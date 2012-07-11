@@ -15,6 +15,10 @@ declare("iD.controller.edit.NoSelection", [iD.controller.ControllerState], {
 	constructor:function() {
 	},
 	
+	enterState:function() {
+		this.controller.stepper.hide();
+	},
+	
 	processMouseEvent:function(event,entityUI) {
 		this.inherited(arguments);
 		if (!entityUI) { return this; }
