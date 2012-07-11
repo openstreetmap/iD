@@ -31,11 +31,11 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 	},
 
 	enterState:function() {
-		this.controller.stepper.setSteps([
-			"Click anywhere on the map to start drawing there",
-			"Keep clicking to add each point, and press Enter or double-click when you're done",
-			"Set the type of the road or shape"
-		]).highlight(1);
+		this.controller.stepper.setSteps({
+			begin: "Click anywhere on the map to start drawing there",
+			draw: "Keep clicking to add each point, and press Enter or double-click when you're done",
+			tag: "Set the type of the road or shape"
+		},['begin','draw','tag']).highlight('begin');
 	},
 	
 	processMouseEvent:function(event,entityUI) {

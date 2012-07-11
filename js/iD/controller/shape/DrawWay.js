@@ -34,7 +34,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 		this.wayUI.setStateClass('selected');
 		this.wayUI.setStateClass('shownodes');
 		this.wayUI.redraw();
-		this.controller.stepper.highlight(2);
+		this.controller.stepper.highlight('draw');
 	},
 	exitState:function() {
 		this.controller.map.clearElastic();
@@ -93,12 +93,12 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 					// Click on node
 					if (entity==this.getDrawingNode()) {
 						// Double-click, so complete drawing
-						this.controller.stepper.highlight(3);
+						this.controller.stepper.highlight('tag');
 						return new iD.controller.edit.SelectedWay(this.way);
 					} else if (entity==this.getStartNode()) {
 						// Start of this way, so complete drawing
 						this.appendNode(entity, this.undoAdder() );
-						this.controller.stepper.highlight(3);
+						this.controller.stepper.highlight('tag');
 						return new iD.controller.edit.SelectedWay(this.way);
 					} else {
 						// Add to way
