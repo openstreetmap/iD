@@ -95,7 +95,7 @@ node[amenity=restaurant] { icon-image: icons/restaurant.png; icon-width: 16; }
 node[amenity=school] { icon-image: icons/school.png; icon-width: 16; }
 node[amenity=taxi] { icon-image: icons/taxi.png; icon-width: 16; }
 node[amenity=telephone] { icon-image: icons/telephone.png; icon-width: 16; }
-way node[barrier=gate], way node[highway=gate] { icon-image: icons/gate.png; icon-width: 16; }
+way node[barrier=gate], way node[highway=gate] { icon-image: icons/gate.png; icon-width: 7; }
 	
 /* We can stack styles at different z-index (depth) */
 
