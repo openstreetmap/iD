@@ -63,25 +63,26 @@ declare("iD.renderer.Map", null, {
 	ruleset: null,			// map style
 	
 	// Constructor
+	// takes object with lat, lon, scale, div, connection, width, height properties
 	
-	constructor:function(_lat,_lon,_scale,_divname,_conn) {
-		// Bounds ** FIXME: shouldn't be hardcoded!
-		this.mapwidth=800;
-		this.mapheight=400;
+	constructor:function(obj) {
+		// Bounds
+		this.mapwidth=obj.width ? obj.width : 800;
+		this.mapheight=obj.height ? obj.height : 400;
 
 		// Initialise variables
 		this.nodeuis={},
 		this.wayuis={},
-		this.div=document.getElementById(_divname);
-		this.surface=Gfx.createSurface(_divname, this.mapwidth, this.mapheight);
+		this.div=document.getElementById(obj.div);
+		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
 		this.backdrop=this.surface.createRect( { x:0, y:0, width: this.mapwidth, height: this.mapheight }).setFill(new dojo.Color([255,255,245,1]));
 		this.tilegroup=this.surface.createGroup();
 		this.container=this.surface.createGroup();
-		this.conn=_conn;
-		this.scale=_scale;
-		this.baselon=_lon;
-		this.baselat=_lat;
-		this.baselatp=this.lat2latp(_lat);
+		this.conn=obj.connection;
+		this.scale=obj.scale ? obj.scale : 17;
+		this.baselon=obj.lon;
+		this.baselat=obj.lat;
+		this.baselatp=this.lat2latp(obj.lat);
 		this.setScaleFactor();
 		this.updateCoordsFromViewportPosition();
 
