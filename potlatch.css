@@ -1,0 +1,151 @@
+/*
+
+	Stylesheet that mimicks, to a certain extent, potlatch 1.x
+        Andy Allan, November 2009
+
+	Based heavily on:
+	MapCSS demonstration stylesheet
+	Richard Fairhurst, October 2009
+	
+*/
+
+/* A set of fairly standard rules.
+  We use z-index to make sure high-priority roads appear above minor ones.
+  The default z-index is 5. If an object matches multiple rules with the same
+  z-index then the rules are "merged" (but individual properties become one or the other)  */
+
+way[highway=motorway],way[highway=motorway_link],
+way[highway=trunk],way[highway=trunk_link],
+way[highway=primary],way[highway=primary_link],
+way[highway=secondary],way[highway=secondary_link],
+way[highway=tertiary],way[highway=tertiary_link],
+way[highway=unclassified],
+way[highway=residential]                             { text: name; text-color: black; font-size: 7; text-position: line;}
+way[highway=motorway],way[highway=motorway_link]    { z-index: 9; color: #809BC0; width: 7; casing-color: black; casing-width: 1; }
+way[highway=trunk],way[highway=trunk_link]          { z-index: 9; color: #7FC97F; width: 7; casing-color: black; casing-width: 1; }
+way[highway=primary],way[highway=primary_link]      { z-index: 8; color: #E46D71; width: 7; casing-color: black; casing-width: 1; }
+way[highway=secondary],way[highway=secondary_link]  { z-index: 7; color: #FDBF6F; width: 7; casing-width: 1; }
+way[highway=tertiary],way[highway=unclassified]     { z-index: 6; color: #FEFECB; width: 5; casing-width: 1; }
+way[highway=residential]                            { z-index: 5; color: #E8E8E8; width: 5; casing-color: gray; casing-width: 1; }
+way[highway=service]                                { color: white; width: 3; casing-width: 1; }
+
+/* Pedestrian precincts need to be treated carefully. Only closed-loops with an explicit
+area=yes tag should be filled. The below doesn't yet work as intended. */
+way[highway=pedestrian] !:area { color: #ddddee; width: 5; casing-color: #555555; casing-width: 1; }
+way[highway=pedestrian] :area  { color: #555555; width: 1; fill-color: #ddddee; fill-opacity: 0.8; }
+
+way[highway=steps]     { color: #FF6644; width: 2; dashes: 4, 2; }
+way[highway=footway]   { color: #FF6644; width: 2; dashes: 6, 3; }
+way[highway=bridleway] { z-index:9; color: #996644; width: 2; dashes: 4, 2, 2, 2; }
+way[highway=track]     { color: #996644; width: 2; dashes: 4, 2; }
+way[highway=path]      { color: lightgreen; width: 2; dashes: 2, 2; }
+
+way[waterway=river], way[waterway=canal] { color: blue; width: 2; text:name; text-color:blue; font-size:9; text-position: offset; text-offset: 7;}
+
+way[barrier] {color: #000000; width: 1}
+
+/* Fills can be solid colour or bitmap images */
+
+
+way[natural] :area                          { color: #ADD6A5; width: 1; fill-color: #ADD6A5; fill-opacity: 0.2; }
+way[landuse] :area                          { color: #444444; width: 2; fill-color: #444444; fill-opacity: 0.3; }
+way[amenity],way[shop] :area                { color: #ADCEB5; width: 1; fill-color: #ADCEB5; fill-opacity: 0.2; }
+way[leisure],way[sport] :area               { color: #8CD6B5; width: 1; fill-color: #8CD6B5; fill-opacity: 0.2; }
+way[tourism] :area                          { color: #F7CECE; width: 1; fill-color: #F7CECE; fill-opacity: 0.2; }
+way[historic],way[ruins] :area              { color: #F7F7DE; width: 1; fill-color: #F7F7DE; fill-opacity: 0.2; }
+way[military] :area                         { color: #D6D6D6; width: 1; fill-color: #D6D6D6; fill-opacity: 0.2; }
+way[building] :area                         { color: #ff6ec7; width: 1; fill-color: #ff6ec7; fill-opacity: 0.2; }
+way[natural=water],
+way[waterway] :area               { color: blue;    width: 2; fill-color: blue;    fill-opacity: 0.2; }
+way[landuse=forest],way[natural=wood] :area { color: green;   width: 2; fill-color: green;   fill-opacity: 0.2; }
+way[leisure=pitch],way[leisure=park]        { color: #44ff44; width: 1; fill-color: #44ff44; fill-opacity: 0.2; }
+way[amenity=parking] :area                  { color: gray;    width: 1; fill-color: gray;    fill-opacity: 0.2; }
+way[public_transport=pay_scale_area] :area  { color: gray;    width: 1; fill-color: gray;    fill-opacity: 0.1; }
+
+/* Addressing. Nodes with addresses *and* match POIs should have a poi icon, so we put addressing first */ 
+
+node[addr:housenumber],
+node[addr:housename] { icon-image: circle; icon-width: 4; color: #B0E0E6; casing-color:blue; casing-width: 1; }
+way[addr:interpolation] { color: #B0E0E6; width: 3; dashes: 3,3;}
+
+/* POIs, too, can have bitmap icons - they can even be transparent */
+
+node[amenity=pub] { icon-image: icons/pub.png; text-offset: 15; font-family: DejaVu; text: name; font-size: 9; }
+node[place] { icon-image: icons/place.png; text-offset: 17; font-family: DejaVu; text: name; font-size: 9; font-weight: bold; text-decoration: underline; }
+node[railway=station] { icon-image: icons/station.png; text-offset: 13; font-family: DejaVu; text: name; font-size: 9; font-weight: bold; }
+node[aeroway=aerodrome] { icon-image: icons/airport.png; text-offset: 13; font-family: DejaVu; text: name; font-size: 10; }
+node[amenity=atm] { icon-image: icons/atm.png; }
+node[amenity=bank] { icon-image: icons/bank.png; text-offset: 15; text: name; }
+node[highway=bus_stop] { icon-image: icons/bus_stop.png; }
+node[amenity=cafe] { icon-image: icons/cafe.png; text-offset: 15; text: name; icon-width: 16; }
+node[shop=convenience] { icon-image: icons/convenience.png; text-offset:15; text:name; }
+node[shop=supermarket] { icon-image: icons/supermarket.png; text-offset:15; text:name; }
+node[amenity=fast_food] { icon-image: icons/fast_food.png; text-offset:15; text: name; }
+node[amenity=fire_station] { icon-image: icons/fire_station.png; }
+node[amenity=hospital] { icon-image: icons/hospital.png; }
+node[tourism=hotel] { icon-image: icons/hotel.png; }
+node[amenity=parking] { icon-image: icons/parking.png; }
+node[amenity=bicycle_parking] { icon-image: icons/parking_cycle.png; text-offset: 15; text: capacity; }
+node[amenity=pharmacy] { icon-image: icons/pharmacy.png; }
+node[amenity=pharmacy][dispensing=yes] { icon-image: icons/pharmacy_dispensing.png; }
+node[amenity=police] { icon-image: icons/police.png; }
+node[amenity=post_box] { icon-image: icons/post_box.png; }
+node[amenity=recycling] { icon-image: icons/recycling.png; }
+node[amenity=restaurant] { icon-image: icons/restaurant.png; icon-width: 16; }
+node[amenity=school] { icon-image: icons/school.png; icon-width: 16; }
+node[amenity=taxi] { icon-image: icons/taxi.png; }
+node[amenity=telephone] { icon-image: icons/telephone.png; }
+way node[barrier=gate], way node[highway=gate] { icon-image: icons/gate.png; }
+	
+/* We can stack styles at different z-index (depth) */
+
+way[railway=rail]
+	{ z-index: 6; color: black; width: 5; } 
+	{ z-index: 7; color: white; width: 3; dashes: 12,12; }
+way[railway=subway]
+        { z-index: 6; color: #444444; width: 5; }
+        { z-index: 7; color: white; width: 3; dashes: 8,8; }
+
+/* Bridge */
+way[bridge=yes]
+    { z-index: 4; color: white; width: eval('_width+3'); }
+    { z-index: 3; color: black; width: eval('_width+6'); }
+    
+/* Tunnel */
+way[tunnel=yes]
+    { z-index: 4; color: white; width: eval('_width+2'); }
+    { z-index: 3; color: black; width: eval('_width+6'); dashes: 4,4; }
+
+/* Oneway */
+way[oneway=yes] { z-index: 10; color: #444444; width: 3; dashes: 15,25; line-style: arrows; }
+
+
+/* Change the road colour based on dynamically set "highlighted" tag (see earlier) */
+
+way .highlighted { color: pink; }
+
+/* Interactive editors may choose different behaviour when a user mouses-over or selects
+   an object. Potlatch 2 supports these but the stand-alone Halcyon viewer does not */
+
+way !:drawn { z-index:10; width: 1; color: black; } 
+way::highlight :hover { z-index: 2; width: eval('_width+10'); color: #ffff99; }
+way::highlight :selected { z-index: 2; width: eval('_width+10'); color: yellow; opacity: 0.7;}
+
+node :selectedway { z-index: 9; icon-image: square; icon-width: 8; color: red; }
+node::junction :junction :selectedway { z-index: 8; icon-image: square; icon-width: 11; casing-color: black; casing-width: 1; }
+
+node !:drawn :poi { z-index: 2; icon-image: circle; icon-width: 4; color: green; casing-color: black; casing-width: 1; }
+
+node :hoverway { z-index: 9; icon-image: square; icon-width: 7; color: blue; }
+node::highlight :selected { z-index: 1; icon-image: square; icon-width: eval('_width+10'); color: yellow; }
+	
+/* Descendant selectors provide an easy way to style relations: this example means "any way
+   which is part of a relation whose type=route". */
+
+relation[type=route] way { z-index: 1; width: 17; color: blue; opacity: 0.3; }
+relation[type=route][route=bicycle][network=ncn] way { z-index: 1; width: 12; color: red; opacity: 0.3; }
+relation[type=route][route=bicycle][network=rcn] way { z-index: 1; width: 12; color: cyan; opacity: 0.3; }
+relation[type=route][route=bicycle][network=lcn] way { z-index: 1; width: 12; color: blue; opacity: 0.3; }
+relation[type=route][route=foot] way { z-index: 1; width: 10; color: #80ff80; opacity: 0.6; }
+
+

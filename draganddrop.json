@@ -1,0 +1,11 @@
+[
+	{
+		name: "Cafe",
+		icon: "cafe.png",
+		tags: "amenity=cafe"
+	}, {
+		name: "Pub",
+		icon: "pub.png",
+		tags: "amenity=pub"
+	}
+]
