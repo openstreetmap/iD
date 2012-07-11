@@ -1,11 +1,11 @@
 // iD/controller/edit/SelectedPOINode.js
 
-define(['dojo/_base/declare','iD/controller/ControllerState'], function(declare){
+define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(declare){
 
 // ----------------------------------------------------------------------
 // SelectedPOINode class
 
-declare("iD.controller.edit.SelectedPOINode", [iD.controller.ControllerState], {
+declare("iD.controller.edit.SelectedPOINode", [iD.controller.edit.EditBaseState], {
 
 	node: null,
 	nodeUI: null,
@@ -14,13 +14,17 @@ declare("iD.controller.edit.SelectedPOINode", [iD.controller.ControllerState], {
 		this.node=_node;
 	},
 	enterState:function() {
-		this.nodeUI=this.controller.map.getUI(this.node);
+		var map=this.controller.map;
+		this.nodeUI=map.getUI(this.node);
 		this.nodeUI.setStateClass('selected');
 		this.nodeUI.redraw();
+		this.openEditorTooltip(map.lon2screen(this.node.lon),
+		                       map.lat2screen(this.node.lat));
 	},
 	exitState:function() {
 		this.nodeUI.resetStateClass('selected');
 		this.nodeUI.redraw();
+		this.closeEditorTooltip();
 	},
 	
 	processMouseEvent:function(event,entityUI) {
@@ -31,7 +35,7 @@ declare("iD.controller.edit.SelectedPOINode", [iD.controller.ControllerState], {
 			switch (entityType) {
 				case null: 		return new iD.controller.edit.NoSelection();
 				case 'node': 	return new iD.controller.edit.SelectedPOINode(entityUI.entity);
-				case 'way': 	return new iD.controller.edit.SelectedWay(entityUI.entity);
+				case 'way': 	return new iD.controller.edit.SelectedWay(entityUI.entity, event);
 			}
 		}
 		return this;

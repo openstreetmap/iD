@@ -1,7 +1,7 @@
 // iD/controller/edit/NoSelection.js
 
 define(['dojo/_base/declare',
-		'iD/controller/ControllerState',
+		'iD/controller/edit/EditBaseState',
 		'iD/controller/edit/SelectedWay',
 		'iD/controller/edit/SelectedWayNode',
 		'iD/controller/edit/SelectedPOINode',
@@ -10,7 +10,7 @@ define(['dojo/_base/declare',
 // ----------------------------------------------------------------------
 // ControllerState base class
 
-declare("iD.controller.edit.NoSelection", [iD.controller.ControllerState], {
+declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
 
 	constructor:function() {
 	},
@@ -30,7 +30,7 @@ declare("iD.controller.edit.NoSelection", [iD.controller.ControllerState], {
 					if (ways.length==0) { return new iD.controller.edit.SelectedPOINode(entity); }
 					               else { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
 				case 'way':
-					return new iD.controller.edit.SelectedWay(entityUI.entity);
+					return new iD.controller.edit.SelectedWay(entityUI.entity, event);
 			}
 		}
 		return this;

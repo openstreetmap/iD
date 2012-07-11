@@ -1,11 +1,11 @@
 // iD/controller/edit/SelectedWayNode.js
 
-define(['dojo/_base/declare','iD/controller/ControllerState'], function(declare){
+define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(declare){
 
 // ----------------------------------------------------------------------
 // SelectedWayNode class
 
-declare("iD.controller.edit.SelectedWayNode", [iD.controller.ControllerState], {
+declare("iD.controller.edit.SelectedWayNode", [iD.controller.edit.EditBaseState], {
 
 	node: null,
 	way: null,
@@ -15,12 +15,17 @@ declare("iD.controller.edit.SelectedWayNode", [iD.controller.ControllerState], {
 		this.way=_way;
 	},
 	enterState:function() {
-		this.controller.map.getUI(this.way ).setStateClass('shownodes').redraw();
-		this.controller.map.getUI(this.node).setStateClass('selected' ).redraw();
+		var map=this.controller.map;
+		map.getUI(this.way ).setStateClass('shownodes').redraw();
+		map.getUI(this.node).setStateClass('selected' ).redraw();
+		this.openEditorTooltip(map.lon2screen(this.node.lon),
+		                       map.lat2screen(this.node.lat));
 	},
 	exitState:function() {
-		this.controller.map.getUI(this.way ).resetStateClass('shownodes').redraw();
-		this.controller.map.getUI(this.node).resetStateClass('selected' ).redraw();
+		var map=this.controller.map;
+		map.getUI(this.way ).resetStateClass('shownodes').redraw();
+		map.getUI(this.node).resetStateClass('selected' ).redraw();
+		this.closeEditorTooltip();
 	},
 	
 	processMouseEvent:function(event,entityUI) {
@@ -37,7 +42,7 @@ declare("iD.controller.edit.SelectedWayNode", [iD.controller.ControllerState], {
 					else if (ways.length==0)        { return new iD.controller.edit.SelectedPOINode(entity); }
 					else                            { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
 				case 'way':
-					return new iD.controller.edit.SelectedWay(entityUI.entity);
+					return new iD.controller.edit.SelectedWay(entityUI.entity, event);
 			}
 		}
 		return this;

@@ -94,12 +94,12 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 					if (entity==this.getDrawingNode()) {
 						// Double-click, so complete drawing
 						this.controller.stepper.highlight('tag');
-						return new iD.controller.edit.SelectedWay(this.way);
+						return new iD.controller.edit.SelectedWay(this.way, event);
 					} else if (entity==this.getStartNode()) {
 						// Start of this way, so complete drawing
 						this.appendNode(entity, this.undoAdder() );
 						this.controller.stepper.highlight('tag');
-						return new iD.controller.edit.SelectedWay(this.way);
+						return new iD.controller.edit.SelectedWay(this.way, event);
 					} else {
 						// Add to way
 						this.appendNode(entity, this.undoAdder() );

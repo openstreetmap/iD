@@ -424,10 +424,13 @@ declare("iD.renderer.Map", null, {
 	coord2latp:function(a) { return a/-this.scalefactor+this.baselatp; },
 	lon2coord:function(a)  { return (a-this.baselon)*this.scalefactor; },
 	coord2lon:function(a)  { return a/this.scalefactor+this.baselon; },
+	lon2screen:function(a) { return this.lon2coord(a) + domGeom.getMarginBox(this.div).l + this.containerx; },
+
 	lat2latp:function(a)   { return 180/Math.PI * Math.log(Math.tan(Math.PI/4+a*(Math.PI/180)/2)); },
 	latp2lat:function(a)   { return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2); },
 	lat2coord:function(a)  { return -(this.lat2latp(a)-this.baselatp)*this.scalefactor; },
 	coord2lat:function(a)  { return this.latp2lat(a/-this.scalefactor+this.baselatp); },
+	lat2screen:function(a) { return this.lat2coord(a) + domGeom.getMarginBox(this.div).t + this.containery; },
 
 	lon2tile:function(a)   { return (Math.floor((a+180)/360*Math.pow(2,this.scale))); },
 	lat2tile:function(a)   { return (Math.floor((1-Math.log(Math.tan(a*Math.PI/180) + 1/Math.cos(a*Math.PI/180))/Math.PI)/2 *Math.pow(2,this.scale))); },
