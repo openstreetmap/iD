@@ -44,7 +44,7 @@ declare("iD.ui.DragAndDrop", null, {
 		var row;
 		for (var i=0; i<obj.length; i++) {
 			var item=obj[i];
-			if (!row || row.length==this.ITEMSPERROW) {
+			if (!row || row.cells.length==this.ITEMSPERROW) {
 				row=document.createElement('tr');
 				this.grid.appendChild(row);
 			}
