@@ -14,7 +14,6 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
 	},
 	
 	openEditorTooltip:function(x,y) {
-console.log("opening at "+x+","+y);
 		editortooltip = new dijit.TooltipDialog({
 			content: "Fred's House<br/>"+
 			         "<button data-dojo-type='dijit.form.Button' type='submit'>Edit tags</button> "+
