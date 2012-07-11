@@ -1,9 +1,9 @@
 // iD/Entity.js
 // Entity classes for iD
 
-define(['dojo/_base/declare','dojo/_base/array',
-        'iD/actions/AddNodeToWayAction'
-       ], function(declare,array){
+define(['dojo/_base/declare','dojo/_base/array','dojo/_base/lang',
+        'iD/actions/AddNodeToWayAction','iD/actions/MoveNodeAction'
+       ], function(declare,array,lang){
 
 // ----------------------------------------------------------------------
 // Entity base class
@@ -117,11 +117,29 @@ declare("iD.Node", [iD.Entity], {
 		this.modified=this.id<0;
 	},
 	
-	project:function() {
-		this.latp=180/Math.PI * Math.log(Math.tan(Math.PI/4+this.lat*(Math.PI/180)/2));
-	},
+	project:function() { this.latp=180/Math.PI * Math.log(Math.tan(Math.PI/4+this.lat*(Math.PI/180)/2)); },
+	latp2lat:function(a) { return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2); },
 
 	within:function(left,right,top,bottom) { return (this.lon>=left) && (this.lon<=right) && (this.lat>=bottom) && (this.lat<=top) && !this.deleted; },
+
+	refresh:function() {
+		var ways=this.parentWays();
+		var conn=this.connection;
+		array.forEach(ways,function(way) { conn.refreshEntity(way); });
+		this.connection.refreshEntity(this);
+	},
+
+	doSetLonLatp:function(lon,latproj,performAction) {
+		performAction(new iD.actions.MoveNodeAction(this, this.latp2lat(latproj), lon, lang.hitch(this,this._setLatLonImmediate) ));
+	},
+
+	_setLatLonImmediate:function(lat,lon) {
+		this.lat = lat;
+		this.lon = lon;
+		this.project();
+		var ways = this.parentWays();
+		for (var i=0; i<ways.length; i++) { ways[i].expandBbox(this); }
+	},
 	
 });
 
@@ -205,7 +223,44 @@ declare("iD.Way", [iD.Entity], {
 		if (node!=this.getFirstNode()) performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, 0, true));
 		return this.nodes.length + 1;
 	},
+
+	doInsertNode:function(index, node, performAction) {
+		if (index>0 && this.getNode(index-1)==node) return;
+		if (index<this.nodes.length-1 && this.getNode(index)==node) return;
+		performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, index, false));
+	},
 	
+	doInsertNodeAtClosestPosition:function(newNode, isSnap, performAction) {
+		var closestProportion = 1;
+		var newIndex = 0;
+		var snapped;
+
+		for (var i=0; i<this.nodes.length-1; i++) {
+			var node1 = this.getNode(i);
+			var node2 = this.getNode(i+1);
+			var directDist = this.pythagoras(node1, node2);
+			var viaNewDist = this.pythagoras(node1, newNode) + this.pythagoras(node2, newNode);
+			var proportion = Math.abs(viaNewDist/directDist - 1);
+			if (proportion < closestProportion) {
+				newIndex = i+1;
+				closestProportion = proportion;
+				snapped = this.calculateSnappedPoint(node1, node2, newNode);
+			}
+		}
+
+		// splice in new node
+		if (isSnap) { newNode.doSetLonLatp(snapped.x, snapped.y, performAction); }
+		this.doInsertNode(newIndex, newNode, performAction);
+		return newIndex;
+	},
+	
+	pythagoras:function(node1, node2) { return (Math.sqrt(Math.pow(node1.lon-node2.lon,2)+Math.pow(node1.latp-node2.latp,2))); },
+	calculateSnappedPoint:function(node1, node2, newNode) {
+		var w = node2.lon  - node1.lon;
+		var h = node2.latp - node1.latp;
+		var u = ((newNode.lon-node1.lon) * w + (newNode.latp-node1.latp) * h) / (w*w + h*h);
+		return { x: node1.lon + u*w, y: node1.latp + u*h };
+	},
 });
 
 // ----------------------------------------------------------------------

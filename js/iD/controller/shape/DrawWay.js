@@ -14,7 +14,8 @@
 */
 
 
-define(['dojo/_base/declare','dojo/_base/lang','dojox/gfx/shape','iD/controller/ControllerState'], function(declare,lang,shape){
+define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojox/gfx/shape','iD/controller/ControllerState'], 
+       function(declare,lang,array,shape){
 
 // ----------------------------------------------------------------------
 // DrawWay class
@@ -111,7 +112,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 					var ways=[entity];	// ** needs to find all the ways under the mouse
 					var undo=new iD.actions.CompositeUndoableAction();
 					var node=this.appendNewNode(event, undo);
-//					array.forEach(ways, function(w) { w.insertNodeAtClosestPosition(node, true, undo.push); } );
+					array.forEach(ways, function(w) { w.doInsertNodeAtClosestPosition(node, true, lang.hitch(undo,undo.push)); } );
 					var action=this.undoAdder(); action(undo);
 					return this;
 			}
