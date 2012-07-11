@@ -1,10 +1,9 @@
 DrawWay to do:
-* make junctions
+* start from a POI node ("convert into way?")
 * still allow dragging the map
 
 Drag and drop to do:
-* icon grid
-* improve 'avatar'
+* presentation
 * cope with dragging onto anything, not just blank areas of the map
 
 Next to do:
@@ -33,9 +32,6 @@ Events
 	- undo says "the following entities have changed: way 5, node 3, way 7, relation 8"
 	- the Controller gets the message and invokes a redraw
 	- no need for anything else to listen
-
-General code
-* Do the ***doSetLatLon*** and ***_setLatLon*** naming convention
 
 ------------------------------------------------
 

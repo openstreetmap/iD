@@ -34,9 +34,10 @@ declare("iD.actions.AddNodeToWayAction", [iD.actions.UndoableEntityAction], {
 		// add the node
 		if (this.index==-1) this.index=this.nodeList.length;
 		this.node.addParent(way);
+		this.node.connection.unregisterPOI(this.node);
 		this.nodeList.splice(this.index, 0, this.node);
 		this.markDirty();
-//		way.expandBbox(this.node);
+		way.expandBbox(this.node);
 		way.refresh();
 
 		return this.SUCCESS;
