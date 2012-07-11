@@ -131,12 +131,12 @@ way !:drawn { z-index:10; width: 1; color: black; }
 way::highlight :hover { z-index: 2; width: eval('_width+10'); color: #ffff99; }
 way::highlight :selected { z-index: 2; width: eval('_width+10'); color: yellow; opacity: 0.7;}
 
-node :selectedway { z-index: 9; icon-image: square; icon-width: 8; color: red; }
-node::junction :junction :selectedway { z-index: 8; icon-image: square; icon-width: 11; casing-color: black; casing-width: 1; }
+node :selectedway { z-index: 9; icon-image: square; icon-width: 8; color: red; layer: 5; }
+node::junction :junction :selectedway { z-index: 8; icon-image: square; icon-width: 11; casing-color: black; casing-width: 1; layer: 5; }
 
 node !:drawn :poi { z-index: 2; icon-image: circle; icon-width: 4; color: green; casing-color: black; casing-width: 1; }
 
-node :hoverway { z-index: 9; icon-image: square; icon-width: 7; color: blue; }
+node :hoverway { z-index: 9; icon-image: square; icon-width: 7; color: blue; layer: 5; }
 node::highlight :selected { z-index: 1; icon-image: square; icon-width: eval('_width+10'); color: yellow; }
 	
 /* Descendant selectors provide an easy way to style relations: this example means "any way
