@@ -26,7 +26,6 @@ declare("iD.Connection", null, {
 	constructor:function(apiURL) {
 		// summary:		The data store, including methods to fetch data from (and, eventually, save data to)
 		// 				an OSM API server.
-		console.log("Created a connection");
 		this.nodes={};
 		this.ways={};
 		this.relations={};

@@ -63,8 +63,6 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	// Data is loaded and app ready to go
 
 	function styleLoaded() {
-		console.log("style loaded");
-
 		// Initialise drag-and-drop icons
 		new iD.ui.DragAndDrop("map",map,"dndgrid");
 
@@ -93,12 +91,10 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	// Mode button handlers
 
 	enterWayMode=function() {
-		console.log('Second button was clicked!');
 		controller.setState(new iD.controller.shape.NoSelection());
 	};
 
 	enterEditMode=function() {
-		console.log('Third button was clicked!');
 	};
 	
 	finishClicked=function() {
@@ -122,7 +118,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
      and http://dojotoolkit.org/widgets -->
 
 <div id="modebuttons" style="position:absolute; left: 10px; top: 10px;">
-	<div id="addPOI" data-dojo-type="dijit.form.DropDownButton" data-dojo-props="iconClass:'dijitIconApplication', onClick:function(){ console.log('First button was clicked!'); }">
+	<div id="addPOI" data-dojo-type="dijit.form.DropDownButton" data-dojo-props="iconClass:'dijitIconApplication', onClick:function(){}">
 		<span>Add point</span>
         <div data-dojo-type="dijit.TooltipDialog">
 			<p>Drag points onto the map</p>

@@ -58,7 +58,6 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 				default:
 					// Click to start a new way
 					var undo = new iD.actions.CompositeUndoableAction();
-					console.log("Event is ",event.type);
 					var startNode = this.getConnection().doCreateNode(
 						{}, 
 						map.coord2lat(map.mouseY(event)),
@@ -66,7 +65,6 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 					var way = this.getConnection().doCreateWay({}, [startNode], lang.hitch(undo,undo.push) );
 					this.controller.undoStack.addAction(undo);
 					this.controller.map.createUI(way);
-					console.log("Started new way");
 					return new iD.controller.shape.DrawWay(way);
 			}
 		}

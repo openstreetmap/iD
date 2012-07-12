@@ -108,7 +108,6 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 
 				case 'way':
 					// Click on way, add new junction node to way
-					console.log("clicked a way, add new junction to way");
 					var ways=[entity];	// ** needs to find all the ways under the mouse
 					var undo=new iD.actions.CompositeUndoableAction();
 					var node=this.appendNewNode(event, undo);
@@ -119,7 +118,6 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 		
 		} else if (event.type=='click') {
 			// Click on empty space, add new node to way
-			console.log("clicked empty space, add a new node to way");
 			var undo=new iD.actions.CompositeUndoableAction();
 			this.appendNewNode(event, undo);
 			var action=this.undoAdder(); action(undo);
