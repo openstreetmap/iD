@@ -22,17 +22,15 @@ Function names
 --------------
 Anything that creates and calls an Action should be prefixed with do:
 	doSetLatLon(lat,lon)
+
 Anything that is called by an Action, to do the actual work, should be prefixed with an underscore:
 	_setLatLon(lat,lon)
-and commented as such.
+
+and commented as such. Underscores are also used to prefix private methods.
 
 File naming
 -----------
 The filename should be the name of the base class. You can add subclasses within that file for clarity. Don't add extra classes that aren't subclasses, unless they're not referenced from elsewhere.
-
-Class and variable names
-------------------------
-You can prefix function arguments with an underscore to make it clear where they've come from.
 
 Layout
 ------

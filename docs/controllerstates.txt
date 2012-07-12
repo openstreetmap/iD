@@ -1,7 +1,0 @@
-Each ControllerState represents a UI state.
-
-They are grouped into folders:
-
-- 'edit' is all states within the 'Edit object' mode
-- 'shape' is all states within the 'Add shape' mode
-- 'point' is all states within the 'Add point' mode
