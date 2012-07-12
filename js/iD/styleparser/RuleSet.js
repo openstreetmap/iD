@@ -5,7 +5,6 @@ define(['dojo/_base/xhr','dojo/_base/lang','dojo/_base/declare','dojo/_base/arra
 // ----------------------------------------------------------------------
 // RuleSet base class
 // needs to cope with nested CSS files
-// evals not done
 // doesn't do untagged nodes optimisation
 
 declare("iD.styleparser.RuleSet", null, {
@@ -14,30 +13,31 @@ declare("iD.styleparser.RuleSet", null, {
 	callback: null,
 
 	constructor:function() {
+		// summary:		An entire stylesheet in parsed form.
 		this.choosers=[];
 	},
 	
-	registerCallback:function(_callback) {
-		this.callback=_callback;
+	registerCallback:function(callback) {
+		// summary:		Set a callback function to be called when the CSS is loaded and parsed.
+		this.callback=callback;
 	},
 	
-	// Find the styles for a given entity
-
 	getStyles:function(entity, tags, zoom) {
+		// summary:		Find the styles for a given entity.
 		var sl=new iD.styleparser.StyleList();
 		for (var i in this.choosers) {
 			this.choosers[i].updateStyles(entity, tags, sl, zoom);
 		}
-		return sl;
+		return sl;	// iD.styleparser.StyleList
 	},
 
-	// Load from .mapcss file
-
 	loadFromCSS:function(url) {
+		// summary:		Load a MapCSS file from a URL, then throw it at the parser when it's loaded.
 		xhr.get({ url: url, load: lang.hitch(this, "parseCSS") });
 	},
 	
 	parseCSS:function(css) {
+		// summary:		Parse a CSS document into a set of StyleChoosers.
 		var previous=0;								// what was the previous CSS word?
 		var sc=new iD.styleparser.StyleChooser();	// currently being assembled
 		this.choosers=[];

@@ -1,12 +1,9 @@
 // iD/styleparser/Style.js
-// Entity classes for iD
 
 define(['dojo/_base/declare','dojo/_base/array'], function(declare,array){
 
 // ----------------------------------------------------------------------
 // Style base class
-// don't use deepCopy, use lang.clone instead
-// evals not done yet
 // fillStyler not done for text yet
 
 declare("iD.styleparser.Style", null, {
@@ -19,6 +16,7 @@ declare("iD.styleparser.Style", null, {
 	evals: null,
 
 	constructor: function(){
+		// summary:		Base class for a set of painting attributes, into which the CSS declaration is parsed.
 		this.evals={};
 	},
 

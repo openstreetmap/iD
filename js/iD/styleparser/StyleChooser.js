@@ -15,6 +15,8 @@ declare("iD.styleparser.StyleChooser", null, {
 	stylepos:0,
 
 	constructor:function() {
+		// summary:		A combination of the selectors (ruleChains) and declaration (styles).
+		//				For example, way[highway=footway] node[barrier=gate] { icon: gate.png; } is one StyleChooser.
 		this.ruleChains=[new iD.styleparser.RuleChain()];
 		this.styles=[];
 	},
@@ -24,7 +26,7 @@ declare("iD.styleparser.StyleChooser", null, {
 	},
 
 	newRuleChain:function() {
-		// starts a new ruleChain in this.ruleChains
+		// summary:		Starts a new ruleChain in this.ruleChains.
 		if (this.ruleChains[this.ruleChains.length-1].length()>0) {
 			this.ruleChains.push(new iD.styleparser.RuleChain());
 		}

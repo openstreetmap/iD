@@ -10,11 +10,13 @@ declare("iD.styleparser.Condition", null, {
 	params: [],				// what to test against
 
 	constructor:function(_type) {
+		// summary:		A condition to evaluate.
 		this.type  =_type;
 		this.params=Array.prototype.slice.call(arguments,1);
 	},
 	
 	test:function(tags) {
+		// summary:		Run the condition against the supplied tags.
 		var p=this.params;
 		switch (this.type) {
 			case 'eq':		return (tags[p[0]]==p[1]); break;

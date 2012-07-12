@@ -24,6 +24,7 @@ declare("iD.styleparser.RuleChain", null, {
 	subpart: 'default',		// subpart name, as in way[highway=primary]::centreline
 	
 	constructor:function() {
+		// summary:		A descendant list of MapCSS selectors (Rules).
 		this.rules=[];
 	},
 
@@ -60,6 +61,7 @@ declare("iD.styleparser.RuleChain", null, {
 	// - if they succeed, and there's more in the chain, rerun this for each parent until success
 
 	test:function(pos, entity, tags, zoom) {
+		// summary:		Test a rule chain by running all the tests in reverse order.
 		if (this.rules.length==0) { return false; }
 		if (pos==-1) { pos=this.rules.length-1; }
 		
