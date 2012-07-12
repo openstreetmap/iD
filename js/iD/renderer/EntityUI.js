@@ -1,5 +1,6 @@
 // iD/renderer/EntityUI.js
 // EntityUI classes for iD
+// **** TODO:
 // multipolygon support - http://mail.dojotoolkit.org/pipermail/dojo-interest/2011-January/052042.html
 // support 'interactive'
 // line decoration, dots etc.
@@ -12,35 +13,43 @@ define(['dojo/_base/declare','dojo/_base/lang','iD/Entity','iD/renderer/Map'], f
 // EntityUI base class
 
 declare("iD.renderer.EntityUI", null, {
+
 	entity:null,				// Entity this represents
 	map:null,					// the Map object containing this
 	layer:0,					// OSM layer
 	sprites:null,				// array of sprites created for this EntityUI
 	styleList:null,				// current StyleList
 	stateClasses:null,			// list of stateClass tags to apply
-	constructor:function(_entity,_map,_stateClasses) {
-		this.entity=_entity;
-		this.map=_map;
-		this.stateClasses=_stateClasses ? _stateClasses.slice() : [];
+
+	constructor:function(entity,map,stateClasses) {
+		// summary:		Base class for a UI representing an entity.
+		this.entity=entity;
+		this.map=map;
+		this.stateClasses=stateClasses ? stateClasses.slice() : [];
 		this.sprites=[];
 	},
 	getConnection:function() {
-		return this.map.conn;
+		// summary:		Get the Connection from where the map draws its data.
+		return this.map.conn;	// iD.Connection
 	},
 	targetGroup:function(groupType,sublayer) {
-		return this.map.sublayer(this.layer,groupType,sublayer);
+		// summary:		Find a gfx.Group to render on.
+		return this.map.sublayer(this.layer,groupType,sublayer);	// dojox.gfx.Group
 	},
 	recordSprite:function(sprite) {
+		// summary:		Record that an individual sprite (one stroke, icon or text item) has been added.
 		if (this.sprites.indexOf(sprite)==-1) { this.sprites.push(sprite); }
 		return sprite;
 	},
 	removeSprites:function() {
+		// summary:		Clear all sprites currently used.
 		for (var i=0; i<this.sprites.length; i++) {
 			this.sprites[i].removeShape();
 		}
 		this.sprites=[];
 	},
 	refreshStyleList:function(tags) {
+		// summary:		Calculate the list of styles that apply to this UI at this zoom level.
 		if (!this.styleList || !this.styleList.isValidAt(this.map.scale)) { 
 			this.styleList=this.map.ruleset.getStyles(this.entity,tags,this.map.scale);
 		}
@@ -57,29 +66,30 @@ declare("iD.renderer.EntityUI", null, {
 		}
 	},
 	getEnhancedTags:function() {
-		// Clone entity tags
+		// summary:		Return tags for this entity augmented by the EntityUI's state classes.
 		var tags=lang.clone(this.entity.tags);
 		// Apply stateClasses (hover, selected, hoverway, selectedway)
 		for (var i in this.stateClasses) {
 			tags[':'+this.stateClasses[i]]='yes';
 		}
 		// todo - Add any common 'special-case' tags, e.g. :hasTags
-		return tags;
+		return tags;	// Object
 	},
 
+	// --------------------
 	// State class handling
 	
-	// Set all state classes at once, and prompt a redraw if they're different to previously
-	setStateClasses:function(_stateClasses) {
-		if (_stateClasses && this.stateClasses.join(',')!=_stateClasses.join(',')) {
-			this.stateClasses=_stateClasses.slice();
+	setStateClasses:function(stateClasses) {
+		// summary:		Set all state classes at once, and prompt a redraw if they're different to previously,
+		if (stateClasses && this.stateClasses.join(',')!=stateClasses.join(',')) {
+			this.stateClasses=stateClasses.slice();
 			this.invalidateStyleList();
 		}
 		return this;
 	},
 	
-	// Set a single state class, and prompt a redraw if it wasn't set previously
 	setStateClass:function(sc) {
+		// summary:		Set a single state class, and prompt a redraw if it wasn't set previously.
 		if (this.stateClasses.indexOf(sc)==-1) {
 			this.stateClasses.push(sc);
 			this.invalidateStyleList();
@@ -87,8 +97,8 @@ declare("iD.renderer.EntityUI", null, {
 		return this;
 	},
 
-	// Reset a single state class, and prompt a redraw if it was set previously
 	resetStateClass:function(sc) {
+		// summary:		Reset a single state class, and prompt a redraw if it was set previously.
 		if (this.stateClasses.indexOf(sc)>-1) {
 			this.stateClasses.splice(this.stateClasses.indexOf(sc),1);
 			this.invalidateStyleList();
@@ -97,15 +107,19 @@ declare("iD.renderer.EntityUI", null, {
 	},
 
 	hasStateClass:function(sc) {
+		// summary:		Is a particular state class set for this UI?
 		return this.stateClasses.indexOf(sc)>-1;
 	},
 	invalidateStyleList:function() {
+		// summary:		Invalidate the StyleList so it's recalculated on next redraw.
 		this.styleList=null;
 	},
 
+	// --------------------
 	// Mouse event handling
 
 	entityMouseEvent:function(event) {
+		// summary:		Receive a mouse event (e.g. clicking on the UI), and forward it to the Controller.
 		this.map.controller.entityMouseEvent(event, event.gfxTarget.source);
 		event.stopPropagation();
 	},
