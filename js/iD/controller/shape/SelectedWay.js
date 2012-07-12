@@ -21,6 +21,7 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 	wayUI: null,
 
 	constructor:function(_way) {
+		// summary:		In 'Draw shape' mode, and a way is selected as the starting point of the new way.
 		this.way=_way;
 	},
 	enterState:function() {

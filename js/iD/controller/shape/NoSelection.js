@@ -28,6 +28,7 @@ define(['dojo/_base/declare','dojo/_base/lang',
 declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 
 	constructor:function() {
+		// summary:		In 'Draw shape' mode but nothing is selected.
 	},
 
 	enterState:function() {
@@ -49,7 +50,9 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 					// Click to select a node
 					var ways=entity.parentWays();
 					if (ways.length==0) { return new iD.controller.shape.SelectedPOINode(entity); }
-					               else { return new iD.controller.shape.SelectedWayNode(entity,ways[0]); }
+//					               else { return new iD.controller.shape.SelectedWayNode(entity,ways[0]); }
+//					               ** FIXME: ^^^ the above should start a new branching way, not select the node
+					return this;
 				case 'way':
 					// Click to select a way
 					return new iD.controller.shape.SelectedWay(entityUI.entity);

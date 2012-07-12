@@ -18,6 +18,8 @@ define(['dojo/_base/declare',
 declare("iD.controller.shape.SelectedPOINode", [iD.controller.ControllerState], {
 
 	constructor:function() {
+		// summary:		In 'Draw shape' mode and a POI node is selected, to be converted into a way.
+		//				Not yet implemented.
 	},
 	
 	processMouseEvent:function(event,entityUI) {
