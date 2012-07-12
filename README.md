@@ -1,21 +1,21 @@
-iD - JavaScript beginners' editor for OpenStreetMap
-===================================================
+iD - friendly JavaScript editor for OpenStreetMap
+=================================================
 
 Basics
 ------
 * iD is a JavaScript-based OpenStreetMap editor with MapCSS rendering.
 * iD is written with the Dojo framework.
-* It's intentionally simple. iD is not a 90% editor. It's not even a 70% editor. It should let you do the most basic tasks while not breaking other people's data. Nothing more. 
-* Same goes for the code. So go easy on the abstraction. :)
+* It's intentionally simple. iD is not a 90% editor. It's not even a 70% editor. It should let you do the most basic tasks while not breaking other people's data. Nothing more. (Same goes for the code, so go easy on the abstraction. :) )
 * Speaking of percentages, it's about 1% complete.
 * We're initially targeting WebKit-based browsers and Firefox, using SVG. IE and non-SVG can come later!
-* The licence of iD is WTFPL and contributions to 'trunk' should accord with this. This does of course allow you to dual-license.
+* The licence of iD is WTFPL, though obviously, if you want to dual-license any contributions that's cool.
 
 
 Getting started
 ---------------
-* Unzip and start playing!
-* All the code is in js/iD. 
+* Fork it and start playing!
+* Read the [live docs](http://www.geowiki.com/docs/), generated from source every hour.
+* All the code is in js/iD.
 
 
 How it works
@@ -30,9 +30,11 @@ The code works similarly to Potlatch 2, but with a bit less abstraction. So, we 
 * ControllerState: the current UI mode. ControllerStates decide what to do in response to mouse/keyboard events. (iD/controller/...)
 * UndoableAction: the code to actually change the data, as fired by ControllerStates. (iD/actions/...)
 
-The UI is more modal than Potlatch 2. In particular there's a "draw shape" mode (the "Add road or shape" button) and an "edit object" mode. The directory structure of iD/controller reflects this.
+The UI is much more modal than Potlatch 2. In particular there's a "draw shape" mode (the "Add road or shape" button) and an "edit object" mode. The directory structure of iD/controller reflects this.
 
 Other relevant code includes the MapCSS parser in styleparser/ and custom widgets in ui/ .
+
+As well as the [live docs](http://www.geowiki.com/docs/), you'll find various notes and comments in the docs/ folder. Feel free to add to these.
 
 
 Getting started
@@ -46,6 +48,6 @@ Scoping in JavaScript is famously broken: Dojo's lang.hitch method will save you
 
 Instance methods and variables _always_ need to be accessed with 'this.'. This is a fairly frequent gotcha if you're coming from another language.
 
-You'll find various notes and comments in the docs/ folder. Feel free to add to these.
+The [Dojo site](http://dojotoolkit.org/) has lots of documentation. iD currently uses Dojo 1.7.2 - this has a much better module architecture (AMD) than previously.
 
-More help: ping RichardF on IRC (irc.oftc.net, in #osm-dev or #osm), on the OSM mailing lists or at richard@systemeD.net.
+Come on in, the water's lovely. More help? Ping RichardF on IRC (irc.oftc.net, in #osm-dev or #osm), on the OSM mailing lists or at richard@systemeD.net.
