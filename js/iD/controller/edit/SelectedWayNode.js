@@ -19,7 +19,7 @@ declare("iD.controller.edit.SelectedWayNode", [iD.controller.edit.EditBaseState]
 		map.getUI(this.way ).setStateClass('shownodes').redraw();
 		map.getUI(this.node).setStateClass('selected' ).redraw();
 		this.openEditorTooltip(map.lon2screen(this.node.lon),
-		                       map.lat2screen(this.node.lat));
+		                       map.lat2screen(this.node.lat), this.node);
 	},
 	exitState:function() {
 		var map=this.controller.map;

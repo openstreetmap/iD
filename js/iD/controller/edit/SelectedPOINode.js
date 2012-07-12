@@ -19,7 +19,7 @@ declare("iD.controller.edit.SelectedPOINode", [iD.controller.edit.EditBaseState]
 		this.nodeUI.setStateClass('selected');
 		this.nodeUI.redraw();
 		this.openEditorTooltip(map.lon2screen(this.node.lon),
-		                       map.lat2screen(this.node.lat));
+		                       map.lat2screen(this.node.lat), this.node);
 	},
 	exitState:function() {
 		this.nodeUI.resetStateClass('selected');

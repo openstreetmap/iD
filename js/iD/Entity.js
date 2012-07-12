@@ -17,6 +17,7 @@ declare("iD.Entity", null, {
 	parents: null,
 	modified: false,
 	deleted: false,
+	MAINKEYS: ['highway','amenity','railway','waterway'],
 
 	constructor:function() {
 		this.tags={};
@@ -25,10 +26,6 @@ declare("iD.Entity", null, {
 	
 	isType:function(_type) {
 		return this.entityType==_type;
-	},
-
-	getTagsHash:function() {
-		return this.tags;
 	},
 
 	toString:function() {
@@ -52,6 +49,31 @@ declare("iD.Entity", null, {
 	// Bounding box check (to be overridden)
 
 	within:function(left,right,top,bottom) { return !this.deleted; },
+
+	// Tag functions
+
+	getTagsHash:function() {
+		return this.tags;
+	},
+	
+	numTags:function() {
+		var c=0;
+		for (var i in this.tags) { c++; }
+		return c;
+	},
+	
+	friendlyName:function() {
+		if (this.numTags()==0) { return ''; }
+		var n=[];
+		if (this.tags['name']) { n.push(this.tags['name']); }
+		if (this.tags['ref']) { n.push(this.tags['ref']); }
+		if (n.length==0) {
+			for (var i=0; i<this.MAINKEYS.length; i++) {
+				if (this.tags[this.MAINKEYS[i]]) { n.push(this.tags[this.MAINKEYS[i]]); break; }
+			}
+		}
+		return n.length==0 ? 'unknown' : n.join('; ');
+	},
 
 	// Parent-handling
 	

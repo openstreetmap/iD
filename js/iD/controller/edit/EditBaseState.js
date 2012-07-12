@@ -13,18 +13,18 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
 	constructor:function() {
 	},
 	
-	openEditorTooltip:function(x,y) {
-		editortooltip = new dijit.TooltipDialog({
-			content: "Fred's House<br/>"+
-			         "<button data-dojo-type='dijit.form.Button' type='submit'>Edit tags</button> "+
-			         "<button data-dojo-type='dijit.form.Button' type='submit'>Edit shape</button> ",
+	openEditorTooltip:function(x,y,entity) {
+		var h=entity.friendlyName(); h = (h=='') ? h : h+"<br/>";
+		this.editortooltip = new dijit.TooltipDialog({
+			content: h+"<button data-dojo-type='dijit.form.Button' type='submit'>Edit tags</button> "
+			          +"<button data-dojo-type='dijit.form.Button' type='submit'>Edit shape</button> ",
 			autoFocus: false
 		});
-		dijit.popup.open({ popup: editortooltip, x: x, y: y });
+		dijit.popup.open({ popup: this.editortooltip, x: x, y: y });
 	},
 	
 	closeEditorTooltip:function() {
-		if (this.editortooltip) { dijit.popup.close(editortooltip); }
+		if (this.editortooltip) { dijit.popup.close(this.editortooltip); }
 	},
 	
 });
