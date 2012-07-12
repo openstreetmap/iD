@@ -1,4 +1,5 @@
 // iD/actions/UndoStack.js
+// ** FIXME: a couple of AS3-isms in undoIfAction/removeLastIfAction
 
 define(['dojo/_base/declare'], function(declare){
 
@@ -15,11 +16,15 @@ declare("iD.actions.UndoStack", null, {
 	NO_CHANGE: 2,
 
 	constructor:function() {
+		// summary:		An undo stack. There can be any number of these, but almost all operations will
+		//				take place on the global undo stack - implemented as a singleton-like property of
+		//				the Controller.
 		this.undoActions=[];
 		this.redoActions=[];
 	},
 	
 	addAction:function(_action) {
+		// summary:		Do an action, and add it to the undo stack if it succeeded.
 		var result = _action.doAction();
 		switch (result) {
 			case this.FAIL:
@@ -46,26 +51,31 @@ declare("iD.actions.UndoStack", null, {
 	},
 
 	breakUndo:function() {
+		// summary:		Wipe the undo stack - typically used after saving.
 		this.undoActions = [];
 		this.redoActions = [];
 	},
 
 	canUndo:function() {
+		// summary:		Are there any items on the undo stack?
 		return this.undoActions.length > 0;
 	},
 
 	canRedo:function() {
+		// summary:		Are there any redoable actions?
 		return this.redoActions.length > 0;
 	},
 
-	// Undo the most recent action, and add it to the top of the redo stack
 	undo:function() {
+		// summary:		Undo the most recent action, and add it to the top of the redo stack.
 		if (!this.undoActions.length) { return; }
 		var action = undoActions.pop();
 		action.undoAction();
 		redoActions.push(action);
 	},
 	undoIfAction:function(_action) {
+		// summary:		Undo the most recent action _only_ if it was of a certain type.
+		//				Fixme: isInstanceOf needs to be made into JavaScript.
 		if (!this.undoActions.length) { return; }
 		if (this.undoActions[this.undoActions.length-1].isInstanceOf(_action)) {
 			this.undo();
@@ -74,12 +84,15 @@ declare("iD.actions.UndoStack", null, {
 		return false;
 	},
 	removeLastIfAction:function(_action) {
+		// summary:		Remove the most recent action from the stack _only_ if it was of a certain type.
+		//				Fixme: isInstanceOf needs to be made into JavaScript.
 		if (this.undoActions.length && this.undoActions[this.undoActions.length-1].isInstanceOf(_action)) {
 			this.undoActions.pop();
 		}
 	},
 
 	getUndoDescription:function() {
+		// summary:		Get the name of the topmost item on the undo stack.
 		if (this.undoActions.length==0) return null;
 		if (this.undoActions[this.undoActions.length-1].name) {
 			return this.undoActions[this.undoActions.length-1].name;
@@ -88,6 +101,7 @@ declare("iD.actions.UndoStack", null, {
 	},
 
 	getRedoDescription:function() {
+		// summary:		Get the name of the topmost item on the redo stack.
 		if (this.redoActions.length==0) return null;
 		if (this.redoActions[this.redoActions.length-1].name) {
 			return this.redoActions[this.redoActions.length-1].name;
@@ -95,8 +109,8 @@ declare("iD.actions.UndoStack", null, {
 		return null;
 	},
 
-	// Takes the action most recently undone, does it, and adds it to the undo stack
 	redo:function() {
+		// summary:		Takes the action most recently undone, does it, and adds it to the undo stack.
 		if (!this.redoActions.length) { return; }
 		var action = this.redoActions.pop();
 		action.doAction();

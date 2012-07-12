@@ -14,6 +14,8 @@ declare("iD.actions.CreatePOIAction", [iD.actions.CompositeUndoableAction], {
 	connection: null,
 
 	constructor:function(connection,tags,lat,lon) {
+		// summary:		Create a new node and set it as a POI. Used by drag-and-drop. Note that the
+		//				node is remembered, so that on redo we can just reinstate it.
 		this.setName("Create POI");
 		this.connection = connection;
 		this.tags = tags;

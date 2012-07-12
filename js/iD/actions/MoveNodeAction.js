@@ -15,6 +15,7 @@ declare("iD.actions.MoveNodeAction", [iD.actions.UndoableEntityAction], {
 	setLatLon: null,
 
 	constructor:function(node, newLat, newLon, setLatLon) {
+		// summary:		Move a node to a new position.
 		this.entity = node;
 		this.newLat = newLat;
 		this.newLon = newLon;

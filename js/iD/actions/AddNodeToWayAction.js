@@ -1,6 +1,6 @@
 // iD/actions/AddNodeToWayAction.js
 
-define(['dojo/_base/declare','iD/actions/UndoableEntityAction'], function(declare){
+define(['dojo/_base/declare','iD/actions/UndoableAction'], function(declare){
 
 // ----------------------------------------------------------------------
 // AddNodeToWayAction class
@@ -13,12 +13,13 @@ declare("iD.actions.AddNodeToWayAction", [iD.actions.UndoableEntityAction], {
 	firstNode: null,
 	autoDelete: true,
 	
-	constructor:function(_way, _node, _nodeList, _index, _autoDelete) {
-		this.entity = _way;
-		this.node = _node;
-		this.nodeList = _nodeList;
-		this.index = _index;
-		this.autoDelete = _autoDelete;
+	constructor:function(way, node, nodeList, index, autoDelete) {
+		// summary:		Add a node to a way at a specified index, or -1 for the end of the way.
+		this.entity = way;
+		this.node = node;
+		this.nodeList = nodeList;
+		this.index = index;
+		this.autoDelete = autoDelete;
 	},
 
 	doAction:function() {
@@ -44,6 +45,8 @@ declare("iD.actions.AddNodeToWayAction", [iD.actions.UndoableEntityAction], {
 	},
 
 	undoAction:function() {
+		// summary:		Remove the added node. Fixme: if the way is now 1-length, we should
+		//				do something like deleting it and converting the remaining node to a POI.
 		var way=this.entity;	// shorthand
 		if (this.autoDelete && way.length()==2 && way.parentRelations().length()) return this.FAIL;
 
@@ -53,8 +56,6 @@ declare("iD.actions.AddNodeToWayAction", [iD.actions.UndoableEntityAction], {
 		this.markClean();
 		way.refresh();
 
-		// ** if the way is now 1-length, we should do something like deleting it and
-		//    converting the remaining node to a POI (see P2)
 		return this.SUCCESS;
 	},
 });
