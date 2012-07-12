@@ -23,12 +23,14 @@ declare("iD.ui.DragAndDrop", null, {
 	ICONPATH: 'icons/',
 	ITEMSPERROW: 5,
 
-	constructor:function(_divname,_map,_gridname) {
-		this.divname=_divname;
-		dom.byId(_divname).ondragover = lang.hitch(this,this.update);
-		dom.byId(_divname).ondrop = function(e) { e.preventDefault(); };	// required by Firefox
-		this.map=_map;
-		this.grid=dom.byId(_gridname);
+	constructor:function(divname, map, gridname) {
+		// summary:		Singleton-like class for POI drag and drop. Loads a config file (draganddrop.json)
+		//				on initialisation, then populates the drop-down palette with it.
+		this.divname=divname;
+		dom.byId(divname).ondragover = lang.hitch(this,this.update);
+		dom.byId(divname).ondrop = function(e) { e.preventDefault(); };	// required by Firefox
+		this.map=map;
+		this.grid=dom.byId(gridname);
 
 		// Load drag and drop config file
 		dojo.xhrGet({
@@ -41,6 +43,7 @@ declare("iD.ui.DragAndDrop", null, {
 	},
 
 	drawGrid:function(obj) {
+		// summary:		Draw the grid of icons based on the JSON-derived object loaded.
 		var row;
 		for (var i=0; i<obj.length; i++) {
 			var item=obj[i];
@@ -62,14 +65,16 @@ declare("iD.ui.DragAndDrop", null, {
 	},
 
 	update:function(event) {
+		// summary:		Handler for dragging over the map; tells the browser that it's droppable here.
 		this.dragevent=event;
 		event.preventDefault();
 	},
 
 	end:function(event) {
+		// summary:		Create a new POI from the dropped icon.
 		var lon=this.map.coord2lon(this.map.mouseX(this.dragevent));
 		var lat=this.map.coord2lat(this.map.mouseY(this.dragevent));
-		var tags=this.parseKeyValues(event.target.getAttribute('alt'));
+		var tags=this._parseKeyValues(event.target.getAttribute('alt'));
 
 		var action=new iD.actions.CreatePOIAction(this.map.conn,tags,lat,lon);
 		this.map.controller.undoStack.addAction(action);
@@ -80,7 +85,8 @@ declare("iD.ui.DragAndDrop", null, {
 		this.map.controller.setState(new iD.controller.edit.SelectedPOINode(node));
 	},
 
-	parseKeyValues:function(string) {
+	_parseKeyValues:function(string) {
+		// summary:		Turn a string of format k1=v1;k2=v2;... into a hash.
 		var pairs=string.split(';');
 		var tags={};
 		for (var i in pairs) {
