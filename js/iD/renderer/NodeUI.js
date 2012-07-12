@@ -9,6 +9,7 @@ define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojox/gfx/_ba
 
 declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 	constructor:function() {
+		// summary:		A UI (rendering) representing a node.
 		this.redraw();
 	},
 	getEnhancedTags:function() {
@@ -18,6 +19,7 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 		return tags;
 	},
 	redraw:function() {
+		// summary:		Draw the object (mostly icons) and add hitzone sprites.
 		var node=this.entity;
 		this.removeSprites();
 

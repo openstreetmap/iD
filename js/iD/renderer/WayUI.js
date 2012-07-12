@@ -1,5 +1,6 @@
 // iD/renderer/WayUI.js
 // WayUI classes for iD
+// **** TODO:
 // multipolygon support - http://mail.dojotoolkit.org/pipermail/dojo-interest/2011-January/052042.html
 // support 'interactive'
 // line decoration, dots etc.
@@ -13,6 +14,7 @@ define(['dojo/_base/declare','dojo/_base/lang','iD/renderer/EntityUI'], function
 
 declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 	constructor:function() {
+		// summary:		A UI (rendering) representing a way.
 		this.redraw();
 	},
 	getEnhancedTags:function() {
@@ -21,9 +23,11 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 		return tags;
 	},
 	recalculate:function() {
+		// summary:		Not yet implemented - calculate length/centrepoint of UI for use in rendering.
 		// ** FIXME: todo
 	},
 	redraw:function() {
+		// summary:		Draw the object and add hitzone sprites.
 		var way=this.entity;
 		var maxwidth=4;
 		var i;
