@@ -53,7 +53,7 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 					var ways=entity.parentWays();
 					if (entity.hasParent(this.way)) { 
 						// start a branching way from an existing point
-						var way = this.getConnection().createWay({}, [entity], lang.hitch(this,this.undoAdder) );
+						var way = this.getConnection().doCreateWay({}, [entity], lang.hitch(this,this.undoAdder) );
 						this.controller.map.createUI(way);
 						return new iD.controller.shape.DrawWay(way);
 					} else if (ways.length==0) {
@@ -68,12 +68,12 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 						// start a branching way from a new point
 						var map = this.controller.map;
 						var undo = new iD.actions.CompositeUndoableAction();
-						var startNode = this.getConnection().createNode(
+						var startNode = this.getConnection().doCreateNode(
 							{}, 
 							map.coord2lat(map.mouseY(event)),
 							map.coord2lon(map.mouseX(event)), lang.hitch(undo,undo.push) );
 						entity.doInsertNodeAtClosestPosition(startNode, true, lang.hitch(undo,undo.push));
-						var way = this.getConnection().createWay({}, [startNode], lang.hitch(undo,undo.push) );
+						var way = this.getConnection().doCreateWay({}, [startNode], lang.hitch(undo,undo.push) );
 						this.controller.undoStack.addAction(undo);
 						this.controller.map.createUI(way);
 						return new iD.controller.shape.DrawWay(way);

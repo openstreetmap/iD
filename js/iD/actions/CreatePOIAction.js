@@ -23,7 +23,7 @@ declare("iD.actions.CreatePOIAction", [iD.actions.CompositeUndoableAction], {
 
 	doAction:function() {
 		if (this.newNode==null) {
-			this.newNode=this.connection.createNode(this.tags,this.lat,this.lon,lang.hitch(this,this.push));
+			this.newNode=this.connection.doCreateNode(this.tags,this.lat,this.lon,lang.hitch(this,this.push));
 		}
 		this.inherited(arguments);
 		this.connection.registerPOI(this.newNode);

@@ -153,7 +153,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 
 	appendNewNode:function(event, undo) {
 		var map=this.controller.map;
-		var node=this.getConnection().createNode(
+		var node=this.getConnection().doCreateNode(
 			{}, 
 			map.coord2lat(map.mouseY(event)),
 			map.coord2lon(map.mouseX(event)), lang.hitch(undo,undo.push) );

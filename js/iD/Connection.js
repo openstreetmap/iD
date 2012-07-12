@@ -1,7 +1,8 @@
 // iD/Connection.js
 
 define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/array",'dojo/_base/declare',
-        "iD/Entity","iD/actions/CreateEntityAction"], function(xhr,lang,DomParser,array,declare,Entity){
+        "iD/Entity","iD/Node","iD/Way","iD/Relation","iD/actions/CreateEntityAction"],
+       function(xhr,lang,DomParser,array,declare,Entity){
 
 // ----------------------------------------------------------------------
 // Connection base class
@@ -22,7 +23,9 @@ declare("iD.Connection", null, {
 	
 	apiBaseURL: '',		// root API address
 
-	constructor:function(_apiURL) {
+	constructor:function(apiURL) {
+		// summary:		The data store, including methods to fetch data from (and, eventually, save data to)
+		// 				an OSM API server.
 		console.log("Created a connection");
 		this.nodes={};
 		this.ways={};
@@ -30,10 +33,11 @@ declare("iD.Connection", null, {
 		this.pois=new Hashtable();
 		this.maps=[];
 		this.modified=false;
-		this.apiBaseURL=_apiURL;
+		this.apiBaseURL=apiURL;
 	},
 
-	assign:function(obj) {
+	_assign:function(obj) {
+		// summary:		Save an entity to the data store.
 		switch (obj.entityType) {
 			case "node": 		this.nodes[obj.id]=obj; break;
 			case "way": 		this.ways[obj.id]=obj; break;
@@ -41,45 +45,70 @@ declare("iD.Connection", null, {
 		}
 	},
 	
-	getNode:function(id) { return this.nodes[id]; },
-	getWay:function(id) { return this.ways[id]; },
-	getRelation:function(id) { return this.relations[id]; },
+	getNode:function(id) {
+		// summary:		Return a node by id.
+		return this.nodes[id];		// iD.Node
+	},
+	getWay:function(id) {
+		// summary:		Return a way by id.
+		return this.ways[id];		// iD.Way
+	},
+	getRelation:function(id) { 
+		// summary:		Return a relation by id.
+		return this.relations[id];	// iD.Relation
+	},
 
-	getOrCreate:function(id,type) {
+	_getOrCreate:function(id,type) {
+		// summary:		Return an entity if it exists: if not, create an empty one with the given id, and return that.
 		switch (type) {
 			case "node":
-				if (!this.nodes[id]) this.assign(new iD.Node(this, id, NaN, NaN, {}, false));
+				if (!this.nodes[id]) this._assign(new iD.Node(this, id, NaN, NaN, {}, false));
 				return this.nodes[id];
 			case "way":
-				if (!this.ways[id]) this.assign(new iD.Way(this, id, [], {}, false));
+				if (!this.ways[id]) this._assign(new iD.Way(this, id, [], {}, false));
 				return this.ways[id];
 			case "relation":
-				if (!this.relations[id]) this.assign(new iD.Relation(this, id, [], {}, false));
+				if (!this.relations[id]) this._assign(new iD.Relation(this, id, [], {}, false));
 				return this.relations[id];
 		}
 	},
 
-	createNode:function(tags, lat, lon, perform) {
+	doCreateNode:function(tags, lat, lon, perform) {
+		// summary:		Create a new node and save it in the data store, using an undo stack.
 		var node = new iD.Node(this, this.nextNode--, lat, lon, tags, true);
-		perform(new iD.actions.CreateEntityAction(node, lang.hitch(this,this.assign) ));
-		return node;
+		perform(new iD.actions.CreateEntityAction(node, lang.hitch(this,this._assign) ));
+		return node;	// iD.Node
 	},
-	createWay:function(tags, nodes, perform) {
+	doCreateWay:function(tags, nodes, perform) {
+		// summary:		Create a new way and save it in the data store, using an undo stack.
 		var way = new iD.Way(this, this.nextWay--, nodes.concat(), tags, true);
-		perform(new iD.actions.CreateEntityAction(way, lang.hitch(this,this.assign) ));
+		perform(new iD.actions.CreateEntityAction(way, lang.hitch(this,this._assign) ));
 		return way;
 	},
-	createRelation:function(tags, members, perform) {
+	doCreateRelation:function(tags, members, perform) {
+		// summary:		Create a new relation and save it in the data store, using an undo stack.
 		var relation = new iD.Relation(this, this.nextRelation--, members.concat(), tags, true);
-		perform(new iD.actions.CreateEntityAction(relation, lang.hitch(this,this.assign) ));
+		perform(new iD.actions.CreateEntityAction(relation, lang.hitch(this,this._assign) ));
 		return relation;
 	},
 
-	markClean:function() { this.modified=false; },
-	markDirty:function() { this.modified=true; },
-	isDirty:function() { return this.modified; },
+	markClean:function() { 
+		// summary:		Mark the connection as clean (i.e. there's no new data to be saved).
+		this.modified=false;
+	},
+	markDirty:function() { 
+		// summary:		Mark the connection as dirty (i.e. there's data to be saved).
+		this.modified=true;
+	},
+	isDirty:function() { 
+		// summary:		Is the connection dirty?
+		return this.modified;
+	},
 
 	getObjectsByBbox:function(left,right,top,bottom) {
+		// summary:			Find all drawable entities that are within a given bounding box.
+		// returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
+		// 					Each one is an array of entities.
 		var o={ poisInside: [], poisOutside: [],
 		        waysInside: [], waysOutside: [] };
 		for (var id in this.ways) {
@@ -94,33 +123,33 @@ declare("iD.Connection", null, {
 		return o;
 	},
 
+	// ---------------
 	// Redraw handling
 
 	registerMap:function(map) {
+		// summary:		Record that a Map object wants updates from this Connection.
 		this.maps.push(map);
 	},
 
 	refreshMaps:function() {
+		// summary:		Redraw all the Map objects that take data from this Connection.
 		array.forEach(this.maps, function(map) {
 			map.updateUIs(false,true);
 		});
 	},
 	
 	refreshEntity:function(_entity) {
+		// summary:		Redraw a particular entity on all the Map objects that take data from this Connection.
 		array.forEach(this.maps, function(map) {
 			map.refreshUI(_entity);
 		});
 	},
 	
-	// Callback when completed loading (used in initialisation)
-	
-	registerCallback:function(_callback) {
-		this.callback=_callback;
-	},
-
+	// ------------
 	// POI handling
 
 	updatePOIs:function(nodelist) {
+		// summary:		Update the list of POIs (nodes not in ways) from a supplied array of nodes.
 		for (var i in nodelist) {
 			if (nodelist[i].hasParentWays()) {
 				this.pois.remove(nodelist[i]);
@@ -131,31 +160,38 @@ declare("iD.Connection", null, {
 	},
 	
 	getPOIs:function() {
-		return this.pois.keys();
+		// summary:		Return a list of all the POIs in this Connection.
+		return this.pois.keys();	// Array
 	},
 	
 	registerPOI:function(node) {
+		// summary:		Register a node as a POI (not in a way).
 		this.pois.put(node,true);
 	},
 	
 	unregisterPOI:function(node) {
+		// summary:		Mark a node as no longer being a POI (it's now in a way).
 		this.pois.remove(node);
 	},
 
+	// ----------
 	// OSM parser
 
 	loadFromAPI:function(left,right,top,bottom) {
+		// summary:		Request data within the bbox from an external OSM server. Currently hardcoded
+		// 				to use Overpass API (which has the relevant CORS headers).
 		var url="http://www.overpass-api.de/api/xapi?map?bbox="+left+","+bottom+","+right+","+top;
 		xhr.get({ url: url,
 		          headers: { "X-Requested-With": null },
-		          load: lang.hitch(this, "processOSM") });
+		          load: lang.hitch(this, "_processOSM") });
 	},
 
 	loadFromURL:function(url) {
-		xhr.get({ url: url, load: lang.hitch(this, "processOSM") });
+		// summary:		Load all data from a given URL.
+		xhr.get({ url: url, load: lang.hitch(this, "_processOSM") });
 	},
 
-	processOSM:function(result) {
+	_processOSM:function(result) {
 		var jsdom = DomParser.parse(result).childNodes[1];
 		var nodelist = [];
 		for (var i in jsdom.childNodes) {
@@ -168,7 +204,7 @@ declare("iD.Connection", null, {
 					                       getAttribute(obj,'lat'),
 					                       getAttribute(obj,'lon'),
 					                       getTags(obj));
-					this.assign(node);
+					this._assign(node);
 					nodelist.push(node);
 					break;
 
@@ -177,7 +213,7 @@ declare("iD.Connection", null, {
 					                     getAttribute(obj,'id'),
 					                     getNodes(obj,this),
 					                     getTags(obj));
-					this.assign(way);
+					this._assign(way);
 					break;
 
 				case "relation":
@@ -185,7 +221,7 @@ declare("iD.Connection", null, {
 					                               getAttribute(obj,'id'),
 					                               getMembers(obj,this),
 					                               getTags(obj));
-					this.assign(relation);
+					this._assign(relation);
 					break;
 			}
 		}
@@ -231,7 +267,7 @@ declare("iD.Connection", null, {
 					var type=getAttribute(item,'type');
 					var role=getAttribute(item,'role');
 
-					var obj=conn.getOrCreate(id,type);
+					var obj=conn._getOrCreate(id,type);
 					members.push(new iD.RelationMember(obj,role));
 				}
 			});

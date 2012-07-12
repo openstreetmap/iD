@@ -18,13 +18,13 @@ declare("iD.actions.UndoableEntityAction", [iD.actions.UndoableAction], {
 
 		markDirty:function() {
 			if (!this.initialised) this.init();
-			if (!this.wasDirty) this.entity.markDirty();
+			if (!this.wasDirty) this.entity._markDirty();
 			if (!this.connectionWasDirty) this.entity.connection.markDirty();
         },
 
 		markClean:function() {
 			if (!this.initialised) this.init();
-			if (!this.wasDirty) this.entity.markClean();
+			if (!this.wasDirty) this.entity._markClean();
 			if (!this.connectionWasDirty) this.entity.connection.markClean();
 		},
 
