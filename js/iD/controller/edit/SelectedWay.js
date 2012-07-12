@@ -19,7 +19,7 @@ declare("iD.controller.edit.SelectedWay", [iD.controller.edit.EditBaseState], {
 		this.wayUI=this.controller.map.getUI(this.way);
 		this.wayUI.setStateClass('selected');
 		this.wayUI.setStateClass('shownodes');
-		this.openEditorTooltip(this.entryevent.clientX, this.entryevent.clientY);
+		if (this.entryevent) { this.openEditorTooltip(this.entryevent.clientX, this.entryevent.clientY); }
 		this.wayUI.redraw();
 	},
 	exitState:function() {

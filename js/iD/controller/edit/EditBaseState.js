@@ -24,7 +24,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
 	},
 	
 	closeEditorTooltip:function() {
-		dijit.popup.close(editortooltip);
+		if (this.editortooltip) { dijit.popup.close(editortooltip); }
 	},
 	
 });
