@@ -11,6 +11,7 @@ declare("iD.controller.edit.SelectedWayNode", [iD.controller.edit.EditBaseState]
 	way: null,
 
 	constructor:function(_node,_way) {
+		// summary:		In 'Edit object' mode and a node in a way is selected.
 		this.node=_node;
 		this.way=_way;
 	},

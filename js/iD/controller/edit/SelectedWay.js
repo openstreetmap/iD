@@ -3,7 +3,7 @@
 define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(declare){
 
 // ----------------------------------------------------------------------
-// SelectedWay class
+// edit.SelectedWay class
 
 declare("iD.controller.edit.SelectedWay", [iD.controller.edit.EditBaseState], {
 
@@ -12,6 +12,7 @@ declare("iD.controller.edit.SelectedWay", [iD.controller.edit.EditBaseState], {
 	entryevent: null,
 
 	constructor:function(_way,_event) {
+		// summary:		In 'Edit object' mode and a way is selected.
 		this.way=_way;
 		this.entryevent=_event;
 	},

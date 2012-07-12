@@ -3,7 +3,7 @@
 define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(declare){
 
 // ----------------------------------------------------------------------
-// SelectedPOINode class
+// edit.SelectedPOINode class
 
 declare("iD.controller.edit.SelectedPOINode", [iD.controller.edit.EditBaseState], {
 
@@ -11,6 +11,7 @@ declare("iD.controller.edit.SelectedPOINode", [iD.controller.edit.EditBaseState]
 	nodeUI: null,
 
 	constructor:function(_node) {
+		// summary:		In 'Edit object' mode and a POI node is selected.
 		this.node=_node;
 	},
 	enterState:function() {
