@@ -13,6 +13,8 @@
 	<style type="text/css">
 		:focus { outline-color: transparent; outline-style: none; }
 		* { font-family: Helvetica, Arial; }
+		p { font-size: x-small; }
+		a:visited,a { color: black; }
 	</style>
 </head>
 <body class="claro">
@@ -45,8 +47,8 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 		scale: 17,
 		div: "map",
 		connection: conn,
-		width: dom.byId('appLayout').offsetWidth,
-		height: dom.byId('appLayout').offsetHeight
+		width: dom.byId('map').offsetWidth,
+		height: dom.byId('map').offsetHeight
 	});
 	conn.registerMap(map);
 	map.ruleset=ruleset;
@@ -149,9 +151,10 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 
 <!-- Map div -->
 
-<div id="map"
+<div id="map" style="height:600px"
      style="-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
 </div>
+<p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>, <a href='http://github.com/systemed/iD'>code</a>, <a href='http://www.geowiki.com/docs'>docs</a>. Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
 
 <!-- Floating help window -->
 
