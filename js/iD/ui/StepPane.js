@@ -87,12 +87,13 @@ declare("iD.ui.StepPane", null, {
 	
 	show:function() {
 		// summary:		Show the window.
-		dijit.byId(this.divname).show();
+                if(dijit.byId(this.divname).domNode.style.visibility == 'hidden')
+                    dijit.byId(this.divname).show();
 	},
 	hide:function() {
 		// summary:		Hide the window.
 		dijit.byId(this.divname).hide();
-	},
+	}
 
 });
 
