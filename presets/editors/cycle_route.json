@@ -1,0 +1,20 @@
+{
+	'1': { key: 'type', value: 'route', type: 'hidden' },
+	'2': { key: 'route', value: 'bicycle', type: 'hidden' },
+
+	'Route name': {
+		key: 'name',
+		type: 'text'
+	},
+	
+	'Route number': {
+		key: 'ref',
+		type: 'text'
+	},
+	
+	'Network': {
+		key: 'network',
+		type: 'dropdown',
+		value: { 'National': 'ncn', 'Regional': 'rcn', 'Local': 'lcn' }
+	}
+}

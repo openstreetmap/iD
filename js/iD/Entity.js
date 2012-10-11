@@ -11,7 +11,7 @@ define(['dojo/_base/declare','dojo/_base/array','dojo/_base/lang',
 declare("iD.Entity", null, {
 
 	connection: null,
-	id: NaN,
+	id: NaN,
 	loaded: false,
 	tags: null,
 	entityType: '',
@@ -105,6 +105,13 @@ declare("iD.Entity", null, {
 			}
 		}
 		return n.length==0 ? 'unknown' : n.join('; ');	// String
+	},
+	
+	matchesTags:function(hash) {
+		for (var k in hash) {
+			if (!this.tags[k] || this.tags[k]!=hash[k]) return false;
+		}
+		return true;
 	},
 
 	// ---------------

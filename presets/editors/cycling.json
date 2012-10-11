@@ -1,0 +1,12 @@
+{
+	'Bikes allowed?': {
+		key: 'bicycle',
+		type: 'dropdown',
+		value: { 'Yes': 'yes', 'No': 'no', 'Permissive': 'permissive' }
+	}, 
+
+	'Cycle routes': {
+		type: 'relation',
+		editor: 'cycle_route'
+	}
+}

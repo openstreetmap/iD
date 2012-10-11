@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <title>iD</title>
     <!-- load Dojo -->
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dijit/themes/claro/claro.css">
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojox/layout/resources/FloatingPane.css">
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojox/layout/resources/ResizeHandle.css">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dijit/themes/claro/claro.css">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojox/layout/resources/FloatingPane.css">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojox/layout/resources/ResizeHandle.css">
 	<link rel="stylesheet" href="css/app.css">
 	<script src="js/lib/jshashtable.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true, parseOnLoad: true, baseUrl: 'js/iD/'"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojo/dojo.js" data-dojo-config="async: true, parseOnLoad: true, baseUrl: 'js/iD/'"></script>
 	<style type="text/css">
 		:focus { outline-color: transparent; outline-style: none; }
 		* { font-family: Helvetica, Arial; }
@@ -22,7 +22,7 @@
 
 	<script>
 
-require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom",
+require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented",
          "dijit/form/Button","dijit/form/ToggleButton",
          "dojox/layout/FloatingPane",
          "iD/actions/UndoStack","iD/actions/CreatePOIAction",
@@ -31,7 +31,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
          "iD/controller/edit/NoSelection","iD/controller/shape/NoSelection",
          "iD/renderer/Map","iD/styleparser/RuleSet",
          "iD/ui/DragAndDrop","iD/ui/StepPane",
-         "dojo/domReady!"], function(lang,domGeom,domClass,on,dom){
+         "dojo/domReady!"], function(lang,domGeom,domClass,on,dom,Evented){
 
 	var ruleset=new iD.styleparser.RuleSet();
 	var conn=new iD.Connection("http://www.overpass-api.de/api/xapi?");
@@ -58,8 +58,8 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	map.setController(controller);
 	
 	// Initialise event listeners
-	on(window, "enterState", enterStateListener);
-	on(window, "exitState", exitStateListener);
+	controller.on("enterState", enterStateListener);
+	controller.on("exitState", exitStateListener);
 
 	// ----------------------------------------------------
 	// Data is loaded and app ready to go
@@ -73,6 +73,10 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 
 		// Set initial controllerState
 		controller.setState(new iD.controller.edit.NoSelection());
+		
+		// Load presets 
+		controller.setTagPresets('way','presets/ways.json');
+		controller.setTagPresets('node','presets/nodes.json');
 
 		// Load data
 		map.download();
@@ -122,7 +126,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 <div id="modebuttons" style="position:absolute; left: 10px; top: 10px;">
 	<div id="addPOI" data-dojo-type="dijit.form.DropDownButton" data-dojo-props="iconClass:'dijitIconApplication', onClick:function(){}">
 		<span>Add point</span>
-        <div data-dojo-type="dijit.TooltipDialog">
+		<div data-dojo-type="dijit.TooltipDialog">
 			<p>Drag points onto the map</p>
 			<table id="dndgrid">
 			</table>

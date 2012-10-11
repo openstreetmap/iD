@@ -1,7 +1,8 @@
 // iD/controller/edit/EditBaseState.js
 
-define(['dojo/_base/declare','dijit/TooltipDialog','dijit/popup',
-        'iD/controller/ControllerState'], function(declare){
+define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojo/on',
+        'dijit/registry','dijit/TooltipDialog','dijit/Dialog','dijit/popup',
+        'iD/controller/ControllerState','iD/tags/TagEditor'], function(declare,lang,array,on,registry){
 
 // ----------------------------------------------------------------------
 // EditBaseState class - provides shared UI functions to edit mode states
@@ -21,16 +22,28 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
 		// entity: iD.Entity	The entity to be edited.
 		var h=entity.friendlyName(); h = (h=='') ? h : h+"<br/>";
 		this.editortooltip = new dijit.TooltipDialog({
-			content: h+"<button data-dojo-type='dijit.form.Button' type='submit'>Edit tags</button> "
-			          +"<button data-dojo-type='dijit.form.Button' type='submit'>Edit shape</button> ",
+			content: h+"<button data-dojo-type='dijit.form.Button' id='editTags'  parseOnLoad='false' type='submit'>Edit tags</button> "
+			          +"<button data-dojo-type='dijit.form.Button' id='editShape' parseOnLoad='false' type='submit'>Edit shape</button> ",
 			autoFocus: false
 		});
+		on(registry.byId('editTags'), 'click', lang.hitch(this,this.editTags,entity));
 		dijit.popup.open({ popup: this.editortooltip, x: x, y: y });
 	},
 	
 	closeEditorTooltip:function() {
 		// summary:		Close the tooltip.
+		array.forEach(['editTags','editShape'], function(b){
+			if (!registry.byId(b)) return;
+			registry.byId(b).type='';	// fix Safari issue
+			registry.byId(b).destroy();	// remove from registry so we can reinitialise next time
+		});
 		if (this.editortooltip) { dijit.popup.close(this.editortooltip); }
+	},
+	
+	editTags:function(entity) {
+		// summary:		Open a tag editor for the selected entity.
+		var tagEditor = new iD.tags.TagEditor(entity,this.controller);
+		this.closeEditorTooltip();
 	},
 	
 });

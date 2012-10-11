@@ -143,7 +143,7 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 		};
 	},
 	shapeStrokeStyler:function() {
-		if (isNaN(this.casing_color)) { return { width:0 }; }
+		if (isNaN(this.casing_color)) { return { width:0 }; }
 		return {
 			color: this.dojoColor(this.casing_color, this.casing_opacity ? this.casing_opacity : 1),
 			width: this.casing_width ? this.casing_width : 1

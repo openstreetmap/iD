@@ -1,0 +1,53 @@
+{
+	'Roads': {
+		'Motorway': {
+			tags: { highway: 'motorway' },
+			implied: { oneway: 'yes', bicycle: 'no', foot: 'no', horse: 'no' },
+			icon: 'ways/highway__motorway.png',
+			editors: ['road']
+		},
+		'Trunk road': {
+			tags: { highway: 'secondary' },
+			icon: 'ways/highway__secondary.png',
+			editors: ['road','cycling','bus']
+		},
+		'Primary road': {
+			tags: { highway: 'primary' },
+			icon: 'ways/highway__primary.png',
+			editors: ['road','cycling','bus']
+		},
+		'Secondary road': {
+			tags: { highway: 'secondary' },
+			icon: 'ways/highway__secondary.png',
+			editors: ['road','cycling','bus']
+		},
+		'Tertiary road': {
+			tags: { highway: 'tertiary' },
+			icon: 'ways/highway__tertiary.png',
+			editors: ['road','cycling','bus']
+		},
+		'Minor road': {
+			tags: { highway: 'unclassified' },
+			icon: 'ways/highway__unclassified.png',
+			editors: ['road','cycling','bus']
+		},
+	},
+
+	'Railways': {
+		'Railway': {
+			tags: { railway: 'rail' },
+			icon: 'ways/railway__rail.png',
+			editors: ['rail']
+		},
+		'Disused tracks': {
+			tags: { railway: 'disused' },
+			icon: 'ways/railway__disused.png',
+			editors: ['rail']
+		},
+		'Abandoned trackbed': {
+			tags: { railway: 'abandoned' },
+			icon: 'ways/railway__abandoned.png',
+			editors: ['rail']
+		},
+	}
+}

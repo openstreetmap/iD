@@ -18,6 +18,9 @@ Renderer to do
 * Node headings (for locks etc.)
 * Dragging needs tolerance (i.e. less than n pixels and n seconds)
 
+Tagging to do
+* dijitTooltipConnector is wrong when an entityUI is clicked
+
 ControllerStates to do:
 * Try to share as much code as possible
 * Draw way controller states:
