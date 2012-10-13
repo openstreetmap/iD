@@ -20,7 +20,7 @@ declare("iD.Node", [iD.Entity], {
 		this.lat=Number(lat);
 		this.lon=Number(lon);
 		this.tags=tags;
-		this.loaded=(loaded==undefined) ? true : loaded;
+		this.loaded=(loaded===undefined) ? true : loaded;
 		this.project();
 		this.modified=this.id<0;
 	},

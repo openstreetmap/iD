@@ -4,7 +4,7 @@ define(['dojo/_base/declare',
 		'iD/controller/edit/EditBaseState',
 		'iD/controller/edit/SelectedWay',
 		'iD/controller/edit/SelectedWayNode',
-		'iD/controller/edit/SelectedPOINode',
+		'iD/controller/edit/SelectedPOINode'
 		], function(declare){
 
 // ----------------------------------------------------------------------
@@ -29,13 +29,13 @@ declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
 				case 'node':
 					var ways=entity.parentWays();
 					if (ways.length==0) { return new iD.controller.edit.SelectedPOINode(entity); }
-					               else { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
+                    else { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
 				case 'way':
 					return new iD.controller.edit.SelectedWay(entityUI.entity, event);
 			}
 		}
 		return this;
-	},
+	}
 	
 });
 

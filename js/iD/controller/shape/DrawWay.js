@@ -47,6 +47,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 		var entity=entityUI ? entityUI.entity : null;
 		var entityType=entity ? entity.entityType : null;
 		var map=this.controller.map;
+        var ways;
 
 		if (event.type=='mouseover' && entityType=='way' && entityUI!=this.wayUI) { 
 			// Mouse over way, show hover highlight
@@ -70,7 +71,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 
 		} else if (event.type=='mouseout' && entityType=='node') {
 			// Mouse left node, remove hover highlight from parent way too
-			var ways=entity.parentWays();
+			ways=entity.parentWays();
 			for (var i in ways) {
 				var ui=this.controller.map.getUI(ways[i]);
 				if (ui && ui.hasStateClass('shownodeshover')) {
@@ -105,10 +106,11 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 						this.appendNode(entity, this.undoAdder() );
 						return this;
 					}
+                    break;
 
 				case 'way':
 					// Click on way, add new junction node to way
-					var ways=[entity];	// ** needs to find all the ways under the mouse
+					ways=[entity];	// ** needs to find all the ways under the mouse
 					var undo=new iD.actions.CompositeUndoableAction();
 					var node=this.appendNewNode(event, undo);
 					array.forEach(ways, function(w) { w.doInsertNodeAtClosestPosition(node, true, lang.hitch(undo,undo.push)); } );
@@ -145,9 +147,9 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	},
 	
 	appendNode:function(node, performAction) {
-		if (this.editEnd) { this.way.doAppendNode(node, performAction); }
-		             else { this.way.doPrependNode(node, performAction); }
-	},
+        if (this.editEnd) { this.way.doAppendNode(node, performAction); }
+        else { this.way.doPrependNode(node, performAction); }
+    },
 
 	appendNewNode:function(event, undo) {
 		var map=this.controller.map;
@@ -157,7 +159,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 			map.coord2lon(map.mouseX(event)), lang.hitch(undo,undo.push) );
 		this.appendNode(node, lang.hitch(undo,undo.push));
 		return node;
-	},
+	}
 	
 });
 

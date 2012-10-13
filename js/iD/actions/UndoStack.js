@@ -93,7 +93,7 @@ declare("iD.actions.UndoStack", null, {
 
 	getUndoDescription:function() {
 		// summary:		Get the name of the topmost item on the undo stack.
-		if (this.undoActions.length==0) return null;
+		if (!this.undoActions.length) return null;
 		if (this.undoActions[this.undoActions.length-1].name) {
 			return this.undoActions[this.undoActions.length-1].name;
 		}
@@ -102,7 +102,7 @@ declare("iD.actions.UndoStack", null, {
 
 	getRedoDescription:function() {
 		// summary:		Get the name of the topmost item on the redo stack.
-		if (this.redoActions.length==0) return null;
+		if (!this.redoActions.length) return null;
 		if (this.redoActions[this.redoActions.length-1].name) {
 			return this.redoActions[this.redoActions.length-1].name;
 		}
@@ -115,7 +115,7 @@ declare("iD.actions.UndoStack", null, {
 		var action = this.redoActions.pop();
 		action.doAction();
 		this.undoActions.push(action);
-	},
+	}
 
 });
 

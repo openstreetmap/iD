@@ -25,7 +25,7 @@ declare("iD.Controller", null, {
 	setState:function(newState) {
 		// summary:		Enter a new ControllerState, firing exitState on the old one, and enterState on the new one.
 		if (newState==this.state) { return; }
-		if (this.state) { 
+		if (this.state) {
 			this.state.exitState(newState);
 			on.emit(window, "exitState", { bubbles: true, cancelable: true, state: this.state.stateNameAsArray() });
 		}
@@ -40,7 +40,7 @@ declare("iD.Controller", null, {
 		if (!this.state) { return; }
 		var newState=this.state.processMouseEvent(event,entityUI);
 		this.setState(newState);
-	},
+	}
 
 });
 

@@ -41,7 +41,7 @@ declare("iD.actions.UndoableAction", null, {
 	setName:function(_name) {
 		// summary:		Set the name of an action. For UI and debugging purposes.
 		this.name=_name;
-	},
+	}
 
 });
 
@@ -69,9 +69,9 @@ declare("iD.actions.UndoableEntityAction", [iD.actions.UndoableAction], {
 		if (!this.connectionWasDirty) this.entity.connection.markDirty();
 	},
 
-	markClean:function() {
-		// summary: 	If the entity was clean before, revert the dirty flag to that state.
-		if (!this.initialised) this.init();
+    markClean:function() {
+        // summary: 	If the entity was clean before, revert the dirty flag to that state.
+        if (!this.initialised) this.init();
 		if (!this.wasDirty) this.entity._markClean();
 		if (!this.connectionWasDirty) this.entity.connection.markClean();
 	},
@@ -85,7 +85,7 @@ declare("iD.actions.UndoableEntityAction", [iD.actions.UndoableAction], {
 
 	toString:function() {
 		return this.name + " " + this.entity.entityType + " " + this.entity.id;
-	},
+	}
 
 });
 
@@ -153,7 +153,7 @@ declare("iD.actions.CompositeUndoableAction", [iD.actions.UndoableAction], {
 			this.actions[i].undoAction();
 		}
 		this.actionsDone=false;
-	},
+	}
 
 });
 

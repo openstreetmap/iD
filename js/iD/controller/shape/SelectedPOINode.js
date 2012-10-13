@@ -9,7 +9,7 @@
 
 define(['dojo/_base/declare',
 		'iD/actions/UndoableAction',
-		'iD/controller/ControllerState',
+		'iD/controller/ControllerState'
 		], function(declare){
 
 // ----------------------------------------------------------------------
@@ -27,7 +27,7 @@ declare("iD.controller.shape.SelectedPOINode", [iD.controller.ControllerState], 
 		var entityType=entity ? entity.entityType : null;
 
 		return this;
-	},
+	}
 	
 });
 
