@@ -40,7 +40,7 @@ declare("iD.controller.edit.SelectedPOINode", [iD.controller.edit.EditBaseState]
 			}
 		}
 		return this;
-	},
+	}
 	
 });
 

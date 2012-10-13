@@ -19,11 +19,12 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
 		// x: Number	Screen co-ordinate.
 		// y: Number	Screen co-ordinate.
 		// entity: iD.Entity	The entity to be edited.
-		var h=entity.friendlyName(); h = (h=='') ? h : h+"<br/>";
-		this.editortooltip = new dijit.TooltipDialog({
-			content: h+"<button data-dojo-type='dijit.form.Button' type='submit'>Edit tags</button> "
-			          +"<button data-dojo-type='dijit.form.Button' type='submit'>Edit shape</button> ",
-			autoFocus: false
+        var h=entity.friendlyName();
+        if (h !== '') h = h + "<br/>";
+        this.editortooltip = new dijit.TooltipDialog({
+            content: h+"<button data-dojo-type='dijit.form.Button' type='submit'>Edit tags</button> " +
+                "<button data-dojo-type='dijit.form.Button' type='submit'>Edit shape</button> ",
+            autoFocus: false
 		});
 		dijit.popup.open({ popup: this.editortooltip, x: x, y: y });
 	},
@@ -31,7 +32,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
 	closeEditorTooltip:function() {
 		// summary:		Close the tooltip.
 		if (this.editortooltip) { dijit.popup.close(this.editortooltip); }
-	},
+	}
 	
 });
 
