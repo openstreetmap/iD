@@ -28,11 +28,13 @@ declare("iD.tags.PresetList", null, {
 	assembleEditorsForEntity:function(_entity) {
 		if (_entity.entityType!=this.entityType) return false;
 		
+		var presetList={};
 		var editorList=[];
 		for (var group in this.presets) {
 			for (var preset in this.presets[group]) {
 				var props=this.presets[group][preset];
 				if (_entity.matchesTags(props.tags)) {
+					presetList[preset]=props;
 					for (var i in props.editors) {
 						var editor=props.editors[i];
 						if (editorList.indexOf(editor)==-1) { editorList.push(editor); }
@@ -40,7 +42,7 @@ declare("iD.tags.PresetList", null, {
 				}
 			}
 		}
-		return editorList;
+		return { presets:presetList, editors: editorList };
 	}
 
 });

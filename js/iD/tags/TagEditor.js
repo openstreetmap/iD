@@ -19,7 +19,6 @@ declare("iD.tags.TagEditor", null, {
 		this.editorContainers={};
 
 		// Create the dialog, and the form to put the editors in
-
 		this.dialog = new dijit.Dialog({ title: "My Dialog", content: "Test content.", style: "width: 300px" });
 		var form = new dijit.form.Form({ encType: 'multipart/form-data', action: '', method: '',
 			onSubmit: function(event) { console.log('submit'); }
@@ -27,14 +26,33 @@ declare("iD.tags.TagEditor", null, {
 		this.dialog.set('content',form);
 		this.dialog.show();
 
-		// Add each editor
+		// What editors are relevant?
 		var presetList=this.controller.presets[_entity.entityType];
-		var editors=presetList.assembleEditorsForEntity(_entity);
-		for (var i in editors) {
-			var editor=editors[i];
-			this.appendEditor(editor,form.domNode);
+		var applicablePresets=presetList.assembleEditorsForEntity(_entity);
+
+		// Add preset types
+		for (var i in applicablePresets.presets) {
+			this.appendPreset(i,applicablePresets.presets[i],form.domNode);
+		}
+
+		// Add each editor
+		for (var i in applicablePresets.editors) {
+			this.appendEditor(applicablePresets.editors[i],form.domNode);
 		}
 	},
+
+	// ------------
+	// Presets
+
+	appendPreset:function(_name,_preset,_destination) {
+		var element=domConstruct.create('h2');
+		element.appendChild(domConstruct.create('img', { src: 'presets/'+_preset.icon }));
+		element.appendChild(dojo.doc.createTextNode(_name));
+		_destination.appendChild(element);
+	},
+
+	// ------------
+	// Editors
 	
 	appendEditor:function(_editor,_destination) {
 		// summary:		Request an editor (cached if available, XHR if not), and call renderEditor when it's available.
