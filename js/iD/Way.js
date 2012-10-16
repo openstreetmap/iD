@@ -23,9 +23,9 @@ declare("iD.Way", [iD.Entity], {
 		this.tags=tags;
 		this.loaded=(loaded==undefined) ? true : loaded;
 		this.modified=this.id<0;
-		var w=this; array.forEach(nodes,function(node) { 
-			node.addParent(w);
-		});
+        _.each(nodes, _.bind(function(node) {
+			node.addParent(this);
+		}, this));
 		this._calculateBbox();
 	},
 	

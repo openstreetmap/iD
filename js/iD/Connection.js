@@ -91,15 +91,15 @@ declare("iD.Connection", null, {
 		return relation;
 	},
 
-	markClean:function() { 
+	markClean:function() {
 		// summary:		Mark the connection as clean (i.e. there's no new data to be saved).
 		this.modified=false;
 	},
-	markDirty:function() { 
+	markDirty:function() {
 		// summary:		Mark the connection as dirty (i.e. there's data to be saved).
 		this.modified=true;
 	},
-	isDirty:function() { 
+	isDirty:function() {
 		// summary:		Is the connection dirty?
 		return this.modified;
 	},
@@ -132,18 +132,18 @@ declare("iD.Connection", null, {
 
 	refreshMaps:function() {
 		// summary:		Redraw all the Map objects that take data from this Connection.
-		array.forEach(this.maps, function(map) {
+		_.each(this.maps, function(map) {
 			map.updateUIs(false,true);
 		});
 	},
-	
+
 	refreshEntity:function(_entity) {
 		// summary:		Redraw a particular entity on all the Map objects that take data from this Connection.
-		array.forEach(this.maps, function(map) {
+		_.each(this.maps, function(map) {
 			map.refreshUI(_entity);
 		});
 	},
-	
+
 	// ------------
 	// POI handling
 
@@ -230,49 +230,45 @@ declare("iD.Connection", null, {
 
 		// Private functions to parse DOM created from XML file
 
+
+        function filterNodeName(n) {
+            return function(item) {
+                return item.nodeName === n;
+            };
+        }
+
 		function getAttribute(obj,name) {
-			var result=array.filter(obj.attributes,function(item) {
-				return item.nodeName==name;
-			});
-			return result[0].nodeValue;
+            return _.find(obj.attributes, filterNodeName(name)).nodeValue;
 		}
 
 		function getTags(obj) {
-			var tags={};
-			array.forEach(obj.childNodes,function(item) {
-				if (item.nodeName=='tag') {
-					tags[getAttribute(item,'k')]=getAttribute(item,'v');
-				}
-			});
-			return tags;
+            return _(obj.childNodes).chain()
+                .filter(filterNodeName('tag'))
+                .map(function(item) {
+                    return [getAttribute(item,'k'), getAttribute(item,'v')];
+                }).object().value();
 		}
 
 		function getNodes(obj,conn) {
-			var nodes=[];
-			array.forEach(obj.childNodes,function(item) {
-				if (item.nodeName=='nd') {
-					var id=getAttribute(item,'ref');
-					nodes.push(conn.getNode(id));
-				}
-			});
-			return nodes;
+            return _(obj.childNodes).chain()
+                .filter(filterNodeName('nd'))
+                .map(function(item) {
+                    return conn.getNode(getAttribute(item,'ref'));
+                }).value();
 		}
 
 		function getMembers(obj,conn) {
-			var members=[];
-			array.forEach(obj.childNodes,function(item) {
-				if (item.nodeName=='member') {
-					var id  =getAttribute(item,'ref');
-					var type=getAttribute(item,'type');
-					var role=getAttribute(item,'role');
+            return _(obj.childNodes).chain()
+                .filter(filterNodeName('member'))
+                .map(function(item) {
+                    var id = getAttribute(item,'ref'),
+                        type = getAttribute(item,'type'),
+                        role = getAttribute(item,'role');
 
-					var obj=conn._getOrCreate(id,type);
-					members.push(new iD.RelationMember(obj,role));
-				}
-			});
-			return members;
+					var obj = conn._getOrCreate(id,type);
+					return new iD.RelationMember(obj,role);
+                }).value();
 		}
-
 	}
 });
 
