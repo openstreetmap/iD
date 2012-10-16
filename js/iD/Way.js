@@ -57,7 +57,7 @@ declare("iD.Way", [iD.Entity], {
 		// summary:		Return the first node in the way.
 		return this.nodes[0];		// iD.Node
 	},
-	getLastNode:function() { 
+	getLastNode:function() {
 		// summary:		Return the last node in the way.
 		return this.nodes[this.nodes.length-1];	// iD.Node
 	},

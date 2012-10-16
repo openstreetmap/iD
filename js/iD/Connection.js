@@ -8,7 +8,6 @@ define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/arr
 // Connection base class
 
 declare("iD.Connection", null, {
-	
 	nodes: {},			// hash of node objects
 	ways: {},			// hash of way objects
 	relations: {},		// hash of relation objects
@@ -20,7 +19,7 @@ declare("iD.Connection", null, {
 	nextNode: -1,		// next negative ids
 	nextWay: -1,		//  |
 	nextRelation: -1,	//  |
-	
+
 	apiBaseURL: '',		// root API address
 
 	constructor:function(apiURL) {
@@ -52,7 +51,7 @@ declare("iD.Connection", null, {
 		// summary:		Return a way by id.
 		return this.ways[id];		// iD.Way
 	},
-	getRelation:function(id) { 
+	getRelation:function(id) {
 		// summary:		Return a relation by id.
 		return this.relations[id];	// iD.Relation
 	},
@@ -90,20 +89,6 @@ declare("iD.Connection", null, {
 		perform(new iD.actions.CreateEntityAction(relation, lang.hitch(this,this._assign) ));
 		return relation;
 	},
-
-	markClean:function() { 
-		// summary:		Mark the connection as clean (i.e. there's no new data to be saved).
-		this.modified=false;
-	},
-	markDirty:function() { 
-		// summary:		Mark the connection as dirty (i.e. there's data to be saved).
-		this.modified=true;
-	},
-	isDirty:function() { 
-		// summary:		Is the connection dirty?
-		return this.modified;
-	},
-
 	getObjectsByBbox:function(left,right,top,bottom) {
 		// summary:			Find all drawable entities that are within a given bounding box.
 		// returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
@@ -197,7 +182,7 @@ declare("iD.Connection", null, {
 			var obj=jsdom.childNodes[i];
 			switch(obj.nodeName) {
 
-				case "node": 		
+				case "node":
 					var node = new iD.Node(this,
 					                       getAttribute(obj,'id'),
 					                       getAttribute(obj,'lat'),
@@ -275,9 +260,6 @@ declare("iD.Connection", null, {
 
 	}
 });
-
-
-
 
 // ----------------------------------------------------------------------
 // End of module

@@ -78,8 +78,8 @@ declare("iD.actions.UndoableEntityAction", [iD.actions.UndoableAction], {
 
 	init:function() {
 		// summary:		Record whether or not the entity and connection were clean before this action started
-		this.wasDirty = this.entity.isDirty();
-		this.connectionWasDirty = this.entity.connection.isDirty();
+		this.wasDirty = this.entity.modified;
+		this.connectionWasDirty = this.entity.connection.modified;
 		this.initialised = true;
 	},
 
