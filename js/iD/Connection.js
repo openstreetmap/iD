@@ -273,7 +273,7 @@ declare("iD.Connection", null, {
 			return members;
 		}
 
-	},
+	}
 });
 
 

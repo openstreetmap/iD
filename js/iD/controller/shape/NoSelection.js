@@ -18,7 +18,7 @@ define(['dojo/_base/declare','dojo/_base/lang',
 		'iD/controller/ControllerState',
 		'iD/controller/shape/DrawWay',
 		'iD/controller/shape/SelectedWay',
-		'iD/controller/shape/SelectedPOINode',
+		'iD/controller/shape/SelectedPOINode'
 		], function(declare,lang){
 
 // ----------------------------------------------------------------------
@@ -69,7 +69,7 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 			}
 		}
 		return this;
-	},
+	}
 	
 });
 

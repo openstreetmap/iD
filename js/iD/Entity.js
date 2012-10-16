@@ -93,16 +93,16 @@ declare("iD.Entity", null, {
 		// summary:		Rough-and-ready function to return a human-friendly name 
 		//				for the object. Really just a placeholder for something better.
 		// returns:		A string such as 'river' or 'Fred's House'.
-		if (this.numTags()==0) { return ''; }
+		if (this.numTags()===0) { return ''; }
 		var n=[];
-		if (this.tags['name']) { n.push(this.tags['name']); }
-		if (this.tags['ref']) { n.push(this.tags['ref']); }
-		if (n.length==0) {
+		if (this.tags.name) { n.push(this.tags.name); }
+		if (this.tags.ref) { n.push(this.tags.ref); }
+		if (n.length===0) {
 			for (var i=0; i<this.MAINKEYS.length; i++) {
 				if (this.tags[this.MAINKEYS[i]]) { n.push(this.tags[this.MAINKEYS[i]]); break; }
 			}
 		}
-		return n.length==0 ? 'unknown' : n.join('; ');	// String
+		return n.length===0 ? 'unknown' : n.join('; ');	// String
 	},
 
 	// ---------------

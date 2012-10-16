@@ -18,12 +18,11 @@ declare("iD.Relation", [iD.Entity], {
 		this.members=members;
 		this.tags=tags;
 		this.modified=this.id<0;
-		this.loaded=(loaded==undefined) ? true : loaded;
-		var r=this; array.forEach(members,function(member) { 
+		this.loaded=(loaded===undefined) ? true : loaded;
+		var r=this; array.forEach(members,function(member) {
 			member.entity.addParent(r);
 		});
-	},
-	
+	}
 });
 
 // ----------------------------------------------------------------------
@@ -36,7 +35,7 @@ declare("iD.RelationMember", [], {
 		// summary:		An object containing both the entity that is in the relation, and its role.
 		this.entity=entity;
 		this.role=role;
-	},
+	}
 });
 
 // ----------------------------------------------------------------------

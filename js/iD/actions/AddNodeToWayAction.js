@@ -57,7 +57,7 @@ declare("iD.actions.AddNodeToWayAction", [iD.actions.UndoableEntityAction], {
 		way.refresh();
 
 		return this.SUCCESS;
-	},
+	}
 });
 
 // ----------------------------------------------------------------------

@@ -9,7 +9,7 @@
 
 define(['dojo/_base/declare','dojo/_base/lang',
 		'iD/actions/UndoableAction',
-		'iD/controller/ControllerState',
+		'iD/controller/ControllerState'
 		], function(declare,lang){
 
 // ----------------------------------------------------------------------
@@ -45,6 +45,7 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 	processMouseEvent:function(event,entityUI) {
 		var entity=entityUI ? entityUI.entity : null;
 		var entityType=entity ? entity.entityType : null;
+        var way;
 
 		if (event.type=='click') {
 			switch (entityType) {
@@ -54,16 +55,17 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 					var ways=entity.parentWays();
 					if (entity.hasParent(this.way)) { 
 						// start a branching way from an existing point
-						var way = this.getConnection().doCreateWay({}, [entity], lang.hitch(this,this.undoAdder) );
+						way = this.getConnection().doCreateWay({}, [entity], lang.hitch(this,this.undoAdder) );
 						this.controller.map.createUI(way);
 						return new iD.controller.shape.DrawWay(way);
-					} else if (ways.length==0) {
+					} else if (ways.length===0) {
 						// convert POI into way
 						return this;
-					} else { 
-						// select another way
- 						return new iD.controller.shape.SelectedWay(entity.getParents()[0]);
-					}
+					} else {
+                        // select another way
+                        return new iD.controller.shape.SelectedWay(entity.getParents()[0]);
+                    }
+                    break;
 				case 'way':
 					if (entity==this.way) {
 						// start a branching way from a new point
@@ -74,7 +76,7 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 							map.coord2lat(map.mouseY(event)),
 							map.coord2lon(map.mouseX(event)), lang.hitch(undo,undo.push) );
 						entity.doInsertNodeAtClosestPosition(startNode, true, lang.hitch(undo,undo.push));
-						var way = this.getConnection().doCreateWay({}, [startNode], lang.hitch(undo,undo.push) );
+						way = this.getConnection().doCreateWay({}, [startNode], lang.hitch(undo,undo.push) );
 						this.controller.undoStack.addAction(undo);
 						this.controller.map.createUI(way);
 						return new iD.controller.shape.DrawWay(way);
@@ -86,7 +88,7 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 		} else {
 		}
 		return this;
-	},
+	}
 	
 });
 

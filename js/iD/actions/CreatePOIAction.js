@@ -24,7 +24,7 @@ declare("iD.actions.CreatePOIAction", [iD.actions.CompositeUndoableAction], {
 	},
 
 	doAction:function() {
-		if (this.newNode==null) {
+		if (this.newNode===null) {
 			this.newNode=this.connection.doCreateNode(this.tags,this.lat,this.lon,lang.hitch(this,this.push));
 		}
 		this.inherited(arguments);
@@ -40,7 +40,7 @@ declare("iD.actions.CreatePOIAction", [iD.actions.CompositeUndoableAction], {
 
 	getNode:function() {
 		return this.newNode;
-	},
+	}
 
 });
 

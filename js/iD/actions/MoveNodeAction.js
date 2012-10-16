@@ -50,7 +50,7 @@ declare("iD.actions.MoveNodeAction", [iD.actions.UndoableEntityAction], {
 			return true;
 		}
 		return false;
-	},
+	}
 
 });
 
