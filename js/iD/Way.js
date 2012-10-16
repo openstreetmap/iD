@@ -6,6 +6,7 @@ iD.Way = function(conn, id, nodes, tags, loaded) {
     this.entityType = 'way';
     this.id = id;
     this.nodes = nodes || [];
+    this.deleted = false;
     this.entity = new iD.Entity();
     this.tags = tags || {};
     this.loaded = (loaded === undefined) ? true : loaded;
@@ -33,11 +34,12 @@ iD.Way.prototype = {
     // ---------------------
     // Bounding-box handling
     within:function(left,right,top,bottom) {
+        // TODO invert and just return
         if (!this.edgel ||
             (this.edgel<left   && this.edger<left  ) ||
             (this.edgel>right  && this.edger>right ) ||
             (this.edgeb<bottom && this.edget<bottom) ||
-            (this.edgeb>top    && this.edgeb>top   ) || this.deleted) {
+            (this.edgeb>top    && this.edgeb>top   )) {
             return false;
         } else {
             return true;
@@ -47,7 +49,7 @@ iD.Way.prototype = {
     _calculateBbox:function() {
         this.edgel = 999999; this.edger = -999999;
         this.edgeb = 999999; this.edget = -999999;
-        for (var i in this.nodes) { this.expandBbox(this.nodes[i]); }
+        _.each(this.nodes, _.bind(function(n) { this.expandBbox(n); }, this));
     },
 
     expandBbox:function(node) {

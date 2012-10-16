@@ -20,19 +20,19 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 	},
 	redraw:function() {
 		// summary:		Draw the object (mostly icons) and add hitzone sprites.
-		var node=this.entity;
+		var node = this.entity;
 		this.removeSprites();
 
 		// Tags, position and styleList
-		var x=this.map.lon2coord(this.entity.lon);
-		var y=this.map.latp2coord(this.entity.latp);
-		var tags=this.getEnhancedTags();
+		var x= this.map.lon2coord(this.entity.lon);
+		var y= this.map.latp2coord(this.entity.latp);
+		var tags = this.getEnhancedTags();
 		this.refreshStyleList(tags);
 
 		// Iterate through each subpart, drawing any styles on that layer
 		var drawn=false;
 		var s,p,t,w,h;
-		for (i=0; i<this.styleList.subparts.length; i++) {
+		for (i = 0; i < this.styleList.subparts.length; i++) {
 			var subpart=this.styleList.subparts[i];
 			p = this.styleList.pointStyles[subpart];
 			if (!p || !p.drawn()) { continue; }
@@ -55,7 +55,6 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 			this.recordSprite(shape);
 
 			// Add text label
-			
 			// Add hit-zone
 			var hit;
 			switch (p.icon_image) {

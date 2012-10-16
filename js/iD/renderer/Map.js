@@ -53,7 +53,7 @@ declare("iD.renderer.Map", null, {
 	edgeb: NaN,				//  |
 	mapheight: NaN,			// size of map object in pixels
 	mapwidth: NaN,			//  |
-	
+
 	layers: null,			// array-like object of Groups, one for each OSM layer
 	minlayer: -5,			// minimum OSM layer supported
 	maxlayer: 5,			// maximum OSM layer supported
@@ -61,7 +61,7 @@ declare("iD.renderer.Map", null, {
 	elastic: null,			// Group for drawing elastic band
 
 	ruleset: null,			// map style
-	
+
 	constructor:function(obj) {
 		// summary:		The main map display, containing the individual sprites (UIs) for each entity.
 		// obj: Object	An object containing .lat, .lon, .scale, .div (the name of the <div> to be used),
@@ -111,7 +111,7 @@ declare("iD.renderer.Map", null, {
 		this.surface.connect("onmousedown", lang.hitch(this,"_mouseEvent"));
 		this.surface.connect("onmouseup", lang.hitch(this,"_mouseEvent"));
 	},
-	
+
 	setController:function(controller) {
 		// summary:		Set the controller that will handle events on the map (e.g. mouse clicks).
 		this.controller=controller;
@@ -170,21 +170,26 @@ declare("iD.renderer.Map", null, {
 		sub.sublayer=sublayer;
 		return sub;		// dojox.gfx.Group
 	},
-	
+
 	createUI:function(entity,stateClasses) {
 		// summary:		Create a UI (sprite) for an entity, assigning any specified state classes
 		//				(temporary attributes such as ':hover' or ':selected')
-		var id=entity.id;
-		switch (entity.entityType) {
-			case 'node':
-				if (!this.nodeuis[id]) { this.nodeuis[id]=new iD.renderer.NodeUI(entity,this,stateClasses); }
-				                  else { this.nodeuis[id].setStateClasses(stateClasses).redraw(); }
-				return this.nodeuis[id];	// iD.renderer.EntityUI
-			case 'way':
-				if (!this.wayuis[id]) { this.wayuis[id]=new iD.renderer.WayUI(entity,this,stateClasses); }
-				                 else { this.wayuis[id].setStateClasses(stateClasses).redraw(); }
-				return this.wayuis[id];		// iD.renderer.EntityUI
-		}
+		var id = entity.id;
+        if (entity.entityType === 'node') {
+            if (!this.nodeuis[id]) {
+                this.nodeuis[id] = new iD.renderer.NodeUI(entity,this,stateClasses);
+            } else {
+                this.nodeuis[id].setStateClasses(stateClasses).redraw();
+            }
+            return this.nodeuis[id];	// iD.renderer.EntityUI
+        } else if (entity.entityType === 'way') {
+            if (!this.wayuis[id]) {
+                this.wayuis[id] = new iD.renderer.WayUI(entity,this,stateClasses);
+            } else {
+                this.wayuis[id].setStateClasses(stateClasses).redraw();
+            }
+            return this.wayuis[id];		// iD.renderer.EntityUI
+        }
 	},
 
 	getUI:function(entity) {
@@ -195,7 +200,7 @@ declare("iD.renderer.Map", null, {
 		}
 		return null;
 	},
-	
+
 	refreshUI:function(entity) {
 		// summary: 	Redraw the UI for an entity.
 		switch (entity.entityType) {
@@ -203,7 +208,7 @@ declare("iD.renderer.Map", null, {
 			case 'way': 	if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); } break;
 		}
 	},
-	
+
 	deleteUI:function(entity) {
 		// summary:		Delete the UI for an entity.
 		switch (entity.entityType) {
@@ -211,7 +216,7 @@ declare("iD.renderer.Map", null, {
 			case 'way': 	if (this.wayuis[entity.id] ) { this.wayuis[entity.id].removeSprites();  delete this.wayuis[entity.id];  } break;
 		}
 	},
-	
+
 	download:function() {
 		// summary:		Ask the connection to download data for the current viewport.
 		this.conn.loadFromAPI(this.edgel, this.edger, this.edget, this.edgeb);

@@ -17,12 +17,13 @@ iD.Node = function(conn, id, lat, lon, tags, loaded) {
 iD.Node.prototype = {
 	project: function() {
 		// summary:		Update the projected latitude value (this.latp) from the latitude (this.lat).
-		this.latp = 180/Math.PI * Math.log(Math.tan(Math.PI/4+this.lat*(Math.PI/180)/2));
+		this.latp = 180/Math.PI *
+            Math.log(Math.tan(Math.PI/4+this.lat*(Math.PI/180)/2));
 	},
 	latp2lat: function(a) {
 		// summary:		Get a latitude from a projected latitude.
 		// returns:		Latitude.
-		return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2);	// Number
+		return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2);
 	},
 
 	within: function(left, right, top, bottom) {

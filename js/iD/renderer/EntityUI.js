@@ -50,7 +50,7 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	refreshStyleList:function(tags) {
 		// summary:		Calculate the list of styles that apply to this UI at this zoom level.
-		if (!this.styleList || !this.styleList.isValidAt(this.map.scale)) { 
+		if (!this.styleList || !this.styleList.isValidAt(this.map.scale)) {
 			this.styleList=this.map.ruleset.getStyles(this.entity,tags,this.map.scale);
 		}
 		this.layer=this.styleList.layerOverride();
