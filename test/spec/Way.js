@@ -16,4 +16,12 @@ describe('Way', function() {
   it('is closed by default', function() {
       expect(way.isClosed()).toEqual(true);
   });
+
+  it('is a way when it has no nodes', function() {
+      expect(way.isType('way')).toEqual(true);
+  });
+
+  it('is also an area when it has no nodes', function() {
+      expect(way.isType('area')).toEqual(true);
+  });
 });

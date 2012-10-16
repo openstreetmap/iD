@@ -1,5 +1,3 @@
-// iD/Connection.js
-
 define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/array",'dojo/_base/declare',
         "iD/Entity","iD/Node","iD/Way","iD/Relation","iD/actions/CreateEntityAction"],
        function(xhr,lang,DomParser,array,declare,Entity){
@@ -90,19 +88,6 @@ declare("iD.Connection", null, {
 		return relation;
 	},
 
-	markClean:function() {
-		// summary:		Mark the connection as clean (i.e. there's no new data to be saved).
-		this.modified=false;
-	},
-	markDirty:function() {
-		// summary:		Mark the connection as dirty (i.e. there's data to be saved).
-		this.modified=true;
-	},
-	isDirty:function() {
-		// summary:		Is the connection dirty?
-		return this.modified;
-	},
-
 	getObjectsByBbox:function(left,right,top,bottom) {
 		// summary:			Find all drawable entities that are within a given bounding box.
 		// returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
@@ -149,7 +134,7 @@ declare("iD.Connection", null, {
 	updatePOIs:function(nodelist) {
 		// summary:		Update the list of POIs (nodes not in ways) from a supplied array of nodes.
 		for (var i in nodelist) {
-			if (nodelist[i].hasParentWays()) {
+			if (nodelist[i].entity.hasParentWays()) {
 				this.pois.remove(nodelist[i]);
 			} else {
 				this.pois.put(nodelist[i],true);
@@ -197,28 +182,28 @@ declare("iD.Connection", null, {
 			switch(obj.nodeName) {
 
 				case "node":
-					var node = new iD.Node(this,
-					                       getAttribute(obj,'id'),
-					                       getAttribute(obj,'lat'),
-					                       getAttribute(obj,'lon'),
-					                       getTags(obj));
-					this._assign(node);
+                    var node = new iD.Node(this,
+                        +getAttribute(obj,'id'),
+                        +getAttribute(obj,'lat'),
+                        +getAttribute(obj,'lon'),
+                        getTags(obj));
+                    this._assign(node);
 					nodelist.push(node);
 					break;
 
 				case "way":
-					var way = new iD.Way(this,
-					                     getAttribute(obj,'id'),
-					                     getNodes(obj,this),
-					                     getTags(obj));
+                    var way = new iD.Way(this,
+                        getAttribute(obj,'id'),
+                        getNodes(obj,this),
+                        getTags(obj));
 					this._assign(way);
 					break;
 
 				case "relation":
-					var relation = new iD.Relation(this,
-					                               getAttribute(obj,'id'),
-					                               getMembers(obj,this),
-					                               getTags(obj));
+                    var relation = new iD.Relation(this,
+                        getAttribute(obj,'id'),
+                        getMembers(obj,this),
+                        getTags(obj));
 					this._assign(relation);
 					break;
 			}
@@ -228,8 +213,6 @@ declare("iD.Connection", null, {
 		if (this.callback) { this.callback(); }
 
 		// Private functions to parse DOM created from XML file
-
-
         function filterNodeName(n) {
             return function(item) {
                 return item.nodeName === n;

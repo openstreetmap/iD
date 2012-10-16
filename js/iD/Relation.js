@@ -1,4 +1,3 @@
-// iD/Relation.js
 if (typeof iD === 'undefined') iD = {};
 
 iD.Relation = function(conn, id, members, tags, loaded) {
@@ -10,7 +9,7 @@ iD.Relation = function(conn, id, members, tags, loaded) {
     this.modified = this.id < 0;
     this.loaded = (loaded === undefined) ? true : loaded;
     _.each(members, _.bind(function(member) {
-        member.entity.addParent(this);
+        member.entity.entity.addParent(this);
     }, this));
 };
 

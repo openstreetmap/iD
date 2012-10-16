@@ -14,7 +14,7 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 	},
 	getEnhancedTags:function() {
 		var tags=this.inherited(arguments);
-		if (!this.entity.hasParentWays()) { tags[':poi']='yes'; }
+		if (!this.entity.entity.hasParentWays()) { tags[':poi']='yes'; }
 		// add junction and dupe
 		return tags;
 	},
@@ -44,9 +44,9 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 			// Draw icon
 			var shape;
 			switch (p.icon_image) {
-				case 'square': 	shape=this.targetGroup('stroke',p.sublayer).createRect({ x:x-w/2, y:y-h/2, width:w, height:h }); break;
-				case 'circle': 	shape=this.targetGroup('stroke',p.sublayer).createCircle({ cx:x, cy:y, r:w }); break;
-				default: 		shape=this.targetGroup('stroke',p.sublayer).createImage({ width:w, height:h, x: x-w/2, y: y-h/2, src:p.icon_image }); break;
+				case 'square':shape=this.targetGroup('stroke',p.sublayer).createRect({ x:x-w/2, y:y-h/2, width:w, height:h }); break;
+				case 'circle':shape=this.targetGroup('stroke',p.sublayer).createCircle({ cx:x, cy:y, r:w }); break;
+				default:shape=this.targetGroup('stroke',p.sublayer).createImage({ width:w, height:h, x: x-w/2, y: y-h/2, src:p.icon_image }); break;
 			}
 			switch (p.icon_image) {
 				case 'square':
@@ -71,7 +71,7 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 			hit.connect("onmouseenter", lang.hitch(this,this.entityMouseEvent));
 			hit.connect("onmouseleave", lang.hitch(this,this.entityMouseEvent));
 		}
-	},
+	}
 	
 });
 

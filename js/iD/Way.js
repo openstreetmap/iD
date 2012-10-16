@@ -1,17 +1,17 @@
-// iD/Way.js
-
 if (typeof iD === 'undefined') iD = {};
+
 iD.Way = function(conn, id, nodes, tags, loaded) {
     // summary:		An OSM way.
     this.connection = conn;
     this.entityType = 'way';
     this.id = id;
     this.nodes = nodes || [];
+    this.entity = new iD.Entity();
     this.tags = tags || {};
     this.loaded = (loaded === undefined) ? true : loaded;
     this.modified = this.id < 0;
     _.each(nodes, _.bind(function(node) {
-        node.addParent(this);
+        node.entity.addParent(this);
     }, this));
     this._calculateBbox();
 };
@@ -19,16 +19,14 @@ iD.Way = function(conn, id, nodes, tags, loaded) {
 iD.Way.prototype = {
     isClosed:function() {
         // summary:		Is this a closed way (first and last nodes the same)?
-        return this.nodes[this.nodes.length-1]==this.nodes[0];	// Boolean
+        return this.nodes[this.nodes.length - 1] === this.nodes[0]; // Boolean
     },
 
-    isType:function(_type) {
+    isType:function(type) {
         // summary:		Is this a 'way' (always true), an 'area' (closed) or a 'line' (unclosed)?
-        switch (_type) {
-            case 'way':	return true;
-            case 'area': return this.isClosed;
-            case 'line': return !(this.isClosed);
-        }
+        if (type === 'way') return true;
+        if (type === 'area') return this.isClosed();
+        if (type === 'line') return !(this.isClosed());
         return false;	// Boolean
     },
 
@@ -39,8 +37,11 @@ iD.Way.prototype = {
             (this.edgel<left   && this.edger<left  ) ||
             (this.edgel>right  && this.edger>right ) ||
             (this.edgeb<bottom && this.edget<bottom) ||
-            (this.edgeb>top    && this.edgeb>top   ) || this.deleted) { return false; }
+            (this.edgeb>top    && this.edgeb>top   ) || this.deleted) {
+            return false;
+        } else {
             return true;
+        }
     },
 
     _calculateBbox:function() {
@@ -87,8 +88,8 @@ iD.Way.prototype = {
         // isSnap: Boolean	Should the node position be snapped to be exactly on the segment?
         // returns:			The index at which the node was inserted.
         var closestProportion = 1,
-            newIndex = 0,
-            snapped;
+        newIndex = 0,
+        snapped;
 
         for (var i = 0; i < this.nodes.length - 1; i++) {
             var node1 = this.nodes[i];

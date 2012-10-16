@@ -28,11 +28,12 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 	},
 	redraw:function() {
 		// summary:		Draw the object and add hitzone sprites.
-		var way=this.entity;
-		var maxwidth=4;
-		var i;
+		var way = this.entity,
+            maxwidth=4,
+            i;
+
 		this.removeSprites();
-		if (way.length()==0) { return; }
+		if (!way.nodes.length) { return; }
 
 		// Create tags and calculate styleList
 		var tags=this.getEnhancedTags();
@@ -40,14 +41,17 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 
 		// List of co-ordinates
 		var coords=[];
-		for (i=0; i<way.nodes.length; i++) {
-			var node=way.nodes[i];
-			coords.push( { x: this.map.lon2coord(node.lon), y: this.map.latp2coord(node.latp) } );
+		for (i = 0; i < way.nodes.length; i++) {
+			var node = way.nodes[i];
+			coords.push({
+                x: this.map.lon2coord(node.lon),
+                y: this.map.latp2coord(node.latp)
+            });
 		}
 
 		// Iterate through each subpart, drawing any styles on that layer
-		var drawn=false;
-		for (i=0; i<this.styleList.subparts.length; i++) {
+		var drawn = false;
+		for (i = 0; i < this.styleList.subparts.length; i++) {
 			var subpart=this.styleList.subparts[i];
 			if (this.styleList.shapeStyles[subpart]) {
 				var s=this.styleList.shapeStyles[subpart];
@@ -66,13 +70,13 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 				}
 
 				// Casing
-				if (s.casing_width) { 
+				if (s.casing_width) {
 					this.recordSprite(this.targetGroup('casing').createPolyline(coords).setStroke(s.casingStyler()));
 					maxwidth=Math.max(maxwidth,s.width+s.casing_width*2);
 					drawn=true;
 				}
 			}
-			
+
 			// Text label on path
 			if (this.styleList.textStyles[subpart]) {
 				var t=this.styleList.textStyles[subpart];
@@ -96,26 +100,26 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 		if (drawn) {
 			var hit=this.recordSprite(this.targetGroup('hit').createPolyline(coords).setStroke( { width:maxwidth+8, color: [0,0,0,0] } ));
 			hit.source=this;
-			hit.connect("onclick"     , lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmousedown" , lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmouseup"   , lang.hitch(this,this.entityMouseEvent));
+			hit.connect("onclick", lang.hitch(this,this.entityMouseEvent));
+			hit.connect("onmousedown", lang.hitch(this,this.entityMouseEvent));
+			hit.connect("onmouseup", lang.hitch(this,this.entityMouseEvent));
 			hit.connect("onmouseenter", lang.hitch(this,this.entityMouseEvent));
 			hit.connect("onmouseleave", lang.hitch(this,this.entityMouseEvent));
 		}
 		// Draw nodes
-		for (i=0; i<way.length(); i++) {
+		for (i=0; i<way.nodes.length; i++) {
 			var node=way.nodes[i];
 			var sc=[];
 			if (tags[':shownodes']) { sc.push('selectedway'); }
 			if (tags[':shownodeshover']) { sc.push('hoverway'); }
-			if (node.parentWays().length>1) { sc.push('junction'); }
+			if (node.entity.parentWays().length>1) { sc.push('junction'); }
 			this.map.createUI(node,sc);
 		}
 	},
-	
+
 	entityMouseEvent:function(event) {
 		this.inherited(arguments);
-	},
+	}
 });
 
 // ----------------------------------------------------------------------

@@ -1,6 +1,5 @@
-// iD/Entity.js
-// Entity classes for iD
 if (typeof iD === 'undefined') iD = {};
+
 iD.Entity = function() {
     this.tags = {};
     this.parents = new Hashtable();
@@ -8,10 +7,9 @@ iD.Entity = function() {
 	this.id = NaN;
 	this.loaded = false;
 	this.entityType =  '';
-	this.parents =  null;
-	this.modified =  false;
-	this.deleted =  false;
-	this.MAINKEYS =  ['highway','amenity','railway','waterway'];
+	this.modified = false;
+	this.deleted = false;
+	this.MAINKEYS = ['highway','amenity','railway','waterway'];
 };
 
 iD.Entity.prototype = {

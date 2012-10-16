@@ -1,5 +1,3 @@
-// iD/Controller.js
-
 define(['dojo/_base/declare','dojo/on','iD/actions/UndoStack'], function(declare,on){
 
 // ----------------------------------------------------------------------

@@ -69,10 +69,10 @@ declare("iD.styleparser.RuleChain", null, {
 		if (!r.test(entity, tags, zoom)) { return false; }
 		if (pos==0) { return true; }
 		
-		var o=entity.parentObjects();
+		var o = entity.entity.parentObjects();
 		for (var i=0; i<o.length; i++) {
 			var p=o[i];
-			if (this.test(pos-1, p, p.getTagsHash(), zoom)) { return true; }
+			if (this.test(pos-1, p, p.tags, zoom)) { return true; }
 		}
 		return false;
 	},
