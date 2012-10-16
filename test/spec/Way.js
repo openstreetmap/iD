@@ -10,6 +10,10 @@ describe('Way', function() {
   });
 
   it('has zero nodes by default', function() {
-      expect(way.length()).toEqual(0);
+      expect(way.nodes.length).toEqual(0);
+  });
+
+  it('is closed by default', function() {
+      expect(way.isClosed()).toEqual(true);
   });
 });

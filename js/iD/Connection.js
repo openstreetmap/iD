@@ -24,7 +24,7 @@ declare("iD.Connection", null, {
 
 	constructor:function(apiURL) {
 		// summary:		The data store, including methods to fetch data from (and, eventually, save data to)
-		// 				an OSM API server.
+		// an OSM API server.
 		this.nodes={};
 		this.ways={};
 		this.relations={};
@@ -37,12 +37,12 @@ declare("iD.Connection", null, {
 	_assign:function(obj) {
 		// summary:		Save an entity to the data store.
 		switch (obj.entityType) {
-			case "node": 		this.nodes[obj.id]=obj; break;
-			case "way": 		this.ways[obj.id]=obj; break;
-			case "relation": 	this.relations[obj.id]=obj; break;
+			case "node": this.nodes[obj.id]=obj; break;
+			case "way": this.ways[obj.id]=obj; break;
+			case "relation": this.relations[obj.id]=obj; break;
 		}
 	},
-	
+
 	getNode:function(id) {
 		// summary:		Return a node by id.
 		return this.nodes[id];		// iD.Node
