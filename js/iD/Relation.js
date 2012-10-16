@@ -19,9 +19,9 @@ declare("iD.Relation", [iD.Entity], {
 		this.tags=tags;
 		this.modified=this.id<0;
 		this.loaded=(loaded===undefined) ? true : loaded;
-		var r=this; array.forEach(members,function(member) {
-			member.entity.addParent(r);
-		});
+		_.each(members, _.bind(function(member) {
+			member.entity.addParent(this);
+		}, this));
 	}
 });
 

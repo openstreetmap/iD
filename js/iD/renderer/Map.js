@@ -226,11 +226,12 @@ declare("iD.renderer.Map", null, {
 		var way, poi;
 		var o = this.conn.getObjectsByBbox(this.edgel,this.edger,this.edget,this.edgeb);
 
-		array.forEach(o.waysInside, function(way) {
-			if (!way.loaded) return;
-			if (!m.wayuis[way.id]) { m.createUI(way); }
-			else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
-		});
+        _(o.waysInside).chain()
+            .filter(function(w) { return w.loaded; })
+            .each(function(way) {
+                if (!m.wayuis[way.id]) { m.createUI(way); }
+                else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
+            });
 
 		if (remove) {
 			array.forEach(o.waysOutside, function(way) {
@@ -257,12 +258,12 @@ declare("iD.renderer.Map", null, {
 
 	// -------------
 	// Zoom handling
-	
+
 	zoomIn:function() {
 		// summary:		Zoom in by one level (unless maximum reached).
 		if (this.scale!=this.MAXSCALE) { this.changeScale(this.scale+1); }
 	},
-	
+
 	zoomOut:function() {
 		// summary:		Zoom out by one level (unless minimum reached).
 		if (this.scale!=this.MINSCALE) { this.changeScale(this.scale-1); }
@@ -277,7 +278,7 @@ declare("iD.renderer.Map", null, {
 		this.updateCoordsFromLatLon(this.centrelat,this.centrelon);	// recentre
 		this.updateUIs(true,true);
 	},
-	
+
 	_setScaleFactor:function() {
 		// summary:		Calculate the scaling factor for this zoom level.
 		this.scalefactor=this.MASTERSCALE/Math.pow(2,13-this.scale);
@@ -285,12 +286,12 @@ declare("iD.renderer.Map", null, {
 
 	// ----------------------
 	// Elastic band redrawing
-	
+
 	clearElastic:function() {
 		// summary:		Remove the elastic band used to draw new ways.
 		this.elastic.clear();
 	},
-	
+
 	drawElastic:function(x1,y1,x2,y2) {
 		// summary:		Draw the elastic band (for new ways) between two points.
 		this.elastic.clear();
@@ -305,7 +306,7 @@ declare("iD.renderer.Map", null, {
 	// -------------
 	// Tile handling
 	// ** FIXME: see docs
-	
+
 	loadTiles:function() {
 		// summary:		Load all tiles for the current viewport. This is a bare-bones function 
 		//				at present: it needs configurable URLs (not just Bing), attribution/logo
@@ -320,7 +321,7 @@ declare("iD.renderer.Map", null, {
 			}
 		}
 	},
-	
+
 	_fetchTile:function(z,x,y) {
 		// summary:		Load a tile image at the given tile co-ordinates.
 		var t=this.tilegroup.createImage({
@@ -331,7 +332,7 @@ declare("iD.renderer.Map", null, {
 		});
 		this._assignTile(z,x,y,t);
 	},
-	
+
 	_getTile:function(z,x,y) {
 		// summary:		See if this tile is already loaded.
 		if (this.tiles[z]==undefined) { return undefined; }
@@ -345,7 +346,7 @@ declare("iD.renderer.Map", null, {
 		if (this.tiles[z][x]==undefined) { this.tiles[z][x]=[]; }
 		this.tiles[z][x][y]=t;
 	},
-	
+
 	_tileURL:function(z,x,y) {
 		// summary:		Calculate the URL for a tile at the given co-ordinates.
 		var u='';
@@ -358,7 +359,7 @@ declare("iD.renderer.Map", null, {
 		}
 		return this.tilebaseURL.replace('$z',z).replace('$x',x).replace('$y',y).replace('$quadkey',u);
 	},
-	
+
 	_blankTiles:function() {
 		// summary:		Unload all tiles and remove from the display.
 		this.tilegroup.clear();
@@ -411,13 +412,13 @@ declare("iD.renderer.Map", null, {
 			this.controller.entityMouseEvent(e,null);
 		}
 	},
-	
+
 	updateOrigin:function() {
 		// summary:		Tell Dojo to update the viewport origin.
 		this.container.setTransform([Matrix.translate(this.containerx,this.containery)]);
 		this.tilegroup.setTransform([Matrix.translate(this.containerx,this.containery)]);
 	},
-	
+
 	_mouseEvent:function(e) {
 		// summary: 	Catch mouse events on the surface but not the tiles - in other words, 
 		// 				on drawn items that don't have their own hitzones, like the fill of a shape.
@@ -425,12 +426,12 @@ declare("iD.renderer.Map", null, {
 		// ** FIXME: we may want to reinstate this at some point...
 		// this.controller.entityMouseEvent(e,null);
 	},
-	
+
 	updateCoordsFromViewportPosition:function(e) {
 		// summary:		Update centre and bbox from the current viewport origin.
 		this._updateCoords(this.containerx,this.containery);
 	},
-	
+
 	updateCoordsFromLatLon:function(lat,lon) {
 		// summary:		Update centre and bbox to a specified lat/lon.
 		this._updateCoords(-(this.lon2coord(lon)-this.mapwidth/2),

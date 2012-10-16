@@ -40,7 +40,9 @@ declare("iD.Node", [iD.Entity], {
 	refresh:function() {
 		var ways=this.parentWays();
 		var conn=this.connection;
-		array.forEach(ways,function(way) { conn.refreshEntity(way); });
+		_.each(array, function(way) {
+            conn.refreshEntity(way);
+        });
 		this.connection.refreshEntity(this);
 	},
 
@@ -54,9 +56,8 @@ declare("iD.Node", [iD.Entity], {
 		this.lon = lon;
 		this.project();
 		var ways = this.parentWays();
-		for (var i=0; i<ways.length; i++) { ways[i].expandBbox(this); }
-	},
-	
+        _.each(ways, _.bind(function(way) { way.expandBbox(this); }, this));
+	}
 });
 
 // ----------------------------------------------------------------------
