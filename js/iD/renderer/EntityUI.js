@@ -122,7 +122,7 @@ declare("iD.renderer.EntityUI", null, {
 		// summary:		Receive a mouse event (e.g. clicking on the UI), and forward it to the Controller.
 		this.map.controller.entityMouseEvent(event, event.gfxTarget.source);
 		event.stopPropagation();
-	},
+	}
 });
 
 // ----------------------------------------------------------------------

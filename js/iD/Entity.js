@@ -200,7 +200,7 @@ iD.Entity.prototype = {
 	// -------------------------------------
 	// Bounding box check (to be overridden)
 
-	within:function(left,right,top,bottom) { 
+	within:function(left,right,top,bottom) {
 		// summary:		Is the entity within the specified bbox?
 		return !this.deleted;	// Boolean
 	},
