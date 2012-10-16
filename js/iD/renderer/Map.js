@@ -330,8 +330,8 @@ declare("iD.renderer.Map", null, {
 	_fetchTile:function(z,x,y) {
 		// summary:		Load a tile image at the given tile co-ordinates.
 		var t=this.tilegroup.createImage({
-			x: this.lon2coord(this.tile2lon(x)),
-			y: this.lat2coord(this.tile2lat(y)),
+			x: Math.floor(this.lon2coord(this.tile2lon(x))),
+			y: Math.floor(this.lat2coord(this.tile2lat(y))),
 			width: 256, height: 256,
 			src: this._tileURL(z,x,y)
 		});
@@ -340,15 +340,15 @@ declare("iD.renderer.Map", null, {
 
 	_getTile:function(z,x,y) {
 		// summary:		See if this tile is already loaded.
-		if (this.tiles[z]==undefined) { return undefined; }
-		if (this.tiles[z][x]==undefined) { return undefined; }
+		if (this.tiles[z]===undefined) { return undefined; }
+		if (this.tiles[z][x]===undefined) { return undefined; }
 		return this.tiles[z][x][y];
 	},
 
 	_assignTile:function(z,x,y,t) {
 		// summary:		Store a reference to the tile so we know it's loaded.
-		if (this.tiles[z]==undefined) { this.tiles[z]=[]; }
-		if (this.tiles[z][x]==undefined) { this.tiles[z][x]=[]; }
+		if (this.tiles[z]===undefined) { this.tiles[z]=[]; }
+		if (this.tiles[z][x]===undefined) { this.tiles[z][x]=[]; }
 		this.tiles[z][x][y]=t;
 	},
 
