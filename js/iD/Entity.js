@@ -25,7 +25,7 @@ declare("iD.Entity", null, {
 		this.tags={};
 		this.parents=new Hashtable();
 	},
-	
+
 	isType:function(type) {
 		// summary:		Is this entity of the specified type ('node','way','relation')?
 		return this.entityType==type;	// Boolean
@@ -42,10 +42,10 @@ declare("iD.Entity", null, {
 		// summary:		Ask the connection to provoke redraw and other changes.
 		this.connection.refreshEntity(this);
 	},
-	
+
 	// ---------------
 	// Clean and dirty
-	
+
 	_markClean:function() {
 		// summary:		Mark entity as clean. Should only be called from UndoableEntityAction.
 		this.modified=false;
@@ -58,10 +58,10 @@ declare("iD.Entity", null, {
 		// summary:		Is the entity dirty?
 		return this.modified;	// Boolean
 	},
-	
+
 	// --------
 	// Deletion
-	
+
 	setDeletedState:function(isDeleted) { 
 		// summary:		Mark entity as deleted or not.
 		this.deleted=isDeleted;
@@ -83,14 +83,12 @@ declare("iD.Entity", null, {
 		// returns:		The tags hash (reference to the actual object property, not a copy).
 		return this.tags;	// Object
 	},
-	
+
 	numTags:function() {
 		// summary:		Count how many tags this entity has.
-		var c=0;
-		for (var i in this.tags) { c++; }
-		return c;	// int
+		return Object.keys(this.tags).length;	// int
 	},
-	
+
 	friendlyName:function() {
 		// summary:		Rough-and-ready function to return a human-friendly name 
 		//				for the object. Really just a placeholder for something better.
@@ -109,7 +107,7 @@ declare("iD.Entity", null, {
 
 	// ---------------
 	// Parent-handling
-	
+
 	addParent:function(entity) {
 		// summary:		Record a parent (a relation or way which contains this entity).
 		this.parents.put(entity,true);
@@ -156,7 +154,7 @@ declare("iD.Entity", null, {
 	// getRelationMemberships()
 	// countParentObjects(within)
 	// memberships()
-	
+
 });
 
 // ----------------------------------------------------------------------
