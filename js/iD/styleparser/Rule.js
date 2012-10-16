@@ -29,9 +29,11 @@ declare("iD.styleparser.Rule", null, {
 	test:function(entity,tags,zoom) {
 		// summary:		Evaluate the Rule on the given entity, tags and zoom level.
 		// returns: 	true if the Rule passes, false if the conditions aren't fulfilled.
-		if (this.subject !== '' && !entity.entity.isType(this.subject)) { return false; }
+		if ((this.subject !== '') && (entity.entityType !== this.subject)) {
+            return false;
+        }
 		if (zoom<this.minZoom || zoom>this.maxZoom) { return false; }
-		
+
 		var v=true; var i=0; var isAnd=this.isAnd;
 		array.forEach(this.conditions, function(condition) {
 			var r=condition.test(tags);

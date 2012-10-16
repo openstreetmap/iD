@@ -62,20 +62,20 @@ declare("iD.styleparser.RuleChain", null, {
 
 	test:function(pos, entity, tags, zoom) {
 		// summary:		Test a rule chain by running all the tests in reverse order.
-		if (this.rules.length==0) { return false; }
+		if (this.rules.length === 0) { return false; }
 		if (pos==-1) { pos=this.rules.length-1; }
-		
-		var r=this.rules[pos];
+
+		var r = this.rules[pos];
 		if (!r.test(entity, tags, zoom)) { return false; }
-		if (pos==0) { return true; }
-		
+		if (pos === 0) { return true; }
+
 		var o = entity.entity.parentObjects();
-		for (var i=0; i<o.length; i++) {
+		for (var i = 0; i < o.length; i++) {
 			var p=o[i];
 			if (this.test(pos-1, p, p.tags, zoom)) { return true; }
 		}
 		return false;
-	},
+	}
 
 });
 
