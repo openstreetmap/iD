@@ -50,13 +50,13 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	refreshStyleList:function(tags) {
 		// summary:		Calculate the list of styles that apply to this UI at this zoom level.
-		if (!this.styleList || !this.styleList.isValidAt(this.map.scale)) { 
+		if (!this.styleList || !this.styleList.isValidAt(this.map.scale)) {
 			this.styleList=this.map.ruleset.getStyles(this.entity,tags,this.map.scale);
 		}
 		this.layer=this.styleList.layerOverride();
 		if (isNaN(this.layer)) {
 			this.layer=0;
-			if (tags['layer']) { this.layer=Number(tags['layer']); }
+			if (tags.layer) { this.layer = +tags.layer; }
 		}
 
 		// Iterate through each subpart, drawing any styles on that layer
@@ -78,7 +78,7 @@ declare("iD.renderer.EntityUI", null, {
 
 	// --------------------
 	// State class handling
-	
+
 	setStateClasses:function(stateClasses) {
 		// summary:		Set all state classes at once, and prompt a redraw if they're different to previously,
 		if (stateClasses && this.stateClasses.join(',')!=stateClasses.join(',')) {
@@ -87,7 +87,7 @@ declare("iD.renderer.EntityUI", null, {
 		}
 		return this;
 	},
-	
+
 	setStateClass:function(sc) {
 		// summary:		Set a single state class, and prompt a redraw if it wasn't set previously.
 		if (this.stateClasses.indexOf(sc)==-1) {
@@ -122,7 +122,7 @@ declare("iD.renderer.EntityUI", null, {
 		// summary:		Receive a mouse event (e.g. clicking on the UI), and forward it to the Controller.
 		this.map.controller.entityMouseEvent(event, event.gfxTarget.source);
 		event.stopPropagation();
-	},
+	}
 });
 
 // ----------------------------------------------------------------------

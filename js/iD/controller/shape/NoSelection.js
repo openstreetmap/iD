@@ -4,7 +4,7 @@
 	Add road or shape -> NoSelection
 
 	The user has clicked 'Add road or shape', but hasn't yet started drawing.
-	
+
 	Goes to:
 	-> click empty area: goes to shape/DrawWay
 	-> click way: goes to shape/SelectedWay
@@ -37,7 +37,7 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 			tag: "Set the type of the road or shape"
 		},['begin','draw','tag']).highlight('begin');
 	},
-	
+
 	processMouseEvent:function(event,entityUI) {
 		var entity=entityUI ? entityUI.entity : null;
 		var entityType=entity ? entity.entityType : null;
@@ -70,7 +70,6 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 		}
 		return this;
 	}
-	
 });
 
 // ----------------------------------------------------------------------

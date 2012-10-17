@@ -1,3 +1,33 @@
 /* Additional CSS rules will go here */
 
 .currentMode { font-weight: bold; }
+
+#zoombuttons {
+    position:absolute;
+    right:20px;
+    top:20px;
+}
+
+#zoombuttons button {
+    width:30px;
+    height:30px;
+    text-align:center;
+    margin:0;
+    background:#fff;
+    color:#555;
+    font:bold 20px/20px 'Helvetica';
+    border:1px solid #888;
+}
+
+#zoombuttons button:active {
+    background:#eee;
+}
+
+#zoombuttons #zoomIn {
+    border-radius: 4px 0 0 4px;
+}
+
+#zoombuttons #zoomOut {
+    border-left:0;
+    border-radius: 0 4px 4px 0;
+}

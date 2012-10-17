@@ -1,43 +1,20 @@
-// iD/Relation.js
+if (typeof iD === 'undefined') iD = {};
 
-define(['dojo/_base/declare','dojo/_base/array','dojo/_base/lang',
-        'iD/Entity','iD/actions/AddNodeToWayAction','iD/actions/MoveNodeAction'
-       ], function(declare,array,lang){
+iD.Relation = function(conn, id, members, tags, loaded) {
+    this.entityType = 'relation';
+    this.connection = conn;
+    this.id = id;
+    this._id = iD.Util.id();
+    this.members = members;
+    this.tags = tags;
+    this.modified = this.id < 0;
+    this.loaded = (loaded === undefined) ? true : loaded;
+    _.each(members, _.bind(function(member) {
+        member.entity.entity.addParent(this);
+    }, this));
+};
 
-// ----------------------------------------------------------------------
-// Relation class
-
-declare("iD.Relation", [iD.Entity], {
-	members:null,
-	entityType:"relation",
-
-	constructor:function(conn,id,members,tags,loaded) {
-		// summary:		An OSM relation.
-		this.connection=conn;
-		this.id=Number(id);
-		this.members=members;
-		this.tags=tags;
-		this.modified=this.id<0;
-		this.loaded=(loaded===undefined) ? true : loaded;
-		var r=this; array.forEach(members,function(member) {
-			member.entity.addParent(r);
-		});
-	}
-});
-
-// ----------------------------------------------------------------------
-// RelationMember class
-
-declare("iD.RelationMember", [], {
-	entity:null,
-	role:"",
-	constructor:function(entity,role) {
-		// summary:		An object containing both the entity that is in the relation, and its role.
-		this.entity=entity;
-		this.role=role;
-	}
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+iD.RelationMember = function(entity, role) {
+    this.entity = entity;
+    this.role = role;
+};

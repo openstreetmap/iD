@@ -66,20 +66,20 @@ declare("iD.actions.UndoableEntityAction", [iD.actions.UndoableAction], {
 		// summary: 	Mark a change to the entity ('dirtying' it).
 		if (!this.initialised) this.init();
 		if (!this.wasDirty) this.entity._markDirty();
-		if (!this.connectionWasDirty) this.entity.connection.markDirty();
+		if (!this.connectionWasDirty) this.entity.connection.modified = true;
 	},
 
     markClean:function() {
         // summary: 	If the entity was clean before, revert the dirty flag to that state.
         if (!this.initialised) this.init();
 		if (!this.wasDirty) this.entity._markClean();
-		if (!this.connectionWasDirty) this.entity.connection.markClean();
+		if (!this.connectionWasDirty) this.entity.connection.modified = false;
 	},
 
 	init:function() {
 		// summary:		Record whether or not the entity and connection were clean before this action started
-		this.wasDirty = this.entity.isDirty();
-		this.connectionWasDirty = this.entity.connection.isDirty();
+		this.wasDirty = this.entity.modified;
+		this.connectionWasDirty = this.entity.connection.modified;
 		this.initialised = true;
 	},
 

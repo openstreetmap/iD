@@ -53,7 +53,7 @@ declare("iD.renderer.Map", null, {
 	edgeb: NaN,				//  |
 	mapheight: NaN,			// size of map object in pixels
 	mapwidth: NaN,			//  |
-	
+
 	layers: null,			// array-like object of Groups, one for each OSM layer
 	minlayer: -5,			// minimum OSM layer supported
 	maxlayer: 5,			// maximum OSM layer supported
@@ -61,7 +61,7 @@ declare("iD.renderer.Map", null, {
 	elastic: null,			// Group for drawing elastic band
 
 	ruleset: null,			// map style
-	
+
 	constructor:function(obj) {
 		// summary:		The main map display, containing the individual sprites (UIs) for each entity.
 		// obj: Object	An object containing .lat, .lon, .scale, .div (the name of the <div> to be used),
@@ -75,7 +75,12 @@ declare("iD.renderer.Map", null, {
 		this.wayuis={},
 		this.div=document.getElementById(obj.div);
 		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
-		this.backdrop=this.surface.createRect( { x:0, y:0, width: this.mapwidth, height: this.mapheight }).setFill(new dojo.Color([255,255,245,1]));
+		this.backdrop=this.surface.createRect({
+            x: 0,
+            y: 0,
+            width: this.mapwidth,
+            height: this.mapheight
+        }).setFill(new dojo.Color([255,255,245,1]));
 		this.tilegroup=this.surface.createGroup();
 		this.container=this.surface.createGroup();
 		this.conn=obj.connection;
@@ -111,7 +116,7 @@ declare("iD.renderer.Map", null, {
 		this.surface.connect("onmousedown", lang.hitch(this,"_mouseEvent"));
 		this.surface.connect("onmouseup", lang.hitch(this,"_mouseEvent"));
 	},
-	
+
 	setController:function(controller) {
 		// summary:		Set the controller that will handle events on the map (e.g. mouse clicks).
 		this.controller=controller;
@@ -145,9 +150,9 @@ declare("iD.renderer.Map", null, {
 
 	sublayer:function(layer,groupType,sublayer) {
 		// summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
-		// 				if necessary. Note that sublayers are only implemented for stroke and fill.
+		// 	if necessary. Note that sublayers are only implemented for stroke and fill.
 		// groupType: String	'casing','text','hit','stroke', or 'fill'
-		var collection=this.layers[layer][groupType];
+		var collection=this.layers[layer][groupType], sub;
 		switch (groupType) {
 			case 'casing':
 			case 'text':
@@ -157,7 +162,7 @@ declare("iD.renderer.Map", null, {
 		// Find correct sublayer, inserting if necessary
 		var insertAt=collection.children.length;
 		for (var i=0; i<collection.children.length; i++) {
-			var sub=collection.children[i];
+			sub=collection.children[i];
 			if (sub.sublayer==sublayer) { return sub; }
 			else if (sub.sublayer>sublayer) {
 				sub=collection.createGroup();
@@ -168,50 +173,56 @@ declare("iD.renderer.Map", null, {
 		}
 		sub=collection.createGroup().moveToFront();
 		sub.sublayer=sublayer;
-		return sub;		// dojox.gfx.Group
+		return sub; // dojox.gfx.Group
 	},
-	
+
 	createUI:function(entity,stateClasses) {
 		// summary:		Create a UI (sprite) for an entity, assigning any specified state classes
 		//				(temporary attributes such as ':hover' or ':selected')
-		var id=entity.id;
-		switch (entity.entityType) {
-			case 'node':
-				if (!this.nodeuis[id]) { this.nodeuis[id]=new iD.renderer.NodeUI(entity,this,stateClasses); }
-				                  else { this.nodeuis[id].setStateClasses(stateClasses).redraw(); }
-				return this.nodeuis[id];	// iD.renderer.EntityUI
-			case 'way':
-				if (!this.wayuis[id]) { this.wayuis[id]=new iD.renderer.WayUI(entity,this,stateClasses); }
-				                 else { this.wayuis[id].setStateClasses(stateClasses).redraw(); }
-				return this.wayuis[id];		// iD.renderer.EntityUI
-		}
+		var id = entity.id;
+        if (entity.entityType === 'node') {
+            if (!this.nodeuis[id]) {
+                this.nodeuis[id] = new iD.renderer.NodeUI(entity,this,stateClasses);
+            } else {
+                this.nodeuis[id].setStateClasses(stateClasses).redraw();
+            }
+            return this.nodeuis[id];	// iD.renderer.EntityUI
+        } else if (entity.entityType === 'way') {
+            if (!this.wayuis[id]) {
+                this.wayuis[id] = new iD.renderer.WayUI(entity,this,stateClasses);
+            } else {
+                this.wayuis[id].setStateClasses(stateClasses).redraw();
+            }
+            return this.wayuis[id];		// iD.renderer.EntityUI
+        }
 	},
 
 	getUI:function(entity) {
-		// summary:		Return the UI for an entity, if it exists.
-		switch (entity.entityType) {
-			case 'node': 	return this.nodeuis[entity.id];	// iD.renderer.EntityUI
-			case 'way': 	return this.wayuis[entity.id];	// iD.renderer.EntityUI
+		// summary: Return the UI for an entity, if it exists.
+		if (entity.entityType === 'node') {
+            return this.nodeuis[entity.id];	// iD.renderer.EntityUI
+        } else if (entity.entityType === 'way') {
+			return this.wayuis[entity.id];	// iD.renderer.EntityUI
 		}
 		return null;
 	},
-	
+
 	refreshUI:function(entity) {
 		// summary: 	Redraw the UI for an entity.
 		switch (entity.entityType) {
-			case 'node': 	if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); } break;
-			case 'way': 	if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); } break;
+			case 'node': if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); } break;
+			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); } break;
 		}
 	},
-	
+
 	deleteUI:function(entity) {
 		// summary:		Delete the UI for an entity.
 		switch (entity.entityType) {
-			case 'node': 	if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].removeSprites(); delete this.nodeuis[entity.id]; } break;
-			case 'way': 	if (this.wayuis[entity.id] ) { this.wayuis[entity.id].removeSprites();  delete this.wayuis[entity.id];  } break;
+			case 'node':if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].removeSprites(); delete this.nodeuis[entity.id]; } break;
+			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].removeSprites();  delete this.wayuis[entity.id];  } break;
 		}
 	},
-	
+
 	download:function() {
 		// summary:		Ask the connection to download data for the current viewport.
 		this.conn.loadFromAPI(this.edgel, this.edger, this.edget, this.edgeb);
@@ -226,11 +237,12 @@ declare("iD.renderer.Map", null, {
 		var way, poi;
 		var o = this.conn.getObjectsByBbox(this.edgel,this.edger,this.edget,this.edgeb);
 
-		array.forEach(o.waysInside, function(way) {
-			if (!way.loaded) return;
-			if (!m.wayuis[way.id]) { m.createUI(way); }
-			else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
-		});
+        _(o.waysInside).chain()
+            .filter(function(w) { return w.loaded; })
+            .each(function(way) {
+                if (!m.wayuis[way.id]) { m.createUI(way); }
+                else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
+            });
 
 		if (remove) {
 			array.forEach(o.waysOutside, function(way) {
@@ -257,12 +269,12 @@ declare("iD.renderer.Map", null, {
 
 	// -------------
 	// Zoom handling
-	
+
 	zoomIn:function() {
 		// summary:		Zoom in by one level (unless maximum reached).
 		if (this.scale!=this.MAXSCALE) { this.changeScale(this.scale+1); }
 	},
-	
+
 	zoomOut:function() {
 		// summary:		Zoom out by one level (unless minimum reached).
 		if (this.scale!=this.MINSCALE) { this.changeScale(this.scale-1); }
@@ -277,7 +289,7 @@ declare("iD.renderer.Map", null, {
 		this.updateCoordsFromLatLon(this.centrelat,this.centrelon);	// recentre
 		this.updateUIs(true,true);
 	},
-	
+
 	_setScaleFactor:function() {
 		// summary:		Calculate the scaling factor for this zoom level.
 		this.scalefactor=this.MASTERSCALE/Math.pow(2,13-this.scale);
@@ -285,12 +297,12 @@ declare("iD.renderer.Map", null, {
 
 	// ----------------------
 	// Elastic band redrawing
-	
+
 	clearElastic:function() {
 		// summary:		Remove the elastic band used to draw new ways.
 		this.elastic.clear();
 	},
-	
+
 	drawElastic:function(x1,y1,x2,y2) {
 		// summary:		Draw the elastic band (for new ways) between two points.
 		this.elastic.clear();
@@ -305,7 +317,7 @@ declare("iD.renderer.Map", null, {
 	// -------------
 	// Tile handling
 	// ** FIXME: see docs
-	
+
 	loadTiles:function() {
 		// summary:		Load all tiles for the current viewport. This is a bare-bones function 
 		//				at present: it needs configurable URLs (not just Bing), attribution/logo
@@ -320,49 +332,49 @@ declare("iD.renderer.Map", null, {
 			}
 		}
 	},
-	
+
 	_fetchTile:function(z,x,y) {
 		// summary:		Load a tile image at the given tile co-ordinates.
 		var t=this.tilegroup.createImage({
-			x: this.lon2coord(this.tile2lon(x)),
-			y: this.lat2coord(this.tile2lat(y)),
+			x: Math.floor(this.lon2coord(this.tile2lon(x))),
+			y: Math.floor(this.lat2coord(this.tile2lat(y))),
 			width: 256, height: 256,
 			src: this._tileURL(z,x,y)
 		});
 		this._assignTile(z,x,y,t);
 	},
-	
+
 	_getTile:function(z,x,y) {
 		// summary:		See if this tile is already loaded.
-		if (this.tiles[z]==undefined) { return undefined; }
-		if (this.tiles[z][x]==undefined) { return undefined; }
-		return this.tiles[z][x][y];
+        var k = z + ',' + x + ',' + y;
+		return this.tiles[k];
 	},
 
 	_assignTile:function(z,x,y,t) {
 		// summary:		Store a reference to the tile so we know it's loaded.
-		if (this.tiles[z]==undefined) { this.tiles[z]=[]; }
-		if (this.tiles[z][x]==undefined) { this.tiles[z][x]=[]; }
-		this.tiles[z][x][y]=t;
+        var k = z + ',' + x + ',' + y;
+        if (!this.tiles[k]) {
+            this.tiles[z + ',' + x + ',' + y] = t;
+        }
 	},
-	
+
 	_tileURL:function(z,x,y) {
 		// summary:		Calculate the URL for a tile at the given co-ordinates.
 		var u='';
 		for (var zoom=z; zoom>0; zoom--) {
 			var byte=0;
 			var mask=1<<(zoom-1);
-			if ((x & mask)!=0) byte++;
-			if ((y & mask)!=0) byte+=2;
+			if ((x & mask) !== 0) byte++;
+			if ((y & mask) !== 0) byte += 2;
 			u=u+byte.toString();
 		}
 		return this.tilebaseURL.replace('$z',z).replace('$x',x).replace('$y',y).replace('$quadkey',u);
 	},
-	
+
 	_blankTiles:function() {
 		// summary:		Unload all tiles and remove from the display.
 		this.tilegroup.clear();
-		this.tiles=[];
+		this.tiles = {};
 	},
 
 	// -------------------------------------------
@@ -396,12 +408,12 @@ declare("iD.renderer.Map", null, {
 	processMove:function(e) {
 		// summary:		Drag the map to a new origin.
 		// e: MouseEvent	The mouse-move event that triggered it.
-		var x=e.clientX;
-		var y=e.clientY;
+		var x = e.clientX;
+		var y = e.clientY;
 		if (this.dragging) {
 			if (this.dragx) {
-				this.containerx+=(x-this.dragx);
-				this.containery+=(y-this.dragy);
+				this.containerx += (x - this.dragx);
+				this.containery += (y - this.dragy);
 				this.updateOrigin();
 				this.dragged=true;
 			}
@@ -411,31 +423,31 @@ declare("iD.renderer.Map", null, {
 			this.controller.entityMouseEvent(e,null);
 		}
 	},
-	
+
 	updateOrigin:function() {
 		// summary:		Tell Dojo to update the viewport origin.
 		this.container.setTransform([Matrix.translate(this.containerx,this.containery)]);
 		this.tilegroup.setTransform([Matrix.translate(this.containerx,this.containery)]);
 	},
-	
+
 	_mouseEvent:function(e) {
-		// summary: 	Catch mouse events on the surface but not the tiles - in other words, 
-		// 				on drawn items that don't have their own hitzones, like the fill of a shape.
-		if (e.type=='mousedown') { this.startDrag(e); }
-		// ** FIXME: we may want to reinstate this at some point...
-		// this.controller.entityMouseEvent(e,null);
-	},
-	
+        // summary: Catch mouse events on the surface but not the tiles - in other words,
+        // on drawn items that don't have their own hitzones, like the fill of a shape.
+        if (e.type=='mousedown') { this.startDrag(e); }
+        // ** FIXME: we may want to reinstate this at some point...
+        // this.controller.entityMouseEvent(e,null);
+    },
+
 	updateCoordsFromViewportPosition:function(e) {
 		// summary:		Update centre and bbox from the current viewport origin.
 		this._updateCoords(this.containerx,this.containery);
 	},
-	
+
 	updateCoordsFromLatLon:function(lat,lon) {
-		// summary:		Update centre and bbox to a specified lat/lon.
-		this._updateCoords(-(this.lon2coord(lon)-this.mapwidth/2),
-		                   -(this.lat2coord(lat)-this.mapheight/2));
-	},
+        // summary:		Update centre and bbox to a specified lat/lon.
+        this._updateCoords(-(this.lon2coord(lon)-this.mapwidth/2),
+                           -(this.lat2coord(lat)-this.mapheight/2));
+    },
 
 	_updateCoords:function(x,y) {
 		// summary:		Set centre and bbox.
@@ -481,8 +493,7 @@ declare("iD.renderer.Map", null, {
 	// Turn event co-ordinates into map co-ordinates
 
 	mouseX:function(e) { return e.clientX - domGeom.getMarginBox(this.div).l - this.containerx; },
-	mouseY:function(e) { return e.clientY - domGeom.getMarginBox(this.div).t - this.containery; },
-
+	mouseY:function(e) { return e.clientY - domGeom.getMarginBox(this.div).t - this.containery; }
 });
 
 // ----------------------------------------------------------------------

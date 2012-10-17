@@ -20,7 +20,7 @@ declare("iD.styleparser.StyleChooser", null, {
 		this.ruleChains=[new iD.styleparser.RuleChain()];
 		this.styles=[];
 	},
-	
+
 	currentChain:function() {
 		return this.ruleChains[this.ruleChains.length-1];
 	},
