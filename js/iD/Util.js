@@ -2,6 +2,12 @@ if (typeof iD === 'undefined') iD = {};
 
 iD.Util = {};
 
+iD.Util._id = 0;
+
+iD.Util.id = function() {
+    return iD.Util._id++;
+};
+
 iD.Util.friendlyName = function(entity) {
     // summary:		Rough-and-ready function to return a human-friendly name
     //				for the object. Really just a placeholder for something better.

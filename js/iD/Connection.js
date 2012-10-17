@@ -14,8 +14,8 @@ iD.Connection = function(apiURL) {
     this.nextRelation = -1;	//  |
 	this.nodes={};
 	this.ways={};
-	this.relations={};
-	this.pois=new Hashtable();
+	this.relations= {};
+	this.pois = {};
 	this.maps=[];
 	this.modified=false;
 	this.apiBaseURL=apiURL;
@@ -50,21 +50,21 @@ iD.Connection.prototype = {
 	doCreateNode:function(tags, lat, lon, perform) {
 		// summary:		Create a new node and save it in the data store, using an undo stack.
 		var node = new iD.Node(this, this.nextNode--, lat, lon, tags, true);
-		perform(new iD.actions.CreateEntityAction(node, lang.hitch(this,this._assign) ));
+		perform(new iD.actions.CreateEntityAction(node, _.bind(this._assign, this) ));
 		return node;	// iD.Node
 	},
 
 	doCreateWay:function(tags, nodes, perform) {
 		// summary:		Create a new way and save it in the data store, using an undo stack.
 		var way = new iD.Way(this, this.nextWay--, nodes.concat(), tags, true);
-		perform(new iD.actions.CreateEntityAction(way, lang.hitch(this,this._assign) ));
+		perform(new iD.actions.CreateEntityAction(way, _.bind(this._assign, this) ));
 		return way;
 	},
 
 	doCreateRelation:function(tags, members, perform) {
 		// summary:		Create a new relation and save it in the data store, using an undo stack.
 		var relation = new iD.Relation(this, this.nextRelation--, members.concat(), tags, true);
-		perform(new iD.actions.CreateEntityAction(relation, lang.hitch(this,this._assign) ));
+		perform(new iD.actions.CreateEntityAction(relation, _.bind(this._assign, this) ));
 		return relation;
 	},
 
@@ -83,7 +83,7 @@ iD.Connection.prototype = {
             if (way.within(left,right,top,bottom)) { o.waysInside.push(way); }
             else { o.waysOutside.push(way); }
         }
-        this.pois.each(function(node,v) {
+        _.each(this.pois, function(node) {
             if (node.within(left,right,top,bottom)) { o.poisInside.push(node); }
             else { o.poisOutside.push(node); }
         });
@@ -118,26 +118,26 @@ iD.Connection.prototype = {
 		// summary:		Update the list of POIs (nodes not in ways) from a supplied array of nodes.
 		for (var i in nodelist) {
 			if (nodelist[i].entity.hasParentWays()) {
-				this.pois.remove(nodelist[i]);
+				delete this.pois[nodelist[i]._id];
 			} else {
-				this.pois.put(nodelist[i],true);
+				this.pois[nodelist[i]._id] = nodelist[i];
 			}
 		}
 	},
 
 	getPOIs:function() {
 		// summary:		Return a list of all the POIs in this Connection.
-		return this.pois.keys();	// Array
+		return _.values(this.pois);
 	},
 
 	registerPOI:function(node) {
 		// summary:		Register a node as a POI (not in a way).
-		this.pois.put(node,true);
+        this.pois[node._id] = node;
 	},
 
 	unregisterPOI:function(node) {
 		// summary:		Mark a node as no longer being a POI (it's now in a way).
-		this.pois.remove(node);
+        delete this.pois[node._id];
 	},
 
 	// ----------

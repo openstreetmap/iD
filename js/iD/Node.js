@@ -5,6 +5,7 @@ iD.Node = function(conn, id, lat, lon, tags, loaded) {
 	this.entityType = 'node';
 	this.connection = conn;
 	this.id = id;
+	this._id = iD.Util.id();
 	this.entity = new iD.Entity();
 	this.lat = lat;
 	this.lon = lon;

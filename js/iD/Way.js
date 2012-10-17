@@ -5,6 +5,7 @@ iD.Way = function(conn, id, nodes, tags, loaded) {
     this.connection = conn;
     this.entityType = 'way';
     this.id = id;
+    this._id = iD.Util.id();
     this.nodes = nodes || [];
     this.deleted = false;
     this.entity = new iD.Entity();

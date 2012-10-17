@@ -1,11 +1,9 @@
 if (typeof iD === 'undefined') iD = {};
 
-iD._id = 0;
-
 iD.Entity = function() {
     this.parents = {};
     // The ID locally
-    this._id = iD._id++;
+    this._id = iD.Util.id();
 	this.connection =  null;
     // The ID in OSM terms
 	this.id = NaN;
