@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojox/layout/resources/FloatingPane.css">
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojox/layout/resources/ResizeHandle.css">
 	<link rel="stylesheet" href="css/app.css">
-	<script src="js/lib/jshashtable.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" data-dojo-config="async: true, parseOnLoad: true, baseUrl: 'js/iD/'"></script>
 	<style type="text/css">
 		:focus { outline-color: transparent; outline-style: none; }
@@ -19,23 +18,31 @@
 </head>
 <body class="claro">
 <div id="appLayout" class="demoLayout">
-
-	<script>
+  <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+  <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" src="js/iD/Util.js"></script>
+  <script type="text/javascript" src="js/iD/Node.js"></script>
+  <script type="text/javascript" src="js/iD/Relation.js"></script>
+  <script type="text/javascript" src="js/iD/Entity.js"></script>
+  <script type="text/javascript" src="js/iD/Way.js"></script>
+  <script type="text/javascript" src="js/iD/Connection.js"></script>
+  <script>
 
 require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom",
          "dijit/form/Button","dijit/form/ToggleButton",
          "dojox/layout/FloatingPane",
          "iD/actions/UndoStack","iD/actions/CreatePOIAction",
-         "iD/Connection",
          "iD/Controller",
-         "iD/controller/edit/NoSelection","iD/controller/shape/NoSelection",
+         "iD/actions/CreateEntityAction",
+         "iD/controller/edit/NoSelection",
+         "iD/controller/shape/NoSelection",
          "iD/renderer/Map","iD/styleparser/RuleSet",
          "iD/ui/DragAndDrop","iD/ui/StepPane",
-         "dojo/domReady!"], function(lang,domGeom,domClass,on,dom){
+         "dojo/domReady!"], function(lang,domGeom,domClass,on,dom) {
 
 	var ruleset=new iD.styleparser.RuleSet();
 	var conn=new iD.Connection("http://www.overpass-api.de/api/xapi?");
-	
+
 	// Load styles
 	ruleset.registerCallback(styleLoaded);
 	ruleset.loadFromCSS("potlatch.css",styleLoaded);
@@ -56,7 +63,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	// Initialise controller
 	var controller=new iD.Controller(map);
 	map.setController(controller);
-	
+
 	// Initialise event listeners
 	on(window, "enterState", enterStateListener);
 	on(window, "exitState", exitStateListener);
@@ -77,10 +84,10 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 		// Load data
 		map.download();
 	}
-	
+
 	// ----------------------------------------------------
 	// State event listeners
-	
+
 	function enterStateListener(event) {
 		domClass.add(event.state[0]+"Button","currentMode");
 	};
@@ -88,7 +95,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	function exitStateListener(event) {
 		domClass.remove(event.state[0]+"Button","currentMode");
 	};
-	
+
 	// ----------------------------------------------------
 	// Mode button handlers
 
@@ -98,7 +105,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 
 	enterEditMode=function() {
 	};
-	
+
 	finishClicked=function() {
 		controller.stepper.hide();
 	};
@@ -106,12 +113,17 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	cancelClicked=function() {
 		controller.stepper.hide();
 	};
-	
+
 	// ----------------------------------------------------
 	// Map control handlers
-	
-	zoomInClicked =function() { map.zoomIn();  };
-	zoomOutClicked=function() { map.zoomOut(); };
+
+    $('#zoomIn').click(function() {
+        map.zoomIn();
+    });
+
+    $('#zoomOut').click(function() {
+        map.zoomOut();
+    });
 
 });
 	</script>
@@ -139,14 +151,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 </div>
 
 <div id="zoombuttons">
-	<button style="position: absolute; left: 10px; top: 40px;"
-	        id="zoomIn" data-dojo-type="dijit.form.Button" data-dojo-props="onClick:zoomInClicked">
-		+
-	</button>
-	<button style="position: absolute; left: 10px; top: 70px;"
-	        id="zoomOut" data-dojo-type="dijit.form.Button" data-dojo-props="onClick:zoomOutClicked">
-		&ndash;
-	</button>
+	<button id="zoomIn">+</button><button id="zoomOut">&ndash;</button>
 </div>
 
 <!-- Map div -->
@@ -158,7 +163,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 
 <!-- Floating help window -->
 
-<div id="helpPane" data-dojo-type="dojox.layout.FloatingPane" 
+<div id="helpPane" data-dojo-type="dojox.layout.FloatingPane"
      data-dojo-props="resizable:true, closable:false, dockable:false, title: 'Step by step'"
      style="position:absolute; top:45px; left:50px; width:200px; height:200px; visibility: hidden;" >
 	<ol id="helpSteps">
