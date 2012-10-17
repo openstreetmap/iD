@@ -12,35 +12,43 @@ declare("iD.Controller", [Evented], {
 	presets: null,			// tag presets
 	editorCache: null,		// cache of tag editor objects, means we don't have to repeatedly load them
 	
-	constructor:function(_map) {
+	constructor:function(map) {
 		// summary:		The Controller marshalls ControllerStates and passes events to them.
-		this.map=_map;
-		this.undoStack=new iD.actions.UndoStack();
-		this.presets={};
-		this.editorCache={};
+		this.map = map;
+		this.undoStack = new iD.actions.UndoStack();
+		this.presets = {};
+		this.editorCache = {};
 	},
 
-	setStepper:function(_stepper) {
+	setStepper:function(stepper) {
 		// summary:		Set reference for the singleton-like class for the step-by-step instruction panel.
-		this.stepper=_stepper;
+		this.stepper = stepper;
 	},
 
-	setTagPresets:function(type,url) {
+	setTagPresets:function(type, url) {
 		// summary:		Load and store a JSON tag preset file.
-		this.presets[type]=new iD.tags.PresetList(type,url);
+		this.presets[type] = new iD.tags.PresetList(type,url);
 	},
 	
 	setState:function(newState) {
 		// summary:		Enter a new ControllerState, firing exitState on the old one, and enterState on the new one.
-		if (newState==this.state) { return; }
+		if (newState === this.state) { return; }
 		if (this.state) {
 			this.state.exitState(newState);
-			this.emit("exitState", { bubbles: true, cancelable: true, state: this.state.stateNameAsArray() });
+			this.emit("exitState", {
+                bubbles: true,
+                cancelable: true,
+                state: this.state.stateNameAsArray()
+            });
 		}
 		newState.setController(this);
-		this.state=newState;
+		this.state = newState;
 		newState.enterState();
-		this.emit("enterState", { bubbles: true, cancelable: true, state: this.state.stateNameAsArray() });
+		this.emit("enterState", {
+            bubbles: true,
+            cancelable: true,
+            state: this.state.stateNameAsArray()
+        });
 	},
 
 	entityMouseEvent:function(event,entityUI) {

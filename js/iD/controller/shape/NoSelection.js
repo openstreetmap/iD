@@ -30,12 +30,17 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 		// summary:		In 'Draw shape' mode but nothing is selected.
 	},
 
-	enterState:function() {
+    exitState: function() {
+        this.controller.map.div.className = '';
+    },
+
+	enterState: function() {
+        this.controller.map.div.className = 'state-drawing';
 		this.controller.stepper.setSteps({
-			begin: "Click anywhere on the map to start drawing there",
-			draw: "Keep clicking to add each point, and press Enter or double-click when you're done",
+			begin: "Click anywhere on the map to start drawing",
+			draw: "Keep clicking to add each point then double-click when you're done",
 			tag: "Set the type of the road or shape"
-		},['begin','draw','tag']).highlight('begin');
+		}, ['begin', 'draw', 'tag']).highlight('begin');
 	},
 
 	processMouseEvent:function(event,entityUI) {
@@ -47,13 +52,13 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 			switch (entityType) {
 				case 'node':
 					// Click to select a node
-					var ways=entity.parentWays();
-					if (ways.length==0) { return new iD.controller.shape.SelectedPOINode(entity); }
-//					               else { return new iD.controller.shape.SelectedWayNode(entity,ways[0]); }
-//					               ** FIXME: ^^^ the above should start a new branching way, not select the node
-					return this;
-				case 'way':
-					// Click to select a way
+                    var ways=entity.parentWays();
+                    if (ways.length==0) { return new iD.controller.shape.SelectedPOINode(entity); }
+                    //					               else { return new iD.controller.shape.SelectedWayNode(entity,ways[0]); }
+                    //					               ** FIXME: ^^^ the above should start a new branching way, not select the node
+                    return this;
+                case 'way':
+                    // Click to select a way
 					return new iD.controller.shape.SelectedWay(entityUI.entity);
 				default:
 					// Click to start a new way

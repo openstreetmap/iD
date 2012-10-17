@@ -24,6 +24,10 @@ text {
     -moz-user-select: none;
 }
 
+#map.state-drawing {
+    cursor: pointer;
+}
+
 .currentMode {
     font-weight: bold;
 }
