@@ -32,21 +32,6 @@ iD.Connection.prototype = {
 		}
 	},
 
-	getNode:function(id) {
-		// summary:		Return a node by id.
-		return this.nodes[id];		// iD.Node
-	},
-
-	getWay:function(id) {
-		// summary:		Return a way by id.
-		return this.ways[id];		// iD.Way
-	},
-
-	getRelation:function(id) {
-		// summary:		Return a relation by id.
-		return this.relations[id];	// iD.Relation
-	},
-
 	_getOrCreate:function(id,type) {
 		// summary:		Return an entity if it exists: if not, create an empty one with the given id, and return that.
 		switch (type) {
@@ -160,14 +145,8 @@ iD.Connection.prototype = {
 
     loadFromAPI:function(left,right,top,bottom) {
         // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
-        // 	    to use Overpass API (which has the relevant CORS headers).
-        var url="http://www.overpass-api.de/api/xapi?map?bbox="+left+","+bottom+","+right+","+top;
-        $.ajax({
-            url: url,
-            context: this,
-            headers: { "X-Requested-With": null },
-            success: this._processOSM
-        });
+        // to use Overpass API (which has the relevant CORS headers).
+        this.loadFromURL("http://www.overpass-api.de/api/xapi?map?bbox=" + [left,bottom,right,top]);
     },
 
 	loadFromURL:function(url) {
@@ -175,6 +154,7 @@ iD.Connection.prototype = {
 		$.ajax({
             url: url,
             context: this,
+            headers: { "X-Requested-With": null },
             success: this._processOSM
         });
 	},
@@ -240,7 +220,7 @@ iD.Connection.prototype = {
             return _(obj.childNodes).chain()
                 .filter(filterNodeName('nd'))
                 .map(function(item) {
-                    return conn.getNode(getAttribute(item,'ref'));
+                    return conn.nodes[getAttribute(item,'ref')];
                 }).value();
 		}
 
