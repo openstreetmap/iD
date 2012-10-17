@@ -11,7 +11,7 @@ declare("iD.tags.TagEditor", null, {
 	dialog: null,
 	editorContainers: null,			// hash of DOM nodes to put editors in
 
-	constructor:function(entity, controller) {
+	constructor: function(entity, controller) {
 		// summary:		Construct a tag editor dialog box.
 		this.entity = entity;
 		this.controller = controller;

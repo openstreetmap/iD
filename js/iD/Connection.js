@@ -105,10 +105,10 @@ iD.Connection.prototype = {
 		});
 	},
 
-	refreshEntity:function(_entity) {
+	refreshEntity: function(entity) {
 		// summary:		Redraw a particular entity on all the Map objects that take data from this Connection.
 		_.each(this.maps, function(map) {
-			map.refreshUI(_entity);
+			map.refreshUI(entity);
 		});
 	},
 

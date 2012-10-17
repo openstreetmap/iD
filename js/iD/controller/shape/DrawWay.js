@@ -29,14 +29,14 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	constructor: function(way) {
 		this.way = way;
 	},
-	enterState:function() {
-		this.wayUI=this.controller.map.getUI(this.way);
+	enterState: function() {
+		this.wayUI = this.controller.map.getUI(this.way);
 		this.wayUI.setStateClass('selected');
 		this.wayUI.setStateClass('shownodes');
 		this.wayUI.redraw();
 		this.controller.stepper.highlight('draw');
 	},
-	exitState:function() {
+	exitState: function() {
 		this.controller.map.clearElastic();
 		this.wayUI.resetStateClass('selected');
 		this.wayUI.resetStateClass('shownodes');
@@ -46,8 +46,8 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	processMouseEvent:function(event,entityUI) {
 		var entity=entityUI ? entityUI.entity : null;
 		var entityType=entity ? entity.entityType : null;
-		var map=this.controller.map;
-        var ways;
+		var map = this.controller.map;
+        var ways, undo, action;
 
 		if (event.type=='mouseover' && entityType=='way' && entityUI!=this.wayUI) {
 			// Mouse over way, show hover highlight
@@ -62,7 +62,12 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 			// Find what object we're moving into
 			var into=shape.byId((event.hasOwnProperty('toElement') ? event.toElement : event.relatedTarget).__gfxObject__);
 			// If it's a nodeUI that belongs to a hovering way, don't deselect
-			if (into && into.hasOwnProperty('source') && into.source.hasStateClass('hoverway') && into.source.entity.hasParent(entity)) { return this; }
+			if (into &&
+                into.hasOwnProperty('source') &&
+                into.source.hasStateClass('hoverway') &&
+                into.source.entity.entity.hasParent(entity)) {
+                return this;
+            }
 			entityUI.resetStateClass('shownodeshover');
 			entityUI.redraw();
 			this.wayUI.redraw();
@@ -71,9 +76,9 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 
 		} else if (event.type=='mouseout' && entityType=='node') {
 			// Mouse left node, remove hover highlight from parent way too
-			ways=entity.parentWays();
+			ways = entity.entity.parentWays();
 			for (var i in ways) {
-				var ui=this.controller.map.getUI(ways[i]);
+				var ui = this.controller.map.getUI(ways[i]);
 				if (ui && ui.hasStateClass('shownodeshover')) {
 					ui.resetStateClass('shownodeshover');
 					ui.redraw();
@@ -92,11 +97,11 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 			switch (entityType) {
 				case 'node':
 					// Click on node
-					if (entity==this.getDrawingNode()) {
+					if (entity === this.getDrawingNode()) {
 						// Double-click, so complete drawing
 						this.controller.stepper.highlight('tag');
 						return new iD.controller.edit.SelectedWay(this.way, null);
-					} else if (entity==this.getStartNode()) {
+					} else if (entity === this.getStartNode()) {
 						// Start of this way, so complete drawing
 						this.appendNode(entity, this.undoAdder() );
 						this.controller.stepper.highlight('tag');
@@ -110,19 +115,22 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 
 				case 'way':
 					// Click on way, add new junction node to way
-					ways=[entity];	// ** needs to find all the ways under the mouse
-					var undo=new iD.actions.CompositeUndoableAction();
+					ways = [entity];	// ** needs to find all the ways under the mouse
+					undo = new iD.actions.CompositeUndoableAction();
 					var node=this.appendNewNode(event, undo);
-					array.forEach(ways, function(w) { w.doInsertNodeAtClosestPosition(node, true, lang.hitch(undo,undo.push)); } );
-					var action=this.undoAdder(); action(undo);
+					_.each(ways, function(w) {
+                        w.doInsertNodeAtClosestPosition(node, true, lang.hitch(undo, undo.push));
+                    });
+					action = this.undoAdder();
+                    action(undo);
 					return this;
 			}
 
 		} else if (event.type=='click') {
 			// Click on empty space, add new node to way
-			var undo=new iD.actions.CompositeUndoableAction();
+			undo = new iD.actions.CompositeUndoableAction();
 			this.appendNewNode(event, undo);
-			var action=this.undoAdder(); action(undo);
+			action = this.undoAdder(); action(undo);
 			return this;
 		}
 
