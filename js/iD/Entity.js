@@ -6,7 +6,7 @@ iD.Entity = function() {
     this._id = iD.Util.id();
 	this.connection =  null;
     // The ID in OSM terms
-	this.id = NaN;
+	this.id = NaN;
 	this.loaded = false;
 	this.entityType =  '';
 	this.modified = false;
