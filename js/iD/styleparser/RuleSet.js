@@ -118,10 +118,10 @@ declare("iD.styleparser.RuleSet", null, {
 			// Unknown pattern
 			} else if ((o=this.UNKNOWN.exec(css))) {
 				css=css.replace(this.UNKNOWN,'');
-				console.log("unknown: "+o[1]);
+				// console.log("unknown: "+o[1]);
 
 			} else {
-				console.log("choked on "+css);
+				// console.log("choked on "+css);
 				return;
 			}
 		}
@@ -192,7 +192,9 @@ declare("iD.styleparser.RuleSet", null, {
             else if (ps.has(a)) { ps.setPropertyFromString(a,v,isEval[a]); }
             else if (ts.has(a)) { ts.setPropertyFromString(a,v,isEval[a]); }
             else if (hs.has(a)) { hs.setPropertyFromString(a,v,isEval[a]); }
-            else { console.log(a+" not found"); }
+            else {
+                // console.log(a+" not found");
+                // }
         }
 
         // Add each style to list

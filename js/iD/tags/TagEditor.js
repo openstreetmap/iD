@@ -114,7 +114,9 @@ declare("iD.tags.TagEditor", null, {
 				url: "presets/editors/" + editor + ".json",
                 // TODO: eliminate lang.hitch here
 				success: lang.hitch(this, this.loadedEditor, editor, destination),
-				error: function(err) { console.log("Couldn't load editor"); }
+				error: function(err) {
+                    // console.log("Couldn't load editor");
+                }
 			});
 		}
 	},

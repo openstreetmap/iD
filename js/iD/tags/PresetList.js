@@ -19,9 +19,9 @@ declare("iD.tags.PresetList", null, {
 		});
 	},
 
-	loaded:function(obj) {
+	loaded: function(obj) {
 		this.presets = obj;
-		console.log("Loaded presets for " + this.entityType);
+		// console.log("Loaded presets for " + this.entityType);
 	},
 
     // This entity has all of the same tags as props, with all of the same
@@ -36,7 +36,6 @@ declare("iD.tags.PresetList", null, {
 	assembleEditorsForEntity:function(entity) {
 		if (entity.entityType != this.entityType) return false;
 
-        console.log(this.presets);
 		var presetList = {};
 		var editorList = [];
 		for (var group in this.presets) {
