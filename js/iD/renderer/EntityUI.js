@@ -38,7 +38,9 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	recordSprite:function(sprite) {
 		// summary:		Record that an individual sprite (one stroke, icon or text item) has been added.
-		if (this.sprites.indexOf(sprite)==-1) { this.sprites.push(sprite); }
+		if (!_.include(this.sprites, sprite)) {
+            this.sprites.push(sprite);
+        }
 		return sprite;
 	},
 	removeSprites:function() {
@@ -67,10 +69,10 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	getEnhancedTags:function() {
 		// summary:		Return tags for this entity augmented by the EntityUI's state classes.
-		var tags=lang.clone(this.entity.tags);
+		var tags = lang.clone(this.entity.tags);
 		// Apply stateClasses (hover, selected, hoverway, selectedway)
 		for (var i in this.stateClasses) {
-			tags[':'+this.stateClasses[i]]='yes';
+			tags[':'+this.stateClasses[i]] = 'yes';
 		}
 		// todo - Add any common 'special-case' tags, e.g. :hasTags
 		return tags;	// Object

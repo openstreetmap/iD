@@ -48,3 +48,7 @@
     font: normal 13px/20px 'Helvetica';
     width:135px;
 }
+
+polyline.way-fill {
+    cursor: pointer;
+}
