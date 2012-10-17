@@ -27,7 +27,7 @@ declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
             this.inherited(arguments);
 			switch (entity.entityType) {
 				case 'node':
-					var ways=entity.parentWays();
+					var ways=entity.entity.parentWays();
 					if (!ways.length) { return new iD.controller.edit.SelectedPOINode(entity); }
                     else { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
                     break;

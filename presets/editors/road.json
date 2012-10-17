@@ -1,0 +1,11 @@
+{
+	'Road name': {
+		key: 'name',
+		type: 'text'
+	},
+
+	'Road number': {
+		key: 'ref',
+		type: 'text'
+	}
+}

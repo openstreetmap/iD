@@ -48,6 +48,6 @@ Scoping in JavaScript is famously broken: Dojo's lang.hitch method will save you
 
 Instance methods and variables _always_ need to be accessed with 'this.'. This is a fairly frequent gotcha if you're coming from another language.
 
-The [Dojo site](http://dojotoolkit.org/) has lots of documentation. iD currently uses Dojo 1.7.2 - this has a much better module architecture (AMD) than previously.
+The [Dojo site](http://dojotoolkit.org/) has lots of documentation. iD currently uses Dojo 1.8 - this has a much better module architecture (AMD) than previously.
 
 Come on in, the water's lovely. More help? Ping RichardF on IRC (irc.oftc.net, in #osm-dev or #osm), on the OSM mailing lists or at richard@systemeD.net.

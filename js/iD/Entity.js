@@ -14,33 +14,22 @@ iD.Entity = function() {
 };
 
 iD.Entity.prototype = {
-	isType:function(type) {
-		// summary:		Is this entity of the specified type ('node','way','relation')?
-		return this.entityType === type;
-	},
-
 	toString:function() {
 		return this.entityType + " . " + this.id;
 	},
 
-	// --------------------------------
 	// Provoke redraw and other changes
 	refresh:function() {
 		// summary:		Ask the connection to provoke redraw and other changes.
 		this.connection.refreshEntity(this);
 	},
 
-	// -------------------------------------
 	// Bounding box check (to be overridden)
-
 	within:function(left, right, top, bottom) {
 		// summary:		Is the entity within the specified bbox?
 		return !this.deleted;	// Boolean
 	},
 
-
-
-	// ---------------
 	// Parent-handling
 	addParent: function(entity) {
 		// summary:		Record a parent (a relation or way which contains this entity).
