@@ -38,7 +38,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
          "iD/controller/shape/NoSelection",
          "iD/renderer/Map","iD/styleparser/RuleSet",
          "iD/ui/DragAndDrop","iD/ui/StepPane",
-         "dojo/domReady!"], function(lang,domGeom,domClass,on,dom){
+         "dojo/domReady!"], function(lang,domGeom,domClass,on,dom) {
 
 	var ruleset=new iD.styleparser.RuleSet();
 	var conn=new iD.Connection("http://www.overpass-api.de/api/xapi?");
@@ -49,10 +49,8 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 
 	// Initialise map
 	var map = new iD.renderer.Map({
-		lat: 38.89,
-		lon: -77,
-		// lat: 51.87,
-		// lon: -1.49,
+		lat: 51.87,
+		lon: -1.49,
 		scale: 17,
 		div: "map",
 		connection: conn,
@@ -119,8 +117,13 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	// ----------------------------------------------------
 	// Map control handlers
 
-	zoomInClicked =function() { map.zoomIn();  };
-	zoomOutClicked=function() { map.zoomOut(); };
+    $('#zoomIn').click(function() {
+        map.zoomIn();
+    });
+
+    $('#zoomOut').click(function() {
+        map.zoomOut();
+    });
 
 });
 	</script>
@@ -148,14 +151,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 </div>
 
 <div id="zoombuttons">
-	<button style="position: absolute; left: 10px; top: 40px;"
-	        id="zoomIn" data-dojo-type="dijit.form.Button" data-dojo-props="onClick:zoomInClicked">
-		+
-	</button>
-	<button style="position: absolute; left: 10px; top: 70px;"
-	        id="zoomOut" data-dojo-type="dijit.form.Button" data-dojo-props="onClick:zoomOutClicked">
-		&ndash;
-	</button>
+	<button id="zoomIn">+</button><button id="zoomOut">&ndash;</button>
 </div>
 
 <!-- Map div -->
