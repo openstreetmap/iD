@@ -3,7 +3,6 @@ if (typeof iD === 'undefined') iD = {};
 iD._id = 0;
 
 iD.Entity = function() {
-    this.tags = {};
     this.parents = {};
     // The ID locally
     this._id = iD._id++;
@@ -14,7 +13,6 @@ iD.Entity = function() {
 	this.entityType =  '';
 	this.modified = false;
 	this.deleted = false;
-	this.MAINKEYS = ['highway','amenity','railway','waterway'];
 };
 
 iD.Entity.prototype = {
@@ -42,28 +40,7 @@ iD.Entity.prototype = {
 		return !this.deleted;	// Boolean
 	},
 
-	// -------------
-	// Tag functions
-	numTags:function() {
-		// summary: Count how many tags this entity has.
-        return Object.keys(this.tags).length;
-	},
 
-	friendlyName:function() {
-		// summary:		Rough-and-ready function to return a human-friendly name 
-		//				for the object. Really just a placeholder for something better.
-		// returns:		A string such as 'river' or 'Fred's House'.
-		if (this.numTags()===0) { return ''; }
-		var n=[];
-		if (this.tags.name) { n.push(this.tags.name); }
-		if (this.tags.ref) { n.push(this.tags.ref); }
-		if (n.length===0) {
-			for (var i=0; i<this.MAINKEYS.length; i++) {
-				if (this.tags[this.MAINKEYS[i]]) { n.push(this.tags[this.MAINKEYS[i]]); break; }
-			}
-		}
-		return n.length===0 ? 'unknown' : n.join('; ');	// String
-	},
 
 	// ---------------
 	// Parent-handling

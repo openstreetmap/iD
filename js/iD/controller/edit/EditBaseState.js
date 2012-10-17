@@ -19,7 +19,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
 		// x: Number	Screen co-ordinate.
 		// y: Number	Screen co-ordinate.
 		// entity: iD.Entity	The entity to be edited.
-        var h=entity.friendlyName();
+        var h = iD.Util.friendlyName(entity);
         if (h !== '') h = h + "<br/>";
         this.editortooltip = new dijit.TooltipDialog({
             content: h+"<button data-dojo-type='dijit.form.Button' type='submit'>Edit tags</button> " +

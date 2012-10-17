@@ -194,9 +194,9 @@ declare("iD.renderer.Map", null, {
 
 	getUI:function(entity) {
 		// summary: Return the UI for an entity, if it exists.
-		if (entity.nodeType === 'node') {
+		if (entity.entityType === 'node') {
             return this.nodeuis[entity.id];	// iD.renderer.EntityUI
-        } else if (entity.nodeType === 'way') {
+        } else if (entity.entityType === 'way') {
 			return this.wayuis[entity.id];	// iD.renderer.EntityUI
 		}
 		return null;
