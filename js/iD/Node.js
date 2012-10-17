@@ -21,6 +21,18 @@ iD.Node.prototype = {
         this.latp = 180/Math.PI *
             Math.log(Math.tan(Math.PI/4+this.lat*(Math.PI/180)/2));
     },
+
+    toGeoJSON: function() {
+        return {
+            type: 'Feature',
+            properties: this.tags,
+            geometry: {
+                type: 'Point',
+                coordinates: [this.lon, this.lat]
+            }
+        };
+    },
+
     latp2lat: function(a) {
         // summary:		Get a latitude from a projected latitude.
         // returns:		Latitude.
