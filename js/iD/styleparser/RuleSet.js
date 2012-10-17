@@ -194,7 +194,7 @@ declare("iD.styleparser.RuleSet", null, {
             else if (hs.has(a)) { hs.setPropertyFromString(a,v,isEval[a]); }
             else {
                 // console.log(a+" not found");
-                // }
+            }
         }
 
         // Add each style to list
