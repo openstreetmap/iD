@@ -12,7 +12,6 @@ declare("iD.tags.PresetList", null, {
 		// summary:		List of presets for a given type (e.g. nodes, ways)
 		this.entityType = type;
 
-        console.log(url);
 		$.ajax({
 			url: url,
 			success: _.bind(this.loaded, this),

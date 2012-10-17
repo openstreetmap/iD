@@ -1,7 +1,7 @@
 // iD/tags/TagEditor.js
 
 define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/xhr','dojo/dom-construct',
-        'dijit/Dialog','dijit/form/Form','dijit/form/Button','dijit/form/TextBox'],
+       'dijit/Dialog','dijit/form/Form','dijit/form/Button','dijit/form/TextBox'],
        function(declare,lang,xhr,domConstruct){
 
 declare("iD.tags.TagEditor", null, {
@@ -23,21 +23,18 @@ declare("iD.tags.TagEditor", null, {
             content: "",
             style: "width: 300px" });
 
-		var form = new dijit.form.Form({
-            encType: 'multipart/form-data',
-            action: '',
-            method: '',
-			onSubmit: function(event) { console.log('submit'); }
-		}, dojo.doc.createElement('div'));
+        this.$content = $('<div id="tagform"></div>');
+        this.render();
 
-		this.dialog.set('content', form);
+		this.dialog.set('content', this.$content[0]);
 		this.dialog.show();
 
-		// What editors are relevant?
-		var presetList = this.controller.presets[entity.entityType];
-		var applicablePresets = presetList.assembleEditorsForEntity(entity);
+        /*
+        // What editors are relevant?
+        var presetList = this.controller.presets[entity.entityType],
+            applicablePresets = presetList.assembleEditorsForEntity(entity),
+            i;
 
-        var i;
 		// Add preset types
 		for (i in applicablePresets.presets) {
 			this.appendPreset(i, applicablePresets.presets[i], form.domNode);
@@ -47,14 +44,60 @@ declare("iD.tags.TagEditor", null, {
 		for (i in applicablePresets.editors) {
 			this.appendEditor(applicablePresets.editors[i], form.domNode);
 		}
+        */
 	},
 
 	// ------------
 	// Presets
 
+	render: function() {
+        this.$content.empty();
+        // TODO: optimize
+        if (!$('#datalists').size()) {
+            $(document.body).append('<div id="datalists"></div>');
+        }
+        _.each(this.entity.tags, _.bind(function(value, key) {
+            var row = $('<div></div>'),
+                keyid = 'key-' + key;
+
+            $('<input></input>')
+                .val(key)
+                .attr({
+                    'class': 'key'
+                }).appendTo(row);
+
+            $('<input></input>')
+                .val(value)
+                .attr({
+                    'list': keyid,
+                    'class': 'value'
+                }).appendTo(row);
+               
+            // Share datalists between same-keys
+            if (!$('datalist#' + keyid).size()) {
+                iD.Taginfo.values(key, function(values) {
+
+                    var $dl = $('<datalist></datalist>')
+                        .attr('id', keyid);
+
+                    _.each(values, function(v) {
+                        $dl.append($('<option></option>')
+                            .attr('value', v.value));
+                    });
+
+                    $('#datalists').append($dl);
+                });
+            }
+
+            this.$content.append(row);
+        }, this));
+    },
+
 	appendPreset:function(name, preset, destination) {
-		var element=domConstruct.create('h2');
-		element.appendChild(domConstruct.create('img', { src: 'presets/' + preset.icon }));
+		var element = domConstruct.create('h2');
+		element.appendChild(domConstruct.create('img', {
+            src: 'presets/' + preset.icon
+        }));
 		element.appendChild(dojo.doc.createTextNode(name));
 		destination.appendChild(element);
 	},
@@ -67,11 +110,10 @@ declare("iD.tags.TagEditor", null, {
 		if (this.controller.editorCache[editor]) {
 			this.renderEditor(editor, destination);
 		} else {
-			dojo.xhrGet({
-				url: "presets/editors/"+_editor+".json",
-				handleAs: "json",
+			$.ajax({
+				url: "presets/editors/" + editor + ".json",
                 // TODO: eliminate lang.hitch here
-				load: lang.hitch(this, this.loadedEditor, editor, destination),
+				success: lang.hitch(this, this.loadedEditor, editor, destination),
 				error: function(err) { console.log("Couldn't load editor"); }
 			});
 		}
@@ -83,16 +125,17 @@ declare("iD.tags.TagEditor", null, {
 		this.renderEditor(editor, destination);
 	},
 
-	renderEditor: function(_editor, destination) {
+	renderEditor: function(editor_name, destination) {
 		// summary:	Render an editor as a form.
-		var editor=this.controller.editorCache[_editor];
+		editor = this.controller.editorCache[editor_name];
 
 		// Add the subhead
-		var element=domConstruct.create('h3');
-		element.appendChild(dojo.doc.createTextNode(_editor));
+		var element = domConstruct.create('h3');
+		element.appendChild(dojo.doc.createTextNode(editor));
 		destination.appendChild(element);
 
 		// Add each form element
+        // this.$content
 		for (var label in editor) {
 			var item = editor[label];
 			var value = this.getTagValue(item.key);
@@ -117,11 +160,6 @@ declare("iD.tags.TagEditor", null, {
 //		var resetbtn = new dijit.form.Button({ type: 'reset', label: 'Reset' }, dojo.doc.createElement('button'));
 //		_destination.appendChild(submitbtn.domNode);
 //		_destination.appendChild(resetbtn.domNode);
-	},
-
-	getTagValue:function(k) {
-		// summary:	Get the value of a tag for the current entity, or empty string if unset.
-		return this.entity.tags[k] ? this.entity.tags[k] : '';
 	}
 });
 

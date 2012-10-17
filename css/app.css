@@ -1,7 +1,14 @@
 /* Additional CSS rules will go here */
 
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 .currentMode { font-weight: bold; }
 
+/* Zoom controls */
 #zoombuttons {
     position:absolute;
     right:20px;
@@ -30,4 +37,14 @@
 #zoombuttons #zoomOut {
     border-left:0;
     border-radius: 0 4px 4px 0;
+}
+
+/* Tag window */
+#tagform input.key {
+    margin-right:10px;
+}
+#tagform input.key,
+#tagform input.value {
+    font: normal 13px/20px 'Helvetica';
+    width:135px;
 }

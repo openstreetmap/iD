@@ -91,16 +91,16 @@ iD.Way.prototype = {
         // isSnap: Boolean	Should the node position be snapped to be exactly on the segment?
         // returns:			The index at which the node was inserted.
         var closestProportion = 1,
-        newIndex = 0,
-        snapped;
+            newIndex = 0,
+            snapped;
 
         for (var i = 0; i < this.nodes.length - 1; i++) {
-            var node1 = this.nodes[i];
-            var node2 = this.nodes[i + 1];
-            var directDist = this._pythagoras(node1, node2);
-            var viaNewDist = this._pythagoras(node1, newNode) +
-                this._pythagoras(node2, newNode);
-            var proportion = Math.abs(viaNewDist/directDist - 1);
+            var node1 = this.nodes[i],
+                node2 = this.nodes[i + 1],
+                directDist = this._pythagoras(node1, node2),
+                viaNewDist = this._pythagoras(node1, newNode) +
+                    this._pythagoras(node2, newNode),
+                proportion = Math.abs(viaNewDist/directDist - 1);
             if (proportion < closestProportion) {
                 newIndex = i+1;
                 closestProportion = proportion;
