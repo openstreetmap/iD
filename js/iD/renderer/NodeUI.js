@@ -1,7 +1,7 @@
 // iD/renderer/NodeUI.js
 // NodeUI classes for iD
 
-define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojox/gfx/_base','iD/renderer/EntityUI'], 
+define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojox/gfx/_base','iD/renderer/EntityUI'],
        function(declare,lang,array,g){
 
 // ----------------------------------------------------------------------
@@ -63,7 +63,7 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 			}
 			hit.setFill([0,1,0,0]).setStroke( { width:2, color:[0,0,0,0] } );
 			this.recordSprite(hit);
-			hit.source=this;
+			hit.source= this;
 			hit.connect("onclick"     , lang.hitch(this,this.entityMouseEvent));
 			hit.connect("onmousedown" , lang.hitch(this,this.entityMouseEvent));
 			hit.connect("onmouseup"   , lang.hitch(this,this.entityMouseEvent));
@@ -71,7 +71,6 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 			hit.connect("onmouseleave", lang.hitch(this,this.entityMouseEvent));
 		}
 	}
-	
 });
 
 

@@ -56,7 +56,7 @@ declare("iD.renderer.EntityUI", null, {
 		this.layer=this.styleList.layerOverride();
 		if (isNaN(this.layer)) {
 			this.layer=0;
-			if (tags['layer']) { this.layer=Number(tags['layer']); }
+			if (tags.layer) { this.layer = +tags.layer; }
 		}
 
 		// Iterate through each subpart, drawing any styles on that layer
@@ -78,7 +78,7 @@ declare("iD.renderer.EntityUI", null, {
 
 	// --------------------
 	// State class handling
-	
+
 	setStateClasses:function(stateClasses) {
 		// summary:		Set all state classes at once, and prompt a redraw if they're different to previously,
 		if (stateClasses && this.stateClasses.join(',')!=stateClasses.join(',')) {
@@ -87,7 +87,7 @@ declare("iD.renderer.EntityUI", null, {
 		}
 		return this;
 	},
-	
+
 	setStateClass:function(sc) {
 		// summary:		Set a single state class, and prompt a redraw if it wasn't set previously.
 		if (this.stateClasses.indexOf(sc)==-1) {

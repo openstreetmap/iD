@@ -75,7 +75,12 @@ declare("iD.renderer.Map", null, {
 		this.wayuis={},
 		this.div=document.getElementById(obj.div);
 		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
-		this.backdrop=this.surface.createRect( { x:0, y:0, width: this.mapwidth, height: this.mapheight }).setFill(new dojo.Color([255,255,245,1]));
+		this.backdrop=this.surface.createRect({
+            x: 0,
+            y: 0,
+            width: this.mapwidth,
+            height: this.mapheight
+        }).setFill(new dojo.Color([255,255,245,1]));
 		this.tilegroup=this.surface.createGroup();
 		this.container=this.surface.createGroup();
 		this.conn=obj.connection;
@@ -341,16 +346,16 @@ declare("iD.renderer.Map", null, {
 
 	_getTile:function(z,x,y) {
 		// summary:		See if this tile is already loaded.
-		if (this.tiles[z]===undefined) { return undefined; }
-		if (this.tiles[z][x]===undefined) { return undefined; }
-		return this.tiles[z][x][y];
+        var k = z + ',' + x + ',' + y;
+		return this.tiles[k];
 	},
 
 	_assignTile:function(z,x,y,t) {
 		// summary:		Store a reference to the tile so we know it's loaded.
-		if (this.tiles[z]===undefined) { this.tiles[z]=[]; }
-		if (this.tiles[z][x]===undefined) { this.tiles[z][x]=[]; }
-		this.tiles[z][x][y]=t;
+        var k = z + ',' + x + ',' + y;
+        if (!this.tiles[k]) {
+            this.tiles[z + ',' + x + ',' + y] = t;
+        }
 	},
 
 	_tileURL:function(z,x,y) {
@@ -359,8 +364,8 @@ declare("iD.renderer.Map", null, {
 		for (var zoom=z; zoom>0; zoom--) {
 			var byte=0;
 			var mask=1<<(zoom-1);
-			if ((x & mask)!=0) byte++;
-			if ((y & mask)!=0) byte+=2;
+			if ((x & mask) !== 0) byte++;
+			if ((y & mask) !== 0) byte += 2;
 			u=u+byte.toString();
 		}
 		return this.tilebaseURL.replace('$z',z).replace('$x',x).replace('$y',y).replace('$quadkey',u);
@@ -369,7 +374,7 @@ declare("iD.renderer.Map", null, {
 	_blankTiles:function() {
 		// summary:		Unload all tiles and remove from the display.
 		this.tilegroup.clear();
-		this.tiles=[];
+		this.tiles = {};
 	},
 
 	// -------------------------------------------
@@ -426,12 +431,12 @@ declare("iD.renderer.Map", null, {
 	},
 
 	_mouseEvent:function(e) {
-		// summary: Catch mouse events on the surface but not the tiles - in other words,
-		// 	on drawn items that don't have their own hitzones, like the fill of a shape.
-		if (e.type=='mousedown') { this.startDrag(e); }
-		// ** FIXME: we may want to reinstate this at some point...
-		// this.controller.entityMouseEvent(e,null);
-	},
+        // summary: Catch mouse events on the surface but not the tiles - in other words,
+        // on drawn items that don't have their own hitzones, like the fill of a shape.
+        if (e.type=='mousedown') { this.startDrag(e); }
+        // ** FIXME: we may want to reinstate this at some point...
+        // this.controller.entityMouseEvent(e,null);
+    },
 
 	updateCoordsFromViewportPosition:function(e) {
 		// summary:		Update centre and bbox from the current viewport origin.
@@ -439,10 +444,10 @@ declare("iD.renderer.Map", null, {
 	},
 
 	updateCoordsFromLatLon:function(lat,lon) {
-		// summary:		Update centre and bbox to a specified lat/lon.
-		this._updateCoords(-(this.lon2coord(lon)-this.mapwidth/2),
-		                   -(this.lat2coord(lat)-this.mapheight/2));
-	},
+        // summary:		Update centre and bbox to a specified lat/lon.
+        this._updateCoords(-(this.lon2coord(lon)-this.mapwidth/2),
+                           -(this.lat2coord(lat)-this.mapheight/2));
+    },
 
 	_updateCoords:function(x,y) {
 		// summary:		Set centre and bbox.

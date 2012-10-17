@@ -15,28 +15,28 @@ declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
 	constructor:function() {
 		// summary:		In 'Edit object' mode but nothing selected.
 	},
-	
+
 	enterState:function() {
 		this.controller.stepper.hide();
 	},
-	
+
 	processMouseEvent:function(event,entityUI) {
-		this.inherited(arguments);
 		if (!entityUI) { return this; }
-		var entity=entityUI.entity;
+		var entity = entityUI.entity;
 		if (event.type=='click') {
+            this.inherited(arguments);
 			switch (entity.entityType) {
 				case 'node':
 					var ways=entity.parentWays();
-					if (ways.length==0) { return new iD.controller.edit.SelectedPOINode(entity); }
+					if (!ways.length) { return new iD.controller.edit.SelectedPOINode(entity); }
                     else { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
+                    break;
 				case 'way':
 					return new iD.controller.edit.SelectedWay(entityUI.entity, event);
 			}
 		}
 		return this;
 	}
-	
 });
 
 // ----------------------------------------------------------------------

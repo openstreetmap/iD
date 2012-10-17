@@ -6,7 +6,6 @@
 	Based heavily on:
 	MapCSS demonstration stylesheet
 	Richard Fairhurst, October 2009
-	
 */
 
 /* A set of fairly standard rules.
@@ -20,13 +19,13 @@ way[highway=primary],way[highway=primary_link],
 way[highway=secondary],way[highway=secondary_link],
 way[highway=tertiary],way[highway=tertiary_link],
 way[highway=unclassified],
-way[highway=residential]                             { text: name; text-color: black; font-size: 6; text-position: line;}
+way[highway=residential]                            { text: name; text-color: black; font-size: 6; text-position: line;}
 way[highway=motorway],way[highway=motorway_link]    { z-index: 9; color: #809BC0; width: 7; casing-color: black; casing-width: 1; }
 way[highway=trunk],way[highway=trunk_link]          { z-index: 9; color: #7FC97F; width: 7; casing-color: black; casing-width: 1; }
-way[highway=primary],way[highway=primary_link]      { z-index: 8; color: #E46D71; width: 7; casing-color: black; casing-width: 1; }
+way[highway=primary],way[highway=primary_link]      { z-index: 8; color: #E46D71; width: 9; casing-color: black; casing-width: 1; }
 way[highway=secondary],way[highway=secondary_link]  { z-index: 7; color: #FDBF6F; width: 7; casing-width: 1; }
 way[highway=tertiary],way[highway=unclassified]     { z-index: 6; color: #FEFECB; width: 5; casing-width: 1; }
-way[highway=residential]                            { z-index: 5; color: #E8E8E8; width: 5; casing-color: gray; casing-width: 1; }
+way[highway=residential]                            { z-index: 5; color: #E8E8E8; width: 6; casing-color: gray; casing-width: 1; }
 way[highway=service]                                { color: white; width: 3; casing-width: 1; }
 
 /* Pedestrian precincts need to be treated carefully. Only closed-loops with an explicit
