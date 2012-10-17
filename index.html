@@ -132,6 +132,26 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
         map.zoomOut();
     });
 
+    $('#map').dblclick(function() {
+        map.zoomIn();
+    });
+
+    var scroll = 0;
+    $('#map').bind('mousewheel', function(e) {
+        e.preventDefault();
+
+        scroll += e.originalEvent.wheelDelta;
+        if (scroll > 300) {
+            map.zoomIn();
+            scroll = 0;
+        }
+        if (scroll < -300) {
+            map.zoomOut();
+            scroll = 0;
+        }
+    });
+
+
 });
 	</script>
 
