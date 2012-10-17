@@ -1,4 +1,17 @@
-/* Additional CSS rules will go here */
+body {
+    font:normal 13px/20px Helvetica, Arial, sans-serif;
+    background:#e4e4e4;
+}
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+p {
+    font-size: x-small;
+}
+a:visited, a {
+    color: black;
+}
 
 * {
     -moz-box-sizing: border-box;
@@ -6,7 +19,14 @@
     box-sizing: border-box;
 }
 
-.currentMode { font-weight: bold; }
+text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.currentMode {
+    font-weight: bold;
+}
 
 /* Zoom controls */
 #zoombuttons {
@@ -16,6 +36,7 @@
 }
 
 #zoombuttons button {
+    cursor:pointer;
     width:30px;
     height:30px;
     text-align:center;
