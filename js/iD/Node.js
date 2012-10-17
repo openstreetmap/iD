@@ -52,12 +52,12 @@ iD.Node.prototype = {
         this.connection.refreshEntity(this);
     },
 
-    doSetLonLatp: function(lon,latproj,performAction) {
+    doSetLonLatp: function(lon, latproj, performAction) {
         // summary:		Change the position of a node, using an undo stack.
         performAction(new iD.actions.MoveNodeAction(this,
             this.latp2lat(latproj),
             lon,
-            lang.hitch(this,this._setLatLonImmediate)));
+            _.bind(this._setLatLonImmediate, this)));
     },
 
     _setLatLonImmediate: function(lat,lon) {
