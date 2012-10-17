@@ -1,50 +1,64 @@
 // iD/tags/PresetList.js
 // List of presets for a given type (e.g. nodes, ways)
 
-define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/xhr'], function(declare,lang,xhr){
+define(['dojo/_base/declare'], function(declare) {
 
 declare("iD.tags.PresetList", null, {
 
 	entityType: null,
 	presets: null,
 
-	constructor:function(_type,_url) {
+	constructor:function(type, url) {
 		// summary:		List of presets for a given type (e.g. nodes, ways)
-		this.entityType=_type;
+		this.entityType = type;
 
-		dojo.xhrGet({
-			url: _url,
-			handleAs: "json",
-			load: lang.hitch(this, this.loaded),
-			error: function(err) { console.log("Couldn't load presets"); }
+        console.log(url);
+		$.ajax({
+			url: url,
+			success: _.bind(this.loaded, this),
+			error: function(err) { console.log("Couldn't load presets for " + type); }
 		});
 	},
-	
-	loaded:function(_obj) {
-		this.presets=_obj;
-		console.log("Loaded presets for "+this.entityType);
+
+	loaded:function(obj) {
+		this.presets = obj;
+		console.log("Loaded presets for " + this.entityType);
 	},
-	
-	assembleEditorsForEntity:function(_entity) {
-		if (_entity.entityType!=this.entityType) return false;
-		
-		var presetList={};
-		var editorList=[];
+
+    // This entity has all of the same tags as props, with all of the same
+    // values. It may have additional tags that are not in props.
+    matchesTags: function(entity, props) {
+        for (var k in props) {
+			if (!entity.tags[k] || entity.tags[k] !== props[k]) return false;
+		}
+		return true;
+    },
+
+	assembleEditorsForEntity:function(entity) {
+		if (entity.entityType != this.entityType) return false;
+
+        console.log(this.presets);
+		var presetList = {};
+		var editorList = [];
 		for (var group in this.presets) {
 			for (var preset in this.presets[group]) {
-				var props=this.presets[group][preset];
-				if (_entity.matchesTags(props.tags)) {
-					presetList[preset]=props;
-					for (var i in props.editors) {
-						var editor=props.editors[i];
-						if (editorList.indexOf(editor)==-1) { editorList.push(editor); }
+				var props = this.presets[group][preset];
+				if (this.matchesTags(entity, props.tags)) {
+					presetList[preset] = props;
+					for (var i in props.edtors) {
+						var editor = props.editors[i];
+						if (editorList.indexOf(editor) === -1) {
+                            editorList.push(editor);
+                        }
 					}
 				}
 			}
 		}
-		return { presets:presetList, editors: editorList };
+		return {
+            presets: presetList,
+            editors: editorList
+        };
 	}
-
 });
 
 // ----------------------------------------------------------------------
