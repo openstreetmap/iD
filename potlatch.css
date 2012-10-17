@@ -20,7 +20,7 @@ way[highway=primary],way[highway=primary_link],
 way[highway=secondary],way[highway=secondary_link],
 way[highway=tertiary],way[highway=tertiary_link],
 way[highway=unclassified],
-way[highway=residential]                             { text: name; text-color: black; font-size: 7; text-position: line;}
+way[highway=residential]                             { text: name; text-color: black; font-size: 6; text-position: line;}
 way[highway=motorway],way[highway=motorway_link]    { z-index: 9; color: #809BC0; width: 7; casing-color: black; casing-width: 1; }
 way[highway=trunk],way[highway=trunk_link]          { z-index: 9; color: #7FC97F; width: 7; casing-color: black; casing-width: 1; }
 way[highway=primary],way[highway=primary_link]      { z-index: 8; color: #E46D71; width: 7; casing-color: black; casing-width: 1; }
@@ -40,12 +40,21 @@ way[highway=bridleway] { z-index:9; color: #996644; width: 2; dashes: 4, 2, 2, 2
 way[highway=track]     { color: #996644; width: 2; dashes: 4, 2; }
 way[highway=path]      { color: lightgreen; width: 2; dashes: 2, 2; }
 
-way[waterway=river], way[waterway=canal] { color: blue; width: 2; text:name; text-color:blue; font-size:9; text-position: offset; text-offset: 7;}
+way[waterway=river], way[waterway=canal] {
+    casing-width: 1;
+    casing-color: #6eafd4;
+    color: #10539a;
+    width: 3;
+    text:name;
+    text-color:blue;
+    font-size:7;
+    text-position: offset;
+    text-offset: -5;
+}
 
 way[barrier] {color: #000000; width: 1}
 
 /* Fills can be solid colour or bitmap images */
-
 
 way[natural] :area                          { color: #ADD6A5; width: 1; fill-color: #ADD6A5; fill-opacity: 0.2; }
 way[landuse] :area                          { color: #444444; width: 2; fill-color: #444444; fill-opacity: 0.3; }
@@ -96,7 +105,7 @@ node[amenity=school] { icon-image: icons/school.png; icon-width: 16; }
 node[amenity=taxi] { icon-image: icons/taxi.png; icon-width: 16; }
 node[amenity=telephone] { icon-image: icons/telephone.png; icon-width: 16; }
 way node[barrier=gate], way node[highway=gate] { icon-image: icons/gate.png; icon-width: 7; }
-	
+
 /* We can stack styles at different z-index (depth) */
 
 way[railway=rail]
@@ -110,7 +119,7 @@ way[railway=subway]
 way[bridge=yes]
     { z-index: 4; color: white; width: eval('_width+3'); }
     { z-index: 3; color: black; width: eval('_width+6'); }
-    
+
 /* Tunnel */
 way[tunnel=yes]
     { z-index: 4; color: white; width: eval('_width+2'); }
@@ -138,7 +147,7 @@ node !:drawn :poi { z-index: 2; icon-image: circle; icon-width: 4; color: green;
 
 node :hoverway { z-index: 9; icon-image: square; icon-width: 7; color: blue; layer: 5; }
 node::highlight :selected { z-index: 1; icon-image: square; icon-width: eval('_width+10'); color: yellow; }
-	
+
 /* Descendant selectors provide an easy way to style relations: this example means "any way
    which is part of a relation whose type=route". */
 

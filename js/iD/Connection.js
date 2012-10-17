@@ -1,37 +1,28 @@
-define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/array",'dojo/_base/declare',
-        "iD/Entity","iD/Node","iD/Way","iD/Relation","iD/actions/CreateEntityAction"],
-       function(xhr,lang,DomParser,array,declare,Entity){
+// define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/array",'dojo/_base/declare',
+//         "iD/Entity","iD/Node","iD/Way","iD/Relation","iD/actions/CreateEntityAction"],
+//        function(xhr,lang,DomParser,array,declare,Entity){
 
 // ----------------------------------------------------------------------
 // Connection base class
 
-declare("iD.Connection", null, {
-	nodes: {},			// hash of node objects
-	ways: {},			// hash of way objects
-	relations: {},		// hash of relation objects
-	pois: null,			// list of nodes which are POIs
-	maps: [],			// list of Map objects listening to this
-	callback: null,		// callback once .osm is parsed
-	modified: false,	// data has been changed
+if (typeof iD === 'undefined') iD = {};
+iD.Connection = function(apiURL) {
+	// summary:		The data store, including methods to fetch data from (and, eventually, save data to)
+	// an OSM API server.
+    this.nextNode = -1;		// next negative ids
+    this.nextWay = -1;		//  |
+    this.nextRelation = -1;	//  |
+	this.nodes={};
+	this.ways={};
+	this.relations={};
+	this.pois=new Hashtable();
+	this.maps=[];
+	this.modified=false;
+	this.apiBaseURL=apiURL;
+    this.callback = null;
+};
 
-	nextNode: -1,		// next negative ids
-	nextWay: -1,		//  |
-	nextRelation: -1,	//  |
-
-	apiBaseURL: '',		// root API address
-
-	constructor:function(apiURL) {
-		// summary:		The data store, including methods to fetch data from (and, eventually, save data to)
-		// an OSM API server.
-		this.nodes={};
-		this.ways={};
-		this.relations={};
-		this.pois=new Hashtable();
-		this.maps=[];
-		this.modified=false;
-		this.apiBaseURL=apiURL;
-	},
-
+iD.Connection.prototype = {
 	_assign:function(obj) {
 		// summary:		Save an entity to the data store.
 		switch (obj.entityType) {
@@ -45,10 +36,12 @@ declare("iD.Connection", null, {
 		// summary:		Return a node by id.
 		return this.nodes[id];		// iD.Node
 	},
+
 	getWay:function(id) {
 		// summary:		Return a way by id.
 		return this.ways[id];		// iD.Way
 	},
+
 	getRelation:function(id) {
 		// summary:		Return a relation by id.
 		return this.relations[id];	// iD.Relation
@@ -75,12 +68,14 @@ declare("iD.Connection", null, {
 		perform(new iD.actions.CreateEntityAction(node, lang.hitch(this,this._assign) ));
 		return node;	// iD.Node
 	},
+
 	doCreateWay:function(tags, nodes, perform) {
 		// summary:		Create a new way and save it in the data store, using an undo stack.
 		var way = new iD.Way(this, this.nextWay--, nodes.concat(), tags, true);
 		perform(new iD.actions.CreateEntityAction(way, lang.hitch(this,this._assign) ));
 		return way;
 	},
+
 	doCreateRelation:function(tags, members, perform) {
 		// summary:		Create a new relation and save it in the data store, using an undo stack.
 		var relation = new iD.Relation(this, this.nextRelation--, members.concat(), tags, true);
@@ -88,23 +83,27 @@ declare("iD.Connection", null, {
 		return relation;
 	},
 
-	getObjectsByBbox:function(left,right,top,bottom) {
-		// summary:			Find all drawable entities that are within a given bounding box.
-		// returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
-		// 					Each one is an array of entities.
-		var o={ poisInside: [], poisOutside: [],
-		        waysInside: [], waysOutside: [] };
-		for (var id in this.ways) {
-			var way=this.ways[id];
-			if (way.within(left,right,top,bottom)) { o.waysInside.push(way); }
-			                                  else { o.waysOutside.push(way); }
-		}
-		this.pois.each(function(node,v) {
-			if (node.within(left,right,top,bottom)) { o.poisInside.push(node); }
-			                                   else { o.poisOutside.push(node); }
-		});
-		return o;
-	},
+    getObjectsByBbox:function(left,right,top,bottom) {
+        // summary:			Find all drawable entities that are within a given bounding box.
+        // returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
+        // Each one is an array of entities.
+        var o = {
+            poisInside: [],
+            poisOutside: [],
+            waysInside: [],
+            waysOutside: []
+        };
+        for (var id in this.ways) {
+            var way = this.ways[id];
+            if (way.within(left,right,top,bottom)) { o.waysInside.push(way); }
+            else { o.waysOutside.push(way); }
+        }
+        this.pois.each(function(node,v) {
+            if (node.within(left,right,top,bottom)) { o.poisInside.push(node); }
+            else { o.poisOutside.push(node); }
+        });
+        return o;
+    },
 
 	// ---------------
 	// Redraw handling
@@ -130,7 +129,6 @@ declare("iD.Connection", null, {
 
 	// ------------
 	// POI handling
-
 	updatePOIs:function(nodelist) {
 		// summary:		Update the list of POIs (nodes not in ways) from a supplied array of nodes.
 		for (var i in nodelist) {
@@ -141,17 +139,17 @@ declare("iD.Connection", null, {
 			}
 		}
 	},
-	
+
 	getPOIs:function() {
 		// summary:		Return a list of all the POIs in this Connection.
 		return this.pois.keys();	// Array
 	},
-	
+
 	registerPOI:function(node) {
 		// summary:		Register a node as a POI (not in a way).
 		this.pois.put(node,true);
 	},
-	
+
 	unregisterPOI:function(node) {
 		// summary:		Mark a node as no longer being a POI (it's now in a way).
 		this.pois.remove(node);
@@ -160,25 +158,32 @@ declare("iD.Connection", null, {
 	// ----------
 	// OSM parser
 
-	loadFromAPI:function(left,right,top,bottom) {
-		// summary:		Request data within the bbox from an external OSM server. Currently hardcoded
-		// 				to use Overpass API (which has the relevant CORS headers).
-		var url="http://www.overpass-api.de/api/xapi?map?bbox="+left+","+bottom+","+right+","+top;
-		xhr.get({ url: url,
-		          headers: { "X-Requested-With": null },
-		          load: lang.hitch(this, "_processOSM") });
-	},
+    loadFromAPI:function(left,right,top,bottom) {
+        // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
+        // 	    to use Overpass API (which has the relevant CORS headers).
+        var url="http://www.overpass-api.de/api/xapi?map?bbox="+left+","+bottom+","+right+","+top;
+        $.ajax({
+            url: url,
+            context: this,
+            headers: { "X-Requested-With": null },
+            success: this._processOSM
+        });
+    },
 
 	loadFromURL:function(url) {
 		// summary:		Load all data from a given URL.
-		xhr.get({ url: url, load: lang.hitch(this, "_processOSM") });
+		$.ajax({
+            url: url,
+            context: this,
+            success: this._processOSM
+        });
 	},
 
-	_processOSM:function(result) {
-		var jsdom = DomParser.parse(result).childNodes[1];
+	_processOSM:function(dom) {
+		// var jsdom = $.parseXML(result).childNodes[1];
 		var nodelist = [];
-		for (var i in jsdom.childNodes) {
-			var obj=jsdom.childNodes[i];
+		for (var i in dom.childNodes[0].childNodes) {
+			var obj=dom.childNodes[0].childNodes[i];
 			switch(obj.nodeName) {
 
 				case "node":
@@ -252,8 +257,4 @@ declare("iD.Connection", null, {
                 }).value();
 		}
 	}
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};

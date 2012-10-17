@@ -16,12 +16,12 @@ declare("iD.styleparser.RuleSet", null, {
 		// summary:		An entire stylesheet in parsed form.
 		this.choosers=[];
 	},
-	
+
 	registerCallback:function(callback) {
 		// summary:		Set a callback function to be called when the CSS is loaded and parsed.
 		this.callback=callback;
 	},
-	
+
 	getStyles:function(entity, tags, zoom) {
 		// summary:		Find the styles for a given entity.
 		var sl=new iD.styleparser.StyleList();
@@ -35,13 +35,13 @@ declare("iD.styleparser.RuleSet", null, {
 		// summary:		Load a MapCSS file from a URL, then throw it at the parser when it's loaded.
 		xhr.get({ url: url, load: lang.hitch(this, "parseCSS") });
 	},
-	
+
 	parseCSS:function(css) {
 		// summary:		Parse a CSS document into a set of StyleChoosers.
 		var previous=0;								// what was the previous CSS word?
 		var sc=new iD.styleparser.StyleChooser();	// currently being assembled
 		this.choosers=[];
-		css=css.replace(/[\r\n]/g,"");				// strip linebreaks because JavaScript doesn't have the /s modifier
+		css = css.replace(/[\r\n]/g,"");				// strip linebreaks because JavaScript doesn't have the /s modifier
 
 		var o={};
 		while (css.length>0) {
@@ -139,12 +139,12 @@ declare("iD.styleparser.RuleSet", null, {
 		var o={};
 		var k, v;
 
-		// Create styles
-		var ss=new iD.styleparser.ShapeStyle() ;
-		var ps=new iD.styleparser.PointStyle() ; 
-		var ts=new iD.styleparser.TextStyle()  ; 
-		var hs=new iD.styleparser.ShieldStyle(); 
-		var xs=new iD.styleparser.InstructionStyle(); 
+		// Create styles
+		var ss = new iD.styleparser.ShapeStyle();
+		var ps = new iD.styleparser.PointStyle();
+		var ts = new iD.styleparser.TextStyle();
+		var hs = new iD.styleparser.ShieldStyle();
+		var xs = new iD.styleparser.InstructionStyle();
 
 		var r=s.split(';');
 		var isEval={};
@@ -163,39 +163,39 @@ declare("iD.styleparser.RuleSet", null, {
 		if (t['z_index']) { sub=Number(t['z_index']); delete t['z_index']; }
 		ss.sublayer=ps.sublayer=ts.sublayer=hs.sublayer=sub;
 		xs.sublayer=10;
-		
+
 		// Find "interactive" property - it's true unless explicitly set false
 		var inter=true;
 		if (t['interactive']) { inter=t['interactive'].match(this.FALSE) ? false : true; delete t['interactive']; }
 		ss.interactive=ps.interactive=ts.interactive=hs.interactive=xs.interactive=inter;
 
-		// Munge special values
-		// (we should stop doing this and do it in the style instead)
-		if (t['font_weight']    ) { t['font_bold'  ]    = t['font_weight'    ].match(this.BOLD  )    ? true : false; delete t['font_weight']; }
-		if (t['font_style']     ) { t['font_italic']    = t['font_style'     ].match(this.ITALIC)    ? true : false; delete t['font_style']; }
-		if (t['text_decoration']) { t['font_underline'] = t['text_decoration'].match(this.UNDERLINE) ? true : false; delete t['text_decoration']; }
-		if (t['text_position']  ) { t['text_center']    = t['text_position'  ].match(this.CENTER)    ? true : false; delete t['text_position']; }
-		if (t['text_transform']) {
-			if (t['text_transform'].match(this.CAPS)) { t['font_caps']=true; } else { t['font_caps']=false; }
-			delete t['text_transform'];
-		}
+        // Munge special values
+        // (we should stop doing this and do it in the style instead)
+        if (t['font_weight']    ) { t['font_bold'  ]    = t['font_weight'    ].match(this.BOLD  )    ? true : false; delete t['font_weight']; }
+        if (t['font_style']     ) { t['font_italic']    = t['font_style'     ].match(this.ITALIC)    ? true : false; delete t['font_style']; }
+        if (t['text_decoration']) { t['font_underline'] = t['text_decoration'].match(this.UNDERLINE) ? true : false; delete t['text_decoration']; }
+        if (t['text_position']  ) { t['text_center']    = t['text_position'  ].match(this.CENTER)    ? true : false; delete t['text_position']; }
+        if (t['text_transform']) {
+            if (t['text_transform'].match(this.CAPS)) { t['font_caps']=true; } else { t['font_caps']=false; }
+            delete t['text_transform'];
+        }
 
-		// Assign each property to the appropriate style
-		for (a in t) {
-			// Parse properties
-			// ** also do units, e.g. px/pt/m
-			if (a.match(this.COLOR)) { v = this.parseCSSColor(t[a]); }
-			                    else { v = t[a]; }
-			
-			// Set in styles
-			if      (ss.has(a)) { ss.setPropertyFromString(a,v,isEval[a]); }
-			else if (ps.has(a)) { ps.setPropertyFromString(a,v,isEval[a]); }
-			else if (ts.has(a)) { ts.setPropertyFromString(a,v,isEval[a]); }
-			else if (hs.has(a)) { hs.setPropertyFromString(a,v,isEval[a]); }
-			else { console.log(a+" not found"); }
-		}
+        // Assign each property to the appropriate style
+        for (a in t) {
+            // Parse properties
+            // ** also do units, e.g. px/pt/m
+            if (a.match(this.COLOR)) { v = this.parseCSSColor(t[a]); }
+            else { v = t[a]; }
 
-		// Add each style to list
+            // Set in styles
+            if      (ss.has(a)) { ss.setPropertyFromString(a,v,isEval[a]); }
+            else if (ps.has(a)) { ps.setPropertyFromString(a,v,isEval[a]); }
+            else if (ts.has(a)) { ts.setPropertyFromString(a,v,isEval[a]); }
+            else if (hs.has(a)) { hs.setPropertyFromString(a,v,isEval[a]); }
+            else { console.log(a+" not found"); }
+        }
+
+        // Add each style to list
 		if (ss.edited) { styles.push(ss); }
 		if (ps.edited) { styles.push(ps); }
 		if (ts.edited) { styles.push(ts); }
@@ -203,7 +203,7 @@ declare("iD.styleparser.RuleSet", null, {
 		if (xs.edited) { styles.push(xs); }
 		return styles;
 	},
-		
+
 	parseZoom:function(s) {
 		var o={};
 		if      ((o=this.ZOOM_MINMAX.exec(s))) { return [o[1],o[2]]; }
@@ -250,7 +250,7 @@ declare("iD.styleparser.RuleSet", null, {
 		}
 		return 0;
 	},
-	
+
 	// Regular expression tests and other constants
 
 	WHITESPACE	:/^\s+/,
@@ -287,16 +287,16 @@ declare("iD.styleparser.RuleSet", null, {
 	SET_TAG_EVAL	:/^\s*set\s+(\S+)\s*=\s*eval\s*\(\s*'(.+?)'\s*\)\s*$/i,
 	SET_TAG			:/^\s*set\s+(\S+)\s*=\s*(.+?)\s*$/i,
 	SET_TAG_TRUE	:/^\s*set\s+(\S+)\s*$/i,
-	EXIT			:/^\s*exit\s*$/i,
+    EXIT			:/^\s*exit\s*$/i,
 
-	oZOOM: 			2,
-	oGROUP: 		3,
-	oCONDITION: 	4,
-	oOBJECT: 		5,
-	oDECLARATION: 	6,
-	oSUBPART: 		7,
+    oZOOM: 			2,
+    oGROUP: 		3,
+    oCONDITION: 	4,
+    oOBJECT: 		5,
+    oDECLARATION: 	6,
+    oSUBPART: 		7,
 
-	DASH: 	/\-/g,
+    DASH: 	/\-/g,
 	COLOR: 	/color$/,
 	BOLD: 	/^bold$/i,
 	ITALIC: /^italic|oblique$/i,

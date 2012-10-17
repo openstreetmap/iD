@@ -211,13 +211,13 @@ declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 		return {
 			decoration: this.font_underline ? 'underline' : 'none',
 			align: 'middle',
-			text: _text,
+			text: _text
 		};
 	},
 	fillStyler:function() {
 		// not implemented yet
 		return this.dojoColor(0,1);
-	},
+	}
 	
 	// getTextFormat, getHaloFilter, writeNameLabel
 });

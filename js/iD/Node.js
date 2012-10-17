@@ -34,8 +34,8 @@ iD.Node.prototype = {
     },
 
 	refresh: function() {
-		var ways=this.parentWays();
-		var conn=this.connection;
+		var ways= this.parentWays();
+		var conn= this.connection;
 		array.forEach(ways,function(way) { conn.refreshEntity(way); });
 		this.connection.refreshEntity(this);
 	},

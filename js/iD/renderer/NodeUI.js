@@ -24,8 +24,8 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 		this.removeSprites();
 
 		// Tags, position and styleList
-		var x= this.map.lon2coord(this.entity.lon);
-		var y= this.map.latp2coord(this.entity.latp);
+		var x = Math.floor(this.map.lon2coord(this.entity.lon));
+		var y = Math.floor(this.map.latp2coord(this.entity.latp));
 		var tags = this.getEnhancedTags();
 		this.refreshStyleList(tags);
 

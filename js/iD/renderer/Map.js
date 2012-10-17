@@ -145,9 +145,9 @@ declare("iD.renderer.Map", null, {
 
 	sublayer:function(layer,groupType,sublayer) {
 		// summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
-		// 				if necessary. Note that sublayers are only implemented for stroke and fill.
+		// 	if necessary. Note that sublayers are only implemented for stroke and fill.
 		// groupType: String	'casing','text','hit','stroke', or 'fill'
-		var collection=this.layers[layer][groupType];
+		var collection=this.layers[layer][groupType], sub;
 		switch (groupType) {
 			case 'casing':
 			case 'text':
@@ -157,7 +157,7 @@ declare("iD.renderer.Map", null, {
 		// Find correct sublayer, inserting if necessary
 		var insertAt=collection.children.length;
 		for (var i=0; i<collection.children.length; i++) {
-			var sub=collection.children[i];
+			sub=collection.children[i];
 			if (sub.sublayer==sublayer) { return sub; }
 			else if (sub.sublayer>sublayer) {
 				sub=collection.createGroup();
@@ -168,7 +168,7 @@ declare("iD.renderer.Map", null, {
 		}
 		sub=collection.createGroup().moveToFront();
 		sub.sublayer=sublayer;
-		return sub;		// dojox.gfx.Group
+		return sub; // dojox.gfx.Group
 	},
 
 	createUI:function(entity,stateClasses) {
@@ -193,10 +193,11 @@ declare("iD.renderer.Map", null, {
 	},
 
 	getUI:function(entity) {
-		// summary:		Return the UI for an entity, if it exists.
-		switch (entity.entityType) {
-			case 'node': 	return this.nodeuis[entity.id];	// iD.renderer.EntityUI
-			case 'way': 	return this.wayuis[entity.id];	// iD.renderer.EntityUI
+		// summary: Return the UI for an entity, if it exists.
+		if (entity.nodeType === 'node') {
+            return this.nodeuis[entity.id];	// iD.renderer.EntityUI
+        } else if (entity.nodeType === 'way') {
+			return this.wayuis[entity.id];	// iD.renderer.EntityUI
 		}
 		return null;
 	},
@@ -204,16 +205,16 @@ declare("iD.renderer.Map", null, {
 	refreshUI:function(entity) {
 		// summary: 	Redraw the UI for an entity.
 		switch (entity.entityType) {
-			case 'node': 	if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); } break;
-			case 'way': 	if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); } break;
+			case 'node': if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); } break;
+			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); } break;
 		}
 	},
 
 	deleteUI:function(entity) {
 		// summary:		Delete the UI for an entity.
 		switch (entity.entityType) {
-			case 'node': 	if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].removeSprites(); delete this.nodeuis[entity.id]; } break;
-			case 'way': 	if (this.wayuis[entity.id] ) { this.wayuis[entity.id].removeSprites();  delete this.wayuis[entity.id];  } break;
+			case 'node':if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].removeSprites(); delete this.nodeuis[entity.id]; } break;
+			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].removeSprites();  delete this.wayuis[entity.id];  } break;
 		}
 	},
 
@@ -402,12 +403,12 @@ declare("iD.renderer.Map", null, {
 	processMove:function(e) {
 		// summary:		Drag the map to a new origin.
 		// e: MouseEvent	The mouse-move event that triggered it.
-		var x=e.clientX;
-		var y=e.clientY;
+		var x = e.clientX;
+		var y = e.clientY;
 		if (this.dragging) {
 			if (this.dragx) {
-				this.containerx+=(x-this.dragx);
-				this.containery+=(y-this.dragy);
+				this.containerx += (x - this.dragx);
+				this.containery += (y - this.dragy);
 				this.updateOrigin();
 				this.dragged=true;
 			}
@@ -425,8 +426,8 @@ declare("iD.renderer.Map", null, {
 	},
 
 	_mouseEvent:function(e) {
-		// summary: 	Catch mouse events on the surface but not the tiles - in other words, 
-		// 				on drawn items that don't have their own hitzones, like the fill of a shape.
+		// summary: Catch mouse events on the surface but not the tiles - in other words,
+		// 	on drawn items that don't have their own hitzones, like the fill of a shape.
 		if (e.type=='mousedown') { this.startDrag(e); }
 		// ** FIXME: we may want to reinstate this at some point...
 		// this.controller.entityMouseEvent(e,null);
@@ -487,8 +488,7 @@ declare("iD.renderer.Map", null, {
 	// Turn event co-ordinates into map co-ordinates
 
 	mouseX:function(e) { return e.clientX - domGeom.getMarginBox(this.div).l - this.containerx; },
-	mouseY:function(e) { return e.clientY - domGeom.getMarginBox(this.div).t - this.containery; },
-
+	mouseY:function(e) { return e.clientY - domGeom.getMarginBox(this.div).t - this.containery; }
 });
 
 // ----------------------------------------------------------------------
