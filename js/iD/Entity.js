@@ -1,9 +1,14 @@
 if (typeof iD === 'undefined') iD = {};
 
+iD._id = 0;
+
 iD.Entity = function() {
     this.tags = {};
-    this.parents = new Hashtable();
+    this.parents = {};
+    // The ID locally
+    this._id = iD._id++;
 	this.connection =  null;
+    // The ID in OSM terms
 	this.id = NaN;
 	this.loaded = false;
 	this.entityType =  '';
@@ -15,7 +20,7 @@ iD.Entity = function() {
 iD.Entity.prototype = {
 	isType:function(type) {
 		// summary:		Is this entity of the specified type ('node','way','relation')?
-		return this.entityType==type;	// Boolean
+		return this.entityType === type;
 	},
 
 	toString:function() {
@@ -32,7 +37,7 @@ iD.Entity.prototype = {
 	// -------------------------------------
 	// Bounding box check (to be overridden)
 
-	within:function(left,right,top,bottom) {
+	within:function(left, right, top, bottom) {
 		// summary:		Is the entity within the specified bbox?
 		return !this.deleted;	// Boolean
 	},
@@ -62,43 +67,39 @@ iD.Entity.prototype = {
 
 	// ---------------
 	// Parent-handling
-	addParent:function(entity) {
+	addParent: function(entity) {
 		// summary:		Record a parent (a relation or way which contains this entity).
-		this.parents.put(entity,true);
+		this.parents[entity._id] = entity;
 	},
-	removeParent:function(entity) {
+	removeParent: function(entity) {
 		// summary:		Remove a parent (e.g. when node removed from a way).
-		this.parents.remove(_entity);
+        delete this.parents[entity._id];
 	},
-	hasParent:function(entity) {
+	hasParent: function(entity) {
 		// summary:		Does this entity have the specified parent (e.g. is it in a certain relation)?
-		return this.parents.containsKey(entity);	// Boolean
+		return !!this.parents[entity._id];
 	},
-	parentObjects:function() {
+	parentObjects: function() {
 		// summary:		List of all parents of this entity.
-		return this.parents.keys();	// Boolean
+		return _.values(this.parents);
 	},
-	hasParentWays:function() {
+	hasParentWays: function() {
 		// summary:		Does this entity have any parents which are ways?
-		var p=this.parentObjects();
-		for (var i in p) {
-			if (p[i].entityType=='way') { return true; }
-		}
-		return false;	// Boolean
+        return !!_.find(this.parentObjects(), function(p) {
+            return p.entityType === 'way';
+        });
 	},
-	parentWays:function() {
+	parentWays: function() {
 		// summary:		Return an array of all ways that this entity is a member of.
 		return this._parentObjectsOfClass('way');	// Array
 	},
-	parentRelations:function() {
+	parentRelations: function() {
 		// summary:		Return an array of all relations that this entity is a member of.
 		return this._parentObjectsOfClass('relation');	// Array
 	},
-	_parentObjectsOfClass:function(_class) {
-		var p=this.parentObjects(), c=[];
-		for (var i in p) {
-			if (p[i].entityType==_class) { c.push(p[i]); }
-		}
-		return c;
+	_parentObjectsOfClass: function(_class) {
+        return _.filter(this.parentObjects(), function(p) {
+            return p.entityType === _class;
+        });
 	}
 };
