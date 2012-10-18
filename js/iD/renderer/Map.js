@@ -224,10 +224,10 @@ declare("iD.renderer.Map", null, {
 
     download:function() {
         // summary:		Ask the connection to download data for the current viewport.
-        this.conn.loadFromAPI(this.extent);
+        this.conn.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
     },
 
-	updateUIs:function(redraw,remove) {
+	updateUIs: function(redraw, remove) {
 		// summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
 		// redraw: Boolean	Should we redraw any UIs that are already present?
 		// remove: Boolean	Should we delete any UIs that are no longer in the bbox?
@@ -243,7 +243,7 @@ declare("iD.renderer.Map", null, {
                 else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
             });
 
-		if (remove) {
+		if (remove !== false) {
 			array.forEach(o.waysOutside, function(way) {
 				if (m.wayuis[way.id]) {	//  && !m.wayuis[way.id].purgable
 					if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
@@ -257,7 +257,7 @@ declare("iD.renderer.Map", null, {
 			else if (redraw) { m.nodeuis[poi.id].redraw(); }
 		});
 
-		if (remove) {
+		if (remove !== false) {
 			array.forEach(o.poisOutside, function(poi) {
 				if (m.nodeuis[poi.id]) {	//  && !m.nodeuis[poi.id].purgable
 					if (redraw) { m.nodeuis[poi.id].redraw(); }
