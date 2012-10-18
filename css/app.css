@@ -80,7 +80,7 @@ text {
     cursor:pointer;
     background:#fff;
     color:#555;
-    font:bold 19px/35px 'Helvetica Neue';
+    font:bold 19px/30px 'Helvetica Neue';
     border:0;
     border-right:1px solid #222;
     border-bottom:1px solid #222;
@@ -128,6 +128,6 @@ text {
     width:135px;
 }
 
-polyline.way-fill {
+polyline {
     cursor: pointer;
 }

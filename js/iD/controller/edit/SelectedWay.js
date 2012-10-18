@@ -32,7 +32,7 @@ declare("iD.controller.edit.SelectedWay", [iD.controller.edit.EditBaseState], {
 		this.closeEditorTooltip();
 	},
 	
-	processMouseEvent:function(event,entityUI) {
+	processMouseEvent:function(event, entityUI) {
 		var entity = entityUI ? entityUI.entity : null;
 		var entityType =  entity ? entity.entityType : null;
 

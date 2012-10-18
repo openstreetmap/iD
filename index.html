@@ -23,7 +23,7 @@
   <script type="text/javascript" src="js/iD/Connection.js"></script>
   <script>
 
-require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented",
+require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented",
          "dojox/layout/FloatingPane",
          "iD/actions/UndoStack",
          "iD/actions/CreatePOIAction",
@@ -34,7 +34,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
          "iD/controller/shape/NoSelection",
          "iD/renderer/Map","iD/styleparser/RuleSet",
          "iD/ui/DragAndDrop","iD/ui/StepPane",
-         "dojo/domReady!"], function(lang,domGeom,domClass,on,dom,Evented){
+         "dojo/domReady!"], function(domGeom,domClass,on,dom,Evented){
 
 	var ruleset = new iD.styleparser.RuleSet();
 	var conn = new iD.Connection("http://www.overpass-api.de/api/xapi?");
@@ -67,7 +67,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 		new iD.ui.DragAndDrop("map", map, "dndgrid");
 
 		// Initialise help pane
-		controller.setStepper(new iD.ui.StepPane("helpPane", "helpSteps"));
+		controller.setStepper(new iD.ui.StepPane());
 
 		// Set initial controllerState
 		controller.setState(new iD.controller.edit.NoSelection());
@@ -82,17 +82,8 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 
 	// ----------------------------------------------------
 	// Mode button handlers
-    /*
-	finishClicked=function() {
-		controller.stepper.hide();
-	};
-
-	cancelClicked=function() {
-		controller.stepper.hide();
-	};
-    */
     $('#add-place').click(function() {
-		controller.setState(new iD.controller.shape.NoSelection());
+		controller.setState(new iD.controller.shape.NoSelection('node'));
     });
 
     $('#add-road').click(function() {
@@ -132,8 +123,6 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
             scroll = 0;
         }
     });
-
-
 });
 </script>
 
@@ -143,7 +132,6 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
         + Road</button><button id="add-area">
         + Area</button>
     <div id='addPOI'>
-      <p>Drag points onto the map</p>
       <table id='dndgrid'>
       </table>
     </div>

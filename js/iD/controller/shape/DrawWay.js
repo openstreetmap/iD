@@ -14,8 +14,8 @@
 */
 
 
-define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojox/gfx/shape','iD/controller/ControllerState'], 
-       function(declare,lang,array,shape){
+define(['dojo/_base/declare', 'dojo/_base/lang', 'dojox/gfx/shape', 'iD/controller/ControllerState'], 
+       function(declare, lang, shape){
 
 // ----------------------------------------------------------------------
 // DrawWay class
@@ -44,25 +44,28 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
             .redraw();
     },
 
-	processMouseEvent:function(event,entityUI) {
-		var entity=entityUI ? entityUI.entity : null;
-		var entityType=entity ? entity.entityType : null;
-		var map = this.controller.map;
+	processMouseEvent: function(event, entityUI) {
+		var entity = entityUI ? entityUI.entity : null;
+        var entityType = entity ? entity.entityType : null;
+        var map = this.controller.map;
         var ways, undo, action;
 
-		if (event.type=='mouseover' && entityType=='way' && entityUI!=this.wayUI) {
-			// Mouse over way, show hover highlight
-			entityUI.setStateClass('shownodeshover');
-			entityUI.redraw();
-			this.wayUI.redraw();
-			this.updateElastic(event);
-			return this;
+        if (event.type=='mouseover' && entityType=='way' &&
+            entityUI !== this.wayUI) {
 
-		} else if (event.type=='mouseout' && entityType=='way' && entityUI!=this.wayUI) {
-			// Mouse left way, remove hover highlight
-			// Find what object we're moving into
-			var into=shape.byId((event.hasOwnProperty('toElement') ? event.toElement : event.relatedTarget).__gfxObject__);
-			// If it's a nodeUI that belongs to a hovering way, don't deselect
+            // Mouse over way, show hover highlight
+            entityUI.setStateClass('shownodeshover')
+                .redraw();
+            this.wayUI.redraw();
+            this.updateElastic(event);
+            return this;
+
+        } else if (event.type=='mouseout' && entityType=='way' &&
+                   entityUI !== this.wayUI) {
+            // Mouse left way, remove hover highlight
+            // Find what object we're moving into
+            var into = shape.byId((event.hasOwnProperty('toElement') ? event.toElement : event.relatedTarget).__gfxObject__);
+            // If it's a nodeUI that belongs to a hovering way, don't deselect
 			if (into &&
                 into.hasOwnProperty('source') &&
                 into.source.hasStateClass('hoverway') &&
