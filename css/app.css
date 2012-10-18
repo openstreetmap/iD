@@ -3,6 +3,7 @@ body {
     background:#e4e4e4;
     margin:0;
     text-rendering: optimizeLegibility;
+    color:#444;
 }
 :focus {
     outline-color: transparent;
@@ -130,4 +131,34 @@ text {
 
 polyline {
     cursor: pointer;
+}
+
+.edit-pane {
+    position:absolute;
+    display:none;
+    width:300px;
+    background:#fff;
+    box-shadow:1px 1px 3px #111;
+}
+
+.edit-pane h2 {
+    margin:0;
+    padding:5px;
+    background:#eee;
+}
+
+.tabs {
+    border-bottom:1px solid #ddd;
+    background:#eee;
+}
+
+.tabs a {
+    color:#888;
+    padding:5px;
+    text-decoration:none;
+}
+
+.tabs a.active {
+    color:#222;
+    background:#fff;
 }

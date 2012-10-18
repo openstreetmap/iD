@@ -145,7 +145,7 @@ node::junction :junction :selectedway, node::junction :junction :hoverway { z-in
 node !:drawn :poi { z-index: 2; icon-image: circle; icon-width: 6; color: #98D1FD; casing-color: #135485; casing-width: 2; }
 
 node :hoverway { z-index: 9; icon-image: square; icon-width: 7; color: blue; layer: 5; }
-node::highlight :selected { z-index: 1; icon-image: circle; icon-width: eval('_width+5'); color: #FFF68D; }
+node::highlight :selected { z-index: 1; icon-image: circle; icon-width: eval('_width+2'); color: #FFF68D; }
 
 /* Descendant selectors provide an easy way to style relations: this example means "any way
    which is part of a relation whose type=route". */
