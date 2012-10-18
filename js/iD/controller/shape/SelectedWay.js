@@ -54,7 +54,7 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 					var ways = entity.entity.parentWays();
 					if (entity.entity.hasParent(this.way)) { 
 						// start a branching way from an existing point
-						way = this.getConnection().doCreateWay({}, [entity], lang.hitch(this,this.undoAdder) );
+						way = this.getConnection().doCreateWay({}, [entity], lang.hitch(this, this.undoAdder));
 						this.controller.map.createUI(way);
 						return new iD.controller.shape.DrawWay(way);
 					} else if (ways.length===0) {
@@ -66,7 +66,7 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
                     }
                     break;
 				case 'way':
-					if (entity==this.way) {
+					if (entity === this.way) {
 						// start a branching way from a new point
 						var map = this.controller.map;
 						var undo = new iD.actions.CompositeUndoableAction();

@@ -51,7 +51,7 @@ text {
 }
 
 #map.state-drawing {
-    cursor: pointer;
+    cursor: crosshair;
 }
 
 .currentMode {
