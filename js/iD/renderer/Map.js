@@ -206,16 +206,16 @@ declare("iD.renderer.Map", null, {
 
 	refreshUI:function(entity) {
 		// summary:	Redraw the UI for an entity.
-		switch (entity.entityType) {
-			case 'node': if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); } break;
-			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); } break;
+		if (entity.entityType === 'node') {
+			if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); }
+        } else if (entity.entityType === 'way') {
+			if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); }
 		}
 	},
 
 	deleteUI:function(entity) {
 		// summary:		Delete the UI for an entity.
         var uis = { node: 'nodeuis', way: 'wayuis' }[entity.entityType];
-        console.log('removing');
 		if (uis && this[uis][entity.id]) {
 			this[uis][entity.id].removeSprites();
             delete this[uis][entity.id];
