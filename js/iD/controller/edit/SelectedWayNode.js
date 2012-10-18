@@ -30,7 +30,7 @@ declare("iD.controller.edit.SelectedWayNode", [iD.controller.edit.EditBaseState]
     },
 
     processMouseEvent:function(event,entityUI) {
-        if (event.type !== 'click') return;
+        if (event.type !== 'click') return this;
         var entity = entityUI ? entityUI.entity : null;
         var entityType = entity ? entity.entityType : null;
 

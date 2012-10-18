@@ -155,5 +155,3 @@ relation[type=route][route=bicycle][network=ncn] way { z-index: 1; width: 12; co
 relation[type=route][route=bicycle][network=rcn] way { z-index: 1; width: 12; color: cyan; opacity: 0.3; }
 relation[type=route][route=bicycle][network=lcn] way { z-index: 1; width: 12; color: blue; opacity: 0.3; }
 relation[type=route][route=foot] way { z-index: 1; width: 10; color: #80ff80; opacity: 0.6; }
-
-

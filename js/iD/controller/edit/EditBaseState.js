@@ -26,6 +26,14 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
             left: x,
             top: y
         }).show();
+        $('.edit-pane a.tab').click(function(e) {
+            $('.edit-pane a.tab').removeClass('active');
+            var hud = $(e.currentTarget).addClass('active')
+                .attr('href').split('#').pop();
+            $('.edit-pane .hud').hide();
+            $('.edit-pane .' + hud).show();
+        });
+        $('.edit-pane a.tab:first').click();
         $('.edit-pane a[href=#close]').click(this.closeEditorTooltip);
     },
 
