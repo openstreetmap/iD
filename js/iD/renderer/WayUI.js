@@ -131,6 +131,8 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 			if (node.entity.parentWays().length>1) { sc.push('junction'); }
 			this.map.createUI(node,sc);
 		}
+
+        return this;
 	},
 
 	entityMouseEvent:function(event) {

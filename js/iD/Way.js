@@ -12,6 +12,7 @@ iD.Way = function(conn, id, nodes, tags, loaded) {
     this.loaded = (loaded === undefined) ? true : loaded;
     this.modified = this.id < 0;
     this.nodes = nodes || [];
+    this.extent = {};
     _.each(nodes, _.bind(function(node) {
         node.entity.addParent(this);
     }, this));
@@ -49,11 +50,11 @@ iD.Way.prototype = {
     // Bounding-box handling
     within:function(left,right,top,bottom) {
         // TODO invert and just return
-        if (!this.edgel ||
-            (this.edgel<left   && this.edger<left  ) ||
-            (this.edgel>right  && this.edger>right ) ||
-            (this.edgeb<bottom && this.edget<bottom) ||
-            (this.edgeb>top    && this.edgeb>top   )) {
+        if (!this.extent.west ||
+            (this.extent.west < left   && this.extent.east < left  ) ||
+            (this.extent.west > right  && this.extent.east > right ) ||
+            (this.extent.south < bottom && this.extent.north < bottom) ||
+            (this.extent.south > top    && this.extent.south > top)) {
             return false;
         } else {
             return true;
@@ -61,18 +62,22 @@ iD.Way.prototype = {
     },
 
     _calculateBbox:function() {
-        this.edgel = 999999; this.edger = -999999;
-        this.edgeb = 999999; this.edget = -999999;
+        this.extent = {
+            west: Infinity,
+            east: -Infinity,
+            south: Infinity,
+            north: -Infinity
+        };
         _.each(this.nodes, _.bind(function(n) { this.expandBbox(n); }, this));
     },
 
     expandBbox:function(node) {
         // summary:	Enlarge the way's bounding box to make sure it
         // includes the co-ordinates of a supplied node.
-        this.edgel=Math.min(this.edgel,node.lon);
-        this.edger=Math.max(this.edger,node.lon);
-        this.edgeb=Math.min(this.edgeb,node.lat);
-        this.edget=Math.max(this.edget,node.lat);
+        this.extent.west = Math.min(this.extent.west, node.lon);
+        this.extent.east = Math.max(this.extent.east, node.lon);
+        this.extent.south = Math.min(this.extent.south, node.lat);
+        this.extent.north = Math.max(this.extent.north, node.lat);
     },
 
     // --------------

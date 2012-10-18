@@ -5,7 +5,7 @@ define(['dojo/_base/declare','dojo/_base/array','dojo/_base/event','dojo/_base/l
         'dojo/dom-geometry',
         'dojox/gfx','dojox/gfx/matrix',
         'iD/Connection','iD/Entity','iD/renderer/EntityUI','iD/renderer/WayUI','iD/renderer/NodeUI'], 
-       function(declare,array,Event,lang,domGeom,Gfx,Matrix){
+       function(declare, array, Event, lang, domGeom, Gfx, Matrix){
 
 // ----------------------------------------------------------------------
 // Connection base class
@@ -47,10 +47,7 @@ declare("iD.renderer.Map", null, {
 	containery: 0,			//  |
 	centrelat: NaN,			// lat/long and bounding box of map
 	centrelon: NaN,			//  |
-	edgel: NaN,				//  |
-	edger: NaN,				//  |
-	edget: NaN,				//  |
-	edgeb: NaN,				//  |
+	extent: {},				//  |
 	mapheight: NaN,			// size of map object in pixels
 	mapwidth: NaN,			//  |
 
@@ -109,22 +106,22 @@ declare("iD.renderer.Map", null, {
 		this.elastic = this.container.createGroup();
 
 		// Make draggable
-		this.backdrop.connect("onmousedown", lang.hitch(this,"startDrag"));
-		this.tilegroup.connect("onmousedown", lang.hitch(this,"startDrag"));
-		this.surface.connect("onclick", lang.hitch(this,"clickSurface"));
-		this.surface.connect("onmousemove", lang.hitch(this,"processMove"));
-		this.surface.connect("onmousedown", lang.hitch(this,"_mouseEvent"));
-		this.surface.connect("onmouseup", lang.hitch(this,"_mouseEvent"));
+		this.backdrop.connect("onmousedown", _.bind(this.startDrag, this));
+		this.tilegroup.connect("onmousedown", _.bind(this.startDrag, this));
+		this.surface.connect("onclick", _.bind(this.clickSurface, this));
+		this.surface.connect("onmousemove", _.bind(this.processMove, this));
+		this.surface.connect("onmousedown", _.bind(this._mouseEvent, this));
+		this.surface.connect("onmouseup", _.bind(this._mouseEvent, this));
 	},
 
 	setController:function(controller) {
 		// summary:		Set the controller that will handle events on the map (e.g. mouse clicks).
-		this.controller=controller;
+		this.controller = controller;
 	},
 
-	_moveToPosition:function(group,position) {
+	_moveToPosition:function(group, position) {
 		// summary:		Supplementary method for dojox.gfx.
-		// 				This should ideally be core Dojo stuff: see http://bugs.dojotoolkit.org/ticket/15296
+		// This should ideally be core Dojo stuff: see http://bugs.dojotoolkit.org/ticket/15296
 		var parent=group.getParent();
 		if (!parent) { return; }
 		this._moveChildToPosition(parent,group,position);
@@ -135,9 +132,9 @@ declare("iD.renderer.Map", null, {
 		}
 	},
 
-	_moveChildToPosition: function(parent,child,position) {
-		for(var i = 0; i < parent.children.length; ++i){
-			if(parent.children[i] == child){
+	_moveChildToPosition: function(parent, child, position) {
+		for (var i = 0; i < parent.children.length; ++i){
+			if (parent.children[i] === child){
 				parent.children.splice(i, 1);
 				parent.children.splice(position, 0, child);
 				break;
@@ -150,7 +147,7 @@ declare("iD.renderer.Map", null, {
 
 	sublayer:function(layer,groupType,sublayer) {
 		// summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
-		// 	if necessary. Note that sublayers are only implemented for stroke and fill.
+		// if necessary. Note that sublayers are only implemented for stroke and fill.
 		// groupType: String	'casing','text','hit','stroke', or 'fill'
 		var collection=this.layers[layer][groupType], sub;
 		switch (groupType) {
@@ -165,7 +162,7 @@ declare("iD.renderer.Map", null, {
 			sub=collection.children[i];
 			if (sub.sublayer==sublayer) { return sub; }
 			else if (sub.sublayer>sublayer) {
-				sub=collection.createGroup();
+				sub = collection.createGroup();
 				this._moveToPosition(sub,i);
 				sub.sublayer=sublayer;
 				return sub;
@@ -208,7 +205,7 @@ declare("iD.renderer.Map", null, {
 	},
 
 	refreshUI:function(entity) {
-		// summary: 	Redraw the UI for an entity.
+		// summary:	Redraw the UI for an entity.
 		switch (entity.entityType) {
 			case 'node': if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); } break;
 			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); } break;
@@ -218,14 +215,14 @@ declare("iD.renderer.Map", null, {
 	deleteUI:function(entity) {
 		// summary:		Delete the UI for an entity.
 		switch (entity.entityType) {
-			case 'node':if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].removeSprites(); delete this.nodeuis[entity.id]; } break;
+			case 'node': if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].removeSprites(); delete this.nodeuis[entity.id]; } break;
 			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].removeSprites();  delete this.wayuis[entity.id];  } break;
 		}
 	},
 
 	download:function() {
 		// summary:		Ask the connection to download data for the current viewport.
-		this.conn.loadFromAPI(this.edgel, this.edger, this.edget, this.edgeb);
+		this.conn.loadFromAPI(this.extent);
 	},
 
 	updateUIs:function(redraw,remove) {
@@ -235,7 +232,7 @@ declare("iD.renderer.Map", null, {
 
 		var m = this;
 		var way, poi;
-		var o = this.conn.getObjectsByBbox(this.edgel,this.edger,this.edget,this.edgeb);
+		var o = this.conn.getObjectsByBbox(this.extent);
 
         _(o.waysInside).chain()
             .filter(function(w) { return w.loaded; })
@@ -270,18 +267,18 @@ declare("iD.renderer.Map", null, {
 	// -------------
 	// Zoom handling
 
-	zoomIn:function() {
+	zoomIn: function() {
 		// summary:		Zoom in by one level (unless maximum reached).
-		if (this.scale!=this.MAXSCALE) { this.changeScale(this.scale+1); }
+		if (this.scale !== this.MAXSCALE) { this.changeScale(this.scale+1); }
 	},
 
-	zoomOut:function() {
+	zoomOut: function() {
 		// summary:		Zoom out by one level (unless minimum reached).
-		if (this.scale!=this.MINSCALE) { this.changeScale(this.scale-1); }
+		if (this.scale !== this.MINSCALE) { this.changeScale(this.scale-1); }
 		this.download();
 	},
 
-	changeScale:function(scale) {
+	changeScale: function(scale) {
 		// summary:		Redraw the map at a new zoom level.
 		this.scale=scale;
 		this._setScaleFactor();
@@ -290,7 +287,7 @@ declare("iD.renderer.Map", null, {
 		this.updateUIs(true,true);
 	},
 
-	_setScaleFactor:function() {
+	_setScaleFactor: function() {
 		// summary:		Calculate the scaling factor for this zoom level.
 		this.scalefactor=this.MASTERSCALE/Math.pow(2,13-this.scale);
 	},
@@ -298,42 +295,45 @@ declare("iD.renderer.Map", null, {
 	// ----------------------
 	// Elastic band redrawing
 
-	clearElastic:function() {
+	clearElastic: function() {
 		// summary:		Remove the elastic band used to draw new ways.
 		this.elastic.clear();
 	},
 
-	drawElastic:function(x1,y1,x2,y2) {
+	drawElastic: function(x1,y1,x2,y2) {
 		// summary:		Draw the elastic band (for new ways) between two points.
 		this.elastic.clear();
 		// **** Next line is SVG-specific
 		this.elastic.rawNode.setAttribute("pointer-events","none");
 		this.elastic.createPolyline( [{ x:x1, y:y1 }, { x:x2, y:y2 }] ).setStroke( {
-			color: [0,0,0,1],
+			color: [0, 0, 0, 1],
 			style: 'Solid',
-			width: 1 });
+			width: 1
+        });
 	},
 
 	// -------------
 	// Tile handling
 	// ** FIXME: see docs
-
-	loadTiles:function() {
+	loadTiles: function() {
 		// summary:		Load all tiles for the current viewport. This is a bare-bones function 
 		//				at present: it needs configurable URLs (not just Bing), attribution/logo
 		//				support, and to be 'nudgable' (i.e. adjust the offset).
-		var tile_l=this.lon2tile(this.edgel);
-		var tile_r=this.lon2tile(this.edger);
-		var tile_t=this.lat2tile(this.edget);
-		var tile_b=this.lat2tile(this.edgeb);
+		var tile_l=this.lon2tile(this.extent.west);
+		var tile_r=this.lon2tile(this.extent.east);
+		var tile_t=this.lat2tile(this.extent.north);
+		var tile_b=this.lat2tile(this.extent.south);
+
 		for (var x=tile_l; x<=tile_r; x++) {
 			for (var y=tile_t; y<=tile_b; y++) {
-				if (!this._getTile(this.scale,x,y)) { this._fetchTile(this.scale,x,y); }
+				if (!this._getTile(this.scale,x,y)) {
+                    this._fetchTile(this.scale,x,y);
+                }
 			}
 		}
 	},
 
-	_fetchTile:function(z,x,y) {
+	_fetchTile: function(z,x,y) {
 		// summary:		Load a tile image at the given tile co-ordinates.
 		var t=this.tilegroup.createImage({
 			x: Math.floor(this.lon2coord(this.tile2lon(x))),
@@ -344,13 +344,13 @@ declare("iD.renderer.Map", null, {
 		this._assignTile(z,x,y,t);
 	},
 
-	_getTile:function(z,x,y) {
+	_getTile: function(z,x,y) {
 		// summary:		See if this tile is already loaded.
         var k = z + ',' + x + ',' + y;
 		return this.tiles[k];
 	},
 
-	_assignTile:function(z,x,y,t) {
+	_assignTile: function(z,x,y,t) {
 		// summary:		Store a reference to the tile so we know it's loaded.
         var k = z + ',' + x + ',' + y;
         if (!this.tiles[k]) {
@@ -358,7 +358,7 @@ declare("iD.renderer.Map", null, {
         }
 	},
 
-	_tileURL:function(z,x,y) {
+	_tileURL: function(z,x,y) {
 		// summary:		Calculate the URL for a tile at the given co-ordinates.
 		var u='';
 		for (var zoom=z; zoom>0; zoom--) {
@@ -371,7 +371,7 @@ declare("iD.renderer.Map", null, {
 		return this.tilebaseURL.replace('$z',z).replace('$x',x).replace('$y',y).replace('$quadkey',u);
 	},
 
-	_blankTiles:function() {
+	_blankTiles: function() {
 		// summary:		Unload all tiles and remove from the display.
 		this.tilegroup.clear();
 		this.tiles = {};
@@ -380,7 +380,7 @@ declare("iD.renderer.Map", null, {
 	// -------------------------------------------
 	// Co-ordinate management, dragging and redraw
 
-	startDrag:function(e) {
+	startDrag: function(e) {
 		// summary:		Start dragging the map in response to a mouse-down.
 		// e: MouseEvent	The mouse-down event that triggered it.
 		var srcElement = (e.gfxTarget==this.backdrop) ? e.gfxTarget : e.gfxTarget.parent;
@@ -393,7 +393,7 @@ declare("iD.renderer.Map", null, {
 		this.dragconnect=srcElement.connect("onmouseup", lang.hitch(this,"endDrag"));
 	},
 
-	endDrag:function(e) {
+	endDrag: function(e) {
 		// summary:		Stop dragging the map in response to a mouse-up.
 		// e: MouseEvent	The mouse-up event that triggered it.
 		Event.stop(e);
@@ -405,7 +405,7 @@ declare("iD.renderer.Map", null, {
 		this.download();
 	},
 
-	processMove:function(e) {
+	processMove: function(e) {
 		// summary:		Drag the map to a new origin.
 		// e: MouseEvent	The mouse-move event that triggered it.
 		var x = e.clientX;
@@ -424,13 +424,13 @@ declare("iD.renderer.Map", null, {
 		}
 	},
 
-	updateOrigin:function() {
+	updateOrigin: function() {
 		// summary:		Tell Dojo to update the viewport origin.
 		this.container.setTransform([Matrix.translate(this.containerx,this.containery)]);
 		this.tilegroup.setTransform([Matrix.translate(this.containerx,this.containery)]);
 	},
 
-	_mouseEvent:function(e) {
+	_mouseEvent: function(e) {
         // summary: Catch mouse events on the surface but not the tiles - in other words,
         // on drawn items that don't have their own hitzones, like the fill of a shape.
         if (e.type=='mousedown') { this.startDrag(e); }
@@ -449,15 +449,19 @@ declare("iD.renderer.Map", null, {
                            -(this.lat2coord(lat)-this.mapheight/2));
     },
 
-	_updateCoords:function(x,y) {
+	_updateCoords:function(x, y) {
 		// summary:		Set centre and bbox.
 		this.containerx=x; this.containery=y; this.updateOrigin();
 		this.centrelon=this.coord2lon(-x + this.mapwidth/2);
 		this.centrelat=this.coord2lat(-y + this.mapheight/2);
-		this.edget=this.coord2lat(-y);
-		this.edgeb=this.coord2lat(-y + this.mapheight);
-		this.edgel=this.coord2lon(-x);
-		this.edger=this.coord2lon(-x + this.mapwidth);
+        
+        this.extent = {
+            north: this.coord2lat(-y),
+            south: this.coord2lat(-y + this.mapheight),
+            west: this.coord2lon(-x),
+            east: this.coord2lon(-x + this.mapwidth)
+        };
+
 		this.loadTiles();
 	},
 

@@ -28,20 +28,21 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 
 	constructor: function(way) {
 		this.way = way;
-	},
-	enterState: function() {
-		this.wayUI = this.controller.map.getUI(this.way);
-		this.wayUI.setStateClass('selected');
-		this.wayUI.setStateClass('shownodes');
-		this.wayUI.redraw();
-		this.controller.stepper.highlight('draw');
-	},
-	exitState: function() {
-		this.controller.map.clearElastic();
-		this.wayUI.resetStateClass('selected');
-		this.wayUI.resetStateClass('shownodes');
-		this.wayUI.redraw();
-	},
+    },
+    enterState: function() {
+        this.wayUI = this.controller.map.getUI(this.way);
+        this.wayUI.setStateClass('selected')
+            .setStateClass('shownodes')
+            .redraw();
+        this.controller.stepper.step(1);
+    },
+    exitState: function() {
+        this.controller.map.clearElastic();
+        this.wayUI
+            .resetStateClass('selected')
+            .resetStateClass('shownodes')
+            .redraw();
+    },
 
 	processMouseEvent:function(event,entityUI) {
 		var entity=entityUI ? entityUI.entity : null;
@@ -99,12 +100,12 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 					// Click on node
 					if (entity === this.getDrawingNode()) {
 						// Double-click, so complete drawing
-						this.controller.stepper.highlight('tag');
+						this.controller.stepper.step(2);
 						return new iD.controller.edit.SelectedWay(this.way, null);
 					} else if (entity === this.getStartNode()) {
 						// Start of this way, so complete drawing
 						this.appendNode(entity, this.undoAdder() );
-						this.controller.stepper.highlight('tag');
+						this.controller.stepper.step(2);
 						return new iD.controller.edit.SelectedWay(this.way, null);
 					} else {
 						// Add to way
@@ -147,11 +148,11 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	},
 
 	getDrawingNode:function() {
-		return (this.editEnd ? this.way.nodes[this.way.length()-1] : this.way.nodes[0]);
+		return (this.editEnd ? this.way.nodes[this.way.nodes.length - 1] : this.way.nodes[0]);
 	},
 
 	getStartNode:function() {
-		return (this.editEnd ? this.way.nodes[0] : this.way.nodes[this.way.length()-1]);
+		return (this.editEnd ? this.way.nodes[0] : this.way.nodes[this.way.node.length - 1]);
 	},
 
 	appendNode:function(node, performAction) {
@@ -168,7 +169,6 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 		this.appendNode(node, lang.hitch(undo,undo.push));
 		return node;
 	}
-
 });
 
 // ----------------------------------------------------------------------

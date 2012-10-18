@@ -36,11 +36,7 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 
 	enterState: function() {
         this.controller.map.div.className = 'state-drawing';
-		this.controller.stepper.setSteps({
-			begin: "Click anywhere on the map to start drawing",
-			draw: "Keep clicking to add each point then double-click when you're done",
-			tag: "Set the type of the road or shape"
-		}, ['begin', 'draw', 'tag']).highlight('begin');
+		this.controller.stepper.show().step(0);
 	},
 
 	processMouseEvent:function(event,entityUI) {
@@ -53,9 +49,9 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 				case 'node':
 					// Click to select a node
                     var ways=entity.parentWays();
-                    if (ways.length==0) { return new iD.controller.shape.SelectedPOINode(entity); }
-                    //					               else { return new iD.controller.shape.SelectedWayNode(entity,ways[0]); }
-                    //					               ** FIXME: ^^^ the above should start a new branching way, not select the node
+                    if (!ways.length) { return new iD.controller.shape.SelectedPOINode(entity); }
+                    //  else { return new iD.controller.shape.SelectedWayNode(entity,ways[0]); }
+                    //  ** FIXME: ^^^ the above should start a new branching way, not select the node
                     return this;
                 case 'way':
                     // Click to select a way

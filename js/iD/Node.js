@@ -39,11 +39,11 @@ iD.Node.prototype = {
         return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2);
     },
 
-    within: function(left, right, top, bottom) {
-        return (this.lon >= left) &&
-            (this.lon <= right) &&
-            (this.lat >= bottom) &&
-            (this.lat <= top);
+    within: function(extent) {
+        return (this.lon >= extent.west) &&
+            (this.lon <= extent.east) &&
+            (this.lat >= extent.south) &&
+            (this.lat <= extent.north);
     },
 
     refresh: function() {

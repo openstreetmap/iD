@@ -20,7 +20,7 @@ declare("iD.Controller", [Evented], {
 		this.editorCache = {};
 	},
 
-	setStepper:function(stepper) {
+	setStepper: function(stepper) {
 		// summary:		Set reference for the singleton-like class for the step-by-step instruction panel.
 		this.stepper = stepper;
 	},

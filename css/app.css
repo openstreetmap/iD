@@ -1,6 +1,8 @@
 body {
     font:normal 13px/20px Helvetica, Arial, sans-serif;
     background:#e4e4e4;
+    margin:0;
+    text-rendering: optimizeLegibility;
 }
 :focus {
     outline-color: transparent;
@@ -24,6 +26,30 @@ text {
     -moz-user-select: none;
 }
 
+#map {
+    height: 600px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.help-pane {
+    position:absolute;
+    left:0;
+    width:300px;
+    opacity:0.9;
+    top:40px;
+    background:#FFFBD3;
+}
+
+.help-pane div {
+    padding:10px;
+    font-style:italic;
+}
+
 #map.state-drawing {
     cursor: pointer;
 }
@@ -32,11 +58,39 @@ text {
     font-weight: bold;
 }
 
-/* Zoom controls */
+#modebuttons {
+    width:300px;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
 #zoombuttons {
     position:absolute;
     right:20px;
     top:20px;
+}
+
+#addPOI {
+    display:none;
+}
+
+#modebuttons button {
+    width:100px;
+    cursor:pointer;
+    background:#fff;
+    color:#555;
+    font:bold 19px/35px 'Helvetica Neue';
+    border:0;
+    border-right:1px solid #222;
+    border-bottom:1px solid #222;
+    padding:0 10px;
+    height:40px;
+    margin:0;
+}
+
+#modebuttons button:hover {
+    background:#eee;
 }
 
 #zoombuttons button {

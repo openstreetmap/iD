@@ -143,13 +143,13 @@ iD.Connection.prototype = {
 	// ----------
 	// OSM parser
 
-    loadFromAPI:function(left,right,top,bottom) {
+    loadFromAPI: function(box) {
         // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
         // to use Overpass API (which has the relevant CORS headers).
-        this.loadFromURL("http://www.overpass-api.de/api/xapi?map?bbox=" + [left,bottom,right,top]);
+        this.loadFromURL("http://www.overpass-api.de/api/xapi?map?bbox=" + [box.west, box.south, box.east, box.north]);
     },
 
-	loadFromURL:function(url) {
+	loadFromURL: function(url) {
 		// summary:		Load all data from a given URL.
 		$.ajax({
             url: url,
@@ -160,17 +160,16 @@ iD.Connection.prototype = {
 	},
 
 	_processOSM:function(dom) {
-		// var jsdom = $.parseXML(result).childNodes[1];
 		var nodelist = [];
 		for (var i in dom.childNodes[0].childNodes) {
-			var obj=dom.childNodes[0].childNodes[i];
+			var obj = dom.childNodes[0].childNodes[i];
 			switch(obj.nodeName) {
 
 				case "node":
                     var node = new iD.Node(this,
-                        +getAttribute(obj,'id'),
-                        +getAttribute(obj,'lat'),
-                        +getAttribute(obj,'lon'),
+                        +getAttribute(obj, 'id'),
+                        +getAttribute(obj, 'lat'),
+                        +getAttribute(obj, 'lon'),
                         getTags(obj));
                     this._assign(node);
 					nodelist.push(node);
@@ -179,7 +178,7 @@ iD.Connection.prototype = {
 				case "way":
                     var way = new iD.Way(this,
                         getAttribute(obj,'id'),
-                        getNodes(obj,this),
+                        getNodes(obj, this),
                         getTags(obj));
 					this._assign(way);
 					break;
@@ -187,7 +186,7 @@ iD.Connection.prototype = {
 				case "relation":
                     var relation = new iD.Relation(this,
                         getAttribute(obj,'id'),
-                        getMembers(obj,this),
+                        getMembers(obj, this),
                         getTags(obj));
 					this._assign(relation);
 					break;
@@ -204,7 +203,7 @@ iD.Connection.prototype = {
             };
         }
 
-		function getAttribute(obj,name) {
+		function getAttribute(obj, name) {
             return _.find(obj.attributes, filterNodeName(name)).nodeValue;
 		}
 
