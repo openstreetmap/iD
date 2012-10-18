@@ -40,7 +40,6 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
         // Build presets panel
         iD.Util.presets(entity.entityType, function(presets) {
             $presets.empty();
-            console.log(presets);
             _.each(presets, function(pre, category) {
                 $('<h3></h3>')
                     .text(category)

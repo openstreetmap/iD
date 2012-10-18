@@ -208,6 +208,12 @@ iD.Connection = function(apiURL) {
     connection.loadFromAPI = loadFromAPI;
     connection.loadFromURL = loadFromURL;
     connection.getObjectsByBbox = getObjectsByBbox;
+    connection.doCreateNode = doCreateNode;
+    connection.doCreateWay = doCreateWay;
+    connection.doCreateRelation = doCreateRelation;
+    connection.registerPOI = registerPOI;
+    connection.unregisterPOI = unregisterPOI;
+    connection.getPOIs = getPOIs;
 
     return connection;
 };

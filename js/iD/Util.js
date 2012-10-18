@@ -38,7 +38,6 @@ iD.Util.presets = function(type, callback) {
             if (typeof console !== 'undefined') console.error(arguments);
         },
         success: function(resp) {
-            console.log(resp);
             iD.Util._presets[type] = resp;
             return callback(resp);
         }
