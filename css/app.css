@@ -27,6 +27,14 @@ text {
     -moz-user-select: none;
 }
 
+table {
+    border-collapse: collapse;
+    border-spacing:0;
+}
+table th {
+    text-align:left;
+}
+
 #map {
     height: 600px;
     -webkit-touch-callout: none;
@@ -171,4 +179,15 @@ polyline {
     text-decoration:none;
     font-size:18px;
     color:#DD4848;
+}
+.edit-pane table {
+    width:290px;
+    margin:5px;
+}
+.edit-pane table th,
+.edit-pane table td {
+    padding:2px 2px;
+}
+.edit-pane table td input {
+    width:140px;
 }
