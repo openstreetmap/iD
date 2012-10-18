@@ -20,28 +20,27 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 	way: null,
 	wayUI: null,
 
-	constructor:function(_way) {
+	constructor: function(way) {
 		// summary:		In 'Draw shape' mode, and a way is selected as the starting point of the new way.
-		this.way=_way;
+		this.way = way;
 	},
-	enterState:function() {
-		this.wayUI=this.controller.map.getUI(this.way);
-		this.wayUI.setStateClass('selected');
-		this.wayUI.setStateClass('shownodes');
-		this.wayUI.redraw();
-		this.controller.stepper.setSteps({
-			begin: "Click anywhere on the map to start drawing there",
-			startpoint: "Click the point on the way where you want to start your new way",
-			draw: "Keep clicking to add each point, and press Enter or double-click when you're done",
-			tag: "Set the type of the road or shape"
-		},['begin','startpoint','draw','tag']).highlight('startpoint');
-	},
-	exitState:function() {
-		this.wayUI.resetStateClass('selected');
-		this.wayUI.resetStateClass('shownodes');
-		this.wayUI.redraw();
-	},
-	
+
+    enterState:function() {
+        this.wayUI = this.controller.map.getUI(this.way);
+        this.wayUI.setStateClass('selected')
+            .setStateClass('shownodes')
+            .redraw();
+        this.controller.stepper.message("Click the point on the way where you want to start your new way");
+        return this;
+    },
+
+    exitState:function() {
+        this.wayUI.resetStateClass('selected')
+            .resetStateClass('shownodes')
+            .redraw();
+        return this;
+    },
+
 	processMouseEvent:function(event,entityUI) {
 		var entity=entityUI ? entityUI.entity : null;
 		var entityType=entity ? entity.entityType : null;
@@ -52,8 +51,8 @@ declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
 				case null:
 					return new iD.controller.shape.NoSelection();
 				case 'node':
-					var ways=entity.parentWays();
-					if (entity.hasParent(this.way)) { 
+					var ways = entity.entity.parentWays();
+					if (entity.entity.hasParent(this.way)) { 
 						// start a branching way from an existing point
 						way = this.getConnection().doCreateWay({}, [entity], lang.hitch(this,this.undoAdder) );
 						this.controller.map.createUI(way);

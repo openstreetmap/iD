@@ -17,6 +17,15 @@ declare("iD.ui.StepPane", null, {
 	// ---------------------------
 	// Change the highlighted step
 
+	message: function(x) {
+        this.show();
+        $('<div></div>')
+            .appendTo('#road-help')
+            .attr('class', 'manual')
+            .text(x);
+        return this;
+    },
+
 	step: function(x) {
 		// summary:		Highlight the step with the specified name, and dim all others.
 		this.show();
@@ -30,6 +39,7 @@ declare("iD.ui.StepPane", null, {
 		// summary:		Show the window.
         $('#road-help').show();
         $('#road-help div').hide();
+        $('#road-help .manual').remove();
         return this;
 	},
 	hide: function() {

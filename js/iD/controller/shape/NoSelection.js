@@ -39,16 +39,16 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
 		this.controller.stepper.show().step(0);
 	},
 
-	processMouseEvent:function(event,entityUI) {
-		var entity=entityUI ? entityUI.entity : null;
-		var entityType=entity ? entity.entityType : null;
-		var map=this.controller.map;
+	processMouseEvent:function(event, entityUI) {
+		var entity = entityUI ? entityUI.entity : null;
+		var entityType = entity ? entity.entityType : null;
+		var map = this.controller.map;
 
-		if (event.type=='click') {
+		if (event.type === 'click') {
 			switch (entityType) {
 				case 'node':
 					// Click to select a node
-                    var ways=entity.parentWays();
+                    var ways = entity.parentWays();
                     if (!ways.length) { return new iD.controller.shape.SelectedPOINode(entity); }
                     //  else { return new iD.controller.shape.SelectedWayNode(entity,ways[0]); }
                     //  ** FIXME: ^^^ the above should start a new branching way, not select the node

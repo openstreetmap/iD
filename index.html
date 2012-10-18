@@ -83,13 +83,6 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	// ----------------------------------------------------
 	// Mode button handlers
     /*
-	enterWayMode=function() {
-		controller.setState(new iD.controller.shape.NoSelection());
-	};
-
-	enterEditMode=function() {
-	};
-
 	finishClicked=function() {
 		controller.stepper.hide();
 	};
@@ -99,6 +92,7 @@ require(["dojo/_base/lang","dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/
 	};
     */
     $('#add-place').click(function() {
+		controller.setState(new iD.controller.shape.NoSelection());
     });
 
     $('#add-road').click(function() {
