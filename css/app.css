@@ -151,13 +151,13 @@ polyline {
 
 .edit-pane h2 {
     margin:0;
-    padding:5px;
-    background:#eee;
+    padding:5px 5px 10px 5px;
+    background:#e4e4e4;
 }
 
 .tabs {
     border-bottom:1px solid #ddd;
-    background:#eee;
+    background:#e4e4e4;
 }
 
 .tabs a {
