@@ -28,7 +28,7 @@ define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(decla
 
         exitState: function() {
             this.nodeUI.resetStateClass('selected')
-                .nodeUI.redraw();
+                .redraw();
             this.closeEditorTooltip();
             return this;
         },

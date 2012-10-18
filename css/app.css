@@ -162,3 +162,13 @@ polyline {
     color:#222;
     background:#fff;
 }
+
+.edit-pane a.close {
+    position:absolute;
+    top:0;
+    right:10px;
+    font-weight:bold;
+    text-decoration:none;
+    font-size:18px;
+    color:#DD4848;
+}
