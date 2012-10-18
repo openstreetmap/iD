@@ -32,6 +32,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
                 .attr('href').split('#').pop();
             $('.edit-pane .hud').hide();
             $('.edit-pane .' + hud).show();
+            return e.preventDefault();
         });
         $('.edit-pane a.tab:first').click();
         $('.edit-pane .tags tbody').empty();

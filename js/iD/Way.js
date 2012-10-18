@@ -21,12 +21,12 @@ iD.Way = function(conn, id, nodes, tags, loaded) {
 
 iD.Way.prototype = {
     isClosed: function() {
-        // summary:		Is this a closed way (first and last nodes the same)?
-        return this.nodes[this.nodes.length - 1] === this.nodes[0]; // Boolean
+        // summary:	Is this a closed way (first and last nodes the same)?
+        return this.nodes[this.nodes.length - 1] === this.nodes[0];
     },
 
     isType: function(type) {
-        // summary:		Is this a 'way' (always true), an 'area' (closed) or a 'line' (unclosed)?
+        // summary:	Is this a 'way' (always true), an 'area' (closed) or a 'line' (unclosed)?
         if (type === 'way') return true;
         if (type === 'area') return this.isClosed();
         if (type === 'line') return !(this.isClosed());
@@ -134,7 +134,7 @@ iD.Way.prototype = {
 
     _pythagoras:function(node1, node2) {
         return (Math.sqrt(Math.pow(node1.lon-node2.lon,2) +
-                          Math.pow(node1.latp-node2.latp,2)));
+            Math.pow(node1.latp-node2.latp,2)));
     },
 
     _calculateSnappedPoint:function(node1, node2, newNode) {
