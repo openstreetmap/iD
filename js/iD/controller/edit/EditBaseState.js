@@ -29,7 +29,8 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
         $('.edit-pane a[href=#close]').click(this.closeEditorTooltip);
     },
 
-    closeEditorTooltip: function() {
+    closeEditorTooltip: function(e) {
+        if (e) e.preventDefault();
         // summary:		Close the tooltip.
         $('.edit-pane').hide();
     },

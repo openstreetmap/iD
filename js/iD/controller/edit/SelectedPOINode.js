@@ -34,15 +34,13 @@ define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(decla
         },
 
         processMouseEvent: function(event,entityUI) {
+            if (event.type !== 'click') return this;
             var entity=entityUI ? entityUI.entity : null;
             var entityType=entity ? entity.entityType : null;
-
-            if (event.type=='click') {
-                switch (entityType) {
-                    case null: return new iD.controller.edit.NoSelection();
-                    case 'node': return new iD.controller.edit.SelectedPOINode(entityUI.entity);
-                    case 'way': return new iD.controller.edit.SelectedWay(entityUI.entity, event);
-                }
+            switch (entityType) {
+                case null: return new iD.controller.edit.NoSelection();
+                case 'node': return new iD.controller.edit.SelectedPOINode(entityUI.entity);
+                case 'way': return new iD.controller.edit.SelectedWay(entityUI.entity, event);
             }
             return this;
         }

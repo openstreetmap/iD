@@ -64,8 +64,8 @@ declare("iD.renderer.Map", null, {
 		// obj: Object	An object containing .lat, .lon, .scale, .div (the name of the <div> to be used),
 		//				.connection, .width (px) and .height (px) properties.
 
-		this.mapwidth=obj.width ? obj.width : 800;
-		this.mapheight=obj.height ? obj.height : 400;
+		this.mapwidth = obj.width ? obj.width : 800;
+		this.mapheight = obj.height ? obj.height : 400;
 
 		// Initialise variables
 		this.nodeuis={},
@@ -78,13 +78,13 @@ declare("iD.renderer.Map", null, {
             width: this.mapwidth,
             height: this.mapheight
         }).setFill(new dojo.Color([255,255,245,1]));
-		this.tilegroup=this.surface.createGroup();
-		this.container=this.surface.createGroup();
-		this.conn=obj.connection;
-		this.scale=obj.scale ? obj.scale : 17;
-		this.baselon=obj.lon;
-		this.baselat=obj.lat;
-		this.baselatp=this.lat2latp(obj.lat);
+		this.tilegroup = this.surface.createGroup();
+		this.container = this.surface.createGroup();
+		this.conn = obj.connection;
+		this.scale = obj.scale ? obj.scale : 17;
+		this.baselon = obj.lon;
+		this.baselat = obj.lat;
+		this.baselatp = this.lat2latp(obj.lat);
 		this._setScaleFactor();
 		this.updateCoordsFromViewportPosition();
 
@@ -214,16 +214,18 @@ declare("iD.renderer.Map", null, {
 
 	deleteUI:function(entity) {
 		// summary:		Delete the UI for an entity.
-		switch (entity.entityType) {
-			case 'node': if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].removeSprites(); delete this.nodeuis[entity.id]; } break;
-			case 'way': if (this.wayuis[entity.id] ) { this.wayuis[entity.id].removeSprites();  delete this.wayuis[entity.id];  } break;
+        var uis = { node: 'nodeuis', way: 'wayuis' }[entity.entityType];
+        console.log('removing');
+		if (uis && this[uis][entity.id]) {
+			this[uis][entity.id].removeSprites();
+            delete this[uis][entity.id];
 		}
 	},
 
-	download:function() {
-		// summary:		Ask the connection to download data for the current viewport.
-		this.conn.loadFromAPI(this.extent);
-	},
+    download:function() {
+        // summary:		Ask the connection to download data for the current viewport.
+        this.conn.loadFromAPI(this.extent);
+    },
 
 	updateUIs:function(redraw,remove) {
 		// summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
@@ -265,32 +267,32 @@ declare("iD.renderer.Map", null, {
 	},
 
 	// -------------
-	// Zoom handling
+    // Zoom handling
 
-	zoomIn: function() {
-		// summary:		Zoom in by one level (unless maximum reached).
-		if (this.scale !== this.MAXSCALE) { this.changeScale(this.scale+1); }
-	},
+    zoomIn: function() {
+        // summary:		Zoom in by one level (unless maximum reached).
+        if (this.scale !== this.MAXSCALE) { this.changeScale(this.scale+1); }
+    },
 
-	zoomOut: function() {
-		// summary:		Zoom out by one level (unless minimum reached).
-		if (this.scale !== this.MINSCALE) { this.changeScale(this.scale-1); }
-		this.download();
-	},
+    zoomOut: function() {
+        // summary:		Zoom out by one level (unless minimum reached).
+        if (this.scale !== this.MINSCALE) { this.changeScale(this.scale-1); }
+        this.download();
+    },
 
-	changeScale: function(scale) {
-		// summary:		Redraw the map at a new zoom level.
-		this.scale=scale;
-		this._setScaleFactor();
-		this._blankTiles();
-		this.updateCoordsFromLatLon(this.centrelat,this.centrelon);	// recentre
-		this.updateUIs(true,true);
-	},
+    changeScale: function(scale) {
+        // summary:		Redraw the map at a new zoom level.
+        this.scale=scale;
+        this._setScaleFactor();
+        this._blankTiles();
+        this.updateCoordsFromLatLon(this.centrelat,this.centrelon);	// recentre
+        this.updateUIs(true,true);
+    },
 
-	_setScaleFactor: function() {
-		// summary:		Calculate the scaling factor for this zoom level.
-		this.scalefactor=this.MASTERSCALE/Math.pow(2,13-this.scale);
-	},
+    _setScaleFactor: function() {
+        // summary:		Calculate the scaling factor for this zoom level.
+        this.scalefactor=this.MASTERSCALE/Math.pow(2,13-this.scale);
+    },
 
 	// ----------------------
 	// Elastic band redrawing
