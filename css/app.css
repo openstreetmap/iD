@@ -214,3 +214,47 @@ polyline {
     color: #888;
     font: normal 11px/15px Helvetica, Arial, sans-serif;
 }
+
+#progress {
+    position:absolute;
+    left:50%;
+    top:300px;
+    color:#fff;
+    z-index:999;
+    width:100px;
+    margin-left:-50px;
+    text-align:center;
+    font-size:100px;
+    display:none;
+    font-weight:bold;
+}
+@-webkit-keyframes spinnerAnim {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spinnerAnim {
+  0% { -moz-transform: rotate(0deg); }
+  100% { -moz-transform: rotate(360deg); }
+}
+@-ms-keyframes spinnerAnim {
+  0% { -ms-transform: rotate(0deg); }
+  100% { -ms-transform: rotate(360deg); }
+}
+@-o-keyframes spinnerAnim {
+  0% { -o-transform: rotate(0deg); }
+  100% { -o-transform: rotate(360deg); }
+}
+.spinner {
+  -webkit-animation-fill-mode: both;
+  -webkit-animation: spinnerAnim 1.5s infinite linear;
+  -webkit-transform-origin: 50% 50%;
+  -moz-animation-fill-mode: both;
+  -moz-animation: spinnerAnim 1.5s infinite linear;
+  -moz-transform-origin: 50% 50%;
+  -ms-animation-fill-mode: both;
+  -ms-animation: spinnerAnim 1.5s infinite linear;
+  -ms-transform-origin: 50% 50%;
+  -o-animation-fill-mode: both;
+  -o-animation: spinnerAnim 1.5s infinite linear;
+  -o-transform-origin: 50% 50%;
+}

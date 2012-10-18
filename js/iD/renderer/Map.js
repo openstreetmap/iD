@@ -224,6 +224,7 @@ declare("iD.renderer.Map", null, {
 
     download:function() {
         // summary:		Ask the connection to download data for the current viewport.
+        $('#progress').show().addClass('spinner');
         this.conn.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
     },
 
@@ -231,6 +232,7 @@ declare("iD.renderer.Map", null, {
 		// summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
 		// redraw: Boolean	Should we redraw any UIs that are already present?
 		// remove: Boolean	Should we delete any UIs that are no longer in the bbox?
+        $('#progress').hide().removeClass('spinner');
 
 		var m = this;
 		var way, poi;
