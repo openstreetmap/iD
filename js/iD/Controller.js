@@ -9,14 +9,12 @@ declare("iD.Controller", [Evented], {
 	map: null,				// current Map
 	stepper: null,			// current StepPane
 	undoStack: null,		// main undoStack
-	presets: null,			// tag presets
 	editorCache: null,		// cache of tag editor objects, means we don't have to repeatedly load them
 	
 	constructor:function(map) {
 		// summary:		The Controller marshalls ControllerStates and passes events to them.
 		this.map = map;
 		this.undoStack = new iD.actions.UndoStack();
-		this.presets = {};
 		this.editorCache = {};
 	},
 
@@ -25,11 +23,6 @@ declare("iD.Controller", [Evented], {
 		this.stepper = stepper;
 	},
 
-	setTagPresets:function(type, url) {
-		// summary:		Load and store a JSON tag preset file.
-		this.presets[type] = new iD.tags.PresetList(type,url);
-	},
-	
 	setState:function(newState) {
 		// summary:		Enter a new ControllerState, firing exitState on the old one, and enterState on the new one.
 		if (newState === this.state) { return; }

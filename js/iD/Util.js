@@ -26,3 +26,21 @@ iD.Util.friendlyName = function(entity) {
 
     return n.length === 0 ? 'unknown' : n.join('; ');
 };
+
+iD.Util._presets = {};
+
+iD.Util.presets = function(type, callback) {
+    if (iD.Util._presets[type]) return callback(iD.Util._presets[type]);
+    $.ajax({
+        url: 'presets/' + type + '.json',
+        dataType: "json",
+        error: function() {
+            if (typeof console !== 'undefined') console.error(arguments);
+        },
+        success: function(resp) {
+            console.log(resp);
+            iD.Util._presets[type] = resp;
+            return callback(resp);
+        }
+    });
+};

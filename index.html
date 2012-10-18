@@ -71,10 +71,6 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 		// Set initial controllerState
 		controller.setState(new iD.controller.edit.NoSelection());
 
-		// Load presets
-		controller.setTagPresets('way', 'presets/ways.json');
-		controller.setTagPresets('node', 'presets/nodes.json');
-
 		// Load data
 		map.download();
 	}
@@ -155,14 +151,7 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
         <a class='tab' href='#presets'>Presets</a>
         <a class='tab' href='#tags'>Tags</a>
     </div>
-    <div class='hud presets'>
-        <ul>
-            <li>Primary
-            <li>Secondary
-            <li>Residential
-            <li>Service
-        </ul>
-    </div>
+    <div class='hud presets'></div>
     <div class='hud tags'>
         <table>
             <thead>

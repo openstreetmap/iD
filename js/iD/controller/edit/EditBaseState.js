@@ -35,6 +35,32 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
             return e.preventDefault();
         });
         $('.edit-pane a.tab:first').click();
+
+        var $presets = $('.edit-pane .presets');
+        // Build presets panel
+        iD.Util.presets(entity.entityType, function(presets) {
+            $presets.empty();
+            console.log(presets);
+            _.each(presets, function(pre, category) {
+                $('<h3></h3>')
+                    .text(category)
+                    .appendTo($presets);
+                _.each(pre, function(set) {
+                    var a = $('<a></a>')
+                        .text(set.name)
+                        .attr({
+                            'class': 'preset-option',
+                            'href': '#'
+                        })
+                        .appendTo($presets);
+                    $('<span></span>')
+                        .text(set.description)
+                        .appendTo(a);
+                });
+            });
+        });
+
+        // Build tag panel
         $('.edit-pane .tags tbody').empty();
         _.each(entity.tags, function(value, key) {
             var tr = $('<tr></tr>').appendTo(
@@ -52,6 +78,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
             $('<td></td>').append(keyfield).appendTo(tr);
             $('<td></td>').append(valuefield).appendTo(tr);
         });
+
         $('.edit-pane a[href=#close]').click(this.closeEditorTooltip);
     },
 

@@ -1,6 +1,8 @@
 {
-    "Roads": {
-        "Motorway": {
+    "Roads": [
+        {
+            "name": "Motorway",
+            "description": "a large highway, linking states or provinces",
             "tags": {
                 "highway": "motorway"
             },
@@ -15,7 +17,9 @@
                 "road"
             ]
         },
-        "Trunk road": {
+        {
+            "name": "Trunk road",
+            "description": "a highway, linking states or provinces",
             "tags": {
                 "highway": "secondary"
             },
@@ -26,7 +30,9 @@
                 "bus"
             ]
         },
-        "Primary road": {
+        {
+            "name": "Primary road",
+            "description": "a highway linking large towns",
             "tags": {
                 "highway": "primary"
             },
@@ -37,7 +43,9 @@
                 "bus"
             ]
         },
-        "Secondary road": {
+        {
+            "name": "Secondary road",
+            "description": "Multi-lane roads that lead to residential roads. Usually they have stop lights and feed in to larger streets.",
             "tags": {
                 "highway": "secondary"
             },
@@ -48,7 +56,9 @@
                 "bus"
             ]
         },
-        "Tertiary road": {
+        {
+            "name": "Tertiary road",
+            "description": "Roads that connect to residential roads. Typically feature stop lights and connect to larger streets.",
             "tags": {
                 "highway": "tertiary"
             },
@@ -59,7 +69,22 @@
                 "bus"
             ]
         },
-        "Minor road": {
+        {
+            "name": "Residential",
+            "description": "a typically paved road that connects other roads to housing, and usually to driveways",
+            "tags": {
+                "highway": "residential"
+            },
+            "icon": "ways/highway__unclassified.png",
+            "editors": [
+                "road",
+                "cycling",
+                "bus"
+            ]
+        },
+        {
+            "name": "Minor road",
+            "description": "Minor connecting roads",
             "tags": {
                 "highway": "unclassified"
             },
@@ -70,9 +95,10 @@
                 "bus"
             ]
         }
-    },
-    "Railways": {
-        "Railway": {
+    ],
+    "Railways": [
+        {
+            "name": "Railway",
             "tags": {
                 "railway": "rail"
             },
@@ -81,7 +107,8 @@
                 "rail"
             ]
         },
-        "Disused tracks": {
+        {
+            "name": "Disused tracks",
             "tags": {
                 "railway": "disused"
             },
@@ -90,7 +117,8 @@
                 "rail"
             ]
         },
-        "Abandoned trackbed": {
+        {
+            "name": "Abandoned trackbed",
             "tags": {
                 "railway": "abandoned"
             },
@@ -99,5 +127,5 @@
                 "rail"
             ]
         }
-    }
+    ]
 }

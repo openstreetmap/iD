@@ -147,6 +147,8 @@ polyline {
     width:300px;
     background:#fff;
     box-shadow:1px 1px 3px #111;
+    max-height:300px;
+    overflow:auto;
 }
 
 .edit-pane h2 {
@@ -190,4 +192,25 @@ polyline {
 }
 .edit-pane table td input {
     width:140px;
+}
+
+.presets h3 {
+    padding: 5px;
+    font: normal 13px/15px Helvetica, Arial, sans-serif;
+    text-align:center;
+    margin: 0;
+}
+
+.presets a.preset-option {
+    text-decoration:none;
+    display:block;
+    background:#eee;
+    padding:5px;
+    border-top:1px solid #ccc;
+}
+
+.presets a.preset-option span {
+    display:block;
+    color: #888;
+    font: normal 11px/15px Helvetica, Arial, sans-serif;
 }
