@@ -27,8 +27,8 @@ iD.Util.friendlyName = function(entity) {
     return n.length === 0 ? 'unknown' : n.join('; ');
 };
 
+// TODO: don't use a cache here?
 iD.Util._presets = {};
-
 iD.Util.presets = function(type, callback) {
     if (iD.Util._presets[type]) return callback(iD.Util._presets[type]);
     $.ajax({
@@ -42,4 +42,8 @@ iD.Util.presets = function(type, callback) {
             return callback(resp);
         }
     });
+};
+
+iD.Util.tileKey = function(coord) {
+    return coord.z + ',' + coord.x + ',' + coord.y;
 };

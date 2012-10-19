@@ -209,8 +209,8 @@ declare("iD.styleparser.RuleSet", null, {
 	parseZoom:function(s) {
 		var o={};
 		if      ((o=this.ZOOM_MINMAX.exec(s))) { return [o[1],o[2]]; }
-		else if ((o=this.ZOOM_MIN.exec(s)   )) { return [o[1],maxscale]; }
-		else if ((o=this.ZOOM_MAX.exec(s)   )) { return [minscale,o[1]]; }
+		else if ((o=this.ZOOM_MIN.exec(s)   )) { return [o[1], maxscale]; }
+		else if ((o=this.ZOOM_MAX.exec(s)   )) { return [minscale, o[1]]; }
 		else if ((o=this.ZOOM_SINGLE.exec(s))) { return [o[1],o[1]]; }
 		return null;
 	},

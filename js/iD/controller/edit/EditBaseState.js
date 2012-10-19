@@ -22,10 +22,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
         // y: Number	Screen co-ordinate.
         // entity: iD.Entity	The entity to be edited.
         $('.edit-pane h2').text(iD.Util.friendlyName(entity));
-        $('.edit-pane').css({
-            left: x,
-            top: y
-        }).show();
+        $('.edit-pane').show().addClass('active');
         $('.edit-pane a.tab').click(function(e) {
             $('.edit-pane a.tab').removeClass('active');
             var hud = $(e.currentTarget).addClass('active')
@@ -84,7 +81,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
     closeEditorTooltip: function(e) {
         if (e) e.preventDefault();
         // summary:		Close the tooltip.
-        $('.edit-pane').hide();
+        $('.edit-pane').removeClass('active').hide();
     }
 });
 
