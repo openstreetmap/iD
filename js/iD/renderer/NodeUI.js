@@ -8,25 +8,26 @@ define(['dojo/_base/declare','dojo/_base/array','dojox/gfx/_base','iD/renderer/E
 // NodeUI class
 
 declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
-	constructor:function() {
+	constructor: function() {
 		// summary:		A UI (rendering) representing a node.
 		this.redraw();
 	},
-	getEnhancedTags:function() {
-		var tags=this.inherited(arguments);
+	getEnhancedTags: function() {
+		var tags = this.inherited(arguments);
 		if (!this.entity.entity.hasParentWays()) { tags[':poi']='yes'; }
 		// add junction and dupe
 		return tags;
 	},
-	redraw:function() {
+	redraw: function() {
 		// summary:		Draw the object (mostly icons) and add hitzone sprites.
 		var node = this.entity;
 		this.removeSprites();
 
 		// Tags, position and styleList
-        var px = this.map.locationPoint(this.entity),
+        var px = this.map.locationPoint(node),
             x = px.x,
             y = px.y;
+
 		var tags = this.getEnhancedTags();
 		this.refreshStyleList(tags);
 
@@ -34,7 +35,7 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 		var drawn = false;
 		var s, p, t, w, h;
 		for (i = 0; i < this.styleList.subparts.length; i++) {
-			var subpart=this.styleList.subparts[i];
+			var subpart = this.styleList.subparts[i];
 			p = this.styleList.pointStyles[subpart];
 			if (!p || !p.drawn()) { continue; }
 			s = this.styleList.shapeStyles[subpart];
@@ -44,27 +45,31 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 
             // Draw icon
             var shape;
-            if (p.icon_image ===  'square') shape = this.targetGroup('stroke', p.sublayer)
-                .createRect({
-                    x: x-w/2,
-                    y: y-h/2,
-                    width: w,
-                    height: h
-                });
-            else if (p.icon_image ===  'circle') shape = this.targetGroup('stroke', p.sublayer)
-                .createCircle({
-                    cx: x,
-                    cy: y,
-                    r: w
-                });
-            else shape = this.targetGroup('stroke',p.sublayer)
-                .createImage({
-                    width: w,
-                    height: h,
-                    x: x-w/2,
-                    y: y-h/2,
-                    src: p.icon_image
-                });
+            if (p.icon_image ===  'square') {
+                shape = this.targetGroup('stroke', p.sublayer)
+                    .createRect({
+                        x: x-w/2,
+                        y: y-h/2,
+                        width: w,
+                        height: h
+                    });
+            } else if (p.icon_image ===  'circle') {
+                shape = this.targetGroup('stroke', p.sublayer)
+                    .createCircle({
+                        cx: x,
+                        cy: y,
+                        r: w
+                    });
+            } else {
+                shape = this.targetGroup('stroke',p.sublayer)
+                    .createImage({
+                        width: w,
+                        height: h,
+                        x: x-w/2,
+                        y: y-h/2,
+                        src: p.icon_image
+                    });
+            }
             if (p.icon_image === 'square' || p.icon_image === 'circle') {
 				shape.setStroke(s.shapeStrokeStyler()).setFill(s.shapeFillStyler());
 			}

@@ -49,7 +49,9 @@ iD.Way.prototype = {
     // ---------------------
     // Bounding-box handling
     within: function(extent) {
+        return true;
         // TODO was tired
+        /*
         return (
             // the left side is less than my this right side
             extent[0].lon < this.extent[1].lon &&
@@ -59,6 +61,7 @@ iD.Way.prototype = {
             extent[0].lat > this.extent[1].lat &&
             // the bottom is less than my top
             extent[1].lat < this.extent[0].lat);
+            */
     },
 
     calculateBbox: function() {

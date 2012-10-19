@@ -298,7 +298,6 @@ declare("iD.renderer.Map", null, {
     draw: function() {
         this.clearTiles();
         if (this.coord.z > this.MIN_DOWNLOAD_SCALE) {
-            console.log('downloading');
             this.download();
         }
         this.loadTiles();
@@ -441,8 +440,8 @@ declare("iD.renderer.Map", null, {
 
 	updateOrigin: function() {
 		// summary:		Tell Dojo to update the viewport origin.
-        var ox = (this.mapwidth / 2) -this.coord.x * 256,
-            oy = (this.mapheight / 2) -this.coord.y * 256,
+        var ox = (this.mapwidth / 2) - this.coord.x * 256,
+            oy = (this.mapheight / 2) - this.coord.y * 256,
             t = [Matrix.translate(ox, oy)];
 		this.container.setTransform(t);
 		this.tilegroup.setTransform(t);
@@ -475,6 +474,7 @@ declare("iD.renderer.Map", null, {
     },
 
     locationPoint: function(ll, z) {
+        z = (typeof z === 'undefined') ? this.coord.z : z;
         var px = this.projection.px([ll.lon, ll.lat], z);
         return { x: px[0], y: px[1] };
     },
