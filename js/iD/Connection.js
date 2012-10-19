@@ -179,7 +179,7 @@ iD.Connection = function(apiURL) {
                 }).object().value();
             }
 
-            function getNodes(obj,conn) {
+            function getNodes(obj) {
                 return _(obj.childNodes).chain()
                 .filter(filterNodeName('nd'))
                 .map(function(item) {
@@ -187,7 +187,7 @@ iD.Connection = function(apiURL) {
                 }).value();
             }
 
-            function getMembers(obj,conn) {
+            function getMembers(obj) {
                 return _(obj.childNodes).chain()
                     .filter(filterNodeName('member'))
                     .map(function(item) {

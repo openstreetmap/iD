@@ -25,7 +25,7 @@ declare("iD.renderer.Map", null, {
 	surface: null,			// <div>.surface containing the rendering
 	container: null,		// root-level group within the surface
 	backdrop: null,			// coloured backdrop (MapCSS canvas element)
-	conn: null,				// data store
+	connection: null,				// data store
 	controller: null,		// UI controller
 	nodeuis: {},			// graphic representations of data
 	wayuis: {},				//  |
@@ -80,7 +80,7 @@ declare("iD.renderer.Map", null, {
         }).setFill(new dojo.Color([255,255,245,1]));
 		this.tilegroup = this.surface.createGroup();
 		this.container = this.surface.createGroup();
-		this.conn = obj.connection;
+		this.connection = obj.connection;
 		this.zoom = obj.zoom ? obj.zoom : 17;
 		this.baselon = obj.lon;
 		this.baselat = obj.lat;
@@ -225,7 +225,7 @@ declare("iD.renderer.Map", null, {
     download: function() {
         // summary:		Ask the connection to download data for the current viewport.
         $('#progress').show().addClass('spinner');
-        this.conn.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
+        this.connection.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
     },
 
 	updateUIs: function(redraw, remove) {
@@ -236,7 +236,7 @@ declare("iD.renderer.Map", null, {
 
 		var m = this;
 		var way, poi;
-		var o = this.conn.getObjectsByBbox(this.extent);
+		var o = this.connection.getObjectsByBbox(this.extent);
 
         _(o.waysInside).chain()
             .filter(function(w) { return w.loaded; })

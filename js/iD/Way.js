@@ -1,8 +1,8 @@
 if (typeof iD === 'undefined') iD = {};
 
-iD.Way = function(conn, id, nodes, tags, loaded) {
+iD.Way = function(connection, id, nodes, tags, loaded) {
     // summary:		An OSM way.
-    this.connection = conn;
+    this.connection = connection;
     this.entityType = 'way';
     this.id = id;
     this._id = iD.Util.id();

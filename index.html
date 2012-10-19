@@ -5,8 +5,6 @@
     <title>iD</title>
     <!-- load Dojo -->
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dijit/themes/claro/claro.css">
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojox/layout/resources/FloatingPane.css">
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojox/layout/resources/ResizeHandle.css">
 	<link rel="stylesheet" href="css/app.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojo/dojo.js" data-dojo-config="async: true, parseOnLoad: true, baseUrl: 'js/iD/'"></script>
 </head>
@@ -24,7 +22,6 @@
   <script>
 
 require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented",
-         "dojox/layout/FloatingPane",
          "iD/actions/UndoStack",
          "iD/actions/CreatePOIAction",
          "iD/actions/AddNodeToWayAction",
@@ -37,7 +34,7 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
          "dojo/domReady!"], function(domGeom,domClass,on,dom,Evented){
 
 	var ruleset = new iD.styleparser.RuleSet();
-	var conn = new iD.Connection("http://www.overpass-api.de/api/xapi?");
+	var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
 
 	// Load styles
 	ruleset.registerCallback(styleLoaded);
@@ -49,7 +46,7 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 		lon: -1.49,
 		zoom: 17,
 		div: "map",
-		connection: conn,
+		connection: connection,
 		width: dom.byId('map').offsetWidth,
 		height: dom.byId('map').offsetHeight
 	});

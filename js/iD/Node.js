@@ -1,9 +1,9 @@
 if (typeof iD === 'undefined') iD = {};
 
-iD.Node = function(conn, id, lat, lon, tags, loaded) {
+iD.Node = function(connection, id, lat, lon, tags, loaded) {
 	// summary: An OSM node.
 	this.entityType = 'node';
-	this.connection = conn;
+	this.connection = connection;
 	this.id = id;
 	this._id = iD.Util.id();
 	this.entity = new iD.Entity();

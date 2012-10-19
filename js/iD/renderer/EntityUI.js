@@ -30,7 +30,7 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	getConnection:function() {
 		// summary:		Get the Connection from where the map draws its data.
-		return this.map.conn;	// iD.Connection
+		return this.map.connection;	// iD.Connection
 	},
 	targetGroup:function(groupType,sublayer) {
 		// summary:		Find a gfx.Group to render on.
