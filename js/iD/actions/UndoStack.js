@@ -15,7 +15,7 @@ declare("iD.actions.UndoStack", null, {
 	SUCCESS: 1,
 	NO_CHANGE: 2,
 
-	constructor:function() {
+	constructor: function() {
 		// summary:		An undo stack. There can be any number of these, but almost all operations will
 		//				take place on the global undo stack - implemented as a singleton-like property of
 		//				the Controller.
@@ -23,7 +23,7 @@ declare("iD.actions.UndoStack", null, {
 		this.redoActions=[];
 	},
 	
-	addAction:function(_action) {
+	addAction: function(_action) {
 		// summary:		Do an action, and add it to the undo stack if it succeeded.
 		var result = _action.doAction();
 		switch (result) {
@@ -50,30 +50,30 @@ declare("iD.actions.UndoStack", null, {
 		}
 	},
 
-	breakUndo:function() {
+	breakUndo: function() {
 		// summary:		Wipe the undo stack - typically used after saving.
 		this.undoActions = [];
 		this.redoActions = [];
 	},
 
-	canUndo:function() {
+	canUndo: function() {
 		// summary:		Are there any items on the undo stack?
 		return this.undoActions.length > 0;
 	},
 
-	canRedo:function() {
+	canRedo: function() {
 		// summary:		Are there any redoable actions?
 		return this.redoActions.length > 0;
 	},
 
-	undo:function() {
+	undo: function() {
 		// summary:		Undo the most recent action, and add it to the top of the redo stack.
 		if (!this.undoActions.length) { return; }
 		var action = undoActions.pop();
 		action.undoAction();
 		redoActions.push(action);
 	},
-	undoIfAction:function(_action) {
+	undoIfAction: function(_action) {
 		// summary:		Undo the most recent action _only_ if it was of a certain type.
 		//				Fixme: isInstanceOf needs to be made into JavaScript.
 		if (!this.undoActions.length) { return; }
@@ -83,7 +83,7 @@ declare("iD.actions.UndoStack", null, {
 		}
 		return false;
 	},
-	removeLastIfAction:function(_action) {
+	removeLastIfAction: function(_action) {
 		// summary:		Remove the most recent action from the stack _only_ if it was of a certain type.
 		//				Fixme: isInstanceOf needs to be made into JavaScript.
 		if (this.undoActions.length && this.undoActions[this.undoActions.length-1].isInstanceOf(_action)) {
@@ -91,7 +91,7 @@ declare("iD.actions.UndoStack", null, {
 		}
 	},
 
-	getUndoDescription:function() {
+	getUndoDescription: function() {
 		// summary:		Get the name of the topmost item on the undo stack.
 		if (!this.undoActions.length) return null;
 		if (this.undoActions[this.undoActions.length-1].name) {
@@ -100,7 +100,7 @@ declare("iD.actions.UndoStack", null, {
 		return null;
 	},
 
-	getRedoDescription:function() {
+	getRedoDescription: function() {
 		// summary:		Get the name of the topmost item on the redo stack.
 		if (!this.redoActions.length) return null;
 		if (this.redoActions[this.redoActions.length-1].name) {
@@ -109,7 +109,7 @@ declare("iD.actions.UndoStack", null, {
 		return null;
 	},
 
-	redo:function() {
+	redo: function() {
 		// summary:		Takes the action most recently undone, does it, and adds it to the undo stack.
 		if (!this.redoActions.length) { return; }
 		var action = this.redoActions.pop();

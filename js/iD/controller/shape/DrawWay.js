@@ -29,6 +29,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	constructor: function(way) {
 		this.way = way;
     },
+
     enterState: function() {
         this.wayUI = this.controller.map.getUI(this.way);
         this.wayUI.setStateClass('selected')
@@ -36,6 +37,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
             .redraw();
         this.controller.stepper.step(1);
     },
+
     exitState: function() {
         this.controller.map.clearElastic();
         this.wayUI
@@ -155,11 +157,14 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	},
 
 	getStartNode:function() {
-		return (this.editEnd ? this.way.nodes[0] : this.way.nodes[this.way.node.length - 1]);
+		return (this.editEnd ? this.way.nodes[0] : this.way.nodes[this.way.nodes.length - 1]);
 	},
 
 	appendNode:function(node, performAction) {
-        if (this.editEnd) { this.way.doAppendNode(node, performAction); }
+        if (this.editEnd) {
+            this.way.doAppendNode(node, performAction);
+            this.controller.map.refreshUI(this.way);
+        }
         else { this.way.doPrependNode(node, performAction); }
     },
 

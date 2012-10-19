@@ -83,14 +83,14 @@ iD.Way.prototype = {
     // --------------
     // Action callers
 
-    doAppendNode:function(node, performAction) {
+    doAppendNode: function(node, performAction) {
         // summary:		Add a node to the end of the way, using an undo stack.
         // returns:		New length of the way.
         if (node!=this.getLastNode()) performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, -1, true));
         return this.nodes.length + 1;	// int
     },
 
-    doPrependNode:function(node, performAction) {
+    doPrependNode: function(node, performAction) {
         // summary:		Add a node to the start of the way, using an undo stack.
         // returns:		New length of the way.
         if (node!=this.nodes[0]) performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, 0, true));

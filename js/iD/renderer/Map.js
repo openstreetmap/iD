@@ -149,7 +149,7 @@ declare("iD.renderer.Map", null, {
 		// summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
 		// if necessary. Note that sublayers are only implemented for stroke and fill.
 		// groupType: String	'casing','text','hit','stroke', or 'fill'
-		var collection=this.layers[layer][groupType], sub;
+		var collection = this.layers[layer][groupType], sub;
 		switch (groupType) {
 			case 'casing':
 			case 'text':
@@ -158,7 +158,7 @@ declare("iD.renderer.Map", null, {
 		}
 		// Find correct sublayer, inserting if necessary
 		var insertAt=collection.children.length;
-		for (var i=0; i<collection.children.length; i++) {
+		for (var i = 0; i < collection.children.length; i++) {
 			sub=collection.children[i];
 			if (sub.sublayer==sublayer) { return sub; }
 			else if (sub.sublayer>sublayer) {
@@ -173,7 +173,7 @@ declare("iD.renderer.Map", null, {
 		return sub; // dojox.gfx.Group
 	},
 
-	createUI:function(entity,stateClasses) {
+	createUI: function(entity,stateClasses) {
 		// summary:		Create a UI (sprite) for an entity, assigning any specified state classes
 		//				(temporary attributes such as ':hover' or ':selected')
 		var id = entity.id;
@@ -194,7 +194,7 @@ declare("iD.renderer.Map", null, {
         }
 	},
 
-	getUI:function(entity) {
+	getUI: function(entity) {
 		// summary: Return the UI for an entity, if it exists.
 		if (entity.entityType === 'node') {
             return this.nodeuis[entity.id];	// iD.renderer.EntityUI
@@ -204,7 +204,7 @@ declare("iD.renderer.Map", null, {
 		return null;
 	},
 
-	refreshUI:function(entity) {
+	refreshUI: function(entity) {
 		// summary:	Redraw the UI for an entity.
 		if (entity.entityType === 'node') {
 			if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); }
@@ -213,7 +213,7 @@ declare("iD.renderer.Map", null, {
 		}
 	},
 
-	deleteUI:function(entity) {
+	deleteUI: function(entity) {
 		// summary:		Delete the UI for an entity.
         var uis = { node: 'nodeuis', way: 'wayuis' }[entity.entityType];
 		if (uis && this[uis][entity.id]) {
@@ -222,7 +222,7 @@ declare("iD.renderer.Map", null, {
 		}
 	},
 
-    download:function() {
+    download: function() {
         // summary:		Ask the connection to download data for the current viewport.
         $('#progress').show().addClass('spinner');
         this.conn.loadFromAPI(this.extent, _.bind(this.updateUIs, this));

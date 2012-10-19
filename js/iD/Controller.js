@@ -27,7 +27,6 @@ declare("iD.Controller", [Evented], {
 		// summary:		Enter a new ControllerState, firing exitState on the old one, and enterState on the new one.
 		if (newState === this.state) { return; }
 		if (this.state) {
-			this.state.exitState(newState);
 			this.emit("exitState", {
                 bubbles: true,
                 cancelable: true,
@@ -47,10 +46,9 @@ declare("iD.Controller", [Evented], {
 	entityMouseEvent:function(event,entityUI) {
 		// summary:		Pass a MouseEvent on an EntityUI (e.g. clicking a way) to the current ControllerState.
 		if (!this.state) { return; }
-		var newState=this.state.processMouseEvent(event,entityUI);
+		var newState = this.state.processMouseEvent(event,entityUI);
 		this.setState(newState);
 	}
-
 });
 
 // ----------------------------------------------------------------------

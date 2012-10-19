@@ -13,7 +13,7 @@ declare("iD.actions.AddNodeToWayAction", [iD.actions.UndoableEntityAction], {
 	firstNode: null,
 	autoDelete: true,
 	
-	constructor:function(way, node, nodeList, index, autoDelete) {
+	constructor: function(way, node, nodeList, index, autoDelete) {
 		// summary:		Add a node to a way at a specified index, or -1 for the end of the way.
 		this.entity = way;
 		this.node = node;
@@ -41,7 +41,6 @@ declare("iD.actions.AddNodeToWayAction", [iD.actions.UndoableEntityAction], {
 		this.nodeList.splice(this.index, 0, this.node);
 		this.markDirty();
 		way.expandBbox(this.node);
-		way.connection.refreshEntity(way);
 
 		return this.SUCCESS;
 	},

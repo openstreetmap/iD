@@ -10,13 +10,13 @@ declare("iD.actions.CreateEntityAction", [iD.actions.UndoableEntityAction], {
 	setCreate:null,
 	deleteAction:null,
 
-	constructor:function(entity,setCreate) {
+	constructor: function(entity,setCreate) {
 		// summary:		Create a new entity - way, node or relation.
 		this.setCreate = setCreate;
-		this.setName("Create "+entity.entityType);
+		this.setName("Create " + entity.entityType);
 	},
 
-	doAction:function() {
+	doAction: function() {
 		// summary:		Call out to the specified method (in the Controller) to create the entity.
 		//				See undoAction for explanation of special redo handling.
 		if (this.deleteAction!==null) {
@@ -28,7 +28,7 @@ declare("iD.actions.CreateEntityAction", [iD.actions.UndoableEntityAction], {
 		return this.SUCCESS;
 	},
 
-	undoAction:function() {
+	undoAction: function() {
 		// summary:		Special handling for undoing a create. When undo is called, instead 
 		//				of simply removing the entity, we work through to make a Delete[Entity]Action, 
 		//				call that, and store it for later. Then, when this action is called again 
@@ -39,7 +39,7 @@ declare("iD.actions.CreateEntityAction", [iD.actions.UndoableEntityAction], {
 		return this.SUCCESS;
 	},
 
-	setAction:function(action) {
+	setAction: function(action) {
 		// summary:		Set the associated delete action (see undoAction for explanation).
 		deleteAction = action;
 	}

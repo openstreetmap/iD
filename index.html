@@ -82,7 +82,7 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
     });
 
     $('#add-road').click(function() {
-		controller.setState(new iD.controller.shape.NoSelection());
+		controller.setState(new iD.controller.shape.NoSelection('way'));
     });
 
     $('#add-area').click(function() {
@@ -98,10 +98,6 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 
     $('#zoomOut').click(function() {
         map.zoomOut();
-    });
-
-    $('#map').dblclick(function() {
-        map.zoomIn();
     });
 
     var scroll = 0;
