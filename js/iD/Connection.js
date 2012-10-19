@@ -65,7 +65,7 @@ iD.Connection = function(apiURL) {
         return relation;
     }
 
-    function getObjectsByBbox(left,right,top,bottom) {
+    function getObjectsByBbox(extent) {
         // summary:			Find all drawable entities that are within a given bounding box.
         // returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
         // Each one is an array of entities.
@@ -77,11 +77,11 @@ iD.Connection = function(apiURL) {
         };
         for (var id in ways) {
             var way = ways[id];
-            if (way.within(left,right,top,bottom)) { o.waysInside.push(way); }
+            if (way.within(extent)) { o.waysInside.push(way); }
             else { o.waysOutside.push(way); }
         }
         _.each(pois, function(node) {
-            if (node.within(left,right,top,bottom)) { o.poisInside.push(node); }
+            if (node.within(extent)) { o.poisInside.push(node); }
             else { o.poisOutside.push(node); }
         });
         return o;

@@ -216,14 +216,18 @@ declare("iD.renderer.Map", null, {
 		}
 	},
 
+    getExtent: function() {
+        return [
+            this.coordLocation(this.pointCoord({ x: 0, y: 0 })),
+            this.coordLocation(this.pointCoord({
+            x: this.mapwidth,
+            y: this.mapheight }))];
+    },
+
     download: function() {
         // summary:		Ask the connection to download data for the current viewport.
         $('#progress').show().addClass('spinner');
-        this.connection.loadFromAPI([
-            this.coordLocation(this.pointCoord({ x: 0, y: 0 })),
-            this.coordLocation(this.pointCoord({
-                x: this.mapwidth,
-                y: this.mapheight }))], _.bind(this.updateUIs, this));
+        this.connection.loadFromAPI(this.getExtent(), _.bind(this.updateUIs, this));
     },
 
 	updateUIs: function(redraw, remove) {
@@ -234,7 +238,7 @@ declare("iD.renderer.Map", null, {
 
 		var m = this;
 		var way, poi;
-		var o = this.connection.getObjectsByBbox(this.extent);
+		var o = this.connection.getObjectsByBbox(this.getExtent());
 
         _(o.waysInside).chain()
             .filter(function(w) { return w.loaded; })
@@ -462,11 +466,16 @@ declare("iD.renderer.Map", null, {
 	// Co-ordinate conversions
 
 	locationCoord: function(ll, z) {
-        var px = this.projection.px([ll.lon, ll.lat], z);
+        var px = this.locationPoint(ll, z);
         return { z: z,
-            x: Math.floor(px[0] / this.tileSize),
-            y: Math.floor(px[1] / this.tileSize)
+            x: Math.floor(px.x / this.tileSize),
+            y: Math.floor(px.y / this.tileSize)
         };
+    },
+
+    locationPoint: function(ll, z) {
+        var px = this.projection.px([ll.lon, ll.lat], z);
+        return { x: px[0], y: px[1] };
     },
 
 	coordLocation: function(coord) {

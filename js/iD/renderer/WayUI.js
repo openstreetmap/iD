@@ -41,10 +41,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 
 		// List of co-ordinates
 		var coords = _.map(way.nodes, _.bind(function(node) {
-            return {
-                x: this.map.lon2coord(node.lon),
-                y: this.map.latp2coord(node.latp)
-            };
+            return this.map.locationPoint(node);
         }, this));
 
 		// Iterate through each subpart, drawing any styles on that layer
