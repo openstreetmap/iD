@@ -290,7 +290,7 @@ declare("iD.renderer.Map", null, {
 
 	setCentre: function(loc) {
         // summary:		Update centre and bbox to a specified lat/lon.
-        this.coord = this.locationCoord(loc, this.zoom);
+        this.coord = this.locationCoord(loc, this.z);
         return this.draw();
     },
 	setCenter: function(loc) { this.setCentre(loc); },
@@ -466,6 +466,7 @@ declare("iD.renderer.Map", null, {
 	// Co-ordinate conversions
 
 	locationCoord: function(ll, z) {
+        z = (typeof z === 'undefined') ? this.coord.z : z;
         var px = this.locationPoint(ll, z);
         return { z: z,
             x: Math.floor(px.x / this.tileSize),

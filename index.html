@@ -43,15 +43,15 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 
 	// Initialise map
 	var map = new iD.renderer.Map({
-		lat: 51.87,
-		lon: -1.49,
-		zoom: 17,
 		div: "map",
 		connection: connection,
 		width: dom.byId('map').offsetWidth,
 		height: dom.byId('map').offsetHeight
 	});
 	map.ruleset = ruleset;
+
+    map.setZoom(14);
+    map.setCenter({ lat: 38.89, lon: -77 });
 
 	// Initialise controller
 	var controller = new iD.Controller(map);

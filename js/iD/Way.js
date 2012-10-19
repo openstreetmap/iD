@@ -16,7 +16,7 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
     _.each(nodes, _.bind(function(node) {
         node.entity.addParent(this);
     }, this));
-    this._calculateBbox();
+    this.calculateBbox();
 };
 
 iD.Way.prototype = {
@@ -48,36 +48,29 @@ iD.Way.prototype = {
 
     // ---------------------
     // Bounding-box handling
-    within:function(left,right,top,bottom) {
-        // TODO invert and just return
-        if (!this.extent.west ||
-            (this.extent.west < left   && this.extent.east < left  ) ||
-            (this.extent.west > right  && this.extent.east > right ) ||
-            (this.extent.south < bottom && this.extent.north < bottom) ||
-            (this.extent.south > top    && this.extent.south > top)) {
-            return false;
-        } else {
-            return true;
-        }
+    within: function(extent) {
+        // TODO was tired
+        return (
+            // the left side is less than my this right side
+            extent[0].lon < this.extent[1].lon &&
+            // the right side is greater than my left side
+            extent[1].lon > this.extent[0].lon &&
+            // the top is greater than my bottom
+            extent[0].lat > this.extent[1].lat &&
+            // the bottom is less than my top
+            extent[1].lat < this.extent[0].lat);
     },
 
-    _calculateBbox:function() {
-        this.extent = {
-            west: Infinity,
-            east: -Infinity,
-            south: Infinity,
-            north: -Infinity
-        };
-        _.each(this.nodes, _.bind(function(n) { this.expandBbox(n); }, this));
-    },
-
-    expandBbox:function(node) {
-        // summary:	Enlarge the way's bounding box to make sure it
-        // includes the co-ordinates of a supplied node.
-        this.extent.west = Math.min(this.extent.west, node.lon);
-        this.extent.east = Math.max(this.extent.east, node.lon);
-        this.extent.south = Math.min(this.extent.south, node.lat);
-        this.extent.north = Math.max(this.extent.north, node.lat);
+    calculateBbox: function() {
+        function lat(n) { return n.lat; }
+        function lon(n) { return n.lon; }
+        this.extent = [{
+            lat: _.max(this.nodes, lat),
+            lon: _.min(this.nodes, lon)
+        }, {
+            lat: _.min(this.nodes, lat),
+            lon: _.max(this.nodes, lon)
+        }];
     },
 
     // --------------
@@ -99,8 +92,8 @@ iD.Way.prototype = {
 
     doInsertNode:function(index, node, performAction) {
         // summary:		Add a node at a given index within the way, using an undo stack.
-        if (index > 0 && this.nodes[index - 1]==node) return;
-        if (index < this.nodes.length - 1 && this.nodes[index]==node) return;
+        if (index > 0 && this.nodes[index - 1] === node) return;
+        if (index < this.nodes.length - 1 && this.nodes[index] === node) return;
         performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, index, false));
     },
 
@@ -127,7 +120,9 @@ iD.Way.prototype = {
         }
 
         // splice in new node
-        if (isSnap) { newNode.doSetLonLatp(snapped.x, snapped.y, performAction); }
+        if (isSnap) {
+            newNode.doSetLonLatp(snapped.x, snapped.y, performAction);
+        }
         this.doInsertNode(newIndex, newNode, performAction);
         return newIndex;	// int
     },
