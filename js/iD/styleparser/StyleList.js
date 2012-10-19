@@ -17,10 +17,10 @@ declare("iD.styleparser.StyleList", null, {
 	validAt: -1,				// Zoom level this is valid at (or -1 at all levels - saves recomputing)
 
 	constructor:function() {
-		// summary:				A StyleList object is the full list of all styles applied to
-		// 						a drawn entity (i.e. node/way). Each array element applies to that 
-		//						sublayer (z-index). If there is no element, nothing is drawn on that sublayer.
-		//						StyleLists are created by StyleChooser.getStyles.
+		// summary: A StyleList object is the full list of all styles applied to
+		// a drawn entity (i.e. node/way). Each array element applies to that 
+		// sublayer (z-index). If there is no element, nothing is drawn on that sublayer.
+		// StyleLists are created by StyleChooser.getStyles.
 		this.shapeStyles={};
 		this.textStyles={};
 		this.pointStyles={};
@@ -30,7 +30,7 @@ declare("iD.styleparser.StyleList", null, {
 
 	hasStyles:function() {
 		// summary:		Does this StyleList contain any styles?
-		return ( this.hasShapeStyles() || this.hasTextStyles() || this.hasPointStyles() || this.hasShieldStyles() );
+		return (this.hasShapeStyles() || this.hasTextStyles() || this.hasPointStyles() || this.hasShieldStyles());
 	},
 
 	hasFills:function() {
@@ -61,7 +61,7 @@ declare("iD.styleparser.StyleList", null, {
 
 	toString:function() {
 		// summary:		Summarise StyleList as String - for debugging
-		var str='';
+		var str = '';
 		var k;
 		for (k in this.shapeStyles ) { str+="- SS "+k+"="+this.shapeStyles[k]+"\n"; }
 		for (k in this.textStyles  ) { str+="- TS "+k+"="+this.textStyles[k]+"\n"; }

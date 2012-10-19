@@ -1,8 +1,8 @@
 // iD/renderer/NodeUI.js
 // NodeUI classes for iD
 
-define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojox/gfx/_base','iD/renderer/EntityUI'],
-       function(declare,lang,array,g){
+define(['dojo/_base/declare','dojo/_base/array','dojox/gfx/_base','iD/renderer/EntityUI'],
+       function(declare,array,g){
 
 // ----------------------------------------------------------------------
 // NodeUI class
@@ -30,8 +30,8 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 		this.refreshStyleList(tags);
 
 		// Iterate through each subpart, drawing any styles on that layer
-		var drawn=false;
-		var s,p,t,w,h;
+		var drawn = false;
+		var s, p, t, w, h;
 		for (i = 0; i < this.styleList.subparts.length; i++) {
 			var subpart=this.styleList.subparts[i];
 			p = this.styleList.pointStyles[subpart];
@@ -41,34 +41,62 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 			w = p.icon_width ? p.icon_width : 16;
 			h = p.icon_height ? p.icon_height: w;
 
-			// Draw icon
-			var shape;
-			switch (p.icon_image) {
-				case 'square':shape=this.targetGroup('stroke',p.sublayer).createRect({ x:x-w/2, y:y-h/2, width:w, height:h }); break;
-				case 'circle':shape=this.targetGroup('stroke',p.sublayer).createCircle({ cx:x, cy:y, r:w }); break;
-				default:shape=this.targetGroup('stroke',p.sublayer).createImage({ width:w, height:h, x: x-w/2, y: y-h/2, src:p.icon_image }); break;
-			}
-			switch (p.icon_image) {
-				case 'square':
-				case 'circle': 	shape.setStroke(s.shapeStrokeStyler()).setFill(s.shapeFillStyler()); break;
+            // Draw icon
+            var shape;
+            if (p.icon_image ===  'square') shape = this.targetGroup('stroke', p.sublayer)
+                .createRect({
+                    x: x-w/2,
+                    y: y-h/2,
+                    width: w,
+                    height: h
+                });
+            else if (p.icon_image ===  'circle') shape = this.targetGroup('stroke', p.sublayer)
+                .createCircle({
+                    cx: x,
+                    cy: y,
+                    r: w
+                });
+            else shape = this.targetGroup('stroke',p.sublayer)
+                .createImage({
+                    width: w,
+                    height: h,
+                    x: x-w/2,
+                    y: y-h/2,
+                    src: p.icon_image
+                });
+            if (p.icon_image === 'square' || p.icon_image === 'circle') {
+				shape.setStroke(s.shapeStrokeStyler()).setFill(s.shapeFillStyler());
 			}
 			this.recordSprite(shape);
 
 			// Add text label
 			// Add hit-zone
 			var hit;
-			switch (p.icon_image) {
-				case 'circle': 	hit=this.targetGroup('hit').createCircle({ cx:x, cy:y, r:w }); break;
-				default: 		hit=this.targetGroup('hit').createRect({ x:x-w/2, y:y-h/2, width:w, height: h}); break;
-			}
-			hit.setFill([0,1,0,0]).setStroke( { width:2, color:[0,0,0,0] } );
+            if (p.icon_image === 'circle') {
+                hit = this.targetGroup('hit').createCircle({
+                    cx: x,
+                    cy: y,
+                    r: w
+                });
+            } else {
+                hit = this.targetGroup('hit').createRect({
+                    x: x-w/2,
+                    y: y-h/2,
+                    width: w,
+                    height: h
+                });
+            }
+            hit.setFill([0,1,0,0]).setStroke({
+                width:2,
+                color:[0,0,0,0]
+            });
 			this.recordSprite(hit);
-			hit.source= this;
-			hit.connect("onclick"     , lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmousedown" , lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmouseup"   , lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmouseenter", lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmouseleave", lang.hitch(this,this.entityMouseEvent));
+			hit.source = this;
+			hit.connect("onclick", _.bind(this.entityMouseEvent, this));
+			hit.connect("onmousedown", _.bind(this.entityMouseEvent, this));
+			hit.connect("onmouseup", _.bind(this.entityMouseEvent, this));
+			hit.connect("onmouseenter", _.bind(this.entityMouseEvent, this));
+			hit.connect("onmouseleave", _.bind(this.entityMouseEvent, this));
 		}
 	}
 });

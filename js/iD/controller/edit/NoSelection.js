@@ -12,30 +12,31 @@ define(['dojo/_base/declare',
 
 declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
 
-	constructor:function() {
+	constructor: function() {
 		// summary:		In 'Edit object' mode but nothing selected.
 	},
 
-	enterState:function() {
+	enterState: function() {
 		this.controller.stepper.hide();
 	},
 
-	processMouseEvent:function(event,entityUI) {
-		if (!entityUI) { return this; }
-		var entity = entityUI.entity;
-		if (event.type=='click') {
+	processMouseEvent: function(event, entityUI) {
+        if (!entityUI) { return this; }
+        var entity = entityUI.entity;
+        if (event.type === 'click') {
             this.inherited(arguments);
-			switch (entity.entityType) {
-				case 'node':
-					var ways=entity.parentWays();
-					if (!ways.length) { return new iD.controller.edit.SelectedPOINode(entity); }
-                    else { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
-                    break;
-				case 'way':
-					return new iD.controller.edit.SelectedWay(entityUI.entity, event);
-			}
-		}
-		return this;
+            if (entity.entityType === 'node') {
+                var ways = entity.entity.parentWays();
+                if (!ways.length) {
+                    return new iD.controller.edit.SelectedPOINode(entity);
+                } else {
+                    return new iD.controller.edit.SelectedWayNode(entity,ways[0]);
+                }
+            } else if (entity.entityType === 'way') {
+                return new iD.controller.edit.SelectedWay(entityUI.entity, event);
+            }
+        }
+        return this;
 	}
 });
 

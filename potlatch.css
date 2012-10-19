@@ -137,15 +137,15 @@ way .highlighted { color: pink; }
 
 way !:drawn { z-index:10; width: 1; color: black; } 
 way::highlight :hover { z-index: 2; width: eval('_width+10'); color: #ffff99; }
-way::highlight :selected { z-index: 2; width: eval('_width+10'); color: yellow; opacity: 0.7;}
+way::highlight :selected { z-index: 2; width: eval('_width+5'); color: #FFF68D; }
 
-node :selectedway { z-index: 9; icon-image: square; icon-width: 8; color: red; layer: 5; }
+node :selectedway { z-index: 9; icon-image: circle; icon-width: 7; color: #DD4848; layer: 5; }
 node::junction :junction :selectedway, node::junction :junction :hoverway { z-index: 8; icon-image: square; icon-width: 11; casing-color: black; casing-width: 1; layer: 5; }
 
-node !:drawn :poi { z-index: 2; icon-image: circle; icon-width: 4; color: green; casing-color: black; casing-width: 1; }
+node !:drawn :poi { z-index: 2; icon-image: circle; icon-width: 6; color: #98D1FD; casing-color: #135485; casing-width: 2; }
 
 node :hoverway { z-index: 9; icon-image: square; icon-width: 7; color: blue; layer: 5; }
-node::highlight :selected { z-index: 1; icon-image: square; icon-width: eval('_width+10'); color: yellow; }
+node::highlight :selected { z-index: 1; icon-image: circle; icon-width: eval('_width+2'); color: #FFF68D; }
 
 /* Descendant selectors provide an easy way to style relations: this example means "any way
    which is part of a relation whose type=route". */
@@ -155,5 +155,3 @@ relation[type=route][route=bicycle][network=ncn] way { z-index: 1; width: 12; co
 relation[type=route][route=bicycle][network=rcn] way { z-index: 1; width: 12; color: cyan; opacity: 0.3; }
 relation[type=route][route=bicycle][network=lcn] way { z-index: 1; width: 12; color: blue; opacity: 0.3; }
 relation[type=route][route=foot] way { z-index: 1; width: 10; color: #80ff80; opacity: 0.6; }
-
-
