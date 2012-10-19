@@ -16,6 +16,15 @@ a:visited, a {
     color: black;
 }
 
+input[type=text] {
+    font:normal 13px/20px Helvetica, Arial, sans-serif;
+    padding:1px 2px;
+}
+
+input[type=text]:focus {
+    border-color:#222;
+}
+
 * {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -144,38 +153,23 @@ polyline {
 .edit-pane {
     position:absolute;
     display:none;
+    right:10px;
     top:80px;
-    height:520px;
+    height:500px;
     width:300px;
     background:#fff;
     overflow:auto;
+    box-shadow:#222 0px 0px 3px;
 }
 
 .edit-pane.active {
     display:block;
-    right:0px;
 }
 
 .edit-pane h2 {
     margin:0;
     padding:5px 5px 10px 5px;
     background:#e4e4e4;
-}
-
-.tabs {
-    border-bottom:1px solid #ddd;
-    background:#e4e4e4;
-}
-
-.tabs a {
-    color:#888;
-    padding:5px;
-    text-decoration:none;
-}
-
-.tabs a.active {
-    color:#222;
-    background:#fff;
 }
 
 .edit-pane a.close {
@@ -240,14 +234,6 @@ polyline {
   0% { -moz-transform: rotate(0deg); }
   100% { -moz-transform: rotate(360deg); }
 }
-@-ms-keyframes spinnerAnim {
-  0% { -ms-transform: rotate(0deg); }
-  100% { -ms-transform: rotate(360deg); }
-}
-@-o-keyframes spinnerAnim {
-  0% { -o-transform: rotate(0deg); }
-  100% { -o-transform: rotate(360deg); }
-}
 .spinner {
   -webkit-animation-fill-mode: both;
   -webkit-animation: spinnerAnim 1.5s infinite linear;
@@ -255,10 +241,4 @@ polyline {
   -moz-animation-fill-mode: both;
   -moz-animation: spinnerAnim 1.5s infinite linear;
   -moz-transform-origin: 50% 50%;
-  -ms-animation-fill-mode: both;
-  -ms-animation: spinnerAnim 1.5s infinite linear;
-  -ms-transform-origin: 50% 50%;
-  -o-animation-fill-mode: both;
-  -o-animation: spinnerAnim 1.5s infinite linear;
-  -o-transform-origin: 50% 50%;
 }

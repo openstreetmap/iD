@@ -1,6 +1,6 @@
 // iD/controller/ControllerState.js
 
-define(['dojo/_base/declare','dojo/_base/lang'], function(declare,lang) {
+define(['dojo/_base/declare'], function(declare) {
 
 // ----------------------------------------------------------------------
 // ControllerState base class
@@ -51,7 +51,8 @@ declare("iD.controller.ControllerState", null, {
 	undoAdder:function() {
 		// summary:		Shorthand for adding an action to the global undo stack, setting the scope correctly.
 		// return:		Function
-		return lang.hitch(this.controller.undoStack, this.controller.undoStack.addAction);
+		return _.bind(this.controller.undoStack.addAction,
+                      this.controller.undoStack);
 	}
 
 });

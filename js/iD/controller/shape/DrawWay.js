@@ -126,7 +126,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 					undo = new iD.actions.CompositeUndoableAction();
 					var node=this.appendNewNode(event, undo);
 					_.each(ways, function(w) {
-                        w.doInsertNodeAtClosestPosition(node, true, lang.hitch(undo, undo.push));
+                        w.doInsertNodeAtClosestPosition(node, true, _.bind(undo.push, this));
                     });
 					action = this.undoAdder();
                     action(undo);
@@ -167,16 +167,18 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
         if (this.editEnd) {
             this.way.doAppendNode(node, performAction);
             this.controller.map.refreshUI(this.way);
+        } else {
+            this.way.doPrependNode(node, performAction);
         }
-        else { this.way.doPrependNode(node, performAction); }
     },
 
 	appendNewNode:function(event, undo) {
-		var map=this.controller.map;
-		var node=this.getConnection().doCreateNode({},
+		var map = this.controller.map;
+        var push = _.bind(undo.push, undo);
+		var node = this.getConnection().doCreateNode({},
 			map.coord2lat(map.mouseY(event)),
-			map.coord2lon(map.mouseX(event)), lang.hitch(undo,undo.push) );
-		this.appendNode(node, lang.hitch(undo,undo.push));
+			map.coord2lon(map.mouseX(event)), push);
+		this.appendNode(node, push);
 		return node;
 	}
 });

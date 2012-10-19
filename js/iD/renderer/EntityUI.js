@@ -7,7 +7,8 @@
 // fill images
 // opacity
 
-define(['dojo/_base/declare','dojo/_base/lang','iD/Entity','iD/renderer/Map'], function(declare,lang){
+define(['dojo/_base/declare','iD/Entity','iD/renderer/Map'],
+       function(declare) {
 
 // ----------------------------------------------------------------------
 // EntityUI base class
@@ -69,7 +70,7 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	getEnhancedTags:function() {
 		// summary:		Return tags for this entity augmented by the EntityUI's state classes.
-		var tags = lang.clone(this.entity.tags);
+		var tags = _.clone(this.entity.tags);
 		// Apply stateClasses (hover, selected, hoverway, selectedway)
 		for (var i in this.stateClasses) {
 			tags[':'+this.stateClasses[i]] = 'yes';

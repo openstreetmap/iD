@@ -7,7 +7,7 @@
 // fill images
 // opacity
 
-define(['dojo/_base/declare','dojo/_base/lang','iD/renderer/EntityUI'], function(declare,lang){
+define(['dojo/_base/declare','iD/renderer/EntityUI'], function(declare) {
 
 // ----------------------------------------------------------------------
 // WayUI class
@@ -115,12 +115,13 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
                     color: [0,0,0,0]
                 }));
 
+            var entityMouseEvent = _.bind(this.entityMouseEvent, this);
 			hit.source=this;
-			hit.connect("onclick", lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmousedown", lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmouseup", lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmouseenter", lang.hitch(this,this.entityMouseEvent));
-			hit.connect("onmouseleave", lang.hitch(this,this.entityMouseEvent));
+			hit.connect("onclick", entityMouseEvent);
+			hit.connect("onmousedown", entityMouseEvent);
+			hit.connect("onmouseup", entityMouseEvent);
+			hit.connect("onmouseenter", entityMouseEvent);
+			hit.connect("onmouseleave", entityMouseEvent);
 		}
 		// Draw nodes
 		for (i=0; i<way.nodes.length; i++) {

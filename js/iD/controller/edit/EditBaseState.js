@@ -23,16 +23,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
         // entity: iD.Entity	The entity to be edited.
         $('.edit-pane h2').text(iD.Util.friendlyName(entity));
         $('.edit-pane').show().addClass('active');
-        $('.edit-pane a.tab').click(function(e) {
-            $('.edit-pane a.tab').removeClass('active');
-            var hud = $(e.currentTarget).addClass('active')
-                .attr('href').split('#').pop();
-            $('.edit-pane .hud').hide();
-            $('.edit-pane .' + hud).show();
-            return e.preventDefault();
-        });
-        $('.edit-pane a.tab:first').click();
-
+        /*
         var $presets = $('.edit-pane .presets');
         // Build presets panel
         iD.Util.presets(entity.entityType, function(presets) {
@@ -55,6 +46,7 @@ declare("iD.controller.edit.EditBaseState", [iD.controller.ControllerState], {
                 });
             });
         });
+        */
 
         // Build tag panel
         $('.edit-pane .tags tbody').empty();

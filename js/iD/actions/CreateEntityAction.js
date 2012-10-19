@@ -1,6 +1,6 @@
 // iD/actions/UndoableAction.js
 
-define(['dojo/_base/declare','iD/actions/UndoableAction'], function(declare){
+define(['dojo/_base/declare','iD/actions/UndoableAction'], function(declare) {
 
 // ----------------------------------------------------------------------
 // CreateEntityAction class

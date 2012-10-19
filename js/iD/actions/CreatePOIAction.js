@@ -1,6 +1,7 @@
 // iD/actions/CreatePOIAction.js
 
-define(['dojo/_base/declare','dojo/_base/lang','iD/actions/UndoableAction'], function(declare,lang){
+define(['dojo/_base/declare', 'iD/actions/UndoableAction'],
+       function(declare) {
 
 // ----------------------------------------------------------------------
 // CreatePOIAction class

@@ -1,8 +1,8 @@
 // iD/renderer/NodeUI.js
 // NodeUI classes for iD
 
-define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojox/gfx/_base','iD/renderer/EntityUI'],
-       function(declare,lang,array,g){
+define(['dojo/_base/declare','dojo/_base/array','dojox/gfx/_base','iD/renderer/EntityUI'],
+       function(declare,array,g){
 
 // ----------------------------------------------------------------------
 // NodeUI class
