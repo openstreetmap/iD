@@ -13,13 +13,9 @@ define(['dojo/_base/declare','dojo/_base/event',
 declare("iD.renderer.Map", null, {
 
 	MASTERSCALE: 5825.4222222222,
-	MINSCALE: 14,
+	MINSCALE: 0,
+	MIN_DOWNLOAD_SCALE: 14,
 	MAXSCALE: 23,
-	zoom: NaN,
-	zoomfactor: NaN,
-	baselon: NaN,			// original longitude at top left of viewport
-	baselat: NaN,			// original latitude at top left of viewport
-	baselatp: NaN,			// original projected latitude at top left of viewport
 
 	div: '',				// <div> of this map
 	surface: null,			// <div>.surface containing the rendering
@@ -43,11 +39,7 @@ declare("iD.renderer.Map", null, {
 	dragtime: NaN,			// timestamp of mouseup (compared to stop resulting click from firing)
 	dragconnect: null,		// event listener for endDrag
 
-	containerx: 0,			// screen co-ordinates of container
-	containery: 0,			//  |
-	centrelat: NaN,			// lat/long and bounding box of map
-	centrelon: NaN,			//  |
-	extent: {},				//  |
+	coord: { z: 0, x: 0.5, y: 0.5 },			// lat/long and bounding box of map
 	mapheight: NaN,			// size of map object in pixels
 	mapwidth: NaN,			//  |
 
@@ -58,6 +50,8 @@ declare("iD.renderer.Map", null, {
 	elastic: null,			// Group for drawing elastic band
 
 	ruleset: null,			// map style
+	projection: null,			// map style
+	tileSize: 256,			// map style
 
 	constructor: function(obj) {
 		// summary:		The main map display, containing the individual sprites (UIs) for each entity.
@@ -66,10 +60,12 @@ declare("iD.renderer.Map", null, {
 
 		this.mapwidth = obj.width ? obj.width : 800;
 		this.mapheight = obj.height ? obj.height : 400;
+        this.coord = this.zoomCoord(this.coord, 5);
 
 		// Initialise variables
 		this.nodeuis = {},
 		this.wayuis = {},
+        this.projection = new SphericalMercator();
 		this.div=document.getElementById(obj.div);
 		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
 		this.backdrop=this.surface.createRect({
@@ -81,21 +77,16 @@ declare("iD.renderer.Map", null, {
 		this.tilegroup = this.surface.createGroup();
 		this.container = this.surface.createGroup();
 		this.connection = obj.connection;
-		this.zoom = obj.zoom ? obj.zoom : 17;
-		this.baselon = obj.lon;
-		this.baselat = obj.lat;
-		this.baselatp = this.lat2latp(obj.lat);
-		this._setScaleFactor();
 		this.updateCoordsFromViewportPosition();
 
         // Cache the margin box, since this is expensive.
         this.marginBox = domGeom.getMarginBox(this.div);
 
 		// Initialise layers
-		this.layers={};
-		for (var l=this.minlayer; l<=this.maxlayer; l++) {
-			var r=this.container.createGroup();
-			this.layers[l]={
+		this.layers = {};
+		for (var l = this.minlayer; l <= this.maxlayer; l++) {
+			var r = this.container.createGroup();
+			this.layers[l] = {
 				root: r,
 				fill: r.createGroup(),
 				casing: r.createGroup(),
@@ -160,7 +151,7 @@ declare("iD.renderer.Map", null, {
 				return collection;
 		}
 		// Find correct sublayer, inserting if necessary
-		var insertAt=collection.children.length;
+		var insertAt = collection.children.length;
 		for (var i = 0; i < collection.children.length; i++) {
 			sub=collection.children[i];
 			if (sub.sublayer==sublayer) { return sub; }
@@ -278,36 +269,30 @@ declare("iD.renderer.Map", null, {
 
 	// -------------
     // Zoom handling
-
-    zoomIn: function() {
-        // summary:		Zoom in by one level (unless maximum reached).
-        return this.setZoom(this.zoom + 1);
+    zoomBy: function(by) {
+        var to = this.coord.z + by;
+        if (to < this.MINSCALE || to > this.MAXSCALE) return this;
+        this.coord = this.zoomCoord(this.coord, to);
+        return this.draw();
     },
 
-    zoomOut: function() {
-        // summary:		Zoom out by one level (unless minimum reached).
-        this.setZoom(this.zoom - 1);
-        this.download();
-        return this;
-    },
+    zoomIn: function() { return this.zoomBy(1); },
+    zoomOut: function() { return this.zoomBy(-1); },
+    setZoom: function(zoom) { return this.zoomBy(zoom - this.coord.z); },
 
-    setZoom: function(zoom) {
-        if (zoom < this.MINSCALE || zoom > this.MAXSCALE) return this;
-        // summary:		Redraw the map at a new zoom level.
-        this.zoom = zoom;
-        this._setScaleFactor();
-        this._blankTiles();
-        this.setCentre({
-            lat: this.centrelat,
-            lon: this.centrelon
-        });
+    draw: function() {
+        this.clearTiles();
+        if (this.coord.z > this.MIN_DOWNLOAD_SCALE) {
+            this.download();
+        }
+        this.loadTiles();
+        this.updateOrigin();
         this.updateUIs(true, true);
-        return this;
     },
 
     _setScaleFactor: function() {
         // summary:		Calculate the scaling factor for this zoom level.
-        this.zoomfactor = this.MASTERSCALE/Math.pow(2, 13 - this.zoom);
+        this.zoomfactor = this.MASTERSCALE / Math.pow(2, 13 - this.zoom);
     },
 
 	// ----------------------
@@ -337,23 +322,23 @@ declare("iD.renderer.Map", null, {
         // summary:		Load all tiles for the current viewport. This is a bare-bones function 
         //				at present: it needs configurable URLs (not just Bing), attribution/logo
         //				support, and to be 'nudgable' (i.e. adjust the offset).
-        var tl = this.locationCoord({
-                lat: this.extent.north,
-                lon: this.extent.west
-            }, this.zoom),
-            br = this.locationCoord({
-                lat: this.extent.south,
-                lon: this.extent.east
-            }, this.zoom),
+        var tl = {
+                x: Math.floor(this.coord.x - this.mapwidth / 2 / this.tileSize),
+                y: Math.floor(this.coord.y - this.mapheight / 2 / this.tileSize),
+                z: this.coord.z
+            },
+            br = {
+                x: Math.ceil(this.coord.x + this.mapwidth / 2 / this.tileSize),
+                y: Math.ceil(this.coord.y + this.mapheight / 2 / this.tileSize),
+                z: this.coord.z
+            },
             tileKeys = _.keys(this.tiles),
             seen = [],
-            coord = { z: this.zoom };
+            coord = { z: this.coord.z };
 
         for (coord.x = tl.x; coord.x <= br.x; coord.x++) {
             for (coord.y = tl.y; coord.y <= br.y; coord.y++) {
-                if (!this._getTile(coord)) {
-                    this._fetchTile(coord);
-                }
+                this.fetchTile(coord);
                 seen.push(iD.Util.tileKey(coord));
             }
         }
@@ -363,25 +348,16 @@ declare("iD.renderer.Map", null, {
         }, this));
     },
 
-	_fetchTile: function(coord) {
+	fetchTile: function(coord) {
+        if (this.tiles[iD.Util.tileKey(coord)]) return;
 		// summary:		Load a tile image at the given tile co-ordinates.
 		var t = this.tilegroup.createImage({
-			x: Math.floor(this.lon2coord(this.tile2lon(coord.x))),
-			y: Math.floor(this.lat2coord(this.tile2lat(coord.y))),
-			width: 256,
-            height: 256,
+			x: coord.x * this.tileSize,
+			y: coord.y * this.tileSize,
+			width: this.tileSize,
+            height: this.tileSize,
 			src: this._tileURL(coord)
 		});
-		this._assignTile(coord, t);
-	},
-
-	_getTile: function(coord) {
-		// summary:		See if this tile is already loaded.
-		return this.tiles[iD.Util.tileKey(coord)];
-	},
-
-	_assignTile: function(coord, t) {
-		// summary:		Store a reference to the tile so we know it's loaded.
         this.tiles[iD.Util.tileKey(coord)] = t;
 	},
 
@@ -402,7 +378,7 @@ declare("iD.renderer.Map", null, {
             .replace('$quadkey', u);
 	},
 
-	_blankTiles: function() {
+	clearTiles: function() {
 		// summary:		Unload all tiles and remove from the display.
 		this.tilegroup.clear();
 		this.tiles = {};
@@ -422,7 +398,7 @@ declare("iD.renderer.Map", null, {
 		this.dragx = this.dragy=NaN;
 		this.startdragx = e.clientX;
 		this.startdragy = e.clientY;
-		this.dragconnect = srcElement.connect("onmouseup", _.bind(this.endDrag, this));
+		this.dragconnect = srcElement.connect('onmouseup', _.bind(this.endDrag, this));
 	},
 
 	endDrag: function(e) {
@@ -440,29 +416,31 @@ declare("iD.renderer.Map", null, {
 		this.download();
 	},
 
-	processMove: function(e) {
-		// summary:		Drag the map to a new origin.
-		// e: MouseEvent	The mouse-move event that triggered it.
-		var x = e.clientX;
-		var y = e.clientY;
-		if (this.dragging) {
-			if (this.dragx) {
-				this.containerx += (x - this.dragx);
-				this.containery += (y - this.dragy);
-				this.updateOrigin();
-				this.dragged=true;
-			}
-			this.dragx = x;
-			this.dragy = y;
-		} else {
-			this.controller.entityMouseEvent(e,null);
-		}
-	},
+    processMove: function(e) {
+        // summary:		Drag the map to a new origin.
+        // e: MouseEvent	The mouse-move event that triggered it.
+        var x = e.clientX, y = e.clientY;
+        if (this.dragging) {
+            if (this.dragx) {
+                this.coord.x -= (x - this.dragx) / 256;
+                this.coord.y -= (y - this.dragy) / 256;
+                this.updateOrigin();
+                this.dragged = true;
+            }
+            this.dragx = x;
+            this.dragy = y;
+        } else {
+            this.controller.entityMouseEvent(e,null);
+        }
+    },
 
 	updateOrigin: function() {
 		// summary:		Tell Dojo to update the viewport origin.
-		this.container.setTransform([Matrix.translate(this.containerx, this.containery)]);
-		this.tilegroup.setTransform([Matrix.translate(this.containerx, this.containery)]);
+        var ox = (this.mapwidth / 2) -this.coord.x * 256,
+            oy = (this.mapheight / 2) -this.coord.y * 256,
+            t = [Matrix.translate(ox, oy)];
+		this.container.setTransform(t);
+		this.tilegroup.setTransform(t);
 	},
 
 	_mouseEvent: function(e) {
@@ -489,25 +467,20 @@ declare("iD.renderer.Map", null, {
 
 	setCenter: function(loc) { this.setCentre(loc); },
 
-	_updateCoords:function(x, y) {
+	_updateCoords: function(x, y) {
 		// summary:		Set centre and bbox.
 		this.containerx = x;
         this.containery = y;
         this.updateOrigin();
-		this.centrelon = this.coord2lon(-x + this.mapwidth/2);
-		this.centrelat = this.coord2lat(-y + this.mapheight/2);
-
-        this.extent = {
-            north: this.coord2lat(-y),
-            south: this.coord2lat(-y + this.mapheight),
-            west: this.coord2lon(-x),
-            east: this.coord2lon(-x + this.mapwidth)
+		this.centre = {
+            lon: this.coord2lon(-x + this.mapwidth/2),
+            lat: this.coord2lat(-y + this.mapheight/2)
         };
 
 		this.loadTiles();
 	},
 
-	clickSurface:function(e) {
+	clickSurface: function(e) {
 		// summary:		Handle a click on an empty area of the map.
 		if (this.dragged && e.timeStamp==this.dragtime) { return; }
 		this.controller.entityMouseEvent(e,null);
@@ -529,14 +502,31 @@ declare("iD.renderer.Map", null, {
 	lat2screen:function(a) { return this.lat2coord(a) + this.marginBox.t + this.containery; },
 
 	locationCoord: function(ll, z) {
-        var z2 = Math.pow(2, z), d2r = Math.PI / 180;
+        var px = this.projection.px([ll.lon, ll.lat], z);
         return {
             z: z,
-            x: Math.floor((ll.lon + 180) / 360 * z2),
-            y: Math.floor((1 - Math.log(Math.tan(ll.lat * d2r) +
-                   1 / Math.cos(ll.lat * d2r)) / Math.PI) / 2 * z2)
+            x: Math.floor(px[0] / this.tileSize),
+            y: Math.floor(px[1] / this.tileSize)
         };
     },
+
+	coordLocation: function(coord) {
+        var ll = this.projection.ll([coord.x * 256, coord.y * 256], coord.z);
+        return {
+            lon: ll[0],
+            lat: ll[1]
+        };
+    },
+
+    zoomCoord: function(c, z) {
+        var power = Math.pow(2, z - c.z);
+        return {
+            x: c.x * power,
+            y: c.y * power,
+            z: z
+        };
+    },
+
 	lon2tile:function(a) { return (Math.floor((a+180)/360*Math.pow(2,this.zoom))); },
 	lat2tile:function(a)   { return (Math.floor((1-Math.log(Math.tan(a*Math.PI/180) + 1/Math.cos(a*Math.PI/180))/Math.PI)/2 *Math.pow(2,this.zoom))); },
 	tile2lon:function(a)   { return (a/Math.pow(2,this.zoom)*360-180); },
