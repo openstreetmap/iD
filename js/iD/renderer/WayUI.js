@@ -124,14 +124,13 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 			hit.connect("onmouseleave", entityMouseEvent);
 		}
 		// Draw nodes
-		for (i=0; i<way.nodes.length; i++) {
-			var node=way.nodes[i];
-			var sc=[];
+        _.each(way.nodes, function(node) {
+			var sc = [];
 			if (tags[':shownodes']) { sc.push('selectedway'); }
 			if (tags[':shownodeshover']) { sc.push('hoverway'); }
 			if (node.entity.parentWays().length>1) { sc.push('junction'); }
-			this.map.createUI(node,sc);
-		}
+			this.map.createUI(node, sc);
+		});
 
         return this;
 	},
