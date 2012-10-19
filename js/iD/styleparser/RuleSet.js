@@ -12,17 +12,17 @@ declare("iD.styleparser.RuleSet", null, {
 	choosers: [],		// list of StyleChoosers
 	callback: null,
 
-	constructor:function() {
+	constructor: function() {
 		// summary:		An entire stylesheet in parsed form.
-		this.choosers=[];
+		this.choosers = [];
 	},
 
-	registerCallback:function(callback) {
+	registerCallback: function(callback) {
 		// summary:		Set a callback function to be called when the CSS is loaded and parsed.
-		this.callback=callback;
+		this.callback = callback;
 	},
 
-	getStyles:function(entity, tags, zoom) {
+	getStyles: function(entity, tags, zoom) {
 		// summary:		Find the styles for a given entity.
 		var sl=new iD.styleparser.StyleList();
 		for (var i in this.choosers) {
@@ -39,11 +39,11 @@ declare("iD.styleparser.RuleSet", null, {
 	parseCSS:function(css) {
 		// summary:		Parse a CSS document into a set of StyleChoosers.
 		var previous=0;								// what was the previous CSS word?
-		var sc=new iD.styleparser.StyleChooser();	// currently being assembled
-		this.choosers=[];
+		var sc = new iD.styleparser.StyleChooser();	// currently being assembled
+		this.choosers = [];
 		css = css.replace(/[\r\n]/g,"");				// strip linebreaks because JavaScript doesn't have the /s modifier
 
-		var o={};
+		var o = {};
 		while (css.length>0) {
 
 			// CSS comment

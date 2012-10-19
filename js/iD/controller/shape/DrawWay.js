@@ -52,7 +52,8 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
         var map = this.controller.map;
         var ways, undo, action;
 
-        if (event.type=='mouseover' && entityType=='way' &&
+        if (event.type === 'mouseover' &&
+            entityType === 'way' &&
             entityUI !== this.wayUI) {
 
             // Mouse over way, show hover highlight
@@ -144,7 +145,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	},
 
 	updateElastic:function(event) {
-		var map=this.controller.map;
+		var map = this.controller.map;
 		map.drawElastic(
 			map.lon2coord(this.getDrawingNode().lon),
 			map.lat2coord(this.getDrawingNode().lat),
@@ -153,11 +154,13 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 	},
 
 	getDrawingNode:function() {
-		return (this.editEnd ? this.way.nodes[this.way.nodes.length - 1] : this.way.nodes[0]);
+		return this.editEnd ?
+            this.way.nodes[this.way.nodes.length - 1] : this.way.nodes[0];
 	},
 
 	getStartNode:function() {
-		return (this.editEnd ? this.way.nodes[0] : this.way.nodes[this.way.nodes.length - 1]);
+		return this.editEnd ?
+            this.way.nodes[0] : this.way.nodes[this.way.nodes.length - 1];
 	},
 
 	appendNode:function(node, performAction) {
@@ -170,8 +173,7 @@ declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
 
 	appendNewNode:function(event, undo) {
 		var map=this.controller.map;
-		var node=this.getConnection().doCreateNode(
-			{},
+		var node=this.getConnection().doCreateNode({},
 			map.coord2lat(map.mouseY(event)),
 			map.coord2lon(map.mouseX(event)), lang.hitch(undo,undo.push) );
 		this.appendNode(node, lang.hitch(undo,undo.push));

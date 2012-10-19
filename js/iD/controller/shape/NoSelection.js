@@ -13,13 +13,13 @@
 
 */
 
-define(['dojo/_base/declare','dojo/_base/lang',
+define(['dojo/_base/declare',
 		'iD/actions/UndoableAction',
 		'iD/controller/ControllerState',
 		'iD/controller/shape/DrawWay',
 		'iD/controller/shape/SelectedWay',
 		'iD/controller/shape/SelectedPOINode'
-		], function(declare,lang){
+		], function(declare) {
 
 // ----------------------------------------------------------------------
 // ControllerState base class
@@ -68,8 +68,8 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
                     var undo = new iD.actions.CompositeUndoableAction();
                     var startNode = this.getConnection().doCreateNode({}, 
                         map.coord2lat(map.mouseY(event)),
-                        map.coord2lon(map.mouseX(event)), lang.hitch(undo,undo.push) );
-                    var way = this.getConnection().doCreateWay({}, [startNode], lang.hitch(undo,undo.push) );
+                        map.coord2lon(map.mouseX(event)), _.bind(undo.push, undo) );
+                    var way = this.getConnection().doCreateWay({}, [startNode], _.bind(undo.push, undo) );
                     this.controller.undoStack.addAction(undo);
                     this.controller.map.createUI(way);
                     return new iD.controller.shape.DrawWay(way);

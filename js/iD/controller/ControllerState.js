@@ -42,10 +42,10 @@ declare("iD.controller.ControllerState", null, {
 		return this.__proto__.declaredClass.split('.').slice(2);
 	},
 	
-	getConnection:function() {
+	getConnection: function() {
 		// summary: 	Shorthand to return the Connection associated with this Controller (via its Map object).
 		// return:		iD.Connection
-		return this.controller.map.conn;
+		return this.controller.map.connection;
 	},
 	
 	undoAdder:function() {

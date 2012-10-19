@@ -278,26 +278,25 @@ declare("iD.renderer.Map", null, {
 
     zoomIn: function() {
         // summary:		Zoom in by one level (unless maximum reached).
-        if (this.zoom !== this.MAXSCALE) {
-            this.changeScale(this.zoom + 1);
-        }
+        return this.changeScale(this.zoom + 1);
     },
 
     zoomOut: function() {
         // summary:		Zoom out by one level (unless minimum reached).
-        if (this.zoom !== this.MINSCALE) {
-            this.changeScale(this.zoom - 1);
-        }
+        this.changeScale(this.zoom - 1);
         this.download();
+        return this;
     },
 
     changeScale: function(zoom) {
+        if (zoom < this.MINSCALE || zoom > this.MAXSCALE) return this;
         // summary:		Redraw the map at a new zoom level.
         this.zoom = zoom;
         this._setScaleFactor();
         this._blankTiles();
         this.updateCoordsFromLatLon(this.centrelat, this.centrelon);	// recentre
         this.updateUIs(true, true);
+        return this;
     },
 
     _setScaleFactor: function() {
@@ -386,7 +385,7 @@ declare("iD.renderer.Map", null, {
 			var mask = 1 << (zoom - 1);
 			if ((coord.x & mask) !== 0) byte++;
 			if ((coord.y & mask) !== 0) byte += 2;
-			u = u + byte.toString();
+			u += byte.toString();
 		}
 		return this.tilebaseURL
             .replace('$z', coord.z)
