@@ -1,7 +1,8 @@
 // iD/styleparser/RuleSet.js
 
-define(['dojo/_base/xhr','dojo/_base/lang','dojo/_base/declare',
-       'iD/styleparser/Style','iD/styleparser/StyleChooser','iD/styleparser/Condition','iD/styleparser/StyleList'], function(xhr,lang,declare) {
+define(['dojo/_base/declare',
+       'iD/styleparser/Style','iD/styleparser/StyleChooser',
+       'iD/styleparser/Condition','iD/styleparser/StyleList'], function(declare) {
 
 // ----------------------------------------------------------------------
 // RuleSet base class
@@ -34,7 +35,10 @@ declare("iD.styleparser.RuleSet", null, {
 
 	loadFromCSS:function(url) {
 		// summary:		Load a MapCSS file from a URL, then throw it at the parser when it's loaded.
-		xhr.get({ url: url, load: lang.hitch(this, "parseCSS") });
+        $.ajax({
+            url: url,
+            success: _.bind(this.parseCSS, this)
+        });
 	},
 
 	parseCSS:function(css) {
@@ -238,7 +242,7 @@ declare("iD.styleparser.RuleSet", null, {
 			return this.CSSCOLORS[colorStr];
 		} else {
 			var match = this.HEX.exec(colorStr);
-			if ( match ) { 
+			if (match) {
                 if ( match[1].length == 3) {
                     // repeat digits. #abc => 0xaabbcc
                     return Number("0x"+match[1].charAt(0)+match[1].charAt(0)+
