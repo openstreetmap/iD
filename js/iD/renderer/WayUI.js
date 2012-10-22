@@ -108,7 +108,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 			var hit = this.recordSprite(this.targetGroup('hit')
                 .createPolyline(coords)
                 .setStroke({
-                    width: maxwidth+8,
+                    width: maxwidth + 8,
                     color: [0,0,0,0]
                 }));
 

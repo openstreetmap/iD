@@ -34,44 +34,30 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
          "iD/ui/DragAndDrop","iD/ui/StepPane",
          "dojo/domReady!"], function(domGeom,domClass,on,dom,Evented){
 
+    var map;
 	var ruleset = new iD.styleparser.RuleSet();
 	var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
 
 	// Load styles
-	ruleset.registerCallback(styleLoaded);
-	ruleset.loadFromCSS("potlatch.css", styleLoaded);
+    ruleset.loadFromCSS("potlatch.css", function() {
+        // Initialise map
+        map = new iD.renderer.Map({
+            div: "map",
+            connection: connection,
+            width: dom.byId('map').offsetWidth,
+            height: dom.byId('map').offsetHeight
+        });
+        map.ruleset = ruleset;
 
-	// Initialise map
-	var map = new iD.renderer.Map({
-		div: "map",
-		connection: connection,
-		width: dom.byId('map').offsetWidth,
-		height: dom.byId('map').offsetHeight
-	});
-	map.ruleset = ruleset;
-
-    map.setZoom(19)
-        .setCenter({ lat: 38.89, lon: -77 });
-
-	// Initialise controller
-	var controller = new iD.Controller(map);
-	map.setController(controller);
-
-	// ----------------------------------------------------
-	// Data is loaded and app ready to go
-	function styleLoaded() {
-		// Initialise drag-and-drop icons
-		new iD.ui.DragAndDrop("map", map, "dndgrid");
-
-		// Initialise help pane
+        var controller = new iD.Controller(map);
 		controller.setStepper(new iD.ui.StepPane());
-
-		// Set initial controllerState
 		controller.setState(new iD.controller.edit.NoSelection());
+        map.setController(controller);
 
-		// Load data
-		map.download();
-	}
+        map.setZoom(19)
+            .setCenter({ lat: 38.89, lon: -77 });
+    });
+
 
 	// ----------------------------------------------------
 	// Mode button handlers
