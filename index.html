@@ -22,8 +22,7 @@
   <script type="text/javascript" src="js/iD/Connection.js"></script>
   <script>
 
-require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented",
-         "iD/actions/UndoStack",
+require(["iD/actions/UndoStack",
          "iD/actions/CreatePOIAction",
          "iD/actions/AddNodeToWayAction",
          "iD/Controller",
@@ -31,8 +30,7 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
          "iD/controller/edit/NoSelection",
          "iD/controller/shape/NoSelection",
          "iD/renderer/Map","iD/styleparser/RuleSet",
-         "iD/ui/DragAndDrop","iD/ui/StepPane",
-         "dojo/domReady!"], function(domGeom,domClass,on,dom,Evented){
+         "iD/ui/DragAndDrop","iD/ui/StepPane"], function() {
 
     var map;
 	var ruleset = new iD.styleparser.RuleSet();
@@ -44,8 +42,8 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
         map = new iD.renderer.Map({
             div: "map",
             connection: connection,
-            width: dom.byId('map').offsetWidth,
-            height: dom.byId('map').offsetHeight
+            width: $('#map').width(),
+            height: $('#map').height()
         });
         map.ruleset = ruleset;
 
