@@ -1,8 +1,8 @@
 // iD/renderer/NodeUI.js
 // NodeUI classes for iD
 
-define(['dojo/_base/declare','dojo/_base/array','dojox/gfx/_base','iD/renderer/EntityUI'],
-       function(declare,array,g){
+define(['dojo/_base/declare','dojox/gfx/_base','iD/renderer/EntityUI'],
+       function(declare,g){
 
 // ----------------------------------------------------------------------
 // NodeUI class
@@ -104,6 +104,8 @@ declare("iD.renderer.NodeUI", [iD.renderer.EntityUI], {
 			hit.connect("onmouseenter", _.bind(this.entityMouseEvent, this));
 			hit.connect("onmouseleave", _.bind(this.entityMouseEvent, this));
 		}
+
+        return this;
 	}
 });
 

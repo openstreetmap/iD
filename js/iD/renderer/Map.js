@@ -65,14 +65,14 @@ declare("iD.renderer.Map", null, {
 		this.nodeuis = {},
 		this.wayuis = {},
         this.projection = new SphericalMercator();
-		this.div=document.getElementById(obj.div);
+		this.div = document.getElementById(obj.div);
 		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
 		this.backdrop=this.surface.createRect({
             x: 0,
             y: 0,
             width: this.mapwidth,
             height: this.mapheight
-        }).setFill(new dojo.Color([255,255,245,1]));
+        }).setFill(new dojo.Color([100,100,100,1]));
 		this.tilegroup = this.surface.createGroup();
 		this.container = this.surface.createGroup();
 		this.connection = obj.connection;
@@ -116,7 +116,7 @@ declare("iD.renderer.Map", null, {
 	_moveToPosition:function(group, position) {
 		// summary:		Supplementary method for dojox.gfx.
 		// This should ideally be core Dojo stuff: see http://bugs.dojotoolkit.org/ticket/15296
-		var parent=group.getParent();
+		var parent = group.getParent();
 		if (!parent) { return; }
 		this._moveChildToPosition(parent,group,position);
 		if (position === group.rawNode.parentNode.childNodes.length) {
@@ -153,7 +153,7 @@ declare("iD.renderer.Map", null, {
 		// Find correct sublayer, inserting if necessary
 		var insertAt = collection.children.length;
 		for (var i = 0; i < collection.children.length; i++) {
-			sub=collection.children[i];
+			sub = collection.children[i];
 			if (sub.sublayer === sublayer) { return sub; }
 			else if (sub.sublayer>sublayer) {
 				sub = collection.createGroup();
@@ -170,21 +170,14 @@ declare("iD.renderer.Map", null, {
 	createUI: function(entity,stateClasses) {
 		// summary:		Create a UI (sprite) for an entity, assigning any specified state classes
 		//				(temporary attributes such as ':hover' or ':selected')
-		var id = entity.id;
-        if (entity.entityType === 'node') {
-            if (!this.nodeuis[id]) {
-                this.nodeuis[id] = new iD.renderer.NodeUI(entity,this,stateClasses);
-            } else {
-                this.nodeuis[id].setStateClasses(stateClasses).redraw();
-            }
-            return this.nodeuis[id];	// iD.renderer.EntityUI
+        if (this.getUI(entity)) {
+            return this.getUI(entity).setStateClasses(stateClasses).redraw();
+        } else if (entity.entityType === 'node') {
+            this.nodeuis[entity.id] = new iD.renderer.NodeUI(entity,this,stateClasses);
+            return this.nodeuis[entity.id]; // iD.renderer.EntityUI
         } else if (entity.entityType === 'way') {
-            if (!this.wayuis[id]) {
-                this.wayuis[id] = new iD.renderer.WayUI(entity,this,stateClasses);
-            } else {
-                this.wayuis[id].setStateClasses(stateClasses).redraw();
-            }
-            return this.wayuis[id];		// iD.renderer.EntityUI
+            this.wayuis[entity.id] = new iD.renderer.WayUI(entity,this,stateClasses);
+            return this.wayuis[entity.id]; // iD.renderer.EntityUI
         }
 	},
 
@@ -200,11 +193,7 @@ declare("iD.renderer.Map", null, {
 
 	refreshUI: function(entity) {
 		// summary:	Redraw the UI for an entity.
-		if (entity.entityType === 'node') {
-			if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); }
-        } else if (entity.entityType === 'way') {
-			if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); }
-		}
+        if (this.getUI(entity)) this.getUI(entity).redraw();
 	},
 
 	deleteUI: function(entity) {
@@ -230,7 +219,7 @@ declare("iD.renderer.Map", null, {
         this.connection.loadFromAPI(this.getExtent(), _.bind(this.updateUIs, this));
     },
 
-	updateUIs: function(redraw, remove) {
+	updateUIs: function() {
 		// summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
 		// redraw: Boolean	Should we redraw any UIs that are already present?
 		// remove: Boolean	Should we delete any UIs that are no longer in the bbox?
@@ -244,35 +233,31 @@ declare("iD.renderer.Map", null, {
             .filter(function(w) { return w.loaded; })
             .each(function(way) {
                 if (!m.wayuis[way.id]) { m.createUI(way); }
-                else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
+                else { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
             });
 
-		if (remove !== false) {
-			_.each(o.waysOutside, function(way) {
-				if (m.wayuis[way.id]) {	//  && !m.wayuis[way.id].purgable
-					if (redraw) {
-                        m.wayuis[way.id].recalculate();
-                        m.wayuis[way.id].redraw();
-                    }
-				} else {
-                    m.deleteUI(way);
-                }
-			});
-		}
+		_.each(o.waysOutside, function(way) {
+			if (m.wayuis[way.id]) {	//  && !m.wayuis[way.id].purgable
+                m.wayuis[way.id].recalculate();
+                m.wayuis[way.id].redraw();
+			} else {
+                m.deleteUI(way);
+            }
+		});
 
 		_.each(o.poisInside, function(poi) {
 			if (!poi.loaded) return;
 			if (!m.nodeuis[poi.id]) { m.createUI(poi); }
-			else if (redraw) { m.nodeuis[poi.id].redraw(); }
+			else { m.nodeuis[poi.id].redraw(); }
 		});
 
-		if (remove !== false) {
-			_.each(o.poisOutside, function(poi) {
-				if (m.nodeuis[poi.id]) {	//  && !m.nodeuis[poi.id].purgable
-					if (redraw) { m.nodeuis[poi.id].redraw(); }
-				} else { m.deleteUI(poi); }
-			});
-		}
+		_.each(o.poisOutside, function(poi) {
+			if (m.nodeuis[poi.id]) {	//  && !m.nodeuis[poi.id].purgable
+				m.nodeuis[poi.id].redraw();
+			} else { m.deleteUI(poi); }
+		});
+
+        return this;
 	},
 
 	// -------------
@@ -296,14 +281,8 @@ declare("iD.renderer.Map", null, {
 	setCenter: function(loc) { this.setCentre(loc); },
 
     draw: function() {
-        this.clearTiles();
-        if (this.coord.z > this.MIN_DOWNLOAD_SCALE) {
-            this.download();
-        }
-        this.loadTiles();
-        this.updateOrigin();
-        this.updateUIs(true, true);
-        return this;
+        if (this.coord.z > this.MIN_DOWNLOAD_SCALE) this.download();
+        return this.clearTiles().loadTiles().updateOrigin().updateUIs();
     },
 
 	// ----------------------
@@ -319,7 +298,7 @@ declare("iD.renderer.Map", null, {
 		this.elastic.clear();
 		// **** Next line is SVG-specific
 		this.elastic.rawNode.setAttribute("pointer-events","none");
-		this.elastic.createPolyline( [{ x:x1, y:y1 }, { x:x2, y:y2 }] ).setStroke( {
+		this.elastic.createPolyline([{ x:x1, y:y1 }, { x:x2, y:y2 }]).setStroke({
 			color: [0, 0, 0, 1],
 			style: 'Solid',
 			width: 1
@@ -351,6 +330,8 @@ declare("iD.renderer.Map", null, {
         _.each(_.without(tileKeys, seen), _.bind(function(key) {
             delete this.tiles[key];
         }, this));
+
+        return this;
     },
 
 	fetchTile: function(coord) {
@@ -384,9 +365,10 @@ declare("iD.renderer.Map", null, {
 	},
 
 	clearTiles: function() {
-		// summary:		Unload all tiles and remove from the display.
+		// summary:	Unload all tiles and remove from the display.
 		this.tilegroup.clear();
 		this.tiles = {};
+        return this;
 	},
 
 	// -------------------------------------------
@@ -445,6 +427,7 @@ declare("iD.renderer.Map", null, {
             t = [Matrix.translate(ox, oy)];
 		this.container.setTransform(t);
 		this.tilegroup.setTransform(t);
+        return this;
 	},
 
 	_mouseEvent: function(e) {
@@ -481,10 +464,7 @@ declare("iD.renderer.Map", null, {
 
 	coordLocation: function(coord) {
         var ll = this.projection.ll([coord.x * 256, coord.y * 256], coord.z);
-        return {
-            lon: ll[0],
-            lat: ll[1]
-        };
+        return { lon: ll[0], lat: ll[1] };
     },
 
 	parentCoord: function(c) {

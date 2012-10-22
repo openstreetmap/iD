@@ -1,6 +1,7 @@
 // iD/styleparser/RuleSet.js
 
-define(['dojo/_base/xhr','dojo/_base/lang','dojo/_base/declare','dojo/_base/array','iD/styleparser/Style','iD/styleparser/StyleChooser','iD/styleparser/Condition','iD/styleparser/StyleList'], function(xhr,lang,declare,array){
+define(['dojo/_base/xhr','dojo/_base/lang','dojo/_base/declare',
+       'iD/styleparser/Style','iD/styleparser/StyleChooser','iD/styleparser/Condition','iD/styleparser/StyleList'], function(xhr,lang,declare) {
 
 // ----------------------------------------------------------------------
 // RuleSet base class

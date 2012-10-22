@@ -1,8 +1,8 @@
 // iD/controller/edit/EditBaseState.js
 
-define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojo/on',
+define(['dojo/_base/declare','dojo/on',
         'dijit/registry','dijit/TooltipDialog','dijit/Dialog','dijit/popup',
-        'iD/controller/ControllerState'], function(declare,lang,array,on,registry){
+        'iD/controller/ControllerState'], function(declare, on, registry){
 
 // ----------------------------------------------------------------------
 // EditBaseState class - provides shared UI functions to edit mode states

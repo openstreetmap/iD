@@ -105,7 +105,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 
 		// Add hitzone sprite
 		if (drawn) {
-			var hit=this.recordSprite(this.targetGroup('hit')
+			var hit = this.recordSprite(this.targetGroup('hit')
                 .createPolyline(coords)
                 .setStroke({
                     width: maxwidth+8,

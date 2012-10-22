@@ -9,7 +9,7 @@ iD.Relation = function(connection, id, members, tags, loaded) {
     this.tags = tags;
     this.modified = this.id < 0;
     this.loaded = (loaded === undefined) ? true : loaded;
-    _.each(members, _.bind(function(member) {
+    _.each(this.members, _.bind(function(member) {
         member.entity.entity.addParent(this);
     }, this));
 };

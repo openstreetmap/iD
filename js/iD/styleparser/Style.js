@@ -1,6 +1,6 @@
 // iD/styleparser/Style.js
 
-define(['dojo/_base/declare','dojo/_base/array'], function(declare,array){
+define(['dojo/_base/declare'], function(declare) {
 
 // ----------------------------------------------------------------------
 // Style base class

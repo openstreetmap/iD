@@ -1,6 +1,6 @@
 // iD/styleparser/Rule.js
 
-define(['dojo/_base/declare','dojo/_base/array'], function(declare,array){
+define(['dojo/_base/declare'], function(declare) {
 
 // ----------------------------------------------------------------------
 // Rule class
@@ -35,7 +35,7 @@ declare("iD.styleparser.Rule", null, {
 		if (zoom<this.minZoom || zoom>this.maxZoom) { return false; }
 
 		var v=true; var i=0; var isAnd=this.isAnd;
-		array.forEach(this.conditions, function(condition) {
+		_.each(this.conditions, function(condition) {
 			var r=condition.test(tags);
 			if (i === 0) { v=r; }
 			else if (isAnd) { v=v && r; }
