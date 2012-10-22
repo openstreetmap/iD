@@ -1,7 +1,7 @@
 // iD/controller/edit/EditBaseState.js
 
 define(['dojo/_base/declare','dojo/on',
-        'dijit/registry','dijit/TooltipDialog','dijit/Dialog','dijit/popup',
+        'dijit/registry',
         'iD/controller/ControllerState'], function(declare, on, registry){
 
 // ----------------------------------------------------------------------

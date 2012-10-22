@@ -157,7 +157,7 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 		return this.dojoColor(this.fill_color, this.fill_opacity ? this.fill_opacity : 1);
 	},
 	casingStyler:function() {
-		var cap,join;
+		var cap, join;
 		switch (this.linecap ) { case 'round': cap ='round'; break; case 'square': cap='square'; break; default: cap ='butt' ; break; }
 		switch (this.linejoin) { case 'bevel': join='bevel'; break; case 'miter' : join=4      ; break; default: join='round'; break; }
 		return {

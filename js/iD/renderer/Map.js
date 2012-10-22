@@ -5,7 +5,7 @@ define(['dojo/_base/declare','dojo/_base/event',
         'dojo/dom-geometry',
         'dojox/gfx','dojox/gfx/matrix',
         'iD/Connection','iD/Entity','iD/renderer/EntityUI','iD/renderer/WayUI','iD/renderer/NodeUI'], 
-       function(declare, Event, domGeom, Gfx, Matrix){
+       function(declare, Event, domGeom, Gfx, Matrix) {
 
 // ----------------------------------------------------------------------
 // Connection base class
@@ -66,13 +66,14 @@ declare("iD.renderer.Map", null, {
 		this.wayuis = {},
         this.projection = new SphericalMercator();
 		this.div = document.getElementById(obj.div);
-		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
-		this.backdrop=this.surface.createRect({
+		this.surface = Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
+		this.backdrop = this.surface.createRect({
             x: 0,
             y: 0,
             width: this.mapwidth,
             height: this.mapheight
         }).setFill(new dojo.Color([100,100,100,1]));
+
 		this.tilegroup = this.surface.createGroup();
 		this.container = this.surface.createGroup();
 		this.connection = obj.connection;
@@ -92,6 +93,12 @@ declare("iD.renderer.Map", null, {
 				text: r.createGroup(),
 				hit: r.createGroup()
 			};
+            this.layers[l].root.rawNode.id = 'layer-root-' + (l + 5);
+            this.layers[l].fill.rawNode.id = 'layer-fill';
+            this.layers[l].casing.rawNode.id = 'layer-casing';
+            this.layers[l].stroke.rawNode.id = 'layer-stroke';
+            this.layers[l].text.rawNode.id = 'layer-text';
+            this.layers[l].hit.rawNode.id = 'layer-hit';
 		}
 
 		// Create group for elastic band
@@ -102,8 +109,8 @@ declare("iD.renderer.Map", null, {
 		this.tilegroup.connect("onmousedown", _.bind(this.startDrag, this));
 		this.surface.connect("onclick", _.bind(this.clickSurface, this));
 		this.surface.connect("onmousemove", _.bind(this.processMove, this));
-		this.surface.connect("onmousedown", _.bind(this._mouseEvent, this));
-		this.surface.connect("onmouseup", _.bind(this._mouseEvent, this));
+		this.surface.connect("onmousedown", _.bind(this.mouseEvent, this));
+		this.surface.connect("onmouseup", _.bind(this.mouseEvent, this));
 
         this.draw();
 	},
@@ -139,7 +146,7 @@ declare("iD.renderer.Map", null, {
 	// ----------------------------
 	// Sprite and EntityUI handling
 
-	sublayer:function(layer,groupType,sublayer) {
+	sublayer:function(layer, groupType, sublayer) {
 		// summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
 		// if necessary. Note that sublayers are only implemented for stroke and fill.
 		// groupType: String	'casing','text','hit','stroke', or 'fill'
@@ -282,7 +289,7 @@ declare("iD.renderer.Map", null, {
 
     draw: function() {
         if (this.coord.z > this.MIN_DOWNLOAD_SCALE) this.download();
-        return this.clearTiles().loadTiles().updateOrigin().updateUIs();
+        return this.clearTiles().updateOrigin().loadTiles().updateUIs();
     },
 
 	// ----------------------
@@ -337,13 +344,17 @@ declare("iD.renderer.Map", null, {
 	fetchTile: function(coord) {
         if (this.tiles[iD.Util.tileKey(coord)]) return;
 		// summary:		Load a tile image at the given tile co-ordinates.
+        var x = this.transform.x + (coord.x * this.tileSize);
+        var y = this.transform.y + (coord.y * this.tileSize);
+
 		var t = this.tilegroup.createImage({
-			x: coord.x * this.tileSize,
-			y: coord.y * this.tileSize,
+			x: x,
+			y: y,
 			width: this.tileSize,
             height: this.tileSize,
 			src: this.tileURL(coord)
 		});
+
         this.tiles[iD.Util.tileKey(coord)] = t;
 	},
 
@@ -423,14 +434,14 @@ declare("iD.renderer.Map", null, {
 	updateOrigin: function() {
 		// summary:		Tell Dojo to update the viewport origin.
         var ox = (this.mapwidth / 2) - this.coord.x * 256,
-            oy = (this.mapheight / 2) - this.coord.y * 256,
-            t = [Matrix.translate(ox, oy)];
-		this.container.setTransform(t);
-		this.tilegroup.setTransform(t);
+            oy = (this.mapheight / 2) - this.coord.y * 256;
+        this.transform = { x: ox, y: oy };
+		// this.container.setTransform(t);
+		// this.tilegroup.setTransform(t);
         return this;
 	},
 
-	_mouseEvent: function(e) {
+	mouseEvent: function(e) {
         // summary: Catch mouse events on the surface but not the tiles - in other words,
         // on drawn items that don't have their own hitzones, like the fill of a shape.
         if (e.type === 'mousedown') { this.startDrag(e); }
