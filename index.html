@@ -50,8 +50,8 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 	});
 	map.ruleset = ruleset;
 
-    map.setZoom(19);
-    map.setCenter({ lat: 38.89, lon: -77 });
+    map.setZoom(19)
+        .setCenter({ lat: 38.89, lon: -77 });
 
 	// Initialise controller
 	var controller = new iD.Controller(map);

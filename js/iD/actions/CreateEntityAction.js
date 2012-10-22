@@ -41,7 +41,7 @@ declare("iD.actions.CreateEntityAction", [iD.actions.UndoableEntityAction], {
 
 	setAction: function(action) {
 		// summary:		Set the associated delete action (see undoAction for explanation).
-		deleteAction = action;
+		this.deleteAction = action;
 	}
 
 });

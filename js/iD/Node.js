@@ -1,17 +1,17 @@
 if (typeof iD === 'undefined') iD = {};
 
 iD.Node = function(connection, id, lat, lon, tags, loaded) {
-	// summary: An OSM node.
-	this.entityType = 'node';
-	this.connection = connection;
-	this.id = id;
-	this._id = iD.Util.id();
-	this.entity = new iD.Entity();
-	this.lat = lat;
-	this.lon = lon;
-	this.tags = tags;
-	this.loaded = (loaded === undefined) ? true : loaded;
-	this.modified = this.id < 0;
+    // summary: An OSM node.
+    this.entityType = 'node';
+    this.connection = connection;
+    this.id = id;
+    this._id = iD.Util.id();
+    this.entity = new iD.Entity();
+    this.lat = lat;
+    this.lon = lon;
+    this.tags = tags;
+    this.loaded = (loaded === undefined) ? true : loaded;
+    this.modified = this.id < 0;
 };
 
 iD.Node.prototype = {
@@ -39,6 +39,7 @@ iD.Node.prototype = {
         this.connection.refreshEntity(this);
     },
 
+    // TODO: eliminate
     doSetLonLatp: function(lon, latproj, performAction) {
         // summary:		Change the position of a node, using an undo stack.
         performAction(new iD.actions.MoveNodeAction(this,

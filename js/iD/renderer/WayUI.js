@@ -29,7 +29,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 	redraw: function() {
 		// summary:		Draw the object and add hitzone sprites.
 		var way = this.entity,
-            maxwidth=4,
+            maxwidth = 4,
             i;
 
 		this.removeSprites();
@@ -53,7 +53,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 
 				// Stroke
 				if (s.width)  {
-                    line = this.targetGroup('stroke',s.sublayer)
+                    line = this.targetGroup('stroke', s.sublayer)
                         .createPolyline(coords)
                         .setStroke(s.strokeStyler());
 
@@ -64,7 +64,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 
 				// Fill
 				if (!isNaN(s.fill_color)) {
-                    line = this.targetGroup('fill',s.sublayer)
+                    line = this.targetGroup('fill', s.sublayer)
                         .createPolyline(coords)
                         .setFill(s.fillStyler());
 
@@ -88,13 +88,13 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 			if (this.styleList.textStyles[subpart]) {
 				var t = this.styleList.textStyles[subpart];
 				if (t.text && tags[t.text]) {
-					var tp=this.recordSprite(this.targetGroup('text')
+					var tp = this.recordSprite(this.targetGroup('text')
 						.createTextPath(t.textStyler(tags[t.text]))
 						.setFont(t.fontStyler())
 						.setFill(t.fillStyler())
 						.moveTo(coords[0].x,coords[0].y));
 					for (var j=1; j<coords.length; j++) {
-						tp.lineTo(coords[j].x,coords[j].y);
+						tp.lineTo(coords[j].x, coords[j].y);
 					}
 					// *** this next line is SVG-specific
 					tp.rawNode.setAttribute("pointer-events","none");
