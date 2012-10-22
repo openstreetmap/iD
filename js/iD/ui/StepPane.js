@@ -4,7 +4,7 @@
 	Step-by-step help pane.
 */
 
-define(['dojo/_base/declare','dojo/_base/lang'], function(declare,lang){
+define(['dojo/_base/declare'], function(declare) {
 
 // ----------------------------------------------------------------------
 // StepPane class

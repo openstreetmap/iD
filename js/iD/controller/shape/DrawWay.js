@@ -14,8 +14,8 @@
 */
 
 
-define(['dojo/_base/declare', 'dojo/_base/lang', 'dojox/gfx/shape', 'iD/controller/ControllerState'], 
-       function(declare, lang, shape){
+define(['dojo/_base/declare', 'dojox/gfx/shape', 'iD/controller/ControllerState'], 
+       function(declare, shape){
 
 // ----------------------------------------------------------------------
 // DrawWay class
