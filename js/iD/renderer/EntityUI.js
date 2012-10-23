@@ -24,10 +24,10 @@ declare("iD.renderer.EntityUI", null, {
 
 	constructor:function(entity,map,stateClasses) {
 		// summary:		Base class for a UI representing an entity.
-		this.entity=entity;
-		this.map=map;
+		this.entity = entity;
+		this.map = map;
 		this.stateClasses=stateClasses ? stateClasses.slice() : [];
-		this.sprites=[];
+		this.sprites = [];
 	},
 	getConnection:function() {
 		// summary:		Get the Connection from where the map draws its data.

@@ -1,6 +1,8 @@
 // iD/styleparser/RuleSet.js
 
-define(['dojo/_base/xhr','dojo/_base/lang','dojo/_base/declare','dojo/_base/array','iD/styleparser/Style','iD/styleparser/StyleChooser','iD/styleparser/Condition','iD/styleparser/StyleList'], function(xhr,lang,declare,array){
+define(['dojo/_base/declare',
+       'iD/styleparser/Style','iD/styleparser/StyleChooser',
+       'iD/styleparser/Condition','iD/styleparser/StyleList'], function(declare) {
 
 // ----------------------------------------------------------------------
 // RuleSet base class
@@ -10,16 +12,10 @@ define(['dojo/_base/xhr','dojo/_base/lang','dojo/_base/declare','dojo/_base/arra
 declare("iD.styleparser.RuleSet", null, {
 
 	choosers: [],		// list of StyleChoosers
-	callback: null,
 
 	constructor: function() {
 		// summary:		An entire stylesheet in parsed form.
 		this.choosers = [];
-	},
-
-	registerCallback: function(callback) {
-		// summary:		Set a callback function to be called when the CSS is loaded and parsed.
-		this.callback = callback;
 	},
 
 	getStyles: function(entity, tags, zoom) {
@@ -31,12 +27,18 @@ declare("iD.styleparser.RuleSet", null, {
 		return sl;	// iD.styleparser.StyleList
 	},
 
-	loadFromCSS:function(url) {
+	loadFromCSS: function(url, callback) {
 		// summary:		Load a MapCSS file from a URL, then throw it at the parser when it's loaded.
-		xhr.get({ url: url, load: lang.hitch(this, "parseCSS") });
+        $.ajax({
+            url: url,
+            success: _.bind(function(css) {
+                this.parseCSS(css);
+                callback(this);
+            }, this)
+        });
 	},
 
-	parseCSS:function(css) {
+	parseCSS: function(css) {
 		// summary:		Parse a CSS document into a set of StyleChoosers.
 		var previous=0;								// what was the previous CSS word?
 		var sc = new iD.styleparser.StyleChooser();	// currently being assembled
@@ -44,7 +46,7 @@ declare("iD.styleparser.RuleSet", null, {
 		css = css.replace(/[\r\n]/g,"");				// strip linebreaks because JavaScript doesn't have the /s modifier
 
 		var o = {};
-		while (css.length>0) {
+		while (css.length > 0) {
 
 			// CSS comment
 			if ((o=this.COMMENT.exec(css))) {
@@ -114,7 +116,6 @@ declare("iD.styleparser.RuleSet", null, {
 				css=css.replace(this.DECLARATION,'');
 				sc.addStyles(this.parseDeclaration(o[1]));
 				previous=this.oDECLARATION;
-			
 			// Unknown pattern
 			} else if ((o=this.UNKNOWN.exec(css))) {
 				css=css.replace(this.UNKNOWN,'');
@@ -126,13 +127,12 @@ declare("iD.styleparser.RuleSet", null, {
 			}
 		}
 		if (previous==this.oDECLARATION) { this.saveChooser(sc); sc=new iD.styleparser.StyleChooser(); }
-		if (this.callback) { this.callback(); }
 	},
 
 	saveChooser:function(sc) {
 		this.choosers.push(sc);
 	},
-	
+
 	parseDeclaration:function(s) {
 		var styles=[];
 		var t={};
@@ -237,7 +237,7 @@ declare("iD.styleparser.RuleSet", null, {
 			return this.CSSCOLORS[colorStr];
 		} else {
 			var match = this.HEX.exec(colorStr);
-			if ( match ) { 
+			if (match) {
                 if ( match[1].length == 3) {
                     // repeat digits. #abc => 0xaabbcc
                     return Number("0x"+match[1].charAt(0)+match[1].charAt(0)+

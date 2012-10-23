@@ -10,7 +10,7 @@ declare("iD.Controller", [Evented], {
 	stepper: null,			// current StepPane
 	undoStack: null,		// main undoStack
 	editorCache: null,		// cache of tag editor objects, means we don't have to repeatedly load them
-	
+
 	constructor:function(map) {
 		// summary:		The Controller marshalls ControllerStates and passes events to them.
 		this.map = map;

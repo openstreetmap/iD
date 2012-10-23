@@ -14,18 +14,18 @@ iD.Entity = function() {
 };
 
 iD.Entity.prototype = {
-	toString:function() {
+	toString: function() {
 		return this.entityType + " . " + this.id;
 	},
 
 	// Provoke redraw and other changes
-	refresh:function() {
+	refresh: function() {
 		// summary:		Ask the connection to provoke redraw and other changes.
 		this.connection.refreshEntity(this);
 	},
 
 	// Bounding box check (to be overridden)
-	within:function(left, right, top, bottom) {
+	within: function(extent) {
 		// summary:		Is the entity within the specified bbox?
 		return !this.deleted;	// Boolean
 	},

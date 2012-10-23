@@ -9,13 +9,13 @@ declare("iD.styleparser.Condition", null, {
 	type: '',				// eq/ne/regex etc.
 	params: [],				// what to test against
 
-	constructor:function(_type) {
-		// summary:		A condition to evaluate.
-		this.type  =_type;
-		this.params=Array.prototype.slice.call(arguments,1);
+	constructor: function(type) {
+		// summary:	A condition to evaluate.
+		this.type  = type;
+		this.params = Array.prototype.slice.call(arguments,1);
 	},
 	
-	test:function(tags) {
+	test: function(tags) {
 		// summary:		Run the condition against the supplied tags.
 		var p=this.params;
 		switch (this.type) {
@@ -35,7 +35,7 @@ declare("iD.styleparser.Condition", null, {
 		return false;
 	},
 	
-	toString:function() {
+	toString: function() {
 		return "["+this.type+": "+this.params+"]";
 	}
 });

@@ -1,27 +1,20 @@
 if (typeof iD === 'undefined') iD = {};
 
 iD.Node = function(connection, id, lat, lon, tags, loaded) {
-	// summary: An OSM node.
-	this.entityType = 'node';
-	this.connection = connection;
-	this.id = id;
-	this._id = iD.Util.id();
-	this.entity = new iD.Entity();
-	this.lat = lat;
-	this.lon = lon;
-	this.tags = tags;
-	this.loaded = (loaded === undefined) ? true : loaded;
-	this.project();
-	this.modified = this.id < 0;
+    // summary: An OSM node.
+    this.entityType = 'node';
+    this.connection = connection;
+    this.id = id;
+    this._id = iD.Util.id();
+    this.entity = new iD.Entity();
+    this.lat = lat;
+    this.lon = lon;
+    this.tags = tags;
+    this.loaded = (loaded === undefined) ? true : loaded;
+    this.modified = this.id < 0;
 };
 
 iD.Node.prototype = {
-    project: function() {
-        // summary:		Update the projected latitude value (this.latp) from the latitude (this.lat).
-        this.latp = 180/Math.PI *
-            Math.log(Math.tan(Math.PI/4+this.lat*(Math.PI/180)/2));
-    },
-
     toGeoJSON: function() {
         return {
             type: 'Feature',
@@ -33,17 +26,11 @@ iD.Node.prototype = {
         };
     },
 
-    latp2lat: function(a) {
-        // summary:		Get a latitude from a projected latitude.
-        // returns:		Latitude.
-        return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2);
-    },
-
     within: function(extent) {
-        return (this.lon >= extent.west) &&
-            (this.lon <= extent.east) &&
-            (this.lat >= extent.south) &&
-            (this.lat <= extent.north);
+        return (this.lon >= extent[0].lon) &&
+            (this.lon <= extent[1].lon) &&
+            (this.lat <= extent[0].lat) &&
+            (this.lat >= extent[1].lat);
     },
 
     refresh: function() {
@@ -52,6 +39,7 @@ iD.Node.prototype = {
         this.connection.refreshEntity(this);
     },
 
+    // TODO: eliminate
     doSetLonLatp: function(lon, latproj, performAction) {
         // summary:		Change the position of a node, using an undo stack.
         performAction(new iD.actions.MoveNodeAction(this,

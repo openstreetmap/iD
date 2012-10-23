@@ -21,11 +21,11 @@ declare("iD.styleparser.StyleList", null, {
 		// a drawn entity (i.e. node/way). Each array element applies to that 
 		// sublayer (z-index). If there is no element, nothing is drawn on that sublayer.
 		// StyleLists are created by StyleChooser.getStyles.
-		this.shapeStyles={};
-		this.textStyles={};
-		this.pointStyles={};
-		this.shieldStyles={};
-		this.subparts=[];
+		this.shapeStyles = {};
+		this.textStyles = {};
+		this.pointStyles = {};
+		this.shieldStyles = {};
+		this.subparts = [];
 	},
 
 	hasStyles:function() {

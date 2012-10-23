@@ -5,21 +5,16 @@ define(['dojo/_base/declare','dojo/_base/event',
         'dojo/dom-geometry',
         'dojox/gfx','dojox/gfx/matrix',
         'iD/Connection','iD/Entity','iD/renderer/EntityUI','iD/renderer/WayUI','iD/renderer/NodeUI'], 
-       function(declare, Event, domGeom, Gfx, Matrix){
+       function(declare, Event, domGeom, Gfx, Matrix) {
 
 // ----------------------------------------------------------------------
 // Connection base class
 
 declare("iD.renderer.Map", null, {
 
-	MASTERSCALE: 5825.4222222222,
-	MINSCALE: 14,
+	MINSCALE: 0,
+	MIN_DOWNLOAD_SCALE: 14,
 	MAXSCALE: 23,
-	zoom: NaN,
-	zoomfactor: NaN,
-	baselon: NaN,			// original longitude at top left of viewport
-	baselat: NaN,			// original latitude at top left of viewport
-	baselatp: NaN,			// original projected latitude at top left of viewport
 
 	div: '',				// <div> of this map
 	surface: null,			// <div>.surface containing the rendering
@@ -31,8 +26,6 @@ declare("iD.renderer.Map", null, {
 	wayuis: {},				//  |
 
 	tilegroup: null,		// group within container for adding bitmap tiles
-	tiles: {},				// index of tile objects
-	tilebaseURL: 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z',	// Bing imagery URL
 
 	dragging: false,		// current drag state
 	dragged: false,			// was most recent click a drag?
@@ -43,11 +36,7 @@ declare("iD.renderer.Map", null, {
 	dragtime: NaN,			// timestamp of mouseup (compared to stop resulting click from firing)
 	dragconnect: null,		// event listener for endDrag
 
-	containerx: 0,			// screen co-ordinates of container
-	containery: 0,			//  |
-	centrelat: NaN,			// lat/long and bounding box of map
-	centrelon: NaN,			//  |
-	extent: {},				//  |
+	coord: { z: 0, x: 0.5, y: 0.5 },			// lat/long and bounding box of map
 	mapheight: NaN,			// size of map object in pixels
 	mapwidth: NaN,			//  |
 
@@ -58,6 +47,8 @@ declare("iD.renderer.Map", null, {
 	elastic: null,			// Group for drawing elastic band
 
 	ruleset: null,			// map style
+	projection: null,			// map style
+	tileSize: 256,			// map style
 
 	constructor: function(obj) {
 		// summary:		The main map display, containing the individual sprites (UIs) for each entity.
@@ -66,36 +57,56 @@ declare("iD.renderer.Map", null, {
 
 		this.mapwidth = obj.width ? obj.width : 800;
 		this.mapheight = obj.height ? obj.height : 400;
+        this.coord = this.zoomCoord(this.coord, 5);
 
 		// Initialise variables
 		this.nodeuis = {},
 		this.wayuis = {},
-		this.div=document.getElementById(obj.div);
-		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
-		this.backdrop=this.surface.createRect({
+        this.projection = new SphericalMercator();
+		this.div = document.getElementById(obj.div);
+		this.surface = Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
+		this.backdrop = this.surface.createRect({
             x: 0,
             y: 0,
             width: this.mapwidth,
             height: this.mapheight
-        }).setFill(new dojo.Color([255,255,245,1]));
+        }).setFill(new dojo.Color([100,100,100,1]));
+
+        /** Returns a Bing URL template given a string and a list of subdomains. */
+        function template(url, subdomains) {
+          /** Returns the given coordinate formatted as a 'quadkey'. */
+          function quad(column, row, zoom) {
+            var key = "";
+            for (var i = 1; i <= zoom; i++) {
+              key += (((row >> zoom - i) & 1) << 1) | ((column >> zoom - i) & 1);
+            }
+            return key;
+          }
+
+          return function(c) {
+            var quadKey = quad(c.column, c.row, c.zoom);
+            return url
+                .replace("{quadkey}", quadKey);
+          };
+        }
+
 		this.tilegroup = this.surface.createGroup();
+        var po = org.polymaps;
+        this.map = po.map().container(this.tilegroup.rawNode);
+        this.map.add(po.image()
+            .url(template('http://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=587&mkt=en-gb&n=z')));
+
 		this.container = this.surface.createGroup();
 		this.connection = obj.connection;
-		this.zoom = obj.zoom ? obj.zoom : 17;
-		this.baselon = obj.lon;
-		this.baselat = obj.lat;
-		this.baselatp = this.lat2latp(obj.lat);
-		this._setScaleFactor();
-		this.updateCoordsFromViewportPosition();
 
         // Cache the margin box, since this is expensive.
         this.marginBox = domGeom.getMarginBox(this.div);
 
 		// Initialise layers
-		this.layers={};
-		for (var l=this.minlayer; l<=this.maxlayer; l++) {
-			var r=this.container.createGroup();
-			this.layers[l]={
+		this.layers = {};
+		for (var l = this.minlayer; l <= this.maxlayer; l++) {
+			var r = this.container.createGroup();
+			this.layers[l] = {
 				root: r,
 				fill: r.createGroup(),
 				casing: r.createGroup(),
@@ -103,6 +114,12 @@ declare("iD.renderer.Map", null, {
 				text: r.createGroup(),
 				hit: r.createGroup()
 			};
+            this.layers[l].root.rawNode.id = 'layer-root-' + (l + 5);
+            this.layers[l].fill.rawNode.id = 'layer-fill';
+            this.layers[l].casing.rawNode.id = 'layer-casing';
+            this.layers[l].stroke.rawNode.id = 'layer-stroke';
+            this.layers[l].text.rawNode.id = 'layer-text';
+            this.layers[l].hit.rawNode.id = 'layer-hit';
 		}
 
 		// Create group for elastic band
@@ -110,11 +127,12 @@ declare("iD.renderer.Map", null, {
 
 		// Make draggable
 		this.backdrop.connect("onmousedown", _.bind(this.startDrag, this));
-		this.tilegroup.connect("onmousedown", _.bind(this.startDrag, this));
 		this.surface.connect("onclick", _.bind(this.clickSurface, this));
 		this.surface.connect("onmousemove", _.bind(this.processMove, this));
-		this.surface.connect("onmousedown", _.bind(this._mouseEvent, this));
-		this.surface.connect("onmouseup", _.bind(this._mouseEvent, this));
+		this.surface.connect("onmousedown", _.bind(this.mouseEvent, this));
+		this.surface.connect("onmouseup", _.bind(this.mouseEvent, this));
+
+        this.draw();
 	},
 
 	setController:function(controller) {
@@ -125,7 +143,7 @@ declare("iD.renderer.Map", null, {
 	_moveToPosition:function(group, position) {
 		// summary:		Supplementary method for dojox.gfx.
 		// This should ideally be core Dojo stuff: see http://bugs.dojotoolkit.org/ticket/15296
-		var parent=group.getParent();
+		var parent = group.getParent();
 		if (!parent) { return; }
 		this._moveChildToPosition(parent,group,position);
 		if (position === group.rawNode.parentNode.childNodes.length) {
@@ -148,7 +166,7 @@ declare("iD.renderer.Map", null, {
 	// ----------------------------
 	// Sprite and EntityUI handling
 
-	sublayer:function(layer,groupType,sublayer) {
+	sublayer: function(layer, groupType, sublayer) {
 		// summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
 		// if necessary. Note that sublayers are only implemented for stroke and fill.
 		// groupType: String	'casing','text','hit','stroke', or 'fill'
@@ -160,40 +178,33 @@ declare("iD.renderer.Map", null, {
 				return collection;
 		}
 		// Find correct sublayer, inserting if necessary
-		var insertAt=collection.children.length;
+		var insertAt = collection.children.length;
 		for (var i = 0; i < collection.children.length; i++) {
-			sub=collection.children[i];
-			if (sub.sublayer==sublayer) { return sub; }
+			sub = collection.children[i];
+			if (sub.sublayer === sublayer) { return sub; }
 			else if (sub.sublayer>sublayer) {
 				sub = collection.createGroup();
 				this._moveToPosition(sub,i);
-				sub.sublayer=sublayer;
+				sub.sublayer = sublayer;
 				return sub;
 			}
 		}
-		sub=collection.createGroup().moveToFront();
-		sub.sublayer=sublayer;
+		sub = collection.createGroup().moveToFront();
+		sub.sublayer = sublayer;
 		return sub; // dojox.gfx.Group
 	},
 
 	createUI: function(entity,stateClasses) {
 		// summary:		Create a UI (sprite) for an entity, assigning any specified state classes
 		//				(temporary attributes such as ':hover' or ':selected')
-		var id = entity.id;
-        if (entity.entityType === 'node') {
-            if (!this.nodeuis[id]) {
-                this.nodeuis[id] = new iD.renderer.NodeUI(entity,this,stateClasses);
-            } else {
-                this.nodeuis[id].setStateClasses(stateClasses).redraw();
-            }
-            return this.nodeuis[id];	// iD.renderer.EntityUI
+        if (this.getUI(entity)) {
+            return this.getUI(entity).setStateClasses(stateClasses).redraw();
+        } else if (entity.entityType === 'node') {
+            this.nodeuis[entity.id] = new iD.renderer.NodeUI(entity,this,stateClasses);
+            return this.nodeuis[entity.id]; // iD.renderer.EntityUI
         } else if (entity.entityType === 'way') {
-            if (!this.wayuis[id]) {
-                this.wayuis[id] = new iD.renderer.WayUI(entity,this,stateClasses);
-            } else {
-                this.wayuis[id].setStateClasses(stateClasses).redraw();
-            }
-            return this.wayuis[id];		// iD.renderer.EntityUI
+            this.wayuis[entity.id] = new iD.renderer.WayUI(entity,this,stateClasses);
+            return this.wayuis[entity.id]; // iD.renderer.EntityUI
         }
 	},
 
@@ -209,11 +220,7 @@ declare("iD.renderer.Map", null, {
 
 	refreshUI: function(entity) {
 		// summary:	Redraw the UI for an entity.
-		if (entity.entityType === 'node') {
-			if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); }
-        } else if (entity.entityType === 'way') {
-			if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); }
-		}
+        if (this.getUI(entity)) this.getUI(entity).redraw();
 	},
 
 	deleteUI: function(entity) {
@@ -225,13 +232,21 @@ declare("iD.renderer.Map", null, {
 		}
 	},
 
+    getExtent: function() {
+        return [
+            this.coordLocation(this.pointCoord({ x: 0, y: 0 })),
+            this.coordLocation(this.pointCoord({
+            x: this.mapwidth,
+            y: this.mapheight }))];
+    },
+
     download: function() {
         // summary:		Ask the connection to download data for the current viewport.
         $('#progress').show().addClass('spinner');
-        this.connection.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
+        this.connection.loadFromAPI(this.getExtent(), _.bind(this.updateUIs, this));
     },
 
-	updateUIs: function(redraw, remove) {
+	updateUIs: function() {
 		// summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
 		// redraw: Boolean	Should we redraw any UIs that are already present?
 		// remove: Boolean	Should we delete any UIs that are no longer in the bbox?
@@ -239,75 +254,71 @@ declare("iD.renderer.Map", null, {
 
 		var m = this;
 		var way, poi;
-		var o = this.connection.getObjectsByBbox(this.extent);
+		var o = this.connection.getObjectsByBbox(this.getExtent());
 
         _(o.waysInside).chain()
             .filter(function(w) { return w.loaded; })
             .each(function(way) {
                 if (!m.wayuis[way.id]) { m.createUI(way); }
-                else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
+                else { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
             });
 
-		if (remove !== false) {
-			_.each(o.waysOutside, function(way) {
-				if (m.wayuis[way.id]) {	//  && !m.wayuis[way.id].purgable
-					if (redraw) {
-                        m.wayuis[way.id].recalculate();
-                        m.wayuis[way.id].redraw();
-                    }
-				} else {
-                    m.deleteUI(way);
-                }
-			});
-		}
+		_.each(o.waysOutside, function(way) {
+			if (m.wayuis[way.id]) {	//  && !m.wayuis[way.id].purgable
+                m.wayuis[way.id].recalculate();
+                m.wayuis[way.id].redraw();
+			} else {
+                m.deleteUI(way);
+            }
+		});
 
 		_.each(o.poisInside, function(poi) {
 			if (!poi.loaded) return;
 			if (!m.nodeuis[poi.id]) { m.createUI(poi); }
-			else if (redraw) { m.nodeuis[poi.id].redraw(); }
+			else { m.nodeuis[poi.id].redraw(); }
 		});
 
-		if (remove !== false) {
-			_.each(o.poisOutside, function(poi) {
-				if (m.nodeuis[poi.id]) {	//  && !m.nodeuis[poi.id].purgable
-					if (redraw) { m.nodeuis[poi.id].redraw(); }
-				} else { m.deleteUI(poi); }
-			});
-		}
+		_.each(o.poisOutside, function(poi) {
+			if (m.nodeuis[poi.id]) {	//  && !m.nodeuis[poi.id].purgable
+				m.nodeuis[poi.id].redraw();
+			} else { m.deleteUI(poi); }
+		});
+
+        return this;
 	},
 
 	// -------------
     // Zoom handling
-
-    zoomIn: function() {
-        // summary:		Zoom in by one level (unless maximum reached).
-        return this.setZoom(this.zoom + 1);
+    zoomBy: function(by) {
+        var to = this.coord.z + by;
+        if (to < this.MINSCALE || to > this.MAXSCALE) return this;
+        this.coord = this.zoomCoord(this.coord, to);
+        return this.draw();
     },
 
-    zoomOut: function() {
-        // summary:		Zoom out by one level (unless minimum reached).
-        this.setZoom(this.zoom - 1);
-        this.download();
-        return this;
+    zoomIn: function() { return this.zoomBy(1); },
+    zoomOut: function() { return this.zoomBy(-1); },
+    setZoom: function(zoom) { return this.zoomBy(zoom - this.coord.z); },
+
+	setCentre: function(loc) {
+        // summary:		Update centre and bbox to a specified lat/lon.
+        this.coord = this.locationCoord(loc, this.z);
+        return this.draw();
+    },
+	setCenter: function(loc) { this.setCentre(loc); },
+
+	getCenter: function() {
+        return this.coordLocation(this.coord);
     },
 
-    setZoom: function(zoom) {
-        if (zoom < this.MINSCALE || zoom > this.MAXSCALE) return this;
-        // summary:		Redraw the map at a new zoom level.
-        this.zoom = zoom;
-        this._setScaleFactor();
-        this._blankTiles();
-        this.setCentre({
-            lat: this.centrelat,
-            lon: this.centrelon
-        });
-        this.updateUIs(true, true);
-        return this;
+	getZoom: function() {
+        return this.coord.z;
     },
 
-    _setScaleFactor: function() {
-        // summary:		Calculate the scaling factor for this zoom level.
-        this.zoomfactor = this.MASTERSCALE/Math.pow(2, 13 - this.zoom);
+    draw: function() {
+        if (this.coord.z > this.MIN_DOWNLOAD_SCALE) this.download();
+        this.map.zoom(this.getZoom()).center(this.getCenter());
+        return this.updateOrigin().updateUIs();
     },
 
 	// ----------------------
@@ -318,94 +329,16 @@ declare("iD.renderer.Map", null, {
 		this.elastic.clear();
 	},
 
-	drawElastic: function(x1,y1,x2,y2) {
+    drawElastic: function(x1, y1, x2, y2) {
 		// summary:		Draw the elastic band (for new ways) between two points.
 		this.elastic.clear();
 		// **** Next line is SVG-specific
 		this.elastic.rawNode.setAttribute("pointer-events","none");
-		this.elastic.createPolyline( [{ x:x1, y:y1 }, { x:x2, y:y2 }] ).setStroke( {
+		this.elastic.createPolyline([{ x:x1, y:y1 }, { x:x2, y:y2 }]).setStroke({
 			color: [0, 0, 0, 1],
 			style: 'Solid',
 			width: 1
         });
-	},
-
-    // -------------
-    // Tile handling
-    // ** FIXME: see docs
-    loadTiles: function() {
-        // summary:		Load all tiles for the current viewport. This is a bare-bones function 
-        //				at present: it needs configurable URLs (not just Bing), attribution/logo
-        //				support, and to be 'nudgable' (i.e. adjust the offset).
-        var tl = this.locationCoord({
-                lat: this.extent.north,
-                lon: this.extent.west
-            }, this.zoom),
-            br = this.locationCoord({
-                lat: this.extent.south,
-                lon: this.extent.east
-            }, this.zoom),
-            tileKeys = _.keys(this.tiles),
-            seen = [],
-            coord = { z: this.zoom };
-
-        for (coord.x = tl.x; coord.x <= br.x; coord.x++) {
-            for (coord.y = tl.y; coord.y <= br.y; coord.y++) {
-                if (!this._getTile(coord)) {
-                    this._fetchTile(coord);
-                }
-                seen.push(iD.Util.tileKey(coord));
-            }
-        }
-
-        _.each(_.without(tileKeys, seen), _.bind(function(key) {
-            delete this.tiles[key];
-        }, this));
-    },
-
-	_fetchTile: function(coord) {
-		// summary:		Load a tile image at the given tile co-ordinates.
-		var t = this.tilegroup.createImage({
-			x: Math.floor(this.lon2coord(this.tile2lon(coord.x))),
-			y: Math.floor(this.lat2coord(this.tile2lat(coord.y))),
-			width: 256,
-            height: 256,
-			src: this._tileURL(coord)
-		});
-		this._assignTile(coord, t);
-	},
-
-	_getTile: function(coord) {
-		// summary:		See if this tile is already loaded.
-		return this.tiles[iD.Util.tileKey(coord)];
-	},
-
-	_assignTile: function(coord, t) {
-		// summary:		Store a reference to the tile so we know it's loaded.
-        this.tiles[iD.Util.tileKey(coord)] = t;
-	},
-
-	_tileURL: function(coord) {
-		// summary:		Calculate the URL for a tile at the given co-ordinates.
-		var u = '';
-		for (var zoom = coord.z; zoom > 0; zoom--) {
-			var byte = 0;
-			var mask = 1 << (zoom - 1);
-			if ((coord.x & mask) !== 0) byte++;
-			if ((coord.y & mask) !== 0) byte += 2;
-			u += byte.toString();
-		}
-		return this.tilebaseURL
-            .replace('$z', coord.z)
-            .replace('$x', coord.x)
-            .replace('$y', coord.y)
-            .replace('$quadkey', u);
-	},
-
-	_blankTiles: function() {
-		// summary:		Unload all tiles and remove from the display.
-		this.tilegroup.clear();
-		this.tiles = {};
 	},
 
 	// -------------------------------------------
@@ -419,10 +352,10 @@ declare("iD.renderer.Map", null, {
 		Event.stop(e);
 		this.dragging = true;
 		this.dragged = false;
-		this.dragx = this.dragy=NaN;
+		this.dragx = this.dragy = NaN;
 		this.startdragx = e.clientX;
 		this.startdragy = e.clientY;
-		this.dragconnect = srcElement.connect("onmouseup", _.bind(this.endDrag, this));
+		this.dragconnect = srcElement.connect('onmouseup', _.bind(this.endDrag, this));
 	},
 
 	endDrag: function(e) {
@@ -430,84 +363,51 @@ declare("iD.renderer.Map", null, {
 		// e: MouseEvent	The mouse-up event that triggered it.
 		Event.stop(e);
 		dojo.disconnect(this.dragconnect);
-		this.dragging=false;
-		this.dragtime=e.timeStamp;
-		this.updateCoordsFromViewportPosition();
+		this.dragging = false;
+		this.dragtime = e.timeStamp;
 		if (Math.abs(e.clientX - this.startdragx) < 3 &&
             Math.abs(e.clientY - this.startdragy) < 3) {
             return;
         }
-		this.download();
+        this.draw();
 	},
 
-	processMove: function(e) {
-		// summary:		Drag the map to a new origin.
-		// e: MouseEvent	The mouse-move event that triggered it.
-		var x = e.clientX;
-		var y = e.clientY;
-		if (this.dragging) {
-			if (this.dragx) {
-				this.containerx += (x - this.dragx);
-				this.containery += (y - this.dragy);
-				this.updateOrigin();
-				this.dragged=true;
-			}
-			this.dragx = x;
-			this.dragy = y;
-		} else {
-			this.controller.entityMouseEvent(e,null);
-		}
-	},
+    processMove: function(e) {
+        // summary:		Drag the map to a new origin.
+        // e: MouseEvent	The mouse-move event that triggered it.
+        var x = e.clientX, y = e.clientY;
+        if (this.dragging) {
+            if (this.dragx) {
+                this.coord.x -= (x - this.dragx) / 256;
+                this.coord.y -= (y - this.dragy) / 256;
+                this.updateOrigin();
+                this.draw();
+                this.dragged = true;
+            }
+            this.dragx = x;
+            this.dragy = y;
+        } else {
+            this.controller.entityMouseEvent(e,null);
+        }
+    },
 
 	updateOrigin: function() {
 		// summary:		Tell Dojo to update the viewport origin.
-		this.container.setTransform([Matrix.translate(this.containerx, this.containery)]);
-		this.tilegroup.setTransform([Matrix.translate(this.containerx, this.containery)]);
+        var ox = (this.mapwidth / 2) - this.coord.x * 256,
+            oy = (this.mapheight / 2) - this.coord.y * 256;
+        this.transform = { x: ox, y: oy };
+        return this;
 	},
 
-	_mouseEvent: function(e) {
+	mouseEvent: function(e) {
         // summary: Catch mouse events on the surface but not the tiles - in other words,
         // on drawn items that don't have their own hitzones, like the fill of a shape.
-        if (e.type=='mousedown') { this.startDrag(e); }
+        if (e.type === 'mousedown') { this.startDrag(e); }
         // ** FIXME: we may want to reinstate this at some point...
         // this.controller.entityMouseEvent(e,null);
     },
 
-	updateCoordsFromViewportPosition: function(e) {
-		// summary:		Update centre and bbox from the current viewport origin.
-		this._updateCoords(this.containerx, this.containery);
-	},
-
-	setCentre: function(loc) {
-        // summary:		Update centre and bbox to a specified lat/lon.
-        var coord = this.locationCoord(loc, this.zoom);
-        this._updateCoords(
-            -coord.x - this.mapwidth / 2,
-            -coord.y - this.mapheight / 2);
-        return this;
-    },
-
-	setCenter: function(loc) { this.setCentre(loc); },
-
-	_updateCoords:function(x, y) {
-		// summary:		Set centre and bbox.
-		this.containerx = x;
-        this.containery = y;
-        this.updateOrigin();
-		this.centrelon = this.coord2lon(-x + this.mapwidth/2);
-		this.centrelat = this.coord2lat(-y + this.mapheight/2);
-
-        this.extent = {
-            north: this.coord2lat(-y),
-            south: this.coord2lat(-y + this.mapheight),
-            west: this.coord2lon(-x),
-            east: this.coord2lon(-x + this.mapwidth)
-        };
-
-		this.loadTiles();
-	},
-
-	clickSurface:function(e) {
+	clickSurface: function(e) {
 		// summary:		Handle a click on an empty area of the map.
 		if (this.dragged && e.timeStamp==this.dragtime) { return; }
 		this.controller.entityMouseEvent(e,null);
@@ -516,37 +416,50 @@ declare("iD.renderer.Map", null, {
 	// -----------------------
 	// Co-ordinate conversions
 
-	latp2coord:function(a) { return -(a-this.baselatp)*this.zoomfactor; },
-	coord2latp:function(a) { return a/-this.zoomfactor+this.baselatp; },
-	lon2coord:function(a)  { return (a-this.baselon)*this.zoomfactor; },
-	coord2lon:function(a)  { return a/this.zoomfactor+this.baselon; },
-	lon2screen:function(a) { return this.lon2coord(a) + this.marginBox.l + this.containerx; },
-
-	lat2latp:function(a)   { return 180/Math.PI * Math.log(Math.tan(Math.PI/4+a*(Math.PI/180)/2)); },
-	latp2lat:function(a)   { return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2); },
-	lat2coord:function(a)  { return -(this.lat2latp(a)-this.baselatp)*this.zoomfactor; },
-	coord2lat:function(a)  { return this.latp2lat(a/-this.zoomfactor+this.baselatp); },
-	lat2screen:function(a) { return this.lat2coord(a) + this.marginBox.t + this.containery; },
-
 	locationCoord: function(ll, z) {
-        var z2 = Math.pow(2, z), d2r = Math.PI / 180;
-        return {
-            z: z,
-            x: Math.floor((ll.lon + 180) / 360 * z2),
-            y: Math.floor((1 - Math.log(Math.tan(ll.lat * d2r) +
-                   1 / Math.cos(ll.lat * d2r)) / Math.PI) / 2 * z2)
+        z = (typeof z === 'undefined') ? this.coord.z : z;
+        var px = this.locationPoint(ll, z);
+        return { z: z,
+            x: Math.floor(px.x / this.tileSize),
+            y: Math.floor(px.y / this.tileSize)
         };
     },
-	lon2tile:function(a) { return (Math.floor((a+180)/360*Math.pow(2,this.zoom))); },
-	lat2tile:function(a)   { return (Math.floor((1-Math.log(Math.tan(a*Math.PI/180) + 1/Math.cos(a*Math.PI/180))/Math.PI)/2 *Math.pow(2,this.zoom))); },
-	tile2lon:function(a)   { return (a/Math.pow(2,this.zoom)*360-180); },
-	tile2lat:function(a)   {
-		var n=Math.PI-2*Math.PI*a/Math.pow(2,this.zoom);
-		return (180/Math.PI*Math.atan(0.5*(Math.exp(n)-Math.exp(-n))));
-	},
+
+    locationPoint: function(ll, z) {
+        z = (typeof z === 'undefined') ? this.coord.z : z;
+        var px = this.projection.px([ll.lon, ll.lat], z);
+        return { x: px[0], y: px[1] };
+    },
+
+	coordLocation: function(coord) {
+        var ll = this.projection.ll([coord.x * 256, coord.y * 256], coord.z);
+        return { lon: ll[0], lat: ll[1] };
+    },
+
+	parentCoord: function(c) {
+        return { z: c.z,
+            x: Math.floor(c.x),
+            y: Math.floor(c.y)
+        };
+    },
+
+	pointCoord: function(px) {
+        return {
+            x: (px.x + (this.coord.x * this.tileSize - this.mapwidth / 2)) / this.tileSize,
+            y: (px.y + (this.coord.y * this.tileSize - this.mapheight / 2)) / this.tileSize,
+            z: this.coord.z
+        };
+    },
+
+    zoomCoord: function(c, z) {
+        var power = Math.pow(2, z - c.z);
+        return { z: z,
+            x: c.x * power,
+            y: c.y * power
+        };
+    },
 
 	// Turn event co-ordinates into map co-ordinates
-
 	mouseX: function(e) { return e.clientX - this.marginBox.l - this.containerx; },
 	mouseY: function(e) { return e.clientY - this.marginBox.t - this.containery; }
 });

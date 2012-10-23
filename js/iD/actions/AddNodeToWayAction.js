@@ -40,7 +40,7 @@ define(['dojo/_base/declare','iD/actions/UndoableAction'], function(declare){
             this.node.connection.unregisterPOI(this.node);
             this.nodeList.splice(this.index, 0, this.node);
             this.markDirty();
-            way.expandBbox(this.node);
+            way.calculateBbox();
 
             return this.SUCCESS;
         },

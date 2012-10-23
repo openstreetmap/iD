@@ -1,7 +1,3 @@
-// define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/array",'dojo/_base/declare',
-//         "iD/Entity","iD/Node","iD/Way","iD/Relation","iD/actions/CreateEntityAction"],
-//        function(xhr,lang,DomParser,array,declare,Entity){
-
 // ----------------------------------------------------------------------
 // Connection base class
 
@@ -65,7 +61,7 @@ iD.Connection = function(apiURL) {
         return relation;
     }
 
-    function getObjectsByBbox(left,right,top,bottom) {
+    function getObjectsByBbox(extent) {
         // summary:			Find all drawable entities that are within a given bounding box.
         // returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
         // Each one is an array of entities.
@@ -77,11 +73,11 @@ iD.Connection = function(apiURL) {
         };
         for (var id in ways) {
             var way = ways[id];
-            if (way.within(left,right,top,bottom)) { o.waysInside.push(way); }
+            if (way.within(extent)) { o.waysInside.push(way); }
             else { o.waysOutside.push(way); }
         }
         _.each(pois, function(node) {
-            if (node.within(left,right,top,bottom)) { o.poisInside.push(node); }
+            if (node.within(extent)) { o.poisInside.push(node); }
             else { o.poisOutside.push(node); }
         });
         return o;
@@ -118,11 +114,11 @@ iD.Connection = function(apiURL) {
     // ----------
     // OSM parser
 
-    function loadFromAPI(box, callback) {
+    function loadFromAPI(extent, callback) {
         // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
         // to use Overpass API (which has the relevant CORS headers).
         loadFromURL("http://www.overpass-api.de/api/xapi?map?bbox=" +
-            [box.west, box.south, box.east, box.north], callback);
+            [extent[0].lon, extent[1].lat, extent[1].lon, extent[0].lat], callback);
     }
 
     function loadFromURL(url, callback) {
