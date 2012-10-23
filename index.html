@@ -9,6 +9,7 @@
 <body>
 <div id="appLayout" class="demoLayout">
   <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+  <script type="text/javascript" src="js/lib/polymaps.min.js"></script>
   <script type="text/javascript" src="js/lib/sphericalmercator.js"></script>
   <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
   <script type="text/javascript" src="js/iD/Util.js"></script>
@@ -32,7 +33,7 @@ require(["iD/actions/UndoStack",
 
     var map;
 	var ruleset = new iD.styleparser.RuleSet();
-	var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
+	var connection = iD.Connection("http://www.overpass-api.de/api/xapi?");
 
 	// Load styles
     ruleset.loadFromCSS("potlatch.css", function() {

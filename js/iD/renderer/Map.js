@@ -26,8 +26,6 @@ declare("iD.renderer.Map", null, {
 	wayuis: {},				//  |
 
 	tilegroup: null,		// group within container for adding bitmap tiles
-	tiles: {},				// index of tile objects
-	tilebaseURL: 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z',	// Bing imagery URL
 
 	dragging: false,		// current drag state
 	dragged: false,			// was most recent click a drag?
@@ -74,7 +72,30 @@ declare("iD.renderer.Map", null, {
             height: this.mapheight
         }).setFill(new dojo.Color([100,100,100,1]));
 
+        /** Returns a Bing URL template given a string and a list of subdomains. */
+        function template(url, subdomains) {
+          /** Returns the given coordinate formatted as a 'quadkey'. */
+          function quad(column, row, zoom) {
+            var key = "";
+            for (var i = 1; i <= zoom; i++) {
+              key += (((row >> zoom - i) & 1) << 1) | ((column >> zoom - i) & 1);
+            }
+            return key;
+          }
+
+          return function(c) {
+            var quadKey = quad(c.column, c.row, c.zoom);
+            return url
+                .replace("{quadkey}", quadKey);
+          };
+        }
+
 		this.tilegroup = this.surface.createGroup();
+        var po = org.polymaps;
+        this.map = po.map().container(this.tilegroup.rawNode);
+        this.map.add(po.image()
+            .url(template('http://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=587&mkt=en-gb&n=z')));
+
 		this.container = this.surface.createGroup();
 		this.connection = obj.connection;
 
@@ -106,7 +127,6 @@ declare("iD.renderer.Map", null, {
 
 		// Make draggable
 		this.backdrop.connect("onmousedown", _.bind(this.startDrag, this));
-		this.tilegroup.connect("onmousedown", _.bind(this.startDrag, this));
 		this.surface.connect("onclick", _.bind(this.clickSurface, this));
 		this.surface.connect("onmousemove", _.bind(this.processMove, this));
 		this.surface.connect("onmousedown", _.bind(this.mouseEvent, this));
@@ -146,7 +166,7 @@ declare("iD.renderer.Map", null, {
 	// ----------------------------
 	// Sprite and EntityUI handling
 
-	sublayer:function(layer, groupType, sublayer) {
+	sublayer: function(layer, groupType, sublayer) {
 		// summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
 		// if necessary. Note that sublayers are only implemented for stroke and fill.
 		// groupType: String	'casing','text','hit','stroke', or 'fill'
@@ -287,9 +307,18 @@ declare("iD.renderer.Map", null, {
     },
 	setCenter: function(loc) { this.setCentre(loc); },
 
+	getCenter: function() {
+        return this.coordLocation(this.coord);
+    },
+
+	getZoom: function() {
+        return this.coord.z;
+    },
+
     draw: function() {
         if (this.coord.z > this.MIN_DOWNLOAD_SCALE) this.download();
-        return this.clearTiles().updateOrigin().loadTiles().updateUIs();
+        this.map.zoom(this.getZoom()).center(this.getCenter());
+        return this.updateOrigin().updateUIs();
     },
 
 	// ----------------------
@@ -312,76 +341,6 @@ declare("iD.renderer.Map", null, {
         });
 	},
 
-    // -------------
-    // Tile handling
-    // ** FIXME: see docs
-    loadTiles: function() {
-        // summary:		Load all tiles for the current viewport. This is a bare-bones function 
-        //				at present: it needs configurable URLs (not just Bing), attribution/logo
-        //				support, and to be 'nudgable' (i.e. adjust the offset).
-        var tl = this.parentCoord(this.pointCoord({ x: 0, y: 0 })),
-            br = this.parentCoord(this.pointCoord({
-                x: this.mapwidth,
-                y: this.mapheight })),
-            tileKeys = _.keys(this.tiles),
-            seen = [],
-            coord = { z: this.coord.z };
-
-        for (coord.x = tl.x; coord.x <= br.x; coord.x++) {
-            for (coord.y = tl.y; coord.y <= br.y; coord.y++) {
-                this.fetchTile(coord);
-                seen.push(iD.Util.tileKey(coord));
-            }
-        }
-
-        _.each(_.without(tileKeys, seen), _.bind(function(key) {
-            delete this.tiles[key];
-        }, this));
-
-        return this;
-    },
-
-	fetchTile: function(coord) {
-        if (this.tiles[iD.Util.tileKey(coord)]) return;
-		// summary:		Load a tile image at the given tile co-ordinates.
-        var x = this.transform.x + (coord.x * this.tileSize);
-        var y = this.transform.y + (coord.y * this.tileSize);
-
-		var t = this.tilegroup.createImage({
-			x: x,
-			y: y,
-			width: this.tileSize,
-            height: this.tileSize,
-			src: this.tileURL(coord)
-		});
-
-        this.tiles[iD.Util.tileKey(coord)] = t;
-	},
-
-	tileURL: function(coord) {
-		// summary:		Calculate the URL for a tile at the given co-ordinates.
-		var u = '';
-		for (var zoom = coord.z; zoom > 0; zoom--) {
-			var byte = 0;
-			var mask = 1 << (zoom - 1);
-			if ((coord.x & mask) !== 0) byte++;
-			if ((coord.y & mask) !== 0) byte += 2;
-			u += byte.toString();
-		}
-		return this.tilebaseURL
-            .replace('$z', coord.z)
-            .replace('$x', coord.x)
-            .replace('$y', coord.y)
-            .replace('$quadkey', u);
-	},
-
-	clearTiles: function() {
-		// summary:	Unload all tiles and remove from the display.
-		this.tilegroup.clear();
-		this.tiles = {};
-        return this;
-	},
-
 	// -------------------------------------------
 	// Co-ordinate management, dragging and redraw
 
@@ -393,7 +352,7 @@ declare("iD.renderer.Map", null, {
 		Event.stop(e);
 		this.dragging = true;
 		this.dragged = false;
-		this.dragx = this.dragy=NaN;
+		this.dragx = this.dragy = NaN;
 		this.startdragx = e.clientX;
 		this.startdragy = e.clientY;
 		this.dragconnect = srcElement.connect('onmouseup', _.bind(this.endDrag, this));
@@ -422,6 +381,7 @@ declare("iD.renderer.Map", null, {
                 this.coord.x -= (x - this.dragx) / 256;
                 this.coord.y -= (y - this.dragy) / 256;
                 this.updateOrigin();
+                this.draw();
                 this.dragged = true;
             }
             this.dragx = x;
@@ -436,8 +396,6 @@ declare("iD.renderer.Map", null, {
         var ox = (this.mapwidth / 2) - this.coord.x * 256,
             oy = (this.mapheight / 2) - this.coord.y * 256;
         this.transform = { x: ox, y: oy };
-		// this.container.setTransform(t);
-		// this.tilegroup.setTransform(t);
         return this;
 	},
 

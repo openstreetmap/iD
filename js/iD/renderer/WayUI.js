@@ -116,7 +116,7 @@ define(['dojo/_base/declare','iD/renderer/EntityUI'], function(declare) {
                     }));
 
                 var entityMouseEvent = _.bind(this.entityMouseEvent, this);
-                hit.source=this;
+                hit.source = this;
                 hit.connect("onclick", entityMouseEvent);
                 hit.connect("onmousedown", entityMouseEvent);
                 hit.connect("onmouseup", entityMouseEvent);
