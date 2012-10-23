@@ -24,4 +24,10 @@ describe('Way', function() {
   it('is also an area when it has no nodes', function() {
       expect(way.isType('area')).toEqual(true);
   });
+
+  it('can provide geojson', function() {
+      var gj = way.toGeoJSON(); 
+      expect(gj.type).toEqual('Feature');
+      expect(gj.geometry.type).toEqual('LineString');
+  });
 });

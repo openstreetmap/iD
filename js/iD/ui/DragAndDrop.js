@@ -37,7 +37,9 @@ declare("iD.ui.DragAndDrop", null, {
 			url: "draganddrop.json",
 			handleAs: "json",
 			load: lang.hitch(this, function(obj) { this.drawGrid(obj); } ),
-			error: function(err) { console.log("couldn't load"); }
+			error: function(err) {
+                // console.log("couldn't load");
+            }
 		});
 
 	},

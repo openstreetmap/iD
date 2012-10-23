@@ -64,7 +64,7 @@ declare("iD.styleparser.StyleChooser", null, {
 							break;
 					}
 					if (r.drawn) { tags[':drawn']='yes'; }
-					tags['_width']=sl.maxwidth;
+					tags._width = sl.maxwidth;
 			
 					r.runEvals(tags);
 					if (a[c.subpart]) {
@@ -79,8 +79,7 @@ declare("iD.styleparser.StyleChooser", null, {
 				}
 			}
 		}
-	},
-
+	}
 });
 
 // ----------------------------------------------------------------------

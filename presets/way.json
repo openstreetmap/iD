@@ -1,0 +1,131 @@
+{
+    "Roads": [
+        {
+            "name": "Motorway",
+            "description": "a large highway, linking states or provinces",
+            "tags": {
+                "highway": "motorway"
+            },
+            "implied": {
+                "oneway": "yes",
+                "bicycle": "no",
+                "foot": "no",
+                "horse": "no"
+            },
+            "icon": "ways/highway__motorway.png",
+            "editors": [
+                "road"
+            ]
+        },
+        {
+            "name": "Trunk road",
+            "description": "a highway, linking states or provinces",
+            "tags": {
+                "highway": "secondary"
+            },
+            "icon": "ways/highway__secondary.png",
+            "editors": [
+                "road",
+                "cycling",
+                "bus"
+            ]
+        },
+        {
+            "name": "Primary road",
+            "description": "a highway linking large towns",
+            "tags": {
+                "highway": "primary"
+            },
+            "icon": "ways/highway__primary.png",
+            "editors": [
+                "road",
+                "cycling",
+                "bus"
+            ]
+        },
+        {
+            "name": "Secondary road",
+            "description": "Multi-lane roads that lead to residential roads. Usually they have stop lights and feed in to larger streets.",
+            "tags": {
+                "highway": "secondary"
+            },
+            "icon": "ways/highway__secondary.png",
+            "editors": [
+                "road",
+                "cycling",
+                "bus"
+            ]
+        },
+        {
+            "name": "Tertiary road",
+            "description": "Roads that connect to residential roads. Typically feature stop lights and connect to larger streets.",
+            "tags": {
+                "highway": "tertiary"
+            },
+            "icon": "ways/highway__tertiary.png",
+            "editors": [
+                "road",
+                "cycling",
+                "bus"
+            ]
+        },
+        {
+            "name": "Residential",
+            "description": "a typically paved road that connects other roads to housing, and usually to driveways",
+            "tags": {
+                "highway": "residential"
+            },
+            "icon": "ways/highway__unclassified.png",
+            "editors": [
+                "road",
+                "cycling",
+                "bus"
+            ]
+        },
+        {
+            "name": "Minor road",
+            "description": "Minor connecting roads",
+            "tags": {
+                "highway": "unclassified"
+            },
+            "icon": "ways/highway__unclassified.png",
+            "editors": [
+                "road",
+                "cycling",
+                "bus"
+            ]
+        }
+    ],
+    "Railways": [
+        {
+            "name": "Railway",
+            "tags": {
+                "railway": "rail"
+            },
+            "icon": "ways/railway__rail.png",
+            "editors": [
+                "rail"
+            ]
+        },
+        {
+            "name": "Disused tracks",
+            "tags": {
+                "railway": "disused"
+            },
+            "icon": "ways/railway__disused.png",
+            "editors": [
+                "rail"
+            ]
+        },
+        {
+            "name": "Abandoned trackbed",
+            "tags": {
+                "railway": "abandoned"
+            },
+            "icon": "ways/railway__abandoned.png",
+            "editors": [
+                "rail"
+            ]
+        }
+    ]
+}

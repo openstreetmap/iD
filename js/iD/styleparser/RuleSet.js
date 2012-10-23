@@ -12,17 +12,17 @@ declare("iD.styleparser.RuleSet", null, {
 	choosers: [],		// list of StyleChoosers
 	callback: null,
 
-	constructor:function() {
+	constructor: function() {
 		// summary:		An entire stylesheet in parsed form.
-		this.choosers=[];
+		this.choosers = [];
 	},
 
-	registerCallback:function(callback) {
+	registerCallback: function(callback) {
 		// summary:		Set a callback function to be called when the CSS is loaded and parsed.
-		this.callback=callback;
+		this.callback = callback;
 	},
 
-	getStyles:function(entity, tags, zoom) {
+	getStyles: function(entity, tags, zoom) {
 		// summary:		Find the styles for a given entity.
 		var sl=new iD.styleparser.StyleList();
 		for (var i in this.choosers) {
@@ -39,11 +39,11 @@ declare("iD.styleparser.RuleSet", null, {
 	parseCSS:function(css) {
 		// summary:		Parse a CSS document into a set of StyleChoosers.
 		var previous=0;								// what was the previous CSS word?
-		var sc=new iD.styleparser.StyleChooser();	// currently being assembled
-		this.choosers=[];
+		var sc = new iD.styleparser.StyleChooser();	// currently being assembled
+		this.choosers = [];
 		css = css.replace(/[\r\n]/g,"");				// strip linebreaks because JavaScript doesn't have the /s modifier
 
-		var o={};
+		var o = {};
 		while (css.length>0) {
 
 			// CSS comment
@@ -118,10 +118,10 @@ declare("iD.styleparser.RuleSet", null, {
 			// Unknown pattern
 			} else if ((o=this.UNKNOWN.exec(css))) {
 				css=css.replace(this.UNKNOWN,'');
-				console.log("unknown: "+o[1]);
+				// console.log("unknown: "+o[1]);
 
 			} else {
-				console.log("choked on "+css);
+				// console.log("choked on "+css);
 				return;
 			}
 		}
@@ -192,7 +192,9 @@ declare("iD.styleparser.RuleSet", null, {
             else if (ps.has(a)) { ps.setPropertyFromString(a,v,isEval[a]); }
             else if (ts.has(a)) { ts.setPropertyFromString(a,v,isEval[a]); }
             else if (hs.has(a)) { hs.setPropertyFromString(a,v,isEval[a]); }
-            else { console.log(a+" not found"); }
+            else {
+                // console.log(a+" not found");
+            }
         }
 
         // Add each style to list
@@ -207,8 +209,8 @@ declare("iD.styleparser.RuleSet", null, {
 	parseZoom:function(s) {
 		var o={};
 		if      ((o=this.ZOOM_MINMAX.exec(s))) { return [o[1],o[2]]; }
-		else if ((o=this.ZOOM_MIN.exec(s)   )) { return [o[1],maxscale]; }
-		else if ((o=this.ZOOM_MAX.exec(s)   )) { return [minscale,o[1]]; }
+		else if ((o=this.ZOOM_MIN.exec(s)   )) { return [o[1], maxscale]; }
+		else if ((o=this.ZOOM_MAX.exec(s)   )) { return [minscale, o[1]]; }
 		else if ((o=this.ZOOM_SINGLE.exec(s))) { return [o[1],o[1]]; }
 		return null;
 	},
@@ -236,12 +238,12 @@ declare("iD.styleparser.RuleSet", null, {
 		} else {
 			var match = this.HEX.exec(colorStr);
 			if ( match ) { 
-				if ( match[1].length == 3) {
-					// repeat digits. #abc => 0xaabbcc
-					return Number("0x"+match[1].charAt(0)+match[1].charAt(0)+
-					                   match[1].charAt(1)+match[1].charAt(1)+
-					                   match[1].charAt(2)+match[1].charAt(2));
-				} else if ( match[1].length == 6) {
+                if ( match[1].length == 3) {
+                    // repeat digits. #abc => 0xaabbcc
+                    return Number("0x"+match[1].charAt(0)+match[1].charAt(0)+
+                                  match[1].charAt(1)+match[1].charAt(1)+
+                                  match[1].charAt(2)+match[1].charAt(2));
+                } else if ( match[1].length == 6) {
 					return Number("0x"+match[1]);
 				} else {
 					return Number("0x000000"); //as good as any

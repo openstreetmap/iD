@@ -48,8 +48,8 @@ declare("iD.styleparser.RuleChain", null, {
 		return this.rules.length;
 	},
 	
-	setSubpart:function(_subpart) {
-		this.subpart = _subpart=='' ? 'default' : _subpart;
+	setSubpart:function(subpart) {
+		this.subpart = subpart || 'default';
 	},
 
 	// Test a ruleChain
@@ -60,7 +60,7 @@ declare("iD.styleparser.RuleChain", null, {
 	// - if they succeed, and it's the last in the chain, return happily
 	// - if they succeed, and there's more in the chain, rerun this for each parent until success
 
-	test:function(pos, entity, tags, zoom) {
+	test: function(pos, entity, tags, zoom) {
 		// summary:		Test a rule chain by running all the tests in reverse order.
 		if (this.rules.length === 0) { return false; }
 		if (pos==-1) { pos=this.rules.length-1; }
@@ -76,7 +76,6 @@ declare("iD.styleparser.RuleChain", null, {
 		}
 		return false;
 	}
-
 });
 
 // ----------------------------------------------------------------------

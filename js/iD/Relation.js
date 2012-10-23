@@ -1,8 +1,8 @@
 if (typeof iD === 'undefined') iD = {};
 
-iD.Relation = function(conn, id, members, tags, loaded) {
+iD.Relation = function(connection, id, members, tags, loaded) {
     this.entityType = 'relation';
-    this.connection = conn;
+    this.connection = connection;
     this.id = id;
     this._id = iD.Util.id();
     this.members = members;
