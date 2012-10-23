@@ -176,7 +176,7 @@ declare("iD.renderer.Map", null, {
 		return sub; // dojox.gfx.Group
 	},
 
-	createUI: function(entity,stateClasses) {
+	createUI: function(entity, stateClasses) {
 		// summary:		Create a UI (sprite) for an entity, assigning any specified state classes
 		//				(temporary attributes such as ':hover' or ':selected')
 		var id = entity.id;

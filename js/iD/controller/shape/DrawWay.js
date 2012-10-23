@@ -14,13 +14,13 @@
 */
 
 
-define(['dojo/_base/declare', 'dojo/_base/lang', 'dojox/gfx/shape', 'iD/controller/ControllerState'], 
+define(['dojo/_base/declare', 'dojo/_base/lang', 'dojox/gfx/shape'], 
        function(declare, lang, shape){
 
 // ----------------------------------------------------------------------
 // DrawWay class
 
-declare("iD.controller.shape.DrawWay", [iD.controller.ControllerState], {
+declare("iD.controller.shape.DrawWay", null, {
 
 	way: null,
 	wayUI: null,

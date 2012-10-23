@@ -15,7 +15,6 @@
 
 define(['dojo/_base/declare',
 		'iD/actions/UndoableAction',
-		'iD/controller/ControllerState',
 		'iD/controller/shape/DrawWay',
 		'iD/controller/shape/SelectedWay',
 		'iD/controller/shape/SelectedPOINode'
@@ -24,7 +23,7 @@ define(['dojo/_base/declare',
 // ----------------------------------------------------------------------
 // ControllerState base class
 
-declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
+declare("iD.controller.shape.NoSelection", null, {
 
 	constructor: function(intent) {
 		// summary:		In 'Draw shape' mode but nothing is selected.
@@ -77,13 +76,15 @@ declare("iD.controller.shape.NoSelection", [iD.controller.ControllerState], {
                     var action = new iD.actions.CreatePOIAction(this.getConnection(), {},
                         map.coord2lat(map.mouseY(event)),
                         map.coord2lon(map.mouseX(event)));
-                    this.controller.undoStack.addAction(action);
-                    var node = action.getNode();
-                    this.controller.map.createUI(node);
-                    var state = new iD.controller.edit.SelectedPOINode(node);
-                    state.controller = this.controller;
-                    state.enterState();
-                    return state;
+                    if (action.doAction()) {
+                        this.controller.undoStack.add(action);
+                        var node = action.getNode();
+                        this.controller.map.createUI(node);
+                        var state = new iD.controller.edit.SelectedPOINode(node);
+                        state.controller = this.controller;
+                        state.enterState();
+                        return state;
+                    }
                 }
             }
         }
