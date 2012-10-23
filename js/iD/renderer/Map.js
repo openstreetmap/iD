@@ -229,7 +229,6 @@ function(declare, Event, domGeom, Gfx, Matrix){
                     return '' + e.id;
                 }, this)).value();
             _.each(_.difference(_.keys(this.uis), touch), _.bind(function(k) {
-                console.log(k);
                 this.deleteUI(k);
             }, this));
         },

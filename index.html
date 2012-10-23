@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojo/dojo.js" data-dojo-config="async: true, parseOnLoad: true, baseUrl: 'js/iD/'"></script>
     <title>iD</title>
     <!-- load Dojo -->
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dijit/themes/claro/claro.css">
 	<link rel="stylesheet" href="css/app.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojo/dojo.js" data-dojo-config="async: true, parseOnLoad: true, baseUrl: 'js/iD/'"></script>
 </head>
 <body class="claro">
 <div id="appLayout" class="demoLayout">
@@ -20,19 +20,18 @@
   <script type="text/javascript" src="js/iD/Entity.js"></script>
   <script type="text/javascript" src="js/iD/Way.js"></script>
   <script type="text/javascript" src="js/iD/Connection.js"></script>
+  <script type="text/javascript" src="js/iD/Controller.js"></script>
   <script>
-
-require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented",
+require(["dojo/on", "dojo/dom", "dojo/Evented",
          "iD/actions/UndoStack",
          "iD/actions/CreatePOIAction",
          "iD/actions/AddNodeToWayAction",
-         "iD/Controller",
          "iD/actions/CreateEntityAction",
          "iD/controller/edit/NoSelection",
          "iD/controller/shape/NoSelection",
          "iD/renderer/Map","iD/styleparser/RuleSet",
          "iD/ui/DragAndDrop","iD/ui/StepPane",
-         "dojo/domReady!"], function(domGeom,domClass,on,dom,Evented){
+         "dojo/domReady!"], function(on, dom, Evented){
 
 	var ruleset = new iD.styleparser.RuleSet();
 	var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
@@ -48,8 +47,8 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 		zoom: 17,
 		div: "map",
 		connection: connection,
-		width: dom.byId('map').offsetWidth,
-		height: dom.byId('map').offsetHeight
+		width: $('#map').width(),
+		height: $('#map').height()
 	});
 	map.ruleset = ruleset;
 
@@ -62,9 +61,6 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 	function styleLoaded() {
 		// Initialise drag-and-drop icons
 		new iD.ui.DragAndDrop("map", map, "dndgrid");
-
-		// Initialise help pane
-		controller.setStepper(new iD.ui.StepPane());
 
 		// Set initial controllerState
 		controller.setState(new iD.controller.edit.NoSelection());
