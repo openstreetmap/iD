@@ -8,14 +8,13 @@
 */
 
 define(['dojo/_base/declare',
-		'iD/actions/UndoableAction',
-		'iD/controller/ControllerState'
+		'iD/actions/UndoableAction'
 		], function(declare){
 
 // ----------------------------------------------------------------------
 // SelectedPOINode class
 
-declare("iD.controller.shape.SelectedPOINode", [iD.controller.ControllerState], {
+declare("iD.controller.shape.SelectedPOINode", null, {
 
 	constructor:function() {
 		// summary:		In 'Draw shape' mode and a POI node is selected, to be converted into a way.

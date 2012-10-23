@@ -15,7 +15,7 @@ declare("iD.actions.MoveNodeAction", [iD.actions.UndoableEntityAction], {
 	newLon: NaN,       
 	setLatLon: null,
 
-	constructor:function(node, newLat, newLon, setLatLon) {
+	constructor: function(node, newLat, newLon, setLatLon) {
 		// summary:		Move a node to a new position.
 		this.entity = node;
 		this.newLat = newLat;
@@ -24,25 +24,28 @@ declare("iD.actions.MoveNodeAction", [iD.actions.UndoableEntityAction], {
 		this.createTime = new Date().getTime();
 	},
 
-	doAction:function() {
+	run: function() {
 		var node = this.entity;
 		this.oldLat = node.lat;
 		this.oldLon = node.lon;
-		if (this.oldLat==this.newLat && this.oldLon==this.newLon) { return NO_CHANGE; }
+		if (this.oldLat === this.newLat &&
+            this.oldLon === this.newLon) {
+            return NO_CHANGE;
+        }
 		this.setLatLon(this.newLat, this.newLon);
 		this.markDirty();
 		node.refresh();
-		return this.SUCCESS;
+		return true;
 	},
 
-	undoAction:function() {
+	undo: function() {
 		this.setLatLon(this.oldLat, this.oldLon);
 		this.markClean();
 		this.refresh();
-		return this.SUCCESS;
+		return true;
 	},
 
-	mergePrevious:function(prev) {
+	mergePrevious: function(prev) {
 		if (prev.declaredClass!=this.declaredClass) { return false; }
 		
 		if (prev.entity == this.entity && prev.createTime+1000>this.createTime) {
@@ -52,7 +55,6 @@ declare("iD.actions.MoveNodeAction", [iD.actions.UndoableEntityAction], {
 		}
 		return false;
 	}
-
 });
 
 // ----------------------------------------------------------------------

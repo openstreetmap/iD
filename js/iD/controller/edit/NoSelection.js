@@ -13,7 +13,7 @@ define(['dojo/_base/declare',
 declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
 
 	constructor: function() {
-		// summary:		In 'Edit object' mode but nothing selected.
+		// summary:	In 'Edit object' mode but nothing selected.
 	},
 
 	enterState: function() {

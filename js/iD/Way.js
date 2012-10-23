@@ -48,7 +48,7 @@ iD.Way.prototype = {
 
     // ---------------------
     // Bounding-box handling
-    within:function(left,right,top,bottom) {
+    within: function(left,right,top,bottom) {
         // TODO invert and just return
         if (!this.extent.west ||
             (this.extent.west < left   && this.extent.east < left  ) ||

@@ -18,7 +18,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 		this.redraw();
 	},
 	getEnhancedTags: function() {
-		var tags=this.inherited(arguments);
+		var tags = this.inherited(arguments);
 		if (this.entity.isClosed()) { tags[':area']='yes'; }
 		return tags;
 	},
@@ -29,7 +29,7 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 	redraw: function() {
 		// summary:		Draw the object and add hitzone sprites.
 		var way = this.entity,
-            maxwidth=4,
+            maxwidth = 4,
             i;
 
 		this.removeSprites();
