@@ -25,12 +25,6 @@ input[type=text]:focus {
     border-color:#222;
 }
 
-* {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
 text {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -42,16 +36,6 @@ table {
 }
 table th {
     text-align:left;
-}
-
-#map {
-    height: 600px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .help-pane {
@@ -144,10 +128,6 @@ table th {
 #tagform input.value {
     font: normal 13px/20px 'Helvetica';
     width:135px;
-}
-
-polyline {
-    cursor: pointer;
 }
 
 .edit-pane {

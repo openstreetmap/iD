@@ -7,7 +7,7 @@ iD.Controller = function(map) {
 
     controller.editorCache = {};
     controller.undoStack = new iD.UndoStack();
-    controller.stepper = new iD.ui.StepPane();
+    // controller.stepper = new iD.ui.StepPane();
 
     controller.setState = function(newState) {
         // summary:		Enter a new ControllerState, firing exitState on the old one, and enterState on the new one.

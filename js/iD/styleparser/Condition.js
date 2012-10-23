@@ -1,11 +1,8 @@
-// iD/styleparser/Condition.js
-
-define(['dojo/_base/declare'], function(declare){
-
 // ----------------------------------------------------------------------
 // Condition base class
 
-declare("iD.styleparser.Condition", null, {
+iD.styleparser.Condition = function() {};
+iD.styleparser.Condition.prototype = {
 	type: '',				// eq/ne/regex etc.
 	params: [],				// what to test against
 
@@ -38,8 +35,4 @@ declare("iD.styleparser.Condition", null, {
 	toString:function() {
 		return "["+this.type+": "+this.params+"]";
 	}
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};

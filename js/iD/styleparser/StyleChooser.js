@@ -1,14 +1,15 @@
 // iD/styleparser/StyleChooser.js
 
-define(['dojo/_base/declare','dojo/_base/lang','iD/styleparser/RuleChain'], function(declare,lang){
+iD.styleparser.StyleChooser = function() {
+    this.ruleChains = [new iD.styleparser.RuleChain()];
+    this.styles = [];
+};
 
-declare("iD.styleparser.StyleChooser", null, {
-
+iD.styleparser.StyleChooser.prototype = {
 	// UpdateStyles doesn't support image-widths yet
 	// or setting maxwidth/_width
-
-	ruleChains:[],				// array of RuleChains (each one an array of Rules)
-	styles:[],					// array of ShapeStyle/ShieldStyle/TextStyle/PointStyle
+	ruleChains: [],				// array of RuleChains (each one an array of Rules)
+	styles: [],					// array of ShapeStyle/ShieldStyle/TextStyle/PointStyle
 	zoomSpecific:false,			// are any of the rules zoom-specific?
 
 	rcpos:0,
@@ -17,8 +18,6 @@ declare("iD.styleparser.StyleChooser", null, {
 	constructor:function() {
 		// summary:		A combination of the selectors (ruleChains) and declaration (styles).
 		//				For example, way[highway=footway] node[barrier=gate] { icon: gate.png; } is one StyleChooser.
-		this.ruleChains=[new iD.styleparser.RuleChain()];
-		this.styles=[];
 	},
 
 	currentChain:function() {
@@ -80,8 +79,4 @@ declare("iD.styleparser.StyleChooser", null, {
 			}
 		}
 	}
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};

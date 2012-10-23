@@ -1,81 +1,72 @@
-// iD/styleparser/RuleChain.js
-
-define(['dojo/_base/declare','iD/styleparser/Rule'], function(declare){
-
 // ----------------------------------------------------------------------
 // RuleChain base class
 // In contrast to Halcyon, note that length() is a function, not a getter property
 
 /**	A descendant list of MapCSS selectors (Rules).
 
-	For example,
-		relation[type=route] way[highway=primary]
-		^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^
-		    first Rule           second Rule
-		       |------------|---------|
-		                    |
-		             one RuleChain
+  For example,
+  relation[type=route] way[highway=primary]
+  ^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^
+  first Rule           second Rule
+  |------------|---------|
+  |
+  one RuleChain
 
 */
 
-declare("iD.styleparser.RuleChain", null, {
+iD.styleparser.RuleChain = function() { };
+iD.styleparser.RuleChain.prototype = {
 
-	rules:[],				// list of Rules
-	subpart: 'default',		// subpart name, as in way[highway=primary]::centreline
-	
-	constructor:function() {
-		// summary:		A descendant list of MapCSS selectors (Rules).
-		this.rules=[];
-	},
+    rules:[],				// list of Rules
+    subpart: 'default',		// subpart name, as in way[highway=primary]::centreline
 
-	// Functions to define the RuleChain
+    // Functions to define the RuleChain
+    addRule:function(_subject) {
+        this.rules.push(new iD.styleparser.Rule(_subject));
+    },
 
-	addRule:function(_subject) {
-		this.rules.push(new iD.styleparser.Rule(_subject));
-	},
+    addConditionToLast:function(_condition) {
+        this.rules[this.rules.length-1].addCondition(_condition);
+    },
 
-	addConditionToLast:function(_condition) {
-		this.rules[this.rules.length-1].addCondition(_condition);
-	},
+    addZoomToLast:function(z1,z2) {
+        this.rules[this.rules.length-1].minZoom=z1;
+        this.rules[this.rules.length-1].maxZoom=z2;
+    },
 
-	addZoomToLast:function(z1,z2) {
-		this.rules[this.rules.length-1].minZoom=z1;
-		this.rules[this.rules.length-1].maxZoom=z2;
-	},
 
-		
-	length:function() {
-		return this.rules.length;
-	},
-	
-	setSubpart:function(subpart) {
-		this.subpart = subpart || 'default';
-	},
+    length:function() {
+        return this.rules.length;
+    },
 
-	// Test a ruleChain
-	// - run a set of tests in the chain
-	//		works backwards from at position "pos" in array, or -1  for the last
-	//		separate tags object is required in case they've been dynamically retagged
-	// - if they fail, return false
-	// - if they succeed, and it's the last in the chain, return happily
-	// - if they succeed, and there's more in the chain, rerun this for each parent until success
+    setSubpart:function(subpart) {
+        this.subpart = subpart || 'default';
+    },
 
-	test: function(pos, entity, tags, zoom) {
-		// summary:		Test a rule chain by running all the tests in reverse order.
-		if (this.rules.length === 0) { return false; }
-		if (pos==-1) { pos=this.rules.length-1; }
+    // Test a ruleChain
+    // - run a set of tests in the chain
+    //		works backwards from at position "pos" in array, or -1  for the last
+    //		separate tags object is required in case they've been dynamically retagged
+    // - if they fail, return false
+    // - if they succeed, and it's the last in the chain, return happily
+    // - if they succeed, and there's more in the chain, rerun this for each parent until success
 
-		var r = this.rules[pos];
-		if (!r.test(entity, tags, zoom)) { return false; }
-		if (pos === 0) { return true; }
+    test: function(pos, entity, tags, zoom) {
+        // summary:		Test a rule chain by running all the tests in reverse order.
+        if (this.rules.length === 0) { return false; }
+        if (pos==-1) { pos=this.rules.length-1; }
 
-		var o = entity.entity.parentObjects();
-		for (var i = 0; i < o.length; i++) {
-			var p=o[i];
-			if (this.test(pos-1, p, p.tags, zoom)) { return true; }
-		}
-		return false;
-	}
+        var r = this.rules[pos];
+        if (!r.test(entity, tags, zoom)) { return false; }
+        if (pos === 0) { return true; }
+
+        var o = entity.entity.parentObjects();
+        for (var i = 0; i < o.length; i++) {
+            var p=o[i];
+            if (this.test(pos-1, p, p.tags, zoom)) { return true; }
+        }
+        return false;
+    }
 });
 
 // ----------------------------------------------------------------------

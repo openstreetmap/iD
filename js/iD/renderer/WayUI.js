@@ -1,4 +1,3 @@
-// iD/renderer/WayUI.js
 // WayUI classes for iD
 // **** TODO:
 // multipolygon support - http://mail.dojotoolkit.org/pipermail/dojo-interest/2011-January/052042.html
@@ -7,16 +6,11 @@
 // fill images
 // opacity
 
-define(['dojo/_base/declare','iD/renderer/EntityUI'], function(declare) {
-
 // ----------------------------------------------------------------------
 // WayUI class
+iD.renderer.WayUI = function() {};
 
-declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
-	constructor: function() {
-		// summary:		A UI (rendering) representing a way.
-		this.redraw();
-	},
+iD.renderer.WayUI.prototype = {
 	getEnhancedTags: function() {
 		var tags = this.inherited(arguments);
 		if (this.entity.isClosed()) { tags[':area']='yes'; }
@@ -139,8 +133,4 @@ declare("iD.renderer.WayUI", [iD.renderer.EntityUI], {
 	entityMouseEvent:function(event) {
 		this.inherited(arguments);
 	}
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};

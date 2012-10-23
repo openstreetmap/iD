@@ -1,7 +1,3 @@
-// define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/array",'dojo/_base/declare',
-//         "iD/Entity","iD/Node","iD/Way","iD/Relation","iD/actions/CreateEntityAction"],
-//        function(xhr,lang,DomParser,array,declare,Entity){
-
 // ----------------------------------------------------------------------
 // Connection base class
 

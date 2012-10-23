@@ -1,12 +1,6 @@
-// iD/styleparser/Style.js
+iD.styleparser.Style = function() {};
 
-define(['dojo/_base/declare','dojo/_base/array'], function(declare,array){
-
-// ----------------------------------------------------------------------
-// Style base class
-// fillStyler not done for text yet
-
-declare("iD.styleparser.Style", null, {
+iD.styleparser.Style.prototype = {
 	merged: false,
 	edited: false,
 	sublayer: 5,
@@ -54,7 +48,8 @@ declare("iD.styleparser.Style", null, {
 
 	runEvals: function(tags) {
 		for (var k in this.evals) {
-			this.setPropertyFromString(k,eval("with (tags) {"+this.evals[k]+"}"),false);
+            // TODO: kill
+			this.setPropertyFromString(k, eval("with (tags) {"+this.evals[k]+"}"),false);
 		}
 	},
 	
@@ -72,13 +67,14 @@ declare("iD.styleparser.Style", null, {
 		}
 		return str;
 	}
-});
+};
 
 
 // ----------------------------------------------------------------------
 // InstructionStyle class
 
-declare("iD.styleparser.InstructionStyle", [iD.styleparser.Style], {
+iD.styleparser.InstructionStyle = function() {};
+iD.styleparser.InstructionStyle.prototype = {
 	set_tags: null,
 	breaker: false,
 	styleType: 'InstructionStyle',
@@ -87,12 +83,13 @@ declare("iD.styleparser.InstructionStyle", [iD.styleparser.Style], {
 		if (!this.set_tags) this.set_tags={};
 		this.set_tags[k]=v;
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // PointStyle class
 
-declare("iD.styleparser.PointStyle", [iD.styleparser.Style], {
+iD.styleparser.PointStyle = function() {};
+iD.styleparser.PointStyle.prototype = {
 	properties: ['icon_image','icon_width','icon_height','rotation'],
 	icon_image: null,
 	icon_width: 0,
@@ -105,12 +102,14 @@ declare("iD.styleparser.PointStyle", [iD.styleparser.Style], {
 	maxwidth:function() {
 		return this.evals.icon_width ? 0 : this.icon_width;
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // ShapeStyle class
 
-declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
+iD.styleparser.ShapeStyle = function() {};
+
+iD.styleparser.ShapeStyle.prototype = {
     properties: ['width','color','opacity','dashes','linecap','linejoin','line_style',
         'fill_image','fill_color','fill_opacity','casing_width','casing_color','casing_opacity','casing_dashes','layer'],
 
@@ -168,13 +167,13 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 			join:  join
 		};
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // TextStyle class
 
-declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
-
+iD.styleparser.TextStyle = function() {};
+iD.styleparser.TextStyle.prototype = {
     properties: ['font_family','font_bold','font_italic','font_caps','font_underline','font_size',
         'text_color','text_offset','max_width',
         'text','text_halo_color','text_halo_radius','text_center',
@@ -219,13 +218,15 @@ declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 		return this.dojoColor(0,1);
 	}
 	// getTextFormat, getHaloFilter, writeNameLabel
-});
+};
 
 // ----------------------------------------------------------------------
 // ShieldStyle class
 
-declare("iD.styleparser.ShieldStyle", [iD.styleparser.Style], {
-	properties: ['shield_image','shield_width','shield_height'],
+iD.styleparser.ShieldStyle = function() {};
+
+iD.styleparser.ShieldStyle.prototype = {
+    properties: ['shield_image','shield_width','shield_height'],
 	shield_image: null,
 	shield_width: NaN,
 	shield_height: NaN,
@@ -233,8 +234,7 @@ declare("iD.styleparser.ShieldStyle", [iD.styleparser.Style], {
 	drawn:function() {
 		return (shield_image !== null);
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // End of module
-});
