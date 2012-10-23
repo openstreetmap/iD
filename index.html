@@ -89,10 +89,12 @@ require(["dojo/dom-geometry","dojo/dom-class","dojo/on","dojo/dom","dojo/Evented
 
     $('#undo').click(function() {
 		controller.undoStack.undo();
+        map.updateUIs(true, true);
     });
 
     $('#redo').click(function() {
 		controller.undoStack.redo();
+        map.updateUIs(true, true);
     });
 
 	// ----------------------------------------------------

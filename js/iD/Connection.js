@@ -12,8 +12,7 @@ iD.Connection = function(apiURL) {
     var nextNode = -1,		// next negative ids
         nextWay = -1,		//  |
         nextRelation = -1,	//  |
-        nodes = {},
-        ways = {},
+        entities = {},
         relations = {},
         pois = {},
         modified = false,
@@ -24,20 +23,20 @@ iD.Connection = function(apiURL) {
     function assign(obj) {
         // summary:	Save an entity to the data store.
         switch (obj.entityType) {
-            case "node": nodes[obj.id]=obj; break;
-            case "way": ways[obj.id]=obj; break;
-            case "relation": relations[obj.id]=obj; break;
+            case "node": entities[obj.id] = obj; break;
+            case "way": entities[obj.id] = obj; break;
+            case "relation": relations[obj.id] = obj; break;
         }
     }
 
     function getOrCreate(id, type) {
         // summary:		Return an entity if it exists: if not, create an empty one with the given id, and return that.
         if (type === 'node') {
-            if (!nodes[id]) assign(new iD.Node(connection, id, NaN, NaN, {}, false));
-            return nodes[id];
+            if (!entities[id]) assign(new iD.Node(connection, id, NaN, NaN, {}, false));
+            return entities[id];
         } else if (type === 'way') {
-            if (!ways[id]) assign(new iD.Way(connection, id, [], {}, false));
-            return ways[id];
+            if (!entities[id]) assign(new iD.Way(connection, id, [], {}, false));
+            return entities[id];
         } else if (type === 'relation') {
             if (!relations[id]) assign(new iD.Relation(connection, id, [], {}, false));
             return relations[id];
@@ -66,23 +65,15 @@ iD.Connection = function(apiURL) {
     }
 
     function getObjectsByBbox(left,right,top,bottom) {
-        // summary:			Find all drawable entities that are within a given bounding box.
-        // returns: Object	An object with four properties: .poisInside, .poisOutside, .waysInside, .waysOutside.
+        // summary:	Find all drawable entities that are within a given bounding box.
         // Each one is an array of entities.
         var o = {
-            poisInside: [],
-            poisOutside: [],
-            waysInside: [],
-            waysOutside: []
+            inside: [],
+            outside: []
         };
-        for (var id in ways) {
-            var way = ways[id];
-            if (way.within(left,right,top,bottom)) { o.waysInside.push(way); }
-            else { o.waysOutside.push(way); }
-        }
-        _.each(pois, function(node) {
-            if (node.within(left,right,top,bottom)) { o.poisInside.push(node); }
-            else { o.poisOutside.push(node); }
+        _.each(this.entities, function(e, id) {
+            if (e.within(left, right, top, bottom)) { o.inside.push(e); }
+            else { o.outside.push(e); }
         });
         return o;
     }
@@ -183,7 +174,7 @@ iD.Connection = function(apiURL) {
                 return _(obj.childNodes).chain()
                 .filter(filterNodeName('nd'))
                 .map(function(item) {
-                    return nodes[getAttribute(item,'ref')];
+                    return entities[getAttribute(item,'ref')];
                 }).value();
             }
 
@@ -202,8 +193,7 @@ iD.Connection = function(apiURL) {
         };
     }
 
-    connection.nodes = nodes;
-    connection.ways = ways;
+    connection.entities = entities;
     connection.relations = relations;
     connection.loadFromAPI = loadFromAPI;
     connection.loadFromURL = loadFromURL;

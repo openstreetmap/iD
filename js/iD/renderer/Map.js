@@ -27,8 +27,7 @@ declare("iD.renderer.Map", null, {
 	backdrop: null,			// coloured backdrop (MapCSS canvas element)
 	connection: null,				// data store
 	controller: null,		// UI controller
-	nodeuis: {},			// graphic representations of data
-	wayuis: {},				//  |
+    uis: {},
 
 	tilegroup: null,		// group within container for adding bitmap tiles
 	tiles: {},				// index of tile objects
@@ -68,8 +67,7 @@ declare("iD.renderer.Map", null, {
 		this.mapheight = obj.height ? obj.height : 400;
 
 		// Initialise variables
-		this.nodeuis = {},
-		this.wayuis = {},
+		this.uis = {};
 		this.div=document.getElementById(obj.div);
 		this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
 		this.backdrop=this.surface.createRect({
@@ -171,57 +169,40 @@ declare("iD.renderer.Map", null, {
 				return sub;
 			}
 		}
-		sub=collection.createGroup().moveToFront();
+		sub = collection.createGroup().moveToFront();
 		sub.sublayer=sublayer;
 		return sub; // dojox.gfx.Group
 	},
 
-	createUI: function(entity, stateClasses) {
+	createUI: function(e, stateClasses) {
 		// summary:		Create a UI (sprite) for an entity, assigning any specified state classes
 		//				(temporary attributes such as ':hover' or ':selected')
-		var id = entity.id;
-        if (entity.entityType === 'node') {
-            if (!this.nodeuis[id]) {
-                this.nodeuis[id] = new iD.renderer.NodeUI(entity,this,stateClasses);
-            } else {
-                this.nodeuis[id].setStateClasses(stateClasses).redraw();
+        if (!this.uis[e.id]) {
+            if (e.entityType === 'node') {
+                this.uis[e.id] = new iD.renderer.NodeUI(e, this, stateClasses);
+            } else if (e.entityType === 'way') {
+                this.uis[e.id] = new iD.renderer.WayUI(e, this, stateClasses);
             }
-            return this.nodeuis[id];	// iD.renderer.EntityUI
-        } else if (entity.entityType === 'way') {
-            if (!this.wayuis[id]) {
-                this.wayuis[id] = new iD.renderer.WayUI(entity,this,stateClasses);
-            } else {
-                this.wayuis[id].setStateClasses(stateClasses).redraw();
-            }
-            return this.wayuis[id];		// iD.renderer.EntityUI
+        } else {
+            this.uis[e.id].setStateClasses(stateClasses).redraw();
         }
 	},
 
-	getUI: function(entity) {
+	getUI: function(e) {
 		// summary: Return the UI for an entity, if it exists.
-		if (entity.entityType === 'node') {
-            return this.nodeuis[entity.id];	// iD.renderer.EntityUI
-        } else if (entity.entityType === 'way') {
-			return this.wayuis[entity.id];	// iD.renderer.EntityUI
-		}
-		return null;
+        return this.uis[e.id];	// iD.renderer.EntityUI
 	},
 
-	refreshUI: function(entity) {
+	refreshUI: function(e) {
 		// summary:	Redraw the UI for an entity.
-		if (entity.entityType === 'node') {
-			if (this.nodeuis[entity.id]) { this.nodeuis[entity.id].redraw(); }
-        } else if (entity.entityType === 'way') {
-			if (this.wayuis[entity.id] ) { this.wayuis[entity.id].redraw(); }
-		}
+	    if (this.uis[e.id]) { this.uis[e.id].redraw(); }
 	},
 
-	deleteUI: function(entity) {
+	deleteUI: function(e) {
 		// summary:		Delete the UI for an entity.
-        var uis = { node: 'nodeuis', way: 'wayuis' }[entity.entityType];
-		if (uis && this[uis][entity.id]) {
-			this[uis][entity.id].removeSprites();
-            delete this[uis][entity.id];
+		if (this.uis[e.id]) {
+			this.uis[e.id].removeSprites();
+            delete this.uis[e.id];
 		}
 	},
 
@@ -231,49 +212,21 @@ declare("iD.renderer.Map", null, {
         this.connection.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
     },
 
-	updateUIs: function(redraw, remove) {
+	updateUIs: function() {
 		// summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
 		// redraw: Boolean	Should we redraw any UIs that are already present?
 		// remove: Boolean	Should we delete any UIs that are no longer in the bbox?
         $('#progress').hide().removeClass('spinner');
-
-		var m = this;
-		var way, poi;
 		var o = this.connection.getObjectsByBbox(this.extent);
-
-        _(o.waysInside).chain()
+        _(o.inside).chain()
             .filter(function(w) { return w.loaded; })
-            .each(function(way) {
-                if (!m.wayuis[way.id]) { m.createUI(way); }
-                else if (redraw) { m.wayuis[way.id].recalculate(); m.wayuis[way.id].redraw(); }
-            });
-
-		if (remove !== false) {
-			_.each(o.waysOutside, function(way) {
-				if (m.wayuis[way.id]) {	//  && !m.wayuis[way.id].purgable
-					if (redraw) {
-                        m.wayuis[way.id].recalculate();
-                        m.wayuis[way.id].redraw();
-                    }
-				} else {
-                    m.deleteUI(way);
+            .each(_.bind(function(e) {
+                if (!this.uis[e.id]) {
+                    this.createUI(e);
+                } else {
+                    this.uis[e.id].redraw();
                 }
-			});
-		}
-
-		_.each(o.poisInside, function(poi) {
-			if (!poi.loaded) return;
-			if (!m.nodeuis[poi.id]) { m.createUI(poi); }
-			else if (redraw) { m.nodeuis[poi.id].redraw(); }
-		});
-
-		if (remove !== false) {
-			_.each(o.poisOutside, function(poi) {
-				if (m.nodeuis[poi.id]) {	//  && !m.nodeuis[poi.id].purgable
-					if (redraw) { m.nodeuis[poi.id].redraw(); }
-				} else { m.deleteUI(poi); }
-			});
-		}
+            }, this));
 	},
 
 	// -------------

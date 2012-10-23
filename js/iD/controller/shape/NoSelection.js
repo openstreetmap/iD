@@ -47,6 +47,7 @@ declare("iD.controller.shape.NoSelection", null, {
         var entity = entityUI ? entityUI.entity : null;
         var entityType = entity ? entity.entityType : null;
         var map = this.controller.map;
+        var connection = map.connection;
 
         if (event.type === 'click') {
             if (entityType === 'node') {
@@ -65,18 +66,18 @@ declare("iD.controller.shape.NoSelection", null, {
                 if (this.intent === 'way') {
                     // Click to start a new way
                     var undo = new iD.actions.CompositeUndoableAction();
-                    var startNode = this.getConnection().doCreateNode({}, 
+                    var startNode = connection.doCreateNode({}, 
                         map.coord2lat(map.mouseY(event)),
                         map.coord2lon(map.mouseX(event)), _.bind(undo.push, undo) );
-                    var way = this.getConnection().doCreateWay({}, [startNode], _.bind(undo.push, undo) );
+                    var way = connection.doCreateWay({}, [startNode], _.bind(undo.push, undo) );
                     this.controller.undoStack.addAction(undo);
                     this.controller.map.createUI(way);
                     return new iD.controller.shape.DrawWay(way);
                 } else if (this.intent === 'node') {
-                    var action = new iD.actions.CreatePOIAction(this.getConnection(), {},
+                    var action = new iD.actions.CreatePOIAction(connection, {},
                         map.coord2lat(map.mouseY(event)),
                         map.coord2lon(map.mouseX(event)));
-                    if (action.doAction()) {
+                    if (action.run()) {
                         this.controller.undoStack.add(action);
                         var node = action.getNode();
                         this.controller.map.createUI(node);
