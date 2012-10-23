@@ -28,4 +28,10 @@ describe('Node', function() {
   it('knows if it is without a bounding box', function() {
       expect(node.within(-90, -85, 90, -90)).toBeFalsy();
   });
+
+  it('can provide geojson', function() {
+      var gj = node.toGeoJSON(); 
+      expect(gj.type).toEqual('Feature');
+      expect(gj.geometry.type).toEqual('Point');
+  });
 });

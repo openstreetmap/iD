@@ -7,7 +7,8 @@
 // fill images
 // opacity
 
-define(['dojo/_base/declare','dojo/_base/lang','iD/Entity','iD/renderer/Map'], function(declare,lang){
+define(['dojo/_base/declare','iD/Entity','iD/renderer/Map'],
+       function(declare) {
 
 // ----------------------------------------------------------------------
 // EntityUI base class
@@ -30,7 +31,7 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	getConnection:function() {
 		// summary:		Get the Connection from where the map draws its data.
-		return this.map.conn;	// iD.Connection
+		return this.map.connection;	// iD.Connection
 	},
 	targetGroup:function(groupType,sublayer) {
 		// summary:		Find a gfx.Group to render on.
@@ -38,7 +39,9 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	recordSprite:function(sprite) {
 		// summary:		Record that an individual sprite (one stroke, icon or text item) has been added.
-		if (this.sprites.indexOf(sprite)==-1) { this.sprites.push(sprite); }
+		if (!_.include(this.sprites, sprite)) {
+            this.sprites.push(sprite);
+        }
 		return sprite;
 	},
 	removeSprites:function() {
@@ -50,8 +53,8 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	refreshStyleList:function(tags) {
 		// summary:		Calculate the list of styles that apply to this UI at this zoom level.
-		if (!this.styleList || !this.styleList.isValidAt(this.map.scale)) {
-			this.styleList=this.map.ruleset.getStyles(this.entity,tags,this.map.scale);
+		if (!this.styleList || !this.styleList.isValidAt(this.map.zoom)) {
+			this.styleList=this.map.ruleset.getStyles(this.entity,tags, this.map.zoom);
 		}
 		this.layer=this.styleList.layerOverride();
 		if (isNaN(this.layer)) {
@@ -67,10 +70,10 @@ declare("iD.renderer.EntityUI", null, {
 	},
 	getEnhancedTags:function() {
 		// summary:		Return tags for this entity augmented by the EntityUI's state classes.
-		var tags=lang.clone(this.entity.tags);
+		var tags = _.clone(this.entity.tags);
 		// Apply stateClasses (hover, selected, hoverway, selectedway)
 		for (var i in this.stateClasses) {
-			tags[':'+this.stateClasses[i]]='yes';
+			tags[':'+this.stateClasses[i]] = 'yes';
 		}
 		// todo - Add any common 'special-case' tags, e.g. :hasTags
 		return tags;	// Object

@@ -15,16 +15,16 @@ declare("iD.styleparser.Style", null, {
 	styleType: 'Style',
 	evals: null,
 
-	constructor: function(){
+	constructor: function() {
 		// summary:		Base class for a set of painting attributes, into which the CSS declaration is parsed.
-		this.evals={};
+		this.evals = {};
 	},
 
-	drawn: function(){
+	drawn: function() {
 		return false;
 	},
 
-	has: function(k){
+	has: function(k) {
 		return this.properties.indexOf(k)>-1;
 	},
 	
@@ -46,7 +46,7 @@ declare("iD.styleparser.Style", null, {
 		} else if (typeof(this[k])=='number') {
 			v=Number(v);
 		} else if (this[k] && this[k].constructor==Array) {
-			v=v.split(',').map(function(a) { return Number(a); });
+			v = v.split(',').map(function(a) { return Number(a); });
 		}
 		this[k]=v; 
 		return true;
@@ -66,12 +66,12 @@ declare("iD.styleparser.Style", null, {
 	},
 
 	toString: function() {
-		var str='';
+		var str = '';
 		for (var k in this.properties) {
 			if (this.hasOwnProperty(k)) { str+=k+"="+this[k]+"; "; }
 		}
 		return str;
-	},
+	}
 });
 
 
@@ -79,14 +79,14 @@ declare("iD.styleparser.Style", null, {
 // InstructionStyle class
 
 declare("iD.styleparser.InstructionStyle", [iD.styleparser.Style], {
-	set_tags:null,
-	breaker:false,
+	set_tags: null,
+	breaker: false,
 	styleType: 'InstructionStyle',
-	addSetTag:function(k,v) {
+	addSetTag: function(k,v) {
 		this.edited=true;
 		if (!this.set_tags) this.set_tags={};
 		this.set_tags[k]=v;
-	},
+	}
 });
 
 // ----------------------------------------------------------------------
@@ -100,19 +100,19 @@ declare("iD.styleparser.PointStyle", [iD.styleparser.Style], {
 	rotation: NaN,
 	styleType: 'PointStyle',
 	drawn:function() {
-		return (this.icon_image!=null);
+		return (this.icon_image !== null);
 	},
 	maxwidth:function() {
-		return this.evals['icon_width'] ? 0 : this.icon_width;
-	},
+		return this.evals.icon_width ? 0 : this.icon_width;
+	}
 });
 
 // ----------------------------------------------------------------------
 // ShapeStyle class
 
 declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
-	properties: ['width','color','opacity','dashes','linecap','linejoin','line_style',
-	             'fill_image','fill_color','fill_opacity','casing_width','casing_color','casing_opacity','casing_dashes','layer'],
+    properties: ['width','color','opacity','dashes','linecap','linejoin','line_style',
+        'fill_image','fill_color','fill_opacity','casing_width','casing_color','casing_opacity','casing_dashes','layer'],
 
 	width:0, color:NaN, opacity:NaN, dashes:[],
 	linecap:null, linejoin:null, line_style:null,
@@ -127,7 +127,7 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 	},
 	maxwidth:function() {
 		// If width is set by an eval, then we can't use it to calculate maxwidth, or it'll just grow on each invocation...
-		if (this.evals['width'] || this.evals['casing_width']) { return 0; }
+		if (this.evals.width || this.evals.casing_width) { return 0; }
 		return (this.width + (this.casing_width ? this.casing_width*2 : 0));
 	},
 	strokeStyler:function() {
@@ -143,7 +143,7 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 		};
 	},
 	shapeStrokeStyler:function() {
-		if (isNaN(this.casing_color)) { return { width:0 }; }
+		if (isNaN(this.casing_color)) { return { width:0 }; }
 		return {
 			color: this.dojoColor(this.casing_color, this.casing_opacity ? this.casing_opacity : 1),
 			width: this.casing_width ? this.casing_width : 1
@@ -167,7 +167,7 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 			cap:   cap,
 			join:  join
 		};
-	},
+	}
 });
 
 // ----------------------------------------------------------------------
@@ -175,13 +175,13 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 
 declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 
-	properties: ['font_family','font_bold','font_italic','font_caps','font_underline','font_size',
-	             'text_color','text_offset','max_width',
-	             'text','text_halo_color','text_halo_radius','text_center',
-	             'letter_spacing'],
+    properties: ['font_family','font_bold','font_italic','font_caps','font_underline','font_size',
+        'text_color','text_offset','max_width',
+        'text','text_halo_color','text_halo_radius','text_center',
+        'letter_spacing'],
 
-	font_family: null,
-	font_bold: false,
+    font_family: null,
+    font_bold: false,
 	font_italic: false,
 	font_underline: false,
 	font_caps: false,
@@ -197,7 +197,7 @@ declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 	styleType: 'TextStyle',
 
 	drawn: function() {
-		return (this.text!=null);
+		return (this.text !== null);
 	},
 	fontStyler:function() {
 		return {
@@ -218,7 +218,6 @@ declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 		// not implemented yet
 		return this.dojoColor(0,1);
 	}
-	
 	// getTextFormat, getHaloFilter, writeNameLabel
 });
 
@@ -232,8 +231,8 @@ declare("iD.styleparser.ShieldStyle", [iD.styleparser.Style], {
 	shield_height: NaN,
 	styleType: 'ShieldStyle',
 	drawn:function() {
-		return (shield_image!=null);
-	},
+		return (shield_image !== null);
+	}
 });
 
 // ----------------------------------------------------------------------

@@ -11,16 +11,18 @@ declare("iD.controller.edit.SelectedWay", [iD.controller.edit.EditBaseState], {
 	wayUI: null,
 	entryevent: null,
 
-	constructor:function(_way,_event) {
+	constructor:function(way, event) {
 		// summary:		In 'Edit object' mode and a way is selected.
-		this.way=_way;
-		this.entryevent=_event;
+		this.way = way;
+		this.entryevent = event;
 	},
 	enterState:function() {
-		this.wayUI=this.controller.map.getUI(this.way);
+		this.wayUI = this.controller.map.getUI(this.way);
 		this.wayUI.setStateClass('selected');
 		this.wayUI.setStateClass('shownodes');
-		if (this.entryevent) { this.openEditorTooltip(this.entryevent.clientX, this.entryevent.clientY, this.way); }
+		if (this.entryevent) {
+            this.openEditorTooltip(this.entryevent.clientX, this.entryevent.clientY, this.way);
+        }
 		this.wayUI.redraw();
 	},
 	exitState:function() {
@@ -30,26 +32,31 @@ declare("iD.controller.edit.SelectedWay", [iD.controller.edit.EditBaseState], {
 		this.closeEditorTooltip();
 	},
 	
-	processMouseEvent:function(event,entityUI) {
-		var entity=entityUI ? entityUI.entity : null;
-		var entityType=entity ? entity.entityType : null;
+	processMouseEvent:function(event, entityUI) {
+		var entity = entityUI ? entityUI.entity : null;
+		var entityType =  entity ? entity.entityType : null;
 
-		if (event.type=='click') {
+		if (event.type === 'click') {
 			switch (entityType) {
 				case null:
 					return new iD.controller.edit.NoSelection();
 				case 'node':
-					var ways=entity.parentWays();
-					if (entity.hasParent(this.way)) { return new iD.controller.edit.SelectedWayNode(entity,this.way); }
-					else if (ways.length==0)        { return new iD.controller.edit.SelectedPOINode(entity); }
-					else                            { return new iD.controller.edit.SelectedWayNode(entity,ways[0]); }
+					var ways = entity.entity.parentWays();
+					if (entity.entity.hasParent(this.way)) {
+                        return new iD.controller.edit.SelectedWayNode(entity, this.way);
+                    } else if (!ways.length) {
+                        return new iD.controller.edit.SelectedPOINode(entity);
+                    } else {
+                        return new iD.controller.edit.SelectedWayNode(entity, ways[0]);
+                    }
+                    break;
 				case 'way':
 					return new iD.controller.edit.SelectedWay(entityUI.entity, event);
 			}
 		} else {
 		}
 		return this;
-	},
+	}
 	
 });
 

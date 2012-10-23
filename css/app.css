@@ -1,6 +1,87 @@
-/* Additional CSS rules will go here */
+body {
+    font:normal 13px/20px Helvetica, Arial, sans-serif;
+    background:#e4e4e4;
+    margin:0;
+    text-rendering: optimizeLegibility;
+    color:#444;
+}
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+p {
+    font-size: x-small;
+}
+a:visited, a {
+    color: black;
+}
 
-.currentMode { font-weight: bold; }
+input[type=text] {
+    font:normal 13px/20px Helvetica, Arial, sans-serif;
+    padding:1px 2px;
+}
+
+input[type=text]:focus {
+    border-color:#222;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing:0;
+}
+table th {
+    text-align:left;
+}
+
+#map {
+    height: 600px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.help-pane {
+    position:absolute;
+    left:0;
+    width:300px;
+    opacity:0.9;
+    top:40px;
+    background:#FFFBD3;
+}
+
+.help-pane div {
+    padding:10px;
+    font-style:italic;
+}
+
+#map.state-drawing {
+    cursor: crosshair;
+}
+
+.currentMode {
+    font-weight: bold;
+}
+
+#modebuttons {
+    width:300px;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
 
 #zoombuttons {
     position:absolute;
@@ -8,7 +89,30 @@
     top:20px;
 }
 
+#addPOI {
+    display:none;
+}
+
+#modebuttons button {
+    width:100px;
+    cursor:pointer;
+    background:#fff;
+    color:#555;
+    font:bold 19px/30px 'Helvetica Neue';
+    border:0;
+    border-right:1px solid #222;
+    border-bottom:1px solid #222;
+    padding:0 10px;
+    height:40px;
+    margin:0;
+}
+
+#modebuttons button:hover {
+    background:#eee;
+}
+
 #zoombuttons button {
+    cursor:pointer;
     width:30px;
     height:30px;
     text-align:center;
@@ -30,4 +134,111 @@
 #zoombuttons #zoomOut {
     border-left:0;
     border-radius: 0 4px 4px 0;
+}
+
+/* Tag window */
+#tagform input.key {
+    margin-right:10px;
+}
+#tagform input.key,
+#tagform input.value {
+    font: normal 13px/20px 'Helvetica';
+    width:135px;
+}
+
+polyline {
+    cursor: pointer;
+}
+
+.edit-pane {
+    position:absolute;
+    display:none;
+    right:10px;
+    top:80px;
+    height:500px;
+    width:300px;
+    background:#fff;
+    overflow:auto;
+    box-shadow:#222 0px 0px 3px;
+}
+
+.edit-pane.active {
+    display:block;
+}
+
+.edit-pane h2 {
+    margin:0;
+    padding:5px 5px 10px 5px;
+    background:#e4e4e4;
+}
+
+.edit-pane a.close {
+    position:absolute;
+    top:5px;
+    right:10px;
+    font-weight:bold;
+    text-decoration:none;
+    font-size:20px;
+    color:#DD4848;
+}
+.edit-pane table {
+    width:290px;
+    margin:5px;
+}
+.edit-pane table th,
+.edit-pane table td {
+    padding:2px 2px;
+}
+.edit-pane table td input {
+    width:140px;
+}
+
+.presets h3 {
+    padding: 5px 10px;
+    font: normal 13px/15px Helvetica, Arial, sans-serif;
+    text-align:center;
+    margin: 0;
+}
+
+.presets a.preset-option {
+    text-decoration:none;
+    display:block;
+    background:#eee;
+    padding:5px 10px;
+    border-top:1px solid #ccc;
+}
+
+.presets a.preset-option span {
+    display:block;
+    color: #888;
+    font: normal 11px/15px Helvetica, Arial, sans-serif;
+}
+
+#progress {
+    position:absolute;
+    left:305px;
+    top:10px;
+    color:#fff;
+    z-index:999;
+    width:100px;
+    text-align:center;
+    font-size:28px;
+    display:none;
+    font-weight:bold;
+}
+@-webkit-keyframes spinnerAnim {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spinnerAnim {
+  0% { -moz-transform: rotate(0deg); }
+  100% { -moz-transform: rotate(360deg); }
+}
+.spinner {
+  -webkit-animation-fill-mode: both;
+  -webkit-animation: spinnerAnim 1.5s infinite linear;
+  -webkit-transform-origin: 50% 50%;
+  -moz-animation-fill-mode: both;
+  -moz-animation: spinnerAnim 1.5s infinite linear;
+  -moz-transform-origin: 50% 50%;
 }
