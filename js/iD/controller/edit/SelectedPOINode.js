@@ -20,9 +20,7 @@ define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(decla
             this.nodeUI = map.getUI(this.node);
             this.nodeUI.setStateClass('selected')
                 .redraw();
-            this.openEditorTooltip(
-                map.lon2screen(this.node.lon),
-                map.lat2screen(this.node.lat), this.node);
+            this.openEditorTooltip(this.node);
             return this;
         },
 
@@ -33,10 +31,10 @@ define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(decla
             return this;
         },
 
-        processMouseEvent: function(event,entityUI) {
+        processMouseEvent: function(event, entityUI) {
             if (event.type !== 'click') return this;
-            var entity=entityUI ? entityUI.entity : null;
-            var entityType=entity ? entity.entityType : null;
+            var entity = entityUI ? entityUI.entity : null;
+            var entityType = entity ? entity.entityType : null;
             switch (entityType) {
                 case null: return new iD.controller.edit.NoSelection();
                 case 'node': return new iD.controller.edit.SelectedPOINode(entityUI.entity);

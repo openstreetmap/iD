@@ -14,7 +14,7 @@ declare("iD.Controller", [Evented], {
 	constructor:function(map) {
 		// summary:		The Controller marshalls ControllerStates and passes events to them.
 		this.map = map;
-		this.undoStack = new iD.actions.UndoStack();
+		this.undoStack = new iD.UndoStack();
 		this.editorCache = {};
 	},
 
@@ -29,17 +29,15 @@ declare("iD.Controller", [Evented], {
 		if (this.state) {
 			this.emit("exitState", {
                 bubbles: true,
-                cancelable: true,
-                state: this.state.stateNameAsArray()
+                cancelable: true
             });
 		}
-		newState.setController(this);
+		newState.controller = this;
 		this.state = newState;
 		newState.enterState();
 		this.emit("enterState", {
             bubbles: true,
-            cancelable: true,
-            state: this.state.stateNameAsArray()
+            cancelable: true
         });
 	},
 

@@ -7,14 +7,13 @@
 // to.
 
 define(['dojo/_base/declare',
-       'iD/actions/UndoableAction',
-       'iD/controller/ControllerState'
+       'iD/actions/UndoableAction'
 ], function(declare) {
 
     // ----------------------------------------------------------------------
     // SelectedWayNode class
 
-    declare("iD.controller.shape.SelectedWay", [iD.controller.ControllerState], {
+    declare("iD.controller.shape.SelectedWay", null, {
 
         way: null,
         wayUI: null,
