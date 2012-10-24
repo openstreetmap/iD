@@ -1,2 +1,11 @@
 {
+  'Station name': {
+    key: 'name',
+    type: 'text'
+  },
+
+  'No. passenger platforms': {
+    key: 'platform',
+    type: 'text'
+  }
 }
