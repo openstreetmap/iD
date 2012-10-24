@@ -1,23 +1,15 @@
-// iD/styleparser/Style.js
+iD.styleparser.Style = function() {};
 
-define(['dojo/_base/declare','dojo/_base/array'], function(declare,array){
-
-// ----------------------------------------------------------------------
-// Style base class
-// fillStyler not done for text yet
-
-declare("iD.styleparser.Style", null, {
+iD.styleparser.Style.prototype = {
 	merged: false,
 	edited: false,
 	sublayer: 5,
 	interactive: true,
 	properties: [],
 	styleType: 'Style',
-	evals: null,
+	evals: {},
 
 	constructor: function() {
-		// summary:		Base class for a set of painting attributes, into which the CSS declaration is parsed.
-		this.evals = {};
 	},
 
 	drawn: function() {
@@ -54,7 +46,8 @@ declare("iD.styleparser.Style", null, {
 
 	runEvals: function(tags) {
 		for (var k in this.evals) {
-			this.setPropertyFromString(k,eval("with (tags) {"+this.evals[k]+"}"),false);
+            // TODO: kill
+			this.setPropertyFromString(k, eval("with (tags) {"+this.evals[k]+"}"),false);
 		}
 	},
 	
@@ -72,45 +65,72 @@ declare("iD.styleparser.Style", null, {
 		}
 		return str;
 	}
-});
+};
 
 
 // ----------------------------------------------------------------------
 // InstructionStyle class
 
-declare("iD.styleparser.InstructionStyle", [iD.styleparser.Style], {
+iD.styleparser.InstructionStyle = function() {};
+iD.styleparser.InstructionStyle.prototype = {
 	set_tags: null,
 	breaker: false,
+	evals: {},
 	styleType: 'InstructionStyle',
 	addSetTag: function(k,v) {
 		this.edited=true;
 		if (!this.set_tags) this.set_tags={};
 		this.set_tags[k]=v;
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // PointStyle class
 
-declare("iD.styleparser.PointStyle", [iD.styleparser.Style], {
+iD.styleparser.PointStyle = function() {};
+iD.styleparser.PointStyle.prototype = {
 	properties: ['icon_image','icon_width','icon_height','rotation'],
 	icon_image: null,
 	icon_width: 0,
+	evals: {},
 	icon_height: NaN,
 	rotation: NaN,
 	styleType: 'PointStyle',
 	drawn:function() {
 		return (this.icon_image !== null);
 	},
+	
+	setPropertyFromString: function(k,v,isEval) {
+		this.edited=true;
+		if (isEval) { this.evals[k]=v; return; }
+
+		if (typeof(this[k])=='boolean') {
+			v=Boolean(v);
+		} else if (typeof(this[k])=='number') {
+			v=Number(v);
+		} else if (this[k] && this[k].constructor==Array) {
+			v = v.split(',').map(function(a) { return Number(a); });
+		}
+		this[k]=v; 
+		return true;
+	},
+
+
+
+	has: function(k) {
+		return this.properties.indexOf(k)>-1;
+	},
 	maxwidth:function() {
 		return this.evals.icon_width ? 0 : this.icon_width;
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // ShapeStyle class
 
-declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
+iD.styleparser.ShapeStyle = function() {};
+
+iD.styleparser.ShapeStyle.prototype = {
     properties: ['width','color','opacity','dashes','linecap','linejoin','line_style',
         'fill_image','fill_color','fill_opacity','casing_width','casing_color','casing_opacity','casing_dashes','layer'],
 
@@ -119,9 +139,31 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 	fill_image:null, fill_color:NaN, fill_opacity:NaN, 
 	casing_width:NaN, casing_color:NaN, casing_opacity:NaN, casing_dashes:[],
 
+	evals: {},
 	layer:NaN,				// optional layer override (usually set by OSM tag)
 	styleType: 'ShapeStyle',
 	
+	
+	setPropertyFromString: function(k,v,isEval) {
+		this.edited=true;
+		if (isEval) { this.evals[k]=v; return; }
+
+		if (typeof(this[k])=='boolean') {
+			v=Boolean(v);
+		} else if (typeof(this[k])=='number') {
+			v=Number(v);
+		} else if (this[k] && this[k].constructor==Array) {
+			v = v.split(',').map(function(a) { return Number(a); });
+		}
+		this[k]=v; 
+		return true;
+	},
+
+
+
+	has: function(k) {
+		return this.properties.indexOf(k)>-1;
+	},
 	drawn:function() {
 		return (this.fill_image || !isNaN(this.fill_color) || this.width || this.casing_width);
 	},
@@ -168,13 +210,13 @@ declare("iD.styleparser.ShapeStyle", [iD.styleparser.Style], {
 			join:  join
 		};
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // TextStyle class
 
-declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
-
+iD.styleparser.TextStyle = function() {};
+iD.styleparser.TextStyle.prototype = {
     properties: ['font_family','font_bold','font_italic','font_caps','font_underline','font_size',
         'text_color','text_offset','max_width',
         'text','text_halo_color','text_halo_radius','text_center',
@@ -185,6 +227,7 @@ declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 	font_italic: false,
 	font_underline: false,
 	font_caps: false,
+	evals: {},
 	font_size: NaN,
 	text_color: NaN,
 	text_offset: NaN,
@@ -195,6 +238,23 @@ declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 	text_center: true,
 	letter_spacing: 0,
 	styleType: 'TextStyle',
+
+	
+	setPropertyFromString: function(k,v,isEval) {
+		this.edited=true;
+		if (isEval) { this.evals[k]=v; return; }
+
+		if (typeof(this[k])=='boolean') {
+			v=Boolean(v);
+		} else if (typeof(this[k])=='number') {
+			v=Number(v);
+		} else if (this[k] && this[k].constructor==Array) {
+			v = v.split(',').map(function(a) { return Number(a); });
+		}
+		this[k]=v; 
+		return true;
+	},
+
 
 	drawn: function() {
 		return (this.text !== null);
@@ -214,27 +274,33 @@ declare("iD.styleparser.TextStyle", [iD.styleparser.Style], {
 			text: _text
 		};
 	},
+
+	has: function(k) {
+		return this.properties.indexOf(k)>-1;
+	},
 	fillStyler:function() {
 		// not implemented yet
 		return this.dojoColor(0,1);
 	}
 	// getTextFormat, getHaloFilter, writeNameLabel
-});
+};
 
 // ----------------------------------------------------------------------
 // ShieldStyle class
 
-declare("iD.styleparser.ShieldStyle", [iD.styleparser.Style], {
-	properties: ['shield_image','shield_width','shield_height'],
+iD.styleparser.ShieldStyle = function() {};
+
+iD.styleparser.ShieldStyle.prototype = {
+    properties: ['shield_image','shield_width','shield_height'],
 	shield_image: null,
 	shield_width: NaN,
 	shield_height: NaN,
+	evals: {},
 	styleType: 'ShieldStyle',
 	drawn:function() {
 		return (shield_image !== null);
 	}
-});
+};
 
 // ----------------------------------------------------------------------
 // End of module
-});

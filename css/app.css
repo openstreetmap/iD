@@ -25,12 +25,6 @@ input[type=text]:focus {
     border-color:#222;
 }
 
-* {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
 text {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -44,14 +38,82 @@ table th {
     text-align:left;
 }
 
-#map {
-    height: 600px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+path {
+    fill: none;
+}
+
+path.casing {
+    stroke: #111;
+    stroke-width: 3;
+}
+
+path.stroke {
+    stroke: #555;
+    stroke-width: 2;
+}
+
+path.stroke.railway-rail {
+    stroke: white;
+    stroke-width: 3;
+    stroke-dasharray: 12,12;
+}
+
+path.stroke.railway-subway {
+    stroke: #444;
+    stroke-width: 3;
+    stroke-dasharray: 8,8;
+}
+
+path.area.natural {
+    stroke: #ADD6A5;
+    fill: #ADD6A5;
+    stroke-width:1;
+    fill-opacity:0.3;
+}
+
+path.area.building {
+    stroke: #9E176A;
+    stroke-width: 1;
+    fill: #ff6ec7;
+    fill-opacity: 0.3;
+}
+
+path.area.landuse {
+    stroke: #444;
+    stroke-width:1;
+    fill: #444;
+    opacity:0.2;
+}
+
+path.stroke.highway-residential {
+    stroke:#E8E8E8;
+    stroke-width:3;
+}
+
+path.stroke.highway-unclassified,
+path.stroke.highway-tertiary {
+    stroke:#FEFECB;
+    stroke-width:3;
+}
+
+path.stroke.highway-service {
+    stroke:#fff;
+    stroke-width:2;
+}
+
+path.stroke.highway-motorway,
+path.stroke.highway-motorway_link {
+    stroke:#809BC0;
+}
+
+path.stroke.highway-trunk,
+path.stroke.highway-trunk_link {
+    stroke:#7FC97F;
+}
+
+path.stroke.waterway {
+    stroke: #10539a;
+    stroke-width: 3;
 }
 
 .help-pane {
@@ -144,10 +206,6 @@ table th {
 #tagform input.value {
     font: normal 13px/20px 'Helvetica';
     width:135px;
-}
-
-polyline {
-    cursor: pointer;
 }
 
 .edit-pane {
