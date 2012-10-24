@@ -34,8 +34,21 @@ iD.renderer.Map = function(obj) {
         .attr({ width: this.width, height: this.width })
         .call(this.zoombehavior);
 
-    this.tilegroup = this.surface.append('g');
-    this.container = this.surface.append('g');
+    var clip = this.surface.append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("id", "clip-rect")
+        .attr("x", "0")
+        .attr("y", "0")
+        .attr("width", this.width)
+        .attr("height", this.height);
+
+    this.tilegroup = this.surface.append('g')
+        .attr("clip-path", "url(#clip)");
+    this.container = this.surface.append('g')
+        .attr("clip-path", "url(#clip)");
+
     this.connection = obj.connection;
 
     // Initialise layers
@@ -88,60 +101,6 @@ iD.renderer.Map.prototype = {
     setController:function(controller) {
         // summary:		Set the controller that will handle events on the map (e.g. mouse clicks).
         this.controller = controller;
-    },
-
-    _moveToPosition:function(group, position) {
-        // summary:		Supplementary method for dojox.gfx.
-        // This should ideally be core Dojo stuff: see http://bugs.dojotoolkit.org/ticket/15296
-        var parent=group.getParent();
-        if (!parent) { return; }
-        this._moveChildToPosition(parent,group,position);
-        if (position === group.rawNode.parentNode.childNodes.length) {
-            group.rawNode.parentNode.appendChild(group.rawNode);
-        } else {
-            group.rawNode.parentNode.insertBefore(group.rawNode, group.rawNode.parentNode.childNodes[position]);
-        }
-    },
-
-    _moveChildToPosition: function(parent, child, position) {
-        for (var i = 0; i < parent.children.length; ++i){
-            if (parent.children[i] === child){
-                parent.children.splice(i, 1);
-                parent.children.splice(position, 0, child);
-                break;
-            }
-        }
-    },
-
-    // ----------------------------
-    // Sprite and EntityUI handling
-
-    sublayer: function(layer,groupType,sublayer) {
-        // summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
-        // if necessary. Note that sublayers are only implemented for stroke and fill.
-        // groupType: String	'casing','text','hit','stroke', or 'fill'
-        var collection = this.layers[layer][groupType], sub;
-        switch (groupType) {
-            case 'casing':
-                case 'text':
-                case 'hit':
-                return collection;
-        }
-        // Find correct sublayer, inserting if necessary
-        var insertAt=collection.children.length;
-        for (var i = 0; i < collection.children.length; i++) {
-            sub=collection.children[i];
-            if (sub.sublayer==sublayer) { return sub; }
-            else if (sub.sublayer>sublayer) {
-                sub = collection.createGroup();
-                this._moveToPosition(sub,i);
-                sub.sublayer=sublayer;
-                return sub;
-            }
-        }
-        sub = collection.createGroup().moveToFront();
-        sub.sublayer=sublayer;
-        return sub; // dojox.gfx.Group
     },
 
     createUI: function(e, stateClasses) {

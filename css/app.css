@@ -38,16 +38,79 @@ table th {
     text-align:left;
 }
 
+path {
+    fill: none;
+}
+
 path.casing {
-    fill: transparent;
-    stroke: #ace;
-    stroke-width: 6;
+    stroke: #111;
+    stroke-width: 3;
 }
 
 path.stroke {
-    fill: transparent;
-    stroke: #5F8594;
-    stroke-width: 4;
+    stroke: #555;
+    stroke-width: 2;
+}
+
+path.casing.natural {
+    display:none;
+}
+
+path.stroke.railway-rail {
+    stroke: white;
+    stroke-width: 3;
+    stroke-dasharray: 12,12;
+}
+
+path.stroke.railway-subway {
+    stroke: #444;
+    stroke-width: 3;
+    stroke-dasharray: 8,8;
+}
+
+path.stroke.natural {
+    stroke: #ADD6A5;
+    fill: #ADD6A5;
+    stroke-width:1;
+    opacity:0.2;
+}
+
+path.stroke.landuse {
+    stroke: #444;
+    stroke-width:1;
+    fill: #444;
+    opacity:0.2;
+}
+
+path.stroke.highway-residential {
+    stroke:#E8E8E8;
+    stroke-width:3;
+}
+
+path.stroke.highway-unclassified,
+path.stroke.highway-tertiary {
+    stroke:#FEFECB;
+    stroke-width:3;
+}
+
+path.stroke.highway-service {
+    stroke:#fff;
+    stroke-width:2;
+}
+
+path.stroke.highway-motorway,
+path.stroke.highway-motorway_link {
+    stroke:#809BC0;
+}
+
+path.stroke.highway-trunk,
+path.stroke.highway-trunk_link {
+    stroke:#7FC97F;
+}
+
+path.stroke.waterway {
+    stroke: #10539a;
+    stroke-width: 3;
 }
 
 .help-pane {
