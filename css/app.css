@@ -94,6 +94,10 @@ path.stroke.railway-subway {
     stroke-dasharray: 8,8;
 }
 
+path.area.active {
+    fill-opacity:0.4;
+}
+
 path.area.natural {
     stroke: #ADD6A5;
     fill: #ADD6A5;

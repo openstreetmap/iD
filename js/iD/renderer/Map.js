@@ -25,27 +25,27 @@ iD.renderer.Map = function(obj) {
         .translate(this.projection.translate())
         .scale(this.projection.scale());
 
-    this.zoombehavior.on("zoom", _.bind(this.redraw, this));
+    this.zoombehavior.on('zoom', _.bind(this.redraw, this));
 
     this.surface = d3.selectAll(obj.selector)
         .append('svg')
         .attr({ width: this.width, height: this.width })
         .call(this.zoombehavior);
 
-    var clip = this.surface.append("defs")
-        .append("clipPath")
-        .attr("id", "clip")
-        .append("rect")
-        .attr("id", "clip-rect")
-        .attr("x", "0")
-        .attr("y", "0")
-        .attr("width", this.width)
-        .attr("height", this.height);
+    var clip = this.surface.append('defs')
+        .append('clipPath')
+        .attr('id', 'clip')
+        .append('rect')
+        .attr('id', 'clip-rect')
+        .attr('x', '0')
+        .attr('y', '0')
+        .attr('width', this.width)
+        .attr('height', this.height);
 
     this.tilegroup = this.surface.append('g')
-        .attr("clip-path", "url(#clip)");
+        .attr('clip-path', 'url(#clip)');
     this.container = this.surface.append('g')
-        .attr("clip-path", "url(#clip)");
+        .attr('clip-path', 'url(#clip)');
 
     this.connection = obj.connection;
 
@@ -67,6 +67,8 @@ iD.renderer.Map = function(obj) {
     // Create group for elastic band
     this.elastic = this.container.append('g');
 
+    this.selection = [];
+
     this.redraw();
 };
 
@@ -83,10 +85,15 @@ iD.renderer.Map.prototype = {
             this.projection.invert([this.width, this.height])];
     },
 
+    select: function(d) {
+        this.selection = [d._id];
+    },
+
     updateUIs: function() {
         // summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
         // redraw: Boolean	Should we redraw any UIs that are already present?
         // remove: Boolean	Should we delete any UIs that are no longer in the bbox?
+        var selection = this.selection;
         function classes(d) {
             var tags = d.tags;
             var c = [];
@@ -102,7 +109,9 @@ iD.renderer.Map.prototype = {
                 c.push(k);
                 c.push(v);
             }
-            if (d.active) c.push('active');
+            if (selection.indexOf(d._id) !== -1) {
+                c.push('active');
+            }
             return c.join(' ');
         }
 
@@ -120,20 +129,24 @@ iD.renderer.Map.prototype = {
             return a.entityType === 'way' && a.isClosed();
         });
 
-        var active_entity = all.filter(function(a) {
-            return a.active;
-        });
+
+        var selectClick = _.bind(function(d) {
+            this.select(d);
+            this.updateUIs();
+        }, this);
 
         var fills = this.layers[0].fill.selectAll('path.area')
             .data(areas, key);
 
         fills.enter().append('path')
-            .attr('class', function(d) {
-                return 'area ' + classes(d);
-            });
+            .on('click', selectClick);
+
         fills.exit().remove();
-        fills.attr("d", function(d) {
+
+        fills.attr('d', function(d) {
             return linegen(d.nodes);
+        }).attr('class', function(d) {
+            return 'area ' + classes(d);
         });
 
         var casings = this.layers[0].casing.selectAll('path.casing')
@@ -143,7 +156,7 @@ iD.renderer.Map.prototype = {
 
         casings.exit().remove();
 
-        casings.attr("d", function(d) {
+        casings.attr('d', function(d) {
             return linegen(d.nodes);
         }).attr('class', function(d) {
             return 'casing ' + classes(d);
@@ -156,17 +169,19 @@ iD.renderer.Map.prototype = {
             .attr('class', function(d) {
                 return 'stroke ' + classes(d);
             })
-            .on('click', _.bind(function(d) {
-                d.active = true;
-                this.updateUIs();
-            }, this));
+            .on('click', selectClick);
 
         strokes.exit().remove();
 
-        strokes.attr("d", function(d) {
+        strokes.attr('d', function(d) {
             return linegen(d.nodes);
         }).attr('class', function(d) {
-                return 'stroke ' + classes(d);
+            return 'stroke ' + classes(d);
+        });
+
+        var _id = this.selection[0];
+        var active_entity = all.filter(function(a) {
+            return a._id === _id;
         });
 
         var handles = this.layers[0].hit.selectAll('circle.handle')
@@ -175,9 +190,7 @@ iD.renderer.Map.prototype = {
         handles.enter().append('circle')
             .attr('class', 'handle')
             .attr('r', 5)
-            .on('click', _.bind(function(d) {
-                this.updateUIs();
-            }, this));
+            .on('click', selectClick);
 
         handles.exit().remove();
 
@@ -225,7 +238,7 @@ iD.renderer.Map.prototype = {
         // summary:	Draw the elastic band (for new ways) between two points.
         this.elastic.clear();
         // **** Next line is SVG-specific
-        this.elastic.rawNode.setAttribute("pointer-events","none");
+        this.elastic.rawNode.setAttribute('pointer-events','none');
         this.elastic.createPolyline( [{ x:x1, y:y1 }, { x:x2, y:y2 }] ).setStroke( {
             color: [0, 0, 0, 1],
             style: 'Solid',
