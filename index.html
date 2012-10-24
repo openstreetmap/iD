@@ -1,162 +1,134 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>iD</title>
-    <!-- load Dojo -->
-	<link rel="stylesheet" href="css/app.css">
-</head>
-<body class="claro">
-  <script type="text/javascript" src="js/lib/underscore-min.js"></script>
-  <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
-  <script type="text/javascript" src="js/lib/d3.v2.min.js"></script>
-  <script type="text/javascript" src="js/iD/actions/UndoStack.js"></script>
-  <script type="text/javascript" src="js/iD/Util.js"></script>
-  <script type="text/javascript" src="js/iD/Taginfo.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <title>iD</title>
+        <!-- load Dojo -->
+        <link rel="stylesheet" href="css/app.css">
+    </head>
+    <body class="claro">
+        <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="js/lib/d3.v2.min.js"></script>
+        <script type="text/javascript" src="js/iD/actions/UndoStack.js"></script>
+        <script type="text/javascript" src="js/iD/Util.js"></script>
+        <script type="text/javascript" src="js/iD/Taginfo.js"></script>
 
-  <script type="text/javascript" src="js/iD/controller/controller.js"></script>
-  <script type="text/javascript" src="js/iD/controller/edit/edit.js"></script>
-  <script type="text/javascript" src="js/iD/controller/edit/EditBaseState.js"></script>
-  <script type="text/javascript" src="js/iD/controller/edit/NoSelection.js"></script>
-  <script type="text/javascript" src="js/iD/controller/edit/SelectedPOINode.js"></script>
-  <script type="text/javascript" src="js/iD/controller/edit/SelectedWay.js"></script>
-  <script type="text/javascript" src="js/iD/controller/edit/SelectedWayNode.js"></script>
+        <script type="text/javascript" src="js/iD/controller/controller.js"></script>
+        <script type="text/javascript" src="js/iD/controller/edit/edit.js"></script>
+        <script type="text/javascript" src="js/iD/controller/edit/EditBaseState.js"></script>
+        <script type="text/javascript" src="js/iD/controller/edit/NoSelection.js"></script>
+        <script type="text/javascript" src="js/iD/controller/edit/SelectedPOINode.js"></script>
+        <script type="text/javascript" src="js/iD/controller/edit/SelectedWay.js"></script>
+        <script type="text/javascript" src="js/iD/controller/edit/SelectedWayNode.js"></script>
 
-  <script type="text/javascript" src="js/iD/styleparser/styleparser.js"></script>
-  <script type="text/javascript" src="js/iD/styleparser/Condition.js"></script>
-  <script type="text/javascript" src="js/iD/styleparser/Rule.js"></script>
-  <script type="text/javascript" src="js/iD/styleparser/RuleChain.js"></script>
-  <script type="text/javascript" src="js/iD/styleparser/Style.js"></script>
-  <script type="text/javascript" src="js/iD/styleparser/StyleChooser.js"></script>
-  <script type="text/javascript" src="js/iD/styleparser/StyleList.js"></script>
-  <script type="text/javascript" src="js/iD/styleparser/RuleSet.js"></script>
+        <script type="text/javascript" src="js/iD/renderer/renderer.js"></script>
+        <script type="text/javascript" src="js/iD/renderer/EntityUI.js"></script>
+        <script type="text/javascript" src="js/iD/renderer/WayUI.js"></script>
+        <script type="text/javascript" src="js/iD/renderer/NodeUI.js"></script>
+        <script type="text/javascript" src="js/iD/renderer/Map.js"></script>
 
-  <script type="text/javascript" src="js/iD/renderer/renderer.js"></script>
-  <script type="text/javascript" src="js/iD/renderer/EntityUI.js"></script>
-  <script type="text/javascript" src="js/iD/renderer/WayUI.js"></script>
-  <script type="text/javascript" src="js/iD/renderer/NodeUI.js"></script>
-  <script type="text/javascript" src="js/iD/renderer/Map.js"></script>
+        <script type="text/javascript" src="js/iD/Node.js"></script>
+        <script type="text/javascript" src="js/iD/Relation.js"></script>
+        <script type="text/javascript" src="js/iD/Entity.js"></script>
+        <script type="text/javascript" src="js/iD/Way.js"></script>
+        <script type="text/javascript" src="js/iD/Connection.js"></script>
+        <script type="text/javascript" src="js/iD/Controller.js"></script>
 
-  <script type="text/javascript" src="js/iD/Node.js"></script>
-  <script type="text/javascript" src="js/iD/Relation.js"></script>
-  <script type="text/javascript" src="js/iD/Entity.js"></script>
-  <script type="text/javascript" src="js/iD/Way.js"></script>
-  <script type="text/javascript" src="js/iD/Connection.js"></script>
-  <script type="text/javascript" src="js/iD/Controller.js"></script>
-  
-
-<div id='modebuttons'>
-    <button id='add-place'>
-        + Place</button><button id="add-road">
-        + Road</button><button id="add-area">
-        + Area</button><button id="undo">
-        &larr;</button><button id="redo">
-        &rarr;</button>
+        <div id='modebuttons'>
+            <button id='add-place'>
+                + Place</button><button id="add-road">
+                + Road</button><button id="add-area">
+                + Area</button><button id="undo">
+                &larr;</button><button id="redo">
+                &rarr;</button>
 
 
-    <div id='addPOI'>
-      <table id='dndgrid'>
-      </table>
+            <div id='addPOI'>
+                <table id='dndgrid'>
+                </table>
+            </div>
+        </div>
+
+        <div id="zoombuttons">
+            <button id="zoomIn">+</button><button id="zoomOut">&ndash;</button>
+        </div>
+
+        <!-- Floating edit pane -->
+        <div class='edit-pane'>
+            <h2>&nbsp;</h2>
+            <a class='close' href='#close'>&times;</a>
+            <div class='hud tags'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class='hud presets'></div>
+        </div>
     </div>
-</div>
 
-<div id="zoombuttons">
-    <button id="zoomIn">+</button><button id="zoomOut">&ndash;</button>
-</div>
-
-<!-- Floating help window -->
-<div class='help-pane' id='road-help'>
-    <div>Click on the map to start a road</div>
-    <div>Draw the road by clicking on points along its path</div>
-    <div>Choose a road type</div>
-</div>
-
-<!-- Floating edit pane -->
-<div class='edit-pane'>
-    <h2>&nbsp;</h2>
-    <a class='close' href='#close'>&times;</a>
-    <div class='hud tags'>
-        <table>
-            <thead>
-                <tr>
-                    <th>Key</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-    <div class='hud presets'></div>
-</div>
-</div>
-
-<!-- Map div -->
-
-<div id="map"></div>
-<p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>,
-<a href='http://github.com/systemed/iD'>code</a>,
-<a href='http://www.geowiki.com/docs'>docs</a>.
-Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
+    <div id="map"></div>
+    <p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>,
+    <a href='http://github.com/systemed/iD'>code</a>,
+    <a href='http://www.geowiki.com/docs'>docs</a>.
+    Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
 
 </div>
 <script>
-	var ruleset = new iD.styleparser.RuleSet();
-	var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
+    var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
 
-	// Load styles
+    // Initialise map
+    var map = new iD.renderer.Map({
+        selector: "#map",
+        connection: connection,
+        width: $('#map').width(),
+        height: 700
+    });
+    map.setZoom(18);
+    map.setCentre({ lat: 40.786, lon: -74.691 });
 
-	// Initialise map
-	var map = new iD.renderer.Map({
-		selector: "#map",
-		connection: connection,
-		width: $('#map').width(),
-		height: 700
-	});
-    map.setZoom(16);
-    map.setCentre({ lat: 40.407, lon: -74.688 });
-	map.ruleset = ruleset;
+    // Initialise controller
+    var controller = new iD.Controller(map);
+    map.setController(controller);
 
-	// Initialise controller
-	var controller = new iD.Controller(map);
-	map.setController(controller);
+    // ----------------------------------------------------
+    // Data is loaded and app ready to go
+    // Set initial controllerState
+    controller.setState(new iD.controller.edit.NoSelection());
 
-	// ----------------------------------------------------
-	// Data is loaded and app ready to go
-	ruleset.loadFromCSS("potlatch.css", function styleLoaded() {
-		// Set initial controllerState
-		controller.setState(new iD.controller.edit.NoSelection());
-
-		// Load data
-		map.download();
-	});
-
-	// ----------------------------------------------------
-	// Mode button handlers
+    // ----------------------------------------------------
+    // Mode button handlers
     $('#add-place').click(function() {
-		controller.setState(new iD.controller.shape.NoSelection('node'));
+        controller.setState(new iD.controller.shape.NoSelection('node'));
     });
 
     $('#add-road').click(function() {
-		controller.setState(new iD.controller.shape.NoSelection('way'));
+        controller.setState(new iD.controller.shape.NoSelection('way'));
     });
 
     $('#add-area').click(function() {
-		controller.setState(new iD.controller.shape.NoSelection());
+        controller.setState(new iD.controller.shape.NoSelection());
     });
 
     $('#undo').click(function() {
-		controller.undoStack.undo();
+        controller.undoStack.undo();
         map.updateUIs(true, true);
     });
 
     $('#redo').click(function() {
-		controller.undoStack.redo();
+        controller.undoStack.redo();
         map.updateUIs(true, true);
     });
 
-	// ----------------------------------------------------
-	// Map control handlers
+    // ----------------------------------------------------
+    // Map control handlers
 
     $('#zoomIn').click(function() {
         map.zoomIn();
@@ -164,21 +136,6 @@ Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</
 
     $('#zoomOut').click(function() {
         map.zoomOut();
-    });
-
-    var scroll = 0;
-    $('#map').bind('mousewheel', function(e) {
-        e.preventDefault();
-
-        scroll += e.originalEvent.wheelDelta;
-        if (scroll > 300) {
-            map.zoomIn();
-            scroll = 0;
-        }
-        if (scroll < -300) {
-            map.zoomOut();
-            scroll = 0;
-        }
     });
 </script>
 </body>

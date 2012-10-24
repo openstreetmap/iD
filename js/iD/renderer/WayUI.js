@@ -29,7 +29,6 @@ iD.renderer.WayUI.prototype = {
         for (var k in this.entity.tags) {
             var v = this.entity.tags[k];
             if (!clean(k) || !clean(v)) {
-                console.log(k, v);
                 continue;
             }
             classes.push(k + '-' + v);
