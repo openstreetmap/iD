@@ -8,14 +8,9 @@ iD.renderer.Map = function(obj) {
     // summary:		The main map display, containing the individual sprites (UIs) for each entity.
     // obj: Object	An object containing .lat, .lon, .scale, .div (the name of the <div> to be used),
     //	.connection, .width (px) and .height (px) properties.
-    this.width = obj.width ? obj.width : 800;
-    this.height = obj.height ? obj.height : 400;
-
+    this.width = obj.width || 800;
+    this.height = obj.height || 400;
     this.controller = iD.Controller();
-
-    // Initialise variables
-    this.uis = {};
-
     this.projection = d3.geo.mercator()
         .scale(512).translate([512, 512]);
 
@@ -56,9 +51,10 @@ iD.renderer.Map = function(obj) {
 
     // Initialise layers
     this.layers = {};
-    for (var l=this.minlayer; l<=this.maxlayer; l++) {
+    var minlayer = -5, maxlayer = 5;
+    for (var l = minlayer; l <= maxlayer; l++) {
         var r = this.container.append('g');
-        this.layers[l]={
+        this.layers[l] = {
             root: r,
             fill: r.append('g'),
             casing: r.append('g'),
@@ -75,24 +71,6 @@ iD.renderer.Map = function(obj) {
 };
 
 iD.renderer.Map.prototype = {
-
-    div: '',				// <div> of this map
-    surface: null,			// <div>.surface containing the rendering
-    container: null,        // root-level group within the surface
-    connection: null,       // data store
-
-    tilegroup: null,		// group within container for adding bitmap tiles
-    tilebaseURL: 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z',	// Bing imagery URL
-
-    height: NaN,			// size of map object in pixels
-    width: NaN,			//  |
-
-    layers: null,			// array-like object of Groups, one for each OSM layer
-    minlayer: -5,			// minimum OSM layer supported
-    maxlayer: 5,			// maximum OSM layer supported
-
-    elastic: null,			// Group for drawing elastic band
-    ruleset: null,			// map style
 
     download: _.debounce(function() {
         // summary:		Ask the connection to download data for the current viewport.
@@ -124,6 +102,7 @@ iD.renderer.Map.prototype = {
                 c.push(k);
                 c.push(v);
             }
+            if (d.active) c.push('active');
             return c.join(' ');
         }
 
@@ -156,13 +135,14 @@ iD.renderer.Map.prototype = {
         var casings = this.layers[0].casing.selectAll('path.casing')
             .data(ways, key);
 
-        casings.enter().append('path')
-            .attr('class', function(d) {
-                return 'casing ' + classes(d);
-            });
+        casings.enter().append('path');
+
         casings.exit().remove();
+
         casings.attr("d", function(d) {
             return linegen(d.nodes);
+        }).attr('class', function(d) {
+            return 'casing ' + classes(d);
         });
 
         var strokes = this.layers[0].stroke.selectAll('path.stroke')
@@ -171,10 +151,19 @@ iD.renderer.Map.prototype = {
         strokes.enter().append('path')
             .attr('class', function(d) {
                 return 'stroke ' + classes(d);
-            });
+            })
+            .on('click', _.bind(function(d) {
+                d.active = true;
+                this.updateUIs();
+            }, this));
+
         strokes.exit().remove();
+
         strokes.attr("d", function(d) {
             return linegen(d.nodes);
+        })
+        .attr('class', function(d) {
+                return 'stroke ' + classes(d);
         });
     },
 
@@ -268,7 +257,7 @@ iD.renderer.Map.prototype = {
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = this.tilesForView();
 
-        var tmpl = this.tilebaseURL;
+        var tmpl = 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z';
 
         function tileUrl(coord) {
             var u = '';

@@ -56,11 +56,18 @@ table th {
 
 path {
     fill: none;
+    cursor: pointer;
 }
 
 path.casing {
     stroke: #111;
     stroke-width: 3;
+}
+
+path.casing.active {
+    stroke:#FFF9C9;
+    stroke-opacity:0.5;
+    stroke-width:8;
 }
 
 path.stroke {
