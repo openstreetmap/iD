@@ -109,7 +109,7 @@ iD.Connection = function(apiURL) {
         // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
         // to use Overpass API (which has the relevant CORS headers).
         loadFromURL("http://www.overpass-api.de/api/xapi?map?bbox=" +
-            [box.west, box.south, box.east, box.north], callback);
+            [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
     }
 
     function loadFromURL(url, callback) {

@@ -20,6 +20,7 @@ iD.renderer.WayUI.prototype = {
 		if (this.entity.isClosed()) { tags[':area']='yes'; }
 		return tags;
 	},
+
 	draw: function() {
 		// summary:		Draw the object and add hitzone sprites.
 		var way = this.entity,
@@ -32,27 +33,24 @@ iD.renderer.WayUI.prototype = {
 		var tags = this.getEnhancedTags();
 
 		// List of co-ordinates
-		var coords = _.map(way.nodes, _.bind(function(node) {
-            return {
-                x: this.map.lon2coord(node.lon),
-                y: this.map.latp2coord(node.latp)
-            };
-        }, this));
+        var proj = this.map.projection;
 
         var line = d3.svg.line()
-            .x(function(d) { return d.x; })
-            .y(function(d) { return d.y; })
+            .x(function(d) { return proj([d.lon, d.lat])[0]; })
+            .y(function(d) { return proj([d.lon, d.lat])[1]; })
             .interpolate("linear");
 
-        this.map.layers[0].casing.append("path")
-            .data([coords])
-            .attr('class', 'casing')
-            .attr("d", line);
+        this.casing = this.map.layers[0].casing.append("path")
+            .data([way.nodes])
+            .attr('class', 'casing');
 
-        this.map.layers[0].stroke.append("path")
-            .data([coords])
-            .attr('class', 'stroke')
-            .attr("d", line);
+        this.casing.attr("d", line);
+
+        this.stroke = this.map.layers[0].stroke.append("path")
+            .data([way.nodes])
+            .attr('class', 'stroke');
+
+        this.stroke.attr("d", line);
 
         return this;
 	},

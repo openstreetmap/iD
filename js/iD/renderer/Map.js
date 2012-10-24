@@ -178,7 +178,13 @@ iD.renderer.Map.prototype = {
 
     download: function() {
         // summary:		Ask the connection to download data for the current viewport.
-        this.connection.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
+        this.connection.loadFromAPI(this.extent(), _.bind(this.updateUIs, this));
+    },
+
+    extent: function() {
+        return [
+            this.projection.invert([0, 0]),
+            this.projection.invert([this.width, this.height])];
     },
 
     updateUIs: function() {
