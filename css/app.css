@@ -162,26 +162,13 @@ table th {
     width:135px;
 }
 
-.edit-pane {
+.inspector {
     position:absolute;
-    display:none;
-    right:10px;
-    top:80px;
-    height:500px;
-    width:300px;
     background:#fff;
     overflow:auto;
+    top:50px;
+    right:10px;
     box-shadow:#222 0px 0px 3px;
-}
-
-.edit-pane.active {
-    display:block;
-}
-
-.edit-pane h2 {
-    margin:0;
-    padding:5px 5px 10px 5px;
-    background:#e4e4e4;
 }
 
 .edit-pane a.close {

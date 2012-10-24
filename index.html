@@ -25,6 +25,7 @@
 
         <script type="text/javascript" src="js/iD/renderer/renderer.js"></script>
         <script type="text/javascript" src="js/iD/renderer/Map.js"></script>
+        <script type="text/javascript" src="js/iD/ui/Inspector.js"></script>
 
         <script type="text/javascript" src="js/iD/Node.js"></script>
         <script type="text/javascript" src="js/iD/Relation.js"></script>
@@ -39,33 +40,13 @@
                 + Road</button><button id="add-area">
                 + Area</button>--><button class='mini' id="undo">
                 &larr;</button><button class='mini' id="redo">
-                &rarr;</button><form id='geocode-form'><input type='text' id='geocode-location' placeholder='find a place' />
+                &rarr;</button><form action='GET' id='geocode-form'><input type='text' id='geocode-location' placeholder='find a place' />
             </form>
         </div>
 
         <div id="zoombuttons">
             <button id="zoomIn">+</button><button id="zoomOut">&ndash;</button>
         </div>
-
-        <!-- Floating edit pane -->
-        <div class='edit-pane'>
-            <h2>&nbsp;</h2>
-            <a class='close' href='#close'>&times;</a>
-            <div class='hud tags'>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Key</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-            <div class='hud presets'></div>
-        </div>
-    </div>
 
     <div id="map"></div>
     <div id='about'>
@@ -74,7 +55,6 @@
         <a href='http://www.geowiki.com/docs'>docs</a>.
         Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
     </div>
-</div>
 <script>
     var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
 
