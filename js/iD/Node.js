@@ -29,17 +29,11 @@ iD.Node.prototype = {
         };
     },
 
-    latp2lat: function(a) {
-        // summary:		Get a latitude from a projected latitude.
-        // returns:		Latitude.
-        return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2);
-    },
-
     within: function(extent) {
-        return (this.lon >= extent.west) &&
-            (this.lon <= extent.east) &&
-            (this.lat >= extent.south) &&
-            (this.lat <= extent.north);
+        return (this.lon >= extent[0][0]) &&
+            (this.lon <= extent[1][0]) &&
+            (this.lat <= extent[0][1]) &&
+            (this.lat >= extent[1][1]);
     },
 
     refresh: function() {

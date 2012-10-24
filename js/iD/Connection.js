@@ -60,18 +60,12 @@ iD.Connection = function(apiURL) {
         return relation;
     }
 
-    function getObjectsByBbox(left,right,top,bottom) {
+    function getObjectsByBbox(extent) {
         // summary:	Find all drawable entities that are within a given bounding box.
         // Each one is an array of entities.
-        var o = {
-            inside: [],
-            outside: []
-        };
-        _.each(this.entities, function(e, id) {
-            if (e.within(left, right, top, bottom)) { o.inside.push(e); }
-            else { o.outside.push(e); }
+        return _.filter(this.entities, function(e, id) {
+            return e.within(extent);
         });
-        return o;
     }
 
     // ------------

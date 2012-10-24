@@ -26,8 +26,9 @@ iD.renderer.Map = function(obj) {
 
     this.zoombehavior = d3.behavior.zoom()
         .translate(this.projection.translate())
-        .scale(this.projection.scale())
-        .on("zoom", _.bind(this.redraw, this));
+        .scale(this.projection.scale());
+
+    this.zoombehavior.on("zoom", _.bind(this.redraw, this));
 
     this.surface = d3.selectAll(obj.selector)
         .append('svg')
@@ -150,8 +151,9 @@ iD.renderer.Map.prototype = {
         // summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
         // redraw: Boolean	Should we redraw any UIs that are already present?
         // remove: Boolean	Should we delete any UIs that are no longer in the bbox?
-        var o = this.connection.getObjectsByBbox(this.extent);
-        var touch = _(o.inside).chain()
+        var o = this.connection.getObjectsByBbox(this.extent());
+
+        var touch = _(o).chain()
             .filter(function(w) { return w.loaded; })
             .map(_.bind(function(e) {
                 if (!this.uis[e.id]) {
@@ -161,9 +163,10 @@ iD.renderer.Map.prototype = {
                 }
                 return '' + e.id;
             }, this)).value();
-            _.each(_.difference(_.keys(this.uis), touch), _.bind(function(k) {
-                this.deleteUI(k);
-            }, this));
+
+       _.each(_.difference(_.keys(this.uis), touch), _.bind(function(k) {
+           this.deleteUI(k);
+       }, this));
     },
 
     // -------------

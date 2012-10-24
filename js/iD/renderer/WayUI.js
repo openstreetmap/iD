@@ -15,11 +15,6 @@ iD.renderer.WayUI = function(entity, map) {
 };
 
 iD.renderer.WayUI.prototype = {
-    getEnhancedTags: function() {
-        var tags = this.entity.tags;
-        if (this.entity.isClosed()) { tags[':area']='yes'; }
-        return tags;
-    },
 
     getClasses: function() {
         var classes = [];
@@ -45,28 +40,45 @@ iD.renderer.WayUI.prototype = {
         if (!way.nodes.length) { return; }
 
         // Create tags and calculate styleList
-        var tags = this.getEnhancedTags();
+        var tags = this.entity.tags;
         var classes = this.getClasses();
 
-        if (!this.casing) {
-            this.casing = this.map.layers[0].casing.append("path")
-                .data([way.nodes])
-                .attr('class', function() {
-                    return 'casing ' + classes;
-                });
+        // This is an area
+        if (this.entity.isClosed()) {
+
+            if (!this.stroke) {
+                this.stroke = this.map.layers[0].fill.append("path")
+                    .data([way.nodes])
+                    .attr('class', function() {
+                        return 'area ' + classes;
+                    });
+            }
+
+            this.stroke.attr("d", this.map.linegen);
+
+        } else {
+
+            if (!this.casing) {
+                this.casing = this.map.layers[0].casing.append("path")
+                    .data([way.nodes])
+                    .attr('class', function() {
+                        return 'casing ' + classes;
+                    });
+            }
+
+            this.casing.attr("d", this.map.linegen);
+
+            if (!this.stroke) {
+                this.stroke = this.map.layers[0].stroke.append("path")
+                    .data([way.nodes])
+                    .attr('class', function() {
+                        return 'stroke ' + classes;
+                    });
+            }
+
+            this.stroke.attr("d", this.map.linegen);
+
         }
-
-        this.casing.attr("d", this.map.linegen);
-
-        if (!this.stroke) {
-            this.stroke = this.map.layers[0].stroke.append("path")
-                .data([way.nodes])
-                .attr('class', function() {
-                    return 'stroke ' + classes;
-                });
-        }
-
-        this.stroke.attr("d", this.map.linegen);
 
         return this;
     },
