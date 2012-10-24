@@ -16,6 +16,10 @@ iD.Connection = function(apiURL) {
 
     var connection = {};
 
+    function all() {
+        return _.values(entities);
+    }
+
     function assign(obj) {
         // summary:	Save an entity to the data store.
         if (obj.entityType === 'node' || obj.entityType === 'way') {
@@ -154,6 +158,7 @@ iD.Connection = function(apiURL) {
     }
 
     connection.entities = entities;
+    connection.all = all;
     connection.relations = relations;
     connection.loadFromAPI = loadFromAPI;
     connection.loadFromURL = loadFromURL;

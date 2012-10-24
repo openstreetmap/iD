@@ -79,14 +79,11 @@ iD.renderer.Map.prototype = {
 
     div: '',				// <div> of this map
     surface: null,			// <div>.surface containing the rendering
-    container: null,		// root-level group within the surface
-    backdrop: null,			// coloured backdrop (MapCSS canvas element)
-    connection: null,				// data store
+    container: null,        // root-level group within the surface
+    connection: null,       // data store
     controller: null,		// UI controller
-    uis: {},
 
     tilegroup: null,		// group within container for adding bitmap tiles
-    tiles: {},				// index of tile objects
     tilebaseURL: 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z',	// Bing imagery URL
 
     height: NaN,			// size of map object in pixels
@@ -104,38 +101,6 @@ iD.renderer.Map.prototype = {
         this.controller = controller;
     },
 
-    createUI: function(e, stateClasses) {
-        // summary:		Create a UI (sprite) for an entity, assigning any specified state classes
-        //				(temporary attributes such as ':hover' or ':selected')
-        if (!this.uis[e.id]) {
-            if (e.entityType === 'node') {
-                this.uis[e.id] = new iD.renderer.NodeUI(e, this, stateClasses);
-            } else if (e.entityType === 'way') {
-                this.uis[e.id] = new iD.renderer.WayUI(e, this, stateClasses);
-            }
-        } else {
-            this.uis[e.id].setStateClasses(stateClasses).redraw();
-        }
-    },
-
-    getUI: function(e) {
-        // summary: Return the UI for an entity, if it exists.
-        return this.uis[e.id];	// iD.renderer.EntityUI
-    },
-
-    refreshUI: function(e) {
-        // summary:	Redraw the UI for an entity.
-        if (this.uis[e.id]) { this.uis[e.id].redraw(); }
-    },
-
-    deleteUI: function(e) {
-        // summary:		Delete the UI for an entity.
-        if (this.uis[e.id]) {
-            this.uis[e.id].removeSprites();
-            delete this.uis[e.id];
-        }
-    },
-
     download: _.debounce(function() {
         // summary:		Ask the connection to download data for the current viewport.
         this.connection.loadFromAPI(this.extent(), _.bind(this.updateUIs, this));
@@ -151,34 +116,90 @@ iD.renderer.Map.prototype = {
         // summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
         // redraw: Boolean	Should we redraw any UIs that are already present?
         // remove: Boolean	Should we delete any UIs that are no longer in the bbox?
-        var o = this.connection.getObjectsByBbox(this.extent());
-
-        var touch = _(o).chain()
-            .filter(function(w) { return w.loaded; })
-            .map(_.bind(function(e) {
-                if (!this.uis[e.id]) {
-                    this.createUI(e);
-                } else {
-                    this.uis[e.id].draw();
+        function classes(d) {
+            var tags = d.tags;
+            var c = [];
+            function clean(x) {
+                return x.indexOf(' ') === -1 && x.length < 30;
+            }
+            for (var k in tags) {
+                var v = tags[k];
+                if (!clean(k) || !clean(v)) {
+                    continue;
                 }
-                return '' + e.id;
-            }, this)).value();
+                c.push(k + '-' + v);
+                c.push(k);
+                c.push(v);
+            }
+            return c.join(' ');
+        }
 
-       _.each(_.difference(_.keys(this.uis), touch), _.bind(function(k) {
-           this.deleteUI(k);
-       }, this));
+        var linegen = this.linegen;
+
+        var all = this.connection.all();
+
+        function key(d) { return d._id; }
+
+        var ways = all.filter(function(a) {
+            return a.entityType === 'way' && !a.isClosed();
+        });
+
+        var areas = all.filter(function(a) {
+            return a.entityType === 'way' && a.isClosed();
+        });
+
+        var fills = this.layers[0].fill.selectAll('path.area')
+            .data(areas, key);
+
+        fills.enter().append('path')
+            .attr('class', function(d) {
+                return 'area ' + classes(d);
+            });
+        fills.exit().remove();
+        fills.attr("d", function(d) {
+            return linegen(d.nodes);
+        });
+
+        var casings = this.layers[0].casing.selectAll('path.casing')
+            .data(ways, key);
+
+        casings.enter().append('path')
+            .attr('class', function(d) {
+                return 'casing ' + classes(d);
+            });
+        casings.exit().remove();
+        casings.attr("d", function(d) {
+            return linegen(d.nodes);
+        });
+
+        var strokes = this.layers[0].stroke.selectAll('path.stroke')
+            .data(ways, key);
+
+        strokes.enter().append('path')
+            .attr('class', function(d) {
+                return 'stroke ' + classes(d);
+            });
+        strokes.exit().remove();
+        strokes.attr("d", function(d) {
+            return linegen(d.nodes);
+        });
     },
 
     // -------------
     // Zoom handling
     zoomIn: function() {
         // summary:	Zoom in by one level (unless maximum reached).
-        return this.setZoom(this.zoom + 1);
+        return this.setZoom(this.getZoom() + 1);
     },
 
     zoomOut: function() {
         // summary:	Zoom out by one level (unless minimum reached).
-        return this.setZoom(this.zoom - 1);
+        return this.setZoom(this.getZoom() - 1);
+    },
+
+    getZoom: function(zoom) {
+        var s = this.projection.scale();
+        return Math.max(Math.log(s) / Math.log(2) - 8, 0);
     },
 
     setZoom: function(zoom) {
