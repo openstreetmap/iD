@@ -15,6 +15,9 @@ iD.renderer.Map = function(obj) {
         connection = obj.connection,
         layers = {};
 
+    var tagclasses = [
+        'highway', 'railway', 'motorway', 'amenity', 'landuse', 'building'];
+
     var linegen = d3.svg.line()
         .x(function(d) { return projection(d)[0]; })
         .y(function(d) { return projection(d)[1]; });
@@ -39,9 +42,9 @@ iD.renderer.Map = function(obj) {
         .attr({ width: width, height: height });
 
     var tilegroup = surface.append('g')
-        .attr('clip-path', 'url(#clip)');
-    var container = surface.append('g')
-        .attr('clip-path', 'url(#clip)');
+            .attr('clip-path', 'url(#clip)'),
+        container = surface.append('g')
+            .attr('clip-path', 'url(#clip)');
 
     var minlayer = -5, maxlayer = 5;
     for (var l = minlayer; l <= maxlayer; l++) {
@@ -55,10 +58,10 @@ iD.renderer.Map = function(obj) {
             hit: r.append('g')
         };
     }
+
     var elastic = container.append('g');
 
     var download = _.debounce(function() {
-        // summary:		Ask the connection to download data for the current viewport.
         connection.loadFromAPI(extent(), drawVector);
     }, 1000);
 
@@ -74,33 +77,30 @@ iD.renderer.Map = function(obj) {
 
     function key(d) { return d._id; }
 
-    function drawVector() {
-        // summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
-        // redraw: Boolean	Should we redraw any UIs that are already present?
-        // remove: Boolean	Should we delete any UIs that are no longer in the bbox?
-        function classes(d) {
-            var tags = d.tags;
-            var c = [];
-            function clean(x) {
-                return x.indexOf(' ') === -1 && x.length < 30;
-            }
-            for (var k in tags) {
-                var v = tags[k];
-                if (!clean(k) || !clean(v)) {
-                    continue;
-                }
-                c.push(k + '-' + v);
-                c.push(k);
-                c.push(v);
-            }
-            if (selection.indexOf(d._id) !== -1) {
-                c.push('active');
-            }
-            return c.join(' ');
+    function classes(d) {
+        var tags = d.tags;
+        var c = [];
+        function clean(x) {
+            return tagclasses.indexOf(x) !== -1;
         }
+        for (var k in tags) {
+            if (!clean(k)) continue;
+            c.push(k + '-' + tags[k]);
+            c.push(k);
+        }
+        if (selection.indexOf(d._id) !== -1) {
+            c.push('active');
+        }
+        return c.join(' ');
+    }
 
+    var selectClick = function(d) {
+        select(d);
+        drawVector();
+    };
+
+    function drawVector() {
         var all = connection.all();
-
 
         var ways = all.filter(function(a) {
             return a.entityType === 'way' && !a.isClosed();
@@ -109,11 +109,6 @@ iD.renderer.Map = function(obj) {
         var areas = all.filter(function(a) {
             return a.entityType === 'way' && a.isClosed();
         });
-
-        var selectClick = function(d) {
-            select(d);
-            drawVector();
-        };
 
         var fills = layers[0].fill.selectAll('path.area')
             .data(areas, key);
@@ -176,7 +171,6 @@ iD.renderer.Map = function(obj) {
             return 'translate(' + projection(d) + ')';
         });
     }
-
     
     // -------------
     // Zoom handling
@@ -225,6 +219,20 @@ iD.renderer.Map = function(obj) {
         return coords;
     }
 
+
+    function tileUrl(coord) {
+        var tmpl = 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z';
+        var u = '';
+        for (var zoom = coord[0]; zoom > 0; zoom--) {
+            var byte = 0;
+            var mask = 1 << (zoom - 1);
+            if ((coord[1] & mask) !== 0) byte++;
+            if ((coord[2] & mask) !== 0) byte += 2;
+            u += byte.toString();
+        }
+        return tmpl.replace('$quadkey', u);
+    }
+
     function redraw() {
         if (d3.event) {
             projection
@@ -241,20 +249,6 @@ iD.renderer.Map = function(obj) {
         // This is the 0, 0 px of the projection
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = tilesForView();
-
-        var tmpl = 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z';
-
-        function tileUrl(coord) {
-            var u = '';
-            for (var zoom = coord[0]; zoom > 0; zoom--) {
-                var byte = 0;
-                var mask = 1 << (zoom - 1);
-                if ((coord[1] & mask) !== 0) byte++;
-                if ((coord[2] & mask) !== 0) byte += 2;
-                u += byte.toString();
-            }
-            return tmpl.replace('$quadkey', u);
-        }
 
         var tiles = tilegroup.selectAll('image.tile')
             .data(coords, function(d) { return d.join(','); });
