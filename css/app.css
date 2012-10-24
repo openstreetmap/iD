@@ -5,11 +5,27 @@ body {
     text-rendering: optimizeLegibility;
     color:#444;
 }
+
+form {
+    margin:0;
+    padding:0;
+    display:inline-block;
+}
+
 :focus {
     outline-color: transparent;
     outline-style: none;
 }
+#about {
+    position:absolute;
+    bottom:5px;
+    right:5px;
+    background:#fff;
+    padding:2px 5px;
+}
 p {
+    margin:0;
+    padding:0;
     font-size: x-small;
 }
 a:visited, a {
@@ -139,7 +155,7 @@ path.stroke.waterway {
 }
 
 #modebuttons {
-    width:500px;
+    width:600px;
     position:absolute;
     left:0px;
     top:0px;
@@ -166,6 +182,19 @@ path.stroke.waterway {
     border-bottom:1px solid #222;
     padding:0 10px;
     height:40px;
+    margin:0;
+}
+
+#modebuttons button.mini,
+#modebuttons button.mini {
+    width:50px;
+}
+
+#modebuttons input[type=text] {
+    width:150px;
+    height:30px;
+    border:0;
+    padding:5px;
     margin:0;
 }
 

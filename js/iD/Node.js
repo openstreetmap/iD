@@ -34,29 +34,5 @@ iD.Node.prototype = {
             (this.lon <= extent[1][0]) &&
             (this.lat <= extent[0][1]) &&
             (this.lat >= extent[1][1]);
-    },
-
-    refresh: function() {
-        var ways = this.parentWays();
-        _.each(ways, _.bind(function(way) { this.connection.refreshEntity(way); }, this));
-        this.connection.refreshEntity(this);
-    },
-
-    doSetLonLatp: function(lon, latproj, performAction) {
-        // summary:		Change the position of a node, using an undo stack.
-        performAction(new iD.actions.MoveNodeAction(this,
-            this.latp2lat(latproj),
-            lon,
-            _.bind(this._setLatLonImmediate, this)));
-    },
-
-    _setLatLonImmediate: function(lat,lon) {
-        this.lat = lat;
-        this.lon = lon;
-        this.project();
-        var ways = this.parentWays();
-        _.each(ways, _.bind(function(way) {
-            way.expandBbox(this);
-        }, this));
     }
 };

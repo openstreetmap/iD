@@ -36,15 +36,10 @@
             <button id='add-place'>
                 + Place</button><button id="add-road">
                 + Road</button><button id="add-area">
-                + Area</button><button id="undo">
-                &larr;</button><button id="redo">
-                &rarr;</button>
-
-
-            <div id='addPOI'>
-                <table id='dndgrid'>
-                </table>
-            </div>
+                + Area</button><button class='mini' id="undo">
+                &larr;</button><button class='mini' id="redo">
+                &rarr;</button><form id='geocode-form'><input type='text' id='geocode-location' placeholder='find a place' />
+            </form>
         </div>
 
         <div id="zoombuttons">
@@ -72,10 +67,12 @@
     </div>
 
     <div id="map"></div>
-    <p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>,
-    <a href='http://github.com/systemed/iD'>code</a>,
-    <a href='http://www.geowiki.com/docs'>docs</a>.
-    Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
+    <div id='about'>
+        <p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>,
+        <a href='http://github.com/systemed/iD'>code</a>,
+        <a href='http://www.geowiki.com/docs'>docs</a>.
+        Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
+    </div>
 
 </div>
 <script>
@@ -85,11 +82,11 @@
     var map = new iD.renderer.Map({
         selector: "#map",
         connection: connection,
-        width: $('#map').width(),
-        height: 700
+        width: $(document).width(),
+        height: $(document).height()
     });
-    map.setZoom(18);
-    map.setCentre({ lat: 40.796, lon: -74.691 });
+    map.setZoom(18)
+        .setCentre({ lat: 40.796, lon: -74.691 });
 
     // ----------------------------------------------------
     // Data is loaded and app ready to go
@@ -98,16 +95,33 @@
 
     // ----------------------------------------------------
     // Mode button handlers
-    $('#add-place').click(function() {
+    d3.select('#add-place').on('click', function() {
         map.controller.setState(new iD.controller.shape.NoSelection('node'));
     });
 
-    $('#add-road').click(function() {
+    d3.select('#add-road').on('click', function() {
         map.controller.setState(new iD.controller.shape.NoSelection('way'));
     });
 
-    $('#add-area').click(function() {
+    d3.select('#add-area').on('click', function() {
         map.controller.setState(new iD.controller.shape.NoSelection());
+    });
+
+    d3.select('#geocode-form').on('submit', function() {
+        d3.event.preventDefault();
+        var val = d3.select('#geocode-location').node().value;
+        $.ajax({
+            url: 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
+                encodeURIComponent(val) + '.jsonp',
+            dataType: 'jsonp',
+            jsonpCallback: 'grid',
+            success: function(resp) {
+                map.setCentre({
+                    lon: resp.results[0][0].lon,
+                    lat: resp.results[0][0].lat
+                });
+            }
+        });
     });
 
     $('#undo').click(function() {
