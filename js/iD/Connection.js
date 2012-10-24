@@ -85,14 +85,23 @@ iD.Connection = function(apiURL) {
         // summary:		Load all data from a given URL.
         $.ajax({
             url: url,
-            headers: { "X-Requested-With": null },
             success: parse(callback)
         });
     }
 
+    // Private functions to parse DOM created from XML file
+    function filterNodeName(n) {
+        return function(item) { return item.nodeName === n; };
+    }
+
+    function getAttribute(obj, name) {
+        return _.find(obj.attributes, filterNodeName(name)).nodeValue;
+    }
+
     function parse(callback) {
         return function(dom) {
-            var nodelist = _.compact(_.map(dom.childNodes[0].childNodes, function(obj) {
+            for (var i = 0; i < dom.childNodes[0].childNodes.length; i++) {
+                var obj = dom.childNodes[0].childNodes[i];
                 if (obj.nodeName === 'node') {
                     var node = new iD.Node(connection,
                         +getAttribute(obj, 'id'),
@@ -100,7 +109,6 @@ iD.Connection = function(apiURL) {
                         +getAttribute(obj, 'lon'),
                         getTags(obj));
                     assign(node);
-                    return node;
                 } else if (obj.nodeName === 'way') {
                     var way = new iD.Way(connection,
                         getAttribute(obj, 'id'),
@@ -114,18 +122,8 @@ iD.Connection = function(apiURL) {
                         getTags(obj));
                     assign(relation);
                 }
-            }));
-            if (callback) { callback(nodelist); }
-
-            // Private functions to parse DOM created from XML file
-            function filterNodeName(n) {
-                return function(item) { return item.nodeName === n; };
             }
-
-            function getAttribute(obj, name) {
-                return _.find(obj.attributes, filterNodeName(name)).nodeValue;
-            }
-
+            if (callback) { callback(); }
             function getTags(obj) {
                 return _(obj.childNodes).chain()
                 .filter(filterNodeName('tag'))
