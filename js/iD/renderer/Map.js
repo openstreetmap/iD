@@ -120,6 +120,10 @@ iD.renderer.Map.prototype = {
             return a.entityType === 'way' && a.isClosed();
         });
 
+        var active_entity = all.filter(function(a) {
+            return a.active;
+        });
+
         var fills = this.layers[0].fill.selectAll('path.area')
             .data(areas, key);
 
@@ -161,9 +165,25 @@ iD.renderer.Map.prototype = {
 
         strokes.attr("d", function(d) {
             return linegen(d.nodes);
-        })
-        .attr('class', function(d) {
+        }).attr('class', function(d) {
                 return 'stroke ' + classes(d);
+        });
+
+        var handles = this.layers[0].hit.selectAll('circle.handle')
+            .data(active_entity.length ? active_entity[0].nodes : [], key);
+
+        handles.enter().append('circle')
+            .attr('class', 'handle')
+            .attr('r', 5)
+            .on('click', _.bind(function(d) {
+                this.updateUIs();
+            }, this));
+
+        handles.exit().remove();
+
+        var proj = this.projection;
+        handles.attr('transform', function(d) {
+            return 'translate(' + proj(d) + ')';
         });
     },
 
