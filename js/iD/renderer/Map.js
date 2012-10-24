@@ -94,10 +94,10 @@ iD.renderer.Map = function(obj) {
         return c.join(' ');
     }
 
-    var selectClick = function(d) {
+    function selectClick(d) {
         select(d);
         drawVector();
-    };
+    }
 
     function drawVector() {
         var all = connection.all();
