@@ -1,514 +1,389 @@
 // iD/renderer/Map.js
 // at present this combines P2's Map and MapPaint functionality
 
-define(['dojo/_base/declare','dojo/_base/event',
-    'dojo/dom-geometry',
-    'dojox/gfx','dojox/gfx/matrix',
-    'iD/Connection','iD/Entity','iD/renderer/EntityUI','iD/renderer/WayUI','iD/renderer/NodeUI'], 
-function(declare, Event, domGeom, Gfx, Matrix){
+// ----------------------------------------------------------------------
+// Connection base class
 
-    // ----------------------------------------------------------------------
-    // Connection base class
+iD.renderer.Map = function(obj) {
+    var map = {},
+        selection = [],
+        width = obj.width || 800,
+        height = obj.height || 400,
+        controller = iD.Controller(),
+        projection = d3.geo.mercator()
+            .scale(512).translate([512, 512]),
+        connection = obj.connection,
+        layers = {};
 
-    declare("iD.renderer.Map", null, {
+    var tagclasses = [
+        'highway', 'railway', 'motorway', 'amenity', 'landuse', 'building', 'bridge'];
 
-        MASTERSCALE: 5825.4222222222,
-        MINSCALE: 14,
-        MAXSCALE: 23,
-        zoom: NaN,
-        zoomfactor: NaN,
-        baselon: NaN,			// original longitude at top left of viewport
-        baselat: NaN,			// original latitude at top left of viewport
-        baselatp: NaN,			// original projected latitude at top left of viewport
+    var linegen = d3.svg.line()
+        .x(function(d) { return projection(d)[0]; })
+        .y(function(d) { return projection(d)[1]; });
 
-        div: '',				// <div> of this map
-        surface: null,			// <div>.surface containing the rendering
-        container: null,		// root-level group within the surface
-        backdrop: null,			// coloured backdrop (MapCSS canvas element)
-        connection: null,				// data store
-        controller: null,		// UI controller
-        uis: {},
+    var zoombehavior = d3.behavior.zoom()
+        .translate(projection.translate())
+        .scale(projection.scale())
+        .scaleExtent([256, 134217728]);
 
-        tilegroup: null,		// group within container for adding bitmap tiles
-        tiles: {},				// index of tile objects
-        tilebaseURL: 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z',	// Bing imagery URL
+    zoombehavior.on('zoom', redraw);
 
-        dragging: false,		// current drag state
-        dragged: false,			// was most recent click a drag?
-        dragx: NaN,				// click co-ordinates at previously recorded drag event
-        dragy: NaN,				//  |
-        startdragx: NaN,		// click co-ordinates at start of drag
-        startdragy: NaN,		//  |
-        dragtime: NaN,			// timestamp of mouseup (compared to stop resulting click from firing)
-        dragconnect: null,		// event listener for endDrag
+    var surface = d3.selectAll(obj.selector)
+        .append('svg')
+        .attr({ width: width, height: width })
+        .call(zoombehavior);
 
-        containerx: 0,			// screen co-ordinates of container
-        containery: 0,			//  |
-        centrelat: NaN,			// lat/long and bounding box of map
-        centrelon: NaN,			//  |
-        extent: {},				//  |
-        mapheight: NaN,			// size of map object in pixels
-        mapwidth: NaN,			//  |
+    var defs = surface.append('defs');
 
-        layers: null,			// array-like object of Groups, one for each OSM layer
-        minlayer: -5,			// minimum OSM layer supported
-        maxlayer: 5,			// maximum OSM layer supported
+    var clipPath = defs.append('clipPath')
+        .attr('id', 'clip')
+        .append('rect')
+        .attr('id', 'clip-rect')
+        .attr({ x: 0, y: 0 })
+        .attr({ width: width, height: height });
 
-        elastic: null,			// Group for drawing elastic band
+    var tilegroup = surface.append('g')
+            .attr('clip-path', 'url(#clip)'),
+        container = surface.append('g')
+            .attr('clip-path', 'url(#clip)');
 
-        ruleset: null,			// map style
+   var r = container.append('g');
 
-        constructor: function(obj) {
-            // summary:		The main map display, containing the individual sprites (UIs) for each entity.
-            // obj: Object	An object containing .lat, .lon, .scale, .div (the name of the <div> to be used),
-            //				.connection, .width (px) and .height (px) properties.
+   layers[0] = {
+       root: r,
+       fill: r.append('g'),
+       casing: r.append('g'),
+       stroke: r.append('g'),
+       text: r.append('g'),
+       hit: r.append('g')
+   };
 
-            this.mapwidth = obj.width ? obj.width : 800;
-            this.mapheight = obj.height ? obj.height : 400;
+    var elastic = container.append('g');
 
-            // Initialise variables
-            this.uis = {};
-            this.div=document.getElementById(obj.div);
-            this.surface=Gfx.createSurface(obj.div, this.mapwidth, this.mapheight);
-            this.backdrop=this.surface.createRect({
-                x: 0,
-                y: 0,
-                width: this.mapwidth,
-                height: this.mapheight
-            }).setFill(new dojo.Color([255,255,245,1]));
-            this.tilegroup = this.surface.createGroup();
-            this.container = this.surface.createGroup();
-            this.connection = obj.connection;
-            this.zoom = obj.zoom ? obj.zoom : 17;
-            this.baselon = obj.lon;
-            this.baselat = obj.lat;
-            this.baselatp = this.lat2latp(obj.lat);
-            this._setScaleFactor();
-            this.updateCoordsFromViewportPosition();
+    var download = _.debounce(function() {
+        connection.loadFromAPI(extent(), drawVector);
+    }, 1000);
 
-            // Cache the margin box, since this is expensive.
-            this.marginBox = domGeom.getMarginBox(this.div);
+    function extent() {
+        return [
+            projection.invert([0, 0]),
+            projection.invert([width, height])];
+    }
 
-            // Initialise layers
-            this.layers={};
-            for (var l=this.minlayer; l<=this.maxlayer; l++) {
-                var r=this.container.createGroup();
-                this.layers[l]={
-                    root: r,
-                    fill: r.createGroup(),
-                    casing: r.createGroup(),
-                    stroke: r.createGroup(),
-                    text: r.createGroup(),
-                    hit: r.createGroup()
-                };
+    function select(d) {
+        selection = [d._id];
+    }
+
+    function key(d) { return d._id; }
+
+    function classes(pre) {
+        return function(d) {
+            var tags = d.tags;
+            var c = [pre];
+            function clean(x) {
+                return tagclasses.indexOf(x) !== -1;
             }
-
-            // Create group for elastic band
-            this.elastic = this.container.createGroup();
-
-            // Make draggable
-            this.backdrop.connect("onmousedown", _.bind(this.startDrag, this));
-            this.tilegroup.connect("onmousedown", _.bind(this.startDrag, this));
-            this.surface.connect("onclick", _.bind(this.clickSurface, this));
-            this.surface.connect("onmousemove", _.bind(this.processMove, this));
-            this.surface.connect("onmousedown", _.bind(this._mouseEvent, this));
-            this.surface.connect("onmouseup", _.bind(this._mouseEvent, this));
-        },
-
-        setController:function(controller) {
-            // summary:		Set the controller that will handle events on the map (e.g. mouse clicks).
-            this.controller = controller;
-        },
-
-        _moveToPosition:function(group, position) {
-            // summary:		Supplementary method for dojox.gfx.
-            // This should ideally be core Dojo stuff: see http://bugs.dojotoolkit.org/ticket/15296
-            var parent=group.getParent();
-            if (!parent) { return; }
-            this._moveChildToPosition(parent,group,position);
-            if (position === group.rawNode.parentNode.childNodes.length) {
-                group.rawNode.parentNode.appendChild(group.rawNode);
-            } else {
-                group.rawNode.parentNode.insertBefore(group.rawNode, group.rawNode.parentNode.childNodes[position]);
+            for (var k in tags) {
+                if (!clean(k)) continue;
+                c.push(k + '-' + tags[k]);
+                c.push(k);
             }
-        },
-
-        _moveChildToPosition: function(parent, child, position) {
-            for (var i = 0; i < parent.children.length; ++i){
-                if (parent.children[i] === child){
-                    parent.children.splice(i, 1);
-                    parent.children.splice(position, 0, child);
-                    break;
-                }
+            if (selection.indexOf(d._id) !== -1) {
+                c.push('active');
             }
-        },
+            return c.join(' ');
+        };
+    }
 
-        // ----------------------------
-        // Sprite and EntityUI handling
+    var icons = {
+        tourism: ['hotel'],
+        shop: [
+            'convenience',
+            'supermarket'],
+        amenity: 
+            [
+            'atm',
+            'bank',
+            'cafe',
+            'pub',
+            'place',
+            'parking',
+            'bicycle_parking',
+            'pharmacy',
+            'pharmacy',
+            'police',
+            'post_box',
+            'recycling',
+            'restaurant',
+            'school',
+            'taxi',
+            'telephone']
+    };
 
-        sublayer:function(layer,groupType,sublayer) {
-            // summary:		Find the gfx.Group for a given OSM layer and rendering sublayer, creating it 
-            // if necessary. Note that sublayers are only implemented for stroke and fill.
-            // groupType: String	'casing','text','hit','stroke', or 'fill'
-            var collection = this.layers[layer][groupType], sub;
-            switch (groupType) {
-                case 'casing':
-                    case 'text':
-                    case 'hit':
-                    return collection;
+    function markerimage(d) {
+        for (var k in icons) {
+            if (d.tags[k] && icons[k].indexOf(d.tags[k]) !== -1) {
+                return 'icons/' + d.tags[k] + '.png';
             }
-            // Find correct sublayer, inserting if necessary
-            var insertAt=collection.children.length;
-            for (var i = 0; i < collection.children.length; i++) {
-                sub=collection.children[i];
-                if (sub.sublayer==sublayer) { return sub; }
-                else if (sub.sublayer>sublayer) {
-                    sub = collection.createGroup();
-                    this._moveToPosition(sub,i);
-                    sub.sublayer=sublayer;
-                    return sub;
-                }
-            }
-            sub = collection.createGroup().moveToFront();
-            sub.sublayer=sublayer;
-            return sub; // dojox.gfx.Group
-        },
+        }
+    }
 
-        createUI: function(e, stateClasses) {
-            // summary:		Create a UI (sprite) for an entity, assigning any specified state classes
-            //				(temporary attributes such as ':hover' or ':selected')
-            if (!this.uis[e.id]) {
-                if (e.entityType === 'node') {
-                    this.uis[e.id] = new iD.renderer.NodeUI(e, this, stateClasses);
-                } else if (e.entityType === 'way') {
-                    this.uis[e.id] = new iD.renderer.WayUI(e, this, stateClasses);
-                }
-            } else {
-                this.uis[e.id].setStateClasses(stateClasses).redraw();
-            }
-        },
+    function selectClick(d) {
+        select(d);
+        drawVector();
+    }
 
-        getUI: function(e) {
-            // summary: Return the UI for an entity, if it exists.
-            return this.uis[e.id];	// iD.renderer.EntityUI
-        },
+    function nodeline(d) {
+        return linegen(d.nodes);
+    }
 
-        refreshUI: function(e) {
-            // summary:	Redraw the UI for an entity.
-            if (this.uis[e.id]) { this.uis[e.id].redraw(); }
-        },
+    var highway_stack = [
+        'motorway',
+        'motorway_link',
+        'trunk',
+        'trunk_link',
+        'primary',
+        'primary_link',
+        'secondary',
+        'tertiary',
+        'unclassified',
+        'residential',
+        'service',
+        'footway'
+    ];
 
-        deleteUI: function(e) {
-            // summary:		Delete the UI for an entity.
-            if (this.uis[e.id]) {
-                this.uis[e.id].removeSprites();
-                delete this.uis[e.id];
-            }
-        },
+    function waystack(a, b) {
+        if (!a || !b) return 0;
+        if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
+            return a.tags.layer - b.tags.layer;
+        }
+        if (a.tags.bridge) return 1;
+        if (b.tags.bridge) return -1;
+        var as = 0, bs = 0;
+        if (a.tags.highway && b.tags.highway) {
+            as -= highway_stack.indexOf(a.tags.highway);
+            bs -= highway_stack.indexOf(b.tags.highway);
+        }
+        return as - bs;
+    }
 
-        download: function() {
-            // summary:		Ask the connection to download data for the current viewport.
-            $('#progress').show().addClass('spinner');
-            this.connection.loadFromAPI(this.extent, _.bind(this.updateUIs, this));
-        },
+    function drawVector() {
+        var all = connection.all();
 
-        updateUIs: function() {
-            // summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
-            // redraw: Boolean	Should we redraw any UIs that are already present?
-            // remove: Boolean	Should we delete any UIs that are no longer in the bbox?
-            $('#progress').hide().removeClass('spinner');
-            var o = this.connection.getObjectsByBbox(this.extent);
-            var touch = _(o.inside).chain()
-                .filter(function(w) { return w.loaded; })
-                .map(_.bind(function(e) {
-                    if (!this.uis[e.id]) {
-                        this.createUI(e);
-                    } else {
-                        this.uis[e.id].redraw();
-                    }
-                    return '' + e.id;
-                }, this)).value();
-            _.each(_.difference(_.keys(this.uis), touch), _.bind(function(k) {
-                console.log(k);
-                this.deleteUI(k);
-            }, this));
-        },
-
-        // -------------
-        // Zoom handling
-
-        zoomIn: function() {
-            // summary:		Zoom in by one level (unless maximum reached).
-            return this.setZoom(this.zoom + 1);
-        },
-
-        zoomOut: function() {
-            // summary:		Zoom out by one level (unless minimum reached).
-            this.setZoom(this.zoom - 1);
-            this.download();
-            return this;
-        },
-
-        setZoom: function(zoom) {
-            if (zoom < this.MINSCALE || zoom > this.MAXSCALE) return this;
-            // summary:		Redraw the map at a new zoom level.
-            this.zoom = zoom;
-            this._setScaleFactor();
-            this._blankTiles();
-            this.setCentre({
-                lat: this.centrelat,
-                lon: this.centrelon
+        var ways = all.filter(function(a) {
+                return a.entityType === 'way' && !a.isClosed();
+            }),
+            areas = all.filter(function(a) {
+                return a.entityType === 'way' && a.isClosed();
+            }),
+            points = all.filter(function(a) {
+                return a.entityType === 'node';
             });
-            this.updateUIs(true, true);
-            return this;
-        },
 
-        _setScaleFactor: function() {
-            // summary:		Calculate the scaling factor for this zoom level.
-            this.zoomfactor = this.MASTERSCALE/Math.pow(2, 13 - this.zoom);
-        },
+        var defpaths = defs.selectAll('path')
+                .data(ways, key),
+            fills = layers[0].fill.selectAll('path.area')
+                .data(areas, key),
+            casings = layers[0].casing.selectAll('use.casing')
+                .data(ways, key),
+            strokes = layers[0].stroke.selectAll('use.stroke')
+                .data(ways, key),
+            texts = layers[0].text.selectAll('text')
+                .data(ways.filter(function(w) {
+                    return !!w.tags.name;
+                }), key),
+            markers = layers[0].hit.selectAll('image.marker')
+                .data(points, key);
 
-        // ----------------------
-        // Elastic band redrawing
+        var _id = selection[0];
+        var active_entity = all.filter(function(a) {
+            return a._id === _id;
+        });
 
-        clearElastic: function() {
-            // summary:		Remove the elastic band used to draw new ways.
-            this.elastic.clear();
-        },
+        var handles = layers[0].hit.selectAll('circle.handle')
+            .data(active_entity.length ? active_entity[0].nodes : [], key);
 
-        drawElastic: function(x1,y1,x2,y2) {
-            // summary:		Draw the elastic band (for new ways) between two points.
-            this.elastic.clear();
-            // **** Next line is SVG-specific
-            this.elastic.rawNode.setAttribute("pointer-events","none");
-            this.elastic.createPolyline( [{ x:x1, y:y1 }, { x:x2, y:y2 }] ).setStroke( {
-                color: [0, 0, 0, 1],
-                style: 'Solid',
-                width: 1
+        defpaths.exit().remove();
+        texts.exit().remove();
+        handles.exit().remove();
+        fills.exit().remove();
+        markers.exit().remove();
+        casings.exit().remove();
+        strokes.exit().remove();
+
+        defpaths.enter().append('path');
+
+        defpaths.attr('d', nodeline)
+            .attr('id', function(d) {
+                return 'd' + d._id;
             });
-        },
 
-        // -------------
-        // Tile handling
-        // ** FIXME: see docs
-        loadTiles: function() {
-            // summary:		Load all tiles for the current viewport. This is a bare-bones function 
-            //				at present: it needs configurable URLs (not just Bing), attribution/logo
-            //				support, and to be 'nudgable' (i.e. adjust the offset).
-            var tl = this.locationCoord({
-                lat: this.extent.north,
-                lon: this.extent.west
-            }, this.zoom),
-            br = this.locationCoord({
-                lat: this.extent.south,
-                lon: this.extent.east
-            }, this.zoom),
-            tileKeys = _.keys(this.tiles),
-            seen = [],
-            coord = { z: this.zoom };
+        function usehref(d) {
+            return '#d' + d._id;
+        }
 
-            for (coord.x = tl.x; coord.x <= br.x; coord.x++) {
-                for (coord.y = tl.y; coord.y <= br.y; coord.y++) {
-                    if (!this._getTile(coord)) {
-                        this._fetchTile(coord);
-                    }
-                    seen.push(iD.Util.tileKey(coord));
-                }
-            }
+        fills.enter().append('path')
+            .on('click', selectClick);
 
-            _.each(_.without(tileKeys, seen), _.bind(function(key) {
-                delete this.tiles[key];
-            }, this));
-        },
+        fills.attr('d', nodeline)
+            .attr('class', classes('area'));
 
-        _fetchTile: function(coord) {
-            // summary:		Load a tile image at the given tile co-ordinates.
-            var t = this.tilegroup.createImage({
-                x: Math.floor(this.lon2coord(this.tile2lon(coord.x))),
-                y: Math.floor(this.lat2coord(this.tile2lat(coord.y))),
-                width: 256,
-                height: 256,
-                src: this._tileURL(coord)
+        casings.enter().append('use');
+        casings.sort(waystack)
+            .attr('xlink:href', usehref)
+            .attr('class', classes('casing'));
+
+        strokes.enter().append('use')
+            .on('click', selectClick);
+
+        strokes.sort(waystack).attr('xlink:href', usehref)
+            .attr('class', classes('stroke'));
+
+        markers.enter().append('image');
+        markers.attr('class', classes('marker'))
+            .attr({ width: 16, height: 16 })
+            .attr('xlink:href', markerimage)
+            .attr('transform', function(d) {
+                return 'translate(' + projection(d) + ')';
             });
-            this._assignTile(coord, t);
-        },
 
-        _getTile: function(coord) {
-            // summary:		See if this tile is already loaded.
-            return this.tiles[iD.Util.tileKey(coord)];
-        },
+        var textems = texts.enter().append('text')
+            .attr('dy', 3);
 
-        _assignTile: function(coord, t) {
-            // summary:		Store a reference to the tile so we know it's loaded.
-            this.tiles[iD.Util.tileKey(coord)] = t;
-        },
+        textems.append('textPath')
+            .attr('xlink:href', usehref)
+            .attr('startOffset', '50%')
+            .text(function(d) { return d.tags.name; });
 
-        _tileURL: function(coord) {
-            // summary:		Calculate the URL for a tile at the given co-ordinates.
-            var u = '';
-            for (var zoom = coord.z; zoom > 0; zoom--) {
-                var byte = 0;
-                var mask = 1 << (zoom - 1);
-                if ((coord.x & mask) !== 0) byte++;
-                if ((coord.y & mask) !== 0) byte += 2;
-                u += byte.toString();
-            }
-            return this.tilebaseURL
-                .replace('$z', coord.z)
-                .replace('$x', coord.x)
-                .replace('$y', coord.y)
-                .replace('$quadkey', u);
-        },
+        handles.enter().append('circle')
+            .attr('class', 'handle')
+            .attr('r', 5)
+            .on('click', selectClick);
+        handles.attr('transform', function(d) {
+            return 'translate(' + projection(d) + ')';
+        });
+    }
+    
+    // -------------
+    // Zoom handling
+    function zoomIn() {
+        // summary:	Zoom in by one level (unless maximum reached).
+        return setZoom(getZoom() + 1);
+    }
 
-        _blankTiles: function() {
-            // summary:		Unload all tiles and remove from the display.
-            this.tilegroup.clear();
-            this.tiles = {};
-        },
+    function zoomOut() {
+        // summary:	Zoom out by one level (unless minimum reached).
+        return setZoom(getZoom() - 1);
+    }
 
-        // -------------------------------------------
-        // Co-ordinate management, dragging and redraw
+    function getZoom(zoom) {
+        var s = projection.scale();
+        return Math.max(Math.log(s) / Math.log(2) - 8, 0);
+    }
 
-        startDrag: function(e) {
-            // summary:		Start dragging the map in response to a mouse-down.
-            // e: MouseEvent	The mouse-down event that triggered it.
-            var srcElement = (e.gfxTarget === this.backdrop) ?
-                e.gfxTarget : e.gfxTarget.parent;
-            Event.stop(e);
-            this.dragging = true;
-            this.dragged = false;
-            this.dragx = this.dragy=NaN;
-            this.startdragx = e.clientX;
-            this.startdragy = e.clientY;
-            this.dragconnect = srcElement.connect("onmouseup", _.bind(this.endDrag, this));
-        },
+    function setZoom(zoom) {
+        // summary:	Redraw the map at a new zoom level.
+        projection.scale(256 * Math.pow(2, zoom - 1));
+        zoombehavior.scale(projection.scale());
+        drawVector();
+        redraw();
+        return map;
+    }
 
-        endDrag: function(e) {
-            // summary:		Stop dragging the map in response to a mouse-up.
-            // e: MouseEvent	The mouse-up event that triggered it.
-            Event.stop(e);
-            dojo.disconnect(this.dragconnect);
-            this.dragging=false;
-            this.dragtime=e.timeStamp;
-            this.updateCoordsFromViewportPosition();
-            if (Math.abs(e.clientX - this.startdragx) < 3 &&
-                Math.abs(e.clientY - this.startdragy) < 3) {
-                return;
-            }
-            this.download();
-        },
+    function tilesForView() {
+        var t = projection.translate(),
+            s = projection.scale(),
+            z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
+            rz = Math.floor(z),
+            ts = 256 * Math.pow(2, z - rz);
 
-        processMove: function(e) {
-            // summary:		Drag the map to a new origin.
-            // e: MouseEvent	The mouse-move event that triggered it.
-            var x = e.clientX;
-            var y = e.clientY;
-            if (this.dragging) {
-                if (this.dragx) {
-                    this.containerx += (x - this.dragx);
-                    this.containery += (y - this.dragy);
-                    this.updateOrigin();
-                    this.dragged=true;
-                }
-                this.dragx = x;
-                this.dragy = y;
-            } else {
-                this.controller.entityMouseEvent(e,null);
-            }
-        },
+        // This is the 0, 0 px of the projection
+        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
+            coords = [],
+            cols = d3.range(Math.max(0, Math.floor((tile_origin[0] - width) / ts)),
+            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
+            rows = d3.range(Math.max(0, Math.floor((tile_origin[1] - height) / ts)),
+            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
 
-        updateOrigin: function() {
-            // summary:		Tell Dojo to update the viewport origin.
-            this.container.setTransform([Matrix.translate(this.containerx, this.containery)]);
-            this.tilegroup.setTransform([Matrix.translate(this.containerx, this.containery)]);
-        },
+        cols.forEach(function(x) {
+            rows.forEach(function(y) { coords.push([Math.floor(z), x, y]); });
+        });
+        return coords;
+    }
 
-        _mouseEvent: function(e) {
-            // summary: Catch mouse events on the surface but not the tiles - in other words,
-            // on drawn items that don't have their own hitzones, like the fill of a shape.
-            if (e.type=='mousedown') { this.startDrag(e); }
-            // ** FIXME: we may want to reinstate this at some point...
-            // this.controller.entityMouseEvent(e,null);
-        },
 
-        updateCoordsFromViewportPosition: function(e) {
-            // summary:		Update centre and bbox from the current viewport origin.
-            this._updateCoords(this.containerx, this.containery);
-        },
+    function tileUrl(coord) {
+        var tmpl = 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z';
+        var u = '';
+        for (var zoom = coord[0]; zoom > 0; zoom--) {
+            var byte = 0;
+            var mask = 1 << (zoom - 1);
+            if ((coord[1] & mask) !== 0) byte++;
+            if ((coord[2] & mask) !== 0) byte += 2;
+            u += byte.toString();
+        }
+        return tmpl.replace('$quadkey', u);
+    }
 
-        setCentre: function(loc) {
-            // summary:		Update centre and bbox to a specified lat/lon.
-            var coord = this.locationCoord(loc, this.zoom);
-            this._updateCoords(
-                -coord.x - this.mapwidth / 2,
-                -coord.y - this.mapheight / 2);
-                return this;
-        },
+    function redraw() {
+        if (d3.event) {
+            projection
+              .translate(d3.event.translate)
+              .scale(d3.event.scale);
+        }
 
-        setCenter: function(loc) { this.setCentre(loc); },
+        var t = projection.translate(),
+            s = projection.scale(),
+            z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
+            rz = Math.floor(z),
+            ts = 256 * Math.pow(2, z - rz);
 
-        _updateCoords:function(x, y) {
-            // summary:		Set centre and bbox.
-            this.containerx = x;
-            this.containery = y;
-            this.updateOrigin();
-            this.centrelon = this.coord2lon(-x + this.mapwidth/2);
-            this.centrelat = this.coord2lat(-y + this.mapheight/2);
+        // This is the 0, 0 px of the projection
+        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
+            coords = tilesForView();
 
-            this.extent = {
-                north: this.coord2lat(-y),
-                south: this.coord2lat(-y + this.mapheight),
-                west: this.coord2lon(-x),
-                east: this.coord2lon(-x + this.mapwidth)
-            };
+        var tiles = tilegroup.selectAll('image.tile')
+            .data(coords, function(d) { return d.join(','); });
 
-            this.loadTiles();
-        },
+        tiles.exit().remove();
+        tiles.enter().append('image')
+            .attr('class', 'tile')
+            .attr('xlink:href', tileUrl);
+        tiles.attr({ width: ts, height: ts })
+            .attr('transform', function(d) {
+                return 'translate(' + [(d[1] * ts) - tile_origin[0], (d[2] * ts) - tile_origin[1]] + ')';
+            });
+        drawVector();
+        download();
+    }
 
-        clickSurface:function(e) {
-            // summary:		Handle a click on an empty area of the map.
-            if (this.dragged && e.timeStamp==this.dragtime) { return; }
-            this.controller.entityMouseEvent(e,null);
-        },
+    function setCentre(loc) {
+        // summary:		Update centre and bbox to a specified lat/lon.
+        var t = projection.translate(),
+            ll = projection([loc.lon, loc.lat]);
+        projection.translate([
+            t[0] - ll[0] + width / 2,
+            t[1] - ll[1] + height / 2]);
+        zoombehavior.translate(projection.translate());
+        redraw();
+        return map;
+    }
 
-        // -----------------------
-        // Co-ordinate conversions
+    map.download = download;
+    map.extent = extent;
+    map.setCentre = setCentre;
+    map.setCenter = setCentre;
 
-        latp2coord:function(a) { return -(a-this.baselatp)*this.zoomfactor; },
-        coord2latp:function(a) { return a/-this.zoomfactor+this.baselatp; },
-        lon2coord:function(a)  { return (a-this.baselon)*this.zoomfactor; },
-        coord2lon:function(a)  { return a/this.zoomfactor+this.baselon; },
-        lon2screen:function(a) { return this.lon2coord(a) + this.marginBox.l + this.containerx; },
+    map.getZoom = getZoom;
+    map.setZoom = setZoom;
+    map.zoomIn = zoomIn;
+    map.zoomOut = zoomOut;
 
-        lat2latp:function(a)   { return 180/Math.PI * Math.log(Math.tan(Math.PI/4+a*(Math.PI/180)/2)); },
-        latp2lat:function(a)   { return 180/Math.PI * (2 * Math.atan(Math.exp(a*Math.PI/180)) - Math.PI/2); },
-        lat2coord:function(a)  { return -(this.lat2latp(a)-this.baselatp)*this.zoomfactor; },
-        coord2lat:function(a)  { return this.latp2lat(a/-this.zoomfactor+this.baselatp); },
-        lat2screen:function(a) { return this.lat2coord(a) + this.marginBox.t + this.containery; },
+    map.connection = connection;
+    map.controller = controller;
+    map.projection = projection;
 
-        locationCoord: function(ll, z) {
-            var z2 = Math.pow(2, z), d2r = Math.PI / 180;
-            return {
-                z: z,
-                x: Math.floor((ll.lon + 180) / 360 * z2),
-                y: Math.floor((1 - Math.log(Math.tan(ll.lat * d2r) +
-                                            1 / Math.cos(ll.lat * d2r)) / Math.PI) / 2 * z2)
-            };
-        },
-        lon2tile:function(a) { return (Math.floor((a+180)/360*Math.pow(2,this.zoom))); },
-        lat2tile:function(a)   { return (Math.floor((1-Math.log(Math.tan(a*Math.PI/180) + 1/Math.cos(a*Math.PI/180))/Math.PI)/2 *Math.pow(2,this.zoom))); },
-        tile2lon:function(a)   { return (a/Math.pow(2,this.zoom)*360-180); },
-        tile2lat:function(a)   {
-            var n=Math.PI-2*Math.PI*a/Math.pow(2,this.zoom);
-            return (180/Math.PI*Math.atan(0.5*(Math.exp(n)-Math.exp(-n))));
-        },
-
-        // Turn event co-ordinates into map co-ordinates
-
-        mouseX: function(e) { return e.clientX - this.marginBox.l - this.containerx; },
-        mouseY: function(e) { return e.clientY - this.marginBox.t - this.containery; }
-    });
-
-    // ----------------------------------------------------------------------
-    // End of module
-});
+    redraw();
+    return map;
+};

@@ -1,23 +1,15 @@
-// iD/controller/edit/NoSelection.js
-
-define(['dojo/_base/declare',
-		'iD/controller/edit/EditBaseState',
-		'iD/controller/edit/SelectedWay',
-		'iD/controller/edit/SelectedWayNode',
-		'iD/controller/edit/SelectedPOINode'
-		], function(declare){
-
 // ----------------------------------------------------------------------
 // edit.NoSelection class
 
-declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
+iD.controller.edit.NoSelection = function() {};
+iD.controller.edit.NoSelection.prototype = {
 
 	constructor: function() {
 		// summary:	In 'Edit object' mode but nothing selected.
 	},
 
 	enterState: function() {
-		this.controller.stepper.hide();
+		// this.controller.stepper.hide();
 	},
 
 	processMouseEvent: function(event, entityUI) {
@@ -38,8 +30,4 @@ declare("iD.controller.edit.NoSelection", [iD.controller.edit.EditBaseState], {
         }
         return this;
 	}
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};

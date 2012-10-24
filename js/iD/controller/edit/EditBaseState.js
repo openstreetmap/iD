@@ -1,13 +1,8 @@
-// iD/controller/edit/EditBaseState.js
-
-define(['dojo/_base/declare','dojo/_base/lang','dojo/_base/array','dojo/on',
-        'dijit/registry'
-    ], function(declare,lang,array,on,registry){
-
 // ----------------------------------------------------------------------
 // EditBaseState class - provides shared UI functions to edit mode states
 
-declare("iD.controller.edit.EditBaseState", null, {
+iD.controller.edit.EditBaseState = function() {};
+iD.controller.edit.EditBaseState.prototype = {
 
 	editortooltip: null,
 
@@ -73,8 +68,4 @@ declare("iD.controller.edit.EditBaseState", null, {
         // summary:		Close the tooltip.
         $('.edit-pane').removeClass('active').hide();
     }
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};

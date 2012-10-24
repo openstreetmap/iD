@@ -16,7 +16,6 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
     _.each(nodes, _.bind(function(node) {
         node.entity.addParent(this);
     }, this));
-    this._calculateBbox();
 };
 
 iD.Way.prototype = {
@@ -46,9 +45,14 @@ iD.Way.prototype = {
         };
     },
 
+    bounds: function() {
+        return d3.geo.bounds(this.toGeoJSON());
+    },
+
     // ---------------------
     // Bounding-box handling
     within: function(left,right,top,bottom) {
+        var bounds = this.bounds();
         // TODO invert and just return
         if (!this.extent.west ||
             (this.extent.west < left   && this.extent.east < left  ) ||
@@ -59,25 +63,6 @@ iD.Way.prototype = {
         } else {
             return true;
         }
-    },
-
-    _calculateBbox:function() {
-        this.extent = {
-            west: Infinity,
-            east: -Infinity,
-            south: Infinity,
-            north: -Infinity
-        };
-        _.each(this.nodes, _.bind(function(n) { this.expandBbox(n); }, this));
-    },
-
-    expandBbox:function(node) {
-        // summary:	Enlarge the way's bounding box to make sure it
-        // includes the co-ordinates of a supplied node.
-        this.extent.west = Math.min(this.extent.west, node.lon);
-        this.extent.east = Math.max(this.extent.east, node.lon);
-        this.extent.south = Math.min(this.extent.south, node.lat);
-        this.extent.north = Math.max(this.extent.north, node.lat);
     },
 
     // --------------
