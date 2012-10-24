@@ -1,5 +1,3 @@
-// ----------------------------------------------------------------------
-// Controller base class
 if (typeof iD === 'undefined') iD = {};
 
 iD.Controller = function() {

@@ -73,13 +73,12 @@
         <a href='http://www.geowiki.com/docs'>docs</a>.
         Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
     </div>
-
 </div>
 <script>
     var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
 
     // Initialise map
-    var map = new iD.renderer.Map({
+    var map = iD.renderer.Map({
         selector: "#map",
         connection: connection,
         width: $(document).width(),

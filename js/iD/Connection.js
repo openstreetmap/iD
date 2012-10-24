@@ -1,7 +1,5 @@
-// ----------------------------------------------------------------------
-// Connection base class
-
 if (typeof iD === 'undefined') iD = {};
+
 iD.Connection = function(apiURL) {
     // summary:		The data store, including methods to fetch data from (and, eventually, save data to)
     // an OSM API server.

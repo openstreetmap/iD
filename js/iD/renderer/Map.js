@@ -5,56 +5,48 @@
 // Connection base class
 
 iD.renderer.Map = function(obj) {
-    // summary:		The main map display, containing the individual sprites (UIs) for each entity.
-    // obj: Object	An object containing .lat, .lon, .scale, .div (the name of the <div> to be used),
-    //	.connection, .width (px) and .height (px) properties.
-    this.width = obj.width || 800;
-    this.height = obj.height || 400;
-    this.controller = iD.Controller();
-    this.projection = d3.geo.mercator()
-        .scale(512).translate([512, 512]);
+    var map = {},
+        selection = [],
+        width = obj.width || 800,
+        height = obj.height || 400,
+        controller = iD.Controller(),
+        projection = d3.geo.mercator()
+            .scale(512).translate([512, 512]),
+        connection = obj.connection,
+        layers = {};
 
-	// List of co-ordinates
-    var proj = this.projection;
+    var linegen = d3.svg.line()
+        .x(function(d) { return projection(d)[0]; })
+        .y(function(d) { return projection(d)[1]; });
 
-    this.linegen = d3.svg.line()
-        .x(function(d) { return proj(d)[0]; })
-        .y(function(d) { return proj(d)[1]; });
+    var zoombehavior = d3.behavior.zoom()
+        .translate(projection.translate())
+        .scale(projection.scale());
 
-    this.zoombehavior = d3.behavior.zoom()
-        .translate(this.projection.translate())
-        .scale(this.projection.scale());
+    zoombehavior.on('zoom', redraw);
 
-    this.zoombehavior.on('zoom', _.bind(this.redraw, this));
-
-    this.surface = d3.selectAll(obj.selector)
+    var surface = d3.selectAll(obj.selector)
         .append('svg')
-        .attr({ width: this.width, height: this.width })
-        .call(this.zoombehavior);
+        .attr({ width: width, height: width })
+        .call(zoombehavior);
 
-    var clip = this.surface.append('defs')
+    var clip = surface.append('defs')
         .append('clipPath')
         .attr('id', 'clip')
         .append('rect')
         .attr('id', 'clip-rect')
-        .attr('x', '0')
-        .attr('y', '0')
-        .attr('width', this.width)
-        .attr('height', this.height);
+        .attr({ x: 0, y: 0 })
+        .attr({ width: width, height: height });
 
-    this.tilegroup = this.surface.append('g')
+    var tilegroup = surface.append('g')
         .attr('clip-path', 'url(#clip)');
-    this.container = this.surface.append('g')
+    var container = surface.append('g')
         .attr('clip-path', 'url(#clip)');
 
-    this.connection = obj.connection;
-
-    // Initialise layers
-    this.layers = {};
     var minlayer = -5, maxlayer = 5;
     for (var l = minlayer; l <= maxlayer; l++) {
-        var r = this.container.append('g');
-        this.layers[l] = {
+        var r = container.append('g');
+        layers[l] = {
             root: r,
             fill: r.append('g'),
             casing: r.append('g'),
@@ -63,37 +55,29 @@ iD.renderer.Map = function(obj) {
             hit: r.append('g')
         };
     }
+    var elastic = container.append('g');
 
-    // Create group for elastic band
-    this.elastic = this.container.append('g');
-
-    this.selection = [];
-
-    this.redraw();
-};
-
-iD.renderer.Map.prototype = {
-
-    download: _.debounce(function() {
+    var download = _.debounce(function() {
         // summary:		Ask the connection to download data for the current viewport.
-        this.connection.loadFromAPI(this.extent(), _.bind(this.updateUIs, this));
-    }, 1000),
+        connection.loadFromAPI(extent(), drawVector);
+    }, 1000);
 
-    extent: function() {
+    function extent() {
         return [
-            this.projection.invert([0, 0]),
-            this.projection.invert([this.width, this.height])];
-    },
+            projection.invert([0, 0]),
+            projection.invert([width, height])];
+    }
 
-    select: function(d) {
-        this.selection = [d._id];
-    },
+    function select(d) {
+        selection = [d._id];
+    }
 
-    updateUIs: function() {
+    function key(d) { return d._id; }
+
+    function drawVector() {
         // summary:		Draw/refresh all EntityUIs within the bbox, and remove any others.
         // redraw: Boolean	Should we redraw any UIs that are already present?
         // remove: Boolean	Should we delete any UIs that are no longer in the bbox?
-        var selection = this.selection;
         function classes(d) {
             var tags = d.tags;
             var c = [];
@@ -115,11 +99,8 @@ iD.renderer.Map.prototype = {
             return c.join(' ');
         }
 
-        var linegen = this.linegen;
+        var all = connection.all();
 
-        var all = this.connection.all();
-
-        function key(d) { return d._id; }
 
         var ways = all.filter(function(a) {
             return a.entityType === 'way' && !a.isClosed();
@@ -129,13 +110,12 @@ iD.renderer.Map.prototype = {
             return a.entityType === 'way' && a.isClosed();
         });
 
+        var selectClick = function(d) {
+            select(d);
+            drawVector();
+        };
 
-        var selectClick = _.bind(function(d) {
-            this.select(d);
-            this.updateUIs();
-        }, this);
-
-        var fills = this.layers[0].fill.selectAll('path.area')
+        var fills = layers[0].fill.selectAll('path.area')
             .data(areas, key);
 
         fills.enter().append('path')
@@ -149,20 +129,18 @@ iD.renderer.Map.prototype = {
             return 'area ' + classes(d);
         });
 
-        var casings = this.layers[0].casing.selectAll('path.casing')
+        var casings = layers[0].casing.selectAll('path.casing')
             .data(ways, key);
 
         casings.enter().append('path');
-
         casings.exit().remove();
-
         casings.attr('d', function(d) {
             return linegen(d.nodes);
         }).attr('class', function(d) {
             return 'casing ' + classes(d);
         });
 
-        var strokes = this.layers[0].stroke.selectAll('path.stroke')
+        var strokes = layers[0].stroke.selectAll('path.stroke')
             .data(ways, key);
 
         strokes.enter().append('path')
@@ -179,12 +157,12 @@ iD.renderer.Map.prototype = {
             return 'stroke ' + classes(d);
         });
 
-        var _id = this.selection[0];
+        var _id = selection[0];
         var active_entity = all.filter(function(a) {
             return a._id === _id;
         });
 
-        var handles = this.layers[0].hit.selectAll('circle.handle')
+        var handles = layers[0].hit.selectAll('circle.handle')
             .data(active_entity.length ? active_entity[0].nodes : [], key);
 
         handles.enter().append('circle')
@@ -194,63 +172,39 @@ iD.renderer.Map.prototype = {
 
         handles.exit().remove();
 
-        var proj = this.projection;
         handles.attr('transform', function(d) {
-            return 'translate(' + proj(d) + ')';
+            return 'translate(' + projection(d) + ')';
         });
-    },
+    }
 
+    
     // -------------
     // Zoom handling
-    zoomIn: function() {
+    function zoomIn() {
         // summary:	Zoom in by one level (unless maximum reached).
-        return this.setZoom(this.getZoom() + 1);
-    },
+        return setZoom(getZoom() + 1);
+    }
 
-    zoomOut: function() {
+    function zoomOut() {
         // summary:	Zoom out by one level (unless minimum reached).
-        return this.setZoom(this.getZoom() - 1);
-    },
+        return setZoom(getZoom() - 1);
+    }
 
-    getZoom: function(zoom) {
-        var s = this.projection.scale();
+    function getZoom(zoom) {
+        var s = projection.scale();
         return Math.max(Math.log(s) / Math.log(2) - 8, 0);
-    },
+    }
 
-    setZoom: function(zoom) {
+    function setZoom(zoom) {
         // summary:	Redraw the map at a new zoom level.
-        this.projection.scale(256 * Math.pow(2, zoom - 1));
-        this.zoombehavior.scale(this.projection.scale());
-        this.updateUIs(true, true);
-        this.redraw();
-        return this;
-    },
+        projection.scale(256 * Math.pow(2, zoom - 1));
+        zoombehavior.scale(projection.scale());
+        drawVector();
+        redraw();
+        return map;
+    }
 
-    // ----------------------
-    // Elastic band redrawing
-
-    clearElastic: function() {
-        // summary:	Remove the elastic band used to draw new ways.
-        this.elastic.clear();
-    },
-
-    drawElastic: function(x1,y1,x2,y2) {
-        // summary:	Draw the elastic band (for new ways) between two points.
-        this.elastic.clear();
-        // **** Next line is SVG-specific
-        this.elastic.rawNode.setAttribute('pointer-events','none');
-        this.elastic.createPolyline( [{ x:x1, y:y1 }, { x:x2, y:y2 }] ).setStroke( {
-            color: [0, 0, 0, 1],
-            style: 'Solid',
-            width: 1
-        });
-    },
-
-    tilesForView: function() {
-        var projection = this.projection,
-            width = this.width,
-            height = this.height;
-
+    function tilesForView() {
         var t = projection.translate(),
             s = projection.scale(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
@@ -269,11 +223,9 @@ iD.renderer.Map.prototype = {
             rows.forEach(function(y) { coords.push([Math.floor(z), x, y]); });
         });
         return coords;
-    },
+    }
 
-    redraw: function() {
-        var projection = this.projection;
-
+    function redraw() {
         if (d3.event) {
             projection
               .translate(d3.event.translate)
@@ -288,7 +240,7 @@ iD.renderer.Map.prototype = {
 
         // This is the 0, 0 px of the projection
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
-            coords = this.tilesForView();
+            coords = tilesForView();
 
         var tmpl = 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z';
 
@@ -304,7 +256,7 @@ iD.renderer.Map.prototype = {
             return tmpl.replace('$quadkey', u);
         }
 
-        var tiles = this.tilegroup.selectAll('image.tile')
+        var tiles = tilegroup.selectAll('image.tile')
             .data(coords, function(d) { return d.join(','); });
 
         tiles.exit().remove();
@@ -315,20 +267,36 @@ iD.renderer.Map.prototype = {
             .attr('transform', function(d) {
                 return 'translate(' + [(d[1] * ts) - tile_origin[0], (d[2] * ts) - tile_origin[1]] + ')';
             });
-        this.updateUIs();
-        this.download();
-    },
+        drawVector();
+        download();
+    }
 
-    setCentre: function(loc) {
+    function setCentre(loc) {
         // summary:		Update centre and bbox to a specified lat/lon.
-        var t = this.projection.translate(),
-            ll = this.projection([loc.lon, loc.lat]);
-        this.projection.translate([
-            t[0] - ll[0] + this.width / 2,
-            t[1] - ll[1] + this.height / 2]);
-        this.zoombehavior.translate(this.projection.translate());
-        this.redraw();
-        return this;
-    },
-    setCenter: function(loc) { this.setCentre(loc); }
+        var t = projection.translate(),
+            ll = projection([loc.lon, loc.lat]);
+        projection.translate([
+            t[0] - ll[0] + width / 2,
+            t[1] - ll[1] + height / 2]);
+        zoombehavior.translate(projection.translate());
+        redraw();
+        return map;
+    }
+
+    map.download = download;
+    map.extent = extent;
+    map.setCentre = setCentre;
+    map.setCenter = setCentre;
+
+    map.getZoom = getZoom;
+    map.setZoom = setZoom;
+    map.zoomIn = zoomIn;
+    map.zoomOut = zoomOut;
+
+    map.connection = connection;
+    map.controller = controller;
+    map.projection = projection;
+
+    redraw();
+    return map;
 };
