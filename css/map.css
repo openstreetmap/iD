@@ -1,0 +1,129 @@
+/* base styles */
+use, path {
+    fill: none;
+    cursor: pointer;
+}
+
+/* interactive elements */
+circle.handle {
+    cursor: move;
+    stroke-width: 1;
+    stroke:#222;
+    fill:#eee;
+}
+
+.casing {
+    stroke: #111;
+    stroke-width: 3;
+}
+
+.casing.active {
+    stroke:#FFF9C9;
+    stroke-opacity:0.5;
+    stroke-width:8;
+}
+
+.stroke {
+    stroke: #555;
+    stroke-width: 2;
+}
+
+.stroke.railway-rail {
+    stroke: white;
+    stroke-width: 3;
+    stroke-dasharray: 12,12;
+}
+
+.stroke.railway-subway {
+    stroke: #444;
+    stroke-width: 3;
+    stroke-dasharray: 8,8;
+}
+
+.area.active {
+    fill-opacity:0.4;
+}
+
+.area.natural {
+    stroke: #ADD6A5;
+    fill: #ADD6A5;
+    stroke-width:1;
+    fill-opacity:0.3;
+}
+
+.area.building {
+    stroke: #9E176A;
+    stroke-width: 1;
+    fill: #ff6ec7;
+    fill-opacity: 0.3;
+}
+
+.area.landuse {
+    stroke: #444;
+    stroke-width:1;
+    fill: #444;
+    opacity:0.2;
+}
+
+/* highways */
+.stroke.highway-residential {
+    stroke:#E8E8E8;
+    stroke-width:5;
+}
+.casing.highway-residential {
+    stroke-width:7;
+}
+
+.stroke.highway-unclassified,
+.stroke.highway-tertiary {
+    stroke:#FEFECB;
+    stroke-width:3;
+}
+
+.stroke.highway-service {
+    stroke:#fff;
+    stroke-width:2;
+}
+
+.stroke.highway-motorway, .stroke.highway-motorway_link {
+    stroke:#809BC0;
+    stroke-width:7;
+}
+.casing.highway-motorway, .casing.highway-motorway_link {
+    stroke-width:9;
+}
+
+.stroke.highway-trunk, .stroke.highway-trunk_link {
+    stroke:#7FC97F;
+}
+
+.stroke.highway-primary, .stroke.highway-primary_link {
+    stroke:#E46D71;
+    stroke-width:8;
+}
+.casing.highway-primary, .casing.highway-primary_link {
+    stroke-width:10;
+}
+
+.stroke.highway-secondary, .stroke.highway-secondary_link {
+    stroke:#FDBF6F;
+    stroke-width:7;
+}
+.casing.highway-secondary, .casing.highway-secondary_link {
+    stroke-width:9;
+}
+
+.stroke.bridge-yes {
+    stroke:#eee;
+    stroke-width:7;
+}
+
+.stroke.waterway {
+    stroke: #10539a;
+    stroke-width: 3;
+}
+
+text {
+    font:9px 'Helvetica';
+    text-anchor:middle;
+}
