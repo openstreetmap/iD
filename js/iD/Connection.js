@@ -98,6 +98,43 @@ iD.Connection = function(apiURL) {
         return _.find(obj.attributes, filterNodeName(name)).nodeValue;
     }
 
+    function getTags(obj) {
+        var tags = {};
+        // Doesn't use underscore for performance reasons
+        for (var i = 0; i < obj.childNodes.length; i++) {
+            var item = obj.childNodes[i];
+            if (item.nodeName === 'tag') {
+                tags[getAttribute(item,'k')] = getAttribute(item,'v');
+            }
+        }
+        return tags;
+    }
+
+    function getNodes(obj) {
+        var nodes = [];
+        // Doesn't use underscore for performance reasons
+        for (var i = 0; i < obj.childNodes.length; i++) {
+            var item = obj.childNodes[i];
+            if (item.nodeName === 'nd') {
+                nodes.push(entities[getAttribute(item,'ref')]);
+            }
+        }
+        return nodes;
+    }
+
+    function getMembers(obj) {
+        return _(obj.childNodes).chain()
+            .filter(filterNodeName('member'))
+            .map(function(item) {
+                var id = getAttribute(item,'ref'),
+                type = getAttribute(item,'type'),
+                role = getAttribute(item,'role');
+
+                var obj = getOrCreate(id,type);
+                return new iD.RelationMember(obj,role);
+            }).value();
+    }
+
     function parse(callback) {
         return function(dom) {
             for (var i = 0; i < dom.childNodes[0].childNodes.length; i++) {
@@ -123,35 +160,7 @@ iD.Connection = function(apiURL) {
                     assign(relation);
                 }
             }
-            if (callback) { callback(); }
-            function getTags(obj) {
-                return _(obj.childNodes).chain()
-                .filter(filterNodeName('tag'))
-                .map(function(item) {
-                    return [getAttribute(item,'k'), getAttribute(item,'v')];
-                }).object().value();
-            }
-
-            function getNodes(obj) {
-                return _(obj.childNodes).chain()
-                .filter(filterNodeName('nd'))
-                .map(function(item) {
-                    return entities[getAttribute(item,'ref')];
-                }).value();
-            }
-
-            function getMembers(obj) {
-                return _(obj.childNodes).chain()
-                    .filter(filterNodeName('member'))
-                    .map(function(item) {
-                        var id = getAttribute(item,'ref'),
-                        type = getAttribute(item,'type'),
-                        role = getAttribute(item,'role');
-
-                        var obj = getOrCreate(id,type);
-                        return new iD.RelationMember(obj,role);
-                    }).value();
-            }
+            callback();
         };
     }
 
