@@ -11,6 +11,8 @@ iD.renderer.Map = function(obj) {
     this.width = obj.width ? obj.width : 800;
     this.height = obj.height ? obj.height : 400;
 
+    this.controller = iD.Controller();
+
     // Initialise variables
     this.uis = {};
 
@@ -69,9 +71,6 @@ iD.renderer.Map = function(obj) {
     // Create group for elastic band
     this.elastic = this.container.append('g');
 
-    // Make draggable
-    this.surface.on('onclick', _.bind(this.clickSurface, this));
-
     this.redraw();
 };
 
@@ -81,7 +80,6 @@ iD.renderer.Map.prototype = {
     surface: null,			// <div>.surface containing the rendering
     container: null,        // root-level group within the surface
     connection: null,       // data store
-    controller: null,		// UI controller
 
     tilegroup: null,		// group within container for adding bitmap tiles
     tilebaseURL: 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z',	// Bing imagery URL
@@ -95,11 +93,6 @@ iD.renderer.Map.prototype = {
 
     elastic: null,			// Group for drawing elastic band
     ruleset: null,			// map style
-
-    setController:function(controller) {
-        // summary:		Set the controller that will handle events on the map (e.g. mouse clicks).
-        this.controller = controller;
-    },
 
     download: _.debounce(function() {
         // summary:		Ask the connection to download data for the current viewport.
@@ -315,12 +308,5 @@ iD.renderer.Map.prototype = {
         this.redraw();
         return this;
     },
-
-    setCenter: function(loc) { this.setCentre(loc); },
-
-    clickSurface:function(e) {
-        // summary:		Handle a click on an empty area of the map.
-        if (this.dragged && e.timeStamp==this.dragtime) { return; }
-        this.controller.entityMouseEvent(e,null);
-    }
+    setCenter: function(loc) { this.setCentre(loc); }
 };

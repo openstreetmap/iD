@@ -91,31 +91,27 @@
     map.setZoom(18);
     map.setCentre({ lat: 40.796, lon: -74.691 });
 
-    // Initialise controller
-    var controller = new iD.Controller(map);
-    map.setController(controller);
-
     // ----------------------------------------------------
     // Data is loaded and app ready to go
     // Set initial controllerState
-    controller.setState(new iD.controller.edit.NoSelection());
+    map.controller.setState(new iD.controller.edit.NoSelection());
 
     // ----------------------------------------------------
     // Mode button handlers
     $('#add-place').click(function() {
-        controller.setState(new iD.controller.shape.NoSelection('node'));
+        map.controller.setState(new iD.controller.shape.NoSelection('node'));
     });
 
     $('#add-road').click(function() {
-        controller.setState(new iD.controller.shape.NoSelection('way'));
+        map.controller.setState(new iD.controller.shape.NoSelection('way'));
     });
 
     $('#add-area').click(function() {
-        controller.setState(new iD.controller.shape.NoSelection());
+        map.controller.setState(new iD.controller.shape.NoSelection());
     });
 
     $('#undo').click(function() {
-        controller.undoStack.undo();
+        map.controller.undoStack.undo();
         map.updateUIs(true, true);
     });
 

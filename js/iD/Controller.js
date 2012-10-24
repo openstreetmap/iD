@@ -2,7 +2,7 @@
 // Controller base class
 if (typeof iD === 'undefined') iD = {};
 
-iD.Controller = function(map) {
+iD.Controller = function() {
     var controller = {},
         state = null;
 
