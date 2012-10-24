@@ -16,6 +16,14 @@ iD.renderer.Map = function(obj) {
 
     this.projection = d3.geo.mercator()
         .scale(512).translate([512, 512]);
+
+	// List of co-ordinates
+    var proj = this.projection;
+
+    this.linegen = d3.svg.line()
+        .x(function(d) { return proj(d)[0]; })
+        .y(function(d) { return proj(d)[1]; });
+
     this.zoombehavior = d3.behavior.zoom()
         .translate(this.projection.translate())
         .scale(this.projection.scale())
@@ -66,14 +74,6 @@ iD.renderer.Map.prototype = {
     tilegroup: null,		// group within container for adding bitmap tiles
     tiles: {},				// index of tile objects
     tilebaseURL: 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z',	// Bing imagery URL
-
-    dragging: false,		// current drag state
-    dragged: false,			// was most recent click a drag?
-    dragtime: NaN,			// timestamp of mouseup (compared to stop resulting click from firing)
-    dragconnect: null,		// event listener for endDrag
-
-    containerx: 0,			// screen co-ordinates of container
-    containery: 0,			//  |
 
     height: NaN,			// size of map object in pixels
     width: NaN,			//  |
@@ -209,21 +209,18 @@ iD.renderer.Map.prototype = {
 
     // -------------
     // Zoom handling
-
     zoomIn: function() {
-        // summary:		Zoom in by one level (unless maximum reached).
+        // summary:	Zoom in by one level (unless maximum reached).
         return this.setZoom(this.zoom + 1);
     },
 
     zoomOut: function() {
-        // summary:		Zoom out by one level (unless minimum reached).
-        this.setZoom(this.zoom - 1);
-        this.download();
-        return this;
+        // summary:	Zoom out by one level (unless minimum reached).
+        return this.setZoom(this.zoom - 1);
     },
 
     setZoom: function(zoom) {
-        // summary:		Redraw the map at a new zoom level.
+        // summary:	Redraw the map at a new zoom level.
         this.projection.scale(256 * Math.pow(2, zoom - 1));
         this.zoombehavior.scale(this.projection.scale());
         this.updateUIs(true, true);
@@ -231,21 +228,16 @@ iD.renderer.Map.prototype = {
         return this;
     },
 
-    _setScaleFactor: function() {
-        // summary:		Calculate the scaling factor for this zoom level.
-        this.zoomfactor = this.MASTERSCALE/Math.pow(2, 13 - this.zoom);
-    },
-
     // ----------------------
     // Elastic band redrawing
 
     clearElastic: function() {
-        // summary:		Remove the elastic band used to draw new ways.
+        // summary:	Remove the elastic band used to draw new ways.
         this.elastic.clear();
     },
 
     drawElastic: function(x1,y1,x2,y2) {
-        // summary:		Draw the elastic band (for new ways) between two points.
+        // summary:	Draw the elastic band (for new ways) between two points.
         this.elastic.clear();
         // **** Next line is SVG-specific
         this.elastic.rawNode.setAttribute("pointer-events","none");
@@ -282,9 +274,7 @@ iD.renderer.Map.prototype = {
     },
 
     redraw: function() {
-        var projection = this.projection,
-            width = this.width,
-            height = this.height;
+        var projection = this.projection;
 
         if (d3.event) {
             projection
@@ -349,9 +339,5 @@ iD.renderer.Map.prototype = {
         // summary:		Handle a click on an empty area of the map.
         if (this.dragged && e.timeStamp==this.dragtime) { return; }
         this.controller.entityMouseEvent(e,null);
-    },
-
-    // Turn event co-ordinates into map co-ordinates
-    mouseX: function(e) { return e.clientX - this.marginBox.l - this.containerx; },
-    mouseY: function(e) { return e.clientY - this.marginBox.t - this.containery; }
+    }
 };

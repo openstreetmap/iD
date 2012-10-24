@@ -16,7 +16,7 @@ iD.renderer.NodeUI.prototype = {
         var x = Math.floor(this.map.lon2coord(this.node.lon));
         var y = Math.floor(this.map.latp2coord(this.node.latp));
         var tags = this.getEnhancedTags();
-        
+
         var im = this.map.layers[0].hit.append("image")
             .attr('class', 'poi')
             .attr('x', x)

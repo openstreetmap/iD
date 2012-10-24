@@ -9,19 +9,15 @@ iD.Node = function(connection, id, lat, lon, tags, loaded) {
 	this.entity = new iD.Entity();
 	this.lat = lat;
 	this.lon = lon;
+    // TODO: keep or trash this custom
+	this[0] = lon;
+	this[1] = lat;
 	this.tags = tags;
 	this.loaded = (loaded === undefined) ? true : loaded;
-	this.project();
 	this.modified = this.id < 0;
 };
 
 iD.Node.prototype = {
-    project: function() {
-        // summary:		Update the projected latitude value (this.latp) from the latitude (this.lat).
-        this.latp = 180/Math.PI *
-            Math.log(Math.tan(Math.PI/4+this.lat*(Math.PI/180)/2));
-    },
-
     toGeoJSON: function() {
         return {
             type: 'Feature',

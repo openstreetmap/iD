@@ -32,21 +32,13 @@ iD.renderer.WayUI.prototype = {
 		// Create tags and calculate styleList
 		var tags = this.getEnhancedTags();
 
-		// List of co-ordinates
-        var proj = this.map.projection;
-
-        var line = d3.svg.line()
-            .x(function(d) { return proj([d.lon, d.lat])[0]; })
-            .y(function(d) { return proj([d.lon, d.lat])[1]; })
-            .interpolate("linear");
-
         if (!this.casing) {
             this.casing = this.map.layers[0].casing.append("path")
                 .data([way.nodes])
                 .attr('class', 'casing');
         }
 
-        this.casing.attr("d", line);
+        this.casing.attr("d", this.map.linegen);
 
         if (!this.stroke) {
             this.stroke = this.map.layers[0].stroke.append("path")
@@ -54,7 +46,7 @@ iD.renderer.WayUI.prototype = {
                 .attr('class', 'stroke');
         }
 
-        this.stroke.attr("d", line);
+        this.stroke.attr("d", this.map.linegen);
 
         return this;
 	},
