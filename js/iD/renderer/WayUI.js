@@ -40,15 +40,19 @@ iD.renderer.WayUI.prototype = {
             .y(function(d) { return proj([d.lon, d.lat])[1]; })
             .interpolate("linear");
 
-        this.casing = this.map.layers[0].casing.append("path")
-            .data([way.nodes])
-            .attr('class', 'casing');
+        if (!this.casing) {
+            this.casing = this.map.layers[0].casing.append("path")
+                .data([way.nodes])
+                .attr('class', 'casing');
+        }
 
         this.casing.attr("d", line);
 
-        this.stroke = this.map.layers[0].stroke.append("path")
-            .data([way.nodes])
-            .attr('class', 'stroke');
+        if (!this.stroke) {
+            this.stroke = this.map.layers[0].stroke.append("path")
+                .data([way.nodes])
+                .attr('class', 'stroke');
+        }
 
         this.stroke.attr("d", line);
 

@@ -31,7 +31,7 @@ iD.renderer.Map = function(obj) {
     this.connection = obj.connection;
 
     // Initialise layers
-    this.layers={};
+    this.layers = {};
     for (var l=this.minlayer; l<=this.maxlayer; l++) {
         var r = this.container.append('g');
         this.layers[l]={
@@ -176,10 +176,10 @@ iD.renderer.Map.prototype = {
         }
     },
 
-    download: function() {
+    download: _.debounce(function() {
         // summary:		Ask the connection to download data for the current viewport.
         this.connection.loadFromAPI(this.extent(), _.bind(this.updateUIs, this));
-    },
+    }, 1000),
 
     extent: function() {
         return [
@@ -198,7 +198,7 @@ iD.renderer.Map.prototype = {
                 if (!this.uis[e.id]) {
                     this.createUI(e);
                 } else {
-                    this.uis[e.id].redraw();
+                    this.uis[e.id].draw();
                 }
                 return '' + e.id;
             }, this)).value();
@@ -255,6 +255,32 @@ iD.renderer.Map.prototype = {
             width: 1
         });
     },
+
+    tilesForView: function() {
+        var projection = this.projection,
+            width = this.width,
+            height = this.height;
+
+        var t = projection.translate(),
+            s = projection.scale(),
+            z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
+            rz = Math.floor(z),
+            ts = 256 * Math.pow(2, z - rz);
+
+        // This is the 0, 0 px of the projection
+        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
+            coords = [],
+            cols = d3.range(Math.max(0, Math.floor((tile_origin[0] - width) / ts)),
+            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
+            rows = d3.range(Math.max(0, Math.floor((tile_origin[1] - height) / ts)),
+            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
+
+        cols.forEach(function(x) {
+            rows.forEach(function(y) { coords.push([Math.floor(z), x, y]); });
+        });
+        return coords;
+    },
+
     redraw: function() {
         var projection = this.projection,
             width = this.width,
@@ -274,15 +300,7 @@ iD.renderer.Map.prototype = {
 
         // This is the 0, 0 px of the projection
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
-            coords = [],
-            cols = d3.range(Math.max(0, Math.floor((tile_origin[0] - width) / ts)),
-            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
-            rows = d3.range(Math.max(0, Math.floor((tile_origin[1] - height) / ts)),
-            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
-
-        cols.forEach(function(x) {
-            rows.forEach(function(y) { coords.push([Math.floor(z), x, y]); });
-        });
+            coords = this.tilesForView();
 
         var tmpl = this.tilebaseURL;
 
@@ -309,6 +327,8 @@ iD.renderer.Map.prototype = {
             .attr('transform', function(d) {
                 return 'translate(' + [(d[1] * ts) - tile_origin[0], (d[2] * ts) - tile_origin[1]] + ')';
             });
+        this.updateUIs();
+        this.download();
     },
 
     setCentre: function(loc) {
