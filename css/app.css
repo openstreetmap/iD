@@ -98,9 +98,10 @@ table th {
 #modebuttons button {
     width:100px;
     cursor:pointer;
+    display:inline-block;
     background:#fff;
     color:#555;
-    font:bold 19px/30px 'Helvetica Neue';
+    font:bold 19px/30px 'Helvetica Neue', sans-serif;
     border:0;
     border-right:1px solid #222;
     border-bottom:1px solid #222;

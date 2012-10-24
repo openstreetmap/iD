@@ -16,7 +16,7 @@ iD.renderer.Map = function(obj) {
         layers = {};
 
     var tagclasses = [
-        'highway', 'railway', 'motorway', 'amenity', 'landuse', 'building'];
+        'highway', 'railway', 'motorway', 'amenity', 'landuse', 'building', 'bridge'];
 
     var linegen = d3.svg.line()
         .x(function(d) { return projection(d)[0]; })
@@ -24,7 +24,8 @@ iD.renderer.Map = function(obj) {
 
     var zoombehavior = d3.behavior.zoom()
         .translate(projection.translate())
-        .scale(projection.scale());
+        .scale(projection.scale())
+        .scaleExtent([256, 134217728]);
 
     zoombehavior.on('zoom', redraw);
 
@@ -33,8 +34,9 @@ iD.renderer.Map = function(obj) {
         .attr({ width: width, height: width })
         .call(zoombehavior);
 
-    var clip = surface.append('defs')
-        .append('clipPath')
+    var defs = surface.append('defs');
+
+    var clipPath = defs.append('clipPath')
         .attr('id', 'clip')
         .append('rect')
         .attr('id', 'clip-rect')
@@ -46,18 +48,16 @@ iD.renderer.Map = function(obj) {
         container = surface.append('g')
             .attr('clip-path', 'url(#clip)');
 
-    var minlayer = -5, maxlayer = 5;
-    for (var l = minlayer; l <= maxlayer; l++) {
-        var r = container.append('g');
-        layers[l] = {
-            root: r,
-            fill: r.append('g'),
-            casing: r.append('g'),
-            stroke: r.append('g'),
-            text: r.append('g'),
-            hit: r.append('g')
-        };
-    }
+   var r = container.append('g');
+
+   layers[0] = {
+       root: r,
+       fill: r.append('g'),
+       casing: r.append('g'),
+       stroke: r.append('g'),
+       text: r.append('g'),
+       hit: r.append('g')
+   };
 
     var elastic = container.append('g');
 
@@ -77,21 +77,56 @@ iD.renderer.Map = function(obj) {
 
     function key(d) { return d._id; }
 
-    function classes(d) {
-        var tags = d.tags;
-        var c = [];
-        function clean(x) {
-            return tagclasses.indexOf(x) !== -1;
+    function classes(pre) {
+        return function(d) {
+            var tags = d.tags;
+            var c = [pre];
+            function clean(x) {
+                return tagclasses.indexOf(x) !== -1;
+            }
+            for (var k in tags) {
+                if (!clean(k)) continue;
+                c.push(k + '-' + tags[k]);
+                c.push(k);
+            }
+            if (selection.indexOf(d._id) !== -1) {
+                c.push('active');
+            }
+            return c.join(' ');
+        };
+    }
+
+    var icons = {
+        tourism: ['hotel'],
+        shop: [
+            'convenience',
+            'supermarket'],
+        amenity: 
+            [
+            'atm',
+            'bank',
+            'cafe',
+            'pub',
+            'place',
+            'parking',
+            'bicycle_parking',
+            'pharmacy',
+            'pharmacy',
+            'police',
+            'post_box',
+            'recycling',
+            'restaurant',
+            'school',
+            'taxi',
+            'telephone']
+    };
+
+    function markerimage(d) {
+        for (var k in icons) {
+            if (d.tags[k] && icons[k].indexOf(d.tags[k]) !== -1) {
+                return 'icons/' + d.tags[k] + '.png';
+            }
         }
-        for (var k in tags) {
-            if (!clean(k)) continue;
-            c.push(k + '-' + tags[k]);
-            c.push(k);
-        }
-        if (selection.indexOf(d._id) !== -1) {
-            c.push('active');
-        }
-        return c.join(' ');
     }
 
     function selectClick(d) {
@@ -99,58 +134,67 @@ iD.renderer.Map = function(obj) {
         drawVector();
     }
 
+    function nodeline(d) {
+        return linegen(d.nodes);
+    }
+
+    var highway_stack = [
+        'motorway',
+        'motorway_link',
+        'trunk',
+        'trunk_link',
+        'primary',
+        'primary_link',
+        'secondary',
+        'tertiary',
+        'unclassified',
+        'residential',
+        'service',
+        'footway'
+    ];
+
+    function waystack(a, b) {
+        if (!a || !b) return 0;
+        if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
+            return a.tags.layer - b.tags.layer;
+        }
+        if (a.tags.bridge) return 1;
+        if (b.tags.bridge) return -1;
+        var as = 0, bs = 0;
+        if (a.tags.highway && b.tags.highway) {
+            as -= highway_stack.indexOf(a.tags.highway);
+            bs -= highway_stack.indexOf(b.tags.highway);
+        }
+        return as - bs;
+    }
+
     function drawVector() {
         var all = connection.all();
 
         var ways = all.filter(function(a) {
-            return a.entityType === 'way' && !a.isClosed();
-        });
+                return a.entityType === 'way' && !a.isClosed();
+            }),
+            areas = all.filter(function(a) {
+                return a.entityType === 'way' && a.isClosed();
+            }),
+            points = all.filter(function(a) {
+                return a.entityType === 'node';
+            });
 
-        var areas = all.filter(function(a) {
-            return a.entityType === 'way' && a.isClosed();
-        });
-
-        var fills = layers[0].fill.selectAll('path.area')
-            .data(areas, key);
-
-        fills.enter().append('path')
-            .on('click', selectClick);
-
-        fills.exit().remove();
-
-        fills.attr('d', function(d) {
-            return linegen(d.nodes);
-        }).attr('class', function(d) {
-            return 'area ' + classes(d);
-        });
-
-        var casings = layers[0].casing.selectAll('path.casing')
-            .data(ways, key);
-
-        casings.enter().append('path');
-        casings.exit().remove();
-        casings.attr('d', function(d) {
-            return linegen(d.nodes);
-        }).attr('class', function(d) {
-            return 'casing ' + classes(d);
-        });
-
-        var strokes = layers[0].stroke.selectAll('path.stroke')
-            .data(ways, key);
-
-        strokes.enter().append('path')
-            .attr('class', function(d) {
-                return 'stroke ' + classes(d);
-            })
-            .on('click', selectClick);
-
-        strokes.exit().remove();
-
-        strokes.attr('d', function(d) {
-            return linegen(d.nodes);
-        }).attr('class', function(d) {
-            return 'stroke ' + classes(d);
-        });
+        var defpaths = defs.selectAll('path')
+                .data(ways, key),
+            fills = layers[0].fill.selectAll('path.area')
+                .data(areas, key),
+            casings = layers[0].casing.selectAll('use.casing')
+                .data(ways, key),
+            strokes = layers[0].stroke.selectAll('use.stroke')
+                .data(ways, key),
+            texts = layers[0].text.selectAll('text')
+                .data(ways.filter(function(w) {
+                    return !!w.tags.name;
+                }), key),
+            markers = layers[0].hit.selectAll('image.marker')
+                .data(points, key);
 
         var _id = selection[0];
         var active_entity = all.filter(function(a) {
@@ -160,13 +204,62 @@ iD.renderer.Map = function(obj) {
         var handles = layers[0].hit.selectAll('circle.handle')
             .data(active_entity.length ? active_entity[0].nodes : [], key);
 
+        defpaths.exit().remove();
+        texts.exit().remove();
+        handles.exit().remove();
+        fills.exit().remove();
+        markers.exit().remove();
+        casings.exit().remove();
+        strokes.exit().remove();
+
+        defpaths.enter().append('path');
+
+        defpaths.attr('d', nodeline)
+            .attr('id', function(d) {
+                return 'd' + d._id;
+            });
+
+        function usehref(d) {
+            return '#d' + d._id;
+        }
+
+        fills.enter().append('path')
+            .on('click', selectClick);
+
+        fills.attr('d', nodeline)
+            .attr('class', classes('area'));
+
+        casings.enter().append('use');
+        casings.sort(waystack)
+            .attr('xlink:href', usehref)
+            .attr('class', classes('casing'));
+
+        strokes.enter().append('use')
+            .on('click', selectClick);
+
+        strokes.sort(waystack).attr('xlink:href', usehref)
+            .attr('class', classes('stroke'));
+
+        markers.enter().append('image');
+        markers.attr('class', classes('marker'))
+            .attr({ width: 16, height: 16 })
+            .attr('xlink:href', markerimage)
+            .attr('transform', function(d) {
+                return 'translate(' + projection(d) + ')';
+            });
+
+        var textems = texts.enter().append('text')
+            .attr('dy', 3);
+
+        textems.append('textPath')
+            .attr('xlink:href', usehref)
+            .attr('startOffset', '50%')
+            .text(function(d) { return d.tags.name; });
+
         handles.enter().append('circle')
             .attr('class', 'handle')
             .attr('r', 5)
             .on('click', selectClick);
-
-        handles.exit().remove();
-
         handles.attr('transform', function(d) {
             return 'translate(' + projection(d) + ')';
         });
