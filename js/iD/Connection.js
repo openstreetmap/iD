@@ -1,11 +1,5 @@
-// define(["dojo/_base/xhr","dojo/_base/lang","dojox/xml/DomParser","dojo/_base/array",'dojo/_base/declare',
-//         "iD/Entity","iD/Node","iD/Way","iD/Relation","iD/actions/CreateEntityAction"],
-//        function(xhr,lang,DomParser,array,declare,Entity){
-
-// ----------------------------------------------------------------------
-// Connection base class
-
 if (typeof iD === 'undefined') iD = {};
+
 iD.Connection = function(apiURL) {
     // summary:		The data store, including methods to fetch data from (and, eventually, save data to)
     // an OSM API server.
@@ -20,12 +14,16 @@ iD.Connection = function(apiURL) {
 
     var connection = {};
 
+    function all() {
+        return _.values(entities);
+    }
+
     function assign(obj) {
         // summary:	Save an entity to the data store.
-        switch (obj.entityType) {
-            case "node": entities[obj.id] = obj; break;
-            case "way": entities[obj.id] = obj; break;
-            case "relation": relations[obj.id] = obj; break;
+        if (obj.entityType === 'node' || obj.entityType === 'way') {
+            entities[obj.id] = obj;
+        } else if (obj.entityType === 'relation') {
+            relations[obj.id] = obj;
         }
     }
 
@@ -64,70 +62,81 @@ iD.Connection = function(apiURL) {
         return relation;
     }
 
-    function getObjectsByBbox(left,right,top,bottom) {
+    function getObjectsByBbox(extent) {
         // summary:	Find all drawable entities that are within a given bounding box.
         // Each one is an array of entities.
-        var o = {
-            inside: [],
-            outside: []
-        };
-        _.each(this.entities, function(e, id) {
-            if (e.within(left, right, top, bottom)) { o.inside.push(e); }
-            else { o.outside.push(e); }
+        return _.filter(this.entities, function(e, id) {
+            return e.within(extent);
         });
-        return o;
-    }
-
-    // ------------
-    // POI handling
-    function updatePOIs(nodelist) {
-        // summary:		Update the list of POIs (nodes not in ways) from a supplied array of nodes.
-        _.each(nodelist, function(node) {
-            if (node.entity.hasParentWays()) {
-                delete pois[node._id];
-            } else {
-                pois[node._id] = node;
-            }
-        });
-    }
-
-    function getPOIs() {
-        // summary:		Return a list of all the POIs in connection Connection.
-        return _.values(pois);
-    }
-
-    function registerPOI(node) {
-        // summary:		Register a node as a POI (not in a way).
-        pois[node._id] = node;
-    }
-
-    function unregisterPOI(node) {
-        // summary:		Mark a node as no longer being a POI (it's now in a way).
-        delete pois[node._id];
     }
 
     // ----------
     // OSM parser
-
     function loadFromAPI(box, callback) {
         // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
         // to use Overpass API (which has the relevant CORS headers).
         loadFromURL("http://www.overpass-api.de/api/xapi?map?bbox=" +
-            [box.west, box.south, box.east, box.north], callback);
+            [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
     }
 
     function loadFromURL(url, callback) {
         // summary:		Load all data from a given URL.
         $.ajax({
             url: url,
-            headers: { "X-Requested-With": null },
             success: parse(callback)
         });
     }
 
+    // Private functions to parse DOM created from XML file
+    function filterNodeName(n) {
+        return function(item) { return item.nodeName === n; };
+    }
+
+    function getAttribute(obj, name) {
+        return _.find(obj.attributes, filterNodeName(name)).nodeValue;
+    }
+
+    function getTags(obj) {
+        var tags = {};
+        // Doesn't use underscore for performance reasons
+        for (var i = 0; i < obj.childNodes.length; i++) {
+            var item = obj.childNodes[i];
+            if (item.nodeName === 'tag') {
+                tags[getAttribute(item,'k')] = getAttribute(item,'v');
+            }
+        }
+        return tags;
+    }
+
+    function getNodes(obj) {
+        var nodes = [];
+        // Doesn't use underscore for performance reasons
+        for (var i = 0; i < obj.childNodes.length; i++) {
+            var item = obj.childNodes[i];
+            if (item.nodeName === 'nd') {
+                nodes.push(entities[getAttribute(item,'ref')]);
+            }
+        }
+        return nodes;
+    }
+
+    function getMembers(obj) {
+        return _(obj.childNodes).chain()
+            .filter(filterNodeName('member'))
+            .map(function(item) {
+                var id = getAttribute(item,'ref'),
+                type = getAttribute(item,'type'),
+                role = getAttribute(item,'role');
+
+                var obj = getOrCreate(id,type);
+                return new iD.RelationMember(obj,role);
+            }).value();
+    }
+
     function parse(callback) {
         return function(dom) {
-            var nodelist = _.compact(_.map(dom.childNodes[0].childNodes, function(obj) {
+            for (var i = 0; i < dom.childNodes[0].childNodes.length; i++) {
+                var obj = dom.childNodes[0].childNodes[i];
                 if (obj.nodeName === 'node') {
                     var node = new iD.Node(connection,
                         +getAttribute(obj, 'id'),
@@ -135,7 +144,6 @@ iD.Connection = function(apiURL) {
                         +getAttribute(obj, 'lon'),
                         getTags(obj));
                     assign(node);
-                    return node;
                 } else if (obj.nodeName === 'way') {
                     var way = new iD.Way(connection,
                         getAttribute(obj, 'id'),
@@ -149,51 +157,13 @@ iD.Connection = function(apiURL) {
                         getTags(obj));
                     assign(relation);
                 }
-            }));
-            updatePOIs(nodelist);
-            if (callback) { callback(nodelist); }
-
-            // Private functions to parse DOM created from XML file
-            function filterNodeName(n) {
-                return function(item) { return item.nodeName === n; };
             }
-
-            function getAttribute(obj, name) {
-                return _.find(obj.attributes, filterNodeName(name)).nodeValue;
-            }
-
-            function getTags(obj) {
-                return _(obj.childNodes).chain()
-                .filter(filterNodeName('tag'))
-                .map(function(item) {
-                    return [getAttribute(item,'k'), getAttribute(item,'v')];
-                }).object().value();
-            }
-
-            function getNodes(obj) {
-                return _(obj.childNodes).chain()
-                .filter(filterNodeName('nd'))
-                .map(function(item) {
-                    return entities[getAttribute(item,'ref')];
-                }).value();
-            }
-
-            function getMembers(obj) {
-                return _(obj.childNodes).chain()
-                    .filter(filterNodeName('member'))
-                    .map(function(item) {
-                        var id = getAttribute(item,'ref'),
-                        type = getAttribute(item,'type'),
-                        role = getAttribute(item,'role');
-
-                        var obj = getOrCreate(id,type);
-                        return new iD.RelationMember(obj,role);
-                    }).value();
-            }
+            callback();
         };
     }
 
     connection.entities = entities;
+    connection.all = all;
     connection.relations = relations;
     connection.loadFromAPI = loadFromAPI;
     connection.loadFromURL = loadFromURL;
@@ -201,9 +171,6 @@ iD.Connection = function(apiURL) {
     connection.doCreateNode = doCreateNode;
     connection.doCreateWay = doCreateWay;
     connection.doCreateRelation = doCreateRelation;
-    connection.registerPOI = registerPOI;
-    connection.unregisterPOI = unregisterPOI;
-    connection.getPOIs = getPOIs;
 
     return connection;
 };

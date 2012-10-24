@@ -1,11 +1,7 @@
-// iD/controller/edit/SelectedWayNode.js
-
-define(['dojo/_base/declare','iD/controller/edit/EditBaseState'], function(declare){
-
 // ----------------------------------------------------------------------
 // SelectedWayNode class
-
-declare("iD.controller.edit.SelectedWayNode", [iD.controller.edit.EditBaseState], {
+iD.controller.edit.SelectedWayNode = function() {};
+iD.controller.edit.SelectedWayNode.prototype = {
 
 	node: null,
 	way: null,
@@ -53,8 +49,4 @@ declare("iD.controller.edit.SelectedWayNode", [iD.controller.edit.EditBaseState]
         return this;
     }
 
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};
