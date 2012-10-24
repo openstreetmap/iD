@@ -67,8 +67,4 @@ iD.styleparser.RuleChain.prototype = {
         }
         return false;
     }
-});
-
-// ----------------------------------------------------------------------
-// End of module
-});
+};

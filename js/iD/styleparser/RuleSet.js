@@ -7,12 +7,6 @@ iD.styleparser.RuleSet = function() {};
 iD.styleparser.RuleSet.prototype = {
 
     choosers: [],		// list of StyleChoosers
-    callback: null,
-
-    registerCallback: function(callback) {
-        // summary:		Set a callback function to be called when the CSS is loaded and parsed.
-        this.callback = callback;
-    },
 
     getStyles: function(entity, tags, zoom) {
         // summary:		Find the styles for a given entity.
@@ -23,15 +17,16 @@ iD.styleparser.RuleSet.prototype = {
         return sl;	// iD.styleparser.StyleList
     },
 
-    loadFromCSS:function(url) {
+    loadFromCSS: function(url, callback) {
         // summary:		Load a MapCSS file from a URL, then throw it at the parser when it's loaded.
+        this.callback = callback;
         $.ajax({
             url: url,
-            load: _.bind(this.parseCSS, this)
+            success: _.bind(this.parseCSS, this)
         });
     },
 
-    parseCSS:function(css) {
+    parseCSS: function(css) {
         // summary:		Parse a CSS document into a set of StyleChoosers.
         var previous=0;								// what was the previous CSS word?
         var sc = new iD.styleparser.StyleChooser();	// currently being assembled

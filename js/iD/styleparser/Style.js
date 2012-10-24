@@ -7,11 +7,9 @@ iD.styleparser.Style.prototype = {
 	interactive: true,
 	properties: [],
 	styleType: 'Style',
-	evals: null,
+	evals: {},
 
 	constructor: function() {
-		// summary:		Base class for a set of painting attributes, into which the CSS declaration is parsed.
-		this.evals = {};
 	},
 
 	drawn: function() {
@@ -77,6 +75,7 @@ iD.styleparser.InstructionStyle = function() {};
 iD.styleparser.InstructionStyle.prototype = {
 	set_tags: null,
 	breaker: false,
+	evals: {},
 	styleType: 'InstructionStyle',
 	addSetTag: function(k,v) {
 		this.edited=true;
@@ -93,11 +92,33 @@ iD.styleparser.PointStyle.prototype = {
 	properties: ['icon_image','icon_width','icon_height','rotation'],
 	icon_image: null,
 	icon_width: 0,
+	evals: {},
 	icon_height: NaN,
 	rotation: NaN,
 	styleType: 'PointStyle',
 	drawn:function() {
 		return (this.icon_image !== null);
+	},
+	
+	setPropertyFromString: function(k,v,isEval) {
+		this.edited=true;
+		if (isEval) { this.evals[k]=v; return; }
+
+		if (typeof(this[k])=='boolean') {
+			v=Boolean(v);
+		} else if (typeof(this[k])=='number') {
+			v=Number(v);
+		} else if (this[k] && this[k].constructor==Array) {
+			v = v.split(',').map(function(a) { return Number(a); });
+		}
+		this[k]=v; 
+		return true;
+	},
+
+
+
+	has: function(k) {
+		return this.properties.indexOf(k)>-1;
 	},
 	maxwidth:function() {
 		return this.evals.icon_width ? 0 : this.icon_width;
@@ -118,9 +139,31 @@ iD.styleparser.ShapeStyle.prototype = {
 	fill_image:null, fill_color:NaN, fill_opacity:NaN, 
 	casing_width:NaN, casing_color:NaN, casing_opacity:NaN, casing_dashes:[],
 
+	evals: {},
 	layer:NaN,				// optional layer override (usually set by OSM tag)
 	styleType: 'ShapeStyle',
 	
+	
+	setPropertyFromString: function(k,v,isEval) {
+		this.edited=true;
+		if (isEval) { this.evals[k]=v; return; }
+
+		if (typeof(this[k])=='boolean') {
+			v=Boolean(v);
+		} else if (typeof(this[k])=='number') {
+			v=Number(v);
+		} else if (this[k] && this[k].constructor==Array) {
+			v = v.split(',').map(function(a) { return Number(a); });
+		}
+		this[k]=v; 
+		return true;
+	},
+
+
+
+	has: function(k) {
+		return this.properties.indexOf(k)>-1;
+	},
 	drawn:function() {
 		return (this.fill_image || !isNaN(this.fill_color) || this.width || this.casing_width);
 	},
@@ -184,6 +227,7 @@ iD.styleparser.TextStyle.prototype = {
 	font_italic: false,
 	font_underline: false,
 	font_caps: false,
+	evals: {},
 	font_size: NaN,
 	text_color: NaN,
 	text_offset: NaN,
@@ -194,6 +238,23 @@ iD.styleparser.TextStyle.prototype = {
 	text_center: true,
 	letter_spacing: 0,
 	styleType: 'TextStyle',
+
+	
+	setPropertyFromString: function(k,v,isEval) {
+		this.edited=true;
+		if (isEval) { this.evals[k]=v; return; }
+
+		if (typeof(this[k])=='boolean') {
+			v=Boolean(v);
+		} else if (typeof(this[k])=='number') {
+			v=Number(v);
+		} else if (this[k] && this[k].constructor==Array) {
+			v = v.split(',').map(function(a) { return Number(a); });
+		}
+		this[k]=v; 
+		return true;
+	},
+
 
 	drawn: function() {
 		return (this.text !== null);
@@ -213,6 +274,10 @@ iD.styleparser.TextStyle.prototype = {
 			text: _text
 		};
 	},
+
+	has: function(k) {
+		return this.properties.indexOf(k)>-1;
+	},
 	fillStyler:function() {
 		// not implemented yet
 		return this.dojoColor(0,1);
@@ -230,6 +295,7 @@ iD.styleparser.ShieldStyle.prototype = {
 	shield_image: null,
 	shield_width: NaN,
 	shield_height: NaN,
+	evals: {},
 	styleType: 'ShieldStyle',
 	drawn:function() {
 		return (shield_image !== null);

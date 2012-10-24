@@ -8,30 +8,28 @@
 
 // ----------------------------------------------------------------------
 // WayUI class
-iD.renderer.WayUI = function() {};
+iD.renderer.WayUI = function(entity, map) {
+    this.entity = entity;
+    this.map = map;
+    this.draw();
+};
 
 iD.renderer.WayUI.prototype = {
 	getEnhancedTags: function() {
-		var tags = this.inherited(arguments);
+		var tags = this.entity.tags;
 		if (this.entity.isClosed()) { tags[':area']='yes'; }
 		return tags;
 	},
-	recalculate: function() {
-		// summary:		Not yet implemented - calculate length/centrepoint of UI for use in rendering.
-		// ** FIXME: todo
-	},
-	redraw: function() {
+	draw: function() {
 		// summary:		Draw the object and add hitzone sprites.
 		var way = this.entity,
             maxwidth = 4,
             i;
 
-		this.removeSprites();
 		if (!way.nodes.length) { return; }
 
 		// Create tags and calculate styleList
 		var tags = this.getEnhancedTags();
-		this.refreshStyleList(tags);
 
 		// List of co-ordinates
 		var coords = _.map(way.nodes, _.bind(function(node) {
@@ -41,91 +39,20 @@ iD.renderer.WayUI.prototype = {
             };
         }, this));
 
-		// Iterate through each subpart, drawing any styles on that layer
-		var drawn = false;
-		for (i = 0; i < this.styleList.subparts.length; i++) {
-			var subpart = this.styleList.subparts[i];
-			if (this.styleList.shapeStyles[subpart]) {
-				var s = this.styleList.shapeStyles[subpart], line;
+        var line = d3.svg.line()
+            .x(function(d) { return d.x; })
+            .y(function(d) { return d.y; })
+            .interpolate("linear");
 
-				// Stroke
-				if (s.width)  {
-                    line = this.targetGroup('stroke',s.sublayer)
-                        .createPolyline(coords)
-                        .setStroke(s.strokeStyler());
+        this.map.layers[0].casing.append("path")
+            .data([coords])
+            .attr('class', 'casing')
+            .attr("d", line);
 
-					this.recordSprite(line);
-					maxwidth = Math.max(maxwidth, s.width);
-					drawn = true;
-				}
-
-				// Fill
-				if (!isNaN(s.fill_color)) {
-                    line = this.targetGroup('fill',s.sublayer)
-                        .createPolyline(coords)
-                        .setFill(s.fillStyler());
-
-					this.recordSprite(line);
-					drawn = true;
-				}
-
-				// Casing
-				if (s.casing_width) {
-                    line = this.targetGroup('casing')
-                        .createPolyline(coords)
-                        .setStroke(s.casingStyler());
-
-					this.recordSprite(line);
-					maxwidth = Math.max(maxwidth, s.width + s.casing_width * 2);
-					drawn = true;
-				}
-			}
-
-			// Text label on path
-			if (this.styleList.textStyles[subpart]) {
-				var t = this.styleList.textStyles[subpart];
-				if (t.text && tags[t.text]) {
-					var tp=this.recordSprite(this.targetGroup('text')
-						.createTextPath(t.textStyler(tags[t.text]))
-						.setFont(t.fontStyler())
-						.setFill(t.fillStyler())
-						.moveTo(coords[0].x,coords[0].y));
-					for (var j=1; j<coords.length; j++) {
-						tp.lineTo(coords[j].x,coords[j].y);
-					}
-					// *** this next line is SVG-specific
-					tp.rawNode.setAttribute("pointer-events","none");
-				}
-			}
-
-		}
-
-		// Add hitzone sprite
-		if (drawn) {
-			var hit=this.recordSprite(this.targetGroup('hit')
-                .createPolyline(coords)
-                .setStroke({
-                    width: maxwidth+8,
-                    color: [0,0,0,0]
-                }));
-
-            var entityMouseEvent = _.bind(this.entityMouseEvent, this);
-			hit.source=this;
-			hit.connect("onclick", entityMouseEvent);
-			hit.connect("onmousedown", entityMouseEvent);
-			hit.connect("onmouseup", entityMouseEvent);
-			hit.connect("onmouseenter", entityMouseEvent);
-			hit.connect("onmouseleave", entityMouseEvent);
-		}
-		// Draw nodes
-		for (i=0; i<way.nodes.length; i++) {
-			var node=way.nodes[i];
-			var sc=[];
-			if (tags[':shownodes']) { sc.push('selectedway'); }
-			if (tags[':shownodeshover']) { sc.push('hoverway'); }
-			if (node.entity.parentWays().length>1) { sc.push('junction'); }
-			this.map.createUI(node,sc);
-		}
+        this.map.layers[0].stroke.append("path")
+            .data([coords])
+            .attr('class', 'stroke')
+            .attr("d", line);
 
         return this;
 	},

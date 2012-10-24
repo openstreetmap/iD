@@ -3,7 +3,8 @@
 if (typeof iD === 'undefined') iD = {};
 
 iD.Controller = function(map) {
-    var controller = {};
+    var controller = {},
+        state = null;
 
     controller.editorCache = {};
     controller.undoStack = new iD.UndoStack();

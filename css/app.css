@@ -38,6 +38,18 @@ table th {
     text-align:left;
 }
 
+path.casing {
+    fill: transparent;
+    stroke: #ace;
+    stroke-width: 6;
+}
+
+path.stroke {
+    fill: transparent;
+    stroke: #5F8594;
+    stroke-width: 4;
+}
+
 .help-pane {
     position:absolute;
     left:0;
