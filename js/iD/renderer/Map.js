@@ -305,11 +305,6 @@ iD.renderer.Map.prototype = {
             });
     },
 
-    updateCoordsFromViewportPosition: function(e) {
-        // summary:		Update centre and bbox from the current viewport origin.
-        this._updateCoords(this.containerx, this.containery);
-    },
-
     setCentre: function(loc) {
         // summary:		Update centre and bbox to a specified lat/lon.
         var t = this.projection.translate(),
@@ -323,21 +318,6 @@ iD.renderer.Map.prototype = {
     },
 
     setCenter: function(loc) { this.setCentre(loc); },
-
-    _updateCoords:function(x, y) {
-        // summary:		Set centre and bbox.
-        this.containerx = x;
-        this.containery = y;
-        this.centrelon = this.coord2lon(-x + this.mapwidth/2);
-        this.centrelat = this.coord2lat(-y + this.mapheight/2);
-
-        this.extent = {
-            north: this.coord2lat(-y),
-            south: this.coord2lat(-y + this.mapheight),
-            west: this.coord2lon(-x),
-            east: this.coord2lon(-x + this.mapwidth)
-        };
-    },
 
     clickSurface:function(e) {
         // summary:		Handle a click on an empty area of the map.
