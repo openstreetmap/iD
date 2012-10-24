@@ -4,16 +4,10 @@ iD.renderer.NodeUI = function(node, map) {
     this.draw();
 };
 iD.renderer.NodeUI.prototype = {
-    getEnhancedTags: function() {
-        var tags = this.node.tags;
-        if (!this.node.entity.hasParentWays()) { tags[':poi']='yes'; }
-        // add junction and dupe
-        return tags;
-    },
     draw: function() {
         // summary:		Draw the object (mostly icons) and add hitzone sprites.
         // Tags, position and styleList
-        var tags = this.getEnhancedTags();
+        var tags = this.node.tags;
 
         function getIcon(tags) {
             if (tags.amenity) {

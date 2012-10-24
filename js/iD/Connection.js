@@ -18,10 +18,10 @@ iD.Connection = function(apiURL) {
 
     function assign(obj) {
         // summary:	Save an entity to the data store.
-        switch (obj.entityType) {
-            case "node": entities[obj.id] = obj; break;
-            case "way": entities[obj.id] = obj; break;
-            case "relation": relations[obj.id] = obj; break;
+        if (obj.entityType === 'node' || obj.entityType === 'way') {
+            entities[obj.id] = obj;
+        } else if (obj.entityType === 'relation') {
+            relations[obj.id] = obj;
         }
     }
 
@@ -68,37 +68,8 @@ iD.Connection = function(apiURL) {
         });
     }
 
-    // ------------
-    // POI handling
-    function updatePOIs(nodelist) {
-        // summary:		Update the list of POIs (nodes not in ways) from a supplied array of nodes.
-        _.each(nodelist, function(node) {
-            if (node.entity.hasParentWays()) {
-                delete pois[node._id];
-            } else {
-                pois[node._id] = node;
-            }
-        });
-    }
-
-    function getPOIs() {
-        // summary:		Return a list of all the POIs in connection Connection.
-        return _.values(pois);
-    }
-
-    function registerPOI(node) {
-        // summary:		Register a node as a POI (not in a way).
-        pois[node._id] = node;
-    }
-
-    function unregisterPOI(node) {
-        // summary:		Mark a node as no longer being a POI (it's now in a way).
-        delete pois[node._id];
-    }
-
     // ----------
     // OSM parser
-
     function loadFromAPI(box, callback) {
         // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
         // to use Overpass API (which has the relevant CORS headers).
@@ -140,7 +111,6 @@ iD.Connection = function(apiURL) {
                     assign(relation);
                 }
             }));
-            updatePOIs(nodelist);
             if (callback) { callback(nodelist); }
 
             // Private functions to parse DOM created from XML file
@@ -191,9 +161,6 @@ iD.Connection = function(apiURL) {
     connection.doCreateNode = doCreateNode;
     connection.doCreateWay = doCreateWay;
     connection.doCreateRelation = doCreateRelation;
-    connection.registerPOI = registerPOI;
-    connection.unregisterPOI = unregisterPOI;
-    connection.getPOIs = getPOIs;
 
     return connection;
 };
