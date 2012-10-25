@@ -65,6 +65,13 @@ circle.handle {
     opacity:0.2;
 }
 
+.stroke.highway {
+    stroke-opacity:0.7;
+}
+.casing.highway {
+    stroke-opacity:0.2;
+}
+
 /* highways */
 .stroke.highway-residential {
     stroke:#E8E8E8;
@@ -139,4 +146,10 @@ circle.handle {
 text {
     font:9px 'Helvetica';
     text-anchor:middle;
+    fill:#fff;
+    text-shadow:
+       0 0 1px #000,
+       0 0 1px #000,
+       0 0 1px #000,
+       0 0 2px #000;
 }
