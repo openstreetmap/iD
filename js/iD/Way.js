@@ -7,7 +7,7 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
     this.id = id;
     this._id = iD.Util.id();
     this.deleted = false;
-    this.entity = new iD.Entity();
+    this.entity = iD.Entity();
     this.tags = tags || {};
     this.loaded = (loaded === undefined) ? true : loaded;
     this.modified = this.id < 0;

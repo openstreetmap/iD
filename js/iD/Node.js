@@ -6,7 +6,7 @@ iD.Node = function(connection, id, lat, lon, tags, loaded) {
 	this.connection = connection;
 	this.id = id;
 	this._id = iD.Util.id();
-	this.entity = new iD.Entity();
+	this.entity = iD.Entity();
 	this.lat = lat;
 	this.lon = lon;
     // TODO: keep or trash this custom

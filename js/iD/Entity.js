@@ -1,69 +1,53 @@
 if (typeof iD === 'undefined') iD = {};
 
 iD.Entity = function() {
-    this.parents = {};
-    // The ID locally
-    this._id = iD.Util.id();
-	this.connection =  null;
+    var entity = {};
+
     // The ID in OSM terms
-	this.id = NaN;
-	this.loaded = false;
-	this.entityType =  '';
-	this.modified = false;
-	this.deleted = false;
-};
-
-iD.Entity.prototype = {
-	toString:function() {
-		return this.entityType + " . " + this.id;
-	},
-
-	// Provoke redraw and other changes
-	refresh:function() {
-		// summary:		Ask the connection to provoke redraw and other changes.
-		this.connection.refreshEntity(this);
-	},
-
-	// Bounding box check (to be overridden)
-	within:function(left, right, top, bottom) {
-		// summary:		Is the entity within the specified bbox?
-		return !this.deleted;	// Boolean
-	},
+    entity.parents = {};
+	entity.connection =  null;
+    entity._id = iD.Util.id();
+	entity.id = NaN;
+	entity.loaded = false;
+	entity.entityType =  '';
+	entity.modified = false;
+	entity.deleted = false;
 
 	// Parent-handling
-	addParent: function(entity) {
+	entity.addParent = function(x) {
 		// summary:		Record a parent (a relation or way which contains this entity).
-		this.parents[entity._id] = entity;
-	},
-	removeParent: function(entity) {
+		entity.parents[x._id] = x;
+	};
+	entity.removeParent = function(x) {
 		// summary:		Remove a parent (e.g. when node removed from a way).
-        delete this.parents[entity._id];
-	},
-	hasParent: function(entity) {
+        delete entity.parents[x._id];
+	};
+	entity.hasParent = function(x) {
 		// summary:		Does this entity have the specified parent (e.g. is it in a certain relation)?
-		return !!this.parents[entity._id];
-	},
-	parentObjects: function() {
+		return !!entity.parents[x._id];
+	};
+	entity.parentObjects = function() {
 		// summary:		List of all parents of this entity.
-		return _.values(this.parents);
-	},
-	hasParentWays: function() {
+		return _.values(entity.parents);
+	};
+	entity.hasParentWays = function() {
 		// summary:		Does this entity have any parents which are ways?
-        return !!_.find(this.parentObjects(), function(p) {
+        return !!_.find(entity.parentObjects(), function(p) {
             return p.entityType === 'way';
         });
-	},
-	parentWays: function() {
-		// summary:		Return an array of all ways that this entity is a member of.
-		return this._parentObjectsOfClass('way');	// Array
-	},
-	parentRelations: function() {
-		// summary:		Return an array of all relations that this entity is a member of.
-		return this._parentObjectsOfClass('relation');	// Array
-	},
-	_parentObjectsOfClass: function(_class) {
-        return _.filter(this.parentObjects(), function(p) {
+	};
+	entity.parentWays = function() {
+		return entity._parentObjectsOfClass('way');
+	};
+	entity.parentRelations = function() {
+		return entity._parentObjectsOfClass('relation');
+	};
+	function _parentObjectsOfClass(_class) {
+        return _.filter(entity.parentObjects(), function(p) {
             return p.entityType === _class;
         });
 	}
+
+    return entity;
 };
+

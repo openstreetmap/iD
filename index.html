@@ -34,12 +34,13 @@
         <script type="text/javascript" src="js/iD/Way.js"></script>
         <script type="text/javascript" src="js/iD/Connection.js"></script>
         <script type="text/javascript" src="js/iD/Controller.js"></script>
+        <script type="text/javascript" src="js/iD/controller/DrawWay.js"></script>
 
         <div id='modebuttons'>
             <button id='add-place'>
-                + Place</button><!-- <button id="add-road">
+                + Place</button><button id="add-road">
                 + Road</button><button id="add-area">
-                + Area</button>--><button class='mini' id="undo">
+                + Area</button><button class='mini' id="undo">
                 &larr;</button><button class='mini' id="redo">
                 &rarr;</button><form action='GET' id='geocode-form'><input type='text' id='geocode-location' placeholder='find a place' />
             </form>
@@ -73,7 +74,7 @@
     // ----------------------------------------------------
     // Data is loaded and app ready to go
     // Set initial controllerState
-    map.controller.setState(new iD.controller.edit.NoSelection());
+    // map.controller.setState(iD.DrawWay());
 
     // ----------------------------------------------------
     // Mode button handlers
@@ -82,7 +83,9 @@
     });
 
     d3.select('#add-road').on('click', function() {
-        map.controller.setState(new iD.controller.shape.NoSelection('way'));
+        // map.controller.setState(new iD.controller.shape.DrawWay('way'));
+        console.log(iD.DrawWay.enter());
+        console.log(iD.DrawWay.enter(map));
     });
 
     d3.select('#add-area').on('click', function() {
@@ -106,6 +109,7 @@
         });
     });
 
+    /*
     $('#undo').click(function() {
         map.controller.undoStack.undo();
         map.updateUIs(true, true);
@@ -126,6 +130,7 @@
     $('#zoomOut').click(function() {
         map.zoomOut();
     });
+    */
 </script>
 </body>
 </html>

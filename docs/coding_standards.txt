@@ -1,22 +1,12 @@
 Coding standards and advice for iD
 ==================================
 
-Classes
+Objects
 -------
-All constructors must initialise objects and arrays. It is not enough to say
-	array:[],
-	constructor:function() {
-	},
 
-but rather, you should do
-	array: null,		// effectively a placeholder
-	constructor:function() {
-		this.array=[],
-	},
-	
-or bad things will happen. You should still declare the object outside the constructor, but for clarity rather than functionality.
-
-(This doesn't apply to simple types - numbers, strings, booleans - which you can declare as normal.)
+Most of iD is written with [a js module pattern](http://macwright.org/2012/06/04/the-module-pattern.html):
+that is, they do not use the `new` operator, and they use scope instead of
+`this` to reference variables and functions.
 
 Function names
 --------------
@@ -30,14 +20,10 @@ and commented as such. Underscores are also used to prefix private methods.
 
 File naming
 -----------
-The filename should be the name of the base class. You can add subclasses within that file for clarity. Don't add extra classes that aren't subclasses, unless they're not referenced from elsewhere.
+The filename should be the name of the base class. You can add subclasses within
+that file for clarity. Don't add extra classes that aren't subclasses,
+unless they're not referenced from elsewhere.
 
 Layout
 ------
-* Hard tabs, indent of 4.
-* Do not indent the root level of the module. Add an 'End of module' comment instead.
-
-Useful stuff to know about Dojo
--------------------------------
-* The array and lang modules are full of useful add-ons to basic JavaScript functionality. lang/hitch will save your life with scopes.
-
+* Soft tabs
