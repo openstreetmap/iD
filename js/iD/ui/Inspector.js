@@ -1,25 +1,44 @@
 iD.Inspector = function(selection) {
     var inspector = {};
-    var width = 300,
-        height = 600;
 
+    // http://jsfiddle.net/7WQjr/
     selection.each(function(d, i) {
-        var rows = d3.select(this)
-            .attr('class', 'inspector')
-            .attr('width', width)
-            .attr('height', height)
-            .selectAll('div.row')
-            .data(d3.entries(d.tags));
+        var tagpairs = d3.entries(d.tags);
 
-        rows.exit().remove();
+        d3.select(this).selectAll('table').remove();
 
-        var row = rows.enter().append('div.row').data(function(d) { return d; });
-        row.enter().append('input')
-            .attr('type', 'text')
-            .attr('value', function(d) { return d[0]; });
+        var table = d3.select(this)
+            .append('table')
+            .attr('class', 'inspector');
 
-        row.enter().append('input')
-            .attr('type', 'text')
-            .attr('value', function(d) { return d[1]; });
+        var thead = table.append('thead');
+        var tbody = table.append('tbody');
+
+        thead.append('tr')
+            .selectAll('th')
+            .data(['tag', 'value'])
+            .enter()
+            .append('th')
+                .text(String);
+
+        var row = tbody.selectAll('tr')
+            .data(tagpairs)
+            .enter()
+            .append('tr');
+
+        row.selectAll('td')
+            .data(function(d) {
+                return [d.key, d.value];
+            })
+            .enter()
+            .append('td')
+            .append('input')
+                .attr('class', function(d, i) {
+                    return i === 0 ? 'tag-input' : 'value-input';
+                })
+                .attr('placeholder', function(d, i) {
+                    return i === 0 ? 'tag' : 'value';
+                })
+                .property('value', function(d) { return d; });
     });
 };

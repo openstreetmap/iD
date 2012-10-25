@@ -36,7 +36,6 @@ iD.renderer.Map = function(obj) {
 
     var defs = surface.append('defs');
 
-    var inspector_elem = d3.select(document.body).append('div');
 
     var clipPath = defs.append('clipPath')
         .attr('id', 'clip')
@@ -134,7 +133,7 @@ iD.renderer.Map = function(obj) {
     function selectClick(d) {
         select(d);
         drawVector();
-        inspector_elem.datum(d).call(iD.Inspector);
+        d3.select('.inspector-wrap').datum(d).call(iD.Inspector);
     }
 
     function nodeline(d) {

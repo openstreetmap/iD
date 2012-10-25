@@ -53,8 +53,10 @@ table {
 table th {
     text-align:left;
 }
-
-
+table td {
+    padding:0;
+    border-spacing:0;
+}
 
 .help-pane {
     position:absolute;
@@ -68,14 +70,6 @@ table th {
 .help-pane div {
     padding:10px;
     font-style:italic;
-}
-
-#map.state-drawing {
-    cursor: crosshair;
-}
-
-.currentMode {
-    font-weight: bold;
 }
 
 #modebuttons {
@@ -152,44 +146,33 @@ table th {
     border-radius: 0 4px 4px 0;
 }
 
-/* Tag window */
-#tagform input.key {
-    margin-right:10px;
-}
-#tagform input.key,
-#tagform input.value {
-    font: normal 13px/20px 'Helvetica';
-    width:135px;
-}
-
-.inspector {
+.inspector-wrap {
     position:absolute;
-    background:#fff;
+    top:90px;
+    right:20px;
     overflow:auto;
-    top:50px;
-    right:10px;
-    box-shadow:#222 0px 0px 3px;
+    padding:10px;
+    background:#aaa;
 }
 
-.edit-pane a.close {
-    position:absolute;
-    top:5px;
-    right:10px;
-    font-weight:bold;
-    text-decoration:none;
-    font-size:20px;
-    color:#DD4848;
+.inspector thead th {
+    font-size:10px;
+    line-height:10px;
+    color:#eee;
+    font-weight:normal;
+    text-transform:uppercase;
 }
-.edit-pane table {
-    width:290px;
-    margin:5px;
+
+.inspector input {
+    margin:0;
+    padding:2px;
+    border:0;
+    border-bottom:1px solid #ccc;
+    width:150px;
 }
-.edit-pane table th,
-.edit-pane table td {
-    padding:2px 2px;
-}
-.edit-pane table td input {
-    width:140px;
+
+.inspector input.tag-input {
+    box-shadow: inset -2px 0 10px #EEE
 }
 
 .presets h3 {
