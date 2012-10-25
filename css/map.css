@@ -68,10 +68,10 @@ circle.handle {
 /* highways */
 .stroke.highway-residential {
     stroke:#E8E8E8;
-    stroke-width:5;
+    stroke-width:8;
 }
 .casing.highway-residential {
-    stroke-width:7;
+    stroke-width:10;
 }
 
 .stroke.highway-unclassified,
@@ -82,7 +82,20 @@ circle.handle {
 
 .stroke.highway-service {
     stroke:#fff;
-    stroke-width:2;
+    stroke-width:4;
+}
+.casing.highway-service {
+    stroke-width:6;
+}
+
+.stroke.highway-footway {
+    stroke: #ff6257;
+    stroke-width: 3;
+    stroke-dasharray: 6, 6;
+}
+.casing.highway-footway {
+    stroke-width: 3;
+    stroke: #fff;
 }
 
 .stroke.highway-motorway, .stroke.highway-motorway_link {
@@ -99,18 +112,18 @@ circle.handle {
 
 .stroke.highway-primary, .stroke.highway-primary_link {
     stroke:#E46D71;
-    stroke-width:8;
+    stroke-width:10;
 }
 .casing.highway-primary, .casing.highway-primary_link {
-    stroke-width:10;
+    stroke-width:12;
 }
 
 .stroke.highway-secondary, .stroke.highway-secondary_link {
     stroke:#FDBF6F;
-    stroke-width:7;
+    stroke-width:9;
 }
 .casing.highway-secondary, .casing.highway-secondary_link {
-    stroke-width:9;
+    stroke-width:11;
 }
 
 .stroke.bridge-yes {
