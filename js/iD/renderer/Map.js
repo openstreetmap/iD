@@ -119,7 +119,7 @@ iD.renderer.Map = function(obj) {
         shop: [
             'convenience',
             'supermarket'],
-        amenity: 
+        amenity:
             [
             'atm',
             'bank',
@@ -208,12 +208,8 @@ iD.renderer.Map = function(obj) {
                 .data(ways, key),
             strokes = layers[0].stroke.selectAll('use.stroke')
                 .data(ways, key),
-            texts = layers[0].text.selectAll('text')
-                .data(ways.filter(function(w) {
-                    return !!w.tags.name;
-                }), key),
             markers = layers[0].hit.selectAll('image.marker')
-                .data(points, key);
+                .data(points.filter(markerimage), key);
 
         var _id = selection[0];
         var active_entity = all.filter(function(a) {
@@ -224,7 +220,6 @@ iD.renderer.Map = function(obj) {
             .data(active_entity.length ? active_entity[0].nodes : [], key);
 
         defpaths.exit().remove();
-        texts.exit().remove();
         handles.exit().remove();
         fills.exit().remove();
         markers.exit().remove();
@@ -267,14 +262,6 @@ iD.renderer.Map = function(obj) {
                 return 'translate(' + projection(d) + ')';
             });
 
-        var textems = texts.enter().append('text')
-            .attr('dy', 3);
-
-        textems.append('textPath')
-            .attr('xlink:href', usehref)
-            .attr('startOffset', '50%')
-            .text(function(d) { return d.tags.name; });
-
         handles.enter().append('circle')
             .attr('class', 'handle')
             .attr('r', 5)
@@ -283,7 +270,7 @@ iD.renderer.Map = function(obj) {
             return 'translate(' + projection(d) + ')';
         });
     }
-    
+
     // -------------
     // Zoom handling
     function zoomIn() {

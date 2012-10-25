@@ -20,10 +20,16 @@ iD.Connection = function(apiURL) {
 
     function assign(obj) {
         // summary:	Save an entity to the data store.
-        if (obj.entityType === 'node' || obj.entityType === 'way') {
-            entities[obj.id] = obj;
+        if (obj.entityType === 'node') { // never reassign nodes
+            if (!entities[obj.id]) entities[obj.id] = obj;
+        } else if (obj.entityType === 'way') {
+            if (!entities[obj.id]) {
+                entities[obj.id] = obj;
+            } else {
+                entities[obj.id].nodes = obj.nodes;
+            }
         } else if (obj.entityType === 'relation') {
-            relations[obj.id] = obj;
+            if (!relations[obj.id]) relations[obj.id] = obj;
         }
     }
 
@@ -92,8 +98,20 @@ iD.Connection = function(apiURL) {
         return function(item) { return item.nodeName === n; };
     }
 
+    function attributeObject(obj) {
+        var o = {};
+        for (var i = 0; i < obj.attributes.length; i++) {
+            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
+        }
+        return o;
+    }
+
     function getAttribute(obj, name) {
-        return _.find(obj.attributes, filterNodeName(name)).nodeValue;
+        for (var i = 0; i < obj.attributes.length; i++) {
+            if (obj.attributes[i].nodeName === name) {
+                return obj.attributes[i].nodeValue;
+            }
+        }
     }
 
     function getTags(obj) {
@@ -128,31 +146,34 @@ iD.Connection = function(apiURL) {
                 type = getAttribute(item,'type'),
                 role = getAttribute(item,'role');
 
-                var obj = getOrCreate(id,type);
-                return new iD.RelationMember(obj,role);
+                var obj = getOrCreate(id, type);
+                return new iD.RelationMember(obj, role);
             }).value();
     }
 
     function parse(callback) {
         return function(dom) {
             for (var i = 0; i < dom.childNodes[0].childNodes.length; i++) {
-                var obj = dom.childNodes[0].childNodes[i];
+                var obj = dom.childNodes[0].childNodes[i], attrib;
                 if (obj.nodeName === 'node') {
+                    attrib = attributeObject(obj);
                     var node = new iD.Node(connection,
-                        +getAttribute(obj, 'id'),
-                        +getAttribute(obj, 'lat'),
-                        +getAttribute(obj, 'lon'),
+                        +attrib.id,
+                        +attrib.lat,
+                        +attrib.lon,
                         getTags(obj));
                     assign(node);
                 } else if (obj.nodeName === 'way') {
+                    attrib = attributeObject(obj);
                     var way = new iD.Way(connection,
-                        getAttribute(obj, 'id'),
+                        attrib.id,
                         getNodes(obj, connection),
                         getTags(obj));
                     assign(way);
                 } else if (obj.nodeName === 'relation') {
+                    attrib = attributeObject(obj);
                     var relation = new iD.Relation(connection,
-                        getAttribute(obj, 'id'),
+                        attrib.id,
                         getMembers(obj, connection),
                         getTags(obj));
                     assign(relation);
