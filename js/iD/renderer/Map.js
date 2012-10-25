@@ -27,6 +27,24 @@ iD.renderer.Map = function(obj) {
         .scale(projection.scale())
         .scaleExtent([256, 134217728]);
 
+    var dragbehavior = d3.behavior.drag()
+        .origin(function(d) {
+            var p = projection(d);
+            return { x: p[0], y: p[1] };
+        })
+        .on("drag", dragmove);
+
+   // http://bl.ocks.org/1557377
+   function dragmove(d) {
+      d3.select(this).attr('transform', function() {
+          return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
+      });
+      var ll = projection.invert([d3.event.x, d3.event.y]);
+      d[0] = ll[0];
+      d[1] = ll[1];
+      drawVector();
+    }
+
     zoombehavior.on('zoom', redraw);
 
     var surface = d3.selectAll(obj.selector)
@@ -35,7 +53,6 @@ iD.renderer.Map = function(obj) {
         .call(zoombehavior);
 
     var defs = surface.append('defs');
-
 
     var clipPath = defs.append('clipPath')
         .attr('id', 'clip')
@@ -261,7 +278,7 @@ iD.renderer.Map = function(obj) {
         handles.enter().append('circle')
             .attr('class', 'handle')
             .attr('r', 5)
-            .on('click', selectClick);
+            .call(dragbehavior);
         handles.attr('transform', function(d) {
             return 'translate(' + projection(d) + ')';
         });
