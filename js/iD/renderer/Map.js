@@ -208,13 +208,11 @@ iD.Map = function(obj) {
                 return a.entityType === 'node';
             });
 
-        var defpaths = defs.selectAll('path')
-                .data(ways, key),
-            fills = layers[0].fill.selectAll('path.area')
+        var fills = layers[0].fill.selectAll('path.area')
                 .data(areas, key),
-            casings = layers[0].casing.selectAll('use.casing')
+            casings = layers[0].casing.selectAll('path.casing')
                 .data(ways, key),
-            strokes = layers[0].stroke.selectAll('use.stroke')
+            strokes = layers[0].stroke.selectAll('path.stroke')
                 .data(ways, key),
             markers = layers[0].hit.selectAll('image.marker')
                 .data(points.filter(markerimage), key);
@@ -227,23 +225,11 @@ iD.Map = function(obj) {
         var handles = layers[0].hit.selectAll('circle.handle')
             .data(active_entity.length ? active_entity[0].nodes : [], key);
 
-        defpaths.exit().remove();
         handles.exit().remove();
         fills.exit().remove();
         markers.exit().remove();
         casings.exit().remove();
         strokes.exit().remove();
-
-        defpaths.enter().append('path');
-
-        defpaths.attr('d', nodeline)
-            .attr('id', function(d) {
-                return 'd' + d._id;
-            });
-
-        function usehref(d) {
-            return '#d' + d._id;
-        }
 
         fills.enter().append('path')
             .on('click', selectClick);
@@ -251,15 +237,16 @@ iD.Map = function(obj) {
         fills.attr('d', nodeline)
             .attr('class', classes('area'));
 
-        casings.enter().append('use');
+        casings.enter().append('path');
         casings.order()
-            .attr('xlink:href', usehref)
+            .attr('d', nodeline)
             .attr('class', classes('casing'));
 
-        strokes.enter().append('use')
+        strokes.enter().append('path')
             .on('click', selectClick);
 
-        strokes.order().attr('xlink:href', usehref)
+        strokes.order()
+            .attr('d', nodeline)
             .attr('class', classes('stroke'));
 
         markers.enter().append('image');
