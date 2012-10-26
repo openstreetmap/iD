@@ -18,6 +18,7 @@ circle.handle {
 
 .casing {
     stroke: #111;
+    stroke-linecap:round;
     stroke-width: 3;
 }
 
@@ -29,6 +30,7 @@ circle.handle {
 
 .stroke {
     stroke: #555;
+    stroke-linecap:round;
     stroke-width: 2;
 }
 
@@ -68,15 +70,6 @@ circle.handle {
     fill: #444;
     opacity:0.2;
 }
-
-/*
-.stroke.highway {
-    stroke-opacity:0.7;
-}
-.casing.highway {
-    stroke-opacity:0.7;
-}
-*/
 
 /* highways */
 .stroke.highway-residential {
@@ -124,7 +117,7 @@ circle.handle {
 }
 
 .stroke.highway-primary, .stroke.highway-primary_link {
-    stroke:#E46D71;
+    stroke:#FD969A;
     stroke-width:10;
 }
 .casing.highway-primary, .casing.highway-primary_link {

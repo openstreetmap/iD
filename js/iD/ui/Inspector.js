@@ -1,41 +1,66 @@
 iD.Inspector = function(selection) {
-    var inspector = {};
+    var event = d3.dispatch('change', 'update');
 
-    // http://jsfiddle.net/7WQjr/
-    selection.each(function(d, i) {
-        d3.select(this).selectAll('table').remove();
+    function inspector(selection) {
+        // http://jsfiddle.net/7WQjr/
+        selection.each(function(d, i) {
+            d3.select(this).selectAll('table,button').remove();
 
-        var table = d3.select(this)
-            .append('table')
-            .attr('class', 'inspector');
+            var table = d3.select(this)
+                .append('table')
+                .attr('class', 'inspector');
 
-        var tbody = table.append('tbody');
+            var tbody = table.append('tbody');
 
-        table.append('thead').append('tr').selectAll('th')
-            .data(['tag', 'value'])
-            .enter()
-            .append('th')
-                .text(String);
+            table.append('thead').append('tr').selectAll('th')
+                .data(['tag', 'value'])
+                .enter()
+                .append('th')
+                    .text(String);
 
-        var row = tbody.selectAll('tr')
-            .data(d3.entries(d.tags))
-            .enter()
-            .append('tr');
+            var row = tbody.selectAll('tr')
+                .data(d3.entries(d.tags))
+                .enter()
+                .append('tr');
 
-        row.append('td').append('input')
-            .property('value', function(d) { return d.key; });
+            row.append('td').append('input')
+                .property('value', function(d) { return d.key; })
+                .on('change', function(row) {
+                    row.key = this.key;
+                    event.update(d, newtags());
+                });
 
-        row.append('td').append('input')
-            .attr('class', 'tag-value')
-            .property('value', function(d) { return d.value; });
+            row.append('td').append('input')
+                .attr('class', 'tag-value')
+                .property('value', function(d) { return d.value; })
+                .on('change', function(row) {
+                    row.value = this.value;
+                    event.update(d, newtags());
+                });
 
-        var save = d3.select(this)
-            .append('button')
-            .text('Save')
-            .on('click', function(d, i) {
+            // TODO: there must be a function for this
+            function unentries(x) {
+                var obj = {};
+                for (var i = 0; i < x.length; i++) {
+                    obj[x[i].key] = x[i].value;
+                }
+                return obj;
+            }
+
+            function newtags() {
                 var inputs = table.selectAll('input.tag-value')
                     .data();
-                console.log(inputs);
-            });
-    });
+                return unentries(inputs);
+            }
+
+            var save = d3.select(this)
+                .append('button')
+                .text('Save')
+                .on('click', function(d, i) {
+                    event.change(d, newtags());
+                });
+        });
+    }
+
+    return d3.rebind(inspector, event, 'on');
 };

@@ -15,6 +15,8 @@ iD.Map = function(obj) {
         connection = obj.connection,
         layers = {};
 
+    var inspector = iD.Inspector();
+
     var tagclasses = [
         'highway', 'railway', 'motorway', 'amenity', 'landuse', 'building', 'bridge'];
 
@@ -150,8 +152,13 @@ iD.Map = function(obj) {
     function selectClick(d) {
         select(d);
         drawVector();
-        d3.select('.inspector-wrap').datum(d).call(iD.Inspector);
+        d3.select('.inspector-wrap').datum(d).call(inspector);
     }
+
+    inspector.on('update', function(way, tags) {
+        connection.entities[way.id].tags = tags;
+        drawVector();
+    });
 
     function nodeline(d) {
         return linegen(d.nodes);
@@ -192,7 +199,7 @@ iD.Map = function(obj) {
 
         var ways = all.filter(function(a) {
                 return a.entityType === 'way' && !a.isClosed();
-            }),
+            }).sort(waystack),
             areas = all.filter(function(a) {
                 return a.entityType === 'way' && a.isClosed();
             }),
@@ -244,14 +251,14 @@ iD.Map = function(obj) {
             .attr('class', classes('area'));
 
         casings.enter().append('use');
-        casings.sort(waystack)
+        casings.order()
             .attr('xlink:href', usehref)
             .attr('class', classes('casing'));
 
         strokes.enter().append('use')
             .on('click', selectClick);
 
-        strokes.sort(waystack).attr('xlink:href', usehref)
+        strokes.order().attr('xlink:href', usehref)
             .attr('class', classes('stroke'));
 
         markers.enter().append('image');
@@ -271,15 +278,11 @@ iD.Map = function(obj) {
         });
     }
 
-    // -------------
-    // Zoom handling
     function zoomIn() {
-        // summary:	Zoom in by one level (unless maximum reached).
         return setZoom(getZoom() + 1);
     }
 
     function zoomOut() {
-        // summary:	Zoom out by one level (unless minimum reached).
         return setZoom(getZoom() - 1);
     }
 
