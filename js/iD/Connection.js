@@ -85,10 +85,7 @@ iD.Connection = function(apiURL) {
 
     function loadFromURL(url, callback) {
         // summary:		Load all data from a given URL.
-        $.ajax({
-            url: url,
-            success: parse(callback)
-        });
+        d3.xml(url, parse(callback));
     }
 
     // Private functions to parse DOM created from XML file

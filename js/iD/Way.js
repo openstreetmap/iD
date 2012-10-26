@@ -28,9 +28,7 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
 
 iD.Way.prototype = {
 
-
     // JOSM: http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/data/osm/Way.java#L466
-
     isClosed: function() {
         // summary:	Is this a closed way (first and last nodes the same)?
         return this.nodes.length > 1 &&
