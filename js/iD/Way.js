@@ -19,14 +19,20 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
     this.tags = tags || {};
     this.loaded = (loaded === undefined) ? true : loaded;
     this.modified = this.id < 0;
-    this.nodes = nodes || [];
+    this.nodes = [];
     this.extent = {};
+
     for (var i = 0; i < nodes.length; i++) {
-        nodes[i].entity.addParent(this);
+        this.addNode(nodes[i]);
     }
 };
 
 iD.Way.prototype = {
+    addNode: function(node) {
+        node.entity.addParent(this);
+        this.nodes.push(node);
+        return this;
+    },
 
     // JOSM: http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/data/osm/Way.java#L466
     isClosed: function() {

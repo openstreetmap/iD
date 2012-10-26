@@ -52,7 +52,13 @@ iD.Map = function(obj) {
     var surface = d3.selectAll(obj.selector)
         .append('svg')
         .attr({ width: width, height: width })
-        .call(zoombehavior);
+        .call(zoombehavior).on('dblclick', function() {
+            // TODO: round zooms
+            /*
+            var s = projection.scale();
+            projection.scale(Math.round(Math.max(Math.log(s) / Math.log(2) - 7, 0)));
+            */
+        });
 
     var defs = surface.append('defs');
 
@@ -154,11 +160,6 @@ iD.Map = function(obj) {
         drawVector();
         d3.select('.inspector-wrap').datum(d).call(inspector);
     }
-
-    inspector.on('update', function(way, tags) {
-        connection.entities[way.id].tags = tags;
-        drawVector();
-    });
 
     function nodeline(d) {
         return linegen(d.nodes);
@@ -320,7 +321,6 @@ iD.Map = function(obj) {
         });
         return coords;
     }
-
 
     function tileUrl(coord) {
         var tmpl = 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z';

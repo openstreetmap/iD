@@ -4,7 +4,21 @@ iD.Inspector = function(selection) {
     function inspector(selection) {
         // http://jsfiddle.net/7WQjr/
         selection.each(function(d, i) {
-            d3.select(this).selectAll('table,button').remove();
+            // TODO: there must be a better way to do this.
+            d3.select(this).node().innerHTML = '';
+
+            var head = d3.select(this)
+                .append('div')
+                .attr('class', 'head');
+
+            head.append('h2')
+                .text(iD.Util.friendlyName(d));
+
+            head.append('a')
+                .attr('class', 'permalink')
+                .attr('href', 'http://www.openstreetmap.org/browse/' +
+                      d.entityType + '/' + d.id)
+                .text('#' + d.id);
 
             var table = d3.select(this)
                 .append('table')

@@ -29,7 +29,7 @@ p {
     font-size: x-small;
 }
 a:visited, a {
-    color: black;
+    color: #345692;
 }
 
 input[type=text] {
@@ -153,6 +153,15 @@ table td {
     overflow:auto;
     padding:5px;
     background:#fff;
+}
+
+.inspector-wrap h2 {
+    font: normal 20px/20px 'Helvetica';
+}
+
+.inspector-wrap a.permalink {
+    text-decoration:none;
+    font: normal 11px/20px 'Helvetica'
 }
 
 .inspector thead th {

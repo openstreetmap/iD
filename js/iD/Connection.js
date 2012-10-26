@@ -15,7 +15,7 @@ iD.Connection = function(apiURL) {
     var connection = {};
 
     function all() {
-        return _.values(entities);
+        return d3.values(entities);
     }
 
     function assign(obj) {
@@ -26,7 +26,11 @@ iD.Connection = function(apiURL) {
             if (!entities[obj.id]) {
                 entities[obj.id] = obj;
             } else {
-                entities[obj.id].nodes = obj.nodes;
+                /*
+                for (var n = 0; n < obj.nodes.length; n++) {
+                    entities[obj.id].addNode(obj.nodes[n]);
+                }
+                */
             }
         } else if (obj.entityType === 'relation') {
             if (!relations[obj.id]) relations[obj.id] = obj;
@@ -71,24 +75,21 @@ iD.Connection = function(apiURL) {
     function getObjectsByBbox(extent) {
         // summary:	Find all drawable entities that are within a given bounding box.
         // Each one is an array of entities.
-        return _.filter(this.entities, function(e, id) {
+        return d3.values(entities).filter(function(e, id) {
             return e.within(extent);
         });
     }
 
+    // Request data within the bbox from an external OSM server.
     function loadFromAPI(box, callback) {
-        // summary:		Request data within the bbox from an external OSM server. Currently hardcoded
-        // to use Overpass API (which has the relevant CORS headers).
         loadFromURL('http://www.overpass-api.de/api/xapi?map?bbox=' +
             [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
     }
 
     function loadFromURL(url, callback) {
-        // summary:		Load all data from a given URL.
         d3.xml(url, parse(callback));
     }
 
-    // Private functions to parse DOM created from XML file
     function filterNodeName(n) {
         return function(item) { return item.nodeName === n; };
     }
@@ -102,11 +103,7 @@ iD.Connection = function(apiURL) {
     }
 
     function getAttribute(obj, name) {
-        for (var i = 0; i < obj.attributes.length; i++) {
-            if (obj.attributes[i].nodeName === name) {
-                return obj.attributes[i].nodeValue;
-            }
-        }
+        return obj.attributes[name].nodeValue;
     }
 
     function getTags(obj) {
@@ -134,16 +131,20 @@ iD.Connection = function(apiURL) {
     }
 
     function getMembers(obj) {
-        return _(obj.childNodes).chain()
-            .filter(filterNodeName('member'))
-            .map(function(item) {
-                var id = getAttribute(item,'ref'),
-                type = getAttribute(item,'type'),
-                role = getAttribute(item,'role');
+        var members = [];
+        for (var i = 0; i < obj.childNodes.length; i++) {
+            if (obj.childNodes[i].nodeName !== 'member') continue;
 
-                var obj = getOrCreate(id, type);
-                return new iD.RelationMember(obj, role);
-            }).value();
+            var item = obj.childNodes[i];
+            var id = item.attributes.ref.nodeValue,
+                type = item.attributes.type.nodeValue,
+                role = item.attributes.role.nodeValue;
+
+            var o = getOrCreate(id, type);
+            members.push(new iD.RelationMember(o, role));
+        }
+
+        return members;
     }
 
     function parse(callback) {
