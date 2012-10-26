@@ -28,7 +28,7 @@ define(['dojo/_base/declare', 'iD/actions/UndoableAction'],
                    if (this.newNode === null) {
                        this.newNode = this.connection.doCreateNode(this.tags,
                                                                    this.lat, this.lon,
-                                                                   _.bind(this.push, this));
+                                                                   this.push.bind(this));
                    }
                    this.connection.registerPOI(this.newNode);
                    return true;
