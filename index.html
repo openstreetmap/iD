@@ -24,7 +24,6 @@
         <script type="text/javascript" src="js/iD/controller/edit/SelectedWay.js"></script>
         <script type="text/javascript" src="js/iD/controller/edit/SelectedWayNode.js"></script>
 
-        <script type="text/javascript" src="js/iD/renderer/renderer.js"></script>
         <script type="text/javascript" src="js/iD/renderer/Map.js"></script>
         <script type="text/javascript" src="js/iD/ui/Inspector.js"></script>
 
@@ -62,7 +61,7 @@
     var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
 
     // Initialise map
-    var map = iD.renderer.Map({
+    var map = iD.Map({
         selector: "#map",
         connection: connection,
         width: $(document).width(),

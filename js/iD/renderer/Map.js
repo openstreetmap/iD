@@ -4,7 +4,7 @@
 // ----------------------------------------------------------------------
 // Connection base class
 
-iD.renderer.Map = function(obj) {
+iD.Map = function(obj) {
     var map = {},
         selection = [],
         width = obj.width || 800,
@@ -285,7 +285,7 @@ iD.renderer.Map = function(obj) {
 
     function getZoom(zoom) {
         var s = projection.scale();
-        return Math.max(Math.log(s) / Math.log(2) - 8, 0);
+        return Math.max(Math.log(s) / Math.log(2) - 7, 0);
     }
 
     function setZoom(zoom) {

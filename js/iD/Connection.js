@@ -151,6 +151,9 @@ iD.Connection = function(apiURL) {
 
     function parse(callback) {
         return function(dom) {
+            if (!dom.childNodes) {
+                return callback(new Error('Bad request'));
+            }
             for (var i = 0; i < dom.childNodes[0].childNodes.length; i++) {
                 var obj = dom.childNodes[0].childNodes[i], attrib;
                 if (obj.nodeName === 'node') {
@@ -177,7 +180,7 @@ iD.Connection = function(apiURL) {
                     assign(relation);
                 }
             }
-            callback();
+            callback(null);
         };
     }
 

@@ -1,1 +1,0 @@
-iD.renderer = {};
