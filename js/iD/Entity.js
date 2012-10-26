@@ -37,10 +37,10 @@ iD.Entity = function () {
         });
     };
     entity.parentWays = function () {
-        return entity._parentObjectsOfClass('way');
+        return _parentObjectsOfClass('way');
     };
     entity.parentRelations = function () {
-        return entity._parentObjectsOfClass('relation');
+        return _parentObjectsOfClass('relation');
     };
     function _parentObjectsOfClass(_class) {
         return _.filter(entity.parentObjects(), function (p) {
