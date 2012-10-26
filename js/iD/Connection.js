@@ -40,10 +40,12 @@ iD.Connection = function(apiURL) {
     function getOrCreate(id, type) {
         // summary:		Return an entity if it exists: if not, create an empty one with the given id, and return that.
         if (type === 'node') {
-            if (!entities[id]) assign(new iD.Node(connection, id, NaN, NaN, {}, false));
+            if (!entities[id]) assign(new iD.Node(id, NaN, NaN, {}, false));
             return entities[id];
         } else if (type === 'way') {
-            if (!entities[id]) assign(new iD.Way(connection, id, [], {}, false));
+            if (!entities[id]) {
+                assign(new iD.Way(connection, id, [], {}, false));
+            }
             return entities[id];
         } else if (type === 'relation') {
             if (!relations[id]) assign(new iD.Relation(connection, id, [], {}, false));
@@ -53,7 +55,7 @@ iD.Connection = function(apiURL) {
 
     function doCreateNode(tags, lat, lon, perform) {
         // summary:		Create a new node and save it in the data store, using an undo stack.
-        var node = new iD.Node(connection, nextNode--, lat, lon, tags, true);
+        var node = new iD.Node(nextNode--, lat, lon, tags, true);
         perform(new iD.actions.CreateEntityAction(node, assign));
         return node;	// iD.Node
     }
@@ -72,11 +74,11 @@ iD.Connection = function(apiURL) {
         return relation;
     }
 
-    function getObjectsByBbox(extent) {
+    function intersects(extent) {
         // summary:	Find all drawable entities that are within a given bounding box.
         // Each one is an array of entities.
         return d3.values(entities).filter(function(e, id) {
-            return e.within(extent);
+            return e.intersects(extent);
         });
     }
 
@@ -92,14 +94,6 @@ iD.Connection = function(apiURL) {
 
     function filterNodeName(n) {
         return function(item) { return item.nodeName === n; };
-    }
-
-    function attributeObject(obj) {
-        var o = {};
-        for (var i = 0; i < obj.attributes.length; i++) {
-            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
-        }
-        return o;
     }
 
     function getAttribute(obj, name) {
@@ -155,24 +149,21 @@ iD.Connection = function(apiURL) {
             for (var i = 0; i < dom.childNodes[0].childNodes.length; i++) {
                 var obj = dom.childNodes[0].childNodes[i], attrib;
                 if (obj.nodeName === 'node') {
-                    attrib = attributeObject(obj);
-                    var node = new iD.Node(connection,
-                        +attrib.id,
-                        +attrib.lat,
-                        +attrib.lon,
+                    var node = new iD.Node(
+                        +getAttribute(obj, 'id'),
+                        +getAttribute(obj, 'lat'),
+                        +getAttribute(obj, 'lon'),
                         getTags(obj));
                     assign(node);
                 } else if (obj.nodeName === 'way') {
-                    attrib = attributeObject(obj);
                     var way = new iD.Way(connection,
-                        attrib.id,
+                        getAttribute(obj, 'id'),
                         getNodes(obj, connection),
                         getTags(obj));
                     assign(way);
                 } else if (obj.nodeName === 'relation') {
-                    attrib = attributeObject(obj);
                     var relation = new iD.Relation(connection,
-                        attrib.id,
+                        getAttribute(obj, 'id'),
                         getMembers(obj, connection),
                         getTags(obj));
                     assign(relation);
@@ -187,7 +178,7 @@ iD.Connection = function(apiURL) {
     connection.relations = relations;
     connection.loadFromAPI = loadFromAPI;
     connection.loadFromURL = loadFromURL;
-    connection.getObjectsByBbox = getObjectsByBbox;
+    connection.intersects = intersects;
     connection.doCreateNode = doCreateNode;
     connection.doCreateWay = doCreateWay;
     connection.doCreateRelation = doCreateRelation;

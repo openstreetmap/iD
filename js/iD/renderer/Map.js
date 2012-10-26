@@ -207,7 +207,7 @@ iD.Map = function(obj) {
     }
 
     function drawVector() {
-        var all = connection.all();
+        var all = connection.intersects(extent());
 
         var ways = all.filter(function(a) {
                 return a.entityType === 'way' && !a.isClosed();

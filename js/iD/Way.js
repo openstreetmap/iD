@@ -65,23 +65,26 @@ iD.Way.prototype = {
     },
 
     bounds: function() {
+        // TODO: cache
         return d3.geo.bounds(this.toGeoJSON());
     },
 
     // ---------------------
     // Bounding-box handling
-    within: function(left,right,top,bottom) {
+    intersects: function(extent) {
+        // No-node ways are inside of nothing.
+        if (!this.nodes.length) return false;
         var bounds = this.bounds();
-        // TODO invert and just return
-        if (!this.extent.west ||
-            (this.extent.west < left   && this.extent.east < left  ) ||
-            (this.extent.west > right  && this.extent.east > right ) ||
-            (this.extent.south < bottom && this.extent.north < bottom) ||
-            (this.extent.south > top    && this.extent.south > top)) {
-            return false;
-        } else {
-            return true;
-        }
+        // left
+        return !(
+            // the bottom right is to the top-left
+            // of the top-left
+            bounds[1][0] < extent[0][0] &&
+            bounds[1][1] < extent[0][1] ||
+            // The top left is to the bottom-right
+            // of the top-left
+            bounds[0][0] > extent[1][0] &&
+            bounds[0][1] > extent[1][1]);
     },
 
     // --------------

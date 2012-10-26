@@ -1,10 +1,9 @@
 if (typeof iD === 'undefined') iD = {};
 
 // [Node](http://wiki.openstreetmap.org/wiki/Node)
-iD.Node = function(connection, id, lat, lon, tags, loaded) {
+iD.Node = function(id, lat, lon, tags, loaded) {
 	// summary: An OSM node.
 	this.entityType = 'node';
-	this.connection = connection;
 	this.id = id;
 	this._id = iD.Util.id();
 	this.entity = iD.Entity();
@@ -30,7 +29,7 @@ iD.Node.prototype = {
         };
     },
 
-    within: function(extent) {
+    intersects: function(extent) {
         return (this.lon >= extent[0][0]) &&
             (this.lon <= extent[1][0]) &&
             (this.lat <= extent[0][1]) &&
