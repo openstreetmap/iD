@@ -28,13 +28,18 @@ iD.Entity = function () {
     };
     entity.parentObjects = function () {
         // summary:		List of all parents of this entity.
-        return _.values(entity.parents);
+        var objects = [];
+        for (var i in entity.parents) {
+            objects.push(entity.parents[i]);
+        }
+        return objects;
     };
     entity.hasParentWays = function () {
         // summary:		Does this entity have any parents which are ways?
-        return !!_.find(entity.parentObjects(), function (p) {
-            return p.entityType === 'way';
-        });
+        var parentObjects = entity.parentObjects();
+        for (var i = 0; i < parentObjects.length; i++) {
+            if (parentObjects[i].entityType === 'way') return true;
+        }
     };
     entity.parentWays = function () {
         return _parentObjectsOfClass('way');
@@ -43,9 +48,14 @@ iD.Entity = function () {
         return _parentObjectsOfClass('relation');
     };
     function _parentObjectsOfClass(_class) {
-        return _.filter(entity.parentObjects(), function (p) {
-            return p.entityType === _class;
-        });
+        var poc = [];
+        var parentObjects = entity.parentObjects();
+        for (var i = 0; i < parentObjects.length; i++) {
+            if (parentObjects[i].entityType === _class) {
+                poc.push(parentObjects[i]);
+            }
+        }
+        return poc;
     }
 
     return entity;
