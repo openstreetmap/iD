@@ -13,9 +13,9 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
     this.modified = this.id < 0;
     this.nodes = nodes || [];
     this.extent = {};
-    _.each(nodes, _.bind(function(node) {
-        node.entity.addParent(this);
-    }, this));
+    for (var i = 0; i < nodes.length; i++) {
+        nodes[i].entity.addParent(this);
+    }
 };
 
 iD.Way.prototype = {
