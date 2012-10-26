@@ -44,11 +44,11 @@ iD.Connection = function(apiURL) {
             return entities[id];
         } else if (type === 'way') {
             if (!entities[id]) {
-                assign(new iD.Way(connection, id, [], {}, false));
+                assign(new iD.Way(id, [], {}, false));
             }
             return entities[id];
         } else if (type === 'relation') {
-            if (!relations[id]) assign(new iD.Relation(connection, id, [], {}, false));
+            if (!relations[id]) assign(new iD.Relation(id, [], {}, false));
             return relations[id];
         }
     }
@@ -62,14 +62,14 @@ iD.Connection = function(apiURL) {
 
     function doCreateWay(tags, nodes, perform) {
         // summary:		Create a new way and save it in the data store, using an undo stack.
-        var way = new iD.Way(connection, nextWay--, nodes.concat(), tags, true);
+        var way = new iD.Way(nextWay--, nodes.concat(), tags, true);
         perform(new iD.actions.CreateEntityAction(way, assign));
         return way;
     }
 
     function doCreateRelation(tags, members, perform) {
         // summary:		Create a new relation and save it in the data store, using an undo stack.
-        var relation = new iD.Relation(connection, nextRelation--, members.concat(), tags, true);
+        var relation = new iD.Relation(nextRelation--, members.concat(), tags, true);
         perform(new iD.actions.CreateEntityAction(relation, assign));
         return relation;
     }
@@ -156,13 +156,13 @@ iD.Connection = function(apiURL) {
                         getTags(obj));
                     assign(node);
                 } else if (obj.nodeName === 'way') {
-                    var way = new iD.Way(connection,
+                    var way = new iD.Way(
                         getAttribute(obj, 'id'),
                         getNodes(obj, connection),
                         getTags(obj));
                     assign(way);
                 } else if (obj.nodeName === 'relation') {
-                    var relation = new iD.Relation(connection,
+                    var relation = new iD.Relation(
                         getAttribute(obj, 'id'),
                         getMembers(obj, connection),
                         getTags(obj));

@@ -8,14 +8,13 @@ if (typeof iD === 'undefined') iD = {};
 //
 // If a a way is _closed_, it is assumed to be an area unless it has a
 // `highway` or `barrier` tag and is not also tagged `area`.
-iD.Way = function(connection, id, nodes, tags, loaded) {
+iD.Way = function(id, nodes, tags, loaded) {
     // summary:		An OSM way.
-    this.connection = connection;
     this.entityType = 'way';
     this.id = id;
     this._id = iD.Util.id();
     this.deleted = false;
-    this.entity = iD.Entity();
+    this.entity = new iD.Entity();
     this.tags = tags || {};
     this.loaded = (loaded === undefined) ? true : loaded;
     this.modified = this.id < 0;

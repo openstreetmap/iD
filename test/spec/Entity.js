@@ -2,7 +2,7 @@ describe('Entity', function () {
     var entity;
 
     beforeEach(function () {
-        entity = iD.Entity();
+        entity = new iD.Entity();
     });
 
     it('has no entity type', function () {
@@ -23,5 +23,5 @@ describe('Entity', function () {
             entity.addParent({_id: 2, entityType: 'relation'});
             expect(entity.parentRelations()).toEqual([{_id: 2, entityType: 'relation'}]);
         });
-    })
+    });
 });

@@ -6,7 +6,7 @@ iD.Node = function(id, lat, lon, tags, loaded) {
 	this.entityType = 'node';
 	this.id = id;
 	this._id = iD.Util.id();
-	this.entity = iD.Entity();
+	this.entity = new iD.Entity();
 	this.lat = lat;
 	this.lon = lon;
     // TODO: keep or trash this custom
