@@ -70,7 +70,8 @@ iD.Map = function(obj) {
         .attr({ width: width, height: height });
 
     var tilegroup = surface.append('g')
-            .attr('clip-path', 'url(#clip)'),
+            .attr('clip-path', 'url(#clip)')
+            .on('click', deselectClick),
         container = surface.append('g')
             .attr('clip-path', 'url(#clip)');
 
@@ -155,10 +156,20 @@ iD.Map = function(obj) {
         }
     }
 
+    function deselectClick() {
+        selection = [];
+        drawVector();
+        d3.event.stopPropagation();
+        d3.select('.inspector-wrap').style('display', 'none');
+    }
+
     function selectClick(d) {
         select(d);
         drawVector();
-        d3.select('.inspector-wrap').datum(d).call(inspector);
+        d3.select('.inspector-wrap')
+            .style('display', 'block')
+            .datum(d).call(inspector);
+        d3.event.stopPropagation();
     }
 
     function nodeline(d) {
