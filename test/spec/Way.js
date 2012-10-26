@@ -3,6 +3,7 @@ describe('Way', function() {
 
   beforeEach(function() {
       way = new iD.Way();
+      console.log(way);
   });
 
   it('is a way', function() {
@@ -26,7 +27,7 @@ describe('Way', function() {
   });
 
   it('can provide geojson', function() {
-      var gj = way.toGeoJSON(); 
+      var gj = way.toGeoJSON();
       expect(gj.type).toEqual('Feature');
       expect(gj.geometry.type).toEqual('LineString');
   });

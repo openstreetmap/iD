@@ -22,8 +22,10 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
     this.nodes = [];
     this.extent = {};
 
-    for (var i = 0; i < nodes.length; i++) {
-        this.addNode(nodes[i]);
+    if (nodes) {
+        for (var i = 0; i < nodes.length; i++) {
+            this.addNode(nodes[i]);
+        }
     }
 };
 
@@ -37,8 +39,8 @@ iD.Way.prototype = {
     // JOSM: http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/data/osm/Way.java#L466
     isClosed: function() {
         // summary:	Is this a closed way (first and last nodes the same)?
-        return this.nodes.length > 1 &&
-            this.nodes[this.nodes.length - 1] === this.nodes[0];
+        if (!this.nodes.length) return true;
+        return this.nodes[this.nodes.length - 1] === this.nodes[0];
     },
 
     isType: function(type) {
