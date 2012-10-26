@@ -81,9 +81,16 @@ circle.handle {
 }
 
 .stroke.highway-unclassified,
-.stroke.highway-tertiary {
+.stroke.highway-tertiary,
+.stroke.highway-tertiary_link {
     stroke:#FEFECB;
-    stroke-width:3;
+    stroke-width:4;
+}
+
+.casing.highway-unclassified,
+.casing.highway-tertiary,
+.casing.highway-tertiary_link {
+    stroke-width:6;
 }
 
 .stroke.highway-service {
@@ -94,12 +101,14 @@ circle.handle {
     stroke-width:6;
 }
 
-.stroke.highway-footway {
+.stroke.highway-footway,
+.stroke.highway-steps {
     stroke: #ff6257;
     stroke-width: 3;
     stroke-dasharray: 6, 6;
 }
-.casing.highway-footway {
+.casing.highway-footway,
+.casing.highway-steps {
     stroke-width: 3;
     stroke: #fff;
 }
