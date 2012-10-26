@@ -1,5 +1,6 @@
 if (typeof iD === 'undefined') iD = {};
 
+// [Node](http://wiki.openstreetmap.org/wiki/Node)
 iD.Node = function(connection, id, lat, lon, tags, loaded) {
 	// summary: An OSM node.
 	this.entityType = 'node';

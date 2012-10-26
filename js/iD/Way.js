@@ -1,5 +1,13 @@
 if (typeof iD === 'undefined') iD = {};
 
+// Way
+// wiki: http://wiki.openstreetmap.org/wiki/Way
+//
+// Ways can either be open or closed. A closed way is such that the
+// last node is the first node.
+//
+// If a a way is _closed_, it is assumed to be an area unless it has a
+// `highway` or `barrier` tag and is not also tagged `area`.
 iD.Way = function(connection, id, nodes, tags, loaded) {
     // summary:		An OSM way.
     this.connection = connection;
@@ -19,9 +27,14 @@ iD.Way = function(connection, id, nodes, tags, loaded) {
 };
 
 iD.Way.prototype = {
+
+
+    // JOSM: http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/data/osm/Way.java#L466
+
     isClosed: function() {
         // summary:	Is this a closed way (first and last nodes the same)?
-        return this.nodes[this.nodes.length - 1] === this.nodes[0];
+        return this.nodes.length > 1 &&
+            this.nodes[this.nodes.length - 1] === this.nodes[0];
     },
 
     isType: function(type) {
