@@ -230,7 +230,7 @@ iD.Map = function(obj) {
 
         var _id = selection[0];
         var active_entity = all.filter(function(a) {
-            return a._id === _id;
+            return a._id === _id && a.entityType === 'way';
         });
 
         var handles = layers[0].hit.selectAll('circle.handle')
@@ -260,7 +260,8 @@ iD.Map = function(obj) {
             .attr('d', nodeline)
             .attr('class', classes('stroke'));
 
-        markers.enter().append('image');
+        markers.enter().append('image')
+            .on('click', selectClick);
         markers.attr('class', classes('marker'))
             .attr({ width: 16, height: 16 })
             .attr('xlink:href', markerimage)

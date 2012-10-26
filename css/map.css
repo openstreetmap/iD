@@ -3,7 +3,7 @@ image.tile {
 }
 
 /* base styles */
-use, path {
+path, image.marker {
     fill: none;
     cursor: pointer;
 }
