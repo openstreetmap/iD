@@ -261,10 +261,12 @@ iD.Map = function(obj) {
             .attr('class', classes('stroke'));
 
         markers.enter().append('image')
-            .on('click', selectClick);
-        markers.attr('class', classes('marker'))
+            .attr('class', classes('marker'))
+            .on('click', selectClick)
             .attr({ width: 16, height: 16 })
-            .attr('xlink:href', markerimage)
+            .attr('xlink:href', markerimage);
+
+        markers
             .attr('transform', function(d) {
                 return 'translate(' + projection(d) + ')';
             });

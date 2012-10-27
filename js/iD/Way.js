@@ -32,6 +32,7 @@ iD.Way.prototype = {
     addNode: function(node) {
         node.entity.addParent(this);
         this.nodes.push(node);
+        this._bounds = null;
         return this;
     },
 
@@ -63,9 +64,14 @@ iD.Way.prototype = {
         };
     },
 
+    updateBounds: function() {
+        this._bounds = d3.geo.bounds(this.toGeoJSON());
+    },
+
     bounds: function() {
         // TODO: cache
-        return d3.geo.bounds(this.toGeoJSON());
+        if (!this._bounds) this.updateBounds();
+        return this._bounds;
     },
 
     // ---------------------
