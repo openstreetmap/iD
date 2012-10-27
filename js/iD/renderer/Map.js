@@ -123,39 +123,6 @@ iD.Map = function(obj) {
         };
     }
 
-    var icons = {
-        tourism: ['hotel'],
-        shop: [
-            'convenience',
-            'supermarket'],
-        amenity:
-            [
-            'atm',
-            'bank',
-            'cafe',
-            'pub',
-            'place',
-            'parking',
-            'bicycle_parking',
-            'pharmacy',
-            'pharmacy',
-            'police',
-            'post_box',
-            'recycling',
-            'restaurant',
-            'school',
-            'taxi',
-            'telephone']
-    };
-
-    function markerimage(d) {
-        for (var k in icons) {
-            if (d.tags[k] && icons[k].indexOf(d.tags[k]) !== -1) {
-                return 'icons/' + d.tags[k] + '.png';
-            }
-        }
-    }
-
     function deselectClick() {
         selection = [];
         drawVector();
@@ -226,7 +193,7 @@ iD.Map = function(obj) {
             strokes = layers[0].stroke.selectAll('path.stroke')
                 .data(ways, key),
             markers = layers[0].hit.selectAll('image.marker')
-                .data(points.filter(markerimage), key);
+                .data(points.filter(iD.markerimage), key);
 
         var _id = selection[0];
         var active_entity = all.filter(function(a) {
@@ -264,7 +231,7 @@ iD.Map = function(obj) {
             .attr('class', classes('marker'))
             .on('click', selectClick)
             .attr({ width: 16, height: 16 })
-            .attr('xlink:href', markerimage);
+            .attr('xlink:href', iD.markerimage);
 
         markers
             .attr('transform', function(d) {
