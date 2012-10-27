@@ -2,8 +2,34 @@ body {
     font:normal 13px/20px Helvetica, Arial, sans-serif;
     background:#e4e4e4;
     margin:0;
+    padding:0;
     text-rendering: optimizeLegibility;
     color:#444;
+}
+
+#map {
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+#about {
+    position:absolute;
+    bottom:5px;
+    right:5px;
+    background:#fff;
+    padding:2px 5px;
+}
+
+
+#modebuttons {
+    width:600px;
+    position:absolute;
+    left:0px;
+    top:0px;
 }
 
 form {
@@ -16,13 +42,7 @@ form {
     outline-color: transparent;
     outline-style: none;
 }
-#about {
-    position:absolute;
-    bottom:5px;
-    right:5px;
-    background:#fff;
-    padding:2px 5px;
-}
+
 p {
     margin:0;
     padding:0;
@@ -72,12 +92,6 @@ table td {
     font-style:italic;
 }
 
-#modebuttons {
-    width:600px;
-    position:absolute;
-    left:0px;
-    top:0px;
-}
 
 #zoombuttons {
     position:absolute;

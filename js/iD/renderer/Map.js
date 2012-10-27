@@ -159,8 +159,8 @@ iD.Map = function(obj) {
     function deselectClick() {
         selection = [];
         drawVector();
-        d3.event.stopPropagation();
         d3.select('.inspector-wrap').style('display', 'none');
+        d3.event.stopPropagation();
     }
 
     function selectClick(d) {
@@ -360,9 +360,12 @@ iD.Map = function(obj) {
         tiles.enter().append('image')
             .attr('class', 'tile')
             .attr('xlink:href', tileUrl);
-        tiles.attr({ width: ts, height: ts })
+        tiles.attr({ width: Math.ceil(ts), height: Math.ceil(ts) })
             .attr('transform', function(d) {
-                return 'translate(' + [(d[1] * ts) - tile_origin[0], (d[2] * ts) - tile_origin[1]] + ')';
+                return 'translate(' + [
+                    Math.round((d[1] * ts) - tile_origin[0]),
+                    Math.round((d[2] * ts) - tile_origin[1])
+                ] + ')';
             });
         drawVector();
         download();
