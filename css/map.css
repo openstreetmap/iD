@@ -65,10 +65,10 @@ circle.handle {
 }
 
 .area.landuse {
-    stroke: #444;
-    stroke-width:1;
-    fill: #444;
-    opacity:0.2;
+    stroke: #006B34;
+    stroke-width: 1;
+    fill: #189E59;
+    fill-opacity:0.2;
 }
 
 /* highways */
@@ -84,13 +84,13 @@ circle.handle {
 .stroke.highway-tertiary,
 .stroke.highway-tertiary_link {
     stroke:#FEFECB;
-    stroke-width:4;
+    stroke-width:6;
 }
 
 .casing.highway-unclassified,
 .casing.highway-tertiary,
 .casing.highway-tertiary_link {
-    stroke-width:6;
+    stroke-width:8;
 }
 
 .stroke.highway-service {
@@ -123,7 +123,11 @@ circle.handle {
     stroke-width:9;
 }
 
+.casing.highway-trunk, .casing.highway-trunk_link {
+    stroke-width:9;
+}
 .stroke.highway-trunk, .stroke.highway-trunk_link {
+    stroke-width:7;
     stroke:#7FC97F;
 }
 

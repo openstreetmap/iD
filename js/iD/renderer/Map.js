@@ -169,6 +169,12 @@ iD.Map = function(obj) {
         return as - bs;
     }
 
+    var class_stroke = classes('stroke'),
+        class_fill = classes('stroke'),
+        class_area = classes('area'),
+        class_marker = classes('marker'),
+        class_casing = classes('casing');
+
     function drawVector() {
         var all = connection.intersects(extent());
 
@@ -209,25 +215,26 @@ iD.Map = function(obj) {
             .on('click', selectClick);
 
         fills.attr('d', nodeline)
-            .attr('class', classes('area'));
+            .attr('class', class_area);
 
         casings.enter().append('path');
         casings.order()
             .attr('d', nodeline)
-            .attr('class', classes('casing'));
+            .attr('class', class_casing);
 
         strokes.enter().append('path')
             .on('click', selectClick);
 
         strokes.order()
             .attr('d', nodeline)
-            .attr('class', classes('stroke'));
+            .attr('class', class_stroke);
 
         markers.enter().append('image')
-            .attr('class', classes('marker'))
+            .attr('class', class_marker)
             .on('click', selectClick)
             .attr({ width: 16, height: 16 })
-            .attr('xlink:href', iD.markerimage);
+            .attr('xlink:href', iD.markerimage)
+            .call(dragbehavior);
 
         markers
             .attr('transform', function(d) {
