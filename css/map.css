@@ -64,7 +64,8 @@ circle.handle {
     fill-opacity: 0.3;
 }
 
-.area.landuse {
+.area.landuse,
+.area.natural {
     stroke: #006B34;
     stroke-width: 1;
     fill: #189E59;
