@@ -29,6 +29,7 @@ iD.Way = function(id, nodes, tags, loaded) {
 };
 
 iD.Way.prototype = {
+
     addNode: function(node) {
         node.entity.addParent(this);
         this.nodes.push(node);

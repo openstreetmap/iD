@@ -20,20 +20,10 @@ iD.Connection = function(apiURL) {
 
     function assign(obj) {
         // summary:	Save an entity to the data store.
-        if (obj.entityType === 'node') { // never reassign nodes
-            if (!entities[obj.id]) entities[obj.id] = obj;
-        } else if (obj.entityType === 'way') {
-            if (!entities[obj.id]) {
-                entities[obj.id] = obj;
-            } else {
-                /*
-                for (var n = 0; n < obj.nodes.length; n++) {
-                    entities[obj.id].addNode(obj.nodes[n]);
-                }
-                */
-            }
-        } else if (obj.entityType === 'relation') {
+        if (obj.entityType === 'relation') {
             if (!relations[obj.id]) relations[obj.id] = obj;
+        } else if (!entities[obj.id] || !entities[obj.id].loaded) {
+            entities[obj.id] = obj;
         }
     }
 

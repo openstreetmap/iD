@@ -102,12 +102,14 @@ circle.handle {
 }
 
 .stroke.highway-footway,
+.stroke.highway-cycleway,
 .stroke.highway-steps {
     stroke: #ff6257;
     stroke-width: 3;
     stroke-dasharray: 6, 6;
 }
 .casing.highway-footway,
+.casing.highway-cycleway,
 .casing.highway-steps {
     stroke-width: 3;
     stroke: #fff;
