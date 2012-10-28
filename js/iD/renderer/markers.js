@@ -1,4 +1,4 @@
-iD.markers = [
+iD._markers = [
     // http://svn.openstreetmap.org/applications/rendering/mapnik/inc/layer-amenity-symbols.xml.inc
     {
         tags: { aeroway: 'helipad' },
@@ -548,19 +548,27 @@ iD.markers = [
     }
 ];
 
+iD._markertable = (function(markers) {
+    var table = {};
+    for (var i = 0; i < markers.length; i++) {
+        var marker = markers[i];
+        // single-tag matches, the easy case
+        if (Object.keys(marker.tags).length === 1) {
+            for (var k in marker.tags) {
+                var key = k + '=' + marker.tags[k];
+                table[key] = marker.icon;
+            }
+        }
+    }
+    return table;
+})(iD._markers);
 
 iD.markerimage = function(d) {
     // TODO: optimize
-    for (var i = 0; i < iD.markers.length; i++) {
-        var tl = Object.keys(iD.markers[i].tags).length;
-        var tf = 0;
-        for (var k in iD.markers[i].tags) {
-            if (d.tags[k] && d.tags[k] == iD.markers[i].tags[k]) {
-                tf++;
-            }
-        }
-        if (tf == tl) {
-            return 'icons/' + iD.markers[i].icon + '.png';
+    for (var k in d.tags) {
+        var key = k + '=' + d.tags[k];
+        if (iD._markertable[key]) {
+            return 'icons/' + iD._markertable[key] + '.png';
         }
     }
 };
