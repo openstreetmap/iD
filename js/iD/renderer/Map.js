@@ -51,7 +51,7 @@ iD.Map = function(obj) {
 
     var surface = d3.selectAll(obj.selector)
         .append('svg')
-        .attr({ width: width, height: width })
+        .attr({ width: width, height: height })
         .call(zoombehavior).on('dblclick', function() {
             // TODO: round zooms
             /*
