@@ -82,44 +82,33 @@ iD.Connection = function(apiURL) {
         d3.xml(url, parse(callback));
     }
 
-    function filterNodeName(n) {
-        return function(item) { return item.nodeName === n; };
-    }
-
-    function getAttribute(obj, name) {
-        return obj.attributes[name].nodeValue;
-    }
-
     function getTags(obj) {
         var tags = {};
+        var tagelems = obj.getElementsByTagName('tag');
         // Doesn't use underscore for performance reasons
-        for (var i = 0; i < obj.childNodes.length; i++) {
-            var item = obj.childNodes[i];
-            if (item.nodeName === 'tag') {
-                tags[getAttribute(item,'k')] = getAttribute(item,'v');
-            }
+        for (var i = 0; i < tagelems.length; i++) {
+            var item = tagelems[i];
+            tags[item.attributes.k.nodeValue] = item.attributes.v.nodeValue;
         }
         return tags;
     }
 
     function getNodes(obj) {
         var nodes = [];
+        var nelems = obj.getElementsByTagName('nd');
         // Doesn't use underscore for performance reasons
-        for (var i = 0; i < obj.childNodes.length; i++) {
-            var item = obj.childNodes[i];
-            if (item.nodeName === 'nd') {
-                nodes.push(entities[getAttribute(item,'ref')]);
-            }
+        for (var i = 0; i < nelems.length; i++) {
+            var item = nelems[i];
+            nodes.push(entities[item.attributes.ref.nodeValue]);
         }
         return nodes;
     }
 
     function getMembers(obj) {
         var members = [];
-        for (var i = 0; i < obj.childNodes.length; i++) {
-            if (obj.childNodes[i].nodeName !== 'member') continue;
-
-            var item = obj.childNodes[i];
+        var elems = obj.getElementsByTagName('member');
+        for (var i = 0; i < elems.length; i++) {
+            var item = elems[i];
             var id = item.attributes.ref.nodeValue,
                 type = item.attributes.type.nodeValue,
                 role = item.attributes.role.nodeValue;
@@ -140,20 +129,20 @@ iD.Connection = function(apiURL) {
                 var obj = dom.childNodes[0].childNodes[i], attrib;
                 if (obj.nodeName === 'node') {
                     var node = new iD.Node(
-                        +getAttribute(obj, 'id'),
-                        +getAttribute(obj, 'lat'),
-                        +getAttribute(obj, 'lon'),
+                        +obj.attributes.id.nodeValue,
+                        +obj.attributes.lat.nodeValue,
+                        +obj.attributes.lon.nodeValue,
                         getTags(obj));
                     assign(node);
                 } else if (obj.nodeName === 'way') {
                     var way = new iD.Way(
-                        getAttribute(obj, 'id'),
-                        getNodes(obj, connection),
+                        obj.attributes.id.nodeValue,
+                        getNodes(obj),
                         getTags(obj));
                     assign(way);
                 } else if (obj.nodeName === 'relation') {
                     var relation = new iD.Relation(
-                        getAttribute(obj, 'id'),
+                        obj.attributes.id.nodeValue,
                         getMembers(obj, connection),
                         getTags(obj));
                     assign(relation);
