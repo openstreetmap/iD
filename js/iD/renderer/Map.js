@@ -52,13 +52,7 @@ iD.Map = function(obj) {
     var surface = d3.selectAll(obj.selector)
         .append('svg')
         .attr({ width: width, height: height })
-        .call(zoombehavior).on('dblclick', function() {
-            // TODO: round zooms
-            /*
-            var s = projection.scale();
-            projection.scale(Math.round(Math.max(Math.log(s) / Math.log(2) - 7, 0)));
-            */
-        });
+        .call(zoombehavior);
 
     var defs = surface.append('defs');
 
@@ -74,6 +68,8 @@ iD.Map = function(obj) {
             .on('click', deselectClick),
         container = surface.append('g')
             .attr('clip-path', 'url(#clip)');
+
+   var tileclient = iD.Tiles(tilegroup, width, height);
 
    var r = container.append('g');
 
@@ -269,71 +265,13 @@ iD.Map = function(obj) {
         return map;
     }
 
-    function tilesForView() {
-        var t = projection.translate(),
-            s = projection.scale(),
-            z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-            rz = Math.floor(z),
-            ts = 256 * Math.pow(2, z - rz);
-
-        // This is the 0, 0 px of the projection
-        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
-            coords = [],
-            cols = d3.range(Math.max(0, Math.floor((tile_origin[0] - width) / ts)),
-            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
-            rows = d3.range(Math.max(0, Math.floor((tile_origin[1] - height) / ts)),
-            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
-
-        cols.forEach(function(x) {
-            rows.forEach(function(y) { coords.push([Math.floor(z), x, y]); });
-        });
-        return coords;
-    }
-
-    function tileUrl(coord) {
-        var tmpl = 'http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&mkt=en-gb&n=z';
-        var u = '';
-        for (var zoom = coord[0]; zoom > 0; zoom--) {
-            var byte = 0;
-            var mask = 1 << (zoom - 1);
-            if ((coord[1] & mask) !== 0) byte++;
-            if ((coord[2] & mask) !== 0) byte += 2;
-            u += byte.toString();
-        }
-        return tmpl.replace('$quadkey', u);
-    }
-
     function redraw() {
         if (d3.event) {
             projection
               .translate(d3.event.translate)
               .scale(d3.event.scale);
         }
-
-        var t = projection.translate(),
-            s = projection.scale(),
-            z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-            rz = Math.floor(z),
-            ts = 256 * Math.pow(2, z - rz);
-
-        // This is the 0, 0 px of the projection
-        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
-            coords = tilesForView();
-
-        var tiles = tilegroup.selectAll('image.tile')
-            .data(coords, function(d) { return d.join(','); });
-
-        tiles.exit().remove();
-        tiles.enter().append('image')
-            .attr('class', 'tile')
-            .attr('xlink:href', tileUrl);
-        tiles.attr({ width: Math.ceil(ts), height: Math.ceil(ts) })
-            .attr('transform', function(d) {
-                return 'translate(' + [
-                    Math.round((d[1] * ts) - tile_origin[0]),
-                    Math.round((d[2] * ts) - tile_origin[1])
-                ] + ')';
-            });
+        tileclient.redraw(projection);
         drawVector();
         download();
     }
