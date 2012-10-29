@@ -4,6 +4,7 @@ iD.Relation = function(id, members, tags, loaded) {
     this.entityType = 'relation';
     this.id = id;
     this._id = iD.Util.id();
+	this.entity = new iD.Entity();
     this.members = members;
     this.tags = tags;
     this.modified = this.id < 0;

@@ -1,6 +1,6 @@
 if (typeof iD === 'undefined') iD = {};
 
-iD.Connection = function(apiURL) {
+iD.Connection = function() {
     // summary:		The data store, including methods to fetch data from (and, eventually, save data to)
     // an OSM API server.
     var nextNode = -1,		// next negative ids
@@ -9,8 +9,8 @@ iD.Connection = function(apiURL) {
         entities = {},
         relations = {},
         pois = {},
-        modified = false,
-        apiBaseURL = apiURL;
+        apiURL = 'http://www.openstreetmap.org/api/0.6/map?bbox=',
+        modified = false;
 
     var connection = {};
 
@@ -74,7 +74,7 @@ iD.Connection = function(apiURL) {
 
     // Request data within the bbox from an external OSM server.
     function loadFromAPI(box, callback) {
-        loadFromURL('http://www.overpass-api.de/api/xapi?map?bbox=' +
+        loadFromURL(apiURL +
             [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
     }
 
@@ -107,6 +107,7 @@ iD.Connection = function(apiURL) {
     function getMembers(obj) {
         var members = [];
         var elems = obj.getElementsByTagName('member');
+
         for (var i = 0; i < elems.length; i++) {
             var item = elems[i];
             var id = item.attributes.ref.nodeValue,
@@ -129,7 +130,7 @@ iD.Connection = function(apiURL) {
                 var obj = dom.childNodes[0].childNodes[i], attrib;
                 if (obj.nodeName === 'node') {
                     var node = new iD.Node(
-                        +obj.attributes.id.nodeValue,
+                        obj.attributes.id.nodeValue,
                         +obj.attributes.lat.nodeValue,
                         +obj.attributes.lon.nodeValue,
                         getTags(obj));
@@ -157,6 +158,7 @@ iD.Connection = function(apiURL) {
     connection.relations = relations;
     connection.loadFromAPI = loadFromAPI;
     connection.loadFromURL = loadFromURL;
+    connection.apiURL = apiURL;
     connection.intersects = intersects;
     connection.doCreateNode = doCreateNode;
     connection.doCreateWay = doCreateWay;
