@@ -9,7 +9,6 @@ iD.Map = function(obj) {
         selection = [],
         width = obj.width || 800,
         height = obj.height || 400,
-        controller = iD.Controller(),
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
         connection = obj.connection,
@@ -114,37 +113,9 @@ iD.Map = function(obj) {
     }
 
     function nodeline(d) {
-        return linegen(d.nodes);
-    }
-
-    var highway_stack = [
-        'motorway',
-        'motorway_link',
-        'trunk',
-        'trunk_link',
-        'primary',
-        'primary_link',
-        'secondary',
-        'tertiary',
-        'unclassified',
-        'residential',
-        'service',
-        'footway'
-    ];
-
-    function waystack(a, b) {
-        if (!a || !b) return 0;
-        if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
-            return a.tags.layer - b.tags.layer;
-        }
-        if (a.tags.bridge) return 1;
-        if (b.tags.bridge) return -1;
-        var as = 0, bs = 0;
-        if (a.tags.highway && b.tags.highway) {
-            as -= highway_stack.indexOf(a.tags.highway);
-            bs -= highway_stack.indexOf(b.tags.highway);
-        }
-        return as - bs;
+        return linegen(d.nodes.map(function(n) {
+            return connection.graph().index[n];
+        }));
     }
 
     // This is an unfortunate hack that should be improved.
@@ -158,18 +129,18 @@ iD.Map = function(obj) {
         };
     }
 
-    var class_stroke = augmentSelect(iD.Util.styleClasses('stroke')),
-        class_fill =   augmentSelect(iD.Util.styleClasses('stroke')),
-        class_area =   augmentSelect(iD.Util.styleClasses('area')),
-        class_marker = augmentSelect(iD.Util.styleClasses('marker')),
-        class_casing = augmentSelect(iD.Util.styleClasses('casing'));
+    var class_stroke = augmentSelect(iD.Style.styleClasses('stroke')),
+        class_fill =   augmentSelect(iD.Style.styleClasses('stroke')),
+        class_area =   augmentSelect(iD.Style.styleClasses('area')),
+        class_marker = augmentSelect(iD.Style.styleClasses('marker')),
+        class_casing = augmentSelect(iD.Style.styleClasses('casing'));
 
     function drawVector() {
         var all = connection.intersects(extent());
 
         var ways = all.filter(function(a) {
                 return a.type === 'way' && !a.isClosed();
-            }).sort(waystack),
+            }).sort(iD.Style.waystack),
             areas = all.filter(function(a) {
                 return a.type === 'way' && a.isClosed();
             }),
@@ -295,7 +266,6 @@ iD.Map = function(obj) {
     map.zoomOut = zoomOut;
 
     map.connection = connection;
-    map.controller = controller;
     map.projection = projection;
 
     redraw();

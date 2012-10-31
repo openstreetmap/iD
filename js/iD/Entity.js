@@ -9,21 +9,18 @@ iD.Entity = function () {
 };
 
 iD.Entity.prototype = {
-    // Parent-handling
+    // a relation or way which contains this entity
     addParent: function (x) {
-        // summary:		Record a parent (a relation or way which contains this entity).
         this.parents[x._id] = x;
     },
     removeParent: function (x) {
-        // summary:		Remove a parent (e.g. when node removed from a way).
         delete this.parents[x._id];
     },
     hasParent: function (x) {
-        // summary:		Does this entity have the specified parent (e.g. is it in a certain relation)?
+        // summary:	Does this entity have the specified parent (e.g. is it in a certain relation)?
         return !!this.parents[x._id];
     },
     parentObjects: function () {
-        // summary:		List of all parents of this entity.
         var objects = [];
         for (var i in this.parents) {
             objects.push(this.parents[i]);
@@ -31,7 +28,6 @@ iD.Entity.prototype = {
         return objects;
     },
     hasParentWays: function () {
-        // summary:		Does this entity have any parents which are ways?
         var parentObjects = this.parentObjects();
         for (var i = 0; i < parentObjects.length; i++) {
             if (parentObjects[i].type === 'way') return true;

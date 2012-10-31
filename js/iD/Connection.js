@@ -31,20 +31,76 @@ iD.Connection = function() {
         d3.xml(url, parse(callback));
     }
 
+    function getNodes(obj) {
+        var nodes = [], nelems = obj.getElementsByTagName('nd');
+        for (var i = 0; i < nelems.length; i++) {
+            var item = nelems[i];
+            nodes.push(item.attributes.ref.nodeValue);
+        }
+        return nodes;
+    }
+
+    function getTags(obj) {
+        var tags = {}, tagelems = obj.getElementsByTagName('tag');
+        for (var i = 0; i < tagelems.length; i++) {
+            var item = tagelems[i];
+            tags[item.attributes.k.nodeValue] = item.attributes.v.nodeValue;
+        }
+        return tags;
+    }
+
+    function getMembers(obj) {
+        var members = [];
+        var elems = obj.getElementsByTagName('member');
+
+        for (var i = 0; i < elems.length; i++) {
+            var item = elems[i];
+            var id = item.attributes.ref.nodeValue,
+                type = item.attributes.type.nodeValue,
+                role = item.attributes.role.nodeValue;
+
+            var o = {
+                id: id,
+                type: type,
+                role: role
+            };
+
+            members.push(o);
+        }
+
+        return members;
+    }
+
+    function objectData(obj) {
+        return {
+            type: obj.nodeName,
+            id: obj.attributes.id.nodeValue,
+            tags: getTags(obj),
+            lat: (obj.attributes.lat) ? obj.attributes.lat.nodeValue : null,
+            lon: (obj.attributes.lon) ? obj.attributes.lon.nodeValue : null,
+            members: getMembers(obj),
+            nodes: getNodes(obj)
+        };
+    }
+
     function parse(callback) {
         return function(dom) {
             if (!dom.childNodes) {
                 return callback(new Error('Bad request'));
             }
-            for (var i = 0; i < dom.childNodes[0].childNodes.length; i++) {
-                var obj = dom.childNodes[0].childNodes[i];
-                graph.process(obj);
-            }
+            var ways = dom.childNodes[0].getElementsByTagName('way'),
+                relations = dom.childNodes[0].getElementsByTagName('relation'),
+                nodes = dom.childNodes[0].getElementsByTagName('node');
+            var i;
+            for (i = 0; i < ways.length; i++) graph.insert(objectData(ways[i]));
+            for (i = 0; i < relations.length; i++) graph.insert(objectData(relations[i]));
+            for (i = 0; i < nodes.length; i++) graph.insert(objectData(nodes[i]));
             callback(null);
         };
     }
 
     connection.graph = function(x) {
+        if (!arguments.length) return graph;
         graph = x;
         return connection;
     };

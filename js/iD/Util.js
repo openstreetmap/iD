@@ -30,28 +30,3 @@ iD.Util.friendlyName = function(entity) {
     return n.length === 0 ? 'unknown' : n.join('; ');
 };
 
-iD.Util.TAG_CLASSES = {
-    'highway': true,
-    'railway': true,
-    'motorway': true,
-    'amenity': true,
-    'landuse': true,
-    'building': true,
-    'bridge': true
-};
-
-iD.Util.styleClasses = function(pre) {
-    return function(d) {
-        var tags = d.tags;
-        var c = [pre];
-        function clean(x) {
-            return iD.Util.TAG_CLASSES[x];
-        }
-        for (var k in tags) {
-            if (!clean(k)) continue;
-            c.push(k + '-' + tags[k]);
-            c.push(k);
-        }
-        return c.join(' ');
-    };
-};

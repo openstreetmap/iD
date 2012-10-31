@@ -7,29 +7,22 @@
 // If a a way is _closed_, it is assumed to be an area unless it has a
 // `highway` or `barrier` tag and is not also tagged `area`.
 iD.Way = function(id, nodes, tags, loaded) {
-    // summary:		An OSM way.
+    nodes = nodes || [];
+    tags = tags || {};
     this.type = 'way';
     this.id = id;
     this._id = iD.Util.id();
     this.deleted = false;
     this.entity = new iD.Entity();
-    this.tags = tags || {};
+    this.tags = tags;
+    this.nodes = nodes;
     this.loaded = (loaded === undefined) ? true : loaded;
-    this.modified = this.id < 0;
-    this.nodes = [];
     this.extent = {};
-
-    if (nodes) {
-        for (var i = 0; i < nodes.length; i++) {
-            this.addNode(nodes[i]);
-        }
-    }
 };
 
 iD.Way.prototype = {
 
     addNode: function(node) {
-        node.entity.addParent(this);
         this.nodes.push(node);
         this._bounds = null;
         return this;
@@ -63,6 +56,7 @@ iD.Way.prototype = {
     // ---------------------
     // Bounding-box handling
     intersects: function(extent) {
+        return true;
         // No-node ways are inside of nothing.
         if (!this.nodes.length) return false;
         var bounds = this.bounds();

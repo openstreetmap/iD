@@ -9,9 +9,6 @@ iD.Relation = function(id, members, tags, loaded) {
     this.tags = tags;
     this.modified = this.id < 0;
     this.loaded = (loaded === undefined) ? true : loaded;
-    for (var i = 0; i < members.length; i++) {
-        members[i].entity.entity.addParent(this);
-    }
 };
 
 iD.Relation.prototype = {
