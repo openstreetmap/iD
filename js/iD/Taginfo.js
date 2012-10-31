@@ -1,5 +1,3 @@
-if (typeof iD === 'undefined') iD = {};
-
 // Taginfo service singleton
 iD.Taginfo = (function() {
 

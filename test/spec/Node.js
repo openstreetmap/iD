@@ -2,11 +2,11 @@ describe('Node', function() {
   var node;
 
   beforeEach(function() {
-      node = new iD.Node(null, 10, 38, -77);
+      node = new iD.Node(10, 38, -77);
   });
 
   it('is a node entity', function() {
-      expect(node.entityType).toEqual('node');
+      expect(node.type).toEqual('node');
   });
 
   it('should be initialized with a proper ID, lat, and lon', function() {
@@ -16,12 +16,6 @@ describe('Node', function() {
   });
 
   it('knows if it is within a bounding box', function() {
-      expect(node.within([[-90, 90], [90, -90]])).toBeTruthy();
-  });
-
-  it('can provide geojson', function() {
-      var gj = node.toGeoJSON();
-      expect(gj.type).toEqual('Feature');
-      expect(gj.geometry.type).toEqual('Point');
+      expect(node.intersects([[-90, 90], [90, -90]])).toBeTruthy();
   });
 });

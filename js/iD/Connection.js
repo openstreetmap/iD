@@ -1,15 +1,12 @@
-if (typeof iD === 'undefined') iD = {};
-
 iD.Connection = function() {
-    // summary:		The data store, including methods to fetch data from (and, eventually, save data to)
+    // summary:	The data store, including methods to fetch data from (and, eventually, save data to)
     // an OSM API server.
-    var nextNode = -1,		// next negative ids
-        nextWay = -1,		//  |
-        nextRelation = -1,	//  |
+    var nextNode = -1,
+        nextWay = -1,
+        nextRelation = -1,
         entities = {},
         relations = {},
-        pois = {},
-        apiURL = 'http://www.openstreetmap.org/api/0.6/map?bbox=',
+        apiURL = 'http://www.openstreetmap.org/api/0.6/',
         modified = false;
 
     var connection = {};
@@ -20,7 +17,7 @@ iD.Connection = function() {
 
     function assign(obj) {
         // summary:	Save an entity to the data store.
-        if (obj.entityType === 'relation') {
+        if (obj.type === 'relation') {
             if (!relations[obj.id]) relations[obj.id] = obj;
         } else if (!entities[obj.id] || !entities[obj.id].loaded) {
             entities[obj.id] = obj;
@@ -74,7 +71,7 @@ iD.Connection = function() {
 
     // Request data within the bbox from an external OSM server.
     function loadFromAPI(box, callback) {
-        loadFromURL(apiURL +
+        loadFromURL(apiURL + 'map?bbox=' +
             [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
     }
 

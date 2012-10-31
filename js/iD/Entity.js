@@ -1,11 +1,9 @@
-if (typeof iD === 'undefined') iD = {};
-
 iD.Entity = function () {
     this.parents = {};
     this._id = iD.Util.id();
     this.id = NaN;
     this.loaded = false;
-    this.entityType = '';
+    this.type = '';
     this.modified = false;
     this.deleted = false;
 };
@@ -36,7 +34,7 @@ iD.Entity.prototype = {
         // summary:		Does this entity have any parents which are ways?
         var parentObjects = this.parentObjects();
         for (var i = 0; i < parentObjects.length; i++) {
-            if (parentObjects[i].entityType === 'way') return true;
+            if (parentObjects[i].type === 'way') return true;
         }
     },
     parentWays: function () {
@@ -49,7 +47,7 @@ iD.Entity.prototype = {
         var poc = [];
         var parentObjects = this.parentObjects();
         for (var i = 0; i < parentObjects.length; i++) {
-            if (parentObjects[i].entityType === _class) {
+            if (parentObjects[i].type === _class) {
                 poc.push(parentObjects[i]);
             }
         }

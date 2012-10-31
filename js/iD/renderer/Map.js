@@ -179,13 +179,13 @@ iD.Map = function(obj) {
         var all = connection.intersects(extent());
 
         var ways = all.filter(function(a) {
-                return a.entityType === 'way' && !a.isClosed();
+                return a.type === 'way' && !a.isClosed();
             }).sort(waystack),
             areas = all.filter(function(a) {
-                return a.entityType === 'way' && a.isClosed();
+                return a.type === 'way' && a.isClosed();
             }),
             points = all.filter(function(a) {
-                return a.entityType === 'node';
+                return a.type === 'node';
             });
 
         var fills = layers[0].fill.selectAll('path.area')

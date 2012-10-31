@@ -41,7 +41,7 @@ define(['dojo/_base/declare',
 
         processMouseEvent: function(event, entityUI) {
             var entity = entityUI ? entityUI.entity : null;
-            var entityType = entity ? entity.entityType : null;
+            var entityType = entity ? entity.type : null;
             var way;
 
             if (event.type === 'click') {

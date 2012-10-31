@@ -14,17 +14,21 @@ describe('Map', function() {
         foo.parentNode.removeChild(foo);
     });
 
-    it('can set and get its zoom level', function() {
-        expect(map.setZoom(4)).toEqual(map);
-        expect(map.getZoom()).toEqual(4);
+    describe('#getZoom', function() {
+        it('accurate reports zoom level', function() {
+            expect(map.setZoom(4)).toEqual(map);
+            expect(map.getZoom()).toEqual(4);
+        });
     });
 
-    it('can zoom out and in', function() {
-        expect(map.setZoom(4)).toEqual(map);
-        expect(map.getZoom()).toEqual(4);
-        expect(map.zoomOut()).toEqual(map);
-        expect(map.getZoom()).toEqual(3);
-        expect(map.zoomIn()).toEqual(map);
-        expect(map.getZoom()).toEqual(4);
+    describe('#zoomIn', function() {
+        it('changes reported zoom level', function() {
+            expect(map.setZoom(4)).toEqual(map);
+            expect(map.getZoom()).toEqual(4);
+            expect(map.zoomOut()).toEqual(map);
+            expect(map.getZoom()).toEqual(3);
+            expect(map.zoomIn()).toEqual(map);
+            expect(map.getZoom()).toEqual(4);
+        });
     });
 });

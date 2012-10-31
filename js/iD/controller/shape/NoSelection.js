@@ -45,7 +45,7 @@ declare("iD.controller.shape.NoSelection", null, {
 
     processMouseEvent: function(event, entityUI) {
         var entity = entityUI ? entityUI.entity : null;
-        var entityType = entity ? entity.entityType : null;
+        var entityType = entity ? entity.type : null;
         var map = this.controller.map;
         var connection = map.connection;
 

@@ -1,5 +1,3 @@
-if (typeof iD === 'undefined') iD = {};
-
 iD.Util = {};
 
 iD.Util._id = 0;

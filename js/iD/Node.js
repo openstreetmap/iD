@@ -1,9 +1,7 @@
-if (typeof iD === 'undefined') iD = {};
-
 // [Node](http://wiki.openstreetmap.org/wiki/Node)
 iD.Node = function(id, lat, lon, tags, loaded) {
 	// summary: An OSM node.
-	this.entityType = 'node';
+	this.type = 'node';
 	this.id = id;
 	this._id = iD.Util.id();
 	this.entity = new iD.Entity();
@@ -18,17 +16,6 @@ iD.Node = function(id, lat, lon, tags, loaded) {
 };
 
 iD.Node.prototype = {
-    toGeoJSON: function() {
-        return {
-            type: 'Feature',
-            properties: this.tags,
-            geometry: {
-                type: 'Point',
-                coordinates: [this.lon, this.lat]
-            }
-        };
-    },
-
     intersects: function(extent) {
         return (this.lon >= extent[0][0]) &&
             (this.lon <= extent[1][0]) &&

@@ -17,7 +17,7 @@ iD.Inspector = function(selection) {
             head.append('a')
                 .attr('class', 'permalink')
                 .attr('href', 'http://www.openstreetmap.org/browse/' +
-                      d.entityType + '/' + d.id)
+                      d.type + '/' + d.id)
                 .text('#' + d.id);
 
             var table = d3.select(this)

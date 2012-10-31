@@ -1,0 +1,2 @@
+iD.Graph = function() {
+};

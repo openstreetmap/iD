@@ -7,15 +7,17 @@ describe('Way', function() {
   });
 
   it('is a way', function() {
-      expect(way.entityType).toEqual('way');
+      expect(way.type).toEqual('way');
   });
 
   it('has zero nodes by default', function() {
       expect(way.nodes.length).toEqual(0);
   });
 
-  it('is closed by default', function() {
-      expect(way.isClosed()).toEqual(true);
+  describe('#isClosed', function() {
+      it('is closed by default', function() {
+          expect(way.isClosed()).toEqual(true);
+      });
   });
 
   it('is a way when it has no nodes', function() {
@@ -24,11 +26,5 @@ describe('Way', function() {
 
   it('is also an area when it has no nodes', function() {
       expect(way.isType('area')).toEqual(true);
-  });
-
-  it('can provide geojson', function() {
-      var gj = way.toGeoJSON();
-      expect(gj.type).toEqual('Feature');
-      expect(gj.geometry.type).toEqual('LineString');
   });
 });

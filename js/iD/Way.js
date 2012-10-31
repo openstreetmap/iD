@@ -1,5 +1,3 @@
-if (typeof iD === 'undefined') iD = {};
-
 // Way
 // wiki: http://wiki.openstreetmap.org/wiki/Way
 //
@@ -10,7 +8,7 @@ if (typeof iD === 'undefined') iD = {};
 // `highway` or `barrier` tag and is not also tagged `area`.
 iD.Way = function(id, nodes, tags, loaded) {
     // summary:		An OSM way.
-    this.entityType = 'way';
+    this.type = 'way';
     this.id = id;
     this._id = iD.Util.id();
     this.deleted = false;
@@ -52,21 +50,8 @@ iD.Way.prototype = {
         return false;	// Boolean
     },
 
-    toGeoJSON: function() {
-        return {
-            type: 'Feature',
-            properties: this.tags,
-            geometry: {
-                'type': 'LineString',
-                'coordinates': _.map(this.nodes, function(node) {
-                    return [node.lon, node.lat];
-                })
-            }
-        };
-    },
-
     updateBounds: function() {
-        this._bounds = d3.geo.bounds(this.toGeoJSON());
+        this._bounds = d3.geo.bounds(iD.GeoJSON.mapping(this));
     },
 
     bounds: function() {
@@ -91,69 +76,5 @@ iD.Way.prototype = {
             // of the top-left
             bounds[0][0] > extent[1][0] &&
             bounds[0][1] > extent[1][1]);
-    },
-
-    // --------------
-    // Action callers
-
-    doAppendNode: function(node, performAction) {
-        // summary:		Add a node to the end of the way, using an undo stack.
-        // returns:		New length of the way.
-        if (node!=this.getLastNode()) performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, -1, true));
-        return this.nodes.length + 1;	// int
-    },
-
-    doPrependNode: function(node, performAction) {
-        // summary:		Add a node to the start of the way, using an undo stack.
-        // returns:		New length of the way.
-        if (node!=this.nodes[0]) performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, 0, true));
-        return this.nodes.length + 1;	// int
-    },
-
-    doInsertNode:function(index, node, performAction) {
-        // summary:		Add a node at a given index within the way, using an undo stack.
-        if (index > 0 && this.nodes[index - 1]==node) return;
-        if (index < this.nodes.length - 1 && this.nodes[index]==node) return;
-        performAction(new iD.actions.AddNodeToWayAction(this, node, this.nodes, index, false));
-    },
-
-    doInsertNodeAtClosestPosition:function(newNode, isSnap, performAction) {
-        // summary:			Add a node into whichever segment of the way is nearest, using an undo stack.
-        // isSnap: Boolean	Should the node position be snapped to be exactly on the segment?
-        // returns:			The index at which the node was inserted.
-        var closestProportion = 1,
-            newIndex = 0,
-            snapped;
-
-        for (var i = 0; i < this.nodes.length - 1; i++) {
-            var node1 = this.nodes[i],
-                node2 = this.nodes[i + 1],
-                directDist = this._pythagoras(node1, node2),
-                viaNewDist = this._pythagoras(node1, newNode) +
-                    this._pythagoras(node2, newNode),
-                proportion = Math.abs(viaNewDist/directDist - 1);
-            if (proportion < closestProportion) {
-                newIndex = i+1;
-                closestProportion = proportion;
-                snapped = this._calculateSnappedPoint(node1, node2, newNode);
-            }
-        }
-
-        // splice in new node
-        if (isSnap) { newNode.doSetLonLatp(snapped.x, snapped.y, performAction); }
-        this.doInsertNode(newIndex, newNode, performAction);
-        return newIndex;	// int
-    },
-
-    _pythagoras:function(node1, node2) {
-        return (Math.sqrt(Math.pow(node1.lon-node2.lon,2) +
-            Math.pow(node1.latp-node2.latp,2)));
-    },
-
-    _calculateSnappedPoint:function(node1, node2, newNode) {
-        var w = node2.lon  - node1.lon;
-        var h = node2.latp - node1.latp;
-        var u = ((newNode.lon-node1.lon) * w + (newNode.latp-node1.latp) * h) / (w*w + h*h);
-        return { x: node1.lon + u*w, y: node1.latp + u*h };
     }
 };

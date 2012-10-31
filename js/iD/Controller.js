@@ -1,5 +1,3 @@
-if (typeof iD === 'undefined') iD = {};
-
 iD.Controller = function() {
     var controller = {},
         state = null;
