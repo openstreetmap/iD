@@ -17,9 +17,6 @@ iD.Map = function(obj) {
 
     var inspector = iD.Inspector();
 
-    var tagclasses = [
-        'highway', 'railway', 'motorway', 'amenity', 'landuse', 'building', 'bridge'];
-
     var linegen = d3.svg.line()
         .x(function(d) { return projection(d)[0]; })
         .y(function(d) { return projection(d)[1]; });
@@ -100,25 +97,6 @@ iD.Map = function(obj) {
 
     function key(d) { return d._id; }
 
-    function classes(pre) {
-        return function(d) {
-            var tags = d.tags;
-            var c = [pre];
-            function clean(x) {
-                return tagclasses.indexOf(x) !== -1;
-            }
-            for (var k in tags) {
-                if (!clean(k)) continue;
-                c.push(k + '-' + tags[k]);
-                c.push(k);
-            }
-            if (selection.indexOf(d._id) !== -1) {
-                c.push('active');
-            }
-            return c.join(' ');
-        };
-    }
-
     function deselectClick() {
         selection = [];
         drawVector();
@@ -169,11 +147,22 @@ iD.Map = function(obj) {
         return as - bs;
     }
 
-    var class_stroke = classes('stroke'),
-        class_fill = classes('stroke'),
-        class_area = classes('area'),
-        class_marker = classes('marker'),
-        class_casing = classes('casing');
+    // This is an unfortunate hack that should be improved.
+    function augmentSelect(fn) {
+        return function(d) {
+            var c = fn(d);
+            if (selection.indexOf(d._id) !== -1) {
+                c += ' active';
+            }
+            return c;
+        };
+    }
+
+    var class_stroke = augmentSelect(iD.Util.styleClasses('stroke')),
+        class_fill =   augmentSelect(iD.Util.styleClasses('stroke')),
+        class_area =   augmentSelect(iD.Util.styleClasses('area')),
+        class_marker = augmentSelect(iD.Util.styleClasses('marker')),
+        class_casing = augmentSelect(iD.Util.styleClasses('casing'));
 
     function drawVector() {
         var all = connection.intersects(extent());

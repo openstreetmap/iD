@@ -1,4 +1,6 @@
 iD.Relation = function(id, members, tags, loaded) {
+    members = members || [];
+    tags = tags || {};
     this.type = 'relation';
     this.id = id;
     this._id = iD.Util.id();
@@ -10,6 +12,10 @@ iD.Relation = function(id, members, tags, loaded) {
     for (var i = 0; i < members.length; i++) {
         members[i].entity.entity.addParent(this);
     }
+};
+
+iD.Relation.prototype = {
+    intersects: function() { return true; }
 };
 
 iD.RelationMember = function(entity, role) {

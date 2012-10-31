@@ -30,23 +30,28 @@ iD.Util.friendlyName = function(entity) {
     return n.length === 0 ? 'unknown' : n.join('; ');
 };
 
-// TODO: don't use a cache here?
-iD.Util._presets = {};
-iD.Util.presets = function(type, callback) {
-    if (iD.Util._presets[type]) return callback(iD.Util._presets[type]);
-    $.ajax({
-        url: 'presets/' + type + '.json',
-        dataType: "json",
-        error: function() {
-            if (typeof console !== 'undefined') console.error(arguments);
-        },
-        success: function(resp) {
-            iD.Util._presets[type] = resp;
-            return callback(resp);
-        }
-    });
+iD.Util.TAG_CLASSES = {
+    'highway': true,
+    'railway': true,
+    'motorway': true,
+    'amenity': true,
+    'landuse': true,
+    'building': true,
+    'bridge': true
 };
 
-iD.Util.tileKey = function(coord) {
-    return coord.z + ',' + coord.x + ',' + coord.y;
+iD.Util.styleClasses = function(pre) {
+    return function(d) {
+        var tags = d.tags;
+        var c = [pre];
+        function clean(x) {
+            return iD.Util.TAG_CLASSES[x];
+        }
+        for (var k in tags) {
+            if (!clean(k)) continue;
+            c.push(k + '-' + tags[k]);
+            c.push(k);
+        }
+        return c.join(' ');
+    };
 };

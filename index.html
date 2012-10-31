@@ -64,6 +64,7 @@
     </div>
 <script>
     var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
+    connection.graph(new iD.Graph());
 
     var m = d3.select('#map');
     // Initialise map
@@ -83,26 +84,13 @@
 
     // ----------------------------------------------------
     // Mode button handlers
-    d3.select('#add-place').on('click', function() {
-        map.controller.setState(new iD.controller.shape.NoSelection('node'));
-    });
-
-    d3.select('#add-road').on('click', function() {
-        // map.controller.setState(new iD.controller.shape.DrawWay('way'));
-        console.log(iD.DrawWay.enter());
-        console.log(iD.DrawWay.enter(map));
-    });
-
-    d3.select('#add-area').on('click', function() {
-        map.controller.setState(new iD.controller.shape.NoSelection());
-    });
-
     function grid(resp) {
         map.setCentre({
             lon: resp.results[0][0].lon,
             lat: resp.results[0][0].lat
         });
     }
+
     d3.select('#geocode-form').on('submit', function() {
         d3.event.preventDefault();
         var val = d3.select('#geocode-location').node().value;
@@ -110,29 +98,6 @@
         scr.src = 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
                 encodeURIComponent(val) + '.jsonp?callback=grid';
     });
-
-    /*
-    $('#undo').click(function() {
-        map.controller.undoStack.undo();
-        map.updateUIs(true, true);
-    });
-
-    $('#redo').click(function() {
-        controller.undoStack.redo();
-        map.updateUIs(true, true);
-    });
-
-    // ----------------------------------------------------
-    // Map control handlers
-
-    $('#zoomIn').click(function() {
-        map.zoomIn();
-    });
-
-    $('#zoomOut').click(function() {
-        map.zoomOut();
-    });
-    */
 </script>
 </body>
 </html>
