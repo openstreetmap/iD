@@ -113,7 +113,7 @@ iD.Map = function(obj) {
     }
 
     function nodeline(d) {
-        return linegen(d.nodes.map(function(n) {
+        return linegen(d.children.map(function(n) {
             return connection.graph().index[n];
         }));
     }
@@ -163,7 +163,7 @@ iD.Map = function(obj) {
         });
 
         var handles = layers[0].hit.selectAll('circle.handle')
-            .data(active_entity.length ? active_entity[0].nodes : [], key);
+            .data(active_entity.length ? active_entity[0].children : [], key);
 
         handles.exit().remove();
         fills.exit().remove();

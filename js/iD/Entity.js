@@ -1,14 +1,7 @@
-iD.Entity = function () {
-    this.parents = {};
-    this._id = iD.Util.id();
-    this.id = NaN;
-    this.loaded = false;
-    this.type = '';
-    this.modified = false;
-    this.deleted = false;
-};
+iD.Entity = function () { };
 
 iD.Entity.prototype = {
+    parents: {},
     // a relation or way which contains this entity
     addParent: function (x) {
         this.parents[x._id] = x;

@@ -2,7 +2,6 @@ iD.Node = function(id, lat, lon, tags, loaded) {
 	this.type = 'node';
 	this.id = id;
 	this._id = iD.Util.id();
-	this.entity = new iD.Entity();
 	this.lat = lat;
 	this.lon = lon;
 	this[0] = lon;
@@ -19,3 +18,5 @@ iD.Node.prototype = {
             (this.lat >= extent[1][1]);
     }
 };
+
+iD.Util.extend(iD.Node, iD.Entity);

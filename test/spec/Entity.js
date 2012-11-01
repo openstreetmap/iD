@@ -5,10 +5,6 @@ describe('Entity', function () {
         entity = new iD.Entity();
     });
 
-    it('has no entity type', function () {
-        expect(entity.type).toEqual('');
-    });
-
     describe('#parentWays', function () {
         it('returns an array of parents with entityType way', function () {
             entity.addParent({_id: 1, type: 'way'});

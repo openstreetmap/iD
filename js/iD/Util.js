@@ -30,3 +30,11 @@ iD.Util.friendlyName = function(entity) {
     return n.length === 0 ? 'unknown' : n.join('; ');
 };
 
+iD.Util.extend = function(child, parent) {
+    for (var property in parent.prototype) {
+        if (typeof child.prototype[property] == "undefined") {
+            child.prototype[property] = parent.prototype[property];
+        }
+    }
+    return child;
+};

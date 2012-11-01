@@ -11,7 +11,7 @@ describe('Way', function() {
   });
 
   it('has zero nodes by default', function() {
-      expect(way.nodes.length).toEqual(0);
+      expect(way.children.length).toEqual(0);
   });
 
   describe('#isClosed', function() {

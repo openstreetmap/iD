@@ -1,3 +1,16 @@
+## The Graph
+
+iD implements a [persistent data structure](http://en.wikipedia.org/wiki/Persistent_data_structure)
+over the OSM data model.
+
+To be clear, this data model is something like
+
+
+    root -> relations (-> relations) -> ways -> nodes
+       \                             \> nodes
+        \-  ways -> nodes
+         \- nodes
+
 ## Actions
 
 Actions are operations on OSM data like adding nodes, moving ways,

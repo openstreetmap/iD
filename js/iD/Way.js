@@ -12,27 +12,19 @@ iD.Way = function(id, nodes, tags, loaded) {
     this.type = 'way';
     this.id = id;
     this._id = iD.Util.id();
-    this.deleted = false;
-    this.entity = new iD.Entity();
     this.tags = tags;
-    this.nodes = nodes;
+    this.children = nodes;
     this.loaded = (loaded === undefined) ? true : loaded;
     this.extent = {};
 };
 
 iD.Way.prototype = {
 
-    addNode: function(node) {
-        this.nodes.push(node);
-        this._bounds = null;
-        return this;
-    },
-
     // JOSM: http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/data/osm/Way.java#L466
     isClosed: function() {
         // summary:	Is this a closed way (first and last nodes the same)?
-        if (!this.nodes.length) return true;
-        return this.nodes[this.nodes.length - 1] === this.nodes[0];
+        if (!this.children.length) return true;
+        return this.children[this.children.length - 1] === this.children[0];
     },
 
     isType: function(type) {
@@ -56,9 +48,10 @@ iD.Way.prototype = {
     // ---------------------
     // Bounding-box handling
     intersects: function(extent) {
+        // TODO: rewrite with new id-mapping
         return true;
         // No-node ways are inside of nothing.
-        if (!this.nodes.length) return false;
+        if (!this.children.length) return false;
         var bounds = this.bounds();
         // left
         return !(
@@ -72,3 +65,5 @@ iD.Way.prototype = {
             bounds[0][1] > extent[1][1]);
     }
 };
+
+iD.Util.extend(iD.Way, iD.Entity);
