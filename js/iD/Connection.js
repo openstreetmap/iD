@@ -7,13 +7,13 @@ iD.Connection = function(graph) {
     var connection = {};
 
     function all() {
-        return d3.values(graph.index);
+        return graph.nodes;
     }
 
     function intersects(extent) {
         // summary:	Find all drawable entities that are within a given bounding box.
         // Each one is an array of entities.
-        return d3.values(graph.index).filter(function(e, id) {
+        return graph.nodes.filter(function(e, id) {
             return e.intersects(extent);
         });
     }

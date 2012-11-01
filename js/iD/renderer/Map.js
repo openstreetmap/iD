@@ -241,7 +241,9 @@ iD.Map = function(parentSelector) {
         dispatch.move(map);
         tileclient.redraw();
         drawVector();
-        download();
+        if (getZoom() > 13) {
+            download();
+        }
     }
 
     function getCenter() {
