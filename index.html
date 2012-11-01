@@ -28,6 +28,7 @@
 
         <script type="text/javascript" src="js/iD/renderer/tiles.js"></script>
         <script type="text/javascript" src="js/iD/renderer/Map.js"></script>
+        <script type="text/javascript" src="js/iD/renderer/hash.js"></script>
         <script type="text/javascript" src="js/iD/renderer/markers.js"></script>
         <script type="text/javascript" src="js/iD/ui/Inspector.js"></script>
 
@@ -76,6 +77,7 @@
     });
     map.setZoom(18)
         .setCentre({ lat: 40.7965621, lon: -74.4773184 });
+    iD.Hash().map(map);
 
     window.onresize = function() {
         map.setSize(m.node().offsetWidth,

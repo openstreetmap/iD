@@ -13,6 +13,8 @@ iD.Map = function(obj) {
             .scale(512).translate([512, 512]),
         connection = obj.connection;
 
+    var event = d3.dispatch('move');
+
     var inspector = iD.Inspector();
 
     var linegen = d3.svg.line()
@@ -239,9 +241,20 @@ iD.Map = function(obj) {
               .translate(d3.event.translate)
               .scale(d3.event.scale);
         }
+        event.move(map);
         tileclient.redraw();
         drawVector();
         download();
+    }
+
+    function getCenter() {
+        var ll = projection.invert([
+            width / 2,
+            height / 2]);
+        return {
+            lon: ll[0],
+            lat: ll[1]
+        };
     }
 
     function setCentre(loc) {
@@ -261,6 +274,7 @@ iD.Map = function(obj) {
     map.setCentre = setCentre;
     map.setCenter = setCentre;
 
+    map.getCenter = getCenter;
     map.getZoom = getZoom;
     map.setZoom = setZoom;
     map.zoomIn = zoomIn;
@@ -272,5 +286,5 @@ iD.Map = function(obj) {
 
     setSize(width, height);
     redraw();
-    return map;
+    return d3.rebind(map, event, 'on');
 };
