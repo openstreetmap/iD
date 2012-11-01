@@ -4,35 +4,54 @@ iD.XML = {
             return this.mappings[entity.type](entity);
         }
     },
-    mappings: {
-        node: function(entity) {
-            /*
-            return {
-                type: 'Feature',
-                properties: entity.tags,
-                geometry: {
-                    type: 'Point',
-                    coordinates: [entity.lon, entity.lat]
-                }
-            };
-            */
-        },
-        way: function(entity) {
-            return (new XMLSerializer()).serializeToString(
-            JXON.unbuild({
-                way: {
-                    '@id': entity.id,
-                    'nd': entity.children.map(function(e) {
-                        return {
-                            keyAttributes: {
-                                ref: e.id
-                            }
-                        };
-                    })
-                }
-            })).replace(/>/g,'&gt;').
+    decode: function(s) {
+        return s.replace(/>/g,'&gt;').
                 replace(/</g,'&lt;').
                 replace(/"/g,'&quot;');
+    },
+    mappings: {
+        node: function(entity) {
+            return iD.XML.decode((new XMLSerializer()).serializeToString(
+                JXON.unbuild({
+                    node: {
+                        '@id': entity.id,
+                        '@lat': entity.lat,
+                        '@lon': entity.lon,
+                        'tag': _.map(entity.tags, function(k, v) {
+                            return {
+                                keyAttributes: {
+                                    k: k,
+                                    v: v
+                                }
+                            };
+                        })
+                    }
+                })
+            ));
+        },
+        way: function(entity) {
+            return iD.XML.decode(
+                (new XMLSerializer()).serializeToString(
+                    JXON.unbuild({
+                        way: {
+                            '@id': entity.id,
+                            'nd': entity.children.map(function(e) {
+                                return {
+                                    keyAttributes: {
+                                        ref: e.id
+                                    }
+                                };
+                            }),
+                            'tag': _.map(entity.tags, function(k, v) {
+                                return {
+                                    keyAttributes: {
+                                        k: k,
+                                        v: v
+                                    }
+                                };
+                            })
+                        }
+                    })));
         }
     }
 };

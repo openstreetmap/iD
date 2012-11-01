@@ -130,8 +130,6 @@ const JXON = new (function () {
     return oNewDoc;
   };
 })();
-
-
 // var myObject = JXON.build(doc);
 // we got our javascript object! try: alert(JSON.stringify(myObject));
 

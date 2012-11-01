@@ -64,5 +64,3 @@ iD.Way.prototype = {
             bounds[0][1] > extent[1][1]);
     }
 };
-
-// iD.Util.extend(iD.Way, iD.Entity);

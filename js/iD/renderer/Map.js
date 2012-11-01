@@ -208,7 +208,7 @@ iD.Map = function(parentSelector) {
 
         markers
             .attr('transform', function(d) {
-                return 'translate(' + projection(d) + ')';
+                return 'translate(' + projection([d.lon, d.lat]) + ')';
             });
     }
 

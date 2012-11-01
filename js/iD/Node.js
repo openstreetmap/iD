@@ -20,5 +20,3 @@ iD.Node.prototype = {
     }
 
 };
-
-// iD.Util.extend(iD.Node, iD.Entity);
