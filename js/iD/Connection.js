@@ -14,7 +14,14 @@ iD.Connection = function(graph) {
         // summary:	Find all drawable entities that are within a given bounding box.
         // Each one is an array of entities.
         return graph.nodes.filter(function(e, id) {
-            return e.intersects(extent);
+            if (e.lon !== undefined) {
+                return (e.lon >= extent[0][0]) &&
+                    (e.lon <= extent[1][0]) &&
+                    (e.lat <= extent[0][1]) &&
+                    (e.lat >= extent[1][1]);
+            } else {
+                return e.intersects(extent);
+            }
         });
     }
 
@@ -86,6 +93,7 @@ iD.Connection = function(graph) {
             for (i = 0; i < ways.length; i++) graph.insert(objectData(ways[i]));
             for (i = 0; i < relations.length; i++) graph.insert(objectData(relations[i]));
             for (i = 0; i < nodes.length; i++) graph.insert(objectData(nodes[i]));
+            graph.build();
             callback(null);
         };
     }

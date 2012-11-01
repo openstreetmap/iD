@@ -1,6 +1,6 @@
-iD.Relation = function(id, children, tags, loaded) {
+iD.Relation = function(id, uid, children, tags, loaded) {
     this.id = id;
-    this._id = iD.Util.id();
+    this.uid = uid;
     this.children = children || [];
     this.tags = tags || {};
     this.loaded = (loaded === undefined) ? true : loaded;

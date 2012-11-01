@@ -1,6 +1,5 @@
 iD.Node = function(id, lat, lon, tags, loaded) {
 	this.id = id;
-	this._id = iD.Util.id();
 	this.lat = lat;
 	this.lon = lon;
 	this.tags = tags || {};

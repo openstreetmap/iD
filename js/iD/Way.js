@@ -6,9 +6,9 @@
 //
 // If a a way is _closed_, it is assumed to be an area unless it has a
 // `highway` or `barrier` tag and is not also tagged `area`.
-iD.Way = function(id, children, tags, loaded) {
+iD.Way = function(id, uid, children, tags, loaded) {
     this.id = id;
-    this._id = iD.Util.id();
+    this.uid = uid;
     this.tags = tags || {};
     this.children = children || [];
     this.loaded = (loaded === undefined) ? true : loaded;

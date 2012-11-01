@@ -31,11 +31,11 @@ iD.Map = function(parentSelector) {
 
     var linegen = d3.svg.line()
         .x(function(d) {
-            var node = connection.graph.index[d];
+            var node = connection.graph.fetch(d);
             return projection([node.lon, node.lat])[0];
         })
         .y(function(d) {
-            var node = connection.graph.index[d];
+            var node = connection.graph.fetch(d);
             return projection([node.lon, node.lat])[1];
         });
 
@@ -95,10 +95,10 @@ iD.Map = function(parentSelector) {
     }
 
     function select(d) {
-        selection = [d._id];
+        selection = [d.uid];
     }
 
-    function key(d) { return d._id; }
+    function key(d) { return d.uid; }
 
     function deselectClick() {
         selection = [];
@@ -124,7 +124,7 @@ iD.Map = function(parentSelector) {
     function augmentSelect(fn) {
         return function(d) {
             var c = fn(d);
-            if (selection.indexOf(d._id) !== -1) {
+            if (selection.indexOf(d.uid) !== -1) {
                 c += ' active';
             }
             return c;
@@ -157,9 +157,9 @@ iD.Map = function(parentSelector) {
                 .data(points.filter(iD.markerimage), key);
 
         if (selection.length) {
-            var _id = selection[0];
+            var uid = selection[0];
             var active_entity = all.filter(function(a) {
-                return a._id === _id && a.entityType === 'way';
+                return a.uid === uid && a.entityType === 'way';
             });
 
             var handles = hit_g.selectAll('circle.handle')
@@ -281,6 +281,8 @@ iD.Map = function(parentSelector) {
     map.connection = connection;
     map.projection = projection;
     map.setSize = setSize;
+
+    map.graph = graph;
 
     setSize(width, height);
     redraw();
