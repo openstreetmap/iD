@@ -77,6 +77,11 @@
     map.setZoom(18)
         .setCentre({ lat: 40.7965621, lon: -74.4773184 });
 
+    window.onresize = function() {
+        map.setSize(m.node().offsetWidth,
+            m.node().offsetHeight);
+    };
+
     // ----------------------------------------------------
     // Data is loaded and app ready to go
     // Set initial controllerState

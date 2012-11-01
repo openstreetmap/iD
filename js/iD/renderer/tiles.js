@@ -1,8 +1,8 @@
 // a minimal map tile client, to be turned on and off etc.
-iD.Tiles = function(selection, width, height) {
+iD.Tiles = function(selection, projection, width, height) {
     var tiles = {};
 
-    function tilesForView(projection) {
+    function tilesForView() {
         var t = projection.translate(),
             s = projection.scale(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
@@ -36,7 +36,7 @@ iD.Tiles = function(selection, width, height) {
         return tmpl.replace('$quadkey', u);
     }
 
-    function redraw(projection) {
+    function redraw() {
         var t = projection.translate(),
             s = projection.scale(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
@@ -63,6 +63,14 @@ iD.Tiles = function(selection, width, height) {
             });
     }
 
+    function setSize(w, h) {
+        width = w;
+        height = h;
+        redraw();
+        return tiles;
+    }
+
+    tiles.setSize = setSize;
     tiles.redraw = redraw;
 
     return tiles;

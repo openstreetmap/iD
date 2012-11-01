@@ -1,17 +1,14 @@
 iD.Relation = function(id, children, tags, loaded) {
-    members = members || [];
-    tags = tags || {};
-    this.type = 'relation';
     this.id = id;
     this._id = iD.Util.id();
-	this.entity = new iD.Entity();
-    this.children = children;
-    this.tags = tags;
-    this.modified = this.id < 0;
+    this.children = children || [];
+    this.tags = tags || {};
     this.loaded = (loaded === undefined) ? true : loaded;
 };
 
 iD.Relation.prototype = {
+    type: 'relation',
+
     intersects: function() { return true; }
 };
 

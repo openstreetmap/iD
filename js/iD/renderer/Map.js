@@ -11,8 +11,7 @@ iD.Map = function(obj) {
         height = obj.height || 400,
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
-        connection = obj.connection,
-        layers = {};
+        connection = obj.connection;
 
     var inspector = iD.Inspector();
 
@@ -34,20 +33,19 @@ iD.Map = function(obj) {
 
    // http://bl.ocks.org/1557377
    function dragmove(d) {
-      d3.select(this).attr('transform', function() {
-          return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
-      });
-      var ll = projection.invert([d3.event.x, d3.event.y]);
-      d[0] = ll[0];
-      d[1] = ll[1];
-      drawVector();
+        d3.select(this).attr('transform', function() {
+            return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
+        });
+        var ll = projection.invert([d3.event.x, d3.event.y]);
+        d[0] = ll[0];
+        d[1] = ll[1];
+        drawVector();
     }
 
     zoombehavior.on('zoom', redraw);
 
     var surface = d3.selectAll(obj.selector)
         .append('svg')
-        .attr({ width: width, height: height })
         .call(zoombehavior);
 
     var defs = surface.append('defs');
@@ -56,29 +54,28 @@ iD.Map = function(obj) {
         .attr('id', 'clip')
         .append('rect')
         .attr('id', 'clip-rect')
-        .attr({ x: 0, y: 0 })
-        .attr({ width: width, height: height });
+        .attr({ x: 0, y: 0 });
 
     var tilegroup = surface.append('g')
             .attr('clip-path', 'url(#clip)')
             .on('click', deselectClick),
-        container = surface.append('g')
+        r = surface.append('g')
             .attr('clip-path', 'url(#clip)');
 
-   var tileclient = iD.Tiles(tilegroup, width, height);
+   var tileclient = iD.Tiles(tilegroup, projection, width, height);
 
-   var r = container.append('g');
+    function setSize(width, height) {
+        surface.attr({ width: width, height: height });
+        clipPath.attr({ width: width, height: height });
+        tileclient.setSize(width, height);
+    }
 
-   layers[0] = {
-       root: r,
-       fill: r.append('g'),
-       casing: r.append('g'),
-       stroke: r.append('g'),
-       text: r.append('g'),
-       hit: r.append('g')
-   };
-
-    var elastic = container.append('g');
+   var fill_g = r.append('g'),
+       casing_g =  r.append('g'),
+       stroke_g = r.append('g'),
+       text_g = r.append('g'),
+       hit_g = r.append('g'),
+       elastic = r.append('g');
 
     var download = _.debounce(function() {
         connection.loadFromAPI(extent(), drawVector);
@@ -148,24 +145,35 @@ iD.Map = function(obj) {
                 return a.type === 'node';
             });
 
-        var fills = layers[0].fill.selectAll('path.area')
+        var fills = fill_g.selectAll('path.area')
                 .data(areas, key),
-            casings = layers[0].casing.selectAll('path.casing')
+            casings = casing_g.selectAll('path.casing')
                 .data(ways, key),
-            strokes = layers[0].stroke.selectAll('path.stroke')
+            strokes = stroke_g.selectAll('path.stroke')
                 .data(ways, key),
-            markers = layers[0].hit.selectAll('image.marker')
+            markers = hit_g.selectAll('image.marker')
                 .data(points.filter(iD.markerimage), key);
 
-        var _id = selection[0];
-        var active_entity = all.filter(function(a) {
-            return a._id === _id && a.entityType === 'way';
-        });
+        if (selection.length) {
+            var _id = selection[0];
+            var active_entity = all.filter(function(a) {
+                return a._id === _id && a.entityType === 'way';
+            });
 
-        var handles = layers[0].hit.selectAll('circle.handle')
-            .data(active_entity.length ? active_entity[0].children : [], key);
+            var handles = hit_g.selectAll('circle.handle')
+                .data(active_entity.length ? active_entity[0].children : [], key);
 
-        handles.exit().remove();
+            handles.exit().remove();
+
+            handles.enter().append('circle')
+                .attr('class', 'handle')
+                .attr('r', 5)
+                .call(dragbehavior);
+            handles.attr('transform', function(d) {
+                return 'translate(' + projection(d) + ')';
+            });
+        }
+
         fills.exit().remove();
         markers.exit().remove();
         casings.exit().remove();
@@ -201,13 +209,6 @@ iD.Map = function(obj) {
                 return 'translate(' + projection(d) + ')';
             });
 
-        handles.enter().append('circle')
-            .attr('class', 'handle')
-            .attr('r', 5)
-            .call(dragbehavior);
-        handles.attr('transform', function(d) {
-            return 'translate(' + projection(d) + ')';
-        });
     }
 
     function zoomIn() {
@@ -238,7 +239,7 @@ iD.Map = function(obj) {
               .translate(d3.event.translate)
               .scale(d3.event.scale);
         }
-        tileclient.redraw(projection);
+        tileclient.redraw();
         drawVector();
         download();
     }
@@ -267,7 +268,9 @@ iD.Map = function(obj) {
 
     map.connection = connection;
     map.projection = projection;
+    map.setSize = setSize;
 
+    setSize(width, height);
     redraw();
     return map;
 };
