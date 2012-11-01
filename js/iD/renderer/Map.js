@@ -18,8 +18,14 @@ iD.Map = function(obj) {
     var inspector = iD.Inspector();
 
     var linegen = d3.svg.line()
-        .x(function(d) { return projection(d)[0]; })
-        .y(function(d) { return projection(d)[1]; });
+        .x(function(d) {
+            var node = connection.graph.index[d];
+            return projection([node.lon, node.lat])[0];
+        })
+        .y(function(d) {
+            var node = connection.graph.index[d];
+            return projection([node.lon, node.lat])[1];
+        });
 
     var zoombehavior = d3.behavior.zoom()
         .translate(projection.translate())
@@ -112,10 +118,7 @@ iD.Map = function(obj) {
     }
 
     function nodeline(d) {
-        return linegen(d.children.map(function(n) {
-            var node = connection.graph().index[n];
-            return [node.lon, node.lat];
-        }));
+        return linegen(d.children);
     }
 
     // This is an unfortunate hack that should be improved.

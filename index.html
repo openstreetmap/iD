@@ -63,9 +63,7 @@
         Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
     </div>
 <script>
-    var connection = new iD.Connection("http://www.overpass-api.de/api/xapi?");
-    var graph = new iD.Graph();
-    connection.graph(graph);
+    var connection = new iD.Connection(new iD.Graph());
 
     var m = d3.select('#map');
     // Initialise map

@@ -1,10 +1,9 @@
-iD.Connection = function() {
+iD.Connection = function(graph) {
     // summary:	The data store, including methods to fetch data from (and, eventually, save data to)
     // an OSM API server.
     var nextNode = -1,
         nextWay = -1,
         nextRelation = -1,
-        graph = {},
         apiURL = 'http://www.openstreetmap.org/api/0.6/';
 
     var connection = {};
@@ -99,12 +98,7 @@ iD.Connection = function() {
         };
     }
 
-    connection.graph = function(x) {
-        if (!arguments.length) return graph;
-        graph = x;
-        return connection;
-    };
-
+    connection.graph = graph;
     connection.all = all;
     connection.loadFromAPI = loadFromAPI;
     connection.loadFromURL = loadFromURL;
