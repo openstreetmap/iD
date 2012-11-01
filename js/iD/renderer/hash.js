@@ -22,10 +22,10 @@ iD.Hash = function() {
              "/" + center.lon.toFixed(precision);
   };
 
-  function move() {
+  var move = _.throttle(function() {
     var s1 = formatter(map);
     if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
-  }
+  }, 1000);
 
   function hashchange() {
     if (location.hash === s0) return; // ignore spurious hashchange events
