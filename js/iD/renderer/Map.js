@@ -14,20 +14,20 @@ iD.Map = function(parentSelector) {
         height = parent.node().offsetHeight,
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
-        dispatch = d3.dispatch('move');
+        dispatch = d3.dispatch('move'),
+        inspector = iD.Inspector(graph);
 
     var zoombehavior = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
-            .scaleExtent([256, 134217728]),
+            .scaleExtent([256, 134217728])
+            .on('zoom', redraw),
         dragbehavior = d3.behavior.drag()
             .origin(function(d) {
                 var p = projection(d);
                 return { x: p[0], y: p[1] };
             })
-            .on("drag", dragmove);
-
-    var inspector = iD.Inspector(graph);
+            .on('drag', dragmove);
 
     var linegen = d3.svg.line()
         .x(function(d) {
@@ -50,14 +50,10 @@ iD.Map = function(parentSelector) {
         drawVector();
     }
 
-    zoombehavior.on('zoom', redraw);
-
     var surface = parent.append('svg')
         .call(zoombehavior);
 
-    var defs = surface.append('defs');
-
-    var clipPath = defs.append('clipPath')
+    surface.append('defs').append('clipPath')
         .attr('id', 'clip')
         .append('rect')
         .attr('id', 'clip-rect')
@@ -73,7 +69,7 @@ iD.Map = function(parentSelector) {
 
     function setSize(width, height) {
         surface.attr({ width: width, height: height });
-        clipPath.attr({ width: width, height: height });
+        surface.selectAll('#clip-rect').attr({ width: width, height: height });
         tileclient.setSize(width, height);
     }
 
@@ -88,16 +84,6 @@ iD.Map = function(parentSelector) {
         connection.loadFromAPI(extent(), drawVector);
     }, 1000);
 
-    function extent() {
-        return [
-            projection.invert([0, 0]),
-            projection.invert([width, height])];
-    }
-
-    function select(d) {
-        selection = [d.uid];
-    }
-
     function key(d) { return d.uid; }
 
     function deselectClick() {
@@ -108,7 +94,7 @@ iD.Map = function(parentSelector) {
     }
 
     function selectClick(d) {
-        select(d);
+        selection = [d.uid];
         drawVector();
         d3.select('.inspector-wrap')
             .style('display', 'block')
@@ -132,8 +118,8 @@ iD.Map = function(parentSelector) {
     }
 
     var class_stroke = augmentSelect(iD.Style.styleClasses('stroke')),
-        class_fill =   augmentSelect(iD.Style.styleClasses('stroke')),
-        class_area =   augmentSelect(iD.Style.styleClasses('area')),
+        class_fill = augmentSelect(iD.Style.styleClasses('stroke')),
+        class_area = augmentSelect(iD.Style.styleClasses('area')),
         class_marker = augmentSelect(iD.Style.styleClasses('marker')),
         class_casing = augmentSelect(iD.Style.styleClasses('casing'));
 
@@ -212,6 +198,24 @@ iD.Map = function(parentSelector) {
             });
     }
 
+    function redraw() {
+        if (d3.event) {
+            projection
+              .translate(d3.event.translate)
+              .scale(d3.event.scale);
+        }
+        dispatch.move(map);
+        tileclient.redraw();
+        drawVector();
+        if (getZoom() > 13) download();
+    }
+
+    function extent() {
+        return [
+            projection.invert([0, 0]),
+            projection.invert([width, height])];
+    }
+
     function getZoom(zoom) {
         var s = projection.scale();
         return Math.max(Math.log(s) / Math.log(2) - 7, 0);
@@ -228,20 +232,6 @@ iD.Map = function(parentSelector) {
 
     function zoomIn() { return setZoom(getZoom() + 1); }
     function zoomOut() { return setZoom(getZoom() - 1); }
-
-    function redraw() {
-        if (d3.event) {
-            projection
-              .translate(d3.event.translate)
-              .scale(d3.event.scale);
-        }
-        dispatch.move(map);
-        tileclient.redraw();
-        drawVector();
-        if (getZoom() > 13) {
-            download();
-        }
-    }
 
     function getCenter() {
         var ll = projection.invert([
