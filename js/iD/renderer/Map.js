@@ -150,12 +150,9 @@ iD.Map = function(parentSelector) {
                 return a.type === 'node';
             });
 
-        var fills = fill_g.selectAll('path.area')
-                .data(areas, key),
-            casings = casing_g.selectAll('path.casing')
-                .data(ways, key),
-            strokes = stroke_g.selectAll('path.stroke')
-                .data(ways, key),
+        var fills = fill_g.selectAll('path.area').data(areas, key),
+            casings = casing_g.selectAll('path.casing').data(ways, key),
+            strokes = stroke_g.selectAll('path.stroke').data(ways, key),
             markers = hit_g.selectAll('image.marker')
                 .data(points.filter(iD.markerimage), key);
 

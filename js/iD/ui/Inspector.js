@@ -18,23 +18,21 @@ iD.Inspector = function(graph) {
                 .attr('class', 'permalink')
                 .attr('href', 'http://www.openstreetmap.org/browse/' +
                       d.type + '/' + d.id)
-                .text('#' + d.id);
+                .text('OSM');
 
             head.append('a')
                 .attr('class', 'permalink')
                 .attr('href', '#')
-                .text(d.id + '.geojson')
+                .text('GeoJSON')
                 .on('click', function() {
-                    iD.Util.codeWindow(
-                        JSON.stringify(iD.GeoJSON.mapping(graph.fetch(d.id)), null, 2));
                     d3.event.stopPropagation();
+                    iD.Util.codeWindow(JSON.stringify(
+                        iD.GeoJSON.mapping(graph.fetch(d.id)), null, 2));
                 });
 
             var table = d3.select(this)
                 .append('table')
                 .attr('class', 'inspector');
-
-            var tbody = table.append('tbody');
 
             table.append('thead').append('tr').selectAll('th')
                 .data(['tag', 'value'])
@@ -42,12 +40,15 @@ iD.Inspector = function(graph) {
                 .append('th')
                     .text(String);
 
+            var tbody = table.append('tbody');
+
             var row = tbody.selectAll('tr')
                 .data(d3.entries(d.tags))
                 .enter()
                 .append('tr');
 
             row.append('td').append('input')
+                .attr('class', 'tag-key')
                 .property('value', function(d) { return d.key; })
                 .on('change', function(row) {
                     row.key = this.key;

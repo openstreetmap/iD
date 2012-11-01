@@ -175,28 +175,34 @@ table td {
 
 .inspector-wrap a.permalink {
     text-decoration:none;
-    margin-right:2em;
+    margin-right:1em;
     font: normal 11px/20px 'Helvetica'
 }
 
 .inspector thead th {
     font-size:10px;
-    line-height:10px;
+    line-height:15px;
     color:#999;
     font-weight:normal;
     text-transform:uppercase;
+}
+
+.inspector tbody td {
+    border: 1px solid #ccc;
 }
 
 .inspector input {
     margin:0;
     padding:4px;
     border:0;
-    border-bottom:1px solid #ccc;
     width:150px;
+    border:0;
 }
 
-.inspector input.tag-input {
-    box-shadow: inset -2px 0 10px #EEE
+.inspector input.tag-key {
+}
+
+.inspector input.tag-value {
 }
 
 .presets h3 {
