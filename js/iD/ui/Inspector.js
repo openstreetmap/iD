@@ -23,6 +23,15 @@ iD.Inspector = function(graph) {
             head.append('a')
                 .attr('class', 'permalink')
                 .attr('href', '#')
+                .text('XML')
+                .on('click', function() {
+                    d3.event.stopPropagation();
+                    iD.Util.codeWindow(iD.XML.mapping(graph.fetch(d.id)));
+                });
+
+            head.append('a')
+                .attr('class', 'permalink')
+                .attr('href', '#')
                 .text('GeoJSON')
                 .on('click', function() {
                     d3.event.stopPropagation();
