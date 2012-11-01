@@ -63,16 +63,10 @@
         Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
     </div>
 <script>
-    var connection = new iD.Connection(new iD.Graph());
-
-    var m = d3.select('#map');
     // Initialise map
-    var map = iD.Map({
-        selector: "#map",
-        connection: connection,
-        width: m.node().offsetWidth,
-        height: m.node().offsetHeight
-    });
+    var m = d3.select('#map');
+    var map = iD.Map('#map');
+
     map.setZoom(18)
         .setCentre({ lat: 40.7965621, lon: -74.4773184 });
     iD.Hash().map(map);

@@ -12,9 +12,4 @@ iD.Relation.prototype = {
     intersects: function() { return true; }
 };
 
-iD.Util.extend(iD.Relation, iD.Entity);
-
-iD.RelationMember = function(entity, role) {
-    this.entity = entity;
-    this.role = role;
-};
+// iD.Util.extend(iD.Relation, iD.Entity);

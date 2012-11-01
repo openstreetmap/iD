@@ -175,6 +175,7 @@ table td {
 
 .inspector-wrap a.permalink {
     text-decoration:none;
+    margin-right:2em;
     font: normal 11px/20px 'Helvetica'
 }
 

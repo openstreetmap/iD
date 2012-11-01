@@ -1,4 +1,4 @@
-iD.Inspector = function(selection) {
+iD.Inspector = function(graph) {
     var event = d3.dispatch('change', 'update');
 
     function inspector(selection) {
@@ -19,6 +19,16 @@ iD.Inspector = function(selection) {
                 .attr('href', 'http://www.openstreetmap.org/browse/' +
                       d.type + '/' + d.id)
                 .text('#' + d.id);
+
+            head.append('a')
+                .attr('class', 'permalink')
+                .attr('href', '#')
+                .text(d.id + '.geojson')
+                .on('click', function() {
+                    iD.Util.codeWindow(
+                        JSON.stringify(iD.GeoJSON.mapping(graph.fetch(d.id)), null, 2));
+                    d3.event.stopPropagation();
+                });
 
             var table = d3.select(this)
                 .append('table')

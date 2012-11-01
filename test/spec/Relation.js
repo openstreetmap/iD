@@ -1,8 +1,8 @@
-describe('Relation Member', function() {
+describe('Relation', function() {
   var rm;
 
   beforeEach(function() {
-      rm = new iD.RelationMember();
+      rm = new iD.Relation();
   });
 
   it('is instantiated', function() {

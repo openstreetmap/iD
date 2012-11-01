@@ -1,6 +1,4 @@
 iD.Connection = function(graph) {
-    // summary:	The data store, including methods to fetch data from (and, eventually, save data to)
-    // an OSM API server.
     var nextNode = -1,
         nextWay = -1,
         nextRelation = -1,
@@ -49,22 +47,15 @@ iD.Connection = function(graph) {
     }
 
     function getMembers(obj) {
-        var members = [];
-        var elems = obj.getElementsByTagName('member');
+        var members = [],
+            elems = obj.getElementsByTagName('member');
 
         for (var i = 0; i < elems.length; i++) {
-            var item = elems[i];
-            var id = +item.attributes.ref.nodeValue,
-                type = item.attributes.type.nodeValue,
-                role = item.attributes.role.nodeValue;
-
-            var o = {
-                id: id,
-                type: type,
-                role: role
-            };
-
-            members.push(o);
+            members.push({
+                id: +elems[i].attributes.ref.nodeValue,
+                type: elems[i].attributes.type.nodeValue,
+                role: elems[i].attributes.role.nodeValue
+            });
         }
 
         return members;
@@ -87,9 +78,10 @@ iD.Connection = function(graph) {
             if (!dom.childNodes) {
                 return callback(new Error('Bad request'));
             }
-            var ways = dom.childNodes[0].getElementsByTagName('way'),
-                relations = dom.childNodes[0].getElementsByTagName('relation'),
-                nodes = dom.childNodes[0].getElementsByTagName('node');
+            var root = dom.childNodes[0],
+                ways = root.getElementsByTagName('way'),
+                relations = root.getElementsByTagName('relation'),
+                nodes = root.getElementsByTagName('node');
             var i;
             for (i = 0; i < ways.length; i++) graph.insert(objectData(ways[i]));
             for (i = 0; i < relations.length; i++) graph.insert(objectData(relations[i]));

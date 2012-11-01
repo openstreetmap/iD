@@ -38,3 +38,11 @@ iD.Util.extend = function(child, parent) {
     }
     return child;
 };
+
+iD.Util.codeWindow = function(content) {
+    top.win = window.open('','contentWindow',
+        'width=350,height=350,menubar=0' +
+        ',toolbar=1,status=0,scrollbars=1,resizable=1');
+    top.win.document.writeln('<pre>' + content + '</pre>');
+    top.win.document.close();
+};

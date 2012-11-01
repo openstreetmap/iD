@@ -11,17 +11,35 @@ To be clear, this data model is something like
         \-  ways -> nodes
          \- nodes
 
-## Actions
 
-Actions are operations on OSM data like adding nodes, moving ways,
-and so on. They are initiated by controller states, like
-`iD.controller.ControllerState` initiates a `CreatePOIAction` and
-adds it to the undo stack.
+## Performance
 
-## Entities
+Main performance concerns of iD:
 
-`iD.Entity` is the door from pure objects like `iD.Node` into a hierarchy
-of objects - it provides handling of parents, children, and so on.
+### Panning & zooming performance of the map
+
+SVG redraws are costly, especially when they require all features to
+be reprojected.
+
+Approaches:
+
+* Using CSS transforms for intermediate map states, and then redrawing when
+  map movement stops
+* "In-between" projecting features to make reprojection cheaper
+
+### Memory overhead of objects
+
+Many things will be stored by iD. With the graph structure in place, we'll
+be storing much more.
+
+## Connection, Graph, Map
+
+The Map is a display and manipulation element. It should have minimal particulars
+of how exactly to store or retrieve data. It gets data from Connection and
+asks for it from Graph.
+
+Graph stores all of the objects and all of the versions of those objects.
+Connection requests objects over HTTP, parses them, and provides them to Graph.
 
 ## loaded
 

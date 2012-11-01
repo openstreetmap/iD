@@ -1,6 +1,5 @@
 iD.Graph = function() {
     this.index = {};
-    this.nodes = [];
 };
 
 iD.Graph.prototype = {
@@ -26,5 +25,15 @@ iD.Graph.prototype = {
         if (obj && (!this.index[obj.id] || !this.index[obj.id].loaded)) {
             this.index[obj.id] = obj;
         }
+    },
+
+    fetch: function(id) {
+        var obj = _.clone(this.index[id]);
+        var children = [];
+        for (var i = 0; i < obj.children.length; i++) {
+            children.push(this.index[obj.children[i]]);
+        }
+        obj.children = children;
+        return obj;
     }
 };

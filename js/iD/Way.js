@@ -65,4 +65,4 @@ iD.Way.prototype = {
     }
 };
 
-iD.Util.extend(iD.Way, iD.Entity);
+// iD.Util.extend(iD.Way, iD.Entity);

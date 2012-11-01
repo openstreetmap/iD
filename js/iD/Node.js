@@ -4,6 +4,7 @@ iD.Node = function(id, lat, lon, tags, loaded) {
 	this.lat = lat;
 	this.lon = lon;
 	this.tags = tags || {};
+    this.children = [];
 	this.loaded = (loaded === undefined) ? true : loaded;
 };
 
@@ -20,4 +21,4 @@ iD.Node.prototype = {
 
 };
 
-iD.Util.extend(iD.Node, iD.Entity);
+// iD.Util.extend(iD.Node, iD.Entity);

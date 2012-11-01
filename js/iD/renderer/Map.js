@@ -4,18 +4,30 @@
 // ----------------------------------------------------------------------
 // Connection base class
 
-iD.Map = function(obj) {
-    var map = {},
+iD.Map = function(parentSelector) {
+    var graph = new iD.Graph(),
+        connection = new iD.Connection(graph);
+        map = {},
+        parent = d3.selectAll(parentSelector),
         selection = [],
-        width = obj.width || 800,
-        height = obj.height || 400,
+        width = parent.node().offsetWidth,
+        height = parent.node().offsetHeight,
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
-        connection = obj.connection;
+        dispatch = d3.dispatch('move');
 
-    var event = d3.dispatch('move');
+    var zoombehavior = d3.behavior.zoom()
+            .translate(projection.translate())
+            .scale(projection.scale())
+            .scaleExtent([256, 134217728]),
+        dragbehavior = d3.behavior.drag()
+            .origin(function(d) {
+                var p = projection(d);
+                return { x: p[0], y: p[1] };
+            })
+            .on("drag", dragmove);
 
-    var inspector = iD.Inspector();
+    var inspector = iD.Inspector(graph);
 
     var linegen = d3.svg.line()
         .x(function(d) {
@@ -27,33 +39,20 @@ iD.Map = function(obj) {
             return projection([node.lon, node.lat])[1];
         });
 
-    var zoombehavior = d3.behavior.zoom()
-        .translate(projection.translate())
-        .scale(projection.scale())
-        .scaleExtent([256, 134217728]);
-
-    var dragbehavior = d3.behavior.drag()
-        .origin(function(d) {
-            var p = projection(d);
-            return { x: p[0], y: p[1] };
-        })
-        .on("drag", dragmove);
-
    // http://bl.ocks.org/1557377
    function dragmove(d) {
         d3.select(this).attr('transform', function() {
             return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
         });
         var ll = projection.invert([d3.event.x, d3.event.y]);
-        d[0] = ll[0];
-        d[1] = ll[1];
+        d.lon = ll[0];
+        d.lat = ll[1];
         drawVector();
     }
 
     zoombehavior.on('zoom', redraw);
 
-    var surface = d3.selectAll(obj.selector)
-        .append('svg')
+    var surface = parent.append('svg')
         .call(zoombehavior);
 
     var defs = surface.append('defs');
@@ -214,15 +213,6 @@ iD.Map = function(obj) {
             .attr('transform', function(d) {
                 return 'translate(' + projection(d) + ')';
             });
-
-    }
-
-    function zoomIn() {
-        return setZoom(getZoom() + 1);
-    }
-
-    function zoomOut() {
-        return setZoom(getZoom() - 1);
     }
 
     function getZoom(zoom) {
@@ -239,13 +229,16 @@ iD.Map = function(obj) {
         return map;
     }
 
+    function zoomIn() { return setZoom(getZoom() + 1); }
+    function zoomOut() { return setZoom(getZoom() - 1); }
+
     function redraw() {
         if (d3.event) {
             projection
               .translate(d3.event.translate)
               .scale(d3.event.scale);
         }
-        event.move(map);
+        dispatch.move(map);
         tileclient.redraw();
         drawVector();
         download();
@@ -275,10 +268,12 @@ iD.Map = function(obj) {
 
     map.download = download;
     map.extent = extent;
+
     map.setCentre = setCentre;
     map.setCenter = setCentre;
-
+    map.getCentre = getCenter;
     map.getCenter = getCenter;
+
     map.getZoom = getZoom;
     map.setZoom = setZoom;
     map.zoomIn = zoomIn;
@@ -290,5 +285,5 @@ iD.Map = function(obj) {
 
     setSize(width, height);
     redraw();
-    return d3.rebind(map, event, 'on');
+    return d3.rebind(map, dispatch, 'on');
 };
