@@ -3,8 +3,6 @@ iD.Node = function(id, lat, lon, tags, loaded) {
 	this._id = iD.Util.id();
 	this.lat = lat;
 	this.lon = lon;
-	this[0] = lon;
-	this[1] = lat;
 	this.tags = tags || {};
 	this.loaded = (loaded === undefined) ? true : loaded;
 };

@@ -35,7 +35,7 @@ iD.Connection = function() {
         var nodes = [], nelems = obj.getElementsByTagName('nd');
         for (var i = 0; i < nelems.length; i++) {
             var item = nelems[i];
-            nodes.push(item.attributes.ref.nodeValue);
+            nodes.push(+item.attributes.ref.nodeValue);
         }
         return nodes;
     }
@@ -55,7 +55,7 @@ iD.Connection = function() {
 
         for (var i = 0; i < elems.length; i++) {
             var item = elems[i];
-            var id = item.attributes.ref.nodeValue,
+            var id = +item.attributes.ref.nodeValue,
                 type = item.attributes.type.nodeValue,
                 role = item.attributes.role.nodeValue;
 
@@ -74,10 +74,10 @@ iD.Connection = function() {
     function objectData(obj) {
         return {
             type: obj.nodeName,
-            id: obj.attributes.id.nodeValue,
+            id: +obj.attributes.id.nodeValue,
             tags: getTags(obj),
-            lat: (obj.attributes.lat) ? obj.attributes.lat.nodeValue : null,
-            lon: (obj.attributes.lon) ? obj.attributes.lon.nodeValue : null,
+            lat: (obj.attributes.lat) ? +obj.attributes.lat.nodeValue : null,
+            lon: (obj.attributes.lon) ? +obj.attributes.lon.nodeValue : null,
             members: getMembers(obj),
             nodes: getNodes(obj)
         };

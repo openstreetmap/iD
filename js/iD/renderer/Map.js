@@ -113,7 +113,8 @@ iD.Map = function(obj) {
 
     function nodeline(d) {
         return linegen(d.children.map(function(n) {
-            return connection.graph().index[n];
+            var node = connection.graph().index[n];
+            return [node.lon, node.lat];
         }));
     }
 
