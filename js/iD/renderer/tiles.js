@@ -39,9 +39,11 @@ iD.Tiles = function(selection, projection, width, height) {
             .data(coords, function(d) { return d[3]; });
 
         tiles.exit().remove();
+
         tiles.enter().append('image')
             .attr('class', 'tile')
             .attr('xlink:href', tileUrl);
+
         tiles.attr({ width: Math.ceil(ts), height: Math.ceil(ts) })
             .attr('transform', function(d) {
                 return 'translate(' +

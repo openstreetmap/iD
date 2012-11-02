@@ -15,6 +15,12 @@ circle.handle {
     fill:#D3F5FF;
 }
 
+circle.teaser-point {
+    stroke-width: 2;
+    stroke:#1DCAFF;
+    fill:#D3F5FF;
+}
+
 .casing {
     stroke: #111;
     stroke-linecap:round;

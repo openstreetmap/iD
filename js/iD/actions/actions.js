@@ -1,8 +1,9 @@
 iD.actions = {};
 
 iD.actions.AddPlace = {
-    bind: function(controller) {
+    bind: function(controller, map) {
         this.controller = controller;
+        this.map = map;
         d3.selectAll('button#place').on('click', function() {
             iD.actions.AddPlace.enter();
         });
@@ -11,17 +12,40 @@ iD.actions.AddPlace = {
         d3.selectAll('button').classed('active', false);
         d3.selectAll('button#place').classed('active', true);
 
+        var surface = this.map.surface;
+        var teaser = surface.selectAll('g#temp-g')
+            .append('g').attr('id', 'teaser-g');
+
+        teaser.append('circle')
+            .attr('class', 'teaser-point')
+            .attr('r', 10);
+
+        surface.on('mousemove.shift', function() {
+            teaser.attr('transform', function() {
+                var off = d3.mouse(surface.node());
+                return 'translate(' + off + ')';
+            });
+        });
+
+        surface.on('click', function() {
+            var off = d3.mouse(surface.node());
+            this.exit();
+        }.bind(this));
+
         // Bind clicks to the map to 'add a place' and
         // add little floaty place
     },
     exit: function() {
+        this.map.surface.on('mousemove.shift', null);
+        d3.selectAll('#teaser-g').remove();
         d3.selectAll('button#place').classed('active', false);
     }
 };
 
 iD.actions.AddRoad = {
-    bind: function(controller) {
+    bind: function(controller, map) {
         this.controller = controller;
+        this.map = map;
         d3.selectAll('button#road').on('click', function() {
             iD.actions.AddRoad.enter();
         });
@@ -39,8 +63,9 @@ iD.actions.AddRoad = {
 };
 
 iD.actions.AddArea = {
-    bind: function(controller) {
+    bind: function(controller, map) {
         this.controller = controller;
+        this.map = map;
         d3.selectAll('button#area').on('click', function() {
             iD.actions.AddArea.enter();
         });
@@ -58,8 +83,9 @@ iD.actions.AddArea = {
 };
 
 iD.actions.Move = {
-    bind: function(controller) {
+    bind: function(controller, map) {
         this.controller = controller;
+        this.map = map;
     },
     enter: function() {
         d3.selectAll('button').classed('active', false);
@@ -68,17 +94,16 @@ iD.actions.Move = {
 };
 
 iD.controller = function(map) {
-    var controller = {},
-        action;
+    var controller = { action: null };
 
-    for (var a in iD.actions) iD.actions[a].bind(controller);
+    for (var a in iD.actions) iD.actions[a].bind(controller, map);
 
     controller.go = function(x) {
-        if (action) {
-            action.exit();
+        if (controller.action) {
+            controller.action.exit();
         }
         x.enter();
-        action = x;
+        controller.action = x;
     };
 
     controller.go(iD.actions.Move);

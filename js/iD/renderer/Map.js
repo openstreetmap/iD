@@ -80,12 +80,12 @@ iD.Map = function(elem) {
         r = surface.append('g')
             .attr('clip-path', 'url(#clip)');
 
-    var fill_g = r.append('g'),
-        casing_g =  r.append('g'),
-        stroke_g = r.append('g'),
-        text_g = r.append('g'),
-        hit_g = r.append('g'),
-        elastic = r.append('g');
+    var fill_g = r.append('g').attr('id', 'fill-g'),
+        casing_g =  r.append('g').attr('id', 'casing-g'),
+        stroke_g = r.append('g').attr('id', 'stroke-g'),
+        text_g = r.append('g').attr('id', 'text-g'),
+        hit_g = r.append('g').attr('id', 'hit-g'),
+        temp = r.append('g').attr('id', 'temp-g');
 
     var class_stroke = augmentSelect(iD.Style.styleClasses('stroke')),
         class_fill = augmentSelect(iD.Style.styleClasses('stroke')),
@@ -315,6 +315,7 @@ iD.Map = function(elem) {
     map.setSize = setSize;
 
     map.graph = graph;
+    map.surface = surface;
 
     setSize(
         parent.node().offsetWidth,

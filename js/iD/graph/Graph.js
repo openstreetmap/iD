@@ -45,5 +45,15 @@ iD.Graph.prototype = {
             }
         }
         return items;
+    },
+
+    fetch: function(object) {
+        var o = this.index[object][0];
+        var f = _.clone(o);
+        if (!f.children || !f.children.length) return f;
+        f.children = f.children.map(function(c) {
+            return this.fetch(c);
+        }.bind(this));
+        return f;
     }
 };
