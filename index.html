@@ -10,19 +10,17 @@
     </head>
     <body>
         <div id='map'></div>
-        <div id='modebuttons'>
+        <div id='bar'>
             <button id='place'>
                 + Place</button><button id='road'>
                 + Road</button><button id='area'>
                 + Area</button><button class='mini' id='undo'>
                 &larr;</button><button class='mini' id='redo'>
-                &rarr;</button><form action='GET' id='geocode-form'><input type='text' id='geocode-location' placeholder='find a place' />
-            </form>
-        </div>
-
-        <div id='zoombuttons'>
-            <button id='zoomIn'>+</button><button id='zoomOut'>&ndash;</button>
-        </div>
+                &rarr;</button><input type='text' id='geocode-location' placeholder='find a place' />
+                <div class='zoombuttons'>
+                    <button class='zoom-in'>+</button><button class='zoom-out'>&ndash;</button>
+                </div>
+            </div>
 
         <div class='inspector-wrap'></div>
         <div id='about'>
@@ -71,6 +69,8 @@
             iD.Hash().map(map);
             iD.UI.bind();
 
+            iD.controller(map);
+
             window.onresize = function() {
                 map.setSize(m.node().offsetWidth,
                 m.node().offsetHeight);
@@ -83,13 +83,17 @@
                 });
             }
 
-            d3.select('#geocode-form').on('submit', function() {
+            d3.select('#geocode-location').on('keydown', function() {
+                if (d3.event.keyCode !== 13) return;
                 d3.event.preventDefault();
                 var val = d3.select('#geocode-location').node().value;
                 var scr = document.body.appendChild(document.createElement('script'));
                 scr.src = 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
                 encodeURIComponent(val) + '.jsonp?callback=grid';
             });
+
+            d3.select('.zoombuttons .zoom-in').on('click', map.zoomIn);
+            d3.select('.zoombuttons .zoom-out').on('click', map.zoomOut);
         </script>
     </body>
 </html>

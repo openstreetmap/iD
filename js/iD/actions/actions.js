@@ -67,7 +67,7 @@ iD.actions.Move = {
     exit: function() { }
 };
 
-iD.controller = (function() {
+iD.controller = function(map) {
     var controller = {},
         action;
 
@@ -86,10 +86,9 @@ iD.controller = (function() {
     // Pressing 'escape' should exit any action.
     d3.select(document).on('keydown', function() {
         if (d3.event.keyCode === 27) {
-            iD.controller.go(iD.actions.Move);
+            controller.go(iD.actions.Move);
         }
     });
 
     return controller;
-})();
-
+};

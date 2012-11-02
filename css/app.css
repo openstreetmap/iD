@@ -1,6 +1,5 @@
 body {
     font:normal 13px/20px Helvetica, Arial, sans-serif;
-    background:#e4e4e4;
     margin:0;
     padding:0;
     text-rendering: optimizeLegibility;
@@ -10,10 +9,11 @@ body {
 #map {
     display:block;
     position:absolute;
-    top:0;
+    top:40px;
     left:0;
     right:0;
     bottom:0;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAI0lEQVQIW2NkYGD4f+/ePSAFAYxAzn84D1lASUmJAaQSQwUAcxYRaXDVJ6QAAAAASUVORK5CYII=);
 }
 
 #about {
@@ -25,17 +25,19 @@ body {
 }
 
 
-#modebuttons {
-    width:600px;
+#bar {
+    background:#222;
     position:absolute;
     left:0px;
     top:0px;
+    height:40px;
+    right:0;
 }
 
-form {
-    margin:0;
-    padding:0;
-    display:inline-block;
+#geocode-location {
+    position:absolute;
+    background:#555;
+    color:#fff;
 }
 
 :focus {
@@ -103,36 +105,35 @@ table td {
     display:none;
 }
 
-#modebuttons button {
+#bar button {
     width:100px;
     cursor:pointer;
     display:inline-block;
-    background:#ddd;
-    color:#222;
+    background:#222222;
+    color:#999;
     font:bold 19px/30px 'Helvetica Neue', sans-serif;
     border:0;
     border-right:1px solid #222;
-    border-bottom:1px solid #222;
     padding:0 10px;
     height:40px;
     margin:0;
 }
 
-#modebuttons button:hover {
-    background:#eee;
-    color:#000;
+#bar button:hover {
+    background:#333;
 }
 
-#modebuttons button.active {
-    background:#fff;
+#bar button.active {
+    background:#000;
+    color:#fff;
 }
 
-#modebuttons button.mini,
-#modebuttons button.mini {
+#bar button.mini,
+#bar button.mini {
     width:50px;
 }
 
-#modebuttons input[type=text] {
+#bar input[type=text] {
     width:150px;
     height:30px;
     border:0;
@@ -140,29 +141,15 @@ table td {
     margin:0;
 }
 
-#zoombuttons button {
-    cursor:pointer;
-    width:30px;
-    height:30px;
-    text-align:center;
-    margin:0;
-    background:#fff;
-    color:#555;
-    font:bold 20px/20px 'Helvetica';
-    border:1px solid #888;
+.zoombuttons {
+    position:absolute;
+    right:0;
+    top:0;
 }
-
-#zoombuttons button:active {
-    background:#eee;
-}
-
-#zoombuttons #zoomIn {
-    border-radius: 4px 0 0 4px;
-}
-
-#zoombuttons #zoomOut {
-    border-left:0;
-    border-radius: 0 4px 4px 0;
+#bar .zoombuttons button {
+    width:50px;
+    background:#333333;
+    color:#fff;
 }
 
 .inspector-wrap {

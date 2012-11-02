@@ -26,7 +26,7 @@ iD.Map = function(elem) {
             .translate(projection.translate())
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
-            .on('zoom', redraw),
+            .on('zoom', zoomPan),
         dragbehavior = d3.behavior.drag()
             .origin(function(d) {
                 var p = projection(d);
@@ -208,12 +208,14 @@ iD.Map = function(elem) {
         };
     }
 
+    function zoomPan() {
+        projection
+            .translate(d3.event.translate)
+            .scale(d3.event.scale);
+        redraw();
+    }
+
     function redraw() {
-        if (d3.event) {
-            projection
-                .translate(d3.event.translate)
-                .scale(d3.event.scale);
-        }
         dispatch.move(map);
         tileclient.redraw();
         if (getZoom() > 13) {
@@ -234,6 +236,18 @@ iD.Map = function(elem) {
             projection.invert([width, height])];
     }
 
+    function pointLocation(p) {
+        var translate = projection.translate(),
+            scale = projection.scale();
+        return [(p[0] - translate[0]) / scale, (p[1] - translate[1]) / scale];
+    }
+
+    function locationPoint(l) {
+        var translate = projection.translate(),
+            scale = projection.scale();
+        return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
+    }
+
     function getZoom(zoom) {
         var s = projection.scale();
         return Math.max(Math.log(s) / Math.log(2) - 7, 0);
@@ -241,15 +255,24 @@ iD.Map = function(elem) {
 
     function setZoom(zoom) {
         // summary:	Redraw the map at a new zoom level.
-        projection.scale(256 * Math.pow(2, zoom - 1));
+        var scale = 256 * Math.pow(2, zoom - 1);
+        var l = pointLocation([width / 2, height / 2]);
+        projection.scale(scale);
         zoombehavior.scale(projection.scale());
+
+        var t = projection.translate();
+        l = locationPoint(l);
+        t[0] += (width / 2) - l[0];
+        t[1] += (height / 2) - l[1];
+        projection.translate(t);
+
         drawVector();
         redraw();
         return map;
     }
 
-    function zoomIn() { return setZoom(getZoom() + 1); }
-    function zoomOut() { return setZoom(getZoom() - 1); }
+    function zoomIn() { return setZoom(Math.ceil(getZoom() + 1)); }
+    function zoomOut() { return setZoom(Math.floor(getZoom() - 1)); }
 
     function getCenter() {
         var ll = projection.invert([
