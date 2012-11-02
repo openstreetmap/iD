@@ -48,7 +48,7 @@
         <script type='text/javascript' src='js/iD/ui/Inspector.js'></script>
 
         <script type='text/javascript' src='js/iD/actions/actions.js'></script>
-        <script type='text/javascript' src='js/iD/actions/CreatePOI.js'></script>
+        <script type='text/javascript' src='js/iD/actions/AddPlace.js'></script>
 
         <script type='text/javascript' src='js/iD/format/GeoJSON.js'></script>
         <script type='text/javascript' src='js/iD/format/XML.js'></script>
@@ -82,6 +82,8 @@
                     lat: resp.results[0][0].lat
                 });
             }
+
+            for (var a in iD.actions) iD.actions[a].bind();
 
             d3.select('#geocode-form').on('submit', function() {
                 d3.event.preventDefault();

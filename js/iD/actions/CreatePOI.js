@@ -1,3 +1,0 @@
-iD.actions.createPoi = function() {
-    
-};

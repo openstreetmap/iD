@@ -123,6 +123,10 @@ table td {
     color:#000;
 }
 
+#modebuttons button.active {
+    background:#fff;
+}
+
 #modebuttons button.mini,
 #modebuttons button.mini {
     width:50px;
