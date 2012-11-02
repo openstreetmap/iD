@@ -83,8 +83,6 @@
                 });
             }
 
-            for (var a in iD.actions) iD.actions[a].bind();
-
             d3.select('#geocode-form').on('submit', function() {
                 d3.event.preventDefault();
                 var val = d3.select('#geocode-location').node().value;
