@@ -20,6 +20,8 @@ In English:
 
 The background for this is in [#50](https://github.com/systemed/iD/issues/50).
 
+Also see [this spec by jfirebaugh](https://gist.github.com/3994398)
+
 The idea is that we keep every _changed_ of an object around, but reuse
 unchanged objects between versions.
 
@@ -63,6 +65,10 @@ Approaches:
 
 Many things will be stored by iD. With the graph structure in place, we'll
 be storing much more.
+
+We also need to worry about **memory leaks**, which have been a big problem
+in Potlatch 2. Storing OSM data and versions leads to a lot of object-referencing
+in Javascript.
 
 ## Connection, Graph, Map
 
