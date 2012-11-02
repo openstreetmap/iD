@@ -80,3 +80,27 @@ which refer to elements, so we want to have real references of those
 elements, but we don't have the data yet. Thus when the Connection
 encounters a new object but has a non-loaded representation of it,
 the non-loaded version is replaced.
+
+## Prior Art
+
+JOSM and Potlatch 2 appear to implement versioning in the same way, but having
+an undo stack:
+
+```java
+// src/org/openstreetmap/josm/actions/MoveNodeAction.java
+Main.main.undoRedo.add(new MoveCommand(n, coordinates));
+
+// src/org/openstreetmap/josm/command/MoveCommand.java
+
+/**
+ * List of all old states of the objects.
+ */
+private List<OldState> oldState = new LinkedList<OldState>();
+
+@Override public boolean executeCommand() {
+// ...
+}
+@Override public void undoCommand() {
+// ...
+}
+```

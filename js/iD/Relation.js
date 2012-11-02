@@ -11,5 +11,3 @@ iD.Relation.prototype = {
 
     intersects: function() { return true; }
 };
-
-// iD.Util.extend(iD.Relation, iD.Entity);

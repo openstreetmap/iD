@@ -8,7 +8,6 @@ iD.Node = function(id, lat, lon, tags, loaded) {
 };
 
 iD.Node.prototype = {
-
     type: 'node',
 
     intersects: function(extent) {
@@ -17,5 +16,4 @@ iD.Node.prototype = {
             (this.lat <= extent[0][1]) &&
             (this.lat >= extent[1][1]);
     }
-
 };
