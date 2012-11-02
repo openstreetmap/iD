@@ -1,23 +1,18 @@
-// iD/renderer/Map.js
-// at present this combines P2's Map and MapPaint functionality
-
-// ----------------------------------------------------------------------
-// Connection base class
-
 iD.Map = function(parentSelector) {
-    var graph = new iD.Graph(),
+
+    var map = {},
+        width, height,
+        dispatch = d3.dispatch('move'),
+        // data
+        graph = new iD.Graph(),
         connection = new iD.Connection(graph);
-        map = {},
+        inspector = iD.Inspector(graph),
         parent = d3.selectAll(parentSelector),
         selection = [],
-        width = parent.node().offsetWidth,
-        height = parent.node().offsetHeight,
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
-        dispatch = d3.dispatch('move'),
-        inspector = iD.Inspector(graph);
-
-    var zoombehavior = d3.behavior.zoom()
+        // behaviors
+        zoombehavior = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
@@ -27,29 +22,39 @@ iD.Map = function(parentSelector) {
                 var p = projection(d);
                 return { x: p[0], y: p[1] };
             })
-            .on('drag', dragmove);
+            .on('drag', function dragmove(d) {
+                d3.select(this).attr('transform', function() {
+                    return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
+                });
+                var ll = projection.invert([d3.event.x, d3.event.y]);
+                d.lon = ll[0];
+                d.lat = ll[1];
+                drawVector();
+            }),
+        // geo
+        linegen = d3.svg.line()
+            .x(function(d) {
+                var node = connection.graph.fetch(d);
+                return projection([node.lon, node.lat])[0];
+            })
+            .y(function(d) {
+                var node = connection.graph.fetch(d);
+                return projection([node.lon, node.lat])[1];
+            }),
+        // Abstract linegen so that it pulls from `.children`. This
+        // makes it possible to call simply `.attr('d', nodeline)`.
+        nodeline = function(d) {
+            return linegen(d.children);
+        },
+        // Abstract a key function that looks for uids. This is given
+        // as a second argument to `.data()`.
+        key = function(d) { return d.uid; };
 
-    var linegen = d3.svg.line()
-        .x(function(d) {
-            var node = connection.graph.fetch(d);
-            return projection([node.lon, node.lat])[0];
-        })
-        .y(function(d) {
-            var node = connection.graph.fetch(d);
-            return projection([node.lon, node.lat])[1];
-        });
-
-   // http://bl.ocks.org/1557377
-   function dragmove(d) {
-        d3.select(this).attr('transform', function() {
-            return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
-        });
-        var ll = projection.invert([d3.event.x, d3.event.y]);
-        d.lon = ll[0];
-        d.lat = ll[1];
-        drawVector();
-    }
-
+    // Creating containers
+    // -------------------
+    // The map uses SVG groups in order to restrict
+    // visual and event ordering - fills below casings, casings below
+    // strokes, and so on.
     var surface = parent.append('svg')
         .call(zoombehavior);
 
@@ -65,57 +70,12 @@ iD.Map = function(parentSelector) {
         r = surface.append('g')
             .attr('clip-path', 'url(#clip)');
 
-   var tileclient = iD.Tiles(tilegroup, projection, width, height);
-
-    function setSize(width, height) {
-        surface.attr({ width: width, height: height });
-        surface.selectAll('#clip-rect').attr({ width: width, height: height });
-        tileclient.setSize(width, height);
-    }
-
-   var fill_g = r.append('g'),
-       casing_g =  r.append('g'),
-       stroke_g = r.append('g'),
-       text_g = r.append('g'),
-       hit_g = r.append('g'),
-       elastic = r.append('g');
-
-    var download = _.debounce(function() {
-        connection.loadFromAPI(extent(), drawVector);
-    }, 1000);
-
-    function key(d) { return d.uid; }
-
-    function deselectClick() {
-        selection = [];
-        drawVector();
-        d3.select('.inspector-wrap').style('display', 'none');
-        d3.event.stopPropagation();
-    }
-
-    function selectClick(d) {
-        selection = [d.uid];
-        drawVector();
-        d3.select('.inspector-wrap')
-            .style('display', 'block')
-            .datum(d).call(inspector);
-        d3.event.stopPropagation();
-    }
-
-    function nodeline(d) {
-        return linegen(d.children);
-    }
-
-    // This is an unfortunate hack that should be improved.
-    function augmentSelect(fn) {
-        return function(d) {
-            var c = fn(d);
-            if (selection.indexOf(d.uid) !== -1) {
-                c += ' active';
-            }
-            return c;
-        };
-    }
+    var fill_g = r.append('g'),
+        casing_g =  r.append('g'),
+        stroke_g = r.append('g'),
+        text_g = r.append('g'),
+        hit_g = r.append('g'),
+        elastic = r.append('g');
 
     var class_stroke = augmentSelect(iD.Style.styleClasses('stroke')),
         class_fill = augmentSelect(iD.Style.styleClasses('stroke')),
@@ -123,8 +83,10 @@ iD.Map = function(parentSelector) {
         class_marker = augmentSelect(iD.Style.styleClasses('marker')),
         class_casing = augmentSelect(iD.Style.styleClasses('casing'));
 
+    var tileclient = iD.Tiles(tilegroup, projection);
+
     function drawVector() {
-        var all = connection.intersects(extent());
+        var all = connection.intersects(getExtent());
 
         var ways = all.filter(function(a) {
                 return a.type === 'way' && !a.isClosed();
@@ -142,6 +104,40 @@ iD.Map = function(parentSelector) {
             markers = hit_g.selectAll('image.marker')
                 .data(points.filter(iD.markerimage), key);
 
+        // Fills
+        fills.exit().remove();
+        fills.enter().append('path')
+            .on('click', selectClick);
+        fills.attr('d', nodeline)
+            .attr('class', class_area);
+
+        // Casings
+        casings.exit().remove();
+        casings.enter().append('path');
+        casings.order()
+            .attr('d', nodeline)
+            .attr('class', class_casing);
+
+        // Strokes
+        strokes.exit().remove();
+        strokes.enter().append('path')
+            .on('click', selectClick);
+        strokes.order()
+            .attr('d', nodeline)
+            .attr('class', class_stroke);
+
+        // Markers
+        markers.exit().remove();
+        markers.enter().append('image')
+            .attr('class', class_marker)
+            .on('click', selectClick)
+            .attr({ width: 16, height: 16 })
+            .attr('xlink:href', iD.markerimage)
+            .call(dragbehavior);
+        markers.attr('transform', function(d) {
+                return 'translate(' + projection([d.lon, d.lat]) + ')';
+            });
+
         if (selection.length) {
             var uid = selection[0];
             var active_entity = all.filter(function(a) {
@@ -149,7 +145,7 @@ iD.Map = function(parentSelector) {
             });
 
             var handles = hit_g.selectAll('circle.handle')
-                .data(active_entity.length ? active_entity[0].children : [], key);
+            .data(active_entity.length ? active_entity[0].children : [], key);
 
             handles.exit().remove();
 
@@ -161,56 +157,68 @@ iD.Map = function(parentSelector) {
                 return 'translate(' + projection(d) + ')';
             });
         }
+    }
 
-        fills.exit().remove();
-        markers.exit().remove();
-        casings.exit().remove();
-        strokes.exit().remove();
+    function setSize(w, h) {
+        width = w;
+        height = h;
+        surface.attr({ width: width, height: height });
+        surface.selectAll('#clip-rect').attr({ width: width, height: height });
+        tileclient.setSize(width, height);
+    }
 
-        fills.enter().append('path')
-            .on('click', selectClick);
+    var download = _.debounce(function() {
+        connection.loadFromAPI(getExtent(), drawVector);
+    }, 1000);
 
-        fills.attr('d', nodeline)
-            .attr('class', class_area);
+    function deselectClick() {
+        selection = [];
+        drawVector();
+        d3.select('.inspector-wrap').style('display', 'none');
+        d3.event.stopPropagation();
+    }
 
-        casings.enter().append('path');
-        casings.order()
-            .attr('d', nodeline)
-            .attr('class', class_casing);
+    function selectClick(d) {
+        selection = [d.uid];
+        drawVector();
+        d3.select('.inspector-wrap')
+        .style('display', 'block')
+        .datum(d).call(inspector);
+        d3.event.stopPropagation();
+    }
 
-        strokes.enter().append('path')
-            .on('click', selectClick);
-
-        strokes.order()
-            .attr('d', nodeline)
-            .attr('class', class_stroke);
-
-        markers.enter().append('image')
-            .attr('class', class_marker)
-            .on('click', selectClick)
-            .attr({ width: 16, height: 16 })
-            .attr('xlink:href', iD.markerimage)
-            .call(dragbehavior);
-
-        markers
-            .attr('transform', function(d) {
-                return 'translate(' + projection([d.lon, d.lat]) + ')';
-            });
+    // This is an unfortunate hack that should be improved.
+    function augmentSelect(fn) {
+        return function(d) {
+            var c = fn(d);
+            if (selection.indexOf(d.uid) !== -1) {
+                c += ' active';
+            }
+            return c;
+        };
     }
 
     function redraw() {
         if (d3.event) {
             projection
-              .translate(d3.event.translate)
-              .scale(d3.event.scale);
+                .translate(d3.event.translate)
+                .scale(d3.event.scale);
         }
         dispatch.move(map);
         tileclient.redraw();
-        drawVector();
-        if (getZoom() > 13) download();
+        if (getZoom() > 13) {
+            download();
+            drawVector();
+        } else {
+        }
     }
 
-    function extent() {
+    // Getters & setters for map state
+    // -------------------------------
+    // The map state can be expressed entirely as the combination
+    // of a centerpoint and a zoom level. Zoom levels are floating-point
+    // values, and we express lat, lon points as `{ lat, lon }` objects.
+    function getExtent() {
         return [
             projection.invert([0, 0]),
             projection.invert([width, height])];
@@ -243,23 +251,23 @@ iD.Map = function(parentSelector) {
         };
     }
 
-    function setCentre(loc) {
+    function setCenter(loc) {
         // summary:		Update centre and bbox to a specified lat/lon.
         var t = projection.translate(),
-            ll = projection([loc.lon, loc.lat]);
+        ll = projection([loc.lon, loc.lat]);
         projection.translate([
             t[0] - ll[0] + width / 2,
             t[1] - ll[1] + height / 2]);
-        zoombehavior.translate(projection.translate());
-        redraw();
-        return map;
+            zoombehavior.translate(projection.translate());
+            redraw();
+            return map;
     }
 
     map.download = download;
-    map.extent = extent;
+    map.getExtent = getExtent;
 
-    map.setCentre = setCentre;
-    map.setCenter = setCentre;
+    map.setCenter = setCenter;
+    map.setCentre = setCenter;
     map.getCentre = getCenter;
     map.getCenter = getCenter;
 
@@ -274,7 +282,9 @@ iD.Map = function(parentSelector) {
 
     map.graph = graph;
 
-    setSize(width, height);
+    setSize(
+        parent.node().offsetWidth,
+        parent.node().offsetHeight);
     redraw();
     return d3.rebind(map, dispatch, 'on');
 };
