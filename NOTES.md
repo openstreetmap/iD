@@ -3,14 +3,44 @@
 iD implements a [persistent data structure](http://en.wikipedia.org/wiki/Persistent_data_structure)
 over the OSM data model.
 
-To be clear, this data model is something like
-
+The data model of OSM is something like
 
     root -> relations (-> relations) -> ways -> nodes
        \                             \> nodes
         \-  ways -> nodes
          \- nodes
 
+In English:
+
+* Relations have (ways, nodes, relations)
+* Ways have (nodes)
+* Nodes have ()
+
+## Persistence
+
+The idea is that we keep every _changed_ of an object around, but reuse
+unchanged objects between versions.
+
+So, possibly the datastructure on first load is like
+
+```javascript
+{
+    1: [1],
+    2: [2],
+    3: [3]
+}
+```
+
+After one edit in which the object formerly known as `1` acquires a new
+version, it is like:
+
+```javascript
+{
+    1: [4, 1],
+    2: [2, 2],
+    3: [3, 3]
+}
+```
 
 ## Performance
 
