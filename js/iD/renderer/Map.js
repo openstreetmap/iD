@@ -265,6 +265,7 @@ iD.Map = function(elem) {
         t[0] += (width / 2) - l[0];
         t[1] += (height / 2) - l[1];
         projection.translate(t);
+        zoombehavior.translate(projection.translate());
 
         drawVector();
         redraw();
