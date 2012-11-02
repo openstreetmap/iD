@@ -18,6 +18,8 @@ In English:
 
 ## Persistence
 
+The background for this is in [#50](https://github.com/systemed/iD/issues/50).
+
 The idea is that we keep every _changed_ of an object around, but reuse
 unchanged objects between versions.
 
