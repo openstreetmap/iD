@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset='utf-8'>
         <title>iD</title>
-        <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/map.css">
-        <link rel="stylesheet" href="css/app.css">
-        <meta name="viewport" content="initial-scale=1.0 maximum-scale=1.0">
+        <link rel='stylesheet' href='css/reset.css'>
+        <link rel='stylesheet' href='css/map.css'>
+        <link rel='stylesheet' href='css/app.css'>
+        <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
     </head>
     <body>
-        <div id="map"></div>
+        <div id='map'></div>
         <div id='modebuttons'>
-            <button id='add-place'>
-                + Place</button><!-- <button id="add-road">
-                + Road</button><button id="add-area">
-                + Area</button><button class='mini' id="undo">
-                &larr;</button><button class='mini' id="redo">
-                &rarr;</button>--><form action='GET' id='geocode-form'><input type='text' id='geocode-location' placeholder='find a place' />
+            <button id='place'>
+                + Place</button><button id='road'>
+                + Road</button><button id='area'>
+                + Area</button><button class='mini' id='undo'>
+                &larr;</button><button class='mini' id='redo'>
+                &rarr;</button><form action='GET' id='geocode-form'><input type='text' id='geocode-location' placeholder='find a place' />
             </form>
         </div>
 
-        <div id="zoombuttons">
-            <button id="zoomIn">+</button><button id="zoomOut">&ndash;</button>
+        <div id='zoombuttons'>
+            <button id='zoomIn'>+</button><button id='zoomOut'>&ndash;</button>
         </div>
 
         <div class='inspector-wrap'></div>
@@ -29,32 +29,36 @@
             <p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>,
             <a href='http://github.com/systemed/iD'>code</a>,
             <a href='http://www.geowiki.com/docs'>docs</a>.
-            Imagery <a href="http://opengeodata.org/microsoft-imagery-details">&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
+            Imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
         </div>
 
-        <script type="text/javascript" src="js/lib/underscore-min.js"></script>
-        <script type="text/javascript" src="js/lib/d3.v2.js"></script>
-        <script type="text/javascript" src="js/lib/jxon.js"></script>
-        <script type="text/javascript" src="js/lib/uuid.js"></script>
+        <script type='text/javascript' src='js/lib/underscore-min.js'></script>
+        <script type='text/javascript' src='js/lib/d3.v2.js'></script>
+        <script type='text/javascript' src='js/lib/jxon.js'></script>
+        <script type='text/javascript' src='js/lib/uuid.js'></script>
 
-        <script type="text/javascript" src="js/iD/id.js"></script>
-        <script type="text/javascript" src="js/iD/Util.js"></script>
-        <script type="text/javascript" src="js/iD/renderer/style.js"></script>
+        <script type='text/javascript' src='js/iD/id.js'></script>
+        <script type='text/javascript' src='js/iD/Util.js'></script>
+        <script type='text/javascript' src='js/iD/renderer/style.js'></script>
 
-        <script type="text/javascript" src="js/iD/renderer/tiles.js"></script>
-        <script type="text/javascript" src="js/iD/renderer/Map.js"></script>
-        <script type="text/javascript" src="js/iD/renderer/hash.js"></script>
-        <script type="text/javascript" src="js/iD/renderer/markers.js"></script>
-        <script type="text/javascript" src="js/iD/ui/Inspector.js"></script>
+        <script type='text/javascript' src='js/iD/renderer/tiles.js'></script>
+        <script type='text/javascript' src='js/iD/renderer/Map.js'></script>
+        <script type='text/javascript' src='js/iD/renderer/hash.js'></script>
+        <script type='text/javascript' src='js/iD/renderer/markers.js'></script>
+        <script type='text/javascript' src='js/iD/ui/Inspector.js'></script>
 
-        <script type="text/javascript" src="js/iD/Entity.js"></script>
-        <script type="text/javascript" src="js/iD/GeoJSON.js"></script>
-        <script type="text/javascript" src="js/iD/XML.js"></script>
-        <script type="text/javascript" src="js/iD/Node.js"></script>
-        <script type="text/javascript" src="js/iD/Relation.js"></script>
-        <script type="text/javascript" src="js/iD/Way.js"></script>
-        <script type="text/javascript" src="js/iD/Connection.js"></script>
-        <script type="text/javascript" src="js/iD/Graph.js"></script>
+        <script type='text/javascript' src='js/iD/actions/actions.js'></script>
+        <script type='text/javascript' src='js/iD/actions/CreatePOI.js'></script>
+
+        <script type='text/javascript' src='js/iD/format/GeoJSON.js'></script>
+        <script type='text/javascript' src='js/iD/format/XML.js'></script>
+        <script type='text/javascript' src='js/iD/graph/Node.js'></script>
+        <script type='text/javascript' src='js/iD/graph/Relation.js'></script>
+        <script type='text/javascript' src='js/iD/graph/Way.js'></script>
+        <script type='text/javascript' src='js/iD/graph/Graph.js'></script>
+        <script type='text/javascript' src='js/iD/Connection.js'></script>
+
+        <script type='text/javascript' src='js/iD/UI.js'></script>
 
         <script>
             var map = iD.Map(document.getElementById('map')).setZoom(18).setCenter({
@@ -65,6 +69,7 @@
             var m = d3.select('#map');
 
             iD.Hash().map(map);
+            iD.UI.bind();
 
             window.onresize = function() {
                 map.setSize(m.node().offsetWidth,

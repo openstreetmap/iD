@@ -46,6 +46,18 @@ version, it is like:
 }
 ```
 
+Issues:
+
+* [Performance seems to suffer with Object.freeze](http://stackoverflow.com/questions/8435080/any-performance-benefit-to-locking-down-javascript-objects).
+
+The alternative to this approach is changing the object graph itself and keeping
+the change data in another representation, like an undo stack.
+
+At the very least, changes need to have:
+
+* A name ('Changed 2 Nodes')
+* Changes (whether in discrete versions or a 'change object' that can be applied and unapplied)
+
 ## Performance
 
 Main performance concerns of iD:

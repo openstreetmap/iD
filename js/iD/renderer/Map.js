@@ -8,6 +8,8 @@ iD.Map = function(elem) {
         return;
     }
 
+    var version = 0;
+
     var map = {},
         width, height,
         dispatch = d3.dispatch('move'),
@@ -42,11 +44,11 @@ iD.Map = function(elem) {
         // geo
         linegen = d3.svg.line()
             .x(function(d) {
-                var node = connection.graph.fetch(d);
+                var node = connection.graph.index[d][version];
                 return projection([node.lon, node.lat])[0];
             })
             .y(function(d) {
-                var node = connection.graph.fetch(d);
+                var node = connection.graph.index[d][version];
                 return projection([node.lon, node.lat])[1];
             }),
         // Abstract linegen so that it pulls from `.children`. This
@@ -94,7 +96,7 @@ iD.Map = function(elem) {
     var tileclient = iD.Tiles(tilegroup, projection);
 
     function drawVector() {
-        var all = connection.intersects(getExtent());
+        var all = graph.intersects(version, getExtent());
 
         var ways = all.filter(function(a) {
                 return a.type === 'way' && !a.isClosed();
