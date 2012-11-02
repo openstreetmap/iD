@@ -1,4 +1,12 @@
-iD.Map = function(parentSelector) {
+iD.Map = function(elem) {
+
+    if (!iD.supported()) {
+        elem.innerHTML = 'This editor is supported in Firefox, Chrome, Safari, Opera, ' +
+            'and Internet Explorer 9 and above. Please upgrade your browser ' +
+            'or use Potlatch 2 to edit the map.';
+        elem.style.cssText = 'text-align:center;font-style:italic;';
+        return;
+    }
 
     var map = {},
         width, height,
@@ -7,7 +15,7 @@ iD.Map = function(parentSelector) {
         graph = new iD.Graph(),
         connection = new iD.Connection(graph);
         inspector = iD.Inspector(graph),
-        parent = d3.selectAll(parentSelector),
+        parent = d3.select(elem),
         selection = [],
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
