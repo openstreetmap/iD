@@ -15,7 +15,7 @@ iD.Map = function(elem) {
         dispatch = d3.dispatch('move'),
         // data
         graph = new iD.Graph(),
-        connection = new iD.Connection(graph);
+        connection = new iD.Connection(graph),
         inspector = iD.Inspector(graph),
         parent = d3.select(elem),
         selection = [],
