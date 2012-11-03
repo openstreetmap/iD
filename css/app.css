@@ -107,6 +107,7 @@ table td {
 
 #bar button {
     width:100px;
+    white-space:nowrap;
     cursor:pointer;
     display:inline-block;
     background:#222222;
