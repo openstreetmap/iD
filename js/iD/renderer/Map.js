@@ -354,6 +354,8 @@ iD.Map = function(elem) {
     map.undo = undo;
     map.redo = redo;
 
+    map.redraw = redraw;
+
     setSize(parent.node().offsetWidth, parent.node().offsetHeight);
     redraw();
 

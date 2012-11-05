@@ -70,7 +70,19 @@
             iD.Hash().map(map);
             iD.UI.bind();
 
-            iD.controller(map);
+            var controller = iD.controller(map);
+
+            d3.selectAll('button#place').on('click', function() {
+                controller.go(iD.actions.AddPlace);
+            });
+
+            d3.selectAll('button#road').on('click', function() {
+                controller.go(iD.actions.AddRoad);
+            });
+
+            d3.selectAll('button#area').on('click', function() {
+                controller.go(iD.actions.AddArea);
+            });
 
             window.onresize = function() {
                 map.setSize(m.node().offsetWidth,
