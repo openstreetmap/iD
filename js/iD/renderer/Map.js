@@ -12,7 +12,7 @@ iD.Map = function(elem) {
 
     var map = {},
         width, height,
-        dispatch = d3.dispatch('move'),
+        dispatch = d3.dispatch('move', 'update'),
         // data
         graph = new iD.Graph(),
         connection = new iD.Connection(graph),
@@ -141,14 +141,12 @@ iD.Map = function(elem) {
 
         // Markers
         markers.exit().remove();
-
         markers.enter().append('image')
             .attr('class', class_marker)
             .on('click', selectClick)
             .attr({ width: 16, height: 16 })
             .attr('xlink:href', iD.Style.markerimage)
             .call(dragbehavior);
-
         markers.attr('transform', function(d) {
             var pt = projection([d.lon, d.lat]);
             pt[0] -= 8;
@@ -204,8 +202,8 @@ iD.Map = function(elem) {
 
     function zoomPan() {
         projection
-        .translate(d3.event.translate)
-        .scale(d3.event.scale);
+            .translate(d3.event.translate)
+            .scale(d3.event.scale);
         redraw();
     }
 
@@ -219,6 +217,13 @@ iD.Map = function(elem) {
             // TODO: hide vector features
         }
     }
+
+    // UI elements
+    // -----------
+    var undolabel = d3.select('button#undo small');
+    dispatch.on('update', function() {
+        undolabel.text(graph.annotations[graph.annotations.length - 1]);
+    });
 
     // Getters & setters for map state
     // -------------------------------
@@ -312,10 +317,8 @@ iD.Map = function(elem) {
     map.graph = graph;
     map.surface = surface;
 
-    setSize(
-        parent.node().offsetWidth,
-        parent.node().offsetHeight);
-        redraw();
+    setSize(parent.node().offsetWidth, parent.node().offsetHeight);
+    redraw();
 
-        return d3.rebind(map, dispatch, 'on');
+    return d3.rebind(map, dispatch, 'on', 'move', 'update');
 };

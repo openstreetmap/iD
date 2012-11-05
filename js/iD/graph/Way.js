@@ -9,8 +9,7 @@
 
 iD.Way = {
     isClosed: function(w) {
-        if (!w.nodes.length) return true;
-        return w.nodes[w.nodes.length - 1] === w.nodes[0];
+        return (!w.nodes.length) || w.nodes[w.nodes.length - 1] === w.nodes[0];
     }
 };
 

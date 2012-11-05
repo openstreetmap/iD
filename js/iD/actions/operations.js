@@ -5,5 +5,6 @@ iD.operations.addNode = function(map, node) {
         var o = {};
         o[node.id] = node;
         return graph.set(o);
-    }, 'Added a new unidentified place');
+    }, 'added a place');
+    map.update();
 };

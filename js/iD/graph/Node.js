@@ -1,3 +1,4 @@
+/*
 iD.Node = function(id, lat, lon, tags, loaded) {
 	this.id = id;
 	this.lat = lat;
@@ -17,3 +18,4 @@ iD.Node.prototype = {
             (this.lat >= extent[1][1]);
     }
 };
+*/

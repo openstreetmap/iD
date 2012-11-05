@@ -131,7 +131,15 @@ table td {
 
 #bar button.mini,
 #bar button.mini {
-    width:50px;
+    width:auto;
+}
+
+button small {
+    display: inline-block;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 30px;
+    vertical-align: top;
 }
 
 #bar input[type=text] {
