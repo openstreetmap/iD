@@ -4,6 +4,7 @@ iD.Graph.prototype = {
 
     // a pointer to the top of the stack.
     head: {},
+    annotation: null,
 
     // stack of previous versions of this datastructure
     prev: [],
@@ -27,6 +28,27 @@ iD.Graph.prototype = {
             }
         }
         return pois;
+    },
+
+    undo: function() {
+        if (this.prev.length && this.prev[0] !== this.head) {
+            // skip changes without annotations
+            for (var idx = this.prev.indexOf(this.head) - 1; idx > 0; idx--) {
+                if (this.annotations[idx]) break;
+            }
+            this.head = this.prev[idx];
+            this.annotation = this.annotations[idx];
+        }
+    },
+
+    redo: function() {
+        if (this.prev.length && this.prev[this.prev.length - 1] !== this.head) {
+            for (var idx = this.prev.indexOf(this.head) + 1; idx < this.prev.length - 1; idx++) {
+                if (this.annotations[idx]) break;
+            }
+            this.head = this.prev[idx];
+            this.annotation = this.annotations[idx];
+        }
     },
 
     insert: function(a) {
@@ -54,6 +76,7 @@ iD.Graph.prototype = {
 
         // Make head the top of the previous stack
         this.head = this.prev[this.prev.length - 1];
+        this.annotation = this.annotations[this.annotations.length - 1];
     },
 
     intersects: function(version, extent) {

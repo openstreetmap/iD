@@ -95,6 +95,9 @@
 
             d3.select('.zoombuttons .zoom-in').on('click', map.zoomIn);
             d3.select('.zoombuttons .zoom-out').on('click', map.zoomOut);
+
+            d3.select('#undo').on('click', map.undo);
+            d3.select('#redo').on('click', map.redo);
         </script>
     </body>
 </html>

@@ -10,6 +10,16 @@ iD.Map = function(elem) {
 
     var version = 0;
 
+    // lon/lat object to array
+    function ll2a(o) {
+        return [o.lon, o.lat];
+    }
+
+    // array to lon/lat object
+    function a2ll(o) {
+        return { lon: o[0], lat: o[1] };
+    }
+
     var map = {},
         width, height,
         dispatch = d3.dispatch('move', 'update'),
@@ -30,8 +40,13 @@ iD.Map = function(elem) {
         // this is used with handles
         dragbehavior = d3.behavior.drag()
             .origin(function(d) {
-                var n = graph.head[d];
-                var p = projection([n.lon, n.lat]);
+                var data = (typeof d === 'number') ? graph.head[d] : d;
+                graph.modify(function(o) {
+                    var c = {};
+                    c[data.id] = pdata.object(data).set({ modified: true }).get();
+                    return o.set(c);
+                }, '');
+                p = projection(ll2a(data));
                 return { x: p[0], y: p[1] };
             })
             .on('drag', function(d) {
@@ -42,20 +57,28 @@ iD.Map = function(elem) {
                 graph.head[d].lon = ll[0];
                 graph.head[d].lat = ll[1];
                 drawVector();
+            })
+            .on('dragend', function(d) {
+                var data = (typeof d === 'number') ? graph.head[d] : d;
+                graph.modify(function(o) {
+                    var c = {};
+                    c[data.id] = pdata.object(c[data.id]).get();
+                    o.set(c);
+                    return o;
+                }, 'moved an element');
+                map.update();
             }),
         // geo
         linegen = d3.svg.line()
-        .defined(function(d) {
-            return !!graph.head[d];
-        })
-        .x(function(d) {
-            var node = graph.head[d];
-            return projection([node.lon, node.lat])[0];
-        })
-        .y(function(d) {
-            var node = graph.head[d];
-            return projection([node.lon, node.lat])[1];
-        }),
+            .defined(function(d) {
+                return !!graph.head[d];
+            })
+            .x(function(d) {
+                return projection(ll2a(graph.head[d]))[0];
+            })
+            .y(function(d) {
+                return projection(ll2a(graph.head[d]))[1];
+            }),
         // Abstract linegen so that it pulls from `.children`. This
         // makes it possible to call simply `.attr('d', nodeline)`.
         nodeline = function(d) {
@@ -63,13 +86,12 @@ iD.Map = function(elem) {
         },
         key = function(d) { return d.id; };
 
-    // Creating containers
-    // -------------------
+    // Containers
+    // ----------
     // The map uses SVG groups in order to restrict
     // visual and event ordering - fills below casings, casings below
     // strokes, and so on.
-    var surface = parent.append('svg')
-    .call(zoombehavior);
+    var surface = parent.append('svg').call(zoombehavior);
 
     surface.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -91,10 +113,10 @@ iD.Map = function(elem) {
         temp = r.append('g').attr('id', 'temp-g');
 
     var class_stroke = iD.Style.styleClasses('stroke'),
-    class_fill = iD.Style.styleClasses('stroke'),
-    class_area = iD.Style.styleClasses('area'),
-    class_marker = iD.Style.styleClasses('marker'),
-    class_casing = iD.Style.styleClasses('casing');
+        class_fill = iD.Style.styleClasses('stroke'),
+        class_area = iD.Style.styleClasses('area'),
+        class_marker = iD.Style.styleClasses('marker'),
+        class_casing = iD.Style.styleClasses('casing');
 
     var tileclient = iD.Tiles(tilegroup, projection);
 
@@ -172,8 +194,7 @@ iD.Map = function(elem) {
             .attr('r', 5)
             .call(dragbehavior);
         handles.attr('transform', function(d) {
-            var node = graph.head[d];
-            return 'translate(' + projection([node.lon, node.lat]) + ')';
+            return 'translate(' + projection(ll2a(graph.head[d])) + ')';
         });
     }
 
@@ -227,8 +248,20 @@ iD.Map = function(elem) {
     // -----------
     var undolabel = d3.select('button#undo small');
     dispatch.on('update', function() {
-        undolabel.text(graph.annotations[graph.annotations.length - 1]);
+        undolabel.text(graph.annotation);
+        redraw();
     });
+
+    // Undo/redo
+    function undo() {
+        graph.undo();
+        map.update();
+    }
+
+    function redo() {
+        graph.redo();
+        map.update();
+    }
 
     // Getters & setters for map state
     // -------------------------------
@@ -281,13 +314,9 @@ iD.Map = function(elem) {
     function zoomOut() { return setZoom(Math.floor(getZoom() - 1)); }
 
     function getCenter() {
-        var ll = projection.invert([
+        return a2ll(projection.invert([
             width / 2,
-            height / 2]);
-        return {
-            lon: ll[0],
-            lat: ll[1]
-        };
+            height / 2]));
     }
 
     function setCenter(loc) {
@@ -321,6 +350,9 @@ iD.Map = function(elem) {
 
     map.graph = graph;
     map.surface = surface;
+
+    map.undo = undo;
+    map.redo = redo;
 
     setSize(parent.node().offsetWidth, parent.node().offsetHeight);
     redraw();
