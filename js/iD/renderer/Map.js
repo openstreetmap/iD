@@ -221,10 +221,14 @@ iD.Map = function(elem) {
         selection = [d.id];
         drawVector();
         d3.select('.inspector-wrap')
-        .style('display', 'block')
-        .datum(d).call(inspector);
+            .style('display', 'block')
+            .datum(d).call(inspector);
         d3.event.stopPropagation();
     }
+
+    inspector.on('change', function(d, tags) {
+        iD.operations.changeTags(map, d, tags);
+    });
 
     function zoomPan() {
         projection

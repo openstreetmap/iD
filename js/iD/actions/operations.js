@@ -38,6 +38,16 @@ iD.operations.addTemporary = function(map, node) {
     map.update();
 };
 
+iD.operations.changeTags = function(map, node, tags) {
+    map.graph.modify(function(graph) {
+        var o = {};
+        var copy = pdata.object(node).set({ tags: tags }).get();
+        o[copy.id] = copy;
+        return graph.set(o);
+    }, 'changed tags');
+    map.update();
+};
+
 iD.operations.removeTemporary = function(map, node) {
     map.graph.modify(function(graph) {
         return graph.remove(node.id);
