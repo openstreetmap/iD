@@ -132,9 +132,9 @@ iD.Map = function(elem) {
         points = graph.pois(graph.head);
 
         var fills = fill_g.selectAll('path.area').data(areas, key),
-        casings = casing_g.selectAll('path.casing').data(ways, key),
-        strokes = stroke_g.selectAll('path.stroke').data(ways, key),
-        markers = hit_g.selectAll('image.marker').data(points, key);
+            casings = casing_g.selectAll('path.casing').data(ways, key),
+            strokes = stroke_g.selectAll('path.stroke').data(ways, key),
+            markers = hit_g.selectAll('image.marker').data(points, key);
 
         var selected_id = selection && selection[0];
 

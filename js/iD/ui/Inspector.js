@@ -51,26 +51,35 @@ iD.Inspector = function(graph) {
 
             var tbody = table.append('tbody');
 
-            var row = tbody.selectAll('tr')
-                .data(d3.entries(d.tags))
-                .enter()
-                .append('tr');
+            function draw(data) {
+                var tr = tbody.selectAll('tr')
+                    .data(data, function(d) { return d.key; });
 
-            row.append('td').append('input')
-                .attr('class', 'tag-key')
-                .property('value', function(d) { return d.key; })
-                .on('change', function(row) {
-                    row.key = this.key;
-                    event.update(d, newtags());
-                });
+                var row = tr.enter()
+                    .append('tr');
+                tr.exit().remove();
 
-            row.append('td').append('input')
-                .attr('class', 'tag-value')
-                .property('value', function(d) { return d.value; })
-                .on('change', function(row) {
-                    row.value = this.value;
-                    event.update(d, newtags());
-                });
+                row.append('td').append('input')
+                    .attr('class', 'tag-key')
+                    .property('value', function(d) { return d.key; })
+                    .on('change', function(row) {
+                        row.key = this.value;
+                        event.update(d, newtags());
+                        draw(formtags());
+                    });
+
+                row.append('td').append('input')
+                    .attr('class', 'tag-value')
+                    .property('value', function(d) { return d.value; })
+                    .on('change', function(row) {
+                        row.value = this.value;
+                        event.update(d, newtags());
+                        draw(formtags());
+                    });
+            }
+
+            var data = d3.entries(d.tags).concat([{ key: '', value: ''}]);
+            draw(data);
 
             // TODO: there must be a function for this
             function unentries(x) {
@@ -79,6 +88,12 @@ iD.Inspector = function(graph) {
                     obj[x[i].key] = x[i].value;
                 }
                 return obj;
+            }
+
+            function formtags() {
+                var t = newtags();
+                if (Object.keys(t).indexOf('') === -1) t[''] = '';
+                return d3.entries(t);
             }
 
             function newtags() {

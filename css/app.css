@@ -163,11 +163,13 @@ button small {
 
 .inspector-wrap {
     position:absolute;
-    top:90px;
-    right:20px;
+    top:40px;
+    right:00px;
     overflow:auto;
-    padding:5px;
-    background:#fff;
+    padding:10px;
+    background:#222222;
+    border-top:1px solid #000;
+    color:#fff;
 }
 
 .inspector-wrap h2 {
@@ -196,8 +198,8 @@ button small {
     margin:0;
     padding:4px;
     border:0;
+    background:#fff;
     width:150px;
-    border:0;
 }
 
 .inspector input.tag-key {
