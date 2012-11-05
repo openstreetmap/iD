@@ -11,6 +11,24 @@ iD.Graph.prototype = {
     // messages
     annotations: [],
 
+    // get all points that are not part of a way. this is an expensive
+    // call that needs to be optimized.
+    pois: function(head) {
+        var included = [], pois = [], idx = {};
+        for (var i in head) {
+            if (head[i].nodes) {
+                included = included.concat(head[i].nodes);
+            }
+        }
+        for (var j = 0; j < included.length; j++) { idx[included[j]] = true; }
+        for (var k in head) {
+            if (head[k].type === 'node' && !idx[head[k].id]) {
+                pois.push(head[k]);
+            }
+        }
+        return pois;
+    },
+
     insert: function(a) {
         for (var i = 0; i < a.length; i++) {
             if (this.head[a[i].id]) return;

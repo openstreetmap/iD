@@ -43,14 +43,14 @@ iD.Map = function(elem) {
             }),
         // geo
         linegen = d3.svg.line()
-            .x(function(d) {
-                var node = graph.head[d];
-                return projection([node.lon, node.lat])[0];
-            })
-            .y(function(d) {
-                var node = graph.head[d];
-                return projection([node.lon, node.lat])[1];
-            }),
+        .x(function(d) {
+            var node = graph.head[d];
+            return projection([node.lon, node.lat])[0];
+        })
+        .y(function(d) {
+            var node = graph.head[d];
+            return projection([node.lon, node.lat])[1];
+        }),
         // Abstract linegen so that it pulls from `.children`. This
         // makes it possible to call simply `.attr('d', nodeline)`.
         nodeline = function(d) {
@@ -64,7 +64,7 @@ iD.Map = function(elem) {
     // visual and event ordering - fills below casings, casings below
     // strokes, and so on.
     var surface = parent.append('svg')
-        .call(zoombehavior);
+    .call(zoombehavior);
 
     surface.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -73,23 +73,23 @@ iD.Map = function(elem) {
         .attr({ x: 0, y: 0 });
 
     var tilegroup = surface.append('g')
-            .attr('clip-path', 'url(#clip)')
-            .on('click', deselectClick),
-        r = surface.append('g')
-            .attr('clip-path', 'url(#clip)');
+        .attr('clip-path', 'url(#clip)')
+        .on('click', deselectClick),
+    r = surface.append('g')
+        .attr('clip-path', 'url(#clip)');
 
     var fill_g = r.append('g').attr('id', 'fill-g'),
-        casing_g =  r.append('g').attr('id', 'casing-g'),
-        stroke_g = r.append('g').attr('id', 'stroke-g'),
-        text_g = r.append('g').attr('id', 'text-g'),
-        hit_g = r.append('g').attr('id', 'hit-g'),
-        temp = r.append('g').attr('id', 'temp-g');
+    casing_g =  r.append('g').attr('id', 'casing-g'),
+    stroke_g = r.append('g').attr('id', 'stroke-g'),
+    text_g = r.append('g').attr('id', 'text-g'),
+    hit_g = r.append('g').attr('id', 'hit-g'),
+    temp = r.append('g').attr('id', 'temp-g');
 
     var class_stroke = augmentSelect(iD.Style.styleClasses('stroke')),
-        class_fill = augmentSelect(iD.Style.styleClasses('stroke')),
-        class_area = augmentSelect(iD.Style.styleClasses('area')),
-        class_marker = augmentSelect(iD.Style.styleClasses('marker')),
-        class_casing = augmentSelect(iD.Style.styleClasses('casing'));
+    class_fill = augmentSelect(iD.Style.styleClasses('stroke')),
+    class_area = augmentSelect(iD.Style.styleClasses('area')),
+    class_marker = augmentSelect(iD.Style.styleClasses('marker')),
+    class_casing = augmentSelect(iD.Style.styleClasses('casing'));
 
     var tileclient = iD.Tiles(tilegroup, projection);
 
@@ -97,27 +97,24 @@ iD.Map = function(elem) {
         var all = graph.intersects(version, getExtent());
 
         var ways = all.filter(function(a) {
-                return a.type === 'way' && !iD.Way.isClosed(a);
-            }).sort(iD.Style.waystack),
-            areas = all.filter(function(a) {
-                return a.type === 'way' && iD.Way.isClosed(a);
-            }),
-            points = all.filter(function(a) {
-                return a.type === 'node';
-            });
+            return a.type === 'way' && !iD.Way.isClosed(a);
+        }).sort(iD.Style.waystack),
+        areas = all.filter(function(a) {
+            return a.type === 'way' && iD.Way.isClosed(a);
+        }),
+        points = graph.pois(graph.head);
 
         var fills = fill_g.selectAll('path.area').data(areas, key),
-            casings = casing_g.selectAll('path.casing').data(ways, key),
-            strokes = stroke_g.selectAll('path.stroke').data(ways, key),
-            markers = hit_g.selectAll('image.marker')
-                .data(points, key);
+        casings = casing_g.selectAll('path.casing').data(ways, key),
+        strokes = stroke_g.selectAll('path.stroke').data(ways, key),
+        markers = hit_g.selectAll('image.marker').data(points, key);
 
         // Fills
         fills.exit().remove();
         fills.enter().append('path')
-            .on('click', selectClick);
+        .on('click', selectClick);
         fills.attr('d', nodeline)
-            .attr('class', class_area);
+        .attr('class', class_area);
 
         // Casings
         casings.exit().remove();
@@ -136,38 +133,38 @@ iD.Map = function(elem) {
 
         // Markers
         markers.exit().remove();
+
         markers.enter().append('image')
             .attr('class', class_marker)
             .on('click', selectClick)
             .attr({ width: 16, height: 16 })
             .attr('xlink:href', iD.Style.markerimage)
             .call(dragbehavior);
+
         markers.attr('transform', function(d) {
-                var pt = projection([d.lon, d.lat]);
-                pt[0] -= 8;
-                pt[1] -= 8;
-                return 'translate(' + pt + ')';
-            });
+            var pt = projection([d.lon, d.lat]);
+            pt[0] -= 8;
+            pt[1] -= 8;
+            return 'translate(' + pt + ')';
+        });
 
-        if (selection.length) {
-            var id = selection[0];
-            var active_entity = all.filter(function(a) {
-                return a.id === id && a.entityType === 'way';
-            });
+        var id = selection && selection[0];
+        var active_entity = all.filter(function(a) {
+            return a.id === id && a.type === 'way';
+        });
 
-            var handles = hit_g.selectAll('circle.handle')
-            .data(active_entity.length ? active_entity[0].children : [], key);
+        var handles = hit_g.selectAll('circle.handle')
+            .data(selection.length ? (active_entity.length ? active_entity[0].nodes : []) : [], key);
 
-            handles.exit().remove();
-
-            handles.enter().append('circle')
-                .attr('class', 'handle')
-                .attr('r', 5)
-                .call(dragbehavior);
-            handles.attr('transform', function(d) {
-                return 'translate(' + projection(d) + ')';
-            });
-        }
+        handles.exit().remove();
+        handles.enter().append('circle')
+            .attr('class', 'handle')
+            .attr('r', 5)
+            .call(dragbehavior);
+        handles.attr('transform', function(d) {
+            var node = graph.head[d];
+            return 'translate(' + projection([node.lon, node.lat]) + ')';
+        });
     }
 
     function setSize(w, h) {
@@ -211,8 +208,8 @@ iD.Map = function(elem) {
 
     function zoomPan() {
         projection
-            .translate(d3.event.translate)
-            .scale(d3.event.scale);
+        .translate(d3.event.translate)
+        .scale(d3.event.scale);
         redraw();
     }
 
@@ -240,13 +237,13 @@ iD.Map = function(elem) {
 
     function pointLocation(p) {
         var translate = projection.translate(),
-            scale = projection.scale();
+        scale = projection.scale();
         return [(p[0] - translate[0]) / scale, (p[1] - translate[1]) / scale];
     }
 
     function locationPoint(l) {
         var translate = projection.translate(),
-            scale = projection.scale();
+        scale = projection.scale();
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
@@ -294,9 +291,9 @@ iD.Map = function(elem) {
         projection.translate([
             t[0] - ll[0] + width / 2,
             t[1] - ll[1] + height / 2]);
-            zoombehavior.translate(projection.translate());
-            redraw();
-            return map;
+        zoombehavior.translate(projection.translate());
+        redraw();
+        return map;
     }
 
     map.download = download;
@@ -322,7 +319,7 @@ iD.Map = function(elem) {
     setSize(
         parent.node().offsetWidth,
         parent.node().offsetHeight);
-    redraw();
+        redraw();
 
-    return d3.rebind(map, dispatch, 'on');
+        return d3.rebind(map, dispatch, 'on');
 };
