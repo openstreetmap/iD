@@ -143,7 +143,10 @@ iD.Map = function(elem) {
             .attr('xlink:href', iD.Style.markerimage)
             .call(dragbehavior);
         markers.attr('transform', function(d) {
-                return 'translate(' + projection([d.lon, d.lat]) + ')';
+                var pt = projection([d.lon, d.lat]);
+                pt[0] -= 8;
+                pt[1] -= 8;
+                return 'translate(' + pt + ')';
             });
 
         if (selection.length) {

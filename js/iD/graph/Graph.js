@@ -2,6 +2,7 @@ iD.Graph = function() { };
 
 iD.Graph.prototype = {
 
+    // a pointer to the top of the stack.
     head: {},
 
     // stack of previous versions of this datastructure
