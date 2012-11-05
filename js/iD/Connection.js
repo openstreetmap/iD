@@ -6,11 +6,6 @@ iD.Connection = function(graph) {
 
     var connection = {};
 
-    function all() {
-        return graph.nodes;
-    }
-
-
     // Request data within the bbox from an external OSM server.
     function loadFromAPI(box, callback) {
         loadFromURL(apiURL + 'map?bbox=' +
@@ -24,12 +19,12 @@ iD.Connection = function(graph) {
     function getNodes(obj) {
         var nodes = [], nelems = obj.getElementsByTagName('nd');
         for (var i = 0; i < nelems.length; i++) {
-            var item = nelems[i];
-            nodes.push(+item.attributes.ref.nodeValue);
+            nodes.push(+nelems[i].attributes.ref.nodeValue);
         }
         return nodes;
     }
 
+    // <tag k="highway" v="unclassified"/>
     function getTags(obj) {
         var tags = {}, tagelems = obj.getElementsByTagName('tag');
         for (var i = 0; i < tagelems.length; i++) {
@@ -39,6 +34,7 @@ iD.Connection = function(graph) {
         return tags;
     }
 
+    // <member type="node" ref="364933006" role=""/>
     function getMembers(obj) {
         var members = [],
             elems = obj.getElementsByTagName('member');
@@ -54,38 +50,45 @@ iD.Connection = function(graph) {
         return members;
     }
 
+    // <node id="1831881213"
+    //     version="1"
+    //     changeset="12370172"
+    //     lat="54.0900666"
+    //     lon="12.2539381"
+    //     user="lafkor"
+    //     uid="75625"
+    //     visible="true"
+    //     timestamp="2012-07-20T09:43:19Z">
     function objectData(obj) {
-        return {
+        var o = {
             type: obj.nodeName,
-            id: +obj.attributes.id.nodeValue,
-            tags: getTags(obj),
-            lat: (obj.attributes.lat) ? +obj.attributes.lat.nodeValue : null,
-            lon: (obj.attributes.lon) ? +obj.attributes.lon.nodeValue : null,
             members: getMembers(obj),
-            nodes: getNodes(obj)
+            nodes: getNodes(obj),
+            tags: getTags(obj)
         };
+        var numbers = {id: true, lat: true, lon: true };
+        for (var i = 0; i < obj.attributes.length; i++) {
+            var n = obj.attributes[i].nodeName;
+            var v = obj.attributes[i].nodeValue;
+            o[n] = numbers[n] ? +v : v;
+        }
+        return o;
     }
 
     function parse(callback) {
         return function(dom) {
-            if (!dom.childNodes) {
-                return callback(new Error('Bad request'));
-            }
-            var root = dom.childNodes[0],
-                ways = root.getElementsByTagName('way'),
-                relations = root.getElementsByTagName('relation'),
-                nodes = root.getElementsByTagName('node');
-            var i;
-            for (i = 0; i < ways.length; i++) graph.insert(objectData(ways[i]));
-            for (i = 0; i < relations.length; i++) graph.insert(objectData(relations[i]));
-            for (i = 0; i < nodes.length; i++) graph.insert(objectData(nodes[i]));
+            if (!dom.childNodes) return callback(new Error('Bad request'));
+            var root = dom.childNodes[0];
+            connection.graph.insert(_.map(root.getElementsByTagName('way'), objectData));
+            connection.graph.insert(_.map(root.getElementsByTagName('node'), objectData));
+            connection.graph.insert(_.map(root.getElementsByTagName('relation'), objectData));
             callback(null);
         };
     }
 
     connection.graph = graph;
-    connection.all = all;
     connection.loadFromAPI = loadFromAPI;
+    connection.objectData = objectData;
     connection.loadFromURL = loadFromURL;
     connection.apiURL = apiURL;
 

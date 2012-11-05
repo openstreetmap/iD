@@ -44,17 +44,17 @@ iD.Map = function(elem) {
         // geo
         linegen = d3.svg.line()
             .x(function(d) {
-                var node = connection.graph.index[d][version];
+                var node = graph.head[d];
                 return projection([node.lon, node.lat])[0];
             })
             .y(function(d) {
-                var node = connection.graph.index[d][version];
+                var node = graph.head[d];
                 return projection([node.lon, node.lat])[1];
             }),
         // Abstract linegen so that it pulls from `.children`. This
         // makes it possible to call simply `.attr('d', nodeline)`.
         nodeline = function(d) {
-            return linegen(d.children);
+            return linegen(d.nodes);
         },
         // Abstract a key function that looks for uids. This is given
         // as a second argument to `.data()`.
@@ -99,10 +99,10 @@ iD.Map = function(elem) {
         var all = graph.intersects(version, getExtent());
 
         var ways = all.filter(function(a) {
-                return a.type === 'way' && !a.isClosed();
+                return a.type === 'way' && !iD.Way.isClosed(a);
             }).sort(iD.Style.waystack),
             areas = all.filter(function(a) {
-                return a.type === 'way' && a.isClosed();
+                return a.type === 'way' && iD.Way.isClosed(a);
             }),
             points = all.filter(function(a) {
                 return a.type === 'node';
@@ -222,6 +222,7 @@ iD.Map = function(elem) {
             download();
             drawVector();
         } else {
+            // TODO: hide vector features
         }
     }
 
@@ -321,5 +322,6 @@ iD.Map = function(elem) {
         parent.node().offsetWidth,
         parent.node().offsetHeight);
     redraw();
+
     return d3.rebind(map, dispatch, 'on');
 };

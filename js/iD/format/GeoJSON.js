@@ -21,7 +21,7 @@ iD.GeoJSON = {
                 properties: entity.tags,
                 geometry: {
                     'type': 'LineString',
-                    'coordinates': _.map(entity.children, function(node) {
+                    'coordinates': entity.nodes.map(function(node) {
                         return [node.lon, node.lat];
                     })
                 }

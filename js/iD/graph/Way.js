@@ -6,19 +6,15 @@
 //
 // If a a way is _closed_, it is assumed to be an area unless it has a
 // `highway` or `barrier` tag and is not also tagged `area`.
-iD.Way = function(id, uid, children, tags, loaded) {
-    this.id = id;
-    this.uid = uid;
-    this.tags = tags || {};
-    this.children = children || [];
-    this.loaded = (loaded === undefined) ? true : loaded;
-    this.extent = {};
+
+iD.Way = {
+    isClosed: function(w) {
+        if (!w.nodes.length) return true;
+        return w.nodes[w.nodes.length - 1] === w.nodes[0];
+    }
 };
 
-iD.Way.prototype = {
-
-    type: 'way',
-
+/*
     // JOSM: http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/data/osm/Way.java#L466
     isClosed: function() {
         // summary:	Is this a closed way (first and last nodes the same)?
@@ -64,3 +60,4 @@ iD.Way.prototype = {
             bounds[0][1] > extent[1][1]);
     }
 };
+*/

@@ -35,7 +35,7 @@ iD.XML = {
                     JXON.unbuild({
                         way: {
                             '@id': entity.id,
-                            'nd': entity.children.map(function(e) {
+                            'nd': entity.nodes.map(function(e) {
                                 return {
                                     keyAttributes: {
                                         ref: e.id
