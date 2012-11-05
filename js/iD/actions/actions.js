@@ -55,6 +55,7 @@ iD.actions.AddRoad = {
             lat: ll[1],
             lon: ll[0],
             id: iD.Util.id(),
+            modified: true,
             tags: {}
         };
     },
@@ -65,6 +66,7 @@ iD.actions.AddRoad = {
             tags: {
                 highway: 'residential'
             },
+            modified: true,
             id: iD.Util.id()
         };
     },
@@ -118,6 +120,7 @@ iD.actions.DrawRoad = function(way) {
                 lat: ll[1],
                 lon: ll[0],
                 id: iD.Util.id(),
+                modified: true,
                 tags: {}
             };
         },
