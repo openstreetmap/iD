@@ -45,6 +45,9 @@ iD.Map = function(elem) {
             }),
         // geo
         linegen = d3.svg.line()
+        .defined(function(d) {
+            return !!graph.head[d];
+        })
         .x(function(d) {
             var node = graph.head[d];
             return projection([node.lon, node.lat])[0];
