@@ -29,7 +29,6 @@ iD.Style.waystack = function(a, b) {
     return as - bs;
 };
 
-
 iD.Style.markerimage = function(d) {
     // TODO: optimize
     for (var k in d.tags) {

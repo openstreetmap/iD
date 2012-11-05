@@ -27,18 +27,20 @@ iD.Map = function(elem) {
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
             .on('zoom', zoomPan),
+        // this is used with handles
         dragbehavior = d3.behavior.drag()
             .origin(function(d) {
-                var p = projection(d);
+                var n = graph.head[d];
+                var p = projection([n.lon, n.lat]);
                 return { x: p[0], y: p[1] };
             })
-            .on('drag', function dragmove(d) {
+            .on('drag', function(d) {
                 d3.select(this).attr('transform', function() {
                     return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
                 });
                 var ll = projection.invert([d3.event.x, d3.event.y]);
-                d.lon = ll[0];
-                d.lat = ll[1];
+                graph.head[d].lon = ll[0];
+                graph.head[d].lat = ll[1];
                 drawVector();
             }),
         // geo
@@ -159,7 +161,7 @@ iD.Map = function(elem) {
         });
 
         var handles = hit_g.selectAll('circle.handle')
-            .data(selection.length ? (active_entity.length ? active_entity[0].nodes : []) : [], key);
+            .data(selection.length ? (active_entity.length ? active_entity[0].nodes : []) : []);
 
         handles.exit().remove();
         handles.enter().append('circle')
