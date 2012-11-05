@@ -562,13 +562,3 @@ iD._markertable = (function(markers) {
     }
     return table;
 })(iD._markers);
-
-iD.markerimage = function(d) {
-    // TODO: optimize
-    for (var k in d.tags) {
-        var key = k + '=' + d.tags[k];
-        if (iD._markertable[key]) {
-            return 'icons/' + iD._markertable[key] + '.png';
-        }
-    }
-};

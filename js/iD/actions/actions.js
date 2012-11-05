@@ -8,36 +8,49 @@ iD.actions.AddPlace = {
             iD.actions.AddPlace.enter();
         });
     },
+    node: function(ll) {
+        return {
+            type: 'node',
+            lat: ll[1],
+            lon: ll[0],
+            id: iD.Util.id(),
+            tags: {}
+        };
+    },
     enter: function() {
         d3.selectAll('button').classed('active', false);
         d3.selectAll('button#place').classed('active', true);
 
         var surface = this.map.surface;
         var teaser = surface.selectAll('g#temp-g')
-            .append('g').attr('id', 'teaser-g');
+            .append('g').attr('id', 'addplace');
 
         teaser.append('circle')
             .attr('class', 'teaser-point')
             .attr('r', 10);
 
-        surface.on('mousemove.shift', function() {
+        surface.on('mousemove.addplace', function() {
             teaser.attr('transform', function() {
                 var off = d3.mouse(surface.node());
                 return 'translate(' + off + ')';
             });
         });
 
-        surface.on('click', function() {
-            var off = d3.mouse(surface.node());
+        surface.on('click.addplace', function() {
+            var ll = this.map.projection.invert(
+                d3.mouse(surface.node()));
+            iD.operations.addNode(this.map, this.node(ll));
             this.exit();
         }.bind(this));
 
-        // Bind clicks to the map to 'add a place' and
-        // add little floaty place
+        d3.select(document).on('keydown.addplace', function() {
+            if (d3.event.keyCode === 27) this.exit();
+        }.bind(this));
     },
     exit: function() {
-        this.map.surface.on('mousemove.shift', null);
-        d3.selectAll('#teaser-g').remove();
+        this.map.surface.on('.addplace', null);
+        d3.select(document).on('.addplace', null);
+        d3.selectAll('#addplace').remove();
         d3.selectAll('button#place').classed('active', false);
     }
 };
@@ -53,9 +66,6 @@ iD.actions.AddRoad = {
     enter: function() {
         d3.selectAll('button').classed('active', false);
         d3.selectAll('button#road').classed('active', true);
-
-        // Bind clicks to the map to 'add a road' and
-        // add little floaty point
     },
     exit: function() {
         d3.selectAll('button#road').classed('active', false);
@@ -73,9 +83,6 @@ iD.actions.AddArea = {
     enter: function() {
         d3.selectAll('button').classed('active', false);
         d3.selectAll('button#area').classed('active', true);
-
-        // Bind clicks to the map to 'add an area' and
-        // add little floaty point
     },
     exit: function() {
         d3.selectAll('button#area').classed('active', false);
@@ -107,13 +114,6 @@ iD.controller = function(map) {
     };
 
     controller.go(iD.actions.Move);
-
-    // Pressing 'escape' should exit any action.
-    d3.select(document).on('keydown', function() {
-        if (d3.event.keyCode === 27) {
-            controller.go(iD.actions.Move);
-        }
-    });
 
     return controller;
 };

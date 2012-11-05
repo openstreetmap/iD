@@ -1,9 +1,9 @@
 iD.Util = {};
 
-iD.Util._id = 0;
+iD.Util._id = -1;
 
 iD.Util.id = function() {
-    return iD.Util._id++;
+    return iD.Util._id--;
 };
 
 iD.Util.friendlyName = function(entity) {

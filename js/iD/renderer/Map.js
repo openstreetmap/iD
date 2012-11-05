@@ -56,9 +56,7 @@ iD.Map = function(elem) {
         nodeline = function(d) {
             return linegen(d.nodes);
         },
-        // Abstract a key function that looks for uids. This is given
-        // as a second argument to `.data()`.
-        key = function(d) { return d.uid; };
+        key = function(d) { return d.id; };
 
     // Creating containers
     // -------------------
@@ -112,7 +110,7 @@ iD.Map = function(elem) {
             casings = casing_g.selectAll('path.casing').data(ways, key),
             strokes = stroke_g.selectAll('path.stroke').data(ways, key),
             markers = hit_g.selectAll('image.marker')
-                .data(points.filter(iD.markerimage), key);
+                .data(points, key);
 
         // Fills
         fills.exit().remove();
@@ -142,16 +140,16 @@ iD.Map = function(elem) {
             .attr('class', class_marker)
             .on('click', selectClick)
             .attr({ width: 16, height: 16 })
-            .attr('xlink:href', iD.markerimage)
+            .attr('xlink:href', iD.Style.markerimage)
             .call(dragbehavior);
         markers.attr('transform', function(d) {
                 return 'translate(' + projection([d.lon, d.lat]) + ')';
             });
 
         if (selection.length) {
-            var uid = selection[0];
+            var id = selection[0];
             var active_entity = all.filter(function(a) {
-                return a.uid === uid && a.entityType === 'way';
+                return a.id === id && a.entityType === 'way';
             });
 
             var handles = hit_g.selectAll('circle.handle')
@@ -189,7 +187,7 @@ iD.Map = function(elem) {
     }
 
     function selectClick(d) {
-        selection = [d.uid];
+        selection = [d.id];
         drawVector();
         d3.select('.inspector-wrap')
         .style('display', 'block')
@@ -201,7 +199,7 @@ iD.Map = function(elem) {
     function augmentSelect(fn) {
         return function(d) {
             var c = fn(d);
-            if (selection.indexOf(d.uid) !== -1) {
+            if (selection.indexOf(d.id) !== -1) {
                 c += ' active';
             }
             return c;

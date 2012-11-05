@@ -7,6 +7,9 @@ iD.Graph.prototype = {
     // stack of previous versions of this datastructure
     prev: [],
 
+    // messages
+    annotations: [],
+
     insert: function(a) {
         for (var i = 0; i < a.length; i++) {
             if (this.head[a[i].id]) return;
@@ -14,13 +17,24 @@ iD.Graph.prototype = {
         }
     },
 
-    modify: function(callback) {
-        // Previous version pushed onto stack
-        var o = pdata.object(this.head).get();
-        prev.push(o);
+    modify: function(callback, annotation) {
+        // create a pdata wrapper of current head
+        var o = pdata.object(this.head);
 
-        // Make head a copy with no common history
-        this.head = pdata.object(this.head).get();
+        // Archive current version
+        this.prev.push(o.get());
+
+        // Let the operation make modification of a safe
+        // copy
+        var modified = callback(o);
+
+        // Archive this version
+        this.prev.push(modified.get());
+        // Annotate this version
+        this.annotations.push(annotation);
+
+        // Make head the top of the previous stack
+        this.head = this.prev[this.prev.length - 1];
     },
 
     intersects: function(version, extent) {

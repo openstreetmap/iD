@@ -30,6 +30,17 @@ iD.Style.waystack = function(a, b) {
 };
 
 
+iD.Style.markerimage = function(d) {
+    // TODO: optimize
+    for (var k in d.tags) {
+        var key = k + '=' + d.tags[k];
+        if (iD._markertable[key]) {
+            return 'icons/' + iD._markertable[key] + '.png';
+        }
+    }
+    return 'icons/unknown.png';
+};
+
 iD.Style.TAG_CLASSES = {
     'highway': true,
     'railway': true,
