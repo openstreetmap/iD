@@ -79,17 +79,17 @@ iD.Map = function(elem) {
         .attr('clip-path', 'url(#clip)');
 
     var fill_g = r.append('g').attr('id', 'fill-g'),
-    casing_g =  r.append('g').attr('id', 'casing-g'),
-    stroke_g = r.append('g').attr('id', 'stroke-g'),
-    text_g = r.append('g').attr('id', 'text-g'),
-    hit_g = r.append('g').attr('id', 'hit-g'),
-    temp = r.append('g').attr('id', 'temp-g');
+        casing_g = r.append('g').attr('id', 'casing-g'),
+        stroke_g = r.append('g').attr('id', 'stroke-g'),
+        text_g = r.append('g').attr('id', 'text-g'),
+        hit_g = r.append('g').attr('id', 'hit-g'),
+        temp = r.append('g').attr('id', 'temp-g');
 
-    var class_stroke = augmentSelect(iD.Style.styleClasses('stroke')),
-    class_fill = augmentSelect(iD.Style.styleClasses('stroke')),
-    class_area = augmentSelect(iD.Style.styleClasses('area')),
-    class_marker = augmentSelect(iD.Style.styleClasses('marker')),
-    class_casing = augmentSelect(iD.Style.styleClasses('casing'));
+    var class_stroke = iD.Style.styleClasses('stroke'),
+    class_fill = iD.Style.styleClasses('stroke'),
+    class_area = iD.Style.styleClasses('area'),
+    class_marker = iD.Style.styleClasses('marker'),
+    class_casing = iD.Style.styleClasses('casing');
 
     var tileclient = iD.Tiles(tilegroup, projection);
 
@@ -109,19 +109,24 @@ iD.Map = function(elem) {
         strokes = stroke_g.selectAll('path.stroke').data(ways, key),
         markers = hit_g.selectAll('image.marker').data(points, key);
 
+        var selected_id = selection && selection[0];
+
         // Fills
         fills.exit().remove();
         fills.enter().append('path')
-        .on('click', selectClick);
+            .on('click', selectClick);
         fills.attr('d', nodeline)
-        .attr('class', class_area);
+            .attr('class', class_area);
 
         // Casings
         casings.exit().remove();
         casings.enter().append('path');
         casings.order()
             .attr('d', nodeline)
-            .attr('class', class_casing);
+            .attr('class', class_casing)
+            .classed('active', function(d) {
+                return d.id === selected_id;
+            });
 
         // Strokes
         strokes.exit().remove();
@@ -129,7 +134,10 @@ iD.Map = function(elem) {
             .on('click', selectClick);
         strokes.order()
             .attr('d', nodeline)
-            .attr('class', class_stroke);
+            .attr('class', class_stroke)
+            .classed('active', function(d) {
+                return d.id === selected_id;
+            });
 
         // Markers
         markers.exit().remove();
@@ -148,9 +156,8 @@ iD.Map = function(elem) {
             return 'translate(' + pt + ')';
         });
 
-        var id = selection && selection[0];
         var active_entity = all.filter(function(a) {
-            return a.id === id && a.type === 'way';
+            return a.id === selected_id && a.type === 'way';
         });
 
         var handles = hit_g.selectAll('circle.handle')
@@ -193,17 +200,6 @@ iD.Map = function(elem) {
         .style('display', 'block')
         .datum(d).call(inspector);
         d3.event.stopPropagation();
-    }
-
-    // This is an unfortunate hack that should be improved.
-    function augmentSelect(fn) {
-        return function(d) {
-            var c = fn(d);
-            if (selection.indexOf(d.id) !== -1) {
-                c += ' active';
-            }
-            return c;
-        };
     }
 
     function zoomPan() {
