@@ -109,6 +109,30 @@
 
             d3.select('#undo').on('click', map.undo);
             d3.select('#redo').on('click', map.redo);
+
+            d3.select(document).on('keydown', function() {
+                console.log(d3.event);
+                // cmd-z
+                if (d3.event.which === 90 && d3.event.metaKey) {
+                    map.undo();
+                }
+                // cmd-shift-z
+                if (d3.event.which === 90 && d3.event.metaKey && d3.event.shiftKey) {
+                    map.redo();
+                }
+                // p
+                if (d3.event.which === 80) {
+                    controller.go(iD.actions.AddPlace);
+                }
+                // r
+                if (d3.event.which === 82) {
+                    controller.go(iD.actions.AddRoad);
+                }
+                // a
+                if (d3.event.which === 65) {
+                    controller.go(iD.actions.AddArea);
+                }
+            });
         </script>
     </body>
 </html>
