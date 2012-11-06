@@ -1,8 +1,5 @@
 iD.Connection = function(graph) {
-    var nextNode = -1,
-        nextWay = -1,
-        nextRelation = -1,
-        apiURL = 'http://www.openstreetmap.org/api/0.6/';
+    var apiURL = 'http://www.openstreetmap.org/api/0.6/';
 
     var connection = {};
 
@@ -18,8 +15,8 @@ iD.Connection = function(graph) {
 
     function getNodes(obj) {
         var nodes = [], nelems = obj.getElementsByTagName('nd');
-        for (var i = 0; i < nelems.length; i++) {
-            nodes[i] = +nelems[i].attributes.ref.nodeValue;
+        for (var i = 0, l = nelems.length; i < l; i++) {
+            nodes[i] = 'n' + nelems[i].attributes.ref.nodeValue;
         }
         return nodes;
     }
@@ -39,9 +36,9 @@ iD.Connection = function(graph) {
         var members = [],
             elems = obj.getElementsByTagName('member');
 
-        for (var i = 0; i < elems.length; i++) {
+        for (var i = 0, l = elems.length; i < l; i++) {
             members[i] = {
-                id: +elems[i].attributes.ref.nodeValue,
+                id: elems[i].attributes.type.nodeValue[0] + elems[i].attributes.ref.nodeValue,
                 type: elems[i].attributes.type.nodeValue,
                 role: elems[i].attributes.role.nodeValue
             };
@@ -66,12 +63,15 @@ iD.Connection = function(graph) {
             nodes: getNodes(obj),
             tags: getTags(obj)
         };
-        var numbers = {id: true, lat: true, lon: true };
         for (var i = 0; i < obj.attributes.length; i++) {
             var n = obj.attributes[i].nodeName;
             var v = obj.attributes[i].nodeValue;
-            o[n] = numbers[n] ? +v : v;
+            o[n] = v;
         }
+        if (o.lat) o.lat = parseFloat(o.lat);
+        if (o.lon) o.lon = parseFloat(o.lon);
+        o._id = o.id;
+        o.id = o.type[0] + o.id;
         return o;
     }
 

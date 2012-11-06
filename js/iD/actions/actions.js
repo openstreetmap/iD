@@ -6,7 +6,7 @@ iD.actions.AddPlace = {
             type: 'node',
             lat: ll[1],
             lon: ll[0],
-            id: iD.Util.id(),
+            id: iD.Util.id('node'),
             tags: {}
         };
     },
@@ -54,7 +54,7 @@ iD.actions.AddRoad = {
             type: 'node',
             lat: ll[1],
             lon: ll[0],
-            id: iD.Util.id(),
+            id: iD.Util.id('node'),
             modified: true,
             tags: {}
         };
@@ -67,7 +67,7 @@ iD.actions.AddRoad = {
                 highway: 'residential'
             },
             modified: true,
-            id: iD.Util.id()
+            id: iD.Util.id('way')
         };
     },
     enter: function() {
@@ -119,7 +119,7 @@ iD.actions.DrawRoad = function(way) {
                 type: 'node',
                 lat: ll[1],
                 lon: ll[0],
-                id: iD.Util.id(),
+                id: iD.Util.id('node'),
                 modified: true,
                 tags: {}
             };

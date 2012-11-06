@@ -1,9 +1,10 @@
 iD.Util = {};
 
-iD.Util._id = -1;
+iD.Util._counters = {};
 
-iD.Util.id = function() {
-    return iD.Util._id--;
+iD.Util.id = function(counter) {
+    if (!iD.Util._counters[counter]) iD.Util._counters[counter] = 0;
+    return iD.Util._counters[counter];
 };
 
 iD.Util.friendlyName = function(entity) {
@@ -28,15 +29,6 @@ iD.Util.friendlyName = function(entity) {
     }
 
     return n.length === 0 ? 'unknown' : n.join('; ');
-};
-
-iD.Util.extend = function(child, parent) {
-    for (var property in parent.prototype) {
-        if (typeof child.prototype[property] == "undefined") {
-            child.prototype[property] = parent.prototype[property];
-        }
-    }
-    return child;
 };
 
 iD.Util.codeWindow = function(content) {
