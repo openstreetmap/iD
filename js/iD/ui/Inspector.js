@@ -17,7 +17,7 @@ iD.Inspector = function(graph) {
             head.append('a')
                 .attr('class', 'permalink')
                 .attr('href', 'http://www.openstreetmap.org/browse/' +
-                      d.type + '/' + d.id)
+                      d.type + '/' + d.id.slice(1))
                 .text('OSM');
 
             head.append('a')

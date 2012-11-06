@@ -4,12 +4,12 @@ iD.Graph.prototype = {
 
     // a pointer to the top of the stack.
     head: {},
+    // a pointer to the latest annotation
     annotation: null,
 
     // stack of previous versions of this datastructure
     prev: [],
-
-    // messages
+    // stack of previous annotations
     annotations: [],
 
     // get all points that are not part of a way. this is an expensive

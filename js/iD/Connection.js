@@ -4,9 +4,14 @@ iD.Connection = function(graph) {
     var connection = {};
 
     // Request data within the bbox from an external OSM server.
-    function loadFromAPI(box, callback) {
+    function bboxFromAPI(box, callback) {
         loadFromURL(apiURL + 'map?bbox=' +
             [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
+    }
+
+    // Request data within the bbox from an external OSM server.
+    function wayFromAPI(id, callback) {
+        loadFromURL(apiURL + 'way/' + id + '/full', callback);
     }
 
     function loadFromURL(url, callback) {
@@ -87,9 +92,12 @@ iD.Connection = function(graph) {
     }
 
     connection.graph = graph;
-    connection.loadFromAPI = loadFromAPI;
-    connection.objectData = objectData;
+
+    connection.bboxFromAPI = bboxFromAPI;
+    connection.wayFromAPI = wayFromAPI;
     connection.loadFromURL = loadFromURL;
+
+    connection.objectData = objectData;
     connection.apiURL = apiURL;
 
     return connection;

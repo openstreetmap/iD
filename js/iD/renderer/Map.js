@@ -38,7 +38,7 @@ iD.Map = function(elem) {
         // this is used with handles
         dragbehavior = d3.behavior.drag()
             .origin(function(d) {
-                var data = (typeof d === 'number') ? graph.head[d] : d;
+                var data = (typeof d === 'string') ? graph.head[d] : d;
                 graph.modify(function(o) {
                     var c = {};
                     c[data.id] = pdata.object(data).set({ modified: true }).get();
@@ -57,7 +57,7 @@ iD.Map = function(elem) {
                 drawVector();
             })
             .on('dragend', function(d) {
-                var data = (typeof d === 'number') ? graph.head[d] : d;
+                var data = (typeof d === 'string') ? graph.head[d] : d;
                 graph.modify(function(o) {
                     var c = {};
                     c[data.id] = pdata.object(c[data.id]).get();
@@ -205,7 +205,7 @@ iD.Map = function(elem) {
     }
 
     var download = _.debounce(function() {
-        connection.loadFromAPI(getExtent(), drawVector);
+        connection.bboxFromAPI(getExtent(), drawVector);
     }, 1000);
 
     function deselectClick() {
