@@ -1,15 +1,16 @@
 iD.actions = {};
 
+iD.actions._node = function(ll) {
+    return {
+        type: 'node',
+        lat: ll[1],
+        lon: ll[0],
+        id: iD.Util.id('node'),
+        tags: {}
+    };
+},
+
 iD.actions.AddPlace = {
-    node: function(ll) {
-        return {
-            type: 'node',
-            lat: ll[1],
-            lon: ll[0],
-            id: iD.Util.id('node'),
-            tags: {}
-        };
-    },
     enter: function() {
         d3.selectAll('button').classed('active', false);
         d3.selectAll('button#place').classed('active', true);
@@ -32,7 +33,7 @@ iD.actions.AddPlace = {
         surface.on('click.addplace', function() {
             var ll = this.map.projection.invert(
                 d3.mouse(surface.node()));
-            iD.operations.addNode(this.map, this.node(ll));
+            iD.operations.addNode(this.map, iD.actions._node(ll));
             this.exit();
         }.bind(this));
 
@@ -41,24 +42,15 @@ iD.actions.AddPlace = {
         }.bind(this));
     },
     exit: function() {
-        this.map.surface.on('.addplace', null);
-        d3.select(document).on('.addplace', null);
+        this.map.surface.on('mousemove.addplace', null);
+        this.map.surface.on('click.addplace', null);
+        d3.select(document).on('keydown.addplace', null);
         d3.selectAll('#addplace').remove();
         d3.selectAll('button#place').classed('active', false);
     }
 };
 
 iD.actions.AddRoad = {
-    node: function(ll) {
-        return {
-            type: 'node',
-            lat: ll[1],
-            lon: ll[0],
-            id: iD.Util.id('node'),
-            modified: true,
-            tags: {}
-        };
-    },
     way: function(ll) {
         return {
             type: 'way',
@@ -92,21 +84,23 @@ iD.actions.AddRoad = {
         surface.on('click.addroad', function() {
             var ll = this.map.projection.invert(
                 d3.mouse(surface.node()));
+
             var way = this.way();
-            var node = this.node(ll);
+            var node = iD.actions._node(ll);
             way.nodes.push(node.id);
+
             iD.operations.changeWayNodes(this.map, way, node);
             this.controller.go(iD.actions.DrawRoad(way));
-            this.exit();
         }.bind(this));
 
-        d3.select(document).on('keydown.addplace', function() {
+        d3.select(document).on('keydown.addroad', function() {
             if (d3.event.keyCode === 27) this.exit();
         }.bind(this));
     },
     exit: function() {
-        this.map.surface.on('.addroad', null);
-        d3.select(document).on('.addroad', null);
+        this.map.surface.on('click.addroad', null);
+        this.map.surface.on('mousemove.addroad', null);
+        d3.select(document).on('keydown.addroad', null);
         d3.selectAll('#addroad').remove();
         d3.selectAll('button#road').classed('active', false);
     }
@@ -114,20 +108,10 @@ iD.actions.AddRoad = {
 
 iD.actions.DrawRoad = function(way) {
     return {
-        node: function(ll) {
-            return {
-                type: 'node',
-                lat: ll[1],
-                lon: ll[0],
-                id: iD.Util.id('node'),
-                modified: true,
-                tags: {}
-            };
-        },
         enter: function() {
             var surface = this.map.surface;
 
-            this.falsenode = this.node([0, 0]);
+            this.falsenode = iD.actions._node([0, 0]);
 
             iD.operations.addTemporary(this.map, this.falsenode);
             // way.nodes = way.nodes.slice();
@@ -146,7 +130,7 @@ iD.actions.DrawRoad = function(way) {
                 way.nodes.pop();
 
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
-                var node = this.node(ll);
+                var node = iD.actions._node(ll);
 
                 way.nodes.push(node.id);
 
@@ -163,7 +147,8 @@ iD.actions.DrawRoad = function(way) {
         },
         exit: function() {
             iD.operations.addTemporary(this.map, this.falsenode);
-            this.map.surface.on('.drawroad', null);
+            this.map.surface.on('mousemove.drawroad', null);
+            this.map.surface.on('click.drawroad', null);
             d3.select(document).on('.drawroad', null);
             d3.selectAll('#drawroad').remove();
         }

@@ -5,7 +5,7 @@ iD.Util._counters = {};
 iD.Util.id = function(counter) {
     counter = counter || 'default';
     if (!iD.Util._counters[counter]) iD.Util._counters[counter] = 0;
-    return iD.Util._counters[counter]--;
+    return counter[0] + (--iD.Util._counters[counter]);
 };
 
 iD.Util.friendlyName = function(entity) {
