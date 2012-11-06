@@ -19,7 +19,7 @@ iD.Connection = function(graph) {
     function getNodes(obj) {
         var nodes = [], nelems = obj.getElementsByTagName('nd');
         for (var i = 0; i < nelems.length; i++) {
-            nodes.push(+nelems[i].attributes.ref.nodeValue);
+            nodes[i] = +nelems[i].attributes.ref.nodeValue;
         }
         return nodes;
     }
@@ -40,11 +40,11 @@ iD.Connection = function(graph) {
             elems = obj.getElementsByTagName('member');
 
         for (var i = 0; i < elems.length; i++) {
-            members.push({
+            members[i] = {
                 id: +elems[i].attributes.ref.nodeValue,
                 type: elems[i].attributes.type.nodeValue,
                 role: elems[i].attributes.role.nodeValue
-            });
+            };
         }
 
         return members;
