@@ -228,6 +228,10 @@ iD.Map = function(elem) {
         iD.operations.changeTags(map, d, tags);
     });
 
+    inspector.on('remove', function(d) {
+        iD.operations.remove(map, d);
+    });
+
     function zoomPan() {
         projection
             .translate(d3.event.translate)

@@ -1,5 +1,5 @@
 iD.Inspector = function(graph) {
-    var event = d3.dispatch('change', 'update');
+    var event = d3.dispatch('change', 'update', 'remove');
 
     function inspector(selection) {
         // http://jsfiddle.net/7WQjr/
@@ -64,8 +64,8 @@ iD.Inspector = function(graph) {
                     .property('value', function(d) { return d.key; })
                     .on('change', function(row) {
                         row.key = this.value;
-                        event.update(d, newtags());
-                        draw(formtags());
+                        event.update(d, newtags(table));
+                        draw(formtags(table));
                     });
 
                 row.append('td').append('input')
@@ -73,42 +73,50 @@ iD.Inspector = function(graph) {
                     .property('value', function(d) { return d.value; })
                     .on('change', function(row) {
                         row.value = this.value;
-                        event.update(d, newtags());
-                        draw(formtags());
+                        event.update(d, newtags(table));
+                        draw(formtags(table));
                     });
             }
 
             var data = d3.entries(d.tags).concat([{ key: '', value: ''}]);
             draw(data);
 
-            // TODO: there must be a function for this
-            function unentries(x) {
-                var obj = {};
-                for (var i = 0; i < x.length; i++) {
-                    obj[x[i].key] = x[i].value;
-                }
-                return obj;
-            }
 
-            function formtags() {
-                var t = newtags();
-                if (Object.keys(t).indexOf('') === -1) t[''] = '';
-                return d3.entries(t);
-            }
-
-            function newtags() {
-                var inputs = table.selectAll('input.tag-value')
-                    .data();
-                return unentries(inputs);
-            }
-
-            var save = d3.select(this)
+            save = d3.select(this)
                 .append('button')
                 .text('Save')
                 .on('click', function(d, i) {
-                    event.change(d, newtags());
+                    event.change(d, newtags(table));
+                });
+
+            d3.select(this)
+                .append('button')
+                .text('Delete')
+                .on('click', function(d, i) {
+                    event.remove(d);
                 });
         });
+    }
+
+    // TODO: there must be a function for this
+    function unentries(x) {
+        var obj = {};
+        for (var i = 0; i < x.length; i++) {
+            obj[x[i].key] = x[i].value;
+        }
+        return obj;
+    }
+
+    function formtags(table) {
+        var t = newtags(table);
+        if (Object.keys(t).indexOf('') === -1) t[''] = '';
+        return d3.entries(t);
+    }
+
+    function newtags(table) {
+        var inputs = table.selectAll('input.tag-value')
+            .data();
+        return unentries(inputs);
     }
 
     return d3.rebind(inspector, event, 'on');

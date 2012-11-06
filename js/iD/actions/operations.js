@@ -18,6 +18,14 @@ iD.operations.startWay = function(map, way) {
     map.update();
 };
 
+iD.operations.remove = function(map, node) {
+    map.graph.modify(function(graph) {
+        console.log(node.id);
+        return graph.remove(node.id);
+    }, 'removed a feature');
+    map.update();
+};
+
 iD.operations.changeWayNodes = function(map, way, node) {
     map.graph.modify(function(graph) {
         var o = {};
