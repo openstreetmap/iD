@@ -8,8 +8,6 @@ iD.Map = function(elem) {
         return;
     }
 
-    var version = 0;
-
     // lon/lat object to array
     function ll2a(o) {
         return [o.lon, o.lat];
@@ -121,7 +119,7 @@ iD.Map = function(elem) {
     var tileclient = iD.Tiles(tilegroup, projection);
 
     function drawVector() {
-        var all = graph.intersects(version, getExtent());
+        var all = graph.intersects(getExtent());
 
         var ways = all.filter(function(a) {
             return a.type === 'way' && !iD.Way.isClosed(a);

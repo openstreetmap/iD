@@ -79,9 +79,7 @@ iD.Graph.prototype = {
         this.annotation = this.annotations[this.annotations.length - 1];
     },
 
-    intersects: function(version, extent) {
-        // summary:	Find all drawable entities that are within a given bounding box.
-        // Each one is an array of entities.
+    intersects: function(extent) {
         var items = [];
         for (var i in this.head) {
             if (this.head[i]) items.push(this.head[i]);
@@ -89,6 +87,7 @@ iD.Graph.prototype = {
         return items;
     },
 
+    // Resolve the id references in a way, replacing them with actual objects.
     fetch: function(id) {
         var o = this.head[id];
         var f = _.clone(o);
