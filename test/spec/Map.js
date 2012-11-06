@@ -4,10 +4,7 @@ describe('Map', function() {
     beforeEach(function() {
         foo = document.body.appendChild(document.createElement('div'));
         foo.id = 'foo';
-        map = iD.Map({
-            selector: '#foo',
-            connection: iD.Connection()
-        });
+        map = iD.Map(d3.select('#foo').node());
     });
 
     afterEach(function() {
