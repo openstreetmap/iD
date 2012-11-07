@@ -1,4 +1,4 @@
-iD.GeoJSON = {
+iD.format.GeoJSON = {
     mapping: function(entity) {
         if (this.mappings[entity.type]) {
             return this.mappings[entity.type](entity);

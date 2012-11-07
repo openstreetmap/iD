@@ -26,7 +26,7 @@ iD.Inspector = function(graph) {
                 .text('XML')
                 .on('click', function() {
                     d3.event.stopPropagation();
-                    iD.Util.codeWindow(iD.XML.mapping(graph.fetch(d.id)));
+                    iD.Util.codeWindow(iD.format.XML.mapping(graph.fetch(d.id)));
                 });
 
             head.append('a')
@@ -36,7 +36,7 @@ iD.Inspector = function(graph) {
                 .on('click', function() {
                     d3.event.stopPropagation();
                     iD.Util.codeWindow(JSON.stringify(
-                        iD.GeoJSON.mapping(graph.fetch(d.id)), null, 2));
+                        iD.format.GeoJSON.mapping(graph.fetch(d.id)), null, 2));
                 });
 
             var table = d3.select(this)

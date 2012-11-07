@@ -1,5 +1,6 @@
+// an index of tag -> marker image combinations, taken from
+// http://svn.openstreetmap.org/applications/rendering/mapnik/inc/layer-amenity-symbols.xml.inc
 iD._markers = [
-    // http://svn.openstreetmap.org/applications/rendering/mapnik/inc/layer-amenity-symbols.xml.inc
     {
         tags: { aeroway: 'helipad' },
         icon: 'helipad'
@@ -548,6 +549,7 @@ iD._markers = [
     }
 ];
 
+// generate a fast lookup table for marker styling
 iD._markertable = (function(markers) {
     var table = {};
     for (var i = 0; i < markers.length; i++) {

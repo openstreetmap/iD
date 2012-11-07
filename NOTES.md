@@ -1,3 +1,17 @@
+## Code Layout
+
+This follows a similar layout to d3: each module of d3 has a file with its exact
+name, like
+
+```javascript
+// format.js
+
+iD.format = {};
+```
+
+And the parts of that module are in separate files that implement `iD.format.XML`
+and so on.
+
 ## The Graph
 
 iD implements a [persistent data structure](http://en.wikipedia.org/wiki/Persistent_data_structure)

@@ -30,9 +30,11 @@ iD.Graph.prototype = {
         return pois;
     },
 
+    // rewind and fast-forward the graph. these preserve the other modes of the
+    // graph. these attempt to skip over any edits that didn't have an annotation,
+    // like 'invisible edits' and sub-edits.
     undo: function() {
         if (this.prev.length && this.prev[0] !== this.head) {
-            // skip changes without annotations
             for (var idx = this.prev.indexOf(this.head) - 1; idx > 0; idx--) {
                 if (this.annotations[idx]) break;
             }
@@ -40,7 +42,6 @@ iD.Graph.prototype = {
             this.annotation = this.annotations[idx];
         }
     },
-
     redo: function() {
         if (this.prev.length && this.prev[this.prev.length - 1] !== this.head) {
             for (var idx = this.prev.indexOf(this.head) + 1; idx < this.prev.length - 1; idx++) {
@@ -58,6 +59,11 @@ iD.Graph.prototype = {
         }
     },
 
+    // the gist of all operations on the graph: the callback function
+    // receives the current graph and returns a modified graph. the graph
+    // given to the callback is guaranteed to be immutable at one level - the
+    // key -> object mappings. the callback is responsible for keeping objects
+    // in the graph immutable.
     modify: function(callback, annotation) {
         // create a pdata wrapper of current head
         var o = pdata.object(this.head);
@@ -79,6 +85,7 @@ iD.Graph.prototype = {
         this.annotation = this.annotations[this.annotations.length - 1];
     },
 
+    // get all objects that intersect an extent.
     intersects: function(extent) {
         var items = [];
         for (var i in this.head) {

@@ -1,4 +1,12 @@
 iD.Style = {};
+
+// all styling that is done outside of CSS in iD.
+//
+// Since SVG does not support z-index, we sort roads manually with d3's `sort`
+// and the `waystack` fn.
+// 
+// This also chooses kosher CSS classes for ways, and marker images for POIs
+
 iD.Style.highway_stack = {
     motorway: 0,
     motorway_link: 1,

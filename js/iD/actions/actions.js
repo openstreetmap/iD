@@ -1,5 +1,11 @@
 iD.actions = {};
 
+// Actions are like 'modes' for the editor. They are entered by bindings to
+// clicks and keypresses, and exited by the same.
+//
+// Actions aim to include a bare minimum of 'business logic' - this is separated
+// into operations.
+
 iD.actions._node = function(ll) {
     return {
         type: 'node',
@@ -172,7 +178,8 @@ iD.actions.Move = {
     exit: function() { }
 };
 
-
+// A controller holds a single action at a time and calls `.enter` and `.exit`
+// to bind and unbind actions.
 iD.controller = function(map) {
     var controller = { action: null };
 

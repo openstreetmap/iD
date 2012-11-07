@@ -27,6 +27,7 @@ iD.Connection = function(graph) {
     }
 
     // <tag k="highway" v="unclassified"/>
+    // { highway: 'classified' }
     function getTags(obj) {
         var tags = {}, tagelems = obj.getElementsByTagName('tag');
         for (var i = 0, l = tagelems.length; i < l; i++) {

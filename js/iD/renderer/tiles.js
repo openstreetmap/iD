@@ -2,6 +2,7 @@
 iD.Tiles = function(selection, projection, width, height) {
     var tiles = {};
 
+    // derive the url of a 'quadkey' style tile from a coordinate object
     function tileUrl(coord) {
         var u = '';
         for (var zoom = coord[0]; zoom > 0; zoom--) {
@@ -14,6 +15,8 @@ iD.Tiles = function(selection, projection, width, height) {
         return  'http://ecn.t0.tiles.virtualearth.net/tiles/a' + u + '.jpeg?g=587&mkt=en-gb&n=z';
     }
 
+    // derive the tiles onscreen, remove those offscreen and position tiles
+    // correctly for the currentstate of `projection`
     function redraw() {
         var t = projection.translate(),
             s = projection.scale(),

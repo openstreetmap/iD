@@ -1,5 +1,9 @@
 iD.operations = {};
 
+// operations take a map, and arguments that they modify in the map's graph.
+// they use `graph.modify` to do this while keeping a previous version
+// of the graph the same.
+
 iD.operations.addNode = function(map, node) {
     map.graph.modify(function(graph) {
         var o = {};
@@ -20,7 +24,6 @@ iD.operations.startWay = function(map, way) {
 
 iD.operations.remove = function(map, node) {
     map.graph.modify(function(graph) {
-        console.log(node.id);
         return graph.remove(node.id);
     }, 'removed a feature');
     map.update();
