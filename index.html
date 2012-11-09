@@ -58,8 +58,6 @@
         <script type='text/javascript' src='js/iD/graph/Graph.js'></script>
         <script type='text/javascript' src='js/iD/Connection.js'></script>
 
-        <script type='text/javascript' src='js/iD/UI.js'></script>
-
         <script>
             var map = iD.Map(document.getElementById('map')).setZoom(18).setCenter({
                 lat: 40.7965621,
@@ -69,7 +67,6 @@
             var m = d3.select('#map');
 
             iD.Hash().map(map);
-            iD.UI.bind();
 
             var controller = iD.controller(map);
 
