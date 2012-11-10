@@ -22,8 +22,8 @@ iD.Map = function(elem) {
         width, height,
         dispatch = d3.dispatch('move', 'update'),
         // data
-        history = new iD.History(),
-        connection = new iD.Connection(history.graph()),
+        history = iD.History(),
+        connection = iD.Connection(history.graph()),
         inspector = iD.Inspector(history),
         parent = d3.select(elem),
         selection = [],

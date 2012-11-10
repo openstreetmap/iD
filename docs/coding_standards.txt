@@ -8,6 +8,13 @@ Most of iD is written with [a js module pattern](http://macwright.org/2012/06/04
 that is, they do not use the `new` operator, and they use scope instead of
 `this` to reference variables and functions.
 
+The exceptions are classes that are very heavily instantiated: Graphs and entities. These are written in a
+classical manner for [performance reasons](https://gist.github.com/3961693).
+
+In order to unify the construction interface for these two styles, classical classes use the
+[instanceof trick](http://ejohn.org/blog/simple-class-instantiation/). This allows instantiation
+of both module pattern classes and classical classes to be done without using `new`.
+
 Function names
 --------------
 Anything that creates and calls an Action should be prefixed with do:
