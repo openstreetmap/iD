@@ -1,5 +1,6 @@
 iD.History = function() {
-    this.stack = [new iD.Graph()];
+    if (!(this instanceof iD.History)) return new iD.History();
+    this.stack = [iD.Graph()];
     this.index = 0;
 };
 

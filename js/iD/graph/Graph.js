@@ -1,4 +1,5 @@
 iD.Graph = function(entities, annotation) {
+    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation)
     this.entities = entities || {};
     this.annotation = annotation;
 };
@@ -36,11 +37,11 @@ iD.Graph.prototype = {
     replace: function(entity, annotation) {
         var o = {};
         o[entity.id] = entity;
-        return new iD.Graph(pdata.object(this.entities).set(o).get(), annotation);
+        return iD.Graph(pdata.object(this.entities).set(o).get(), annotation);
     },
 
     remove: function(entity, annotation) {
-        return new iD.Graph(pdata.object(this.entities).remove(entity.id).get(), annotation);
+        return iD.Graph(pdata.object(this.entities).remove(entity.id).get(), annotation);
     },
 
     // get all objects that intersect an extent.
