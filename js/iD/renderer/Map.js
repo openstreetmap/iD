@@ -201,7 +201,14 @@ iD.Map = function(elem) {
     }
 
     var download = _.debounce(function() {
-        connection.bboxFromAPI(getExtent(), drawVector);
+        connection.bboxFromAPI(getExtent(), function (result) {
+            if (result instanceof Error) {
+                // TODO: handle
+            } else {
+                history.merge(result);
+                drawVector();
+            }
+        });
     }, 1000);
 
     function deselectClick() {

@@ -27,11 +27,10 @@ iD.Graph.prototype = {
         return pois;
     },
 
-    insert: function(a) {
-        for (var i = 0; i < a.length; i++) {
-            if (this.entities[a[i].id]) return;
-            this.entities[a[i].id] = a[i];
-        }
+    merge: function(graph) {
+        var entities = _.clone(this.entities);
+        _.defaults(entities, graph.entities);
+        return iD.Graph(entities, this.annotation);
     },
 
     replace: function(entity, annotation) {
