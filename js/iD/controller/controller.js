@@ -1,6 +1,6 @@
 // A controller holds a single action at a time and calls `.enter` and `.exit`
 // to bind and unbind actions.
-iD.controller = function(map) {
+iD.Controller = function(map) {
     var controller = { action: null };
 
     controller.go = function(x) {
