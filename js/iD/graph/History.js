@@ -9,6 +9,12 @@ iD.History.prototype = {
         return this.stack[this.index];
     },
 
+    merge: function(graph) {
+        for (var i = 0; i < this.stack.length; i++) {
+            this.stack[i] = this.stack[i].merge(graph);
+        }
+    },
+
     do: function(operation) {
         this.stack = this.stack.slice(0, this.index + 1);
         this.stack.push(operation(this.graph()));

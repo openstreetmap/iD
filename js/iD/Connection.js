@@ -1,4 +1,4 @@
-iD.Connection = function(graph) {
+iD.Connection = function() {
     var apiURL = 'http://www.openstreetmap.org/api/0.6/';
 
     var connection = {};
@@ -85,14 +85,19 @@ iD.Connection = function(graph) {
         return function(dom) {
             if (!dom.childNodes) return callback(new Error('Bad request'));
             var root = dom.childNodes[0];
-            connection.graph.insert(_.map(root.getElementsByTagName('way'), objectData));
-            connection.graph.insert(_.map(root.getElementsByTagName('node'), objectData));
-            connection.graph.insert(_.map(root.getElementsByTagName('relation'), objectData));
-            callback(null);
+            var entities = {};
+            var addEntity = function (obj) {
+                var o = objectData(obj);
+                entities[o.id] = o;
+            };
+
+            _.forEach(root.getElementsByTagName('way'), addEntity);
+            _.forEach(root.getElementsByTagName('node'), addEntity);
+            _.forEach(root.getElementsByTagName('relation'), addEntity);
+
+            callback(iD.Graph(entities));
         };
     }
-
-    connection.graph = graph;
 
     connection.bboxFromAPI = bboxFromAPI;
     connection.wayFromAPI = wayFromAPI;
