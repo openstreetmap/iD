@@ -7,14 +7,14 @@ iD.actions = {};
 // into operations.
 
 iD.actions._node = function(ll) {
-    return {
+    return iD.Entity({
         type: 'node',
         lat: ll[1],
         lon: ll[0],
         id: iD.Util.id('node'),
         tags: {}
-    };
-},
+    });
+};
 
 iD.actions.AddPlace = {
     enter: function() {
@@ -58,7 +58,7 @@ iD.actions.AddPlace = {
 
 iD.actions.AddRoad = {
     way: function(ll) {
-        return {
+        return iD.Entity({
             type: 'way',
             nodes: [],
             tags: {
@@ -66,7 +66,7 @@ iD.actions.AddRoad = {
             },
             modified: true,
             id: iD.Util.id('way')
-        };
+        });
     },
     enter: function() {
         d3.selectAll('button').classed('active', false);
