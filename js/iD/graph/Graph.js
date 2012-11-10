@@ -35,13 +35,15 @@ iD.Graph.prototype = {
     },
 
     replace: function(entity, annotation) {
-        var o = {};
-        o[entity.id] = entity;
-        return iD.Graph(pdata.object(this.entities).set(o).get(), annotation);
+        var entities = _.clone(this.entities);
+        entities[entity.id] = entity;
+        return iD.Graph(entities, annotation);
     },
 
     remove: function(entity, annotation) {
-        return iD.Graph(pdata.object(this.entities).remove(entity.id).get(), annotation);
+        var entities = _.clone(this.entities);
+        delete entities[entity.id];
+        return iD.Graph(entities, annotation);
     },
 
     // get all objects that intersect an extent.
