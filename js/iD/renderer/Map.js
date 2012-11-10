@@ -115,7 +115,8 @@ iD.Map = function(elem) {
     var tileclient = iD.Tiles(tilegroup, projection);
 
     function drawVector() {
-        var all = history.graph().intersects(getExtent());
+        var graph = history.graph(),
+            all = graph.intersects(getExtent());
 
         var ways = all.filter(function(a) {
             return a.type === 'way' && !iD.Way.isClosed(a);
@@ -123,7 +124,7 @@ iD.Map = function(elem) {
         areas = all.filter(function(a) {
             return a.type === 'way' && iD.Way.isClosed(a);
         }),
-        points = history.graph().pois();
+        points = graph.pois();
 
         var fills = fill_g.selectAll('path.area').data(areas, key),
             casings = casing_g.selectAll('path.casing').data(ways, key),
@@ -188,7 +189,7 @@ iD.Map = function(elem) {
             .attr('r', 5)
             .call(dragbehavior);
         handles.attr('transform', function(d) {
-            return 'translate(' + projection(ll2a(history.entity(d))) + ')';
+            return 'translate(' + projection(ll2a(graph.entity(d))) + ')';
         });
     }
 
