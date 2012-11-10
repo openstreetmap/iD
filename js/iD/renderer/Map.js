@@ -23,7 +23,7 @@ iD.Map = function(elem) {
         dispatch = d3.dispatch('move', 'update'),
         // data
         history = iD.History(),
-        connection = iD.Connection(history.graph()),
+        connection = iD.Connection(),
         inspector = iD.Inspector(history),
         parent = d3.select(elem),
         selection = [],
@@ -37,29 +37,19 @@ iD.Map = function(elem) {
             .on('zoom', zoomPan),
         // this is used with handles
         dragbehavior = d3.behavior.drag()
-            .origin(function(d) {
-                var entity = (typeof d === 'string') ? history.entity(d) : d;
-                history.do(function(graph) {
-                    var node = pdata.object(entity).set({ modified: true }).get();
-                    return graph.replace(node);
-                });
+            .origin(function(entity) {
                 var p = projection(ll2a(entity));
                 return { x: p[0], y: p[1] };
             })
-            .on('drag', function(d) {
-                d3.select(this).attr('transform', function() {
-                    return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
-                });
-                var ll = projection.invert([d3.event.x, d3.event.y]);
-                history.entity(d).lon = ll[0];
-                history.entity(d).lat = ll[1];
+            .on('dragstart', function() {
+                history.do(iD.operations.noop());
+            })
+            .on('drag', function(entity) {
+                var to = projection.invert([d3.event.x, d3.event.y]);
+                history.replace(iD.operations.move(entity, to));
                 drawVector();
             })
-            .on('dragend', function(d) {
-                var entity = (typeof d === 'string') ? history.entity(d) : d;
-                history.do(function(graph) {
-                    return graph.replace(entity, 'moved an element');
-                });
+            .on('dragend', function() {
                 map.update();
             }),
         // geo
@@ -115,7 +105,8 @@ iD.Map = function(elem) {
     var tileclient = iD.Tiles(tilegroup, projection);
 
     function drawVector() {
-        var all = history.graph().intersects(getExtent());
+        var graph = history.graph(),
+            all = graph.intersects(getExtent());
 
         var ways = all.filter(function(a) {
             return a.type === 'way' && !iD.Way.isClosed(a);
@@ -123,7 +114,7 @@ iD.Map = function(elem) {
         areas = all.filter(function(a) {
             return a.type === 'way' && iD.Way.isClosed(a);
         }),
-        points = history.graph().pois();
+        points = graph.pois();
 
         var fills = fill_g.selectAll('path.area').data(areas, key),
             casings = casing_g.selectAll('path.casing').data(ways, key),
@@ -180,15 +171,15 @@ iD.Map = function(elem) {
         });
 
         var handles = hit_g.selectAll('circle.handle')
-            .data(selection.length ? (active_entity.length ? active_entity[0].nodes : []) : []);
+            .data(active_entity.length ? graph.fetch(active_entity[0].id).nodes : []);
 
         handles.exit().remove();
         handles.enter().append('circle')
             .attr('class', 'handle')
             .attr('r', 5)
             .call(dragbehavior);
-        handles.attr('transform', function(d) {
-            return 'translate(' + projection(ll2a(history.entity(d))) + ')';
+        handles.attr('transform', function(entity) {
+            return 'translate(' + projection(ll2a(entity)) + ')';
         });
     }
 

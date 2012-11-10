@@ -78,7 +78,7 @@ iD.Connection = function() {
         if (o.lon) o.lon = parseFloat(o.lon);
         o._id = o.id;
         o.id = o.type[0] + o.id;
-        return o;
+        return iD.Entity(o);
     }
 
     function parse(callback) {

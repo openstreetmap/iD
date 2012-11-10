@@ -1,5 +1,11 @@
 iD.operations = {};
 
+iD.operations.noop = function() {
+    return function(graph) {
+        return graph;
+    };
+};
+
 iD.operations.addNode = function(node) {
     return function(graph) {
         return graph.replace(node, 'added a place');
@@ -20,16 +26,26 @@ iD.operations.remove = function(node) {
 
 iD.operations.changeWayNodes = function(way, node) {
     return function(graph) {
-        way.nodes = way.nodes.slice();
-        way = pdata.object(way).get();
-        return graph.replace(way).replace(node, 'added to a road');
+        return graph.replace(way.update({
+            nodes: way.nodes.slice()
+        })).replace(node, 'added to a road');
     };
 };
 
 iD.operations.changeTags = function(node, tags) {
     return function(graph) {
-        var node = pdata.object(node).set({ tags: tags }).get();
-        return graph.replace(node, 'changed tags');
+        return graph.replace(node.update({
+            tags: tags
+        }), 'changed tags');
+    };
+};
+
+iD.operations.move = function(entity, to) {
+    return function(graph) {
+        return graph.replace(entity.update({
+            lon: to.lon || to[0],
+            lat: to.lat || to[1]
+        }), 'moved an element');
     };
 };
 
