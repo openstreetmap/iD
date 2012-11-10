@@ -21,6 +21,11 @@ iD.History.prototype = {
         this.index++;
     },
 
+    replace: function(operation) {
+        // assert(this.index == this.stack.length - 1)
+        this.stack[this.index] = operation(this.graph());
+    },
+
     undo: function() {
         while (this.index > 0) {
             this.index--;
