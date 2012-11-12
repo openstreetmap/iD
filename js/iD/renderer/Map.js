@@ -13,7 +13,7 @@ iD.Map = function(elem) {
         dispatch = d3.dispatch('move', 'update'),
         history = iD.History(),
         connection = iD.Connection(),
-        inspector = iD.Inspector(history),
+        inspector = iD.Inspector(),
         parent = d3.select(elem),
         selection = null,
         translateStart,
@@ -381,13 +381,13 @@ iD.Map = function(elem) {
     }
 
     function selectClick() {
-        var d = d3.select(d3.event.target).data();
-        if (d) d = d[0];
-        if (!d || selection === d.id) return;
-        selection = d.id;
+        var entity = d3.select(d3.event.target).data();
+        if (entity) entity = entity[0];
+        if (!entity || selection === entity.id) return;
+        selection = entity.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')
-            .datum(d).call(inspector);
+            .datum(history.graph().fetch(entity.id)).call(inspector);
         redraw();
     }
 

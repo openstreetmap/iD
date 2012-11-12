@@ -38,13 +38,5 @@ iD.History.prototype = {
             this.index++;
             if (this.stack[this.index].annotation) break;
         }
-    },
-
-    entity: function(id) {
-        return this.graph().entity(id);
-    },
-
-    fetch: function(id) {
-        return this.graph().fetch(id);
     }
 };

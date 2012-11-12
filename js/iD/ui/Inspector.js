@@ -1,9 +1,9 @@
-iD.Inspector = function(graph) {
+iD.Inspector = function() {
     var event = d3.dispatch('change', 'update', 'remove', 'close');
 
     function inspector(selection) {
         // http://jsfiddle.net/7WQjr/
-        selection.each(function(d, i) {
+        selection.each(function(entity) {
             // TODO: there must be a better way to do this.
             d3.select(this).node().innerHTML = '';
 
@@ -20,12 +20,12 @@ iD.Inspector = function(graph) {
                 .attr('class', 'head');
 
             head.append('h2')
-                .text(iD.Util.friendlyName(d));
+                .text(iD.Util.friendlyName(entity));
 
             head.append('a')
                 .attr('class', 'permalink')
                 .attr('href', 'http://www.openstreetmap.org/browse/' +
-                      d.type + '/' + d.id.slice(1))
+                      entity.type + '/' + entity.id.slice(1))
                 .text('OSM');
 
             head.append('a')
@@ -34,7 +34,7 @@ iD.Inspector = function(graph) {
                 .text('XML')
                 .on('click', function() {
                     d3.event.stopPropagation();
-                    iD.Util.codeWindow(iD.format.XML.mapping(graph.fetch(d.id)));
+                    iD.Util.codeWindow(iD.format.XML.mapping(entity));
                 });
 
             head.append('a')
@@ -44,7 +44,7 @@ iD.Inspector = function(graph) {
                 .on('click', function() {
                     d3.event.stopPropagation();
                     iD.Util.codeWindow(JSON.stringify(
-                        iD.format.GeoJSON.mapping(graph.fetch(d.id)), null, 2));
+                        iD.format.GeoJSON.mapping(entity), null, 2));
                 });
 
             var table = d3.select(this)
@@ -72,7 +72,7 @@ iD.Inspector = function(graph) {
                     .property('value', function(d) { return d.key; })
                     .on('change', function(row) {
                         row.key = this.value;
-                        event.update(d, newtags(table));
+                        event.update(entity, newtags(table));
                         draw(formtags(table));
                     });
 
@@ -81,7 +81,7 @@ iD.Inspector = function(graph) {
                     .property('value', function(d) { return d.value; })
                     .on('change', function(row) {
                         row.value = this.value;
-                        event.update(d, newtags(table));
+                        event.update(entity, newtags(table));
                         draw(formtags(table));
                     });
 
@@ -93,7 +93,7 @@ iD.Inspector = function(graph) {
                     });
             }
 
-            var data = d3.entries(d.tags).concat([{ key: '', value: ''}]);
+            var data = d3.entries(entity.tags).concat([{ key: '', value: ''}]);
             draw(data);
 
             d3.select(this)
