@@ -80,10 +80,12 @@ circle.teaser-point {
 /* highways */
 .stroke.highway-residential {
     stroke:#E8E8E8;
-    stroke-width:8;
+    stroke-width:4;
 }
 .casing.highway-residential {
+    stroke:#E8E8E8;
     stroke-width:10;
+    opacity:0.4;
 }
 
 .stroke.highway-unclassified,
@@ -123,33 +125,41 @@ circle.teaser-point {
 
 .stroke.highway-motorway, .stroke.highway-motorway_link {
     stroke:#809BC0;
-    stroke-width:7;
+    stroke-width:3;
 }
 .casing.highway-motorway, .casing.highway-motorway_link {
+    stroke:#809BC0;
     stroke-width:9;
+    opacity:0.4;
 }
 
-.casing.highway-trunk, .casing.highway-trunk_link {
-    stroke-width:9;
-}
 .stroke.highway-trunk, .stroke.highway-trunk_link {
     stroke-width:7;
+    opacity:0.4;
+    stroke:#7FC97F;
+}
+.casing.highway-trunk, .casing.highway-trunk_link {
+    stroke-width:4;
     stroke:#7FC97F;
 }
 
 .stroke.highway-primary, .stroke.highway-primary_link {
     stroke:#FD969A;
-    stroke-width:10;
+    stroke-width:5;
 }
 .casing.highway-primary, .casing.highway-primary_link {
+    stroke:#FF6363;
+    opacity:0.4;
     stroke-width:12;
 }
 
 .stroke.highway-secondary, .stroke.highway-secondary_link {
     stroke:#FDBF6F;
-    stroke-width:9;
+    stroke-width:4;
 }
 .casing.highway-secondary, .casing.highway-secondary_link {
+    opacity:0.4;
+    stroke:#FDBF6F;
     stroke-width:11;
 }
 

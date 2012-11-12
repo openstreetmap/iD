@@ -123,6 +123,9 @@ iD.Map = function(elem) {
 
         var ways = all.filter(function(a) {
             return a.type === 'way' && !iD.Way.isClosed(a);
+        }).map(function(x) {
+            x._line = nodeline(x);
+            return x;
         }).sort(iD.Style.waystack),
         areas = all.filter(function(a) {
             return a.type === 'way' && iD.Way.isClosed(a);
@@ -147,7 +150,7 @@ iD.Map = function(elem) {
         casings.exit().remove();
         casings.enter().append('path');
         casings.order()
-            .attr('d', nodeline)
+            .attr('d', function(d) { return d._line; })
             .attr('class', class_casing)
             .classed('active', function(d) {
                 return d.id === selected_id;
@@ -158,7 +161,7 @@ iD.Map = function(elem) {
         strokes.enter().append('path')
             .on('click', selectClick);
         strokes.order()
-            .attr('d', nodeline)
+            .attr('d', function(d) { return d._line; })
             .attr('class', class_stroke)
             .classed('active', function(d) {
                 return d.id === selected_id;
@@ -232,11 +235,37 @@ iD.Map = function(elem) {
         iD.operations.remove(map, d);
     });
 
+    var fastTranslate = [0,0];
+
     function zoomPan() {
+        var translate;
+        var fast = projection.scale() === d3.event.scale;
+        if (fast) {
+            fastTranslate[0] -= projection.translate()[0] - d3.event.translate[0];
+            fastTranslate[1] -= projection.translate()[1] - d3.event.translate[1];
+        }
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
+        if (fast) {
+            fastRedraw();
+        } else {
+            redraw();
+        }
+    }
+
+    // Slow redraw - going out of turbo mode.
+    var slowDraw = _.debounce(function() {
+        fastTranslate = [0,0];
         redraw();
+        r.attr('transform', '');
+    }, 500);
+
+    function fastRedraw(translate) {
+        dispatch.move(map);
+        tileclient.redraw();
+        r.attr('transform', 'translate(' + fastTranslate + ')');
+        slowDraw();
     }
 
     function redraw() {
