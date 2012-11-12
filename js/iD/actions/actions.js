@@ -7,14 +7,14 @@ iD.actions = {};
 // into operations.
 
 iD.actions._node = function(ll) {
-    return {
+    return iD.Entity({
         type: 'node',
         lat: ll[1],
         lon: ll[0],
         id: iD.Util.id('node'),
         tags: {}
-    };
-},
+    });
+};
 
 iD.actions.AddPlace = {
     enter: function() {
@@ -39,7 +39,7 @@ iD.actions.AddPlace = {
         surface.on('click.addplace', function() {
             var ll = this.map.projection.invert(
                 d3.mouse(surface.node()));
-            iD.operations.addNode(this.map, iD.actions._node(ll));
+            this.map.do(iD.operations.addNode(iD.actions._node(ll)));
             this.exit();
         }.bind(this));
 
@@ -58,7 +58,7 @@ iD.actions.AddPlace = {
 
 iD.actions.AddRoad = {
     way: function(ll) {
-        return {
+        return iD.Entity({
             type: 'way',
             nodes: [],
             tags: {
@@ -66,7 +66,7 @@ iD.actions.AddRoad = {
             },
             modified: true,
             id: iD.Util.id('way')
-        };
+        });
     },
     enter: function() {
         d3.selectAll('button').classed('active', false);
@@ -95,7 +95,7 @@ iD.actions.AddRoad = {
             var node = iD.actions._node(ll);
             way.nodes.push(node.id);
 
-            iD.operations.changeWayNodes(this.map, way, node);
+            this.map.do(iD.operations.changeWayNodes(way, node));
             this.controller.go(iD.actions.DrawRoad(way));
         }.bind(this));
 
@@ -119,7 +119,7 @@ iD.actions.DrawRoad = function(way) {
 
             this.falsenode = iD.actions._node([0, 0]);
 
-            iD.operations.addTemporary(this.map, this.falsenode);
+            this.map.do(iD.operations.addTemporary(this.falsenode));
             // way.nodes = way.nodes.slice();
             way.nodes.push(this.falsenode.id);
 
@@ -140,7 +140,7 @@ iD.actions.DrawRoad = function(way) {
 
                 way.nodes.push(node.id);
 
-                iD.operations.changeWayNodes(this.map, way, node);
+                this.map.do(iD.operations.changeWayNodes(way, node));
 
                 way.nodes = way.nodes.slice();
                 way.nodes.push(this.falsenode.id);
@@ -152,7 +152,7 @@ iD.actions.DrawRoad = function(way) {
             }.bind(this));
         },
         exit: function() {
-            iD.operations.addTemporary(this.map, this.falsenode);
+            this.map.do(iD.operations.addTemporary(this.falsenode));
             this.map.surface.on('mousemove.drawroad', null);
             this.map.surface.on('click.drawroad', null);
             d3.select(document).on('.drawroad', null);
@@ -176,24 +176,4 @@ iD.actions.Move = {
         d3.selectAll('button').classed('active', false);
     },
     exit: function() { }
-};
-
-// A controller holds a single action at a time and calls `.enter` and `.exit`
-// to bind and unbind actions.
-iD.controller = function(map) {
-    var controller = { action: null };
-
-    controller.go = function(x) {
-        x.controller = controller;
-        x.map = map;
-        if (controller.action) {
-            controller.action.exit();
-        }
-        x.enter();
-        controller.action = x;
-    };
-
-    controller.go(iD.actions.Move);
-
-    return controller;
 };

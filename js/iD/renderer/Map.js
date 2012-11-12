@@ -22,9 +22,9 @@ iD.Map = function(elem) {
         width, height,
         dispatch = d3.dispatch('move', 'update'),
         // data
-        graph = new iD.Graph(),
-        connection = new iD.Connection(graph),
-        inspector = iD.Inspector(graph),
+        history = iD.History(),
+        connection = iD.Connection(),
+        inspector = iD.Inspector(history),
         parent = d3.select(elem),
         selection = [],
         projection = d3.geo.mercator()
@@ -37,45 +37,31 @@ iD.Map = function(elem) {
             .on('zoom', zoomPan),
         // this is used with handles
         dragbehavior = d3.behavior.drag()
-            .origin(function(d) {
-                var data = (typeof d === 'string') ? graph.head[d] : d;
-                graph.modify(function(o) {
-                    var c = {};
-                    c[data.id] = pdata.object(data).set({ modified: true }).get();
-                    return o.set(c);
-                }, '');
-                p = projection(ll2a(data));
+            .origin(function(entity) {
+                var p = projection(ll2a(entity));
                 return { x: p[0], y: p[1] };
             })
-            .on('drag', function(d) {
-                d3.select(this).attr('transform', function() {
-                    return 'translate(' + d3.event.x + ',' + d3.event.y + ')';
-                });
-                var ll = projection.invert([d3.event.x, d3.event.y]);
-                graph.head[d].lon = ll[0];
-                graph.head[d].lat = ll[1];
+            .on('dragstart', function() {
+                history.do(iD.operations.noop());
+            })
+            .on('drag', function(entity) {
+                var to = projection.invert([d3.event.x, d3.event.y]);
+                history.replace(iD.operations.move(entity, to));
                 drawVector();
             })
-            .on('dragend', function(d) {
-                var data = (typeof d === 'string') ? graph.head[d] : d;
-                graph.modify(function(o) {
-                    var c = {};
-                    c[data.id] = pdata.object(c[data.id]).get();
-                    o.set(c);
-                    return o;
-                }, 'moved an element');
+            .on('dragend', function() {
                 map.update();
             }),
         // geo
         linegen = d3.svg.line()
             .defined(function(d) {
-                return !!graph.head[d];
+                return !!history.entity(d);
             })
             .x(function(d) {
-                return projection(ll2a(graph.head[d]))[0];
+                return projection(ll2a(history.entity(d)))[0];
             })
             .y(function(d) {
-                return projection(ll2a(graph.head[d]))[1];
+                return projection(ll2a(history.entity(d)))[1];
             }),
         // Abstract linegen so that it pulls from `.children`. This
         // makes it possible to call simply `.attr('d', nodeline)`.
@@ -119,7 +105,8 @@ iD.Map = function(elem) {
     var tileclient = iD.Tiles(tilegroup, projection);
 
     function drawVector() {
-        var all = graph.intersects(getExtent());
+        var graph = history.graph(),
+            all = graph.intersects(getExtent());
 
         var ways = all.filter(function(a) {
             return a.type === 'way' && !iD.Way.isClosed(a);
@@ -130,7 +117,7 @@ iD.Map = function(elem) {
         areas = all.filter(function(a) {
             return a.type === 'way' && iD.Way.isClosed(a);
         }),
-        points = graph.pois(graph.head);
+        points = graph.pois();
 
         var fills = fill_g.selectAll('path.area').data(areas, key),
             casings = casing_g.selectAll('path.casing').data(ways, key),
@@ -187,15 +174,15 @@ iD.Map = function(elem) {
         });
 
         var handles = hit_g.selectAll('circle.handle')
-            .data(selection.length ? (active_entity.length ? active_entity[0].nodes : []) : []);
+            .data(active_entity.length ? graph.fetch(active_entity[0].id).nodes : []);
 
         handles.exit().remove();
         handles.enter().append('circle')
             .attr('class', 'handle')
             .attr('r', 5)
             .call(dragbehavior);
-        handles.attr('transform', function(d) {
-            return 'translate(' + projection(ll2a(graph.head[d])) + ')';
+        handles.attr('transform', function(entity) {
+            return 'translate(' + projection(ll2a(entity)) + ')';
         });
     }
 
@@ -208,7 +195,14 @@ iD.Map = function(elem) {
     }
 
     var download = _.debounce(function() {
-        connection.bboxFromAPI(getExtent(), drawVector);
+        connection.bboxFromAPI(getExtent(), function (result) {
+            if (result instanceof Error) {
+                // TODO: handle
+            } else {
+                history.merge(result);
+                drawVector();
+            }
+        });
     }, 1000);
 
     function deselectClick() {
@@ -228,11 +222,11 @@ iD.Map = function(elem) {
     }
 
     inspector.on('change', function(d, tags) {
-        iD.operations.changeTags(map, d, tags);
+        map.do(iD.operations.changeTags(d, tags));
     });
 
     inspector.on('remove', function(d) {
-        iD.operations.remove(map, d);
+        map.do(iD.operations.remove(d));
     });
 
     var fastTranslate = [0,0];
@@ -283,18 +277,23 @@ iD.Map = function(elem) {
     // -----------
     var undolabel = d3.select('button#undo small');
     dispatch.on('update', function() {
-        undolabel.text(graph.annotation);
+        undolabel.text(history.graph().annotation);
         redraw();
     });
 
+    function _do(operation) {
+        history.do(operation);
+        map.update();
+    }
+
     // Undo/redo
     function undo() {
-        graph.undo();
+        history.undo();
         map.update();
     }
 
     function redo() {
-        graph.redo();
+        history.redo();
         map.update();
     }
 
@@ -383,9 +382,10 @@ iD.Map = function(elem) {
     map.projection = projection;
     map.setSize = setSize;
 
-    map.graph = graph;
+    map.history = history;
     map.surface = surface;
 
+    map.do = _do;
     map.undo = undo;
     map.redo = redo;
 

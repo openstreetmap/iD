@@ -1,67 +1,62 @@
 iD.operations = {};
 
-// operations take a map, and arguments that they modify in the map's graph.
-// they use `graph.modify` to do this while keeping a previous version
-// of the graph the same.
-
-iD.operations.addNode = function(map, node) {
-    map.graph.modify(function(graph) {
-        var o = {};
-        o[node.id] = node;
-        return graph.set(o);
-    }, 'added a place');
-    map.update();
+iD.operations.noop = function() {
+    return function(graph) {
+        return graph;
+    };
 };
 
-iD.operations.startWay = function(map, way) {
-    map.graph.modify(function(graph) {
-        var o = {};
-        o[way.id] = way;
-        return graph.set(o);
-    }, 'started a road');
-    map.update();
+iD.operations.addNode = function(node) {
+    return function(graph) {
+        return graph.replace(node, 'added a place');
+    }
 };
 
-iD.operations.remove = function(map, node) {
-    map.graph.modify(function(graph) {
-        return graph.remove(node.id);
-    }, 'removed a feature');
-    map.update();
+iD.operations.startWay = function(way) {
+    return function(graph) {
+        return graph.replace(way, 'started a road');
+    };
 };
 
-iD.operations.changeWayNodes = function(map, way, node) {
-    map.graph.modify(function(graph) {
-        var o = {};
-        way.nodes = way.nodes.slice();
-        o[way.id] = pdata.object(way).get();
-        o[node.id] = node;
-        return graph.set(o);
-    }, 'added to a road');
-    map.update();
+iD.operations.remove = function(node) {
+    return function(graph) {
+        return graph.remove(node, 'removed a feature');
+    };
 };
 
-iD.operations.addTemporary = function(map, node) {
-    map.graph.modify(function(graph) {
-        var o = {};
-        o[node.id] = node;
-        return graph.set(o);
-    }, '');
-    map.update();
+iD.operations.changeWayNodes = function(way, node) {
+    return function(graph) {
+        return graph.replace(way.update({
+            nodes: way.nodes.slice()
+        })).replace(node, 'added to a road');
+    };
 };
 
-iD.operations.changeTags = function(map, node, tags) {
-    map.graph.modify(function(graph) {
-        var o = {};
-        var copy = pdata.object(node).set({ tags: tags }).get();
-        o[copy.id] = copy;
-        return graph.set(o);
-    }, 'changed tags');
-    map.update();
+iD.operations.changeTags = function(node, tags) {
+    return function(graph) {
+        return graph.replace(node.update({
+            tags: tags
+        }), 'changed tags');
+    };
 };
 
-iD.operations.removeTemporary = function(map, node) {
-    map.graph.modify(function(graph) {
-        return graph.remove(node.id);
-    }, '');
-    map.update();
+iD.operations.move = function(entity, to) {
+    return function(graph) {
+        return graph.replace(entity.update({
+            lon: to.lon || to[0],
+            lat: to.lat || to[1]
+        }), 'moved an element');
+    };
+};
+
+iD.operations.addTemporary = function(node) {
+    return function(graph) {
+        return graph.replace(node);
+    };
+};
+
+iD.operations.removeTemporary = function(node) {
+    return function(graph) {
+        return graph.remove(node);
+    };
 };
