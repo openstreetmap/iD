@@ -33,6 +33,10 @@ circle.teaser-point {
     stroke-width:8;
 }
 
+image.marker {
+    background:#fff;
+}
+
 .stroke {
     stroke: #555;
     stroke-linecap:round;

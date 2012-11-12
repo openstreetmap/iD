@@ -345,6 +345,8 @@ iD.Map = function(elem) {
     map.download = download;
     map.getExtent = getExtent;
 
+    map.selectClick = selectClick;
+
     map.setCenter = setCenter;
     map.setCentre = setCenter;
     map.getCentre = getCenter;

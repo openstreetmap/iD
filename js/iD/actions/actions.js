@@ -39,7 +39,10 @@ iD.actions.AddPlace = {
         surface.on('click.addplace', function() {
             var ll = this.map.projection.invert(
                 d3.mouse(surface.node()));
-            this.map.operate(iD.operations.addNode(iD.actions._node(ll)));
+            var n = iD.actions._node(ll);
+            n._poi = true;
+            this.map.operate(iD.operations.addNode(n));
+            this.map.selectClick(n);
             this.exit();
         }.bind(this));
 
