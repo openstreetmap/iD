@@ -96,7 +96,7 @@ iD.Inspector = function(graph) {
             var data = d3.entries(d.tags).concat([{ key: '', value: ''}]);
             draw(data);
 
-            save = d3.select(this)
+            d3.select(this)
                 .append('button')
                 .text('Save')
                 .on('click', function(d, i) {
