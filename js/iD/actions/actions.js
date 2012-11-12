@@ -119,32 +119,22 @@ iD.actions.DrawRoad = function(way) {
     return {
         enter: function() {
             var surface = this.map.surface;
-
-            this.falsenode = iD.actions._node([0, 0]);
-
-            this.map.operate(iD.operations.addTemporary(this.falsenode));
-            // way.nodes = way.nodes.slice();
-            way.nodes.push(this.falsenode.id);
-
+            this.nextnode = iD.actions._node([0, 0]);
+            way.nodes = [way.nodes[0], this.nextnode.id];
+            this.map.operate(iD.operations.changeWayNodes(way, this.nextnode));
             surface.on('mousemove.drawroad', function() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
-                this.falsenode.lon = ll[0];
-                this.falsenode.lat = ll[1];
+                this.map.history.replace(iD.operations.move(this.nextnode, ll));
                 this.map.update();
             }.bind(this));
 
             surface.on('click.drawroad', function() {
                 d3.event.stopPropagation();
-
                 way.nodes.pop();
-
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
                 var node = iD.actions._node(ll);
-
                 way.nodes.push(node.id);
-
                 this.map.operate(iD.operations.changeWayNodes(way, node));
-
                 way.nodes = way.nodes.slice();
                 way.nodes.push(this.falsenode.id);
             }.bind(this));
