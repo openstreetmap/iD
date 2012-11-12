@@ -1,7 +1,7 @@
 iD.Connection = function() {
     var apiURL = 'http://www.openstreetmap.org/api/0.6/';
 
-    var connection = {};
+    var connection = {}, refNodes = {};
 
     // Request data within the bbox from an external OSM server.
     function bboxFromAPI(box, callback) {
@@ -22,6 +22,7 @@ iD.Connection = function() {
         var nodes = [], nelems = obj.getElementsByTagName('nd');
         for (var i = 0, l = nelems.length; i < l; i++) {
             nodes[i] = 'n' + nelems[i].attributes.ref.nodeValue;
+            refNodes['n' + nelems[i].attributes.ref.nodeValue] = true;
         }
         return nodes;
     }
@@ -86,8 +87,10 @@ iD.Connection = function() {
             if (!dom.childNodes) return callback(new Error('Bad request'));
             var root = dom.childNodes[0];
             var entities = {};
+            refNodes = {};
             var addEntity = function (obj) {
                 var o = objectData(obj);
+                if (o.type === 'node') o._poi = !refNodes[o.id];
                 entities[o.id] = o;
             };
 

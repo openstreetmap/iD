@@ -108,16 +108,18 @@ iD.Map = function(elem) {
         var graph = history.graph(),
             all = graph.intersects(getExtent());
 
-        var ways = all.filter(function(a) {
-            return a.type === 'way' && !iD.Way.isClosed(a);
-        }).map(function(x) {
-            x._line = nodeline(x);
-            return x;
-        }).sort(iD.Style.waystack),
-        areas = all.filter(function(a) {
-            return a.type === 'way' && iD.Way.isClosed(a);
-        }),
-        points = graph.pois();
+        var ways = [], areas = [], points = [];
+
+        for (var i = 0; i < all.length; i++) {
+            var a = all[i];
+            if (a.type === 'way') {
+                a._line = nodeline(a);
+                if (!iD.Way.isClosed(a)) ways.push(a);
+                else areas.push(a);
+            } else if (a._poi) {
+                points.push(a);
+            }
+        }
 
         var fills = fill_g.selectAll('path.area').data(areas, key),
             casings = casing_g.selectAll('path.casing').data(ways, key),
@@ -229,44 +231,18 @@ iD.Map = function(elem) {
         map.operate(iD.operations.remove(d));
     });
 
-    var fastTranslate = [0,0];
-
     function zoomPan() {
-        var translate;
-        var fast = projection.scale() === d3.event.scale;
-        if (fast) {
-            fastTranslate[0] -= projection.translate()[0] - d3.event.translate[0];
-            fastTranslate[1] -= projection.translate()[1] - d3.event.translate[1];
-        }
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-        if (fast) {
-            fastRedraw();
-        } else {
-            redraw();
-        }
-    }
-
-    // Slow redraw - going out of turbo mode.
-    var slowDraw = _.debounce(function() {
-        fastTranslate = [0,0];
         redraw();
-        r.attr('transform', '');
-    }, 500);
-
-    function fastRedraw(translate) {
-        dispatch.move(map);
-        tileclient.redraw();
-        r.attr('transform', 'translate(' + fastTranslate + ')');
-        slowDraw();
+        download();
     }
 
     function redraw() {
         dispatch.move(map);
         tileclient.redraw();
         if (getZoom() > 13) {
-            download();
             drawVector();
         } else {
             // TODO: hide vector features

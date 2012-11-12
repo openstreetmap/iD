@@ -10,9 +10,9 @@ path, image.marker {
 /* interactive elements */
 circle.handle {
     cursor: move;
-    stroke-width: 2;
-    stroke:#1DCAFF;
-    fill:#D3F5FF;
+    stroke-width: 3;
+    fill:#000;
+    stroke:#FFF694;
 }
 
 circle.teaser-point {

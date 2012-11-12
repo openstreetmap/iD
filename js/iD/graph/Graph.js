@@ -9,24 +9,6 @@ iD.Graph.prototype = {
         return this.entities[id];
     },
 
-    // get all points that are not part of a way. this is an expensive
-    // call that needs to be optimized.
-    pois: function() {
-        var included = [], pois = [], idx = {};
-        for (var i in this.entities) {
-            if (this.entities[i].nodes) {
-                included = included.concat(this.entities[i].nodes);
-            }
-        }
-        for (var j = 0; j < included.length; j++) { idx[included[j]] = true; }
-        for (var k in this.entities) {
-            if (this.entities[k].type === 'node' && !idx[this.entities[k].id]) {
-                pois.push(this.entities[k]);
-            }
-        }
-        return pois;
-    },
-
     merge: function(graph) {
         var entities = _.clone(this.entities);
         _.defaults(entities, graph.entities);
