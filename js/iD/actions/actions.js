@@ -99,6 +99,7 @@ iD.actions.AddRoad = {
             way.nodes.push(node.id);
 
             this.map.operate(iD.operations.changeWayNodes(way, node));
+            this.map.selectClick(way);
             this.controller.go(iD.actions.DrawRoad(way));
         }.bind(this));
 
@@ -119,8 +120,9 @@ iD.actions.DrawRoad = function(way) {
     return {
         enter: function() {
             var surface = this.map.surface;
-            this.nextnode = iD.actions._node([0, 0]);
-            way.nodes = [way.nodes[0], this.nextnode.id];
+            var lastNode = this.map.history.graph().entity(way.nodes[way.nodes.length - 1]);
+            this.nextnode = iD.actions._node([lastNode.lon, lastNode.lat]);
+            way.nodes.push(this.nextnode.id);
             this.map.operate(iD.operations.changeWayNodes(way, this.nextnode));
             surface.on('mousemove.drawroad', function() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
@@ -136,16 +138,21 @@ iD.actions.DrawRoad = function(way) {
                 way.nodes.push(node.id);
                 this.map.operate(iD.operations.changeWayNodes(way, node));
                 way.nodes = way.nodes.slice();
-                way.nodes.push(this.falsenode.id);
+                way.nodes.push(this.nextnode.id);
+                this.controller.go(iD.actions.DrawRoad(way));
             }.bind(this));
 
             surface.on('dblclick.drawroad', function() {
                 d3.event.stopPropagation();
+                var a = this.map.history.graph().entity(way.nodes.pop());
+                var b = this.map.history.graph().entity(way.nodes.pop());
+                this.map.operate(iD.operations.changeWayNodes(way, a));
+                this.map.operate(iD.operations.remove(a));
+                this.map.operate(iD.operations.remove(b));
                 this.exit();
             }.bind(this));
         },
         exit: function() {
-            this.map.operate(iD.operations.addTemporary(this.falsenode));
             this.map.surface.on('mousemove.drawroad', null);
             this.map.surface.on('click.drawroad', null);
             d3.select(document).on('.drawroad', null);

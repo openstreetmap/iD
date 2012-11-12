@@ -215,6 +215,7 @@ iD.Map = function(elem) {
     }
 
     function selectClick(d) {
+        if (selection[0] === d.id) return;
         selection = [d.id];
         drawVector();
         d3.select('.inspector-wrap')
