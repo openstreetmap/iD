@@ -42,7 +42,7 @@ iD.Map = function(elem) {
                 return { x: p[0], y: p[1] };
             })
             .on('dragstart', function() {
-                history.do(iD.operations.noop());
+                history.operate(iD.operations.noop());
             })
             .on('drag', function(entity) {
                 var to = projection.invert([d3.event.x, d3.event.y]);
@@ -222,11 +222,11 @@ iD.Map = function(elem) {
     }
 
     inspector.on('change', function(d, tags) {
-        map.do(iD.operations.changeTags(d, tags));
+        map.operate(iD.operations.changeTags(d, tags));
     });
 
     inspector.on('remove', function(d) {
-        map.do(iD.operations.remove(d));
+        map.operate(iD.operations.remove(d));
     });
 
     var fastTranslate = [0,0];
@@ -282,7 +282,7 @@ iD.Map = function(elem) {
     });
 
     function _do(operation) {
-        history.do(operation);
+        history.operate(operation);
         map.update();
     }
 
@@ -385,7 +385,7 @@ iD.Map = function(elem) {
     map.history = history;
     map.surface = surface;
 
-    map.do = _do;
+    map.operate = _do;
     map.undo = undo;
     map.redo = redo;
 

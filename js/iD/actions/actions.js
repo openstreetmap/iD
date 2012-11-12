@@ -39,7 +39,7 @@ iD.actions.AddPlace = {
         surface.on('click.addplace', function() {
             var ll = this.map.projection.invert(
                 d3.mouse(surface.node()));
-            this.map.do(iD.operations.addNode(iD.actions._node(ll)));
+            this.map.operate(iD.operations.addNode(iD.actions._node(ll)));
             this.exit();
         }.bind(this));
 
@@ -95,7 +95,7 @@ iD.actions.AddRoad = {
             var node = iD.actions._node(ll);
             way.nodes.push(node.id);
 
-            this.map.do(iD.operations.changeWayNodes(way, node));
+            this.map.operate(iD.operations.changeWayNodes(way, node));
             this.controller.go(iD.actions.DrawRoad(way));
         }.bind(this));
 
@@ -119,7 +119,7 @@ iD.actions.DrawRoad = function(way) {
 
             this.falsenode = iD.actions._node([0, 0]);
 
-            this.map.do(iD.operations.addTemporary(this.falsenode));
+            this.map.operate(iD.operations.addTemporary(this.falsenode));
             // way.nodes = way.nodes.slice();
             way.nodes.push(this.falsenode.id);
 
@@ -140,7 +140,7 @@ iD.actions.DrawRoad = function(way) {
 
                 way.nodes.push(node.id);
 
-                this.map.do(iD.operations.changeWayNodes(way, node));
+                this.map.operate(iD.operations.changeWayNodes(way, node));
 
                 way.nodes = way.nodes.slice();
                 way.nodes.push(this.falsenode.id);
@@ -152,7 +152,7 @@ iD.actions.DrawRoad = function(way) {
             }.bind(this));
         },
         exit: function() {
-            this.map.do(iD.operations.addTemporary(this.falsenode));
+            this.map.operate(iD.operations.addTemporary(this.falsenode));
             this.map.surface.on('mousemove.drawroad', null);
             this.map.surface.on('click.drawroad', null);
             d3.select(document).on('.drawroad', null);

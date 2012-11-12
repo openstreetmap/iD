@@ -15,7 +15,7 @@ iD.History.prototype = {
         }
     },
 
-    do: function(operation) {
+    operate: function(operation) {
         this.stack = this.stack.slice(0, this.index + 1);
         this.stack.push(operation(this.graph()));
         this.index++;

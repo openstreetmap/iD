@@ -1,5 +1,5 @@
 iD.Graph = function(entities, annotation) {
-    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation)
+    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation);
     this.entities = entities || {};
     this.annotation = annotation;
 };

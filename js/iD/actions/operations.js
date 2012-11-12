@@ -9,7 +9,7 @@ iD.operations.noop = function() {
 iD.operations.addNode = function(node) {
     return function(graph) {
         return graph.replace(node, 'added a place');
-    }
+    };
 };
 
 iD.operations.startWay = function(way) {
