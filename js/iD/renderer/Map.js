@@ -243,6 +243,7 @@ iD.Map = function(elem) {
         dispatch.move(map);
         tileclient.redraw();
         if (getZoom() > 13) {
+            download();
             drawVector();
         } else {
             // TODO: hide vector features
