@@ -26,7 +26,7 @@ iD.Map = function(elem) {
         connection = iD.Connection(),
         inspector = iD.Inspector(history),
         parent = d3.select(elem),
-        selection = [],
+        selection = null,
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
         // behaviors
@@ -35,6 +35,7 @@ iD.Map = function(elem) {
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
             .on('zoom', zoomPan),
+
         // this is used with handles
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
@@ -111,10 +112,11 @@ iD.Map = function(elem) {
         var ways = [], areas = [], points = [];
 
         var active_entity = null;
-        var selected_id = selection && selection[0];
+        var selected_id = selection;
 
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
+            if (a.id === selected_id) active_entity = a;
             if (a.type === 'way') {
                 a._line = nodeline(a);
                 if (!iD.Way.isClosed(a)) {
@@ -122,16 +124,19 @@ iD.Map = function(elem) {
                 } else {
                     areas.push(a);
                 }
-                if (a.id === selected_id) active_entity = a;
             } else if (a._poi) {
                 points.push(a);
             }
         }
 
+        function classActive(d) {
+            return d.id === selected_id;
+        }
+
         var fills = fill_g.selectAll('path.area').data(areas, key),
             casings = casing_g.selectAll('path.casing').data(ways, key),
             strokes = stroke_g.selectAll('path.stroke').data(ways, key),
-            markers = hit_g.selectAll('image.marker').data(points, key);
+            markers = hit_g.selectAll('g.marker').data(points, key);
 
         // Fills
         fills.exit().remove();
@@ -146,9 +151,7 @@ iD.Map = function(elem) {
         casings.order()
             .attr('d', function(d) { return d._line; })
             .attr('class', class_casing)
-            .classed('active', function(d) {
-                return d.id === selected_id;
-            });
+            .classed('active', classActive);
 
         // Strokes
         strokes.exit().remove();
@@ -157,19 +160,23 @@ iD.Map = function(elem) {
         strokes.order()
             .attr('d', function(d) { return d._line; })
             .attr('class', class_stroke)
-            .classed('active', function(d) {
-                return d.id === selected_id;
-            });
+            .classed('active', classActive);
 
         // Markers
         markers.exit().remove();
-        markers.enter().append('image')
-            .attr('class', class_marker)
+        var marker = markers.enter().append('g')
+            .attr('class', 'marker')
             .on('click', selectClick)
-            .attr({ width: 16, height: 16 })
-            .attr('xlink:href', iD.Style.markerimage)
             .call(dragbehavior);
-        markers.attr('transform', function(d) {
+        marker.append('circle')
+            .attr('r', 10)
+            .attr('cx', 8)
+            .attr('cy', 8);
+        marker.append('image')
+            .attr({ width: 16, height: 16 })
+            .attr('xlink:href', iD.Style.markerimage);
+        markers.classed('active', classActive)
+            .attr('transform', function(d) {
             var pt = projection([d.lon, d.lat]);
             pt[0] -= 8;
             pt[1] -= 8;
@@ -209,15 +216,15 @@ iD.Map = function(elem) {
     }, 1000);
 
     function deselectClick() {
-        selection = [];
+        selection = null;
         drawVector();
         d3.select('.inspector-wrap').style('display', 'none');
         d3.event.stopPropagation();
     }
 
     function selectClick(d) {
-        if (selection[0] === d.id) return;
-        selection = [d.id];
+        if (selection === d.id) return;
+        selection = d.id;
         drawVector();
         d3.select('.inspector-wrap')
             .style('display', 'block')

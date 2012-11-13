@@ -7,6 +7,18 @@ path, image.marker {
     cursor: pointer;
 }
 
+g.marker circle {
+    fill:#fff;
+    stroke:#888;
+    stroke-width:1;
+}
+
+g.marker.active circle {
+    stroke-width:2;
+    stroke:#000;
+    fill:#FCFFAF;
+}
+
 /* interactive elements */
 circle.handle {
     cursor: move;
@@ -29,12 +41,8 @@ circle.teaser-point {
 
 .casing.active {
     stroke:#FFF9C9;
-    stroke-opacity:0.5;
+    stroke-opacity:1;
     stroke-width:8;
-}
-
-image.marker {
-    background:#fff;
 }
 
 .stroke {
