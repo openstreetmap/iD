@@ -257,3 +257,13 @@ button small {
   -moz-animation: spinnerAnim 1.5s infinite linear;
   -moz-transform-origin: 50% 50%;
 }
+
+.tag-help,
+.tag-help a {
+    text-align:center;
+    background:#CED4F0;
+    color:#fff;
+    text-decoration:none;
+    padding:0 5px;
+    display:block;
+}

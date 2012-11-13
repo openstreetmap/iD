@@ -110,12 +110,19 @@ iD.Map = function(elem) {
 
         var ways = [], areas = [], points = [];
 
+        var active_entity = null;
+        var selected_id = selection && selection[0];
+
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
             if (a.type === 'way') {
                 a._line = nodeline(a);
-                if (!iD.Way.isClosed(a)) ways.push(a);
-                else areas.push(a);
+                if (!iD.Way.isClosed(a)) {
+                    ways.push(a);
+                } else {
+                    areas.push(a);
+                }
+                if (a.id === selected_id) active_entity = a;
             } else if (a._poi) {
                 points.push(a);
             }
@@ -125,8 +132,6 @@ iD.Map = function(elem) {
             casings = casing_g.selectAll('path.casing').data(ways, key),
             strokes = stroke_g.selectAll('path.stroke').data(ways, key),
             markers = hit_g.selectAll('image.marker').data(points, key);
-
-        var selected_id = selection && selection[0];
 
         // Fills
         fills.exit().remove();
@@ -171,12 +176,8 @@ iD.Map = function(elem) {
             return 'translate(' + pt + ')';
         });
 
-        var active_entity = all.filter(function(a) {
-            return a.id === selected_id && a.type === 'way';
-        });
-
         var handles = hit_g.selectAll('circle.handle')
-            .data(active_entity.length ? graph.fetch(active_entity[0].id).nodes : []);
+            .data(active_entity ? graph.fetch(active_entity.id).nodes : []);
 
         handles.exit().remove();
         handles.enter().append('circle')

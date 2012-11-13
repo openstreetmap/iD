@@ -44,7 +44,7 @@ iD.Inspector = function(graph) {
                 .attr('class', 'inspector');
 
             table.append('thead').append('tr').selectAll('th')
-                .data(['tag', 'value'])
+                .data(['tag', 'value', ''])
                 .enter()
                 .append('th')
                     .text(String);
@@ -76,11 +76,17 @@ iD.Inspector = function(graph) {
                         event.update(d, newtags(table));
                         draw(formtags(table));
                     });
+
+                row.append('td').attr('class', 'tag-help').append('a')
+                    .text('?')
+                    .attr('target', '_blank')
+                    .attr('href', function(d) {
+                        return 'http://taginfo.openstreetmap.org/keys/' + d.key;
+                    });
             }
 
             var data = d3.entries(d.tags).concat([{ key: '', value: ''}]);
             draw(data);
-
 
             save = d3.select(this)
                 .append('button')
