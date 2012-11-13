@@ -26,8 +26,8 @@ iD.actions.AddPlace = {
             .append('g').attr('id', 'addplace');
 
         teaser.append('circle')
-            .attr('class', 'teaser-point')
-            .attr('r', 10);
+            .attr('class', 'handle')
+            .attr('r', 3);
 
         surface.on('mousemove.addplace', function() {
             teaser.attr('transform', function() {
@@ -80,8 +80,8 @@ iD.actions.AddRoad = {
             .append('g').attr('id', 'addroad');
 
         teaser.append('circle')
-            .attr('class', 'teaser-point')
-            .attr('r', 10);
+            .attr('class', 'handle')
+            .attr('r', 3);
 
         surface.on('mousemove.addroad', function() {
             teaser.attr('transform', function() {
@@ -155,6 +155,7 @@ iD.actions.DrawRoad = function(way) {
         exit: function() {
             this.map.surface.on('mousemove.drawroad', null);
             this.map.surface.on('click.drawroad', null);
+            this.map.surface.on('dblclick.drawroad', null);
             d3.select(document).on('.drawroad', null);
             d3.selectAll('#drawroad').remove();
         }
@@ -162,13 +163,115 @@ iD.actions.DrawRoad = function(way) {
 };
 
 iD.actions.AddArea = {
+    way: function(ll) {
+        return iD.Entity({
+            type: 'way',
+            nodes: [],
+            tags: {
+                building: 'yes'
+            },
+            modified: true,
+            id: iD.Util.id('way')
+        });
+    },
     enter: function() {
         d3.selectAll('button').classed('active', false);
         d3.selectAll('button#area').classed('active', true);
+
+        var surface = this.map.surface;
+        var teaser = surface.selectAll('g#temp-g')
+            .append('g').attr('id', 'addroad');
+
+        teaser.append('circle')
+            .attr('class', 'handle')
+            .attr('r', 3);
+
+        surface.on('mousemove.addroad', function() {
+            teaser.attr('transform', function() {
+                var off = d3.mouse(surface.node());
+                return 'translate(' + off + ')';
+            });
+        });
+
+        surface.on('click.addroad', function() {
+            var ll = this.map.projection.invert(
+                d3.mouse(surface.node()));
+
+            var way = this.way();
+            var node = iD.actions._node(ll);
+            way.nodes.push(node.id);
+
+            this.map.operate(iD.operations.changeWayNodes(way, node));
+            this.map.selectClick(way);
+            this.controller.go(iD.actions.DrawArea(way));
+        }.bind(this));
+
+        d3.select(document).on('keydown.addroad', function() {
+            if (d3.event.keyCode === 27) this.exit();
+        }.bind(this));
     },
     exit: function() {
+        this.map.surface.on('click.addarea', null);
+        this.map.surface.on('mousemove.addarea', null);
+        d3.select(document).on('keydown.addarea', null);
+        d3.selectAll('#addroad').remove();
         d3.selectAll('button#area').classed('active', false);
     }
+};
+
+iD.actions.DrawArea = function(way) {
+    return {
+        enter: function() {
+            var surface = this.map.surface;
+
+            var lastNode = this.map.history.graph().entity(way.nodes[way.nodes.length - 1]);
+            var firstNode = this.map.history.graph().entity(way.nodes[0]);
+
+            this.nextnode = iD.actions._node([lastNode.lon, lastNode.lat]);
+
+            way.nodes.push(this.nextnode.id);
+            way.nodes.push(firstNode.id);
+            this.map.operate(iD.operations.changeWayNodes(way, this.nextnode));
+            this.map.operate(iD.operations.changeWayNodes(way, firstNode));
+
+            surface.on('mousemove.drawarea', function() {
+                var ll = this.map.projection.invert(d3.mouse(surface.node()));
+                this.map.history.replace(iD.operations.move(this.nextnode, ll));
+                this.map.update();
+            }.bind(this));
+
+            surface.on('click.drawarea', function() {
+                d3.event.stopPropagation();
+                way.nodes.pop();
+                way.nodes.pop();
+                var ll = this.map.projection.invert(d3.mouse(surface.node()));
+                var node = iD.actions._node(ll);
+                way.nodes.push(node.id);
+                this.map.operate(iD.operations.changeWayNodes(way, node));
+                this.controller.go(iD.actions.DrawRoad(way));
+            }.bind(this));
+
+            surface.on('dblclick.drawarea', function() {
+                d3.event.stopPropagation();
+                var a = this.map.history.graph().entity(way.nodes.pop());
+                var b = this.map.history.graph().entity(way.nodes.pop());
+                this.map.operate(iD.operations.changeWayNodes(way, a));
+                this.map.operate(iD.operations.remove(a));
+                this.map.operate(iD.operations.remove(b));
+                way.nodes.push(way.nodes[0]);
+                var closeNode = this.map.history.graph().entity(way.nodes[0]);
+                this.map.operate(iD.operations.changeWayNodes(way, closeNode));
+                this.exit();
+            }.bind(this));
+        },
+        exit: function() {
+            this.map.surface.on('mousemove.drawarea', null);
+            this.map.surface.on('click.drawarea', null);
+            this.map.surface.on('dblclick.drawarea', null);
+            d3.select(document).on('.drawarea', null);
+            d3.selectAll('#drawarea').remove();
+        }
+    };
 };
 
 iD.actions.Move = {

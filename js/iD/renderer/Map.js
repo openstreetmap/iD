@@ -27,6 +27,7 @@ iD.Map = function(elem) {
         inspector = iD.Inspector(history),
         parent = d3.select(elem),
         selection = null,
+        // clickCancel = clickCancelProvider(),
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
         // behaviors
@@ -76,7 +77,12 @@ iD.Map = function(elem) {
     // The map uses SVG groups in order to restrict
     // visual and event ordering - fills below casings, casings below
     // strokes, and so on.
-    var surface = parent.append('svg').call(zoombehavior);
+    var surface = parent.append('svg')
+        .call(zoombehavior);
+        // .call(clickCancel);
+
+    // Don't use the default double click handler.
+    // surface.on('dblclick.zoom', null);
 
     surface.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -148,7 +154,8 @@ iD.Map = function(elem) {
 
         // Casings
         casings.exit().remove();
-        casings.enter().append('path');
+        casings.enter().append('path')
+            .on('click', selectClick);
         casings.order()
             .attr('d', function(d) { return d._line; })
             .attr('class', class_casing)
@@ -170,9 +177,7 @@ iD.Map = function(elem) {
             .on('click', selectClick)
             .call(dragbehavior);
         marker.append('circle')
-            .attr('r', 10)
-            .attr('cx', 8)
-            .attr('cy', 8);
+            .attr({ r: 10, cx: 8, cy: 8 });
         marker.append('image')
             .attr({ width: 16, height: 16 })
             .attr('xlink:href', iD.Style.markerimage);
@@ -190,7 +195,7 @@ iD.Map = function(elem) {
         handles.exit().remove();
         handles.enter().append('circle')
             .attr('class', 'handle')
-            .attr('r', 5)
+            .attr('r', 3)
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
             return 'translate(' + projection(ll2a(entity)) + ')';
@@ -220,7 +225,6 @@ iD.Map = function(elem) {
         selection = null;
         drawVector();
         d3.select('.inspector-wrap').style('display', 'none');
-        d3.event.stopPropagation();
     }
 
     function selectClick(d) {
@@ -230,7 +234,6 @@ iD.Map = function(elem) {
         d3.select('.inspector-wrap')
             .style('display', 'block')
             .datum(d).call(inspector);
-        d3.event.stopPropagation();
     }
 
     inspector.on('change', function(d, tags) {

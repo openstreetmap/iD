@@ -22,7 +22,7 @@ g.marker.active circle {
 /* interactive elements */
 circle.handle {
     cursor: move;
-    stroke-width: 3;
+    stroke-width: 2;
     fill:#000;
     stroke:#FFF694;
 }
