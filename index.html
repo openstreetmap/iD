@@ -69,9 +69,7 @@
             });
 
             var m = d3.select('#map');
-
             iD.Hash().map(map);
-
             var controller = iD.Controller(map);
 
             d3.selectAll('button#place').on('click', function() {

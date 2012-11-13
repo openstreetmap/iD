@@ -30,8 +30,25 @@ iD.Graph.prototype = {
     // get all objects that intersect an extent.
     intersects: function(extent) {
         var items = [];
+        function nodeIntersect(entity) {
+            return entity.lon > extent[0][0] &&
+                entity.lon < extent[1][0] &&
+                entity.lat < extent[0][1] &&
+                entity.lat > extent[1][1];
+        }
         for (var i in this.entities) {
-            if (this.entities[i]) items.push(this.entities[i]);
+            var entity = this.entities[i];
+            if (entity.type === 'node' && nodeIntersect(entity)) {
+                items.push(entity);
+            } else if (entity.type === 'way') {
+                var w = this.fetch(entity.id);
+                for (var j = 0; j < w.nodes.length; j++) {
+                    if (nodeIntersect(w.nodes[j])) {
+                        items.push(w);
+                        break;
+                    }
+                }
+            }
         }
         return items;
     },

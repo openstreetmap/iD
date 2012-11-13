@@ -56,14 +56,11 @@ iD.Map = function(elem) {
             }),
         // geo
         linegen = d3.svg.line()
-            .defined(function(d) {
-                return !!history.entity(d);
-            })
             .x(function(d) {
-                return projection(ll2a(history.entity(d)))[0];
+                return projection(ll2a(d))[0];
             })
             .y(function(d) {
-                return projection(ll2a(history.entity(d)))[1];
+                return projection(ll2a(d))[1];
             }),
         // Abstract linegen so that it pulls from `.children`. This
         // makes it possible to call simply `.attr('d', nodeline)`.
@@ -189,16 +186,23 @@ iD.Map = function(elem) {
             return 'translate(' + pt + ')';
         });
 
-        var handles = hit_g.selectAll('circle.handle')
-            .data(active_entity ? graph.fetch(active_entity.id).nodes : []);
+        var handles = hit_g.selectAll('rect.handle')
+            // TODO: this could be faster
+            .data(areas.reduce(function(memo, w) {
+                return memo.concat(w.nodes);
+            }, ways.reduce(function(memo, w) {
+                return memo.concat(w.nodes);
+            }, [])), key);
 
         handles.exit().remove();
-        handles.enter().append('circle')
-            .attr('class', 'handle')
-            .attr('r', 3)
+        handles.enter().append('rect')
+            .attr({width: 4, height: 4, 'class': 'handle'})
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
-            return 'translate(' + projection(ll2a(entity)) + ')';
+            var p = projection(ll2a(entity));
+            p[0] -= 2;
+            p[1] -= 2;
+            return 'translate(' + p + ') rotate(45, 2, 2)';
         });
     }
 
