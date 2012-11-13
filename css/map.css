@@ -36,6 +36,7 @@ circle.teaser-point {
 .casing {
     stroke: #111;
     stroke-linecap:round;
+    stroke-linejoin:bevel;
     stroke-width: 3;
 }
 
@@ -48,6 +49,7 @@ circle.teaser-point {
 .stroke {
     stroke: #555;
     stroke-linecap:round;
+    stroke-linejoin:bevel;
     stroke-width: 2;
 }
 
