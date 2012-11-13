@@ -76,11 +76,13 @@ iD.actions.AddRoad = {
         d3.selectAll('button#road').classed('active', true);
 
         var surface = this.map.surface;
+        this.map.handleDrag(false);
         var teaser = surface.selectAll('g#temp-g')
             .append('g').attr('id', 'addroad');
 
         teaser.append('circle')
             .attr('class', 'handle')
+            .style('pointer-events', 'none')
             .attr('r', 3);
 
         surface.on('mousemove.addroad', function() {
@@ -91,13 +93,19 @@ iD.actions.AddRoad = {
         });
 
         surface.on('click.addroad', function() {
-            var ll = this.map.projection.invert(
-                d3.mouse(surface.node()));
-
+            var t = d3.select(d3.event.target);
+            var node;
             var way = this.way();
-            var node = iD.actions._node(ll);
-            way.nodes.push(node.id);
 
+            // connect a way to an existing way
+            if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
+                node = t.data()[0];
+            } else {
+                node = iD.actions._node(this.map.projection.invert(
+                    d3.mouse(surface.node())));
+            }
+
+            way.nodes.push(node.id);
             this.map.operate(iD.operations.changeWayNodes(way, node));
             this.map.selectClick(way);
             this.controller.go(iD.actions.DrawRoad(way));
@@ -110,6 +118,7 @@ iD.actions.AddRoad = {
     exit: function() {
         this.map.surface.on('click.addroad', null);
         this.map.surface.on('mousemove.addroad', null);
+        this.map.handleDrag(true);
         d3.select(document).on('keydown.addroad', null);
         d3.selectAll('#addroad').remove();
         d3.selectAll('button#road').classed('active', false);
@@ -124,6 +133,7 @@ iD.actions.DrawRoad = function(way) {
             this.nextnode = iD.actions._node([lastNode.lon, lastNode.lat]);
             way.nodes.push(this.nextnode.id);
             this.map.operate(iD.operations.changeWayNodes(way, this.nextnode));
+
             surface.on('mousemove.drawroad', function() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
                 this.map.history.replace(iD.operations.move(this.nextnode, ll));
@@ -131,24 +141,30 @@ iD.actions.DrawRoad = function(way) {
             }.bind(this));
 
             surface.on('click.drawroad', function() {
-                d3.event.stopPropagation();
-                way.nodes.pop();
-                var ll = this.map.projection.invert(d3.mouse(surface.node()));
-                var node = iD.actions._node(ll);
-                way.nodes.push(node.id);
-                this.map.operate(iD.operations.changeWayNodes(way, node));
-                way.nodes = way.nodes.slice();
-                way.nodes.push(this.nextnode.id);
-                this.controller.go(iD.actions.DrawRoad(way));
+                if (this._doubleTime) {
+                    window.clearTimeout(this._doubleTime);
+                    this._doubleTime = null;
+                } else {
+                    // forgive me
+                    var that = this;
+                    this._doubleTime = window.setTimeout(function(e) {
+                        return function() {
+                            d3.event = e;
+                            d3.event.stopPropagation();
+                            way.nodes.pop();
+                            var ll = that.map.projection.invert(d3.mouse(surface.node()));
+                            var node = iD.actions._node(ll);
+                            way.nodes.push(node.id);
+                            that.map.operate(iD.operations.changeWayNodes(way, node));
+                            way.nodes = way.nodes.slice();
+                            that.controller.go(iD.actions.DrawRoad(way));
+                        };
+                    }(_.clone(d3.event)), 150);
+                }
             }.bind(this));
 
             surface.on('dblclick.drawroad', function() {
                 d3.event.stopPropagation();
-                var a = this.map.history.graph().entity(way.nodes.pop());
-                var b = this.map.history.graph().entity(way.nodes.pop());
-                this.map.operate(iD.operations.changeWayNodes(way, a));
-                this.map.operate(iD.operations.remove(a));
-                this.map.operate(iD.operations.remove(b));
                 this.exit();
             }.bind(this));
         },

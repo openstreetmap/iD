@@ -206,6 +206,17 @@ iD.Map = function(elem) {
         });
     }
 
+    // https://github.com/mbostock/d3/issues/894
+    function handleDrag(x) {
+        hit_g.selectAll('rect.handle')
+            .on('mousedown.drag', null)
+            .on('touchstart.drag', null);
+        if (x) {
+            hit_g.selectAll('rect.handle')
+                .call(dragbehavior);
+        }
+    }
+
     function setSize(w, h) {
         width = w;
         height = h;
@@ -358,6 +369,8 @@ iD.Map = function(elem) {
         redraw();
         return map;
     }
+
+    map.handleDrag = handleDrag;
 
     map.download = download;
     map.getExtent = getExtent;
