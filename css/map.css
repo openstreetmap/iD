@@ -64,7 +64,7 @@ circle.teaser-point {
 }
 
 .area.active {
-    fill-opacity:0.4;
+    stroke-width:3 !important;
 }
 
 .area.natural {

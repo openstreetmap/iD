@@ -143,7 +143,8 @@ iD.Map = function(elem) {
         fills.enter().append('path')
             .on('click', selectClick);
         fills.attr('d', nodeline)
-            .attr('class', class_area);
+            .attr('class', class_area)
+            .classed('active', classActive);
 
         // Casings
         casings.exit().remove();
