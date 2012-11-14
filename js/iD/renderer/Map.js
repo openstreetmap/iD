@@ -36,7 +36,6 @@ iD.Map = function(elem) {
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
             .on('zoom', zoomPan),
-
         // this is used with handles
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
@@ -123,9 +122,16 @@ iD.Map = function(elem) {
             }
         }
 
+        drawHandles(waynodes);
+        drawFills(areas, changed);
+        drawStrokes(ways, changed);
+        drawMarkers(points, changed);
+        drawCasings(ways, changed);
+    }
+
+    function drawHandles(waynodes) {
         var handles = hit_g.selectAll('rect.handle')
             .data(waynodes, key);
-
         handles.exit().remove();
         handles.enter().append('rect')
             .attr({width: 4, height: 4, 'class': 'handle'})
@@ -136,17 +142,10 @@ iD.Map = function(elem) {
             p[1] -= 2;
             return 'translate(' + p + ') rotate(45, 2, 2)';
         });
-
-        drawFills(areas, changed);
-        drawStrokes(ways, changed);
-        drawMarkers(points, changed);
-        drawCasings(ways, changed);
     }
 
     function drawFills(areas, changed) {
-        var fills = fill_g.selectAll('path.area').data(areas, key);
-
-        // Fills
+        var fills = fill_g.selectAll('path').data(areas, key);
         fills.exit().remove();
         fills.enter().append('path')
             .attr('class', class_area)
@@ -162,7 +161,6 @@ iD.Map = function(elem) {
 
     function drawMarkers(points, changed) {
         var markers = hit_g.selectAll('g.marker').data(points, key);
-        // Markers
         markers.exit().remove();
         var marker = markers.enter().append('g')
             .attr('class', 'marker')
@@ -185,8 +183,7 @@ iD.Map = function(elem) {
     }
 
     function drawStrokes(ways, changed) {
-        var strokes = stroke_g.selectAll('path.stroke').data(ways, key);
-        // Strokes
+        var strokes = stroke_g.selectAll('path').data(ways, key);
         strokes.exit().remove();
         strokes.enter().append('path')
             .on('click', selectClick)
@@ -202,8 +199,7 @@ iD.Map = function(elem) {
     }
 
     function drawCasings(ways, changed) {
-        var casings = casing_g.selectAll('path.casing').data(ways, key);
-        // Casings
+        var casings = casing_g.selectAll('path').data(ways, key);
         casings.exit().remove();
         casings.enter().append('path')
             .on('click', selectClick)
@@ -271,13 +267,38 @@ iD.Map = function(elem) {
         map.operate(iD.operations.remove(d));
     });
 
+    var lastScale = null, translateStart;
+
     function zoomPan() {
+        if (d3.event.scale === projection.scale()) {
+            if (!translateStart) translateStart = d3.event.translate.slice();
+            fastPan(d3.event.translate, translateStart);
+        } else {
+            redraw();
+            download();
+            translateStart = null;
+        }
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-        redraw();
-        download();
     }
+
+    function fastPan(a, b) {
+        var t = 'translate(' +
+                     (a[0] - b[0]) + ',' +
+                     (a[1] - b[1]) + ')';
+        r.attr('transform', t);
+        tilegroup.attr('transform', t);
+    }
+
+    surface.on('mouseup', function() {
+        if (r.attr('transform')) {
+            translateStart = null;
+            r.attr('transform', '');
+            tilegroup.attr('transform', '');
+            redraw();
+        }
+    });
 
     function redraw(changed) {
         dispatch.move(map);
