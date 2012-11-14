@@ -150,10 +150,16 @@ iD.actions.DrawRoad = function(way) {
                     this._doubleTime = window.setTimeout(function(e) {
                         return function() {
                             d3.event = e;
+                            var t = d3.select(d3.event.target);
                             d3.event.stopPropagation();
+                            // connect a way to an existing way
+                            if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
+                                node = t.data()[0];
+                            } else {
+                                node = iD.actions._node(that.map.projection.invert(
+                                    d3.mouse(surface.node())));
+                            }
                             way.nodes.pop();
-                            var ll = that.map.projection.invert(d3.mouse(surface.node()));
-                            var node = iD.actions._node(ll);
                             way.nodes.push(node.id);
                             that.map.operate(iD.operations.changeWayNodes(way, node));
                             way.nodes = way.nodes.slice();

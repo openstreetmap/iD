@@ -40,6 +40,11 @@ circle.teaser-point {
     stroke-width: 3;
 }
 
+.casing:hover {
+    stroke:#FF0F0F !important;
+    opacity:0.8;
+}
+
 .casing.active {
     stroke:#FFF9C9;
     stroke-opacity:1;

@@ -108,7 +108,10 @@ iD.Map = function(elem) {
         var graph = history.graph(),
             all = graph.intersects(getExtent());
 
-        var ways = [], areas = [], points = [];
+        var ways = [],
+            areas = [],
+            points = [],
+            waynodes = [];
 
         var active_entity = null;
         var selected_id = selection;
@@ -125,6 +128,8 @@ iD.Map = function(elem) {
                 }
             } else if (a._poi) {
                 points.push(a);
+            } else if (!a._poi && a.type === 'node') {
+                waynodes.push(a);
             }
         }
 
@@ -183,12 +188,7 @@ iD.Map = function(elem) {
         });
 
         var handles = hit_g.selectAll('rect.handle')
-            // TODO: this could be faster
-            .data(areas.reduce(function(memo, w) {
-                return memo.concat(w.nodes);
-            }, ways.reduce(function(memo, w) {
-                return memo.concat(w.nodes);
-            }, [])), key);
+            .data(waynodes, key);
 
         handles.exit().remove();
         handles.enter().append('rect')
