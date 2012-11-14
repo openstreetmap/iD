@@ -26,7 +26,7 @@ body {
 
 
 #bar {
-    background:#222;
+    background:#fff;
     position:absolute;
     left:0px;
     top:0px;
@@ -34,10 +34,10 @@ body {
     right:0;
 }
 
-#geocode-location {
+input#geocode-location {
     position:absolute;
-    background:#555;
-    color:#fff;
+    background:#eee;
+    color:#222;
 }
 
 :focus {
@@ -86,23 +86,23 @@ table td {
     white-space:nowrap;
     cursor:pointer;
     display:inline-block;
-    background:#222222;
-    color:#999;
+    background:#fff;
+    color:#222;
     font:bold 19px/30px 'Helvetica Neue', sans-serif;
     border:0;
-    border-right:1px solid #222;
+    border-right:1px solid #eee;
     padding:0 10px;
     height:40px;
     margin:0;
 }
 
 #bar button:hover {
-    background:#333;
+    background:#eee;
 }
 
 #bar button.active {
-    background:#000;
-    color:#fff;
+    background:#eee;
+    color:#000;
 }
 
 #bar button#save {
@@ -140,8 +140,6 @@ button small {
 }
 #bar .zoombuttons button {
     width:50px;
-    background:#333333;
-    color:#fff;
 }
 
 .inspector-wrap {
