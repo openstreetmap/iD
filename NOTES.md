@@ -118,3 +118,16 @@ private List<OldState> oldState = new LinkedList<OldState>();
 // ...
 }
 ```
+
+## Transforms Performance
+
+There are two kinds of transforms: SVG and CSS. CSS transforms of SVG elements
+are less efficient that SVG transforms of SVG elements. `translate` notation
+has equivalent performance to `matrix` notation.
+
+* [svg swarm with svg transform matrix](http://bl.ocks.org/d/4074697/)
+* [svg swarm with svg transform translate](http://bl.ocks.org/d/4074808/)
+* [svg swarm with css translate](http://bl.ocks.org/d/4074632/)
+
+SVG transforms are a roughly 2x speedup relative to CSS - 16fps vs 32fps in
+Google Chrome Beta.
