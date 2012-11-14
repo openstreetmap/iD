@@ -27,7 +27,6 @@ iD.Map = function(elem) {
         inspector = iD.Inspector(history),
         parent = d3.select(elem),
         selection = null,
-        // clickCancel = clickCancelProvider(),
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
         // behaviors
@@ -233,14 +232,52 @@ iD.Map = function(elem) {
         tileclient.setSize(width, height);
     }
 
+    var apiTilesLoaded = {};
+
+    function apiTiles() {
+        var t = projection.translate(),
+            s = projection.scale(),
+            z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
+            rz = Math.floor(z),
+            ts = 256 * Math.pow(2, z - rz);
+
+        // This is the 0, 0 px of the projection
+        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
+            coords = [],
+            cols = d3.range(Math.max(0, Math.floor((tile_origin[0] - width) / ts)),
+                            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
+            rows = d3.range(Math.max(0, Math.floor((tile_origin[1] - height) / ts)),
+                            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
+
+        cols.forEach(function(x) {
+            rows.forEach(function(y) {
+                coords.push([x, y, rz]);
+            });
+        });
+
+        var extents = coords.filter(function(c) {
+            return !apiTilesLoaded[c];
+        }).map(function(c) {
+            var x = (c[0] * ts) - tile_origin[0];
+            var y = (c[1] * ts) - tile_origin[1];
+            apiTilesLoaded[c] = true;
+            return [
+                projection.invert([x, y]),
+                projection.invert([x + 256, y + 256])];
+        });
+        return extents;
+    }
+
     var download = _.debounce(function() {
-        connection.bboxFromAPI(getExtent(), function (result) {
-            if (result instanceof Error) {
-                // TODO: handle
-            } else {
-                history.merge(result);
-                drawVector();
-            }
+        apiTiles().map(function(extent) {
+            connection.bboxFromAPI(extent, function (result) {
+                if (result instanceof Error) {
+                    // TODO: handle
+                } else {
+                    history.merge(result);
+                    drawVector();
+                }
+            });
         });
     }, 1000);
 
@@ -284,9 +321,7 @@ iD.Map = function(elem) {
     }
 
     function fastPan(a, b) {
-        var t = 'translate(' +
-                     (a[0] - b[0]) + ',' +
-                     (a[1] - b[1]) + ')';
+        var t = 'translate(' + [(a[0] - b[0]), (a[1] - b[1])] + ')';
         r.attr('transform', t);
         tilegroup.attr('transform', t);
     }
