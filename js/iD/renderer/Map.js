@@ -76,10 +76,6 @@ iD.Map = function(elem) {
     // strokes, and so on.
     var surface = parent.append('svg')
         .call(zoombehavior);
-        // .call(clickCancel);
-
-    // Don't use the default double click handler.
-    // surface.on('dblclick.zoom', null);
 
     surface.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -326,8 +322,7 @@ iD.Map = function(elem) {
     }
 
     function getZoom(zoom) {
-        var s = projection.scale();
-        return Math.max(Math.log(s) / Math.log(2) - 7, 0);
+        return Math.max(Math.log(projection.scale()) / Math.log(2) - 7, 0);
     }
 
     function setZoom(zoom) {

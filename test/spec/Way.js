@@ -2,7 +2,7 @@ describe('Way', function() {
   var way;
 
   beforeEach(function() {
-      way = { type: 'way', nodes: ['n1', 'n2'] };
+      way = { type: 'way', nodes: [{id: 'n1'}, {id: 'n2'}] };
   });
 
 
