@@ -263,7 +263,7 @@ iD.Map = function(elem) {
             apiTilesLoaded[c] = true;
             return [
                 projection.invert([x, y]),
-                projection.invert([x + 256, y + 256])];
+                projection.invert([x + ts, y + ts])];
         });
         return extents;
     }
