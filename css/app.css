@@ -63,11 +63,6 @@ input[type=text]:focus {
     border-color:#222;
 }
 
-text {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-}
-
 table {
     border-collapse: collapse;
     border-spacing:0;
@@ -80,29 +75,10 @@ table td {
     border-spacing:0;
 }
 
-.help-pane {
-    position:absolute;
-    left:0;
-    width:300px;
-    opacity:0.9;
-    top:40px;
-    background:#FFFBD3;
-}
-
-.help-pane div {
-    padding:10px;
-    font-style:italic;
-}
-
-
 #zoombuttons {
     position:absolute;
     right:20px;
     top:20px;
-}
-
-#addPOI {
-    display:none;
 }
 
 #bar button {
@@ -127,6 +103,13 @@ table td {
 #bar button.active {
     background:#000;
     color:#fff;
+}
+
+#bar button#save {
+    position:absolute;
+    right:100px;
+    background:#3F5CA5;
+    color:#eee;
 }
 
 #bar button.mini,
@@ -200,70 +183,4 @@ button small {
     border:0;
     background:#fff;
     width:150px;
-}
-
-.inspector input.tag-key {
-}
-
-.inspector input.tag-value {
-}
-
-.presets h3 {
-    padding: 5px 10px;
-    font: normal 13px/15px Helvetica, Arial, sans-serif;
-    text-align:center;
-    margin: 0;
-}
-
-.presets a.preset-option {
-    text-decoration:none;
-    display:block;
-    background:#eee;
-    padding:5px 10px;
-    border-top:1px solid #ccc;
-}
-
-.presets a.preset-option span {
-    display:block;
-    color: #888;
-    font: normal 11px/15px Helvetica, Arial, sans-serif;
-}
-
-#progress {
-    position:absolute;
-    left:305px;
-    top:10px;
-    color:#fff;
-    z-index:999;
-    width:100px;
-    text-align:center;
-    font-size:28px;
-    display:none;
-    font-weight:bold;
-}
-@-webkit-keyframes spinnerAnim {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-@-moz-keyframes spinnerAnim {
-  0% { -moz-transform: rotate(0deg); }
-  100% { -moz-transform: rotate(360deg); }
-}
-.spinner {
-  -webkit-animation-fill-mode: both;
-  -webkit-animation: spinnerAnim 1.5s infinite linear;
-  -webkit-transform-origin: 50% 50%;
-  -moz-animation-fill-mode: both;
-  -moz-animation: spinnerAnim 1.5s infinite linear;
-  -moz-transform-origin: 50% 50%;
-}
-
-.tag-help,
-.tag-help a {
-    text-align:center;
-    background:#CED4F0;
-    color:#fff;
-    text-decoration:none;
-    padding:0 5px;
-    display:block;
 }
