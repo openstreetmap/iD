@@ -33,63 +33,63 @@ circle.teaser-point {
     fill:#D3F5FF;
 }
 
-.casing {
+path.casing {
     stroke: #111;
     stroke-linecap:round;
     stroke-linejoin:bevel;
     stroke-width: 3;
 }
 
-.casing:hover {
+path.casing:hover {
     stroke:#FF0F0F !important;
     opacity:0.8;
 }
 
-.casing.active {
+path.casing.active {
     stroke:#FFF9C9;
     stroke-opacity:1;
     stroke-width:8;
 }
 
-.stroke {
+path.stroke {
     stroke: #555;
     stroke-linecap:round;
     stroke-linejoin:bevel;
     stroke-width: 2;
 }
 
-.stroke.railway-rail {
+path.stroke.railway-rail {
     stroke: white;
     stroke-width: 3;
     stroke-dasharray: 12,12;
 }
 
-.stroke.railway-subway {
+path.stroke.railway-subway {
     stroke: #444;
     stroke-width: 3;
     stroke-dasharray: 8,8;
 }
 
-.area.active {
+path.area.active {
     stroke-width:3 !important;
 }
 
-.area.natural {
+path.area.natural {
     stroke: #ADD6A5;
     fill: #ADD6A5;
     stroke-width:1;
     fill-opacity:0.3;
 }
 
-.area.building {
+path.area.building {
     stroke: #9E176A;
     stroke-width: 1;
     fill: #ff6ec7;
     fill-opacity: 0.3;
 }
 
-.area.landuse,
-.area.natural {
+path.area.landuse,
+path.area.natural {
     stroke: #006B34;
     stroke-width: 1;
     fill: #189E59;
@@ -97,97 +97,97 @@ circle.teaser-point {
 }
 
 /* highways */
-.stroke.highway-residential {
+path.stroke.highway-residential {
     stroke:#E8E8E8;
     stroke-width:4;
 }
-.casing.highway-residential {
+path.casing.highway-residential {
     stroke:#E8E8E8;
     stroke-width:10;
     opacity:0.4;
 }
 
-.stroke.highway-unclassified,
-.stroke.highway-tertiary,
-.stroke.highway-tertiary_link {
+path.stroke.highway-unclassified,
+path.stroke.highway-tertiary,
+path.stroke.highway-tertiary_link {
     stroke:#FEFECB;
     stroke-width:6;
 }
 
-.casing.highway-unclassified,
-.casing.highway-tertiary,
-.casing.highway-tertiary_link {
+path.casing.highway-unclassified,
+path.casing.highway-tertiary,
+path.casing.highway-tertiary_link {
     stroke-width:8;
 }
 
-.stroke.highway-service {
+path.stroke.highway-service {
     stroke:#fff;
     stroke-width:4;
 }
-.casing.highway-service {
+path.casing.highway-service {
     stroke-width:6;
 }
 
-.stroke.highway-footway,
-.stroke.highway-cycleway,
-.stroke.highway-steps {
+path.stroke.highway-footway,
+path.stroke.highway-cycleway,
+path.stroke.highway-steps {
     stroke: #ff6257;
     stroke-width: 3;
     stroke-dasharray: 6, 6;
 }
-.casing.highway-footway,
-.casing.highway-cycleway,
-.casing.highway-steps {
+path.casing.highway-footway,
+path.casing.highway-cycleway,
+path.casing.highway-steps {
     stroke-width: 3;
     stroke: #fff;
 }
 
-.stroke.highway-motorway, .stroke.highway-motorway_link {
+path.stroke.highway-motorway, path.stroke.highway-motorway_link {
     stroke:#809BC0;
     stroke-width:3;
 }
-.casing.highway-motorway, .casing.highway-motorway_link {
+path.casing.highway-motorway, path.casing.highway-motorway_link {
     stroke:#809BC0;
     stroke-width:9;
     opacity:0.4;
 }
 
-.stroke.highway-trunk, .stroke.highway-trunk_link {
+path.stroke.highway-trunk, path.stroke.highway-trunk_link {
     stroke-width:7;
     opacity:0.4;
     stroke:#7FC97F;
 }
-.casing.highway-trunk, .casing.highway-trunk_link {
+path.casing.highway-trunk, path.casing.highway-trunk_link {
     stroke-width:4;
     stroke:#7FC97F;
 }
 
-.stroke.highway-primary, .stroke.highway-primary_link {
+path.stroke.highway-primary, path.stroke.highway-primary_link {
     stroke:#FD969A;
     stroke-width:5;
 }
-.casing.highway-primary, .casing.highway-primary_link {
+path.casing.highway-primary, path.casing.highway-primary_link {
     stroke:#FF6363;
     opacity:0.4;
     stroke-width:12;
 }
 
-.stroke.highway-secondary, .stroke.highway-secondary_link {
+path.stroke.highway-secondary, path.stroke.highway-secondary_link {
     stroke:#FDBF6F;
     stroke-width:4;
 }
-.casing.highway-secondary, .casing.highway-secondary_link {
+path.casing.highway-secondary, path.casing.highway-secondary_link {
     opacity:0.4;
     stroke:#FDBF6F;
     stroke-width:11;
 }
 
-.stroke.bridge-yes {
+path.stroke.bridge-yes {
     stroke:#eee;
     stroke-width:7;
 }
 
-.stroke.waterway {
+path.stroke.waterway {
     stroke: #10539a;
     stroke-width: 3;
 }
