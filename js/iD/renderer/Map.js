@@ -54,18 +54,8 @@ iD.Map = function(elem) {
             .on('dragend', function() {
                 map.update();
             }),
-        // geo
-        linegen = d3.svg.line()
-            .x(function(d) {
-                return projection(ll2a(d))[0];
-            })
-            .y(function(d) {
-                return projection(ll2a(d))[1];
-            }),
-        // Abstract linegen so that it pulls from `.children`. This
-        // makes it possible to call simply `.attr('d', nodeline)`.
         nodeline = function(d) {
-            return linegen(d.nodes);
+            return 'M' + d.nodes.map(ll2a).map(projection).join('L');
         },
         key = function(d) { return d.id; };
 
@@ -162,7 +152,7 @@ iD.Map = function(elem) {
             .attr('class', class_area)
             .classed('active', classActive)
             .on('click', selectClick);
-        fills.attr('d', nodeline);
+        fills.attr('d', function(d) { return d._line; });
         if (changed) {
             fills
                 .attr('class', class_area)
@@ -285,7 +275,7 @@ iD.Map = function(elem) {
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-        d3.timer(redraw, 0);
+        redraw();
         download();
     }
 
