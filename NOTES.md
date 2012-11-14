@@ -1,3 +1,27 @@
+## Interactions
+
+    map movement +---+ adding a node
+                 |
+                 +---+ adding a way +--+ click on an existing node
+                 |                  |
+                 |                  +--+ click on the map
+                 |                  |
+                 |                  +--+ double-click, click on existing, or esc to finish
+                 |
+                 +---+ adding an area ++ click on existing node
+                                      |
+                                      ++ click on map
+                                      |
+                                      ++ double click to finish, closes area if unclosed
+
+## Pathological conditions
+
+* Ways with one node
+* Relations which contain themselves (circular references)
+* Nodes with no tags and no way attached
+* Ways which contain only nodes that are subsets of the nodes of other ways
+* Paths with intersecting boundaries (invalid geometries)
+
 ## Code Layout
 
 This follows a similar layout to d3: each module of d3 has a file with its exact
@@ -29,48 +53,6 @@ In English:
 * Relations have (ways, nodes, relations)
 * Ways have (nodes)
 * Nodes have ()
-
-## Persistence
-
-The background for this is in [#50](https://github.com/systemed/iD/issues/50).
-
-Also see [this spec by jfirebaugh](https://gist.github.com/3994398)
-
-The idea is that we keep every _changed_ of an object around, but reuse
-unchanged objects between versions.
-
-So, possibly the datastructure on first load is like
-
-```javascript
-{
-    1: [1],
-    2: [2],
-    3: [3]
-}
-```
-
-After one edit in which the object formerly known as `1` acquires a new
-version, it is like:
-
-```javascript
-{
-    1: [4, 1],
-    2: [2, 2],
-    3: [3, 3]
-}
-```
-
-Issues:
-
-* [Performance seems to suffer with Object.freeze](http://stackoverflow.com/questions/8435080/any-performance-benefit-to-locking-down-javascript-objects).
-
-The alternative to this approach is changing the object graph itself and keeping
-the change data in another representation, like an undo stack.
-
-At the very least, changes need to have:
-
-* A name ('Changed 2 Nodes')
-* Changes (whether in discrete versions or a 'change object' that can be applied and unapplied)
 
 ## Performance
 
