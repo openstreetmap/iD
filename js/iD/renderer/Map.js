@@ -401,8 +401,6 @@ iD.Map = function(elem) {
         if (fast) {
             if (!translateStart) translateStart = d3.mouse(document.body).slice();
             hideHandles();
-            hideFills();
-            hideMarkers();
             fastPan(d3.mouse(document.body), translateStart);
         } else {
             redraw();
