@@ -75,9 +75,11 @@ iD.Graph.prototype = {
     fetch: function(id) {
         var entity = iD.Entity(this.entities[id]);
         if (!entity.nodes || !entity.nodes.length) return entity;
-        entity.nodes = entity.nodes.map(function(id) {
-            return this.fetch(id);
-        }.bind(this));
+        var nodes = [];
+        for (var i = 0, l = entity.nodes.length; i < l; i++) {
+            nodes[i] = this.fetch(entity.nodes[i]);
+        }
+        entity.nodes = nodes;
         return entity;
     }
 };
