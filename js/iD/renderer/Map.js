@@ -18,6 +18,13 @@ iD.Map = function(elem) {
         return { lon: o[0], lat: o[1] };
     }
 
+    function roundCoords(c) {
+        return [
+            Math.floor(c[0]),
+            Math.floor(c[1])
+        ];
+    }
+
     var map = {},
         width, height,
         dispatch = d3.dispatch('move', 'update'),
@@ -48,7 +55,7 @@ iD.Map = function(elem) {
             })
             .on('dragend', map.update),
         nodeline = function(d) {
-            return 'M' + d.nodes.map(ll2a).map(projection).join('L');
+            return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
         },
         key = function(d) { return d.id; };
 
