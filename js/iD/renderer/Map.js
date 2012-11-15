@@ -208,7 +208,7 @@ iD.Map = function(elem) {
         markers.attr('transform', function(d) {
             var pt = projection([d.lon, d.lat]);
             pt[0] = ~~(pt[0] - 8);
-            pt[1] = ~~(pt[0] - 8);
+            pt[1] = ~~(pt[1] - 8);
             return 'translate(' + pt + ')';
         });
         markers.classed('active', classActive);
