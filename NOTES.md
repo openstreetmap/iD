@@ -6,13 +6,21 @@
                  |                  |
                  |                  +--+ click on the map
                  |                  |
-                 |                  +--+ double-click, click on existing, or esc to finish
+                 |                  +--+ click on existing, or esc to finish
                  |
                  +---+ adding an area ++ click on existing node
                                       |
                                       ++ click on map
                                       |
                                       ++ double click to finish, closes area if unclosed
+
+
+Way drawing strategy:
+
+* START: Click to start way
+* END: Click on own node
+* END: Click on self-segment
+* END: Escape key
 
 ## Pathological conditions
 
@@ -131,3 +139,19 @@ has equivalent performance to `matrix` notation.
 
 SVG transforms are a roughly 2x speedup relative to CSS - 16fps vs 32fps in
 Google Chrome Beta.
+
+## SVG Corner Cases
+
+One-way streets need markers to indicate that they're one-way. Unfortunately
+SVG [line markers](http://www.svgbasics.com/markers.html) are based strictly
+off of vertices, so won't handle this case properly.
+
+* textPath demo http://bl.ocks.org/4078870
+* line markers http://bl.ocks.org/4079441
+
+One way to resolve this is by using textPath with a glyph, like a gt sign or
+triangle character if available. This has a few concerns:
+
+* performance of textPath is known to suck in some cases. For simple cases, it is fine
+* can we be absolutely sure about direction of text?
+* glyphs need to be available. are webfonts svg-okay?
