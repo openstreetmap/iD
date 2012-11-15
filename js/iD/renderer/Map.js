@@ -111,7 +111,7 @@ iD.Map = function(elem) {
 
     function drawVector() {
         // don't redraw vectors while the map is in fast mode
-        if (r.attr('transform')) return;
+        if (surface.style(transformProp) != 'none') return;
         var graph = history.graph(),
             extent = getExtent(),
             all = graph.intersects(extent);
