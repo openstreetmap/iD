@@ -371,10 +371,10 @@ iD.Map = function(elem) {
     function selectClick(d) {
         if (selection === d.id) return;
         selection = d.id;
-        drawVector();
         d3.select('.inspector-wrap')
             .style('display', 'block')
             .datum(d).call(inspector);
+        drawVector();
     }
 
     inspector.on('change', function(d, tags) {
