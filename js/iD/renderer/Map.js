@@ -162,6 +162,14 @@ iD.Map = function(elem) {
         hit_g.selectAll('rect.handle').remove();
     }
 
+    function hideFills() {
+        fill_g.selectAll('path').remove();
+    }
+
+    function hideMarkers() {
+        hit_g.selectAll('g.marker').remove();
+    }
+
     function drawFills(areas) {
         var fills = fill_g.selectAll('path').data(areas, key);
         fills.exit().remove();
@@ -378,6 +386,9 @@ iD.Map = function(elem) {
 
         if (fast) {
             if (!translateStart) translateStart = d3.event.translate.slice();
+            hideHandles();
+            hideFills();
+            hideMarkers();
             fastPan(d3.event.translate, translateStart);
         } else {
             redraw();

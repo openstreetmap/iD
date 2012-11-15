@@ -50,7 +50,6 @@ iD.Connection = function() {
                 role: elems[i].attributes.role.nodeValue
             };
         }
-
         return members;
     }
 
