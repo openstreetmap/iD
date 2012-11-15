@@ -98,12 +98,20 @@ iD.Map = function(elem) {
         // don't redraw vectors while the map is in fast mode
         if (r.attr('transform')) return;
         var graph = history.graph(),
-            all = graph.intersects(getExtent());
+            extent = getExtent(),
+            all = graph.intersects(extent);
 
         var ways = [],
             areas = [],
             points = [],
             waynodes = [];
+
+        function nodeIntersect(entity) {
+            return entity.lon > extent[0][0] &&
+                entity.lon < extent[1][0] &&
+                entity.lat < extent[0][1] &&
+                entity.lat > extent[1][1];
+        }
 
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
@@ -116,7 +124,7 @@ iD.Map = function(elem) {
                 }
             } else if (a._poi) {
                 points.push(a);
-            } else if (!a._poi && a.type === 'node') {
+            } else if (!a._poi && a.type === 'node' && nodeIntersect(a)) {
                 waynodes.push(a);
             }
         }
@@ -331,6 +339,7 @@ iD.Map = function(elem) {
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
+
         if (fast) {
             if (!translateStart) translateStart = d3.event.translate.slice();
             fastPan(d3.event.translate, translateStart);
