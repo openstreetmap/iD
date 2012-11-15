@@ -411,15 +411,33 @@ iD.Map = function(elem) {
         }
     }
 
+    var transformProp = (function(props) {
+        var style = document.documentElement.style;
+        for (var i = 0; i < props.length; i++) {
+            if (props[i] in style) return props[i];
+        }
+        return false;
+    })(['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
+    // Gross, fix this.
+    if (transformProp) {
+        transformProp = {
+            transform: 'transform',
+            WebkitTransform: '-webkit-transform',
+            OTransform: '-o-transform',
+            MozTransform: '-moz-transform',
+            msTransform: '-ms-transform'
+        }[transformProp];
+    }
+
     function fastPan(a, b) {
         var t = 'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)';
-        surface.style('-webkit-transform', t);
+        surface.style(transformProp, t);
     }
 
     surface.on('mouseup', function() {
-        if (surface.style('-webkit-transform')) {
+        if (surface.style(transformProp)) {
             translateStart = null;
-            surface.style('-webkit-transform', '');
+            surface.style(transformProp, '');
             redraw();
         }
     });
