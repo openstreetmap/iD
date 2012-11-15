@@ -6,6 +6,7 @@ iD.operations.noop = function() {
     };
 };
 
+// https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/AddCommand.java
 iD.operations.addNode = function(node) {
     return function(graph) {
         return graph.replace(node, 'added a place');
@@ -18,12 +19,14 @@ iD.operations.startWay = function(way) {
     };
 };
 
+// https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as
 iD.operations.remove = function(node) {
     return function(graph) {
         return graph.remove(node, 'removed a feature');
     };
 };
 
+// https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/AddNodeToWayAction.as
 iD.operations.changeWayNodes = function(way, node) {
     return function(graph) {
         return graph.replace(way.update({
@@ -40,6 +43,8 @@ iD.operations.changeTags = function(node, tags) {
     };
 };
 
+// https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
+// https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
 iD.operations.move = function(entity, to) {
     return function(graph) {
         return graph.replace(entity.update({
