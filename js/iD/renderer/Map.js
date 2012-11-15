@@ -21,7 +21,6 @@ iD.Map = function(elem) {
     var map = {},
         width, height,
         dispatch = d3.dispatch('move', 'update'),
-        // data
         history = iD.History(),
         connection = iD.Connection(),
         inspector = iD.Inspector(history),
@@ -29,13 +28,11 @@ iD.Map = function(elem) {
         selection = null,
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
-        // behaviors
         zoombehavior = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
             .on('zoom', zoomPan),
-        // this is used with handles
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
                 var p = projection(ll2a(entity));
@@ -124,11 +121,12 @@ iD.Map = function(elem) {
             }
         }
 
-        drawHandles(waynodes);
+        var z = getZoom();
+        if (z > 18) { drawHandles(waynodes); } else { hideHandles(); }
         drawFills(areas);
         drawStrokes(ways);
         drawMarkers(points);
-        drawCasings(ways);
+        if (z > 18) { drawCasings(ways); } else { hideCasings(); }
     }
 
     function drawHandles(waynodes) {
@@ -144,6 +142,10 @@ iD.Map = function(elem) {
             p[1] -= 2;
             return 'translate(' + p + ') rotate(45, 2, 2)';
         });
+    }
+
+    function hideHandles() {
+        hit_g.selectAll('rect.handle').remove();
     }
 
     function drawFills(areas) {
@@ -212,6 +214,10 @@ iD.Map = function(elem) {
             .classed('active', classActive);
     }
 
+    function hideCasings() {
+        casing_g.selectAll('path').remove();
+    }
+
     // https://github.com/mbostock/d3/issues/894
     function handleDrag(x) {
         hit_g.selectAll('rect.handle')
@@ -238,15 +244,15 @@ iD.Map = function(elem) {
             s = projection.scale(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
             rz = Math.floor(z),
-            ts = 256 * Math.pow(2, z - rz);
+            ts = 512 * Math.pow(2, z - rz);
 
         // This is the 0, 0 px of the projection
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = [],
-            cols = d3.range(Math.max(0, Math.floor((tile_origin[0] - width) / ts)),
-                            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
-            rows = d3.range(Math.max(0, Math.floor((tile_origin[1] - height) / ts)),
-                            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
+            cols = d3.range(Math.max(0, Math.floor(tile_origin[0] / ts)),
+                            Math.max(0, Math.ceil((tile_origin[0] +  width) / ts))),
+            rows = d3.range(Math.max(0, Math.floor(tile_origin[1] / ts)),
+                            Math.max(0, Math.ceil((tile_origin[1] +  height) / ts)));
 
         cols.forEach(function(x) {
             rows.forEach(function(y) {

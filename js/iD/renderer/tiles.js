@@ -27,10 +27,10 @@ iD.Tiles = function(selection, projection, width, height) {
         // This is the 0, 0 px of the projection
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = [],
-            cols = d3.range(Math.max(0, Math.floor((tile_origin[0] - width) / ts)),
-                Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
-            rows = d3.range(Math.max(0, Math.floor((tile_origin[1] - height) / ts)),
-                Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
+            cols = d3.range(Math.max(0, Math.floor((tile_origin[0]) / ts)),
+                            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
+            rows = d3.range(Math.max(0, Math.floor((tile_origin[1]) / ts)),
+                            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
 
         cols.forEach(function(x) {
             rows.forEach(function(y) {
