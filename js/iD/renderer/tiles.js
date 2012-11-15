@@ -20,7 +20,7 @@ iD.Tiles = function(selection, projection, width, height) {
     function redraw() {
         var t = projection.translate(),
             s = projection.scale(),
-            z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
+            z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
             rz = Math.floor(z),
             ts = 256 * Math.pow(2, z - rz);
 
