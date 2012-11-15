@@ -63,17 +63,6 @@ input[type=text]:focus {
     border-color:#222;
 }
 
-table {
-    border-collapse: collapse;
-    border-spacing:0;
-}
-table th {
-    text-align:left;
-}
-table td {
-    padding:0;
-    border-spacing:0;
-}
 
 #zoombuttons {
     position:absolute;
@@ -158,6 +147,7 @@ button small {
     background:#eee;
     border-top:1px solid #000;
     color:#222;
+    width:350px;
 }
 
 .inspector-wrap h2 {
@@ -188,4 +178,17 @@ button small {
     border:0;
     background:#fff;
     width:150px;
+}
+
+.inspector-wrap table {
+    border-collapse: collapse;
+    width:350px;
+    border-spacing:0;
+}
+.inspector-wrap table th {
+    text-align:left;
+}
+.inspector-wrap table td {
+    padding:0;
+    border-spacing:0;
 }
