@@ -155,3 +155,12 @@ triangle character if available. This has a few concerns:
 * performance of textPath is known to suck in some cases. For simple cases, it is fine
 * can we be absolutely sure about direction of text?
 * glyphs need to be available. are webfonts svg-okay?
+
+Or more importantly, we need to calculate the pixel length of a linestring,
+calculate the width of a glyph, and do the necessary math so that it fills enough
+of the line without overflowing.
+
+See:
+
+* [getComputedTextLength](http://www.w3.org/TR/SVG/text.html#__svg__SVGTextContentElement__getComputedTextLength)
+* [getTotalLength](http://www.w3.org/TR/SVG/paths.html#__svg__SVGPathElement__getTotalLength)
