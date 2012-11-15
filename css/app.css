@@ -96,6 +96,13 @@ table td {
     margin:0;
 }
 
+#bar .messages {
+    position:absolute;
+    right:200px;
+    top:0;
+    padding:10px;
+}
+
 #bar button:hover {
     background:#eee;
 }

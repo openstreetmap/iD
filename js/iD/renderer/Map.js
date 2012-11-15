@@ -55,6 +55,9 @@ iD.Map = function(elem) {
         },
         key = function(d) { return d.id; };
 
+    d3.select('.inspector-wrap').style('display', 'none');
+    var messages = d3.select('.messages');
+
     // Containers
     // ----------
     // The map uses SVG groups in order to restrict
@@ -161,6 +164,8 @@ iD.Map = function(elem) {
         var marker = markers.enter().append('g')
             .attr('class', 'marker')
             .on('click', selectClick)
+            .on('mouseover', function(d) { messages.text(d.tags.name || '(unknown)'); })
+            .on('mouseout', function(d) { messages.text(''); })
             .call(dragbehavior);
         marker.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
@@ -181,6 +186,8 @@ iD.Map = function(elem) {
         strokes.exit().remove();
         strokes.enter().append('path')
             .on('click', selectClick)
+            .on('mouseover', function(d) { messages.text(d.tags.name || '(unknown)'); })
+            .on('mouseout', function(d) { messages.text(''); })
             .attr('class', class_stroke)
             .classed('active', classActive);
         strokes.order()
@@ -195,6 +202,8 @@ iD.Map = function(elem) {
         casings.exit().remove();
         casings.enter().append('path')
             .on('click', selectClick)
+            .on('mouseover', function(d) { messages.text(d.tags.name || '(unknown)'); })
+            .on('mouseout', function(d) { messages.text(''); })
             .attr('class', class_casing)
             .classed('active', classActive);
         casings.order()
