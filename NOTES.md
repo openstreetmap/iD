@@ -160,6 +160,8 @@ Or more importantly, we need to calculate the pixel length of a linestring,
 calculate the width of a glyph, and do the necessary math so that it fills enough
 of the line without overflowing.
 
+See the [textPath element](http://www.w3.org/TR/SVG/text.html#TextPathElement) and its quirks.
+
 See:
 
 * [getComputedTextLength](http://www.w3.org/TR/SVG/text.html#__svg__SVGTextContentElement__getComputedTextLength)

@@ -240,6 +240,15 @@ iD.Map = function(elem) {
     var apiTilesLoaded = {};
 
     function apiTiles() {
+
+        function tileAtZoom(t, distance) {
+            var power = Math.pow(2, distance);
+            return [
+                Math.floor(t[0] * power),
+                Math.floor(t[1] * power),
+                t[2] + distance];
+        }
+
         var t = projection.translate(),
             s = projection.scale(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
@@ -261,7 +270,11 @@ iD.Map = function(elem) {
         });
 
         return coords.filter(function(c) {
-            return !apiTilesLoaded[c];
+            if (apiTilesLoaded[c]) return false;
+            for (var i = 0; i < 4; i++) {
+                if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
+            }
+            return true;
         }).map(function(c) {
             var x = (c[0] * ts) - tile_origin[0];
             var y = (c[1] * ts) - tile_origin[1];
@@ -286,9 +299,12 @@ iD.Map = function(elem) {
     }, 1000);
 
     function deselectClick() {
+        var hadSelection = !!selection;
         selection = null;
-        drawVector();
-        d3.select('.inspector-wrap').style('display', 'none');
+        if (hadSelection) {
+            drawVector();
+            d3.select('.inspector-wrap').style('display', 'none');
+        }
     }
 
     function selectClick(d) {
