@@ -327,7 +327,11 @@ iD.Map = function(elem) {
     var translateStart;
 
     function zoomPan() {
-        if (d3.event.scale === projection.scale()) {
+        var fast = (d3.event.scale === projection.scale());
+        projection
+            .translate(d3.event.translate)
+            .scale(d3.event.scale);
+        if (fast) {
             if (!translateStart) translateStart = d3.event.translate.slice();
             fastPan(d3.event.translate, translateStart);
         } else {
@@ -335,9 +339,6 @@ iD.Map = function(elem) {
             download();
             translateStart = null;
         }
-        projection
-            .translate(d3.event.translate)
-            .scale(d3.event.scale);
     }
 
     function fastPan(a, b) {
