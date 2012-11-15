@@ -52,7 +52,11 @@ iD.Map = function(elem) {
         },
         key = function(d) { return d.id; };
 
-    d3.select('.inspector-wrap').style('display', 'none');
+    function hideInspector() {
+        d3.select('.inspector-wrap').style('display', 'none');
+    }
+
+    hideInspector();
     var messages = d3.select('.messages');
 
     // Containers
@@ -355,7 +359,7 @@ iD.Map = function(elem) {
         selection = null;
         if (hadSelection) {
             drawVector();
-            d3.select('.inspector-wrap').style('display', 'none');
+            hideInspector();
         }
     }
 
@@ -374,6 +378,11 @@ iD.Map = function(elem) {
 
     inspector.on('remove', function(d) {
         map.operate(iD.operations.remove(d));
+    });
+
+    inspector.on('close', function(d) {
+        deselectClick();
+        hideInspector();
     });
 
     var translateStart;

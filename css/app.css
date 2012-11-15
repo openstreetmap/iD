@@ -191,3 +191,11 @@ button small {
     padding:0;
     border-spacing:0;
 }
+
+.inspector-wrap .close {
+    border: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
