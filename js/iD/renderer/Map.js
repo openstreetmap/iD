@@ -67,8 +67,8 @@ iD.Map = function(elem) {
     // The map uses SVG groups in order to restrict
     // visual and event ordering - fills below casings, casings below
     // strokes, and so on.
-    var surface = parent.append('svg')
-        .call(zoombehavior);
+    var supersurface = parent.append('div').call(zoombehavior);
+    var surface = supersurface.append('svg');
 
     var defs = surface.append('defs');
     defs.append('clipPath')
@@ -103,9 +103,7 @@ iD.Map = function(elem) {
     var alength = arrow.node().getComputedTextLength();
     arrow.remove();
 
-    function classActive(d) {
-        return d.id === selection;
-    }
+    function classActive(d) { return d.id === selection; }
 
     function drawVector() {
         // don't redraw vectors while the map is in fast mode
@@ -205,8 +203,8 @@ iD.Map = function(elem) {
             .attr('xlink:href', iD.Style.markerimage);
         markers.attr('transform', function(d) {
             var pt = projection([d.lon, d.lat]);
-            pt[0] -= 8;
-            pt[1] -= 8;
+            pt[0] = ~~(pt[0] - 8);
+            pt[1] = ~~(pt[0] - 8);
             return 'translate(' + pt + ')';
         });
         markers.classed('active', classActive);
@@ -392,11 +390,11 @@ iD.Map = function(elem) {
             .scale(d3.event.scale);
 
         if (fast) {
-            if (!translateStart) translateStart = d3.event.translate.slice();
+            if (!translateStart) translateStart = d3.mouse(document.body).slice();
             hideHandles();
             hideFills();
             hideMarkers();
-            fastPan(d3.event.translate, translateStart);
+            fastPan(d3.mouse(document.body), translateStart);
         } else {
             redraw();
             download();
@@ -405,16 +403,14 @@ iD.Map = function(elem) {
     }
 
     function fastPan(a, b) {
-        var t = 'translate(' + [(a[0] - b[0]), (a[1] - b[1])] + ')';
-        r.attr('transform', t);
-        tilegroup.attr('transform', t);
+        var t = 'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)';
+        surface.style('-webkit-transform', t);
     }
 
     surface.on('mouseup', function() {
-        if (r.attr('transform')) {
+        if (surface.style('-webkit-transform')) {
             translateStart = null;
-            r.attr('transform', '');
-            tilegroup.attr('transform', '');
+            surface.style('-webkit-transform', '');
             redraw();
         }
     });
