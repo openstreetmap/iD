@@ -55,6 +55,7 @@ iD.Style.TAG_CLASSES = {
     'amenity': true,
     'landuse': true,
     'building': true,
+    'oneway': true,
     'bridge': true
 };
 

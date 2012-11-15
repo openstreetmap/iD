@@ -49,9 +49,7 @@ iD.Map = function(elem) {
                 history.replace(iD.operations.move(entity, to));
                 drawVector();
             })
-            .on('dragend', function() {
-                map.update();
-            }),
+            .on('dragend', map.update),
         nodeline = function(d) {
             return 'M' + d.nodes.map(ll2a).map(projection).join('L');
         },
@@ -96,7 +94,9 @@ iD.Map = function(elem) {
         return d.id === selection;
     }
 
-    function drawVector(changed) {
+    function drawVector() {
+        // don't redraw vectors while the map is in fast mode
+        if (r.attr('transform')) return;
         var graph = history.graph(),
             all = graph.intersects(getExtent());
 
@@ -122,10 +122,10 @@ iD.Map = function(elem) {
         }
 
         drawHandles(waynodes);
-        drawFills(areas, changed);
-        drawStrokes(ways, changed);
-        drawMarkers(points, changed);
-        drawCasings(ways, changed);
+        drawFills(areas);
+        drawStrokes(ways);
+        drawMarkers(points);
+        drawCasings(ways);
     }
 
     function drawHandles(waynodes) {
@@ -143,22 +143,19 @@ iD.Map = function(elem) {
         });
     }
 
-    function drawFills(areas, changed) {
+    function drawFills(areas) {
         var fills = fill_g.selectAll('path').data(areas, key);
         fills.exit().remove();
         fills.enter().append('path')
             .attr('class', class_area)
             .classed('active', classActive)
             .on('click', selectClick);
-        fills.attr('d', function(d) { return d._line; });
-        if (changed) {
-            fills
-                .attr('class', class_area)
-                .classed('active', classActive);
-        }
+        fills.attr('d', function(d) { return d._line; })
+            .attr('class', class_area)
+            .classed('active', classActive);
     }
 
-    function drawMarkers(points, changed) {
+    function drawMarkers(points) {
         var markers = hit_g.selectAll('g.marker').data(points, key);
         markers.exit().remove();
         var marker = markers.enter().append('g')
@@ -176,12 +173,10 @@ iD.Map = function(elem) {
             pt[1] -= 8;
             return 'translate(' + pt + ')';
         });
-        if (changed) {
-            markers.classed('active', classActive);
-        }
+        markers.classed('active', classActive);
     }
 
-    function drawStrokes(ways, changed) {
+    function drawStrokes(ways) {
         var strokes = stroke_g.selectAll('path').data(ways, key);
         strokes.exit().remove();
         strokes.enter().append('path')
@@ -190,14 +185,12 @@ iD.Map = function(elem) {
             .classed('active', classActive);
         strokes.order()
             .attr('d', function(d) { return d._line; });
-        if (changed) {
-            strokes
-                .attr('class', class_stroke)
-                .classed('active', classActive);
-        }
+        strokes
+            .attr('class', class_stroke)
+            .classed('active', classActive);
     }
 
-    function drawCasings(ways, changed) {
+    function drawCasings(ways) {
         var casings = casing_g.selectAll('path').data(ways, key);
         casings.exit().remove();
         casings.enter().append('path')
@@ -205,12 +198,9 @@ iD.Map = function(elem) {
             .attr('class', class_casing)
             .classed('active', classActive);
         casings.order()
-            .attr('d', function(d) { return d._line; });
-        if (changed) {
-            casings
-                .attr('class', class_casing)
-                .classed('active', classActive);
-        }
+            .attr('d', function(d) { return d._line; })
+            .attr('class', class_casing)
+            .classed('active', classActive);
     }
 
     // https://github.com/mbostock/d3/issues/894
@@ -255,7 +245,7 @@ iD.Map = function(elem) {
             });
         });
 
-        var extents = coords.filter(function(c) {
+        return coords.filter(function(c) {
             return !apiTilesLoaded[c];
         }).map(function(c) {
             var x = (c[0] * ts) - tile_origin[0];
@@ -265,7 +255,6 @@ iD.Map = function(elem) {
                 projection.invert([x, y]),
                 projection.invert([x + ts, y + ts])];
         });
-        return extents;
     }
 
     var download = _.debounce(function() {
@@ -304,7 +293,7 @@ iD.Map = function(elem) {
         map.operate(iD.operations.remove(d));
     });
 
-    var lastScale = null, translateStart;
+    var translateStart;
 
     function zoomPan() {
         if (d3.event.scale === projection.scale()) {
@@ -335,12 +324,12 @@ iD.Map = function(elem) {
         }
     });
 
-    function redraw(changed) {
+    function redraw() {
         dispatch.move(map);
         tileclient.redraw();
         if (getZoom() > 13) {
             download();
-            drawVector(changed);
+            drawVector();
         } else {
             // TODO: hide vector features
         }
@@ -351,7 +340,7 @@ iD.Map = function(elem) {
     var undolabel = d3.select('button#undo small');
     dispatch.on('update', function() {
         undolabel.text(history.graph().annotation);
-        redraw(true);
+        redraw();
     });
 
     function _do(operation) {
@@ -383,13 +372,13 @@ iD.Map = function(elem) {
 
     function pointLocation(p) {
         var translate = projection.translate(),
-        scale = projection.scale();
+            scale = projection.scale();
         return [(p[0] - translate[0]) / scale, (p[1] - translate[1]) / scale];
     }
 
     function locationPoint(l) {
         var translate = projection.translate(),
-        scale = projection.scale();
+            scale = projection.scale();
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
