@@ -63,7 +63,8 @@ iD.Map = function(elem) {
     var surface = parent.append('svg')
         .call(zoombehavior);
 
-    surface.append('defs').append('clipPath')
+    var defs = surface.append('defs');
+    defs.append('clipPath')
         .attr('id', 'clip')
         .append('rect')
         .attr('id', 'clip-rect')
@@ -89,6 +90,11 @@ iD.Map = function(elem) {
         class_casing = iD.Style.styleClasses('casing');
 
     var tileclient = iD.Tiles(tilegroup, projection);
+
+    // For one-way roads, find the length of a triangle
+    var arrow = surface.append('text').text('►');
+    var alength = arrow.node().getComputedTextLength();
+    arrow.remove();
 
     function classActive(d) {
         return d.id === selection;
@@ -131,10 +137,10 @@ iD.Map = function(elem) {
 
         var z = getZoom();
         if (z > 18) { drawHandles(waynodes); } else { hideHandles(); }
+        if (z > 18) { drawCasings(ways); } else { hideCasings(); }
         drawFills(areas);
         drawStrokes(ways);
         drawMarkers(points);
-        if (z > 18) { drawCasings(ways); } else { hideCasings(); }
     }
 
     function drawHandles(waynodes) {
@@ -205,6 +211,36 @@ iD.Map = function(elem) {
         strokes
             .attr('class', class_stroke)
             .classed('active', classActive);
+
+        // Determine the lengths of oneway paths
+        var lengths = [];
+        var oneways = strokes.filter(function(d, i) {
+            return d.tags.oneway && d.tags.oneway === 'yes';
+        }).each(function(d, i) {
+            lengths.push(Math.floor(this.getTotalLength() / alength / 4));
+        }).data();
+
+        var uses = defs.selectAll('path')
+            .data(oneways, key);
+        uses.exit().remove();
+        uses.enter().append('path');
+        uses
+            .attr('id', function(d, i) { return 'shadow-' + i; })
+            .attr('d', function(d) { return d._line; });
+
+        var labels = text_g.selectAll('text')
+            .data(oneways, key);
+        labels.exit().remove();
+        var tp = labels.enter()
+            .append('text')
+            .attr('class', 'oneway')
+            .attr('dy', 4)
+            .append('textPath');
+        tp.attr('letter-spacing', alength * 4)
+            .attr('xlink:href', function(d, i) { return '#shadow-' + i; })
+            .text(function(d, i) {
+                return (new Array(lengths[i])).join('►');
+            });
     }
 
     function drawCasings(ways) {

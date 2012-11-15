@@ -193,12 +193,12 @@ path.stroke.waterway {
 }
 
 text {
-    font:9px 'Helvetica';
-    text-anchor:middle;
-    fill:#fff;
-    text-shadow:
-       0 0 1px #000,
-       0 0 1px #000,
-       0 0 1px #000,
-       0 0 2px #000;
+    font-size:10px;
+}
+
+text.oneway {
+    fill:#91CFFF;
+    stroke:#2C6B9B;
+    stroke-width:1;
+    pointer-events:none;
 }
