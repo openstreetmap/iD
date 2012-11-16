@@ -62,13 +62,6 @@ input[type=text]:focus {
     border-color:#222;
 }
 
-
-#zoombuttons {
-    position:absolute;
-    right:20px;
-    top:20px;
-}
-
 #bar button {
     width:100px;
     white-space:nowrap;
