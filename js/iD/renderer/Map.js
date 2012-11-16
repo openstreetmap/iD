@@ -30,6 +30,8 @@ iD.Map = function(elem) {
         inspector = iD.Inspector(history),
         parent = d3.select(elem),
         selection = null,
+        translateStart,
+        apiTilesLoaded = {},
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
         zoombehavior = d3.behavior.zoom()
@@ -54,58 +56,67 @@ iD.Map = function(elem) {
         nodeline = function(d) {
             return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
         },
-        key = function(d) { return d.id; };
+        key = function(d) { return d.id; },
+        messages = d3.select('.messages'),
 
-    function hideInspector() {
-        d3.select('.inspector-wrap').style('display', 'none');
-    }
+        // Containers
+        // ----------
+        // The map uses SVG groups in order to restrict
+        // visual and event ordering - fills below casings, casings below
+        // strokes, and so on.
+        supersurface = parent.append('div').call(zoombehavior),
+        surface = supersurface.append('svg'),
+        defs = surface.append('defs'),
+        tilegroup = surface.append('g')
+            .attr('clip-path', 'url(#clip)')
+            .on('click', deselectClick),
+        r = surface.append('g')
+            .attr('clip-path', 'url(#clip)'),
+        // TODO: reduce repetition
+        fill_g = r.append('g').attr('id', 'fill-g'),
+        casing_g = r.append('g').attr('id', 'casing-g'),
+        stroke_g = r.append('g').attr('id', 'stroke-g'),
+        text_g = r.append('g').attr('id', 'text-g'),
+        hit_g = r.append('g').attr('id', 'hit-g'),
+        temp = r.append('g').attr('id', 'temp-g'),
+        // class generators
+        class_stroke = iD.Style.styleClasses('stroke'),
+        class_fill = iD.Style.styleClasses('stroke'),
+        class_area = iD.Style.styleClasses('area'),
+        class_marker = iD.Style.styleClasses('marker'),
+        class_casing = iD.Style.styleClasses('casing'),
+        // For one-way roads, find the length of a triangle
+        alength = (function() {
+            var arrow = surface.append('text').text('►');
+            var alength = arrow.node().getComputedTextLength();
+            arrow.remove();
+            return alength;
+        })(),
+        transformProp = (function(props) {
+            var style = document.documentElement.style;
+            for (var i = 0; i < props.length; i++) {
+                if (props[i] in style) return {
+                    transform: 'transform',
+                    WebkitTransform: '-webkit-transform',
+                    OTransform: '-o-transform',
+                    MozTransform: '-moz-transform',
+                    msTransform: '-ms-transform'
+                }[props[i]];
+            }
+            return false;
+        })(['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
 
-    hideInspector();
-    var messages = d3.select('.messages');
-
-    // Containers
-    // ----------
-    // The map uses SVG groups in order to restrict
-    // visual and event ordering - fills below casings, casings below
-    // strokes, and so on.
-    var supersurface = parent.append('div').call(zoombehavior);
-    var surface = supersurface.append('svg');
-
-    var defs = surface.append('defs');
     defs.append('clipPath')
         .attr('id', 'clip')
         .append('rect')
         .attr('id', 'clip-rect')
         .attr({ x: 0, y: 0 });
 
-    var tilegroup = surface.append('g')
-        .attr('clip-path', 'url(#clip)')
-        .on('click', deselectClick),
-    r = surface.append('g')
-        .attr('clip-path', 'url(#clip)');
-
-    var fill_g = r.append('g').attr('id', 'fill-g'),
-        casing_g = r.append('g').attr('id', 'casing-g'),
-        stroke_g = r.append('g').attr('id', 'stroke-g'),
-        text_g = r.append('g').attr('id', 'text-g'),
-        hit_g = r.append('g').attr('id', 'hit-g'),
-        temp = r.append('g').attr('id', 'temp-g');
-
-    var class_stroke = iD.Style.styleClasses('stroke'),
-        class_fill = iD.Style.styleClasses('stroke'),
-        class_area = iD.Style.styleClasses('area'),
-        class_marker = iD.Style.styleClasses('marker'),
-        class_casing = iD.Style.styleClasses('casing');
-
     var tileclient = iD.Tiles(tilegroup, projection);
 
-    // For one-way roads, find the length of a triangle
-    var alength = (function() {
-        var arrow = surface.append('text').text('►');
-        var alength = arrow.node().getComputedTextLength();
-        arrow.remove();
-        return alength;
-    })();
+    function hideInspector() {
+        d3.select('.inspector-wrap').style('display', 'none');
+    }
 
     function classActive(d) { return d.id === selection; }
 
@@ -292,8 +303,6 @@ iD.Map = function(elem) {
         tileclient.setSize(dimensions);
     }
 
-    var apiTilesLoaded = {};
-
     function tileAtZoom(t, distance) {
         var power = Math.pow(2, distance);
         return [
@@ -389,8 +398,6 @@ iD.Map = function(elem) {
         hideInspector();
     });
 
-    var translateStart;
-
     function zoomPan() {
         var fast = (d3.event.scale === projection.scale());
         projection
@@ -405,24 +412,6 @@ iD.Map = function(elem) {
             download();
             translateStart = null;
         }
-    }
-
-    var transformProp = (function(props) {
-        var style = document.documentElement.style;
-        for (var i = 0; i < props.length; i++) {
-            if (props[i] in style) return props[i];
-        }
-        return false;
-    })(['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
-    // Gross, fix this.
-    if (transformProp) {
-        transformProp = {
-            transform: 'transform',
-            WebkitTransform: '-webkit-transform',
-            OTransform: '-o-transform',
-            MozTransform: '-moz-transform',
-            msTransform: '-ms-transform'
-        }[transformProp];
     }
 
     function fastPan(a, b) {
@@ -577,6 +566,7 @@ iD.Map = function(elem) {
     map.redraw = redraw;
 
     setSize({ width: parent.node().offsetWidth, height: parent.node().offsetHeight });
+    hideInspector();
     redraw();
 
     return d3.rebind(map, dispatch, 'on', 'move', 'update');
