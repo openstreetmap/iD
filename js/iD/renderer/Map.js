@@ -36,7 +36,7 @@ iD.Map = function(elem) {
             .on('drag', function(entity) {
                 var to = projection.invert([d3.event.x, d3.event.y]);
                 history.replace(iD.operations.move(entity, to));
-                drawVector();
+                redraw();
             })
             .on('dragend', map.update),
         nodeline = function(d) {
@@ -177,6 +177,13 @@ iD.Map = function(elem) {
     }
 
     function hideHandles() { hit_g.selectAll('rect.handle').remove(); }
+    function hideVector() {
+        fill_g.selectAll('*').remove();
+        stroke_g.selectAll('*').remove();
+        casing_g.selectAll('*').remove();
+        text_g.selectAll('*').remove();
+        hit_g.selectAll('*').remove();
+    }
 
     function drawFills(areas) {
         var fills = fill_g.selectAll('path').data(areas, key);
@@ -361,7 +368,7 @@ iD.Map = function(elem) {
         var hadSelection = !!selection;
         selection = null;
         if (hadSelection) {
-            drawVector();
+            redraw();
             hideInspector();
         }
     }
@@ -372,7 +379,7 @@ iD.Map = function(elem) {
         d3.select('.inspector-wrap')
             .style('display', 'block')
             .datum(d).call(inspector);
-        drawVector();
+        redraw();
     }
 
     inspector.on('change', function(d, tags) {
@@ -398,7 +405,6 @@ iD.Map = function(elem) {
             fastPan(d3.mouse(document.body), translateStart);
         } else {
             redraw();
-            download();
             translateStart = null;
         }
     }
@@ -419,7 +425,7 @@ iD.Map = function(elem) {
     function redraw() {
         dispatch.move(map);
         tileclient.redraw();
-        if (getZoom() > 13) {
+        if (getZoom() > 16) {
             download();
             drawVector();
         } else {
@@ -493,7 +499,6 @@ iD.Map = function(elem) {
         projection.translate(t);
         zoombehavior.translate(projection.translate());
 
-        drawVector();
         redraw();
         return map;
     }

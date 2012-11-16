@@ -1,8 +1,9 @@
 iD.Hash = function() {
     var hash = {},
-    s0, // cached location.hash
-    lat = 90 - 1e-8, // allowable latitude range
-    map;
+        s0, // cached location.hash
+        lat = 90 - 1e-8, // allowable latitude range
+        hadHash,
+        map;
 
     var qs = function(a,b,c,d,e){for(b=/[?&]?([^=]+)=([^&]*)/g,c={},e=decodeURIComponent;d=b.exec(a.replace(/\+/g,' '));c[e(d[1])]=e(d[2]));return c;};
 
@@ -47,11 +48,15 @@ iD.Hash = function() {
         if (x) {
             map.on("move", move);
             window.addEventListener("hashchange", hashchange, false);
-            if (location.hash) hashchange();
-            else move();
+            if (location.hash) {
+                hashchange();
+                hadHash = true;
+            }
         }
         return hash;
     };
+
+    hash.hadHash = hadHash;
 
     return hash;
 };

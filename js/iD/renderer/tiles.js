@@ -1,5 +1,5 @@
 // a minimal map tile client, to be turned on and off etc.
-iD.Tiles = function(selection, projection, dimensions) {
+iD.Tiles = function(selection, projection) {
     var tiles = {}, dimensions;
 
     // derive the url of a 'quadkey' style tile from a coordinate object

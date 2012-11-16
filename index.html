@@ -15,7 +15,7 @@
                 +&nbsp;Place</button><button id='road'>
                 +&nbsp;Road</button><button id='area'>
                 +&nbsp;Area</button><button class='mini' id='undo'>
-                &larr;<small></small></button><button class='mini' id='redo'>
+                &larr;<small>&nbsp;</small></button><button class='mini' id='redo'>
                 &rarr;</button><input type='text' id='geocode-location' placeholder='find a place' />
                 <div class='messages'></div>
                 <button id='save'>Save</button>
@@ -65,13 +65,14 @@
         <script type='text/javascript' src='js/iD/Connection.js'></script>
 
         <script>
-            var map = iD.Map(document.getElementById('map')).setZoom(19).setCenter({
+            var map = iD.Map(document.getElementById('map'));
+            var m = d3.select('#map');
+            var hash = iD.Hash().map(map);
+            if (!hash.hadHash) map.setZoom(19).setCenter({
                 lat: 48.83724,
                 lon: 2.35266
             });
 
-            var m = d3.select('#map');
-            iD.Hash().map(map);
             var controller = iD.Controller(map);
 
             d3.selectAll('button#place').on('click', function() {
