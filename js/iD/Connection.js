@@ -101,6 +101,12 @@ iD.Connection = function() {
         return iD.Graph(entities);
     }
 
+    connection.url = function(x) {
+        if (!arguments.length) return apiURL;
+        apiURL = x;
+        return connection;
+    };
+
     connection.bboxFromAPI = bboxFromAPI;
     connection.wayFromAPI = wayFromAPI;
     connection.loadFromURL = loadFromURL;

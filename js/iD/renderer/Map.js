@@ -23,7 +23,7 @@ iD.Map = function(elem) {
     }
 
     var map = {},
-        width, height,
+        dimensions = { width: null, height: null },
         dispatch = d3.dispatch('move', 'update'),
         history = iD.History(),
         connection = iD.Connection(),
@@ -285,12 +285,11 @@ iD.Map = function(elem) {
         }
     }
 
-    function setSize(w, h) {
-        width = w;
-        height = h;
-        surface.attr({ width: width, height: height });
-        surface.selectAll('#clip-rect').attr({ width: width, height: height });
-        tileclient.setSize(width, height);
+    function setSize(x) {
+        dimensions = x;
+        surface.attr(dimensions);
+        surface.selectAll('#clip-rect').attr(dimensions);
+        tileclient.setSize(dimensions);
     }
 
     var apiTilesLoaded = {};
@@ -322,9 +321,9 @@ iD.Map = function(elem) {
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = [],
             cols = d3.range(Math.max(0, Math.floor(tile_origin[0] / ts)),
-                            Math.max(0, Math.ceil((tile_origin[0] +  width) / ts))),
+                            Math.max(0, Math.ceil((tile_origin[0] +  dimensions.width) / ts))),
             rows = d3.range(Math.max(0, Math.floor(tile_origin[1] / ts)),
-                            Math.max(0, Math.ceil((tile_origin[1] +  height) / ts)));
+                            Math.max(0, Math.ceil((tile_origin[1] +  dimensions.height) / ts)));
 
         cols.forEach(function(x) {
             rows.forEach(function(y) {
@@ -332,27 +331,31 @@ iD.Map = function(elem) {
             });
         });
 
-        return coords.filter(tileAlreadyLoaded).map(function(c) {
+        function apiExtentBox(c) {
             var x = (c[0] * ts) - tile_origin[0];
             var y = (c[1] * ts) - tile_origin[1];
             apiTilesLoaded[c] = true;
             return [
                 projection.invert([x, y]),
                 projection.invert([x + ts, y + ts])];
+        }
+
+        return coords.filter(tileAlreadyLoaded).map(apiExtentBox);
+    }
+
+    function apiRequestExtent(extent) {
+        connection.bboxFromAPI(extent, function (result) {
+            if (result instanceof Error) {
+                // TODO: handle
+            } else {
+                history.merge(result);
+                drawVector();
+            }
         });
     }
 
     var download = _.debounce(function() {
-        apiTiles().map(function(extent) {
-            connection.bboxFromAPI(extent, function (result) {
-                if (result instanceof Error) {
-                    // TODO: handle
-                } else {
-                    history.merge(result);
-                    drawVector();
-                }
-            });
-        });
+        apiTiles().map(apiRequestExtent);
     }, 1000);
 
     function deselectClick() {
@@ -396,7 +399,6 @@ iD.Map = function(elem) {
 
         if (fast) {
             if (!translateStart) translateStart = d3.mouse(document.body).slice();
-            hideHandles();
             fastPan(d3.mouse(document.body), translateStart);
         } else {
             redraw();
@@ -479,7 +481,7 @@ iD.Map = function(elem) {
     function getExtent() {
         return [
             projection.invert([0, 0]),
-            projection.invert([width, height])];
+            projection.invert([dimensions.width, dimensions.height])];
     }
 
     function pointLocation(p) {
@@ -501,14 +503,14 @@ iD.Map = function(elem) {
     function setZoom(zoom) {
         // summary:	Redraw the map at a new zoom level.
         var scale = 256 * Math.pow(2, zoom - 1);
-        var l = pointLocation([width / 2, height / 2]);
+        var l = pointLocation([dimensions.width / 2, dimensions.height / 2]);
         projection.scale(scale);
         zoombehavior.scale(projection.scale());
 
         var t = projection.translate();
         l = locationPoint(l);
-        t[0] += (width / 2) - l[0];
-        t[1] += (height / 2) - l[1];
+        t[0] += (dimensions.width / 2) - l[0];
+        t[1] += (dimensions.height / 2) - l[1];
         projection.translate(t);
         zoombehavior.translate(projection.translate());
 
@@ -522,8 +524,8 @@ iD.Map = function(elem) {
 
     function getCenter() {
         return a2ll(projection.invert([
-            width / 2,
-            height / 2]));
+            dimensions.width / 2,
+            dimensions.height / 2]));
     }
 
     function setCenter(loc) {
@@ -531,10 +533,15 @@ iD.Map = function(elem) {
         var t = projection.translate(),
         ll = projection([loc.lon, loc.lat]);
         projection.translate([
-            t[0] - ll[0] + width / 2,
-            t[1] - ll[1] + height / 2]);
+            t[0] - ll[0] + dimensions.width / 2,
+            t[1] - ll[1] + dimensions.height / 2]);
         zoombehavior.translate(projection.translate());
         redraw();
+        return map;
+    }
+
+    function setAPI(x) {
+        connection.url(x);
         return map;
     }
 
@@ -558,6 +565,7 @@ iD.Map = function(elem) {
     map.connection = connection;
     map.projection = projection;
     map.setSize = setSize;
+    map.setAPI = setAPI;
 
     map.history = history;
     map.surface = surface;
@@ -568,7 +576,7 @@ iD.Map = function(elem) {
 
     map.redraw = redraw;
 
-    setSize(parent.node().offsetWidth, parent.node().offsetHeight);
+    setSize({ width: parent.node().offsetWidth, height: parent.node().offsetHeight });
     redraw();
 
     return d3.rebind(map, dispatch, 'on', 'move', 'update');

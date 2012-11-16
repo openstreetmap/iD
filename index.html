@@ -87,8 +87,10 @@
             });
 
             window.onresize = function() {
-                map.setSize(m.node().offsetWidth,
-                m.node().offsetHeight);
+                map.setSize({
+                    width: m.node().offsetWidth,
+                    height: m.node().offsetHeight
+                });
             };
 
             function grid(resp) {

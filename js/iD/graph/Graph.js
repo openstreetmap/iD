@@ -11,7 +11,6 @@ iD.Graph = function(entities, annotation) {
             for (var j = 0, l = w.nodes.length; j < l; j++) {
                 if (w.nodes[j].lon > extent[0][0]) extent[0][0] = w.nodes[j].lon;
                 if (w.nodes[j].lon < extent[1][0]) extent[1][0] = w.nodes[j].lon;
-
                 if (w.nodes[j].lat < extent[0][1]) extent[0][1] = w.nodes[j].lat;
                 if (w.nodes[j].lat > extent[1][1]) extent[1][1] = w.nodes[j].lat;
             }

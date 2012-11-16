@@ -1,6 +1,6 @@
 // a minimal map tile client, to be turned on and off etc.
-iD.Tiles = function(selection, projection, width, height) {
-    var tiles = {};
+iD.Tiles = function(selection, projection, dimensions) {
+    var tiles = {}, dimensions;
 
     // derive the url of a 'quadkey' style tile from a coordinate object
     function tileUrl(coord) {
@@ -30,9 +30,9 @@ iD.Tiles = function(selection, projection, width, height) {
         var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = [],
             cols = d3.range(Math.max(0, Math.floor((tile_origin[0]) / ts)),
-                            Math.max(0, Math.ceil((tile_origin[0] + width) / ts))),
+                            Math.max(0, Math.ceil((tile_origin[0] + dimensions.width) / ts))),
             rows = d3.range(Math.max(0, Math.floor((tile_origin[1]) / ts)),
-                            Math.max(0, Math.ceil((tile_origin[1] + height) / ts)));
+                            Math.max(0, Math.ceil((tile_origin[1] + dimensions.height) / ts)));
 
         cols.forEach(function(x) {
             rows.forEach(function(y) {
@@ -58,9 +58,8 @@ iD.Tiles = function(selection, projection, width, height) {
             });
     }
 
-    function setSize(w, h) {
-        width = w;
-        height = h;
+    function setSize(x) {
+        dimensions = x;
         redraw();
         return tiles;
     }
