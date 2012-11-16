@@ -109,6 +109,13 @@ iD.Map = function(elem) {
 
     function classActive(d) { return d.id === selection; }
 
+    function nodeIntersect(entity, extent) {
+        return entity.lon > extent[0][0] &&
+            entity.lon < extent[1][0] &&
+            entity.lat < extent[0][1] &&
+            entity.lat > extent[1][1];
+    }
+
     function drawVector() {
         // don't redraw vectors while the map is in fast mode
         if (surface.style(transformProp) != 'none') return;
@@ -121,13 +128,6 @@ iD.Map = function(elem) {
             points = [],
             waynodes = [];
 
-        function nodeIntersect(entity) {
-            return entity.lon > extent[0][0] &&
-                entity.lon < extent[1][0] &&
-                entity.lat < extent[0][1] &&
-                entity.lat > extent[1][1];
-        }
-
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
             if (a.type === 'way') {
@@ -139,7 +139,7 @@ iD.Map = function(elem) {
                 }
             } else if (a._poi) {
                 points.push(a);
-            } else if (!a._poi && a.type === 'node' && nodeIntersect(a)) {
+            } else if (!a._poi && a.type === 'node' && nodeIntersect(a, extent)) {
                 waynodes.push(a);
             }
         }
@@ -191,14 +191,17 @@ iD.Map = function(elem) {
             .classed('active', classActive);
     }
 
+    function nameHoverIn(d) { messages.text(d.tags.name || '(unknown)'); }
+    function nameHoverOut(d) { messages.text(''); }
+
     function drawMarkers(points) {
         var markers = hit_g.selectAll('g.marker').data(points, key);
         markers.exit().remove();
         var marker = markers.enter().append('g')
             .attr('class', 'marker')
             .on('click', selectClick)
-            .on('mouseover', function(d) { messages.text(d.tags.name || '(unknown)'); })
-            .on('mouseout', function(d) { messages.text(''); })
+            .on('mouseover', nameHoverIn)
+            .on('mouseout', nameHoverOut)
             .call(dragbehavior);
         marker.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
@@ -219,8 +222,8 @@ iD.Map = function(elem) {
         strokes.exit().remove();
         strokes.enter().append('path')
             .on('click', selectClick)
-            .on('mouseover', function(d) { messages.text(d.tags.name || '(unknown)'); })
-            .on('mouseout', function(d) { messages.text(''); })
+            .on('mouseover', nameHoverIn)
+            .on('mouseout', nameHoverOut)
             .attr('class', class_stroke)
             .classed('active', classActive);
         strokes.order()
@@ -265,8 +268,8 @@ iD.Map = function(elem) {
         casings.exit().remove();
         casings.enter().append('path')
             .on('click', selectClick)
-            .on('mouseover', function(d) { messages.text(d.tags.name || '(unknown)'); })
-            .on('mouseout', function(d) { messages.text(''); })
+            .on('mouseover', nameHoverIn)
+            .on('mouseout', nameHoverOut)
             .attr('class', class_casing)
             .classed('active', classActive);
         casings.order()
@@ -300,16 +303,23 @@ iD.Map = function(elem) {
 
     var apiTilesLoaded = {};
 
-    function apiTiles() {
+    function tileAtZoom(t, distance) {
+        var power = Math.pow(2, distance);
+        return [
+            Math.floor(t[0] * power),
+            Math.floor(t[1] * power),
+            t[2] + distance];
+    }
 
-        function tileAtZoom(t, distance) {
-            var power = Math.pow(2, distance);
-            return [
-                Math.floor(t[0] * power),
-                Math.floor(t[1] * power),
-                t[2] + distance];
+    function tileAlreadyLoaded(c) {
+        if (apiTilesLoaded[c]) return false;
+        for (var i = 0; i < 4; i++) {
+            if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
         }
+        return true;
+    }
 
+    function apiTiles() {
         var t = projection.translate(),
             s = projection.scale(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
@@ -330,13 +340,7 @@ iD.Map = function(elem) {
             });
         });
 
-        return coords.filter(function(c) {
-            if (apiTilesLoaded[c]) return false;
-            for (var i = 0; i < 4; i++) {
-                if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
-            }
-            return true;
-        }).map(function(c) {
+        return coords.filter(tileAlreadyLoaded).map(function(c) {
             var x = (c[0] * ts) - tile_origin[0];
             var y = (c[1] * ts) - tile_origin[1];
             apiTilesLoaded[c] = true;

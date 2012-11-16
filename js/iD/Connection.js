@@ -82,7 +82,7 @@ iD.Connection = function() {
     }
 
     function parse(callback) {
-        return function(dom) {
+        return function(err, dom) {
             if (!dom.childNodes) return callback(new Error('Bad request'));
             var root = dom.childNodes[0];
             var entities = {};
