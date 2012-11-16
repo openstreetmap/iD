@@ -43,10 +43,12 @@ iD.Hash = function() {
             map.off("move", move);
             window.removeEventListener("hashchange", hashchange, false);
         }
-        if (map = x) {
+        map = x;
+        if (x) {
             map.on("move", move);
             window.addEventListener("hashchange", hashchange, false);
-            location.hash ? hashchange() : move();
+            if (location.hash) hashchange();
+            else move();
         }
         return hash;
     };
