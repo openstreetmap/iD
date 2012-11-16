@@ -8,20 +8,6 @@ iD.Map = function(elem) {
         return;
     }
 
-    // lon/lat object to array
-    function ll2a(o) {
-        return [o.lon, o.lat];
-    }
-
-    // array to lon/lat object
-    function a2ll(o) {
-        return { lon: o[0], lat: o[1] };
-    }
-
-    function roundCoords(c) {
-        return [Math.floor(c[0]), Math.floor(c[1])];
-    }
-
     var map = {},
         dimensions = { width: null, height: null },
         dispatch = d3.dispatch('move', 'update'),
@@ -64,6 +50,16 @@ iD.Map = function(elem) {
         // The map uses SVG groups in order to restrict
         // visual and event ordering - fills below casings, casings below
         // strokes, and so on.
+        //
+        // div (supersurface)
+        //   svg (surface)
+        //     defs
+        //       rect#clip
+        //       path (textPath data)
+        //     g (tilegroup)
+        //     r (vector root)
+        //       g (fill, casing, stroke, text, hit, temp)
+        //         (path, g, marker, etc)
         supersurface = parent.append('div').call(zoombehavior),
         surface = supersurface.append('svg'),
         defs = surface.append('defs'),
@@ -114,11 +110,17 @@ iD.Map = function(elem) {
 
     var tileclient = iD.Tiles(tilegroup, projection);
 
+    function ll2a(o) { return [o.lon, o.lat]; }
+    function a2ll(o) { return { lon: o[0], lat: o[1] }; }
+    function roundCoords(c) { return [Math.floor(c[0]), Math.floor(c[1])]; }
+
     function hideInspector() {
         d3.select('.inspector-wrap').style('display', 'none');
     }
 
     function classActive(d) { return d.id === selection; }
+    function nameHoverIn(d) { messages.text(d.tags.name || '(unknown)'); }
+    function nameHoverOut(d) { messages.text(''); }
 
     function nodeIntersect(entity, extent) {
         return entity.lon > extent[0][0] &&
@@ -132,12 +134,9 @@ iD.Map = function(elem) {
         if (surface.style(transformProp) != 'none') return;
         var graph = history.graph(),
             extent = getExtent(),
-            all = graph.intersects(extent);
-
-        var ways = [],
-            areas = [],
-            points = [],
-            waynodes = [];
+            all = graph.intersects(extent),
+            ways = [], areas = [], points = [], waynodes = [],
+            z = getZoom();
 
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
@@ -155,7 +154,6 @@ iD.Map = function(elem) {
             }
         }
 
-        var z = getZoom();
         if (z > 18) { drawHandles(waynodes); } else { hideHandles(); }
         if (z > 18) { drawCasings(ways); } else { hideCasings(); }
         drawFills(areas);
@@ -178,9 +176,7 @@ iD.Map = function(elem) {
         });
     }
 
-    function hideHandles() {
-        hit_g.selectAll('rect.handle').remove();
-    }
+    function hideHandles() { hit_g.selectAll('rect.handle').remove(); }
 
     function drawFills(areas) {
         var fills = fill_g.selectAll('path').data(areas, key);
@@ -194,8 +190,6 @@ iD.Map = function(elem) {
             .classed('active', classActive);
     }
 
-    function nameHoverIn(d) { messages.text(d.tags.name || '(unknown)'); }
-    function nameHoverOut(d) { messages.text(''); }
 
     function drawMarkers(points) {
         var markers = hit_g.selectAll('g.marker').data(points, key);
@@ -281,9 +275,7 @@ iD.Map = function(elem) {
             .classed('active', classActive);
     }
 
-    function hideCasings() {
-        casing_g.selectAll('path').remove();
-    }
+    function hideCasings() { casing_g.selectAll('path').remove(); }
 
     // https://github.com/mbostock/d3/issues/894
     function handleDrag(x) {
@@ -324,10 +316,8 @@ iD.Map = function(elem) {
             s = projection.scale(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
             rz = Math.floor(z),
-            ts = 512 * Math.pow(2, z - rz);
-
-        // This is the 0, 0 px of the projection
-        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
+            ts = 512 * Math.pow(2, z - rz),
+            tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = [],
             cols = d3.range(Math.max(0, Math.floor(tile_origin[0] / ts)),
                             Math.max(0, Math.ceil((tile_origin[0] +  dimensions.width) / ts))),
@@ -403,7 +393,6 @@ iD.Map = function(elem) {
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-
         if (fast) {
             if (!translateStart) translateStart = d3.mouse(document.body).slice();
             fastPan(d3.mouse(document.body), translateStart);
@@ -434,6 +423,7 @@ iD.Map = function(elem) {
             download();
             drawVector();
         } else {
+            hideVector();
             // TODO: hide vector features
         }
     }
