@@ -1,5 +1,9 @@
 # iD - friendly JavaScript editor for OpenStreetMap
 
+![](https://raw.github.com/systemed/iD/master/screenshot.jpg)
+
+[Try the online demo of the most recent code.](http://geowiki.com/iD/)
+
 ## Basics
 
 * iD is a JavaScript-based [OpenStreetMap](http://www.openstreetmap.org/) editor.
@@ -7,10 +11,13 @@
   not even a 70% editor. It should let you do the most basic tasks while
   not breaking other people's data. Nothing more. (Same goes for the code,
   so go easy on the abstraction. :) )
+* We're aiming to support modern desktop browsers and mobile browsers. The map
+  rendering uses [SVG](http://en.wikipedia.org/wiki/Scalable_Vector_Graphics) via
+  [d3](http://d3js.org/).
 
 ## Architecture
 
-* iD uses [d3js](http://d3js.org/) for graphics & managing databindings to the
+* iD uses [d3](http://d3js.org/) for graphics & managing databindings to the
   map. There's a tiny tiled-map core, but the majority of the action is in
   dynamic rendering of the editable map data.
 * This project aims to create a usable object model of [OpenStreetMap data](http://wiki.openstreetmap.org/wiki/Tags)
