@@ -140,6 +140,24 @@ has equivalent performance to `matrix` notation.
 SVG transforms are a roughly 2x speedup relative to CSS - 16fps vs 32fps in
 Google Chrome Beta.
 
+* [svg swarm with css on html](http://bl.ocks.org/4081364)
+
+However, using CSS transforms with HTML elements has vastly different and
+better performance than using them with SVG elements. For this reason, iD
+transforms a map-container element rather than a `g` element on panning
+movements.
+
+## SVG point rounding performance
+
+Rounding points in SVG gives a ~20% speedup.
+
+* http://bl.ocks.org/4081369 ~18fps
+* http://bl.ocks.org/4081356 ~22fps (about 20% faster)
+
+And this is not just the effect of less `d` data:
+
+* http://bl.ocks.org/4089090 ~18fps
+
 ## SVG Corner Cases
 
 One-way streets need markers to indicate that they're one-way. Unfortunately
