@@ -19,10 +19,7 @@ iD.Map = function(elem) {
     }
 
     function roundCoords(c) {
-        return [
-            Math.floor(c[0]),
-            Math.floor(c[1])
-        ];
+        return [Math.floor(c[0]), Math.floor(c[1])];
     }
 
     var map = {},
@@ -103,9 +100,12 @@ iD.Map = function(elem) {
     var tileclient = iD.Tiles(tilegroup, projection);
 
     // For one-way roads, find the length of a triangle
-    var arrow = surface.append('text').text('►');
-    var alength = arrow.node().getComputedTextLength();
-    arrow.remove();
+    var alength = (function() {
+        var arrow = surface.append('text').text('►');
+        var alength = arrow.node().getComputedTextLength();
+        arrow.remove();
+        return alength;
+    })();
 
     function classActive(d) { return d.id === selection; }
 
@@ -169,14 +169,6 @@ iD.Map = function(elem) {
 
     function hideHandles() {
         hit_g.selectAll('rect.handle').remove();
-    }
-
-    function hideFills() {
-        fill_g.selectAll('path').remove();
-    }
-
-    function hideMarkers() {
-        hit_g.selectAll('g.marker').remove();
     }
 
     function drawFills(areas) {

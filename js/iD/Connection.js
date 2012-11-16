@@ -15,7 +15,9 @@ iD.Connection = function() {
     }
 
     function loadFromURL(url, callback) {
-        d3.xml(url, parse(callback));
+        d3.xml(url, function(err, dom) {
+            callback(parse(dom));
+        });
     }
 
     function getNodes(obj) {
@@ -81,24 +83,22 @@ iD.Connection = function() {
         return iD.Entity(o);
     }
 
-    function parse(callback) {
-        return function(err, dom) {
-            if (!dom.childNodes) return callback(new Error('Bad request'));
-            var root = dom.childNodes[0];
-            var entities = {};
-            refNodes = {};
-            var addEntity = function (obj) {
-                var o = objectData(obj);
-                if (o.type === 'node') o._poi = !refNodes[o.id];
-                entities[o.id] = o;
-            };
+    function parse(dom) {
+        if (!dom.childNodes) return new Error('Bad request');
+        var root = dom.childNodes[0];
+        var entities = {};
+        refNodes = {};
+        function addEntity(obj) {
+            var o = objectData(obj);
+            if (o.type === 'node') o._poi = !refNodes[o.id];
+            entities[o.id] = o;
+        }
 
-            _.forEach(root.getElementsByTagName('way'), addEntity);
-            _.forEach(root.getElementsByTagName('node'), addEntity);
-            _.forEach(root.getElementsByTagName('relation'), addEntity);
+        _.forEach(root.getElementsByTagName('way'), addEntity);
+        _.forEach(root.getElementsByTagName('node'), addEntity);
+        _.forEach(root.getElementsByTagName('relation'), addEntity);
 
-            callback(iD.Graph(entities));
-        };
+        return iD.Graph(entities);
     }
 
     connection.bboxFromAPI = bboxFromAPI;
