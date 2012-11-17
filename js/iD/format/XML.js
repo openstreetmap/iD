@@ -30,7 +30,7 @@ iD.format.XML = {
             ));
         },
         way: function(entity) {
-            return iD.XML.decode(
+            return iD.format.XML.decode(
                 (new XMLSerializer()).serializeToString(
                     JXON.unbuild({
                         way: {
