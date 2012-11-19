@@ -2,7 +2,8 @@ iD.Graph = function(entities, annotation) {
     if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation);
     this.entities = entities || {};
     for (var id in this.entities) {
-        if (this.entities[id].type === 'way') {
+        // TODO: update extents that need it.
+        if (this.entities[id].type === 'way' && !this.entities[id]._extent) {
             // top left, bottom right
             var extent = [
                 [-Infinity, Infinity],
@@ -34,7 +35,8 @@ iD.Graph.prototype = {
     replace: function(entity, annotation) {
         var entities = _.clone(this.entities);
         entities[entity.id] = entity;
-        return iD.Graph(entities, annotation);
+        var g = iD.Graph(entities, annotation);
+        return g;
     },
 
     remove: function(entity, annotation) {

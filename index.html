@@ -40,7 +40,6 @@
         <script type='text/javascript' src='js/iD/Util.js'></script>
         <script type='text/javascript' src='js/iD/renderer/style.js'></script>
 
-        <script type='text/javascript' src='js/iD/renderer/clickcancel.js'></script>
         <script type='text/javascript' src='js/iD/renderer/tiles.js'></script>
         <script type='text/javascript' src='js/iD/renderer/Map.js'></script>
         <script type='text/javascript' src='js/iD/renderer/hash.js'></script>
@@ -57,8 +56,6 @@
         <script type='text/javascript' src='js/iD/format/XML.js'></script>
 
         <script type='text/javascript' src='js/iD/graph/Entity.js'></script>
-        <script type='text/javascript' src='js/iD/graph/Node.js'></script>
-        <script type='text/javascript' src='js/iD/graph/Relation.js'></script>
         <script type='text/javascript' src='js/iD/graph/Way.js'></script>
         <script type='text/javascript' src='js/iD/graph/Graph.js'></script>
         <script type='text/javascript' src='js/iD/graph/History.js'></script>
@@ -95,10 +92,7 @@
             };
 
             function grid(resp) {
-                map.setCentre({
-                    lon: resp.results[0][0].lon,
-                    lat: resp.results[0][0].lat
-                });
+                map.setCentre(resp.results[0][0]);
             }
 
             d3.select('#geocode-location').on('keydown', function() {

@@ -36,7 +36,9 @@ iD.Map = function(elem) {
             .on('drag', function(entity) {
                 var to = projection.invert([d3.event.x, d3.event.y]);
                 history.replace(iD.operations.move(entity, to));
-                redraw();
+                var only = {};
+                only[entity.id] = true;
+                redraw(only);
             })
             .on('dragend', map.update),
         nodeline = function(d) {
@@ -67,6 +69,7 @@ iD.Map = function(elem) {
             .attr('clip-path', 'url(#clip)')
             .on('click', deselectClick),
         r = surface.append('g')
+            .on('click', selectClick)
             .attr('clip-path', 'url(#clip)'),
         // TODO: reduce repetition
         fill_g = r.append('g').attr('id', 'fill-g'),
@@ -129,24 +132,28 @@ iD.Map = function(elem) {
             entity.lat > extent[1][1];
     }
 
-    function drawVector() {
-        // don't redraw vectors while the map is in fast mode
+    function drawVector(only) {
         if (surface.style(transformProp) != 'none') return;
-        var graph = history.graph(),
+        var z = getZoom(),
+            all = [], ways = [], areas = [], points = [], waynodes = [],
             extent = getExtent(),
-            all = graph.intersects(extent),
-            ways = [], areas = [], points = [], waynodes = [],
-            z = getZoom();
+            graph = history.graph();
+
+        if (!only) {
+            all = graph.intersects(extent);
+        } else {
+            for (var id in only) all.push(graph.entity(id));
+        }
+
+        var filter = only ?
+            function(d) { return only[d.id]; } : function() { return true; };
 
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
             if (a.type === 'way') {
                 a._line = nodeline(a);
-                if (!iD.Way.isClosed(a)) {
-                    ways.push(a);
-                } else {
-                    areas.push(a);
-                }
+                if (!iD.Way.isClosed(a)) ways.push(a);
+                else areas.push(a);
             } else if (a._poi) {
                 points.push(a);
             } else if (!a._poi && a.type === 'node' && nodeIntersect(a, extent)) {
@@ -154,25 +161,24 @@ iD.Map = function(elem) {
             }
         }
 
-        if (z > 18) { drawHandles(waynodes); } else { hideHandles(); }
-        if (z > 18) { drawCasings(ways); } else { hideCasings(); }
-        drawFills(areas);
-        drawStrokes(ways);
-        drawMarkers(points);
+        if (z > 18) { drawHandles(waynodes, filter); } else { hideHandles(); }
+        if (z > 18) { drawCasings(ways, filter); } else { hideCasings(); }
+        drawFills(areas, filter);
+        drawStrokes(ways, filter);
+        drawMarkers(points, filter);
     }
 
-    function drawHandles(waynodes) {
+    function drawHandles(waynodes, filter) {
         var handles = hit_g.selectAll('rect.handle')
+            .filter(filter)
             .data(waynodes, key);
         handles.exit().remove();
         handles.enter().append('rect')
-            .attr({width: 4, height: 4, 'class': 'handle'})
+            .attr({ width: 4, height: 4, 'class': 'handle' })
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
             var p = projection(ll2a(entity));
-            p[0] -= 2;
-            p[1] -= 2;
-            return 'translate(' + p + ') rotate(45, 2, 2)';
+            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-2, -2) rotate(45, 2, 2)';
         });
     }
 
@@ -185,25 +191,28 @@ iD.Map = function(elem) {
         hit_g.selectAll('*').remove();
     }
 
-    function drawFills(areas) {
-        var fills = fill_g.selectAll('path').data(areas, key);
+    function drawFills(areas, filter) {
+        var fills = fill_g.selectAll('path')
+            .filter(filter)
+            .data(areas, key);
         fills.exit().remove();
         fills.enter().append('path')
             .attr('class', class_area)
-            .classed('active', classActive)
-            .on('click', selectClick);
-        fills.attr('d', function(d) { return d._line; })
+            .classed('active', classActive);
+        fills
+            .attr('d', function(d) { return d._line; })
             .attr('class', class_area)
             .classed('active', classActive);
     }
 
 
-    function drawMarkers(points) {
-        var markers = hit_g.selectAll('g.marker').data(points, key);
+    function drawMarkers(points, filter) {
+        var markers = hit_g.selectAll('g.marker')
+            .filter(filter)
+            .data(points, key);
         markers.exit().remove();
         var marker = markers.enter().append('g')
             .attr('class', 'marker')
-            .on('click', selectClick)
             .on('mouseover', nameHoverIn)
             .on('mouseout', nameHoverOut)
             .call(dragbehavior);
@@ -213,32 +222,32 @@ iD.Map = function(elem) {
             .attr({ width: 16, height: 16 })
             .attr('xlink:href', iD.Style.markerimage);
         markers.attr('transform', function(d) {
-            var pt = projection([d.lon, d.lat]);
-            pt[0] = ~~(pt[0] - 8);
-            pt[1] = ~~(pt[1] - 8);
-            return 'translate(' + pt + ')';
-        });
-        markers.classed('active', classActive);
+                var pt = projection([d.lon, d.lat]);
+                return 'translate(' + [~~pt[0], ~~pt[1]] + ') transform(-8, -8)';
+            })
+            .classed('active', classActive);
     }
 
-    function drawStrokes(ways) {
-        var strokes = stroke_g.selectAll('path').data(ways, key);
+    function drawStrokes(ways, filter) {
+        var strokes = stroke_g.selectAll('path')
+            .filter(filter)
+            .data(ways, key);
         strokes.exit().remove();
         strokes.enter().append('path')
-            .on('click', selectClick)
             .on('mouseover', nameHoverIn)
             .on('mouseout', nameHoverOut)
             .attr('class', class_stroke)
             .classed('active', classActive);
-        strokes.order()
-            .attr('d', function(d) { return d._line; });
         strokes
+            .order()
+            .attr('d', function(d) { return d._line; })
             .attr('class', class_stroke)
             .classed('active', classActive);
 
         // Determine the lengths of oneway paths
         var lengths = [];
-        var oneways = strokes.filter(function(d, i) {
+        var oneways = strokes
+        .filter(function(d, i) {
             return d.tags.oneway && d.tags.oneway === 'yes';
         }).each(function(d, i) {
             lengths.push(Math.floor(this.getTotalLength() / alength / 4));
@@ -257,8 +266,7 @@ iD.Map = function(elem) {
         labels.exit().remove();
         var tp = labels.enter()
             .append('text')
-            .attr('class', 'oneway')
-            .attr('dy', 4)
+            .attr({ 'class': 'oneway', 'dy': 4 })
             .append('textPath');
         tp.attr('letter-spacing', alength * 4)
             .attr('xlink:href', function(d, i) { return '#shadow-' + i; })
@@ -267,16 +275,18 @@ iD.Map = function(elem) {
             });
     }
 
-    function drawCasings(ways) {
-        var casings = casing_g.selectAll('path').data(ways, key);
+    function drawCasings(ways, filter) {
+        var casings = casing_g.selectAll('path')
+            .filter(filter)
+            .data(ways, key);
         casings.exit().remove();
         casings.enter().append('path')
-            .on('click', selectClick)
             .on('mouseover', nameHoverIn)
             .on('mouseout', nameHoverOut)
             .attr('class', class_casing)
             .classed('active', classActive);
-        casings.order()
+        casings
+            .order()
             .attr('d', function(d) { return d._line; })
             .attr('class', class_casing)
             .classed('active', classActive);
@@ -296,8 +306,7 @@ iD.Map = function(elem) {
     }
 
     function setSize(x) {
-        dimensions = x;
-        surface.attr(dimensions);
+        surface.attr(dimensions = x);
         surface.selectAll('#clip-rect').attr(dimensions);
         tileclient.setSize(dimensions);
     }
@@ -373,8 +382,10 @@ iD.Map = function(elem) {
         }
     }
 
-    function selectClick(d) {
-        if (selection === d.id) return;
+    function selectClick() {
+        var d = d3.select(d3.event.target).data();
+        if (d) d = d[0];
+        if (!d || selection === d.id) return;
         selection = d.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')
@@ -410,8 +421,8 @@ iD.Map = function(elem) {
     }
 
     function fastPan(a, b) {
-        var t = 'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)';
-        surface.style(transformProp, t);
+        surface.style(transformProp,
+            'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)');
     }
 
     surface.on('mouseup', function() {
@@ -422,15 +433,14 @@ iD.Map = function(elem) {
         }
     });
 
-    function redraw() {
+    function redraw(only) {
         dispatch.move(map);
         tileclient.redraw();
         if (getZoom() > 16) {
             download();
-            drawVector();
+            drawVector(only);
         } else {
             hideVector();
-            // TODO: hide vector features
         }
     }
 
