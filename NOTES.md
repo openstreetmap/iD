@@ -184,3 +184,16 @@ See:
 
 * [getComputedTextLength](http://www.w3.org/TR/SVG/text.html#__svg__SVGTextContentElement__getComputedTextLength)
 * [getTotalLength](http://www.w3.org/TR/SVG/paths.html#__svg__SVGPathElement__getTotalLength)
+
+## Authenticating
+
+The [OAuth](http://oauth.net/) endpoint of OpenStreetMap does support
+[CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing),
+which is great and allows iD to do browser-side authentication. This requires some hacks,
+mainly that a cookie is used to persist the token_secret between pageloads.
+
+## Making Edits
+
+    PUT /api/0.6/changeset/create
+    POST /api/0.6/changeset/135324/upload
+    PUT /api/0.6/changeset/135324/close
