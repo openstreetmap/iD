@@ -11,10 +11,12 @@ all: \
 	iD.min.js
 
 .INTERMEDIATE iD.js: \
-	js/lib/d3.v2.js \
+	js/lib/d3.v3.js \
 	js/lib/lodash.js \
+	js/lib/ohauth.js \
+	js/lib/sha.js \
 	js/lib/jxon.js \
-	js/lib/underscore.js \
+	js/lib/lodash.js \
 	js/iD/id.js \
 	js/iD/Connection.js \
 	js/iD/Util.js \

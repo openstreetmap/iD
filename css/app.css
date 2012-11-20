@@ -192,3 +192,15 @@ button small {
     right: 0;
     cursor: pointer;
 }
+
+.modal {
+    width:600px;
+    height:400px;
+    padding:10px;
+    position:absolute;
+    background:#fff;
+    top:50px;
+    left:50%;
+    margin-left:-305px;
+    box-shadow:0 0 5px #000;
+}

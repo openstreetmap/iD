@@ -40,6 +40,7 @@
 
         <script type='text/javascript' src='js/iD/id.js'></script>
         <script type='text/javascript' src='js/iD/Util.js'></script>
+        <script type='text/javascript' src='js/iD/OAuth.js'></script>
         <script type='text/javascript' src='js/iD/renderer/style.js'></script>
 
         <script type='text/javascript' src='js/iD/renderer/tiles.js'></script>
@@ -75,6 +76,11 @@
             });
 
             var controller = iD.Controller(map);
+            var oauth = iD.OAuth(map);
+
+            d3.selectAll('button#save').on('click', function() {
+                oauth.authenticate();
+            });
 
             d3.selectAll('button#place').on('click', function() {
                 controller.go(iD.actions.AddPlace);
