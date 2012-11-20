@@ -205,7 +205,6 @@ iD.Map = function(elem) {
             .classed('active', classActive);
     }
 
-
     function drawMarkers(points, filter) {
         var markers = hit_g.selectAll('g.marker')
             .filter(filter)
@@ -219,8 +218,7 @@ iD.Map = function(elem) {
         marker.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
         marker.append('image')
-            .attr({ width: 16, height: 16 })
-            .attr('xlink:href', iD.Style.markerimage);
+            .attr({ width: 16, height: 16, 'xlink:href': iD.Style.markerimage });
         markers.attr('transform', function(d) {
                 var pt = projection([d.lon, d.lat]);
                 return 'translate(' + [~~pt[0], ~~pt[1]] + ') transform(-8, -8)';

@@ -62,12 +62,14 @@
         <script type='text/javascript' src='js/iD/Connection.js'></script>
 
         <script>
-            var map = iD.Map(document.getElementById('map'));
+            var map = iD.Map(document.getElementById('map'))
+                .setAPI('http://api06.dev.openstreetmap.org/api/0.6/');
+
             var m = d3.select('#map');
             var hash = iD.Hash().map(map);
             if (!hash.hadHash) map.setZoom(19).setCenter({
-                lat: 48.83724,
-                lon: 2.35266
+                lat: 51.85888,
+                lon: -1.60015
             });
 
             var controller = iD.Controller(map);
@@ -121,17 +123,11 @@
                     map.redo();
                 }
                 // p
-                if (d3.event.which === 80) {
-                    controller.go(iD.actions.AddPlace);
-                }
+                if (d3.event.which === 80) controller.go(iD.actions.AddPlace);
                 // r
-                if (d3.event.which === 82) {
-                    controller.go(iD.actions.AddRoad);
-                }
+                if (d3.event.which === 82) controller.go(iD.actions.AddRoad);
                 // a
-                if (d3.event.which === 65) {
-                    controller.go(iD.actions.AddArea);
-                }
+                if (d3.event.which === 65) controller.go(iD.actions.AddArea);
             });
         </script>
     </body>
