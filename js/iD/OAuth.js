@@ -1,13 +1,17 @@
 iD.OAuth = function(map) {
     var baseurl = 'http://api06.dev.openstreetmap.org',
+        apibase = 'http://api06.dev.openstreetmap.org/api/0.6',
         oauth_secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p',
         oauth = {};
 
     var o = {
         oauth_consumer_key: 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
-        oauth_token: localStorage.oauth_token || '',
         oauth_signature_method: 'HMAC-SHA1'
     };
+
+    if (localStorage.oauth_token) {
+        o.oauth_token = localStorage.oauth_token;
+    }
 
     function timenonce(o) {
         o.oauth_timestamp = ohauth.timestamp();
@@ -21,8 +25,11 @@ iD.OAuth = function(map) {
     };
 
     oauth.xhr = function(options, callback) {
+        if (localStorage.oauth_token) {
+            o.oauth_token = localStorage.oauth_token;
+        }
         o = timenonce(o);
-        var url = baseurl + options.path;
+        var url = apibase + options.path;
         var oauth_token_secret = localStorage.oauth_token_secret;
         o.oauth_signature = ohauth.signature(oauth_secret, oauth_token_secret,
             ohauth.baseString(options.method, url, o));
@@ -32,9 +39,10 @@ iD.OAuth = function(map) {
         });
     };
 
-    oauth.authenticate = function() {
+    oauth.authenticate = function(callback) {
         // TODO: deal with changing the api endpoint
-        if (oauth.authenticated()) return;
+        if (oauth.authenticated()) return callback();
+
         var d = document.body.appendChild(document.createElement('div')),
             ifr = d.appendChild(document.createElement('iframe'));
         d.className = 'modal';
@@ -71,13 +79,14 @@ iD.OAuth = function(map) {
                     var access_token = ohauth.stringQs(xhr.response);
                     localStorage.oauth_token = access_token.oauth_token;
                     localStorage.oauth_token_secret = access_token.oauth_token_secret;
+                    callback();
                 });
             }
         };
     };
 
     oauth.setAPI = function(x) {
-        baseurl = x;
+        apibase = x;
         return oauth;
     };
 

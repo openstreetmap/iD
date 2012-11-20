@@ -92,8 +92,9 @@
             }
 
             d3.selectAll('button#save').on('click', function() {
-                oauth.authenticate();
-                map.commit();
+                oauth.authenticate(function() {
+                    map.commit();
+                });
             });
 
             d3.selectAll('button#place').on('click', function() {
