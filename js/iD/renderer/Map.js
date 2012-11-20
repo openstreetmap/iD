@@ -221,7 +221,7 @@ iD.Map = function(elem) {
             .attr({ width: 16, height: 16, 'xlink:href': iD.Style.markerimage });
         markers.attr('transform', function(d) {
                 var pt = projection([d.lon, d.lat]);
-                return 'translate(' + [~~pt[0], ~~pt[1]] + ') transform(-8, -8)';
+                return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
             })
             .classed('active', classActive);
     }
