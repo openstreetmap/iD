@@ -559,7 +559,7 @@ iD.Map = function(elem) {
                     method: 'PUT',
                     path: '/changeset/' + changeset_id + '/close'
                 }, function() {
-                    alert('saved!');
+                    alert('saved! ' + connection.url().replace('/api/0.6/', '/browse') + '/changeset/' + changeset_id);
                 });
             });
         });
