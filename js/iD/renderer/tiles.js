@@ -49,13 +49,15 @@ iD.Tiles = function(selection, projection) {
             .attr('class', 'tile')
             .attr('xlink:href', tileUrl);
 
-        tiles.attr({ width: Math.ceil(ts), height: Math.ceil(ts) })
-            .attr('transform', function(d) {
+        tiles.attr({
+            width: Math.ceil(ts),
+            height: Math.ceil(ts),
+            transform: function(d) {
                 return 'translate(' +
                     Math.round((d[1] * ts) - tile_origin[0]) + ',' +
-                    Math.round((d[2] * ts) - tile_origin[1]) +
-                    ')';
-            });
+                    Math.round((d[2] * ts) - tile_origin[1]) + ')';
+            }
+        });
     }
 
     function setSize(x) {

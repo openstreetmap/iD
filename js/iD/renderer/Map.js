@@ -432,8 +432,10 @@ iD.Map = function(elem) {
     });
 
     function redraw(only) {
-        dispatch.move(map);
-        tileclient.redraw();
+        if (!only) {
+            dispatch.move(map);
+            tileclient.redraw();
+        }
         if (getZoom() > 16) {
             download();
             drawVector(only);
