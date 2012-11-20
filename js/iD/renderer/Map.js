@@ -539,6 +539,32 @@ iD.Map = function(elem) {
         return map;
     }
 
+    function commit() {
+        var modified = _.filter(history.graph().entities, function(e) {
+            return e.modified;
+        });
+        var userid = connection.user().id;
+        map.oauth.xhr({
+            method: 'PUT',
+            path: '/changeset/create',
+            options: { header: { 'Content-Type': 'text/xml' } },
+            content: iD.format.XML.changeset() }, function(changeset_id) {
+            map.oauth.xhr({
+                method: 'POST',
+                path: '/changeset/' + changeset_id + '/upload',
+                options: { header: { 'Content-Type': 'text/xml' } },
+                content: iD.format.XML.osmChange(userid, changeset_id, modified)
+            }, function() {
+                map.oauth.xhr({
+                    method: 'PUT',
+                    path: '/changeset/' + changeset_id + '/close'
+                }, function() {
+                    alert('saved!');
+                });
+            });
+        });
+    }
+
     map.handleDrag = handleDrag;
 
     map.download = download;
@@ -569,6 +595,8 @@ iD.Map = function(elem) {
     map.redo = redo;
 
     map.redraw = redraw;
+
+    map.commit = commit;
 
     setSize({ width: parent.node().offsetWidth, height: parent.node().offsetHeight });
     hideInspector();

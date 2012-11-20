@@ -1,7 +1,12 @@
 iD.format.XML = {
     mapping: function(entity) {
-        if (this.mappings[entity.type]) {
-            return this.mappings[entity.type](entity);
+        if (iD.format.XML.mappings[entity.type]) {
+            return iD.format.XML.mappings[entity.type](entity);
+        }
+    },
+    rep: function(entity) {
+        if (iD.format.XML.reps[entity.type]) {
+            return iD.format.XML.reps[entity.type](entity);
         }
     },
     decode: function(s) {
@@ -13,7 +18,7 @@ iD.format.XML = {
             osm: {
                 changeset: {
                     tag: [
-                        { '@k': 'created_by', '@v': 'iD' },
+                        { '@k': 'created_by', '@v': 'iD 0.0.0' },
                         { '@k': 'comment', '@v': comment || '' }
                     ],
                     '@version': 0.3,
@@ -22,45 +27,62 @@ iD.format.XML = {
             }
         }));
     },
-    osmChange: function() {
+    osmChange: function(userid, changeset, created) {
         return (new XMLSerializer()).serializeToString(
         JXON.unbuild({
             osmChange: {
                 '@version': 0.3,
-                '@generator': 'iD'
+                '@generator': 'iD',
+                // TODO: copy elements first
+                'create': created.map(function(c) {
+                    var x = Object.create(c);
+                    x.changeset = changeset;
+                    return x;
+                }).map(iD.format.XML.rep)
             }
         }));
+    },
+    reps: {
+        node: function(entity) {
+            var r = {
+                node: {
+                    '@id': entity.id.replace('n', ''),
+                    '@lat': entity.lat, '@lon': entity.lon,
+                    tag: _.map(entity.tags, function(k, v) {
+                        return { keyAttributes: { k: k, v: v } };
+                    })
+                }
+            };
+            if (entity.changeset) r.node['@changeset'] = entity.changeset;
+            return r;
+        },
+        way: function(entity) {
+            var r = {
+                way: {
+                    '@id': entity.id.replace('w', ''),
+                    nd: entity.nodes.map(function(e) {
+                        return { keyAttributes: { ref: e.id } };
+                    }),
+                    tag: _.map(entity.tags, function(k, v) {
+                        return {
+                            keyAttributes: { k: k, v: v }
+                        };
+                    })
+                }
+            };
+            if (entity.changeset) r.way['@changeset'] = entity.changeset;
+            return r;
+        }
     },
     mappings: {
         node: function(entity) {
             return iD.format.XML.decode((new XMLSerializer()).serializeToString(
-                JXON.unbuild({
-                    node: {
-                        '@id': entity.id,
-                        '@lat': entity.lat, '@lon': entity.lon,
-                        tag: _.map(entity.tags, function(k, v) {
-                            return { keyAttributes: { k: k, v: v } };
-                        })
-                    }
-                })
+                JXON.unbuild(iD.format.XML.reps.node(entity))
             ));
         },
         way: function(entity) {
-            return iD.format.XML.decode(
-                (new XMLSerializer()).serializeToString(
-                    JXON.unbuild({
-                        way: {
-                            '@id': entity.id,
-                            nd: entity.nodes.map(function(e) {
-                                return { keyAttributes: { ref: e.id } };
-                            }),
-                            tag: _.map(entity.tags, function(k, v) {
-                                return {
-                                    keyAttributes: { k: k, v: v }
-                                };
-                            })
-                        }
-                    })));
+            return iD.format.XML.decode((new XMLSerializer()).serializeToString(
+                JXON.unbuild(iD.format.XML.reps.way(entity))));
         }
     }
 };

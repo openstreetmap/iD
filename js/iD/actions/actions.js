@@ -13,7 +13,7 @@ iD.actions._node = function(ll) {
         lon: ll[0],
         id: iD.Util.id('node'),
         tags: {}
-    });
+    }, {});
 };
 
 iD.actions.AddPlace = {

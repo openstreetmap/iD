@@ -80,7 +80,7 @@
                 .setAPI('http://api06.dev.openstreetmap.org/api/0.6');
 
             if (oauth.authenticated()) {
-                oauth.xhr('GET', '/user/details', function(user_details) {
+                oauth.xhr({ method: 'GET', path: '/user/details' }, function(user_details) {
                     var u = user_details.getElementsByTagName('user')[0];
                     map.connection.user({
                         display_name: u.attributes.display_name.nodeValue,
@@ -93,6 +93,7 @@
 
             d3.selectAll('button#save').on('click', function() {
                 oauth.authenticate();
+                map.commit();
             });
 
             d3.selectAll('button#place').on('click', function() {
