@@ -1,7 +1,8 @@
 iD.Connection = function() {
-    var apiURL = 'http://www.openstreetmap.org/api/0.6/';
-
-    var connection = {}, refNodes = {};
+    var apiURL = 'http://www.openstreetmap.org/api/0.6/',
+        connection = {},
+        refNodes = {},
+        user = {};
 
     // Request data within the bbox from an external OSM server.
     function bboxFromAPI(box, callback) {
@@ -15,9 +16,7 @@ iD.Connection = function() {
     }
 
     function loadFromURL(url, callback) {
-        d3.xml(url, function(err, dom) {
-            callback(parse(dom));
-        });
+        d3.xml(url, function(err, dom) { callback(parse(dom)); });
     }
 
     function getNodes(obj) {
@@ -29,8 +28,6 @@ iD.Connection = function() {
         return nodes;
     }
 
-    // <tag k="highway" v="unclassified"/>
-    // { highway: 'classified' }
     function getTags(obj) {
         var tags = {}, tagelems = obj.getElementsByTagName('tag');
         for (var i = 0, l = tagelems.length; i < l; i++) {
@@ -40,7 +37,6 @@ iD.Connection = function() {
         return tags;
     }
 
-    // <member type="node" ref="364933006" role=""/>
     function getMembers(obj) {
         var members = [],
             elems = obj.getElementsByTagName('member');
@@ -55,15 +51,6 @@ iD.Connection = function() {
         return members;
     }
 
-    // <node id="1831881213"
-    //     version="1"
-    //     changeset="12370172"
-    //     lat="54.0900666"
-    //     lon="12.2539381"
-    //     user="lafkor"
-    //     uid="75625"
-    //     visible="true"
-    //     timestamp="2012-07-20T09:43:19Z">
     function objectData(obj) {
         var o = {
             type: obj.nodeName,
@@ -104,6 +91,12 @@ iD.Connection = function() {
     connection.url = function(x) {
         if (!arguments.length) return apiURL;
         apiURL = x;
+        return connection;
+    };
+
+    connection.user = function(x) {
+        if (!arguments.length) return user;
+        user = x;
         return connection;
     };
 

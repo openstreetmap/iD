@@ -5,6 +5,7 @@ iD.OAuth = function() {
 
     var o = {
         oauth_consumer_key: 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
+        oauth_token: localStorage.oauth_token || '',
         oauth_signature_method: 'HMAC-SHA1'
     };
 
@@ -14,7 +15,25 @@ iD.OAuth = function() {
         return o;
     }
 
+    oauth.authenticated = function() {
+        return localStorage.oauth_token &&
+            localStorage.oauth_token_secret;
+    };
+
+    oauth.xhr = function(method, path, callback) {
+        o = timenonce(o);
+        var url = baseurl + path;
+        var oauth_token_secret = localStorage.oauth_token_secret;
+        o.oauth_signature = ohauth.signature(oauth_secret, oauth_token_secret,
+            ohauth.baseString(method, url, o));
+        ohauth.xhr(method, url, o, null, {}, function(xhr) {
+            if (xhr.responseXML) callback(xhr.responseXML);
+        });
+    };
+
     oauth.authenticate = function() {
+        // TODO: deal with changing the api endpoint
+        if (oauth.authenticated()) return;
         var d = document.body.appendChild(document.createElement('div')),
             ifr = d.appendChild(document.createElement('iframe'));
         d.className = 'modal';
@@ -54,6 +73,11 @@ iD.OAuth = function() {
                 });
             }
         };
+    };
+
+    oauth.setAPI = function(x) {
+        baseurl = x;
+        return oauth;
     };
 
     return oauth;

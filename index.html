@@ -18,7 +18,7 @@
                 &larr;<small>&nbsp;</small></button><button class='mini' id='redo'>
                 &rarr;</button><input type='text' id='geocode-location' placeholder='find a place' />
                 <div class='messages'></div>
-                <button id='save'>Save</button>
+                <button id='save'>Save<small id='as-username'></small></button>
                 <div class='zoombuttons'>
                     <button class='zoom-in'>+</button><button class='zoom-out'>&ndash;</button>
                 </div>
@@ -71,12 +71,25 @@
             var m = d3.select('#map');
             var hash = iD.Hash().map(map);
             if (!hash.hadHash) map.setZoom(19).setCenter({
-                lat: 51.85888,
-                lon: -1.60015
+                lat: 51.87502,
+                lon: -1.49475
             });
 
             var controller = iD.Controller(map);
-            var oauth = iD.OAuth(map);
+            var oauth = iD.OAuth(map)
+                .setAPI('http://api06.dev.openstreetmap.org/api/0.6');
+
+            if (oauth.authenticated()) {
+                oauth.xhr('GET', '/user/details', function(user_details) {
+                    var u = user_details.getElementsByTagName('user')[0];
+                    map.connection.user({
+                        display_name: u.attributes.display_name.nodeValue,
+                        id: u.attributes.id.nodeValue
+                    });
+                    d3.select('.messages').text('logged in as ' +
+                        map.connection.user().display_name);
+                });
+            }
 
             d3.selectAll('button#save').on('click', function() {
                 oauth.authenticate();
