@@ -197,3 +197,14 @@ mainly that a cookie is used to persist the token_secret between pageloads.
     PUT /api/0.6/changeset/create
     POST /api/0.6/changeset/135324/upload
     PUT /api/0.6/changeset/135324/close
+
+## Browser problems that affect iD
+
+See also: [Kothic browser bugs](https://github.com/kothic/kothic-js/wiki/Browser-bugs).
+
+**one-way streets** use glyphs and textPaths. letter-spacing is not supported
+in Firefox but is in webkit so we need to use spaces.
+
+And trailing spaces are not included in getComputedTextLength:
+
+* https://bugzilla.mozilla.org/show_bug.cgi?id=346694
