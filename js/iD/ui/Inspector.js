@@ -4,10 +4,7 @@ iD.Inspector = function() {
     function inspector(selection) {
         // http://jsfiddle.net/7WQjr/
         selection.each(function(entity) {
-            // TODO: there must be a better way to do this.
-            d3.select(this).node().innerHTML = '';
-
-            d3.select(this).append('button')
+            d3.select(this).html("").append('button')
                 .text('x')
                 .attr('title', 'close')
                 .attr('class', 'close')
