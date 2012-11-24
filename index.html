@@ -7,30 +7,6 @@
         <link rel='stylesheet' href='css/map.css'>
         <link rel='stylesheet' href='css/app.css'>
         <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
-    </head>
-    <body>
-        <div id='map'></div>
-        <div id='bar'>
-            <button id='place'>
-                +&nbsp;Place</button><button id='road'>
-                +&nbsp;Road</button><button id='area'>
-                +&nbsp;Area</button><button class='mini' id='undo'>
-                &larr;<small>&nbsp;</small></button><button class='mini' id='redo'>
-                &rarr;</button><input type='text' id='geocode-location' placeholder='find a place' />
-                <div class='messages'></div>
-                <button id='save'>Save<small id='as-username'></small></button>
-                <div class='zoombuttons'>
-                    <button class='zoom-in'>+</button><button class='zoom-out'>&ndash;</button>
-                </div>
-            </div>
-
-        <div class='inspector-wrap'></div>
-        <div id='about'>
-            <p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>,
-            <a href='http://github.com/systemed/iD'>code</a>,
-            <a href='http://www.geowiki.com/docs'>docs</a>.
-            Imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>
-        </div>
 
         <script type='text/javascript' src='js/lib/lodash.js'></script>
         <script type='text/javascript' src='js/lib/d3.v3.js'></script>
@@ -63,95 +39,9 @@
         <script type='text/javascript' src='js/iD/graph/Graph.js'></script>
         <script type='text/javascript' src='js/iD/graph/History.js'></script>
         <script type='text/javascript' src='js/iD/Connection.js'></script>
-
-        <script>
-            var map = iD.Map(document.getElementById('map'))
-                .setAPI('http://api06.dev.openstreetmap.org/api/0.6/');
-
-            var m = d3.select('#map');
-            var hash = iD.Hash().map(map);
-            if (!hash.hadHash) map.setZoom(19).setCenter({
-                lat: 51.87502,
-                lon: -1.49475
-            });
-
-            var controller = iD.Controller(map);
-            var oauth = iD.OAuth(map)
-                .setAPI('http://api06.dev.openstreetmap.org/api/0.6');
-
-            if (oauth.authenticated()) {
-                oauth.xhr({ method: 'GET', path: '/user/details' }, function(user_details) {
-                    var u = user_details.getElementsByTagName('user')[0];
-                    map.connection.user({
-                        display_name: u.attributes.display_name.nodeValue,
-                        id: u.attributes.id.nodeValue
-                    });
-                    d3.select('.messages').text('logged in as ' +
-                        map.connection.user().display_name);
-                });
-            }
-
-            d3.selectAll('button#save').on('click', function() {
-                oauth.authenticate(function() {
-                    map.commit();
-                });
-            });
-
-            d3.selectAll('button#place').on('click', function() {
-                controller.go(iD.actions.AddPlace);
-            });
-
-            d3.selectAll('button#road').on('click', function() {
-                controller.go(iD.actions.AddRoad);
-            });
-
-            d3.selectAll('button#area').on('click', function() {
-                controller.go(iD.actions.AddArea);
-            });
-
-            window.onresize = function() {
-                map.setSize({
-                    width: m.node().offsetWidth,
-                    height: m.node().offsetHeight
-                });
-            };
-
-            function grid(resp) {
-                map.setCentre(resp.results[0][0]);
-            }
-
-            d3.select('#geocode-location').on('keydown', function() {
-                if (d3.event.keyCode !== 13) return;
-                d3.event.preventDefault();
-                var val = d3.select('#geocode-location').node().value;
-                var scr = document.body.appendChild(document.createElement('script'));
-                scr.src = 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
-                encodeURIComponent(val) + '.jsonp?callback=grid';
-            });
-
-            d3.select('.zoombuttons .zoom-in').on('click', map.zoomIn);
-            d3.select('.zoombuttons .zoom-out').on('click', map.zoomOut);
-
-            d3.select('#undo').on('click', map.undo);
-            d3.select('#redo').on('click', map.redo);
-
-            d3.select(document).on('keydown', function() {
-                // console.log(d3.event);
-                // cmd-z
-                if (d3.event.which === 90 && d3.event.metaKey) {
-                    map.undo();
-                }
-                // cmd-shift-z
-                if (d3.event.which === 90 && d3.event.metaKey && d3.event.shiftKey) {
-                    map.redo();
-                }
-                // p
-                if (d3.event.which === 80) controller.go(iD.actions.AddPlace);
-                // r
-                if (d3.event.which === 82) controller.go(iD.actions.AddRoad);
-                // a
-                if (d3.event.which === 65) controller.go(iD.actions.AddArea);
-            });
-        </script>
+    </head>
+    <body>
+        <div id="iD"></div>
+        <script>iD(document.getElementById('iD'));</script>
     </body>
 </html>
