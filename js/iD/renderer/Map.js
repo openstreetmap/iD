@@ -397,6 +397,7 @@ iD.Map = function(elem) {
 
     inspector.on('remove', function(d) {
         map.operate(iD.operations.remove(d));
+        hideInspector();
     });
 
     inspector.on('close', function(d) {
