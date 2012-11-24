@@ -1,42 +1,51 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-  "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset='utf-8'>
   <title>Jasmine Spec Runner</title>
 
-  <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.2.0/jasmine_favicon.png">
   <link rel="stylesheet" type="text/css" href="lib/jasmine-1.2.0/jasmine.css">
   <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine-html.js"></script>
 
   <!-- include source files here... -->
-  <script type="text/javascript" src="../js/lib/underscore-min.js"></script>
-  <script type="text/javascript" src="../js/lib/d3.v2.min.js"></script>
-  <script type="text/javascript" src="../js/iD/id.js"></script>
-  <script type="text/javascript" src="../js/iD/Util.js"></script>
-  <script type="text/javascript" src="../js/iD/format/format.js"></script>
-  <script type="text/javascript" src="../js/iD/format/GeoJSON.js"></script>
-  <script type="text/javascript" src="../js/iD/Connection.js"></script>
+  <script type='text/javascript' src='../js/lib/lodash.js'></script>
+  <script type='text/javascript' src='../js/lib/d3.v3.js'></script>
+  <script type='text/javascript' src='../js/lib/sha.js'></script>
+  <script type='text/javascript' src='../js/lib/ohauth.js'></script>
+  <script type='text/javascript' src='../js/lib/jxon.js'></script>
 
-  <script type="text/javascript" src="../js/iD/graph/Graph.js"></script>
-  <script type="text/javascript" src="../js/iD/graph/Way.js"></script>
+  <script type='text/javascript' src='../js/iD/id.js'></script>
+  <script type='text/javascript' src='../js/iD/Util.js'></script>
+  <script type='text/javascript' src='../js/iD/OAuth.js'></script>
+  <script type='text/javascript' src='../js/iD/renderer/style.js'></script>
 
-  <script type="text/javascript" src="../js/iD/actions/UndoStack.js"></script>
-  <script type="text/javascript" src="../js/iD/ui/Inspector.js"></script>
-  <script type="text/javascript" src="../js/iD/renderer/markers.js"></script>
-  <script type="text/javascript" src="../js/iD/renderer/Map.js"></script>
-  <script type="text/javascript" src="../js/iD/renderer/Style.js"></script>
-  <script type="text/javascript" src="../js/iD/renderer/tiles.js"></script>
-  <script type="text/javascript" src="../js/iD/graph/Graph.js"></script>
-  <script type="text/javascript" src="../js/iD/graph/History.js"></script>
+  <script type='text/javascript' src='../js/iD/renderer/tiles.js'></script>
+  <script type='text/javascript' src='../js/iD/renderer/Map.js'></script>
+  <script type='text/javascript' src='../js/iD/renderer/hash.js'></script>
+  <script type='text/javascript' src='../js/iD/renderer/markers.js'></script>
+  <script type='text/javascript' src='../js/iD/ui/Inspector.js'></script>
+
+  <script type='text/javascript' src='../js/iD/actions/actions.js'></script>
+  <script type='text/javascript' src='../js/iD/actions/operations.js'></script>
+
+  <script type='text/javascript' src='../js/iD/controller/Controller.js'></script>
+
+  <script type='text/javascript' src='../js/iD/format/format.js'></script>
+  <script type='text/javascript' src='../js/iD/format/GeoJSON.js'></script>
+  <script type='text/javascript' src='../js/iD/format/XML.js'></script>
+
+  <script type='text/javascript' src='../js/iD/graph/Entity.js'></script>
+  <script type='text/javascript' src='../js/iD/graph/Way.js'></script>
+  <script type='text/javascript' src='../js/iD/graph/Graph.js'></script>
+  <script type='text/javascript' src='../js/iD/graph/History.js'></script>
+  <script type='text/javascript' src='../js/iD/Connection.js'></script>
 
   <!-- include spec files here... -->
   <script type="text/javascript" src="spec/Util.js"></script>
-  <script type="text/javascript" src="spec/Relation.js"></script>
   <script type="text/javascript" src="spec/Way.js"></script>
   <script type="text/javascript" src="spec/Map.js"></script>
   <script type="text/javascript" src="spec/Connection.js"></script>
-  <script type="text/javascript" src="spec/Graph.js"></script>
   <script type="text/javascript" src="spec/GeoJSON.js"></script>
 
   <script type="text/javascript">
