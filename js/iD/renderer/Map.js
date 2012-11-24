@@ -1,4 +1,4 @@
-iD.Map = function(elem) {
+iD.Map = function(elem, connection) {
 
     if (!iD.supported()) {
         elem.innerHTML = 'This editor is supported in Firefox, Chrome, Safari, Opera, ' +
@@ -12,7 +12,6 @@ iD.Map = function(elem) {
         dimensions = { width: null, height: null },
         dispatch = d3.dispatch('move', 'update'),
         history = iD.History(),
-        connection = iD.Connection(),
         inspector = iD.Inspector(),
         parent = d3.select(elem),
         selection = null,
@@ -535,11 +534,6 @@ iD.Map = function(elem) {
         return map;
     }
 
-    function setAPI(x) {
-        connection.url(x);
-        return map;
-    }
-
     function commit() {
         var modified = _.filter(history.graph().entities, function(e) {
             return e.modified;
@@ -583,10 +577,8 @@ iD.Map = function(elem) {
     map.zoomIn = zoomIn;
     map.zoomOut = zoomOut;
 
-    map.connection = connection;
     map.projection = projection;
     map.setSize = setSize;
-    map.setAPI = setAPI;
 
     map.history = history;
     map.surface = surface;

@@ -4,8 +4,10 @@ var iD = function(container) {
     var m = container.append('div')
         .attr('id', 'map');
 
-    var map = iD.Map(m.node())
-        .setAPI('http://api06.dev.openstreetmap.org/api/0.6/');
+    var connection = iD.Connection()
+        .url('http://api06.dev.openstreetmap.org/api/0.6/');
+
+    var map = iD.Map(m.node(), connection);
 
     var controller = iD.Controller(map);
 
@@ -137,12 +139,12 @@ var iD = function(container) {
     if (oauth.authenticated()) {
         oauth.xhr({ method: 'GET', path: '/user/details' }, function(user_details) {
             var u = user_details.getElementsByTagName('user')[0];
-            map.connection.user({
+            connection.user({
                 display_name: u.attributes.display_name.nodeValue,
                 id: u.attributes.id.nodeValue
             });
             d3.select('.messages').text('logged in as ' +
-                map.connection.user().display_name);
+                connection.user().display_name);
         });
     }
 };
