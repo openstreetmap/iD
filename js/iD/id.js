@@ -11,9 +11,6 @@ var iD = function(container) {
 
     var controller = iD.Controller(map);
 
-    var oauth = iD.OAuth(map)
-        .setAPI('http://api06.dev.openstreetmap.org/api/0.6');
-
     var bar = container.append('div')
         .attr('id', 'bar');
 
@@ -75,7 +72,7 @@ var iD = function(container) {
         .attr('id', 'save')
         .html("Save<small id='as-username'></small>")
         .on('click', function() {
-            oauth.authenticate(function() {
+            connection.authenticate(function() {
                 map.commit();
             });
         });
@@ -136,15 +133,10 @@ var iD = function(container) {
         });
     }
 
-    if (oauth.authenticated()) {
-        oauth.xhr({ method: 'GET', path: '/user/details' }, function(user_details) {
-            var u = user_details.getElementsByTagName('user')[0];
-            connection.user({
-                display_name: u.attributes.display_name.nodeValue,
-                id: u.attributes.id.nodeValue
-            });
-            d3.select('.messages').text('logged in as ' +
-                connection.user().display_name);
+    if (connection.authenticated()) {
+        connection.userDetails(function(user_details) {
+            connection.user(user_details);
+            d3.select('.messages').text('logged in as ' + user_details.display_name);
         });
     }
 };

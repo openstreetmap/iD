@@ -535,29 +535,9 @@ iD.Map = function(elem, connection) {
     }
 
     function commit() {
-        var modified = _.filter(history.graph().entities, function(e) {
+        connection.createChangeset(_.filter(history.graph().entities, function(e) {
             return e.modified;
-        });
-        var userid = connection.user().id;
-        map.oauth.xhr({
-            method: 'PUT',
-            path: '/changeset/create',
-            options: { header: { 'Content-Type': 'text/xml' } },
-            content: iD.format.XML.changeset() }, function(changeset_id) {
-            map.oauth.xhr({
-                method: 'POST',
-                path: '/changeset/' + changeset_id + '/upload',
-                options: { header: { 'Content-Type': 'text/xml' } },
-                content: iD.format.XML.osmChange(userid, changeset_id, modified)
-            }, function() {
-                map.oauth.xhr({
-                    method: 'PUT',
-                    path: '/changeset/' + changeset_id + '/close'
-                }, function() {
-                    alert('saved! ' + connection.url().replace('/api/0.6/', '/browse') + '/changeset/' + changeset_id);
-                });
-            });
-        });
+        }));
     }
 
     map.handleDrag = handleDrag;
