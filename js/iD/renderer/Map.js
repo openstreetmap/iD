@@ -39,7 +39,7 @@ iD.Map = function(elem, connection) {
                 only[entity.id] = true;
                 redraw(only);
             })
-            .on('dragend', map.update),
+            .on('dragend', update),
         nodeline = function(d) {
             return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
         },
@@ -446,26 +446,25 @@ iD.Map = function(elem, connection) {
 
     // UI elements
     // -----------
-    var undolabel = d3.select('button#undo small');
-    dispatch.on('update', function() {
-        undolabel.text(history.graph().annotation);
+    function update() {
+        map.update();
         redraw();
-    });
+    }
 
     function _do(operation) {
         history.operate(operation);
-        map.update();
+        update();
     }
 
     // Undo/redo
     function undo() {
         history.undo();
-        map.update();
+        update();
     }
 
     function redo() {
         history.redo();
-        map.update();
+        update();
     }
 
     // Getters & setters for map state

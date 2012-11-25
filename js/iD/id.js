@@ -38,13 +38,15 @@ var iD = function(container) {
     bar.append('button')
         .attr('id', 'undo')
         .attr('class', 'mini')
-        .html('&larr;<small>&nbsp;</small>')
+        .property('disabled', true)
+        .html('&larr;<small></small>')
         .on('click', map.undo);
 
     bar.append('button')
         .attr('id', 'redo')
         .attr('class', 'mini')
-        .html('&rarr;<small>&nbsp;</small>')
+        .property('disabled', true)
+        .html('&rarr;<small></small>')
         .on('click', map.redo);
 
     bar.append('input')
@@ -99,6 +101,21 @@ var iD = function(container) {
               "<a href='http://github.com/systemed/iD'>code</a>," +
               "<a href='http://www.geowiki.com/docs'>docs</a>." +
               "Imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
+
+    map.on('update', function() {
+        var undo = map.history.undoAnnotation(),
+            redo = map.history.redoAnnotation();
+
+        bar.select('#undo')
+            .property('disabled', !undo)
+            .select('small')
+            .text(undo);
+
+        bar.select('#redo')
+            .property('disabled', !redo)
+            .select('small')
+            .text(redo);
+    });
 
     window.onresize = function() {
         map.setSize({
