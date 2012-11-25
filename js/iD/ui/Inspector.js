@@ -9,7 +9,7 @@ iD.Inspector = function() {
                 .attr('title', 'close')
                 .attr('class', 'close')
                 .on('click', function() {
-                    event.close(d);
+                    event.close(entity);
                 });
 
             var head = d3.select(this)
@@ -96,15 +96,15 @@ iD.Inspector = function() {
             d3.select(this)
                 .append('button')
                 .text('Save')
-                .on('click', function(d, i) {
-                    event.change(d, newtags(table));
+                .on('click', function() {
+                    event.change(entity, newtags(table));
                 });
 
             d3.select(this)
                 .append('button')
                 .text('Delete')
-                .on('click', function(d, i) {
-                    event.remove(d);
+                .on('click', function() {
+                    event.remove(entity);
                 });
         });
     }
