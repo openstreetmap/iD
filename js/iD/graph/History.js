@@ -15,15 +15,15 @@ iD.History.prototype = {
         }
     },
 
-    operate: function(operation) {
+    perform: function(action) {
         this.stack = this.stack.slice(0, this.index + 1);
-        this.stack.push(operation(this.graph()));
+        this.stack.push(action(this.graph()));
         this.index++;
     },
 
-    replace: function(operation) {
+    replace: function(action) {
         // assert(this.index == this.stack.length - 1)
-        this.stack[this.index] = operation(this.graph());
+        this.stack[this.index] = action(this.graph());
     },
 
     undo: function() {
