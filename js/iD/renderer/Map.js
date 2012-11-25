@@ -535,9 +535,7 @@ iD.Map = function(elem, connection) {
     }
 
     function commit() {
-        connection.createChangeset(_.filter(history.graph().entities, function(e) {
-            return e.modified;
-        }));
+        connection.createChangeset(history.graph().modifications());
     }
 
     map.handleDrag = handleDrag;
