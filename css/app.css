@@ -95,6 +95,7 @@ input[type=text]:focus {
 
 #bar button#save {
     position:absolute;
+    top:0;
     right:100px;
     background:#3F5CA5;
     color:#eee;
