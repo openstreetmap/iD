@@ -95,6 +95,7 @@ iD.Inspector = function() {
 
             d3.select(this)
                 .append('button')
+                .attr('class', 'save')
                 .text('Save')
                 .on('click', function() {
                     event.change(entity, newtags(table));
@@ -102,6 +103,7 @@ iD.Inspector = function() {
 
             d3.select(this)
                 .append('button')
+                .attr('class', 'delete')
                 .text('Delete')
                 .on('click', function() {
                     event.remove(entity);
