@@ -1,19 +1,19 @@
 // A controller holds a single action at a time and calls `.enter` and `.exit`
 // to bind and unbind actions.
 iD.Controller = function(map) {
-    var controller = { action: null };
+    var controller = { mode: null };
 
-    controller.go = function(x) {
-        x.controller = controller;
-        x.map = map;
-        if (controller.action) {
-            controller.action.exit();
+    controller.enter = function(mode) {
+        mode.controller = controller;
+        mode.map = map;
+        if (controller.mode) {
+            controller.mode.exit();
         }
-        x.enter();
-        controller.action = x;
+        mode.enter();
+        controller.mode = mode;
     };
 
-    controller.go(iD.actions.Move);
+    controller.enter(iD.modes.Move);
 
     return controller;
 };

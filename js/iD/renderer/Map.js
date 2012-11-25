@@ -31,11 +31,11 @@ iD.Map = function(elem) {
                 return { x: p[0], y: p[1] };
             })
             .on('dragstart', function() {
-                history.operate(iD.operations.noop());
+                history.perform(iD.actions.noop());
             })
             .on('drag', function(entity) {
                 var to = projection.invert([d3.event.x, d3.event.y]);
-                history.replace(iD.operations.move(entity, to));
+                history.replace(iD.actions.move(entity, to));
                 var only = {};
                 only[entity.id] = true;
                 redraw(only);
@@ -392,11 +392,11 @@ iD.Map = function(elem) {
     }
 
     inspector.on('change', function(d, tags) {
-        map.operate(iD.operations.changeTags(d, tags));
+        map.perform(iD.actions.changeTags(d, tags));
     });
 
     inspector.on('remove', function(d) {
-        map.operate(iD.operations.remove(d));
+        map.perform(iD.actions.remove(d));
         hideInspector();
     });
 
@@ -453,8 +453,8 @@ iD.Map = function(elem) {
         redraw();
     });
 
-    function _do(operation) {
-        history.operate(operation);
+    function perform(action) {
+        history.perform(action);
         map.update();
     }
 
@@ -591,7 +591,7 @@ iD.Map = function(elem) {
     map.history = history;
     map.surface = surface;
 
-    map.operate = _do;
+    map.perform = perform;
     map.undo = undo;
     map.redo = redo;
 
