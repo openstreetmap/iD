@@ -410,8 +410,8 @@ iD.Map = function(elem, connection) {
             .translate(d3.event.translate)
             .scale(d3.event.scale);
         if (fast) {
-            if (!translateStart) translateStart = d3.mouse(document.body).slice();
-            var a = d3.mouse(document.body),
+            if (!translateStart) translateStart = d3.event.translate.slice();
+            var a = d3.event.translate,
                 b = translateStart;
             surface.style(transformProp,
                 'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)');
