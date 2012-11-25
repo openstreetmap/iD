@@ -2,7 +2,8 @@ iD.Connection = function() {
     var apiURL = 'http://www.openstreetmap.org/api/0.6/',
         connection = {},
         refNodes = {},
-        user = {};
+        user = {},
+        oauth = iD.OAuth().setAPI(apiURL);
 
     // Request data within the bbox from an external OSM server.
     function bboxFromAPI(box, callback) {
@@ -88,9 +89,52 @@ iD.Connection = function() {
         return iD.Graph(entities);
     }
 
+    function authenticate(callback) {
+        return oauth.authenticate(callback);
+    }
+
+    function authenticated() {
+        return oauth.authenticated();
+    }
+
+    function createChangeset(modified) {
+        oauth.xhr({
+                method: 'PUT',
+                path: '/changeset/create',
+                options: { header: { 'Content-Type': 'text/xml' } },
+                content: iD.format.XML.changeset()
+            },
+            function (changeset_id) {
+                oauth.xhr({
+                    method: 'POST',
+                    path: '/changeset/' + changeset_id + '/upload',
+                    options: { header: { 'Content-Type': 'text/xml' } },
+                    content: iD.format.XML.osmChange(user.id, changeset_id, modified)
+                }, function () {
+                    oauth.xhr({
+                        method: 'PUT',
+                        path: '/changeset/' + changeset_id + '/close'
+                    }, function () {
+                        alert('saved! ' + apiURL.replace('/api/0.6/', '/browse') + '/changeset/' + changeset_id);
+                    });
+                });
+            });
+    }
+
+    function userDetails(callback) {
+        oauth.xhr({ method: 'GET', path: '/user/details' }, function(user_details) {
+            var u = user_details.getElementsByTagName('user')[0];
+            callback({
+                display_name: u.attributes.display_name.nodeValue,
+                id: u.attributes.id.nodeValue
+            });
+        });
+    }
+
     connection.url = function(x) {
         if (!arguments.length) return apiURL;
         apiURL = x;
+        oauth.setAPI(x);
         return connection;
     };
 
@@ -103,6 +147,10 @@ iD.Connection = function() {
     connection.bboxFromAPI = bboxFromAPI;
     connection.wayFromAPI = wayFromAPI;
     connection.loadFromURL = loadFromURL;
+    connection.userDetails = userDetails;
+    connection.authenticate = authenticate;
+    connection.authenticated = authenticated;
+    connection.createChangeset = createChangeset;
 
     connection.objectData = objectData;
     connection.apiURL = apiURL;

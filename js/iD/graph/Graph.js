@@ -84,5 +84,11 @@ iD.Graph.prototype = {
         }
         entity.nodes = nodes;
         return entity;
+    },
+
+    modifications: function() {
+        _.filter(this.entities, function(entity) {
+            return entity.modified;
+        });
     }
 };

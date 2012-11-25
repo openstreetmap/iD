@@ -1,4 +1,4 @@
-iD.Map = function(elem) {
+iD.Map = function(elem, connection) {
 
     if (!iD.supported()) {
         elem.innerHTML = 'This editor is supported in Firefox, Chrome, Safari, Opera, ' +
@@ -12,7 +12,6 @@ iD.Map = function(elem) {
         dimensions = { width: null, height: null },
         dispatch = d3.dispatch('move', 'update'),
         history = iD.History(),
-        connection = iD.Connection(),
         inspector = iD.Inspector(),
         parent = d3.select(elem),
         selection = null,
@@ -40,7 +39,7 @@ iD.Map = function(elem) {
                 only[entity.id] = true;
                 redraw(only);
             })
-            .on('dragend', map.update),
+            .on('dragend', update),
         nodeline = function(d) {
             return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
         },
@@ -412,16 +411,14 @@ iD.Map = function(elem) {
             .scale(d3.event.scale);
         if (fast) {
             if (!translateStart) translateStart = d3.mouse(document.body).slice();
-            fastPan(d3.mouse(document.body), translateStart);
+            var a = d3.mouse(document.body),
+                b = translateStart;
+            surface.style(transformProp,
+                'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)');
         } else {
             redraw();
             translateStart = null;
         }
-    }
-
-    function fastPan(a, b) {
-        surface.style(transformProp,
-            'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)');
     }
 
     surface.on('mouseup', function() {
@@ -447,26 +444,30 @@ iD.Map = function(elem) {
 
     // UI elements
     // -----------
-    var undolabel = d3.select('button#undo small');
-    dispatch.on('update', function() {
-        undolabel.text(history.graph().annotation);
+    function update() {
+        map.update();
         redraw();
-    });
+    }
 
     function perform(action) {
         history.perform(action);
         map.update();
     }
 
+    function _do(operation) {
+        history.operate(operation);
+        update();
+    }
+
     // Undo/redo
     function undo() {
         history.undo();
-        map.update();
+        update();
     }
 
     function redo() {
         history.redo();
-        map.update();
+        update();
     }
 
     // Getters & setters for map state
@@ -535,35 +536,8 @@ iD.Map = function(elem) {
         return map;
     }
 
-    function setAPI(x) {
-        connection.url(x);
-        return map;
-    }
-
     function commit() {
-        var modified = _.filter(history.graph().entities, function(e) {
-            return e.modified;
-        });
-        var userid = connection.user().id;
-        map.oauth.xhr({
-            method: 'PUT',
-            path: '/changeset/create',
-            options: { header: { 'Content-Type': 'text/xml' } },
-            content: iD.format.XML.changeset() }, function(changeset_id) {
-            map.oauth.xhr({
-                method: 'POST',
-                path: '/changeset/' + changeset_id + '/upload',
-                options: { header: { 'Content-Type': 'text/xml' } },
-                content: iD.format.XML.osmChange(userid, changeset_id, modified)
-            }, function() {
-                map.oauth.xhr({
-                    method: 'PUT',
-                    path: '/changeset/' + changeset_id + '/close'
-                }, function() {
-                    alert('saved! ' + connection.url().replace('/api/0.6/', '/browse') + '/changeset/' + changeset_id);
-                });
-            });
-        });
+        connection.createChangeset(history.graph().modifications());
     }
 
     map.handleDrag = handleDrag;
@@ -583,10 +557,8 @@ iD.Map = function(elem) {
     map.zoomIn = zoomIn;
     map.zoomOut = zoomOut;
 
-    map.connection = connection;
     map.projection = projection;
     map.setSize = setSize;
-    map.setAPI = setAPI;
 
     map.history = history;
     map.surface = surface;
