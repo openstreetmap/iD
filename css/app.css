@@ -84,11 +84,16 @@ input[type=text]:focus {
     padding:10px;
 }
 
-#bar button:hover {
+#bar button[disabled] {
+    color:#eee;
+    cursor:auto;
+}
+
+#bar button:hover:not([disabled]) {
     background:#eee;
 }
 
-#bar button.active {
+#bar button.active:not([disabled]) {
     background:#eee;
     color:#000;
 }

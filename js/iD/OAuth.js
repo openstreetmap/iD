@@ -1,4 +1,4 @@
-iD.OAuth = function(map) {
+iD.OAuth = function() {
     var baseurl = 'http://api06.dev.openstreetmap.org',
         apibase = 'http://api06.dev.openstreetmap.org/api/0.6',
         oauth_secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p',
@@ -89,8 +89,6 @@ iD.OAuth = function(map) {
         apibase = x;
         return oauth;
     };
-
-    map.oauth = oauth;
 
     return oauth;
 };
