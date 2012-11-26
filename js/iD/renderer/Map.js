@@ -395,7 +395,7 @@ iD.Map = function(elem, connection) {
             var a = d3.event.translate,
                 b = translateStart;
             surface.style(transformProp,
-                'translate3d(' + (a[0] - b[0]) + 'px,' + (a[1] - b[1]) + 'px, 0px)');
+                'translate3d(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px, 0px)');
         } else {
             redraw();
             translateStart = null;

@@ -60,9 +60,9 @@ var iD = function(container) {
                 encodeURIComponent(val) + '.jsonp?callback=grid';
         });
 
-    function grid(resp) {
-        map.setCentre(resp.results[0][0]);
-    }
+    window.grid = function(resp) {
+        map.setCenter([resp.results[0][0].lon, resp.results[0][0].lat]);
+    };
 
     bar.append('div')
         .attr('class', 'messages');
