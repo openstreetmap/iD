@@ -11,7 +11,7 @@ iD.Map = function(elem, connection) {
         apiTilesLoaded = {},
         projection = d3.geo.mercator()
             .scale(512).translate([512, 512]),
-        zoombehavior = d3.behavior.zoom()
+        zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
@@ -53,7 +53,7 @@ iD.Map = function(elem, connection) {
         //     r (vector root)
         //       g (fill, casing, stroke, text, hit, temp)
         //         (path, g, marker, etc)
-        supersurface = parent.append('div').call(zoombehavior),
+        supersurface = parent.append('div').call(zoom),
         surface = supersurface.append('svg'),
         defs = surface.append('defs'),
         tilegroup = surface.append('g')
@@ -387,9 +387,13 @@ iD.Map = function(elem, connection) {
 
     function zoomPan() {
         var fast = (d3.event.scale === projection.scale());
-        projection
-            .translate(d3.event.translate)
-            .scale(d3.event.scale);
+        if (d3.event && d3.event.sourceEvent.type === "dblclick") {
+            dblclick.call(this);
+        } else {
+            projection
+                .translate(d3.event.translate)
+                .scale(d3.event.scale);
+        }
         if (fast) {
             if (!translateStart) translateStart = d3.event.translate.slice();
             var a = d3.event.translate,
@@ -400,6 +404,17 @@ iD.Map = function(elem, connection) {
             redraw();
             translateStart = null;
         }
+    }
+
+    function dblclick() {
+        var p = d3.mouse(this),
+            translate = projection.translate(),
+            scale0 = projection.scale(),
+            scale1 = Math.pow(2, Math.floor(Math.log(scale0) / Math.LN2) + 1);
+        projection.scale(scale1).translate([
+            p[0] - (p[0] - translate[0]) / scale0 * scale1,
+            p[1] - (p[1] - translate[1]) / scale0 * scale1
+        ]);
     }
 
     surface.on('mouseup', function() {
@@ -467,20 +482,20 @@ iD.Map = function(elem, connection) {
         return [dimensions[0] / 2, dimensions[0] / 2];
     }
 
-    function setZoom(zoom) {
+    function setZoom(z) {
         // summary:	Redraw the map at a new zoom level.
-        var scale = 256 * Math.pow(2, zoom - 1);
+        var scale = 256 * Math.pow(2, z - 1);
         var center = pxCenter();
         var l = pointLocation(center);
         projection.scale(scale);
-        zoombehavior.scale(projection.scale());
+        zoom.scale(projection.scale());
 
         var t = projection.translate();
         l = locationPoint(l);
         t[0] += center[0] - l[0];
         t[1] += center[1] - l[1];
         projection.translate(t);
-        zoombehavior.translate(projection.translate());
+        zoom.translate(projection.translate());
 
         redraw();
         return map;
@@ -497,7 +512,7 @@ iD.Map = function(elem, connection) {
             ll = projection(loc);
         projection.translate([
             t[0] - ll[0] + center[0], t[1] - ll[1] + center[1]]);
-        zoombehavior.translate(projection.translate());
+        zoom.translate(projection.translate());
         redraw();
         return map;
     }
