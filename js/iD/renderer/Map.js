@@ -287,6 +287,7 @@ iD.Map = function(elem, connection) {
         var attr = { width: dimensions[0], height: dimensions[1] };
         surface.attr(attr).selectAll('#clip-rect').attr(attr);
         tileclient.setSize(dimensions);
+        return map;
     }
 
     function tileAtZoom(t, distance) {
@@ -412,6 +413,10 @@ iD.Map = function(elem, connection) {
             scale0 = projection.scale(),
             scale1 = Math.pow(2, Math.floor(Math.log(scale0) / Math.LN2) + 1);
         projection.scale(scale1).translate([
+            p[0] - (p[0] - translate[0]) / scale0 * scale1,
+            p[1] - (p[1] - translate[1]) / scale0 * scale1
+        ]);
+        zoom.scale(scale1).translate([
             p[0] - (p[0] - translate[0]) / scale0 * scale1,
             p[1] - (p[1] - translate[1]) / scale0 * scale1
         ]);
