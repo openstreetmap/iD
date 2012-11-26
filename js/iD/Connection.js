@@ -97,12 +97,12 @@ iD.Connection = function() {
         return oauth.authenticated();
     }
 
-    function createChangeset(changes) {
+    function putChangeset(changes, comment, callback) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: iD.format.XML.changeset()
+                content: iD.format.XML.changeset(comment)
             },
             function (changeset_id) {
                 oauth.xhr({
@@ -115,7 +115,7 @@ iD.Connection = function() {
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close'
                     }, function () {
-                        alert('saved! ' + apiURL.replace('/api/0.6', '/browse') + '/changeset/' + changeset_id);
+                        callback(changeset_id);
                     });
                 });
             });
@@ -155,7 +155,7 @@ iD.Connection = function() {
     connection.userDetails = userDetails;
     connection.authenticate = authenticate;
     connection.authenticated = authenticated;
-    connection.createChangeset = createChangeset;
+    connection.putChangeset = putChangeset;
 
     connection.objectData = objectData;
     connection.apiURL = apiURL;

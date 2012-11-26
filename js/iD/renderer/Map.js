@@ -503,7 +503,7 @@ iD.Map = function(elem, connection) {
     }
 
     function commit() {
-        connection.createChangeset(history.changes());
+        connection.putChangeset(history.changes());
     }
 
     map.download = download;

@@ -227,3 +227,35 @@ button small {
     position:fixed;
     left:0px; right:0px; top:0px; bottom:0px;
 }
+
+.commit-pane h2 {
+    font: bold 24px/40px 'Helvetica';
+}
+
+.commit-pane h3 small.count {
+    font: normal 12px/40px 'Helvetica';
+    border-radius:20px;
+    padding:5px;
+    background:#555;
+    margin-left:10px;
+    color:#fff;
+}
+
+.commit-pane h3 {
+    font: bold 18px/30px 'Helvetica';
+}
+
+.commit-pane ul {
+    border-bottom:1px solid #ccc;
+    background:#fff;
+}
+
+.commit-pane li {
+    border-top:1px solid #ccc;
+    padding:2px 10px;
+}
+
+.commit-pane .changeset-comment {
+    width:630px;
+    font-size:100%;
+}
