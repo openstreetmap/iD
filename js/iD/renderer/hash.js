@@ -5,7 +5,13 @@ iD.Hash = function() {
         hadHash,
         map;
 
-    var qs = function(a,b,c,d,e){for(b=/[?&]?([^=]+)=([^&]*)/g,c={},e=decodeURIComponent;d=b.exec(a.replace(/\+/g,' '));c[e(d[1])]=e(d[2]));return c;};
+    function qs(str) {
+        return str.split('&').reduce(function(obj, pair){
+            var parts = pair.split('=');
+            obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
+            return obj;
+        }, {});
+    }
 
     var parser = function(map, s) {
         var q = qs(s);
