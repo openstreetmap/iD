@@ -1,5 +1,5 @@
 iD.Connection = function() {
-    var apiURL = 'http://www.openstreetmap.org/api/0.6/',
+    var apiURL = 'http://www.openstreetmap.org/api/0.6',
         connection = {},
         refNodes = {},
         user = {},
@@ -7,13 +7,13 @@ iD.Connection = function() {
 
     // Request data within the bbox from an external OSM server.
     function bboxFromAPI(box, callback) {
-        loadFromURL(apiURL + 'map?bbox=' +
+        loadFromURL(apiURL + '/map?bbox=' +
             [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
     }
 
     // Request data within the bbox from an external OSM server.
     function wayFromAPI(id, callback) {
-        loadFromURL(apiURL + 'way/' + id + '/full', callback);
+        loadFromURL(apiURL + '/way/' + id + '/full', callback);
     }
 
     function loadFromURL(url, callback) {
@@ -115,7 +115,7 @@ iD.Connection = function() {
                         method: 'PUT',
                         path: '/changeset/' + changeset_id + '/close'
                     }, function () {
-                        alert('saved! ' + apiURL.replace('/api/0.6/', '/browse') + '/changeset/' + changeset_id);
+                        alert('saved! ' + apiURL.replace('/api/0.6', '/browse') + '/changeset/' + changeset_id);
                     });
                 });
             });
