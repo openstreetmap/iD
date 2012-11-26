@@ -516,10 +516,7 @@ iD.Map = function(elem, connection) {
     }
 
     function commit() {
-        connection.createChangeset({
-            modified: history.graph().modifications(),
-            created: history.graph().creations()
-        });
+        connection.createChangeset(history.changes());
     }
 
     map.download = download;

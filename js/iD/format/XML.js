@@ -12,6 +12,7 @@ iD.format.XML = {
     decode: function(s) {
         return s.replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
     },
+    // Generate Changeset XML. Returns a string.
     changeset: function(comment) {
         return (new XMLSerializer()).serializeToString(
         JXON.unbuild({
@@ -27,21 +28,28 @@ iD.format.XML = {
             }
         }));
     },
-    osmChange: function(userid, changeset, changes) {
+    // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
+    // XML. Returns a string.
+    osmChange: function(userid, changeset_id, changes) {
         return (new XMLSerializer()).serializeToString(
         JXON.unbuild({
             osmChange: {
                 '@version': 0.3,
                 '@generator': 'iD',
                 // TODO: copy elements first
-                create: changes.created.map(function(c) {
+                create: changes.create.map(function(c) {
                     var x = Object.create(c);
-                    x.changeset = changeset;
+                    x.changeset = changeset_id;
                     return x;
                 }).map(iD.format.XML.rep),
-                modify: changes.modified.map(function(c) {
+                modify: changes.modify.map(function(c) {
                     var x = Object.create(c);
-                    x.changeset = changeset;
+                    x.changeset = changeset_id;
+                    return x;
+                }).map(iD.format.XML.rep),
+                'delete': changes['delete'].map(function(c) {
+                    var x = Object.create(c);
+                    x.changeset = changeset_id;
                     return x;
                 }).map(iD.format.XML.rep)
             }
@@ -71,9 +79,7 @@ iD.format.XML = {
                         return { keyAttributes: { ref: e.id } };
                     }),
                     tag: _.map(entity.tags, function(v, k) {
-                        return {
-                            keyAttributes: { k: k, v: v }
-                        };
+                        return { keyAttributes: { k: k, v: v } };
                     })
                 }
             };

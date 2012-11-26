@@ -94,4 +94,5 @@ iD.Graph.prototype = {
             return ((+entity.id.slice(1)) < 0) && entity.modified;
         });
     }
+
 };

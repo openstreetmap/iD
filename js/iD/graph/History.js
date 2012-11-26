@@ -56,23 +56,28 @@ iD.History.prototype = {
         }
     },
 
-    modified: function() {
+    modify: function() {
         return this.stack[this.index].creations();
     },
 
-    created: function() {
+    create: function() {
         return this.stack[this.index].creations();
     },
 
-    deleted: function() {
-        // return this.stack[this.index].();
+    'delete': function() {
+        return _.difference(
+            _.pluck(this.stack[0].entities, 'id'),
+            _.pluck(this.stack[this.index].entities, 'id')
+            ).map(function(id) {
+                return this.stack[0].entity(id);
+            }.bind(this));
     },
 
     changes: function() {
         return {
-            modified: this.modified(),
-            created: this.created(),
-            deleted: this.deleted()
+            modify: this.modify(),
+            create: this.create(),
+            'delete': this['delete']()
         };
     }
 };
