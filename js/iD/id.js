@@ -5,7 +5,7 @@ var iD = function(container) {
         .attr('id', 'map');
 
     var connection = iD.Connection()
-        .url('http://api06.dev.openstreetmap.org/api/0.6');
+        .url('http://api06.dev.openstreetmap.org');
 
     var map = iD.Map(m.node(), connection);
 
@@ -58,8 +58,13 @@ var iD = function(container) {
     bar.append('div')
         .attr('class', 'messages');
 
+    bar.append('div')
+        .attr('class', 'user')
+        .append('div')
+        .attr('class', 'hello');
+
     bar.append('button')
-        .attr('id', 'save')
+        .attr('class', 'save')
         .html("Save<small id='as-username'></small>")
         .on('click', function() {
             connection.authenticate(function() {
@@ -129,7 +134,11 @@ var iD = function(container) {
     if (connection.authenticated()) {
         connection.userDetails(function(user_details) {
             connection.user(user_details);
-            d3.select('.messages').text('logged in as ' + user_details.display_name);
+            d3.select('.user .hello').text('hi, ')
+            .append('a')
+                .attr('href', connection.url() + '/user/' + user_details.display_name)
+                .attr('target', '_blank')
+                .text(user_details.display_name);
         });
     }
 };

@@ -1,6 +1,6 @@
 iD.OAuth = function() {
     var baseurl = 'http://api06.dev.openstreetmap.org',
-        apibase = 'http://api06.dev.openstreetmap.org/api/0.6',
+        apibase = 'http://api06.dev.openstreetmap.org',
         oauth_secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p',
         oauth = {};
 
@@ -8,6 +8,8 @@ iD.OAuth = function() {
         oauth_consumer_key: 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
         oauth_signature_method: 'HMAC-SHA1'
     };
+
+    function keyclean(x) { return x.replace(/\W/g, ''); }
 
     if (localStorage.oauth_token) {
         o.oauth_token = localStorage.oauth_token;
@@ -19,19 +21,30 @@ iD.OAuth = function() {
         return o;
     }
 
+    function token(k, x) {
+        if (arguments.length == 2) {
+            localStorage[keyclean(apibase) + k] = x;
+        }
+        return localStorage[keyclean(apibase) + k];
+    }
+
     oauth.authenticated = function() {
-        return localStorage.oauth_token &&
-            localStorage.oauth_token_secret;
+        return token('oauth_token') && token('oauth_token_secret');
+    };
+
+    oauth.logout = function() {
+        token('oauth_token', '');
+        token('oauth_token_secret', '');
+        return ouath;
     };
 
     oauth.xhr = function(options, callback) {
-        if (localStorage.oauth_token) {
-            o.oauth_token = localStorage.oauth_token;
+        if (token('oauth_token')) {
+            o.oauth_token = token('oauth_token');
         }
         o = timenonce(o);
         var url = apibase + options.path;
-        console.log(apibase, options.path);
-        var oauth_token_secret = localStorage.oauth_token_secret;
+        var oauth_token_secret = token('oauth_token_secret');
         o.oauth_signature = ohauth.signature(oauth_secret, oauth_token_secret,
             ohauth.baseString(options.method, url, o));
         ohauth.xhr(options.method, url, o, options.content, options.options, function(xhr) {
@@ -44,10 +57,11 @@ iD.OAuth = function() {
         // TODO: deal with changing the api endpoint
         if (oauth.authenticated()) return callback();
 
-        var d = d3.select(document.body)
-            .append('div').attr('class', 'modal'),
-            ifr = d.append('iframe')
-                .attr({ width: 640, height: 550, frameborder: 'no' });
+        var shaded = d3.select(document.body)
+            .append('div').attr('class', 'shaded');
+        var modal = shaded.append('div').attr('class', 'modal');
+        var ifr = modal.append('iframe')
+            .attr({ width: 640, height: 550, frameborder: 'no' });
 
         o = timenonce(o);
         var url = baseurl + '/oauth/request_token';
@@ -55,11 +69,11 @@ iD.OAuth = function() {
             ohauth.baseString('POST', url, o));
 
         ohauth.xhr('POST', url, o, null, {}, function(xhr) {
-            var token = ohauth.stringQs(xhr.response);
-            localStorage.oauth_request_token_secret = token.oauth_token_secret;
+            var resp = ohauth.stringQs(xhr.response);
+            token('oauth_request_token_secret', resp.oauth_token_secret);
             var at = baseurl + '/oauth/authorize?';
             ifr.attr('src', at + ohauth.qsString({
-                oauth_token: token.oauth_token, oauth_callback: location.href
+                oauth_token: resp.oauth_token, oauth_callback: location.href
             }));
         });
         ifr.on('load', function() {
@@ -68,16 +82,16 @@ iD.OAuth = function() {
                     oauth_token = ohauth.stringQs(search.slice(1)),
                     url = baseurl + '/oauth/access_token';
                 o = timenonce(o);
-                d.remove();
+                shaded.remove();
 
                 o.oauth_token = oauth_token.oauth_token;
-                var request_token_secret = localStorage.oauth_request_token_secret;
+                var request_token_secret = token('oauth_request_token_secret');
                 o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
                     ohauth.baseString('POST', url, o));
                 ohauth.xhr('POST', url, o, null, {}, function(xhr) {
                     var access_token = ohauth.stringQs(xhr.response);
-                    localStorage.oauth_token = access_token.oauth_token;
-                    localStorage.oauth_token_secret = access_token.oauth_token_secret;
+                    token('oauth_token', access_token.oauth_token);
+                    token('oauth_token_secret', access_token.oauth_token_secret);
                     callback();
                 });
             }

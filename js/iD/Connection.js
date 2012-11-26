@@ -1,5 +1,5 @@
 iD.Connection = function() {
-    var apiURL = 'http://www.openstreetmap.org/api/0.6',
+    var apiURL = 'http://www.openstreetmap.org',
         connection = {},
         refNodes = {},
         user = {},
@@ -7,13 +7,13 @@ iD.Connection = function() {
 
     // Request data within the bbox from an external OSM server.
     function bboxFromAPI(box, callback) {
-        loadFromURL(apiURL + '/map?bbox=' +
+        loadFromURL(apiURL + '/api/0.6/map?bbox=' +
             [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
     }
 
     // Request data within the bbox from an external OSM server.
     function wayFromAPI(id, callback) {
-        loadFromURL(apiURL + '/way/' + id + '/full', callback);
+        loadFromURL(apiURL + '/api/0.6/way/' + id + '/full', callback);
     }
 
     function loadFromURL(url, callback) {
@@ -100,20 +100,20 @@ iD.Connection = function() {
     function createChangeset(changes) {
         oauth.xhr({
                 method: 'PUT',
-                path: '/changeset/create',
+                path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
                 content: iD.format.XML.changeset()
             },
             function (changeset_id) {
                 oauth.xhr({
                     method: 'POST',
-                    path: '/changeset/' + changeset_id + '/upload',
+                    path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
                     content: iD.format.XML.osmChange(user.id, changeset_id, changes)
                 }, function () {
                     oauth.xhr({
                         method: 'PUT',
-                        path: '/changeset/' + changeset_id + '/close'
+                        path: '/api/0.6/changeset/' + changeset_id + '/close'
                     }, function () {
                         alert('saved! ' + apiURL.replace('/api/0.6', '/browse') + '/changeset/' + changeset_id);
                     });
@@ -122,7 +122,7 @@ iD.Connection = function() {
     }
 
     function userDetails(callback) {
-        oauth.xhr({ method: 'GET', path: '/user/details' }, function(user_details) {
+        oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, function(user_details) {
             var u = user_details.getElementsByTagName('user')[0];
             callback({
                 display_name: u.attributes.display_name.nodeValue,

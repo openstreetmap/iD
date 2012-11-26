@@ -82,6 +82,16 @@ input[type=text]:focus {
     right:200px;
     top:0;
     padding:10px;
+    overflow:hidden;
+    width:100px;
+}
+
+#bar .user {
+    width:200px;
+    position:absolute;
+    right:300px;
+    top:0;
+    padding:10px;
 }
 
 #bar button[disabled] {
@@ -98,7 +108,7 @@ input[type=text]:focus {
     color:#000;
 }
 
-#bar button#save {
+#bar button.save {
     position:absolute;
     top:0;
     right:100px;
@@ -209,4 +219,11 @@ button small {
     left:50%;
     margin-left:-330px;
     box-shadow:0 0 5px #000;
+}
+
+.shaded:before {
+    content:'';
+    background:rgba(0,0,0,0.5);
+    position:fixed;
+    left:0px; right:0px; top:0px; bottom:0px;
 }
