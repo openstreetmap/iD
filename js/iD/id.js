@@ -18,21 +18,21 @@ var iD = function(container) {
         .attr('id', 'place')
         .html('+&nbsp;Place')
         .on('click', function() {
-            controller.go(iD.actions.AddPlace);
+            controller.enter(iD.modes.AddPlace);
         });
 
     bar.append('button')
         .attr('id', 'road')
         .html('+&nbsp;Road')
         .on('click', function() {
-            controller.go(iD.actions.AddRoad);
+            controller.enter(iD.modes.AddRoad);
         });
 
     bar.append('button')
         .attr('id', 'area')
         .html('+&nbsp;Area')
         .on('click', function() {
-            controller.go(iD.actions.AddArea);
+            controller.enter(iD.modes.AddArea);
         });
 
     bar.append('button')
@@ -135,11 +135,11 @@ var iD = function(container) {
             map.redo();
         }
         // p
-        if (d3.event.which === 80) controller.go(iD.actions.AddPlace);
+        if (d3.event.which === 80) controller.enter(iD.modes.AddPlace);
         // r
-        if (d3.event.which === 82) controller.go(iD.actions.AddRoad);
+        if (d3.event.which === 82) controller.enter(iD.modes.AddRoad);
         // a
-        if (d3.event.which === 65) controller.go(iD.actions.AddArea);
+        if (d3.event.which === 65) controller.enter(iD.modes.AddArea);
     });
 
     var hash = iD.Hash().map(map);
