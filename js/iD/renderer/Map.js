@@ -451,7 +451,7 @@ iD.Map = function(elem, connection) {
 
     function perform(action) {
         history.perform(action);
-        map.update();
+        update();
     }
 
     function _do(operation) {
