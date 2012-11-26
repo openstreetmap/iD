@@ -144,6 +144,11 @@ iD.Connection = function() {
         return connection;
     };
 
+    connection.logout = function() {
+        oauth.logout();
+        return connection;
+    };
+
     connection.bboxFromAPI = bboxFromAPI;
     connection.wayFromAPI = wayFromAPI;
     connection.loadFromURL = loadFromURL;

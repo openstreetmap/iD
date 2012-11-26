@@ -35,7 +35,7 @@ iD.OAuth = function() {
     oauth.logout = function() {
         token('oauth_token', '');
         token('oauth_token_secret', '');
-        return ouath;
+        return oauth;
     };
 
     oauth.xhr = function(options, callback) {

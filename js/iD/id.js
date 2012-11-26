@@ -134,11 +134,19 @@ var iD = function(container) {
     if (connection.authenticated()) {
         connection.userDetails(function(user_details) {
             connection.user(user_details);
-            d3.select('.user .hello').text('hi, ')
-            .append('a')
-                .attr('href', connection.url() + '/user/' + user_details.display_name)
-                .attr('target', '_blank')
-                .text(user_details.display_name);
+            d3.select('.user').html('');
+            d3.select('.user')
+                .append('span')
+                .text('signed in as ')
+                .append('a')
+                    .attr('href', connection.url() + '/user/' + user_details.display_name)
+                    .attr('target', '_blank')
+                    .text(user_details.display_name);
+            d3.select('.user')
+                .append('a')
+                .attr('class', 'logout')
+                .text('logout')
+                .on('click', connection.logout);
         });
     }
 };
