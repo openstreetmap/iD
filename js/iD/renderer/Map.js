@@ -262,7 +262,7 @@ iD.Map = function(elem, connection) {
         labels.exit().remove();
         var tp = labels.enter()
             .append('text')
-            .attr({ 'class': 'oneway', 'dy': 4 })
+            .attr({ 'class': 'oneway', dy: 4 })
             .append('textPath');
         tp.attr('letter-spacing', alength * 4)
             .attr('xlink:href', function(d, i) { return '#shadow-' + i; })
@@ -303,10 +303,7 @@ iD.Map = function(elem, connection) {
 
     function setSize(x) {
         dimensions = x;
-        var attr = {
-            width: dimensions[0],
-            height: dimensions[1]
-        };
+        var attr = { width: dimensions[0], height: dimensions[1] };
         surface.attr(attr).selectAll('#clip-rect').attr(attr);
         tileclient.setSize(dimensions);
     }
@@ -471,9 +468,7 @@ iD.Map = function(elem, connection) {
     // of a centerpoint and a zoom level. Zoom levels are floating-point
     // values, and we express lat, lon points as `{ lat, lon }` objects.
     function getExtent() {
-        return [
-            projection.invert([0, 0]),
-            projection.invert(dimensions)];
+        return [projection.invert([0, 0]), projection.invert(dimensions)];
     }
 
     function pointLocation(p) {
@@ -492,17 +487,22 @@ iD.Map = function(elem, connection) {
         return Math.max(Math.log(projection.scale()) / Math.log(2) - 7, 0);
     }
 
+    function pxCenter() {
+        return [dimensions[0] / 2, dimensions[0] / 2];
+    }
+
     function setZoom(zoom) {
         // summary:	Redraw the map at a new zoom level.
         var scale = 256 * Math.pow(2, zoom - 1);
-        var l = pointLocation([dimensions[0] / 2, dimensions[0] / 2]);
+        var center = pxCenter();
+        var l = pointLocation(center);
         projection.scale(scale);
         zoombehavior.scale(projection.scale());
 
         var t = projection.translate();
         l = locationPoint(l);
-        t[0] += (dimensions[0] / 2) - l[0];
-        t[1] += (dimensions[1] / 2) - l[1];
+        t[0] += center[0] - l[0];
+        t[1] += center[1] - l[1];
         projection.translate(t);
         zoombehavior.translate(projection.translate());
 
@@ -512,20 +512,15 @@ iD.Map = function(elem, connection) {
 
     function zoomIn() { return setZoom(Math.ceil(getZoom() + 1)); }
     function zoomOut() { return setZoom(Math.floor(getZoom() - 1)); }
-
-    function getCenter() {
-        return a2ll(projection.invert([
-            dimensions[0] / 2,
-            dimensions[1] / 2]));
-    }
+    function getCenter() { return projection.invert(pxCenter()); }
 
     function setCenter(loc) {
         // summary:		Update centre and bbox to a specified lat/lon.
         var t = projection.translate(),
-        ll = projection([loc.lon, loc.lat]);
+            center = pxCenter();
+            ll = projection(loc);
         projection.translate([
-            t[0] - ll[0] + dimensions[0] / 2,
-            t[1] - ll[1] + dimensions[1] / 2]);
+            t[0] - ll[0] + center[0], t[1] - ll[1] + center[1]]);
         zoombehavior.translate(projection.translate());
         redraw();
         return map;

@@ -107,10 +107,7 @@ var iD = function(container) {
     });
 
     window.onresize = function() {
-        map.setSize({
-            width: m.node().offsetWidth,
-            height: m.node().offsetHeight
-        });
+        map.setSize([m.node().offsetWidth, m.node().offsetHeight]);
     };
 
     d3.select(document).on('keydown', function() {
@@ -132,12 +129,7 @@ var iD = function(container) {
     });
 
     var hash = iD.Hash().map(map);
-    if (!hash.hadHash) {
-        map.setZoom(19).setCenter({
-            lat: 51.87502,
-            lon: -1.49475
-        });
-    }
+    if (!hash.hadHash) map.setZoom(19).setCenter([-1.49475, 51.87502]);
 
     if (connection.authenticated()) {
         connection.userDetails(function(user_details) {

@@ -19,8 +19,8 @@ iD.Hash = function() {
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
         } else {
-            map.setZoom(args[0]);
-            map.setCenter({lat: Math.min(lat, Math.max(-lat, args[1])), lon: args[2]});
+            map.setZoom(args[0])
+                .setCenter([args[2], Math.min(lat, Math.max(-lat, args[1]))]);
         }
     };
 
@@ -29,8 +29,8 @@ iD.Hash = function() {
         zoom = map.getZoom(),
         precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
         return '#?map=' + zoom.toFixed(2) +
-            '/' + center.lat.toFixed(precision) +
-            '/' + center.lon.toFixed(precision);
+            '/' + center[1].toFixed(precision) +
+            '/' + center[0].toFixed(precision);
     };
 
     var move = _.throttle(function() {
