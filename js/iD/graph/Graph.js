@@ -5,9 +5,7 @@ iD.Graph = function(entities, annotation) {
         // TODO: update extents that need it.
         if (this.entities[id].type === 'way' && !this.entities[id]._extent) {
             // top left, bottom right
-            var extent = [
-                [-Infinity, Infinity],
-                [Infinity, -Infinity]];
+            var extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
             var w = this.fetch(id);
             for (var j = 0, l = w.nodes.length; j < l; j++) {
                 if (w.nodes[j].lon > extent[0][0]) extent[0][0] = w.nodes[j].lon;
@@ -76,9 +74,8 @@ iD.Graph.prototype = {
 
     // Resolve the id references in a way, replacing them with actual objects.
     fetch: function(id) {
-        var entity = iD.Entity(this.entities[id]);
+        var entity = iD.Entity(this.entities[id]), nodes = [];
         if (!entity.nodes || !entity.nodes.length) return entity;
-        var nodes = [];
         for (var i = 0, l = entity.nodes.length; i < l; i++) {
             nodes[i] = this.fetch(entity.nodes[i]);
         }
@@ -88,7 +85,13 @@ iD.Graph.prototype = {
 
     modifications: function() {
         return _.filter(this.entities, function(entity) {
-            return entity.modified;
+            return (entity.id > 0) && entity.modified;
+        });
+    },
+
+    creations: function() {
+        return _.filter(this.entities, function(entity) {
+            return (entity.id < 0) && entity.modified;
         });
     }
 };

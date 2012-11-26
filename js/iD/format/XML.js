@@ -27,14 +27,19 @@ iD.format.XML = {
             }
         }));
     },
-    osmChange: function(userid, changeset, created) {
+    osmChange: function(userid, changeset, changes) {
         return (new XMLSerializer()).serializeToString(
         JXON.unbuild({
             osmChange: {
                 '@version': 0.3,
                 '@generator': 'iD',
                 // TODO: copy elements first
-                'create': created.map(function(c) {
+                create: changes.created.map(function(c) {
+                    var x = Object.create(c);
+                    x.changeset = changeset;
+                    return x;
+                }).map(iD.format.XML.rep),
+                modify: changes.modified.map(function(c) {
                     var x = Object.create(c);
                     x.changeset = changeset;
                     return x;

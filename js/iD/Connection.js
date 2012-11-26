@@ -97,7 +97,7 @@ iD.Connection = function() {
         return oauth.authenticated();
     }
 
-    function createChangeset(modified) {
+    function createChangeset(changes) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/changeset/create',
@@ -109,7 +109,7 @@ iD.Connection = function() {
                     method: 'POST',
                     path: '/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
-                    content: iD.format.XML.osmChange(user.id, changeset_id, modified)
+                    content: iD.format.XML.osmChange(user.id, changeset_id, changes)
                 }, function () {
                     oauth.xhr({
                         method: 'PUT',
