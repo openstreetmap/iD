@@ -43,7 +43,7 @@ iD.Tiles = function(selection, projection) {
     }
 
     function setSize(x) {
-        tile.size([x.width, x.height]);
+        tile.size(x);
         redraw();
         return t;
     }

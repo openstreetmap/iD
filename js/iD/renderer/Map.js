@@ -9,7 +9,7 @@ iD.Map = function(elem, connection) {
     }
 
     var map = {},
-        dimensions = { width: null, height: null },
+        dimensions = [],
         dispatch = d3.dispatch('move', 'update'),
         history = iD.History(),
         inspector = iD.Inspector(),
@@ -302,8 +302,12 @@ iD.Map = function(elem, connection) {
     }
 
     function setSize(x) {
-        surface.attr(dimensions = x);
-        surface.selectAll('#clip-rect').attr(dimensions);
+        dimensions = x;
+        var attr = {
+            width: dimensions[0],
+            height: dimensions[1]
+        };
+        surface.attr(attr).selectAll('#clip-rect').attr(attr);
         tileclient.setSize(dimensions);
     }
 
@@ -332,9 +336,9 @@ iD.Map = function(elem, connection) {
             tile_origin = [s / 2 - t[0], s / 2 - t[1]],
             coords = [],
             cols = d3.range(Math.max(0, Math.floor(tile_origin[0] / ts)),
-                            Math.max(0, Math.ceil((tile_origin[0] +  dimensions.width) / ts))),
+                            Math.max(0, Math.ceil((tile_origin[0] +  dimensions[0]) / ts))),
             rows = d3.range(Math.max(0, Math.floor(tile_origin[1] / ts)),
-                            Math.max(0, Math.ceil((tile_origin[1] +  dimensions.height) / ts)));
+                            Math.max(0, Math.ceil((tile_origin[1] +  dimensions[1]) / ts)));
 
         cols.forEach(function(x) {
             rows.forEach(function(y) {
@@ -469,7 +473,7 @@ iD.Map = function(elem, connection) {
     function getExtent() {
         return [
             projection.invert([0, 0]),
-            projection.invert([dimensions.width, dimensions.height])];
+            projection.invert(dimensions)];
     }
 
     function pointLocation(p) {
@@ -491,14 +495,14 @@ iD.Map = function(elem, connection) {
     function setZoom(zoom) {
         // summary:	Redraw the map at a new zoom level.
         var scale = 256 * Math.pow(2, zoom - 1);
-        var l = pointLocation([dimensions.width / 2, dimensions.height / 2]);
+        var l = pointLocation([dimensions[0] / 2, dimensions[0] / 2]);
         projection.scale(scale);
         zoombehavior.scale(projection.scale());
 
         var t = projection.translate();
         l = locationPoint(l);
-        t[0] += (dimensions.width / 2) - l[0];
-        t[1] += (dimensions.height / 2) - l[1];
+        t[0] += (dimensions[0] / 2) - l[0];
+        t[1] += (dimensions[1] / 2) - l[1];
         projection.translate(t);
         zoombehavior.translate(projection.translate());
 
@@ -511,8 +515,8 @@ iD.Map = function(elem, connection) {
 
     function getCenter() {
         return a2ll(projection.invert([
-            dimensions.width / 2,
-            dimensions.height / 2]));
+            dimensions[0] / 2,
+            dimensions[1] / 2]));
     }
 
     function setCenter(loc) {
@@ -520,8 +524,8 @@ iD.Map = function(elem, connection) {
         var t = projection.translate(),
         ll = projection([loc.lon, loc.lat]);
         projection.translate([
-            t[0] - ll[0] + dimensions.width / 2,
-            t[1] - ll[1] + dimensions.height / 2]);
+            t[0] - ll[0] + dimensions[0] / 2,
+            t[1] - ll[1] + dimensions[1] / 2]);
         zoombehavior.translate(projection.translate());
         redraw();
         return map;
@@ -562,7 +566,7 @@ iD.Map = function(elem, connection) {
 
     map.commit = commit;
 
-    setSize({ width: parent.node().offsetWidth, height: parent.node().offsetHeight });
+    setSize([parent.node().offsetWidth, parent.node().offsetHeight]);
     hideInspector();
     redraw();
 
