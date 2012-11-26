@@ -1,4 +1,4 @@
-!(function(context) {
+!(function(context, $) {
     var h = {};
 
     // Make inheritance bearable: clone one level of properties
@@ -85,7 +85,21 @@
 
     this.happen = h;
 
+    // Export for nodejs
     if (typeof module !== 'undefined') {
         module.exports = this.happen;
     }
-})(this);
+
+    // Provide jQuery plugin
+    if ($ && $.fn) {
+        $.fn.happen = function(o) {
+            if (typeof o === 'string') {
+                o = { type: o };
+            }
+            for (var i = 0; i < this.length; i++) {
+                happen.once(this[i], o);
+            }
+            return this;
+        };
+    }
+})(this, (typeof jQuery !== 'undefined') ? jQuery : null);
