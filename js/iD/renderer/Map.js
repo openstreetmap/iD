@@ -1,13 +1,5 @@
 iD.Map = function(elem, connection) {
 
-    if (!iD.supported()) {
-        elem.innerHTML = 'This editor is supported in Firefox, Chrome, Safari, Opera, ' +
-            'and Internet Explorer 9 and above. Please upgrade your browser ' +
-            'or use Potlatch 2 to edit the map.';
-        elem.style.cssText = 'text-align:center;font-style:italic;';
-        return;
-    }
-
     var map = {},
         dimensions = [],
         dispatch = d3.dispatch('move', 'update'),
@@ -451,11 +443,6 @@ iD.Map = function(elem, connection) {
         update();
     }
 
-    // Getters & setters for map state
-    // -------------------------------
-    // The map state can be expressed entirely as the combination
-    // of a centerpoint and a zoom level. Zoom levels are floating-point
-    // values, and we express lat, lon points as `{ lat, lon }` objects.
     function getExtent() {
         return [projection.invert([0, 0]), projection.invert(dimensions)];
     }

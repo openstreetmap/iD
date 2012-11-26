@@ -1,4 +1,13 @@
 var iD = function(container) {
+
+    if (!iD.supported()) {
+        container.innerHTML = 'This editor is supported in Firefox, Chrome, Safari, Opera, ' +
+            'and Internet Explorer 9 and above. Please upgrade your browser ' +
+            'or use Potlatch 2 to edit the map.';
+        container.style.cssText = 'text-align:center;font-style:italic;';
+        return;
+    }
+
     container = d3.select(container);
 
     var m = container.append('div')
