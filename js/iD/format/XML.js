@@ -63,7 +63,6 @@ iD.format.XML = {
                     '@lat': entity.lat, '@lon': entity.lon,
                     '@version': (entity.version || 0),
                     tag: _.map(entity.tags, function(v, k) {
-                        console.log(k, v);
                         return { keyAttributes: { k: k, v: v } };
                     })
                 }
