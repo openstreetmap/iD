@@ -16,10 +16,8 @@ iD.modes._node = function(ll) {
 };
 
 iD.modes.AddPlace = {
+    title: "+ Place",
     enter: function() {
-        d3.selectAll('button').classed('active', false);
-        d3.selectAll('button#place').classed('active', true);
-
         var surface = this.map.surface;
         var teaser = surface.selectAll('g#temp-g')
             .append('g').attr('id', 'addplace');
@@ -54,11 +52,11 @@ iD.modes.AddPlace = {
         this.map.surface.on('click.addplace', null);
         d3.select(document).on('keydown.addplace', null);
         d3.selectAll('#addplace').remove();
-        d3.selectAll('button#place').classed('active', false);
     }
 };
 
 iD.modes.AddRoad = {
+    title: "+ Road",
     way: function(ll) {
         return iD.Entity({
             type: 'way',
@@ -71,9 +69,6 @@ iD.modes.AddRoad = {
         });
     },
     enter: function() {
-        d3.selectAll('button').classed('active', false);
-        d3.selectAll('button#road').classed('active', true);
-
         var surface = this.map.surface;
         this.map.handleDrag(false);
         var teaser = surface.selectAll('g#temp-g')
@@ -120,7 +115,6 @@ iD.modes.AddRoad = {
         this.map.handleDrag(true);
         d3.select(document).on('keydown.addroad', null);
         d3.selectAll('#addroad').remove();
-        d3.selectAll('button#road').classed('active', false);
     }
 };
 
@@ -184,6 +178,7 @@ iD.modes.DrawRoad = function(way) {
 };
 
 iD.modes.AddArea = {
+    title: "+ Area",
     way: function(ll) {
         return iD.Entity({
             type: 'way',
@@ -196,9 +191,6 @@ iD.modes.AddArea = {
         });
     },
     enter: function() {
-        d3.selectAll('button').classed('active', false);
-        d3.selectAll('button#area').classed('active', true);
-
         var surface = this.map.surface;
         var teaser = surface.selectAll('g#temp-g')
             .append('g').attr('id', 'addroad');
@@ -236,7 +228,6 @@ iD.modes.AddArea = {
         this.map.surface.on('mousemove.addarea', null);
         d3.select(document).on('keydown.addarea', null);
         d3.selectAll('#addroad').remove();
-        d3.selectAll('button#area').classed('active', false);
     }
 };
 
@@ -296,8 +287,6 @@ iD.modes.DrawArea = function(way) {
 };
 
 iD.modes.Move = {
-    enter: function() {
-        d3.selectAll('button').classed('active', false);
-    },
+    enter: function() { },
     exit: function() { }
 };

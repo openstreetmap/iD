@@ -14,26 +14,15 @@ var iD = function(container) {
     var bar = container.append('div')
         .attr('id', 'bar');
 
-    bar.append('button')
-        .attr('id', 'place')
-        .html('+&nbsp;Place')
-        .on('click', function() {
-            controller.enter(iD.modes.AddPlace);
-        });
+    var buttons = bar.selectAll('button')
+        .data([iD.modes.AddPlace, iD.modes.AddRoad, iD.modes.AddArea])
+        .enter().append('button')
+        .text(function (mode) { return mode.title; })
+        .on('click', function (mode) { controller.enter(mode); });
 
-    bar.append('button')
-        .attr('id', 'road')
-        .html('+&nbsp;Road')
-        .on('click', function() {
-            controller.enter(iD.modes.AddRoad);
-        });
-
-    bar.append('button')
-        .attr('id', 'area')
-        .html('+&nbsp;Area')
-        .on('click', function() {
-            controller.enter(iD.modes.AddArea);
-        });
+    controller.on('enter', function (entered) {
+        buttons.classed('active', function (mode) { return entered === mode; })
+    });
 
     bar.append('button')
         .attr('id', 'undo')
