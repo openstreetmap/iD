@@ -82,17 +82,12 @@ var iD = function(container) {
         });
 
     var zoom = bar.append('div')
-        .attr('class', 'zoombuttons');
-
-    zoom.append('button')
-        .attr('class', 'zoom-in')
-        .text('+')
-        .on('click', map.zoomIn);
-
-    zoom.append('button')
-        .attr('class', 'zoom-out')
-        .text('–')
-        .on('click', map.zoomOut);
+        .attr('class', 'zoombuttons')
+        .selectAll('button')
+            .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
+            .enter().append('button').attr('class', function(d) { return d[0]; })
+            .text(function(d) { return d[1]; })
+            .on('click', function(d) { return d[2](); });
 
     container.append('div')
         .attr('class', 'inspector-wrap');
