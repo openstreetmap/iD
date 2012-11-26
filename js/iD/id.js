@@ -11,21 +11,17 @@ var iD = function(container) {
     container = d3.select(container);
 
     var m = container.append('div')
-        .attr('id', 'map');
+            .attr('id', 'map'),
+        connection = iD.Connection()
+            .url('http://api06.dev.openstreetmap.org'),
+        map = iD.Map(m.node(), connection),
+        controller = iD.Controller(map),
+        bar = container.append('div')
+            .attr('id', 'bar');
 
-    var connection = iD.Connection()
-        .url('http://api06.dev.openstreetmap.org');
-
-    var map = iD.Map(m.node(), connection);
-
-    var controller = iD.Controller(map);
-
-    var bar = container.append('div')
-        .attr('id', 'bar');
-
-    var buttons = bar.selectAll('button')
+    var buttons = bar.selectAll('button.add-button')
         .data([iD.modes.AddPlace, iD.modes.AddRoad, iD.modes.AddArea])
-        .enter().append('button')
+        .enter().append('button').attr('class', 'add-button')
         .text(function (mode) { return mode.title; })
         .on('click', function (mode) { controller.enter(mode); });
 
@@ -34,30 +30,26 @@ var iD = function(container) {
     });
 
     bar.append('button')
-        .attr('id', 'undo')
-        .attr('class', 'mini')
+        .attr({ id: 'undo', 'class': 'mini' })
         .property('disabled', true)
         .html('&larr;<small></small>')
         .on('click', map.undo);
 
     bar.append('button')
-        .attr('id', 'redo')
-        .attr('class', 'mini')
+        .attr({ id: 'redo', 'class': 'mini' })
         .property('disabled', true)
         .html('&rarr;<small></small>')
         .on('click', map.redo);
 
     bar.append('input')
-        .attr('type', 'text')
-        .attr('placeholder', 'find a place')
-        .attr('id', 'geocode-location')
+        .attr({ type: 'text', placeholder: 'find a place', id: 'geocode-location' })
         .on('keydown', function () {
             if (d3.event.keyCode !== 13) return;
             d3.event.preventDefault();
             var val = d3.select('#geocode-location').node().value;
-            var scr = document.body.appendChild(document.createElement('script'));
-            scr.src = 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
-                encodeURIComponent(val) + '.jsonp?callback=grid';
+            d3.select(document.body).append('script')
+                .attr('src', 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
+                    encodeURIComponent(val) + '.jsonp?callback=grid');
         });
 
     window.grid = function(resp) {
@@ -77,7 +69,13 @@ var iD = function(container) {
         .html("Save<small id='as-username'></small>")
         .on('click', function() {
             connection.authenticate(function() {
-                map.commit();
+                var shaded = d3.select(document.body)
+                    .append('div').attr('class', 'shaded');
+                var modal = shaded.append('div')
+                    .attr('class', 'modal')
+                    .datum(map.history.changes());
+                modal.call(iD.Commit());
+                // map.commit();
             });
         });
 
