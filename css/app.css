@@ -200,13 +200,13 @@ button small {
 }
 
 .modal {
-    width:600px;
-    height:400px;
+    width:640px;
+    height:550px;
     padding:10px;
     position:absolute;
-    background:#fff;
+    background:#f0f0f0;
     top:50px;
     left:50%;
-    margin-left:-305px;
+    margin-left:-330px;
     box-shadow:0 0 5px #000;
 }

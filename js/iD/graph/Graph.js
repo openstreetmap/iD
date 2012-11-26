@@ -85,13 +85,13 @@ iD.Graph.prototype = {
 
     modifications: function() {
         return _.filter(this.entities, function(entity) {
-            return (entity.id > 0) && entity.modified;
+            return ((+entity.id.slice(1) > 0)) && entity.modified;
         });
     },
 
     creations: function() {
         return _.filter(this.entities, function(entity) {
-            return (entity.id < 0) && entity.modified;
+            return ((+entity.id.slice(1)) < 0) && entity.modified;
         });
     }
 };

@@ -54,5 +54,25 @@ iD.History.prototype = {
             if (this.stack[index].annotation) return this.stack[index].annotation;
             index++;
         }
+    },
+
+    modified: function() {
+        return this.stack[this.index].creations();
+    },
+
+    created: function() {
+        return this.stack[this.index].creations();
+    },
+
+    deleted: function() {
+        // return this.stack[this.index].();
+    },
+
+    changes: function() {
+        return {
+            modified: this.modified(),
+            created: this.created(),
+            deleted: this.deleted()
+        };
     }
 };

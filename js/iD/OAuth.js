@@ -30,6 +30,7 @@ iD.OAuth = function() {
         }
         o = timenonce(o);
         var url = apibase + options.path;
+        console.log(apibase, options.path);
         var oauth_token_secret = localStorage.oauth_token_secret;
         o.oauth_signature = ohauth.signature(oauth_secret, oauth_token_secret,
             ohauth.baseString(options.method, url, o));
@@ -43,12 +44,10 @@ iD.OAuth = function() {
         // TODO: deal with changing the api endpoint
         if (oauth.authenticated()) return callback();
 
-        var d = document.body.appendChild(document.createElement('div')),
-            ifr = d.appendChild(document.createElement('iframe'));
-        d.className = 'modal';
-        ifr.frameborder = 'no';
-        ifr.width = 600;
-        ifr.height = 400;
+        var d = d3.select(document.body)
+            .append('div').attr('class', 'modal'),
+            ifr = d.append('iframe')
+                .attr({ width: 640, height: 550, frameborder: 'no' });
 
         o = timenonce(o);
         var url = baseurl + '/oauth/request_token';
@@ -59,17 +58,17 @@ iD.OAuth = function() {
             var token = ohauth.stringQs(xhr.response);
             localStorage.oauth_request_token_secret = token.oauth_token_secret;
             var at = baseurl + '/oauth/authorize?';
-            ifr.src = at + ohauth.qsString({
+            ifr.attr('src', at + ohauth.qsString({
                 oauth_token: token.oauth_token, oauth_callback: location.href
-            });
+            }));
         });
-        ifr.onload = function() {
-            if (ifr.contentWindow.location.search) {
-                var search = ifr.contentWindow.location.search,
+        ifr.on('load', function() {
+            if (ifr.node().contentWindow.location.search) {
+                var search = ifr.node().contentWindow.location.search,
                     oauth_token = ohauth.stringQs(search.slice(1)),
                     url = baseurl + '/oauth/access_token';
                 o = timenonce(o);
-                d.parentNode.removeChild(d);
+                d.remove();
 
                 o.oauth_token = oauth_token.oauth_token;
                 var request_token_secret = localStorage.oauth_request_token_secret;
@@ -82,7 +81,7 @@ iD.OAuth = function() {
                     callback();
                 });
             }
-        };
+        });
     };
 
     oauth.setAPI = function(x) {

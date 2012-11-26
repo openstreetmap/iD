@@ -290,17 +290,6 @@ iD.Map = function(elem, connection) {
 
     function hideCasings() { casing_g.selectAll('path').remove(); }
 
-    // https://github.com/mbostock/d3/issues/894
-    function handleDrag(x) {
-        hit_g.selectAll('rect.handle')
-            .on('mousedown.drag', null)
-            .on('touchstart.drag', null);
-        if (x) {
-            hit_g.selectAll('rect.handle')
-                .call(dragbehavior);
-        }
-    }
-
     function setSize(x) {
         dimensions = x;
         var attr = { width: dimensions[0], height: dimensions[1] };
@@ -532,8 +521,6 @@ iD.Map = function(elem, connection) {
             created: history.graph().creations()
         });
     }
-
-    map.handleDrag = handleDrag;
 
     map.download = download;
     map.getExtent = getExtent;

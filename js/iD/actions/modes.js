@@ -70,7 +70,6 @@ iD.modes.AddRoad = {
     },
     enter: function() {
         var surface = this.map.surface;
-        this.map.handleDrag(false);
         var teaser = surface.selectAll('g#temp-g')
             .append('g').attr('id', 'addroad');
 
@@ -112,7 +111,6 @@ iD.modes.AddRoad = {
     exit: function() {
         this.map.surface.on('click.addroad', null);
         this.map.surface.on('mousemove.addroad', null);
-        this.map.handleDrag(true);
         d3.select(document).on('keydown.addroad', null);
         d3.selectAll('#addroad').remove();
     }

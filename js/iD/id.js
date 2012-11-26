@@ -5,7 +5,7 @@ var iD = function(container) {
         .attr('id', 'map');
 
     var connection = iD.Connection()
-        .url('http://api06.dev.openstreetmap.org/api/0.6/');
+        .url('http://api06.dev.openstreetmap.org/api/0.6');
 
     var map = iD.Map(m.node(), connection);
 
@@ -57,7 +57,6 @@ var iD = function(container) {
 
     bar.append('div')
         .attr('class', 'messages');
-
 
     bar.append('button')
         .attr('id', 'save')
@@ -120,17 +119,13 @@ var iD = function(container) {
         if (d3.event.which === 90 && d3.event.metaKey && d3.event.shiftKey) {
             map.redo();
         }
-        // p
-        if (d3.event.which === 80) controller.enter(iD.modes.AddPlace);
-        // r
-        if (d3.event.which === 82) controller.enter(iD.modes.AddRoad);
-        // a
-        if (d3.event.which === 65) controller.enter(iD.modes.AddArea);
+        if (d3.event.which === 80) controller.enter(iD.modes.AddPlace); // p
+        if (d3.event.which === 82) controller.enter(iD.modes.AddRoad); // r
+        if (d3.event.which === 65) controller.enter(iD.modes.AddArea); // a
     });
 
     var hash = iD.Hash().map(map);
     if (!hash.hadHash) map.setZoom(19).setCenter([-1.49475, 51.87502]);
-
     if (connection.authenticated()) {
         connection.userDetails(function(user_details) {
             connection.user(user_details);
