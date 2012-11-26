@@ -69,13 +69,21 @@ var iD = function(container) {
         .html("Save<small id='as-username'></small>")
         .on('click', function() {
             connection.authenticate(function() {
+                var commitpane = iD.Commit();
                 var shaded = d3.select(document.body)
                     .append('div').attr('class', 'shaded');
                 var modal = shaded.append('div')
                     .attr('class', 'modal commit-pane')
                     .datum(map.history.changes());
-                modal.call(iD.Commit());
-                // map.commit();
+                modal.call(commitpane);
+                commitpane.on('cancel', function() {
+                    shaded.remove();
+                });
+                commitpane.on('save', function(e) {
+                    connection.putChangeset(map.history.changes(), e.comment, function() {
+                        shaded.remove();
+                    });
+                });
             });
         });
 

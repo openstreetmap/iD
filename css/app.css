@@ -247,9 +247,15 @@ button small {
 
 .commit-pane ul {
     border-bottom:1px solid #ccc;
+    background:#fff;
 }
 
 .commit-pane li {
     border-top:1px solid #ccc;
-    padding:2px;
+    padding:2px 10px;
+}
+
+.commit-pane .changeset-comment {
+    width:630px;
+    font-size:100%;
 }
