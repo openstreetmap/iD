@@ -1,15 +1,16 @@
 // a minimal map tile client, to be turned on and off etc.
 iD.Tiles = function(selection, projection) {
-    var tiles = {}, dimensions;
+    var t = {},
+        tile = d3.geo.tile();
 
     // derive the url of a 'quadkey' style tile from a coordinate object
     function tileUrl(coord) {
         var u = '';
-        for (var zoom = coord[0]; zoom > 0; zoom--) {
+        for (var zoom = coord[2]; zoom > 0; zoom--) {
             var byte = 0;
             var mask = 1 << (zoom - 1);
-            if ((coord[1] & mask) !== 0) byte++;
-            if ((coord[2] & mask) !== 0) byte += 2;
+            if ((coord[0] & mask) !== 0) byte++;
+            if ((coord[1] & mask) !== 0) byte += 2;
             u += byte.toString();
         }
         // distribute requests against multiple domains
@@ -17,57 +18,38 @@ iD.Tiles = function(selection, projection) {
         return  'http://ecn.t' + t + '.tiles.virtualearth.net/tiles/a' + u + '.jpeg?g=587&mkt=en-gb&n=z';
     }
 
+
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`
     function redraw() {
-        var t = projection.translate(),
-            s = projection.scale(),
-            z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
-            rz = Math.floor(z),
-            ts = 256 * Math.pow(2, z - rz);
+        var tiles = tile
+            .scale(projection.scale())
+            .translate(projection.translate())();
 
-        // This is the 0, 0 px of the projection
-        var tile_origin = [s / 2 - t[0], s / 2 - t[1]],
-            coords = [],
-            cols = d3.range(Math.max(0, Math.floor((tile_origin[0]) / ts)),
-                            Math.max(0, Math.ceil((tile_origin[0] + dimensions.width) / ts))),
-            rows = d3.range(Math.max(0, Math.floor((tile_origin[1]) / ts)),
-                            Math.max(0, Math.ceil((tile_origin[1] + dimensions.height) / ts)));
+        var image = selection
+            .attr("transform", function(d) { return "scale(" + tiles.scale + ")translate(" + tiles.translate + ")"; })
+            .selectAll("image")
+            .data(tiles, function(d) { return d; });
 
-        cols.forEach(function(x) {
-            rows.forEach(function(y) {
-                coords.push([Math.floor(z), x, y, Math.floor(z) + '-' + x + '-' + y]);
-            });
-        });
+        image.exit()
+            .remove();
 
-        var tiles = selection.selectAll('image.tile')
-            .data(coords, function(d) { return d[3]; });
-
-        tiles.exit().remove();
-
-        tiles.enter().append('image')
-            .attr('class', 'tile')
-            .attr('xlink:href', tileUrl);
-
-        tiles.attr({
-            width: Math.ceil(ts),
-            height: Math.ceil(ts),
-            transform: function(d) {
-                return 'translate(' +
-                    Math.round((d[1] * ts) - tile_origin[0]) + ',' +
-                    Math.round((d[2] * ts) - tile_origin[1]) + ')';
-            }
-        });
+        image.enter().append("image")
+            .attr("xlink:href", tileUrl)
+            .attr("width", 1)
+            .attr("height", 1)
+            .attr("x", function(d) { return d[0]; })
+            .attr("y", function(d) { return d[1]; });
     }
 
     function setSize(x) {
-        dimensions = x;
+        tile.size([x.width, x.height]);
         redraw();
-        return tiles;
+        return t;
     }
 
-    tiles.setSize = setSize;
-    tiles.redraw = redraw;
+    t.setSize = setSize;
+    t.redraw = redraw;
 
-    return tiles;
+    return t;
 };

@@ -65,7 +65,6 @@ iD.Map = function(elem, connection) {
         surface = supersurface.append('svg'),
         defs = surface.append('defs'),
         tilegroup = surface.append('g')
-            .attr('clip-path', 'url(#clip)')
             .on('click', deselectClick),
         r = surface.append('g')
             .on('click', selectClick)
