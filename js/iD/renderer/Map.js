@@ -442,8 +442,6 @@ iD.Map = function(elem, connection) {
         }
     }
 
-    // UI elements
-    // -----------
     function update() {
         map.update();
         redraw();
@@ -454,12 +452,6 @@ iD.Map = function(elem, connection) {
         update();
     }
 
-    function _do(operation) {
-        history.operate(operation);
-        update();
-    }
-
-    // Undo/redo
     function undo() {
         history.undo();
         update();
