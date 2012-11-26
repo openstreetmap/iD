@@ -12,17 +12,24 @@ iD.Commit = function() {
             .data(['modify', 'delete', 'create'])
             .enter()
             .append('div').attr('class', 'section');
-        section.append('h3').text(String);
-        section.append('ul')
+
+        section.append('h3').text(String)
+            .append('small')
+            .attr('class', 'count')
+            .text(function(d) { return changes[d].length; });
+
+        var li = section.append('ul')
             .selectAll('li')
-            .data(function(d) {
-                return changes[d];
-            })
+            .data(function(d) { return changes[d]; })
             .enter()
-            .append('li')
-            .text(function(d) {
-                return d.type + iD.Util.friendlyName(d);
-            });
+            .append('li');
+
+        li.append('strong').text(function(d) {
+            return d.type + ' ';
+        });
+        li.append('span').text(function(d) {
+             return iD.Util.friendlyName(d);
+        });
 
         body.append('button').text('Save');
         body.append('button').text('Cancel');

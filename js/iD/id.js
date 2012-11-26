@@ -72,7 +72,7 @@ var iD = function(container) {
                 var shaded = d3.select(document.body)
                     .append('div').attr('class', 'shaded');
                 var modal = shaded.append('div')
-                    .attr('class', 'modal')
+                    .attr('class', 'modal commit-pane')
                     .datum(map.history.changes());
                 modal.call(iD.Commit());
                 // map.commit();
