@@ -94,6 +94,7 @@ input[type=text]:focus {
     width:200px;
     position:absolute;
     right:300px;
+    font-size:11px;
     top:0;
     padding:10px;
 }
@@ -101,7 +102,6 @@ input[type=text]:focus {
 #bar .user .logout {
     text-decoration:underline;
     margin-left:10px;
-    font-size:11px;
     cursor:pointer;
 }
 
@@ -125,6 +125,10 @@ input[type=text]:focus {
     right:100px;
     background:#3F5CA5;
     color:#eee;
+}
+
+#bar button.save:hover {
+    background:#000;
 }
 
 #bar button.mini,
