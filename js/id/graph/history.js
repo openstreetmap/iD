@@ -58,7 +58,7 @@ iD.History.prototype = {
 
     // generate reports of changes for changesets to use
     modify: function() {
-        return this.stack[this.index].creations();
+        return this.stack[this.index].modifications();
     },
 
     create: function() {

@@ -85,7 +85,9 @@ var iD = function(container) {
                     .attr('class', 'modal commit-pane')
                     .datum(map.history.changes());
                 modal.call(iD.commit()
-                    .on('cancel', shaded.remove)
+                    .on('cancel', function() {
+                        shaded.remove();
+                    })
                     .on('save', save));
             });
         });

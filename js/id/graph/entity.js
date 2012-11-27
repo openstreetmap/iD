@@ -20,6 +20,7 @@ iD.Entity = function(a, b) {
 
 iD.Entity.prototype = {
     update: function(attrs) {
+        attrs._updated = true;
         return iD.Entity(this, attrs);
     },
 
