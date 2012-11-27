@@ -1,6 +1,9 @@
 iD.Graph = function(entities, annotation) {
     if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation);
+
     this.entities = entities || {};
+    this.annotation = annotation;
+
     for (var id in this.entities) {
         // TODO: update extents that need it.
         if (this.entities[id].type === 'way' && !this.entities[id]._extent) {
@@ -16,7 +19,11 @@ iD.Graph = function(entities, annotation) {
             this.entities[id]._extent = extent;
         }
     }
-    this.annotation = annotation;
+
+    if (iD.debug) {
+        Object.freeze(this);
+        Object.freeze(this.entities);
+    }
 };
 
 iD.Graph.prototype = {
