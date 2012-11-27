@@ -8,7 +8,7 @@ iD.modes = {};
 iD.modes._node = function(ll) {
     return iD.Node({
         lat: ll[1],
-        lon: ll[0],
+        lon: ll[0]
     });
 };
 

@@ -1,9 +1,8 @@
 iD.Map = function(elem, connection) {
 
-    var map = {},
+    var map = { history: iD.History() },
         dimensions = [],
         dispatch = d3.dispatch('move', 'update'),
-        history = iD.History(),
         inspector = iD.Inspector(),
         parent = d3.select(elem),
         selection = null,
@@ -21,17 +20,17 @@ iD.Map = function(elem, connection) {
             .origin(function(entity) {
                 var p = projection(ll2a(entity));
                 only = iD.Util.trueObj([entity.id].concat(
-                    _.pluck(history.graph().parents(entity.id), 'id')));
+                    _.pluck(map.history.graph().parents(entity.id), 'id')));
                 return { x: p[0], y: p[1] };
             })
             .on('dragstart', function() {
-                history.perform(iD.actions.noop());
+                map.history.perform(iD.actions.noop());
                 d3.event.sourceEvent.stopPropagation();
             })
             .on('drag', function(entity) {
                 var to = projection.invert([d3.event.x, d3.event.y]);
                 d3.event.sourceEvent.stopPropagation();
-                history.replace(iD.actions.move(entity, to));
+                map.history.replace(iD.actions.move(entity, to));
                 redraw(only);
             })
             .on('dragend', update),
@@ -124,7 +123,7 @@ iD.Map = function(elem, connection) {
         var z = getZoom(),
             all = [], ways = [], areas = [], points = [], waynodes = [],
             extent = getExtent(),
-            graph = history.graph();
+            graph = map.history.graph();
 
         if (!only) {
             all = graph.intersects(extent);
@@ -343,7 +342,7 @@ iD.Map = function(elem, connection) {
             if (result instanceof Error) {
                 // TODO: handle
             } else {
-                history.merge(result);
+                map.history.merge(result);
                 drawVector();
             }
         });
@@ -369,7 +368,7 @@ iD.Map = function(elem, connection) {
         selection = entity.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')
-            .datum(history.graph().fetch(entity.id)).call(inspector);
+            .datum(map.history.graph().fetch(entity.id)).call(inspector);
         redraw();
     }
 
@@ -430,17 +429,17 @@ iD.Map = function(elem, connection) {
     }
 
     function perform(action) {
-        history.perform(action);
+        map.history.perform(action);
         update();
     }
 
     function undo() {
-        history.undo();
+        map.history.undo();
         update();
     }
 
     function redo() {
-        history.redo();
+        map.history.redo();
         update();
     }
 
@@ -503,8 +502,8 @@ iD.Map = function(elem, connection) {
         return map;
     }
 
-    function commit() {
-        connection.putChangeset(history.changes());
+    function flush() {
+        apiTilesLoaded = {};
     }
 
     map.download = download;
@@ -525,7 +524,6 @@ iD.Map = function(elem, connection) {
     map.projection = projection;
     map.setSize = setSize;
 
-    map.history = history;
     map.surface = surface;
 
     map.perform = perform;
@@ -534,7 +532,7 @@ iD.Map = function(elem, connection) {
 
     map.redraw = redraw;
 
-    map.commit = commit;
+    map.flush = flush;
 
     setSize([parent.node().offsetWidth, parent.node().offsetHeight]);
     hideInspector();

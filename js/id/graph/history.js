@@ -5,6 +5,7 @@ iD.History = function() {
 };
 
 iD.History.prototype = {
+
     graph: function() {
         return this.stack[this.index];
     },

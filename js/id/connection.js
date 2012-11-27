@@ -1,4 +1,5 @@
 iD.Connection = function() {
+
     var event = d3.dispatch('auth'),
         apiURL = 'http://www.openstreetmap.org',
         connection = {},
@@ -10,11 +11,6 @@ iD.Connection = function() {
     function bboxFromAPI(box, callback) {
         loadFromURL(apiURL + '/api/0.6/map?bbox=' +
             [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
-    }
-
-    // Request data within the bbox from an external OSM server.
-    function wayFromAPI(id, callback) {
-        loadFromURL(apiURL + '/api/0.6/way/' + id + '/full', callback);
     }
 
     function loadFromURL(url, callback) {
@@ -155,7 +151,6 @@ iD.Connection = function() {
     };
 
     connection.bboxFromAPI = bboxFromAPI;
-    connection.wayFromAPI = wayFromAPI;
     connection.loadFromURL = loadFromURL;
     connection.userDetails = userDetails;
     connection.authenticate = authenticate;
