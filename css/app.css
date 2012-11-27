@@ -220,6 +220,11 @@ button small {
     width:350px;
     border-spacing:0;
 }
+.inspector-wrap .tag-table-wrap {
+    max-height:350px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
 .inspector-wrap table th {
     text-align:left;
 }

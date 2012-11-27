@@ -50,6 +50,7 @@ iD.Inspector = function() {
                 .attr('class', 'head').call(drawhead);
 
             var table = selection
+                .append('div').attr('class', 'tag-table-wrap')
                 .append('table').attr('class', 'inspector');
 
             table.append('thead').append('tr').selectAll('th')
