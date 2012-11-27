@@ -400,13 +400,14 @@ iD.Map = function(elem, connection) {
         }
     }
 
-    surface.on('mouseup', function() {
-        if (surface.style(transformProp)) {
-            translateStart = null;
-            surface.style(transformProp, '');
-            redraw();
-        }
-    });
+    function resetTransform() {
+        if (!surface.style(transformProp)) return;
+        translateStart = null;
+        surface.style(transformProp, '');
+        redraw();
+    }
+
+    surface.on('mouseup', resetTransform).on('touchend', resetTransform);
 
     function redraw(only) {
         if (!only) {
