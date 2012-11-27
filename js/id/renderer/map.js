@@ -26,9 +26,11 @@ iD.Map = function(elem, connection) {
             })
             .on('dragstart', function() {
                 history.perform(iD.actions.noop());
+                d3.event.sourceEvent.stopPropagation();
             })
             .on('drag', function(entity) {
                 var to = projection.invert([d3.event.x, d3.event.y]);
+                d3.event.sourceEvent.stopPropagation();
                 history.replace(iD.actions.move(entity, to));
                 redraw(only);
             })
