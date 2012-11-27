@@ -380,13 +380,9 @@ iD.Map = function(elem, connection) {
 
     function zoomPan() {
         var fast = (d3.event.scale === projection.scale());
-        if (d3.event && d3.event.sourceEvent.type === "dblclick") {
-            dblclick.call(this);
-        } else {
-            projection
-                .translate(d3.event.translate)
-                .scale(d3.event.scale);
-        }
+        projection
+            .translate(d3.event.translate)
+            .scale(d3.event.scale);
         if (fast) {
             if (!translateStart) translateStart = d3.event.translate.slice();
             var a = d3.event.translate,
@@ -397,21 +393,6 @@ iD.Map = function(elem, connection) {
             redraw();
             translateStart = null;
         }
-    }
-
-    function dblclick() {
-        var p = d3.mouse(this),
-            translate = projection.translate(),
-            scale0 = projection.scale(),
-            scale1 = Math.pow(2, Math.floor(Math.log(scale0) / Math.LN2) + 1);
-        projection.scale(scale1).translate([
-            p[0] - (p[0] - translate[0]) / scale0 * scale1,
-            p[1] - (p[1] - translate[1]) / scale0 * scale1
-        ]);
-        zoom.scale(scale1).translate([
-            p[0] - (p[0] - translate[0]) / scale0 * scale1,
-            p[1] - (p[1] - translate[1]) / scale0 * scale1
-        ]);
     }
 
     surface.on('mouseup', function() {
