@@ -1,5 +1,6 @@
 iD.Connection = function() {
-    var apiURL = 'http://www.openstreetmap.org',
+    var event = d3.dispatch('auth'),
+        apiURL = 'http://www.openstreetmap.org',
         connection = {},
         refNodes = {},
         user = {},
@@ -90,7 +91,10 @@ iD.Connection = function() {
     }
 
     function authenticate(callback) {
-        return oauth.authenticate(callback);
+        return oauth.authenticate(function() {
+            event.auth();
+            if (callback) callback();
+        });
     }
 
     function authenticated() {
@@ -124,10 +128,10 @@ iD.Connection = function() {
     function userDetails(callback) {
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, function(user_details) {
             var u = user_details.getElementsByTagName('user')[0];
-            callback({
+            callback(connection.user({
                 display_name: u.attributes.display_name.nodeValue,
                 id: u.attributes.id.nodeValue
-            });
+            }).user());
         });
     }
 
@@ -146,6 +150,7 @@ iD.Connection = function() {
 
     connection.logout = function() {
         oauth.logout();
+        event.auth();
         return connection;
     };
 
@@ -160,5 +165,5 @@ iD.Connection = function() {
     connection.objectData = objectData;
     connection.apiURL = apiURL;
 
-    return connection;
+    return d3.rebind(connection, event, 'on');
 };

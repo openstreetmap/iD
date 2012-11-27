@@ -125,7 +125,6 @@ var iD = function(container) {
     };
 
     d3.select(document).on('keydown', function() {
-        // console.log(d3.event);
         // cmd-z
         if (d3.event.which === 90 && d3.event.metaKey) {
             map.undo();
@@ -134,31 +133,13 @@ var iD = function(container) {
         if (d3.event.which === 90 && d3.event.metaKey && d3.event.shiftKey) {
             map.redo();
         }
-        // if (d3.event.which === 80) controller.enter(iD.modes.AddPlace); // p
-        // if (d3.event.which === 82) controller.enter(iD.modes.AddRoad); // r
-        // if (d3.event.which === 65) controller.enter(iD.modes.AddArea); // a
     });
 
     var hash = iD.Hash().map(map);
     if (!hash.hadHash) map.setZoom(19).setCenter([-1.49475, 51.87502]);
-    if (connection.authenticated()) {
-        connection.userDetails(function(user_details) {
-            connection.user(user_details);
-            d3.select('.user').html('');
-            d3.select('.user')
-                .append('span')
-                .text('signed in as ')
-                .append('a')
-                    .attr('href', connection.url() + '/user/' + user_details.display_name)
-                    .attr('target', '_blank')
-                    .text(user_details.display_name);
-            d3.select('.user')
-                .append('a')
-                .attr('class', 'logout')
-                .text('logout')
-                .on('click', connection.logout);
-        });
-    }
+    d3.select('.user').call(iD.userpanel(connection)
+        .on('logout', connection.logout)
+        .on('login', connection.authenticate));
 };
 
 iD.supported = function() {
