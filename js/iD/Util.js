@@ -8,6 +8,12 @@ iD.Util.id = function(counter) {
     return counter[0] + (--iD.Util._counters[counter]);
 };
 
+iD.Util.trueObj = function(arr) {
+    var o = {};
+    for (var i = 0, l = arr.length; i < l; i++) o[arr[i]] = true;
+    return o;
+};
+
 iD.Util.friendlyName = function(entity) {
     // Generate a string such as 'river' or 'Fred's House' for an entity.
     if (!Object.keys(entity.tags).length) { return ''; }

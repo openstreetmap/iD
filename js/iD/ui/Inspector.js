@@ -26,7 +26,7 @@ iD.Inspector = function() {
                     iD.format.GeoJSON.mapping(d), null, 2));
             });
         if (selection.datum().type === 'way') {
-            head.append('a')
+            selection.append('a')
                 .attr('class', 'permalink')
                 .attr('href', '#')
                 .text('Reverse Direction')
@@ -39,7 +39,6 @@ iD.Inspector = function() {
     }
 
     function inspector(selection) {
-        // http://jsfiddle.net/7WQjr/
         selection.each(function(entity) {
             selection.html("").append('button')
                 .text('x').attr({ title: 'close', 'class': 'close' })

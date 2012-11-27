@@ -16,9 +16,12 @@ iD.Map = function(elem, connection) {
             .scale(projection.scale())
             .scaleExtent([256, 134217728])
             .on('zoom', zoomPan),
+        only,
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
                 var p = projection(ll2a(entity));
+                only = iD.Util.trueObj([entity.id].concat(
+                    _.pluck(history.graph().parents(entity.id), 'id')));
                 return { x: p[0], y: p[1] };
             })
             .on('dragstart', function() {
@@ -27,8 +30,6 @@ iD.Map = function(elem, connection) {
             .on('drag', function(entity) {
                 var to = projection.invert([d3.event.x, d3.event.y]);
                 history.replace(iD.actions.move(entity, to));
-                var only = {};
-                only[entity.id] = true;
                 redraw(only);
             })
             .on('dragend', update),
@@ -126,7 +127,7 @@ iD.Map = function(elem, connection) {
         if (!only) {
             all = graph.intersects(extent);
         } else {
-            for (var id in only) all.push(graph.entity(id));
+            for (var id in only) all.push(graph.fetch(id));
         }
 
         var filter = only ?
