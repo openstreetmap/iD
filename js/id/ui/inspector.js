@@ -106,10 +106,12 @@ iD.Inspector = function() {
                 });
 
             selection.append('button')
+                .attr('class', 'cancel').text('Cancel')
+                .on('click', function() { event.close(entity); });
+
+            selection.append('button')
                 .attr('class', 'delete').text('Delete')
-                .on('click', function() {
-                    event.remove(entity);
-                });
+                .on('click', function() { event.remove(entity); });
         });
     }
 
