@@ -1,23 +1,20 @@
 describe('Entity', function () {
-    var entity;
-
-    beforeEach(function () {
-        entity = new iD.Entity();
-    });
-
-    describe('#parentWays', function () {
-        it('returns an array of parents with entityType way', function () {
-            entity.addParent({_id: 1, type: 'way'});
-            entity.addParent({_id: 2, type: 'node'});
-            expect(entity.parentWays()).toEqual([{_id: 1, type: 'way'}]);
+    describe("#update", function () {
+        it("returns a new Entity", function () {
+            var a = iD.Entity(),
+                b = a.update({});
+            expect(b instanceof iD.Entity).toBeTruthy();
+            expect(a).not.toBe(b);
         });
-    });
 
-    describe('#parentRelations', function () {
-        it('returns an array of parents with entityType relation', function () {
-            entity.addParent({_id: 1, type: 'way'});
-            entity.addParent({_id: 2, type: 'relation'});
-            expect(entity.parentRelations()).toEqual([{_id: 2, type: 'relation'}]);
+        it("updates the specified attributes", function () {
+            var tags = {foo: 'bar'},
+                e = iD.Entity().update({tags: tags});
+            expect(e.tags).toBe(tags);
+        });
+
+        it("returns a modified Entity", function () {
+            expect(iD.Entity().update({}).modified).toBeTruthy();
         });
     });
 });
