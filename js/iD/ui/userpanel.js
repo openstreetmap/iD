@@ -23,6 +23,7 @@ iD.userpanel = function(connection) {
                 selection
                     .append('a')
                     .attr('class', 'login')
+                    .attr('href', '#')
                     .text('login')
                     .on('click', event.login);
             }

@@ -114,9 +114,7 @@ iD.Inspector = function() {
     // TODO: there must be a function for this
     function unentries(x) {
         var obj = {};
-        for (var i = 0; i < x.length; i++) {
-            obj[x[i].key] = x[i].value;
-        }
+        for (var i = 0; i < x.length; i++) obj[x[i].key] = x[i].value;
         return obj;
     }
 

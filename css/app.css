@@ -23,7 +23,6 @@ body {
     padding:2px 5px;
 }
 
-
 #bar {
     background:#fff;
     position:absolute;
@@ -35,7 +34,7 @@ body {
 
 input#geocode-location {
     position:absolute;
-    background:#eee;
+    background:#f4f4ff;
     color:#222;
 }
 
@@ -52,7 +51,6 @@ p {
 a:visited, a {
     color: #345692;
 }
-
 a:hover {
     color:#000;
 }
@@ -66,14 +64,18 @@ input[type=text]:focus {
     border-color:#222;
 }
 
+button {
+    background:#3f5ca5;
+}
+
 #bar button {
-    width:100px;
+    width:80px;
     white-space:nowrap;
     cursor:pointer;
     display:inline-block;
     background:#fff;
     color:#222;
-    font:bold 19px/30px 'Helvetica Neue', sans-serif;
+    font:bold 14px/19px 'Helvetica Neue', sans-serif;
     border:0;
     border-right:1px solid #eee;
     padding:0 10px;
@@ -123,8 +125,8 @@ input[type=text]:focus {
     position:absolute;
     top:0;
     right:100px;
-    background:#3F5CA5;
-    color:#eee;
+    background:#7092ff;
+    color:#fff;
 }
 
 #bar button.save:hover {
@@ -140,7 +142,7 @@ button small {
     display: inline-block;
     font-weight: normal;
     font-size: 12px;
-    line-height: 30px;
+    line-height: 20px;
     vertical-align: top;
 }
 
