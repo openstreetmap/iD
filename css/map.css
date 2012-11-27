@@ -46,9 +46,9 @@ path.casing:hover {
 }
 
 path.casing.active {
-    stroke:#FFF9C9;
-    stroke-opacity:1;
-    stroke-width:8;
+    stroke:#FFF9C9 !important;
+    stroke-opacity:1 !important;
+    stroke-width:10 !important;
 }
 
 path.stroke {

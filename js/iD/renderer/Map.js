@@ -81,19 +81,8 @@ iD.Map = function(elem, connection) {
             arrow.remove();
             return alength;
         })(),
-        transformProp = (function(props) {
-            var style = document.documentElement.style;
-            for (var i = 0; i < props.length; i++) {
-                if (props[i] in style) return {
-                    transform: 'transform',
-                    WebkitTransform: '-webkit-transform',
-                    OTransform: '-o-transform',
-                    MozTransform: '-moz-transform',
-                    msTransform: '-ms-transform'
-                }[props[i]];
-            }
-            return false;
-        })(['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
+        prefix = prefixMatch(['webkit', 'ms', 'Moz', 'O']),
+        transformProp = prefix + 'transform';
 
     defs.append('clipPath')
         .attr('id', 'clip')
@@ -103,6 +92,11 @@ iD.Map = function(elem, connection) {
 
     var tileclient = iD.Tiles(tilegroup, projection);
 
+    function prefixMatch(p) { // via mbostock
+        var i = -1, n = p.length, s = document.body.style;
+        while (++i < n) if (p[i] + 'Transform' in s) return '-' + p[i].toLowerCase() + '-';
+        return '';
+    }
     function ll2a(o) { return [o.lon, o.lat]; }
     function a2ll(o) { return { lon: o[0], lat: o[1] }; }
     function roundCoords(c) { return [Math.floor(c[0]), Math.floor(c[1])]; }
