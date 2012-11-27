@@ -1,122 +1,112 @@
 iD.Inspector = function() {
     var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close');
 
+    function drawhead(selection) {
+        selection.html('');
+        selection.append('h2')
+            .text(iD.Util.friendlyName(selection.datum()));
+        selection.append('a')
+            .attr('class', 'permalink')
+            .attr('href', function(d) {
+                return 'http://www.openstreetmap.org/browse/' +
+                  d.type + '/' + d.id.slice(1);
+            })
+            .text('View on OSM');
+        selection.append('a')
+            .attr({ 'class': 'permalink', href: '#' }).text('XML')
+            .on('click', function(d) {
+                d3.event.stopPropagation();
+                iD.Util.codeWindow(iD.format.XML.mapping(d));
+            });
+        selection.append('a')
+            .attr({ 'class': 'permalink', href: '#' }).text('GeoJSON')
+            .on('click', function(d) {
+                d3.event.stopPropagation();
+                iD.Util.codeWindow(JSON.stringify(
+                    iD.format.GeoJSON.mapping(d), null, 2));
+            });
+        if (selection.datum().type === 'way') {
+            head.append('a')
+                .attr('class', 'permalink')
+                .attr('href', '#')
+                .text('Reverse Direction')
+                .on('click', function(d) {
+                    event.changeWayDirection(iD.Entity(d, {
+                        nodes: _.pluck(d.nodes.slice().reverse(), 'id')
+                    }));
+                });
+        }
+    }
+
     function inspector(selection) {
         // http://jsfiddle.net/7WQjr/
         selection.each(function(entity) {
-            d3.select(this).html("").append('button')
-                .text('x')
-                .attr('title', 'close')
-                .attr('class', 'close')
+            selection.html("").append('button')
+                .text('x').attr({ title: 'close', 'class': 'close' })
                 .on('click', function() {
                     event.close(entity);
                 });
 
-            var head = d3.select(this)
-                .append('div')
-                .attr('class', 'head');
+            var head = selection.append('div')
+                .attr('class', 'head').call(drawhead);
 
-            head.append('h2')
-                .text(iD.Util.friendlyName(entity));
-
-            head.append('a')
-                .attr('class', 'permalink')
-                .attr('href', 'http://www.openstreetmap.org/browse/' +
-                      entity.type + '/' + entity.id.slice(1))
-                .text('OSM');
-
-            head.append('a')
-                .attr('class', 'permalink')
-                .attr('href', '#')
-                .text('XML')
-                .on('click', function() {
-                    d3.event.stopPropagation();
-                    iD.Util.codeWindow(iD.format.XML.mapping(entity));
-                });
-
-            head.append('a')
-                .attr('class', 'permalink')
-                .attr('href', '#')
-                .text('GeoJSON')
-                .on('click', function() {
-                    d3.event.stopPropagation();
-                    iD.Util.codeWindow(JSON.stringify(
-                        iD.format.GeoJSON.mapping(entity), null, 2));
-                });
-
-            if (entity.type === 'way') {
-                head.append('a')
-                    .attr('class', 'permalink')
-                    .attr('href', '#')
-                    .text('Reverse Direction')
-                    .on('click', function() {
-                        event.changeWayDirection(iD.Entity(entity, {
-                            nodes: _.pluck(entity.nodes.slice().reverse(), 'id')
-                        }));
-                    });
-            }
-
-            var table = d3.select(this)
-                .append('table')
-                .attr('class', 'inspector');
+            var table = selection
+                .append('table').attr('class', 'inspector');
 
             table.append('thead').append('tr').selectAll('th')
                 .data(['tag', 'value', ''])
                 .enter()
-                .append('th')
-                    .text(String);
+                .append('th').text(String);
 
             var tbody = table.append('tbody');
 
             function draw(data) {
-                var tr = tbody.selectAll('tr')
-                    .data(data, function(d) { return d.key; });
-
-                var row = tr.enter()
-                    .append('tr');
+                tr = tbody.selectAll('tr')
+                    .data(d3.entries(data));
                 tr.exit().remove();
-
-                row.append('td').append('input')
-                    .attr('class', 'tag-key')
-                    .property('value', function(d) { return d.key; })
-                    .on('change', function(row) {
-                        row.key = this.value;
-                        event.update(entity, newtags(table));
-                        draw(formtags(table));
-                    });
-
-                row.append('td').append('input')
-                    .attr('class', 'tag-value')
-                    .property('value', function(d) { return d.value; })
-                    .on('change', function(row) {
-                        row.value = this.value;
-                        event.update(entity, newtags(table));
-                        draw(formtags(table));
+                row = tr.enter().append('tr');
+                valuetds = row.selectAll('td')
+                    .data(function(d) { return [d, d]; });
+                valuetds.enter().append('td').append('input')
+                    .property('value', function(d, i) { return d[i ? 'value' : 'key']; })
+                    .on('keyup', function(d, i) {
+                        d[i ? 'value' : 'key'] = this.value;
+                        update();
                     });
 
                 row.append('td').attr('class', 'tag-help').append('a')
                     .text('?')
                     .attr('target', '_blank')
+                    .attr('tabindex', -1)
                     .attr('href', function(d) {
                         return 'http://taginfo.openstreetmap.org/keys/' + d.key;
                     });
             }
 
-            var data = d3.entries(entity.tags).concat([{ key: '', value: ''}]);
-            draw(data);
+            function update() {
+                var grabbed = {};
+                function grab(d) { grabbed[d.key] = d.value; }
+                tbody.selectAll('td').each(grab);
+                if (!grabbed['']) {
+                    grabbed[''] = '';
+                    draw(grabbed);
+                }
+                draw(grabbed);
+                return grabbed;
+            }
 
-            d3.select(this)
-                .append('button')
-                .attr('class', 'save')
-                .text('Save')
+            var data = _.clone(entity.tags);
+            draw(data);
+            update();
+
+            selection.append('button')
+                .attr('class', 'save').text('Save')
                 .on('click', function() {
                     event.changeTags(entity, newtags(table));
                 });
 
-            d3.select(this)
-                .append('button')
-                .attr('class', 'delete')
-                .text('Delete')
+            selection.append('button')
+                .attr('class', 'delete').text('Delete')
                 .on('click', function() {
                     event.remove(entity);
                 });
@@ -126,7 +116,9 @@ iD.Inspector = function() {
     // TODO: there must be a function for this
     function unentries(x) {
         var obj = {};
-        for (var i = 0; i < x.length; i++) obj[x[i].key] = x[i].value;
+        for (var i = 0; i < x.length; i++) {
+            if (obj[x[i].key] && x[i].value) obj[x[i].key] = x[i].value;
+        }
         return obj;
     }
 

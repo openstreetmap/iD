@@ -252,6 +252,7 @@ iD.Map = function(elem, connection) {
         // why not just selectAll('textPath')?
         // https://bugs.webkit.org/show_bug.cgi?id=46800
         // https://bugs.webkit.org/show_bug.cgi?id=83438
+        // https://github.com/mbostock/d3/issues/925
         text_g.selectAll('.textpath')
             .attr('letter-spacing', alength * 2)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
