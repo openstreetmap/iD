@@ -227,12 +227,12 @@ iD.Map = function(elem, connection) {
             .classed('active', classActive);
 
         // Determine the lengths of oneway paths
-        var lengths = [];
+        var lengths = {};
         var oneways = strokes
         .filter(function(d, i) {
             return d.tags.oneway && d.tags.oneway === 'yes';
         }).each(function(d, i) {
-            lengths.push(Math.floor(this.getTotalLength() / alength / 4));
+            lengths[d.id] = Math.floor(this.getTotalLength() / alength);
         }).data();
 
         var uses = defs.selectAll('path')
@@ -240,20 +240,23 @@ iD.Map = function(elem, connection) {
         uses.exit().remove();
         uses.enter().append('path');
         uses
-            .attr('id', function(d, i) { return 'shadow-' + i; })
+            .attr('id', function(d, i) { return 'shadow-' + d.id; })
             .attr('d', function(d) { return d._line; });
 
         var labels = text_g.selectAll('text')
             .data(oneways, key);
         labels.exit().remove();
         var tp = labels.enter()
-            .append('text')
-            .attr({ 'class': 'oneway', dy: 4 })
-            .append('textPath');
-        tp.attr('letter-spacing', alength * 4)
-            .attr('xlink:href', function(d, i) { return '#shadow-' + i; })
+            .append('text').attr({ 'class': 'oneway', dy: 4 })
+            .append('textPath').attr('class', 'textpath');
+        // why not just selectAll('textPath')?
+        // https://bugs.webkit.org/show_bug.cgi?id=46800
+        // https://bugs.webkit.org/show_bug.cgi?id=83438
+        text_g.selectAll('.textpath')
+            .attr('letter-spacing', alength * 2)
+            .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
             .text(function(d, i) {
-                return (new Array(lengths[i])).join('►');
+                return (new Array(Math.floor(lengths[d.id] / 2))).join('►');
             });
     }
 

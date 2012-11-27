@@ -22,6 +22,9 @@ Way drawing strategy:
 * END: Click on self-segment
 * END: Escape key
 
+* [Adding a new road in MapZen](http://www.youtube.com/watch?v=tdpDm6MiUEM)
+* [Editing turn restrictions](http://www.youtube.com/watch?v=DyHorSJFbyg)
+
 ## Pathological conditions
 
 * Ways with one node
