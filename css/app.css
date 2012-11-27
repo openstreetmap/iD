@@ -248,6 +248,12 @@ button small {
     box-shadow:0 0 5px #000;
 }
 
+.modal.loading-pane {
+    width:300px;
+    height:200px;
+    margin-left:-160px;
+}
+
 .shaded:before {
     content:'';
     background:rgba(0,0,0,0.5);

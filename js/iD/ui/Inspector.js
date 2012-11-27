@@ -102,7 +102,7 @@ iD.Inspector = function() {
             selection.append('button')
                 .attr('class', 'save').text('Save')
                 .on('click', function() {
-                    event.changeTags(entity, newtags(table));
+                    event.changeTags(entity, update());
                 });
 
             selection.append('button')
@@ -113,26 +113,6 @@ iD.Inspector = function() {
         });
     }
 
-    // TODO: there must be a function for this
-    function unentries(x) {
-        var obj = {};
-        for (var i = 0; i < x.length; i++) {
-            if (obj[x[i].key] && x[i].value) obj[x[i].key] = x[i].value;
-        }
-        return obj;
-    }
-
-    function formtags(table) {
-        var t = newtags(table);
-        if (Object.keys(t).indexOf('') === -1) t[''] = '';
-        return d3.entries(t);
-    }
-
-    function newtags(table) {
-        var inputs = table.selectAll('input.tag-value')
-            .data();
-        return unentries(inputs);
-    }
 
     return d3.rebind(inspector, event, 'on');
 };

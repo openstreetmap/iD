@@ -68,13 +68,15 @@ var iD = function(container) {
         .attr('class', 'save')
         .html("Save<small id='as-username'></small>")
         .on('click', function() {
-            function save() {
+            function save(e) {
+                d3.select('.shaded').remove();
+                var l = iD.loading('committing changes to openstreetmap');
                 connection.putChangeset(map.history.changes(), e.comment, function() {
-                    shaded.remove();
+                    l.remove();
                 });
             }
             connection.authenticate(function() {
-                var shaded = d3.select(document.body)
+                shaded = d3.select(document.body)
                     .append('div').attr('class', 'shaded')
                     .on('click', function() {
                         if (d3.event.target == this) shaded.remove();
