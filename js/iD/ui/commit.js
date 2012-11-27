@@ -1,10 +1,10 @@
-iD.Commit = function() {
+iD.commit = function() {
     var event = d3.dispatch('cancel', 'save');
 
     function commit(selection) {
-        var changes = selection.datum();
-        var header = selection.append('div').attr('class', 'header');
-        var body = selection.append('div').attr('class', 'body');
+        var changes = selection.datum(),
+            header = selection.append('div').attr('class', 'header'),
+            body = selection.append('div').attr('class', 'body');
 
         header.append('h2').text('Save Changes to OpenStreetMap');
 

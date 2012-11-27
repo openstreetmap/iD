@@ -21,6 +21,7 @@ iD.OAuth = function() {
         return o;
     }
 
+    // token getter/setter, namespaced to the current `apibase` value.
     function token(k, x) {
         if (arguments.length == 2) {
             localStorage[keyclean(apibase) + k] = x;
@@ -58,7 +59,11 @@ iD.OAuth = function() {
         if (oauth.authenticated()) return callback();
 
         var shaded = d3.select(document.body)
-            .append('div').attr('class', 'shaded');
+            .append('div')
+            .attr('class', 'shaded')
+            .on('click', function() {
+                if (d3.event.target == this) shaded.remove();
+            });
         var modal = shaded.append('div').attr('class', 'modal');
         var ifr = modal.append('iframe')
             .attr({ width: 640, height: 550, frameborder: 'no' });
