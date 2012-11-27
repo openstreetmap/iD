@@ -204,6 +204,7 @@ button small {
 
 .inspector tbody td {
     border: 1px solid #ccc;
+    width:150px;
 }
 
 .inspector input {
