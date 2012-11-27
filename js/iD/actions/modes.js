@@ -64,7 +64,7 @@ iD.modes.AddRoad = {
             tags: {
                 highway: 'residential'
             },
-            modified: true,
+            _updated: true,
             id: iD.Util.id('way')
         });
     },
@@ -184,7 +184,7 @@ iD.modes.AddArea = {
             tags: {
                 building: 'yes'
             },
-            modified: true,
+            _updated: true,
             id: iD.Util.id('way')
         });
     },

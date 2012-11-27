@@ -53,4 +53,22 @@ describe('Graph', function() {
             expect(g2.entity('n-1').lat).toEqual(40);
         });
     });
+
+    describe("#modifications", function () {
+        it("filters entities by modified", function () {
+            var a = {modified: function () { return true; }},
+                b = {modified: function () { return false; }},
+                graph = iD.Graph([a, b]);
+            expect(graph.modifications()).toEqual([a]);
+        });
+    });
+
+    describe("#creations", function () {
+        it("filters entities by created", function () {
+            var a = {created: function () { return true; }},
+                b = {created: function () { return false; }},
+                graph = iD.Graph([a, b]);
+            expect(graph.creations()).toEqual([a]);
+        });
+    })
 });

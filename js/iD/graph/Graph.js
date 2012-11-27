@@ -91,15 +91,10 @@ iD.Graph.prototype = {
     },
 
     modifications: function() {
-        return _.filter(this.entities, function(entity) {
-            return ((+entity.id.slice(1) > 0)) && entity.modified;
-        });
+        return _.filter(this.entities, function(entity) { return entity.modified(); });
     },
 
     creations: function() {
-        return _.filter(this.entities, function(entity) {
-            return ((+entity.id.slice(1)) < 0) && entity.modified;
-        });
+        return _.filter(this.entities, function(entity) { return entity.created(); });
     }
-
 };

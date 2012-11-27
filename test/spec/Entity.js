@@ -12,9 +12,33 @@ describe('Entity', function () {
                 e = iD.Entity().update({tags: tags});
             expect(e.tags).toBe(tags);
         });
+    });
 
-        it("returns a modified Entity", function () {
-            expect(iD.Entity().update({}).modified).toBeTruthy();
+    describe("#created", function () {
+        it("returns false for an unmodified Entity", function () {
+            expect(iD.Entity().created()).toBeFalsy();
+        });
+
+        it("returns false for a modified Entity with positive ID", function () {
+            expect(iD.Entity({id: 'w1234'}).update({}).created()).toBeFalsy();
+        });
+
+        it("returns true for a modified Entity with negative ID", function () {
+           expect(iD.Entity({id: 'w-1234'}).update({}).created()).toBeTruthy();
+        });
+    });
+
+    describe("#modified", function () {
+        it("returns false for an unmodified Entity", function () {
+            expect(iD.Entity().modified()).toBeFalsy();
+        });
+
+        it("returns true for a modified Entity with positive ID", function () {
+            expect(iD.Entity({id: 'w1234'}).update({}).modified()).toBeTruthy();
+        });
+
+        it("returns false for a modified Entity with negative ID", function () {
+           expect(iD.Entity({id: 'w-1234'}).update({}).modified()).toBeFalsy();
         });
     });
 });
