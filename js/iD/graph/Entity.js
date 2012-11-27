@@ -7,6 +7,11 @@ iD.Entity = function(a, b) {
         this._updated = true;
     }
 
+    if (!this.id) {
+        this.id = iD.Util.id(this.type);
+        this._updated = true;
+    }
+
     if (iD.debug) {
         Object.freeze(this);
         Object.freeze(this.tags);
@@ -25,4 +30,16 @@ iD.Entity.prototype = {
     modified: function() {
         return this._updated && +this.id.slice(1) > 0;
     }
+};
+
+iD.Node = function (attrs) {
+    return iD.Entity(_.extend({}, attrs, {type: 'node'}));
+};
+
+iD.Way = function (attrs) {
+    return iD.Entity(_.extend({}, attrs, {type: 'way'}));
+};
+
+iD.Relation = function (attrs) {
+    return iD.Entity(_.extend({}, attrs, {type: 'relation'}));
 };

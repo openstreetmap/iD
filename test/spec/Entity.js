@@ -16,7 +16,7 @@ describe('Entity', function () {
 
     describe("#created", function () {
         it("returns false for an unmodified Entity", function () {
-            expect(iD.Entity().created()).toBeFalsy();
+            expect(iD.Entity({id: 'w1234'}).created()).toBeFalsy();
         });
 
         it("returns false for a modified Entity with positive ID", function () {
@@ -30,7 +30,7 @@ describe('Entity', function () {
 
     describe("#modified", function () {
         it("returns false for an unmodified Entity", function () {
-            expect(iD.Entity().modified()).toBeFalsy();
+            expect(iD.Entity({id: 'w1234'}).modified()).toBeFalsy();
         });
 
         it("returns true for a modified Entity with positive ID", function () {
@@ -40,5 +40,23 @@ describe('Entity', function () {
         it("returns false for a modified Entity with negative ID", function () {
            expect(iD.Entity({id: 'w-1234'}).update({}).modified()).toBeFalsy();
         });
+    });
+});
+
+describe('Node', function () {
+    it("returns a created Entity if no ID is specified", function () {
+        expect(iD.Node().created()).toBeTruthy();
+    });
+});
+
+describe('Way', function () {
+    it("returns a created Entity if no ID is specified", function () {
+        expect(iD.Way().created()).toBeTruthy();
+    });
+});
+
+describe('Relation', function () {
+    it("returns a created Entity if no ID is specified", function () {
+        expect(iD.Relation().created()).toBeTruthy();
     });
 });

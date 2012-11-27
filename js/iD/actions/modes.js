@@ -6,13 +6,10 @@ iD.modes = {};
 // into actions.
 
 iD.modes._node = function(ll) {
-    return iD.Entity({
-        type: 'node',
+    return iD.Node({
         lat: ll[1],
         lon: ll[0],
-        id: iD.Util.id('node'),
-        tags: {}
-    }, {});
+    });
 };
 
 iD.modes.AddPlace = {
@@ -57,16 +54,8 @@ iD.modes.AddPlace = {
 
 iD.modes.AddRoad = {
     title: "+ Road",
-    way: function(ll) {
-        return iD.Entity({
-            type: 'way',
-            nodes: [],
-            tags: {
-                highway: 'residential'
-            },
-            _updated: true,
-            id: iD.Util.id('way')
-        });
+    way: function() {
+        return iD.Way({tags: {highway: 'residential'}});
     },
     enter: function() {
         var surface = this.map.surface;
@@ -177,16 +166,8 @@ iD.modes.DrawRoad = function(way) {
 
 iD.modes.AddArea = {
     title: "+ Area",
-    way: function(ll) {
-        return iD.Entity({
-            type: 'way',
-            nodes: [],
-            tags: {
-                building: 'yes'
-            },
-            _updated: true,
-            id: iD.Util.id('way')
-        });
+    way: function() {
+        return iD.Way({tags: {building: 'yes'}});
     },
     enter: function() {
         var surface = this.map.surface;
