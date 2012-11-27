@@ -66,6 +66,15 @@ input[type=text]:focus {
 
 button {
     background:#3f5ca5;
+    border:0;
+    color:#fff;
+    font:normal 12px/18px 'Helvetica Neue', sans-serif;
+    margin:5px 5px 0 0;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#000;
 }
 
 #bar button {

@@ -372,16 +372,14 @@ iD.Map = function(elem, connection) {
         redraw();
     }
 
-    inspector.on('change', function(d, tags) {
+    inspector.on('changeTags', function(d, tags) {
         map.perform(iD.actions.changeTags(d, tags));
-    });
-
-    inspector.on('remove', function(d) {
+    }).on('changeWayDirection', function(d, tags) {
+        map.perform(iD.actions.changeWayDirection(d));
+    }).on('remove', function(d) {
         map.perform(iD.actions.remove(d));
         hideInspector();
-    });
-
-    inspector.on('close', function(d) {
+    }).on('close', function(d) {
         deselectClick();
         hideInspector();
     });

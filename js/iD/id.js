@@ -96,7 +96,7 @@ var iD = function(container) {
             .on('click', function(d) { return d[2](); });
 
     container.append('div')
-        .attr('class', 'inspector-wrap');
+        .attr('class', 'inspector-wrap').style('display', 'none');
 
     container.append('div')
         .attr('id', 'about')

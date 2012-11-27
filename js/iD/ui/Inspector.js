@@ -1,5 +1,5 @@
 iD.Inspector = function() {
-    var event = d3.dispatch('change', 'update', 'remove', 'close');
+    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close');
 
     function inspector(selection) {
         // http://jsfiddle.net/7WQjr/
@@ -43,6 +43,18 @@ iD.Inspector = function() {
                     iD.Util.codeWindow(JSON.stringify(
                         iD.format.GeoJSON.mapping(entity), null, 2));
                 });
+
+            if (entity.type === 'way') {
+                head.append('a')
+                    .attr('class', 'permalink')
+                    .attr('href', '#')
+                    .text('Reverse Direction')
+                    .on('click', function() {
+                        event.changeWayDirection(iD.Entity(entity, {
+                            nodes: _.pluck(entity.nodes.slice().reverse(), 'id')
+                        }));
+                    });
+            }
 
             var table = d3.select(this)
                 .append('table')
@@ -98,7 +110,7 @@ iD.Inspector = function() {
                 .attr('class', 'save')
                 .text('Save')
                 .on('click', function() {
-                    event.change(entity, newtags(table));
+                    event.changeTags(entity, newtags(table));
                 });
 
             d3.select(this)
