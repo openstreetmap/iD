@@ -16,6 +16,7 @@ iD.Map = function(elem, connection) {
             .scaleExtent([256, 134217728])
             .on('zoom', zoomPan),
         only,
+        dblclickEnabled = false,
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
                 var p = projection(ll2a(entity));
@@ -385,6 +386,8 @@ iD.Map = function(elem, connection) {
     });
 
     function zoomPan() {
+        if (d3.event && d3.event.sourceEvent.type === "dblclick" &&
+            !dblclickEnabled) return;
         var fast = (d3.event.scale === projection.scale());
         projection
             .translate(d3.event.translate)
@@ -424,7 +427,6 @@ iD.Map = function(elem, connection) {
     }
 
     function update() {
-        // map.update();
         redraw();
     }
 
@@ -441,6 +443,12 @@ iD.Map = function(elem, connection) {
     function redo() {
         map.history.redo();
         update();
+    }
+
+    function dblclickEnable(_) {
+        if (!arguments.length) return dblclickEnabled;
+        dblclickEnabled = _;
+        return map;
     }
 
     function getExtent() {
@@ -533,6 +541,7 @@ iD.Map = function(elem, connection) {
     map.redraw = redraw;
 
     map.flush = flush;
+    map.dblclickEnable = dblclickEnable;
 
     setSize([parent.node().offsetWidth, parent.node().offsetHeight]);
     hideInspector();

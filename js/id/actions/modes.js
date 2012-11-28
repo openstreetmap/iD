@@ -62,6 +62,7 @@ iD.modes.AddRoad = {
         });
     },
     enter: function() {
+        this.map.dblclickEnable(false);
         var surface = this.map.surface;
         var teaser = surface.selectAll('g#temp-g')
             .append('g').attr('id', 'addroad');
@@ -104,6 +105,7 @@ iD.modes.AddRoad = {
         }.bind(this));
     },
     exit: function() {
+        this.map.dblclickEnable(true);
         this.map.surface.on('click.addroad', null);
         this.map.surface.on('mousemove.addroad', null);
         d3.select(document).on('keydown.addroad', null);
@@ -114,6 +116,7 @@ iD.modes.AddRoad = {
 iD.modes.DrawRoad = function(way_id) {
     return {
         enter: function() {
+            this.map.dblclickEnable(false);
             var surface = this.map.surface,
 
             nextnode = iD.modes._node([NaN, NaN]);
@@ -167,6 +170,9 @@ iD.modes.DrawRoad = function(way_id) {
             this.map.surface.on('click.drawroad', null);
             d3.select(document).on('.drawroad', null);
             d3.selectAll('#drawroad').remove();
+            window.setTimeout(function() {
+                this.map.dblclickEnable(true);
+            }.bind(this), 1000);
         }
     };
 };
