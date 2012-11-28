@@ -135,12 +135,16 @@ iD.Map = function(elem, connection) {
         var filter = only ?
             function(d) { return only[d.id]; } : function() { return true; };
 
+        function isArea(way) {
+            return iD.Way.isClosed(a) || (a.tags.area && a.tags.area === 'yes');
+        }
+
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
             if (a.type === 'way') {
                 a._line = nodeline(a);
-                if (!iD.Way.isClosed(a)) ways.push(a);
-                else areas.push(a);
+                if (isArea(a)) areas.push(a);
+                else ways.push(a);
             } else if (a._poi) {
                 points.push(a);
             } else if (!a._poi && a.type === 'node' && nodeIntersect(a, extent)) {
