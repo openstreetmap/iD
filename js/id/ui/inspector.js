@@ -112,6 +112,7 @@ iD.Inspector = function() {
                 .attr('class', 'save').text('Save')
                 .on('click', function() {
                     event.changeTags(entity, clean(grabtags()));
+                    event.close(entity);
                 });
 
             selection.append('button')
