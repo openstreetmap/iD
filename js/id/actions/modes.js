@@ -227,7 +227,9 @@ iD.modes.AddArea = {
         }.bind(this));
     },
     exit: function() {
-        this.map.dblclickEnable(true);
+        window.setTimeout(function() {
+            this.map.dblclickEnable(true);
+        }.bind(this), 1000);
         this.map.surface.on('click.addarea', null)
             .on('mousemove.addarea', null);
         d3.select(document).on('keydown.addarea', null);
@@ -269,7 +271,8 @@ iD.modes.DrawArea = function(way_id) {
                         var l = this.map.history.graph().entity(way.nodes.pop());
                         this.map.perform(iD.actions.removeWayNode(way, l));
                         way.nodes.push(way.nodes[0]);
-                        this.map.perform(iD.actions.addWayNode(way, way.nodes[0]));
+                        this.map.perform(iD.actions.addWayNode(way,
+                            this.map.history.graph().entity(way.nodes[0])));
                         // End by clicking on own tail
                         return this.exit();
                     } else {
@@ -294,6 +297,9 @@ iD.modes.DrawArea = function(way_id) {
             this.map.surface.on('dblclick.drawarea', null);
             d3.select(document).on('.drawarea', null);
             d3.selectAll('#drawarea').remove();
+            window.setTimeout(function() {
+                this.map.dblclickEnable(true);
+            }.bind(this), 1000);
         }
     };
 };
