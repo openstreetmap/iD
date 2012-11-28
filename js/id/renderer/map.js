@@ -75,7 +75,6 @@ iD.Map = function(elem, connection) {
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
-        class_marker = iD.Style.styleClasses('marker'),
         class_casing = iD.Style.styleClasses('casing'),
         // For one-way roads, find the length of a triangle
         alength = (function() {
@@ -237,9 +236,9 @@ iD.Map = function(elem, connection) {
         // Determine the lengths of oneway paths
         var lengths = {};
         var oneways = strokes
-        .filter(function(d, i) {
+        .filter(function(d) {
             return d.tags.oneway && d.tags.oneway === 'yes';
-        }).each(function(d, i) {
+        }).each(function(d) {
             lengths[d.id] = Math.floor(this.getTotalLength() / alength);
         }).data();
 
@@ -248,7 +247,7 @@ iD.Map = function(elem, connection) {
         uses.exit().remove();
         uses.enter().append('path');
         uses
-            .attr('id', function(d, i) { return 'shadow-' + d.id; })
+            .attr('id', function(d) { return 'shadow-' + d.id; })
             .attr('d', function(d) { return d._line; });
 
         var labels = text_g.selectAll('text')
@@ -264,7 +263,7 @@ iD.Map = function(elem, connection) {
         text_g.selectAll('.textpath')
             .attr('letter-spacing', alength * 2)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
-            .text(function(d, i) {
+            .text(function(d) {
                 return (new Array(Math.floor(lengths[d.id] / 2))).join('►');
             });
     }
@@ -386,7 +385,7 @@ iD.Map = function(elem, connection) {
     }).on('remove', function(d) {
         map.perform(iD.actions.remove(d));
         hideInspector();
-    }).on('close', function(d) {
+    }).on('close', function() {
         deselectClick();
         hideInspector();
     });

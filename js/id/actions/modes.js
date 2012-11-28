@@ -75,6 +75,24 @@ iD.modes.AddRoad = {
             });
         });
 
+        // http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/actions/mapmode/ImproveWayAccuracyAction.java#L431
+        // https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/Way.as#L215
+        var map = this.map;
+        function dist(a, b) {
+            return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
+        }
+        function chooseIndex(way, point) {
+            var projNodes = way.nodes.map(function(n) {
+                return map.projection([n.lon, n.lat]);
+            });
+            for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
+                changes[i] =
+                    (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
+                    dist(projNodes[i], projNodes[i + 1]);
+            }
+            return _.indexOf(changes, _.min(changes));
+        }
+
         function addRoad() {
             var t = d3.select(d3.event.target),
                 node,
@@ -83,6 +101,14 @@ iD.modes.AddRoad = {
             // connect a way to an existing way
             if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
                 node = t.data()[0];
+            // snap into an existing way
+            } else if (t.data() && t.data()[0] && t.data()[0].type === 'way') {
+                var index = chooseIndex(t.data()[0], d3.mouse(surface.node()));
+                node = iD.modes._node(this.map.projection.invert(
+                    d3.mouse(surface.node())));
+                var connectedWay = this.map.history.graph().entity(t.data()[0].id);
+                connectedWay.nodes.splice(1, 0, node.id);
+                this.map.perform(iD.actions.addWayNode(connectedWay, node));
             } else {
                 node = iD.modes._node(this.map.projection.invert(
                     d3.mouse(surface.node())));

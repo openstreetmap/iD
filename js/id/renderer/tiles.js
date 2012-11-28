@@ -25,7 +25,9 @@ iD.Tiles = function(selection, projection) {
             .translate(projection.translate())();
 
         var image = selection
-            .attr("transform", function(d) { return "scale(" + tiles.scale + ")translate(" + tiles.translate + ")"; })
+            .attr("transform", function() {
+                return "scale(" + tiles.scale + ")translate(" + tiles.translate + ")";
+            })
             .selectAll("image")
             .data(tiles, function(d) { return d; });
 

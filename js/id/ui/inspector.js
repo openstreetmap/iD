@@ -46,7 +46,7 @@ iD.Inspector = function() {
                     event.close(entity);
                 });
 
-            var head = selection.append('div')
+            selection.append('div')
                 .attr('class', 'head').call(drawhead);
 
             var table = selection
