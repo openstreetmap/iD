@@ -88,7 +88,7 @@ iD.modes.AddRoad = {
 
             this.map.perform(iD.actions.startWay(way));
             way.nodes.push(node.id);
-            this.map.perform(iD.actions.changeWayNodes(way, node));
+            this.map.perform(iD.actions.addWayNode(way, node));
             this.map.selectClick(way);
             this.controller.enter(iD.modes.DrawRoad(way.id));
         }.bind(this));
@@ -114,8 +114,9 @@ iD.modes.DrawRoad = function(way_id) {
             var nextnode_id = nextnode.id;
 
             var way = this.map.history.graph().entity(way_id);
+            var lastnode_id = _.last(way.nodes);
             way.nodes.push(nextnode_id);
-            this.map.perform(iD.actions.changeWayNodes(way, nextnode));
+            this.map.perform(iD.actions.addWayNode(way, nextnode));
 
             surface.on('mousemove.drawroad', function() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
@@ -124,7 +125,7 @@ iD.modes.DrawRoad = function(way_id) {
                     lon: ll[0],
                     lat: ll[1]
                 });
-                this.map.history.replace(iD.actions.changeWayNodes(way, node));
+                this.map.history.replace(iD.actions.addWayNode(way, node));
                 var only = iD.Util.trueObj([way.id].concat(_.pluck(way.nodes, 'id')));
                 this.map.redraw(only);
             }.bind(this));
@@ -132,29 +133,30 @@ iD.modes.DrawRoad = function(way_id) {
             surface.on('click.drawroad', function() {
                 var t = d3.select(d3.event.target);
                 d3.event.stopPropagation();
-                // connect a way to an existing way
                 if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
-                    node = t.data()[0];
+                    if (t.data()[0].id == lastnode_id) {
+                        var l = this.map.history.graph().entity(way.nodes.pop());
+                        this.map.perform(iD.actions.removeWayNode(way, l));
+                        // End by clicking on own tail
+                        return this.exit();
+                    } else {
+                        // connect a way to an existing way
+                        node = t.data()[0];
+                    }
                 } else {
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));
                 }
                 way.nodes.pop();
                 way.nodes.push(node.id);
-                this.map.perform(iD.actions.changeWayNodes(way, node));
+                this.map.perform(iD.actions.addWayNode(way, node));
                 way.nodes = way.nodes.slice();
-                this.controller.enter(iD.modes.DrawRoad(way));
-            }.bind(this));
-
-            surface.on('dblclick.drawroad', function() {
-                d3.event.stopPropagation();
-                this.exit();
+                this.controller.enter(iD.modes.DrawRoad(way_id));
             }.bind(this));
         },
         exit: function() {
             this.map.surface.on('mousemove.drawroad', null);
             this.map.surface.on('click.drawroad', null);
-            this.map.surface.on('dblclick.drawroad', null);
             d3.select(document).on('.drawroad', null);
             d3.selectAll('#drawroad').remove();
         }

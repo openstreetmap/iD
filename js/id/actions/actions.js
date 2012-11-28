@@ -27,11 +27,19 @@ iD.actions.remove = function(node) {
 };
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/AddNodeToWayAction.as
-iD.actions.changeWayNodes = function(way, node) {
+iD.actions.addWayNode = function(way, node) {
     return function(graph) {
         return graph.replace(way.update({
             nodes: way.nodes.slice()
         })).replace(node, 'added to a road');
+    };
+};
+
+iD.actions.removeWayNode = function(way, node) {
+    return function(graph) {
+        return graph.replace(way.update({
+            nodes: way.nodes.slice()
+        })).remove(node, 'removed from a road');
     };
 };
 
