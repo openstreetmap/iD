@@ -29,9 +29,11 @@ iD.commit = function() {
         li.append('strong').text(function(d) {
             return d.type + ' ';
         });
-        li.append('span').text(function(d) {
-             return iD.Util.friendlyName(d);
-        });
+        li.append('span')
+            .text(function(d) {
+                 return iD.Util.friendlyName(d);
+            })
+            .attr('title', iD.Util.tagText);
 
         body.append('textarea')
             .attr('class', 'changeset-comment')

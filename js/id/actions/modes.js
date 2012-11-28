@@ -55,7 +55,11 @@ iD.modes.AddPlace = {
 iD.modes.AddRoad = {
     title: "+ Road",
     way: function() {
-        return iD.Way({tags: {highway: 'residential'}});
+        return iD.Way({
+            tags: {
+                highway: 'residential'
+            }
+        });
     },
     enter: function() {
         var surface = this.map.surface;
@@ -73,7 +77,7 @@ iD.modes.AddRoad = {
             });
         });
 
-        surface.on('click.addroad', function() {
+        function addRoad() {
             var t = d3.select(d3.event.target),
                 node,
                 way = this.way();
@@ -91,7 +95,9 @@ iD.modes.AddRoad = {
             this.map.perform(iD.actions.addWayNode(way, node));
             this.map.selectClick(way);
             this.controller.enter(iD.modes.DrawRoad(way.id));
-        }.bind(this));
+        }
+
+        surface.on('click.addroad', addRoad.bind(this));
 
         d3.select(document).on('keydown.addroad', function() {
             if (d3.event.keyCode === 27) this.exit();
@@ -130,7 +136,7 @@ iD.modes.DrawRoad = function(way_id) {
                 this.map.redraw(only);
             }.bind(this));
 
-            surface.on('click.drawroad', function() {
+            function drawRoad() {
                 var t = d3.select(d3.event.target);
                 d3.event.stopPropagation();
                 if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
@@ -152,7 +158,9 @@ iD.modes.DrawRoad = function(way_id) {
                 this.map.perform(iD.actions.addWayNode(way, node));
                 way.nodes = way.nodes.slice();
                 this.controller.enter(iD.modes.DrawRoad(way_id));
-            }.bind(this));
+            }
+
+            surface.on('click.drawroad', drawRoad.bind(this));
         },
         exit: function() {
             this.map.surface.on('mousemove.drawroad', null);
@@ -166,7 +174,11 @@ iD.modes.DrawRoad = function(way_id) {
 iD.modes.AddArea = {
     title: "+ Area",
     way: function() {
-        return iD.Way({tags: {building: 'yes'}});
+        return iD.Way({
+            tags: {
+                building: 'yes'
+            }
+        });
     },
     enter: function() {
         var surface = this.map.surface;

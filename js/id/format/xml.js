@@ -7,6 +7,8 @@ iD.format.XML = {
     rep: function(entity) {
         if (iD.format.XML.reps[entity.type]) {
             return iD.format.XML.reps[entity.type](entity);
+        } else {
+            if (typeof console !== 'undefined') console.log(entity.type);
         }
     },
     decode: function(s) {
@@ -31,17 +33,30 @@ iD.format.XML = {
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
     osmChange: function(userid, changeset_id, changes) {
-        return (new XMLSerializer()).serializeToString(
-        JXON.unbuild({
+        function nest(x) {
+            var groups = {};
+            for (var i = 0; i < x.length; i++) {
+                var tagName = Object.keys(x[i])[0];
+                if (!groups[tagName]) groups[tagName] = [];
+                groups[tagName].push(x[i][tagName]);
+            }
+            var order = ['node', 'way', 'relation'];
+            var ordered = {};
+            order.forEach(function(o) {
+                if (groups[o]) ordered[o] = groups[o];
+            });
+            return ordered;
+        }
+        var rep = {
             osmChange: {
                 '@version': 0.3,
                 '@generator': 'iD',
                 // TODO: copy elements first
-                create: changes.create.map(function(c) {
-                    var x = Object.create(c);
+                create: nest(changes.create.map(function(c) {
+                    var x = iD.Entity(c);
                     x.changeset = changeset_id;
                     return x;
-                }).map(iD.format.XML.rep),
+                }).map(iD.format.XML.rep)),
                 modify: changes.modify.map(function(c) {
                     var x = Object.create(c);
                     x.changeset = changeset_id;
@@ -53,7 +68,9 @@ iD.format.XML = {
                     return x;
                 }).map(iD.format.XML.rep)
             }
-        }));
+        };
+        console.log(rep);
+        return (new XMLSerializer()).serializeToString(JXON.unbuild(rep));
     },
     reps: {
         node: function(entity) {
@@ -75,7 +92,7 @@ iD.format.XML = {
                 way: {
                     '@id': entity.id.replace('w', ''),
                     nd: entity.nodes.map(function(e) {
-                        return { keyAttributes: { ref: e.id } };
+                        return { keyAttributes: { ref: e.id.replace('n', '') } };
                     }),
                     tag: _.map(entity.tags, function(v, k) {
                         return { keyAttributes: { k: k, v: v } };

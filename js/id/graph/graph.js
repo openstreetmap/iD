@@ -99,10 +99,18 @@ iD.Graph.prototype = {
     },
 
     modifications: function() {
-        return _.filter(this.entities, function(entity) { return entity.modified(); });
+        return _.filter(this.entities, function(entity) {
+            return entity.modified();
+        }).map(function(e) {
+            return this.fetch(e.id);
+        }.bind(this));
     },
 
     creations: function() {
-        return _.filter(this.entities, function(entity) { return entity.created(); });
+        return _.filter(this.entities, function(entity) {
+            return entity.created();
+        }).map(function(e) {
+            return this.fetch(e.id);
+        }.bind(this));
     }
 };

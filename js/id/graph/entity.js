@@ -34,13 +34,13 @@ iD.Entity.prototype = {
 };
 
 iD.Node = function (attrs) {
-    return iD.Entity(_.extend({}, attrs, {type: 'node'}));
+    return iD.Entity(_.extend({}, attrs || {}, {type: 'node'}));
 };
 
 iD.Way = function (attrs) {
-    return iD.Entity(_.extend({}, attrs, {type: 'way', nodes: []}));
+    return iD.Entity(_.extend({}, attrs || {}, {type: 'way', nodes: []}));
 };
 
 iD.Relation = function (attrs) {
-    return iD.Entity(_.extend({}, attrs, {type: 'relation'}));
+    return iD.Entity(_.extend({}, attrs || {}, {type: 'relation'}));
 };

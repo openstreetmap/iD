@@ -43,3 +43,9 @@ iD.Util.codeWindow = function(content) {
     top.win.document.writeln('<pre>' + content + '</pre>');
     top.win.document.close();
 };
+
+iD.Util.tagText = function(entity) {
+    return d3.entries(entity.tags).map(function(e) {
+        return e.key + ': ' + e.value;
+    }).join('\n');
+};
