@@ -69,7 +69,6 @@ iD.format.XML = {
                 }).map(iD.format.XML.rep)
             }
         };
-        console.log(rep);
         return (new XMLSerializer()).serializeToString(JXON.unbuild(rep));
     },
     reps: {

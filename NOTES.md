@@ -211,3 +211,9 @@ in Firefox but is in webkit so we need to use spaces.
 And trailing spaces are not included in getComputedTextLength:
 
 * https://bugzilla.mozilla.org/show_bug.cgi?id=346694
+
+webkit doesn't let querySelectorAll select camelcase elements:
+
+* https://bugs.webkit.org/show_bug.cgi?id=46800
+* https://bugs.webkit.org/show_bug.cgi?id=83438
+* https://github.com/mbostock/d3/issues/925

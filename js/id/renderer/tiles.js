@@ -1,4 +1,3 @@
-// a minimal map tile client, to be turned on and off etc.
 iD.Tiles = function(selection, projection) {
     var t = {},
         tile = d3.geo.tile();
@@ -17,7 +16,6 @@ iD.Tiles = function(selection, projection) {
         var t = coord[2] % 5;
         return  'http://ecn.t' + t + '.tiles.virtualearth.net/tiles/a' + u + '.jpeg?g=587&mkt=en-gb&n=z';
     }
-
 
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`

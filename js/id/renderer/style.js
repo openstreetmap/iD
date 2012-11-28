@@ -48,16 +48,10 @@ iD.Style.markerimage = function(d) {
     return 'icons/unknown.png';
 };
 
-iD.Style.TAG_CLASSES = {
-    'highway': true,
-    'railway': true,
-    'motorway': true,
-    'amenity': true,
-    'landuse': true,
-    'building': true,
-    'oneway': true,
-    'bridge': true
-};
+iD.Style.TAG_CLASSES = iD.Util.trueObj([
+    'highway', 'railway', 'motorway', 'amenity',
+    'landuse', 'building', 'oneway', 'bridge'
+]);
 
 iD.Style.styleClasses = function(pre) {
     return function(d) {
