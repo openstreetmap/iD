@@ -93,6 +93,7 @@ iD.format.XML = {
                     nd: entity.nodes.map(function(e) {
                         return { keyAttributes: { ref: e.id.replace('n', '') } };
                     }),
+                    '@version': (entity.version || 0),
                     tag: _.map(entity.tags, function(v, k) {
                         return { keyAttributes: { k: k, v: v } };
                     })

@@ -32,7 +32,7 @@ iD.Inspector = function() {
                 .text('Reverse Direction')
                 .on('click', function(d) {
                     event.changeWayDirection(iD.Entity(d, {
-                        nodes: _.pluck(d.nodes.slice().reverse(), 'id')
+                        nodes: _.pluck(d.nodes.reverse(), 'id')
                     }));
                 });
         }
