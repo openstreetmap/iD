@@ -51,12 +51,29 @@ iD.modes.AddPlace = {
     }
 };
 
+iD.modes.dist = function(a, b) {
+    return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
+};
+
+iD.modes.chooseIndex = function(way, point, map) {
+    var dist = iD.modes.dist;
+    var projNodes = way.nodes.map(function(n) {
+        return map.projection([n.lon, n.lat]);
+    });
+    for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
+        changes[i] =
+            (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
+            dist(projNodes[i], projNodes[i + 1]);
+    }
+    return _.indexOf(changes, _.min(changes));
+};
+
 // user has clicked 'add road' or pressed a keybinding, and now has
 // a teaser node and needs to click on the map to start a road
 iD.modes.AddRoad = {
     title: "+ Road",
     way: function() {
-        return iD.Way({ tags: { highway: 'residential' } });
+        return iD.Way({ tags: { highway: 'residential', elastic: 'true' } });
     },
     enter: function() {
         this.map.dblclickEnable(false);
@@ -77,21 +94,7 @@ iD.modes.AddRoad = {
 
         // http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/actions/mapmode/ImproveWayAccuracyAction.java#L431
         // https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/Way.as#L215
-        var map = this.map;
-        function dist(a, b) {
-            return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
-        }
-        function chooseIndex(way, point) {
-            var projNodes = way.nodes.map(function(n) {
-                return map.projection([n.lon, n.lat]);
-            });
-            for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
-                changes[i] =
-                    (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
-                    dist(projNodes[i], projNodes[i + 1]);
-            }
-            return _.indexOf(changes, _.min(changes));
-        }
+        
 
         function addRoad() {
             var t = d3.select(d3.event.target),
@@ -103,7 +106,7 @@ iD.modes.AddRoad = {
                 node = t.data()[0];
             // snap into an existing way
             } else if (t.data() && t.data()[0] && t.data()[0].type === 'way') {
-                var index = chooseIndex(t.data()[0], d3.mouse(surface.node()));
+                var index = iD.modes.chooseIndex(t.data()[0], d3.mouse(surface.node()), this.map);
                 node = iD.modes._node(this.map.projection.invert(
                     d3.mouse(surface.node())));
                 var connectedWay = this.map.history.graph().entity(t.data()[0].id);
@@ -171,12 +174,21 @@ iD.modes.DrawRoad = function(way_id) {
                     if (t.data()[0].id == lastnode_id) {
                         var l = this.map.history.graph().entity(way.nodes.pop());
                         this.map.perform(iD.actions.removeWayNode(way, l));
+                        delete way.tags.elastic;
+                        this.map.perform(iD.actions.changeTags(way, way.tags));
                         // End by clicking on own tail
                         return this.exit();
                     } else {
                         // connect a way to an existing way
                         node = t.data()[0];
                     }
+                } else if (t.data() && t.data()[0] && t.data()[0].type === 'way') {
+                    var index = iD.modes.chooseIndex(t.data()[0], d3.mouse(surface.node()), this.map);
+                    node = iD.modes._node(this.map.projection.invert(
+                        d3.mouse(surface.node())));
+                    var connectedWay = this.map.history.graph().entity(t.data()[0].id);
+                    connectedWay.nodes.splice(1, 0, node.id);
+                    this.map.perform(iD.actions.addWayNode(connectedWay, node));
                 } else {
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));

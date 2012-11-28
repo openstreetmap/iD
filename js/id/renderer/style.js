@@ -50,7 +50,7 @@ iD.Style.markerimage = function(d) {
 
 iD.Style.TAG_CLASSES = iD.Util.trueObj([
     'highway', 'railway', 'motorway', 'amenity',
-    'landuse', 'building', 'oneway', 'bridge'
+    'landuse', 'building', 'oneway', 'bridge', 'elastic'
 ]);
 
 iD.Style.styleClasses = function(pre) {

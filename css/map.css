@@ -40,6 +40,10 @@ path.casing {
     stroke-width: 3;
 }
 
+.elastic-true {
+    pointer-events:none;
+}
+
 path.casing:hover {
     stroke:#FF0F0F !important;
     opacity:0.8;
