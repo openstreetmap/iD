@@ -64,7 +64,7 @@ iD.OAuth = function() {
             .on('click', function() {
                 if (d3.event.target == this) shaded.remove();
             });
-        var modal = shaded.append('div').attr('class', 'modal');
+        var modal = shaded.append('div').attr('class', 'modal').style('display', 'none');
         var ifr = modal.append('iframe')
             .attr({ width: 640, height: 550, frameborder: 'no' });
 
@@ -73,7 +73,10 @@ iD.OAuth = function() {
         o.oauth_signature = ohauth.signature(oauth_secret, '',
             ohauth.baseString('POST', url, o));
 
+        var l = iD.loading('contacting openstreetmap...');
         ohauth.xhr('POST', url, o, null, {}, function(xhr) {
+            l.remove();
+            modal.style('display', 'block');
             var resp = ohauth.stringQs(xhr.response);
             token('oauth_request_token_secret', resp.oauth_token_secret);
             var at = baseurl + '/oauth/authorize?';
@@ -93,7 +96,9 @@ iD.OAuth = function() {
                 var request_token_secret = token('oauth_request_token_secret');
                 o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
                     ohauth.baseString('POST', url, o));
+                var l = iD.loading('contacting openstreetmap...');
                 ohauth.xhr('POST', url, o, null, {}, function(xhr) {
+                    l.remove();
                     var access_token = ohauth.stringQs(xhr.response);
                     token('oauth_token', access_token.oauth_token);
                     token('oauth_token_secret', access_token.oauth_token_secret);
