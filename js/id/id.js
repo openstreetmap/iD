@@ -73,7 +73,7 @@ var iD = function(container) {
                 var l = iD.loading('committing changes to openstreetmap');
                 connection.putChangeset(map.history.changes(), e.comment, function() {
                     l.remove();
-                    map.history = new iD.History();
+                    map.history = iD.History();
                     map.flush();
                     map.update();
                     map.redraw();

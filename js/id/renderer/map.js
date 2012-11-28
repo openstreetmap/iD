@@ -424,7 +424,7 @@ iD.Map = function(elem, connection) {
     }
 
     function update() {
-        map.update();
+        // map.update();
         redraw();
     }
 

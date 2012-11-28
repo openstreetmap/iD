@@ -38,7 +38,7 @@ iD.Node = function (attrs) {
 };
 
 iD.Way = function (attrs) {
-    return iD.Entity(_.extend({}, attrs, {type: 'way'}));
+    return iD.Entity(_.extend({}, attrs, {type: 'way', nodes: []}));
 };
 
 iD.Relation = function (attrs) {

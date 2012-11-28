@@ -4,22 +4,6 @@ iD.Graph = function(entities, annotation) {
     this.entities = entities || {};
     this.annotation = annotation;
 
-    for (var id in this.entities) {
-        // TODO: update extents that need it.
-        if (this.entities[id].type === 'way' && !this.entities[id]._extent) {
-            // top left, bottom right
-            var extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
-            var w = this.fetch(id);
-            for (var j = 0, l = w.nodes.length; j < l; j++) {
-                if (w.nodes[j].lon > extent[0][0]) extent[0][0] = w.nodes[j].lon;
-                if (w.nodes[j].lon < extent[1][0]) extent[1][0] = w.nodes[j].lon;
-                if (w.nodes[j].lat < extent[0][1]) extent[0][1] = w.nodes[j].lat;
-                if (w.nodes[j].lat > extent[1][1]) extent[1][1] = w.nodes[j].lat;
-            }
-            this.entities[id]._extent = extent;
-        }
-    }
-
     if (iD.debug) {
         Object.freeze(this);
         Object.freeze(this.entities);
@@ -72,6 +56,22 @@ iD.Graph.prototype = {
             entity._extent[1][1] > extent[1][1];
     },
 
+    indexWay: function(way) {
+        if (way.type === 'way' && !way._extent) {
+            // top left, bottom right
+            var extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
+            var w = way;
+            for (var j = 0, l = w.nodes.length; j < l; j++) {
+                if (w.nodes[j].lon > extent[0][0]) extent[0][0] = w.nodes[j].lon;
+                if (w.nodes[j].lon < extent[1][0]) extent[1][0] = w.nodes[j].lon;
+                if (w.nodes[j].lat < extent[0][1]) extent[0][1] = w.nodes[j].lat;
+                if (w.nodes[j].lat > extent[1][1]) extent[1][1] = w.nodes[j].lat;
+            }
+            way._extent = extent;
+        }
+        return true;
+    },
+
     // get all objects that intersect an extent.
     intersects: function(extent) {
         var items = [];
@@ -81,7 +81,7 @@ iD.Graph.prototype = {
                 items.push(entity);
             } else if (entity.type === 'way') {
                 var w = this.fetch(entity.id);
-                if (this.wayIntersect(w, extent)) items.push(w);
+                if (this.indexWay(w) && this.wayIntersect(w, extent)) items.push(w);
             }
         }
         return items;
