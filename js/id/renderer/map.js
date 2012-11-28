@@ -374,7 +374,8 @@ iD.Map = function(elem, connection) {
     }
 
     inspector.on('changeTags', function(d, tags) {
-        map.perform(iD.actions.changeTags(d, tags));
+        var entity = map.history.graph().entity(d.id);
+        map.perform(iD.actions.changeTags(entity, tags));
     }).on('changeWayDirection', function(d, tags) {
         map.perform(iD.actions.changeWayDirection(d));
     }).on('remove', function(d) {

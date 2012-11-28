@@ -83,16 +83,25 @@ iD.Inspector = function() {
                     });
             }
 
-            function update() {
+           function clean(x) {
+                for (var i in x) if (!i) delete x[i];
+                return x;
+            }
+
+            function pad(x) {
+                if (!x['']) x[''] = '';
+                return x;
+            }
+
+            function grabtags() {
                 var grabbed = {};
                 function grab(d) { grabbed[d.key] = d.value; }
                 tbody.selectAll('td').each(grab);
-                if (!grabbed['']) {
-                    grabbed[''] = '';
-                    draw(grabbed);
-                }
-                draw(grabbed);
                 return grabbed;
+            }
+
+            function update() {
+                draw(pad(grabtags()));
             }
 
             var data = _.clone(entity.tags);
@@ -102,7 +111,7 @@ iD.Inspector = function() {
             selection.append('button')
                 .attr('class', 'save').text('Save')
                 .on('click', function() {
-                    event.changeTags(entity, update());
+                    event.changeTags(entity, clean(grabtags()));
                 });
 
             selection.append('button')
