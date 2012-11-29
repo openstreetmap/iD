@@ -1,20 +1,5 @@
 ## Interactions
 
-    map movement +---+ adding a node
-                 |
-                 +---+ adding a way +--+ click on an existing node
-                 |                  |
-                 |                  +--+ click on the map
-                 |                  |
-                 |                  +--+ click on existing, or esc to finish
-                 |
-                 +---+ adding an area ++ click on existing node
-                                      |
-                                      ++ click on map
-                                      |
-                                      ++ double click to finish, closes area if unclosed
-
-
 Way drawing strategy:
 
 * START: Click to start way
@@ -25,6 +10,24 @@ Way drawing strategy:
 * [Adding a new road in MapZen](http://www.youtube.com/watch?v=tdpDm6MiUEM)
 * [Editing turn restrictions](http://www.youtube.com/watch?v=DyHorSJFbyg)
 
+### Continuing Ways
+
+Continuing ways is a tricky problem: for instance, fixing unclosed areas by
+completing the loop.
+
+**Potlatch** does this by clicking on the way (since it does
+not show handles by default), showing handles, and if you click on the start
+or end, it immediately starts drawing. If you escape out of that draw, you can
+then edit the node itself.
+
+**JOSM**, since it has an `add` mode, just selects the node if you click a start
+or end. You need to be in draw mode, and then clicking on a start/end node
+extends the way.
+
+_However_ JOSM also does a little trick where if you have a node selected and
+then enter draw mode, it'll start either a new way or a continuation of the way,
+depending on whether it's the start or the end.
+
 ## Pathological conditions
 
 * Ways with one node
@@ -32,6 +35,7 @@ Way drawing strategy:
 * Nodes with no tags and no way attached
 * Ways which contain only nodes that are subsets of the nodes of other ways
 * Paths with intersecting boundaries (invalid geometries)
+* Nodes with tags that repeat what the way says
 
 ## Code Layout
 
@@ -66,6 +70,8 @@ In English:
 * Nodes have ()
 
 ## Performance
+
+See blog post: http://mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
 
 Main performance concerns of iD:
 
