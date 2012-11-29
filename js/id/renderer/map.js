@@ -339,6 +339,14 @@ iD.Map = function(elem, connection) {
         }
     }
 
+    function selectEntity(entity) {
+        selection = entity.id;
+        d3.select('.inspector-wrap')
+            .style('display', 'block')
+            .datum(map.history.graph().fetch(entity.id)).call(inspector);
+        redraw();
+    }
+
     function selectClick() {
         var entity = d3.select(d3.event.target).data();
         if (entity) entity = entity[0];
@@ -504,7 +512,7 @@ iD.Map = function(elem, connection) {
     map.download = download;
     map.getExtent = getExtent;
 
-    map.selectClick = selectClick;
+    map.selectEntity = selectEntity;
 
     map.center = center;
     map.centre = center;

@@ -35,7 +35,7 @@ iD.modes.AddPlace = {
             var n = iD.modes._node(ll);
             n._poi = true;
             this.map.perform(iD.actions.addNode(n));
-            this.map.selectClick(n);
+            this.map.selectEntity(n);
             this.exit();
         }.bind(this));
 
@@ -281,7 +281,7 @@ iD.modes.AddArea = {
             this.map.perform(iD.actions.startWay(way));
             way.nodes.push(node.id);
             this.map.perform(iD.actions.addWayNode(way, node));
-            this.map.selectClick(way);
+            this.map.selectEntity(way);
             this.controller.enter(iD.modes.DrawArea(way.id));
         }
 

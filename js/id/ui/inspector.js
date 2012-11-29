@@ -117,16 +117,16 @@ iD.Inspector = function() {
             function drawbuttons(selection) {
                 selection.append('button')
                     .attr('class', 'save').text('Save')
-                    .on('click', function() {
+                    .on('click', function(entity) {
                         event.changeTags(entity, clean(grabtags()));
                         event.close(entity);
                     });
                 selection.append('button')
                     .attr('class', 'cancel').text('Cancel')
-                    .on('click', function() { event.close(entity); });
+                    .on('click', function(entity) { event.close(entity); });
                 selection.append('button')
                     .attr('class', 'delete').text('Delete')
-                    .on('click', function() { event.remove(entity); });
+                    .on('click', function(entity) { event.remove(entity); });
             }
         });
     }
