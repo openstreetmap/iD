@@ -370,7 +370,7 @@ iD.Map = function(elem, connection) {
     function selectClick() {
         var entity = d3.select(d3.event.target).data();
         if (entity) entity = entity[0];
-        if (!entity || selection === entity.id) return;
+        if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
         selection = entity.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')

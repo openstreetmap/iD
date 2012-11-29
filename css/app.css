@@ -292,7 +292,7 @@ input#geocode-location {
 
 .commit-section {
     max-height:250px;
-    overflow:scroll;
+    overflow:auto;
 }
 
 /* mobile tweaks */

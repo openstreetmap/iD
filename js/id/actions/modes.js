@@ -8,7 +8,8 @@ iD.modes = {};
 iD.modes._node = function(ll) {
     return iD.Node({
         lat: ll[1],
-        lon: ll[0]
+        lon: ll[0],
+        tags: {}
     });
 };
 
@@ -219,7 +220,7 @@ iD.modes.AddArea = {
     title: "+ Area",
     way: function() {
         return iD.Way({
-            tags: { building: 'yes', area: 'yes' }
+            tags: { building: 'yes', area: 'yes', elastic: 'true' }
         });
     },
     enter: function() {
@@ -312,6 +313,8 @@ iD.modes.DrawArea = function(way_id) {
                         way.nodes.push(way.nodes[0]);
                         this.map.perform(iD.actions.addWayNode(way,
                             this.map.history.graph().entity(way.nodes[0])));
+                        delete way.tags.elastic;
+                        this.map.perform(iD.actions.changeTags(way, way.tags));
                         // End by clicking on own tail
                         return this.exit();
                     } else {
@@ -322,7 +325,8 @@ iD.modes.DrawArea = function(way_id) {
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));
                 }
-                way.nodes.pop();
+                var old = this.map.history.graph().entity(way.nodes.pop());
+                this.map.perform(iD.actions.removeWayNode(way, old));
                 way.nodes.push(node.id);
                 this.map.perform(iD.actions.addWayNode(way, node));
                 way.nodes = way.nodes.slice();
