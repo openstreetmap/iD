@@ -49,12 +49,9 @@ iD.Map = function(elem, connection) {
             .on('mouseover', nameHoverIn)
             .on('mouseout', nameHoverOut)
             .attr('clip-path', 'url(#clip)'),
-        fill_g = r.append('g').attr('id', 'fill-g'),
-        casing_g = r.append('g').attr('id', 'casing-g'),
-        stroke_g = r.append('g').attr('id', 'stroke-g'),
-        text_g = r.append('g').attr('id', 'text-g'),
-        hit_g = r.append('g').attr('id', 'hit-g'),
-        temp = r.append('g').attr('id', 'temp-g'),
+        g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
+            return (mem[i] = r.append('g').attr('class', 'layer-g')) && mem;
+        }, {}),
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
@@ -139,7 +136,7 @@ iD.Map = function(elem, connection) {
     }
 
     function drawHandles(waynodes, filter) {
-        var handles = hit_g.selectAll('rect.handle')
+        var handles = g.hit.selectAll('rect.handle')
             .filter(filter)
             .data(waynodes, key);
         handles.exit().remove();
@@ -152,17 +149,13 @@ iD.Map = function(elem, connection) {
         }).classed('active', classActive);
     }
 
-    function hideHandles() { hit_g.selectAll('rect.handle').remove(); }
+    function hideHandles() { g.hit.selectAll('rect.handle').remove(); }
     function hideVector() {
-        fill_g.selectAll('*').remove();
-        stroke_g.selectAll('*').remove();
-        casing_g.selectAll('*').remove();
-        text_g.selectAll('*').remove();
-        hit_g.selectAll('*').remove();
+        surface.selectAll('.layer-g *').remove();
     }
 
     function drawFills(areas, filter) {
-        var fills = fill_g.selectAll('path')
+        var fills = g.fill.selectAll('path')
             .filter(filter)
             .data(areas, key);
         fills.exit().remove();
@@ -176,7 +169,7 @@ iD.Map = function(elem, connection) {
     }
 
     function drawMarkers(points, filter) {
-        var markers = hit_g.selectAll('g.marker')
+        var markers = g.hit.selectAll('g.marker')
             .filter(filter)
             .data(points, key);
         markers.exit().remove();
@@ -197,7 +190,7 @@ iD.Map = function(elem, connection) {
     
     function isOneWay(d) { return d.tags.oneway && d.tags.oneway === 'yes'; }
     function drawStrokes(ways, filter) {
-        var strokes = stroke_g.selectAll('path')
+        var strokes = g.stroke.selectAll('path')
             .filter(filter)
             .data(ways, key);
         strokes.exit().remove();
@@ -224,13 +217,13 @@ iD.Map = function(elem, connection) {
             .attr('id', function(d) { return 'shadow-' + d.id; })
             .attr('d', getline);
 
-        var labels = text_g.selectAll('text')
+        var labels = g.text.selectAll('text')
             .data(oneways, key);
         labels.exit().remove();
         var tp = labels.enter()
             .append('text').attr({ 'class': 'oneway', dy: 4 })
             .append('textPath').attr('class', 'textpath');
-        text_g.selectAll('.textpath')
+        g.text.selectAll('.textpath')
             .attr('letter-spacing', alength * 2)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
             .text(function(d) {
@@ -239,7 +232,7 @@ iD.Map = function(elem, connection) {
     }
 
     function drawCasings(ways, filter) {
-        var casings = casing_g.selectAll('path')
+        var casings = g.casing.selectAll('path')
             .filter(filter)
             .data(ways, key);
         casings.exit().remove();
@@ -253,7 +246,7 @@ iD.Map = function(elem, connection) {
             .classed('active', classActive);
     }
 
-    function hideCasings() { casing_g.selectAll('path').remove(); }
+    function hideCasings() { g.casing.selectAll('path').remove(); }
 
     function setSize(x) {
         dimensions = x;
