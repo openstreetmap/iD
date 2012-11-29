@@ -164,12 +164,12 @@ iD.Map = function(elem, connection) {
             .data(waynodes, key);
         handles.exit().remove();
         handles.enter().append('rect')
-            .attr({ width: 4, height: 4, 'class': 'handle' })
+            .attr({ width: 6, height: 6, 'class': 'handle' })
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
             var p = projection(ll2a(entity));
-            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-2, -2) rotate(45, 2, 2)';
-        });
+            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 2, 2)';
+        }).classed('active', classActive);
     }
 
     function hideHandles() { hit_g.selectAll('rect.handle').remove(); }
@@ -377,13 +377,24 @@ iD.Map = function(elem, connection) {
         redraw();
     }
 
+    function removeEntity(entity) {
+        var parents = map.history.graph().parents(entity.id);
+        parents
+            .filter(function(d) { return d.type === 'way'; })
+            .forEach(function(parent) {
+                parent.nodes = _.without(parent.nodes, entity.id);
+                map.perform(iD.actions.removeWayNode(parent, entity));
+            });
+        map.perform(iD.actions.remove(entity));
+    }
+
     inspector.on('changeTags', function(d, tags) {
         var entity = map.history.graph().entity(d.id);
         map.perform(iD.actions.changeTags(entity, tags));
     }).on('changeWayDirection', function(d) {
         map.perform(iD.actions.changeWayDirection(d));
     }).on('remove', function(d) {
-        map.perform(iD.actions.remove(d));
+        removeEntity(d);
         hideInspector();
     }).on('close', function() {
         deselectClick();

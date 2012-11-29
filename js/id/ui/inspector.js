@@ -9,7 +9,7 @@ iD.Inspector = function() {
             .attr('class', 'permalink')
             .attr('href', function(d) {
                 return 'http://www.openstreetmap.org/browse/' +
-                  d.type + '/' + d.id.slice(1);
+                d.type + '/' + d.id.slice(1);
             })
             .text('View on OSM');
         selection.append('a')
@@ -83,11 +83,13 @@ iD.Inspector = function() {
                     });
             }
 
-           function clean(x) {
+            // Remove any blank key-values
+            function clean(x) {
                 for (var i in x) if (!i) delete x[i];
                 return x;
             }
 
+            // Add a blank row for new tags
             function pad(x) {
                 if (!x['']) x[''] = '';
                 return x;
@@ -100,6 +102,7 @@ iD.Inspector = function() {
                 return grabbed;
             }
 
+            // fill values and add blank field if necessary
             function update() {
                 draw(pad(grabtags()));
             }
@@ -108,20 +111,23 @@ iD.Inspector = function() {
             draw(data);
             update();
 
-            selection.append('button')
-                .attr('class', 'save').text('Save')
-                .on('click', function() {
-                    event.changeTags(entity, clean(grabtags()));
-                    event.close(entity);
-                });
+            selection.append('div')
+                .attr('class', 'buttons').call(drawbuttons);
 
-            selection.append('button')
-                .attr('class', 'cancel').text('Cancel')
-                .on('click', function() { event.close(entity); });
-
-            selection.append('button')
-                .attr('class', 'delete').text('Delete')
-                .on('click', function() { event.remove(entity); });
+            function drawbuttons(selection) {
+                selection.append('button')
+                    .attr('class', 'save').text('Save')
+                    .on('click', function() {
+                        event.changeTags(entity, clean(grabtags()));
+                        event.close(entity);
+                    });
+                selection.append('button')
+                    .attr('class', 'cancel').text('Cancel')
+                    .on('click', function() { event.close(entity); });
+                selection.append('button')
+                    .attr('class', 'delete').text('Delete')
+                    .on('click', function() { event.remove(entity); });
+            }
         });
     }
 

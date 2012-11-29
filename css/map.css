@@ -27,6 +27,11 @@ rect.handle {
     fill:#FFF694;
 }
 
+rect.handle.active {
+    stroke:red;
+    fill:#FFC5C5;
+}
+
 circle.teaser-point {
     stroke-width: 2;
     stroke:#1DCAFF;
