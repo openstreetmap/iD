@@ -1,6 +1,6 @@
 # iD - friendly JavaScript editor for OpenStreetMap
 
-![](https://raw.github.com/systemed/iD/master/screenshot.jpg)
+[![](https://raw.github.com/systemed/iD/master/screenshot.jpg)](http://geowiki.com/iD/)
 
 [Try the online demo of the most recent code.](http://geowiki.com/iD/)
 
