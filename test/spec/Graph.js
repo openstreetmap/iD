@@ -58,8 +58,8 @@ describe('Graph', function() {
         it("filters entities by modified", function () {
             var a = {modified: function () { return true; }},
                 b = {modified: function () { return false; }},
-                graph = iD.Graph([a, b]);
-            expect(graph.modifications()).toEqual([a]);
+                graph = iD.Graph({ 'a': a, 'b': b });
+            expect(graph.modifications()).toEqual([iD.Entity(graph.entity('a'))]);
         });
     });
 
@@ -70,5 +70,5 @@ describe('Graph', function() {
                 graph = iD.Graph([a, b]);
             expect(graph.creations()).toEqual([a]);
         });
-    })
+    });
 });

@@ -20,14 +20,14 @@ iD.Hash = function() {
             return true; // replace bogus hash
         } else {
             map.setZoom(args[0])
-                .setCenter([args[2], Math.min(lat, Math.max(-lat, args[1]))]);
+                .center([args[2], Math.min(lat, Math.max(-lat, args[1]))]);
         }
     };
 
     var formatter = function(map) {
-        var center = map.getCenter(),
-        zoom = map.getZoom(),
-        precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+        var center = map.center(),
+            zoom = map.getZoom(),
+            precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
         return '#?map=' + zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);

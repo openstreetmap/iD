@@ -51,6 +51,7 @@ iD.Map = function(elem, connection) {
             .attr('clip-path', 'url(#clip)'),
         g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
             return (mem[i] = r.append('g').attr('class', 'layer-g')) && mem;
+            return mem;
         }, {}),
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
@@ -478,18 +479,19 @@ iD.Map = function(elem, connection) {
 
     function zoomIn() { return setZoom(Math.ceil(getZoom() + 1)); }
     function zoomOut() { return setZoom(Math.floor(getZoom() - 1)); }
-    function getCenter() { return projection.invert(pxCenter()); }
-
-    function setCenter(loc) {
-        // summary:		Update centre and bbox to a specified lat/lon.
-        var t = projection.translate(),
-            center = pxCenter();
-            ll = projection(loc);
-        projection.translate([
-            t[0] - ll[0] + center[0], t[1] - ll[1] + center[1]]);
-        zoom.translate(projection.translate());
-        redraw();
-        return map;
+    function center(loc) {
+        if (!arguments.length) {
+            return projection.invert(pxCenter());
+        } else {
+            var t = projection.translate(),
+                c = pxCenter(),
+                ll = projection(loc);
+            projection.translate([
+                t[0] - ll[0] + c[0], t[1] - ll[1] + c[1]]);
+            zoom.translate(projection.translate());
+            redraw();
+            return map;
+        }
     }
 
     function flush() {
@@ -501,11 +503,8 @@ iD.Map = function(elem, connection) {
 
     map.selectClick = selectClick;
 
-    map.setCenter = setCenter;
-    map.setCentre = setCenter;
-    map.getCentre = getCenter;
-    map.getCenter = getCenter;
-
+    map.center = center;
+    map.centre = center;
     map.getZoom = getZoom;
     map.setZoom = setZoom;
     map.zoomIn = zoomIn;
