@@ -14,7 +14,7 @@ iD.Tiles = function(selection, projection) {
         }
         // distribute requests against multiple domains
         var t = coord[2] % 5;
-        return  'http://ecn.t' + t + '.tiles.virtualearth.net/tiles/a' + u + '.jpeg?g=587&mkt=en-gb&n=z';
+        return 'http://ecn.t' + t + '.tiles.virtualearth.net/tiles/a' + u + '.jpeg?g=587&mkt=en-gb&n=z';
     }
 
     // derive the tiles onscreen, remove those offscreen and position tiles

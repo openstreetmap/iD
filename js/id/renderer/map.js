@@ -8,8 +8,7 @@ iD.Map = function(elem, connection) {
         selection = null,
         translateStart,
         apiTilesLoaded = {},
-        projection = d3.geo.mercator()
-            .scale(512).translate([512, 512]),
+        projection = d3.geo.mercator(),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
@@ -34,28 +33,12 @@ iD.Map = function(elem, connection) {
                 map.history.replace(iD.actions.move(entity, to));
                 redraw(only);
             })
-            .on('dragend', update),
+            .on('dragend', redraw),
         nodeline = function(d) {
             return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
         },
+        getline = function(d) { return d._line; },
         key = function(d) { return d.id; },
-        messages = d3.select('.messages'),
-
-        // Containers
-        // ----------
-        // The map uses SVG groups in order to restrict
-        // visual and event ordering - fills below casings, casings below
-        // strokes, and so on.
-        //
-        // div (supersurface)
-        //   svg (surface)
-        //     defs
-        //       rect#clip
-        //       path (textPath data)
-        //     g (tilegroup)
-        //     r (vector root)
-        //       g (fill, casing, stroke, text, hit, temp)
-        //         (path, g, marker, etc)
         supersurface = parent.append('div').call(zoom),
         surface = supersurface.append('svg'),
         defs = surface.append('defs'),
@@ -63,20 +46,19 @@ iD.Map = function(elem, connection) {
             .on('click', deselectClick),
         r = surface.append('g')
             .on('click', selectClick)
+            .on('mouseover', nameHoverIn)
+            .on('mouseout', nameHoverOut)
             .attr('clip-path', 'url(#clip)'),
-        // TODO: reduce repetition
         fill_g = r.append('g').attr('id', 'fill-g'),
         casing_g = r.append('g').attr('id', 'casing-g'),
         stroke_g = r.append('g').attr('id', 'stroke-g'),
         text_g = r.append('g').attr('id', 'text-g'),
         hit_g = r.append('g').attr('id', 'hit-g'),
         temp = r.append('g').attr('id', 'temp-g'),
-        // class generators
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
-        // For one-way roads, find the length of a triangle
         alength = (function() {
             var arrow = surface.append('text').text('►');
             var alength = arrow.node().getComputedTextLength();
@@ -108,14 +90,16 @@ iD.Map = function(elem, connection) {
     }
 
     function classActive(d) { return d.id === selection; }
-    function nameHoverIn(d) { messages.text(d.tags.name || '(unknown)'); }
-    function nameHoverOut(d) { messages.text(''); }
 
     function nodeIntersect(entity, extent) {
         return entity.lon > extent[0][0] &&
             entity.lon < extent[1][0] &&
             entity.lat < extent[0][1] &&
             entity.lat > extent[1][1];
+    }
+
+    function isArea(a) {
+        return iD.Way.isClosed(a) || (a.tags.area && a.tags.area === 'yes');
     }
 
     function drawVector(only) {
@@ -133,10 +117,6 @@ iD.Map = function(elem, connection) {
 
         var filter = only ?
             function(d) { return only[d.id]; } : function() { return true; };
-
-        function isArea(way) {
-            return iD.Way.isClosed(a) || (a.tags.area && a.tags.area === 'yes');
-        }
 
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
@@ -190,7 +170,7 @@ iD.Map = function(elem, connection) {
             .attr('class', class_area)
             .classed('active', classActive);
         fills
-            .attr('d', function(d) { return d._line; })
+            .attr('d', getline)
             .attr('class', class_area)
             .classed('active', classActive);
     }
@@ -202,8 +182,6 @@ iD.Map = function(elem, connection) {
         markers.exit().remove();
         var marker = markers.enter().append('g')
             .attr('class', 'marker')
-            .on('mouseover', nameHoverIn)
-            .on('mouseout', nameHoverOut)
             .call(dragbehavior);
         marker.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
@@ -216,31 +194,27 @@ iD.Map = function(elem, connection) {
             .classed('active', classActive);
         markers.select('image').attr('xlink:href', iD.Style.markerimage);
     }
-
+    
+    function isOneWay(d) { return d.tags.oneway && d.tags.oneway === 'yes'; }
     function drawStrokes(ways, filter) {
         var strokes = stroke_g.selectAll('path')
             .filter(filter)
             .data(ways, key);
         strokes.exit().remove();
         strokes.enter().append('path')
-            .on('mouseover', nameHoverIn)
-            .on('mouseout', nameHoverOut)
             .attr('class', class_stroke)
             .classed('active', classActive);
         strokes
             .order()
-            .attr('d', function(d) { return d._line; })
+            .attr('d', getline)
             .attr('class', class_stroke)
             .classed('active', classActive);
 
         // Determine the lengths of oneway paths
-        var lengths = {};
-        var oneways = strokes
-        .filter(function(d) {
-            return d.tags.oneway && d.tags.oneway === 'yes';
-        }).each(function(d) {
-            lengths[d.id] = Math.floor(this.getTotalLength() / alength);
-        }).data();
+        var lengths = {},
+            oneways = strokes.filter(isOneWay).each(function(d) {
+                lengths[d.id] = Math.floor(this.getTotalLength() / alength);
+            }).data();
 
         var uses = defs.selectAll('path')
             .data(oneways, key);
@@ -248,7 +222,7 @@ iD.Map = function(elem, connection) {
         uses.enter().append('path');
         uses
             .attr('id', function(d) { return 'shadow-' + d.id; })
-            .attr('d', function(d) { return d._line; });
+            .attr('d', getline);
 
         var labels = text_g.selectAll('text')
             .data(oneways, key);
@@ -256,10 +230,6 @@ iD.Map = function(elem, connection) {
         var tp = labels.enter()
             .append('text').attr({ 'class': 'oneway', dy: 4 })
             .append('textPath').attr('class', 'textpath');
-        // why not just selectAll('textPath')?
-        // https://bugs.webkit.org/show_bug.cgi?id=46800
-        // https://bugs.webkit.org/show_bug.cgi?id=83438
-        // https://github.com/mbostock/d3/issues/925
         text_g.selectAll('.textpath')
             .attr('letter-spacing', alength * 2)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
@@ -274,13 +244,11 @@ iD.Map = function(elem, connection) {
             .data(ways, key);
         casings.exit().remove();
         casings.enter().append('path')
-            .on('mouseover', nameHoverIn)
-            .on('mouseout', nameHoverOut)
             .attr('class', class_casing)
             .classed('active', classActive);
         casings
             .order()
-            .attr('d', function(d) { return d._line; })
+            .attr('d', getline)
             .attr('class', class_casing)
             .classed('active', classActive);
     }
@@ -357,6 +325,13 @@ iD.Map = function(elem, connection) {
     var download = _.debounce(function() {
         apiTiles().map(apiRequestExtent);
     }, 1000);
+
+    function nameHoverIn() {
+        var entity = d3.select(d3.event.target).data();
+        if (entity) d3.select('.messages').text(entity[0].tags.name || '(unknown)');
+    }
+
+    function nameHoverOut(d) { d3.select('.messages').text(''); }
 
     function deselectClick() {
         var hadSelection = !!selection;
@@ -444,23 +419,19 @@ iD.Map = function(elem, connection) {
         }
     }
 
-    function update() {
-        redraw();
-    }
-
     function perform(action) {
         map.history.perform(action);
-        update();
+        redraw();
     }
 
     function undo() {
         map.history.undo();
-        update();
+        redraw();
     }
 
     function redo() {
         map.history.redo();
-        update();
+        redraw();
     }
 
     function dblclickEnable(_) {
