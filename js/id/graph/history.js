@@ -70,7 +70,9 @@ iD.History.prototype = {
         return _.difference(
             _.pluck(this.stack[0].entities, 'id'),
             _.pluck(this.stack[this.index].entities, 'id')
-            );
+            ).map(function(id) {
+                return this.stack[0].fetch(id);
+            }.bind(this));
     },
 
     changes: function() {

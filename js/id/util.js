@@ -16,7 +16,7 @@ iD.Util.trueObj = function(arr) {
 
 iD.Util.friendlyName = function(entity) {
     // Generate a string such as 'river' or 'Fred's House' for an entity.
-    if (!Object.keys(entity.tags).length) { return ''; }
+    if (!entity.tags || !Object.keys(entity.tags).length) { return ''; }
 
     var mainkeys = ['highway','amenity','railway','waterway'],
         n = [];
