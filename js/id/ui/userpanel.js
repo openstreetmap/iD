@@ -16,8 +16,12 @@ iD.userpanel = function(connection) {
                     selection
                         .append('a')
                         .attr('class', 'logout')
+                        .attr('href', '#')
                         .text('logout')
-                        .on('click', event.logout);
+                        .on('click', function() {
+                            d3.event.preventDefault();
+                            event.logout();
+                        });
                 });
             } else {
                 selection

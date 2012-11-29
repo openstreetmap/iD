@@ -95,8 +95,6 @@ iD.modes.AddRoad = {
 
         // http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/actions/mapmode/ImproveWayAccuracyAction.java#L431
         // https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/Way.as#L215
-        
-
         function addRoad() {
             var t = d3.select(d3.event.target),
                 node,

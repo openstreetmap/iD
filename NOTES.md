@@ -28,6 +28,10 @@ _However_ JOSM also does a little trick where if you have a node selected and
 then enter draw mode, it'll start either a new way or a continuation of the way,
 depending on whether it's the start or the end.
 
+## Relations and Turn Restrictions
+
+http://wiki.openstreetmap.org/wiki/Relation:restriction
+
 ## Pathological conditions
 
 * Ways with one node
