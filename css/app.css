@@ -297,3 +297,8 @@ button small {
     width:630px;
     font-size:100%;
 }
+
+.commit-section {
+    max-height:250px;
+    overflow:scroll;
+}

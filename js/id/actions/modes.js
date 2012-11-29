@@ -193,7 +193,8 @@ iD.modes.DrawRoad = function(way_id) {
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));
                 }
-                way.nodes.pop();
+                var old = this.map.history.graph().entity(way.nodes.pop());
+                this.map.perform(iD.actions.removeWayNode(way, old));
                 way.nodes.push(node.id);
                 this.map.perform(iD.actions.addWayNode(way, node));
                 way.nodes = way.nodes.slice();

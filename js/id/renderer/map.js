@@ -378,8 +378,8 @@ iD.Map = function(elem, connection) {
     }
 
     function removeEntity(entity) {
-        var parents = map.history.graph().parents(entity.id);
-        parents
+        // Remove this node from any ways that is a member of
+        map.history.graph().parents(entity.id)
             .filter(function(d) { return d.type === 'way'; })
             .forEach(function(parent) {
                 parent.nodes = _.without(parent.nodes, entity.id);
