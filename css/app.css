@@ -1,8 +1,81 @@
 body {
-    font:normal 13px/20px Helvetica, Arial, sans-serif;
+    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
     color:#444;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height:40px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    line-height:30px;
+}
+
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+p {
+    margin:0;
+    padding:0;
+}
+
+a:visited, a {
+    color: #345692;
+}
+
+a:hover {
+    color:#000;
+}
+
+input[type=text] {
+    font-size:12px;
+    line-height:20px;
+    padding:1px 2px;
+}
+
+input[type=text]:focus {
+    border-color:#222;
+}
+
+button {
+    background:#7092ff;
+    border:0;
+    color:#fff;
+    font-size:12px;
+    line-height:18px;
+    margin:5px 5px 0 0;
+    cursor:pointer;
+}
+
+button.cancel {
+    background:#aaa;
+}
+button.delete {
+    background:#DD5757;
+}
+
+button:hover {
+    background:#000;
+}
+
+button small {
+    display: inline-block;
+    font-weight: normal;
+    font-size:12px;
+    line-height:20px;
+    vertical-align: top;
+}
+
+table th {
+    text-align:left;
 }
 
 #map {
@@ -38,45 +111,6 @@ input#geocode-location {
     color:#222;
 }
 
-:focus {
-    outline-color: transparent;
-    outline-style: none;
-}
-
-p {
-    margin:0;
-    padding:0;
-    font-size: x-small;
-}
-a:visited, a {
-    color: #345692;
-}
-a:hover {
-    color:#000;
-}
-
-input[type=text] {
-    font:normal 13px/20px Helvetica, Arial, sans-serif;
-    padding:1px 2px;
-}
-
-input[type=text]:focus {
-    border-color:#222;
-}
-
-button {
-    background:#3f5ca5;
-    border:0;
-    color:#fff;
-    font:normal 12px/18px 'Helvetica Neue', sans-serif;
-    margin:5px 5px 0 0;
-    cursor:pointer;
-}
-
-button:hover {
-    background:#000;
-}
-
 #bar button {
     width:80px;
     white-space:nowrap;
@@ -84,7 +118,9 @@ button:hover {
     display:inline-block;
     background:#fff;
     color:#222;
-    font:bold 14px/19px 'Helvetica Neue', sans-serif;
+    font-weight:bold;
+    font-size:14px;
+    line-height:19px;
     border:0;
     border-right:1px solid #eee;
     padding:0 10px;
@@ -105,7 +141,6 @@ button:hover {
     width:200px;
     position:absolute;
     right:300px;
-    font-size:11px;
     top:0;
     padding:10px;
 }
@@ -147,14 +182,6 @@ button:hover {
     width:auto;
 }
 
-button small {
-    display: inline-block;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 20px;
-    vertical-align: top;
-}
-
 #bar input[type=text] {
     width:150px;
     height:30px;
@@ -178,28 +205,13 @@ button small {
     right:0px;
     overflow:auto;
     padding:10px;
-    background:#eee;
-    border-top:1px solid #000;
-    color:#222;
+    background:#fff;
     width:350px;
-}
-
-.inspector-wrap h2 {
-    font: bold 20px/20px 'Helvetica';
 }
 
 .inspector-wrap a.permalink {
     text-decoration:none;
     margin-right:1em;
-    font: normal 11px/20px 'Helvetica'
-}
-
-.inspector thead th {
-    font-size:10px;
-    line-height:15px;
-    color:#999;
-    font-weight:normal;
-    text-transform:uppercase;
 }
 
 .inspector tbody td {
@@ -217,17 +229,15 @@ button small {
 
 .inspector-wrap table {
     border-collapse: collapse;
-    width:350px;
+    width:347px;
     border-spacing:0;
 }
+
 .inspector-wrap .tag-table-wrap {
     max-height:350px;
-    overflow-y:scroll;
-    overflow-x:hidden;
+    overflow:auto;
 }
-.inspector-wrap table th {
-    text-align:left;
-}
+
 .inspector-wrap table td {
     padding:0;
     border-spacing:0;
@@ -266,21 +276,15 @@ button small {
     left:0px; right:0px; top:0px; bottom:0px;
 }
 
-.commit-pane h2 {
-    font: bold 24px/40px 'Helvetica';
-}
-
 .commit-pane h3 small.count {
-    font: normal 12px/40px 'Helvetica';
+    font-size:12px;
+    font-weight: normal;
+    line-height:40px;
     border-radius:20px;
     padding:5px;
-    background:#555;
+    background:#7092ff;
     margin-left:10px;
     color:#fff;
-}
-
-.commit-pane h3 {
-    font: bold 18px/30px 'Helvetica';
 }
 
 .commit-pane ul {
@@ -295,7 +299,7 @@ button small {
 
 .commit-pane .changeset-comment {
     width:630px;
-    font-size:100%;
+    font-size:12px;
 }
 
 .commit-section {
