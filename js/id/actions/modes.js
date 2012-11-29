@@ -66,7 +66,7 @@ iD.modes.chooseIndex = function(way, point, map) {
             (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
             dist(projNodes[i], projNodes[i + 1]);
     }
-    return _.indexOf(changes, _.min(changes));
+    return _.indexOf(changes, _.min(changes)) + 1;
 };
 
 // user has clicked 'add road' or pressed a keybinding, and now has
@@ -111,7 +111,7 @@ iD.modes.AddRoad = {
                 node = iD.modes._node(this.map.projection.invert(
                     d3.mouse(surface.node())));
                 var connectedWay = this.map.history.graph().entity(t.data()[0].id);
-                connectedWay.nodes.splice(1, 0, node.id);
+                connectedWay.nodes.splice(index, 0, node.id);
                 this.map.perform(iD.actions.addWayNode(connectedWay, node));
             } else {
                 node = iD.modes._node(this.map.projection.invert(
