@@ -62,10 +62,6 @@ button.delete {
     background:#DD5757;
 }
 
-button:hover {
-    background:#000;
-}
-
 button small {
     display: inline-block;
     font-weight: normal;
@@ -156,10 +152,6 @@ input#geocode-location {
     cursor:auto;
 }
 
-#bar button:hover:not([disabled]) {
-    background:#eee;
-}
-
 #bar button.active:not([disabled]) {
     background:#eee;
     color:#000;
@@ -171,10 +163,6 @@ input#geocode-location {
     right:100px;
     background:#7092ff;
     color:#fff;
-}
-
-#bar button.save:hover {
-    background:#000;
 }
 
 #bar button.mini,
@@ -305,4 +293,10 @@ input#geocode-location {
 .commit-section {
     max-height:250px;
     overflow:scroll;
+}
+
+/* mobile tweaks */
+* {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-touch-callout:none;
 }

@@ -342,13 +342,14 @@ iD.Map = function(elem, connection) {
         return coords.filter(tileAlreadyLoaded).map(apiExtentBox);
     }
 
+
     function apiRequestExtent(extent) {
         connection.bboxFromAPI(extent, function (result) {
             if (result instanceof Error) {
                 // TODO: handle
             } else {
                 map.history.merge(result);
-                drawVector();
+                drawVector(iD.Util.trueObj(Object.keys(result.entities)));
             }
         });
     }
