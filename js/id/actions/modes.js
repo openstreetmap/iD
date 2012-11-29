@@ -166,7 +166,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
             var nextnode_id = nextnode.id;
 
             var way = this.map.history.graph().entity(way_id);
-            var lastnode_id = (direction === 'forward') ? _.last(way.nodes) : way.nodes[0];
+            var firstNode = way.nodes[0];
+            var lastNode = _.last(way.nodes);
             way.nodes[push](nextnode_id);
             this.map.perform(iD.actions.addWayNode(way, nextnode));
 
@@ -185,9 +186,20 @@ iD.modes.DrawRoad = function(way_id, direction) {
                 var t = d3.select(d3.event.target);
                 d3.event.stopPropagation();
                 if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
-                    if (t.data()[0].id == lastnode_id) {
+                    if (t.data()[0].id == firstNode || t.data()[0].id == lastNode) {
                         var l = this.map.history.graph().entity(way.nodes[pop]());
                         this.map.perform(iD.actions.removeWayNode(way, l));
+                        // If this is drawing a loop and this is not the drawing
+                        // end of the stick, finish the circle
+                        if (direction === 'forward' && t.data()[0].id == firstNode) {
+                            way.nodes[push](firstNode);
+                            this.map.perform(iD.actions.addWayNode(way,
+                                this.map.history.graph().entity(firstNode)));
+                        } else if (direction === 'backward' && t.data()[0].id == lastNode) {
+                            way.nodes[push](lastNode);
+                            this.map.perform(iD.actions.addWayNode(way,
+                                this.map.history.graph().entity(lastNode)));
+                        }
                         delete way.tags.elastic;
                         this.map.perform(iD.actions.changeTags(way, way.tags));
                         // End by clicking on own tail

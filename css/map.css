@@ -79,6 +79,13 @@ path.stroke.railway-subway {
     stroke-dasharray: 8,8;
 }
 
+path.area {
+    stroke-width:2;
+    stroke:red;
+    fill:#fff;
+    fill-opacity:0.3;
+}
+
 path.area.active {
     stroke-width:3 !important;
 }
@@ -87,14 +94,12 @@ path.area.natural {
     stroke: #ADD6A5;
     fill: #ADD6A5;
     stroke-width:1;
-    fill-opacity:0.3;
 }
 
 path.area.building {
     stroke: #9E176A;
     stroke-width: 1;
     fill: #ff6ec7;
-    fill-opacity: 0.3;
 }
 
 path.area.landuse,

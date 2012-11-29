@@ -51,7 +51,6 @@ iD.Map = function(elem, connection) {
             .attr('clip-path', 'url(#clip)'),
         g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
             return (mem[i] = r.append('g').attr('class', 'layer-g')) && mem;
-            return mem;
         }, {}),
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
@@ -326,7 +325,7 @@ iD.Map = function(elem, connection) {
 
     function nameHoverIn() {
         var entity = d3.select(d3.event.target).data();
-        if (entity) d3.select('.messages').text(entity[0].tags.name || '(unknown)');
+        if (entity) d3.select('.messages').text(entity[0].tags.name || '#' + entity[0].id);
     }
 
     function nameHoverOut(d) { d3.select('.messages').text(''); }
