@@ -12,7 +12,7 @@ iD.Map = function(elem, connection) {
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
-            .scaleExtent([256, 134217728])
+            .scaleExtent([256, 256 * Math.pow(2, 20)])
             .on('zoom', zoomPan),
         only,
         dblclickEnabled = true,
@@ -116,6 +116,14 @@ iD.Map = function(elem, connection) {
         var filter = only ?
             function(d) { return only[d.id]; } : function() { return true; };
 
+        if (all.length > 2000) {
+            d3.select('.messages').text('Zoom in to edit the map');
+            hideVector();
+            return;
+        } else {
+            d3.select('.messages').text('Zoom in to edit the map');
+        }
+
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
             if (a.type === 'way') {
@@ -128,9 +136,8 @@ iD.Map = function(elem, connection) {
                 waynodes.push(a);
             }
         }
-
-        if (z > 18) { drawHandles(waynodes, filter); } else { hideHandles(); }
-        if (z > 18) { drawCasings(ways, filter); } else { hideCasings(); }
+        drawHandles(waynodes, filter);
+        drawCasings(ways, filter);
         drawFills(areas, filter);
         drawStrokes(ways, filter);
         drawMarkers(points, filter);
@@ -142,15 +149,14 @@ iD.Map = function(elem, connection) {
             .data(waynodes, key);
         handles.exit().remove();
         handles.enter().append('rect')
-            .attr({ width: 6, height: 6, 'class': 'handle' })
+            .attr({ width: 10, height: 10, 'class': 'handle' })
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
             var p = projection(ll2a(entity));
-            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 2, 2)';
+            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-5, -5) rotate(45, 5, 5)';
         }).classed('active', classActive);
     }
 
-    function hideHandles() { g.hit.selectAll('rect.handle').remove(); }
     function hideVector() {
         surface.selectAll('.layer-g *').remove();
     }
@@ -246,8 +252,6 @@ iD.Map = function(elem, connection) {
             .attr('class', class_casing)
             .classed('active', classActive);
     }
-
-    function hideCasings() { g.casing.selectAll('path').remove(); }
 
     function setSize(x) {
         dimensions = x;

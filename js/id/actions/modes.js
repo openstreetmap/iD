@@ -93,15 +93,28 @@ iD.modes.AddRoad = {
             });
         });
 
-        // http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/actions/mapmode/ImproveWayAccuracyAction.java#L431
-        // https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/Way.as#L215
+        // http://bit.ly/SwUwIL
+        // http://bit.ly/WxqGng
         function addRoad() {
             var t = d3.select(d3.event.target),
                 node,
+                direction = 'forward',
+                start = true,
                 way = this.way();
 
             // connect a way to an existing way
             if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
+                // continue an existing way
+                var id = t.data()[0].id;
+                var parents = this.map.history.graph().parents(id);
+                if (parents.length && parents[0].nodes[0] === id) {
+                    way = parents[0];
+                    direction = 'backward';
+                    start = false;
+                } else if (parents.length && _.last(parents[0].nodes) === id) {
+                    way = parents[0];
+                    start = false;
+                }
                 node = t.data()[0];
             // snap into an existing way
             } else if (t.data() && t.data()[0] && t.data()[0].type === 'way') {
@@ -116,11 +129,12 @@ iD.modes.AddRoad = {
                     d3.mouse(surface.node())));
             }
 
-            this.map.perform(iD.actions.startWay(way));
-            way.nodes.push(node.id);
-            this.map.perform(iD.actions.addWayNode(way, node));
-            this.map.selectClick(way);
-            this.controller.enter(iD.modes.DrawRoad(way.id));
+            if (start) {
+                this.map.perform(iD.actions.startWay(way));
+                way.nodes.push(node.id);
+                this.map.perform(iD.actions.addWayNode(way, node));
+            }
+            this.controller.enter(iD.modes.DrawRoad(way.id, direction));
         }
 
         surface.on('click.addroad', addRoad.bind(this));
@@ -140,9 +154,11 @@ iD.modes.AddRoad = {
 
 // user has clicked on the map, started a road, and now needs to click more
 // nodes to continue it.
-iD.modes.DrawRoad = function(way_id) {
+iD.modes.DrawRoad = function(way_id, direction) {
     return {
         enter: function() {
+            var push = (direction === 'forward') ? 'push' : 'unshift',
+                pop = (direction === 'forward') ? 'pop' : 'shift';
             this.map.dblclickEnable(false);
             var surface = this.map.surface,
 
@@ -150,16 +166,15 @@ iD.modes.DrawRoad = function(way_id) {
             var nextnode_id = nextnode.id;
 
             var way = this.map.history.graph().entity(way_id);
-            var lastnode_id = _.last(way.nodes);
-            way.nodes.push(nextnode_id);
+            var lastnode_id = (direction === 'forward') ? _.last(way.nodes) : way.nodes[0];
+            way.nodes[push](nextnode_id);
             this.map.perform(iD.actions.addWayNode(way, nextnode));
 
             surface.on('mousemove.drawroad', function() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
                 var way = this.map.history.graph().entity(way_id);
                 var node = iD.Entity(this.map.history.graph().entity(nextnode_id), {
-                    lon: ll[0],
-                    lat: ll[1]
+                    lon: ll[0], lat: ll[1]
                 });
                 this.map.history.replace(iD.actions.addWayNode(way, node));
                 var only = iD.Util.trueObj([way.id].concat(_.pluck(way.nodes, 'id')));
@@ -171,7 +186,7 @@ iD.modes.DrawRoad = function(way_id) {
                 d3.event.stopPropagation();
                 if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
                     if (t.data()[0].id == lastnode_id) {
-                        var l = this.map.history.graph().entity(way.nodes.pop());
+                        var l = this.map.history.graph().entity(way.nodes[pop]());
                         this.map.perform(iD.actions.removeWayNode(way, l));
                         delete way.tags.elastic;
                         this.map.perform(iD.actions.changeTags(way, way.tags));
@@ -192,12 +207,12 @@ iD.modes.DrawRoad = function(way_id) {
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));
                 }
-                var old = this.map.history.graph().entity(way.nodes.pop());
+                var old = this.map.history.graph().entity(way.nodes[pop]());
                 this.map.perform(iD.actions.removeWayNode(way, old));
-                way.nodes.push(node.id);
+                way.nodes[push](node.id);
                 this.map.perform(iD.actions.addWayNode(way, node));
                 way.nodes = way.nodes.slice();
-                this.controller.enter(iD.modes.DrawRoad(way_id));
+                this.controller.enter(iD.modes.DrawRoad(way_id, direction));
             }
 
             surface.on('click.drawroad', drawRoad.bind(this));
