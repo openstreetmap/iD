@@ -2,7 +2,7 @@
 
 * [CORS](http://caniuse.com/#feat=cors)
 * [SVG](http://caniuse.com/#feat=svg)
-* [CSS 3D Transforms](http://caniuse.com/#feat=transforms3d): No IE9
+* [CSS 3D Transforms](http://caniuse.com/#feat=transforms3d): No IE9, No Opera
 * [localStorage](http://caniuse.com/#feat=namevalue-storage)
 * [hashchange event](http://caniuse.com/#feat=hashchange)
 
@@ -170,6 +170,17 @@ However, using CSS transforms with HTML elements has vastly different and
 better performance than using them with SVG elements. For this reason, iD
 transforms a map-container element rather than a `g` element on panning
 movements.
+
+### Transforms in browsers
+
+Matrix transforms are significantly slower than `translate` in webkit but
+nearly equivalent in Firefox. Chrome is about 4x faster than Firefox with
+transforms.
+
+However, matrix transforms can also represent scale, and so they should be compared
+with transform + scale. If you add an identity scale (`scale(1, 1)`), then
+matrix and `translate scale` performance is similar in Chrome, though matrix
+still lags significantly in Safari and Firefox.
 
 ## SVG point rounding performance
 
