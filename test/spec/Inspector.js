@@ -23,13 +23,13 @@ describe("Inspector", function () {
         expect(spy).toHaveBeenCalledWith(entity);
     });
 
-    it("emits a change event when the save button is clicked", function () {
+    it("emits a changeTags event when the save button is clicked", function () {
         var spy = jasmine.createSpy();
-        inspector.on('change', spy);
+        inspector.on('changeTags', spy);
 
         happen.click(element.select('.save').node());
 
-        expect(spy).toHaveBeenCalledWith(entity, { '': '' });
+        expect(spy).toHaveBeenCalledWith(entity, {});
     });
 
     it("emits a remove event when the delete button is clicked", function () {
