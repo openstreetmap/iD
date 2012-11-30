@@ -1,3 +1,11 @@
+## Browser Features caniuse
+
+* [CORS](http://caniuse.com/#feat=cors)
+* [SVG](http://caniuse.com/#feat=svg)
+* [CSS 3D Transforms](http://caniuse.com/#feat=transforms3d): No IE9
+* [localStorage](http://caniuse.com/#feat=namevalue-storage)
+* [hashchange event](http://caniuse.com/#feat=hashchange)
+
 ## Interactions
 
 Way drawing strategy:
