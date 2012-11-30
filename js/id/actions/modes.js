@@ -202,6 +202,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                         }
                         delete way.tags.elastic;
                         this.map.perform(iD.actions.changeTags(way, way.tags));
+                        this.map.selectEntity(way);
                         // End by clicking on own tail
                         return this.exit();
                     } else {
