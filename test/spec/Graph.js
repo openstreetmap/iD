@@ -56,19 +56,19 @@ describe('Graph', function() {
 
     describe("#modifications", function () {
         it("filters entities by modified", function () {
-            var a = {modified: function () { return true; }},
-                b = {modified: function () { return false; }},
+            var a = {id: 'a', modified: function () { return true; }},
+                b = {id: 'b', modified: function () { return false; }},
                 graph = iD.Graph({ 'a': a, 'b': b });
-            expect(graph.modifications()).toEqual([iD.Entity(graph.entity('a'))]);
+            expect(graph.modifications()).toEqual([graph.fetch('a')]);
         });
     });
 
     describe("#creations", function () {
         it("filters entities by created", function () {
-            var a = {created: function () { return true; }},
-                b = {created: function () { return false; }},
-                graph = iD.Graph([a, b]);
-            expect(graph.creations()).toEqual([a]);
+            var a = {id: 'a', created: function () { return true; }},
+                b = {id: 'b', created: function () { return false; }},
+                graph = iD.Graph({ 'a': a, 'b': b });
+            expect(graph.creations()).toEqual([graph.fetch('a')]);
         });
     });
 });
