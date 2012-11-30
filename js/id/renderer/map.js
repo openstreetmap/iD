@@ -71,7 +71,7 @@ iD.Map = function(elem, connection) {
         .attr('id', 'clip-rect')
         .attr({ x: 0, y: 0 });
 
-    var tileclient = iD.Tiles(tilegroup, projection);
+     var tileclient = iD.Tiles(tilegroup, projection);
 
     function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
@@ -139,16 +139,16 @@ iD.Map = function(elem, connection) {
     }
 
     function drawHandles(waynodes, filter) {
-        var handles = g.hit.selectAll('rect.handle')
+        var handles = g.hit.selectAll('image.handle')
             .filter(filter)
             .data(waynodes, key);
         handles.exit().remove();
-        handles.enter().append('rect')
-            .attr({ width: 10, height: 10, 'class': 'handle' })
+        handles.enter().append('image')
+            .attr({ width: 6, height: 6, 'class': 'handle', 'xlink:href': 'css/handle.png' })
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
             var p = projection(ll2a(entity));
-            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-5, -5) rotate(45, 5, 5)';
+            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
         }).classed('active', classActive);
     }
 
