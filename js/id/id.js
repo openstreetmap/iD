@@ -149,6 +149,8 @@ var iD = function(container) {
     d3.select('.user').call(iD.userpanel(connection)
         .on('logout', connection.logout)
         .on('login', connection.authenticate));
+
+    return map;
 };
 
 iD.supported = function() {

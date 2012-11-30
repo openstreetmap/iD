@@ -510,6 +510,7 @@ iD.Map = function(elem, connection) {
 
     map.selectEntity = selectEntity;
 
+    map.tileclient = tileclient;
     map.center = center;
     map.centre = center;
     map.getZoom = getZoom;
