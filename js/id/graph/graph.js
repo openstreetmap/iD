@@ -32,8 +32,7 @@ iD.Graph.prototype = {
     replace: function(entity, annotation) {
         var entities = _.clone(this.entities);
         entities[entity.id] = entity;
-        var g = iD.Graph(entities, annotation);
-        return g;
+        return iD.Graph(entities, annotation);
     },
 
     remove: function(entity, annotation) {
