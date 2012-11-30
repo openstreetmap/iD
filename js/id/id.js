@@ -66,11 +66,11 @@ var iD = function(container) {
 
     bar.append('button')
         .attr('class', 'save')
-        .html("Save<small id='as-username'></small>")
+        .html("Upload<small id='as-username'></small>")
         .on('click', function() {
             function save(e) {
                 d3.select('.shaded').remove();
-                var l = iD.loading('committing changes to openstreetmap');
+                var l = iD.loading('uploading changes to openstreetmap');
                 connection.putChangeset(map.history.changes(), e.comment, function() {
                     l.remove();
                     map.history = iD.History();

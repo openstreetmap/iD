@@ -6,7 +6,8 @@ iD.commit = function() {
             header = selection.append('div').attr('class', 'header'),
             body = selection.append('div').attr('class', 'body');
 
-        header.append('h2').text('Save Changes to OpenStreetMap');
+        header.append('h2').text('Upload Changes to OpenStreetMap');
+        header.append('p').text('the changes you upload will be visible on all maps using OpenStreetMap data');
 
         var section = body.selectAll('div.commit-section')
             .data(['modify', 'delete', 'create'].filter(function(d) {

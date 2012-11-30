@@ -11,8 +11,8 @@ iD.OAuth = function() {
 
     function keyclean(x) { return x.replace(/\W/g, ''); }
 
-    if (localStorage.oauth_token) {
-        o.oauth_token = localStorage.oauth_token;
+    if (token('oauth_token')) {
+        o.oauth_token = token('oauth_token');
     }
 
     function timenonce(o) {
@@ -36,6 +36,7 @@ iD.OAuth = function() {
     oauth.logout = function() {
         token('oauth_token', '');
         token('oauth_token_secret', '');
+        token('oauth_request_token_secret', '');
         return oauth;
     };
 
@@ -55,8 +56,8 @@ iD.OAuth = function() {
     };
 
     oauth.authenticate = function(callback) {
-        // TODO: deal with changing the api endpoint
         if (oauth.authenticated()) return callback();
+        oauth.logout();
 
         var shaded = d3.select(document.body)
             .append('div')

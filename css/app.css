@@ -53,6 +53,7 @@ button {
     line-height:18px;
     margin:5px 5px 0 0;
     cursor:pointer;
+    border-radius:2px;
 }
 
 button.cancel {
@@ -285,7 +286,8 @@ input#geocode-location {
 
 .commit-pane .changeset-comment {
     width:630px;
-    font-size:12px;
+    /* firefox uses monospace in textareas */
+    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
 }
 
 .commit-section {

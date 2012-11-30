@@ -116,11 +116,7 @@ iD.Map = function(elem, connection) {
             function(d) { return only[d.id]; } : function() { return true; };
 
         if (all.length > 2000) {
-            d3.select('.messages').text('Zoom in to edit the map');
-            hideVector();
-            return;
-        } else {
-            d3.select('.messages').text('Zoom in to edit the map');
+            return hideVector();
         }
 
         for (var i = 0; i < all.length; i++) {
