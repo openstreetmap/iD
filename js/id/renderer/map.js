@@ -103,7 +103,7 @@ iD.Map = function(elem, connection) {
         if (surface.style(transformProp) != 'none') return;
         var z = map.zoom(),
             all = [], ways = [], areas = [], points = [], waynodes = [],
-            extent = getExtent(),
+            extent = map.extent(),
             graph = map.history.graph();
 
         if (!only) {
@@ -448,10 +448,6 @@ iD.Map = function(elem, connection) {
         return map;
     }
 
-    function getExtent() {
-        return [projection.invert([0, 0]), projection.invert(dimensions)];
-    }
-
     function pointLocation(p) {
         var translate = projection.translate(),
             scale = projection.scale();
@@ -494,7 +490,7 @@ iD.Map = function(elem, connection) {
     map.zoomIn = function() { return map.zoom(Math.ceil(map.zoom() + 1)); };
     map.zoomOut = function() { return map.zoom(Math.floor(map.zoom() - 1)); };
 
-    function center(loc) {
+    map.center = function(loc) {
         if (!arguments.length) {
             return projection.invert(pxCenter());
         } else {
@@ -507,21 +503,21 @@ iD.Map = function(elem, connection) {
             redraw();
             return map;
         }
-    }
+    };
+
+    map.extent = function() {
+        return [projection.invert([0, 0]), projection.invert(dimensions)];
+    };
 
     function flush() {
         apiTilesLoaded = {};
     }
 
     map.download = download;
-    map.getExtent = getExtent;
 
     map.selectEntity = selectEntity;
 
     map.background = background;
-    map.center = center;
-    map.centre = center;
-
     map.projection = projection;
     map.size = setSize;
 

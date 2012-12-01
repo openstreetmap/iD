@@ -34,8 +34,8 @@ describe('Map', function() {
         });
     });
 
-    describe('#getCenter', function() {
-        it('reports center', function() {
+    describe('#center', function() {
+        it('gets and sets center', function() {
             expect(map.center([0, 0])).toEqual(map);
             expect(map.center()).toEqual([0, 0]);
             expect(map.center([10, 15])).toEqual(map);
@@ -44,12 +44,12 @@ describe('Map', function() {
         });
     });
 
-    describe('#getExtent', function() {
+    describe('#extent', function() {
         it('reports extent', function() {
             expect(map.size([100, 100])).toEqual(map);
             expect(map.center([0, 0])).toEqual(map);
-            expect(map.getExtent()[0][0]).toBeCloseTo(-36);
-            expect(map.getExtent()[1][0]).toBeCloseTo(36);
+            expect(map.extent()[0][0]).toBeCloseTo(-36);
+            expect(map.extent()[1][0]).toBeCloseTo(36);
         });
     });
 });
