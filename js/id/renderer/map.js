@@ -248,10 +248,14 @@ iD.Map = function(elem, connection) {
             .classed('active', classActive);
     }
 
-    function setSize(x) {
-        dimensions = x;
-        var attr = { width: dimensions[0], height: dimensions[1] };
-        surface.attr(attr).selectAll('#clip-rect').attr(attr);
+    function setSize(size) {
+        dimensions = size;
+
+        surface
+            .size(dimensions)
+            .selectAll('#clip-rect')
+            .size(dimensions);
+
         tileclient.setSize(dimensions);
         return map;
     }
@@ -532,7 +536,7 @@ iD.Map = function(elem, connection) {
     map.flush = flush;
     map.dblclickEnable = dblclickEnable;
 
-    setSize([parent.node().offsetWidth, parent.node().offsetHeight]);
+    setSize(parent.size());
     hideInspector();
     redraw();
 

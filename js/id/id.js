@@ -130,7 +130,7 @@ var iD = function(container) {
     });
 
     window.onresize = function() {
-        map.setSize([m.node().offsetWidth, m.node().offsetHeight]);
+        map.setSize(m.size());
     };
 
     d3.select(document).on('keydown', function() {
