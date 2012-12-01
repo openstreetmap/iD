@@ -44,6 +44,8 @@ iD.Map = function(elem, connection) {
         defs = surface.append('defs'),
         tilegroup = surface.append('g')
             .on('click', deselectClick),
+        background = iD.Background()
+            .projection(projection),
         r = surface.append('g')
             .on('click', selectClick)
             .on('mouseover', nameHoverIn)
@@ -70,8 +72,6 @@ iD.Map = function(elem, connection) {
         .append('rect')
         .attr('id', 'clip-rect')
         .attr({ x: 0, y: 0 });
-
-     var tileclient = iD.Tiles(tilegroup, projection);
 
     function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
@@ -256,7 +256,10 @@ iD.Map = function(elem, connection) {
             .selectAll('#clip-rect')
             .size(dimensions);
 
-        tileclient.size(dimensions);
+        background.size(dimensions);
+
+        redraw();
+
         return map;
     }
 
@@ -414,7 +417,7 @@ iD.Map = function(elem, connection) {
     function redraw(only) {
         if (!only) {
             dispatch.move(map);
-            tileclient.redraw();
+            tilegroup.call(background);
         }
         if (getZoom() > 16) {
             download();
@@ -514,7 +517,7 @@ iD.Map = function(elem, connection) {
 
     map.selectEntity = selectEntity;
 
-    map.tileclient = tileclient;
+    map.background = background;
     map.center = center;
     map.centre = center;
     map.getZoom = getZoom;

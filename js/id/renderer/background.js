@@ -1,7 +1,7 @@
-iD.Tiles = function(selection, projection) {
-    var t = {},
-        template = 'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
-        tile = d3.geo.tile();
+iD.Background = function() {
+    var template = 'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
+        tile = d3.geo.tile(),
+        projection;
 
     // derive the url of a 'quadkey' style tile from a coordinate object
     function tileUrl(coord) {
@@ -25,12 +25,12 @@ iD.Tiles = function(selection, projection) {
 
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`
-    function redraw() {
+    function background() {
         var tiles = tile
             .scale(projection.scale())
             .translate(projection.translate())();
 
-        var image = selection
+        var image = this
             .attr("transform", function() {
                 return "scale(" + tiles.scale + ")translate(" + tiles.translate + ")";
             })
@@ -48,20 +48,23 @@ iD.Tiles = function(selection, projection) {
             .attr("y", function(d) { return d[1]; });
     }
 
-    t.size = function(size) {
-        tile.size(size);
-        redraw();
-        return t;
+    background.projection = function(p) {
+        if (!arguments.length) return projection;
+        projection = p;
+        return background;
     };
 
-    t.template = function(x) {
+    background.size = function(size) {
+        if (!arguments.length) return tile.size();
+        tile.size(size);
+        return background;
+    };
+
+    background.template = function(x) {
         if (!arguments.length) return template;
         template = x;
-        redraw();
-        return t;
+        return background;
     };
 
-    t.redraw = redraw;
-
-    return t;
+    return background;
 };
