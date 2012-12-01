@@ -30,7 +30,7 @@ describe('Map', function() {
 
     describe('#getExtent', function() {
         it('reports extent', function() {
-            expect(map.setSize([100, 100])).toEqual(map);
+            expect(map.size([100, 100])).toEqual(map);
             expect(map.center([0, 0])).toEqual(map);
             expect(map.getExtent()[0][0]).toBeCloseTo(-36);
             expect(map.getExtent()[1][0]).toBeCloseTo(36);

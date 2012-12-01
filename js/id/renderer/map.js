@@ -256,7 +256,7 @@ iD.Map = function(elem, connection) {
             .selectAll('#clip-rect')
             .size(dimensions);
 
-        tileclient.setSize(dimensions);
+        tileclient.size(dimensions);
         return map;
     }
 
@@ -523,7 +523,7 @@ iD.Map = function(elem, connection) {
     map.zoomOut = zoomOut;
 
     map.projection = projection;
-    map.setSize = setSize;
+    map.size = setSize;
 
     map.surface = surface;
 

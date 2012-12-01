@@ -48,11 +48,11 @@ iD.Tiles = function(selection, projection) {
             .attr("y", function(d) { return d[1]; });
     }
 
-    function setSize(x) {
-        tile.size(x);
+    t.size = function(size) {
+        tile.size(size);
         redraw();
         return t;
-    }
+    };
 
     t.template = function(x) {
         if (!arguments.length) return template;
@@ -61,7 +61,6 @@ iD.Tiles = function(selection, projection) {
         return t;
     };
 
-    t.setSize = setSize;
     t.redraw = redraw;
 
     return t;
