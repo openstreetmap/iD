@@ -79,7 +79,6 @@ iD.Map = function(elem, connection) {
         return '';
     }
     function ll2a(o) { return [o.lon, o.lat]; }
-    function a2ll(o) { return { lon: o[0], lat: o[1] }; }
     function roundCoords(c) { return [Math.floor(c[0]), Math.floor(c[1])]; }
 
     function hideInspector() {
@@ -101,8 +100,7 @@ iD.Map = function(elem, connection) {
 
     function drawVector(only) {
         if (surface.style(transformProp) != 'none') return;
-        var z = map.zoom(),
-            all = [], ways = [], areas = [], points = [], waynodes = [],
+        var all = [], ways = [], areas = [], points = [], waynodes = [],
             extent = map.extent(),
             graph = map.history.graph();
 
@@ -331,7 +329,7 @@ iD.Map = function(elem, connection) {
         if (entity) d3.select('.messages').text(entity[0].tags.name || '#' + entity[0].id);
     }
 
-    function nameHoverOut(d) { d3.select('.messages').text(''); }
+    function nameHoverOut() { d3.select('.messages').text(''); }
 
     function deselectClick() {
         var hadSelection = !!selection;
@@ -516,7 +514,6 @@ iD.Map = function(elem, connection) {
         apiTilesLoaded = {};
     };
 
-    map.download = download;
     map.surface = surface;
     map.background = background;
     map.projection = projection;
