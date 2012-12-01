@@ -1,5 +1,5 @@
 describe('Map', function() {
-    var node, foo;
+    var map, foo;
 
     beforeEach(function() {
         foo = document.body.appendChild(document.createElement('div'));
@@ -11,10 +11,26 @@ describe('Map', function() {
         foo.parentNode.removeChild(foo);
     });
 
-    describe('#getZoom', function() {
-        it('reports zoom level', function() {
-            expect(map.setZoom(4)).toEqual(map);
-            expect(map.getZoom()).toEqual(4);
+    describe('#zoom', function() {
+        it('gets and sets zoom level', function() {
+            expect(map.zoom(4)).toEqual(map);
+            expect(map.zoom()).toEqual(4);
+        });
+    });
+
+    describe('#zoomIn', function() {
+        it('increments zoom', function() {
+            expect(map.zoom(4)).toEqual(map);
+            expect(map.zoomIn()).toEqual(map);
+            expect(map.zoom()).toEqual(5);
+        });
+    });
+
+    describe('#zoomOut', function() {
+        it('decrements zoom', function() {
+            expect(map.zoom(4)).toEqual(map);
+            expect(map.zoomOut()).toEqual(map);
+            expect(map.zoom()).toEqual(3);
         });
     });
 
@@ -34,17 +50,6 @@ describe('Map', function() {
             expect(map.center([0, 0])).toEqual(map);
             expect(map.getExtent()[0][0]).toBeCloseTo(-36);
             expect(map.getExtent()[1][0]).toBeCloseTo(36);
-        });
-    });
-
-    describe('#zoomIn', function() {
-        it('changes reported zoom level', function() {
-            expect(map.setZoom(4)).toEqual(map);
-            expect(map.getZoom()).toEqual(4);
-            expect(map.zoomOut()).toEqual(map);
-            expect(map.getZoom()).toEqual(3);
-            expect(map.zoomIn()).toEqual(map);
-            expect(map.getZoom()).toEqual(4);
         });
     });
 });

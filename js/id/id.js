@@ -145,7 +145,12 @@ var iD = function(container) {
     });
 
     var hash = iD.Hash().map(map);
-    if (!hash.hadHash) map.setZoom(20).center([-77.02405, 38.87952]);
+
+    if (!hash.hadHash) {
+        map.zoom(20)
+            .center([-77.02405, 38.87952]);
+    }
+
     d3.select('.user').call(iD.userpanel(connection)
         .on('logout', connection.logout)
         .on('login', connection.authenticate));

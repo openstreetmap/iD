@@ -19,14 +19,14 @@ iD.Hash = function() {
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
         } else {
-            map.setZoom(args[0])
+            map.zoom(args[0])
                 .center([args[2], Math.min(lat, Math.max(-lat, args[1]))]);
         }
     };
 
     var formatter = function(map) {
         var center = map.center(),
-            zoom = map.getZoom(),
+            zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
         return '#?map=' + zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +

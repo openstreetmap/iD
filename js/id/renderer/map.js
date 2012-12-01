@@ -101,7 +101,7 @@ iD.Map = function(elem, connection) {
 
     function drawVector(only) {
         if (surface.style(transformProp) != 'none') return;
-        var z = getZoom(),
+        var z = map.zoom(),
             all = [], ways = [], areas = [], points = [], waynodes = [],
             extent = getExtent(),
             graph = map.history.graph();
@@ -419,7 +419,7 @@ iD.Map = function(elem, connection) {
             dispatch.move(map);
             tilegroup.call(background);
         }
-        if (getZoom() > 16) {
+        if (map.zoom() > 16) {
             download();
             drawVector(only);
         } else {
@@ -464,15 +464,15 @@ iD.Map = function(elem, connection) {
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
-    function getZoom(zoom) {
-        return Math.max(Math.log(projection.scale()) / Math.log(2) - 7, 0);
-    }
-
     function pxCenter() {
         return [dimensions[0] / 2, dimensions[0] / 2];
     }
 
-    function setZoom(z) {
+    map.zoom = function(z) {
+        if (!arguments.length) {
+            return Math.max(Math.log(projection.scale()) / Math.log(2) - 7, 0);
+        }
+
         // summary:	Redraw the map at a new zoom level.
         var scale = 256 * Math.pow(2, z - 1);
         var center = pxCenter();
@@ -489,10 +489,11 @@ iD.Map = function(elem, connection) {
 
         redraw();
         return map;
-    }
+    };
 
-    function zoomIn() { return setZoom(Math.ceil(getZoom() + 1)); }
-    function zoomOut() { return setZoom(Math.floor(getZoom() - 1)); }
+    map.zoomIn = function() { return map.zoom(Math.ceil(map.zoom() + 1)); };
+    map.zoomOut = function() { return map.zoom(Math.floor(map.zoom() - 1)); };
+
     function center(loc) {
         if (!arguments.length) {
             return projection.invert(pxCenter());
@@ -520,10 +521,6 @@ iD.Map = function(elem, connection) {
     map.background = background;
     map.center = center;
     map.centre = center;
-    map.getZoom = getZoom;
-    map.setZoom = setZoom;
-    map.zoomIn = zoomIn;
-    map.zoomOut = zoomOut;
 
     map.projection = projection;
     map.size = setSize;
@@ -541,7 +538,6 @@ iD.Map = function(elem, connection) {
 
     setSize(parent.size());
     hideInspector();
-    redraw();
 
     return d3.rebind(map, dispatch, 'on', 'move', 'update');
 };
