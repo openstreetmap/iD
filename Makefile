@@ -17,13 +17,13 @@ all: \
 	js/lib/sha.js \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
-	js/iD/id.js \
-	js/iD/Connection.js \
-	js/iD/Util.js \
-	js/iD/actions/*.js \
-	js/iD/graph/*.js \
-	js/iD/renderer/*.js \
-	js/iD/ui/*.js \
+	js/id/id.js \
+	js/id/connection.js \
+	js/id/util.js \
+	js/id/actions/*.js \
+	js/id/graph/*.js \
+	js/id/renderer/*.js \
+	js/id/ui/*.js \
 
 iD.js: Makefile
 	@rm -f $@
