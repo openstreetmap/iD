@@ -248,7 +248,7 @@ iD.Map = function(elem, connection) {
             .classed('active', classActive);
     }
 
-    function setSize(size) {
+    map.size = function(size) {
         dimensions = size;
 
         surface
@@ -261,7 +261,7 @@ iD.Map = function(elem, connection) {
         redraw();
 
         return map;
-    }
+    };
 
     function tileAtZoom(t, distance) {
         var power = Math.pow(2, distance);
@@ -427,20 +427,23 @@ iD.Map = function(elem, connection) {
         }
     }
 
-    function perform(action) {
+    map.perform = function(action) {
         map.history.perform(action);
         redraw();
-    }
+        return map;
+    };
 
-    function undo() {
+    map.undo = function() {
         map.history.undo();
         redraw();
-    }
+        return map;
+    };
 
-    function redo() {
+    map.redo = function() {
         map.history.redo();
         redraw();
-    }
+        return map;
+    };
 
     function dblclickEnable(_) {
         if (!arguments.length) return dblclickEnabled;
@@ -509,30 +512,19 @@ iD.Map = function(elem, connection) {
         return [projection.invert([0, 0]), projection.invert(dimensions)];
     };
 
-    function flush() {
+    map.flush = function () {
         apiTilesLoaded = {};
-    }
+    };
 
     map.download = download;
-
-    map.selectEntity = selectEntity;
-
+    map.surface = surface;
     map.background = background;
     map.projection = projection;
-    map.size = setSize;
-
-    map.surface = surface;
-
-    map.perform = perform;
-    map.undo = undo;
-    map.redo = redo;
-
     map.redraw = redraw;
-
-    map.flush = flush;
+    map.selectEntity = selectEntity;
     map.dblclickEnable = dblclickEnable;
 
-    setSize(parent.size());
+    map.size(parent.size());
     hideInspector();
 
     return d3.rebind(map, dispatch, 'on', 'move', 'update');
