@@ -1,14 +1,13 @@
 describe('Map', function() {
-    var map, foo;
+    var container, map;
 
     beforeEach(function() {
-        foo = document.body.appendChild(document.createElement('div'));
-        foo.id = 'foo';
-        map = iD.Map(d3.select('#foo').node());
+        container = d3.select('body').append('div');
+        map = iD.Map(container.node());
     });
 
     afterEach(function() {
-        foo.parentNode.removeChild(foo);
+        container.remove();
     });
 
     describe('#zoom', function() {

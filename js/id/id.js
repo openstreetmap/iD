@@ -144,6 +144,8 @@ var iD = function(container) {
         }
     });
 
+    map.background.source(iD.Background.Bing);
+
     var hash = iD.Hash().map(map);
 
     if (!hash.hadHash) {
