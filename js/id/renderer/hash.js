@@ -2,7 +2,6 @@ iD.Hash = function() {
     var hash = {},
         s0, // cached location.hash
         lat = 90 - 1e-8, // allowable latitude range
-        hadHash,
         map;
 
     function qs(str) {
@@ -40,7 +39,7 @@ iD.Hash = function() {
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
-        if (parser(map, (s0 = location.hash).substring(1)))
+        if (parser(map, (s0 = location.hash).substring(2)))
             move(); // replace bogus hash
     }
 
@@ -56,13 +55,11 @@ iD.Hash = function() {
             window.addEventListener("hashchange", hashchange, false);
             if (location.hash) {
                 hashchange();
-                hadHash = true;
+                hash.hadHash = true;
             }
         }
         return hash;
     };
-
-    hash.hadHash = hadHash;
 
     return hash;
 };
