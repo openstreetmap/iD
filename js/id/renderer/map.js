@@ -59,7 +59,7 @@ iD.Map = function(elem, connection) {
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
         alength = (function() {
-            var arrow = surface.append('text').text('►');
+            var arrow = surface.append('text').text('►----');
             var alength = arrow.node().getComputedTextLength();
             arrow.remove();
             return alength;
@@ -187,7 +187,7 @@ iD.Map = function(elem, connection) {
             .classed('active', classActive);
         markers.select('image').attr('xlink:href', iD.Style.markerimage);
     }
-    
+
     function isOneWay(d) { return d.tags.oneway && d.tags.oneway === 'yes'; }
     function drawStrokes(ways, filter) {
         var strokes = g.stroke.selectAll('path')
@@ -224,10 +224,9 @@ iD.Map = function(elem, connection) {
             .append('text').attr({ 'class': 'oneway', dy: 4 })
             .append('textPath').attr('class', 'textpath');
         g.text.selectAll('.textpath')
-            .attr('letter-spacing', alength * 2)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
             .text(function(d) {
-                return (new Array(Math.floor(lengths[d.id] / 2))).join('►');
+                return (new Array(Math.floor(lengths[d.id]))).join('►----');
             });
     }
 
