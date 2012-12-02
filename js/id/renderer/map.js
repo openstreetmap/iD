@@ -1,10 +1,8 @@
-iD.Map = function(elem, connection) {
-
-    var map = { history: iD.History() },
+iD.Map = function() {
+    var connection,
         dimensions = [],
         dispatch = d3.dispatch('move', 'update'),
         inspector = iD.Inspector(),
-        parent = d3.select(elem),
         selection = null,
         translateStart,
         apiTilesLoaded = {},
@@ -39,39 +37,53 @@ iD.Map = function(elem, connection) {
         },
         getline = function(d) { return d._line; },
         key = function(d) { return d.id; },
-        supersurface = parent.append('div').call(zoom),
-        surface = supersurface.append('svg'),
-        defs = surface.append('defs'),
-        tilegroup = surface.append('g')
-            .on('click', deselectClick),
         background = iD.Background()
             .projection(projection),
-        r = surface.append('g')
-            .on('click', selectClick)
-            .on('mouseover', nameHoverIn)
-            .on('mouseout', nameHoverOut)
-            .attr('clip-path', 'url(#clip)'),
-        g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
-            return (mem[i] = r.append('g').attr('class', 'layer-g')) && mem;
-        }, {}),
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
-        alength = (function() {
-            var arrow = surface.append('text').text('►----');
-            var alength = arrow.node().getComputedTextLength();
-            arrow.remove();
-            return alength;
-        })(),
         prefix = prefixMatch(['webkit', 'ms', 'Moz', 'O']),
-        transformProp = prefix + 'transform';
+        transformProp = prefix + 'transform',
+        supersurface, surface, defs, tilegroup, r, g, alength;
 
-    defs.append('clipPath')
-        .attr('id', 'clip')
-        .append('rect')
-        .attr('id', 'clip-rect')
-        .attr({ x: 0, y: 0 });
+    function map() {
+        supersurface = this.append('div').call(zoom);
+
+        surface = supersurface.append('svg')
+            .on('mouseup', resetTransform)
+            .on('touchend', resetTransform);
+
+        defs = surface.append('defs');
+        defs.append('clipPath')
+                .attr('id', 'clip')
+            .append('rect')
+                .attr('id', 'clip-rect')
+                .attr({ x: 0, y: 0 });
+
+        tilegroup = surface.append('g')
+            .on('click', deselectClick);
+
+        r = surface.append('g')
+            .on('click', selectClick)
+            .on('mouseover', nameHoverIn)
+            .on('mouseout', nameHoverOut)
+            .attr('clip-path', 'url(#clip)');
+
+        g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
+            return (mem[i] = r.append('g').attr('class', 'layer-g')) && mem;
+        }, {});
+
+        var arrow = surface.append('text').text('►----');
+        alength = arrow.node().getComputedTextLength();
+        arrow.remove();
+
+        map.size(this.size());
+
+        hideInspector();
+    };
+
+    map.history = iD.History();
 
     function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
@@ -409,8 +421,6 @@ iD.Map = function(elem, connection) {
         redraw();
     }
 
-    surface.on('mouseup', resetTransform).on('touchend', resetTransform);
-
     function redraw(only) {
         if (!only) {
             dispatch.move(map);
@@ -515,15 +525,18 @@ iD.Map = function(elem, connection) {
         return map;
     };
 
+    map.connection = function(_) {
+      if (!arguments.length) return connection;
+      connection = _;
+      return map;
+    };
+
     map.surface = surface;
     map.background = background;
     map.projection = projection;
     map.redraw = redraw;
     map.selectEntity = selectEntity;
     map.dblclickEnable = dblclickEnable;
-
-    map.size(parent.size());
-    hideInspector();
 
     return d3.rebind(map, dispatch, 'on', 'move', 'update');
 };

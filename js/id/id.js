@@ -10,14 +10,18 @@ var iD = function(container) {
 
     container = d3.select(container);
 
-    var m = container.append('div')
-            .attr('id', 'map'),
-        connection = iD.Connection()
+    var connection = iD.Connection()
             .url('http://api06.dev.openstreetmap.org'),
-        map = iD.Map(m.node(), connection),
-        controller = iD.Controller(map),
-        bar = container.append('div')
-            .attr('id', 'bar');
+        map = iD.Map()
+            .connection(connection),
+        controller = iD.Controller(map);
+
+    var m = container.append('div')
+        .attr('id', 'map')
+        .call(map);
+
+    var bar = container.append('div')
+        .attr('id', 'bar');
 
     var buttons = bar.selectAll('button.add-button')
         .data([iD.modes.AddPlace, iD.modes.AddRoad, iD.modes.AddArea])

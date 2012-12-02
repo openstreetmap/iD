@@ -3,11 +3,20 @@ describe('Map', function() {
 
     beforeEach(function() {
         container = d3.select('body').append('div');
-        map = iD.Map(container.node());
+        map = iD.Map();
+        container.call(map);
     });
 
     afterEach(function() {
         container.remove();
+    });
+
+    describe('#connection', function() {
+        it('gets and sets connection', function() {
+            var connection = {};
+            expect(map.connection(connection)).toBe(map);
+            expect(map.connection()).toBe(connection);
+        });
     });
 
     describe('#zoom', function() {
