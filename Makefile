@@ -18,6 +18,7 @@ all: \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/id/id.js \
+	js/id/oauth.js \
 	js/id/connection.js \
 	js/id/util.js \
 	js/id/actions/*.js \

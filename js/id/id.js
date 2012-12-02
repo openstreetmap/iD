@@ -74,9 +74,7 @@ var iD = function(container) {
                 connection.putChangeset(map.history.changes(), e.comment, function() {
                     l.remove();
                     map.history = iD.History();
-                    map.flush();
-                    map.update();
-                    map.redraw();
+                    map.flush().redraw();
                 });
             }
             connection.authenticate(function() {

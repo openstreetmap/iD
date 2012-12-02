@@ -423,6 +423,7 @@ iD.Map = function(elem, connection) {
         } else {
             hideVector();
         }
+        return map;
     }
 
     map.perform = function(action) {
@@ -512,6 +513,7 @@ iD.Map = function(elem, connection) {
 
     map.flush = function () {
         apiTilesLoaded = {};
+        return map;
     };
 
     map.surface = surface;
