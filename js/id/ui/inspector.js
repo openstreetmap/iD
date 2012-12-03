@@ -141,6 +141,5 @@ iD.Inspector = function() {
         });
     }
 
-
     return d3.rebind(inspector, event, 'on');
 };

@@ -1,9 +1,11 @@
 var iD = function(container) {
     var connection = iD.Connection()
             .url('http://api06.dev.openstreetmap.org'),
+        history = iD.History(),
         map = iD.Map()
-            .connection(connection),
-        controller = iD.Controller(map);
+            .connection(connection)
+            .history(history),
+        controller = iD.Controller(map, history);
 
     map.background.source(iD.Background.Bing);
 
@@ -37,13 +39,13 @@ var iD = function(container) {
             .attr({ id: 'undo', 'class': 'mini' })
             .property('disabled', true)
             .html('&larr;<small></small>')
-            .on('click', map.undo);
+            .on('click', history.undo);
 
         bar.append('button')
             .attr({ id: 'redo', 'class': 'mini' })
             .property('disabled', true)
             .html('&rarr;<small></small>')
-            .on('click', map.redo);
+            .on('click', history.redo);
 
         bar.append('input')
             .attr({ type: 'text', placeholder: 'find a place', id: 'geocode-location' })
@@ -75,9 +77,9 @@ var iD = function(container) {
                 function save(e) {
                     d3.select('.shaded').remove();
                     var l = iD.loading('uploading changes to openstreetmap');
-                    connection.putChangeset(map.history.changes(), e.comment, function() {
+                    connection.putChangeset(history.changes(), e.comment, function() {
                         l.remove();
-                        map.history = iD.History();
+                        history.reset();
                         map.flush().redraw();
                     });
                 }
@@ -89,7 +91,7 @@ var iD = function(container) {
                         });
                     var modal = shaded.append('div')
                         .attr('class', 'modal commit-pane')
-                        .datum(map.history.changes());
+                        .datum(history.changes());
                     modal.call(iD.commit()
                         .on('cancel', function() {
                             shaded.remove();
@@ -107,7 +109,8 @@ var iD = function(container) {
                 .on('click', function(d) { return d[2](); });
 
         this.append('div')
-            .attr('class', 'inspector-wrap').style('display', 'none');
+            .attr('class', 'inspector-wrap')
+            .style('display', 'none');
 
         this.append('div')
             .attr('id', 'about')
@@ -115,9 +118,9 @@ var iD = function(container) {
                   "<a href='http://github.com/systemed/iD/issues'>report a bug</a> " +
                   "/ imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
 
-        map.on('update', function() {
-            var undo = map.history.undoAnnotation(),
-                redo = map.history.redoAnnotation();
+        history.on('change.buttons', function() {
+            var undo = history.undoAnnotation(),
+                redo = history.redoAnnotation();
 
             bar.select('#undo')
                 .property('disabled', !undo)
@@ -137,11 +140,11 @@ var iD = function(container) {
         d3.select(document).on('keydown', function() {
             // cmd-z
             if (d3.event.which === 90 && d3.event.metaKey) {
-                map.undo();
+                history.undo();
             }
             // cmd-shift-z
             if (d3.event.which === 90 && d3.event.metaKey && d3.event.shiftKey) {
-                map.redo();
+                history.redo();
             }
         });
 

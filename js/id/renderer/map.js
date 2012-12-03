@@ -1,7 +1,7 @@
 iD.Map = function() {
-    var connection,
+    var connection, history,
         dimensions = [],
-        dispatch = d3.dispatch('move', 'update'),
+        dispatch = d3.dispatch('move'),
         inspector = iD.Inspector(),
         selection = null,
         translateStart,
@@ -12,9 +12,8 @@ iD.Map = function() {
             .scale(projection.scale())
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
-        only,
         dblclickEnabled = true,
-        dragging = false,
+        dragging,
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
                 if (entity.accuracy) {
@@ -31,21 +30,19 @@ iD.Map = function() {
                 d3.event.sourceEvent.stopPropagation();
 
                 if (!dragging) {
-                    dragging = true;
-                    only = iD.Util.trueObj([entity.id].concat(
-                        _.pluck(map.history.graph().parents(entity.id), 'id')));
-                    map.history.perform(iD.actions.noop());
+                    dragging = iD.Util.trueObj([entity.id].concat(
+                        _.pluck(history.graph().parents(entity.id), 'id')));
+                    history.perform(iD.actions.noop());
                 }
 
                 var to = projection.invert([d3.event.x, d3.event.y]);
-                map.history.replace(iD.actions.move(entity, to));
+                history.replace(iD.actions.move(entity, to));
 
-                redraw(only);
+                redraw();
             })
             .on('dragend', function () {
                 if (dragging) {
-                    dragging = false;
-                    map.update();
+                    dragging = undefined;
                     redraw();
                 }
             }),
@@ -130,13 +127,8 @@ iD.Map = function() {
         arrow.remove();
 
         map.size(this.size());
-
-        hideInspector();
-
         map.surface = surface;
     }
-
-    map.history = iD.History();
 
     function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
@@ -167,7 +159,7 @@ iD.Map = function() {
         if (surface.style(transformProp) != 'none') return;
         var all = [], ways = [], areas = [], points = [], waynodes = [],
             extent = map.extent(),
-            graph = map.history.graph();
+            graph = history.graph();
 
         if (!only) {
             all = graph.intersects(extent);
@@ -408,7 +400,7 @@ iD.Map = function() {
             if (result instanceof Error) {
                 // TODO: handle
             } else {
-                map.history.merge(result);
+                history.merge(result);
                 drawVector(iD.Util.trueObj(Object.keys(result.entities)));
             }
         });
@@ -443,7 +435,8 @@ iD.Map = function() {
         selection = entity.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')
-            .datum(map.history.graph().fetch(entity.id)).call(inspector);
+            .datum(history.graph().fetch(entity.id))
+            .call(inspector);
         redraw();
     }
 
@@ -452,29 +445,25 @@ iD.Map = function() {
         if (entity) entity = entity[0];
         if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
         if (entity.type === 'way') d3.select(d3.event.target).call(waydragbehavior);
-        selection = entity.id;
-        d3.select('.inspector-wrap')
-            .style('display', 'block')
-            .datum(map.history.graph().fetch(entity.id)).call(inspector);
-        redraw();
+        selectEntity(entity);
     }
 
     function removeEntity(entity) {
         // Remove this node from any ways that is a member of
-        map.history.graph().parents(entity.id)
+        history.graph().parents(entity.id)
             .filter(function(d) { return d.type === 'way'; })
             .forEach(function(parent) {
                 parent.nodes = _.without(parent.nodes, entity.id);
-                map.perform(iD.actions.removeWayNode(parent, entity));
+                history.perform(iD.actions.removeWayNode(parent, entity));
             });
-        map.perform(iD.actions.remove(entity));
+        history.perform(iD.actions.remove(entity));
     }
 
     inspector.on('changeTags', function(d, tags) {
-        var entity = map.history.graph().entity(d.id);
-        map.perform(iD.actions.changeTags(entity, tags));
+        var entity = history.graph().entity(d.id);
+        history.perform(iD.actions.changeTags(entity, tags));
     }).on('changeWayDirection', function(d) {
-        map.perform(iD.actions.changeWayDirection(d));
+        history.perform(iD.actions.changeWayDirection(d));
     }).on('remove', function(d) {
         removeEntity(d);
         hideInspector();
@@ -510,40 +499,19 @@ iD.Map = function() {
         redraw();
     }
 
-    function redraw(only) {
-        if (!only) {
+    function redraw() {
+        if (!dragging) {
             dispatch.move(map);
             tilegroup.call(background);
         }
         if (map.zoom() > 16) {
             download();
-            drawVector(only);
+            drawVector(dragging);
         } else {
             hideVector();
         }
         return map;
     }
-
-    map.perform = function(action) {
-        map.history.perform(action);
-        map.update();
-        redraw();
-        return map;
-    };
-
-    map.undo = function() {
-        map.history.undo();
-        map.update();
-        redraw();
-        return map;
-    };
-
-    map.redo = function() {
-        map.history.redo();
-        map.update();
-        redraw();
-        return map;
-    };
 
     function dblclickEnable(_) {
         if (!arguments.length) return dblclickEnabled;
@@ -618,9 +586,16 @@ iD.Map = function() {
     };
 
     map.connection = function(_) {
-      if (!arguments.length) return connection;
-      connection = _;
-      return map;
+        if (!arguments.length) return connection;
+        connection = _;
+        return map;
+    };
+
+    map.history = function (_) {
+        if (!arguments.length) return history;
+        history = _;
+        history.on('change.map', redraw);
+        return map;
     };
 
     map.background = background;
@@ -629,5 +604,5 @@ iD.Map = function() {
     map.selectEntity = selectEntity;
     map.dblclickEnable = dblclickEnable;
 
-    return d3.rebind(map, dispatch, 'on', 'move', 'update');
+    return d3.rebind(map, dispatch, 'on', 'move');
 };

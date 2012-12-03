@@ -1,85 +1,103 @@
 iD.History = function() {
-    if (!(this instanceof iD.History)) return new iD.History();
-    this.stack = [iD.Graph()];
-    this.index = 0;
-};
+    var stack, index,
+        dispatch = d3.dispatch('change');
 
-iD.History.prototype = {
-
-    graph: function() {
-        return this.stack[this.index];
-    },
-
-    merge: function(graph) {
-        for (var i = 0; i < this.stack.length; i++) {
-            this.stack[i] = this.stack[i].merge(graph);
+    function maybeChange() {
+        if (stack[index].annotation) {
+            dispatch.change();
         }
-    },
-
-    perform: function(action) {
-        this.stack = this.stack.slice(0, this.index + 1);
-        this.stack.push(action(this.graph()));
-        this.index++;
-    },
-
-    replace: function(action) {
-        // assert(this.index == this.stack.length - 1)
-        this.stack[this.index] = action(this.graph());
-    },
-
-    undo: function() {
-        while (this.index > 0) {
-            this.index--;
-            if (this.stack[this.index].annotation) break;
-        }
-    },
-
-    redo: function() {
-        while (this.index < this.stack.length - 1) {
-            this.index++;
-            if (this.stack[this.index].annotation) break;
-        }
-    },
-
-    undoAnnotation: function() {
-        var index = this.index;
-        while (index >= 0) {
-            if (this.stack[index].annotation) return this.stack[index].annotation;
-            index--;
-        }
-    },
-
-    redoAnnotation: function() {
-        var index = this.index + 1;
-        while (index <= this.stack.length - 1) {
-            if (this.stack[index].annotation) return this.stack[index].annotation;
-            index++;
-        }
-    },
-
-    // generate reports of changes for changesets to use
-    modify: function() {
-        return this.stack[this.index].modifications();
-    },
-
-    create: function() {
-        return this.stack[this.index].creations();
-    },
-
-    'delete': function() {
-        return _.difference(
-            _.pluck(this.stack[0].entities, 'id'),
-            _.pluck(this.stack[this.index].entities, 'id')
-            ).map(function(id) {
-                return this.stack[0].fetch(id);
-            }.bind(this));
-    },
-
-    changes: function() {
-        return {
-            modify: this.modify(),
-            create: this.create(),
-            'delete': this['delete']()
-        };
     }
+
+    var history = {
+        graph: function () {
+            return stack[index];
+        },
+
+        merge: function (graph) {
+            for (var i = 0; i < stack.length; i++) {
+                stack[i] = stack[i].merge(graph);
+            }
+        },
+
+        perform: function (action) {
+            stack = stack.slice(0, index + 1);
+            stack.push(action(this.graph()));
+            index++;
+            maybeChange();
+        },
+
+        replace: function (action) {
+            // assert(index == stack.length - 1)
+            stack[index] = action(this.graph());
+            maybeChange();
+        },
+
+        undo: function () {
+            while (index > 0) {
+                index--;
+                if (stack[index].annotation) break;
+            }
+            dispatch.change();
+        },
+
+        redo: function () {
+            while (index < stack.length - 1) {
+                index++;
+                if (stack[index].annotation) break;
+            }
+            dispatch.change();
+        },
+
+        undoAnnotation: function () {
+            var i = index;
+            while (i >= 0) {
+                if (stack[i].annotation) return stack[i].annotation;
+                i--;
+            }
+        },
+
+        redoAnnotation: function () {
+            var i = index + 1;
+            while (i <= stack.length - 1) {
+                if (stack[i].annotation) return stack[i].annotation;
+                i++;
+            }
+        },
+
+        // generate reports of changes for changesets to use
+        modify: function () {
+            return stack[index].modifications();
+        },
+
+        create: function () {
+            return stack[index].creations();
+        },
+
+        'delete': function () {
+            return _.difference(
+                _.pluck(stack[0].entities, 'id'),
+                _.pluck(stack[index].entities, 'id')
+            ).map(function (id) {
+                return stack[0].fetch(id);
+            });
+        },
+
+        changes: function () {
+            return {
+                modify: this.modify(),
+                create: this.create(),
+                'delete': this['delete']()
+            };
+        },
+
+        reset: function () {
+            stack = [iD.Graph()];
+            index = 0;
+            dispatch.change();
+        }
+    };
+
+    history.reset();
+
+    return d3.rebind(history, dispatch, 'on');
 };
