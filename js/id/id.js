@@ -1,8 +1,10 @@
 var iD = function(container) {
     var connection = iD.Connection()
             .url('http://api06.dev.openstreetmap.org'),
+        history = iD.History(),
         map = iD.Map()
-            .connection(connection),
+            .connection(connection)
+            .history(history),
         controller = iD.Controller(map);
 
     map.background.source(iD.Background.Bing);
@@ -75,9 +77,9 @@ var iD = function(container) {
                 function save(e) {
                     d3.select('.shaded').remove();
                     var l = iD.loading('uploading changes to openstreetmap');
-                    connection.putChangeset(map.history.changes(), e.comment, function() {
+                    connection.putChangeset(history.changes(), e.comment, function() {
                         l.remove();
-                        map.history = iD.History();
+                        map.history(iD.History());
                         map.flush().redraw();
                     });
                 }
@@ -89,7 +91,7 @@ var iD = function(container) {
                         });
                     var modal = shaded.append('div')
                         .attr('class', 'modal commit-pane')
-                        .datum(map.history.changes());
+                        .datum(history.changes());
                     modal.call(iD.commit()
                         .on('cancel', function() {
                             shaded.remove();
@@ -117,8 +119,8 @@ var iD = function(container) {
                   "/ imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
 
         map.on('update', function() {
-            var undo = map.history.undoAnnotation(),
-                redo = map.history.redoAnnotation();
+            var undo = history.undoAnnotation(),
+                redo = history.redoAnnotation();
 
             bar.select('#undo')
                 .property('disabled', !undo)

@@ -66,6 +66,11 @@ describe('Map', function() {
 
         beforeEach(function () {
             spy = sinon.spy();
+            map.history({
+                perform: function () {},
+                undo: function () {},
+                redo: function () {}
+            });
             map.on('update', spy);
         });
 

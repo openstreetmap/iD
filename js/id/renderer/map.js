@@ -1,5 +1,5 @@
 iD.Map = function() {
-    var connection,
+    var connection, history,
         dimensions = [],
         dispatch = d3.dispatch('move', 'update'),
         inspector = iD.Inspector(),
@@ -33,12 +33,12 @@ iD.Map = function() {
                 if (!dragging) {
                     dragging = true;
                     only = iD.Util.trueObj([entity.id].concat(
-                        _.pluck(map.history.graph().parents(entity.id), 'id')));
-                    map.history.perform(iD.actions.noop());
+                        _.pluck(history.graph().parents(entity.id), 'id')));
+                    history.perform(iD.actions.noop());
                 }
 
                 var to = projection.invert([d3.event.x, d3.event.y]);
-                map.history.replace(iD.actions.move(entity, to));
+                history.replace(iD.actions.move(entity, to));
 
                 redraw(only);
             })
@@ -132,8 +132,6 @@ iD.Map = function() {
         map.surface = surface;
     }
 
-    map.history = iD.History();
-
     function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
         while (++i < n) if (p[i] + 'Transform' in s) return '-' + p[i].toLowerCase() + '-';
@@ -163,7 +161,7 @@ iD.Map = function() {
         if (surface.style(transformProp) != 'none') return;
         var all = [], ways = [], areas = [], points = [], waynodes = [],
             extent = map.extent(),
-            graph = map.history.graph();
+            graph = history.graph();
 
         if (!only) {
             all = graph.intersects(extent);
@@ -404,7 +402,7 @@ iD.Map = function() {
             if (result instanceof Error) {
                 // TODO: handle
             } else {
-                map.history.merge(result);
+                history.merge(result);
                 drawVector(iD.Util.trueObj(Object.keys(result.entities)));
             }
         });
@@ -439,7 +437,7 @@ iD.Map = function() {
         selection = entity.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')
-            .datum(map.history.graph().fetch(entity.id))
+            .datum(history.graph().fetch(entity.id))
             .call(inspector);
         redraw();
     }
@@ -454,7 +452,7 @@ iD.Map = function() {
 
     function removeEntity(entity) {
         // Remove this node from any ways that is a member of
-        map.history.graph().parents(entity.id)
+        history.graph().parents(entity.id)
             .filter(function(d) { return d.type === 'way'; })
             .forEach(function(parent) {
                 parent.nodes = _.without(parent.nodes, entity.id);
@@ -464,7 +462,7 @@ iD.Map = function() {
     }
 
     inspector.on('changeTags', function(d, tags) {
-        var entity = map.history.graph().entity(d.id);
+        var entity = history.graph().entity(d.id);
         map.perform(iD.actions.changeTags(entity, tags));
     }).on('changeWayDirection', function(d) {
         map.perform(iD.actions.changeWayDirection(d));
@@ -518,21 +516,21 @@ iD.Map = function() {
     }
 
     map.perform = function(action) {
-        map.history.perform(action);
+        history.perform(action);
         map.update();
         redraw();
         return map;
     };
 
     map.undo = function() {
-        map.history.undo();
+        history.undo();
         map.update();
         redraw();
         return map;
     };
 
     map.redo = function() {
-        map.history.redo();
+        history.redo();
         map.update();
         redraw();
         return map;
@@ -611,9 +609,15 @@ iD.Map = function() {
     };
 
     map.connection = function(_) {
-      if (!arguments.length) return connection;
-      connection = _;
-      return map;
+        if (!arguments.length) return connection;
+        connection = _;
+        return map;
+    };
+
+    map.history = function (_) {
+        if (!arguments.length) return history;
+        history = _;
+        return map;
     };
 
     map.background = background;
