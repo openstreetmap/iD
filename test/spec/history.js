@@ -24,6 +24,18 @@ describe("History", function () {
             history.perform(action);
             expect(history.undoAnnotation()).to.equal("action");
         });
+
+        it("emits a change event", function () {
+            history.on('change', spy);
+            history.perform(action);
+            expect(spy).to.have.been.called;
+        });
+
+        it("does not emit a change event when performing a noop", function () {
+            history.on('change', spy);
+            history.perform(iD.actions.noop);
+            expect(spy).not.to.have.been.called;
+        });
     });
 
     describe("#undo", function () {
@@ -37,6 +49,23 @@ describe("History", function () {
             history.perform(action);
             history.undo();
             expect(history.redoAnnotation()).to.equal("action");
+        });
+
+        it("emits a change event", function () {
+            history.perform(action);
+            history.on('change', spy);
+            history.undo();
+            expect(spy).to.have.been.called;
+        });
+    });
+
+    describe("#redo", function () {
+        it("emits a change event", function () {
+            history.perform(action);
+            history.undo();
+            history.on('change', spy);
+            history.redo();
+            expect(spy).to.have.been.called;
         });
     });
 
@@ -53,35 +82,6 @@ describe("History", function () {
         it("emits a change event", function () {
             history.on('change', spy);
             history.reset();
-            expect(spy).to.have.been.called;
-        });
-    });
-
-    describe("change", function () {
-        it("is not emitted when performing a noop", function () {
-            history.on('change', spy);
-            history.perform(iD.actions.noop);
-            expect(spy).not.to.have.been.called;
-        });
-
-        it("is emitted when performing an action", function () {
-            history.on('change', spy);
-            history.perform(action);
-            expect(spy).to.have.been.called;
-        });
-
-        it("is emitted when undoing an action", function () {
-            history.perform(action);
-            history.on('change', spy);
-            history.undo();
-            expect(spy).to.have.been.called;
-        });
-
-        it("is emitted when redoing an action", function () {
-            history.perform(action);
-            history.undo();
-            history.on('change', spy);
-            history.redo();
             expect(spy).to.have.been.called;
         });
     });
