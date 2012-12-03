@@ -49,6 +49,38 @@ iD.Map = function() {
                     redraw();
                 }
             }),
+        waydragbehavior = d3.behavior.drag()
+            .origin(function(entity) {
+                var p = projection(ll2a(entity.nodes[0]));
+                return { x: p[0], y: p[1] };
+            })
+            .on('drag', function(entity) {
+                d3.event.sourceEvent.stopPropagation();
+
+                if (!dragging) {
+                    dragging = true;
+                    only = iD.Util.trueObj([entity.id].concat(
+                        _.pluck(map.history.graph().parents(entity.id), 'id')));
+                    map.history.perform(iD.actions.noop());
+                }
+
+                entity.nodes.forEach(function(node) {
+                    var start = projection(ll2a(node));
+                    var end = projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
+                    node.lon = end[0];
+                    node.lat = end[1];
+                    map.history.replace(iD.actions.move(node, end));
+                });
+
+                redraw(only);
+            })
+            .on('dragend', function () {
+                if (dragging) {
+                    dragging = false;
+                    map.update();
+                    redraw();
+                }
+            }),
         nodeline = function(d) {
             return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
         },
@@ -394,11 +426,16 @@ iD.Map = function() {
 
     function deselectClick() {
         var hadSelection = !!selection;
-        selection = null;
         if (hadSelection) {
+            if (selection.type === 'way') {
+                d3.select(d3.event.target)
+                    .on('mousedown.drag', null)
+                    .on('touchstart.drag', null);
+            }
             redraw();
             hideInspector();
         }
+        selection = null;
     }
 
     function selectEntity(entity) {
@@ -413,6 +450,7 @@ iD.Map = function() {
         var entity = d3.select(d3.event.target).data();
         if (entity) entity = entity[0];
         if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
+        if (entity.type === 'way') d3.select(d3.event.target).call(waydragbehavior);
         selection = entity.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')
