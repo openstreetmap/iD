@@ -1,7 +1,7 @@
 iD.Map = function() {
     var connection, history,
         dimensions = [],
-        dispatch = d3.dispatch('move', 'update'),
+        dispatch = d3.dispatch('move'),
         inspector = iD.Inspector(),
         selection = null,
         translateStart,
@@ -45,7 +45,6 @@ iD.Map = function() {
             .on('dragend', function () {
                 if (dragging) {
                     dragging = false;
-                    map.update();
                     redraw();
                 }
             }),
@@ -517,21 +516,18 @@ iD.Map = function() {
 
     map.perform = function(action) {
         history.perform(action);
-        map.update();
         redraw();
         return map;
     };
 
     map.undo = function() {
         history.undo();
-        map.update();
         redraw();
         return map;
     };
 
     map.redo = function() {
         history.redo();
-        map.update();
         redraw();
         return map;
     };
@@ -626,5 +622,5 @@ iD.Map = function() {
     map.selectEntity = selectEntity;
     map.dblclickEnable = dblclickEnable;
 
-    return d3.rebind(map, dispatch, 'on', 'move', 'update');
+    return d3.rebind(map, dispatch, 'on', 'move');
 };

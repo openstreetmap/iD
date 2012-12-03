@@ -118,7 +118,7 @@ var iD = function(container) {
                   "<a href='http://github.com/systemed/iD/issues'>report a bug</a> " +
                   "/ imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
 
-        map.on('update', function() {
+        history.on('change', function() {
             var undo = history.undoAnnotation(),
                 redo = history.redoAnnotation();
 

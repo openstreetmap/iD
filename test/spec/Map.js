@@ -61,35 +61,6 @@ describe('Map', function() {
         });
     });
 
-    describe("update", function () {
-        var spy;
-
-        beforeEach(function () {
-            spy = sinon.spy();
-            map.history({
-                perform: function () {},
-                undo: function () {},
-                redo: function () {}
-            });
-            map.on('update', spy);
-        });
-
-        it("is emitted when performing an action", function () {
-            map.perform(iD.actions.noop);
-            expect(spy).to.have.been.called;
-        });
-
-        it("is emitted when undoing an action", function () {
-            map.undo();
-            expect(spy).to.have.been.called;
-        });
-
-        it("is emitted when redoing an action", function () {
-            map.redo();
-            expect(spy).to.have.been.called;
-        });
-    });
-
     describe("surface", function() {
         it("is an SVG element", function() {
            expect(map.surface.node().tagName).to.equal("svg");

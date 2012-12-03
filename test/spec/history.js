@@ -38,4 +38,39 @@ describe("History", function () {
             expect(history.redoAnnotation()).to.equal("action");
         });
     });
+
+    describe("change", function () {
+        var spy;
+
+        beforeEach(function () {
+            spy = sinon.spy();
+        });
+
+        it("is not emitted when performing a noop", function () {
+            history.on('change', spy);
+            history.perform(iD.actions.noop);
+            expect(spy).not.to.have.been.called;
+        });
+
+        it("is emitted when performing an action", function () {
+            history.on('change', spy);
+            history.perform(action);
+            expect(spy).to.have.been.called;
+        });
+
+        it("is emitted when undoing an action", function () {
+            history.perform(action);
+            history.on('change', spy);
+            history.undo();
+            expect(spy).to.have.been.called;
+        });
+
+        it("is emitted when redoing an action", function () {
+            history.perform(action);
+            history.undo();
+            history.on('change', spy);
+            history.redo();
+            expect(spy).to.have.been.called;
+        });
+    });
 });

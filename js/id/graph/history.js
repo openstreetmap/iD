@@ -1,8 +1,15 @@
 iD.History = function() {
     var stack = [iD.Graph()],
-        index = 0;
+        index = 0,
+        dispatch = d3.dispatch('change');
 
-    return {
+    function maybeChange() {
+        if (stack[index].annotation) {
+            dispatch.change();
+        }
+    }
+
+    var history = {
         graph: function () {
             return stack[index];
         },
@@ -17,11 +24,13 @@ iD.History = function() {
             stack = stack.slice(0, index + 1);
             stack.push(action(this.graph()));
             index++;
+            maybeChange();
         },
 
         replace: function (action) {
             // assert(index == stack.length - 1)
             stack[index] = action(this.graph());
+            maybeChange();
         },
 
         undo: function () {
@@ -29,6 +38,7 @@ iD.History = function() {
                 index--;
                 if (stack[index].annotation) break;
             }
+            dispatch.change();
         },
 
         redo: function () {
@@ -36,6 +46,7 @@ iD.History = function() {
                 index++;
                 if (stack[index].annotation) break;
             }
+            dispatch.change();
         },
 
         undoAnnotation: function () {
@@ -79,5 +90,7 @@ iD.History = function() {
                 'delete': this['delete']()
             };
         }
-    }
+    };
+
+    return d3.rebind(history, dispatch, 'on');
 };
