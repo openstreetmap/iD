@@ -131,16 +131,16 @@ iD.Connection = function() {
         });
     }
 
-    connection.url = function(x) {
+    connection.url = function(_) {
         if (!arguments.length) return apiURL;
-        apiURL = x;
-        oauth.api(x);
+        apiURL = _;
+        oauth.api(_);
         return connection;
     };
 
-    connection.user = function(x) {
+    connection.user = function(_) {
         if (!arguments.length) return user;
-        user = x;
+        user = _;
         return connection;
     };
 

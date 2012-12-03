@@ -1,5 +1,6 @@
 iD.Inspector = function() {
-    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close');
+    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close'),
+        taginfo = iD.taginfo();
 
     function drawhead(selection) {
         selection.html('');
@@ -72,6 +73,15 @@ iD.Inspector = function() {
                     .on('keyup', function(d, i) {
                         d[i ? 'value' : 'key'] = this.value;
                         update();
+                    })
+                    .each(function(d, i) {
+                        var selection = this;
+                        if (i == 1) {
+                            taginfo.values(d.key, function(vals) {
+                                d3.select(selection).call(d3.typeahead()
+                                    .data(vals));
+                            });
+                        }
                     });
 
                 row.append('td').attr('class', 'tag-help').append('a')

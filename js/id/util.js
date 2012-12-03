@@ -49,3 +49,9 @@ iD.Util.tagText = function(entity) {
         return e.key + ': ' + e.value;
     }).join('\n');
 };
+
+iD.Util.qsString = function(obj) {
+    return Object.keys(obj).sort().map(function(key) {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
+    }).join('&');
+};
