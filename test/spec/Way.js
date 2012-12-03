@@ -8,7 +8,7 @@ describe('Way', function() {
 
   describe('#isClosed', function() {
       it('is not closed with two distinct nodes ', function() {
-          expect(iD.Way.isClosed(way)).toEqual(false);
+          expect(iD.Way.isClosed(way)).to.equal(false);
       });
   });
 });

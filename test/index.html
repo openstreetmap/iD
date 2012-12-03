@@ -2,103 +2,82 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>Jasmine Spec Runner</title>
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="lib/mocha.css">
+</head>
+<body>
+    <div id="mocha"></div>
 
-    <link rel="stylesheet" type="text/css" href="lib/jasmine-1.2.0/jasmine.css">
-    <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine.js"></script>
-    <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine-html.js"></script>
-    <script type="text/javascript" src="lib/console-runner.js"></script>
-    <script type="text/javascript" src="lib/bind-shim.js"></script>
-    <script type="text/javascript" src="lib/happen.js"></script>
+    <script src="lib/mocha.js"></script>
+    <script src="lib/chai.js"></script>
+    <script src="lib/sinon.js"></script>
+    <script src="lib/sinon-chai.js"></script>
+    <script src="lib/bind-shim.js"></script>
+    <script src="lib/happen.js"></script>
 
     <!-- include source files here... -->
-    <script type='text/javascript' src='../js/lib/lodash.js'></script>
-    <script type='text/javascript' src='../js/lib/d3.v3.js'></script>
-    <script type='text/javascript' src='../js/lib/sha.js'></script>
-    <script type='text/javascript' src='../js/lib/d3.geo.tile.js'></script>
-    <script type='text/javascript' src='../js/lib/d3.size.js'></script>
-    <script type='text/javascript' src='../js/lib/ohauth.js'></script>
-    <script type='text/javascript' src='../js/lib/jxon.js'></script>
+    <script src='../js/lib/lodash.js'></script>
+    <script src='../js/lib/d3.v3.js'></script>
+    <script src='../js/lib/sha.js'></script>
+    <script src='../js/lib/d3.geo.tile.js'></script>
+    <script src='../js/lib/d3.size.js'></script>
+    <script src='../js/lib/d3.one.js'></script>
+    <script src='../js/lib/ohauth.js'></script>
+    <script src='../js/lib/jxon.js'></script>
 
-    <script type='text/javascript' src='../js/id/id.js'></script>
-    <script type='text/javascript' src='../js/id/util.js'></script>
-    <script type='text/javascript' src='../js/id/oauth.js'></script>
-    <script type='text/javascript' src='../js/id/renderer/style.js'></script>
+    <script src='../js/id/id.js'></script>
+    <script src='../js/id/util.js'></script>
+    <script src='../js/id/oauth.js'></script>
+    <script src='../js/id/renderer/style.js'></script>
 
-    <script type='text/javascript' src='../js/id/renderer/background.js'></script>
-    <script type='text/javascript' src='../js/id/renderer/map.js'></script>
-    <script type='text/javascript' src='../js/id/renderer/hash.js'></script>
-    <script type='text/javascript' src='../js/id/renderer/markers.js'></script>
-    <script type='text/javascript' src='../js/id/renderer/style.js'></script>
-    <script type='text/javascript' src='../js/id/ui/inspector.js'></script>
+    <script src='../js/id/renderer/background.js'></script>
+    <script src='../js/id/renderer/map.js'></script>
+    <script src='../js/id/renderer/hash.js'></script>
+    <script src='../js/id/renderer/markers.js'></script>
+    <script src='../js/id/renderer/style.js'></script>
+    <script src='../js/id/ui/inspector.js'></script>
+    <script src='../js/id/ui/commit.js'></script>
+    <script src='../js/id/ui/loading.js'></script>
+    <script src='../js/id/ui/userpanel.js'></script>
 
-    <script type='text/javascript' src='../js/id/actions/modes.js'></script>
-    <script type='text/javascript' src='../js/id/actions/actions.js'></script>
+    <script src='../js/id/actions/modes.js'></script>
+    <script src='../js/id/actions/actions.js'></script>
 
-    <script type='text/javascript' src='../js/id/controller/controller.js'></script>
+    <script src='../js/id/controller/controller.js'></script>
 
-    <script type='text/javascript' src='../js/id/format/format.js'></script>
-    <script type='text/javascript' src='../js/id/format/geojson.js'></script>
-    <script type='text/javascript' src='../js/id/format/xml.js'></script>
+    <script src='../js/id/format/format.js'></script>
+    <script src='../js/id/format/geojson.js'></script>
+    <script src='../js/id/format/xml.js'></script>
 
-    <script type='text/javascript' src='../js/id/graph/entity.js'></script>
-    <script type='text/javascript' src='../js/id/graph/way.js'></script>
-    <script type='text/javascript' src='../js/id/graph/graph.js'></script>
-    <script type='text/javascript' src='../js/id/graph/history.js'></script>
-    <script type='text/javascript' src='../js/id/connection.js'></script>
+    <script src='../js/id/graph/entity.js'></script>
+    <script src='../js/id/graph/way.js'></script>
+    <script src='../js/id/graph/graph.js'></script>
+    <script src='../js/id/graph/history.js'></script>
+    <script src='../js/id/connection.js'></script>
+
+    <script>
+        iD.debug = true;
+        mocha.setup('bdd');
+        var expect = chai.expect;
+    </script>
 
     <!-- include spec files here... -->
-    <script type="text/javascript" src="spec/util.js"></script>
-    <script type="text/javascript" src="spec/background.js"></script>
-    <script type="text/javascript" src="spec/way.js"></script>
-    <script type="text/javascript" src="spec/map.js"></script>
-    <script type="text/javascript" src="spec/hash.js"></script>
-    <script type="text/javascript" src="spec/oauth.js"></script>
-    <script type="text/javascript" src="spec/graph.js"></script>
-    <script type="text/javascript" src="spec/entity.js"></script>
-    <script type="text/javascript" src="spec/connection.js"></script>
-    <script type="text/javascript" src="spec/geojson.js"></script>
-    <script type="text/javascript" src="spec/xml.js"></script>
-    <script type="text/javascript" src="spec/style.js"></script>
-    <script type="text/javascript" src="spec/inspector.js"></script>
+    <script src="spec/util.js"></script>
+    <script src="spec/background.js"></script>
+    <script src="spec/way.js"></script>
+    <script src="spec/map.js"></script>
+    <script src="spec/hash.js"></script>
+    <script src="spec/oauth.js"></script>
+    <script src="spec/graph.js"></script>
+    <script src="spec/entity.js"></script>
+    <script src="spec/connection.js"></script>
+    <script src="spec/geojson.js"></script>
+    <script src="spec/xml.js"></script>
+    <script src="spec/style.js"></script>
+    <script src="spec/inspector.js"></script>
 
-    <script type="text/javascript">
-        iD.debug = true;
+    <script>
+        mocha.run();
     </script>
-
-    <script type="text/javascript">
-        (function () {
-            var jasmineEnv = jasmine.getEnv();
-            jasmineEnv.updateInterval = 1000;
-
-            var htmlReporter = new jasmine.HtmlReporter();
-            jasmineEnv.addReporter(htmlReporter);
-
-            window.console_reporter = new jasmine.ConsoleReporter();
-            jasmineEnv.addReporter(console_reporter);
-
-            jasmineEnv.specFilter = function (spec) {
-                return htmlReporter.specFilter(spec);
-            };
-
-            var currentWindowOnload = window.onload;
-
-            window.onload = function () {
-                if (currentWindowOnload) {
-                    currentWindowOnload();
-                }
-                execJasmine();
-            };
-
-            function execJasmine() {
-                jasmineEnv.execute();
-            }
-
-        })();
-    </script>
-
-</head>
-
-<body>
 </body>
 </html>

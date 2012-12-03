@@ -18,80 +18,80 @@ describe("hash", function () {
 
   describe("#map()", function () {
     it("gets and sets map", function () {
-      expect(hash.map(map)).toBe(hash);
-      expect(hash.map()).toBe(map);
+      expect(hash.map(map)).to.equal(hash);
+      expect(hash.map()).to.equal(map);
     });
 
     it("sets hadHash if location.hash is present", function () {
       location.hash = "?map=20.00/38.87952/-77.02405";
       hash.map(map);
-      expect(hash.hadHash).toBeTruthy();
+      expect(hash.hadHash).to.be.true;
     });
 
     it("zooms map to requested level", function () {
       location.hash = "?map=20.00/38.87952/-77.02405";
-      spyOn(map, 'zoom').andCallThrough();
+      sinon.spy(map, 'zoom');
       hash.map(map);
-      expect(map.zoom).toHaveBeenCalledWith(20.0);
+      expect(map.zoom).to.have.been.calledWith(20.0);
     });
 
     it("centers map at requested coordinates", function () {
       location.hash = "?map=20.00/38.87952/-77.02405";
-      spyOn(map, 'center').andCallThrough();
+      sinon.spy(map, 'center');
       hash.map(map);
-      expect(map.center).toHaveBeenCalledWith([-77.02405, 38.87952]);
+      expect(map.center).to.have.been.calledWith([-77.02405, 38.87952]);
     });
 
     it("binds the map's move event", function () {
-      spyOn(map, 'on');
+      sinon.spy(map, 'on');
       hash.map(map);
-      expect(map.on).toHaveBeenCalledWith('move', jasmine.any(Function));
+      expect(map.on).to.have.been.calledWith('move', sinon.match.instanceOf(Function));
     });
 
     it("unbinds the map's move event", function () {
-      spyOn(map, 'on');
-      spyOn(map, 'off');
+      sinon.spy(map, 'on');
+      sinon.spy(map, 'off');
       hash.map(map);
       hash.map(null);
-      expect(map.off).toHaveBeenCalledWith('move', map.on.mostRecentCall.args[1]);
+      expect(map.off).to.have.been.calledWith('move', map.on.firstCall.args[1]);
     });
   });
 
   describe("on window hashchange events", function () {
-    var hashchanged,
-        hashchange = function () { return hashchanged; };
-
     beforeEach(function() {
       hash.map(map);
-      hashchanged = false;
-      window.addEventListener("hashchange", function () { hashchanged = true; }, false);
     });
 
-    it("zooms map to requested level", function () {
-      spyOn(map, 'zoom').andCallThrough();
-      location.hash = "#?map=20.00/38.87952/-77.02405";
-      waitsFor(hashchange);
-      runs(function () {
-        expect(map.zoom).toHaveBeenCalledWith(20.0);
+    function onhashchange(fn) {
+        d3.select(window).one("hashchange", fn);
+    }
+
+    it("zooms map to requested level", function (done) {
+      onhashchange(function () {
+        expect(map.zoom).to.have.been.calledWith(20.0);
+        done();
       });
+
+      sinon.spy(map, 'zoom');
+      location.hash = "#?map=20.00/38.87952/-77.02405";
     });
 
-    it("centers map at requested coordinates", function () {
-      spyOn(map, 'center').andCallThrough();
-      location.hash = "#?map=20.00/38.87952/-77.02405";
-      waitsFor(hashchange);
-      runs(function () {
-        expect(map.center).toHaveBeenCalledWith([-77.02405, 38.87952]);
+    it("centers map at requested coordinates", function (done) {
+      onhashchange(function () {
+        expect(map.center).to.have.been.calledWith([-77.02405, 38.87952]);
+        done();
       });
+
+      sinon.spy(map, 'center');
+      location.hash = "#?map=20.00/38.87952/-77.02405";
     });
   });
 
   describe("on map move events", function () {
     it("stores the current zoom and coordinates in location.hash", function () {
-      spyOn(map, 'on');
+      sinon.stub(map, 'on').yields();
       hash.map(map);
-      map.on.mostRecentCall.args[1]();
-      expect(location.hash).toEqual("#?map=0.00/0/0");
+      expect(location.hash).to.equal("#?map=0.00/0/0");
     });
   });
 });

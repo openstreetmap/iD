@@ -15,29 +15,29 @@ describe("Inspector", function () {
     });
 
     it("emits a close event when the close button is clicked", function () {
-        var spy = jasmine.createSpy();
+        var spy = sinon.spy();
         inspector.on('close', spy);
 
         happen.click(element.select('.close').node());
 
-        expect(spy).toHaveBeenCalledWith(entity);
+        expect(spy).to.have.been.calledWith(entity);
     });
 
     it("emits a changeTags event when the save button is clicked", function () {
-        var spy = jasmine.createSpy();
+        var spy = sinon.spy();
         inspector.on('changeTags', spy);
 
         happen.click(element.select('.save').node());
 
-        expect(spy).toHaveBeenCalledWith(entity, {});
+        expect(spy).to.have.been.calledWith(entity, {});
     });
 
     it("emits a remove event when the delete button is clicked", function () {
-        var spy = jasmine.createSpy();
+        var spy = sinon.spy();
         inspector.on('remove', spy);
 
         happen.click(element.select('.delete').node());
 
-        expect(spy).toHaveBeenCalledWith(entity);
+        expect(spy).to.have.been.calledWith(entity);
     });
 });

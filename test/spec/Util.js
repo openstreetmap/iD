@@ -6,19 +6,19 @@ describe('Util', function() {
           b = iD.Util.id(),
           c = iD.Util.id(),
           d = iD.Util.id();
-      expect(a === b).toEqual(false);
-      expect(b === c).toEqual(false);
-      expect(c === d).toEqual(false);
+      expect(a === b).to.equal(false);
+      expect(b === c).to.equal(false);
+      expect(c === d).to.equal(false);
   });
 
   it('#trueObj', function() {
-      expect(iD.Util.trueObj(['a', 'b', 'c'])).toEqual({ a: true, b: true, c: true });
-      expect(iD.Util.trueObj([])).toEqual({});
+      expect(iD.Util.trueObj(['a', 'b', 'c'])).to.eql({ a: true, b: true, c: true });
+      expect(iD.Util.trueObj([])).to.eql({});
   });
 
   it('#friendlyName', function() {
-      expect(iD.Util.friendlyName({ tags: { name: 'hi' }})).toEqual('hi');
-      expect(iD.Util.friendlyName({ tags: { highway: 'Route 5' }})).toEqual('Route 5');
-      expect(iD.Util.friendlyName({ tags: { name: 'hi', highway: 'Route 5' }})).toEqual('hi');
+      expect(iD.Util.friendlyName({ tags: { name: 'hi' }})).to.equal('hi');
+      expect(iD.Util.friendlyName({ tags: { highway: 'Route 5' }})).to.equal('Route 5');
+      expect(iD.Util.friendlyName({ tags: { name: 'hi', highway: 'Route 5' }})).to.equal('hi');
   });
 });
