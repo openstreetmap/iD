@@ -36,11 +36,11 @@ iD.modes.AddPlace = {
             n._poi = true;
             this.map.perform(iD.actions.addNode(n));
             this.map.selectEntity(n);
-            this.exit();
+            this.controller.exit();
         }.bind(this));
 
         d3.select(document).on('keydown.addplace', function() {
-            if (d3.event.keyCode === 27) this.exit();
+            if (d3.event.keyCode === 27) this.controller.exit();
         }.bind(this));
     },
     exit: function() {
@@ -140,7 +140,7 @@ iD.modes.AddRoad = {
         surface.on('click.addroad', addRoad.bind(this));
 
         d3.select(document).on('keydown.addroad', function() {
-            if (d3.event.keyCode === 27) this.exit();
+            if (d3.event.keyCode === 27) this.controller.exit();
         }.bind(this));
     },
     exit: function() {
@@ -204,7 +204,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                         this.map.perform(iD.actions.changeTags(way, way.tags));
                         this.map.selectEntity(way);
                         // End by clicking on own tail
-                        return this.exit();
+                        return this.controller.exit();
                     } else {
                         // connect a way to an existing way
                         node = t.data()[0];
@@ -289,7 +289,7 @@ iD.modes.AddArea = {
         surface.on('click.addarea', addArea.bind(this));
 
         d3.select(document).on('keydown.addarea', function() {
-            if (d3.event.keyCode === 27) this.exit();
+            if (d3.event.keyCode === 27) this.controller.exit();
         }.bind(this));
     },
     exit: function() {
@@ -342,7 +342,7 @@ iD.modes.DrawArea = function(way_id) {
                         delete way.tags.elastic;
                         this.map.perform(iD.actions.changeTags(way, way.tags));
                         // End by clicking on own tail
-                        return this.exit();
+                        return this.controller.exit();
                     } else {
                         // connect a way to an existing way
                         node = t.data()[0];

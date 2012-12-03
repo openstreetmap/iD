@@ -16,7 +16,11 @@ iD.Controller = function(map) {
         event.enter(mode);
     };
 
-    controller.enter(iD.modes.Move);
+    controller.exit = function() {
+        controller.enter(iD.modes.Move);
+    };
+
+    controller.exit();
 
     return d3.rebind(controller, event, 'on');
 };
