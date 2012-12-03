@@ -81,6 +81,8 @@ iD.Map = function() {
         map.size(this.size());
 
         hideInspector();
+
+        map.surface = surface;
     }
 
     map.history = iD.History();
@@ -532,7 +534,6 @@ iD.Map = function() {
       return map;
     };
 
-    map.surface = surface;
     map.background = background;
     map.projection = projection;
     map.redraw = redraw;

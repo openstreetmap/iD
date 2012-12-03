@@ -60,4 +60,10 @@ describe('Map', function() {
             expect(map.extent()[1][0]).toBeCloseTo(36);
         });
     });
+
+    describe("surface", function() {
+        it("is an SVG element", function() {
+           expect(map.surface.node().tagName).toEqual("svg");
+        });
+    });
 });
