@@ -24,6 +24,13 @@ image.handle {
     cursor: move;
 }
 
+circle.accuracy-handle {
+    fill:#DF2D2D;
+    stroke:#DF2D2D;
+    fill-opacity:0.2;
+    stroke-width:1;
+}
+
 circle.teaser-point {
     stroke-width: 2;
     stroke:#1DCAFF;

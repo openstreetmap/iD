@@ -8,12 +8,8 @@ iD.modes._node = function(ll) {
     });
 };
 
-iD.modes.dist = function(a, b) {
-    return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
-};
-
 iD.modes.chooseIndex = function(way, point, map) {
-    var dist = iD.modes.dist;
+    var dist = iD.Util.dist;
     var projNodes = way.nodes.map(function(n) {
         return map.projection([n.lon, n.lat]);
     });

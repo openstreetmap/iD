@@ -16,6 +16,13 @@ iD.Map = function() {
         dblclickEnabled = true,
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
+                if (entity.accuracy) {
+                    var index = entity.index, wayid = entity.way;
+                    entity = iD.Node(entity);
+                    var connectedWay = map.history.graph().entity(wayid);
+                    connectedWay.nodes.splice(index, 0, entity.id);
+                    map.perform(iD.actions.addWayNode(connectedWay, entity));
+                }
                 var p = projection(ll2a(entity));
                 only = iD.Util.trueObj([entity.id].concat(
                     _.pluck(map.history.graph().parents(entity.id), 'id')));
@@ -143,11 +150,27 @@ iD.Map = function() {
                 waynodes.push(a);
             }
         }
+        var wayAccuracyHandles = ways.reduce(function(mem, w) {
+            return mem.concat(accuracyHandles(w));
+        }, []);
         drawHandles(waynodes, filter);
+        drawAccuracyHandles(wayAccuracyHandles, filter);
         drawCasings(ways, filter);
         drawFills(areas, filter);
         drawStrokes(ways, filter);
         drawMarkers(points, filter);
+    }
+
+    function accuracyHandles(way) {
+        var handles = [];
+        for (var i = 0; i < way.nodes.length - 1; i++) {
+            handles[i] = iD.Node(iD.Util.interp(way.nodes[i], way.nodes[i + 1], 0.5));
+            handles[i].way = way.id;
+            handles[i].index = i + 1;
+            handles[i].accuracy = true;
+            handles[i].tags = { name: 'Improve way accuracy' };
+        }
+        return handles;
     }
 
     function drawHandles(waynodes, filter) {
@@ -161,6 +184,20 @@ iD.Map = function() {
         handles.attr('transform', function(entity) {
             var p = projection(ll2a(entity));
             return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
+        }).classed('active', classActive);
+    }
+
+    function drawAccuracyHandles(waynodes) {
+        var handles = g.hit.selectAll('circle.accuracy-handle')
+            .data(waynodes, key);
+        console.log(handles);
+        handles.exit().remove();
+        handles.enter().append('circle')
+            .attr({ r: 2, 'class': 'accuracy-handle' })
+            .call(dragbehavior);
+        handles.attr('transform', function(entity) {
+            var p = projection(ll2a(entity));
+            return 'translate(' + [~~p[0], ~~p[1]] + ')';
         }).classed('active', classActive);
     }
 

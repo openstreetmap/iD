@@ -55,3 +55,14 @@ iD.Util.qsString = function(obj) {
         return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
     }).join('&');
 };
+
+iD.Util.interp = function(p1, p2, t) {
+    return {
+        lon: p1.lon + (p2.lon - p1.lon) * t,
+        lat: p1.lat + (p2.lat - p1.lat) * t
+    };
+};
+
+iD.Util.dist = function(a, b) {
+    return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
+};
