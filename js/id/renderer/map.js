@@ -200,7 +200,6 @@ iD.Map = function() {
     function drawAccuracyHandles(waynodes) {
         var handles = g.hit.selectAll('circle.accuracy-handle')
             .data(waynodes, key);
-        console.log(handles);
         handles.exit().remove();
         handles.enter().append('circle')
             .attr({ r: 2, 'class': 'accuracy-handle' })
