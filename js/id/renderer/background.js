@@ -7,12 +7,15 @@ iD.Background = function() {
     function background() {
         var tiles = tile
             .scale(projection.scale())
-            .translate(projection.translate())();
+            .translate(projection.translate())(),
+            z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),
+            rz = Math.floor(z),
+            ts = 256 * Math.pow(2, z - rz),
+            tile_origin = [
+                projection.scale() / 2 - projection.translate()[0],
+                projection.scale() / 2 - projection.translate()[1]];
 
         var image = this
-            .attr("transform", function() {
-                return "scale(" + tiles.scale + ")translate(" + tiles.translate + ")";
-            })
             .selectAll("image")
             .data(tiles, function(d) { return d; });
 
@@ -20,11 +23,15 @@ iD.Background = function() {
             .remove();
 
         image.enter().append("image")
-            .attr("xlink:href", source)
-            .attr("width", 1)
-            .attr("height", 1)
-            .attr("x", function(d) { return d[0]; })
-            .attr("y", function(d) { return d[1]; });
+            .attr("xlink:href", source);
+
+        image.attr('transform', function(d) {
+            return 'translate(' +
+                Math.round((d[0] * ts) - tile_origin[0]) + ',' +
+                Math.round((d[1] * ts) - tile_origin[1]) + ')';
+        })
+        .attr("width", ts)
+        .attr("height", ts);
     }
 
     background.projection = function(_) {
@@ -68,3 +75,4 @@ iD.Background.Bing = function (coord) {
         .replace('{y}', coord[1])
         .replace('{z}', coord[2]);
 };
+
