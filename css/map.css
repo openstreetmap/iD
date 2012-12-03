@@ -20,16 +20,8 @@ g.marker.active circle {
 }
 
 /* interactive elements */
-rect.handle {
+image.handle {
     cursor: move;
-    stroke-width: 1;
-    stroke:#000;
-    fill:#FFF694;
-}
-
-rect.handle.active {
-    stroke:red;
-    fill:#FFC5C5;
 }
 
 circle.teaser-point {
