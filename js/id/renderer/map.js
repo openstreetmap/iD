@@ -14,24 +14,34 @@ iD.Map = function() {
             .on('zoom', zoomPan),
         only,
         dblclickEnabled = true,
+        dragging = false,
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
                 var p = projection(ll2a(entity));
-                only = iD.Util.trueObj([entity.id].concat(
-                    _.pluck(map.history.graph().parents(entity.id), 'id')));
                 return { x: p[0], y: p[1] };
             })
-            .on('dragstart', function() {
-                map.history.perform(iD.actions.noop());
-                d3.event.sourceEvent.stopPropagation();
-            })
             .on('drag', function(entity) {
-                var to = projection.invert([d3.event.x, d3.event.y]);
                 d3.event.sourceEvent.stopPropagation();
+
+                if (!dragging) {
+                    dragging = true;
+                    only = iD.Util.trueObj([entity.id].concat(
+                        _.pluck(map.history.graph().parents(entity.id), 'id')));
+                    map.history.perform(iD.actions.noop());
+                }
+
+                var to = projection.invert([d3.event.x, d3.event.y]);
                 map.history.replace(iD.actions.move(entity, to));
+
                 redraw(only);
             })
-            .on('dragend', redraw),
+            .on('dragend', function () {
+                if (dragging) {
+                    dragging = false;
+                    map.update();
+                    redraw();
+                }
+            }),
         nodeline = function(d) {
             return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
         },
