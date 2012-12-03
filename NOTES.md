@@ -108,7 +108,7 @@ unchanged.
 
 ## UI
 
-Rendering and UI code generally follows d3 styles and conventions.
+Rendering and UI code generally follows a [convention for reusable elements established by d3](http://bost.ocks.org/mike/chart/).
 
 Constructor functions typically return a function decorated with additional properties. The function
 can be called with `this` set to a d3 selection in order to set up the HTML structure. This is usually
