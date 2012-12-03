@@ -162,11 +162,15 @@ var iD = function(container) {
         if (!arguments.length) return connection;
         connection = _;
         return editor;
-    }
+    };
 
     editor.map = function() {
         return map;
-    }
+    };
+
+    editor.controller = function() {
+        return controller;
+    };
 
     if (arguments.length) {
         d3.select(container).call(editor);
