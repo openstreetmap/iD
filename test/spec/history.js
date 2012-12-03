@@ -4,7 +4,8 @@ describe("History", function () {
         action = function() { return graph; };
 
     beforeEach(function () {
-       history = iD.History();
+        history = iD.History();
+        spy = sinon.spy();
     });
 
     describe("#graph", function () {
@@ -39,13 +40,24 @@ describe("History", function () {
         });
     });
 
-    describe("change", function () {
-        var spy;
-
-        beforeEach(function () {
-            spy = sinon.spy();
+    describe("#reset", function () {
+        it("clears the version stack", function () {
+            history.perform(action);
+            history.perform(action);
+            history.undo();
+            history.reset();
+            expect(history.undoAnnotation()).to.be.undefined;
+            expect(history.redoAnnotation()).to.be.undefined;
         });
 
+        it("emits a change event", function () {
+            history.on('change', spy);
+            history.reset();
+            expect(spy).to.have.been.called;
+        });
+    });
+
+    describe("change", function () {
         it("is not emitted when performing a noop", function () {
             history.on('change', spy);
             history.perform(iD.actions.noop);

@@ -79,7 +79,7 @@ var iD = function(container) {
                     var l = iD.loading('uploading changes to openstreetmap');
                     connection.putChangeset(history.changes(), e.comment, function() {
                         l.remove();
-                        map.history(iD.History());
+                        history.reset();
                         map.flush().redraw();
                     });
                 }

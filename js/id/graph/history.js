@@ -1,6 +1,5 @@
 iD.History = function() {
-    var stack = [iD.Graph()],
-        index = 0,
+    var stack, index,
         dispatch = d3.dispatch('change');
 
     function maybeChange() {
@@ -89,8 +88,16 @@ iD.History = function() {
                 create: this.create(),
                 'delete': this['delete']()
             };
+        },
+
+        reset: function () {
+            stack = [iD.Graph()];
+            index = 0;
+            dispatch.change();
         }
     };
+
+    history.reset();
 
     return d3.rebind(history, dispatch, 'on');
 };
