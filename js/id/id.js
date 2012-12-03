@@ -111,10 +111,9 @@ var iD = function(container) {
 
         this.append('div')
             .attr('id', 'about')
-            .html("<p>Work in progress: <a href='http://www.geowiki.com/'>introduction</a>," +
-                  "<a href='http://github.com/systemed/iD'>code</a>," +
-                  "<a href='http://www.geowiki.com/docs'>docs</a>." +
-                  "Imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
+            .html("<a href='http://github.com/systemed/iD'>code</a>, " +
+                  "<a href='http://github.com/systemed/iD/issues'>report a bug</a> " +
+                  "/ imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
 
         map.on('update', function() {
             var undo = map.history.undoAnnotation(),

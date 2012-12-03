@@ -64,7 +64,6 @@ iD.modes.AddPlace = {
             .on('mousemove.addplace', null)
             .on('click.addplace', null);
         d3.select(document).on('keydown.addplace', null);
-        d3.selectAll('#addplace').remove();
     }
 };
 
@@ -234,8 +233,6 @@ iD.modes.DrawRoad = function(way_id, direction) {
         exit: function() {
             this.map.surface.on('mousemove.drawroad', null)
                 .on('click.drawroad', null);
-            d3.select(document).on('.drawroad', null);
-            d3.selectAll('#drawroad').remove();
             window.setTimeout(function() {
                 this.map.dblclickEnable(true);
             }.bind(this), 1000);
