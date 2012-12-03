@@ -1,0 +1,1 @@
+script: cd test && phantomjs lib/run_jasmine_test.coffee index.html
