@@ -106,6 +106,19 @@ the state of the data model objects (Entity, Graph) or their constituent parts (
 tags Object) must return a new instance of the appropriate type, leaving the current instance
 unchanged.
 
+## UI
+
+Rendering and UI code generally follows d3 styles and conventions.
+
+Constructor functions typically return a function decorated with additional properties. The function
+can be called with `this` set to a d3 selection in order to set up the HTML structure. This is usually
+done via [selection.call](https://github.com/mbostock/d3/wiki/Selections#wiki-call).
+
+Accessors are implemented as a unified getter/setter function. When called with no arguments,
+it acts as a getter; when called with an argument it acts as a setter and returns self, for
+chaining. Accessors are preferable to constructor arguments; constructors typically take zero
+arguments.
+
 ## Performance
 
 See blog post: http://mapbox.com/osmdev/2012/11/20/getting-serious-about-svg/
