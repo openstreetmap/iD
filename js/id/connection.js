@@ -5,7 +5,7 @@ iD.Connection = function() {
         connection = {},
         refNodes = {},
         user = {},
-        oauth = iD.OAuth().setAPI(apiURL);
+        oauth = iD.OAuth().api(apiURL);
 
     // Request data within the bbox from an external OSM server.
     function bboxFromAPI(box, callback) {
@@ -134,7 +134,7 @@ iD.Connection = function() {
     connection.url = function(x) {
         if (!arguments.length) return apiURL;
         apiURL = x;
-        oauth.setAPI(x);
+        oauth.api(x);
         return connection;
     };
 

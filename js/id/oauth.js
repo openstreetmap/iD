@@ -109,8 +109,9 @@ iD.OAuth = function() {
         });
     };
 
-    oauth.setAPI = function(x) {
-        apibase = x;
+    oauth.api = function(_) {
+        if (!arguments.length) return apibase;
+        apibase = _;
         return oauth;
     };
 
