@@ -129,9 +129,6 @@ iD.Map = function() {
         arrow.remove();
 
         map.size(this.size());
-
-        hideInspector();
-
         map.surface = surface;
     }
 
@@ -442,7 +439,8 @@ iD.Map = function() {
         selection = entity.id;
         d3.select('.inspector-wrap')
             .style('display', 'block')
-            .datum(map.history.graph().fetch(entity.id)).call(inspector);
+            .datum(map.history.graph().fetch(entity.id))
+            .call(inspector);
         redraw();
     }
 
@@ -451,11 +449,7 @@ iD.Map = function() {
         if (entity) entity = entity[0];
         if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
         if (entity.type === 'way') d3.select(d3.event.target).call(waydragbehavior);
-        selection = entity.id;
-        d3.select('.inspector-wrap')
-            .style('display', 'block')
-            .datum(map.history.graph().fetch(entity.id)).call(inspector);
-        redraw();
+        selectEntity(entity);
     }
 
     function removeEntity(entity) {
