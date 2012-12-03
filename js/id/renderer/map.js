@@ -440,18 +440,21 @@ iD.Map = function() {
 
     map.perform = function(action) {
         map.history.perform(action);
+        map.update();
         redraw();
         return map;
     };
 
     map.undo = function() {
         map.history.undo();
+        map.update();
         redraw();
         return map;
     };
 
     map.redo = function() {
         map.history.redo();
+        map.update();
         redraw();
         return map;
     };
