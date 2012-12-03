@@ -10,4 +10,9 @@ describe('Util', function() {
       expect(b === c).toEqual(false);
       expect(c === d).toEqual(false);
   });
+
+  it('creates a truthy object', function() {
+      expect(iD.Util.trueObj(['a', 'b', 'c'])).toEqual({ a: true, b: true, c: true });
+      expect(iD.Util.trueObj([])).toEqual({});
+  });
 });
