@@ -10,7 +10,7 @@ iD.Map = function() {
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
-            .scaleExtent([256, 256 * Math.pow(2, 20)])
+            .scaleExtent([1024, 256 * Math.pow(2, 20)])
             .on('zoom', zoomPan),
         only,
         dblclickEnabled = true,

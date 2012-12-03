@@ -30,8 +30,8 @@ iD.Background = function() {
                 Math.round((d[0] * ts) - tile_origin[0]) + ',' +
                 Math.round((d[1] * ts) - tile_origin[1]) + ')';
         })
-        .attr("width", ts)
-        .attr("height", ts);
+        .attr("width", Math.ceil(ts))
+        .attr("height", Math.ceil(ts));
     }
 
     background.projection = function(_) {
