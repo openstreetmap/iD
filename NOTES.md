@@ -68,9 +68,6 @@ and so on.
 
 ## The Graph
 
-iD implements a [persistent data structure](http://en.wikipedia.org/wiki/Persistent_data_structure)
-over the OSM data model.
-
 The data model of OSM is something like
 
     root -> relations (-> relations) -> ways -> nodes
@@ -83,6 +80,31 @@ In English:
 * Relations have (ways, nodes, relations)
 * Ways have (nodes)
 * Nodes have ()
+
+iD implements a [persistent data structure](http://en.wikipedia.org/wiki/Persistent_data_structure)
+over the OSM data model. Instead of updating the graph in place when edits are made and storing enough
+information about the change so that it can be undone in place, changes produce a new version of the
+graph data structure, and the previous version is left untouced. "Undo" is accomplished simply by
+reverting to the previous version.
+
+The persistent data structure approach also takes advantage of the fact that the typical change modifies
+only a small portion of the graph. The unchanged majority of the graph is shared between revisions,
+keeping memory use to a minimum. For example, the `iD.actions.removeWayNode` action removes a single
+node from a way. It produces new versions of three objects:
+
+* The Array of nodes in the way.
+* The way itself. The new version references the new Array of nodes.
+* The Graph. The new version references the new way.
+
+The previous versions of these three objects are retained. Since the previous version of the Graph
+continues to reference the previous version of the way and its nodes, the action can be undone by
+restoring this version. Meanwhile, both versions of the Graph share references to all the other
+objects. Since these objects are never themselves mutated, this is safe.
+
+In concrete terms, this approach dictates the following rule: all methods that produce a change in
+the state of the data model objects (Entity, Graph) or their constituent parts (e.g. nodes Array,
+tags Object) must return a new instance of the appropriate type, leaving the current instance
+unchanged.
 
 ## Performance
 
