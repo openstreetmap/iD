@@ -5,7 +5,7 @@ var iD = function(container) {
         map = iD.Map()
             .connection(connection)
             .history(history),
-        controller = iD.Controller(map);
+        controller = iD.Controller(map, history);
 
     map.background.source(iD.Background.Bing);
 
@@ -39,13 +39,13 @@ var iD = function(container) {
             .attr({ id: 'undo', 'class': 'mini' })
             .property('disabled', true)
             .html('&larr;<small></small>')
-            .on('click', map.undo);
+            .on('click', history.undo);
 
         bar.append('button')
             .attr({ id: 'redo', 'class': 'mini' })
             .property('disabled', true)
             .html('&rarr;<small></small>')
-            .on('click', map.redo);
+            .on('click', history.redo);
 
         bar.append('input')
             .attr({ type: 'text', placeholder: 'find a place', id: 'geocode-location' })
@@ -118,7 +118,7 @@ var iD = function(container) {
                   "<a href='http://github.com/systemed/iD/issues'>report a bug</a> " +
                   "/ imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
 
-        history.on('change', function() {
+        history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
                 redo = history.redoAnnotation();
 
@@ -140,11 +140,11 @@ var iD = function(container) {
         d3.select(document).on('keydown', function() {
             // cmd-z
             if (d3.event.which === 90 && d3.event.metaKey) {
-                map.undo();
+                history.undo();
             }
             // cmd-shift-z
             if (d3.event.which === 90 && d3.event.metaKey && d3.event.shiftKey) {
-                map.redo();
+                history.redo();
             }
         });
 
