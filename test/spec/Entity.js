@@ -12,6 +12,12 @@ describe('Entity', function () {
                 e = iD.Entity().update({tags: tags});
             expect(e.tags).toBe(tags);
         });
+
+        it("tags the entity as updated", function () {
+            var tags = {foo: 'bar'},
+                e = iD.Entity().update({tags: tags});
+            expect(e._updated).toBe(true);
+        });
     });
 
     describe("#created", function () {
