@@ -1,5 +1,6 @@
 iD.Background = function() {
     var tile = d3.geo.tile(),
+        scaleExtent = [0, 20],
         projection, source;
 
     // derive the tiles onscreen, remove those offscreen and position tiles
@@ -9,7 +10,7 @@ iD.Background = function() {
             .scale(projection.scale())
             .translate(projection.translate())(),
             z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),
-            rz = Math.floor(z),
+            rz = Math.max(scaleExtent[0], Math.min(scaleExtent[1], Math.floor(z))),
             ts = 256 * Math.pow(2, z - rz),
             tile_origin = [
                 projection.scale() / 2 - projection.translate()[0],
@@ -49,6 +50,12 @@ iD.Background = function() {
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
+        return background;
+    };
+
+    background.scaleExtent = function(_) {
+        if (!arguments.length) return tile.scaleExtent();
+        tile.scaleExtent(_);
         return background;
     };
 

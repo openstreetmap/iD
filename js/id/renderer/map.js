@@ -10,7 +10,7 @@ iD.Map = function() {
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
-            .scaleExtent([1024, 256 * Math.pow(2, 20)])
+            .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         only,
         dblclickEnabled = true,
@@ -87,7 +87,8 @@ iD.Map = function() {
         getline = function(d) { return d._line; },
         key = function(d) { return d.id; },
         background = iD.Background()
-            .projection(projection),
+            .projection(projection)
+            .scaleExtent([0, 20]),
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
