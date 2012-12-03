@@ -1,1 +1,3 @@
-script: cd test && phantomjs lib/run_jasmine_test.coffee index.html
+before_script:
+  - "npm install -g mocha-phantomjs"
+script: mocha-phantomjs test/index.html
