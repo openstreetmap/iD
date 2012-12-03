@@ -13,4 +13,14 @@ describe('Style', function() {
             expect(iD.Style.waystack(b, a)).toEqual(-1);
         });
     });
+    describe('#styleClasses', function() {
+        it('no valid classes', function() {
+            var a = { tags: { } };
+            expect(iD.Style.styleClasses('')(a)).toEqual('');
+        });
+        it('a valid class', function() {
+            var a = { tags: { highway: 'primary' } };
+            expect(iD.Style.styleClasses('')(a)).toEqual(' highway-primary highway');
+        });
+    });
 });
