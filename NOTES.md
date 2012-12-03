@@ -164,6 +164,14 @@ the non-loaded version is replaced.
 
 ## Prior Art
 
+Editors:
+
+* [Potlatch 2](http://wiki.openstreetmap.org/wiki/Potlatch_2)
+* [JOSM](http://josm.openstreetmap.de/)
+* [Nokia Here Maps](http://here.net/mapcreator/6.806948216077587,-58.14884979189826,20,0,0?scope=)
+* [Waze](http://www.waze.com/)
+* [Google Map Maker](http://www.google.com/mapmaker)
+
 JOSM and Potlatch 2 appear to implement versioning in the same way, but having
 an undo stack:
 
