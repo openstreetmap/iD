@@ -81,7 +81,7 @@ iD.Map = function() {
         map.size(this.size());
 
         hideInspector();
-    };
+    }
 
     map.history = iD.History();
 
@@ -257,8 +257,9 @@ iD.Map = function() {
             .classed('active', classActive);
     }
 
-    map.size = function(size) {
-        dimensions = size;
+    map.size = function(_) {
+        if (!arguments.length) return dimensions;
+        dimensions = _;
 
         surface
             .size(dimensions)
