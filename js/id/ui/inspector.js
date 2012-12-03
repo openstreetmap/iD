@@ -61,11 +61,11 @@ iD.Inspector = function() {
             var tbody = table.append('tbody');
 
             function draw(data) {
-                tr = tbody.selectAll('tr')
+                var tr = tbody.selectAll('tr')
                     .data(d3.entries(data));
                 tr.exit().remove();
-                row = tr.enter().append('tr');
-                valuetds = row.selectAll('td')
+                var row = tr.enter().append('tr');
+                var valuetds = row.selectAll('td')
                     .data(function(d) { return [d, d]; });
                 valuetds.enter().append('td').append('input')
                     .property('value', function(d, i) { return d[i ? 'value' : 'key']; })
