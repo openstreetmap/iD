@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>iD</title>
+        <link rel='stylesheet' href='css/reset.css'>
+        <link rel='stylesheet' href='css/map.css'>
+        <link rel='stylesheet' href='css/app.css'>
+
+        <!-- mobile devices -->
+        <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <script src='js/lib/lodash.js'></script>
+        <script src='js/lib/d3.v3.js'></script>
+        <script src='js/lib/sha.js'></script>
+        <script src='js/lib/ohauth.js'></script>
+        <script src='js/lib/jxon.js'></script>
+        <script src='js/lib/d3.typeahead.js'></script>
+        <script src='js/lib/d3.geo.tile.js'></script>
+        <script src='js/lib/d3.size.js'></script>
+        <script src='js/lib/d3.keybinding.js'></script>
+
+        <script src='js/id/id.js'></script>
+        <script src='js/id/util.js'></script>
+        <script src='js/id/oauth.js'></script>
+        <script src='js/id/taginfo.js'></script>
+        <script src='js/id/renderer/style.js'></script>
+        <script src='js/id/renderer/background.js'></script>
+        <script src='js/id/renderer/map.js'></script>
+        <script src='js/id/renderer/hash.js'></script>
+        <script src='js/id/renderer/markers.js'></script>
+        <script src='js/id/ui/inspector.js'></script>
+        <script src='js/id/ui/commit.js'></script>
+        <script src='js/id/ui/loading.js'></script>
+        <script src='js/id/ui/userpanel.js'></script>
+
+        <script src='js/id/actions/modes.js'></script>
+        <script src='js/id/actions/actions.js'></script>
+
+        <script src='js/id/controller/controller.js'></script>
+
+        <script src='js/id/format/format.js'></script>
+        <script src='js/id/format/geojson.js'></script>
+        <script src='js/id/format/xml.js'></script>
+
+        <script src='js/id/graph/entity.js'></script>
+        <script src='js/id/graph/graph.js'></script>
+        <script src='js/id/graph/history.js'></script>
+        <script src='js/id/connection.js'></script>
+    </head>
+    <body>
+        <div id="iD"></div><script>
+            var id = iD(document.getElementById('iD'));
+        </script></body>
+</html>
