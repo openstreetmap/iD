@@ -162,9 +162,7 @@ iD.Map = function() {
         var filter = only ?
             function(d) { return only[d.id]; } : function() { return true; };
 
-        if (all.length > 2000) {
-            return hideVector();
-        }
+        if (all.length > 200000) return hideVector();
 
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
