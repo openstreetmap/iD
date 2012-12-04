@@ -5,6 +5,7 @@ iD.Map = function() {
         inspector = iD.Inspector(),
         selection = null,
         translateStart,
+        keybinding,
         apiTilesLoaded = {},
         projection = d3.geo.mercator(),
         zoom = d3.behavior.zoom()
@@ -334,6 +335,18 @@ iD.Map = function() {
 
     function nameHoverOut() { d3.select('.messages').text(''); }
 
+    function selectClick() {
+        var entity = d3.select(d3.event.target).data();
+        if (entity) entity = entity[0];
+        if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
+        if (entity.type === 'way') d3.select(d3.event.target).call(waydragbehavior);
+        map.selectEntity(entity);
+        keybinding.on('⌫.deletefeature', function(e) {
+            removeEntity(entity);
+            e.preventDefault();
+        });
+    }
+
     function deselectClick() {
         var hadSelection = !!selection;
         if (hadSelection) {
@@ -345,15 +358,8 @@ iD.Map = function() {
             redraw();
             hideInspector();
         }
+        keybinding.on('⌫.deletefeature', null);
         selection = null;
-    }
-
-    function selectClick() {
-        var entity = d3.select(d3.event.target).data();
-        if (entity) entity = entity[0];
-        if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
-        if (entity.type === 'way') d3.select(d3.event.target).call(waydragbehavior);
-        map.selectEntity(entity);
     }
 
     function removeEntity(entity) {
@@ -364,6 +370,7 @@ iD.Map = function() {
                 parent.nodes = _.without(parent.nodes, entity.id);
                 history.perform(iD.actions.removeWayNode(parent, entity));
             });
+        deselectClick();
         history.perform(iD.actions.remove(entity));
     }
 
@@ -493,6 +500,12 @@ iD.Map = function() {
         if (!arguments.length) return history;
         history = _;
         history.on('change.map', redraw);
+        return map;
+    };
+
+    map.keybinding = function (_) {
+        if (!arguments.length) return keybinding;
+        keybinding = _;
         return map;
     };
 

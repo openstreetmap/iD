@@ -1,4 +1,6 @@
 d3.keybinding = function() {
+    // via https://github.com/keithamus/jwerty/
+    // and https://github.com/madrobby/keymaster
     var _keys = {
         // MOD aka toggleable keys
         mods: {
@@ -11,7 +13,6 @@ d3.keybinding = function() {
             // META, on Mac: ⌘ (CMD), on Windows (Win), on Linux (Super)
             '⌘': 91
         },
-        
         // Normal keys
         keys: {
             // Backspace key, on Mac: ⌫ (Backspace)
@@ -40,7 +41,6 @@ d3.keybinding = function() {
             ins: 45, insert: 45,
             // Delete key, on Mac: ⌫ (Delete)
             del: 46, 'delete': 46,
-            
             // Left Arrow Key, or ←
             '←': 37, left: 37, 'arrow-left': 37,
             // Up Arrow Key, or ↑
@@ -49,7 +49,6 @@ d3.keybinding = function() {
             '→': 39, right: 39, 'arrow-right': 39,
             // Up Arrow Key, or ↓
             '↓': 40, down: 40, 'arrow-down': 40,
-            
             // odities, printing characters that come out wrong:
             // Num-Multiply, or *
             '*': 106, star: 106, asterisk: 106, multiply: 106,
@@ -96,13 +95,12 @@ d3.keybinding = function() {
     var pairs = d3.entries(_keys.keys),
         key_shortcuts = pairs.map(function(d) {
             return d.key;
-        });
-    var mods = d3.entries(_keys.mods),
+        }),
+        mods = d3.entries(_keys.mods),
         mod_shortcuts = mods.map(function(d) {
             return d.key;
-        });
-
-    var event = d3.dispatch.apply(d3, key_shortcuts),
+        }),
+        event = d3.dispatch.apply(d3, key_shortcuts),
         modifiers = [];
 
     function keydown() {

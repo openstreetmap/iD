@@ -28,9 +28,7 @@ window.iD = function(container) {
         var buttons = bar.selectAll('button.add-button')
             .data([iD.modes.AddPlace, iD.modes.AddRoad, iD.modes.AddArea])
             .enter().append('button')
-                .attr('class', function(d) {
-                    return 'add-button ' + d.id;
-                })
+                .attr('class', 'add-button')
             .text(function (mode) { return mode.title; })
             .on('click', function (mode) { controller.enter(mode); });
 
@@ -155,6 +153,8 @@ window.iD = function(container) {
                 if (mods === '⌘') history.undo();
             });
         d3.select(document).call(keybinding);
+        map.keybinding(keybinding);
+
         var hash = iD.Hash().map(map);
 
         if (!hash.hadHash) {
