@@ -52,15 +52,15 @@ iD.modes.AddPlace = {
         surface.on('mousemove.addplace', mousemove)
             .on('click.addplace', click.bind(this));
 
-        d3.select(document).on('keydown.addplace', function() {
-            if (d3.event.keyCode === 27) this.controller.exit();
+        this.map.keybinding().on('⎋.exit', function() {
+            this.controller.exit();
         }.bind(this));
     },
     exit: function() {
         this.map.surface
             .on('mousemove.addplace', null)
             .on('click.addplace', null);
-        d3.select(document).on('keydown.addplace', null);
+        this.map.keybinding().on('⎋.exit', null);
     }
 };
 
@@ -136,15 +136,15 @@ iD.modes.AddRoad = {
         surface.on('click.addroad', click.bind(this))
             .on('mousemove.addroad', mousemove);
 
-        d3.select(document).on('keydown.addroad', function() {
-            if (d3.event.keyCode === 27) this.controller.exit();
+        this.map.keybinding().on('⎋.exit', function() {
+            this.controller.exit();
         }.bind(this));
     },
     exit: function() {
         this.map.dblclickEnable(true);
         this.map.surface.on('click.addroad', null)
             .on('mousemove.addroad', null);
-        d3.select(document).on('keydown.addroad', null);
+        this.map.keybinding().on('⎋.exit', null);
         d3.selectAll('#addroad').remove();
     }
 };
@@ -225,10 +225,15 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
             surface.on('mousemove.drawroad', mousemove.bind(this))
                 .on('click.drawroad', click.bind(this));
+                
+            this.map.keybinding().on('⎋.exit', function() {
+                this.controller.exit();
+            }.bind(this));
         },
         exit: function() {
             this.map.surface.on('mousemove.drawroad', null)
                 .on('click.drawroad', null);
+            this.map.keybinding().on('⎋.exit', null);
             window.setTimeout(function() {
                 this.map.dblclickEnable(true);
             }.bind(this), 1000);
@@ -283,8 +288,8 @@ iD.modes.AddArea = {
 
         surface.on('click.addarea', click.bind(this));
 
-        d3.select(document).on('keydown.addarea', function() {
-            if (d3.event.keyCode === 27) this.controller.exit();
+        this.map.keybinding().on('⎋.exit', function() {
+            this.controller.exit();
         }.bind(this));
     },
     exit: function() {
@@ -293,7 +298,7 @@ iD.modes.AddArea = {
         }.bind(this), 1000);
         this.map.surface.on('click.addarea', null)
             .on('mousemove.addarea', null);
-        d3.select(document).on('keydown.addarea', null);
+        this.map.keybinding().on('⎋.exit', null);
     }
 };
 
@@ -351,6 +356,10 @@ iD.modes.DrawArea = function(way_id) {
                 way.nodes = way.nodes.slice();
                 this.controller.enter(iD.modes.DrawArea(way_id));
             }
+            
+            this.map.keybinding().on('⎋.exit', function() {
+                this.controller.exit();
+            }.bind(this));
 
             surface.on('click.drawarea', click.bind(this))
                 .on('mousemove.drawarea', mousemove.bind(this));
@@ -358,6 +367,7 @@ iD.modes.DrawArea = function(way_id) {
         exit: function() {
             this.map.surface.on('mousemove.drawarea', null)
                 .on('click.drawarea', null);
+            this.map.keybinding().on('⎋.exit', null);
             window.setTimeout(function() {
                 this.map.dblclickEnable(true);
             }.bind(this), 1000);
