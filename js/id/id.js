@@ -60,7 +60,7 @@ window.iD = function(container) {
             });
 
         window.grid = function(resp) {
-            map.setCenter([resp.results[0][0].lon, resp.results[0][0].lat]);
+            map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
         };
 
         bar.append('div')

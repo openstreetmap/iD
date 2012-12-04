@@ -75,11 +75,6 @@ iD.Map = function() {
                     redraw();
                 }
             }),
-        nodeline = function(d) {
-            return 'M' + d.nodes.map(ll2a).map(projection).map(iD.util.geo.roundCoords).join('L');
-        },
-        getline = function(d) { return d._line; },
-        key = function(d) { return d.id; },
         background = iD.Background()
             .projection(projection)
             .scaleExtent([0, 20]),
@@ -142,6 +137,11 @@ iD.Map = function() {
     function ll2a(o) { return [o.lon, o.lat]; }
     function pxCenter() { return [dimensions[0] / 2, dimensions[0] / 2]; }
     function classActive(d) { return d.id === selection; }
+    function getline(d) { return d._line; }
+    function key(d) { return d.id; }
+    function nodeline(d) {
+        return 'M' + d.nodes.map(ll2a).map(projection).map(iD.util.geo.roundCoords).join('L');
+    }
 
     function hideInspector() {
         d3.select('.inspector-wrap').style('display', 'none');
@@ -424,7 +424,6 @@ iD.Map = function() {
             scale = projection.scale();
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
-
 
     map.dblclickEnable = function(_) {
         if (!arguments.length) return dblclickEnabled;
