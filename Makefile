@@ -20,6 +20,7 @@ all: \
 	js/lib/lodash.js \
 	js/lib/ohauth.js \
 	js/lib/sha.js \
+	js/id/start.js \
 	js/id/id.js \
 	js/id/connection.js \
 	js/id/oauth.js \
@@ -31,6 +32,7 @@ all: \
 	js/id/graph/*.js \
 	js/id/renderer/*.js \
 	js/id/ui/*.js \
+	js/id/end.js
 
 iD.js: Makefile
 	@rm -f $@

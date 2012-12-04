@@ -1,4 +1,4 @@
-var iD = function(container) {
+window.iD = function(container) {
     var connection = iD.Connection()
             .url('http://api06.dev.openstreetmap.org'),
         history = iD.History(),
