@@ -12,16 +12,22 @@ all: \
 
 .INTERMEDIATE iD.js: \
 	js/lib/d3.v3.js \
+	js/lib/d3.geo.tile.js \
+	js/lib/d3.one.js \
+	js/lib/d3.size.js \
+	js/lib/d3.typeahead.js \
+	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/ohauth.js \
 	js/lib/sha.js \
-	js/lib/jxon.js \
-	js/lib/lodash.js \
 	js/id/id.js \
-	js/id/oauth.js \
 	js/id/connection.js \
+	js/id/oauth.js \
+	js/id/taginfo.js \
 	js/id/util.js \
 	js/id/actions/*.js \
+	js/id/controller/*.js \
+	js/id/format/*.js \
 	js/id/graph/*.js \
 	js/id/renderer/*.js \
 	js/id/ui/*.js \

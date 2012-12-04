@@ -1,3 +1,4 @@
 before_script:
+  - "make"
   - "npm install -g mocha-phantomjs"
-script: mocha-phantomjs test/index.html
+script: mocha-phantomjs test/index.html && mocha-phantomjs test/index_packaged.html
