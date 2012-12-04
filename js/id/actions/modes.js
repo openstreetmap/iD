@@ -60,15 +60,17 @@ iD.modes.AddRoad = {
             // connect a way to an existing way
             if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
                 // continue an existing way
-                var id = t.data()[0].id;
-                var parents = this.history.graph().parents(id);
-                if (parents.length && parents[0].nodes[0] === id) {
-                    way = parents[0];
-                    direction = 'backward';
-                    start = false;
-                } else if (parents.length && _.last(parents[0].nodes) === id) {
-                    way = parents[0];
-                    start = false;
+                var id = t.data()[0].id,
+                    parents = this.history.graph().parents(id);
+                if (parents.length) {
+                    if (parents[0].nodes[0] === id) {
+                        way = parents[0];
+                        direction = 'backward';
+                        start = false;
+                    } else if (_.last(parents[0].nodes) === id) {
+                        way = parents[0];
+                        start = false;
+                    }
                 }
                 node = t.data()[0];
             // snap into an existing way
@@ -88,8 +90,8 @@ iD.modes.AddRoad = {
                 this.history.perform(iD.actions.startWay(way));
                 way.nodes.push(node.id);
                 this.history.perform(iD.actions.addWayNode(way, node));
-                console.log(this.history.graph().entities);
             }
+
             this.controller.enter(iD.modes.DrawRoad(way.id, direction));
         }
 
@@ -212,20 +214,7 @@ iD.modes.AddArea = {
     enter: function() {
         this.map.dblclickEnable(false);
 
-        var surface = this.map.surface,
-            teaser = surface.selectAll('g#temp-g')
-            .append('g').attr('id', 'addarea');
-
-        teaser.append('circle')
-            .attr({ 'class': 'handle', r: 3 })
-            .style('pointer-events', 'none');
-
-        surface.on('mousemove.addarea', function() {
-            teaser.attr('transform', function() {
-                var off = d3.mouse(surface.node());
-                return 'translate(' + off + ')';
-            });
-        });
+        var surface = this.map.surface;
 
         function click() {
             var t = d3.select(d3.event.target),
@@ -256,8 +245,7 @@ iD.modes.AddArea = {
         window.setTimeout(function() {
             this.map.dblclickEnable(true);
         }.bind(this), 1000);
-        this.map.surface.on('click.addarea', null)
-            .on('mousemove.addarea', null);
+        this.map.surface.on('click.addarea', null);
         this.map.keybinding().on('⎋.exit', null);
     }
 };
