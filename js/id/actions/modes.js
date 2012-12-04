@@ -9,7 +9,7 @@ iD.modes._node = function(ll) {
 };
 
 iD.modes.chooseIndex = function(way, point, map) {
-    var dist = iD.Util.dist;
+    var dist = iD.util.geo.dist;
     var projNodes = way.nodes.map(function(n) {
         return map.projection([n.lon, n.lat]);
     });

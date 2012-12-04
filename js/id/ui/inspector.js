@@ -5,7 +5,7 @@ iD.Inspector = function() {
     function drawhead(selection) {
         selection.html('');
         selection.append('h2')
-            .text(iD.Util.friendlyName(selection.datum()));
+            .text(iD.util.friendlyName(selection.datum()));
         selection.append('a')
             .attr('class', 'permalink')
             .attr('href', function(d) {
@@ -17,13 +17,13 @@ iD.Inspector = function() {
             .attr({ 'class': 'permalink', href: '#' }).text('XML')
             .on('click', function(d) {
                 d3.event.stopPropagation();
-                iD.Util.codeWindow(iD.format.XML.mapping(d));
+                iD.util.codeWindow(iD.format.XML.mapping(d));
             });
         selection.append('a')
             .attr({ 'class': 'permalink', href: '#' }).text('GeoJSON')
             .on('click', function(d) {
                 d3.event.stopPropagation();
-                iD.Util.codeWindow(JSON.stringify(
+                iD.util.codeWindow(JSON.stringify(
                     iD.format.GeoJSON.mapping(d), null, 2));
             });
         if (selection.datum().type === 'way') {

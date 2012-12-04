@@ -8,7 +8,7 @@ iD.Entity = function(a, b) {
     }
 
     if (!this.id) {
-        this.id = iD.Util.id(this.type);
+        this.id = iD.util.id(this.type);
         this._updated = true;
     }
 

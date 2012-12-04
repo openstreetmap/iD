@@ -30,7 +30,7 @@ iD.Map = function() {
                 d3.event.sourceEvent.stopPropagation();
 
                 if (!dragging) {
-                    dragging = iD.Util.trueObj([entity.id].concat(
+                    dragging = iD.util.trueObj([entity.id].concat(
                         _.pluck(history.graph().parents(entity.id), 'id')));
                     history.perform(iD.actions.noop());
                 }
@@ -55,7 +55,7 @@ iD.Map = function() {
                 d3.event.sourceEvent.stopPropagation();
 
                 if (!dragging) {
-                    dragging = iD.Util.trueObj([entity.id].concat(
+                    dragging = iD.util.trueObj([entity.id].concat(
                         _.pluck(history.graph().parents(entity.id), 'id')));
                     history.perform(iD.actions.noop());
                 }
@@ -75,7 +75,7 @@ iD.Map = function() {
                 }
             }),
         nodeline = function(d) {
-            return 'M' + d.nodes.map(ll2a).map(projection).map(roundCoords).join('L');
+            return 'M' + d.nodes.map(ll2a).map(projection).map(iD.util.geo.roundCoords).join('L');
         },
         getline = function(d) { return d._line; },
         key = function(d) { return d.id; },
@@ -86,8 +86,7 @@ iD.Map = function() {
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
-        prefix = prefixMatch(['webkit', 'ms', 'Moz', 'O']),
-        transformProp = prefix + 'transform',
+        transformProp = iD.util.prefix() + 'transform',
         supersurface, surface, defs, tilegroup, r, g, alength;
 
     function map() {
@@ -126,26 +125,13 @@ iD.Map = function() {
         map.surface = surface;
     }
 
-    function prefixMatch(p) { // via mbostock
-        var i = -1, n = p.length, s = document.body.style;
-        while (++i < n) if (p[i] + 'Transform' in s) return '-' + p[i].toLowerCase() + '-';
-        return '';
-    }
     function ll2a(o) { return [o.lon, o.lat]; }
-    function roundCoords(c) { return [Math.floor(c[0]), Math.floor(c[1])]; }
 
     function hideInspector() {
         d3.select('.inspector-wrap').style('display', 'none');
     }
 
     function classActive(d) { return d.id === selection; }
-
-    function nodeIntersect(entity, extent) {
-        return entity.lon > extent[0][0] &&
-            entity.lon < extent[1][0] &&
-            entity.lat < extent[0][1] &&
-            entity.lat > extent[1][1];
-    }
 
     function isArea(a) {
         return iD.Way.isClosed(a) || (a.tags.area && a.tags.area === 'yes');
@@ -178,7 +164,7 @@ iD.Map = function() {
                 else ways.push(a);
             } else if (a._poi) {
                 points.push(a);
-            } else if (!a._poi && a.type === 'node' && nodeIntersect(a, extent)) {
+            } else if (!a._poi && a.type === 'node' && iD.util.geo.nodeIntersect(a, extent)) {
                 waynodes.push(a);
             }
         }
@@ -196,7 +182,7 @@ iD.Map = function() {
     function accuracyHandles(way) {
         var handles = [];
         for (var i = 0; i < way.nodes.length - 1; i++) {
-            handles[i] = iD.Node(iD.Util.interp(way.nodes[i], way.nodes[i + 1], 0.5));
+            handles[i] = iD.Node(iD.util.geo.interp(way.nodes[i], way.nodes[i + 1], 0.5));
             handles[i].way = way.id;
             handles[i].index = i + 1;
             handles[i].accuracy = true;
@@ -340,7 +326,7 @@ iD.Map = function() {
 
     function connectionLoad(err, result) {
         history.merge(result);
-        drawVector(iD.Util.trueObj(Object.keys(result.entities)));
+        drawVector(iD.util.trueObj(Object.keys(result.entities)));
     }
 
     function nameHoverIn() {
