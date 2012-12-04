@@ -80,8 +80,7 @@ iD.modes.AddRoad = {
                 node = iD.modes._node(this.map.projection.invert(
                     d3.mouse(surface.node())));
                 var connectedWay = this.history.graph().entity(t.datum().id);
-                connectedWay.nodes.splice(index, 0, node.id);
-                this.history.perform(iD.actions.addWayNode(connectedWay, node));
+                this.history.perform(iD.actions.addWayNode(connectedWay, node, index));
             } else {
                 node = iD.modes._node(this.map.projection.invert(
                     d3.mouse(surface.node())));
@@ -89,7 +88,6 @@ iD.modes.AddRoad = {
 
             if (start) {
                 this.history.perform(iD.actions.startWay(way));
-                way.nodes.push(node.id);
                 this.history.perform(iD.actions.addWayNode(way, node));
             }
 
@@ -118,7 +116,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
             this.map.dblclickEnable(false);
             this.map.dragEnable(false);
 
-            var push = (direction === 'forward') ? 'push' : 'unshift',
+            var index = (direction === 'forward') ? undefined : -1,
                 pop = (direction === 'forward') ? 'pop' : 'shift',
                 surface = this.map.surface,
                 nextnode = iD.modes._node([NaN, NaN]),
@@ -127,16 +125,14 @@ iD.modes.DrawRoad = function(way_id, direction) {
                 firstNode = way.nodes[0],
                 lastNode = _.last(way.nodes);
 
-            way.nodes[push](nextnode_id);
-            this.history.perform(iD.actions.addWayNode(way, nextnode));
+            this.history.perform(iD.actions.addWayNode(way, nextnode, index));
 
             function mousemove() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
-                var way = this.history.graph().entity(way_id);
                 var node = iD.Entity(this.history.graph().entity(nextnode_id), {
                     lon: ll[0], lat: ll[1]
                 });
-                this.history.replace(iD.actions.addWayNode(way, node));
+                this.history.replace(iD.actions.addWayNode(way, node, index));
             }
 
             function click() {
@@ -147,19 +143,14 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
                 if (t.datum() && t.datum().type === 'node') {
                     if (t.datum().id == firstNode || t.datum().id == lastNode) {
-                        var l = this.history.graph().entity(way.nodes[pop]());
-                        this.history.perform(iD.actions.removeWayNode(way, l));
-
                         // If this is drawing a loop and this is not the drawing
                         // end of the stick, finish the circle
                         if (direction === 'forward' && t.datum().id == firstNode) {
-                            way.nodes[push](firstNode);
-                            this.history.perform(iD.actions.addWayNode(way,
-                                this.history.graph().entity(firstNode)));
+                            this.history.replace(iD.actions.addWayNode(way,
+                                this.history.graph().entity(firstNode), index));
                         } else if (direction === 'backward' && t.datum().id == lastNode) {
-                            way.nodes[push](lastNode);
-                            this.history.perform(iD.actions.addWayNode(way,
-                                this.history.graph().entity(lastNode)));
+                            this.history.replace(iD.actions.addWayNode(way,
+                                this.history.graph().entity(lastNode), index));
                         }
 
                         delete way.tags.elastic;
@@ -171,25 +162,21 @@ iD.modes.DrawRoad = function(way_id, direction) {
                     } else {
                         // connect a way to an existing way
                         node = t.datum();
+                        this.history.replace(iD.actions.addWayNode(way, node, index));
                     }
                 } else if (t.datum() && t.datum().type === 'way') {
-                    var index = iD.modes.chooseIndex(t.datum(), d3.mouse(surface.node()), this.map);
+                    var connectedIndex = iD.modes.chooseIndex(t.datum(), d3.mouse(surface.node()), this.map);
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));
+                    this.history.replace(iD.actions.addWayNode(way, node, index));
+
                     var connectedWay = this.history.graph().entity(t.datum().id);
-                    connectedWay.nodes.splice(1, 0, node.id);
-                    this.history.perform(iD.actions.addWayNode(connectedWay, node));
+                    this.history.perform(iD.actions.addWayNode(connectedWay, node, connectedIndex));
                 } else {
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));
+                    this.history.replace(iD.actions.addWayNode(way, node, index));
                 }
-
-                var old = this.history.graph().entity(way.nodes[pop]());
-                this.history.perform(iD.actions.removeWayNode(way, old));
-
-                way.nodes[push](node.id);
-                this.history.perform(iD.actions.addWayNode(way, node));
-                way.nodes = way.nodes.slice();
 
                 this.controller.enter(iD.modes.DrawRoad(way_id, direction));
             }
@@ -242,7 +229,6 @@ iD.modes.AddArea = {
             }
 
             this.history.perform(iD.actions.startWay(way));
-            way.nodes.push(node.id);
             this.history.perform(iD.actions.addWayNode(way, node));
             this.map.selectEntity(way);
             this.controller.enter(iD.modes.DrawArea(way.id));
@@ -275,12 +261,10 @@ iD.modes.DrawArea = function(way_id) {
                 nextnode = iD.modes._node([NaN, NaN]),
                 nextnode_id = nextnode.id;
 
-            way.nodes.push(nextnode_id);
             this.history.perform(iD.actions.addWayNode(way, nextnode));
 
             function mousemove() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
-                var way = this.history.graph().entity(way_id);
                 var node = iD.Entity(this.history.graph().entity(nextnode_id), {
                     lon: ll[0],
                     lat: ll[1]
@@ -296,11 +280,7 @@ iD.modes.DrawArea = function(way_id) {
 
                 if (t.datum() && t.datum().type === 'node') {
                     if (t.datum().id == firstnode_id) {
-                        var l = this.history.graph().entity(way.nodes.pop());
-                        this.history.perform(iD.actions.removeWayNode(way, l));
-
-                        way.nodes.push(way.nodes[0]);
-                        this.history.perform(iD.actions.addWayNode(way,
+                        this.history.replace(iD.actions.addWayNode(way,
                             this.history.graph().entity(way.nodes[0])));
 
                         delete way.tags.elastic;
@@ -311,18 +291,13 @@ iD.modes.DrawArea = function(way_id) {
                     } else {
                         // connect a way to an existing way
                         node = t.datum();
+                        this.history.replace(iD.actions.addWayNode(way, node));
                     }
                 } else {
                     node = iD.modes._node(this.map.projection.invert(
                         d3.mouse(surface.node())));
+                    this.history.replace(iD.actions.addWayNode(way, node));
                 }
-
-                var old = this.history.graph().entity(way.nodes.pop());
-                this.history.perform(iD.actions.removeWayNode(way, old));
-
-                way.nodes.push(node.id);
-                this.history.perform(iD.actions.addWayNode(way, node));
-                way.nodes = way.nodes.slice();
 
                 this.controller.enter(iD.modes.DrawArea(way_id));
             }
