@@ -135,7 +135,7 @@ iD.Map = function() {
     }
 
     function ll2a(o) { return [o.lon, o.lat]; }
-    function pxCenter() { return [dimensions[0] / 2, dimensions[0] / 2]; }
+    function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
     function classActive(d) { return d.id === selection; }
     function getline(d) { return d._line; }
     function key(d) { return d.id; }
@@ -325,7 +325,6 @@ iD.Map = function() {
             .classed('active', classActive);
     }
 
-
     function connectionLoad(err, result) {
         history.merge(result);
         drawVector(iD.util.trueObj(Object.keys(result.entities)));
@@ -479,7 +478,7 @@ iD.Map = function() {
                 ll = projection(loc);
             projection.translate([
                 t[0] - ll[0] + c[0],
-                t[1] - ll[1] + (c[1] /2)]);
+                t[1] - ll[1] + c[1]]);
             zoom.translate(projection.translate());
             return redraw();
         }
