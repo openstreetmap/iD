@@ -133,10 +133,6 @@ iD.Map = function() {
 
     function classActive(d) { return d.id === selection; }
 
-    function isArea(a) {
-        return iD.Way.isClosed(a) || (a.tags.area && a.tags.area === 'yes');
-    }
-
     function drawVector(only) {
         if (surface.style(transformProp) != 'none') return;
         var all = [], ways = [], areas = [], points = [], waynodes = [],
@@ -160,7 +156,7 @@ iD.Map = function() {
             var a = all[i];
             if (a.type === 'way') {
                 a._line = nodeline(a);
-                if (isArea(a)) areas.push(a);
+                if (iD.Way.isArea(a)) areas.push(a);
                 else ways.push(a);
             } else if (a._poi) {
                 points.push(a);
@@ -256,7 +252,6 @@ iD.Map = function() {
         markers.select('image').attr('xlink:href', iD.Style.markerimage);
     }
 
-    function isOneWay(d) { return d.tags.oneway && d.tags.oneway === 'yes'; }
     function drawStrokes(ways, filter) {
         var strokes = g.stroke.selectAll('path')
             .filter(filter)
@@ -273,7 +268,7 @@ iD.Map = function() {
 
         // Determine the lengths of oneway paths
         var lengths = {},
-            oneways = strokes.filter(isOneWay).each(function(d) {
+            oneways = strokes.filter(iD.Way.isOneWay).each(function(d) {
                 lengths[d.id] = Math.floor(this.getTotalLength() / alength);
             }).data();
 

@@ -34,11 +34,23 @@ iD.Entity.prototype = {
 };
 
 iD.Node = function(attrs) {
-    return iD.Entity(_.extend({}, attrs || {}, {type: 'node'}));
+    return iD.Entity(_.extend({}, attrs || {}, {type: 'node', tags: {}}));
 };
 
 iD.Way = function(attrs) {
-    return iD.Entity(_.extend({}, attrs || {}, {type: 'way', nodes: []}));
+    return iD.Entity(_.extend({}, attrs || {}, {type: 'way', nodes: [], tags: {}}));
+};
+
+iD.Way.isOneWay = function(d) {
+    return !!(d.tags.oneway && d.tags.oneway === 'yes');
+};
+
+iD.Way.isClosed = function(d) {
+    return (!d.nodes.length) || d.nodes[d.nodes.length - 1].id === d.nodes[0].id;
+};
+
+iD.Way.isArea = function(d) {
+    return iD.Way.isClosed(d) || (d.tags.area && d.tags.area === 'yes');
 };
 
 iD.Relation = function(attrs) {
