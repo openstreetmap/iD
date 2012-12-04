@@ -22,7 +22,8 @@ iD.modes.chooseIndex = function(way, point, map) {
 };
 
 iD.modes.AddPlace = {
-    title: "+ Place",
+    id: 'add-place',
+    title: '+ Place',
     enter: function() {
         var surface = this.map.surface,
             teaser = surface.selectAll('g#temp-g')
@@ -66,7 +67,8 @@ iD.modes.AddPlace = {
 // user has clicked 'add road' or pressed a keybinding, and now has
 // a teaser node and needs to click on the map to start a road
 iD.modes.AddRoad = {
-    title: "+ Road",
+    id: 'add-road',
+    title: '+ Road',
     way: function() {
         return iD.Way({ tags: { highway: 'residential', elastic: 'true' } });
     },
@@ -235,7 +237,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
 };
 
 iD.modes.AddArea = {
-    title: "+ Area",
+    id: 'add-area',
+    title: '+ Area',
     way: function() {
         return iD.Way({
             tags: { building: 'yes', area: 'yes', elastic: 'true' }

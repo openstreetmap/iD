@@ -27,7 +27,10 @@ window.iD = function(container) {
 
         var buttons = bar.selectAll('button.add-button')
             .data([iD.modes.AddPlace, iD.modes.AddRoad, iD.modes.AddArea])
-            .enter().append('button').attr('class', 'add-button')
+            .enter().append('button')
+                .attr('class', function(d) {
+                    return 'add-button ' + d.id;
+                })
             .text(function (mode) { return mode.title; })
             .on('click', function (mode) { controller.enter(mode); });
 
@@ -137,17 +140,21 @@ window.iD = function(container) {
             map.size(m.size());
         };
 
-        d3.select(document).on('keydown', function() {
-            // cmd-z
-            if (d3.event.which === 90 && d3.event.metaKey) {
-                history.undo();
-            }
-            // cmd-shift-z
-            if (d3.event.which === 90 && d3.event.metaKey && d3.event.shiftKey) {
-                history.redo();
-            }
-        });
-
+        var keybinding = d3.keybinding()
+            .on('a', function(evt, mods) {
+                controller.enter(iD.modes.AddArea);
+            })
+            .on('p', function(evt, mods) {
+                controller.enter(iD.modes.AddPlace);
+            })
+            .on('r', function(evt, mods) {
+                controller.enter(iD.modes.AddRoad);
+            })
+            .on('z', function(evt, mods) {
+                if (mods === '⇧⌘') history.redo();
+                if (mods === '⌘') history.undo();
+            });
+        d3.select(document).call(keybinding);
         var hash = iD.Hash().map(map);
 
         if (!hash.hadHash) {
