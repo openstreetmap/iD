@@ -37,9 +37,8 @@ iD.actions.addWayNode = function(way, node, index) {
 
 iD.actions.removeWayNode = function(way, node) {
     return function(graph) {
-        return graph.replace(way.update({
-            nodes: way.nodes.slice()
-        })).remove(node, 'removed from a road');
+        var nodes = _.without(way.nodes, node.id);
+        return graph.replace(way.update({nodes: nodes}), 'removed from a road');
     };
 };
 

@@ -367,7 +367,6 @@ iD.Map = function() {
         history.graph().parents(entity.id)
             .filter(function(d) { return d.type === 'way'; })
             .forEach(function(parent) {
-                parent.nodes = _.without(parent.nodes, entity.id);
                 history.perform(iD.actions.removeWayNode(parent, entity));
             });
         deselectClick();
