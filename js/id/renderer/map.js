@@ -121,17 +121,30 @@ iD.Map = function() {
         alength = arrow.node().getComputedTextLength();
         arrow.remove();
 
+        inspector.on('changeTags', function(d, tags) {
+            var entity = history.graph().entity(d.id);
+            history.perform(iD.actions.changeTags(entity, tags));
+        }).on('changeWayDirection', function(d) {
+            history.perform(iD.actions.changeWayDirection(d));
+        }).on('remove', function(d) {
+            removeEntity(d);
+            hideInspector();
+        }).on('close', function() {
+            deselectClick();
+            hideInspector();
+        });
+
         map.size(this.size());
         map.surface = surface;
     }
 
     function ll2a(o) { return [o.lon, o.lat]; }
+    function pxCenter() { return [dimensions[0] / 2, dimensions[0] / 2]; }
+    function classActive(d) { return d.id === selection; }
 
     function hideInspector() {
         d3.select('.inspector-wrap').style('display', 'none');
     }
-
-    function classActive(d) { return d.id === selection; }
 
     function drawVector(only) {
         if (surface.style(transformProp) != 'none') return;
@@ -308,16 +321,6 @@ iD.Map = function() {
             .classed('active', classActive);
     }
 
-    map.size = function(_) {
-        if (!arguments.length) return dimensions;
-        dimensions = _;
-        surface
-            .size(dimensions)
-            .selectAll('#clip-rect')
-            .size(dimensions);
-        background.size(dimensions);
-        return redraw();
-    };
 
     function connectionLoad(err, result) {
         history.merge(result);
@@ -373,19 +376,6 @@ iD.Map = function() {
         history.perform(iD.actions.remove(entity));
     }
 
-    inspector.on('changeTags', function(d, tags) {
-        var entity = history.graph().entity(d.id);
-        history.perform(iD.actions.changeTags(entity, tags));
-    }).on('changeWayDirection', function(d) {
-        history.perform(iD.actions.changeWayDirection(d));
-    }).on('remove', function(d) {
-        removeEntity(d);
-        hideInspector();
-    }).on('close', function() {
-        deselectClick();
-        hideInspector();
-    });
-
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
             if (!dblclickEnabled) return;
@@ -427,12 +417,6 @@ iD.Map = function() {
         return map;
     }
 
-    function dblclickEnable(_) {
-        if (!arguments.length) return dblclickEnabled;
-        dblclickEnabled = _;
-        return map;
-    }
-
     function pointLocation(p) {
         var translate = projection.translate(),
             scale = projection.scale();
@@ -445,31 +429,40 @@ iD.Map = function() {
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
-    function pxCenter() {
-        return [dimensions[0] / 2, dimensions[0] / 2];
-    }
+
+    map.dblclickEnable = function(_) {
+        if (!arguments.length) return dblclickEnabled;
+        dblclickEnabled = _;
+        return map;
+    };
 
     map.zoom = function(z) {
         if (!arguments.length) {
             return Math.max(Math.log(projection.scale()) / Math.log(2) - 7, 0);
         }
-
-        // summary:	Redraw the map at a new zoom level.
-        var scale = 256 * Math.pow(2, z - 1);
-        var center = pxCenter();
-        var l = pointLocation(center);
+        var scale = 256 * Math.pow(2, z - 1),
+            center = pxCenter(),
+            l = pointLocation(center);
         projection.scale(scale);
         zoom.scale(projection.scale());
-
         var t = projection.translate();
         l = locationPoint(l);
         t[0] += center[0] - l[0];
         t[1] += center[1] - l[1];
         projection.translate(t);
         zoom.translate(projection.translate());
+        return redraw();
+    };
 
-        redraw();
-        return map;
+    map.size = function(_) {
+        if (!arguments.length) return dimensions;
+        dimensions = _;
+        surface
+            .size(dimensions)
+            .selectAll('#clip-rect')
+            .size(dimensions);
+        background.size(dimensions);
+        return redraw();
     };
 
     map.zoomIn = function() { return map.zoom(Math.ceil(map.zoom() + 1)); };
@@ -485,8 +478,7 @@ iD.Map = function() {
             projection.translate([
                 t[0] - ll[0] + c[0], t[1] - ll[1] + c[1]]);
             zoom.translate(projection.translate());
-            redraw();
-            return map;
+            return redraw();
         }
     };
 
@@ -516,7 +508,6 @@ iD.Map = function() {
     map.background = background;
     map.projection = projection;
     map.selectEntity = selectEntity;
-    map.dblclickEnable = dblclickEnable;
 
     return d3.rebind(map, dispatch, 'on', 'move');
 };
