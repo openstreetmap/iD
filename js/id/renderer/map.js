@@ -55,10 +55,9 @@ iD.Map = function() {
                 d3.event.sourceEvent.stopPropagation();
 
                 if (!dragging) {
-                    dragging = true;
-                    only = iD.Util.trueObj([entity.id].concat(
-                        _.pluck(map.history.graph().parents(entity.id), 'id')));
-                    map.history.perform(iD.actions.noop());
+                    dragging = iD.Util.trueObj([entity.id].concat(
+                        _.pluck(history.graph().parents(entity.id), 'id')));
+                    history.perform(iD.actions.noop());
                 }
 
                 entity.nodes.forEach(function(node) {
@@ -66,15 +65,12 @@ iD.Map = function() {
                     var end = projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
                     node.lon = end[0];
                     node.lat = end[1];
-                    map.history.replace(iD.actions.move(node, end));
+                    history.replace(iD.actions.move(node, end));
                 });
-
-                redraw(only);
             })
             .on('dragend', function () {
                 if (dragging) {
-                    dragging = false;
-                    map.update();
+                    dragging = undefined;
                     redraw();
                 }
             }),
