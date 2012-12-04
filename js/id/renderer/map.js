@@ -330,81 +330,18 @@ iD.Map = function() {
     map.size = function(_) {
         if (!arguments.length) return dimensions;
         dimensions = _;
-
         surface
             .size(dimensions)
             .selectAll('#clip-rect')
             .size(dimensions);
-
         background.size(dimensions);
-
-        redraw();
-
-        return map;
+        return redraw();
     };
 
-    function tileAtZoom(t, distance) {
-        var power = Math.pow(2, distance);
-        return [
-            Math.floor(t[0] * power),
-            Math.floor(t[1] * power),
-            t[2] + distance];
+    function connectionLoad(err, result) {
+        history.merge(result);
+        drawVector(iD.Util.trueObj(Object.keys(result.entities)));
     }
-
-    function tileAlreadyLoaded(c) {
-        if (apiTilesLoaded[c]) return false;
-        for (var i = 0; i < 4; i++) {
-            if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
-        }
-        return true;
-    }
-
-    function apiTiles() {
-        var t = projection.translate(),
-            s = projection.scale(),
-            z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
-            rz = Math.floor(z),
-            ts = 512 * Math.pow(2, z - rz),
-            tile_origin = [s / 2 - t[0], s / 2 - t[1]],
-            coords = [],
-            cols = d3.range(Math.max(0, Math.floor(tile_origin[0] / ts)),
-                            Math.max(0, Math.ceil((tile_origin[0] +  dimensions[0]) / ts))),
-            rows = d3.range(Math.max(0, Math.floor(tile_origin[1] / ts)),
-                            Math.max(0, Math.ceil((tile_origin[1] +  dimensions[1]) / ts)));
-
-        cols.forEach(function(x) {
-            rows.forEach(function(y) {
-                coords.push([x, y, rz]);
-            });
-        });
-
-        function apiExtentBox(c) {
-            var x = (c[0] * ts) - tile_origin[0];
-            var y = (c[1] * ts) - tile_origin[1];
-            apiTilesLoaded[c] = true;
-            return [
-                projection.invert([x, y]),
-                projection.invert([x + ts, y + ts])];
-        }
-
-        return coords.filter(tileAlreadyLoaded).map(apiExtentBox);
-    }
-
-
-    function apiRequestExtent(extent) {
-        connection.bboxFromAPI(extent, function (result) {
-            if (result instanceof Error) {
-                // TODO: handle
-            } else {
-                history.merge(result);
-                drawVector(iD.Util.trueObj(Object.keys(result.entities)));
-            }
-        });
-    }
-
-    var download = _.debounce(function() {
-        apiTiles().map(apiRequestExtent);
-    }, 1000);
 
     function nameHoverIn() {
         var entity = d3.select(d3.event.target).data();
@@ -501,7 +438,7 @@ iD.Map = function() {
             tilegroup.call(background);
         }
         if (map.zoom() > 16) {
-            download();
+            connection.loadTiles(projection);
             drawVector(dragging);
         } else {
             hideVector();
@@ -577,13 +514,14 @@ iD.Map = function() {
     };
 
     map.flush = function () {
-        apiTilesLoaded = {};
+        connection.flush();
         return map;
     };
 
     map.connection = function(_) {
         if (!arguments.length) return connection;
         connection = _;
+        connection.on('load', connectionLoad);
         return map;
     };
 

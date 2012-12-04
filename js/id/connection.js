@@ -1,10 +1,11 @@
 iD.Connection = function() {
 
-    var event = d3.dispatch('auth'),
+    var event = d3.dispatch('auth', 'load'),
         apiURL = 'http://www.openstreetmap.org',
         connection = {},
         refNodes = {},
         user = {},
+        apiTilesLoaded = {},
         oauth = iD.OAuth().api(apiURL);
 
     // Request data within the bbox from an external OSM server.
@@ -14,7 +15,7 @@ iD.Connection = function() {
     }
 
     function loadFromURL(url, callback) {
-        d3.xml(url, function(err, dom) { callback(parse(dom)); });
+        d3.xml(url, function(err, dom) { callback(err, parse(dom)); });
     }
 
     function getNodes(obj) {
@@ -131,6 +132,55 @@ iD.Connection = function() {
         });
     }
 
+    function tileAtZoom(t, distance) {
+        var power = Math.pow(2, distance);
+        return [
+            Math.floor(t[0] * power),
+            Math.floor(t[1] * power),
+            t[2] + distance];
+    }
+
+    function tileAlreadyLoaded(c) {
+        if (apiTilesLoaded[c]) return false;
+        for (var i = 0; i < 4; i++) {
+            if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
+        }
+        return true;
+    }
+
+    function apiRequestExtent(extent) {
+        bboxFromAPI(extent, event.load);
+    }
+
+    function loadTiles(projection) {
+        var scaleExtent = [16, 16],
+            s = projection.scale(),
+            tiles = d3.geo.tile()
+                .scaleExtent(scaleExtent)
+                .scale(s)
+                .translate(projection.translate())(),
+            z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
+            rz = Math.max(scaleExtent[0], Math.min(scaleExtent[1], Math.floor(z))),
+            ts = 256 * Math.pow(2, z - rz),
+            tile_origin = [
+                s / 2 - projection.translate()[0],
+                s / 2 - projection.translate()[1]];
+
+        function apiExtentBox(c) {
+            var x = (c[0] * ts) - tile_origin[0];
+            var y = (c[1] * ts) - tile_origin[1];
+            apiTilesLoaded[c] = true;
+            return [
+                projection.invert([x, y]),
+                projection.invert([x + ts, y + ts])];
+        }
+
+        return tiles
+            .filter(tileAlreadyLoaded)
+            .map(apiExtentBox)
+            .map(apiRequestExtent);
+    }
+
     connection.url = function(_) {
         if (!arguments.length) return apiURL;
         apiURL = _;
@@ -144,6 +194,11 @@ iD.Connection = function() {
         return connection;
     };
 
+    connection.flush = function() {
+        apiTilesLoaded = {};
+        return connection;
+    };
+
     connection.logout = function() {
         oauth.logout();
         event.auth();
@@ -152,6 +207,7 @@ iD.Connection = function() {
 
     connection.bboxFromAPI = bboxFromAPI;
     connection.loadFromURL = loadFromURL;
+    connection.loadTiles = _.debounce(loadTiles, 1000);
     connection.userDetails = userDetails;
     connection.authenticate = authenticate;
     connection.authenticated = authenticated;

@@ -20,8 +20,7 @@ iD.Background = function() {
             .selectAll("image")
             .data(tiles, function(d) { return d; });
 
-        image.exit()
-            .remove();
+        image.exit().remove();
 
         image.enter().append("image")
             .attr("xlink:href", source);
@@ -82,4 +81,3 @@ iD.Background.Bing = function (coord) {
         .replace('{y}', coord[1])
         .replace('{z}', coord[2]);
 };
-
