@@ -444,9 +444,9 @@ iD.Map = function() {
 
     map.zoom = function(z) {
         if (!arguments.length) {
-            return Math.max(Math.log(projection.scale()) / Math.log(2) - 7, 0);
+            return Math.max(Math.log(projection.scale()) / Math.LN2 - 8, 0);
         }
-        var scale = 256 * Math.pow(2, z - 1),
+        var scale = 256 * Math.pow(2, z),
             center = pxCenter(),
             l = pointLocation(center);
         projection.scale(scale);
@@ -482,7 +482,8 @@ iD.Map = function() {
                 c = pxCenter(),
                 ll = projection(loc);
             projection.translate([
-                t[0] - ll[0] + c[0], t[1] - ll[1] + c[1]]);
+                t[0] - ll[0] + c[0],
+                t[1] - ll[1] + (c[1] /2)]);
             zoom.translate(projection.translate());
             return redraw();
         }
