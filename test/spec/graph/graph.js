@@ -54,6 +54,15 @@ describe('Graph', function() {
         });
     });
 
+    describe("#fetch", function () {
+        it("replaces node ids with references", function () {
+            var node  = iD.Node({id: "n1"}),
+                way   = iD.Way({id: "w1", nodes: ["n1"]}),
+                graph = iD.Graph({n1: node, w1: way});
+            expect(graph.fetch("w1").nodes).to.eql([node]);
+        });
+    });
+
     describe("#modifications", function () {
         it("filters entities by modified", function () {
             var a = {id: 'a', modified: function () { return true; }},
