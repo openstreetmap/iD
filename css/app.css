@@ -238,6 +238,17 @@ input#geocode-location {
     cursor: pointer;
 }
 
+div.typeahead {
+    background:#fff;
+    padding:2px 4px;
+    width:148px;
+    border:1px solid #ccc;
+}
+
+div.typeahead a {
+    display:block;
+}
+
 .modal {
     width:640px;
     height:550px;

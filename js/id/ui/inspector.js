@@ -77,9 +77,9 @@ iD.Inspector = function() {
                     .each(function(d, i) {
                         var selection = this;
                         if (i == 1) {
-                            taginfo.values(d.key, function(vals) {
+                            taginfo.values(d.key, function(err, data) {
                                 d3.select(selection).call(d3.typeahead()
-                                    .data(vals));
+                                    .data(data.data));
                             });
                         }
                     });
