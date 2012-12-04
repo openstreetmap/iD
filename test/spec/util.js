@@ -39,15 +39,13 @@ describe('Util', function() {
             it('correctly says that a node is in an extent', function() {
                 expect(iD.util.geo.nodeIntersect({
                     lat: 0, lon: 0
-                }, [
-                    [-180, 90],
+                }, [[-180, 90],
                     [180, -90]])).to.be.true;
             });
             it('correctly says that a node is outside of an extent', function() {
                 expect(iD.util.geo.nodeIntersect({
                     lat: 0, lon: 0
-                }, [
-                    [100, 90],
+                }, [[100, 90],
                     [180, -90]])).to.be.false;
             });
         });

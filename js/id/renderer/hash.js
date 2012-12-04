@@ -4,16 +4,8 @@ iD.Hash = function() {
         lat = 90 - 1e-8, // allowable latitude range
         map;
 
-    function qs(str) {
-        return str.split('&').reduce(function(obj, pair){
-            var parts = pair.split('=');
-            obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
-            return obj;
-        }, {});
-    }
-
     var parser = function(map, s) {
-        var q = qs(s);
+        var q = iD.util.stringQs(s);
         var args = (q.map || '').split("/").map(Number);
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash

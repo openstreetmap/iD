@@ -6,7 +6,6 @@ iD.Map = function() {
         selection = null,
         translateStart,
         keybinding,
-        apiTilesLoaded = {},
         projection = d3.geo.mercator(),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())

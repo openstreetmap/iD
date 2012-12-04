@@ -50,6 +50,14 @@ iD.util.tagText = function(entity) {
     }).join('\n');
 };
 
+iD.util.stringQs = function(str) {
+    return str.split('&').reduce(function(obj, pair){
+        var parts = pair.split('=');
+        obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
+        return obj;
+    }, {});
+};
+
 iD.util.qsString = function(obj) {
     return Object.keys(obj).sort().map(function(key) {
         return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
