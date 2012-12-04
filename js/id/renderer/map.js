@@ -206,14 +206,19 @@ iD.Map = function() {
         var handles = g.hit.selectAll('image.handle')
             .filter(filter)
             .data(waynodes, key);
+        function olderOnTop(a, b) {
+            return (+a.id.slice(1)) - (+b.id.slice(1));
+        }
         handles.exit().remove();
         handles.enter().append('image')
             .attr({ width: 6, height: 6, 'class': 'handle', 'xlink:href': 'css/handle.png' })
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
-            var p = projection(ll2a(entity));
-            return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
-        }).classed('active', classActive);
+                var p = projection(ll2a(entity));
+                return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
+            })
+            .classed('active', classActive)
+            .sort(olderOnTop);
     }
 
     function drawAccuracyHandles(waynodes) {

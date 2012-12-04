@@ -41,8 +41,6 @@ iD.modes.AddPlace = {
     }
 };
 
-// user has clicked 'add road' or pressed a keybinding, and now has
-// a teaser node and needs to click on the map to start a road
 iD.modes.AddRoad = {
     id: 'add-road',
     title: '+ Road',
