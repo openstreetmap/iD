@@ -600,7 +600,6 @@ iD.Map = function() {
 
     map.background = background;
     map.projection = projection;
-    map.redraw = redraw;
     map.selectEntity = selectEntity;
     map.dblclickEnable = dblclickEnable;
 

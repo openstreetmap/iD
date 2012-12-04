@@ -173,8 +173,6 @@ iD.modes.DrawRoad = function(way_id, direction) {
                     lon: ll[0], lat: ll[1]
                 });
                 this.history.replace(iD.actions.addWayNode(way, node));
-                var only = iD.Util.trueObj([way.id].concat(_.pluck(way.nodes, 'id')));
-                this.map.redraw(only);
             }
 
             function click() {
@@ -319,8 +317,6 @@ iD.modes.DrawArea = function(way_id) {
                     lat: ll[1]
                 });
                 this.history.replace(iD.actions.addWayNode(way, node));
-                var only = iD.Util.trueObj([way.id].concat(_.pluck(way.nodes, 'id')));
-                this.map.redraw(only);
             }
 
             function click() {
