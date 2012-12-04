@@ -1,4 +1,10 @@
 describe('XML', function() {
+    describe('#decode', function() {
+        it('decodes xml', function() {
+            expect(iD.format.XML.decode('<">')).to.eql('&lt;&quot;&gt;');
+        });
+    });
+
     describe('#rep', function() {
         it('converts a node to jxon', function() {
             expect(iD.format.XML.rep({ id: 'n-1', type: 'node', lat: 38, lon: -77 }))
