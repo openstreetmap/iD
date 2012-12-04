@@ -1,4 +1,4 @@
 before_script:
+  - "npm install -g uglifyjs mocha-phantomjs"
   - "make"
-  - "npm install -g mocha-phantomjs"
 script: mocha-phantomjs test/index.html && mocha-phantomjs test/index_packaged.html
