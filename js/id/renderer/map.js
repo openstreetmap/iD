@@ -348,21 +348,12 @@ iD.Map = function() {
         selection = null;
     }
 
-    function selectEntity(entity) {
-        selection = entity.id;
-        d3.select('.inspector-wrap')
-            .style('display', 'block')
-            .datum(history.graph().fetch(entity.id))
-            .call(inspector);
-        redraw();
-    }
-
     function selectClick() {
         var entity = d3.select(d3.event.target).data();
         if (entity) entity = entity[0];
         if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
         if (entity.type === 'way') d3.select(d3.event.target).call(waydragbehavior);
-        selectEntity(entity);
+        map.selectEntity(entity);
     }
 
     function removeEntity(entity) {
@@ -505,9 +496,17 @@ iD.Map = function() {
         return map;
     };
 
+    map.selectEntity = function(entity) {
+        selection = entity.id;
+        d3.select('.inspector-wrap')
+            .style('display', 'block')
+            .datum(history.graph().fetch(entity.id))
+            .call(inspector);
+        redraw();
+    };
+
     map.background = background;
     map.projection = projection;
-    map.selectEntity = selectEntity;
 
     return d3.rebind(map, dispatch, 'on', 'move');
 };
