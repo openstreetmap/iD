@@ -7,6 +7,7 @@ iD.Entity = function(a, b, c) {
         this.id = iD.util.id(this.type);
         this._updated = true;
     }
+    delete this._extent;
 
     if (iD.debug) {
         Object.freeze(this);

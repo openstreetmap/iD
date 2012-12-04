@@ -14,13 +14,15 @@ iD.Map = function() {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
+        dragEnabled = true,
         dragging,
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
+                if (!dragEnabled) return { x: 0, y: 0 };
                 if (entity.accuracy) {
                     var index = entity.index, wayid = entity.way;
                     entity = iD.Node(entity);
-                    var connectedWay = map.history.graph().entity(wayid);
+                    var connectedWay = history.graph().entity(wayid);
                     connectedWay.nodes.splice(index, 0, entity.id);
                     map.perform(iD.actions.addWayNode(connectedWay, entity));
                 }
@@ -42,10 +44,9 @@ iD.Map = function() {
                 redraw();
             })
             .on('dragend', function () {
-                if (dragging) {
-                    dragging = undefined;
-                    redraw();
-                }
+                if (!dragEnabled || !dragging) return;
+                dragging = undefined;
+                redraw();
             }),
         waydragbehavior = d3.behavior.drag()
             .origin(function(entity) {
@@ -53,6 +54,8 @@ iD.Map = function() {
                 return { x: p[0], y: p[1] };
             })
             .on('drag', function(entity) {
+                console.log(dragEnabled);
+                if (!dragEnabled) return;
                 d3.event.sourceEvent.stopPropagation();
 
                 if (!dragging) {
@@ -70,10 +73,9 @@ iD.Map = function() {
                 });
             })
             .on('dragend', function () {
-                if (dragging) {
-                    dragging = undefined;
-                    redraw();
-                }
+                if (!dragEnabled || !dragging) return;
+                dragging = undefined;
+                redraw();
             }),
         background = iD.Background()
             .projection(projection)
@@ -431,6 +433,12 @@ iD.Map = function() {
         return map;
     };
 
+    map.dragEnable = function(_) {
+        if (!arguments.length) return dragEnabled;
+        dragEnabled = _;
+        return map;
+    };
+
     map.zoom = function(z) {
         if (!arguments.length) {
             return Math.max(Math.log(projection.scale()) / Math.log(2) - 7, 0);
@@ -517,6 +525,7 @@ iD.Map = function() {
 
     map.background = background;
     map.projection = projection;
+    map.redraw = redraw;
 
     return d3.rebind(map, dispatch, 'on', 'move');
 };

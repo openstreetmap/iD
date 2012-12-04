@@ -13,18 +13,7 @@ iD.modes.AddPlace = {
     id: 'add-place',
     title: '+ Place',
     enter: function() {
-        var surface = this.map.surface,
-            teaser = surface.selectAll('g#temp-g')
-            .append('g').attr('id', 'addplace');
-
-        teaser.append('circle').attr({ 'class': 'handle', r: 3 });
-
-        function mousemove() {
-            teaser.attr('transform', function() {
-                var off = d3.mouse(surface.node());
-                return 'translate(' + off + ')';
-            });
-        }
+        var surface = this.map.surface;
 
         function click() {
             var ll = this.map.projection.invert(
@@ -37,8 +26,7 @@ iD.modes.AddPlace = {
             this.exit();
         }
 
-        surface.on('mousemove.addplace', mousemove)
-            .on('click.addplace', click.bind(this));
+        surface.on('click.addplace', click.bind(this));
 
         this.map.keybinding().on('⎋.exit', function() {
             this.controller.exit();
@@ -46,7 +34,6 @@ iD.modes.AddPlace = {
     },
     exit: function() {
         this.map.surface
-            .on('mousemove.addplace', null)
             .on('click.addplace', null);
         this.map.keybinding().on('⎋.exit', null);
     }
@@ -57,25 +44,9 @@ iD.modes.AddPlace = {
 iD.modes.AddRoad = {
     id: 'add-road',
     title: '+ Road',
-    way: function() {
-        return iD.Way({ tags: { highway: 'residential', elastic: 'true' } });
-    },
     enter: function() {
         this.map.dblclickEnable(false);
-        var surface = this.map.surface,
-            teaser = surface.selectAll('g#temp-g')
-            .append('g').attr('id', 'addroad');
-
-        teaser.append('circle')
-            .attr({ 'class': 'handle', r: 3 })
-            .style('pointer-events', 'none');
-
-        function mousemove() {
-            teaser.attr('transform', function() {
-                var off = d3.mouse(surface.node());
-                return 'translate(' + off + ')';
-            });
-        }
+        var surface = this.map.surface;
 
         // http://bit.ly/SwUwIL
         // http://bit.ly/WxqGng
@@ -84,7 +55,7 @@ iD.modes.AddRoad = {
                 node,
                 direction = 'forward',
                 start = true,
-                way = this.way();
+                way = iD.Way({ tags: { highway: 'residential', elastic: 'true' } });
 
             // connect a way to an existing way
             if (t.data() && t.data()[0] && t.data()[0].type === 'node') {
@@ -117,12 +88,12 @@ iD.modes.AddRoad = {
                 this.history.perform(iD.actions.startWay(way));
                 way.nodes.push(node.id);
                 this.history.perform(iD.actions.addWayNode(way, node));
+                console.log(this.history.graph().entities);
             }
             this.controller.enter(iD.modes.DrawRoad(way.id, direction));
         }
 
-        surface.on('click.addroad', click.bind(this))
-            .on('mousemove.addroad', mousemove);
+        surface.on('click.addroad', click.bind(this));
 
         this.map.keybinding().on('⎋.exit', function() {
             this.controller.exit();
@@ -130,8 +101,7 @@ iD.modes.AddRoad = {
     },
     exit: function() {
         this.map.dblclickEnable(true);
-        this.map.surface.on('click.addroad', null)
-            .on('mousemove.addroad', null);
+        this.map.surface.on('click.addroad', null);
         this.map.keybinding().on('⎋.exit', null);
         d3.selectAll('#addroad').remove();
     }
@@ -145,6 +115,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
             var push = (direction === 'forward') ? 'push' : 'unshift',
                 pop = (direction === 'forward') ? 'pop' : 'shift';
             this.map.dblclickEnable(false);
+            this.map.dragEnable(false);
             var surface = this.map.surface,
 
             nextnode = iD.modes._node([NaN, NaN]);
@@ -224,6 +195,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
             this.map.keybinding().on('⎋.exit', null);
             window.setTimeout(function() {
                 this.map.dblclickEnable(true);
+                this.map.dragEnable(true);
             }.bind(this), 1000);
         }
     };
