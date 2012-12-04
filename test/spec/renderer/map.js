@@ -13,7 +13,7 @@ describe('Map', function() {
 
     describe('#connection', function() {
         it('gets and sets connection', function() {
-            var connection = {};
+            var connection = iD.Connection();
             expect(map.connection(connection)).to.equal(map);
             expect(map.connection()).to.equal(connection);
         });
