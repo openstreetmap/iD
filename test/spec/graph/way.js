@@ -18,7 +18,7 @@ describe('Way', function() {
             expect(iD.Way.isOneWay(iD.Way({ tags: { oneway: 'no' } }))).to.eql(false);
         });
         it('is oneway oneway=yes', function() {
-            expect(iD.Way.isOneWay(iD.Way({ tags: { oneway: 'yes' } }))).to.eql(false);
+            expect(iD.Way.isOneWay(iD.Way({ tags: { oneway: 'yes' } }))).to.eql(true);
         });
     });
 });

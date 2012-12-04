@@ -1,11 +1,7 @@
-iD.Entity = function(a, b) {
-    if (!(this instanceof iD.Entity)) return new iD.Entity(a, b);
+iD.Entity = function(a, b, c) {
+    if (!(this instanceof iD.Entity)) return new iD.Entity(a, b, c);
 
-    _.extend(this, {tags: {}}, a, b);
-
-    if (b) {
-        this._updated = true;
-    }
+    _.extend(this, {tags: {}}, a, b, c);
 
     if (!this.id) {
         this.id = iD.util.id(this.type);
@@ -20,8 +16,7 @@ iD.Entity = function(a, b) {
 
 iD.Entity.prototype = {
     update: function(attrs) {
-        attrs._updated = true;
-        return iD.Entity(this, attrs);
+        return iD.Entity(this, attrs, {_updated: true});
     },
 
     created: function() {
@@ -34,11 +29,11 @@ iD.Entity.prototype = {
 };
 
 iD.Node = function(attrs) {
-    return iD.Entity(_.extend({}, attrs || {}, {type: 'node', tags: {}}));
+    return iD.Entity({tags: {}}, attrs || {}, {type: 'node'});
 };
 
 iD.Way = function(attrs) {
-    return iD.Entity(_.extend({}, attrs || {}, {type: 'way', nodes: [], tags: {}}));
+    return iD.Entity({tags: {}, nodes: []}, attrs || {}, {type: 'way'});
 };
 
 iD.Way.isOneWay = function(d) {
@@ -54,5 +49,5 @@ iD.Way.isArea = function(d) {
 };
 
 iD.Relation = function(attrs) {
-    return iD.Entity(_.extend({}, attrs || {}, {type: 'relation'}));
+    return iD.Entity({tags: {}}, attrs || {}, {type: 'relation'});
 };
