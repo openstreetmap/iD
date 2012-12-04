@@ -8,18 +8,6 @@ iD.modes._node = function(ll) {
     });
 };
 
-iD.modes.chooseIndex = function(way, point, map) {
-    var dist = iD.util.geo.dist;
-    var projNodes = way.nodes.map(function(n) {
-        return map.projection([n.lon, n.lat]);
-    });
-    for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
-        changes[i] =
-            (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
-            dist(projNodes[i], projNodes[i + 1]);
-    }
-    return _.indexOf(changes, _.min(changes)) + 1;
-};
 
 iD.modes.AddPlace = {
     id: 'add-place',
@@ -114,7 +102,7 @@ iD.modes.AddRoad = {
                 node = t.data()[0];
             // snap into an existing way
             } else if (t.data() && t.data()[0] && t.data()[0].type === 'way') {
-                var index = iD.modes.chooseIndex(t.data()[0], d3.mouse(surface.node()), this.map);
+                var index = iD.util.geo.chooseIndex(t.data()[0], d3.mouse(surface.node()), this.map);
                 node = iD.modes._node(this.map.projection.invert(
                     d3.mouse(surface.node())));
                 var connectedWay = this.history.graph().entity(t.data()[0].id);

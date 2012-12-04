@@ -88,3 +88,16 @@ iD.util.geo.nodeIntersect = function(entity, extent) {
         entity.lat < extent[0][1] &&
         entity.lat > extent[1][1];
 };
+
+iD.util.geo.chooseIndex = function(way, point, map) {
+    var dist = iD.util.geo.dist;
+    var projNodes = way.nodes.map(function(n) {
+        return map.projection([n.lon, n.lat]);
+    });
+    for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
+        changes[i] =
+            (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
+            dist(projNodes[i], projNodes[i + 1]);
+    }
+    return _.indexOf(changes, _.min(changes)) + 1;
+};

@@ -22,16 +22,35 @@ describe('Util', function() {
         expect(iD.util.friendlyName({ tags: { name: 'hi', highway: 'Route 5' }})).to.equal('hi');
     });
 
-    describe('#interp', function() {
-        it('interpolates halfway', function() {
-            var a = { lat: 0, lon: 0 },
-            b = { lat: 10, lon: 10 };
-            expect(iD.util.geo.interp(a, b, 0.5)).to.eql({ lat: 5, lon: 5});
+    describe('geo', function() {
+        describe('#interp', function() {
+            it('interpolates halfway', function() {
+                var a = { lat: 0, lon: 0 },
+                b = { lat: 10, lon: 10 };
+                expect(iD.util.geo.interp(a, b, 0.5)).to.eql({ lat: 5, lon: 5});
+            });
+            it('interpolates to one side', function() {
+                var a = { lat: 0, lon: 0 },
+                    b = { lat: 10, lon: 10 };
+                expect(iD.util.geo.interp(a, b, 0)).to.eql({ lat: 0, lon: 0});
+            });
         });
-        it('interpolates to one side', function() {
-            var a = { lat: 0, lon: 0 },
-            b = { lat: 10, lon: 10 };
-            expect(iD.util.geo.interp(a, b, 0)).to.eql({ lat: 0, lon: 0});
+        describe('#dist', function() {
+            it('distance between two same points is zero', function() {
+                var a = [0, 0],
+                    b = [0, 0];
+                expect(iD.util.geo.dist(a, b)).to.eql(0);
+            });
+            it('a straight 10 unit line is 10', function() {
+                var a = [0, 0],
+                    b = [10, 0];
+                expect(iD.util.geo.dist(a, b)).to.eql(10);
+            });
+            it('a pythagorean triangle is right', function() {
+                var a = [0, 0],
+                    b = [4, 3];
+                expect(iD.util.geo.dist(a, b)).to.eql(5);
+            });
         });
     });
 });
