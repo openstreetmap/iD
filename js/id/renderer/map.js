@@ -354,18 +354,15 @@ iD.Map = function() {
     }
 
     function deselectClick() {
-        var hadSelection = !!selection;
-        if (hadSelection) {
-            if (selection.type === 'way') {
-                d3.select(d3.event.target)
-                    .on('mousedown.drag', null)
-                    .on('touchstart.drag', null);
-            }
-            redraw();
-            hideInspector();
+        if (selection && selection.type === 'way') {
+            d3.select(d3.event.target)
+                .on('mousedown.drag', null)
+                .on('touchstart.drag', null);
         }
-        keybinding.on('⌫.deletefeature', null);
         selection = null;
+        redraw();
+        hideInspector();
+        keybinding.on('⌫.deletefeature', null);
     }
 
     function removeEntity(entity) {
