@@ -19,13 +19,6 @@ iD.Map = function() {
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
                 if (!dragEnabled) return { x: 0, y: 0 };
-                if (entity.accuracy) {
-                    var index = entity.index, wayid = entity.way;
-                    entity = iD.Node(entity);
-                    var connectedWay = history.graph().entity(wayid);
-                    connectedWay.nodes.splice(index, 0, entity.id);
-                    map.perform(iD.actions.addWayNode(connectedWay, entity));
-                }
                 var p = projection(ll2a(entity));
                 return { x: p[0], y: p[1] };
             })
@@ -33,6 +26,14 @@ iD.Map = function() {
                 d3.event.sourceEvent.stopPropagation();
 
                 if (!dragging) {
+                    if (entity.accuracy) {
+                        var index = entity.index, wayid = entity.way;
+                        entity = iD.Node(entity);
+                        var connectedWay = history.graph().entity(wayid);
+                        connectedWay.nodes.splice(index, 0, entity.id);
+                        history.perform(iD.actions.addWayNode(connectedWay, entity));
+                    }
+
                     dragging = iD.util.trueObj([entity.id].concat(
                         _.pluck(history.graph().parents(entity.id), 'id')));
                     history.perform(iD.actions.noop());
