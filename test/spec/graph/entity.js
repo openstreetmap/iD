@@ -131,6 +131,14 @@ describe('Relation', function () {
         expect(iD.Relation({id: 'r1234'}).modified()).not.to.be.ok;
     });
 
+    it("defaults members to an empty array", function () {
+        expect(iD.Relation().members).to.eql([]);
+    });
+
+    it("sets members as specified", function () {
+        expect(iD.Relation({members: ["n-1"]}).members).to.eql(["n-1"]);
+    });
+
     it("defaults tags to an empty object", function () {
         expect(iD.Relation().tags).to.eql({});
     });

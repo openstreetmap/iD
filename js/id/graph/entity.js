@@ -30,11 +30,11 @@ iD.Entity.prototype = {
 };
 
 iD.Node = function(attrs) {
-    return iD.Entity({tags: {}}, attrs || {}, {type: 'node'});
+    return iD.Entity(attrs || {}, {type: 'node'});
 };
 
 iD.Way = function(attrs) {
-    return iD.Entity({tags: {}, nodes: []}, attrs || {}, {type: 'way'});
+    return iD.Entity({nodes: []}, attrs || {}, {type: 'way'});
 };
 
 iD.Way.isOneWay = function(d) {
@@ -50,5 +50,5 @@ iD.Way.isArea = function(d) {
 };
 
 iD.Relation = function(attrs) {
-    return iD.Entity({tags: {}}, attrs || {}, {type: 'relation'});
+    return iD.Entity({members: []}, attrs || {}, {type: 'relation'});
 };
