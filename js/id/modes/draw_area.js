@@ -2,6 +2,9 @@ iD.modes.DrawArea = function(way_id) {
     var mode = {};
 
     mode.enter = function() {
+
+        mode.map.hint('Click on the map to add points to your area. Finish the ' +
+                      'area by clicking on your first point');
         mode.map.dblclickEnable(false);
 
         var way = mode.history.graph().entity(way_id),
@@ -47,6 +50,7 @@ iD.modes.DrawArea = function(way_id) {
     };
 
     mode.exit = function() {
+        mode.map.hint(false);
         mode.map.surface
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);

@@ -419,6 +419,20 @@ iD.Map = function() {
         return map;
     };
 
+    map.hint = function (_) {
+        if (_ === false) {
+            d3.select('div.inspector-wrap')
+                .style('opacity', 0)
+                .style('display', 'none');
+        } else {
+            d3.select('div.inspector-wrap')
+                .style('display', 'block')
+                .transition()
+                .style('opacity', 1)
+                .text(_);
+        }
+    };
+
     map.history = function (_) {
         if (!arguments.length) return history;
         history = _;

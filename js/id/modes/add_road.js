@@ -7,6 +7,8 @@ iD.modes.AddRoad = function() {
     mode.enter = function() {
         mode.map.dblclickEnable(false);
 
+        mode.map.hint('Click on the map to start drawing an road, path, or route.');
+
         mode.map.surface.on('click.addroad', function() {
             var datum = d3.select(d3.event.target).datum() || {},
                 node,
@@ -57,6 +59,7 @@ iD.modes.AddRoad = function() {
 
     mode.exit = function() {
         mode.map.dblclickEnable(true);
+        mode.map.hint(false);
         mode.map.surface.on('click.addroad', null);
         mode.map.keybinding().on('⎋.addroad', null);
     };

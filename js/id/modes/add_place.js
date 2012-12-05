@@ -5,6 +5,8 @@ iD.modes.AddPlace = function() {
     };
 
     mode.enter = function() {
+        mode.map.hint('Click on the map to add a place.');
+
         mode.map.surface.on('click.addplace', function() {
             var node = iD.Node({loc: mode.map.mouseCoordinates(), _poi: true});
             mode.history.perform(iD.actions.addNode(node));
@@ -17,6 +19,7 @@ iD.modes.AddPlace = function() {
     };
 
     mode.exit = function() {
+        mode.map.hint(false);
         mode.map.surface.on('click.addplace', null);
         mode.map.keybinding().on('⎋.addplace', null);
     };

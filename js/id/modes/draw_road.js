@@ -3,6 +3,9 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
     mode.enter = function() {
         mode.map.dblclickEnable(false);
+        mode.map.hint('Click to add more points to the road. ' +
+                      'Click on other roads to connect to them, and double-click to ' +
+                      'end the road.');
         mode.map.dragEnable(false);
 
         var index = (direction === 'forward') ? undefined : -1,
@@ -64,6 +67,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
     };
 
     mode.exit = function() {
+        mode.map.hint(false);
         mode.map.surface
             .on('mousemove.drawroad', null)
             .on('click.drawroad', null);

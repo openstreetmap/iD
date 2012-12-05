@@ -171,8 +171,8 @@ div.buttons-joined {
 }
 
 #bar button.active:not([disabled]) {
-    background:#eee;
-    color:#000;
+    background:#7392ff;
+    color:#fff;
 }
 
 #bar button.save {
@@ -216,13 +216,18 @@ div.buttons-joined {
 }
 
 .inspector-wrap {
+    border-radius:3px;
+    border:1px solid #ccc;
     position:absolute;
-    top:45px;
-    right:0px;
+    top:50px;
+    left:50%;
+    margin-left:-175px;
     overflow:auto;
     padding:10px;
     background:#fff;
     width:350px;
+    opacity:0;
+    display:none;
 }
 
 .inspector-wrap a.permalink {
