@@ -57,8 +57,8 @@ iD.OAuth = function() {
 
     oauth.authenticate = function(callback) {
         if (oauth.authenticated()) return callback();
-        oauth.logout();
 
+        oauth.logout();
 
         o = timenonce(o);
         var url = baseurl + '/oauth/request_token';
@@ -66,9 +66,14 @@ iD.OAuth = function() {
             ohauth.baseString('POST', url, o));
 
         var l = iD.loading('contacting openstreetmap...');
+
         ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
+            if (err) callback(err);
             l.remove();
-            var resp = ohauth.stringQs(xhr.response);
+            authorize(ohauth.stringQs(xhr.response));
+        });
+
+        function authorize(resp) {
             token('oauth_request_token_secret', resp.oauth_token_secret);
             var modal = iD.modal();
             modal
@@ -82,26 +87,32 @@ iD.OAuth = function() {
                 .on('load', function() {
                     if (this.contentWindow.location.search) {
                         var search = this.contentWindow.location.search,
-                            oauth_token = ohauth.stringQs(search.slice(1)),
-                            url = baseurl + '/oauth/access_token';
-                        o = timenonce(o);
+                            oauth_token = ohauth.stringQs(search.slice(1));
                         modal.remove();
-
-                        o.oauth_token = oauth_token.oauth_token;
-                        var request_token_secret = token('oauth_request_token_secret');
-                        o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
-                            ohauth.baseString('POST', url, o));
-                        var l = iD.loading('contacting openstreetmap...');
-                        ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
-                            l.remove();
-                            var access_token = ohauth.stringQs(xhr.response);
-                            token('oauth_token', access_token.oauth_token);
-                            token('oauth_token_secret', access_token.oauth_token_secret);
-                            callback();
-                        });
+                        get_access_token(oauth_token);
                     }
                 });
-        });
+        }
+
+        function get_access_token(oauth_token) {
+            var url = baseurl + '/oauth/access_token';
+            o = timenonce(o);
+
+            o.oauth_token = oauth_token.oauth_token;
+            var request_token_secret = token('oauth_request_token_secret');
+            o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
+                ohauth.baseString('POST', url, o));
+            var l = iD.loading('contacting openstreetmap...');
+            ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
+                if (err) callback(err);
+                l.remove();
+                var access_token = ohauth.stringQs(xhr.response);
+                token('oauth_token', access_token.oauth_token);
+                token('oauth_token_secret', access_token.oauth_token_secret);
+                callback();
+            });
+        }
+
     };
 
     oauth.api = function(_) {

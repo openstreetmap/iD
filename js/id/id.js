@@ -96,7 +96,7 @@ window.iD = function(container) {
                 })) > 0;
 
                 if (has_changes) {
-                    connection.authenticate(function() {
+                    connection.authenticate(function(err) {
                         var modal = iD.modal();
                         modal.select('.content')
                             .classed('commit-modal', true)
@@ -108,17 +108,8 @@ window.iD = function(container) {
                                 .on('save', save));
                     });
                 } else {
-                    var modal = iD.modal();
-                    modal.select('.modal').classed('modal-alert', true);
-                    modal.select('.content')
-                        .append('p')
+                    iD.confirm().select('.description')
                         .text('You don\'t have any changes to save.');
-                    modal.select('.content')
-                        .append('button')
-                        .text('OK')
-                        .on('click', function() {
-                            modal.remove();
-                        });
                 }
             });
 
