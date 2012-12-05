@@ -55,7 +55,7 @@ iD.modes.Select = function (entity) {
             .call(inspector);
 
         inspector.on('changeTags', function(d, tags) {
-            mode.history.perform(iD.actions.ChangeEntityTags(history.graph().entity(d.id), tags));
+            mode.history.perform(iD.actions.ChangeEntityTags(mode.history.graph().entity(d.id), tags));
         }).on('changeWayDirection', function(d) {
             mode.history.perform(iD.actions.ReverseWay(d));
         }).on('remove', function() {
