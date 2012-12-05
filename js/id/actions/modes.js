@@ -1,5 +1,127 @@
 iD.modes = {};
 
+iD.modes.Browse = function() {
+    var mode = {};
+
+    mode.enter = function() {
+        mode.map.surface.on('click.browse', function () {
+            var datum = d3.select(d3.event.target).datum();
+            if (datum instanceof iD.Entity) {
+                mode.controller.enter(iD.modes.Select(datum));
+            }
+        });
+    };
+
+    mode.exit = function() {
+        mode.map.surface.on('click.browse', null);
+    };
+
+    return mode;
+};
+
+iD.modes.Select = function (entity) {
+    var mode = {},
+        inspector = iD.Inspector(),
+        dragging, target;
+
+    var dragWay = d3.behavior.drag()
+        .origin(function(entity) {
+            var p = mode.map.projection(entity.nodes[0].loc);
+            return { x: p[0], y: p[1] };
+        })
+        .on('drag', function(entity) {
+            if (!mode.map.dragEnable()) return;
+
+            d3.event.sourceEvent.stopPropagation();
+
+            if (!dragging) {
+                dragging = iD.util.trueObj([entity.id].concat(
+                    _.pluck(mode.history.graph().parents(entity.id), 'id')));
+                mode.history.perform(iD.actions.noop());
+            }
+
+            entity.nodes.forEach(function(node) {
+                var start = mode.map.projection(node.loc);
+                var end = mode.map.projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
+                node.loc = end;
+                mode.history.replace(iD.actions.move(node, end));
+            });
+        })
+        .on('dragend', function () {
+            if (!mode.map.dragEnable() || !dragging) return;
+            dragging = undefined;
+            mode.map.redraw();
+        });
+
+    function remove() {
+        // Remove this node from any ways that is a member of
+        mode.history.graph().parents(entity.id)
+            .filter(function(d) { return d.type === 'way'; })
+            .forEach(function(parent) {
+                mode.history.perform(iD.actions.removeWayNode(parent, entity));
+            });
+        mode.history.perform(iD.actions.remove(entity));
+        mode.controller.exit();
+    }
+
+    mode.enter = function () {
+        target = mode.map.surface.selectAll("*")
+            .filter(function (d) { return d === entity; });
+
+        d3.select('.inspector-wrap')
+            .style('display', 'block')
+            .datum(entity)
+            .call(inspector);
+
+        inspector.on('changeTags', function(d, tags) {
+            mode.history.perform(iD.actions.changeTags(history.graph().entity(d.id), tags));
+        }).on('changeWayDirection', function(d) {
+            mode.history.perform(iD.actions.changeWayDirection(d));
+        }).on('remove', function() {
+            remove();
+        }).on('close', function() {
+            mode.controller.exit();
+        });
+
+        if (entity.type === 'way') {
+            target.call(dragWay);
+        }
+
+        mode.map.surface.on("click.browse", function () {
+            var datum = d3.select(d3.event.target).datum();
+            if (datum instanceof iD.Entity) {
+                mode.controller.enter(iD.modes.Select(datum));
+            } else {
+                mode.controller.enter(iD.modes.Browse());
+            }
+        });
+
+        mode.map.keybinding().on('⌫.browse', function(e) {
+            remove();
+            e.preventDefault();
+        });
+
+        mode.map.selection(entity.id);
+    };
+
+    mode.exit = function () {
+        d3.select('.inspector-wrap')
+            .style('display', 'none');
+
+        if (entity.type === 'way') {
+            target.on('mousedown.drag', null)
+                .on('touchstart.drag', null);
+        }
+
+        mode.map.surface.on("click.browse", null);
+        mode.map.keybinding().on('⌫.browse', null);
+
+        mode.map.selection(null);
+    };
+
+    return mode;
+};
+
 iD.modes.AddPlace = {
     id: 'add-place',
     title: '+ Place',
@@ -10,9 +132,7 @@ iD.modes.AddPlace = {
         function click() {
             var node = iD.Node({loc: this.map.mouseCoordinates(), _poi: true});
             this.history.perform(iD.actions.addNode(node));
-            this.map.selectEntity(node);
-            this.controller.exit();
-            this.exit();
+            this.controller.enter(iD.modes.Select(node));
         }
 
         surface.on('click.addplace', click.bind(this));
@@ -136,10 +256,9 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
                         delete way.tags.elastic;
                         this.history.perform(iD.actions.changeTags(way, way.tags));
-                        this.map.selectEntity(way);
 
                         // End by clicking on own tail
-                        return this.controller.exit();
+                        return this.controller.enter(iD.modes.Select(way));
                     } else {
                         // connect a way to an existing way
                         this.history.replace(iD.actions.addWayNode(way, datum, index));
@@ -207,7 +326,7 @@ iD.modes.AddArea = {
 
             this.history.perform(iD.actions.startWay(way));
             this.history.perform(iD.actions.addWayNode(way, node));
-            this.map.selectEntity(way);
+
             this.controller.enter(iD.modes.DrawArea(way.id));
         }
 
@@ -257,7 +376,7 @@ iD.modes.DrawArea = function(way_id) {
                         this.history.perform(iD.actions.changeTags(way, way.tags));
 
                         // End by clicking on own tail
-                        return this.controller.exit();
+                        return this.controller.enter(iD.modes.Select(way));
                     } else {
                         // connect a way to an existing way
                         this.history.replace(iD.actions.addWayNode(way, datum));
@@ -287,9 +406,4 @@ iD.modes.DrawArea = function(way_id) {
             }.bind(this), 1000);
         }
     };
-};
-
-iD.modes.Move = {
-    enter: function() { },
-    exit: function() { }
 };

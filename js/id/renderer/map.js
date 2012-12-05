@@ -2,7 +2,6 @@ iD.Map = function() {
     var connection, history,
         dimensions = [],
         dispatch = d3.dispatch('move'),
-        inspector = iD.Inspector(),
         selection = null,
         translateStart,
         keybinding,
@@ -45,34 +44,6 @@ iD.Map = function() {
                 dragging = undefined;
                 redraw();
             }),
-        waydragbehavior = d3.behavior.drag()
-            .origin(function(entity) {
-                var p = projection(entity.nodes[0].loc);
-                return { x: p[0], y: p[1] };
-            })
-            .on('drag', function(entity) {
-                console.log(dragEnabled);
-                if (!dragEnabled) return;
-                d3.event.sourceEvent.stopPropagation();
-
-                if (!dragging) {
-                    dragging = iD.util.trueObj([entity.id].concat(
-                        _.pluck(history.graph().parents(entity.id), 'id')));
-                    history.perform(iD.actions.noop());
-                }
-
-                entity.nodes.forEach(function(node) {
-                    var start = projection(node.loc);
-                    var end = projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
-                    node.loc = end;
-                    history.replace(iD.actions.move(node, end));
-                });
-            })
-            .on('dragend', function () {
-                if (!dragEnabled || !dragging) return;
-                dragging = undefined;
-                redraw();
-            }),
         background = iD.Background()
             .projection(projection)
             .scaleExtent([0, 20]),
@@ -98,11 +69,9 @@ iD.Map = function() {
                 .attr({ x: 0, y: 0 });
 
         tilegroup = surface.append('g')
-            .attr('clip-path', 'url(#clip)')
-            .on('click', deselectClick);
+            .attr('clip-path', 'url(#clip)');
 
         r = surface.append('g')
-            .on('click', selectClick)
             .on('mouseover', nameHoverIn)
             .on('mouseout', nameHoverOut)
             .attr('clip-path', 'url(#clip)');
@@ -115,19 +84,6 @@ iD.Map = function() {
         alength = arrow.node().getComputedTextLength();
         arrow.remove();
 
-        inspector.on('changeTags', function(d, tags) {
-            var entity = history.graph().entity(d.id);
-            history.perform(iD.actions.changeTags(entity, tags));
-        }).on('changeWayDirection', function(d) {
-            history.perform(iD.actions.changeWayDirection(d));
-        }).on('remove', function(d) {
-            removeEntity(d);
-            hideInspector();
-        }).on('close', function() {
-            deselectClick();
-            hideInspector();
-        });
-
         map.size(this.size());
         map.surface = surface;
     }
@@ -138,10 +94,6 @@ iD.Map = function() {
     function key(d) { return d.id; }
     function nodeline(d) {
         return 'M' + _.pluck(d.nodes, 'loc').map(projection).map(iD.util.geo.roundCoords).join('L');
-    }
-
-    function hideInspector() {
-        d3.select('.inspector-wrap').style('display', 'none');
     }
 
     function drawVector(only) {
@@ -335,41 +287,6 @@ iD.Map = function() {
 
     function nameHoverOut() { d3.select('.messages').text(''); }
 
-    function selectClick() {
-        var entity = d3.select(d3.event.target).data();
-        if (entity) entity = entity[0];
-        if (!entity || selection === entity.id || (entity.tags && entity.tags.elastic)) return;
-        if (entity.type === 'way') d3.select(d3.event.target).call(waydragbehavior);
-        map.selectEntity(entity);
-        keybinding.on('⌫.deletefeature', function(e) {
-            removeEntity(entity);
-            e.preventDefault();
-        });
-    }
-
-    function deselectClick() {
-        if (selection && selection.type === 'way') {
-            d3.select(d3.event.target)
-                .on('mousedown.drag', null)
-                .on('touchstart.drag', null);
-        }
-        selection = null;
-        redraw();
-        hideInspector();
-        keybinding.on('⌫.deletefeature', null);
-    }
-
-    function removeEntity(entity) {
-        // Remove this node from any ways that is a member of
-        history.graph().parents(entity.id)
-            .filter(function(d) { return d.type === 'way'; })
-            .forEach(function(parent) {
-                history.perform(iD.actions.removeWayNode(parent, entity));
-            });
-        deselectClick();
-        history.perform(iD.actions.remove(entity));
-    }
-
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
             if (!dblclickEnabled) return;
@@ -515,13 +432,10 @@ iD.Map = function() {
         return map;
     };
 
-    map.selectEntity = function(entity) {
-        selection = entity.id;
-        d3.select('.inspector-wrap')
-            .style('display', 'block')
-            .datum(history.graph().fetch(entity.id))
-            .call(inspector);
-        redraw();
+    map.selection = function (_) {
+        if (!arguments.length) return selection;
+        selection = _;
+        return redraw();
     };
 
     map.background = background;

@@ -20,10 +20,8 @@ iD.Controller = function(map, history) {
     };
 
     controller.exit = function() {
-        controller.enter(iD.modes.Move);
+        controller.enter(iD.modes.Browse());
     };
-
-    controller.exit();
 
     return d3.rebind(controller, event, 'on');
 };
