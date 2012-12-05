@@ -1,0 +1,81 @@
+iD.modes.DrawRoad = function(way_id, direction) {
+    var mode = {};
+
+    mode.enter = function() {
+        mode.map.dblclickEnable(false);
+        mode.map.dragEnable(false);
+
+        var index = (direction === 'forward') ? undefined : -1,
+            surface = mode.map.surface,
+            node = iD.Node({loc: mode.map.mouseCoordinates()}),
+            way = mode.history.graph().entity(way_id),
+            firstNode = way.nodes[0],
+            lastNode = _.last(way.nodes);
+
+        mode.history.perform(iD.actions.addWayNode(way, node, index));
+
+        function mousemove() {
+            mode.history.replace(iD.actions.addWayNode(way, node.update({loc: mode.map.mouseCoordinates()}), index));
+        }
+
+        function click() {
+            d3.event.stopPropagation();
+
+            var datum = d3.select(d3.event.target).datum() || {};
+
+            if (datum.type === 'node') {
+                if (datum.id == firstNode || datum.id == lastNode) {
+                    // If mode is drawing a loop and mode is not the drawing
+                    // end of the stick, finish the circle
+                    if (direction === 'forward' && datum.id == firstNode) {
+                        mode.history.replace(iD.actions.addWayNode(way,
+                            mode.history.graph().entity(firstNode), index));
+                    } else if (direction === 'backward' && datum.id == lastNode) {
+                        mode.history.replace(iD.actions.addWayNode(way,
+                            mode.history.graph().entity(lastNode), index));
+                    }
+
+                    delete way.tags.elastic;
+                    mode.history.perform(iD.actions.changeTags(way, way.tags));
+
+                    // End by clicking on own tail
+                    return mode.controller.enter(iD.modes.Select(way));
+                } else {
+                    // connect a way to an existing way
+                    mode.history.replace(iD.actions.addWayNode(way, datum, index));
+                }
+            } else if (datum.type === 'way') {
+                node = node.update({loc: mode.map.mouseCoordinates()});
+                mode.history.replace(iD.actions.addWayNode(way, node, index));
+
+                var connectedWay = mode.history.graph().entity(datum.id);
+                var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(surface.node()), mode.map);
+                mode.history.perform(iD.actions.addWayNode(connectedWay, node, connectedIndex));
+            } else {
+                node = node.update({loc: mode.map.mouseCoordinates()});
+                mode.history.replace(iD.actions.addWayNode(way, node, index));
+            }
+
+            mode.controller.enter(iD.modes.DrawRoad(way_id, direction));
+        }
+
+        surface.on('mousemove.drawroad', mousemove)
+            .on('click.drawroad', click);
+
+        mode.map.keybinding().on('⎋.exit', function() {
+            mode.controller.exit();
+        });
+    };
+
+    mode.exit = function() {
+        mode.map.surface.on('mousemove.drawroad', null)
+            .on('click.drawroad', null);
+        mode.map.keybinding().on('⎋.exit', null);
+        window.setTimeout(function() {
+            mode.map.dblclickEnable(true);
+            mode.map.dragEnable(true);
+        }, 1000);
+    };
+
+    return mode;
+};
