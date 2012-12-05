@@ -40,16 +40,17 @@ iD.modes.AddRoad = {
         // http://bit.ly/SwUwIL
         // http://bit.ly/WxqGng
         function click() {
-            var t = d3.select(d3.event.target),
+            var datum = d3.select(d3.event.target).datum() || {},
                 node,
                 direction = 'forward',
                 start = true,
                 way = iD.Way({ tags: { highway: 'residential', elastic: 'true' } });
 
-            // connect a way to an existing way
-            if (t.datum() && t.datum().type === 'node') {
+            if (datum.type === 'node') {
                 // continue an existing way
-                var id = t.datum().id;
+                node = datum;
+
+                var id = datum.id;
                 var parents = this.history.graph().parents(id);
                 if (parents.length) {
                     if (parents[0].nodes[0] === id) {
@@ -61,14 +62,15 @@ iD.modes.AddRoad = {
                         start = false;
                     }
                 }
-                node = t.datum();
-            // snap into an existing way
-            } else if (t.data() && t.datum() && t.datum().type === 'way') {
-                var index = iD.util.geo.chooseIndex(t.datum(), d3.mouse(surface.node()), this.map);
+            } else if (datum.type === 'way') {
+                // begin a new way starting from an existing way
                 node = iD.Node({loc: this.map.mouseCoordinates()});
-                var connectedWay = this.history.graph().entity(t.datum().id);
+
+                var index = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), this.map);
+                var connectedWay = this.history.graph().entity(datum.id);
                 this.history.perform(iD.actions.addWayNode(connectedWay, node, index));
             } else {
+                // begin a new way
                 node = iD.Node({loc: this.map.mouseCoordinates()});
             }
 
@@ -118,16 +120,16 @@ iD.modes.DrawRoad = function(way_id, direction) {
             function click() {
                 d3.event.stopPropagation();
 
-                var t = d3.select(d3.event.target);
+                var datum = d3.select(d3.event.target).datum() || {};
 
-                if (t.datum() && t.datum().type === 'node') {
-                    if (t.datum().id == firstNode || t.datum().id == lastNode) {
+                if (datum.type === 'node') {
+                    if (datum.id == firstNode || datum.id == lastNode) {
                         // If this is drawing a loop and this is not the drawing
                         // end of the stick, finish the circle
-                        if (direction === 'forward' && t.datum().id == firstNode) {
+                        if (direction === 'forward' && datum.id == firstNode) {
                             this.history.replace(iD.actions.addWayNode(way,
                                 this.history.graph().entity(firstNode), index));
-                        } else if (direction === 'backward' && t.datum().id == lastNode) {
+                        } else if (direction === 'backward' && datum.id == lastNode) {
                             this.history.replace(iD.actions.addWayNode(way,
                                 this.history.graph().entity(lastNode), index));
                         }
@@ -140,14 +142,14 @@ iD.modes.DrawRoad = function(way_id, direction) {
                         return this.controller.exit();
                     } else {
                         // connect a way to an existing way
-                        this.history.replace(iD.actions.addWayNode(way, t.datum(), index));
+                        this.history.replace(iD.actions.addWayNode(way, datum, index));
                     }
-                } else if (t.datum() && t.datum().type === 'way') {
+                } else if (datum.type === 'way') {
                     node = node.update({loc: this.map.mouseCoordinates()});
                     this.history.replace(iD.actions.addWayNode(way, node, index));
 
-                    var connectedWay = this.history.graph().entity(t.datum().id);
-                    var connectedIndex = iD.modes.chooseIndex(t.datum(), d3.mouse(surface.node()), this.map);
+                    var connectedWay = this.history.graph().entity(datum.id);
+                    var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(surface.node()), this.map);
                     this.history.perform(iD.actions.addWayNode(connectedWay, node, connectedIndex));
                 } else {
                     node = node.update({loc: this.map.mouseCoordinates()});
@@ -193,12 +195,12 @@ iD.modes.AddArea = {
         var surface = this.map.surface;
 
         function click() {
-            var t = d3.select(d3.event.target),
+            var datum = d3.select(d3.event.target).datum() || {},
                 node, way = this.way();
 
             // connect a way to an existing way
-            if (t.datum() && t.datum().type === 'node') {
-                node = t.datum();
+            if (datum.type === 'node') {
+                node = datum;
             } else {
                 node = iD.Node({loc: this.map.mouseCoordinates()});
             }
@@ -244,10 +246,10 @@ iD.modes.DrawArea = function(way_id) {
             function click() {
                 d3.event.stopPropagation();
 
-                var t = d3.select(d3.event.target);
+                var datum = d3.select(d3.event.target).datum();
 
-                if (t.datum() && t.datum().type === 'node') {
-                    if (t.datum().id == firstnode_id) {
+                if (datum.type === 'node') {
+                    if (datum.id == firstnode_id) {
                         this.history.replace(iD.actions.addWayNode(way,
                             this.history.graph().entity(way.nodes[0])));
 
@@ -258,7 +260,7 @@ iD.modes.DrawArea = function(way_id) {
                         return this.controller.exit();
                     } else {
                         // connect a way to an existing way
-                        this.history.replace(iD.actions.addWayNode(way, t.datum()));
+                        this.history.replace(iD.actions.addWayNode(way, datum));
                     }
                 } else {
                     node = node.update({loc: this.map.mouseCoordinates()});
