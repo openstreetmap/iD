@@ -423,6 +423,10 @@ iD.Map = function() {
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
+    map.mouseCoordinates = function() {
+        return projection.invert(d3.mouse(surface.node()));
+    };
+
     map.dblclickEnable = function(_) {
         if (!arguments.length) return dblclickEnabled;
         dblclickEnabled = _;
