@@ -240,13 +240,17 @@ input#geocode-location {
 
 div.typeahead {
     background:#fff;
-    padding:2px 4px;
     width:148px;
     border:1px solid #ccc;
 }
 
 div.typeahead a {
+    padding:1px 4px;
     display:block;
+}
+
+div.typeahead a.active {
+    background:#DDE4FF;
 }
 
 .modal {

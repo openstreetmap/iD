@@ -70,18 +70,20 @@ iD.Inspector = function() {
                     .data(function(d) { return [d, d]; });
                 valuetds.enter().append('td').append('input')
                     .property('value', function(d, i) { return d[i ? 'value' : 'key']; })
-                    .on('keyup', function(d, i) {
+                    .on('keyup.update', function(d, i) {
                         d[i ? 'value' : 'key'] = this.value;
                         update();
                     })
                     .each(function(d, i) {
-                        var selection = this;
-                        if (i == 1) {
-                            taginfo.values(d.key, function(err, data) {
-                                d3.select(selection).call(d3.typeahead()
-                                    .data(data.data));
-                            });
-                        }
+                        if (!i) return;
+                        var selection = d3.select(this);
+                        selection.call(d3.typeahead()
+                            .data(function(selection, callback) {
+                                update();
+                                taginfo.values(selection.datum().key, function(err, data) {
+                                    callback(data.data);
+                                });
+                            }));
                     });
 
                 row.append('td').attr('class', 'tag-help').append('a')
