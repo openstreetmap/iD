@@ -54,6 +54,7 @@ iD.Map = function() {
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
         transformProp = iD.util.prefix() + 'transform',
+        support3d = iD.util.prefix() === 'O',
         supersurface, surface, defs, tilegroup, r, g, alength;
 
     function map() {
@@ -304,8 +305,13 @@ iD.Map = function() {
             if (!translateStart) translateStart = d3.event.translate.slice();
             var a = d3.event.translate,
                 b = translateStart;
-            surface.style(transformProp,
-                'translate3d(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px, 0px)');
+            if (support3d) {
+                surface.style(transformProp,
+                    'translate3d(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px, 0px)');
+            } else {
+                surface.style(transformProp,
+                    'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
+            }
         } else {
             redraw();
             translateStart = null;

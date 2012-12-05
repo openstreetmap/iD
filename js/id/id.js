@@ -7,7 +7,7 @@ window.iD = function(container) {
             .history(history),
         controller = iD.Controller(map, history);
 
-    map.background.source(iD.Background.Bing);
+    map.background.source(iD.BackgroundSource.Bing);
 
     function editor() {
         if (!iD.supported()) {
