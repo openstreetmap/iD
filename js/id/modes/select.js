@@ -33,7 +33,13 @@ iD.modes.Select = function (entity) {
         });
 
     function remove() {
-        mode.history.perform(iD.actions.remove(entity));
+        switch (entity.type) {
+            case 'way':
+                mode.history.perform(iD.actions.DeleteWay(entity));
+            case 'node':
+                mode.history.perform(iD.actions.DeleteNode(entity));
+        }
+
         mode.controller.exit();
     }
 
