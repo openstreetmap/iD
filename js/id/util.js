@@ -80,7 +80,7 @@ iD.util.geo.roundCoords = function(c) {
 
 iD.util.geo.interp = function(p1, p2, t) {
     return [p1[0] + (p2[0] - p1[0]) * t,
-            p1[1] + (p2[1] - p1[1]) * t]
+            p1[1] + (p2[1] - p1[1]) * t];
 };
 
 iD.util.geo.dist = function(a, b) {

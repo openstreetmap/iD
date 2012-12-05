@@ -36,6 +36,7 @@ iD.modes.Select = function (entity) {
         switch (entity.type) {
             case 'way':
                 mode.history.perform(iD.actions.DeleteWay(entity));
+                break;
             case 'node':
                 mode.history.perform(iD.actions.DeleteNode(entity));
         }

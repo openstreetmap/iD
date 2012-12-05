@@ -33,7 +33,11 @@ iD.Entity.prototype = {
 
     hasInterestingTags: function() {
         return _.keys(this.tags).some(function (key) {
-            return key != "attribution" && key != "created_by" && key != "source" && key != 'odbl' && key.indexOf('tiger:') != 0;
+            return key != "attribution" &&
+                key != "created_by" &&
+                key != "source" &&
+                key != 'odbl' &&
+                key.indexOf('tiger:') !== 0;
         });
     }
 };
