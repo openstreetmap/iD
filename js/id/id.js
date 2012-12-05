@@ -33,6 +33,8 @@ window.iD = function(container) {
             .enter().append('button')
                 .attr('class', 'add-button')
             .text(function (mode) { return mode.title; })
+            .attr('data-original-title', function (mode) { return mode.description; })
+            .call(bootstrap.tooltip().placement('bottom'))
             .on('click', function (mode) { controller.enter(mode); });
 
         controller.on('enter', function (entered) {

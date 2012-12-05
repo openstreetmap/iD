@@ -350,6 +350,9 @@ div.typeahead a.active {
     -webkit-touch-callout:none;
 }
 
+#bar button .tooltip {
+  white-space: normal;
+  }
 .tooltip {
   position: absolute;
   z-index: 1030;

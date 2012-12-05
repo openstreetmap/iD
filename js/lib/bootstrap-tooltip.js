@@ -125,7 +125,7 @@
           pos = {x: outer.x - inner.w, y: outer.y + (outer.h - inner.h) / 2};
           break;
         case "bottom":
-          pos = {x: outer.x + (outer.w - inner.w) / 2, y: outer.y + outer.h};
+          pos = {x: Math.max(0, outer.x + (outer.w - inner.w) / 2), y: outer.y + outer.h};
           break;
       }
 
