@@ -49,6 +49,7 @@ iD.modes.Select = function (entity) {
 
         d3.select('.inspector-wrap')
             .style('display', 'block')
+            .style('opacity', 1)
             .datum(entity)
             .call(inspector);
 

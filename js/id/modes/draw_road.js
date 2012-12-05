@@ -38,7 +38,9 @@ iD.modes.DrawRoad = function(way_id, direction) {
                             mode.history.graph().entity(lastNode), index));
                     }
 
-                    mode.history.perform(iD.actions.ChangeEntityTags(way, _.omit(way.tags, 'elastic')));
+                    mode.history.perform(iD.actions.ChangeEntityTags(
+                        way,
+                        _.omit(way.tags, 'elastic')));
 
                     // End by clicking on own tail
                     return mode.controller.enter(iD.modes.Select(way));
@@ -51,8 +53,12 @@ iD.modes.DrawRoad = function(way_id, direction) {
                 mode.history.replace(iD.actions.AddWayNode(way, node, index));
 
                 var connectedWay = mode.history.graph().entity(datum.id);
-                var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(mode.map.surface.node()), mode.map);
-                mode.history.perform(iD.actions.AddWayNode(connectedWay, node, connectedIndex));
+                var connectedIndex = iD.modes.chooseIndex(datum,
+                    d3.mouse(mode.map.surface.node()),
+                    mode.map);
+                mode.history.perform(iD.actions.AddWayNode(connectedWay,
+                    node,
+                    connectedIndex));
             } else {
                 node = node.update({loc: mode.map.mouseCoordinates()});
                 mode.history.replace(iD.actions.AddWayNode(way, node, index));
