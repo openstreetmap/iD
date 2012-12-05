@@ -29,6 +29,12 @@ iD.Entity.prototype = {
 
     modified: function() {
         return this._updated && +this.id.slice(1) > 0;
+    },
+
+    hasInterestingTags: function() {
+        return _.keys(this.tags).some(function (key) {
+            return key != "attribution" && key != "created_by" && key != "source" && key != 'odbl' && key.indexOf('tiger:') != 0;
+        });
     }
 };
 

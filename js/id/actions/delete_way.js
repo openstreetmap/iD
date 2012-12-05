@@ -12,7 +12,11 @@ iD.actions.DeleteWay = function(way) {
             graph = iD.actions.removeWayNode(way, node)(graph);
 
             if (!graph.parentWays(id).length && !graph.parentRelations(id).length) {
-                graph = graph.remove(node);
+                if (!node.hasInterestingTags()) {
+                    graph = graph.remove(node);
+                } else {
+                    graph = graph.replace(node.update({_poi: true}));
+                }
             }
         });
 
