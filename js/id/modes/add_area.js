@@ -1,47 +1,51 @@
-iD.modes.AddArea = {
-    id: 'add-area',
-    title: '+ Area',
+iD.modes.AddArea = function() {
+    var mode = {
+        id: 'add-area',
+        title: '+ Area'
+    };
 
-    way: function() {
+    function way() {
         return iD.Way({
             tags: { building: 'yes', area: 'yes', elastic: 'true' }
         });
-    },
+    }
 
-    enter: function() {
-        this.map.dblclickEnable(false);
+    mode.enter = function() {
+        mode.map.dblclickEnable(false);
 
-        var surface = this.map.surface;
+        var surface = mode.map.surface;
 
         function click() {
             var datum = d3.select(d3.event.target).datum() || {},
-                node, way = this.way();
+                node, way = way();
 
             // connect a way to an existing way
             if (datum.type === 'node') {
                 node = datum;
             } else {
-                node = iD.Node({loc: this.map.mouseCoordinates()});
+                node = iD.Node({loc: mode.map.mouseCoordinates()});
             }
 
-            this.history.perform(iD.actions.startWay(way));
-            this.history.perform(iD.actions.addWayNode(way, node));
+            mode.history.perform(iD.actions.startWay(way));
+            mode.history.perform(iD.actions.addWayNode(way, node));
 
-            this.controller.enter(iD.modes.DrawArea(way.id));
+            mode.controller.enter(iD.modes.DrawArea(way.id));
         }
 
-        surface.on('click.addarea', click.bind(this));
+        surface.on('click.addarea', click);
 
-        this.map.keybinding().on('⎋.exit', function() {
-            this.controller.exit();
-        }.bind(this));
-    },
+        mode.map.keybinding().on('⎋.exit', function() {
+            mode.controller.exit();
+        });
+    };
 
-    exit: function() {
+    mode.exit = function() {
         window.setTimeout(function() {
-            this.map.dblclickEnable(true);
-        }.bind(this), 1000);
-        this.map.surface.on('click.addarea', null);
-        this.map.keybinding().on('⎋.exit', null);
-    }
+            mode.map.dblclickEnable(true);
+        }, 1000);
+        mode.map.surface.on('click.addarea', null);
+        mode.map.keybinding().on('⎋.exit', null);
+    };
+
+    return mode;
 };

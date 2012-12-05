@@ -26,7 +26,7 @@ window.iD = function(container) {
             .attr('id', 'bar');
 
         var buttons = bar.selectAll('button.add-button')
-            .data([iD.modes.AddPlace, iD.modes.AddRoad, iD.modes.AddArea])
+            .data([iD.modes.AddPlace(), iD.modes.AddRoad(), iD.modes.AddArea()])
             .enter().append('button')
                 .attr('class', 'add-button')
             .text(function (mode) { return mode.title; })
@@ -140,13 +140,13 @@ window.iD = function(container) {
 
         var keybinding = d3.keybinding()
             .on('a', function(evt, mods) {
-                controller.enter(iD.modes.AddArea);
+                controller.enter(iD.modes.AddArea());
             })
             .on('p', function(evt, mods) {
-                controller.enter(iD.modes.AddPlace);
+                controller.enter(iD.modes.AddPlace());
             })
             .on('r', function(evt, mods) {
-                controller.enter(iD.modes.AddRoad);
+                controller.enter(iD.modes.AddRoad());
             })
             .on('z', function(evt, mods) {
                 if (mods === '⇧⌘') history.redo();

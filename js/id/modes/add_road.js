@@ -1,10 +1,12 @@
-iD.modes.AddRoad = {
-    id: 'add-road',
-    title: '+ Road',
+iD.modes.AddRoad = function() {
+    var mode = {
+        id: 'add-road',
+        title: '+ Road'
+    };
 
-    enter: function() {
-        this.map.dblclickEnable(false);
-        var surface = this.map.surface;
+    mode.enter = function() {
+        mode.map.dblclickEnable(false);
+        var surface = mode.map.surface;
 
         // http://bit.ly/SwUwIL
         // http://bit.ly/WxqGng
@@ -20,7 +22,7 @@ iD.modes.AddRoad = {
                 node = datum;
 
                 var id = datum.id;
-                var parents = this.history.graph().parents(id);
+                var parents = mode.history.graph().parents(id);
                 if (parents.length) {
                     if (parents[0].nodes[0] === id) {
                         way = parents[0];
@@ -33,34 +35,37 @@ iD.modes.AddRoad = {
                 }
             } else if (datum.type === 'way') {
                 // begin a new way starting from an existing way
-                node = iD.Node({loc: this.map.mouseCoordinates()});
+                node = iD.Node({loc: mode.map.mouseCoordinates()});
 
-                var index = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), this.map);
-                var connectedWay = this.history.graph().entity(datum.id);
-                this.history.perform(iD.actions.addWayNode(connectedWay, node, index));
+                var index = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), mode.map);
+                var connectedWay = mode.history.graph().entity(datum.id);
+                mode.history.perform(iD.actions.addWayNode(connectedWay, node, index));
             } else {
                 // begin a new way
-                node = iD.Node({loc: this.map.mouseCoordinates()});
+                node = iD.Node({loc: mode.map.mouseCoordinates()});
             }
 
             if (start) {
-                this.history.perform(iD.actions.startWay(way));
-                this.history.perform(iD.actions.addWayNode(way, node));
+                mode.history.perform(iD.actions.startWay(way));
+                mode.history.perform(iD.actions.addWayNode(way, node));
             }
 
-            this.controller.enter(iD.modes.DrawRoad(way.id, direction));
+            mode.controller.enter(iD.modes.DrawRoad(way.id, direction));
         }
 
-        surface.on('click.addroad', click.bind(this));
+        surface.on('click.addroad', click);
 
-        this.map.keybinding().on('⎋.exit', function() {
-            this.controller.exit();
-        }.bind(this));
-    },
-    exit: function() {
-        this.map.dblclickEnable(true);
-        this.map.surface.on('click.addroad', null);
-        this.map.keybinding().on('⎋.exit', null);
+        mode.map.keybinding().on('⎋.exit', function() {
+            mode.controller.exit();
+        });
+    };
+
+    mode.exit = function() {
+        mode.map.dblclickEnable(true);
+        mode.map.surface.on('click.addroad', null);
+        mode.map.keybinding().on('⎋.exit', null);
         d3.selectAll('#addroad').remove();
-    }
+    };
+
+    return mode;
 };

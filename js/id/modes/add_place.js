@@ -1,26 +1,30 @@
-iD.modes.AddPlace = {
-    id: 'add-place',
-    title: '+ Place',
+iD.modes.AddPlace = function() {
+    var mode = {
+        id: 'add-place',
+        title: '+ Place'
+    };
 
-    enter: function() {
-        var surface = this.map.surface;
+    mode.enter = function() {
+        var surface = mode.map.surface;
 
         function click() {
-            var node = iD.Node({loc: this.map.mouseCoordinates(), _poi: true});
-            this.history.perform(iD.actions.addNode(node));
-            this.controller.enter(iD.modes.Select(node));
+            var node = iD.Node({loc: mode.map.mouseCoordinates(), _poi: true});
+            mode.history.perform(iD.actions.addNode(node));
+            mode.controller.enter(iD.modes.Select(node));
         }
 
-        surface.on('click.addplace', click.bind(this));
+        surface.on('click.addplace', click);
 
-        this.map.keybinding().on('⎋.exit', function() {
-            this.controller.exit();
-        }.bind(this));
-    },
+        mode.map.keybinding().on('⎋.exit', function() {
+            mode.controller.exit();
+        });
+    };
 
-    exit: function() {
-        this.map.surface
+    mode.exit = function() {
+        mode.map.surface
             .on('click.addplace', null);
-        this.map.keybinding().on('⎋.exit', null);
-    }
+        mode.map.keybinding().on('⎋.exit', null);
+    };
+
+    return mode;
 };
