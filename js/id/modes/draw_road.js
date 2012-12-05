@@ -1,5 +1,7 @@
 iD.modes.DrawRoad = function(way_id, direction) {
-    var mode = {};
+    var mode = {
+        button: 'road'
+    };
 
     mode.enter = function() {
         mode.map.dblclickEnable(false);

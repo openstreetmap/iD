@@ -1,5 +1,6 @@
 iD.modes.Browse = function() {
     var mode = {
+        button: 'browse',
         id: 'browse',
         title: 'Browse',
         description: 'Pan and zoom the map'

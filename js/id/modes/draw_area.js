@@ -1,5 +1,7 @@
 iD.modes.DrawArea = function(way_id) {
-    var mode = {};
+    var mode = {
+        button: 'area'
+    };
 
     mode.enter = function() {
 

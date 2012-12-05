@@ -1,5 +1,7 @@
 iD.modes.Select = function (entity) {
-    var mode = {},
+    var mode = {
+        button: ''
+    },
         inspector = iD.Inspector(),
         dragging, target;
 
