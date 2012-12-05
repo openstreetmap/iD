@@ -68,6 +68,9 @@ window.iD = function(container) {
         bar.append('button')
             .attr('class', 'save')
             .html("Upload<small id='as-username'></small>")
+            .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
+            .call(bootstrap.tooltip()
+                .placement('bottom'))
             .on('click', function() {
                 function save(e) {
                     d3.select('.shaded').remove();
