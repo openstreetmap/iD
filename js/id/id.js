@@ -46,13 +46,17 @@ window.iD = function(container) {
             .attr({ id: 'undo', 'class': 'mini' })
             .property('disabled', true)
             .html('&larr;<small></small>')
-            .on('click', history.undo);
+            .on('click', history.undo)
+            .call(bootstrap.tooltip()
+                .placement('bottom'));
 
         undo_buttons.append('button')
             .attr({ id: 'redo', 'class': 'mini' })
             .property('disabled', true)
             .html('&rarr;<small></small>')
-            .on('click', history.redo);
+            .on('click', history.redo)
+            .call(bootstrap.tooltip()
+                .placement('bottom'));
 
         bar.append('input')
             .attr({ type: 'text', placeholder: 'find a place', id: 'geocode-location' })
@@ -137,13 +141,11 @@ window.iD = function(container) {
 
             bar.select('#undo')
                 .property('disabled', !undo)
-                .select('small')
-                .text(undo);
+                .attr('data-original-title', undo);
 
             bar.select('#redo')
                 .property('disabled', !redo)
-                .select('small')
-                .text(redo);
+                .attr('data-original-title', redo);
         });
 
         window.onresize = function() {
