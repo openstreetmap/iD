@@ -107,18 +107,17 @@ iD.Connection = function() {
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
                 content: iD.format.XML.changeset(comment)
-            },
-            function (changeset_id) {
+            }, function (err, changeset_id) {
                 oauth.xhr({
                     method: 'POST',
                     path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
                     content: iD.format.XML.osmChange(user.id, changeset_id, changes)
-                }, function () {
+                }, function (err) {
                     oauth.xhr({
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close'
-                    }, function () {
+                    }, function (err) {
                         callback(changeset_id);
                     });
                 });
@@ -126,7 +125,7 @@ iD.Connection = function() {
     }
 
     function userDetails(callback) {
-        oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, function(user_details) {
+        oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, function(err, user_details) {
             var u = user_details.getElementsByTagName('user')[0];
             callback(connection.user({
                 display_name: u.attributes.display_name.nodeValue,

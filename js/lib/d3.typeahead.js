@@ -13,7 +13,7 @@ d3.typeahead = function() {
                     top: rect.bottom + 'px'
                 });
             selection
-                .on('keyup.update', update);
+                .on('keyup.typeahead', update);
             hidden = false;
         }
 
@@ -26,8 +26,8 @@ d3.typeahead = function() {
         }
 
         selection
-            .on('focus', setup)
-            .on('blur', hide);
+            .on('focus.typeahead', setup)
+            .on('blur.typeahead', hide);
 
         var idx = 0;
         function update() {

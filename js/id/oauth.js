@@ -49,9 +49,9 @@ iD.OAuth = function() {
         var oauth_token_secret = token('oauth_token_secret');
         o.oauth_signature = ohauth.signature(oauth_secret, oauth_token_secret,
             ohauth.baseString(options.method, url, o));
-        ohauth.xhr(options.method, url, o, options.content, options.options, function(xhr) {
-            if (xhr.responseXML) callback(xhr.responseXML);
-            else callback(xhr.response);
+        ohauth.xhr(options.method, url, o, options.content, options.options, function(err, xhr) {
+            if (xhr.responseXML) callback(err, xhr.responseXML);
+            else callback(err, xhr.response);
         });
     };
 
