@@ -29,7 +29,7 @@ window.iD = function(container) {
             .attr('class', 'buttons-joined');
 
         var buttons = buttons_joined.selectAll('button.add-button')
-            .data([iD.modes.AddPlace(), iD.modes.AddRoad(), iD.modes.AddArea()])
+            .data([iD.modes.Browse(), iD.modes.AddPlace(), iD.modes.AddRoad(), iD.modes.AddArea()])
             .enter().append('button')
                 .attr('class', 'add-button')
             .text(function (mode) { return mode.title; })
@@ -65,7 +65,7 @@ window.iD = function(container) {
             map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
         };
 
-        bar.append('div')
+        this.append('div')
             .attr('class', 'user')
             .append('div')
             .attr('class', 'hello');

@@ -1,5 +1,9 @@
 iD.modes.Browse = function() {
-    var mode = {};
+    var mode = {
+        id: 'browse',
+        title: 'Browse',
+        description: 'Pan and zoom the map'
+    };
 
     mode.enter = function() {
         mode.map.surface.on('click.browse', function () {
