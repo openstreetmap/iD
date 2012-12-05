@@ -61,6 +61,24 @@ describe('Entity', function () {
            expect(iD.Entity({id: 'w-1234'}).update({}).modified()).not.to.be.ok;
         });
     });
+
+    describe("#hasInterestingTags", function () {
+        it("returns false if the entity has no tags", function () {
+            expect(iD.Entity().hasInterestingTags()).to.equal(false);
+        });
+
+        it("returns true if the entity has tags other than 'attribution', 'created_by', 'source', 'odbl' and tiger tags", function () {
+            expect(iD.Entity({tags: {foo: 'bar'}}).hasInterestingTags()).to.equal(true);
+        });
+
+        it("return false if the entity has only uninteresting tags", function () {
+            expect(iD.Entity({tags: {source: 'Bing'}}).hasInterestingTags()).to.equal(false);
+        });
+
+        it("return false if the entity has only tiger tags", function () {
+            expect(iD.Entity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
+        });
+    });
 });
 
 describe('Node', function () {

@@ -11,10 +11,10 @@ iD.modes.DrawArea = function(way_id) {
             firstnode_id = _.first(way.nodes),
             node = iD.Node({loc: mode.map.mouseCoordinates()});
 
-        mode.history.perform(iD.actions.addWayNode(way, node));
+        mode.history.perform(iD.actions.AddWayNode(way, node));
 
         mode.map.surface.on('mousemove.drawarea', function() {
-            mode.history.replace(iD.actions.addWayNode(way, node.update({loc: mode.map.mouseCoordinates()})));
+            mode.history.replace(iD.actions.AddWayNode(way, node.update({loc: mode.map.mouseCoordinates()})));
         });
 
         mode.map.surface.on('click.drawarea', function() {
@@ -25,20 +25,20 @@ iD.modes.DrawArea = function(way_id) {
             if (datum.type === 'node') {
                 if (datum.id == firstnode_id) {
                     mode.history.replace(iD.actions.DeleteNode(node));
-                    mode.history.replace(iD.actions.addWayNode(way,
+                    mode.history.replace(iD.actions.AddWayNode(way,
                         mode.history.graph().entity(way.nodes[0])));
                     way = mode.history.graph().entity(way.id);
-                    mode.history.perform(iD.actions.changeTags(way, _.omit(way.tags, 'elastic')));
+                    mode.history.perform(iD.actions.ChangeEntityTags(way, _.omit(way.tags, 'elastic')));
 
                     // End by clicking on own tail
                     return mode.controller.enter(iD.modes.Select(way));
                 } else {
                     // connect a way to an existing way
-                    mode.history.replace(iD.actions.addWayNode(way, datum));
+                    mode.history.replace(iD.actions.AddWayNode(way, datum));
                 }
             } else {
                 node = node.update({loc: mode.map.mouseCoordinates()});
-                mode.history.replace(iD.actions.addWayNode(way, node));
+                mode.history.replace(iD.actions.AddWayNode(way, node));
             }
 
             mode.controller.enter(iD.modes.DrawArea(way_id));

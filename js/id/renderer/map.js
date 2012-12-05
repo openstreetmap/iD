@@ -26,16 +26,16 @@ iD.Map = function() {
                 if (!dragging) {
                     if (entity.accuracy) {
                         var way = history.graph().entity(entity.way);
-                        history.perform(iD.actions.addWayNode(way, iD.Node(entity), entity.index));
+                        history.perform(iD.actions.AddWayNode(way, iD.Node(entity), entity.index));
                     }
 
                     dragging = iD.util.trueObj([entity.id].concat(
                         _.pluck(history.graph().parentWays(entity.id), 'id')));
-                    history.perform(iD.actions.noop());
+                    history.perform(iD.actions.Noop());
                 }
 
                 var to = projection.invert([d3.event.x, d3.event.y]);
-                history.replace(iD.actions.move(entity, to));
+                history.replace(iD.actions.Move(entity, to));
 
                 redraw();
             })

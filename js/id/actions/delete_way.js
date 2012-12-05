@@ -3,16 +3,20 @@ iD.actions.DeleteWay = function(way) {
     return function(graph) {
         graph.parentRelations(way.id)
             .forEach(function(parent) {
-                graph = iD.actions.removeRelationEntity(parent, way)(graph);
+                graph = iD.actions.RemoveRelationMember(parent, way)(graph);
             });
 
         way.nodes.forEach(function (id) {
             var node = graph.entity(id);
 
-            graph = iD.actions.removeWayNode(way, node)(graph);
+            graph = iD.actions.RemoveWayNode(way, node)(graph);
 
             if (!graph.parentWays(id).length && !graph.parentRelations(id).length) {
-                graph = graph.remove(node);
+                if (!node.hasInterestingTags()) {
+                    graph = graph.remove(node);
+                } else {
+                    graph = graph.replace(node.update({_poi: true}));
+                }
             }
         });
 

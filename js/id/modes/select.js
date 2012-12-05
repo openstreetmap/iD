@@ -16,14 +16,14 @@ iD.modes.Select = function (entity) {
             if (!dragging) {
                 dragging = iD.util.trueObj([entity.id].concat(
                     _.pluck(mode.history.graph().parentWays(entity.id), 'id')));
-                mode.history.perform(iD.actions.noop());
+                mode.history.perform(iD.actions.Noop());
             }
 
             entity.nodes.forEach(function(node) {
                 var start = mode.map.projection(node.loc);
                 var end = mode.map.projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
                 node.loc = end;
-                mode.history.replace(iD.actions.move(node, end));
+                mode.history.replace(iD.actions.Move(node, end));
             });
         })
         .on('dragend', function () {
@@ -53,9 +53,9 @@ iD.modes.Select = function (entity) {
             .call(inspector);
 
         inspector.on('changeTags', function(d, tags) {
-            mode.history.perform(iD.actions.changeTags(history.graph().entity(d.id), tags));
+            mode.history.perform(iD.actions.ChangeEntityTags(history.graph().entity(d.id), tags));
         }).on('changeWayDirection', function(d) {
-            mode.history.perform(iD.actions.changeWayDirection(d));
+            mode.history.perform(iD.actions.ReverseWay(d));
         }).on('remove', function() {
             remove();
         }).on('close', function() {

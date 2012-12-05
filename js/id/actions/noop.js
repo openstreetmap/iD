@@ -1,4 +1,4 @@
-iD.actions.noop = function() {
+iD.actions.Noop = function() {
     return function(graph) {
         return graph;
     };

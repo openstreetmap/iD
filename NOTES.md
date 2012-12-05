@@ -89,7 +89,7 @@ reverting to the previous version.
 
 The persistent data structure approach also takes advantage of the fact that the typical change modifies
 only a small portion of the graph. The unchanged majority of the graph is shared between revisions,
-keeping memory use to a minimum. For example, the `iD.actions.removeWayNode` action removes a single
+keeping memory use to a minimum. For example, the `iD.actions.RemoveWayNode` action removes a single
 node from a way. It produces new versions of three objects:
 
 * The Array of nodes in the way.

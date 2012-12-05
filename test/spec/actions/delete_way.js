@@ -31,6 +31,19 @@ describe("iD.actions.DeleteWay", function () {
         expect(graph.entity(node.id)).not.to.be.undefined;
     });
 
-    it("does not delete member nodes with interesting tags");
-    it("registers member nodes with interesting tags as POIs");
+    it("does not delete member nodes with interesting tags", function () {
+        var node   = iD.Node({tags: {highway: 'traffic_signals'}}),
+            way    = iD.Way({nodes: [node.id]}),
+            action = iD.actions.DeleteWay(way),
+            graph  = action(iD.Graph([node, way]));
+        expect(graph.entity(node.id)).not.to.be.undefined;
+    });
+
+    it("registers member nodes with interesting tags as POIs", function () {
+        var node   = iD.Node({tags: {highway: 'traffic_signals'}}),
+            way    = iD.Way({nodes: [node.id]}),
+            action = iD.actions.DeleteWay(way),
+            graph  = action(iD.Graph([node, way]));
+        expect(graph.entity(node.id)._poi).to.be.ok;
+    });
 });
