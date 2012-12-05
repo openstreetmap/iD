@@ -78,7 +78,7 @@ table th {
 #map {
     display:block;
     position:absolute;
-    top:40px;
+    top:45px;
     left:0;
     right:0;
     bottom:0;
@@ -98,7 +98,7 @@ table th {
     position:absolute;
     left:0px;
     top:0px;
-    height:40px;
+    height:45px;
     right:0;
 }
 
@@ -118,11 +118,30 @@ input#geocode-location {
     font-weight:bold;
     font-size:14px;
     line-height:19px;
-    border:0;
-    border-right:1px solid #eee;
+    border:1px solid #ccc;
+    border-radius:3px;
     padding:0 10px;
-    height:40px;
+    height:35px;
     margin:0;
+}
+
+div.buttons-joined {
+    padding:5px;
+    display:inline-block;
+}
+
+#bar div.buttons-joined button:first-child {
+    border-radius:3px 0 0 3px;
+    border-right:0;
+}
+#bar div.buttons-joined button:last-child {
+    border-right:1px solid #ccc;
+    border-radius:0 3px 3px 0;
+}
+
+#bar div.buttons-joined button {
+    border-right:0;
+    border-radius:0;
 }
 
 #bar .messages {
@@ -160,8 +179,6 @@ input#geocode-location {
     position:absolute;
     top:0;
     right:100px;
-    background:#7092ff;
-    color:#fff;
 }
 
 #bar button.mini,
@@ -179,16 +196,28 @@ input#geocode-location {
 
 .zoombuttons {
     position:absolute;
-    right:0;
-    top:0;
+    left:10px;
+    top:50px;
+    width:40px;
 }
+
 #bar .zoombuttons button {
-    width:50px;
+    width:40px;
+    border:1px solid #ccc;
+}
+
+#bar .zoombuttons button.zoom-in {
+    border-bottom:0;
+    border-radius:5px 5px 0 0;
+}
+
+#bar .zoombuttons button.zoom-out {
+    border-radius:0 0 5px 5px;
 }
 
 .inspector-wrap {
     position:absolute;
-    top:40px;
+    top:45px;
     right:0px;
     overflow:auto;
     padding:10px;

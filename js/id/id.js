@@ -25,7 +25,10 @@ window.iD = function(container) {
         var bar = this.append('div')
             .attr('id', 'bar');
 
-        var buttons = bar.selectAll('button.add-button')
+        var buttons_joined = bar.append('div')
+            .attr('class', 'buttons-joined');
+
+        var buttons = buttons_joined.selectAll('button.add-button')
             .data([iD.modes.AddPlace(), iD.modes.AddRoad(), iD.modes.AddArea()])
             .enter().append('button')
                 .attr('class', 'add-button')
@@ -36,13 +39,16 @@ window.iD = function(container) {
             buttons.classed('active', function (mode) { return entered === mode; });
         });
 
-        bar.append('button')
+        var undo_buttons = bar.append('div')
+            .attr('class', 'buttons-joined');
+
+        undo_buttons.append('button')
             .attr({ id: 'undo', 'class': 'mini' })
             .property('disabled', true)
             .html('&larr;<small></small>')
             .on('click', history.undo);
 
-        bar.append('button')
+        undo_buttons.append('button')
             .attr({ id: 'redo', 'class': 'mini' })
             .property('disabled', true)
             .html('&rarr;<small></small>')
