@@ -139,13 +139,15 @@ iD.Map = function() {
     function accuracyHandles(way) {
         var handles = [];
         for (var i = 0; i < way.nodes.length - 1; i++) {
-            handles[i] = {
-                loc: iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5),
-                way: way.id,
-                index: i + 1,
-                accuracy: true,
-                tags: { name: 'Improve way accuracy' }
-            };
+            if (iD.util.geo.dist(way.nodes[i].loc, way.nodes[i + 1].loc) > 0.0001) {
+                handles.push({
+                    loc: iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5),
+                    way: way.id,
+                    index: i + 1,
+                    accuracy: true,
+                    tags: { name: 'Improve way accuracy' }
+                });
+            }
         }
         return handles;
     }
