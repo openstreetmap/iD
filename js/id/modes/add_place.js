@@ -5,25 +5,20 @@ iD.modes.AddPlace = function() {
     };
 
     mode.enter = function() {
-        var surface = mode.map.surface;
-
-        function click() {
+        mode.map.surface.on('click.addplace', function() {
             var node = iD.Node({loc: mode.map.mouseCoordinates(), _poi: true});
             mode.history.perform(iD.actions.addNode(node));
             mode.controller.enter(iD.modes.Select(node));
-        }
+        });
 
-        surface.on('click.addplace', click);
-
-        mode.map.keybinding().on('⎋.exit', function() {
+        mode.map.keybinding().on('⎋.addplace', function() {
             mode.controller.exit();
         });
     };
 
     mode.exit = function() {
-        mode.map.surface
-            .on('click.addplace', null);
-        mode.map.keybinding().on('⎋.exit', null);
+        mode.map.surface.on('click.addplace', null);
+        mode.map.keybinding().on('⎋.addplace', null);
     };
 
     return mode;

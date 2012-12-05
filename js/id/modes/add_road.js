@@ -6,11 +6,8 @@ iD.modes.AddRoad = function() {
 
     mode.enter = function() {
         mode.map.dblclickEnable(false);
-        var surface = mode.map.surface;
 
-        // http://bit.ly/SwUwIL
-        // http://bit.ly/WxqGng
-        function click() {
+        mode.map.surface.on('click.addroad', function() {
             var datum = d3.select(d3.event.target).datum() || {},
                 node,
                 direction = 'forward',
@@ -37,7 +34,7 @@ iD.modes.AddRoad = function() {
                 // begin a new way starting from an existing way
                 node = iD.Node({loc: mode.map.mouseCoordinates()});
 
-                var index = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), mode.map);
+                var index = iD.util.geo.chooseIndex(datum, d3.mouse(mode.map.surface.node()), mode.map);
                 var connectedWay = mode.history.graph().entity(datum.id);
                 mode.history.perform(iD.actions.addWayNode(connectedWay, node, index));
             } else {
@@ -51,11 +48,9 @@ iD.modes.AddRoad = function() {
             }
 
             mode.controller.enter(iD.modes.DrawRoad(way.id, direction));
-        }
+        });
 
-        surface.on('click.addroad', click);
-
-        mode.map.keybinding().on('⎋.exit', function() {
+        mode.map.keybinding().on('⎋.addroad', function() {
             mode.controller.exit();
         });
     };
@@ -63,8 +58,7 @@ iD.modes.AddRoad = function() {
     mode.exit = function() {
         mode.map.dblclickEnable(true);
         mode.map.surface.on('click.addroad', null);
-        mode.map.keybinding().on('⎋.exit', null);
-        d3.selectAll('#addroad').remove();
+        mode.map.keybinding().on('⎋.addroad', null);
     };
 
     return mode;
