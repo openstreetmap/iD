@@ -36,12 +36,11 @@ all: \
 
 iD.js: Makefile
 	@rm -f $@
-	cat $(filter %.js,$^) | $(JS_BEAUTIFIER) > $@
-	@chmod a-w $@
+	cat $(filter %.js,$^) > $@
 
 %.min.js: %.js Makefile
 	@rm -f $@
-	$(JS_COMPILER) < $< > $@
+	$(JS_COMPILER) $< -o $@
 
 clean:
 	rm -f iD*.js
