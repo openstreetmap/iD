@@ -25,8 +25,10 @@ iD.Map = function() {
 
                 if (!dragging) {
                     if (entity.accuracy) {
-                        var way = history.graph().entity(entity.way);
-                        history.perform(iD.actions.AddWayNode(way, iD.Node(entity), entity.index));
+                        var way = history.graph().entity(entity.way),
+                            index = entity.index;
+                        entity = iD.Node(entity);
+                        history.perform(iD.actions.AddWayNode(way, entity, index));
                     }
 
                     dragging = iD.util.trueObj([entity.id].concat(
