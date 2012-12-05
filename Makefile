@@ -26,6 +26,7 @@ all: \
 	js/id/oauth.js \
 	js/id/taginfo.js \
 	js/id/util.js \
+	js/id/actions.js \
 	js/id/actions/*.js \
 	js/id/modes.js \
 	js/id/modes/*.js \
