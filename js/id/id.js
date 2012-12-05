@@ -60,11 +60,6 @@ window.iD = function(container) {
             .call(bootstrap.tooltip()
                 .placement('bottom'));
 
-
-        window.grid = function(resp) {
-            map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
-        };
-
         this.append('div')
             .attr('class', 'user')
             .append('div')
@@ -133,10 +128,10 @@ window.iD = function(container) {
             .on('keydown', function () {
                 if (d3.event.keyCode !== 13) return;
                 d3.event.preventDefault();
-                var val = this.value;
-                d3.select(document.body).append('script')
-                    .attr('src', 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
-                        encodeURIComponent(val) + '.jsonp?callback=grid');
+                d3.json('http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
+                    encodeURIComponent(this.value) + '.json', function(err, resp) {
+                    map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
+                });
             });
 
         this.append('div')
