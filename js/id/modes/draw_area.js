@@ -24,9 +24,10 @@ iD.modes.DrawArea = function(way_id) {
 
             if (datum.type === 'node') {
                 if (datum.id == firstnode_id) {
+                    mode.history.replace(iD.actions.DeleteNode(node));
                     mode.history.replace(iD.actions.addWayNode(way,
                         mode.history.graph().entity(way.nodes[0])));
-
+                    way = mode.history.graph().entity(way.id);
                     mode.history.perform(iD.actions.changeTags(way, _.omit(way.tags, 'elastic')));
 
                     // End by clicking on own tail
@@ -45,6 +46,16 @@ iD.modes.DrawArea = function(way_id) {
 
         mode.map.keybinding().on('⎋.drawarea', function() {
             mode.controller.exit();
+        })
+        .on('⌫.drawarea', function() {
+            d3.event.preventDefault();
+            var lastNode = _.last(way.nodes);
+            mode.history.replace(iD.actions.removeWayNode(way,
+                mode.history.graph().entity(lastNode)));
+            mode.history.replace(iD.actions.DeleteNode(
+                mode.history.graph().entity(lastNode)));
+            mode.history.replace(iD.actions.DeleteNode(node));
+            mode.controller.enter(iD.modes.DrawArea(way_id));
         });
     };
 
@@ -53,7 +64,8 @@ iD.modes.DrawArea = function(way_id) {
         mode.map.surface
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);
-        mode.map.keybinding().on('⎋.drawarea', null);
+        mode.map.keybinding().on('⎋.drawarea', null)
+            .on('⌫.drawarea', null);
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);

@@ -17,7 +17,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
         mode.history.perform(iD.actions.addWayNode(way, node, index));
 
         mode.map.surface.on('mousemove.drawroad', function() {
-            mode.history.replace(iD.actions.addWayNode(way, node.update({loc: mode.map.mouseCoordinates()}), index));
+            mode.history.replace(iD.actions.addWayNode(way,
+                node.update({loc: mode.map.mouseCoordinates()}), index));
         });
 
         mode.map.surface.on('click.drawroad', function() {
@@ -63,6 +64,16 @@ iD.modes.DrawRoad = function(way_id, direction) {
         mode.map.keybinding().on('⎋.drawroad', function() {
             mode.controller.exit();
         });
+
+        mode.map.keybinding().on('⌫.drawroad', function() {
+            d3.event.preventDefault();
+            mode.history.replace(iD.actions.removeWayNode(way,
+                mode.history.graph().entity(lastNode)));
+            mode.history.replace(iD.actions.DeleteNode(
+                mode.history.graph().entity(lastNode)));
+            mode.history.replace(iD.actions.DeleteNode(node));
+            mode.controller.enter(iD.modes.DrawRoad(way_id, direction));
+        });
     };
 
     mode.exit = function() {
@@ -70,7 +81,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
         mode.map.surface
             .on('mousemove.drawroad', null)
             .on('click.drawroad', null);
-        mode.map.keybinding().on('⎋.drawroad', null);
+        mode.map.keybinding().on('⎋.drawroad', null)
+            .on('⌫.drawroad', null);
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
             mode.map.dragEnable(true);
