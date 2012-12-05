@@ -50,6 +50,26 @@ describe('Graph', function() {
         });
     });
 
+    describe("#parentWays", function() {
+        it("returns an array of ways that contain the given node id", function () {
+            var node  = iD.Node({id: "n1"}),
+                way   = iD.Way({id: "w1", nodes: ["n1"]}),
+                graph = iD.Graph({n1: node, w1: way});
+            expect(graph.parentWays("n1")).to.eql([way]);
+            expect(graph.parentWays("n2")).to.eql([]);
+        });
+    });
+
+    describe("#parentRelations", function() {
+        it("returns an array of relations that contain the given entity id", function () {
+            var node     = iD.Node({id: "n1"}),
+                relation = iD.Relation({id: "r1", members: ["n1"]}),
+                graph    = iD.Graph({n1: node, r1: relation});
+            expect(graph.parentRelations("n1")).to.eql([relation]);
+            expect(graph.parentRelations("n2")).to.eql([]);
+        });
+    });
+
     describe("#fetch", function () {
         it("replaces node ids with references", function () {
             var node  = iD.Node({id: "n1"}),

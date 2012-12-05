@@ -15,7 +15,7 @@ iD.modes.Select = function (entity) {
 
             if (!dragging) {
                 dragging = iD.util.trueObj([entity.id].concat(
-                    _.pluck(mode.history.graph().parents(entity.id), 'id')));
+                    _.pluck(mode.history.graph().parentWays(entity.id), 'id')));
                 mode.history.perform(iD.actions.noop());
             }
 
@@ -33,12 +33,6 @@ iD.modes.Select = function (entity) {
         });
 
     function remove() {
-        // Remove this node from any ways that is a member of
-        mode.history.graph().parents(entity.id)
-            .filter(function(d) { return d.type === 'way'; })
-            .forEach(function(parent) {
-                mode.history.perform(iD.actions.removeWayNode(parent, entity));
-            });
         mode.history.perform(iD.actions.remove(entity));
         mode.controller.exit();
     }

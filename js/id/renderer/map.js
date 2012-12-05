@@ -30,7 +30,7 @@ iD.Map = function() {
                     }
 
                     dragging = iD.util.trueObj([entity.id].concat(
-                        _.pluck(history.graph().parents(entity.id), 'id')));
+                        _.pluck(history.graph().parentWays(entity.id), 'id')));
                     history.perform(iD.actions.noop());
                 }
 

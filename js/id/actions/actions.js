@@ -20,9 +20,19 @@ iD.actions.startWay = function(way) {
 };
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as
-iD.actions.remove = function(node) {
+iD.actions.remove = function(entity) {
     return function(graph) {
-        return graph.remove(node, 'removed a feature');
+        graph.parentWays(entity.id)
+            .forEach(function(parent) {
+                graph = iD.actions.removeWayNode(parent, entity)(graph);
+            });
+
+        graph.parentRelations(entity.id)
+            .forEach(function(parent) {
+                graph = iD.actions.removeRelationEntity(parent, entity)(graph);
+            });
+
+        return graph.remove(entity, 'removed a feature');
     };
 };
 
@@ -39,6 +49,13 @@ iD.actions.removeWayNode = function(way, node) {
     return function(graph) {
         var nodes = _.without(way.nodes, node.id);
         return graph.replace(way.update({nodes: nodes}), 'removed from a road');
+    };
+};
+
+iD.actions.removeRelationEntity = function(relation, entity) {
+    return function(graph) {
+        var members = _.without(relation.members, entity.id);
+        return graph.replace(relation.update({members: members}), 'removed from a relation');
     };
 };
 
