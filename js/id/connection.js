@@ -62,8 +62,11 @@ iD.Connection = function() {
             var v = obj.attributes[i].nodeValue;
             o[n] = v;
         }
-        if (o.lat) o.lat = parseFloat(o.lat);
-        if (o.lon) o.lon = parseFloat(o.lon);
+        if (o.lon && o.lat) {
+            o.loc = [parseFloat(o.lon), parseFloat(o.lat)];
+            delete o.lon;
+            delete o.lat;
+        }
         o._id = o.id;
         o.id = o.type[0] + o.id;
         return iD.Entity(o);

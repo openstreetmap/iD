@@ -76,7 +76,8 @@ iD.format.XML = {
             var r = {
                 node: {
                     '@id': entity.id.replace('n', ''),
-                    '@lat': entity.lat, '@lon': entity.lon,
+                    '@lon': entity.loc[0],
+                    '@lat': entity.loc[1],
                     '@version': (entity.version || 0),
                     tag: _.map(entity.tags, function(v, k) {
                         return { keyAttributes: { k: k, v: v } };

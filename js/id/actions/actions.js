@@ -61,12 +61,9 @@ iD.actions.changeTags = function(node, tags) {
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
-iD.actions.move = function(entity, to) {
+iD.actions.move = function(entity, loc) {
     return function(graph) {
-        return graph.replace(entity.update({
-            lon: to.lon || to[0],
-            lat: to.lat || to[1]
-        }), 'moved an element');
+        return graph.replace(entity.update({loc: loc}), 'moved an element');
     };
 };
 

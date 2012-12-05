@@ -18,7 +18,7 @@ iD.Map = function() {
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
                 if (!dragEnabled) return { x: 0, y: 0 };
-                var p = projection(ll2a(entity));
+                var p = projection(entity.loc);
                 return { x: p[0], y: p[1] };
             })
             .on('drag', function(entity) {
@@ -47,7 +47,7 @@ iD.Map = function() {
             }),
         waydragbehavior = d3.behavior.drag()
             .origin(function(entity) {
-                var p = projection(ll2a(entity.nodes[0]));
+                var p = projection(entity.nodes[0].loc);
                 return { x: p[0], y: p[1] };
             })
             .on('drag', function(entity) {
@@ -62,10 +62,9 @@ iD.Map = function() {
                 }
 
                 entity.nodes.forEach(function(node) {
-                    var start = projection(ll2a(node));
+                    var start = projection(node.loc);
                     var end = projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
-                    node.lon = end[0];
-                    node.lat = end[1];
+                    node.loc = end;
                     history.replace(iD.actions.move(node, end));
                 });
             })
@@ -133,13 +132,12 @@ iD.Map = function() {
         map.surface = surface;
     }
 
-    function ll2a(o) { return [o.lon, o.lat]; }
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
     function classActive(d) { return d.id === selection; }
     function getline(d) { return d._line; }
     function key(d) { return d.id; }
     function nodeline(d) {
-        return 'M' + d.nodes.map(ll2a).map(projection).map(iD.util.geo.roundCoords).join('L');
+        return 'M' + _.pluck(d.nodes, 'loc').map(projection).map(iD.util.geo.roundCoords).join('L');
     }
 
     function hideInspector() {
@@ -189,7 +187,8 @@ iD.Map = function() {
     function accuracyHandles(way) {
         var handles = [];
         for (var i = 0; i < way.nodes.length - 1; i++) {
-            handles[i] = iD.Node(iD.util.geo.interp(way.nodes[i], way.nodes[i + 1], 0.5));
+            handles[i] = iD.Node();
+            handles[i].loc = iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5);
             handles[i].way = way.id;
             handles[i].index = i + 1;
             handles[i].accuracy = true;
@@ -210,7 +209,7 @@ iD.Map = function() {
             .attr({ width: 6, height: 6, 'class': 'handle', 'xlink:href': 'css/handle.png' })
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
-                var p = projection(ll2a(entity));
+                var p = projection(entity.loc);
                 return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
             })
             .classed('active', classActive)
@@ -225,7 +224,7 @@ iD.Map = function() {
             .attr({ r: 2, 'class': 'accuracy-handle' })
             .call(dragbehavior);
         handles.attr('transform', function(entity) {
-            var p = projection(ll2a(entity));
+            var p = projection(entity.loc);
             return 'translate(' + [~~p[0], ~~p[1]] + ')';
         }).classed('active', classActive);
     }
@@ -261,7 +260,7 @@ iD.Map = function() {
         marker.append('image')
             .attr({ width: 16, height: 16 });
         markers.attr('transform', function(d) {
-                var pt = projection([d.lon, d.lat]);
+                var pt = projection(d.loc);
                 return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
             })
             .classed('active', classActive);

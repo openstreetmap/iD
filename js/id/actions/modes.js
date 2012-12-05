@@ -1,11 +1,7 @@
 iD.modes = {};
 
 iD.modes._node = function(ll) {
-    return iD.Node({
-        lat: ll[1],
-        lon: ll[0],
-        tags: {}
-    });
+    return iD.Node({loc: ll});
 };
 
 
@@ -129,9 +125,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
             function mousemove() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
-                var node = iD.Entity(this.history.graph().entity(nextnode_id), {
-                    lon: ll[0], lat: ll[1]
-                });
+                var node = iD.Entity(this.history.graph().entity(nextnode_id), {loc: ll});
                 this.history.replace(iD.actions.addWayNode(way, node, index));
             }
 
@@ -265,10 +259,7 @@ iD.modes.DrawArea = function(way_id) {
 
             function mousemove() {
                 var ll = this.map.projection.invert(d3.mouse(surface.node()));
-                var node = iD.Entity(this.history.graph().entity(nextnode_id), {
-                    lon: ll[0],
-                    lat: ll[1]
-                });
+                var node = iD.Entity(this.history.graph().entity(nextnode_id), {loc: ll});
                 this.history.replace(iD.actions.addWayNode(way, node));
             }
 

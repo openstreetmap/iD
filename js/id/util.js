@@ -79,10 +79,8 @@ iD.util.geo.roundCoords = function(c) {
 };
 
 iD.util.geo.interp = function(p1, p2, t) {
-    return {
-        lon: p1.lon + (p2.lon - p1.lon) * t,
-        lat: p1.lat + (p2.lat - p1.lat) * t
-    };
+    return [p1[0] + (p2[0] - p1[0]) * t,
+            p1[1] + (p2[1] - p1[1]) * t]
 };
 
 iD.util.geo.dist = function(a, b) {
@@ -91,16 +89,16 @@ iD.util.geo.dist = function(a, b) {
 };
 
 iD.util.geo.nodeIntersect = function(entity, extent) {
-    return entity.lon > extent[0][0] &&
-        entity.lon < extent[1][0] &&
-        entity.lat < extent[0][1] &&
-        entity.lat > extent[1][1];
+    return entity.loc[0] > extent[0][0] &&
+        entity.loc[0] < extent[1][0] &&
+        entity.loc[1] < extent[0][1] &&
+        entity.loc[1] > extent[1][1];
 };
 
 iD.util.geo.chooseIndex = function(way, point, map) {
     var dist = iD.util.geo.dist;
     var projNodes = way.nodes.map(function(n) {
-        return map.projection([n.lon, n.lat]);
+        return map.projection(n.loc);
     });
     for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
         changes[i] =

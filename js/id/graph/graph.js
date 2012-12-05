@@ -42,10 +42,10 @@ iD.Graph.prototype = {
     },
 
     nodeIntersect: function(entity, extent) {
-        return entity.lon > extent[0][0] &&
-            entity.lon < extent[1][0] &&
-            entity.lat < extent[0][1] &&
-            entity.lat > extent[1][1];
+        return entity.loc[0] > extent[0][0] &&
+            entity.loc[0] < extent[1][0] &&
+            entity.loc[1] < extent[0][1] &&
+            entity.loc[1] > extent[1][1];
     },
 
     wayIntersect: function(entity, extent) {
@@ -61,10 +61,10 @@ iD.Graph.prototype = {
             var extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
             var w = way;
             for (var j = 0, l = w.nodes.length; j < l; j++) {
-                if (w.nodes[j].lon > extent[0][0]) extent[0][0] = w.nodes[j].lon;
-                if (w.nodes[j].lon < extent[1][0]) extent[1][0] = w.nodes[j].lon;
-                if (w.nodes[j].lat < extent[0][1]) extent[0][1] = w.nodes[j].lat;
-                if (w.nodes[j].lat > extent[1][1]) extent[1][1] = w.nodes[j].lat;
+                if (w.nodes[j].loc[0] > extent[0][0]) extent[0][0] = w.nodes[j].loc[0];
+                if (w.nodes[j].loc[0] < extent[1][0]) extent[1][0] = w.nodes[j].loc[0];
+                if (w.nodes[j].loc[1] < extent[0][1]) extent[0][1] = w.nodes[j].loc[1];
+                if (w.nodes[j].loc[1] > extent[1][1]) extent[1][1] = w.nodes[j].loc[1];
             }
             way._extent = extent;
         }

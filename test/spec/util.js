@@ -25,26 +25,26 @@ describe('Util', function() {
     describe('geo', function() {
         describe('#interp', function() {
             it('interpolates halfway', function() {
-                var a = { lat: 0, lon: 0 },
-                b = { lat: 10, lon: 10 };
-                expect(iD.util.geo.interp(a, b, 0.5)).to.eql({ lat: 5, lon: 5});
+                var a = [0, 0],
+                    b = [10, 10];
+                expect(iD.util.geo.interp(a, b, 0.5)).to.eql([5, 5]);
             });
             it('interpolates to one side', function() {
-                var a = { lat: 0, lon: 0 },
-                    b = { lat: 10, lon: 10 };
-                expect(iD.util.geo.interp(a, b, 0)).to.eql({ lat: 0, lon: 0});
+                var a = [0, 0],
+                    b = [10, 10];
+                expect(iD.util.geo.interp(a, b, 0)).to.eql([0, 0]);
             });
         });
         describe('#nodeIntersect', function() {
             it('correctly says that a node is in an extent', function() {
                 expect(iD.util.geo.nodeIntersect({
-                    lat: 0, lon: 0
+                    loc: [0, 0]
                 }, [[-180, 90],
                     [180, -90]])).to.be.true;
             });
             it('correctly says that a node is outside of an extent', function() {
                 expect(iD.util.geo.nodeIntersect({
-                    lat: 0, lon: 0
+                    loc: [0, 0]
                 }, [[100, 90],
                     [180, -90]])).to.be.false;
             });

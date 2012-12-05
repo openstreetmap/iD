@@ -11,7 +11,7 @@ iD.format.GeoJSON = {
                 properties: entity.tags,
                 geometry: {
                     type: 'Point',
-                    coordinates: [entity.lon, entity.lat]
+                    coordinates: entity.loc
                 }
             };
         },
@@ -22,7 +22,7 @@ iD.format.GeoJSON = {
                 geometry: {
                     'type': 'LineString',
                     'coordinates': entity.nodes.map(function(node) {
-                        return [node.lon, node.lat];
+                        return node.loc;
                     })
                 }
             };

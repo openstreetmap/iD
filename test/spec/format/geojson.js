@@ -2,7 +2,7 @@ describe('GeoJSON', function() {
 
   describe('#mapping', function() {
       it('should be able to map a node to geojson', function() {
-          expect(iD.format.GeoJSON.mapping({ type: 'node', lat: 38, lon: -77 }).geometry.type).to.equal('Point');
+          expect(iD.format.GeoJSON.mapping({ type: 'node', loc: [-77, 38] }).geometry.type).to.equal('Point');
       });
       it('should be able to map a way to geojson', function() {
           var way = { type: 'way', nodes: [] };

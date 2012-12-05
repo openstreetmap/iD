@@ -4,8 +4,7 @@ describe('Graph', function() {
         it('entity', function() {
             var entities = { 'n-1': {
                     type: 'node',
-                    lat: 30,
-                    lon: -80,
+                    loc: [-80, 30],
                     id: 'n-1'
                 }
             };
@@ -23,8 +22,7 @@ describe('Graph', function() {
         it('#remove', function() {
             var entities = { 'n-1': {
                     type: 'node',
-                    lat: 30,
-                    lon: -80,
+                    loc: [-80, 30],
                     id: 'n-1'
                 }
             };
@@ -36,21 +34,19 @@ describe('Graph', function() {
         it('#replace', function() {
             var entities = { 'n-1': {
                     type: 'node',
-                    lat: 30,
-                    lon: -80,
+                    loc: [-80, 30],
                     id: 'n-1'
                 }
             };
             var replacement = {
                 type: 'node',
-                lat: 40,
-                lon: -80,
+                loc: [-80, 40],
                 id: 'n-1'
             };
             var graph = iD.Graph(entities, 'first graph');
             var g2 = graph.replace(replacement, 'Removed node');
-            expect(graph.entity('n-1').lat).to.equal(30);
-            expect(g2.entity('n-1').lat).to.equal(40);
+            expect(graph.entity('n-1').loc[1]).to.equal(30);
+            expect(g2.entity('n-1').loc[1]).to.equal(40);
         });
     });
 
