@@ -60,23 +60,10 @@ window.iD = function(container) {
             .call(bootstrap.tooltip()
                 .placement('bottom'));
 
-        bar.append('input')
-            .attr({ type: 'text', placeholder: 'find a place', id: 'geocode-location' })
-            .on('keydown', function () {
-                if (d3.event.keyCode !== 13) return;
-                d3.event.preventDefault();
-                var val = d3.select('#geocode-location').node().value;
-                d3.select(document.body).append('script')
-                    .attr('src', 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
-                        encodeURIComponent(val) + '.jsonp?callback=grid');
-            });
 
         window.grid = function(resp) {
             map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
         };
-
-        bar.append('div')
-            .attr('class', 'messages');
 
         bar.append('div')
             .attr('class', 'user')
@@ -119,6 +106,9 @@ window.iD = function(container) {
                 }
             });
 
+        bar.append('div')
+            .attr('class', 'messages');
+
         var zoom = bar.append('div')
             .attr('class', 'zoombuttons')
             .selectAll('button')
@@ -126,6 +116,28 @@ window.iD = function(container) {
                 .enter().append('button').attr('class', function(d) { return d[0]; })
                 .text(function(d) { return d[1]; })
                 .on('click', function(d) { return d[2](); });
+
+        var gc = bar.append('div').attr('class', 'geocode-control');
+        gc.append('button').text('?');
+        gc.on('mouseover', function() {
+            d3.select('.geocode-control input').style('display', 'inline-block');
+        });
+        gc.on('mouseout', function() {
+            d3.select('.geocode-control input').style('display', 'none');
+        });
+        gc.append('input')
+            .attr({
+                type: 'text',
+                placeholder: 'find a place'
+            })
+            .on('keydown', function () {
+                if (d3.event.keyCode !== 13) return;
+                d3.event.preventDefault();
+                var val = this.value;
+                d3.select(document.body).append('script')
+                    .attr('src', 'http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
+                        encodeURIComponent(val) + '.jsonp?callback=grid');
+            });
 
         this.append('div')
             .attr('class', 'inspector-wrap')

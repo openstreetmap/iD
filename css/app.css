@@ -102,10 +102,19 @@ table th {
     right:0;
 }
 
-input#geocode-location {
+div.geocode-control {
     position:absolute;
-    background:#f4f4ff;
+    top:130px;
+    left:10px;
     color:#222;
+}
+
+#bar div.geocode-control button {
+    width:40px;
+}
+
+div.geocode-control input {
+    display:none;
 }
 
 #bar button {
@@ -145,19 +154,15 @@ div.buttons-joined {
 }
 
 #bar .messages {
-    position:absolute;
-    right:200px;
-    top:0;
     padding:10px;
     overflow:hidden;
     width:100px;
+    display:inline-block;
 }
 
 #bar .user {
-    width:200px;
-    position:absolute;
-    right:300px;
-    top:0;
+    width:150px;
+    display:inline-block;
     padding:10px;
 }
 
@@ -176,9 +181,7 @@ div.buttons-joined {
 }
 
 #bar button.save {
-    position:absolute;
-    top:0;
-    right:100px;
+    display:inline-block;
 }
 
 #bar button.mini,
@@ -188,8 +191,8 @@ div.buttons-joined {
 
 #bar input[type=text] {
     width:150px;
-    height:30px;
-    border:0;
+    height:20px;
+    border:1px solid #ccc;
     padding:5px;
     margin:0;
 }
