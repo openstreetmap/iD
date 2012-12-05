@@ -139,12 +139,13 @@ iD.Map = function() {
     function accuracyHandles(way) {
         var handles = [];
         for (var i = 0; i < way.nodes.length - 1; i++) {
-            handles[i] = iD.Node();
-            handles[i].loc = iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5);
-            handles[i].way = way.id;
-            handles[i].index = i + 1;
-            handles[i].accuracy = true;
-            handles[i].tags = { name: 'Improve way accuracy' };
+            handles[i] = {
+                loc: iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5),
+                way: way.id,
+                index: i + 1,
+                accuracy: true,
+                tags: { name: 'Improve way accuracy' }
+            };
         }
         return handles;
     }
