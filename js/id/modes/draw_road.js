@@ -6,7 +6,6 @@ iD.modes.DrawRoad = function(way_id, direction) {
         mode.map.dragEnable(false);
 
         var index = (direction === 'forward') ? undefined : -1,
-            surface = mode.map.surface,
             node = iD.Node({loc: mode.map.mouseCoordinates()}),
             way = mode.history.graph().entity(way_id),
             firstNode = way.nodes[0],
@@ -14,11 +13,11 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
         mode.history.perform(iD.actions.addWayNode(way, node, index));
 
-        function mousemove() {
+        mode.map.surface.on('mousemove.drawroad', function() {
             mode.history.replace(iD.actions.addWayNode(way, node.update({loc: mode.map.mouseCoordinates()}), index));
-        }
+        });
 
-        function click() {
+        mode.map.surface.on('click.drawroad', function() {
             d3.event.stopPropagation();
 
             var datum = d3.select(d3.event.target).datum() || {};
@@ -49,7 +48,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                 mode.history.replace(iD.actions.addWayNode(way, node, index));
 
                 var connectedWay = mode.history.graph().entity(datum.id);
-                var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(surface.node()), mode.map);
+                var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(mode.map.surface.node()), mode.map);
                 mode.history.perform(iD.actions.addWayNode(connectedWay, node, connectedIndex));
             } else {
                 node = node.update({loc: mode.map.mouseCoordinates()});
@@ -57,20 +56,18 @@ iD.modes.DrawRoad = function(way_id, direction) {
             }
 
             mode.controller.enter(iD.modes.DrawRoad(way_id, direction));
-        }
+        });
 
-        surface.on('mousemove.drawroad', mousemove)
-            .on('click.drawroad', click);
-
-        mode.map.keybinding().on('⎋.exit', function() {
+        mode.map.keybinding().on('⎋.drawroad', function() {
             mode.controller.exit();
         });
     };
 
     mode.exit = function() {
-        mode.map.surface.on('mousemove.drawroad', null)
+        mode.map.surface
+            .on('mousemove.drawroad', null)
             .on('click.drawroad', null);
-        mode.map.keybinding().on('⎋.exit', null);
+        mode.map.keybinding().on('⎋.drawroad', null);
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
             mode.map.dragEnable(true);

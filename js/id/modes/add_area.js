@@ -4,20 +4,13 @@ iD.modes.AddArea = function() {
         title: '+ Area'
     };
 
-    function way() {
-        return iD.Way({
-            tags: { building: 'yes', area: 'yes', elastic: 'true' }
-        });
-    }
-
     mode.enter = function() {
         mode.map.dblclickEnable(false);
 
-        var surface = mode.map.surface;
-
-        function click() {
+        mode.map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
-                node, way = way();
+                node,
+                way = iD.Way({tags: { building: 'yes', area: 'yes', elastic: 'true' }});
 
             // connect a way to an existing way
             if (datum.type === 'node') {
@@ -30,11 +23,9 @@ iD.modes.AddArea = function() {
             mode.history.perform(iD.actions.addWayNode(way, node));
 
             mode.controller.enter(iD.modes.DrawArea(way.id));
-        }
+        });
 
-        surface.on('click.addarea', click);
-
-        mode.map.keybinding().on('⎋.exit', function() {
+        mode.map.keybinding().on('⎋.addarea', function() {
             mode.controller.exit();
         });
     };
@@ -44,7 +35,7 @@ iD.modes.AddArea = function() {
             mode.map.dblclickEnable(true);
         }, 1000);
         mode.map.surface.on('click.addarea', null);
-        mode.map.keybinding().on('⎋.exit', null);
+        mode.map.keybinding().on('⎋.addarea', null);
     };
 
     return mode;
