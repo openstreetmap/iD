@@ -1,7 +1,15 @@
 iD.Graph = function(entities, annotation) {
     if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation);
 
-    this.entities = entities || {};
+    if (_.isArray(entities)) {
+        this.entities = {};
+        for (var i = 0; i < entities.length; i++) {
+            this.entities[entities[i].id] = entities[i];
+        }
+    } else {
+        this.entities = entities || {};
+    }
+
     this.annotation = annotation;
 
     if (iD.debug) {
