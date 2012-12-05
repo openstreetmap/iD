@@ -12,6 +12,9 @@ iD.Entity = function(a, b, c) {
     if (iD.debug) {
         Object.freeze(this);
         Object.freeze(this.tags);
+
+        if (this.nodes) Object.freeze(this.nodes);
+        if (this.members) Object.freeze(this.members);
     }
 };
 
