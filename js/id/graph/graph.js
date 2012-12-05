@@ -1,7 +1,15 @@
 iD.Graph = function(entities, annotation) {
     if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation);
 
-    this.entities = entities || {};
+    if (_.isArray(entities)) {
+        this.entities = {};
+        for (var i = 0; i < entities.length; i++) {
+            this.entities[entities[i].id] = entities[i];
+        }
+    } else {
+        this.entities = entities || {};
+    }
+
     this.annotation = annotation;
 
     if (iD.debug) {
@@ -15,11 +23,17 @@ iD.Graph.prototype = {
         return this.entities[id];
     },
 
-    parents: function(id) {
+    parentWays: function(id) {
         // This is slow and a bad hack.
         return _.filter(this.entities, function(e) {
-            if (e.type !== 'way') return false;
-            return e.nodes.indexOf(id) !== -1;
+            return e.type === 'way' && e.nodes.indexOf(id) !== -1;
+        });
+    },
+
+    parentRelations: function(id) {
+        // This is slow and a bad hack.
+        return _.filter(this.entities, function(e) {
+            return e.type === 'relation' && e.members.indexOf(id) !== -1;
         });
     },
 

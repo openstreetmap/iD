@@ -12,6 +12,9 @@ iD.Entity = function(a, b, c) {
     if (iD.debug) {
         Object.freeze(this);
         Object.freeze(this.tags);
+
+        if (this.nodes) Object.freeze(this.nodes);
+        if (this.members) Object.freeze(this.members);
     }
 };
 
@@ -30,11 +33,11 @@ iD.Entity.prototype = {
 };
 
 iD.Node = function(attrs) {
-    return iD.Entity({tags: {}}, attrs || {}, {type: 'node'});
+    return iD.Entity(attrs || {}, {type: 'node'});
 };
 
 iD.Way = function(attrs) {
-    return iD.Entity({tags: {}, nodes: []}, attrs || {}, {type: 'way'});
+    return iD.Entity({nodes: []}, attrs || {}, {type: 'way'});
 };
 
 iD.Way.isOneWay = function(d) {
@@ -50,5 +53,5 @@ iD.Way.isArea = function(d) {
 };
 
 iD.Relation = function(attrs) {
-    return iD.Entity({tags: {}}, attrs || {}, {type: 'relation'});
+    return iD.Entity({members: []}, attrs || {}, {type: 'relation'});
 };

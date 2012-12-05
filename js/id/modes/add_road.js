@@ -22,7 +22,7 @@ iD.modes.AddRoad = function() {
                 node = datum;
 
                 var id = datum.id;
-                var parents = mode.history.graph().parents(id);
+                var parents = mode.history.graph().parentWays(id);
                 if (parents.length) {
                     if (parents[0].nodes[0] === id) {
                         way = parents[0];

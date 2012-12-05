@@ -37,8 +37,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                             mode.history.graph().entity(lastNode), index));
                     }
 
-                    delete way.tags.elastic;
-                    mode.history.perform(iD.actions.changeTags(way, way.tags));
+                    mode.history.perform(iD.actions.changeTags(way, _.omit(way.tags, 'elastic')));
 
                     // End by clicking on own tail
                     return mode.controller.enter(iD.modes.Select(way));
