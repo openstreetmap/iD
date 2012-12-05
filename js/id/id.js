@@ -85,19 +85,15 @@ window.iD = function(container) {
                     });
                 }
                 connection.authenticate(function() {
-                    shaded = d3.select(document.body)
-                        .append('div').attr('class', 'shaded')
-                        .on('click', function() {
-                            if (d3.event.target == this) shaded.remove();
-                        });
-                    var modal = shaded.append('div')
-                        .attr('class', 'modal commit-pane')
-                        .datum(history.changes());
-                    modal.call(iD.commit()
-                        .on('cancel', function() {
-                            shaded.remove();
-                        })
-                        .on('save', save));
+                    var modal = iD.modal();
+                    modal.select('.content')
+                        .classed('commit-modal', true)
+                        .datum(history.changes())
+                        .call(iD.commit()
+                            .on('cancel', function() {
+                                modal.remove();
+                            })
+                            .on('save', save));
                 });
             });
 

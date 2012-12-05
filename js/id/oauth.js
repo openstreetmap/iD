@@ -59,15 +59,6 @@ iD.OAuth = function() {
         if (oauth.authenticated()) return callback();
         oauth.logout();
 
-        var shaded = d3.select(document.body)
-            .append('div')
-            .attr('class', 'shaded')
-            .on('click', function() {
-                if (d3.event.target == this) shaded.remove();
-            });
-        var modal = shaded.append('div').attr('class', 'modal').style('display', 'none');
-        var ifr = modal.append('iframe')
-            .attr({ width: 640, height: 550, frameborder: 'no' });
 
         o = timenonce(o);
         var url = baseurl + '/oauth/request_token';
@@ -75,37 +66,41 @@ iD.OAuth = function() {
             ohauth.baseString('POST', url, o));
 
         var l = iD.loading('contacting openstreetmap...');
-        ohauth.xhr('POST', url, o, null, {}, function(xhr) {
+        ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
             l.remove();
-            modal.style('display', 'block');
             var resp = ohauth.stringQs(xhr.response);
             token('oauth_request_token_secret', resp.oauth_token_secret);
-            var at = baseurl + '/oauth/authorize?';
-            ifr.attr('src', at + ohauth.qsString({
-                oauth_token: resp.oauth_token, oauth_callback: location.href
-            }));
-        });
-        ifr.on('load', function() {
-            if (ifr.node().contentWindow.location.search) {
-                var search = ifr.node().contentWindow.location.search,
-                    oauth_token = ohauth.stringQs(search.slice(1)),
-                    url = baseurl + '/oauth/access_token';
-                o = timenonce(o);
-                shaded.remove();
+            var modal = iD.modal();
+            modal
+                .select('.content')
+                .append('iframe')
+                .attr({ width: 640, height: 550, frameborder: 'no' })
+                .attr('src', baseurl + '/oauth/authorize?' + ohauth.qsString({
+                    oauth_token: resp.oauth_token,
+                    oauth_callback: location.href
+                }))
+                .on('load', function() {
+                    if (this.contentWindow.location.search) {
+                        var search = this.contentWindow.location.search,
+                            oauth_token = ohauth.stringQs(search.slice(1)),
+                            url = baseurl + '/oauth/access_token';
+                        o = timenonce(o);
+                        modal.remove();
 
-                o.oauth_token = oauth_token.oauth_token;
-                var request_token_secret = token('oauth_request_token_secret');
-                o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
-                    ohauth.baseString('POST', url, o));
-                var l = iD.loading('contacting openstreetmap...');
-                ohauth.xhr('POST', url, o, null, {}, function(xhr) {
-                    l.remove();
-                    var access_token = ohauth.stringQs(xhr.response);
-                    token('oauth_token', access_token.oauth_token);
-                    token('oauth_token_secret', access_token.oauth_token_secret);
-                    callback();
+                        o.oauth_token = oauth_token.oauth_token;
+                        var request_token_secret = token('oauth_request_token_secret');
+                        o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
+                            ohauth.baseString('POST', url, o));
+                        var l = iD.loading('contacting openstreetmap...');
+                        ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
+                            l.remove();
+                            var access_token = ohauth.stringQs(xhr.response);
+                            token('oauth_token', access_token.oauth_token);
+                            token('oauth_token_secret', access_token.oauth_token_secret);
+                            callback();
+                        });
+                    }
                 });
-            }
         });
     };
 
