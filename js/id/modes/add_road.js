@@ -39,15 +39,15 @@ iD.modes.AddRoad = function() {
 
                 var index = iD.util.geo.chooseIndex(datum, d3.mouse(mode.map.surface.node()), mode.map);
                 var connectedWay = mode.history.graph().entity(datum.id);
-                mode.history.perform(iD.actions.addWayNode(connectedWay, node, index));
+                mode.history.perform(iD.actions.AddWayNode(connectedWay, node, index));
             } else {
                 // begin a new way
                 node = iD.Node({loc: mode.map.mouseCoordinates()});
             }
 
             if (start) {
-                mode.history.perform(iD.actions.startWay(way));
-                mode.history.perform(iD.actions.addWayNode(way, node));
+                mode.history.perform(iD.actions.StartWay(way));
+                mode.history.perform(iD.actions.AddWayNode(way, node));
             }
 
             mode.controller.enter(iD.modes.DrawRoad(way.id, direction));

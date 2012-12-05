@@ -33,7 +33,7 @@ describe("History", function () {
 
         it("does not emit a change event when performing a noop", function () {
             history.on('change', spy);
-            history.perform(iD.actions.noop);
+            history.perform(iD.actions.Noop);
             expect(spy).not.to.have.been.called;
         });
     });

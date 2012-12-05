@@ -14,10 +14,10 @@ iD.modes.DrawRoad = function(way_id, direction) {
             firstNode = way.nodes[0],
             lastNode = _.last(way.nodes);
 
-        mode.history.perform(iD.actions.addWayNode(way, node, index));
+        mode.history.perform(iD.actions.AddWayNode(way, node, index));
 
         mode.map.surface.on('mousemove.drawroad', function() {
-            mode.history.replace(iD.actions.addWayNode(way, node.update({loc: mode.map.mouseCoordinates()}), index));
+            mode.history.replace(iD.actions.AddWayNode(way, node.update({loc: mode.map.mouseCoordinates()}), index));
         });
 
         mode.map.surface.on('click.drawroad', function() {
@@ -30,31 +30,31 @@ iD.modes.DrawRoad = function(way_id, direction) {
                     // If mode is drawing a loop and mode is not the drawing
                     // end of the stick, finish the circle
                     if (direction === 'forward' && datum.id == firstNode) {
-                        mode.history.replace(iD.actions.addWayNode(way,
+                        mode.history.replace(iD.actions.AddWayNode(way,
                             mode.history.graph().entity(firstNode), index));
                     } else if (direction === 'backward' && datum.id == lastNode) {
-                        mode.history.replace(iD.actions.addWayNode(way,
+                        mode.history.replace(iD.actions.AddWayNode(way,
                             mode.history.graph().entity(lastNode), index));
                     }
 
-                    mode.history.perform(iD.actions.changeTags(way, _.omit(way.tags, 'elastic')));
+                    mode.history.perform(iD.actions.ChangeEntityTags(way, _.omit(way.tags, 'elastic')));
 
                     // End by clicking on own tail
                     return mode.controller.enter(iD.modes.Select(way));
                 } else {
                     // connect a way to an existing way
-                    mode.history.replace(iD.actions.addWayNode(way, datum, index));
+                    mode.history.replace(iD.actions.AddWayNode(way, datum, index));
                 }
             } else if (datum.type === 'way') {
                 node = node.update({loc: mode.map.mouseCoordinates()});
-                mode.history.replace(iD.actions.addWayNode(way, node, index));
+                mode.history.replace(iD.actions.AddWayNode(way, node, index));
 
                 var connectedWay = mode.history.graph().entity(datum.id);
                 var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(mode.map.surface.node()), mode.map);
-                mode.history.perform(iD.actions.addWayNode(connectedWay, node, connectedIndex));
+                mode.history.perform(iD.actions.AddWayNode(connectedWay, node, connectedIndex));
             } else {
                 node = node.update({loc: mode.map.mouseCoordinates()});
-                mode.history.replace(iD.actions.addWayNode(way, node, index));
+                mode.history.replace(iD.actions.AddWayNode(way, node, index));
             }
 
             mode.controller.enter(iD.modes.DrawRoad(way_id, direction));

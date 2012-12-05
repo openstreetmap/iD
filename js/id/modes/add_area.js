@@ -21,8 +21,8 @@ iD.modes.AddArea = function() {
                 node = iD.Node({loc: mode.map.mouseCoordinates()});
             }
 
-            mode.history.perform(iD.actions.startWay(way));
-            mode.history.perform(iD.actions.addWayNode(way, node));
+            mode.history.perform(iD.actions.StartWay(way));
+            mode.history.perform(iD.actions.AddWayNode(way, node));
 
             mode.controller.enter(iD.modes.DrawArea(way.id));
         });

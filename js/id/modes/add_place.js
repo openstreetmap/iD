@@ -10,7 +10,7 @@ iD.modes.AddPlace = function() {
 
         mode.map.surface.on('click.addplace', function() {
             var node = iD.Node({loc: mode.map.mouseCoordinates(), _poi: true});
-            mode.history.perform(iD.actions.addNode(node));
+            mode.history.perform(iD.actions.AddNode(node));
             mode.controller.enter(iD.modes.Select(node));
         });
 

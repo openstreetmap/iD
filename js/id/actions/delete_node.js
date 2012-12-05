@@ -3,12 +3,12 @@ iD.actions.DeleteNode = function(node) {
     return function(graph) {
         graph.parentWays(node.id)
             .forEach(function(parent) {
-                graph = iD.actions.removeWayNode(parent, node)(graph);
+                graph = iD.actions.RemoveWayNode(parent, node)(graph);
             });
 
         graph.parentRelations(node.id)
             .forEach(function(parent) {
-                graph = iD.actions.removeRelationEntity(parent, node)(graph);
+                graph = iD.actions.RemoveRelationMember(parent, node)(graph);
             });
 
         return graph.remove(node, 'removed a node');
