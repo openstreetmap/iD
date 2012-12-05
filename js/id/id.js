@@ -84,17 +84,36 @@ window.iD = function(container) {
                         map.flush().redraw();
                     });
                 }
-                connection.authenticate(function() {
+                var changes = history.changes();
+                var has_changes = d3.sum(d3.values(changes).map(function(c) {
+                    return c.length;
+                })) > 0;
+
+                if (has_changes) {
+                    connection.authenticate(function() {
+                        var modal = iD.modal();
+                        modal.select('.content')
+                            .classed('commit-modal', true)
+                            .datum(history.changes())
+                            .call(iD.commit()
+                                .on('cancel', function() {
+                                    modal.remove();
+                                })
+                                .on('save', save));
+                    });
+                } else {
                     var modal = iD.modal();
+                    modal.select('.modal').classed('modal-alert', true);
                     modal.select('.content')
-                        .classed('commit-modal', true)
-                        .datum(history.changes())
-                        .call(iD.commit()
-                            .on('cancel', function() {
-                                modal.remove();
-                            })
-                            .on('save', save));
-                });
+                        .append('p')
+                        .text('You don\'t have any changes to save.');
+                    modal.select('.content')
+                        .append('button')
+                        .text('OK')
+                        .on('click', function() {
+                            modal.remove();
+                        });
+                }
             });
 
         var zoom = bar.append('div')
