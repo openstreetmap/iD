@@ -47,7 +47,7 @@ iD.modes.AddRoad = function() {
             }
 
             if (start) {
-                mode.history.perform(iD.actions.StartWay(way));
+                mode.history.perform(iD.actions.AddWay(way));
                 mode.history.perform(iD.actions.AddWayNode(way, node));
             }
 
