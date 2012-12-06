@@ -3,7 +3,7 @@ describe('Background', function() {
 
   beforeEach(function() {
       d = d3.select(document.createElement('div'));
-      c = iD.Background().projection(d3.geo.mercator());
+      c = iD.Background(d).projection(d3.geo.mercator());
       d.call(c);
   });
 

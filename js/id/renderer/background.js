@@ -2,7 +2,7 @@ iD.Background = function() {
     var tile = d3.geo.tile(),
         scaleExtent = [0, 20],
         projection,
-        source;
+        source = d3.functor('');
 
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`
@@ -90,7 +90,7 @@ iD.BackgroundSource.template = function(template, subdomains) {
 
 iD.BackgroundSource.Bing = iD.BackgroundSource.template(
     'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
-    [1, 2, 3, 4]);
+    [0, 1, 2, 3]);
 
 iD.BackgroundSource.Tiger2012 = iD.BackgroundSource.template(
     'http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png',
