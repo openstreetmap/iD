@@ -50,6 +50,7 @@ iD.modes.Browse = function() {
     };
 
     mode.exit = function() {
+        mode.map.surface.on('mousedown.latedrag', null);
         mode.map.surface.on('click.browse', null);
     };
 
