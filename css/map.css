@@ -48,7 +48,7 @@ path.casing {
     pointer-events:none;
 }
 
-path.casing:hover {
+path.casing.hover {
     stroke:#FF0F0F !important;
     opacity:0.8;
 }
