@@ -30,7 +30,8 @@ iD.modes.DrawArea = function(way_id) {
                     mode.history.replace(iD.actions.AddWayNode(way,
                         mode.history.graph().entity(way.nodes[0])));
                     way = mode.history.graph().entity(way.id);
-                    mode.history.perform(iD.actions.ChangeEntityTags(way, _.omit(way.tags, 'elastic')));
+                    way.tags = _.omit(way.tags, 'elastic');
+                    mode.history.perform(iD.actions.ChangeEntityTags(way, way.tags));
 
                     // End by clicking on own tail
                     return mode.controller.enter(iD.modes.Select(way));

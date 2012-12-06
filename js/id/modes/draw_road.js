@@ -40,9 +40,9 @@ iD.modes.DrawRoad = function(way_id, direction) {
                             mode.history.graph().entity(lastNode), index));
                     }
 
+                    way.tags = _.omit(way.tags, 'elastic');
                     mode.history.perform(iD.actions.ChangeEntityTags(
-                        way,
-                        _.omit(way.tags, 'elastic')));
+                        way, way.tags));
 
                     // End by clicking on own tail
                     return mode.controller.enter(iD.modes.Select(way));
