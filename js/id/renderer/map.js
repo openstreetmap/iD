@@ -72,6 +72,7 @@ iD.Map = function() {
                 .attr({ x: 0, y: 0 });
 
         tilegroup = surface.append('g')
+            .attr('id', 'tile-g')
             .attr('clip-path', 'url(#clip)');
 
         r = surface.append('g')

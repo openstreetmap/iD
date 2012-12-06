@@ -117,12 +117,13 @@ window.iD = function(container) {
 
         var gc = bar.append('div').attr('class', 'geocode-control');
         gc.append('button').text('?');
-        gc.on('mouseover', function() {
-            d3.select('.geocode-control input').style('display', 'inline-block');
-        });
-        gc.on('mouseout', function() {
-            d3.select('.geocode-control input').style('display', 'none');
-        });
+        gc
+            .on('mouseover', function() {
+                d3.select('.geocode-control input').style('display', 'inline-block');
+            })
+            .on('mouseout', function() {
+                d3.select('.geocode-control input').style('display', 'none');
+            });
         gc.append('input')
             .attr({
                 type: 'text',
@@ -136,6 +137,9 @@ window.iD = function(container) {
                     map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
                 });
             });
+
+        this.append('div').attr('class', 'layerswitcher-control')
+            .call(iD.layerswitcher(map));
 
         this.append('div')
             .attr('class', 'inspector-wrap')

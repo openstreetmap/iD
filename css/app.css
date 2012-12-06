@@ -104,6 +104,32 @@ table th {
     right:0;
 }
 
+div.layerswitcher-control {
+    position:absolute;
+    top:170px;
+    left:10px;
+    color:#222;
+}
+
+div.layerswitcher-control .content {
+    background:#fff;
+    padding:5px;
+}
+
+div.layerswitcher-control div.opacity-options {
+    border:1px solid #000;
+    height:15px;
+    width:45px;
+}
+
+div.layerswitcher-control a.opacity {
+    background:#000;
+    display:inline-block;
+    width:15px;
+    height:15px;
+}
+
+
 div.geocode-control {
     position:absolute;
     top:130px;
@@ -111,7 +137,8 @@ div.geocode-control {
     color:#222;
 }
 
-#bar div.geocode-control button {
+#bar div.geocode-control button,
+div.layerswitcher-control button {
     width:40px;
 }
 
@@ -119,7 +146,8 @@ div.geocode-control input {
     display:none;
 }
 
-#bar button {
+#bar button,
+button.white {
     width:80px;
     white-space:nowrap;
     cursor:pointer;
@@ -137,7 +165,7 @@ div.geocode-control input {
 }
 
 div.buttons-joined {
-    margin:3px;
+    margin:5px;
     padding:1px;
     background:#fff;
     display:inline-block;
@@ -146,12 +174,12 @@ div.buttons-joined {
 }
 
 #bar div.buttons-joined button:first-child {
-    border-radius:3px 0 0 3px;
+    border-radius:2px 0 0 2px;
 }
 
 #bar div.buttons-joined button:last-child {
     border-right:0;
-    border-radius:0 3px 3px 0;
+    border-radius:0 2px 2px 0;
 }
 
 #bar div.buttons-joined button {
