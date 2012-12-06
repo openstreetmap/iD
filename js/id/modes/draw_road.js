@@ -89,7 +89,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
     };
 
     mode.exit = function() {
-        mode.map.hint(false).fastEnable(true);
+        mode.map.hint(false);
+        mode.map.fastEnable(true);
 
         mode.map.surface
             .on('mousemove.drawroad', null)
