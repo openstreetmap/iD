@@ -12,18 +12,20 @@ iD.modes.AddArea = function() {
 
         mode.map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
-                node,
                 way = iD.Way({tags: { building: 'yes', area: 'yes' }});
 
             // connect a way to an existing way
             if (datum.type === 'node') {
-                node = datum;
+                mode.history.perform(
+                    iD.actions.AddWay(way),
+                    iD.actions.AddWayNode(way.id, datum.id));
             } else {
-                node = iD.Node({loc: mode.map.mouseCoordinates()});
+                var node = iD.Node({loc: mode.map.mouseCoordinates()});
+                mode.history.perform(
+                    iD.actions.AddWay(way),
+                    iD.actions.AddNode(node),
+                    iD.actions.AddWayNode(way.id, node.id));
             }
-
-            mode.history.perform(iD.actions.AddWay(way));
-            mode.history.perform(iD.actions.AddWayNode(way, node));
 
             mode.controller.enter(iD.modes.DrawArea(way.id));
         });

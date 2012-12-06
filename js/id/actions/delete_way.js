@@ -1,17 +1,19 @@
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as
-iD.actions.DeleteWay = function(way) {
+iD.actions.DeleteWay = function(wayId) {
     return function(graph) {
-        graph.parentRelations(way.id)
+        var way = graph.entity(wayId);
+
+        graph.parentRelations(wayId)
             .forEach(function(parent) {
-                graph = iD.actions.RemoveRelationMember(parent, way)(graph);
+                graph = iD.actions.RemoveRelationMember(parent.id, wayId)(graph);
             });
 
-        way.nodes.forEach(function (id) {
-            var node = graph.entity(id);
+        way.nodes.forEach(function (nodeId) {
+            var node = graph.entity(nodeId);
 
-            graph = iD.actions.RemoveWayNode(way, node)(graph);
+            graph = iD.actions.RemoveWayNode(wayId, nodeId)(graph);
 
-            if (!graph.parentWays(id).length && !graph.parentRelations(id).length) {
+            if (!graph.parentWays(nodeId).length && !graph.parentRelations(nodeId).length) {
                 if (!node.hasInterestingTags()) {
                     graph = graph.remove(node);
                 } else {

@@ -17,17 +17,17 @@ iD.modes.Browse = function() {
             d3.event.sourceEvent.stopPropagation();
             if (!dragging) {
                 if (entity.accuracy) {
-                    var way = history.graph().entity(entity.way),
-                        index = entity.index;
-                    entity = iD.Node(entity);
-                    mode.history.perform(iD.actions.AddWayNode(way, entity, index));
+                    var node = iD.Node(entity);
+                    mode.history.perform(
+                        iD.actions.AddNode(node),
+                        iD.actions.AddWayNode(entity.way, node.id, entity.index));
                 }
                 dragging = iD.util.trueObj([entity.id].concat(
                     _.pluck(mode.history.graph().parentWays(entity.id), 'id')));
                 mode.history.perform(iD.actions.Noop());
             }
             var to = mode.map.projection.invert([d3.event.x, d3.event.y]);
-            mode.history.replace(iD.actions.Move(entity, to));
+            mode.history.replace(iD.actions.Move(entity.id, to));
         })
         .on('dragend', function () {
             if (!dragging) return;

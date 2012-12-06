@@ -1,7 +1,7 @@
 describe("iD.actions.DeleteWay", function () {
     it("removes the way from the graph", function () {
         var way    = iD.Way(),
-            action = iD.actions.DeleteWay(way),
+            action = iD.actions.DeleteWay(way.id),
             graph  = action(iD.Graph([way]));
         expect(graph.entity(way.id)).to.be.undefined;
     });
@@ -9,7 +9,7 @@ describe("iD.actions.DeleteWay", function () {
     it("removes a way from parent relations", function () {
         var way      = iD.Way(),
             relation = iD.Relation({members: [way.id]}),
-            action   = iD.actions.DeleteWay(way),
+            action   = iD.actions.DeleteWay(way.id),
             graph    = action(iD.Graph([way, relation]));
         expect(graph.entity(relation.id).members).not.to.contain(way.id);
     });
@@ -17,7 +17,7 @@ describe("iD.actions.DeleteWay", function () {
     it("deletes member nodes not referenced by another parent", function () {
         var node   = iD.Node(),
             way    = iD.Way({nodes: [node.id]}),
-            action = iD.actions.DeleteWay(way),
+            action = iD.actions.DeleteWay(way.id),
             graph  = action(iD.Graph([node, way]));
         expect(graph.entity(node.id)).to.be.undefined;
     });
@@ -26,7 +26,7 @@ describe("iD.actions.DeleteWay", function () {
         var node   = iD.Node(),
             way1   = iD.Way({nodes: [node.id]}),
             way2   = iD.Way({nodes: [node.id]}),
-            action = iD.actions.DeleteWay(way1),
+            action = iD.actions.DeleteWay(way1.id),
             graph  = action(iD.Graph([node, way1, way2]));
         expect(graph.entity(node.id)).not.to.be.undefined;
     });
@@ -34,7 +34,7 @@ describe("iD.actions.DeleteWay", function () {
     it("does not delete member nodes with interesting tags", function () {
         var node   = iD.Node({tags: {highway: 'traffic_signals'}}),
             way    = iD.Way({nodes: [node.id]}),
-            action = iD.actions.DeleteWay(way),
+            action = iD.actions.DeleteWay(way.id),
             graph  = action(iD.Graph([node, way]));
         expect(graph.entity(node.id)).not.to.be.undefined;
     });
@@ -42,7 +42,7 @@ describe("iD.actions.DeleteWay", function () {
     it("registers member nodes with interesting tags as POIs", function () {
         var node   = iD.Node({tags: {highway: 'traffic_signals'}}),
             way    = iD.Way({nodes: [node.id]}),
-            action = iD.actions.DeleteWay(way),
+            action = iD.actions.DeleteWay(way.id),
             graph  = action(iD.Graph([node, way]));
         expect(graph.entity(node.id)._poi).to.be.ok;
     });

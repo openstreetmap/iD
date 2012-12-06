@@ -1,95 +1,83 @@
-iD.modes.DrawRoad = function(way_id, direction) {
+iD.modes.DrawRoad = function(wayId, direction) {
     var mode = {
         button: 'road'
     };
 
     mode.enter = function() {
-        mode.map.dblclickEnable(false)
+        var map = mode.map,
+            history = mode.history,
+            controller = mode.controller,
+            way = history.graph().entity(wayId),
+            node = iD.Node({loc: map.mouseCoordinates(), tags: {elastic: true}}),
+            index = (direction === 'forward') ? undefined : -1,
+            headId = (direction === 'forward') ? _.last(way.nodes) : _.first(way.nodes),
+            tailId = (direction === 'forward') ? _.first(way.nodes) : _.last(way.nodes);
+
+        map.dblclickEnable(false)
             .dragEnable(false)
-            .fastEnable(false);
+            .fastEnable(false)
+            .hint('Click to add more points to the road. ' +
+                      'Click on other roads to connect to them, and double-click to ' +
+                      'end the road.');
 
-        mode.map.hint('Click to add more points to the road. ' +
-                'Click on other roads to connect to them, and double-click to ' +
-                'end the road.');
+        history.perform(
+            iD.actions.AddNode(node),
+            iD.actions.AddWayNode(wayId, node.id, index));
 
-        var index = (direction === 'forward') ? undefined : -1,
-            node = iD.Node({loc: mode.map.mouseCoordinates() }),
-            way = mode.history.graph().entity(way_id),
-            firstNode = way.nodes[0],
-            lastNode = _.last(way.nodes);
-
-        function finish(next) {
-            way.tags = _.omit(way.tags, 'elastic');
-            mode.history.perform(iD.actions.ChangeEntityTags(way, way.tags));
-            return mode.controller.enter(next);
-        }
-
-        mode.history.perform(iD.actions.AddWayNode(way, node, index));
-
-        mode.map.surface.on('mousemove.drawroad', function() {
-            mode.history.replace(iD.actions.AddWayNode(way,
-                node.update({ loc: mode.map.mouseCoordinates() }), index));
+        map.surface.on('mousemove.drawroad', function() {
+            history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
         });
 
-        mode.map.surface.on('click.drawroad', function() {
-            // d3.event.stopPropagation();
-
+        map.surface.on('click.drawroad', function() {
             var datum = d3.select(d3.event.target).datum() || {};
 
+            if (datum.id === tailId) {
+                // connect the way in a loop
+                history.replace(
+                    iD.actions.DeleteNode(node.id),
+                    iD.actions.AddWayNode(wayId, tailId, index),
+                    iD.actions.ChangeEntityTags(wayId, _.omit(way.tags, 'elastic')));
 
-            if (datum.type === 'node') {
-                if (datum.id == firstNode || datum.id == lastNode) {
-                    // If mode is drawing a loop and mode is not the drawing
-                    // end of the stick, finish the circle
-                    if (direction === 'forward' && datum.id == firstNode) {
-                        mode.history.replace(iD.actions.AddWayNode(way,
-                            mode.history.graph().entity(firstNode), index));
-                    } else if (direction === 'backward' && datum.id == lastNode) {
-                        mode.history.replace(iD.actions.AddWayNode(way,
-                            mode.history.graph().entity(lastNode), index));
-                    }
-                    mode.history.replace(iD.actions.DeleteNode(node));
-                    return finish(iD.modes.Select(way));
-                } else if (datum.id == node.id) {
-                    datum = datum.update({ tags: {} });
-                    mode.history.replace(iD.actions.ChangeEntityTags(datum, {}));
-                    mode.history.replace(iD.actions.DeleteNode(node));
-                    mode.history.replace(iD.actions.AddWayNode(way, datum, index));
-                } else {
-                    // connect a way to an existing way
-                    mode.history.replace(iD.actions.DeleteNode(node));
-                    mode.history.replace(iD.actions.AddWayNode(way, datum, index));
-                }
+                controller.enter(iD.modes.Select(way));
+
+            } else if (datum.type === 'node' && datum.id !== node.id) {
+                // connect the way to an existing node
+                history.replace(
+                    iD.actions.DeleteNode(node.id),
+                    iD.actions.AddWayNode(wayId, datum.id, index));
+
+                controller.enter(iD.modes.DrawRoad(wayId, direction));
+
             } else if (datum.type === 'way') {
-                node = node.update({loc: mode.map.mouseCoordinates() });
-                mode.history.replace(iD.actions.AddWayNode(way, node, index));
+                // connect the way to an existing way
+                var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(map.surface.node()), map);
 
-                var connectedWay = mode.history.graph().entity(datum.id);
-                var connectedIndex = iD.modes.chooseIndex(datum,
-                    d3.mouse(mode.map.surface.node()),
-                    mode.map);
-                mode.history.perform(iD.actions.AddWayNode(connectedWay,
-                    node,
-                    connectedIndex));
+                history.replace(
+                    iD.actions.AddWayNode(datum.id, node.id, connectedIndex));
+
+                controller.enter(iD.modes.DrawRoad(wayId, direction));
+
             } else {
-                mode.history.replace(iD.actions.AddWayNode(way, node, index));
+                controller.enter(iD.modes.DrawRoad(wayId, direction));
             }
-
-            mode.controller.enter(iD.modes.DrawRoad(way_id, direction));
         });
 
-        mode.map.keybinding().on('⎋.drawroad', function() {
-            finish(iD.modes.Browse());
+        map.keybinding().on('⎋.drawroad', function() {
+            history.replace(
+                iD.actions.DeleteNode(node.id),
+                iD.actions.ChangeEntityTags(wayId, _.omit(way.tags, 'elastic')));
+
+            controller.enter(iD.modes.Browse());
         });
 
-        mode.map.keybinding().on('⌫.drawroad', function() {
+        map.keybinding().on('⌫.drawroad', function() {
             d3.event.preventDefault();
-            mode.history.replace(iD.actions.RemoveWayNode(way,
-                mode.history.graph().entity(lastNode)));
-            mode.history.replace(iD.actions.DeleteNode(
-                mode.history.graph().entity(lastNode)));
-            mode.history.replace(iD.actions.DeleteNode(node));
-            mode.controller.enter(iD.modes.DrawRoad(way_id, direction));
+
+            history.replace(
+                iD.actions.DeleteNode(node.id),
+                iD.actions.DeleteNode(headId));
+
+            controller.enter(iD.modes.DrawRoad(wayId, direction));
         });
     };
 
