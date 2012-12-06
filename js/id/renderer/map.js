@@ -53,7 +53,7 @@ iD.Map = function() {
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
-        transformProp = iD.util.prefix(['webkit', 'ms', 'Moz']) + 'transform',
+        transformProp = iD.util.prefixProperty('Transform'),
         support3d = (function() {
             // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
             var el = document.createElement('div'),

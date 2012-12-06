@@ -72,6 +72,15 @@ iD.util.prefix = function(browsers) {
         return '';
     })(browsers);
 };
+iD.util.prefixProperty = function(property) {
+    prefixes = ['webkit', 'ms', 'Moz', 'O'];
+    return (function prefixMatch(p) { // via mbostock
+        var i = -1, n = p.length, s = document.body.style;
+        if (property.toLowerCase() in s) return property.toLowerCase();
+        while (++i < n) if (p[i] + property in s) return '-' + p[i].toLowerCase() + '-' + property.toLowerCase();
+        return '';
+    })(prefixes);
+};
 
 iD.util.geo = {};
 
