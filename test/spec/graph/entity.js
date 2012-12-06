@@ -23,7 +23,17 @@ describe('Entity', function () {
             var attrs = {tags: {foo: 'bar'}},
                 e = iD.Entity().update(attrs);
             expect(attrs).to.eql({tags: {foo: 'bar'}});
-        })
+        });
+
+        it("doesn't copy transients", function () {
+            var entity = iD.Entity();
+            entity.transients['foo'] = 'bar';
+            expect(entity.update({}).transients).not.to.have.property('foo');
+        });
+
+        it("doesn't copy prototype properties", function () {
+            expect(iD.Entity().update({})).not.to.have.ownProperty('update');
+        });
     });
 
     describe("#created", function () {
@@ -102,6 +112,16 @@ describe('Node', function () {
     it("sets tags as specified", function () {
         expect(iD.Node({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
+
+    describe("#intersects", function () {
+        it("returns true for a node within the given extent", function () {
+            expect(iD.Node({loc: [0, 0]}).intersects([[-180, 90], [180, -90]])).to.equal(true);
+        });
+
+        it("returns false for a node outside the given extend", function () {
+            expect(iD.Node({loc: [0, 0]}).intersects([[100, 90], [180, -90]])).to.equal(false);
+        });
+    });
 });
 
 describe('Way', function () {
@@ -132,6 +152,22 @@ describe('Way', function () {
 
     it("sets tags as specified", function () {
         expect(iD.Way({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
+    });
+
+    describe("#intersects", function () {
+        it("returns true for a way with a node within the given extent", function () {
+            var node  = iD.Node({loc: [0, 0]}),
+                way   = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(way.intersects([[-180, 90], [180, -90]], graph)).to.equal(true);
+        });
+
+        it("returns false for way with no nodes within the given extent", function () {
+            var node  = iD.Node({loc: [0, 0]}),
+                way   = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(way.intersects([[100, 90], [180, -90]], graph)).to.equal(false);
+        });
     });
 });
 

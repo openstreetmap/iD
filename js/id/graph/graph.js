@@ -55,46 +55,13 @@ iD.Graph.prototype = {
         return iD.Graph(entities, annotation);
     },
 
-    nodeIntersect: function(entity, extent) {
-        return entity.loc[0] > extent[0][0] &&
-            entity.loc[0] < extent[1][0] &&
-            entity.loc[1] < extent[0][1] &&
-            entity.loc[1] > extent[1][1];
-    },
-
-    wayIntersect: function(entity, extent) {
-        return entity._extent[0][0] > extent[0][0] &&
-            entity._extent[1][0] < extent[1][0] &&
-            entity._extent[0][1] < extent[0][1] &&
-            entity._extent[1][1] > extent[1][1];
-    },
-
-    indexWay: function(way) {
-        if (way.type === 'way' && !way._extent) {
-            // top left, bottom right
-            var extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
-            var w = way;
-            for (var j = 0, l = w.nodes.length; j < l; j++) {
-                if (w.nodes[j].loc[0] > extent[0][0]) extent[0][0] = w.nodes[j].loc[0];
-                if (w.nodes[j].loc[0] < extent[1][0]) extent[1][0] = w.nodes[j].loc[0];
-                if (w.nodes[j].loc[1] < extent[0][1]) extent[0][1] = w.nodes[j].loc[1];
-                if (w.nodes[j].loc[1] > extent[1][1]) extent[1][1] = w.nodes[j].loc[1];
-            }
-            way._extent = extent;
-        }
-        return true;
-    },
-
     // get all objects that intersect an extent.
     intersects: function(extent) {
         var items = [];
         for (var i in this.entities) {
             var entity = this.entities[i];
-            if (entity.type === 'node' && this.nodeIntersect(entity, extent)) {
-                items.push(entity);
-            } else if (entity.type === 'way') {
-                var w = this.fetch(entity.id);
-                if (this.indexWay(w) && this.wayIntersect(w, extent)) items.push(w);
+            if (entity.intersects(extent, this)) {
+                items.push(this.fetch(entity.id));
             }
         }
         return items;
