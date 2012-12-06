@@ -35,10 +35,22 @@ iD.layerswitcher = function(map) {
             .style('opacity', function(d) {
                 return d;
             })
-            .on('click', function(d) {
+            .on('mouseover', function(d) {
                 d3.select('#tile-g')
                     .transition()
                     .style('opacity', d);
+            })
+            .on('mouseout', function(d) {
+                var o = d3.select('#tile-g').attr('data-opacity');
+                d3.select('#tile-g')
+                    .transition()
+                    .style('opacity', o);
+            })
+            .on('click', function(d) {
+                d3.select('#tile-g')
+                    .transition()
+                    .style('opacity', d)
+                    .attr('data-opacity', d);
             });
 
         function selectLayer(d) {
