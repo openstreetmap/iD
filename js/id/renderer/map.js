@@ -201,18 +201,27 @@ iD.Map = function() {
         surface.selectAll('.layer-g *').remove();
     }
 
-    function drawFills(areas, filter) {
-        var fills = g.fill.selectAll('path')
+    function drawLines(data, filter, group, class_gen) {
+        var lines = group.selectAll('path')
             .filter(filter)
-            .data(areas, key);
-        fills.exit().remove();
-        fills.enter().append('path')
-            .attr('class', class_area)
+            .data(data, key);
+        lines.exit().remove();
+        lines.enter().append('path')
             .classed('active', classActive);
-        fills
+        lines
+            .order()
             .attr('d', getline)
-            .attr('class', class_area)
+            .attr('class', class_gen)
             .classed('active', classActive);
+        return lines;
+    }
+
+    function drawFills(areas, filter) {
+        drawLines(areas, filter, g.fill, class_area);
+    }
+
+    function drawCasings(ways, filter) {
+        drawLines(ways, filter, g.casing, class_casing);
     }
 
     function drawMarkers(points, filter) {
@@ -236,18 +245,7 @@ iD.Map = function() {
     }
 
     function drawStrokes(ways, filter) {
-        var strokes = g.stroke.selectAll('path')
-            .filter(filter)
-            .data(ways, key);
-        strokes.exit().remove();
-        strokes.enter().append('path')
-            .attr('class', class_stroke)
-            .classed('active', classActive);
-        strokes
-            .order()
-            .attr('d', getline)
-            .attr('class', class_stroke)
-            .classed('active', classActive);
+        var strokes = drawLines(ways, filter, g.stroke, class_stroke);
 
         // Determine the lengths of oneway paths
         var lengths = {},
@@ -276,22 +274,6 @@ iD.Map = function() {
             });
     }
 
-    function drawCasings(ways, filter) {
-        var casings = g.casing.selectAll('path')
-            .filter(filter)
-            .data(ways, key);
-        casings.exit().remove();
-        casings.enter().append('path')
-            .attr('class', class_casing)
-            .classed('hover', classHover)
-            .classed('active', classActive);
-        casings
-            .order()
-            .attr('d', getline)
-            .attr('class', class_casing)
-            .classed('hover', classHover)
-            .classed('active', classActive);
-    }
 
     function connectionLoad(err, result) {
         history.merge(result);
