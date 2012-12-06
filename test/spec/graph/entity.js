@@ -1,4 +1,18 @@
 describe('Entity', function () {
+    if (iD.debug) {
+        it("is frozen", function () {
+            expect(Object.isFrozen(iD.Entity())).to.be.true;
+        });
+
+        it("freezes tags", function () {
+            expect(Object.isFrozen(iD.Entity().tags)).to.be.true;
+        });
+
+        it("does not freeze transients", function () {
+            expect(Object.isFrozen(iD.Entity().transients)).to.be.false;
+        });
+    }
+
     describe("#update", function () {
         it("returns a new Entity", function () {
             var a = iD.Entity(),
@@ -23,7 +37,17 @@ describe('Entity', function () {
             var attrs = {tags: {foo: 'bar'}},
                 e = iD.Entity().update(attrs);
             expect(attrs).to.eql({tags: {foo: 'bar'}});
-        })
+        });
+
+        it("doesn't copy transients", function () {
+            var entity = iD.Entity();
+            entity.transients['foo'] = 'bar';
+            expect(entity.update({}).transients).not.to.have.property('foo');
+        });
+
+        it("doesn't copy prototype properties", function () {
+            expect(iD.Entity().update({})).not.to.have.ownProperty('update');
+        });
     });
 
     describe("#created", function () {
@@ -102,9 +126,25 @@ describe('Node', function () {
     it("sets tags as specified", function () {
         expect(iD.Node({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
+
+    describe("#intersects", function () {
+        it("returns true for a node within the given extent", function () {
+            expect(iD.Node({loc: [0, 0]}).intersects([[-180, 90], [180, -90]])).to.equal(true);
+        });
+
+        it("returns false for a node outside the given extend", function () {
+            expect(iD.Node({loc: [0, 0]}).intersects([[100, 90], [180, -90]])).to.equal(false);
+        });
+    });
 });
 
 describe('Way', function () {
+    if (iD.debug) {
+        it("freezes nodes", function () {
+            expect(Object.isFrozen(iD.Way().nodes)).to.be.true;
+        });
+    }
+
     it("returns a way", function () {
         expect(iD.Way().type).to.equal("way");
     });
@@ -133,9 +173,31 @@ describe('Way', function () {
     it("sets tags as specified", function () {
         expect(iD.Way({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
+
+    describe("#intersects", function () {
+        it("returns true for a way with a node within the given extent", function () {
+            var node  = iD.Node({loc: [0, 0]}),
+                way   = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(way.intersects([[-180, 90], [180, -90]], graph)).to.equal(true);
+        });
+
+        it("returns false for way with no nodes within the given extent", function () {
+            var node  = iD.Node({loc: [0, 0]}),
+                way   = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(way.intersects([[100, 90], [180, -90]], graph)).to.equal(false);
+        });
+    });
 });
 
 describe('Relation', function () {
+    if (iD.debug) {
+        it("freezes nodes", function () {
+            expect(Object.isFrozen(iD.Relation().members)).to.be.true;
+        });
+    }
+
     it("returns a relation", function () {
         expect(iD.Relation().type).to.equal("relation");
     });

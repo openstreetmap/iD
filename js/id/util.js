@@ -90,13 +90,6 @@ iD.util.geo.dist = function(a, b) {
         Math.pow(a[1] - b[1], 2));
 };
 
-iD.util.geo.nodeIntersect = function(entity, extent) {
-    return entity.loc[0] > extent[0][0] &&
-        entity.loc[0] < extent[1][0] &&
-        entity.loc[1] < extent[0][1] &&
-        entity.loc[1] > extent[1][1];
-};
-
 iD.util.geo.chooseIndex = function(way, point, map) {
     var dist = iD.util.geo.dist;
     var projNodes = way.nodes.map(function(n) {

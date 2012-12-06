@@ -135,7 +135,7 @@ iD.Map = function() {
                 else ways.push(a);
             } else if (a._poi) {
                 points.push(a);
-            } else if (!a._poi && a.type === 'node' && iD.util.geo.nodeIntersect(a, extent)) {
+            } else if (!a._poi && a.type === 'node' && a.intersects(extent)) {
                 waynodes.push(a);
             }
         }
@@ -208,11 +208,13 @@ iD.Map = function() {
             .data(data, key);
         lines.exit().remove();
         lines.enter().append('path')
+            .classed('hover', classHover)
             .classed('active', classActive);
         lines
             .order()
             .attr('d', getline)
             .attr('class', class_gen)
+            .classed('hover', classHover)
             .classed('active', classActive);
         return lines;
     }
@@ -281,17 +283,21 @@ iD.Map = function() {
     }
 
     function hoverIn() {
-        var entity = d3.select(d3.event.target).datum();
-        hover = entity.id;
-        drawVector(iD.util.trueObj([hover]));
-        d3.select('.messages').text(entity.tags.name || '#' + entity.id);
+        var datum = d3.select(d3.event.target).datum();
+        if (datum instanceof iD.Entity) {
+            hover = datum.id;
+            drawVector(iD.util.trueObj([hover]));
+            d3.select('.messages').text(datum.tags.name || '#' + datum.id);
+        }
     }
 
     function hoverOut() {
-        var oldHover = hover;
-        hover = null;
-        drawVector(iD.util.trueObj([oldHover]));
-        d3.select('.messages').text('');
+        if (hover) {
+            var oldHover = hover;
+            hover = null;
+            drawVector(iD.util.trueObj([oldHover]));
+            d3.select('.messages').text('');
+        }
     }
 
     function zoomPan() {

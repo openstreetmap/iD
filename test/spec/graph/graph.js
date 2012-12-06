@@ -16,6 +16,16 @@ describe('iD.Graph', function() {
         expect(graph.annotation).to.equal('first graph');
     });
 
+    if (iD.debug) {
+        it("is frozen", function () {
+            expect(Object.isFrozen(iD.Graph())).to.be.true;
+        });
+
+        it("freezes entities", function () {
+            expect(Object.isFrozen(iD.Graph().entities)).to.be.true;
+        });
+    }
+
     describe('operations', function() {
         it('#remove', function() {
             var entities = { 'n-1': {
