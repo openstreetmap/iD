@@ -57,15 +57,13 @@ iD.Map = function() {
         support3d = (function() {
             // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
             var el = document.createElement('div'),
-                has3d = false,
-                transform = iD.util.prefix(['webkit', 'ms', 'Moz']) + 'transform';
+                has3d = false;
             document.body.insertBefore(el,null);
-            if (el.style[transform] !== undefined) {
-                el.style[transform] = 'translate3d(1px,1px,1px)';
-                has3d = window.getComputedStyle(el).getPropertyValue(transform);
+            if (el.style[transformProp] !== undefined) {
+                el.style[transformProp] = 'translate3d(1px,1px,1px)';
+                has3d = window.getComputedStyle(el).getPropertyValue(transformProp);
             }
             document.body.removeChild(el);
-
             return (has3d && has3d.length>0 && has3d!=="none");
         })(),
         supersurface, surface, defs, tilegroup, r, g, alength;

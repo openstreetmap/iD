@@ -70,7 +70,7 @@ iD.util.prefixProperty = function(property) {
         var i = -1, n = p.length, s = document.body.style;
         if (property.toLowerCase() in s) return property.toLowerCase();
         while (++i < n) if (p[i] + property in s) return '-' + p[i].toLowerCase() + '-' + property.toLowerCase();
-        return '';
+        return false;
     })(prefixes);
 };
 
