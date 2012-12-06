@@ -53,8 +53,19 @@ iD.Map = function() {
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
-        transformProp = iD.util.prefix() + 'transform',
-        support3d = iD.util.prefix() === 'O',
+        transformProp = iD.util.prefixProperty('Transform'),
+        support3d = (function() {
+            // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
+            var el = document.createElement('div'),
+                has3d = false;
+            document.body.insertBefore(el,null);
+            if (el.style[transformProp] !== undefined) {
+                el.style[transformProp] = 'translate3d(1px,1px,1px)';
+                has3d = window.getComputedStyle(el).getPropertyValue(transformProp);
+            }
+            document.body.removeChild(el);
+            return (has3d && has3d.length>0 && has3d!=="none");
+        })(),
         supersurface, surface, defs, tilegroup, r, g, alength;
 
     function map() {

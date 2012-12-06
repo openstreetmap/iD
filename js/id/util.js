@@ -64,12 +64,14 @@ iD.util.qsString = function(obj) {
     }).join('&');
 };
 
-iD.util.prefix = function() {
+iD.util.prefixProperty = function(property) {
+    var prefixes = ['webkit', 'ms', 'Moz', 'O'];
     return (function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
-        while (++i < n) if (p[i] + 'Transform' in s) return '-' + p[i].toLowerCase() + '-';
-        return '';
-    })(['webkit', 'ms', 'Moz', 'O']);
+        if (property.toLowerCase() in s) return property.toLowerCase();
+        while (++i < n) if (p[i] + property in s) return '-' + p[i].toLowerCase() + '-' + property.toLowerCase();
+        return false;
+    })(prefixes);
 };
 
 iD.util.geo = {};
