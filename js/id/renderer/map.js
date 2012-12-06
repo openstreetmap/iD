@@ -13,37 +13,8 @@ iD.Map = function() {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         dragEnabled = true,
+        dragging = false,
         fastEnabled = true,
-        dragging,
-        dragbehavior = d3.behavior.drag()
-            .origin(function(entity) {
-                if (!dragEnabled) return { x: 0, y: 0 };
-                var p = projection(entity.loc);
-                return { x: p[0], y: p[1] };
-            })
-            .on('drag', function(entity) {
-                d3.event.sourceEvent.stopPropagation();
-
-                if (!dragging) {
-                    if (entity.accuracy) {
-                        var way = history.graph().entity(entity.way),
-                            index = entity.index;
-                        entity = iD.Node(entity);
-                        history.perform(iD.actions.AddWayNode(way, entity, index));
-                    }
-
-                    dragging = iD.util.trueObj([entity.id].concat(
-                        _.pluck(history.graph().parentWays(entity.id), 'id')));
-                    history.perform(iD.actions.Noop());
-                }
-
-                var to = projection.invert([d3.event.x, d3.event.y]);
-                history.replace(iD.actions.Move(entity, to));
-            })
-            .on('dragend', function () {
-                if (!dragEnabled || !dragging) return;
-                dragging = undefined;
-            }),
         background = iD.Background()
             .projection(projection),
         class_stroke = iD.Style.styleClasses('stroke'),
@@ -90,7 +61,7 @@ iD.Map = function() {
             .attr('clip-path', 'url(#clip)');
 
         g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
-            return (mem[i] = r.append('g').attr('class', 'layer-g')) && mem;
+            return (mem[i] = r.append('g').attr('class', 'layer-g layer-' + i)) && mem;
         }, {});
 
         var arrow = surface.append('text').text('►----');
@@ -175,10 +146,11 @@ iD.Map = function() {
         }
         handles.exit().remove();
         handles.enter().append('image')
-            .attr({ width: 6, height: 6, 'class': 'handle', 'xlink:href': 'css/handle.png' })
-            .each(function(d) {
-                if (d.tags && d.tags.elastic) return;
-                d3.select(this).call(dragbehavior);
+            .attr({
+                width: 6,
+                height: 6,
+                'class': 'handle',
+                'xlink:href': 'css/handle.png'
             });
         handles.attr('transform', function(entity) {
                 var p = projection(entity.loc);
@@ -193,8 +165,7 @@ iD.Map = function() {
             .data(waynodes, key);
         handles.exit().remove();
         handles.enter().append('circle')
-            .attr({ r: 2, 'class': 'accuracy-handle' })
-            .call(dragbehavior);
+            .attr({ r: 2, 'class': 'accuracy-handle' });
         handles.attr('transform', function(entity) {
             var p = projection(entity.loc);
             return 'translate(' + [~~p[0], ~~p[1]] + ')';
@@ -236,8 +207,7 @@ iD.Map = function() {
             .data(points, key);
         markers.exit().remove();
         var marker = markers.enter().append('g')
-            .attr('class', 'marker')
-            .call(dragbehavior);
+            .attr('class', 'marker');
         marker.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
         marker.append('image')

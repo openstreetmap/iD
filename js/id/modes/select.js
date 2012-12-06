@@ -23,7 +23,9 @@ iD.modes.Select = function (entity) {
 
             entity.nodes.forEach(function(node) {
                 var start = mode.map.projection(node.loc);
-                var end = mode.map.projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
+                var end = mode.map.projection.invert([
+                    start[0] + d3.event.dx,
+                    start[1] + d3.event.dy]);
                 node.loc = end;
                 mode.history.replace(iD.actions.Move(node, end));
             });
