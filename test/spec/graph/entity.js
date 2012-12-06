@@ -1,4 +1,18 @@
 describe('Entity', function () {
+    if (iD.debug) {
+        it("is frozen", function () {
+            expect(Object.isFrozen(iD.Entity())).to.be.true;
+        });
+
+        it("freezes tags", function () {
+            expect(Object.isFrozen(iD.Entity().tags)).to.be.true;
+        });
+
+        it("does not freeze transients", function () {
+            expect(Object.isFrozen(iD.Entity().transients)).to.be.false;
+        });
+    }
+
     describe("#update", function () {
         it("returns a new Entity", function () {
             var a = iD.Entity(),
@@ -125,6 +139,12 @@ describe('Node', function () {
 });
 
 describe('Way', function () {
+    if (iD.debug) {
+        it("freezes nodes", function () {
+            expect(Object.isFrozen(iD.Way().nodes)).to.be.true;
+        });
+    }
+
     it("returns a way", function () {
         expect(iD.Way().type).to.equal("way");
     });
@@ -172,6 +192,12 @@ describe('Way', function () {
 });
 
 describe('Relation', function () {
+    if (iD.debug) {
+        it("freezes nodes", function () {
+            expect(Object.isFrozen(iD.Relation().members)).to.be.true;
+        });
+    }
+
     it("returns a relation", function () {
         expect(iD.Relation().type).to.equal("relation");
     });
