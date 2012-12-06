@@ -8,8 +8,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
             .dragEnable(false)
             .fastEnable(false)
             .hint('Click to add more points to the road. ' +
-                      'Click on other roads to connect to them, and double-click to ' +
-                      'end the road.');
+                'Click on other roads to connect to them, and double-click to ' +
+                'end the road.');
 
         var index = (direction === 'forward') ? undefined : -1,
             node = iD.Node({loc: mode.map.mouseCoordinates(), tags: { elastic: true } }),
@@ -35,6 +35,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
             var datum = d3.select(d3.event.target).datum() || {};
 
+
             if (datum.type === 'node') {
                 if (datum.id == firstNode || datum.id == lastNode) {
                     // If mode is drawing a loop and mode is not the drawing
@@ -46,17 +47,20 @@ iD.modes.DrawRoad = function(way_id, direction) {
                         mode.history.replace(iD.actions.AddWayNode(way,
                             mode.history.graph().entity(lastNode), index));
                     }
-
                     mode.history.replace(iD.actions.DeleteNode(node));
-
                     return finish(iD.modes.Select(way));
+                } else if (datum.id == node.id) {
+                    datum = datum.update({ tags: {} });
+                    mode.history.replace(iD.actions.ChangeEntityTags(datum, {}));
+                    mode.history.replace(iD.actions.DeleteNode(node));
+                    mode.history.replace(iD.actions.AddWayNode(way, datum, index));
                 } else {
                     // connect a way to an existing way
                     mode.history.replace(iD.actions.DeleteNode(node));
                     mode.history.replace(iD.actions.AddWayNode(way, datum, index));
                 }
             } else if (datum.type === 'way') {
-                node = node.update({loc: mode.map.mouseCoordinates(), tags: {} });
+                node = node.update({loc: mode.map.mouseCoordinates() });
                 mode.history.replace(iD.actions.AddWayNode(way, node, index));
 
                 var connectedWay = mode.history.graph().entity(datum.id);
@@ -67,7 +71,6 @@ iD.modes.DrawRoad = function(way_id, direction) {
                     node,
                     connectedIndex));
             } else {
-                node = node.update({loc: mode.map.mouseCoordinates(), tags: {} });
                 mode.history.replace(iD.actions.AddWayNode(way, node, index));
             }
 
