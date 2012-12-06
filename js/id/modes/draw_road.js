@@ -6,8 +6,9 @@ iD.modes.DrawRoad = function(way_id, direction) {
     mode.enter = function() {
         mode.map.dblclickEnable(false)
             .dragEnable(false)
-            .fastEnable(false)
-            .hint('Click to add more points to the road. ' +
+            .fastEnable(false);
+
+        mode.map.hint('Click to add more points to the road. ' +
                 'Click on other roads to connect to them, and double-click to ' +
                 'end the road.');
 
