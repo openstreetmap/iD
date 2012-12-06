@@ -31,8 +31,7 @@ iD.modes.DrawArea = function(wayId) {
             if (datum.id === tailId) {
                 history.replace(
                     iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, tailId),
-                    iD.actions.ChangeEntityTags(way.id, _.omit(way.tags, 'elastic')));
+                    iD.actions.AddWayNode(way.id, tailId));
 
                 controller.enter(iD.modes.Select(way));
 
@@ -51,8 +50,7 @@ iD.modes.DrawArea = function(wayId) {
 
         map.keybinding().on('⎋.drawarea', function() {
             history.replace(
-                iD.actions.DeleteNode(node.id),
-                iD.actions.ChangeEntityTags(wayId, _.omit(way.tags, 'elastic')));
+                iD.actions.DeleteNode(node.id));
 
             controller.enter(iD.modes.Browse());
         });

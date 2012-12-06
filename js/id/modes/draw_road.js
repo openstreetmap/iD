@@ -8,7 +8,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
             history = mode.history,
             controller = mode.controller,
             way = history.graph().entity(wayId),
-            node = iD.Node({loc: map.mouseCoordinates(), tags: {elastic: true}}),
+            node = iD.Node({loc: map.mouseCoordinates()}),
             index = (direction === 'forward') ? undefined : -1,
             headId = (direction === 'forward') ? _.last(way.nodes) : _.first(way.nodes),
             tailId = (direction === 'forward') ? _.first(way.nodes) : _.last(way.nodes);
@@ -35,8 +35,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
                 // connect the way in a loop
                 history.replace(
                     iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(wayId, tailId, index),
-                    iD.actions.ChangeEntityTags(wayId, _.omit(way.tags, 'elastic')));
+                    iD.actions.AddWayNode(wayId, tailId, index));
 
                 controller.enter(iD.modes.Select(way));
 
@@ -64,8 +63,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
 
         map.keybinding().on('⎋.drawroad', function() {
             history.replace(
-                iD.actions.DeleteNode(node.id),
-                iD.actions.ChangeEntityTags(wayId, _.omit(way.tags, 'elastic')));
+                iD.actions.DeleteNode(node.id));
 
             controller.enter(iD.modes.Browse());
         });
