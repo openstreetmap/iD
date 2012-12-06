@@ -13,6 +13,13 @@ iD.modes.DrawArea = function(way_id) {
             firstnode_id = _.first(way.nodes),
             node = iD.Node({loc: mode.map.mouseCoordinates()});
 
+        function finish(next) {
+            way = mode.history.graph().entity(way.id);
+            way.tags = _.omit(way.tags, 'elastic');
+            mode.history.perform(iD.actions.ChangeEntityTags(way, way.tags));
+            return mode.controller.enter(next);
+        }
+
         mode.history.perform(iD.actions.AddWayNode(way, node));
 
         mode.map.surface.on('mousemove.drawarea', function() {
@@ -29,12 +36,8 @@ iD.modes.DrawArea = function(way_id) {
                     mode.history.replace(iD.actions.DeleteNode(node));
                     mode.history.replace(iD.actions.AddWayNode(way,
                         mode.history.graph().entity(way.nodes[0])));
-                    way = mode.history.graph().entity(way.id);
-                    way.tags = _.omit(way.tags, 'elastic');
-                    mode.history.perform(iD.actions.ChangeEntityTags(way, way.tags));
 
-                    // End by clicking on own tail
-                    return mode.controller.enter(iD.modes.Select(way));
+                    return finish(iD.modes.Select(way));
                 } else {
                     // connect a way to an existing way
                     mode.history.replace(iD.actions.AddWayNode(way, datum));
@@ -48,9 +51,10 @@ iD.modes.DrawArea = function(way_id) {
         });
 
         mode.map.keybinding().on('⎋.drawarea', function() {
-            mode.controller.exit();
-        })
-        .on('⌫.drawarea', function() {
+            finish(iD.modes.Browse());
+        });
+
+        mode.map.keybinding().on('⌫.drawarea', function() {
             d3.event.preventDefault();
             var lastNode = _.last(way.nodes);
             mode.history.replace(iD.actions.removeWayNode(way,

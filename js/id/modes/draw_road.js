@@ -16,6 +16,12 @@ iD.modes.DrawRoad = function(way_id, direction) {
             firstNode = way.nodes[0],
             lastNode = _.last(way.nodes);
 
+        function finish(next) {
+            way.tags = _.omit(way.tags, 'elastic');
+            mode.history.perform(iD.actions.ChangeEntityTags(way, way.tags));
+            return mode.controller.enter(next);
+        }
+
         mode.history.perform(iD.actions.AddWayNode(way, node, index));
 
         mode.map.surface.on('mousemove.drawroad', function() {
@@ -40,12 +46,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                             mode.history.graph().entity(lastNode), index));
                     }
 
-                    way.tags = _.omit(way.tags, 'elastic');
-                    mode.history.perform(iD.actions.ChangeEntityTags(
-                        way, way.tags));
-
-                    // End by clicking on own tail
-                    return mode.controller.enter(iD.modes.Select(way));
+                    return finish(iD.modes.Select(way));
                 } else {
                     // connect a way to an existing way
                     mode.history.replace(iD.actions.AddWayNode(way, datum, index));
@@ -70,7 +71,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
         });
 
         mode.map.keybinding().on('⎋.drawroad', function() {
-            mode.controller.exit();
+            finish(iD.modes.Browse());
         });
 
         mode.map.keybinding().on('⌫.drawroad', function() {
