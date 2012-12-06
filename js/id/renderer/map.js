@@ -2,7 +2,7 @@ iD.Map = function() {
     var connection, history,
         dimensions = [],
         dispatch = d3.dispatch('move'),
-        selection = null,
+        selection = null, hover = null,
         translateStart,
         keybinding,
         projection = d3.geo.mercator(),
@@ -38,13 +38,10 @@ iD.Map = function() {
 
                 var to = projection.invert([d3.event.x, d3.event.y]);
                 history.replace(iD.actions.Move(entity, to));
-
-                redraw();
             })
             .on('dragend', function () {
                 if (!dragEnabled || !dragging) return;
                 dragging = undefined;
-                redraw();
             }),
         background = iD.Background()
             .projection(projection)
@@ -87,8 +84,8 @@ iD.Map = function() {
             .attr('clip-path', 'url(#clip)');
 
         r = surface.append('g')
-            .on('mouseover', nameHoverIn)
-            .on('mouseout', nameHoverOut)
+            .on('mouseover', hoverIn)
+            .on('mouseout', hoverOut)
             .attr('clip-path', 'url(#clip)');
 
         g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
@@ -104,6 +101,7 @@ iD.Map = function() {
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
+    function classHover(d) { return d.id === hover; }
     function classActive(d) { return d.id === selection; }
     function getline(d) { return d._line; }
     function key(d) { return d.id; }
@@ -285,11 +283,13 @@ iD.Map = function() {
         casings.exit().remove();
         casings.enter().append('path')
             .attr('class', class_casing)
+            .classed('hover', classHover)
             .classed('active', classActive);
         casings
             .order()
             .attr('d', getline)
             .attr('class', class_casing)
+            .classed('hover', classHover)
             .classed('active', classActive);
     }
 
@@ -298,12 +298,19 @@ iD.Map = function() {
         drawVector(iD.util.trueObj(Object.keys(result.entities)));
     }
 
-    function nameHoverIn() {
-        var entity = d3.select(d3.event.target).data();
-        if (entity) d3.select('.messages').text(entity[0].tags.name || '#' + entity[0].id);
+    function hoverIn() {
+        var entity = d3.select(d3.event.target).datum();
+        hover = entity.id;
+        drawVector(iD.util.trueObj([hover]));
+        d3.select('.messages').text(entity.tags.name || '#' + entity.id);
     }
 
-    function nameHoverOut() { d3.select('.messages').text(''); }
+    function hoverOut() {
+        var oldHover = hover;
+        hover = null;
+        drawVector(iD.util.trueObj([oldHover]));
+        d3.select('.messages').text('');
+    }
 
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
