@@ -1,8 +1,9 @@
 iD.modes.Select = function (entity) {
     var mode = {
-        button: ''
-    },
-        inspector = iD.Inspector(),
+        button: 'browse'
+    };
+
+    var inspector = iD.Inspector(),
         dragging, target;
 
     var dragWay = d3.behavior.drag()
