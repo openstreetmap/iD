@@ -1,11 +1,13 @@
 iD.layerswitcher = function(map) {
-    var event = d3.dispatch('cancel', 'save');
-    var sources = [{
-        name: 'Bing',
-        source: iD.BackgroundSource.Bing
-    }];
-
-    var opacities = [1, 0.5, 0];
+    var event = d3.dispatch('cancel', 'save'),
+        sources = [{
+            name: 'Bing',
+            source: iD.BackgroundSource.Bing
+        }, {
+            name: 'TIGER 2012',
+            source: iD.BackgroundSource.Tiger2012
+        }],
+        opacities = [1, 0.5, 0];
 
     function layerswitcher(selection) {
         selection
@@ -16,7 +18,7 @@ iD.layerswitcher = function(map) {
         var content = selection
             .append('div').attr('class', 'content');
 
-        var opa = content.append('div')
+        opa = content.append('div')
             .attr('class', 'opacity-options')
             .selectAll('a.opacity')
             .data(opacities)
@@ -31,14 +33,17 @@ iD.layerswitcher = function(map) {
                     .style('opacity', d);
             });
 
-        var s = content.selectAll('a.layer')
-            .data(sources);
-
-        s.enter()
+        content.selectAll('a.layer')
+            .data(sources)
+            .enter()
             .append('a')
             .attr('class', 'layer')
             .text(function(d) {
                 return d.name;
+            })
+            .on('click', function(d) {
+                map.background.source(d.source);
+                map.redraw();
             });
     }
 

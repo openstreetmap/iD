@@ -1,7 +1,8 @@
 iD.Background = function() {
     var tile = d3.geo.tile(),
         scaleExtent = [0, 20],
-        projection, source;
+        projection,
+        source;
 
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`
@@ -16,6 +17,7 @@ iD.Background = function() {
                 projection.scale() / 2 - projection.translate()[0],
                 projection.scale() / 2 - projection.translate()[1]];
 
+        tiles.forEach(function(t) { t.push(source(t)); });
         var image = this
             .selectAll("image")
             .data(tiles, function(d) { return d; });
@@ -23,7 +25,7 @@ iD.Background = function() {
         image.exit().remove();
 
         image.enter().append("image")
-            .attr("xlink:href", source);
+            .attr("xlink:href", function(d) { return d[3]; });
 
         image.attr('transform', function(d) {
             return 'translate(' +
@@ -64,7 +66,7 @@ iD.Background = function() {
 iD.BackgroundSource = {};
 
 // derive the url of a 'quadkey' style tile from a coordinate object
-iD.BackgroundSource.template = function(template) {
+iD.BackgroundSource.template = function(template, subdomains) {
     return function(coord) {
         var u = '';
         for (var zoom = coord[2]; zoom > 0; zoom--) {
@@ -75,7 +77,8 @@ iD.BackgroundSource.template = function(template) {
             u += byte.toString();
         }
         // distribute requests against multiple domains
-        var t = coord[2] % 5;
+        var t = subdomains ?
+            subdomains[coord[2] % subdomains.length] : '';
         return template
             .replace('{t}', t)
             .replace('{u}', u)
@@ -86,4 +89,9 @@ iD.BackgroundSource.template = function(template) {
 };
 
 iD.BackgroundSource.Bing = iD.BackgroundSource.template(
-    'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z');
+    'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
+    [1, 2, 3, 4]);
+
+iD.BackgroundSource.Tiger2012 = iD.BackgroundSource.template(
+    'http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png',
+    ['a', 'b', 'c']);

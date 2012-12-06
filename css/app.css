@@ -122,6 +122,10 @@ div.layerswitcher-control div.opacity-options {
     width:45px;
 }
 
+div.layerswitcher-control a.layer {
+    display:block;
+}
+
 div.layerswitcher-control a.opacity {
     background:#000;
     display:inline-block;
