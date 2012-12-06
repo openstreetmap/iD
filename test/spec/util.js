@@ -35,20 +35,7 @@ describe('Util', function() {
                 expect(iD.util.geo.interp(a, b, 0)).to.eql([0, 0]);
             });
         });
-        describe('#nodeIntersect', function() {
-            it('correctly says that a node is in an extent', function() {
-                expect(iD.util.geo.nodeIntersect({
-                    loc: [0, 0]
-                }, [[-180, 90],
-                    [180, -90]])).to.be.true;
-            });
-            it('correctly says that a node is outside of an extent', function() {
-                expect(iD.util.geo.nodeIntersect({
-                    loc: [0, 0]
-                }, [[100, 90],
-                    [180, -90]])).to.be.false;
-            });
-        });
+
         describe('#dist', function() {
             it('distance between two same points is zero', function() {
                 var a = [0, 0],

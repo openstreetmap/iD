@@ -134,7 +134,7 @@ iD.Map = function() {
                 else ways.push(a);
             } else if (a._poi) {
                 points.push(a);
-            } else if (!a._poi && a.type === 'node' && iD.util.geo.nodeIntersect(a, extent)) {
+            } else if (!a._poi && a.type === 'node' && a.intersects(extent)) {
                 waynodes.push(a);
             }
         }
