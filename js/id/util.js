@@ -64,12 +64,13 @@ iD.util.qsString = function(obj) {
     }).join('&');
 };
 
-iD.util.prefix = function() {
+iD.util.prefix = function(browsers) {
+    if (!browsers) browsers = ['webkit', 'ms', 'Moz', 'O'];
     return (function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
         while (++i < n) if (p[i] + 'Transform' in s) return '-' + p[i].toLowerCase() + '-';
         return '';
-    })(['webkit', 'ms', 'Moz', 'O']);
+    })(browsers);
 };
 
 iD.util.geo = {};
