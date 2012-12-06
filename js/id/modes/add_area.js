@@ -13,7 +13,7 @@ iD.modes.AddArea = function() {
         mode.map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
                 node,
-                way = iD.Way({tags: { building: 'yes', area: 'yes', elastic: 'true' }});
+                way = iD.Way({tags: { building: 'yes', area: 'yes' }});
 
             // connect a way to an existing way
             if (datum.type === 'node') {

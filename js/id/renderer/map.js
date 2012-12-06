@@ -154,7 +154,8 @@ iD.Map = function() {
             });
         handles.attr('transform', function(entity) {
                 var p = projection(entity.loc);
-                return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
+                return 'translate(' + [~~p[0], ~~p[1]] +
+                    ') translate(-3, -3) rotate(45, 3, 3)';
             })
             .classed('active', classActive)
             .sort(olderOnTop);

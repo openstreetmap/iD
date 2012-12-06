@@ -12,7 +12,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                 'end the road.');
 
         var index = (direction === 'forward') ? undefined : -1,
-            node = iD.Node({loc: mode.map.mouseCoordinates(), tags: { elastic: true } }),
+            node = iD.Node({loc: mode.map.mouseCoordinates() }),
             way = mode.history.graph().entity(way_id),
             firstNode = way.nodes[0],
             lastNode = _.last(way.nodes);

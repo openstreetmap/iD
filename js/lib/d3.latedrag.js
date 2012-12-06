@@ -7,7 +7,7 @@ d3.latedrag = function() {
         selection.on('mousedown.latedrag', function() {
             var datum = d3.select(d3.event.target).datum();
             if (datum && filter(datum)) {
-                mousedown.apply(d3.event.target, [datum]);
+                mousedown.apply(selection.node(), [datum]);
             }
         });
     }

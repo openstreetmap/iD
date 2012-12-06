@@ -16,7 +16,7 @@ iD.modes.AddRoad = function() {
                 node,
                 direction = 'forward',
                 start = true,
-                way = iD.Way({ tags: { highway: 'residential', elastic: 'true' } });
+                way = iD.Way({ tags: { highway: 'residential' } });
 
             if (datum.type === 'node') {
                 // continue an existing way
