@@ -95,3 +95,7 @@ iD.BackgroundSource.Bing = iD.BackgroundSource.template(
 iD.BackgroundSource.Tiger2012 = iD.BackgroundSource.template(
     'http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png',
     ['a', 'b', 'c']);
+
+iD.BackgroundSource.OSM = iD.BackgroundSource.template(
+    'http://{t}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    ['a', 'b', 'c']);

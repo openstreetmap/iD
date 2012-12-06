@@ -35,12 +35,12 @@ d3.typeahead = function() {
             if (d3.event.keyCode === 40) idx++;
             if (d3.event.keyCode === 38) idx--;
             if (d3.event.keyCode === 13) {
-                selection.property('value', container.select('a.active').datum().value);
+                selection.property('value', container.select('a.selected').datum().value);
                 hide();
             }
             container
                 .selectAll('a')
-                .classed('active', function(d, i) { return i == idx; });
+                .classed('selected', function(d, i) { return i == idx; });
             // if (d3.event.keyCode === 13) // return
             data(selection, function(data) {
                 var val = selection.property('value'),

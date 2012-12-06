@@ -111,9 +111,17 @@ div.layerswitcher-control {
     color:#222;
 }
 
+div.hide {
+    display:none;
+}
+
 div.layerswitcher-control .content {
     background:#fff;
     padding:5px;
+    position:absolute;
+    left:40px;
+    width:100px;
+    top:0;
 }
 
 div.layerswitcher-control div.opacity-options {
@@ -329,7 +337,7 @@ div.typeahead a {
     display:block;
 }
 
-div.typeahead a.active {
+a.selected {
     background:#DDE4FF;
 }
 

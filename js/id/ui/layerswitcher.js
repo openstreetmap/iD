@@ -6,6 +6,9 @@ iD.layerswitcher = function(map) {
         }, {
             name: 'TIGER 2012',
             source: iD.BackgroundSource.Tiger2012
+        }, {
+            name: 'OSM',
+            source: iD.BackgroundSource.OSM
         }],
         opacities = [1, 0.5, 0];
 
@@ -13,10 +16,15 @@ iD.layerswitcher = function(map) {
         selection
             .append('button')
             .attr('class', 'white')
-            .text('L');
+            .text('L')
+            .on('click', function() {
+                content.classed('hide', function() {
+                    return !content.classed('hide');
+                });
+            });
 
         var content = selection
-            .append('div').attr('class', 'content');
+            .append('div').attr('class', 'content hide');
 
         opa = content.append('div')
             .attr('class', 'opacity-options')
@@ -33,18 +41,29 @@ iD.layerswitcher = function(map) {
                     .style('opacity', d);
             });
 
+        function selectLayer(d) {
+            content.selectAll('a.layer')
+                .classed('selected', function(d) {
+                    return d.source === map.background.source();
+                });
+        }
+
         content.selectAll('a.layer')
             .data(sources)
             .enter()
             .append('a')
+            .attr('href', '#')
             .attr('class', 'layer')
             .text(function(d) {
                 return d.name;
             })
             .on('click', function(d) {
+                d3.event.preventDefault();
                 map.background.source(d.source);
                 map.redraw();
+                selectLayer(d);
             });
+        selectLayer(map.background.source());
     }
 
     return d3.rebind(layerswitcher, event, 'on');
