@@ -38,13 +38,10 @@ iD.Map = function() {
 
                 var to = projection.invert([d3.event.x, d3.event.y]);
                 history.replace(iD.actions.Move(entity, to));
-
-                redraw();
             })
             .on('dragend', function () {
                 if (!dragEnabled || !dragging) return;
                 dragging = undefined;
-                redraw();
             }),
         background = iD.Background()
             .projection(projection)
