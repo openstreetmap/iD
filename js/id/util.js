@@ -65,7 +65,7 @@ iD.util.qsString = function(obj) {
 };
 
 iD.util.prefixProperty = function(property) {
-    prefixes = ['webkit', 'ms', 'Moz', 'O'];
+    var prefixes = ['webkit', 'ms', 'Moz', 'O'];
     return (function prefixMatch(p) { // via mbostock
         var i = -1, n = p.length, s = document.body.style;
         if (property.toLowerCase() in s) return property.toLowerCase();
