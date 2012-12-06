@@ -1,7 +1,13 @@
+/* Basics
+------------------------------------------------------- */
+
 body {
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     color:#444;
 }
 
@@ -35,6 +41,10 @@ a:hover {
     color:#000;
 }
 
+table th {
+    text-align:left;
+}
+
 input[type=text] {
     font-size:12px;
     line-height:20px;
@@ -44,6 +54,19 @@ input[type=text] {
 input[type=text]:focus {
     border-color:#222;
 }
+
+/* Utility Classes
+------------------------------------------------------- */
+
+div.hide {
+    display:none;
+}
+
+a.selected {
+    background:#DDE4FF;
+}
+
+/* Buttons */
 
 button {
     background:#7092ff;
@@ -59,6 +82,7 @@ button {
 button.cancel {
     background:#aaa;
 }
+
 button.delete {
     background:#DD5757;
 }
@@ -71,9 +95,17 @@ button small {
     vertical-align: top;
 }
 
-table th {
-    text-align:left;
+div.buttons-joined {
+    margin:5px;
+    padding:1px;
+    background:#fff;
+    display:inline-block;
+    border-radius:3px;
+    border:1px solid #ccc;
 }
+
+/* Map
+------------------------------------------------------- */
 
 #map {
     display:block;
@@ -86,6 +118,23 @@ table th {
     background:#fff;
 }
 
+img.tile {
+    position:absolute;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+}
+
+#tile-g {
+    position:absolute;
+    top:0;
+}
+
+/* About Section
+------------------------------------------------------- */
+
 #about {
     position:absolute;
     bottom:5px;
@@ -93,6 +142,9 @@ table th {
     background:#fff;
     padding:2px 5px;
 }
+
+/* ToolBar / Persistent UI Elements
+------------------------------------------------------- */
 
 #bar {
     background:#e8e8e8;
@@ -102,60 +154,6 @@ table th {
     top:0px;
     height:44px;
     right:0;
-}
-
-div.layerswitcher-control {
-    position:absolute;
-    top:170px;
-    left:10px;
-    color:#222;
-}
-
-div.hide {
-    display:none;
-}
-
-div.layerswitcher-control .content {
-    background:#fff;
-    padding:5px;
-    position:absolute;
-    left:40px;
-    width:100px;
-    top:0;
-}
-
-div.layerswitcher-control div.opacity-options {
-    border:1px solid #000;
-    height:15px;
-    width:45px;
-}
-
-div.layerswitcher-control a.layer {
-    display:block;
-}
-
-div.layerswitcher-control a.opacity {
-    background:#000;
-    display:inline-block;
-    width:15px;
-    height:15px;
-}
-
-
-div.geocode-control {
-    position:absolute;
-    top:130px;
-    left:10px;
-    color:#222;
-}
-
-#bar div.geocode-control button,
-div.layerswitcher-control button {
-    width:40px;
-}
-
-div.geocode-control input {
-    display:none;
 }
 
 #bar button,
@@ -176,15 +174,6 @@ button.white {
     margin:0;
 }
 
-div.buttons-joined {
-    margin:5px;
-    padding:1px;
-    background:#fff;
-    display:inline-block;
-    border-radius:3px;
-    border:1px solid #ccc;
-}
-
 #bar div.buttons-joined button:first-child {
     border-radius:2px 0 0 2px;
 }
@@ -203,21 +192,6 @@ div.buttons-joined {
 
 #bar .messages {
     display:none;
-}
-
-.user {
-    width:200px;
-    position:absolute;
-    bottom:10px;
-    left:10px;
-    background:#fff;
-    padding:2px 5px;
-    border-radius:3px;
-    border:1px solid #aaa;
-}
-
-.user .logout {
-    margin-left:10px;
 }
 
 #bar button[disabled] {
@@ -248,7 +222,9 @@ div.buttons-joined {
     margin:0;
 }
 
-.zoombuttons {
+/* Map Controls */
+
+#bar .zoombuttons {
     position:absolute;
     left:10px;
     top:50px;
@@ -269,6 +245,77 @@ div.buttons-joined {
     border-radius:0 0 5px 5px;
 }
 
+/* Layer Switcher */
+
+div.layerswitcher-control {
+    position:absolute;
+    top:170px;
+    left:10px;
+    color:#222;
+}
+
+div.layerswitcher-control .content {
+    background:#fff;
+    padding:5px;
+    position:absolute;
+    left:40px;
+    width:100px;
+    top:0;
+}
+
+div.layerswitcher-control div.opacity-options {
+    border:1px solid #000;
+    height:15px;
+    width:45px;
+}
+
+div.layerswitcher-control a.layer {
+    display:block;
+}
+
+div.layerswitcher-control a.opacity {
+    background:#000;
+    display:inline-block;
+    width:15px;
+    height:15px;
+}
+
+/* Geocoder */
+
+div.geocode-control {
+    position:absolute;
+    top:130px;
+    left:10px;
+    color:#222;
+}
+
+#bar div.geocode-control button,
+div.layerswitcher-control button {
+    width:40px;
+}
+
+div.geocode-control input {
+    display:none;
+}
+
+/* Account Information
+------------------------------------------------------- */
+
+.user {
+    width:200px;
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    background:#fff;
+    padding:2px 5px;
+    border-radius:3px;
+    border:1px solid #aaa;
+}
+
+.user .logout {
+    margin-left:10px;
+}
+
 .inspector-wrap {
     border-radius:3px;
     border:1px solid #ccc;
@@ -283,6 +330,9 @@ div.buttons-joined {
     opacity:0;
     display:none;
 }
+
+/* Inspector
+------------------------------------------------------- */
 
 .inspector-wrap a.permalink {
     text-decoration:none;
@@ -337,9 +387,8 @@ div.typeahead a {
     display:block;
 }
 
-a.selected {
-    background:#DDE4FF;
-}
+/* Modals
+------------------------------------------------------- */
 
 .modal {
     width:640px;
@@ -398,11 +447,8 @@ a.selected {
     overflow:auto;
 }
 
-/* mobile tweaks */
-* {
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-    -webkit-touch-callout:none;
-}
+/* Tooltips
+------------------------------------------------------- */
 
 #bar button .tooltip {
     white-space: normal;
@@ -452,16 +498,9 @@ a.selected {
     border-width: 0 5px 5px;
 }
 
-img.tile {
-    position:absolute;
-    transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-    -moz-transform-origin:0 0;
-    -o-transform-origin:0 0;
-}
-
-#tile-g {
-    position:absolute;
-    top:0;
+/* Mobile Tweaks
+------------------------------------------------------- */
+* {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-touch-callout:none;
 }
