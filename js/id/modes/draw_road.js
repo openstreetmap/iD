@@ -4,12 +4,12 @@ iD.modes.DrawRoad = function(way_id, direction) {
     };
 
     mode.enter = function() {
-        mode.map.dblclickEnable(false);
-        mode.map.hint('Click to add more points to the road. ' +
+        mode.map.dblclickEnable(false)
+            .dragEnable(false)
+            .fastEnable(false)
+            .hint('Click to add more points to the road. ' +
                       'Click on other roads to connect to them, and double-click to ' +
                       'end the road.');
-        mode.map.dragEnable(false);
-        mode.map.fastEnable(false);
 
         var index = (direction === 'forward') ? undefined : -1,
             node = iD.Node({loc: mode.map.mouseCoordinates(), tags: { elastic: true } }),
@@ -46,6 +46,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
                         mode.history.replace(iD.actions.AddWayNode(way,
                             mode.history.graph().entity(lastNode), index));
                     }
+
+                    mode.history.replace(iD.actions.DeleteNode(node));
 
                     return finish(iD.modes.Select(way));
                 } else {
@@ -87,8 +89,8 @@ iD.modes.DrawRoad = function(way_id, direction) {
     };
 
     mode.exit = function() {
-        mode.map.hint(false);
-        mode.map.fastEnable(true);
+        mode.map.hint(false).fastEnable(true);
+
         mode.map.surface
             .on('mousemove.drawroad', null)
             .on('click.drawroad', null);
