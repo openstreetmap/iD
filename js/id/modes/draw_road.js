@@ -52,6 +52,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                     return finish(iD.modes.Select(way));
                 } else {
                     // connect a way to an existing way
+                    mode.history.replace(iD.actions.DeleteNode(node));
                     mode.history.replace(iD.actions.AddWayNode(way, datum, index));
                 }
             } else if (datum.type === 'way') {
