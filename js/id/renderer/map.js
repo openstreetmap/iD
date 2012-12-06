@@ -207,11 +207,13 @@ iD.Map = function() {
             .data(data, key);
         lines.exit().remove();
         lines.enter().append('path')
+            .classed('hover', classHover)
             .classed('active', classActive);
         lines
             .order()
             .attr('d', getline)
             .attr('class', class_gen)
+            .classed('hover', classHover)
             .classed('active', classActive);
         return lines;
     }
