@@ -57,7 +57,7 @@ iD.modes.DrawArea = function(way_id) {
         mode.map.keybinding().on('⌫.drawarea', function() {
             d3.event.preventDefault();
             var lastNode = _.last(way.nodes);
-            mode.history.replace(iD.actions.removeWayNode(way,
+            mode.history.replace(iD.actions.RemoveWayNode(way,
                 mode.history.graph().entity(lastNode)));
             mode.history.replace(iD.actions.DeleteNode(
                 mode.history.graph().entity(lastNode)));

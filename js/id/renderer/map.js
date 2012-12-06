@@ -13,6 +13,7 @@ iD.Map = function() {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         dragEnabled = true,
+        fastEnabled = true,
         dragging,
         dragbehavior = d3.behavior.drag()
             .origin(function(entity) {
@@ -176,7 +177,10 @@ iD.Map = function() {
         handles.exit().remove();
         handles.enter().append('image')
             .attr({ width: 6, height: 6, 'class': 'handle', 'xlink:href': 'css/handle.png' })
-            .call(dragbehavior);
+            .each(function(d) {
+                if (d.tags && d.tags.elastic) return;
+                d3.select(this).call(dragbehavior);
+            });
         handles.attr('transform', function(entity) {
                 var p = projection(entity.loc);
                 return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
@@ -304,7 +308,7 @@ iD.Map = function() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
             if (!dblclickEnabled) return;
         }
-        var fast = (d3.event.scale === projection.scale());
+        var fast = (d3.event.scale === projection.scale() && fastEnabled);
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
@@ -376,6 +380,12 @@ iD.Map = function() {
     map.dragEnable = function(_) {
         if (!arguments.length) return dragEnabled;
         dragEnabled = _;
+        return map;
+    };
+
+    map.fastEnable = function(_) {
+        if (!arguments.length) return fastEnabled;
+        fastEnabled = _;
         return map;
     };
 

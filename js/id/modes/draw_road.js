@@ -9,9 +9,10 @@ iD.modes.DrawRoad = function(way_id, direction) {
                       'Click on other roads to connect to them, and double-click to ' +
                       'end the road.');
         mode.map.dragEnable(false);
+        mode.map.fastEnable(false);
 
         var index = (direction === 'forward') ? undefined : -1,
-            node = iD.Node({loc: mode.map.mouseCoordinates()}),
+            node = iD.Node({loc: mode.map.mouseCoordinates(), tags: { elastic: true } }),
             way = mode.history.graph().entity(way_id),
             firstNode = way.nodes[0],
             lastNode = _.last(way.nodes);
@@ -26,11 +27,11 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
         mode.map.surface.on('mousemove.drawroad', function() {
             mode.history.replace(iD.actions.AddWayNode(way,
-                node.update({loc: mode.map.mouseCoordinates()}), index));
+                node.update({ loc: mode.map.mouseCoordinates() }), index));
         });
 
         mode.map.surface.on('click.drawroad', function() {
-            d3.event.stopPropagation();
+            // d3.event.stopPropagation();
 
             var datum = d3.select(d3.event.target).datum() || {};
 
@@ -52,7 +53,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                     mode.history.replace(iD.actions.AddWayNode(way, datum, index));
                 }
             } else if (datum.type === 'way') {
-                node = node.update({loc: mode.map.mouseCoordinates()});
+                node = node.update({loc: mode.map.mouseCoordinates(), tags: {} });
                 mode.history.replace(iD.actions.AddWayNode(way, node, index));
 
                 var connectedWay = mode.history.graph().entity(datum.id);
@@ -63,7 +64,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
                     node,
                     connectedIndex));
             } else {
-                node = node.update({loc: mode.map.mouseCoordinates()});
+                node = node.update({loc: mode.map.mouseCoordinates(), tags: {} });
                 mode.history.replace(iD.actions.AddWayNode(way, node, index));
             }
 
@@ -76,7 +77,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
         mode.map.keybinding().on('⌫.drawroad', function() {
             d3.event.preventDefault();
-            mode.history.replace(iD.actions.removeWayNode(way,
+            mode.history.replace(iD.actions.RemoveWayNode(way,
                 mode.history.graph().entity(lastNode)));
             mode.history.replace(iD.actions.DeleteNode(
                 mode.history.graph().entity(lastNode)));
@@ -87,6 +88,7 @@ iD.modes.DrawRoad = function(way_id, direction) {
 
     mode.exit = function() {
         mode.map.hint(false);
+        mode.map.fastEnable(true);
         mode.map.surface
             .on('mousemove.drawroad', null)
             .on('click.drawroad', null);
