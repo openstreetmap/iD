@@ -64,14 +64,6 @@ iD.util.qsString = function(obj) {
     }).join('&');
 };
 
-iD.util.prefix = function(browsers) {
-    if (!browsers) browsers = ['webkit', 'ms', 'Moz', 'O'];
-    return (function prefixMatch(p) { // via mbostock
-        var i = -1, n = p.length, s = document.body.style;
-        while (++i < n) if (p[i] + 'Transform' in s) return '-' + p[i].toLowerCase() + '-';
-        return '';
-    })(browsers);
-};
 iD.util.prefixProperty = function(property) {
     prefixes = ['webkit', 'ms', 'Moz', 'O'];
     return (function prefixMatch(p) { // via mbostock
