@@ -1,6 +1,5 @@
 iD.Background = function() {
     var tile = d3.geo.tile(),
-        scaleExtent = [0, 20],
         projection,
         cache = {},
         transformProp = iD.util.prefixProperty('Transform'),
@@ -17,8 +16,7 @@ iD.Background = function() {
     }
 
     function upZoom(t, distance) {
-        var az = atZoom(t, distance),
-            tiles = [];
+        var az = atZoom(t, distance), tiles = [];
         for (var x = 0; x < 2; x++) {
             for (var y = 0; y < 2; y++) {
                 var up = [az[0] + x, az[1] + y, az[2]];
@@ -34,15 +32,16 @@ iD.Background = function() {
     function background() {
         var tiles = tile
             .scale(projection.scale())
+            .scaleExtent(source.scaleExtent || [0, 17])
             .translate(projection.translate())(),
+            scaleExtent = tile.scaleExtent(),
             z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),
             rz = Math.max(scaleExtent[0], Math.min(scaleExtent[1], Math.floor(z))),
             ts = 256 * Math.pow(2, z - rz),
             tile_origin = [
                 projection.scale() / 2 - projection.translate()[0],
-                projection.scale() / 2 - projection.translate()[1]];
-
-        var ups = {};
+                projection.scale() / 2 - projection.translate()[1]],
+            ups = {};
 
         tiles.forEach(function(d) {
             d.push(source(d));
@@ -108,12 +107,5 @@ iD.Background = function() {
         return background;
     };
 
-    background.scaleExtent = function(_) {
-        if (!arguments.length) return tile.scaleExtent();
-        tile.scaleExtent(_);
-        return background;
-    };
-
     return background;
 };
-

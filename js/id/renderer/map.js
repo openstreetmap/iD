@@ -45,8 +45,7 @@ iD.Map = function() {
                 dragging = undefined;
             }),
         background = iD.Background()
-            .projection(projection)
-            .scaleExtent([0, 20]),
+            .projection(projection),
         class_stroke = iD.Style.styleClasses('stroke'),
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
