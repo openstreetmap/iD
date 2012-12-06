@@ -66,7 +66,12 @@ iD.Map = function() {
         supersurface, surface, defs, tilegroup, r, g, alength;
 
     function map() {
-        supersurface = this.append('div').call(zoom);
+        tilegroup = this.append('div')
+            .attr('id', 'tile-g');
+
+        supersurface = this.append('div')
+            .style('position', 'absolute')
+            .call(zoom);
 
         surface = supersurface.append('svg')
             .on('mouseup', resetTransform)
@@ -78,10 +83,6 @@ iD.Map = function() {
             .append('rect')
                 .attr('id', 'clip-rect')
                 .attr({ x: 0, y: 0 });
-
-        tilegroup = surface.append('g')
-            .attr('id', 'tile-g')
-            .attr('clip-path', 'url(#clip)');
 
         r = surface.append('g')
             .on('mouseover', hoverIn)
@@ -306,9 +307,13 @@ iD.Map = function() {
             var a = d3.event.translate,
                 b = translateStart;
             if (support3d) {
+                tilegroup.style(transformProp,
+                    'translate3d(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px, 0px)');
                 surface.style(transformProp,
                     'translate3d(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px, 0px)');
             } else {
+                tilegroup.style(transformProp,
+                    'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
                 surface.style(transformProp,
                     'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
             }
@@ -322,6 +327,7 @@ iD.Map = function() {
         if (!surface.style(transformProp)) return;
         translateStart = null;
         surface.style(transformProp, '');
+        tilegroup.style(transformProp, '');
         redraw();
     }
 

@@ -451,3 +451,17 @@ a.selected {
     border-bottom-color: #000000;
     border-width: 0 5px 5px;
 }
+
+img.tile {
+    position:absolute;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+}
+
+#tile-g {
+    position:absolute;
+    top:0;
+}
