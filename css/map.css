@@ -95,6 +95,11 @@ path.area.natural {
     stroke-width:1;
 }
 
+path.area.natural.natural-water {
+    stroke: #6382FF;
+    fill: #ADBEFF;
+}
+
 path.area.building {
     stroke: #9E176A;
     stroke-width: 1;
@@ -102,7 +107,9 @@ path.area.building {
 }
 
 path.area.landuse,
-path.area.natural {
+path.area.natural.natural-wood,
+path.area.natural.natural-tree,
+path.area.natural.natural-grassland {
     stroke: #006B34;
     stroke-width: 1;
     fill: #189E59;

@@ -274,7 +274,6 @@ iD.Map = function() {
             });
     }
 
-
     function connectionLoad(err, result) {
         history.merge(result);
         drawVector(iD.util.trueObj(Object.keys(result.entities)));
