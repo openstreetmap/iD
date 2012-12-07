@@ -19,7 +19,7 @@ iD.modes.DrawArea = function(wayId) {
 
         history.perform(
             iD.actions.AddNode(node),
-            iD.actions.AddWayNode(way.id, node.id));
+            iD.actions.AddWayNode(way.id, node.id, -1));
 
         map.surface.on('mousemove.drawarea', function() {
             history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
@@ -31,7 +31,7 @@ iD.modes.DrawArea = function(wayId) {
             if (datum.id === tailId) {
                 history.replace(
                     iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, tailId),
+                    iD.actions.AddWayNode(way.id, tailId, -1),
                     'added to an area');
 
                 controller.enter(iD.modes.Select(way));
@@ -40,7 +40,7 @@ iD.modes.DrawArea = function(wayId) {
                 // connect the way to an existing node
                 history.replace(
                     iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, datum.id),
+                    iD.actions.AddWayNode(way.id, datum.id, -1),
                     'added to an area');
 
                 controller.enter(iD.modes.DrawArea(wayId));
