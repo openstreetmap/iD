@@ -116,9 +116,9 @@ iD.Map = function() {
                 handles.push({
                     loc: iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5),
                     way: way.id,
+                    id: way.id,
                     index: i + 1,
-                    accuracy: true,
-                    tags: { name: 'Improve way accuracy' }
+                    accuracy: true
                 });
             }
         }
@@ -149,8 +149,9 @@ iD.Map = function() {
             .sort(olderOnTop);
     }
 
-    function drawAccuracyHandles(waynodes) {
+    function drawAccuracyHandles(waynodes, filter) {
         var handles = g.hit.selectAll('circle.accuracy-handle')
+            .filter(filter)
             .data(waynodes, key);
         handles.exit().remove();
         handles.enter().append('circle')
