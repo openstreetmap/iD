@@ -14,7 +14,11 @@ iD.modes.AddPlace = function() {
 
         map.surface.on('click.addplace', function() {
             var node = iD.Node({loc: map.mouseCoordinates(), _poi: true});
-            history.perform(iD.actions.AddNode(node));
+
+            history.perform(
+                iD.actions.AddNode(node),
+                'added a place');
+
             controller.enter(iD.modes.Select(node));
         });
 

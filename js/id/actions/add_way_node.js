@@ -5,6 +5,6 @@ iD.actions.AddWayNode = function(wayId, nodeId, index) {
             node = graph.entity(nodeId),
             nodes = way.nodes.slice();
         nodes.splice(index || nodes.length, 0, nodeId);
-        return graph.replace(way.update({nodes: nodes}), 'added to a road');
+        return graph.replace(way.update({nodes: nodes}));
     };
 };

@@ -1,5 +1,5 @@
-iD.Graph = function(entities, annotation) {
-    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation);
+iD.Graph = function(entities) {
+    if (!(this instanceof iD.Graph)) return new iD.Graph(entities);
 
     if (_.isArray(entities)) {
         this.entities = {};
@@ -9,8 +9,6 @@ iD.Graph = function(entities, annotation) {
     } else {
         this.entities = entities || {};
     }
-
-    this.annotation = annotation;
 
     if (iD.debug) {
         Object.freeze(this);
@@ -40,19 +38,19 @@ iD.Graph.prototype = {
     merge: function(graph) {
         var entities = _.clone(this.entities);
         _.defaults(entities, graph.entities);
-        return iD.Graph(entities, this.annotation);
+        return iD.Graph(entities);
     },
 
-    replace: function(entity, annotation) {
+    replace: function(entity) {
         var entities = _.clone(this.entities);
         entities[entity.id] = entity;
-        return iD.Graph(entities, annotation);
+        return iD.Graph(entities);
     },
 
-    remove: function(entity, annotation) {
+    remove: function(entity) {
         var entities = _.clone(this.entities);
         delete entities[entity.id];
-        return iD.Graph(entities, annotation);
+        return iD.Graph(entities);
     },
 
     // get all objects that intersect an extent.

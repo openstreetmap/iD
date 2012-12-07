@@ -26,6 +26,6 @@ iD.actions.DeleteWay = function(wayId) {
             }
         });
 
-        return graph.remove(way, 'removed a way');
+        return graph.remove(way);
     };
 };

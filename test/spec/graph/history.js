@@ -1,7 +1,6 @@
-describe("History", function () {
+describe("iD.History", function () {
     var history, spy,
-        graph = iD.Graph([], "action"),
-        action = function() { return graph; };
+        action = function() { return iD.Graph(); };
 
     beforeEach(function () {
         history = iD.History();
@@ -16,13 +15,14 @@ describe("History", function () {
 
     describe("#perform", function () {
         it("updates the graph", function () {
-            history.perform(action);
+            var graph = iD.Graph();
+            history.perform(d3.functor(graph));
             expect(history.graph()).to.equal(graph);
         });
 
-        it("pushes the undo stack", function () {
-            history.perform(action);
-            expect(history.undoAnnotation()).to.equal("action");
+        it("pushes an undo annotation", function () {
+            history.perform(action, "annotation");
+            expect(history.undoAnnotation()).to.equal("annotation");
         });
 
         it("emits a change event", function () {
@@ -31,32 +31,27 @@ describe("History", function () {
             expect(spy).to.have.been.called;
         });
 
-        it("does not emit a change event when performing a noop", function () {
-            history.on('change', spy);
-            history.perform(iD.actions.Noop);
-            expect(spy).not.to.have.been.called;
-        });
-
         it("performs multiple actions", function () {
-            var action1 = sinon.stub().returns(graph),
-                action2 = sinon.stub().returns(graph);
-            history.perform(action1, action2);
+            var action1 = sinon.stub().returns(iD.Graph()),
+                action2 = sinon.stub().returns(iD.Graph());
+            history.perform(action1, action2, "annotation");
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
+            expect(history.undoAnnotation()).to.equal("annotation");
         });
     });
 
     describe("#replace", function () {
         it("updates the graph", function () {
-            history.replace(action);
+            var graph = iD.Graph();
+            history.replace(d3.functor(graph));
             expect(history.graph()).to.equal(graph);
         });
 
-        it("replaces the undo stack", function () {
-            history.perform(action);
-            history.replace(action);
-            history.undo();
-            expect(history.undoAnnotation()).to.be.undefined;
+        it("replaces the undo annotation", function () {
+            history.perform(action, "annotation1");
+            history.replace(action, "annotation2");
+            expect(history.undoAnnotation()).to.equal("annotation2");
         });
 
         it("emits a change event", function () {
@@ -65,32 +60,27 @@ describe("History", function () {
             expect(spy).to.have.been.called;
         });
 
-        it("does not emit a change event when performing a noop", function () {
-            history.on('change', spy);
-            history.replace(iD.actions.Noop);
-            expect(spy).not.to.have.been.called;
-        });
-
         it("performs multiple actions", function () {
-            var action1 = sinon.stub().returns(graph),
-                action2 = sinon.stub().returns(graph);
-            history.replace(action1, action2);
+            var action1 = sinon.stub().returns(iD.Graph()),
+                action2 = sinon.stub().returns(iD.Graph());
+            history.replace(action1, action2, "annotation");
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
+            expect(history.undoAnnotation()).to.equal("annotation");
         });
     });
 
     describe("#undo", function () {
         it("pops the undo stack", function () {
-            history.perform(action);
+            history.perform(action, "annotation");
             history.undo();
             expect(history.undoAnnotation()).to.be.undefined;
         });
 
         it("pushes the redo stack", function () {
-            history.perform(action);
+            history.perform(action, "annotation");
             history.undo();
-            expect(history.redoAnnotation()).to.equal("action");
+            expect(history.redoAnnotation()).to.equal("annotation");
         });
 
         it("emits a change event", function () {
@@ -113,8 +103,8 @@ describe("History", function () {
 
     describe("#reset", function () {
         it("clears the version stack", function () {
-            history.perform(action);
-            history.perform(action);
+            history.perform(action, "annotation");
+            history.perform(action, "annotation");
             history.undo();
             history.reset();
             expect(history.undoAnnotation()).to.be.undefined;

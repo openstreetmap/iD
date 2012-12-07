@@ -22,14 +22,17 @@ iD.modes.AddArea = function() {
                 // start from an existing node
                 history.perform(
                     iD.actions.AddWay(way),
-                    iD.actions.AddWayNode(way.id, datum.id));
+                    iD.actions.AddWayNode(way.id, datum.id),
+                    'started an area');
+
             } else {
                 // start from a new node
                 var node = iD.Node({loc: map.mouseCoordinates()});
                 history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
-                    iD.actions.AddWayNode(way.id, node.id));
+                    iD.actions.AddWayNode(way.id, node.id),
+                    'started an area');
             }
 
             controller.enter(iD.modes.DrawArea(way.id));

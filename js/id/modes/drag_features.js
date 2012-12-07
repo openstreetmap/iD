@@ -1,5 +1,5 @@
 iD.modes._dragFeatures = function(mode) {
-    var dragging, incarnated;
+    var dragging;
 
     var dragbehavior = d3.behavior.drag()
         .origin(function(entity) {
@@ -8,26 +8,31 @@ iD.modes._dragFeatures = function(mode) {
         })
         .on('drag', function(entity) {
             d3.event.sourceEvent.stopPropagation();
+
+            var loc = mode.map.projection.invert([d3.event.x, d3.event.y]);
+
             if (!dragging) {
                 if (entity.accuracy) {
-                    var node = iD.Node({ loc: entity.loc });
+                    dragging = iD.Node({loc: loc});
                     mode.history.perform(
-                        iD.actions.AddNode(node),
-                        iD.actions.AddWayNode(entity.way, node.id, entity.index));
-                    incarnated = node.id;
+                        iD.actions.AddNode(dragging),
+                        iD.actions.AddWayNode(entity.way, dragging.id, entity.index));
+                } else {
+                    dragging = entity;
+                    mode.history.perform(
+                        iD.actions.Move(dragging.id, loc));
                 }
-                dragging = iD.util.trueObj([entity.id].concat(
-                    _.pluck(mode.history.graph().parentWays(entity.id), 'id')));
-                mode.history.perform(iD.actions.Noop());
             }
-            if (incarnated) entity = mode.history.graph().entity(incarnated);
-            var to = mode.map.projection.invert([d3.event.x, d3.event.y]);
-            mode.history.replace(iD.actions.Move(entity.id, to));
+
+            mode.history.replace(iD.actions.Move(dragging.id, loc));
         })
-        .on('dragend', function () {
+        .on('dragend', function (entity) {
             if (!dragging) return;
             dragging = undefined;
-            incarnated = undefined;
+
+            mode.history.replace(
+                iD.actions.Noop(),
+                entity.accuracy ? 'added a node to a way' : 'moved a node');
         });
 
     mode.map.surface

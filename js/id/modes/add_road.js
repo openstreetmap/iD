@@ -31,8 +31,10 @@ iD.modes.AddRoad = function() {
                 } else {
                     history.perform(
                         iD.actions.AddWay(way),
-                        iD.actions.AddWayNode(way.id, datum.id));
+                        iD.actions.AddWayNode(way.id, datum.id),
+                        'started a road');
                 }
+
             } else if (datum.type === 'way') {
                 // begin a new way starting from an existing way
                 var node = iD.Node({loc: map.mouseCoordinates()}),
@@ -41,7 +43,9 @@ iD.modes.AddRoad = function() {
                 history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddWayNode(datum.id, node, index),
-                    iD.actions.AddWayNode(way.id, node.id));
+                    iD.actions.AddWayNode(way.id, node.id),
+                    'started a road');
+
             } else {
                 // begin a new way
                 var node = iD.Node({loc: map.mouseCoordinates()});
@@ -49,7 +53,8 @@ iD.modes.AddRoad = function() {
                 history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
-                    iD.actions.AddWayNode(way.id, node.id));
+                    iD.actions.AddWayNode(way.id, node.id),
+                    'started a road');
             }
 
             controller.enter(iD.modes.DrawRoad(way.id, direction));
