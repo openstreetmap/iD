@@ -10,7 +10,7 @@ iD.commit = function() {
         header.append('p').text('the changes you upload will be visible on all maps using OpenStreetMap data');
 
         var section = body.selectAll('div.commit-section')
-            .data(['modify', 'delete', 'create'].filter(function(d) {
+            .data(['modified', 'deleted', 'created'].filter(function(d) {
                 return changes[d].length;
             }))
             .enter()
