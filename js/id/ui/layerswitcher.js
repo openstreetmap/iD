@@ -27,11 +27,12 @@ iD.layerswitcher = function(map) {
             .append('div').attr('class', 'content hide');
 
         opa = content.append('div')
+            .append('ul')
             .attr('class', 'opacity-options')
             .selectAll('a.opacity')
             .data(opacities)
             .enter()
-            .append('a').attr('class', 'opacity')
+            .append('li').append('a').attr('class', 'opacity')
             .style('opacity', function(d) {
                 return d;
             })
@@ -60,9 +61,10 @@ iD.layerswitcher = function(map) {
                 });
         }
 
-        content.selectAll('a.layer')
+        content.append('ul').selectAll('a.layer')
             .data(sources)
             .enter()
+            .append('li')
             .append('a')
             .attr('href', '#')
             .attr('class', 'layer')

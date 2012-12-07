@@ -58,6 +58,17 @@ input[type=text]:focus {
     border-color:#222;
 }
 
+/* UI Lists
+------------------------------------------------------- */
+
+ul.list-toggle {
+    border-bottom: 1px solid #CCC;
+}
+
+a.selected {
+    background:#DDE4FF;
+}
+
 /* Utility Classes
 ------------------------------------------------------- */
 
@@ -69,10 +80,6 @@ input[type=text]:focus {
 }
 div.hide {
     display:none;
-}
-
-a.selected {
-    background:#DDE4FF;
 }
 
 /* Buttons */
@@ -144,7 +151,9 @@ button[disabled] {
     color:#ccc;
     cursor:auto;
 }
-
+button[disabled]:hover {
+    background: white;
+}
 button.action {
     background: #7092ff;
 }
@@ -162,6 +171,7 @@ button.delete:hover {
 button.save {
     background:#6bc641;
 }
+
 button.save:hover {
     background: #59ac33;
 }
@@ -178,14 +188,6 @@ input[type=text] {
     border:1px solid #ccc;
     padding:5px;
     margin:0;
-}
-
-button small {
-    display: inline-block;
-    font-weight: normal;
-    font-size:12px;
-    line-height:20px;
-    vertical-align: top;
 }
 
 button .label {
