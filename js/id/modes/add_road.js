@@ -8,6 +8,7 @@ iD.modes.AddRoad = function() {
 
     mode.enter = function() {
         var map = mode.map,
+            node,
             history = mode.history,
             controller = mode.controller;
 
@@ -37,7 +38,7 @@ iD.modes.AddRoad = function() {
 
             } else if (datum.type === 'way') {
                 // begin a new way starting from an existing way
-                var node = iD.Node({loc: map.mouseCoordinates()}),
+                node = iD.Node({loc: map.mouseCoordinates()}),
                     index = iD.util.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
 
                 history.perform(
@@ -48,7 +49,7 @@ iD.modes.AddRoad = function() {
 
             } else {
                 // begin a new way
-                var node = iD.Node({loc: map.mouseCoordinates()});
+                node = iD.Node({loc: map.mouseCoordinates()});
 
                 history.perform(
                     iD.actions.AddWay(way),

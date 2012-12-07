@@ -9,7 +9,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
             controller = mode.controller,
             way = history.graph().entity(wayId),
             node = iD.Node({loc: map.mouseCoordinates()}),
-            index = (direction === 'forward') ? undefined : -1,
+            index = (direction === 'forward') ? undefined : 0,
             headId = (direction === 'forward') ? _.last(way.nodes) : _.first(way.nodes),
             tailId = (direction === 'forward') ? _.first(way.nodes) : _.last(way.nodes);
 
