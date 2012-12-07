@@ -90,7 +90,7 @@ iD.Map = function() {
                 }
             });
             all = _.values(only);
-            filter = function(d) { return d.accuracy ? only[d.way.id] : only[d.id]; };
+            filter = function(d) { return d.accuracy ? only[d.way] : only[d.id]; };
         }
 
         if (all.length > 200000) return hideVector();
@@ -160,7 +160,7 @@ iD.Map = function() {
     function drawAccuracyHandles(waynodes, filter) {
         var handles = g.hit.selectAll('circle.accuracy-handle')
             .filter(filter)
-            .data(waynodes, function (d) { return [d.way.id, d.index].join(","); });
+            .data(waynodes, function (d) { return [d.way, d.index].join(","); });
         handles.exit().remove();
         handles.enter().append('circle')
             .attr({ r: 2, 'class': 'accuracy-handle' });
