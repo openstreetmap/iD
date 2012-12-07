@@ -68,6 +68,7 @@ iD.Connection = function() {
             delete o.lat;
         }
         o.id = iD.Entity.id.fromOSM(o.type, o.id);
+        if (o.type === 'node') o._poi = !refNodes[o.id];
         return iD.Entity(o);
     }
 
@@ -76,9 +77,9 @@ iD.Connection = function() {
         var root = dom.childNodes[0];
         var entities = {};
         refNodes = {};
+
         function addEntity(obj) {
             var o = objectData(obj);
-            if (o.type === 'node') o._poi = !refNodes[o.id];
             entities[o.id] = o;
         }
 
