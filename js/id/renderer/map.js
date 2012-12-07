@@ -12,7 +12,6 @@ iD.Map = function() {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
-        dragEnabled = true,
         dragging = false,
         fastEnabled = true,
         background = iD.Background()
@@ -22,18 +21,7 @@ iD.Map = function() {
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
         transformProp = iD.util.prefixProperty('Transform'),
-        support3d = (function() {
-            // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
-            var el = document.createElement('div'),
-                has3d = false;
-            document.body.insertBefore(el,null);
-            if (el.style[transformProp] !== undefined) {
-                el.style[transformProp] = 'translate3d(1px,1px,1px)';
-                has3d = window.getComputedStyle(el).getPropertyValue(transformProp);
-            }
-            document.body.removeChild(el);
-            return (has3d && has3d.length>0 && has3d!=="none");
-        })(),
+        support3d = iD.util.support3d(),
         supersurface, surface, defs, tilegroup, r, g, alength;
 
     function map() {
@@ -344,12 +332,6 @@ iD.Map = function() {
     map.dblclickEnable = function(_) {
         if (!arguments.length) return dblclickEnabled;
         dblclickEnabled = _;
-        return map;
-    };
-
-    map.dragEnable = function(_) {
-        if (!arguments.length) return dragEnabled;
-        dragEnabled = _;
         return map;
     };
 

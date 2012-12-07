@@ -74,6 +74,20 @@ iD.util.prefixProperty = function(property) {
     })(prefixes);
 };
 
+iD.util.support3d = function() {
+    // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
+    var transformProp = iD.util.prefixProperty('Transform');
+    var el = document.createElement('div'),
+        has3d = false;
+    document.body.insertBefore(el, null);
+    if (el.style[transformProp] !== undefined) {
+        el.style[transformProp] = 'translate3d(1px,1px,1px)';
+        has3d = window.getComputedStyle(el).getPropertyValue(transformProp);
+    }
+    document.body.removeChild(el);
+    return (has3d && has3d.length>0 && has3d!=="none");
+};
+
 iD.util.geo = {};
 
 iD.util.geo.roundCoords = function(c) {
