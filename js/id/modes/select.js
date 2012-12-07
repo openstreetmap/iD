@@ -71,6 +71,11 @@ iD.modes.Select = function (entity) {
                 iD.actions.ReverseWay(d.id),
                 'reversed a way');
 
+        }).on('splitWay', function(d) {
+            mode.history.perform(
+                iD.actions.SplitWay(d.id),
+                'split a way on a node');
+
         }).on('remove', function() {
             remove();
 

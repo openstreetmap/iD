@@ -1,5 +1,5 @@
 iD.Inspector = function() {
-    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close'),
+    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close', 'splitWay'),
         taginfo = iD.taginfo();
 
     function drawhead(selection) {
