@@ -30,6 +30,7 @@ iD.modes.Select = function (entity) {
         var surface = mode.map.surface;
 
         behaviors = [
+            iD.behavior.Hover(),
             iD.behavior.DragNode(mode),
             iD.behavior.DragWay(mode),
             iD.behavior.DragAccuracyHandle(mode)];

@@ -12,7 +12,6 @@ iD.modes.AddArea = function() {
             controller = mode.controller;
 
         map.dblclickEnable(false)
-            .hoverEnable(false)
             .hint('Click on the map to start drawing an area, like a park, lake, or building.');
 
         map.surface.on('click.addarea', function() {
@@ -48,8 +47,7 @@ iD.modes.AddArea = function() {
 
     mode.exit = function() {
         window.setTimeout(function() {
-            mode.map.dblclickEnable(true)
-                .hoverEnable(true);
+            mode.map.dblclickEnable(true);
         }, 1000);
         mode.map.hint(false);
         mode.map.surface.on('click.addarea', null);
