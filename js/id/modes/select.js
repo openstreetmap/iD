@@ -47,6 +47,8 @@ iD.modes.Select = function (entity) {
     }
 
     mode.enter = function () {
+        iD.modes._dragFeatures(mode);
+
         target = mode.map.surface.selectAll("*")
             .filter(function (d) { return d === entity; });
 
@@ -88,6 +90,8 @@ iD.modes.Select = function (entity) {
     };
 
     mode.exit = function () {
+        mode.map.surface.on('mousedown.latedrag', null);
+
         d3.select('.inspector-wrap')
             .style('display', 'none');
 
