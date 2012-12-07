@@ -31,7 +31,8 @@ iD.Graph.prototype = {
     parentRelations: function(id) {
         // This is slow and a bad hack.
         return _.filter(this.entities, function(e) {
-            return e && e.type === 'relation' && e.members.indexOf(id) !== -1;
+            return e && e.type === 'relation' &&
+                _.pluck(e.members, 'id').indexOf(id) !== -1;
         });
     },
 
