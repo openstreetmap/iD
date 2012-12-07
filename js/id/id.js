@@ -45,7 +45,7 @@ window.iD = function(container) {
             .attr('class', 'buttons-joined');
 
         undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'mini' })
+            .attr({ id: 'undo', 'class': 'narrow' })
             .property('disabled', true)
             .html('&larr;<small></small>')
             .on('click', history.undo)
@@ -53,7 +53,7 @@ window.iD = function(container) {
                 .placement('bottom'));
 
         undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'mini' })
+            .attr({ id: 'redo', 'class': 'narrow' })
             .property('disabled', true)
             .html('&rarr;<small></small>')
             .on('click', history.redo)
@@ -66,7 +66,7 @@ window.iD = function(container) {
             .attr('class', 'hello');
 
         bar.append('button')
-            .attr('class', 'save big')
+            .attr('class', 'save wide')
             .html("Upload<small id='as-username'></small>")
             .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
             .call(bootstrap.tooltip()
@@ -111,12 +111,12 @@ window.iD = function(container) {
             .attr('class', 'zoombuttons')
             .selectAll('button')
                 .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
-                .enter().append('button').attr('class', function(d) { return d[0] + ' big'; })
+                .enter().append('button').attr('class', function(d) { return d[0] + ' wide'; })
                 .text(function(d) { return d[1]; })
                 .on('click', function(d) { return d[2](); });
 
         var gc = bar.append('div').attr('class', 'geocode-control');
-        gc.append('button').text('?').attr('class','big');
+        gc.append('button').text('?').attr('class','wide');
         gc
             .on('mouseover', function() {
                 d3.select('.geocode-control input').style('display', 'inline-block');
@@ -142,7 +142,7 @@ window.iD = function(container) {
             .call(iD.layerswitcher(map));
 
         this.append('div')
-            .attr('class', 'inspector-wrap')
+            .attr('class', 'inspector-wrap fillL')
             .style('display', 'none');
 
         this.append('div')
