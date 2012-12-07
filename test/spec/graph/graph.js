@@ -77,7 +77,7 @@ describe('iD.Graph', function() {
     describe("#parentRelations", function() {
         it("returns an array of relations that contain the given entity id", function () {
             var node     = iD.Node({id: "n1"}),
-                relation = iD.Relation({id: "r1", members: ["n1"]}),
+                relation = iD.Relation({id: "r1", members: [{ id: "n1", role: 'from' }]}),
                 graph    = iD.Graph({n1: node, r1: relation});
             expect(graph.parentRelations("n1")).to.eql([relation]);
             expect(graph.parentRelations("n2")).to.eql([]);

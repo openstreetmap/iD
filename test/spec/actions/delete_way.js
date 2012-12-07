@@ -8,10 +8,10 @@ describe("iD.actions.DeleteWay", function () {
 
     it("removes a way from parent relations", function () {
         var way      = iD.Way(),
-            relation = iD.Relation({members: [way.id]}),
+            relation = iD.Relation({members: [{ id: way.id }]}),
             action   = iD.actions.DeleteWay(way.id),
             graph    = action(iD.Graph([way, relation]));
-        expect(graph.entity(relation.id).members).not.to.contain(way.id);
+        expect(_.pluck(graph.entity(relation.id).members, 'id')).not.to.contain(way.id);
     });
 
     it("deletes member nodes not referenced by another parent", function () {

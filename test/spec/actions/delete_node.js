@@ -16,7 +16,7 @@ describe("iD.actions.DeleteNode", function () {
 
     it("removes the node from parent relations", function () {
         var node     = iD.Node(),
-            relation = iD.Relation({members: [node.id]}),
+            relation = iD.Relation({members: [{ id: node.id }]}),
             action   = iD.actions.DeleteNode(node.id),
             graph    = action(iD.Graph([node, relation]));
         expect(graph.entity(relation.id).members).not.to.contain(node.id);
