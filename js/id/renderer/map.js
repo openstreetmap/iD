@@ -116,7 +116,6 @@ iD.Map = function() {
                 handles.push({
                     loc: iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5),
                     way: way.id,
-                    id: way.id,
                     index: i + 1,
                     accuracy: true
                 });
