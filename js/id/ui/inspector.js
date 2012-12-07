@@ -42,16 +42,17 @@ iD.Inspector = function() {
     function inspector(selection) {
         selection.each(function(entity) {
             selection.html("").append('button')
-                .text('x').attr({ title: 'close', 'class': 'close' })
+                .attr('class', 'narrow close')
+                .html("<span class='icon close'></span>")
                 .on('click', function() {
                     event.close(entity);
                 });
 
             selection.append('div')
-                .attr('class', 'head').call(drawhead);
+                .attr('class', 'head inspector-inner').call(drawhead);
 
             var table = selection
-                .append('div').attr('class', 'tag-table-wrap')
+                .append('div').attr('class', 'inspector-inner tag-table-wrap')
                 .append('table').attr('class', 'inspector');
 
             table.append('thead').append('tr').selectAll('th')
@@ -128,16 +129,15 @@ iD.Inspector = function() {
 
             function drawbuttons(selection) {
                 selection.append('button')
-                    .attr('class', 'save').text('Save')
+                    .attr('class', 'save wide')
+                    .html("<span class='icon icon-pre-text apply'></span><span class='label'>Apply</span>")
                     .on('click', function(entity) {
                         event.changeTags(entity, clean(grabtags()));
                         event.close(entity);
                     });
                 selection.append('button')
-                    .attr('class', 'cancel').text('Cancel')
-                    .on('click', function(entity) { event.close(entity); });
-                selection.append('button')
-                    .attr('class', 'delete').text('Delete')
+                    .attr('class', 'delete wide')
+                    .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
                     .on('click', function(entity) { event.remove(entity); });
             }
         });

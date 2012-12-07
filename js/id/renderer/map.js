@@ -458,10 +458,14 @@ iD.Map = function() {
                 .style('display', 'none');
         } else {
             d3.select('div.inspector-wrap')
+                .html('')
                 .style('display', 'block')
                 .transition()
-                .style('opacity', 1)
-                .text(_);
+                .style('opacity', 1);
+            d3.select('div.inspector-wrap')
+                .append('div')
+                .attr('class','inspector-inner')
+                .text(_)
         }
     };
 

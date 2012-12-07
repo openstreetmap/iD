@@ -2,7 +2,7 @@ iD.modes.AddRoad = function() {
     var mode = {
         id: 'add-road',
         button: 'road',
-        title: '+ Road',
+        title: 'Road',
         description: 'Roads can be highways, streets, pedestrian paths, or even canals'
     };
 

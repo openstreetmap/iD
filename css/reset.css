@@ -60,6 +60,7 @@ textarea {
     font-family: inherit; /* 1 */
     font-size: 100%; /* 2 */
     margin: 0; /* 3 */
+    padding: 0;
 }
 
 /*
@@ -140,3 +141,17 @@ input::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
+
+/*
+** Markup free clearing
+** Details: http://www.positioniseverything.net/easyclearing.html
+*/
+.cf:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  }
+
+.cf { display: inline-block; }

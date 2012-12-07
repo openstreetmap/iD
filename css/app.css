@@ -5,7 +5,7 @@ body {
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
-    color:#444;
+    color:#222;
 }
 
 #iD * {
@@ -63,7 +63,10 @@ input[type=text]:focus {
 
 .fillL { background-color: white;}
 .fillL2 { background: #f7f7f7 url(/img/background-pattern-1.png) repeat;}
-
+.fillD {
+    background-color: #222222;
+    color: white;
+}
 div.hide {
     display:none;
 }
@@ -87,8 +90,8 @@ button {
     font-size:14px;
     display: inline-block;
     height:40px;
-    margin:10px;
 }
+.fillD button { border: 1px solid black; }
 
 button:hover {
     background-color: #ececec;
@@ -104,14 +107,17 @@ button.narrow {
     border-radius:4px;
 }
 
-button.wide,
+button.wide {
+    margin: 10px;
+    width: 100px;
+}
+
 button.add-button {
     width: 80px;
 }
 
-
 button.narrow,
-button.add-button:first-child {
+button.Browse {
     width:40px;
 }
 
@@ -145,12 +151,14 @@ button.save {
     color:#6dc643;
 }
 
-button.cancel {
-    background:#aaa;
+button.delete {
+    color:#ff7070;
 }
 
-button.delete {
-    background:#DD5757;
+button.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 input[type=text] {
@@ -169,6 +177,15 @@ button small {
     vertical-align: top;
 }
 
+button .label {
+    margin-right: 3px;
+    text-shadow: 0 1px 0 white;
+}
+
+.active .label {
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
 /* Icons */
 
 .icon {
@@ -176,18 +193,208 @@ button small {
   vertical-align:top;
   width:20px;
   height:20px;
-  background:transparent url(/img/background-pattern-1.png) no-repeat 0px 0px;
+  background:transparent url(/img/sprite.png) no-repeat 0px 0px;
   text-indent:-9999px;
   overflow:hidden;
   }
 
-.icon.browse { background-position: 0px 0px;}
-.icon.place  { background-position: -20px 0px;}
-.icon.road   { background-position: -40px 0px;}
-.icon.area   { background-position: -60px 0px;}
-.icon.undo   { background-position: -80px 0px;}
-.icon.redo   { background-position: -100px 0px;}
-.icon.save   { background-position: -120px 0px;}
+.icon.icon-pre-text {
+  margin-right: 3px;
+}
+
+.icon.browse     { background-position:   0px 0px;}
+.icon.add-place  { background-position: -20px 0px;}
+.icon.add-road   { background-position: -40px 0px;}
+.icon.add-area   { background-position: -60px 0px;}
+.icon.undo       { background-position: -80px 0px;}
+.icon.redo       { background-position: -100px 0px;}
+.apply.icon      { background-position: -120px 0px;}
+.save.icon       { background-position: -140px 0px;}
+.close.icon      { background-position: -160px 0px;}
+.delete.icon     { background-position: -180px 0px;}
+
+.active .icon.browse     { background-position:   0px -20px;}
+.active .icon.add-place  { background-position: -20px -20px;}
+.active .icon.add-road   { background-position: -40px -20px;}
+.active .icon.add-area   { background-position: -60px -20px;}
+.active .icon.undo       { background-position: -80px -20px;}
+.active .icon.redo       { background-position: -100px -20px;}
+.active .apply.icon      { background-position: -120px -20px;}
+.active .save.icon       { background-position: -140px -20px;}
+.active .close.icon      { background-position: -160px -20px;}
+.active .delete.icon     { background-position: -180px -20px;}
+
+
+button[disabled] .icon.browse     { background-position:   0px -40px;}
+button[disabled] .icon.add-place  { background-position: -20px -40px;}
+button[disabled] .icon.add-road   { background-position: -40px -40px;}
+button[disabled] .icon.add-area   { background-position: -60px -40px;}
+button[disabled] .icon.undo       { background-position: -80px -40px;}
+button[disabled] .icon.redo       { background-position: -100px -40px;}
+button[disabled] .apply.icon      { background-position: -120px -40px;}
+button[disabled] .save.icon       { background-position: -140px -40px;}
+button[disabled] .close.icon      { background-position: -160px -40px;}
+button[disabled] .delete.icon     { background-position: -180px -40px;}
+
+/* ToolBar / Persistent UI Elements
+------------------------------------------------------- */
+
+#bar {
+    border-bottom:1px solid #ccc;
+    position:absolute;
+    left:0px;
+    top:0px;
+    right:0;
+    height:60px;
+}
+
+/* Special rules for toolbar icons */
+
+button.Browse .label {
+    display: none;
+ }
+
+/* Status box */
+
+.messages {
+    display:none;
+}
+
+/* Inspector */
+
+.inspector-wrap {
+    border:1px solid #ccc;
+    position:absolute;
+    right: 0;
+    left: 530px;
+    min-height: 60px;
+    opacity:0;
+    display:none;
+}
+
+.inspector-inner {
+    padding: 10px;
+}
+
+.inspector-wrap a.permalink {
+    text-decoration:none;
+    margin-right:1em;
+}
+
+.inspector tbody td {
+    border: 1px solid #ccc;
+    width:150px;
+}
+
+.inspector input {
+    margin:0;
+    padding:4px;
+    border:0;
+    background:#fff;
+    width:150px;
+}
+
+.inspector-wrap table {
+    border-collapse: collapse;
+    width:100%;
+    border-spacing:0;
+}
+
+.inspector-wrap .tag-table-wrap {
+    max-height:350px;
+    overflow:auto;
+}
+
+.inspector-wrap table td {
+    padding:0;
+    border-spacing:0;
+}
+
+.inspector-wrap .buttons {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+}
+
+/* Map Controls */
+
+.map-control {
+    left:10px;
+    position:absolute;
+}
+
+.map-control button {
+    text-indent: -9999px;
+    overflow: hidden;
+    background-image: url(/img/sprite.png);
+}
+
+/* Zoomer */
+
+.zoombuttons {
+    top:70px;
+    width: 40px;
+}
+
+.zoombuttons button.zoom-in {
+    background-position: 10px -90px;
+    border-bottom:0;
+    border-radius:4px 4px 0 0;
+}
+
+.zoombuttons button.zoom-out {
+    background-position: -30px -90px;
+    border-radius:0 0 4px 4px;
+}
+
+/* Layer Switcher */
+
+.layerswitcher-control {
+    top:210px;
+}
+
+.layerswitcher-control button {
+    background-position: -110px -90px;
+}
+
+.layerswitcher-control .content {
+    background:#fff;
+    padding:5px;
+    position:absolute;
+    left:40px;
+    width:100px;
+    top:0;
+}
+
+.layerswitcher-control .opacity-options {
+    border:1px solid #000;
+    height:15px;
+    width:45px;
+}
+
+.layerswitcher-control a.layer {
+    display:block;
+}
+
+.layerswitcher-control a.opacity {
+    background:#000;
+    display:inline-block;
+    width:15px;
+    height:15px;
+}
+
+/* Geocoder */
+
+.geocode-control {
+    top:160px;
+}
+
+.geocode-control button {
+    background-position: -70px -90px;
+}
+
+.geocode-control input {
+    display:none;
+}
 
 /* Map
 ------------------------------------------------------- */
@@ -226,155 +433,6 @@ img.tile {
     right:5px;
     background:#fff;
     padding:2px 5px;
-}
-
-/* ToolBar / Persistent UI Elements
-------------------------------------------------------- */
-
-#bar {
-    border-bottom:1px solid #ccc;
-    position:absolute;
-    left:0px;
-    top:0px;
-    right:0;
-    height:60px;
-}
-
-/* Status box */
-
-.messages {
-    display:none;
-}
-
-/* Inspector */
-
-.inspector-wrap {
-    border:1px solid #ccc;
-    position:absolute;
-    right: 0;
-    left: 510px;
-    padding:10px;
-    height: 60px;
-    opacity:0;
-    display:none;
-}
-
-.inspector-wrap a.permalink {
-    text-decoration:none;
-    margin-right:1em;
-}
-
-.inspector tbody td {
-    border: 1px solid #ccc;
-    width:150px;
-}
-
-.inspector input {
-    margin:0;
-    padding:4px;
-    border:0;
-    background:#fff;
-    width:150px;
-}
-
-.inspector-wrap table {
-    border-collapse: collapse;
-    width:347px;
-    border-spacing:0;
-}
-
-.inspector-wrap .tag-table-wrap {
-    max-height:350px;
-    overflow:auto;
-}
-
-.inspector-wrap table td {
-    padding:0;
-    border-spacing:0;
-}
-
-.inspector-wrap .close {
-    border: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-}
-
-/* Map Controls */
-
-#bar .zoombuttons {
-    position:absolute;
-    left:10px;
-    top:50px;
-    width:40px;
-}
-
-#bar .zoombuttons button {
-    width:40px;
-    border:1px solid #ccc;
-}
-
-#bar .zoombuttons button.zoom-in {
-    border-bottom:0;
-    border-radius:5px 5px 0 0;
-}
-
-#bar .zoombuttons button.zoom-out {
-    border-radius:0 0 5px 5px;
-}
-
-/* Layer Switcher */
-
-div.layerswitcher-control {
-    position:absolute;
-    top:170px;
-    left:10px;
-    color:#222;
-}
-
-div.layerswitcher-control .content {
-    background:#fff;
-    padding:5px;
-    position:absolute;
-    left:40px;
-    width:100px;
-    top:0;
-}
-
-div.layerswitcher-control div.opacity-options {
-    border:1px solid #000;
-    height:15px;
-    width:45px;
-}
-
-div.layerswitcher-control a.layer {
-    display:block;
-}
-
-div.layerswitcher-control a.opacity {
-    background:#000;
-    display:inline-block;
-    width:15px;
-    height:15px;
-}
-
-/* Geocoder */
-
-div.geocode-control {
-    position:absolute;
-    top:130px;
-    left:10px;
-    color:#222;
-}
-
-#bar div.geocode-control button,
-div.layerswitcher-control button {
-    width:40px;
-}
-
-div.geocode-control input {
-    display:none;
 }
 
 /* Account Information
@@ -476,15 +534,16 @@ div.typeahead a {
 .tooltip {
     position: absolute;
     z-index: 1030;
-    display: block;
     padding: 5px;
     font-size: 11px;
     opacity: 0;
+    display: none;
     filter: alpha(opacity=0);
     visibility: visible;
 }
 
 .tooltip.in {
+    display: block;
     opacity: 0.8;
     filter: alpha(opacity=80);
 }
