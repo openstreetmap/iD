@@ -32,9 +32,16 @@ iD.Inspector = function() {
                 .attr('href', '#')
                 .text('Reverse Direction')
                 .on('click', function(d) {
-                    event.changeWayDirection(iD.Entity(d, {
-                        nodes: _.pluck(d.nodes.reverse(), 'id')
-                    }));
+                    event.changeWayDirection(iD.Entity(d));
+                });
+        }
+        if (selection.datum().type === 'node' && !selection.datum()._poi) {
+            selection.append('a')
+                .attr('class', 'permalink')
+                .attr('href', '#')
+                .text('Split Way')
+                .on('click', function(d) {
+                    event.splitWay(iD.Entity(d));
                 });
         }
     }

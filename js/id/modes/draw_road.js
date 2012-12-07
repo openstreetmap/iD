@@ -38,6 +38,12 @@ iD.modes.DrawRoad = function(wayId, direction) {
 
                 controller.enter(iD.modes.Select(way));
 
+            } else if (datum.id === headId) {
+                // finish the way
+                history.replace(iD.actions.DeleteNode(node.id));
+
+                controller.enter(iD.modes.Select(way));
+
             } else if (datum.type === 'node' && datum.id !== node.id) {
                 // connect the way to an existing node
                 history.replace(
