@@ -82,7 +82,7 @@ window.iD = function(container) {
                 function save(e) {
                     d3.select('.shaded').remove();
                     var l = iD.loading('uploading changes to openstreetmap');
-                    connection.putChangeset(history.changes(), e.comment, function() {
+                    connection.putChangeset(history.changes(), e.comment, function(err, changeset_id) {
                         l.remove();
                         history.reset();
                         map.flush().redraw();
