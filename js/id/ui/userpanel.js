@@ -5,6 +5,7 @@ iD.userpanel = function(connection) {
         function update() {
             selection.html('');
             if (connection.authenticated()) {
+                selection.style('display', 'block');
                 connection.userDetails(function(user_details) {
                     selection.append('span')
                         .text('signed in as ')
@@ -24,12 +25,7 @@ iD.userpanel = function(connection) {
                         });
                 });
             } else {
-                selection
-                    .append('a')
-                    .attr('class', 'login')
-                    .attr('href', '#')
-                    .text('login')
-                    .on('click', event.login);
+                selection.html('').style('display', 'none');
             }
         }
         connection.on('auth', update);
