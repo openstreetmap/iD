@@ -29,7 +29,7 @@ describe('Connection', function() {
 
       it('returns a graph', function(done) {
           c.loadFromURL('data/map.xml', function(err, graph) {
-              expect(err).to.be.a('null');
+              expect(err).to.not.be.ok;
               expect(graph).to.be.instanceOf(iD.Graph);
               done();
           });
@@ -51,7 +51,6 @@ describe('Connection', function() {
 
       it('passes errors for 404s', function(done) {
           c.loadFromURL('404', function(err, graph) {
-              expect(err.status).to.eql(404);
               expect(graph).to.be.a('Error');
               done();
           });
