@@ -24,7 +24,7 @@ window.iD = function(container) {
             .call(map);
 
         var bar = this.append('div')
-            .attr('id', 'bar');
+            .attr('id', 'bar').attr('class', 'fillL2');
 
         var buttons_joined = bar.append('div')
             .attr('class', 'buttons-joined');
@@ -32,11 +32,17 @@ window.iD = function(container) {
         var buttons = buttons_joined.selectAll('button.add-button')
             .data([iD.modes.Browse(), iD.modes.AddPlace(), iD.modes.AddRoad(), iD.modes.AddArea()])
             .enter().append('button')
-                .attr('class', 'add-button')
-            .text(function (mode) { return mode.title; })
+                .attr('class', function (mode) { return mode.title + ' add-button'; })
             .attr('data-original-title', function (mode) { return mode.description; })
             .call(bootstrap.tooltip().placement('bottom'))
             .on('click', function (mode) { controller.enter(mode); });
+
+        buttons.append('span')
+            .attr('class', function(d) {
+                return d.id + ' icon icon-pre-text';
+            });
+
+        buttons.append('span').attr('class', 'label').text(function (mode) { return mode.title; });
 
         controller.on('enter', function (entered) {
             buttons.classed('active', function (mode) { return entered.button === mode.button; });
@@ -46,17 +52,17 @@ window.iD = function(container) {
             .attr('class', 'buttons-joined');
 
         undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'mini' })
+            .attr({ id: 'undo', 'class': 'narrow' })
             .property('disabled', true)
-            .html('&larr;<small></small>')
+            .html("<span class='undo icon'></span><small></small>")
             .on('click', history.undo)
             .call(bootstrap.tooltip()
                 .placement('bottom'));
 
         undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'mini' })
+            .attr({ id: 'redo', 'class': 'narrow' })
             .property('disabled', true)
-            .html('&rarr;<small></small>')
+            .html("<span class='redo icon'><small></small>")
             .on('click', history.redo)
             .call(bootstrap.tooltip()
                 .placement('bottom'));
@@ -67,8 +73,8 @@ window.iD = function(container) {
             .attr('class', 'hello');
 
         bar.append('button')
-            .attr('class', 'save')
-            .html("Upload<small id='as-username'></small>")
+            .attr('class', 'save wide')
+            .html("<span class='icon icon-pre-text save'></span><span class='label'>Save</span><small id='as-username'></small>")
             .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
             .call(bootstrap.tooltip()
                 .placement('bottom'))
@@ -108,16 +114,16 @@ window.iD = function(container) {
         bar.append('div')
             .attr('class', 'messages');
 
-        var zoom = bar.append('div')
-            .attr('class', 'zoombuttons')
+        var zoom = this.append('div')
+            .attr('class', 'zoombuttons map-control')
             .selectAll('button')
                 .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
-                .enter().append('button').attr('class', function(d) { return d[0]; })
+                .enter().append('button').attr('class', function(d) { return d[0] + ' narrow'; })
                 .text(function(d) { return d[1]; })
                 .on('click', function(d) { return d[2](); });
 
-        var gc = bar.append('div').attr('class', 'geocode-control');
-        gc.append('button').text('?');
+        var gc = this.append('div').attr('class', 'geocode-control map-control');
+        gc.append('button').text('geocode').attr('class','narrow');
         gc
             .on('mouseover', function() {
                 d3.select('.geocode-control input').style('display', 'inline-block');
@@ -139,11 +145,11 @@ window.iD = function(container) {
                 });
             });
 
-        this.append('div').attr('class', 'layerswitcher-control')
+        this.append('div').attr('class', 'map-control layerswitcher-control')
             .call(iD.layerswitcher(map));
 
         this.append('div')
-            .attr('class', 'inspector-wrap')
+            .attr('class', 'inspector-wrap fillL')
             .style('display', 'none');
 
         this.append('div')
