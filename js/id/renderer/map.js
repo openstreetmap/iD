@@ -286,7 +286,7 @@ iD.Map = function() {
                     'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
             }
         } else {
-            redraw({ moved: true });
+            redraw();
             translateStart = null;
         }
     }
@@ -299,11 +299,9 @@ iD.Map = function() {
         redraw();
     }
 
-    function redraw(e) {
-        if (e && e.moved) {
-            dispatch.move(map);
-            tilegroup.call(background);
-        }
+    function redraw() {
+        dispatch.move(map);
+        tilegroup.call(background);
         if (map.zoom() > 16) {
             connection.loadTiles(projection);
             drawVector();
@@ -356,7 +354,7 @@ iD.Map = function() {
         t[1] += center[1] - l[1];
         projection.translate(t);
         zoom.translate(projection.translate());
-        return redraw({ moved: true });
+        return redraw();
     };
 
     map.size = function(_) {
@@ -367,7 +365,7 @@ iD.Map = function() {
             .selectAll('#clip-rect')
             .size(dimensions);
         background.size(dimensions);
-        return redraw({ moved: true });
+        return redraw();
     };
 
     map.zoomIn = function() { return map.zoom(Math.ceil(map.zoom() + 1)); };
@@ -384,7 +382,7 @@ iD.Map = function() {
                 t[0] - ll[0] + c[0],
                 t[1] - ll[1] + c[1]]);
             zoom.translate(projection.translate());
-            return redraw({ moved: true });
+            return redraw();
         }
     };
 

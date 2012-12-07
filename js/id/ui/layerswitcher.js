@@ -72,7 +72,7 @@ iD.layerswitcher = function(map) {
             .on('click', function(d) {
                 d3.event.preventDefault();
                 map.background.source(d.source);
-                map.redraw({ moved: true });
+                map.redraw();
                 selectLayer(d);
             });
         selectLayer(map.background.source());
