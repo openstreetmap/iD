@@ -2,7 +2,7 @@
 iD.actions.ReverseWay = function(wayId) {
     return function(graph) {
         var way = graph.entity(wayId),
-            nodes = way.nodes.slice();
+            nodes = way.nodes.slice().reverse();
         return graph.replace(way.update({nodes: nodes}), 'changed way direction');
     };
 };
