@@ -14,7 +14,6 @@ iD.modes.DrawRoad = function(wayId, direction) {
             tailId = (direction === 'forward') ? _.first(way.nodes) : _.last(way.nodes);
 
         map.dblclickEnable(false)
-            .dragEnable(false)
             .fastEnable(false)
             .hint('Click to add more points to the road. ' +
                       'Click on other roads to connect to them, and double-click to ' +
@@ -90,7 +89,6 @@ iD.modes.DrawRoad = function(wayId, direction) {
             .on('⌫.drawroad', null);
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
-            mode.map.dragEnable(true);
         }, 1000);
     };
 

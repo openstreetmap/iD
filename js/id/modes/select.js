@@ -12,8 +12,6 @@ iD.modes.Select = function (entity) {
             return { x: p[0], y: p[1] };
         })
         .on('drag', function(entity) {
-            if (!mode.map.dragEnable()) return;
-
             d3.event.sourceEvent.stopPropagation();
 
             if (!dragging) {
@@ -31,7 +29,7 @@ iD.modes.Select = function (entity) {
             });
         })
         .on('dragend', function () {
-            if (!mode.map.dragEnable() || !dragging) return;
+            if (!dragging) return;
             dragging = undefined;
             mode.map.redraw();
         });
