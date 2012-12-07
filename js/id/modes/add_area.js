@@ -23,6 +23,7 @@ iD.modes.AddArea = function() {
                 history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddWayNode(way.id, datum.id),
+                    iD.actions.AddWayNode(way.id, datum.id),
                     'started an area');
 
             } else {
@@ -31,6 +32,7 @@ iD.modes.AddArea = function() {
                 history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
+                    iD.actions.AddWayNode(way.id, node.id),
                     iD.actions.AddWayNode(way.id, node.id),
                     'started an area');
             }
