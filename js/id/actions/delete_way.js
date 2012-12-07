@@ -11,6 +11,10 @@ iD.actions.DeleteWay = function(wayId) {
         way.nodes.forEach(function (nodeId) {
             var node = graph.entity(nodeId);
 
+            // Circular ways include nodes more than once, so they
+            // can be deleted on earlier iterations of this loop.
+            if (!node) return;
+
             graph = iD.actions.RemoveWayNode(wayId, nodeId)(graph);
 
             if (!graph.parentWays(nodeId).length && !graph.parentRelations(nodeId).length) {
