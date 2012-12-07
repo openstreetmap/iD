@@ -14,8 +14,8 @@ iD.Entity = function(a, b, c) {
         }
     }
 
-    if (!this.id) {
-        this.id = iD.util.id(this.type);
+    if (!this.id && this.type) {
+        this.id = iD.Entity.id(this.type);
         this._updated = true;
     }
 
@@ -28,17 +28,35 @@ iD.Entity = function(a, b, c) {
     }
 };
 
+iD.Entity.id = function (type) {
+    return iD.Entity.id.fromOSM(type, iD.Entity.id.next[type]--);
+};
+
+iD.Entity.id.next = {node: -1, way: -1, relation: -1};
+
+iD.Entity.id.fromOSM = function (type, id) {
+    return type[0] + id;
+};
+
+iD.Entity.id.toOSM = function (id) {
+    return +id.slice(1);
+};
+
 iD.Entity.prototype = {
+    osmId: function() {
+        return iD.Entity.id.toOSM(this.id);
+    },
+
     update: function(attrs) {
         return iD.Entity(this, attrs, {_updated: true});
     },
 
     created: function() {
-        return this._updated && +this.id.slice(1) < 0;
+        return this._updated && this.osmId() < 0;
     },
 
     modified: function() {
-        return this._updated && +this.id.slice(1) > 0;
+        return this._updated && this.osmId() > 0;
     },
 
     intersects: function(extent, resolver) {

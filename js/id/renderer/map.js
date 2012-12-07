@@ -129,7 +129,7 @@ iD.Map = function() {
             .filter(filter)
             .data(waynodes, key);
         function olderOnTop(a, b) {
-            return (+a.id.slice(1)) - (+b.id.slice(1));
+            return a.osmId() - b.osmId();
         }
         handles.exit().remove();
         handles.enter().append('image')

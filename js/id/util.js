@@ -1,13 +1,5 @@
 iD.util = {};
 
-iD.util._counters = {};
-
-iD.util.id = function(counter) {
-    counter = counter || 'default';
-    if (!iD.util._counters[counter]) iD.util._counters[counter] = 0;
-    return counter[0] + (--iD.util._counters[counter]);
-};
-
 iD.util.trueObj = function(arr) {
     var o = {};
     for (var i = 0, l = arr.length; i < l; i++) o[arr[i]] = true;
