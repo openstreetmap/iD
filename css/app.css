@@ -169,6 +169,26 @@ button small {
     vertical-align: top;
 }
 
+/* Icons */
+
+.icon {
+  display:inline-block;
+  vertical-align:top;
+  width:20px;
+  height:20px;
+  background:transparent url(/img/background-pattern-1.png) no-repeat 0px 0px;
+  text-indent:-9999px;
+  overflow:hidden;
+  }
+
+.icon.browse { background-position: 0px 0px;}
+.icon.place  { background-position: -20px 0px;}
+.icon.road   { background-position: -40px 0px;}
+.icon.area   { background-position: -60px 0px;}
+.icon.undo   { background-position: -80px 0px;}
+.icon.redo   { background-position: -100px 0px;}
+.icon.save   { background-position: -120px 0px;}
+
 /* Map
 ------------------------------------------------------- */
 
