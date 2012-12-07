@@ -70,7 +70,7 @@ iD.Graph.prototype = {
     // Resolve the id references in a way, replacing them with actual objects.
     fetch: function(id) {
         var entity = this.entities[id], nodes = [];
-        if (!entity.nodes || !entity.nodes.length) return iD.Entity(entity); // TODO: shouldn't be necessary
+        if (!entity.nodes || !entity.nodes.length) return entity;
         for (var i = 0, l = entity.nodes.length; i < l; i++) {
             nodes[i] = this.fetch(entity.nodes[i]);
         }
