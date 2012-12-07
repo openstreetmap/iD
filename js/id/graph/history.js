@@ -19,10 +19,8 @@ iD.History = function() {
         return {graph: graph, annotation: annotation};
     }
 
-    function maybeChange() {
-        if (stack[index].annotation) {
-            dispatch.change();
-        }
+    function change(previous) {
+        dispatch.change(history.graph().difference(previous));
     }
 
     var history = {
@@ -37,32 +35,44 @@ iD.History = function() {
         },
 
         perform: function () {
+            var previous = stack[index].graph;
+
             stack = stack.slice(0, index + 1);
             stack.push(perform(arguments));
             index++;
-            dispatch.change();
+
+            change(previous);
         },
 
         replace: function () {
+            var previous = stack[index].graph;
+
             // assert(index == stack.length - 1)
             stack[index] = perform(arguments);
-            dispatch.change();
+
+            change(previous);
         },
 
         undo: function () {
+            var previous = stack[index].graph;
+
             while (index > 0) {
                 index--;
                 if (stack[index].annotation) break;
             }
-            dispatch.change();
+
+            change(previous);
         },
 
         redo: function () {
+            var previous = stack[index].graph;
+
             while (index < stack.length - 1) {
                 index++;
                 if (stack[index].annotation) break;
             }
-            dispatch.change();
+
+            change(previous);
         },
 
         undoAnnotation: function () {

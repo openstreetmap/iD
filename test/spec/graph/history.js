@@ -28,7 +28,7 @@ describe("iD.History", function () {
         it("emits a change event", function () {
             history.on('change', spy);
             history.perform(action);
-            expect(spy).to.have.been.called;
+            expect(spy).to.have.been.calledWith([]);
         });
 
         it("performs multiple actions", function () {
@@ -57,7 +57,7 @@ describe("iD.History", function () {
         it("emits a change event", function () {
             history.on('change', spy);
             history.replace(action);
-            expect(spy).to.have.been.called;
+            expect(spy).to.have.been.calledWith([]);
         });
 
         it("performs multiple actions", function () {
@@ -87,7 +87,7 @@ describe("iD.History", function () {
             history.perform(action);
             history.on('change', spy);
             history.undo();
-            expect(spy).to.have.been.called;
+            expect(spy).to.have.been.calledWith([]);
         });
     });
 
@@ -97,7 +97,7 @@ describe("iD.History", function () {
             history.undo();
             history.on('change', spy);
             history.redo();
-            expect(spy).to.have.been.called;
+            expect(spy).to.have.been.calledWith([]);
         });
     });
 
