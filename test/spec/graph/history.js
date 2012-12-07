@@ -36,6 +36,48 @@ describe("History", function () {
             history.perform(iD.actions.Noop);
             expect(spy).not.to.have.been.called;
         });
+
+        it("performs multiple actions", function () {
+            var action1 = sinon.stub().returns(graph),
+                action2 = sinon.stub().returns(graph);
+            history.perform(action1, action2);
+            expect(action1).to.have.been.called;
+            expect(action2).to.have.been.called;
+        });
+    });
+
+    describe("#replace", function () {
+        it("updates the graph", function () {
+            history.replace(action);
+            expect(history.graph()).to.equal(graph);
+        });
+
+        it("replaces the undo stack", function () {
+            history.perform(action);
+            history.replace(action);
+            history.undo();
+            expect(history.undoAnnotation()).to.be.undefined;
+        });
+
+        it("emits a change event", function () {
+            history.on('change', spy);
+            history.replace(action);
+            expect(spy).to.have.been.called;
+        });
+
+        it("does not emit a change event when performing a noop", function () {
+            history.on('change', spy);
+            history.replace(iD.actions.Noop);
+            expect(spy).not.to.have.been.called;
+        });
+
+        it("performs multiple actions", function () {
+            var action1 = sinon.stub().returns(graph),
+                action2 = sinon.stub().returns(graph);
+            history.replace(action1, action2);
+            expect(action1).to.have.been.called;
+            expect(action2).to.have.been.called;
+        });
     });
 
     describe("#undo", function () {

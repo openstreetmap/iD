@@ -1,6 +1,7 @@
-iD.actions.RemoveRelationMember = function(relation, member) {
+iD.actions.RemoveRelationMember = function(relationId, memberId) {
     return function(graph) {
-        var members = _.without(relation.members, member.id);
+        var relation = graph.entity(relationId),
+            members = _.without(relation.members, memberId);
         return graph.replace(relation.update({members: members}), 'removed from a relation');
     };
 };

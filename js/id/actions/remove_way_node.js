@@ -1,6 +1,7 @@
-iD.actions.RemoveWayNode = function(way, node) {
+iD.actions.RemoveWayNode = function(wayId, nodeId) {
     return function(graph) {
-        var nodes = _.without(way.nodes, node.id);
+        var way = graph.entity(wayId),
+            nodes = _.without(way.nodes, nodeId);
         return graph.replace(way.update({nodes: nodes}), 'removed from a road');
     };
 };

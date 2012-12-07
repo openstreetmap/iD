@@ -19,16 +19,28 @@ iD.History = function() {
             }
         },
 
-        perform: function (action) {
+        perform: function () {
             stack = stack.slice(0, index + 1);
-            stack.push(action(this.graph()));
+
+            var graph = this.graph();
+            for (var i = 0; i < arguments.length; i++) {
+                graph = arguments[i](graph);
+            }
+
+            stack.push(graph);
             index++;
             maybeChange();
         },
 
-        replace: function (action) {
+        replace: function () {
             // assert(index == stack.length - 1)
-            stack[index] = action(this.graph());
+
+            var graph = this.graph();
+            for (var i = 0; i < arguments.length; i++) {
+                graph = arguments[i](graph);
+            }
+
+            stack[index] = graph;
             maybeChange();
         },
 

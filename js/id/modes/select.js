@@ -1,8 +1,9 @@
 iD.modes.Select = function (entity) {
     var mode = {
-        button: ''
-    },
-        inspector = iD.Inspector(),
+        button: 'browse'
+    };
+
+    var inspector = iD.Inspector(),
         dragging, target;
 
     var dragWay = d3.behavior.drag()
@@ -26,8 +27,7 @@ iD.modes.Select = function (entity) {
                 var end = mode.map.projection.invert([
                     start[0] + d3.event.dx,
                     start[1] + d3.event.dy]);
-                node.loc = end;
-                mode.history.replace(iD.actions.Move(node, end));
+                mode.history.replace(iD.actions.Move(node.id, end));
             });
         })
         .on('dragend', function () {
@@ -39,10 +39,10 @@ iD.modes.Select = function (entity) {
     function remove() {
         switch (entity.type) {
             case 'way':
-                mode.history.perform(iD.actions.DeleteWay(entity));
+                mode.history.perform(iD.actions.DeleteWay(entity.id));
                 break;
             case 'node':
-                mode.history.perform(iD.actions.DeleteNode(entity));
+                mode.history.perform(iD.actions.DeleteNode(entity.id));
         }
 
         mode.controller.exit();
@@ -59,9 +59,9 @@ iD.modes.Select = function (entity) {
             .call(inspector);
 
         inspector.on('changeTags', function(d, tags) {
-            mode.history.perform(iD.actions.ChangeEntityTags(mode.history.graph().entity(d.id), tags));
+            mode.history.perform(iD.actions.ChangeEntityTags(d.id, tags));
         }).on('changeWayDirection', function(d) {
-            mode.history.perform(iD.actions.ReverseWay(d));
+            mode.history.perform(iD.actions.ReverseWay(d.id));
         }).on('remove', function() {
             remove();
         }).on('close', function() {
