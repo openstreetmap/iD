@@ -7,31 +7,36 @@ iD.modes.AddArea = function() {
     };
 
     mode.enter = function() {
-        mode.map.dblclickEnable(false);
-        mode.map.hint('Click on the map to start drawing an area, like a park, lake, or building.');
+        var map = mode.map,
+            history = mode.history,
+            controller = mode.controller;
 
-        mode.map.surface.on('click.addarea', function() {
+        map.dblclickEnable(false)
+            .hint('Click on the map to start drawing an area, like a park, lake, or building.');
+
+        map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
                 way = iD.Way({tags: { building: 'yes', area: 'yes' }});
 
-            // connect a way to an existing way
             if (datum.type === 'node') {
-                mode.history.perform(
+                // start from an existing node
+                history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddWayNode(way.id, datum.id));
             } else {
-                var node = iD.Node({loc: mode.map.mouseCoordinates()});
-                mode.history.perform(
+                // start from a new node
+                var node = iD.Node({loc: map.mouseCoordinates()});
+                history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(way.id, node.id));
             }
 
-            mode.controller.enter(iD.modes.DrawArea(way.id));
+            controller.enter(iD.modes.DrawArea(way.id));
         });
 
-        mode.map.keybinding().on('⎋.addarea', function() {
-            mode.controller.exit();
+        map.keybinding().on('⎋.addarea', function() {
+            controller.exit();
         });
     };
 

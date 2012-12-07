@@ -6,16 +6,20 @@ iD.modes.AddPlace = function() {
     };
 
     mode.enter = function() {
-        mode.map.hint('Click on the map to add a place.');
+        var map = mode.map,
+            history = mode.history,
+            controller = mode.controller;
 
-        mode.map.surface.on('click.addplace', function() {
-            var node = iD.Node({loc: mode.map.mouseCoordinates(), _poi: true});
-            mode.history.perform(iD.actions.AddNode(node));
-            mode.controller.enter(iD.modes.Select(node));
+        map.hint('Click on the map to add a place.');
+
+        map.surface.on('click.addplace', function() {
+            var node = iD.Node({loc: map.mouseCoordinates(), _poi: true});
+            history.perform(iD.actions.AddNode(node));
+            controller.enter(iD.modes.Select(node));
         });
 
-        mode.map.keybinding().on('⎋.addplace', function() {
-            mode.controller.exit();
+        map.keybinding().on('⎋.addplace', function() {
+            controller.exit();
         });
     };
 

@@ -7,27 +7,29 @@ iD.modes.AddRoad = function() {
     };
 
     mode.enter = function() {
-        var map = mode.map;
+        var map = mode.map,
+            history = mode.history,
+            controller = mode.controller;
 
         map.dblclickEnable(false)
             .hint('Click on the map to start drawing an road, path, or route.');
 
         map.surface.on('click.addroad', function() {
             var datum = d3.select(d3.event.target).datum() || {},
-                direction = 'forward',
-                way = iD.Way({ tags: { highway: 'residential' } });
+                way = iD.Way({ tags: { highway: 'residential' } }),
+                direction = 'forward';
 
             if (datum.type === 'node') {
                 // continue an existing way
                 var id = datum.id;
-                var parents = mode.history.graph().parentWays(id);
+                var parents = history.graph().parentWays(id);
                 if (parents.length && parents[0].nodes[0] === id) {
                     way = parents[0];
                     direction = 'backward';
                 } else if (parents.length && _.last(parents[0].nodes) === id) {
                     way = parents[0];
                 } else {
-                    mode.history.perform(
+                    history.perform(
                         iD.actions.AddWay(way),
                         iD.actions.AddWayNode(way.id, datum.id));
                 }
@@ -36,7 +38,7 @@ iD.modes.AddRoad = function() {
                 var node = iD.Node({loc: map.mouseCoordinates()}),
                     index = iD.util.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
 
-                mode.history.perform(
+                history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddWayNode(datum.id, node, index),
                     iD.actions.AddWayNode(way.id, node.id));
@@ -44,17 +46,17 @@ iD.modes.AddRoad = function() {
                 // begin a new way
                 var node = iD.Node({loc: map.mouseCoordinates()});
 
-                mode.history.perform(
+                history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(way.id, node.id));
             }
 
-            mode.controller.enter(iD.modes.DrawRoad(way.id, direction));
+            controller.enter(iD.modes.DrawRoad(way.id, direction));
         });
 
         map.keybinding().on('⎋.addroad', function() {
-            mode.controller.exit();
+            controller.exit();
         });
     };
 
