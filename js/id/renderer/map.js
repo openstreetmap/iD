@@ -69,20 +69,29 @@ iD.Map = function() {
         return 'M' + _.pluck(d.nodes, 'loc').map(projection).map(iD.util.geo.roundCoords).join('L');
     }
 
-    function drawVector(only) {
+    function drawVector(difference) {
         if (surface.style(transformProp) != 'none') return;
-        var all = [], ways = [], areas = [], points = [], waynodes = [],
+        var filter, all, ways = [], areas = [], points = [], waynodes = [],
             extent = map.extent(),
             graph = history.graph();
 
-        if (!only) {
+        if (!difference) {
             all = graph.intersects(extent);
+            filter = d3.functor(true);
         } else {
-            for (var id in only) all.push(graph.fetch(id));
+            var only = {};
+            difference.forEach(function (id) {
+                var entity = graph.fetch(id);
+                if (entity) {
+                    only[id] = entity;
+                    graph.parentWays(id).forEach(function (entity) {
+                        only[entity.id] = graph.fetch(entity.id);
+                    });
+                }
+            });
+            all = _.values(only);
+            filter = function(d) { return d.accuracy ? only[d.way.id] : only[d.id]; };
         }
-
-        var filter = only ?
-            function(d) { return only[d.id]; } : function() { return true; };
 
         if (all.length > 200000) return hideVector();
 
@@ -151,7 +160,7 @@ iD.Map = function() {
     function drawAccuracyHandles(waynodes, filter) {
         var handles = g.hit.selectAll('circle.accuracy-handle')
             .filter(filter)
-            .data(waynodes, key);
+            .data(waynodes, function (d) { return [d.way.id, d.index].join(","); });
         handles.exit().remove();
         handles.enter().append('circle')
             .attr({ r: 2, 'class': 'accuracy-handle' });
@@ -241,14 +250,14 @@ iD.Map = function() {
 
     function connectionLoad(err, result) {
         history.merge(result);
-        drawVector(iD.util.trueObj(Object.keys(result.entities)));
+        drawVector(Object.keys(result.entities));
     }
 
     function hoverIn() {
         var datum = d3.select(d3.event.target).datum();
         if (datum instanceof iD.Entity) {
             hover = datum.id;
-            drawVector(iD.util.trueObj([hover]));
+            drawVector([hover]);
             d3.select('.messages').text(datum.tags.name || '#' + datum.id);
         }
     }
@@ -257,7 +266,7 @@ iD.Map = function() {
         if (hover) {
             var oldHover = hover;
             hover = null;
-            drawVector(iD.util.trueObj([oldHover]));
+            drawVector([oldHover]);
             d3.select('.messages').text('');
         }
     }
@@ -299,12 +308,12 @@ iD.Map = function() {
         redraw();
     }
 
-    function redraw() {
+    function redraw(difference) {
         dispatch.move(map);
         tilegroup.call(background);
         if (map.zoom() > 16) {
             connection.loadTiles(projection);
-            drawVector();
+            drawVector(difference);
         } else {
             hideVector();
         }

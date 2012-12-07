@@ -24,14 +24,14 @@ iD.Graph.prototype = {
     parentWays: function(id) {
         // This is slow and a bad hack.
         return _.filter(this.entities, function(e) {
-            return e.type === 'way' && e.nodes.indexOf(id) !== -1;
+            return e && e.type === 'way' && e.nodes.indexOf(id) !== -1;
         });
     },
 
     parentRelations: function(id) {
         // This is slow and a bad hack.
         return _.filter(this.entities, function(e) {
-            return e.type === 'relation' && e.members.indexOf(id) !== -1;
+            return e && e.type === 'relation' && e.members.indexOf(id) !== -1;
         });
     },
 
@@ -49,7 +49,13 @@ iD.Graph.prototype = {
 
     remove: function(entity) {
         var entities = _.clone(this.entities);
-        delete entities[entity.id];
+
+        if (entity.created()) {
+            delete entities[entity.id];
+        } else {
+            entities[entity.id] = undefined;
+        }
+
         return iD.Graph(entities);
     },
 
@@ -58,7 +64,7 @@ iD.Graph.prototype = {
         var items = [];
         for (var i in this.entities) {
             var entity = this.entities[i];
-            if (entity.intersects(extent, this)) {
+            if (entity && entity.intersects(extent, this)) {
                 items.push(this.fetch(entity.id));
             }
         }
@@ -68,26 +74,52 @@ iD.Graph.prototype = {
     // Resolve the id references in a way, replacing them with actual objects.
     fetch: function(id) {
         var entity = this.entities[id], nodes = [];
-        if (!entity.nodes || !entity.nodes.length) return entity;
+        if (!entity || !entity.nodes || !entity.nodes.length) return entity;
         for (var i = 0, l = entity.nodes.length; i < l; i++) {
             nodes[i] = this.fetch(entity.nodes[i]);
         }
         return iD.Entity(entity, {nodes: nodes});
     },
 
-    modifications: function() {
-        return _.filter(this.entities, function(entity) {
-            return entity.modified();
-        }).map(function(e) {
-            return this.fetch(e.id);
-        }.bind(this));
+    difference: function (graph) {
+        var result = [];
+
+        _.each(this.entities, function(entity, id) {
+            if (entity !== graph.entities[id]) {
+                result.push(id);
+            }
+        });
+
+        _.each(graph.entities, function(entity, id) {
+            if (entity && !this.entities.hasOwnProperty(id)) {
+                result.push(id);
+            }
+        }, this);
+
+        return result.sort();
     },
 
-    creations: function() {
-        return _.filter(this.entities, function(entity) {
-            return entity.created();
-        }).map(function(e) {
-            return this.fetch(e.id);
-        }.bind(this));
+    modified: function() {
+        var result = [];
+        _.each(this.entities, function(entity, id) {
+            if (entity && entity.modified()) result.push(id);
+        });
+        return result;
+    },
+
+    created: function() {
+        var result = [];
+        _.each(this.entities, function(entity, id) {
+            if (entity && entity.created()) result.push(id);
+        });
+        return result;
+    },
+
+    deleted: function() {
+        var result = [];
+        _.each(this.entities, function(entity, id) {
+            if (!entity) result.push(id);
+        });
+        return result;
     }
 };
