@@ -81,6 +81,24 @@ iD.Graph.prototype = {
         return iD.Entity(entity, {nodes: nodes});
     },
 
+    difference: function (graph) {
+        var result = [];
+
+        _.each(this.entities, function(entity, id) {
+            if (entity !== graph.entities[id]) {
+                result.push(id);
+            }
+        });
+
+        _.each(graph.entities, function(entity, id) {
+            if (entity && !this.entities.hasOwnProperty(id)) {
+                result.push(id);
+            }
+        }, this);
+
+        return result.sort();
+    },
+
     modified: function() {
         var result = [];
         _.each(this.entities, function(entity, id) {

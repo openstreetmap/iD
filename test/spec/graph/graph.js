@@ -93,6 +93,25 @@ describe('iD.Graph', function() {
         });
     });
 
+    describe("#difference", function () {
+        it("returns an Array of ids of changed entities", function () {
+            var initial = iD.Node({id: "n1"}),
+                updated = initial.update({}),
+                created = iD.Node(),
+                deleted = iD.Node({id: 'n2'}),
+                graph1 = iD.Graph([initial, deleted]),
+                graph2 = graph1.replace(updated).replace(created).remove(deleted);
+            expect(graph2.difference(graph1)).to.eql([created.id, updated.id, deleted.id]);
+        });
+
+        it("includes created entities that were subsequently deleted", function () {
+            var node = iD.Node(),
+                graph1 = iD.Graph([node]),
+                graph2 = graph1.remove(node);
+            expect(graph2.difference(graph1)).to.eql([node.id]);
+        });
+    });
+
     describe("#modified", function () {
         it("returns an Array of ids of modified entities", function () {
             var node1 = iD.Node({id: 'n1', _updated: true}),
