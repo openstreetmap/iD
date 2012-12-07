@@ -23,7 +23,7 @@ window.iD = function(container) {
             .call(map);
 
         var bar = this.append('div')
-            .attr('id', 'bar');
+            .attr('id', 'bar').attr('class', 'fillL2');
 
         var buttons_joined = bar.append('div')
             .attr('class', 'buttons-joined');
@@ -66,7 +66,7 @@ window.iD = function(container) {
             .attr('class', 'hello');
 
         bar.append('button')
-            .attr('class', 'save')
+            .attr('class', 'save big')
             .html("Upload<small id='as-username'></small>")
             .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
             .call(bootstrap.tooltip()
@@ -111,12 +111,12 @@ window.iD = function(container) {
             .attr('class', 'zoombuttons')
             .selectAll('button')
                 .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
-                .enter().append('button').attr('class', function(d) { return d[0]; })
+                .enter().append('button').attr('class', function(d) { return d[0] + ' big'; })
                 .text(function(d) { return d[1]; })
                 .on('click', function(d) { return d[2](); });
 
         var gc = bar.append('div').attr('class', 'geocode-control');
-        gc.append('button').text('?');
+        gc.append('button').text('?').attr('class','big');
         gc
             .on('mouseover', function() {
                 d3.select('.geocode-control input').style('display', 'inline-block');
