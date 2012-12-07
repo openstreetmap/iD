@@ -302,6 +302,7 @@ button.Browse .label {
 
 .inspector-wrap .tag-table-wrap {
     max-height:350px;
+    border-top: 1px solid #ccc;
     overflow:auto;
 }
 
