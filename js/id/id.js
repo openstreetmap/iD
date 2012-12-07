@@ -1,6 +1,7 @@
 window.iD = function(container) {
     var connection = iD.Connection()
             .url('http://api06.dev.openstreetmap.org'),
+            // .url('http://www.openstreetmap.org'),
         history = iD.History(),
         map = iD.Map()
             .connection(connection)

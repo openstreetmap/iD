@@ -3,7 +3,7 @@ iD.History = function() {
         dispatch = d3.dispatch('change');
 
     function perform(actions) {
-        actions = Array.prototype.slice.call(actions)
+        actions = Array.prototype.slice.call(actions);
 
         var annotation;
 
