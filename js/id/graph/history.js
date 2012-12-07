@@ -81,29 +81,20 @@ iD.History = function() {
             }
         },
 
-        // generate reports of changes for changesets to use
-        modify: function () {
-            return stack[index].graph.modifications();
-        },
-
-        create: function () {
-            return stack[index].graph.creations();
-        },
-
-        'delete': function () {
-            return _.difference(
-                _.pluck(stack[0].graph.entities, 'id'),
-                _.pluck(stack[index].graph.entities, 'id')
-            ).map(function (id) {
-                return stack[0].graph.fetch(id);
-            });
-        },
-
         changes: function () {
+            var initial = stack[0].graph,
+                current = stack[index].graph;
+
             return {
-                modify: this.modify(),
-                create: this.create(),
-                'delete': this['delete']()
+                modified: current.modified().map(function (id) {
+                    return current.fetch(id);
+                }),
+                created: current.created().map(function (id) {
+                    return current.fetch(id);
+                }),
+                deleted: current.deleted().map(function (id) {
+                    return initial.fetch(id);
+                })
             };
         },
 

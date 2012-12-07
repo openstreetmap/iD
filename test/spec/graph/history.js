@@ -101,6 +101,31 @@ describe("iD.History", function () {
         });
     });
 
+    describe("#changes", function () {
+        it("includes created entities", function () {
+            var node = iD.Node();
+            history.perform(function (graph) { return graph.replace(node); });
+            expect(history.changes().created).to.eql([node]);
+        });
+
+        it("includes modified entities", function () {
+            var node1 = iD.Node({id: "n1"}),
+                node2 = node1.update({}),
+                graph = iD.Graph([node1]);
+            history.merge(graph);
+            history.perform(function (graph) { return graph.replace(node2); });
+            expect(history.changes().modified).to.eql([node2]);
+        });
+
+        it("includes deleted entities", function () {
+            var node = iD.Node({id: "n1"}),
+                graph = iD.Graph([node]);
+            history.merge(graph);
+            history.perform(function (graph) { return graph.remove(node); });
+            expect(history.changes().deleted).to.eql([node]);
+        });
+    });
+
     describe("#reset", function () {
         it("clears the version stack", function () {
             history.perform(action, "annotation");
