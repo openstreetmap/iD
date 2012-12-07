@@ -15,7 +15,7 @@ iD.layerswitcher = function(map) {
     function layerswitcher(selection) {
         selection
             .append('button')
-            .attr('class', 'white')
+            .attr('class', 'narrow')
             .text('L')
             .on('click', function() {
                 content.classed('hide', function() {

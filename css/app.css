@@ -1,8 +1,17 @@
+/* Basics
+------------------------------------------------------- */
+
 body {
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
-    color:#444;
+    color:#222;
+}
+
+#iD * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 h2 {
@@ -35,6 +44,10 @@ a:hover {
     color:#000;
 }
 
+table th {
+    text-align:left;
+}
+
 input[type=text] {
     font-size:12px;
     line-height:20px;
@@ -45,22 +58,115 @@ input[type=text]:focus {
     border-color:#222;
 }
 
-button {
-    background:#7092ff;
-    border:0;
-    color:#fff;
-    font-size:12px;
-    line-height:18px;
-    margin:5px 5px 0 0;
-    cursor:pointer;
-    border-radius:2px;
+/* Utility Classes
+------------------------------------------------------- */
+
+.fillL { background-color: white;}
+.fillL2 { background: #f7f7f7 url(/img/background-pattern-1.png) repeat;}
+.fillD {
+    background-color: #222222;
+    color: white;
+}
+div.hide {
+    display:none;
 }
 
-button.cancel {
-    background:#aaa;
+a.selected {
+    background:#DDE4FF;
 }
+
+/* Buttons */
+
+button {
+    border:0;
+    line-height:20px;
+    cursor:pointer;
+    border:1px solid #aaa;
+    box-shadow: inset 0 0 0 1px #fff;
+    color:#222;
+    background: white;
+    font-weight:bold;
+    white-space:nowrap;
+    font-size:14px;
+    display: inline-block;
+    height:40px;
+}
+.fillD button { border: 1px solid black; }
+
+button:hover {
+    background-color: #ececec;
+}
+
+button.active:not([disabled]) {
+    background:#7392ff;
+    color:#fff;
+}
+
+button.wide,
+button.narrow {
+    border-radius:4px;
+}
+
+button.wide {
+    margin: 10px;
+    width: 100px;
+}
+
+button.add-button {
+    width: 80px;
+}
+
+button.narrow,
+button.Browse {
+    width:40px;
+}
+
+.buttons-joined {
+    display: inline-block;
+    margin:10px;
+}
+
+.buttons-joined button {
+    border-right-width: 0;
+    border-radius:0;
+    margin: 0;
+}
+
+.buttons-joined button:first-child {
+    border-radius:4px 0 0 4px;
+}
+
+.buttons-joined button:last-child {
+    border-right-width: 1px;
+    border-radius:0 4px 4px 0;
+}
+
+button[disabled] {
+    color:#eee;
+    cursor:auto;
+}
+
+button.save {
+    display:inline-block;
+    color:#6dc643;
+}
+
 button.delete {
-    background:#DD5757;
+    color:#ff7070;
+}
+
+button.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+input[type=text] {
+    width:150px;
+    height:20px;
+    border:1px solid #ccc;
+    padding:5px;
+    margin:0;
 }
 
 button small {
@@ -71,217 +177,103 @@ button small {
     vertical-align: top;
 }
 
-table th {
-    text-align:left;
+button .label {
+    margin-right: 3px;
+    text-shadow: 0 1px 0 white;
 }
 
-#map {
-    display:block;
-    position:absolute;
-    overflow:hidden;
-    top:45px;
-    left:0;
-    right:0;
-    bottom:0;
-    background:#fff;
+.active .label {
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 }
 
-#about {
-    position:absolute;
-    bottom:5px;
-    right:5px;
-    background:#fff;
-    padding:2px 5px;
+/* Icons */
+
+.icon {
+  display:inline-block;
+  vertical-align:top;
+  width:20px;
+  height:20px;
+  background:transparent url(/img/sprite.png) no-repeat 0px 0px;
+  text-indent:-9999px;
+  overflow:hidden;
+  }
+
+.icon.icon-pre-text {
+  margin-right: 3px;
 }
+
+.icon.browse     { background-position:   0px 0px;}
+.icon.add-place  { background-position: -20px 0px;}
+.icon.add-road   { background-position: -40px 0px;}
+.icon.add-area   { background-position: -60px 0px;}
+.icon.undo       { background-position: -80px 0px;}
+.icon.redo       { background-position: -100px 0px;}
+.apply.icon      { background-position: -120px 0px;}
+.save.icon       { background-position: -140px 0px;}
+.close.icon      { background-position: -160px 0px;}
+.delete.icon     { background-position: -180px 0px;}
+
+.active .icon.browse     { background-position:   0px -20px;}
+.active .icon.add-place  { background-position: -20px -20px;}
+.active .icon.add-road   { background-position: -40px -20px;}
+.active .icon.add-area   { background-position: -60px -20px;}
+.active .icon.undo       { background-position: -80px -20px;}
+.active .icon.redo       { background-position: -100px -20px;}
+.active .apply.icon      { background-position: -120px -20px;}
+.active .save.icon       { background-position: -140px -20px;}
+.active .close.icon      { background-position: -160px -20px;}
+.active .delete.icon     { background-position: -180px -20px;}
+
+
+button[disabled] .icon.browse     { background-position:   0px -40px;}
+button[disabled] .icon.add-place  { background-position: -20px -40px;}
+button[disabled] .icon.add-road   { background-position: -40px -40px;}
+button[disabled] .icon.add-area   { background-position: -60px -40px;}
+button[disabled] .icon.undo       { background-position: -80px -40px;}
+button[disabled] .icon.redo       { background-position: -100px -40px;}
+button[disabled] .apply.icon      { background-position: -120px -40px;}
+button[disabled] .save.icon       { background-position: -140px -40px;}
+button[disabled] .close.icon      { background-position: -160px -40px;}
+button[disabled] .delete.icon     { background-position: -180px -40px;}
+
+/* ToolBar / Persistent UI Elements
+------------------------------------------------------- */
 
 #bar {
-    background:#e8e8e8;
-    border-bottom:1px solid #aaa;
+    border-bottom:1px solid #ccc;
     position:absolute;
     left:0px;
     top:0px;
-    height:44px;
     right:0;
+    height:60px;
 }
 
-div.layerswitcher-control {
-    position:absolute;
-    top:170px;
-    left:10px;
-    color:#222;
-}
+/* Special rules for toolbar icons */
 
-div.hide {
+button.Browse .label {
+    display: none;
+ }
+
+/* Status box */
+
+.messages {
     display:none;
 }
 
-div.layerswitcher-control .content {
-    background:#fff;
-    padding:5px;
-    position:absolute;
-    left:40px;
-    width:100px;
-    top:0;
-}
-
-div.layerswitcher-control div.opacity-options {
-    border:1px solid #000;
-    height:15px;
-    width:45px;
-}
-
-div.layerswitcher-control a.layer {
-    display:block;
-}
-
-div.layerswitcher-control a.opacity {
-    background:#000;
-    display:inline-block;
-    width:15px;
-    height:15px;
-}
-
-
-div.geocode-control {
-    position:absolute;
-    top:130px;
-    left:10px;
-    color:#222;
-}
-
-#bar div.geocode-control button,
-div.layerswitcher-control button {
-    width:40px;
-}
-
-div.geocode-control input {
-    display:none;
-}
-
-#bar button,
-button.white {
-    width:80px;
-    white-space:nowrap;
-    cursor:pointer;
-    display:inline-block;
-    background:#fff;
-    color:#222;
-    font-weight:bold;
-    font-size:14px;
-    line-height:19px;
-    border-radius:3px;
-    border:1px solid #ccc;
-    padding:0 10px;
-    height:35px;
-    margin:0;
-}
-
-div.buttons-joined {
-    margin:5px;
-    padding:1px;
-    background:#fff;
-    display:inline-block;
-    border-radius:3px;
-    border:1px solid #ccc;
-}
-
-#bar div.buttons-joined button:first-child {
-    border-radius:2px 0 0 2px;
-}
-
-#bar div.buttons-joined button:last-child {
-    border-right:0;
-    border-radius:0 2px 2px 0;
-}
-
-#bar div.buttons-joined button {
-    height:31px;
-    border:0;
-    border-right:1px solid #ccc;
-    border-radius:0;
-}
-
-#bar .messages {
-    display:none;
-}
-
-.user {
-    width:200px;
-    position:absolute;
-    bottom:10px;
-    left:10px;
-    background:#fff;
-    padding:2px 5px;
-    border-radius:3px;
-    border:1px solid #aaa;
-}
-
-.user .logout {
-    margin-left:10px;
-}
-
-#bar button[disabled] {
-    color:#eee;
-    cursor:auto;
-}
-
-#bar button.active:not([disabled]) {
-    background:#7392ff;
-    color:#fff;
-}
-
-#bar button.save {
-    display:inline-block;
-    color:#6dc643;
-}
-
-#bar button.mini,
-#bar button.mini {
-    width:auto;
-}
-
-#bar input[type=text] {
-    width:150px;
-    height:20px;
-    border:1px solid #ccc;
-    padding:5px;
-    margin:0;
-}
-
-.zoombuttons {
-    position:absolute;
-    left:10px;
-    top:50px;
-    width:40px;
-}
-
-#bar .zoombuttons button {
-    width:40px;
-    border:1px solid #ccc;
-}
-
-#bar .zoombuttons button.zoom-in {
-    border-bottom:0;
-    border-radius:5px 5px 0 0;
-}
-
-#bar .zoombuttons button.zoom-out {
-    border-radius:0 0 5px 5px;
-}
+/* Inspector */
 
 .inspector-wrap {
-    border-radius:3px;
     border:1px solid #ccc;
     position:absolute;
-    top:50px;
-    left:50%;
-    margin-left:-175px;
-    overflow:auto;
-    padding:10px;
-    background:#fff;
-    width:350px;
+    right: 0;
+    left: 530px;
+    min-height: 60px;
     opacity:0;
     display:none;
+}
+
+.inspector-inner {
+    padding: 10px;
 }
 
 .inspector-wrap a.permalink {
@@ -304,7 +296,7 @@ div.buttons-joined {
 
 .inspector-wrap table {
     border-collapse: collapse;
-    width:347px;
+    width:100%;
     border-spacing:0;
 }
 
@@ -318,12 +310,147 @@ div.buttons-joined {
     border-spacing:0;
 }
 
-.inspector-wrap .close {
-    border: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
+.inspector-wrap .buttons {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+}
+
+/* Map Controls */
+
+.map-control {
+    left:10px;
+    position:absolute;
+}
+
+.map-control button {
+    text-indent: -9999px;
+    overflow: hidden;
+    background-image: url(/img/sprite.png);
+}
+
+/* Zoomer */
+
+.zoombuttons {
+    top:70px;
+    width: 40px;
+}
+
+.zoombuttons button.zoom-in {
+    background-position: 10px -90px;
+    border-bottom:0;
+    border-radius:4px 4px 0 0;
+}
+
+.zoombuttons button.zoom-out {
+    background-position: -30px -90px;
+    border-radius:0 0 4px 4px;
+}
+
+/* Layer Switcher */
+
+.layerswitcher-control {
+    top:210px;
+}
+
+.layerswitcher-control button {
+    background-position: -110px -90px;
+}
+
+.layerswitcher-control .content {
+    background:#fff;
+    padding:5px;
+    position:absolute;
+    left:40px;
+    width:100px;
+    top:0;
+}
+
+.layerswitcher-control .opacity-options {
+    border:1px solid #000;
+    height:15px;
+    width:45px;
+}
+
+.layerswitcher-control a.layer {
+    display:block;
+}
+
+.layerswitcher-control a.opacity {
+    background:#000;
+    display:inline-block;
+    width:15px;
+    height:15px;
+}
+
+/* Geocoder */
+
+.geocode-control {
+    top:160px;
+}
+
+.geocode-control button {
+    background-position: -70px -90px;
+}
+
+.geocode-control input {
+    display:none;
+}
+
+/* Map
+------------------------------------------------------- */
+
+#map {
+    display:block;
+    position:absolute;
+    overflow:hidden;
+    top:45px;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#fff;
+}
+
+img.tile {
+    position:absolute;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+}
+
+#tile-g {
+    position:absolute;
+    top:0;
+}
+
+/* About Section
+------------------------------------------------------- */
+
+#about {
+    position:absolute;
+    bottom:5px;
+    right:5px;
+    background:#fff;
+    padding:2px 5px;
+}
+
+/* Account Information
+------------------------------------------------------- */
+
+.user {
+    width:200px;
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    background:#fff;
+    padding:2px 5px;
+    border-radius:3px;
+    border:1px solid #aaa;
+}
+
+.user .logout {
+    margin-left:10px;
 }
 
 div.typeahead {
@@ -337,9 +464,8 @@ div.typeahead a {
     display:block;
 }
 
-a.selected {
-    background:#DDE4FF;
-}
+/* Modals
+------------------------------------------------------- */
 
 .modal {
     width:640px;
@@ -398,11 +524,8 @@ a.selected {
     overflow:auto;
 }
 
-/* mobile tweaks */
-* {
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-    -webkit-touch-callout:none;
-}
+/* Tooltips
+------------------------------------------------------- */
 
 #bar button .tooltip {
     white-space: normal;
@@ -411,15 +534,16 @@ a.selected {
 .tooltip {
     position: absolute;
     z-index: 1030;
-    display: block;
     padding: 5px;
     font-size: 11px;
     opacity: 0;
+    display: none;
     filter: alpha(opacity=0);
     visibility: visible;
 }
 
 .tooltip.in {
+    display: block;
     opacity: 0.8;
     filter: alpha(opacity=80);
 }
@@ -452,16 +576,9 @@ a.selected {
     border-width: 0 5px 5px;
 }
 
-img.tile {
-    position:absolute;
-    transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-    -moz-transform-origin:0 0;
-    -o-transform-origin:0 0;
-}
-
-#tile-g {
-    position:absolute;
-    top:0;
+/* Mobile Tweaks
+------------------------------------------------------- */
+* {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-touch-callout:none;
 }
