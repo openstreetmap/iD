@@ -91,14 +91,13 @@ button {
     display: inline-block;
     height:40px;
 }
-.fillD button { border: 1px solid black; }
 
 button:hover {
     background-color: #ececec;
 }
 
 button.active:not([disabled]) {
-    background:#7392ff;
+    background:#aaa;
     color:#fff;
 }
 
@@ -142,17 +141,29 @@ button.Browse {
 }
 
 button[disabled] {
-    color:#eee;
+    color:#ccc;
     cursor:auto;
 }
 
-button.save {
-    display:inline-block;
-    color:#6dc643;
+button.action {
+    background: #7092ff;
+}
+button.action:hover {
+    background: #6282ee;
 }
 
 button.delete {
-    color:#ff7070;
+    background: #ff7070;
+}
+button.delete:hover {
+    background: #ef5454;
+}
+
+button.save {
+    background:#6bc641;
+}
+button.save:hover {
+    background: #59ac33;
 }
 
 button.close {
@@ -183,6 +194,11 @@ button .label {
 }
 
 .active .label {
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+button.action .label {
+    color: white;
     text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 }
 
@@ -263,7 +279,6 @@ button.Browse .label {
 /* Inspector */
 
 .inspector-wrap {
-    border:1px solid #ccc;
     position:absolute;
     right: 0;
     left: 530px;

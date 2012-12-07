@@ -136,14 +136,14 @@ iD.Inspector = function() {
 
             function drawbuttons(selection) {
                 selection.append('button')
-                    .attr('class', 'save wide')
+                    .attr('class', 'apply wide action')
                     .html("<span class='icon icon-pre-text apply'></span><span class='label'>Apply</span>")
                     .on('click', function(entity) {
                         event.changeTags(entity, clean(grabtags()));
                         event.close(entity);
                     });
                 selection.append('button')
-                    .attr('class', 'delete wide')
+                    .attr('class', 'delete wide action')
                     .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
                     .on('click', function(entity) { event.remove(entity); });
             }

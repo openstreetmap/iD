@@ -329,11 +329,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="551.67736"
-     inkscape:cy="614.51516"
+     inkscape:zoom="8"
+     inkscape:cx="-55.068441"
+     inkscape:cy="832.46552"
      inkscape:document-units="px"
-     inkscape:current-layer="layer8"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1660"
      inkscape:window-height="971"
@@ -2092,6 +2092,33 @@
        d="M 454 -35 L 453 -34 L 453 -33 L 454 -32 L 466 -32 L 467 -33 L 467 -34 L 466 -35 L 454 -35 z M 454 -31 L 454 -21 L 455 -20 L 465 -20 L 466 -21 L 466 -31 L 454 -31 z M 456 -29 L 458 -29 L 458 -23 L 457 -22 L 456 -23 L 456 -29 z M 459 -29 L 461 -29 L 461 -23 L 460 -22 L 459 -23 L 459 -29 z M 462 -29 L 464 -29 L 464 -23 L 463 -22 L 462 -23 L 462 -29 z "
        transform="translate(0,52.362183)"
        id="path16662" />
+    <rect
+       ry="0"
+       rx="0"
+       y="242.36218"
+       x="-90"
+       height="20"
+       width="19.99999"
+       id="rect22368"
+       style="color:#000000;fill:#ef5454;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:#59ac33;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect22370"
+       width="19.99999"
+       height="20"
+       x="-90"
+       y="217.36218"
+       rx="0"
+       ry="0" />
+    <rect
+       ry="0"
+       rx="0"
+       y="192.36218"
+       x="-90"
+       height="20"
+       width="19.99999"
+       id="rect22372"
+       style="color:#000000;fill:#6282ee;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -2113,7 +2140,7 @@
        inkscape:connector-curvature="0"
        id="path5129"
        d="m 51,94.362183 0,35.999997 97,0 0,-35.999994 z"
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#4672ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
     <text
        transform="translate(0,-52.362183)"
        xml:space="preserve"
