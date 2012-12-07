@@ -67,8 +67,7 @@ iD.Connection = function() {
             delete o.lon;
             delete o.lat;
         }
-        o._id = o.id;
-        o.id = o.type[0] + o.id;
+        o.id = iD.Entity.id.fromOSM(o.type, o.id);
         return iD.Entity(o);
     }
 

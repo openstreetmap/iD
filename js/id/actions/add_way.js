@@ -1,5 +1,5 @@
 iD.actions.AddWay = function(way) {
     return function(graph) {
-        return graph.replace(way, 'started a road');
+        return graph.replace(way);
     };
 };

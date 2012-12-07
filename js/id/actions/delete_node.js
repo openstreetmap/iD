@@ -13,6 +13,6 @@ iD.actions.DeleteNode = function(nodeId) {
                 graph = iD.actions.RemoveRelationMember(parent.id, nodeId)(graph);
             });
 
-        return graph.remove(node, 'removed a node');
+        return graph.remove(node);
     };
 };

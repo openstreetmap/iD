@@ -15,8 +15,7 @@ iD.modes.Select = function (entity) {
             d3.event.sourceEvent.stopPropagation();
 
             if (!dragging) {
-                dragging = iD.util.trueObj([entity.id].concat(
-                    _.pluck(mode.history.graph().parentWays(entity.id), 'id')));
+                dragging = true;
                 mode.history.perform(iD.actions.Noop());
             }
 
@@ -37,10 +36,14 @@ iD.modes.Select = function (entity) {
     function remove() {
         switch (entity.type) {
             case 'way':
-                mode.history.perform(iD.actions.DeleteWay(entity.id));
+                mode.history.perform(
+                    iD.actions.DeleteWay(entity.id),
+                    'deleted a way');
                 break;
             case 'node':
-                mode.history.perform(iD.actions.DeleteNode(entity.id));
+                mode.history.perform(
+                    iD.actions.DeleteNode(entity.id),
+                    'deleted a node');
         }
 
         mode.controller.exit();
@@ -59,11 +62,18 @@ iD.modes.Select = function (entity) {
             .call(inspector);
 
         inspector.on('changeTags', function(d, tags) {
-            mode.history.perform(iD.actions.ChangeEntityTags(d.id, tags));
+            mode.history.perform(
+                iD.actions.ChangeEntityTags(d.id, tags),
+                'changed tags');
+
         }).on('changeWayDirection', function(d) {
-            mode.history.perform(iD.actions.ReverseWay(d.id));
+            mode.history.perform(
+                iD.actions.ReverseWay(d.id),
+                'reversed a way');
+
         }).on('remove', function() {
             remove();
+
         }).on('close', function() {
             mode.controller.exit();
         });

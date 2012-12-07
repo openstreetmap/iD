@@ -11,11 +11,6 @@ describe('iD.Graph', function() {
         expect(graph.entity(entity.id)).to.equal(entity);
     });
 
-    it('can be constructed with an annotation', function() {
-        var graph = iD.Graph({}, 'first graph');
-        expect(graph.annotation).to.equal('first graph');
-    });
-
     if (iD.debug) {
         it("is frozen", function () {
             expect(Object.isFrozen(iD.Graph())).to.be.true;

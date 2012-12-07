@@ -10,7 +10,7 @@ iD.Inspector = function() {
             .attr('class', 'permalink')
             .attr('href', function(d) {
                 return 'http://www.openstreetmap.org/browse/' +
-                d.type + '/' + d.id.slice(1);
+                d.type + '/' + d.osmId();
             })
             .text('View on OSM');
         selection.append('a')

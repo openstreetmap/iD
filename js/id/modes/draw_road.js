@@ -34,7 +34,8 @@ iD.modes.DrawRoad = function(wayId, direction) {
                 // connect the way in a loop
                 history.replace(
                     iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(wayId, tailId, index));
+                    iD.actions.AddWayNode(wayId, tailId, index),
+                    'added to a road');
 
                 controller.enter(iD.modes.Select(way));
 
@@ -48,7 +49,8 @@ iD.modes.DrawRoad = function(wayId, direction) {
                 // connect the way to an existing node
                 history.replace(
                     iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(wayId, datum.id, index));
+                    iD.actions.AddWayNode(wayId, datum.id, index),
+                    'added to a road');
 
                 controller.enter(iD.modes.DrawRoad(wayId, direction));
 
@@ -57,11 +59,16 @@ iD.modes.DrawRoad = function(wayId, direction) {
                 var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(map.surface.node()), map);
 
                 history.replace(
-                    iD.actions.AddWayNode(datum.id, node.id, connectedIndex));
+                    iD.actions.AddWayNode(datum.id, node.id, connectedIndex),
+                    'added to a road');
 
                 controller.enter(iD.modes.DrawRoad(wayId, direction));
 
             } else {
+                history.replace(
+                    iD.actions.Noop(),
+                    'added to a road');
+
                 controller.enter(iD.modes.DrawRoad(wayId, direction));
             }
         });

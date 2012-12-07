@@ -3,6 +3,6 @@
 iD.actions.Move = function(entityId, loc) {
     return function(graph) {
         var entity = graph.entity(entityId);
-        return graph.replace(entity.update({loc: loc}), 'moved an element');
+        return graph.replace(entity.update({loc: loc}));
     };
 };
