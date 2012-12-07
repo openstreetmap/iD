@@ -67,8 +67,7 @@ iD.Connection = function() {
             delete o.lon;
             delete o.lat;
         }
-        o._id = o.id;
-        o.id = o.type[0] + o.id;
+        o.id = iD.Entity.id.fromOSM(o.type, o.id);
         return iD.Entity(o);
     }
 
@@ -150,10 +149,6 @@ iD.Connection = function() {
         return true;
     }
 
-    function apiRequestExtent(extent) {
-        bboxFromAPI(extent, event.load);
-    }
-
     function loadTiles(projection) {
         var scaleExtent = [16, 16],
             s = projection.scale(),
@@ -177,10 +172,20 @@ iD.Connection = function() {
                 projection.invert([x + ts, y + ts])];
         }
 
-        return tiles
+        var q = queue(2);
+
+        var bboxes = tiles
             .filter(tileAlreadyLoaded)
             .map(apiExtentBox)
-            .map(apiRequestExtent);
+            .forEach(function(e) {
+                q.defer(bboxFromAPI, e);
+            });
+
+        q.awaitAll(function(err, res) {
+            var g = iD.Graph();
+            res.forEach(function(r) { g = g.merge(r); });
+            event.load(err, g);
+        });
     }
 
     connection.url = function(_) {

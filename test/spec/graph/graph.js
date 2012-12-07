@@ -11,11 +11,6 @@ describe('iD.Graph', function() {
         expect(graph.entity(entity.id)).to.equal(entity);
     });
 
-    it('can be constructed with an annotation', function() {
-        var graph = iD.Graph({}, 'first graph');
-        expect(graph.annotation).to.equal('first graph');
-    });
-
     if (iD.debug) {
         it("is frozen", function () {
             expect(Object.isFrozen(iD.Graph())).to.be.true;
@@ -26,35 +21,46 @@ describe('iD.Graph', function() {
         });
     }
 
-    describe('operations', function() {
-        it('#remove', function() {
-            var entities = { 'n-1': {
-                    type: 'node',
-                    loc: [-80, 30],
-                    id: 'n-1'
-                }
-            };
-            var graph = iD.Graph(entities, 'first graph');
-            var g2 = graph.remove(entities['n-1'], 'Removed node');
-            expect(graph.entity('n-1')).to.equal(entities['n-1']);
-            expect(g2.entity('n-1')).to.equal(undefined);
+    describe("#remove", function () {
+        it("returns a new graph", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(graph.remove(node)).not.to.equal(graph);
         });
-        it('#replace', function() {
-            var entities = { 'n-1': {
-                    type: 'node',
-                    loc: [-80, 30],
-                    id: 'n-1'
-                }
-            };
-            var replacement = {
-                type: 'node',
-                loc: [-80, 40],
-                id: 'n-1'
-            };
-            var graph = iD.Graph(entities, 'first graph');
-            var g2 = graph.replace(replacement, 'Removed node');
-            expect(graph.entity('n-1').loc[1]).to.equal(30);
-            expect(g2.entity('n-1').loc[1]).to.equal(40);
+
+        it("doesn't modify the receiver", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            graph.remove(node);
+            expect(graph.entity(node.id)).to.equal(node);
+        });
+
+        it("removes the entity from the result", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(graph.remove(node).entity(node.id)).to.be.undefined;
+        });
+    });
+
+    describe("#replace", function () {
+        it("returns a new graph", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(graph.replace(node)).not.to.equal(graph);
+        });
+
+        it("doesn't modify the receiver", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            graph.replace(node);
+            expect(graph.entity(node.id)).to.equal(node);
+        });
+
+        it("replaces the entity in the result", function () {
+            var node1 = iD.Node(),
+                node2 = node1.update({}),
+                graph = iD.Graph([node1]);
+            expect(graph.replace(node2).entity(node2.id)).to.equal(node2);
         });
     });
 
@@ -71,7 +77,7 @@ describe('iD.Graph', function() {
     describe("#parentRelations", function() {
         it("returns an array of relations that contain the given entity id", function () {
             var node     = iD.Node({id: "n1"}),
-                relation = iD.Relation({id: "r1", members: ["n1"]}),
+                relation = iD.Relation({id: "r1", members: [{ id: "n1", role: 'from' }]}),
                 graph    = iD.Graph({n1: node, r1: relation});
             expect(graph.parentRelations("n1")).to.eql([relation]);
             expect(graph.parentRelations("n2")).to.eql([]);
@@ -83,25 +89,59 @@ describe('iD.Graph', function() {
             var node  = iD.Node({id: "n1"}),
                 way   = iD.Way({id: "w1", nodes: ["n1"]}),
                 graph = iD.Graph({n1: node, w1: way});
-            expect(graph.fetch("w1").nodes[0].id).to.equal("n1");
+            expect(graph.fetch("w1").nodes).to.eql([node]);
         });
     });
 
-    describe("#modifications", function () {
-        it("filters entities by modified", function () {
-            var a = {id: 'a', modified: function () { return true; }},
-                b = {id: 'b', modified: function () { return false; }},
-                graph = iD.Graph({ 'a': a, 'b': b });
-            expect(graph.modifications()).to.eql([graph.fetch('a')]);
+    describe("#difference", function () {
+        it("returns an Array of ids of changed entities", function () {
+            var initial = iD.Node({id: "n1"}),
+                updated = initial.update({}),
+                created = iD.Node(),
+                deleted = iD.Node({id: 'n2'}),
+                graph1 = iD.Graph([initial, deleted]),
+                graph2 = graph1.replace(updated).replace(created).remove(deleted);
+            expect(graph2.difference(graph1)).to.eql([created.id, updated.id, deleted.id]);
+        });
+
+        it("includes created entities that were subsequently deleted", function () {
+            var node = iD.Node(),
+                graph1 = iD.Graph([node]),
+                graph2 = graph1.remove(node);
+            expect(graph2.difference(graph1)).to.eql([node.id]);
         });
     });
 
-    describe("#creations", function () {
-        it("filters entities by created", function () {
-            var a = {id: 'a', created: function () { return true; }},
-                b = {id: 'b', created: function () { return false; }},
-                graph = iD.Graph({ 'a': a, 'b': b });
-            expect(graph.creations()).to.eql([graph.fetch('a')]);
+    describe("#modified", function () {
+        it("returns an Array of ids of modified entities", function () {
+            var node1 = iD.Node({id: 'n1', _updated: true}),
+                node2 = iD.Node({id: 'n2'}),
+                graph = iD.Graph([node1, node2]);
+            expect(graph.modified()).to.eql([node1.id]);
+        });
+    });
+
+    describe("#created", function () {
+        it("returns an Array of ids of created entities", function () {
+            var node1 = iD.Node({id: 'n-1', _updated: true}),
+                node2 = iD.Node({id: 'n2'}),
+                graph = iD.Graph([node1, node2]);
+            expect(graph.created()).to.eql([node1.id]);
+        });
+    });
+
+    describe("#deleted", function () {
+        it("returns an Array of ids of deleted entities", function () {
+            var node1 = iD.Node({id: "n1"}),
+                node2 = iD.Node(),
+                graph = iD.Graph([node1, node2]).remove(node1);
+            expect(graph.deleted()).to.eql([node1.id]);
+        });
+
+        it("doesn't include created entities that were subsequently deleted", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]).remove(node);
+            expect(graph.deleted()).to.eql([]);
         });
     });
 });

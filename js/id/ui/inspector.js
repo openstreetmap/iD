@@ -1,5 +1,5 @@
 iD.Inspector = function() {
-    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close'),
+    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close', 'splitWay'),
         taginfo = iD.taginfo();
 
     function drawhead(selection) {
@@ -10,7 +10,7 @@ iD.Inspector = function() {
             .attr('class', 'permalink')
             .attr('href', function(d) {
                 return 'http://www.openstreetmap.org/browse/' +
-                d.type + '/' + d.id.slice(1);
+                d.type + '/' + d.osmId();
             })
             .text('View on OSM');
         selection.append('a')
@@ -32,9 +32,16 @@ iD.Inspector = function() {
                 .attr('href', '#')
                 .text('Reverse Direction')
                 .on('click', function(d) {
-                    event.changeWayDirection(iD.Entity(d, {
-                        nodes: _.pluck(d.nodes.reverse(), 'id')
-                    }));
+                    event.changeWayDirection(iD.Entity(d));
+                });
+        }
+        if (selection.datum().type === 'node' && !selection.datum()._poi) {
+            selection.append('a')
+                .attr('class', 'permalink')
+                .attr('href', '#')
+                .text('Split Way')
+                .on('click', function(d) {
+                    event.splitWay(iD.Entity(d));
                 });
         }
     }

@@ -7,29 +7,41 @@ iD.modes.AddArea = function() {
     };
 
     mode.enter = function() {
-        mode.map.dblclickEnable(false);
-        mode.map.hint('Click on the map to start drawing an area, like a park, lake, or building.');
+        var map = mode.map,
+            history = mode.history,
+            controller = mode.controller;
 
-        mode.map.surface.on('click.addarea', function() {
+        map.dblclickEnable(false)
+            .hint('Click on the map to start drawing an area, like a park, lake, or building.');
+
+        map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
-                node,
-                way = iD.Way({tags: { building: 'yes', area: 'yes', elastic: 'true' }});
+                way = iD.Way({tags: { building: 'yes', area: 'yes' }});
 
-            // connect a way to an existing way
             if (datum.type === 'node') {
-                node = datum;
+                // start from an existing node
+                history.perform(
+                    iD.actions.AddWay(way),
+                    iD.actions.AddWayNode(way.id, datum.id),
+                    iD.actions.AddWayNode(way.id, datum.id),
+                    'started an area');
+
             } else {
-                node = iD.Node({loc: mode.map.mouseCoordinates()});
+                // start from a new node
+                var node = iD.Node({loc: map.mouseCoordinates()});
+                history.perform(
+                    iD.actions.AddWay(way),
+                    iD.actions.AddNode(node),
+                    iD.actions.AddWayNode(way.id, node.id),
+                    iD.actions.AddWayNode(way.id, node.id),
+                    'started an area');
             }
 
-            mode.history.perform(iD.actions.StartWay(way));
-            mode.history.perform(iD.actions.AddWayNode(way, node));
-
-            mode.controller.enter(iD.modes.DrawArea(way.id));
+            controller.enter(iD.modes.DrawArea(way.id));
         });
 
-        mode.map.keybinding().on('⎋.addarea', function() {
-            mode.controller.exit();
+        map.keybinding().on('⎋.addarea', function() {
+            controller.exit();
         });
     };
 

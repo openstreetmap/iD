@@ -52,17 +52,17 @@ iD.format.XML = {
                 '@version': 0.3,
                 '@generator': 'iD',
                 // TODO: copy elements first
-                create: nest(changes.create.map(function(c) {
+                create: nest(changes.created.map(function(c) {
                     var x = iD.Entity(c);
                     x.changeset = changeset_id;
                     return x;
                 }).map(iD.format.XML.rep)),
-                modify: changes.modify.map(function(c) {
+                modify: changes.modified.map(function(c) {
                     var x = iD.Entity(c);
                     x.changeset = changeset_id;
                     return x;
                 }).map(iD.format.XML.rep),
-                'delete': changes['delete'].map(function(c) {
+                'delete': changes.deleted.map(function(c) {
                     var x = iD.Entity(c);
                     x.changeset = changeset_id;
                     return x;

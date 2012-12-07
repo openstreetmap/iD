@@ -1,8 +1,9 @@
 iD.modes.Select = function (entity) {
     var mode = {
-        button: ''
-    },
-        inspector = iD.Inspector(),
+        button: 'browse'
+    };
+
+    var inspector = iD.Inspector(),
         dragging, target;
 
     var dragWay = d3.behavior.drag()
@@ -11,25 +12,23 @@ iD.modes.Select = function (entity) {
             return { x: p[0], y: p[1] };
         })
         .on('drag', function(entity) {
-            if (!mode.map.dragEnable()) return;
-
             d3.event.sourceEvent.stopPropagation();
 
             if (!dragging) {
-                dragging = iD.util.trueObj([entity.id].concat(
-                    _.pluck(mode.history.graph().parentWays(entity.id), 'id')));
+                dragging = true;
                 mode.history.perform(iD.actions.Noop());
             }
 
             entity.nodes.forEach(function(node) {
                 var start = mode.map.projection(node.loc);
-                var end = mode.map.projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
-                node.loc = end;
-                mode.history.replace(iD.actions.Move(node, end));
+                var end = mode.map.projection.invert([
+                    start[0] + d3.event.dx,
+                    start[1] + d3.event.dy]);
+                mode.history.replace(iD.actions.Move(node.id, end));
             });
         })
         .on('dragend', function () {
-            if (!mode.map.dragEnable() || !dragging) return;
+            if (!dragging) return;
             dragging = undefined;
             mode.map.redraw();
         });
@@ -37,16 +36,22 @@ iD.modes.Select = function (entity) {
     function remove() {
         switch (entity.type) {
             case 'way':
-                mode.history.perform(iD.actions.DeleteWay(entity));
+                mode.history.perform(
+                    iD.actions.DeleteWay(entity.id),
+                    'deleted a way');
                 break;
             case 'node':
-                mode.history.perform(iD.actions.DeleteNode(entity));
+                mode.history.perform(
+                    iD.actions.DeleteNode(entity.id),
+                    'deleted a node');
         }
 
         mode.controller.exit();
     }
 
     mode.enter = function () {
+        iD.modes._dragFeatures(mode);
+
         target = mode.map.surface.selectAll("*")
             .filter(function (d) { return d === entity; });
 
@@ -57,11 +62,23 @@ iD.modes.Select = function (entity) {
             .call(inspector);
 
         inspector.on('changeTags', function(d, tags) {
-            mode.history.perform(iD.actions.ChangeEntityTags(mode.history.graph().entity(d.id), tags));
+            mode.history.perform(
+                iD.actions.ChangeEntityTags(d.id, tags),
+                'changed tags');
+
         }).on('changeWayDirection', function(d) {
-            mode.history.perform(iD.actions.ReverseWay(d));
+            mode.history.perform(
+                iD.actions.ReverseWay(d.id),
+                'reversed a way');
+
+        }).on('splitWay', function(d) {
+            mode.history.perform(
+                iD.actions.SplitWay(d.id),
+                'split a way on a node');
+
         }).on('remove', function() {
             remove();
+
         }).on('close', function() {
             mode.controller.exit();
         });
@@ -88,6 +105,8 @@ iD.modes.Select = function (entity) {
     };
 
     mode.exit = function () {
+        mode.map.surface.on('mousedown.latedrag', null);
+
         d3.select('.inspector-wrap')
             .style('display', 'none');
 

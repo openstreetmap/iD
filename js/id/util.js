@@ -1,13 +1,5 @@
 iD.util = {};
 
-iD.util._counters = {};
-
-iD.util.id = function(counter) {
-    counter = counter || 'default';
-    if (!iD.util._counters[counter]) iD.util._counters[counter] = 0;
-    return counter[0] + (--iD.util._counters[counter]);
-};
-
 iD.util.trueObj = function(arr) {
     var o = {};
     for (var i = 0, l = arr.length; i < l; i++) o[arr[i]] = true;
@@ -72,6 +64,20 @@ iD.util.prefixProperty = function(property) {
         while (++i < n) if (p[i] + property in s) return '-' + p[i].toLowerCase() + '-' + property.toLowerCase();
         return false;
     })(prefixes);
+};
+
+iD.util.support3d = function() {
+    // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
+    var transformProp = iD.util.prefixProperty('Transform');
+    var el = document.createElement('div'),
+        has3d = false;
+    document.body.insertBefore(el, null);
+    if (el.style[transformProp] !== undefined) {
+        el.style[transformProp] = 'translate3d(1px,1px,1px)';
+        has3d = window.getComputedStyle(el).getPropertyValue(transformProp);
+    }
+    document.body.removeChild(el);
+    return (has3d && has3d.length>0 && has3d!=="none");
 };
 
 iD.util.geo = {};

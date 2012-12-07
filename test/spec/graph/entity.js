@@ -1,4 +1,4 @@
-describe('Entity', function () {
+describe('iD.Entity', function () {
     if (iD.debug) {
         it("is frozen", function () {
             expect(Object.isFrozen(iD.Entity())).to.be.true;
@@ -12,6 +12,24 @@ describe('Entity', function () {
             expect(Object.isFrozen(iD.Entity().transients)).to.be.false;
         });
     }
+
+    describe(".id", function () {
+        it("generates unique IDs", function () {
+            expect(iD.Entity.id('node')).not.to.equal(iD.Entity.id('node'));
+        });
+
+        describe(".fromOSM", function () {
+            it("returns a ID string unique across entity types", function () {
+                expect(iD.Entity.id.fromOSM('node', 1)).to.equal("n1");
+            });
+        });
+
+        describe(".toOSM", function () {
+            it("reverses fromOSM", function () {
+                expect(iD.Entity.id.toOSM(iD.Entity.id.fromOSM('node', 1))).to.equal(1);
+            });
+        });
+    });
 
     describe("#update", function () {
         it("returns a new Entity", function () {
@@ -105,7 +123,7 @@ describe('Entity', function () {
     });
 });
 
-describe('Node', function () {
+describe('iD.Node', function () {
     it("returns a node", function () {
         expect(iD.Node().type).to.equal("node");
     });
@@ -138,7 +156,7 @@ describe('Node', function () {
     });
 });
 
-describe('Way', function () {
+describe('iD.Way', function () {
     if (iD.debug) {
         it("freezes nodes", function () {
             expect(Object.isFrozen(iD.Way().nodes)).to.be.true;
@@ -191,7 +209,7 @@ describe('Way', function () {
     });
 });
 
-describe('Relation', function () {
+describe('iD.Relation', function () {
     if (iD.debug) {
         it("freezes nodes", function () {
             expect(Object.isFrozen(iD.Relation().members)).to.be.true;

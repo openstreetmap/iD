@@ -2,50 +2,77 @@ iD.History = function() {
     var stack, index,
         dispatch = d3.dispatch('change');
 
-    function maybeChange() {
-        if (stack[index].annotation) {
-            dispatch.change();
+    function perform(actions) {
+        actions = Array.prototype.slice.call(actions);
+
+        var annotation;
+
+        if (_.isString(_.last(actions))) {
+            annotation = actions.pop();
         }
+
+        var graph = stack[index].graph;
+        for (var i = 0; i < actions.length; i++) {
+            graph = actions[i](graph);
+        }
+
+        return {graph: graph, annotation: annotation};
+    }
+
+    function change(previous) {
+        dispatch.change(history.graph().difference(previous));
     }
 
     var history = {
         graph: function () {
-            return stack[index];
+            return stack[index].graph;
         },
 
         merge: function (graph) {
             for (var i = 0; i < stack.length; i++) {
-                stack[i] = stack[i].merge(graph);
+                stack[i].graph = stack[i].graph.merge(graph);
             }
         },
 
-        perform: function (action) {
+        perform: function () {
+            var previous = stack[index].graph;
+
             stack = stack.slice(0, index + 1);
-            stack.push(action(this.graph()));
+            stack.push(perform(arguments));
             index++;
-            maybeChange();
+
+            change(previous);
         },
 
-        replace: function (action) {
+        replace: function () {
+            var previous = stack[index].graph;
+
             // assert(index == stack.length - 1)
-            stack[index] = action(this.graph());
-            maybeChange();
+            stack[index] = perform(arguments);
+
+            change(previous);
         },
 
         undo: function () {
+            var previous = stack[index].graph;
+
             while (index > 0) {
                 index--;
                 if (stack[index].annotation) break;
             }
-            dispatch.change();
+
+            change(previous);
         },
 
         redo: function () {
+            var previous = stack[index].graph;
+
             while (index < stack.length - 1) {
                 index++;
                 if (stack[index].annotation) break;
             }
-            dispatch.change();
+
+            change(previous);
         },
 
         undoAnnotation: function () {
@@ -64,34 +91,25 @@ iD.History = function() {
             }
         },
 
-        // generate reports of changes for changesets to use
-        modify: function () {
-            return stack[index].modifications();
-        },
-
-        create: function () {
-            return stack[index].creations();
-        },
-
-        'delete': function () {
-            return _.difference(
-                _.pluck(stack[0].entities, 'id'),
-                _.pluck(stack[index].entities, 'id')
-            ).map(function (id) {
-                return stack[0].fetch(id);
-            });
-        },
-
         changes: function () {
+            var initial = stack[0].graph,
+                current = stack[index].graph;
+
             return {
-                modify: this.modify(),
-                create: this.create(),
-                'delete': this['delete']()
+                modified: current.modified().map(function (id) {
+                    return current.fetch(id);
+                }),
+                created: current.created().map(function (id) {
+                    return current.fetch(id);
+                }),
+                deleted: current.deleted().map(function (id) {
+                    return initial.fetch(id);
+                })
             };
         },
 
         reset: function () {
-            stack = [iD.Graph()];
+            stack = [{graph: iD.Graph()}];
             index = 0;
             dispatch.change();
         }

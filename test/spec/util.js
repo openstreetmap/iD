@@ -1,16 +1,6 @@
 describe('Util', function() {
     var util;
 
-    it('#id', function() {
-        var a = iD.util.id(),
-        b = iD.util.id(),
-        c = iD.util.id(),
-        d = iD.util.id();
-        expect(a === b).to.equal(false);
-        expect(b === c).to.equal(false);
-        expect(c === d).to.equal(false);
-    });
-
     it('#trueObj', function() {
         expect(iD.util.trueObj(['a', 'b', 'c'])).to.eql({ a: true, b: true, c: true });
         expect(iD.util.trueObj([])).to.eql({});

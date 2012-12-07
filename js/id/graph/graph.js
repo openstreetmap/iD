@@ -1,5 +1,5 @@
-iD.Graph = function(entities, annotation) {
-    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, annotation);
+iD.Graph = function(entities) {
+    if (!(this instanceof iD.Graph)) return new iD.Graph(entities);
 
     if (_.isArray(entities)) {
         this.entities = {};
@@ -9,8 +9,6 @@ iD.Graph = function(entities, annotation) {
     } else {
         this.entities = entities || {};
     }
-
-    this.annotation = annotation;
 
     if (iD.debug) {
         Object.freeze(this);
@@ -26,33 +24,40 @@ iD.Graph.prototype = {
     parentWays: function(id) {
         // This is slow and a bad hack.
         return _.filter(this.entities, function(e) {
-            return e.type === 'way' && e.nodes.indexOf(id) !== -1;
+            return e && e.type === 'way' && e.nodes.indexOf(id) !== -1;
         });
     },
 
     parentRelations: function(id) {
         // This is slow and a bad hack.
         return _.filter(this.entities, function(e) {
-            return e.type === 'relation' && e.members.indexOf(id) !== -1;
+            return e && e.type === 'relation' &&
+                _.pluck(e.members, 'id').indexOf(id) !== -1;
         });
     },
 
     merge: function(graph) {
         var entities = _.clone(this.entities);
         _.defaults(entities, graph.entities);
-        return iD.Graph(entities, this.annotation);
+        return iD.Graph(entities);
     },
 
-    replace: function(entity, annotation) {
+    replace: function(entity) {
         var entities = _.clone(this.entities);
         entities[entity.id] = entity;
-        return iD.Graph(entities, annotation);
+        return iD.Graph(entities);
     },
 
-    remove: function(entity, annotation) {
+    remove: function(entity) {
         var entities = _.clone(this.entities);
-        delete entities[entity.id];
-        return iD.Graph(entities, annotation);
+
+        if (entity.created()) {
+            delete entities[entity.id];
+        } else {
+            entities[entity.id] = undefined;
+        }
+
+        return iD.Graph(entities);
     },
 
     // get all objects that intersect an extent.
@@ -60,7 +65,7 @@ iD.Graph.prototype = {
         var items = [];
         for (var i in this.entities) {
             var entity = this.entities[i];
-            if (entity.intersects(extent, this)) {
+            if (entity && entity.intersects(extent, this)) {
                 items.push(this.fetch(entity.id));
             }
         }
@@ -70,26 +75,52 @@ iD.Graph.prototype = {
     // Resolve the id references in a way, replacing them with actual objects.
     fetch: function(id) {
         var entity = this.entities[id], nodes = [];
-        if (!entity.nodes || !entity.nodes.length) return iD.Entity(entity); // TODO: shouldn't be necessary
+        if (!entity || !entity.nodes || !entity.nodes.length) return entity;
         for (var i = 0, l = entity.nodes.length; i < l; i++) {
             nodes[i] = this.fetch(entity.nodes[i]);
         }
         return iD.Entity(entity, {nodes: nodes});
     },
 
-    modifications: function() {
-        return _.filter(this.entities, function(entity) {
-            return entity.modified();
-        }).map(function(e) {
-            return this.fetch(e.id);
-        }.bind(this));
+    difference: function (graph) {
+        var result = [];
+
+        _.each(this.entities, function(entity, id) {
+            if (entity !== graph.entities[id]) {
+                result.push(id);
+            }
+        });
+
+        _.each(graph.entities, function(entity, id) {
+            if (entity && !this.entities.hasOwnProperty(id)) {
+                result.push(id);
+            }
+        }, this);
+
+        return result.sort();
     },
 
-    creations: function() {
-        return _.filter(this.entities, function(entity) {
-            return entity.created();
-        }).map(function(e) {
-            return this.fetch(e.id);
-        }.bind(this));
+    modified: function() {
+        var result = [];
+        _.each(this.entities, function(entity, id) {
+            if (entity && entity.modified()) result.push(id);
+        });
+        return result;
+    },
+
+    created: function() {
+        var result = [];
+        _.each(this.entities, function(entity, id) {
+            if (entity && entity.created()) result.push(id);
+        });
+        return result;
+    },
+
+    deleted: function() {
+        var result = [];
+        _.each(this.entities, function(entity, id) {
+            if (!entity) result.push(id);
+        });
+        return result;
     }
 };

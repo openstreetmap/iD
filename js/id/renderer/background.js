@@ -67,12 +67,20 @@ iD.Background = function() {
 
         image.exit().remove();
 
+        function load(d) {
+            cache[d] = true;
+            d3.select(this).on('load', null);
+        }
+
+        function error() {
+            d3.select(this).remove();
+        }
+
         image.enter().append('img')
             .attr('class', 'tile')
             .attr('src', function(d) { return d[3]; })
-            .on('load', function(d) {
-                cache[d] = true;
-            });
+            .on('error', error)
+            .on('load', load);
 
         function tileSize(d) {
             return Math.ceil(256 * Math.pow(2, z - d[2])) / 256;

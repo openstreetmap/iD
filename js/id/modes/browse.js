@@ -7,6 +7,7 @@ iD.modes.Browse = function() {
     };
 
     mode.enter = function() {
+        iD.modes._dragFeatures(mode);
         mode.map.surface.on('click.browse', function () {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
@@ -16,6 +17,7 @@ iD.modes.Browse = function() {
     };
 
     mode.exit = function() {
+        mode.map.surface.on('mousedown.latedrag', null);
         mode.map.surface.on('click.browse', null);
     };
 

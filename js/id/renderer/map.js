@@ -12,38 +12,8 @@ iD.Map = function() {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
-        dragEnabled = true,
+        dragging = false,
         fastEnabled = true,
-        dragging,
-        dragbehavior = d3.behavior.drag()
-            .origin(function(entity) {
-                if (!dragEnabled) return { x: 0, y: 0 };
-                var p = projection(entity.loc);
-                return { x: p[0], y: p[1] };
-            })
-            .on('drag', function(entity) {
-                d3.event.sourceEvent.stopPropagation();
-
-                if (!dragging) {
-                    if (entity.accuracy) {
-                        var way = history.graph().entity(entity.way),
-                            index = entity.index;
-                        entity = iD.Node(entity);
-                        history.perform(iD.actions.AddWayNode(way, entity, index));
-                    }
-
-                    dragging = iD.util.trueObj([entity.id].concat(
-                        _.pluck(history.graph().parentWays(entity.id), 'id')));
-                    history.perform(iD.actions.Noop());
-                }
-
-                var to = projection.invert([d3.event.x, d3.event.y]);
-                history.replace(iD.actions.Move(entity, to));
-            })
-            .on('dragend', function () {
-                if (!dragEnabled || !dragging) return;
-                dragging = undefined;
-            }),
         background = iD.Background()
             .projection(projection),
         class_stroke = iD.Style.styleClasses('stroke'),
@@ -51,18 +21,7 @@ iD.Map = function() {
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
         transformProp = iD.util.prefixProperty('Transform'),
-        support3d = (function() {
-            // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
-            var el = document.createElement('div'),
-                has3d = false;
-            document.body.insertBefore(el,null);
-            if (el.style[transformProp] !== undefined) {
-                el.style[transformProp] = 'translate3d(1px,1px,1px)';
-                has3d = window.getComputedStyle(el).getPropertyValue(transformProp);
-            }
-            document.body.removeChild(el);
-            return (has3d && has3d.length>0 && has3d!=="none");
-        })(),
+        support3d = iD.util.support3d(),
         supersurface, surface, defs, tilegroup, r, g, alength;
 
     function map() {
@@ -90,7 +49,7 @@ iD.Map = function() {
             .attr('clip-path', 'url(#clip)');
 
         g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
-            return (mem[i] = r.append('g').attr('class', 'layer-g')) && mem;
+            return (mem[i] = r.append('g').attr('class', 'layer-g layer-' + i)) && mem;
         }, {});
 
         var arrow = surface.append('text').text('►----');
@@ -110,20 +69,29 @@ iD.Map = function() {
         return 'M' + _.pluck(d.nodes, 'loc').map(projection).map(iD.util.geo.roundCoords).join('L');
     }
 
-    function drawVector(only) {
+    function drawVector(difference) {
         if (surface.style(transformProp) != 'none') return;
-        var all = [], ways = [], areas = [], points = [], waynodes = [],
+        var filter, all, ways = [], areas = [], points = [], waynodes = [],
             extent = map.extent(),
             graph = history.graph();
 
-        if (!only) {
+        if (!difference) {
             all = graph.intersects(extent);
+            filter = d3.functor(true);
         } else {
-            for (var id in only) all.push(graph.fetch(id));
+            var only = {};
+            difference.forEach(function (id) {
+                var entity = graph.fetch(id);
+                if (entity) {
+                    only[id] = entity;
+                    graph.parentWays(id).forEach(function (entity) {
+                        only[entity.id] = graph.fetch(entity.id);
+                    });
+                }
+            });
+            all = _.values(only);
+            filter = function(d) { return d.accuracy ? only[d.way] : only[d.id]; };
         }
-
-        var filter = only ?
-            function(d) { return only[d.id]; } : function() { return true; };
 
         if (all.length > 200000) return hideVector();
 
@@ -158,8 +126,7 @@ iD.Map = function() {
                     loc: iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5),
                     way: way.id,
                     index: i + 1,
-                    accuracy: true,
-                    tags: { name: 'Improve way accuracy' }
+                    accuracy: true
                 });
             }
         }
@@ -171,30 +138,32 @@ iD.Map = function() {
             .filter(filter)
             .data(waynodes, key);
         function olderOnTop(a, b) {
-            return (+a.id.slice(1)) - (+b.id.slice(1));
+            return a.osmId() - b.osmId();
         }
         handles.exit().remove();
         handles.enter().append('image')
-            .attr({ width: 6, height: 6, 'class': 'handle', 'xlink:href': 'css/handle.png' })
-            .each(function(d) {
-                if (d.tags && d.tags.elastic) return;
-                d3.select(this).call(dragbehavior);
+            .attr({
+                width: 6,
+                height: 6,
+                'class': 'handle',
+                'xlink:href': 'css/handle.png'
             });
         handles.attr('transform', function(entity) {
                 var p = projection(entity.loc);
-                return 'translate(' + [~~p[0], ~~p[1]] + ') translate(-3, -3) rotate(45, 3, 3)';
+                return 'translate(' + [~~p[0], ~~p[1]] +
+                    ') translate(-3, -3) rotate(45, 3, 3)';
             })
             .classed('active', classActive)
             .sort(olderOnTop);
     }
 
-    function drawAccuracyHandles(waynodes) {
+    function drawAccuracyHandles(waynodes, filter) {
         var handles = g.hit.selectAll('circle.accuracy-handle')
-            .data(waynodes, key);
+            .filter(filter)
+            .data(waynodes, function (d) { return [d.way, d.index].join(","); });
         handles.exit().remove();
         handles.enter().append('circle')
-            .attr({ r: 2, 'class': 'accuracy-handle' })
-            .call(dragbehavior);
+            .attr({ r: 2, 'class': 'accuracy-handle' });
         handles.attr('transform', function(entity) {
             var p = projection(entity.loc);
             return 'translate(' + [~~p[0], ~~p[1]] + ')';
@@ -236,8 +205,7 @@ iD.Map = function() {
             .data(points, key);
         markers.exit().remove();
         var marker = markers.enter().append('g')
-            .attr('class', 'marker')
-            .call(dragbehavior);
+            .attr('class', 'marker');
         marker.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
         marker.append('image')
@@ -282,14 +250,14 @@ iD.Map = function() {
 
     function connectionLoad(err, result) {
         history.merge(result);
-        drawVector(iD.util.trueObj(Object.keys(result.entities)));
+        drawVector(Object.keys(result.entities));
     }
 
     function hoverIn() {
         var datum = d3.select(d3.event.target).datum();
         if (datum instanceof iD.Entity) {
             hover = datum.id;
-            drawVector(iD.util.trueObj([hover]));
+            drawVector([hover]);
             d3.select('.messages').text(datum.tags.name || '#' + datum.id);
         }
     }
@@ -298,7 +266,7 @@ iD.Map = function() {
         if (hover) {
             var oldHover = hover;
             hover = null;
-            drawVector(iD.util.trueObj([oldHover]));
+            drawVector([oldHover]);
             d3.select('.messages').text('');
         }
     }
@@ -340,14 +308,12 @@ iD.Map = function() {
         redraw();
     }
 
-    function redraw() {
-        if (!dragging) {
-            dispatch.move(map);
-            tilegroup.call(background);
-        }
+    function redraw(difference) {
+        dispatch.move(map);
+        tilegroup.call(background);
         if (map.zoom() > 16) {
             connection.loadTiles(projection);
-            drawVector(dragging);
+            drawVector(difference);
         } else {
             hideVector();
         }
@@ -373,12 +339,6 @@ iD.Map = function() {
     map.dblclickEnable = function(_) {
         if (!arguments.length) return dblclickEnabled;
         dblclickEnabled = _;
-        return map;
-    };
-
-    map.dragEnable = function(_) {
-        if (!arguments.length) return dragEnabled;
-        dragEnabled = _;
         return map;
     };
 
