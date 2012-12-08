@@ -23,11 +23,11 @@ describe("Inspector", function () {
         expect(spy).to.have.been.calledWith(entity);
     });
 
-    it("emits a changeTags event when the save button is clicked", function () {
+    it("emits a changeTags event when the apply button is clicked", function () {
         var spy = sinon.spy();
         inspector.on('changeTags', spy);
 
-        happen.click(element.select('.save').node());
+        happen.click(element.select('.apply').node());
 
         expect(spy).to.have.been.calledWith(entity, {});
     });
