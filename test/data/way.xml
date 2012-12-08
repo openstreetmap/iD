@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="OpenStreetMap server" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+  <node id="204595896" version="2" changeset="2817006" lat="44.665883" lon="-72.923053" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595901" version="2" changeset="2817006" lat="44.66597" lon="-72.922201" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595904" version="2" changeset="2817006" lat="44.665989" lon="-72.921986" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595911" version="2" changeset="3138486" lat="44.666015" lon="-72.921474" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-11-17T05:45:06Z"/>
+  <node id="204595915" version="2" changeset="2817006" lat="44.666015" lon="-72.921254" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595919" version="2" changeset="2817006" lat="44.666007" lon="-72.921033" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204587613" version="2" changeset="2817006" lat="44.665983" lon="-72.920587" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:01:27Z"/>
+  <node id="204595923" version="2" changeset="2817006" lat="44.665938" lon="-72.920089" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595927" version="2" changeset="2817006" lat="44.665901" lon="-72.919727" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595932" version="2" changeset="3138486" lat="44.665837" lon="-72.919284" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-11-17T05:45:06Z"/>
+  <node id="204595935" version="2" changeset="2817006" lat="44.665821" lon="-72.91914" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595939" version="2" changeset="2817006" lat="44.66581" lon="-72.918999" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595943" version="2" changeset="2817006" lat="44.665814" lon="-72.918855" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595947" version="2" changeset="3346870" lat="44.665823" lon="-72.918783" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-12-11T06:32:30Z"/>
+  <node id="204595950" version="2" changeset="2817006" lat="44.665839" lon="-72.91871" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595953" version="2" changeset="2817006" lat="44.66587" lon="-72.918641" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595955" version="2" changeset="2817006" lat="44.665923" lon="-72.918586" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595957" version="2" changeset="2817006" lat="44.665985" lon="-72.918559" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <node id="204595961" version="2" changeset="3138486" lat="44.666193" lon="-72.918523" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-11-17T05:45:06Z"/>
+  <node id="204595963" version="2" changeset="2817006" lat="44.666342" lon="-72.918513" user="woodpeck_fixbot" uid="147510" visible="true" timestamp="2009-10-11T18:03:23Z"/>
+  <way id="19698713" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559" user="DaveHansenTiger" uid="7168">
+    <nd ref="204595896"/>
+    <nd ref="204595901"/>
+    <nd ref="204595904"/>
+    <nd ref="204595911"/>
+    <nd ref="204595915"/>
+    <nd ref="204595919"/>
+    <nd ref="204587613"/>
+    <nd ref="204595923"/>
+    <nd ref="204595927"/>
+    <nd ref="204595932"/>
+    <nd ref="204595935"/>
+    <nd ref="204595939"/>
+    <nd ref="204595943"/>
+    <nd ref="204595947"/>
+    <nd ref="204595950"/>
+    <nd ref="204595953"/>
+    <nd ref="204595955"/>
+    <nd ref="204595957"/>
+    <nd ref="204595961"/>
+    <nd ref="204595963"/>
+    <tag k="highway" v="residential"/>
+    <tag k="name" v="Oustinoff Rd"/>
+    <tag k="tiger:cfcc" v="A41"/>
+    <tag k="tiger:county" v="Franklin, VT"/>
+    <tag k="tiger:name_base" v="Oustinoff"/>
+    <tag k="tiger:name_type" v="Rd"/>
+    <tag k="tiger:reviewed" v="no"/>
+    <tag k="tiger:separated" v="no"/>
+    <tag k="tiger:source" v="tiger_import_dch_v0.6_20070830"/>
+    <tag k="tiger:tlid" v="136533324:136533325"/>
+    <tag k="tiger:upload_uuid" v="bulk_upload.pl-62def9fe-abee-42f3-ac1f-9d9f4b4ee78b"/>
+    <tag k="tiger:zip_left" v="05444"/>
+    <tag k="tiger:zip_right" v="05444"/>
+  </way>
+</osm>
