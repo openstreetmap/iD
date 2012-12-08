@@ -68,17 +68,18 @@ iD.Connection = function() {
             delete o.lat;
         }
         o.id = iD.Entity.id.fromOSM(o.type, o.id);
+        if (o.type === 'node') o._poi = !refNodes[o.id];
         return iD.Entity(o);
     }
 
     function parse(dom) {
-        if (!dom.childNodes) return new Error('Bad request');
+        if (!dom || !dom.childNodes) return new Error('Bad request');
         var root = dom.childNodes[0];
         var entities = {};
         refNodes = {};
+
         function addEntity(obj) {
             var o = objectData(obj);
-            if (o.type === 'node') o._poi = !refNodes[o.id];
             entities[o.id] = o;
         }
 
@@ -100,28 +101,30 @@ iD.Connection = function() {
         return oauth.authenticated();
     }
 
-    function putChangeset(changes, comment, callback) {
+    connection.putChangeset = function(changes, comment, callback) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
                 content: iD.format.XML.changeset(comment)
             }, function (err, changeset_id) {
+                if (err) return callback(err);
                 oauth.xhr({
                     method: 'POST',
                     path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
                     content: iD.format.XML.osmChange(user.id, changeset_id, changes)
                 }, function (err) {
+                    if (err) return callback(err);
                     oauth.xhr({
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close'
                     }, function (err) {
-                        callback(changeset_id);
+                        callback(err, changeset_id);
                     });
                 });
             });
-    }
+    };
 
     function userDetails(callback) {
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, function(err, user_details) {
@@ -218,7 +221,6 @@ iD.Connection = function() {
     connection.userDetails = userDetails;
     connection.authenticate = authenticate;
     connection.authenticated = authenticated;
-    connection.putChangeset = putChangeset;
 
     connection.objectData = objectData;
     connection.apiURL = apiURL;
