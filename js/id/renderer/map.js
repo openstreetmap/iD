@@ -81,16 +81,13 @@ iD.Map = function() {
         } else {
             var only = {};
             difference.forEach(function (id) {
-                var entity = graph.fetch(id);
-                if (entity) {
-                    only[id] = entity;
-                    graph.parentWays(id).forEach(function (entity) {
-                        only[entity.id] = graph.fetch(entity.id);
-                    });
-                }
+                only[id] = graph.fetch(id);
+                graph.parentWays(id).forEach(function (parent) {
+                    only[parent.id] = graph.fetch(parent.id);
+                });
             });
-            all = _.values(only);
-            filter = function(d) { return d.accuracy ? only[d.way] : only[d.id]; };
+            all = _.compact(_.values(only));
+            filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }
 
         if (all.length > 200000) return hideVector();
