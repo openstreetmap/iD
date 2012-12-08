@@ -24,9 +24,11 @@ iD.layerswitcher = function(map) {
             });
 
         var content = selection
-            .append('div').attr('class', 'content hide');
+            .append('div').attr('class', 'content map-overlay hide');
 
-        opa = content.append('div')
+        opa = content
+            .append('div')
+            .attr('class', 'opacity-options-wrapper')
             .append('ul')
             .attr('class', 'opacity-options')
             .selectAll('a.opacity')
@@ -61,7 +63,11 @@ iD.layerswitcher = function(map) {
                 });
         }
 
-        content.append('ul').selectAll('a.layer')
+        content
+        .append('ul')
+        .attr('class', 'toggle-list')
+
+        .selectAll('a.layer')
             .data(sources)
             .enter()
             .append('li')

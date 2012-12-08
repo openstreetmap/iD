@@ -2,7 +2,7 @@
 ------------------------------------------------------- */
 
 body {
-    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
+    font:normal 14px/20px 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
     color:#222;
@@ -37,11 +37,11 @@ p {
 }
 
 a:visited, a {
-    color: #345692;
+    color: #b0b0b0;
 }
 
 a:hover {
-    color:#000;
+    color:#222222;
 }
 
 table th {
@@ -61,12 +61,22 @@ input[type=text]:focus {
 /* UI Lists
 ------------------------------------------------------- */
 
-ul.list-toggle {
-    border-bottom: 1px solid #CCC;
+ul.toggle-list {
+}
+
+ul.toggle-list li a {
+    font-weight: bold;
+    padding: 10px;
+    border-top: 1px solid #CCC;
+    display:block;
+}
+
+ul.toggle-list li a:hover {
+    background: #ececec;
 }
 
 a.selected {
-    background:#DDE4FF;
+    color:#222;
 }
 
 /* Utility Classes
@@ -78,6 +88,7 @@ a.selected {
     background-color: #222222;
     color: white;
 }
+
 div.hide {
     display:none;
 }
@@ -346,6 +357,12 @@ button.Browse .label {
     background-image: url(/img/sprite.png);
 }
 
+.content {
+    background:#fff;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
 /* Zoomer */
 
 .zoombuttons {
@@ -375,22 +392,20 @@ button.Browse .label {
 }
 
 .layerswitcher-control .content {
-    background:#fff;
-    padding:5px;
+    width: 150px;
     position:absolute;
-    left:40px;
-    width:100px;
+    left:50px;
     top:0;
 }
 
-.layerswitcher-control .opacity-options {
-    border:1px solid #000;
-    height:15px;
-    width:45px;
+.opacity-options-wrapper {
+    padding: 10px;
 }
 
-.layerswitcher-control a.layer {
-    display:block;
+.opacity-options {
+    border:1px solid #000;
+    height:15px;
+    width:100px;
 }
 
 .layerswitcher-control a.opacity {
