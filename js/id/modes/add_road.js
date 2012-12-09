@@ -43,6 +43,7 @@ iD.modes.AddRoad = function() {
 
                 history.perform(
                     iD.actions.AddWay(way),
+                    iD.actions.AddNode(node),
                     iD.actions.AddWayNode(datum.id, node.id, index),
                     iD.actions.AddWayNode(way.id, node.id),
                     'started a road');
