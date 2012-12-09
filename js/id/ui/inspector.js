@@ -131,6 +131,8 @@ iD.Inspector = function() {
             draw(data);
             update();
 
+            selection.select('input').node().focus();
+
             selection.append('div')
                 .attr('class', 'buttons').call(drawbuttons);
 
