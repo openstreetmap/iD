@@ -83,7 +83,7 @@ a.selected {
 ------------------------------------------------------- */
 
 .fillL { background-color: white;}
-.fillL2 { background: #f7f7f7 url(/img/background-pattern-1.png) repeat;}
+.fillL2 { background: #f7f7f7 url(../img/background-pattern-1.png) repeat;}
 .fillD {
     background-color: #222222;
     color: white;
@@ -222,7 +222,7 @@ button.action .label {
   vertical-align:top;
   width:20px;
   height:20px;
-  background:transparent url(/img/sprite.png) no-repeat 0px 0px;
+  background:transparent url(../img/sprite.png) no-repeat 0px 0px;
   text-indent:-9999px;
   overflow:hidden;
   }
@@ -354,7 +354,7 @@ button.Browse .label {
 .map-control button {
     text-indent: -9999px;
     overflow: hidden;
-    background-image: url(/img/sprite.png);
+    background-image: url(../img/sprite.png);
 }
 
 .content {
