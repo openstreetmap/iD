@@ -6,16 +6,24 @@ iD.Connection = function() {
         refNodes = {},
         user = {},
         apiTilesLoaded = {},
+        inflight = {},
         oauth = iD.OAuth().api(apiURL);
 
-    // Request data within the bbox from an external OSM server.
+    function bboxUrl(b) {
+        return apiURL + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
+    }
+
     function bboxFromAPI(box, callback) {
-        loadFromURL(apiURL + '/api/0.6/map?bbox=' +
-            [box[0][0], box[1][1], box[1][0], box[0][1]], callback);
+         loadFromURL(bboxUrl(box), callback);
     }
 
     function loadFromURL(url, callback) {
-        d3.xml(url, function(err, dom) { callback(err, parse(dom)); });
+        inflight[url] = d3.xml(url).get()
+            .on('load', function(err, dom) {
+                delete inflight[url];
+                apiTilesLoaded[url] = true;
+                return callback(err, parse(dom));
+            });
     }
 
     function getNodes(obj) {
@@ -90,13 +98,6 @@ iD.Connection = function() {
         return iD.Graph(entities);
     }
 
-    function authenticate(callback) {
-        return oauth.authenticate(function(err, res) {
-            event.auth();
-            if (callback) callback(err, res);
-        });
-    }
-
     function authenticated() {
         return oauth.authenticated();
     }
@@ -145,7 +146,7 @@ iD.Connection = function() {
     }
 
     function tileAlreadyLoaded(c) {
-        if (apiTilesLoaded[c]) return false;
+        if (apiTilesLoaded[bboxUrl(c)] || inflight[bboxUrl(c)]) return false;
         for (var i = 0; i < 4; i++) {
             if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
         }
@@ -169,7 +170,6 @@ iD.Connection = function() {
         function apiExtentBox(c) {
             var x = (c[0] * ts) - tile_origin[0];
             var y = (c[1] * ts) - tile_origin[1];
-            apiTilesLoaded[c] = true;
             return [
                 projection.invert([x, y]),
                 projection.invert([x + ts, y + ts])];
@@ -179,14 +179,20 @@ iD.Connection = function() {
 
         var bboxes = tiles
             .filter(tileAlreadyLoaded)
-            .map(apiExtentBox)
-            .forEach(function(e) {
-                q.defer(bboxFromAPI, e);
-            });
+            .map(apiExtentBox);
+
+        _.difference(_.keys(inflight), bboxes.map(bboxUrl)).forEach(function(d) {
+            inflight[d].abort();
+            delete inflight[d];
+        });
+
+        bboxes.forEach(function(e) {
+            q.defer(bboxFromAPI, e);
+        });
 
         q.awaitAll(function(err, res) {
             var g = iD.Graph();
-            res.forEach(function(r) { g = g.merge(r); });
+            if (res) res.forEach(function(r) { g = g.merge(r); });
             event.load(err, g);
         });
     }
@@ -215,11 +221,17 @@ iD.Connection = function() {
         return connection;
     };
 
+    connection.authenticate = function(callback) {
+        return oauth.authenticate(function(err, res) {
+            event.auth();
+            if (callback) callback(err, res);
+        });
+    };
+
     connection.bboxFromAPI = bboxFromAPI;
     connection.loadFromURL = loadFromURL;
-    connection.loadTiles = _.debounce(loadTiles, 1000);
+    connection.loadTiles = _.debounce(loadTiles, 100);
     connection.userDetails = userDetails;
-    connection.authenticate = authenticate;
     connection.authenticated = authenticated;
 
     connection.objectData = objectData;
