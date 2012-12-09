@@ -97,14 +97,23 @@ iD.util.geo.dist = function(a, b) {
 };
 
 iD.util.geo.chooseIndex = function(way, point, map) {
-    var dist = iD.util.geo.dist;
-    var projNodes = way.nodes.map(function(n) {
+    var dist = iD.util.geo.dist,
+        projNodes = way.nodes.map(function(n) {
         return map.projection(n.loc);
     });
+
     for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
         changes[i] =
             (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
             dist(projNodes[i], projNodes[i + 1]);
     }
-    return _.indexOf(changes, _.min(changes)) + 1;
+
+    var idx = _.indexOf(changes, _.min(changes)),
+        ratio = dist(projNodes[idx], point) / dist(projNodes[idx], projNodes[idx + 1]),
+        loc = iD.util.geo.interp(way.nodes[idx].loc, way.nodes[idx + 1].loc, ratio);
+
+    return {
+        index: idx + 1,
+        loc: loc
+    };
 };
