@@ -39,7 +39,7 @@ iD.modes.AddRoad = function() {
             } else if (datum.type === 'way') {
                 // begin a new way starting from an existing way
                 var choice = iD.util.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
-                node = iD.Node({ loc: choice.loc }),
+                node = iD.Node({ loc: choice.loc });
 
                 history.perform(
                     iD.actions.AddWay(way),

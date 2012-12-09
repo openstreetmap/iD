@@ -19,10 +19,10 @@ iD.Connection = function() {
 
     function loadFromURL(url, callback) {
         inflight[url] = d3.xml(url).get()
-            .on('load', function(err, dom) {
+            .on('load', function(dom) {
                 delete inflight[url];
                 apiTilesLoaded[url] = true;
-                return callback(err, parse(dom));
+                return callback(null, parse(dom));
             });
     }
 
