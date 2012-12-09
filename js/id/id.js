@@ -191,7 +191,7 @@ window.iD = function(container) {
             map.size(m.size());
         };
 
-        var keybinding = d3.keybinding()
+        map.keybinding()
             .on('a', function(evt, mods) {
                 controller.enter(iD.modes.AddArea());
             })
@@ -205,8 +205,6 @@ window.iD = function(container) {
                 if (mods === '⇧⌘') history.redo();
                 if (mods === '⌘') history.undo();
             });
-        d3.select(document).call(keybinding);
-        map.keybinding(keybinding);
 
         var hash = iD.Hash().map(map);
 
