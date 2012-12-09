@@ -93,42 +93,27 @@ d3.keybinding = function() {
     while(++i < 91) _keys.keys[String.fromCharCode(i).toLowerCase()] = i;
 
     var pairs = d3.entries(_keys.keys),
-        key_shortcuts = pairs.map(function(d) {
-            return d.key;
-        }),
-        mods = d3.entries(_keys.mods),
-        mod_shortcuts = mods.map(function(d) {
-            return d.key;
-        }),
-        event = d3.dispatch.apply(d3, key_shortcuts),
-        modifiers = [];
-
-    function keydown() {
-        var tagName = d3.select(d3.event.target).node().tagName;
-        if (tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA') {
-            return;
-        }
-
-        modifiers = modifiers.concat(mods.filter(function(d) {
-            return d.value === d3.event.keyCode;
-        }).map(function(d) { return d.key; }));
-
-        pairs.filter(function(d) {
-            return d.value === d3.event.keyCode;
-        }).forEach(function(d) {
-            event[d.key](d3.event, modifiers.slice().sort().join(''));
-        });
-    }
-
-    function keyup() {
-        modifiers = [];
-    }
+        event = d3.dispatch.apply(d3, d3.keys(_keys.keys));
 
     function keys(selection) {
-        d3.select(window).on('focus', keyup);
-        selection
-            .on('keyup', keyup)
-            .on('keydown', keydown);
+        selection.on('keydown', function () {
+            var tagName = d3.select(d3.event.target).node().tagName;
+            if (tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA') {
+                return;
+            }
+
+            var modifiers = '';
+            if (d3.event.shiftKey) modifiers += '⇧';
+            if (d3.event.ctrlKey) modifiers += '⌃';
+            if (d3.event.altKey) modifiers += '⌥';
+            if (d3.event.metaKey) modifiers += '⌘';
+
+            pairs.filter(function(d) {
+                return d.value === d3.event.keyCode;
+            }).forEach(function(d) {
+                event[d.key](d3.event, modifiers);
+            });
+        });
     }
 
     return d3.rebind(keys, event, 'on');
