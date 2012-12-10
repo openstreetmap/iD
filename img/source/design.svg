@@ -329,19 +329,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="8"
-     inkscape:cx="-55.068441"
-     inkscape:cy="832.46552"
+     inkscape:zoom="1"
+     inkscape:cx="315.10272"
+     inkscape:cy="734.82658"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer11"
      showgrid="false"
      inkscape:window-width="1660"
      inkscape:window-height="971"
-     inkscape:window-x="238"
-     inkscape:window-y="15"
+     inkscape:window-x="981"
+     inkscape:window-y="59"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
-     inkscape:snap-nodes="true"
+     inkscape:snap-nodes="false"
      showguides="false"
      inkscape:guide-bbox="true"
      inkscape:object-paths="true"
@@ -544,7 +544,7 @@
     <rect
        ry="4"
        rx="3.9999998"
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#b0b0b0;stroke-width:1;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#aaaaaa;stroke-width:1;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect9199"
        width="104"
        height="39"
@@ -2282,10 +2282,10 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="layer-switcher"
-     style="display:inline">
+     style="display:none">
     <rect
        y="220.50002"
-       x="10.500001"
+       x="70.5"
        height="278.99997"
        width="149"
        id="rect5303"
@@ -2302,7 +2302,7 @@
        id="rect7661"
        width="149"
        height="278.99997"
-       x="10.500001"
+       x="70.5"
        y="220.50002"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
@@ -2310,10 +2310,10 @@
     <g
        style="display:inline"
        id="g5301"
-       transform="matrix(3.8187791,0,0,4.7029385,-2129.8919,348.44168)" />
+       transform="matrix(3.8187791,0,0,4.7029385,-2069.8919,348.44168)" />
     <path
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999988;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 10.5,260.5 0,58.75625 0,44.625 0,15.61875 149,0 0,-15.61875 0,-44.625 0,-58.75625 z"
+       d="m 70.5,260.5 0,58.75625 0,44.625 0,15.61875 149,0 0,-15.61875 0,-44.625 0,-58.75625 z"
        id="rect6307"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccc"
@@ -2324,25 +2324,25 @@
        sodipodi:linespacing="167%"
        id="text5392"
        y="245"
-       x="20"
+       x="80"
        style="font-size:12px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Italic"
        xml:space="preserve"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          y="245"
-         x="20"
+         x="80"
          id="tspan5394"
          sodipodi:role="line">Baselayers</tspan></text>
     <g
-       transform="matrix(3.8187791,0,0,3.6908716,-2129.8919,360.5546)"
+       transform="matrix(3.8187791,0,0,3.6908716,-2069.8919,360.5546)"
        id="g6305"
        style="fill:#f7f7f7;fill-opacity:1;display:inline" />
     <path
        sodipodi:nodetypes="ccccccccc"
        inkscape:connector-curvature="0"
        id="path7360"
-       d="m 10.5,420.5 0,-0.5 0,116 4,3.5 141,0 4,-4.5 0,-115 0,0.5 z"
+       d="m 70.5,420.5 0,-0.5 0,116 4,3.5 141,0 4,-4.5 0,-115 0,0.5 z"
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999988;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
@@ -2354,7 +2354,7 @@
        id="rect7142"
        width="149"
        height="318.99997"
-       x="10.500001"
+       x="70.5"
        y="220.5"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
@@ -2362,7 +2362,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path7144"
-       d="m 11,260 0,1 149,0 0,-1 -149,0 z"
+       d="m 71,260 0,1 149,0 0,-1 -149,0 z"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
@@ -2371,19 +2371,19 @@
        sodipodi:linespacing="167%"
        id="text6292"
        y="323"
-       x="50"
+       x="110"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
        xml:space="preserve"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          y="323"
-         x="50"
+         x="110"
          id="tspan6294"
          sodipodi:role="line">OpenStreetMap</tspan></text>
     <path
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       d="m 12,300 0,1 146,0 0,-1 -146,0 z"
+       d="m 72,300 0,1 146,0 0,-1 -146,0 z"
        id="path7225"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
@@ -2392,7 +2392,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path7227"
-       d="m 11,380 0,1 148,0 0,-1 -148,0 z"
+       d="m 71,380 0,1 148,0 0,-1 -148,0 z"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
@@ -2400,7 +2400,7 @@
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
-       x="50"
+       x="110"
        y="283"
        id="text6288"
        sodipodi:linespacing="167%"
@@ -2409,27 +2409,15 @@
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan6290"
-         x="50"
+         x="110"
          y="283">Bing Satellite</tspan></text>
-    <rect
-       style="color:#000000;fill:#f7f7f7;fill-opacity:1;fill-rule:nonzero;stroke:#222222;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect7320"
-       width="19"
-       height="19"
-       x="20.5"
-       y="270.5"
-       rx="9.5"
-       ry="9.5"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
     <g
        id="g7330"
-       transform="translate(0,-20)" />
+       transform="translate(60,-20)" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Italic"
-       x="20"
+       x="80"
        y="405"
        id="text7352"
        sodipodi:linespacing="167%"
@@ -2438,11 +2426,11 @@
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan7354"
-         x="20"
+         x="80"
          y="405">Overlays</tspan></text>
     <path
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       d="m 11,420 0,1 149,0 0,-1 -149,0 z"
+       d="m 71,420 0,1 149,0 0,-1 -149,0 z"
        id="path7356"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
@@ -2451,7 +2439,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path7366"
-       d="m 13,460 0,1 145,0 0,-1 -145,0 z"
+       d="m 73,460 0,1 145,0 0,-1 -145,0 z"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
@@ -2460,33 +2448,21 @@
        sodipodi:linespacing="167%"
        id="text7372"
        y="483"
-       x="50"
+       x="110"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
        xml:space="preserve"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          y="483"
-         x="50"
+         x="110"
          id="tspan7374"
          sodipodi:role="line">TIGER roads</tspan></text>
-    <rect
-       style="color:#000000;fill:#f7f7f7;fill-opacity:1;stroke:#b0b0b0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect7407"
-       width="19"
-       height="19"
-       x="20.5"
-       y="310.5"
-       rx="9.5"
-       ry="9.5"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
     <rect
        ry="3.9999995"
        rx="4"
        y="470.5"
-       x="20.5"
+       x="80.5"
        height="19"
        width="19"
        id="rect7425"
@@ -2498,47 +2474,35 @@
        sodipodi:linespacing="167%"
        id="text7368"
        y="443"
-       x="50"
+       x="110"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
        xml:space="preserve"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          y="443"
-         x="50"
+         x="110"
          id="tspan7370"
          sodipodi:role="line">Standard</tspan></text>
     <rect
        ry="3.9999995"
        rx="4"
        y="430.5"
-       x="20.5"
+       x="80.5"
        height="19"
        width="19"
        id="rect7409"
-       style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:#222222;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       ry="9.5"
-       rx="9.5"
-       y="271"
-       x="21"
-       height="18"
-       width="18"
-       id="rect7439"
-       style="color:#000000;fill:#e2e9ff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:#7092ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
        style="color:#000000;fill:#e2e9ff;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7486"
-       width="16"
-       height="16"
-       x="22"
-       y="432"
+       width="14"
+       height="14"
+       x="83"
+       y="433"
        rx="3"
        ry="3"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
@@ -2546,7 +2510,7 @@
        inkscape:export-ydpi="90" />
     <path
        style="color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 25,439 -1,1 0,1 4,4 1,0 1,-1 0,-1 -4,-4 z"
+       d="m 85,439 -1,1 0,1 4,4 1,0 1,-1 0,-1 -4,-4 z"
        id="path4961-2-6"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccc"
@@ -2557,38 +2521,92 @@
        sodipodi:nodetypes="ccccccccc"
        inkscape:connector-curvature="0"
        id="path7538"
-       d="m 35,436 1,1 0,1 -7,7 -1,0 -1,-1 0,-1 7,-7 z"
+       d="m 95,436 1,1 0,1 -7,7 -1,0 -1,-1 0,-1 7,-7 z"
        style="color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <rect
-       style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect7542"
-       width="13"
-       height="13"
-       x="23.5"
-       y="313.5"
-       rx="9.5"
-       ry="9.5"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       style="color:#000000;fill:#7092ff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect7681"
-       width="10"
-       height="10"
-       x="25"
-       y="275"
-       rx="9.5"
-       ry="9.5"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+    <g
+       id="g32533">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
+         ry="9.5"
+         rx="9.5"
+         y="311.5"
+         x="81.5"
+         height="17"
+         width="17"
+         id="rect7407"
+         style="color:#000000;fill:#f7f7f7;fill-opacity:1;stroke:#b0b0b0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
+         ry="9.5"
+         rx="9.5"
+         y="314.5"
+         x="84.5"
+         height="11"
+         width="11"
+         id="rect7542"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       id="g32491">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
+         ry="9.5"
+         rx="9.5"
+         y="271.5"
+         x="81.5"
+         height="17"
+         width="17"
+         id="rect7320"
+         style="color:#000000;fill:#f7f7f7;fill-opacity:1;fill-rule:nonzero;stroke:#7092ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect7439"
+         width="16"
+         height="16"
+         x="82"
+         y="272"
+         rx="9.5"
+         ry="9.5" />
+      <rect
+         style="color:#000000;fill:#e2e9ff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect32489"
+         width="12"
+         height="12"
+         x="84"
+         y="274"
+         rx="7.0000005"
+         ry="7.0000005"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
+         ry="5"
+         rx="5"
+         y="276"
+         x="86"
+         height="8"
+         width="8"
+         id="rect7681"
+         style="color:#000000;fill:#7092ff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
     <g
        id="g7952"
-       transform="translate(0,140)"
+       transform="translate(60,140)"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -2611,7 +2629,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path8024"
-       d="m 12,340 0,1 146,0 0,-1 -146,0 z"
+       d="m 72,340 0,1 146,0 0,-1 -146,0 z"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        inkscape:export-xdpi="90"
@@ -2619,7 +2637,7 @@
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
-       x="50"
+       x="110"
        y="363"
        id="text8026"
        sodipodi:linespacing="167%"
@@ -2628,13 +2646,13 @@
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8028"
-         x="50"
+         x="110"
          y="363">Cycle Map</tspan></text>
     <rect
        ry="9.5"
        rx="9.5"
        y="350.5"
-       x="20.5"
+       x="80.5"
        height="19"
        width="19"
        id="rect8030"
@@ -2646,7 +2664,7 @@
        ry="9.5"
        rx="9.5"
        y="353.5"
-       x="23.5"
+       x="83.5"
        height="13"
        width="13"
        id="rect8032"
@@ -2657,7 +2675,7 @@
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b0b0b0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
-       x="50"
+       x="110"
        y="523"
        id="text8329"
        sodipodi:linespacing="167%"
@@ -2666,14 +2684,14 @@
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan8331"
-         x="50"
+         x="110"
          y="523">GPS Tracks</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#b0b0b0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect8333"
        width="19"
        height="19"
-       x="20.5"
+       x="80.5"
        y="510.5"
        rx="4"
        ry="3.9999995"
@@ -2682,7 +2700,7 @@
        inkscape:export-ydpi="90" />
     <path
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       d="m 13,500 0,1 145,0 0,-1 -145,0 z"
+       d="m 73,500 0,1 145,0 0,-1 -145,0 z"
        id="path8337"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
@@ -2693,7 +2711,7 @@
        inkscape:export-xdpi="90"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
        id="g8339"
-       transform="translate(0,-20)">
+       transform="translate(60,-20)">
       <rect
          y="250.5"
          x="130.5"
@@ -2715,7 +2733,7 @@
      inkscape:groupmode="layer"
      id="layer11"
      inkscape:label="layer-switcher-simple"
-     style="display:none">
+     style="display:inline">
     <g
        style="display:inline"
        id="g9148"

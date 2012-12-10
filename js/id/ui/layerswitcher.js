@@ -16,7 +16,7 @@ iD.layerswitcher = function(map) {
         selection
             .append('button')
             .attr('class', 'narrow')
-            .text('L')
+            .text('Layers')
             .on('click', function() {
                 content.classed('hide', function() {
                     return !content.classed('hide');
@@ -28,9 +28,12 @@ iD.layerswitcher = function(map) {
 
         opa = content
             .append('div')
-            .attr('class', 'opacity-options-wrapper')
+            .attr('class', 'opacity-options-wrapper fillL2')
+            .html("<em>Layers</em>")
             .append('ul')
             .attr('class', 'opacity-options')
+            .attr('data-original-title', 'Adjust the layer opacity')
+            .call(bootstrap.tooltip().placement('right'))
             .selectAll('a.opacity')
             .data(opacities)
             .enter()
@@ -82,7 +85,9 @@ iD.layerswitcher = function(map) {
                 map.background.source(d.source);
                 map.redraw();
                 selectLayer(d);
-            });
+            })
+            .insert('span')
+            .attr('class','icon toggle');
         selectLayer(map.background.source());
     }
 

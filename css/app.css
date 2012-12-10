@@ -2,7 +2,7 @@
 ------------------------------------------------------- */
 
 body {
-    font:normal 14px/20px 'Helvetica Neue', Arial, sans-serif;
+    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
     color:#222;
@@ -34,6 +34,10 @@ h3 {
 p {
     margin:0;
     padding:0;
+}
+
+em {
+    font-style: italic;
 }
 
 a:visited, a {
@@ -75,9 +79,15 @@ ul.toggle-list li a:hover {
     background: #ececec;
 }
 
+ul.toggle-list .icon {
+    float: left;
+    margin-right: 5px;
+}
+
 a.selected {
     color:#222;
 }
+
 
 /* Utility Classes
 ------------------------------------------------------- */
@@ -241,6 +251,7 @@ button.action .label {
 .save.icon       { background-position: -140px 0px;}
 .close.icon      { background-position: -160px 0px;}
 .delete.icon     { background-position: -180px 0px;}
+.toggle.icon     { background-position: 0px -180px;}
 
 .active .icon.browse     { background-position:   0px -20px;}
 .active .icon.add-place  { background-position: -20px -20px;}
@@ -252,6 +263,10 @@ button.action .label {
 .active .save.icon       { background-position: -140px -20px;}
 .active .close.icon      { background-position: -160px -20px;}
 .active .delete.icon     { background-position: -180px -20px;}
+
+a:hover .toggle.icon           { background-position: -20px -180px;}
+.selected .toggle.icon,
+a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 
 button[disabled] .icon.browse     { background-position:   0px -40px;}
@@ -295,6 +310,8 @@ button.Browse .label {
     position:absolute;
     right: 0;
     left: 530px;
+    border-left:  1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     min-height: 60px;
     opacity:0;
     display:none;
@@ -403,16 +420,26 @@ button.Browse .label {
 }
 
 .opacity-options {
-    border:1px solid #000;
-    height:15px;
-    width:100px;
+    border:1px solid #b0b0b0;
+    background: url(../img/background-pattern-opacity.png) 0 0 repeat;
+    height:20px;
+    width:62px;
+    right: 10px;
+    top: 10px;
+    float: right;
+}
+
+.opacity-options li {
+    height: 100%;
+    display: block;
+    float: left;
 }
 
 .layerswitcher-control a.opacity {
-    background:#000;
+    background:#4672ff;
     display:inline-block;
-    width:15px;
-    height:15px;
+    width:20px;
+    height:18px;
 }
 
 /* Geocoder */
@@ -560,53 +587,93 @@ div.typeahead a {
 /* Tooltips
 ------------------------------------------------------- */
 
-#bar button .tooltip {
-    white-space: normal;
-}
-
 .tooltip {
+    white-space: normal;
     position: absolute;
     z-index: 1030;
     padding: 5px;
-    font-size: 11px;
     opacity: 0;
-    display: none;
+    display: block;
     filter: alpha(opacity=0);
     visibility: visible;
 }
 
 .tooltip.in {
-    display: block;
     opacity: 0.8;
     filter: alpha(opacity=80);
 }
 
+.tooltip.top {
+  margin-top: -5px;
+}
+
+.tooltip.right {
+  margin-left: 5px;
+}
+
+.tooltip.bottom {
+  margin-top: 5px;
+}
+
+.tooltip.left {
+  margin-left: -5px;
+}
+
+
 .tooltip-inner {
     max-width: 200px;
-    padding: 3px 8px;
+    min-width: 100px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 5px 10px;
     color: #ffffff;
     text-align: center;
     text-decoration: none;
     background-color: #000000;
     -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
 }
 
 .tooltip-arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-top-color: #000000;
+  border-width: 5px 5px 0;
+}
+
+.tooltip.right .tooltip-arrow {
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-right-color: #000000;
+  border-width: 5px 5px 5px 0;
+}
+
+.tooltip.left .tooltip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-left-color: #000000;
+  border-width: 5px 0 5px 5px;
 }
 
 .tooltip.bottom .tooltip-arrow {
-    top: 0;
-    left: 50%;
-    margin-left: -5px;
-    border-bottom-color: #000000;
-    border-width: 0 5px 5px;
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom-color: #000000;
+  border-width: 0 5px 5px;
 }
 
 /* Mobile Tweaks
