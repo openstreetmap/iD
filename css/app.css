@@ -491,8 +491,17 @@ img.tile {
     position:absolute;
     bottom:5px;
     right:5px;
-    background:#fff;
     padding:2px 5px;
+    text-shadow:0px 0px 2px #000;
+}
+
+#about img {
+    vertical-align:middle;
+    margin-left:5px;
+}
+
+#about a:hover {
+    color:#fff;
 }
 
 /* Account Information
