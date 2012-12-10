@@ -2,13 +2,16 @@ iD.layerswitcher = function(map) {
     var event = d3.dispatch('cancel', 'save'),
         sources = [{
             name: 'Bing',
-            source: iD.BackgroundSource.Bing
+            source: iD.BackgroundSource.Bing,
+            description: 'High quality satellite imagery'
         }, {
             name: 'TIGER 2012',
-            source: iD.BackgroundSource.Tiger2012
+            source: iD.BackgroundSource.Tiger2012,
+            description: 'Public domain road data from the US Government'
         }, {
             name: 'OSM',
-            source: iD.BackgroundSource.OSM
+            source: iD.BackgroundSource.OSM,
+            description: 'The default OpenStreetMap layer'
         }],
         opacities = [1, 0.5, 0];
 
@@ -34,30 +37,28 @@ iD.layerswitcher = function(map) {
             .attr('data-original-title', 'Adjust the opacity')
             .call(bootstrap.tooltip().placement('right'))
             .attr('class', 'opacity-options')
-            .selectAll('a.opacity')
+            .selectAll('div.opacity')
             .data(opacities)
             .enter()
-            .append('li').append('a').attr('class', 'opacity')
+            .append('li')
+              .on('click', function(d) {
+                  d3.select('#tile-g')
+                      .transition()
+                      .style('opacity', d)
+                      .attr('data-opacity', d);
+                  d3.selectAll('.opacity-options li')
+                  .classed('selected', false)
+                  d3.select(this)
+                  .classed('selected', true)
+              })
+            .html("<div class='select-box'></div>")
+            .append('div')
+            .attr('class', 'opacity')
             .style('opacity', function(d) {
                 return d;
-            })
-            .on('mouseover', function(d) {
-                d3.select('#tile-g')
-                    .transition()
-                    .style('opacity', d);
-            })
-            .on('mouseout', function(d) {
-                var o = d3.select('#tile-g').attr('data-opacity');
-                d3.select('#tile-g')
-                    .transition()
-                    .style('opacity', o);
-            })
-            .on('click', function(d) {
-                d3.select('#tile-g')
-                    .transition()
-                    .style('opacity', d)
-                    .attr('data-opacity', d);
             });
+            // Make sure there is an active selection by default
+            d3.select('.opacity-options li').classed('selected', true)
 
         function selectLayer(d) {
             content.selectAll('a.layer')

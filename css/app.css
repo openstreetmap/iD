@@ -430,13 +430,33 @@ button.Browse .label {
 }
 
 .opacity-options li {
+    position: relative;
     height: 100%;
     display: block;
     float: left;
+    cursor: pointer;
 }
 
-.layerswitcher-control a.opacity {
-    background:#4672ff;
+.opacity-options li .select-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.layerswitcher-control li:hover .select-box,
+.layerswitcher-control li.selected .select-box {
+    border: 2px solid #4672ff;
+    background: rgba(70, 114, 255, .5);
+    opacity: .5;
+}
+.layerswitcher-control li.selected:hover .select-box,
+.layerswitcher-control li.selected .select-box {
+    opacity: 1;
+}
+
+.layerswitcher-control .opacity {
+    background:#222;
     display:inline-block;
     width:20px;
     height:18px;
@@ -590,7 +610,8 @@ div.typeahead a {
 .tooltip {
     white-space: normal;
     position: absolute;
-    z-index: 1030;
+    z-index: -1000;
+    height: 0;
     padding: 5px;
     opacity: 0;
     display: block;
@@ -601,6 +622,8 @@ div.typeahead a {
 .tooltip.in {
     opacity: 0.8;
     filter: alpha(opacity=80);
+    z-index: 1030;
+    height: auto;
 }
 
 .tooltip.top {
@@ -618,7 +641,6 @@ div.typeahead a {
 .tooltip.left {
   margin-left: -5px;
 }
-
 
 .tooltip-inner {
     max-width: 200px;
