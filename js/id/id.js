@@ -154,9 +154,9 @@ window.iD = function(container) {
 
         this.append('div')
             .attr('id', 'about')
-            .html("<a href='http://github.com/systemed/iD'>code</a>, " +
-                  "<a href='http://github.com/systemed/iD/issues'>report a bug</a> " +
-                  "/ imagery <a href='http://opengeodata.org/microsoft-imagery-details'>&copy; 2012</a> Bing, GeoEye, Getmapping, Intermap, Microsoft.</p>");
+            .html("<a href='http://github.com/systemed/iD'>code</a> " +
+                  "<a href='http://github.com/systemed/iD/issues'>report a bug</a>" +
+                  " <a href='http://opengeodata.org/microsoft-imagery-details'><img src='img/bing.png' /></a>");
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
