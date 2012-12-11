@@ -4,6 +4,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
     };
 
     mode.enter = function() {
+
         var map = mode.map,
             history = mode.history,
             controller = mode.controller,

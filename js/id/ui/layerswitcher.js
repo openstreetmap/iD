@@ -72,7 +72,7 @@ iD.layerswitcher = function(map) {
                     .attr('data-original-title', function(d) {
                         return d.label + " opacity";
                     })
-                    .on('click', function(d) {
+                    .on('click.set-opacity', function(d) {
                         d3.select('#tile-g')
                             .transition()
                             .style('opacity', d.level)
@@ -116,7 +116,7 @@ iD.layerswitcher = function(map) {
                         return d.name;
                     })
                     .call(bootstrap.tooltip().placement('right'))
-                    .on('click', function(d) {
+                    .on('click.set-source', function(d) {
                         d3.event.preventDefault();
                         map.background.source(d.source);
                         map.redraw();
