@@ -3,7 +3,7 @@ iD.layerswitcher = function(map) {
         sources = [{
             name: 'Bing',
             source: iD.BackgroundSource.Bing,
-            description: 'High quality satellite imagery.'
+            description: 'Satellite imagery.'
         }, {
             name: 'TIGER 2012',
             source: iD.BackgroundSource.Tiger2012,
