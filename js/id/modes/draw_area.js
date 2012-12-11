@@ -21,11 +21,11 @@ iD.modes.DrawArea = function(wayId) {
             iD.actions.AddNode(node),
             iD.actions.AddWayNode(way.id, node.id, -1));
 
-        map.surface.on('mousemove.drawarea', function() {
+        function mousemove() {
             history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
-        });
+        }
 
-        map.surface.on('click.drawarea', function() {
+        function click() {
             var datum = d3.select(d3.event.target).datum() || {};
 
             if (datum.id === tailId) {
@@ -52,16 +52,16 @@ iD.modes.DrawArea = function(wayId) {
 
                 controller.enter(iD.modes.DrawArea(wayId));
             }
-        });
+        }
 
-        map.keybinding().on('⎋.drawarea', function() {
+        function esc() {
             history.replace(
                 iD.actions.DeleteNode(node.id));
 
             controller.enter(iD.modes.Browse());
-        });
+        }
 
-        map.keybinding().on('⌫.drawarea', function() {
+        function del() {
             d3.event.preventDefault();
 
             history.replace(
@@ -69,7 +69,12 @@ iD.modes.DrawArea = function(wayId) {
                 iD.actions.DeleteNode(headId));
 
             controller.enter(iD.modes.DrawArea(wayId));
-        });
+        }
+
+        map.surface.on('mousemove.drawarea', mousemove);
+        map.surface.on('click.drawarea', click);
+        map.keybinding().on('⎋.drawarea', esc);
+        map.keybinding().on('⌫.drawarea', del);
     };
 
     mode.exit = function() {

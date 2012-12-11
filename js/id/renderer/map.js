@@ -134,24 +134,23 @@ iD.Map = function() {
         var handles = g.hit.selectAll('image.handle')
             .filter(filter)
             .data(waynodes, key);
-        function olderOnTop(a, b) {
-            return a.osmId() - b.osmId();
-        }
+
         handles.exit().remove();
-        handles.enter().append('image')
+
+        handles.enter().insert('image', ':first-child')
             .attr({
                 width: 6,
                 height: 6,
                 'class': 'handle',
                 'xlink:href': 'css/handle.png'
             });
+
         handles.attr('transform', function(entity) {
                 var p = projection(entity.loc);
                 return 'translate(' + [~~p[0], ~~p[1]] +
                     ') translate(-3, -3) rotate(45, 3, 3)';
             })
-            .classed('active', classActive)
-            .sort(olderOnTop);
+            .classed('active', classActive);
     }
 
     function drawAccuracyHandles(waynodes, filter) {

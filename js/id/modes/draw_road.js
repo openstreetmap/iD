@@ -57,7 +57,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
 
             } else if (datum.type === 'way') {
                 // connect the way to an existing way
-                var connectedIndex = iD.modes.chooseIndex(datum, d3.mouse(map.surface.node()), map);
+                var connectedIndex = iD.util.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
 
                 history.replace(
                     iD.actions.AddWayNode(datum.id, node.id, connectedIndex),
