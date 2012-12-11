@@ -329,16 +329,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="315.10272"
-     inkscape:cy="734.82658"
+     inkscape:zoom="2"
+     inkscape:cx="57.428809"
+     inkscape:cy="875.20462"
      inkscape:document-units="px"
-     inkscape:current-layer="layer11"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1660"
      inkscape:window-height="971"
-     inkscape:window-x="981"
-     inkscape:window-y="59"
+     inkscape:window-x="396"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="false"
@@ -1393,9 +1393,9 @@
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7403"
        width="70.75"
-       height="125.75"
+       height="140.5"
        x="-128"
-       y="167.11218" />
+       y="152.36218" />
     <g
        style="display:inline"
        id="g7279"
@@ -2119,6 +2119,24 @@
        width="19.99999"
        id="rect22372"
        style="color:#000000;fill:#6282ee;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       ry="0"
+       rx="0"
+       y="167.36218"
+       x="-100"
+       height="20"
+       width="19.99999"
+       id="rect42168"
+       style="color:#000000;fill:#a3a9ba;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:#848ba3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect42170"
+       width="19.99999"
+       height="20"
+       x="-90"
+       y="167.36218"
+       rx="0"
+       ry="0" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -2277,6 +2295,12 @@
          id="tspan5100-0-4-6"
          x="220"
          y="-90">Patterns</tspan></text>
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path5129-2"
+       d="m -115.5,-17.999998 0,35.999997 97,0 0,-35.999994 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -4441,7 +4465,8 @@
        id="rect8830"
        style="color:#000000;fill:none;stroke:#b0b0b0;stroke-width:0.99999982;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
-       id="g9662">
+       id="g9662"
+       transform="translate(20,0)">
       <rect
          ry="0"
          rx="0"

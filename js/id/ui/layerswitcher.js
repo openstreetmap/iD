@@ -3,7 +3,7 @@ iD.layerswitcher = function(map) {
         sources = [{
             name: 'Bing',
             source: iD.BackgroundSource.Bing,
-            description: 'High quality satellite imagery.'
+            description: 'Satellite imagery.'
         }, {
             name: 'TIGER 2012',
             source: iD.BackgroundSource.Tiger2012,
@@ -44,7 +44,8 @@ iD.layerswitcher = function(map) {
                 });
 
         var content = selection
-            .append('div').attr('class', 'content map-overlay hide');
+            .append('div')
+                .attr('class', 'content map-overlay hide');
 
         opa = content
             .append('div')

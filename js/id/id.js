@@ -123,27 +123,37 @@ window.iD = function(container) {
                 .on('click', function(d) { return d[2](); });
 
         var gc = this.append('div').attr('class', 'geocode-control map-control');
-        gc.append('button').text('geocode').attr('class','narrow');
-        gc
-            .on('mouseover', function() {
-                d3.select('.geocode-control input').style('display', 'inline-block');
-            })
-            .on('mouseout', function() {
-                d3.select('.geocode-control input').style('display', 'none');
-            });
-        gc.append('input')
-            .attr({
-                type: 'text',
-                placeholder: 'find a place'
-            })
-            .on('keydown', function () {
-                if (d3.event.keyCode !== 13) return;
-                d3.event.preventDefault();
-                d3.json('http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
-                    encodeURIComponent(this.value) + '.json', function(err, resp) {
-                    map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
+        gc.append('button').text('geocode').attr('class','narrow')
+            .on('click', function() {
+                d3.select(this)
+               .classed('active', function() {
+                    if ( !gcForm.classed('hide')) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
+                gcForm.classed('hide', function() {
+                    return !gcForm.classed('hide');
                 });
+
             });
+        var gcForm = gc.append('form')
+            gcForm.attr('class','content map-overlay hide')
+            .append('input')
+                .attr ('autofocus','autofocus')
+                .attr({
+                    type: 'text',
+                    placeholder: 'find a place'
+                })
+                .on('keydown', function () {
+                    if (d3.event.keyCode !== 13) return;
+                    d3.event.preventDefault();
+                    d3.json('http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
+                        encodeURIComponent(this.value) + '.json', function(err, resp) {
+                        map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
+                    });
+                });
 
         this.append('div').attr('class', 'map-control layerswitcher-control')
             .call(iD.layerswitcher(map));
