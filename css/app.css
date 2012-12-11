@@ -6,6 +6,7 @@ body {
     margin:0;
     padding:0;
     color:#222;
+    /* text-rendering: optimizeLegibility; */
     -webkit-font-smoothing: subpixel-antialiased;
      }
 

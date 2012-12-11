@@ -5,8 +5,8 @@ iD.Connection = function() {
         connection = {},
         refNodes = {},
         user = {},
-        apiTilesLoaded = {},
-        inflight = {},
+        inflight = [],
+        loadedTiles = {},
         oauth = iD.OAuth().api(apiURL);
 
     function bboxUrl(b) {
@@ -14,20 +14,21 @@ iD.Connection = function() {
     }
 
     function bboxFromAPI(box, callback) {
-         loadFromURL(bboxUrl(box), callback);
+         loadFromURL(bboxUrl(box), function(err, parsed) {
+             loadedTiles[box] = true;
+             callback(err, parsed);
+         });
     }
 
     function loadFromURL(url, callback) {
-        inflight[url] = d3.xml(url).get()
+        inflight.push(d3.xml(url).get()
             .on('load', function(dom) {
-                delete inflight[url];
-                apiTilesLoaded[url] = true;
                 return callback(null, parse(dom));
-            });
+            }));
     }
 
     function getNodes(obj) {
-        var nodes = [], nelems = obj.getElementsByTagName('nd');
+        var nelems = obj.getElementsByTagName('nd'), nodes = new Array(nelems.length);
         for (var i = 0, l = nelems.length; i < l; i++) {
             nodes[i] = 'n' + nelems[i].attributes.ref.nodeValue;
             refNodes['n' + nelems[i].attributes.ref.nodeValue] = true;
@@ -45,8 +46,8 @@ iD.Connection = function() {
     }
 
     function getMembers(obj) {
-        var members = [],
-            elems = obj.getElementsByTagName('member');
+        var elems = obj.getElementsByTagName('member'),
+            members = new Array(elems.length);
 
         for (var i = 0, l = elems.length; i < l; i++) {
             members[i] = {
@@ -146,9 +147,9 @@ iD.Connection = function() {
     }
 
     function tileAlreadyLoaded(c) {
-        if (apiTilesLoaded[bboxUrl(c)] || inflight[bboxUrl(c)]) return false;
+        if (loadedTiles[c]) return false;
         for (var i = 0; i < 4; i++) {
-            if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
+            if (loadedTiles[tileAtZoom(c, -i)]) return false;
         }
         return true;
     }
@@ -175,26 +176,19 @@ iD.Connection = function() {
                 projection.invert([x + ts, y + ts])];
         }
 
-        var q = queue(2);
+        inflight.map(function(i) {
+            i.abort();
+        });
+        inflight = [];
 
-        var bboxes = tiles
+        tiles
+            .map(apiExtentBox)
             .filter(tileAlreadyLoaded)
-            .map(apiExtentBox);
-
-        _.difference(_.keys(inflight), bboxes.map(bboxUrl)).forEach(function(d) {
-            inflight[d].abort();
-            delete inflight[d];
-        });
-
-        bboxes.forEach(function(e) {
-            q.defer(bboxFromAPI, e);
-        });
-
-        q.awaitAll(function(err, res) {
-            var g = iD.Graph();
-            if (res) res.forEach(function(r) { g = g.merge(r); });
-            event.load(err, g);
-        });
+            .forEach(function(e) {
+                bboxFromAPI(e, function(err, g) {
+                    event.load(err, g);
+                });
+            });
     }
 
     connection.url = function(_) {
@@ -211,7 +205,7 @@ iD.Connection = function() {
     };
 
     connection.flush = function() {
-        apiTilesLoaded = {};
+        loadedTiles = {};
         return connection;
     };
 
