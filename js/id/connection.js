@@ -5,8 +5,8 @@ iD.Connection = function() {
         connection = {},
         refNodes = {},
         user = {},
-        apiTilesLoaded = {},
-        inflight = {},
+        inflight = [],
+        loadedTiles = {},
         oauth = iD.OAuth().api(apiURL);
 
     function bboxUrl(b) {
@@ -14,16 +14,17 @@ iD.Connection = function() {
     }
 
     function bboxFromAPI(box, callback) {
-         loadFromURL(bboxUrl(box), callback);
+         loadFromURL(bboxUrl(box), function(err, parsed) {
+             loadedTiles[box] = true;
+             callback(err, parsed);
+         });
     }
 
     function loadFromURL(url, callback) {
-        inflight[url] = d3.xml(url).get()
+        inflight.push(d3.xml(url).get()
             .on('load', function(dom) {
-                delete inflight[url];
-                apiTilesLoaded[url] = true;
                 return callback(null, parse(dom));
-            });
+            }));
     }
 
     function getNodes(obj) {
@@ -146,9 +147,9 @@ iD.Connection = function() {
     }
 
     function tileAlreadyLoaded(c) {
-        if (apiTilesLoaded[bboxUrl(c)] || inflight[bboxUrl(c)]) return false;
+        if (loadedTiles[c]) return false;
         for (var i = 0; i < 4; i++) {
-            if (apiTilesLoaded[tileAtZoom(c, -i)]) return false;
+            if (loadedTiles[tileAtZoom(c, -i)]) return false;
         }
         return true;
     }
@@ -175,16 +176,16 @@ iD.Connection = function() {
                 projection.invert([x + ts, y + ts])];
         }
 
+        inflight.map(function(i) {
+            i.abort();
+        });
+        inflight = [];
+
         var q = queue(2);
 
         var bboxes = tiles
-            .filter(tileAlreadyLoaded)
-            .map(apiExtentBox);
-
-        _.difference(_.keys(inflight), bboxes.map(bboxUrl)).forEach(function(d) {
-            inflight[d].abort();
-            delete inflight[d];
-        });
+            .map(apiExtentBox)
+            .filter(tileAlreadyLoaded);
 
         bboxes.forEach(function(e) {
             q.defer(bboxFromAPI, e);
@@ -211,7 +212,7 @@ iD.Connection = function() {
     };
 
     connection.flush = function() {
-        apiTilesLoaded = {};
+        loadedTiles = {};
         return connection;
     };
 
