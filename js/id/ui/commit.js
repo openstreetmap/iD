@@ -40,14 +40,14 @@ iD.commit = function() {
 
         body.append('button').text('Save')
             .attr('class', 'save')
-            .on('click', function() {
+            .on('click.save', function() {
                 event.save({
                     comment: d3.select('textarea.changeset-comment').node().value
                 });
             });
         body.append('button').text('Cancel')
             .attr('class', 'cancel')
-            .on('click', function() {
+            .on('click.cancel', function() {
                 event.cancel();
             });
     }

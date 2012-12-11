@@ -108,6 +108,10 @@ form.hide {
     display:none;
 }
 
+button:hover form.hide {
+    display: block;
+}
+
 /* Buttons */
 
 button {

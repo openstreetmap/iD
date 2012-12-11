@@ -126,22 +126,21 @@ window.iD = function(container) {
         gc.append('button').text('geocode').attr('class','narrow')
             .on('click', function() {
                 d3.select(this)
-               .classed('active', function() {
-                    if ( !gcForm.classed('hide')) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                })
-                gcForm.classed('hide', function() {
-                    return !gcForm.classed('hide');
-                });
-
+                    .classed('active', function() {
+                        if ( !gcForm.classed('hide')) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+                    gcForm.classed('hide', function() {
+                        return !gcForm.classed('hide');
+                    });
+                    d3.select('.map-overlay input').node().focus();
             });
         var gcForm = gc.append('form')
             gcForm.attr('class','content map-overlay hide')
             .append('input')
-                .attr ('autofocus','autofocus')
                 .attr({
                     type: 'text',
                     placeholder: 'find a place'

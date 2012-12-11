@@ -6,7 +6,7 @@ iD.confirm = function(message) {
     modal.select('.content')
         .append('button')
         .text('OK')
-        .on('click', function() {
+        .on('click.confirm', function() {
             modal.remove();
         });
 

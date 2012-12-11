@@ -53,7 +53,7 @@ iD.modes.Select = function (entity) {
     mode.enter = function () {
         iD.modes._dragFeatures(mode);
 
-        target = mode.map.surface.selectAll("*")
+        target = mode.map.surface.selectAll('*')
             .filter(function (d) { return d === entity; });
 
         d3.select('.inspector-wrap')
@@ -88,7 +88,7 @@ iD.modes.Select = function (entity) {
             target.call(dragWay);
         }
 
-        mode.map.surface.on("click.browse", function () {
+        mode.map.surface.on('click.browse', function () {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
                 mode.controller.enter(iD.modes.Select(datum));
@@ -116,7 +116,7 @@ iD.modes.Select = function (entity) {
                 .on('touchstart.drag', null);
         }
 
-        mode.map.surface.on("click.browse", null);
+        mode.map.surface.on('click.browse', null);
         mode.map.keybinding().on('⌫.browse', null);
 
         mode.map.selection(null);

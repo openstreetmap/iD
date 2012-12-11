@@ -19,7 +19,7 @@ iD.userpanel = function(connection) {
                         .attr('class', 'logout')
                         .attr('href', '#')
                         .text('logout')
-                        .on('click', function() {
+                        .on('click.logout', function() {
                             d3.event.preventDefault();
                             event.logout();
                         });
