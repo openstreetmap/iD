@@ -28,7 +28,7 @@ iD.Connection = function() {
     }
 
     function getNodes(obj) {
-        var nodes = [], nelems = obj.getElementsByTagName('nd');
+        var nelems = obj.getElementsByTagName('nd'), nodes = new Array(nelems.length);
         for (var i = 0, l = nelems.length; i < l; i++) {
             nodes[i] = 'n' + nelems[i].attributes.ref.nodeValue;
             refNodes['n' + nelems[i].attributes.ref.nodeValue] = true;
@@ -46,8 +46,8 @@ iD.Connection = function() {
     }
 
     function getMembers(obj) {
-        var members = [],
-            elems = obj.getElementsByTagName('member');
+        var elems = obj.getElementsByTagName('member'),
+            members = new Array(elems.length);
 
         for (var i = 0, l = elems.length; i < l; i++) {
             members[i] = {
