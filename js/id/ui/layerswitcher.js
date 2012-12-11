@@ -64,33 +64,33 @@ iD.layerswitcher = function(map) {
             .attr('class', 'opacity-options-wrapper fillL2')
             .html("<em>Layers</em>")
             .append('ul')
-            .attr('class', 'opacity-options')
-            .selectAll('div.opacity')
-            .data(opacities)
-            .enter()
-            .append('li')
-            .attr('data-original-title', function(d) {
-                return d.label + " opacity";
-            })
-              .on('click', function(d) {
-                  d3.select('#tile-g')
-                      .transition()
-                      .style('opacity', d.level)
-                      .attr('data-opacity', d.level);
-                  d3.selectAll('.opacity-options li')
-                      .classed('selected', false);
-                  d3.select(this)
-                      .classed('selected', true);
-              })
-            .html("<div class='select-box'></div>")
-            .call(bootstrap.tooltip().placement('top'))
-            .append('div')
-            .attr('class', 'opacity')
-            .style('opacity', function(d) {
-                return d.level;
-            });
-            // Make sure there is an active selection by default
-            d3.select('.opacity-options li').classed('selected', true);
+                .attr('class', 'opacity-options')
+                .selectAll('div.opacity')
+                .data(opacities)
+                .enter()
+                .append('li')
+                    .attr('data-original-title', function(d) {
+                        return d.label + " opacity";
+                    })
+                    .on('click', function(d) {
+                        d3.select('#tile-g')
+                            .transition()
+                            .style('opacity', d.level)
+                            .attr('data-opacity', d.level);
+                        d3.selectAll('.opacity-options li')
+                            .classed('selected', false);
+                        d3.select(this)
+                            .classed('selected', true);
+                    })
+                    .html("<div class='select-box'></div>")
+                    .call(bootstrap.tooltip().placement('top'))
+                    .append('div')
+                        .attr('class', 'opacity')
+                        .style('opacity', function(d) {
+                            return d.level;
+                        });
+        // Make sure there is an active selection by default
+        d3.select('.opacity-options li').classed('selected', true);
 
         function selectLayer(d) {
             content.selectAll('a.layer')
@@ -107,23 +107,23 @@ iD.layerswitcher = function(map) {
                 .enter()
                 .append('li')
                 .append('a')
-                .attr('data-original-title', function(d) {
-                    return d.description;
-                })
-                .attr('href', '#')
-                .attr('class', 'layer')
-                .text(function(d) {
-                    return d.name;
-                })
-                .call(bootstrap.tooltip().placement('right'))
-                .on('click', function(d) {
-                    d3.event.preventDefault();
-                    map.background.source(d.source);
-                    map.redraw();
-                    selectLayer(d);
-                })
-                .insert('span')
-                .attr('class','icon toggle');
+                    .attr('data-original-title', function(d) {
+                        return d.description;
+                    })
+                    .attr('href', '#')
+                    .attr('class', 'layer')
+                    .text(function(d) {
+                        return d.name;
+                    })
+                    .call(bootstrap.tooltip().placement('right'))
+                    .on('click', function(d) {
+                        d3.event.preventDefault();
+                        map.background.source(d.source);
+                        map.redraw();
+                        selectLayer(d);
+                    })
+                    .insert('span')
+                    .attr('class','icon toggle');
 
         selectLayer(map.background.source());
     }

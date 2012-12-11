@@ -70,7 +70,7 @@ window.iD = function(container) {
         this.append('div')
             .attr('class', 'user')
             .append('div')
-            .attr('class', 'hello');
+                .attr('class', 'hello');
 
         bar.append('button')
             .attr('class', 'save action wide')
