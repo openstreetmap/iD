@@ -329,15 +329,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="57.428809"
-     inkscape:cy="875.20462"
+     inkscape:zoom="1"
+     inkscape:cx="559.569"
+     inkscape:cy="819.10846"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="false"
+     showgrid="true"
      inkscape:window-width="1660"
      inkscape:window-height="971"
-     inkscape:window-x="396"
+     inkscape:window-x="156"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
@@ -2137,12 +2137,25 @@
        y="167.36218"
        rx="0"
        ry="0" />
+    <rect
+       ry="0"
+       rx="0"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:1.00000012;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect9635-9"
+       width="393.99997"
+       height="249"
+       x="565.5"
+       y="82.862183" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer13"
+     inkscape:label="inspector" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="select-point-mode"
-     style="display:inline">
+     style="display:none">
     <rect
        ry="0"
        rx="0"
@@ -2158,7 +2171,7 @@
        inkscape:connector-curvature="0"
        id="path5129"
        d="m 51,94.362183 0,35.999997 97,0 0,-35.999994 z"
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#4672ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
     <text
        transform="translate(0,-52.362183)"
        xml:space="preserve"
@@ -2757,7 +2770,7 @@
      inkscape:groupmode="layer"
      id="layer11"
      inkscape:label="layer-switcher-simple"
-     style="display:inline">
+     style="display:none">
     <g
        style="display:inline"
        id="g9148"
