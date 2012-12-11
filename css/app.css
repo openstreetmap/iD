@@ -125,7 +125,7 @@ button:hover {
 }
 
 button.active:not([disabled]) {
-    background:#aaa;
+    background-color:#aaa;
     color:#fff;
 }
 
@@ -408,6 +408,10 @@ button.Browse .label {
     background-position: -110px -90px;
 }
 
+.layerswitcher-control button.active {
+    background-position: -110px -130px;;
+}
+
 .layerswitcher-control .content {
     width: 150px;
     position:absolute;
@@ -424,13 +428,10 @@ button.Browse .label {
     background: url(../img/background-pattern-opacity.png) 0 0 repeat;
     height:20px;
     width:62px;
-    right: 10px;
-    top: 10px;
     float: right;
 }
 
 .opacity-options li {
-    position: relative;
     height: 100%;
     display: block;
     float: left;
@@ -439,8 +440,8 @@ button.Browse .label {
 
 .opacity-options li .select-box{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width:20px;
+    height:18px;
     z-index: 9999;
 }
 

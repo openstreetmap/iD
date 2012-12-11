@@ -3,17 +3,26 @@ iD.layerswitcher = function(map) {
         sources = [{
             name: 'Bing',
             source: iD.BackgroundSource.Bing,
-            description: 'High quality satellite imagery'
+            description: 'High quality satellite imagery.'
         }, {
             name: 'TIGER 2012',
             source: iD.BackgroundSource.Tiger2012,
-            description: 'Public domain road data from the US Government'
+            description: 'Public domain road data from the US Government.'
         }, {
             name: 'OSM',
             source: iD.BackgroundSource.OSM,
-            description: 'The default OpenStreetMap layer'
+            description: 'The default OpenStreetMap layer.'
         }],
-        opacities = [1, 0.5, 0];
+        opacities = [{
+            level: 1,
+            label: "0%"
+        }, {
+            level: 0.5,
+            label: "50%"
+        }, {
+            level: 0,
+            label: "100%"
+        }];
 
     function layerswitcher(selection) {
         selection
@@ -21,6 +30,14 @@ iD.layerswitcher = function(map) {
             .attr('class', 'narrow')
             .text('Layers')
             .on('click', function() {
+                d3.select(this)
+                .classed('active', function() {
+                    if ( !content.classed('hide')) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
                 content.classed('hide', function() {
                     return !content.classed('hide');
                 });
@@ -34,28 +51,30 @@ iD.layerswitcher = function(map) {
             .attr('class', 'opacity-options-wrapper fillL2')
             .html("<em>Layers</em>")
             .append('ul')
-            .attr('data-original-title', 'Adjust the opacity')
-            .call(bootstrap.tooltip().placement('right'))
             .attr('class', 'opacity-options')
             .selectAll('div.opacity')
             .data(opacities)
             .enter()
             .append('li')
+            .attr('data-original-title', function(d) {
+                return d.label + " opacity";
+            })
               .on('click', function(d) {
                   d3.select('#tile-g')
                       .transition()
-                      .style('opacity', d)
-                      .attr('data-opacity', d);
+                      .style('opacity', d.level)
+                      .attr('data-opacity', d.level);
                   d3.selectAll('.opacity-options li')
                   .classed('selected', false)
                   d3.select(this)
                   .classed('selected', true)
               })
             .html("<div class='select-box'></div>")
+            .call(bootstrap.tooltip().placement('top'))
             .append('div')
             .attr('class', 'opacity')
             .style('opacity', function(d) {
-                return d;
+                return d.level;
             });
             // Make sure there is an active selection by default
             d3.select('.opacity-options li').classed('selected', true)
@@ -76,11 +95,15 @@ iD.layerswitcher = function(map) {
             .enter()
             .append('li')
             .append('a')
+            .attr('data-original-title', function(d) {
+                return d.description;
+            })
             .attr('href', '#')
             .attr('class', 'layer')
             .text(function(d) {
                 return d.name;
             })
+            .call(bootstrap.tooltip().placement('right'))
             .on('click', function(d) {
                 d3.event.preventDefault();
                 map.background.source(d.source);
