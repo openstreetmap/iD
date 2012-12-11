@@ -181,21 +181,14 @@ iD.Connection = function() {
         });
         inflight = [];
 
-        var q = queue(2);
-
-        var bboxes = tiles
+        tiles
             .map(apiExtentBox)
-            .filter(tileAlreadyLoaded);
-
-        bboxes.forEach(function(e) {
-            q.defer(bboxFromAPI, e);
-        });
-
-        q.awaitAll(function(err, res) {
-            var g = iD.Graph();
-            if (res) res.forEach(function(r) { g = g.merge(r); });
-            event.load(err, g);
-        });
+            .filter(tileAlreadyLoaded)
+            .forEach(function(e) {
+                bboxFromAPI(e, function(err, g) {
+                    event.load(err, g);
+                });
+            });
     }
 
     connection.url = function(_) {
