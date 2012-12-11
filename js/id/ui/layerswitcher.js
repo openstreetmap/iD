@@ -25,26 +25,39 @@ iD.layerswitcher = function(map) {
         }];
 
     function layerswitcher(selection) {
-        selection
+
+        var content = selection
+            .append('div').attr('class', 'content map-overlay hide');
+
+        var toggle = selection
             .append('button')
             .attr('class', 'narrow')
             .text('Layers')
-            .on('click', function() {
+            .on('click.toggle', function() {
                 d3.select(this)
-                .classed('active', function() {
-                    if ( !content.classed('hide')) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                })
+                    .classed('active', function() {
+                        return content.classed('hide');
+                    });
                 content.classed('hide', function() {
+                    if (content.classed('hide')) clickoutside(selection);
+                    else {
+                        d3.select('body').on('click.outside', null);
+                        selection.on('click.inside', null);
+                    }
                     return !content.classed('hide');
                 });
             });
 
-        var content = selection
-            .append('div').attr('class', 'content map-overlay hide');
+        function clickoutside(selection) {
+            selection
+                .on('click.inside', function() {
+                    return d3.event.stopPropagation();
+                });
+            d3.select('body')
+                .on('click.outside', function() {
+                    toggle.on('click.toggle').apply(toggle.node(), d3.event);
+                });
+        }
 
         opa = content
             .append('div')
@@ -65,9 +78,9 @@ iD.layerswitcher = function(map) {
                       .style('opacity', d.level)
                       .attr('data-opacity', d.level);
                   d3.selectAll('.opacity-options li')
-                  .classed('selected', false)
+                      .classed('selected', false);
                   d3.select(this)
-                  .classed('selected', true)
+                      .classed('selected', true);
               })
             .html("<div class='select-box'></div>")
             .call(bootstrap.tooltip().placement('top'))
@@ -77,7 +90,7 @@ iD.layerswitcher = function(map) {
                 return d.level;
             });
             // Make sure there is an active selection by default
-            d3.select('.opacity-options li').classed('selected', true)
+            d3.select('.opacity-options li').classed('selected', true);
 
         function selectLayer(d) {
             content.selectAll('a.layer')
@@ -87,31 +100,31 @@ iD.layerswitcher = function(map) {
         }
 
         content
-        .append('ul')
-        .attr('class', 'toggle-list')
+            .append('ul')
+            .attr('class', 'toggle-list')
+            .selectAll('a.layer')
+                .data(sources)
+                .enter()
+                .append('li')
+                .append('a')
+                .attr('data-original-title', function(d) {
+                    return d.description;
+                })
+                .attr('href', '#')
+                .attr('class', 'layer')
+                .text(function(d) {
+                    return d.name;
+                })
+                .call(bootstrap.tooltip().placement('right'))
+                .on('click', function(d) {
+                    d3.event.preventDefault();
+                    map.background.source(d.source);
+                    map.redraw();
+                    selectLayer(d);
+                })
+                .insert('span')
+                .attr('class','icon toggle');
 
-        .selectAll('a.layer')
-            .data(sources)
-            .enter()
-            .append('li')
-            .append('a')
-            .attr('data-original-title', function(d) {
-                return d.description;
-            })
-            .attr('href', '#')
-            .attr('class', 'layer')
-            .text(function(d) {
-                return d.name;
-            })
-            .call(bootstrap.tooltip().placement('right'))
-            .on('click', function(d) {
-                d3.event.preventDefault();
-                map.background.source(d.source);
-                map.redraw();
-                selectLayer(d);
-            })
-            .insert('span')
-            .attr('class','icon toggle');
         selectLayer(map.background.source());
     }
 
