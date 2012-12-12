@@ -35,16 +35,18 @@ iD.modes.Select = function (entity) {
         });
 
     function remove() {
-        switch (entity.type) {
-            case 'way':
-                mode.history.perform(
-                    iD.actions.DeleteWay(entity.id),
-                    'deleted a way');
-                break;
-            case 'node':
-                mode.history.perform(
-                    iD.actions.DeleteNode(entity.id),
-                    'deleted a node');
+        if (entity.type === 'way') {
+            mode.history.perform(
+                iD.actions.DeleteWay(entity.id),
+                'deleted a way');
+        } else if (entity.type === 'node') {
+            var parents = mode.history.graph().parentWays(entity.id),
+                operations = [iD.actions.DeleteNode(entity.id)];
+            parents.forEach(function(parent) {
+                if (_.uniq(parent.nodes).length === 1) operations.push(iD.actions.DeleteWay(parent.id));
+            });
+            mode.history.perform.apply(mode.history,
+                operations.concat(['deleted a node']));
         }
 
         mode.controller.exit();
