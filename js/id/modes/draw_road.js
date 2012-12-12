@@ -81,7 +81,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
             controller.enter(iD.modes.Browse());
         }
 
-        function del() {
+        function backspace() {
             d3.event.preventDefault();
 
             history.replace(
@@ -96,8 +96,22 @@ iD.modes.DrawRoad = function(wayId, direction) {
             }
         }
 
-        map.keybinding().on('⎋.drawroad', esc);
-        map.keybinding().on('⌫.drawroad', del);
+        function del() {
+            d3.event.preventDefault();
+            history.replace(iD.actions.DeleteWay(wayId));
+            controller.enter(iD.modes.Browse());
+        }
+
+        function ret() {
+            d3.event.preventDefault();
+            history.replace(iD.actions.DeleteNode(node.id));
+            controller.enter(iD.modes.Browse());
+        }
+
+        map.keybinding().on('⎋.drawroad', esc)
+            .on('⌫.drawroad', backspace)
+            .on('delete.drawroad', del)
+            .on('↩.drawroad', ret);
     };
 
     mode.exit = function() {
@@ -108,7 +122,9 @@ iD.modes.DrawRoad = function(wayId, direction) {
             .on('mousemove.drawroad', null)
             .on('click.drawroad', null);
         mode.map.keybinding().on('⎋.drawroad', null)
-            .on('⌫.drawroad', null);
+            .on('⌫.drawroad', null)
+            .on('delete.drawroad', null)
+            .on('↩.drawroad', null);
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);
