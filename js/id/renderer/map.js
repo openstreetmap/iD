@@ -5,7 +5,7 @@ iD.Map = function() {
         selection = null, hover = null,
         translateStart,
         keybinding,
-        projection = d3.geo.mercator(),
+        projection = d3.geo.mercator().scale(1024),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
