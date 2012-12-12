@@ -8,7 +8,9 @@ iD.modes.DrawArea = function(wayId) {
             history = mode.history,
             controller = mode.controller,
             way = history.graph().entity(wayId),
-            headId = _.last(way.nodes),
+            headId = (way.nodes.length == 1) ?
+                way.nodes[0] :
+                way.nodes[way.nodes.length - 2],
             tailId = _.first(way.nodes),
             node = iD.Node({loc: map.mouseCoordinates()});
 
@@ -68,7 +70,14 @@ iD.modes.DrawArea = function(wayId) {
                 iD.actions.DeleteNode(node.id),
                 iD.actions.DeleteNode(headId));
 
-            controller.enter(iD.modes.DrawArea(wayId));
+            if (history.graph().fetch(wayId).nodes.length === 2) {
+                history.replace(
+                    iD.actions.DeleteNode(way.nodes[0]),
+                    iD.actions.DeleteWay(wayId));
+                controller.enter(iD.modes.Browse());
+            } else {
+                controller.enter(iD.modes.DrawArea(wayId));
+            }
         }
 
         map.surface.on('mousemove.drawarea', mousemove);

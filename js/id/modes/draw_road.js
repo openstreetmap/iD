@@ -74,22 +74,30 @@ iD.modes.DrawRoad = function(wayId, direction) {
             }
         });
 
-        map.keybinding().on('⎋.drawroad', function() {
+        function esc() {
             history.replace(
                 iD.actions.DeleteNode(node.id));
 
             controller.enter(iD.modes.Browse());
-        });
+        }
 
-        map.keybinding().on('⌫.drawroad', function() {
+        function del() {
             d3.event.preventDefault();
 
             history.replace(
                 iD.actions.DeleteNode(node.id),
                 iD.actions.DeleteNode(headId));
 
-            controller.enter(iD.modes.DrawRoad(wayId, direction));
-        });
+            if (history.graph().fetch(wayId).nodes.length === 0) {
+                history.replace(iD.actions.DeleteWay(wayId));
+                controller.enter(iD.modes.Browse());
+            } else {
+                controller.enter(iD.modes.DrawRoad(wayId, direction));
+            }
+        }
+
+        map.keybinding().on('⎋.drawroad', esc);
+        map.keybinding().on('⌫.drawroad', del);
     };
 
     mode.exit = function() {
