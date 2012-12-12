@@ -119,11 +119,16 @@ window.iD = function(container) {
             .selectAll('button')
                 .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
                 .enter().append('button').attr('class', function(d) { return d[0] + ' narrow'; })
-                .text(function(d) { return d[1]; })
-                .on('click', function(d) { return d[2](); });
+                .on('click', function(d) { return d[2](); })
+                .append('span')
+                    .attr('class', function(d) {
+                        return d[0] + ' icon'
+                    });
 
         var gc = this.append('div').attr('class', 'geocode-control map-control');
-        gc.append('button').text('geocode').attr('class','narrow')
+        gc.append('button')
+            .attr('class','narrow')
+            .html("<span class='geocode icon'></span>")
             .on('click', function() {
                 d3.select(this)
                     .classed('active', function() {
