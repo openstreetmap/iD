@@ -32,7 +32,7 @@ iD.layerswitcher = function(map) {
         var toggle = selection
             .append('button')
             .attr('class', 'narrow')
-            .text('Layers')
+            .html("<span class='layers icon'></span>")
             .on('click.toggle', function() {
                 d3.select(this)
                     .classed('active', function() {

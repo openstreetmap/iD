@@ -6,7 +6,7 @@ body {
     margin:0;
     padding:0;
     color:#222;
-    /* text-rendering: optimizeLegibility; */
+    /* text-rendering: optimizeLegibility;  */
     -webkit-font-smoothing: subpixel-antialiased;
      }
 
@@ -40,6 +40,10 @@ p {
 
 em {
     font-style: italic;
+}
+
+strong {
+    font-style: bold;
 }
 
 a:visited, a {
@@ -118,7 +122,6 @@ button:hover form.hide {
 /* Buttons */
 
 button {
-    border:0;
     line-height:20px;
     cursor:pointer;
     border:1px solid #aaa;
@@ -245,17 +248,23 @@ button.action .label {
   margin-right: 3px;
 }
 
+/* Definitions for every icon */
 .icon.browse     { background-position:   0px 0px;}
 .icon.add-place  { background-position: -20px 0px;}
 .icon.add-road   { background-position: -40px 0px;}
 .icon.add-area   { background-position: -60px 0px;}
 .icon.undo       { background-position: -80px 0px;}
 .icon.redo       { background-position: -100px 0px;}
-.apply.icon      { background-position: -120px 0px;}
-.save.icon       { background-position: -140px 0px;}
-.close.icon      { background-position: -160px 0px;}
-.delete.icon     { background-position: -180px 0px;}
-.toggle.icon     { background-position: 0px -180px;}
+.icon.apply      { background-position: -120px 0px;}
+.icon.save       { background-position: -140px 0px;}
+.icon.close      { background-position: -160px 0px;}
+.icon.delete     { background-position: -180px 0px;}
+.icon.remove     { background-position: -200px 0px;}
+.icon.inspect    { background-position: -220px 0px;}
+.icon.zoom-in    { background-position: -240px 0px;}
+.icon.zoom-out   { background-position: -260px 0px;}
+.icon.geocode    { background-position: -280px 0px;}
+.icon.layers     { background-position: -300px 0px;}
 
 .active .icon.browse     { background-position:   0px -20px;}
 .active .icon.add-place  { background-position: -20px -20px;}
@@ -263,15 +272,16 @@ button.action .label {
 .active .icon.add-area   { background-position: -60px -20px;}
 .active .icon.undo       { background-position: -80px -20px;}
 .active .icon.redo       { background-position: -100px -20px;}
-.active .apply.icon      { background-position: -120px -20px;}
-.active .save.icon       { background-position: -140px -20px;}
-.active .close.icon      { background-position: -160px -20px;}
-.active .delete.icon     { background-position: -180px -20px;}
-
-a:hover .toggle.icon           { background-position: -20px -180px;}
-.selected .toggle.icon,
-a.selected:hover .toggle.icon  { background-position: -40px -180px;}
-
+.active .icon.apply      { background-position: -120px -20px;}
+.active .icon.save       { background-position: -140px -20px;}
+.active .icon.close      { background-position: -160px -20px;}
+.active .icon.delete     { background-position: -180px -20px;}
+.active .icon.remove     { background-position: -200px -20px;}
+.active .icon.inspect    { background-position: -220px -20px;}
+.active .icon.zoom-in    { background-position: -240px -20px;}
+.active .icon.zoom-out   { background-position: -260px -20px;}
+.active .icon.geocode    { background-position: -280px -20px;}
+.active .icon.layers     { background-position: -300px -20px;}
 
 button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-place  { background-position: -20px -40px;}
@@ -283,6 +293,18 @@ button[disabled] .apply.icon      { background-position: -120px -40px;}
 button[disabled] .save.icon       { background-position: -140px -40px;}
 button[disabled] .close.icon      { background-position: -160px -40px;}
 button[disabled] .delete.icon     { background-position: -180px -40px;}
+button[disabled] .icon.remove     { background-position: -200px -40px;}
+button[disabled] .icon.inspect    { background-position: -220px -40px;}
+button[disabled] .icon.zoom-in    { background-position: -240px -40px;}
+button[disabled] .icon.zoom-out   { background-position: -260px -40px;}
+button[disabled] .icon.geocode    { background-position: -280px -40px;}
+button[disabled] .icon.layers     { background-position: -300px -40px;}
+
+/* Toggle Icon is special */
+.toggle.icon                   { background-position: 0px -180px;}
+a:hover .toggle.icon           { background-position: -20px -180px;}
+.selected .toggle.icon,
+a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* ToolBar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -372,17 +394,6 @@ button.Browse .label {
     position:absolute;
 }
 
-.map-control button {
-    text-indent: -9999px;
-    overflow: hidden;
-    background-image: url(../img/sprite.png);
-}
-
-.layerswitcher-control button        {background-position: -110px -90px;}
-.layerswitcher-control button.active {background-position: -110px -130px;}
-.geocode-control button              {background-position: -70px -90px;}
-.geocode-control button.active       {background-position: -70px -130px;}
-
 .map-overlay {
     width: 150px;
     position:absolute;
@@ -405,13 +416,11 @@ button.Browse .label {
 }
 
 .zoombuttons button.zoom-in {
-    background-position: 10px -90px;
-    border-bottom:0;
     border-radius:4px 4px 0 0;
 }
 
 .zoombuttons button.zoom-out {
-    background-position: -30px -90px;
+    border-top:0;
     border-radius:0 0 4px 4px;
 }
 
