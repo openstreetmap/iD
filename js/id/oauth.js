@@ -82,7 +82,8 @@ iD.OAuth = function() {
                 .attr({ width: 640, height: 550, frameborder: 'no' })
                 .attr('src', baseurl + '/oauth/authorize?' + ohauth.qsString({
                     oauth_token: resp.oauth_token,
-                    oauth_callback: location.href
+                    oauth_callback: location.href.replace('index.html', '')
+                        .replace(/#.+/, '') + 'land.html'
                 }))
                 .on('load', function() {
                     if (this.contentWindow.location.search) {
