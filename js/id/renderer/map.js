@@ -365,6 +365,7 @@ iD.Map = function() {
         var scale = 256 * Math.pow(2, z),
             center = pxCenter(),
             l = pointLocation(center);
+        scale = Math.max(1024, Math.min(256 * Math.pow(2, 24), scale));
         projection.scale(scale);
         zoom.scale(projection.scale());
         var t = projection.translate();
