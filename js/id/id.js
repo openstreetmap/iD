@@ -1,7 +1,6 @@
 window.iD = function(container) {
     var connection = iD.Connection()
             .url('http://api06.dev.openstreetmap.org'),
-            // .url('http://www.openstreetmap.org'),
         history = iD.History(),
         map = iD.Map()
             .connection(connection)
@@ -36,6 +35,16 @@ window.iD = function(container) {
             .attr('data-original-title', function (mode) { return mode.description; })
             .call(bootstrap.tooltip().placement('bottom'))
             .on('click', function (mode) { controller.enter(mode); });
+
+
+        map.on('move.disable-buttons', function() {
+            if (map.zoom() < 16) {
+                buttons.attr('disabled', 'disabled');
+                controller.enter(iD.modes.Browse());
+            } else {
+                buttons.attr('disabled', null);
+            }
+        });
 
         buttons.append('span')
             .attr('class', function(d) {
@@ -138,8 +147,8 @@ window.iD = function(container) {
                     });
                     d3.select('.map-overlay input').node().focus();
             });
-        var gcForm = gc.append('form')
-            gcForm.attr('class','content map-overlay hide')
+        var gcForm = gc.append('form');
+        gcForm.attr('class','content map-overlay hide')
             .append('input')
                 .attr({
                     type: 'text',

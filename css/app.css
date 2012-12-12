@@ -607,6 +607,22 @@ div.typeahead a {
     overflow:auto;
 }
 
+/* Notices
+------------------------------------------------------- */
+
+.notice {
+    position:absolute;
+    top:60px;
+    left:70px;
+    width:250px;
+    height:50px;
+    padding:10px;
+    background:#fff;
+    font-size: 20px;
+    font-weight: bold;
+    line-height:30px;
+}
+
 /* Tooltips
 ------------------------------------------------------- */
 

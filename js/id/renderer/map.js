@@ -14,6 +14,7 @@ iD.Map = function() {
         dblclickEnabled = true,
         dragging = false,
         fastEnabled = true,
+        notice,
         background = iD.Background()
             .projection(projection),
         class_stroke = iD.Style.styleClasses('stroke'),
@@ -56,6 +57,10 @@ iD.Map = function() {
         alength = arrow.node().getComputedTextLength();
         arrow.remove();
 
+        notice = iD.notice(d3.select('body')
+            .append('div')
+            .attr('class', 'notice'));
+
         map.size(this.size());
         map.surface = surface;
     }
@@ -90,7 +95,8 @@ iD.Map = function() {
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }
 
-        if (all.length > 200000) return hideVector();
+        if (all.length > 200000) return editOff();
+        else editOn();
 
         for (var i = 0; i < all.length; i++) {
             var a = all[i];
@@ -166,8 +172,13 @@ iD.Map = function() {
         }).classed('active', classActive);
     }
 
-    function hideVector() {
+    function editOff() {
+        notice.message('Zoom in to edit the map');
         surface.selectAll('.layer-g *').remove();
+    }
+
+    function editOn() {
+        notice.message('');
     }
 
     function drawLines(data, filter, group, class_gen) {
@@ -224,6 +235,7 @@ iD.Map = function() {
             }).data();
 
         var uses = defs.selectAll('path')
+            .filter(filter)
             .data(oneways, key);
         uses.exit().remove();
         uses.enter().append('path');
@@ -232,12 +244,14 @@ iD.Map = function() {
             .attr('d', getline);
 
         var labels = g.text.selectAll('text')
+            .filter(filter)
             .data(oneways, key);
         labels.exit().remove();
         var tp = labels.enter()
             .append('text').attr({ 'class': 'oneway', dy: 4 })
             .append('textPath').attr('class', 'textpath');
         g.text.selectAll('.textpath')
+            .filter(filter)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
             .text(function(d) {
                 return (new Array(Math.floor(lengths[d.id]))).join('►----');
@@ -246,14 +260,14 @@ iD.Map = function() {
 
     function connectionLoad(err, result) {
         history.merge(result);
-        drawVector(Object.keys(result.entities));
+        redraw(Object.keys(result.entities));
     }
 
     function hoverIn() {
         var datum = d3.select(d3.event.target).datum();
         if (datum instanceof iD.Entity) {
             hover = datum.id;
-            drawVector([hover]);
+            redraw([hover]);
             d3.select('.messages').text(datum.tags.name || '#' + datum.id);
         }
     }
@@ -262,7 +276,7 @@ iD.Map = function() {
         if (hover) {
             var oldHover = hover;
             hover = null;
-            drawVector([oldHover]);
+            redraw([oldHover]);
             d3.select('.messages').text('');
         }
     }
@@ -311,7 +325,7 @@ iD.Map = function() {
             connection.loadTiles(projection);
             drawVector(difference);
         } else {
-            hideVector();
+            editOff();
         }
         return map;
     }
@@ -421,7 +435,7 @@ iD.Map = function() {
             d3.select('div.inspector-wrap')
                 .append('div')
                 .attr('class','inspector-inner')
-                .text(_)
+                .text(_);
         }
     };
 
@@ -448,5 +462,5 @@ iD.Map = function() {
     map.projection = projection;
     map.redraw = redraw;
 
-    return d3.rebind(map, dispatch, 'on', 'move');
+    return d3.rebind(map, dispatch, 'on');
 };
