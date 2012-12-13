@@ -55,40 +55,58 @@ iD.Inspector = function() {
                 .enter();
 
             function removeTag(d) {
-                var tags = pad(grabtags());
-                delete tags[d.key];
-                draw(tags);
+                draw(grabtags().filter(function(t) { return t.key !== d.key; }));
             }
 
             function draw(data) {
-                var tr = inspectorwrap.selectAll('li')
-                    .data(d3.entries(data), function(d) { return [d.key, d.value]; });
-                tr.exit().remove();
-                var row = tr.enter().append('li').attr('class','tag-row');
-                var inputs = row.append('div').attr('class','input-wrap').selectAll('input')
-                    .data(function(d) { return [d, d]; });
-                inputs.enter().append('input')
+
+                var li = inspectorwrap.selectAll('li')
+                    .data(data, function(d) { return [d.key, d.value]; });
+
+                li.exit().remove();
+
+                var row = li.enter().append('li').attr('class','tag-row');
+                var inputs = row.append('div').attr('class','input-wrap');
+
+                function setValue(d, i) { d.value = this.value; }
+
+                function emptyTag(d) { return d.key === ''; }
+
+                function pushMore(d, i) {
+                    if (d3.event.keyCode === 9) {
+                        var tags = grabtags();
+                        if (i == tags.length - 1 && !tags.filter(emptyTag).length) {
+                            draw(tags.concat([{ key: '', value: '' }]));
+                        }
+                    }
+                }
+
+                function bindTypeahead(d, i) {
+                    var selection = d3.select(this);
+                    selection.call(d3.typeahead()
+                        .data(function(selection, callback) {
+                            taginfo.values(selection.datum().key, function(err, data) {
+                                callback(data.data);
+                            });
+                        }));
+                }
+
+                inputs.append('input')
                     .property('type', 'text')
-                    .attr('class', function(d, i) {
-                        return i ? 'value' : 'key';
-                    })
-                    .property('value', function(d, i) { return d[i ? 'value' : 'key']; })
-                    .on('keyup.update', function(d, i) {
-                        d[i ? 'value' : 'key'] = this.value;
-                        update();
-                    })
-                    .each(function(d, i) {
-                        if (!i) return;
-                        var selection = d3.select(this);
-                        selection.call(d3.typeahead()
-                            .data(function(selection, callback) {
-                                update();
-                                taginfo.values(selection.datum().key, function(err, data) {
-                                    callback(data.data);
-                                });
-                            }));
-                    });
+                    .attr('class', 'key')
+                    .property('value', function(d, i) { return d.key; })
+                    .on('keyup.update', setValue);
+
+                inputs.append('input')
+                    .property('type', 'text')
+                    .attr('class', 'value')
+                    .property('value', function(d, i) { return d.value; })
+                    .on('keyup.update', setValue)
+                    .on('keydown.push-more', pushMore)
+                    .each(bindTypeahead);
+
                 row.append('button').attr('class','remove minor').on('click', removeTag);
+
                 row.append('button').attr('class', 'tag-help minor').append('a')
                     .text('?')
                     .attr('target', '_blank')
@@ -98,36 +116,21 @@ iD.Inspector = function() {
                     });
             }
 
-            // Remove any blank key-values
-            function clean(x) {
-                for (var i in x) {
-                    // undefined is cast to a string as an object key
-                    if (!i || i === 'undefined') delete x[i];
-                }
-                return x;
-            }
-
-            // Add a blank row for new tags
-            function pad(x) {
-                if (!x['']) x[''] = '';
-                return x;
-            }
-
             function grabtags() {
-                var grabbed = {};
-                function grab(d) { if (d.key !== undefined) grabbed[d.key] = d.value; }
-                inspectorwrap.selectAll('input').each(grab);
+                var grabbed = [];
+                function grab(d) { grabbed.push(d); }
+                inspectorwrap.selectAll('li').each(grab);
                 return grabbed;
             }
 
-            // fill values and add blank field if necessary
-            function update() {
-                draw(pad(grabtags()));
+            function unentries(entries) {
+                return d3.nest()
+                    .key(function(d) { return d.key; })
+                    .rollup(function(v) { return v[0].value; })
+                    .map(entries);
             }
 
-            var data = _.clone(entity.tags);
-            draw(data);
-            update();
+            draw(d3.entries(_.clone(entity.tags)));
 
             selection.select('input').node().focus();
 
@@ -139,7 +142,7 @@ iD.Inspector = function() {
                     .attr('class', 'apply wide action')
                     .html("<span class='icon icon-pre-text apply'></span><span class='label'>Apply</span>")
                     .on('click', function(entity) {
-                        event.changeTags(entity, clean(grabtags()));
+                        event.changeTags(entity, unentries(grabtags()));
                         event.close(entity);
                     });
                 selection.append('button')
