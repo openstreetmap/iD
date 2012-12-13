@@ -61,6 +61,8 @@ iD.Inspector = function() {
             var inspectorwrap = selection
                 .append('ul').attr('class', 'inspector-inner tag-wrap fillL2')
 
+            inspectorwrap.append('h4').text('Edit tags')
+
             inspectorwrap
                 .data(['tag', 'value', ''])
                 .enter()
@@ -73,6 +75,7 @@ iD.Inspector = function() {
                 var inputs = row.append('div').attr('class','input-wrap').selectAll('input')
                     .data(function(d) { return [d, d]; });
                 inputs.enter().append('input')
+                    .property('type', 'text')
                     .attr('class', function(d, i) {
                         return i ? 'value' : 'key';
                     })
@@ -133,7 +136,7 @@ iD.Inspector = function() {
             selection.select('input').node().focus();
 
             selection.append('div')
-                .attr('class', 'buttons').call(drawbuttons);
+                .attr('class', 'inspector-buttons').call(drawbuttons);
 
             function drawbuttons(selection) {
                 selection.append('button')

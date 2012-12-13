@@ -49,8 +49,10 @@ iD.layerswitcher = function(map) {
         var opa = content
             .append('div')
             .attr('class', 'opacity-options-wrapper fillL2')
-            .html("<em>Layers</em>")
-            .append('ul')
+
+            opa.append('h4').text('Layers')
+
+            opa.append('ul')
                 .attr('class', 'opacity-options')
                 .selectAll('div.opacity')
                 .data(opacities)
@@ -76,6 +78,7 @@ iD.layerswitcher = function(map) {
                         .style('opacity', function(d) {
                             return d;
                         });
+
         // Make sure there is an active selection by default
         d3.select('.opacity-options li').classed('selected', true);
 
