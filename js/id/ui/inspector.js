@@ -58,25 +58,21 @@ iD.Inspector = function() {
             selection.append('div')
                 .attr('class', 'head inspector-inner').call(drawhead);
 
-            var table = selection
-                .append('div').attr('class', 'inspector-inner tag-table-wrap')
-                .append('table').attr('class', 'inspector');
+            var inspectorwrap = selection
+                .append('ul').attr('class', 'inspector-inner tag-table-wrap fillL2')
 
-            table.append('thead').append('tr').selectAll('th')
+            inspectorwrap
                 .data(['tag', 'value', ''])
                 .enter()
-                .append('th').text(String);
-
-            var tbody = table.append('tbody');
 
             function draw(data) {
-                var tr = tbody.selectAll('tr')
+                var tr = inspectorwrap.selectAll('li')
                     .data(d3.entries(data));
                 tr.exit().remove();
-                var row = tr.enter().append('tr');
-                var valuetds = row.selectAll('td')
+                var row = tr.enter().append('li');
+                var valuetds = row.selectAll('input')
                     .data(function(d) { return [d, d]; });
-                valuetds.enter().append('td').append('input')
+                valuetds.enter().append('input')
                     .property('value', function(d, i) { return d[i ? 'value' : 'key']; })
                     .on('keyup.update', function(d, i) {
                         d[i ? 'value' : 'key'] = this.value;
@@ -93,8 +89,8 @@ iD.Inspector = function() {
                                 });
                             }));
                     });
-
-                row.append('td').attr('class', 'tag-help').append('a')
+                row.append('button').attr('class','remove');
+                row.append('a').attr('class', 'tag-help button')
                     .text('?')
                     .attr('target', '_blank')
                     .attr('tabindex', -1)
@@ -118,7 +114,7 @@ iD.Inspector = function() {
             function grabtags() {
                 var grabbed = {};
                 function grab(d) { grabbed[d.key] = d.value; }
-                tbody.selectAll('td').each(grab);
+                inspectorwrap.selectAll('input').each(grab);
                 return grabbed;
             }
 
@@ -145,7 +141,7 @@ iD.Inspector = function() {
                         event.close(entity);
                     });
                 selection.append('button')
-                    .attr('class', 'delete wide action')
+                    .attr('class', 'delete wide action fr')
                     .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
                     .on('click', function(entity) { event.remove(entity); });
             }

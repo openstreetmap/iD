@@ -27,14 +27,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="16"
-     inkscape:cx="298.70699"
-     inkscape:cy="157.19463"
+     inkscape:zoom="11.313708"
+     inkscape:cx="291.89171"
+     inkscape:cy="165.02789"
      inkscape:document-units="px"
-     inkscape:current-layer="layer12"
-     showgrid="true"
-     inkscape:window-width="684"
-     inkscape:window-height="819"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1560"
+     inkscape:window-height="922"
      inkscape:window-x="227"
      inkscape:window-y="3"
      inkscape:window-maximized="0"
@@ -42,7 +42,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="false">
@@ -141,10 +141,6 @@
        orientation="0,1"
        position="145,60"
        id="guide47496" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="152,428"
-       id="guide47958" />
   </sodipodi:namedview>
   <metadata
      id="metadata12398">
@@ -154,7 +150,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -163,7 +159,16 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-25,-62.362183)"
-     style="display:inline" />
+     style="display:inline">
+    <rect
+       transform="translate(0,62.362185)"
+       style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect49418"
+       width="320"
+       height="200"
+       x="25"
+       y="-1.9140625e-06" />
+  </g>
   <g
      inkscape:groupmode="layer"
      id="layer12"
