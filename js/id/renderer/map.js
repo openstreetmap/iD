@@ -137,26 +137,32 @@ iD.Map = function() {
     }
 
     function drawHandles(waynodes, filter) {
-        var handles = g.hit.selectAll('image.handle')
+        var handles = g.hit.selectAll('circle.handle')
             .filter(filter)
             .data(waynodes, key);
 
         handles.exit().remove();
 
-        handles.enter().insert('image', ':first-child')
+        handles.enter().insert('circle', ':first-child')
             .attr({
-                width: 6,
-                height: 6,
-                'class': 'handle',
-                'xlink:href': 'css/handle.png'
+                'class': 'handle'
             });
 
         handles.attr('transform', function(entity) {
                 var p = projection(entity.loc);
                 return 'translate(' + [~~p[0], ~~p[1]] +
-                    ') translate(-3, -3) rotate(45, 3, 3)';
+                    ')';
             })
-            .classed('active', classActive);
+            // This doesn't work, need to figure out a better way to make attribute changes
+            .attr('r', function() {
+                if (handles.classed('active') || handles.classed('hover')) {
+                        return 8;
+                } else {
+                        return 4;
+                }
+            })
+            .classed('active', classActive)
+            .classed('hover', classHover);
     }
 
     function drawAccuracyHandles(waynodes, filter) {
@@ -165,7 +171,7 @@ iD.Map = function() {
             .data(waynodes, function (d) { return [d.way, d.index].join(","); });
         handles.exit().remove();
         handles.enter().append('circle')
-            .attr({ r: 2, 'class': 'accuracy-handle' });
+            .attr({ r: 3, 'class': 'accuracy-handle' });
         handles.attr('transform', function(entity) {
             var p = projection(entity.loc);
             return 'translate(' + [~~p[0], ~~p[1]] + ')';

@@ -20,14 +20,26 @@ g.marker.active circle {
 }
 
 /* interactive elements */
-image.handle {
+circle.handle {
     cursor: move;
+    fill:white;
+    stroke:#333;
+    fill-opacity:1;
+    stroke-width:2;
+    stroke-opacity: 1;
+}
+
+circle.handle.hover {
+}
+
+circle.handle.active {
+    fill: #6bc641;
 }
 
 circle.accuracy-handle {
-    fill:#DF2D2D;
-    stroke:#DF2D2D;
-    fill-opacity:0.2;
+    fill:#aaa;
+    stroke:#333;
+    fill-opacity:1;
     stroke-width:1;
 }
 
