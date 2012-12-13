@@ -95,8 +95,9 @@ iD.modes.DrawArea = function(wayId) {
             controller.enter(iD.modes.Browse());
         }
 
-        map.surface.on('mousemove.drawarea', mousemove);
-        map.surface.on('click.drawarea', click);
+        map.surface
+            .on('mousemove.drawarea', mousemove)
+            .on('click.drawarea', click);
 
         map.keybinding()
             .on('⎋.drawarea', esc)
@@ -106,8 +107,9 @@ iD.modes.DrawArea = function(wayId) {
     };
 
     mode.exit = function() {
-        mode.map.hint(false);
-        mode.map.fastEnable(true);
+        mode.map
+            .hint(false)
+            .fastEnable(true);
 
         mode.map.surface
             .on('mousemove.drawarea', null)

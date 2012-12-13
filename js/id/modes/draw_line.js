@@ -24,11 +24,11 @@ iD.modes.DrawLine = function(wayId, direction) {
             iD.actions.AddNode(node),
             iD.actions.AddWayNode(wayId, node.id, index));
 
-        map.surface.on('mousemove.drawline', function() {
+        function mousemove() {
             history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
-        });
+        }
 
-        map.surface.on('click.drawline', function() {
+        function click() {
             var datum = d3.select(d3.event.target).datum() || {};
 
             if (datum.id === tailId) {
@@ -72,7 +72,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
                 controller.enter(iD.modes.DrawLine(wayId, direction));
             }
-        });
+        }
 
         function esc() {
             history.replace(
@@ -107,6 +107,10 @@ iD.modes.DrawLine = function(wayId, direction) {
             history.replace(iD.actions.DeleteNode(node.id));
             controller.enter(iD.modes.Browse());
         }
+
+        map.surface
+            .on('mousemove.drawline', mousemove)
+            .on('click.drawline', click);
 
         map.keybinding()
             .on('⎋.drawline', esc)
