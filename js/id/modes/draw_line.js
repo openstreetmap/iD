@@ -1,6 +1,6 @@
-iD.modes.DrawRoad = function(wayId, direction) {
+iD.modes.DrawLine = function(wayId, direction) {
     var mode = {
-        button: 'road'
+        button: 'line'
     };
 
     mode.enter = function() {
@@ -16,19 +16,19 @@ iD.modes.DrawRoad = function(wayId, direction) {
 
         map.dblclickEnable(false)
             .fastEnable(false)
-            .hint('Click to add more points to the road. ' +
-                      'Click on other roads to connect to them, and double-click to ' +
-                      'end the road.');
+            .hint('Click to add more points to the line. ' +
+                      'Click on other lines to connect to them, and double-click to ' +
+                      'end the line.');
 
         history.perform(
             iD.actions.AddNode(node),
             iD.actions.AddWayNode(wayId, node.id, index));
 
-        map.surface.on('mousemove.drawroad', function() {
+        map.surface.on('mousemove.drawline', function() {
             history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
         });
 
-        map.surface.on('click.drawroad', function() {
+        map.surface.on('click.drawline', function() {
             var datum = d3.select(d3.event.target).datum() || {};
 
             if (datum.id === tailId) {
@@ -36,7 +36,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
                 history.replace(
                     iD.actions.DeleteNode(node.id),
                     iD.actions.AddWayNode(wayId, tailId, index),
-                    'added to a road');
+                    'added to a line');
 
                 controller.enter(iD.modes.Select(way));
 
@@ -51,9 +51,9 @@ iD.modes.DrawRoad = function(wayId, direction) {
                 history.replace(
                     iD.actions.DeleteNode(node.id),
                     iD.actions.AddWayNode(wayId, datum.id, index),
-                    'added to a road');
+                    'added to a line');
 
-                controller.enter(iD.modes.DrawRoad(wayId, direction));
+                controller.enter(iD.modes.DrawLine(wayId, direction));
 
             } else if (datum.type === 'way') {
                 // connect the way to an existing way
@@ -61,16 +61,16 @@ iD.modes.DrawRoad = function(wayId, direction) {
 
                 history.replace(
                     iD.actions.AddWayNode(datum.id, node.id, connectedIndex),
-                    'added to a road');
+                    'added to a line');
 
-                controller.enter(iD.modes.DrawRoad(wayId, direction));
+                controller.enter(iD.modes.DrawLine(wayId, direction));
 
             } else {
                 history.replace(
                     iD.actions.Noop(),
-                    'added to a road');
+                    'added to a line');
 
-                controller.enter(iD.modes.DrawRoad(wayId, direction));
+                controller.enter(iD.modes.DrawLine(wayId, direction));
             }
         });
 
@@ -92,7 +92,7 @@ iD.modes.DrawRoad = function(wayId, direction) {
                 history.replace(iD.actions.DeleteWay(wayId));
                 controller.enter(iD.modes.Browse());
             } else {
-                controller.enter(iD.modes.DrawRoad(wayId, direction));
+                controller.enter(iD.modes.DrawLine(wayId, direction));
             }
         }
 
@@ -108,10 +108,10 @@ iD.modes.DrawRoad = function(wayId, direction) {
             controller.enter(iD.modes.Browse());
         }
 
-        map.keybinding().on('⎋.drawroad', esc)
-            .on('⌫.drawroad', backspace)
-            .on('delete.drawroad', del)
-            .on('↩.drawroad', ret);
+        map.keybinding().on('⎋.drawline', esc)
+            .on('⌫.drawline', backspace)
+            .on('delete.drawline', del)
+            .on('↩.drawline', ret);
     };
 
     mode.exit = function() {
@@ -119,12 +119,12 @@ iD.modes.DrawRoad = function(wayId, direction) {
         mode.map.fastEnable(true);
 
         mode.map.surface
-            .on('mousemove.drawroad', null)
-            .on('click.drawroad', null);
-        mode.map.keybinding().on('⎋.drawroad', null)
-            .on('⌫.drawroad', null)
-            .on('delete.drawroad', null)
-            .on('↩.drawroad', null);
+            .on('mousemove.drawline', null)
+            .on('click.drawline', null);
+        mode.map.keybinding().on('⎋.drawline', null)
+            .on('⌫.drawline', null)
+            .on('delete.drawline', null)
+            .on('↩.drawline', null);
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);

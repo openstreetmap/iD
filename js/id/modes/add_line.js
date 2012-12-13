@@ -1,9 +1,9 @@
-iD.modes.AddRoad = function() {
+iD.modes.AddLine = function() {
     var mode = {
-        id: 'add-road',
-        button: 'road',
-        title: 'Road',
-        description: 'Roads can be highways, streets, pedestrian paths, or even canals.'
+        id: 'add-line',
+        button: 'line',
+        title: 'Line',
+        description: 'Lines can be highways, streets, pedestrian paths, or even canals.'
     };
 
     mode.enter = function() {
@@ -59,7 +59,7 @@ iD.modes.AddRoad = function() {
                     'started a road');
             }
 
-            controller.enter(iD.modes.DrawRoad(way.id, direction));
+            controller.enter(iD.modes.DrawLine(way.id, direction));
         });
 
         map.keybinding().on('⎋.addroad', function() {
