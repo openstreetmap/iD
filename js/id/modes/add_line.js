@@ -15,7 +15,7 @@ iD.modes.AddLine = function() {
         map.dblclickEnable(false)
             .hint('Click on the map to start drawing an road, path, or route.');
 
-        map.surface.on('click.addroad', function() {
+        map.surface.on('click.addline', function() {
             var datum = d3.select(d3.event.target).datum() || {},
                 way = iD.Way({ tags: { highway: 'residential' } }),
                 direction = 'forward';
@@ -62,7 +62,7 @@ iD.modes.AddLine = function() {
             controller.enter(iD.modes.DrawLine(way.id, direction));
         });
 
-        map.keybinding().on('⎋.addroad', function() {
+        map.keybinding().on('⎋.addline', function() {
             controller.exit();
         });
     };
@@ -70,8 +70,8 @@ iD.modes.AddLine = function() {
     mode.exit = function() {
         mode.map.dblclickEnable(true);
         mode.map.hint(false);
-        mode.map.surface.on('click.addroad', null);
-        mode.map.keybinding().on('⎋.addroad', null);
+        mode.map.surface.on('click.addline', null);
+        mode.map.keybinding().on('⎋.addline', null);
     };
 
     return mode;
