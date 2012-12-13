@@ -251,7 +251,7 @@ button.action .label {
 /* Definitions for every icon */
 .icon.browse     { background-position:   0px 0px;}
 .icon.add-place  { background-position: -20px 0px;}
-.icon.add-road   { background-position: -40px 0px;}
+.icon.add-line   { background-position: -40px 0px;}
 .icon.add-area   { background-position: -60px 0px;}
 .icon.undo       { background-position: -80px 0px;}
 .icon.redo       { background-position: -100px 0px;}
@@ -268,7 +268,7 @@ button.action .label {
 
 .active .icon.browse     { background-position:   0px -20px;}
 .active .icon.add-place  { background-position: -20px -20px;}
-.active .icon.add-road   { background-position: -40px -20px;}
+.active .icon.add-line   { background-position: -40px -20px;}
 .active .icon.add-area   { background-position: -60px -20px;}
 .active .icon.undo       { background-position: -80px -20px;}
 .active .icon.redo       { background-position: -100px -20px;}
@@ -285,7 +285,7 @@ button.action .label {
 
 button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-place  { background-position: -20px -40px;}
-button[disabled] .icon.add-road   { background-position: -40px -40px;}
+button[disabled] .icon.add-line   { background-position: -40px -40px;}
 button[disabled] .icon.add-area   { background-position: -60px -40px;}
 button[disabled] .icon.undo       { background-position: -80px -40px;}
 button[disabled] .icon.redo       { background-position: -100px -40px;}

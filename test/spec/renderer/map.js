@@ -56,8 +56,8 @@ describe('Map', function() {
         it('reports extent', function() {
             expect(map.size([100, 100])).to.equal(map);
             expect(map.center([0, 0])).to.equal(map);
-            expect(map.extent()[0][0]).to.be.closeTo(-36, 0.5);
-            expect(map.extent()[1][0]).to.be.closeTo(36, 0.5);
+            expect(map.extent()[0][0]).to.be.closeTo(-17.5, 0.5);
+            expect(map.extent()[1][0]).to.be.closeTo(17.5, 0.5);
         });
     });
 

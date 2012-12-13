@@ -29,7 +29,7 @@ window.iD = function(container) {
             .attr('class', 'buttons-joined');
 
         var buttons = buttons_joined.selectAll('button.add-button')
-            .data([iD.modes.Browse(), iD.modes.AddPlace(), iD.modes.AddRoad(), iD.modes.AddArea()])
+            .data([iD.modes.Browse(), iD.modes.AddPlace(), iD.modes.AddLine(), iD.modes.AddArea()])
             .enter().append('button')
                 .attr('class', function (mode) { return mode.title + ' add-button'; })
             .attr('data-original-title', function (mode) { return mode.description; })
@@ -131,7 +131,7 @@ window.iD = function(container) {
                 .on('click', function(d) { return d[2](); })
                 .append('span')
                     .attr('class', function(d) {
-                        return d[0] + ' icon'
+                        return d[0] + ' icon';
                     });
 
         var gc = this.append('div').attr('class', 'geocode-control map-control');
@@ -139,18 +139,11 @@ window.iD = function(container) {
             .attr('class','narrow')
             .html("<span class='geocode icon'></span>")
             .on('click', function() {
-                d3.select(this)
-                    .classed('active', function() {
-                        if ( !gcForm.classed('hide')) {
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    });
-                    gcForm.classed('hide', function() {
-                        return !gcForm.classed('hide');
-                    });
-                    d3.select('.map-overlay input').node().focus();
+                d3.select(this).classed('active', gcForm.classed('hide'));
+                gcForm.classed('hide', !gcForm.classed('hide'));
+
+                if (!gcForm.classed('hide')) d3.select('.map-overlay input').node().focus();
+                else map.surface.node().focus();
             });
         var gcForm = gc.append('form');
         gcForm.attr('class','content map-overlay hide')
@@ -164,6 +157,7 @@ window.iD = function(container) {
                     d3.event.preventDefault();
                     d3.json('http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
                         encodeURIComponent(this.value) + '.json', function(err, resp) {
+                        gc.select('button').on('click').apply(gc.select('button').node());
                         map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
                     });
                 });
@@ -206,7 +200,7 @@ window.iD = function(container) {
                 controller.enter(iD.modes.AddPlace());
             })
             .on('r', function(evt, mods) {
-                controller.enter(iD.modes.AddRoad());
+                controller.enter(iD.modes.AddLine());
             })
             .on('z', function(evt, mods) {
                 if (mods === '⇧⌘') history.redo();
