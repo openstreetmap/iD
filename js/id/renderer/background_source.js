@@ -28,6 +28,12 @@ iD.BackgroundSource.template = function(template, subdomains, scaleExtent) {
     return generator;
 };
 
+iD.BackgroundSource.Custom = function() {
+    var template = window.prompt('Enter a tile template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.');
+    if (!template) return null;
+    return iD.BackgroundSource.template(template, null, [0, 20]);
+};
+
 iD.BackgroundSource.Bing = iD.BackgroundSource.template(
     'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
     [0, 1, 2, 3], [0, 20]);

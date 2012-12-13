@@ -12,6 +12,10 @@ iD.layerswitcher = function(map) {
             name: 'OSM',
             source: iD.BackgroundSource.OSM,
             description: 'The default OpenStreetMap layer.'
+        }, {
+            name: 'Custom',
+            source: iD.BackgroundSource.Custom,
+            description: 'A custom layer (requires configuration)'
         }],
         opacities = [1, 0.5, 0];
 
@@ -101,6 +105,12 @@ iD.layerswitcher = function(map) {
                     .call(bootstrap.tooltip().placement('right'))
                     .on('click.set-source', function(d) {
                         d3.event.preventDefault();
+                        if (d.name === 'Custom') {
+                            var configured = d.source();
+                            if (!configured) return;
+                            d.source = configured;
+                            d.name = 'Custom (configured)';
+                        }
                         map.background.source(d.source);
                         map.redraw();
                         selectLayer(d);
