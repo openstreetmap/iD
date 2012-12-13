@@ -13,16 +13,7 @@ iD.layerswitcher = function(map) {
             source: iD.BackgroundSource.OSM,
             description: 'The default OpenStreetMap layer.'
         }],
-        opacities = [{
-            level: 1,
-            label: "0%"
-        }, {
-            level: 0.5,
-            label: "50%"
-        }, {
-            level: 0,
-            label: "100%"
-        }];
+        opacities = [1, 0.5, 0];
 
     function layerswitcher(selection) {
 
@@ -70,13 +61,13 @@ iD.layerswitcher = function(map) {
                 .enter()
                 .append('li')
                     .attr('data-original-title', function(d) {
-                        return d.label + " opacity";
+                        return (d * 100) + "% opacity";
                     })
                     .on('click.set-opacity', function(d) {
                         d3.select('#tile-g')
                             .transition()
-                            .style('opacity', d.level)
-                            .attr('data-opacity', d.level);
+                            .style('opacity', d)
+                            .attr('data-opacity', d);
                         d3.selectAll('.opacity-options li')
                             .classed('selected', false);
                         d3.select(this)
@@ -87,7 +78,7 @@ iD.layerswitcher = function(map) {
                     .append('div')
                         .attr('class', 'opacity')
                         .style('opacity', function(d) {
-                            return d.level;
+                            return d;
                         });
         // Make sure there is an active selection by default
         d3.select('.opacity-options li').classed('selected', true);
