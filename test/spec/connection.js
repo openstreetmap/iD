@@ -49,12 +49,5 @@ describe('Connection', function() {
           });
       });
 
-      it('passes errors for 404s', function(done) {
-          c.loadFromURL('404', function(err, graph) {
-              expect(graph).to.be.a('Error');
-              done();
-          });
-      });
-
   });
 });
