@@ -36,7 +36,6 @@ window.iD = function(container) {
             .call(bootstrap.tooltip().placement('bottom'))
             .on('click', function (mode) { controller.enter(mode); });
 
-
         map.on('move.disable-buttons', function() {
             if (map.zoom() < 16) {
                 buttons.attr('disabled', 'disabled');

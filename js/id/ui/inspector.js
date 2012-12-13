@@ -13,19 +13,6 @@ iD.Inspector = function() {
                 d.type + '/' + d.osmId();
             })
             .text('View on OSM');
-        selection.append('a')
-            .attr({ 'class': 'permalink', href: '#' }).text('XML')
-            .on('click', function(d) {
-                d3.event.stopPropagation();
-                iD.util.codeWindow(iD.format.XML.mapping(d));
-            });
-        selection.append('a')
-            .attr({ 'class': 'permalink', href: '#' }).text('GeoJSON')
-            .on('click', function(d) {
-                d3.event.stopPropagation();
-                iD.util.codeWindow(JSON.stringify(
-                    iD.format.GeoJSON.mapping(d), null, 2));
-            });
         if (selection.datum().type === 'way') {
             selection.append('a')
                 .attr('class', 'permalink')
@@ -104,7 +91,10 @@ iD.Inspector = function() {
 
             // Remove any blank key-values
             function clean(x) {
-                for (var i in x) if (!i) delete x[i];
+                for (var i in x) {
+                    // undefined is cast to a string as an object key
+                    if (!i || i === 'undefined') delete x[i];
+                }
                 return x;
             }
 
