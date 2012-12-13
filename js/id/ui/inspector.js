@@ -48,7 +48,7 @@ iD.Inspector = function() {
             var inspectorwrap = selection
                 .append('ul').attr('class', 'inspector-inner tag-wrap fillL2');
 
-            inspectorwrap.append('h4').text('Edit tags')
+            inspectorwrap.append('h4').text('Edit tags');
 
             inspectorwrap
                 .data(['tag', 'value', ''])
