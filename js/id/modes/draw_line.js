@@ -108,23 +108,28 @@ iD.modes.DrawLine = function(wayId, direction) {
             controller.enter(iD.modes.Browse());
         }
 
-        map.keybinding().on('⎋.drawline', esc)
+        map.keybinding()
+            .on('⎋.drawline', esc)
             .on('⌫.drawline', backspace)
-            .on('delete.drawline', del)
+            .on('⌦.drawline', del)
             .on('↩.drawline', ret);
     };
 
     mode.exit = function() {
-        mode.map.hint(false);
-        mode.map.fastEnable(true);
+        mode.map
+            .hint(false)
+            .fastEnable(true);
 
         mode.map.surface
             .on('mousemove.drawline', null)
             .on('click.drawline', null);
-        mode.map.keybinding().on('⎋.drawline', null)
+
+        mode.map.keybinding()
+            .on('⎋.drawline', null)
             .on('⌫.drawline', null)
-            .on('delete.drawline', null)
+            .on('⌦.drawline', null)
             .on('↩.drawline', null);
+
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);
