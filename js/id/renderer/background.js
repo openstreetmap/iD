@@ -32,7 +32,7 @@ iD.Background = function() {
     function background() {
         var tiles = tile
             .scale(projection.scale())
-            .scaleExtent(source.scaleExtent || [0, 17])
+            .scaleExtent(source.scaleExtent || [1, 17])
             .translate(projection.translate())(),
             scaleExtent = tile.scaleExtent(),
             z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),

@@ -63,7 +63,7 @@ iD.modes.DrawArea = function(wayId) {
             controller.enter(iD.modes.Browse());
         }
 
-        function del() {
+        function backspace() {
             d3.event.preventDefault();
 
             history.replace(
@@ -80,10 +80,27 @@ iD.modes.DrawArea = function(wayId) {
             }
         }
 
+        function del() {
+            d3.event.preventDefault();
+            history.replace(iD.actions.DeleteWay(wayId));
+            controller.enter(iD.modes.Browse());
+        }
+
+        function ret() {
+            d3.event.preventDefault();
+            history.replace(
+                    iD.actions.DeleteNode(node.id),
+                    iD.actions.AddWayNode(way.id, tailId, -1),
+                    'added to an area');
+            controller.enter(iD.modes.Browse());
+        }
+
         map.surface.on('mousemove.drawarea', mousemove);
         map.surface.on('click.drawarea', click);
-        map.keybinding().on('⎋.drawarea', esc);
-        map.keybinding().on('⌫.drawarea', del);
+        map.keybinding().on('⎋.drawarea', esc)
+            .on('⌫.drawarea', backspace)
+            .on('delete.drawarea', del)
+            .on('↩.drawarea', ret);
     };
 
     mode.exit = function() {
@@ -93,7 +110,9 @@ iD.modes.DrawArea = function(wayId) {
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);
         mode.map.keybinding().on('⎋.drawarea', null)
-            .on('⌫.drawarea', null);
+            .on('⌫.drawarea', null)
+            .on('delete.drawarea', null)
+            .on('↩.drawarea', null);
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);

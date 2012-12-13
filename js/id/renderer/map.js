@@ -5,7 +5,7 @@ iD.Map = function() {
         selection = null, hover = null,
         translateStart,
         keybinding,
-        projection = d3.geo.mercator(),
+        projection = d3.geo.mercator().scale(1024),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
@@ -289,7 +289,11 @@ iD.Map = function() {
 
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
-            if (!dblclickEnabled) return;
+            if (!dblclickEnabled) {
+                zoom.scale(projection.scale())
+                    .translate(projection.translate());
+                return d3.event.sourceEvent.preventDefault();
+            }
         }
         var fast = (d3.event.scale === projection.scale() && fastEnabled);
         projection

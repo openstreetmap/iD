@@ -21,11 +21,14 @@ iD.modes.Select = function (entity) {
                 mode.history.perform(iD.actions.Noop());
             }
 
-            entity.nodes.forEach(function(node) {
-                var start = mode.map.projection(node.loc);
-                var end = mode.map.projection.invert([start[0] + d3.event.dx, start[1] + d3.event.dy]);
-                node.loc = end;
-                mode.history.replace(iD.actions.Move(node, end));
+            _.uniq(_.pluck(entity.nodes, 'id'))
+            .forEach(function(id) {
+                var node = mode.history.graph().entity(id),
+                    start = mode.map.projection(node.loc),
+                    end = mode.map.projection.invert([
+                        start[0] + d3.event.dx,
+                        start[1] + d3.event.dy]);
+                mode.history.replace(iD.actions.Move(id, end));
             });
         })
         .on('dragend', function () {
