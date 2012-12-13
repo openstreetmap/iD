@@ -25,7 +25,7 @@ iD.modes.DrawLine = function(wayId, direction) {
             iD.actions.AddWayNode(wayId, node.id, index));
 
         function mousemove() {
-            history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
+            history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
         }
 
         function click() {

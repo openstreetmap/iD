@@ -21,11 +21,11 @@ iD.modes._dragFeatures = function(mode) {
                 } else {
                     dragging = entity;
                     mode.history.perform(
-                        iD.actions.Move(dragging.id, loc));
+                        iD.actions.MoveNode(dragging.id, loc));
                 }
             }
 
-            mode.history.replace(iD.actions.Move(dragging.id, loc));
+            mode.history.replace(iD.actions.MoveNode(dragging.id, loc));
         })
         .on('dragend', function (entity) {
             if (!dragging) return;
