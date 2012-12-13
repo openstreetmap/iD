@@ -28,8 +28,9 @@ iD.geocoder = function() {
         function setVisible(show) {
             button.classed('active', show);
             gcForm.classed('hide', !show);
-            if (show) d3.select('.map-overlay input').node().focus();
-            else map.surface.node().focus();
+            var input_node = d3.select('.map-overlay input').node();
+            if (show) input_node.focus();
+            else input_node.blur();
         }
 
         var button = selection.append('button')
