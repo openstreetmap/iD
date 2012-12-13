@@ -137,14 +137,16 @@ iD.Inspector = function() {
             selection.append('div')
                 .attr('class', 'inspector-buttons').call(drawbuttons);
 
+            function apply(entity) {
+                event.changeTags(entity, unentries(grabtags()));
+                event.close(entity);
+            }
+
             function drawbuttons(selection) {
                 selection.append('button')
                     .attr('class', 'apply wide action')
                     .html("<span class='icon icon-pre-text apply'></span><span class='label'>Apply</span>")
-                    .on('click', function(entity) {
-                        event.changeTags(entity, unentries(grabtags()));
-                        event.close(entity);
-                    });
+                    .on('click', apply);
                 selection.append('button')
                     .attr('class', 'delete wide action fr')
                     .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
