@@ -12,7 +12,6 @@ iD.Map = function() {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
-        dragging = false,
         fastEnabled = true,
         notice,
         background = iD.Background()
