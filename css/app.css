@@ -54,10 +54,6 @@ a:hover {
     color:#222;
 }
 
-table th {
-    text-align:left;
-}
-
 input[type=text] {
     background-color: white;
     width:150px;
@@ -71,6 +67,19 @@ input[type=text] {
 
 input[type=text]:focus {
     border-color:#aaa;
+}
+
+/* tables */
+
+table {
+    background-color: white;
+    border-collapse: collapse;
+    width:100%;
+    border-spacing:0;
+}
+
+table th {
+    text-align:left;
 }
 
 /* UI Lists
@@ -110,13 +119,12 @@ a.selected {
     color: white;
 }
 
+.fl { float: left;}
+.fr { float: right;}
+
 div.hide,
 form.hide {
     display:none;
-}
-
-button:hover form.hide {
-    display: block;
 }
 
 /* Buttons */
@@ -249,6 +257,7 @@ button.action .label {
 }
 
 /* Definitions for every icon */
+
 .icon.browse     { background-position:   0px 0px;}
 .icon.add-place  { background-position: -20px 0px;}
 .icon.add-line   { background-position: -40px 0px;}
@@ -365,12 +374,6 @@ button.Browse .label {
     width:150px;
 }
 
-.inspector-wrap table {
-    border-collapse: collapse;
-    width:100%;
-    border-spacing:0;
-}
-
 .inspector-wrap .tag-table-wrap {
     max-height:350px;
     border-top: 1px solid #ccc;
@@ -383,7 +386,6 @@ button.Browse .label {
 }
 
 .inspector-wrap .buttons {
-    margin-top: 10px;
     border-top: 1px solid #ccc;
 }
 
