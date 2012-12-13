@@ -59,11 +59,11 @@ iD.Inspector = function() {
                 .attr('class', 'head inspector-inner').call(drawhead);
 
             var inspectorwrap = selection
-                .append('ul').attr('class', 'inspector-inner tag-wrap fillL2')
+                .append('ul').attr('class', 'inspector-inner tag-wrap fillL2');
 
             inspectorwrap
                 .data(['tag', 'value', ''])
-                .enter()
+                .enter();
 
             function draw(data) {
                 var tr = inspectorwrap.selectAll('li')
