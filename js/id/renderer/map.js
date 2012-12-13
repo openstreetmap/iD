@@ -283,7 +283,11 @@ iD.Map = function() {
 
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
-            if (!dblclickEnabled) return;
+            if (!dblclickEnabled) {
+                zoom.scale(projection.scale())
+                    .translate(projection.translate());
+                return d3.event.sourceEvent.preventDefault();
+            }
         }
         var fast = (d3.event.scale === projection.scale() && fastEnabled);
         projection
