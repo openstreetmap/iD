@@ -154,12 +154,8 @@ iD.Map = function() {
                     ')';
             })
             // This doesn't work, need to figure out a better way to make attribute changes
-            .attr('r', function() {
-                if (handles.classed('active') || handles.classed('hover')) {
-                        return 8;
-                } else {
-                        return 4;
-                }
+            .attr('r', function(d) {
+                return d.id === hover ? 8: 4;
             })
             .classed('active', classActive)
             .classed('hover', classHover);
