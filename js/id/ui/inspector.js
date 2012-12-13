@@ -52,9 +52,15 @@ iD.Inspector = function() {
                 .data(['tag', 'value', ''])
                 .enter();
 
+            function removeTag(d) {
+                var tags = pad(grabtags());
+                delete tags[d.key];
+                draw(tags);
+            }
+
             function draw(data) {
                 var tr = inspectorwrap.selectAll('li')
-                    .data(d3.entries(data));
+                    .data(d3.entries(data), function(d) { return [d.key, d.value]; });
                 tr.exit().remove();
                 var row = tr.enter().append('li').attr('class','tag-row');
                 var inputs = row.append('div').attr('class','input-wrap').selectAll('input')
@@ -79,7 +85,7 @@ iD.Inspector = function() {
                                 });
                             }));
                     });
-                row.append('button').attr('class','remove minor');
+                row.append('button').attr('class','remove minor').on('click', removeTag);
                 row.append('button').attr('class', 'tag-help minor').append('a')
                     .text('?')
                     .attr('target', '_blank')
@@ -106,7 +112,7 @@ iD.Inspector = function() {
 
             function grabtags() {
                 var grabbed = {};
-                function grab(d) { grabbed[d.key] = d.value; }
+                function grab(d) { if (d.key !== undefined) grabbed[d.key] = d.value; }
                 inspectorwrap.selectAll('input').each(grab);
                 return grabbed;
             }
