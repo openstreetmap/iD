@@ -171,6 +171,12 @@ button.Browse {
     width:40px;
 }
 
+button.minor {
+    height: 20px;
+    width: 20px;
+    margin: 0;
+}
+
 .buttons-joined {
     display: inline-block;
     margin:10px;
@@ -356,37 +362,52 @@ button.Browse .label {
     padding: 10px;
 }
 
+.inspector-inner button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.inspector-inner button.tag-help {
+    right: 40px;
+}
+
 .inspector-wrap a.permalink {
     text-decoration:none;
     margin-right:1em;
 }
 
-.inspector tbody td {
-    border: 1px solid #ccc;
-    width:150px;
+.inspector-inner.tag-wrap {
+    max-height: 200px;
+    overflow: auto;
 }
 
-.inspector input {
+.tag-row {
+    width: 100%;
+    padding-right: 80px;
+    position: relative;
+    height: 30px;
+}
+
+.input-wrap {
+    position: absolute;
+    left: 0px;
+    right: 80px;
+    }
+
+.tag-row input {
+    width: 50%;
     margin:0;
+    height: 30px;
     padding:4px;
-    border:0;
+    border:1px solid #ccc;
+    border-right: 0;
+    border-top: 0;
     background:#fff;
-    width:150px;
 }
 
-.inspector-wrap .tag-table-wrap {
-    max-height:350px;
-    border-top: 1px solid #ccc;
-    overflow:auto;
-}
-
-.inspector-wrap table td {
-    padding:0;
-    border-spacing:0;
-}
-
-.inspector-wrap .buttons {
-    border-top: 1px solid #ccc;
+.tag-row input.value {
+    border-right: 1px solid #ccc;
 }
 
 /* Map Controls */

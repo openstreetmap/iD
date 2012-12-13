@@ -59,7 +59,7 @@ iD.Inspector = function() {
                 .attr('class', 'head inspector-inner').call(drawhead);
 
             var inspectorwrap = selection
-                .append('ul').attr('class', 'inspector-inner tag-table-wrap fillL2')
+                .append('ul').attr('class', 'inspector-inner tag-wrap fillL2')
 
             inspectorwrap
                 .data(['tag', 'value', ''])
@@ -69,10 +69,13 @@ iD.Inspector = function() {
                 var tr = inspectorwrap.selectAll('li')
                     .data(d3.entries(data));
                 tr.exit().remove();
-                var row = tr.enter().append('li');
-                var valuetds = row.selectAll('input')
+                var row = tr.enter().append('li').attr('class','tag-row');
+                var inputs = row.append('div').attr('class','input-wrap').selectAll('input')
                     .data(function(d) { return [d, d]; });
-                valuetds.enter().append('input')
+                inputs.enter().append('input')
+                    .attr('class', function(d, i) {
+                        return i ? 'value' : 'key';
+                    })
                     .property('value', function(d, i) { return d[i ? 'value' : 'key']; })
                     .on('keyup.update', function(d, i) {
                         d[i ? 'value' : 'key'] = this.value;
@@ -89,8 +92,8 @@ iD.Inspector = function() {
                                 });
                             }));
                     });
-                row.append('button').attr('class','remove');
-                row.append('a').attr('class', 'tag-help button')
+                row.append('button').attr('class','remove minor');
+                row.append('button').attr('class', 'tag-help minor').append('a')
                     .text('?')
                     .attr('target', '_blank')
                     .attr('tabindex', -1)
