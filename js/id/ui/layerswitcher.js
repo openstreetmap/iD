@@ -20,37 +20,29 @@ iD.layerswitcher = function(map) {
         var content = selection
             .append('div').attr('class', 'content map-overlay hide');
 
-        var toggle = selection
+        var button = selection
             .append('button')
             .attr('class', 'narrow')
             .html("<span class='layers icon'></span>")
-            .on('click.toggle', function() {
-                d3.select(this)
-                    .classed('active', function() {
-                        return content.classed('hide');
-                    });
-                content.classed('hide', function() {
-                    if (content.classed('hide')) clickoutside(selection);
-                    else {
-                        d3.select('body').on('click.outside', null);
-                        selection.on('click.inside', null);
-                    }
-                    return !content.classed('hide');
-                });
-            });
+            .on('click.layerswitcher-toggle', toggle);
 
-        function clickoutside(selection) {
-            selection
-                .on('click.inside', function() {
-                    return d3.event.stopPropagation();
-                });
-            d3.select('body')
-                .on('click.outside', function() {
-                    toggle.on('click.toggle').apply(toggle.node(), d3.event);
-                });
+        function show() { setVisible(true); }
+        function hide() { setVisible(false); }
+        function toggle() { setVisible(content.classed('hide')); }
+
+        function setVisible(show) {
+            button.classed('active', show);
+            content.classed('hide', !show);
         }
 
-        opa = content
+        function clickoutside(selection) {
+            selection.on('click.layerswitcher-inside', function() {
+                return d3.event.stopPropagation();
+            });
+            d3.select('body').on('click.layerswitcher-outside', hide);
+        }
+
+        var opa = content
             .append('div')
             .attr('class', 'opacity-options-wrapper fillL2')
             .html("<em>Layers</em>")
@@ -116,6 +108,8 @@ iD.layerswitcher = function(map) {
                     .insert('span')
                     .attr('class','icon toggle');
 
+
+        selection.call(clickoutside);
         selectLayer(map.background.source());
     }
 

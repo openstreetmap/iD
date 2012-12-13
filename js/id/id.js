@@ -134,33 +134,8 @@ window.iD = function(container) {
                         return d[0] + ' icon';
                     });
 
-        var gc = this.append('div').attr('class', 'geocode-control map-control');
-        gc.append('button')
-            .attr('class','narrow')
-            .html("<span class='geocode icon'></span>")
-            .on('click', function() {
-                d3.select(this).classed('active', gcForm.classed('hide'));
-                gcForm.classed('hide', !gcForm.classed('hide'));
-
-                if (!gcForm.classed('hide')) d3.select('.map-overlay input').node().focus();
-                else map.surface.node().focus();
-            });
-        var gcForm = gc.append('form');
-        gcForm.attr('class','content map-overlay hide')
-            .append('input')
-                .attr({
-                    type: 'text',
-                    placeholder: 'find a place'
-                })
-                .on('keydown', function () {
-                    if (d3.event.keyCode !== 13) return;
-                    d3.event.preventDefault();
-                    d3.json('http://api.tiles.mapbox.com/v3/mapbox/geocode/' +
-                        encodeURIComponent(this.value) + '.json', function(err, resp) {
-                        gc.select('button').on('click').apply(gc.select('button').node());
-                        map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
-                    });
-                });
+        var gc = this.append('div').attr('class', 'geocode-control map-control')
+            .call(iD.geocoder().map(map));
 
         this.append('div').attr('class', 'map-control layerswitcher-control')
             .call(iD.layerswitcher(map));
