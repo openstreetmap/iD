@@ -96,7 +96,7 @@ iD.Map = function() {
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }
 
-        if (all.length > 200000) return editOff();
+        if (all.length > 10000) return editOff();
         else editOn();
 
         for (var i = 0; i < all.length; i++) {
