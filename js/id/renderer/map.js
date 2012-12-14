@@ -224,6 +224,7 @@ iD.Map = function() {
                 return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
             })
             .classed('active', classActive);
+        markers.classed('hover', classHover);
         markers.select('image').attr('xlink:href', iD.Style.markerimage);
     }
 

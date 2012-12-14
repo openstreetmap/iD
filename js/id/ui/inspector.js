@@ -88,9 +88,12 @@ iD.Inspector = function() {
                                 });
                             }));
                     });
-                row.append('button').attr('class','remove minor').on('click', removeTag);
+                row.append('button')
+                    .html("<span class='icon remove'></span>")
+                    .attr('class','remove minor')
+                    .on('click', removeTag);
                 row.append('button').attr('class', 'tag-help minor').append('a')
-                    .text('?')
+                    .html("<span class='icon inspect'></span>")
                     .attr('target', '_blank')
                     .attr('tabindex', -1)
                     .attr('href', function(d) {

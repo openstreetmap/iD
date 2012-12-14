@@ -9,14 +9,13 @@ path, image.marker {
 
 g.marker circle {
     fill:#fff;
-    stroke:#888;
-    stroke-width:1;
 }
 
+g.marker.hover circle,
 g.marker.active circle {
-    stroke-width:2;
-    stroke:#000;
-    fill:#FCFFAF;
+    fill:#ffff00;
+    stroke-width:4;
+    stroke:#fff
 }
 
 /* interactive elements */
@@ -33,7 +32,7 @@ circle.handle.hover {
 }
 
 circle.handle.active {
-    fill: #6bc641;
+    fill: #ffff00;
 }
 
 circle.accuracy-handle {

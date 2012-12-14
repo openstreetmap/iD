@@ -177,9 +177,17 @@ button.Browse {
 }
 
 button.minor {
+    border-radius:4px;
     height: 20px;
     width: 20px;
     margin: 5px;
+    border: 0;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+button.minor:hover {
+    background: white;
 }
 
 .buttons-joined {
@@ -355,7 +363,6 @@ button.Browse .label {
 .inspector-wrap {
     position:absolute;
     right: 0;
-    left: 530px;
     border-left:  1px solid #ccc;
     border-bottom: 1px solid #ccc;
     min-height: 60px;
@@ -378,7 +385,7 @@ button.Browse .label {
 }
 
 .inspector-inner button.tag-help {
-    right: 40px;
+    right: 30px;
 }
 
 .inspector-wrap a.permalink {
@@ -393,7 +400,7 @@ button.Browse .label {
 
 .tag-row {
     width: 100%;
-    padding-right: 80px;
+    padding-right: 70px;
     position: relative;
     height: 30px;
 }
@@ -591,6 +598,8 @@ div.typeahead {
     z-index: 9999;
     box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
     margin-top: -1px;
+    max-height: 120px;
+    overflow: auto;
 }
 
 div.typeahead a {
