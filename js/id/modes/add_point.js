@@ -1,7 +1,7 @@
-iD.modes.AddPlace = function() {
+iD.modes.AddPoint = function() {
     var mode = {
-        id: 'add-place',
-        title: 'Place',
+        id: 'add-point',
+        title: 'Point',
         description: 'Restaurants, monuments, and postal boxes are points.'
     };
 
@@ -12,27 +12,27 @@ iD.modes.AddPlace = function() {
             history = mode.history,
             controller = mode.controller;
 
-        map.hint('Click on the map to add a place.');
+        map.hint('Click on the map to add a point.');
 
-        map.surface.on('click.addplace', function() {
+        map.surface.on('click.addpoint', function() {
             var node = iD.Node({loc: map.mouseCoordinates(), _poi: true});
 
             history.perform(
                 iD.actions.AddNode(node),
-                'added a place');
+                'added a point');
 
             controller.enter(iD.modes.Select(node));
         });
 
-        map.keybinding().on('⎋.addplace', function() {
+        map.keybinding().on('⎋.addpoint', function() {
             controller.exit();
         });
     };
 
     mode.exit = function() {
         mode.map.hint(false);
-        mode.map.surface.on('click.addplace', null);
-        mode.map.keybinding().on('⎋.addplace', null);
+        mode.map.surface.on('click.addpoint', null);
+        mode.map.keybinding().on('⎋.addpoint', null);
         d3.select('#map').attr('class', null);
     };
 

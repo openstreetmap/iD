@@ -1,4 +1,4 @@
-describe("iD.modes.AddPlace", function () {
+describe("iD.modes.AddPoint", function () {
     var container, map, history, controller, mode;
 
     beforeEach(function () {
@@ -9,7 +9,7 @@ describe("iD.modes.AddPlace", function () {
 
         container.call(map);
 
-        mode = iD.modes.AddPlace();
+        mode = iD.modes.AddPoint();
         controller.enter(mode);
     });
 

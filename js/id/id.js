@@ -29,7 +29,7 @@ window.iD = function(container) {
             .attr('class', 'buttons-joined');
 
         var buttons = buttons_joined.selectAll('button.add-button')
-            .data([iD.modes.Browse(), iD.modes.AddPlace(), iD.modes.AddLine(), iD.modes.AddArea()])
+            .data([iD.modes.Browse(), iD.modes.AddPoint(), iD.modes.AddLine(), iD.modes.AddArea()])
             .enter().append('button')
                 .attr('class', function (mode) { return mode.title + ' add-button'; })
             .attr('data-original-title', function (mode) { return mode.description; })
@@ -198,7 +198,7 @@ window.iD = function(container) {
                 controller.enter(iD.modes.AddArea());
             })
             .on('p', function(evt, mods) {
-                controller.enter(iD.modes.AddPlace());
+                controller.enter(iD.modes.AddPoint());
             })
             .on('r', function(evt, mods) {
                 controller.enter(iD.modes.AddLine());

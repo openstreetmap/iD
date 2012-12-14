@@ -126,7 +126,7 @@ a.selected {
        cursor:url(../img/cursor-draw.png) 9 9, auto;
 }
 
-#map.add-place:hover {
+#map.add-point:hover {
        cursor:url(../img/cursor-draw-marker.png) 18 18, auto;
 }
 
@@ -295,7 +295,7 @@ button.action .label {
 /* Definitions for every icon */
 
 .icon.browse     { background-position:   0px 0px;}
-.icon.add-place  { background-position: -20px 0px;}
+.icon.add-point  { background-position: -20px 0px;}
 .icon.add-line   { background-position: -40px 0px;}
 .icon.add-area   { background-position: -60px 0px;}
 .icon.undo       { background-position: -80px 0px;}
@@ -312,7 +312,7 @@ button.action .label {
 .icon.layers     { background-position: -300px 0px;}
 
 /*.active .icon.browse     { background-position:   0px -20px;}
-.active .icon.add-place  { background-position: -20px -20px;}
+.active .icon.add-point  { background-position: -20px -20px;}
 .active .icon.add-line   { background-position: -40px -20px;}
 .active .icon.add-area   { background-position: -60px -20px;}
 .active .icon.undo       { background-position: -80px -20px;}
@@ -329,7 +329,7 @@ button.action .label {
 .active .icon.layers     { background-position: -300px -20px;}*/
 
 button[disabled] .icon.browse     { background-position:   0px -40px;}
-button[disabled] .icon.add-place  { background-position: -20px -40px;}
+button[disabled] .icon.add-point  { background-position: -20px -40px;}
 button[disabled] .icon.add-line   { background-position: -40px -40px;}
 button[disabled] .icon.add-area   { background-position: -60px -40px;}
 button[disabled] .icon.undo       { background-position: -80px -40px;}
