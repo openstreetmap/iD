@@ -56,7 +56,7 @@ iD.Map = function() {
         alength = arrow.node().getComputedTextLength();
         arrow.remove();
 
-        notice = iD.notice(d3.select('body')
+        notice = iD.notice(supersurface
             .append('div')
             .attr('class', 'notice'));
 
