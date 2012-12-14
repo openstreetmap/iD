@@ -1,0 +1,26 @@
+{
+  "name": "iD",
+  "version": "0.0.0",
+  "description": "a new editor for openstreetmap",
+  "main": "iD.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha-phantomjs test/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/systemed/iD.git"
+  },
+  "keywords": [
+    "editor",
+    "openstreetmap"
+  ],
+  "license": "BSD",
+  "devDependencies": {
+    "uglify-js": "~2.2.2",
+    "mocha-phantomjs": "~1.1.1"
+  }
+}
