@@ -38,6 +38,16 @@ iD.modes.DrawArea = function(wayId) {
 
                 controller.enter(iD.modes.Select(way));
 
+            } else if (datum.id === headId) {
+
+                // finish the way
+                history.replace(
+                        iD.actions.DeleteNode(node.id),
+                        iD.actions.AddWayNode(way.id, tailId, -1),
+                        'added to an area');
+
+                controller.enter(iD.modes.Select(way));
+
             } else if (datum.type === 'node' && datum.id !== node.id) {
                 // connect the way to an existing node
                 history.replace(
