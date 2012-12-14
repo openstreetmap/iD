@@ -136,7 +136,9 @@ iD.Inspector = function() {
                     .map(entries);
             }
 
-            draw(d3.entries(_.clone(entity.tags)));
+            var tags = d3.entries(_.clone(entity.tags));
+            if (tags.length === 0) tags = [{ key: '', value: '' }];
+            draw(tags);
 
             selection.select('input').node().focus();
 
