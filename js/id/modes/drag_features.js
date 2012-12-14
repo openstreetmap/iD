@@ -4,7 +4,7 @@ iD.modes._dragFeatures = function(mode) {
     var dragbehavior = d3.behavior.drag()
         .origin(function(entity) {
             var p = mode.map.projection(entity.loc);
-            d3.event.sourceEvent.stopPropagation();
+            // d3.event.sourceEvent.stopPropagation();
             return { x: p[0], y: p[1] };
         })
         .on('drag', function(entity) {
