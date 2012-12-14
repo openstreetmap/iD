@@ -113,6 +113,22 @@ a.selected {
     color:#222;
 }
 
+/* Mode-specific styles
+------------------------------------------------------- */
+
+#map:hover,
+#map.browse:hover {
+       cursor:url(../img/cursor-grab.png) 9 9, auto;
+}
+
+#map.add-line:hover,
+#map.add-area:hover {
+       cursor:url(../img/cursor-draw.png) 9 9, auto;
+}
+
+#map.add-place:hover {
+       cursor:url(../img/cursor-draw-marker.png) 18 18, auto;
+}
 
 /* Utility Classes
 ------------------------------------------------------- */
@@ -136,9 +152,8 @@ form.hide {
 
 button {
     line-height:20px;
-    cursor:pointer;
     border:1px solid #aaa;
-    box-shadow: inset 0 0 0 1px #fff;
+    box-shadow: inset 0 0 0px 1px #fff;
     color:#222;
     background: white;
     font-weight:bold;
@@ -150,11 +165,17 @@ button {
 
 button:hover {
     background-color: #ececec;
+    cursor:url(../img/cursor-pointer.png), auto;
+}
+
+button:active {
+    cursor:url(../img/cursor-pointing.png), auto;
+    box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.35);
 }
 
 button.active:not([disabled]) {
-    background-color:#aaaaaa;
-    color:#fff;
+    background-color: #ececec;
+    box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.25);
 }
 
 button.wide,
@@ -218,25 +239,26 @@ button[disabled]:hover {
     background: white;
 }
 button.action {
-    background: #7092ff;
+    background-color: #7092ff;
 }
 button.action:hover {
-    background: #6282ee;
+    background-color: #6282ee;
 }
 
 button.delete {
-    background: #ff7070;
+    background-color: #ff7070;
 }
 button.delete:hover {
-    background: #ef5454;
+    background-color: #ef5454;
 }
 
 button.save {
-    background:#6bc641;
+    background-color: #6bc641;
 }
 
 button.save:hover {
-    background: #59ac33;
+    color: #59ac33;
+    background-color: #6bc641;
 }
 
 button.close {
@@ -247,11 +269,6 @@ button.close {
 
 button .label {
     margin-right: 3px;
-    text-shadow: 0 1px 0 white;
-}
-
-.active .label {
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 }
 
 button.action .label {
@@ -294,7 +311,7 @@ button.action .label {
 .icon.geocode    { background-position: -280px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 
-.active .icon.browse     { background-position:   0px -20px;}
+/*.active .icon.browse     { background-position:   0px -20px;}
 .active .icon.add-place  { background-position: -20px -20px;}
 .active .icon.add-line   { background-position: -40px -20px;}
 .active .icon.add-area   { background-position: -60px -20px;}
@@ -309,7 +326,7 @@ button.action .label {
 .active .icon.zoom-in    { background-position: -240px -20px;}
 .active .icon.zoom-out   { background-position: -260px -20px;}
 .active .icon.geocode    { background-position: -280px -20px;}
-.active .icon.layers     { background-position: -300px -20px;}
+.active .icon.layers     { background-position: -300px -20px;}*/
 
 button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-place  { background-position: -20px -40px;}

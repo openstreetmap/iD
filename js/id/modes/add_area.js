@@ -7,6 +7,8 @@ iD.modes.AddArea = function() {
     };
 
     mode.enter = function() {
+        d3.select('#map').attr('class', function() { return mode.id});
+
         var map = mode.map,
             history = mode.history,
             controller = mode.controller;
@@ -52,6 +54,7 @@ iD.modes.AddArea = function() {
         mode.map.hint(false);
         mode.map.surface.on('click.addarea', null);
         mode.map.keybinding().on('⎋.addarea', null);
+        d3.select('#map').attr('class', null);
     };
 
     return mode;
