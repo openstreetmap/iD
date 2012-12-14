@@ -115,8 +115,16 @@ iD.Way.isClosed = function(d) {
     return (!d.nodes.length) || d.nodes[d.nodes.length - 1].id === d.nodes[0].id;
 };
 
+// a way is an area if:
+//
+// - area=yes
+// - closed and
+//   - doesn't have area=no
+//   - doesn't have highway tag
 iD.Way.isArea = function(d) {
-    return iD.Way.isClosed(d) || (d.tags.area && d.tags.area === 'yes');
+    return (d.tags.area && d.tags.area === 'yes') ||
+        (iD.Way.isClosed(d) &&
+             (!d.tags.area || d.tags.area === 'no') && !d.tags.highway);
 };
 
 iD.Relation = function(attrs) {
