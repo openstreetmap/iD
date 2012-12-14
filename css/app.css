@@ -702,7 +702,7 @@ div.typeahead a:first-child {
 
 .notice {
     position:absolute;
-    top:60px;
+    top:0px;
     left:70px;
     width:250px;
     height:50px;

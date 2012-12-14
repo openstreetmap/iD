@@ -18,7 +18,7 @@ iD.modes.AddArea = function() {
 
         map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
-                way = iD.Way({tags: { building: 'yes', area: 'yes' }});
+                way = iD.Way({tags: { area: 'yes' }});
 
             if (datum.type === 'node') {
                 // start from an existing node

@@ -106,25 +106,29 @@ iD.Inspector = function() {
                     .on('keydown.push-more', pushMore)
                     .each(bindTypeahead);
 
-                removeBtn = row.append('button')
+                var removeBtn = row.append('button')
+                    .attr('tabindex', -1)
                     .attr('class','remove minor')
                     .on('click', removeTag);
 
                 removeBtn.append('span').attr('class', 'icon remove');
 
-                helpBtn = row.append('button').attr('class', 'tag-help minor').append('a')
-                    .attr('target', '_blank')
+                var helpBtn = row.append('button')
                     .attr('tabindex', -1)
-                    .attr('href', function(d) {
-                        return 'http://taginfo.openstreetmap.org/keys/' + d.key;
-                    });
+                    .attr('class', 'tag-help minor')
+                    .append('a')
+                        .attr('tabindex', -1)
+                        .attr('target', '_blank')
+                        .attr('href', function(d) {
+                            return 'http://taginfo.openstreetmap.org/keys/' + d.key;
+                        });
 
                 helpBtn.append('span').attr('class', 'icon inspect');
             }
 
             function grabtags() {
                 var grabbed = [];
-                function grab(d) { grabbed.push(d); }
+                function grab(d) { if (d.key !== '') grabbed.push(d); }
                 inspectorwrap.selectAll('li').each(grab);
                 return grabbed;
             }
