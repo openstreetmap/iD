@@ -36,14 +36,36 @@ window.iD = function(container) {
             .call(bootstrap.tooltip().placement('bottom'))
             .on('click', function (mode) { controller.enter(mode); });
 
-        map.on('move.disable-buttons', function() {
+        function disableTooHigh() {
             if (map.zoom() < 16) {
                 buttons.attr('disabled', 'disabled');
                 controller.enter(iD.modes.Browse());
             } else {
                 buttons.attr('disabled', null);
             }
-        });
+        }
+
+        var showUsers = _.debounce(function() {
+            var users = {},
+                entities = map.history().graph().entities;
+            for (var i in entities) {
+                users[entities[i].user] = true;
+                if (Object.keys(users).length > 10) break;
+            }
+            var u = Object.keys(users);
+            var l = d3.select('#user-list')
+                .selectAll('a.user-link').data(u);
+            l.enter().append('a')
+                .attr('class', 'user-link')
+                .attr('href', function(d) {
+                    return 'http://api06.dev.openstreetmap.org/user/' + d;
+                })
+                .text(String);
+            l.exit().remove();
+        }, 1000);
+
+        map.on('move.disable-buttons', disableTooHigh)
+            .on('move.show-users', showUsers);
 
         buttons.append('span')
             .attr('class', function(d) {
@@ -143,11 +165,14 @@ window.iD = function(container) {
             .attr('class', 'inspector-wrap fillL')
             .style('display', 'none');
 
-        this.append('div')
+        var about = this.append('div')
             .attr('id', 'about')
             .html("<a href='http://github.com/systemed/iD'>code</a> " +
                   "<a href='http://github.com/systemed/iD/issues'>report a bug</a>" +
                   " <a href='http://opengeodata.org/microsoft-imagery-details'><img src='img/bing.png' /></a>");
+
+        about.append('div')
+            .attr('id', 'user-list');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
@@ -166,7 +191,7 @@ window.iD = function(container) {
             map.size(m.size());
         };
 
-        var keybinding = d3.keybinding()
+        map.keybinding()
             .on('a', function(evt, mods) {
                 controller.enter(iD.modes.AddArea());
             })
@@ -180,8 +205,6 @@ window.iD = function(container) {
                 if (mods === '⇧⌘') history.redo();
                 if (mods === '⌘') history.undo();
             });
-        d3.select(document).call(keybinding);
-        map.keybinding(keybinding);
 
         var hash = iD.Hash().map(map);
 

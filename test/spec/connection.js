@@ -24,11 +24,11 @@ describe('Connection', function() {
   describe('#loadFromURL', function() {
 
       it('loads test data', function(done) {
-          c.loadFromURL('data/map.xml', done);
+          c.loadFromURL('data/node.xml', done);
       });
 
       it('returns a graph', function(done) {
-          c.loadFromURL('data/map.xml', function(err, graph) {
+          c.loadFromURL('data/node.xml', function(err, graph) {
               expect(err).to.not.be.ok;
               expect(graph).to.be.instanceOf(iD.Graph);
               done();
@@ -36,15 +36,15 @@ describe('Connection', function() {
       });
 
       it('parses a node', function(done) {
-          c.loadFromURL('data/map.xml', function(err, graph) {
-              expect(graph.entity('n1193811')).to.be.instanceOf(iD.Entity);
+          c.loadFromURL('data/node.xml', function(err, graph) {
+              expect(graph.entity('n356552551')).to.be.instanceOf(iD.Entity);
               done();
           });
       });
 
       it('parses a way', function(done) {
-          c.loadFromURL('data/map.xml', function(err, graph) {
-              expect(graph.entity('w53471')).to.be.instanceOf(iD.Entity);
+          c.loadFromURL('data/way.xml', function(err, graph) {
+              expect(graph.entity('w19698713')).to.be.instanceOf(iD.Entity);
               done();
           });
       });

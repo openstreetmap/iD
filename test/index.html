@@ -20,6 +20,8 @@
     <script src='../js/lib/d3.v3.js'></script>
     <script src='../js/lib/sha.js'></script>
     <script src='../js/lib/d3.geo.tile.js'></script>
+    <script src='../js/lib/d3.keybinding.js'></script>
+    <script src='../js/lib/d3.latedrag.js'></script>
     <script src='../js/lib/d3.size.js'></script>
     <script src='../js/lib/d3.typeahead.js'></script>
     <script src='../js/lib/d3.one.js'></script>
@@ -52,7 +54,8 @@
     <script src='../js/id/actions/change_entity_tags.js'></script>
     <script src="../js/id/actions/delete_node.js"></script>
     <script src="../js/id/actions/delete_way.js"></script>
-    <script src='../js/id/actions/move.js'></script>
+    <script src='../js/id/actions/move_node.js'></script>
+    <script src='../js/id/actions/move_way.js'></script>
     <script src='../js/id/actions/noop.js'></script>
     <script src='../js/id/actions/remove_relation_member.js'></script>
     <script src='../js/id/actions/remove_way_node.js'></script>
@@ -63,6 +66,7 @@
     <script src='../js/id/modes/add_place.js'></script>
     <script src='../js/id/modes/add_line.js'></script>
     <script src='../js/id/modes/browse.js'></script>
+    <script src='../js/id/modes/drag_features.js'></script>
     <script src='../js/id/modes/draw_area.js'></script>
     <script src='../js/id/modes/draw_line.js'></script>
     <script src='../js/id/modes/select.js'></script>
@@ -91,7 +95,8 @@
     <script src="spec/actions/change_entity_tags.js"></script>
     <script src="spec/actions/delete_node.js"></script>
     <script src="spec/actions/delete_way.js"></script>
-    <script src="spec/actions/move.js"></script>
+    <script src="spec/actions/move_node.js"></script>
+    <script src="spec/actions/move_way.js"></script>
     <script src="spec/actions/noop.js"></script>
     <script src="spec/actions/remove_way_node.js"></script>
     <script src="spec/actions/remove_relation_member.js"></script>
@@ -99,14 +104,19 @@
 
     <script src="spec/format/geojson.js"></script>
     <script src="spec/format/xml.js"></script>
+
     <script src="spec/graph/graph.js"></script>
     <script src="spec/graph/entity.js"></script>
     <script src="spec/graph/history.js"></script>
     <script src="spec/graph/way.js"></script>
+
+    <script src="spec/modes/add_place.js"></script>
+
     <script src="spec/renderer/background.js"></script>
     <script src="spec/renderer/hash.js"></script>
     <script src="spec/renderer/map.js"></script>
     <script src="spec/renderer/style.js"></script>
+
     <script src="spec/ui/inspector.js"></script>
     <script src="spec/ui/geocoder.js"></script>
     <script src="spec/connection.js"></script>

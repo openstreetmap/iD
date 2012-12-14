@@ -24,7 +24,7 @@ iD.modes.DrawArea = function(wayId) {
             iD.actions.AddWayNode(way.id, node.id, -1));
 
         function mousemove() {
-            history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
+            history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
         }
 
         function click() {
@@ -95,24 +95,32 @@ iD.modes.DrawArea = function(wayId) {
             controller.enter(iD.modes.Browse());
         }
 
-        map.surface.on('mousemove.drawarea', mousemove);
-        map.surface.on('click.drawarea', click);
-        map.keybinding().on('⎋.drawarea', esc)
+        map.surface
+            .on('mousemove.drawarea', mousemove)
+            .on('click.drawarea', click);
+
+        map.keybinding()
+            .on('⎋.drawarea', esc)
             .on('⌫.drawarea', backspace)
-            .on('delete.drawarea', del)
+            .on('⌦.drawarea', del)
             .on('↩.drawarea', ret);
     };
 
     mode.exit = function() {
-        mode.map.hint(false);
-        mode.map.fastEnable(true);
+        mode.map
+            .hint(false)
+            .fastEnable(true);
+
         mode.map.surface
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);
-        mode.map.keybinding().on('⎋.drawarea', null)
+
+        mode.map.keybinding()
+            .on('⎋.drawarea', null)
             .on('⌫.drawarea', null)
-            .on('delete.drawarea', null)
+            .on('⌦.drawarea', null)
             .on('↩.drawarea', null);
+
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);

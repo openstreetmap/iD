@@ -48,36 +48,36 @@ iD.layerswitcher = function(map) {
 
         var opa = content
             .append('div')
-            .attr('class', 'opacity-options-wrapper fillL2')
+            .attr('class', 'opacity-options-wrapper fillL2');
 
-            opa.append('h4').text('Layers')
+        opa.append('h4').text('Layers');
 
-            opa.append('ul')
-                .attr('class', 'opacity-options')
-                .selectAll('div.opacity')
-                .data(opacities)
-                .enter()
-                .append('li')
-                    .attr('data-original-title', function(d) {
-                        return (d * 100) + "% opacity";
-                    })
-                    .on('click.set-opacity', function(d) {
-                        d3.select('#tile-g')
-                            .transition()
-                            .style('opacity', d)
-                            .attr('data-opacity', d);
-                        d3.selectAll('.opacity-options li')
-                            .classed('selected', false);
-                        d3.select(this)
-                            .classed('selected', true);
-                    })
-                    .html("<div class='select-box'></div>")
-                    .call(bootstrap.tooltip().placement('top'))
-                    .append('div')
-                        .attr('class', 'opacity')
-                        .style('opacity', function(d) {
-                            return d;
-                        });
+        opa.append('ul')
+            .attr('class', 'opacity-options')
+            .selectAll('div.opacity')
+            .data(opacities)
+            .enter()
+            .append('li')
+                .attr('data-original-title', function(d) {
+                    return (d * 100) + "% opacity";
+                })
+                .on('click.set-opacity', function(d) {
+                    d3.select('#tile-g')
+                        .transition()
+                        .style('opacity', d)
+                        .attr('data-opacity', d);
+                    d3.selectAll('.opacity-options li')
+                        .classed('selected', false);
+                    d3.select(this)
+                        .classed('selected', true);
+                })
+                .html("<div class='select-box'></div>")
+                .call(bootstrap.tooltip().placement('top'))
+                .append('div')
+                    .attr('class', 'opacity')
+                    .style('opacity', function(d) {
+                        return d;
+                    });
 
         // Make sure there is an active selection by default
         d3.select('.opacity-options li').classed('selected', true);

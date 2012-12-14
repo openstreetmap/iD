@@ -4,7 +4,7 @@ iD.Map = function() {
         dispatch = d3.dispatch('move'),
         selection = null, hover = null,
         translateStart,
-        keybinding,
+        keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
@@ -12,7 +12,6 @@ iD.Map = function() {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
-        dragging = false,
         fastEnabled = true,
         notice,
         background = iD.Background()
@@ -63,6 +62,8 @@ iD.Map = function() {
 
         map.size(this.size());
         map.surface = surface;
+
+        d3.select(document).call(keybinding);
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }

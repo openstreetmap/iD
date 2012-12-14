@@ -4,6 +4,7 @@ iD.modes._dragFeatures = function(mode) {
     var dragbehavior = d3.behavior.drag()
         .origin(function(entity) {
             var p = mode.map.projection(entity.loc);
+            d3.event.sourceEvent.stopPropagation();
             return { x: p[0], y: p[1] };
         })
         .on('drag', function(entity) {
@@ -20,11 +21,11 @@ iD.modes._dragFeatures = function(mode) {
                 } else {
                     dragging = entity;
                     mode.history.perform(
-                        iD.actions.Move(dragging.id, loc));
+                        iD.actions.MoveNode(dragging.id, loc));
                 }
             }
 
-            mode.history.replace(iD.actions.Move(dragging.id, loc));
+            mode.history.replace(iD.actions.MoveNode(dragging.id, loc));
         })
         .on('dragend', function (entity) {
             if (!dragging) return;

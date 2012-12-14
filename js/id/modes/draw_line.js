@@ -24,11 +24,11 @@ iD.modes.DrawLine = function(wayId, direction) {
             iD.actions.AddNode(node),
             iD.actions.AddWayNode(wayId, node.id, index));
 
-        map.surface.on('mousemove.drawline', function() {
-            history.replace(iD.actions.Move(node.id, map.mouseCoordinates()));
-        });
+        function mousemove() {
+            history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
+        }
 
-        map.surface.on('click.drawline', function() {
+        function click() {
             var datum = d3.select(d3.event.target).datum() || {};
 
             if (datum.id === tailId) {
@@ -72,7 +72,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
                 controller.enter(iD.modes.DrawLine(wayId, direction));
             }
-        });
+        }
 
         function esc() {
             history.replace(
@@ -108,23 +108,32 @@ iD.modes.DrawLine = function(wayId, direction) {
             controller.enter(iD.modes.Browse());
         }
 
-        map.keybinding().on('⎋.drawline', esc)
+        map.surface
+            .on('mousemove.drawline', mousemove)
+            .on('click.drawline', click);
+
+        map.keybinding()
+            .on('⎋.drawline', esc)
             .on('⌫.drawline', backspace)
-            .on('delete.drawline', del)
+            .on('⌦.drawline', del)
             .on('↩.drawline', ret);
     };
 
     mode.exit = function() {
-        mode.map.hint(false);
-        mode.map.fastEnable(true);
+        mode.map
+            .hint(false)
+            .fastEnable(true);
 
         mode.map.surface
             .on('mousemove.drawline', null)
             .on('click.drawline', null);
-        mode.map.keybinding().on('⎋.drawline', null)
+
+        mode.map.keybinding()
+            .on('⎋.drawline', null)
             .on('⌫.drawline', null)
-            .on('delete.drawline', null)
+            .on('⌦.drawline', null)
             .on('↩.drawline', null);
+
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);
