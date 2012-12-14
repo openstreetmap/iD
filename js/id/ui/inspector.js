@@ -124,7 +124,7 @@ iD.Inspector = function() {
 
             function grabtags() {
                 var grabbed = [];
-                function grab(d) { grabbed.push(d); }
+                function grab(d) { if (d.key !== '') grabbed.push(d); }
                 inspectorwrap.selectAll('li').each(grab);
                 return grabbed;
             }
