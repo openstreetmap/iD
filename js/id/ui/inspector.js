@@ -107,17 +107,21 @@ iD.Inspector = function() {
                     .each(bindTypeahead);
 
                 var removeBtn = row.append('button')
+                    .attr('tabindex', -1)
                     .attr('class','remove minor')
                     .on('click', removeTag);
 
                 removeBtn.append('span').attr('class', 'icon remove');
 
-                var helpBtn = row.append('button').attr('class', 'tag-help minor').append('a')
-                    .attr('target', '_blank')
+                var helpBtn = row.append('button')
                     .attr('tabindex', -1)
-                    .attr('href', function(d) {
-                        return 'http://taginfo.openstreetmap.org/keys/' + d.key;
-                    });
+                    .attr('class', 'tag-help minor')
+                    .append('a')
+                        .attr('tabindex', -1)
+                        .attr('target', '_blank')
+                        .attr('href', function(d) {
+                            return 'http://taginfo.openstreetmap.org/keys/' + d.key;
+                        });
 
                 helpBtn.append('span').attr('class', 'icon inspect');
             }
