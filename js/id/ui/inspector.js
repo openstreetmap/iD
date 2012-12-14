@@ -69,6 +69,7 @@ iD.Inspector = function() {
                 var inputs = row.append('div').attr('class','input-wrap');
 
                 function setValue(d, i) { d.value = this.value; }
+                function setKey(d, i) { d.key = this.value; }
 
                 function emptyTag(d) { return d.key === ''; }
 
@@ -95,7 +96,7 @@ iD.Inspector = function() {
                     .property('type', 'text')
                     .attr('class', 'key')
                     .property('value', function(d, i) { return d.key; })
-                    .on('keyup.update', setValue);
+                    .on('keyup.update', setKey);
 
                 inputs.append('input')
                     .property('type', 'text')
@@ -109,7 +110,7 @@ iD.Inspector = function() {
                     .attr('class','remove minor')
                     .on('click', removeTag);
 
-                removeBtn.append('span').attr('class', 'icon remove')
+                removeBtn.append('span').attr('class', 'icon remove');
 
                 helpBtn = row.append('button').attr('class', 'tag-help minor').append('a')
                     .attr('target', '_blank')
@@ -117,7 +118,8 @@ iD.Inspector = function() {
                     .attr('href', function(d) {
                         return 'http://taginfo.openstreetmap.org/keys/' + d.key;
                     });
-                helpBtn.append('span').attr('class', 'icon inspect')
+
+                helpBtn.append('span').attr('class', 'icon inspect');
             }
 
             function grabtags() {
