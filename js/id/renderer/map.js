@@ -77,7 +77,7 @@ iD.Map = function() {
 
     function drawVector(difference) {
         if (surface.style(transformProp) != 'none') return;
-        var filter, all, ways = [], areas = [], points = [], waynodes = [],
+        var filter, all, ways = [], lines = [], areas = [], points = [], waynodes = [],
             extent = map.extent(),
             graph = history.graph();
 
@@ -103,8 +103,9 @@ iD.Map = function() {
             var a = all[i];
             if (a.type === 'way') {
                 a._line = nodeline(a);
+                ways.push(a);
                 if (iD.Way.isArea(a)) areas.push(a);
-                else ways.push(a);
+                else lines.push(a);
             } else if (a._poi) {
                 points.push(a);
             } else if (!a._poi && a.type === 'node' && a.intersects(extent)) {
@@ -116,9 +117,9 @@ iD.Map = function() {
         }, []);
         drawHandles(waynodes, filter);
         drawAccuracyHandles(wayAccuracyHandles, filter);
-        drawCasings(ways, filter);
+        drawCasings(lines, filter);
         drawFills(areas, filter);
-        drawStrokes(ways, filter);
+        drawStrokes(lines, filter);
         drawMarkers(points, filter);
     }
 

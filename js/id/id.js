@@ -47,7 +47,7 @@ window.iD = function(container) {
 
         var showUsers = _.debounce(function() {
             var users = {},
-                entities = map.history().graph().entities;
+                entities = map.history().graph().intersects(map.extent());
             for (var i in entities) {
                 users[entities[i].user] = true;
                 if (Object.keys(users).length > 10) break;
@@ -172,7 +172,9 @@ window.iD = function(container) {
                   " <a href='http://opengeodata.org/microsoft-imagery-details'><img src='img/bing.png' /></a>");
 
         about.append('div')
-            .attr('id', 'user-list');
+            .attr('id', 'user-list')
+            .append('span')
+            .text('edited by ');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),

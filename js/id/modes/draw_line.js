@@ -120,9 +120,8 @@ iD.modes.DrawLine = function(wayId, direction) {
     };
 
     mode.exit = function() {
-        mode.map
-            .hint(false)
-            .fastEnable(true);
+        mode.map.hint(false);
+        mode.map.fastEnable(true);
 
         mode.map.surface
             .on('mousemove.drawline', null)
