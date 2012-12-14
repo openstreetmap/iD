@@ -6,6 +6,8 @@ iD.modes.AddPlace = function() {
     };
 
     mode.enter = function() {
+        d3.select('#map').attr('class', function() { return mode.id});
+
         var map = mode.map,
             history = mode.history,
             controller = mode.controller;
@@ -31,6 +33,7 @@ iD.modes.AddPlace = function() {
         mode.map.hint(false);
         mode.map.surface.on('click.addplace', null);
         mode.map.keybinding().on('⎋.addplace', null);
+        d3.select('#map').attr('class', null);
     };
 
     return mode;

@@ -4,7 +4,11 @@ image.tile {
 /* base styles */
 path, image.marker {
     fill: none;
-    cursor: pointer;
+    cursor: url(../img/cursor-select-way.png), pointer;
+}
+
+g.marker {
+    cursor: url(../img/cursor-select-marker.png), pointer;
 }
 
 g.marker circle {
@@ -20,7 +24,7 @@ g.marker.active circle {
 
 /* interactive elements */
 circle.handle {
-    cursor: move;
+    cursor: url(../img/cursor-select-node.png), pointer;
     fill:white;
     stroke:#333;
     fill-opacity:1;
@@ -36,6 +40,7 @@ circle.handle.active {
 }
 
 circle.accuracy-handle {
+    cursor: url(../img/cursor-select-split.png), pointer;
     fill:#aaa;
     stroke:#333;
     fill-opacity:1;
@@ -90,6 +95,7 @@ path.area {
     stroke:red;
     fill:#fff;
     fill-opacity:0.3;
+    cursor: url(../img/cursor-select-area.png), pointer;
 }
 
 path.area.active {
