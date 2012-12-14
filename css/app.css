@@ -572,6 +572,10 @@ img.tile {
     padding:2px 5px;
 }
 
+#about #user-list a:not(:last-child):after {
+    content: ', ';
+}
+
 /* Account Information
 ------------------------------------------------------- */
 
