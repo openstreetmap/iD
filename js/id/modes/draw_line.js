@@ -1,10 +1,11 @@
 iD.modes.DrawLine = function(wayId, direction) {
     var mode = {
-        button: 'line'
+        button: 'line',
+        id: 'draw-line'
     };
 
     mode.enter = function() {
-
+        d3.select('#map').attr('class', function() { return mode.id});
         var map = mode.map,
             history = mode.history,
             controller = mode.controller,
@@ -120,6 +121,7 @@ iD.modes.DrawLine = function(wayId, direction) {
     };
 
     mode.exit = function() {
+        d3.select('#map').attr('class', null);
         mode.map.hint(false);
         mode.map.fastEnable(true);
 

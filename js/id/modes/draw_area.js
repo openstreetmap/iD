@@ -1,9 +1,11 @@
 iD.modes.DrawArea = function(wayId) {
     var mode = {
-        button: 'area'
+        button: 'area',
+        id: 'draw-area'
     };
 
     mode.enter = function() {
+        d3.select('#map').attr('class', function() { return mode.id});
         var map = mode.map,
             history = mode.history,
             controller = mode.controller,
@@ -25,6 +27,15 @@ iD.modes.DrawArea = function(wayId) {
 
         function mousemove() {
             history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
+        }
+
+        function mouseover() {
+            var datum = d3.select(d3.event.target).datum() || {};
+            if (datum.id === tailId) {
+                d3.select('#map').attr('class', 'finish-area draw-area');
+            } else if ( (d3.select('#map').classed('draw-area')) && (datum.id !== tailId)) {
+                d3.select('#map').attr('class', 'draw-area');
+            }
         }
 
         function click() {
@@ -107,6 +118,7 @@ iD.modes.DrawArea = function(wayId) {
 
         map.surface
             .on('mousemove.drawarea', mousemove)
+            .on('mouseover.drawarea', mouseover)
             .on('click.drawarea', click);
 
         map.keybinding()
@@ -117,6 +129,7 @@ iD.modes.DrawArea = function(wayId) {
     };
 
     mode.exit = function() {
+        d3.select('#map').attr('class', null);
         mode.map.hint(false);
         mode.map.fastEnable(true);
 

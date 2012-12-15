@@ -120,10 +120,20 @@ a.selected {
 #map.browse:hover {
        cursor:url(../img/cursor-grab.png) 9 9, auto;
 }
+#map:active,
+#map.browse:active {
+       cursor:url(../img/cursor-grabbing.png) 9 9, auto;
+}
 
+#map.draw-line:hover,
+#map.draw-area:hover,
 #map.add-line:hover,
 #map.add-area:hover {
        cursor:url(../img/cursor-draw.png) 9 9, auto;
+}
+
+#map.finish-area:hover {
+       cursor:url(../img/cursor-draw-finish.png) 9 9, auto;
 }
 
 #map.add-place:hover {
@@ -161,16 +171,16 @@ button {
     font-size:14px;
     display: inline-block;
     height:40px;
+    cursor:url(../img/cursor-pointer.png) 9 9, auto;
 }
 
 button:hover {
     background-color: #ececec;
-    cursor:url(../img/cursor-pointer.png), auto;
 }
 
 button:active {
-    cursor:url(../img/cursor-pointing.png), auto;
     box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.35);
+    cursor:url(../img/cursor-pointing.png) 9 9, auto;
 }
 
 button.active:not([disabled]) {

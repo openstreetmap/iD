@@ -24,8 +24,8 @@ g.marker.active circle {
 
 /* interactive elements */
 circle.handle {
-    cursor: url(../img/cursor-select-node.png), pointer;
-    fill:white;
+/*    cursor: url(../img/cursor-select-node.png), pointer;
+*/    fill:white;
     stroke:#333;
     fill-opacity:1;
     stroke-width:2;
@@ -234,4 +234,12 @@ text.oneway {
     stroke:#2C6B9B;
     stroke-width:1;
     pointer-events:none;
+}
+
+path:active,
+path.area:active,
+g.marker:active,
+circle.handle:active,
+circle.accuracy-handle:active {
+    cursor: url(../img/cursor-select-acting.png), pointer;
 }
