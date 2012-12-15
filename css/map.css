@@ -24,8 +24,8 @@ g.marker.active circle {
 
 /* interactive elements */
 circle.handle {
-/*    cursor: url(../img/cursor-select-node.png), pointer;
-*/    fill:white;
+    cursor: url(../img/cursor-select-node.png), pointer;
+    fill:white;
     stroke:#333;
     fill-opacity:1;
     stroke-width:2;
