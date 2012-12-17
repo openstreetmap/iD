@@ -10,8 +10,12 @@ iD.Inspector = function() {
         function emitChangeDirection(d) { event.changeWayDirection(iD.Entity(d)); }
         function emitSplitWay(d) { event.splitWay(iD.Entity(d)); }
         selection.html('');
-        selection.append('h2')
-            .text(iD.util.friendlyName(selection.datum()));
+        var h2 = selection.append('h2');
+        h2.append('span').attr('class', function(d) {
+            var icons = { way: 'line', node: 'point' };
+            return 'icon add-' + icons[d.type];
+        });
+        h2.append('span').text(iD.util.friendlyName(selection.datum()));
         selection.append('a')
             .attr('class', 'permalink')
             .attr('href', osmLink)
