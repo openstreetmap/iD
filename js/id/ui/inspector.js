@@ -120,6 +120,10 @@ iD.Inspector = function() {
                                             return 'icon add-' + d;
                                         });
                                     mod.select('.content')
+                                        .append('a')
+                                        .attr('href', 'http://wiki.openstreetmap.org/wiki/' + en.title)
+                                        .text('→ ' + en.title + ' on wiki.osm.org');
+                                    mod.select('.content')
                                         .append('p')
                                         .text(en.description);
                                 }
