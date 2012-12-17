@@ -14,6 +14,7 @@ all: \
 	js/lib/d3.v3.js \
 	js/lib/d3.geo.tile.js \
 	js/lib/d3.keybinding.js \
+	js/lib/d3.latedrag.js \
 	js/lib/d3.one.js \
 	js/lib/d3.size.js \
 	js/lib/d3.typeahead.js \

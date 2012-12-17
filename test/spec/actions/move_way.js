@@ -5,9 +5,13 @@ describe("iD.actions.MoveWay", function () {
             way    = iD.Way({nodes: [node1.id, node2.id]}),
             dxdy   = [2, 3],
             projection = d3.geo.mercator(),
-            graph  = iD.actions.MoveWay(way.id, dxdy, projection)(iD.Graph([node1, node2, way]));
-        expect(graph.entity(node1.id).loc).to.eql([1.4400000000000002, -2.1594885414215783]);
-        expect(graph.entity(node2.id).loc).to.eql([6.440000000000008, 7.866329874099955]);
+            graph  = iD.actions.MoveWay(way.id, dxdy, projection)(iD.Graph([node1, node2, way])),
+            loc1   = graph.entity(node1.id).loc,
+            loc2   = graph.entity(node2.id).loc;
+        expect(loc1[0]).to.be.closeTo( 1.440, 0.001);
+        expect(loc1[1]).to.be.closeTo(-2.159, 0.001);
+        expect(loc2[0]).to.be.closeTo( 6.440, 0.001);
+        expect(loc2[1]).to.be.closeTo( 7.866, 0.001);
     });
 
     it("moves repeated nodes only once", function () {
@@ -15,7 +19,9 @@ describe("iD.actions.MoveWay", function () {
             way    = iD.Way({nodes: [node.id, node.id]}),
             dxdy   = [2, 3],
             projection = d3.geo.mercator(),
-            graph  = iD.actions.MoveWay(way.id, dxdy, projection)(iD.Graph([node, way]));
-        expect(graph.entity(node.id).loc).to.eql([1.4400000000000002, -2.1594885414215783]);
+            graph  = iD.actions.MoveWay(way.id, dxdy, projection)(iD.Graph([node, way])),
+            loc    = graph.entity(node.id).loc;
+        expect(loc[0]).to.be.closeTo( 1.440, 0.001);
+        expect(loc[1]).to.be.closeTo(-2.159, 0.001);
     });
 });
