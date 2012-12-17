@@ -58,6 +58,7 @@ path.casing {
     stroke-linecap:round;
     stroke-linejoin:bevel;
     stroke-width: 3;
+    -webkit-transition: stroke 100ms linear;
 }
 
 path.casing.hover {
