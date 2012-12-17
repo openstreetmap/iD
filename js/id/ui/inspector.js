@@ -36,15 +36,25 @@ iD.Inspector = function() {
         selection.each(function(entity) {
 
             function draw(data) {
-                function setValue(d, i) { d.value = this.value; }
-                function setKey(d, i) { d.key = this.value; }
-                function emptyTag(d) { return d.key === ''; }
+                data.push({key: '', value: ''});
+
+                function setValue(d, i) {
+                    d.value = this.value;
+                }
+
+                function setKey(d, i) {
+                    d.key = this.value;
+                }
+
+                function emptyTag(d) {
+                    return d.key === '';
+                }
 
                 function pushMore(d, i) {
                     if (d3.event.keyCode === 9) {
                         var tags = grabtags();
                         if (i == tags.length - 1 && !tags.filter(emptyTag).length) {
-                            draw(tags.concat([{ key: '', value: '' }]));
+                            draw(tags);
                         }
                     }
                 }
@@ -186,9 +196,7 @@ iD.Inspector = function() {
 
             inspectorwrap.append('h4').text('Edit tags');
 
-            var tags = d3.entries(_.cloneDeep(entity.tags));
-            if (tags.length === 0) tags = [{ key: '', value: '' }];
-            draw(tags);
+            draw(d3.entries(_.cloneDeep(entity.tags)));
 
             selection.select('input').node().focus();
 
