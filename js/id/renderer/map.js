@@ -140,6 +140,7 @@ iD.Map = function() {
         return handles;
     }
 
+    function hasTwoParents(d) { return parentStructure[d.id] > 1; }
     function drawHandles(waynodes, parentStructure, filter) {
         var handles = g.hit.selectAll('circle.handle')
             .filter(filter)
@@ -157,15 +158,13 @@ iD.Map = function() {
                 return 'translate(' + [~~p[0], ~~p[1]] +
                     ')';
             })
-            // This doesn't work, need to figure out a better way to make attribute changes
-            .attr('r', function(d) {
-                return d.id === hover ? 8: 4;
-            })
             .classed('active', classActive)
-            .classed('two-parents', function(d) {
-                return parentStructure[d.id] > 1;
-            })
+            .classed('two-parents', hasTwoParents)
             .classed('hover', classHover);
+
+        handles.transition().duration(50).attr('r', function(d) {
+                return d.id === hover ? 8: 4;
+            });
     }
 
     function drawAccuracyHandles(waynodes, filter) {
