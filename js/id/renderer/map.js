@@ -96,6 +96,7 @@ iD.Map = function() {
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }
 
+
         if (all.length > 10000) return editOff();
         else editOn();
 
@@ -112,10 +113,11 @@ iD.Map = function() {
                 waynodes.push(a);
             }
         }
+        var parentStructure = graph.parentStructure(ways);
         var wayAccuracyHandles = ways.reduce(function(mem, w) {
             return mem.concat(accuracyHandles(w));
         }, []);
-        drawHandles(waynodes, filter);
+        drawHandles(waynodes, parentStructure, filter);
         drawAccuracyHandles(wayAccuracyHandles, filter);
         drawCasings(lines, filter);
         drawFills(areas, filter);
@@ -138,7 +140,7 @@ iD.Map = function() {
         return handles;
     }
 
-    function drawHandles(waynodes, filter) {
+    function drawHandles(waynodes, parentStructure, filter) {
         var handles = g.hit.selectAll('circle.handle')
             .filter(filter)
             .data(waynodes, key);
@@ -160,6 +162,9 @@ iD.Map = function() {
                 return d.id === hover ? 8: 4;
             })
             .classed('active', classActive)
+            .classed('two-parents', function(d) {
+                return parentStructure[d.id] > 1;
+            })
             .classed('hover', classHover);
     }
 

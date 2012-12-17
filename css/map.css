@@ -32,6 +32,10 @@ circle.handle {
     stroke-opacity: 1;
 }
 
+circle.handle.two-parents {
+    fill:#aff;
+}
+
 circle.handle.hover {
 }
 
