@@ -36,15 +36,25 @@ iD.Inspector = function() {
         selection.each(function(entity) {
 
             function draw(data) {
-                function setValue(d, i) { d.value = this.value; }
-                function setKey(d, i) { d.key = this.value; }
-                function emptyTag(d) { return d.key === ''; }
+                data.push({key: '', value: ''});
+
+                function setValue(d, i) {
+                    d.value = this.value;
+                }
+
+                function setKey(d, i) {
+                    d.key = this.value;
+                }
+
+                function emptyTag(d) {
+                    return d.key === '';
+                }
 
                 function pushMore(d, i) {
                     if (d3.event.keyCode === 9) {
                         var tags = grabtags();
                         if (i == tags.length - 1 && !tags.filter(emptyTag).length) {
-                            draw(tags.concat([{ key: '', value: '' }]));
+                            draw(tags);
                         }
                     }
                 }
@@ -60,23 +70,25 @@ iD.Inspector = function() {
                 }
 
                 var li = inspectorwrap.selectAll('li')
-                    .data(data, function(d) { return [d.key, d.value]; });
+                    .data(data, function(d) { return d.key; });
 
                 li.exit().remove();
 
                 var row = li.enter().append('li').attr('class','tag-row');
                 var inputs = row.append('div').attr('class','input-wrap');
 
+                li.classed('tag-row-empty', emptyTag);
+
                 inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'key')
-                    .property('value', function(d, i) { return d.key; })
+                    .property('value', function(d) { return d.key; })
                     .on('keyup.update', setKey);
 
                 inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'value')
-                    .property('value', function(d, i) { return d.value; })
+                    .property('value', function(d) { return d.value; })
                     .on('keyup.update', setValue)
                     .on('keydown.push-more', pushMore)
                     .each(bindTypeahead);
@@ -186,9 +198,7 @@ iD.Inspector = function() {
 
             inspectorwrap.append('h4').text('Edit tags');
 
-            var tags = d3.entries(_.cloneDeep(entity.tags));
-            if (tags.length === 0) tags = [{ key: '', value: '' }];
-            draw(tags);
+            draw(d3.entries(_.cloneDeep(entity.tags)));
 
             selection.select('input').node().focus();
 
