@@ -31,7 +31,7 @@ describe("iD.modes.AddPoint", function () {
     });
 
     describe("pressing ⎋", function () {
-        it("exits to browse mode", function () {
+        xit("exits to browse mode", function () {
             happen.keydown(document, {keyCode: 27});
             expect(controller.mode.id).to.equal('browse');
         });
