@@ -10,7 +10,7 @@ iD.util.friendlyName = function(entity) {
     // Generate a string such as 'river' or 'Fred's House' for an entity.
     if (!entity.tags || !Object.keys(entity.tags).length) { return ''; }
 
-    var mainkeys = ['highway','amenity','railway','waterway'],
+    var mainkeys = ['highway','amenity','railway','waterway','natural'],
         n = [];
 
     if (entity.tags.name) n.push(entity.tags.name);

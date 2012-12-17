@@ -35,7 +35,8 @@ iD.Inspector = function() {
     function inspector(selection) {
         selection.each(function(entity) {
 
-            function draw(data) {
+            function draw(selection) {
+
                 function setValue(d, i) { d.value = this.value; }
                 function setKey(d, i) { d.key = this.value; }
                 function emptyTag(d) { return d.key === ''; }
@@ -59,15 +60,22 @@ iD.Inspector = function() {
                         }));
                 }
 
-                var li = inspectorwrap.selectAll('li')
-                    .data(data, function(d) { return [d.key, d.value]; });
+                function getTags(entity) {
+                    var tags = d3.entries(_.cloneDeep(entity.tags));
+                    if (tags.length === 0) tags = [{ key: '', value: '' }];
+                    return tags;
+                }
+
+                var li = selection.selectAll('li')
+                    .data(getTags, function(d) { return [d.key, d.value]; });
+
 
                 li.exit().remove();
 
                 var row = li.enter().append('li').attr('class','tag-row');
                 var inputs = row.append('div').attr('class','input-wrap');
 
-                inputs.append('input')
+                var keyInput = inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'key')
                     .property('value', function(d, i) { return d.key; })
@@ -135,6 +143,8 @@ iD.Inspector = function() {
                         });
 
                 helpBtn.append('span').attr('class', 'icon inspect');
+
+                return li;
             }
 
             function removeTag(d) {
@@ -186,11 +196,9 @@ iD.Inspector = function() {
 
             inspectorwrap.append('h4').text('Edit tags');
 
-            var tags = d3.entries(_.cloneDeep(entity.tags));
-            if (tags.length === 0) tags = [{ key: '', value: '' }];
-            draw(tags);
+            var formsel = draw(inspectorwrap);
 
-            selection.select('input').node().focus();
+            formsel.select('input').node().focus();
 
             selection.append('div')
                 .attr('class', 'inspector-buttons').call(drawbuttons);
