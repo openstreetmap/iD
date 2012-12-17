@@ -13,6 +13,14 @@ iD.taginfo = function() {
             }), callback);
     };
 
+    taginfo.docs = function(keyvalue, callback) {
+        d3.json(endpoint + 'wiki/tags?' +
+            iD.util.qsString({
+                key: keyvalue.key,
+                value: keyvalue.value
+            }), callback);
+    };
+
     taginfo.endpoint = function(_) {
         if (!arguments.length) return endpoint;
         endpoint = _;

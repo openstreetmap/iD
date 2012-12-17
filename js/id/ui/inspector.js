@@ -94,6 +94,38 @@ iD.Inspector = function() {
                     .append('a')
                         .attr('tabindex', -1)
                         .attr('target', '_blank')
+                        .on('click', function(d) {
+                            taginfo.docs(d, function(err, docs) {
+                                var en = _.find(docs, function(d) {
+                                    return d.lang == 'en';
+                                });
+                                if (en) {
+                                    var mod = iD.modal();
+                                    var types = [];
+                                    if (en.on_area) types.push('area');
+                                    if (en.on_node) types.push('point');
+                                    if (en.on_way) types.push('line');
+                                    mod.select('.content')
+                                        .append('h3')
+                                        .text(en.title);
+                                    mod.select('.content')
+                                        .append('div')
+                                        .selectAll('span.icon')
+                                        .data(types).enter()
+                                        .append('span')
+                                        .attr('title', function(d) {
+                                            return 'used with ' + d;
+                                        })
+                                        .attr('class', function(d) {
+                                            return 'icon add-' + d;
+                                        });
+                                    mod.select('.content')
+                                        .append('p')
+                                        .text(en.description);
+                                }
+                            });
+                            d3.event.preventDefault();
+                        })
                         .attr('href', function(d) {
                             return 'http://taginfo.openstreetmap.org/keys/' + d.key;
                         });
