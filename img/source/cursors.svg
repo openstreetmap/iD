@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="-62.679714"
-     inkscape:cy="998.30763"
+     inkscape:cx="339.14483"
+     inkscape:cy="1050.2033"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -916,7 +916,7 @@
        inkscape:export-xdpi="90"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-pointing.png"
        id="g58409"
-       transform="translate(100,-140)">
+       transform="translate(50,-140)">
       <rect
          style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
          id="rect58411"
@@ -1553,26 +1553,26 @@
        id="rect59512"
        width="90"
        height="50"
-       x="-30"
+       x="60"
        y="-87.637817" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:150%;letter-spacing:0px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"
-       x="15.257263"
+       x="105.25726"
        y="-68.216827"
        id="text59514"
        sodipodi:linespacing="150%"><tspan
          id="tspan59516"
          sodipodi:role="line"
-         x="15.257263"
-         y="-68.216827">cursor-</tspan><tspan
+         x="105.25726"
+         y="-68.216827">cursor-draw</tspan><tspan
          id="tspan59518"
          sodipodi:role="line"
-         x="15.257263"
-         y="-47.216827">pointing.png</tspan></text>
+         x="105.25726"
+         y="-47.216827">connect.png</tspan></text>
     <path
        style="opacity:0.5;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 25,-87.637817 -10,-10 -10,10 z"
+       d="m 115,-87.637817 -10,-10 -10,10 z"
        id="path59520"
        inkscape:connector-curvature="0" />
     <g
@@ -1707,6 +1707,147 @@
            transform="translate(30,0)"
            d="m -118.15625,25.375 c -0.28125,0.04687 -0.84375,0.25 -0.84375,1 l 0,2 2,0 0,-2 c 0,-1 -1,-1 -1,-1 0,0 -0.0625,-0.01563 -0.15625,0 z m 3,2 c -0.28125,0.04687 -0.84375,0.249998 -0.84375,1 l 0,1 c 0,0 0,0.5 -0.5,0.5 -0.5,0 -0.5,-0.5 -0.5,-0.5 l 0,1 6,0 0,-1 0,-1 c 0,-1 -1,-1 -1,-1 0,0 -1,0 -1,1 l 0,1 c 0,0 0.0131,0.5 -0.5,0.5 -0.50133,0 -0.5,-0.5 -0.5,-0.5 l 0,-1 c 0,-1 -1,-1 -1,-1 0,0 -0.0625,-0.01563 -0.15625,0 z m 4.15625,3 2,0 0,-1 c 0,-1 -1,-1 -1,-1 l -1,2 z"
            style="color:#000000;fill:#d9d9d9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate" />
+      </g>
+    </g>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect.png"
+       id="g59783"
+       transform="translate(150,-180)">
+      <path
+         id="path59785"
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#6bc641;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+         d="m -38,75.362183 -4,3.999997 0,1 1,0 4,-3.999997 0,-1 z"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         sodipodi:nodetypes="ccccccc"
+         inkscape:connector-curvature="0"
+         d="m -38,75.362183 -4,3.999997 0,1 1,0 4,-3.999997 0,-1 z"
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#6bc641;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+         id="path59787" />
+      <g
+         id="g59789"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <rect
+           ry="0"
+           rx="0"
+           y="63.362183"
+           x="-54"
+           height="18"
+           width="18"
+           id="rect59791"
+           style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate" />
+        <g
+           transform="translate(20,19)"
+           id="g59793">
+          <g
+             id="g59795"
+             style="stroke:#000000;stroke-opacity:1">
+            <rect
+               style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+               id="rect59797"
+               width="1"
+               height="4"
+               x="-66"
+               y="46.362183"
+               rx="0.5"
+               ry="0.5" />
+            <rect
+               y="68"
+               x="52.362183"
+               height="4"
+               width="1"
+               id="rect59799"
+               style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.99999976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+               transform="matrix(0,1,-1,0,0,0)"
+               rx="0.5"
+               ry="0.5" />
+          </g>
+          <rect
+             ry="0.5"
+             rx="0.5"
+             style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+             id="rect59801"
+             width="1"
+             height="4"
+             x="65"
+             y="-59.362186"
+             transform="scale(-1,-1)" />
+          <rect
+             ry="0.5"
+             rx="0.5"
+             y="-63"
+             x="-53.362186"
+             height="4"
+             width="1"
+             id="rect59803"
+             style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.99999976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+             transform="matrix(0,-1,1,0,0,0)" />
+          <rect
+             style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+             id="rect59805"
+             width="3"
+             height="3"
+             x="51.362183"
+             y="61"
+             rx="0"
+             ry="0"
+             transform="matrix(0,1,-1,0,0,0)" />
+          <rect
+             ry="0"
+             rx="0"
+             y="67"
+             x="51.362183"
+             height="2"
+             width="3"
+             id="rect59807"
+             style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+             transform="matrix(0,1,-1,0,0,0)" />
+          <rect
+             transform="scale(-1,-1)"
+             ry="0"
+             rx="0"
+             y="-56.362183"
+             x="64"
+             height="2"
+             width="3"
+             id="rect59809"
+             style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate" />
+          <rect
+             transform="scale(-1,-1)"
+             style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+             id="rect59811"
+             width="3"
+             height="2"
+             x="64"
+             y="-51.362183"
+             rx="0"
+             ry="0" />
+          <path
+             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+             d="m -65.5,46.362183 c -0.277,0 -0.5,0.223 -0.5,0.5 l 0,2.5 0,1.5 0,0.5 0.5,0 0.5,0 0,-0.5 0,-1.5 0,-2.5 c 0,-0.277 -0.223,-0.5 -0.5,-0.5 z"
+             id="path59813"
+             inkscape:connector-curvature="0" />
+          <path
+             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+             d="m -66,54.362183 0,0.5 0,1.5 0,2.5 c 0,0.277 0.223,0.5 0.5,0.5 0.277,0 0.5,-0.223 0.5,-0.5 l 0,-2.5 0,-1.5 0,-0.5 -0.5,0 -0.5,0 z"
+             id="path59815"
+             inkscape:connector-curvature="0" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path59817"
+             d="m -58.999999,52.862182 c -7e-6,-0.276999 -0.222997,-0.5 -0.500001,-0.5 l -2.5,1e-6 -1.5,0 -0.5,0 0,0.499998 0,0.500002 0.5,0 1.5,0 2.500001,10e-7 c 0.277001,-8e-6 0.5,-0.222997 0.5,-0.500002 z"
+             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path59819"
+             d="m -67,52.362183 -0.5,0 -1.5,0 -2.500001,-1e-6 c -0.277001,8e-6 -0.5,0.222997 -0.5,0.500002 7e-6,0.276999 0.222997,0.5 0.500001,0.5 l 2.5,-10e-7 1.5,0 0.5,0 0,-0.499998 0,-0.500002 z"
+             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate" />
+        </g>
       </g>
     </g>
   </g>
