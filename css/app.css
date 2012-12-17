@@ -399,10 +399,15 @@ button.Browse .label {
 
 .inspector-inner {
     padding: 10px;
+    min-width:400px;
 }
 
 .inspector-inner.head {
     border-bottom: 1px solid #ccc;
+    background:#fff;
+    height:80px;
+    z-index:99;
+    position:relative;
 }
 
 .inspector-wrap a.permalink {
@@ -413,6 +418,19 @@ button.Browse .label {
 .inspector-inner.tag-wrap {
     max-height: 200px;
     overflow: auto;
+}
+
+.inspector-toggle {
+    padding:10px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    text-align:center;
+    color:#fff;
+    cursor:pointer;
+    background:#7092ff;
+}
+
+.inspector-body {
+    position:relative;
 }
 
 .tag-row {

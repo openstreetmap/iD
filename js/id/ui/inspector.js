@@ -177,19 +177,39 @@ iD.Inspector = function() {
                 });
 
             selection.append('div')
-                .attr('class', 'head inspector-inner').call(drawhead);
+                .attr('class', 'head inspector-inner')
+                .call(drawhead);
 
-            var inspectorwrap = selection
+            var inspectorbody = selection.append('div')
+                .attr('class', 'inspector-body');
+
+            var inspectorwrap = inspectorbody
                 .append('ul').attr('class', 'inspector-inner tag-wrap fillL2');
 
             inspectorwrap.append('h4').text('Edit tags');
 
             var formsel = draw(inspectorwrap);
 
-            formsel.select('input').node().focus();
-
-            selection.append('div')
+            inspectorbody.append('div')
                 .attr('class', 'inspector-buttons').call(drawbuttons);
+
+            var inHeight = inspectorbody.node().offsetHeight;
+
+            inspectorbody.style('display', 'none')
+                .style('margin-top', (-inHeight) + 'px');
+
+            var inspectortoggle = selection.append('div')
+                .attr('class', 'inspector-toggle')
+                .text('Details')
+                .on('click', function() {
+                    inspectortoggle.style('display', 'none');
+                    inspectorbody
+                        .style('display', 'block')
+                        .transition()
+                        .style('margin-top', '0px');
+                });
+
+            formsel.select('input').node().focus();
 
         });
     }
