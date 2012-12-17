@@ -70,23 +70,25 @@ iD.Inspector = function() {
                 }
 
                 var li = inspectorwrap.selectAll('li')
-                    .data(data, function(d) { return [d.key, d.value]; });
+                    .data(data, function(d) { return d.key; });
 
                 li.exit().remove();
 
                 var row = li.enter().append('li').attr('class','tag-row');
                 var inputs = row.append('div').attr('class','input-wrap');
 
+                li.classed('tag-row-empty', emptyTag);
+
                 inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'key')
-                    .property('value', function(d, i) { return d.key; })
+                    .property('value', function(d) { return d.key; })
                     .on('keyup.update', setKey);
 
                 inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'value')
-                    .property('value', function(d, i) { return d.value; })
+                    .property('value', function(d) { return d.value; })
                     .on('keyup.update', setValue)
                     .on('keydown.push-more', pushMore)
                     .each(bindTypeahead);
