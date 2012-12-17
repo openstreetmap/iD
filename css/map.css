@@ -32,6 +32,10 @@ circle.handle {
     stroke-opacity: 1;
 }
 
+circle.handle.two-parents {
+    fill:#aff;
+}
+
 circle.handle.hover {
 }
 
@@ -58,6 +62,7 @@ path.casing {
     stroke-linecap:round;
     stroke-linejoin:bevel;
     stroke-width: 3;
+    -webkit-transition: stroke 100ms linear;
 }
 
 path.casing.hover {

@@ -21,6 +21,17 @@ iD.Graph.prototype = {
         return this.entities[id];
     },
 
+    parentStructure: function(ways) {
+        var nodes = {};
+        ways.forEach(function(w) {
+            _.uniq(w.nodes).forEach(function(n) {
+                if (typeof nodes[n.id] === 'undefined') nodes[n.id] = 0;
+                nodes[n.id]++;
+            });
+        });
+        return nodes;
+    },
+
     parentWays: function(id) {
         // This is slow and a bad hack.
         return _.filter(this.entities, function(e) {

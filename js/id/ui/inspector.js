@@ -1,76 +1,43 @@
 iD.Inspector = function() {
-    var event = d3.dispatch('changeTags', 'changeWayDirection', 'update', 'remove', 'close', 'splitWay'),
+    var event = d3.dispatch('changeTags', 'changeWayDirection',
+        'update', 'remove', 'close', 'splitWay'),
         taginfo = iD.taginfo();
 
     function drawhead(selection) {
+        function osmLink(d) {
+            return 'http://www.openstreetmap.org/browse/' + d.type + '/' + d.osmId();
+        }
+        function emitChangeDirection(d) { event.changeWayDirection(iD.Entity(d)); }
+        function emitSplitWay(d) { event.splitWay(iD.Entity(d)); }
         selection.html('');
         selection.append('h2')
             .text(iD.util.friendlyName(selection.datum()));
         selection.append('a')
             .attr('class', 'permalink')
-            .attr('href', function(d) {
-                return 'http://www.openstreetmap.org/browse/' +
-                d.type + '/' + d.osmId();
-            })
+            .attr('href', osmLink)
             .text('View on OSM');
         if (selection.datum().type === 'way') {
             selection.append('a')
                 .attr('class', 'permalink')
                 .attr('href', '#')
                 .text('Reverse Direction')
-                .on('click', function(d) {
-                    event.changeWayDirection(iD.Entity(d));
-                });
+                .on('click', emitChangeDirection);
         }
         if (selection.datum().type === 'node' && !selection.datum()._poi) {
             selection.append('a')
                 .attr('class', 'permalink')
                 .attr('href', '#')
                 .text('Split Way')
-                .on('click', function(d) {
-                    event.splitWay(iD.Entity(d));
-                });
+                .on('click', emitSplitWay);
         }
     }
 
     function inspector(selection) {
         selection.each(function(entity) {
-            selection.html("").append('button')
-                .attr('class', 'narrow close')
-                .html("<span class='icon close'></span>")
-                .on('click', function() {
-                    event.close(entity);
-                });
-
-            selection.append('div')
-                .attr('class', 'head inspector-inner').call(drawhead);
-
-            var inspectorwrap = selection
-                .append('ul').attr('class', 'inspector-inner tag-wrap fillL2');
-
-            inspectorwrap.append('h4').text('Edit tags');
-
-            inspectorwrap
-                .data(['tag', 'value', ''])
-                .enter();
-
-            function removeTag(d) {
-                draw(grabtags().filter(function(t) { return t.key !== d.key; }));
-            }
 
             function draw(data) {
-
-                var li = inspectorwrap.selectAll('li')
-                    .data(data, function(d) { return [d.key, d.value]; });
-
-                li.exit().remove();
-
-                var row = li.enter().append('li').attr('class','tag-row');
-                var inputs = row.append('div').attr('class','input-wrap');
-
                 function setValue(d, i) { d.value = this.value; }
                 function setKey(d, i) { d.key = this.value; }
-
                 function emptyTag(d) { return d.key === ''; }
 
                 function pushMore(d, i) {
@@ -91,6 +58,14 @@ iD.Inspector = function() {
                             });
                         }));
                 }
+
+                var li = inspectorwrap.selectAll('li')
+                    .data(data, function(d) { return [d.key, d.value]; });
+
+                li.exit().remove();
+
+                var row = li.enter().append('li').attr('class','tag-row');
+                var inputs = row.append('div').attr('class','input-wrap');
 
                 inputs.append('input')
                     .property('type', 'text')
@@ -119,11 +94,51 @@ iD.Inspector = function() {
                     .append('a')
                         .attr('tabindex', -1)
                         .attr('target', '_blank')
+                        .on('click', function(d) {
+                            taginfo.docs(d, function(err, docs) {
+                                var en = _.find(docs, function(d) {
+                                    return d.lang == 'en';
+                                });
+                                if (en) {
+                                    var mod = iD.modal();
+                                    var types = [];
+                                    if (en.on_area) types.push('area');
+                                    if (en.on_node) types.push('point');
+                                    if (en.on_way) types.push('line');
+                                    mod.select('.content')
+                                        .append('h3')
+                                        .text(en.title);
+                                    mod.select('.content')
+                                        .append('div')
+                                        .selectAll('span.icon')
+                                        .data(types).enter()
+                                        .append('span')
+                                        .attr('title', function(d) {
+                                            return 'used with ' + d;
+                                        })
+                                        .attr('class', function(d) {
+                                            return 'icon add-' + d;
+                                        });
+                                    mod.select('.content')
+                                        .append('a')
+                                        .attr('href', 'http://wiki.openstreetmap.org/wiki/' + en.title)
+                                        .text('→ ' + en.title + ' on wiki.osm.org');
+                                    mod.select('.content')
+                                        .append('p')
+                                        .text(en.description);
+                                }
+                            });
+                            d3.event.preventDefault();
+                        })
                         .attr('href', function(d) {
                             return 'http://taginfo.openstreetmap.org/keys/' + d.key;
                         });
 
                 helpBtn.append('span').attr('class', 'icon inspect');
+            }
+
+            function removeTag(d) {
+                draw(grabtags().filter(function(t) { return t.key !== d.key; }));
             }
 
             function grabtags() {
@@ -140,15 +155,6 @@ iD.Inspector = function() {
                     .map(entries);
             }
 
-            var tags = d3.entries(_.clone(entity.tags));
-            if (tags.length === 0) tags = [{ key: '', value: '' }];
-            draw(tags);
-
-            selection.select('input').node().focus();
-
-            selection.append('div')
-                .attr('class', 'inspector-buttons').call(drawbuttons);
-
             function apply(entity) {
                 event.changeTags(entity, unentries(grabtags()));
                 event.close(entity);
@@ -164,6 +170,31 @@ iD.Inspector = function() {
                     .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
                     .on('click', function(entity) { event.remove(entity); });
             }
+
+            selection.html("").append('button')
+                .attr('class', 'narrow close')
+                .html("<span class='icon close'></span>")
+                .on('click', function() {
+                    event.close(entity);
+                });
+
+            selection.append('div')
+                .attr('class', 'head inspector-inner').call(drawhead);
+
+            var inspectorwrap = selection
+                .append('ul').attr('class', 'inspector-inner tag-wrap fillL2');
+
+            inspectorwrap.append('h4').text('Edit tags');
+
+            var tags = d3.entries(_.cloneDeep(entity.tags));
+            if (tags.length === 0) tags = [{ key: '', value: '' }];
+            draw(tags);
+
+            selection.select('input').node().focus();
+
+            selection.append('div')
+                .attr('class', 'inspector-buttons').call(drawbuttons);
+
         });
     }
 
