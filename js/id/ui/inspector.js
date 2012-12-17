@@ -109,32 +109,15 @@ iD.Inspector = function() {
                                     return d.lang == 'en';
                                 });
                                 if (en) {
-                                    var mod = iD.modal();
                                     var types = [];
                                     if (en.on_area) types.push('area');
                                     if (en.on_node) types.push('point');
                                     if (en.on_way) types.push('line');
+                                    en.types = types;
+                                    var mod = iD.modal();
                                     mod.select('.content')
-                                        .append('h3')
-                                        .text(en.title);
-                                    mod.select('.content')
-                                        .append('div')
-                                        .selectAll('span.icon')
-                                        .data(types).enter()
-                                        .append('span')
-                                        .attr('title', function(d) {
-                                            return 'used with ' + d;
-                                        })
-                                        .attr('class', function(d) {
-                                            return 'icon add-' + d;
-                                        });
-                                    mod.select('.content')
-                                        .append('a')
-                                        .attr('href', 'http://wiki.openstreetmap.org/wiki/' + en.title)
-                                        .text('→ ' + en.title + ' on wiki.osm.org');
-                                    mod.select('.content')
-                                        .append('p')
-                                        .text(en.description);
+                                        .datum(en)
+                                        .call(iD.tagReference);
                                 }
                             });
                             d3.event.preventDefault();
