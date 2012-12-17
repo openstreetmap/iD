@@ -140,8 +140,9 @@ iD.Map = function() {
         return handles;
     }
 
-    function hasTwoParents(d) { return parentStructure[d.id] > 1; }
     function drawHandles(waynodes, parentStructure, filter) {
+        function hasTwoParents(d) { return parentStructure[d.id] > 1; }
+
         var handles = g.hit.selectAll('circle.handle')
             .filter(filter)
             .data(waynodes, key);
