@@ -45,7 +45,7 @@ iD.Inspector = function() {
                     if (d3.event.keyCode === 9) {
                         var tags = grabtags();
                         if (i == tags.length - 1 && !tags.filter(emptyTag).length) {
-                            draw(tags.concat([{ key: '', value: '' }]));
+                            draw(tags);
                         }
                     }
                 }
@@ -63,6 +63,7 @@ iD.Inspector = function() {
                 function getTags(entity) {
                     var tags = d3.entries(_.cloneDeep(entity.tags));
                     if (tags.length === 0) tags = [{ key: '', value: '' }];
+                    else tags.push({ key: '', value: ''});
                     return tags;
                 }
 

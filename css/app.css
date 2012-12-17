@@ -405,16 +405,6 @@ button.Browse .label {
     border-bottom: 1px solid #ccc;
 }
 
-.inspector-inner button {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.inspector-inner button.tag-help {
-    right: 30px;
-}
-
 .inspector-wrap a.permalink {
     text-decoration:none;
     margin-right:1em;
@@ -451,6 +441,20 @@ button.Browse .label {
 }
 .tag-row input.value {
     border-right: 1px solid #ccc;
+}
+
+.tag-row button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.tag-row-empty button {
+    display: none;
+}
+
+.tag-row button.tag-help {
+    right: 30px;
 }
 
 .inspector-buttons {
