@@ -198,19 +198,20 @@ iD.Inspector = function() {
             inspectorbody.style('display', 'none')
                 .style('margin-top', (-inHeight) + 'px');
 
-            var inspectortoggle = selection.append('div')
-                .attr('class', 'inspector-toggle')
-                .text('Details')
+            var inspectortoggle = selection.append('button')
+                .attr('class', 'inspector-toggle action')
                 .on('click', function() {
                     inspectortoggle.style('display', 'none');
                     inspectorbody
                         .style('display', 'block')
                         .transition()
                         .style('margin-top', '0px');
-                });
-
+                })
             formsel.select('input').node().focus();
 
+            inspectortoggle.append('span')
+                .text('Details')
+                .attr('class','label');
         });
     }
 

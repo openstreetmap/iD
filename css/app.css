@@ -451,12 +451,11 @@ button.Browse .label {
 }
 
 .inspector-toggle {
-    padding:10px;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-    text-align:center;
     color:#fff;
-    cursor:pointer;
+    width: 100%;
+    display: block;
     background:#7092ff;
+    border: 0;
 }
 
 .inspector-body {
