@@ -7,7 +7,7 @@ iD.modes.AddLine = function() {
     };
 
     mode.enter = function() {
-        d3.select('#map').attr('class', function() { return mode.id});
+        d3.select('#map').attr('class', function() { return mode.id; });
 
         var map = mode.map,
             node,

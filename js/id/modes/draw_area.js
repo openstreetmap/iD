@@ -5,7 +5,7 @@ iD.modes.DrawArea = function(wayId) {
     };
 
     mode.enter = function() {
-        d3.select('#map').attr('class', function() { return mode.id});
+        d3.select('#map').attr('class', function() { return mode.id; });
         var map = mode.map,
             history = mode.history,
             controller = mode.controller,

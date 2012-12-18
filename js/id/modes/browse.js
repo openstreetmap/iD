@@ -7,7 +7,7 @@ iD.modes.Browse = function() {
     };
 
     mode.enter = function() {
-        d3.select('#map').attr('class', function() { return mode.id});
+        d3.select('#map').attr('class', function() { return mode.id; });
 
         iD.modes._dragFeatures(mode);
         mode.map.surface.on('click.browse', function () {
