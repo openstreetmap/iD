@@ -1,7 +1,8 @@
 iD.Inspector = function() {
     var event = d3.dispatch('changeTags', 'changeWayDirection',
         'update', 'remove', 'close', 'splitWay'),
-        taginfo = iD.taginfo();
+        taginfo = iD.taginfo(),
+        inspectorwrap;
 
     function drawhead(selection) {
         function osmLink(d) {
@@ -39,18 +40,23 @@ iD.Inspector = function() {
     function inspector(selection) {
         selection.each(function(entity) {
 
-            function draw(selection) {
+            function draw(tags) {
 
-                function setValue(d, i) { d.value = this.value; }
-                function setKey(d, i) { d.key = this.value; }
-                function emptyTag(d) { return d.key === ''; }
+                function setValue(d) {
+                    d.value = this.value;
+                }
 
-                function pushMore(d, i) {
+                function setKey(d) {
+                    d.key = this.value;
+                }
+
+                function emptyTag(d) {
+                    return d.key === '';
+                }
+
+                function pushMore() {
                     if (d3.event.keyCode === 9) {
-                        var tags = grabtags();
-                        if (i == tags.length - 1 && !tags.filter(emptyTag).length) {
-                            draw(tags);
-                        }
+                        draw(inspector.tags());
                     }
                 }
 
@@ -64,32 +70,29 @@ iD.Inspector = function() {
                         }));
                 }
 
-                function getTags(entity) {
-                    var tags = d3.entries(_.cloneDeep(entity.tags));
-                    if (tags.length === 0) tags = [{ key: '', value: '' }];
-                    else tags.push({ key: '', value: ''});
-                    return tags;
-                }
+                tags = d3.entries(tags);
+                tags.push({ key: '', value: ''});
 
-                var li = selection.selectAll('li')
-                    .data(getTags, function(d) { return [d.key, d.value]; });
-
+                var li = inspectorwrap.selectAll('li')
+                    .data(tags, function(d) { return d.key; });
 
                 li.exit().remove();
 
                 var row = li.enter().append('li').attr('class','tag-row');
                 var inputs = row.append('div').attr('class','input-wrap');
 
-                var keyInput = inputs.append('input')
+                li.classed('tag-row-empty', emptyTag);
+
+                inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'key')
-                    .property('value', function(d, i) { return d.key; })
+                    .property('value', function(d) { return d.key; })
                     .on('keyup.update', setKey);
 
                 inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'value')
-                    .property('value', function(d, i) { return d.value; })
+                    .property('value', function(d) { return d.value; })
                     .on('keyup.update', setValue)
                     .on('keydown.push-more', pushMore)
                     .each(bindTypeahead);
@@ -136,25 +139,13 @@ iD.Inspector = function() {
             }
 
             function removeTag(d) {
-                draw(grabtags().filter(function(t) { return t.key !== d.key; }));
-            }
-
-            function grabtags() {
-                var grabbed = [];
-                function grab(d) { if (d.key !== '') grabbed.push(d); }
-                inspectorwrap.selectAll('li').each(grab);
-                return grabbed;
-            }
-
-            function unentries(entries) {
-                return d3.nest()
-                    .key(function(d) { return d.key; })
-                    .rollup(function(v) { return v[0].value; })
-                    .map(entries);
+                var tags = inspector.tags();
+                delete tags[d.key];
+                draw(tags);
             }
 
             function apply(entity) {
-                event.changeTags(entity, unentries(grabtags()));
+                event.changeTags(entity, inspector.tags());
                 event.close(entity);
             }
 
@@ -183,12 +174,12 @@ iD.Inspector = function() {
             var inspectorbody = selection.append('div')
                 .attr('class', 'inspector-body');
 
-            var inspectorwrap = inspectorbody
+            inspectorwrap = inspectorbody
                 .append('ul').attr('class', 'inspector-inner tag-wrap fillL2');
 
             inspectorwrap.append('h4').text('Edit tags');
 
-            var formsel = draw(inspectorwrap);
+            var formsel = draw(entity.tags);
 
             inspectorbody.append('div')
                 .attr('class', 'inspector-buttons').call(drawbuttons);
@@ -206,7 +197,8 @@ iD.Inspector = function() {
                         .style('display', 'block')
                         .transition()
                         .style('margin-top', '0px');
-                })
+                });
+
             formsel.select('input').node().focus();
 
             inspectortoggle.append('span')
@@ -214,6 +206,20 @@ iD.Inspector = function() {
                 .attr('class','label');
         });
     }
+
+    function unentries(entries) {
+        return d3.nest()
+            .key(function(d) { return d.key; })
+            .rollup(function(v) { return v[0].value; })
+            .map(entries);
+    }
+
+    inspector.tags = function () {
+        var grabbed = [];
+        function grab(d) { if (d.key !== '') grabbed.push(d); }
+        inspectorwrap.selectAll('li').each(grab);
+        return unentries(grabbed);
+    };
 
     return d3.rebind(inspector, event, 'on');
 };
