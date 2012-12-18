@@ -3,7 +3,7 @@ iD.commit = function() {
 
     function commit(selection) {
         var changes = selection.datum(),
-            header = selection.append('div').attr('class', 'header'),
+            header = selection.append('div').attr('class', 'header pad1'),
             body = selection.append('div').attr('class', 'body');
 
         header.append('h2').text('Upload Changes to OpenStreetMap');
@@ -14,7 +14,7 @@ iD.commit = function() {
                 return changes[d].length;
             }))
             .enter()
-            .append('div').attr('class', 'commit-section');
+            .append('div').attr('class', 'commit-section pad1');
 
         section.append('h3').text(String)
             .append('small')
@@ -22,6 +22,7 @@ iD.commit = function() {
             .text(function(d) { return changes[d].length; });
 
         var li = section.append('ul')
+            .attr('class','changeset-list')
             .selectAll('li')
             .data(function(d) { return changes[d]; })
             .enter()
@@ -34,22 +35,30 @@ iD.commit = function() {
             })
             .attr('title', iD.util.tagText);
 
-        body.append('textarea')
-            .attr('class', 'changeset-comment')
-            .attr('placeholder', 'Brief Description');
+        body.append('div').attr('class','pad1')
+                .append('textarea')
+                .attr('class', 'changeset-comment pad1')
+                .attr('placeholder', 'Brief Description');
 
-        body.append('button').text('Save')
-            .attr('class', 'save')
+        var buttonwrap = body.append('div')
+                            .attr('class', 'buttons');
+
+        var savebutton = buttonwrap.append('button')
+            .attr('class', 'action wide')
             .on('click.save', function() {
                 event.save({
                     comment: d3.select('textarea.changeset-comment').node().value
                 });
             });
-        body.append('button').text('Cancel')
-            .attr('class', 'cancel')
+            savebutton.append('span').attr('class','icon save icon-pre-text')
+            savebutton.append('span').attr('class','label').text('Save')
+        var cancelbutton = buttonwrap.append('button')
+            .attr('class', 'cancel wide')
             .on('click.cancel', function() {
                 event.cancel();
             });
+            cancelbutton.append('span').attr('class','icon close icon-pre-text')
+            cancelbutton.append('span').attr('class','label').text('Cancel')
     }
 
     return d3.rebind(commit, event, 'on');

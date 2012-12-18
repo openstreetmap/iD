@@ -2,7 +2,7 @@
 ------------------------------------------------------- */
 
 body {
-    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
+    font:normal 12px/1.6666 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
     color:#222;
@@ -18,21 +18,22 @@ body {
 
 h2 {
     font-size: 24px;
+    line-height: 1.3333;
     font-weight: bold;
-    line-height:40px;
+    margin-bottom: 10px;
 }
 
 h3 {
     font-size: 18px;
+    line-height: 1.3333;
     font-weight: bold;
-    line-height:30px;
+    margin-bottom: 10px;
 }
 
 h4 {
     font-size: 12px;
     font-weight: normal;
     font-style: italic;
-    line-height: 20px;
     padding-bottom: 10px;
 }
 
@@ -179,8 +180,10 @@ form.hide {
     border: 1px solid #ccc;
 }
 
-.pad1 {
-padding: 10px;}
+.pad1    {padding: 10px;}
+.pad2    {padding: 20px;}
+.margin1 {margin: 10px;}
+.margin2 {margin: 20px;}
 
 /* Buttons */
 
@@ -245,6 +248,12 @@ button.minor:hover {
     background: white;
 }
 
+button.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .buttons-joined {
     display: inline-block;
     margin:10px;
@@ -291,8 +300,7 @@ button.save {
 }
 
 button.save:hover {
-    color: #59ac33;
-    background-color: #6bc641;
+    background-color: #59ac33;
 }
 
 button.close {
@@ -436,7 +444,7 @@ button.Browse .label {
     border-bottom: 1px solid #ccc;
     background:#fff;
     height:80px;
-    z-index:99;
+    z-index:1;
     position:relative;
 }
 
@@ -650,7 +658,10 @@ img.tile {
 #user-list {
     border-radius:3px 3px 0 0;
     right: 330px;
-    max-width: 300px;
+    max-width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #user-list a:not(:last-child):after {
@@ -701,23 +712,22 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 .modal {
-    width:640px;
-    height:550px;
-    padding:10px;
+    display: inline-block;
     position:absolute;
-    background:#f0f0f0;
+    width: 50%;
+    left: 25%;
     top:50px;
-    left:50%;
-    margin-left:-330px;
-    box-shadow:0 0 5px #000;
+    z-index: 3;
 }
 
-.modal.modal-alert {
-    width:320px;
-    height:100px;
-    margin-left:-160px;
+.modal .description {
+    text-align: center;
 }
 
+.shaded {
+    z-index: 2;
+    position: relative;
+}
 .shaded:before {
     content:'';
     background:rgba(0,0,0,0.5);
@@ -725,36 +735,43 @@ div.typeahead a:first-child {
     left:0px; right:0px; top:0px; bottom:0px;
 }
 
+.commit-modal { padding: 10px;}
+
 .commit-modal h3 small.count {
+    margin-right: 10px;
+    float: left;
+    height: 24px;
+    width: 24px;
     font-size:12px;
-    font-weight: normal;
-    line-height:40px;
-    border-radius:20px;
+    border-radius:50%;
     padding:5px;
     background:#7092ff;
-    margin-left:10px;
     color:#fff;
 }
 
-.commit-modal ul {
-    border-bottom:1px solid #ccc;
+.commit-modal .changeset-list {
+    overflow: auto;
+    border:1px solid #ccc;
     background:#fff;
+    max-height: 200px;
 }
 
-.commit-modal li {
+.changeset-list li {
     border-top:1px solid #ccc;
-    padding:2px 10px;
+    padding:5px 10px;
 }
+
+.changeset-list li:first-child { border-top: 0;}
 
 .commit-modal .changeset-comment {
-    width:630px;
+    height: 60px;
+    width:100%;
     /* firefox uses monospace in textareas */
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
 }
 
+.commit-modal .buttons button { margin-top: 0;}
 .commit-section {
-    max-height:250px;
-    overflow:auto;
 }
 
 /* Notices

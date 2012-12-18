@@ -137,7 +137,7 @@ window.iD = function(container) {
                     });
                 } else {
                     iD.confirm().select('.description')
-                        .text('You don\'t have any changes to save.');
+                        .append('h3').text('You don\'t have any changes to save.');
                 }
             });
 
