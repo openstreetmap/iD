@@ -98,7 +98,7 @@ window.iD = function(container) {
                 .placement('bottom'));
 
         this.append('div')
-            .attr('class', 'user')
+            .attr('class', 'user-container pad1 fillD about-block')
             .append('div')
                 .attr('class', 'hello');
 
@@ -166,15 +166,19 @@ window.iD = function(container) {
             .style('display', 'none');
 
         var about = this.append('div')
-            .attr('id', 'about')
-            .html("<a href='http://github.com/systemed/iD'>code</a> " +
-                  "<a href='http://github.com/systemed/iD/issues'>report a bug</a>" +
-                  " <a href='http://opengeodata.org/microsoft-imagery-details'><img src='img/bing.png' /></a>");
+
+        about.append('ul')
+            .attr('id','about')
+            .attr('class','pad1 fillD about-block link-list')
+            .html("<li><a href='http://github.com/systemed/iD'>view code</a></li> " +
+                  "<li><a href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
+                  " <li>imagery <a href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
 
         about.append('div')
             .attr('id', 'user-list')
+            .attr('class','about-block fillD pad1')
             .append('span')
-            .text('edited by ');
+            .text('Viewing contributions by ');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
@@ -215,7 +219,7 @@ window.iD = function(container) {
                 .center([-77.02405, 38.87952]);
         }
 
-        d3.select('.user').call(iD.userpanel(connection)
+        d3.select('.user-container').call(iD.userpanel(connection)
             .on('logout', connection.logout)
             .on('login', connection.authenticate));
 
