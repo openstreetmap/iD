@@ -906,6 +906,10 @@ div.typeahead a:first-child {
   border-width: 0 5px 5px;
 }
 
+.Browse .tooltip .tooltip-arrow {
+    left: 30px;
+    }
+
 /* Mobile Tweaks
 ------------------------------------------------------- */
 * {

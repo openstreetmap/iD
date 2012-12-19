@@ -174,11 +174,13 @@ window.iD = function(container) {
                   "<li><a href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
                   " <li>imagery <a href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
 
-        about.append('div')
+        var contributors = about.append('div')
             .attr('id', 'user-list')
-            .attr('class','about-block fillD pad1')
-            .append('span')
-            .text('Viewing contributions by ');
+            .attr('class','about-block fillD pad1');
+            contributors.append('span')
+                .attr('class', 'icon nearby icon-pre-text');
+            contributors.append('pan')
+                .text('Viewing contributions by ');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),

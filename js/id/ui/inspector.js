@@ -160,6 +160,13 @@ iD.Inspector = function() {
                     .on('click', function(entity) { event.remove(entity); });
             }
 
+            selection.html("").append('button')
+                .attr('class', 'narrow close')
+                .html("<span class='icon close'></span>")
+                .on('click', function() {
+                    event.close(entity);
+                });
+
             selection.append('div')
                 .attr('class', 'head inspector-inner')
                 .call(drawhead);
