@@ -25,7 +25,7 @@ iD.commit = function() {
                 });
             });
             savebutton.append('span').attr('class','icon save icon-pre-text')
-            savebutton.append('span').attr('class','label').text('Upload')
+            savebutton.append('span').attr('class','label').text('Save')
         var cancelbutton = buttonwrap.append('button')
             .attr('class', 'cancel wide')
             .on('click.cancel', function() {
