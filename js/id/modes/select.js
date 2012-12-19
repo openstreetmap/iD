@@ -26,7 +26,10 @@ iD.modes.Select = function (entity) {
         .on('dragend', function () {
             if (!dragging) return;
             dragging = undefined;
-            mode.map.redraw();
+
+            mode.history.replace(
+                iD.actions.Noop(),
+                'moved a way');
         });
 
     function remove() {
