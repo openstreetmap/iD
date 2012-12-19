@@ -730,6 +730,8 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
+.modal button { margin-top: 0;}
+
 .shaded {
     z-index: 2;
     position: relative;
@@ -780,8 +782,10 @@ div.typeahead a:first-child {
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
 }
 
-.commit-modal .buttons button { margin-top: 0;}
-.commit-section {
+.commit-modal .buttons {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 /* Notices
