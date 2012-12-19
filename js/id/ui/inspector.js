@@ -14,7 +14,7 @@ iD.Inspector = function() {
         var h2 = selection.append('h2');
         h2.append('span').attr('class', function(d) {
             var icons = { way: 'line', node: 'point' };
-            return 'icon add-' + icons[d.type];
+            return 'icon big icon-pre-text big-' + icons[d.type];
         });
         h2.append('span').text(iD.util.friendlyName(selection.datum()));
         selection.append('a')
@@ -155,17 +155,10 @@ iD.Inspector = function() {
                     .html("<span class='icon icon-pre-text apply'></span><span class='label'>Apply</span>")
                     .on('click', apply);
                 selection.append('button')
-                    .attr('class', 'delete wide action fr')
+                    .attr('class', 'delete wide action')
                     .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
                     .on('click', function(entity) { event.remove(entity); });
             }
-
-            selection.html("").append('button')
-                .attr('class', 'narrow close')
-                .html("<span class='icon close'></span>")
-                .on('click', function() {
-                    event.close(entity);
-                });
 
             selection.append('div')
                 .attr('class', 'head inspector-inner')

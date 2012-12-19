@@ -23,8 +23,8 @@ body {
 }
 
 h2 {
-    font-size: 24px;
-    line-height: 1.3333;
+    font-size: 25px;
+    line-height: 1.6;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -336,6 +336,11 @@ button.action .label {
   overflow:hidden;
   }
 
+.icon.big {
+    width: 40px;
+    height: 40px;
+}
+
 .icon.icon-pre-text {
   margin-right: 3px;
 }
@@ -358,8 +363,8 @@ button.action .label {
 .icon.zoom-out   { background-position: -260px 0px;}
 .icon.geocode    { background-position: -280px 0px;}
 .icon.layers     { background-position: -300px 0px;}
-.icon.avatar       { background-position: -320px 0px;}
-.icon.nearby       { background-position: -340px 0px;}
+.icon.avatar     { background-position: -320px 0px;}
+.icon.nearby     { background-position: -340px 0px;}
 
 .fillD .icon.browse     { background-position:   0px -20px;}
 .fillD .icon.add-point  { background-position: -20px -20px;}
@@ -398,6 +403,10 @@ button[disabled] .icon.geocode    { background-position: -280px -40px;}
 button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
+
+.icon.big-line   { background-position: 0px -80px;}
+.icon.big-point  { background-position: -40px -80px;}
+.icon.big-area   { background-position: -80px -80px;}
 
 /* Toggle Icon is special */
 .toggle.icon                   { background-position: 0px -180px;}
@@ -449,14 +458,14 @@ button.Browse .label {
 .inspector-inner.head {
     border-bottom: 1px solid #ccc;
     background:#fff;
-    height:80px;
     z-index:1;
     position:relative;
 }
 
 .inspector-wrap a.permalink {
     text-decoration:none;
-    margin-right:1em;
+    margin-right: 10px;
+    display: inline-block
 }
 
 .inspector-inner.tag-wrap {
@@ -726,6 +735,11 @@ div.typeahead a:first-child {
     z-index: 3;
 }
 
+.modal .content {
+    padding: 10px;
+    margin-bottom: 40px;
+}
+
 .modal .description {
     text-align: center;
 }
@@ -741,11 +755,6 @@ div.typeahead a:first-child {
     background:rgba(0,0,0,0.5);
     position:fixed;
     left:0px; right:0px; top:0px; bottom:0px;
-}
-
-.commit-modal {
-    padding: 10px;
-    margin-bottom: 40px;
 }
 
 .commit-modal h3 small.count {

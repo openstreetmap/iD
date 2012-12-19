@@ -3,8 +3,10 @@ iD.tagReference = function(selection) {
         function g(x) { return function(d) { return d[x]; }; }
         var selection = d3.select(this);
         selection
-            .append('h3')
-            .text(g('title'));
+            .append('div')
+                .attr('class','header')
+                .append('h2')
+                    .text(g('title'));
         var icon_row = selection.append('div');
         var icons = icon_row.selectAll('span.icon')
             .data(g('types'))
