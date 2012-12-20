@@ -762,6 +762,8 @@ div.typeahead a:first-child {
     z-index: 3;
 }
 
+.modal .loader { margin-bottom: 10px;}
+
 .modal .content {
     padding: 10px;
     margin-bottom: 40px;
