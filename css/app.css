@@ -29,6 +29,10 @@ h2 {
     margin-bottom: 10px;
 }
 
+h3:last-child,
+h2:last-child,
+h4:last-child { margin-bottom: 0;}
+
 h3 {
     font-size: 18px;
     line-height: 1.3333;
@@ -409,9 +413,11 @@ button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
-.icon.big-line   { background-position: 0px -80px;}
-.icon.big-point  { background-position: -40px -80px;}
-.icon.big-area   { background-position: -80px -80px;}
+.icon.big-line    { background-position: 0px -80px;}
+.icon.big-point   { background-position: -40px -80px;}
+.icon.big-area    { background-position: -80px -80px;}
+.icon.big-inspect { background-position: -120px -80px;}
+
 
 /* Toggle Icon is special */
 .toggle.icon                   { background-position: 0px -180px;}
@@ -765,7 +771,6 @@ div.typeahead a:first-child {
 .modal .loader { margin-bottom: 10px;}
 
 .modal .content {
-    padding: 10px;
     margin-bottom: 40px;
 }
 
@@ -773,7 +778,8 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
-.modal button { margin-top: 0;}
+.modal button { margin-bottom: 0;}
+.modal button:first-child { margin-left: 0;}
 
 .shaded {
     z-index: 2;
@@ -806,6 +812,12 @@ div.typeahead a:first-child {
     max-height: 160px;
 }
 
+.modal-section {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.modal-section:last-child { border-bottom: 0;}
+
 .changeset-list li {
     border-top:1px solid #ccc;
     padding:5px 10px;
@@ -818,12 +830,6 @@ div.typeahead a:first-child {
     width:100%;
     /* firefox uses monospace in textareas */
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
-}
-
-.commit-modal .buttons {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ccc;
 }
 
 .loading-modal {

@@ -2,8 +2,8 @@ iD.confirm = function(message) {
     var modal = iD.modal();
     modal.select('.modal').classed('modal-alert', true);
     modal.select('.content')
-        .classed('pad1', true)
-        .append('div').attr('class', 'description pad1');
+        .classed('modal-section', true)
+        .append('div').attr('class', 'description');
     var nochanges = modal.select('.content')
         .append('button')
         .attr('class','wide action centered')

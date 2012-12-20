@@ -2,11 +2,12 @@ iD.tagReference = function(selection) {
     selection.each(function() {
         function g(x) { return function(d) { return d[x]; }; }
         var selection = d3.select(this);
-        selection
-            .append('div')
-                .attr('class','header')
-                .append('h2')
-                    .text(g('title'));
+        var header = selection.append('div')
+                        .attr('class','modal-section')
+                        .append('h2');
+            header.append('span').attr('class','icon big icon-pre-text big-inspect');
+            header.append('span').text(g('title'));
+
         var icon_row = selection.append('div');
         var icons = icon_row.selectAll('span.icon')
             .data(g('types'))
