@@ -16,7 +16,7 @@ iD.tagReference = function(selection) {
                 return 'used with ' + d;
             })
             .attr('class', function(d) {
-                return 'icon add-' + d;
+                return 'icon big icon-pre-text big-' + d;
             });
         selection
             .append('a')

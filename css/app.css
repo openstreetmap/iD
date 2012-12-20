@@ -69,14 +69,19 @@ a:hover {
     color:#154dff;
 }
 
+textarea,
 input[type=text] {
     background-color: white;
-    height:30px;
     border:1px solid #ccc;
-    padding:4px 10px;
-    margin:0;
+    padding:10px;
 }
 
+input[type=text] {
+    padding:4px 10px;
+    height:30px;
+}
+
+textarea:focus,
 input[type=text]:focus {
     background-color: #ececec;
 }
@@ -509,8 +514,22 @@ button.Browse .label {
 .tag-row:first-child input {
     border-top: 1px solid #ccc;
 }
+
 .tag-row input.value {
+    position: relative;
     border-right: 1px solid #ccc;
+}
+
+.input-wrap::after {
+    content: '';
+    position: absolute;
+    right: 9px;
+    top: 14px;
+    height: 0;
+    width: 0;
+    border-top: 5px solid #ccc;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
 }
 
 .tag-row button {
@@ -519,16 +538,16 @@ button.Browse .label {
     right: 0;
 }
 
-.tag-row-empty button {
-    display: none;
-}
-
 .tag-row button.tag-help {
     right: 30px;
 }
 
 .inspector-buttons {
     border-top: 1px solid #ccc;
+}
+
+.tag-row-empty button {
+    display: none;
 }
 
 /* Map Controls */
@@ -621,11 +640,9 @@ button.Browse .label {
 }
 
 .geocode-control input {
-    width: 128px;
-    height: 20px;
+    width: 140px;
     border: 1px solid #ccc;
-    margin: 9px;
-    line-height: 20px;
+    margin: 4px;
 }
 
 /* Map
@@ -701,25 +718,35 @@ img.tile {
 ------------------------------------------------------- */
 
 div.typeahead {
-    width:200px;
+    width:155px;
     z-index: 9999;
+    display: none;
     box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
     margin-top: -1px;
+    background: white;
     max-height: 120px;
     overflow: auto;
+    border: 1px solid #ccc;
 }
 
 div.typeahead a {
     height: 30px;
-    border:1px solid #ccc;
-    border-top: 0;
+    line-height: 30px;
+    cursor: pointer;
+    display: block;
+    border-top:1px solid #ccc;
     background-color: #fff;
     padding:1px 4px;
-    display:block;
+}
+
+div.typeahead a:hover,
+div.typeahead a.selected  {
+    background: #e1e8ff;
+    color: #154dff;
 }
 
 div.typeahead a:first-child {
-    border-top: 1px solid #ccc;
+    border-top: 0;
 }
 
 
@@ -795,6 +822,10 @@ div.typeahead a:first-child {
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
+}
+
+.loading-modal {
+    text-align: center;
 }
 
 /* Notices

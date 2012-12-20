@@ -39,10 +39,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="131.68853"
-     inkscape:cy="97.839246"
+     inkscape:cx="29.5116"
+     inkscape:cy="98.899907"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer12"
      showgrid="true"
      inkscape:window-width="1560"
      inkscape:window-height="922"
@@ -1379,5 +1379,12 @@
        id="path14143"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccsccssccssccsccc" />
+    <rect
+       style="opacity:0.5;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4383"
+       width="20"
+       height="19.999998"
+       x="-135"
+       y="39.999996" />
   </g>
 </svg>

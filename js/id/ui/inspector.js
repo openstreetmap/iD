@@ -179,6 +179,7 @@ iD.Inspector = function() {
 
             inspectorwrap.append('h4').text('Edit tags');
 
+
             var formsel = draw(entity.tags);
 
             inspectorbody.append('div')
