@@ -203,6 +203,9 @@ window.iD = function(container) {
             .on('a', function(evt, mods) {
                 controller.enter(iD.modes.AddArea());
             })
+            .on('⌫.prevent_navigation', function(evt, mods) {
+                evt.preventDefault();
+            })
             .on('p', function(evt, mods) {
                 controller.enter(iD.modes.AddPoint());
             })
