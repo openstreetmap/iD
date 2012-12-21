@@ -9,20 +9,20 @@ window.iD = function(container) {
 
     map.background.source(iD.BackgroundSource.Bing);
 
-    function editor() {
+    function editor(container) {
         if (!iD.supported()) {
-            this.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
+            container.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
                       'and Internet Explorer 9 and above. Please upgrade your browser ' +
                       'or use Potlatch 2 to edit the map.')
                 .style('text-align:center;font-style:italic;');
             return;
         }
 
-        var m = this.append('div')
+        var m = container.append('div')
             .attr('id', 'map')
             .call(map);
 
-        var bar = this.append('div')
+        var bar = container.append('div')
             .attr('id', 'bar').attr('class', 'fillL2');
 
         var buttons_joined = bar.append('div')
@@ -97,7 +97,7 @@ window.iD = function(container) {
             .call(bootstrap.tooltip()
                 .placement('bottom'));
 
-        this.append('div')
+        container.append('div')
             .attr('class', 'user-container pad1 fillD about-block')
             .append('div')
                 .attr('class', 'hello');
@@ -144,7 +144,7 @@ window.iD = function(container) {
         bar.append('div')
             .attr('class', 'messages');
 
-        var zoom = this.append('div')
+        var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
             .selectAll('button')
                 .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
@@ -155,17 +155,17 @@ window.iD = function(container) {
                         return d[0] + ' icon';
                     });
 
-        var gc = this.append('div').attr('class', 'geocode-control map-control')
+        var gc = container.append('div').attr('class', 'geocode-control map-control')
             .call(iD.geocoder().map(map));
 
-        this.append('div').attr('class', 'map-control layerswitcher-control')
+        container.append('div').attr('class', 'map-control layerswitcher-control')
             .call(iD.layerswitcher(map));
 
-        this.append('div')
+        container.append('div')
             .attr('class', 'inspector-wrap fillL')
             .style('display', 'none');
 
-        var about = this.append('div')
+        var about = container.append('div')
 
         about.append('ul')
             .attr('id','about')
