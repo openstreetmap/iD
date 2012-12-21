@@ -2,9 +2,12 @@ image.tile {
 }
 
 /* base styles */
+path {
+    fill: none;
+}
+
 .mode-browse path,
 .mode-select path {
-    fill: none;
     cursor: url(../img/cursor-select-way.png), pointer;
 }
 
