@@ -30,6 +30,8 @@ all: \
 	js/id/util.js \
 	js/id/actions.js \
 	js/id/actions/*.js \
+	js/id/behavior.js \
+	js/id/behavior/*.js \
 	js/id/modes.js \
 	js/id/modes/*.js \
 	js/id/controller/*.js \

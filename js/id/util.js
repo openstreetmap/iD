@@ -56,7 +56,25 @@ iD.util.qsString = function(obj) {
     }).join('&');
 };
 
-iD.util.prefixProperty = function(property) {
+iD.util.prefixDOMProperty = function(property) {
+    var prefixes = ['webkit', 'ms', 'moz', 'o'],
+        i = -1,
+        n = prefixes.length,
+        s = document.body;
+
+    if (property in s)
+        return property;
+
+    property = property.substr(0, 1).toUpperCase() + property.substr(1);
+
+    while (++i < n)
+        if (prefixes[i] + property in s)
+            return prefixes[i] + property;
+
+    return false;
+};
+
+iD.util.prefixCSSProperty = function(property) {
     var prefixes = ['webkit', 'ms', 'Moz', 'O'],
         i = -1,
         n = prefixes.length,
@@ -74,7 +92,7 @@ iD.util.prefixProperty = function(property) {
 
 iD.util.support3d = function() {
     // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
-    var transformProp = iD.util.prefixProperty('Transform');
+    var transformProp = iD.util.prefixCSSProperty('Transform');
     var el = document.createElement('div'),
         has3d = false;
     document.body.insertBefore(el, null);

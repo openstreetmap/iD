@@ -20,7 +20,7 @@ iD.Map = function() {
         class_fill = iD.Style.styleClasses('stroke'),
         class_area = iD.Style.styleClasses('area'),
         class_casing = iD.Style.styleClasses('casing'),
-        transformProp = iD.util.prefixProperty('Transform'),
+        transformProp = iD.util.prefixCSSProperty('Transform'),
         support3d = iD.util.support3d(),
         supersurface, surface, defs, tilegroup, r, g, alength;
 

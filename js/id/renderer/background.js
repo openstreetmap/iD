@@ -2,7 +2,7 @@ iD.Background = function() {
     var tile = d3.geo.tile(),
         projection,
         cache = {},
-        transformProp = iD.util.prefixProperty('Transform'),
+        transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
     function atZoom(t, distance) {
