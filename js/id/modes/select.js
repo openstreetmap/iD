@@ -6,31 +6,7 @@ iD.modes.Select = function (entity) {
     };
 
     var inspector = iD.Inspector(),
-        dragging, target;
-
-    var dragWay = d3.behavior.drag()
-        .origin(function(entity) {
-            var p = mode.map.projection(entity.nodes[0].loc);
-            return { x: p[0], y: p[1] };
-        })
-        .on('drag', function(entity) {
-            d3.event.sourceEvent.stopPropagation();
-
-            if (!dragging) {
-                dragging = true;
-                mode.history.perform(iD.actions.Noop());
-            }
-
-            mode.history.replace(iD.actions.MoveWay(entity.id, [d3.event.dx, d3.event.dy], mode.map.projection));
-        })
-        .on('dragend', function () {
-            if (!dragging) return;
-            dragging = undefined;
-
-            mode.history.replace(
-                iD.actions.Noop(),
-                'moved a way');
-        });
+        target;
 
     function remove() {
         if (entity.type === 'way') {
@@ -85,7 +61,26 @@ iD.modes.Select = function (entity) {
         });
 
         if (entity.type === 'way') {
-            target.call(dragWay);
+            var history = mode.history,
+                projection = mode.map.projection;
+
+            target.call(iD.behavior.drag()
+                .origin(function(entity) {
+                    return projection(entity.nodes[0].loc);
+                })
+                .on('start', function() {
+                    history.perform(iD.actions.Noop());
+                })
+                .on('move', function(entity) {
+                    d3.event.sourceEvent.stopPropagation();
+                    history.replace(
+                        iD.actions.MoveWay(entity.id, d3.event.dxdy, projection));
+                })
+                .on('end', function() {
+                    history.replace(
+                        iD.actions.Noop(),
+                        'moved a way');
+                }));
         }
 
         mode.map.surface.on('click.browse', function () {

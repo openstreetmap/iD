@@ -1,45 +1,50 @@
 iD.modes._dragFeatures = function(mode) {
-    var dragging;
+    var history = mode.history,
+        projection = mode.map.projection;
 
-    var dragbehavior = d3.behavior.drag()
+    var dragNode = iD.behavior.drag()
+        .delegate(".handle, .marker")
         .origin(function(entity) {
-            var p = mode.map.projection(entity.loc);
-            // d3.event.sourceEvent.stopPropagation();
-            return { x: p[0], y: p[1] };
+            return projection(entity.loc);
         })
-        .on('drag', function(entity) {
+        .on('start', function() {
+            history.perform(
+                iD.actions.Noop());
+        })
+        .on('move', function(entity) {
             d3.event.sourceEvent.stopPropagation();
-
-            var loc = mode.map.projection.invert([d3.event.x, d3.event.y]);
-
-            if (!dragging) {
-                if (entity.accuracy) {
-                    dragging = iD.Node({loc: loc});
-                    mode.history.perform(
-                        iD.actions.AddNode(dragging),
-                        iD.actions.AddWayNode(entity.way, dragging.id, entity.index));
-                } else {
-                    dragging = entity;
-                    mode.history.perform(
-                        iD.actions.MoveNode(dragging.id, loc));
-                }
-            }
-
-            mode.history.replace(iD.actions.MoveNode(dragging.id, loc));
+            history.replace(
+                iD.actions.MoveNode(entity.id, projection.invert(d3.event.loc)));
         })
-        .on('dragend', function (entity) {
-            if (!dragging) return;
-            dragging = undefined;
-
-            mode.history.replace(
+        .on('end', function() {
+            history.replace(
                 iD.actions.Noop(),
-                entity.accuracy ? 'added a node to a way' : 'moved a node');
+                'moved a node');
+        });
+
+    var dragAccuracy = iD.behavior.drag()
+        .delegate(".accuracy-handle")
+        .origin(function(d) {
+            return projection(d.loc);
+        })
+        .on('start', function(d) {
+            d.node = iD.Node({loc: d.loc});
+            history.perform(
+                iD.actions.AddNode(d.node),
+                iD.actions.AddWayNode(d.way, d.node.id, d.index));
+        })
+        .on('move', function(d) {
+            d3.event.sourceEvent.stopPropagation();
+            history.replace(
+                iD.actions.MoveNode(d.node.id, projection.invert(d3.event.loc)));
+        })
+        .on('end', function() {
+            history.replace(
+                iD.actions.Noop(),
+                'added a node to a way');
         });
 
     mode.map.surface
-        .call(dragbehavior)
-        .call(d3.latedrag()
-             .filter(function(d) {
-                 return (d.type === 'node' || d.accuracy);
-             }));
+        .call(dragNode)
+        .call(dragAccuracy);
 };
