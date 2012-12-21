@@ -6,7 +6,7 @@ iD.modes.Select = function (entity) {
     };
 
     var inspector = iD.Inspector(),
-        target;
+        behaviors;
 
     function remove() {
         if (entity.type === 'way') {
@@ -27,10 +27,16 @@ iD.modes.Select = function (entity) {
     }
 
     mode.enter = function () {
-        target = mode.map.surface.selectAll('*')
-            .filter(function (d) { return d === entity; });
+        var surface = mode.map.surface;
 
-        iD.modes._dragFeatures(mode);
+        behaviors = [
+            iD.behavior.DragNode(mode),
+            iD.behavior.DragWay(mode),
+            iD.behavior.DragAccuracyHandle(mode)];
+
+        behaviors.forEach(function(behavior) {
+            behavior(surface);
+        });
 
         d3.select('.inspector-wrap')
             .style('display', 'block')
@@ -60,30 +66,7 @@ iD.modes.Select = function (entity) {
             mode.controller.exit();
         });
 
-        if (entity.type === 'way') {
-            var history = mode.history,
-                projection = mode.map.projection;
-
-            target.call(iD.behavior.drag()
-                .origin(function(entity) {
-                    return projection(entity.nodes[0].loc);
-                })
-                .on('start', function() {
-                    history.perform(iD.actions.Noop());
-                })
-                .on('move', function(entity) {
-                    d3.event.sourceEvent.stopPropagation();
-                    history.replace(
-                        iD.actions.MoveWay(entity.id, d3.event.dxdy, projection));
-                })
-                .on('end', function() {
-                    history.replace(
-                        iD.actions.Noop(),
-                        'moved a way');
-                }));
-        }
-
-        mode.map.surface.on('click.browse', function () {
+        surface.on('click.browse', function () {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
                 mode.controller.enter(iD.modes.Select(datum));
@@ -101,18 +84,18 @@ iD.modes.Select = function (entity) {
     };
 
     mode.exit = function () {
+        var surface = mode.map.surface;
+
         d3.select('.inspector-wrap')
             .style('display', 'none');
 
-        if (entity.type === 'way') {
-            target.on('mousedown.drag', null)
-                .on('touchstart.drag', null);
-        }
+        behaviors.forEach(function(behavior) {
+            behavior.off(surface);
+        });
 
-        mode.map.surface.on("click.browse", null);
-        mode.map.surface.on('mousedown.latedrag', null);
+        surface.on("click.browse", null);
+        surface.on('mousedown.latedrag', null);
         mode.map.keybinding().on('⌫.browse', null);
-
         mode.map.selection(null);
     };
 

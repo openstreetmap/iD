@@ -6,11 +6,22 @@ iD.modes.Browse = function() {
         description: 'Pan and zoom the map'
     };
 
+    var behaviors;
+
     mode.enter = function() {
         d3.select('#map').attr('class', function() { return mode.id; });
 
-        iD.modes._dragFeatures(mode);
-        mode.map.surface.on('click.browse', function () {
+        var surface = mode.map.surface;
+
+        behaviors = [
+            iD.behavior.DragNode(mode),
+            iD.behavior.DragAccuracyHandle(mode)];
+
+        behaviors.forEach(function(behavior) {
+            behavior(surface);
+        });
+
+        surface.on('click.browse', function () {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
                 mode.controller.enter(iD.modes.Select(datum));
@@ -19,8 +30,14 @@ iD.modes.Browse = function() {
     };
 
     mode.exit = function() {
-        mode.map.surface.on('mousedown.latedrag', null);
-        mode.map.surface.on('click.browse', null);
+        var surface = mode.map.surface;
+
+        behaviors.forEach(function(behavior) {
+            behavior.off(surface);
+        });
+
+        surface.on('mousedown.latedrag', null);
+        surface.on('click.browse', null);
         d3.select('#map').attr('class', null);
     };
 
