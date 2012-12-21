@@ -7,8 +7,6 @@ iD.modes.AddLine = function() {
     };
 
     mode.enter = function() {
-        d3.select('#map').attr('class', function() { return mode.id; });
-
         var map = mode.map,
             node,
             history = mode.history,
@@ -74,7 +72,6 @@ iD.modes.AddLine = function() {
         mode.map.hint(false);
         mode.map.surface.on('click.addline', null);
         mode.map.keybinding().on('⎋.addline', null);
-        d3.select('#map').attr('class', null);
     };
 
     return mode;

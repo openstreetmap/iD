@@ -9,8 +9,6 @@ iD.modes.Browse = function() {
     var behaviors;
 
     mode.enter = function() {
-        d3.select('#map').attr('class', function() { return mode.id; });
-
         var surface = mode.map.surface;
 
         behaviors = [
@@ -37,7 +35,6 @@ iD.modes.Browse = function() {
         });
 
         surface.on('click.browse', null);
-        d3.select('#map').attr('class', null);
     };
 
     return mode;

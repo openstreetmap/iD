@@ -5,7 +5,6 @@ iD.modes.DrawArea = function(wayId) {
     };
 
     mode.enter = function() {
-        d3.select('#map').attr('class', function() { return mode.id; });
         var map = mode.map,
             history = mode.history,
             controller = mode.controller,
@@ -31,11 +30,7 @@ iD.modes.DrawArea = function(wayId) {
 
         function mouseover() {
             var datum = d3.select(d3.event.target).datum() || {};
-            if (datum.id === tailId) {
-                d3.select('#map').attr('class', 'finish-area draw-area');
-            } else if ( (d3.select('#map').classed('draw-area')) && (datum.id !== tailId)) {
-                d3.select('#map').attr('class', 'draw-area');
-            }
+            d3.select('#map').classed('finish-area', datum.id === tailId);
         }
 
         function click() {
@@ -129,7 +124,6 @@ iD.modes.DrawArea = function(wayId) {
     };
 
     mode.exit = function() {
-        d3.select('#map').attr('class', null);
         mode.map.hint(false);
         mode.map.fastEnable(true);
 

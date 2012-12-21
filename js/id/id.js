@@ -76,6 +76,11 @@ window.iD = function(container) {
 
         controller.on('enter', function (entered) {
             buttons.classed('active', function (mode) { return entered.button === mode.button; });
+            container.classed("mode-" + entered.id, true);
+        });
+
+        controller.on('exit', function (exited) {
+            container.classed("mode-" + exited.id, false);
         });
 
         var undo_buttons = bar.append('div')

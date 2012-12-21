@@ -2,12 +2,14 @@ image.tile {
 }
 
 /* base styles */
-path, image.marker {
+.mode-browse path,
+.mode-select path {
     fill: none;
     cursor: url(../img/cursor-select-way.png), pointer;
 }
 
-g.marker {
+.mode-browse g.marker,
+.mode-select g.marker {
     cursor: url(../img/cursor-select-marker.png), pointer;
 }
 
@@ -24,12 +26,16 @@ g.marker.active circle {
 
 /* interactive elements */
 circle.handle {
-    cursor: url(../img/cursor-select-node.png), pointer;
     fill:white;
     stroke:#333;
     fill-opacity:1;
     stroke-width:2;
     stroke-opacity: 1;
+}
+
+.mode-select circle.handle,
+.mode-browse circle.handle {
+    cursor: url(../img/cursor-select-node.png), pointer;
 }
 
 circle.handle.two-parents {
@@ -44,11 +50,15 @@ circle.handle.active {
 }
 
 circle.accuracy-handle {
-    cursor: url(../img/cursor-select-split.png), pointer;
     fill:#aaa;
     stroke:#333;
     fill-opacity:1;
     stroke-width:1;
+}
+
+.mode-select circle.accuracy-handle,
+.mode-browse circle.accuracy-handle {
+    cursor: url(../img/cursor-select-split.png), pointer;
 }
 
 circle.teaser-point {
@@ -100,6 +110,10 @@ path.area {
     stroke:red;
     fill:#fff;
     fill-opacity:0.3;
+}
+
+.mode-select path.area,
+.mode-browse path.area {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 

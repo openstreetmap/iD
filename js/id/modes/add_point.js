@@ -6,8 +6,6 @@ iD.modes.AddPoint = function() {
     };
 
     mode.enter = function() {
-        d3.select('#map').attr('class', function() { return mode.id; });
-
         var map = mode.map,
             history = mode.history,
             controller = mode.controller;
@@ -33,7 +31,6 @@ iD.modes.AddPoint = function() {
         mode.map.hint(false);
         mode.map.surface.on('click.addpoint', null);
         mode.map.keybinding().on('⎋.addpoint', null);
-        d3.select('#map').attr('class', null);
     };
 
     return mode;
