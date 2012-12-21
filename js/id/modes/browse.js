@@ -36,7 +36,6 @@ iD.modes.Browse = function() {
             behavior.off(surface);
         });
 
-        surface.on('mousedown.latedrag', null);
         surface.on('click.browse', null);
         d3.select('#map').attr('class', null);
     };

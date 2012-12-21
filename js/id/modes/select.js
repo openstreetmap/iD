@@ -94,7 +94,6 @@ iD.modes.Select = function (entity) {
         });
 
         surface.on("click.browse", null);
-        surface.on('mousedown.latedrag', null);
         mode.map.keybinding().on('⌫.browse', null);
         mode.map.selection(null);
     };
