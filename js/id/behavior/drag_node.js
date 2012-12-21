@@ -14,7 +14,7 @@ iD.behavior.DragNode = function(mode) {
         .on('move', function(entity) {
             d3.event.sourceEvent.stopPropagation();
             history.replace(
-                iD.actions.MoveNode(entity.id, projection.invert(d3.event.loc)));
+                iD.actions.MoveNode(entity.id, projection.invert(d3.event.point)));
         })
         .on('end', function() {
             history.replace(

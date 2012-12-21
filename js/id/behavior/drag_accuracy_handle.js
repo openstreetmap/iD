@@ -16,7 +16,7 @@ iD.behavior.DragAccuracyHandle = function(mode) {
         .on('move', function(d) {
             d3.event.sourceEvent.stopPropagation();
             history.replace(
-                iD.actions.MoveNode(d.node.id, projection.invert(d3.event.loc)));
+                iD.actions.MoveNode(d.node.id, projection.invert(d3.event.point)));
         })
         .on('end', function() {
             history.replace(

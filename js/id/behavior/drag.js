@@ -7,7 +7,7 @@
       (https://github.com/mbostock/d3/issues/563)
     * The `start` event is not dispatched until the first cursor movement occurs.
       (https://github.com/mbostock/d3/pull/368)
-    * The `move` event has a `loc` and `dxdy` [x, y] tuple properties rather
+    * The `move` event has a `point` and `delta` [x, y] tuple properties rather
       than `x`, `y`, `dx`, and `dy` properties.
     * The `end` event is not dispatched if no movement occurs.
     * An `off` function is available that unbinds the drag's internal event handlers.
@@ -85,8 +85,8 @@ iD.behavior.drag = function () {
 
             event_({
                 type: "move",
-                loc: [p[0] + offset[0],  p[1] + offset[1]],
-                dxdy: [dx, dy]
+                point: [p[0] + offset[0],  p[1] + offset[1]],
+                delta: [dx, dy]
             });
         }
 
