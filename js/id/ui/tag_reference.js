@@ -5,27 +5,29 @@ iD.tagReference = function(selection) {
         var header = selection.append('div')
             .attr('class','modal-section')
             .append('h2');
-                header.append('span').attr('class','icon big icon-pre-text big-inspect');
-                header.append('span').text(g('title'));
-        var icon_row = selection.append('div')
-            .attr('class','modal-section');
-        var icons = icon_row.selectAll('span.icon')
+
+        header.selectAll('span.icon')
             .data(g('types'))
             .enter()
             .append('span')
             .attr('title', function(d) {
                 return 'used with ' + d;
+            })
+            .attr('class', function(d) {
+                return 'icon big icon-pre-text big-' + d;
             });
-            // .attr('class', function(d) {
-            //     // return 'icon icon-pre-text ' + d;
-            // });
-        icon_row
+            header.append('span')
+                .text(g('title'));
+
+        referenceBody =  selection.append('div')
+            .attr('class','modal-section');
+        referenceBody
             .append('h5')
             .text('Description')
-        icon_row
+        referenceBody
             .append('p')
             .text(g('description'));
-        icon_row
+        referenceBody
             .append('a')
             .attr('href', function(d) {
                 return 'http://wiki.openstreetmap.org/wiki/' + d.title;
