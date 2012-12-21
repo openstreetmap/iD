@@ -120,6 +120,13 @@ path.area {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 
+.mode-select g.marker.active,
+.mode-select path.active,
+.mode-select circle.handle.active,
+.mode-select path.area.active {
+    cursor: url(../img/cursor-select-acting.png), pointer;
+}
+
 path.area.active {
     stroke-width:3 !important;
 }
