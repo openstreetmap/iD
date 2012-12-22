@@ -41,7 +41,7 @@ circle.handle {
     cursor: url(../img/cursor-select-node.png), pointer;
 }
 
-circle.handle.two-parents {
+circle.handle.shared {
     fill:#aff;
 }
 

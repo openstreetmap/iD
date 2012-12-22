@@ -141,7 +141,7 @@ iD.Map = function() {
     }
 
     function drawHandles(waynodes, parentStructure, filter) {
-        function hasTwoParents(d) { return parentStructure[d.id] > 1; }
+        function shared(d) { return parentStructure[d.id] > 1; }
 
         var handles = g.hit.selectAll('circle.handle')
             .filter(filter)
@@ -160,7 +160,7 @@ iD.Map = function() {
                     ')';
             })
             .classed('active', classActive)
-            .classed('two-parents', hasTwoParents)
+            .classed('shared', shared)
             .classed('hover', classHover);
 
         handles.transition().duration(50).attr('r', function(d) {
