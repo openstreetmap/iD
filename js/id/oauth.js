@@ -79,7 +79,7 @@ iD.OAuth = function() {
             modal
                 .select('.content')
                 .append('iframe')
-                .attr({ width: 640, height: 550, frameborder: 'no' })
+                .attr({ width: "100%", height: 550, frameborder: 'no' })
                 .attr('src', baseurl + '/oauth/authorize?' + ohauth.qsString({
                     oauth_token: resp.oauth_token,
                     oauth_callback: location.href.replace('index.html', '')
