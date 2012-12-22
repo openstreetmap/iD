@@ -66,7 +66,7 @@ iD.modes.Select = function (entity) {
             mode.controller.exit();
         });
 
-        surface.on('click.browse', function () {
+        surface.on('click.select', function () {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
                 mode.controller.enter(iD.modes.Select(datum));
@@ -75,7 +75,7 @@ iD.modes.Select = function (entity) {
             }
         });
 
-        mode.map.keybinding().on('⌫.browse', function(e) {
+        mode.map.keybinding().on('⌫.select', function(e) {
             remove();
             e.preventDefault();
         });
@@ -95,8 +95,8 @@ iD.modes.Select = function (entity) {
             behavior.off(surface);
         });
 
-        surface.on("click.browse", null);
-        mode.map.keybinding().on('⌫.browse', null);
+        surface.on("click.select", null);
+        mode.map.keybinding().on('⌫.select', null);
 
         surface.selectAll(".selected")
             .classed('selected', false);
