@@ -2,7 +2,7 @@ iD.Map = function() {
     var connection, history,
         dimensions = [],
         dispatch = d3.dispatch('move'),
-        selection = null, hover = null,
+        hover = null,
         translateStart,
         keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
@@ -68,7 +68,6 @@ iD.Map = function() {
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
     function classHover(d) { return d.id === hover; }
-    function classActive(d) { return d.id === selection; }
     function getline(d) { return d._line; }
     function key(d) { return d.id; }
     function nodeline(d) {
@@ -159,7 +158,6 @@ iD.Map = function() {
                 return 'translate(' + [~~p[0], ~~p[1]] +
                     ')';
             })
-            .classed('active', classActive)
             .classed('shared', shared)
             .classed('hover', classHover);
 
@@ -178,7 +176,7 @@ iD.Map = function() {
         handles.attr('transform', function(entity) {
             var p = projection(entity.loc);
             return 'translate(' + [~~p[0], ~~p[1]] + ')';
-        }).classed('active', classActive);
+        });
     }
 
     function editOff() {
@@ -196,14 +194,12 @@ iD.Map = function() {
             .data(data, key);
         lines.exit().remove();
         lines.enter().append('path')
-            .classed('hover', classHover)
-            .classed('active', classActive);
+            .classed('hover', classHover);
         lines
             .order()
             .attr('d', getline)
             .attr('class', class_gen)
-            .classed('hover', classHover)
-            .classed('active', classActive);
+            .classed('hover', classHover);
         return lines;
     }
 
@@ -229,8 +225,7 @@ iD.Map = function() {
         markers.attr('transform', function(d) {
                 var pt = projection(d.loc);
                 return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
-            })
-            .classed('active', classActive);
+            });
         markers.classed('hover', classHover);
         markers.select('image').attr('xlink:href', iD.Style.markerimage);
     }
@@ -465,12 +460,6 @@ iD.Map = function() {
         if (!arguments.length) return keybinding;
         keybinding = _;
         return map;
-    };
-
-    map.selection = function (_) {
-        if (!arguments.length) return selection;
-        selection = _;
-        return redraw();
     };
 
     map.background = background;

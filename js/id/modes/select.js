@@ -80,7 +80,9 @@ iD.modes.Select = function (entity) {
             e.preventDefault();
         });
 
-        mode.map.selection(entity.id);
+        surface.selectAll("*")
+            .filter(function (d) { return d === entity; })
+            .classed('selected', true);
     };
 
     mode.exit = function () {
@@ -95,7 +97,9 @@ iD.modes.Select = function (entity) {
 
         surface.on("click.browse", null);
         mode.map.keybinding().on('⌫.browse', null);
-        mode.map.selection(null);
+
+        surface.selectAll(".selected")
+            .classed('selected', false);
     };
 
     return mode;

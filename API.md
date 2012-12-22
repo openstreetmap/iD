@@ -51,7 +51,7 @@ TODO: elaborate.
 
 ### Special classes
 
-A node that is a member of two or more ways shall have the `.shared` class. (TODO)
+A node that is a member of two or more ways shall have the `.shared` class.
 
 Two or more nodes at identical coordinates shall each have an `.overlapped` class. (TODO)
 
@@ -60,6 +60,6 @@ Elements comprising the entity currently under the cursor shall have the `.hover
 of several elements, only one of which can be `:hover`ed.)
 
 Elements that are currently active (being clicked or dragged) shall have the `.active`
-class.
+class. (TODO)
 
 Elements that are currently selected shall have the `.selected` class.
