@@ -149,32 +149,6 @@ ul.link-list li:first-child {
     padding-left: 0;
 }
 
-/* Mode-specific styles
-------------------------------------------------------- */
-
-#map:hover {
-    cursor:url(../img/cursor-grab.png) 9 9, auto;
-}
-
-#map:active {
-    cursor:url(../img/cursor-grabbing.png) 9 9, auto;
-}
-
-.mode-draw-line #map:hover,
-.mode-draw-area #map:hover,
-.mode-add-line  #map:hover,
-.mode-add-area  #map:hover {
-    cursor:url(../img/cursor-draw.png) 9 9, auto;
-}
-
-.mode-add-point #map:hover {
-    cursor:url(../img/cursor-draw-marker.png) 18 18, auto;
-}
-
-#map.finish-area:hover {
-    cursor:url(../img/cursor-draw-finish.png) 9 9, auto;
-}
-
 /* Utility Classes
 ------------------------------------------------------- */
 
