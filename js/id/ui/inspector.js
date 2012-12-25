@@ -8,8 +8,8 @@ iD.Inspector = function() {
         function osmLink(d) {
             return 'http://www.openstreetmap.org/browse/' + d.type + '/' + d.osmId();
         }
-        function emitChangeDirection(d) { event.changeWayDirection(iD.Entity(d)); }
-        function emitSplitWay(d) { event.splitWay(iD.Entity(d)); }
+        function emitChangeDirection(d) { event.changeWayDirection(d); }
+        function emitSplitWay(d) { event.splitWay(d); }
         selection.html('');
         var h2 = selection.append('h2');
         h2.append('span').attr('class', function(d) {
