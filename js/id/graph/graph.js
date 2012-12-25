@@ -10,6 +10,8 @@ iD.Graph = function(entities) {
         this.entities = entities || {};
     }
 
+    this.transients = {};
+
     if (iD.debug) {
         Object.freeze(this);
         Object.freeze(this.entities);
@@ -19,6 +21,17 @@ iD.Graph = function(entities) {
 iD.Graph.prototype = {
     entity: function(id) {
         return this.entities[id];
+    },
+
+    transient: function(entity, key, fn) {
+        var id = entity.id,
+            transients = this.transients[id] || (this.transients[id] = {});
+
+        if (transients[key]) {
+            return transients[key];
+        }
+
+        return transients[key] = fn.call(entity);
     },
 
     parentStructure: function(ways) {

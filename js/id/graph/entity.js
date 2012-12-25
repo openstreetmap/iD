@@ -2,13 +2,12 @@ iD.Entity = function(a, b, c) {
     if (!(this instanceof iD.Entity)) return new iD.Entity(a, b, c);
 
     this.tags = {};
-    this.transients = {};
 
     var sources = [a, b, c], source;
     for (var i = 0; i < sources.length; ++i) {
         source = sources[i];
         for (var prop in source) {
-            if (prop !== 'transients' && Object.prototype.hasOwnProperty.call(source, prop)) {
+            if (Object.prototype.hasOwnProperty.call(source, prop)) {
                 this[prop] = source[prop];
             }
         }
@@ -59,33 +58,32 @@ iD.Entity.prototype = {
         return this._updated && this.osmId() > 0;
     },
 
-    intersects: function(extent, resolver) {
+    extent: function(resolver) {
         if (this.type === 'node') {
-            return this.loc[0] > extent[0][0] &&
-                   this.loc[0] < extent[1][0] &&
-                   this.loc[1] < extent[0][1] &&
-                   this.loc[1] > extent[1][1];
-        } else if (this.type === 'way') {
-            var _extent = this.transients.extent;
-
-            if (!_extent) {
-                _extent = this.transients.extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
+            return [this.loc, this.loc];
+        } else if (this.type == 'way') {
+            return resolver.transient(this, 'extent', function() {
+                var extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
                 for (var i = 0, l = this.nodes.length; i < l; i++) {
                     var node = resolver.entity(this.nodes[i]);
-                    if (node.loc[0] > _extent[0][0]) _extent[0][0] = node.loc[0];
-                    if (node.loc[0] < _extent[1][0]) _extent[1][0] = node.loc[0];
-                    if (node.loc[1] < _extent[0][1]) _extent[0][1] = node.loc[1];
-                    if (node.loc[1] > _extent[1][1]) _extent[1][1] = node.loc[1];
+                    if (node.loc[0] > extent[0][0]) extent[0][0] = node.loc[0];
+                    if (node.loc[0] < extent[1][0]) extent[1][0] = node.loc[0];
+                    if (node.loc[1] < extent[0][1]) extent[0][1] = node.loc[1];
+                    if (node.loc[1] > extent[1][1]) extent[1][1] = node.loc[1];
                 }
-            }
-
-            return _extent[0][0] > extent[0][0] &&
-                   _extent[1][0] < extent[1][0] &&
-                   _extent[0][1] < extent[0][1] &&
-                   _extent[1][1] > extent[1][1];
+                return extent;
+            });
         } else {
-            return false;
+            return [[NaN, NaN], [NaN, NaN]];
         }
+    },
+
+    intersects: function(extent, resolver) {
+        var _extent = this.extent(resolver);
+        return _extent[0][0] > extent[0][0] &&
+               _extent[1][0] < extent[1][0] &&
+               _extent[0][1] < extent[0][1] &&
+               _extent[1][1] > extent[1][1];
     },
 
     hasInterestingTags: function() {

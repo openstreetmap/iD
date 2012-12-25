@@ -7,10 +7,6 @@ describe('iD.Entity', function () {
         it("freezes tags", function () {
             expect(Object.isFrozen(iD.Entity().tags)).to.be.true;
         });
-
-        it("does not freeze transients", function () {
-            expect(Object.isFrozen(iD.Entity().transients)).to.be.false;
-        });
     }
 
     describe(".id", function () {
@@ -55,12 +51,6 @@ describe('iD.Entity', function () {
             var attrs = {tags: {foo: 'bar'}},
                 e = iD.Entity().update(attrs);
             expect(attrs).to.eql({tags: {foo: 'bar'}});
-        });
-
-        it("doesn't copy transients", function () {
-            var entity = iD.Entity();
-            entity.transients['foo'] = 'bar';
-            expect(entity.update({}).transients).not.to.have.property('foo');
         });
 
         it("doesn't copy prototype properties", function () {
