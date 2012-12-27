@@ -4,9 +4,9 @@ iD.format.XML = {
             return iD.format.XML.mappings[entity.type](entity);
         }
     },
-    rep: function(entity) {
+    rep: function(entity, changeset_id) {
         if (iD.format.XML.reps[entity.type]) {
-            return iD.format.XML.reps[entity.type](entity);
+            return iD.format.XML.reps[entity.type](entity, changeset_id);
         } else {
             if (typeof console !== 'undefined') console.log(entity.type);
         }
@@ -47,32 +47,24 @@ iD.format.XML = {
             });
             return ordered;
         }
-        var rep = {
+
+        function rep(entity) {
+            return iD.format.XML.rep(entity, changeset_id);
+        }
+
+        return (new XMLSerializer()).serializeToString(JXON.unbuild({
             osmChange: {
                 '@version': 0.3,
                 '@generator': 'iD',
                 // TODO: copy elements first
-                create: nest(changes.created.map(function(c) {
-                    var x = iD.Entity(c);
-                    x.changeset = changeset_id;
-                    return x;
-                }).map(iD.format.XML.rep)),
-                modify: changes.modified.map(function(c) {
-                    var x = iD.Entity(c);
-                    x.changeset = changeset_id;
-                    return x;
-                }).map(iD.format.XML.rep),
-                'delete': changes.deleted.map(function(c) {
-                    var x = iD.Entity(c);
-                    x.changeset = changeset_id;
-                    return x;
-                }).map(iD.format.XML.rep)
+                create: nest(changes.created.map(rep)),
+                modify: changes.modified.map(rep),
+                'delete': changes.deleted.map(rep)
             }
-        };
-        return (new XMLSerializer()).serializeToString(JXON.unbuild(rep));
+        }));
     },
     reps: {
-        node: function(entity) {
+        node: function(entity, changeset_id) {
             var r = {
                 node: {
                     '@id': entity.id.replace('n', ''),
@@ -84,10 +76,10 @@ iD.format.XML = {
                     })
                 }
             };
-            if (entity.changeset) r.node['@changeset'] = entity.changeset;
+            if (changeset_id) r.node['@changeset'] = changeset_id;
             return r;
         },
-        way: function(entity) {
+        way: function(entity, changeset_id) {
             var r = {
                 way: {
                     '@id': entity.id.replace('w', ''),
@@ -100,7 +92,7 @@ iD.format.XML = {
                     })
                 }
             };
-            if (entity.changeset) r.way['@changeset'] = entity.changeset;
+            if (changeset_id) r.way['@changeset'] = changeset_id;
             return r;
         }
     },
