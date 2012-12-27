@@ -70,29 +70,42 @@ iD.OAuth = function() {
         ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
             if (err) callback(err);
             l.remove();
-            authorize(ohauth.stringQs(xhr.response));
+            var modal = iD.modal();
+            modal
+                .select('.content')
+                .append('button')
+                .text('Authenticate with OpenStreetMap')
+                .on('click', function() {
+                    modal.remove();
+                    authorize(ohauth.stringQs(xhr.response));
+                });
         });
 
         function authorize(resp) {
             token('oauth_request_token_secret', resp.oauth_token_secret);
-            var modal = iD.modal();
-            modal
-                .select('.content')
-                .append('iframe')
-                .attr({ width: "100%", height: 550, frameborder: 'no' })
-                .attr('src', baseurl + '/oauth/authorize?' + ohauth.qsString({
-                    oauth_token: resp.oauth_token,
-                    oauth_callback: location.href.replace('index.html', '')
-                        .replace(/#.+/, '') + 'land.html'
-                }))
-                .on('load', function() {
-                    if (this.contentWindow.location.search) {
-                        var search = this.contentWindow.location.search,
+            var w = 600, h = 550,
+                settings = [
+                    ['width', w], ['height', h],
+                    ['left', screen.width / 2 - w / 2],
+                    ['top', screen.height / 2 - h / 2]].map(function(x) {
+                        return x.join('=');
+                    }).join(','),
+                popup = window.open(
+                    baseurl + '/oauth/authorize?' + ohauth.qsString({
+                        oauth_token: resp.oauth_token,
+                        oauth_callback: location.href.replace('index.html', '')
+                            .replace(/#.+/, '') + 'land.html'
+                    }), 'oauth_window', settings),
+                locationCheck = window.setInterval(function() {
+                    if (popup.closed) return window.clearInterval(locationCheck);
+                    if (popup.location.search) {
+                        var search = popup.location.search,
                             oauth_token = ohauth.stringQs(search.slice(1));
-                        modal.remove();
+                        popup.close();
                         get_access_token(oauth_token);
+                        window.clearInterval(locationCheck);
                     }
-                });
+                }, 100);
         }
 
         function get_access_token(oauth_token) {
