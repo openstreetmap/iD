@@ -8,7 +8,7 @@ iD.modal = function() {
         .append('div').attr('class', 'shaded')
         .style('opacity', 0)
         .on('click.remove-modal', function() {
-            if (d3.event.target == this) this.remove();
+            if (d3.event.target == this) d3.select(this).remove();
         });
 
     shaded.append('div')
