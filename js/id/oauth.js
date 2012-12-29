@@ -1,6 +1,5 @@
 iD.OAuth = function() {
-    var baseurl = 'http://api06.dev.openstreetmap.org',
-        apibase = 'http://api06.dev.openstreetmap.org',
+    var baseurl = 'http://www.openstreetmap.org',
         oauth_secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p',
         oauth = {};
 
@@ -24,9 +23,9 @@ iD.OAuth = function() {
     // token getter/setter, namespaced to the current `apibase` value.
     function token(k, x) {
         if (arguments.length == 2) {
-            localStorage[keyclean(apibase) + k] = x;
+            localStorage[keyclean(baseurl) + k] = x;
         }
-        return localStorage[keyclean(apibase) + k];
+        return localStorage[keyclean(baseurl) + k];
     }
 
     oauth.authenticated = function() {
@@ -45,7 +44,7 @@ iD.OAuth = function() {
             o.oauth_token = token('oauth_token');
         }
         o = timenonce(o);
-        var url = apibase + options.path;
+        var url = baseurl + options.path;
         var oauth_token_secret = token('oauth_token_secret');
         o.oauth_signature = ohauth.signature(oauth_secret, oauth_token_secret,
             ohauth.baseString(options.method, url, o));
@@ -129,9 +128,9 @@ iD.OAuth = function() {
 
     };
 
-    oauth.api = function(_) {
-        if (!arguments.length) return apibase;
-        apibase = _;
+    oauth.url = function(_) {
+        if (!arguments.length) return baseurl;
+        baseurl = _;
         return oauth;
     };
 

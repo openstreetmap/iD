@@ -93,6 +93,8 @@
     </head>
     <body>
         <div id="iD"></div><script>
-            var id = iD(document.getElementById('iD'));
+            var id = iD();
+            id.connection().url('http://api06.dev.openstreetmap.org');
+            d3.select("#iD").call(id);
         </script></body>
 </html>

@@ -1,16 +1,16 @@
 iD.Connection = function() {
 
     var event = d3.dispatch('auth', 'load'),
-        apiURL = 'http://www.openstreetmap.org',
+        url = 'http://www.openstreetmap.org',
         connection = {},
         refNodes = {},
         user = {},
         inflight = [],
         loadedTiles = {},
-        oauth = iD.OAuth().api(apiURL);
+        oauth = iD.OAuth();
 
     function bboxUrl(b) {
-        return apiURL + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
+        return url + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
     }
 
     function bboxFromAPI(box, callback) {
@@ -139,7 +139,7 @@ iD.Connection = function() {
     }
 
     connection.userUrl = function(username) {
-        return apiURL + "/user/" + username;
+        return url + "/user/" + username;
     };
 
     function tileAtZoom(t, distance) {
@@ -196,9 +196,9 @@ iD.Connection = function() {
     }
 
     connection.url = function(_) {
-        if (!arguments.length) return apiURL;
-        apiURL = _;
-        oauth.api(_);
+        if (!arguments.length) return url;
+        url = _;
+        oauth.url(_);
         return connection;
     };
 
@@ -231,9 +231,7 @@ iD.Connection = function() {
     connection.loadTiles = _.debounce(loadTiles, 100);
     connection.userDetails = userDetails;
     connection.authenticated = authenticated;
-
     connection.objectData = objectData;
-    connection.apiURL = apiURL;
 
     return d3.rebind(connection, event, 'on');
 };
