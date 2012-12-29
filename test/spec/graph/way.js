@@ -35,6 +35,16 @@ describe('iD.Way', function() {
         expect(iD.Way({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
+    describe("#extent", function () {
+        it("returns the minimal extent containing all member nodes", function () {
+            var node1 = iD.Node({loc: [0, 0]}),
+                node2 = iD.Node({loc: [5, 10]}),
+                way   = iD.Way({nodes: [node1.id, node2.id]}),
+                graph = iD.Graph([node1, node2, way]);
+            expect(way.extent(graph)).to.eql([[5, 0], [0, 10]]);
+        });
+    });
+
     describe("#intersects", function () {
         it("returns true for a way with a node within the given extent", function () {
             var node  = iD.Node({loc: [0, 0]}),

@@ -34,4 +34,8 @@ describe('iD.Relation', function () {
     it("sets tags as specified", function () {
         expect(iD.Relation({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
+
+    describe("#extent", function () {
+        it("returns the minimal extent containing the extents of all members");
+    });
 });

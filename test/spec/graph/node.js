@@ -21,6 +21,12 @@ describe('iD.Node', function () {
         expect(iD.Node({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
+    describe("#extent", function() {
+        it("returns a point extent", function() {
+            expect(iD.Node({loc: [5, 10]}).extent()).to.eql([[5, 10], [5, 10]]);
+        });
+    });
+
     describe("#intersects", function () {
         it("returns true for a node within the given extent", function () {
             expect(iD.Node({loc: [0, 0]}).intersects([[-180, 90], [180, -90]])).to.equal(true);

@@ -1,4 +1,8 @@
 iD.Relation = iD.Entity.extend({
     type: "relation",
-    members: []
+    members: [],
+
+    extent: function() {
+        return [[NaN, NaN], [NaN, NaN]];
+    }
 });
