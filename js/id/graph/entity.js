@@ -68,10 +68,6 @@ iD.Entity.prototype = {
         return this._updated && this.osmId() > 0;
     },
 
-    extent: function() {
-        throw Error("not implemented");
-    },
-
     intersects: function(extent, resolver) {
         var _extent = this.extent(resolver);
         return _extent[0][0] > extent[0][0] &&
