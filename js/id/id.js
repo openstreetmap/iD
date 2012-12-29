@@ -49,17 +49,18 @@ window.iD = function(container) {
             var users = {},
                 entities = map.history().graph().intersects(map.extent());
             for (var i in entities) {
-                users[entities[i].user] = true;
-                if (Object.keys(users).length > 10) break;
+                if (entities[i].user) {
+                    users[entities[i].user] = true;
+                    if (Object.keys(users).length > 10) break;
+                }
             }
             var u = Object.keys(users);
             var l = d3.select('#user-list')
                 .selectAll('a.user-link').data(u);
             l.enter().append('a')
                 .attr('class', 'user-link')
-                .attr('href', function(d) {
-                    return 'http://api06.dev.openstreetmap.org/user/' + d;
-                })
+                .attr('href', function(d) { return connection.userUrl(d); })
+                .attr('target', '_blank')
                 .text(String);
             l.exit().remove();
         }, 1000);

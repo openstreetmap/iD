@@ -138,6 +138,10 @@ iD.Connection = function() {
         });
     }
 
+    connection.userUrl = function(username) {
+        return apiURL + "/user/" + username;
+    };
+
     function tileAtZoom(t, distance) {
         var power = Math.pow(2, distance);
         return [
