@@ -1,6 +1,6 @@
-// an index of tag -> marker image combinations, taken from
+// an index of tag -> point image combinations, taken from
 // http://svn.openstreetmap.org/applications/rendering/mapnik/inc/layer-amenity-symbols.xml.inc
-iD._markers = [
+iD._points = [
     {
         tags: { aeroway: 'helipad' },
         icon: 'helipad'
@@ -549,18 +549,18 @@ iD._markers = [
     }
 ];
 
-// generate a fast lookup table for marker styling
-iD._markertable = (function(markers) {
+// generate a fast lookup table for point styling
+iD._pointTable = (function(points) {
     var table = {};
-    for (var i = 0; i < markers.length; i++) {
-        var marker = markers[i];
+    for (var i = 0; i < points.length; i++) {
+        var point = points[i];
         // single-tag matches, the easy case
-        if (Object.keys(marker.tags).length === 1) {
-            for (var k in marker.tags) {
-                var key = k + '=' + marker.tags[k];
-                table[key] = marker.icon;
+        if (Object.keys(point.tags).length === 1) {
+            for (var k in point.tags) {
+                var key = k + '=' + point.tags[k];
+                table[key] = point.icon;
             }
         }
     }
     return table;
-})(iD._markers);
+})(iD._points);

@@ -6,19 +6,19 @@ path {
     fill: none;
 }
 
-g.marker circle {
+g.point circle {
     fill:#fff;
 }
 
-g.marker.hover circle,
-g.marker.selected circle {
+g.point.hover circle,
+g.point.selected circle {
     fill:#ffff00;
     stroke-width:4;
     stroke:#fff
 }
 
 /* interactive elements */
-circle.handle {
+circle.vertex {
     fill:white;
     stroke:#333;
     fill-opacity:1;
@@ -26,14 +26,14 @@ circle.handle {
     stroke-opacity: 1;
 }
 
-circle.handle.shared {
+circle.vertex.shared {
     fill:#aff;
 }
 
-circle.handle.hover {
+circle.vertex.hover {
 }
 
-circle.handle.selected {
+circle.vertex.selected {
     fill: #ffff00;
 }
 
@@ -243,24 +243,19 @@ text.oneway {
     cursor:url(../img/cursor-grabbing.png) 9 9, auto;
 }
 
-.mode-browse path,
-.mode-select path {
-    cursor: url(../img/cursor-select-way.png), pointer;
+.mode-browse .point,
+.mode-select .point {
+    cursor: url(../img/cursor-select-point.png), pointer;
 }
 
-.mode-browse .marker,
-.mode-select .marker {
-    cursor: url(../img/cursor-select-marker.png), pointer;
+.mode-select .vertex,
+.mode-browse .vertex {
+    cursor: url(../img/cursor-select-vertex.png), pointer;
 }
 
-.mode-select .handle,
-.mode-browse .handle {
-    cursor: url(../img/cursor-select-node.png), pointer;
-}
-
-.mode-select .accuracy-handle,
-.mode-browse .accuracy-handle {
-    cursor: url(../img/cursor-select-split.png), pointer;
+.mode-browse .line,
+.mode-select .line {
+    cursor: url(../img/cursor-select-line.png), pointer;
 }
 
 .mode-select .area,
@@ -268,10 +263,15 @@ text.oneway {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 
-path:active,
+.mode-select .accuracy-handle,
+.mode-browse .accuracy-handle {
+    cursor: url(../img/cursor-select-split.png), pointer;
+}
+
+.point:active,
+.vertex:active,
+.line:active,
 .area:active,
-.marker:active,
-.handle:active,
 .accuracy-handle:active,
 .mode-select .selected {
     cursor: url(../img/cursor-select-acting.png), pointer;
@@ -285,7 +285,7 @@ path:active,
 }
 
 .mode-add-point #map:hover {
-    cursor:url(../img/cursor-draw-marker.png) 18 18, auto;
+    cursor:url(../img/cursor-draw-point.png) 18 18, auto;
 }
 
 #map.finish-area:hover {

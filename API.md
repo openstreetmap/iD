@@ -26,21 +26,21 @@ elements we use in order to implement a particular visual style.
 ### Geometric classes
 
 In addition to the OSM element vocabulary of nodes, ways, and relations, iD has
-established a related geometric vocabulary consisting of points, lines, and areas.
+established a related geometric vocabulary consisting of points, vertices, lines,
+and areas.
 
-A **point** is a node that is either not a member of any way, or has specific tags
-that identify it as "interesting" in some way. For example, a node belonging to a
-way may also be considered a point if it has a `traffic_signal` tag. Elements
-representing points have a `.point` class. Since a point is always a node, they
-also have a `.node` class. Nodes that are not points can be selected using
-`.node:not(.point)` (TODO: come up with something better than that.)
+A **point** is a node that is not a member of any way. Elements representing points
+have a `.point` class. Since a point is always a node, they also have a `.node` class.
+
+A **vertex** is a node that is a member of one or more ways. Elements representing
+points have `.vertex` and `.node` classes.
 
 A **line** is a way that is not an area. Elements representing lines have a `.line`
 class. Since a line is also a way, they also have a `.way` class.
 
 An **area** is a way that is circular, has certain tags, or lacks certain other
 tags (see `iD.Way#isArea` for the exact definition). Elements representing areas
-have an `.area` class. Since an area is also a way, they also have a `.way` class.
+have `.area` and `.way` classes.
 
 ### Tag classes
 

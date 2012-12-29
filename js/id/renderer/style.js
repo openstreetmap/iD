@@ -5,7 +5,7 @@ iD.Style = {};
 // Since SVG does not support z-index, we sort roads manually with d3's `sort`
 // and the `waystack` fn.
 //
-// This also chooses kosher CSS classes for ways, and marker images for POIs
+// This also chooses kosher CSS classes for ways, and images for points
 
 iD.Style.highway_stack = {
     motorway: 0,
@@ -37,12 +37,12 @@ iD.Style.waystack = function(a, b) {
     return as - bs;
 };
 
-iD.Style.markerimage = function(d) {
+iD.Style.pointImage = function(d) {
     // TODO: optimize
     for (var k in d.tags) {
         var key = k + '=' + d.tags[k];
-        if (iD._markertable[key]) {
-            return 'icons/' + iD._markertable[key] + '.png';
+        if (iD._pointTable[key]) {
+            return 'icons/' + iD._pointTable[key] + '.png';
         }
     }
     return 'icons/unknown.png';

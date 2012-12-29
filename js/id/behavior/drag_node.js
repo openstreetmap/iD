@@ -3,7 +3,7 @@ iD.behavior.DragNode = function(mode) {
         projection = mode.map.projection;
 
     return iD.behavior.drag()
-        .delegate(".handle, .marker")
+        .delegate(".node")
         .origin(function(entity) {
             return projection(entity.loc);
         })

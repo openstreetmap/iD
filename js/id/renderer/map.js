@@ -16,10 +16,9 @@ iD.Map = function() {
         notice,
         background = iD.Background()
             .projection(projection),
-        class_stroke = iD.Style.styleClasses('stroke'),
-        class_fill = iD.Style.styleClasses('stroke'),
-        class_area = iD.Style.styleClasses('area'),
-        class_casing = iD.Style.styleClasses('casing'),
+        class_stroke = iD.Style.styleClasses('way line stroke'),
+        class_casing = iD.Style.styleClasses('way line casing'),
+        class_area = iD.Style.styleClasses('way area'),
         transformProp = iD.util.prefixCSSProperty('Transform'),
         support3d = iD.util.support3d(),
         supersurface, surface, defs, tilegroup, r, g, alength;
@@ -76,7 +75,7 @@ iD.Map = function() {
 
     function drawVector(difference) {
         if (surface.style(transformProp) != 'none') return;
-        var filter, all, ways = [], lines = [], areas = [], points = [], waynodes = [],
+        var filter, all, ways = [], lines = [], areas = [], points = [], vertices = [],
             extent = map.extent(),
             graph = history.graph();
 
@@ -109,19 +108,19 @@ iD.Map = function() {
             } else if (a._poi) {
                 points.push(a);
             } else if (!a._poi && a.type === 'node' && a.intersects(extent)) {
-                waynodes.push(a);
+                vertices.push(a);
             }
         }
         var parentStructure = graph.parentStructure(ways);
         var wayAccuracyHandles = ways.reduce(function(mem, w) {
             return mem.concat(accuracyHandles(w));
         }, []);
-        drawHandles(waynodes, parentStructure, filter);
+        drawVertices(vertices, parentStructure, filter);
         drawAccuracyHandles(wayAccuracyHandles, filter);
         drawCasings(lines, filter);
         drawFills(areas, filter);
         drawStrokes(lines, filter);
-        drawMarkers(points, filter);
+        drawPoints(points, filter);
     }
 
     function accuracyHandles(way) {
@@ -139,21 +138,19 @@ iD.Map = function() {
         return handles;
     }
 
-    function drawHandles(waynodes, parentStructure, filter) {
+    function drawVertices(vertices, parentStructure, filter) {
         function shared(d) { return parentStructure[d.id] > 1; }
 
-        var handles = g.hit.selectAll('circle.handle')
+        var vertices = g.hit.selectAll('circle.vertex')
             .filter(filter)
-            .data(waynodes, key);
+            .data(vertices, key);
 
-        handles.exit().remove();
+        vertices.exit().remove();
 
-        handles.enter().insert('circle', ':first-child')
-            .attr({
-                'class': 'handle'
-            });
+        vertices.enter().insert('circle', ':first-child')
+            .attr('class', 'node vertex');
 
-        handles.attr('transform', function(entity) {
+        vertices.attr('transform', function(entity) {
                 var p = projection(entity.loc);
                 return 'translate(' + [~~p[0], ~~p[1]] +
                     ')';
@@ -161,7 +158,7 @@ iD.Map = function() {
             .classed('shared', shared)
             .classed('hover', classHover);
 
-        handles.transition().duration(50).attr('r', function(d) {
+        vertices.transition().duration(50).attr('r', function(d) {
                 return d.id === hover ? 8: 4;
             });
     }
@@ -211,23 +208,23 @@ iD.Map = function() {
         drawLines(ways, filter, g.casing, class_casing);
     }
 
-    function drawMarkers(points, filter) {
-        var markers = g.hit.selectAll('g.marker')
+    function drawPoints(points, filter) {
+        var points = g.hit.selectAll('g.point')
             .filter(filter)
             .data(points, key);
-        markers.exit().remove();
-        var marker = markers.enter().append('g')
-            .attr('class', 'marker');
-        marker.append('circle')
+        points.exit().remove();
+        var group = points.enter().append('g')
+            .attr('class', 'node point');
+        group.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
-        marker.append('image')
+        group.append('image')
             .attr({ width: 16, height: 16 });
-        markers.attr('transform', function(d) {
+        points.attr('transform', function(d) {
                 var pt = projection(d.loc);
                 return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
             });
-        markers.classed('hover', classHover);
-        markers.select('image').attr('xlink:href', iD.Style.markerimage);
+        points.classed('hover', classHover);
+        points.select('image').attr('xlink:href', iD.Style.pointImage);
     }
 
     function drawStrokes(ways, filter) {
