@@ -52,6 +52,10 @@ describe('iD.Way', function() {
     });
 
     describe('#isClosed', function() {
+        it('returns false when the way has no nodes', function() {
+            expect(iD.Way().isClosed()).to.equal(false);
+        });
+
         it('returns false when the way ends are not equal', function() {
             expect(iD.Way({nodes: ['n1', 'n2']}).isClosed()).to.equal(false);
         });
@@ -72,6 +76,28 @@ describe('iD.Way', function() {
 
         it('returns true when the way has tag oneway=yes', function() {
             expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay()).to.equal(true);
+        });
+    });
+
+    describe('#isArea', function() {
+        it('returns false when the way has no tags', function() {
+            expect(iD.Way().isArea()).to.equal(false);
+        });
+
+        it('returns true if the way has tag area=yes', function() {
+            expect(iD.Way({tags: { area: 'yes' }}).isArea()).to.equal(true);
+        });
+
+        it('returns true if the way is closed and has no tags', function() {
+            expect(iD.Way({nodes: ['n1', 'n1']}).isArea()).to.equal(true);
+        });
+
+        it('returns false if the way is closed and has tag area=no', function() {
+            expect(iD.Way({tags: { area: 'no' }, nodes: ['n1', 'n1']}).isArea()).to.equal(false);
+        });
+
+        it('returns false if the way is closed and has highway tag', function() {
+            expect(iD.Way({tags: { highway: 'residential' }, nodes: ['n1', 'n1']}).isArea()).to.equal(false);
         });
     });
 });

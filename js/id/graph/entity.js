@@ -129,11 +129,11 @@ iD.Way = iD.Entity.extend({
     nodes: [],
 
     isOneWay: function() {
-        return !!(this.tags.oneway && this.tags.oneway === 'yes');
+        return this.tags.oneway === 'yes';
     },
 
     isClosed: function() {
-        return (!this.nodes.length) || this.nodes[this.nodes.length - 1] === this.nodes[0];
+        return this.nodes.length > 0 && this.nodes[this.nodes.length - 1] === this.nodes[0];
     },
 
     // a way is an area if:
@@ -143,14 +143,11 @@ iD.Way = iD.Entity.extend({
     //   - doesn't have area=no
     //   - doesn't have highway tag
     isArea: function() {
-        return (this.tags.area && this.tags.area === 'yes') ||
+        return this.tags.area === 'yes' ||
             (this.isClosed() &&
-                 // area-ness is disabled
-                 (!this.tags.area || this.tags.area !== 'no') &&
-                 // Tags that disable area-ness unless they are accompanied by
-                 // area=yes
-                 !this.tags.highway &&
-                 !this.tags.barrier);
+                this.tags.area !== 'no' &&
+                !this.tags.highway &&
+                !this.tags.barrier);
     }
 });
 
