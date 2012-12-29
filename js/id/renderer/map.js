@@ -104,7 +104,7 @@ iD.Map = function() {
             if (a.type === 'way') {
                 a._line = nodeline(a);
                 ways.push(a);
-                if (iD.Way.isArea(a)) areas.push(a);
+                if (a.isArea()) areas.push(a);
                 else lines.push(a);
             } else if (a._poi) {
                 points.push(a);
@@ -235,7 +235,7 @@ iD.Map = function() {
 
         // Determine the lengths of oneway paths
         var lengths = {},
-            oneways = strokes.filter(iD.Way.isOneWay).each(function(d) {
+            oneways = strokes.filter(function (d) { return d.isOneWay(); }).each(function(d) {
                 lengths[d.id] = Math.floor(this.getTotalLength() / alength);
             }).data();
 

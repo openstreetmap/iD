@@ -1,30 +1,12 @@
-iD.Entity = function(a, b, c) {
-    if (!(this instanceof iD.Entity)) return new iD.Entity(a, b, c);
+iD.Entity = function(attrs) {
+    // For prototypal inheritance.
+    if (this instanceof iD.Entity) return;
 
-    this.tags = {};
+    // Create the appropriate subtype.
+    if (attrs && attrs.type) return iD.Entity[attrs.type].apply(this, arguments);
 
-    var sources = [a, b, c], source;
-    for (var i = 0; i < sources.length; ++i) {
-        source = sources[i];
-        for (var prop in source) {
-            if (Object.prototype.hasOwnProperty.call(source, prop)) {
-                this[prop] = source[prop];
-            }
-        }
-    }
-
-    if (!this.id && this.type) {
-        this.id = iD.Entity.id(this.type);
-        this._updated = true;
-    }
-
-    if (iD.debug) {
-        Object.freeze(this);
-        Object.freeze(this.tags);
-
-        if (this.nodes) Object.freeze(this.nodes);
-        if (this.members) Object.freeze(this.members);
-    }
+    // Initialize a generic Entity (used only in tests).
+    return (new iD.Entity()).initialize(arguments);
 };
 
 iD.Entity.id = function (type) {
@@ -42,6 +24,34 @@ iD.Entity.id.toOSM = function (id) {
 };
 
 iD.Entity.prototype = {
+    tags: {},
+
+    initialize: function(sources) {
+        for (var i = 0; i < sources.length; ++i) {
+            var source = sources[i];
+            for (var prop in source) {
+                if (Object.prototype.hasOwnProperty.call(source, prop)) {
+                    this[prop] = source[prop];
+                }
+            }
+        }
+
+        if (!this.id && this.type) {
+            this.id = iD.Entity.id(this.type);
+            this._updated = true;
+        }
+
+        if (iD.debug) {
+            Object.freeze(this);
+            Object.freeze(this.tags);
+
+            if (this.nodes) Object.freeze(this.nodes);
+            if (this.members) Object.freeze(this.members);
+        }
+
+        return this;
+    },
+
     osmId: function() {
         return iD.Entity.id.toOSM(this.id);
     },
@@ -97,39 +107,54 @@ iD.Entity.prototype = {
     }
 };
 
-iD.Node = function(attrs) {
-    return iD.Entity(attrs || {}, {type: 'node'});
+iD.Entity.extend = function(properties) {
+    var Subclass = function() {
+        if (this instanceof Subclass) return;
+        return (new Subclass()).initialize(arguments);
+    };
+
+    Subclass.prototype = new iD.Entity();
+    _.extend(Subclass.prototype, properties);
+    iD.Entity[properties.type] = Subclass;
+
+    return Subclass;
 };
 
-iD.Way = function(attrs) {
-    return iD.Entity({nodes: []}, attrs || {}, {type: 'way'});
-};
+iD.Node = iD.Entity.extend({
+    type: "node"
+});
 
-iD.Way.isOneWay = function(d) {
-    return !!(d.tags.oneway && d.tags.oneway === 'yes');
-};
+iD.Way = iD.Entity.extend({
+    type: "way",
+    nodes: [],
 
-iD.Way.isClosed = function(d) {
-    return (!d.nodes.length) || d.nodes[d.nodes.length - 1].id === d.nodes[0].id;
-};
+    isOneWay: function() {
+        return !!(this.tags.oneway && this.tags.oneway === 'yes');
+    },
 
-// a way is an area if:
-//
-// - area=yes
-// - closed and
-//   - doesn't have area=no
-//   - doesn't have highway tag
-iD.Way.isArea = function(d) {
-    return (d.tags.area && d.tags.area === 'yes') ||
-        (iD.Way.isClosed(d) &&
-             // area-ness is disabled
-             (!d.tags.area || d.tags.area !== 'no') &&
-             // Tags that disable area-ness unless they are accompanied by
-             // area=yes
-             !d.tags.highway &&
-             !d.tags.barrier);
-};
+    isClosed: function() {
+        return (!this.nodes.length) || this.nodes[this.nodes.length - 1] === this.nodes[0];
+    },
 
-iD.Relation = function(attrs) {
-    return iD.Entity({members: []}, attrs || {}, {type: 'relation'});
-};
+    // a way is an area if:
+    //
+    // - area=yes
+    // - closed and
+    //   - doesn't have area=no
+    //   - doesn't have highway tag
+    isArea: function() {
+        return (this.tags.area && this.tags.area === 'yes') ||
+            (this.isClosed() &&
+                 // area-ness is disabled
+                 (!this.tags.area || this.tags.area !== 'no') &&
+                 // Tags that disable area-ness unless they are accompanied by
+                 // area=yes
+                 !this.tags.highway &&
+                 !this.tags.barrier);
+    }
+});
+
+iD.Relation = iD.Entity.extend({
+    type: "relation",
+    members: []
+});

@@ -39,7 +39,7 @@ A **line** is a way that is not an area. Elements representing lines have a `.li
 class. Since a line is also a way, they also have a `.way` class.
 
 An **area** is a way that is circular, has certain tags, or lacks certain other
-tags (see `iD.Way.isArea` for the exact definition). Elements representing areas
+tags (see `iD.Way#isArea` for the exact definition). Elements representing areas
 have an `.area` class. Since an area is also a way, they also have a `.way` class.
 
 ### Tag classes
