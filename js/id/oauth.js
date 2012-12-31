@@ -66,46 +66,38 @@ iD.OAuth = function() {
 
         var l = iD.loading('contacting openstreetmap...');
 
+        var w = 600, h = 550,
+            settings = [
+                ['width', w], ['height', h],
+                ['left', screen.width / 2 - w / 2],
+                ['top', screen.height / 2 - h / 2]].map(function(x) {
+                    return x.join('=');
+                }).join(','),
+            popup = window.open("about:blank", 'oauth_window', settings),
+            locationCheck = window.setInterval(function() {
+                if (popup.closed) return window.clearInterval(locationCheck);
+                if (popup.location.search) {
+                    var search = popup.location.search,
+                        oauth_token = ohauth.stringQs(search.slice(1));
+                    popup.close();
+                    get_access_token(oauth_token);
+                    window.clearInterval(locationCheck);
+                }
+            }, 100);
+
         ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
             if (err) callback(err);
             l.remove();
-            var modal = iD.modal();
-            modal
-                .select('.content')
-                .append('button')
-                .text('Authenticate with OpenStreetMap')
-                .on('click', function() {
-                    modal.remove();
-                    authorize(ohauth.stringQs(xhr.response));
-                });
-        });
 
-        function authorize(resp) {
+            var resp = ohauth.stringQs(xhr.response);
             token('oauth_request_token_secret', resp.oauth_token_secret);
-            var w = 600, h = 550,
-                settings = [
-                    ['width', w], ['height', h],
-                    ['left', screen.width / 2 - w / 2],
-                    ['top', screen.height / 2 - h / 2]].map(function(x) {
-                        return x.join('=');
-                    }).join(','),
-                popup = window.open(
-                    baseurl + '/oauth/authorize?' + ohauth.qsString({
-                        oauth_token: resp.oauth_token,
-                        oauth_callback: location.href.replace('index.html', '')
-                            .replace(/#.+/, '') + 'land.html'
-                    }), 'oauth_window', settings),
-                locationCheck = window.setInterval(function() {
-                    if (popup.closed) return window.clearInterval(locationCheck);
-                    if (popup.location.search) {
-                        var search = popup.location.search,
-                            oauth_token = ohauth.stringQs(search.slice(1));
-                        popup.close();
-                        get_access_token(oauth_token);
-                        window.clearInterval(locationCheck);
-                    }
-                }, 100);
-        }
+
+            popup.location = baseurl + '/oauth/authorize?' + ohauth.qsString({
+                oauth_token: resp.oauth_token,
+                oauth_callback: location.href.replace('index.html', '')
+                    .replace(/#.+/, '') + 'land.html'
+            });
+        });
 
         function get_access_token(oauth_token) {
             var url = baseurl + '/oauth/access_token';
