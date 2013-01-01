@@ -1,6 +1,6 @@
 describe("iD.Inspector", function () {
     var inspector, element,
-        tags   = {highway: 'residential'},
+        tags = {highway: 'residential'},
         entity = iD.Entity({type: 'node', id: "n12345", tags: tags});
 
     beforeEach(function () {
@@ -17,9 +17,15 @@ describe("iD.Inspector", function () {
     });
 
     describe("#tags", function () {
-       it("returns the current tags", function () {
-          expect(inspector.tags()).to.eql(tags);
-       });
+        it("returns the current tags", function () {
+            expect(inspector.tags()).to.eql(tags);
+        });
+
+        it("returns updated tags when input values have changed", function () {
+            element.selectAll(".tag-row-empty input.key").property('value', 'k');
+            element.selectAll(".tag-row-empty input.value").property('value', 'v');
+            expect(inspector.tags()).to.eql({highway: 'residential', k: 'v'});
+        });
     });
 
     it("creates input elements for each key-value pair", function () {
@@ -28,8 +34,8 @@ describe("iD.Inspector", function () {
     });
 
     it("creates one trailing pair of empty input elements", function () {
-       expect(element.selectAll("input")[0][2].value).to.be.empty;
-       expect(element.selectAll("input")[0][3].value).to.be.empty;
+        expect(element.selectAll("input")[0][2].value).to.be.empty;
+        expect(element.selectAll("input")[0][3].value).to.be.empty;
     });
 
     it("sets the 'tag-row-empty' class on the placeholder row", function () {
@@ -39,16 +45,6 @@ describe("iD.Inspector", function () {
     it("removes tags when clicking the remove button", function () {
         happen.click(element.selectAll("button.remove").node());
         expect(inspector.tags()).to.eql({});
-    });
-
-    it("adds tags when typing in the placeholder row", function () {
-        var k = element.selectAll(".tag-row-empty input.key").node(),
-            v = element.selectAll(".tag-row-empty input.value").node();
-        k.value = 'k';
-        v.value = 'v';
-        happen.keyup(k);
-        happen.keyup(v);
-        expect(inspector.tags()).to.eql({highway: 'residential', k: 'v'});
     });
 
     it("emits a close event when the close button is clicked", function () {

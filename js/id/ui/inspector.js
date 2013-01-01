@@ -42,14 +42,6 @@ iD.Inspector = function() {
 
             function draw(tags) {
 
-                function setValue(d) {
-                    d.value = this.value;
-                }
-
-                function setKey(d) {
-                    d.key = this.value;
-                }
-
                 function emptyTag(d) {
                     return d.key === '';
                 }
@@ -86,14 +78,12 @@ iD.Inspector = function() {
                 inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'key')
-                    .property('value', function(d) { return d.key; })
-                    .on('keyup.update', setKey);
+                    .property('value', function(d) { return d.key; });
 
                 inputs.append('input')
                     .property('type', 'text')
                     .attr('class', 'value')
                     .property('value', function(d) { return d.value; })
-                    .on('keyup.update', setValue)
                     .on('keydown.push-more', pushMore)
                     .each(bindTypeahead);
 
@@ -208,18 +198,15 @@ iD.Inspector = function() {
         });
     }
 
-    function unentries(entries) {
-        return d3.nest()
-            .key(function(d) { return d.key; })
-            .rollup(function(v) { return v[0].value; })
-            .map(entries);
-    }
-
     inspector.tags = function () {
-        var grabbed = [];
-        function grab(d) { if (d.key !== '') grabbed.push(d); }
-        inspectorwrap.selectAll('li').each(grab);
-        return unentries(grabbed);
+        var tags = {};
+        inspectorwrap.selectAll('li').each(function() {
+            var row = d3.select(this),
+                key = row.selectAll('.key').property('value'),
+                value = row.selectAll('.value').property('value');
+            if (key !== '') tags[key] = value;
+        });
+        return tags;
     };
 
     return d3.rebind(inspector, event, 'on');
