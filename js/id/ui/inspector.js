@@ -52,12 +52,26 @@ iD.Inspector = function() {
                     }
                 }
 
-                function bindTypeahead(d, i) {
-                    var selection = d3.select(this);
-                    selection.call(d3.typeahead()
-                        .data(function(selection, callback) {
-                            taginfo.values(selection.datum().key, function(err, data) {
-                                callback(data.data);
+                function bindTypeahead() {
+                    var row = d3.select(this),
+                        key = row.selectAll('.key'),
+                        value = row.selectAll('.value');
+
+                    key.call(d3.typeahead()
+                        .data(function(_, callback) {
+                            taginfo.keys({query: key.property('value')}, function(err, data) {
+                                callback(data.data.map(function (d) {
+                                    return {value: d.key};
+                                }));
+                            });
+                        }));
+
+                    value.call(d3.typeahead()
+                        .data(function(_, callback) {
+                            taginfo.values({key: key.property('value'), query: value.property('value')}, function(err, data) {
+                                callback(data.data.map(function (d) {
+                                    return {value: d.value, title: d.description};
+                                }));
                             });
                         }));
                 }
@@ -84,8 +98,9 @@ iD.Inspector = function() {
                     .property('type', 'text')
                     .attr('class', 'value')
                     .property('value', function(d) { return d.value; })
-                    .on('keydown.push-more', pushMore)
-                    .each(bindTypeahead);
+                    .on('keydown.push-more', pushMore);
+
+                inputs.each(bindTypeahead);
 
                 var removeBtn = row.append('button')
                     .attr('tabindex', -1)
