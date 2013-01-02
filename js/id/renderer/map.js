@@ -84,9 +84,9 @@ iD.Map = function() {
             filter = d3.functor(true);
         } else {
             var only = {};
-            difference.forEach(function (id) {
+            difference.forEach(function buildDifference(id) {
                 only[id] = graph.fetch(id);
-                graph.parentWays(id).forEach(function (parent) {
+                graph.parentWays(id).forEach(function buildOnly(parent) {
                     only[parent.id] = graph.fetch(parent.id);
                 });
             });

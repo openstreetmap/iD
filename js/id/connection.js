@@ -14,17 +14,19 @@ iD.Connection = function() {
     }
 
     function bboxFromAPI(box, tile, callback) {
-         loadFromURL(bboxUrl(box), function(err, parsed) {
+        function done(err, parsed) {
              loadedTiles[tile.toString()] = true;
              callback(err, parsed);
-         });
+         }
+         loadFromURL(bboxUrl(box), done);
     }
 
     function loadFromURL(url, callback) {
+        function done(dom) {
+            return callback(null, parse(dom));
+        }
         inflight.push(d3.xml(url).get()
-            .on('load', function(dom) {
-                return callback(null, parse(dom));
-            }));
+            .on('load', done));
     }
 
     function getNodes(obj) {
@@ -129,13 +131,14 @@ iD.Connection = function() {
     };
 
     function userDetails(callback) {
-        oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, function(err, user_details) {
+        function done(err, user_details) {
             var u = user_details.getElementsByTagName('user')[0];
             callback(connection.user({
                 display_name: u.attributes.display_name.nodeValue,
                 id: u.attributes.id.nodeValue
             }).user());
-        });
+        }
+        oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     }
 
     function tileAlreadyLoaded(c) { return !loadedTiles[c.toString()]; }
@@ -143,9 +146,10 @@ iD.Connection = function() {
     function abortRequest(i) { i.abort(); }
 
     function loadTile(e) {
-        bboxFromAPI(e.box, e.tile, function(err, g) {
+        function done(err, g) {
             event.load(err, g);
-        });
+        }
+        bboxFromAPI(e.box, e.tile, done);
     }
 
     function loadTiles(projection) {
@@ -211,10 +215,11 @@ iD.Connection = function() {
     };
 
     connection.authenticate = function(callback) {
-        return oauth.authenticate(function(err, res) {
+        function done(err, res) {
             event.auth();
             if (callback) callback(err, res);
-        });
+        }
+        return oauth.authenticate(done);
     };
 
     connection.bboxFromAPI = bboxFromAPI;
