@@ -116,7 +116,7 @@ window.iD = function(container) {
             .on('click', function() {
                 function save(e) {
                     d3.select('.shaded').remove();
-                    var l = iD.loading('uploading changes to OpenStreetMap.');
+                    var l = iD.loading('Uploading changes to OpenStreetMap.');
                     connection.putChangeset(history.changes(), e.comment, function(err, changeset_id) {
                         l.remove();
                         history.reset();
