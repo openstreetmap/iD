@@ -23,7 +23,7 @@ iD.tagReference = function(selection) {
             .attr('class','modal-section');
         referenceBody
             .append('h5')
-            .text('Description')
+            .text('Description');
         referenceBody
             .append('p')
             .text(g('description'));

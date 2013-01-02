@@ -20,7 +20,6 @@ iD.Map = function() {
         class_casing = iD.Style.styleClasses('way line casing'),
         class_area = iD.Style.styleClasses('way area'),
         transformProp = iD.util.prefixCSSProperty('Transform'),
-        support3d = iD.util.support3d(),
         supersurface, surface, defs, tilegroup, r, g, alength;
 
     function map() {
@@ -141,16 +140,16 @@ iD.Map = function() {
     function drawVertices(vertices, parentStructure, filter) {
         function shared(d) { return parentStructure[d.id] > 1; }
 
-        var vertices = g.hit.selectAll('circle.vertex')
+        var circles = g.hit.selectAll('circle.vertex')
             .filter(filter)
             .data(vertices, key);
 
-        vertices.exit().remove();
+        circles.exit().remove();
 
-        vertices.enter().insert('circle', ':first-child')
+        circles.enter().insert('circle', ':first-child')
             .attr('class', 'node vertex');
 
-        vertices.attr('transform', function(entity) {
+        circles.attr('transform', function(entity) {
                 var p = projection(entity.loc);
                 return 'translate(' + [~~p[0], ~~p[1]] +
                     ')';
@@ -158,7 +157,7 @@ iD.Map = function() {
             .classed('shared', shared)
             .classed('hover', classHover);
 
-        vertices.transition().duration(50).attr('r', function(d) {
+        circles.transition().duration(50).attr('r', function(d) {
                 return d.id === hover ? 8: 4;
             });
     }
@@ -209,22 +208,22 @@ iD.Map = function() {
     }
 
     function drawPoints(points, filter) {
-        var points = g.hit.selectAll('g.point')
+        var groups = g.hit.selectAll('g.point')
             .filter(filter)
             .data(points, key);
-        points.exit().remove();
-        var group = points.enter().append('g')
+        groups.exit().remove();
+        var group = groups.enter().append('g')
             .attr('class', 'node point');
         group.append('circle')
             .attr({ r: 10, cx: 8, cy: 8 });
         group.append('image')
             .attr({ width: 16, height: 16 });
-        points.attr('transform', function(d) {
+        groups.attr('transform', function(d) {
                 var pt = projection(d.loc);
                 return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
             });
-        points.classed('hover', classHover);
-        points.select('image').attr('xlink:href', iD.Style.pointImage);
+        groups.classed('hover', classHover);
+        groups.select('image').attr('xlink:href', iD.Style.pointImage);
     }
 
     function drawStrokes(ways, filter) {
@@ -299,17 +298,10 @@ iD.Map = function() {
             if (!translateStart) translateStart = d3.event.translate.slice();
             var a = d3.event.translate,
                 b = translateStart;
-            if (support3d) {
-                tilegroup.style(transformProp,
-                    'translate3d(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px, 0px)');
-                surface.style(transformProp,
-                    'translate3d(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px, 0px)');
-            } else {
-                tilegroup.style(transformProp,
-                    'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
-                surface.style(transformProp,
-                    'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
-            }
+            tilegroup.style(transformProp,
+                'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
+            surface.style(transformProp,
+                'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
         } else {
             redraw();
             translateStart = null;
