@@ -69,6 +69,14 @@ describe('iD.Entity', function () {
         });
     });
 
+    describe("#osmId", function () {
+        it("returns a numeric osm id", function () {
+            expect(iD.Entity({id: 'w1234'}).osmId()).to.eql(1234);
+            expect(iD.Entity({id: 'n1234'}).osmId()).to.eql(1234);
+            expect(iD.Entity({id: 'r1234'}).osmId()).to.eql(1234);
+        });
+    });
+
     describe("#created", function () {
         it("returns falsy by default", function () {
             expect(iD.Entity({id: 'w1234'}).created()).not.to.be.ok;
