@@ -45,7 +45,9 @@ iD.util.tagText = function(entity) {
 iD.util.stringQs = function(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
-        obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
+        if (parts.length === 2) {
+            obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
+        }
         return obj;
     }, {});
 };
@@ -88,20 +90,6 @@ iD.util.prefixCSSProperty = function(property) {
             return '-' + prefixes[i].toLowerCase() + '-' + property.toLowerCase();
 
     return false;
-};
-
-iD.util.support3d = function() {
-    // test for translate3d support. Based on https://gist.github.com/3794226 by lorenzopolidori and webinista
-    var transformProp = iD.util.prefixCSSProperty('Transform');
-    var el = document.createElement('div'),
-        has3d = false;
-    document.body.insertBefore(el, null);
-    if (el.style[transformProp] !== undefined) {
-        el.style[transformProp] = 'translate3d(1px,1px,1px)';
-        has3d = window.getComputedStyle(el).getPropertyValue(transformProp);
-    }
-    document.body.removeChild(el);
-    return (has3d && has3d.length>0 && has3d!=="none");
 };
 
 iD.util.geo = {};

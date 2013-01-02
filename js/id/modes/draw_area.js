@@ -16,6 +16,7 @@ iD.modes.DrawArea = function(wayId) {
             node = iD.Node({loc: map.mouseCoordinates()});
 
         map.dblclickEnable(false)
+            .hoverEnable(false)
             .fastEnable(false);
         map.hint('Click on the map to add points to your area. Finish the ' +
                       'area by clicking on your first point');
@@ -125,7 +126,8 @@ iD.modes.DrawArea = function(wayId) {
 
     mode.exit = function() {
         mode.map.hint(false);
-        mode.map.fastEnable(true);
+        mode.map.fastEnable(true)
+            .hoverEnable(true);
 
         mode.map.surface
             .on('mousemove.drawarea', null)

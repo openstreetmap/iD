@@ -13,6 +13,8 @@ iD.modes.AddLine = function() {
             controller = mode.controller;
 
         map.dblclickEnable(false)
+            .hoverEnable(false)
+            .hoverEnable(false)
             .hint('Click on the map to start drawing an road, path, or route.');
 
         map.surface.on('click.addline', function() {
@@ -68,7 +70,7 @@ iD.modes.AddLine = function() {
     };
 
     mode.exit = function() {
-        mode.map.dblclickEnable(true);
+        mode.map.dblclickEnable(true).hoverEnable(true);
         mode.map.hint(false);
         mode.map.surface.on('click.addline', null);
         mode.map.keybinding().on('⎋.addline', null);

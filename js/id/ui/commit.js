@@ -24,15 +24,15 @@ iD.commit = function() {
                             comment: d3.select('textarea.changeset-comment').node().value
                         });
                     });
-                    savebutton.append('span').attr('class','icon save icon-pre-text')
-                    savebutton.append('span').attr('class','label').text('Save')
+                    savebutton.append('span').attr('class','icon save icon-pre-text');
+                    savebutton.append('span').attr('class','label').text('Save');
                 var cancelbutton = buttonwrap.append('button')
                     .attr('class', 'cancel wide')
                     .on('click.cancel', function() {
                         event.cancel();
                     });
-                    cancelbutton.append('span').attr('class','icon close icon-pre-text')
-                    cancelbutton.append('span').attr('class','label').text('Cancel')
+                    cancelbutton.append('span').attr('class','icon close icon-pre-text');
+                    cancelbutton.append('span').attr('class','label').text('Cancel');
 
         var section = body.selectAll('div.commit-section')
             .data(['modified', 'deleted', 'created'].filter(function(d) {

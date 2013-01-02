@@ -170,7 +170,7 @@ window.iD = function(container) {
             .attr('class', 'inspector-wrap fillL')
             .style('display', 'none');
 
-        var about = container.append('div')
+        var about = container.append('div');
 
         about.append('ul')
             .attr('id','about')
@@ -226,7 +226,7 @@ window.iD = function(container) {
 
         if (!hash.hadHash) {
             map.zoom(20)
-                .center([-77.02405, 38.87952]);
+                .center([-77.02271,38.90085]);
         }
 
         d3.select('.user-container').call(iD.userpanel(connection)

@@ -16,6 +16,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
         map.dblclickEnable(false)
             .fastEnable(false)
+            .hoverEnable(false)
             .hint('Click to add more points to the line. ' +
                       'Click on other lines to connect to them, and double-click to ' +
                       'end the line.');
@@ -121,7 +122,8 @@ iD.modes.DrawLine = function(wayId, direction) {
 
     mode.exit = function() {
         mode.map.hint(false);
-        mode.map.fastEnable(true);
+        mode.map.fastEnable(true)
+            .hoverEnable(true);
 
         mode.map.surface
             .on('mousemove.drawline', null)

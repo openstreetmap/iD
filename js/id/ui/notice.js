@@ -3,7 +3,7 @@ iD.notice = function(selection) {
         notice = {};
 
     notice.message = function(_) {
-        selection.attr('class','inner')
+        selection.attr('class','inner');
         if (!arguments.length) return _;
         if (!message && _) {
             selection

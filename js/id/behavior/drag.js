@@ -123,7 +123,7 @@ iD.behavior.drag = function () {
                         return mousedown.call(target, target.__data__);
                     }
                 }
-            }
+            };
         }
 
         selection.on("mousedown.drag" + selector, delegate)
