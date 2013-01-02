@@ -12,6 +12,7 @@ iD.Map = function() {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
+        hoverEnabled = true,
         fastEnabled = true,
         notice,
         background = iD.Background()
@@ -265,6 +266,7 @@ iD.Map = function() {
     }
 
     function hoverIn() {
+        if (!hoverEnabled) return;
         var datum = d3.select(d3.event.target).datum();
         if (datum instanceof iD.Entity) {
             hover = datum.id;
@@ -274,7 +276,7 @@ iD.Map = function() {
     }
 
     function hoverOut() {
-        if (hover) {
+        if (hoverEnabled && hover) {
             var oldHover = hover;
             hover = null;
             redraw([oldHover]);
@@ -347,6 +349,12 @@ iD.Map = function() {
     map.dblclickEnable = function(_) {
         if (!arguments.length) return dblclickEnabled;
         dblclickEnabled = _;
+        return map;
+    };
+
+    map.hoverEnable = function(_) {
+        if (!arguments.length) return hoverEnabled;
+        hoverEnabled = _;
         return map;
     };
 
