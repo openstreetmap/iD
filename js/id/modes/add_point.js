@@ -30,7 +30,7 @@ iD.modes.AddPoint = function() {
     };
 
     mode.exit = function() {
-        map.hoverEnable(true);
+        mode.map.hoverEnable(true);
         mode.map.hint(false);
         mode.map.surface.on('click.addpoint', null);
         mode.map.keybinding().on('⎋.addpoint', null);
