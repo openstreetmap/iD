@@ -39,7 +39,7 @@ iD.commit = function() {
                 return changes[d].length;
             }))
             .enter()
-            .append('div').attr('class', 'commit-section modal-section');
+            .append('div').attr('class', 'commit-section modal-section fillL2');
 
         section.append('h3').text(String)
             .append('small')
