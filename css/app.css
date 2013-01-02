@@ -823,6 +823,7 @@ div.typeahead a:first-child {
     left:70px;
     width:250px;
     height:50px;
+    padding:10px;
     background:#fff;
     font-size: 20px;
     font-weight: bold;
