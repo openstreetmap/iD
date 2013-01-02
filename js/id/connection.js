@@ -13,9 +13,9 @@ iD.Connection = function() {
         return url + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
     }
 
-    function bboxFromAPI(box, callback) {
+    function bboxFromAPI(box, tile, callback) {
          loadFromURL(bboxUrl(box), function(err, parsed) {
-             loadedTiles[box] = true;
+             loadedTiles[tile.toString()] = true;
              callback(err, parsed);
          });
     }
@@ -138,24 +138,14 @@ iD.Connection = function() {
         });
     }
 
-    connection.userUrl = function(username) {
-        return url + "/user/" + username;
-    };
+    function tileAlreadyLoaded(c) { return !loadedTiles[c.toString()]; }
 
-    function tileAtZoom(t, distance) {
-        var power = Math.pow(2, distance);
-        return [
-            Math.floor(t[0] * power),
-            Math.floor(t[1] * power),
-            t[2] + distance];
-    }
+    function abortRequest(i) { i.abort(); }
 
-    function tileAlreadyLoaded(c) {
-        if (loadedTiles[c]) return false;
-        for (var i = 0; i < 4; i++) {
-            if (loadedTiles[tileAtZoom(c, -i)]) return false;
-        }
-        return true;
+    function loadTile(e) {
+        bboxFromAPI(e.box, e.tile, function(err, g) {
+            event.load(err, g);
+        });
     }
 
     function loadTiles(projection) {
@@ -175,25 +165,26 @@ iD.Connection = function() {
         function apiExtentBox(c) {
             var x = (c[0] * ts) - tile_origin[0];
             var y = (c[1] * ts) - tile_origin[1];
-            return [
-                projection.invert([x, y]),
-                projection.invert([x + ts, y + ts])];
+            return {
+                box: [
+                    projection.invert([x, y]),
+                    projection.invert([x + ts, y + ts])],
+                tile: c
+            };
         }
 
-        inflight.map(function(i) {
-            i.abort();
-        });
+        inflight.map(abortRequest);
         inflight = [];
 
         tiles
-            .map(apiExtentBox)
             .filter(tileAlreadyLoaded)
-            .forEach(function(e) {
-                bboxFromAPI(e, function(err, g) {
-                    event.load(err, g);
-                });
-            });
+            .map(apiExtentBox)
+            .forEach(loadTile);
     }
+
+    connection.userUrl = function(username) {
+        return url + "/user/" + username;
+    };
 
     connection.url = function(_) {
         if (!arguments.length) return url;
