@@ -36,4 +36,14 @@ describe('iD.Node', function () {
             expect(iD.Node({loc: [0, 0]}).intersects([[100, 90], [180, -90]])).to.equal(false);
         });
     });
+
+    describe("#geometry", function () {
+        it("returns 'vertex' if the node is not a point", function () {
+            expect(iD.Node().geometry()).to.equal('vertex');
+        });
+
+        it("returns 'point' if the node is a point", function () {
+            expect(iD.Node({_poi: true}).geometry()).to.equal('point');
+        });
+    });
 });

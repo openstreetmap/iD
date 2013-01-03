@@ -61,18 +61,13 @@ iD.Inspector = function() {
         var h2 = selection.append('h2');
 
         h2.append('span')
-            .attr('class', function(d) {
-                var icons = { way: 'line', node: 'point' };
-                return 'icon big icon-pre-text big-' + icons[d.type];
-            });
+            .attr('class', 'icon big icon-pre-text big-' + entity.geometry());
 
         h2.append('span')
             .text(entity.friendlyName());
 
         selection.append('a')
-            .attr('href', function() {
-                return 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId();
-            })
+            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
             .text('View on OSM');
 
         if (entity.type === 'way') {
@@ -82,7 +77,7 @@ iD.Inspector = function() {
                 .on('click', function() { event.changeWayDirection(entity); });
         }
 
-        if (entity.type === 'node' && !entity._poi) {
+        if (entity.geometry() === 'vertex') {
             selection.append('a')
                 .attr('href', '#')
                 .text('Split Way')

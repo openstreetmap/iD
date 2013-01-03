@@ -36,5 +36,9 @@ iD.Way = iD.Entity.extend({
                 this.tags.area !== 'no' &&
                 !this.tags.highway &&
                 !this.tags.barrier);
+    },
+
+    geometry: function() {
+        return this.isArea() ? 'area' : 'line';
     }
 });
