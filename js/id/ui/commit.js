@@ -56,7 +56,7 @@ iD.commit = function() {
         li.append('strong').text(function(d) { return d.type + ' '; });
         li.append('span')
             .text(function(d) {
-                 return iD.util.friendlyName(d);
+                 return d.friendlyName();
             })
             .attr('title', iD.util.tagText);
     }

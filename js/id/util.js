@@ -6,28 +6,6 @@ iD.util.trueObj = function(arr) {
     return o;
 };
 
-iD.util.friendlyName = function(entity) {
-    // Generate a string such as 'river' or 'Fred's House' for an entity.
-    if (!entity.tags || !Object.keys(entity.tags).length) { return ''; }
-
-    var mainkeys = ['highway','amenity','railway','waterway','natural'],
-        n = [];
-
-    if (entity.tags.name) n.push(entity.tags.name);
-    if (entity.tags.ref) n.push(entity.tags.ref);
-
-    if (!n.length) {
-        for (var k in entity.tags) {
-            if (mainkeys.indexOf(k) !== -1) {
-                n.push(entity.tags[k]);
-                break;
-            }
-        }
-    }
-
-    return n.length === 0 ? 'unknown' : n.join('; ');
-};
-
 iD.util.codeWindow = function(content) {
     top.win = window.open('','contentWindow',
         'width=350,height=350,menubar=0' +

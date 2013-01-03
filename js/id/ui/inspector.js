@@ -67,7 +67,7 @@ iD.Inspector = function() {
             });
 
         h2.append('span')
-            .text(iD.util.friendlyName(entity));
+            .text(entity.friendlyName());
 
         selection.append('a')
             .attr('href', function() {
