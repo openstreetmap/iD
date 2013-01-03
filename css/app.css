@@ -452,7 +452,7 @@ button.Browse .label {
     position:relative;
 }
 
-.inspector-wrap a.permalink {
+.inspector-inner.head a {
     text-decoration:none;
     margin-right: 10px;
     display: inline-block
