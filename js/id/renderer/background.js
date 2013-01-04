@@ -2,7 +2,7 @@ iD.Background = function() {
     var tile = d3.geo.tile(),
         projection,
         cache = {},
-        offset = [0, 0];
+        offset = [0, 0],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
