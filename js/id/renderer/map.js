@@ -94,7 +94,6 @@ iD.Map = function() {
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }
 
-
         if (all.length > 10000) return editOff();
         else editOn();
 
@@ -112,9 +111,10 @@ iD.Map = function() {
             }
         }
         var parentStructure = graph.parentStructure(ways);
-        var wayAccuracyHandles = ways.reduce(function(mem, w) {
-            return mem.concat(accuracyHandles(w));
-        }, []);
+        var wayAccuracyHandles = [];
+        for (i = 0; i < ways.length; i++) {
+            accuracyHandles(ways[i], wayAccuracyHandles);
+        }
         drawVertices(vertices, parentStructure, filter);
         drawAccuracyHandles(wayAccuracyHandles, filter);
         drawCasings(lines, filter);
@@ -123,8 +123,8 @@ iD.Map = function() {
         drawPoints(points, filter);
     }
 
-    function accuracyHandles(way) {
-        var handles = [];
+    // updates handles by reference
+    function accuracyHandles(way, handles) {
         for (var i = 0; i < way.nodes.length - 1; i++) {
             if (iD.util.geo.dist(way.nodes[i].loc, way.nodes[i + 1].loc) > 0.0001) {
                 handles.push({
@@ -135,7 +135,6 @@ iD.Map = function() {
                 });
             }
         }
-        return handles;
     }
 
     function pointTransform(entity) {
@@ -233,10 +232,7 @@ iD.Map = function() {
             .attr({ width: 16, height: 16 })
             .attr('transform', 'translate(-8, -8)');
 
-        groups.attr('transform', function(d) {
-            var pt = projection(d.loc);
-            return 'translate(' + [~~pt[0], ~~pt[1]] + ')';
-        });
+        groups.attr('transform', pointTransform);
 
         groups.classed('hover', classHover);
         groups.select('image').attr('xlink:href', iD.Style.pointImage);
@@ -314,11 +310,11 @@ iD.Map = function() {
         if (fast) {
             if (!translateStart) translateStart = d3.event.translate.slice();
             var a = d3.event.translate,
-                b = translateStart;
-            tilegroup.style(transformProp,
-                'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
-            surface.style(transformProp,
-                'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
+                b = translateStart,
+                translate = 'translate(' + ~~(a[0] - b[0]) + 'px,' +
+                    ~~(a[1] - b[1]) + 'px)';
+            tilegroup.style(transformProp, translate);
+            surface.style(transformProp, translate);
         } else {
             redraw();
             translateStart = null;

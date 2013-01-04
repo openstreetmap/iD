@@ -69,9 +69,7 @@ iD.Connection = function() {
             tags: getTags(obj)
         };
         for (var i = 0, l = obj.attributes.length; i < l; i++) {
-            var n = obj.attributes[i].nodeName;
-            var v = obj.attributes[i].nodeValue;
-            o[n] = v;
+            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
         }
         if (o.lon && o.lat) {
             o.loc = [parseFloat(o.lon), parseFloat(o.lat)];
