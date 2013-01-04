@@ -26,7 +26,7 @@ describe("iD.taginfo", function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {query: "amen", page: "1", rp: "20", sortname: "count_all", sortorder: "desc"});
+                {query: "amen", page: "1", rp: "6", sortname: "count_all", sortorder: "desc"});
             expect(callback).to.have.been.calledWith(null,
                 {"data":[{"count_all":5190337,"key":"amenity"}]});
         });
