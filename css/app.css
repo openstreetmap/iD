@@ -538,6 +538,7 @@ button.Browse .label {
 .inspector-inner .add-tag {
     width: 50%;
     height: 30px;
+    font-size: 100%;
     border: 1px solid #ccc;
     border-top: 0;
 }
