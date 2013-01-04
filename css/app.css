@@ -489,7 +489,7 @@ button.Browse .label {
 
 .tag-row input {
     width: 50%;
-    border-right: 0;
+    border-left: 0;
 }
 
 .tag-row input.key {
@@ -500,9 +500,8 @@ button.Browse .label {
     border-top: 1px solid #ccc;
 }
 
-.tag-row input.value {
-    position: relative;
-    border-right: 1px solid #ccc;
+.tag-row input.key {
+    border-left: 1px solid #ccc;
 }
 
 .input-wrap::after {
@@ -531,8 +530,16 @@ button.Browse .label {
     border-top: 1px solid #ccc;
 }
 
-.tag-row-empty button {
-    display: none;
+.inspector-inner .add-tag-row {
+    width: 100%;
+    padding-right: 70px;
+}
+
+.inspector-inner .add-tag {
+    width: 50%;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-top: 0;
 }
 
 /* Map Controls */

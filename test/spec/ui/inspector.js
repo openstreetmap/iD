@@ -1,15 +1,20 @@
 describe("iD.Inspector", function () {
     var inspector, element,
         tags = {highway: 'residential'},
-        entity = iD.Entity({type: 'node', id: "n12345", tags: tags});
+        entity;
 
-    beforeEach(function () {
+    function render() {
         inspector = iD.Inspector();
         element = d3.select('body')
             .append('div')
             .attr('id', 'inspector-wrap')
             .datum(entity)
             .call(inspector);
+    }
+
+    beforeEach(function () {
+        entity = iD.Entity({type: 'node', id: "n12345", tags: tags});
+        render();
     });
 
     afterEach(function () {
@@ -22,9 +27,9 @@ describe("iD.Inspector", function () {
         });
 
         it("returns updated tags when input values have changed", function () {
-            element.selectAll(".tag-row-empty input.key").property('value', 'k');
-            element.selectAll(".tag-row-empty input.value").property('value', 'v');
-            expect(inspector.tags()).to.eql({highway: 'residential', k: 'v'});
+            element.selectAll("input.key").property('value', 'k');
+            element.selectAll("input.value").property('value', 'v');
+            expect(inspector.tags()).to.eql({k: 'v'});
         });
     });
 
@@ -33,17 +38,22 @@ describe("iD.Inspector", function () {
         expect(element.selectAll("input[value=residential]")).not.to.be.empty;
     });
 
-    it("creates one trailing pair of empty input elements", function () {
+    it("creates a pair of empty input elements if the entity has no tags", function () {
+        element.remove();
+        entity = entity.update({tags: {}});
+        render();
+        expect(element.selectAll("input.value").property('value')).to.be.empty;
+        expect(element.selectAll("input.key").property('value')).to.be.empty;
+    });
+
+    it("adds tags when clicking the add button", function () {
+        element.selectAll("button.add-tag").trigger('click');
         expect(element.selectAll("input")[0][2].value).to.be.empty;
         expect(element.selectAll("input")[0][3].value).to.be.empty;
     });
 
-    it("sets the 'tag-row-empty' class on the placeholder row", function () {
-        expect(element.selectAll(".tag-row:last-child").classed('tag-row-empty')).to.be.true;
-    });
-
     it("removes tags when clicking the remove button", function () {
-        happen.click(element.selectAll("button.remove").node());
+        element.selectAll("button.remove").trigger('click');
         expect(inspector.tags()).to.eql({});
     });
 
@@ -51,7 +61,7 @@ describe("iD.Inspector", function () {
         var spy = sinon.spy();
         inspector.on('close', spy);
 
-        happen.click(element.select('.close').node());
+        element.select('.close').trigger('click');
 
         expect(spy).to.have.been.calledWith(entity);
     });
@@ -60,7 +70,7 @@ describe("iD.Inspector", function () {
         var spy = sinon.spy();
         inspector.on('changeTags', spy);
 
-        happen.click(element.select('.apply').node());
+        element.select('.apply').trigger('click');
 
         expect(spy).to.have.been.calledWith(entity, tags);
     });
@@ -69,7 +79,7 @@ describe("iD.Inspector", function () {
         var spy = sinon.spy();
         inspector.on('remove', spy);
 
-        happen.click(element.select('.delete').node());
+        element.select('.delete').trigger('click');
 
         expect(spy).to.have.been.calledWith(entity);
     });

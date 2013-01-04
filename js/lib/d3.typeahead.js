@@ -36,7 +36,7 @@ d3.typeahead = function() {
             if (d3.event.keyCode === 40) idx++;
             if (d3.event.keyCode === 38) idx--;
             if (d3.event.keyCode === 13) {
-                selection.property('value', container.select('a.selected').datum().value);
+                select(container.select('a.selected').datum());
                 hide();
             }
 
@@ -57,10 +57,15 @@ d3.typeahead = function() {
                     .append('a')
                     .text(function(d) { return d.value; })
                     .attr('title', function(d) { return d.title; })
-                    .on('click', function(d) { selection.property('value', d.value); });
+                    .on('click', select);
 
                 options.exit().remove();
             });
+        }
+
+        function select(d) {
+            selection.property('value', d.value)
+                .trigger('change');
         }
     };
 

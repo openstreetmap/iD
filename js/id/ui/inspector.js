@@ -2,7 +2,7 @@ iD.Inspector = function() {
     var event = d3.dispatch('changeTags', 'changeWayDirection',
         'update', 'remove', 'close', 'splitWay'),
         taginfo = iD.taginfo(),
-        inspectorwrap;
+        tagList;
 
     function inspector(selection) {
         var entity = selection.datum();
@@ -21,11 +21,21 @@ iD.Inspector = function() {
         var inspectorbody = selection.append('div')
             .attr('class', 'inspector-body');
 
-        inspectorwrap = inspectorbody.append('ul')
+        var inspectorwrap = inspectorbody.append('div')
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
         inspectorwrap.append('h4')
             .text('Edit tags');
+
+        tagList = inspectorwrap.append('ul');
+
+        inspectorwrap.append('div').attr('class', 'add-tag-row').append('button')
+            .attr('class', 'add-tag')
+            .text('+ Add New Tag')
+            .on('click', function() {
+                addTag();
+                tagList.selectAll('li:last-child input.key').node().focus();
+            });
 
         var formsel = drawTags(entity.tags);
 
@@ -99,27 +109,33 @@ iD.Inspector = function() {
 
     function drawTags(tags) {
         tags = d3.entries(tags);
-        tags.push({ key: '', value: ''});
 
-        var li = inspectorwrap.selectAll('li')
+        if (!tags.length) {
+            tags = [{key: '', value: ''}];
+        }
+
+        var li = tagList.selectAll('li')
             .data(tags, function(d) { return d.key; });
 
         li.exit().remove();
 
-        var row = li.enter().append('li').attr('class','tag-row');
-        var inputs = row.append('div').attr('class','input-wrap');
+        var row = li.enter().append('li')
+            .attr('class', 'tag-row');
 
-        li.classed('tag-row-empty', function(d) { return d.key === ''; });
+        var inputs = row.append('div')
+            .attr('class', 'input-wrap');
 
         inputs.append('input')
             .property('type', 'text')
             .attr('class', 'key')
-            .property('value', function(d) { return d.key; });
+            .property('value', function(d) { return d.key; })
+            .on('change', function(d) { d.key = this.value; });
 
         inputs.append('input')
             .property('type', 'text')
             .attr('class', 'value')
             .property('value', function(d) { return d.value; })
+            .on('change', function(d) { d.value = this.value; })
             .on('keydown.push-more', pushMore);
 
         inputs.each(bindTypeahead);
@@ -129,7 +145,8 @@ iD.Inspector = function() {
             .attr('class','remove minor')
             .on('click', removeTag);
 
-        removeBtn.append('span').attr('class', 'icon remove');
+        removeBtn.append('span')
+            .attr('class', 'icon remove');
 
         var helpBtn = row.append('button')
             .attr('tabindex', -1)
@@ -160,14 +177,15 @@ iD.Inspector = function() {
                     return 'http://taginfo.openstreetmap.org/keys/' + d.key;
                 });
 
-        helpBtn.append('span').attr('class', 'icon inspect');
+        helpBtn.append('span')
+            .attr('class', 'icon inspect');
 
         return li;
     }
 
     function pushMore() {
-        if (d3.event.keyCode === 9) {
-            drawTags(inspector.tags());
+        if (d3.event.keyCode === 9 && tagList.selectAll('li:last-child input.value').node() === this) {
+            addTag();
         }
     }
 
@@ -195,6 +213,12 @@ iD.Inspector = function() {
             }));
     }
 
+    function addTag() {
+        var tags = inspector.tags();
+        tags[''] = '';
+        drawTags(tags);
+    }
+
     function removeTag(d) {
         var tags = inspector.tags();
         delete tags[d.key];
@@ -208,7 +232,7 @@ iD.Inspector = function() {
 
     inspector.tags = function () {
         var tags = {};
-        inspectorwrap.selectAll('li').each(function() {
+        tagList.selectAll('li').each(function() {
             var row = d3.select(this),
                 key = row.selectAll('.key').property('value'),
                 value = row.selectAll('.value').property('value');
