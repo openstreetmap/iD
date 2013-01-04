@@ -125,6 +125,36 @@ iD.layerswitcher = function(map) {
                     .insert('span')
                     .attr('class','icon toggle');
 
+        var adjustments = content
+            .append('div')
+            .attr('class', 'adjustments');
+
+        var directions = [
+            ['←', [-1, 0]],
+            ['↑', [0, -1]],
+            ['→', [1, 0]],
+            ['↓', [0, 1]]];
+
+        function nudge(d) {
+            map.background.nudge(d[1]);
+            map.redraw();
+        }
+
+        adjustments.selectAll('button')
+            .data(directions).enter()
+            .append('button')
+            .attr('class', 'nudge')
+            .text(function(d) { return d[0]; })
+            .on('click', nudge);
+
+        adjustments.append('button')
+            .text('reset')
+            .attr('class', 'reset')
+            .on('click', function() {
+                map.background.offset([0, 0]);
+                map.redraw();
+            });
+
 
         selection.call(clickoutside);
         selectLayer(map.background.source());
