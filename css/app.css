@@ -716,8 +716,8 @@ div.typeahead {
     box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
     margin-top: -1px;
     background: white;
-    max-height: 120px;
-    overflow: auto;
+    max-height: 180px;
+    overflow: hidden;
     border: 1px solid #ccc;
 }
 
@@ -729,6 +729,7 @@ div.typeahead a {
     border-top:1px solid #ccc;
     background-color: #fff;
     padding:1px 4px;
+    white-space: nowrap;
 }
 
 div.typeahead a:hover,

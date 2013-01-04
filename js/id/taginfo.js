@@ -5,7 +5,7 @@ iD.taginfo = function() {
     taginfo.keys = function(parameters, callback) {
         d3.json(endpoint + 'db/keys?' +
             iD.util.qsString(_.extend({
-                rp: 20,
+                rp: 6,
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
