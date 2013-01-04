@@ -158,15 +158,22 @@ window.iD = function(container) {
                 }
             });
 
-        save_button.append('span').attr('class', 'count');
+        save_button.append('span')
+            .attr('class', 'count');
 
         history.on('change.save-button', function() {
             var changes = history.changes(),
                 num_changes = d3.sum(d3.values(changes).map(function(c) {
                     return c.length;
                 }));
+
             save_button.property('disabled', num_changes === 0);
-            save_button.select('span.count').text(num_changes === 0 ? '' : num_changes);
+
+            save_button
+                .classed('has-count', num_changes > 0);
+
+            save_button.select('span.count')
+                .text(num_changes);
         });
 
         bar.append('div')

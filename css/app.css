@@ -291,10 +291,25 @@ button.delete:hover {
 
 button.save {
     background-color: #6bc641;
+    width: 120px;
+    position: relative;
 }
 
-button.save[disabled] {
-    background-color: #92BB7F;
+button.save.has-count {
+    padding-right:10px;
+}
+
+button.save.has-count .count {
+    display: block;
+    position: absolute;
+    font-size:small;
+    top: 0;
+    right: 0;
+    background: #fff;
+    height: 37px;
+    border-radius: 0 3px 3px 0;
+    padding: 0 10px;
+    line-height: 40px;
 }
 
 button.save:hover {
