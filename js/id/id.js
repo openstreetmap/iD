@@ -121,6 +121,17 @@ window.iD = function(container) {
                         l.remove();
                         history.reset();
                         map.flush().redraw();
+                        var modal = iD.modal();
+                        modal.select('.content')
+                            .classed('success-modal', true)
+                            .datum({
+                                id: changeset_id,
+                                comment: e.comment
+                            })
+                            .call(iD.success()
+                                .on('cancel', function() {
+                                    modal.remove();
+                                }));
                     });
                 }
                 var changes = history.changes();
