@@ -10,20 +10,20 @@ g.point circle {
     fill:#fff;
 }
 
-g.point.hover circle,
-g.point.selected circle {
-    fill:#ffff00;
-    stroke-width:4;
-    stroke:#fff
+g.point.hover circle.stroke,
+g.point.selected circle.stroke {
+    fill:#333;
+    -webkit-transform:scale(1.2, 1.2);
 }
 
 /* interactive elements */
-g.vertex circle {
+g.vertex circle.fill {
     fill:white;
-    stroke:#333;
     fill-opacity:1;
-    stroke-width:2;
-    stroke-opacity: 1;
+}
+
+circle.stroke,
+circle.fill {
     -webkit-transition: -webkit-transform 50ms linear;
     transition: transform 50ms linear;
     -moz-transition: stroke 50ms linear;
@@ -32,12 +32,20 @@ g.vertex circle {
     transform:scale(1, 1);
 }
 
+g.vertex circle.stroke {
+    fill:#333;
+}
+
 g.vertex.shared circle {
     fill:#aff;
 }
 
-g.vertex.hover circle {
+g.vertex.hover circle.fill {
     -webkit-transform:scale(2, 2);
+}
+
+g.vertex.hover circle.stroke {
+    -webkit-transform:scale(1.8, 1.8);
 }
 
 g.vertex circle.selected {

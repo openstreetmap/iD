@@ -151,10 +151,16 @@ iD.Map = function() {
 
         circles.exit().remove();
 
-        circles.enter()
+        var cg = circles.enter()
             .insert('g', ':first-child')
-            .attr('class', 'node vertex')
-            .append('circle')
+            .attr('class', 'node vertex');
+
+        cg.append('circle')
+            .attr('class', 'stroke')
+            .attr('r', 6);
+
+        cg.append('circle')
+            .attr('class', 'fill')
             .attr('r', 4);
 
         circles.attr('transform', pointTransform)
@@ -205,20 +211,33 @@ iD.Map = function() {
     }
 
     function drawPoints(points, filter) {
+
         var groups = g.hit.selectAll('g.point')
             .filter(filter)
             .data(points, key);
+
         groups.exit().remove();
+
         var group = groups.enter().append('g')
             .attr('class', 'node point');
+
         group.append('circle')
-            .attr({ r: 10, cx: 8, cy: 8 });
+            .attr('class', 'stroke')
+            .attr({ r: 10 });
+
+        group.append('circle')
+            .attr('class', 'fill')
+            .attr({ r: 10 });
+
         group.append('image')
-            .attr({ width: 16, height: 16 });
+            .attr({ width: 16, height: 16 })
+            .attr('transform', 'translate(-8, -8)');
+
         groups.attr('transform', function(d) {
-                var pt = projection(d.loc);
-                return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
-            });
+            var pt = projection(d.loc);
+            return 'translate(' + [~~pt[0], ~~pt[1]] + ')';
+        });
+
         groups.classed('hover', classHover);
         groups.select('image').attr('xlink:href', iD.Style.pointImage);
     }
