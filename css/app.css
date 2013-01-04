@@ -293,6 +293,10 @@ button.save {
     background-color: #6bc641;
 }
 
+button.save[disabled] {
+    background-color: #92BB7F;
+}
+
 button.save:hover {
     background-color: #59ac33;
 }

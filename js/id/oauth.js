@@ -66,6 +66,10 @@ iD.OAuth = function() {
 
         var l = iD.loading('contacting openstreetmap...');
 
+        // it would make more sense to have this code within the callback
+        // to oauth.xhr below. however, it needs to be directly within a
+        // browser event handler in order to open a popup without it being
+        // blocked.
         var w = 600, h = 550,
             settings = [
                 ['width', w], ['height', h],
