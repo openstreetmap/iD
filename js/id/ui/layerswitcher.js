@@ -13,6 +13,10 @@ iD.layerswitcher = function(map) {
             source: iD.BackgroundSource.OSM,
             description: 'The default OpenStreetMap layer.'
         }, {
+            name: 'MapBox',
+            source: iD.BackgroundSource.MapBox,
+            description: 'Satellite and Aerial Imagery'
+        }, {
             name: 'Custom',
             source: iD.BackgroundSource.Custom,
             description: 'A custom layer (requires configuration)'
