@@ -107,10 +107,11 @@ window.iD = function(container) {
             .append('div')
                 .attr('class', 'hello');
 
-        bar.append('button')
+        var save_button = bar.append('button')
             .attr('class', 'save action wide')
             .html("<span class='icon icon-pre-text save'></span><span class='label'>Save</span><small id='as-username'></small>")
             .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
+            .property('disabled', true)
             .call(bootstrap.tooltip()
                 .placement('bottom'))
             .on('click', function() {
@@ -145,6 +146,17 @@ window.iD = function(container) {
                         .append('h3').text('You don\'t have any changes to save.');
                 }
             });
+
+        save_button.append('span').attr('class', 'count');
+
+        history.on('change.save-button', function() {
+            var changes = history.changes(),
+                num_changes = d3.sum(d3.values(changes).map(function(c) {
+                    return c.length;
+                }));
+            save_button.property('disabled', num_changes === 0);
+            save_button.select('span.count').text(num_changes === 0 ? '' : num_changes);
+        });
 
         bar.append('div')
             .attr('class', 'messages');
