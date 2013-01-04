@@ -14,6 +14,8 @@ g.point.hover circle.stroke,
 g.point.selected circle.stroke {
     fill:#333;
     -webkit-transform:scale(1.2, 1.2);
+    -moz-transform:scale(1.2, 1.2);
+    transform:scale(1.2, 1.2);
 }
 
 /* interactive elements */
@@ -42,10 +44,14 @@ g.vertex.shared circle {
 
 g.vertex.hover circle.fill {
     -webkit-transform:scale(2, 2);
+    -moz-transform:scale(2, 2);
+    transform:scale(2, 2);
 }
 
 g.vertex.hover circle.stroke {
     -webkit-transform:scale(1.8, 1.8);
+    -moz-transform:scale(1.8, 1.8);
+    transform:scale(1.8, 1.8);
 }
 
 g.vertex circle.selected {
@@ -75,12 +81,12 @@ path.casing {
 
 path.casing.hover {
     stroke:#FF0F0F !important;
-    opacity:0.8;
+    stroke-opacity:0.8;
 }
 
 path.casing.selected {
     stroke:#E96666 !important;
-    opacity:1 !important;
+    stroke-opacity:1 !important;
     stroke-width:10 !important;
 }
 
@@ -149,7 +155,7 @@ path.stroke.highway-residential {
 path.casing.highway-residential {
     stroke:#E8E8E8;
     stroke-width:10;
-    opacity:0.4;
+    stroke-opacity:0.4;
 }
 
 path.stroke.highway-unclassified,
@@ -194,12 +200,12 @@ path.stroke.highway-motorway, path.stroke.highway-motorway_link {
 path.casing.highway-motorway, path.casing.highway-motorway_link {
     stroke:#809BC0;
     stroke-width:9;
-    opacity:0.4;
+    stroke-opacity:0.4;
 }
 
 path.stroke.highway-trunk, path.stroke.highway-trunk_link {
     stroke-width:7;
-    opacity:0.4;
+    stroke-opacity:0.4;
     stroke:#7FC97F;
 }
 path.casing.highway-trunk, path.casing.highway-trunk_link {
@@ -213,7 +219,7 @@ path.stroke.highway-primary, path.stroke.highway-primary_link {
 }
 path.casing.highway-primary, path.casing.highway-primary_link {
     stroke:#FF6363;
-    opacity:0.4;
+    stroke-opacity:0.4;
     stroke-width:12;
 }
 
@@ -222,7 +228,7 @@ path.stroke.highway-secondary, path.stroke.highway-secondary_link {
     stroke-width:4;
 }
 path.casing.highway-secondary, path.casing.highway-secondary_link {
-    opacity:0.4;
+    stroke-opacity:0.4;
     stroke:#FDBF6F;
     stroke-width:11;
 }
