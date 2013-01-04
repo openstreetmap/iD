@@ -138,29 +138,28 @@ iD.Map = function() {
         return handles;
     }
 
+    function pointTransform(entity) {
+        return 'translate(' + iD.util.geo.roundCoords(projection(entity.loc)) + ')';
+    }
+
     function drawVertices(vertices, parentStructure, filter) {
         function shared(d) { return parentStructure[d.id] > 1; }
 
-        var circles = g.hit.selectAll('circle.vertex')
+        var circles = g.hit.selectAll('g.vertex')
             .filter(filter)
             .data(vertices, key);
 
         circles.exit().remove();
 
-        circles.enter().insert('circle', ':first-child')
-            .attr('class', 'node vertex');
+        circles.enter()
+            .insert('g', ':first-child')
+            .attr('class', 'node vertex')
+            .append('circle')
+            .attr('r', 4);
 
-        circles.attr('transform', function(entity) {
-                var p = projection(entity.loc);
-                return 'translate(' + [~~p[0], ~~p[1]] +
-                    ')';
-            })
+        circles.attr('transform', pointTransform)
             .classed('shared', shared)
             .classed('hover', classHover);
-
-        circles.transition().duration(50).attr('r', function(d) {
-                return d.id === hover ? 8: 4;
-            });
     }
 
     function drawAccuracyHandles(waynodes, filter) {
@@ -170,10 +169,7 @@ iD.Map = function() {
         handles.exit().remove();
         handles.enter().append('circle')
             .attr({ r: 3, 'class': 'accuracy-handle' });
-        handles.attr('transform', function(entity) {
-            var p = projection(entity.loc);
-            return 'translate(' + [~~p[0], ~~p[1]] + ')';
-        });
+        handles.attr('transform', pointTransform);
     }
 
     function editOff() {

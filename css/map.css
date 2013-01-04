@@ -18,22 +18,29 @@ g.point.selected circle {
 }
 
 /* interactive elements */
-circle.vertex {
+g.vertex circle {
     fill:white;
     stroke:#333;
     fill-opacity:1;
     stroke-width:2;
     stroke-opacity: 1;
+    -webkit-transition: -webkit-transform 50ms linear;
+    transition: transform 50ms linear;
+    -moz-transition: stroke 50ms linear;
+    -webkit-transform:scale(1, 1);
+    -moz-transform:scale(1, 1);
+    transform:scale(1, 1);
 }
 
-circle.vertex.shared {
+g.vertex.shared circle {
     fill:#aff;
 }
 
-circle.vertex.hover {
+g.vertex.hover circle {
+    -webkit-transform:scale(2, 2);
 }
 
-circle.vertex.selected {
+g.vertex circle.selected {
     fill: #ffff00;
 }
 
