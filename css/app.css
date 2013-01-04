@@ -808,6 +808,14 @@ div.typeahead a:first-child {
     padding:5px 10px;
 }
 
+.changeset-list li span.count {
+    font-size:10px;
+    color:#555;
+}
+
+.changeset-list li span.count:before { content: '('; }
+.changeset-list li span.count:after { content: ')'; }
+
 .changeset-list li:first-child { border-top: 0;}
 
 .commit-modal .changeset-comment {
