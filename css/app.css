@@ -657,6 +657,10 @@ button.Browse .label {
     margin: 4px;
 }
 
+.geolocate-control {
+    top:260px;
+}
+
 /* Map
 ------------------------------------------------------- */
 
