@@ -414,8 +414,8 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.big-line    { background-position: 0px -80px;}
 .icon.big-point   { background-position: -40px -80px;}
 .icon.big-area    { background-position: -80px -80px;}
-.icon.big-inspect { background-position: -120px -80px;}
-
+.icon.big-vertex { background-position: -120px -80px;}
+.icon.big-inspect { background-position: -160px -80px;}
 
 /* Toggle Icon is special */
 .toggle.icon                   { background-position: 0px -180px;}
