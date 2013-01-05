@@ -8,6 +8,8 @@ describe("iD.modes.AddPoint", function () {
         controller = iD.Controller(map, history);
 
         container.call(map);
+        container.append('div')
+            .attr('class', 'inspector-wrap');
 
         mode = iD.modes.AddPoint();
         controller.enter(mode);

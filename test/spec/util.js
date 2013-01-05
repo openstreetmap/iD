@@ -24,12 +24,6 @@ describe('Util', function() {
         expect(iD.util.qsString({})).to.eql('');
     });
 
-    it('#friendlyName', function() {
-        expect(iD.util.friendlyName({ tags: { name: 'hi' }})).to.equal('hi');
-        expect(iD.util.friendlyName({ tags: { highway: 'Route 5' }})).to.equal('Route 5');
-        expect(iD.util.friendlyName({ tags: { name: 'hi', highway: 'Route 5' }})).to.equal('hi');
-    });
-
     describe('geo', function() {
         describe('#roundCoords', function() {
             expect(iD.util.geo.roundCoords([0.1, 1])).to.eql([0, 1]);

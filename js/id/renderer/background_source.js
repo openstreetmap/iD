@@ -45,3 +45,7 @@ iD.BackgroundSource.Tiger2012 = iD.BackgroundSource.template(
 iD.BackgroundSource.OSM = iD.BackgroundSource.template(
     'http://{t}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     ['a', 'b', 'c'], [0, 18]);
+
+iD.BackgroundSource.MapBox = iD.BackgroundSource.template(
+    'http://{t}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.jpg70',
+    ['a', 'b', 'c'], [0, 16]);

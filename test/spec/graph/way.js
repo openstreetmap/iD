@@ -110,4 +110,14 @@ describe('iD.Way', function() {
             expect(iD.Way({tags: { highway: 'residential' }, nodes: ['n1', 'n1']}).isArea()).to.equal(false);
         });
     });
+
+    describe("#geometry", function() {
+        it("returns 'line' when the way is not an area", function () {
+            expect(iD.Way().geometry()).to.equal('line');
+        });
+
+        it("returns 'area' when the way is an area", function () {
+            expect(iD.Way({tags: { area: 'yes' }}).geometry()).to.equal('area');
+        });
+    });
 });

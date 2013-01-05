@@ -84,16 +84,15 @@ iD.Map = function() {
             filter = d3.functor(true);
         } else {
             var only = {};
-            difference.forEach(function (id) {
+            difference.forEach(function buildDifference(id) {
                 only[id] = graph.fetch(id);
-                graph.parentWays(id).forEach(function (parent) {
+                graph.parentWays(id).forEach(function buildOnly(parent) {
                     only[parent.id] = graph.fetch(parent.id);
                 });
             });
             all = _.compact(_.values(only));
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }
-
 
         if (all.length > 10000) return editOff();
         else editOn();
@@ -112,9 +111,10 @@ iD.Map = function() {
             }
         }
         var parentStructure = graph.parentStructure(ways);
-        var wayAccuracyHandles = ways.reduce(function(mem, w) {
-            return mem.concat(accuracyHandles(w));
-        }, []);
+        var wayAccuracyHandles = [];
+        for (i = 0; i < ways.length; i++) {
+            accuracyHandles(ways[i], wayAccuracyHandles);
+        }
         drawVertices(vertices, parentStructure, filter);
         drawAccuracyHandles(wayAccuracyHandles, filter);
         drawCasings(lines, filter);
@@ -123,8 +123,8 @@ iD.Map = function() {
         drawPoints(points, filter);
     }
 
-    function accuracyHandles(way) {
-        var handles = [];
+    // updates handles by reference
+    function accuracyHandles(way, handles) {
         for (var i = 0; i < way.nodes.length - 1; i++) {
             if (iD.util.geo.dist(way.nodes[i].loc, way.nodes[i + 1].loc) > 0.0001) {
                 handles.push({
@@ -135,32 +135,36 @@ iD.Map = function() {
                 });
             }
         }
-        return handles;
+    }
+
+    function pointTransform(entity) {
+        return 'translate(' + iD.util.geo.roundCoords(projection(entity.loc)) + ')';
     }
 
     function drawVertices(vertices, parentStructure, filter) {
         function shared(d) { return parentStructure[d.id] > 1; }
 
-        var circles = g.hit.selectAll('circle.vertex')
+        var circles = g.hit.selectAll('g.vertex')
             .filter(filter)
             .data(vertices, key);
 
         circles.exit().remove();
 
-        circles.enter().insert('circle', ':first-child')
+        var cg = circles.enter()
+            .insert('g', ':first-child')
             .attr('class', 'node vertex');
 
-        circles.attr('transform', function(entity) {
-                var p = projection(entity.loc);
-                return 'translate(' + [~~p[0], ~~p[1]] +
-                    ')';
-            })
+        cg.append('circle')
+            .attr('class', 'stroke')
+            .attr('r', 6);
+
+        cg.append('circle')
+            .attr('class', 'fill')
+            .attr('r', 4);
+
+        circles.attr('transform', pointTransform)
             .classed('shared', shared)
             .classed('hover', classHover);
-
-        circles.transition().duration(50).attr('r', function(d) {
-                return d.id === hover ? 8: 4;
-            });
     }
 
     function drawAccuracyHandles(waynodes, filter) {
@@ -170,10 +174,7 @@ iD.Map = function() {
         handles.exit().remove();
         handles.enter().append('circle')
             .attr({ r: 3, 'class': 'accuracy-handle' });
-        handles.attr('transform', function(entity) {
-            var p = projection(entity.loc);
-            return 'translate(' + [~~p[0], ~~p[1]] + ')';
-        });
+        handles.attr('transform', pointTransform);
     }
 
     function editOff() {
@@ -209,20 +210,30 @@ iD.Map = function() {
     }
 
     function drawPoints(points, filter) {
+
         var groups = g.hit.selectAll('g.point')
             .filter(filter)
             .data(points, key);
+
         groups.exit().remove();
+
         var group = groups.enter().append('g')
             .attr('class', 'node point');
+
         group.append('circle')
-            .attr({ r: 10, cx: 8, cy: 8 });
+            .attr('class', 'stroke')
+            .attr({ r: 10 });
+
+        group.append('circle')
+            .attr('class', 'fill')
+            .attr({ r: 10 });
+
         group.append('image')
-            .attr({ width: 16, height: 16 });
-        groups.attr('transform', function(d) {
-                var pt = projection(d.loc);
-                return 'translate(' + [~~pt[0], ~~pt[1]] + ') translate(-8, -8)';
-            });
+            .attr({ width: 16, height: 16 })
+            .attr('transform', 'translate(-8, -8)');
+
+        groups.attr('transform', pointTransform);
+
         groups.classed('hover', classHover);
         groups.select('image').attr('xlink:href', iD.Style.pointImage);
     }
@@ -299,11 +310,11 @@ iD.Map = function() {
         if (fast) {
             if (!translateStart) translateStart = d3.event.translate.slice();
             var a = d3.event.translate,
-                b = translateStart;
-            tilegroup.style(transformProp,
-                'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
-            surface.style(transformProp,
-                'translate(' + ~~(a[0] - b[0]) + 'px,' + ~~(a[1] - b[1]) + 'px)');
+                b = translateStart,
+                translate = 'translate(' + ~~(a[0] - b[0]) + 'px,' +
+                    ~~(a[1] - b[1]) + 'px)';
+            tilegroup.style(transformProp, translate);
+            surface.style(transformProp, translate);
         } else {
             redraw();
             translateStart = null;

@@ -66,14 +66,35 @@ iD.modes.Select = function (entity) {
             mode.controller.exit();
         });
 
-        surface.on('click.select', function () {
+        function click() {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
                 mode.controller.enter(iD.modes.Select(datum));
             } else {
                 mode.controller.enter(iD.modes.Browse());
             }
-        });
+        }
+
+        function dblclick() {
+            var datum = d3.select(d3.event.target).datum();
+            if (datum instanceof iD.Entity &&
+                (datum.geometry() === 'area' || datum.geometry() === 'line')) {
+                var choice = iD.util.geo.chooseIndex(datum,
+                        d3.mouse(mode.map.surface.node()), mode.map),
+                    node = iD.Node({ loc: choice.loc });
+
+                mode.history.perform(
+                    iD.actions.AddNode(node),
+                    iD.actions.AddWayNode(datum.id, node.id, choice.index),
+                    'added a point to a road');
+
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+            }
+        }
+
+        surface.on('click.select', click)
+            .on('dblclick.browse', dblclick);
 
         mode.map.keybinding().on('⌫.select', function(e) {
             remove();

@@ -13,6 +13,10 @@ iD.layerswitcher = function(map) {
             source: iD.BackgroundSource.OSM,
             description: 'The default OpenStreetMap layer.'
         }, {
+            name: 'MapBox',
+            source: iD.BackgroundSource.MapBox,
+            description: 'Satellite and Aerial Imagery'
+        }, {
             name: 'Custom',
             source: iD.BackgroundSource.Custom,
             description: 'A custom layer (requires configuration)'
@@ -120,6 +124,36 @@ iD.layerswitcher = function(map) {
                     })
                     .insert('span')
                     .attr('class','icon toggle');
+
+        var adjustments = content
+            .append('div')
+            .attr('class', 'adjustments');
+
+        var directions = [
+            ['←', [-1, 0]],
+            ['↑', [0, -1]],
+            ['→', [1, 0]],
+            ['↓', [0, 1]]];
+
+        function nudge(d) {
+            map.background.nudge(d[1]);
+            map.redraw();
+        }
+
+        adjustments.selectAll('button')
+            .data(directions).enter()
+            .append('button')
+            .attr('class', 'nudge')
+            .text(function(d) { return d[0]; })
+            .on('click', nudge);
+
+        adjustments.append('button')
+            .text('reset')
+            .attr('class', 'reset')
+            .on('click', function() {
+                map.background.offset([0, 0]);
+                map.redraw();
+            });
 
 
         selection.call(clickoutside);

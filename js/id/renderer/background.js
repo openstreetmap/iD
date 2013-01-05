@@ -2,6 +2,7 @@ iD.Background = function() {
     var tile = d3.geo.tile(),
         projection,
         cache = {},
+        offset = [0, 0],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
@@ -25,6 +26,10 @@ iD.Background = function() {
             }
         }
         return tiles;
+    }
+
+    function tileSize(d, z) {
+        return Math.ceil(256 * Math.pow(2, z - d[2])) / 256;
     }
 
     // derive the tiles onscreen, remove those offscreen and position tiles
@@ -82,20 +87,28 @@ iD.Background = function() {
             .on('error', error)
             .on('load', load);
 
-        function tileSize(d) {
-            return Math.ceil(256 * Math.pow(2, z - d[2])) / 256;
-        }
-
         image.style(transformProp, function(d) {
             var _ts = 256 * Math.pow(2, z - d[2]);
-            var scale = tileSize(d);
+            var scale = tileSize(d, z);
             return 'translate(' +
-                Math.round((d[0] * _ts) - tile_origin[0]) + 'px,' +
-                Math.round((d[1] * _ts) - tile_origin[1]) + 'px) scale(' + scale + ',' + scale + ')';
+                (Math.round((d[0] * _ts) - tile_origin[0]) + offset[0]) + 'px,' +
+                (Math.round((d[1] * _ts) - tile_origin[1]) + offset[1]) + 'px) scale(' + scale + ',' + scale + ')';
         });
 
         if (Object.keys(cache).length > 100) cache = {};
     }
+
+    background.offset = function(_) {
+        if (!arguments.length) return offset;
+        offset = _;
+        return background;
+    };
+
+    background.nudge = function(_) {
+        offset[0] += _[0];
+        offset[1] += _[1];
+        return background;
+    };
 
     background.projection = function(_) {
         if (!arguments.length) return projection;
