@@ -268,13 +268,6 @@ button.centered {
     border-radius:0 4px 4px 0;
 }
 
-button[disabled] {
-    color:#ccc;
-    cursor:auto;
-}
-button[disabled]:hover {
-    background: white;
-}
 button.action {
     background-color: #7092ff;
 }
@@ -291,25 +284,24 @@ button.delete:hover {
 
 button.save {
     background-color: #6bc641;
-    width: 120px;
+    min-width: 120px;
+    width: auto;
     position: relative;
 }
 
 button.save.has-count {
-    padding-right:10px;
+    padding: 9px;
 }
 
 button.save.has-count .count {
-    display: block;
-    position: absolute;
-    font-size:small;
-    top: 0;
-    right: 0;
+    color: #6bc641;
     background: #fff;
-    height: 37px;
     border-radius: 0 3px 3px 0;
-    padding: 0 10px;
-    line-height: 40px;
+    padding: 9px;
+    float: right;
+    margin-left: 10px;
+    margin-top: -9px;
+    margin-right: -8px;
 }
 
 button.save:hover {
@@ -329,6 +321,21 @@ button .label {
 button.action .label {
     color: white;
     text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+button[disabled] {
+    cursor:auto;
+    background: white;
+    pointer-events:none;
+}
+
+button[disabled] .label {
+    color:#ccc;
+    text-shadow: none;
+}
+
+button[disabled]:hover {
+    background: white;
 }
 
 /* Icons */
