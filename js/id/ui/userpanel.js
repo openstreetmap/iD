@@ -7,7 +7,14 @@ iD.userpanel = function(connection) {
             if (connection.authenticated()) {
                 selection.style('display', 'block');
                 connection.userDetails(function(user_details) {
-                    selection.append('span').attr('class','icon avatar icon-pre-text');
+                    if (user_details.image_url) {
+                        selection.append('img')
+                            .attr('class', 'icon icon-pre-text')
+                            .attr('src', user_details.image_url);
+                    } else {
+                        selection.append('span')
+                            .attr('class','icon avatar icon-pre-text');
+                    }
                     selection.append('span')
                         .append('a')
                             .attr('href', connection.url() + '/user/' +
