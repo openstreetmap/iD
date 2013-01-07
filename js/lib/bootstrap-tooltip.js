@@ -155,12 +155,22 @@
   };
 
   function getPosition(node) {
-    return {
-      x: node.offsetLeft,
-      y: node.offsetTop,
-      w: node.offsetWidth,
-      h: node.offsetHeight
-    };
+    var mode = d3.select(node).style('position');
+    if (mode === 'absolute' || mode === 'static') {
+      return {
+        x: node.offsetLeft,
+        y: node.offsetTop,
+        w: node.offsetWidth,
+        h: node.offsetHeight
+      };
+    } else {
+      return {
+        x: 0,
+        y: 0,
+        w: node.offsetWidth,
+        h: node.offsetHeight
+      };
+    }
   }
 
 })(this);
