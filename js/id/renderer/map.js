@@ -97,11 +97,13 @@ iD.Map = function() {
             switch (entity.geometry()) {
                 case 'line':
                     entity._line = nodeline(entity);
+                    ways.push(entity);
                     lines.push(entity);
                     break;
 
                 case 'area':
                     entity._line = nodeline(entity);
+                    ways.push(entity);
                     areas.push(entity);
                     break;
 
