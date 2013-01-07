@@ -423,6 +423,14 @@ iD.Map = function() {
         }
     };
 
+    map.centerEase = function(loc) {
+        var from = map.center().slice(), t = 0;
+        d3.timer(function() {
+            map.center(iD.util.geo.interp(from, loc, (t += 1) / 10));
+            return t == 10;
+        }, 20);
+    };
+
     map.extent = function() {
         return [projection.invert([0, 0]), projection.invert(dimensions)];
     };

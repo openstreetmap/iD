@@ -44,6 +44,16 @@ iD.modes.Select = function (entity) {
             .datum(entity)
             .call(inspector);
 
+        var inspector_size = d3.select('.inspector-wrap').size(),
+            map_size = mode.map.size(),
+            entity_extent = entity.extent(mode.history.graph()),
+            left_edge = map_size[0] - inspector_size[0];
+
+        var left = mode.map.projection(entity_extent[1])[0];
+        var right = mode.map.projection(entity_extent[0])[0];
+
+        if (left > left_edge) mode.map.centerEase(entity_extent[0]);
+
         inspector.on('changeTags', function(d, tags) {
             mode.history.perform(
                 iD.actions.ChangeEntityTags(d.id, tags),
