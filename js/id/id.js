@@ -220,9 +220,9 @@ window.iD = function(container) {
         about.append('ul')
             .attr('id','about')
             .attr('class','pad1 fillD about-block link-list')
-            .html("<li><a href='http://github.com/systemed/iD'>view code</a></li> " +
-                  "<li><a href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
-                  " <li>imagery <a href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
+            .html("<li><a target='_blank' href='http://github.com/systemed/iD'>view code</a></li> " +
+                  "<li><a target='_blank' href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
+                  " <li>imagery <a target='_blank' href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
 
         var contributors = about.append('div')
             .attr('id', 'user-list')
