@@ -4,5 +4,9 @@ iD.Relation = iD.Entity.extend({
 
     extent: function() {
         return [[NaN, NaN], [NaN, NaN]];
+    },
+
+    geometry: function() {
+        return 'relation';
     }
 });
