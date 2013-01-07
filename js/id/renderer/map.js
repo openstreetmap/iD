@@ -93,23 +93,34 @@ iD.Map = function() {
         else editOn();
 
         for (var i = 0; i < all.length; i++) {
-            var a = all[i];
-            if (a.type === 'way') {
-                a._line = nodeline(a);
-                ways.push(a);
-                if (a.isArea()) areas.push(a);
-                else lines.push(a);
-            } else if (a._poi) {
-                points.push(a);
-            } else if (!a._poi && a.type === 'node' && a.intersects(extent)) {
-                vertices.push(a);
+            var entity = all[i];
+            switch (entity.geometry()) {
+                case 'line':
+                    entity._line = nodeline(entity);
+                    lines.push(entity);
+                    break;
+
+                case 'area':
+                    entity._line = nodeline(entity);
+                    areas.push(entity);
+                    break;
+
+                case 'point':
+                    points.push(entity);
+                    break;
+
+                case 'vertex':
+                    vertices.push(entity);
+                    break;
             }
         }
+
         var parentStructure = graph.parentStructure(ways);
         var wayAccuracyHandles = [];
         for (i = 0; i < ways.length; i++) {
             accuracyHandles(ways[i], wayAccuracyHandles);
         }
+
         drawVertices(vertices, parentStructure, filter);
         drawAccuracyHandles(wayAccuracyHandles, filter);
         drawCasings(lines, filter);
