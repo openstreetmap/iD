@@ -143,9 +143,11 @@ window.iD = function(container) {
                 if (has_changes) {
                     connection.authenticate(function(err) {
                         var modal = iD.modal();
+                        var changes = history.changes();
+                        changes.connection = connection;
                         modal.select('.content')
                             .classed('commit-modal', true)
-                            .datum(history.changes())
+                            .datum(changes)
                             .call(iD.commit()
                                 .on('cancel', function() {
                                     modal.remove();
