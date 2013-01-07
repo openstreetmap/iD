@@ -338,7 +338,12 @@ iD.Map = function() {
     }
 
     map.mouseCoordinates = function() {
-        return projection.invert(d3.mouse(surface.node()));
+        try {
+            return projection.invert(d3.mouse(surface.node()));
+        } catch(e) {
+            // when called with hidden elements, d3.mouse() will throw
+            return [NaN, NaN];
+        }
     };
 
     map.dblclickEnable = function(_) {
