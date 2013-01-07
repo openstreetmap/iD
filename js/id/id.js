@@ -122,17 +122,25 @@ window.iD = function(container) {
                         l.remove();
                         history.reset();
                         map.flush().redraw();
-                        var modal = iD.modal();
-                        modal.select('.content')
-                            .classed('success-modal', true)
-                            .datum({
-                                id: changeset_id,
-                                comment: e.comment
-                            })
-                            .call(iD.success()
-                                .on('cancel', function() {
-                                    modal.remove();
-                                }));
+                        if (err) {
+                            var desc = iD.confirm()
+                                .select('.description');
+                            desc.append('h2')
+                                .text('An error occurred while trying to save');
+                            desc.append('p').text(err.responseText);
+                        } else {
+                            var modal = iD.modal();
+                            modal.select('.content')
+                                .classed('success-modal', true)
+                                .datum({
+                                    id: changeset_id,
+                                    comment: e.comment
+                                })
+                                .call(iD.success()
+                                    .on('cancel', function() {
+                                        modal.remove();
+                                    }));
+                        }
                     });
                 }
                 var changes = history.changes();

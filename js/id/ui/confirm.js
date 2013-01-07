@@ -1,9 +1,10 @@
-iD.confirm = function(message) {
+iD.confirm = function() {
     var modal = iD.modal();
     modal.select('.modal').classed('modal-alert', true);
     modal.select('.content')
         .classed('modal-section', true)
-        .append('div').attr('class', 'description');
+        .append('div')
+        .attr('class', 'description');
     var nochanges = modal.select('.content')
         .append('button')
         .attr('class','wide action centered')
