@@ -853,6 +853,15 @@ div.typeahead a:first-child {
     max-height: 160px;
 }
 
+.commit-modal .user-details {
+    float: right;
+}
+
+.user-icon {
+    max-width: 50px;
+    max-height: 50px;
+}
+
 .modal-section {
     padding: 20px;
     border-bottom: 1px solid #ccc;

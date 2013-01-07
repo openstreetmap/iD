@@ -1,12 +1,61 @@
 iD.commit = function() {
     var event = d3.dispatch('cancel', 'save');
+    
+    function zipSame(d) {
+        var c = [], n = -1;
+        for (var i = 0; i < d.length; i++) {
+            var desc = {
+                name: d[i].friendlyName(),
+                type: d[i].type,
+                count: 1,
+                tagText: iD.util.tagText(d[i])
+            };
+            if (c[n] &&
+                c[n].name == desc.name &&
+                c[n].tagText == desc.tagText) {
+                c[n].count++;
+            } else {
+                c[++n] = desc;
+            }
+        }
+        return c;
+    }
 
     function commit(selection) {
+
+        function changesLength(d) { return changes[d].length; }
+
         var changes = selection.datum(),
+            connection = changes.connection,
+            user = connection.user(),
             header = selection.append('div').attr('class', 'header modal-section'),
             body = selection.append('div').attr('class', 'body');
 
+
+        var user_details = header
+            .append('div')
+            .attr('class', 'user-details');
+
+        var user_link = user_details
+            .append('div')
+            .append('a')
+                .attr('href', connection.url() + '/user/' +
+                      user.display_name)
+                .attr('target', '_blank');
+
+        if (user.image_url) {
+            user_link
+                .append('img')
+                .attr('src', user.image_url)
+                .attr('class', 'user-icon');
+        }
+
+        user_link
+            .append('div')
+            .text(user.display_name);
+
         header.append('h2').text('Upload Changes to OpenStreetMap');
+
         header.append('p').text('The changes you upload will be visible on all maps that use OpenStreetMap data.');
 
         var commit = body.append('div').attr('class','modal-section');
@@ -35,8 +84,6 @@ iD.commit = function() {
             cancelbutton.append('span').attr('class','icon close icon-pre-text');
             cancelbutton.append('span').attr('class','label').text('Cancel');
 
-        function changesLength(d) { return changes[d].length; }
-
         var section = body.selectAll('div.commit-section')
             .data(['modified', 'deleted', 'created'].filter(changesLength))
             .enter()
@@ -46,26 +93,6 @@ iD.commit = function() {
             .append('small')
             .attr('class', 'count')
             .text(changesLength);
-
-        function zipSame(d) {
-            var c = [], n = -1;
-            for (var i = 0; i < d.length; i++) {
-                var desc = {
-                    name: d[i].friendlyName(),
-                    type: d[i].type,
-                    count: 1,
-                    tagText: iD.util.tagText(d[i])
-                };
-                if (c[n] &&
-                    c[n].name == desc.name &&
-                    c[n].tagText == desc.tagText) {
-                    c[n].count++;
-                } else {
-                    c[++n] = desc;
-                }
-            }
-            return c;
-        }
 
         var li = section.append('ul')
             .attr('class','changeset-list')
