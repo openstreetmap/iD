@@ -126,7 +126,8 @@ iD.modes.Select = function (entity) {
         var surface = mode.map.surface;
 
         d3.select('.inspector-wrap')
-            .style('display', 'none');
+            .style('display', 'none')
+            .html('');
 
         behaviors.forEach(function(behavior) {
             behavior.off(surface);
