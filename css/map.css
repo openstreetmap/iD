@@ -111,13 +111,13 @@ path.stroke.railway-subway {
 
 path.area {
     stroke-width:2;
-    stroke:red;
+    stroke:#fff;
     fill:#fff;
     fill-opacity:0.3;
 }
 
 path.area.selected {
-    stroke-width:3 !important;
+    stroke-width:4 !important;
 }
 
 path.area.natural {
