@@ -34,16 +34,14 @@ iD.Inspector = function() {
             .text('+ Add New Tag')
             .on('click', function() {
                 addTag();
-                tagList.selectAll('li:last-child input.key').node().focus();
+                focusNewKey();
             });
 
-        var formsel = drawTags(entity.tags);
+        drawTags(entity.tags);
 
         inspectorbody.append('div')
             .attr('class', 'inspector-buttons')
             .call(drawButtons);
-
-        formsel.selectAll('input').node().focus();
     }
 
     function drawHead(selection) {
@@ -161,6 +159,10 @@ iD.Inspector = function() {
         helpBtn.append('span')
             .attr('class', 'icon inspect');
 
+        if (tags.length === 1 && tags[0].key === '' && tags[0].value === '') {
+            focusNewKey();
+        }
+
         return li;
     }
 
@@ -196,6 +198,10 @@ iD.Inspector = function() {
                     }));
                 });
             }));
+    }
+
+    function focusNewKey() {
+        tagList.selectAll('li:last-child input.key').node().focus();
     }
 
     function addTag() {
