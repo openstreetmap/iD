@@ -34,6 +34,10 @@ describe('Background', function() {
     });
 
     describe('iD.BackgroundSource.Template', function() {
+        it('does not error with blank template', function() {
+            var source = iD.BackgroundSource.template('');
+            expect(source([0,1,2])).to.equal('');
+        });
         it('generates a tile-generating source', function() {
             var source = iD.BackgroundSource.template('{z}/{x}/{y}');
             expect(source([0,1,2])).to.equal('2/0/1');
