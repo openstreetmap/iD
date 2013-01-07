@@ -2,7 +2,6 @@ iD.Map = function() {
     var connection, history,
         dimensions = [],
         dispatch = d3.dispatch('move'),
-        hover = null,
         translateStart,
         keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
@@ -12,7 +11,6 @@ iD.Map = function() {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
-        hoverEnabled = true,
         fastEnabled = true,
         notice,
         background = iD.Background()
@@ -43,8 +41,6 @@ iD.Map = function() {
                 .attr({ x: 0, y: 0 });
 
         r = surface.append('g')
-            .on('mouseover', hoverIn)
-            .on('mouseout', hoverOut)
             .attr('clip-path', 'url(#clip)');
 
         g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
@@ -66,7 +62,6 @@ iD.Map = function() {
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
-    function classHover(d) { return d.id === hover; }
     function getline(d) { return d._line; }
     function key(d) { return d.id; }
     function nodeline(d) {
@@ -98,23 +93,36 @@ iD.Map = function() {
         else editOn();
 
         for (var i = 0; i < all.length; i++) {
-            var a = all[i];
-            if (a.type === 'way') {
-                a._line = nodeline(a);
-                ways.push(a);
-                if (a.isArea()) areas.push(a);
-                else lines.push(a);
-            } else if (a._poi) {
-                points.push(a);
-            } else if (!a._poi && a.type === 'node' && a.intersects(extent)) {
-                vertices.push(a);
+            var entity = all[i];
+            switch (entity.geometry()) {
+                case 'line':
+                    entity._line = nodeline(entity);
+                    ways.push(entity);
+                    lines.push(entity);
+                    break;
+
+                case 'area':
+                    entity._line = nodeline(entity);
+                    ways.push(entity);
+                    areas.push(entity);
+                    break;
+
+                case 'point':
+                    points.push(entity);
+                    break;
+
+                case 'vertex':
+                    vertices.push(entity);
+                    break;
             }
         }
+
         var parentStructure = graph.parentStructure(ways);
         var wayAccuracyHandles = [];
         for (i = 0; i < ways.length; i++) {
             accuracyHandles(ways[i], wayAccuracyHandles);
         }
+
         drawVertices(vertices, parentStructure, filter);
         drawAccuracyHandles(wayAccuracyHandles, filter);
         drawCasings(lines, filter);
@@ -163,8 +171,7 @@ iD.Map = function() {
             .attr('r', 4);
 
         circles.attr('transform', pointTransform)
-            .classed('shared', shared)
-            .classed('hover', classHover);
+            .classed('shared', shared);
     }
 
     function drawAccuracyHandles(waynodes, filter) {
@@ -191,13 +198,11 @@ iD.Map = function() {
             .filter(filter)
             .data(data, key);
         lines.exit().remove();
-        lines.enter().append('path')
-            .classed('hover', classHover);
+        lines.enter().append('path');
         lines
             .order()
             .attr('d', getline)
-            .attr('class', class_gen)
-            .classed('hover', classHover);
+            .attr('class', class_gen);
         return lines;
     }
 
@@ -210,7 +215,6 @@ iD.Map = function() {
     }
 
     function drawPoints(points, filter) {
-
         var groups = g.hit.selectAll('g.point')
             .filter(filter)
             .data(points, key);
@@ -234,7 +238,6 @@ iD.Map = function() {
 
         groups.attr('transform', pointTransform);
 
-        groups.classed('hover', classHover);
         groups.select('image').attr('xlink:href', iD.Style.pointImage);
     }
 
@@ -274,25 +277,6 @@ iD.Map = function() {
     function connectionLoad(err, result) {
         history.merge(result);
         redraw(Object.keys(result.entities));
-    }
-
-    function hoverIn() {
-        if (!hoverEnabled) return;
-        var datum = d3.select(d3.event.target).datum();
-        if (datum instanceof iD.Entity) {
-            hover = datum.id;
-            redraw([hover]);
-            d3.select('.messages').text(datum.tags.name || '#' + datum.id);
-        }
-    }
-
-    function hoverOut() {
-        if (hoverEnabled && hover) {
-            var oldHover = hover;
-            hover = null;
-            redraw([oldHover]);
-            d3.select('.messages').text('');
-        }
     }
 
     function zoomPan() {
@@ -363,12 +347,6 @@ iD.Map = function() {
         return map;
     };
 
-    map.hoverEnable = function(_) {
-        if (!arguments.length) return hoverEnabled;
-        hoverEnabled = _;
-        return map;
-    };
-
     map.fastEnable = function(_) {
         if (!arguments.length) return fastEnabled;
         fastEnabled = _;
@@ -421,6 +399,14 @@ iD.Map = function() {
             zoom.translate(projection.translate());
             return redraw();
         }
+    };
+
+    map.centerEase = function(loc) {
+        var from = map.center().slice(), t = 0;
+        d3.timer(function() {
+            map.center(iD.util.geo.interp(from, loc, (t += 1) / 10));
+            return t == 10;
+        }, 20);
     };
 
     map.extent = function() {

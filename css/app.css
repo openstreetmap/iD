@@ -192,7 +192,7 @@ button {
     font-size:14px;
     display: inline-block;
     height:40px;
-    cursor:url(../img/cursor-pointer.png) 9 9, auto;
+    cursor:url(../img/cursor-pointer.png) 6 1, auto;
 }
 
 button:hover {
@@ -201,7 +201,7 @@ button:hover {
 
 button.active {
     box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.35);
-    cursor:url(../img/cursor-pointing.png) 9 9, auto;
+    cursor:url(../img/cursor-pointing.png) 6 1, auto;
 }
 
 button.active:not([disabled]) {

@@ -34,35 +34,14 @@ iD.Inspector = function() {
             .text('+ Add New Tag')
             .on('click', function() {
                 addTag();
-                tagList.selectAll('li:last-child input.key').node().focus();
+                focusNewKey();
             });
 
-        var formsel = drawTags(entity.tags);
+        drawTags(entity.tags);
 
         inspectorbody.append('div')
             .attr('class', 'inspector-buttons')
             .call(drawButtons);
-
-        var inHeight = inspectorbody.node().offsetHeight;
-
-        inspectorbody.style('display', 'none')
-            .style('margin-top', (-inHeight) + 'px');
-
-        var inspectortoggle = selection.append('button')
-            .attr('class', 'inspector-toggle action')
-            .on('click', function() {
-                inspectortoggle.style('display', 'none');
-                inspectorbody
-                    .style('display', 'block')
-                    .transition()
-                    .style('margin-top', '0px');
-            });
-
-        formsel.selectAll('input').node().focus();
-
-        inspectortoggle.append('span')
-            .text('Details')
-            .attr('class','label');
     }
 
     function drawHead(selection) {
@@ -180,11 +159,16 @@ iD.Inspector = function() {
         helpBtn.append('span')
             .attr('class', 'icon inspect');
 
+        if (tags.length === 1 && tags[0].key === '' && tags[0].value === '') {
+            focusNewKey();
+        }
+
         return li;
     }
 
     function pushMore() {
-        if (d3.event.keyCode === 9 && tagList.selectAll('li:last-child input.value').node() === this) {
+        if (d3.event.keyCode === 9 &&
+            tagList.selectAll('li:last-child input.value').node() === this) {
             addTag();
         }
     }
@@ -205,12 +189,19 @@ iD.Inspector = function() {
 
         value.call(d3.typeahead()
             .data(function(_, callback) {
-                taginfo.values({key: key.property('value'), query: value.property('value')}, function(err, data) {
+                taginfo.values({
+                    key: key.property('value'),
+                    query: value.property('value')
+                }, function(err, data) {
                     callback(data.data.map(function (d) {
                         return {value: d.value, title: d.description};
                     }));
                 });
             }));
+    }
+
+    function focusNewKey() {
+        tagList.selectAll('li:last-child input.key').node().focus();
     }
 
     function addTag() {

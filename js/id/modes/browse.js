@@ -12,6 +12,7 @@ iD.modes.Browse = function() {
         var surface = mode.map.surface;
 
         behaviors = [
+            iD.behavior.Hover(),
             iD.behavior.DragNode(mode),
             iD.behavior.DragAccuracyHandle(mode)];
 

@@ -10,8 +10,6 @@ iD.modes.AddPoint = function() {
             history = mode.history,
             controller = mode.controller;
 
-        map.hoverEnable(false);
-
         map.hint('Click on the map to add a point.');
 
         map.surface.on('click.addpoint', function() {
@@ -30,7 +28,6 @@ iD.modes.AddPoint = function() {
     };
 
     mode.exit = function() {
-        mode.map.hoverEnable(true);
         mode.map.hint(false);
         mode.map.surface.on('click.addpoint', null);
         mode.map.keybinding().on('⎋.addpoint', null);

@@ -30,6 +30,7 @@ iD.modes.Select = function (entity) {
         var surface = mode.map.surface;
 
         behaviors = [
+            iD.behavior.Hover(),
             iD.behavior.DragNode(mode),
             iD.behavior.DragWay(mode),
             iD.behavior.DragAccuracyHandle(mode)];
@@ -43,6 +44,21 @@ iD.modes.Select = function (entity) {
             .style('opacity', 1)
             .datum(entity)
             .call(inspector);
+
+        // Pan the map if the clicked feature intersects with the position
+        // of the inspector
+        var inspector_size = d3.select('.inspector-wrap').size(),
+            map_size = mode.map.size(),
+            entity_extent = entity.extent(mode.history.graph()),
+            left_edge = map_size[0] - inspector_size[0],
+            left = mode.map.projection(entity_extent[1])[0],
+            right = mode.map.projection(entity_extent[0])[0];
+
+        if (left > left_edge &&
+            right > left_edge) mode.map.centerEase(
+                iD.util.geo.interp(
+                    entity_extent[0],
+                    entity_extent[1], 0.5));
 
         inspector.on('changeTags', function(d, tags) {
             mode.history.perform(
