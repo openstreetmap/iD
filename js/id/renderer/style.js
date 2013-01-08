@@ -53,15 +53,26 @@ iD.Style.TAG_CLASSES = iD.util.trueObj([
     'landuse', 'building', 'oneway', 'bridge'
 ]);
 
-iD.Style.styleClasses = function(pre) {
-    return function(d) {
-        var tags = d.tags;
-        var c = pre ? [pre] : [];
-        for (var k in tags) {
-            if (!iD.Style.TAG_CLASSES[k]) continue;
-            c.push('tag-' + k);
-            c.push('tag-' + k + '-' + tags[k]);
-        }
-        return c.join(' ');
+iD.Style.styleClasses = function() {
+    var tagClassRe = /^tag-/;
+    return function(selection) {
+        selection.each(function(d) {
+            var classes, value = this.className;
+
+            if (value.baseVal != null) value = value.baseVal;
+
+            classes = value.trim().split(/\s+/).filter(function(name) {
+                return name.length && !tagClassRe.test(name);
+            });
+
+            var tags = d.tags;
+            for (var k in tags) {
+                if (!iD.Style.TAG_CLASSES[k]) continue;
+                classes.push('tag-' + k);
+                classes.push('tag-' + k + '-' + tags[k]);
+            }
+
+            return selection.attr('class', classes.join(' '));
+        });
     };
 };

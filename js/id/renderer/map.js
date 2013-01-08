@@ -15,9 +15,6 @@ iD.Map = function() {
         notice,
         background = iD.Background()
             .projection(projection),
-        class_stroke = iD.Style.styleClasses('way line stroke'),
-        class_casing = iD.Style.styleClasses('way line casing'),
-        class_area = iD.Style.styleClasses('way area'),
         transformProp = iD.util.prefixCSSProperty('Transform'),
         supersurface, surface, defs, tilegroup, r, g, alength;
 
@@ -193,25 +190,30 @@ iD.Map = function() {
         notice.message('');
     }
 
-    function drawLines(data, filter, group, class_gen) {
+    function drawLines(data, filter, group, fixedClasses) {
         var lines = group.selectAll('path')
             .filter(filter)
             .data(data, key);
+
         lines.exit().remove();
-        lines.enter().append('path');
+
+        lines.enter().append('path')
+            .attr('class', fixedClasses);
+
         lines
             .order()
             .attr('d', getline)
-            .attr('class', class_gen);
+            .call(iD.Style.styleClasses());
+
         return lines;
     }
 
     function drawFills(areas, filter) {
-        drawLines(areas, filter, g.fill, class_area);
+        drawLines(areas, filter, g.fill, 'way area');
     }
 
     function drawCasings(ways, filter) {
-        drawLines(ways, filter, g.casing, class_casing);
+        drawLines(ways, filter, g.casing, 'way line casing');
     }
 
     function drawPoints(points, filter) {
@@ -242,7 +244,7 @@ iD.Map = function() {
     }
 
     function drawStrokes(ways, filter) {
-        var strokes = drawLines(ways, filter, g.stroke, class_stroke);
+        var strokes = drawLines(ways, filter, g.stroke, 'way line stroke');
 
         // Determine the lengths of oneway paths
         var lengths = {},

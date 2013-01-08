@@ -16,22 +16,48 @@ describe('iD.Style', function() {
     });
 
     describe('#styleClasses', function() {
-        it('returns an empty string when no classes are present', function() {
-            var classes = iD.Style.styleClasses(''),
-                entity = iD.Entity();
-            expect(classes(entity)).to.equal('');
+        var selection;
+
+        beforeEach(function () {
+            selection = d3.select(document.createElement('div'));
         });
 
-        it('returns a string containing predefined classes', function() {
-            var classes = iD.Style.styleClasses('selected'),
-                entity = iD.Entity();
-            expect(classes(entity)).to.equal('selected');
+        it('adds no classes to elements whose datum has no tags', function() {
+            selection
+                .datum(iD.Entity())
+                .call(iD.Style.styleClasses());
+            expect(selection.attr('class')).to.equal('');
         });
 
-        it('returns a string containing classes for highway tags', function() {
-            var classes = iD.Style.styleClasses(''),
-                entity = iD.Entity({tags: {highway: 'primary'}});
-            expect(classes(entity)).to.equal('tag-highway tag-highway-primary');
+        it('adds classes for highway tags', function() {
+            selection
+                .datum(iD.Entity({tags: {highway: 'primary'}}))
+                .call(iD.Style.styleClasses());
+            expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+        });
+
+        it('removes classes for tags that are no longer present', function() {
+            selection
+                .attr('class', 'tag-highway tag-highway-primary')
+                .datum(iD.Entity())
+                .call(iD.Style.styleClasses());
+            expect(selection.attr('class')).to.equal('');
+        });
+
+        it('preserves existing non-"tag-"-prefixed classes', function() {
+            selection
+                .attr('class', 'selected')
+                .datum(iD.Entity())
+                .call(iD.Style.styleClasses());
+            expect(selection.attr('class')).to.equal('selected');
+        });
+
+        it('works on SVG elements', function() {
+            selection = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
+            selection
+                .datum(iD.Entity())
+                .call(iD.Style.styleClasses());
+            expect(selection.attr('class')).to.equal('');
         });
     });
 });
