@@ -29,6 +29,7 @@ iD.tagReference = function(selection) {
             .text(g('description'));
         referenceBody
             .append('a')
+            .attr('target', '_blank')
             .attr('href', function(d) {
                 return 'http://wiki.openstreetmap.org/wiki/' + d.title;
             })
