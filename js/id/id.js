@@ -174,8 +174,11 @@ window.iD = function(container) {
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
             .selectAll('button')
-                .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
-                .enter().append('button').attr('class', function(d) { return d[0] + ' narrow'; })
+                .data([['zoom-in', '+', map.zoomIn, 'Zoom In'], ['zoom-out', '-', map.zoomOut, 'Zoom Out']])
+                .enter()
+                .append('button')
+                .attr('class', function(d) { return d[0] + ' narrow'; })
+                .attr('title', function(d) { return d[3]; })
                 .on('click', function(d) { return d[2](); })
                 .append('span')
                     .attr('class', function(d) {
@@ -191,6 +194,7 @@ window.iD = function(container) {
                 .attr('class', 'geolocate-control map-control')
                 .append('button')
                 .attr('class', 'narrow')
+                .attr('title', 'Show My Location')
                 .text('G')
                 .on('click', function() {
                     navigator.geolocation.getCurrentPosition(geolocateSuccess, geolocateError);
