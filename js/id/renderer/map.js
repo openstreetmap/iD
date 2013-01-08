@@ -28,7 +28,12 @@ iD.Map = function() {
 
         surface = supersurface.append('svg')
             .on('mouseup.reset-transform', resetTransform)
-            .on('touchend.reset-transform', resetTransform);
+            .on('touchend.reset-transform', resetTransform)
+            .on('mousedown.zoom', function() {
+                if (d3.event.button == 2) {
+                    d3.event.stopPropagation();
+                }
+            });
 
         defs = surface.append('defs');
         defs.append('clipPath')
