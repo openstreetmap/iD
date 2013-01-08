@@ -56,7 +56,7 @@ iD.Style.TAG_CLASSES = iD.util.trueObj([
 iD.Style.styleClasses = function() {
     var tagClassRe = /^tag-/;
     return function(selection) {
-        selection.each(function(d) {
+        selection.each(function(d, i) {
             var classes, value = this.className;
 
             if (value.baseVal !== undefined) value = value.baseVal;
@@ -72,7 +72,7 @@ iD.Style.styleClasses = function() {
                 classes.push('tag-' + k + '-' + tags[k]);
             }
 
-            return selection.attr('class', classes.join(' '));
+            return d3.select(this).attr('class', classes.join(' '));
         });
     };
 };
