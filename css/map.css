@@ -34,6 +34,28 @@ circle.fill {
     transform:scale(1, 1);
 }
 
+svg[data-zoom="16"] g.vertex circle.stroke,
+svg[data-zoom="16"] g.vertex circle.fill {
+    -webkit-transform:scale(0.6, 0.6);
+    -moz-transform:scale(0.6, 0.6);
+    transform:scale(0.6, 0.6);
+}
+
+svg[data-zoom="17"] g.vertex circle.stroke,
+svg[data-zoom="17"] g.vertex circle.fill {
+    -webkit-transform:scale(0.7, 0.7);
+    -moz-transform:scale(0.7, 0.7);
+    transform:scale(0.7, 0.7);
+}
+
+svg[data-zoom="16"] path.casing.tag-highway {
+    stroke-width:6;
+}
+
+svg[data-zoom="16"] path.stroke.tag-highway {
+    stroke-width:4;
+}
+
 g.vertex circle.stroke {
     fill:#333;
 }

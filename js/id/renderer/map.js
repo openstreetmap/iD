@@ -78,9 +78,14 @@ iD.Map = function() {
             var only = {};
             difference.forEach(function buildDifference(id) {
                 only[id] = graph.fetch(id);
-                graph.parentWays(id).forEach(function buildOnly(parent) {
-                    only[parent.id] = graph.fetch(parent.id);
-                });
+                if (only[id].type === 'node') {
+                    graph.parentWays(id).forEach(function buildOnly(parent) {
+                        // Don't re-fetch parents
+                        if (only[parent.id] === undefined) {
+                            only[parent.id] = graph.fetch(parent.id);
+                        }
+                    });
+                }
             });
             all = _.compact(_.values(only));
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
@@ -317,6 +322,7 @@ iD.Map = function() {
 
     function redraw(difference) {
         dispatch.move(map);
+        surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
         if (map.zoom() > 16) {
             connection.loadTiles(projection);
