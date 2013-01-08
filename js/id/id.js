@@ -199,7 +199,7 @@ window.iD = function(container) {
             .attr('class', 'inspector-wrap fillL')
             .style('display', 'none');
 
-        var about = container.append('div');
+        var about = container.append('div').attr('id', 'attrib-container');
 
         about.append('ul')
             .attr('id','about')

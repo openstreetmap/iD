@@ -729,19 +729,23 @@ img.tile {
 ------------------------------------------------------- */
 
 .about-block {
-    position:absolute;
-    bottom:0px;
+    float: right;
+    height: 40px;
 }
 
 #about {
-    bottom:0px;
-    right:0px;
     border-radius:3px 0 0 0;
 }
 
+#attrib-container {
+    position: absolute;
+    right:0px;
+    bottom:0px;
+}
+
 #user-list {
+    margin-right: 8px;
     border-radius:3px 3px 0 0;
-    right: 330px;
     max-width: 400px;
     overflow: hidden;
     white-space: nowrap;
@@ -757,6 +761,7 @@ img.tile {
 .user-container {
     position:absolute;
     left:0px;
+    bottom:0px;
     border-radius:0 3px 0 0;
 }
 
