@@ -78,7 +78,7 @@ iD.Map = function() {
             var only = {};
             difference.forEach(function buildDifference(id) {
                 only[id] = graph.fetch(id);
-                if (only[id].type === 'node') {
+                if (only[id] && only[id].type === 'node') {
                     graph.parentWays(id).forEach(function buildOnly(parent) {
                         // Don't re-fetch parents
                         if (only[parent.id] === undefined) {
