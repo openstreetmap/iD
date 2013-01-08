@@ -31,6 +31,7 @@ iD.layerswitcher = function(map) {
         var button = selection
             .append('button')
             .attr('class', 'narrow')
+            .attr('title', 'Layer Settings')
             .html("<span class='layers icon'></span>")
             .on('click.layerswitcher-toggle', toggle);
 

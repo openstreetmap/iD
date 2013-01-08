@@ -44,28 +44,10 @@ window.iD = function(container) {
             }
         }
 
-        var showUsers = _.debounce(function() {
-            var users = {},
-                entities = map.history().graph().intersects(map.extent());
-            for (var i in entities) {
-                if (entities[i].user) {
-                    users[entities[i].user] = true;
-                    if (Object.keys(users).length > 10) break;
-                }
-            }
-            var u = Object.keys(users);
-            var l = d3.select('#user-list')
-                .selectAll('a.user-link').data(u);
-            l.enter().append('a')
-                .attr('class', 'user-link')
-                .attr('href', function(d) { return connection.userUrl(d); })
-                .attr('target', '_blank')
-                .text(String);
-            l.exit().remove();
-        }, 1000);
-
         map.on('move.disable-buttons', disableTooHigh)
-            .on('move.show-users', showUsers);
+            .on('move.contributors', _.debounce(function() {
+                contributors.call(iD.contributors(map));
+            }, 1000));
 
         buttons.append('span')
             .attr('class', function(d) {
@@ -191,8 +173,11 @@ window.iD = function(container) {
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
             .selectAll('button')
-                .data([['zoom-in', '+', map.zoomIn], ['zoom-out', '-', map.zoomOut]])
-                .enter().append('button').attr('class', function(d) { return d[0] + ' narrow'; })
+                .data([['zoom-in', '+', map.zoomIn, 'Zoom In'], ['zoom-out', '-', map.zoomOut, 'Zoom Out']])
+                .enter()
+                .append('button')
+                .attr('class', function(d) { return d[0] + ' narrow'; })
+                .attr('title', function(d) { return d[3]; })
                 .on('click', function(d) { return d[2](); })
                 .append('span')
                     .attr('class', function(d) {
@@ -208,6 +193,7 @@ window.iD = function(container) {
                 .attr('class', 'geolocate-control map-control')
                 .append('button')
                 .attr('class', 'narrow')
+                .attr('title', 'Show My Location')
                 .text('G')
                 .on('click', function() {
                     navigator.geolocation.getCurrentPosition(geolocateSuccess, geolocateError);
@@ -236,10 +222,10 @@ window.iD = function(container) {
         var contributors = about.append('div')
             .attr('id', 'user-list')
             .attr('class','about-block fillD pad1');
-            contributors.append('span')
-                .attr('class', 'icon nearby icon-pre-text');
-            contributors.append('pan')
-                .text('Viewing contributions by ');
+        contributors.append('span')
+            .attr('class', 'icon nearby icon-pre-text');
+        contributors.append('pan')
+            .text('Viewing contributions by ');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
