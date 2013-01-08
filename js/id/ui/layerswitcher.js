@@ -126,6 +126,7 @@ iD.layerswitcher = function(map) {
                             d.name = 'Custom (configured)';
                         }
                         map.background.source(d.source);
+                        map.history().imagery_used(d.name);
                         map.redraw();
                         selectLayer(d);
                     })

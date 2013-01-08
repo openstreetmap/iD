@@ -108,7 +108,7 @@ iD.Connection = function() {
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: iD.format.XML.changeset(comment)
+                content: iD.format.XML.changeset(comment, imagery_used)
             }, function (err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({
