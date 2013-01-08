@@ -7,7 +7,7 @@ iD.Inspector = function() {
     function inspector(selection) {
         var entity = selection.datum();
 
-        selection.html("").append('button')
+        selection.html('').append('button')
             .attr('class', 'narrow close')
             .html("<span class='icon close'></span>")
             .on('click', function() {
@@ -29,13 +29,16 @@ iD.Inspector = function() {
 
         tagList = inspectorwrap.append('ul');
 
-        inspectorwrap.append('div').attr('class', 'add-tag-row').append('button')
-            .attr('class', 'add-tag')
-            .text('+ Add New Tag')
-            .on('click', function() {
-                addTag();
-                focusNewKey();
-            });
+        inspectorwrap
+            .append('div')
+            .attr('class', 'add-tag-row')
+            .append('button')
+                .attr('class', 'add-tag')
+                .text('+ Add New Tag')
+                .on('click', function() {
+                    addTag();
+                    focusNewKey();
+                });
 
         drawTags(entity.tags);
 
@@ -87,6 +90,8 @@ iD.Inspector = function() {
     }
 
     function drawTags(tags) {
+        var entity = tagList.datum();
+
         tags = d3.entries(tags);
 
         if (!tags.length) {
@@ -134,7 +139,9 @@ iD.Inspector = function() {
                 .attr('tabindex', -1)
                 .attr('target', '_blank')
                 .on('click', function(d) {
-                    taginfo.docs(d, function(err, docs) {
+                    taginfo.docs(_.extend({}, d, {
+                            geometry: entity.geometry()
+                        }), function(err, docs) {
                         var en = _.find(docs, function(d) {
                             return d.lang == 'en';
                         });
@@ -174,13 +181,18 @@ iD.Inspector = function() {
     }
 
     function bindTypeahead() {
-        var row = d3.select(this),
+        var entity = tagList.datum(),
+            geometry = entity.geometry(),
+            row = d3.select(this),
             key = row.selectAll('.key'),
             value = row.selectAll('.value');
 
         key.call(d3.typeahead()
             .data(function(_, callback) {
-                taginfo.keys({query: key.property('value')}, function(err, data) {
+                taginfo.keys({
+                    geometry: geometry,
+                    query: key.property('value')
+                }, function(err, data) {
                     callback(data.data.map(function (d) {
                         return {value: d.key};
                     }));
@@ -191,6 +203,7 @@ iD.Inspector = function() {
             .data(function(_, callback) {
                 taginfo.values({
                     key: key.property('value'),
+                    geometry: geometry,
                     query: value.property('value')
                 }, function(err, data) {
                     callback(data.data.map(function (d) {
