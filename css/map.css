@@ -43,15 +43,15 @@ g.vertex.shared circle {
 }
 
 g.vertex.hover circle.fill {
-    -webkit-transform:scale(2, 2);
-    -moz-transform:scale(2, 2);
-    transform:scale(2, 2);
+    -webkit-transform:scale(1.5, 1.5);
+    -moz-transform:scale(1.5, 1.5);
+    transform:scale(1.5, 1.5);
 }
 
 g.vertex.hover circle.stroke {
-    -webkit-transform:scale(1.8, 1.8);
-    -moz-transform:scale(1.8, 1.8);
-    transform:scale(1.8, 1.8);
+    -webkit-transform:scale(1.4, 1.4);
+    -moz-transform:scale(1.4, 1.4);
+    transform:scale(1.4, 1.4);
 }
 
 g.vertex circle.selected {
@@ -149,13 +149,13 @@ path.area.tag-natural-grassland {
 
 /* highways */
 path.stroke.tag-highway-residential {
-    stroke:#E8E8E8;
-    stroke-width:4;
+    stroke:#fff;
+    stroke-width:8;
 }
 path.casing.tag-highway-residential {
-    stroke:#E8E8E8;
+    stroke:#444;
     stroke-width:10;
-    stroke-opacity:0.4;
+    stroke-opacity:1;
 }
 
 path.stroke.tag-highway-unclassified,
@@ -219,26 +219,24 @@ path.casing.tag-highway-trunk_link {
 
 path.stroke.tag-highway-primary,
 path.stroke.tag-highway-primary_link {
-    stroke:#FD969A;
-    stroke-width:5;
+    stroke:#ec989a;
+    stroke-width:8;
 }
 path.casing.tag-highway-primary,
 path.casing.tag-highway-primary_link {
-    stroke:#FF6363;
-    stroke-opacity:0.4;
-    stroke-width:12;
+    stroke:#681212;
+    stroke-width:10;
 }
 
 path.stroke.tag-highway-secondary,
 path.stroke.tag-highway-secondary_link {
     stroke:#FDBF6F;
-    stroke-width:4;
+    stroke-width:8;
 }
 path.casing.tag-highway-secondary,
 path.casing.tag-highway-secondary_link {
-    stroke-opacity:0.4;
-    stroke:#FDBF6F;
-    stroke-width:11;
+    stroke:#444;
+    stroke-width:10;
 }
 
 path.stroke.tag-bridge-yes {

@@ -832,6 +832,13 @@ div.typeahead a:first-child {
 .modal button { margin-bottom: 0;}
 .modal button:first-child { margin-left: 0;}
 
+.modal button.close-modal {
+    float:right;
+    margin-right:10px;
+    margin-top:10px;
+    border:0;
+}
+
 .shaded {
     z-index: 2;
     position: relative;
