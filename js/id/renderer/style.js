@@ -56,11 +56,11 @@ iD.Style.TAG_CLASSES = iD.util.trueObj([
 iD.Style.styleClasses = function(pre) {
     return function(d) {
         var tags = d.tags;
-        var c = [pre];
+        var c = pre ? [pre] : [];
         for (var k in tags) {
             if (!iD.Style.TAG_CLASSES[k]) continue;
-            c.push(k + '-' + tags[k]);
-            c.push(k);
+            c.push('tag-' + k);
+            c.push('tag-' + k + '-' + tags[k]);
         }
         return c.join(' ');
     };
