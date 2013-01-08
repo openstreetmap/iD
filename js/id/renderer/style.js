@@ -59,7 +59,7 @@ iD.Style.styleClasses = function() {
         selection.each(function(d) {
             var classes, value = this.className;
 
-            if (value.baseVal !== null) value = value.baseVal;
+            if (value.baseVal !== undefined) value = value.baseVal;
 
             classes = value.trim().split(/\s+/).filter(function(name) {
                 return name.length && !tagClassRe.test(name);
