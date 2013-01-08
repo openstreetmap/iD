@@ -66,23 +66,22 @@ window.iD = function(container) {
         });
 
         var undo_buttons = bar.append('div')
-            .attr('class', 'buttons-joined');
+            .attr('class', 'buttons-joined'),
+            undo_tooltip = bootstrap.tooltip().placement('bottom');
 
         undo_buttons.append('button')
             .attr({ id: 'undo', 'class': 'narrow' })
             .property('disabled', true)
             .html("<span class='undo icon'></span><small></small>")
             .on('click', history.undo)
-            .call(bootstrap.tooltip()
-                .placement('bottom'));
+            .call(undo_tooltip);
 
         undo_buttons.append('button')
             .attr({ id: 'redo', 'class': 'narrow' })
             .property('disabled', true)
             .html("<span class='redo icon'><small></small>")
             .on('click', history.redo)
-            .call(bootstrap.tooltip()
-                .placement('bottom'));
+            .call(undo_tooltip);
 
         container.append('div')
             .attr('class', 'user-container pad1 fillD about-block')
@@ -232,13 +231,21 @@ window.iD = function(container) {
             var undo = history.undoAnnotation(),
                 redo = history.redoAnnotation();
 
+            function refreshTooltip(selection) {
+                if (selection.property('tooltipVisible')) {
+                    selection.call(undo_tooltip.show);
+                }
+            }
+
             bar.select('#undo')
                 .property('disabled', !undo)
-                .attr('data-original-title', undo);
+                .attr('data-original-title', undo)
+                .call(undo ? refreshTooltip : undo_tooltip.hide);
 
             bar.select('#redo')
                 .property('disabled', !redo)
-                .attr('data-original-title', redo);
+                .attr('data-original-title', redo)
+                .call(redo ? refreshTooltip : undo_tooltip.hide);
         });
 
         window.onresize = function() {
