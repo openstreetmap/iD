@@ -217,7 +217,7 @@ window.iD = function(container) {
             .attr('class','pad1 fillD about-block link-list')
             .html("<li><a target='_blank' href='http://github.com/systemed/iD'>view code</a></li> " +
                   "<li><a target='_blank' href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
-                  " <li>imagery <a target='_blank' href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
+                  " <li id='attribution'>imagery <a target='_blank' href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
 
         var contributors = about.append('div')
             .attr('id', 'user-list')
