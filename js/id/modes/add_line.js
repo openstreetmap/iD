@@ -20,7 +20,7 @@ iD.modes.AddLine = function() {
                 way = iD.Way({ tags: { highway: 'residential' } }),
                 direction = 'forward';
 
-            if (datum.type === 'node' && datum.geometry() === 'line') {
+            if (datum.type === 'node') {
                 // continue an existing way
                 var id = datum.id;
                 var parents = history.graph().parentWays(id);
