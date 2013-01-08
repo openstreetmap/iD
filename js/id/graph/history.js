@@ -1,5 +1,5 @@
 iD.History = function() {
-    var stack, index,
+    var stack, index, imagery_used,
         dispatch = d3.dispatch('change');
 
     function perform(actions) {
@@ -16,7 +16,9 @@ iD.History = function() {
             graph = actions[i](graph);
         }
 
-        return {graph: graph, annotation: annotation};
+        imagery_used = 'Bing'; // TODO, un-hardcode
+
+        return {graph: graph, annotation: annotation, imagery_used: imagery_used};
     }
 
     function change(previous) {
@@ -106,6 +108,10 @@ iD.History = function() {
                     return initial.fetch(id);
                 })
             };
+        },
+
+        imagery_used: function(source) {
+            return _.unique(_.pluck(stack.slice(1, index + 1), 'imagery_used'));
         },
 
         reset: function () {

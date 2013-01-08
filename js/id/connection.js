@@ -103,7 +103,7 @@ iD.Connection = function() {
         return oauth.authenticated();
     }
 
-    connection.putChangeset = function(changes, comment, callback) {
+    connection.putChangeset = function(changes, comment, imagery_used, callback) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
