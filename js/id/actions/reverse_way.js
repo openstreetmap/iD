@@ -31,7 +31,7 @@ iD.actions.ReverseWay = function(wayId) {
     var replacements = [
         [/:right$/, ':left'], [/:left$/, ':right'],
         [/:forward$/, ':backward'], [/:backward$/, ':forward']
-    ], numeric = /^([+-]?)(?=[\d.])/;
+    ], numeric = /^([+\-]?)(?=[\d.])/;
 
     function reverseKey(key) {
         for (var i = 0; i < replacements.length; ++i) {

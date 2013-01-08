@@ -184,20 +184,9 @@ window.iD = function(container) {
                         return d[0] + ' icon';
                     });
 
-        function geolocateSuccess(position) {
-            map.center([position.coords.longitude, position.coords.latitude]);
-        }
-        function geolocateError() { }
         if (navigator.geolocation) {
             container.append('div')
-                .attr('class', 'geolocate-control map-control')
-                .append('button')
-                .attr('class', 'narrow')
-                .attr('title', 'Show My Location')
-                .text('G')
-                .on('click', function() {
-                    navigator.geolocation.getCurrentPosition(geolocateSuccess, geolocateError);
-                });
+                .call(iD.geolocate(map));
         }
 
         var gc = container.append('div').attr('class', 'geocode-control map-control')
