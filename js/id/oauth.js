@@ -1,5 +1,5 @@
 iD.OAuth = function() {
-    var baseurl = 'http://www.openstreetmap.org',
+    var baseurl = 'https://www.openstreetmap.org',
         oauth_secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p',
         oauth = {};
 
@@ -48,11 +48,13 @@ iD.OAuth = function() {
         var oauth_token_secret = token('oauth_token_secret');
         o.oauth_signature = ohauth.signature(oauth_secret, oauth_token_secret,
             ohauth.baseString(options.method, url, o));
-        ohauth.xhr(options.method, url, o, options.content, options.options, function(err, xhr) {
+        function done(err, xhr) {
             if (err) return callback(err);
             if (xhr.responseXML) return callback(err, xhr.responseXML);
             else return callback(err, xhr.response);
-        });
+        }
+        ohauth.xhr(options.method,
+            url, o, options.content, options.options, done);
     };
 
     oauth.authenticate = function(callback) {
@@ -90,7 +92,7 @@ iD.OAuth = function() {
                 }
             }, 100);
 
-        ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
+        function reqTokenDone(err, xhr) {
             if (err) callback(err);
             l.remove();
 
@@ -102,7 +104,9 @@ iD.OAuth = function() {
                 oauth_callback: location.href.replace('index.html', '')
                     .replace(/#.+/, '') + 'land.html'
             });
-        });
+        }
+
+        ohauth.xhr('POST', url, o, null, {}, reqTokenDone);
 
         function get_access_token(oauth_token) {
             var url = baseurl + '/oauth/access_token';
@@ -113,14 +117,17 @@ iD.OAuth = function() {
             o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
                 ohauth.baseString('POST', url, o));
             var l = iD.loading('contacting openstreetmap...');
-            ohauth.xhr('POST', url, o, null, {}, function(err, xhr) {
+
+            function accessTokenDone(err, xhr) {
                 if (err) callback(err);
                 l.remove();
                 var access_token = ohauth.stringQs(xhr.response);
                 token('oauth_token', access_token.oauth_token);
                 token('oauth_token_secret', access_token.oauth_token_secret);
                 callback();
-            });
+            }
+
+            ohauth.xhr('POST', url, o, null, {}, accessTokenDone);
         }
 
     };
