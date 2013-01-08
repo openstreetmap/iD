@@ -33,7 +33,7 @@ iD.modes.AddLine = function() {
                     history.perform(
                         iD.actions.AddWay(way),
                         iD.actions.AddWayNode(way.id, datum.id),
-                        'started a road');
+                        'started a line');
                 }
 
             } else if (datum.type === 'way') {
@@ -46,7 +46,7 @@ iD.modes.AddLine = function() {
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(datum.id, node.id, choice.index),
                     iD.actions.AddWayNode(way.id, node.id),
-                    'started a road');
+                    'started a line');
 
             } else {
                 // begin a new way
@@ -56,7 +56,7 @@ iD.modes.AddLine = function() {
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(way.id, node.id),
-                    'started a road');
+                    'started a line');
             }
 
             controller.enter(iD.modes.DrawLine(way.id, direction));
