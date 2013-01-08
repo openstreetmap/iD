@@ -14,7 +14,6 @@ iD.taginfo = function() {
             line: 'ways'
         };
 
-
     function sets(parameters, n, o) {
         if (parameters.geometry && o[parameters.geometry]) {
             parameters[n] = o[parameters.geometry];
