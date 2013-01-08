@@ -5,15 +5,23 @@ iD.modal = function() {
         .style('opacity', 0).remove();
 
     var shaded = d3.select(document.body)
-        .append('div').attr('class', 'shaded')
+        .append('div')
+        .attr('class', 'shaded')
         .style('opacity', 0)
         .on('click.remove-modal', function() {
             if (d3.event.target == this) d3.select(this).remove();
         });
 
-    shaded.append('div')
-        .attr('class', 'modal')
-        .append('div')
+    var modal = shaded.append('div')
+        .attr('class', 'modal');
+
+    modal.append('button')
+        .attr('class', 'icon remove close-modal')
+        .on('click', function() {
+            shaded.remove();
+        });
+
+    modal.append('div')
         .attr('class', 'content');
 
     if (animate) {
