@@ -3,7 +3,8 @@ iD.layerswitcher = function(map) {
         sources = [{
             name: 'Bing',
             source: iD.BackgroundSource.Bing,
-            description: 'Satellite imagery.'
+            description: 'Satellite imagery.',
+            link: 'http://opengeodata.org/microsoft-imagery-details'
         }, {
             name: 'TIGER 2012',
             source: iD.BackgroundSource.Tiger2012,
@@ -11,11 +12,13 @@ iD.layerswitcher = function(map) {
         }, {
             name: 'OSM',
             source: iD.BackgroundSource.OSM,
-            description: 'The default OpenStreetMap layer.'
+            description: 'The default OpenStreetMap layer.',
+            link: 'http://www.openstreetmap.org/'
         }, {
             name: 'MapBox',
             source: iD.BackgroundSource.MapBox,
-            description: 'Satellite and Aerial Imagery'
+            description: 'Satellite and Aerial Imagery',
+            link: 'http://mapbox.com'
         }, {
             name: 'Custom',
             source: iD.BackgroundSource.Custom,
@@ -92,6 +95,9 @@ iD.layerswitcher = function(map) {
                 .classed('selected', function(d) {
                     return d.source === map.background.source();
                 });
+            d3.select('#attribution a')
+                .attr('href', d.link)
+                .text('provided by ' + d.name);
         }
 
         content
