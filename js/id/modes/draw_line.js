@@ -6,6 +6,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
     mode.enter = function() {
         var map = mode.map,
+            surface = map.surface,
             history = mode.history,
             controller = mode.controller,
             way = history.graph().entity(wayId),
@@ -23,6 +24,10 @@ iD.modes.DrawLine = function(wayId, direction) {
         history.perform(
             iD.actions.AddNode(node),
             iD.actions.AddWayNode(wayId, node.id, index));
+
+        surface.selectAll('.way, .node')
+            .filter(function (d) { return d.id === wayId || d.id === node.id; })
+            .classed('active', true);
 
         function mousemove() {
             history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
@@ -57,10 +62,11 @@ iD.modes.DrawLine = function(wayId, direction) {
 
             } else if (datum.type === 'way') {
                 // connect the way to an existing way
-                var connectedIndex = iD.util.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
+                var choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
 
                 history.replace(
-                    iD.actions.AddWayNode(datum.id, node.id, connectedIndex),
+                    iD.actions.MoveNode(node.id, choice.loc),
+                    iD.actions.AddWayNode(datum.id, node.id, choice.index),
                     'added to a line');
 
                 controller.enter(iD.modes.DrawLine(wayId, direction));
@@ -108,7 +114,7 @@ iD.modes.DrawLine = function(wayId, direction) {
             controller.enter(iD.modes.Browse());
         }
 
-        map.surface
+        surface
             .on('mousemove.drawline', mousemove)
             .on('click.drawline', click);
 
@@ -120,10 +126,15 @@ iD.modes.DrawLine = function(wayId, direction) {
     };
 
     mode.exit = function() {
+        var surface = mode.map.surface;
+
+        surface.selectAll('.way, .node')
+            .classed('active', false);
+
         mode.map.hint(false);
         mode.map.fastEnable(true);
 
-        mode.map.surface
+        surface
             .on('mousemove.drawline', null)
             .on('click.drawline', null);
 

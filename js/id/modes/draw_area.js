@@ -6,6 +6,7 @@ iD.modes.DrawArea = function(wayId) {
 
     mode.enter = function() {
         var map = mode.map,
+            surface = map.surface,
             history = mode.history,
             controller = mode.controller,
             way = history.graph().entity(wayId),
@@ -23,6 +24,10 @@ iD.modes.DrawArea = function(wayId) {
         history.perform(
             iD.actions.AddNode(node),
             iD.actions.AddWayNode(way.id, node.id, -1));
+
+        surface.selectAll('.way, .node')
+            .filter(function (d) { return d.id === wayId || d.id === node.id; })
+            .classed('active', true);
 
         function mousemove() {
             history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
@@ -111,7 +116,7 @@ iD.modes.DrawArea = function(wayId) {
             controller.enter(iD.modes.Browse());
         }
 
-        map.surface
+        surface
             .on('mousemove.drawarea', mousemove)
             .on('mouseover.drawarea', mouseover)
             .on('click.drawarea', click);
@@ -124,10 +129,15 @@ iD.modes.DrawArea = function(wayId) {
     };
 
     mode.exit = function() {
+        var surface = mode.map.surface;
+
+        surface.selectAll('.way, .node')
+            .classed('active', false);
+
         mode.map.hint(false);
         mode.map.fastEnable(true);
 
-        mode.map.surface
+        surface
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);
 

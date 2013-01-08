@@ -313,10 +313,30 @@ text.tag-oneway {
     cursor:url(../img/cursor-draw.png) 9 9, auto;
 }
 
+.mode-draw-line .way,
+.mode-add-line  .way {
+    cursor:url(../img/cursor-draw-connect-line.png) 9 9, auto;
+}
+
+.mode-draw-line .vertex,
+.mode-draw-area .vertex,
+.mode-add-line  .vertex,
+.mode-add-area  .vertex {
+    cursor:url(../img/cursor-draw-connect-vertex.png) 9 9, auto;
+}
+
 .mode-add-point #map:hover {
     cursor:url(../img/cursor-draw-point.png) 18 18, auto;
 }
 
-#map.finish-area:hover {
-    cursor:url(../img/cursor-draw-finish.png) 9 9, auto;
+/* Modes */
+
+.mode-draw-line .vertex.active,
+.mode-draw-area .vertex.active {
+    display: none;
+}
+
+.mode-draw-line .way.active,
+.mode-draw-area .way.active {
+    pointer-events: none;
 }
