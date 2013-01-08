@@ -293,7 +293,12 @@ button.save.has-count {
     padding: 9px;
 }
 
+button.save .count {
+    display: none;
+}
+
 button.save.has-count .count {
+    display: block;
     color: #6bc641;
     background: #fff;
     border-radius: 0 3px 3px 0;
