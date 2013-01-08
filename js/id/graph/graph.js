@@ -107,19 +107,21 @@ iD.Graph.prototype = {
     },
 
     difference: function (graph) {
-        var result = [];
+        var result = [], entity, id;
 
-        _.each(this.entities, function(entity, id) {
+        for (id in this.entities) {
+            entity = this.entities[id];
             if (entity !== graph.entities[id]) {
                 result.push(id);
             }
-        });
+        }
 
-        _.each(graph.entities, function(entity, id) {
+        for (id in graph.entities) {
+            entity = graph.entities[id];
             if (entity && !this.entities.hasOwnProperty(id)) {
                 result.push(id);
             }
-        }, this);
+        }
 
         return result.sort();
     },
