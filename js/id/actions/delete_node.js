@@ -3,7 +3,7 @@ iD.actions.DeleteNode = function(nodeId) {
     return function(graph) {
         var node = graph.entity(nodeId);
 
-        graph.parentWays(nodeId)
+        graph.parentWays(node)
             .forEach(function(parent) {
                 graph = iD.actions.RemoveWayNode(parent.id, nodeId)(graph);
             });
