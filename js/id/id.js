@@ -173,6 +173,18 @@ window.iD = function(container) {
                 .text(num_changes);
         });
 
+        history.on('change.warn-unload', function() {
+            var changes = history.changes(),
+
+                has_changes = !!d3.sum(d3.values(changes).map(function(c) {
+                    return c.length;
+                }));
+
+            window.onbeforeunload = has_changes ? function() {
+                return 'You have unsaved changes.';
+            } : null;
+        });
+
         bar.append('div')
             .attr('class', 'messages');
 
