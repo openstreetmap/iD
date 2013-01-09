@@ -292,3 +292,10 @@ webkit doesn't let querySelectorAll select camelcase elements:
 * https://bugs.webkit.org/show_bug.cgi?id=46800
 * https://bugs.webkit.org/show_bug.cgi?id=83438
 * https://github.com/mbostock/d3/issues/925
+
+## Transients
+
+The graph supports `transient`, which is storage for non-versioned mutable
+properties _about_ entities that are stored outside of entities. For instance,
+`extent` is about an entity, but can be invalidated and stored without getting
+a new graph.
