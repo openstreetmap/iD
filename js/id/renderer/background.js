@@ -6,6 +6,12 @@ iD.Background = function() {
         transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
+    var imgstyle = 'position:absolute;transform-origin:0 0;' +
+        '-ms-transform-origin:0 0;' +
+        '-webkit-transform-origin:0 0;' +
+        '-moz-transform-origin:0 0;' +
+        '-o-transform-origin:0 0;';
+
     function atZoom(t, distance) {
         var power = Math.pow(2, distance);
         var az = [
@@ -82,7 +88,7 @@ iD.Background = function() {
         }
 
         image.enter().append('img')
-            .attr('class', 'tile')
+            .attr('style', imgstyle)
             .attr('src', function(d) { return d[3]; })
             .on('error', error)
             .on('load', load);
