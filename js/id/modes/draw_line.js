@@ -15,6 +15,8 @@ iD.modes.DrawLine = function(wayId, direction) {
             headId = (direction === 'forward') ? _.last(way.nodes) : _.first(way.nodes),
             tailId = (direction === 'forward') ? _.first(way.nodes) : _.last(way.nodes);
 
+        iD.behavior.Hover()(surface);
+
         map.dblclickEnable(false)
             .fastEnable(false)
             .hint('Click to add more points to the line. ' +
