@@ -125,6 +125,12 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('⌫.drawline', backspace)
             .on('⌦.drawline', del)
             .on('↩.drawline', ret);
+
+        d3.select('#undo').on('click.drawline', function() {
+            history.undo();
+            controller.enter(iD.modes.Browse());
+        });
+
     };
 
     mode.exit = function() {
