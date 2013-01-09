@@ -155,6 +155,10 @@ iD.Inspector = function() {
                             mod.select('.content')
                                 .datum(en)
                                 .call(iD.tagReference);
+                        } else {
+                            var mod = iD.flash()
+                                .select('.content')
+                                .text('This is no documentation available for this tag combination');
                         }
                     });
                     d3.event.preventDefault();
