@@ -75,17 +75,19 @@ iD.Map = function() {
             filter = d3.functor(true);
         } else {
             var only = {};
-            difference.forEach(function buildDifference(id) {
+            for (var j = 0; j < difference.length; j++) {
+                var id = difference[j];
                 only[id] = graph.fetch(id);
                 if (only[id] && only[id].type === 'node') {
-                    graph.parentWays(id).forEach(function buildOnly(parent) {
+                    var parents = graph.parentWays(id);
+                    for (var k = 0; k < parents.length; k++) {
                         // Don't re-fetch parents
-                        if (only[parent.id] === undefined) {
-                            only[parent.id] = graph.fetch(parent.id);
+                        if (only[parents[k].id] === undefined) {
+                            only[parent.id] = graph.fetch(parents[k].id);
                         }
-                    });
+                    }
                 }
-            });
+            }
             all = _.compact(_.values(only));
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }

@@ -46,15 +46,20 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(id) {
-        // This is slow and a bad hack.
-        return _.filter(this.entities, function(e) {
-            return e && e.type === 'way' && e.nodes.indexOf(id) !== -1;
-        });
+        var o = [];
+        for (var i in this.entities) {
+            if (this.entities[i] &&
+                this.entities[i].type === 'way' &&
+                this.entities[i].nodes.indexOf(id) !== -1) {
+                o.push(this.entities[i]);
+            }
+        }
+        return o;
     },
 
     parentRelations: function(id) {
         // This is slow and a bad hack.
-        return _.filter(this.entities, function(e) {
+        return _.filter(this.entities, function buildParentRelations(e) {
             return e && e.type === 'relation' &&
                 _.pluck(e.members, 'id').indexOf(id) !== -1;
         });
