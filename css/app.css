@@ -24,7 +24,7 @@ div, textarea, input, span, ul, li, ol, a, button {
 
 /* Mobile Tweaks
 ------------------------------------------------------- */
-* {
+a, button, input, textarea {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
     -webkit-touch-callout:none;
 }
