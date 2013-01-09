@@ -60,7 +60,11 @@ iD.format.XML = {
                 // TODO: copy elements first
                 create: nest(changes.created.map(rep)),
                 modify: changes.modified.map(rep),
-                'delete': changes.deleted.map(rep)
+                'delete': changes.deleted.map(function(x) {
+                    x = rep(x);
+                    x['@if-unused'] = true;
+                    return x;
+                })
             }
         }));
     },
