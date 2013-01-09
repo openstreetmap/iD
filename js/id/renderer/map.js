@@ -12,7 +12,6 @@ iD.Map = function() {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         fastEnabled = true,
-        notice,
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
@@ -52,11 +51,6 @@ iD.Map = function() {
         var arrow = surface.append('text').text('►----');
         alength = arrow.node().getComputedTextLength();
         arrow.remove();
-
-        notice = iD.notice(supersurface
-            .append('div')
-            .attr('class', 'notice'));
-
         map.size(this.size());
         map.surface = surface;
 
@@ -192,13 +186,10 @@ iD.Map = function() {
     }
 
     function editOff() {
-        notice.message('Zoom in to edit the map');
         surface.selectAll('.layer-g *').remove();
     }
 
-    function editOn() {
-        notice.message('');
-    }
+    function editOn() { }
 
     function drawLines(data, filter, group, fixedClasses) {
         var lines = group.selectAll('path')

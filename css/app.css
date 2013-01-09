@@ -924,15 +924,17 @@ div.typeahead a:first-child {
 
 .notice {
     position:absolute;
-    top:0px;
-    left:70px;
-    width:250px;
-    height:50px;
-    padding:10px;
+    top:11px;
+    left:11px;
+    width:278px;
+    text-align: center;
+    height:38px;
+    padding:10px 20px;
     background:#fff;
-    font-size: 20px;
-    font-weight: bold;
-    line-height:30px;
+    font-weight: normal;
+    line-height: 21px;
+    border-radius:5px;
+    opacity: 0.9;
 }
 
 /* Tooltips

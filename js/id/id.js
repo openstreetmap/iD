@@ -38,11 +38,17 @@ window.iD = function(container) {
         function disableTooHigh() {
             if (map.zoom() < 16) {
                 buttons.attr('disabled', 'disabled');
+                notice.message('Zoom in to edit the map');
                 controller.enter(iD.modes.Browse());
             } else {
+                notice.message('');
                 buttons.attr('disabled', null);
             }
         }
+
+        notice = iD.notice(bar
+            .append('div')
+            .attr('class', 'notice'));
 
         map.on('move.disable-buttons', disableTooHigh)
             .on('move.contributors', _.debounce(function() {
