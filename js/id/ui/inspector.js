@@ -151,10 +151,14 @@ iD.Inspector = function() {
                             if (en.on_node) types.push('point');
                             if (en.on_way) types.push('line');
                             en.types = types;
-                            var mod = iD.modal();
-                            mod.select('.content')
+                            iD.modal()
+                                .select('.content')
                                 .datum(en)
                                 .call(iD.tagReference);
+                        } else {
+                            iD.flash()
+                                .select('.content')
+                                .text('This is no documentation available for this tag combination');
                         }
                     });
                     d3.event.preventDefault();
