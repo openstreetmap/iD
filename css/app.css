@@ -16,7 +16,7 @@ body {
     position: fixed;
 }
 
-* {
+div, textarea, input, span, ul, li, ol, a, button {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -930,6 +930,7 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 .notice {
+    pointer-events: none;
     position:absolute;
     top:11px;
     left:11px;
