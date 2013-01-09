@@ -883,7 +883,15 @@ div.typeahead a:first-child {
     padding: 20px;
     border-bottom: 1px solid #ccc;
 }
+
 .modal-section:last-child { border-bottom: 0;}
+
+.modal-section img.wiki-image {
+    max-width: 400px;
+    max-height: 300px;
+    padding: 10px;
+    display: block;
+}
 
 .changeset-list li {
     border-top:1px solid #ccc;
