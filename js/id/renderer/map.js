@@ -83,7 +83,7 @@ iD.Map = function() {
                     for (var k = 0; k < parents.length; k++) {
                         // Don't re-fetch parents
                         if (only[parents[k].id] === undefined) {
-                            only[parent.id] = graph.fetch(parents[k].id);
+                            only[parents[k].id] = graph.fetch(parents[k].id);
                         }
                     }
                 }
