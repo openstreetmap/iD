@@ -21,9 +21,22 @@ iD.tagReference = function(selection) {
 
         referenceBody =  selection.append('div')
             .attr('class','modal-section');
+
         referenceBody
             .append('h5')
             .text('Description');
+
+        if (selection.datum().image) {
+            iD.wiki().image(selection.datum().image, function(err, src) {
+                if (!err) {
+                    referenceBody
+                        .append('img')
+                        .attr('class', 'wiki-image')
+                        .attr('src', src);
+                }
+            });
+        }
+
         referenceBody
             .append('p')
             .text(g('description'));
