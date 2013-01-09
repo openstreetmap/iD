@@ -175,6 +175,11 @@ iD.Map = function() {
 
         circles.attr('transform', pointTransform)
             .classed('shared', shared);
+
+        // Selecting the following implicitly
+        // sets the data (vertix entity) on the elements
+        circles.select('circle.fill');
+        circles.select('circle.stroke');
     }
 
     function drawAccuracyHandles(waynodes, filter) {
@@ -243,6 +248,8 @@ iD.Map = function() {
 
         groups.attr('transform', pointTransform);
 
+        // Selecting the following implicitly
+        // sets the data (point entity) on the element
         groups.select('image').attr('xlink:href', iD.Style.pointImage);
     }
 
