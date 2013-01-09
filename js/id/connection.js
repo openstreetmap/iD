@@ -86,17 +86,53 @@ iD.Connection = function() {
         var root = dom.childNodes[0];
         var entities = {};
         refNodes = {};
+        var rparentsOf = {},
+            wparentsOf = {};
 
         function addEntity(obj) {
             var o = objectData(obj);
             entities[o.id] = o;
+
+            var i;
+            if (o.type === 'relation') {
+                for (i = 0; i < o.members.length; i++) {
+                    if (o.members[i].id) {
+                        if (rparentsOf[o.members[i].id] === undefined) {
+                            rparentsOf[o.members[i].id] = [];
+                        }
+                        rparentsOf[o.members[i].id].push(o.id);
+                    }
+                }
+            }
+            if (o.type === 'way') {
+                for (i = 0; i < o.nodes.length; i++) {
+                    if (o.nodes[i]) {
+                        if (wparentsOf[o.nodes[i]] === undefined) {
+                            wparentsOf[o.nodes[i]] = [];
+                        }
+                        wparentsOf[o.nodes[i]].push(o.id);
+                    }
+                }
+            }
         }
 
         _.forEach(root.getElementsByTagName('way'), addEntity);
         _.forEach(root.getElementsByTagName('node'), addEntity);
         _.forEach(root.getElementsByTagName('relation'), addEntity);
 
-        return iD.Graph(entities);
+        var g = iD.Graph(entities);
+
+        for (var i in wparentsOf) {
+            if (entities[i]) g.transient(entities[i],
+                'parentWays', d3.functor(wparentsOf[i]));
+        }
+
+        for (i in rparentsOf) {
+            if (entities[i]) g.transient(entities[i],
+                'parentRelations', d3.functor(rparentsOf[i]));
+        }
+
+        return g;
     }
 
     function authenticated() {

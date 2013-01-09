@@ -25,7 +25,8 @@ iD.Graph.prototype = {
 
     transient: function(entity, key, fn) {
         var id = entity.id,
-            transients = this.transients[id] || (this.transients[id] = {});
+            transients = this.transients[id] ||
+            (this.transients[id] = {});
 
         if (transients[key]) {
             return transients[key];
@@ -45,23 +46,38 @@ iD.Graph.prototype = {
         return nodes;
     },
 
-    parentWays: function(id) {
-        var o = [];
-        for (var i in this.entities) {
-            if (this.entities[i] &&
-                this.entities[i].type === 'way' &&
-                this.entities[i].nodes.indexOf(id) !== -1) {
-                o.push(this.entities[i]);
+    parentWays: function(entity) {
+        var graph = this;
+        return this.transient(entity, 'parentWays',
+            function generateParentWays() {
+            var o = [];
+            for (var i in graph.entities) {
+                if (graph.entities[i] &&
+                    graph.entities[i].type === 'way' &&
+                    graph.entities[i].nodes.indexOf(this.id) !== -1) {
+                    o.push(graph.entities[i]);
+                }
             }
-        }
-        return o;
+            return o;
+        });
     },
 
-    parentRelations: function(id) {
+    parentRelations: function(entity) {
         // This is slow and a bad hack.
-        return _.filter(this.entities, function buildParentRelations(e) {
-            return e && e.type === 'relation' &&
-                _.pluck(e.members, 'id').indexOf(id) !== -1;
+        var graph = this;
+        return this.transient(entity, 'parentRelations',
+            function generateParentRelations() {
+            var o = [], id = this.id;
+            for (var i in graph.entities) {
+                if (graph.entities[i] &&
+                    graph.entities[i].type === 'relation' &&
+                    _.find(graph.entities[i].members, function(e) {
+                        return e.id === id;
+                    })) {
+                    o.push(graph.entities[i]);
+                }
+            }
+            return o;
         });
     },
 

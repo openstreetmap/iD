@@ -79,7 +79,7 @@ iD.Map = function() {
                 var id = difference[j];
                 only[id] = graph.fetch(id);
                 if (only[id] && only[id].type === 'node') {
-                    var parents = graph.parentWays(id);
+                    var parents = graph.parentWays(only[id]);
                     for (var k = 0; k < parents.length; k++) {
                         // Don't re-fetch parents
                         if (only[parents[k].id] === undefined) {

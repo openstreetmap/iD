@@ -3,7 +3,7 @@ iD.actions.DeleteWay = function(wayId) {
     return function(graph) {
         var way = graph.entity(wayId);
 
-        graph.parentRelations(wayId)
+        graph.parentRelations(way)
             .forEach(function(parent) {
                 graph = iD.actions.RemoveRelationMember(parent.id, wayId)(graph);
             });
@@ -17,7 +17,8 @@ iD.actions.DeleteWay = function(wayId) {
 
             graph = iD.actions.RemoveWayNode(wayId, nodeId)(graph);
 
-            if (!graph.parentWays(nodeId).length && !graph.parentRelations(nodeId).length) {
+            if (!graph.parentWays(node).length &&
+                !graph.parentRelations(node).length) {
                 if (!node.hasInterestingTags()) {
                     graph = graph.remove(node);
                 } else {
