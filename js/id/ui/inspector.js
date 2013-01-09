@@ -60,6 +60,7 @@ iD.Inspector = function() {
 
         selection.append('a')
             .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+            .attr('target', '_blank')
             .text('View on OSM');
 
         if (entity.type === 'way') {
