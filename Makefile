@@ -27,7 +27,7 @@ all: \
 	js/id/id.js \
 	js/id/connection.js \
 	js/id/oauth.js \
-	js/id/taginfo.js \
+	js/id/services/*.js \
 	js/id/util.js \
 	js/id/actions.js \
 	js/id/actions/*.js \
