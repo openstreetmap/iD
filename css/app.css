@@ -116,6 +116,11 @@ table th {
     text-align:left;
 }
 
+table.tags, table.tags td, table.tags th {
+    border: 1px solid #CCC;
+    padding: 4px;
+}
+
 /* UI Lists
 ------------------------------------------------------- */
 
