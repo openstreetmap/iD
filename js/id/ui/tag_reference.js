@@ -27,14 +27,10 @@ iD.tagReference = function(selection) {
             .text('Description');
 
         if (selection.datum().image) {
-            iD.wiki().image(selection.datum().image, function(err, src) {
-                if (!err) {
-                    referenceBody
-                        .append('img')
-                        .attr('class', 'wiki-image')
-                        .attr('src', src);
-                }
-            });
+            referenceBody
+                .append('img')
+                .attr('class', 'wiki-image')
+                .attr('src', selection.datum().image.image_url);
         }
 
         referenceBody
