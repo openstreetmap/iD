@@ -1,157 +1,130 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-a { text-decoration: none;}
-/*
- * 1. Corrects font family not being inherited in all browsers.
- * 2. Corrects font size not being inherited in all browsers.
- * 3. Addresses margins set differently in Firefox 4+, Safari 5, and Chrome
+/**
+ * Reset ==============================================================
+ * Based on http://meyerweb.com/eric/tools/css/reset
  */
 
-button,
+html,
+body,
+
+/* Structures */
+div,
+span,
+applet,
+object,
+iframe,
+
+/* Text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+
+/* Lists */
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+
+/* Forms */
+fieldset,
+form,
 input,
 select,
-textarea {
-    font-family: inherit; /* 1 */
-    font-size: 100%; /* 2 */
-    margin: 0; /* 3 */
-    padding: 0;
-}
+textarea,
+label,
+legend,
 
-/*
- * Addresses Firefox 4+ setting `line-height` on `input` using `!important` in
- * the UA stylesheet.
- */
-
-button,
-input {
-    line-height: normal;
-}
-
-/*
- * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
- *    and `video` controls.
- * 2. Corrects inability to style clickable `input` types in iOS.
- * 3. Improves usability and consistency of cursor style between image-type
- *    `input` and others.
- */
-
-button,
-html input[type="button"], /* 1 */
-input[type="reset"],
-input[type="submit"] {
-    -webkit-appearance: button; /* 2 */
-    cursor: pointer; /* 3 */
-}
-
-/*
- * Re-set default cursor for disabled elements.
- */
-
-button[disabled],
-input[disabled] {
-    cursor: default;
-}
-
-/*
- * 1. Addresses box sizing set to `content-box` in IE 8/9.
- * 2. Removes excess padding in IE 8/9.
- */
-
-input[type="checkbox"],
-input[type="radio"] {
-    box-sizing: border-box; /* 1 */
-    padding: 0; /* 2 */
-}
-
-/*
- * 1. Addresses `appearance` set to `searchfield` in Safari 5 and Chrome.
- * 2. Addresses `box-sizing` set to `border-box` in Safari 5 and Chrome
- *    (include `-moz` to future-proof).
- */
-
-input[type="search"] {
-    -webkit-appearance: textfield; /* 1 */
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box; /* 2 */
-    box-sizing: content-box;
-}
-
-/*
- * Removes inner padding and search cancel button in Safari 5 and Chrome
- * on OS X.
- */
-
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-}
-
-/*
- * Removes inner padding and border in Firefox 4+.
- */
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-}
-
-/*
-** Markup free clearing
-** Details: http://www.positioniseverything.net/easyclearing.html
-*/
-.cf:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
+/* Tables */
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin:0px;
+  padding:0px;
+  border:0px;
+  outline:0px;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+  line-height:inherit;
   }
 
-.cf { display: inline-block; }
+ol,
+ul,
+.item-list ul,
+.item-list ul li {
+  list-style:none;
+  }
+
+blockquote,
+q { quotes:none; }
+
+blockquote:before,
+blockquote:after,
+q:before, q:after {
+  content:'';
+  content:none;
+  }
+
+/* remember to define focus styles! */
+:focus { outline:0px; }
+
+/* remember to highlight inserts somehow! */
+ins { text-decoration:none; }
+del { text-decoration:line-through; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse:collapse;
+  border-spacing:0px;
+  }
+
+/**
+ * Font reset =========================================================
+ *
+ * Specifically targets form elements which browsers oftentimes give
+ * special treatment.
+ */
+input,
+select,
+textarea,
+body { font: 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif; }

@@ -1,109 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset='utf-8'>
-        <title>iD</title>
-        <link rel='stylesheet' href='css/reset.css'>
-        <link rel='stylesheet' href='css/map.css'>
-        <link rel='stylesheet' href='css/app.css'>
-
-        <!-- mobile devices -->
-        <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-        <script src='js/lib/lodash.js'></script>
-        <script src='js/lib/d3.v3.js'></script>
-        <script src='js/lib/sha.js'></script>
-        <script src='js/lib/ohauth.js'></script>
-        <script src='js/lib/jxon.js'></script>
-        <script src='js/lib/d3.typeahead.js'></script>
-        <script src='js/lib/d3.geo.tile.js'></script>
-        <script src='js/lib/d3.size.js'></script>
-        <script src='js/lib/d3.jsonp.js'></script>
-        <script src='js/lib/d3.trigger.js'></script>
-        <script src='js/lib/d3.keybinding.js'></script>
-        <script src='js/lib/d3-compat.js'></script>
-        <script src='js/lib/queue.js'></script>
-        <script src='js/lib/bootstrap-tooltip.js'></script>
-
-        <script src='js/id/id.js'></script>
-        <script src='js/id/util.js'></script>
-        <script src='js/id/oauth.js'></script>
-        <script src='js/id/services/taginfo.js'></script>
-        <script src='js/id/services/wiki.js'></script>
-        <script src='js/id/renderer/style.js'></script>
-        <script src='js/id/renderer/background.js'></script>
-        <script src='js/id/renderer/background_source.js'></script>
-        <script src='js/id/renderer/map.js'></script>
-        <script src='js/id/renderer/hash.js'></script>
-        <script src='js/id/renderer/points.js'></script>
-        <script src='js/id/ui/inspector.js'></script>
-        <script src='js/id/ui/modal.js'></script>
-        <script src='js/id/ui/confirm.js'></script>
-        <script src='js/id/ui/commit.js'></script>
-        <script src='js/id/ui/success.js'></script>
-        <script src='js/id/ui/loading.js'></script>
-        <script src='js/id/ui/userpanel.js'></script>
-        <script src='js/id/ui/layerswitcher.js'></script>
-        <script src='js/id/ui/contributors.js'></script>
-        <script src='js/id/ui/geocoder.js'></script>
-        <script src='js/id/ui/geolocate.js'></script>
-        <script src='js/id/ui/notice.js'></script>
-        <script src='js/id/ui/flash.js'></script>
-        <script src='js/id/ui/tag_reference.js'></script>
-
-        <script src='js/id/actions.js'></script>
-        <script src='js/id/actions/add_node.js'></script>
-        <script src='js/id/actions/add_way.js'></script>
-        <script src='js/id/actions/add_way_node.js'></script>
-        <script src='js/id/actions/change_entity_tags.js'></script>
-        <script src="js/id/actions/delete_node.js"></script>
-        <script src="js/id/actions/delete_way.js"></script>
-        <script src='js/id/actions/move_node.js'></script>
-        <script src='js/id/actions/move_way.js'></script>
-        <script src='js/id/actions/noop.js'></script>
-        <script src='js/id/actions/remove_relation_member.js'></script>
-        <script src='js/id/actions/remove_way_node.js'></script>
-        <script src='js/id/actions/reverse_way.js'></script>
-        <script src='js/id/actions/split_way.js'></script>
-        <script src='js/id/actions/update_relation_member.js'></script>
-
-        <script src='js/id/behavior.js'></script>
-        <script src='js/id/behavior/drag.js'></script>
-        <script src='js/id/behavior/drag_accuracy_handle.js'></script>
-        <script src='js/id/behavior/drag_node.js'></script>
-        <script src='js/id/behavior/drag_way.js'></script>
-        <script src='js/id/behavior/hover.js'></script>
-
-        <script src='js/id/modes.js'></script>
-        <script src='js/id/modes/add_area.js'></script>
-        <script src='js/id/modes/add_point.js'></script>
-        <script src='js/id/modes/add_line.js'></script>
-        <script src='js/id/modes/browse.js'></script>
-        <script src='js/id/modes/draw_area.js'></script>
-        <script src='js/id/modes/draw_line.js'></script>
-        <script src='js/id/modes/select.js'></script>
-
-        <script src='js/id/controller/controller.js'></script>
-
-        <script src='js/id/format/format.js'></script>
-        <script src='js/id/format/geojson.js'></script>
-        <script src='js/id/format/xml.js'></script>
-
-        <script src='js/id/graph/entity.js'></script>
-        <script src='js/id/graph/graph.js'></script>
-        <script src='js/id/graph/history.js'></script>
-        <script src='js/id/graph/node.js'></script>
-        <script src='js/id/graph/relation.js'></script>
-        <script src='js/id/graph/way.js'></script>
-
-        <script src='js/id/connection.js'></script>
-    </head>
-    <body>
-        <div id="iD"></div><script>
-            var id = iD();
-            id.connection().url('http://api06.dev.openstreetmap.org');
-            d3.select("#iD").call(id);
-        </script></body>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <title>iD: a Javascript OpenStreetMap Editor</title>
+  <link rel='shortcut icon' href='img/favicon.ico' type='image/x-icon' />
+  <link href='css/reset.css' rel='stylesheet' />
+  <link href='css/base.css' rel='stylesheet' />
+  <link href='css/site.css' rel='stylesheet' />
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <div class='container pad4'>
+    <div class='header'>
+    <h1> iD Editor </h1>
+    <h2>Subtitle</h2>
+    </div>
+    <div class='content section'>
+      <h2>About the iD Editor</h2>
+      <p>Content</p>
+    </div>
+    <div class='participate section'>
+      <h2> Get Involved</h2>
+      <p>The code for iD is hosted on GitHub. <a href='https://github.com/systemed/iD/issues?state=open'></a>Help out by reporting bugs, requesting features, & submitting pull requests</a>.
+    </div>
+    <div class='action section'>
+      <h2>Try iD now</h2>
+      <a href='http://geowiki.com/iD/'>Experiment a demo of the most recent code</a>
+    </div>
+  </div>
+</body>
 </html>
