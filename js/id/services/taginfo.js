@@ -1,6 +1,6 @@
 iD.taginfo = function() {
     var taginfo = {},
-        endpoint = 'http://taginfo.openstreetmap.org/api/2/',
+        endpoint = 'http://taginfo.openstreetmap.org/api/4/',
         tag_sorts = {
             point: 'count_nodes',
             vertex: 'count_nodes',
@@ -35,7 +35,7 @@ iD.taginfo = function() {
 
     taginfo.keys = function(parameters, callback) {
         parameters = clean(setSort(setFilter(parameters)));
-        d3.json(endpoint + 'db/keys?' +
+        d3.json(endpoint + 'keys/all?' +
             iD.util.qsString(_.extend({
                 rp: 6,
                 sortname: 'count_all',
@@ -46,7 +46,7 @@ iD.taginfo = function() {
 
     taginfo.values = function(parameters, callback) {
         parameters = clean(setSort(setFilter(parameters)));
-        d3.json(endpoint + 'db/keys/values?' +
+        d3.json(endpoint + 'key/values?' +
             iD.util.qsString(_.extend({
                 rp: 20,
                 sortname: 'count_all',
@@ -57,7 +57,7 @@ iD.taginfo = function() {
 
     taginfo.docs = function(parameters, callback) {
         parameters = clean(setSort(parameters));
-        d3.json(endpoint + 'wiki/tags?' +
+        d3.json(endpoint + 'tag/wiki_pages?' +
             iD.util.qsString(parameters), callback);
     };
 
