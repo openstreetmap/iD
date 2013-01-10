@@ -140,28 +140,49 @@ iD.Inspector = function() {
                 .attr('tabindex', -1)
                 .attr('target', '_blank')
                 .on('click', function(d) {
-                    taginfo.docs(_.extend({}, d, {
-                            geometry: entity.geometry()
-                        }), function(err, docs) {
-                        var en = _.find(docs, function(d) {
-                            return d.lang == 'en';
-                        });
-                        if (en) {
-                            var types = [];
-                            if (en.on_area) types.push('area');
-                            if (en.on_node) types.push('point');
-                            if (en.on_way) types.push('line');
-                            en.types = types;
-                            iD.modal()
-                                .select('.content')
-                                .datum(en)
-                                .call(iD.tagReference);
-                        } else {
-                            iD.flash()
-                                .select('.content')
-                                .text('This is no documentation available for this tag combination');
-                        }
+                    var params = _.extend({}, d, {
+                        geometry: entity.geometry()
                     });
+                    if (d.key && d.value) {
+                        taginfo.docs(params, function(err, docs) {
+                            var en = _.find(docs, function(d) {
+                                return d.lang == 'en';
+                            });
+                            if (en) {
+                                var types = [];
+                                if (en.on_area) types.push('area');
+                                if (en.on_node) types.push('point');
+                                if (en.on_way) types.push('line');
+                                en.types = types;
+                                console.log(en);
+                                iD.modal()
+                                    .select('.content')
+                                    .datum(en)
+                                    .call(iD.tagReference);
+                            } else {
+                                iD.flash()
+                                    .select('.content')
+                                    .text('This is no documentation available for this tag combination');
+                            }
+                        });
+                    } else if (d.key) {
+                        taginfo.values(params, function(err, values) {
+                            if (values.data.length) {
+                                iD.modal()
+                                    .select('.content')
+                                    .datum({
+                                        data: values.data,
+                                        title: 'Key:' + params.key,
+                                        geometry: params.geometry
+                                    })
+                                    .call(iD.keyReference);
+                            } else {
+                                iD.flash()
+                                    .select('.content')
+                                    .text('This is no documentation available for this key');
+                            }
+                        });
+                    }
                     d3.event.preventDefault();
                 })
                 .attr('href', function(d) {
