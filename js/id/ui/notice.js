@@ -9,14 +9,14 @@ iD.notice = function(selection) {
             selection
                 .text(_)
                 .transition()
-                .style('opacity', 1);
+                .style('display', 'auto');
         } else if (_ && message !== _) {
             selection.text(_);
         } else if (!_) {
             selection
                 .text('')
                 .transition()
-                .style('opacity', 0);
+                .style('display', 'none');
         }
         message = _;
         return notice;

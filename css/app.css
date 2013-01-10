@@ -935,7 +935,6 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 .notice {
-    pointer-events: none;
     position:absolute;
     top:11px;
     left:11px;
