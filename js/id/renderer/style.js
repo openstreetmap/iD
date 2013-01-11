@@ -37,17 +37,6 @@ iD.Style.waystack = function(a, b) {
     return as - bs;
 };
 
-iD.Style.pointImage = function(d) {
-    // TODO: optimize
-    for (var k in d.tags) {
-        var key = k + '=' + d.tags[k];
-        if (iD._pointTable[key]) {
-            return 'icons/' + iD._pointTable[key] + '.png';
-        }
-    }
-    return 'icons/unknown.png';
-};
-
 iD.Style.TAG_CLASSES = iD.util.trueObj([
     'highway', 'railway', 'motorway', 'amenity', 'natural',
     'landuse', 'building', 'oneway', 'bridge'

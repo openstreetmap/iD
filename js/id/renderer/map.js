@@ -16,13 +16,13 @@ iD.Map = function() {
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
-        supersurface, surface, defs, tilegroup, r, g;
+        surface, tilegroup;
 
-    function map() {
-        tilegroup = this.append('div')
+    function map(selection) {
+        tilegroup = selection.append('div')
             .attr('id', 'tile-g');
 
-        supersurface = this.append('div')
+        var supersurface = selection.append('div')
             .style('position', 'absolute')
             .call(zoom);
 
@@ -35,21 +35,23 @@ iD.Map = function() {
                 }
             });
 
-        defs = surface.append('defs');
-        defs.append('clipPath')
+        surface.append('defs')
+            .append('clipPath')
                 .attr('id', 'clip')
             .append('rect')
                 .attr('id', 'clip-rect')
                 .attr({ x: 0, y: 0 });
 
-        r = surface.append('g')
+        var clip = surface.append('g')
             .attr('clip-path', 'url(#clip)');
 
-        g = ['fill', 'casing', 'stroke', 'text', 'hit', 'temp'].reduce(function(mem, i) {
-            return (mem[i] = r.append('g').attr('class', 'layer-g layer-' + i)) && mem;
-        }, {});
+        var layers = clip.selectAll('.layer')
+            .data(['fill', 'casing', 'stroke', 'text', 'hit'])
 
-        map.size(this.size());
+        layers.enter().append('g')
+            .attr('class', function(d) { return 'class', 'layer layer-' + d; });
+
+        map.size(selection.size());
         map.surface = surface;
 
         d3.select(document).call(keybinding);
@@ -99,7 +101,7 @@ iD.Map = function() {
     }
 
     function editOff() {
-        surface.selectAll('.layer-g *').remove();
+        surface.selectAll('.layer *').remove();
     }
 
     function connectionLoad(err, result) {
