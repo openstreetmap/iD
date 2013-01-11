@@ -58,7 +58,7 @@ iD.Map = function() {
 
     function drawVector(difference) {
         if (surface.style(transformProp) != 'none') return;
-        var filter, all, ways = [], lines = [], areas = [], points = [], vertices = [],
+        var filter, all,
             extent = map.extent(),
             graph = history.graph();
 
@@ -84,8 +84,10 @@ iD.Map = function() {
             filter = function(d) { return d.accuracy ? d.way in only : d.id in only; };
         }
 
-        if (all.length > 10000) return editOff();
-        else editOn();
+        if (all.length > 10000) {
+            editOff();
+            return;
+        }
 
         surface
             .call(iD.svg.Points(),    graph, all, filter, projection)
@@ -98,8 +100,6 @@ iD.Map = function() {
     function editOff() {
         surface.selectAll('.layer-g *').remove();
     }
-
-    function editOn() { }
 
     function connectionLoad(err, result) {
         history.merge(result);
