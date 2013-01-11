@@ -1,33 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <title>iD: a Javascript OpenStreetMap Editor</title>
-  <link rel='shortcut icon' href='img/favicon.ico' type='image/x-icon' />
-  <link href='css/reset.css' rel='stylesheet' />
-  <link href='css/base.css' rel='stylesheet' />
-  <link href='css/site.css' rel='stylesheet' />
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-</head>
-<body>
-  <div class='container pad4'>
-    <div class='header'>
-    <h1> iD Editor </h1>
-    <h2>Subtitle</h2>
-    </div>
-    <div class='content section'>
-      <h2>About the iD Editor</h2>
-      <p>Content</p>
-    </div>
-    <div class='participate section'>
-      <h2> Get Involved</h2>
-      <p>The code for iD is hosted on GitHub. <a href='https://github.com/systemed/iD/issues?state=open'></a>Help out by reporting bugs, requesting features, & submitting pull requests</a>.
-    </div>
-    <div class='action section'>
-      <h2>Try iD now</h2>
-      <a href='http://geowiki.com/iD/'>Experiment a demo of the most recent code</a>
+---
+title: "iD"
+layout: default
+---
+
+<div class='pad4 center header col12'>
+  <h1>{{page.title}}</h1>
+  <h2>A Javascript OpenStreetMap Editor</h2>
+</div>
+
+<div class='shadow'>
+  <div class='limit'>
+    <div class='clearfix content'>
+      {% for item in site.posts reversed %}
+        <div class='col6 pad4 content section'>
+          <h2>{{item.title}}</h2>
+          {{item.content | markdownify}}
+        {% if item.title == 'Contribute' %}
+        <a class='button' href='https://github.com/systemed/iD/issues?state=open'/>iD on GitHub</a>
+        {% endif %}
+
+        </div>
+      {% endfor %}
+      <div class='col6 pad4 content trynow'>
+        <h2>Try it now</h2>
+        <p>The latest running iD code is available on a test server. Don't worry about making errors, it's not connected to the real OSM database.</p>
+        <a class='button' href='http://geowiki.com/iD/'>Launch Demo</a>
+      </div>
     </div>
   </div>
-</body>
-</html>
+</div>
+
+<div class='footer clearfix center pad4 col12'>
+  <p>A couple lines about who and how iD is being developed + link to the osmdev blog</p>
+</div>

@@ -1,0 +1,6 @@
+auto: true
+server: true
+exclude:
+permalink: none
+baseurl:
+permalink: /:title

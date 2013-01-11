@@ -1,0 +1,49 @@
+body  {
+  background: #f8f8f8;
+}
+
+.header {
+  background: url({{site.baseurl}}/img/background.jpg) 50% 50% no-repeat;
+  color: #f8f8f8;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1;
+  height: 250px;
+  top: 0;
+}
+
+.shadow {
+  margin-top: 240px;
+  position: relative;
+  background: #f8f8f8;
+  z-index: 2;
+}
+
+.limit {
+  margin: auto;
+  max-width: 1000px;
+  padding-bottom: 40px;
+}
+
+.content.pad4 { padding-bottom: 0;}
+
+.footer {
+  background: #c1c1c1;
+}
+
+a.button {
+  display: block;
+  width: 50%;
+  background:#77c453;
+  color: white;
+  font-weight: bold;
+  height: 40px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 8px;
+}
+a.button:hover { background: #54af29; }
+
+@media only screen and (max-width: 640px) {
+  a.button { width: 100%;}
+}

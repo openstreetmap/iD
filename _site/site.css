@@ -1,0 +1,464 @@
+/**
+ * Reset ==============================================================
+ * Based on http://meyerweb.com/eric/tools/css/reset
+ */
+
+html,
+body,
+
+/* Structures */
+div,
+span,
+applet,
+object,
+iframe,
+
+/* Text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+
+/* Lists */
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+
+/* Forms */
+fieldset,
+form,
+input,
+select,
+textarea,
+label,
+legend,
+
+/* Tables */
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin:0px;
+  padding:0px;
+  border:0px;
+  outline:0px;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+  line-height:inherit;
+  }
+
+ol,
+ul,
+.item-list ul,
+.item-list ul li {
+  list-style:none;
+  }
+
+blockquote,
+q { quotes:none; }
+
+blockquote:before,
+blockquote:after,
+q:before, q:after {
+  content:'';
+  content:none;
+  }
+
+/* remember to define focus styles! */
+:focus { outline:0px; }
+
+/* remember to highlight inserts somehow! */
+ins { text-decoration:none; }
+del { text-decoration:line-through; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse:collapse;
+  border-spacing:0px;
+  }
+
+/**
+ * Font reset =========================================================
+ *
+ * Specifically targets form elements which browsers oftentimes give
+ * special treatment.
+ */
+input,
+select,
+textarea,
+body { font: 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif; }
+
+
+/* Basics
+------------------------------------------------------- */
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Columns
+------------------------------------------------------- */
+
+.col0    { float:left; width:04.1666%; }
+.col1    { float:left; width:08.3333%; }
+.col2    { float:left; width:16.6666%; }
+.col3    { float:left; width:25.0000%; }
+.col4    { float:left; width:33.3333%; }
+.col5    { float:left; width:41.6666%; }
+.col6    { float:left; width:50.0000%; }
+.col7    { float:left; width:58.3333%; }
+.col8    { float:left; width:66.6666%; }
+.col9    { float:left; width:75.0000%; }
+.col10   { float:left; width:83.3333%; }
+.col11   { float:left; width:91.6666%; }
+.col12   { float:left; width:100.0000%; }
+.margin0  { margin-left: 04.1666%; }
+.margin1  { margin-left: 08.3333%; }
+.margin2  { margin-left: 16.6666%; }
+.margin3  { margin-left: 25.0000%; }
+.margin4  { margin-left: 33.3333%; }
+.margin5  { margin-left: 41.6666%; }
+.margin6  { margin-left: 50.0000%; }
+.margin7  { margin-left: 58.3333%; }
+.margin8  { margin-left: 66.6666%; }
+.margin9  { margin-left: 75.0000%; }
+.margin10 { margin-left: 83.3333%; }
+.margin11 { margin-left: 91.6666%; }
+.margin12 { margin-left: 100.0000%; }
+
+/* Padding
+------------------------------------------------------- */
+
+.pad1    { padding:10px; }
+.pad2    { padding:20px; }
+.pad21h  { padding:10px 20px; }
+.pad2h   { padding:0 20px; }
+.pad4    { padding:40px; }
+.pad4h   { padding-left:40px; padding-right:40px; }
+.pad8    { padding:80px 40px; }
+.pad4c   { padding:40px; }
+
+/* Typography
+------------------------------------------------------- */
+
+body,
+input,
+textarea {
+  color: #333;
+  font: 15px/1.67 'Helvetica Neue', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  margin: 0;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 80px;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+h4, h5 {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 15px;
+  margin-bottom: 0px;
+  line-height: 1.67;
+}
+
+p {
+  font-size: 15px;
+  margin: 0 0 20px 0;
+  }
+  p:last-child { margin-bottom: 0;}
+
+abbr {
+  border-bottom: 1px dotted #000;
+  cursor: help;
+}
+
+address { font-style: italic;}
+
+small { font-size: 11px;}
+
+strong { font-weight: bold;}
+
+em { font-style: italic;}
+
+hr {
+  margin:0px 0px 20px;
+  border:0px;
+  height:1px;
+  background:#f8f8f8;
+}
+
+/* Block Quotes */
+
+blockquote,
+q {
+  quotes: none;
+  font-style: italic;
+  padding-left: 20px;
+  margin: 10px;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+}
+
+/* Code Blocks & Pre */
+
+code,
+pre {
+  padding: 5px;
+  font-family: Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
+  font-size: 12px;
+  border-radius: 3px;
+}
+code {
+  padding: 5px;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+}
+pre {
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre;
+  white-space: pre-wrap;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+pre code {
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  border: 0;
+}
+.pre-scrollable {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+/* Links */
+
+a {
+  color: #77c453;
+  text-decoration: none;
+}
+a:visited {
+  color: #9ed485;
+}
+a:hover {
+  text-decoration: none;
+  color: #54af29;
+}
+a:active {
+  text-decoration: none;
+  color: #9ed485;
+}
+
+/* sub/superscripts */
+sup,
+sub {
+  height: 0;
+  line-height: 1;
+  vertical-align: baseline;
+  _vertical-align: bottom;
+  position: relative;
+  font-size: 75%;
+  }
+
+sup {
+  bottom: 1ex;
+  }
+
+sub {
+  top: .5ex;
+  }
+
+/* Additional Utility Classes
+------------------------------------------------------- */
+
+.fr { float: right;}
+.show { display: block;}
+.hide { display: none;}
+
+.deemphasize { color: #888;}
+.center { text-align: center;}
+
+/* Markup free clearing
+Details: http://www.positioniseverything.net/easyclearing.html
+------------------------------------------------------- */
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  }
+
+.clearfix { display: inline-block; }
+
+/* Tablet Layout
+------------------------------------------------------- */
+
+@media only screen and (max-width: 770px) {
+  .hide-tablet { display: none;}
+  .show-tablet { display: block;}
+}
+
+/* Mobile Layout
+------------------------------------------------------- */
+
+@media only screen and (max-width: 640px) {
+  .col1,
+  .col2,
+  .col3,
+  .col4,
+  .col5,
+  .col6,
+  .col7,
+  .col8,
+  .col9,
+  .col10,
+  .col11,
+  .col12 { width:100%; max-width:100%; }
+  .margin0,
+  .margin1,
+  .margin2,
+  .margin3,
+  .margin4,
+  .margin5,
+  .margin6,
+  .margin7,
+  .margin8,
+  .margin9,
+  .margin10,
+  .margin11,
+  .margin12 { margin-left:0%; }
+  .pad4c { padding:0px; }
+  .pad4,
+  .pad4h { padding-left:20px; padding-right:20px;}
+  .pad8 { padding: 40px 20px;}
+  .hide-mobile { display: none;}
+  .show-mobile { display: block;}
+  }
+body  {
+  background: #f8f8f8;
+}
+
+.header {
+  background: url(/img/background.jpg) 50% 50% no-repeat;
+  color: #f8f8f8;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1;
+  height: 250px;
+  top: 0;
+}
+
+.shadow {
+  margin-top: 240px;
+  position: relative;
+  background: #f8f8f8;
+  z-index: 2;
+}
+
+.limit {
+  margin: auto;
+  max-width: 1000px;
+  padding-bottom: 40px;
+}
+
+.content.pad4 { padding-bottom: 0;}
+
+.footer {
+  background: #c1c1c1;
+}
+
+a.button {
+  display: block;
+  width: 50%;
+  background:#77c453;
+  color: white;
+  font-weight: bold;
+  height: 40px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 8px;
+}
+a.button:hover { background: #54af29; }
+
+@media only screen and (max-width: 640px) {
+  a.button { width: 100%;}
+}
