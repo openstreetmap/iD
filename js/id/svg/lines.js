@@ -1,10 +1,14 @@
 iD.svg.Lines = function() {
-    return function(surface, graph, entities, filter, projection) {
-        var arrowtext = '►\u3000\u3000',
-            arrow = surface.append('text').text(arrowtext),
-            alength = arrow.node().getComputedTextLength();
 
-        arrow.remove();
+        var arrowtext = '►\u3000\u3000',
+            alength;
+
+    return function(surface, graph, entities, filter, projection) {
+        if (!alength) {
+            var arrow = surface.append('text').text(arrowtext);
+            alength = arrow.node().getComputedTextLength();
+            arrow.remove();
+        }
 
         var lines = [];
 
