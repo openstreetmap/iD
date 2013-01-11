@@ -267,10 +267,11 @@ path.stroke.tag-waterway {
 
 text {
     font-size:10px;
+    pointer-events: none;
 }
 
 .oneway .textpath {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 text.tag-oneway {
