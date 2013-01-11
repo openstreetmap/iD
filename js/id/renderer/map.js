@@ -15,7 +15,7 @@ iD.Map = function() {
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
-        supersurface, surface, defs, tilegroup, r, g, alength;
+        supersurface, surface, defs, tilegroup, r, g;
 
     function map() {
         tilegroup = this.append('div')
@@ -48,9 +48,6 @@ iD.Map = function() {
             return (mem[i] = r.append('g').attr('class', 'layer-g layer-' + i)) && mem;
         }, {});
 
-        var arrow = surface.append('text').text('►----');
-        alength = arrow.node().getComputedTextLength();
-        arrow.remove();
         map.size(this.size());
         map.surface = surface;
 
@@ -58,10 +55,6 @@ iD.Map = function() {
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
-    function getline(d) { return d._line; }
-    function nodeline(d) {
-        return 'M' + _.pluck(d.nodes, 'loc').map(projection).map(iD.util.geo.roundCoords).join('L');
-    }
 
     function drawVector(difference) {
         if (surface.style(transformProp) != 'none') return;
@@ -94,101 +87,12 @@ iD.Map = function() {
         if (all.length > 10000) return editOff();
         else editOn();
 
-        for (var i = 0; i < all.length; i++) {
-            var entity = all[i];
-            switch (entity.geometry()) {
-                case 'line':
-                    entity._line = nodeline(entity);
-                    ways.push(entity);
-                    lines.push(entity);
-                    break;
-
-                case 'area':
-                    entity._line = nodeline(entity);
-                    ways.push(entity);
-                    areas.push(entity);
-                    break;
-
-                case 'point':
-                    points.push(entity);
-                    break;
-
-                case 'vertex':
-                    vertices.push(entity);
-                    break;
-            }
-        }
-
-        var parentStructure = graph.parentStructure(ways);
-        var wayAccuracyHandles = [];
-        for (i = 0; i < ways.length; i++) {
-            accuracyHandles(ways[i], wayAccuracyHandles);
-        }
-
-        drawVertices(vertices, parentStructure, filter);
-        drawAccuracyHandles(wayAccuracyHandles, filter);
-        drawCasings(lines, filter);
-        drawFills(areas, filter);
-        drawStrokes(lines, filter);
-        drawPoints(points, filter);
-    }
-
-    // updates handles by reference
-    function accuracyHandles(way, handles) {
-        for (var i = 0; i < way.nodes.length - 1; i++) {
-            if (iD.util.geo.dist(way.nodes[i].loc, way.nodes[i + 1].loc) > 0.0001) {
-                handles.push({
-                    loc: iD.util.geo.interp(way.nodes[i].loc, way.nodes[i + 1].loc, 0.5),
-                    way: way.id,
-                    index: i + 1,
-                    accuracy: true
-                });
-            }
-        }
-    }
-
-    function pointTransform(entity) {
-        return 'translate(' + iD.util.geo.roundCoords(projection(entity.loc)) + ')';
-    }
-
-    function drawVertices(vertices, parentStructure, filter) {
-        function shared(d) { return parentStructure[d.id] > 1; }
-
-        var circles = g.hit.selectAll('g.vertex')
-            .filter(filter)
-            .data(vertices, iD.Entity.key);
-
-        circles.exit().remove();
-
-        var cg = circles.enter()
-            .insert('g', ':first-child')
-            .attr('class', 'node vertex');
-
-        cg.append('circle')
-            .attr('class', 'stroke')
-            .attr('r', 6);
-
-        cg.append('circle')
-            .attr('class', 'fill')
-            .attr('r', 4);
-
-        circles.attr('transform', pointTransform)
-            .classed('shared', shared);
-
-        // Selecting the following implicitly
-        // sets the data (vertix entity) on the elements
-        circles.select('circle.fill');
-        circles.select('circle.stroke');
-    }
-
-    function drawAccuracyHandles(waynodes, filter) {
-        var handles = g.hit.selectAll('circle.accuracy-handle')
-            .filter(filter)
-            .data(waynodes, function (d) { return [d.way, d.index].join(","); });
-        handles.exit().remove();
-        handles.enter().append('circle')
-            .attr({ r: 3, 'class': 'accuracy-handle' });
-        handles.attr('transform', pointTransform);
+        surface
+            .call(iD.svg.Points(),    graph, all, filter, projection)
+            .call(iD.svg.Vertices(),  graph, all, filter, projection)
+            .call(iD.svg.Lines(),     graph, all, filter, projection)
+            .call(iD.svg.Areas(),     graph, all, filter, projection)
+            .call(iD.svg.Midpoints(), graph, all, filter, projection);
     }
 
     function editOff() {
@@ -196,94 +100,6 @@ iD.Map = function() {
     }
 
     function editOn() { }
-
-    function drawLines(data, filter, group, fixedClasses) {
-        var lines = group.selectAll('path')
-            .filter(filter)
-            .data(data, iD.Entity.key);
-
-        lines.exit().remove();
-
-        lines.enter().append('path')
-            .attr('class', fixedClasses);
-
-        lines
-            .order()
-            .attr('d', getline)
-            .call(iD.Style.styleClasses());
-
-        return lines;
-    }
-
-    function drawFills(areas, filter) {
-        drawLines(areas, filter, g.fill, 'way area');
-    }
-
-    function drawCasings(ways, filter) {
-        drawLines(ways, filter, g.casing, 'way line casing');
-    }
-
-    function drawPoints(points, filter) {
-        var groups = g.hit.selectAll('g.point')
-            .filter(filter)
-            .data(points, iD.Entity.key);
-
-        groups.exit().remove();
-
-        var group = groups.enter().append('g')
-            .attr('class', 'node point');
-
-        group.append('circle')
-            .attr('class', 'stroke')
-            .attr({ r: 10 });
-
-        group.append('circle')
-            .attr('class', 'fill')
-            .attr({ r: 10 });
-
-        group.append('image')
-            .attr({ width: 16, height: 16 })
-            .attr('transform', 'translate(-8, -8)');
-
-        groups.attr('transform', pointTransform);
-
-        // Selecting the following implicitly
-        // sets the data (point entity) on the element
-        groups.select('image').attr('xlink:href', iD.Style.pointImage);
-    }
-
-    function drawStrokes(ways, filter) {
-        var strokes = drawLines(ways, filter, g.stroke, 'way line stroke');
-
-        // Determine the lengths of oneway paths
-        var lengths = {},
-            oneways = strokes.filter(function (d) { return d.isOneWay(); }).each(function(d) {
-                lengths[d.id] = Math.floor(this.getTotalLength() / alength);
-            }).data();
-
-        var uses = defs.selectAll('path')
-            .filter(filter)
-            .data(oneways, iD.Entity.key);
-        uses.exit().remove();
-        uses.enter().append('path');
-        uses
-            .attr('id', function(d) { return 'shadow-' + d.id; })
-            .attr('d', getline);
-
-        var labels = g.text.selectAll('text')
-            .filter(filter)
-            .data(oneways, iD.Entity.key);
-        labels.exit().remove();
-        var tp = labels.enter()
-            .append('text').attr({ 'class': 'oneway', dy: 4 })
-            .append('textPath').attr('class', 'textpath');
-        g.text.selectAll('.textpath')
-            .filter(filter)
-            .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
-            .text(function(d) {
-                return (new Array(Math.floor(lengths[d.id]))).join('►----');
-            });
-    }
 
     function connectionLoad(err, result) {
         history.merge(result);
