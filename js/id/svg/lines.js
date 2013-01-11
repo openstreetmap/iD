@@ -1,6 +1,7 @@
 iD.svg.Lines = function() {
     return function(surface, graph, entities, filter, projection) {
-        var arrow = surface.append('text').text('►----'),
+        var arrowtext = '►\u3000\u3000',
+            arrow = surface.append('text').text(arrowtext),
             alength = arrow.node().getComputedTextLength();
 
         arrow.remove();
@@ -84,7 +85,8 @@ iD.svg.Lines = function() {
             .filter(filter)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
             .text(function(d) {
-                return (new Array(Math.floor(lengths[d.id]))).join('►　　');
+                // adding longer text than necessary, since overflow is hidden
+                return (new Array(Math.floor(lengths[d.id] * 1.1))).join(arrowtext);
             });
     }
 };
