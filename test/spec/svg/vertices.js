@@ -10,7 +10,15 @@ describe("iD.svg.Vertices", function () {
             .attr('class', 'layer-hit');
     });
 
-    // TODO: fill out
+    it("adds tag classes", function () {
+        var node = iD.Node({tags: {highway: "traffic_signals"}, loc: [0, 0]}),
+            graph = iD.Graph([node]);
+
+        surface.call(iD.svg.Vertices(), graph, [node], filter, projection);
+
+        expect(surface.select('.vertex')).to.be.classed('tag-highway');
+        expect(surface.select('.vertex')).to.be.classed('tag-highway-traffic_signals');
+    });
 
     it("adds the .shared class to vertices that are members of two or more ways", function () {
         var node = iD.Node({loc: [0, 0]}),
@@ -20,6 +28,6 @@ describe("iD.svg.Vertices", function () {
 
         surface.call(iD.svg.Vertices(), graph, [node], filter, projection);
 
-        expect(surface.select('.vertex').classed('shared')).to.equal(true);
+        expect(surface.select('.vertex')).to.be.classed('shared');
     });
 });
