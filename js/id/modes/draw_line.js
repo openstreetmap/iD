@@ -64,9 +64,15 @@ iD.modes.DrawLine = function(wayId, direction) {
 
                 controller.enter(iD.modes.DrawLine(wayId, direction));
 
-            } else if (datum.type === 'way') {
+            } else if (datum.type === 'way' || datum.accuracy) {
                 // connect the way to an existing way
-                var choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
+                if (datum.accuracy) {
+                    // if clicked on accuracy handle
+                    datum.id = datum.way;
+                    choice = datum;
+                } else {
+                    var choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
+                }
 
                 history.replace(
                     iD.actions.MoveNode(node.id, choice.loc),
