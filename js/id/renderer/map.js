@@ -12,6 +12,7 @@ iD.Map = function() {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         fastEnabled = true,
+        minzoom = 0,
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
@@ -114,6 +115,12 @@ iD.Map = function() {
                 return d3.event.sourceEvent.preventDefault();
             }
         }
+        if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
+            iD.flash()
+                .select('.content')
+                .text('Cannot zoom out further in current mode.')
+            return map.zoom(16);
+        }
         var fast = (d3.event.scale === projection.scale() && fastEnabled);
         projection
             .translate(d3.event.translate)
@@ -144,7 +151,7 @@ iD.Map = function() {
         dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
-        if (map.zoom() > 16) {
+        if (map.zoom() >= 16) {
             connection.loadTiles(projection);
             drawVector(difference);
         } else {
@@ -274,6 +281,11 @@ iD.Map = function() {
                 .attr('class','inspector-inner')
                 .text(_);
         }
+    };
+
+    map.minzoom = function(_) {
+        if (!arguments.length) return minzoom;
+        minzoom = _;
     };
 
     map.history = function (_) {

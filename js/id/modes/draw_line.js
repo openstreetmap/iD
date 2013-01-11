@@ -23,6 +23,8 @@ iD.modes.DrawLine = function(wayId, direction) {
                       'Click on other lines to connect to them, and double-click to ' +
                       'end the line.');
 
+        map.minzoom(16);
+
         history.perform(
             iD.actions.AddNode(node),
             iD.actions.AddWayNode(wayId, node.id, index));
@@ -147,6 +149,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
         mode.map.hint(false);
         mode.map.fastEnable(true);
+        mode.map.minzoom(0);
 
         surface
             .on('mousemove.drawline', null)
