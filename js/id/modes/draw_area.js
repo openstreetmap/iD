@@ -41,22 +41,8 @@ iD.modes.DrawArea = function(wayId) {
         function click() {
             var datum = d3.select(d3.event.target).datum() || {};
 
-            if (datum.id === tailId) {
-                history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, tailId, -1),
-                    'added to an area');
-
-                controller.enter(iD.modes.Select(way));
-
-            } else if (datum.id === headId) {
-
-                // finish the way
-                history.replace(
-                        iD.actions.DeleteNode(node.id),
-                        iD.actions.AddWayNode(way.id, tailId, -1),
-                        'added to an area');
-
+            if (datum.id === tailId || datum.id === headId) {
+                history.replace(iD.actions.DeleteNode(node.id));
                 controller.enter(iD.modes.Select(way));
 
             } else if (datum.type === 'node' && datum.id !== node.id) {
