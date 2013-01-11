@@ -59,7 +59,6 @@ iD.Map = function() {
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
     function getline(d) { return d._line; }
-    function key(d) { return d.id; }
     function nodeline(d) {
         return 'M' + _.pluck(d.nodes, 'loc').map(projection).map(iD.util.geo.roundCoords).join('L');
     }
@@ -157,7 +156,7 @@ iD.Map = function() {
 
         var circles = g.hit.selectAll('g.vertex')
             .filter(filter)
-            .data(vertices, key);
+            .data(vertices, iD.Entity.key);
 
         circles.exit().remove();
 
@@ -201,7 +200,7 @@ iD.Map = function() {
     function drawLines(data, filter, group, fixedClasses) {
         var lines = group.selectAll('path')
             .filter(filter)
-            .data(data, key);
+            .data(data, iD.Entity.key);
 
         lines.exit().remove();
 
@@ -227,7 +226,7 @@ iD.Map = function() {
     function drawPoints(points, filter) {
         var groups = g.hit.selectAll('g.point')
             .filter(filter)
-            .data(points, key);
+            .data(points, iD.Entity.key);
 
         groups.exit().remove();
 
@@ -264,7 +263,7 @@ iD.Map = function() {
 
         var uses = defs.selectAll('path')
             .filter(filter)
-            .data(oneways, key);
+            .data(oneways, iD.Entity.key);
         uses.exit().remove();
         uses.enter().append('path');
         uses
@@ -273,7 +272,7 @@ iD.Map = function() {
 
         var labels = g.text.selectAll('text')
             .filter(filter)
-            .data(oneways, key);
+            .data(oneways, iD.Entity.key);
         labels.exit().remove();
         var tp = labels.enter()
             .append('text').attr({ 'class': 'oneway', dy: 4 })
