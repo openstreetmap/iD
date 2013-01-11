@@ -56,9 +56,7 @@ iD.modes.Select = function (entity) {
 
         if (left > left_edge &&
             right > left_edge) mode.map.centerEase(
-                iD.util.geo.interp(
-                    entity_extent[0],
-                    entity_extent[1], 0.5));
+                mode.map.projection.invert([(window.innerWidth), d3.event.y]));
 
         inspector.on('changeTags', function(d, tags) {
             mode.history.perform(
