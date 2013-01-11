@@ -84,7 +84,7 @@ iD.svg.Lines = function() {
             .filter(filter)
             .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
             .text(function(d) {
-                return (new Array(Math.floor(lengths[d.id]))).join('►----');
+                return (new Array(Math.floor(lengths[d.id]))).join('►　　');
             });
     }
 };
