@@ -41,22 +41,8 @@ iD.modes.DrawArea = function(wayId) {
         function click() {
             var datum = d3.select(d3.event.target).datum() || {};
 
-            if (datum.id === tailId) {
-                history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, tailId, -1),
-                    'added to an area');
-
-                controller.enter(iD.modes.Select(way));
-
-            } else if (datum.id === headId) {
-
-                // finish the way
-                history.replace(
-                        iD.actions.DeleteNode(node.id),
-                        iD.actions.AddWayNode(way.id, tailId, -1),
-                        'added to an area');
-
+            if (datum.id === tailId || datum.id === headId) {
+                history.replace(iD.actions.DeleteNode(node.id));
                 controller.enter(iD.modes.Select(way));
 
             } else if (datum.type === 'node' && datum.id !== node.id) {
@@ -75,13 +61,6 @@ iD.modes.DrawArea = function(wayId) {
 
                 controller.enter(iD.modes.DrawArea(wayId));
             }
-        }
-
-        function esc() {
-            history.replace(
-                iD.actions.DeleteNode(node.id));
-
-            controller.enter(iD.modes.Browse());
         }
 
         function backspace() {
@@ -109,11 +88,8 @@ iD.modes.DrawArea = function(wayId) {
 
         function ret() {
             d3.event.preventDefault();
-            history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, tailId, -1),
-                    'added to an area');
-            controller.enter(iD.modes.Browse());
+            history.replace(iD.actions.DeleteNode(node.id));
+            controller.enter(iD.modes.Select(way));
         }
 
         surface
@@ -122,9 +98,9 @@ iD.modes.DrawArea = function(wayId) {
             .on('click.drawarea', click);
 
         map.keybinding()
-            .on('⎋.drawarea', esc)
             .on('⌫.drawarea', backspace)
             .on('⌦.drawarea', del)
+            .on('⎋.drawarea', ret)
             .on('↩.drawarea', ret);
     };
 

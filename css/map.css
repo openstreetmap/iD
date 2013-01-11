@@ -302,7 +302,6 @@ text.tag-oneway {
 }
 
 .mode-browse .line,
-.mode-browse .oneway,
 .mode-select .line {
     cursor: url(../img/cursor-select-line.png), pointer;
 }

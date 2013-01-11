@@ -90,13 +90,6 @@ iD.modes.DrawLine = function(wayId, direction) {
             }
         }
 
-        function esc() {
-            history.replace(
-                iD.actions.DeleteNode(node.id));
-
-            controller.enter(iD.modes.Browse());
-        }
-
         function backspace() {
             d3.event.preventDefault();
 
@@ -121,7 +114,7 @@ iD.modes.DrawLine = function(wayId, direction) {
         function ret() {
             d3.event.preventDefault();
             history.replace(iD.actions.DeleteNode(node.id));
-            controller.enter(iD.modes.Browse());
+            controller.enter(iD.modes.Select(way));
         }
 
         function undo() {
@@ -134,9 +127,9 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('click.drawline', click);
 
         map.keybinding()
-            .on('⎋.drawline', esc)
             .on('⌫.drawline', backspace)
             .on('⌦.drawline', del)
+            .on('⎋.drawline', ret)
             .on('↩.drawline', ret)
             .on('z.drawline', function(evt, mods) {
                 if (mods === '⌘' || mods === '⌃') undo();

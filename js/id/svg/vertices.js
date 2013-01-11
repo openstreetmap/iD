@@ -9,8 +9,6 @@ iD.svg.Vertices = function() {
             }
         }
 
-        var parentStructure = graph.parentStructure(vertices);
-
         var groups = surface.select('.layer-hit').selectAll('g.vertex')
             .filter(filter)
             .data(vertices, iD.Entity.key);
@@ -28,7 +26,8 @@ iD.svg.Vertices = function() {
             .attr('r', 4);
 
         groups.attr('transform', iD.svg.PointTransform(projection))
-            .classed('shared', function(d) { return parentStructure[d.id] > 1; });
+            .call(iD.svg.TagClasses())
+            .classed('shared', function(entity) { return graph.parentWays(entity).length > 1; });
 
         // Selecting the following implicitly
         // sets the data (vertix entity) on the elements

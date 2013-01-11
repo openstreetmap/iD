@@ -36,32 +36,3 @@ iD.Style.waystack = function(a, b) {
     }
     return as - bs;
 };
-
-iD.Style.TAG_CLASSES = iD.util.trueObj([
-    'highway', 'railway', 'motorway', 'amenity', 'natural',
-    'landuse', 'building', 'oneway', 'bridge'
-]);
-
-iD.Style.styleClasses = function() {
-    var tagClassRe = /^tag-/;
-    return function(selection) {
-        selection.each(function(d, i) {
-            var classes, value = this.className;
-
-            if (value.baseVal !== undefined) value = value.baseVal;
-
-            classes = value.trim().split(/\s+/).filter(function(name) {
-                return name.length && !tagClassRe.test(name);
-            });
-
-            var tags = d.tags;
-            for (var k in tags) {
-                if (!iD.Style.TAG_CLASSES[k]) continue;
-                classes.push('tag-' + k);
-                classes.push('tag-' + k + '-' + tags[k]);
-            }
-
-            return d3.select(this).attr('class', classes.join(' '));
-        });
-    };
-};

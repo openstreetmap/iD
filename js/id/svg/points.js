@@ -8,7 +8,7 @@ iD.svg.Points = function() {
             }
         }
         return 'icons/unknown.png';
-    };
+    }
 
     return function(surface, graph, entities, filter, projection) {
         var points = [];
@@ -40,7 +40,8 @@ iD.svg.Points = function() {
             .attr({ width: 16, height: 16 })
             .attr('transform', 'translate(-8, -8)');
 
-        groups.attr('transform', iD.svg.PointTransform(projection));
+        groups.attr('transform', iD.svg.PointTransform(projection))
+            .call(iD.svg.TagClasses());
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element
