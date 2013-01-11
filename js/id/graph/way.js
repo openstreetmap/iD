@@ -1,4 +1,14 @@
-iD.Way = iD.Entity.extend({
+iD.Way = iD.Entity.way = function iD_Way() {
+    if (!(this instanceof iD_Way)) {
+        return (new iD_Way()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
+};
+
+iD.Way.prototype = Object.create(iD.Entity.prototype);
+
+_.extend(iD.Way.prototype, {
     type: "way",
     nodes: [],
 

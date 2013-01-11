@@ -109,16 +109,3 @@ iD.Entity.prototype = {
         return n.length === 0 ? 'unknown' : n.join('; ');
     }
 };
-
-iD.Entity.extend = function(properties) {
-    var Subclass = function() {
-        if (this instanceof Subclass) return;
-        return (new Subclass()).initialize(arguments);
-    };
-
-    Subclass.prototype = new iD.Entity();
-    _.extend(Subclass.prototype, properties);
-    iD.Entity[properties.type] = Subclass;
-
-    return Subclass;
-};
