@@ -29,6 +29,9 @@ iD.Map = function() {
         surface = supersurface.append('svg')
             .on('mouseup.reset-transform', resetTransform)
             .on('touchend.reset-transform', resetTransform)
+            .on('mousedown.drag', function() {
+                translateStart = projection.translate();
+            })
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
@@ -128,7 +131,6 @@ iD.Map = function() {
             .translate(d3.event.translate)
             .scale(d3.event.scale);
         if (fast) {
-            if (!translateStart) translateStart = d3.event.translate.slice();
             var a = d3.event.translate,
                 b = translateStart,
                 translate = 'translate(' + ~~(a[0] - b[0]) + 'px,' +
