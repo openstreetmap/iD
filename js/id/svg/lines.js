@@ -1,14 +1,15 @@
 iD.svg.Lines = function() {
 
-    var Lines = this;
+        var arrowtext = '►\u3000\u3000',
+            alength;
 
     return function(surface, graph, entities, filter, projection) {
-        var arrowtext = '►\u3000\u3000';
-        if (!Lines.alength) {
+        if (!alength) {
             var arrow = surface.append('text').text(arrowtext);
-            Lines.alength = arrow.node().getComputedTextLength();
+            alength = arrow.node().getComputedTextLength();
             arrow.remove();
         }
+
         var lines = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -55,7 +56,7 @@ iD.svg.Lines = function() {
         // Determine the lengths of oneway paths
         var lengths = {},
             oneways = strokes.filter(function (d) { return d.isOneWay(); }).each(function(d) {
-                lengths[d.id] = Math.floor(this.getTotalLength() / Lines.alength);
+                lengths[d.id] = Math.floor(this.getTotalLength() / alength);
             }).data();
 
         var uses = defs.selectAll('path')

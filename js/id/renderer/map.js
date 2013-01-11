@@ -16,6 +16,11 @@ iD.Map = function() {
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
+        points = iD.svg.Points(),
+        vertices = iD.svg.Vertices(),
+        lines = iD.svg.Lines(),
+        areas = iD.svg.Areas(),
+        midpoints = iD.svg.Midpoints(),
         surface, tilegroup;
 
     function map(selection) {
@@ -96,11 +101,11 @@ iD.Map = function() {
         }
 
         surface
-            .call(iD.svg.Points(),    graph, all, filter, projection)
-            .call(iD.svg.Vertices(),  graph, all, filter, projection)
-            .call(iD.svg.Lines(),     graph, all, filter, projection)
-            .call(iD.svg.Areas(),     graph, all, filter, projection)
-            .call(iD.svg.Midpoints(), graph, all, filter, projection);
+            .call(points, graph, all, filter, projection)
+            .call(vertices, graph, all, filter, projection)
+            .call(lines, graph, all, filter, projection)
+            .call(areas, graph, all, filter, projection)
+            .call(midpoints, graph, all, filter, projection);
     }
 
     function editOff() {
