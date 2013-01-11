@@ -33,7 +33,7 @@ iD.svg.Lines = function() {
             paths
                 .order()
                 .attr('d', lineString)
-                .call(iD.Style.styleClasses());
+                .call(iD.svg.TagClasses());
 
             paths.exit()
                 .remove();
