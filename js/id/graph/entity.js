@@ -26,7 +26,7 @@ iD.Entity.id.toOSM = function (id) {
 // A function suitable for use as the second argument to d3.selection#data().
 iD.Entity.key = function (entity) {
     return entity.id;
-}
+};
 
 iD.Entity.prototype = {
     tags: {},

@@ -77,8 +77,15 @@ iD.Connection = function() {
             delete o.lat;
         }
         o.id = iD.Entity.id.fromOSM(o.type, o.id);
-        if (o.type === 'node') o._poi = !refNodes[o.id];
-        return iD.Entity(o);
+        switch (o.type) {
+            case 'node':
+                o._poi = !refNodes[o.id];
+                return iD.Node(o);
+            case 'way':
+                return iD.Way(o);
+            case 'relation':
+                return iD.Relation(o);
+        }
     }
 
     function parse(dom) {
