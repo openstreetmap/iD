@@ -77,13 +77,6 @@ iD.modes.DrawArea = function(wayId) {
             }
         }
 
-        function esc() {
-            history.replace(
-                iD.actions.DeleteNode(node.id));
-
-            controller.enter(iD.modes.Browse());
-        }
-
         function backspace() {
             d3.event.preventDefault();
 
@@ -109,11 +102,8 @@ iD.modes.DrawArea = function(wayId) {
 
         function ret() {
             d3.event.preventDefault();
-            history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, tailId, -1),
-                    'added to an area');
-            controller.enter(iD.modes.Browse());
+            history.replace(iD.actions.DeleteNode(node.id));
+            controller.enter(iD.modes.Select(way));
         }
 
         surface
@@ -122,9 +112,9 @@ iD.modes.DrawArea = function(wayId) {
             .on('click.drawarea', click);
 
         map.keybinding()
-            .on('⎋.drawarea', esc)
             .on('⌫.drawarea', backspace)
             .on('⌦.drawarea', del)
+            .on('⎋.drawarea', ret)
             .on('↩.drawarea', ret);
     };
 
