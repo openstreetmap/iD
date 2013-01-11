@@ -85,7 +85,7 @@ g.vertex circle.selected {
     fill: #ffff00;
 }
 
-circle.accuracy-handle {
+circle.midpoint {
     fill:#aaa;
     stroke:#333;
     fill-opacity:1;
@@ -311,8 +311,8 @@ text.tag-oneway {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 
-.mode-select .accuracy-handle,
-.mode-browse .accuracy-handle {
+.mode-select .midpoint,
+.mode-browse .midpoint {
     cursor: url(../img/cursor-select-split.png), pointer;
 }
 
@@ -320,7 +320,7 @@ text.tag-oneway {
 .vertex:active,
 .line:active,
 .area:active,
-.accuracy-handle:active,
+.midpoint:active,
 .mode-select .selected {
     cursor: url(../img/cursor-select-acting.png), pointer;
 }

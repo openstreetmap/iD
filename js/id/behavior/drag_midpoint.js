@@ -1,9 +1,9 @@
-iD.behavior.DragAccuracyHandle = function(mode) {
+iD.behavior.DragMidpoint = function(mode) {
     var history = mode.history,
         projection = mode.map.projection;
 
     return iD.behavior.drag()
-        .delegate(".accuracy-handle")
+        .delegate(".midpoint")
         .origin(function(d) {
             return projection(d.loc);
         })

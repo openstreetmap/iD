@@ -14,7 +14,7 @@ iD.modes.Browse = function() {
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.DragNode(mode),
-            iD.behavior.DragAccuracyHandle(mode)];
+            iD.behavior.DragMidpoint(mode)];
 
         behaviors.forEach(function(behavior) {
             behavior(surface);

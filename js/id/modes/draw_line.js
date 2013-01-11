@@ -64,10 +64,10 @@ iD.modes.DrawLine = function(wayId, direction) {
 
                 controller.enter(iD.modes.DrawLine(wayId, direction));
 
-            } else if (datum.type === 'way' || datum.accuracy) {
+            } else if (datum.type === 'way' || datum.midpoint) {
                 // connect the way to an existing way
-                if (datum.accuracy) {
-                    // if clicked on accuracy handle
+                if (datum.midpoint) {
+                    // if clicked on midpoint
                     datum.id = datum.way;
                     choice = datum;
                 } else {

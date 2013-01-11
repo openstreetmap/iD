@@ -14,19 +14,19 @@ iD.svg.Midpoints = function() {
                         loc: iD.util.geo.interp(entity.nodes[j].loc, entity.nodes[j + 1].loc, 0.5),
                         way: entity.id,
                         index: j + 1,
-                        accuracy: true
+                        midpoint: true
                     });
                 }
             }
         }
 
-        var handles = surface.select('.layer-hit').selectAll('circle.accuracy-handle')
+        var handles = surface.select('.layer-hit').selectAll('circle.midpoint')
             .filter(filter)
             .data(midpoints, function (d) { return [d.way, d.index].join(","); });
 
         handles.enter()
             .append('circle')
-            .attr({ r: 3, 'class': 'accuracy-handle' });
+            .attr({ r: 3, 'class': 'midpoint' });
 
         handles.attr('transform', iD.svg.PointTransform(projection));
 

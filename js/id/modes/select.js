@@ -33,7 +33,7 @@ iD.modes.Select = function (entity) {
             iD.behavior.Hover(),
             iD.behavior.DragNode(mode),
             iD.behavior.DragWay(mode),
-            iD.behavior.DragAccuracyHandle(mode)];
+            iD.behavior.DragMidpoint(mode)];
 
         behaviors.forEach(function(behavior) {
             behavior(surface);
