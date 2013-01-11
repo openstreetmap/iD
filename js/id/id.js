@@ -198,8 +198,8 @@ window.iD = function(container) {
                 controller.enter(iD.modes.AddLine());
             })
             .on('z', function(evt, mods) {
-                if (mods === '⇧⌘') history.redo();
-                if (mods === '⌘') history.undo();
+                if (mods === '⇧⌘' || mods === '⌃⇧') history.redo();
+                if (mods === '⌘' || mods === '⌃') history.undo();
             });
 
         var hash = iD.Hash().map(map);

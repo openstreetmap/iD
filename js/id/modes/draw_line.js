@@ -116,6 +116,11 @@ iD.modes.DrawLine = function(wayId, direction) {
             controller.enter(iD.modes.Browse());
         }
 
+        function undo() {
+            history.undo();
+            controller.enter(iD.modes.Browse());
+        }
+
         surface
             .on('mousemove.drawline', mousemove)
             .on('click.drawline', click);
@@ -124,12 +129,13 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('⎋.drawline', esc)
             .on('⌫.drawline', backspace)
             .on('⌦.drawline', del)
-            .on('↩.drawline', ret);
+            .on('↩.drawline', ret)
+            .on('z.drawline', function(evt, mods) {
+                if (mods === '⌘' || mods === '⌃') undo();
+            });
 
-        d3.select('#undo').on('click.drawline', function() {
-            history.undo();
-            controller.enter(iD.modes.Browse());
-        });
+        d3.select('#undo').on('click.drawline', undo);
+
 
     };
 
