@@ -54,10 +54,10 @@ iD.Map = function() {
             .attr('clip-path', 'url(#clip)');
 
         var layers = clip.selectAll('.layer')
-            .data(['fill', 'casing', 'stroke', 'text', 'hit'])
+            .data(['fill', 'casing', 'stroke', 'text', 'hit']);
 
         layers.enter().append('g')
-            .attr('class', function(d) { return 'class', 'layer layer-' + d; });
+            .attr('class', function(d) { return 'layer layer-' + d; });
 
         map.size(selection.size());
         map.surface = surface;
