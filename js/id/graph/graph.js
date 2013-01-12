@@ -36,19 +36,27 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        var graph = this;
-        return this.transient(entity, 'parentWays',
-            function generateParentWays() {
-            var o = [];
+        var graph = this,
+            ent,
+            node;
+
+        if (!graph.calculatedParentWays) {
             for (var i in graph.entities) {
-                if (graph.entities[i] &&
-                    graph.entities[i].type === 'way' &&
-                    graph.entities[i].nodes.indexOf(this.id) !== -1) {
-                    o.push(graph.entities[i]);
+                ent = graph.entities[i];
+                if (ent && ent.type === 'way') {
+                    for (var j = 0; j < ent.nodes.length; j++) {
+                        node = graph.entities[ent.nodes[j]];
+                        node.parentways = node.parentways || [];
+                        if (node.parentways.indexOf(ent) < 0) {
+                            node.parentways.push(ent);
+                        }
+                    }
                 }
             }
-            return o;
-        });
+            graph.calculatedParentWays = true;
+        }
+
+        return entity.parentways || [];
     },
 
     parentRelations: function(entity) {
