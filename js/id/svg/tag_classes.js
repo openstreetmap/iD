@@ -21,7 +21,7 @@ iD.svg.TagClasses = function() {
                 classes.push('tag-' + k + '-' + tags[k]);
             }
 
-            return this.className = classes.join(' ');
+            return d3.select(this).attr('class', classes.join(' '));
         });
     };
 };
