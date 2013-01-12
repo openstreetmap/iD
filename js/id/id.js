@@ -194,7 +194,7 @@ window.iD = function(container) {
             .on('p', function(evt, mods) {
                 controller.enter(iD.modes.AddPoint());
             })
-            .on('r', function(evt, mods) {
+            .on('l', function(evt, mods) {
                 controller.enter(iD.modes.AddLine());
             })
             .on('z', function(evt, mods) {
