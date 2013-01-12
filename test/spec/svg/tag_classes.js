@@ -9,7 +9,7 @@ describe("iD.svg.TagClasses", function () {
         selection
             .datum(iD.Entity())
             .call(iD.svg.TagClasses());
-        expect(selection.attr('class')).to.equal('');
+        expect(selection.attr('class')).to.equal(null);
     });
 
     it('adds classes for highway tags', function() {
@@ -40,6 +40,6 @@ describe("iD.svg.TagClasses", function () {
         selection
             .datum(iD.Entity())
             .call(iD.svg.TagClasses());
-        expect(selection.attr('class')).to.equal('');
+        expect(selection.attr('class')).to.equal(null);
     });
 });
