@@ -12,6 +12,7 @@ iD.Graph = function(entities) {
 
     this.transients = {};
     this._parentWays = {};
+    this._parentRels = {};
 
     if (iD.debug) {
         Object.freeze(this);
@@ -37,19 +38,17 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        var graph = this,
-            ent,
-            id;
+        var ent, id, parents;
 
         if (!this._parentWays.calculated) {
-            for (var i in graph.entities) {
-                ent = graph.entities[i];
+            for (var i in this.entities) {
+                ent = this.entities[i];
                 if (ent && ent.type === 'way') {
                     for (var j = 0; j < ent.nodes.length; j++) {
                         id = ent.nodes[j];
-                        this._parentWays[id] = this._parentWays[id] || [];
-                        if (this._parentWays[id].indexOf(ent) < 0) {
-                            this._parentWays[id].push(ent);
+                        parents = this._parentWays[id] = this._parentWays[id] || [];
+                        if (parents.indexOf(ent) < 0) {
+                            parents.push(ent);
                         }
                     }
                 }
@@ -61,21 +60,25 @@ iD.Graph.prototype = {
     },
 
     parentRelations: function(entity) {
-        var graph = this;
-        return this.transient(entity, 'parentRelations',
-            function generateParentRelations() {
-            var o = [], id = this.id;
-            for (var i in graph.entities) {
-                if (graph.entities[i] &&
-                    graph.entities[i].type === 'relation' &&
-                    _.find(graph.entities[i].members, function(e) {
-                        return e.id === id;
-                    })) {
-                    o.push(graph.entities[i]);
+        var ent, id, parents;
+
+        if (!this._parentRels.calculated) {
+            for (var i in this.entities) {
+                ent = this.entities[i];
+                if (ent && ent.type === 'relation') {
+                    for (var j = 0; j < ent.members.length; j++) {
+                        id = ent.members[j].id;
+                        parents = this._parentRels[id] = this._parentRels[id] || [];
+                        if (parents.indexOf(ent) < 0) {
+                            parents.push(ent);
+                        }
+                    }
                 }
             }
-            return o;
-        });
+            this._parentRels.calculated = true;
+        }
+
+        return this._parentRels[entity.id] || [];
     },
 
     merge: function(graph) {
