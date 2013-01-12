@@ -8,7 +8,7 @@ iD.actions.DeleteNode = function(nodeId) {
                 graph = iD.actions.RemoveWayNode(parent.id, nodeId)(graph);
             });
 
-        graph.parentRelations(nodeId)
+        graph.parentRelations(node)
             .forEach(function(parent) {
                 graph = iD.actions.RemoveRelationMember(parent.id, nodeId)(graph);
             });

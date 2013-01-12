@@ -1,8 +1,8 @@
 // https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 iD.actions.SplitWay = function(nodeId) {
     return function(graph) {
-
-        var parents = graph.parentWays(nodeId);
+        var node = graph.entity(nodeId),
+            parents = graph.parentWays(node);
 
         // splitting ways at intersections TODO
         if (parents.length !== 1) return graph;
@@ -19,7 +19,7 @@ iD.actions.SplitWay = function(nodeId) {
         // Reduce the original way to only contain the first set of nodes
         graph = graph.replace(way.update({ nodes: way.nodes.slice(0, idx + 1) }), 'changed way direction');
 
-        var parentRelations = graph.parentRelations(way.id);
+        var parentRelations = graph.parentRelations(way);
 
         function isVia(x) { return x.role = 'via'; }
         function isSelf(x) { return x.id = way.id; }
