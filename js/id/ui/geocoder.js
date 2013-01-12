@@ -10,6 +10,11 @@ iD.geocoder = function() {
                 encodeURIComponent(this.value) + '.json', function(err, resp) {
                 if (err) return hide();
                 hide();
+                if (!resp.results.length) {
+                    return iD.flash()
+                        .select('.content')
+                        .text('No location found for "' + resp.query[0] + '"');
+                }
                 map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
             });
         }
