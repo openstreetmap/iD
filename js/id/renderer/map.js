@@ -41,23 +41,8 @@ iD.Map = function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
                 }
-            });
-
-        surface.append('defs')
-            .append('clipPath')
-                .attr('id', 'clip')
-            .append('rect')
-                .attr('id', 'clip-rect')
-                .attr({ x: 0, y: 0 });
-
-        var clip = surface.append('g')
-            .attr('clip-path', 'url(#clip)');
-
-        var layers = clip.selectAll('.layer')
-            .data(['fill', 'casing', 'stroke', 'text', 'hit']);
-
-        layers.enter().append('g')
-            .attr('class', function(d) { return 'layer layer-' + d; });
+            })
+            .call(iD.svg.Surface());
 
         map.size(selection.size());
         map.surface = surface;

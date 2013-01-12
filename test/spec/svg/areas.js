@@ -4,10 +4,8 @@ describe("iD.svg.Areas", function () {
         filter = d3.functor(true);
 
     beforeEach(function () {
-        surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
-
-        surface.append('g')
-            .attr('class', 'layer-fill');
+        surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
+            .call(iD.svg.Surface());
     });
 
     it("adds tag classes", function () {
