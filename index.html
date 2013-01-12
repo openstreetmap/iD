@@ -6,6 +6,7 @@ layout: default
 <div class='pad4 center header col12'>
   <h1>{{page.title}}</h1>
   <h2>A Javascript OpenStreetMap Editor</h2>
+  <div class='screenshot'></div>
 </div>
 
 <div class='shadow'>
@@ -15,10 +16,9 @@ layout: default
         <div class='col6 pad4 content section'>
           <h2>{{item.title}}</h2>
           {{item.content | markdownify}}
-        {% if item.title == 'Contribute' %}
-        <a class='button' href='https://github.com/systemed/iD/issues?state=open'/>iD on GitHub</a>
-        {% endif %}
-
+          {% if item.title == 'Contribute' %}
+            <a class='button' href='https://github.com/systemed/iD/issues?state=open'/>iD on GitHub</a>
+          {% endif %}
         </div>
       {% endfor %}
       <div class='col6 pad4 content trynow'>
@@ -28,8 +28,7 @@ layout: default
       </div>
     </div>
   </div>
-</div>
-
-<div class='footer clearfix center pad4 col12'>
-  <p>A couple lines about who and how iD is being developed + link to the osmdev blog</p>
+  <div class='footer clearfix center pad4 col12'>
+    <p>A couple lines about who is behind iD + link to the osmdev blog</p>
+  </div>
 </div>

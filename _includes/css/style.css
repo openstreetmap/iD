@@ -3,17 +3,18 @@ body  {
 }
 
 .header {
-  background: url({{site.baseurl}}/img/background.jpg) 50% 50% no-repeat;
+  background: url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
   color: #f8f8f8;
   overflow: hidden;
   position: fixed;
   z-index: 1;
-  height: 250px;
+  height: 800px;
   top: 0;
+  overflow: hidden;
 }
 
 .shadow {
-  margin-top: 240px;
+  margin-top: 570px;
   position: relative;
   background: #f8f8f8;
   z-index: 2;
@@ -23,6 +24,16 @@ body  {
   margin: auto;
   max-width: 1000px;
   padding-bottom: 40px;
+}
+
+.screenshot {
+  background: url({{site.baseurl}}/img/editor.png) 0 0 no-repeat;
+  position: relative;
+  height: 673px;
+  width: 1059px;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .content.pad4 { padding-bottom: 0;}
