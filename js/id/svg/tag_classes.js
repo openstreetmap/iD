@@ -4,8 +4,8 @@ iD.svg.TagClasses = function() {
         'landuse', 'building', 'oneway', 'bridge'
     ]), tagClassRe = /^tag-/;
 
-    return function(selection) {
-        selection.each(function(d, i) {
+    return function tagClassesSelection(selection) {
+        selection.each(function tagClassesEach(d, i) {
             var classes, value = this.className;
 
             if (value.baseVal !== undefined) value = value.baseVal;
@@ -21,7 +21,7 @@ iD.svg.TagClasses = function() {
                 classes.push('tag-' + k + '-' + tags[k]);
             }
 
-            return d3.select(this).attr('class', classes.join(' '));
+            return this.className = classes.join(' ');
         });
     };
 };
