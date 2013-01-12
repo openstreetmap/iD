@@ -11,6 +11,7 @@ iD.Graph = function(entities) {
     }
 
     this.transients = {};
+    this._parentWays = {};
 
     if (iD.debug) {
         Object.freeze(this);
@@ -36,19 +37,27 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        var graph = this;
-        return this.transient(entity, 'parentWays',
-            function generateParentWays() {
-            var o = [];
+        var graph = this,
+            entity,
+            id;
+
+        if (!graph.calculatedParentWays) {
             for (var i in graph.entities) {
-                if (graph.entities[i] &&
-                    graph.entities[i].type === 'way' &&
-                    graph.entities[i].nodes.indexOf(this.id) !== -1) {
-                    o.push(graph.entities[i]);
+                entity = graph.entities[i];
+                if (entity && entity.type === 'way') {
+                    for (var j = 0; j < entity.nodes.length; j++) {
+                        id = entity.nodes[j];
+                        this._parentWays[id] = this._parentWays[id] || [];
+                        if (this._parentWays[id].indexOf(entity) < 0) {
+                            this._parentWays[id].push(entity);
+                        }
+                    }
                 }
             }
-            return o;
-        });
+            graph.calculatedParentWays = true;
+        }
+
+        return this._parentWays[entity.id] || [];
     },
 
     parentRelations: function(entity) {
