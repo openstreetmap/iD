@@ -22,8 +22,13 @@ iD.svg.Lines = function() {
         var lineStrings = {};
 
         function lineString(entity) {
-            return lineStrings[entity.id] || (lineStrings[entity.id] =
-                'M' + _.pluck(entity.nodes, 'loc').map(iD.svg.RoundProjection(projection)).join('L'));
+            if (lineStrings[entity.id] !== undefined) {
+                return lineStrings[entity.id];
+            }
+            var nodes = _.pluck(entity.nodes, 'loc');
+            if (nodes.length === 0) return (lineStrings[entity.id] = '');
+            else return (lineStrings[entity.id] =
+                'M' + nodes.map(iD.svg.RoundProjection(projection)).join('L'));
         }
 
         function drawPaths(group, lines, filter, classes) {
