@@ -38,18 +38,18 @@ iD.Graph.prototype = {
 
     parentWays: function(entity) {
         var graph = this,
-            entity,
+            ent,
             id;
 
         if (!graph.calculatedParentWays) {
             for (var i in graph.entities) {
-                entity = graph.entities[i];
-                if (entity && entity.type === 'way') {
-                    for (var j = 0; j < entity.nodes.length; j++) {
-                        id = entity.nodes[j];
+                ent = graph.entities[i];
+                if (ent && ent.type === 'way') {
+                    for (var j = 0; j < ent.nodes.length; j++) {
+                        id = ent.nodes[j];
                         this._parentWays[id] = this._parentWays[id] || [];
-                        if (this._parentWays[id].indexOf(entity) < 0) {
-                            this._parentWays[id].push(entity);
+                        if (this._parentWays[id].indexOf(ent) < 0) {
+                            this._parentWays[id].push(ent);
                         }
                     }
                 }
