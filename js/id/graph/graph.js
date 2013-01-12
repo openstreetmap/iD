@@ -41,7 +41,7 @@ iD.Graph.prototype = {
             ent,
             id;
 
-        if (!graph.calculatedParentWays) {
+        if (!this._parentWays.calculated) {
             for (var i in graph.entities) {
                 ent = graph.entities[i];
                 if (ent && ent.type === 'way') {
@@ -54,7 +54,7 @@ iD.Graph.prototype = {
                     }
                 }
             }
-            graph.calculatedParentWays = true;
+            this._parentWays.calculated = true;
         }
 
         return this._parentWays[entity.id] || [];
