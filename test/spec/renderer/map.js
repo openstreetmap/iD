@@ -53,11 +53,17 @@ describe('Map', function() {
     });
 
     describe('#extent', function() {
-        it('reports extent', function() {
+        it('gets and sets extent', function() {
             expect(map.size([100, 100])).to.equal(map);
             expect(map.center([0, 0])).to.equal(map);
             expect(map.extent()[0][0]).to.be.closeTo(-17.5, 0.5);
             expect(map.extent()[1][0]).to.be.closeTo(17.5, 0.5);
+            expect(map.extent([10, 1], [30, 1]));
+            expect(map.extent()[0][0]).to.be.closeTo(10, 0.1);
+            expect(map.extent()[1][0]).to.be.closeTo(30, 0.1);
+            expect(map.extent([-1, -20], [1, -40]));
+            expect(map.extent()[0][1]).to.be.closeTo(-20, 0.1);
+            expect(map.extent()[1][1]).to.be.closeTo(-40, 0.1);
         });
     });
 

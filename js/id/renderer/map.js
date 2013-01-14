@@ -252,17 +252,17 @@ iD.Map = function() {
                 BR = projection(br);
 
             // Calculate maximum zoom that fits extent
-            hFactor = (BR[0] - TL[0]) / dimensions[0];
-            vFactor = (BR[1] - TL[1]) / dimensions[1];
-            hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
-            vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
-            zoomDiff = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
+            var hFactor = (BR[0] - TL[0]) / dimensions[0],
+                vFactor = (BR[1] - TL[1]) / dimensions[1],
+                hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
+                vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
+                newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
             // Calculate center of projected extent
-            midPoint = [(TL[0] + BR[0]) / 2, (TL[1] + BR[1]) / 2];
-            midLoc = projection.invert(midPoint);
+            var midPoint = [(TL[0] + BR[0]) / 2, (TL[1] + BR[1]) / 2],
+                midLoc = projection.invert(midPoint);
 
-            map.zoom(zoomDiff).center(midLoc);
+            map.zoom(newZoom).center(midLoc);
         }
     };
 
