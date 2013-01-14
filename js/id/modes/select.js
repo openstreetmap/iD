@@ -80,6 +80,13 @@ iD.modes.Select = function (entity) {
             mode.controller.exit();
         });
 
+        // Exit mode if selected entity gets undone
+        mode.history.on('change.entity-undone', function() {
+            if (!mode.history.graph().entity(entity.id)) {
+                mode.controller.enter(iD.modes.Browse());
+            }
+        });
+
         function click() {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
@@ -133,6 +140,7 @@ iD.modes.Select = function (entity) {
 
         surface.on("click.select", null);
         mode.map.keybinding().on('⌫.select', null);
+        mode.history.on('change.entity-undone', null);
 
         surface.selectAll(".selected")
             .classed('selected', false);
