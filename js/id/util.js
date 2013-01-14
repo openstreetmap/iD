@@ -133,3 +133,15 @@ iD.util.geo.pointInPolygon = function(point, polygon) {
 
     return inside;
 };
+
+iD.util.geo.polygonContainsPolygon = function(outer, inner) {
+    return _.every(inner, function (point) {
+        return iD.util.geo.pointInPolygon(point, outer);
+    });
+};
+
+iD.util.geo.polygonIntersectsPolygon = function(outer, inner) {
+    return _.some(inner, function (point) {
+        return iD.util.geo.pointInPolygon(point, outer);
+    });
+};

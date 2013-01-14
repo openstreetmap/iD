@@ -154,5 +154,83 @@ describe('iD.Relation', function () {
 
             expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
         });
+
+        specify("single polygon with single single-way inner", function () {
+            var a = iD.Node({loc: [0, 0]}),
+                b = iD.Node({loc: [1, 0]}),
+                c = iD.Node({loc: [0, 1]}),
+                d = iD.Node({loc: [0.1, 0.1]}),
+                e = iD.Node({loc: [0.2, 0.1]}),
+                f = iD.Node({loc: [0.1, 0.2]}),
+                outer = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                inner = iD.Way({nodes: [d.id, e.id, f.id, d.id]}),
+                r = iD.Relation({members: [{id: outer.id, type: 'way'}, {id: inner.id, role: 'inner', type: 'way'}]}),
+                g = iD.Graph([a, b, c, d, e, f, outer, inner, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, a], [d, e, f, d]]]);
+        });
+
+        specify("single polygon with single multi-way inner", function () {
+            var a = iD.Node({loc: [0, 0]}),
+                b = iD.Node({loc: [1, 0]}),
+                c = iD.Node({loc: [0, 1]}),
+                d = iD.Node({loc: [0.1, 0.1]}),
+                e = iD.Node({loc: [0.2, 0.1]}),
+                f = iD.Node({loc: [0.2, 0.1]}),
+                outer = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                inner1 = iD.Way({nodes: [d.id, e.id]}),
+                inner2 = iD.Way({nodes: [e.id, f.id, d.id]}),
+                r = iD.Relation({members: [
+                    {id: outer.id, type: 'way'},
+                    {id: inner2.id, role: 'inner', type: 'way'},
+                    {id: inner1.id, role: 'inner', type: 'way'}]}),
+                graph = iD.Graph([a, b, c, d, e, f, outer, inner1, inner2, r]);
+
+            expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d]]]);
+        });
+
+        specify("single polygon with multiple single-way inners", function () {
+            var a = iD.Node({loc: [0, 0]}),
+                b = iD.Node({loc: [1, 0]}),
+                c = iD.Node({loc: [0, 1]}),
+                d = iD.Node({loc: [0.1, 0.1]}),
+                e = iD.Node({loc: [0.2, 0.1]}),
+                f = iD.Node({loc: [0.1, 0.2]}),
+                g = iD.Node({loc: [0.2, 0.2]}),
+                h = iD.Node({loc: [0.3, 0.2]}),
+                i = iD.Node({loc: [0.2, 0.3]}),
+                outer = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                inner1 = iD.Way({nodes: [d.id, e.id, f.id, d.id]}),
+                inner2 = iD.Way({nodes: [g.id, h.id, i.id, g.id]}),
+                r = iD.Relation({members: [
+                    {id: outer.id, type: 'way'},
+                    {id: inner2.id, role: 'inner', type: 'way'},
+                    {id: inner1.id, role: 'inner', type: 'way'}]}),
+                graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer, inner1, inner2, r]);
+
+            expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d], [g, h, i, g]]]);
+        });
+
+        specify("multiple polygons with single single-way inner", function () {
+            var a = iD.Node({loc: [0, 0]}),
+                b = iD.Node({loc: [1, 0]}),
+                c = iD.Node({loc: [0, 1]}),
+                d = iD.Node({loc: [0.1, 0.1]}),
+                e = iD.Node({loc: [0.2, 0.1]}),
+                f = iD.Node({loc: [0.1, 0.2]}),
+                g = iD.Node({loc: [0, 0]}),
+                h = iD.Node({loc: [-1, 0]}),
+                i = iD.Node({loc: [0, -1]}),
+                outer1 = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                outer2 = iD.Way({nodes: [g.id, h.id, i.id, g.id]}),
+                inner = iD.Way({nodes: [d.id, e.id, f.id, d.id]}),
+                r = iD.Relation({members: [
+                    {id: outer2.id, type: 'way'},
+                    {id: outer1.id, type: 'way'},
+                    {id: inner.id, role: 'inner', type: 'way'}]}),
+                graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer1, outer2, inner, r]);
+
+            expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d]], [[g, h, i, g]]]);
+        });
     });
 });
