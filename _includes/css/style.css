@@ -23,10 +23,6 @@ h1 {
   overflow: hidden;
 }
 
-.fill2L {
-background: #F7F7F7 url(../img/background-pattern-1.png) repeat;
-}
-
 .shadow {
   margin-top: 590px;
   position: relative;
@@ -54,23 +50,34 @@ background: #F7F7F7 url(../img/background-pattern-1.png) repeat;
      -moz-animation:fadeIn .5s ease-out .5s both;
        -o-animation:fadeIn .5s ease-out .5s both;
           animation:fadeIn .5s ease-out .5s both;
+  -webkit-transition:top .5s ease-out 0s;
+     -moz-transition:top .5s ease-out 0s;
+       -o-transition:top .5s ease-out 0s;
+          transition:top .5s ease-out 0s;
 }
+.screenshot:hover {
+  top: -180px;
+}
+
 
 @-webkit-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
    @-moz-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
      @-o-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
         @keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
 
-.basics { border-right: 1px solid #ddd; } 
+.basics { border-right: 1px solid #ddd; }
 
 .spot-illo { 
+  background: url({{site.baseurl}}/img/sprite.png) 50% -90px no-repeat;
   height: 150px;
-  margin-bottom: 20px;
   width: 100%;
 }
-
+.basics .spot-illo { 
+  background: url({{site.baseurl}}/img/sprite.png) 50% -225px no-repeat;
+}
 .video { 
-  border-radius: 5px; 
+  border-radius: 5px;
+  border: 1px solid #ddd;
 }
 
 .force-aspect-ratio {
@@ -79,7 +86,6 @@ background: #F7F7F7 url(../img/background-pattern-1.png) repeat;
   width: 100%;
   padding-bottom: 56%;
   height: 0;
-  box-shadow: 0 0 50px 0px rgba(0, 0, 0, .2);
 }
 
 #player {
@@ -106,5 +112,19 @@ a.button {
 }
 a.button:hover { background: #54af29; }
 
+.footer {
+ background: #141516;
+}
+
 @media only screen and (max-width: 640px) {
+  .basics,
+  .video {
+    border: 0;
+    border-radius: 0;
+  }
+  .video { border-top: 1px solid #ddd;}
+  .actions .pad4 { padding-bottom: 20px; }
+  .actions .col6:last-child { border-left: 0;}
+  .actions .col6 { border-top: 1px solid #ddd; }
+
 }
