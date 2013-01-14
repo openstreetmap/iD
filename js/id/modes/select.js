@@ -26,6 +26,14 @@ iD.modes.Select = function (entity) {
         mode.controller.exit();
     }
 
+    function changeTags(d, tags) {
+        if (!_.isEqual(entity.tags, tags)) {
+            mode.history.perform(
+                iD.actions.ChangeEntityTags(d.id, tags),
+                'changed tags');
+        }
+    }
+
     mode.enter = function () {
         var surface = mode.map.surface;
 
@@ -58,12 +66,9 @@ iD.modes.Select = function (entity) {
             right > left_edge) mode.map.centerEase(
                 mode.map.projection.invert([(window.innerWidth), d3.event.y]));
 
-        inspector.on('changeTags', function(d, tags) {
-            mode.history.perform(
-                iD.actions.ChangeEntityTags(d.id, tags),
-                'changed tags');
-
-        }).on('changeWayDirection', function(d) {
+        inspector
+            .on('changeTags', changeTags)
+            .on('changeWayDirection', function(d) {
             mode.history.perform(
                 iD.actions.ReverseWay(d.id),
                 'reversed a way');
@@ -82,8 +87,11 @@ iD.modes.Select = function (entity) {
 
         // Exit mode if selected entity gets undone
         mode.history.on('change.entity-undone', function() {
-            if (!mode.history.graph().entity(entity.id)) {
+            entity = mode.history.graph().entity(entity.id);
+            if (!entity) {
                 mode.controller.enter(iD.modes.Browse());
+            } else {
+                d3.select('.inspector-wrap').datum(entity).call(inspector);
             }
         });
 
@@ -130,6 +138,7 @@ iD.modes.Select = function (entity) {
     mode.exit = function () {
         var surface = mode.map.surface;
 
+        changeTags(entity, inspector.tags());
         d3.select('.inspector-wrap')
             .style('display', 'none')
             .html('');
