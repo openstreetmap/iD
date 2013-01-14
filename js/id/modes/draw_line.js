@@ -160,6 +160,8 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('⌦.drawline', null)
             .on('↩.drawline', null);
 
+        d3.select('#undo').on('click.drawline', null);
+
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);
