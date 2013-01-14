@@ -24,10 +24,11 @@ iD.modes.AddLine = function() {
                 // continue an existing way
                 var id = datum.id;
                 var parents = history.graph().parentWays(datum);
-                if (parents.length && parents[0].nodes[0] === id) {
+                var isWay = parents.length && parents[0].tags.area !== 'yes';
+                if (isWay && parents[0].nodes[0] === id ) {
                     way = parents[0];
                     direction = 'backward';
-                } else if (parents.length && _.last(parents[0].nodes) === id) {
+                } else if (isWay && _.last(parents[0].nodes) === id) {
                     way = parents[0];
                 } else {
                     history.perform(
