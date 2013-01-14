@@ -1,9 +1,19 @@
 body  {
-  background: #f8f8f8;
+  background: white;
+}
+
+h1 { 
+  background: url({{site.baseurl}}/img/sprite.png) 0 0 no-repeat;
+  text-indent: -9999px;
+  overflow: auto;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 .header {
-  background: url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
+  background: #141516 url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
   color: #f8f8f8;
   overflow: hidden;
   position: fixed;
@@ -13,20 +23,26 @@ body  {
   overflow: hidden;
 }
 
+.fill2L {
+background: #F7F7F7 url(../img/background-pattern-1.png) repeat;
+}
+
 .shadow {
-  margin-top: 570px;
+  margin-top: 590px;
   position: relative;
-  background: #f8f8f8;
+  background: white;
   z-index: 2;
 }
 
 .limit {
   margin: auto;
   max-width: 1000px;
-  padding-bottom: 40px;
 }
 
+.section { padding-top: 0;}
+
 .screenshot {
+  opacity: 0;
   background: url({{site.baseurl}}/img/editor.png) 0 0 no-repeat;
   position: relative;
   height: 673px;
@@ -34,17 +50,52 @@ body  {
   left: 0;
   right: 0;
   margin: auto;
+  -webkit-animation:fadeIn .5s ease-out .5s both;
+     -moz-animation:fadeIn .5s ease-out .5s both;
+       -o-animation:fadeIn .5s ease-out .5s both;
+          animation:fadeIn .5s ease-out .5s both;
 }
 
-.content.pad4 { padding-bottom: 0;}
+@-webkit-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
+   @-moz-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
+     @-o-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
+        @keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
 
-.footer {
-  background: #c1c1c1;
+.basics { border-right: 1px solid #ddd; } 
+
+.spot-illo { 
+  height: 150px;
+  margin-bottom: 20px;
+  width: 100%;
 }
+
+.video { 
+  border-radius: 5px; 
+}
+
+.force-aspect-ratio {
+  margin: auto;
+  position: relative;
+  width: 100%;
+  padding-bottom: 56%;
+  height: 0;
+  box-shadow: 0 0 50px 0px rgba(0, 0, 0, .2);
+}
+
+#player {
+  position: absolute;
+  left: 0; right: 0;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+.actions .col6:last-child { border-left: 1px solid #ddd; } 
+.actions .pad4 { padding-bottom: 0;}
 
 a.button {
+  margin-bottom: 20px;
   display: block;
-  width: 50%;
   background:#77c453;
   color: white;
   font-weight: bold;
@@ -56,5 +107,4 @@ a.button {
 a.button:hover { background: #54af29; }
 
 @media only screen and (max-width: 640px) {
-  a.button { width: 100%;}
 }

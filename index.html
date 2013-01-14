@@ -10,25 +10,37 @@ layout: default
 </div>
 
 <div class='shadow'>
-  <div class='limit'>
-    <div class='clearfix content'>
+  <div class='limit pad4'>
+
       {% for item in site.posts reversed %}
-        <div class='col6 pad4 content section'>
+        <div class='col6 pad4 section {{item.title | downcase | remove: ' '}}'>
           <h2>{{item.title}}</h2>
+          <div class='spot-illo'></div>
           {{item.content | markdownify}}
-          {% if item.title == 'Contribute' %}
-            <a class='button' href='https://github.com/systemed/iD/issues?state=open'/>iD on GitHub</a>
-          {% endif %}
         </div>
       {% endfor %}
-      <div class='col6 pad4 content trynow'>
-        <h2>Try it now</h2>
-        <p>The latest running iD code is available on a test server. Don't worry about making errors, it's not connected to the real OSM database.</p>
-        <a class='button' href='http://geowiki.com/iD/'>Launch Demo</a>
+    <div class='video fill2L clearfix col12 pad4'>
+      <div class='force-aspect-ratio'>
+        <iframe id='player' src="http://player.vimeo.com/video/57155953" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
       </div>
     </div>
+
+    <div class='clearfix actions'>
+      <div class='col6 pad4 trynow'>
+        <a class='button' href='http://geowiki.com/iD/'>Launch Demo</a>
+        <p class='deemphasize'><em>Experiment with the the latest running iD code on a test server.</em></p>
+      </div>
+
+      <div class='col6 pad4 actions'>
+        <a class='button' href='https://github.com/systemed/iD/issues?state=open'/>iD on GitHub</a>
+        <p class='deemphasize'><em>Help make iD even better by reporting issues or submitting pull requests.</em></p>
+      </div>
+    </div>
+  
   </div>
-  <div class='footer clearfix center pad4 col12'>
-    <p>A couple lines about who is behind iD + link to the osmdev blog</p>
+
+  <div class='footer fill2L clearfix center pad4 col12'>
+    <p>Footer</p>
   </div>
+
 </div>
