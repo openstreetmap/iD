@@ -865,9 +865,10 @@ div.typeahead a:first-child {
     margin-right: 10px;
     text-align: center;
     float: left;
-    height: 24px;
-    min-width: 24px;
+    height: 12px;
+    min-width: 12px;
     font-size:12px;
+    line-height: 12px;
     border-radius:24px;
     padding:5px;
     background:#7092ff;
