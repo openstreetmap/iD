@@ -5,7 +5,7 @@ iD.Connection = function() {
         connection = {},
         refNodes = {},
         user = {},
-        inflight = [],
+        inflight = {},
         loadedTiles = {},
         oauth = iD.OAuth();
 
@@ -18,13 +18,14 @@ iD.Connection = function() {
              loadedTiles[tile.toString()] = true;
              callback(err, parsed);
          }
-         loadFromURL(bboxUrl(box), done);
+         inflight[tile.toString()] = loadFromURL(bboxUrl(box), done);
     }
 
     function loadFromURL(url, callback) {
         function done(dom) {
             return callback(null, parse(dom));
         }
+        return d3.xml(url).get().on('load', done);
         inflight.push(d3.xml(url).get()
             .on('load', done));
     }
@@ -188,7 +189,7 @@ iD.Connection = function() {
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     }
 
-    function tileAlreadyLoaded(c) { return !loadedTiles[c.toString()]; }
+    function tileAlreadyLoaded(c) { return !loadedTiles[c.toString()] && !inflight[c.toString()]; }
 
     function abortRequest(i) { i.abort(); }
 
@@ -224,8 +225,13 @@ iD.Connection = function() {
             };
         }
 
-        inflight.map(abortRequest);
-        inflight = [];
+        _.filter(inflight, function(v, i) {
+            var wanted = _.find(tiles, function(tile) {
+                return i === tile.toString();
+            });
+            if (!wanted) delete inflight[i];
+            return !wanted;
+        }).map(abortRequest);
 
         tiles
             .filter(tileAlreadyLoaded)
