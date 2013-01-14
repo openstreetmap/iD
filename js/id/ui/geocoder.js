@@ -15,7 +15,8 @@ iD.ui.geocoder = function() {
                         .select('.content')
                         .text('No location found for "' + resp.query[0] + '"');
                 }
-                map.center([resp.results[0][0].lon, resp.results[0][0].lat]);
+                var bounds = resp.results[0][0].bounds;
+                map.extent([bounds[0], bounds[3]], [bounds[2], bounds[1]]);
             });
         }
 
