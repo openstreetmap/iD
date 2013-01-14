@@ -38,4 +38,121 @@ describe('iD.Relation', function () {
     describe("#extent", function () {
         it("returns the minimal extent containing the extents of all members");
     });
+
+    describe("#multipolygon", function () {
+        specify("single polygon consisting of a single way", function () {
+            var a = iD.Node(),
+                b = iD.Node(),
+                c = iD.Node(),
+                w = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                r = iD.Relation({members: [{id: w.id, type: 'way'}]}),
+                g = iD.Graph([a, b, c, w, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, a]]]);
+        });
+
+        specify("single polygon consisting of multiple ways", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                d  = iD.Node(),
+                w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
+                w2 = iD.Way({nodes: [c.id, d.id, a.id]}),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, d, w1, w2, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, d, a]]]); // TODO: not the only valid ordering
+        });
+
+        specify("single polygon consisting of multiple ways, one needing reversal", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                d  = iD.Node(),
+                w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
+                w2 = iD.Way({nodes: [a.id, d.id, c.id]}),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, d, w1, w2, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, d, a]]]); // TODO: not the only valid ordering
+        });
+
+        specify("multiple polygons consisting of single ways", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                d  = iD.Node(),
+                e  = iD.Node(),
+                f  = iD.Node(),
+                w1 = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                w2 = iD.Way({nodes: [d.id, e.id, f.id, d.id]}),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, d, e, f, w1, w2, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, a]], [[d, e, f, d]]]);
+        });
+
+        specify("invalid geometry: unclosed ring consisting of a single way", function () {
+            var a = iD.Node(),
+                b = iD.Node(),
+                c = iD.Node(),
+                w = iD.Way({nodes: [a.id, b.id, c.id]}),
+                r = iD.Relation({members: [{id: w.id, type: 'way'}]}),
+                g = iD.Graph([a, b, c, w, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c]]]);
+        });
+
+        specify("invalid geometry: unclosed ring consisting of multiple ways", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                d  = iD.Node(),
+                w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
+                w2 = iD.Way({nodes: [c.id, d.id]}),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, d, w1, w2, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+        });
+
+        specify("invalid geometry: unclosed ring consisting of multiple ways, alternate order", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                d  = iD.Node(),
+                w1 = iD.Way({nodes: [c.id, d.id]}),
+                w2 = iD.Way({nodes: [a.id, b.id, c.id]}),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, d, w1, w2, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+        });
+
+        specify("invalid geometry: unclosed ring consisting of multiple ways, one needing reversal", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                d  = iD.Node(),
+                w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
+                w2 = iD.Way({nodes: [d.id, c.id]}),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, d, w1, w2, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+        });
+
+        specify("invalid geometry: unclosed ring consisting of multiple ways, one needing reversal, alternate order", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                d  = iD.Node(),
+                w1 = iD.Way({nodes: [c.id, d.id]}),
+                w2 = iD.Way({nodes: [c.id, b.id, a.id]}),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, d, w1, w2, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+        });
+    });
 });
