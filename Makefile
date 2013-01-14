@@ -41,6 +41,7 @@ all: \
 	js/id/renderer/*.js \
 	js/id/svg.js \
 	js/id/svg/*.js \
+	js/id/ui.js \
 	js/id/ui/*.js \
 	js/id/end.js
 

@@ -1,5 +1,5 @@
-iD.confirm = function() {
-    var modal = iD.modal();
+iD.ui.confirm = function() {
+    var modal = iD.ui.modal();
     modal.select('.modal').classed('modal-alert', true);
     modal.select('.content')
         .classed('modal-section', true)

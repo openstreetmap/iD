@@ -1,6 +1,6 @@
-describe("Geocoder", function () {
+describe("iD.ui.geocoder", function () {
     it('can be instantiated', function () {
-        var geocoder = iD.geocoder();
+        var geocoder = iD.ui.geocoder();
         expect(geocoder).to.be.ok;
     });
 });

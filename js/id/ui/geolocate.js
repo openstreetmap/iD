@@ -1,4 +1,4 @@
-iD.geolocate = function(map) {
+iD.ui.geolocate = function(map) {
 
     function success(position) {
         map.center([position.coords.longitude, position.coords.latitude]);

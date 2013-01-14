@@ -1,4 +1,4 @@
-iD.modal = function() {
+iD.ui.modal = function() {
     var animate = d3.select('div.modal').empty();
 
     d3.select('div.modal').transition()

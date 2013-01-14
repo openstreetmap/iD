@@ -1,4 +1,4 @@
-iD.layerswitcher = function(map) {
+iD.ui.layerswitcher = function(map) {
     var event = d3.dispatch('cancel', 'save'),
         sources = [{
             name: 'Bing',

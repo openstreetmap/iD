@@ -1,4 +1,4 @@
-iD.contributors = function(map) {
+iD.ui.contributors = function(map) {
 
     function contributors(selection) {
 

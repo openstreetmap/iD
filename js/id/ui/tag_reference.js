@@ -1,4 +1,4 @@
-iD.tagReference = function(selection) {
+iD.ui.tagReference = function(selection) {
     selection.each(function() {
         function g(x) { return function(d) { return d[x]; }; }
         var selection = d3.select(this);

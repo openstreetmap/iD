@@ -1,6 +1,6 @@
-iD.commit = function() {
+iD.ui.commit = function() {
     var event = d3.dispatch('cancel', 'save');
-    
+
     function zipSame(d) {
         var c = [], n = -1;
         for (var i = 0; i < d.length; i++) {

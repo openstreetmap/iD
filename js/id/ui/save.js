@@ -1,4 +1,4 @@
-iD.save = function() {
+iD.ui.save = function() {
 
     var map;
 
@@ -16,7 +16,7 @@ iD.save = function() {
 
                 function commit(e) {
                     d3.select('.shaded').remove();
-                    var l = iD.loading('Uploading changes to OpenStreetMap.');
+                    var l = iD.ui.loading('Uploading changes to OpenStreetMap.');
                     connection.putChangeset(history.changes(), e.comment, history.imagery_used(), function(err, changeset_id) {
                         l.remove();
                         history.reset();
@@ -28,14 +28,14 @@ iD.save = function() {
                                 .text('An error occurred while trying to save');
                             desc.append('p').text(err.responseText);
                         } else {
-                            var modal = iD.modal();
+                            var modal = iD.ui.modal();
                             modal.select('.content')
                                 .classed('success-modal', true)
                                 .datum({
                                     id: changeset_id,
                                     comment: e.comment
                                 })
-                                .call(iD.success()
+                                .call(iD.ui.success()
                                     .on('cancel', function() {
                                         modal.remove();
                                     }));
@@ -49,13 +49,13 @@ iD.save = function() {
 
                 if (has_changes) {
                     connection.authenticate(function(err) {
-                        var modal = iD.modal();
+                        var modal = iD.ui.modal();
                         var changes = history.changes();
                         changes.connection = connection;
                         modal.select('.content')
                             .classed('commit-modal', true)
                             .datum(changes)
-                            .call(iD.commit()
+                            .call(iD.ui.commit()
                                 .on('cancel', function() {
                                     modal.remove();
                                 })

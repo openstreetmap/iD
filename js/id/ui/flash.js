@@ -1,5 +1,5 @@
-iD.flash = function() {
-    var modal = iD.modal();
+iD.ui.flash = function() {
+    var modal = iD.ui.modal();
 
     modal.select('.modal').classed('modal-alert', true);
 

@@ -1,4 +1,4 @@
-iD.Inspector = function() {
+iD.ui.inspector = function() {
     var event = d3.dispatch('changeTags', 'changeWayDirection',
         'update', 'remove', 'close', 'splitWay'),
         taginfo = iD.taginfo(),
@@ -155,12 +155,12 @@ iD.Inspector = function() {
                                 if (en.on_way) types.push('line');
                                 en.types = types;
                                 console.log(en);
-                                iD.modal()
+                                iD.ui.modal()
                                     .select('.content')
                                     .datum(en)
-                                    .call(iD.tagReference);
+                                    .call(iD.ui.tagReference);
                             } else {
-                                iD.flash()
+                                iD.ui.flash()
                                     .select('.content')
                                     .text('This is no documentation available for this tag combination');
                             }
@@ -168,7 +168,7 @@ iD.Inspector = function() {
                     } else if (d.key) {
                         taginfo.values(params, function(err, values) {
                             if (values.data.length) {
-                                iD.modal()
+                                iD.ui.modal()
                                     .select('.content')
                                     .datum({
                                         data: values.data,
@@ -177,7 +177,7 @@ iD.Inspector = function() {
                                     })
                                     .call(iD.keyReference);
                             } else {
-                                iD.flash()
+                                iD.ui.flash()
                                     .select('.content')
                                     .text('This is no documentation available for this key');
                             }

@@ -46,13 +46,13 @@ window.iD = function(container) {
             }
         }
 
-        notice = iD.notice(bar
+        notice = iD.ui.notice(bar
             .append('div')
             .attr('class', 'notice'));
 
         map.on('move.disable-buttons', disableTooHigh)
             .on('move.contributors', _.debounce(function() {
-                contributors.call(iD.contributors(map));
+                contributors.call(iD.ui.contributors(map));
             }, 1000));
 
         buttons.append('span')
@@ -96,7 +96,7 @@ window.iD = function(container) {
 
         var save_button = bar.append('button')
             .attr('class', 'save action wide')
-            .call(iD.save().map(map));
+            .call(iD.ui.save().map(map));
 
         history.on('change.warn-unload', function() {
             var changes = history.changes(),
@@ -129,14 +129,14 @@ window.iD = function(container) {
 
         if (navigator.geolocation) {
             container.append('div')
-                .call(iD.geolocate(map));
+                .call(iD.ui.geolocate(map));
         }
 
         var gc = container.append('div').attr('class', 'geocode-control map-control')
-            .call(iD.geocoder().map(map));
+            .call(iD.ui.geocoder().map(map));
 
         container.append('div').attr('class', 'map-control layerswitcher-control')
-            .call(iD.layerswitcher(map));
+            .call(iD.ui.layerswitcher(map));
 
         container.append('div')
             .attr('class', 'inspector-wrap fillL')
@@ -209,7 +209,7 @@ window.iD = function(container) {
                 .center([-77.02271,38.90085]);
         }
 
-        d3.select('.user-container').call(iD.userpanel(connection)
+        d3.select('.user-container').call(iD.ui.userpanel(connection)
             .on('logout', connection.logout)
             .on('login', connection.authenticate));
 

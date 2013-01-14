@@ -5,7 +5,7 @@ iD.modes.Select = function (entity) {
         entity: entity
     };
 
-    var inspector = iD.Inspector(),
+    var inspector = iD.ui.inspector(),
         behaviors;
 
     function remove() {

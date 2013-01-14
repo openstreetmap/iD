@@ -1,5 +1,5 @@
-iD.loading = function(message) {
-    var modal = iD.modal();
+iD.ui.loading = function(message) {
+    var modal = iD.ui.modal();
 
     var loadertext = modal.select('.content')
         .classed('loading-modal', true)

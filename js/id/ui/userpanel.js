@@ -1,4 +1,4 @@
-iD.userpanel = function(connection) {
+iD.ui.userpanel = function(connection) {
     var event = d3.dispatch('logout', 'login');
 
     function user(selection) {

@@ -1,4 +1,4 @@
-iD.keyReference = function(selection) {
+iD.ui.keyReference = function(selection) {
     selection.each(function() {
 
         var selection = d3.select(this),

@@ -1,4 +1,4 @@
-iD.geocoder = function() {
+iD.ui.geocoder = function() {
 
     var map;
 
@@ -11,7 +11,7 @@ iD.geocoder = function() {
                 if (err) return hide();
                 hide();
                 if (!resp.results.length) {
-                    return iD.flash()
+                    return iD.ui.flash()
                         .select('.content')
                         .text('No location found for "' + resp.query[0] + '"');
                 }

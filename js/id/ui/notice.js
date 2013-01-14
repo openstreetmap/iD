@@ -1,4 +1,4 @@
-iD.notice = function(selection) {
+iD.ui.notice = function(selection) {
     var message = '',
         notice = {};
 

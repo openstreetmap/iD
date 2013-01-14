@@ -67,7 +67,7 @@ iD.OAuth = function() {
         o.oauth_signature = ohauth.signature(oauth_secret, '',
             ohauth.baseString('POST', url, o));
 
-        var l = iD.loading('contacting openstreetmap...');
+        var l = iD.ui.loading('contacting openstreetmap...');
 
         // it would make more sense to have this code within the callback
         // to oauth.xhr below. however, it needs to be directly within a
@@ -116,7 +116,7 @@ iD.OAuth = function() {
             var request_token_secret = token('oauth_request_token_secret');
             o.oauth_signature = ohauth.signature(oauth_secret, request_token_secret,
                 ohauth.baseString('POST', url, o));
-            var l = iD.loading('contacting openstreetmap...');
+            var l = iD.ui.loading('contacting openstreetmap...');
 
             function accessTokenDone(err, xhr) {
                 if (err) callback(err);
