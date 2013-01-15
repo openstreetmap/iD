@@ -214,7 +214,7 @@ iD.ui.inspector = function() {
             value = row.selectAll('.value');
 
         key.call(d3.typeahead()
-            .data(function(_, callback) {
+            .data(_.debounce(function(_, callback) {
                 taginfo.keys({
                     geometry: geometry,
                     query: key.property('value')
@@ -223,10 +223,10 @@ iD.ui.inspector = function() {
                         return {value: d.key};
                     }));
                 });
-            }));
+            }, 500)));
 
         value.call(d3.typeahead()
-            .data(function(_, callback) {
+            .data(_.debounce(function(_, callback) {
                 taginfo.values({
                     key: key.property('value'),
                     geometry: geometry,
@@ -236,7 +236,7 @@ iD.ui.inspector = function() {
                         return {value: d.value, title: d.description};
                     }));
                 });
-            }));
+            }, 500)));
     }
 
     function focusNewKey() {
