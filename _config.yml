@@ -2,5 +2,5 @@ auto: true
 server: true
 exclude:
 permalink: none
-baseurl:
+baseurl: http://systemed.github.com/iD/
 permalink: /:title
