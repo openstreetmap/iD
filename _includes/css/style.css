@@ -73,20 +73,22 @@ h1 {
 .force-aspect-ratio {
   margin: auto;
   position: relative;
-  width: 100%;
-  padding-bottom: 56%;
+  padding-bottom: 56.25%;
   height: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 #player {
   position: absolute;
-  left: 0; right: 0;
+  left: 0;
+  top: 0;
   height: 100%;
   width: 100%;
   margin: auto;
 }
 
-.actions .col6:last-child { border-left: 1px solid #ddd; }
+.actions .col6:first-child { border-right: 1px solid #ddd; }
 .actions .pad4 { padding-bottom: 0;}
 
 a.button {
@@ -111,15 +113,15 @@ a.button:hover { background: #54af29; }
 .footer li {
   font-size: 12px;
   display: inline-block;
-  padding-right: 10px;
-  margin-right: 10px;
-  border-right: 1px solid #444546;
+  padding-left: 10px;
+  margin-left: 10px;
+  border-left: 1px solid #444546;
 }
 
-.footer li:last-child {
-  padding-right: 0;
-  margin-right: 0;
-  border-right:0;
+.footer li:first-child {
+  padding-left: 0;
+  margin-left: 0;
+  border-left:0;
 }
 
 @media only screen and (max-width: 640px) {
@@ -130,7 +132,7 @@ a.button:hover { background: #54af29; }
   }
   .video { border-top: 1px solid #ddd;}
   .actions .pad4 { padding-bottom: 20px; }
-  .actions .col6:last-child { border-left: 0;}
+  .actions .col6:first-child { border-right: 0;}
   .actions .col6 { border-top: 1px solid #ddd; }
   .footer li { display: block; border:0; margin: 20px 0; padding: 0;}
 }
