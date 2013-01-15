@@ -22,7 +22,8 @@ iD.behavior.drag = function () {
 
     var event = d3.dispatch("start", "move", "end"),
         origin = null,
-        selector = '';
+        selector = '',
+        filter = null;
 
     event.of = function(thiz, argumentz) {
       return function(e1) {
@@ -119,7 +120,8 @@ iD.behavior.drag = function () {
                 var root = this,
                     target = d3.event.target;
                 for (; target && target !== root; target = target.parentNode) {
-                    if (target[matchesSelector](selector)) {
+                    if (target[matchesSelector](selector) &&
+                            (!filter || filter(target.__data__))) {
                         return mousedown.call(target, target.__data__);
                     }
                 }
@@ -138,6 +140,12 @@ iD.behavior.drag = function () {
     drag.delegate = function(_) {
         if (!arguments.length) return selector;
         selector = _;
+        return drag;
+    };
+
+    drag.filter = function(_) {
+        if (!arguments.length) return origin;
+        filter = _;
         return drag;
     };
 

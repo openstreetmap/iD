@@ -4,6 +4,9 @@ iD.behavior.DragWay = function(mode) {
 
     return iD.behavior.drag()
         .delegate('.casing, .stroke, .area')
+        .filter(function(d) {
+            return d && d.id === mode.entity.id;
+        })
         .origin(function(entity) {
             return projection(entity.nodes[0].loc);
         })
