@@ -9,7 +9,7 @@ iD.ui.notice = function(selection) {
             selection
                 .text(_)
                 .transition()
-                .style('display', 'auto');
+                .style('display', '');
         } else if (_ && message !== _) {
             selection.text(_);
         } else if (!_) {
