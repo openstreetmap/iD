@@ -109,13 +109,17 @@ a.button:hover { background: #54af29; }
 }
 
 .footer li {
+  font-size: 12px;
   display: inline-block;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid #444546;
 }
 
 .footer li:last-child {
-  padding-left: 10px;
-  margin-left: 10px;
-  border-left: 1px solid #444546;
+  padding-right: 0;
+  margin-right: 0;
+  border-right:0;
 }
 
 @media only screen and (max-width: 640px) {
@@ -128,5 +132,5 @@ a.button:hover { background: #54af29; }
   .actions .pad4 { padding-bottom: 20px; }
   .actions .col6:last-child { border-left: 0;}
   .actions .col6 { border-top: 1px solid #ddd; }
-  .footer li:last-child { border: 0; margin: 20px 0; padding: 0;}
+  .footer li { display: block; border:0; margin: 20px 0; padding: 0;}
 }
