@@ -81,7 +81,7 @@ iD.ui.inspector = function() {
     function drawButtons(selection) {
         selection.append('button')
             .attr('class', 'apply wide action')
-            .html("<span class='icon icon-pre-text apply'></span><span class='label'>Apply</span>")
+            .html("<span class='icon icon-pre-text apply'></span><span class='label'>Close</span>")
             .on('click', apply);
 
         selection.append('button')
