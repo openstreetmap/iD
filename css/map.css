@@ -252,9 +252,6 @@ path.casing.tag-highway-secondary_link {
     stroke:#444;
 }
 
-path.stroke.tag-bridge-yes {
-    stroke:#eee;
-}
 path.casing.tag-bridge-yes {
     stroke-width: 14;
     stroke: #000;

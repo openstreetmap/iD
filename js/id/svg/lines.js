@@ -3,6 +3,36 @@ iD.svg.Lines = function() {
     var arrowtext = '►\u3000\u3000',
         alength;
 
+    var highway_stack = {
+        motorway: 0,
+        motorway_link: 1,
+        trunk: 2,
+        trunk_link: 3,
+        primary: 4,
+        primary_link: 5,
+        secondary: 6,
+        tertiary: 7,
+        unclassified: 8,
+        residential: 9,
+        service: 10,
+        footway: 11
+    };
+
+    function waystack(a, b) {
+        if (!a || !b || !a.tags || !b.tags) return 0;
+        if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
+            return a.tags.layer - b.tags.layer;
+        }
+        if (a.tags.bridge) return 1;
+        if (b.tags.bridge) return -1;
+        var as = 0, bs = 0;
+        if (a.tags.highway && b.tags.highway) {
+            as -= highway_stack[a.tags.highway];
+            bs -= highway_stack[b.tags.highway];
+        }
+        return as - bs;
+    }
+
     function drawPaths(group, lines, filter, classes, lineString) {
         var paths = group.selectAll('path')
             .filter(filter)
@@ -40,6 +70,8 @@ iD.svg.Lines = function() {
                 lines.push(entity);
             }
         }
+
+        lines.sort(waystack);
 
         function lineString(entity) {
             if (lineStrings[entity.id] !== undefined) {
