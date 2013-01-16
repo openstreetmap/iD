@@ -42,12 +42,18 @@ iD.modes.DrawLine = function(wayId, direction) {
 
             if (datum.id === tailId) {
                 // connect the way in a loop
-                history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(wayId, tailId, index),
-                    'added to a line');
+                if (way.nodes.length > 2) {
+                    history.replace(
+                        iD.actions.DeleteNode(node.id),
+                        iD.actions.AddWayNode(wayId, tailId, index),
+                        'added to a line');
 
-                controller.enter(iD.modes.Select(way));
+                    controller.enter(iD.modes.Select(way));
+
+                } else {
+                    history.replace(iD.actions.DeleteWay(way.id));
+                    controller.enter(iD.modes.Browse());
+                }
 
             } else if (datum.id === headId) {
                 // finish the way

@@ -23,8 +23,7 @@ iD.modes.AddArea = function() {
                 history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddWayNode(way.id, datum.id),
-                    iD.actions.AddWayNode(way.id, datum.id),
-                    'started an area');
+                    iD.actions.AddWayNode(way.id, datum.id));
 
             } else {
                 // start from a new node
@@ -33,8 +32,7 @@ iD.modes.AddArea = function() {
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(way.id, node.id),
-                    iD.actions.AddWayNode(way.id, node.id),
-                    'started an area');
+                    iD.actions.AddWayNode(way.id, node.id));
             }
 
             controller.enter(iD.modes.DrawArea(way.id));
