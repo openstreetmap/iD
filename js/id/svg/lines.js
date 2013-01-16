@@ -97,5 +97,5 @@ iD.svg.Lines = function() {
                 // adding longer text than necessary, since overflow is hidden
                 return (new Array(Math.floor(lengths[d.id] * 1.1))).join(arrowtext);
             });
-    }
+    };
 };

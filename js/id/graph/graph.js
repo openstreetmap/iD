@@ -135,8 +135,8 @@ iD.Graph.prototype = {
             oldentity = graph.entities[id];
             if (entity !== oldentity) {
                 if (entity && entity.type === 'way') {
-                    result = oldentity
-                        ? result
+                    result = oldentity ?
+                        result
                             .concat(_.difference(entity.nodes, oldentity.nodes))
                             .concat(_.difference(oldentity.nodes, entity.nodes))
                         : result.concat(entity.nodes);
