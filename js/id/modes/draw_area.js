@@ -43,7 +43,7 @@ iD.modes.DrawArea = function(wayId) {
 
             if (datum.id === tailId || datum.id === headId) {
                 if (way.nodes.length > 3) {
-                    history.replace(iD.actions.DeleteNode(node.id));
+                    history.undo();
                     controller.enter(iD.modes.Select(way));
                 } else {
                     // Areas with less than 3 nodes gets deleted
