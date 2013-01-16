@@ -128,11 +128,19 @@ iD.Graph.prototype = {
     },
 
     difference: function (graph) {
-        var result = [], entity, id;
+        var result = [], entity, oldentity, id;
 
         for (id in this.entities) {
             entity = this.entities[id];
-            if (entity !== graph.entities[id]) {
+            oldentity = graph.entities[id];
+            if (entity !== oldentity) {
+                if (entity && entity.type === 'way') {
+                    result = oldentity
+                        ? result
+                            .concat(_.difference(entity.nodes, oldentity.nodes))
+                            .concat(_.difference(oldentity.nodes, entity.nodes))
+                        : result.concat(entity.nodes);
+                }
                 result.push(id);
             }
         }
@@ -141,6 +149,7 @@ iD.Graph.prototype = {
             entity = graph.entities[id];
             if (entity && !this.entities.hasOwnProperty(id)) {
                 result.push(id);
+                if (entity.type === 'way') result = result.concat(entity.nodes);
             }
         }
 
