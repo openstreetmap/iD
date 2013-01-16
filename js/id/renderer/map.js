@@ -80,7 +80,7 @@ iD.Map = function() {
             filter = function(d) { return d.midpoint ? d.way in only : d.id in only; };
         }
 
-        if (all.length > 10000) {
+        if (all.length > 100000) {
             editOff();
             return;
         }

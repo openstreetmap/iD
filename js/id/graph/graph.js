@@ -13,6 +13,7 @@ iD.Graph = function(entities) {
     this.transients = {};
     this._parentWays = {};
     this._parentRels = {};
+    this._fetches = {};
 
     if (iD.debug) {
         Object.freeze(this);
@@ -119,12 +120,13 @@ iD.Graph.prototype = {
 
     // Resolve the id references in a way, replacing them with actual objects.
     fetch: function(id) {
+        if (this._fetches[id]) return this._fetches[id];
         var entity = this.entities[id], nodes = [];
         if (!entity || !entity.nodes || !entity.nodes.length) return entity;
         for (var i = 0, l = entity.nodes.length; i < l; i++) {
             nodes[i] = this.fetch(entity.nodes[i]);
         }
-        return iD.Entity(entity, {nodes: nodes});
+        return (this._fetches[id] = iD.Entity(entity, {nodes: nodes}));
     },
 
     difference: function (graph) {
