@@ -16,6 +16,7 @@ iD.Connection = function() {
     function bboxFromAPI(box, tile, callback) {
         function done(err, parsed) {
              loadedTiles[tile.toString()] = true;
+             delete inflight[tile.toString()];
              callback(err, parsed);
          }
          inflight[tile.toString()] = loadFromURL(bboxUrl(box), done);
