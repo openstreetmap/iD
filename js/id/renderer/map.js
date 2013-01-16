@@ -123,7 +123,7 @@ iD.Map = function() {
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-        if (fast) {
+        if (fast && translateStart) {
             var a = d3.event.translate,
                 b = translateStart,
                 translate = 'translate(' + ~~(a[0] - b[0]) + 'px,' +
