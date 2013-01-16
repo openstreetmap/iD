@@ -219,9 +219,7 @@ iD.ui.inspector = function() {
                     geometry: geometry,
                     query: key.property('value')
                 }, function(err, data) {
-                    callback(data.data.map(function (d) {
-                        return {value: d.key};
-                    }));
+                    if (!err) callback(data);
                 });
             }, 500)));
 
@@ -232,9 +230,7 @@ iD.ui.inspector = function() {
                     geometry: geometry,
                     query: value.property('value')
                 }, function(err, data) {
-                    callback(data.data.map(function (d) {
-                        return {value: d.value, title: d.description};
-                    }));
+                    if (!err) callback(data);
                 });
             }, 500)));
     }

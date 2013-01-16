@@ -33,6 +33,21 @@ iD.taginfo = function() {
         return _.omit(parameters, 'geometry');
     }
 
+    function popular(parameters) {
+        var pop_field = 'fraction';
+        if (parameters) pop_field = 'count_' + parameters.filter + '_fraction';
+        return function(d) { return parseFloat(d[pop_field]) > 0.01; };
+    }
+
+    function valKey(d) { return { value: d.key }; }
+
+    function valKeyDescription(d) {
+        return {
+            value: d.value,
+            title: d.description
+        };
+    }
+
     taginfo.keys = function(parameters, callback) {
         parameters = clean(setSort(setFilter(parameters)));
         d3.json(endpoint + 'keys/all?' +
@@ -41,7 +56,10 @@ iD.taginfo = function() {
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
-            }, parameters)), callback);
+            }, parameters)), function(err, d) {
+                if (err) return callback(err);
+                callback(null, d.data.filter(popular(parameters)).map(valKey));
+            });
     };
 
     taginfo.values = function(parameters, callback) {
@@ -52,7 +70,10 @@ iD.taginfo = function() {
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
-            }, parameters)), callback);
+            }, parameters)), function(err, d) {
+                if (err) return callback(err);
+                callback(null, d.data.filter(popular()).map(valKeyDescription));
+            });
     };
 
     taginfo.docs = function(parameters, callback) {
