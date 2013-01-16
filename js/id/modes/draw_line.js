@@ -57,7 +57,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
             } else if (datum.id === headId) {
                 // finish the way
-                history.replace(iD.actions.DeleteNode(node.id));
+                history.undo();
 
                 controller.enter(iD.modes.Select(way));
 
