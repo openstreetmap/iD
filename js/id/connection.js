@@ -202,7 +202,7 @@ iD.Connection = function() {
     }
 
     function loadTiles(projection) {
-        var scaleExtent = [16, 16],
+        var scaleExtent = [15, 15],
             s = projection.scale(),
             tiles = d3.geo.tile()
                 .scaleExtent(scaleExtent)
