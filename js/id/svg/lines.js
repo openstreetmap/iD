@@ -1,16 +1,38 @@
 iD.svg.Lines = function() {
 
-        var arrowtext = '►\u3000\u3000',
-            alength;
+    var arrowtext = '►\u3000\u3000',
+        alength;
+
+    function drawPaths(group, lines, filter, classes, lineString) {
+        var paths = group.selectAll('path')
+            .filter(filter)
+            .data(lines, iD.Entity.key);
+
+        paths.enter()
+            .append('path')
+            .attr('class', classes);
+
+        paths
+            .order()
+            .attr('d', lineString)
+            .call(iD.svg.TagClasses());
+
+        paths.exit()
+            .remove();
+
+        return paths;
+    }
 
     return function(surface, graph, entities, filter, projection) {
+
         if (!alength) {
             var arrow = surface.append('text').text(arrowtext);
             alength = arrow.node().getComputedTextLength();
             arrow.remove();
         }
 
-        var lines = [];
+        var lines = [],
+            lineStrings = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -18,8 +40,6 @@ iD.svg.Lines = function() {
                 lines.push(entity);
             }
         }
-
-        var lineStrings = {};
 
         function lineString(entity) {
             if (lineStrings[entity.id] !== undefined) {
@@ -31,32 +51,12 @@ iD.svg.Lines = function() {
                 'M' + nodes.map(iD.svg.RoundProjection(projection)).join('L'));
         }
 
-        function drawPaths(group, lines, filter, classes) {
-            var paths = group.selectAll('path')
-                .filter(filter)
-                .data(lines, iD.Entity.key);
-
-            paths.enter()
-                .append('path')
-                .attr('class', classes);
-
-            paths
-                .order()
-                .attr('d', lineString)
-                .call(iD.svg.TagClasses());
-
-            paths.exit()
-                .remove();
-
-            return paths;
-        }
-
         var casing = surface.select('.layer-casing'),
             stroke = surface.select('.layer-stroke'),
             defs   = surface.select('defs'),
             text   = surface.select('.layer-text'),
-            casings = drawPaths(casing, lines, filter, 'way line casing'),
-            strokes = drawPaths(stroke, lines, filter, 'way line stroke');
+            casings = drawPaths(casing, lines, filter, 'way line casing', lineString),
+            strokes = drawPaths(stroke, lines, filter, 'way line stroke', lineString);
 
         // Determine the lengths of oneway paths
         var lengths = {},
