@@ -1,5 +1,5 @@
 iD.svg.Surface = function() {
-    return function(selection) {
+    return function drawSurface(selection) {
         selection.append('defs')
             .append('clipPath')
                 .attr('id', 'clip')

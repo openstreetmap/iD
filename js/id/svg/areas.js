@@ -1,5 +1,5 @@
 iD.svg.Areas = function() {
-    return function(surface, graph, entities, filter, projection) {
+    return function drawAreas(surface, graph, entities, filter, projection) {
         var areas = [];
 
         for (var i = 0; i < entities.length; i++) {

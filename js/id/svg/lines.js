@@ -53,7 +53,7 @@ iD.svg.Lines = function() {
         return paths;
     }
 
-    return function(surface, graph, entities, filter, projection) {
+    return function drawLines(surface, graph, entities, filter, projection) {
 
         if (!alength) {
             var arrow = surface.append('text').text(arrowtext);

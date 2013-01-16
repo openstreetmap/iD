@@ -10,7 +10,7 @@ iD.svg.Points = function() {
         return 'icons/unknown.png';
     }
 
-    return function(surface, graph, entities, filter, projection) {
+    return function drawPoints(surface, graph, entities, filter, projection) {
         var points = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -18,6 +18,10 @@ iD.svg.Points = function() {
             if (entity.geometry() === 'point') {
                 points.push(entity);
             }
+        }
+
+        if (points.length > 100) {
+            return surface.select('.layer-hit').selectAll('g.point').remove();
         }
 
         var groups = surface.select('.layer-hit').selectAll('g.point')
