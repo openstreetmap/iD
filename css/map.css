@@ -81,8 +81,11 @@ g.vertex.hover circle.stroke {
     transform:scale(1.4, 1.4);
 }
 
-g.vertex circle.selected {
+g.vertex circle.selected.fill {
     fill: #ffff00;
+}
+g.vertex circle.selected.stroke {
+    fill: #38380A;
 }
 
 circle.midpoint {
