@@ -134,7 +134,7 @@ iD.Graph.prototype = {
             entity = this.entities[id];
             oldentity = graph.entities[id];
             if (entity !== oldentity) {
-                if (entity.type === 'way') {
+                if (entity && entity.type === 'way') {
                     result = oldentity
                         ? result
                             .concat(_.difference(entity.nodes, oldentity.nodes))
