@@ -65,18 +65,21 @@ iD.Map = function() {
             var only = {};
             for (var j = 0; j < difference.length; j++) {
                 var id = difference[j];
-                only[id] = graph.fetch(id);
-                if (only[id] && only[id].type === 'node') {
-                    var parents = graph.parentWays(only[id]);
-                    for (var k = 0; k < parents.length; k++) {
-                        // Don't re-fetch parents
-                        if (only[parents[k].id] === undefined) {
-                            only[parents[k].id] = graph.fetch(parents[k].id);
+                var entity = graph.fetch(id);
+                if (entity && entity.intersects(extent, graph)) {
+                    only[id] = entity;
+                    if (only[id].type === 'node') {
+                        var parents = graph.parentWays(only[id]);
+                        for (var k = 0; k < parents.length; k++) {
+                            // Don't re-fetch parents
+                            if (only[parents[k].id] === undefined) {
+                                only[parents[k].id] = graph.fetch(parents[k].id);
+                            }
                         }
                     }
                 }
             }
-            all = _.compact(_.values(only));
+            all = _.values(only);
             filter = function(d) { return d.midpoint ? d.way in only : d.id in only; };
         }
 
