@@ -29,14 +29,14 @@ iD.Map = function() {
 
         var supersurface = selection.append('div')
             .style('position', 'absolute')
+            .on('mousedown.drag', function() {
+                translateStart = projection.translate();
+            })
             .call(zoom);
 
         surface = supersurface.append('svg')
             .on('mouseup.reset-transform', resetTransform)
             .on('touchend.reset-transform', resetTransform)
-            .on('mousedown.drag', function() {
-                translateStart = projection.translate();
-            })
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
