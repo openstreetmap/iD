@@ -21,6 +21,7 @@ iD.Map = function() {
         lines = iD.svg.Lines(),
         areas = iD.svg.Areas(),
         midpoints = iD.svg.Midpoints(),
+        tooltip = d3.tooltip(),
         surface, tilegroup;
 
     function map(selection) {
@@ -32,7 +33,8 @@ iD.Map = function() {
             .on('mousedown.drag', function() {
                 translateStart = projection.translate();
             })
-            .call(zoom);
+            .call(zoom)
+            .call(tooltip);
 
         surface = supersurface.append('svg')
             .on('mouseup.reset-transform', resetTransform)
@@ -278,6 +280,12 @@ iD.Map = function() {
         if (!arguments.length) return connection;
         connection = _;
         connection.on('load', connectionLoad);
+        return map;
+    };
+
+    map.tooltip = function (_) {
+        if (_ === false) tooltip.off();
+        else tooltip.text(_);
         return map;
     };
 
