@@ -14,6 +14,11 @@ body {
     height: 100%;
     width: 100%;
     position: fixed;
+    min-width: 760px;
+}
+
+.limiter {
+    max-width: 1400px;
 }
 
 div, textarea, input, span, ul, li, ol, a, button {
@@ -230,7 +235,7 @@ button {
     color:#222;
     background: white;
     font-weight:bold;
-    font-size:14px;
+    font-size:12px;
     display: inline-block;
     height:40px;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
@@ -255,20 +260,6 @@ button.narrow {
     border-radius:4px;
 }
 
-button.wide {
-    margin: 10px;
-    width: 100px;
-}
-
-button.add-button {
-    width: 80px;
-}
-
-button.narrow,
-button.Browse {
-    width:40px;
-}
-
 button.minor {
     border-radius:4px;
     height: 20px;
@@ -289,22 +280,24 @@ button.centered {
     margin-right: auto;
 }
 
-.buttons-joined {
+.button-wrap {
     display: inline-block;
-    margin:10px;
-}
-
-.buttons-joined button {
-    border-right-width: 0;
-    border-radius:0;
+    padding:10px 0 10px 10px;
     margin: 0;
 }
 
-.buttons-joined button:first-child {
+.button-wrap button:only-child { width: 100%;}
+
+.joined button {
+    border-right-width: 0;
+    border-radius:0;
+}
+
+.joined button:first-child {
     border-radius:4px 0 0 4px;
 }
 
-.buttons-joined button:last-child {
+.joined button:last-child {
     border-right-width: 1px;
     border-radius:0 4px 4px 0;
 }
@@ -324,8 +317,6 @@ button.delete:hover {
 }
 
 button.save {
-    min-width: 120px;
-    width: auto;
 }
 
 button.save.has-count {
@@ -482,12 +473,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     height:60px;
 }
 
-/* Special rules for toolbar icons */
-
-button.Browse .label {
-    display: none;
- }
-
 /* Status box */
 
 .messages {
@@ -497,18 +482,21 @@ button.Browse .label {
 /* Inspector */
 
 .inspector-wrap {
-    position:absolute;
-    right: 0;
+    opacity:0;
+    display:none;
+    padding-left: 10px;
+    max-width: 600px;
+}
+
+.inspector {
     border-left:  1px solid #ccc;
     border-bottom: 1px solid #ccc;
     min-height: 60px;
-    opacity:0;
-    display:none;
+    position: relative;
 }
 
 .inspector-inner {
     padding: 10px;
-    min-width:400px;
 }
 
 .inspector-inner.head {
@@ -596,6 +584,10 @@ button.Browse .label {
     border-top: 1px solid #ccc;
 }
 
+.inspector-buttons .button-wrap {
+    width: 20%;
+}
+
 .inspector-inner .add-tag-row {
     width: 100%;
     padding-right: 70px;
@@ -614,6 +606,10 @@ button.Browse .label {
 .map-control {
     left:10px;
     position:absolute;
+}
+
+.map-control button {
+    width: 40px;
 }
 
 .map-overlay {
