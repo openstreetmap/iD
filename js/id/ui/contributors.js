@@ -39,8 +39,8 @@ iD.ui.contributors = function(map) {
                 .attr('href', function() {
                     var ext = map.extent();
                     return 'http://www.openstreetmap.org/browse/changesets?bbox=' + [
-                        ext[0][0], ext[1][1],
-                        ext[1][0], ext[0][1]];
+                        ext[0][0], ext[0][1],
+                        ext[1][0], ext[1][1]];
                 })
                 .text(' and ' + (u.length - limit) + ' others');
         }
