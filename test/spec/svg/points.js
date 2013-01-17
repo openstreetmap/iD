@@ -1,6 +1,6 @@
 describe("iD.svg.Points", function () {
     var surface,
-        projection = d3.geo.mercator(),
+        projection = Object,
         filter = d3.functor(true);
 
     beforeEach(function () {
