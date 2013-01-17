@@ -59,8 +59,8 @@ iD.modes.Select = function (entity) {
             map_size = mode.map.size(),
             entity_extent = entity.extent(mode.history.graph()),
             left_edge = map_size[0] - inspector_size[0],
-            left = mode.map.projection(entity_extent[1])[0],
-            right = mode.map.projection(entity_extent[0])[0];
+            left = mode.map.projection(entity_extent[0])[0],
+            right = mode.map.projection(entity_extent[1])[0];
 
         if (left > left_edge &&
             right > left_edge) mode.map.centerEase(

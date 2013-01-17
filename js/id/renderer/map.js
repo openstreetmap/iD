@@ -257,26 +257,23 @@ iD.Map = function() {
         }, 20);
     };
 
-    map.extent = function(tl, br) {
+    map.extent = function(_) {
         if (!arguments.length) {
-            return [projection.invert([0, 0]), projection.invert(dimensions)];
+            return iD.geo.Extent(projection.invert([0, dimensions[1]]),
+                                 projection.invert([dimensions[0], 0]));
         } else {
-
-            var TL = projection(tl),
-                BR = projection(br);
+            var extent = iD.geo.Extent(_),
+                tl = projection([extent[0][0], extent[1][1]]),
+                br = projection([extent[1][0], extent[0][1]]);
 
             // Calculate maximum zoom that fits extent
-            var hFactor = (BR[0] - TL[0]) / dimensions[0],
-                vFactor = (BR[1] - TL[1]) / dimensions[1],
+            var hFactor = (br[0] - tl[0]) / dimensions[0],
+                vFactor = (br[1] - tl[1]) / dimensions[1],
                 hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
                 vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
                 newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
-            // Calculate center of projected extent
-            var midPoint = [(TL[0] + BR[0]) / 2, (TL[1] + BR[1]) / 2],
-                midLoc = projection.invert(midPoint);
-
-            map.zoom(newZoom).center(midLoc);
+            map.zoom(newZoom).center(extent.center());
         }
     };
 

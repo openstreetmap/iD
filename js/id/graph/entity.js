@@ -74,11 +74,7 @@ iD.Entity.prototype = {
     },
 
     intersects: function(extent, resolver) {
-        var _extent = this.extent(resolver);
-        return _extent[0][0] > extent[0][0] &&
-               _extent[1][0] < extent[1][0] &&
-               _extent[0][1] < extent[0][1] &&
-               _extent[1][1] > extent[1][1];
+        return this.extent(resolver).intersects(extent);
     },
 
     hasInterestingTags: function() {
