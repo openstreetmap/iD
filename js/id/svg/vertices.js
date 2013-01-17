@@ -1,5 +1,5 @@
-iD.svg.Vertices = function() {
-    return function drawVertices(surface, graph, entities, filter, projection) {
+iD.svg.Vertices = function(projection) {
+    return function drawVertices(surface, graph, entities, filter) {
         var vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
