@@ -209,8 +209,7 @@ window.iD = function(container) {
         var hash = iD.Hash().map(map);
 
         if (!hash.hadHash) {
-            map.zoom(20)
-                .center([-77.02271,38.90085]);
+            map.centerZoom([-77.02271, 38.90085], 20);
         }
 
         d3.select('.user-container').call(iD.ui.userpanel(connection)

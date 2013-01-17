@@ -161,7 +161,7 @@ iD.Map = function() {
         redraw();
     }
 
-    function redraw(difference) {
+    var redraw = _.throttle(function(difference) {
         dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
@@ -172,7 +172,7 @@ iD.Map = function() {
             editOff();
         }
         return map;
-    }
+    }, 10);
 
     function pointLocation(p) {
         var translate = projection.translate(),
@@ -207,10 +207,7 @@ iD.Map = function() {
         return map;
     };
 
-    map.zoom = function(z) {
-        if (!arguments.length) {
-            return Math.max(Math.log(projection.scale()) / Math.LN2 - 8, 0);
-        }
+    function setZoom(z) {
         var scale = 256 * Math.pow(2, z),
             center = pxCenter(),
             l = pointLocation(center);
@@ -223,8 +220,17 @@ iD.Map = function() {
         t[1] += center[1] - l[1];
         projection.translate(t);
         zoom.translate(projection.translate());
-        return redraw();
-    };
+    }
+
+    function setCenter(loc) {
+        var t = projection.translate(),
+            c = pxCenter(),
+            ll = projection(loc);
+        projection.translate([
+            t[0] - ll[0] + c[0],
+            t[1] - ll[1] + c[1]]);
+        zoom.translate(projection.translate());
+    }
 
     map.size = function(_) {
         if (!arguments.length) return dimensions;
@@ -244,15 +250,23 @@ iD.Map = function() {
         if (!arguments.length) {
             return projection.invert(pxCenter());
         } else {
-            var t = projection.translate(),
-                c = pxCenter(),
-                ll = projection(loc);
-            projection.translate([
-                t[0] - ll[0] + c[0],
-                t[1] - ll[1] + c[1]]);
-            zoom.translate(projection.translate());
+            setCenter(loc);
             return redraw();
         }
+    };
+
+    map.zoom = function(z) {
+        if (!arguments.length) {
+            return Math.max(Math.log(projection.scale()) / Math.LN2 - 8, 0);
+        }
+        setZoom(z);
+        return redraw();
+    };
+
+    map.centerZoom = function(loc, z) {
+        setCenter(loc);
+        setZoom(z);
+        return redraw();
     };
 
     map.centerEase = function(loc) {
@@ -279,7 +293,7 @@ iD.Map = function() {
                 vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
                 newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
-            map.zoom(newZoom).center(extent.center());
+            map.centerZoom(extent.center(), newZoom);
         }
     };
 
