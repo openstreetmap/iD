@@ -13,7 +13,7 @@ iD.modes.AddLine = function() {
             controller = mode.controller;
 
         map.dblclickEnable(false)
-            .hint('Click on the map to start drawing an road, path, or route.');
+            .tail('Click on the map to start drawing an road, path, or route.');
 
         map.surface.on('click.addline', function() {
             var datum = d3.select(d3.event.target).datum() || {},
@@ -67,7 +67,7 @@ iD.modes.AddLine = function() {
 
     mode.exit = function() {
         mode.map.dblclickEnable(true);
-        mode.map.hint(false);
+        mode.map.tail(false);
         mode.map.surface.on('click.addline', null);
         mode.map.keybinding().on('⎋.addline', null);
     };
