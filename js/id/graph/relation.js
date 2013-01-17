@@ -2,8 +2,14 @@ iD.Relation = iD.Entity.extend({
     type: "relation",
     members: [],
 
-    extent: function() {
-        return [[NaN, NaN], [NaN, NaN]];
+    extent: function(resolver) {
+        return resolver.transient(this, 'extent', function() {
+            var extent = iD.geo.Extent();
+            for (var i = 0, l = this.members.length; i < l; i++) {
+                extent = extent.extend(resolver.entity(this.members[i].id).extent(resolver));
+            }
+            return extent;
+        });
     },
 
     geometry: function() {

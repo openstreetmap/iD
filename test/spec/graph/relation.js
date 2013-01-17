@@ -36,7 +36,14 @@ describe('iD.Relation', function () {
     });
 
     describe("#extent", function () {
-        it("returns the minimal extent containing the extents of all members");
+        it("returns the minimal extent containing the extents of all members", function () {
+            var a = iD.Node({loc: [0, 0]}),
+                b = iD.Node({loc: [5, 10]}),
+                r = iD.Relation({members: [{id: a.id}, {id: b.id}]}),
+                graph = iD.Graph([a, b, r]);
+
+            expect(r.extent(graph)).to.eql([[0, 0], [5, 10]])
+        });
     });
 
     describe("#multipolygon", function () {

@@ -69,8 +69,7 @@ iD.Map = function() {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
-            var only = {},
-                filterOnly = {};
+            var only = {};
             for (var j = 0; j < difference.length; j++) {
                 var id = difference[j],
                     entity = graph.fetch(id);
@@ -84,6 +83,13 @@ iD.Map = function() {
                             // Don't re-fetch parents
                             if (only[parents[k].id] === undefined) {
                                 only[parents[k].id] = graph.fetch(parents[k].id);
+                            }
+                        }
+                        parents = graph.parentRelations(only[id]);
+                        for (k = 0; k < parents.length; k++) {
+                            // Don't re-fetch parents
+                            if (only[parents[k].id] === undefined) {
+                                only[parents[k].id] = parents[k].id;
                             }
                         }
                     }
