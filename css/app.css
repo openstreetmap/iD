@@ -1048,8 +1048,10 @@ div.typeahead a:first-child {
 }
 
 .tail {
+  pointer-events:none;
   position: absolute;
   background: rgba(255, 255, 255, 0.7);
+  max-width: 250px;
   margin-top: -15px;
   padding: 5px;
   -webkit-border-radius: 4px;
