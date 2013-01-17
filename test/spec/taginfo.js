@@ -22,13 +22,12 @@ describe("iD.taginfo", function() {
 
             server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/keys/all"),
                 [200, { "Content-Type": "application/json" },
-                    '{"data":[{"count_all":5190337,"key":"amenity"}]}']);
+                    '{"data":[{"count_all":5190337,"key":"amenity","count_undefined_fraction":1}]}']);
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
                 {query: "amen", page: "1", rp: "6", sortname: "count_all", sortorder: "desc"});
-            expect(callback).to.have.been.calledWith(null,
-                {"data":[{"count_all":5190337,"key":"amenity"}]});
+            expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
         });
     });
 
@@ -41,13 +40,12 @@ describe("iD.taginfo", function() {
 
             server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/key/values"),
                 [200, { "Content-Type": "application/json" },
-                    '{"data":[{"value":"parking","description":"A place for parking cars"}]}']);
+                    '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1}]}']);
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
                 {key: "amenity", query: "par", page: "1", rp: "20", sortname: 'count_all', sortorder: 'desc'});
-            expect(callback).to.have.been.calledWith(null,
-                {"data":[{"value":"parking","description":"A place for parking cars"}]});
+            expect(callback).to.have.been.calledWith(null, [{"value":"parking","title":"A place for parking cars"}]);
         });
     });
 
