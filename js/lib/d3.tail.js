@@ -22,6 +22,9 @@ d3.tail = function() {
                 .on('mouseover.tail', mouseover)
                 .on('mouseout.tail', mouseout);
 
+            container
+                .on('mousemove.tail', mousemove);
+
             selection_size = selection.size();
 
         }
@@ -36,11 +39,13 @@ d3.tail = function() {
         }
 
         function mouseout() {
-            if (text !== false) container.style('display', 'none');
+            if (d3.event.relatedTarget !== container.node() &&
+                text !== false) container.style('display', 'none');
         }
 
         function mouseover() {
-            if (text !== false) container.style('display', 'block');
+            if (d3.event.relatedTarget !== container.node() &&
+                text !== false) container.style('display', 'block');
         }
 
         if (!container) setup();
