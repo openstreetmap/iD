@@ -114,12 +114,14 @@ iD.ui.inspector = function() {
         inputs.append('input')
             .property('type', 'text')
             .attr('class', 'key')
+            .attr('maxlength', 255)
             .property('value', function(d) { return d.key; })
             .on('change', function(d) { d.key = this.value; });
 
         inputs.append('input')
             .property('type', 'text')
             .attr('class', 'value')
+            .attr('maxlength', 255)
             .property('value', function(d) { return d.value; })
             .on('change', function(d) { d.value = this.value; })
             .on('keydown.push-more', pushMore);
@@ -271,7 +273,7 @@ iD.ui.inspector = function() {
 
     inspector.tags = function (tags) {
         if (!arguments.length) {
-            var tags = {};
+            tags = {};
             tagList.selectAll('li').each(function() {
                 var row = d3.select(this),
                     key = row.selectAll('.key').property('value'),

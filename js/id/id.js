@@ -96,7 +96,7 @@ window.iD = function(container) {
 
         var save_button = bar.append('button')
             .attr('class', 'save action wide')
-            .call(iD.ui.save().map(map));
+            .call(iD.ui.save().map(map).controller(controller));
 
         history.on('change.warn-unload', function() {
             var changes = history.changes(),
