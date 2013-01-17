@@ -213,13 +213,26 @@ iD.ui.inspector = function() {
             key = row.selectAll('.key'),
             value = row.selectAll('.value');
 
+        function sort(value, data) {
+            var sameletter = [],
+                other = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].value.substring(0, value.length) === value) {
+                    sameletter.push(data[i]);
+                } else {
+                    other.push(data[i]);
+                }
+            }
+            return sameletter.concat(other);
+        }
+
         key.call(d3.typeahead()
             .data(_.debounce(function(_, callback) {
                 taginfo.keys({
                     geometry: geometry,
                     query: key.property('value')
                 }, function(err, data) {
-                    if (!err) callback(data);
+                    if (!err) callback(sort(key.property('value'), data));
                 });
             }, 500)));
 
@@ -230,7 +243,7 @@ iD.ui.inspector = function() {
                     geometry: geometry,
                     query: value.property('value')
                 }, function(err, data) {
-                    if (!err) callback(data);
+                    if (!err) callback(sort(value.property('value'), data));
                 });
             }, 500)));
     }
