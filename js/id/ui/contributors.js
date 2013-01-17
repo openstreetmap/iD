@@ -21,7 +21,7 @@ iD.ui.contributors = function(map) {
 
         l.enter().append('a')
             .attr('class', 'user-link')
-            .attr('href', function(d) { console.log(d); return map.connection().userUrl(d); })
+            .attr('href', function(d) { return map.connection().userUrl(d); })
             .attr('target', '_blank')
             .text(String);
 
