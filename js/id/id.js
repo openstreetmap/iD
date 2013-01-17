@@ -180,9 +180,9 @@ window.iD = function(container) {
                 .call(redo ? refreshTooltip : undo_tooltip.hide);
         });
 
-        window.onresize = function() {
+        d3.select(window).on('resize.map-size', function() {
             map.size(m.size());
-        };
+        });
 
         map.keybinding()
             .on('a', function(evt, mods) {

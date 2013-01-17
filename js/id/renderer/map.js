@@ -21,6 +21,7 @@ iD.Map = function() {
         lines = iD.svg.Lines(),
         areas = iD.svg.Areas(),
         midpoints = iD.svg.Midpoints(),
+        tail = d3.tail(),
         surface, tilegroup;
 
     function map(selection) {
@@ -44,8 +45,12 @@ iD.Map = function() {
             })
             .call(iD.svg.Surface());
 
+
         map.size(selection.size());
         map.surface = surface;
+
+        supersurface
+            .call(tail);
 
         d3.select(document).call(keybinding);
     }
@@ -281,6 +286,11 @@ iD.Map = function() {
         if (!arguments.length) return connection;
         connection = _;
         connection.on('load', connectionLoad);
+        return map;
+    };
+
+    map.tail = function (_) {
+        tail.text(_);
         return map;
     };
 
