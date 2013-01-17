@@ -1,5 +1,10 @@
 iD.svg.Labels = function() {
 
+    var pointOffsets = [
+        [15, 3, 'start'], // right
+        [-15, 3, 'end'], // left
+    ];
+
     function drawTexts(group, labels, filter, classes, position) {
         var texts = group.selectAll('text')
             .filter(filter)
@@ -12,6 +17,7 @@ iD.svg.Labels = function() {
         texts.attr('x', position('x'))
             .attr('y', position('y'))
             .attr('transform', position('transform'))
+            .style('text-anchor', position('textAnchor'))
             .text(function(d) { return d.tags.name });
 
         texts.exit().remove();
@@ -38,9 +44,11 @@ iD.svg.Labels = function() {
             positions[i] = {};
             var l = labels[i];
             if (l.type === 'node') {
-                var coord = project(l.loc);
-                positions[i].x = coord[0];
-                positions[i].y = coord[1];
+                var coord = project(l.loc),
+                    offset = pointOffsets[1];
+                positions[i].x = coord[0] + offset[0];
+                positions[i].y = coord[1] + offset[1];
+                positions[i].textAnchor = offset[2];
             }
         }
 
@@ -49,7 +57,7 @@ iD.svg.Labels = function() {
         }
 
         var label = surface.select('.layer-label'),
-            texts = drawTexts(label, labels, filter, 'todo', position);
+            texts = drawTexts(label, labels, filter, 'label', position);
 
 
     };

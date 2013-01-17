@@ -284,6 +284,13 @@ text.tag-oneway {
     pointer-events:none;
 }
 
+text.label {
+  font-size: 12px;
+  font-weight: bold;
+  fill: black;
+  text-shadow: 0 0 0.4em white, 1px 1px white, -1px -1px white, -1px 1px white, 1px -1px white;
+}
+
 /* Cursors */
 
 #map:hover {
