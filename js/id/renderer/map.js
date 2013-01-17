@@ -21,6 +21,7 @@ iD.Map = function() {
         vertices = iD.svg.Vertices(roundedProjection),
         lines = iD.svg.Lines(roundedProjection),
         areas = iD.svg.Areas(roundedProjection),
+        multipolygons = iD.svg.Multipolygons(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
         tail = d3.tail(),
         surface, tilegroup;
@@ -102,6 +103,7 @@ iD.Map = function() {
             .call(vertices, graph, all, filter)
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
+            .call(multipolygons, graph, all, filter)
             .call(midpoints, graph, all, filter);
     }
 

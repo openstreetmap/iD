@@ -142,29 +142,37 @@ path.stroke.tag-railway-subway {
     stroke-dasharray: 8,8;
 }
 
-path.area {
+path.area,
+path.multipolygon {
     stroke-width:2;
     stroke:#fff;
     fill:#fff;
     fill-opacity:0.3;
 }
 
+path.multipolygon {
+    fill-rule: evenodd;
+}
+
 path.area.selected {
     stroke-width:4 !important;
 }
 
-path.area.tag-natural {
+path.area.tag-natural,
+path.multipolygon.tag-natural {
     stroke: #ADD6A5;
     fill: #ADD6A5;
     stroke-width:1;
 }
 
-path.area.tag-natural-water {
+path.area.tag-natural-water,
+path.multipolygon.tag-natural-water {
     stroke: #6382FF;
     fill: #ADBEFF;
 }
 
-path.area.tag-building {
+path.area.tag-building,
+path.multipolygon.tag-building {
     stroke: #9E176A;
     stroke-width: 1;
     fill: #ff6ec7;
@@ -173,7 +181,11 @@ path.area.tag-building {
 path.area.tag-landuse,
 path.area.tag-natural-wood,
 path.area.tag-natural-tree,
-path.area.tag-natural-grassland {
+path.area.tag-natural-grassland,
+path.multipolygon.tag-landuse,
+path.multipolygon.tag-natural-wood,
+path.multipolygon.tag-natural-tree,
+path.multipolygon.tag-natural-grassland {
     stroke: #006B34;
     stroke-width: 1;
     fill: #189E59;
