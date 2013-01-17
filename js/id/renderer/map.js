@@ -21,6 +21,7 @@ iD.Map = function() {
         lines = iD.svg.Lines(),
         areas = iD.svg.Areas(),
         midpoints = iD.svg.Midpoints(),
+        labels = iD.svg.Labels(),
         surface, tilegroup;
 
     function map(selection) {
@@ -96,7 +97,8 @@ iD.Map = function() {
             .call(vertices, graph, all, filter, projection)
             .call(lines, graph, all, filter, projection)
             .call(areas, graph, all, filter, projection)
-            .call(midpoints, graph, all, filter, projection);
+            .call(midpoints, graph, all, filter, projection)
+            .call(labels, graph, all, filter, projection);
     }
 
     function editOff() {

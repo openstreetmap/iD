@@ -11,7 +11,7 @@ iD.svg.Surface = function() {
             .attr('clip-path', 'url(#clip)');
 
         var layers = clip.selectAll('.layer')
-            .data(['fill', 'casing', 'stroke', 'text', 'hit']);
+            .data(['fill', 'casing', 'stroke', 'text', 'hit', 'label']);
 
         layers.enter().append('g')
             .attr('class', function(d) { return 'layer layer-' + d; });
