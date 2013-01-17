@@ -41,7 +41,7 @@ iD.svg.Areas = function(projection) {
         var lineString = iD.svg.LineString(projection);
 
         function drawPaths(group, areas, filter, classes) {
-            var paths = group.selectAll('path')
+            var paths = group.selectAll('path.area')
                 .filter(filter)
                 .data(areas, iD.Entity.key);
 
