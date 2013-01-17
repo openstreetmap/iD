@@ -33,10 +33,14 @@ iD.taginfo = function() {
         return _.omit(parameters, 'geometry');
     }
 
-    function popular(parameters) {
-        var pop_field = 'fraction';
-        if (parameters) pop_field = 'count_' + parameters.filter + '_fraction';
+    function popularKeys(parameters) {
+        var pop_field = 'count_all_fraction';
+        if (parameters.filter) pop_field = 'count_' + parameters.filter + '_fraction';
         return function(d) { return parseFloat(d[pop_field]) > 0.01; };
+    }
+
+    function popularValues(parameters) {
+        return function(d) { return parseFloat(d['fraction']) > 0.01; };
     }
 
     function valKey(d) { return { value: d.key }; }
@@ -58,7 +62,7 @@ iD.taginfo = function() {
                 page: 1
             }, parameters)), function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(popular(parameters)).map(valKey));
+                callback(null, d.data.filter(popularKeys(parameters)).map(valKey));
             });
     };
 
@@ -72,7 +76,7 @@ iD.taginfo = function() {
                 page: 1
             }, parameters)), function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(popular()).map(valKeyDescription));
+                callback(null, d.data.filter(popularValues()).map(valKeyDescription));
             });
     };
 
