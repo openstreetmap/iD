@@ -45,7 +45,8 @@ iD.svg.Points = function(projection) {
             .attr('transform', 'translate(-8, -8)');
 
         groups.attr('transform', iD.svg.PointTransform(projection))
-            .call(iD.svg.TagClasses());
+            .call(iD.svg.TagClasses())
+            .call(iD.svg.MemberClasses(graph));
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element

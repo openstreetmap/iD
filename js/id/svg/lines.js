@@ -33,27 +33,27 @@ iD.svg.Lines = function(projection) {
         return as - bs;
     }
 
-    function drawPaths(group, lines, filter, classes, lineString) {
-        var paths = group.selectAll('path')
-            .filter(filter)
-            .data(lines, iD.Entity.key);
-
-        paths.enter()
-            .append('path')
-            .attr('class', classes);
-
-        paths
-            .order()
-            .attr('d', lineString)
-            .call(iD.svg.TagClasses());
-
-        paths.exit()
-            .remove();
-
-        return paths;
-    }
-
     return function drawLines(surface, graph, entities, filter) {
+        function drawPaths(group, lines, filter, classes, lineString) {
+            var paths = group.selectAll('path')
+                .filter(filter)
+                .data(lines, iD.Entity.key);
+
+            paths.enter()
+                .append('path')
+                .attr('class', classes);
+
+            paths
+                .order()
+                .attr('d', lineString)
+                .call(iD.svg.TagClasses())
+                .call(iD.svg.MemberClasses(graph));
+
+            paths.exit()
+                .remove();
+
+            return paths;
+        }
 
         if (!alength) {
             var arrow = surface.append('text').text(arrowtext);
