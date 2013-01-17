@@ -40,7 +40,8 @@ iD.svg.Multipolygons = function(projection) {
             paths
                 .order()
                 .attr('d', lineString)
-                .call(iD.svg.TagClasses());
+                .call(iD.svg.TagClasses())
+                .call(iD.svg.MemberClasses(graph));
 
             paths.exit()
                 .remove();

@@ -154,6 +154,10 @@ path.multipolygon {
     fill-rule: evenodd;
 }
 
+path.area.member-type-multipolygon {
+    fill: none;
+}
+
 path.area.selected {
     stroke-width:4 !important;
 }

@@ -31,6 +31,7 @@ iD.svg.Vertices = function(projection) {
 
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
+            .call(iD.svg.MemberClasses(graph))
             .classed('shared', function(entity) { return graph.parentWays(entity).length > 1; });
 
         // Selecting the following implicitly
