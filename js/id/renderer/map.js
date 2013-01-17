@@ -5,6 +5,7 @@ iD.Map = function() {
         translateStart,
         keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
+        roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
@@ -16,11 +17,11 @@ iD.Map = function() {
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
-        points = iD.svg.Points(),
-        vertices = iD.svg.Vertices(),
-        lines = iD.svg.Lines(),
-        areas = iD.svg.Areas(),
-        midpoints = iD.svg.Midpoints(),
+        points = iD.svg.Points(roundedProjection),
+        vertices = iD.svg.Vertices(roundedProjection),
+        lines = iD.svg.Lines(roundedProjection),
+        areas = iD.svg.Areas(roundedProjection),
+        midpoints = iD.svg.Midpoints(roundedProjection),
         tail = d3.tail(),
         surface, tilegroup;
 
@@ -97,11 +98,11 @@ iD.Map = function() {
         }
 
         surface
-            .call(points, graph, all, filter, projection)
-            .call(vertices, graph, all, filter, projection)
-            .call(lines, graph, all, filter, projection)
-            .call(areas, graph, all, filter, projection)
-            .call(midpoints, graph, all, filter, projection);
+            .call(points, graph, all, filter)
+            .call(vertices, graph, all, filter)
+            .call(lines, graph, all, filter)
+            .call(areas, graph, all, filter)
+            .call(midpoints, graph, all, filter);
     }
 
     function editOff() {

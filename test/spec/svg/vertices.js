@@ -12,7 +12,7 @@ describe("iD.svg.Vertices", function () {
         var node = iD.Node({tags: {highway: "traffic_signals"}, loc: [0, 0]}),
             graph = iD.Graph([node]);
 
-        surface.call(iD.svg.Vertices(), graph, [node], filter, projection);
+        surface.call(iD.svg.Vertices(projection), graph, [node], filter);
 
         expect(surface.select('.vertex')).to.be.classed('tag-highway');
         expect(surface.select('.vertex')).to.be.classed('tag-highway-traffic_signals');
@@ -24,7 +24,7 @@ describe("iD.svg.Vertices", function () {
             way2 = iD.Way({nodes: [node.id]}),
             graph = iD.Graph([node, way1, way2]);
 
-        surface.call(iD.svg.Vertices(), graph, [node], filter, projection);
+        surface.call(iD.svg.Vertices(projection), graph, [node], filter);
 
         expect(surface.select('.vertex')).to.be.classed('shared');
     });

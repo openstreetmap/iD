@@ -1,4 +1,4 @@
-iD.svg.Areas = function() {
+iD.svg.Areas = function(projection) {
 
     var area_stack = {
         building: 0,
@@ -26,7 +26,7 @@ iD.svg.Areas = function() {
         return as - bs;
     }
 
-    return function drawAreas(surface, graph, entities, filter, projection) {
+    return function drawAreas(surface, graph, entities, filter) {
         var areas = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -47,7 +47,7 @@ iD.svg.Areas = function() {
             var nodes = _.pluck(entity.nodes, 'loc');
             if (nodes.length === 0) return (lineStrings[entity.id] = '');
             else return (lineStrings[entity.id] =
-                'M' + nodes.map(iD.svg.RoundProjection(projection)).join('L'));
+                'M' + nodes.map(projection).join('L'));
         }
 
         function drawPaths(group, areas, filter, classes) {

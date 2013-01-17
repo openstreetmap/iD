@@ -12,7 +12,7 @@ describe("iD.svg.Points", function () {
         var node = iD.Node({tags: {amenity: "cafe"}, loc: [0, 0], _poi: true}),
             graph = iD.Graph([node]);
 
-        surface.call(iD.svg.Points(), graph, [node], filter, projection);
+        surface.call(iD.svg.Points(projection), graph, [node], filter);
 
         expect(surface.select('.point')).to.be.classed('tag-amenity');
         expect(surface.select('.point')).to.be.classed('tag-amenity-cafe');

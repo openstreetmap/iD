@@ -6,7 +6,6 @@ iD.svg = {
     },
 
     PointTransform: function (projection) {
-        projection = iD.svg.RoundProjection(projection);
         return function (entity) {
             return 'translate(' + projection(entity.loc) + ')';
         };

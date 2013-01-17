@@ -12,7 +12,7 @@ describe("iD.svg.Areas", function () {
         var area = iD.Way({tags: {area: 'yes', building: 'yes'}}),
             graph = iD.Graph([area]);
 
-        surface.call(iD.svg.Areas(), graph, [area], filter, projection);
+        surface.call(iD.svg.Areas(projection), graph, [area], filter);
 
         expect(surface.select('.area')).to.be.classed('tag-building');
         expect(surface.select('.area')).to.be.classed('tag-building-yes');

@@ -1,4 +1,4 @@
-iD.svg.Points = function() {
+iD.svg.Points = function(projection) {
     function imageHref(d) {
         // TODO: optimize
         for (var k in d.tags) {
@@ -10,7 +10,7 @@ iD.svg.Points = function() {
         return 'icons/unknown.png';
     }
 
-    return function drawPoints(surface, graph, entities, filter, projection) {
+    return function drawPoints(surface, graph, entities, filter) {
         var points = [];
 
         for (var i = 0; i < entities.length; i++) {
