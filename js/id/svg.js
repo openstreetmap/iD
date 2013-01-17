@@ -19,7 +19,7 @@ iD.svg = {
             }
 
             if (entity.nodes.length === 0) {
-                return (cache[entity.id] = '');
+                return (cache[entity.id] = null);
             }
 
             return (cache[entity.id] =

@@ -7,4 +7,11 @@ describe("iD.svg.LineString", function () {
 
         expect(iD.svg.LineString(projection)(way)).to.equal("M0,0L2,3");
     });
+
+    it("returns null for an entity with no nodes", function () {
+        var way = iD.Way(),
+            projection = Object;
+
+        expect(iD.svg.LineString(projection)(way)).to.be.null;
+    });
 });
