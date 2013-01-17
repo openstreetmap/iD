@@ -64,12 +64,15 @@ iD.Map = function() {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
-            var only = {};
+            var only = {},
+                filterOnly = {};
             for (var j = 0; j < difference.length; j++) {
-                var id = difference[j];
-                var entity = graph.fetch(id);
+                var id = difference[j],
+                    entity = graph.fetch(id);
+                // Even if the entity is false (deleted), it needs to be
+                // removed from the surface
+                only[id] = entity;
                 if (entity && entity.intersects(extent, graph)) {
-                    only[id] = entity;
                     if (only[id].type === 'node') {
                         var parents = graph.parentWays(only[id]);
                         for (var k = 0; k < parents.length; k++) {
@@ -81,7 +84,7 @@ iD.Map = function() {
                     }
                 }
             }
-            all = _.values(only);
+            all = _.compact(_.values(only));
             filter = function(d) { return d.midpoint ? d.way in only : d.id in only; };
         }
 

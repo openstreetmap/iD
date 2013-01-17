@@ -65,8 +65,11 @@ g.vertex circle.stroke {
     fill:#333;
 }
 
-g.vertex.shared circle {
+g.vertex.shared circle.fill {
     fill:#aff;
+}
+g.vertex.shared circle.stroke {
+    fill:#044;
 }
 
 g.vertex.hover circle.fill {
