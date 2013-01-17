@@ -73,15 +73,7 @@ iD.svg.Lines = function(projection) {
 
         lines.sort(waystack);
 
-        function lineString(entity) {
-            if (lineStrings[entity.id] !== undefined) {
-                return lineStrings[entity.id];
-            }
-            var nodes = _.pluck(entity.nodes, 'loc');
-            if (nodes.length === 0) return (lineStrings[entity.id] = '');
-            else return (lineStrings[entity.id] =
-                'M' + nodes.map(projection).join('L'));
-        }
+        var lineString = iD.svg.LineString(projection);
 
         var casing = surface.select('.layer-casing'),
             stroke = surface.select('.layer-stroke'),
