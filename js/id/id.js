@@ -156,8 +156,12 @@ window.iD = function(container) {
             .attr('class','about-block fillD pad1');
         contributors.append('span')
             .attr('class', 'icon nearby icon-pre-text');
-        contributors.append('pan')
+        contributors.append('span')
             .text('Viewing contributions by ');
+        contributors.append('span')
+            .attr('class', 'contributor-list');
+        contributors.append('span')
+            .attr('class', 'contributor-count');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
