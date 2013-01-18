@@ -28,6 +28,20 @@ describe("iD.actions.SplitWay", function () {
         expect(waysB[1]).to.equal(waysC[0]);
     });
 
+    it("copies tags to the new way", function () {
+        var a     = iD.Node(),
+            b     = iD.Node(),
+            c     = iD.Node(),
+            tags  = {highway: 'residential'},
+            way   = iD.Way({nodes: [a.id, b.id, c.id], tags: tags}),
+            graph = iD.Graph([a, b, c, way]);
+
+        graph = iD.actions.SplitWay(b.id)(graph);
+
+        expect(graph.parentWays(a)[0].tags).to.eql(tags);
+        expect(graph.parentWays(c)[0].tags).to.eql(tags);
+    });
+
     it("moves restriction relations to the new way", function () {
         // Situation:
         //    a ==== b ==== c ---- d

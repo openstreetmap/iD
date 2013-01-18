@@ -7,17 +7,16 @@ iD.actions.SplitWay = function(nodeId) {
         // splitting ways at intersections TODO
         if (parents.length !== 1) return graph;
 
-        var way = parents[0];
-
-        var idx = _.indexOf(way.nodes, nodeId);
+        var way = parents[0],
+            idx = _.indexOf(way.nodes, nodeId);
 
         // Create a 'b' way that contains all of the tags in the second
         // half of this way
-        var newWay = iD.Way({ tags: _.clone(way.tags), nodes: way.nodes.slice(idx) });
+        var newWay = iD.Way({tags: way.tags, nodes: way.nodes.slice(idx)});
         graph = graph.replace(newWay);
 
         // Reduce the original way to only contain the first set of nodes
-        graph = graph.replace(way.update({ nodes: way.nodes.slice(0, idx + 1) }), 'changed way direction');
+        graph = graph.replace(way.update({nodes: way.nodes.slice(0, idx + 1)}));
 
         var parentRelations = graph.parentRelations(way);
 

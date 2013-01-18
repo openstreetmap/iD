@@ -75,7 +75,7 @@ iD.modes.Select = function (entity) {
         }).on('splitWay', function(d) {
             mode.history.perform(
                 iD.actions.SplitWay(d.id),
-                'split a way on a node');
+                'split a way');
 
         }).on('remove', function() {
             remove();
