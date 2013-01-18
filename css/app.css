@@ -582,10 +582,15 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-buttons {
     border-top: 1px solid #ccc;
+    padding-right: 10px;
 }
 
 .inspector-buttons .button-wrap {
-    width: 20%;
+    width: 50%;
+}
+
+.inspector-buttons .button-wrap {
+    width: 50%;
 }
 
 .inspector-inner .add-tag-row {
