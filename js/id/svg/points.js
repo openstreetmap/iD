@@ -1,4 +1,4 @@
-iD.svg.Points = function() {
+iD.svg.Points = function(projection) {
     function imageHref(d) {
         // TODO: optimize
         for (var k in d.tags) {
@@ -10,7 +10,7 @@ iD.svg.Points = function() {
         return 'icons/unknown.png';
     }
 
-    return function drawPoints(surface, graph, entities, filter, projection) {
+    return function drawPoints(surface, graph, entities, filter) {
         var points = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -45,7 +45,8 @@ iD.svg.Points = function() {
             .attr('transform', 'translate(-8, -8)');
 
         groups.attr('transform', iD.svg.PointTransform(projection))
-            .call(iD.svg.TagClasses());
+            .call(iD.svg.TagClasses())
+            .call(iD.svg.MemberClasses(graph));
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element

@@ -20,7 +20,10 @@
 
     <script>
         iD.debug = true;
-        mocha.setup('bdd');
+        mocha.setup({
+            ui: 'bdd',
+            globals: ['__onresize.tail-size']
+        });
         var expect = chai.expect;
     </script>
 
@@ -47,6 +50,8 @@
     <script src="spec/format/geojson.js"></script>
     <script src="spec/format/xml.js"></script>
 
+    <script src="spec/geo/extent.js"></script>
+
     <script src="spec/graph/graph.js"></script>
     <script src="spec/graph/entity.js"></script>
     <script src="spec/graph/node.js"></script>
@@ -60,7 +65,11 @@
     <script src="spec/renderer/hash.js"></script>
     <script src="spec/renderer/map.js"></script>
 
+    <script src="spec/svg.js"></script>
     <script src="spec/svg/areas.js"></script>
+    <script src="spec/svg/lines.js"></script>
+    <script src="spec/svg/member_classes.js"></script>
+    <script src="spec/svg/multipolygons.js"></script>
     <script src="spec/svg/points.js"></script>
     <script src="spec/svg/vertices.js"></script>
     <script src="spec/svg/tag_classes.js"></script>

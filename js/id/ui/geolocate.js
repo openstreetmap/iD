@@ -10,7 +10,6 @@ iD.ui.geolocate = function(map) {
         selection
             .attr('class', 'geolocate-control map-control')
             .append('button')
-            .attr('class', 'narrow')
             .attr('title', 'Show My Location')
             .text('G')
             .on('click', function() {

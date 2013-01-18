@@ -7,19 +7,11 @@ iD.ui.inspector = function() {
     function inspector(selection) {
         var entity = selection.datum();
 
-        selection.html('').append('button')
-            .attr('class', 'narrow close')
-            .html("<span class='icon close'></span>")
-            .on('click', function() {
-                event.close(entity);
-            });
-
-
         var inspector = selection.append('div')
-            .attr('class','inspector fillL');
+            .attr('class','inspector content');
 
         inspector.append('div')
-            .attr('class', 'head inspector-inner')
+            .attr('class', 'head inspector-inner fillL')
             .call(drawHead);
 
         var inspectorbody = inspector.append('div')
@@ -47,7 +39,9 @@ iD.ui.inspector = function() {
         drawTags(entity.tags);
 
         inspectorbody.append('div')
-            .attr('class', 'inspector-buttons')
+            .attr('class', 'inspector-buttons pad1')
+                .append('div')
+                .attr('class','button-wrap joined')
             .call(drawButtons);
     }
 
@@ -83,19 +77,15 @@ iD.ui.inspector = function() {
     }
 
     function drawButtons(selection) {
-        var inspectorButton1 = selection.append('div')
-            .attr('class', 'button-wrap')
-            .append('button')
-                .attr('class', 'apply wide action')
+        var inspectorButton1 = selection.append('button')
+                .attr('class', 'apply col6 action')
                 .on('click', apply);
 
             inspectorButton1.append('span').attr('class','icon icon-pre-text apply');
             inspectorButton1.append('span').attr('class','label').text('Apply');
 
-        var inspectorButton2 = selection.append('div')
-            .attr('class', 'button-wrap')
-            .append('button')
-                .attr('class', 'delete wide action')
+        var inspectorButton2 = selection.append('button')
+                .attr('class', 'delete col6 action')
                 .on('click', function(entity) { event.remove(entity); });
 
             inspectorButton2.append('span').attr('class','icon icon-pre-text delete');
@@ -126,12 +116,14 @@ iD.ui.inspector = function() {
         inputs.append('input')
             .property('type', 'text')
             .attr('class', 'key')
+            .attr('maxlength', 255)
             .property('value', function(d) { return d.key; })
             .on('change', function(d) { d.key = this.value; });
 
         inputs.append('input')
             .property('type', 'text')
             .attr('class', 'value')
+            .attr('maxlength', 255)
             .property('value', function(d) { return d.value; })
             .on('change', function(d) { d.value = this.value; })
             .on('keydown.push-more', pushMore);
@@ -283,7 +275,7 @@ iD.ui.inspector = function() {
 
     inspector.tags = function (tags) {
         if (!arguments.length) {
-            var tags = {};
+            tags = {};
             tagList.selectAll('li').each(function() {
                 var row = d3.select(this),
                     key = row.selectAll('.key').property('value'),

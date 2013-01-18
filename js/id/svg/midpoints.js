@@ -1,5 +1,5 @@
-iD.svg.Midpoints = function() {
-    return function drawMidpoints(surface, graph, entities, filter, projection) {
+iD.svg.Midpoints = function(projection) {
+    return function drawMidpoints(surface, graph, entities, filter) {
         var midpoints = [];
 
         for (var i = 0; i < entities.length; i++) {

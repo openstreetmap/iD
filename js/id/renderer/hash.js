@@ -1,5 +1,5 @@
 iD.Hash = function() {
-    var hash = {},
+    var hash = { hadHash: false },
         s0, // cached location.hash
         lat = 90 - 1e-8, // allowable latitude range
         map;
@@ -10,8 +10,9 @@ iD.Hash = function() {
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
         } else {
-            map.zoom(args[0])
-                .center([args[2], Math.min(lat, Math.max(-lat, args[1]))]);
+            map.centerZoom([args[2],
+                Math.min(lat, Math.max(-lat, args[1]))],
+                args[0]);
         }
     };
 
@@ -27,12 +28,13 @@ iD.Hash = function() {
     var move = _.throttle(function() {
         var s1 = formatter(map);
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
-    }, 1000);
+    }, 100);
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
-        if (parser(map, (s0 = location.hash).substring(2)))
+        if (parser(map, (s0 = location.hash).substring(2))) {
             move(); // replace bogus hash
+        }
     }
 
     hash.map = function(x) {

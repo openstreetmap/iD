@@ -17,6 +17,7 @@ all: \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
 	js/lib/d3.size.js \
+	js/lib/d3.tail.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
 	js/lib/jxon.js \
@@ -29,6 +30,8 @@ all: \
 	js/id/oauth.js \
 	js/id/services/*.js \
 	js/id/util.js \
+	js/id/geo.js \
+	js/id/geo/*.js \
 	js/id/actions.js \
 	js/id/actions/*.js \
 	js/id/behavior.js \

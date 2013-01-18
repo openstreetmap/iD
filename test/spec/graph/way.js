@@ -41,7 +41,7 @@ describe('iD.Way', function() {
                 node2 = iD.Node({loc: [5, 10]}),
                 way   = iD.Way({nodes: [node1.id, node2.id]}),
                 graph = iD.Graph([node1, node2, way]);
-            expect(way.extent(graph)).to.eql([[5, 0], [0, 10]]);
+            expect(way.extent(graph)).to.eql([[0, 0], [5, 10]]);
         });
     });
 
@@ -50,14 +50,14 @@ describe('iD.Way', function() {
             var node  = iD.Node({loc: [0, 0]}),
                 way   = iD.Way({nodes: [node.id]}),
                 graph = iD.Graph([node, way]);
-            expect(way.intersects([[-180, 90], [180, -90]], graph)).to.equal(true);
+            expect(way.intersects([[-5, -5], [5, 5]], graph)).to.equal(true);
         });
 
         it("returns false for way with no nodes within the given extent", function () {
-            var node  = iD.Node({loc: [0, 0]}),
+            var node  = iD.Node({loc: [6, 6]}),
                 way   = iD.Way({nodes: [node.id]}),
                 graph = iD.Graph([node, way]);
-            expect(way.intersects([[100, 90], [180, -90]], graph)).to.equal(false);
+            expect(way.intersects([[-5, -5], [5, 5]], graph)).to.equal(false);
         });
     });
 

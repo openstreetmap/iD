@@ -22,7 +22,8 @@ window.iD = function(container) {
             .call(map);
 
         var bar = container.append('div')
-            .attr('id', 'bar').attr('class', 'fillL2');
+            .attr('id', 'bar')
+            .attr('class','pad1 fillD');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');
@@ -79,27 +80,22 @@ window.iD = function(container) {
             undo_tooltip = bootstrap.tooltip().placement('bottom');
 
         undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'col6 narrow' })
+            .attr({ id: 'undo', 'class': 'col6' })
             .property('disabled', true)
             .html("<span class='undo icon'></span><small></small>")
             .on('click', history.undo)
             .call(undo_tooltip);
 
         undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'col6 narrow' })
+            .attr({ id: 'redo', 'class': 'col6' })
             .property('disabled', true)
             .html("<span class='redo icon'><small></small>")
             .on('click', history.redo)
             .call(undo_tooltip);
 
-        container.append('div')
-            .attr('class', 'user-container pad1 fillD about-block')
-            .append('div')
-                .attr('class', 'hello');
-
         var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
-            .attr('class', 'save action wide col12')
-            .call(iD.ui.save().map(map));
+            .attr('class', 'save action col12')
+            .call(iD.ui.save().map(map).controller(controller));
 
         history.on('change.warn-unload', function() {
             var changes = history.changes(),
@@ -122,7 +118,7 @@ window.iD = function(container) {
                 .data([['zoom-in', '+', map.zoomIn, 'Zoom In'], ['zoom-out', '-', map.zoomOut, 'Zoom Out']])
                 .enter()
                 .append('button')
-                .attr('class', function(d) { return d[0] + ' narrow'; })
+                .attr('class', function(d) { return d[0]; })
                 .attr('title', function(d) { return d[3]; })
                 .on('click', function(d) { return d[2](); })
                 .append('span')
@@ -145,22 +141,32 @@ window.iD = function(container) {
             .style('display', 'none')
             .attr('class', 'inspector-wrap fr col5');
 
-        var about = container.append('div').attr('id', 'attrib-container');
+        var about = container.append('div')
+            .attr('class','col12 about-block fillD pad1')
 
-        about.append('ul')
-            .attr('id','about')
-            .attr('class','pad1 fillD about-block link-list')
-            .html("<li><a target='_blank' href='http://github.com/systemed/iD'>view code</a></li> " +
+        about.append('div')
+            .attr('class', 'user-container')
+            .append('div')
+                .attr('class', 'hello');
+
+        var aboutList = about.append('ul')
+                .attr('id','about')
+                .attr('class','link-list');
+
+            aboutList.html("<li><a target='_blank' href='http://github.com/systemed/iD'>view code</a></li> " +
                   "<li><a target='_blank' href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
                   " <li id='attribution'>imagery <a target='_blank' href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
 
-        var contributors = about.append('div')
+        var contributors = aboutList.append('li')
             .attr('id', 'user-list')
-            .attr('class','about-block fillD pad1');
         contributors.append('span')
             .attr('class', 'icon nearby icon-pre-text');
-        contributors.append('pan')
+        contributors.append('span')
             .text('Viewing contributions by ');
+        contributors.append('span')
+            .attr('class', 'contributor-list');
+        contributors.append('span')
+            .attr('class', 'contributor-count');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
@@ -208,8 +214,7 @@ window.iD = function(container) {
         var hash = iD.Hash().map(map);
 
         if (!hash.hadHash) {
-            map.zoom(20)
-                .center([-77.02271,38.90085]);
+            map.centerZoom([-77.02271, 38.90085], 20);
         }
 
         d3.select('.user-container').call(iD.ui.userpanel(connection)

@@ -7,7 +7,8 @@ describe("hash", function () {
             on:     function () { return map; },
             off:    function () { return map; },
             zoom:   function () { return arguments.length ? map : 0; },
-            center: function () { return arguments.length ? map : [0, 0] }
+            center: function () { return arguments.length ? map : [0, 0] },
+            centerZoom: function () { return arguments.length ? map : [0, 0] }
         };
     });
 
@@ -28,18 +29,11 @@ describe("hash", function () {
             expect(hash.hadHash).to.be.true;
         });
 
-        it("zooms map to requested level", function () {
+        it("centerZooms map to requested level", function () {
             location.hash = "?map=20.00/38.87952/-77.02405";
-            sinon.spy(map, 'zoom');
+            sinon.spy(map, 'centerZoom');
             hash.map(map);
-            expect(map.zoom).to.have.been.calledWith(20.0);
-        });
-
-        it("centers map at requested coordinates", function () {
-            location.hash = "?map=20.00/38.87952/-77.02405";
-            sinon.spy(map, 'center');
-            hash.map(map);
-            expect(map.center).to.have.been.calledWith([-77.02405, 38.87952]);
+            expect(map.centerZoom).to.have.been.calledWith([-77.02405,38.87952], 20.0);
         });
 
         it("binds the map's move event", function () {
@@ -66,23 +60,13 @@ describe("hash", function () {
             d3.select(window).one("hashchange", fn);
         }
 
-        it("zooms map to requested level", function (done) {
+        it("centerZooms map at requested coordinates", function (done) {
             onhashchange(function () {
-                expect(map.zoom).to.have.been.calledWith(20.0);
+                expect(map.centerZoom).to.have.been.calledWith([-77.02405,38.87952], 20.0);
                 done();
             });
 
-            sinon.spy(map, 'zoom');
-            location.hash = "#?map=20.00/38.87952/-77.02405";
-        });
-
-        it("centers map at requested coordinates", function (done) {
-            onhashchange(function () {
-                expect(map.center).to.have.been.calledWith([-77.02405, 38.87952]);
-                done();
-            });
-
-            sinon.spy(map, 'center');
+            sinon.spy(map, 'centerZoom');
             location.hash = "#?map=20.00/38.87952/-77.02405";
         });
     });

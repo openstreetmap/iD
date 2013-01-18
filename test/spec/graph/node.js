@@ -29,11 +29,11 @@ describe('iD.Node', function () {
 
     describe("#intersects", function () {
         it("returns true for a node within the given extent", function () {
-            expect(iD.Node({loc: [0, 0]}).intersects([[-180, 90], [180, -90]])).to.equal(true);
+            expect(iD.Node({loc: [0, 0]}).intersects([[-5, -5], [5, 5]])).to.equal(true);
         });
 
         it("returns false for a node outside the given extend", function () {
-            expect(iD.Node({loc: [0, 0]}).intersects([[100, 90], [180, -90]])).to.equal(false);
+            expect(iD.Node({loc: [6, 6]}).intersects([[-5, -5], [5, 5]])).to.equal(false);
         });
     });
 

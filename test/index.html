@@ -25,6 +25,7 @@
     <script src='../js/lib/d3.trigger.js'></script>
     <script src='../js/lib/d3.typeahead.js'></script>
     <script src='../js/lib/d3.one.js'></script>
+    <script src='../js/lib/d3.tail.js'></script>
     <script src='../js/lib/ohauth.js'></script>
     <script src='../js/lib/jxon.js'></script>
 
@@ -32,6 +33,9 @@
     <script src='../js/id/util.js'></script>
     <script src='../js/id/oauth.js'></script>
     <script src='../js/id/services/taginfo.js'></script>
+
+    <script src="../js/id/geo.js"></script>
+    <script src="../js/id/geo/extent.js"></script>
 
     <script src='../js/id/renderer/background.js'></script>
     <script src='../js/id/renderer/background_source.js'></script>
@@ -41,7 +45,9 @@
     <script src="../js/id/svg.js"></script>
     <script src="../js/id/svg/areas.js"></script>
     <script src="../js/id/svg/lines.js"></script>
+    <script src="../js/id/svg/member_classes.js"></script>
     <script src="../js/id/svg/midpoints.js"></script>
+    <script src="../js/id/svg/multipolygons.js"></script>
     <script src="../js/id/svg/points.js"></script>
     <script src="../js/id/svg/surface.js"></script>
     <script src="../js/id/svg/tag_classes.js"></script>
@@ -107,7 +113,10 @@
 
     <script>
         iD.debug = true;
-        mocha.setup('bdd');
+        mocha.setup({
+            ui: 'bdd',
+            globals: ['__onresize.tail-size']
+        });
         var expect = chai.expect;
     </script>
 
@@ -134,6 +143,8 @@
     <script src="spec/format/geojson.js"></script>
     <script src="spec/format/xml.js"></script>
 
+    <script src="spec/geo/extent.js"></script>
+
     <script src="spec/graph/graph.js"></script>
     <script src="spec/graph/entity.js"></script>
     <script src="spec/graph/node.js"></script>
@@ -147,7 +158,11 @@
     <script src="spec/renderer/hash.js"></script>
     <script src="spec/renderer/map.js"></script>
 
+    <script src="spec/svg.js"></script>
     <script src="spec/svg/areas.js"></script>
+    <script src="spec/svg/lines.js"></script>
+    <script src="spec/svg/member_classes.js"></script>
+    <script src="spec/svg/multipolygons.js"></script>
     <script src="spec/svg/points.js"></script>
     <script src="spec/svg/vertices.js"></script>
     <script src="spec/svg/tag_classes.js"></script>

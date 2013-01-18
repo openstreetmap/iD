@@ -5,6 +5,7 @@ body {
     font:normal 12px/1.6666 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
+    min-width: 768px;
     color:#222;
     /* text-rendering: optimizeLegibility;  */
     -webkit-font-smoothing: subpixel-antialiased;
@@ -18,7 +19,7 @@ body {
 }
 
 .limiter {
-    max-width: 1400px;
+    max-width: 1200px;
 }
 
 div, textarea, input, span, ul, li, ol, a, button {
@@ -135,7 +136,7 @@ table.tags, table.tags td, table.tags th {
 .col3    { float:left; width:25.0000%; }
 .col4    { float:left; width:33.3333%; }
 .col5    { float:left; width:41.6666%; }
-.col6    { float:left; width:50.0000%; }
+.col6    { float:left; width:50.0000%; max-width: 600px; }
 .col7    { float:left; width:58.3333%; }
 .col8    { float:left; width:66.6666%; }
 .col9    { float:left; width:75.0000%; }
@@ -163,13 +164,15 @@ ul li { list-style: none;}
 
 ul.toggle-list li a {
     font-weight: bold;
+    color: #c1c1c1;
     padding: 10px;
-    border-top: 1px solid #CCC;
+    border-top: 1px solid white;
     display:block;
+    border-top: 1px solid rgba(0, 0, 0, .5);
 }
 
-ul.toggle-list li a:hover {
-    background: #ececec;
+ul.toggle-list li a.selected {
+    color: #333;
 }
 
 ul.toggle-list .icon {
@@ -177,20 +180,15 @@ ul.toggle-list .icon {
     margin-right: 5px;
 }
 
-a.selected {
-    color:#222;
-}
-
-
 ul.link-list li {
-    float: left;
     display: inline-block;
+    float: right;
     margin-left: 10px;
     padding-left: 10px;
     border-left: 1px solid white;
 }
 
-ul.link-list li:first-child {
+ul.link-list li:last-child {
     border-left: 0;
     margin-left: 0;
     padding-left: 0;
@@ -198,13 +196,20 @@ ul.link-list li:first-child {
 
 /* Utility Classes
 ------------------------------------------------------- */
+.fillL {
+    background: white;
+    color: #333;
+}
 
-.fillL { background-color: white;}
-.fillL2 { background: #f7f7f7 url(../img/background-pattern-1.png) repeat;}
-.fillD {
-    background-color: #222222;
-    background-color: rgba(0,0,0,.8);
+.fillL2 {
+    background: #f7f7f7 url(../img/background-pattern-1.png) repeat;
+    color: #333;
+}
+
+.content, .fillD {
+    background:rgba(0,0,0,.8);
     color: white;
+    border-radius: 4px;
 }
 
 .fl { float: left;}
@@ -213,12 +218,6 @@ ul.link-list li:first-child {
 div.hide,
 form.hide {
     display:none;
-}
-
-.content {
-    background-color:#fff;
-    border-radius: 4px;
-    border: 1px solid #ccc;
 }
 
 .pad1    {padding: 10px;}
@@ -230,8 +229,8 @@ form.hide {
 
 button {
     line-height:20px;
-    border:1px solid #aaa;
-    box-shadow: inset 0 0 0px 1px #fff;
+    position: relative;
+    border:0;
     color:#222;
     background: white;
     font-weight:bold;
@@ -239,32 +238,30 @@ button {
     display: inline-block;
     height:40px;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
+    border-radius:4px;
 }
 
 button:hover {
     background-color: #ececec;
 }
 
+button.col3:hover {
+    background: #bde5aa;
+}
+
 button.active {
-    box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.35);
     cursor:url(../img/cursor-pointing.png) 6 1, auto;
 }
 
 button.active:not([disabled]) {
-    background-color: #ececec;
-    box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.25);
-}
-
-button.wide,
-button.narrow {
-    border-radius:4px;
+    background: #6bc641;
+    color: white;
 }
 
 button.minor {
     border-radius:4px;
     height: 20px;
     width: 20px;
-    margin: 5px;
     border: 0;
     box-shadow: none;
     background-color: transparent;
@@ -282,14 +279,15 @@ button.centered {
 
 .button-wrap {
     display: inline-block;
-    padding:10px 0 10px 10px;
+    padding-right:10px;
     margin: 0;
 }
 
 .button-wrap button:only-child { width: 100%;}
+.button-wrap:last-child { padding-right: 0;}
 
 .joined button {
-    border-right-width: 0;
+    border-right: 1px solid rgba(0,0,0,.5);
     border-radius:0;
 }
 
@@ -298,15 +296,16 @@ button.centered {
 }
 
 .joined button:last-child {
-    border-right-width: 1px;
+    border-right-width: 0px;
     border-radius:0 4px 4px 0;
 }
 
 button.action {
-    background: #444;
+    color: white;
+    background: #7092ff;
 }
 button.action:hover {
-    background: #222;
+    background: #597BE7;
 }
 
 button.delete {
@@ -329,14 +328,31 @@ button.save .count {
 
 button.save.has-count .count {
     display: block;
-    color: #444;
-    background: #fff;
-    border-radius: 0 3px 3px 0;
-    padding: 9px;
-    float: right;
-    margin-left: 10px;
-    margin-top: -9px;
-    margin-right: -8px;
+    position: absolute;
+    left: 115%;
+    top: 0;
+    bottom: 0;
+    background: rgba(255,255,255,.5);
+    color: #333;
+    padding: 10px;
+    height: 30px;
+    line-height: 12px;
+    border-radius: 4px;
+    margin: auto;
+}
+
+button.save.has-count .count::before {
+    content: "";
+    margin: auto;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+       border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+     border-right: 6px solid rgba(255,255,255,.5);
 }
 
 button.close {
@@ -345,28 +361,19 @@ button.close {
     right: 10px;
 }
 
-button .label {
-    margin-right: 3px;
-}
-
-button.action .label {
+button.save .label {
+    display: inline-block;
     color: white;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 }
 
 button[disabled] {
     cursor:auto;
-    background: white;
+    background: rgba(255,255,255,.5);
     pointer-events:none;
 }
 
 button[disabled] .label {
-    color:#ccc;
-    text-shadow: none;
-}
-
-button[disabled]:hover {
-    background: white;
+    color: rgba(0,0,0,.5);
 }
 
 /* Icons */
@@ -387,17 +394,16 @@ button[disabled]:hover {
 }
 
 .icon.icon-pre-text {
-  margin-right: 3px;
+    margin-right: 3px;
 }
 
 /* Definitions for every icon */
-
-.icon.browse     { background-position:   0px 0px;}
-.icon.add-point  { background-position: -20px 0px;}
-.icon.add-line   { background-position: -40px 0px;}
-.icon.add-area   { background-position: -60px 0px;}
-.icon.undo       { background-position: -80px 0px;}
-.icon.redo       { background-position: -100px 0px;}
+button.active:not([disabled]) .icon.browse     { background-position:   0px -20px;}
+button.active:not([disabled]) .icon.add-point  { background-position: -20px -20px;}
+button.active:not([disabled]) .icon.add-line   { background-position: -40px -20px;}
+button.active:not([disabled]) .icon.add-area   { background-position: -60px -20px;}
+button.active:not([disabled]) .icon.undo       { background-position: -80px -20px;}
+button.active:not([disabled]) .icon.redo      { background-position: -100px -20px;}
 .icon.apply      { background-position: -120px 0px;}
 .icon.save       { background-position: -140px 0px;}
 .icon.close      { background-position: -160px 0px;}
@@ -411,24 +417,21 @@ button[disabled]:hover {
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
 
-.fillD .icon.browse     { background-position:   0px -20px;}
-.fillD .icon.add-point  { background-position: -20px -20px;}
-.fillD .icon.add-line   { background-position: -40px -20px;}
-.fillD .icon.add-area   { background-position: -60px -20px;}
-.fillD .icon.undo       { background-position: -80px -20px;}
-.fillD .icon.redo       { background-position: -100px -20px;}
-.fillD .icon.apply      { background-position: -120px -20px;}
-.fillD .icon.save       { background-position: -140px -20px;}
-.fillD .icon.close      { background-position: -160px -20px;}
-.fillD .icon.delete     { background-position: -180px -20px;}
-.fillD .icon.remove     { background-position: -200px -20px;}
-.fillD .icon.inspect    { background-position: -220px -20px;}
-.fillD .icon.zoom-in    { background-position: -240px -20px;}
-.fillD .icon.zoom-out   { background-position: -260px -20px;}
-.fillD .icon.geocode    { background-position: -280px -20px;}
-.fillD .icon.layers     { background-position: -300px -20px;}
-.fillD .icon.avatar     { background-position: -320px -20px;}
-.fillD .icon.nearby     { background-position: -340px -20px;}
+.icon.browse     { background-position:   0px 0px;}
+.icon.add-point  { background-position: -20px 0px;}
+.icon.add-line   { background-position: -40px 0px;}
+.icon.add-area   { background-position: -60px 0px;}
+.icon.undo       { background-position: -80px 0px;}
+.icon.redo      { background-position: -100px 0px;}
+
+.close-modal.icon.remove      { background-position: -200px -20px;}
+.map-control .icon.inspect    { background-position: -220px -20px;}
+.map-control .icon.zoom-in    { background-position: -240px -20px;}
+.map-control .icon.zoom-out   { background-position: -260px -20px;}
+.map-control .icon.geocode    { background-position: -280px -20px;}
+.map-control .icon.layers     { background-position: -300px -20px;}
+.fillD .icon.avatar           { background-position: -320px -20px;}
+.fillD .icon.nearby           { background-position: -340px -20px;}
 
 button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
@@ -455,7 +458,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.big-vertex { background-position: -120px -80px;}
 .icon.big-inspect { background-position: -160px -80px;}
 
-/* Toggle Icon is special */
+/* Toggle icon is special */
 .toggle.icon                   { background-position: 0px -180px;}
 a:hover .toggle.icon           { background-position: -20px -180px;}
 .selected .toggle.icon,
@@ -465,12 +468,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 ------------------------------------------------------- */
 
 #bar {
-    border-bottom:1px solid #ccc;
     position:absolute;
     left:0px;
     top:0px;
     right:0;
     height:60px;
+    border-radius: 0;
 }
 
 /* Status box */
@@ -485,14 +488,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity:0;
     display:none;
     padding-left: 10px;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 .inspector {
-    border-left:  1px solid #ccc;
-    border-bottom: 1px solid #ccc;
     min-height: 60px;
     position: relative;
+    border-radius: 0 0 0 4px;
 }
 
 .inspector-inner {
@@ -500,8 +502,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner.head {
-    border-bottom: 1px solid #ccc;
-    background:#fff;
     z-index:1;
     position:relative;
 }
@@ -580,17 +580,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     right: 30px;
 }
 
-.inspector-buttons {
-    border-top: 1px solid #ccc;
-    padding-right: 10px;
-}
-
 .inspector-buttons .button-wrap {
-    width: 50%;
-}
-
-.inspector-buttons .button-wrap {
-    width: 50%;
+    width: 40%;
 }
 
 .inspector-inner .add-tag-row {
@@ -609,12 +600,22 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 /* Map Controls */
 
 .map-control {
-    left:10px;
+    left:0px;
     position:absolute;
 }
 
 .map-control button {
     width: 40px;
+    border-radius: 0 4px 4px 0;
+    background: rgba(0, 0, 0, .8);
+}
+
+.map-control button:hover {
+    background: rgba(0, 0, 0, .9);
+}
+
+.map-control button.active:hover {
+    background: #6bc641;
 }
 
 .map-overlay {
@@ -623,6 +624,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     left:50px;
     top:0;
     display: block;
+    border-radius: 4px;
 }
 
 /* Zoomer */
@@ -633,12 +635,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .zoombuttons button.zoom-in {
-    border-radius:4px 4px 0 0;
+    border-radius:0 4px 0 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
 }
 
 .zoombuttons button.zoom-out {
     border-top:0;
-    border-radius:0 0 4px 4px;
+    border-radius:0 0 4px 0;
 }
 
 /* Layer Switcher */
@@ -647,28 +650,24 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top:210px;
 }
 
-.layerswitcher-control .adjustments {
-    padding:5px;
-    opacity:0.2;
-}
-
-.layerswitcher-control .adjustments:hover {
-    opacity:1;
-}
-
-.layerswitcher-control .adjustments .reset {
+.layerswitcher-control .adjustments button {
+    opacity:0.5;
     height:20px;
     font-size:10px;
     font-weight:normal;
-    padding:0 5px;
+    padding:0 5px 3px 5px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0;
+}
+
+.layerswitcher-control .adjustments button:hover {
+    opacity: 1;
 }
 
 .layerswitcher-control .nudge {
-    height:20px;
     width:20px;
-    font-size:10px;
     margin-right:2px;
-    font-weight:normal;
 }
 
 .opacity-options-wrapper {
@@ -676,7 +675,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .opacity-options {
-    border:1px solid #b0b0b0;
     background: url(../img/background-pattern-opacity.png) 0 0 repeat;
     height:20px;
     width:62px;
@@ -695,14 +693,14 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .opacity-options li .select-box{
     position: absolute;
     width:20px;
-    height:18px;
+    height:20px;
     z-index: 9999;
 }
 
 .layerswitcher-control li:hover .select-box,
 .layerswitcher-control li.selected .select-box {
-    border: 2px solid #4672ff;
-    background: rgba(70, 114, 255, .5);
+    border: 2px solid #6bc641;
+    background: rgba(107, 198, 65, .5);
     opacity: .5;
 }
 .layerswitcher-control li.selected:hover .select-box,
@@ -714,7 +712,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background:#222;
     display:inline-block;
     width:20px;
-    height:18px;
+    height:20px;
 }
 
 /* Geocoder */
@@ -740,7 +738,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     display:block;
     position:absolute;
     overflow:hidden;
-    top:60px;
+    top:0px;
     left:0;
     right:0;
     bottom:0;
@@ -765,28 +763,17 @@ img.tile {
 ------------------------------------------------------- */
 
 .about-block {
-    float: right;
     height: 40px;
-}
-
-#about {
-    border-radius:3px 0 0 0;
-}
-
-#attrib-container {
     position: absolute;
     right:0px;
     bottom:0px;
-}
-
-#user-list {
-    margin-right: 8px;
-    border-radius:3px 3px 0 0;
-    max-width: 400px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    border-radius: 0;
 }
+
+#about { text-align: right;}
 
 #user-list a:not(:last-child):after {
     content: ', ';
@@ -795,10 +782,7 @@ img.tile {
 /* Account Information */
 
 .user-container {
-    position:absolute;
-    left:0px;
-    bottom:0px;
-    border-radius:0 3px 0 0;
+    float: left;
 }
 
 .user-container .logout {
@@ -851,6 +835,7 @@ div.typeahead a:first-child {
     position:absolute;
     width: 50%;
     left: 25%;
+    max-width: 600px;
     top:80px;
     z-index: 3;
 }
@@ -865,14 +850,15 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
-.modal button { margin-bottom: 0;}
-.modal button:first-child { margin-left: 0;}
-
 .modal button.close-modal {
     float:right;
-    margin-right:10px;
-    margin-top:10px;
+    position: absolute;
+    right:5px;
+    top:5px;
     border:0;
+}
+.modal button.close-modal:hover {
+    background-color: transparent;
 }
 
 .shaded {
@@ -918,10 +904,18 @@ div.typeahead a:first-child {
 
 .modal-section {
     padding: 20px;
-    border-bottom: 1px solid #ccc;
+    width: 100%;
 }
 
-.modal-section:last-child { border-bottom: 0;}
+.modal-section:first-child {
+    border-radius: 4px 4px 0 0;
+}
+
+.modal-section:last-child {
+    border-radius: 0 0 4px 4px;
+}
+
+.modal-section .buttons { padding-top: 20px;}
 
 .modal-section img.wiki-image {
     max-width: 400px;
@@ -980,18 +974,16 @@ div.typeahead a:first-child {
 .tooltip {
     white-space: normal;
     position: absolute;
+    left: 0; right: 0; margin: auto;
     z-index: -1000;
     height: 0;
     padding: 5px;
     opacity: 0;
     display: block;
-    filter: alpha(opacity=0);
-    visibility: visible;
 }
 
 .tooltip.in {
     opacity: 0.8;
-    filter: alpha(opacity=80);
     z-index: 1030;
     height: auto;
 }
@@ -1013,16 +1005,14 @@ div.typeahead a:first-child {
 }
 
 .tooltip-inner {
-    max-width: 200px;
-    min-width: 100px;
+    text-align: left;
+    width: 200px;
     font-size: 11px;
     font-weight: bold;
     line-height: 20px;
     padding: 5px 10px;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-    background-color: #000000;
+    color: #333;
+    background-color: white;
     -webkit-border-radius: 4px;
        -moz-border-radius: 4px;
             border-radius: 4px;
@@ -1040,7 +1030,7 @@ div.typeahead a:first-child {
   bottom: 0;
   left: 50%;
   margin-left: -5px;
-  border-top-color: #000000;
+  border-top-color: white;
   border-width: 5px 5px 0;
 }
 
@@ -1048,7 +1038,7 @@ div.typeahead a:first-child {
   top: 50%;
   left: 0;
   margin-top: -5px;
-  border-right-color: #000000;
+  border-right-color: white;
   border-width: 5px 5px 5px 0;
 }
 
@@ -1056,7 +1046,7 @@ div.typeahead a:first-child {
   top: 50%;
   right: 0;
   margin-top: -5px;
-  border-left-color: #000000;
+  border-left-color: white;
   border-width: 5px 0 5px 5px;
 }
 
@@ -1064,7 +1054,7 @@ div.typeahead a:first-child {
   top: 0;
   left: 50%;
   margin-left: -5px;
-  border-bottom-color: #000000;
+  border-bottom-color: white;
   border-width: 0 5px 5px;
 }
 
@@ -1082,4 +1072,18 @@ div.typeahead a:first-child {
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
+}
+
+/* Media Queries
+------------------------------------------------------- */
+
+@media only screen and (max-width: 840px) {
+    span.label {
+        display: none;
+    }
+    .icon.icon-pre-text {
+    margin-right: 0px;
+    }
+}
+
 }

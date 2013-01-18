@@ -5,6 +5,7 @@ iD.Map = function() {
         translateStart,
         keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
+        roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale())
@@ -16,11 +17,12 @@ iD.Map = function() {
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
-        points = iD.svg.Points(),
-        vertices = iD.svg.Vertices(),
-        lines = iD.svg.Lines(),
-        areas = iD.svg.Areas(),
-        midpoints = iD.svg.Midpoints(),
+        points = iD.svg.Points(roundedProjection),
+        vertices = iD.svg.Vertices(roundedProjection),
+        lines = iD.svg.Lines(roundedProjection),
+        areas = iD.svg.Areas(roundedProjection),
+        multipolygons = iD.svg.Multipolygons(roundedProjection),
+        midpoints = iD.svg.Midpoints(roundedProjection),
         tail = d3.tail(),
         surface, tilegroup;
 
@@ -67,26 +69,32 @@ iD.Map = function() {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
-            var only = {},
-                filterOnly = {};
-            for (var j = 0; j < difference.length; j++) {
-                var id = difference[j],
-                    entity = graph.fetch(id);
-                // Even if the entity is false (deleted), it needs to be
-                // removed from the surface
-                only[id] = entity;
-                if (entity && entity.intersects(extent, graph)) {
-                    if (only[id].type === 'node') {
-                        var parents = graph.parentWays(only[id]);
-                        for (var k = 0; k < parents.length; k++) {
-                            // Don't re-fetch parents
-                            if (only[parents[k].id] === undefined) {
-                                only[parents[k].id] = graph.fetch(parents[k].id);
-                            }
-                        }
+            var only = {};
+
+            function addParents(parents) {
+                for (var i = 0; i < parents.length; i++) {
+                    var parent = parents[i];
+                    if (only[parent.id] === undefined) {
+                        only[parent.id] = graph.fetch(parent.id);
+                        addParents(graph.parentRelations(parent));
                     }
                 }
             }
+
+            for (var j = 0; j < difference.length; j++) {
+                var id = difference[j],
+                    entity = graph.fetch(id);
+
+                // Even if the entity is false (deleted), it needs to be
+                // removed from the surface
+                only[id] = entity;
+
+                if (entity && entity.intersects(extent, graph)) {
+                    addParents(graph.parentWays(only[id]));
+                    addParents(graph.parentRelations(only[id]));
+                }
+            }
+
             all = _.compact(_.values(only));
             filter = function(d) { return d.midpoint ? d.way in only : d.id in only; };
         }
@@ -97,11 +105,12 @@ iD.Map = function() {
         }
 
         surface
-            .call(points, graph, all, filter, projection)
-            .call(vertices, graph, all, filter, projection)
-            .call(lines, graph, all, filter, projection)
-            .call(areas, graph, all, filter, projection)
-            .call(midpoints, graph, all, filter, projection);
+            .call(points, graph, all, filter)
+            .call(vertices, graph, all, filter)
+            .call(lines, graph, all, filter)
+            .call(areas, graph, all, filter)
+            .call(multipolygons, graph, all, filter)
+            .call(midpoints, graph, all, filter);
     }
 
     function editOff() {
@@ -152,7 +161,7 @@ iD.Map = function() {
         redraw();
     }
 
-    function redraw(difference) {
+    var redraw = _.throttle(function(difference) {
         dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
@@ -163,7 +172,7 @@ iD.Map = function() {
             editOff();
         }
         return map;
-    }
+    }, 10);
 
     function pointLocation(p) {
         var translate = projection.translate(),
@@ -198,10 +207,7 @@ iD.Map = function() {
         return map;
     };
 
-    map.zoom = function(z) {
-        if (!arguments.length) {
-            return Math.max(Math.log(projection.scale()) / Math.LN2 - 8, 0);
-        }
+    function setZoom(z) {
         var scale = 256 * Math.pow(2, z),
             center = pxCenter(),
             l = pointLocation(center);
@@ -214,8 +220,17 @@ iD.Map = function() {
         t[1] += center[1] - l[1];
         projection.translate(t);
         zoom.translate(projection.translate());
-        return redraw();
-    };
+    }
+
+    function setCenter(loc) {
+        var t = projection.translate(),
+            c = pxCenter(),
+            ll = projection(loc);
+        projection.translate([
+            t[0] - ll[0] + c[0],
+            t[1] - ll[1] + c[1]]);
+        zoom.translate(projection.translate());
+    }
 
     map.size = function(_) {
         if (!arguments.length) return dimensions;
@@ -235,15 +250,23 @@ iD.Map = function() {
         if (!arguments.length) {
             return projection.invert(pxCenter());
         } else {
-            var t = projection.translate(),
-                c = pxCenter(),
-                ll = projection(loc);
-            projection.translate([
-                t[0] - ll[0] + c[0],
-                t[1] - ll[1] + c[1]]);
-            zoom.translate(projection.translate());
+            setCenter(loc);
             return redraw();
         }
+    };
+
+    map.zoom = function(z) {
+        if (!arguments.length) {
+            return Math.max(Math.log(projection.scale()) / Math.LN2 - 8, 0);
+        }
+        setZoom(z);
+        return redraw();
+    };
+
+    map.centerZoom = function(loc, z) {
+        setCenter(loc);
+        setZoom(z);
+        return redraw();
     };
 
     map.centerEase = function(loc) {
@@ -254,26 +277,23 @@ iD.Map = function() {
         }, 20);
     };
 
-    map.extent = function(tl, br) {
+    map.extent = function(_) {
         if (!arguments.length) {
-            return [projection.invert([0, 0]), projection.invert(dimensions)];
+            return iD.geo.Extent(projection.invert([0, dimensions[1]]),
+                                 projection.invert([dimensions[0], 0]));
         } else {
-
-            var TL = projection(tl),
-                BR = projection(br);
+            var extent = iD.geo.Extent(_),
+                tl = projection([extent[0][0], extent[1][1]]),
+                br = projection([extent[1][0], extent[0][1]]);
 
             // Calculate maximum zoom that fits extent
-            var hFactor = (BR[0] - TL[0]) / dimensions[0],
-                vFactor = (BR[1] - TL[1]) / dimensions[1],
+            var hFactor = (br[0] - tl[0]) / dimensions[0],
+                vFactor = (br[1] - tl[1]) / dimensions[1],
                 hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
                 vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
                 newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
-            // Calculate center of projected extent
-            var midPoint = [(TL[0] + BR[0]) / 2, (TL[1] + BR[1]) / 2],
-                midLoc = projection.invert(midPoint);
-
-            map.zoom(newZoom).center(midLoc);
+            map.centerZoom(extent.center(), newZoom);
         }
     };
 
