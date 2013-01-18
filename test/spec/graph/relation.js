@@ -36,7 +36,23 @@ describe('iD.Relation', function () {
     });
 
     describe("#extent", function () {
-        it("returns the minimal extent containing the extents of all members");
+        it("returns the minimal extent containing the extents of all members", function () {
+            var a = iD.Node({loc: [0, 0]}),
+                b = iD.Node({loc: [5, 10]}),
+                r = iD.Relation({members: [{id: a.id}, {id: b.id}]}),
+                graph = iD.Graph([a, b, r]);
+
+            expect(r.extent(graph)).to.eql([[0, 0], [5, 10]])
+        });
+
+        it("returns the known extent of incomplete relations", function () {
+            var a = iD.Node({loc: [0, 0]}),
+                b = iD.Node({loc: [5, 10]}),
+                r = iD.Relation({members: [{id: a.id}, {id: b.id}]}),
+                graph = iD.Graph([a, r]);
+
+            expect(r.extent(graph)).to.eql([[0, 0], [0, 0]])
+        });
     });
 
     describe("#multipolygon", function () {
@@ -231,6 +247,18 @@ describe('iD.Relation', function () {
                 graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer1, outer2, inner, r]);
 
             expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d]], [[g, h, i, g]]]);
+        });
+
+        specify("incomplete relation", function () {
+            var a  = iD.Node(),
+                b  = iD.Node(),
+                c  = iD.Node(),
+                w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
+                w2 = iD.Way(),
+                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                g  = iD.Graph([a, b, c, w1, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c]]]);
         });
     });
 });

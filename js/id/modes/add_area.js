@@ -12,7 +12,7 @@ iD.modes.AddArea = function() {
             controller = mode.controller;
 
         map.dblclickEnable(false)
-            .hint('Click on the map to start drawing an area, like a park, lake, or building.');
+            .tail('Click on the map to start drawing an area, like a park, lake, or building.');
 
         map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
@@ -47,7 +47,7 @@ iD.modes.AddArea = function() {
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);
-        mode.map.hint(false);
+        mode.map.tail(false);
         mode.map.surface.on('click.addarea', null);
         mode.map.keybinding().on('⎋.addarea', null);
     };

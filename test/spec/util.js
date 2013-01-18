@@ -92,5 +92,25 @@ describe('Util', function() {
                 expect(iD.util.geo.polygonContainsPolygon(outer, inner)).to.be.false;
             });
         });
+
+        describe('#polygonIntersectsPolygon', function() {
+            it('says a polygon in a polygon intersects it', function() {
+                var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+                var inner = [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]];
+                expect(iD.util.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
+            });
+
+            it('says a polygon that partially intersects does', function() {
+                var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+                var inner = [[-1, -1], [1, 2], [2, 2], [2, 1], [1, 1]];
+                expect(iD.util.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
+            });
+
+            it('says totally disjoint polygons do not intersect', function() {
+                var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+                var inner = [[-1, -1], [-1, -2], [-2, -2], [-2, -1], [-1, -1]];
+                expect(iD.util.geo.polygonIntersectsPolygon(outer, inner)).to.be.false;
+            });
+        });
     });
 });

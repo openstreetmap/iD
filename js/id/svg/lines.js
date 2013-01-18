@@ -1,4 +1,4 @@
-iD.svg.Lines = function() {
+iD.svg.Lines = function(projection) {
 
     var arrowtext = '►\u3000\u3000',
         alength;
@@ -33,30 +33,28 @@ iD.svg.Lines = function() {
         return as - bs;
     }
 
-    function drawPaths(group, lines, filter, classes, lineString, prefix) {
-        var paths = group.selectAll('path')
-            .filter(filter)
-            .data(lines, iD.Entity.key);
+    return function drawLines(surface, graph, entities, filter) {
+        function drawPaths(group, lines, filter, classes, lineString, prefix) {
+            var paths = group.selectAll('path')
+                .filter(filter)
+                .data(lines, iD.Entity.key);
 
-        paths.enter()
-            .append('path')
-            .attr('id', function(d) {
-                return prefix + d.id;
-            })
-            .attr('class', classes);
+            paths.enter()
+                .append('path')
+                .attr('id', function(d) { return prefix + d.id;})
+                .attr('class', classes);
 
-        paths
-            .order()
-            .attr('d', lineString)
-            .call(iD.svg.TagClasses());
+            paths
+                .order()
+                .attr('d', lineString)
+                .call(iD.svg.TagClasses())
+                .call(iD.svg.MemberClasses(graph));
 
-        paths.exit()
-            .remove();
+            paths.exit()
+                .remove();
 
-        return paths;
-    }
-
-    return function drawLines(surface, graph, entities, filter, projection) {
+            return paths;
+        }
 
         if (!alength) {
             var arrow = surface.append('text').text(arrowtext);
@@ -76,15 +74,7 @@ iD.svg.Lines = function() {
 
         lines.sort(waystack);
 
-        function lineString(entity) {
-            if (lineStrings[entity.id] !== undefined) {
-                return lineStrings[entity.id];
-            }
-            var nodes = _.pluck(entity.nodes, 'loc');
-            if (nodes.length === 0) return (lineStrings[entity.id] = '');
-            else return (lineStrings[entity.id] =
-                'M' + nodes.map(iD.svg.RoundProjection(projection)).join('L'));
-        }
+        var lineString = iD.svg.LineString(projection);
 
         var casing = surface.select('.layer-casing'),
             stroke = surface.select('.layer-stroke'),

@@ -1,5 +1,5 @@
-iD.svg.Vertices = function() {
-    return function drawVertices(surface, graph, entities, filter, projection) {
+iD.svg.Vertices = function(projection) {
+    return function drawVertices(surface, graph, entities, filter) {
         var vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -31,6 +31,7 @@ iD.svg.Vertices = function() {
 
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
+            .call(iD.svg.MemberClasses(graph))
             .classed('shared', function(entity) { return graph.parentWays(entity).length > 1; });
 
         // Selecting the following implicitly

@@ -27,8 +27,6 @@ iD.Connection = function() {
             return callback(null, parse(dom));
         }
         return d3.xml(url).get().on('load', done);
-        inflight.push(d3.xml(url).get()
-            .on('load', done));
     }
 
     function getNodes(obj) {

@@ -2,7 +2,7 @@ iD.Node = iD.Entity.extend({
     type: "node",
 
     extent: function() {
-        return [this.loc, this.loc];
+        return iD.geo.Extent(this.loc);
     },
 
     geometry: function() {

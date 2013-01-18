@@ -96,7 +96,7 @@ window.iD = function(container) {
 
         var save_button = bar.append('button')
             .attr('class', 'save action wide')
-            .call(iD.ui.save().map(map));
+            .call(iD.ui.save().map(map).controller(controller));
 
         history.on('change.warn-unload', function() {
             var changes = history.changes(),
@@ -156,8 +156,12 @@ window.iD = function(container) {
             .attr('class','about-block fillD pad1');
         contributors.append('span')
             .attr('class', 'icon nearby icon-pre-text');
-        contributors.append('pan')
+        contributors.append('span')
             .text('Viewing contributions by ');
+        contributors.append('span')
+            .attr('class', 'contributor-list');
+        contributors.append('span')
+            .attr('class', 'contributor-count');
 
         history.on('change.buttons', function() {
             var undo = history.undoAnnotation(),
@@ -180,9 +184,9 @@ window.iD = function(container) {
                 .call(redo ? refreshTooltip : undo_tooltip.hide);
         });
 
-        window.onresize = function() {
+        d3.select(window).on('resize.map-size', function() {
             map.size(m.size());
-        };
+        });
 
         map.keybinding()
             .on('a', function(evt, mods) {
@@ -205,8 +209,7 @@ window.iD = function(container) {
         var hash = iD.Hash().map(map);
 
         if (!hash.hadHash) {
-            map.zoom(20)
-                .center([-77.02271,38.90085]);
+            map.centerZoom([-77.02271, 38.90085], 20);
         }
 
         d3.select('.user-container').call(iD.ui.userpanel(connection)

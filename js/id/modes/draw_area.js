@@ -18,8 +18,7 @@ iD.modes.DrawArea = function(wayId) {
 
         map.dblclickEnable(false)
             .fastEnable(false);
-        map.hint('Click on the map to add points to your area. Finish the ' +
-                      'area by clicking on your first point');
+        map.tail('Click to add points to your area. Click the first point to finish the area.');
 
         history.perform(
             iD.actions.AddNode(node),
@@ -116,7 +115,7 @@ iD.modes.DrawArea = function(wayId) {
         surface.selectAll('.way, .node')
             .classed('active', false);
 
-        mode.map.hint(false);
+        mode.map.tail(false);
         mode.map.fastEnable(true);
 
         surface

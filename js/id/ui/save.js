@@ -1,6 +1,6 @@
 iD.ui.save = function() {
 
-    var map;
+    var map, controller;
 
     function save(selection) {
 
@@ -59,6 +59,12 @@ iD.ui.save = function() {
                                 .on('cancel', function() {
                                     modal.remove();
                                 })
+                                .on('fix', function(d) {
+                                    map.extent(d.entity.extent(map.history().graph()));
+                                    if (map.zoom() > 19) map.zoom(19);
+                                    controller.enter(iD.modes.Select(d.entity));
+                                    modal.remove();
+                                })
                                 .on('save', commit));
                     });
                 } else {
@@ -88,6 +94,12 @@ iD.ui.save = function() {
     save.map = function(_) {
         if (!arguments.length) return map;
         map = _;
+        return save;
+    };
+
+    save.controller = function(_) {
+        if (!arguments.length) return controller;
+        controller = _;
         return save;
     };
 
