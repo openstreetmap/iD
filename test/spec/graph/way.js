@@ -35,6 +35,28 @@ describe('iD.Way', function() {
         expect(iD.Way({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
+    describe("#first", function () {
+        it("returns the first node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).first()).to.equal('a');
+        });
+    });
+
+    describe("#last", function () {
+        it("returns the last node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).last()).to.equal('c');
+        });
+    });
+
+    describe("#contains", function () {
+        it("returns true if the way contains the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).contains('b')).to.be.true;
+        });
+
+        it("returns false if the way does not contain the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).contains('d')).to.be.false;
+        });
+    });
+
     describe("#extent", function () {
         it("returns the minimal extent containing all member nodes", function () {
             var node1 = iD.Node({loc: [0, 0]}),

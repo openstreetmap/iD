@@ -12,8 +12,8 @@ iD.modes.DrawLine = function(wayId, direction) {
             way = history.graph().entity(wayId),
             node = iD.Node({loc: map.mouseCoordinates()}),
             index = (direction === 'forward') ? undefined : 0,
-            headId = (direction === 'forward') ? _.last(way.nodes) : _.first(way.nodes),
-            tailId = (direction === 'forward') ? _.first(way.nodes) : _.last(way.nodes);
+            headId = (direction === 'forward') ? way.last() : way.first(),
+            tailId = (direction === 'forward') ? way.first() : way.last();
 
         iD.behavior.Hover()(surface);
 
