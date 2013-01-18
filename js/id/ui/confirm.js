@@ -7,7 +7,7 @@ iD.ui.confirm = function() {
         .attr('class', 'description');
     var nochanges = modal.select('.content')
         .append('button')
-        .attr('class','wide action centered')
+        .attr('class','action centered')
         .on('click.confirm', function() {
             modal.remove();
         });
