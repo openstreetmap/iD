@@ -20,7 +20,10 @@
 
     <script>
         iD.debug = true;
-        mocha.setup('bdd');
+        mocha.setup({
+            ui: 'bdd',
+            globals: ['__onresize.tail-size']
+        });
         var expect = chai.expect;
     </script>
 
