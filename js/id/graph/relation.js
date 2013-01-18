@@ -18,6 +18,26 @@ iD.Relation = iD.Entity.extend({
         return 'relation';
     },
 
+    // Return the first member with the given role. A copy of the member object
+    // is returned, extended with an 'index' property whose value is the member index.
+    memberByRole: function(role) {
+        for (var i = 0; i < this.members.length; i++) {
+            if (this.members[i].role === role) {
+                return _.extend({}, this.members[i], {index: i});
+            }
+        }
+    },
+
+    // Return the first member with the given id. A copy of the member object
+    // is returned, extended with an 'index' property whose value is the member index.
+    memberById: function(id) {
+        for (var i = 0; i < this.members.length; i++) {
+            if (this.members[i].id === id) {
+                return _.extend({}, this.members[i], {index: i});
+            }
+        }
+    },
+
     // Returns an array [A0, ... An], each Ai being an array of node arrays [Nds0, ... Ndsm],
     // where Nds0 is an outer ring and subsequent Ndsi's (if any i > 0) being inner rings.
     //
