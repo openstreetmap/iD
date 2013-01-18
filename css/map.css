@@ -284,7 +284,11 @@ text.tag-oneway {
     pointer-events:none;
 }
 
-text.label {
+text.textpath-label {
+  text-anchor: middle;
+}
+
+text.textpath-label, text.text-label {
   font-size: 12px;
   font-weight: bold;
   fill: black;

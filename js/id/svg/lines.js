@@ -33,13 +33,16 @@ iD.svg.Lines = function() {
         return as - bs;
     }
 
-    function drawPaths(group, lines, filter, classes, lineString) {
+    function drawPaths(group, lines, filter, classes, lineString, prefix) {
         var paths = group.selectAll('path')
             .filter(filter)
             .data(lines, iD.Entity.key);
 
         paths.enter()
             .append('path')
+            .attr('id', function(d) {
+                return prefix + d.id;
+            })
             .attr('class', classes);
 
         paths
@@ -87,8 +90,8 @@ iD.svg.Lines = function() {
             stroke = surface.select('.layer-stroke'),
             defs   = surface.select('defs'),
             text   = surface.select('.layer-text'),
-            casings = drawPaths(casing, lines, filter, 'way line casing', lineString),
-            strokes = drawPaths(stroke, lines, filter, 'way line stroke', lineString);
+            casings = drawPaths(casing, lines, filter, 'way line casing', lineString, 'casing-'),
+            strokes = drawPaths(stroke, lines, filter, 'way line stroke', lineString, 'stroke-');
 
         // Determine the lengths of oneway paths
         var lengths = {},
