@@ -89,6 +89,21 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#isRestriction", function () {
+        it("returns true for 'restriction' type", function () {
+            expect(iD.Relation({tags: {type: 'restriction'}}).isRestriction()).to.be.true;
+        });
+
+        it("returns true for 'restriction:type' types", function () {
+            expect(iD.Relation({tags: {type: 'restriction:bus'}}).isRestriction()).to.be.true;
+        });
+
+        it("returns false otherwise", function () {
+            expect(iD.Relation().isRestriction()).to.be.false;
+            expect(iD.Relation({tags: {type: 'multipolygon'}}).isRestriction()).to.be.false;
+        });
+    });
+
     describe("#multipolygon", function () {
         specify("single polygon consisting of a single way", function () {
             var a = iD.Node(),
