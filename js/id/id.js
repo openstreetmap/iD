@@ -24,13 +24,16 @@ window.iD = function(container) {
         var bar = container.append('div')
             .attr('id', 'bar').attr('class', 'fillL2');
 
-        var buttons_joined = bar.append('div')
-            .attr('class', 'buttons-joined');
+        var limiter = bar.append('div')
+            .attr('class', 'limiter');
+
+        var buttons_joined = limiter.append('div')
+            .attr('class', 'button-wrap joined col4');
 
         var buttons = buttons_joined.selectAll('button.add-button')
             .data([iD.modes.Browse(), iD.modes.AddPoint(), iD.modes.AddLine(), iD.modes.AddArea()])
             .enter().append('button')
-                .attr('class', function (mode) { return mode.title + ' add-button'; })
+                .attr('class', function (mode) { return mode.title + ' add-button col3'; })
             .attr('data-original-title', function (mode) { return mode.description; })
             .call(bootstrap.tooltip().placement('bottom'))
             .on('click', function (mode) { controller.enter(mode); });
@@ -46,7 +49,7 @@ window.iD = function(container) {
             }
         }
 
-        notice = iD.ui.notice(bar
+        notice = iD.ui.notice(limiter
             .append('div')
             .attr('class', 'notice'));
 
@@ -71,19 +74,19 @@ window.iD = function(container) {
             container.classed("mode-" + exited.id, false);
         });
 
-        var undo_buttons = bar.append('div')
-            .attr('class', 'buttons-joined'),
+        var undo_buttons = limiter.append('div')
+            .attr('class', 'button-wrap joined col1'),
             undo_tooltip = bootstrap.tooltip().placement('bottom');
 
         undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'narrow' })
+            .attr({ id: 'undo', 'class': 'col6 narrow' })
             .property('disabled', true)
             .html("<span class='undo icon'></span><small></small>")
             .on('click', history.undo)
             .call(undo_tooltip);
 
         undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'narrow' })
+            .attr({ id: 'redo', 'class': 'col6 narrow' })
             .property('disabled', true)
             .html("<span class='redo icon'><small></small>")
             .on('click', history.redo)
@@ -94,8 +97,8 @@ window.iD = function(container) {
             .append('div')
                 .attr('class', 'hello');
 
-        var save_button = bar.append('button')
-            .attr('class', 'save action wide')
+        var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
+            .attr('class', 'save action wide col12')
             .call(iD.ui.save().map(map).controller(controller));
 
         history.on('change.warn-unload', function() {
@@ -110,7 +113,7 @@ window.iD = function(container) {
             } : null;
         });
 
-        bar.append('div')
+        limiter.append('div')
             .attr('class', 'messages');
 
         var zoom = container.append('div')
@@ -139,8 +142,8 @@ window.iD = function(container) {
             .call(iD.ui.layerswitcher(map));
 
         container.append('div')
-            .attr('class', 'inspector-wrap fillL')
-            .style('display', 'none');
+            .style('display', 'none')
+            .attr('class', 'inspector-wrap fr col5');
 
         var about = container.append('div').attr('id', 'attrib-container');
 
@@ -173,12 +176,12 @@ window.iD = function(container) {
                 }
             }
 
-            bar.select('#undo')
+            limiter.select('#undo')
                 .property('disabled', !undo)
                 .attr('data-original-title', undo)
                 .call(undo ? refreshTooltip : undo_tooltip.hide);
 
-            bar.select('#redo')
+            limiter.select('#redo')
                 .property('disabled', !redo)
                 .attr('data-original-title', redo)
                 .call(redo ? refreshTooltip : undo_tooltip.hide);

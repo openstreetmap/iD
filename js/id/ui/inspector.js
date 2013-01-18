@@ -14,11 +14,15 @@ iD.ui.inspector = function() {
                 event.close(entity);
             });
 
-        selection.append('div')
+
+        var inspector = selection.append('div')
+            .attr('class','inspector fillL');
+
+        inspector.append('div')
             .attr('class', 'head inspector-inner')
             .call(drawHead);
 
-        var inspectorbody = selection.append('div')
+        var inspectorbody = inspector.append('div')
             .attr('class', 'inspector-body');
 
         var inspectorwrap = inspectorbody.append('div')
@@ -79,15 +83,23 @@ iD.ui.inspector = function() {
     }
 
     function drawButtons(selection) {
-        selection.append('button')
-            .attr('class', 'apply wide action')
-            .html("<span class='icon icon-pre-text apply'></span><span class='label'>Close</span>")
-            .on('click', apply);
+        var inspectorButton1 = selection.append('div')
+            .attr('class', 'button-wrap')
+            .append('button')
+                .attr('class', 'apply wide action')
+                .on('click', apply);
 
-        selection.append('button')
-            .attr('class', 'delete wide action')
-            .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
-            .on('click', function(entity) { event.remove(entity); });
+            inspectorButton1.append('span').attr('class','icon icon-pre-text apply');
+            inspectorButton1.append('span').attr('class','label').text('Apply');
+
+        var inspectorButton2 = selection.append('div')
+            .attr('class', 'button-wrap')
+            .append('button')
+                .attr('class', 'delete wide action')
+                .on('click', function(entity) { event.remove(entity); });
+
+            inspectorButton2.append('span').attr('class','icon icon-pre-text delete');
+            inspectorButton2.append('span').attr('class','label').text('Delete');
     }
 
     function drawTags(tags) {
