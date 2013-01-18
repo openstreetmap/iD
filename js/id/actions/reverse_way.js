@@ -65,7 +65,7 @@ iD.actions.ReverseWay = function(wayId) {
         graph.parentRelations(way).forEach(function (relation) {
             relation.members.forEach(function (member, index) {
                 if (member.id === way.id && (role = {forward: 'backward', backward: 'forward'}[member.role])) {
-                    graph = iD.actions.UpdateRelationMember(relation.id, index, {role: role})(graph);
+                    graph = iD.actions.UpdateRelationMember(relation.id, {role: role}, index)(graph);
                 }
             });
         });

@@ -28,11 +28,12 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
 
         graph.parentRelations(way).forEach(function(relation) {
             if (relation.isRestriction()) {
-                var via    = relation.memberByRole('via'),
-                    member = relation.memberById(way.id);
-
+                var via = relation.memberByRole('via');
                 if (via && newWay.contains(via.id)) {
-                    graph = iD.actions.UpdateRelationMember(relation.id, member.index, {id: newWay.id})(graph);
+                    graph = iD.actions.UpdateRelationMember(
+                        relation.id,
+                        {id: newWay.id},
+                        relation.memberById(way.id).index)(graph);
                 }
             }
         });
