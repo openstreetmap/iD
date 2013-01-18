@@ -37,6 +37,82 @@ describe("iD.actions.SplitWay", function () {
         expect(graph.entity('=').tags).to.equal(tags);
     });
 
+    it("adds the new way to parent relations (no connections)", function () {
+        // Situation:
+        //    a ---- b ---- c
+        //    Relation: [----]
+        //
+        // Split at b.
+        //
+        // Expected result:
+        //    a ---- b ==== c
+        //    Relation: [----, ====]
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
+            });
+
+        graph = iD.actions.SplitWay('b', '=')(graph);
+
+        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=']);
+    });
+
+    it("adds the new way to parent relations (forward order)", function () {
+        // Situation:
+        //    a ---- b ---- c ~~~~ d
+        //    Relation: [----, ~~~~]
+        //
+        // Split at b.
+        //
+        // Expected result:
+        //    a ---- b ==== c ~~~~ d
+        //    Relation: [----, ====, ~~~~]
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                '~': iD.Way({id: '~', nodes: ['c', 'd']}),
+                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
+            });
+
+        graph = iD.actions.SplitWay('b', '=')(graph);
+
+        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=', '~']);
+    });
+
+    it("adds the new way to parent relations (reverse order)", function () {
+        // Situation:
+        //    a ---- b ---- c ~~~~ d
+        //    Relation: [~~~~, ----]
+        //
+        // Split at b.
+        //
+        // Expected result:
+        //    a ---- b ==== c ~~~~ d
+        //    Relation: [~~~~, ====, ----]
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                '~': iD.Way({id: '~', nodes: ['c', 'd']}),
+                'r': iD.Relation({id: 'r', members: [{id: '~', type: 'way'}, {id: '-', type: 'way'}]})
+            });
+
+        graph = iD.actions.SplitWay('b', '=')(graph);
+
+        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
+    });
+
     ['restriction', 'restriction:bus'].forEach(function (type) {
         it("updates a restriction's 'from' role", function () {
             // Situation:

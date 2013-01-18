@@ -33,8 +33,26 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
                     graph = iD.actions.UpdateRelationMember(
                         relation.id,
                         {id: newWay.id},
-                        relation.memberById(way.id).index)(graph);
+                        relation.memberById(way.id).index
+                    )(graph);
                 }
+            } else {
+                var role = relation.memberById(way.id).role,
+                    last = newWay.last(),
+                    i = relation.memberById(way.id).index,
+                    j;
+
+                for (j = 0; j < relation.members.length; j++) {
+                    if (relation.members[j].type === 'way' && graph.entity(relation.members[j].id).contains(last)) {
+                        break;
+                    }
+                }
+
+                graph = iD.actions.AddRelationMember(
+                    relation.id,
+                    {id: newWay.id, type: 'way', role: role},
+                    i <= j ? i + 1 : i
+                )(graph);
             }
         });
 
