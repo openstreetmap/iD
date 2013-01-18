@@ -57,14 +57,13 @@ iD.modes.Select = function (entity) {
         // of the inspector
         var inspector_size = d3.select('.inspector-wrap').size(),
             map_size = mode.map.size(),
-            entity_extent = entity.extent(mode.history.graph()),
-            left_edge = map_size[0] - inspector_size[0],
-            left = mode.map.projection(entity_extent[0])[0],
-            right = mode.map.projection(entity_extent[1])[0];
+            offset = 50,
+            shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
+            center = (map_size[0] / 2) + shift_left + offset;
 
-        if (left > left_edge &&
-            right > left_edge) mode.map.centerEase(
-                mode.map.projection.invert([(window.innerWidth), d3.event.y]));
+        if (shift_left > 0 && inspector_size[1] > d3.event.y) {
+            mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+        }
 
         inspector
             .on('changeTags', changeTags)
