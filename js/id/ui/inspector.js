@@ -83,7 +83,6 @@ iD.ui.inspector = function() {
     }
 
     function drawButtons(selection) {
-<<<<<<< HEAD
         var inspectorButton1 = selection.append('div')
             .attr('class', 'button-wrap')
             .append('button')

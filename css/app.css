@@ -14,7 +14,7 @@ body {
     height: 100%;
     width: 100%;
     position: fixed;
-    min-width: 760px;
+    min-width: 768px;
 }
 
 .limiter {

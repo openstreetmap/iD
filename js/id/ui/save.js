@@ -7,7 +7,7 @@ iD.ui.save = function() {
         var history = map.history(),
             connection = map.connection();
 
-        selection.html("<span class='icon icon-pre-text save'></span><span class='label'>Save</span><small id='as-username'></small>")
+        selection.html("<span class='label'>Save</span><small id='as-username'></small>")
             .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
             .property('disabled', true)
             .call(bootstrap.tooltip()
