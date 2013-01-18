@@ -2,7 +2,7 @@ d3.typeahead = function() {
     var data;
 
     var typeahead = function(selection) {
-        var container, hidden, idx = 0;
+        var container, hidden, idx = -1;
 
         function setup() {
             var rect = selection.node().getBoundingClientRect();
@@ -20,7 +20,7 @@ d3.typeahead = function() {
 
         function hide() {
             container.remove();
-            idx = 0;
+            idx = -1;
             hidden = true;
         }
 
@@ -33,14 +33,17 @@ d3.typeahead = function() {
             .on('blur.typeahead', slowHide);
 
         function key() {
+           var len = container.selectAll('a').data().length;
            if (d3.event.keyCode === 40) {
-               idx++;
+               idx = Math.min(idx + 1, len - 1);
                return highlight();
            } else if (d3.event.keyCode === 38) {
-               idx--;
+               idx = Math.max(idx - 1, 0);
                return highlight();
            } else if (d3.event.keyCode === 13) {
-               select(container.select('a.selected').datum());
+               if (container.select('a.selected').node()) {
+                   select(container.select('a.selected').datum());
+               }
                hide();
            } else {
                update();

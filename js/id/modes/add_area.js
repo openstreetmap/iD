@@ -12,7 +12,7 @@ iD.modes.AddArea = function() {
             controller = mode.controller;
 
         map.dblclickEnable(false)
-            .hint('Click on the map to start drawing an area, like a park, lake, or building.');
+            .tail('Click on the map to start drawing an area, like a park, lake, or building.');
 
         map.surface.on('click.addarea', function() {
             var datum = d3.select(d3.event.target).datum() || {},
@@ -23,8 +23,7 @@ iD.modes.AddArea = function() {
                 history.perform(
                     iD.actions.AddWay(way),
                     iD.actions.AddWayNode(way.id, datum.id),
-                    iD.actions.AddWayNode(way.id, datum.id),
-                    'started an area');
+                    iD.actions.AddWayNode(way.id, datum.id));
 
             } else {
                 // start from a new node
@@ -33,8 +32,7 @@ iD.modes.AddArea = function() {
                     iD.actions.AddWay(way),
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(way.id, node.id),
-                    iD.actions.AddWayNode(way.id, node.id),
-                    'started an area');
+                    iD.actions.AddWayNode(way.id, node.id));
             }
 
             controller.enter(iD.modes.DrawArea(way.id));
@@ -49,7 +47,7 @@ iD.modes.AddArea = function() {
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
         }, 1000);
-        mode.map.hint(false);
+        mode.map.tail(false);
         mode.map.surface.on('click.addarea', null);
         mode.map.keybinding().on('⎋.addarea', null);
     };

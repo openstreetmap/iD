@@ -16,6 +16,7 @@ iD.Connection = function() {
     function bboxFromAPI(box, tile, callback) {
         function done(err, parsed) {
              loadedTiles[tile.toString()] = true;
+             delete inflight[tile.toString()];
              callback(err, parsed);
          }
          inflight[tile.toString()] = loadFromURL(bboxUrl(box), done);
@@ -26,8 +27,6 @@ iD.Connection = function() {
             return callback(null, parse(dom));
         }
         return d3.xml(url).get().on('load', done);
-        inflight.push(d3.xml(url).get()
-            .on('load', done));
     }
 
     function getNodes(obj) {
@@ -201,7 +200,7 @@ iD.Connection = function() {
     }
 
     function loadTiles(projection) {
-        var scaleExtent = [16, 16],
+        var scaleExtent = [15, 15],
             s = projection.scale(),
             tiles = d3.geo.tile()
                 .scaleExtent(scaleExtent)

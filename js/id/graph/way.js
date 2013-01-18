@@ -6,7 +6,8 @@ iD.Way = iD.Entity.extend({
         return resolver.transient(this, 'extent', function() {
             var extent = [[-Infinity, Infinity], [Infinity, -Infinity]];
             for (var i = 0, l = this.nodes.length; i < l; i++) {
-                var node = resolver.entity(this.nodes[i]);
+                var node = this.nodes[i];
+                if (node.loc === undefined) node = resolver.entity(node);
                 if (node.loc[0] > extent[0][0]) extent[0][0] = node.loc[0];
                 if (node.loc[0] < extent[1][0]) extent[1][0] = node.loc[0];
                 if (node.loc[1] < extent[0][1]) extent[0][1] = node.loc[1];

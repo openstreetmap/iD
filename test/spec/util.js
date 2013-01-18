@@ -61,5 +61,36 @@ describe('Util', function() {
                 expect(iD.util.geo.dist(a, b)).to.eql(5);
             });
         });
+
+        describe('#pointInPolygon', function() {
+            it('says a point in a polygon is on a polygon', function() {
+                var poly = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]];
+                var point = [0.5, 0.5];
+                expect(iD.util.geo.pointInPolygon(point, poly)).to.be.true;
+            });
+            it('says a point outside of a polygon is outside', function() {
+                var poly = [
+                    [0, 0],
+                    [0, 1],
+                    [1, 1],
+                    [1, 0],
+                    [0, 0]];
+                var point = [0.5, 1.5];
+                expect(iD.util.geo.pointInPolygon(point, poly)).to.be.false;
+            });
+        });
+
+        describe('#polygonContainsPolygon', function() {
+            it('says a polygon in a polygon is in', function() {
+                var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+                var inner = [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]];
+                expect(iD.util.geo.polygonContainsPolygon(outer, inner)).to.be.true;
+            });
+            it('says a polygon outside of a polygon is out', function() {
+                var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+                var inner = [[1, 1], [1, 9], [2, 2], [2, 1], [1, 1]];
+                expect(iD.util.geo.polygonContainsPolygon(outer, inner)).to.be.false;
+            });
+        });
     });
 });

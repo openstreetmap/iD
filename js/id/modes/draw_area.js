@@ -18,8 +18,7 @@ iD.modes.DrawArea = function(wayId) {
 
         map.dblclickEnable(false)
             .fastEnable(false);
-        map.hint('Click on the map to add points to your area. Finish the ' +
-                      'area by clicking on your first point');
+        map.tail('Click to add points to your area. Click the first point to finish the area.');
 
         history.perform(
             iD.actions.AddNode(node),
@@ -42,22 +41,28 @@ iD.modes.DrawArea = function(wayId) {
             var datum = d3.select(d3.event.target).datum() || {};
 
             if (datum.id === tailId || datum.id === headId) {
-                history.replace(iD.actions.DeleteNode(node.id));
-                controller.enter(iD.modes.Select(way));
+                if (way.nodes.length > 3) {
+                    history.undo();
+                    controller.enter(iD.modes.Select(way));
+                } else {
+                    // Areas with less than 3 nodes gets deleted
+                    history.replace(iD.actions.DeleteWay(way.id));
+                    controller.enter(iD.modes.Browse());
+                }
 
             } else if (datum.type === 'node' && datum.id !== node.id) {
                 // connect the way to an existing node
                 history.replace(
                     iD.actions.DeleteNode(node.id),
                     iD.actions.AddWayNode(way.id, datum.id, -1),
-                    'added to an area');
+                    way.nodes.length > 2 ? 'added to an area' : '');
 
                 controller.enter(iD.modes.DrawArea(wayId));
 
             } else {
                 history.replace(
                     iD.actions.Noop(),
-                    'added to an area');
+                    way.nodes.length > 2 ? 'added to an area' : '');
 
                 controller.enter(iD.modes.DrawArea(wayId));
             }
@@ -110,7 +115,7 @@ iD.modes.DrawArea = function(wayId) {
         surface.selectAll('.way, .node')
             .classed('active', false);
 
-        mode.map.hint(false);
+        mode.map.tail(false);
         mode.map.fastEnable(true);
 
         surface

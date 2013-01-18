@@ -1,5 +1,5 @@
 iD.svg.Vertices = function() {
-    return function(surface, graph, entities, filter, projection) {
+    return function drawVertices(surface, graph, entities, filter, projection) {
         var vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -7,6 +7,10 @@ iD.svg.Vertices = function() {
             if (entity.geometry() === 'vertex') {
                 vertices.push(entity);
             }
+        }
+
+        if (vertices.length > 2000) {
+            return surface.select('.layer-hit').selectAll('g.vertex').remove();
         }
 
         var groups = surface.select('.layer-hit').selectAll('g.vertex')

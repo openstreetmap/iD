@@ -83,6 +83,7 @@ iD.ui.inspector = function() {
     }
 
     function drawButtons(selection) {
+<<<<<<< HEAD
         var inspectorButton1 = selection.append('div')
             .attr('class', 'button-wrap')
             .append('button')
@@ -111,7 +112,8 @@ iD.ui.inspector = function() {
             tags = [{key: '', value: ''}];
         }
 
-        var li = tagList.selectAll('li')
+        var li = tagList.html('')
+            .selectAll('li')
             .data(tags, function(d) { return d.key; });
 
         li.exit().remove();
@@ -166,7 +168,6 @@ iD.ui.inspector = function() {
                                 if (en.on_node) types.push('point');
                                 if (en.on_way) types.push('line');
                                 en.types = types;
-                                console.log(en);
                                 iD.ui.modal()
                                     .select('.content')
                                     .datum(en)
@@ -225,15 +226,26 @@ iD.ui.inspector = function() {
             key = row.selectAll('.key'),
             value = row.selectAll('.value');
 
+        function sort(value, data) {
+            var sameletter = [],
+                other = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].value.substring(0, value.length) === value) {
+                    sameletter.push(data[i]);
+                } else {
+                    other.push(data[i]);
+                }
+            }
+            return sameletter.concat(other);
+        }
+
         key.call(d3.typeahead()
             .data(_.debounce(function(_, callback) {
                 taginfo.keys({
                     geometry: geometry,
                     query: key.property('value')
                 }, function(err, data) {
-                    callback(data.data.map(function (d) {
-                        return {value: d.key};
-                    }));
+                    if (!err) callback(sort(key.property('value'), data));
                 });
             }, 500)));
 
@@ -244,9 +256,7 @@ iD.ui.inspector = function() {
                     geometry: geometry,
                     query: value.property('value')
                 }, function(err, data) {
-                    callback(data.data.map(function (d) {
-                        return {value: d.value, title: d.description};
-                    }));
+                    if (!err) callback(sort(value.property('value'), data));
                 });
             }, 500)));
     }
@@ -272,15 +282,19 @@ iD.ui.inspector = function() {
         event.close(entity);
     }
 
-    inspector.tags = function () {
-        var tags = {};
-        tagList.selectAll('li').each(function() {
-            var row = d3.select(this),
-                key = row.selectAll('.key').property('value'),
-                value = row.selectAll('.value').property('value');
-            if (key !== '') tags[key] = value;
-        });
-        return tags;
+    inspector.tags = function (tags) {
+        if (!arguments.length) {
+            var tags = {};
+            tagList.selectAll('li').each(function() {
+                var row = d3.select(this),
+                    key = row.selectAll('.key').property('value'),
+                    value = row.selectAll('.value').property('value');
+                if (key !== '') tags[key] = value;
+            });
+            return tags;
+        } else {
+            drawTags(tags);
+        }
     };
 
     return d3.rebind(inspector, event, 'on');

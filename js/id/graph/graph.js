@@ -13,6 +13,7 @@ iD.Graph = function(entities) {
     this.transients = {};
     this._parentWays = {};
     this._parentRels = {};
+    this._fetches = {};
 
     if (iD.debug) {
         Object.freeze(this);
@@ -119,20 +120,29 @@ iD.Graph.prototype = {
 
     // Resolve the id references in a way, replacing them with actual objects.
     fetch: function(id) {
+        if (this._fetches[id]) return this._fetches[id];
         var entity = this.entities[id], nodes = [];
         if (!entity || !entity.nodes || !entity.nodes.length) return entity;
         for (var i = 0, l = entity.nodes.length; i < l; i++) {
             nodes[i] = this.fetch(entity.nodes[i]);
         }
-        return iD.Entity(entity, {nodes: nodes});
+        return (this._fetches[id] = iD.Entity(entity, {nodes: nodes}));
     },
 
     difference: function (graph) {
-        var result = [], entity, id;
+        var result = [], entity, oldentity, id;
 
         for (id in this.entities) {
             entity = this.entities[id];
-            if (entity !== graph.entities[id]) {
+            oldentity = graph.entities[id];
+            if (entity !== oldentity) {
+                if (entity && entity.type === 'way') {
+                    result = oldentity ?
+                        result
+                            .concat(_.difference(entity.nodes, oldentity.nodes))
+                            .concat(_.difference(oldentity.nodes, entity.nodes))
+                        : result.concat(entity.nodes);
+                }
                 result.push(id);
             }
         }
@@ -141,6 +151,7 @@ iD.Graph.prototype = {
             entity = graph.entities[id];
             if (entity && !this.entities.hasOwnProperty(id)) {
                 result.push(id);
+                if (entity.type === 'way') result = result.concat(entity.nodes);
             }
         }
 

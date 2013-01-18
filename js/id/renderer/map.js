@@ -21,6 +21,7 @@ iD.Map = function() {
         lines = iD.svg.Lines(),
         areas = iD.svg.Areas(),
         midpoints = iD.svg.Midpoints(),
+        tail = d3.tail(),
         surface, tilegroup;
 
     function map(selection) {
@@ -29,14 +30,14 @@ iD.Map = function() {
 
         var supersurface = selection.append('div')
             .style('position', 'absolute')
+            .on('mousedown.drag', function() {
+                translateStart = projection.translate();
+            })
             .call(zoom);
 
         surface = supersurface.append('svg')
             .on('mouseup.reset-transform', resetTransform)
             .on('touchend.reset-transform', resetTransform)
-            .on('mousedown.drag', function() {
-                translateStart = projection.translate();
-            })
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
@@ -44,8 +45,12 @@ iD.Map = function() {
             })
             .call(iD.svg.Surface());
 
+
         map.size(selection.size());
         map.surface = surface;
+
+        supersurface
+            .call(tail);
 
         d3.select(document).call(keybinding);
     }
@@ -62,16 +67,22 @@ iD.Map = function() {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
-            var only = {};
+            var only = {},
+                filterOnly = {};
             for (var j = 0; j < difference.length; j++) {
-                var id = difference[j];
-                only[id] = graph.fetch(id);
-                if (only[id] && only[id].type === 'node') {
-                    var parents = graph.parentWays(only[id]);
-                    for (var k = 0; k < parents.length; k++) {
-                        // Don't re-fetch parents
-                        if (only[parents[k].id] === undefined) {
-                            only[parents[k].id] = graph.fetch(parents[k].id);
+                var id = difference[j],
+                    entity = graph.fetch(id);
+                // Even if the entity is false (deleted), it needs to be
+                // removed from the surface
+                only[id] = entity;
+                if (entity && entity.intersects(extent, graph)) {
+                    if (only[id].type === 'node') {
+                        var parents = graph.parentWays(only[id]);
+                        for (var k = 0; k < parents.length; k++) {
+                            // Don't re-fetch parents
+                            if (only[parents[k].id] === undefined) {
+                                only[parents[k].id] = graph.fetch(parents[k].id);
+                            }
                         }
                     }
                 }
@@ -80,7 +91,7 @@ iD.Map = function() {
             filter = function(d) { return d.midpoint ? d.way in only : d.id in only; };
         }
 
-        if (all.length > 10000) {
+        if (all.length > 100000) {
             editOff();
             return;
         }
@@ -113,14 +124,14 @@ iD.Map = function() {
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
             iD.flash()
                 .select('.content')
-                .text('Cannot zoom out further in current mode.')
+                .text('Cannot zoom out further in current mode.');
             return map.zoom(16);
         }
         var fast = (d3.event.scale === projection.scale() && fastEnabled);
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-        if (fast) {
+        if (fast && translateStart) {
             var a = d3.event.translate,
                 b = translateStart,
                 translate = 'translate(' + ~~(a[0] - b[0]) + 'px,' +
@@ -275,6 +286,11 @@ iD.Map = function() {
         if (!arguments.length) return connection;
         connection = _;
         connection.on('load', connectionLoad);
+        return map;
+    };
+
+    map.tail = function (_) {
+        tail.text(_);
         return map;
     };
 

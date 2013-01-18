@@ -19,7 +19,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
         map.dblclickEnable(false)
             .fastEnable(false)
-            .hint('Click to add more points to the line. ' +
+            .tail('Click to add more points to the line. ' +
                       'Click on other lines to connect to them, and double-click to ' +
                       'end the line.');
 
@@ -42,16 +42,22 @@ iD.modes.DrawLine = function(wayId, direction) {
 
             if (datum.id === tailId) {
                 // connect the way in a loop
-                history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(wayId, tailId, index),
-                    'added to a line');
+                if (way.nodes.length > 2) {
+                    history.replace(
+                        iD.actions.DeleteNode(node.id),
+                        iD.actions.AddWayNode(wayId, tailId, index),
+                        'added to a line');
 
-                controller.enter(iD.modes.Select(way));
+                    controller.enter(iD.modes.Select(way));
+
+                } else {
+                    history.replace(iD.actions.DeleteWay(way.id));
+                    controller.enter(iD.modes.Browse());
+                }
 
             } else if (datum.id === headId) {
                 // finish the way
-                history.replace(iD.actions.DeleteNode(node.id));
+                history.undo();
 
                 controller.enter(iD.modes.Select(way));
 
@@ -146,7 +152,7 @@ iD.modes.DrawLine = function(wayId, direction) {
         surface.selectAll('.way, .node')
             .classed('active', false);
 
-        mode.map.hint(false);
+        mode.map.tail(false);
         mode.map.fastEnable(true);
         mode.map.minzoom(0);
 

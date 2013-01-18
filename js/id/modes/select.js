@@ -87,11 +87,12 @@ iD.modes.Select = function (entity) {
 
         // Exit mode if selected entity gets undone
         mode.history.on('change.entity-undone', function() {
+            var old = entity;
             entity = mode.history.graph().entity(entity.id);
             if (!entity) {
                 mode.controller.enter(iD.modes.Browse());
-            } else {
-                d3.select('.inspector-wrap').datum(entity).call(inspector);
+            } else if(!_.isEqual(entity.tags, old.tags)) {
+                inspector.tags(entity.tags);
             }
         });
 
@@ -138,7 +139,7 @@ iD.modes.Select = function (entity) {
     mode.exit = function () {
         var surface = mode.map.surface;
 
-        changeTags(entity, inspector.tags());
+        entity && changeTags(entity, inspector.tags());
         d3.select('.inspector-wrap')
             .style('display', 'none')
             .html('');

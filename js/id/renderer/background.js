@@ -55,14 +55,36 @@ iD.Background = function() {
             ups = {};
 
         tiles.forEach(function(d) {
-            d.push(source(d));
-            // this tile has not been loaded yet
-            if (!cache[d] &&
-                cache[atZoom(d, -1)] &&
+
+            // if this tile has already failed, do
+            // not request it
+            if (cache[d] !== false) d.push(source(d));
+
+            // if this tile has failed, try to request its tile above
+            if (cache[d] === false &&
+                cache[atZoom(d, -1)] !== false &&
                 !ups[atZoom(d, -1)]) {
+
                 ups[atZoom(d, -1)] = true;
                 tiles.push(atZoom(d, -1));
-            } else if (!cache[d]) {
+
+            // if this tile has not finished, req the one above
+            } else if (cache[d] === undefined &&
+
+                // but the tile above is in the cache
+                cache[atZoom(d, -1)] &&
+
+                // and another tile has not already requested the
+                // tile above
+                !ups[atZoom(d, -1)]) {
+
+                ups[atZoom(d, -1)] = true;
+                tiles.push(atZoom(d, -1));
+
+            // if this tile has not yet completed, try keeping the
+            // tiles below it
+            } else if (cache[d] === undefined ||
+                cache[d] === false) {
                 upZoom(d, 1).forEach(function(u) {
                     if (cache[u] && !ups[u]) {
                         ups[u] = true;
@@ -79,11 +101,12 @@ iD.Background = function() {
         image.exit().remove();
 
         function load(d) {
-            cache[d] = true;
+            cache[d.slice(0, 3)] = true;
             d3.select(this).on('load', null);
         }
 
-        function error() {
+        function error(d) {
+            cache[d.slice(0, 3)] = false;
             d3.select(this).remove();
         }
 
