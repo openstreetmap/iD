@@ -8,69 +8,64 @@ describe("iD.actions.SplitWay", function () {
         // Expected result:
         //    a ---- b ==== c
         //
-        var a     = iD.Node(),
-            b     = iD.Node(),
-            c     = iD.Node(),
-            way   = iD.Way({nodes: [a.id, b.id, c.id]}),
-            graph = iD.Graph([a, b, c, way]);
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']})
+            });
 
-        graph = iD.actions.SplitWay(b.id)(graph);
+        graph = iD.actions.SplitWay('b', '=')(graph);
 
-        var waysA = graph.parentWays(a),
-            waysB = graph.parentWays(b),
-            waysC = graph.parentWays(c);
-
-        expect(waysA).to.have.length(1);
-        expect(waysB).to.have.length(2);
-        expect(waysC).to.have.length(1);
-
-        expect(waysA[0]).to.equal(waysB[0]);
-        expect(waysB[1]).to.equal(waysC[0]);
+        expect(graph.entity('-').nodes).to.eql(['a', 'b']);
+        expect(graph.entity('=').nodes).to.eql(['b', 'c']);
     });
 
     it("copies tags to the new way", function () {
-        var a     = iD.Node(),
-            b     = iD.Node(),
-            c     = iD.Node(),
-            tags  = {highway: 'residential'},
-            way   = iD.Way({nodes: [a.id, b.id, c.id], tags: tags}),
-            graph = iD.Graph([a, b, c, way]);
+        var tags = {highway: 'residential'},
+            graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c'], tags: tags})
+            });
 
-        graph = iD.actions.SplitWay(b.id)(graph);
+        graph = iD.actions.SplitWay('b', '=')(graph);
 
-        expect(graph.parentWays(a)[0].tags).to.eql(tags);
-        expect(graph.parentWays(c)[0].tags).to.eql(tags);
+        // Immutable tags => should be shared by identity.
+        expect(graph.entity('-').tags).to.equal(tags);
+        expect(graph.entity('=').tags).to.equal(tags);
     });
 
     it("moves restriction relations to the new way", function () {
         // Situation:
-        //    a ==== b ==== c ---- d
-        // A restriction from ==== to ---- via c.
+        //    a ---- b ---- c ~~~~ d
+        // A restriction from ---- to ~~~~ via c.
         //
         // Split at b.
         //
         // Expected result:
-        //    a ==== b ≠≠≠≠ c ---- d
-        // A restriction from ≠≠≠≠ to ---- via c.
+        //    a ---- b ==== c ~~~~ d
+        // A restriction from ==== to ~~~~ via c.
         //
-        var a           = iD.Node(),
-            b           = iD.Node(),
-            c           = iD.Node(),
-            d           = iD.Node(),
-            from        = iD.Way({nodes: [a.id, b.id, c.id]}),
-            to          = iD.Way({nodes: [c.id, d.id]}),
-            restriction = iD.Relation({tags: {type: 'restriction'}, members: [
-                { role: 'from', id: from.id },
-                { role: 'to', id: to.id },
-                { role: 'via', id: c.id }]}),
-            graph = iD.Graph([a, b, c, d, from, to, restriction]);
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                '~': iD.Way({id: '~', nodes: ['c', 'd']}),
+                'r': iD.Relation({tags: {type: 'restriction'}, members: [
+                    {id: '=', role: 'from'},
+                    {id: '~', role: 'to'},
+                    {id: 'c', role: 'via'}]})
+            });
 
-        graph = iD.actions.SplitWay(b.id)(graph);
+        graph = iD.actions.SplitWay('b', '=')(graph);
 
-        restriction = graph.entity(restriction.id);
-
-        expect(restriction.members[0]).not.to.eql({ role: 'from', id: from.id });
-        expect(restriction.members[1]).to.eql({ role: 'to', id: to.id });
-        expect(restriction.members[2]).to.eql({ role: 'via', id: c.id });
+        expect(graph.entity('r').members).to.eql([
+            {id: '=', role: 'from'},
+            {id: '~', role: 'to'},
+            {id: 'c', role: 'via'}]);
     });
 });
