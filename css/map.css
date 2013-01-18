@@ -326,7 +326,9 @@ text.tag-oneway {
 }
 
 .mode-select .area,
-.mode-browse .area {
+.mode-browse .area,
+.mode-select .multipolygon,
+.mode-browse .multipolygon {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 
@@ -339,6 +341,7 @@ text.tag-oneway {
 .vertex:active,
 .line:active,
 .area:active,
+.multipolygon:active,
 .midpoint:active,
 .mode-select .selected {
     cursor: url(../img/cursor-select-acting.png), pointer;
