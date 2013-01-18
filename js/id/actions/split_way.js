@@ -26,25 +26,13 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
         // Reduce the original way to only contain the first set of nodes
         graph = graph.replace(way.update({nodes: way.nodes.slice(0, idx + 1)}));
 
-        var parentRelations = graph.parentRelations(way);
+        graph.parentRelations(way).forEach(function(relation) {
+            if (relation.isRestriction()) {
+                var via    = relation.memberByRole('via'),
+                    member = relation.memberById(way.id);
 
-        function isVia(x) { return x.role = 'via'; }
-        function isSelf(x) { return x.id = way.id; }
-
-        parentRelations.forEach(function(relation) {
-            if (relation.tags.type === 'restriction') {
-                var via = _.find(relation.members, isVia);
-                var ownrole = _.find(relation.members, isSelf).role;
-                if (via && !_.contains(newWay.nodes, via.id)) {
-                    // the new way doesn't contain the node that's important
-                    // to the turn restriction, so we don't need to worry
-                    // about adding it to the turn restriction.
-                } else {
-                    graph = graph.replace(iD.actions.AddRelationMember(relation.id, {
-                        role: ownrole,
-                        id: newWay.id,
-                        type: 'way'
-                    }));
+                if (via && newWay.contains(via.id)) {
+                    graph = iD.actions.UpdateRelationMember(relation.id, member.index, {id: newWay.id})(graph);
                 }
             }
         });

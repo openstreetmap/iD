@@ -37,35 +37,101 @@ describe("iD.actions.SplitWay", function () {
         expect(graph.entity('=').tags).to.equal(tags);
     });
 
-    it("moves restriction relations to the new way", function () {
-        // Situation:
-        //    a ---- b ---- c ~~~~ d
-        // A restriction from ---- to ~~~~ via c.
-        //
-        // Split at b.
-        //
-        // Expected result:
-        //    a ---- b ==== c ~~~~ d
-        // A restriction from ==== to ~~~~ via c.
-        //
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b'}),
-                'c': iD.Node({id: 'c'}),
-                'd': iD.Node({id: 'd'}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
-                '~': iD.Way({id: '~', nodes: ['c', 'd']}),
-                'r': iD.Relation({tags: {type: 'restriction'}, members: [
-                    {id: '=', role: 'from'},
-                    {id: '~', role: 'to'},
-                    {id: 'c', role: 'via'}]})
-            });
+    ['restriction', 'restriction:bus'].forEach(function (type) {
+        it("updates a restriction's 'from' role", function () {
+            // Situation:
+            //    a ----> b ----> c ~~~~ d
+            // A restriction from ---- to ~~~~ via c.
+            //
+            // Split at b.
+            //
+            // Expected result:
+            //    a ----> b ====> c ~~~~ d
+            // A restriction from ==== to ~~~~ via c.
+            //
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                    '~': iD.Way({id: '~', nodes: ['c', 'd']}),
+                    'r': iD.Relation({id: 'r', tags: {type: type}, members: [
+                        {id: '-', role: 'from'},
+                        {id: '~', role: 'to'},
+                        {id: 'c', role: 'via'}]})
+                });
 
-        graph = iD.actions.SplitWay('b', '=')(graph);
+            graph = iD.actions.SplitWay('b', '=')(graph);
 
-        expect(graph.entity('r').members).to.eql([
-            {id: '=', role: 'from'},
-            {id: '~', role: 'to'},
-            {id: 'c', role: 'via'}]);
+            expect(graph.entity('r').members).to.eql([
+                {id: '=', role: 'from'},
+                {id: '~', role: 'to'},
+                {id: 'c', role: 'via'}]);
+        });
+
+        it("updates a restriction's 'to' role", function () {
+            // Situation:
+            //    a ----> b ----> c ~~~~ d
+            // A restriction from ~~~~ to ---- via c.
+            //
+            // Split at b.
+            //
+            // Expected result:
+            //    a ----> b ====> c ~~~~ d
+            // A restriction from ~~~~ to ==== via c.
+            //
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                    '~': iD.Way({id: '~', nodes: ['c', 'd']}),
+                    'r': iD.Relation({id: 'r', tags: {type: type}, members: [
+                        {id: '~', role: 'from'},
+                        {id: '-', role: 'to'},
+                        {id: 'c', role: 'via'}]})
+                });
+
+            graph = iD.actions.SplitWay('b', '=')(graph);
+
+            expect(graph.entity('r').members).to.eql([
+                {id: '~', role: 'from'},
+                {id: '=', role: 'to'},
+                {id: 'c', role: 'via'}]);
+        });
+
+        it("leaves unaffected restrictions unchanged", function () {
+            // Situation:
+            //    a <---- b <---- c ~~~~ d
+            // A restriction from ---- to ~~~~ via c.
+            //
+            // Split at b.
+            //
+            // Expected result:
+            //    a <==== b <---- c ~~~~ d
+            // A restriction from ---- to ~~~~ via c.
+            //
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['c', 'b', 'a']}),
+                    '~': iD.Way({id: '~', nodes: ['c', 'd']}),
+                    'r': iD.Relation({id: 'r', tags: {type: type}, members: [
+                        {id: '-', role: 'from'},
+                        {id: '~', role: 'to'},
+                        {id: 'c', role: 'via'}]})
+                });
+
+            graph = iD.actions.SplitWay('b', '=')(graph);
+
+            expect(graph.entity('r').members).to.eql([
+                {id: '-', role: 'from'},
+                {id: '~', role: 'to'},
+                {id: 'c', role: 'via'}]);
+        });
     });
 });
