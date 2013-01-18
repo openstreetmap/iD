@@ -22,7 +22,8 @@ window.iD = function(container) {
             .call(map);
 
         var bar = container.append('div')
-            .attr('id', 'bar').attr('class', 'fillL2');
+            .attr('id', 'bar')
+            .attr('class','pad1');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');

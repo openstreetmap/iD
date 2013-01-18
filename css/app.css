@@ -18,7 +18,7 @@ body {
 }
 
 .limiter {
-    max-width: 1400px;
+    max-width: 1200px;
 }
 
 div, textarea, input, span, ul, li, ol, a, button {
@@ -164,23 +164,14 @@ ul li { list-style: none;}
 ul.toggle-list li a {
     font-weight: bold;
     padding: 10px;
-    border-top: 1px solid #CCC;
+    border-top: 1px solid white;
     display:block;
-}
-
-ul.toggle-list li a:hover {
-    background: #ececec;
 }
 
 ul.toggle-list .icon {
     float: left;
     margin-right: 5px;
 }
-
-a.selected {
-    color:#222;
-}
-
 
 ul.link-list li {
     float: left;
@@ -199,11 +190,10 @@ ul.link-list li:first-child {
 /* Utility Classes
 ------------------------------------------------------- */
 
-.fillL { background-color: white;}
+.fillL { background: white;}
 .fillL2 { background: #f7f7f7 url(../img/background-pattern-1.png) repeat;}
 .fillD {
-    background-color: #222222;
-    background-color: rgba(0,0,0,.8);
+    background: rgba(0,0,0,.7);
     color: white;
 }
 
@@ -216,9 +206,8 @@ form.hide {
 }
 
 .content {
-    background-color:#fff;
+    background:#fff;
     border-radius: 4px;
-    border: 1px solid #ccc;
 }
 
 .pad1    {padding: 10px;}
@@ -230,8 +219,7 @@ form.hide {
 
 button {
     line-height:20px;
-    border:1px solid #aaa;
-    box-shadow: inset 0 0 0px 1px #fff;
+    border:0;
     color:#222;
     background: white;
     font-weight:bold;
@@ -242,17 +230,20 @@ button {
 }
 
 button:hover {
-    background-color: #ececec;
+    background: #ececec;
+}
+
+button.col3:hover {
+    background: #bde5aa;
 }
 
 button.active {
-    box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.35);
     cursor:url(../img/cursor-pointing.png) 6 1, auto;
 }
 
 button.active:not([disabled]) {
-    background-color: #ececec;
-    box-shadow: inset 0 0 0px 1px #fff, inset 0 0 6px 1px rgba(0,0,0,.25);
+    background: #6bc641;
+    color: white;
 }
 
 button.wide,
@@ -282,14 +273,15 @@ button.centered {
 
 .button-wrap {
     display: inline-block;
-    padding:10px 0 10px 10px;
+    padding-right:10px;
     margin: 0;
 }
 
 .button-wrap button:only-child { width: 100%;}
+.button-wrap:last-child { padding-right: 0; }
 
 .joined button {
-    border-right-width: 0;
+    border-right: 1px solid rgba(0,0,0,.5);
     border-radius:0;
 }
 
@@ -298,15 +290,16 @@ button.centered {
 }
 
 .joined button:last-child {
-    border-right-width: 1px;
+    border-right-width: 0px;
     border-radius:0 4px 4px 0;
 }
 
 button.action {
-    background: #444;
+    color: white;
+    background: #7092ff;
 }
 button.action:hover {
-    background: #222;
+    background: #597BE7;
 }
 
 button.delete {
@@ -328,15 +321,9 @@ button.save .count {
 }
 
 button.save.has-count .count {
-    display: block;
-    color: #444;
-    background: #fff;
-    border-radius: 0 3px 3px 0;
-    padding: 9px;
-    float: right;
-    margin-left: 10px;
-    margin-top: -9px;
-    margin-right: -8px;
+    display: inline-block;
+    color: rgba(255,255,255,.5);
+    padding-left: 5px;
 }
 
 button.close {
@@ -346,22 +333,22 @@ button.close {
 }
 
 button .label {
-    margin-right: 3px;
+    display: none;
 }
 
-button.action .label {
+button.save .label {
+    display: inline-block;
     color: white;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 }
 
 button[disabled] {
     cursor:auto;
-    background: white;
+    background: #cecece;
     pointer-events:none;
 }
 
 button[disabled] .label {
-    color:#ccc;
+    color:#999999;
     text-shadow: none;
 }
 
@@ -386,18 +373,13 @@ button[disabled]:hover {
     height: 40px;
 }
 
-.icon.icon-pre-text {
-  margin-right: 3px;
-}
-
 /* Definitions for every icon */
-
-.icon.browse     { background-position:   0px 0px;}
-.icon.add-point  { background-position: -20px 0px;}
-.icon.add-line   { background-position: -40px 0px;}
-.icon.add-area   { background-position: -60px 0px;}
-.icon.undo       { background-position: -80px 0px;}
-.icon.redo       { background-position: -100px 0px;}
+button.active:not([disabled]) .icon.browse     { background-position:   0px -20px;}
+button.active:not([disabled]) .icon.add-point  { background-position: -20px -20px;}
+button.active:not([disabled]) .icon.add-line   { background-position: -40px -20px;}
+button.active:not([disabled]) .icon.add-area   { background-position: -60px -20px;}
+button.active:not([disabled]) .icon.undo       { background-position: -80px -20px;}
+button.active:not([disabled]) .icon.redo      { background-position: -100px -20px;}
 .icon.apply      { background-position: -120px 0px;}
 .icon.save       { background-position: -140px 0px;}
 .icon.close      { background-position: -160px 0px;}
@@ -411,10 +393,13 @@ button[disabled]:hover {
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
 
-.fillD .icon.browse     { background-position:   0px -20px;}
-.fillD .icon.add-point  { background-position: -20px -20px;}
-.fillD .icon.add-line   { background-position: -40px -20px;}
-.fillD .icon.add-area   { background-position: -60px -20px;}
+.icon.browse     { background-position:   0px 0px;}
+.icon.add-point  { background-position: -20px 0px;}
+.icon.add-line   { background-position: -40px 0px;}
+.icon.add-area   { background-position: -60px 0px;}
+.icon.undo       { background-position: -80px 0px;}
+.icon.redo      { background-position: -100px 0px;}
+
 .fillD .icon.undo       { background-position: -80px -20px;}
 .fillD .icon.redo       { background-position: -100px -20px;}
 .fillD .icon.apply      { background-position: -120px -20px;}
@@ -422,11 +407,11 @@ button[disabled]:hover {
 .fillD .icon.close      { background-position: -160px -20px;}
 .fillD .icon.delete     { background-position: -180px -20px;}
 .fillD .icon.remove     { background-position: -200px -20px;}
-.fillD .icon.inspect    { background-position: -220px -20px;}
-.fillD .icon.zoom-in    { background-position: -240px -20px;}
-.fillD .icon.zoom-out   { background-position: -260px -20px;}
-.fillD .icon.geocode    { background-position: -280px -20px;}
-.fillD .icon.layers     { background-position: -300px -20px;}
+.map-control .icon.inspect    { background-position: -220px -20px;}
+.map-control .icon.zoom-in    { background-position: -240px -20px;}
+.map-control .icon.zoom-out   { background-position: -260px -20px;}
+.map-control .icon.geocode    { background-position: -280px -20px;}
+.map-control .icon.layers     { background-position: -300px -20px;}
 .fillD .icon.avatar     { background-position: -320px -20px;}
 .fillD .icon.nearby     { background-position: -340px -20px;}
 
@@ -465,12 +450,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 ------------------------------------------------------- */
 
 #bar {
-    border-bottom:1px solid #ccc;
     position:absolute;
     left:0px;
     top:0px;
     right:0;
     height:60px;
+    background: rgba(0,0,0,.8);
 }
 
 /* Status box */
@@ -485,12 +470,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity:0;
     display:none;
     padding-left: 10px;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 .inspector {
-    border-left:  1px solid #ccc;
-    border-bottom: 1px solid #ccc;
     min-height: 60px;
     position: relative;
 }
@@ -500,7 +483,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner.head {
-    border-bottom: 1px solid #ccc;
     background:#fff;
     z-index:1;
     position:relative;
@@ -580,12 +562,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     right: 30px;
 }
 
-.inspector-buttons {
-    border-top: 1px solid #ccc;
-}
-
 .inspector-buttons .button-wrap {
     width: 20%;
+}
+.inspector-buttons .button-wrap:first-child { padding-right: 5px;}
+
+.inspector-buttons .button-wrap:last-child { 
+    padding-left: 5px; 
 }
 
 .inspector-inner .add-tag-row {
@@ -604,12 +587,22 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 /* Map Controls */
 
 .map-control {
-    left:10px;
+    left:0px;
     position:absolute;
 }
 
 .map-control button {
     width: 40px;
+    border-radius: 0 4px 4px 0;
+    background: rgba(0, 0, 0, .8);
+}
+
+.map-control button:hover {
+    background: rgba(0, 0, 0, .9);
+}
+
+.map-control button.active:hover {
+    background: #6bc641;
 }
 
 .map-overlay {
@@ -618,6 +611,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     left:50px;
     top:0;
     display: block;
+    border-radius: 4px;
 }
 
 /* Zoomer */
@@ -628,12 +622,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .zoombuttons button.zoom-in {
-    border-radius:4px 4px 0 0;
+    border-radius:0 4px 0 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
 }
 
 .zoombuttons button.zoom-out {
     border-top:0;
-    border-radius:0 0 4px 4px;
+    border-radius:0 0 4px 0;
 }
 
 /* Layer Switcher */
@@ -642,28 +637,24 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top:210px;
 }
 
-.layerswitcher-control .adjustments {
-    padding:5px;
-    opacity:0.2;
-}
-
-.layerswitcher-control .adjustments:hover {
-    opacity:1;
-}
-
-.layerswitcher-control .adjustments .reset {
+.layerswitcher-control .adjustments button {
+    opacity:0.5;
     height:20px;
     font-size:10px;
     font-weight:normal;
-    padding:0 5px;
+    padding:0 5px 3px 5px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0; 
+}
+
+.layerswitcher-control .adjustments button:hover {
+    opacity: 1;
 }
 
 .layerswitcher-control .nudge {
-    height:20px;
     width:20px;
-    font-size:10px;
     margin-right:2px;
-    font-weight:normal;
 }
 
 .opacity-options-wrapper {
@@ -735,7 +726,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     display:block;
     position:absolute;
     overflow:hidden;
-    top:60px;
+    top:0px;
     left:0;
     right:0;
     bottom:0;
@@ -860,9 +851,6 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
-.modal button { margin-bottom: 0;}
-.modal button:first-child { margin-left: 0;}
-
 .modal button.close-modal {
     float:right;
     margin-right:10px;
@@ -912,11 +900,14 @@ div.typeahead a:first-child {
 }
 
 .modal-section {
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
+    padding: 10px;
 }
 
-.modal-section:last-child { border-bottom: 0;}
+
+.body .modal-section:last-child { 
+    border-bottom: 0;
+    border-radius: 0 0 4px 4px;
+}
 
 .modal-section img.wiki-image {
     max-width: 400px;

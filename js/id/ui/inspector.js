@@ -47,7 +47,7 @@ iD.ui.inspector = function() {
         drawTags(entity.tags);
 
         inspectorbody.append('div')
-            .attr('class', 'inspector-buttons')
+            .attr('class', 'inspector-buttons pad1')
             .call(drawButtons);
     }
 

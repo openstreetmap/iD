@@ -56,7 +56,7 @@ iD.ui.layerswitcher = function(map) {
 
         var opa = content
             .append('div')
-            .attr('class', 'opacity-options-wrapper fillL2');
+            .attr('class', 'opacity-options-wrapper');
 
         opa.append('h4').text('Layers');
 
@@ -102,7 +102,7 @@ iD.ui.layerswitcher = function(map) {
 
         content
             .append('ul')
-            .attr('class', 'toggle-list')
+            .attr('class', 'toggle-list fillL2')
             .selectAll('a.layer')
                 .data(sources)
                 .enter()
@@ -135,7 +135,7 @@ iD.ui.layerswitcher = function(map) {
 
         var adjustments = content
             .append('div')
-            .attr('class', 'adjustments');
+            .attr('class', 'adjustments pad1');
 
         var directions = [
             ['←', [-1, 0]],
