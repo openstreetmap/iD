@@ -198,6 +198,13 @@ path.multipolygon.tag-leisure-park {
     fill-opacity: 0.2;
 }
 
+path.area.tag-amenity-parking,
+path.multipolygon.tag-amenity-parking {
+    stroke: #beb267;
+    stroke-width: 1;
+    fill: #edecc0;
+}
+
 /* highways */
 path.stroke.tag-highway-residential {
     stroke:#fff;
