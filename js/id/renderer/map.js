@@ -70,31 +70,31 @@ iD.Map = function() {
             filter = d3.functor(true);
         } else {
             var only = {};
-            for (var j = 0; j < difference.length; j++) {
-                var id = difference[j],
-                    entity = graph.fetch(id);
-                // Even if the entity is false (deleted), it needs to be
-                // removed from the surface
-                only[id] = entity;
-                if (entity && entity.intersects(extent, graph)) {
-                    if (only[id].type === 'node') {
-                        var parents = graph.parentWays(only[id]);
-                        for (var k = 0; k < parents.length; k++) {
-                            // Don't re-fetch parents
-                            if (only[parents[k].id] === undefined) {
-                                only[parents[k].id] = graph.fetch(parents[k].id);
-                            }
-                        }
-                        parents = graph.parentRelations(only[id]);
-                        for (k = 0; k < parents.length; k++) {
-                            // Don't re-fetch parents
-                            if (only[parents[k].id] === undefined) {
-                                only[parents[k].id] = parents[k].id;
-                            }
-                        }
+
+            function addParents(parents) {
+                for (var i = 0; i < parents.length; i++) {
+                    var parent = parents[i];
+                    if (only[parent.id] === undefined) {
+                        only[parent.id] = graph.fetch(parent.id);
+                        addParents(graph.parentRelations(parent));
                     }
                 }
             }
+
+            for (var j = 0; j < difference.length; j++) {
+                var id = difference[j],
+                    entity = graph.fetch(id);
+
+                // Even if the entity is false (deleted), it needs to be
+                // removed from the surface
+                only[id] = entity;
+
+                if (entity && entity.intersects(extent, graph)) {
+                    addParents(graph.parentWays(only[id]));
+                    addParents(graph.parentRelations(only[id]));
+                }
+            }
+
             all = _.compact(_.values(only));
             filter = function(d) { return d.midpoint ? d.way in only : d.id in only; };
         }
