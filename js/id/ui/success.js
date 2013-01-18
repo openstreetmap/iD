@@ -3,10 +3,10 @@ iD.ui.success = function() {
 
     function success(selection) {
         var changeset = selection.datum(),
-            header = selection.append('div').attr('class', 'header modal-section'),
+            header = selection.append('div').attr('class', 'header fillL modal-section'),
             body = selection.append('div').attr('class', 'body');
 
-        var section = body.append('div').attr('class','modal-section');
+        var section = body.append('div').attr('class','modal-section cf');
 
         header.append('h2').text('You Just Edited OpenStreetMap!');
         header.append('p').text('You just improved the world\'s best free map');
@@ -30,7 +30,7 @@ iD.ui.success = function() {
             .attr('class', 'buttons');
 
         var okbutton = buttonwrap.append('button')
-            .attr('class', 'action wide')
+            .attr('class', 'action col2')
             .on('click.save', function() {
                 event.cancel();
             });
