@@ -4,11 +4,13 @@ iD.Relation = iD.Entity.extend({
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            var extent = iD.geo.Extent();
-            for (var i = 0, l = this.members.length; i < l; i++) {
-                extent = extent.extend(resolver.entity(this.members[i].id).extent(resolver));
-            }
-            return extent;
+            return this.members.reduce(function (extent, member) {
+                if (member = resolver.entity(member.id)) {
+                    return extent.extend(member.extent(resolver))
+                } else {
+                    return extent;
+                }
+            }, iD.geo.Extent());
         });
     },
 
@@ -28,7 +30,7 @@ iD.Relation = iD.Entity.extend({
     //
     multipolygon: function(resolver) {
         var members = this.members
-            .filter(function (m) { return m.type === 'way'; })
+            .filter(function (m) { return m.type === 'way' && resolver.entity(m.id); })
             .map(function (m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.fetch(m.id).nodes }; });
 
         function join(ways) {
