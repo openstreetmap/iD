@@ -141,53 +141,50 @@ iD.ui.inspector = function() {
         var helpBtn = row.append('button')
             .attr('tabindex', -1)
             .attr('class', 'tag-help minor')
-            .append('a')
-                .attr('tabindex', -1)
-                .attr('target', '_blank')
-                .on('click', function(d) {
-                    var params = _.extend({}, d, {
-                        geometry: entity.geometry()
-                    });
-                    if (d.key && d.value) {
-                        taginfo.docs(params, function(err, docs) {
-                            var en = _.find(docs, function(d) {
-                                return d.lang == 'en';
-                            });
-                            if (en) {
-                                var types = [];
-                                if (en.on_area) types.push('area');
-                                if (en.on_node) types.push('point');
-                                if (en.on_way) types.push('line');
-                                en.types = types;
-                                iD.ui.modal()
-                                    .select('.content')
-                                    .datum(en)
-                                    .call(iD.ui.tagReference);
-                            } else {
-                                iD.ui.flash()
-                                    .select('.content')
-                                    .text('This is no documentation available for this tag combination');
-                            }
-                        });
-                    } else if (d.key) {
-                        taginfo.values(params, function(err, values) {
-                            if (values.data.length) {
-                                iD.ui.modal()
-                                    .select('.content')
-                                    .datum({
-                                        data: values.data,
-                                        title: 'Key:' + params.key,
-                                        geometry: params.geometry
-                                    })
-                                    .call(iD.keyReference);
-                            } else {
-                                iD.ui.flash()
-                                    .select('.content')
-                                    .text('This is no documentation available for this key');
-                            }
-                        });
-                    }
+            .on('click', function(d) {
+                var params = _.extend({}, d, {
+                    geometry: entity.geometry()
                 });
+                if (d.key && d.value) {
+                    taginfo.docs(params, function(err, docs) {
+                        var en = _.find(docs, function(d) {
+                            return d.lang == 'en';
+                        });
+                        if (en) {
+                            var types = [];
+                            if (en.on_area) types.push('area');
+                            if (en.on_node) types.push('point');
+                            if (en.on_way) types.push('line');
+                            en.types = types;
+                            iD.ui.modal()
+                                .select('.content')
+                                .datum(en)
+                                .call(iD.ui.tagReference);
+                        } else {
+                            iD.ui.flash()
+                                .select('.content')
+                                .text('This is no documentation available for this tag combination');
+                        }
+                    });
+                } else if (d.key) {
+                    taginfo.values(params, function(err, values) {
+                        if (values.data.length) {
+                            iD.ui.modal()
+                                .select('.content')
+                                .datum({
+                                    data: values.data,
+                                    title: 'Key:' + params.key,
+                                    geometry: params.geometry
+                                })
+                                .call(iD.keyReference);
+                        } else {
+                            iD.ui.flash()
+                                .select('.content')
+                                .text('This is no documentation available for this key');
+                        }
+                    });
+                }
+            });
 
         helpBtn.append('span')
             .attr('class', 'icon inspect');
