@@ -1,16 +1,8 @@
 iD.svg.Surface = function() {
     return function drawSurface(selection) {
-        selection.append('defs')
-            .append('clipPath')
-                .attr('id', 'clip')
-            .append('rect')
-                .attr('id', 'clip-rect')
-                .attr({ x: 0, y: 0 });
+        selection.append('defs');
 
-        var clip = selection.append('g')
-            .attr('clip-path', 'url(#clip)');
-
-        var layers = clip.selectAll('.layer')
+        var layers = selection.selectAll('.layer')
             .data(['fill', 'casing', 'stroke', 'text', 'hit']);
 
         layers.enter().append('g')

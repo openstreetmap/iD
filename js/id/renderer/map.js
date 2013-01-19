@@ -235,10 +235,7 @@ iD.Map = function() {
     map.size = function(_) {
         if (!arguments.length) return dimensions;
         dimensions = _;
-        surface
-            .size(dimensions)
-            .selectAll('#clip-rect')
-            .size(dimensions);
+        surface.size(dimensions);
         background.size(dimensions);
         return redraw();
     };
