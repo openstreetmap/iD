@@ -187,10 +187,6 @@ iD.ui.inspector = function() {
                             }
                         });
                     }
-                    d3.event.preventDefault();
-                })
-                .attr('href', function(d) {
-                    return 'http://taginfo.openstreetmap.org/keys/' + d.key;
                 });
 
         helpBtn.append('span')
