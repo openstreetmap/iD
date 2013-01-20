@@ -22,12 +22,16 @@ iD.svg.Vertices = function(projection) {
             .attr('class', 'node vertex');
 
         group.append('circle')
-            .attr('class', 'stroke')
-            .attr('r', 6);
+            .attr('r', 10)
+            .attr('class', 'shadow');
 
         group.append('circle')
-            .attr('class', 'fill')
-            .attr('r', 4);
+            .attr('r', 6)
+            .attr('class', 'stroke');
+
+        group.append('circle')
+            .attr('r', 3)
+            .attr('class', 'fill');
 
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
