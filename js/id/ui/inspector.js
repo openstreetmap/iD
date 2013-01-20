@@ -82,7 +82,7 @@ iD.ui.inspector = function() {
                 .on('click', apply);
 
             inspectorButton1.append('span').attr('class','icon icon-pre-text apply');
-            inspectorButton1.append('span').attr('class','label').text('Close');
+            inspectorButton1.append('span').attr('class','label').text('Okay');
 
         var inspectorButton2 = selection.append('button')
                 .attr('class', 'delete col6 action')
