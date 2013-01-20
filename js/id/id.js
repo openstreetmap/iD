@@ -50,7 +50,7 @@ window.iD = function(container) {
             }
         }
 
-        notice = iD.ui.notice(limiter
+        var notice = iD.ui.notice(limiter
             .append('div')
             .attr('class', 'notice'));
 
