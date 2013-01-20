@@ -22,17 +22,25 @@ iD.svg.Midpoints = function(projection) {
             }
         }
 
-        var handles = surface.select('.layer-hit').selectAll('circle.midpoint')
+        var groups = surface.select('.layer-hit').selectAll('g.midpoint')
             .filter(filter)
             .data(midpoints, function (d) { return [d.way, d.index].join(","); });
 
-        handles.enter()
-            .append('circle')
-            .attr({ r: 3, 'class': 'midpoint' });
+        var group = groups.enter()
+            .insert('g', ':first-child')
+            .attr('class', 'midpoint');
 
-        handles.attr('transform', iD.svg.PointTransform(projection));
+        group.append('circle')
+            .attr('r', 7)
+            .attr('class', 'shadow');
 
-        handles.exit()
+        group.append('circle')
+            .attr('r', 3)
+            .attr('class', 'fill');
+
+        groups.attr('transform', iD.svg.PointTransform(projection));
+
+        groups.exit()
             .remove();
     };
 };
