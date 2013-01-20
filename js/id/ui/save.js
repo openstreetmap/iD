@@ -42,12 +42,8 @@ iD.ui.save = function() {
                         }
                     });
                 }
-                var changes = history.changes();
-                var has_changes = d3.sum(d3.values(changes).map(function(c) {
-                    return c.length;
-                })) > 0;
 
-                if (has_changes) {
+                if (history.hasChanges()) {
                     connection.authenticate(function(err) {
                         var modal = iD.ui.modal();
                         var changes = history.changes();
@@ -77,16 +73,13 @@ iD.ui.save = function() {
             .attr('class', 'count');
 
         history.on('change.save-button', function() {
-            var changes = history.changes(),
-                num_changes = d3.sum(d3.values(changes).map(function(c) {
-                    return c.length;
-                }));
+            var hasChanges = history.hasChanges();
 
             selection
-                .property('disabled', num_changes === 0)
-                .classed('has-count', num_changes > 0)
+                .property('disabled', !hasChanges)
+                .classed('has-count', hasChanges)
                 .select('span.count')
-                    .text(num_changes);
+                    .text(history.numChanges());
         });
 
     }

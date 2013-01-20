@@ -133,8 +133,24 @@ describe("iD.History", function () {
             expect(history.hasChanges()).to.eql(true);
         });
 
-        it("is false when any of change's values are empty", function() {
+        it("is false when all of change's values are empty", function() {
             expect(history.hasChanges()).to.eql(false);
+        });
+    });
+
+    describe("#numChanges", function() {
+        it("is 0 when there are no changes", function() {
+            expect(history.numChanges()).to.eql(0);
+        });
+
+        it("is the sum of all types of changes", function() {
+            var node1 = iD.Node({id: "n1"}),
+                node2 = iD.Node();
+            history.merge(iD.Graph([node1]));
+            history.perform(function (graph) { return graph.remove(node1); });
+            expect(history.numChanges()).to.eql(1);
+            history.perform(function (graph) { return graph.replace(node2); });
+            expect(history.numChanges()).to.eql(2);
         });
     });
 
