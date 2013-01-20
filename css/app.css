@@ -481,6 +481,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     right:0;
     height:60px;
     border-radius: 0;
+    -webkit-transition: opacity .25s, z-index 0 0s;
+       -moz-transition: opacity .25s, z-index 0 0s;
+            transition: opacity .25s, z-index 0 0s;
+}
+
+.mode-add-point #bar,
+.mode-add-line #bar,
+.mode-draw-line #bar,
+.mode-draw-area #bar,
+.mode-add-area #bar { 
+    opacity:0;
+    z-index: -9999;
+    -webkit-transition: opacity .25s, z-index 0 .5s;
+       -moz-transition: opacity .25s, z-index 0 .5s;
+            transition: opacity .25s, z-index 0 .5s;
 }
 
 /* Inspector */
