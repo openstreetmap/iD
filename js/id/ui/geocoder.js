@@ -47,7 +47,7 @@ iD.ui.geocoder = function() {
 
         var gcForm = selection.append('form');
 
-        gcForm.attr('class','content map-overlay hide')
+        gcForm.attr('class','content fillD map-overlay hide')
             .append('input')
                 .attr({ type: 'text', placeholder: 'find a place' })
                 .on('keydown', keydown);

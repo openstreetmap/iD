@@ -94,7 +94,7 @@ window.iD = function(container) {
             .call(undo_tooltip);
 
         var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
-            .attr('class', 'save action col12')
+            .attr('class', 'save col12')
             .call(iD.ui.save().map(map).controller(controller));
 
         history.on('change.warn-unload', function() {
@@ -102,9 +102,6 @@ window.iD = function(container) {
                 return 'You have unsaved changes.';
             } : null;
         });
-
-        limiter.append('div')
-            .attr('class', 'messages');
 
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')

@@ -29,7 +29,7 @@ iD.ui.layerswitcher = function(map) {
     function layerswitcher(selection) {
 
         var content = selection
-            .append('div').attr('class', 'content map-overlay hide');
+            .append('div').attr('class', 'content fillD map-overlay hide');
 
         var button = selection
             .append('button')

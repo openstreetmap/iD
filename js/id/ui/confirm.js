@@ -2,7 +2,7 @@ iD.ui.confirm = function() {
     var modal = iD.ui.modal();
     modal.select('.modal').classed('modal-alert', true);
     modal.select('.content')
-        .classed('modal-section', true)
+        .attr('class','modal-section fillD')
         .append('div')
         .attr('class', 'description');
     var nochanges = modal.select('.content')

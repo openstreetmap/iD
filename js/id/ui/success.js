@@ -6,7 +6,7 @@ iD.ui.success = function() {
             header = selection.append('div').attr('class', 'header fillL modal-section'),
             body = selection.append('div').attr('class', 'body');
 
-        var section = body.append('div').attr('class','modal-section cf');
+        var section = body.append('div').attr('class','modal-section fillD');
 
         header.append('h2').text('You Just Edited OpenStreetMap!');
         header.append('p').text('You just improved the world\'s best free map');
@@ -27,7 +27,7 @@ iD.ui.success = function() {
             .text('Tweet: ' + message);
 
         var buttonwrap = section.append('div')
-            .attr('class', 'buttons');
+            .attr('class', 'buttons cf');
 
         var okbutton = buttonwrap.append('button')
             .attr('class', 'action col2')
@@ -36,7 +36,7 @@ iD.ui.success = function() {
             });
 
         okbutton.append('span').attr('class','icon apply icon-pre-text');
-        okbutton.append('span').attr('class','label').text('OK');
+        okbutton.append('span').attr('class','label').text('Okay');
     }
 
     return d3.rebind(success, event, 'on');

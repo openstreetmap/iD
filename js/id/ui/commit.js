@@ -59,26 +59,25 @@ iD.ui.commit = function() {
         header.append('p').text('The changes you upload will be visible on all maps that use OpenStreetMap data.');
 
         // Comment Box
-        var comment_section = body.append('div').attr('class','modal-section cf');
+        var comment_section = body.append('div').attr('class','modal-section fillD');
         comment_section.append('textarea')
             .attr('class', 'changeset-comment')
             .attr('placeholder', 'Brief Description of your contributions');
 
         // Confirm / Cancel Buttons
         var buttonwrap = comment_section.append('div')
-                    .attr('class', 'buttons')
+                    .attr('class', 'buttons cf')
                         .append('div')
                         .attr('class', 'button-wrap joined col4');
 
         var savebutton = buttonwrap
                 .append('button')
-                .attr('class', 'action col6 button')
+                .attr('class', 'save action col6 button')
                 .on('click.save', function() {
                     event.save({
                         comment: d3.select('textarea.changeset-comment').node().value
                     });
                 });
-                savebutton.append('span').attr('class','icon save icon-pre-text');
                 savebutton.append('span').attr('class','label').text('Save');
 
         var cancelbutton = buttonwrap.append('button')

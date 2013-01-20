@@ -39,9 +39,7 @@ iD.ui.inspector = function() {
         drawTags(entity.tags);
 
         inspectorbody.append('div')
-            .attr('class', 'inspector-buttons pad1')
-                .append('div')
-                .attr('class','button-wrap joined')
+            .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
     }
 
@@ -55,41 +53,45 @@ iD.ui.inspector = function() {
 
         h2.append('span')
             .text(entity.friendlyName());
-
-        selection.append('a')
-            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-            .attr('target', '_blank')
-            .text('View on OSM');
-
-        if (entity.type === 'way') {
-            selection.append('a')
-                .attr('href', '#')
-                .text('Reverse Direction')
-                .on('click', function() { event.changeWayDirection(entity); });
-        }
-
-        if (entity.geometry() === 'vertex') {
-            selection.append('a')
-                .attr('href', '#')
-                .text('Split Way')
-                .on('click', function() { event.splitWay(entity); });
-        }
     }
 
     function drawButtons(selection) {
-        var inspectorButton1 = selection.append('button')
+        var entity = selection.datum();
+        var inspectorButtonWrap = selection.append('div')
+                .attr('class','button-wrap joined fl');
+        var inspectorButton1 = inspectorButtonWrap.append('button')
                 .attr('class', 'apply col6 action')
                 .on('click', apply);
 
             inspectorButton1.append('span').attr('class','icon icon-pre-text apply');
             inspectorButton1.append('span').attr('class','label').text('Okay');
 
-        var inspectorButton2 = selection.append('button')
+        var inspectorButton2 = inspectorButtonWrap.append('button')
                 .attr('class', 'delete col6 action')
                 .on('click', function(entity) { event.remove(entity); });
 
             inspectorButton2.append('span').attr('class','icon icon-pre-text delete');
             inspectorButton2.append('span').attr('class','label').text('Delete');
+
+        var minorButtons = selection.append('div').attr('class','minor-buttons fl');
+
+            minorButtons.append('a')
+                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                .attr('target', '_blank')
+                .text('View on OSM');
+            if (entity.type === 'way') {
+                minorButtons.append('a')
+                    .attr('href', '#')
+                    .text('Reverse Direction')
+                    .on('click', function() { event.changeWayDirection(entity); });
+            }
+            if (entity.geometry() === 'vertex') {
+                minorButtons.append('a')
+                    .attr('href', '#')
+                    .text('Split Way')
+                    .on('click', function() { event.splitWay(entity); });
+            }
+
     }
 
     function drawTags(tags) {

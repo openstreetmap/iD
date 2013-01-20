@@ -3,7 +3,7 @@ iD.ui.tagReference = function(selection) {
         function g(x) { return function(d) { return d[x]; }; }
         var selection = d3.select(this);
         var header = selection.append('div')
-            .attr('class','modal-section')
+            .attr('class','modal-section fillL header')
             .append('h2');
 
         header.selectAll('span.icon')
@@ -20,7 +20,7 @@ iD.ui.tagReference = function(selection) {
                 .text(g('title'));
 
         referenceBody =  selection.append('div')
-            .attr('class','modal-section');
+            .attr('class','modal-section fillL2');
 
         referenceBody
             .append('h5')

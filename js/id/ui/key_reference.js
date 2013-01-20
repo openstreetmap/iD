@@ -4,10 +4,10 @@ iD.ui.keyReference = function(selection) {
         var selection = d3.select(this),
             data = selection.datum(),
             header = selection.append('div')
-                .attr('class','modal-section')
+                .attr('class','modal-section fillL')
                 .append('h2'),
             body = selection.append('div')
-                .attr('class', 'modal-section');
+                .attr('class', 'modal-section fillL2');
 
         header.append('span').attr('class', 'icon big icon-pre-text big-' + data.geometry);
         header.append('span').text(data.title);

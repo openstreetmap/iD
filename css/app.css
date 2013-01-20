@@ -92,21 +92,38 @@ a:hover {
     color:#154dff;
 }
 
+
 textarea,
 input[type=text] {
     background-color: white;
     border:1px solid #ccc;
     padding:10px;
+    resize: vertical;
 }
 
-input[type=text] {
-    padding:4px 10px;
-    height:30px;
+.fillD textarea,
+.fillD input[type=text] {
+    background-color: black;
+    border:1px solid rgba(255, 255, 255, .25);
+    color: white;
+    border-radius: 4px;
 }
 
 textarea:focus,
 input[type=text]:focus {
     background-color: #ececec;
+}
+
+.fillD textarea:focus,
+.fillD input[type=text]:focus {
+    background-color: black;
+    border:1px solid rgba(255, 255, 255, .5);
+}
+
+input[type=text] {
+    padding:4px 10px;
+    height:30px;
+    resize: none;
 }
 
 /* tables */
@@ -206,10 +223,9 @@ ul.link-list li:last-child {
     color: #333;
 }
 
-.content, .fillD {
+.fillD {
     background:rgba(0,0,0,.8);
     color: white;
-    border-radius: 4px;
 }
 
 .fl { float: left;}
@@ -218,6 +234,11 @@ ul.link-list li:last-child {
 div.hide,
 form.hide {
     display:none;
+}
+
+.content {
+    border-radius: 4px;
+    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.7);
 }
 
 .pad1    {padding: 10px;}
@@ -284,7 +305,7 @@ button.centered {
 }
 
 .button-wrap button:only-child { width: 100%;}
-.button-wrap:last-child { padding-right: 0;}
+.button-wrap:last-of-type { padding-right: 0;}
 
 .joined button {
     border-right: 1px solid rgba(0,0,0,.5);
@@ -313,9 +334,6 @@ button.delete {
 }
 button.delete:hover {
     background-color: #ef5454;
-}
-
-button.save {
 }
 
 button.save.has-count {
@@ -350,20 +368,15 @@ button.save.has-count .count::before {
     left: -6px;
     top: 0;
     bottom: 0;
-       border-top: 6px solid transparent;
+    border-top:    6px solid transparent;
     border-bottom: 6px solid transparent;
-     border-right: 6px solid rgba(255,255,255,.5);
+    border-right:  6px solid rgba(255,255,255,.5);
 }
 
 button.close {
     position: absolute;
     top: 10px;
     right: 10px;
-}
-
-button.save .label {
-    display: inline-block;
-    color: white;
 }
 
 button[disabled] {
@@ -474,12 +487,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-radius: 0;
 }
 
-/* Status box */
-
-.messages {
-    display:none;
-}
-
 /* Inspector */
 
 .inspector-wrap {
@@ -492,7 +499,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector {
     min-height: 60px;
     position: relative;
-    border-radius: 0 0 0 4px;
+    border-radius: 0 0 0 10px;
 }
 
 .inspector-inner {
@@ -577,9 +584,20 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .tag-row button.tag-help {
     right: -30px;
 }
+.inspector-buttons { 
+    border-radius: 0 0 0 10px;
+    height: 60px;
+}
 
 .inspector-buttons .button-wrap {
     width: 40%;
+    padding-right: 0;
+}
+
+.inspector-buttons .minor-buttons {
+    padding-left: 10px;
+    line-height: 40px;
+    width: 60%;
 }
 
 .inspector-inner .add-tag-row {
@@ -904,10 +922,9 @@ div.typeahead a:first-child {
 
 .modal-section {
     padding: 20px;
-    width: 100%;
 }
 
-.modal-section:first-child {
+.modal-section.header {
     border-radius: 4px 4px 0 0;
 }
 
@@ -915,7 +932,10 @@ div.typeahead a:first-child {
     border-radius: 0 0 4px 4px;
 }
 
-.modal-section .buttons { padding-top: 20px;}
+.modal-section .buttons { 
+    padding-top: 10px;
+    width: 100%;
+}
 
 .modal-section img.wiki-image {
     max-width: 400px;
@@ -1078,12 +1098,8 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 @media only screen and (max-width: 840px) {
-    span.label {
-        display: none;
-    }
-    .icon.icon-pre-text {
-    margin-right: 0px;
-    }
-}
-
+    span.label {display: none;}
+    /* override hide for save button */
+    .icon.icon-pre-text { margin-right: 0px;}
+    .save .label { display: block;}
 }
