@@ -126,6 +126,18 @@ describe("iD.History", function () {
         });
     });
 
+    describe("#hasChanges", function() {
+        it("is true when any of change's values are nonempty", function() {
+            var node = iD.Node();
+            history.perform(function (graph) { return graph.replace(node); });
+            expect(history.hasChanges()).to.eql(true);
+        });
+
+        it("is false when any of change's values are empty", function() {
+            expect(history.hasChanges()).to.eql(false);
+        });
+    });
+
     describe("#reset", function () {
         it("clears the version stack", function () {
             history.perform(action, "annotation");
