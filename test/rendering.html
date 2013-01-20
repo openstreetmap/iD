@@ -48,7 +48,7 @@
         var zooms = [16, 17],
             modes = ['base', 'hover', 'selected'],
             highways = [
-                'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential',
+                '', 'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential',
                 'service', 'track', 'road', 'unclassified', 'living_street', 'pedestrian',
                 'path', 'footway', 'cycleway', 'bridleway', 'steps', 'proposed', 'construction'];
 
@@ -84,7 +84,7 @@
             .attr('data-zoom', function (d) { return d.zoom; })
             .call(iD.svg.Surface())
             .each(function (d) {
-                var highway = way.update({tags: {highway: d.tag}}),
+                var highway = way.update({tags: d.tag ? {highway: d.tag} : {}}),
                     graph = iD.Graph([a, b, highway]);
 
                 d3.select(this)

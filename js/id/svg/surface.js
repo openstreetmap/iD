@@ -3,7 +3,7 @@ iD.svg.Surface = function() {
         selection.append('defs');
 
         var layers = selection.selectAll('.layer')
-            .data(['fill', 'casing', 'stroke', 'text', 'hit']);
+            .data(['shadow', 'fill', 'casing', 'stroke', 'text', 'hit']);
 
         layers.enter().append('g')
             .attr('class', function(d) { return 'layer layer-' + d; });

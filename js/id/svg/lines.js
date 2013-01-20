@@ -75,10 +75,12 @@ iD.svg.Lines = function(projection) {
 
         var lineString = iD.svg.LineString(projection);
 
-        var casing = surface.select('.layer-casing'),
+        var shadow = surface.select('.layer-shadow'),
+            casing = surface.select('.layer-casing'),
             stroke = surface.select('.layer-stroke'),
             defs   = surface.select('defs'),
             text   = surface.select('.layer-text'),
+            shadows = drawPaths(shadow, lines, filter, 'way line shadow', lineString),
             casings = drawPaths(casing, lines, filter, 'way line casing', lineString),
             strokes = drawPaths(stroke, lines, filter, 'way line stroke', lineString);
 
