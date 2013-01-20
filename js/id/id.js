@@ -50,7 +50,7 @@ window.iD = function(container) {
             }
         }
 
-        notice = iD.ui.notice(limiter
+        var notice = iD.ui.notice(limiter
             .append('div')
             .attr('class', 'notice'));
 
@@ -98,13 +98,7 @@ window.iD = function(container) {
             .call(iD.ui.save().map(map).controller(controller));
 
         history.on('change.warn-unload', function() {
-            var changes = history.changes(),
-
-                has_changes = !!d3.sum(d3.values(changes).map(function(c) {
-                    return c.length;
-                }));
-
-            window.onbeforeunload = has_changes ? function() {
+            window.onbeforeunload = history.hasChanges() ? function() {
                 return 'You have unsaved changes.';
             } : null;
         });
