@@ -22,7 +22,7 @@ iD.ui.save = function() {
                         history.reset();
                         map.flush().redraw();
                         if (err) {
-                            var desc = iD.confirm()
+                            var desc = iD.ui.confirm()
                                 .select('.description');
                             desc.append('h2')
                                 .text('An error occurred while trying to save');
@@ -68,7 +68,7 @@ iD.ui.save = function() {
                                 .on('save', commit));
                     });
                 } else {
-                    iD.confirm().select('.description')
+                    iD.ui.confirm().select('.description')
                         .append('h3').text('You don\'t have any changes to save.');
                 }
             });
