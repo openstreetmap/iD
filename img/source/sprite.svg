@@ -13,7 +13,7 @@
    height="200"
    id="svg12393"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.1 r9760"
    sodipodi:docname="sprite.svg"
    inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite.png"
    inkscape:export-xdpi="90"
@@ -40,9 +40,9 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
      inkscape:cx="173.1037"
-     inkscape:cy="80.703482"
+     inkscape:cy="123.12989"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer12"
      showgrid="false"
      inkscape:window-width="1560"
      inkscape:window-height="922"
@@ -173,7 +173,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -338,7 +338,7 @@
        id="g16306-5"
        style="display:inline" />
     <path
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 169.00002,9.9999989 5.99998,-7 6.00002,7.0000201 -4,-10e-6 -1e-5,6 -1.00001,0.99999 -2,0 -1,-0.99998 1e-5,-6.0000201 z"
        id="path9203-8"
        inkscape:connector-curvature="0"
@@ -357,10 +357,10 @@
        inkscape:connector-curvature="0"
        id="path22362"
        d="M 159.5,4 154.5625,12.5625 151,9 l -1,0 -1,1 0,1 5,5 1,0 1,0 6,-10 0,-1 -1,-1 -1.5,0 z"
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <path
        inkscape:connector-curvature="0"
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 210,2.999999 -1,1 0,1 1,1 9,0 1,-1 0,-1 -1,-1 z m 0,4 0,9 1,1 7,0 1,-1 0,-9 z m 2,2 1,0 0,6 -1,0 0,-1 z m 2,0 1,0 0,5 0,1 -1,0 z m 2,0 1,0 0,5 0,1 -1,0 z"
        id="path22366"
        sodipodi:nodetypes="cccccccccccccccccccccccccccccccccc" />

@@ -276,7 +276,6 @@ button.active {
 
 button.active:not([disabled]) {
     background: #6bc641;
-    color: white;
 }
 
 button.minor {
@@ -322,7 +321,6 @@ button.centered {
 }
 
 button.action {
-    color: white;
     background: #7092ff;
 }
 button.action:hover {
@@ -411,12 +409,12 @@ button[disabled] .label {
 }
 
 /* Definitions for every icon */
-button.active:not([disabled]) .icon.browse     { background-position:   0px -20px;}
-button.active:not([disabled]) .icon.add-point  { background-position: -20px -20px;}
-button.active:not([disabled]) .icon.add-line   { background-position: -40px -20px;}
-button.active:not([disabled]) .icon.add-area   { background-position: -60px -20px;}
-button.active:not([disabled]) .icon.undo       { background-position: -80px -20px;}
-button.active:not([disabled]) .icon.redo      { background-position: -100px -20px;}
+.icon.browse     { background-position:   0px -20px;}
+.icon.add-point  { background-position: -20px -20px;}
+.icon.add-line   { background-position: -40px -20px;}
+.icon.add-area   { background-position: -60px -20px;}
+.icon.undo       { background-position: -80px -20px;}
+.icon.redo      { background-position: -100px -20px;}
 
 .icon.apply      { background-position: -120px 0px;}
 .icon.save       { background-position: -140px 0px;}
@@ -432,7 +430,6 @@ button.active:not([disabled]) .icon.redo      { background-position: -100px -20p
 .icon.nearby     { background-position: -340px 0px;}
 .icon.geolocate  { background-position: -360px 0px;}
 
-
 .icon.browse     { background-position:   0px 0px;}
 .icon.add-point  { background-position: -20px 0px;}
 .icon.add-line   { background-position: -40px 0px;}
@@ -442,7 +439,6 @@ button.active:not([disabled]) .icon.redo      { background-position: -100px -20p
 
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
-
 
 button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
