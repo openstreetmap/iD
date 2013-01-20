@@ -528,8 +528,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .tag-row {
-    width: 100%;
-    padding-right: 60px;
+    width: 80%;
+    padding-right: 0px;
     position: relative;
     height: 30px;
 }
@@ -571,11 +571,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .tag-row button {
     position: absolute;
     top: 5px;
-    right: 0;
+    right: -60px;
 }
 
 .tag-row button.tag-help {
-    right: 30px;
+    right: -30px;
 }
 
 .inspector-buttons .button-wrap {
@@ -584,7 +584,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-inner .add-tag-row {
     width: 100%;
-    padding-right: 60px;
 }
 
 .inspector-inner .add-tag-row button {
@@ -592,9 +591,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner .add-tag {
-    width: 50%;
+    width: 40%;
     height: 30px;
-    font-size: 100%;
     border: 1px solid #ccc;
     border-top: 0;
 }
