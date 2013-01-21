@@ -19,7 +19,7 @@ iD.svg.MemberClasses = function(graph) {
 
             relations.forEach(function (relation) {
                 classes += ' member-type-' + relation.tags.type;
-                classes += ' member-role-' + _.find(relation.members, function (member) { return member.id == d.id; }).role;
+                classes += ' member-role-' + relation.memberById(d.id).role;
             });
 
             classes = classes.trim();

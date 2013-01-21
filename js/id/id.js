@@ -22,15 +22,19 @@ window.iD = function(container) {
             .call(map);
 
         var bar = container.append('div')
-            .attr('id', 'bar').attr('class', 'fillL2');
+            .attr('id', 'bar')
+            .attr('class','pad1 fillD');
 
-        var buttons_joined = bar.append('div')
-            .attr('class', 'buttons-joined');
+        var limiter = bar.append('div')
+            .attr('class', 'limiter');
+
+        var buttons_joined = limiter.append('div')
+            .attr('class', 'button-wrap joined col4');
 
         var buttons = buttons_joined.selectAll('button.add-button')
             .data([iD.modes.Browse(), iD.modes.AddPoint(), iD.modes.AddLine(), iD.modes.AddArea()])
             .enter().append('button')
-                .attr('class', function (mode) { return mode.title + ' add-button'; })
+                .attr('class', function (mode) { return mode.title + ' add-button col3'; })
             .attr('data-original-title', function (mode) { return mode.description; })
             .call(bootstrap.tooltip().placement('bottom'))
             .on('click', function (mode) { controller.enter(mode); });
@@ -46,7 +50,7 @@ window.iD = function(container) {
             }
         }
 
-        notice = iD.ui.notice(bar
+        var notice = iD.ui.notice(limiter
             .append('div')
             .attr('class', 'notice'));
 
@@ -71,47 +75,33 @@ window.iD = function(container) {
             container.classed("mode-" + exited.id, false);
         });
 
-        var undo_buttons = bar.append('div')
-            .attr('class', 'buttons-joined'),
+        var undo_buttons = limiter.append('div')
+            .attr('class', 'button-wrap joined col1'),
             undo_tooltip = bootstrap.tooltip().placement('bottom');
 
         undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'narrow' })
+            .attr({ id: 'undo', 'class': 'col6' })
             .property('disabled', true)
             .html("<span class='undo icon'></span><small></small>")
             .on('click', history.undo)
             .call(undo_tooltip);
 
         undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'narrow' })
+            .attr({ id: 'redo', 'class': 'col6' })
             .property('disabled', true)
             .html("<span class='redo icon'><small></small>")
             .on('click', history.redo)
             .call(undo_tooltip);
 
-        container.append('div')
-            .attr('class', 'user-container pad1 fillD about-block')
-            .append('div')
-                .attr('class', 'hello');
-
-        var save_button = bar.append('button')
-            .attr('class', 'save action wide')
+        var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
+            .attr('class', 'save col12')
             .call(iD.ui.save().map(map).controller(controller));
 
         history.on('change.warn-unload', function() {
-            var changes = history.changes(),
-
-                has_changes = !!d3.sum(d3.values(changes).map(function(c) {
-                    return c.length;
-                }));
-
-            window.onbeforeunload = has_changes ? function() {
+            window.onbeforeunload = history.hasChanges() ? function() {
                 return 'You have unsaved changes.';
             } : null;
         });
-
-        bar.append('div')
-            .attr('class', 'messages');
 
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
@@ -119,7 +109,7 @@ window.iD = function(container) {
                 .data([['zoom-in', '+', map.zoomIn, 'Zoom In'], ['zoom-out', '-', map.zoomOut, 'Zoom Out']])
                 .enter()
                 .append('button')
-                .attr('class', function(d) { return d[0] + ' narrow'; })
+                .attr('class', function(d) { return d[0]; })
                 .attr('title', function(d) { return d[3]; })
                 .on('click', function(d) { return d[2](); })
                 .append('span')
@@ -139,21 +129,27 @@ window.iD = function(container) {
             .call(iD.ui.layerswitcher(map));
 
         container.append('div')
-            .attr('class', 'inspector-wrap fillL')
-            .style('display', 'none');
+            .style('display', 'none')
+            .attr('class', 'inspector-wrap fr col5');
 
-        var about = container.append('div').attr('id', 'attrib-container');
+        var about = container.append('div')
+            .attr('class','col12 about-block fillD pad1')
 
-        about.append('ul')
-            .attr('id','about')
-            .attr('class','pad1 fillD about-block link-list')
-            .html("<li><a target='_blank' href='http://github.com/systemed/iD'>view code</a></li> " +
+        about.append('div')
+            .attr('class', 'user-container')
+            .append('div')
+                .attr('class', 'hello');
+
+        var aboutList = about.append('ul')
+                .attr('id','about')
+                .attr('class','link-list');
+
+            aboutList.html("<li><a target='_blank' href='http://github.com/systemed/iD'>view code</a></li> " +
                   "<li><a target='_blank' href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
                   " <li id='attribution'>imagery <a target='_blank' href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
 
-        var contributors = about.append('div')
+        var contributors = aboutList.append('li')
             .attr('id', 'user-list')
-            .attr('class','about-block fillD pad1');
         contributors.append('span')
             .attr('class', 'icon nearby icon-pre-text');
         contributors.append('span')
@@ -173,12 +169,12 @@ window.iD = function(container) {
                 }
             }
 
-            bar.select('#undo')
+            limiter.select('#undo')
                 .property('disabled', !undo)
                 .attr('data-original-title', undo)
                 .call(undo ? refreshTooltip : undo_tooltip.hide);
 
-            bar.select('#redo')
+            limiter.select('#redo')
                 .property('disabled', !redo)
                 .attr('data-original-title', redo)
                 .call(redo ? refreshTooltip : undo_tooltip.hide);

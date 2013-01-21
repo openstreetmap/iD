@@ -57,11 +57,11 @@ describe("iD.ui.inspector", function () {
         expect(inspector.tags()).to.eql({});
     });
 
-    it("emits a close event when the close button is clicked", function () {
+    it("emits a close event when the apply button is clicked", function () {
         var spy = sinon.spy();
         inspector.on('close', spy);
 
-        element.select('.close').trigger('click');
+        element.select('.apply').trigger('click');
 
         expect(spy).to.have.been.calledWith(entity);
     });

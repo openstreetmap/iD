@@ -41,14 +41,13 @@ iD.ui.geocoder = function() {
         }
 
         var button = selection.append('button')
-            .attr('class', 'narrow')
             .attr('title', 'Find A Location')
             .html('<span class=\'geocode icon\'></span>')
             .on('click', toggle);
 
         var gcForm = selection.append('form');
 
-        gcForm.attr('class','content map-overlay hide')
+        gcForm.attr('class','content fillD map-overlay hide')
             .append('input')
                 .attr({ type: 'text', placeholder: 'find a place' })
                 .on('keydown', keydown);

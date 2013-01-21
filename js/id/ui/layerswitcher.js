@@ -29,11 +29,11 @@ iD.ui.layerswitcher = function(map) {
     function layerswitcher(selection) {
 
         var content = selection
-            .append('div').attr('class', 'content map-overlay hide');
+            .append('div').attr('class', 'content fillD map-overlay hide');
 
         var button = selection
             .append('button')
-            .attr('class', 'narrow')
+            .attr('class', 'fillD')
             .attr('title', 'Layer Settings')
             .html("<span class='layers icon'></span>")
             .on('click.layerswitcher-toggle', toggle);
@@ -56,7 +56,7 @@ iD.ui.layerswitcher = function(map) {
 
         var opa = content
             .append('div')
-            .attr('class', 'opacity-options-wrapper fillL2');
+            .attr('class', 'opacity-options-wrapper');
 
         opa.append('h4').text('Layers');
 
@@ -102,7 +102,7 @@ iD.ui.layerswitcher = function(map) {
 
         content
             .append('ul')
-            .attr('class', 'toggle-list')
+            .attr('class', 'toggle-list fillL')
             .selectAll('a.layer')
                 .data(sources)
                 .enter()
@@ -135,7 +135,7 @@ iD.ui.layerswitcher = function(map) {
 
         var adjustments = content
             .append('div')
-            .attr('class', 'adjustments');
+            .attr('class', 'adjustments pad1');
 
         var directions = [
             ['←', [-1, 0]],

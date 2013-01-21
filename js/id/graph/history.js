@@ -109,6 +109,16 @@ iD.History = function() {
             };
         },
 
+        hasChanges: function() {
+            return !!this.numChanges();
+        },
+
+        numChanges: function() {
+            return d3.sum(d3.values(this.changes()).map(function(c) {
+                return c.length;
+            }));
+        },
+
         imagery_used: function(source) {
             if (source) imagery_used = source;
             else return _.without(

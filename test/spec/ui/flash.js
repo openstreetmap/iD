@@ -1,13 +1,17 @@
 describe("iD.ui.flash", function () {
-    it('can be instantiated', function () {
-        var flash = iD.ui.flash();
-        expect(flash).to.be.ok;
+    var clock;
+
+    beforeEach(function () {
+        clock = sinon.useFakeTimers();
     });
-    it('leaves after 1000 ms', function (done) {
+
+    afterEach(function () {
+        clock.restore();
+    });
+
+    it('leaves after 1000 ms', function () {
         var flash = iD.ui.flash();
-        window.setTimeout(function() {
-            expect(flash.node().parentNode).to.be.null;
-            done();
-        }, 1200);
+        clock.tick(1010);
+        expect(flash.node().parentNode).to.be.null;
     });
 });

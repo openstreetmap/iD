@@ -14,12 +14,24 @@ iD.Way = iD.Entity.extend({
         });
     },
 
+    first: function() {
+        return this.nodes[0];
+    },
+
+    last: function() {
+        return this.nodes[this.nodes.length - 1];
+    },
+
+    contains: function(node) {
+        return this.nodes.indexOf(node) >= 0;
+    },
+
     isOneWay: function() {
         return this.tags.oneway === 'yes';
     },
 
     isClosed: function() {
-        return this.nodes.length > 0 && this.nodes[this.nodes.length - 1] === this.nodes[0];
+        return this.nodes.length > 0 && this.first() === this.last();
     },
 
     // a way is an area if:

@@ -1,5 +1,13 @@
-// https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
-iD.actions.SplitWay = function(nodeId) {
+// Split a way at the given node.
+//
+// For testing convenience, accepts an ID to assign to the new way.
+// Normally, this will be undefined and the way will automatically
+// be assigned a new ID.
+//
+// Reference:
+//   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
+//
+iD.actions.SplitWay = function(nodeId, newWayId) {
     return function(graph) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node);
@@ -7,38 +15,44 @@ iD.actions.SplitWay = function(nodeId) {
         // splitting ways at intersections TODO
         if (parents.length !== 1) return graph;
 
-        var way = parents[0];
-
-        var idx = _.indexOf(way.nodes, nodeId);
+        var way = parents[0],
+            idx = _.indexOf(way.nodes, nodeId);
 
         // Create a 'b' way that contains all of the tags in the second
         // half of this way
-        var newWay = iD.Way({ tags: _.clone(way.tags), nodes: way.nodes.slice(idx) });
+        var newWay = iD.Way({id: newWayId, tags: way.tags, nodes: way.nodes.slice(idx)});
         graph = graph.replace(newWay);
 
         // Reduce the original way to only contain the first set of nodes
-        graph = graph.replace(way.update({ nodes: way.nodes.slice(0, idx + 1) }), 'changed way direction');
+        graph = graph.replace(way.update({nodes: way.nodes.slice(0, idx + 1)}));
 
-        var parentRelations = graph.parentRelations(way);
-
-        function isVia(x) { return x.role = 'via'; }
-        function isSelf(x) { return x.id = way.id; }
-
-        parentRelations.forEach(function(relation) {
-            if (relation.tags.type === 'restriction') {
-                var via = _.find(relation.members, isVia);
-                var ownrole = _.find(relation.members, isSelf).role;
-                if (via && !_.contains(newWay.nodes, via.id)) {
-                    // the new way doesn't contain the node that's important
-                    // to the turn restriction, so we don't need to worry
-                    // about adding it to the turn restriction.
-                } else {
-                    graph = graph.replace(iD.actions.AddRelationMember(relation.id, {
-                        role: ownrole,
-                        id: newWay.id,
-                        type: 'way'
-                    }));
+        graph.parentRelations(way).forEach(function(relation) {
+            if (relation.isRestriction()) {
+                var via = relation.memberByRole('via');
+                if (via && newWay.contains(via.id)) {
+                    graph = iD.actions.UpdateRelationMember(
+                        relation.id,
+                        {id: newWay.id},
+                        relation.memberById(way.id).index
+                    )(graph);
                 }
+            } else {
+                var role = relation.memberById(way.id).role,
+                    last = newWay.last(),
+                    i = relation.memberById(way.id).index,
+                    j;
+
+                for (j = 0; j < relation.members.length; j++) {
+                    if (relation.members[j].type === 'way' && graph.entity(relation.members[j].id).contains(last)) {
+                        break;
+                    }
+                }
+
+                graph = iD.actions.AddRelationMember(
+                    relation.id,
+                    {id: newWay.id, type: 'way', role: role},
+                    i <= j ? i + 1 : i
+                )(graph);
             }
         });
 

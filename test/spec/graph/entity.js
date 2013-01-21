@@ -113,6 +113,22 @@ describe('iD.Entity', function () {
         });
     });
 
+    describe("#intersects", function () {
+        it("returns true for a way with a node within the given extent", function () {
+            var node  = iD.Node({loc: [0, 0]}),
+                way   = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(way.intersects([[-5, -5], [5, 5]], graph)).to.equal(true);
+        });
+
+        it("returns false for way with no nodes within the given extent", function () {
+            var node  = iD.Node({loc: [6, 6]}),
+                way   = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(way.intersects([[-5, -5], [5, 5]], graph)).to.equal(false);
+        });
+    });
+
     describe("#hasInterestingTags", function () {
         it("returns false if the entity has no tags", function () {
             expect(iD.Entity().hasInterestingTags()).to.equal(false);

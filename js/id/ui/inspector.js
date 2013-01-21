@@ -7,18 +7,14 @@ iD.ui.inspector = function() {
     function inspector(selection) {
         var entity = selection.datum();
 
-        selection.html('').append('button')
-            .attr('class', 'narrow close')
-            .html("<span class='icon close'></span>")
-            .on('click', function() {
-                event.close(entity);
-            });
+        var inspector = selection.append('div')
+            .attr('class','inspector content');
 
-        selection.append('div')
-            .attr('class', 'head inspector-inner')
+        inspector.append('div')
+            .attr('class', 'head inspector-inner fillL')
             .call(drawHead);
 
-        var inspectorbody = selection.append('div')
+        var inspectorbody = inspector.append('div')
             .attr('class', 'inspector-body');
 
         var inspectorwrap = inspectorbody.append('div')
@@ -43,7 +39,7 @@ iD.ui.inspector = function() {
         drawTags(entity.tags);
 
         inspectorbody.append('div')
-            .attr('class', 'inspector-buttons')
+            .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
     }
 
@@ -57,37 +53,45 @@ iD.ui.inspector = function() {
 
         h2.append('span')
             .text(entity.friendlyName());
-
-        selection.append('a')
-            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-            .attr('target', '_blank')
-            .text('View on OSM');
-
-        if (entity.type === 'way') {
-            selection.append('a')
-                .attr('href', '#')
-                .text('Reverse Direction')
-                .on('click', function() { event.changeWayDirection(entity); });
-        }
-
-        if (entity.geometry() === 'vertex') {
-            selection.append('a')
-                .attr('href', '#')
-                .text('Split Way')
-                .on('click', function() { event.splitWay(entity); });
-        }
     }
 
     function drawButtons(selection) {
-        selection.append('button')
-            .attr('class', 'apply wide action')
-            .html("<span class='icon icon-pre-text apply'></span><span class='label'>Close</span>")
-            .on('click', apply);
+        var entity = selection.datum();
+        var inspectorButtonWrap = selection.append('div')
+                .attr('class','button-wrap joined fl');
+        var inspectorButton1 = inspectorButtonWrap.append('button')
+                .attr('class', 'apply col6 action')
+                .on('click', apply);
 
-        selection.append('button')
-            .attr('class', 'delete wide action')
-            .html("<span class='icon icon-pre-text delete'></span><span class='label'>Delete</span>")
-            .on('click', function(entity) { event.remove(entity); });
+            inspectorButton1.append('span').attr('class','icon icon-pre-text apply');
+            inspectorButton1.append('span').attr('class','label').text('Okay');
+
+        var inspectorButton2 = inspectorButtonWrap.append('button')
+                .attr('class', 'delete col6 action')
+                .on('click', function(entity) { event.remove(entity); });
+
+            inspectorButton2.append('span').attr('class','icon icon-pre-text delete');
+            inspectorButton2.append('span').attr('class','label').text('Delete');
+
+        var minorButtons = selection.append('div').attr('class','minor-buttons fl');
+
+            minorButtons.append('a')
+                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                .attr('target', '_blank')
+                .text('View on OSM');
+            if (entity.type === 'way') {
+                minorButtons.append('a')
+                    .attr('href', '#')
+                    .text('Reverse Direction')
+                    .on('click', function() { event.changeWayDirection(entity); });
+            }
+            if (entity.geometry() === 'vertex') {
+                minorButtons.append('a')
+                    .attr('href', '#')
+                    .text('Split Way')
+                    .on('click', function() { event.splitWay(entity); });
+            }
+
     }
 
     function drawTags(tags) {
@@ -139,57 +143,50 @@ iD.ui.inspector = function() {
         var helpBtn = row.append('button')
             .attr('tabindex', -1)
             .attr('class', 'tag-help minor')
-            .append('a')
-                .attr('tabindex', -1)
-                .attr('target', '_blank')
-                .on('click', function(d) {
-                    var params = _.extend({}, d, {
-                        geometry: entity.geometry()
-                    });
-                    if (d.key && d.value) {
-                        taginfo.docs(params, function(err, docs) {
-                            var en = _.find(docs, function(d) {
-                                return d.lang == 'en';
-                            });
-                            if (en) {
-                                var types = [];
-                                if (en.on_area) types.push('area');
-                                if (en.on_node) types.push('point');
-                                if (en.on_way) types.push('line');
-                                en.types = types;
-                                iD.ui.modal()
-                                    .select('.content')
-                                    .datum(en)
-                                    .call(iD.ui.tagReference);
-                            } else {
-                                iD.ui.flash()
-                                    .select('.content')
-                                    .text('This is no documentation available for this tag combination');
-                            }
-                        });
-                    } else if (d.key) {
-                        taginfo.values(params, function(err, values) {
-                            if (values.data.length) {
-                                iD.ui.modal()
-                                    .select('.content')
-                                    .datum({
-                                        data: values.data,
-                                        title: 'Key:' + params.key,
-                                        geometry: params.geometry
-                                    })
-                                    .call(iD.keyReference);
-                            } else {
-                                iD.ui.flash()
-                                    .select('.content')
-                                    .text('This is no documentation available for this key');
-                            }
-                        });
-                    }
-                    d3.event.preventDefault();
-                })
-                .attr('href', function(d) {
-                    return 'http://taginfo.openstreetmap.org/keys/' + d.key;
+            .on('click', function(d) {
+                var params = _.extend({}, d, {
+                    geometry: entity.geometry()
                 });
+                if (d.key && d.value) {
+                    taginfo.docs(params, function(err, docs) {
+                        var en = _.find(docs, function(d) {
+                            return d.lang == 'en';
+                        });
+                        if (en) {
+                            var types = [];
+                            if (en.on_area) types.push('area');
+                            if (en.on_node) types.push('point');
+                            if (en.on_way) types.push('line');
+                            en.types = types;
+                            iD.ui.modal()
+                                .select('.content')
+                                .datum(en)
+                                .call(iD.ui.tagReference);
+                        } else {
+                            iD.ui.flash()
+                                .select('.content')
+                                .text('This is no documentation available for this tag combination');
+                        }
+                    });
+                } else if (d.key) {
+                    taginfo.values(params, function(err, values) {
+                        if (values.data.length) {
+                            iD.ui.modal()
+                                .select('.content')
+                                .datum({
+                                    data: values.data,
+                                    title: 'Key:' + params.key,
+                                    geometry: params.geometry
+                                })
+                                .call(iD.keyReference);
+                        } else {
+                            iD.ui.flash()
+                                .select('.content')
+                                .text('This is no documentation available for this key');
+                        }
+                    });
+                }
+            });
 
         helpBtn.append('span')
             .attr('class', 'icon inspect');

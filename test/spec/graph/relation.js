@@ -55,6 +55,55 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#geometry", function () {
+        it("returns 'relation'", function () {
+            expect(iD.Relation().geometry()).to.equal('relation');
+        });
+    });
+
+    describe("#memberByRole", function () {
+        it("returns the first member with the given role", function () {
+            var r = iD.Relation({members: [
+                {id: 'a', role: 'inner'},
+                {id: 'b', role: 'outer'},
+                {id: 'c', role: 'outer'}]});
+            expect(r.memberByRole('outer')).to.eql({id: 'b', role: 'outer', index: 1});
+        });
+
+        it("returns undefined if no members have the given role", function () {
+            expect(iD.Relation().memberByRole('outer')).to.be.undefined;
+        });
+    });
+
+    describe("#memberById", function () {
+        it("returns the first member with the given id", function () {
+            var r = iD.Relation({members: [
+                {id: 'a', role: 'outer'},
+                {id: 'b', role: 'outer'},
+                {id: 'b', role: 'inner'}]});
+            expect(r.memberById('b')).to.eql({id: 'b', role: 'outer', index: 1});
+        });
+
+        it("returns undefined if no members have the given role", function () {
+            expect(iD.Relation().memberById('b')).to.be.undefined;
+        });
+    });
+
+    describe("#isRestriction", function () {
+        it("returns true for 'restriction' type", function () {
+            expect(iD.Relation({tags: {type: 'restriction'}}).isRestriction()).to.be.true;
+        });
+
+        it("returns true for 'restriction:type' types", function () {
+            expect(iD.Relation({tags: {type: 'restriction:bus'}}).isRestriction()).to.be.true;
+        });
+
+        it("returns false otherwise", function () {
+            expect(iD.Relation().isRestriction()).to.be.false;
+            expect(iD.Relation({tags: {type: 'multipolygon'}}).isRestriction()).to.be.false;
+        });
+    });
+
     describe("#multipolygon", function () {
         specify("single polygon consisting of a single way", function () {
             var a = iD.Node(),

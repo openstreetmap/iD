@@ -10,7 +10,7 @@ iD.ui.flash = function() {
 
     modal.on('click.flash', function() { modal.remove(); });
 
-    d3.timer(function() {
+    setTimeout(function() {
         modal.remove();
         return true;
     }, 1000);

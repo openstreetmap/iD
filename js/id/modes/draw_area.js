@@ -13,7 +13,7 @@ iD.modes.DrawArea = function(wayId) {
             headId = (way.nodes.length == 1) ?
                 way.nodes[0] :
                 way.nodes[way.nodes.length - 2],
-            tailId = _.first(way.nodes),
+            tailId = way.first(),
             node = iD.Node({loc: map.mouseCoordinates()});
 
         map.dblclickEnable(false)
