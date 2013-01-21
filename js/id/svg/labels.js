@@ -1,4 +1,4 @@
-iD.svg.Labels = function() {
+iD.svg.Labels = function(projection) {
 
     var pointOffsets = [
         [25, 3, 'start'], // right
@@ -124,14 +124,13 @@ iD.svg.Labels = function() {
     }
 
 
-    return function drawLabels(surface, graph, entities, filter, projection) {
+    return function drawLabels(surface, graph, entities, filter) {
 
-        var project = iD.svg.RoundProjection(projection);
         var rtree = new RTree();
 
         function addPoint(d, i) {
             var bbox = this.getBBox();
-            var coords = project(d.loc);
+            var coords = projection(d.loc);
             var tree = new RTree.Rectangle(coords[0], coords[1], bbox.width, bbox.height);
             rtree.insert(tree, d.id);
         }
@@ -139,7 +138,8 @@ iD.svg.Labels = function() {
         //d3.selectAll('.node.point').each(addPoint);
 
         var points = [],
-            roads = [];
+            roads = [],
+            buildings = [];
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -147,10 +147,12 @@ iD.svg.Labels = function() {
                 roads.push(entity);
             } else if (entity.geometry() === 'point' && entity.tags.name) {
                 points.push(entity);
+            } else if (entity.geometry() === 'area' && entity.tags.building && entity.tags.name) {
+                buildings.push(entity);
             }
         }
 
-        var entities = roads.concat(points);
+        var entities = roads.concat(buildings).concat(points);
         var rect;
         var pathTransform = getPathTransform(projection);
         var textlabels = [],
@@ -171,12 +173,12 @@ iD.svg.Labels = function() {
                 h = 20;
 
             if (entity.type === 'node') {
-                var coord = project(entity.loc),
+                var coord = projection(entity.loc),
                     offset = pointOffsets[0];
                 p.x = coord[0] + offset[0];
                 p.y = coord[1] + offset[1];
                 p.textAnchor = offset[2];
-                rect = new RTree.Rectangle(p.x, p.y, width * entity.tags.name.length, 20);
+                rect = new RTree.Rectangle(p.x, p.y, w, 20);
                 if (nocollisions(rect)) {
                     textpositions.push(p);
                     textlabels.push(entity);
@@ -189,6 +191,25 @@ iD.svg.Labels = function() {
                 if (nocollisions(rect)) {
                     pathpositions.push(p);
                     pathlabels.push(entity);
+                }
+
+            } else if (entity.type === 'way' && entity.geometry() === 'area') {
+                var nodes = _.pluck(entity.nodes, 'loc')
+                    .map(iD.svg.RoundProjection(projection)),
+                    centroid = iD.util.geo.polygonCentroid(nodes),
+                    extent = entity.extent(graph),
+                    entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
+
+                if (entitywidth < w + 20) {
+                    continue;
+                }
+                p.x = centroid[0];
+                p.y = centroid[1];
+                p.textAnchor = 'middle';
+                rect = new RTree.Rectangle(p.x - w/2, p.y, w, 20);
+                if (nocollisions(rect)) {
+                    textpositions.push(p);
+                    textlabels.push(entity);
                 }
             }
 
