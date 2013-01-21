@@ -136,13 +136,20 @@ iD.Graph.prototype = {
             entity = this.entities[id];
             oldentity = graph.entities[id];
             if (entity !== oldentity) {
-                if (entity && entity.type === 'way') {
-                    result = oldentity ?
-                        result
+
+                if (entity && entity.type === 'way' &&
+                    oldentity && oldentity.type === 'way') {
+                    result = result
                             .concat(_.difference(entity.nodes, oldentity.nodes))
                             .concat(_.difference(oldentity.nodes, entity.nodes))
-                        : result.concat(entity.nodes);
+
+                } else if (entity && entity.type === 'way') {
+                    result = result.concat(entity.nodes);
+
+                } else if (oldentity && oldentity.type === 'way') {
+                    result = result.concat(oldentity.nodes);
                 }
+
                 result.push(id);
             }
         }
