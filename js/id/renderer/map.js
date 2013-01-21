@@ -44,7 +44,7 @@ iD.Map = function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
                 }
-            })
+            }, true)
             .call(iD.svg.Surface());
 
 
