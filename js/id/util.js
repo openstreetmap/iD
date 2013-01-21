@@ -145,3 +145,27 @@ iD.util.geo.polygonIntersectsPolygon = function(outer, inner) {
         return iD.util.geo.pointInPolygon(point, outer);
     });
 };
+
+// May have issues with self interesecting polygons
+iD.util.geo.polygonCentroid = function(polygon) {
+    var x = 0,
+        y = 0,
+        area = iD.util.geo.area(polygon);
+    for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        var xi = polygon[i][0], yi = polygon[i][1];
+        var xj = polygon[j][0], yj = polygon[j][1];
+        x += (xi + xj) * (xj * yi - xi * yj);
+        y += (yi + yj) * (xj * yi - xi * yj);
+    }
+    return [x / 6 / area, y / 6 / area];
+};
+
+iD.util.geo.area = function(polygon) {
+    var area = 0;
+    for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        var xi = polygon[i][0], yi = polygon[i][1];
+        var xj = polygon[j][0], yj = polygon[j][1];
+        area += xj * yi - xi * yj;
+    }
+    return area/2;
+};
