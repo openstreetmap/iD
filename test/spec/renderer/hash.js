@@ -24,13 +24,13 @@ describe("hash", function () {
         });
 
         it("sets hadHash if location.hash is present", function () {
-            location.hash = "?map=20.00/38.87952/-77.02405";
+            location.hash = "map=20.00/38.87952/-77.02405";
             hash.map(map);
             expect(hash.hadHash).to.be.true;
         });
 
         it("centerZooms map to requested level", function () {
-            location.hash = "?map=20.00/38.87952/-77.02405";
+            location.hash = "map=20.00/38.87952/-77.02405";
             sinon.spy(map, 'centerZoom');
             hash.map(map);
             expect(map.centerZoom).to.have.been.calledWith([-77.02405,38.87952], 20.0);
@@ -67,7 +67,7 @@ describe("hash", function () {
             });
 
             sinon.spy(map, 'centerZoom');
-            location.hash = "#?map=20.00/38.87952/-77.02405";
+            location.hash = "#map=20.00/38.87952/-77.02405";
         });
     });
 
@@ -75,7 +75,7 @@ describe("hash", function () {
         it("stores the current zoom and coordinates in location.hash", function () {
             sinon.stub(map, 'on').yields();
             hash.map(map);
-            expect(location.hash).to.equal("#?map=0.00/0/0");
+            expect(location.hash).to.equal("#map=0.00/0/0");
         });
     });
 });
