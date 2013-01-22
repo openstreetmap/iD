@@ -30,9 +30,10 @@ iD.util.stringQs = function(str) {
     }, {});
 };
 
-iD.util.qsString = function(obj) {
+iD.util.qsString = function(obj, noencode) {
     return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
+        return encodeURIComponent(key) + '=' + (
+            noencode ? obj[key] : encodeURIComponent(obj[key]));
     }).join('&');
 };
 

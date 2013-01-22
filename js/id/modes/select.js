@@ -47,6 +47,11 @@ iD.modes.Select = function (entity) {
             behavior(surface);
         });
 
+        var q = iD.util.stringQs(location.hash.substring(1));
+        location.hash =  '#' + iD.util.qsString(_.assign(q, {
+            id: entity.id
+        }), true);
+
         d3.select('.inspector-wrap')
             .style('display', 'block')
             .style('opacity', 1)
@@ -148,6 +153,9 @@ iD.modes.Select = function (entity) {
         behaviors.forEach(function(behavior) {
             behavior.off(surface);
         });
+
+        var q = iD.util.stringQs(location.hash.substring(1));
+        location.hash =  '#' + iD.util.qsString(_.omit(q, 'id'), true);
 
         surface.on("click.select", null);
         mode.map.keybinding().on('⌫.select', null);
