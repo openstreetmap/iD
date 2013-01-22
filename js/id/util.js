@@ -71,6 +71,18 @@ iD.util.prefixCSSProperty = function(property) {
     return false;
 };
 
+iD.util.getStyle = function(selector) {
+    for (var i = 0; i < document.styleSheets.length; i++) {
+        var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules;
+        for (var k = 0; k < rules.length; k++) {
+            var selectorText = rules[k].selectorText && rules[k].selectorText.split(', ');
+            if (_.contains(selectorText, selector)) {
+                return rules[k];
+            }
+        }
+    }
+};
+
 iD.util.geo = {};
 
 iD.util.geo.roundCoords = function(c) {

@@ -6,8 +6,17 @@ iD.svg.Labels = function(projection) {
         ['area', 'building', 'yes'],
         ['area', 'leisure', 'park'],
         ['area', 'natural'],
-        ['point', 'amenity']
+        ['point', 'amenity'],
+        ['point', 'shop'],
     ];
+
+    var default_size = 12;
+    var font_sizes = label_stack.map(function(d) {
+        var style = iD.util.getStyle('text.' + d.join('-'));
+        var m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
+        if (!m) return default_size;
+        return parseInt(m[1], 10);
+    });
 
     var pointOffsets = [
         [15, 0, 'start'], // right
@@ -16,7 +25,7 @@ iD.svg.Labels = function(projection) {
 
     var lineOffsets = [
         50, 40, 60, 30, 70
-    ]
+    ];
 
     var height = 12,
         width = 6;
@@ -46,7 +55,7 @@ iD.svg.Labels = function(projection) {
                 'xlink:href': function(d, i) { return '#casing-' + d.id},
                 'glyph-orientation-vertical': function(d, i) {return reverse(d, i) ? 180 : 0}, 
                 'glyph-orientation-horizontal': function(d, i) {return reverse(d, i) ? 180 : 0},
-                'dominant-baseline': 'central'
+                'dominant-baseline': 'middle'
             })
             .text(function(d, i) {
                 return reverse(d, i) ? d.tags.name.split('').reverse().join('') : d.tags.name;
@@ -123,6 +132,7 @@ iD.svg.Labels = function(projection) {
     return function drawLabels(surface, graph, entities, filter) {
 
         var rtree = new RTree();
+        var hidePoints = !d3.select('.point').node();
 
         var labelable = [];
         for (var i = 0; i < label_stack.length; i++) labelable.push([]);
@@ -130,6 +140,7 @@ iD.svg.Labels = function(projection) {
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             if (!entity.tags.name) continue;
+            if (hidePoints && entity.geometry() === 'point') continue;
             for (var k = 0; k < label_stack.length; k ++) {
                 if (entity.geometry() === label_stack[k][0] &&
                     entity.tags[label_stack[k][1]] && !entity.tags[label_stack[k][2]]) {
@@ -153,15 +164,16 @@ iD.svg.Labels = function(projection) {
         };
 
         for (var k = 0; k < labelable.length; k++) {
+            var font_size = font_sizes[k];
             for (var i = 0; i < labelable[k].length; i ++) {
                 var entity = labelable[k][i],
                     p;
                 if (entity.geometry() === 'point') {
-                    p = getPointLabel(entity);
+                    p = getPointLabel(entity, font_size);
                 } else if (entity.geometry() === 'line') {
-                    p = getLineLabel(entity);
+                    p = getLineLabel(entity, font_size);
                 } else if (entity.geometry() === 'area') {
-                    p = getAreaLabel(entity);
+                    p = getAreaLabel(entity, font_size);
                 }
                 if (p) {
                     p.classes = label_stack[k].join('-');
@@ -171,11 +183,11 @@ iD.svg.Labels = function(projection) {
             }
         }
 
-        function getPointLabel(entity) {
+        function getPointLabel(entity, font) {
             var coord = projection(entity.loc),
                 offset = pointOffsets[0],
                 p = {},
-                w = width * entity.tags.name.length;
+                w = font / 2 * entity.tags.name.length;
             p.x = coord[0] + offset[0];
             p.y = coord[1] + offset[1];
             p.textAnchor = offset[2];
@@ -183,17 +195,17 @@ iD.svg.Labels = function(projection) {
             if (tryInsert(rect)) return p;
         }
 
-        function getLineLabel(entity) {
+        function getLineLabel(entity, font) {
             var nodes = _.pluck(entity.nodes, 'loc').map(projection),
                 length = iD.util.geo.pathLength(nodes),
-                w = width * entity.tags.name.length;
+                w = font / 2 * entity.tags.name.length;
             if (length < w + 20) return;
 
             // 50, 40, 60, 30, 70
             for (var i = 0; i < 5; i ++) {
                 var offset = lineOffsets[i],
                     middle = offset / 100 * length;
-                if (middle < w / 2) return;
+                if (middle <= w / 2) return;
                 var start = middle - w/2,
                     sub = subpath(nodes, start, start + w),
                     rev = reverse(sub),
@@ -210,13 +222,13 @@ iD.svg.Labels = function(projection) {
             }
         }
 
-        function getAreaLabel(entity) {
+        function getAreaLabel(entity, font) {
             var nodes = _.pluck(entity.nodes, 'loc')
                 .map(iD.svg.RoundProjection(projection)),
                 centroid = iD.util.geo.polygonCentroid(nodes),
                 extent = entity.extent(graph),
                 entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
-                w = width * entity.tags.name.length;
+                w = font / 2 * entity.tags.name.length;
                 p = {};
 
             if (entitywidth < w + 20) return;
