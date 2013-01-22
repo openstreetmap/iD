@@ -138,7 +138,9 @@ iD.modes.Select = function(entity) {
         });
 
         surface.selectAll("*")
-            .filter(function (d) { return d === entity; })
+            .filter(function (d) {
+                return d && entity && d.id === entity.id;
+            })
             .classed('selected', true);
     };
 
