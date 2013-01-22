@@ -186,15 +186,18 @@ window.iD = function(container) {
 
         map.keybinding()
             .on('a', function(evt, mods) {
+                if (mods) return;
                 controller.enter(iD.modes.AddArea());
             })
             .on('⌫.prevent_navigation', function(evt, mods) {
                 evt.preventDefault();
             })
             .on('p', function(evt, mods) {
+                if (mods) return;
                 controller.enter(iD.modes.AddPoint());
             })
             .on('l', function(evt, mods) {
+                if (mods) return;
                 controller.enter(iD.modes.AddLine());
             })
             .on('z', function(evt, mods) {
@@ -202,7 +205,7 @@ window.iD = function(container) {
                 if (mods === '⌘' || mods === '⌃') history.undo();
             });
 
-        var hash = iD.Hash().map(map);
+        var hash = iD.Hash().controller(controller).map(map);
 
         if (!hash.hadHash) {
             map.centerZoom([-77.02271, 38.90085], 20);
