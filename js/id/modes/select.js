@@ -150,9 +150,14 @@ iD.modes.Select = function(entity) {
         if (entity) {
             changeTags(entity, inspector.tags());
         }
+
         d3.select('.inspector-wrap')
             .style('display', 'none')
             .html('');
+
+        // Firefox incorrectly implements blur, so typeahead elements
+        // are not correctly removed. Remove any stragglers manually.
+        d3.selectAll('div.typeahead').remove();
 
         behaviors.forEach(function(behavior) {
             behavior.off(surface);

@@ -293,6 +293,13 @@ webkit doesn't let querySelectorAll select camelcase elements:
 * https://bugs.webkit.org/show_bug.cgi?id=83438
 * https://github.com/mbostock/d3/issues/925
 
+Firefox does not fire a `blur` event when an element is removed from the DOM,
+unlike WebKit browsers.
+
+Firefox does not support [the focusout event](https://bugzilla.mozilla.org/show_bug.cgi?id=687787).
+
+Opera does not support `pointer-events` on HTML elements, only SVG elements.
+
 ## Transients
 
 The graph supports `transient`, which is storage for non-versioned mutable
