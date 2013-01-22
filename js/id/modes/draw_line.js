@@ -126,11 +126,6 @@ iD.modes.DrawLine = function(wayId, direction) {
             controller.enter(iD.modes.Select(way, true));
         }
 
-        function undo() {
-            history.undo();
-            controller.enter(iD.modes.Browse());
-        }
-
         surface
             .on('mousemove.drawline', mousemove)
             .on('click.drawline', click);
@@ -139,26 +134,27 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('⌫', backspace)
             .on('⌦', del)
             .on('⎋', ret)
-            .on('↩', ret)
-            .on('⌘-Z', undo)
-            .on('⌃-Z', undo);
+            .on('↩', ret);
 
         d3.select(document)
             .call(keybinding);
 
-        d3.select('#undo')
-            .on('click.drawline', undo);
+        history.on('undone.drawline', function () {
+            controller.enter(iD.modes.Browse());
+        });
     };
 
     mode.exit = function() {
-        var surface = mode.map.surface;
+        var map = mode.map,
+            surface = map.surface,
+            history = mode.history;
 
         surface.selectAll('.way, .node')
             .classed('active', false);
 
-        mode.map.tail(false);
-        mode.map.fastEnable(true);
-        mode.map.minzoom(0);
+        map.tail(false);
+        map.fastEnable(true);
+        map.minzoom(0);
 
         surface
             .on('mousemove.drawline', null)
@@ -166,7 +162,7 @@ iD.modes.DrawLine = function(wayId, direction) {
 
         keybinding.off();
 
-        d3.select('#undo').on('click.drawline', null);
+        history.on('undone.drawline', null);
 
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);

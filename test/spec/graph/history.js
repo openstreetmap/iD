@@ -83,6 +83,13 @@ describe("iD.History", function () {
             expect(history.redoAnnotation()).to.equal("annotation");
         });
 
+        it("emits an undone event", function () {
+            history.perform(action);
+            history.on('undone', spy);
+            history.undo();
+            expect(spy).to.have.been.called;
+        });
+
         it("emits a change event", function () {
             history.perform(action);
             history.on('change', spy);
@@ -92,6 +99,14 @@ describe("iD.History", function () {
     });
 
     describe("#redo", function () {
+        it("emits an redone event", function () {
+            history.perform(action);
+            history.undo();
+            history.on('change', spy);
+            history.redo();
+            expect(spy).to.have.been.called;
+        });
+
         it("emits a change event", function () {
             history.perform(action);
             history.undo();

@@ -112,22 +112,30 @@ iD.modes.DrawArea = function(wayId) {
 
         d3.select(document)
             .call(keybinding);
+
+        history.on('undone.drawline', function () {
+            controller.enter(iD.modes.Browse());
+        });
     };
 
     mode.exit = function() {
-        var surface = mode.map.surface;
+        var map = mode.map,
+            surface = map.surface,
+            history = mode.history;
 
         surface.selectAll('.way, .node')
             .classed('active', false);
 
-        mode.map.tail(false);
-        mode.map.fastEnable(true);
+        map.tail(false);
+        map.fastEnable(true);
 
         surface
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);
 
         keybinding.off();
+
+        history.on('undone.drawline', null);
 
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);

@@ -1,7 +1,7 @@
 iD.History = function() {
     var stack, index,
         imagery_used = 'Bing',
-        dispatch = d3.dispatch('change');
+        dispatch = d3.dispatch('change', 'undone', 'redone');
 
     function perform(actions) {
         actions = Array.prototype.slice.call(actions);
@@ -62,6 +62,7 @@ iD.History = function() {
                 if (stack[index].annotation) break;
             }
 
+            dispatch.undone();
             change(previous);
         },
 
@@ -73,6 +74,7 @@ iD.History = function() {
                 if (stack[index].annotation) break;
             }
 
+            dispatch.redone();
             change(previous);
         },
 
