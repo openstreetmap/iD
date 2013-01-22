@@ -13,6 +13,10 @@ iD.svg.Labels = function(projection) {
         [-15, 3, 'end'], // left
     ];
 
+    var lineOffsets = [
+        50, 40, 60, 30, 70
+    ]
+
     var height = 12,
         width = 6;
 
@@ -22,20 +26,21 @@ iD.svg.Labels = function(projection) {
 
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
-            .data(labels, iD.Entity.key);
+            .data(labels, iD.Entity.key)
 
         var tp = texts.enter()
             .append('text')
             .attr({ 'class': classes})
             .append('textPath')
             .attr({
-                'class': 'textpath',
-                'startOffset': '50%'
+                'class': 'textpath'
             });
+
 
         var tps = group.selectAll('.textpath-label .textpath')
             .data(labels)
             .attr({
+                'startOffset': position('startOffset'),
                 'xlink:href': function(d, i) { return '#casing-' + d.id},
                 'glyph-orientation-vertical': function(d, i) {return reverse(d, i) ? 180 : 0}, 
                 'glyph-orientation-horizontal': function(d, i) {return reverse(d, i) ? 180 : 0},
@@ -180,18 +185,25 @@ iD.svg.Labels = function(projection) {
                 w = width * entity.tags.name.length;
             if (length < w + 20) return;
 
-            var ends = (length - w) / 2,
-                sub = subpath(nodes, ends, length - ends),
-                rev = reverse(sub),
-                rect = new RTree.Rectangle(
-                Math.min(sub[0][0], sub[sub.length - 1][0]) - 5,
-                Math.min(sub[0][1], sub[sub.length - 1][1]) - 5,
-                Math.abs(sub[0][0] - sub[sub.length - 1][0]) + 10,
-                Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 10
-            );
-            if (tryInsert(rect)) return {
-                reverse: rev
-            };
+            // 50, 40, 60, 30, 70
+            for (var i = 0; i < 5; i ++) {
+                var offset = lineOffsets[i],
+                    middle = offset / 100 * length;
+                if (middle < w / 2) return;
+                var start = middle - w/2,
+                    sub = subpath(nodes, start, start + w),
+                    rev = reverse(sub),
+                    rect = new RTree.Rectangle(
+                    Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
+                    Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
+                    Math.abs(sub[0][0] - sub[sub.length - 1][0]) + 20,
+                    Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 20
+                );
+                if (tryInsert(rect)) return {
+                    reverse: rev,
+                    startOffset: offset + '%'
+                }
+            }
         }
 
         function getAreaLabel(entity) {
