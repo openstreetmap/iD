@@ -1,7 +1,7 @@
 iD.Map = function() {
     var connection, history,
         dimensions = [],
-        dispatch = d3.dispatch('move'),
+        dispatch = d3.dispatch('move', 'drawn'),
         translateStart,
         keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
@@ -65,21 +65,21 @@ iD.Map = function() {
             extent = map.extent(),
             graph = history.graph();
 
+        function addParents(parents) {
+            for (var i = 0; i < parents.length; i++) {
+                var parent = parents[i];
+                if (only[parent.id] === undefined) {
+                    only[parent.id] = graph.fetch(parent.id);
+                    addParents(graph.parentRelations(parent));
+                }
+            }
+        }
+
         if (!difference) {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
             var only = {};
-
-            function addParents(parents) {
-                for (var i = 0; i < parents.length; i++) {
-                    var parent = parents[i];
-                    if (only[parent.id] === undefined) {
-                        only[parent.id] = graph.fetch(parent.id);
-                        addParents(graph.parentRelations(parent));
-                    }
-                }
-            }
 
             for (var j = 0; j < difference.length; j++) {
                 var id = difference[j],
@@ -101,16 +101,16 @@ iD.Map = function() {
 
         if (all.length > 100000) {
             editOff();
-            return;
+        } else {
+            surface
+                .call(points, graph, all, filter)
+                .call(vertices, graph, all, filter)
+                .call(lines, graph, all, filter)
+                .call(areas, graph, all, filter)
+                .call(multipolygons, graph, all, filter)
+                .call(midpoints, graph, all, filter);
         }
-
-        surface
-            .call(points, graph, all, filter)
-            .call(vertices, graph, all, filter)
-            .call(lines, graph, all, filter)
-            .call(areas, graph, all, filter)
-            .call(multipolygons, graph, all, filter)
-            .call(midpoints, graph, all, filter);
+        dispatch.drawn(map);
     }
 
     function editOff() {
@@ -302,7 +302,7 @@ iD.Map = function() {
     map.connection = function(_) {
         if (!arguments.length) return connection;
         connection = _;
-        connection.on('load', connectionLoad);
+        connection.on('load.tile', connectionLoad);
         return map;
     };
 

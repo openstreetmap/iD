@@ -1,4 +1,4 @@
-iD.modes.Select = function (entity) {
+iD.modes.Select = function(entity) {
     var mode = {
         id: 'select',
         button: 'browse',
@@ -34,7 +34,7 @@ iD.modes.Select = function (entity) {
         }
     }
 
-    mode.enter = function () {
+    mode.enter = function() {
         var surface = mode.map.surface;
 
         behaviors = [
@@ -58,16 +58,18 @@ iD.modes.Select = function (entity) {
             .datum(entity)
             .call(inspector);
 
-        // Pan the map if the clicked feature intersects with the position
-        // of the inspector
-        var inspector_size = d3.select('.inspector-wrap').size(),
-            map_size = mode.map.size(),
-            offset = 50,
-            shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
-            center = (map_size[0] / 2) + shift_left + offset;
+        if (d3.event) {
+            // Pan the map if the clicked feature intersects with the position
+            // of the inspector
+            var inspector_size = d3.select('.inspector-wrap').size(),
+                map_size = mode.map.size(),
+                offset = 50,
+                shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
+                center = (map_size[0] / 2) + shift_left + offset;
 
-        if (shift_left > 0 && inspector_size[1] > d3.event.y) {
-            mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+            if (shift_left > 0 && inspector_size[1] > d3.event.y) {
+                mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+            }
         }
 
         inspector

@@ -202,7 +202,7 @@ window.iD = function(container) {
                 if (mods === '⌘' || mods === '⌃') history.undo();
             });
 
-        var hash = iD.Hash().map(map);
+        var hash = iD.Hash().controller(controller).map(map);
 
         if (!hash.hadHash) {
             map.centerZoom([-77.02271, 38.90085], 20);

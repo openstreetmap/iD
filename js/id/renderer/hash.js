@@ -2,6 +2,7 @@ iD.Hash = function() {
     var hash = { hadHash: false },
         s0 = null, // cached location.hash
         lat = 90 - 1e-8, // allowable latitude range
+        controller,
         map;
 
     var parser = function(map, s) {
@@ -40,6 +41,32 @@ iD.Hash = function() {
         }
     }
 
+    // the hash can declare that the map should select a feature, but it can
+    // do so before any features are loaded. thus wait for the feature to
+    // be loaded and then select
+    function willselect(id) {
+        map.on('drawn.after-draw-select', function() {
+            var entity = map.history().graph().entity(id);
+            if (entity === undefined) return;
+            else selectoff();
+            controller.enter(iD.modes.Select(entity));
+            map.on('drawn.after-draw-select', null);
+        });
+        controller.on('enter', function() {
+            if (controller.mode.id !== 'browse') selectoff();
+        });
+    }
+
+    function selectoff() {
+        map.on('drawn.after-draw-select', null);
+    }
+
+    hash.controller = function(_) {
+        if (!arguments.length) return controller;
+        controller = _;
+        return hash;
+    };
+
     hash.map = function(x) {
         if (!arguments.length) return map;
         if (map) {
@@ -51,6 +78,10 @@ iD.Hash = function() {
             map.on("move", move);
             window.addEventListener("hashchange", hashchange, false);
             if (location.hash) {
+                var q = iD.util.stringQs(location.hash.substring(1));
+                if (q.id) {
+                    willselect(q.id);
+                }
                 hashchange();
                 hash.hadHash = true;
             }
