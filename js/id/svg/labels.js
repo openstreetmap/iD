@@ -60,68 +60,47 @@ iD.svg.Labels = function(projection) {
         return texts;
     }
 
-    function getPathTransform(projection) {
-        var nodeCache = {};
-        return function pathTransform(entity) {
-            var length = 0,
-                w = entity.tags.name.length * width;
+    function reverse(p) {
+        var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]),
+            reverse = !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > - Math.PI/2);
+        return reverse;
+    }
 
-            var nodes = nodeCache[entity.id];
-            if (typeof nodes  === 'undefined') {
-                nodes = nodeCache[entity.id] = _.pluck(entity.nodes, 'loc')
-                    .map(iD.svg.RoundProjection(projection));
-            }
-
-            function segmentLength(i) {
-                var dx = nodes[i][0] - nodes[i + 1][0];
-                var dy = nodes[i][1] - nodes[i + 1][1];
-                return Math.sqrt(dx * dx + dy * dy);
-            }
-
-            for (var i = 0; i < nodes.length - 1; i++) {
-                length += segmentLength(i);
-            }
-
-            if (length < w + 20) return null;
-
-            var ends = (length - w) / 2,
-                sofar = 0,
-                start, end,
-                n1, n2;
-
-            for (var i = 0; i < nodes.length - 1; i++) {
-                var current = segmentLength(i);
-                if (!start && sofar + current > ends) {
-                    var portion = (ends - sofar) / current;
-                    start = [
-                        nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
-                        nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
-                    ];
-                    n1 = nodes[i + 1];
-                }
-                if (!end && sofar + current > length - ends) {
-                    var portion = (length - ends - sofar) / current;
-                    end = [
-                        nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
-                        nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
-                    ];
-                    n2 = nodes[i];
-                }
-                sofar += current;
-            }
-
-            var angle = Math.atan2(n1[1] - start[1], n1[0] - start[0]);
-            var reverse = !(start[0] < end[0] && angle < Math.PI/2 && angle > - Math.PI/2);
-
-            return {
-                length: length,
-                width: Math.abs(start[0] - end[0]),
-                height: Math.abs(start[1] - end[1]),
-                start: start,
-                end: end,
-                reverse: reverse
-            };
+    function subpath(nodes, from, to) {
+        function segmentLength(i) {
+            var dx = nodes[i][0] - nodes[i + 1][0];
+            var dy = nodes[i][1] - nodes[i + 1][1];
+            return Math.sqrt(dx * dx + dy * dy);
         }
+
+        var sofar = 0,
+            start, end, i0, i1;
+        for (var i = 0; i < nodes.length - 1; i++) {
+            var current = segmentLength(i);
+            if (!start && sofar + current > from) {
+                var portion = (from - sofar) / current;
+                start = [
+                    nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                    nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                ];
+                i0 = i + 1;
+            }
+            if (!end && sofar + current > to) {
+                var portion = (to - sofar) / current;
+                end = [
+                    nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                    nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                ];
+                i1 = i;
+            }
+            sofar += current;
+
+        }
+        var ret = nodes.slice(i0, i1);
+        ret.unshift(start);
+        ret.push(end);
+        return ret;
+
     }
 
 
@@ -145,7 +124,6 @@ iD.svg.Labels = function(projection) {
         }
 
         var entities = roads.concat(buildings).concat(points);
-        var pathTransform = getPathTransform(projection);
 
         var positions = {
             point: [],
@@ -189,10 +167,23 @@ iD.svg.Labels = function(projection) {
         }
 
         function getLineLabel(entity) {
-            var p = pathTransform(entity);
-            if (!p) return;
-            var rect = new RTree.Rectangle(Math.min(p.start[0], p.end[0]) - 5, Math.min(p.start[1], p.end[1]) - 5, p.width + 10, p.height + 10);
-            if (tryInsert(rect)) return p;
+            var nodes = _.pluck(entity.nodes, 'loc').map(projection),
+                length = iD.util.geo.pathLength(nodes),
+                w = width * entity.tags.name.length;
+            if (length < w + 20) return;
+
+            var ends = (length - w) / 2,
+                sub = subpath(nodes, ends, length - ends),
+                rev = reverse(sub),
+                rect = new RTree.Rectangle(
+                Math.min(sub[0][0], sub[sub.length - 1][0]) - 5,
+                Math.min(sub[0][1], sub[sub.length - 1][1]) - 5,
+                Math.abs(sub[0][0] - sub[sub.length - 1][0]) + 10,
+                Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 10
+            );
+            if (tryInsert(rect)) return {
+                reverse: rev
+            };
         }
 
         function getAreaLabel(entity) {
