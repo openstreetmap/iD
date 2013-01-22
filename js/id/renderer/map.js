@@ -149,7 +149,7 @@ iD.Map = function() {
 
         tilegroup.style(transformProp, transform);
         surface.style(transformProp, transform);
-        redraw();
+        queueRedraw();
     }
 
     function resetTransform() {
@@ -158,7 +158,7 @@ iD.Map = function() {
         tilegroup.style(transformProp, '');
     }
 
-    var redraw = _.debounce(function(difference) {
+    function redraw(difference) {
         resetTransform();
         dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
@@ -173,7 +173,9 @@ iD.Map = function() {
             projection.scale(),
             projection.translate().slice()];
         return map;
-    }, 200);
+    }
+
+    var queueRedraw = _.debounce(redraw, 200);
 
     function pointLocation(p) {
         var translate = projection.translate(),
