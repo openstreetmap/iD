@@ -298,6 +298,17 @@ describe('iD.Relation', function () {
             expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d]], [[g, h, i, g]]]);
         });
 
+        specify("invalid geometry: unmatched inner", function () {
+            var a = iD.Node(),
+                b = iD.Node(),
+                c = iD.Node(),
+                w = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                r = iD.Relation({members: [{id: w.id, role: 'inner', type: 'way'}]}),
+                g = iD.Graph([a, b, c, w, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, a]]]);
+        });
+
         specify("incomplete relation", function () {
             var a  = iD.Node(),
                 b  = iD.Node(),

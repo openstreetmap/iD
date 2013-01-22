@@ -140,7 +140,7 @@ _.extend(iD.Relation.prototype, {
             if (o !== undefined)
                 result[o].push(inners[i]);
             else
-                result.push(inners[i]); // Invalid geometry
+                result.push([inners[i]]); // Invalid geometry
         }
 
         return result;
