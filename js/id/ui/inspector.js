@@ -149,9 +149,12 @@ iD.ui.inspector = function() {
                 });
                 if (d.key && d.value) {
                     taginfo.docs(params, function(err, docs) {
-                        var en = _.find(docs, function(d) {
-                            return d.lang == 'en';
-                        });
+                        var en;
+                        if (!err && docs) {
+                            en = _.find(docs, function(d) {
+                                return d.lang == 'en';
+                            });
+                        }
                         if (en) {
                             var types = [];
                             if (en.on_area) types.push('area');
@@ -170,7 +173,7 @@ iD.ui.inspector = function() {
                     });
                 } else if (d.key) {
                     taginfo.values(params, function(err, values) {
-                        if (values.data.length) {
+                        if (!err && values.data.length) {
                             iD.ui.modal()
                                 .select('.content')
                                 .datum({
