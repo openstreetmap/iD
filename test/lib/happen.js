@@ -40,6 +40,23 @@
                     o.keyCode || 0,     //  in unsigned long keyCodeArg,
                     o.charCode || 0       //  in unsigned long charCodeArg);
                 );
+
+                // Workaround for https://bugs.webkit.org/show_bug.cgi?id=16735
+                if (evt.ctrlKey != (o.ctrlKey || 0) ||
+                  evt.altKey != (o.altKey || 0) ||
+                  evt.shiftKey != (o.shiftKey || 0) ||
+                  evt.metaKey != (o.metaKey || 0) ||
+                  evt.keyCode != (o.keyCode || 0) ||
+                  evt.charCode != (o.charCode || 0)) {
+                    evt = document.createEvent('Event');
+                    evt.initEvent(o.type, true, true);
+                    evt.ctrlKey  = o.ctrlKey || false;
+                    evt.altKey   = o.altKey || false;
+                    evt.shiftKey = o.shiftKey || false;
+                    evt.metaKey  = o.metaKey || false;
+                    evt.keyCode  = o.keyCode || 0;
+                    evt.charCode = o.charCode || 0;
+                }
             }
         } else {
             evt = document.createEvent('MouseEvents');
