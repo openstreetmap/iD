@@ -1,5 +1,13 @@
 iD.svg.Labels = function(projection) {
 
+    // Replace with dict and iterate over entities tags instead?
+    var label_stack = [
+        ['line', 'highway', ''],
+        ['area', 'building', 'yes'],
+        ['area', 'leisure', 'park'],
+        ['area', 'natural', '']
+    ];
+
     var pointOffsets = [
         [25, 3, 'start'], // right
         [-15, 3, 'end'], // left
@@ -108,22 +116,21 @@ iD.svg.Labels = function(projection) {
 
         var rtree = new RTree();
 
-        var points = [],
-            roads = [],
-            buildings = [];
+        var labelable = [];
+        for (var i = 0; i < label_stack.length; i++) labelable.push([]);
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry() === 'line' && entity.tags.highway && entity.tags.name) {
-                roads.push(entity);
-            } else if (entity.geometry() === 'point' && entity.tags.name) {
-                points.push(entity);
-            } else if (entity.geometry() === 'area' && entity.tags.building && entity.tags.name) {
-                buildings.push(entity);
+            if (!entity.tags.name) continue;
+            for (var k = 0; k < label_stack.length; k ++) {
+                if (entity.geometry() === label_stack[k][0] &&
+                    entity.tags[label_stack[k][1]] && !entity.tags[label_stack[k][2]]) {
+                    labelable[k].push(entity);
+                    break;
+                }
             }
         }
 
-        var entities = roads.concat(buildings).concat(points);
 
         var positions = {
             point: [],
@@ -137,9 +144,10 @@ iD.svg.Labels = function(projection) {
             area: []
         };
 
+        labelable = _.flatten(labelable);
 
-        for (var i = 0; i < entities.length; i ++) {
-            var entity = entities[i],
+        for (var i = 0; i < labelable.length; i ++) {
+            var entity = labelable[i],
                 p;
             if (entity.geometry() === 'point') {
                 p = getPointLabel(entity);
