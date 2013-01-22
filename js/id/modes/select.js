@@ -131,7 +131,7 @@ iD.modes.Select = function(entity, initial) {
         }
 
         surface.on('click.select', click)
-            .on('dblclick.browse', dblclick);
+            .on('dblclick.select', dblclick);
 
         keybinding.on('⌫', remove);
 
@@ -169,7 +169,9 @@ iD.modes.Select = function(entity, initial) {
 
         keybinding.off();
 
-        surface.on("click.select", null);
+        surface.on('click.select', null)
+            .on('dblclick.select', null);
+
         mode.history.on('change.entity-undone', null);
 
         surface.selectAll(".selected")
