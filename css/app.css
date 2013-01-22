@@ -180,15 +180,11 @@ ul li { list-style: none;}
 
 ul.toggle-list li a {
     font-weight: bold;
-    color: #c1c1c1;
+    color: #333;
     padding: 10px;
     border-top: 1px solid white;
     display:block;
     border-top: 1px solid rgba(0, 0, 0, .5);
-}
-
-ul.toggle-list li a.selected {
-    color: #333;
 }
 
 ul.toggle-list .icon {
