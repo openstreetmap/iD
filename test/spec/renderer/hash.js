@@ -1,5 +1,5 @@
 describe("hash", function () {
-    var hash, map;
+    var hash, map, controller;
 
     beforeEach(function () {
         hash = iD.Hash();
@@ -7,8 +7,12 @@ describe("hash", function () {
             on:     function () { return map; },
             off:    function () { return map; },
             zoom:   function () { return arguments.length ? map : 0; },
-            center: function () { return arguments.length ? map : [0, 0] },
-            centerZoom: function () { return arguments.length ? map : [0, 0] }
+            center: function () { return arguments.length ? map : [0, 0]; },
+            centerZoom: function () { return arguments.length ? map : [0, 0]; }
+        };
+        controller = {
+            on:     function () { return controller; },
+            off:    function () { return controller; }
         };
     });
 
@@ -19,7 +23,7 @@ describe("hash", function () {
 
     describe("#map()", function () {
         it("gets and sets map", function () {
-            expect(hash.map(map)).to.equal(hash);
+            expect(hash.controller(controller).map(map)).to.equal(hash);
             expect(hash.map()).to.equal(map);
         });
 
