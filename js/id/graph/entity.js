@@ -3,7 +3,9 @@ iD.Entity = function(attrs) {
     if (this instanceof iD.Entity) return;
 
     // Create the appropriate subtype.
-    if (attrs && attrs.type) return iD.Entity[attrs.type].apply(this, arguments);
+    if (attrs && attrs.type) {
+        return new iD.Entity[attrs.type](arguments);
+    }
 
     // Initialize a generic Entity (used only in tests).
     return (new iD.Entity()).initialize(arguments);
@@ -110,15 +112,11 @@ iD.Entity.prototype = {
     }
 };
 
-iD.Entity.extend = function(properties) {
-    var Subclass = function() {
-        if (this instanceof Subclass) return;
-        return (new Subclass()).initialize(arguments);
-    };
-
-    Subclass.prototype = new iD.Entity();
-    _.extend(Subclass.prototype, properties);
-    iD.Entity[properties.type] = Subclass;
-
-    return Subclass;
+iD.Entity.simpleExtend = function(child, parent) {
+    for (var property in parent.prototype) {
+        if (typeof child.prototype[property] == "undefined") {
+            child.prototype[property] = parent.prototype[property];
+        }
+    }
+    return child;
 };
