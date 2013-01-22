@@ -783,9 +783,14 @@ img.tile {
     -o-transform-origin:0 0;
 }
 
-#tile-g {
+#surface, #tile-g {
     position:absolute;
     top:0;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
 }
 
 /* About Section
@@ -993,6 +998,7 @@ div.typeahead a:first-child {
     height:38px;
     padding:10px 20px;
     background:#fff;
+    color:#000;
     font-weight: normal;
     line-height: 21px;
     border-radius:5px;
