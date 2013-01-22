@@ -142,8 +142,6 @@ iD.modes.DrawLine = function(wayId, direction) {
             });
 
         d3.select('#undo').on('click.drawline', undo);
-
-
     };
 
     mode.exit = function() {
@@ -161,10 +159,11 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('click.drawline', null);
 
         mode.map.keybinding()
-            .on('⎋.drawline', null)
             .on('⌫.drawline', null)
             .on('⌦.drawline', null)
-            .on('↩.drawline', null);
+            .on('⎋.drawline', null)
+            .on('↩.drawline', null)
+            .on('z.drawline', null);
 
         d3.select('#undo').on('click.drawline', null);
 
