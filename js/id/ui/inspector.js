@@ -1,5 +1,5 @@
 iD.ui.inspector = function() {
-    var event = d3.dispatch('changeTags', 'changeWayDirection',
+    var event = d3.dispatch('changeTags', 'reverseWay',
         'update', 'remove', 'close', 'splitWay'),
         taginfo = iD.taginfo(),
         initial = false,
@@ -84,7 +84,7 @@ iD.ui.inspector = function() {
                 minorButtons.append('a')
                     .attr('href', '#')
                     .text('Reverse Direction')
-                    .on('click', function() { event.changeWayDirection(entity); });
+                    .on('click', function() { event.reverseWay(entity); });
             }
             if (entity.geometry() === 'vertex') {
                 minorButtons.append('a')

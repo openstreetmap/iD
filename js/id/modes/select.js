@@ -74,7 +74,7 @@ iD.modes.Select = function(entity, initial) {
 
         inspector
             .on('changeTags', changeTags)
-            .on('changeWayDirection', function(d) {
+            .on('reverseWay', function(d) {
             mode.history.perform(
                 iD.actions.ReverseWay(d.id),
                 'reversed a way');
