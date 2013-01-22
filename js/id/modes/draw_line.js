@@ -80,7 +80,7 @@ iD.modes.DrawLine = function(wayId, direction) {
                     datum.id = datum.way;
                     choice = datum;
                 } else {
-                    choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
+                    choice = iD.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
                 }
 
                 history.replace(

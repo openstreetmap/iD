@@ -11,9 +11,9 @@ iD.svg.Midpoints = function(projection) {
             for (var j = 0; j < entity.nodes.length - 1; j++) {
                 var a = projection(entity.nodes[j].loc);
                 var b = projection(entity.nodes[j + 1].loc);
-                if (iD.util.geo.dist(a, b) > 40) {
+                if (iD.geo.dist(a, b) > 40) {
                     midpoints.push({
-                        loc: iD.util.geo.interp(entity.nodes[j].loc, entity.nodes[j + 1].loc, 0.5),
+                        loc: iD.geo.interp(entity.nodes[j].loc, entity.nodes[j + 1].loc, 0.5),
                         way: entity.id,
                         index: j + 1,
                         midpoint: true

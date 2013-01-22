@@ -120,13 +120,13 @@ _.extend(iD.Relation.prototype, {
 
             for (o = 0; o < outers.length; o++) {
                 outer = _.pluck(outers[o], 'loc');
-                if (iD.util.geo.polygonContainsPolygon(outer, inner))
+                if (iD.geo.polygonContainsPolygon(outer, inner))
                     return o;
             }
 
             for (o = 0; o < outers.length; o++) {
                 outer = _.pluck(outers[o], 'loc');
-                if (iD.util.geo.polygonIntersectsPolygon(outer, inner))
+                if (iD.geo.polygonIntersectsPolygon(outer, inner))
                     return o;
             }
         }

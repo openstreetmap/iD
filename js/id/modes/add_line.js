@@ -40,7 +40,7 @@ iD.modes.AddLine = function() {
 
             } else if (datum.type === 'way') {
                 // begin a new way starting from an existing way
-                var choice = iD.util.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
+                var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
                 node = iD.Node({ loc: choice.loc });
 
                 history.perform(

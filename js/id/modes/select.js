@@ -116,7 +116,7 @@ iD.modes.Select = function(entity, initial) {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity &&
                 (datum.geometry() === 'area' || datum.geometry() === 'line')) {
-                var choice = iD.util.geo.chooseIndex(datum,
+                var choice = iD.geo.chooseIndex(datum,
                         d3.mouse(mode.map.surface.node()), mode.map),
                     node = iD.Node({ loc: choice.loc });
 
