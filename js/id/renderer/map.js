@@ -12,6 +12,7 @@ iD.Map = function() {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         fastEnabled = true,
+        transformStart,
         minzoom = 0,
         background = iD.Background()
             .projection(projection),
