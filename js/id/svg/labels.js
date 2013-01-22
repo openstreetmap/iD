@@ -8,12 +8,13 @@ iD.svg.Labels = function(projection) {
     var height = 12,
         width = 6;
 
-    function drawTextPaths(group, labels, filter, classes, t) {
+    function drawLineLabels(group, labels, filter, classes, position) {
 
-        var reverse = t('reverse');
+        var reverse = position('reverse');
 
-        var texts = group.selectAll('text.textpath-label')
-            .data(labels);
+        var texts = group.selectAll('text.' + classes)
+            .filter(filter)
+            .data(labels, iD.Entity.key);
 
         var tp = texts.enter()
             .append('text')
@@ -40,10 +41,10 @@ iD.svg.Labels = function(projection) {
 
     }
 
-    function drawTexts(group, labels, filter, classes, position) {
-        var texts = group.selectAll('text.text-label')
+    function drawPointLabels(group, labels, filter, classes, position) {
+        var texts = group.selectAll('text.' + classes)
             .filter(filter)
-            .data(labels);
+            .data(labels, iD.Entity.key);
 
         texts.enter()
             .append('text')
@@ -128,15 +129,6 @@ iD.svg.Labels = function(projection) {
 
         var rtree = new RTree();
 
-        function addPoint(d, i) {
-            var bbox = this.getBBox();
-            var coords = projection(d.loc);
-            var tree = new RTree.Rectangle(coords[0], coords[1], bbox.width, bbox.height);
-            rtree.insert(tree, d.id);
-        }
-
-        //d3.selectAll('.node.point').each(addPoint);
-
         var points = [],
             roads = [],
             buildings = [];
@@ -153,79 +145,95 @@ iD.svg.Labels = function(projection) {
         }
 
         var entities = roads.concat(buildings).concat(points);
-        var rect;
         var pathTransform = getPathTransform(projection);
-        var textlabels = [],
-            pathlabels = [],
-            textpositions = [],
-            pathpositions = [];
 
-        function nocollisions(rect) {
+        var positions = {
+            point: [],
+            line: [],
+            area: []
+        };
+
+        var labelled = {
+            point: [],
+            line: [],
+            area: []
+        };
+
+
+        for (var i = 0; i < entities.length; i ++) {
+            var entity = entities[i],
+                p;
+            if (entity.geometry() === 'point') {
+                p = getPointLabel(entity);
+            } else if (entity.geometry() === 'line') {
+                p = getLineLabel(entity);
+            } else if (entity.geometry() === 'area') {
+                p = getAreaLabel(entity);
+            }
+            if (p) {
+                positions[entity.geometry()].push(p);
+                labelled[entity.geometry()].push(entity);
+            }
+        }
+
+        function getPointLabel(entity) {
+            var coord = projection(entity.loc),
+                offset = pointOffsets[0],
+                p = {},
+                w = width * entity.tags.name.length;
+            p.x = coord[0] + offset[0];
+            p.y = coord[1] + offset[1];
+            p.textAnchor = offset[2];
+            var rect = new RTree.Rectangle(p.x, p.y, w, 20);
+            if (tryInsert(rect)) return p;
+        }
+
+        function getLineLabel(entity) {
+            var p = pathTransform(entity);
+            if (!p) return;
+            var rect = new RTree.Rectangle(Math.min(p.start[0], p.end[0]) - 5, Math.min(p.start[1], p.end[1]) - 5, p.width + 10, p.height + 10);
+            if (tryInsert(rect)) return p;
+        }
+
+        function getAreaLabel(entity) {
+            var nodes = _.pluck(entity.nodes, 'loc')
+                .map(iD.svg.RoundProjection(projection)),
+                centroid = iD.util.geo.polygonCentroid(nodes),
+                extent = entity.extent(graph),
+                entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
+                w = width * entity.tags.name.length;
+                p = {};
+
+            if (entitywidth < w + 20) return;
+            p.x = centroid[0];
+            p.y = centroid[1];
+            p.textAnchor = 'middle';
+            var rect = new RTree.Rectangle(p.x - w/2, p.y, w, 20);
+            if (tryInsert(rect)) return p;
+
+        }
+
+        function tryInsert(rect) {
             var v = rtree.search(rect, true).length === 0;
             if (v) rtree.insert(rect);
             return v;
         }
 
-        for (var i = 0; i < entities.length; i ++) {
-            var p = {},
-                entity = entities[i],
-                w = width * entity.tags.name.length,
-                h = 20;
-
-            if (entity.type === 'node') {
-                var coord = projection(entity.loc),
-                    offset = pointOffsets[0];
-                p.x = coord[0] + offset[0];
-                p.y = coord[1] + offset[1];
-                p.textAnchor = offset[2];
-                rect = new RTree.Rectangle(p.x, p.y, w, 20);
-                if (nocollisions(rect)) {
-                    textpositions.push(p);
-                    textlabels.push(entity);
-                }
-
-            } else if (entity.type === 'way' && entity.geometry() === 'line') {
-                p = pathTransform(entity);
-                if (!p) continue;
-                rect = new RTree.Rectangle(Math.min(p.start[0], p.end[0]) - 5, Math.min(p.start[1], p.end[1]) - 5, p.width + 10, p.height + 10);
-                if (nocollisions(rect)) {
-                    pathpositions.push(p);
-                    pathlabels.push(entity);
-                }
-
-            } else if (entity.type === 'way' && entity.geometry() === 'area') {
-                var nodes = _.pluck(entity.nodes, 'loc')
-                    .map(iD.svg.RoundProjection(projection)),
-                    centroid = iD.util.geo.polygonCentroid(nodes),
-                    extent = entity.extent(graph),
-                    entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
-
-                if (entitywidth < w + 20) {
-                    continue;
-                }
-                p.x = centroid[0];
-                p.y = centroid[1];
-                p.textAnchor = 'middle';
-                rect = new RTree.Rectangle(p.x - w/2, p.y, w, 20);
-                if (nocollisions(rect)) {
-                    textpositions.push(p);
-                    textlabels.push(entity);
-                }
-            }
-
+        function pointposition(attr) {
+            return function(d, i) { return positions['point'][i][attr] };
+        }
+        function lineposition(attr) {
+            return function(d, i) { return positions['line'][i][attr] };
+        }
+        function areaposition(attr) {
+            return function(d, i) { return positions['area'][i][attr] };
         }
 
-
-        function textposition(attr) {
-            return function(d, i) { return textpositions[i][attr] };
-        }
-        function pathposition(attr) {
-            return function(d, i) { return pathpositions[i][attr] };
-        }
 
         var label = surface.select('.layer-label'),
-            texts = drawTexts(label, textlabels, filter, 'text-label', textposition),
-            textPaths = drawTextPaths(label, pathlabels, filter, 'textpath-label', pathposition);
+            points = drawPointLabels(label, labelled['point'], filter, 'text-label', pointposition),
+            lines = drawLineLabels(label, labelled['line'], filter, 'textpath-label', lineposition),
+            areas = drawPointLabels(label, labelled['area'], filter, 'text-arealabel', areaposition);
     };
 
 };
