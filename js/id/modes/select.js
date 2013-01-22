@@ -138,7 +138,9 @@ iD.modes.Select = function (entity) {
     mode.exit = function () {
         var surface = mode.map.surface;
 
-        entity && changeTags(entity, inspector.tags());
+        if (entity) {
+            changeTags(entity, inspector.tags());
+        }
         d3.select('.inspector-wrap')
             .style('display', 'none')
             .html('');
