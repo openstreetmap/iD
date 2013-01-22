@@ -169,3 +169,14 @@ iD.util.geo.area = function(polygon) {
     }
     return area/2;
 };
+
+iD.util.geo.pathLength = function(path) {
+    var length = 0,
+        dx, dy;
+    for (var i = 0; i < path.length - 1; i++) {
+        dx = path[i][0] - path[i + 1][0];
+        dy = path[i][1] - path[i + 1][1];
+        length += Math.sqrt(dx * dx + dy * dy);
+    }
+    return length;
+};
