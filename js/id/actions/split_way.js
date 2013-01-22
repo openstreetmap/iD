@@ -8,14 +8,21 @@
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
 iD.actions.SplitWay = function(nodeId, newWayId) {
-    return function(graph) {
+    function candidateWays(graph) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node);
 
-        // splitting ways at intersections TODO
-        if (parents.length !== 1) return graph;
+        return parents.filter(function (parent) {
+            return parent.first() !== nodeId &&
+                   parent.last()  !== nodeId;
+        })
+    }
 
-        var way = parents[0],
+    var action = function(graph) {
+        if (!action.permitted(graph))
+            return graph;
+
+        var way = candidateWays(graph)[0],
             idx = _.indexOf(way.nodes, nodeId);
 
         // Create a 'b' way that contains all of the tags in the second
@@ -58,4 +65,10 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
 
         return graph;
     };
+
+    action.permitted = function(graph) {
+        return candidateWays(graph).length === 1;
+    };
+
+    return action;
 };

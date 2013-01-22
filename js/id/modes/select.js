@@ -1,11 +1,11 @@
-iD.modes.Select = function (entity) {
+iD.modes.Select = function(entity, initial) {
     var mode = {
         id: 'select',
         button: 'browse',
         entity: entity
     };
 
-    var inspector = iD.ui.inspector(),
+    var inspector = iD.ui.inspector().initial(!!initial),
         behaviors;
 
     function remove() {
@@ -34,7 +34,7 @@ iD.modes.Select = function (entity) {
         }
     }
 
-    mode.enter = function () {
+    mode.enter = function() {
         var surface = mode.map.surface;
 
         behaviors = [
@@ -47,22 +47,29 @@ iD.modes.Select = function (entity) {
             behavior(surface);
         });
 
+        var q = iD.util.stringQs(location.hash.substring(1));
+        location.hash =  '#' + iD.util.qsString(_.assign(q, {
+            id: entity.id
+        }), true);
+
         d3.select('.inspector-wrap')
             .style('display', 'block')
             .style('opacity', 1)
             .datum(entity)
             .call(inspector);
 
-        // Pan the map if the clicked feature intersects with the position
-        // of the inspector
-        var inspector_size = d3.select('.inspector-wrap').size(),
-            map_size = mode.map.size(),
-            offset = 50,
-            shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
-            center = (map_size[0] / 2) + shift_left + offset;
+        if (d3.event) {
+            // Pan the map if the clicked feature intersects with the position
+            // of the inspector
+            var inspector_size = d3.select('.inspector-wrap').size(),
+                map_size = mode.map.size(),
+                offset = 50,
+                shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
+                center = (map_size[0] / 2) + shift_left + offset;
 
-        if (shift_left > 0 && inspector_size[1] > d3.event.y) {
-            mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+            if (shift_left > 0 && inspector_size[1] > d3.event.y) {
+                mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+            }
         }
 
         inspector
@@ -131,21 +138,33 @@ iD.modes.Select = function (entity) {
         });
 
         surface.selectAll("*")
-            .filter(function (d) { return d === entity; })
+            .filter(function (d) {
+                return d && entity && d.id === entity.id;
+            })
             .classed('selected', true);
     };
 
     mode.exit = function () {
         var surface = mode.map.surface;
 
-        entity && changeTags(entity, inspector.tags());
+        if (entity) {
+            changeTags(entity, inspector.tags());
+        }
+
         d3.select('.inspector-wrap')
             .style('display', 'none')
             .html('');
 
+        // Firefox incorrectly implements blur, so typeahead elements
+        // are not correctly removed. Remove any stragglers manually.
+        d3.selectAll('div.typeahead').remove();
+
         behaviors.forEach(function(behavior) {
             behavior.off(surface);
         });
+
+        var q = iD.util.stringQs(location.hash.substring(1));
+        location.hash =  '#' + iD.util.qsString(_.omit(q, 'id'), true);
 
         surface.on("click.select", null);
         mode.map.keybinding().on('⌫.select', null);

@@ -1,4 +1,37 @@
 describe("iD.actions.SplitWay", function () {
+    describe("#permitted", function () {
+        it("returns true for a non-end node of a single way", function () {
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']})
+                });
+
+            expect(iD.actions.SplitWay('b').permitted(graph)).to.be.true;
+        });
+
+        it("returns false for the first node of a single way", function () {
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']})
+                });
+
+            expect(iD.actions.SplitWay('a').permitted(graph)).to.be.false;
+        });
+
+        it("returns false for the last node of a single way", function () {
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']})
+                });
+
+            expect(iD.actions.SplitWay('b').permitted(graph)).to.be.false;
+        });
+    });
+
     it("creates a new way with the appropriate nodes", function () {
         // Situation:
         //    a ---- b ---- c
@@ -35,6 +68,35 @@ describe("iD.actions.SplitWay", function () {
         // Immutable tags => should be shared by identity.
         expect(graph.entity('-').tags).to.equal(tags);
         expect(graph.entity('=').tags).to.equal(tags);
+    });
+
+    it("splits a way at a T-junction", function () {
+        // Situation:
+        //    a ---- b ---- c
+        //           |
+        //           d
+        //
+        // Split at b.
+        //
+        // Expected result:
+        //    a ---- b ==== c
+        //           |
+        //           d
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                '|': iD.Way({id: '|', nodes: ['d', 'b']})
+            });
+
+        graph = iD.actions.SplitWay('b', '=')(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'b']);
+        expect(graph.entity('=').nodes).to.eql(['b', 'c']);
+        expect(graph.entity('|').nodes).to.eql(['d', 'b']);
     });
 
     it("adds the new way to parent relations (no connections)", function () {

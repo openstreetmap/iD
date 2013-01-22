@@ -19,7 +19,7 @@ iD.modes.AddPoint = function() {
                 iD.actions.AddNode(node),
                 'added a point');
 
-            controller.enter(iD.modes.Select(node));
+            controller.enter(iD.modes.Select(node, true));
         });
 
         map.keybinding().on('⎋.addpoint', function() {

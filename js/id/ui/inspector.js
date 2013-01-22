@@ -2,6 +2,7 @@ iD.ui.inspector = function() {
     var event = d3.dispatch('changeTags', 'changeWayDirection',
         'update', 'remove', 'close', 'splitWay'),
         taginfo = iD.taginfo(),
+        initial = false,
         tagList;
 
     function inspector(selection) {
@@ -149,9 +150,12 @@ iD.ui.inspector = function() {
                 });
                 if (d.key && d.value) {
                     taginfo.docs(params, function(err, docs) {
-                        var en = _.find(docs, function(d) {
-                            return d.lang == 'en';
-                        });
+                        var en;
+                        if (!err && docs) {
+                            en = _.find(docs, function(d) {
+                                return d.lang == 'en';
+                            });
+                        }
                         if (en) {
                             var types = [];
                             if (en.on_area) types.push('area');
@@ -170,7 +174,7 @@ iD.ui.inspector = function() {
                     });
                 } else if (d.key) {
                     taginfo.values(params, function(err, values) {
-                        if (values.data.length) {
+                        if (!err && values.data.length) {
                             iD.ui.modal()
                                 .select('.content')
                                 .datum({
@@ -191,7 +195,8 @@ iD.ui.inspector = function() {
         helpBtn.append('span')
             .attr('class', 'icon inspect');
 
-        if (tags.length === 1 && tags[0].key === '' && tags[0].value === '') {
+        if (initial && tags.length === 1 &&
+            tags[0].key === '' && tags[0].value === '') {
             focusNewKey();
         }
 
@@ -268,7 +273,7 @@ iD.ui.inspector = function() {
         event.close(entity);
     }
 
-    inspector.tags = function (tags) {
+    inspector.tags = function(tags) {
         if (!arguments.length) {
             tags = {};
             tagList.selectAll('li').each(function() {
@@ -281,6 +286,11 @@ iD.ui.inspector = function() {
         } else {
             drawTags(tags);
         }
+    };
+
+    inspector.initial = function(_) {
+        initial = _;
+        return inspector;
     };
 
     return d3.rebind(inspector, event, 'on');

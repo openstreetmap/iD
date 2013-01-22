@@ -481,21 +481,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     right:0;
     height:60px;
     border-radius: 0;
-    -webkit-transition: opacity .25s, z-index 0 0s;
-       -moz-transition: opacity .25s, z-index 0 0s;
-            transition: opacity .25s, z-index 0 0s;
-}
-
-.mode-add-point #bar,
-.mode-add-line #bar,
-.mode-draw-line #bar,
-.mode-draw-area #bar,
-.mode-add-area #bar { 
-    opacity:0;
-    z-index: -9999;
-    -webkit-transition: opacity .25s, z-index 0 .5s;
-       -moz-transition: opacity .25s, z-index 0 .5s;
-            transition: opacity .25s, z-index 0 .5s;
 }
 
 /* Inspector */
@@ -595,7 +580,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .tag-row button.tag-help {
     right: -30px;
 }
-.inspector-buttons { 
+.inspector-buttons {
     border-radius: 0 0 0 10px;
     height: 60px;
 }
@@ -783,9 +768,14 @@ img.tile {
     -o-transform-origin:0 0;
 }
 
-#tile-g {
+#surface, #tile-g {
     position:absolute;
     top:0;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
 }
 
 /* About Section
@@ -943,7 +933,7 @@ div.typeahead a:first-child {
     border-radius: 0 0 4px 4px;
 }
 
-.modal-section .buttons { 
+.modal-section .buttons {
     padding-top: 10px;
     width: 100%;
 }
@@ -993,6 +983,7 @@ div.typeahead a:first-child {
     height:38px;
     padding:10px 20px;
     background:#fff;
+    color:#000;
     font-weight: normal;
     line-height: 21px;
     border-radius:5px;

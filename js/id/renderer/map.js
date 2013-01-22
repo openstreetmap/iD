@@ -1,8 +1,7 @@
 iD.Map = function() {
     var connection, history,
         dimensions = [],
-        dispatch = d3.dispatch('move'),
-        translateStart,
+        dispatch = d3.dispatch('move', 'drawn'),
         keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
         roundedProjection = iD.svg.RoundProjection(projection),
@@ -33,19 +32,15 @@ iD.Map = function() {
 
         var supersurface = selection.append('div')
             .style('position', 'absolute')
-            .on('mousedown.drag', function() {
-                translateStart = projection.translate();
-            })
             .call(zoom);
 
         surface = supersurface.append('svg')
-            .on('mouseup.reset-transform', resetTransform)
-            .on('touchend.reset-transform', resetTransform)
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
                 }
             }, true)
+            .attr('id', 'surface')
             .call(iD.svg.Surface());
 
 
@@ -66,21 +61,21 @@ iD.Map = function() {
             extent = map.extent(),
             graph = history.graph();
 
+        function addParents(parents) {
+            for (var i = 0; i < parents.length; i++) {
+                var parent = parents[i];
+                if (only[parent.id] === undefined) {
+                    only[parent.id] = graph.fetch(parent.id);
+                    addParents(graph.parentRelations(parent));
+                }
+            }
+        }
+
         if (!difference) {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
             var only = {};
-
-            function addParents(parents) {
-                for (var i = 0; i < parents.length; i++) {
-                    var parent = parents[i];
-                    if (only[parent.id] === undefined) {
-                        only[parent.id] = graph.fetch(parent.id);
-                        addParents(graph.parentRelations(parent));
-                    }
-                }
-            }
 
             for (var j = 0; j < difference.length; j++) {
                 var id = difference[j],
@@ -102,17 +97,17 @@ iD.Map = function() {
 
         if (all.length > 100000) {
             editOff();
-            return;
+        } else {
+            surface
+                .call(points, graph, all, filter)
+                .call(vertices, graph, all, filter)
+                .call(lines, graph, all, filter)
+                .call(areas, graph, all, filter)
+                .call(multipolygons, graph, all, filter)
+                .call(midpoints, graph, all, filter)
+                .call(labels, graph, all, filter);
         }
-
-        surface
-            .call(points, graph, all, filter)
-            .call(vertices, graph, all, filter)
-            .call(lines, graph, all, filter)
-            .call(areas, graph, all, filter)
-            .call(multipolygons, graph, all, filter)
-            .call(midpoints, graph, all, filter)
-            .call(labels, graph, all, filter, projection);
+        dispatch.drawn(map);
     }
 
     function editOff() {
@@ -138,32 +133,35 @@ iD.Map = function() {
                 .text('Cannot zoom out further in current mode.');
             return map.zoom(16);
         }
-        var fast = (d3.event.scale === projection.scale() && fastEnabled);
+
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-        if (fast && translateStart) {
-            var a = d3.event.translate,
-                b = translateStart,
-                translate = 'translate(' + ~~(a[0] - b[0]) + 'px,' +
-                    ~~(a[1] - b[1]) + 'px)';
-            tilegroup.style(transformProp, translate);
-            surface.style(transformProp, translate);
-        } else {
-            redraw();
-            translateStart = null;
-        }
+
+        var ascale = d3.event.scale;
+        var bscale = transformStart[0];
+        var scale = (ascale / bscale);
+
+        var tX = Math.round((d3.event.translate[0] / scale) - (transformStart[1][0]));
+        var tY = Math.round((d3.event.translate[1] / scale) - (transformStart[1][1]));
+
+        var transform =
+            'scale(' + scale + ')' +
+            'translate(' + tX + 'px,' + tY + 'px) ';
+
+        tilegroup.style(transformProp, transform);
+        surface.style(transformProp, transform);
+        queueRedraw();
     }
 
     function resetTransform() {
         if (!surface.style(transformProp)) return;
-        translateStart = null;
         surface.style(transformProp, '');
         tilegroup.style(transformProp, '');
-        redraw();
     }
 
-    var redraw = _.throttle(function(difference) {
+    function redraw(difference) {
+        resetTransform();
         dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
@@ -173,8 +171,13 @@ iD.Map = function() {
         } else {
             editOff();
         }
+        transformStart = [
+            projection.scale(),
+            projection.translate().slice()];
         return map;
-    }, 10);
+    }
+
+    var queueRedraw = _.debounce(redraw, 200);
 
     function pointLocation(p) {
         var translate = projection.translate(),
@@ -304,7 +307,7 @@ iD.Map = function() {
     map.connection = function(_) {
         if (!arguments.length) return connection;
         connection = _;
-        connection.on('load', connectionLoad);
+        connection.on('load.tile', connectionLoad);
         return map;
     };
 

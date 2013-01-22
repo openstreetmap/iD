@@ -48,7 +48,7 @@ iD.modes.DrawLine = function(wayId, direction) {
                         iD.actions.AddWayNode(wayId, tailId, index),
                         'added to a line');
 
-                    controller.enter(iD.modes.Select(way));
+                    controller.enter(iD.modes.Select(way, true));
 
                 } else {
                     history.replace(iD.actions.DeleteWay(way.id));
@@ -59,7 +59,7 @@ iD.modes.DrawLine = function(wayId, direction) {
                 // finish the way
                 history.undo();
 
-                controller.enter(iD.modes.Select(way));
+                controller.enter(iD.modes.Select(way, true));
 
             } else if (datum.type === 'node' && datum.id !== node.id) {
                 // connect the way to an existing node
@@ -71,13 +71,14 @@ iD.modes.DrawLine = function(wayId, direction) {
                 controller.enter(iD.modes.DrawLine(wayId, direction));
 
             } else if (datum.type === 'way' || datum.midpoint) {
+                var choice;
                 // connect the way to an existing way
                 if (datum.midpoint) {
                     // if clicked on midpoint
                     datum.id = datum.way;
                     choice = datum;
                 } else {
-                    var choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
+                    choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
                 }
 
                 history.replace(
@@ -120,7 +121,7 @@ iD.modes.DrawLine = function(wayId, direction) {
         function ret() {
             d3.event.preventDefault();
             history.replace(iD.actions.DeleteNode(node.id));
-            controller.enter(iD.modes.Select(way));
+            controller.enter(iD.modes.Select(way, true));
         }
 
         function undo() {
@@ -142,8 +143,6 @@ iD.modes.DrawLine = function(wayId, direction) {
             });
 
         d3.select('#undo').on('click.drawline', undo);
-
-
     };
 
     mode.exit = function() {
@@ -161,10 +160,11 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('click.drawline', null);
 
         mode.map.keybinding()
-            .on('⎋.drawline', null)
             .on('⌫.drawline', null)
             .on('⌦.drawline', null)
-            .on('↩.drawline', null);
+            .on('⎋.drawline', null)
+            .on('↩.drawline', null)
+            .on('z.drawline', null);
 
         d3.select('#undo').on('click.drawline', null);
 

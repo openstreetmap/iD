@@ -224,6 +224,10 @@ path.multipolygon.tag-amenity-parking {
     fill: #edecc0;
 }
 
+path.multipolygon.tag-boundary {
+    fill: none;
+}
+
 /* highways */
 
 path.shadow.tag-highway {
