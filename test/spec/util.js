@@ -1,4 +1,4 @@
-describe('Util', function() {
+describe('iD.Util', function() {
     var util;
 
     it('#trueObj', function() {

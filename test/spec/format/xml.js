@@ -1,4 +1,4 @@
-describe('XML', function() {
+describe('iD.format.XML', function() {
     var node = iD.Node({ id: 'n-1', type: 'node', loc: [-77, 38] }),
         way  = iD.Way({ id: 'w-1', type: 'way', nodes: [] });
 

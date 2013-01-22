@@ -1,4 +1,4 @@
-describe("hash", function () {
+describe("iD.Hash", function () {
     var hash, map, controller;
 
     beforeEach(function () {

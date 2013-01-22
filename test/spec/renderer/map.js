@@ -1,4 +1,4 @@
-describe('Map', function() {
+describe('iD.Map', function() {
     var container, map;
 
     beforeEach(function() {
