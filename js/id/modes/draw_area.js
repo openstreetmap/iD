@@ -43,7 +43,7 @@ iD.modes.DrawArea = function(wayId) {
             if (datum.id === tailId || datum.id === headId) {
                 if (way.nodes.length > 3) {
                     history.undo();
-                    controller.enter(iD.modes.Select(way));
+                    controller.enter(iD.modes.Select(way, true));
                 } else {
                     // Areas with less than 3 nodes gets deleted
                     history.replace(iD.actions.DeleteWay(way.id));
@@ -94,7 +94,7 @@ iD.modes.DrawArea = function(wayId) {
         function ret() {
             d3.event.preventDefault();
             history.replace(iD.actions.DeleteNode(node.id));
-            controller.enter(iD.modes.Select(way));
+            controller.enter(iD.modes.Select(way, true));
         }
 
         surface

@@ -1,11 +1,11 @@
-iD.modes.Select = function(entity) {
+iD.modes.Select = function(entity, initial) {
     var mode = {
         id: 'select',
         button: 'browse',
         entity: entity
     };
 
-    var inspector = iD.ui.inspector(),
+    var inspector = iD.ui.inspector().initial(!!initial),
         behaviors;
 
     function remove() {
