@@ -2,15 +2,16 @@ iD.svg.Labels = function(projection) {
 
     // Replace with dict and iterate over entities tags instead?
     var label_stack = [
-        ['line', 'highway', ''],
+        ['line', 'highway'],
         ['area', 'building', 'yes'],
         ['area', 'leisure', 'park'],
-        ['area', 'natural', '']
+        ['area', 'natural'],
+        ['point', 'amenity']
     ];
 
     var pointOffsets = [
-        [25, 3, 'start'], // right
-        [-15, 3, 'end'], // left
+        [15, 0, 'start'], // right
+        [-15, 0, 'end'], // left
     ];
 
     var lineOffsets = [
@@ -22,7 +23,8 @@ iD.svg.Labels = function(projection) {
 
     function drawLineLabels(group, labels, filter, classes, position) {
 
-        var reverse = position('reverse');
+        var reverse = position('reverse'),
+            getClasses = position('classes');
 
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
@@ -30,7 +32,7 @@ iD.svg.Labels = function(projection) {
 
         var tp = texts.enter()
             .append('text')
-            .attr({ 'class': classes})
+            .attr({ 'class': function(d, i) { return classes + ' ' + getClasses(d, i);}})
             .append('textPath')
             .attr({
                 'class': 'textpath'
@@ -55,13 +57,14 @@ iD.svg.Labels = function(projection) {
     }
 
     function drawPointLabels(group, labels, filter, classes, position) {
+        var getClasses = position('classes');
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
             .data(labels, iD.Entity.key);
 
         texts.enter()
             .append('text')
-            .attr('class', classes);
+            .attr('class', function(d, i) { return classes + ' ' + getClasses(d, i);});
 
         texts.attr('x', position('x'))
             .attr('y', position('y'))
@@ -149,21 +152,22 @@ iD.svg.Labels = function(projection) {
             area: []
         };
 
-        labelable = _.flatten(labelable);
-
-        for (var i = 0; i < labelable.length; i ++) {
-            var entity = labelable[i],
-                p;
-            if (entity.geometry() === 'point') {
-                p = getPointLabel(entity);
-            } else if (entity.geometry() === 'line') {
-                p = getLineLabel(entity);
-            } else if (entity.geometry() === 'area') {
-                p = getAreaLabel(entity);
-            }
-            if (p) {
-                positions[entity.geometry()].push(p);
-                labelled[entity.geometry()].push(entity);
+        for (var k = 0; k < labelable.length; k++) {
+            for (var i = 0; i < labelable[k].length; i ++) {
+                var entity = labelable[k][i],
+                    p;
+                if (entity.geometry() === 'point') {
+                    p = getPointLabel(entity);
+                } else if (entity.geometry() === 'line') {
+                    p = getLineLabel(entity);
+                } else if (entity.geometry() === 'area') {
+                    p = getAreaLabel(entity);
+                }
+                if (p) {
+                    p.classes = label_stack[k].join('-');
+                    positions[entity.geometry()].push(p);
+                    labelled[entity.geometry()].push(entity);
+                }
             }
         }
 
@@ -197,7 +201,7 @@ iD.svg.Labels = function(projection) {
                     Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
                     Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
                     Math.abs(sub[0][0] - sub[sub.length - 1][0]) + 20,
-                    Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 20
+                    Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 30
                 );
                 if (tryInsert(rect)) return {
                     reverse: rev,

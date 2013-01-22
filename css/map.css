@@ -557,11 +557,19 @@ text.textpath-label {
   text-anchor: middle;
 }
 
-text.textpath-label, text.text-label {
+.layer-label text{
   font-size: 12px;
   font-weight: bold;
   fill: black;
   text-shadow: 0 0 0.4em white, 1px 1px white, -1px -1px white, -1px 1px white, 1px -1px white;
+}
+
+text.area-leisure-park {
+  font-size: 14px;
+}
+
+text.point-amenity{
+  font-size: 9px;
 }
 
 /* Cursors */
