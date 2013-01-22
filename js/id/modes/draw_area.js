@@ -4,6 +4,8 @@ iD.modes.DrawArea = function(wayId) {
         id: 'draw-area'
     };
 
+    var keybinding = d3.keybinding('draw-area');
+
     mode.enter = function() {
         var map = mode.map,
             surface = map.surface,
@@ -102,11 +104,14 @@ iD.modes.DrawArea = function(wayId) {
             .on('mouseover.drawarea', mouseover)
             .on('click.drawarea', click);
 
-        map.keybinding()
-            .on('⌫.drawarea', backspace)
-            .on('⌦.drawarea', del)
-            .on('⎋.drawarea', ret)
-            .on('↩.drawarea', ret);
+        keybinding
+            .on('⌫', backspace)
+            .on('⌦', del)
+            .on('⎋', ret)
+            .on('↩', ret);
+
+        d3.select(document)
+            .call(keybinding);
     };
 
     mode.exit = function() {
@@ -122,11 +127,7 @@ iD.modes.DrawArea = function(wayId) {
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);
 
-        mode.map.keybinding()
-            .on('⎋.drawarea', null)
-            .on('⌫.drawarea', null)
-            .on('⌦.drawarea', null)
-            .on('↩.drawarea', null);
+        keybinding.off();
 
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);

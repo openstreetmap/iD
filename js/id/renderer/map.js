@@ -2,7 +2,6 @@ iD.Map = function() {
     var connection, history,
         dimensions = [],
         dispatch = d3.dispatch('move', 'drawn'),
-        keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
         roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
@@ -49,8 +48,6 @@ iD.Map = function() {
 
         supersurface
             .call(tail);
-
-        d3.select(document).call(keybinding);
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
@@ -342,12 +339,6 @@ iD.Map = function() {
         if (!arguments.length) return history;
         history = _;
         history.on('change.map', redraw);
-        return map;
-    };
-
-    map.keybinding = function (_) {
-        if (!arguments.length) return keybinding;
-        keybinding = _;
         return map;
     };
 

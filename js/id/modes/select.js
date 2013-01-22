@@ -6,6 +6,7 @@ iD.modes.Select = function(entity, initial) {
     };
 
     var inspector = iD.ui.inspector().initial(!!initial),
+        keybinding = d3.keybinding('select'),
         behaviors;
 
     function remove() {
@@ -132,10 +133,10 @@ iD.modes.Select = function(entity, initial) {
         surface.on('click.select', click)
             .on('dblclick.browse', dblclick);
 
-        mode.map.keybinding().on('⌫.select', function(e) {
-            remove();
-            e.preventDefault();
-        });
+        keybinding.on('⌫', remove);
+
+        d3.select(document)
+            .call(keybinding);
 
         surface.selectAll("*")
             .filter(function (d) {
@@ -166,8 +167,9 @@ iD.modes.Select = function(entity, initial) {
         var q = iD.util.stringQs(location.hash.substring(1));
         location.hash =  '#' + iD.util.qsString(_.omit(q, 'id'), true);
 
+        keybinding.off();
+
         surface.on("click.select", null);
-        mode.map.keybinding().on('⌫.select', null);
         mode.history.on('change.entity-undone', null);
 
         surface.selectAll(".selected")

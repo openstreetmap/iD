@@ -4,6 +4,8 @@ iD.modes.DrawLine = function(wayId, direction) {
         id: 'draw-line'
     };
 
+    var keybinding = d3.keybinding('draw-line');
+
     mode.enter = function() {
         var map = mode.map,
             surface = map.surface,
@@ -133,16 +135,19 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('mousemove.drawline', mousemove)
             .on('click.drawline', click);
 
-        map.keybinding()
-            .on('⌫.drawline', backspace)
-            .on('⌦.drawline', del)
-            .on('⎋.drawline', ret)
-            .on('↩.drawline', ret)
-            .on('z.drawline', function(evt, mods) {
-                if (mods === '⌘' || mods === '⌃') undo();
-            });
+        keybinding
+            .on('⌫', backspace)
+            .on('⌦', del)
+            .on('⎋', ret)
+            .on('↩', ret)
+            .on('⌘-Z', undo)
+            .on('⌃-Z', undo);
 
-        d3.select('#undo').on('click.drawline', undo);
+        d3.select(document)
+            .call(keybinding);
+
+        d3.select('#undo')
+            .on('click.drawline', undo);
     };
 
     mode.exit = function() {
@@ -159,12 +164,7 @@ iD.modes.DrawLine = function(wayId, direction) {
             .on('mousemove.drawline', null)
             .on('click.drawline', null);
 
-        mode.map.keybinding()
-            .on('⌫.drawline', null)
-            .on('⌦.drawline', null)
-            .on('⎋.drawline', null)
-            .on('↩.drawline', null)
-            .on('z.drawline', null);
+        keybinding.off();
 
         d3.select('#undo').on('click.drawline', null);
 
