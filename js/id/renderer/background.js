@@ -38,6 +38,12 @@ iD.Background = function() {
         return Math.ceil(256 * Math.pow(2, z - d[2])) / 256;
     }
 
+    function lookUp(d) {
+        for (var up = -1; up > -d[2]; up--) {
+            if (cache[atZoom(d, up)] !== false) return atZoom(d, up);
+        }
+    }
+
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`
     function background() {
@@ -70,16 +76,13 @@ iD.Background = function() {
 
             // if this tile has not finished, req the one above
             } else if (cache[d] === undefined &&
+                lookUp(d)) {
 
-                // but the tile above is in the cache
-                cache[atZoom(d, -1)] &&
-
-                // and another tile has not already requested the
-                // tile above
-                !ups[atZoom(d, -1)]) {
-
-                ups[atZoom(d, -1)] = true;
-                tiles.push(atZoom(d, -1));
+                var upTile = lookUp(d);
+                if (!ups[upTile]) {
+                    ups[upTile] = true;
+                    tiles.push(upTile);
+                }
 
             // if this tile has not yet completed, try keeping the
             // tiles below it
@@ -98,8 +101,6 @@ iD.Background = function() {
             .selectAll('img')
             .data(tiles, function(d) { return d; });
 
-        image.exit().remove();
-
         function load(d) {
             cache[d.slice(0, 3)] = true;
             d3.select(this).on('load', null);
@@ -115,6 +116,8 @@ iD.Background = function() {
             .attr('src', function(d) { return d[3]; })
             .on('error', error)
             .on('load', load);
+
+        image.exit().remove();
 
         image.style(transformProp, function(d) {
             var _ts = 256 * Math.pow(2, z - d[2]);
