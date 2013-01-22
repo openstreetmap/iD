@@ -113,7 +113,7 @@ iD.modes.DrawArea = function(wayId) {
         d3.select(document)
             .call(keybinding);
 
-        history.on('undone.drawline', function () {
+        history.on('undone.drawarea', function () {
             controller.enter(iD.modes.Browse());
         });
     };
@@ -135,7 +135,7 @@ iD.modes.DrawArea = function(wayId) {
 
         keybinding.off();
 
-        history.on('undone.drawline', null);
+        history.on('undone.drawarea', null);
 
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);
