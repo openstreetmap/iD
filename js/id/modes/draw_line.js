@@ -4,6 +4,8 @@ iD.modes.DrawLine = function(wayId, direction) {
         id: 'draw-line'
     };
 
+    var keybinding = d3.keybinding('draw-line');
+
     mode.enter = function() {
         var map = mode.map,
             surface = map.surface,
@@ -48,7 +50,7 @@ iD.modes.DrawLine = function(wayId, direction) {
                         iD.actions.AddWayNode(wayId, tailId, index),
                         'added to a line');
 
-                    controller.enter(iD.modes.Select(way));
+                    controller.enter(iD.modes.Select(way, true));
 
                 } else {
                     history.replace(iD.actions.DeleteWay(way.id));
@@ -59,7 +61,7 @@ iD.modes.DrawLine = function(wayId, direction) {
                 // finish the way
                 history.undo();
 
-                controller.enter(iD.modes.Select(way));
+                controller.enter(iD.modes.Select(way, true));
 
             } else if (datum.type === 'node' && datum.id !== node.id) {
                 // connect the way to an existing node
@@ -71,13 +73,14 @@ iD.modes.DrawLine = function(wayId, direction) {
                 controller.enter(iD.modes.DrawLine(wayId, direction));
 
             } else if (datum.type === 'way' || datum.midpoint) {
+                var choice;
                 // connect the way to an existing way
                 if (datum.midpoint) {
                     // if clicked on midpoint
                     datum.id = datum.way;
                     choice = datum;
                 } else {
-                    var choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
+                    choice = iD.util.geo.chooseIndex(datum, d3.mouse(surface.node()), map);
                 }
 
                 history.replace(
@@ -120,52 +123,46 @@ iD.modes.DrawLine = function(wayId, direction) {
         function ret() {
             d3.event.preventDefault();
             history.replace(iD.actions.DeleteNode(node.id));
-            controller.enter(iD.modes.Select(way));
-        }
-
-        function undo() {
-            history.undo();
-            controller.enter(iD.modes.Browse());
+            controller.enter(iD.modes.Select(way, true));
         }
 
         surface
             .on('mousemove.drawline', mousemove)
             .on('click.drawline', click);
 
-        map.keybinding()
-            .on('⌫.drawline', backspace)
-            .on('⌦.drawline', del)
-            .on('⎋.drawline', ret)
-            .on('↩.drawline', ret)
-            .on('z.drawline', function(evt, mods) {
-                if (mods === '⌘' || mods === '⌃') undo();
-            });
+        keybinding
+            .on('⌫', backspace)
+            .on('⌦', del)
+            .on('⎋', ret)
+            .on('↩', ret);
 
-        d3.select('#undo').on('click.drawline', undo);
+        d3.select(document)
+            .call(keybinding);
+
+        history.on('undone.drawline', function () {
+            controller.enter(iD.modes.Browse());
+        });
     };
 
     mode.exit = function() {
-        var surface = mode.map.surface;
+        var map = mode.map,
+            surface = map.surface,
+            history = mode.history;
 
         surface.selectAll('.way, .node')
             .classed('active', false);
 
-        mode.map.tail(false);
-        mode.map.fastEnable(true);
-        mode.map.minzoom(0);
+        map.tail(false);
+        map.fastEnable(true);
+        map.minzoom(0);
 
         surface
             .on('mousemove.drawline', null)
             .on('click.drawline', null);
 
-        mode.map.keybinding()
-            .on('⌫.drawline', null)
-            .on('⌦.drawline', null)
-            .on('⎋.drawline', null)
-            .on('↩.drawline', null)
-            .on('z.drawline', null);
+        keybinding.off();
 
-        d3.select('#undo').on('click.drawline', null);
+        history.on('undone.drawline', null);
 
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);

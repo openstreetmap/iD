@@ -4,6 +4,8 @@ iD.modes.DrawArea = function(wayId) {
         id: 'draw-area'
     };
 
+    var keybinding = d3.keybinding('draw-area');
+
     mode.enter = function() {
         var map = mode.map,
             surface = map.surface,
@@ -43,7 +45,7 @@ iD.modes.DrawArea = function(wayId) {
             if (datum.id === tailId || datum.id === headId) {
                 if (way.nodes.length > 3) {
                     history.undo();
-                    controller.enter(iD.modes.Select(way));
+                    controller.enter(iD.modes.Select(way, true));
                 } else {
                     // Areas with less than 3 nodes gets deleted
                     history.replace(iD.actions.DeleteWay(way.id));
@@ -94,7 +96,7 @@ iD.modes.DrawArea = function(wayId) {
         function ret() {
             d3.event.preventDefault();
             history.replace(iD.actions.DeleteNode(node.id));
-            controller.enter(iD.modes.Select(way));
+            controller.enter(iD.modes.Select(way, true));
         }
 
         surface
@@ -102,31 +104,38 @@ iD.modes.DrawArea = function(wayId) {
             .on('mouseover.drawarea', mouseover)
             .on('click.drawarea', click);
 
-        map.keybinding()
-            .on('⌫.drawarea', backspace)
-            .on('⌦.drawarea', del)
-            .on('⎋.drawarea', ret)
-            .on('↩.drawarea', ret);
+        keybinding
+            .on('⌫', backspace)
+            .on('⌦', del)
+            .on('⎋', ret)
+            .on('↩', ret);
+
+        d3.select(document)
+            .call(keybinding);
+
+        history.on('undone.drawarea', function () {
+            controller.enter(iD.modes.Browse());
+        });
     };
 
     mode.exit = function() {
-        var surface = mode.map.surface;
+        var map = mode.map,
+            surface = map.surface,
+            history = mode.history;
 
         surface.selectAll('.way, .node')
             .classed('active', false);
 
-        mode.map.tail(false);
-        mode.map.fastEnable(true);
+        map.tail(false);
+        map.fastEnable(true);
 
         surface
             .on('mousemove.drawarea', null)
             .on('click.drawarea', null);
 
-        mode.map.keybinding()
-            .on('⎋.drawarea', null)
-            .on('⌫.drawarea', null)
-            .on('⌦.drawarea', null)
-            .on('↩.drawarea', null);
+        keybinding.off();
+
+        history.on('undone.drawarea', null);
 
         window.setTimeout(function() {
             mode.map.dblclickEnable(true);

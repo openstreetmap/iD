@@ -184,26 +184,18 @@ window.iD = function(container) {
             map.size(m.size());
         });
 
-        map.keybinding()
-            .on('a', function(evt, mods) {
-                if (mods) return;
-                controller.enter(iD.modes.AddArea());
-            })
-            .on('⌫.prevent_navigation', function(evt, mods) {
-                evt.preventDefault();
-            })
-            .on('p', function(evt, mods) {
-                if (mods) return;
-                controller.enter(iD.modes.AddPoint());
-            })
-            .on('l', function(evt, mods) {
-                if (mods) return;
-                controller.enter(iD.modes.AddLine());
-            })
-            .on('z', function(evt, mods) {
-                if (mods === '⇧⌘' || mods === '⌃⇧') history.redo();
-                if (mods === '⌘' || mods === '⌃') history.undo();
-            });
+        var keybinding = d3.keybinding('main')
+            .on('P', function() { controller.enter(iD.modes.AddPoint()); })
+            .on('L', function() { controller.enter(iD.modes.AddLine()); })
+            .on('A', function() { controller.enter(iD.modes.AddArea()); })
+            .on('⌘+Z', function() { history.undo(); })
+            .on('⌃+Z', function() { history.undo(); })
+            .on('⌘+⇧+Z', function() { history.redo(); })
+            .on('⌃+⇧+Z', function() { history.redo(); })
+            .on('⌫', function(e) { e.preventDefault(); });
+
+        d3.select(document)
+            .call(keybinding);
 
         var hash = iD.Hash().controller(controller).map(map);
 

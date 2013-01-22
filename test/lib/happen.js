@@ -19,10 +19,10 @@
                 evt = new Event(o.type);
                 evt.keyCode = o.keyCode || 0;
                 evt.charCode = o.charCode || 0;
-                evt.shift = o.shift || false;
-                evt.meta = o.meta || false;
-                evt.ctrl = o.ctrl || false;
-                evt.alt = o.alt || false;
+                evt.shiftKey = o.shiftKey || false;
+                evt.metaKey = o.metaKey || false;
+                evt.ctrlKey = o.ctrlKey || false;
+                evt.altKey = o.altKey || false;
             } else {
                 evt = document.createEvent('KeyboardEvent');
                 // https://developer.mozilla.org/en/DOM/event.initKeyEvent
@@ -33,10 +33,10 @@
                     true,   //  in boolean canBubbleArg,
                     true,   //  in boolean cancelableArg,
                     null,   //  in nsIDOMAbstractView viewArg,  Specifies UIEvent.view. This value may be null.
-                    o.ctrl || false,  //  in boolean ctrlKeyArg,
-                    o.alt || false,  //  in boolean altKeyArg,
-                    o.shift || false,  //  in boolean shiftKeyArg,
-                    o.meta || false,  //  in boolean metaKeyArg,
+                    o.ctrlKey || false,  //  in boolean ctrlKeyArg,
+                    o.altKey || false,  //  in boolean altKeyArg,
+                    o.shiftKey || false,  //  in boolean shiftKeyArg,
+                    o.metaKey || false,  //  in boolean metaKeyArg,
                     o.keyCode || 0,     //  in unsigned long keyCodeArg,
                     o.charCode || 0       //  in unsigned long charCodeArg);
                 );
@@ -53,10 +53,10 @@
                 o.screenY || 0, // screenY
                 o.clientX || 0, // clientX
                 o.clientY || 0, // clientY
-                o.ctrl || 0, // ctrl
-                o.alt || false, // alt
-                o.shift || false, // shift
-                o.meta || false, // meta
+                o.ctrlKey || 0, // ctrl
+                o.altKey || false, // alt
+                o.shiftKey || false, // shift
+                o.metaKey || false, // meta
                 o.button || false, // mouse button
                 null // relatedTarget
             );
@@ -65,7 +65,8 @@
         x.dispatchEvent(evt);
     };
 
-    var shortcuts = ['click', 'mousedown', 'mouseup', 'mousemove', 'keydown', 'keyup', 'keypress'],
+    var shortcuts = ['click', 'mousedown', 'mouseup', 'mousemove',
+        'mouseover', 'mouseout', 'keydown', 'keyup', 'keypress'],
         s, i = 0;
 
     while (s = shortcuts[i++]) {

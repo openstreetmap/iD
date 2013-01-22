@@ -2,8 +2,6 @@ iD.Map = function() {
     var connection, history,
         dimensions = [],
         dispatch = d3.dispatch('move', 'drawn'),
-        translateStart,
-        keybinding = d3.keybinding(),
         projection = d3.geo.mercator().scale(1024),
         roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
@@ -13,6 +11,7 @@ iD.Map = function() {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         fastEnabled = true,
+        transformStart,
         minzoom = 0,
         background = iD.Background()
             .projection(projection),
@@ -32,19 +31,15 @@ iD.Map = function() {
 
         var supersurface = selection.append('div')
             .style('position', 'absolute')
-            .on('mousedown.drag', function() {
-                translateStart = projection.translate();
-            })
             .call(zoom);
 
         surface = supersurface.append('svg')
-            .on('mouseup.reset-transform', resetTransform)
-            .on('touchend.reset-transform', resetTransform)
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
                 }
             }, true)
+            .attr('id', 'surface')
             .call(iD.svg.Surface());
 
 
@@ -53,8 +48,6 @@ iD.Map = function() {
 
         supersurface
             .call(tail);
-
-        d3.select(document).call(keybinding);
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
@@ -136,32 +129,35 @@ iD.Map = function() {
                 .text('Cannot zoom out further in current mode.');
             return map.zoom(16);
         }
-        var fast = (d3.event.scale === projection.scale() && fastEnabled);
+
         projection
             .translate(d3.event.translate)
             .scale(d3.event.scale);
-        if (fast && translateStart) {
-            var a = d3.event.translate,
-                b = translateStart,
-                translate = 'translate(' + ~~(a[0] - b[0]) + 'px,' +
-                    ~~(a[1] - b[1]) + 'px)';
-            tilegroup.style(transformProp, translate);
-            surface.style(transformProp, translate);
-        } else {
-            redraw();
-            translateStart = null;
-        }
+
+        var ascale = d3.event.scale;
+        var bscale = transformStart[0];
+        var scale = (ascale / bscale);
+
+        var tX = Math.round((d3.event.translate[0] / scale) - (transformStart[1][0]));
+        var tY = Math.round((d3.event.translate[1] / scale) - (transformStart[1][1]));
+
+        var transform =
+            'scale(' + scale + ')' +
+            'translate(' + tX + 'px,' + tY + 'px) ';
+
+        tilegroup.style(transformProp, transform);
+        surface.style(transformProp, transform);
+        queueRedraw();
     }
 
     function resetTransform() {
         if (!surface.style(transformProp)) return;
-        translateStart = null;
         surface.style(transformProp, '');
         tilegroup.style(transformProp, '');
-        redraw();
     }
 
-    var redraw = _.throttle(function(difference) {
+    function redraw(difference) {
+        resetTransform();
         dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
@@ -171,8 +167,13 @@ iD.Map = function() {
         } else {
             editOff();
         }
+        transformStart = [
+            projection.scale(),
+            projection.translate().slice()];
         return map;
-    }, 10);
+    }
+
+    var queueRedraw = _.debounce(redraw, 200);
 
     function pointLocation(p) {
         var translate = projection.translate(),
@@ -338,12 +339,6 @@ iD.Map = function() {
         if (!arguments.length) return history;
         history = _;
         history.on('change.map', redraw);
-        return map;
-    };
-
-    map.keybinding = function (_) {
-        if (!arguments.length) return keybinding;
-        keybinding = _;
         return map;
     };
 
