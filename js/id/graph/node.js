@@ -17,5 +17,9 @@ _.extend(iD.Node.prototype, {
 
     geometry: function() {
         return this._poi ? 'point' : 'vertex';
+    },
+
+    move: function(loc) {
+        return this.update({loc: loc});
     }
 });

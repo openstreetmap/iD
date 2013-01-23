@@ -12,9 +12,8 @@ iD.modes.DrawArea = function(wayId) {
             history = mode.history,
             controller = mode.controller,
             way = history.graph().entity(wayId),
-            headId = (way.nodes.length == 1) ?
-                way.nodes[0] :
-                way.nodes[way.nodes.length - 2],
+            index = way.nodes.length - 1,
+            headId = way.nodes[index - 1],
             tailId = way.first(),
             node = iD.Node({loc: map.mouseCoordinates()});
 
@@ -24,11 +23,19 @@ iD.modes.DrawArea = function(wayId) {
 
         history.perform(
             iD.actions.AddNode(node),
-            iD.actions.AddWayNode(way.id, node.id, -1));
+            iD.actions.AddWayNode(way.id, node.id, index));
 
         surface.selectAll('.way, .node')
             .filter(function (d) { return d.id === wayId || d.id === node.id; })
             .classed('active', true);
+
+        function ReplaceTemporaryNode(replacementId) {
+            return function(graph) {
+                graph = graph.replace(graph.entity(wayId).updateNode(replacementId, index));
+                graph = graph.remove(node);
+                return graph;
+            }
+        }
 
         function mousemove() {
             history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
@@ -55,8 +62,7 @@ iD.modes.DrawArea = function(wayId) {
             } else if (datum.type === 'node' && datum.id !== node.id) {
                 // connect the way to an existing node
                 history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(way.id, datum.id, -1),
+                    ReplaceTemporaryNode(datum.id),
                     way.nodes.length > 2 ? 'added to an area' : '');
 
                 controller.enter(iD.modes.DrawArea(wayId));
@@ -77,13 +83,11 @@ iD.modes.DrawArea = function(wayId) {
                 iD.actions.DeleteNode(node.id),
                 iD.actions.DeleteNode(headId));
 
-            if (history.graph().fetch(wayId).nodes.length === 2) {
-                history.replace(
-                    iD.actions.DeleteNode(way.nodes[0]),
-                    iD.actions.DeleteWay(wayId));
-                controller.enter(iD.modes.Browse());
-            } else {
+            if (history.graph().entity(wayId)) {
                 controller.enter(iD.modes.DrawArea(wayId));
+            } else {
+                // The way was deleted because it had too few nodes.
+                controller.enter(iD.modes.Browse());
             }
         }
 
@@ -95,8 +99,15 @@ iD.modes.DrawArea = function(wayId) {
 
         function ret() {
             d3.event.preventDefault();
+
             history.replace(iD.actions.DeleteNode(node.id));
-            controller.enter(iD.modes.Select(way, true));
+
+            if (history.graph().entity(wayId)) {
+                controller.enter(iD.modes.Select(way, true));
+            } else {
+                // The way was deleted because it had too few nodes.
+                controller.enter(iD.modes.Browse());
+            }
         }
 
         surface

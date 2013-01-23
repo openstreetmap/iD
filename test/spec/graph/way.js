@@ -117,6 +117,31 @@ describe('iD.Way', function() {
         });
     });
 
+    describe("#isDegenerate", function() {
+       it("returns true for a linear way with zero or one nodes", function () {
+           expect(iD.Way({nodes: []}).isDegenerate()).to.equal(true);
+           expect(iD.Way({nodes: ['a']}).isDegenerate()).to.equal(true);
+       });
+
+        it("returns true for a circular way with only one unique node", function () {
+            expect(iD.Way({nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
+        });
+
+        it("returns false for a linear way with two or more nodes", function () {
+            expect(iD.Way({nodes: ['a', 'b']}).isDegenerate()).to.equal(false);
+        });
+
+        it("returns true for an area with zero, one, or two unique nodes", function () {
+            expect(iD.Way({tags: {area: 'yes'}, nodes: []}).isDegenerate()).to.equal(true);
+            expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
+            expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'b', 'a']}).isDegenerate()).to.equal(true);
+        });
+
+        it("returns false for an area with three or more unique nodes", function () {
+            expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}).isDegenerate()).to.equal(false);
+        });
+    });
+
     describe("#geometry", function() {
         it("returns 'line' when the way is not an area", function () {
             expect(iD.Way().geometry()).to.equal('line');
@@ -124,6 +149,54 @@ describe('iD.Way', function() {
 
         it("returns 'area' when the way is an area", function () {
             expect(iD.Way({tags: { area: 'yes' }}).geometry()).to.equal('area');
+        });
+    });
+
+    describe("#addNode", function () {
+        it("adds a node to the end of a way", function () {
+            var w = iD.Way();
+            expect(w.addNode('a').nodes).to.eql(['a']);
+        });
+
+        it("adds a node to a way at index 0", function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c', 0).nodes).to.eql(['c', 'a', 'b']);
+        });
+
+        it("adds a node to a way at a positive index", function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c', 1).nodes).to.eql(['a', 'c', 'b']);
+        });
+
+        it("adds a node to a way at a negative index", function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c', -1).nodes).to.eql(['a', 'c', 'b']);
+        });
+    });
+
+    describe("#updateNode", function () {
+        it("updates the node id at the specified index", function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c']});
+            expect(w.updateNode('d', 1).nodes).to.eql(['a', 'd', 'c']);
+        });
+    });
+
+    describe("#removeNode", function () {
+        it("removes the node", function () {
+            var a = iD.Node({id: 'a'}),
+                w = iD.Way({nodes: ['a']});
+
+            expect(w.removeNode('a').nodes).to.eql([]);
+        });
+
+        it("preserves circularity", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                d = iD.Node({id: 'd'}),
+                w = iD.Way({nodes: ['a', 'b', 'c', 'd', 'a']});
+
+            expect(w.removeNode('a').nodes).to.eql(['b', 'c', 'd', 'b']);
         });
     });
 });

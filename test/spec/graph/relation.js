@@ -104,6 +104,42 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#addMember", function () {
+        it("adds a member at the end of the relation", function () {
+            var r = iD.Relation();
+            expect(r.addMember({id: '1'}).members).to.eql([{id: '1'}]);
+        });
+
+        it("adds a member at index 0", function () {
+            var r = iD.Relation({members: [{id: '1'}]});
+            expect(r.addMember({id: '2'}, 0).members).to.eql([{id: '2'}, {id: '1'}]);
+        });
+
+        it("adds a member at a positive index", function () {
+            var r = iD.Relation({members: [{id: '1'}, {id: '3'}]});
+            expect(r.addMember({id: '2'}, 1).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+        });
+
+        it("adds a member at a negative index", function () {
+            var r = iD.Relation({members: [{id: '1'}, {id: '3'}]});
+            expect(r.addMember({id: '2'}, -1).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+        });
+    });
+
+    describe("#updateMember", function () {
+        it("updates the properties of the relation member at the specified index", function () {
+            var r = iD.Relation({members: [{role: 'forward'}]});
+            expect(r.updateMember({role: 'backward'}, 0).members).to.eql([{role: 'backward'}]);
+        });
+    });
+
+    describe("#removeMember", function () {
+        it("removes a member", function () {
+            var r = iD.Relation({members: [{id: 'a'}]});
+            expect(r.removeMember('a').members).to.eql([]);
+        });
+    });
+
     describe("#multipolygon", function () {
         specify("single polygon consisting of a single way", function () {
             var a = iD.Node(),
