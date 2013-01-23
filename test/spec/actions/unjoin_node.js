@@ -1,9 +1,9 @@
 describe("iD.actions.UnjoinNode", function () {
-    describe("#permitted", function () {
+    describe("#enabled", function () {
         it("returns false for a node shared by less than two ways", function () {
             var graph = iD.Graph({'a': iD.Node()});
 
-            expect(iD.actions.UnjoinNode('a').permitted(graph)).to.equal(false);
+            expect(iD.actions.UnjoinNode('a').enabled(graph)).to.equal(false);
         });
 
         it("returns true for a node shared by two or more ways", function () {
@@ -19,7 +19,7 @@ describe("iD.actions.UnjoinNode", function () {
                     '|': iD.Way({id: '|', nodes: ['d', 'b']})
                 });
 
-            expect(iD.actions.UnjoinNode('b').permitted(graph)).to.equal(true);
+            expect(iD.actions.UnjoinNode('b').enabled(graph)).to.equal(true);
         });
     });
 
