@@ -13,6 +13,7 @@ iD.ui.geocoder = function() {
                 if (!resp.results.length) {
                     return iD.ui.flash()
                         .select('.content')
+                        .append('h3')
                         .text('No location found for "' + resp.query[0] + '"');
                 }
                 var bounds = resp.results[0][0].bounds;

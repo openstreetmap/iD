@@ -178,6 +178,7 @@ iD.ui.inspector = function() {
                         } else {
                             iD.ui.flash()
                                 .select('.content')
+                                .append('h3')
                                 .text('This is no documentation available for this tag combination');
                         }
                     });
@@ -195,6 +196,7 @@ iD.ui.inspector = function() {
                         } else {
                             iD.ui.flash()
                                 .select('.content')
+                                .append('h3')
                                 .text('This is no documentation available for this key');
                         }
                     });
