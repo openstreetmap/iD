@@ -130,7 +130,6 @@ iD.Connection = function() {
         if (!dom || !dom.childNodes) return new Error('Bad request');
         var root = dom.childNodes[0];
         var entities = {};
-        refNodes = {};
         var rparentsOf = {},
             wparentsOf = {};
 
