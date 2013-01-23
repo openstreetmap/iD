@@ -50,6 +50,7 @@ iD.Entity.prototype = {
             Object.freeze(this);
             Object.freeze(this.tags);
 
+            if (this.loc) Object.freeze(this.loc);
             if (this.nodes) Object.freeze(this.nodes);
             if (this.members) Object.freeze(this.members);
         }
