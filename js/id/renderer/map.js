@@ -273,6 +273,7 @@ iD.Map = function() {
             map.center(iD.geo.interp(from, loc, (t += 1) / 10));
             return t == 10;
         }, 20);
+        return map;
     };
 
     map.extent = function(_) {

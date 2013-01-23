@@ -42,6 +42,12 @@ describe('iD.Map', function() {
         });
     });
 
+    describe('#minzoom', function() {
+        it('is zero by default', function() {
+            expect(map.minzoom()).to.equal(0);
+        });
+    });
+
     describe('#center', function() {
         it('gets and sets center', function() {
             expect(map.center([0, 0])).to.equal(map);
@@ -49,6 +55,18 @@ describe('iD.Map', function() {
             expect(map.center([10, 15])).to.equal(map);
             expect(map.center()[0]).to.be.closeTo(10, 0.5);
             expect(map.center()[1]).to.be.closeTo(15, 0.5);
+        });
+    });
+
+    describe('#centerEase', function() {
+        it('sets center', function(done) {
+            expect(map.center([10, 10])).to.equal(map);
+            expect(map.centerEase([20, 20])).to.equal(map);
+            window.setTimeout(function() {
+                expect(map.center()[0]).to.be.closeTo(20, 0.5);
+                expect(map.center()[1]).to.be.closeTo(20, 0.5);
+                done();
+            }, 500);
         });
     });
 
