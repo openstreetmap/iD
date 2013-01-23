@@ -3,7 +3,6 @@ iD.Connection = function() {
     var event = d3.dispatch('auth', 'load'),
         url = 'http://www.openstreetmap.org',
         connection = {},
-        refNodes = {},
         user = {},
         keys,
         inflight = {},
@@ -34,7 +33,6 @@ iD.Connection = function() {
         var nelems = obj.getElementsByTagName('nd'), nodes = new Array(nelems.length);
         for (var i = 0, l = nelems.length; i < l; i++) {
             nodes[i] = 'n' + nelems[i].attributes.ref.nodeValue;
-            refNodes['n' + nelems[i].attributes.ref.nodeValue] = true;
         }
         return nodes;
     }
@@ -63,23 +61,69 @@ iD.Connection = function() {
     }
 
     function objectData(obj) {
-        var o = {
-            type: obj.nodeName,
-            members: getMembers(obj),
-            nodes: getNodes(obj),
-            tags: getTags(obj)
-        };
+        switch(obj.type) {
+            case 'node': return nodeData(obj);
+            case 'way': return wayData(obj);
+            case 'relation': return relationData(obj);
+        }
+    }
+
+    function nodeData(obj) {
+        var o = { type: 'node', tags: getTags(obj) };
         for (var i = 0, l = obj.attributes.length; i < l; i++) {
             o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
         }
         if (o.lon && o.lat) {
             o.loc = [parseFloat(o.lon), parseFloat(o.lat)];
-            delete o.lon;
-            delete o.lat;
+            delete o.lon; delete o.lat;
         }
-        o.id = iD.Entity.id.fromOSM(o.type, o.id);
-        if (o.type === 'node')  o._poi = !refNodes[o.id];
-        return new iD.Entity[o.type](o);
+        o.id = iD.Entity.id.fromOSM('node', o.id);
+        return new iD.Node(o);
+    }
+
+    function wayData(obj) {
+        var o = { type: 'way', nodes: getNodes(obj),
+            tags: getTags(obj)
+        };
+        for (var i = 0, l = obj.attributes.length; i < l; i++) {
+            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
+        }
+        o.id = iD.Entity.id.fromOSM('way', o.id);
+        return new iD.Way(o);
+    }
+
+    function relationData(obj) {
+        var o = {
+            type: 'relation', members: getMembers(obj),
+            tags: getTags(obj)
+        };
+        for (var i = 0, l = obj.attributes.length; i < l; i++) {
+            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
+        }
+        o.id = iD.Entity.id.fromOSM('relation', o.id);
+        return new iD.Relation(o);
+    }
+
+    function addWay(o, wparentsOf) {
+        for (var i = 0; i < o.nodes.length; i++) {
+            if (o.nodes[i]) {
+                if (wparentsOf[o.nodes[i]] === undefined) {
+                    wparentsOf[o.nodes[i]] = [];
+                }
+                wparentsOf[o.nodes[i]].push(o.id);
+            }
+        }
+    }
+
+    function addRelation(o, rparentsOf) {
+        for (var i = 0; i < o.members.length; i++) {
+            if (o.members[i].id) {
+                if (rparentsOf[o.members[i].id] === undefined) {
+                    rparentsOf[o.members[i].id] = [];
+                }
+                rparentsOf[o.members[i].id].push(o.id);
+            }
+        }
     }
 
     function parse(dom) {
@@ -90,42 +134,32 @@ iD.Connection = function() {
         var rparentsOf = {},
             wparentsOf = {};
 
-        function addEntity(obj) {
-            var o = objectData(obj);
-            entities[o.id] = o;
-
-            var i;
-            if (o.type === 'relation') {
-                for (i = 0; i < o.members.length; i++) {
-                    if (o.members[i].id) {
-                        if (rparentsOf[o.members[i].id] === undefined) {
-                            rparentsOf[o.members[i].id] = [];
-                        }
-                        rparentsOf[o.members[i].id].push(o.id);
-                    }
-                }
-            }
-            if (o.type === 'way') {
-                for (i = 0; i < o.nodes.length; i++) {
-                    if (o.nodes[i]) {
-                        if (wparentsOf[o.nodes[i]] === undefined) {
-                            wparentsOf[o.nodes[i]] = [];
-                        }
-                        wparentsOf[o.nodes[i]].push(o.id);
-                    }
-                }
+        var o;
+        for (i = 0, l = root.childNodes.length; i < l; i++) {
+            switch(root.childNodes[i].nodeName) {
+                case 'node':
+                    o = nodeData(root.childNodes[i]);
+                    entities[o.id] = o;
+                    break;
+                case 'way':
+                    o = wayData(root.childNodes[i]);
+                    addWay(o, wparentsOf);
+                    entities[o.id] = o;
+                    break;
+                case 'relation':
+                    o = relationData(root.childNodes[i]);
+                    addRelation(o, rparentsOf);
+                    entities[o.id] = o;
+                    break;
             }
         }
-
-        _.forEach(root.getElementsByTagName('way'), addEntity);
-        _.forEach(root.getElementsByTagName('node'), addEntity);
-        _.forEach(root.getElementsByTagName('relation'), addEntity);
 
         var g = iD.Graph(entities);
 
         for (var i in wparentsOf) {
             if (entities[i]) g.transient(entities[i],
                 'parentWays', d3.functor(wparentsOf[i]));
+            if (entities[i]) entities[i].update({ _poi: true });
         }
 
         for (i in rparentsOf) {
