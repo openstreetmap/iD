@@ -48,6 +48,23 @@ _.extend(iD.Relation.prototype, {
         }
     },
 
+    addMember: function(member, index) {
+        var members = this.members.slice();
+        members.splice(index === undefined ? members.length : index, 0, member);
+        return this.update({members: members});
+    },
+
+    updateMember: function(member, index) {
+        var members = this.members.slice();
+        members.splice(index, 1, _.extend({}, members[index], member));
+        return this.update({members: members});
+    },
+
+    removeMember: function(id) {
+        var members = _.reject(this.members, function(m) { return m.id === id; });
+        return this.update({members: members});
+    },
+
     isRestriction: function() {
         return !!(this.tags.type && this.tags.type.match(/^restriction:?/));
     },

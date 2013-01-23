@@ -20,13 +20,10 @@ iD.actions.UnjoinNode = function(nodeId, newNodeId) {
                 return;
 
             var index = parent.nodes.indexOf(nodeId),
-                newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags}),
-                nodes = parent.nodes.slice();
-
-            nodes.splice(index, 1, newNode.id);
+                newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
 
             graph = graph.replace(newNode);
-            graph = graph.replace(parent.update({nodes: nodes}));
+            graph = graph.replace(parent.updateNode(newNode.id, index));
         });
 
         return graph;

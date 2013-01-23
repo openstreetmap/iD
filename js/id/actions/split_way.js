@@ -37,11 +37,8 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
             if (relation.isRestriction()) {
                 var via = relation.memberByRole('via');
                 if (via && newWay.contains(via.id)) {
-                    graph = iD.actions.UpdateRelationMember(
-                        relation.id,
-                        {id: newWay.id},
-                        relation.memberById(way.id).index
-                    )(graph);
+                    relation = relation.updateMember({id: newWay.id}, relation.memberById(way.id).index);
+                    graph = graph.replace(relation);
                 }
             } else {
                 var role = relation.memberById(way.id).role,
@@ -55,11 +52,8 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
                     }
                 }
 
-                graph = iD.actions.AddRelationMember(
-                    relation.id,
-                    {id: newWay.id, type: 'way', role: role},
-                    i <= j ? i + 1 : i
-                )(graph);
+                relation = relation.addMember({id: newWay.id, type: 'way', role: role}, i <= j ? i + 1 : i);
+                graph = graph.replace(relation);
             }
         });
 

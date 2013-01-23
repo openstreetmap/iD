@@ -60,5 +60,28 @@ _.extend(iD.Way.prototype, {
 
     geometry: function() {
         return this.isArea() ? 'area' : 'line';
+    },
+
+    addNode: function(id, index) {
+        var nodes = this.nodes.slice();
+        nodes.splice(index === undefined ? nodes.length : index, 0, id);
+        return this.update({nodes: nodes});
+    },
+
+    updateNode: function(id, index) {
+        var nodes = this.nodes.slice();
+        nodes.splice(index, 1, id);
+        return this.update({nodes: nodes});
+    },
+
+    removeNode: function(id) {
+        var nodes = _.without(this.nodes, id);
+
+        // Preserve circularity
+        if (this.nodes.length > 1 && this.first() === id && this.last() === id) {
+            nodes.push(nodes[0]);
+        }
+
+        return this.update({nodes: nodes});
     }
 });

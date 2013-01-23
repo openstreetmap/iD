@@ -5,7 +5,7 @@ iD.actions.DeleteWay = function(wayId) {
 
         graph.parentRelations(way)
             .forEach(function(parent) {
-                graph = iD.actions.RemoveRelationMember(parent.id, wayId)(graph);
+                graph = graph.replace(parent.removeMember(wayId));
             });
 
         way.nodes.forEach(function (nodeId) {
@@ -15,7 +15,7 @@ iD.actions.DeleteWay = function(wayId) {
             // can be deleted on earlier iterations of this loop.
             if (!node) return;
 
-            graph = iD.actions.RemoveWayNode(wayId, nodeId)(graph);
+            graph = graph.replace(way.removeNode(nodeId));
 
             if (!graph.parentWays(node).length &&
                 !graph.parentRelations(node).length) {

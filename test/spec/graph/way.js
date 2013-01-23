@@ -126,4 +126,52 @@ describe('iD.Way', function() {
             expect(iD.Way({tags: { area: 'yes' }}).geometry()).to.equal('area');
         });
     });
+
+    describe("#addNode", function () {
+        it("adds a node to the end of a way", function () {
+            var w = iD.Way();
+            expect(w.addNode('a').nodes).to.eql(['a']);
+        });
+
+        it("adds a node to a way at index 0", function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c', 0).nodes).to.eql(['c', 'a', 'b']);
+        });
+
+        it("adds a node to a way at a positive index", function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c', 1).nodes).to.eql(['a', 'c', 'b']);
+        });
+
+        it("adds a node to a way at a negative index", function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c', -1).nodes).to.eql(['a', 'c', 'b']);
+        });
+    });
+
+    describe("#updateNode", function () {
+        it("updates the node id at the specified index", function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c']});
+            expect(w.updateNode('d', 1).nodes).to.eql(['a', 'd', 'c']);
+        });
+    });
+
+    describe("#removeNode", function () {
+        it("removes the node", function () {
+            var a = iD.Node({id: 'a'}),
+                w = iD.Way({nodes: ['a']});
+
+            expect(w.removeNode('a').nodes).to.eql([]);
+        });
+
+        it("preserves circularity", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                d = iD.Node({id: 'd'}),
+                w = iD.Way({nodes: ['a', 'b', 'c', 'd', 'a']});
+
+            expect(w.removeNode('a').nodes).to.eql(['b', 'c', 'd', 'b']);
+        });
+    });
 });
