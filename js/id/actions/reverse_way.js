@@ -53,7 +53,7 @@ iD.actions.ReverseWay = function(wayId) {
         }
     }
 
-    return function(graph) {
+    var action = function(graph) {
         var way = graph.entity(wayId),
             nodes = way.nodes.slice().reverse(),
             tags = {}, key, role;
@@ -73,4 +73,10 @@ iD.actions.ReverseWay = function(wayId) {
 
         return graph.replace(way.update({nodes: nodes, tags: tags}));
     };
+
+    action.enabled = function(graph) {
+        return true;
+    };
+
+    return action;
 };

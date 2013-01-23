@@ -10,7 +10,7 @@
 //
 iD.actions.UnjoinNode = function(nodeId, newNodeId) {
     var action = function(graph) {
-        if (!action.permitted(graph))
+        if (!action.enabled(graph))
             return graph;
 
         var node = graph.entity(nodeId);
@@ -29,7 +29,7 @@ iD.actions.UnjoinNode = function(nodeId, newNodeId) {
         return graph;
     };
 
-    action.permitted = function(graph) {
+    action.enabled = function(graph) {
         return graph.parentWays(graph.entity(nodeId)).length >= 2;
     };
 

@@ -19,7 +19,7 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
     }
 
     var action = function(graph) {
-        if (!action.permitted(graph))
+        if (!action.enabled(graph))
             return graph;
 
         var way = candidateWays(graph)[0],
@@ -60,7 +60,7 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
         return graph;
     };
 
-    action.permitted = function(graph) {
+    action.enabled = function(graph) {
         return candidateWays(graph).length === 1;
     };
 
