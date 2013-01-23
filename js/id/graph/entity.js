@@ -50,6 +50,7 @@ iD.Entity.prototype = {
             Object.freeze(this);
             Object.freeze(this.tags);
 
+            if (this.loc) Object.freeze(this.loc);
             if (this.nodes) Object.freeze(this.nodes);
             if (this.members) Object.freeze(this.members);
         }
@@ -108,17 +109,4 @@ iD.Entity.prototype = {
 
         return n.length === 0 ? 'unknown' : n.join('; ');
     }
-};
-
-iD.Entity.extend = function(properties) {
-    var Subclass = function() {
-        if (this instanceof Subclass) return;
-        return (new Subclass()).initialize(arguments);
-    };
-
-    Subclass.prototype = new iD.Entity();
-    _.extend(Subclass.prototype, properties);
-    iD.Entity[properties.type] = Subclass;
-
-    return Subclass;
 };

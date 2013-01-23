@@ -14,60 +14,61 @@ iD.ui.save = function() {
                 .placement('bottom'))
             .on('click', function() {
 
-                function commit(e) {
-                    d3.select('.shaded').remove();
-                    var l = iD.ui.loading('Uploading changes to OpenStreetMap.');
-                    connection.putChangeset(history.changes(), e.comment, history.imagery_used(), function(err, changeset_id) {
-                        l.remove();
-                        history.reset();
-                        map.flush().redraw();
-                        if (err) {
-                            var desc = iD.ui.confirm()
-                                .select('.description');
-                            desc.append('h2')
-                                .text('An error occurred while trying to save');
-                            desc.append('p').text(err.responseText);
-                        } else {
-                            var modal = iD.ui.modal();
-                            modal.select('.content')
-                                .classed('success-modal', true)
-                                .datum({
-                                    id: changeset_id,
-                                    comment: e.comment
-                                })
-                                .call(iD.ui.success()
-                                    .on('cancel', function() {
-                                        modal.remove();
-                                    }));
-                        }
-                    });
-                }
-
-                if (history.hasChanges()) {
-                    connection.authenticate(function(err) {
+            function commit(e) {
+                d3.select('.shaded').remove();
+                var l = iD.ui.loading('Uploading changes to OpenStreetMap.', true);
+                connection.putChangeset(history.changes(), e.comment, history.imagery_used(), function(err, changeset_id) {
+                    l.remove();
+                    history.reset();
+                    map.flush().redraw();
+                    if (err) {
+                        var desc = iD.ui.confirm()
+                            .select('.description');
+                        desc.append('h2')
+                            .text('An error occurred while trying to save');
+                        desc.append('p').text(err.responseText);
+                    } else {
                         var modal = iD.ui.modal();
-                        var changes = history.changes();
-                        changes.connection = connection;
                         modal.select('.content')
-                            .classed('commit-modal', true)
-                            .datum(changes)
-                            .call(iD.ui.commit()
+                            .classed('success-modal', true)
+                            .datum({
+                                id: changeset_id,
+                                comment: e.comment
+                            })
+                            .call(iD.ui.success()
                                 .on('cancel', function() {
                                     modal.remove();
-                                })
-                                .on('fix', function(d) {
-                                    map.extent(d.entity.extent(map.history().graph()));
-                                    if (map.zoom() > 19) map.zoom(19);
-                                    controller.enter(iD.modes.Select(d.entity));
-                                    modal.remove();
-                                })
-                                .on('save', commit));
-                    });
-                } else {
-                    iD.ui.confirm().select('.description')
-                        .append('h3').text('You don\'t have any changes to save.');
-                }
-            });
+                                }));
+                    }
+                });
+            }
+
+            if (history.hasChanges()) {
+                connection.authenticate(function(err) {
+                    var modal = iD.ui.modal();
+                    var changes = history.changes();
+                    changes.connection = connection;
+                    modal.select('.content')
+                        .classed('commit-modal', true)
+                        .datum(changes)
+                        .call(iD.ui.commit()
+                            .on('cancel', function() {
+                                modal.remove();
+                            })
+                            .on('fix', function(d) {
+                                map.extent(d.entity.extent(map.history().graph()));
+                                if (map.zoom() > 19) map.zoom(19);
+                                controller.enter(iD.modes.Select(d.entity));
+                                modal.remove();
+                            })
+                            .on('save', commit));
+                });
+            } else {
+                iD.ui.confirm().select('.description')
+                    .append('h3').text('You don\'t have any changes to save.');
+            }
+
+        });
 
         selection.append('span')
             .attr('class', 'count');

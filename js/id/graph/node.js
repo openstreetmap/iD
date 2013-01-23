@@ -1,4 +1,14 @@
-iD.Node = iD.Entity.extend({
+iD.Node = iD.Entity.node = function iD_Node() {
+    if (!(this instanceof iD_Node)) {
+        return (new iD_Node()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
+};
+
+iD.Node.prototype = Object.create(iD.Entity.prototype);
+
+_.extend(iD.Node.prototype, {
     type: "node",
 
     extent: function() {
@@ -7,5 +17,9 @@ iD.Node = iD.Entity.extend({
 
     geometry: function() {
         return this._poi ? 'point' : 'vertex';
+    },
+
+    move: function(loc) {
+        return this.update({loc: loc});
     }
 });

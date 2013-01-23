@@ -1,4 +1,4 @@
-describe('Connection', function() {
+describe('iD.Connection', function() {
   var c;
 
   beforeEach(function() {

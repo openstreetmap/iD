@@ -1,4 +1,4 @@
-describe('GeoJSON', function() {
+describe('iD.format.GeoJSON', function() {
 
   describe('#mapping', function() {
       it('should be able to map a node to geojson', function() {

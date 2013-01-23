@@ -104,6 +104,42 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#addMember", function () {
+        it("adds a member at the end of the relation", function () {
+            var r = iD.Relation();
+            expect(r.addMember({id: '1'}).members).to.eql([{id: '1'}]);
+        });
+
+        it("adds a member at index 0", function () {
+            var r = iD.Relation({members: [{id: '1'}]});
+            expect(r.addMember({id: '2'}, 0).members).to.eql([{id: '2'}, {id: '1'}]);
+        });
+
+        it("adds a member at a positive index", function () {
+            var r = iD.Relation({members: [{id: '1'}, {id: '3'}]});
+            expect(r.addMember({id: '2'}, 1).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+        });
+
+        it("adds a member at a negative index", function () {
+            var r = iD.Relation({members: [{id: '1'}, {id: '3'}]});
+            expect(r.addMember({id: '2'}, -1).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+        });
+    });
+
+    describe("#updateMember", function () {
+        it("updates the properties of the relation member at the specified index", function () {
+            var r = iD.Relation({members: [{role: 'forward'}]});
+            expect(r.updateMember({role: 'backward'}, 0).members).to.eql([{role: 'backward'}]);
+        });
+    });
+
+    describe("#removeMember", function () {
+        it("removes a member", function () {
+            var r = iD.Relation({members: [{id: 'a'}]});
+            expect(r.removeMember('a').members).to.eql([]);
+        });
+    });
+
     describe("#multipolygon", function () {
         specify("single polygon consisting of a single way", function () {
             var a = iD.Node(),
@@ -296,6 +332,17 @@ describe('iD.Relation', function () {
                 graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer1, outer2, inner, r]);
 
             expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d]], [[g, h, i, g]]]);
+        });
+
+        specify("invalid geometry: unmatched inner", function () {
+            var a = iD.Node(),
+                b = iD.Node(),
+                c = iD.Node(),
+                w = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                r = iD.Relation({members: [{id: w.id, role: 'inner', type: 'way'}]}),
+                g = iD.Graph([a, b, c, w, r]);
+
+            expect(r.multipolygon(g)).to.eql([[[a, b, c, a]]]);
         });
 
         specify("incomplete relation", function () {

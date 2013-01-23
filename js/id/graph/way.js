@@ -1,4 +1,14 @@
-iD.Way = iD.Entity.extend({
+iD.Way = iD.Entity.way = function iD_Way() {
+    if (!(this instanceof iD_Way)) {
+        return (new iD_Way()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
+};
+
+iD.Way.prototype = Object.create(iD.Entity.prototype);
+
+_.extend(iD.Way.prototype, {
     type: "way",
     nodes: [],
 
@@ -48,7 +58,34 @@ iD.Way = iD.Entity.extend({
                 !this.tags.barrier);
     },
 
+    isDegenerate: function() {
+        return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
+    },
+
     geometry: function() {
         return this.isArea() ? 'area' : 'line';
+    },
+
+    addNode: function(id, index) {
+        var nodes = this.nodes.slice();
+        nodes.splice(index === undefined ? nodes.length : index, 0, id);
+        return this.update({nodes: nodes});
+    },
+
+    updateNode: function(id, index) {
+        var nodes = this.nodes.slice();
+        nodes.splice(index, 1, id);
+        return this.update({nodes: nodes});
+    },
+
+    removeNode: function(id) {
+        var nodes = _.without(this.nodes, id);
+
+        // Preserve circularity
+        if (this.nodes.length > 1 && this.first() === id && this.last() === id) {
+            nodes.push(nodes[0]);
+        }
+
+        return this.update({nodes: nodes});
     }
 });

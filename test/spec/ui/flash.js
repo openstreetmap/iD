@@ -11,7 +11,7 @@ describe("iD.ui.flash", function () {
 
     it('leaves after 1000 ms', function () {
         var flash = iD.ui.flash();
-        clock.tick(1010);
+        clock.tick(1610);
         expect(flash.node().parentNode).to.be.null;
     });
 });

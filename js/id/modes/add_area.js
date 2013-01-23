@@ -6,6 +6,8 @@ iD.modes.AddArea = function() {
         description: 'Add parks, buildings, lakes, or other areas to the map.'
     };
 
+    var keybinding = d3.keybinding('add-area');
+
     mode.enter = function() {
         var map = mode.map,
             history = mode.history,
@@ -38,9 +40,12 @@ iD.modes.AddArea = function() {
             controller.enter(iD.modes.DrawArea(way.id));
         });
 
-        map.keybinding().on('⎋.addarea', function() {
+        keybinding.on('⎋', function() {
             controller.exit();
         });
+
+        d3.select(document)
+            .call(keybinding);
     };
 
     mode.exit = function() {
@@ -49,7 +54,7 @@ iD.modes.AddArea = function() {
         }, 1000);
         mode.map.tail(false);
         mode.map.surface.on('click.addarea', null);
-        mode.map.keybinding().on('⎋.addarea', null);
+        keybinding.off();
     };
 
     return mode;

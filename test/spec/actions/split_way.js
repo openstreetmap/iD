@@ -1,5 +1,5 @@
 describe("iD.actions.SplitWay", function () {
-    describe("#permitted", function () {
+    describe("#enabled", function () {
         it("returns true for a non-end node of a single way", function () {
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
@@ -8,7 +8,7 @@ describe("iD.actions.SplitWay", function () {
                     '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']})
                 });
 
-            expect(iD.actions.SplitWay('b').permitted(graph)).to.be.true;
+            expect(iD.actions.SplitWay('b').enabled(graph)).to.be.true;
         });
 
         it("returns false for the first node of a single way", function () {
@@ -18,7 +18,7 @@ describe("iD.actions.SplitWay", function () {
                     '-': iD.Way({id: '-', nodes: ['a', 'b']})
                 });
 
-            expect(iD.actions.SplitWay('a').permitted(graph)).to.be.false;
+            expect(iD.actions.SplitWay('a').enabled(graph)).to.be.false;
         });
 
         it("returns false for the last node of a single way", function () {
@@ -28,7 +28,7 @@ describe("iD.actions.SplitWay", function () {
                     '-': iD.Way({id: '-', nodes: ['a', 'b']})
                 });
 
-            expect(iD.actions.SplitWay('b').permitted(graph)).to.be.false;
+            expect(iD.actions.SplitWay('b').enabled(graph)).to.be.false;
         });
     });
 
@@ -173,6 +173,20 @@ describe("iD.actions.SplitWay", function () {
         graph = iD.actions.SplitWay('b', '=')(graph);
 
         expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
+    });
+
+    it("handles incomplete relations", function () {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                'r': iD.Relation({id: 'r', members: [{id: '~', type: 'way'}, {id: '-', type: 'way'}]})
+            });
+
+        graph = iD.actions.SplitWay('b', '=')(graph);
+
+        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
     });
 
     ['restriction', 'restriction:bus'].forEach(function (type) {

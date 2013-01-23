@@ -1,18 +1,29 @@
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteNodeAction.as
 iD.actions.DeleteNode = function(nodeId) {
-    return function(graph) {
+    var action = function(graph) {
         var node = graph.entity(nodeId);
 
         graph.parentWays(node)
             .forEach(function(parent) {
-                graph = iD.actions.RemoveWayNode(parent.id, nodeId)(graph);
+                parent = parent.removeNode(nodeId);
+                graph = graph.replace(parent);
+
+                if (parent.isDegenerate()) {
+                    graph = iD.actions.DeleteWay(parent.id)(graph);
+                }
             });
 
         graph.parentRelations(node)
             .forEach(function(parent) {
-                graph = iD.actions.RemoveRelationMember(parent.id, nodeId)(graph);
+                graph = graph.replace(parent.removeMember(nodeId));
             });
 
         return graph.remove(node);
     };
+
+    action.enabled = function(graph) {
+        return true;
+    };
+
+    return action;
 };

@@ -2,21 +2,40 @@ iD.ui.notice = function(selection) {
     var message = '',
         notice = {};
 
+    var div = selection.append('div')
+        .attr('class', 'notice')
+        .style('display', 'none');
+
+    var txt = div.append('div')
+        .attr('class', 'notice-text');
+
+    function replace(a, b) {
+        a.style('opacity', 1)
+            .transition()
+            .each('end', function() {
+                a.style('display', 'none');
+                b.style('display', 'inline-block')
+                    .style('opacity', 0)
+                    .transition()
+                    .style('opacity', 1);
+            })
+            .style('opacity', 0);
+    }
+
     notice.message = function(_) {
-        selection.attr('class', 'notice inner');
+        div.attr('class', 'notice inner');
         if (!arguments.length) return _;
         if (!message && _) {
-            selection
-                .text(_)
-                .transition()
-                .style('display', '');
+            txt.text(_);
+            replace(selection.select('.button-wrap'), div);
         } else if (_ && message !== _) {
-            selection.text(_);
+            txt.text(_);
+            selection.select('.button-wrap').style('display', 'none');
         } else if (!_) {
-            selection
-                .text('')
-                .transition()
-                .style('display', 'none');
+            txt.text('');
+            if (message) {
+                replace(div, selection.select('.button-wrap'));
+            }
         }
         message = _;
         return notice;

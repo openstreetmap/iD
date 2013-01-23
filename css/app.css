@@ -106,7 +106,6 @@ input[type=text] {
     background-color: black;
     border:1px solid rgba(255, 255, 255, .25);
     color: white;
-    border-radius: 4px;
 }
 
 textarea:focus,
@@ -181,15 +180,11 @@ ul li { list-style: none;}
 
 ul.toggle-list li a {
     font-weight: bold;
-    color: #c1c1c1;
+    color: #333;
     padding: 10px;
     border-top: 1px solid white;
     display:block;
     border-top: 1px solid rgba(0, 0, 0, .5);
-}
-
-ul.toggle-list li a.selected {
-    color: #333;
 }
 
 ul.toggle-list .icon {
@@ -945,6 +940,17 @@ div.typeahead a:first-child {
     display: block;
 }
 
+.modal-flash .content {
+    box-shadow: none;
+    border-radius: 4px;
+    background: #111;
+    color: #eee;
+}
+
+.modal-flash .close-modal {
+    display:none;
+}
+
 .changeset-list li {
     border-top:1px solid #ccc;
     padding:5px 10px;
@@ -975,18 +981,19 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 .notice {
-    position:absolute;
-    top:11px;
-    left:11px;
-    width:278px;
+    float:left;
+    width:33.333%;
+    padding-right: 10px;
+}
+
+.notice .notice-text {
+    height: 40px;
     text-align: center;
-    height:38px;
-    padding:10px 20px;
-    background:#fff;
-    color:#000;
     font-weight: normal;
-    line-height: 21px;
-    border-radius:5px;
+    border-radius: 5px;
+    line-height: 40px;
+    background: #fff;
+    color: #000;
     opacity: 0.9;
 }
 

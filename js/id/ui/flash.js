@@ -1,7 +1,7 @@
 iD.ui.flash = function() {
     var modal = iD.ui.modal();
 
-    modal.select('.modal').classed('modal-alert', true);
+    modal.select('.modal').classed('modal-flash', true);
 
     modal.select('.content')
         .classed('modal-section', true)
@@ -13,7 +13,7 @@ iD.ui.flash = function() {
     setTimeout(function() {
         modal.remove();
         return true;
-    }, 1000);
+    }, 1500);
 
     return modal;
 };

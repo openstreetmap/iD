@@ -1,7 +1,7 @@
 iD.svg = {
     RoundProjection: function (projection) {
         return function (d) {
-            return iD.util.geo.roundCoords(projection(d));
+            return iD.geo.roundCoords(projection(d));
         };
     },
 

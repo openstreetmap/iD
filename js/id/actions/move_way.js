@@ -6,7 +6,7 @@ iD.actions.MoveWay = function(wayId, delta, projection) {
             var node  = graph.entity(id),
                 start = projection(node.loc),
                 end   = projection.invert([start[0] + delta[0], start[1] + delta[1]]);
-            graph = iD.actions.MoveNode(id, end)(graph);
+            graph = graph.replace(node.move(end));
         });
 
         return graph;

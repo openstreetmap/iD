@@ -1,4 +1,4 @@
-describe('Background', function() {
+describe('iD.Background', function() {
     var c, d;
 
     beforeEach(function() {

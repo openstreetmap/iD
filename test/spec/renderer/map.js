@@ -1,4 +1,4 @@
-describe('Map', function() {
+describe('iD.Map', function() {
     var container, map;
 
     beforeEach(function() {
@@ -42,6 +42,12 @@ describe('Map', function() {
         });
     });
 
+    describe('#minzoom', function() {
+        it('is zero by default', function() {
+            expect(map.minzoom()).to.equal(0);
+        });
+    });
+
     describe('#center', function() {
         it('gets and sets center', function() {
             expect(map.center([0, 0])).to.equal(map);
@@ -49,6 +55,27 @@ describe('Map', function() {
             expect(map.center([10, 15])).to.equal(map);
             expect(map.center()[0]).to.be.closeTo(10, 0.5);
             expect(map.center()[1]).to.be.closeTo(15, 0.5);
+        });
+    });
+
+    describe('#centerEase', function() {
+        it('sets center', function(done) {
+            expect(map.center([10, 10])).to.equal(map);
+            expect(map.centerEase([20, 20])).to.equal(map);
+            window.setTimeout(function() {
+                expect(map.center()[0]).to.be.closeTo(20, 0.5);
+                expect(map.center()[1]).to.be.closeTo(20, 0.5);
+                done();
+            }, 1000);
+        });
+    });
+
+    describe('#centerZoom', function() {
+        it('gets and sets center and zoom', function() {
+            expect(map.centerZoom([20, 25], 4)).to.equal(map);
+            expect(map.center()[0]).to.be.closeTo(20, 0.5);
+            expect(map.center()[1]).to.be.closeTo(25, 0.5);
+            expect(map.zoom()).to.be.equal(4);
         });
     });
 

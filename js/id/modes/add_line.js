@@ -6,6 +6,8 @@ iD.modes.AddLine = function() {
         description: 'Lines can be highways, streets, pedestrian paths, or even canals.'
     };
 
+    var keybinding = d3.keybinding('add-line');
+
     mode.enter = function() {
         var map = mode.map,
             node,
@@ -38,7 +40,7 @@ iD.modes.AddLine = function() {
 
             } else if (datum.type === 'way') {
                 // begin a new way starting from an existing way
-                var choice = iD.util.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
+                var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
                 node = iD.Node({ loc: choice.loc });
 
                 history.perform(
@@ -60,16 +62,19 @@ iD.modes.AddLine = function() {
             controller.enter(iD.modes.DrawLine(way.id, direction));
         });
 
-        map.keybinding().on('⎋.addline', function() {
+        keybinding.on('⎋', function() {
             controller.exit();
         });
+
+        d3.select(document)
+            .call(keybinding);
     };
 
     mode.exit = function() {
         mode.map.dblclickEnable(true);
         mode.map.tail(false);
         mode.map.surface.on('click.addline', null);
-        mode.map.keybinding().on('⎋.addline', null);
+        keybinding.off();
     };
 
     return mode;

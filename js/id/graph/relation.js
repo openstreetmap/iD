@@ -1,4 +1,14 @@
-iD.Relation = iD.Entity.extend({
+iD.Relation = iD.Entity.relation = function iD_Relation() {
+    if (!(this instanceof iD_Relation)) {
+        return (new iD_Relation()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
+};
+
+iD.Relation.prototype = Object.create(iD.Entity.prototype);
+
+_.extend(iD.Relation.prototype, {
     type: "relation",
     members: [],
 
@@ -36,6 +46,23 @@ iD.Relation = iD.Entity.extend({
                 return _.extend({}, this.members[i], {index: i});
             }
         }
+    },
+
+    addMember: function(member, index) {
+        var members = this.members.slice();
+        members.splice(index === undefined ? members.length : index, 0, member);
+        return this.update({members: members});
+    },
+
+    updateMember: function(member, index) {
+        var members = this.members.slice();
+        members.splice(index, 1, _.extend({}, members[index], member));
+        return this.update({members: members});
+    },
+
+    removeMember: function(id) {
+        var members = _.reject(this.members, function(m) { return m.id === id; });
+        return this.update({members: members});
     },
 
     isRestriction: function() {
@@ -110,13 +137,13 @@ iD.Relation = iD.Entity.extend({
 
             for (o = 0; o < outers.length; o++) {
                 outer = _.pluck(outers[o], 'loc');
-                if (iD.util.geo.polygonContainsPolygon(outer, inner))
+                if (iD.geo.polygonContainsPolygon(outer, inner))
                     return o;
             }
 
             for (o = 0; o < outers.length; o++) {
                 outer = _.pluck(outers[o], 'loc');
-                if (iD.util.geo.polygonIntersectsPolygon(outer, inner))
+                if (iD.geo.polygonIntersectsPolygon(outer, inner))
                     return o;
             }
         }
@@ -130,7 +157,7 @@ iD.Relation = iD.Entity.extend({
             if (o !== undefined)
                 result[o].push(inners[i]);
             else
-                result.push(inners[i]); // Invalid geometry
+                result.push([inners[i]]); // Invalid geometry
         }
 
         return result;

@@ -19,7 +19,7 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
     }
 
     var action = function(graph) {
-        if (!action.permitted(graph))
+        if (!action.enabled(graph))
             return graph;
 
         var way = candidateWays(graph)[0],
@@ -37,11 +37,8 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
             if (relation.isRestriction()) {
                 var via = relation.memberByRole('via');
                 if (via && newWay.contains(via.id)) {
-                    graph = iD.actions.UpdateRelationMember(
-                        relation.id,
-                        {id: newWay.id},
-                        relation.memberById(way.id).index
-                    )(graph);
+                    relation = relation.updateMember({id: newWay.id}, relation.memberById(way.id).index);
+                    graph = graph.replace(relation);
                 }
             } else {
                 var role = relation.memberById(way.id).role,
@@ -50,23 +47,21 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
                     j;
 
                 for (j = 0; j < relation.members.length; j++) {
-                    if (relation.members[j].type === 'way' && graph.entity(relation.members[j].id).contains(last)) {
+                    var entity = graph.entity(relation.members[j].id);
+                    if (entity && entity.type === 'way' && entity.contains(last)) {
                         break;
                     }
                 }
 
-                graph = iD.actions.AddRelationMember(
-                    relation.id,
-                    {id: newWay.id, type: 'way', role: role},
-                    i <= j ? i + 1 : i
-                )(graph);
+                relation = relation.addMember({id: newWay.id, type: 'way', role: role}, i <= j ? i + 1 : i);
+                graph = graph.replace(relation);
             }
         });
 
         return graph;
     };
 
-    action.permitted = function(graph) {
+    action.enabled = function(graph) {
         return candidateWays(graph).length === 1;
     };
 

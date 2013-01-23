@@ -1,6 +1,6 @@
 iD.ui.inspector = function() {
-    var event = d3.dispatch('changeTags', 'changeWayDirection',
-        'update', 'remove', 'close', 'splitWay'),
+    var event = d3.dispatch('changeTags', 'reverseWay',
+        'update', 'remove', 'close', 'splitWay', 'unjoin'),
         taginfo = iD.taginfo(),
         initial = false,
         tagList;
@@ -58,8 +58,10 @@ iD.ui.inspector = function() {
 
     function drawButtons(selection) {
         var entity = selection.datum();
+
         var inspectorButtonWrap = selection.append('div')
                 .attr('class','button-wrap joined fl');
+
         var inspectorButton1 = inspectorButtonWrap.append('button')
                 .attr('class', 'apply col6 action')
                 .on('click', apply);
@@ -80,17 +82,24 @@ iD.ui.inspector = function() {
                 .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
                 .attr('target', '_blank')
                 .text('View on OSM');
+
             if (entity.type === 'way') {
                 minorButtons.append('a')
                     .attr('href', '#')
                     .text('Reverse Direction')
-                    .on('click', function() { event.changeWayDirection(entity); });
+                    .on('click', function() { event.reverseWay(entity); });
             }
+
             if (entity.geometry() === 'vertex') {
                 minorButtons.append('a')
                     .attr('href', '#')
                     .text('Split Way')
                     .on('click', function() { event.splitWay(entity); });
+
+                minorButtons.append('a')
+                    .attr('href', '#')
+                    .text('Unjoin')
+                    .on('click', function() { event.unjoin(entity); });
             }
 
     }
@@ -169,6 +178,7 @@ iD.ui.inspector = function() {
                         } else {
                             iD.ui.flash()
                                 .select('.content')
+                                .append('h3')
                                 .text('This is no documentation available for this tag combination');
                         }
                     });
@@ -186,6 +196,7 @@ iD.ui.inspector = function() {
                         } else {
                             iD.ui.flash()
                                 .select('.content')
+                                .append('h3')
                                 .text('This is no documentation available for this key');
                         }
                     });
