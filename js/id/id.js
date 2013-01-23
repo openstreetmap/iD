@@ -192,7 +192,7 @@ window.iD = function(container) {
             .on('⌃+Z', function() { history.undo(); })
             .on('⌘+⇧+Z', function() { history.redo(); })
             .on('⌃+⇧+Z', function() { history.redo(); })
-            .on('⌫', function(e) { e.preventDefault(); });
+            .on('⌫', function() { d3.event.preventDefault(); });
 
         d3.select(document)
             .call(keybinding);
