@@ -85,6 +85,11 @@ iD.modes.Select = function(entity, initial) {
                 iD.actions.SplitWay(d.id),
                 'split a way');
 
+        }).on('unjoin', function(d) {
+            mode.history.perform(
+                iD.actions.UnjoinNode(d.id),
+                'unjoined ways');
+
         }).on('remove', function() {
             remove();
 
