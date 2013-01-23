@@ -161,7 +161,7 @@ iD.Map = function() {
         dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
-        if (map.zoom() >= 16) {
+        if (map.editable()) {
             connection.loadTiles(projection);
             drawVector(difference);
         } else {
@@ -329,6 +329,10 @@ iD.Map = function() {
                 .attr('class','inspector-inner')
                 .text(_);
         }
+    };
+
+    map.editable = function() {
+        return map.zoom() >= 16;
     };
 
     map.minzoom = function(_) {

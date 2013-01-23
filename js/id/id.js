@@ -40,13 +40,13 @@ window.iD = function(container) {
             .on('click.editor', function (mode) { controller.enter(mode); });
 
         function disableTooHigh() {
-            if (map.zoom() < 16) {
+            if (map.editable()) {
+                notice.message('');
+                buttons.attr('disabled', null);
+            } else {
                 buttons.attr('disabled', 'disabled');
                 notice.message('Zoom in to edit the map');
                 controller.enter(iD.modes.Browse());
-            } else {
-                notice.message('');
-                buttons.attr('disabled', null);
             }
         }
 
@@ -209,9 +209,9 @@ window.iD = function(container) {
         });
 
         var keybinding = d3.keybinding('main')
-            .on('P', function() { controller.enter(iD.modes.AddPoint()); })
-            .on('L', function() { controller.enter(iD.modes.AddLine()); })
-            .on('A', function() { controller.enter(iD.modes.AddArea()); })
+            .on('P', function() { if (map.editable()) controller.enter(iD.modes.AddPoint()); })
+            .on('L', function() { if (map.editable()) controller.enter(iD.modes.AddLine()); })
+            .on('A', function() { if (map.editable()) controller.enter(iD.modes.AddArea()); })
             .on('⌘+Z', function() { history.undo(); })
             .on('⌃+Z', function() { history.undo(); })
             .on('⌘+⇧+Z', function() { history.redo(); })
