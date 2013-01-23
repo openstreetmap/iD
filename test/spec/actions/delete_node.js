@@ -24,4 +24,22 @@ describe("iD.actions.DeleteNode", function () {
             graph    = action(iD.Graph([node1, node2, relation]));
         expect(graph.entity(relation.id).members).to.eql([{ id: node2.id }]);
     });
+
+    it("deletes parent ways that would otherwise have less than two nodes", function () {
+        var node1  = iD.Node(),
+            node2  = iD.Node(),
+            way    = iD.Way({nodes: [node1.id, node2.id]}),
+            action = iD.actions.DeleteNode(node1.id),
+            graph  = action(iD.Graph([node1, node2, way]));
+        expect(graph.entity(way.id)).to.be.undefined;
+    });
+
+    it("deletes degenerate circular ways", function () {
+        var node1  = iD.Node(),
+            node2  = iD.Node(),
+            way    = iD.Way({nodes: [node1.id, node2.id, node1.id]}),
+            action = iD.actions.DeleteNode(node2.id),
+            graph  = action(iD.Graph([node1, node2, way]));
+        expect(graph.entity(way.id)).to.be.undefined;
+    });
 });

@@ -5,7 +5,12 @@ iD.actions.DeleteNode = function(nodeId) {
 
         graph.parentWays(node)
             .forEach(function(parent) {
-                graph = graph.replace(parent.removeNode(nodeId));
+                parent = parent.removeNode(nodeId);
+                graph = graph.replace(parent);
+
+                if (parent.isDegenerate()) {
+                    graph = iD.actions.DeleteWay(parent.id)(graph);
+                }
             });
 
         graph.parentRelations(node)

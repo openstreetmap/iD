@@ -15,13 +15,9 @@ iD.modes.Select = function(entity, initial) {
                 iD.actions.DeleteWay(entity.id),
                 'deleted a way');
         } else if (entity.type === 'node') {
-            var parents = mode.history.graph().parentWays(entity),
-                operations = [iD.actions.DeleteNode(entity.id)];
-            parents.forEach(function(parent) {
-                if (_.uniq(parent.nodes).length === 1) operations.push(iD.actions.DeleteWay(parent.id));
-            });
-            mode.history.perform.apply(mode.history,
-                operations.concat(['deleted a node']));
+            mode.history.perform(
+                iD.actions.DeleteNode(entity.id),
+                'deleted a node');
         }
 
         mode.controller.exit();

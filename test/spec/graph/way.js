@@ -117,6 +117,31 @@ describe('iD.Way', function() {
         });
     });
 
+    describe("#isDegenerate", function() {
+       it("returns true for a linear way with zero or one nodes", function () {
+           expect(iD.Way({nodes: []}).isDegenerate()).to.equal(true);
+           expect(iD.Way({nodes: ['a']}).isDegenerate()).to.equal(true);
+       });
+
+        it("returns true for a circular way with only one unique node", function () {
+            expect(iD.Way({nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
+        });
+
+        it("returns false for a linear way with two or more nodes", function () {
+            expect(iD.Way({nodes: ['a', 'b']}).isDegenerate()).to.equal(false);
+        });
+
+        it("returns true for an area with zero, one, or two unique nodes", function () {
+            expect(iD.Way({tags: {area: 'yes'}, nodes: []}).isDegenerate()).to.equal(true);
+            expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
+            expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'b', 'a']}).isDegenerate()).to.equal(true);
+        });
+
+        it("returns false for an area with three or more unique nodes", function () {
+            expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}).isDegenerate()).to.equal(false);
+        });
+    });
+
     describe("#geometry", function() {
         it("returns 'line' when the way is not an area", function () {
             expect(iD.Way().geometry()).to.equal('line');

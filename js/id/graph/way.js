@@ -58,6 +58,10 @@ _.extend(iD.Way.prototype, {
                 !this.tags.barrier);
     },
 
+    isDegenerate: function() {
+        return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
+    },
+
     geometry: function() {
         return this.isArea() ? 'area' : 'line';
     },

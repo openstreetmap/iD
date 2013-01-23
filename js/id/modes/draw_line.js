@@ -13,7 +13,7 @@ iD.modes.DrawLine = function(wayId, direction) {
             controller = mode.controller,
             way = history.graph().entity(wayId),
             node = iD.Node({loc: map.mouseCoordinates()}),
-            index = (direction === 'forward') ? undefined : 0,
+            index = (direction === 'forward') ? way.nodes.length : 0,
             headId = (direction === 'forward') ? way.last() : way.first(),
             tailId = (direction === 'forward') ? way.first() : way.last();
 
@@ -35,6 +35,14 @@ iD.modes.DrawLine = function(wayId, direction) {
             .filter(function (d) { return d.id === wayId || d.id === node.id; })
             .classed('active', true);
 
+        function ReplaceTemporaryNode(replacementId) {
+            return function(graph) {
+                graph = graph.replace(graph.entity(wayId).updateNode(replacementId, index));
+                graph = graph.remove(node);
+                return graph;
+            }
+        }
+
         function mousemove() {
             history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
         }
@@ -46,8 +54,7 @@ iD.modes.DrawLine = function(wayId, direction) {
                 // connect the way in a loop
                 if (way.nodes.length > 2) {
                     history.replace(
-                        iD.actions.DeleteNode(node.id),
-                        iD.actions.AddWayNode(wayId, tailId, index),
+                        ReplaceTemporaryNode(tailId),
                         'added to a line');
 
                     controller.enter(iD.modes.Select(way, true));
@@ -66,8 +73,7 @@ iD.modes.DrawLine = function(wayId, direction) {
             } else if (datum.type === 'node' && datum.id !== node.id) {
                 // connect the way to an existing node
                 history.replace(
-                    iD.actions.DeleteNode(node.id),
-                    iD.actions.AddWayNode(wayId, datum.id, index),
+                    ReplaceTemporaryNode(datum.id),
                     'added to a line');
 
                 controller.enter(iD.modes.DrawLine(wayId, direction));
@@ -106,11 +112,11 @@ iD.modes.DrawLine = function(wayId, direction) {
                 iD.actions.DeleteNode(node.id),
                 iD.actions.DeleteNode(headId));
 
-            if (history.graph().fetch(wayId).nodes.length === 0) {
-                history.replace(iD.actions.DeleteWay(wayId));
-                controller.enter(iD.modes.Browse());
-            } else {
+            if (history.graph().entity(wayId)) {
                 controller.enter(iD.modes.DrawLine(wayId, direction));
+            } else {
+                // The way was deleted because it had too few nodes.
+                controller.enter(iD.modes.Browse());
             }
         }
 
@@ -122,8 +128,15 @@ iD.modes.DrawLine = function(wayId, direction) {
 
         function ret() {
             d3.event.preventDefault();
+
             history.replace(iD.actions.DeleteNode(node.id));
-            controller.enter(iD.modes.Select(way, true));
+
+            if (history.graph().entity(wayId)) {
+                controller.enter(iD.modes.Select(way, true));
+            } else {
+                // The way was deleted because it had too few nodes.
+                controller.enter(iD.modes.Browse());
+            }
         }
 
         surface
