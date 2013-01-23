@@ -52,6 +52,15 @@ describe('iD.Map', function() {
         });
     });
 
+    describe('#centerZoom', function() {
+        it('gets and sets center and zoom', function() {
+            expect(map.centerZoom([20, 25], 4)).to.equal(map);
+            expect(map.center()[0]).to.be.closeTo(20, 0.5);
+            expect(map.center()[1]).to.be.closeTo(25, 0.5);
+            expect(map.zoom()).to.be.equal(4);
+        });
+    });
+
     describe('#extent', function() {
         it('gets and sets extent', function() {
             map.size([100, 100])
