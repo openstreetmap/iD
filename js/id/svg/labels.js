@@ -240,6 +240,7 @@ iD.svg.Labels = function(projection) {
 
         function getPointLabel(entity, width, height) {
             var coord = projection(entity.loc),
+                m = 5,  // margin
                 offset = pointOffsets[0],
                 p = {
                     height: height,
@@ -248,7 +249,7 @@ iD.svg.Labels = function(projection) {
                     y: coord[1] + offset[1],
                     textAnchor: offset[2]
                 }
-            var rect = new RTree.Rectangle(p.x, p.y, width, height);
+            var rect = new RTree.Rectangle(p.x - m, p.y - m, width + 2*m, height + 2*m);
             if (tryInsert(rect)) return p;
         }
 
