@@ -12,16 +12,17 @@ iD.svg.Labels = function(projection) {
 
     var default_size = 12;
     var font_sizes = label_stack.map(function(d) {
-        var style = iD.util.getStyle('text.' + d.join('-'));
+        var style = iD.util.getStyle(
+            'text.' + d[0] + '.tag-' + d.slice(1).join('-'));
         var m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
         if (!m) return default_size;
         return parseInt(m[1], 10);
     });
 
     var pointOffsets = [
-        [10, 3, 'start'], // right
-        [10, 0, 'start'],
-        [-15, 0, 'end'], // left
+        [15, 3, 'start'], // right
+        [10, 0, 'start'], // unused right now
+        [-15, 0, 'end']
     ];
 
     var lineOffsets = [
@@ -103,6 +104,8 @@ iD.svg.Labels = function(projection) {
                 return x;
             },
             'y': function(d, i) { return labels[i]['y'] - labels[i]['height'] + 1 - 2; },
+            'rx': 3,
+            'ry': 3,
             'width': function(d, i) { return textWidth(d.tags.name, labels[i]['height']) + 4 },
             'height': function(d, i) { return labels[i]['height'] + 4 },
             'fill': 'white',
@@ -231,7 +234,7 @@ iD.svg.Labels = function(projection) {
                     p = getAreaLabel(entity, width, font_size);
                 }
                 if (p) {
-                    p.classes = label_stack[k].join('-');
+                    p.classes = entity.geometry() + ' tag-' + label_stack[k].slice(1).join('-');
                     positions[entity.geometry()].push(p);
                     labelled[entity.geometry()].push(entity);
                 }
