@@ -565,14 +565,24 @@ text.textpath-label {
   font-size: 12px;
   font-weight: bold;
   fill: black;
-  text-shadow: 0 0 0.4em white, 1px 1px white, -1px -1px white, -1px 1px white, 1px -1px white;
 }
 
 text.area-leisure-park {
-  font-size: 14px;
+  font-size: 16px;
 }
 
-text.point-amenity{
+.layer-label rect {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+rect.area-building-yes {
+  opacity: 0.5;
+}
+text.area-building-yes {
+}
+
+text.point-shop,text.point-amenity{
   font-size: 9px;
 }
 
