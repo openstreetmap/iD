@@ -789,6 +789,14 @@ img.tile {
 
 #about { text-align: right;}
 
+.source-switch a {
+    padding: 2px 5px;
+}
+.source-switch a.live {
+    background: #d32232;
+    color:#fff;
+}
+
 #user-list a:not(:last-child):after {
     content: ', ';
 }

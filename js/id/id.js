@@ -131,7 +131,7 @@ window.iD = function(container) {
             .attr('class', 'inspector-wrap fr col5');
 
         var about = container.append('div')
-            .attr('class','col12 about-block fillD pad1')
+            .attr('class','col12 about-block fillD pad1');
 
         about.append('div')
             .attr('class', 'user-container')
@@ -142,12 +142,38 @@ window.iD = function(container) {
                 .attr('id','about')
                 .attr('class','link-list');
 
-            aboutList.html("<li><a target='_blank' href='http://github.com/systemed/iD'>view code</a></li> " +
-                  "<li><a target='_blank' href='http://github.com/systemed/iD/issues'>report a bug</a></li>" +
-                  " <li id='attribution'>imagery <a target='_blank' href='http://opengeodata.org/microsoft-imagery-details'>provided by bing</a></li>");
+        aboutList.append('ul')
+            .attr('id','about')
+            .attr('class','pad1 fillD about-block link-list');
+        aboutList.append('li').append('a').attr('target', '_blank')
+            .attr('href', 'http://github.com/systemed/iD').text('view code');
+        aboutList.append('li').append('a').attr('target', '_blank')
+            .attr('href', 'http://github.com/systemed/iD/issues').text('report a bug');
+
+        var imagery = aboutList.append('li').attr('id', 'attribution');
+        imagery.append('span').text('imagery');
+        imagery.append('a').attr('target', '_blank')
+            .attr('href', 'http://opengeodata.org/microsoft-imagery-details').text(' provided by bing');
+
+        aboutList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
+            .text('dev')
+            .on('click', function() {
+                d3.event.preventDefault();
+                if (d3.select(this).classed('live')) {
+                    map.flush().connection()
+                        .url('http://api06.dev.openstreetmap.org');
+                    d3.select(this).text('dev').classed('live', false);
+                    map.zoom(map.zoom());
+                } else {
+                    map.flush().connection()
+                        .url('http://www.openstreetmap.org');
+                    d3.select(this).text('live').classed('live', true);
+                    map.zoom(map.zoom());
+                }
+            });
 
         var contributors = aboutList.append('li')
-            .attr('id', 'user-list')
+            .attr('id', 'user-list');
         contributors.append('span')
             .attr('class', 'icon nearby icon-pre-text');
         contributors.append('span')
