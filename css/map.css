@@ -557,32 +557,47 @@ text.tag-oneway {
     pointer-events:none;
 }
 
-text.textpath-label {
-  text-anchor: middle;
+/*
+ * Labels
+ */
+
+.layer-halo path {
+  point-events: none;
+  stroke-linecap: round;
+  stroke-linejoin: bevel;
+  stroke-width: 20px;
+  opacity: 0.8;
+  stroke: white;
 }
 
-.layer-label text{
+text.arealabel,
+text.pathlabel,
+text.pointlabel {
   font-size: 12px;
   font-weight: bold;
   fill: black;
+  text-anchor: middle;
+  pointer-events: none;
 }
+
+.pathlabel .textpath {
+  dominant-baseline: middle;
+}
+
+.pointlabel-halo,
+.linelabel-halo,
+.area-halo {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
 
 text.area-leisure-park {
   font-size: 16px;
 }
 
-.layer-label rect {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-rect.area-building-yes {
-  opacity: 0.5;
-}
-text.area-building-yes {
-}
-
-text.point-shop,text.point-amenity{
+text.point-shop,
+text.point-amenity {
   font-size: 9px;
 }
 
