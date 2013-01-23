@@ -37,7 +37,21 @@ iD.svg.Labels = function(projection) {
         else return size / 3 * 2 * text.length;
     }
 
-    function drawLineLabels(group, labels, filter, classes, position) {
+    function drawLineLabels(group, defs, labels, filter, classes, position) {
+
+        var uses = defs.selectAll('path.label')
+            .filter(filter)
+            .data(labels, iD.Entity.key);
+
+        uses.enter()
+            .append('path')
+            .attr('class', 'label');
+
+        uses
+            .attr('id', function(d) { return 'labelshadow-' + d.id; })
+            .attr('d', position('lineString'));
+
+        uses.exit().remove();
 
         var reverse = position('reverse'),
             getClasses = position('classes');
@@ -59,17 +73,35 @@ iD.svg.Labels = function(projection) {
             .data(labels)
             .attr({
                 'startOffset': position('startOffset'),
-                'xlink:href': function(d, i) { return '#casing-' + d.id},
-                'glyph-orientation-vertical': function(d, i) {return reverse(d, i) ? 180 : 0}, 
-                'glyph-orientation-horizontal': function(d, i) {return reverse(d, i) ? 180 : 0},
+                'xlink:href': function(d, i) { return '#labelshadow-' + d.id},
                 'dominant-baseline': 'middle'
             })
             .text(function(d, i) {
                 return reverse(d, i) ? d.tags.name.split('').reverse().join('') : d.tags.name;
             });
 
+        texts.each(function(d, i) { textWidth(d.tags.name, position('height')(d, i), this); });
+
         texts.exit().remove();
 
+    }
+
+    function drawLineHalos(group, labels, filter, classes, position) {
+
+        var halos = group.selectAll('path')
+            .filter(filter)
+            .data(labels, iD.Entity.key);
+
+        halos.enter()
+            .append('path')
+            .style({
+                'stroke-width': position('font-size')
+            })
+            .attr('class', classes);
+
+        halos.attr('d', position('lineString'));
+
+        halos.exit().remove();
     }
 
     function drawPointHalos(group, labels, filter, classes, position) {
@@ -126,6 +158,10 @@ iD.svg.Labels = function(projection) {
         var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]),
             reverse = !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > - Math.PI/2);
         return reverse;
+    }
+
+    function lineString(nodes) {
+        return 'M' + nodes.join('L');
     }
 
     function subpath(nodes, from, to) {
@@ -254,9 +290,10 @@ iD.svg.Labels = function(projection) {
                     Math.abs(sub[0][0] - sub[sub.length - 1][0]) + 20,
                     Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 30
                 );
+                if (rev) sub = sub.reverse();
                 if (tryInsert(rect)) return {
-                    'font-size': height,
-                    reverse: rev,
+                    'font-size': height + 2,
+                    lineString: lineString(sub),
                     startOffset: offset + '%'
                 }
             }
@@ -299,9 +336,12 @@ iD.svg.Labels = function(projection) {
 
 
         var label = surface.select('.layer-label'),
+            halo = surface.select('.layer-halo'),
+            defs = surface.select('defs'),
             points = drawPointLabels(label, labelled['point'], filter, 'text-label', pointposition),
             pointHalos = drawPointHalos(label, labelled['point'], filter, 'point-label-halo', pointposition),
-            lines = drawLineLabels(label, labelled['line'], filter, 'textpath-label', lineposition),
+            lines = drawLineLabels(label, defs, labelled['line'], filter, 'textpath-label', lineposition),
+            linesHalos = drawLineHalos(halo, labelled['line'], filter, 'textpath-label', lineposition),
             areas = drawPointLabels(label, labelled['area'], filter, 'text-arealabel', areaposition),
             areaHalos = drawPointHalos(label, labelled['area'], filter, 'area-label-halo', areaposition);
     };
