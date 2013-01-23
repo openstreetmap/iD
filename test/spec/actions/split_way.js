@@ -175,6 +175,20 @@ describe("iD.actions.SplitWay", function () {
         expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
     });
 
+    it("handles incomplete relations", function () {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                'r': iD.Relation({id: 'r', members: [{id: '~', type: 'way'}, {id: '-', type: 'way'}]})
+            });
+
+        graph = iD.actions.SplitWay('b', '=')(graph);
+
+        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
+    });
+
     ['restriction', 'restriction:bus'].forEach(function (type) {
         it("updates a restriction's 'from' role", function () {
             // Situation:

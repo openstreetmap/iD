@@ -47,7 +47,8 @@ iD.actions.SplitWay = function(nodeId, newWayId) {
                     j;
 
                 for (j = 0; j < relation.members.length; j++) {
-                    if (relation.members[j].type === 'way' && graph.entity(relation.members[j].id).contains(last)) {
+                    var entity = graph.entity(relation.members[j].id);
+                    if (entity && entity.type === 'way' && entity.contains(last)) {
                         break;
                     }
                 }
