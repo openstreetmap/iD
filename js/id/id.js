@@ -50,9 +50,7 @@ window.iD = function(container) {
             }
         }
 
-        var notice = iD.ui.notice(limiter
-            .append('div')
-            .attr('class', 'notice'));
+        var notice = iD.ui.notice(limiter).message(null);
 
         map.on('move.disable-buttons', disableTooHigh)
             .on('move.contributors', _.debounce(function() {

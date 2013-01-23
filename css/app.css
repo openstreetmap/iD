@@ -981,18 +981,19 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 .notice {
-    position:absolute;
-    top:11px;
-    left:11px;
-    width:278px;
+    float:left;
+    width:33.333%;
+    padding-right: 10px;
+}
+
+.notice .notice-text {
+    height: 40px;
     text-align: center;
-    height:38px;
-    padding:10px 20px;
-    background:#fff;
-    color:#000;
     font-weight: normal;
-    line-height: 21px;
-    border-radius:5px;
+    border-radius: 5px;
+    line-height: 40px;
+    background: #fff;
+    color: #000;
     opacity: 0.9;
 }
 
