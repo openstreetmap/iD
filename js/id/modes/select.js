@@ -45,9 +45,9 @@ iD.modes.Select = function(entity, initial) {
         });
 
         var q = iD.util.stringQs(location.hash.substring(1));
-        location.hash =  '#' + iD.util.qsString(_.assign(q, {
+        location.replace('#' + iD.util.qsString(_.assign(q, {
             id: entity.id
-        }), true);
+        }), true));
 
         d3.select('.inspector-wrap')
             .style('display', 'block')
@@ -166,7 +166,7 @@ iD.modes.Select = function(entity, initial) {
         });
 
         var q = iD.util.stringQs(location.hash.substring(1));
-        location.hash =  '#' + iD.util.qsString(_.omit(q, 'id'), true);
+        location.replace('#' + iD.util.qsString(_.omit(q, 'id'), true));
 
         keybinding.off();
 
