@@ -66,7 +66,7 @@ describe('iD.Map', function() {
                 expect(map.center()[0]).to.be.closeTo(20, 0.5);
                 expect(map.center()[1]).to.be.closeTo(20, 0.5);
                 done();
-            }, 500);
+            }, 1000);
         });
     });
 

@@ -1,4 +1,4 @@
-iD.ui.modal = function() {
+iD.ui.modal = function(blocking) {
     var animate = d3.select('div.modal').empty();
 
     d3.select('div.modal').transition()
@@ -9,7 +9,7 @@ iD.ui.modal = function() {
         .attr('class', 'shaded')
         .style('opacity', 0)
         .on('click.remove-modal', function() {
-            if (d3.event.target == this) d3.select(this).remove();
+            if (d3.event.target == this && !blocking) d3.select(this).remove();
         });
 
     var modal = shaded.append('div')
@@ -18,7 +18,7 @@ iD.ui.modal = function() {
     modal.append('button')
         .attr('class', 'icon remove close-modal')
         .on('click', function() {
-            shaded.remove();
+            if (!blocking) shaded.remove();
         });
 
     modal.append('div')
