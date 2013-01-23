@@ -255,7 +255,7 @@ iD.svg.Labels = function(projection) {
 
         function getLineLabel(entity, width, height) {
             var nodes = _.pluck(entity.nodes, 'loc').map(projection),
-                length = iD.util.geo.pathLength(nodes);
+                length = iD.geo.pathLength(nodes);
             if (length < width + 20) return;
 
             // 50, 40, 60, 30, 70
@@ -284,7 +284,7 @@ iD.svg.Labels = function(projection) {
         function getAreaLabel(entity, width, height) {
             var nodes = _.pluck(entity.nodes, 'loc')
                 .map(iD.svg.RoundProjection(projection)),
-                centroid = iD.util.geo.polygonCentroid(nodes),
+                centroid = iD.geo.polygonCentroid(nodes),
                 extent = entity.extent(graph),
                 entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
 
