@@ -5,9 +5,10 @@ iD.Connection = function() {
         connection = {},
         refNodes = {},
         user = {},
+        keys,
         inflight = {},
         loadedTiles = {},
-        oauth = iD.OAuth();
+        oauth = iD.OAuth().url(url);
 
     function bboxUrl(b) {
         return url + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
@@ -256,6 +257,13 @@ iD.Connection = function() {
     connection.logout = function() {
         oauth.logout();
         event.auth();
+        return connection;
+    };
+
+    connection.keys = function(_) {
+        if (!arguments.length) return keys;
+        keys = _;
+        oauth.keys(keys);
         return connection;
     };
 

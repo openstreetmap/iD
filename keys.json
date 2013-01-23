@@ -1,0 +1,10 @@
+{
+    "http://api06.dev.openstreetmap.org": {
+        "oauth_consumer_key": "zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R",
+        "oauth_signature_method": "HMAC-SHA1"
+    },
+    "http://www.openstreetmap.org": {
+        "oauth_consumer_key": "5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT",
+        "oauth_signature_method": "HMAC-SHA1"
+    }
+}
