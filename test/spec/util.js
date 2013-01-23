@@ -112,5 +112,26 @@ describe('iD.Util', function() {
                 expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.false;
             });
         });
+
+        describe("#area", function() {
+            it('calculates the area of a trapezoid', function() {
+                var polygon = [[0, 0], [3, 0], [2, 2], [1, 2]];
+                expect(iD.geo.area(polygon)).to.eql(4);
+            });
+        });
+
+        describe('#polygonCentroid', function() {
+            it('calculates the centroid of a square', function() {
+                var square = [[0, 0], [0, 2], [2, 2], [2, 0]];
+                expect(iD.geo.polygonCentroid(square)).to.eql([1, 1]);
+            });
+        });
+
+        describe('#pathLength', function() {
+            it('calculates a simple path length', function() {
+                var path = [[0, 0], [0, 1], [3, 5]];
+                expect(iD.geo.pathLength(path)).to.eql(6);
+            });
+        });
     });
 });
