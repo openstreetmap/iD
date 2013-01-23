@@ -1,6 +1,5 @@
 iD.ui.inspector = function() {
-    var event = d3.dispatch('changeTags', 'reverseWay',
-        'update', 'remove', 'close', 'splitWay', 'unjoin'),
+    var event = d3.dispatch('changeTags', 'close'),
         taginfo = iD.taginfo(),
         initial = false,
         tagList;
@@ -69,39 +68,12 @@ iD.ui.inspector = function() {
             inspectorButton1.append('span').attr('class','icon icon-pre-text apply');
             inspectorButton1.append('span').attr('class','label').text('Okay');
 
-        var inspectorButton2 = inspectorButtonWrap.append('button')
-                .attr('class', 'delete col6 action')
-                .on('click', function(entity) { event.remove(entity); });
-
-            inspectorButton2.append('span').attr('class','icon icon-pre-text delete');
-            inspectorButton2.append('span').attr('class','label').text('Delete');
-
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
 
             minorButtons.append('a')
                 .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
                 .attr('target', '_blank')
                 .text('View on OSM');
-
-            if (entity.type === 'way') {
-                minorButtons.append('a')
-                    .attr('href', '#')
-                    .text('Reverse Direction')
-                    .on('click', function() { event.reverseWay(entity); });
-            }
-
-            if (entity.geometry() === 'vertex') {
-                minorButtons.append('a')
-                    .attr('href', '#')
-                    .text('Split Way')
-                    .on('click', function() { event.splitWay(entity); });
-
-                minorButtons.append('a')
-                    .attr('href', '#')
-                    .text('Unjoin')
-                    .on('click', function() { event.unjoin(entity); });
-            }
-
     }
 
     function drawTags(tags) {

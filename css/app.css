@@ -1102,6 +1102,28 @@ div.typeahead a:first-child {
           border-radius: 4px;
 }
 
+.arc-menu-item {
+    fill: white;
+    stroke: black;
+    stroke-width: 1;
+    cursor:url(../img/cursor-pointer.png) 6 1, auto;
+}
+
+.arc-menu-item:hover {
+    fill: #bde5aa;
+}
+
+.arc-menu-item:active {
+    fill: #6bc641;
+}
+
+.arc-menu-item.disabled {
+    cursor: auto;
+    pointer-events: none;
+    fill: rgba(255,255,255,.5);
+}
+
+
 /* Media Queries
 ------------------------------------------------------- */
 
