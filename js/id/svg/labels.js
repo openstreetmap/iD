@@ -284,7 +284,7 @@ iD.svg.Labels = function(projection) {
         function getAreaLabel(entity, width, height) {
             var nodes = _.pluck(entity.nodes, 'loc')
                 .map(iD.svg.RoundProjection(projection)),
-                centroid = iD.geo.polygonCentroid(nodes),
+                centroid = d3.geom.polygon(nodes).centroid(),
                 extent = entity.extent(graph),
                 entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
 
