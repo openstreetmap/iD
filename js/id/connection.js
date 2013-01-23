@@ -133,7 +133,7 @@ iD.Connection = function() {
         var rparentsOf = {},
             wparentsOf = {};
 
-        var o;
+        var o, l;
         for (i = 0, l = root.childNodes.length; i < l; i++) {
             switch(root.childNodes[i].nodeName) {
                 case 'node':
