@@ -112,5 +112,12 @@ describe('iD.Util', function() {
                 expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.false;
             });
         });
+
+        describe('#pathLength', function() {
+            it('calculates a simple path length', function() {
+                var path = [[0, 0], [0, 1], [3, 5]];
+                expect(iD.geo.pathLength(path)).to.eql(6);
+            });
+        });
     });
 });
