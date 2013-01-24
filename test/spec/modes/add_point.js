@@ -3,8 +3,8 @@ describe("iD.modes.AddPoint", function () {
 
     beforeEach(function () {
         container  = d3.select('body').append('div');
-        map        = iD.Map();
         history    = iD.History();
+        map        = iD.Map().history(history);
         controller = iD.Controller(map, history);
 
         container.call(map);

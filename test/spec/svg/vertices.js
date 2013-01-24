@@ -10,7 +10,8 @@ describe("iD.svg.Vertices", function () {
 
     it("adds tag classes", function () {
         var node = iD.Node({tags: {highway: "traffic_signals"}, loc: [0, 0]}),
-            graph = iD.Graph([node]);
+            way  = iD.Way({nodes: [node.id]}),
+            graph = iD.Graph([node, way]);
 
         surface.call(iD.svg.Vertices(projection), graph, [node], filter);
 

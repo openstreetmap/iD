@@ -38,12 +38,17 @@ describe('iD.Node', function () {
     });
 
     describe("#geometry", function () {
-        it("returns 'vertex' if the node is not a point", function () {
-            expect(iD.Node().geometry()).to.equal('vertex');
+        it("returns 'vertex' if the node is a member of any way", function () {
+            var node = iD.Node(),
+                way  = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(node.geometry(graph)).to.equal('vertex');
         });
 
-        it("returns 'point' if the node is a point", function () {
-            expect(iD.Node({_poi: true}).geometry()).to.equal('point');
+        it("returns 'point' if the node is not a member of any way", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(node.geometry(graph)).to.equal('point');
         });
     });
 });

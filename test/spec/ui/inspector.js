@@ -1,10 +1,10 @@
 describe("iD.ui.inspector", function () {
     var inspector, element,
         tags = {highway: 'residential'},
-        entity;
+        entity, graph;
 
     function render() {
-        inspector = iD.ui.inspector();
+        inspector = iD.ui.inspector().graph(graph);
         element = d3.select('body')
             .append('div')
             .attr('id', 'inspector-wrap')
@@ -14,6 +14,7 @@ describe("iD.ui.inspector", function () {
 
     beforeEach(function () {
         entity = iD.Entity({type: 'node', id: "n12345", tags: tags});
+        graph = iD.Graph([entity]);
         render();
     });
 
