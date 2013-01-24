@@ -240,7 +240,6 @@ iD.ui.inspector = function() {
 
     function focusNewKey() {
         tagList.selectAll('li:last-child input.key').node().focus();
-        console.log(tagList.selectAll('li:last-child input.key'));
     }
 
     function addTag() {
