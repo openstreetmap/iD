@@ -157,12 +157,10 @@ window.iD = function(container) {
                     map.flush().connection()
                         .url('http://api06.dev.openstreetmap.org');
                     d3.select(this).text('dev').classed('live', false);
-                    map.zoom(map.zoom());
                 } else {
                     map.flush().connection()
                         .url('http://www.openstreetmap.org');
                     d3.select(this).text('live').classed('live', true);
-                    map.zoom(map.zoom());
                 }
             });
 
