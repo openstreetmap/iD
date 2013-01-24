@@ -66,27 +66,27 @@ iD.ui.commit = function(map) {
 
         // Confirm / Cancel Buttons
         var buttonwrap = comment_section.append('div')
-                    .attr('class', 'buttons cf')
-                        .append('div')
-                        .attr('class', 'button-wrap joined col4');
+            .attr('class', 'buttons cf')
+                .append('div')
+                .attr('class', 'button-wrap joined col4');
 
         var savebutton = buttonwrap
-                .append('button')
-                .attr('class', 'save action col6 button')
-                .on('click.save', function() {
-                    event.save({
-                        comment: d3.select('textarea.changeset-comment').node().value
-                    });
+            .append('button')
+            .attr('class', 'save action col6 button')
+            .on('click.save', function() {
+                event.save({
+                    comment: d3.select('textarea.changeset-comment').node().value
                 });
-                savebutton.append('span').attr('class','label').text('Save');
+            });
+            savebutton.append('span').attr('class','label').text('Save');
 
         var cancelbutton = buttonwrap.append('button')
-                .attr('class', 'cancel col6 button')
-                .on('click.cancel', function() {
-                    event.cancel();
-                });
-                cancelbutton.append('span').attr('class','icon close icon-pre-text');
-                cancelbutton.append('span').attr('class','label').text('Cancel');
+            .attr('class', 'cancel col6 button')
+            .on('click.cancel', function() {
+                event.cancel();
+            });
+            cancelbutton.append('span').attr('class','icon close icon-pre-text');
+            cancelbutton.append('span').attr('class','label').text('Cancel');
 
         var warnings = body.selectAll('div.warning-section')
             .data(iD.validate(changes, map.history().graph()))
