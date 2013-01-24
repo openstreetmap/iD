@@ -8,7 +8,7 @@ iD.History = function() {
 
         var annotation;
 
-        if (_.isString(_.last(actions))) {
+        if (!_.isFunction(_.last(actions))) {
             annotation = actions.pop();
         }
 

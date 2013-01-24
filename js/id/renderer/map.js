@@ -341,6 +341,7 @@ iD.Map = function() {
     map.minzoom = function(_) {
         if (!arguments.length) return minzoom;
         minzoom = _;
+        return map;
     };
 
     map.history = function (_) {

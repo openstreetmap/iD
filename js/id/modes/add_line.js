@@ -6,37 +6,38 @@ iD.modes.AddLine = function() {
         description: 'Lines can be highways, streets, pedestrian paths, or even canals.'
     };
 
-    var keybinding = d3.keybinding('add-line');
+    var behavior;
 
     mode.enter = function() {
         var map = mode.map,
+            surface = map.surface,
             graph = map.history().graph(),
-            node,
             history = mode.history,
             controller = mode.controller;
 
         map.dblclickEnable(false)
             .tail('Click on the map to start drawing an road, path, or route.');
 
-        map.surface.on('click.addline', function() {
+        function add() {
             var datum = d3.select(d3.event.target).datum() || {},
                 way = iD.Way({ tags: { highway: 'residential' } }),
-                direction = 'forward';
+                direction = 'forward',
+                node;
 
             if (datum.type === 'node') {
                 // continue an existing way
-                var id = datum.id;
-                var parents = history.graph(graph).parentWays(datum);
+                node = datum;
+                var parents = history.graph(graph).parentWays(node);
                 var isLine = parents.length && parents[0].geometry(graph) === 'line';
-                if (isLine && parents[0].nodes[0] === id ) {
+                if (isLine && parents[0].first() === node.id) {
                     way = parents[0];
                     direction = 'backward';
-                } else if (isLine && _.last(parents[0].nodes) === id) {
+                } else if (isLine && parents[0].last() === node.id) {
                     way = parents[0];
                 } else {
                     history.perform(
                         iD.actions.AddWay(way),
-                        iD.actions.AddWayNode(way.id, datum.id));
+                        iD.actions.AddWayNode(way.id, node.id));
                 }
 
             } else if (datum.type === 'way') {
@@ -60,22 +61,36 @@ iD.modes.AddLine = function() {
                     iD.actions.AddWayNode(way.id, node.id));
             }
 
-            controller.enter(iD.modes.DrawLine(way.id, direction));
-        });
+            var index = (direction === 'forward') ? way.nodes.length : 0,
 
-        keybinding.on('⎋', function() {
+            node = iD.Node({loc: node.loc});
+
+            history.replace(
+                iD.actions.AddNode(node),
+                iD.actions.AddWayNode(way.id, node.id, index),
+                'started a line');
+
+            controller.enter(iD.modes.DrawLine(way.id, direction, node));
+        }
+
+        function cancel() {
             controller.exit();
-        });
+        }
 
-        d3.select(document)
-            .call(keybinding);
+        behavior = iD.behavior.Draw()
+            .on('add', add)
+            .on('cancel', cancel)
+            .on('finish', cancel)
+            (surface);
     };
 
     mode.exit = function() {
-        mode.map.dblclickEnable(true);
-        mode.map.tail(false);
-        mode.map.surface.on('click.addline', null);
-        keybinding.off();
+        var map = mode.map,
+            surface = map.surface;
+
+        map.dblclickEnable(true);
+        map.tail(false);
+        behavior.off(surface);
     };
 
     return mode;
