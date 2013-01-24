@@ -567,6 +567,50 @@ text.tag-oneway {
     pointer-events:none;
 }
 
+/*
+ * Labels
+ */
+
+.layer-halo path {
+  point-events: none;
+  stroke-linecap: round;
+  stroke-linejoin: bevel;
+  stroke-width: 20px;
+  opacity: 0.8;
+  stroke: white;
+}
+
+text.arealabel,
+text.pathlabel,
+text.pointlabel {
+  font-size: 12px;
+  font-weight: bold;
+  fill: black;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.pathlabel .textpath {
+  dominant-baseline: middle;
+}
+
+.pointlabel-halo,
+.linelabel-halo,
+.arealabel-halo {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+
+text.area.tag-leisure-park {
+  font-size: 16px;
+}
+
+text.point.tag-shop,
+text.point.tag-amenity {
+  font-size: 9px;
+}
+
 /* Cursors */
 
 #map:hover {
