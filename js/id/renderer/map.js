@@ -27,12 +27,13 @@ iD.Map = function() {
         surface, tilegroup;
 
     function map(selection) {
+        selection.call(zoom);
+
         tilegroup = selection.append('div')
             .attr('id', 'tile-g');
 
         var supersurface = selection.append('div')
             .style('position', 'absolute')
-            .call(zoom);
 
         surface = supersurface.append('svg')
             .on('mousedown.zoom', function() {
