@@ -1,7 +1,7 @@
 iD.OAuth = function() {
     var baseurl = 'http://www.openstreetmap.org',
-        oauth_secret = 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p',
-        o, keys,
+        o = {},
+        keys,
         oauth = {};
 
     function keyclean(x) { return x.replace(/\W/g, ''); }
@@ -128,17 +128,24 @@ iD.OAuth = function() {
 
     };
 
+    function setAuth() {
+        if (baseurl && keys && keys[baseurl]) {
+            o = _.assign(o, _.omit(keys[baseurl], 'oauth_secret'));
+            oauth_secret = keys[baseurl].oauth_secret;
+        }
+    }
+
     oauth.url = function(_) {
         if (!arguments.length) return baseurl;
         baseurl = _;
-        if (keys && keys[baseurl]) o = keys[baseurl];
+        setAuth();
         return oauth;
     };
 
     oauth.keys = function(_) {
         if (!arguments.length) return keys;
         keys = _;
-        if (baseurl && keys[baseurl]) o = keys[baseurl];
+        setAuth();
         return oauth;
     };
 

@@ -282,6 +282,8 @@ iD.Connection = function() {
         if (!arguments.length) return url;
         url = _;
         oauth.url(_);
+        event.auth();
+        connection.flush();
         return connection;
     };
 
@@ -292,8 +294,8 @@ iD.Connection = function() {
     };
 
     connection.flush = function() {
-        loadedTiles = {};
         _.forEach(inflight, abortRequest);
+        loadedTiles = {};
         inflight = {};
         return connection;
     };
