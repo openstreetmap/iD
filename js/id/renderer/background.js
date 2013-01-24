@@ -65,19 +65,15 @@ iD.Background = function() {
 
         tiles.forEach(function(d) {
 
-            // if this tile has already failed, do
-            // not request it
-            if (cache[d] !== false) d.push(source(d));
-
-            // if this tile has failed, try to request its tile above
-            if (cache[d] === false &&
+            if (cache[d] === true) {
+                d.push(source(d));
+            } else if (cache[d] === false &&
                 cache[atZoom(d, -1)] !== false &&
                 !ups[atZoom(d, -1)]) {
 
                 ups[atZoom(d, -1)] = true;
                 tiles.push(atZoom(d, -1));
 
-            // if this tile has not finished, req the one above
             } else if (cache[d] === undefined &&
                 lookUp(d)) {
 
@@ -87,8 +83,6 @@ iD.Background = function() {
                     tiles.push(upTile);
                 }
 
-            // if this tile has not yet completed, try keeping the
-            // tiles below it
             } else if (cache[d] === undefined ||
                 cache[d] === false) {
                 upZoom(d, 1).forEach(function(u) {
