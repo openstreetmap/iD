@@ -5,16 +5,17 @@ iD.modes.AddPoint = function() {
         description: 'Restaurants, monuments, and postal boxes are points.'
     };
 
-    var keybinding = d3.keybinding('add-point');
+    var behavior;
 
     mode.enter = function() {
         var map = mode.map,
+            surface = map.surface,
             history = mode.history,
             controller = mode.controller;
 
         map.tail('Click on the map to add a point.');
 
-        map.surface.on('click.addpoint', function() {
+        function add() {
             var node = iD.Node({loc: map.mouseCoordinates()});
 
             history.perform(
@@ -22,20 +23,25 @@ iD.modes.AddPoint = function() {
                 'added a point');
 
             controller.enter(iD.modes.Select(node, true));
-        });
+        }
 
-        keybinding.on('⎋', function() {
+        function cancel() {
             controller.exit();
-        });
+        }
 
-        d3.select(document)
-            .call(keybinding);
+        behavior = iD.behavior.Draw()
+            .on('add', add)
+            .on('cancel', cancel)
+            .on('finish', cancel)
+            (surface);
     };
 
     mode.exit = function() {
-        mode.map.tail(false);
-        mode.map.surface.on('click.addpoint', null);
-        keybinding.off();
+        var map = mode.map,
+            surface = map.surface;
+
+        map.tail(false);
+        behavior.off(surface);
     };
 
     return mode;
