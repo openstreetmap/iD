@@ -62,7 +62,8 @@ iD.ui.commit = function(map) {
         var comment_section = body.append('div').attr('class','modal-section fillD');
         comment_section.append('textarea')
             .attr('class', 'changeset-comment')
-            .attr('placeholder', 'Brief Description of your contributions');
+            .attr('placeholder', 'Brief Description of your contributions')
+            .property('value',  localStorage.comment || '');
 
         // Confirm / Cancel Buttons
         var buttonwrap = comment_section.append('div')
@@ -74,8 +75,10 @@ iD.ui.commit = function(map) {
             .append('button')
             .attr('class', 'save action col6 button')
             .on('click.save', function() {
+                var comment = d3.select('textarea.changeset-comment').node().value;
+                localStorage.comment = comment;
                 event.save({
-                    comment: d3.select('textarea.changeset-comment').node().value
+                    comment: comment
                 });
             });
             savebutton.append('span').attr('class','label').text('Save');
