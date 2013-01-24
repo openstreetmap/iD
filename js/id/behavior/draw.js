@@ -1,5 +1,5 @@
 iD.behavior.Draw = function () {
-    var event = d3.dispatch('move', 'add', 'drop', 'cancel', 'finish'),
+    var event = d3.dispatch('move', 'add', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw');
 
     function draw(selection) {
@@ -13,7 +13,7 @@ iD.behavior.Draw = function () {
 
         function backspace() {
             d3.event.preventDefault();
-            event.drop();
+            event.undo();
         }
 
         function del() {

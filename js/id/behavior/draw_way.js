@@ -107,11 +107,6 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
         controller.enter(mode);
     };
 
-    // Remove the temporary node and the last connected node but continue drawing.
-    drawWay.drop = function() {
-        history.undo();
-    };
-
     // Finish the draw operation, removing the temporary node. If the way has enough
     // nodes to be valid, it's selected. Otherwise, return to browse mode.
     drawWay.finish = function() {
@@ -138,7 +133,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
     draw = iD.behavior.Draw()
         .on('move', move)
         .on('add', add)
-        .on('drop', drawWay.drop)
+        .on('undo', history.undo)
         .on('cancel', drawWay.cancel)
         .on('finish', drawWay.finish);
 
