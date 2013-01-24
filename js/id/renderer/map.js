@@ -164,7 +164,7 @@ iD.Map = function() {
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
         if (map.editable()) {
-            connection.loadTiles(projection);
+            connection.loadTiles(projection, dimensions);
             drawVector(difference);
         } else {
             editOff();
