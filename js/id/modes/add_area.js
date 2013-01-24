@@ -6,82 +6,75 @@ iD.modes.AddArea = function() {
         description: 'Add parks, buildings, lakes, or other areas to the map.'
     };
 
-    var behavior;
+    var behavior,
+        defaultTags = {area: 'yes'};
 
     mode.enter = function() {
         var map = mode.map,
-            surface = map.surface,
             history = mode.history,
             controller = mode.controller;
 
-        map.dblclickEnable(false)
-            .tail('Click on the map to start drawing an area, like a park, lake, or building.', true);
+        function startFromNode(a) {
+            var way = iD.Way({tags: defaultTags}),
+                b = iD.Node({loc: a.loc});
 
-        function add() {
-            var datum = d3.select(d3.event.target).datum() || {},
-                way = iD.Way({tags: { area: 'yes' }}),
-                node;
-
-            if (datum.type === 'node') {
-                // start from an existing node
-                node = datum;
-                history.perform(
-                    iD.actions.AddWay(way),
-                    iD.actions.AddWayNode(way.id, node.id),
-                    iD.actions.AddWayNode(way.id, node.id));
-
-            } else if (datum.type === 'way') {
-                // begin a new way starting from an existing way
-                var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
-                node = iD.Node({ loc: choice.loc });
-
-                history.perform(
-                    iD.actions.AddWay(way),
-                    iD.actions.AddNode(node),
-                    iD.actions.AddWayNode(datum.id, node.id, choice.index),
-                    iD.actions.AddWayNode(way.id, node.id),
-                    iD.actions.AddWayNode(way.id, node.id));
-
-            } else {
-                // start from a new node
-                node = iD.Node({loc: map.mouseCoordinates()});
-                history.perform(
-                    iD.actions.AddWay(way),
-                    iD.actions.AddNode(node),
-                    iD.actions.AddWayNode(way.id, node.id),
-                    iD.actions.AddWayNode(way.id, node.id));
-            }
-
-            node = iD.Node({loc: node.loc});
-
-            history.replace(
-                iD.actions.AddNode(node),
-                iD.actions.AddWayNode(way.id, node.id, -1),
+            history.perform(
+                iD.actions.AddNode(b),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, a.id),
+                iD.actions.AddWayNode(way.id, b.id),
+                iD.actions.AddWayNode(way.id, a.id),
                 'started an area');
 
             controller.enter(iD.modes.DrawArea(way.id));
         }
 
-        function cancel() {
-            controller.exit();
+        function startFromWay(other, loc, index) {
+            var a = iD.Node({loc: loc}),
+                b = iD.Node({loc: loc}),
+                way = iD.Way({tags: defaultTags});
+
+            history.perform(
+                iD.actions.AddNode(a),
+                iD.actions.AddNode(b),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, a.id),
+                iD.actions.AddWayNode(way.id, b.id),
+                iD.actions.AddWayNode(way.id, a.id),
+                iD.actions.AddWayNode(other.id, a.id, index),
+                'started an area');
+
+            controller.enter(iD.modes.DrawArea(way.id));
         }
 
-        behavior = iD.behavior.Draw()
-            .on('add', add)
-            .on('cancel', cancel)
-            .on('finish', cancel)
-            (surface);
+        function start(loc) {
+            var a = iD.Node({loc: loc}),
+                b = iD.Node({loc: loc}),
+                way = iD.Way({tags: defaultTags});
+
+            history.perform(
+                iD.actions.AddNode(a),
+                iD.actions.AddNode(b),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, a.id),
+                iD.actions.AddWayNode(way.id, b.id),
+                iD.actions.AddWayNode(way.id, a.id),
+                'started an area');
+
+            controller.enter(iD.modes.DrawArea(way.id));
+        }
+
+        behavior = iD.behavior.AddWay(mode)
+            .on('startFromNode', startFromNode)
+            .on('startFromWay', startFromWay)
+            .on('start', start);
+
+        mode.map.surface.call(behavior);
+        mode.map.tail('Click on the map to start drawing an area, like a park, lake, or building.', true);
     };
 
     mode.exit = function() {
-        var map = mode.map,
-            surface = map.surface;
-
-        window.setTimeout(function() {
-            map.dblclickEnable(true);
-        }, 1000);
-        map.tail(false);
-        behavior.off(surface);
+        mode.map.surface.call(behavior.off);
     };
 
     return mode;

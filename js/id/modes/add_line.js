@@ -6,91 +6,94 @@ iD.modes.AddLine = function() {
         description: 'Lines can be highways, streets, pedestrian paths, or even canals.'
     };
 
-    var behavior;
+    var behavior,
+        defaultTags = {highway: 'residential'};
 
     mode.enter = function() {
         var map = mode.map,
-            surface = map.surface,
-            graph = map.history().graph(),
             history = mode.history,
             controller = mode.controller;
 
-        map.dblclickEnable(false)
-            .tail('Click on the map to start drawing an road, path, or route.', true);
+        function startFromNode(a) {
+            var b = iD.Node({loc: a.loc}),
+                graph = history.graph(),
+                parent = graph.parentWays(a)[0],
+                isLine = parent && parent.geometry(graph) === 'line';
 
-        function add() {
-            var datum = d3.select(d3.event.target).datum() || {},
-                way = iD.Way({ tags: { highway: 'residential' } }),
-                direction = 'forward',
-                node;
-
-            if (datum.type === 'node') {
-                // continue an existing way
-                node = datum;
-                var parents = history.graph(graph).parentWays(node);
-                var isLine = parents.length && parents[0].geometry(graph) === 'line';
-                if (isLine && parents[0].first() === node.id) {
-                    way = parents[0];
-                    direction = 'backward';
-                } else if (isLine && parents[0].last() === node.id) {
-                    way = parents[0];
-                } else {
-                    history.perform(
-                        iD.actions.AddWay(way),
-                        iD.actions.AddWayNode(way.id, node.id));
-                }
-
-            } else if (datum.type === 'way') {
-                // begin a new way starting from an existing way
-                var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
-                node = iD.Node({ loc: choice.loc });
-
+            if (isLine && parent.first() === a.id) {
                 history.perform(
-                    iD.actions.AddWay(way),
-                    iD.actions.AddNode(node),
-                    iD.actions.AddWayNode(datum.id, node.id, choice.index),
-                    iD.actions.AddWayNode(way.id, node.id));
+                    iD.actions.AddNode(b),
+                    iD.actions.AddWayNode(parent.id, b.id, 0),
+                    'continued a line');
+
+                controller.enter(iD.modes.DrawLine(parent.id, 'backward'));
+
+            } else if (isLine && parent.last() === a.id) {
+                history.perform(
+                    iD.actions.AddNode(b),
+                    iD.actions.AddWayNode(parent.id, b.id),
+                    'continued a line');
+
+                controller.enter(iD.modes.DrawLine(parent.id, 'forward'));
 
             } else {
-                // begin a new way
-                node = iD.Node({loc: map.mouseCoordinates()});
+                var way = iD.Way({tags: defaultTags});
 
                 history.perform(
+                    iD.actions.AddNode(b),
                     iD.actions.AddWay(way),
-                    iD.actions.AddNode(node),
-                    iD.actions.AddWayNode(way.id, node.id));
+                    iD.actions.AddWayNode(way.id, a.id),
+                    iD.actions.AddWayNode(way.id, b.id),
+                    'continued a line');
+
+                controller.enter(iD.modes.DrawLine(way.id, 'forward'));
             }
+        }
 
-            var index = (direction === 'forward') ? way.nodes.length : 0,
+        function startFromWay(other, loc, index) {
+            var a = iD.Node({loc: loc}),
+                b = iD.Node({loc: loc}),
+                way = iD.Way({tags: defaultTags});
 
-            node = iD.Node({loc: node.loc});
-
-            history.replace(
-                iD.actions.AddNode(node),
-                iD.actions.AddWayNode(way.id, node.id, index),
+            history.perform(
+                iD.actions.AddNode(a),
+                iD.actions.AddNode(b),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, a.id),
+                iD.actions.AddWayNode(way.id, b.id),
+                iD.actions.AddWayNode(other.id, a.id, index),
                 'started a line');
 
-            controller.enter(iD.modes.DrawLine(way.id, direction, node));
+            controller.enter(iD.modes.DrawLine(way.id, 'forward'));
         }
 
-        function cancel() {
-            controller.exit();
+        function start(loc) {
+            var a = iD.Node({loc: loc}),
+                b = iD.Node({loc: loc}),
+                way = iD.Way({tags: defaultTags});
+
+            history.perform(
+                iD.actions.AddNode(a),
+                iD.actions.AddNode(b),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, a.id),
+                iD.actions.AddWayNode(way.id, b.id),
+                'started a line');
+
+            controller.enter(iD.modes.DrawLine(way.id, 'forward'));
         }
 
-        behavior = iD.behavior.Draw()
-            .on('add', add)
-            .on('cancel', cancel)
-            .on('finish', cancel)
-            (surface);
+        behavior = iD.behavior.AddWay(mode)
+            .on('startFromNode', startFromNode)
+            .on('startFromWay', startFromWay)
+            .on('start', start);
+
+        mode.map.surface.call(behavior);
+        mode.map.tail('Click on the map to start drawing an road, path, or route.', true);
     };
 
     mode.exit = function() {
-        var map = mode.map,
-            surface = map.surface;
-
-        map.dblclickEnable(true);
-        map.tail(false);
-        behavior.off(surface);
+        mode.map.surface.call(behavior.off);
     };
 
     return mode;
