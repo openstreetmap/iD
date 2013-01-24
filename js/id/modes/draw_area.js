@@ -41,11 +41,6 @@ iD.modes.DrawArea = function(wayId) {
             history.replace(iD.actions.MoveNode(node.id, map.mouseCoordinates()));
         }
 
-        function mouseover() {
-            var datum = d3.select(d3.event.target).datum() || {};
-            d3.select('#map').classed('finish-area', datum.id === tailId);
-        }
-
         function click() {
             var datum = d3.select(d3.event.target).datum() || {};
 
@@ -112,7 +107,6 @@ iD.modes.DrawArea = function(wayId) {
 
         surface
             .on('mousemove.drawarea', mousemove)
-            .on('mouseover.drawarea', mouseover)
             .on('click.drawarea', click);
 
         keybinding
