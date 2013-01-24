@@ -10,6 +10,7 @@ iD.ui.geolocate = function(map) {
         selection
             .attr('class', 'geolocate-control map-control')
             .append('button')
+            .attr('tabindex', -1)
             .attr('title', 'Show My Location')
             .on('click', function() {
                 navigator.geolocation.getCurrentPosition(

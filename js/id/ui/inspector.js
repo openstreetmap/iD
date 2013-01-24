@@ -191,6 +191,8 @@ iD.ui.inspector = function() {
         if (d3.event.keyCode === 9 &&
             tagList.selectAll('li:last-child input.value').node() === this) {
             addTag();
+            focusNewKey();
+            d3.event.preventDefault();
         }
     }
 
@@ -238,6 +240,7 @@ iD.ui.inspector = function() {
 
     function focusNewKey() {
         tagList.selectAll('li:last-child input.key').node().focus();
+        console.log(tagList.selectAll('li:last-child input.key'));
     }
 
     function addTag() {

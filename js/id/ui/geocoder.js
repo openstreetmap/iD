@@ -42,6 +42,7 @@ iD.ui.geocoder = function() {
         }
 
         var button = selection.append('button')
+            .attr('tabindex', -1)
             .attr('title', 'Find A Location')
             .html('<span class=\'geocode icon\'></span>')
             .on('click', toggle);

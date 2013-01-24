@@ -9,6 +9,7 @@ iD.ui.save = function() {
 
         selection.html("<span class='label'>Save</span><small id='as-username'></small>")
             .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
+            .attr('tabindex', -1)
             .property('disabled', true)
             .call(bootstrap.tooltip()
                 .placement('bottom'))
@@ -82,7 +83,6 @@ iD.ui.save = function() {
                 .select('span.count')
                     .text(history.numChanges());
         });
-
     }
 
     save.map = function(_) {

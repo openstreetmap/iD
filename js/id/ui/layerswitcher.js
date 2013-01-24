@@ -33,6 +33,7 @@ iD.ui.layerswitcher = function(map) {
 
         var button = selection
             .append('button')
+            .attr('tabindex', -1)
             .attr('class', 'fillD')
             .attr('title', 'Layer Settings')
             .html("<span class='layers icon'></span>")
