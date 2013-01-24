@@ -138,20 +138,20 @@ window.iD = function(container) {
                 .attr('id','about')
                 .attr('class','link-list');
 
-        aboutList.append('ul')
+        var linkList = aboutList.append('ul')
             .attr('id','about')
             .attr('class','pad1 fillD about-block link-list');
-        aboutList.append('li').append('a').attr('target', '_blank')
+        linkList.append('li').append('a').attr('target', '_blank')
             .attr('href', 'http://github.com/systemed/iD').text('view code');
-        aboutList.append('li').append('a').attr('target', '_blank')
+        linkList.append('li').append('a').attr('target', '_blank')
             .attr('href', 'http://github.com/systemed/iD/issues').text('report a bug');
 
-        var imagery = aboutList.append('li').attr('id', 'attribution');
+        var imagery = linkList.append('li').attr('id', 'attribution');
         imagery.append('span').text('imagery');
         imagery.append('a').attr('target', '_blank')
             .attr('href', 'http://opengeodata.org/microsoft-imagery-details').text(' provided by bing');
 
-        aboutList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
+        linkList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
             .text('dev')
             .on('click.editor', function() {
                 d3.event.preventDefault();
@@ -166,7 +166,7 @@ window.iD = function(container) {
                 }
             });
 
-        var contributors = aboutList.append('li')
+        var contributors = linkList.append('li')
             .attr('id', 'user-list');
         contributors.append('span')
             .attr('class', 'icon nearby icon-pre-text');
