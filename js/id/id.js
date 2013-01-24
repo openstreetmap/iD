@@ -95,12 +95,6 @@ window.iD = function(container) {
             .attr('class', 'save col12')
             .call(iD.ui.save().map(map).controller(controller));
 
-        history.on('change.editor', function() {
-            window.onbeforeunload = history.hasChanges() ? function() {
-                return 'You have unsaved changes.';
-            } : null;
-        });
-
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
             .selectAll('button')
@@ -184,6 +178,10 @@ window.iD = function(container) {
             .attr('class', 'contributor-count');
 
         history.on('change.editor', function() {
+            window.onbeforeunload = history.hasChanges() ? function() {
+                return 'You have unsaved changes.';
+            } : null;
+
             var undo = history.undoAnnotation(),
                 redo = history.redoAnnotation();
 
