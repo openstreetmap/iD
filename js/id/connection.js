@@ -292,6 +292,8 @@ iD.Connection = function() {
 
     connection.flush = function() {
         loadedTiles = {};
+        _.forEach(inflight, abortRequest);
+        inflight = {};
         return connection;
     };
 

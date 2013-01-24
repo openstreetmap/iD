@@ -196,9 +196,9 @@ iD.svg.Labels = function(projection) {
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             if (!entity.tags.name) continue;
-            if (hidePoints && entity.geometry() === 'point') continue;
+            if (hidePoints && entity.geometry(graph) === 'point') continue;
             for (var k = 0; k < label_stack.length; k ++) {
-                if (entity.geometry() === label_stack[k][0] &&
+                if (entity.geometry(graph) === label_stack[k][0] &&
                     entity.tags[label_stack[k][1]] && !entity.tags[label_stack[k][2]]) {
                     labelable[k].push(entity);
                     break;
@@ -226,17 +226,17 @@ iD.svg.Labels = function(projection) {
                 var entity = labelable[k][i],
                     width = textWidth(entity.tags.name, font_size),
                     p;
-                if (entity.geometry() === 'point') {
+                if (entity.geometry(graph) === 'point') {
                     p = getPointLabel(entity, width, font_size);
-                } else if (entity.geometry() === 'line') {
+                } else if (entity.geometry(graph) === 'line') {
                     p = getLineLabel(entity, width, font_size);
-                } else if (entity.geometry() === 'area') {
+                } else if (entity.geometry(graph) === 'area') {
                     p = getAreaLabel(entity, width, font_size);
                 }
                 if (p) {
-                    p.classes = entity.geometry() + ' tag-' + label_stack[k].slice(1).join('-');
-                    positions[entity.geometry()].push(p);
-                    labelled[entity.geometry()].push(entity);
+                    p.classes = entity.geometry(graph) + ' tag-' + label_stack[k].slice(1).join('-');
+                    positions[entity.geometry(graph)].push(p);
+                    labelled[entity.geometry(graph)].push(entity);
                 }
             }
         }

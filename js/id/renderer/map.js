@@ -300,6 +300,7 @@ iD.Map = function() {
 
     map.flush = function () {
         connection.flush();
+        history.reset();
         return map;
     };
 
