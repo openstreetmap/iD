@@ -30,6 +30,18 @@ iD.modes.AddArea = function() {
                     iD.actions.AddWayNode(way.id, node.id),
                     iD.actions.AddWayNode(way.id, node.id));
 
+            } else if (datum.type === 'way') {
+                // begin a new way starting from an existing way
+                var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
+                node = iD.Node({ loc: choice.loc });
+
+                history.perform(
+                    iD.actions.AddWay(way),
+                    iD.actions.AddNode(node),
+                    iD.actions.AddWayNode(datum.id, node.id, choice.index),
+                    iD.actions.AddWayNode(way.id, node.id),
+                    iD.actions.AddWayNode(way.id, node.id));
+
             } else {
                 // start from a new node
                 node = iD.Node({loc: map.mouseCoordinates()});

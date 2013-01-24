@@ -20,6 +20,10 @@ iD.modes.DrawArea = function(wayId) {
             behavior.addNode(node, way.nodes.length > 2 ? 'added to an area' : '');
         }
 
+        function addWay(way, loc, index) {
+            behavior.addWay(way, loc, index, way.nodes.length > 2 ? 'added to an area' : '');
+        }
+
         function add(loc) {
             behavior.add(loc, way.nodes.length > 2 ? 'added to an area' : '');
         }
@@ -28,7 +32,7 @@ iD.modes.DrawArea = function(wayId) {
             .on('addHead', addHeadTail)
             .on('addTail', addHeadTail)
             .on('addNode', addNode)
-            .on('addWay', add)
+            .on('addWay', addWay)
             .on('add', add);
 
         mode.map.surface.call(behavior);
