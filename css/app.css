@@ -751,7 +751,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     left:0;
     right:0;
     bottom:0;
-    background:#fff;
+    background:#000;
 }
 
 img.tile {
