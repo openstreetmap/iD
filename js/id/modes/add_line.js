@@ -16,7 +16,7 @@ iD.modes.AddLine = function() {
             controller = mode.controller;
 
         map.dblclickEnable(false)
-            .tail('Click on the map to start drawing an road, path, or route.');
+            .tail('Click on the map to start drawing an road, path, or route.', true);
 
         function add() {
             var datum = d3.select(d3.event.target).datum() || {},

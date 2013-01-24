@@ -47,7 +47,7 @@ iD.modes.DrawLine = function(wayId, direction) {
         mode.map.surface.call(behavior);
         mode.map.tail('Click to add more points to the line. ' +
                       'Click on other lines to connect to them, and double-click to ' +
-                      'end the line.');
+                      'end the line.', true);
     };
 
     mode.exit = function() {

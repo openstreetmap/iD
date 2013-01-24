@@ -36,7 +36,7 @@ iD.modes.DrawArea = function(wayId) {
             .on('add', add);
 
         mode.map.surface.call(behavior);
-        mode.map.tail('Click to add points to your area. Click the first point to finish the area.');
+        mode.map.tail('Click to add points to your area. Click the first point to finish the area.', true);
     };
 
     mode.exit = function() {

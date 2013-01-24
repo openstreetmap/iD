@@ -311,8 +311,12 @@ iD.Map = function() {
         return map;
     };
 
-    map.tail = function (_) {
-        tail.text(_);
+    var usedTails = {};
+    map.tail = function (_, once) {
+        if (!_ || usedTails[_] === undefined) {
+            tail.text(_);
+            usedTails[_] = true;
+        }
         return map;
     };
 

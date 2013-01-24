@@ -53,6 +53,7 @@ d3.tail = function() {
     };
 
     tail.text = function(_) {
+        if (!arguments.length) return text;
         if (_ === false) {
             text = _;
             container.style('display', 'none');
