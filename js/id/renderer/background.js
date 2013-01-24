@@ -10,7 +10,10 @@ iD.Background = function() {
         '-ms-transform-origin:0 0;' +
         '-webkit-transform-origin:0 0;' +
         '-moz-transform-origin:0 0;' +
-        '-o-transform-origin:0 0;';
+        '-o-transform-origin:0 0;' +
+        '-webkit-user-select: none;' +
+        '-webkit-user-drag: none;' +
+        '-moz-user-drag: none;';
 
     function atZoom(t, distance) {
         var power = Math.pow(2, distance);
