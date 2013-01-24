@@ -8,7 +8,7 @@ iD.modes.Select = function(entity, initial) {
     var inspector = iD.ui.inspector().initial(!!initial),
         keybinding = d3.keybinding('select'),
         behaviors,
-        arcMenu;
+        radialMenu;
 
     function remove() {
         if (entity.type === 'way') {
@@ -131,7 +131,7 @@ iD.modes.Select = function(entity, initial) {
             })
             .classed('selected', true);
 
-        var radialMenu = iD.ui.RadialMenu(entity, history);
+        radialMenu = iD.ui.RadialMenu(entity, history);
 
         if (d3.event) {
             surface.call(radialMenu, d3.mouse(surface.node()));
@@ -171,7 +171,7 @@ iD.modes.Select = function(entity, initial) {
         surface.selectAll(".selected")
             .classed('selected', false);
 
-        surface.call(arcMenu.close);
+        surface.call(radialMenu.close);
     };
 
     return mode;
