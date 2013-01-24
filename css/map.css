@@ -572,7 +572,7 @@ text.tag-oneway {
  */
 
 .layer-halo path {
-  point-events: none;
+  pointer-events: none;
   stroke-linecap: round;
   stroke-linejoin: bevel;
   stroke-width: 20px;
