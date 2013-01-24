@@ -79,8 +79,8 @@ iD.modes.Select = function(entity, initial) {
             .on('changeTags', changeTags)
             .on('close', function() { mode.controller.exit(); });
 
-        // Exit mode if selected entity gets undone
-        history.on('change.entity-undone', function() {
+        history.on('change.select', function() {
+            // Exit mode if selected entity gets undone
             var old = entity;
             entity = history.graph().entity(entity.id);
             if (!entity) {
@@ -88,6 +88,8 @@ iD.modes.Select = function(entity, initial) {
             } else if(!_.isEqual(entity.tags, old.tags)) {
                 inspector.tags(entity.tags);
             }
+
+            surface.call(radialMenu.close);
         });
 
         function click() {
@@ -174,7 +176,7 @@ iD.modes.Select = function(entity, initial) {
         surface.on('click.select', null)
             .on('dblclick.select', null);
 
-        history.on('change.entity-undone', null);
+        history.on('change.select', null);
 
         surface.selectAll(".selected")
             .classed('selected', false);
