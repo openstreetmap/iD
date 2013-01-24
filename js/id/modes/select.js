@@ -7,7 +7,8 @@ iD.modes.Select = function(entity, initial) {
 
     var inspector = iD.ui.inspector().initial(!!initial),
         keybinding = d3.keybinding('select'),
-        behaviors;
+        behaviors,
+        arcMenu;
 
     function remove() {
         if (entity.type === 'way') {
@@ -34,6 +35,7 @@ iD.modes.Select = function(entity, initial) {
     mode.enter = function() {
         var map = mode.map,
             graph = map.history().graph(),
+            history = map.history(),
             surface = mode.map.surface;
 
         inspector.graph(graph);
@@ -75,32 +77,12 @@ iD.modes.Select = function(entity, initial) {
 
         inspector
             .on('changeTags', changeTags)
-            .on('reverseWay', function(d) {
-            mode.history.perform(
-                iD.actions.ReverseWay(d.id),
-                'reversed a way');
-
-        }).on('splitWay', function(d) {
-            mode.history.perform(
-                iD.actions.SplitWay(d.id),
-                'split a way');
-
-        }).on('unjoin', function(d) {
-            mode.history.perform(
-                iD.actions.UnjoinNode(d.id),
-                'unjoined ways');
-
-        }).on('remove', function() {
-            remove();
-
-        }).on('close', function() {
-            mode.controller.exit();
-        });
+            .on('close', function() { mode.controller.exit(); });
 
         // Exit mode if selected entity gets undone
-        mode.history.on('change.entity-undone', function() {
+        history.on('change.entity-undone', function() {
             var old = entity;
-            entity = mode.history.graph().entity(entity.id);
+            entity = history.graph().entity(entity.id);
             if (!entity) {
                 mode.controller.enter(iD.modes.Browse());
             } else if(!_.isEqual(entity.tags, old.tags)) {
@@ -125,7 +107,7 @@ iD.modes.Select = function(entity, initial) {
                         d3.mouse(mode.map.surface.node()), mode.map),
                     node = iD.Node({ loc: choice.loc });
 
-                mode.history.perform(
+                history.perform(
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(datum.id, node.id, choice.index),
                     'added a point to a road');
@@ -148,10 +130,17 @@ iD.modes.Select = function(entity, initial) {
                 return d && entity && d.id === entity.id;
             })
             .classed('selected', true);
+
+        var radialMenu = iD.ui.RadialMenu(entity, history);
+
+        if (d3.event) {
+            surface.call(radialMenu, d3.mouse(surface.node()));
+        }
     };
 
     mode.exit = function () {
-        var surface = mode.map.surface;
+        var surface = mode.map.surface,
+            history = mode.history;
 
         if (entity) {
             changeTags(entity, inspector.tags());
@@ -177,10 +166,12 @@ iD.modes.Select = function(entity, initial) {
         surface.on('click.select', null)
             .on('dblclick.select', null);
 
-        mode.history.on('change.entity-undone', null);
+        history.on('change.entity-undone', null);
 
         surface.selectAll(".selected")
             .classed('selected', false);
+
+        surface.call(arcMenu.close);
     };
 
     return mode;

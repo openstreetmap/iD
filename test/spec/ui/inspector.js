@@ -75,13 +75,4 @@ describe("iD.ui.inspector", function () {
 
         expect(spy).to.have.been.calledWith(entity, tags);
     });
-
-    it("emits a remove event when the delete button is clicked", function () {
-        var spy = sinon.spy();
-        inspector.on('remove', spy);
-
-        element.select('.delete').trigger('click');
-
-        expect(spy).to.have.been.calledWith(entity);
-    });
 });
