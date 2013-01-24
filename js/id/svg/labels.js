@@ -187,7 +187,7 @@ iD.svg.Labels = function(projection) {
     return function drawLabels(surface, graph, entities, filter) {
 
         var rtree = new RTree();
-        var hidePoints = !d3.select('.point').node();
+        var hidePoints = !d3.select('.node.point').node();
 
         var labelable = [];
         for (var i = 0; i < label_stack.length; i++) labelable.push([]);
