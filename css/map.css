@@ -666,7 +666,9 @@ text.point.tag-amenity {
 }
 
 .mode-draw-line .way,
-.mode-add-line  .way {
+.mode-draw-area .way,
+.mode-add-line  .way,
+.mode-add-area  .way {
     cursor:url(../img/cursor-draw-connect-line.png) 9 9, auto;
 }
 
