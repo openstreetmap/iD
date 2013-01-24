@@ -15,8 +15,8 @@ _.extend(iD.Node.prototype, {
         return iD.geo.Extent(this.loc);
     },
 
-    geometry: function() {
-        return this._poi ? 'point' : 'vertex';
+    geometry: function(graph) {
+        return graph.isPoi(this) ? 'point' : 'vertex';
     },
 
     move: function(loc) {

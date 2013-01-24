@@ -3,6 +3,7 @@ iD.ui.inspector = function() {
         'update', 'remove', 'close', 'splitWay', 'unjoin'),
         taginfo = iD.taginfo(),
         initial = false,
+        graph,
         tagList;
 
     function inspector(selection) {
@@ -50,7 +51,7 @@ iD.ui.inspector = function() {
         var h2 = selection.append('h2');
 
         h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry());
+            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(graph));
 
         h2.append('span')
             .text(entity.friendlyName());
@@ -90,7 +91,7 @@ iD.ui.inspector = function() {
                     .on('click', function() { event.reverseWay(entity); });
             }
 
-            if (entity.geometry() === 'vertex') {
+            if (entity.geometry(graph) === 'vertex') {
                 minorButtons.append('a')
                     .attr('href', '#')
                     .text('Split Way')
@@ -155,7 +156,7 @@ iD.ui.inspector = function() {
             .attr('class', 'tag-help minor')
             .on('click', function(d) {
                 var params = _.extend({}, d, {
-                    geometry: entity.geometry()
+                    geometry: entity.geometry(graph)
                 });
                 if (d.key && d.value) {
                     taginfo.docs(params, function(err, docs) {
@@ -223,7 +224,7 @@ iD.ui.inspector = function() {
 
     function bindTypeahead() {
         var entity = tagList.datum(),
-            geometry = entity.geometry(),
+            geometry = entity.geometry(graph),
             row = d3.select(this),
             key = row.selectAll('.key'),
             value = row.selectAll('.value');
@@ -301,6 +302,11 @@ iD.ui.inspector = function() {
 
     inspector.initial = function(_) {
         initial = _;
+        return inspector;
+    };
+
+    inspector.graph = function(_) {
+        graph = _;
         return inspector;
     };
 

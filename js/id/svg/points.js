@@ -15,7 +15,7 @@ iD.svg.Points = function(projection) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry() === 'point') {
+            if (entity.geometry(graph) === 'point') {
                 points.push(entity);
             }
         }

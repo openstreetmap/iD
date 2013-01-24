@@ -22,7 +22,6 @@ iD.actions.DeleteWay = function(wayId) {
                 if (!node.hasInterestingTags()) {
                     graph = graph.remove(node);
                 } else {
-                    graph = graph.replace(node.update({_poi: true}));
                 }
             }
         });
@@ -32,7 +31,7 @@ iD.actions.DeleteWay = function(wayId) {
 
     action.enabled = function(graph) {
         return true;
-    }
+    };
 
     return action;
 };

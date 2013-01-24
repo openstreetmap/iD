@@ -31,7 +31,7 @@ iD.Graph.prototype = {
             transients = this.transients[id] ||
             (this.transients[id] = {});
 
-        if (transients[key]) {
+        if (transients[key] !== undefined) {
             return transients[key];
         }
 
@@ -58,6 +58,10 @@ iD.Graph.prototype = {
         }
 
         return this._parentWays[entity.id] || [];
+    },
+
+    isPoi: function(entity) {
+        return this.parentWays(entity).length === 0;
     },
 
     parentRelations: function(entity) {
@@ -141,7 +145,7 @@ iD.Graph.prototype = {
                     oldentity && oldentity.type === 'way') {
                     result = result
                             .concat(_.difference(entity.nodes, oldentity.nodes))
-                            .concat(_.difference(oldentity.nodes, entity.nodes))
+                            .concat(_.difference(oldentity.nodes, entity.nodes));
 
                 } else if (entity && entity.type === 'way') {
                     result = result.concat(entity.nodes);

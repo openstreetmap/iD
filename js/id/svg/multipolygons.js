@@ -4,7 +4,7 @@ iD.svg.Multipolygons = function(projection) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry() === 'relation' && entity.tags.type === 'multipolygon') {
+            if (entity.geometry(graph) === 'relation' && entity.tags.type === 'multipolygon') {
                 multipolygons.push(entity);
             }
         }
@@ -17,7 +17,7 @@ iD.svg.Multipolygons = function(projection) {
             }
 
             var multipolygon = entity.multipolygon(graph);
-            if (entity.members.length == 0 || !multipolygon) {
+            if (entity.members.length === 0 || !multipolygon) {
                 return (lineStrings[entity.id] = null);
             }
 

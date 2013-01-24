@@ -154,11 +154,19 @@ iD.Connection = function() {
         }
 
         var g = iD.Graph(entities);
+        var i;
 
-        for (var i in wparentsOf) {
-            if (entities[i]) g.transient(entities[i],
-                'parentWays', d3.functor(wparentsOf[i]));
-            if (entities[i]) entities[i].update({ _poi: true });
+        for (i in wparentsOf) {
+            if (entities[i]) {
+                g.transient(entities[i], 'parentWays', d3.functor(wparentsOf[i]));
+                g.transient(entities[i], 'poi', d3.functor(true));
+            }
+        }
+
+        for (i in g.entities) {
+            if (entities[i].type === 'node') {
+                g.transient(entities[i], 'poi', d3.functor(false));
+            }
         }
 
         for (i in rparentsOf) {

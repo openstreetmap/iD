@@ -51,7 +51,7 @@ iD.ui.save = function() {
                     modal.select('.content')
                         .classed('commit-modal', true)
                         .datum(changes)
-                        .call(iD.ui.commit()
+                        .call(iD.ui.commit(map)
                             .on('cancel', function() {
                                 modal.remove();
                             })

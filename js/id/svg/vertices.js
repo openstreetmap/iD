@@ -4,7 +4,7 @@ iD.svg.Vertices = function(projection) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry() === 'vertex') {
+            if (entity.geometry(graph) === 'vertex') {
                 vertices.push(entity);
             }
         }

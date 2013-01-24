@@ -15,7 +15,7 @@ iD.modes.AddPoint = function() {
         map.tail('Click on the map to add a point.');
 
         map.surface.on('click.addpoint', function() {
-            var node = iD.Node({loc: map.mouseCoordinates(), _poi: true});
+            var node = iD.Node({loc: map.mouseCoordinates()});
 
             history.perform(
                 iD.actions.AddNode(node),

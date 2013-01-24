@@ -1,4 +1,4 @@
-iD.ui.commit = function() {
+iD.ui.commit = function(map) {
     var event = d3.dispatch('cancel', 'save', 'fix');
 
     function zipSame(d) {
@@ -89,7 +89,7 @@ iD.ui.commit = function() {
                 cancelbutton.append('span').attr('class','label').text('Cancel');
 
         var warnings = body.selectAll('div.warning-section')
-            .data(iD.validate(changes))
+            .data(iD.validate(changes, map.history().graph()))
             .enter()
             .append('div').attr('class', 'modal-section warning-section fillL');
 

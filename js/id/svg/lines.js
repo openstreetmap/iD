@@ -66,7 +66,7 @@ iD.svg.Lines = function(projection) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry() === 'line') {
+            if (entity.geometry(graph) === 'line') {
                 lines.push(entity);
             }
         }

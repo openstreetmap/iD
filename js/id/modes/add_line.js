@@ -10,6 +10,7 @@ iD.modes.AddLine = function() {
 
     mode.enter = function() {
         var map = mode.map,
+            graph = map.history().graph(),
             node,
             history = mode.history,
             controller = mode.controller;
@@ -25,8 +26,8 @@ iD.modes.AddLine = function() {
             if (datum.type === 'node') {
                 // continue an existing way
                 var id = datum.id;
-                var parents = history.graph().parentWays(datum);
-                var isLine = parents.length && parents[0].geometry() === 'line';
+                var parents = history.graph(graph).parentWays(datum);
+                var isLine = parents.length && parents[0].geometry(graph) === 'line';
                 if (isLine && parents[0].nodes[0] === id ) {
                     way = parents[0];
                     direction = 'backward';

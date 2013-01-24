@@ -31,7 +31,7 @@ iD.svg.Areas = function(projection) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry() === 'area') {
+            if (entity.geometry(graph) === 'area') {
                 areas.push(entity);
             }
         }

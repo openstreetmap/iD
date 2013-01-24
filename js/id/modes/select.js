@@ -32,7 +32,11 @@ iD.modes.Select = function(entity, initial) {
     }
 
     mode.enter = function() {
-        var surface = mode.map.surface;
+        var map = mode.map,
+            graph = map.history().graph(),
+            surface = mode.map.surface;
+
+        inspector.graph(graph);
 
         behaviors = [
             iD.behavior.Hover(),
@@ -116,7 +120,7 @@ iD.modes.Select = function(entity, initial) {
         function dblclick() {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity &&
-                (datum.geometry() === 'area' || datum.geometry() === 'line')) {
+                (datum.geometry(graph) === 'area' || datum.geometry(graph) === 'line')) {
                 var choice = iD.geo.chooseIndex(datum,
                         d3.mouse(mode.map.surface.node()), mode.map),
                     node = iD.Node({ loc: choice.loc });

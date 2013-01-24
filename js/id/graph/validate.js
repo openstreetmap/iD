@@ -1,4 +1,4 @@
-iD.validate = function(changes) {
+iD.validate = function(changes, graph) {
     var warnings = [], change;
 
     // https://github.com/openstreetmap/josm/blob/mirror/src/org/
@@ -19,22 +19,22 @@ iD.validate = function(changes) {
         for (var i = 0; i < changes.created.length; i++) {
             change = changes.created[i];
 
-            if (change.geometry() === 'point' && _.isEmpty(change.tags)) {
+            if (change.geometry(graph) === 'point' && _.isEmpty(change.tags)) {
                 warnings.push({
                     message: 'Untagged point which is not part of a line or area',
                     entity: change
                 });
             }
 
-            if (change.geometry() === 'line' && _.isEmpty(change.tags)) {
+            if (change.geometry(graph) === 'line' && _.isEmpty(change.tags)) {
                 warnings.push({ message: 'Untagged line', entity: change });
             }
 
-            if (change.geometry() === 'area' && _.isEmpty(change.tags)) {
+            if (change.geometry(graph) === 'area' && _.isEmpty(change.tags)) {
                 warnings.push({ message: 'Untagged area', entity: change });
             }
 
-            if (change.geometry() === 'line' && tagSuggestsArea(change)) {
+            if (change.geometry(graph) === 'line' && tagSuggestsArea(change)) {
                 warnings.push({
                     message: 'The tag ' + tagSuggestsArea(change) + ' suggests line should be area, but it is not and area',
                     entity: change
