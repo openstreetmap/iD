@@ -773,6 +773,10 @@ img.tile {
     -o-transform-origin:0 0;
 }
 
+#tile-g {
+  opacity: 0.5;
+}
+
 /* About Section
 ------------------------------------------------------- */
 

@@ -88,7 +88,7 @@ iD.ui.layerswitcher = function(map) {
                     });
 
         // Make sure there is an active selection by default
-        d3.select('.opacity-options li').classed('selected', true);
+        d3.select('.opacity-options li:nth-child(2)').classed('selected', true);
 
         function selectLayer(d) {
             content.selectAll('a.layer')
