@@ -33,12 +33,12 @@ iD.svg.Points = function(projection) {
             .attr('class', 'node point');
 
         group.append('circle')
-            .attr('class', 'stroke')
-            .attr({ r: 10 });
+            .attr('r', 13)
+            .attr('class', 'shadow');
 
         group.append('circle')
-            .attr('class', 'fill')
-            .attr({ r: 10 });
+            .attr('class', 'stroke')
+            .attr('r', 9);
 
         group.append('image')
             .attr({ width: 16, height: 16 })

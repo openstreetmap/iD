@@ -45,20 +45,20 @@ iD.Hash = function() {
     // do so before any features are loaded. thus wait for the feature to
     // be loaded and then select
     function willselect(id) {
-        map.on('drawn.after-draw-select', function() {
+        map.on('drawn.hash', function() {
             var entity = map.history().graph().entity(id);
             if (entity === undefined) return;
             else selectoff();
             controller.enter(iD.modes.Select(entity));
-            map.on('drawn.after-draw-select', null);
+            map.on('drawn.hash', null);
         });
-        controller.on('enter', function() {
+        controller.on('enter.hash', function() {
             if (controller.mode.id !== 'browse') selectoff();
         });
     }
 
     function selectoff() {
-        map.on('drawn.after-draw-select', null);
+        map.on('drawn.hash', null);
     }
 
     hash.controller = function(_) {
@@ -70,12 +70,12 @@ iD.Hash = function() {
     hash.map = function(x) {
         if (!arguments.length) return map;
         if (map) {
-            map.off("move", move);
+            map.on("move.hash", null);
             window.removeEventListener("hashchange", hashchange, false);
         }
         map = x;
         if (x) {
-            map.on("move", move);
+            map.on("move.hash", move);
             window.addEventListener("hashchange", hashchange, false);
             if (location.hash) {
                 var q = iD.util.stringQs(location.hash.substring(1));

@@ -3,16 +3,26 @@ path {
     fill: none;
 }
 
+/* points */
+
 g.point circle {
     fill:#fff;
 }
 
-g.pointer circle.stroke,
-g.point.selected circle.stroke {
-    fill:#333;
-    -webkit-transform:scale(1.2, 1.2);
-    -moz-transform:scale(1.2, 1.2);
-    transform:scale(1.2, 1.2);
+g.point .shadow {
+    fill: none;
+    pointer-events: all;
+    -webkit-transition: -webkit-transform 100ms linear;
+    transition: transform 100ms linear;
+    -moz-transition: fill 100ms linear;
+}
+g.point.hover .shadow {
+    fill: #E96666;
+    fill-opacity: 0.3;
+}
+g.point.selected .shadow {
+    fill: #E96666;
+    fill-opacity: 0.7;
 }
 
 /* vertices */

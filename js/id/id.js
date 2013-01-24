@@ -37,25 +37,25 @@ window.iD = function(container) {
                 .attr('class', function (mode) { return mode.title + ' add-button col3'; })
             .attr('data-original-title', function (mode) { return mode.description; })
             .call(bootstrap.tooltip().placement('bottom'))
-            .on('click', function (mode) { controller.enter(mode); });
+            .on('click.editor', function (mode) { controller.enter(mode); });
 
         function disableTooHigh() {
-            if (map.zoom() < 16) {
+            if (map.editable()) {
+                notice.message('');
+                buttons.attr('disabled', null);
+            } else {
                 buttons.attr('disabled', 'disabled');
                 notice.message('Zoom in to edit the map');
                 controller.enter(iD.modes.Browse());
-            } else {
-                notice.message('');
-                buttons.attr('disabled', null);
             }
         }
 
         var notice = iD.ui.notice(limiter).message(null);
 
-        map.on('move.disable-buttons', disableTooHigh)
-            .on('move.contributors', _.debounce(function() {
-                contributors.call(iD.ui.contributors(map));
-            }, 1000));
+        map.on('move.editor', _.debounce(function() {
+            disableTooHigh();
+            contributors.call(iD.ui.contributors(map));
+        }, 500));
 
         buttons.append('span')
             .attr('class', function(d) {
@@ -64,12 +64,12 @@ window.iD = function(container) {
 
         buttons.append('span').attr('class', 'label').text(function (mode) { return mode.title; });
 
-        controller.on('enter', function (entered) {
+        controller.on('enter.editor', function (entered) {
             buttons.classed('active', function (mode) { return entered.button === mode.button; });
             container.classed("mode-" + entered.id, true);
         });
 
-        controller.on('exit', function (exited) {
+        controller.on('exit.editor', function (exited) {
             container.classed("mode-" + exited.id, false);
         });
 
@@ -81,21 +81,21 @@ window.iD = function(container) {
             .attr({ id: 'undo', 'class': 'col6' })
             .property('disabled', true)
             .html("<span class='undo icon'></span><small></small>")
-            .on('click', history.undo)
+            .on('click.editor', history.undo)
             .call(undo_tooltip);
 
         undo_buttons.append('button')
             .attr({ id: 'redo', 'class': 'col6' })
             .property('disabled', true)
             .html("<span class='redo icon'><small></small>")
-            .on('click', history.redo)
+            .on('click.editor', history.redo)
             .call(undo_tooltip);
 
         var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
             .attr('class', 'save col12')
             .call(iD.ui.save().map(map).controller(controller));
 
-        history.on('change.warn-unload', function() {
+        history.on('change.editor', function() {
             window.onbeforeunload = history.hasChanges() ? function() {
                 return 'You have unsaved changes.';
             } : null;
@@ -109,7 +109,7 @@ window.iD = function(container) {
                 .append('button')
                 .attr('class', function(d) { return d[0]; })
                 .attr('title', function(d) { return d[3]; })
-                .on('click', function(d) { return d[2](); })
+                .on('click.editor', function(d) { return d[2](); })
                 .append('span')
                     .attr('class', function(d) {
                         return d[0] + ' icon';
@@ -157,7 +157,7 @@ window.iD = function(container) {
 
         aboutList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
             .text('dev')
-            .on('click', function() {
+            .on('click.editor', function() {
                 d3.event.preventDefault();
                 if (d3.select(this).classed('live')) {
                     map.flush().connection()
@@ -183,7 +183,7 @@ window.iD = function(container) {
         contributors.append('span')
             .attr('class', 'contributor-count');
 
-        history.on('change.buttons', function() {
+        history.on('change.editor', function() {
             var undo = history.undoAnnotation(),
                 redo = history.redoAnnotation();
 
@@ -204,14 +204,14 @@ window.iD = function(container) {
                 .call(redo ? refreshTooltip : undo_tooltip.hide);
         });
 
-        d3.select(window).on('resize.map-size', function() {
+        d3.select(window).on('resize.editor', function() {
             map.size(m.size());
         });
 
         var keybinding = d3.keybinding('main')
-            .on('P', function() { controller.enter(iD.modes.AddPoint()); })
-            .on('L', function() { controller.enter(iD.modes.AddLine()); })
-            .on('A', function() { controller.enter(iD.modes.AddArea()); })
+            .on('P', function() { if (map.editable()) controller.enter(iD.modes.AddPoint()); })
+            .on('L', function() { if (map.editable()) controller.enter(iD.modes.AddLine()); })
+            .on('A', function() { if (map.editable()) controller.enter(iD.modes.AddArea()); })
             .on('⌘+Z', function() { history.undo(); })
             .on('⌃+Z', function() { history.undo(); })
             .on('⌘+⇧+Z', function() { history.redo(); })
@@ -228,8 +228,8 @@ window.iD = function(container) {
         }
 
         d3.select('.user-container').call(iD.ui.userpanel(connection)
-            .on('logout', connection.logout)
-            .on('login', connection.authenticate));
+            .on('logout.editor', connection.logout)
+            .on('login.editor', connection.authenticate));
 
         controller.enter(iD.modes.Browse());
     }

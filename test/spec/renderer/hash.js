@@ -5,14 +5,12 @@ describe("iD.Hash", function () {
         hash = iD.Hash();
         map = {
             on:     function () { return map; },
-            off:    function () { return map; },
             zoom:   function () { return arguments.length ? map : 0; },
             center: function () { return arguments.length ? map : [0, 0]; },
             centerZoom: function () { return arguments.length ? map : [0, 0]; }
         };
         controller = {
-            on:     function () { return controller; },
-            off:    function () { return controller; }
+            on: function () { return controller; }
         };
     });
 
@@ -43,15 +41,14 @@ describe("iD.Hash", function () {
         it("binds the map's move event", function () {
             sinon.spy(map, 'on');
             hash.map(map);
-            expect(map.on).to.have.been.calledWith('move', sinon.match.instanceOf(Function));
+            expect(map.on).to.have.been.calledWith('move.hash', sinon.match.instanceOf(Function));
         });
 
         it("unbinds the map's move event", function () {
             sinon.spy(map, 'on');
-            sinon.spy(map, 'off');
             hash.map(map);
             hash.map(null);
-            expect(map.off).to.have.been.calledWith('move', map.on.firstCall.args[1]);
+            expect(map.on).to.have.been.calledWith('move.hash', null);
         });
     });
 
@@ -77,7 +74,9 @@ describe("iD.Hash", function () {
 
     describe("on map move events", function () {
         it("stores the current zoom and coordinates in location.hash", function () {
-            sinon.stub(map, 'on').yields();
+            sinon.stub(map, 'on')
+                .withArgs("move.hash", sinon.match.instanceOf(Function))
+                .yields();
             hash.map(map);
             expect(location.hash).to.equal("#map=0.00/0/0");
         });
