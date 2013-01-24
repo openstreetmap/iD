@@ -234,12 +234,13 @@ iD.Connection = function() {
         bboxFromAPI(e.box, e.tile, done);
     }
 
-    function loadTiles(projection) {
-        var scaleExtent = [15, 15],
+    function loadTiles(projection, dimensions) {
+        var scaleExtent = [16, 16],
             s = projection.scale(),
             tiles = d3.geo.tile()
                 .scaleExtent(scaleExtent)
                 .scale(s)
+                .size(dimensions)
                 .translate(projection.translate())(),
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
             rz = Math.max(scaleExtent[0], Math.min(scaleExtent[1], Math.floor(z))),
