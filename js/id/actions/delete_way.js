@@ -21,7 +21,6 @@ iD.actions.DeleteWay = function(wayId) {
                 !graph.parentRelations(node).length) {
                 if (!node.hasInterestingTags()) {
                     graph = graph.remove(node);
-                } else {
                 }
             }
         });
