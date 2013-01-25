@@ -73,13 +73,13 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
         history.on('undone.draw', null);
     };
 
-    // Connect the way to an existing node. Continue drawing, or enter the optional `newMode`.
-    drawWay.addNode = function(node, annotation, newMode) {
+    // Connect the way to an existing node and continue drawing.
+    drawWay.addNode = function(node, annotation) {
         history.perform(
             iD.actions.AddWayNode(wayId, node.id, index),
             annotation);
 
-        controller.enter(newMode || mode);
+        controller.enter(mode);
     };
 
     // Connect the way to an existing way.
