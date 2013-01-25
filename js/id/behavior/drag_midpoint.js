@@ -12,6 +12,7 @@ iD.behavior.DragMidpoint = function(mode) {
             var ops = [iD.actions.AddNode(d.node)];
 
             d.ways.forEach(function(w, i) {
+                console.log(d.indices[i]);
                 ops.push(iD.actions.AddWayNode(w, d.node.id, d.indices[i]));
             });
 

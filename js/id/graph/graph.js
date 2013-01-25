@@ -44,7 +44,6 @@ iD.Graph.prototype = {
         var ent, id, parents;
 
         if (!this._parentWays.calculated) {
-            console.log('recalculating parents');
             for (var i in this.entities) {
                 ent = this.entities[i];
                 if (ent && ent.type === 'way') {

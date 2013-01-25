@@ -21,7 +21,10 @@ iD.svg.Midpoints = function(projection) {
                         graph.parentWays(a),
                         graph.parentWays(b));
                     var indices = parents.map(function(p) {
-                        return p.nodes.indexOf(b.id) || p.nodes.length - 1;
+                        var bi = _.lastIndexOf(p.nodes, b.id),
+                            ai = _.lastIndexOf(p.nodes, a.id);
+                        if (ai > bi) bi++; // reversed direction
+                        return bi;
                     });
                     midpoints.push({
                         loc: iD.geo.interp(nodes[j].loc, nodes[j + 1].loc, 0.5),
