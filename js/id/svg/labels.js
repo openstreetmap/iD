@@ -7,7 +7,7 @@ iD.svg.Labels = function(projection) {
         ['area', 'leisure', 'park'],
         ['area', 'natural'],
         ['point', 'amenity'],
-        ['point', 'shop'],
+        ['point', 'shop']
     ];
 
     var default_size = 12;
@@ -30,7 +30,7 @@ iD.svg.Labels = function(projection) {
     ];
 
     function get(array, prop) {
-        return function(d, i) { return array[i][prop] };
+        return function(d, i) { return array[i][prop]; };
     }
 
     var textWidthCache = {};
@@ -46,11 +46,11 @@ iD.svg.Labels = function(projection) {
 
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, iD.Entity.key)
+            .data(entities, iD.Entity.key);
 
         var tp = texts.enter()
             .append('text')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i]['classes'];})
+            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes;})
             .append('textPath')
             .attr('class', 'textpath');
 
@@ -60,9 +60,9 @@ iD.svg.Labels = function(projection) {
             .data(entities, iD.Entity.key)
             .attr({
                 'startOffset': '50%',
-                'xlink:href': function(d, i) { return '#halo-' + d.id}
+                'xlink:href': function(d, i) { return '#halo-' + d.id; }
             })
-            .text(function(d, i) { return d.tags.name });
+            .text(function(d, i) { return d.tags.name; });
 
         texts.exit().remove();
 
@@ -77,7 +77,7 @@ iD.svg.Labels = function(projection) {
         halos.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d, i) { return 'halo-' + d.id })
+            .attr('id', function(d, i) { return 'halo-' + d.id; })
             .attr('class', classes);
 
         halos.attr('d', get(labels, 'lineString'));
@@ -93,22 +93,22 @@ iD.svg.Labels = function(projection) {
 
         halos.enter()
             .append('rect')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i]['classes'];});
+            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes;});
 
         halos.attr({
             'x': function(d, i) {
-                var x = labels[i]['x'] - 2;
-                if (labels[i]['textAnchor'] === 'middle') {
-                    x -= textWidth(d.tags.name, labels[i]['height']) / 2;
+                var x = labels[i].x - 2;
+                if (labels[i].textAnchor === 'middle') {
+                    x -= textWidth(d.tags.name, labels[i].height) / 2;
                 }
                 return x;
             },
-            'y': function(d, i) { return labels[i]['y'] - labels[i]['height'] + 1 - 2; },
+            'y': function(d, i) { return labels[i].y - labels[i].height + 1 - 2; },
             'rx': 3,
             'ry': 3,
-            'width': function(d, i) { return textWidth(d.tags.name, labels[i]['height']) + 4 },
-            'height': function(d, i) { return labels[i]['height'] + 4 },
-            'fill': 'white',
+            'width': function(d, i) { return textWidth(d.tags.name, labels[i].height) + 4; },
+            'height': function(d, i) { return labels[i].height + 4; },
+            'fill': 'white'
         });
 
         halos.exit().remove();
@@ -123,23 +123,22 @@ iD.svg.Labels = function(projection) {
 
         texts.enter()
             .append('text')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i]['classes'] }) 
+            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes; });
 
         texts.attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
             .attr('transform', get(labels, 'transform'))
             .style('text-anchor', get(labels, 'textAnchor'))
-            .text(function(d) { return d.tags.name })
-            .each(function(d, i) { textWidth(d.tags.name, labels[i]['height'], this); });
+            .text(function(d) { return d.tags.name; })
+            .each(function(d, i) { textWidth(d.tags.name, labels[i].height, this); });
 
         texts.exit().remove();
         return texts;
     }
 
     function reverse(p) {
-        var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]),
-            reverse = !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > - Math.PI/2);
-        return reverse;
+        var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
+        return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > - Math.PI/2);
     }
 
     function lineString(nodes) {
@@ -157,8 +156,9 @@ iD.svg.Labels = function(projection) {
             start, end, i0, i1;
         for (var i = 0; i < nodes.length - 1; i++) {
             var current = segmentLength(i);
+            var portion;
             if (!start && sofar + current > from) {
-                var portion = (from - sofar) / current;
+                portion = (from - sofar) / current;
                 start = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
                     nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
@@ -166,7 +166,7 @@ iD.svg.Labels = function(projection) {
                 i0 = i + 1;
             }
             if (!end && sofar + current > to) {
-                var portion = (to - sofar) / current;
+                portion = (to - sofar) / current;
                 end = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
                     nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
@@ -189,15 +189,15 @@ iD.svg.Labels = function(projection) {
         var rtree = new RTree();
         var hidePoints = !d3.select('.node.point').node();
 
-        var labelable = [];
-        for (var i = 0; i < label_stack.length; i++) labelable.push([]);
+        var labelable = [], i, k, entity;
+        for (i = 0; i < label_stack.length; i++) labelable.push([]);
 
         // Split entities into groups specified by label_stack
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (i = 0; i < entities.length; i++) {
+            entity = entities[i];
             if (!entity.tags.name) continue;
             if (hidePoints && entity.geometry(graph) === 'point') continue;
-            for (var k = 0; k < label_stack.length; k ++) {
+            for (k = 0; k < label_stack.length; k ++) {
                 if (entity.geometry(graph) === label_stack[k][0] &&
                     entity.tags[label_stack[k][1]] && !entity.tags[label_stack[k][2]]) {
                     labelable[k].push(entity);
@@ -220,11 +220,11 @@ iD.svg.Labels = function(projection) {
         };
 
         // Try and find a valid label for labellable entities
-        for (var k = 0; k < labelable.length; k++) {
+        for (k = 0; k < labelable.length; k++) {
             var font_size = font_sizes[k];
-            for (var i = 0; i < labelable[k].length; i ++) {
-                var entity = labelable[k][i],
-                    width = textWidth(entity.tags.name, font_size),
+            for (i = 0; i < labelable[k].length; i ++) {
+                entity = labelable[k][i];
+                var width = textWidth(entity.tags.name, font_size),
                     p;
                 if (entity.geometry(graph) === 'point') {
                     p = getPointLabel(entity, width, font_size);
@@ -251,7 +251,7 @@ iD.svg.Labels = function(projection) {
                     x: coord[0] + offset[0],
                     y: coord[1] + offset[1],
                     textAnchor: offset[2]
-                }
+                };
             var rect = new RTree.Rectangle(p.x - m, p.y - m, width + 2*m, height + 2*m);
             if (tryInsert(rect)) return p;
         }
@@ -280,7 +280,7 @@ iD.svg.Labels = function(projection) {
                     'font-size': height + 2,
                     lineString: lineString(sub),
                     startOffset: offset + '%'
-                }
+                };
             }
         }
 
@@ -297,7 +297,7 @@ iD.svg.Labels = function(projection) {
                 y: centroid[1],
                 textAnchor: 'middle',
                 height: height
-            }
+            };
             var rect = new RTree.Rectangle(p.x - width/2, p.y, width, height);
             if (tryInsert(rect)) return p;
 
@@ -311,12 +311,12 @@ iD.svg.Labels = function(projection) {
 
         var label = surface.select('.layer-label'),
             halo = surface.select('.layer-halo'),
-            points = drawPointLabels(label, labelled['point'], filter, 'pointlabel', positions['point']),
-            pointHalos = drawPointHalos(halo, labelled['point'], filter, 'pointlabel-halo', positions['point']),
-            linesHalos = drawLineHalos(halo, labelled['line'], filter, 'linelabel-halo', positions['line']),
-            lines = drawLineLabels(label, labelled['line'], filter, 'pathlabel', positions['line']),
-            areas = drawPointLabels(label, labelled['area'], filter, 'arealabel', positions['area']),
-            areaHalos = drawPointHalos(halo, labelled['area'], filter, 'arealabel-halo', positions['area']);
+            points = drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point),
+            pointHalos = drawPointHalos(halo, labelled.point, filter, 'pointlabel-halo', positions.point),
+            linesHalos = drawLineHalos(halo, labelled.line, filter, 'linelabel-halo', positions.line),
+            lines = drawLineLabels(label, labelled.line, filter, 'pathlabel', positions.line),
+            areas = drawPointLabels(label, labelled.area, filter, 'arealabel', positions.area),
+            areaHalos = drawPointHalos(halo, labelled.area, filter, 'arealabel-halo', positions.area);
     };
 
 };
