@@ -6,7 +6,7 @@ iD.ui.geocoder = function() {
         function keydown() {
             if (d3.event.keyCode !== 13) return;
             d3.event.preventDefault();
-            d3.json('http://api.tiles.mapbox.com/v3/openstreetmap.map-hn253zqn/geocode/' +
+            d3.json('http://a.tiles.mapbox.com/v3/openstreetmap.map-hn253zqn/geocode/' +
                 encodeURIComponent(this.value) + '.json', function(err, resp) {
                 if (err) return hide();
                 hide();
