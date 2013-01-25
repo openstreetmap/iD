@@ -15,8 +15,9 @@ _.extend(iD.Relation.prototype, {
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
             return this.members.reduce(function (extent, member) {
-                if (member = resolver.entity(member.id)) {
-                    return extent.extend(member.extent(resolver))
+                member = resolver.entity(member.id);
+                if (member) {
+                    return extent.extend(member.extent(resolver));
                 } else {
                     return extent;
                 }
