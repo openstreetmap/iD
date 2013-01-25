@@ -164,7 +164,7 @@ iD.Connection = function() {
             }
         }
 
-        for (i in entities) {
+        for (i in g.entities) {
             if (entities[i].type === 'node') {
                 g.transient(entities[i], 'poi', d3.functor(false));
             }
