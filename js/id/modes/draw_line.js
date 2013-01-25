@@ -19,7 +19,7 @@ iD.modes.DrawLine = function(wayId, direction) {
         function addTail(node) {
             // connect the way in a loop
             if (way.nodes.length > 2) {
-                behavior.addNode(node, 'added to a line', iD.modes.Select(way, true))
+                behavior.addNode(node, 'added to a line');
             } else {
                 behavior.cancel();
             }
