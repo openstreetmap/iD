@@ -128,6 +128,7 @@ iD.History = function() {
         },
 
         reset: function () {
+            iD.Graph.prototype.reset();
             stack = [{graph: iD.Graph()}];
             index = 0;
             dispatch.change();

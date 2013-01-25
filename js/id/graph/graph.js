@@ -156,9 +156,12 @@ iD.Graph.prototype = {
     },
 
     difference: function (graph) {
-        var result = [], entity, oldentity, id;
+        var result = [],
+            keys = Object.keys(this.entities),
+            entity, oldentity, id;
 
-        for (id in this.entities) {
+        for (var i = 0; i < keys.length; i++) {
+            id = keys[i];
             entity = this.entities[id];
             oldentity = graph.entities[id];
             if (entity !== oldentity) {
@@ -180,7 +183,9 @@ iD.Graph.prototype = {
             }
         }
 
-        for (id in graph.entities) {
+        keys = Object.keys(graph.entities);
+        for (var i = 0; i < keys.length; i++) {
+            id = keys[i];
             entity = graph.entities[id];
             if (entity && !this.entities.hasOwnProperty(id)) {
                 result.push(id);
@@ -213,5 +218,9 @@ iD.Graph.prototype = {
             if (!entity) result.push(id);
         });
         return result;
+    },
+
+    reset: function() {
+        iD.Graph.prototype.original = {};
     }
 };
