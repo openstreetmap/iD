@@ -64,7 +64,7 @@ iD.Map = function() {
             for (var i = 0; i < parents.length; i++) {
                 var parent = parents[i];
                 if (only[parent.id] === undefined) {
-                    only[parent.id] = graph.fetch(parent.id);
+                    only[parent.id] = graph.entity(parent.id);
                     addParents(graph.parentRelations(parent));
                 }
             }
@@ -78,7 +78,7 @@ iD.Map = function() {
 
             for (var j = 0; j < difference.length; j++) {
                 var id = difference[j],
-                    entity = graph.fetch(id);
+                    entity = graph.entity(id);
 
                 // Even if the entity is false (deleted), it needs to be
                 // removed from the surface

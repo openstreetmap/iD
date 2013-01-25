@@ -1,10 +1,11 @@
 iD.actions.Circular = function(wayId, map) {
 
     var action = function(graph) {
-        var way = graph.fetch(wayId),
+        var way = graph.entity(wayId),
+            nodes = graph.childNodes(way),
             tags = {}, key, role;
 
-        var points = way.nodes.map(function(n) {
+        var points = nodes.map(function(n) {
                 return map.projection(n.loc);
             }),
             centroid = d3.geom.polygon(points).centroid(),
@@ -22,21 +23,21 @@ iD.actions.Circular = function(wayId, map) {
 
         circular_nodes.push(circular_nodes[0]);
 
-        for (i = 0; i < way.nodes.length; i++) {
-            if (graph.parentWays(way.nodes[i]).length > 1) {
+        for (i = 0; i < nodes.length; i++) {
+            if (graph.parentWays(nodes[i]).length > 1) {
                 var closest, closest_dist = Infinity, dist;
                 for (var j = 0; j < circular_nodes.length; j++) {
-                    dist = iD.geo.dist(circular_nodes[j].loc, way.nodes[i].loc);
+                    dist = iD.geo.dist(circular_nodes[j].loc, nodes[i].loc);
                     if (dist < closest_dist) {
                         closest_dist = dist;
                         closest = j;
                     }
                 }
-                circular_nodes.splice(closest, 1, way.nodes[i]);
-                if (closest === 0) circular_nodes.splice(circular_nodes.length - 1, 1, way.nodes[i]);
-                else if (closest === circular_nodes.length - 1) circular_nodes.splice(0, 1, way.nodes[i]);
+                circular_nodes.splice(closest, 1, nodes[i]);
+                if (closest === 0) circular_nodes.splice(circular_nodes.length - 1, 1, nodes[i]);
+                else if (closest === circular_nodes.length - 1) circular_nodes.splice(0, 1, nodes[i]);
             } else {
-                graph = graph.remove(way.nodes[i]);
+                graph = graph.remove(nodes[i]);
             }
         }
 

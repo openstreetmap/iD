@@ -38,7 +38,7 @@ iD.svg.Areas = function(projection) {
 
         areas.sort(areastack);
 
-        var lineString = iD.svg.LineString(projection);
+        var lineString = iD.svg.LineString(projection, graph);
 
         function drawPaths(group, areas, filter, classes) {
             var paths = group.selectAll('path.area')

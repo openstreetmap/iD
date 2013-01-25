@@ -99,13 +99,13 @@ iD.History = function() {
 
             return {
                 modified: current.modified().map(function (id) {
-                    return current.fetch(id);
+                    return current.entity(id);
                 }),
                 created: current.created().map(function (id) {
-                    return current.fetch(id);
+                    return current.entity(id);
                 }),
                 deleted: current.deleted().map(function (id) {
-                    return initial.fetch(id);
+                    return initial.entity(id);
                 })
             };
         },

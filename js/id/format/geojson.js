@@ -1,7 +1,7 @@
 iD.format.GeoJSON = {
-    mapping: function(entity) {
+    mapping: function(entity, graph) {
         if (this.mappings[entity.type]) {
-            return this.mappings[entity.type](entity);
+            return this.mappings[entity.type](entity, graph);
         }
     },
     mappings: {
@@ -15,15 +15,13 @@ iD.format.GeoJSON = {
                 }
             };
         },
-        way: function(entity) {
+        way: function(entity, graph) {
             return {
                 type: 'Feature',
                 properties: entity.tags,
                 geometry: {
                     'type': 'LineString',
-                    'coordinates': entity.nodes.map(function(node) {
-                        return node.loc;
-                    })
+                    'coordinates': _.pluck(graph.childNodes(entity), 'loc')
                 }
             };
         }

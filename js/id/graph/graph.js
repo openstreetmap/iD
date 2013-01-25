@@ -13,7 +13,7 @@ iD.Graph = function(entities, mutable) {
     this.transients = {};
     this._parentWays = {};
     this._parentRels = {};
-    this._fetches = {};
+    this._childNodes = {};
 
     if (!mutable) {
         this.freeze();
@@ -88,6 +88,18 @@ iD.Graph.prototype = {
         return this._parentRels[entity.id] || [];
     },
 
+    childNodes: function(entity) {
+        if (this._childNodes[entity.id])
+            return this._childNodes[entity.id];
+
+        var nodes = [];
+        for (var i = 0, l = entity.nodes.length; i < l; i++) {
+            nodes[i] = this.entity(entity.nodes[i]);
+        }
+
+        return (this._childNodes[entity.id] = nodes);
+    },
+
     merge: function(graph) {
         for (var i in graph.entities) {
             this.original[i] = graph.entities[i];
@@ -138,21 +150,10 @@ iD.Graph.prototype = {
         for (var i in this.entities) {
             var entity = this.entities[i];
             if (entity && entity.intersects(extent, this)) {
-                items.push(this.fetch(entity.id));
+                items.push(entity);
             }
         }
         return items;
-    },
-
-    // Resolve the id references in a way, replacing them with actual objects.
-    fetch: function(id) {
-        if (this._fetches[id]) return this._fetches[id];
-        var entity = this.entities[id], nodes = [];
-        if (!entity || !entity.nodes || !entity.nodes.length) return entity;
-        for (var i = 0, l = entity.nodes.length; i < l; i++) {
-            nodes[i] = this.fetch(entity.nodes[i]);
-        }
-        return (this._fetches[id] = iD.Entity(entity, {nodes: nodes}));
     },
 
     difference: function (graph) {

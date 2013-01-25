@@ -8,7 +8,7 @@ iD.behavior.DragWay = function(mode) {
             return d && d.id === mode.entity.id;
         })
         .origin(function(entity) {
-            return projection(entity.nodes[0].loc);
+            return projection(history.graph().entity(entity.nodes[0]).loc);
         })
         .on('start', function() {
             history.perform(

@@ -129,12 +129,12 @@ describe('iD.Graph', function() {
         });
     });
 
-    describe("#fetch", function () {
-        it("replaces node ids with references", function () {
+    describe("#childNodes", function () {
+        it("returns an array of child nodes", function () {
             var node  = iD.Node({id: "n1"}),
                 way   = iD.Way({id: "w1", nodes: ["n1"]}),
                 graph = iD.Graph({n1: node, w1: way});
-            expect(graph.fetch("w1").nodes).to.eql([node]);
+            expect(graph.childNodes(way)).to.eql([node]);
         });
     });
 

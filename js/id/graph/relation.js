@@ -82,7 +82,7 @@ _.extend(iD.Relation.prototype, {
     multipolygon: function(resolver) {
         var members = this.members
             .filter(function (m) { return m.type === 'way' && resolver.entity(m.id); })
-            .map(function (m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.fetch(m.id).nodes }; });
+            .map(function (m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.childNodes(resolver.entity(m.id)) }; });
 
         function join(ways) {
             var joined = [], current, first, last, i, how, what;

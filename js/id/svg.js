@@ -11,7 +11,7 @@ iD.svg = {
         };
     },
 
-    LineString: function (projection) {
+    LineString: function (projection, graph) {
         var cache = {};
         return function (entity) {
             if (cache[entity.id] !== undefined) {
@@ -23,7 +23,7 @@ iD.svg = {
             }
 
             return (cache[entity.id] =
-                'M' + entity.nodes.map(function (n) { return projection(n.loc); }).join('L'));
+                'M' + graph.childNodes(entity).map(function (n) { return projection(n.loc); }).join('L'));
         }
     }
 };

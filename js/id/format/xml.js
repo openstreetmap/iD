@@ -86,8 +86,8 @@ iD.format.XML = {
             var r = {
                 way: {
                     '@id': entity.id.replace('w', ''),
-                    nd: entity.nodes.map(function(e) {
-                        return { keyAttributes: { ref: e.id.replace('n', '') } };
+                    nd: entity.nodes.map(function(id) {
+                        return { keyAttributes: { ref: id.replace('n', '') } };
                     }),
                     '@version': (entity.version || 0),
                     tag: _.map(entity.tags, function(v, k) {

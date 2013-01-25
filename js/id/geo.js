@@ -16,9 +16,9 @@ iD.geo.dist = function(a, b) {
 
 iD.geo.chooseIndex = function(way, point, map) {
     var dist = iD.geo.dist,
-        projNodes = way.nodes.map(function(n) {
-        return map.projection(n.loc);
-    });
+        graph = map.history().graph(),
+        nodes = graph.childNodes(way),
+        projNodes = nodes.map(function(n) { return map.projection(n.loc); });
 
     for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
         changes[i] =
@@ -28,7 +28,7 @@ iD.geo.chooseIndex = function(way, point, map) {
 
     var idx = _.indexOf(changes, _.min(changes)),
         ratio = dist(projNodes[idx], point) / dist(projNodes[idx], projNodes[idx + 1]),
-        loc = iD.geo.interp(way.nodes[idx].loc, way.nodes[idx + 1].loc, ratio);
+        loc = iD.geo.interp(nodes[idx].loc, nodes[idx + 1].loc, ratio);
 
     return {
         index: idx + 1,

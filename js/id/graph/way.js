@@ -14,13 +14,9 @@ _.extend(iD.Way.prototype, {
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            var extent = iD.geo.Extent();
-            for (var i = 0, l = this.nodes.length; i < l; i++) {
-                var node = this.nodes[i];
-                if (node.loc === undefined) node = resolver.entity(node);
-                extent = extent.extend(node.loc);
-            }
-            return extent;
+            return this.nodes.reduce(function (extent, id) {
+                return extent.extend(resolver.entity(id).extent(resolver));
+            }, iD.geo.Extent());
         });
     },
 

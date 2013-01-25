@@ -257,7 +257,7 @@ iD.svg.Labels = function(projection) {
         }
 
         function getLineLabel(entity, width, height) {
-            var nodes = _.pluck(entity.nodes, 'loc').map(projection),
+            var nodes = _.pluck(graph.childNodes(entity), 'loc').map(projection),
                 length = iD.geo.pathLength(nodes);
             if (length < width + 20) return;
 
@@ -285,7 +285,7 @@ iD.svg.Labels = function(projection) {
         }
 
         function getAreaLabel(entity, width, height) {
-            var nodes = _.pluck(entity.nodes, 'loc')
+            var nodes = _.pluck(graph.childNodes(entity), 'loc')
                 .map(iD.svg.RoundProjection(projection)),
                 centroid = d3.geom.polygon(nodes).centroid(),
                 extent = entity.extent(graph),

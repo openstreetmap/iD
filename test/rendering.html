@@ -90,7 +90,7 @@
             filter = d3.functor(true),
             a = iD.Node({loc: [15, 15]}),
             b = iD.Node({loc: [185, 15]}),
-            way = iD.Way({nodes: [a, b]}),
+            way = iD.Way({nodes: [a.id, b.id]}),
             vertices = iD.svg.Vertices(projection),
             lines = iD.svg.Lines(projection),
             midpoints = iD.svg.Midpoints(projection);
