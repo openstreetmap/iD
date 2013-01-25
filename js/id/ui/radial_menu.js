@@ -74,7 +74,9 @@ iD.ui.RadialMenu = function(entity, history, map) {
                     action: iD.actions.Circular(entity.id, map)
                 }
             ];
-            
+        } else {
+            // Relation, not implemented yet.
+            return;
         }
 
         var arc = d3.svg.arc()
