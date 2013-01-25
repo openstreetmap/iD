@@ -15,9 +15,9 @@ describe("iD.History", function () {
 
     describe("#perform", function () {
         it("updates the graph", function () {
-            var graph = iD.Graph();
-            history.perform(d3.functor(graph));
-            expect(history.graph()).to.equal(graph);
+            var node = iD.Node();
+            history.perform(function (graph) { return graph.replace(node); });
+            expect(history.graph().entity(node.id)).to.equal(node);
         });
 
         it("pushes an undo annotation", function () {
@@ -43,9 +43,9 @@ describe("iD.History", function () {
 
     describe("#replace", function () {
         it("updates the graph", function () {
-            var graph = iD.Graph();
-            history.replace(d3.functor(graph));
-            expect(history.graph()).to.equal(graph);
+            var node = iD.Node();
+            history.replace(function (graph) { return graph.replace(node); });
+            expect(history.graph().entity(node.id)).to.equal(node);
         });
 
         it("replaces the undo annotation", function () {

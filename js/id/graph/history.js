@@ -12,10 +12,11 @@ iD.History = function() {
             annotation = actions.pop();
         }
 
-        var graph = stack[index].graph;
-        for (var i = 0; i < actions.length; i++) {
-            graph = actions[i](graph);
-        }
+        var graph = stack[index].graph.update(function (graph) {
+            for (var i = 0; i < actions.length; i++) {
+                graph = actions[i](graph);
+            }
+        });
 
         return {graph: graph, annotation: annotation, imagery_used: imagery_used};
     }
