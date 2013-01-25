@@ -52,4 +52,21 @@ describe("iD.svg.Areas", function () {
 
         expect(surface.selectAll('.other')[0].length).to.equal(1);
     });
+
+    it("stacks smaller areas above larger ones", function () {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [0, 0]}),
+                'b': iD.Node({id: 'b', loc: [1, 0]}),
+                'c': iD.Node({id: 'c', loc: [1, 1]}),
+                'd': iD.Node({id: 'd', loc: [0, 1]}),
+                's': iD.Way({area: true, tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
+                'l': iD.Way({area: true, tags: {landuse: 'park'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+            }),
+            areas = [graph.entity('s'), graph.entity('l')];
+
+        surface.call(iD.svg.Areas(projection), graph, areas, filter);
+
+        expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
+        expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+    });
 });

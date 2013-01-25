@@ -1,42 +1,22 @@
 iD.svg.Areas = function(projection) {
-
-    var area_stack = {
-        building: 0,
-        manmade: 1,
-        natural: 1,
-        boundary: 2
-    };
-
-    function findKey(a) {
-        var vals = Object.keys(a.tags).filter(function(k) {
-            return area_stack[k] !== undefined;
-        });
-        if (vals.length > 0) return area_stack[vals[0]];
-        else return -1;
-    }
-
-    function areastack(a, b) {
-        if (!a || !b || !a.tags || !b.tags) return 0;
-        if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
-            return a.tags.layer - b.tags.layer;
-        }
-        var as = 0, bs = 0;
-        as -= findKey(a);
-        bs -= findKey(b);
-        return as - bs;
-    }
-
     return function drawAreas(surface, graph, entities, filter) {
         var areas = [];
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             if (entity.geometry(graph) === 'area') {
-                areas.push(entity);
+                var points = graph.childNodes(entity).map(function(n) {
+                    return projection(n.loc);
+                });
+
+                areas.push({
+                    entity: entity,
+                    area: entity.isDegenerate() ? 0 : d3.geom.polygon(points).area()
+                });
             }
         }
 
-        areas.sort(areastack);
+        areas.sort(function(a, b) { return a.area - b.area; });
 
         var lineString = iD.svg.LineString(projection, graph);
 
@@ -62,6 +42,6 @@ iD.svg.Areas = function(projection) {
         }
 
         var fill = surface.select('.layer-fill'),
-            paths = drawPaths(fill, areas, filter, 'way area');
+            paths = drawPaths(fill, _.pluck(areas, 'entity'), filter, 'way area');
     };
 };
