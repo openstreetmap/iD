@@ -64,6 +64,50 @@ describe('iD.Graph', function() {
         });
     });
 
+    describe("#update", function () {
+        it("returns a new graph if self is frozen", function () {
+            var graph = iD.Graph();
+            expect(graph.update()).not.to.equal(graph);
+        });
+
+        it("returns self if self is not frozen", function () {
+            var graph = iD.Graph({}, true);
+            expect(graph.update()).to.equal(graph);
+        });
+
+        it("doesn't modify self is self is frozen", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+
+            graph.update(function (graph) { graph.remove(node); });
+
+            expect(graph.entity(node.id)).to.equal(node);
+        });
+
+        it("modifies self is self is not frozen", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node], true);
+
+            graph.update(function (graph) { graph.remove(node); });
+
+            expect(graph.entity(node.id)).to.be.undefined;
+        });
+
+        it("executes all of the given functions", function () {
+            var a = iD.Node(),
+                b = iD.Node(),
+                graph = iD.Graph([a]);
+
+            graph = graph.update(
+                function (graph) { graph.remove(a); },
+                function (graph) { graph.replace(b); }
+            );
+
+            expect(graph.entity(a.id)).to.be.undefined;
+            expect(graph.entity(b.id)).to.equal(b);
+        });
+    });
+
     describe("#parentWays", function() {
         it("returns an array of ways that contain the given node id", function () {
             var node  = iD.Node({id: "n1"}),

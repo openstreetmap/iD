@@ -1,5 +1,5 @@
-iD.Graph = function(entities) {
-    if (!(this instanceof iD.Graph)) return new iD.Graph(entities);
+iD.Graph = function(entities, mutable) {
+    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, mutable);
 
     if (_.isArray(entities)) {
         this.entities = {};
@@ -15,9 +15,8 @@ iD.Graph = function(entities) {
     this._parentRels = {};
     this._fetches = {};
 
-    if (iD.debug) {
-        Object.freeze(this);
-        Object.freeze(this.entities);
+    if (!mutable) {
+        this.freeze();
     }
 };
 
@@ -87,27 +86,46 @@ iD.Graph.prototype = {
     },
 
     merge: function(graph) {
-        var entities = _.clone(this.entities);
-        _.defaults(entities, graph.entities);
-        return iD.Graph(entities);
+        return this.update(function () {
+            _.defaults(this.entities, graph.entities);
+        });
     },
 
     replace: function(entity) {
-        var entities = _.clone(this.entities);
-        entities[entity.id] = entity;
-        return iD.Graph(entities);
+        return this.update(function () {
+            this.entities[entity.id] = entity;
+        });
     },
 
     remove: function(entity) {
-        var entities = _.clone(this.entities);
+        return this.update(function () {
+            if (entity.created()) {
+                delete this.entities[entity.id];
+            } else {
+                this.entities[entity.id] = undefined;
+            }
+        });
+    },
 
-        if (entity.created()) {
-            delete entities[entity.id];
-        } else {
-            entities[entity.id] = undefined;
+    update: function() {
+        var graph = this.frozen ? iD.Graph(_.clone(this.entities), true) : this;
+
+        for (var i = 0; i < arguments.length; i++) {
+            arguments[i].call(graph, graph);
         }
 
-        return iD.Graph(entities);
+        return this.frozen ? graph.freeze() : this;
+    },
+
+    freeze: function() {
+        this.frozen = true;
+
+        if (iD.debug) {
+            Object.freeze(this);
+            Object.freeze(this.entities);
+        }
+
+        return this;
     },
 
     // get all objects that intersect an extent.
