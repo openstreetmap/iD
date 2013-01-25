@@ -31,9 +31,7 @@ iD.History = function() {
         },
 
         merge: function (graph) {
-            for (var i = 0; i < stack.length; i++) {
-                stack[i].graph = stack[i].graph.merge(graph);
-            }
+            stack[0].graph.merge(graph);
         },
 
         perform: function () {

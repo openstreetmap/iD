@@ -2,12 +2,12 @@ iD.Graph = function(entities, mutable) {
     if (!(this instanceof iD.Graph)) return new iD.Graph(entities, mutable);
 
     if (_.isArray(entities)) {
-        this.entities = {};
+        this.entities = Object.create(this.original);
         for (var i = 0; i < entities.length; i++) {
             this.entities[entities[i].id] = entities[i];
         }
     } else {
-        this.entities = entities || {};
+        this.entities = _.extend(Object.create(this.original), entities);
     }
 
     this.transients = {};
@@ -21,6 +21,9 @@ iD.Graph = function(entities, mutable) {
 };
 
 iD.Graph.prototype = {
+
+    original: {},
+
     entity: function(id) {
         return this.entities[id];
     },
@@ -86,9 +89,10 @@ iD.Graph.prototype = {
     },
 
     merge: function(graph) {
-        return this.update(function () {
-            _.defaults(this.entities, graph.entities);
-        });
+        for (var i in graph.entities) {
+            this.original[i] = graph.entities[i];
+        }
+        return this;
     },
 
     replace: function(entity) {
