@@ -92,6 +92,10 @@ iD.modes.Select = function(entity, initial) {
             surface.call(radialMenu.close);
         });
 
+        map.on('move.select', function() {
+            surface.call(radialMenu.close);
+        });
+
         function click() {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {

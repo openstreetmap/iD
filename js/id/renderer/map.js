@@ -126,6 +126,7 @@ iD.Map = function() {
                 return d3.event.sourceEvent.preventDefault();
             }
         }
+
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
             iD.flash()
                 .select('.content')
@@ -151,6 +152,8 @@ iD.Map = function() {
         tilegroup.style(transformProp, transform);
         surface.style(transformProp, transform);
         queueRedraw();
+
+        dispatch.move(map);
     }
 
     function resetTransform() {
@@ -161,7 +164,6 @@ iD.Map = function() {
 
     function redraw(difference) {
         resetTransform();
-        dispatch.move(map);
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
         if (map.editable()) {
@@ -212,6 +214,8 @@ iD.Map = function() {
     };
 
     function setZoom(z) {
+        if (z === map.zoom())
+            return false;
         var scale = 256 * Math.pow(2, z),
             center = pxCenter(),
             l = pointLocation(center);
@@ -224,16 +228,20 @@ iD.Map = function() {
         t[1] += center[1] - l[1];
         projection.translate(t);
         zoom.translate(projection.translate());
+        return true;
     }
 
     function setCenter(loc) {
         var t = projection.translate(),
             c = pxCenter(),
             ll = projection(loc);
+        if (ll[0] === c[0] && ll[1] === c[1])
+            return false;
         projection.translate([
             t[0] - ll[0] + c[0],
             t[1] - ll[1] + c[1]]);
         zoom.translate(projection.translate());
+        return true;
     }
 
     map.size = function(_) {
@@ -250,23 +258,35 @@ iD.Map = function() {
     map.center = function(loc) {
         if (!arguments.length) {
             return projection.invert(pxCenter());
-        } else {
-            setCenter(loc);
-            return redraw();
         }
+
+        if (setCenter(loc)) {
+            dispatch.move(map);
+        }
+
+        return redraw();
     };
 
     map.zoom = function(z) {
         if (!arguments.length) {
             return Math.max(Math.log(projection.scale()) / Math.LN2 - 8, 0);
         }
-        setZoom(z);
+
+        if (setZoom(z)) {
+            dispatch.move(map);
+        }
+
         return redraw();
     };
 
     map.centerZoom = function(loc, z) {
-        setCenter(loc);
-        setZoom(z);
+        var centered = setCenter(loc),
+            zoomed   = setZoom(z);
+
+        if (centered || zoomed) {
+            dispatch.move(map);
+        }
+
         return redraw();
     };
 

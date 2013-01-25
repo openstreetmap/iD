@@ -24,6 +24,22 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).to.equal(map);
             expect(map.zoom()).to.equal(4);
         });
+
+        it('dispatches move event when zoom changes', function() {
+            var spy = sinon.spy();
+            map.zoom(4);
+            map.on('move', spy);
+            map.zoom(5);
+            expect(spy).to.have.been.called;
+        });
+
+        it('dispatches no move event when zoom does not change', function() {
+            var spy = sinon.spy();
+            map.zoom(4);
+            map.on('move', spy);
+            map.zoom(4);
+            expect(spy).not.to.have.been.called;
+        });
     });
 
     describe('#zoomIn', function() {
@@ -55,6 +71,22 @@ describe('iD.Map', function() {
             expect(map.center([10, 15])).to.equal(map);
             expect(map.center()[0]).to.be.closeTo(10, 0.5);
             expect(map.center()[1]).to.be.closeTo(15, 0.5);
+        });
+
+        it('dispatches move event when center changes', function() {
+            var spy = sinon.spy();
+            map.center([0, 0]);
+            map.on('move', spy);
+            map.center([1, 1]);
+            expect(spy).to.have.been.called;
+        });
+
+        it('dispatches no move event when center does not change', function() {
+            var spy = sinon.spy();
+            map.center([0, 0]);
+            map.on('move', spy);
+            map.center([0, 0]);
+            expect(spy).not.to.have.been.called;
         });
     });
 
