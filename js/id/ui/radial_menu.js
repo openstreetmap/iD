@@ -1,4 +1,6 @@
 iD.ui.RadialMenu = function(entity, history, map) {
+    var arcs;
+
     var radialMenu = function(selection, center) {
         var operations,
             graph = history.graph(),
@@ -81,7 +83,7 @@ iD.ui.RadialMenu = function(entity, history, map) {
             .startAngle(function (d, i) { return 2 * Math.PI / operations.length * i; })
             .endAngle(function (d, i) { return 2 * Math.PI / operations.length * (i + 1); });
 
-        var arcs = selection.selectAll('.radial-menu')
+        arcs = selection.selectAll()
             .data(operations)
             .enter().append('g')
             .attr('class', 'radial-menu')
@@ -105,10 +107,11 @@ iD.ui.RadialMenu = function(entity, history, map) {
     };
 
     radialMenu.close = function(selection) {
-        selection.selectAll('.radial-menu')
-            .transition()
-            .attr('opacity', 0)
-            .remove();
+        if (arcs) {
+            arcs.transition()
+                .attr('opacity', 0)
+                .remove();
+        }
     };
 
     return radialMenu;
