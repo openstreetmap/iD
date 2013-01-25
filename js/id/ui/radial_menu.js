@@ -1,4 +1,4 @@
-iD.ui.RadialMenu = function(entity, history) {
+iD.ui.RadialMenu = function(entity, history, map) {
     var radialMenu = function(selection, center) {
         var operations,
             graph = history.graph(),
@@ -49,6 +49,14 @@ iD.ui.RadialMenu = function(entity, history) {
                     action: iD.actions.ReverseWay(entity.id)
                 }
             ];
+            if (entity.isClosed()) {
+                operations.push({
+                   id: 'circlar',
+                   text: 'Circular',
+                   description: 'made way circular',
+                   action: iD.actions.Circular(entity.id, map)
+                });
+            }
         } else if (geometry === 'area') {
             operations = [
                 {
@@ -56,8 +64,15 @@ iD.ui.RadialMenu = function(entity, history) {
                     text: 'Delete',
                     description: 'deleted an area',
                     action: iD.actions.DeleteWay(entity.id)
+                },
+                {
+                    id: 'circlar',
+                    text: 'Circular',
+                    description: 'made area circular',
+                    action: iD.actions.Circular(entity.id, map)
                 }
             ];
+            
         }
 
         var arc = d3.svg.arc()
