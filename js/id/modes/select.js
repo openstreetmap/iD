@@ -144,8 +144,6 @@ iD.modes.Select = function(entity, initial) {
 
             if (entity.type === 'node') {
                 loc = entity.loc;
-            } else if (entity.type === 'way') {
-                loc = iD.geo.chooseIndex(entity, d3.mouse(map.surface.node()), map).loc;
             }
 
             surface.call(radialMenu, map.projection(loc));
