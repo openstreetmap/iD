@@ -211,6 +211,7 @@ window.iD = function(container) {
         });
 
         var keybinding = d3.keybinding('main')
+            .on('M', function() { if (map.editable()) controller.enter(iD.modes.Browse()); })
             .on('P', function() { if (map.editable()) controller.enter(iD.modes.AddPoint()); })
             .on('L', function() { if (map.editable()) controller.enter(iD.modes.AddLine()); })
             .on('A', function() { if (map.editable()) controller.enter(iD.modes.AddArea()); })
