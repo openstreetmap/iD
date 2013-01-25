@@ -10,7 +10,7 @@ iD.Hash = function() {
         var args = (q.map || '').split("/").map(Number);
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
-        } else {
+        } else if (s !== formatter(map).slice(1)) {
             map.centerZoom([args[2],
                 Math.min(lat, Math.max(-lat, args[1]))],
                 args[0]);
