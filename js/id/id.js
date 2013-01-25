@@ -190,7 +190,9 @@ window.iD = function(container) {
                 redo = history.redoAnnotation();
 
             function refreshTooltip(selection) {
-                if (selection.property('tooltipVisible')) {
+                if (selection.property('disabled')) {
+                    selection.call(undo_tooltip.hide);
+                } else if (selection.property('tooltipVisible')) {
                     selection.call(undo_tooltip.show);
                 }
             }
@@ -198,12 +200,12 @@ window.iD = function(container) {
             limiter.select('#undo')
                 .property('disabled', !undo)
                 .attr('data-original-title', undo)
-                .call(undo ? refreshTooltip : undo_tooltip.hide);
+                .call(refreshTooltip);
 
             limiter.select('#redo')
                 .property('disabled', !redo)
                 .attr('data-original-title', redo)
-                .call(redo ? refreshTooltip : undo_tooltip.hide);
+                .call(refreshTooltip);
         });
 
         d3.select(window).on('resize.editor', function() {
