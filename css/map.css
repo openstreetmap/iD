@@ -702,3 +702,24 @@ text.point.tag-amenity {
 .mode-add-area .area {
     pointer-events: visibleStroke;
 }
+
+.mode-add-line #surface .layer *,
+.mode-add-point #surface .layer *,
+.mode-add-area #surface .layer * {
+    opacity: 0.5;
+}
+
+.mode-add-line #surface .layer .line,
+.mode-add-point #surface .layer .point,
+.mode-add-point #surface .layer .point *,
+.mode-add-area #surface .layer .area,
+.mode-add-area #surface .layer .handle,
+.mode-add-line #surface .layer .handle,
+.mode-add-area #surface .layer .vertex,
+.mode-add-line #surface .layer .vertex,
+.mode-add-area #surface .layer .handle *,
+.mode-add-line #surface .layer .handle *,
+.mode-add-area #surface .layer .vertex *,
+.mode-add-line #surface .layer .vertex * {
+    opacity: 1;
+}
