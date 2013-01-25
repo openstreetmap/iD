@@ -81,10 +81,10 @@ iD.ui.RadialMenu = function(entity, history, map) {
             .startAngle(function (d, i) { return 2 * Math.PI / operations.length * i; })
             .endAngle(function (d, i) { return 2 * Math.PI / operations.length * (i + 1); });
 
-        var arcs = selection.selectAll('.arc-menu')
+        var arcs = selection.selectAll('.radial-menu')
             .data(operations)
             .enter().append('g')
-            .attr('class', 'arc-menu')
+            .attr('class', 'radial-menu')
             .attr('transform', "translate(" + center + ")")
             .attr('opacity', 0);
 
@@ -92,7 +92,7 @@ iD.ui.RadialMenu = function(entity, history, map) {
             .attr('opacity', 0.8);
 
         arcs.append('path')
-            .attr('class', function (d) { return 'arc-menu-item arc-menu-item-' + d.id; })
+            .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('d', arc)
             .classed('disabled', function (d) { return !d.action.enabled(history.graph()); })
             .on('click', function (d) { history.perform(d.action, d.description); });
@@ -105,7 +105,7 @@ iD.ui.RadialMenu = function(entity, history, map) {
     };
 
     radialMenu.close = function(selection) {
-        selection.selectAll('.arc-menu')
+        selection.selectAll('.radial-menu')
             .transition()
             .attr('opacity', 0)
             .remove();
