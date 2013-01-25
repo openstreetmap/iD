@@ -68,7 +68,7 @@ iD.ui.RadialMenu = function(entity, history) {
 
         var arcs = selection.selectAll('.arc-menu')
             .data(operations)
-          .enter().append('g')
+            .enter().append('g')
             .attr('class', 'arc-menu')
             .attr('transform', "translate(" + center + ")")
             .attr('opacity', 0);
@@ -91,6 +91,8 @@ iD.ui.RadialMenu = function(entity, history) {
 
     radialMenu.close = function(selection) {
         selection.selectAll('.arc-menu')
+            .transition()
+            .attr('opacity', 0)
             .remove();
     };
 
