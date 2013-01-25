@@ -15,16 +15,14 @@ iD.format.XML = {
         return s.replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
     },
     // Generate Changeset XML. Returns a string.
-    changeset: function(comment, imagery_used) {
+    changeset: function(tags) {
         return (new XMLSerializer()).serializeToString(
         JXON.unbuild({
             osm: {
                 changeset: {
-                    tag: [
-                        { '@k': 'created_by', '@v': 'iD 0.0.0' },
-                        { '@k': 'comment', '@v': comment || '' },
-                        { '@k': 'imagery_used', '@v': imagery_used.join(';')}
-                    ],
+                    tag: _.map(tags, function(value, key) {
+                        return { '@k': key, '@v': value };
+                    }),
                     '@version': 0.3,
                     '@generator': 'iD'
                 }

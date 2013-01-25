@@ -4,6 +4,7 @@ iD.Connection = function() {
         url = 'http://www.openstreetmap.org',
         connection = {},
         user = {},
+        version,
         keys,
         inflight = {},
         loadedTiles = {},
@@ -186,7 +187,11 @@ iD.Connection = function() {
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: iD.format.XML.changeset(comment, imagery_used)
+                content: iD.format.XML.changeset({
+                    imagery_used: imagery_used.join(';'),
+                    comment: comment,
+                    created_by: 'iD ' + (version || '')
+                })
             }, function (err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({
@@ -319,6 +324,12 @@ iD.Connection = function() {
             if (callback) callback(err, res);
         }
         return oauth.authenticate(done);
+    };
+
+    connection.version = function(_) {
+        if (!arguments.length) return version;
+        version = _;
+        return connection;
     };
 
     connection.bboxFromAPI = bboxFromAPI;

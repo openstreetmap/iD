@@ -1,5 +1,9 @@
 window.iD = function(container) {
-    var connection = iD.Connection(),
+    // the reported, displayed version of iD.
+    var version = '0.0.0-alpha1';
+
+    var connection = iD.Connection()
+        .version(version),
         history = iD.History(),
         map = iD.Map()
             .connection(connection)
@@ -142,7 +146,7 @@ window.iD = function(container) {
             .attr('id','about')
             .attr('class','pad1 fillD about-block link-list');
         linkList.append('li').append('a').attr('target', '_blank')
-            .attr('href', 'http://github.com/systemed/iD').text('view code');
+            .attr('href', 'http://github.com/systemed/iD').text(version);
         linkList.append('li').append('a').attr('target', '_blank')
             .attr('href', 'http://github.com/systemed/iD/issues').text('report a bug');
 
