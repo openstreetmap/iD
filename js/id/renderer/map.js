@@ -91,7 +91,8 @@ iD.Map = function() {
             }
 
             all = _.compact(_.values(only));
-            filter = function(d) { return d.midpoint ? d.way in only : d.id in only; };
+            filter = function(d) { return d.midpoint ?
+                d.ways.some(function(w) { return w in only; }) : d.id in only; };
         }
 
         if (all.length > 100000) {
