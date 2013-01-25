@@ -5,14 +5,15 @@ iD.ui.save = function() {
     function save(selection) {
 
         var history = map.history(),
-            connection = map.connection();
+            connection = map.connection(),
+            tooltip = bootstrap.tooltip()
+                .placement('bottom');
 
         selection.html("<span class='label'>Save</span><small id='as-username'></small>")
             .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
             .attr('tabindex', -1)
             .property('disabled', true)
-            .call(bootstrap.tooltip()
-                .placement('bottom'))
+            .call(tooltip)
             .on('click', function() {
 
             function commit(e) {
@@ -82,6 +83,10 @@ iD.ui.save = function() {
                 .classed('has-count', hasChanges)
                 .select('span.count')
                     .text(history.numChanges());
+
+            if (!hasChanges) {
+                selection.call(tooltip.hide);
+            }
         });
     }
 
