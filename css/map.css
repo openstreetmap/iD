@@ -171,10 +171,13 @@ path.shadow.selected {
     stroke-opacity: 0.7;
 }
 
-path.area,
+path.area.stroke,
 path.multipolygon {
     stroke-width:2;
     stroke:#fff;
+}
+path.area.fill,
+path.multipolygon {
     fill:#fff;
     fill-opacity:0.3;
 }
@@ -183,39 +186,48 @@ path.multipolygon {
     fill-rule: evenodd;
 }
 
-path.area.member-type-multipolygon {
+path.area.fill.member-type-multipolygon {
     fill: none;
 }
 
-path.area.selected {
+path.area.stroke.selected {
     stroke-width:4 !important;
 }
 
-path.area.tag-natural,
+path.area.stroke.tag-natural,
 path.multipolygon.tag-natural {
     stroke: #ADD6A5;
-    fill: #ADD6A5;
     stroke-width:1;
 }
+path.area.fill.tag-natural,
+path.multipolygon.tag-natural {
+    fill: #ADD6A5;
+}
 
-path.area.tag-natural-water,
+path.area.stroke.tag-natural-water,
 path.multipolygon.tag-natural-water {
     stroke: #6382FF;
+}
+path.area.fill.tag-natural-water,
+path.multipolygon.tag-natural-water {
     fill: #ADBEFF;
 }
 
-path.area.tag-building,
+path.area.stroke.tag-building,
 path.multipolygon.tag-building {
     stroke: #9E176A;
     stroke-width: 1;
+}
+path.area.fill.tag-building,
+path.multipolygon.tag-building {
     fill: #ff6ec7;
 }
 
-path.area.tag-landuse,
-path.area.tag-natural-wood,
-path.area.tag-natural-tree,
-path.area.tag-natural-grassland,
-path.area.tag-leisure-park,
+path.area.stroke.tag-landuse,
+path.area.stroke.tag-natural-wood,
+path.area.stroke.tag-natural-tree,
+path.area.stroke.tag-natural-grassland,
+path.area.stroke.tag-leisure-park,
 path.multipolygon.tag-landuse,
 path.multipolygon.tag-natural-wood,
 path.multipolygon.tag-natural-tree,
@@ -223,14 +235,28 @@ path.multipolygon.tag-natural-grassland,
 path.multipolygon.tag-leisure-park {
     stroke: #006B34;
     stroke-width: 1;
+}
+path.area.fill.tag-landuse,
+path.area.fill.tag-natural-wood,
+path.area.fill.tag-natural-tree,
+path.area.fill.tag-natural-grassland,
+path.area.fill.tag-leisure-park,
+path.multipolygon.tag-landuse,
+path.multipolygon.tag-natural-wood,
+path.multipolygon.tag-natural-tree,
+path.multipolygon.tag-natural-grassland,
+path.multipolygon.tag-leisure-park {
     fill: #189E59;
     fill-opacity: 0.2;
 }
 
-path.area.tag-amenity-parking,
+path.area.stroke.tag-amenity-parking,
 path.multipolygon.tag-amenity-parking {
     stroke: #beb267;
     stroke-width: 1;
+}
+path.area.fill.tag-amenity-parking,
+path.multipolygon.tag-amenity-parking {
     fill: #edecc0;
 }
 
