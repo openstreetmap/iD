@@ -1,45 +1,35 @@
 iD.ui.notice = function(selection) {
-    var message = '',
+    var event = d3.dispatch('zoom'),
+        message = '',
         notice = {};
 
     var div = selection.append('div')
         .attr('class', 'notice')
-        .style('display', 'none');
+        .append('div')
+        .attr('class', 'notice-inner');
 
-    var txt = div.append('div')
-        .attr('class', 'notice-text');
+    div.append('button')
+        .attr('class', 'zoom-to')
+        .on('click', function() {
+            event.zoom();
+        })
+        .append('span')
+        .attr('class', 'icon invert zoom-in');
 
-    function replace(a, b) {
-        a.style('opacity', 1)
-            .transition()
-            .each('end', function() {
-                a.style('display', 'none');
-                b.style('display', 'inline-block')
-                    .style('opacity', 0)
-                    .transition()
-                    .style('opacity', 1);
-            })
-            .style('opacity', 0);
-    }
+    div.append('span')
+        .attr('class', 'notice-text')
+        .text('zoom in to edit the map');
 
     notice.message = function(_) {
-        div.attr('class', 'notice inner');
-        if (!arguments.length) return _;
-        if (!message && _) {
-            txt.text(_);
-            replace(selection.select('.button-wrap'), div);
-        } else if (_ && message !== _) {
-            txt.text(_);
+        if (_) {
             selection.select('.button-wrap').style('display', 'none');
-        } else if (!_) {
-            txt.text('');
-            if (message) {
-                replace(div, selection.select('.button-wrap'));
-            }
+            div.style('display', 'block');
+        } else {
+            selection.select('.button-wrap').style('display', 'block');
+            div.style('display', 'none');
         }
-        message = _;
         return notice;
     };
 
-    return notice;
+    return d3.rebind(notice, event, 'on');
 };

@@ -46,16 +46,18 @@ window.iD = function(container) {
 
         function disableTooHigh() {
             if (map.editable()) {
-                notice.message('');
+                notice.message(false);
                 buttons.attr('disabled', null);
             } else {
                 buttons.attr('disabled', 'disabled');
-                notice.message('Zoom in to edit the map');
+                notice.message(true);
                 controller.enter(iD.modes.Browse());
             }
         }
 
-        var notice = iD.ui.notice(limiter).message(null);
+        var notice = iD.ui.notice(limiter)
+            .message(false)
+            .on('zoom', function() { map.zoom(16); });
 
         map.on('move.editor', _.debounce(function() {
             disableTooHigh();

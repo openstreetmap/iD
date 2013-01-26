@@ -425,6 +425,8 @@ button[disabled] .label {
 .icon.nearby     { background-position: -340px 0px;}
 .icon.geolocate  { background-position: -360px 0px;}
 
+.icon.invert.zoom-in    { background-position: -240px -40px;}
+
 .icon.browse     { background-position:   0px 0px;}
 .icon.add-point  { background-position: -20px 0px;}
 .icon.add-line   { background-position: -40px 0px;}
@@ -996,17 +998,22 @@ div.typeahead a:first-child {
     float:left;
     width:33.333%;
     padding-right: 10px;
+    text-align:center;
 }
 
-.notice .notice-text {
+.notice .notice-inner {
     height: 40px;
-    text-align: center;
-    font-weight: normal;
     border-radius: 5px;
     line-height: 40px;
     background: #fff;
     color: #000;
     opacity: 0.9;
+}
+
+.notice .notice-inner .zoom-to {
+    width:40px;
+    height:40px;
+    margin-right:10px;
 }
 
 /* Tooltips
