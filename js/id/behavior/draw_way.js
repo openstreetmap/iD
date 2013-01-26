@@ -4,13 +4,17 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
         controller = mode.controller,
         event = d3.dispatch('add', 'addHead', 'addTail', 'addNode', 'addWay'),
         way = mode.history.graph().entity(wayId),
-        nodeId = way.nodes[index],
         hover, draw;
 
+    var node = iD.Node({loc: map.mouseCoordinates()}),
+        nodeId = node.id;
+
+    history[way.isDegenerate() ? 'replace' : 'perform'](
+        iD.actions.AddNode(node),
+        iD.actions.AddWayNode(wayId, node.id, index));
+
     function move() {
-        history.replace(
-            iD.actions.MoveNode(nodeId, map.mouseCoordinates()),
-            history.undoAnnotation());
+        history.replace(iD.actions.MoveNode(nodeId, map.mouseCoordinates()));
     }
 
     function add() {
@@ -34,12 +38,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
     }
 
     function undone() {
-        var way = history.graph().entity(wayId);
-        if (way) {
-            controller.enter(mode);
-        } else {
-            controller.enter(iD.modes.Browse());
-        }
+        controller.enter(iD.modes.Browse());
     }
 
     var drawWay = function(surface) {
@@ -73,10 +72,18 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
         history.on('undone.draw', null);
     };
 
+    function ReplaceTemporaryNode(newNode) {
+        return function(graph) {
+            return graph
+                .replace(way.removeNode(nodeId).addNode(newNode.id, index))
+                .remove(node);
+        }
+    }
+
     // Connect the way to an existing node and continue drawing.
     drawWay.addNode = function(node, annotation) {
         history.perform(
-            iD.actions.AddWayNode(wayId, node.id, index),
+            ReplaceTemporaryNode(node),
             annotation);
 
         controller.enter(mode);
@@ -88,8 +95,8 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
 
         history.perform(
             iD.actions.AddNode(newNode),
-            iD.actions.AddWayNode(wayId, newNode.id, index),
             iD.actions.AddWayNode(way.id, newNode.id, wayIndex),
+            ReplaceTemporaryNode(newNode),
             annotation);
 
         controller.enter(mode);
@@ -99,9 +106,9 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
     drawWay.add = function(loc, annotation) {
         var newNode = iD.Node({loc: loc});
 
-        history.perform(
+        history.replace(
             iD.actions.AddNode(newNode),
-            iD.actions.AddWayNode(wayId, newNode.id, index),
+            ReplaceTemporaryNode(newNode),
             annotation);
 
         controller.enter(mode);
@@ -110,9 +117,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
     // Finish the draw operation, removing the temporary node. If the way has enough
     // nodes to be valid, it's selected. Otherwise, return to browse mode.
     drawWay.finish = function() {
-        history.replace(
-            iD.actions.DeleteNode(nodeId),
-            history.undoAnnotation());
+        history.pop();
 
         var way = history.graph().entity(wayId);
         if (way) {

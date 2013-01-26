@@ -14,52 +14,40 @@ iD.modes.AddArea = function() {
             history = mode.history,
             controller = mode.controller;
 
-        function startFromNode(a) {
-            var way = iD.Way({tags: defaultTags}),
-                b = iD.Node({loc: a.loc});
+        function startFromNode(node) {
+            var way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(b),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, a.id),
-                iD.actions.AddWayNode(way.id, b.id),
-                iD.actions.AddWayNode(way.id, a.id),
-                'started an area');
+                iD.actions.AddWayNode(way.id, node.id),
+                iD.actions.AddWayNode(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id));
         }
 
         function startFromWay(other, loc, index) {
-            var a = iD.Node({loc: loc}),
-                b = iD.Node({loc: loc}),
+            var node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(a),
-                iD.actions.AddNode(b),
+                iD.actions.AddNode(node),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, a.id),
-                iD.actions.AddWayNode(way.id, b.id),
-                iD.actions.AddWayNode(way.id, a.id),
-                iD.actions.AddWayNode(other.id, a.id, index),
-                'started an area');
+                iD.actions.AddWayNode(way.id, node.id),
+                iD.actions.AddWayNode(way.id, node.id),
+                iD.actions.AddWayNode(other.id, node.id, index));
 
             controller.enter(iD.modes.DrawArea(way.id));
         }
 
         function start(loc) {
-            var a = iD.Node({loc: loc}),
-                b = iD.Node({loc: loc}),
+            var node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(a),
-                iD.actions.AddNode(b),
+                iD.actions.AddNode(node),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, a.id),
-                iD.actions.AddWayNode(way.id, b.id),
-                iD.actions.AddWayNode(way.id, a.id),
-                'started an area');
+                iD.actions.AddWayNode(way.id, node.id),
+                iD.actions.AddWayNode(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id));
         }

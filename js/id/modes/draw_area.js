@@ -8,24 +8,25 @@ iD.modes.DrawArea = function(wayId) {
 
     mode.enter = function() {
         var way = mode.history.graph().entity(wayId),
-            index = way.nodes.length - 2,
-            headId = way.nodes[index - 1],
-            tailId = way.first();
+            index = -1,
+            headId = way.nodes[way.nodes.length - 2],
+            tailId = way.first(),
+            annotation = way.isDegenerate() ? 'started an area' : 'continued an area';
 
         function addHeadTail() {
             behavior.finish();
         }
 
         function addNode(node) {
-            behavior.addNode(node, way.nodes.length > 2 ? 'added to an area' : '');
+            behavior.addNode(node, annotation);
         }
 
         function addWay(way, loc, index) {
-            behavior.addWay(way, loc, index, way.nodes.length > 2 ? 'added to an area' : '');
+            behavior.addWay(way, loc, index, annotation);
         }
 
         function add(loc) {
-            behavior.add(loc, way.nodes.length > 2 ? 'added to an area' : '');
+            behavior.add(loc, annotation);
         }
 
         behavior = iD.behavior.DrawWay(wayId, headId, tailId, index, mode)
