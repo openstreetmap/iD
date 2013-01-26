@@ -697,7 +697,7 @@ text.point.tag-amenity {
 
 /* Ensure drawing doesn't interact with area fills. */
 .mode-draw-line .area,
-.mode-draw.area .area,
+.mode-draw-area .area,
 .mode-add-line .area,
 .mode-add-area .area {
     pointer-events: visibleStroke;
