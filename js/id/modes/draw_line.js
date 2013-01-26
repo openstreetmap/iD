@@ -8,9 +8,10 @@ iD.modes.DrawLine = function(wayId, direction) {
 
     mode.enter = function() {
         var way = mode.history.graph().entity(wayId),
-            index = (direction === 'forward') ? way.nodes.length - 1 : 0,
-            headId = (direction === 'forward') ? way.nodes[index - 1] : way.nodes[index + 1],
-            tailId = (direction === 'forward') ? way.first() : way.last();
+            index = (direction === 'forward') ? undefined : 0,
+            headId = (direction === 'forward') ? way.last() : way.first(),
+            tailId = (direction === 'forward') ? way.first() : way.last(),
+            annotation = way.isDegenerate() ? 'started a line' : 'continued a line';
 
         function addHead() {
             behavior.finish();
@@ -19,22 +20,22 @@ iD.modes.DrawLine = function(wayId, direction) {
         function addTail(node) {
             // connect the way in a loop
             if (way.nodes.length > 2) {
-                behavior.addNode(node, 'added to a line');
+                behavior.addNode(node, annotation);
             } else {
                 behavior.cancel();
             }
         }
 
         function addNode(node) {
-            behavior.addNode(node, 'added to a line');
+            behavior.addNode(node, annotation);
         }
 
         function addWay(way, loc, index) {
-            behavior.addWay(way, loc, index, 'added to a line');
+            behavior.addWay(way, loc, index, annotation);
         }
 
         function add(loc) {
-            behavior.add(loc, 'added to a line');
+            behavior.add(loc, annotation);
         }
 
         behavior = iD.behavior.DrawWay(wayId, headId, tailId, index, mode)

@@ -70,9 +70,37 @@ describe("iD.History", function () {
         });
     });
 
+    describe("#pop", function () {
+        it("updates the graph", function () {
+            history.perform(action, "annotation");
+            history.pop();
+            expect(history.undoAnnotation()).to.be.undefined;
+        });
+
+        it("does not push the redo stack", function () {
+            history.perform(action, "annotation");
+            history.pop();
+            expect(history.redoAnnotation()).to.be.undefined;
+        });
+
+        it("emits a change event", function () {
+            history.perform(action);
+            history.on('change', spy);
+            history.pop();
+            expect(spy).to.have.been.calledWith([]);
+        });
+    });
+
     describe("#undo", function () {
         it("pops the undo stack", function () {
             history.perform(action, "annotation");
+            history.undo();
+            expect(history.undoAnnotation()).to.be.undefined;
+        });
+
+        it("pops past unannotated states", function () {
+            history.perform(action, "annotation");
+            history.perform(action);
             history.undo();
             expect(history.undoAnnotation()).to.be.undefined;
         });

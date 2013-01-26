@@ -54,9 +54,26 @@ iD.History = function() {
             change(previous);
         },
 
+        pop: function () {
+            var previous = stack[index].graph;
+
+            if (index > 0) {
+                index--;
+                stack.pop();
+                change(previous);
+            }
+        },
+
         undo: function () {
             var previous = stack[index].graph;
 
+            // Pop to the first annotated state.
+            while (index > 0) {
+                if (stack[index].annotation) break;
+                index--;
+            }
+
+            // Pop to the next annotated state.
             while (index > 0) {
                 index--;
                 if (stack[index].annotation) break;

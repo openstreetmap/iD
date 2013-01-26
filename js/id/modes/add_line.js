@@ -14,71 +14,49 @@ iD.modes.AddLine = function() {
             history = mode.history,
             controller = mode.controller;
 
-        function startFromNode(a) {
-            var b = iD.Node({loc: a.loc}),
-                graph = history.graph(),
-                parent = graph.parentWays(a)[0],
+        function startFromNode(node) {
+            var graph = history.graph(),
+                parent = graph.parentWays(node)[0],
                 isLine = parent && parent.geometry(graph) === 'line';
 
-            if (isLine && parent.first() === a.id) {
-                history.perform(
-                    iD.actions.AddNode(b),
-                    iD.actions.AddWayNode(parent.id, b.id, 0),
-                    'continued a line');
-
+            if (isLine && parent.first() === node.id) {
                 controller.enter(iD.modes.DrawLine(parent.id, 'backward'));
 
-            } else if (isLine && parent.last() === a.id) {
-                history.perform(
-                    iD.actions.AddNode(b),
-                    iD.actions.AddWayNode(parent.id, b.id),
-                    'continued a line');
-
+            } else if (isLine && parent.last() === node.id) {
                 controller.enter(iD.modes.DrawLine(parent.id, 'forward'));
 
             } else {
                 var way = iD.Way({tags: defaultTags});
 
                 history.perform(
-                    iD.actions.AddNode(b),
                     iD.actions.AddWay(way),
-                    iD.actions.AddWayNode(way.id, a.id),
-                    iD.actions.AddWayNode(way.id, b.id),
-                    'continued a line');
+                    iD.actions.AddWayNode(way.id, node.id));
 
                 controller.enter(iD.modes.DrawLine(way.id, 'forward'));
             }
         }
 
         function startFromWay(other, loc, index) {
-            var a = iD.Node({loc: loc}),
-                b = iD.Node({loc: loc}),
+            var node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(a),
-                iD.actions.AddNode(b),
+                iD.actions.AddNode(node),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, a.id),
-                iD.actions.AddWayNode(way.id, b.id),
-                iD.actions.AddWayNode(other.id, a.id, index),
-                'started a line');
+                iD.actions.AddWayNode(way.id, node.id),
+                iD.actions.AddWayNode(other.id, node.id, index));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward'));
         }
 
         function start(loc) {
-            var a = iD.Node({loc: loc}),
-                b = iD.Node({loc: loc}),
+            var node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(a),
-                iD.actions.AddNode(b),
+                iD.actions.AddNode(node),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, a.id),
-                iD.actions.AddWayNode(way.id, b.id),
-                'started a line');
+                iD.actions.AddWayNode(way.id, node.id));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward'));
         }
