@@ -149,21 +149,42 @@ iD.ui.layerswitcher = function(map) {
             map.redraw();
         }
 
-        adjustments.selectAll('button')
+        adjustments.append('a')
+            .text('▶ fix misalignment')
+            .attr('href', '#')
+            .classed('expanded', false)
+            .on('click', function() {
+                var exp = d3.select(this).classed('expanded');
+                if (!exp) {
+                    nudge_container.style('display', 'block');
+                    d3.select(this).text('▼ fix misalignment');
+                } else {
+                    nudge_container.style('display', 'none');
+                    d3.select(this).text('▶ fix misalignment');
+                }
+                d3.select(this).classed('expanded', !exp);
+                d3.event.preventDefault();
+            });
+
+        var nudge_container = adjustments
+            .append('div')
+            .attr('class', 'nudge-container')
+            .style('display', 'none');
+
+        nudge_container.selectAll('button')
             .data(directions).enter()
             .append('button')
             .attr('class', 'nudge')
             .text(function(d) { return d[0]; })
             .on('click', nudge);
 
-        adjustments.append('button')
+        nudge_container.append('button')
             .text('reset')
             .attr('class', 'reset')
             .on('click', function() {
                 map.background.offset([0, 0]);
                 map.redraw();
             });
-
 
         selection.call(clickoutside);
         selectLayer(map.background.source());
