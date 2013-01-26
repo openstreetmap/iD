@@ -106,9 +106,10 @@ iD.modes.Select = function(entity, initial) {
         }
 
         function dblclick() {
-            var datum = d3.select(d3.event.target).datum();
-            if (datum instanceof iD.Entity &&
-                (datum.geometry(graph) === 'area' || datum.geometry(graph) === 'line')) {
+            var selection = d3.select(d3.event.target),
+                datum = selection.datum();
+
+            if (datum instanceof iD.Way && !selection.classed('fill')) {
                 var choice = iD.geo.chooseIndex(datum,
                         d3.mouse(mode.map.surface.node()), mode.map),
                     node = iD.Node({ loc: choice.loc });
