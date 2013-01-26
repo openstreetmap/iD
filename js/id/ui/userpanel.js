@@ -3,29 +3,32 @@ iD.ui.userpanel = function(connection) {
 
     function user(selection) {
         function update() {
-            selection.html('');
             if (connection.authenticated()) {
                 selection.style('display', 'block');
                 connection.userDetails(function(user_details) {
+
+                    selection.html('');
 
                     // Link
                     var userLink = selection.append('a')
                             .attr('href', connection.url() + '/user/' +
                                   user_details.display_name)
-                            .attr('target', '_blank')
+                            .attr('target', '_blank');
 
                     // Add thumbnail or dont
-                        if (user_details.image_url) {
-                            userLink.append('img')
-                                .attr('class', 'icon icon-pre-text')
-                                .attr('src', user_details.image_url);
-                        } else {
-                            userLink.append('span')
-                                .attr('class','icon avatar icon-pre-text');
-                        }
+                    if (user_details.image_url) {
+                        userLink.append('img')
+                            .attr('class', 'icon icon-pre-text')
+                            .attr('src', user_details.image_url);
+                    } else {
+                        userLink.append('span')
+                            .attr('class','icon avatar icon-pre-text');
+                    }
 
                     // Add user name
-                    userLink.append('span').attr('class','label').text(user_details.display_name);
+                    userLink.append('span')
+                        .attr('class','label')
+                        .text(user_details.display_name);
 
                     selection
                         .append('a')
