@@ -1,8 +1,4 @@
 iD.format.XML = {
-    decode: function(s) {
-        return s.replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
-    },
-
     // Generate Changeset XML. Returns a string.
     changeset: function(tags) {
         return (new XMLSerializer()).serializeToString(

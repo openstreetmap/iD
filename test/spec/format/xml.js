@@ -2,12 +2,6 @@ describe('iD.format.XML', function() {
     var node = iD.Node({ id: 'n-1', type: 'node', loc: [-77, 38] }),
         way  = iD.Way({ id: 'w-1', type: 'way', nodes: [] });
 
-    describe('#decode', function() {
-        it('decodes xml', function() {
-            expect(iD.format.XML.decode('<">')).to.eql('&lt;&quot;&gt;');
-        });
-    });
-
     describe('#osmChange', function() {
         it('converts change data to XML', function() {
             var jxon = iD.format.XML.osmChange('jfire', '1234', {created: [node], modified: [way], deleted: []});
