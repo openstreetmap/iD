@@ -11,12 +11,12 @@ iD.svg.Areas = function(projection) {
 
                 areas.push({
                     entity: entity,
-                    area: entity.isDegenerate() ? 0 : d3.geom.polygon(points).area()
+                    area: entity.isDegenerate() ? 0 : Math.abs(d3.geom.polygon(points).area())
                 });
             }
         }
 
-        areas.sort(function(a, b) { return a.area - b.area; });
+        areas.sort(function(a, b) { return b.area - a.area; });
 
         var lineString = iD.svg.LineString(projection, graph);
 
