@@ -182,12 +182,65 @@ iD.Connection = function() {
         return oauth.authenticated();
     }
 
+    // Generate Changeset XML. Returns a string.
+    connection.changesetXML = function(tags) {
+        return (new XMLSerializer()).serializeToString(
+        JXON.unbuild({
+            osm: {
+                changeset: {
+                    tag: _.map(tags, function(value, key) {
+                        return { '@k': key, '@v': value };
+                    }),
+                    '@version': 0.3,
+                    '@generator': 'iD'
+                }
+            }
+        }));
+    };
+
+    // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
+    // XML. Returns a string.
+    connection.osmChangeXML = function(userid, changeset_id, changes) {
+        function nest(x) {
+            var groups = {};
+            for (var i = 0; i < x.length; i++) {
+                var tagName = Object.keys(x[i])[0];
+                if (!groups[tagName]) groups[tagName] = [];
+                groups[tagName].push(x[i][tagName]);
+            }
+            var order = ['node', 'way', 'relation'];
+            var ordered = {};
+            order.forEach(function(o) {
+                if (groups[o]) ordered[o] = groups[o];
+            });
+            return ordered;
+        }
+
+        function rep(entity) {
+            return entity.asJXON(changeset_id);
+        }
+
+        return (new XMLSerializer()).serializeToString(JXON.unbuild({
+            osmChange: {
+                '@version': 0.3,
+                '@generator': 'iD',
+                'create': nest(changes.created.map(rep)),
+                'modify': changes.modified.map(rep),
+                'delete': changes.deleted.map(function(x) {
+                    x = rep(x);
+                    x['@if-unused'] = true;
+                    return x;
+                })
+            }
+        }));
+    };
+
     connection.putChangeset = function(changes, comment, imagery_used, callback) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: iD.format.XML.changeset({
+                content: connection.changesetXML({
                     imagery_used: imagery_used.join(';'),
                     comment: comment,
                     created_by: 'iD ' + (version || '')
@@ -198,7 +251,7 @@ iD.Connection = function() {
                     method: 'POST',
                     path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
-                    content: iD.format.XML.osmChange(user.id, changeset_id, changes)
+                    content: connection.osmChangeXML(user.id, changeset_id, changes)
                 }, function (err) {
                     if (err) return callback(err);
                     oauth.xhr({

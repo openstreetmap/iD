@@ -39,7 +39,6 @@ all: \
 	js/id/modes.js \
 	js/id/modes/*.js \
 	js/id/controller/*.js \
-	js/id/format/*.js \
 	js/id/graph/*.js \
 	js/id/renderer/*.js \
 	js/id/svg.js \
