@@ -21,5 +21,16 @@ _.extend(iD.Node.prototype, {
 
     move: function(loc) {
         return this.update({loc: loc});
+    },
+
+    asGeoJSON: function() {
+        return {
+            type: 'Feature',
+            properties: this.tags,
+            geometry: {
+                type: 'Point',
+                coordinates: this.loc
+            }
+        }
     }
 });

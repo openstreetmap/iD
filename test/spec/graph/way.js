@@ -199,4 +199,19 @@ describe('iD.Way', function() {
             expect(w.removeNode('a').nodes).to.eql(['b', 'c', 'd', 'b']);
         });
     });
+
+    describe("#asGeoJSON", function () {
+        it("converts to a GeoJSON LineString features", function () {
+            var a = iD.Node({loc: [1, 2]}),
+                b = iD.Node({loc: [3, 4]}),
+                w = iD.Way({tags: {highway: 'residential'}, nodes: [a.id, b.id]}),
+                graph = iD.Graph([a, b, w]),
+                json = w.asGeoJSON(graph);
+
+            expect(json.type).to.equal('Feature');
+            expect(json.properties).to.eql({highway: 'residential'});
+            expect(json.geometry.type).to.equal('LineString');
+            expect(json.geometry.coordinates).to.eql([[1, 2], [3, 4]]);
+        });
+    });
 });

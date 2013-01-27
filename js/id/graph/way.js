@@ -83,5 +83,16 @@ _.extend(iD.Way.prototype, {
         }
 
         return this.update({nodes: nodes});
+    },
+
+    asGeoJSON: function(resolver) {
+        return {
+            type: 'Feature',
+            properties: this.tags,
+            geometry: {
+                type: 'LineString',
+                coordinates: _.pluck(resolver.childNodes(this), 'loc')
+            }
+        };
     }
 });
