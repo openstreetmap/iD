@@ -8,10 +8,18 @@ iD.behavior.DragMidpoint = function(mode) {
             return projection(d.loc);
         })
         .on('start', function(d) {
+            var w, nds, args = [iD.actions.AddNode(d.node)];
             d.node = iD.Node({loc: d.loc});
-            history.perform(
-                iD.actions.AddNode(d.node),
-                iD.actions.AddWayNode(d.way, d.node.id, d.index));
+            for (var i = 0; i < d.ways.length; i++) {
+                w = d.ways[i], nds = w.nodes;
+                for (var j = 0; j < nds.length; j++) {
+                    if ((nds[j] === d.nodes[0] && nds[j + 1] === d.nodes[1]) ||
+                        (nds[j] === d.nodes[1] && nds[j + 1] === d.nodes[0])) {
+                        args.push(iD.actions.AddWayNode(w.id, d.node.id, j + 1));
+                    }
+                }
+            }
+            history.perform.apply(history, args);
         })
         .on('move', function(d) {
             d3.event.sourceEvent.stopPropagation();
