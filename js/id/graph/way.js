@@ -85,6 +85,23 @@ _.extend(iD.Way.prototype, {
         return this.update({nodes: nodes});
     },
 
+    asJXON: function(changeset_id) {
+        var r = {
+            way: {
+                '@id': this.id.replace('w', ''),
+                '@version': this.version || 0,
+                nd: _.map(this.nodes, function(id) {
+                    return { keyAttributes: { ref: id.replace('n', '') } };
+                }),
+                tag: _.map(this.tags, function(v, k) {
+                    return { keyAttributes: { k: k, v: v } };
+                })
+            }
+        };
+        if (changeset_id) r.way['@changeset'] = changeset_id;
+        return r;
+    },
+
     asGeoJSON: function(resolver) {
         return {
             type: 'Feature',

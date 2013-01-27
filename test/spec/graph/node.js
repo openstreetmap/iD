@@ -52,6 +52,22 @@ describe('iD.Node', function () {
         });
     });
 
+    describe("#asJXON", function () {
+        it('converts a node to jxon', function() {
+            var node = iD.Node({id: 'n-1', loc: [-77, 38], tags: {amenity: 'cafe'}});
+            expect(node.asJXON()).to.eql({node: {
+                '@id': '-1',
+                '@lon': -77,
+                '@lat': 38,
+                '@version': 0,
+                tag: [{keyAttributes: {k: 'amenity', v: 'cafe'}}]}});
+        });
+
+        it('includes changeset if provided', function() {
+            expect(iD.Node({loc: [0, 0]}).asJXON('1234').node['@changeset']).to.equal('1234');
+        });
+    });
+
     describe("#asGeoJSON", function () {
         it("converts to a GeoJSON Point features", function () {
             var node = iD.Node({tags: {amenity: 'cafe'}, loc: [1, 2]}),

@@ -200,6 +200,21 @@ describe('iD.Way', function() {
         });
     });
 
+    describe("#asJXON", function () {
+        it('converts a way to jxon', function() {
+            var node = iD.Way({id: 'w-1', nodes: ['n1', 'n2'], tags: {highway: 'residential'}});
+            expect(node.asJXON()).to.eql({way: {
+                '@id': '-1',
+                '@version': 0,
+                nd: [{keyAttributes: {ref: '1'}}, {keyAttributes: {ref: '2'}}],
+                tag: [{keyAttributes: {k: 'highway', v: 'residential'}}]}});
+        });
+
+        it('includes changeset if provided', function() {
+            expect(iD.Way().asJXON('1234').way['@changeset']).to.equal('1234');
+        });
+    });
+
     describe("#asGeoJSON", function () {
         it("converts to a GeoJSON LineString features", function () {
             var a = iD.Node({loc: [1, 2]}),
