@@ -6,14 +6,6 @@ iD.util.trueObj = function(arr) {
     return o;
 };
 
-iD.util.codeWindow = function(content) {
-    top.win = window.open('','contentWindow',
-        'width=350,height=350,menubar=0' +
-        ',toolbar=1,status=0,scrollbars=1,resizable=1');
-    top.win.document.writeln('<pre>' + content + '</pre>');
-    top.win.document.close();
-};
-
 iD.util.tagText = function(entity) {
     return d3.entries(entity.tags).map(function(e) {
         return e.key + ': ' + e.value;
