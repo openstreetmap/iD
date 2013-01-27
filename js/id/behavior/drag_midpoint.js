@@ -9,9 +9,14 @@ iD.behavior.DragMidpoint = function(mode) {
         })
         .on('start', function(d) {
             d.node = iD.Node({loc: d.loc});
-            history.perform(
-                iD.actions.AddNode(d.node),
-                iD.actions.AddWayNode(d.way, d.node.id, d.index));
+            var ops = [iD.actions.AddNode(d.node)];
+
+            d.ways.forEach(function(w, i) {
+                console.log(d.indices[i]);
+                ops.push(iD.actions.AddWayNode(w, d.node.id, d.indices[i]));
+            });
+
+            history.perform.apply(history, ops);
         })
         .on('move', function(d) {
             d3.event.sourceEvent.stopPropagation();
