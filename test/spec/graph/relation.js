@@ -140,6 +140,21 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#asJXON", function () {
+        it('converts a relation to jxon', function() {
+            var relation = iD.Relation({id: 'r-1', members: [{id: 'w1', role: 'forward', type: 'way'}], tags: {type: 'route'}});
+            expect(relation.asJXON()).to.eql({relation: {
+                '@id': '-1',
+                '@version': 0,
+                member: [{keyAttributes: {ref: '1', role: 'forward', type: 'way'}}],
+                tag: [{keyAttributes: {k: 'type', v: 'route'}}]}});
+        });
+
+        it('includes changeset if provided', function() {
+            expect(iD.Relation().asJXON('1234').relation['@changeset']).to.equal('1234');
+        });
+    });
+
     describe("#multipolygon", function () {
         specify("single polygon consisting of a single way", function () {
             var a = iD.Node(),

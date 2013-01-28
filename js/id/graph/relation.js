@@ -66,6 +66,23 @@ _.extend(iD.Relation.prototype, {
         return this.update({members: members});
     },
 
+    asJXON: function(changeset_id) {
+        var r = {
+            relation: {
+                '@id': this.osmId(),
+                '@version': this.version || 0,
+                member: _.map(this.members, function(member) {
+                    return { keyAttributes: { type: member.type, role: member.role, ref: iD.Entity.id.toOSM(member.id) } };
+                }),
+                tag: _.map(this.tags, function(v, k) {
+                    return { keyAttributes: { k: k, v: v } };
+                })
+            }
+        };
+        if (changeset_id) r.relation['@changeset'] = changeset_id;
+        return r;
+    },
+
     isRestriction: function() {
         return !!(this.tags.type && this.tags.type.match(/^restriction:?/));
     },
