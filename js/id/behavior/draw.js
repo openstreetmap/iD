@@ -1,14 +1,23 @@
 iD.behavior.Draw = function () {
     var event = d3.dispatch('move', 'add', 'undo', 'cancel', 'finish'),
-        keybinding = d3.keybinding('draw');
+        keybinding = d3.keybinding('draw'),
+        down;
 
     function draw(selection) {
         function mousemove() {
-            event.move();
+            if (!down) event.move();
         }
 
         function click() {
             event.add();
+        }
+
+        function mousedown() {
+            down = true;
+        }
+
+        function mouseup() {
+            down = false;
         }
 
         function backspace() {
@@ -27,6 +36,8 @@ iD.behavior.Draw = function () {
         }
 
         selection
+            .on('mousedown.draw', mousedown)
+            .on('mouseup.draw', mouseup)
             .on('mousemove.draw', mousemove)
             .on('click.draw', click);
 
