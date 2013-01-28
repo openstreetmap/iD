@@ -25,9 +25,8 @@ iD.svg.Labels = function(projection) {
         [-15, 0, 'end']
     ];
 
-    var lineOffsets = [
-        50, 40, 60, 30, 70
-    ];
+    var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,
+        75, 20, 80, 15, 95, 10, 90, 5, 95];
 
     function get(array, prop) {
         return function(d, i) { return array[i][prop]; };
@@ -184,7 +183,7 @@ iD.svg.Labels = function(projection) {
     }
 
 
-    return function drawLabels(surface, graph, entities, filter) {
+    return function drawLabels(surface, graph, entities, filter, dimensions) {
 
         var rtree = new RTree();
         var hidePoints = !d3.select('.node.point').node();
@@ -256,18 +255,18 @@ iD.svg.Labels = function(projection) {
             if (tryInsert(rect)) return p;
         }
 
+
         function getLineLabel(entity, width, height) {
             var nodes = _.pluck(graph.childNodes(entity), 'loc').map(projection),
                 length = iD.geo.pathLength(nodes);
             if (length < width + 20) return;
 
-            // 50, 40, 60, 30, 70
-            for (var i = 0; i < 5; i ++) {
+            for (var i = 0; i < lineOffsets.length; i ++) {
                 var offset = lineOffsets[i],
-                    middle = offset / 100 * length;
-                if (middle <= width / 2) return;
-                var start = middle - width/2,
-                    sub = subpath(nodes, start, start + width),
+                    middle = offset / 100 * length,
+                    start = middle - width/2;
+                if (start < 0 || start + width > length) continue;
+                var sub = subpath(nodes, start, start + width),
                     rev = reverse(sub),
                     rect = new RTree.Rectangle(
                     Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
@@ -304,6 +303,9 @@ iD.svg.Labels = function(projection) {
         }
 
         function tryInsert(rect) {
+            // Check that label is visible
+            if (rect.x1 < 0 || rect.y1 < 0 || rect.x2 > dimensions[0] ||
+                rect.y2 > dimensions[1]) return false;
             var v = rtree.search(rect, true).length === 0;
             if (v) rtree.insert(rect);
             return v;

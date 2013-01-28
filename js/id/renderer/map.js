@@ -33,7 +33,7 @@ iD.Map = function() {
             .attr('id', 'tile-g');
 
         var supersurface = selection.append('div')
-            .style('position', 'absolute')
+            .style('position', 'absolute');
 
         surface = supersurface.append('svg')
             .on('mousedown.zoom', function() {
@@ -112,7 +112,7 @@ iD.Map = function() {
                 .call(areas, graph, all, filter)
                 .call(multipolygons, graph, all, filter)
                 .call(midpoints, graph, all, filter)
-                .call(labels, graph, all, filter);
+                .call(labels, graph, all, filter, dimensions);
         }
         dispatch.drawn(map);
     }
