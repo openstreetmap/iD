@@ -88,10 +88,10 @@ _.extend(iD.Way.prototype, {
     asJXON: function(changeset_id) {
         var r = {
             way: {
-                '@id': this.id.replace('w', ''),
+                '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: _.map(this.nodes, function(id) {
-                    return { keyAttributes: { ref: id.replace('n', '') } };
+                    return { keyAttributes: { ref: iD.Entity.id.toOSM(id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };

@@ -26,7 +26,7 @@ _.extend(iD.Node.prototype, {
     asJXON: function(changeset_id) {
         var r = {
             node: {
-                '@id': this.id.replace('n', ''),
+                '@id': this.osmId(),
                 '@lon': this.loc[0],
                 '@lat': this.loc[1],
                 '@version': (this.version || 0),
