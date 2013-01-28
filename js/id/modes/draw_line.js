@@ -1,4 +1,4 @@
-iD.modes.DrawLine = function(wayId, direction) {
+iD.modes.DrawLine = function(wayId, direction, baseGraph) {
     var mode = {
         button: 'line',
         id: 'draw-line'
@@ -38,7 +38,7 @@ iD.modes.DrawLine = function(wayId, direction) {
             behavior.add(loc, annotation);
         }
 
-        behavior = iD.behavior.DrawWay(wayId, headId, tailId, index, mode)
+        behavior = iD.behavior.DrawWay(wayId, headId, tailId, index, mode, baseGraph)
             .on('addHead', addHead)
             .on('addTail', addTail)
             .on('addNode', addNode)

@@ -1,4 +1,4 @@
-iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
+iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
     var map = mode.map,
         history = mode.history,
         controller = mode.controller,
@@ -129,7 +129,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
 
     // Cancel the draw operation and return to browse, deleting everything drawn.
     drawWay.cancel = function() {
-        history.perform(iD.actions.DeleteWay(wayId), 'cancelled drawing');
+        history.perform(d3.functor(baseGraph), 'cancelled drawing');
         controller.enter(iD.modes.Browse());
     };
 

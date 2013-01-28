@@ -21,10 +21,10 @@ iD.modes.AddLine = function() {
                 isLine = parent && parent.geometry(graph) === 'line';
 
             if (isLine && parent.first() === node.id) {
-                controller.enter(iD.modes.DrawLine(parent.id, 'backward'));
+                controller.enter(iD.modes.DrawLine(parent.id, 'backward', graph));
 
             } else if (isLine && parent.last() === node.id) {
-                controller.enter(iD.modes.DrawLine(parent.id, 'forward'));
+                controller.enter(iD.modes.DrawLine(parent.id, 'forward', graph));
 
             } else {
                 var way = iD.Way({tags: defaultTags});
@@ -33,12 +33,13 @@ iD.modes.AddLine = function() {
                     iD.actions.AddWay(way),
                     iD.actions.AddWayNode(way.id, node.id));
 
-                controller.enter(iD.modes.DrawLine(way.id, 'forward'));
+                controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
             }
         }
 
         function startFromWay(other, loc, index) {
-            var node = iD.Node({loc: loc}),
+            var graph = history.graph(),
+                node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
@@ -47,11 +48,12 @@ iD.modes.AddLine = function() {
                 iD.actions.AddWayNode(way.id, node.id),
                 iD.actions.AddWayNode(other.id, node.id, index));
 
-            controller.enter(iD.modes.DrawLine(way.id, 'forward'));
+            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
         }
 
         function start(loc) {
-            var node = iD.Node({loc: loc}),
+            var graph = history.graph(),
+                node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
@@ -59,7 +61,7 @@ iD.modes.AddLine = function() {
                 iD.actions.AddWay(way),
                 iD.actions.AddWayNode(way.id, node.id));
 
-            controller.enter(iD.modes.DrawLine(way.id, 'forward'));
+            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
         }
 
         behavior = iD.behavior.AddWay(mode)
