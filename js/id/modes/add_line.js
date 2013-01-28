@@ -3,7 +3,8 @@ iD.modes.AddLine = function() {
         id: 'add-line',
         button: 'line',
         title: 'Line',
-        description: 'Lines can be highways, streets, pedestrian paths, or even canals.'
+        description: 'Lines can be highways, streets, pedestrian paths, or even canals.',
+        key: 'l'
     };
 
     var behavior,

@@ -3,7 +3,8 @@ iD.modes.AddArea = function() {
         id: 'add-area',
         button: 'area',
         title: 'Area',
-        description: 'Add parks, buildings, lakes, or other areas to the map.'
+        description: 'Add parks, buildings, lakes, or other areas to the map.',
+        key: 'a'
     };
 
     var behavior,

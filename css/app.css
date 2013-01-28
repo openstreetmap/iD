@@ -1110,6 +1110,17 @@ div.typeahead a:first-child {
   left: 30px;
 }
 
+.tooltip .keyhint {
+    float: right;
+    background: #eee;
+    font-size: 10px;
+    padding: 0 4px;
+    background:#aaa;
+    color:#fff;
+    border-radius: 2px;
+    margin-left: 4px;
+}
+
 .tail {
   pointer-events:none;
   position: absolute;
