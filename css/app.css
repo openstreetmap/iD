@@ -994,6 +994,14 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
+/* Success
+------------------------------------------------------- */
+a.success-action {
+  display:inline-block;
+  padding:10px;
+  margin:10px;
+}
+
 /* Notices
 ------------------------------------------------------- */
 
@@ -1056,17 +1064,17 @@ div.typeahead a:first-child {
 }
 
 .tooltip-inner {
-    text-align: left;
-    width: 200px;
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 20px;
-    padding: 5px 10px;
-    color: #333;
-    background-color: white;
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
+  text-align: left;
+  width: 200px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 5px 10px;
+  color: #333;
+  background-color: white;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
 }
 
 .tooltip-arrow {
