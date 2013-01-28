@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/systemed/iD.png)](https://travis-ci.org/systemed/iD)
 
-[![](https://raw.github.com/systemed/iD/master/screenshot.jpg)](http://geowiki.com/iD/)
+[![](http://ideditor.com/img/editor.png)](http://geowiki.com/iD/)
 
 [Try the online demo of the most recent code.](http://geowiki.com/iD/) and
 [open issues for bugs and ideas!](https://github.com/systemed/iD/issues)
