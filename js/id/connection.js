@@ -183,8 +183,8 @@ iD.Connection = function() {
     }
 
     // Generate Changeset XML. Returns a string.
-    connection.changesetXML = function(tags) {
-        return JXON.stringify({
+    connection.changesetJXON = function(tags) {
+        return {
             osm: {
                 changeset: {
                     tag: _.map(tags, function(value, key) {
@@ -194,12 +194,12 @@ iD.Connection = function() {
                     '@generator': 'iD'
                 }
             }
-        });
+        };
     };
 
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
-    connection.osmChangeXML = function(userid, changeset_id, changes) {
+    connection.osmChangeJXON = function(userid, changeset_id, changes) {
         function nest(x) {
             var groups = {};
             for (var i = 0; i < x.length; i++) {
@@ -219,7 +219,7 @@ iD.Connection = function() {
             return entity.asJXON(changeset_id);
         }
 
-        return JXON.stringify({
+        return {
             osmChange: {
                 '@version': 0.3,
                 '@generator': 'iD',
@@ -231,7 +231,7 @@ iD.Connection = function() {
                     return x;
                 })
             }
-        });
+        };
     };
 
     connection.putChangeset = function(changes, comment, imagery_used, callback) {
@@ -239,18 +239,18 @@ iD.Connection = function() {
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: connection.changesetXML({
+                content: JXON.stringify(connection.changesetJXON({
                     imagery_used: imagery_used.join(';'),
                     comment: comment,
                     created_by: 'iD ' + (version || '')
-                })
+                }))
             }, function (err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({
                     method: 'POST',
                     path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
-                    content: connection.osmChangeXML(user.id, changeset_id, changes)
+                    content: JXON.stringify(connection.osmChangeJXON(user.id, changeset_id, changes))
                 }, function (err) {
                     if (err) return callback(err);
                     oauth.xhr({
