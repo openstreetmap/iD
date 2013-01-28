@@ -59,15 +59,12 @@ iD.ui.inspector = function() {
     function drawButtons(selection) {
         var entity = selection.datum();
 
-        var inspectorButtonWrap = selection.append('div')
-                .attr('class','button-wrap joined fl');
-
-        var inspectorButton1 = inspectorButtonWrap.append('button')
-                .attr('class', 'apply col6 action')
+        var inspectorButton = selection.append('button')
+                .attr('class', 'apply action')
                 .on('click', apply);
 
-            inspectorButton1.append('span').attr('class','icon icon-pre-text apply');
-            inspectorButton1.append('span').attr('class','label').text('Okay');
+            inspectorButton.append('span').attr('class','icon icon-pre-text apply');
+            inspectorButton.append('span').attr('class','label').text('Okay');
 
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
 

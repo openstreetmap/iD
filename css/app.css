@@ -582,9 +582,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     height: 60px;
 }
 
-.inspector-buttons .button-wrap {
-    width: 40%;
-    padding-right: 0;
+.inspector-buttons button {
+    width: 20%;
+    float: left;
 }
 
 .inspector-buttons .minor-buttons {
