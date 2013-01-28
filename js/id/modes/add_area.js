@@ -16,18 +16,20 @@ iD.modes.AddArea = function() {
             controller = mode.controller;
 
         function startFromNode(node) {
-            var way = iD.Way({tags: defaultTags});
+            var graph = history.graph(),
+                way = iD.Way({tags: defaultTags});
 
             history.perform(
                 iD.actions.AddWay(way),
                 iD.actions.AddWayNode(way.id, node.id),
                 iD.actions.AddWayNode(way.id, node.id));
 
-            controller.enter(iD.modes.DrawArea(way.id));
+            controller.enter(iD.modes.DrawArea(way.id, graph));
         }
 
         function startFromWay(other, loc, index) {
-            var node = iD.Node({loc: loc}),
+            var graph = history.graph(),
+                node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
@@ -37,11 +39,12 @@ iD.modes.AddArea = function() {
                 iD.actions.AddWayNode(way.id, node.id),
                 iD.actions.AddWayNode(other.id, node.id, index));
 
-            controller.enter(iD.modes.DrawArea(way.id));
+            controller.enter(iD.modes.DrawArea(way.id, graph));
         }
 
         function start(loc) {
-            var node = iD.Node({loc: loc}),
+            var graph = history.graph(),
+                node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
@@ -50,7 +53,7 @@ iD.modes.AddArea = function() {
                 iD.actions.AddWayNode(way.id, node.id),
                 iD.actions.AddWayNode(way.id, node.id));
 
-            controller.enter(iD.modes.DrawArea(way.id));
+            controller.enter(iD.modes.DrawArea(way.id, graph));
         }
 
         behavior = iD.behavior.AddWay(mode)
