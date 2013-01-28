@@ -1,8 +1,7 @@
 iD.behavior.DragMidpoint = function(mode) {
     var history = mode.history,
-        projection = mode.map.projection;
-
-    return iD.behavior.drag()
+        projection = mode.map.projection,
+        behavior = iD.behavior.drag()
         .delegate(".midpoint")
         .origin(function(d) {
             return projection(d.loc);
@@ -21,15 +20,20 @@ iD.behavior.DragMidpoint = function(mode) {
                 }
             }
             history.perform.apply(history, args);
+            var node = d3.selectAll('.node.vertex')
+                .filter(function(data) { return data.id === d.node.id; });
+            behavior.target(node.node(), node.datum());
+
         })
         .on('move', function(d) {
             d3.event.sourceEvent.stopPropagation();
             history.replace(
-                iD.actions.MoveNode(d.node.id, projection.invert(d3.event.point)));
+                iD.actions.MoveNode(d.id, projection.invert(d3.event.point)));
         })
         .on('end', function() {
             history.replace(
                 iD.actions.Noop(),
                 'added a node to a way');
         });
+    return behavior;
 };
