@@ -23,7 +23,8 @@ iD.behavior.drag = function () {
     var event = d3.dispatch("start", "move", "end"),
         origin = null,
         selector = '',
-        filter = null;
+        filter = null,
+        keybinding = d3.keybinding('drag');
 
     event.of = function(thiz, argumentz) {
       return function(e1) {
@@ -135,6 +136,9 @@ iD.behavior.drag = function () {
     drag.off = function(selection) {
         selection.on("mousedown.drag" + selector, null)
             .on("touchstart.drag" + selector, null);
+        keybinding
+            .on('⌘+Z', null)
+            .on('⌃+Z', null);
     };
 
     drag.delegate = function(_) {
@@ -154,6 +158,19 @@ iD.behavior.drag = function () {
         origin = _;
         return drag;
     };
+
+    drag.cancel = function() {
+        d3.select(window)
+            .on("mousemove.drag", null)
+            .on("mouseup.drag", null);
+        return drag;
+    };
+
+    keybinding
+        .on('⌘+Z', drag.cancel)
+        .on('⌃+Z', drag.cancel);
+
+    d3.select(document).call(keybinding);
 
     return d3.rebind(drag, event, "on");
 };
