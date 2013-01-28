@@ -61,14 +61,6 @@ iD.Connection = function() {
         return members;
     }
 
-    function objectData(obj) {
-        switch(obj.type) {
-            case 'node': return nodeData(obj);
-            case 'way': return wayData(obj);
-            case 'relation': return relationData(obj);
-        }
-    }
-
     function nodeData(obj) {
         var o = { type: 'node', tags: getTags(obj) };
         for (var i = 0, l = obj.attributes.length; i < l; i++) {
@@ -337,7 +329,6 @@ iD.Connection = function() {
     connection.loadTiles = _.debounce(loadTiles, 100);
     connection.userDetails = userDetails;
     connection.authenticated = authenticated;
-    connection.objectData = objectData;
 
     return d3.rebind(connection, event, 'on');
 };
