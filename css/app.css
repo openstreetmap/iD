@@ -255,6 +255,9 @@ button {
     height:40px;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
     border-radius:4px;
+    -webkit-transition: background 100ms;
+    -moz-transition: background 100ms;
+    transition: background 100ms;
 }
 
 button:hover {
