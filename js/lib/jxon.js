@@ -129,6 +129,10 @@ const JXON = new (function () {
     loadObjTree(oNewDoc, oNewDoc, oObjTree);
     return oNewDoc;
   };
+
+  this.stringify = function (oObjTree) {
+    return (new XMLSerializer()).serializeToString(JXON.unbuild(oObjTree));
+  };
 })();
 // var myObject = JXON.build(doc);
 // we got our javascript object! try: alert(JSON.stringify(myObject));

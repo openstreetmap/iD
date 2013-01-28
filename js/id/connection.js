@@ -184,8 +184,7 @@ iD.Connection = function() {
 
     // Generate Changeset XML. Returns a string.
     connection.changesetXML = function(tags) {
-        return (new XMLSerializer()).serializeToString(
-        JXON.unbuild({
+        return JXON.stringify({
             osm: {
                 changeset: {
                     tag: _.map(tags, function(value, key) {
@@ -195,7 +194,7 @@ iD.Connection = function() {
                     '@generator': 'iD'
                 }
             }
-        }));
+        });
     };
 
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
@@ -220,7 +219,7 @@ iD.Connection = function() {
             return entity.asJXON(changeset_id);
         }
 
-        return (new XMLSerializer()).serializeToString(JXON.unbuild({
+        return JXON.stringify({
             osmChange: {
                 '@version': 0.3,
                 '@generator': 'iD',
@@ -232,7 +231,7 @@ iD.Connection = function() {
                     return x;
                 })
             }
-        }));
+        });
     };
 
     connection.putChangeset = function(changes, comment, imagery_used, callback) {
