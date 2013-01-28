@@ -63,7 +63,8 @@ iD.ui.commit = function(map) {
         comment_section.append('textarea')
             .attr('class', 'changeset-comment')
             .attr('placeholder', 'Brief Description of your contributions')
-            .property('value',  localStorage.comment || '');
+            .property('value',  localStorage.comment || '')
+            .node().select();
 
         // Confirm / Cancel Buttons
         var buttonwrap = comment_section.append('div')
