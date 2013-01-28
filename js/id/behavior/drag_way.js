@@ -17,7 +17,8 @@ iD.behavior.DragWay = function(mode) {
         .on('move', function(entity) {
             d3.event.sourceEvent.stopPropagation();
             history.replace(
-                iD.actions.MoveWay(entity.id, d3.event.delta, projection));
+                iD.actions.MoveWay(entity.id, d3.event.delta, projection),
+                'moved a way');
         })
         .on('end', function() {
             history.replace(
