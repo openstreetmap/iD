@@ -51,18 +51,60 @@ describe('iD.Connection', function () {
 
     describe('#osmChangeJXON', function() {
         it('converts change data to JXON', function() {
-            var node = iD.Node({ id: 'n-1', type: 'node', loc: [-77, 38] }),
-                way  = iD.Way({ id: 'w-1', type: 'way', nodes: [] }),
-                jxon = c.osmChangeJXON('jfire', '1234', {created: [node], modified: [way], deleted: []});
+            var jxon = c.osmChangeJXON('jfire', '1234', {created: [], modified: [], deleted: []});
+
             expect(jxon).to.eql({
                 osmChange: {
                     '@version': 0.3,
                     '@generator': 'iD',
-                    'create': {node: [node.asJXON('1234').node]},
-                    'modify': [way.asJXON('1234')],
-                    'delete': []
+                    'create': {},
+                    'modify': {},
+                    'delete': {'@if-unused': true}
                 }
             });
+        });
+
+        it('includes creations ordered by nodes, ways, relations', function() {
+            var n = iD.Node({loc: [0, 0]}),
+                w = iD.Way(),
+                r = iD.Relation(),
+                changes = {created: [r, w, n], modified: [], deleted: []},
+                jxon = c.osmChangeJXON('jfire', '1234', changes);
+
+            expect(d3.entries(jxon.osmChange['create'])).to.eql([
+                {key: 'node', value: [n.asJXON('1234').node]},
+                {key: 'way', value: [w.asJXON('1234').way]},
+                {key: 'relation', value: [r.asJXON('1234').relation]}
+            ]);
+        });
+
+        it('includes modifications', function() {
+            var n = iD.Node({loc: [0, 0]}),
+                w = iD.Way(),
+                r = iD.Relation(),
+                changes = {created: [], modified: [r, w, n], deleted: []},
+                jxon = c.osmChangeJXON('jfire', '1234', changes);
+
+            expect(jxon.osmChange['modify']).to.eql({
+                node: [n.asJXON('1234').node],
+                way: [w.asJXON('1234').way],
+                relation: [r.asJXON('1234').relation]
+            });
+        });
+
+        it('includes deletions ordered by relations, ways, nodes', function() {
+            var n = iD.Node({loc: [0, 0]}),
+                w = iD.Way(),
+                r = iD.Relation(),
+                changes = {created: [], modified: [], deleted: [n, w, r]},
+                jxon = c.osmChangeJXON('jfire', '1234', changes);
+
+            expect(d3.entries(jxon.osmChange['delete'])).to.eql([
+                {key: 'relation', value: [r.asJXON('1234').relation]},
+                {key: 'way', value: [w.asJXON('1234').way]},
+                {key: 'node', value: [n.asJXON('1234').node]},
+                {key: '@if-unused', value: true}
+            ]);
         });
     });
 });

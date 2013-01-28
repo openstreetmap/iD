@@ -200,14 +200,13 @@ iD.Connection = function() {
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
     connection.osmChangeJXON = function(userid, changeset_id, changes) {
-        function nest(x) {
+        function nest(x, order) {
             var groups = {};
             for (var i = 0; i < x.length; i++) {
                 var tagName = Object.keys(x[i])[0];
                 if (!groups[tagName]) groups[tagName] = [];
                 groups[tagName].push(x[i][tagName]);
             }
-            var order = ['node', 'way', 'relation'];
             var ordered = {};
             order.forEach(function(o) {
                 if (groups[o]) ordered[o] = groups[o];
@@ -223,13 +222,9 @@ iD.Connection = function() {
             osmChange: {
                 '@version': 0.3,
                 '@generator': 'iD',
-                'create': nest(changes.created.map(rep)),
-                'modify': changes.modified.map(rep),
-                'delete': changes.deleted.map(function(x) {
-                    x = rep(x);
-                    x['@if-unused'] = true;
-                    return x;
-                })
+                'create': nest(changes.created.map(rep), ['node', 'way', 'relation']),
+                'modify': nest(changes.modified.map(rep), ['node', 'way', 'relation']),
+                'delete': _.extend(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), {'@if-unused': true})
             }
         };
     };
