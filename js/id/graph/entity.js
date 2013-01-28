@@ -20,7 +20,7 @@ iD.Entity.id.fromOSM = function (type, id) {
 };
 
 iD.Entity.id.toOSM = function (id) {
-    return +id.slice(1);
+    return id.slice(1);
 };
 
 // A function suitable for use as the second argument to d3.selection#data().
@@ -67,11 +67,11 @@ iD.Entity.prototype = {
     },
 
     created: function() {
-        return this._updated && this.osmId() < 0;
+        return this._updated && this.osmId().charAt(0) === '-';
     },
 
     modified: function() {
-        return this._updated && this.osmId() > 0;
+        return this._updated && this.osmId().charAt(0) !== '-';
     },
 
     intersects: function(extent, resolver) {

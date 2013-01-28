@@ -22,13 +22,13 @@ describe('iD.Entity', function () {
 
         describe(".fromOSM", function () {
             it("returns a ID string unique across entity types", function () {
-                expect(iD.Entity.id.fromOSM('node', 1)).to.equal("n1");
+                expect(iD.Entity.id.fromOSM('node', '1')).to.equal("n1");
             });
         });
 
         describe(".toOSM", function () {
             it("reverses fromOSM", function () {
-                expect(iD.Entity.id.toOSM(iD.Entity.id.fromOSM('node', 1))).to.equal(1);
+                expect(iD.Entity.id.toOSM(iD.Entity.id.fromOSM('node', '1'))).to.equal('1');
             });
         });
     });
@@ -70,10 +70,10 @@ describe('iD.Entity', function () {
     });
 
     describe("#osmId", function () {
-        it("returns a numeric osm id", function () {
-            expect(iD.Entity({id: 'w1234'}).osmId()).to.eql(1234);
-            expect(iD.Entity({id: 'n1234'}).osmId()).to.eql(1234);
-            expect(iD.Entity({id: 'r1234'}).osmId()).to.eql(1234);
+        it("returns an OSM ID as a string", function () {
+            expect(iD.Entity({id: 'w1234'}).osmId()).to.eql('1234');
+            expect(iD.Entity({id: 'n1234'}).osmId()).to.eql('1234');
+            expect(iD.Entity({id: 'r1234'}).osmId()).to.eql('1234');
         });
     });
 
