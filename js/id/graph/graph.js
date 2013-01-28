@@ -1,13 +1,15 @@
-iD.Graph = function(entities, mutable) {
-    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, mutable);
+iD.Graph = function(other, mutable) {
+    if (!(this instanceof iD.Graph)) return new iD.Graph(other, mutable);
 
-    if (_.isArray(entities)) {
-        this.entities = {};
-        for (var i = 0; i < entities.length; i++) {
-            this.entities[entities[i].id] = entities[i];
+    if (_.isArray(other)) {
+        this.entities = Object.create({});
+        for (var i = 0; i < other.length; i++) {
+            this.entities[other[i].id] = other[i];
         }
+    } else if (other instanceof iD.Graph) {
+        this.rebase(other.base(), other.entities);
     } else {
-        this.entities = entities || {};
+        this.entities = Object.create(other || {});
     }
 
     this.transients = {};
@@ -97,10 +99,18 @@ iD.Graph.prototype = {
         return (this._childNodes[entity.id] = nodes);
     },
 
-    merge: function(graph) {
-        return this.update(function () {
-            _.defaults(this.entities, graph.entities);
-        });
+    base: function() {
+        return Object.getPrototypeOf ?
+            Object.getPrototypeOf(this.entities) :
+            this.entities.__proto__;
+    },
+
+    // Unlike other graph methods, rebase mutates in place. This is because it
+    // is used only during the history operation that merges newly downloaded
+    // data into each state. To external consumers, it should appear as if the
+    // graph always contained the newly downloaded data.
+    rebase: function(base, entities) {
+        this.entities = _.assign(Object.create(base), entities || this.entities);
     },
 
     replace: function(entity) {
@@ -120,7 +130,7 @@ iD.Graph.prototype = {
     },
 
     update: function() {
-        var graph = this.frozen ? iD.Graph(_.clone(this.entities), true) : this;
+        var graph = this.frozen ? iD.Graph(this, true) : this;
 
         for (var i = 0; i < arguments.length; i++) {
             arguments[i].call(graph, graph);
@@ -133,7 +143,6 @@ iD.Graph.prototype = {
         this.frozen = true;
 
         if (iD.debug) {
-            Object.freeze(this);
             Object.freeze(this.entities);
         }
 

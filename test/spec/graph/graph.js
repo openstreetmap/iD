@@ -1,25 +1,110 @@
 describe('iD.Graph', function() {
-    it("can be constructed with an entities Object", function () {
-        var entity = iD.Entity(),
-            graph = iD.Graph({'n-1': entity});
-        expect(graph.entity('n-1')).to.equal(entity);
-    });
-
-    it("can be constructed with an entities Array", function () {
-        var entity = iD.Entity(),
-            graph = iD.Graph([entity]);
-        expect(graph.entity(entity.id)).to.equal(entity);
-    });
-
-    if (iD.debug) {
-        it("is frozen", function () {
-            expect(Object.isFrozen(iD.Graph())).to.be.true;
+    describe("constructor", function () {
+        it("accepts an entities Object", function () {
+            var entity = iD.Entity(),
+                graph = iD.Graph({'n-1': entity});
+            expect(graph.entity('n-1')).to.equal(entity);
         });
 
-        it("freezes entities", function () {
-            expect(Object.isFrozen(iD.Graph().entities)).to.be.true;
+        it("accepts an entities Array", function () {
+            var entity = iD.Entity(),
+                graph = iD.Graph([entity]);
+            expect(graph.entity(entity.id)).to.equal(entity);
         });
-    }
+
+        it("accepts a Graph", function () {
+            var entity = iD.Entity(),
+                graph = iD.Graph(iD.Graph([entity]));
+            expect(graph.entity(entity.id)).to.equal(entity);
+        });
+
+        it("copies other's entities", function () {
+            var entity = iD.Entity(),
+                base   = iD.Graph([entity]),
+                graph  = iD.Graph(base);
+            expect(graph.entities).not.to.equal(base.entities);
+        });
+
+        it("rebases on other's base", function () {
+            var base   = iD.Graph(),
+                graph  = iD.Graph(base);
+            expect(graph.base()).to.equal(base.base());
+        });
+
+        it("freezes by default", function () {
+            expect(iD.Graph().frozen).to.be.true;
+        });
+
+        it("remains mutable if passed true as second argument", function () {
+            expect(iD.Graph([], true).frozen).not.to.be.true;
+        });
+    });
+
+    describe("#freeze", function () {
+        it("sets the frozen flag", function () {
+            expect(iD.Graph([], true).freeze().frozen).to.be.true;
+        });
+
+        if (iD.debug) {
+            it("freezes entities", function () {
+                expect(Object.isFrozen(iD.Graph().entities)).to.be.true;
+            });
+        }
+    });
+
+    describe("#rebase", function () {
+        it("preserves existing entities", function () {
+            var node = iD.Node({id: 'n'}),
+                graph = iD.Graph([node]);
+            graph.rebase({});
+            expect(graph.entity('n')).to.equal(node);
+        });
+
+        it("includes new entities", function () {
+            var node = iD.Node({id: 'n'}),
+                graph = iD.Graph();
+            graph.rebase({'n': node});
+            expect(graph.entity('n')).to.equal(node);
+        });
+
+        it("gives precedence to existing entities", function () {
+            var a = iD.Node({id: 'n'}),
+                b = iD.Node({id: 'n'}),
+                graph = iD.Graph([a]);
+            graph.rebase({'n': b});
+            expect(graph.entity('n')).to.equal(a);
+        });
+
+        it("inherits entities from base prototypally", function () {
+            var graph = iD.Graph();
+            graph.rebase({'n': iD.Node()});
+            expect(graph.entities).not.to.have.ownProperty('n');
+        });
+
+        xit("updates parentWays", function () {
+            var n = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w1', nodes: ['n']}),
+                w2 = iD.Way({id: 'w2', nodes: ['n']}),
+                graph = iD.Graph([n, w1]);
+
+            graph.parentWays(n);
+            graph.rebase({'w2': w2});
+
+            expect(graph.parentWays(n)).to.eql([w1, w2]);
+        });
+
+        xit("updates parentRelations", function () {
+            var n = iD.Node({id: 'n'}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
+                r2 = iD.Relation({id: 'r2', members: [{id: 'n'}]}),
+                graph = iD.Graph([n, r1]);
+
+            graph.parentRelations(n);
+            graph.rebase({'r2': r2});
+
+            expect(graph.parentRelations(n)).to.eql([r1, r2]);
+        });
+    });
 
     describe("#remove", function () {
         it("returns a new graph", function () {
