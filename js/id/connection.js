@@ -105,36 +105,12 @@ iD.Connection = function() {
         return new iD.Relation(o);
     }
 
-    function addWay(o, wparentsOf) {
-        for (var i = 0; i < o.nodes.length; i++) {
-            if (o.nodes[i]) {
-                if (wparentsOf[o.nodes[i]] === undefined) {
-                    wparentsOf[o.nodes[i]] = [];
-                }
-                wparentsOf[o.nodes[i]].push(o.id);
-            }
-        }
-    }
-
-    function addRelation(o, rparentsOf) {
-        for (var i = 0; i < o.members.length; i++) {
-            if (o.members[i].id) {
-                if (rparentsOf[o.members[i].id] === undefined) {
-                    rparentsOf[o.members[i].id] = [];
-                }
-                rparentsOf[o.members[i].id].push(o.id);
-            }
-        }
-    }
-
     function parse(dom) {
         if (!dom || !dom.childNodes) return new Error('Bad request');
         var root = dom.childNodes[0];
         var entities = {};
-        var rparentsOf = {},
-            wparentsOf = {};
 
-        var o, l;
+        var i, o, l;
         for (i = 0, l = root.childNodes.length; i < l; i++) {
             switch(root.childNodes[i].nodeName) {
                 case 'node':
@@ -143,39 +119,16 @@ iD.Connection = function() {
                     break;
                 case 'way':
                     o = wayData(root.childNodes[i]);
-                    addWay(o, wparentsOf);
                     entities[o.id] = o;
                     break;
                 case 'relation':
                     o = relationData(root.childNodes[i]);
-                    addRelation(o, rparentsOf);
                     entities[o.id] = o;
                     break;
             }
         }
 
-        var g = iD.Graph(entities);
-        var i;
-
-        for (i in wparentsOf) {
-            if (entities[i]) {
-                g.transient(entities[i], 'parentWays', d3.functor(wparentsOf[i]));
-                g.transient(entities[i], 'poi', d3.functor(true));
-            }
-        }
-
-        for (i in g.entities) {
-            if (entities[i].type === 'node') {
-                g.transient(entities[i], 'poi', d3.functor(false));
-            }
-        }
-
-        for (i in rparentsOf) {
-            if (entities[i]) g.transient(entities[i],
-                'parentRelations', d3.functor(rparentsOf[i]));
-        }
-
-        return g;
+        return iD.Graph(entities);
     }
 
     function authenticated() {
