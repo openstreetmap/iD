@@ -1,5 +1,12 @@
 iD.ui.modal = function(blocking) {
+
     var animate = d3.select('div.modal').empty();
+
+    var keybinding = d3.keybinding('modal')
+        .on('⌫', close)
+        .on('⎋', close);
+
+    d3.select(document).call(keybinding);
 
     d3.select('div.modal').transition()
         .style('opacity', 0).remove();
@@ -28,6 +35,11 @@ iD.ui.modal = function(blocking) {
         shaded.transition().style('opacity', 1);
     } else {
         shaded.style('opacity', 1);
+    }
+
+    function close() {
+        shaded.remove();
+        keybinding.off();
     }
 
     return shaded;
