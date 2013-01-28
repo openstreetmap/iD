@@ -8,8 +8,9 @@ iD.behavior.DragMidpoint = function(mode) {
             return projection(d.loc);
         })
         .on('start', function(d) {
-            var w, nds, args = [iD.actions.AddNode(d.node)];
+            var w, nds;
             d.node = iD.Node({loc: d.loc});
+            var args = [iD.actions.AddNode(d.node)];
             for (var i = 0; i < d.ways.length; i++) {
                 w = d.ways[i], nds = w.nodes;
                 for (var j = 0; j < nds.length; j++) {
