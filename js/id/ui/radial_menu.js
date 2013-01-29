@@ -8,6 +8,11 @@ iD.ui.RadialMenu = function(entity, mode) {
                 .map(function (o) { return o(entity.id, mode); })
                 .filter(function (o) { return o.available(graph); });
 
+        function click(operation) {
+            d3.event.stopPropagation();
+            operation(history);
+        }
+
         var arc = d3.svg.arc()
             .outerRadius(70)
             .innerRadius(30)
@@ -28,7 +33,7 @@ iD.ui.RadialMenu = function(entity, mode) {
             .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('d', arc)
             .classed('disabled', function (d) { return !d.enabled(graph); })
-            .on('click', function (d) { d(history); });
+            .on('click', click);
 
         arcs.append('text')
             .attr("transform", function(d, i) { return "translate(" + arc.centroid(d, i) + ")"; })
