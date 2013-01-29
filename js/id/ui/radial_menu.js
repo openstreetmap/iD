@@ -2,6 +2,9 @@ iD.ui.RadialMenu = function(operations) {
     var menu;
 
     var radialMenu = function(selection, center) {
+        if (!operations.length)
+            return;
+
         function click(operation) {
             d3.event.stopPropagation();
             operation();
