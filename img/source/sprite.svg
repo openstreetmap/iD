@@ -38,22 +38,22 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="16"
-     inkscape:cx="174.72757"
-     inkscape:cy="45.850291"
+     inkscape:zoom="1"
+     inkscape:cx="123.06085"
+     inkscape:cy="91.554201"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
      showgrid="true"
      inkscape:window-width="1280"
      inkscape:window-height="756"
-     inkscape:window-x="240"
+     inkscape:window-x="69"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="true">
@@ -181,7 +181,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -822,26 +822,11 @@
        transform="matrix(2,0,0,2,-1601,221.27564)"
        style="display:inline">
       <path
-         sodipodi:nodetypes="cccccccccsssss"
-         inkscape:connector-curvature="0"
-         id="path4439"
-         d="m 879,-58.63782 2,2 4,0 2,-2 0,-4 -2,-2 -4,-2e-6 -2,2 z m 4,-4 c 1.10456,0 2,0.89543 2,2 0,1.10457 -0.89544,2 -2,2 -1.10456,0 -2,-0.89543 -2,-2 0,-1.10457 0.89544,-2 2,-2 z"
-         style="color:#000000;fill:#c1c1c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         style="color:#000000;fill:#c1c1c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 136 92 L 132 96 L 125 96 L 125 104 L 132 104 L 136 108 L 144 108 L 148 104 L 155 104 L 155 96 L 148 96 L 144 92 L 136 92 z M 140 96 C 142.20912 96 144 97.79086 144 100 C 144 102.20914 142.20912 104 140 104 C 137.79088 104 136 102.20914 136 100 C 136 97.79086 137.79088 96 140 96 z "
+         transform="matrix(0.5,0,0,0.5,813,-110.63782)"
+         id="path4439" />
     </g>
-    <rect
-       style="color:#000000;fill:#c1c1c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect4444"
-       width="9"
-       height="8"
-       x="150"
-       y="96" />
-    <rect
-       y="96"
-       x="171"
-       height="8"
-       width="9"
-       id="rect4446"
-       style="color:#000000;fill:#c1c1c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <path
        sodipodi:type="arc"
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
