@@ -1,16 +1,10 @@
-iD.ui.RadialMenu = function(entity, mode) {
+iD.ui.RadialMenu = function(operations) {
     var menu;
 
     var radialMenu = function(selection, center) {
-        var history = mode.map.history(),
-            graph = history.graph(),
-            operations = d3.values(iD.operations)
-                .map(function (o) { return o(entity.id, mode); })
-                .filter(function (o) { return o.available(graph); });
-
         function click(operation) {
             d3.event.stopPropagation();
-            operation(history);
+            operation();
         }
 
         menu = selection.append('g')
@@ -48,7 +42,7 @@ iD.ui.RadialMenu = function(entity, mode) {
             .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('r', 15)
             .attr('title', function (d) { return d.title; })
-            .classed('disabled', function (d) { return !d.enabled(graph); })
+            .classed('disabled', function (d) { return !d.enabled(); })
             .on('click', click)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);

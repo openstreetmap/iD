@@ -1,7 +1,8 @@
 iD.operations.Circular = function(entityId, mode) {
-    var action = iD.actions.Circular(entityId, mode.map);
+    var history = mode.map.history(),
+        action = iD.actions.Circular(entityId, mode.map);
 
-    var operation = function(history) {
+    var operation = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId),
             geometry = entity.geometry(graph);
@@ -18,16 +19,19 @@ iD.operations.Circular = function(entityId, mode) {
         }
     };
 
-    operation.available = function(graph) {
-        var entity = graph.entity(entityId);
+    operation.available = function() {
+        var graph = history.graph(),
+            entity = graph.entity(entityId);
         return entity.geometry(graph) === 'area' || entity.geometry(graph) === 'line';
     };
 
-    operation.enabled = function(graph) {
+    operation.enabled = function() {
+        var graph = history.graph();
         return action.enabled(graph);
     };
 
     operation.id = "circular";
+    operation.key = "O";
     operation.title = "Circular";
     operation.description = "Make this round";
 
