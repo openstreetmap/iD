@@ -89,7 +89,7 @@ a:visited, a {
 }
 
 a:hover {
-    color:#154dff;
+    color:#597be7;
 }
 
 
@@ -220,8 +220,9 @@ ul.link-list li:last-child {
 
 .fillD {
     background:rgba(0,0,0,.8);
-    color: white;
+    color: #a9a9a9;
 }
+
 
 .fl { float: left;}
 .fr { float: right;}
@@ -399,7 +400,7 @@ button[disabled] .label {
     height: 40px;
 }
 
-.icon.icon-pre-text {
+.icon-pre-text {
     margin-right: 3px;
 }
 
@@ -424,6 +425,9 @@ button[disabled] .label {
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
 .icon.geolocate  { background-position: -360px 0px;}
+.icon.warning    { background-position: -380px 0px;}
+
+.icon.close-modal{ background-position: -200px -40px;}
 
 .icon.invert.zoom-in    { background-position: -240px -40px;}
 
@@ -900,6 +904,18 @@ div.typeahead a:first-child {
     left:0px; right:0px; top:0px; bottom:0px;
 }
 
+.commit-modal .user-info {
+    display: inline-block;
+}
+
+.commit-modal .commit-info {
+    margin-top: 10px;
+}
+
+.commit-modal .user-info img {
+    float: left;
+}
+
 .commit-modal h3 small.count {
     margin-right: 10px;
     text-align: center;
@@ -919,10 +935,26 @@ div.typeahead a:first-child {
     border:1px solid #ccc;
     background:#fff;
     max-height: 160px;
+    overflow: visible;
 }
 
-.commit-modal .user-details {
-    float: right;
+.commit-modal .warning-section .changeset-list  {
+    margin-right: 20px;
+}
+
+.commit-section.modal-section {
+    padding-bottom: 0;
+}
+
+.commit-section.modal-section:last-child { padding-bottom: 20px;}
+
+.commit-modal .changeset-list li {
+    position: relative;
+}
+
+.commit-modal .changeset-list li button {
+    position: absolute;
+    right: -30px;
 }
 
 .user-icon {

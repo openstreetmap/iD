@@ -31,32 +31,7 @@ iD.ui.commit = function(map) {
             header = selection.append('div').attr('class', 'header modal-section fillL'),
             body = selection.append('div').attr('class', 'body');
 
-
-        var user_details = header
-            .append('div')
-            .attr('class', 'user-details');
-
-        var user_link = user_details
-            .append('div')
-            .append('a')
-                .attr('href', connection.url() + '/user/' +
-                      user.display_name)
-                .attr('target', '_blank');
-
-        if (user.image_url) {
-            user_link
-                .append('img')
-                .attr('src', user.image_url)
-                .attr('class', 'user-icon');
-        }
-
-        user_link
-            .append('div')
-            .text(user.display_name);
-
-        header.append('h2').text('Save Changes');
-
-        header.append('p').text('The changes you upload will be visible on all maps that use OpenStreetMap data.');
+        header.append('h2').text('Save Changes to OpenStreetMap');
 
         // Comment Box
         var comment_section = body.append('div').attr('class','modal-section fillD');
@@ -65,6 +40,28 @@ iD.ui.commit = function(map) {
             .attr('placeholder', 'Brief Description of your contributions')
             .property('value',  localStorage.comment || '')
             .node().select();
+
+        var commit_info =
+            comment_section
+                .append('p')
+                .attr('class','commit-info');
+
+                commit_info.append('span').text('The changes you upload as ');
+
+                var user_link = commit_info.append('a')
+                    .attr('class','user-info')
+                    .text(user.display_name)
+                    .attr('href', connection.url() + '/user/' + user.display_name)
+                    .attr('target', '_blank');
+
+                commit_info.append('span').text(' will be visible on all maps that use OpenStreetMap data:');
+
+        if (user.image_url) {
+            user_link
+                .append('img')
+                    .attr('src', user.image_url)
+                    .attr('class', 'icon icon-pre-text');
+        }
 
         // Confirm / Cancel Buttons
         var buttonwrap = comment_section.append('div')
@@ -111,7 +108,7 @@ iD.ui.commit = function(map) {
             .attr('class', 'minor')
             .on('click', event.fix)
             .append('span')
-            .attr('class', 'icon inspect');
+            .attr('class', 'icon warning');
 
         warning_li.append('strong').text(function(d) {
             return d.message;
