@@ -31,7 +31,7 @@ iD.ui.commit = function(map) {
             header = selection.append('div').attr('class', 'header modal-section fillL'),
             body = selection.append('div').attr('class', 'body');
 
-        header.append('h2').text('Save Changes to OpenStreetMap');
+        header.append('h2').text('Save Changes');
 
         // Comment Box
         var comment_section = body.append('div').attr('class','modal-section fillD');
