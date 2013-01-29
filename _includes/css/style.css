@@ -39,8 +39,8 @@ h1 {
   opacity: 0;
   background: url({{site.baseurl}}/img/editor.png) 0 0 no-repeat;
   position: relative;
-  height: 673px;
-  width: 1059px;
+  height: 507px;
+  width: 905px;
   left: 0;
   right: 0;
   margin: auto;
