@@ -29,6 +29,7 @@ iD.operations.Circular = function(entityId, mode) {
 
     operation.id = "circular";
     operation.title = "Circular";
+    operation.description = "Make this round";
 
     return operation;
 };

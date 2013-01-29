@@ -1,5 +1,5 @@
 iD.ui.RadialMenu = function(entity, mode) {
-    var arcs;
+    var menu;
 
     var radialMenu = function(selection, center) {
         var history = mode.map.history(),
@@ -13,12 +13,12 @@ iD.ui.RadialMenu = function(entity, mode) {
             operation(history);
         }
 
-        arcs = selection.append('g')
+        menu = selection.append('g')
             .attr('class', 'radial-menu')
             .attr('transform', "translate(" + center + ")")
             .attr('opacity', 0);
 
-        arcs.transition()
+        menu.transition()
             .attr('opacity', 0.8);
 
         var r = 50,
@@ -26,7 +26,7 @@ iD.ui.RadialMenu = function(entity, mode) {
             a0 = -Math.PI / 4,
             a1 = a0 + (operations.length - 1) * a;
 
-        arcs.append('path')
+        menu.append('path')
             .attr('class', 'radial-menu-background')
             .attr('d', 'M' + r * Math.sin(a0) + ',' +
                              r * Math.cos(a0) +
@@ -36,7 +36,7 @@ iD.ui.RadialMenu = function(entity, mode) {
             .attr('stroke-width', 50)
             .attr('stroke-linecap', 'round');
 
-        var button = arcs.selectAll()
+        var button = menu.selectAll()
             .data(operations)
             .enter().append('g')
             .attr('transform', function(d, i) {
@@ -58,11 +58,36 @@ iD.ui.RadialMenu = function(entity, mode) {
             .attr('height', 16)
             .attr('transform', 'translate(-8, -8)')
             .attr('xlink:href', 'icons/helipad.png');
+
+        var tooltip = menu.append('foreignObject')
+            .style('display', 'none')
+            .attr('width', 200)
+            .attr('height', 400);
+
+        tooltip.append('xhtml:div')
+            .attr('class', 'radial-menu-tooltip');
+
+        function mouseover(d, i) {
+            var angle = a0 + i * a,
+                dx = angle < 0 ? -200 : 0,
+                dy = 0;
+
+            tooltip
+                .attr('x', (r + 30) * Math.sin(angle) + dx)
+                .attr('y', (r + 30) * Math.cos(angle) + dy)
+                .style('display', 'block')
+                .select('div')
+                .text(d.description);
+        }
+
+        function mouseout() {
+            tooltip.style('display', 'none');
+        }
     };
 
     radialMenu.close = function(selection) {
-        if (arcs) {
-            arcs.transition()
+        if (menu) {
+            menu.transition()
                 .attr('opacity', 0)
                 .remove();
         }

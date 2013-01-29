@@ -16,6 +16,7 @@ iD.operations.Reverse = function(entityId) {
 
     operation.id = "reverse";
     operation.title = "Reverse";
+    operation.description = "Make this way go in the opposite direction";
 
     return operation;
 };

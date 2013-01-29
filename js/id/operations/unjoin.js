@@ -16,6 +16,7 @@ iD.operations.Unjoin = function(entityId) {
 
     operation.id = "unjoin";
     operation.title = "Unjoin";
+    operation.description = "Disconnect these ways from each other";
 
     return operation;
 };

@@ -37,6 +37,7 @@ iD.operations.Delete = function(entityId) {
 
     operation.id = "delete";
     operation.title = "Delete";
+    operation.description = "Remove this from the map";
 
     return operation;
 };

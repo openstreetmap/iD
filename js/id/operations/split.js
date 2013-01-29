@@ -16,6 +16,7 @@ iD.operations.Split = function(entityId) {
 
     operation.id = "split";
     operation.title = "Split";
+    operation.description = "Split this into two ways at this point";
 
     return operation;
 };

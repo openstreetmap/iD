@@ -13,6 +13,7 @@ iD.operations.Move = function(entityId, mode) {
 
     operation.id = "move";
     operation.title = "Move";
+    operation.description = "Move this to a different location";
 
     return operation;
 };
