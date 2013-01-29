@@ -1,5 +1,7 @@
-iD.operations.Delete = function(entityId) {
-    var operation = function(history) {
+iD.operations.Delete = function(entityId, mode) {
+    var history = mode.map.history();
+
+    var operation = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId),
             geometry = entity.geometry(graph);
@@ -26,8 +28,9 @@ iD.operations.Delete = function(entityId) {
         }
     };
 
-    operation.available = function(graph) {
-        var entity = graph.entity(entityId);
+    operation.available = function() {
+        var graph = history.graph(),
+            entity = graph.entity(entityId);
         return _.contains(['vertex', 'point', 'line', 'area'], entity.geometry(graph));
     };
 
@@ -36,7 +39,9 @@ iD.operations.Delete = function(entityId) {
     };
 
     operation.id = "delete";
+    operation.key = "⌫";
     operation.title = "Delete";
+    operation.description = "Remove this from the map";
 
     return operation;
 };
