@@ -13,15 +13,7 @@ iD.ui.RadialMenu = function(entity, mode) {
             operation(history);
         }
 
-        var arc = d3.svg.arc()
-            .outerRadius(70)
-            .innerRadius(30)
-            .startAngle(function (d, i) { return 2 * Math.PI / operations.length * i; })
-            .endAngle(function (d, i) { return 2 * Math.PI / operations.length * (i + 1); });
-
-        arcs = selection.selectAll()
-            .data(operations)
-            .enter().append('g')
+        arcs = selection.append('g')
             .attr('class', 'radial-menu')
             .attr('transform', "translate(" + center + ")")
             .attr('opacity', 0);
@@ -29,17 +21,43 @@ iD.ui.RadialMenu = function(entity, mode) {
         arcs.transition()
             .attr('opacity', 0.8);
 
-        arcs.append('path')
-            .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
-            .attr('d', arc)
-            .classed('disabled', function (d) { return !d.enabled(graph); })
-            .on('click', click);
+        var r = 50,
+            a = Math.PI / 4,
+            a0 = -Math.PI / 4,
+            a1 = a0 + (operations.length - 1) * a;
 
-        arcs.append('text')
-            .attr("transform", function(d, i) { return "translate(" + arc.centroid(d, i) + ")"; })
-            .attr("dy", ".35em")
-            .style("text-anchor", "middle")
-            .text(function(d) { return d.title; });
+        arcs.append('path')
+            .attr('class', 'radial-menu-background')
+            .attr('d', 'M' + r * Math.sin(a0) + ',' +
+                             r * Math.cos(a0) +
+                      ' A' + r + ',' + r + ' 0 0,0 ' +
+                             r * Math.sin(a1) + ',' +
+                             r * Math.cos(a1))
+            .attr('stroke-width', 50)
+            .attr('stroke-linecap', 'round');
+
+        var button = arcs.selectAll()
+            .data(operations)
+            .enter().append('g')
+            .attr('transform', function(d, i) {
+                return 'translate(' + r * Math.sin(a0 + i * a) + ',' +
+                                      r * Math.cos(a0 + i * a) + ')';
+            });
+
+        button.append('circle')
+            .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
+            .attr('r', 15)
+            .attr('title', function (d) { return d.title; })
+            .classed('disabled', function (d) { return !d.enabled(graph); })
+            .on('click', click)
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout);
+
+        button.append('image')
+            .attr('width', 16)
+            .attr('height', 16)
+            .attr('transform', 'translate(-8, -8)')
+            .attr('xlink:href', 'icons/helipad.png');
     };
 
     radialMenu.close = function(selection) {
