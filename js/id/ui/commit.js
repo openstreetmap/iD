@@ -60,7 +60,7 @@ iD.ui.commit = function(map) {
             user_link
                 .append('img')
                     .attr('src', user.image_url)
-                    .attr('class', 'icon icon-pre-text');
+                    .attr('class', 'icon icon-pre-text user-icon');
         }
 
         // Confirm / Cancel Buttons

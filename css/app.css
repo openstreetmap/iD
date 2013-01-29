@@ -407,6 +407,14 @@ button[disabled] .label {
     margin-right: 3px;
 }
 
+.user-icon {
+    max-height: 20px;
+    max-width: 20px;
+    height: auto;
+    width: auto;
+    border-radius: 3px;
+}
+
 /* Definitions for every icon */
 .icon.browse     { background-position:   0px -20px;}
 .icon.add-point  { background-position: -20px -20px;}
@@ -959,11 +967,6 @@ div.typeahead a:first-child {
 .commit-modal .changeset-list li button {
     position: absolute;
     right: -30px;
-}
-
-.user-icon {
-    max-width: 50px;
-    max-height: 50px;
 }
 
 .modal-section {

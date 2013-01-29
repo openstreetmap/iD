@@ -18,7 +18,7 @@ iD.ui.userpanel = function(connection) {
                     // Add thumbnail or dont
                     if (user_details.image_url) {
                         userLink.append('img')
-                            .attr('class', 'icon icon-pre-text')
+                            .attr('class', 'icon icon-pre-text user-icon')
                             .attr('src', user_details.image_url);
                     } else {
                         userLink.append('span')
