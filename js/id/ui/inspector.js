@@ -26,16 +26,16 @@ iD.ui.inspector = function() {
 
         tagList = inspectorwrap.append('ul');
 
-        inspectorwrap
-            .append('div')
-            .attr('class', 'add-tag-row')
-            .append('button')
-                .attr('class', 'add-tag')
-                .text('+ Add New Tag')
-                .on('click', function() {
-                    addTag();
-                    focusNewKey();
-                });
+        var newTag = inspectorwrap.append('button')
+                .attr('class', 'add-tag');
+
+            newTag.on('click', function() {
+                addTag();
+                focusNewKey();
+            });
+
+            newTag.append('span').attr('class', 'icon icon-pre-text plus');
+            newTag.append('span').text('New tag')
 
         drawTags(entity.tags);
 
@@ -63,8 +63,7 @@ iD.ui.inspector = function() {
                 .attr('class', 'apply action')
                 .on('click', apply);
 
-            inspectorButton.append('span').attr('class','icon icon-pre-text apply');
-            inspectorButton.append('span').attr('class','label').text('Okay');
+            inspectorButton.append('span').attr('class','icon apply');
 
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
 
