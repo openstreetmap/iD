@@ -988,9 +988,8 @@ div.typeahead a:first-child {
 }
 
 .modal-section img.wiki-image {
-    max-width: 400px;
+    max-width: 100%;
     max-height: 300px;
-    padding: 10px;
     display: block;
 }
 
