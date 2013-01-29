@@ -138,7 +138,7 @@ iD.modes.Select = function(entity, initial) {
             })
             .classed('selected', true);
 
-        radialMenu = iD.ui.RadialMenu(entity, history, mode.map);
+        radialMenu = iD.ui.RadialMenu(entity, mode);
 
         if (d3.event && !initial) {
             var loc = map.mouseCoordinates();

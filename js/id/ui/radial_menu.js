@@ -1,83 +1,12 @@
-iD.ui.RadialMenu = function(entity, history, map) {
+iD.ui.RadialMenu = function(entity, mode) {
     var arcs;
 
     var radialMenu = function(selection, center) {
-        var operations,
+        var history = mode.map.history(),
             graph = history.graph(),
-            geometry = entity.geometry(graph);
-
-        if (geometry === 'vertex') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted a node',
-                    action: iD.actions.DeleteNode(entity.id)
-                },
-                {
-                    id: 'split',
-                    text: 'Split Way',
-                    description: 'split a way',
-                    action: iD.actions.SplitWay(entity.id)
-                },
-                {
-                    id: 'unjoin',
-                    text: 'Unjoin',
-                    description: 'unjoined lines',
-                    action: iD.actions.UnjoinNode(entity.id)
-                }
-            ];
-        } else if (geometry === 'point') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted a point',
-                    action: iD.actions.DeleteNode(entity.id)
-                }
-            ];
-        } else if (geometry === 'line') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted a line',
-                    action: iD.actions.DeleteWay(entity.id)
-                },
-                {
-                    id: 'reverse',
-                    text: 'Reverse',
-                    description: 'reversed a way',
-                    action: iD.actions.ReverseWay(entity.id)
-                }
-            ];
-            if (entity.isClosed()) {
-                operations.push({
-                   id: 'circlar',
-                   text: 'Circular',
-                   description: 'made way circular',
-                   action: iD.actions.Circular(entity.id, map)
-                });
-            }
-        } else if (geometry === 'area') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted an area',
-                    action: iD.actions.DeleteWay(entity.id)
-                },
-                {
-                    id: 'circlar',
-                    text: 'Circular',
-                    description: 'made area circular',
-                    action: iD.actions.Circular(entity.id, map)
-                }
-            ];
-        } else {
-            // Relation, not implemented yet.
-            return;
-        }
+            operations = d3.values(iD.operations)
+                .map(function (o) { return o(entity.id, mode); })
+                .filter(function (o) { return o.available(graph); });
 
         var arc = d3.svg.arc()
             .outerRadius(70)
@@ -98,14 +27,14 @@ iD.ui.RadialMenu = function(entity, history, map) {
         arcs.append('path')
             .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('d', arc)
-            .classed('disabled', function (d) { return !d.action.enabled(history.graph()); })
-            .on('click', function (d) { history.perform(d.action, d.description); });
+            .classed('disabled', function (d) { return !d.enabled(graph); })
+            .on('click', function (d) { d(history); });
 
         arcs.append('text')
             .attr("transform", function(d, i) { return "translate(" + arc.centroid(d, i) + ")"; })
             .attr("dy", ".35em")
             .style("text-anchor", "middle")
-            .text(function(d) { return d.text; });
+            .text(function(d) { return d.title; });
     };
 
     radialMenu.close = function(selection) {
