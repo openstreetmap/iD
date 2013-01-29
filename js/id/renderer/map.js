@@ -258,8 +258,18 @@ iD.Map = function() {
             t[0] - ll[0] + c[0],
             t[1] - ll[1] + c[1]]);
         zoom.translate(projection.translate());
+        dispatch.move(map);
         return true;
     }
+
+    map.pan = function(d) {
+        var t = projection.translate();
+        t[0] += d[0];
+        t[1] += d[1];
+        projection.translate(t);
+        zoom.translate(projection.translate());
+        return map;
+    };
 
     map.size = function(_) {
         if (!arguments.length) return dimensions;
