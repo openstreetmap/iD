@@ -5,7 +5,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
         event = d3.dispatch('add', 'addHead', 'addTail', 'addNode', 'addWay'),
         way = mode.history.graph().entity(wayId),
         finished = false,
-        hover, draw;
+        draw;
 
     var node = iD.Node({loc: map.mouseCoordinates()}),
         nodeId = node.id;
@@ -14,13 +14,19 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
         iD.actions.AddNode(node),
         iD.actions.AddWayNode(wayId, node.id, index));
 
-    function move() {
-        history.replace(iD.actions.MoveNode(nodeId, map.mouseCoordinates()));
+    function move(datum) {
+        var loc = map.mouseCoordinates();
+
+        if (datum.type === 'node' || datum.midpoint) {
+            loc = datum.loc;
+        } else if (datum.type === 'way') {
+            loc = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map).loc;
+        }
+
+        history.replace(iD.actions.MoveNode(nodeId, loc));
     }
 
-    function add() {
-        var datum = d3.select(d3.event.target).datum() || {};
-
+    function add(datum) {
         if (datum.id === headId) {
             event.addHead(datum);
         } else if (datum.id === tailId) {
@@ -47,8 +53,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
             .minzoom(16)
             .dblclickEnable(false);
 
-        surface.call(hover)
-            .call(draw)
+        surface.call(draw)
           .selectAll('.way, .node')
             .filter(function (d) { return d.id === wayId || d.id === nodeId; })
             .classed('active', true);
@@ -68,8 +73,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
             map.dblclickEnable(true);
         }, 1000);
 
-        surface.call(hover.off)
-            .call(draw.off)
+        surface.call(draw.off)
           .selectAll('.way, .node')
             .classed('active', false);
 
@@ -144,8 +148,6 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
         finished = true;
         controller.enter(iD.modes.Browse());
     };
-
-    hover = iD.behavior.Hover();
 
     draw = iD.behavior.Draw()
         .on('move', move)

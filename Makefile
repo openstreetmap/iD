@@ -38,6 +38,8 @@ all: \
 	js/id/behavior/*.js \
 	js/id/modes.js \
 	js/id/modes/*.js \
+	js/id/operations.js \
+	js/id/operations/*.js \
 	js/id/controller/*.js \
 	js/id/graph/*.js \
 	js/id/renderer/*.js \

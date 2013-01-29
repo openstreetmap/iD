@@ -9,6 +9,8 @@
  */
 iD.behavior.Hover = function () {
     var hover = function(selection) {
+        selection.classed('behavior-hover', true);
+
         selection.on('mouseover.hover', function () {
             var datum = d3.event.target.__data__;
             if (datum) {
@@ -25,7 +27,8 @@ iD.behavior.Hover = function () {
     };
 
     hover.off = function(selection) {
-        selection.on('mouseover.hover', null)
+        selection.classed('behavior-hover', false)
+            .on('mouseover.hover', null)
             .on('mouseout.hover', null);
     };
 

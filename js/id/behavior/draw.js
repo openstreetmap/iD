@@ -1,45 +1,64 @@
 iD.behavior.Draw = function () {
     var event = d3.dispatch('move', 'add', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
-        down;
+        down, surface, hover;
+
+    function datum() {
+        if (d3.event.altKey) {
+            return {};
+        } else {
+            return d3.event.target.__data__ || {};
+        }
+    }
+
+    function mousedown() {
+        down = true;
+    }
+
+    function mouseup() {
+        down = false;
+    }
+
+    function mousemove() {
+        if (!down) {
+            event.move(datum());
+        }
+    }
+
+    function click() {
+        event.add(datum());
+    }
+
+    function keydown() {
+        if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+            surface.call(hover.off);
+        }
+    }
+
+    function keyup() {
+        if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+            surface.call(hover);
+        }
+    }
+
+    function backspace() {
+        d3.event.preventDefault();
+        event.undo();
+    }
+
+    function del() {
+        d3.event.preventDefault();
+        event.cancel();
+    }
+
+    function ret() {
+        d3.event.preventDefault();
+        event.finish();
+    }
 
     function draw(selection) {
-        function mousemove() {
-            if (!down) event.move();
-        }
-
-        function click() {
-            event.add();
-        }
-
-        function mousedown() {
-            down = true;
-        }
-
-        function mouseup() {
-            down = false;
-        }
-
-        function backspace() {
-            d3.event.preventDefault();
-            event.undo();
-        }
-
-        function del() {
-            d3.event.preventDefault();
-            event.cancel();
-        }
-
-        function ret() {
-            d3.event.preventDefault();
-            event.finish();
-        }
-
-        selection
-            .on('mousedown.draw', mousedown)
-            .on('mouseup.draw', mouseup)
-            .on('mousemove.draw', mousemove)
-            .on('click.draw', click);
+        surface = selection;
+        hover = iD.behavior.Hover();
 
         keybinding
             .on('⌫', backspace)
@@ -47,18 +66,33 @@ iD.behavior.Draw = function () {
             .on('⎋', ret)
             .on('↩', ret);
 
+        selection
+            .on('mousedown.draw', mousedown)
+            .on('mouseup.draw', mouseup)
+            .on('mousemove.draw', mousemove)
+            .on('click.draw', click)
+            .call(hover);
+
         d3.select(document)
-            .call(keybinding);
+            .call(keybinding)
+            .on('keydown.draw', keydown)
+            .on('keyup.draw', keyup);
 
         return draw;
     }
 
     draw.off = function(selection) {
         selection
+            .on('mousedown.draw', null)
+            .on('mouseup.draw', null)
             .on('mousemove.draw', null)
-            .on('click.draw', null);
+            .on('click.draw', null)
+            .call(hover.off);
 
-        keybinding.off();
+        d3.select(document)
+            .call(keybinding.off)
+            .on('keydown.draw', null)
+            .on('keyup.draw', null);
     };
 
     return d3.rebind(draw, event, 'on');

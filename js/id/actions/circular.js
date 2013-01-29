@@ -51,7 +51,7 @@ iD.actions.Circular = function(wayId, map) {
     };
 
     action.enabled = function(graph) {
-        return true;
+        return graph.entity(wayId).isClosed();
     };
 
     return action;

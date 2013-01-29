@@ -3,11 +3,9 @@ iD.behavior.AddWay = function(mode) {
         history = mode.history,
         controller = mode.controller,
         event = d3.dispatch('startFromNode', 'startFromWay', 'start'),
-        hover, draw;
+        draw;
 
-    function add() {
-        var datum = d3.select(d3.event.target).datum() || {};
-
+    function add(datum) {
         if (datum.type === 'node') {
             event.startFromNode(datum);
         } else if (datum.type === 'way') {
@@ -26,8 +24,7 @@ iD.behavior.AddWay = function(mode) {
             .minzoom(16)
             .dblclickEnable(false);
 
-        surface.call(hover)
-            .call(draw);
+        surface.call(draw);
     };
 
     addWay.off = function(surface) {
@@ -39,15 +36,12 @@ iD.behavior.AddWay = function(mode) {
             map.dblclickEnable(true);
         }, 1000);
 
-        surface.call(hover.off)
-            .call(draw.off);
+        surface.call(draw.off);
     };
 
     addWay.cancel = function() {
         controller.exit();
     };
-
-    hover = iD.behavior.Hover();
 
     draw = iD.behavior.Draw()
         .on('add', add)
