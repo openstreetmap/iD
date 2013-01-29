@@ -1180,10 +1180,13 @@ a.success-action {
           border-radius: 4px;
 }
 
+.radial-menu-background {
+    stroke: #aaa;
+    stroke-opacity: 0.4;
+}
+
 .radial-menu-item {
-    fill: white;
-    stroke: black;
-    stroke-width: 1;
+    fill: black;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
 }
 
@@ -1201,6 +1204,17 @@ a.success-action {
     fill: rgba(255,255,255,.5);
 }
 
+.radial-menu image {
+    pointer-events: none;
+}
+
+.radial-menu-tooltip {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
 
 /* Media Queries
 ------------------------------------------------------- */

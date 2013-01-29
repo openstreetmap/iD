@@ -34,7 +34,7 @@ iD.ui.userpanel = function(connection) {
                         .append('a')
                         .attr('class', 'logout')
                         .attr('href', '#')
-                        .text('logout')
+                        .text(t('logout'))
                         .on('click.logout', function() {
                             d3.event.preventDefault();
                             event.logout();

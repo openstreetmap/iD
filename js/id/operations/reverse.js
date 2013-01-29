@@ -1,12 +1,15 @@
-iD.operations.Reverse = function(entityId) {
-    var operation = function(history) {
+iD.operations.Reverse = function(entityId, mode) {
+    var history = mode.map.history();
+
+    var operation = function() {
         history.perform(
             iD.actions.ReverseWay(entityId),
             'reversed a line');
     };
 
-    operation.available = function(graph) {
-        var entity = graph.entity(entityId);
+    operation.available = function() {
+        var graph = history.graph(),
+            entity = graph.entity(entityId);
         return entity.geometry(graph) === 'line';
     };
 
@@ -15,7 +18,9 @@ iD.operations.Reverse = function(entityId) {
     };
 
     operation.id = "reverse";
+    operation.key = "V";
     operation.title = "Reverse";
+    operation.description = "Make this way go in the opposite direction";
 
     return operation;
 };

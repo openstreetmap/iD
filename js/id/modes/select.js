@@ -10,20 +10,6 @@ iD.modes.Select = function(entity, initial) {
         behaviors,
         radialMenu;
 
-    function remove() {
-        if (entity.type === 'way') {
-            mode.history.perform(
-                iD.actions.DeleteWay(entity.id),
-                'deleted a way');
-        } else if (entity.type === 'node') {
-            mode.history.perform(
-                iD.actions.DeleteNode(entity.id),
-                'deleted a node');
-        }
-
-        mode.controller.exit();
-    }
-
     function changeTags(d, tags) {
         if (!_.isEqual(entity.tags, tags)) {
             mode.history.perform(
@@ -47,6 +33,18 @@ iD.modes.Select = function(entity, initial) {
 
         behaviors.forEach(function(behavior) {
             behavior(surface);
+        });
+
+        var operations = d3.values(iD.operations)
+            .map(function (o) { return o(entity.id, mode); })
+            .filter(function (o) { return o.available(); });
+
+        operations.forEach(function(operation) {
+            keybinding.on(operation.key, function () {
+                if (operation.enabled()) {
+                    operation();
+                }
+            });
         });
 
         var q = iD.util.stringQs(location.hash.substring(1));
@@ -126,8 +124,6 @@ iD.modes.Select = function(entity, initial) {
         surface.on('click.select', click)
             .on('dblclick.select', dblclick);
 
-        keybinding.on('⌫', remove);
-
         d3.select(document)
             .call(keybinding);
 
@@ -137,7 +133,7 @@ iD.modes.Select = function(entity, initial) {
             })
             .classed('selected', true);
 
-        radialMenu = iD.ui.RadialMenu(entity, mode);
+        radialMenu = iD.ui.RadialMenu(operations);
 
         if (d3.event && !initial) {
             var loc = map.mouseCoordinates();
