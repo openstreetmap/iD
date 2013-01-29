@@ -1,4 +1,4 @@
-var locale = {};
+var locale = { current: 'en' };
 
 function t(s, o) {
     if (locale[locale.current][s] !== undefined) {
