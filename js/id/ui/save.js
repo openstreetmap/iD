@@ -9,8 +9,8 @@ iD.ui.save = function() {
             tooltip = bootstrap.tooltip()
                 .placement('bottom');
 
-        selection.html("<span class='label'>Save</span><small id='as-username'></small>")
-            .attr('title', 'Save changes to OpenStreetMap, making them visible to other users')
+        selection.html("<span class='label'>" + t('save') + "</span><small id='as-username'></small>")
+            .attr('title', t('save_help'))
             .attr('tabindex', -1)
             .property('disabled', true)
             .call(tooltip)
@@ -18,7 +18,7 @@ iD.ui.save = function() {
 
             function commit(e) {
                 d3.select('.shaded').remove();
-                var l = iD.ui.loading('Uploading changes to OpenStreetMap.', true);
+                var l = iD.ui.loading(t('uploading_changes'), true);
                 connection.putChangeset(history.changes(), e.comment, history.imagery_used(), function(err, changeset_id) {
                     l.remove();
                     history.reset();
@@ -27,7 +27,7 @@ iD.ui.save = function() {
                         var desc = iD.ui.confirm()
                             .select('.description');
                         desc.append('h2')
-                            .text('An error occurred while trying to save');
+                            .text(t('save_error'));
                         desc.append('p').text(err.responseText);
                     } else {
                         var modal = iD.ui.modal();
@@ -67,7 +67,7 @@ iD.ui.save = function() {
                 });
             } else {
                 iD.ui.confirm().select('.description')
-                    .append('h3').text('You don\'t have any changes to save.');
+                    .append('h3').text(t('no_changes'));
             }
 
         });
