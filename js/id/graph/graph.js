@@ -8,15 +8,12 @@ iD.Graph = function(other, mutable) {
         this.rebase(other.base(), other.entities);
 
     } else {
-        if (_.isArray(other)) {
-            this.entities = Object.create({});
-            for (var i = 0; i < other.length; i++) {
-                this.entities[other[i].id] = other[i];
-            }
-        } else {
-            this.entities = Object.create(other || {});
-        }
+        this.entities = other || Object.create({});
         this._parentWays = Object.create({});
+
+        for (var i in this.entities) {
+            this._updateCalculated(undefined, this.entities[i]);
+        }
     }
 
     this.transients = {};
@@ -119,19 +116,53 @@ iD.Graph.prototype = {
     rebase: function(base, entities) {
     },
 
+    _updateCalculated: function(oldentity, entity) {
+
+        var type = entity && entity.type || oldentity && oldentity.type,
+            removed, added, parentWays, i;
+
+
+        if (type === 'way') {
+
+            // Update parentWays
+            if (oldentity && entity) {
+                removed = _.difference(oldentity.nodes, entity.nodes);
+                added = _.difference(entity.nodes, oldentity.nodes);
+            } else if (oldentity) {
+                removed = oldentity.nodes;
+                added = [];
+            } else if (entity) {
+                removed = [];
+                added = entity.nodes;
+            }
+            for (i = 0; i < removed.length; i++) {
+                this._parentWays[removed[i]] = _.without(this._parentWays[removed[i]], oldentity.id);
+            }
+            for (i = 0; i < added.length; i++) {
+                parentWays = _.without(this._parentWays[added[i]], entity.id);
+                parentWays.push(entity.id);
+                this._parentWays[added[i]] = parentWays;
+            }
+        } else if (type === 'node') {
+
+        } else if (type === 'relation') {
+
+            // TODO: iterate over members
+
+        }
+    },
+
     replace: function(entity) {
         return this.update(function () {
+            this._updateCalculated(this.entities[entity.id], entity);
             this.entities[entity.id] = entity;
         });
     },
 
     remove: function(entity) {
         return this.update(function () {
-            if (entity.created()) {
-                delete this.entities[entity.id];
-            } else {
-                this.entities[entity.id] = undefined;
-            }
+            this._updateCalculated(entity, undefined);
+            this.entities[entity.id] = undefined;
         });
     },
 
