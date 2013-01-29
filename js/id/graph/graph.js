@@ -1,19 +1,25 @@
 iD.Graph = function(other, mutable) {
     if (!(this instanceof iD.Graph)) return new iD.Graph(other, mutable);
 
-    if (_.isArray(other)) {
-        this.entities = Object.create({});
-        for (var i = 0; i < other.length; i++) {
-            this.entities[other[i].id] = other[i];
-        }
-    } else if (other instanceof iD.Graph) {
+    if (other instanceof iD.Graph) {
+        var base = other.base();
+        this.entities = _.assign(Object.create(base.entities), other.entities);
+        this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
         this.rebase(other.base(), other.entities);
+
     } else {
-        this.entities = Object.create(other || {});
+        if (_.isArray(other)) {
+            this.entities = Object.create({});
+            for (var i = 0; i < other.length; i++) {
+                this.entities[other[i].id] = other[i];
+            }
+        } else {
+            this.entities = Object.create(other || {});
+        }
+        this._parentWays = Object.create({});
     }
 
     this.transients = {};
-    this._parentWays = {};
     this._parentRels = {};
     this._childNodes = {};
 
@@ -100,9 +106,10 @@ iD.Graph.prototype = {
     },
 
     base: function() {
-        return Object.getPrototypeOf ?
-            Object.getPrototypeOf(this.entities) :
-            this.entities.__proto__;
+        return {
+            'entities': iD.util.getPrototypeOf(this.entities),
+            'parentWays': iD.util.getPrototypeOf(this._parentWays)
+        };
     },
 
     // Unlike other graph methods, rebase mutates in place. This is because it
@@ -110,7 +117,6 @@ iD.Graph.prototype = {
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
     rebase: function(base, entities) {
-        this.entities = _.assign(Object.create(base), entities || this.entities);
     },
 
     replace: function(entity) {

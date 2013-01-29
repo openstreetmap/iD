@@ -30,11 +30,14 @@ iD.History = function() {
         },
 
         merge: function (graph) {
-            var base = stack[0].graph.base();
+            var base = stack[0].graph.base(),
+                mergee = graph.base();
 
-            _.defaults(base, graph.entities);
+            for (var i in base) {
+                _.defaults(base[i], mergee[i]);
+            }
 
-            for (var i = 1; i < stack.length; i++) {
+            for (i = 1; i < stack.length; i++) {
                 stack[i].graph.rebase(base);
             }
         },

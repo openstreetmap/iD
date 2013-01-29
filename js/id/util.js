@@ -74,3 +74,5 @@ iD.util.getStyle = function(selector) {
         }
     }
 };
+
+iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
