@@ -2,7 +2,8 @@ iD.modes.AddPoint = function() {
     var mode = {
         id: 'add-point',
         title: 'Point',
-        description: 'Restaurants, monuments, and postal boxes are points.'
+        description: 'Restaurants, monuments, and postal boxes are points.',
+        key: 'p'
     };
 
     var behavior;

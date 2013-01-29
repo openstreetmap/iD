@@ -165,24 +165,33 @@ iD.Map = function() {
     }
 
     function resetTransform() {
-        if (!surface.style(transformProp)) return;
+        if (!surface.style(transformProp)) return false;
         surface.style(transformProp, '');
         tilegroup.style(transformProp, '');
+        return true;
     }
 
     function redraw(difference) {
-        resetTransform();
+        // If we are in the middle of a zoom/pan, we can't do differenced redraws.
+        // It would result in artifacts where differenced entities are redrawn with
+        // one transform and unchanged entities with another.
+        if (resetTransform())
+            difference = undefined;
+
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
+
         if (map.editable()) {
             connection.loadTiles(projection, dimensions);
             drawVector(difference);
         } else {
             editOff();
         }
+
         transformStart = [
             projection.scale(),
             projection.translate().slice()];
+
         return map;
     }
 

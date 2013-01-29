@@ -37,7 +37,7 @@ iD.ui.save = function() {
                                 id: changeset_id,
                                 comment: e.comment
                             })
-                            .call(iD.ui.success()
+                            .call(iD.ui.success(connection)
                                 .on('cancel', function() {
                                     modal.remove();
                                 }));

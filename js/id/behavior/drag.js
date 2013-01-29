@@ -23,7 +23,9 @@ iD.behavior.drag = function () {
     var event = d3.dispatch("start", "move", "end"),
         origin = null,
         selector = '',
-        filter = null;
+        filter = null,
+        keybinding = d3.keybinding('drag'),
+        event_, target;
 
     event.of = function(thiz, argumentz) {
       return function(e1) {
@@ -39,9 +41,9 @@ iD.behavior.drag = function () {
     };
 
     function mousedown() {
-        var target = this,
-            event_ = event.of(target, arguments),
-            eventTarget = d3.event.target,
+        target = this,
+        event_ = event.of(target, arguments);
+        var eventTarget = d3.event.target,
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             offset,
             origin_ = point(),
@@ -135,6 +137,9 @@ iD.behavior.drag = function () {
     drag.off = function(selection) {
         selection.on("mousedown.drag" + selector, null)
             .on("touchstart.drag" + selector, null);
+        keybinding
+            .on('⌘+Z', null)
+            .on('⌃+Z', null);
     };
 
     drag.delegate = function(_) {
@@ -154,6 +159,26 @@ iD.behavior.drag = function () {
         origin = _;
         return drag;
     };
+
+    drag.cancel = function() {
+        d3.select(window)
+            .on("mousemove.drag", null)
+            .on("mouseup.drag", null);
+        return drag;
+    };
+
+    drag.target = function() {
+        if (!arguments.length) return target;
+        target = arguments[0];
+        event_ = event.of(target, Array.prototype.slice.call(arguments, 1));
+        return drag;
+    };
+
+    keybinding
+        .on('⌘+Z', drag.cancel)
+        .on('⌃+Z', drag.cancel);
+
+    d3.select(document).call(keybinding);
 
     return d3.rebind(drag, event, "on");
 };

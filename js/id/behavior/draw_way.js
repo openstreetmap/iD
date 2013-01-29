@@ -1,9 +1,10 @@
-iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
+iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
     var map = mode.map,
         history = mode.history,
         controller = mode.controller,
         event = d3.dispatch('add', 'addHead', 'addTail', 'addNode', 'addWay'),
         way = mode.history.graph().entity(wayId),
+        finished = false,
         hover, draw;
 
     var node = iD.Node({loc: map.mouseCoordinates()}),
@@ -56,6 +57,9 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
     };
 
     drawWay.off = function(surface) {
+        if (!finished)
+            history.pop();
+
         map.fastEnable(true)
             .minzoom(0)
             .tail(false);
@@ -86,6 +90,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
             ReplaceTemporaryNode(node),
             annotation);
 
+        finished = true;
         controller.enter(mode);
     };
 
@@ -99,6 +104,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
             ReplaceTemporaryNode(newNode),
             annotation);
 
+        finished = true;
         controller.enter(mode);
     };
 
@@ -111,6 +117,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
             ReplaceTemporaryNode(newNode),
             annotation);
 
+        finished = true;
         controller.enter(mode);
     };
 
@@ -118,6 +125,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
     // nodes to be valid, it's selected. Otherwise, return to browse mode.
     drawWay.finish = function() {
         history.pop();
+        finished = true;
 
         var way = history.graph().entity(wayId);
         if (way) {
@@ -129,7 +137,11 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode) {
 
     // Cancel the draw operation and return to browse, deleting everything drawn.
     drawWay.cancel = function() {
-        history.perform(iD.actions.DeleteWay(wayId), 'cancelled drawing');
+        history.perform(
+            d3.functor(baseGraph),
+            'cancelled drawing');
+
+        finished = true;
         controller.enter(iD.modes.Browse());
     };
 

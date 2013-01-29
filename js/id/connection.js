@@ -10,6 +10,10 @@ iD.Connection = function() {
         loadedTiles = {},
         oauth = iD.OAuth().url(url);
 
+    function changesetUrl(changesetId) {
+        return url + '/browse/changeset/' + changesetId;
+    }
+
     function bboxUrl(b) {
         return url + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
     }
@@ -325,6 +329,7 @@ iD.Connection = function() {
     };
 
     connection.bboxFromAPI = bboxFromAPI;
+    connection.changesetUrl = changesetUrl;
     connection.loadFromURL = loadFromURL;
     connection.loadTiles = _.debounce(loadTiles, 100);
     connection.userDetails = userDetails;
