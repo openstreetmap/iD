@@ -22,7 +22,7 @@ iD.ui.inspector = function() {
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
         inspectorwrap.append('h4')
-            .text('Edit tags');
+            .text(t('edit_tags'));
 
         tagList = inspectorwrap.append('ul');
 
@@ -149,7 +149,7 @@ iD.ui.inspector = function() {
                             iD.ui.flash()
                                 .select('.content')
                                 .append('h3')
-                                .text('This is no documentation available for this tag combination');
+                                .text(t('no_documentation_combination'));
                         }
                     });
                 } else if (d.key) {
@@ -167,7 +167,7 @@ iD.ui.inspector = function() {
                             iD.ui.flash()
                                 .select('.content')
                                 .append('h3')
-                                .text('This is no documentation available for this key');
+                                .text(t('no_documentation_key'));
                         }
                     });
                 }

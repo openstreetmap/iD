@@ -18,7 +18,7 @@ iD.ui.notice = function(selection) {
 
     div.append('span')
         .attr('class', 'notice-text')
-        .text('zoom in to edit the map');
+        .text(t('zoom_in_edit'));
 
     notice.message = function(_) {
         if (_) {
