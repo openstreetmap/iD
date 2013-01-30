@@ -245,6 +245,11 @@ window.iD = function(container) {
             .on('login.editor', connection.authenticate));
 
         controller.enter(iD.modes.Browse());
+
+//        if (!localStorage.sawSplash) {
+            iD.ui.splash();
+//            localStorage.sawSplash = true;
+//        }
     }
 
     editor.connection = function(_) {
