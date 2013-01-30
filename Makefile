@@ -47,7 +47,9 @@ all: \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
-	js/id/end.js
+	js/id/end.js \
+	locale/locale.js \
+	locale/en.js
 
 iD.js: Makefile
 	@rm -f $@
