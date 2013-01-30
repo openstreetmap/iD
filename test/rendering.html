@@ -119,6 +119,7 @@
             })
           .enter()
             .append('td')
+            .attr('class', function (d) { return d.mode === 'selected' ? 'mode-select' : 'mode-browse'; })
             .append('svg')
             .attr('width', 200)
             .attr('height', 30)
@@ -129,7 +130,7 @@
                     graph = iD.Graph([a, b, highway]);
 
                 d3.select(this)
-                    .attr('class', d.mode === 'selected' ? 'mode-select' : 'mode-browse')
+                    .attr('class', 'behavior-hover')
                     .call(vertices, graph, [a, b], filter)
                     .call(lines, graph, [highway], filter)
                     .call(midpoints, graph, [highway], filter)
