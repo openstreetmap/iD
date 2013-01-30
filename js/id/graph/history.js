@@ -29,9 +29,9 @@ iD.History = function() {
             return stack[index].graph;
         },
 
-        merge: function (graph) {
+        merge: function (entities) {
             for (var i = 0; i < stack.length; i++) {
-                stack[i].graph = stack[i].graph.merge(graph);
+                stack[i].graph.rebase(entities);
             }
         },
 
