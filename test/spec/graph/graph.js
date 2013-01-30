@@ -92,6 +92,14 @@ describe('iD.Graph', function() {
             expect(graph._parentWays.hasOwnProperty('n')).to.be.false;
         });
 
+        it("avoids adding duplicate parentWays", function () {
+            var n = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w1', nodes: ['n']}),
+                graph = iD.Graph([n, w1]);
+            graph.rebase({ 'w1': w1 });
+            expect(graph.parentWays(n)).to.eql([w1]);
+        });
+
         it("updates parentWays for nodes with modified parentWays", function () {
             var n = iD.Node({id: 'n'}),
                 w1 = iD.Way({id: 'w1', nodes: ['n']}),
@@ -171,6 +179,20 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([node]);
             expect(graph.remove(node).entity(node.id)).to.be.undefined;
         });
+
+        it("removes the entity as a parentWay", function () {
+            var node = iD.Node({id: 'n' }),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                graph = iD.Graph([node, w1]);
+            expect(graph.remove(w1).parentWays(node)).to.eql([]);
+        });
+
+        it("removes the entity as a parentRelation", function () {
+            var node = iD.Node({id: 'n' }),
+                r1 = iD.Relation({id: 'w', members: [{id: 'n' }]}),
+                graph = iD.Graph([node, r1]);
+            expect(graph.remove(r1).parentRelations(node)).to.eql([]);
+        });
     });
 
     describe("#replace", function () {
@@ -193,6 +215,49 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([node1]);
             expect(graph.replace(node2).entity(node2.id)).to.equal(node2);
         });
+
+        it("adds parentWays",  function () {
+            var node = iD.Node({id: 'n' }),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                graph = iD.Graph([node]);
+            expect(graph.replace(w1).parentWays(node)).to.eql([w1]);
+        });
+
+        it("removes parentWays",  function () {
+            var node = iD.Node({id: 'n' }),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                graph = iD.Graph([node, w1]);
+            expect(graph.remove(w1).parentWays(node)).to.eql([]);
+        });
+
+        it("doesn't add duplicate parentWays",  function () {
+            var node = iD.Node({id: 'n' }),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                graph = iD.Graph([node, w1]);
+            expect(graph.replace(w1).parentWays(node)).to.eql([w1]);
+        });
+
+        it("adds parentRels",  function () {
+            var node = iD.Node({id: 'n' }),
+            r1 = iD.Relation({id: 'w', members: [{id: 'n'}]}),
+            graph = iD.Graph([node]);
+            expect(graph.replace(r1).parentRelations(node)).to.eql([r1]);
+        });
+
+        it("removes parentRelations",  function () {
+            var node = iD.Node({id: 'n' }),
+            r1 = iD.Relation({id: 'w', members: [{id: 'n'}]}),
+            graph = iD.Graph([node, r1]);
+            expect(graph.remove(r1).parentRelations(node)).to.eql([]);
+        });
+
+        it("doesn't add duplicate parentRelations",  function () {
+            var node = iD.Node({id: 'n' }),
+            r1 = iD.Relation({id: 'w', members: [{id: 'n'}]}),
+            graph = iD.Graph([node, r1]);
+            expect(graph.replace(r1).parentRelations(node)).to.eql([r1]);
+        });
+
     });
 
     describe("#update", function () {
