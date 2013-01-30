@@ -17,7 +17,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
     function move(datum) {
         var loc = map.mouseCoordinates();
 
-        if (datum.type === 'node' || datum.midpoint) {
+        if (datum.type === 'node' || datum.type === 'midpoint') {
             loc = datum.loc;
         } else if (datum.type === 'way') {
             loc = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map).loc;

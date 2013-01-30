@@ -34,7 +34,7 @@ iD.behavior.Draw = function(map) {
         } else if (d.type === 'node') {
             event.clickNode(d);
 
-        } else if (d.midpoint) {
+        } else if (d.type === 'midpoint') {
             event.clickMidpoint(d);
 
         } else {
