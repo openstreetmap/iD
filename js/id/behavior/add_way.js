@@ -1,25 +1,16 @@
 iD.behavior.AddWay = function(mode) {
     var map = mode.map,
-        history = mode.history,
         controller = mode.controller,
         event = d3.dispatch('startFromNode', 'startFromWay', 'start'),
-        draw;
-
-    function add(datum) {
-        if (datum.type === 'node') {
-            event.startFromNode(datum);
-        } else if (datum.type === 'way') {
-            var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
-            event.startFromWay(datum, choice.loc, choice.index);
-        } else if (datum.midpoint) {
-            var way = history.graph().entity(datum.way);
-            event.startFromWay(way, datum.loc, datum.index);
-        } else {
-            event.start(map.mouseCoordinates());
-        }
-    }
+        draw = iD.behavior.Draw(map);
 
     var addWay = function(surface) {
+        draw.on('click', event.start)
+            .on('clickNode', event.startFromNode)
+            .on('clickWay', event.startFromWay)
+            .on('cancel', addWay.cancel)
+            .on('finish', addWay.cancel);
+
         map.fastEnable(false)
             .minzoom(16)
             .dblclickEnable(false);
@@ -42,11 +33,6 @@ iD.behavior.AddWay = function(mode) {
     addWay.cancel = function() {
         controller.exit();
     };
-
-    draw = iD.behavior.Draw()
-        .on('add', add)
-        .on('cancel', addWay.cancel)
-        .on('finish', addWay.cancel);
 
     return d3.rebind(addWay, event, 'on');
 };

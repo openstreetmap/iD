@@ -1,11 +1,11 @@
-iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
+iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
     var map = mode.map,
         history = mode.history,
         controller = mode.controller,
-        event = d3.dispatch('add', 'addHead', 'addTail', 'addNode', 'addWay'),
         way = mode.history.graph().entity(wayId),
         finished = false,
-        draw;
+        annotation = 'added to a way',
+        draw = iD.behavior.Draw(map);
 
     var node = iD.Node({loc: map.mouseCoordinates()}),
         nodeId = node.id;
@@ -26,29 +26,19 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
         history.replace(iD.actions.MoveNode(nodeId, loc));
     }
 
-    function add(datum) {
-        if (datum.id === headId) {
-            event.addHead(datum);
-        } else if (datum.id === tailId) {
-            event.addTail(datum);
-        } else if (datum.type === 'node' && datum.id !== nodeId) {
-            event.addNode(datum);
-        } else if (datum.type === 'way') {
-            var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
-            event.addWay(datum, choice.loc, choice.index);
-        } else if (datum.midpoint) {
-            var way = history.graph().entity(datum.way);
-            event.addWay(way, datum.loc, datum.index);
-        } else {
-            event.add(map.mouseCoordinates());
-        }
-    }
-
     function undone() {
         controller.enter(iD.modes.Browse());
     }
 
     var drawWay = function(surface) {
+        draw.on('move', move)
+            .on('click', drawWay.add)
+            .on('clickNode', drawWay.addNode)
+            .on('clickWay', drawWay.addWay)
+            .on('undo', history.undo)
+            .on('cancel', drawWay.cancel)
+            .on('finish', drawWay.finish);
+
         map.fastEnable(false)
             .minzoom(16)
             .dblclickEnable(false);
@@ -80,6 +70,12 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
         history.on('undone.draw', null);
     };
 
+    drawWay.annotation = function(_) {
+        if (!arguments.length) return annotation;
+        annotation = _;
+        return drawWay;
+    };
+
     function ReplaceTemporaryNode(newNode) {
         return function(graph) {
             return graph
@@ -89,7 +85,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
     }
 
     // Connect the way to an existing node and continue drawing.
-    drawWay.addNode = function(node, annotation) {
+    drawWay.addNode = function(node) {
         history.perform(
             ReplaceTemporaryNode(node),
             annotation);
@@ -99,7 +95,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
     };
 
     // Connect the way to an existing way.
-    drawWay.addWay = function(way, loc, wayIndex, annotation) {
+    drawWay.addWay = function(way, loc, wayIndex) {
         var newNode = iD.Node({loc: loc});
 
         history.perform(
@@ -113,7 +109,7 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
     };
 
     // Accept the current position of the temporary node and continue drawing.
-    drawWay.add = function(loc, annotation) {
+    drawWay.add = function(loc) {
         var newNode = iD.Node({loc: loc});
 
         history.replace(
@@ -148,13 +144,6 @@ iD.behavior.DrawWay = function(wayId, headId, tailId, index, mode, baseGraph) {
         finished = true;
         controller.enter(iD.modes.Browse());
     };
-
-    draw = iD.behavior.Draw()
-        .on('move', move)
-        .on('add', add)
-        .on('undo', history.undo)
-        .on('cancel', drawWay.cancel)
-        .on('finish', drawWay.finish);
 
     return d3.rebind(drawWay, event, 'on');
 };
