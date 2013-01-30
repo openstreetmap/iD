@@ -120,7 +120,7 @@ iD.Connection = function() {
             }
         }
 
-        return iD.Graph(entities);
+        return entities;
     }
 
     function authenticated() {

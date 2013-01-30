@@ -123,7 +123,7 @@ iD.Map = function() {
 
     function connectionLoad(err, result) {
         history.merge(result);
-        redraw(Object.keys(result.entities));
+        redraw(Object.keys(result));
     }
 
     function zoomPan() {
