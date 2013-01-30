@@ -2,5 +2,5 @@ auto: true
 server: true
 exclude:
 permalink: none
-baseurl: http://ideditor.com
+# baseurl: http://ideditor.com
 permalink: /:title

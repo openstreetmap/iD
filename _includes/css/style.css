@@ -21,6 +21,8 @@ h1 {
   top: 0;
 }
 
+.header h2 { margin-bottom: 0;}
+
 .shadow {
   margin-top: 590px;
   position: relative;
