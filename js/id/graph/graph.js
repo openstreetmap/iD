@@ -243,6 +243,7 @@ iD.Graph.prototype = {
 
         keys = Object.keys(graph.entities);
         for (i = 0; i < keys.length; i++) {
+            id = keys[i];
             entity = graph.entities[id];
             if (entity && !this.entities.hasOwnProperty(id)) {
                 result.push(id);
