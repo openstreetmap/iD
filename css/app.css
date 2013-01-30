@@ -470,15 +470,15 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.big-inspect  { background-position: -160px -80px;}
 .icon.big-relation { background-position: -200px -80px;}
 
-.icon.operation.delete        { background-position: 0px -140px;}
-.icon.operation.circularize   { background-position: -20px -140px;}
-.icon.operation.straighten    { background-position: -40px -140px;}
-.icon.operation.split         { background-position: -60px -140px;}
-.icon.operation.unjoin        { background-position: -80px -140px;}
-.icon.operation.reverse       { background-position: -100px -140px;}
-.icon.operation.move          { background-position: -120px -140px;}
-.icon.operation.merge         { background-position: -140px -140px;}
-.icon.operation.orthogonalize { background-position: -160px -140px;}
+.icon-operation-delete        { background-position: 0px -140px;}
+.icon-operation-circularize   { background-position: -20px -140px;}
+.icon-operation-straighten    { background-position: -40px -140px;}
+.icon-operation-split         { background-position: -60px -140px;}
+.icon-operation-unjoin        { background-position: -80px -140px;}
+.icon-operation-reverse       { background-position: -100px -140px;}
+.icon-operation-move          { background-position: -120px -140px;}
+.icon-operation-merge         { background-position: -140px -140px;}
+.icon-operation-orthogonalize { background-position: -160px -140px;}
 
 
 /* Toggle icon is special */
@@ -1195,7 +1195,7 @@ a.success-action {
     fill: rgba(255,255,255,.5);
 }
 
-.radial-menu image {
+.radial-menu .icon {
     pointer-events: none;
 }
 

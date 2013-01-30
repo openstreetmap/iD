@@ -1,6 +1,6 @@
-iD.operations.Circular = function(entityId, mode) {
+iD.operations.Circularize = function(entityId, mode) {
     var history = mode.map.history(),
-        action = iD.actions.Circular(entityId, mode.map);
+        action = iD.actions.Circularize(entityId, mode.map);
 
     var operation = function() {
         var graph = history.graph(),
@@ -30,9 +30,9 @@ iD.operations.Circular = function(entityId, mode) {
         return action.enabled(graph);
     };
 
-    operation.id = "circular";
+    operation.id = "circularize";
     operation.key = "O";
-    operation.title = "Circular";
+    operation.title = "Circularize";
     operation.description = "Make this round";
 
     return operation;

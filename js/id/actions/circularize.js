@@ -1,4 +1,4 @@
-iD.actions.Circular = function(wayId, map) {
+iD.actions.Circularize = function(wayId, map) {
 
     var action = function(graph) {
         var way = graph.entity(wayId),

@@ -50,11 +50,15 @@ iD.ui.RadialMenu = function(operations) {
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
-        button.append('image')
-            .attr('width', 16)
-            .attr('height', 16)
-            .attr('transform', 'translate(-8, -8)')
-            .attr('xlink:href', 'icons/helipad.png');
+        var image = button.append('foreignObject')
+            .style('pointer-events', 'none')
+            .attr('width', 20)
+            .attr('height', 20)
+            .attr('x', -10)
+            .attr('y', -10);
+
+        image.append('xhtml:span')
+            .attr('class', function (d) { return 'icon icon-operation icon-operation-' + d.id; });
 
         var tooltip = menu.append('foreignObject')
             .style('display', 'none')
