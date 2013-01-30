@@ -8,14 +8,9 @@ iD.behavior.DragMidpoint = function(mode) {
             return projection(d.loc);
         })
         .on('start', function(d) {
-            var node = iD.Node({loc: d.loc});
+            var node = iD.Node();
 
-            var args = [iD.actions.AddNode(node)];
-            for (var i = 0; i < d.ways.length; i++) {
-                args.push(iD.actions.AddWayNode(d.ways[i].id, node.id, d.ways[i].index));
-            }
-
-            history.perform.apply(history, args);
+            history.perform(iD.actions.AddMidpoint(d, node));
 
             var vertex = d3.selectAll('.vertex')
                 .filter(function(data) { return data.id === node.id; });
