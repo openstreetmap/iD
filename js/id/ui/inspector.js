@@ -35,7 +35,7 @@ iD.ui.inspector = function() {
             });
 
             newTag.append('span').attr('class', 'icon icon-pre-text plus');
-            newTag.append('span').text('New tag')
+            newTag.append('span').attr('class','label').text('New tag')
 
         drawTags(entity.tags);
 
@@ -63,7 +63,7 @@ iD.ui.inspector = function() {
                 .attr('class', 'apply action')
                 .on('click', apply);
 
-            inspectorButton.append('span').attr('class','icon apply');
+            inspectorButton.append('span').attr('class','label').text('Okay');
 
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
 
@@ -117,7 +117,7 @@ iD.ui.inspector = function() {
             .on('click', removeTag);
 
         removeBtn.append('span')
-            .attr('class', 'icon remove');
+            .attr('class', 'icon delete');
 
         var helpBtn = row.append('button')
             .attr('tabindex', -1)

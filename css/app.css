@@ -283,11 +283,11 @@ button.minor {
     width: 20px;
     border: 0;
     box-shadow: none;
-    background-color: transparent;
+    background: rgba(0,0,0,.5);
 }
 
 button.minor:hover {
-    background: white;
+    background: #222;
 }
 
 button.centered {
@@ -318,6 +318,8 @@ button.centered {
     border-right-width: 0px;
     border-radius:0 4px 4px 0;
 }
+
+button.Browse .label { display: none;}
 
 button.action {
     background: #7092ff;
@@ -431,13 +433,13 @@ button[disabled] .label {
 .icon.inspect    { background-position: -220px 0px;}
 .icon.zoom-in    { background-position: -240px 0px;}
 .icon.zoom-out   { background-position: -260px 0px;}
+.icon.plus       { background-position: -240px 0px;}
 .icon.geocode    { background-position: -280px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
 .icon.geolocate  { background-position: -360px 0px;}
 .icon.warning    { background-position: -380px 0px;}
-.icon.plus       { background-position: -400px 0px;}
 
 .icon.close-modal { background-position: -200px -40px;}
 
@@ -613,16 +615,20 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner .add-tag {
-    width: 40%;
+    width: 20%;
     height: 30px;
-    border: 1px solid #ccc;
     border-top: 0;
-    background: white;
+    background: rgba(0,0,0,.5);
     border-radius: 0 0 4px 4px;
-    }
-    .inspector-inner .add-tag:hover {
-        background: #ececec;
-        }
+}
+.inspector-inner .add-tag:hover {
+    background: rgba(0,0,0,.8);
+}
+
+.inspector-inner .add-tag  .label {
+    display: none;
+}
+
 /* Map Controls */
 
 .map-control {
@@ -632,12 +638,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .map-control button {
     width: 40px;
-    background: rgba(0,0,0,.8);
-    border-radius: 0 4px 4px 0;
+    background: rgba(0,0,0,.5);
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
 .map-control button:hover {
-    background: rgba(0, 0, 0, .9);
+    background: rgba(0, 0, 0, .8);
 }
 
 .map-control button.active:hover {
@@ -662,18 +669,16 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .zoombuttons button.zoom-in {
     border-radius:0 4px 0 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .5);
 }
 
 .zoombuttons button.zoom-out {
     border-top:0;
-    border-radius:0 0 4px 0;
 }
 
 /* Layer Switcher */
 
 .layerswitcher-control {
-    top:210px;
+    top:190px;
 }
 
 .layerswitcher-control .adjustments button {
@@ -744,7 +749,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 /* Geocoder */
 
 .geocode-control {
-    top:160px;
+    top:150px;
 }
 
 .geocode-control input {
@@ -753,8 +758,15 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: 4px;
 }
 
+/* Geolocator */
+
 .geolocate-control {
-    top:260px;
+    top:230px;
+}
+
+.geolocate-control button {
+    border-radius: 0 0 4px 0;
+    border-bottom: 0;
 }
 
 /* Map
@@ -1214,5 +1226,5 @@ a.success-action {
     span.label {display: none;}
     /* override hide for save button */
     .icon.icon-pre-text { margin-right: 0px;}
-    .save .label { display: block;}
+    .save .label, .apply .label { display: block;}
 }
