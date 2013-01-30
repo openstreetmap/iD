@@ -1,6 +1,6 @@
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteNodeAction.as
 iD.actions.DeleteNode = function(nodeId) {
-    var action = function(graph) {
+    return function(graph) {
         var node = graph.entity(nodeId);
 
         graph.parentWays(node)
@@ -20,10 +20,4 @@ iD.actions.DeleteNode = function(nodeId) {
 
         return graph.remove(node);
     };
-
-    action.enabled = function(graph) {
-        return true;
-    };
-
-    return action;
 };

@@ -38,6 +38,8 @@ all: \
 	js/id/behavior/*.js \
 	js/id/modes.js \
 	js/id/modes/*.js \
+	js/id/operations.js \
+	js/id/operations/*.js \
 	js/id/controller/*.js \
 	js/id/graph/*.js \
 	js/id/renderer/*.js \
@@ -45,7 +47,9 @@ all: \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
-	js/id/end.js
+	js/id/end.js \
+	locale/locale.js \
+	locale/en.js
 
 iD.js: Makefile
 	@rm -f $@

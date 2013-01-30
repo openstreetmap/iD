@@ -92,7 +92,7 @@ iD.Map = function() {
 
             all = _.compact(_.values(only));
             filter = function(d) {
-                if (d.midpoint) {
+                if (d.type === 'midpoint') {
                     for (var i = 0; i < d.ways.length; i++) {
                         if (d.ways[i].id in only) return true;
                     }
@@ -165,24 +165,33 @@ iD.Map = function() {
     }
 
     function resetTransform() {
-        if (!surface.style(transformProp)) return;
+        if (!surface.style(transformProp)) return false;
         surface.style(transformProp, '');
         tilegroup.style(transformProp, '');
+        return true;
     }
 
     function redraw(difference) {
-        resetTransform();
+        // If we are in the middle of a zoom/pan, we can't do differenced redraws.
+        // It would result in artifacts where differenced entities are redrawn with
+        // one transform and unchanged entities with another.
+        if (resetTransform())
+            difference = undefined;
+
         surface.attr('data-zoom', ~~map.zoom());
         tilegroup.call(background);
+
         if (map.editable()) {
             connection.loadTiles(projection, dimensions);
             drawVector(difference);
         } else {
             editOff();
         }
+
         transformStart = [
             projection.scale(),
             projection.translate().slice()];
+
         return map;
     }
 
@@ -249,8 +258,18 @@ iD.Map = function() {
             t[0] - ll[0] + c[0],
             t[1] - ll[1] + c[1]]);
         zoom.translate(projection.translate());
+        dispatch.move(map);
         return true;
     }
+
+    map.pan = function(d) {
+        var t = projection.translate();
+        t[0] += d[0];
+        t[1] += d[1];
+        projection.translate(t);
+        zoom.translate(projection.translate());
+        return map;
+    };
 
     map.size = function(_) {
         if (!arguments.length) return dimensions;

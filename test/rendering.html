@@ -34,6 +34,20 @@
     <script src='../js/id/graph/relation.js'></script>
     <script src='../js/id/graph/way.js'></script>
 
+    <form style="position: fixed; right: 10px; bottom: 10px">
+        <input id="background-color" type="range" min="0" max="255" value="255">
+        <label for="background-color">Background Color</label>
+    </form>
+
+    <script>
+        var bg = d3.select("#background-color")
+            .on("change", function () {
+                var v = bg.property("value");
+                d3.select("body")
+                    .style("background-color", d3.rgb(v,v,v));
+            });
+    </script>
+
     <table>
         <thead>
             <tr><th></th><th colspan="3">z16</th><th colspan="3">z17</th></tr>
@@ -105,6 +119,7 @@
             })
           .enter()
             .append('td')
+            .attr('class', function (d) { return d.mode === 'selected' ? 'mode-select' : 'mode-browse'; })
             .append('svg')
             .attr('width', 200)
             .attr('height', 30)
@@ -115,7 +130,7 @@
                     graph = iD.Graph([a, b, highway]);
 
                 d3.select(this)
-                    .attr('class', d.mode === 'selected' ? 'mode-select' : 'mode-browse')
+                    .attr('class', 'behavior-hover')
                     .call(vertices, graph, [a, b], filter)
                     .call(lines, graph, [highway], filter)
                     .call(midpoints, graph, [highway], filter)
@@ -123,5 +138,67 @@
                     .classed(d.mode, d.mode !== 'base');
             });
     </script>
+
+    <table>
+        <thead>
+            <tr><th></th><th>Base</th><th>Selected</th></tr>
+        </thead>
+        <tbody class="areas">
+        </tbody>
+    </table>
+
+    <script>
+        var modes = ['base', 'selected'],
+            tags = [
+                {area: 'yes'},
+                {natural: 'yes'},
+                {natural: 'water'},
+                {natural: 'wood'},
+                {building: 'yes'},
+                {amenity: 'parking'}
+            ];
+
+        var row = d3.select('.areas').selectAll('tr')
+            .data(tags)
+          .enter().append('tr');
+
+        row.append('th')
+            .html(function (d) { return _.map(d, function (value, key) { return key + "=" + value;}).join("<br>"); });
+
+        var a = iD.Node({loc: [15, 15]}),
+            b = iD.Node({loc: [85, 15]}),
+            c = iD.Node({loc: [85, 85]}),
+            d = iD.Node({loc: [15, 85]}),
+            way = iD.Way({nodes: [a.id, b.id, c.id, d.id, a.id]}),
+            vertices = iD.svg.Vertices(projection),
+            areas = iD.svg.Areas(projection),
+            midpoints = iD.svg.Midpoints(projection);
+
+        row.selectAll('td')
+            .data(function (d) {
+                return modes.map(function (m) {
+                    return { mode: m, tags: d };
+                });
+            })
+          .enter()
+            .append('td')
+            .append('svg')
+            .attr('width', 100)
+            .attr('height', 100)
+            .call(iD.svg.Surface())
+            .each(function (datum) {
+                var area = way.update({tags: datum.tags}),
+                    graph = iD.Graph([a, b, c, d, area]);
+
+                d3.select(this)
+                    .attr('class', datum.mode === 'selected' ? 'mode-select' : 'mode-browse')
+                    .call(vertices, graph, [a, b, c, d], filter)
+                    .call(areas, graph, [area], filter)
+                    .call(midpoints, graph, [area], filter)
+                    .selectAll('.area')
+                    .classed(datum.mode, datum.mode !== 'base');
+            });
+    </script>
+
 </body>
 </html>

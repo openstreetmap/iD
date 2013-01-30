@@ -35,7 +35,7 @@ iD.ui.layerswitcher = function(map) {
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'fillD')
-            .attr('title', 'Layer Settings')
+            .attr('title', t('layer_settings'))
             .html("<span class='layers icon'></span>")
             .on('click.layerswitcher-toggle', toggle);
 
@@ -59,7 +59,7 @@ iD.ui.layerswitcher = function(map) {
             .append('div')
             .attr('class', 'opacity-options-wrapper');
 
-        opa.append('h4').text('Layers');
+        opa.append('h4').text(t('layers'));
 
         opa.append('ul')
             .attr('class', 'opacity-options')
@@ -68,7 +68,7 @@ iD.ui.layerswitcher = function(map) {
             .enter()
             .append('li')
                 .attr('data-original-title', function(d) {
-                    return (d * 100) + "% opacity";
+                    return t('percent_opacity', { opacity: (d * 100) });
                 })
                 .on('click.set-opacity', function(d) {
                     d3.select('#tile-g')

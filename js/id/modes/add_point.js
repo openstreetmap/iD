@@ -2,7 +2,8 @@ iD.modes.AddPoint = function() {
     var mode = {
         id: 'add-point',
         title: 'Point',
-        description: 'Restaurants, monuments, and postal boxes are points.'
+        description: 'Restaurants, monuments, and postal boxes are points.',
+        key: 'p'
     };
 
     var behavior;
@@ -15,8 +16,8 @@ iD.modes.AddPoint = function() {
 
         map.tail('Click on the map to add a point.', true);
 
-        function add() {
-            var node = iD.Node({loc: map.mouseCoordinates()});
+        function add(loc) {
+            var node = iD.Node({loc: loc});
 
             history.perform(
                 iD.actions.AddNode(node),
@@ -25,12 +26,23 @@ iD.modes.AddPoint = function() {
             controller.enter(iD.modes.Select(node, true));
         }
 
+        function addWay(way, loc, index) {
+            add(loc);
+        }
+
+        function addNode(node) {
+            add(node.loc);
+        }
+
         function cancel() {
             controller.exit();
         }
 
-        behavior = iD.behavior.Draw()
-            .on('add', add)
+        behavior = iD.behavior.Draw(map)
+            .on('click', add)
+            .on('clickWay', addWay)
+            .on('clickNode', addNode)
+            .on('clickMidpoint', addNode)
             .on('cancel', cancel)
             .on('finish', cancel)
             (surface);

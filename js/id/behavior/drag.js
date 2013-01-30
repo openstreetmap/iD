@@ -24,7 +24,8 @@ iD.behavior.drag = function () {
         origin = null,
         selector = '',
         filter = null,
-        keybinding = d3.keybinding('drag');
+        keybinding = d3.keybinding('drag'),
+        event_, target;
 
     event.of = function(thiz, argumentz) {
       return function(e1) {
@@ -40,9 +41,9 @@ iD.behavior.drag = function () {
     };
 
     function mousedown() {
-        var target = this,
-            event_ = event.of(target, arguments),
-            eventTarget = d3.event.target,
+        target = this,
+        event_ = event.of(target, arguments);
+        var eventTarget = d3.event.target,
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             offset,
             origin_ = point(),
@@ -163,6 +164,13 @@ iD.behavior.drag = function () {
         d3.select(window)
             .on("mousemove.drag", null)
             .on("mouseup.drag", null);
+        return drag;
+    };
+
+    drag.target = function() {
+        if (!arguments.length) return target;
+        target = arguments[0];
+        event_ = event.of(target, Array.prototype.slice.call(arguments, 1));
         return drag;
     };
 

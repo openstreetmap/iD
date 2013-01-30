@@ -89,7 +89,7 @@ a:visited, a {
 }
 
 a:hover {
-    color:#154dff;
+    color:#597be7;
 }
 
 
@@ -220,8 +220,9 @@ ul.link-list li:last-child {
 
 .fillD {
     background:rgba(0,0,0,.8);
-    color: white;
+    color: #a9a9a9;
 }
+
 
 .fl { float: left;}
 .fr { float: right;}
@@ -255,6 +256,9 @@ button {
     height:40px;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
     border-radius:4px;
+    -webkit-transition: background 100ms;
+    -moz-transition: background 100ms;
+    transition: background 100ms;
 }
 
 button:hover {
@@ -279,11 +283,11 @@ button.minor {
     width: 20px;
     border: 0;
     box-shadow: none;
-    background-color: transparent;
+    background: rgba(0,0,0,.5);
 }
 
 button.minor:hover {
-    background: white;
+    background: #222;
 }
 
 button.centered {
@@ -314,6 +318,8 @@ button.centered {
     border-right-width: 0px;
     border-radius:0 4px 4px 0;
 }
+
+button.Browse .label { display: none;}
 
 button.action {
     background: #7092ff;
@@ -399,17 +405,25 @@ button[disabled] .label {
     height: 40px;
 }
 
-.icon.icon-pre-text {
+.icon-pre-text {
     margin-right: 3px;
 }
 
+.user-icon {
+    max-height: 20px;
+    max-width: 20px;
+    height: auto;
+    width: auto;
+    border-radius: 3px;
+}
+
 /* Definitions for every icon */
-.icon.browse     { background-position:   0px -20px;}
-.icon.add-point  { background-position: -20px -20px;}
-.icon.add-line   { background-position: -40px -20px;}
-.icon.add-area   { background-position: -60px -20px;}
-.icon.undo       { background-position: -80px -20px;}
-.icon.redo      { background-position: -100px -20px;}
+.icon.browse     { background-position:   0px 0px;}
+.icon.add-point  { background-position: -20px 0px;}
+.icon.add-line   { background-position: -40px 0px;}
+.icon.add-area   { background-position: -60px 0px;}
+.icon.undo       { background-position: -80px 0px;}
+.icon.redo      { background-position: -100px 0px;}
 
 .icon.apply      { background-position: -120px 0px;}
 .icon.save       { background-position: -140px 0px;}
@@ -419,20 +433,15 @@ button[disabled] .label {
 .icon.inspect    { background-position: -220px 0px;}
 .icon.zoom-in    { background-position: -240px 0px;}
 .icon.zoom-out   { background-position: -260px 0px;}
+.icon.plus       { background-position: -240px 0px;}
 .icon.geocode    { background-position: -280px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
 .icon.geolocate  { background-position: -360px 0px;}
+.icon.warning    { background-position: -380px 0px;}
 
-.icon.invert.zoom-in    { background-position: -240px -40px;}
-
-.icon.browse     { background-position:   0px 0px;}
-.icon.add-point  { background-position: -20px 0px;}
-.icon.add-line   { background-position: -40px 0px;}
-.icon.add-area   { background-position: -60px 0px;}
-.icon.undo       { background-position: -80px 0px;}
-.icon.redo      { background-position: -100px 0px;}
+.icon.close-modal { background-position: -200px -40px;}
 
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
@@ -456,11 +465,23 @@ button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
-.icon.big-line    { background-position: 0px -80px;}
-.icon.big-point   { background-position: -40px -80px;}
-.icon.big-area    { background-position: -80px -80px;}
-.icon.big-vertex { background-position: -120px -80px;}
-.icon.big-inspect { background-position: -160px -80px;}
+.icon.big-line     { background-position: 0px -80px;}
+.icon.big-point    { background-position: -40px -80px;}
+.icon.big-area     { background-position: -80px -80px;}
+.icon.big-vertex   { background-position: -120px -80px;}
+.icon.big-inspect  { background-position: -160px -80px;}
+.icon.big-relation { background-position: -200px -80px;}
+
+.icon-operation-delete        { background-position: 0px -140px;}
+.icon-operation-circularize   { background-position: -20px -140px;}
+.icon-operation-straighten    { background-position: -40px -140px;}
+.icon-operation-split         { background-position: -60px -140px;}
+.icon-operation-unjoin        { background-position: -80px -140px;}
+.icon-operation-reverse       { background-position: -100px -140px;}
+.icon-operation-move          { background-position: -120px -140px;}
+.icon-operation-merge         { background-position: -140px -140px;}
+.icon-operation-orthogonalize { background-position: -160px -140px;}
+
 
 /* Toggle icon is special */
 .toggle.icon                   { background-position: 0px -180px;}
@@ -593,19 +614,19 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     width: 60%;
 }
 
-.inspector-inner .add-tag-row {
-    width: 100%;
-}
-
-.inspector-inner .add-tag-row button {
+.inspector-inner .add-tag {
+    width: 20%;
+    height: 30px;
+    border-top: 0;
+    background: rgba(0,0,0,.5);
     border-radius: 0 0 4px 4px;
 }
+.inspector-inner .add-tag:hover {
+    background: rgba(0,0,0,.8);
+}
 
-.inspector-inner .add-tag {
-    width: 40%;
-    height: 30px;
-    border: 1px solid #ccc;
-    border-top: 0;
+.inspector-inner .add-tag  .label {
+    display: none;
 }
 
 /* Map Controls */
@@ -617,12 +638,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .map-control button {
     width: 40px;
-    background: rgba(0,0,0,.8);
-    border-radius: 0 4px 4px 0;
+    background: rgba(0,0,0,.5);
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
 .map-control button:hover {
-    background: rgba(0, 0, 0, .9);
+    background: rgba(0, 0, 0, .8);
 }
 
 .map-control button.active:hover {
@@ -647,18 +669,16 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .zoombuttons button.zoom-in {
     border-radius:0 4px 0 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .5);
 }
 
 .zoombuttons button.zoom-out {
     border-top:0;
-    border-radius:0 0 4px 0;
 }
 
 /* Layer Switcher */
 
 .layerswitcher-control {
-    top:210px;
+    top:190px;
 }
 
 .layerswitcher-control .adjustments button {
@@ -729,7 +749,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 /* Geocoder */
 
 .geocode-control {
-    top:160px;
+    top:150px;
 }
 
 .geocode-control input {
@@ -738,8 +758,15 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: 4px;
 }
 
+/* Geolocator */
+
 .geolocate-control {
-    top:260px;
+    top:230px;
+}
+
+.geolocate-control button {
+    border-radius: 0 0 4px 0;
+    border-bottom: 0;
 }
 
 /* Map
@@ -862,9 +889,11 @@ div.typeahead a:first-child {
     display: inline-block;
     position:absolute;
     width: 50%;
-    left: 25%;
+    left: 0;
+    right: 0;
+    margin: auto;
     max-width: 600px;
-    top:80px;
+    top: 80px;
     z-index: 3;
 }
 
@@ -900,6 +929,59 @@ div.typeahead a:first-child {
     left:0px; right:0px; top:0px; bottom:0px;
 }
 
+.modal-section {
+    padding: 20px;
+}
+
+.modal-section.header {
+    border-radius: 4px 4px 0 0;
+}
+
+.modal-section:last-child {
+    border-radius: 0 0 4px 4px;
+}
+
+.modal-section .buttons {
+    padding-top: 10px;
+    width: 100%;
+}
+
+.modal-section img.wiki-image {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+}
+
+.modal-flash .content {
+    box-shadow: none;
+    border-radius: 4px;
+    background: #111;
+    color: #eee;
+}
+
+.modal-flash .close-modal {
+    display:none;
+}
+
+.loading-modal {
+    text-align: center;
+}
+
+/* Commit Modal
+------------------------------------------------------- */
+
+.commit-modal .user-info {
+    display: inline-block;
+}
+
+.commit-modal .commit-info {
+    margin-top: 10px;
+}
+
+.commit-modal .user-info img {
+    float: left;
+}
+
 .commit-modal h3 small.count {
     margin-right: 10px;
     text-align: center;
@@ -921,49 +1003,15 @@ div.typeahead a:first-child {
     max-height: 160px;
 }
 
-.commit-modal .user-details {
+.commit-modal .warning-section .changeset-list  button {
     float: right;
 }
 
-.user-icon {
-    max-width: 50px;
-    max-height: 50px;
+.commit-section.modal-section {
+    padding-bottom: 0;
 }
 
-.modal-section {
-    padding: 20px;
-}
-
-.modal-section.header {
-    border-radius: 4px 4px 0 0;
-}
-
-.modal-section:last-child {
-    border-radius: 0 0 4px 4px;
-}
-
-.modal-section .buttons {
-    padding-top: 10px;
-    width: 100%;
-}
-
-.modal-section img.wiki-image {
-    max-width: 400px;
-    max-height: 300px;
-    padding: 10px;
-    display: block;
-}
-
-.modal-flash .content {
-    box-shadow: none;
-    border-radius: 4px;
-    background: #111;
-    color: #eee;
-}
-
-.modal-flash .close-modal {
-    display:none;
-}
+.commit-section.modal-section:last-child { padding-bottom: 20px;}
 
 .changeset-list li {
     border-top:1px solid #ccc;
@@ -987,8 +1035,12 @@ div.typeahead a:first-child {
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
 }
 
-.loading-modal {
-    text-align: center;
+/* Success
+------------------------------------------------------- */
+a.success-action {
+  display:inline-block;
+  padding:10px;
+  margin:10px;
 }
 
 /* Notices
@@ -1053,17 +1105,17 @@ div.typeahead a:first-child {
 }
 
 .tooltip-inner {
-    text-align: left;
-    width: 200px;
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 20px;
-    padding: 5px 10px;
-    color: #333;
-    background-color: white;
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
+  text-align: left;
+  width: 200px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 5px 10px;
+  color: #333;
+  background-color: white;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
 }
 
 .tooltip-arrow {
@@ -1110,6 +1162,17 @@ div.typeahead a:first-child {
   left: 30px;
 }
 
+.tooltip .keyhint {
+    float: right;
+    background: #eee;
+    font-size: 10px;
+    padding: 0 4px;
+    background:#aaa;
+    color:#fff;
+    border-radius: 2px;
+    margin-left: 4px;
+}
+
 .tail {
   pointer-events:none;
   position: absolute;
@@ -1122,10 +1185,13 @@ div.typeahead a:first-child {
           border-radius: 4px;
 }
 
+.radial-menu-background {
+    stroke: #aaa;
+    stroke-opacity: 0.4;
+}
+
 .radial-menu-item {
-    fill: white;
-    stroke: black;
-    stroke-width: 1;
+    fill: black;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
 }
 
@@ -1143,6 +1209,17 @@ div.typeahead a:first-child {
     fill: rgba(255,255,255,.5);
 }
 
+.radial-menu .icon {
+    pointer-events: none;
+}
+
+.radial-menu-tooltip {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
 
 /* Media Queries
 ------------------------------------------------------- */
@@ -1151,5 +1228,5 @@ div.typeahead a:first-child {
     span.label {display: none;}
     /* override hide for save button */
     .icon.icon-pre-text { margin-right: 0px;}
-    .save .label { display: block;}
+    .save .label, .apply .label { display: block;}
 }

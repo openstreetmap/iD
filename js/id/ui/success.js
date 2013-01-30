@@ -1,4 +1,4 @@
-iD.ui.success = function() {
+iD.ui.success = function(connection) {
     var event = d3.dispatch('cancel', 'save');
 
     function success(selection) {
@@ -8,23 +8,32 @@ iD.ui.success = function() {
 
         var section = body.append('div').attr('class','modal-section fillD');
 
-        header.append('h2').text('You Just Edited OpenStreetMap!');
-        header.append('p').text('You just improved the world\'s best free map');
+        header.append('h2').text(t('just_edited'));
 
         var m = '';
         if (changeset.comment) {
             m = '"' + changeset.comment.substring(0, 20) + '" ';
         }
 
-        var message = 'Edited OpenStreetMap! ' + m +
-            'http://osm.org/browse/changeset/' + changeset.id;
+        var message = (m || 'Edited OSM!') +
+            connection.changesetUrl(changeset.id);
 
-        section.append('a')
+        header.append('a')
+            .attr('href', function(d) {
+                return connection.changesetUrl(changeset.id);
+            })
+            .attr('target', '_blank')
+            .attr('class', 'success-action')
+            .text(t('view_on_osm'));
+
+        header.append('a')
+            .attr('target', '_blank')
             .attr('href', function(d) {
                 return 'https://twitter.com/intent/tweet?source=webclient&text=' +
                     encodeURIComponent(message);
             })
-            .text('Tweet: ' + message);
+            .attr('class', 'success-action')
+            .text('Tweet');
 
         var buttonwrap = section.append('div')
             .attr('class', 'buttons cf');

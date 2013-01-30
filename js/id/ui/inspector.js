@@ -22,20 +22,20 @@ iD.ui.inspector = function() {
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
         inspectorwrap.append('h4')
-            .text('Edit tags');
+            .text(t('edit_tags'));
 
         tagList = inspectorwrap.append('ul');
 
-        inspectorwrap
-            .append('div')
-            .attr('class', 'add-tag-row')
-            .append('button')
-                .attr('class', 'add-tag')
-                .text('+ Add New Tag')
-                .on('click', function() {
-                    addTag();
-                    focusNewKey();
-                });
+        var newTag = inspectorwrap.append('button')
+                .attr('class', 'add-tag');
+
+            newTag.on('click', function() {
+                addTag();
+                focusNewKey();
+            });
+
+            newTag.append('span').attr('class', 'icon icon-pre-text plus');
+            newTag.append('span').attr('class','label').text('New tag')
 
         drawTags(entity.tags);
 
@@ -63,7 +63,6 @@ iD.ui.inspector = function() {
                 .attr('class', 'apply action')
                 .on('click', apply);
 
-            inspectorButton.append('span').attr('class','icon icon-pre-text apply');
             inspectorButton.append('span').attr('class','label').text('Okay');
 
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
@@ -118,7 +117,7 @@ iD.ui.inspector = function() {
             .on('click', removeTag);
 
         removeBtn.append('span')
-            .attr('class', 'icon remove');
+            .attr('class', 'icon delete');
 
         var helpBtn = row.append('button')
             .attr('tabindex', -1)
@@ -149,7 +148,7 @@ iD.ui.inspector = function() {
                             iD.ui.flash()
                                 .select('.content')
                                 .append('h3')
-                                .text('This is no documentation available for this tag combination');
+                                .text(t('no_documentation_combination'));
                         }
                     });
                 } else if (d.key) {
@@ -167,7 +166,7 @@ iD.ui.inspector = function() {
                             iD.ui.flash()
                                 .select('.content')
                                 .append('h3')
-                                .text('This is no documentation available for this key');
+                                .text(t('no_documentation_key'));
                         }
                     });
                 }

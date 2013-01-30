@@ -1,116 +1,94 @@
-iD.ui.RadialMenu = function(entity, history, map) {
-    var arcs;
+iD.ui.RadialMenu = function(operations) {
+    var menu;
 
     var radialMenu = function(selection, center) {
-        var operations,
-            graph = history.graph(),
-            geometry = entity.geometry(graph);
-
-        if (geometry === 'vertex') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted a node',
-                    action: iD.actions.DeleteNode(entity.id)
-                },
-                {
-                    id: 'split',
-                    text: 'Split Way',
-                    description: 'split a way',
-                    action: iD.actions.SplitWay(entity.id)
-                },
-                {
-                    id: 'unjoin',
-                    text: 'Unjoin',
-                    description: 'unjoined lines',
-                    action: iD.actions.UnjoinNode(entity.id)
-                }
-            ];
-        } else if (geometry === 'point') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted a point',
-                    action: iD.actions.DeleteNode(entity.id)
-                }
-            ];
-        } else if (geometry === 'line') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted a line',
-                    action: iD.actions.DeleteWay(entity.id)
-                },
-                {
-                    id: 'reverse',
-                    text: 'Reverse',
-                    description: 'reversed a way',
-                    action: iD.actions.ReverseWay(entity.id)
-                }
-            ];
-            if (entity.isClosed()) {
-                operations.push({
-                   id: 'circlar',
-                   text: 'Circular',
-                   description: 'made way circular',
-                   action: iD.actions.Circular(entity.id, map)
-                });
-            }
-        } else if (geometry === 'area') {
-            operations = [
-                {
-                    id: 'delete',
-                    text: 'Delete',
-                    description: 'deleted an area',
-                    action: iD.actions.DeleteWay(entity.id)
-                },
-                {
-                    id: 'circlar',
-                    text: 'Circular',
-                    description: 'made area circular',
-                    action: iD.actions.Circular(entity.id, map)
-                }
-            ];
-        } else {
-            // Relation, not implemented yet.
+        if (!operations.length)
             return;
+
+        function click(operation) {
+            d3.event.stopPropagation();
+            operation();
         }
 
-        var arc = d3.svg.arc()
-            .outerRadius(70)
-            .innerRadius(30)
-            .startAngle(function (d, i) { return 2 * Math.PI / operations.length * i; })
-            .endAngle(function (d, i) { return 2 * Math.PI / operations.length * (i + 1); });
-
-        arcs = selection.selectAll()
-            .data(operations)
-            .enter().append('g')
+        menu = selection.append('g')
             .attr('class', 'radial-menu')
             .attr('transform', "translate(" + center + ")")
             .attr('opacity', 0);
 
-        arcs.transition()
+        menu.transition()
             .attr('opacity', 0.8);
 
-        arcs.append('path')
-            .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
-            .attr('d', arc)
-            .classed('disabled', function (d) { return !d.action.enabled(history.graph()); })
-            .on('click', function (d) { history.perform(d.action, d.description); });
+        var r = 50,
+            a = Math.PI / 4,
+            a0 = -Math.PI / 4,
+            a1 = a0 + (operations.length - 1) * a;
 
-        arcs.append('text')
-            .attr("transform", function(d, i) { return "translate(" + arc.centroid(d, i) + ")"; })
-            .attr("dy", ".35em")
-            .style("text-anchor", "middle")
-            .text(function(d) { return d.text; });
+        menu.append('path')
+            .attr('class', 'radial-menu-background')
+            .attr('d', 'M' + r * Math.sin(a0) + ',' +
+                             r * Math.cos(a0) +
+                      ' A' + r + ',' + r + ' 0 0,0 ' +
+                             r * Math.sin(a1) + ',' +
+                             r * Math.cos(a1))
+            .attr('stroke-width', 50)
+            .attr('stroke-linecap', 'round');
+
+        var button = menu.selectAll()
+            .data(operations)
+            .enter().append('g')
+            .attr('transform', function(d, i) {
+                return 'translate(' + r * Math.sin(a0 + i * a) + ',' +
+                                      r * Math.cos(a0 + i * a) + ')';
+            });
+
+        button.append('circle')
+            .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
+            .attr('r', 15)
+            .attr('title', function (d) { return d.title; })
+            .classed('disabled', function (d) { return !d.enabled(); })
+            .on('click', click)
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout);
+
+        var image = button.append('foreignObject')
+            .style('pointer-events', 'none')
+            .attr('width', 20)
+            .attr('height', 20)
+            .attr('x', -10)
+            .attr('y', -10);
+
+        image.append('xhtml:span')
+            .attr('class', function (d) { return 'icon icon-operation icon-operation-' + d.id; });
+
+        var tooltip = menu.append('foreignObject')
+            .style('display', 'none')
+            .attr('width', 200)
+            .attr('height', 400);
+
+        tooltip.append('xhtml:div')
+            .attr('class', 'radial-menu-tooltip');
+
+        function mouseover(d, i) {
+            var angle = a0 + i * a,
+                dx = angle < 0 ? -200 : 0,
+                dy = 0;
+
+            tooltip
+                .attr('x', (r + 30) * Math.sin(angle) + dx)
+                .attr('y', (r + 30) * Math.cos(angle) + dy)
+                .style('display', 'block')
+                .select('div')
+                .text(d.description);
+        }
+
+        function mouseout() {
+            tooltip.style('display', 'none');
+        }
     };
 
     radialMenu.close = function(selection) {
-        if (arcs) {
-            arcs.transition()
+        if (menu) {
+            menu.transition()
                 .attr('opacity', 0)
                 .remove();
         }

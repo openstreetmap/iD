@@ -21,6 +21,10 @@ window.iD = function(container) {
             return;
         }
 
+        function hintprefix(x, y) {
+            return '<span class="keyhint">' + x + '</span> ' + y;
+        }
+
         var m = container.append('div')
             .attr('id', 'map')
             .call(map);
@@ -40,8 +44,10 @@ window.iD = function(container) {
             .enter().append('button')
                 .attr('tabindex', -1)
                 .attr('class', function (mode) { return mode.title + ' add-button col3'; })
-            .attr('data-original-title', function (mode) { return mode.description; })
-            .call(bootstrap.tooltip().placement('bottom'))
+            .attr('data-original-title', function (mode) {
+                return hintprefix(mode.key, mode.description);
+            })
+            .call(bootstrap.tooltip().placement('bottom').html(true))
             .on('click.editor', function (mode) { controller.enter(mode); });
 
         function disableTooHigh() {
@@ -82,7 +88,7 @@ window.iD = function(container) {
 
         var undo_buttons = limiter.append('div')
             .attr('class', 'button-wrap joined col1'),
-            undo_tooltip = bootstrap.tooltip().placement('bottom');
+            undo_tooltip = bootstrap.tooltip().placement('bottom').html(true);
 
         undo_buttons.append('button')
             .attr({ id: 'undo', 'class': 'col6' })
@@ -201,12 +207,12 @@ window.iD = function(container) {
 
             limiter.select('#undo')
                 .property('disabled', !undo)
-                .attr('data-original-title', undo)
+                .attr('data-original-title', hintprefix('⌘Z', undo))
                 .call(refreshTooltip);
 
             limiter.select('#redo')
                 .property('disabled', !redo)
-                .attr('data-original-title', redo)
+                .attr('data-original-title', hintprefix('⌘⇧Z', redo))
                 .call(refreshTooltip);
         });
 
@@ -215,15 +221,15 @@ window.iD = function(container) {
         });
 
         var keybinding = d3.keybinding('main')
-            .on('M', function() { if (map.editable()) controller.enter(iD.modes.Browse()); })
-            .on('P', function() { if (map.editable()) controller.enter(iD.modes.AddPoint()); })
-            .on('L', function() { if (map.editable()) controller.enter(iD.modes.AddLine()); })
-            .on('A', function() { if (map.editable()) controller.enter(iD.modes.AddArea()); })
             .on('⌘+Z', function() { history.undo(); })
             .on('⌃+Z', function() { history.undo(); })
             .on('⌘+⇧+Z', function() { history.redo(); })
             .on('⌃+⇧+Z', function() { history.redo(); })
             .on('⌫', function() { d3.event.preventDefault(); });
+
+        [iD.modes.Browse(), iD.modes.AddPoint(), iD.modes.AddLine(), iD.modes.AddArea()].forEach(function(m) {
+            keybinding.on(m.key, function() { if (map.editable()) controller.enter(m); });
+        });
 
         d3.select(document)
             .call(keybinding);

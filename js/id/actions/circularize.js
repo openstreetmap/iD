@@ -1,4 +1,4 @@
-iD.actions.Circular = function(wayId, map) {
+iD.actions.Circularize = function(wayId, map) {
 
     var action = function(graph) {
         var way = graph.entity(wayId),
@@ -51,7 +51,7 @@ iD.actions.Circular = function(wayId, map) {
     };
 
     action.enabled = function(graph) {
-        return true;
+        return graph.entity(wayId).isClosed();
     };
 
     return action;

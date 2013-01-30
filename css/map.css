@@ -16,7 +16,7 @@ g.point .shadow {
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
 }
-g.point.hover .shadow {
+.behavior-hover g.point.hover .shadow {
     fill: #E96666;
     fill-opacity: 0.3;
 }
@@ -106,7 +106,7 @@ g.vertex .shadow {
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
 }
-g.vertex.hover .shadow {
+.behavior-hover g.vertex.hover .shadow {
     fill: #E96666;
     fill-opacity: 0.3;
 }    
@@ -120,7 +120,7 @@ g.vertex.selected .shadow {
 g.midpoint .fill {
     fill:#aaa;
 }
-g.midpoint .fill.hover {
+.behavior-hover g.midpoint .fill.hover {
     fill:#fff;
     stroke:#000;
 }
@@ -133,7 +133,7 @@ g.midpoint .shadow {
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
 }
-g.midpoint .shadow.hover {
+.behavior-hover g.midpoint .shadow.hover {
     fill:#E96666;
     fill-opacity: 0.3;
 }
@@ -161,7 +161,7 @@ path.shadow {
     -webkit-transition: stroke 100ms linear;
 }
 
-path.shadow.hover {
+.behavior-hover path.shadow.hover {
     stroke: #E96666;
     stroke-opacity: 0.3;
 }
@@ -691,17 +691,17 @@ text.point.tag-amenity {
     cursor:url(../img/cursor-draw.png) 9 9, auto;
 }
 
-.mode-draw-line .way,
-.mode-draw-area .way,
-.mode-add-line  .way,
-.mode-add-area  .way {
+.mode-draw-line .behavior-hover .way,
+.mode-draw-area .behavior-hover .way,
+.mode-add-line  .behavior-hover .way,
+.mode-add-area  .behavior-hover .way {
     cursor:url(../img/cursor-draw-connect-line.png) 9 9, auto;
 }
 
-.mode-draw-line .vertex,
-.mode-draw-area .vertex,
-.mode-add-line  .vertex,
-.mode-add-area  .vertex {
+.mode-draw-line .behavior-hover .vertex,
+.mode-draw-area .behavior-hover .vertex,
+.mode-add-line  .behavior-hover .vertex,
+.mode-add-area  .behavior-hover .vertex {
     cursor:url(../img/cursor-draw-connect-vertex.png) 9 9, auto;
 }
 
