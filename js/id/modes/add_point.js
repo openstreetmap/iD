@@ -42,6 +42,7 @@ iD.modes.AddPoint = function() {
             .on('click', add)
             .on('clickWay', addWay)
             .on('clickNode', addNode)
+            .on('clickMidpoint', addNode)
             .on('cancel', cancel)
             .on('finish', cancel)
             (surface);

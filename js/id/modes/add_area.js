@@ -15,6 +15,20 @@ iD.modes.AddArea = function() {
             history = mode.history,
             controller = mode.controller;
 
+        function startFromMidpoint(midpoint) {
+            var graph = history.graph(),
+                node = iD.Node(),
+                way = iD.Way({tags: defaultTags});
+
+            history.perform(
+                iD.actions.AddMidpoint(midpoint, node),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, node.id),
+                iD.actions.AddWayNode(way.id, node.id));
+
+            controller.enter(iD.modes.DrawArea(way.id, graph));
+        }
+
         function startFromNode(node) {
             var graph = history.graph(),
                 way = iD.Way({tags: defaultTags});
@@ -57,6 +71,7 @@ iD.modes.AddArea = function() {
         }
 
         behavior = iD.behavior.AddWay(mode)
+            .on('startFromMidpoint', startFromMidpoint)
             .on('startFromNode', startFromNode)
             .on('startFromWay', startFromWay)
             .on('start', start);

@@ -1,5 +1,5 @@
 iD.behavior.Draw = function(map) {
-    var event = d3.dispatch('move', 'click', 'clickNode', 'clickWay', 'undo', 'cancel', 'finish'),
+    var event = d3.dispatch('move', 'click', 'clickWay', 'clickNode', 'clickMidpoint', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
         down, surface, hover;
 
@@ -27,14 +27,16 @@ iD.behavior.Draw = function(map) {
 
     function click() {
         var d = datum();
-        if (d.type === 'node') {
-            event.clickNode(d);
-        } else if (d.type === 'way') {
+        if (d.type === 'way') {
             var choice = iD.geo.chooseIndex(d, d3.mouse(map.surface.node()), map);
             event.clickWay(d, choice.loc, choice.index);
+
+        } else if (d.type === 'node') {
+            event.clickNode(d);
+
         } else if (d.midpoint) {
-            var way = history.graph().entity(d.way);
-            event.clickWay(way, d.loc, d.index);
+            event.clickMidpoint(d);
+
         } else {
             event.click(map.mouseCoordinates());
         }

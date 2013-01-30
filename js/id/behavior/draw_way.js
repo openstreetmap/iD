@@ -33,8 +33,9 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
     var drawWay = function(surface) {
         draw.on('move', move)
             .on('click', drawWay.add)
-            .on('clickNode', drawWay.addNode)
             .on('clickWay', drawWay.addWay)
+            .on('clickNode', drawWay.addNode)
+            .on('clickMidpoint', drawWay.addMidpoint)
             .on('undo', history.undo)
             .on('cancel', drawWay.cancel)
             .on('finish', drawWay.finish);
@@ -115,6 +116,19 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
         history.replace(
             iD.actions.AddNode(newNode),
             ReplaceTemporaryNode(newNode),
+            annotation);
+
+        finished = true;
+        controller.enter(mode);
+    };
+
+    // Add a midpoint, connect the way to it, and continue drawing.
+    drawWay.addMidpoint = function(midpoint) {
+        var node = iD.Node();
+
+        history.perform(
+            iD.actions.AddMidpoint(midpoint, node),
+            ReplaceTemporaryNode(node),
             annotation);
 
         finished = true;

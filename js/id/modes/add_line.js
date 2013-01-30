@@ -15,6 +15,19 @@ iD.modes.AddLine = function() {
             history = mode.history,
             controller = mode.controller;
 
+        function startFromMidpoint(midpoint) {
+            var graph = history.graph(),
+                node = iD.Node(),
+                way = iD.Way({tags: defaultTags});
+
+            history.perform(
+                iD.actions.AddMidpoint(midpoint, node),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, node.id));
+
+            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
+        }
+
         function startFromNode(node) {
             var graph = history.graph(),
                 parent = graph.parentWays(node)[0],
@@ -65,6 +78,7 @@ iD.modes.AddLine = function() {
         }
 
         behavior = iD.behavior.AddWay(mode)
+            .on('startFromMidpoint', startFromMidpoint)
             .on('startFromNode', startFromNode)
             .on('startFromWay', startFromWay)
             .on('start', start);
