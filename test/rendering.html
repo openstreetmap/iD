@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <title>Rendering Tests</title>
     <link rel="stylesheet" href="../css/map.css">
+    <style>body { background-color: #888; }</style>
 </head>
 <body>
     <!-- include source files here... -->
@@ -123,5 +124,67 @@
                     .classed(d.mode, d.mode !== 'base');
             });
     </script>
+
+    <table>
+        <thead>
+            <tr><th></th><th>Base</th><th>Selected</th></tr>
+        </thead>
+        <tbody class="areas">
+        </tbody>
+    </table>
+
+    <script>
+        var modes = ['base', 'selected'],
+            tags = [
+                {area: 'yes'},
+                {natural: 'yes'},
+                {natural: 'water'},
+                {natural: 'wood'},
+                {building: 'yes'},
+                {amenity: 'parking'}
+            ];
+
+        var row = d3.select('.areas').selectAll('tr')
+            .data(tags)
+          .enter().append('tr');
+
+        row.append('th')
+            .html(function (d) { return _.map(d, function (value, key) { return key + "=" + value;}).join("<br>"); });
+
+        var a = iD.Node({loc: [15, 15]}),
+            b = iD.Node({loc: [85, 15]}),
+            c = iD.Node({loc: [85, 85]}),
+            d = iD.Node({loc: [15, 85]}),
+            way = iD.Way({nodes: [a.id, b.id, c.id, d.id, a.id]}),
+            vertices = iD.svg.Vertices(projection),
+            areas = iD.svg.Areas(projection),
+            midpoints = iD.svg.Midpoints(projection);
+
+        row.selectAll('td')
+            .data(function (d) {
+                return modes.map(function (m) {
+                    return { mode: m, tags: d };
+                });
+            })
+          .enter()
+            .append('td')
+            .append('svg')
+            .attr('width', 100)
+            .attr('height', 100)
+            .call(iD.svg.Surface())
+            .each(function (datum) {
+                var area = way.update({tags: datum.tags}),
+                    graph = iD.Graph([a, b, c, d, area]);
+
+                d3.select(this)
+                    .attr('class', datum.mode === 'selected' ? 'mode-select' : 'mode-browse')
+                    .call(vertices, graph, [a, b, c, d], filter)
+                    .call(areas, graph, [area], filter)
+                    .call(midpoints, graph, [area], filter)
+                    .selectAll('.area')
+                    .classed(datum.mode, datum.mode !== 'base');
+            });
+    </script>
+
 </body>
 </html>
