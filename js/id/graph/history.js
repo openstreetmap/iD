@@ -30,16 +30,8 @@ iD.History = function() {
         },
 
         merge: function (graph) {
-            var base = stack[0].graph.base();
-
-            _.defaults(base.entities, graph.entities);
-            for (var i in graph.entities) {
-                base.parentWays[i] = _.unique((base.parentWays[id] || []).concat(graph._parentWays[i] || []));
-            }
-            _.defaults(base.parentWays, graph._parentWays);
-
-            for (i = 1; i < stack.length; i++) {
-                stack[i].graph.rebase(base);
+            for (var i = 0; i < stack.length; i++) {
+                stack[i].graph.rebase(graph.base().entities);
             }
         },
 

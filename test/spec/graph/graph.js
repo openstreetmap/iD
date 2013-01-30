@@ -28,7 +28,7 @@ describe('iD.Graph', function() {
         it("rebases on other's base", function () {
             var base   = iD.Graph(),
                 graph  = iD.Graph(base);
-            expect(graph.base()).to.equal(base.base());
+            expect(graph.base().entities).to.equal(base.base().entities);
         });
 
         it("freezes by default", function () {
@@ -81,16 +81,27 @@ describe('iD.Graph', function() {
             expect(graph.entities).not.to.have.ownProperty('n');
         });
 
-        xit("updates parentWays", function () {
+        it("updates parentWays", function () {
             var n = iD.Node({id: 'n'}),
                 w1 = iD.Way({id: 'w1', nodes: ['n']}),
                 w2 = iD.Way({id: 'w2', nodes: ['n']}),
+                w3 = iD.Way({id: 'w3', nodes: ['n']}),
                 graph = iD.Graph([n, w1]);
 
-            graph.parentWays(n);
-            graph.rebase({'w2': w2});
+            var graph2 = graph.replace(w2);
+            graph.rebase({ 'w3': w3 });
+            graph2.rebase({ 'w3': w3 });
 
-            expect(graph.parentWays(n)).to.eql([w1, w2]);
+            expect(graph2.parentWays(n)).to.eql([w1, w2, w3]);
+        });
+
+        it("only sets non-base parentWays when necessary", function () {
+            var n = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w1', nodes: ['n']}),
+                graph = iD.Graph([n, w1]);
+            graph.rebase({ 'w1': w1 });
+            expect(graph._parentWays.hasOwnProperty('n')).to.be.false;
+            expect(graph.parentWays(n)).to.eql([w1]);
         });
 
         xit("updates parentRelations", function () {
@@ -244,18 +255,18 @@ describe('iD.Graph', function() {
 
     describe("#modified", function () {
         it("returns an Array of ids of modified entities", function () {
-            var node1 = iD.Node({id: 'n1', _updated: true}),
-                node2 = iD.Node({id: 'n2'}),
-                graph = iD.Graph([node1, node2]);
-            expect(graph.modified()).to.eql([node1.id]);
+            var node = iD.Node({id: 'n1'}),
+                node_ = iD.Node({id: 'n1'}),
+                graph = iD.Graph([node]).replace(node_);
+            expect(graph.modified()).to.eql([node.id]);
         });
     });
 
     describe("#created", function () {
         it("returns an Array of ids of created entities", function () {
-            var node1 = iD.Node({id: 'n-1', _updated: true}),
+            var node1 = iD.Node({id: 'n-1'}),
                 node2 = iD.Node({id: 'n2'}),
-                graph = iD.Graph([node1, node2]);
+                graph = iD.Graph([node2]).replace(node1);
             expect(graph.created()).to.eql([node1.id]);
         });
     });
@@ -270,7 +281,7 @@ describe('iD.Graph', function() {
 
         it("doesn't include created entities that were subsequently deleted", function () {
             var node = iD.Node(),
-                graph = iD.Graph([node]).remove(node);
+                graph = iD.Graph().replace(node).remove(node);
             expect(graph.deleted()).to.eql([]);
         });
     });

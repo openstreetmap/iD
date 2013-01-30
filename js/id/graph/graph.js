@@ -5,15 +5,19 @@ iD.Graph = function(other, mutable) {
         var base = other.base();
         this.entities = _.assign(Object.create(base.entities), other.entities);
         this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
-        this.rebase(other.base(), other.entities);
+        this.inherited = true;
 
     } else {
-        this.entities = other || Object.create({});
-        this._parentWays = Object.create({});
-
-        for (var i in this.entities) {
-            this._updateCalculated(undefined, this.entities[i]);
+        if (_.isArray(other)) {
+            var entities = {};
+            for (var i = 0; i < other.length; i++) {
+                entities[other[i].id] = other[i];
+            }
+            other = entities;
         }
+        this.entities = Object.create({});
+        this._parentWays = Object.create({});
+        this.rebase(other || {});
     }
 
     this.transients = {};
@@ -43,25 +47,7 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        var ent, id, parents;
-
-        if (!this._parentWays.calculated) {
-            for (var i in this.entities) {
-                ent = this.entities[i];
-                if (ent && ent.type === 'way') {
-                    for (var j = 0; j < ent.nodes.length; j++) {
-                        id = ent.nodes[j];
-                        parents = this._parentWays[id] = this._parentWays[id] || [];
-                        if (parents.indexOf(ent) < 0) {
-                            parents.push(ent);
-                        }
-                    }
-                }
-            }
-            this._parentWays.calculated = true;
-        }
-
-        return this._parentWays[entity.id] || [];
+        return _.map(this._parentWays[entity.id], _.bind(this.entity, this));
     },
 
     isPoi: function(entity) {
@@ -113,13 +99,31 @@ iD.Graph.prototype = {
     // is used only during the history operation that merges newly downloaded
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
-    rebase: function(base, entities) {
+    rebase: function(entities) {
+        var i;
+        // Merging of data only needed if graph is the base graph
+        if (!this.inherited) {
+            _.defaults(this.base().entities, entities);
+            for (i in entities) {
+                this._updateCalculated(undefined, entities[i], this.base().parentWays);
+            }
+        }
+
+        var keys = Object.keys(this._parentWays);
+        for (i = 0; i < keys.length; i++) {
+            this._parentWays[keys[i]] = _.unique((this._parentWays[keys[i]] || [])
+                    .concat(this.base().parentWays[keys[i]] || []));
+        }
     },
 
-    _updateCalculated: function(oldentity, entity) {
+    // Updates calculated properties (parentWays, parentRels) for the specified change
+    _updateCalculated: function(oldentity, entity, parentWays, parentRels) {
+
+        parentWays = parentWays || this._parentWays;
+        parentRels = parentRels || this._parentRels;
 
         var type = entity && entity.type || oldentity && oldentity.type,
-            removed, added, parentWays, i;
+            removed, added, ways, i;
 
 
         if (type === 'way') {
@@ -136,12 +140,12 @@ iD.Graph.prototype = {
                 added = entity.nodes;
             }
             for (i = 0; i < removed.length; i++) {
-                this._parentWays[removed[i]] = _.without(this._parentWays[removed[i]], oldentity.id);
+                parentWays[removed[i]] = _.without(parentWays[removed[i]], oldentity.id);
             }
             for (i = 0; i < added.length; i++) {
-                parentWays = _.without(this._parentWays[added[i]], entity.id);
-                parentWays.push(entity.id);
-                this._parentWays[added[i]] = parentWays;
+                ways = _.without(parentWays[added[i]], entity.id);
+                ways.push(entity.id);
+                parentWays[added[i]] = ways;
             }
         } else if (type === 'node') {
 
@@ -199,9 +203,12 @@ iD.Graph.prototype = {
     },
 
     difference: function (graph) {
-        var result = [], entity, oldentity, id;
+        var result = [],
+            keys = Object.keys(this.entities),
+            entity, oldentity, id, i;
 
-        for (id in this.entities) {
+        for (i = 0; i < keys.length; i++) {
+            id = keys[i];
             entity = this.entities[id];
             oldentity = graph.entities[id];
             if (entity !== oldentity) {
@@ -223,7 +230,8 @@ iD.Graph.prototype = {
             }
         }
 
-        for (id in graph.entities) {
+        keys = Object.keys(graph.entities);
+        for (i = 0; i < keys.length; i++) {
             entity = graph.entities[id];
             if (entity && !this.entities.hasOwnProperty(id)) {
                 result.push(id);
@@ -235,25 +243,25 @@ iD.Graph.prototype = {
     },
 
     modified: function() {
-        var result = [];
+        var result = [], base = this.base().entities;
         _.each(this.entities, function(entity, id) {
-            if (entity && entity.modified()) result.push(id);
+            if (entity && base[id]) result.push(id);
         });
         return result;
     },
 
     created: function() {
-        var result = [];
+        var result = [], base = this.base().entities;
         _.each(this.entities, function(entity, id) {
-            if (entity && entity.created()) result.push(id);
+            if (entity && !base[id]) result.push(id);
         });
         return result;
     },
 
     deleted: function() {
-        var result = [];
+        var result = [], base = this.base().entities;
         _.each(this.entities, function(entity, id) {
-            if (!entity) result.push(id);
+            if (!entity && base[id]) result.push(id);
         });
         return result;
     }
