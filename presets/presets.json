@@ -1,5 +1,6 @@
 [
     {
+        "title": "Highway",
         "name": "highway",
         "match": {
             "type": ["line"],
@@ -17,6 +18,7 @@
         ]
     },
     {
+        "title": "Cafe",
         "name": "cafe",
         "match": {
             "type": ["node", "area"],

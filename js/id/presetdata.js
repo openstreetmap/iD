@@ -8,6 +8,12 @@ iD.presetData = function() {
         return presets;
     };
 
+    presets.search = function(str) {
+        var edits = _.sortBydata.map(function(d) {
+            return iD.util.editDistance(d.title, str);
+        });
+    };
+
     presets.match = function(entity) {
         return data.filter(function(d) {
             return _.contains(d.match.type, entity.type);
