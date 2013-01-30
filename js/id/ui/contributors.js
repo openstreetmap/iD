@@ -16,7 +16,7 @@ iD.ui.contributors = function(map) {
         var l = selection
             .select('.contributor-list')
             .selectAll('a.user-link')
-            .data(subset);
+            .data(subset, function(d) { return d; });
 
 
         l.enter().append('a')
@@ -43,6 +43,10 @@ iD.ui.contributors = function(map) {
                         ext[1][0], ext[1][1]];
                 })
                 .text(' and ' + (u.length - limit) + ' others');
+        } else {
+            selection
+                .select('.contributor-count')
+                .html('');
         }
 
         if (!u.length) {
