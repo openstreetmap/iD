@@ -4,7 +4,6 @@
     <meta charset='utf-8'>
     <title>Rendering Tests</title>
     <link rel="stylesheet" href="../css/map.css">
-    <style>body { background-color: #888; }</style>
 </head>
 <body>
     <!-- include source files here... -->
@@ -34,6 +33,20 @@
     <script src='../js/id/graph/node.js'></script>
     <script src='../js/id/graph/relation.js'></script>
     <script src='../js/id/graph/way.js'></script>
+
+    <form style="position: fixed; right: 10px; bottom: 10px">
+        <input id="background-color" type="range" min="0" max="255" value="255">
+        <label for="background-color">Background Color</label>
+    </form>
+
+    <script>
+        var bg = d3.select("#background-color")
+            .on("change", function () {
+                var v = bg.property("value");
+                d3.select("body")
+                    .style("background-color", d3.rgb(v,v,v));
+            });
+    </script>
 
     <table>
         <thead>
@@ -106,6 +119,7 @@
             })
           .enter()
             .append('td')
+            .attr('class', function (d) { return d.mode === 'selected' ? 'mode-select' : 'mode-browse'; })
             .append('svg')
             .attr('width', 200)
             .attr('height', 30)
@@ -116,7 +130,7 @@
                     graph = iD.Graph([a, b, highway]);
 
                 d3.select(this)
-                    .attr('class', d.mode === 'selected' ? 'mode-select' : 'mode-browse')
+                    .attr('class', 'behavior-hover')
                     .call(vertices, graph, [a, b], filter)
                     .call(lines, graph, [highway], filter)
                     .call(midpoints, graph, [highway], filter)
