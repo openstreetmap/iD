@@ -42,9 +42,15 @@ iD.modes.MoveWay = function(wayId) {
             controller.enter(iD.modes.Select(way, true));
         }
 
+        function undone() {
+            controller.enter(iD.modes.Browse());
+        }
+
         selection
             .on('mousemove.move-way', move)
             .on('click.move-way', finish);
+
+        history.on('undone.move-way', undone);
 
         keybinding
             .on('⎋', cancel)
@@ -56,11 +62,14 @@ iD.modes.MoveWay = function(wayId) {
 
     mode.exit = function() {
         var map = mode.map,
+            history = mode.history,
             selection = map.surface;
 
         selection
             .on('mousemove.move-way', null)
             .on('click.move-way', null);
+
+        history.on('undone.move-way', null);
 
         keybinding.off();
     };
