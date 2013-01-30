@@ -153,17 +153,15 @@ describe("iD.History", function () {
 
         it("includes modified entities", function () {
             var node1 = iD.Node({id: "n1"}),
-                node2 = node1.update({}),
-                graph = iD.Graph([node1]);
-            history.merge(graph);
+                node2 = node1.update({});
+            history.merge({ n1: node1});
             history.perform(function (graph) { return graph.replace(node2); });
             expect(history.changes().modified).to.eql([node2]);
         });
 
         it("includes deleted entities", function () {
-            var node = iD.Node({id: "n1"}),
-                graph = iD.Graph([node]);
-            history.merge(graph);
+            var node = iD.Node({id: "n1"});
+            history.merge({ n1: node });
             history.perform(function (graph) { return graph.remove(node); });
             expect(history.changes().deleted).to.eql([node]);
         });
@@ -189,7 +187,7 @@ describe("iD.History", function () {
         it("is the sum of all types of changes", function() {
             var node1 = iD.Node({id: "n1"}),
                 node2 = iD.Node();
-            history.merge(iD.Graph([node1]));
+            history.merge({ n1: node1 });
             history.perform(function (graph) { return graph.remove(node1); });
             expect(history.numChanges()).to.eql(1);
             history.perform(function (graph) { return graph.replace(node2); });

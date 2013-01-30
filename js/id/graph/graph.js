@@ -1,19 +1,30 @@
-iD.Graph = function(entities, mutable) {
-    if (!(this instanceof iD.Graph)) return new iD.Graph(entities, mutable);
+iD.Graph = function(other, mutable) {
+    if (!(this instanceof iD.Graph)) return new iD.Graph(other, mutable);
 
-    if (_.isArray(entities)) {
-        this.entities = {};
-        for (var i = 0; i < entities.length; i++) {
-            this.entities[entities[i].id] = entities[i];
-        }
+    if (other instanceof iD.Graph) {
+        var base = other.base();
+        this.entities = _.assign(Object.create(base.entities), other.entities);
+        this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
+        this._parentRels = _.assign(Object.create(base.parentRels), other._parentRels);
+        this.inherited = true;
+
     } else {
-        this.entities = entities || {};
+        if (_.isArray(other)) {
+            var entities = {};
+            for (var i = 0; i < other.length; i++) {
+                entities[other[i].id] = other[i];
+            }
+            other = entities;
+        }
+        this.entities = Object.create({});
+        this._parentWays = Object.create({});
+        this._parentRels = Object.create({});
+        this.rebase(other || {});
     }
 
     this.transients = {};
-    this._parentWays = {};
-    this._parentRels = {};
     this._childNodes = {};
+    this.getEntity = _.bind(this.entity, this);
 
     if (!mutable) {
         this.freeze();
@@ -38,51 +49,21 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        var ent, id, parents;
-
-        if (!this._parentWays.calculated) {
-            for (var i in this.entities) {
-                ent = this.entities[i];
-                if (ent && ent.type === 'way') {
-                    for (var j = 0; j < ent.nodes.length; j++) {
-                        id = ent.nodes[j];
-                        parents = this._parentWays[id] = this._parentWays[id] || [];
-                        if (parents.indexOf(ent) < 0) {
-                            parents.push(ent);
-                        }
-                    }
-                }
-            }
-            this._parentWays.calculated = true;
-        }
-
-        return this._parentWays[entity.id] || [];
+        return _.map(this._parentWays[entity.id], this.getEntity);
     },
 
     isPoi: function(entity) {
-        return this.parentWays(entity).length === 0;
+        var parentWays = this._parentWays[entity.id];
+        return !parentWays || parentWays.length === 0;
+    },
+
+    isShared: function(entity) {
+        var parentWays = this._parentWays[entity.id];
+        return parentWays && parentWays.length > 1;
     },
 
     parentRelations: function(entity) {
-        var ent, id, parents;
-
-        if (!this._parentRels.calculated) {
-            for (var i in this.entities) {
-                ent = this.entities[i];
-                if (ent && ent.type === 'relation') {
-                    for (var j = 0; j < ent.members.length; j++) {
-                        id = ent.members[j].id;
-                        parents = this._parentRels[id] = this._parentRels[id] || [];
-                        if (parents.indexOf(ent) < 0) {
-                            parents.push(ent);
-                        }
-                    }
-                }
-            }
-            this._parentRels.calculated = true;
-        }
-
-        return this._parentRels[entity.id] || [];
+        return _.map(this._parentRels[entity.id], this.getEntity);
     },
 
     childNodes: function(entity) {
@@ -97,30 +78,132 @@ iD.Graph.prototype = {
         return (this._childNodes[entity.id] = nodes);
     },
 
-    merge: function(graph) {
-        return this.update(function () {
-            _.defaults(this.entities, graph.entities);
-        });
+    base: function() {
+        return {
+            'entities': iD.util.getPrototypeOf(this.entities),
+            'parentWays': iD.util.getPrototypeOf(this._parentWays),
+            'parentRels': iD.util.getPrototypeOf(this._parentRels)
+        };
+    },
+
+    // Unlike other graph methods, rebase mutates in place. This is because it
+    // is used only during the history operation that merges newly downloaded
+    // data into each state. To external consumers, it should appear as if the
+    // graph always contained the newly downloaded data.
+    rebase: function(entities) {
+        var base = this.base(),
+            i, k, child, id, keys;
+        // Merging of data only needed if graph is the base graph
+        if (!this.inherited) {
+            for (i in entities) {
+                if (!base.entities[i]) {
+                    base.entities[i] = entities[i];
+                    this._updateCalculated(undefined, entities[i],
+                            base.parentWays, base.parentRels);
+                }
+            }
+        }
+
+        keys = Object.keys(this._parentWays);
+        for (i = 0; i < keys.length; i++) {
+            child = keys[i];
+            if (base.parentWays[child]) {
+                for (k = 0; k < base.parentWays[child].length; k++) {
+                    id = base.parentWays[child][k];
+                    if (this.entity(id) && !_.contains(this._parentWays[child], id)) {
+                        this._parentWays[child].push(id);
+                    }
+                }
+            }
+        }
+
+        keys = Object.keys(this._parentRels);
+        for (i = 0; i < keys.length; i++) {
+            child = keys[i];
+            if (base.parentRels[child]) {
+                for (k = 0; k < base.parentRels[child].length; k++) {
+                    id = base.parentRels[child][k];
+                    if (this.entity(id) && !_.contains(this._parentRels[child], id)) {
+                        this._parentRels[child].push(id);
+                    }
+                }
+            }
+        }
+    },
+
+    // Updates calculated properties (parentWays, parentRels) for the specified change
+    _updateCalculated: function(oldentity, entity, parentWays, parentRels) {
+
+        parentWays = parentWays || this._parentWays;
+        parentRels = parentRels || this._parentRels;
+
+        var type = entity && entity.type || oldentity && oldentity.type,
+            removed, added, ways, rels, i;
+
+
+        if (type === 'way') {
+
+            // Update parentWays
+            if (oldentity && entity) {
+                removed = _.difference(oldentity.nodes, entity.nodes);
+                added = _.difference(entity.nodes, oldentity.nodes);
+            } else if (oldentity) {
+                removed = oldentity.nodes;
+                added = [];
+            } else if (entity) {
+                removed = [];
+                added = entity.nodes;
+            }
+            for (i = 0; i < removed.length; i++) {
+                parentWays[removed[i]] = _.without(parentWays[removed[i]], oldentity.id);
+            }
+            for (i = 0; i < added.length; i++) {
+                ways = _.without(parentWays[added[i]], entity.id);
+                ways.push(entity.id);
+                parentWays[added[i]] = ways;
+            }
+        } else if (type === 'node') {
+
+        } else if (type === 'relation') {
+
+            // Update parentRels
+            if (oldentity && entity) {
+                removed = _.difference(oldentity.members, entity.members);
+                added = _.difference(entity.members, oldentity);
+            } else if (oldentity) {
+                removed = oldentity.members;
+                added = [];
+            } else if (entity) {
+                removed = [];
+                added = entity.members;
+            }
+            for (i = 0; i < removed.length; i++) {
+                parentRels[removed[i].id] = _.without(parentRels[removed[i].id], oldentity.id);
+            }
+            for (i = 0; i < added.length; i++) {
+                rels = _.without(parentRels[added[i].id], entity.id);
+                rels.push(entity.id);
+                parentRels[added[i].id] = rels;
+            }
+        }
     },
 
     replace: function(entity) {
         return this.update(function () {
+            this._updateCalculated(this.entities[entity.id], entity);
             this.entities[entity.id] = entity;
         });
     },
 
     remove: function(entity) {
         return this.update(function () {
-            if (entity.created()) {
-                delete this.entities[entity.id];
-            } else {
-                this.entities[entity.id] = undefined;
-            }
+            this._updateCalculated(entity, undefined);
+            this.entities[entity.id] = undefined;
         });
     },
 
     update: function() {
-        var graph = this.frozen ? iD.Graph(_.clone(this.entities), true) : this;
+        var graph = this.frozen ? iD.Graph(this, true) : this;
 
         for (var i = 0; i < arguments.length; i++) {
             arguments[i].call(graph, graph);
@@ -133,7 +216,6 @@ iD.Graph.prototype = {
         this.frozen = true;
 
         if (iD.debug) {
-            Object.freeze(this);
             Object.freeze(this.entities);
         }
 
@@ -153,9 +235,12 @@ iD.Graph.prototype = {
     },
 
     difference: function (graph) {
-        var result = [], entity, oldentity, id;
+        var result = [],
+            keys = Object.keys(this.entities),
+            entity, oldentity, id, i;
 
-        for (id in this.entities) {
+        for (i = 0; i < keys.length; i++) {
+            id = keys[i];
             entity = this.entities[id];
             oldentity = graph.entities[id];
             if (entity !== oldentity) {
@@ -177,7 +262,9 @@ iD.Graph.prototype = {
             }
         }
 
-        for (id in graph.entities) {
+        keys = Object.keys(graph.entities);
+        for (i = 0; i < keys.length; i++) {
+            id = keys[i];
             entity = graph.entities[id];
             if (entity && !this.entities.hasOwnProperty(id)) {
                 result.push(id);
@@ -189,25 +276,25 @@ iD.Graph.prototype = {
     },
 
     modified: function() {
-        var result = [];
+        var result = [], base = this.base().entities;
         _.each(this.entities, function(entity, id) {
-            if (entity && entity.modified()) result.push(id);
+            if (entity && base[id]) result.push(id);
         });
         return result;
     },
 
     created: function() {
-        var result = [];
+        var result = [], base = this.base().entities;
         _.each(this.entities, function(entity, id) {
-            if (entity && entity.created()) result.push(id);
+            if (entity && !base[id]) result.push(id);
         });
         return result;
     },
 
     deleted: function() {
-        var result = [];
+        var result = [], base = this.base().entities;
         _.each(this.entities, function(entity, id) {
-            if (!entity) result.push(id);
+            if (!entity && base[id]) result.push(id);
         });
         return result;
     }
