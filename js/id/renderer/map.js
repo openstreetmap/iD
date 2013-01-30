@@ -64,7 +64,7 @@ iD.Map = function() {
             for (var i = 0; i < parents.length; i++) {
                 var parent = parents[i];
                 if (only[parent.id] === undefined) {
-                    only[parent.id] = graph.entity(parent.id);
+                    only[parent.id] = parent;
                     addParents(graph.parentRelations(parent));
                 }
             }

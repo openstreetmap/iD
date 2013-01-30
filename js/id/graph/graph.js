@@ -24,6 +24,7 @@ iD.Graph = function(other, mutable) {
 
     this.transients = {};
     this._childNodes = {};
+    this.getEntity = _.bind(this.entity, this);
 
     if (!mutable) {
         this.freeze();
@@ -48,19 +49,21 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        return _.map(this._parentWays[entity.id], _.bind(this.entity, this));
+        return _.map(this._parentWays[entity.id], this.getEntity);
     },
 
     isPoi: function(entity) {
-        return this.parentWays(entity).length === 0;
+        var parentWays = this._parentWays[entity.id];
+        return !parentWays || parentWays.length === 0;
+    },
+
+    isShared: function(entity) {
+        var parentWays = this._parentWays[entity.id];
+        return parentWays && parentWays.length > 1;
     },
 
     parentRelations: function(entity) {
-        return _.map(this._parentRels[entity.id], _.bind(this.entity, this));
-        var ent, id, parents;
-
-
-        return this._parentRels[entity.id] || [];
+        return _.map(this._parentRels[entity.id], this.getEntity);
     },
 
     childNodes: function(entity) {
