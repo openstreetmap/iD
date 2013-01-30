@@ -85,10 +85,13 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
         }
     }
 
-    // Connect the way to an existing node and continue drawing.
-    drawWay.addNode = function(node) {
-        history.perform(
-            ReplaceTemporaryNode(node),
+    // Accept the current position of the temporary node and continue drawing.
+    drawWay.add = function(loc) {
+        var newNode = iD.Node({loc: loc});
+
+        history.replace(
+            iD.actions.AddNode(newNode),
+            ReplaceTemporaryNode(newNode),
             annotation);
 
         finished = true;
@@ -109,13 +112,10 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
         controller.enter(mode);
     };
 
-    // Accept the current position of the temporary node and continue drawing.
-    drawWay.add = function(loc) {
-        var newNode = iD.Node({loc: loc});
-
-        history.replace(
-            iD.actions.AddNode(newNode),
-            ReplaceTemporaryNode(newNode),
+    // Connect the way to an existing node and continue drawing.
+    drawWay.addNode = function(node) {
+        history.perform(
+            ReplaceTemporaryNode(node),
             annotation);
 
         finished = true;

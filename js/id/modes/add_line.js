@@ -15,15 +15,29 @@ iD.modes.AddLine = function() {
             history = mode.history,
             controller = mode.controller;
 
-        function startFromMidpoint(midpoint) {
+        function start(loc) {
             var graph = history.graph(),
-                node = iD.Node(),
+                node = iD.Node({loc: loc}),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddMidpoint(midpoint, node),
+                iD.actions.AddNode(node),
                 iD.actions.AddWay(way),
                 iD.actions.AddWayNode(way.id, node.id));
+
+            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
+        }
+
+        function startFromWay(other, loc, index) {
+            var graph = history.graph(),
+                node = iD.Node({loc: loc}),
+                way = iD.Way({tags: defaultTags});
+
+            history.perform(
+                iD.actions.AddNode(node),
+                iD.actions.AddWay(way),
+                iD.actions.AddWayNode(way.id, node.id),
+                iD.actions.AddWayNode(other.id, node.id, index));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
         }
@@ -50,27 +64,13 @@ iD.modes.AddLine = function() {
             }
         }
 
-        function startFromWay(other, loc, index) {
+        function startFromMidpoint(midpoint) {
             var graph = history.graph(),
-                node = iD.Node({loc: loc}),
+                node = iD.Node(),
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(node),
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(other.id, node.id, index));
-
-            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
-        }
-
-        function start(loc) {
-            var graph = history.graph(),
-                node = iD.Node({loc: loc}),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddNode(node),
+                iD.actions.AddMidpoint(midpoint, node),
                 iD.actions.AddWay(way),
                 iD.actions.AddWayNode(way.id, node.id));
 
@@ -78,10 +78,10 @@ iD.modes.AddLine = function() {
         }
 
         behavior = iD.behavior.AddWay(mode)
-            .on('startFromMidpoint', startFromMidpoint)
-            .on('startFromNode', startFromNode)
+            .on('start', start)
             .on('startFromWay', startFromWay)
-            .on('start', start);
+            .on('startFromNode', startFromNode)
+            .on('startFromMidpoint', startFromMidpoint);
 
         mode.map.surface.call(behavior);
         mode.map.tail('Click on the map to start drawing an road, path, or route.', true);
