@@ -165,7 +165,8 @@ iD.Map = function() {
     }
 
     function resetTransform() {
-        if (!surface.style(transformProp)) return false;
+        var prop = surface.style(transformProp);
+        if (!prop || prop === 'none') return false;
         surface.style(transformProp, '');
         tilegroup.style(transformProp, '');
         return true;
