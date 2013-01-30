@@ -929,50 +929,6 @@ div.typeahead a:first-child {
     left:0px; right:0px; top:0px; bottom:0px;
 }
 
-.commit-modal .user-info {
-    display: inline-block;
-}
-
-.commit-modal .commit-info {
-    margin-top: 10px;
-}
-
-.commit-modal .user-info img {
-    float: left;
-}
-
-.commit-modal h3 small.count {
-    margin-right: 10px;
-    text-align: center;
-    float: left;
-    height: 12px;
-    min-width: 12px;
-    font-size:12px;
-    line-height: 12px;
-    border-radius:24px;
-    padding:5px;
-    background:#7092ff;
-    color:#fff;
-}
-
-.commit-modal .changeset-list {
-    overflow: auto;
-    border:1px solid #ccc;
-    background:#fff;
-    max-height: 160px;
-}
-
-.commit-modal .warning-section .changeset-list  {
-    margin-right: 20px;
-    overflow-x: visible;
-}
-
-.commit-section.modal-section {
-    padding-bottom: 0;
-}
-
-.commit-section.modal-section:last-child { padding-bottom: 20px;}
-
 .modal-section {
     padding: 20px;
 }
@@ -1007,6 +963,56 @@ div.typeahead a:first-child {
     display:none;
 }
 
+.loading-modal {
+    text-align: center;
+}
+
+/* Commit Modal
+------------------------------------------------------- */
+
+.commit-modal .user-info {
+    display: inline-block;
+}
+
+.commit-modal .commit-info {
+    margin-top: 10px;
+}
+
+.commit-modal .user-info img {
+    float: left;
+}
+
+.commit-modal h3 small.count {
+    margin-right: 10px;
+    text-align: center;
+    float: left;
+    height: 12px;
+    min-width: 12px;
+    font-size:12px;
+    line-height: 12px;
+    border-radius:24px;
+    padding:5px;
+    background:#7092ff;
+    color:#fff;
+}
+
+.commit-modal .changeset-list {
+    overflow: auto;
+    border:1px solid #ccc;
+    background:#fff;
+    max-height: 160px;
+}
+
+.commit-modal .warning-section .changeset-list  button {
+    float: right;
+}
+
+.commit-section.modal-section {
+    padding-bottom: 0;
+}
+
+.commit-section.modal-section:last-child { padding-bottom: 20px;}
+
 .changeset-list li {
     border-top:1px solid #ccc;
     padding:5px 10px;
@@ -1027,10 +1033,6 @@ div.typeahead a:first-child {
     width:100%;
     /* firefox uses monospace in textareas */
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
-}
-
-.loading-modal {
-    text-align: center;
 }
 
 /* Success
