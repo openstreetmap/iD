@@ -5,6 +5,7 @@ iD.Graph = function(other, mutable) {
         var base = other.base();
         this.entities = _.assign(Object.create(base.entities), other.entities);
         this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
+        this._parentRels = _.assign(Object.create(base.parentRels), other._parentRels);
         this.inherited = true;
 
     } else {
@@ -17,11 +18,11 @@ iD.Graph = function(other, mutable) {
         }
         this.entities = Object.create({});
         this._parentWays = Object.create({});
+        this._parentRels = Object.create({});
         this.rebase(other || {});
     }
 
     this.transients = {};
-    this._parentRels = {};
     this._childNodes = {};
 
     if (!mutable) {
@@ -55,23 +56,9 @@ iD.Graph.prototype = {
     },
 
     parentRelations: function(entity) {
+        return _.map(this._parentRels[entity.id], _.bind(this.entity, this));
         var ent, id, parents;
 
-        if (!this._parentRels.calculated) {
-            for (var i in this.entities) {
-                ent = this.entities[i];
-                if (ent && ent.type === 'relation') {
-                    for (var j = 0; j < ent.members.length; j++) {
-                        id = ent.members[j].id;
-                        parents = this._parentRels[id] = this._parentRels[id] || [];
-                        if (parents.indexOf(ent) < 0) {
-                            parents.push(ent);
-                        }
-                    }
-                }
-            }
-            this._parentRels.calculated = true;
-        }
 
         return this._parentRels[entity.id] || [];
     },
@@ -91,7 +78,8 @@ iD.Graph.prototype = {
     base: function() {
         return {
             'entities': iD.util.getPrototypeOf(this.entities),
-            'parentWays': iD.util.getPrototypeOf(this._parentWays)
+            'parentWays': iD.util.getPrototypeOf(this._parentWays),
+            'parentRels': iD.util.getPrototypeOf(this._parentRels)
         };
     },
 
@@ -100,19 +88,25 @@ iD.Graph.prototype = {
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
     rebase: function(entities) {
-        var i;
+        var i, keys;
         // Merging of data only needed if graph is the base graph
         if (!this.inherited) {
             _.defaults(this.base().entities, entities);
             for (i in entities) {
-                this._updateCalculated(undefined, entities[i], this.base().parentWays);
+                this._updateCalculated(undefined, entities[i], this.base().parentWays, this.base().parentRels);
             }
         }
 
-        var keys = Object.keys(this._parentWays);
+        keys = Object.keys(this._parentWays);
         for (i = 0; i < keys.length; i++) {
             this._parentWays[keys[i]] = _.unique((this._parentWays[keys[i]] || [])
                     .concat(this.base().parentWays[keys[i]] || []));
+        }
+
+        keys = Object.keys(this._parentRels);
+        for (i = 0; i < keys.length; i++) {
+            this._parentRels[keys[i]] = _.unique((this._parentRels[keys[i]] || [])
+                    .concat(this.base().parentRels[keys[i]] || []));
         }
     },
 
@@ -123,7 +117,7 @@ iD.Graph.prototype = {
         parentRels = parentRels || this._parentRels;
 
         var type = entity && entity.type || oldentity && oldentity.type,
-            removed, added, ways, i;
+            removed, added, ways, rels, i;
 
 
         if (type === 'way') {
@@ -151,8 +145,25 @@ iD.Graph.prototype = {
 
         } else if (type === 'relation') {
 
-            // TODO: iterate over members
-
+            // Update parentRels
+            if (oldentity && entity) {
+                removed = _.difference(oldentity.members, entity.members);
+                added = _.difference(entity.members, oldentity);
+            } else if (oldentity) {
+                removed = oldentity.members;
+                added = [];
+            } else if (entity) {
+                removed = [];
+                added = entity.members;
+            }
+            for (i = 0; i < removed.length; i++) {
+                parentRels[removed[i].id] = _.without(parentRels[removed[i].id], oldentity.id);
+            }
+            for (i = 0; i < added.length; i++) {
+                rels = _.without(parentRels[added[i].id], entity.id);
+                rels.push(entity.id);
+                parentRels[added[i].id] = rels;
+            }
         }
     },
 

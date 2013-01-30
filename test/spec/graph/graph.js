@@ -85,35 +85,49 @@ describe('iD.Graph', function() {
             var n = iD.Node({id: 'n'}),
                 w1 = iD.Way({id: 'w1', nodes: ['n']}),
                 w2 = iD.Way({id: 'w2', nodes: ['n']}),
-                w3 = iD.Way({id: 'w3', nodes: ['n']}),
                 graph = iD.Graph([n, w1]);
 
-            var graph2 = graph.replace(w2);
+            graph.rebase({ 'w2': w2 });
+            expect(graph.parentWays(n)).to.eql([w1, w2]);
+            expect(graph._parentWays.hasOwnProperty('n')).to.be.false;
+        });
+
+        it("updates parentWays for nodes with modified parentWays", function () {
+            var n = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w1', nodes: ['n']}),
+                w2 = iD.Way({id: 'w2', nodes: ['n']}),
+                w3 = iD.Way({id: 'w3', nodes: ['n']}),
+                graph = iD.Graph([n, w1]),
+                graph2 = graph.replace(w2);
             graph.rebase({ 'w3': w3 });
             graph2.rebase({ 'w3': w3 });
 
             expect(graph2.parentWays(n)).to.eql([w1, w2, w3]);
         });
 
-        it("only sets non-base parentWays when necessary", function () {
-            var n = iD.Node({id: 'n'}),
-                w1 = iD.Way({id: 'w1', nodes: ['n']}),
-                graph = iD.Graph([n, w1]);
-            graph.rebase({ 'w1': w1 });
-            expect(graph._parentWays.hasOwnProperty('n')).to.be.false;
-            expect(graph.parentWays(n)).to.eql([w1]);
-        });
-
-        xit("updates parentRelations", function () {
+        it("updates parentRelations", function () {
             var n = iD.Node({id: 'n'}),
                 r1 = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
                 r2 = iD.Relation({id: 'r2', members: [{id: 'n'}]}),
                 graph = iD.Graph([n, r1]);
 
-            graph.parentRelations(n);
             graph.rebase({'r2': r2});
 
             expect(graph.parentRelations(n)).to.eql([r1, r2]);
+            expect(graph._parentRels.hasOwnProperty('n')).to.be.false;
+        });
+
+        it("updates parentWays for nodes with modified parentWays", function () {
+            var n = iD.Node({id: 'n'}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
+                r2 = iD.Relation({id: 'r2', members: [{id: 'n'}]}),
+                r3 = iD.Relation({id: 'r3', members: [{id: 'n'}]}),
+                graph = iD.Graph([n, r1]),
+                graph2 = graph.replace(r2);
+
+            graph.rebase({'r3': r3});
+            graph2.rebase({'r3': r3});
+            expect(graph2.parentRelations(n)).to.eql([r1, r2, r3]);
         });
     });
 
