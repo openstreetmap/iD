@@ -92,7 +92,7 @@ iD.Map = function() {
 
             all = _.compact(_.values(only));
             filter = function(d) {
-                if (d.midpoint) {
+                if (d.type === 'midpoint') {
                     for (var i = 0; i < d.ways.length; i++) {
                         if (d.ways[i].id in only) return true;
                     }

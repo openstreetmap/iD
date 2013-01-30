@@ -20,11 +20,9 @@ iD.svg.Midpoints = function(projection) {
 
                 } else if (iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
                     midpoints[id] = {
-                        midpoint: true,
+                        type: 'midpoint',
                         id: id,
                         loc: iD.geo.interp(a.loc, b.loc, 0.5),
-                        a: a.id,
-                        b: b.id,
                         ways: [{id: entity.id, index: j + 1}]
                     };
                 }
