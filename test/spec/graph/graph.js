@@ -105,6 +105,16 @@ describe('iD.Graph', function() {
             expect(graph2.parentWays(n)).to.eql([w1, w2, w3]);
         });
 
+        it("avoids re-adding removed parentWays", function() {
+            var n = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w1', nodes: ['n']}),
+                graph = iD.Graph([n, w1]),
+                graph2 = graph.remove(w1);
+            graph.rebase({ 'w1': w1 });
+            graph2.rebase({ 'w1': w1 });
+            expect(graph2.parentWays(n)).to.eql([]);
+        });
+
         it("updates parentRelations", function () {
             var n = iD.Node({id: 'n'}),
                 r1 = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
@@ -117,7 +127,17 @@ describe('iD.Graph', function() {
             expect(graph._parentRels.hasOwnProperty('n')).to.be.false;
         });
 
-        it("updates parentWays for nodes with modified parentWays", function () {
+        it("avoids re-adding removed parentRels", function() {
+            var n = iD.Node({id: 'n'}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
+                graph = iD.Graph([n, r1]),
+                graph2 = graph.remove(r1);
+            graph.rebase({ 'w1': r1 });
+            graph2.rebase({ 'w1': r1 });
+            expect(graph2.parentWays(n)).to.eql([]);
+        });
+
+        it("updates parentRels for nodes with modified parentWays", function () {
             var n = iD.Node({id: 'n'}),
                 r1 = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
                 r2 = iD.Relation({id: 'r2', members: [{id: 'n'}]}),
@@ -129,6 +149,7 @@ describe('iD.Graph', function() {
             graph2.rebase({'r3': r3});
             expect(graph2.parentRelations(n)).to.eql([r1, r2, r3]);
         });
+
     });
 
     describe("#remove", function () {

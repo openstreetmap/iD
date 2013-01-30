@@ -88,25 +88,39 @@ iD.Graph.prototype = {
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
     rebase: function(entities) {
-        var i, keys;
+        var base = this.base(),
+            i, k, child, id, keys;
         // Merging of data only needed if graph is the base graph
         if (!this.inherited) {
-            _.defaults(this.base().entities, entities);
             for (i in entities) {
-                this._updateCalculated(undefined, entities[i], this.base().parentWays, this.base().parentRels);
+                if (!base.entities[i]) {
+                    base.entities[i] = entities[i];
+                    this._updateCalculated(undefined, entities[i],
+                            base.parentWays, base.parentRels);
+                }
             }
         }
 
         keys = Object.keys(this._parentWays);
         for (i = 0; i < keys.length; i++) {
-            this._parentWays[keys[i]] = _.unique((this._parentWays[keys[i]] || [])
-                    .concat(this.base().parentWays[keys[i]] || []));
+            child = keys[i];
+            for (k = 0; k < base.parentWays[child].length; k++) {
+                id = base.parentWays[child][k];
+                if (this.entity(id) && !_.contains(this._parentWays[child], id)) {
+                    this._parentWays[child].push(id);
+                }
+            }
         }
 
         keys = Object.keys(this._parentRels);
         for (i = 0; i < keys.length; i++) {
-            this._parentRels[keys[i]] = _.unique((this._parentRels[keys[i]] || [])
-                    .concat(this.base().parentRels[keys[i]] || []));
+            child = keys[i];
+            for (k = 0; k < base.parentRels[child].length; k++) {
+                id = base.parentRels[child][k];
+                if (this.entity(id) && !_.contains(this._parentRels[child], id)) {
+                    this._parentRels[child].push(id);
+                }
+            }
         }
     },
 
