@@ -86,6 +86,7 @@ iD.ui.commit = function(map) {
             .on('click.cancel', function() {
                 event.cancel();
             });
+            cancelbutton.append('span').attr('class','icon close icon-pre-text');
             cancelbutton.append('span').attr('class','label').text('Cancel');
 
         var warnings = body.selectAll('div.warning-section')

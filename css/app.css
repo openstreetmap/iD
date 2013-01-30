@@ -948,11 +948,11 @@ div.typeahead a:first-child {
     border:1px solid #ccc;
     background:#fff;
     max-height: 160px;
-    overflow: visible;
 }
 
 .commit-modal .warning-section .changeset-list  {
     margin-right: 20px;
+    overflow-x: visible;
 }
 
 .commit-section.modal-section {
@@ -960,15 +960,6 @@ div.typeahead a:first-child {
 }
 
 .commit-section.modal-section:last-child { padding-bottom: 20px;}
-
-.commit-modal .changeset-list li {
-    position: relative;
-}
-
-.commit-modal .changeset-list li button {
-    position: absolute;
-    right: -30px;
-}
 
 .modal-section {
     padding: 20px;
