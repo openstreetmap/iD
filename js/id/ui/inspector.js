@@ -1,12 +1,15 @@
 iD.ui.inspector = function() {
     var event = d3.dispatch('changeTags', 'close'),
         taginfo = iD.taginfo(),
+        presetData,
         initial = false,
         graph,
         tagList;
 
     function inspector(selection) {
         var entity = selection.datum();
+
+        var possiblePresets = presetData.match(entity);
 
         var inspector = selection.append('div')
             .attr('class','inspector content');
@@ -20,6 +23,14 @@ iD.ui.inspector = function() {
 
         var inspectorwrap = inspectorbody.append('div')
             .attr('class', 'inspector-inner tag-wrap fillL2');
+
+        if (possiblePresets.length) {
+            var inspectorpreset = inspectorwrap.append('div')
+                .attr('class', 'inspector-preset')
+                .call(iD.ui.preset()
+                    .preset(possiblePresets[0]));
+        }
+
 
         inspectorwrap.append('h4')
             .text(t('edit_tags'));
@@ -272,6 +283,11 @@ iD.ui.inspector = function() {
 
     inspector.initial = function(_) {
         initial = _;
+        return inspector;
+    };
+
+    inspector.presetData = function(_) {
+        presetData = _;
         return inspector;
     };
 

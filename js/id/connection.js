@@ -5,6 +5,7 @@ iD.Connection = function() {
         connection = {},
         user = {},
         version,
+        presetData,
         keys,
         inflight = {},
         loadedTiles = {},
@@ -311,6 +312,12 @@ iD.Connection = function() {
         if (!arguments.length) return keys;
         keys = _;
         oauth.keys(keys);
+        return connection;
+    };
+
+    connection.presetData = function(_) {
+        if (!arguments.length) return presetData;
+        presetData = _;
         return connection;
     };
 

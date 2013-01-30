@@ -24,7 +24,9 @@ iD.modes.Select = function(entity, initial) {
             history = map.history(),
             surface = mode.map.surface;
 
-        inspector.graph(graph);
+        inspector
+            .graph(graph)
+            .presetData(map.connection().presetData());
 
         behaviors = [
             iD.behavior.Hover(),
