@@ -908,6 +908,54 @@ div.typeahead a:first-child {
     left:0px; right:0px; top:0px; bottom:0px;
 }
 
+.modal-section {
+    padding: 20px;
+}
+
+.modal-section.header {
+    border-radius: 4px 4px 0 0;
+}
+
+.modal-section:last-child {
+    border-radius: 0 0 4px 4px;
+}
+
+.modal-section:only-child { border-radius: 4px;
+}
+
+.modal-section .buttons {
+    padding-top: 10px;
+    width: 100%;
+}
+
+.modal-section img.wiki-image {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+}
+
+.modal-flash .content {
+    box-shadow: none;
+    border-radius: 4px;
+    background: #111;
+    color: #eee;
+}
+
+.modal-flash .close-modal {
+    display:none;
+}
+
+.loading-modal {
+    text-align: center;
+}
+
+/* Intro Modal
+------------------------------------------------------- */
+
+
+/* Commit Modal
+------------------------------------------------------- */
+
 .commit-modal .user-info {
     display: inline-block;
 }
