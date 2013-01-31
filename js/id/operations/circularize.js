@@ -1,28 +1,20 @@
-iD.operations.Circularize = function(entityId, mode) {
-    var history = mode.map.history(),
+iD.operations.Circularize = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history(),
         action = iD.actions.Circularize(entityId, mode.map);
 
     var operation = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId),
-            geometry = entity.geometry(graph);
+            annotation = t('operations.circularize.annotation.' + entity.geometry(graph));
 
-        if (geometry === 'line') {
-            history.perform(
-                action,
-                'Made a line circular.');
-
-        } else if (geometry === 'area') {
-            history.perform(
-                action,
-                'Made an area circular.');
-        }
+        history.perform(action, annotation);
     };
 
     operation.available = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId);
-        return entity.geometry(graph) === 'area' || entity.geometry(graph) === 'line';
+        return selection.length === 1 && entity.type === 'way';
     };
 
     operation.enabled = function() {
@@ -31,9 +23,9 @@ iD.operations.Circularize = function(entityId, mode) {
     };
 
     operation.id = "circularize";
-    operation.key = "O";
-    operation.title = "Circularize";
-    operation.description = "Make this round";
+    operation.key = t('operations.circularize.key');
+    operation.title = t('operations.circularize.title');
+    operation.description = t('operations.circularize.description');
 
     return operation;
 };

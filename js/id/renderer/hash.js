@@ -49,7 +49,7 @@ iD.Hash = function() {
             var entity = map.history().graph().entity(id);
             if (entity === undefined) return;
             else selectoff();
-            controller.enter(iD.modes.Select(entity));
+            controller.enter(iD.modes.Select([entity.id]));
             map.on('drawn.hash', null);
         });
         controller.on('enter.hash', function() {

@@ -1,8 +1,118 @@
 locale.en = {
-    "browse": "Browse",
-    "point": "Point",
-    "line": "Line",
-    "area": "Area",
+    modes: {
+        add_area: {
+            title: "Area",
+            description: "Add parks, buildings, lakes, or other areas to the map.",
+            tail: "Click on the map to start drawing an area, like a park, lake, or building.",
+            key: "A"
+        },
+        add_line: {
+            title: "Line",
+            description: "Lines can be highways, streets, pedestrian paths, or even canals.",
+            tail: "Click on the map to start drawing an road, path, or route.",
+            key: "L"
+        },
+        add_point: {
+            title: "Point",
+            description: "Restaurants, monuments, and postal boxes are points.",
+            tail: "Click on the map to add a point.",
+            key: "P"
+        },
+        browse: {
+            title: "Browse",
+            description: "Pan and zoom the map.",
+            key: "B"
+        },
+        draw_area: {
+            tail: "Click to add points to your area. Click the first point to finish the area."
+        },
+        draw_line: {
+            tail: "Click to add more points to the line. Click on other lines to connect to them, and double-click to end the line."
+        }
+    },
+
+    operations: {
+        add: {
+            annotation: {
+                point: "Added a point.",
+                vertex: "Added a node to a way."
+            }
+        },
+        start: {
+            annotation: {
+                line: "Started a line.",
+                area: "Started an area."
+            }
+        },
+        continue: {
+            annotation: {
+                line: "Continued a line.",
+                area: "Continued an area."
+            }
+        },
+        cancel_draw: {
+            annotation: "Cancelled drawing."
+        },
+        change_tags: {
+            annotation: "Changed tags."
+        },
+        circularize: {
+            title: "Circularize",
+            description: "Make this round.",
+            key: "O",
+            annotation: {
+                line: "Made a line circular.",
+                area: "Made an area circular."
+            }
+        },
+        delete: {
+            title: "Delete",
+            description: "Remove this from the map.",
+            key: "⌫",
+            annotation: {
+                point: "Deleted a point.",
+                vertex: "Deleted a node from a way.",
+                line: "Deleted a line.",
+                area: "Deleted an area."
+            }
+        },
+        move: {
+            title: "Move",
+            description: "Move this to a different location.",
+            key: "M",
+            annotation: {
+                point: "Moved a point.",
+                vertex: "Moved a node in a way.",
+                line: "Moved a line.",
+                area: "Moved an area."
+            }
+        },
+        reverse: {
+            title: "Reverse",
+            description: "Make this line go in the opposite direction.",
+            key: "V",
+            annotation: "Reversed a line."
+        },
+        split: {
+            title: "Split",
+            description: "Split this into two ways at this point.",
+            key: "X",
+            annotation: "Split a way."
+        },
+        unjoin: {
+            title: "Unjoin",
+            description: "Disconnect these ways from each other.",
+            key: "⇧-J",
+            annotation: "Unjoined ways."
+        }
+    },
+
+    validations: {
+        untagged_point: "Untagged point which is not part of a line or area",
+        untagged_line: "Untagged line",
+        untagged_area: "Untagged area",
+        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
+    },
 
     "save": "Save",
     "save_help": "Save changes to OpenStreetMap, making them visible to other users",
@@ -37,4 +147,4 @@ locale.en = {
 
     "layers": "Layers",
     "percent_opacity": "{opacity}% opacity"
-}
+};

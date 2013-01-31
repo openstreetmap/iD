@@ -1,5 +1,6 @@
 iD.ui.presetsearch = function() {
     var event = d3.dispatch('choose'),
+        entity,
         presetData;
 
     function search(selection) {

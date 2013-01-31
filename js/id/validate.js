@@ -21,22 +21,22 @@ iD.validate = function(changes, graph) {
 
             if (change.geometry(graph) === 'point' && _.isEmpty(change.tags)) {
                 warnings.push({
-                    message: 'Untagged point which is not part of a line or area',
+                    message: t('validations.untagged_point'),
                     entity: change
                 });
             }
 
             if (change.geometry(graph) === 'line' && _.isEmpty(change.tags)) {
-                warnings.push({ message: 'Untagged line', entity: change });
+                warnings.push({ message: t('validations.untagged_line'), entity: change });
             }
 
             if (change.geometry(graph) === 'area' && _.isEmpty(change.tags)) {
-                warnings.push({ message: 'Untagged area', entity: change });
+                warnings.push({ message: t('validations.untagged_area'), entity: change });
             }
 
             if (change.geometry(graph) === 'line' && tagSuggestsArea(change)) {
                 warnings.push({
-                    message: 'The tag ' + tagSuggestsArea(change) + ' suggests line should be area, but it is not and area',
+                    message: t('validations.tag_suggests_area', {tag: tagSuggestsArea(change)}),
                     entity: change
                 });
             }

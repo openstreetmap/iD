@@ -1,29 +1,26 @@
 iD.modes.AddPoint = function() {
     var mode = {
         id: 'add-point',
-        title: 'Point',
-        description: 'Restaurants, monuments, and postal boxes are points.',
-        key: 'p'
+        title: t('modes.add_point.title'),
+        description: t('modes.add_point.description'),
+        key: t('modes.add_point.key')
     };
 
     var behavior;
 
     mode.enter = function() {
         var map = mode.map,
-            surface = map.surface,
             history = mode.history,
             controller = mode.controller;
-
-        map.tail('Click on the map to add a point.', true);
 
         function add(loc) {
             var node = iD.Node({loc: loc});
 
             history.perform(
-                iD.actions.AddNode(node),
-                'Added a point.');
+                iD.actions.AddEntity(node),
+                t('operations.add.annotation.point'));
 
-            controller.enter(iD.modes.Select(node, true));
+            controller.enter(iD.modes.Select([node.id], true));
         }
 
         function addWay(way, loc, index) {
@@ -44,8 +41,10 @@ iD.modes.AddPoint = function() {
             .on('clickNode', addNode)
             .on('clickMidpoint', addNode)
             .on('cancel', cancel)
-            .on('finish', cancel)
-            (surface);
+            .on('finish', cancel);
+
+        mode.map.surface.call(behavior);
+        mode.map.tail(t('modes.add_point.tail'));
     };
 
     mode.exit = function() {

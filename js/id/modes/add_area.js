@@ -2,9 +2,9 @@ iD.modes.AddArea = function() {
     var mode = {
         id: 'add-area',
         button: 'area',
-        title: 'Area',
-        description: 'Add parks, buildings, lakes, or other areas to the map.',
-        key: 'a'
+        title: t('modes.add_area.title'),
+        description: t('modes.add_area.description'),
+        key: t('modes.add_area.key')
     };
 
     var behavior,
@@ -21,10 +21,10 @@ iD.modes.AddArea = function() {
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(node),
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
@@ -35,11 +35,11 @@ iD.modes.AddArea = function() {
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(node),
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(other.id, node.id, index));
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(other.id, node.id, index));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
@@ -49,9 +49,9 @@ iD.modes.AddArea = function() {
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
@@ -63,9 +63,9 @@ iD.modes.AddArea = function() {
 
             history.perform(
                 iD.actions.AddMidpoint(midpoint, node),
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
@@ -77,7 +77,7 @@ iD.modes.AddArea = function() {
             .on('startFromMidpoint', startFromMidpoint);
 
         mode.map.surface.call(behavior);
-        mode.map.tail('Click on the map to start drawing an area, like a park, lake, or building.', true);
+        mode.map.tail(t('modes.add_area.tail'));
     };
 
     mode.exit = function() {

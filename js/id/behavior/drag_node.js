@@ -25,6 +25,10 @@ iD.behavior.DragNode = function(mode) {
         nudgeInterval = null;
     }
 
+    function annotation(entity) {
+        return t('operations.move.annotation.' + entity.geometry(mode.history.graph()));
+    }
+
     return iD.behavior.drag()
         .delegate(".node")
         .origin(function(entity) {
@@ -43,12 +47,12 @@ iD.behavior.DragNode = function(mode) {
 
             history.replace(
                 iD.actions.MoveNode(entity.id, projection.invert(d3.event.point)),
-                'moved a node');
+                annotation(entity));
         })
-        .on('end', function() {
+        .on('end', function(entity) {
             stopNudge();
             history.replace(
                 iD.actions.Noop(),
-                'moved a node');
+                annotation(entity));
         });
 };

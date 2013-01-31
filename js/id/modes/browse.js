@@ -2,9 +2,9 @@ iD.modes.Browse = function() {
     var mode = {
         button: 'browse',
         id: 'browse',
-        title: 'Browse',
-        description: 'Pan and zoom the map.',
-        key: 'b'
+        title: t('modes.browse.title'),
+        description: t('modes.browse.description'),
+        key: t('modes.browse.key')
     };
 
     var behaviors;
@@ -24,7 +24,7 @@ iD.modes.Browse = function() {
         surface.on('click.browse', function () {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
-                mode.controller.enter(iD.modes.Select(datum));
+                mode.controller.enter(iD.modes.Select([datum.id]));
             }
         });
     };

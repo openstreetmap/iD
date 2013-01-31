@@ -4,7 +4,8 @@ describe("iD.modes.AddPoint", function () {
     beforeEach(function () {
         container  = d3.select('body').append('div');
         history    = iD.History();
-        map        = iD.Map().history(history);
+        var connection = iD.Connection();
+        map        = iD.Map().history(history).connection(connection);
         controller = iD.Controller(map, history);
 
         container.call(map);
@@ -28,7 +29,7 @@ describe("iD.modes.AddPoint", function () {
         it("selects the node", function () {
             happen.click(map.surface.node(), {});
             expect(controller.mode.id).to.equal('select');
-            expect(controller.mode.entity).to.equal(history.changes().created[0]);
+            expect(controller.mode.selection()).to.eql([history.changes().created[0].id]);
         });
     });
 

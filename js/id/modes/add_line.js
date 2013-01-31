@@ -2,9 +2,9 @@ iD.modes.AddLine = function() {
     var mode = {
         id: 'add-line',
         button: 'line',
-        title: 'Line',
-        description: 'Lines can be highways, streets, pedestrian paths, or even canals.',
-        key: 'l'
+        title: t('modes.add_line.title'),
+        description: t('modes.add_line.description'),
+        key: t('modes.add_line.key')
     };
 
     var behavior,
@@ -21,9 +21,9 @@ iD.modes.AddLine = function() {
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(node),
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
         }
@@ -34,10 +34,10 @@ iD.modes.AddLine = function() {
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(node),
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(other.id, node.id, index));
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(other.id, node.id, index));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
         }
@@ -57,8 +57,8 @@ iD.modes.AddLine = function() {
                 var way = iD.Way({tags: defaultTags});
 
                 history.perform(
-                    iD.actions.AddWay(way),
-                    iD.actions.AddWayNode(way.id, node.id));
+                    iD.actions.AddEntity(way),
+                    iD.actions.AddVertex(way.id, node.id));
 
                 controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
             }
@@ -71,8 +71,8 @@ iD.modes.AddLine = function() {
 
             history.perform(
                 iD.actions.AddMidpoint(midpoint, node),
-                iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
         }
@@ -84,7 +84,7 @@ iD.modes.AddLine = function() {
             .on('startFromMidpoint', startFromMidpoint);
 
         mode.map.surface.call(behavior);
-        mode.map.tail('Click on the map to start drawing an road, path, or route.', true);
+        mode.map.tail(t('modes.add_line.tail'));
     };
 
     mode.exit = function() {
