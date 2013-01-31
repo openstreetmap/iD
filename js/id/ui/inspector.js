@@ -1,5 +1,5 @@
 iD.ui.inspector = function() {
-    var event = d3.dispatch('changeTags', 'close'),
+    var event = d3.dispatch('changeTags', 'close', 'change'),
         taginfo = iD.taginfo(),
         presetData = iD.presetData(),
         initial = false,
@@ -9,14 +9,32 @@ iD.ui.inspector = function() {
     function inspector(selection) {
         var entity = selection.datum();
 
-        var inspector = selection.append('div')
+        var iwrap = selection.append('div')
             .attr('class','inspector content');
 
-        inspector.append('div')
-            .attr('class', 'head inspector-inner fillL')
-            .call(drawHead);
+        var head = iwrap.append('div')
+            .attr('class', 'head inspector-inner fillL');
 
-        var inspectorbody = inspector.append('div')
+        var h2 = head.append('h2');
+        h2.append('span')
+            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(graph));
+        var name = h2.append('input')
+            .attr('placeholder', 'name')
+            .property('value', function(d) {
+                return entity.tags.name || '';
+            })
+            .on('keyup', function() {
+                var tags = inspector.tags();
+                tags.name = this.value;
+                inspector.tags(tags);
+                event.change();
+            });
+        event.on('change', function() {
+            var tags = inspector.tags();
+            name.property('value', tags.name);
+        });
+
+        var inspectorbody = iwrap.append('div')
             .attr('class', 'inspector-body');
 
         var inspectorwrap = inspectorbody.append('div')
@@ -56,31 +74,19 @@ iD.ui.inspector = function() {
         var newTag = inspectorwrap.append('button')
                 .attr('class', 'add-tag');
 
-            newTag.on('click', function() {
-                addTag();
-                focusNewKey();
-            });
+        newTag.on('click', function() {
+            addTag();
+            focusNewKey();
+        });
 
-            newTag.append('span').attr('class', 'icon icon-pre-text plus');
-            newTag.append('span').attr('class','label').text('New tag');
+        newTag.append('span').attr('class', 'icon icon-pre-text plus');
+        newTag.append('span').attr('class','label').text('New tag');
 
         drawTags(entity.tags);
 
         inspectorbody.append('div')
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
-    }
-
-    function drawHead(selection) {
-        var entity = selection.datum();
-
-        var h2 = selection.append('h2');
-
-        h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(graph));
-
-        h2.append('span')
-            .text(entity.friendlyName());
     }
 
     function drawButtons(selection) {
@@ -90,14 +96,14 @@ iD.ui.inspector = function() {
                 .attr('class', 'apply action')
                 .on('click', apply);
 
-            inspectorButton.append('span').attr('class','label').text('Okay');
+        inspectorButton.append('span').attr('class','label').text('Okay');
 
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
 
-            minorButtons.append('a')
-                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-                .attr('target', '_blank')
-                .text('View on OSM');
+        minorButtons.append('a')
+            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+            .attr('target', '_blank')
+            .text('View on OSM');
     }
 
     function drawTags(tags) {
@@ -126,14 +132,14 @@ iD.ui.inspector = function() {
             .attr('class', 'key')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.key; })
-            .on('change', function(d) { d.key = this.value; });
+            .on('change', function(d) { d.key = this.value; event.change(); });
 
         inputs.append('input')
             .property('type', 'text')
             .attr('class', 'value')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.value; })
-            .on('change', function(d) { d.value = this.value; })
+            .on('change', function(d) { d.value = this.value; event.change(); })
             .on('keydown.push-more', pushMore);
 
         inputs.each(bindTypeahead);
