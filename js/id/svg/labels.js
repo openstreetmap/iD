@@ -156,7 +156,7 @@ iD.svg.Labels = function(projection) {
         for (var i = 0; i < nodes.length - 1; i++) {
             var current = segmentLength(i);
             var portion;
-            if (!start && sofar + current > from) {
+            if (!start && sofar + current >= from) {
                 portion = (from - sofar) / current;
                 start = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
@@ -164,7 +164,7 @@ iD.svg.Labels = function(projection) {
                 ];
                 i0 = i + 1;
             }
-            if (!end && sofar + current > to) {
+            if (!end && sofar + current >= to) {
                 portion = (to - sofar) / current;
                 end = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
