@@ -952,6 +952,12 @@ div.typeahead a:first-child {
 /* Intro Modal
 ------------------------------------------------------- */
 
+.logo {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto 20px auto;
+    background: url(../img/logo.png) 0 0 repeat;
+}
 
 /* Commit Modal
 ------------------------------------------------------- */
