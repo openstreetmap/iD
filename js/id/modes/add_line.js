@@ -21,8 +21,8 @@ iD.modes.AddLine = function() {
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(node),
-                iD.actions.AddWay(way),
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
@@ -34,8 +34,8 @@ iD.modes.AddLine = function() {
                 way = iD.Way({tags: defaultTags});
 
             history.perform(
-                iD.actions.AddNode(node),
-                iD.actions.AddWay(way),
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id),
                 iD.actions.AddVertex(other.id, node.id, index));
 
@@ -57,7 +57,7 @@ iD.modes.AddLine = function() {
                 var way = iD.Way({tags: defaultTags});
 
                 history.perform(
-                    iD.actions.AddWay(way),
+                    iD.actions.AddEntity(way),
                     iD.actions.AddVertex(way.id, node.id));
 
                 controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
@@ -71,7 +71,7 @@ iD.modes.AddLine = function() {
 
             history.perform(
                 iD.actions.AddMidpoint(midpoint, node),
-                iD.actions.AddWay(way),
+                iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));

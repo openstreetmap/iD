@@ -17,7 +17,7 @@ iD.modes.AddPoint = function() {
             var node = iD.Node({loc: loc});
 
             history.perform(
-                iD.actions.AddNode(node),
+                iD.actions.AddEntity(node),
                 t('operations.add.annotation.point'));
 
             controller.enter(iD.modes.Select(node, true));

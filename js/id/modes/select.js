@@ -112,7 +112,7 @@ iD.modes.Select = function(entity, initial) {
                     node = iD.Node({ loc: choice.loc });
 
                 history.perform(
-                    iD.actions.AddNode(node),
+                    iD.actions.AddEntity(node),
                     iD.actions.AddVertex(datum.id, node.id, choice.index),
                     t('operations.add.annotation.vertex'));
 
