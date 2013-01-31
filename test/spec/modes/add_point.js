@@ -28,7 +28,7 @@ describe("iD.modes.AddPoint", function () {
         it("selects the node", function () {
             happen.click(map.surface.node(), {});
             expect(controller.mode.id).to.equal('select');
-            expect(controller.mode.entity).to.equal(history.changes().created[0]);
+            expect(controller.mode.selection()).to.eql([history.changes().created[0].id]);
         });
     });
 

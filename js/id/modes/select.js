@@ -1,8 +1,7 @@
-iD.modes.Select = function(entity, initial) {
+iD.modes.Select = function(selection, initial) {
     var mode = {
         id: 'select',
-        button: 'browse',
-        entity: entity
+        button: 'browse'
     };
 
     var inspector = iD.ui.inspector().initial(!!initial),
@@ -11,20 +10,29 @@ iD.modes.Select = function(entity, initial) {
         radialMenu;
 
     function changeTags(d, tags) {
-        if (!_.isEqual(entity.tags, tags)) {
+        if (!_.isEqual(singular().tags, tags)) {
             mode.history.perform(
                 iD.actions.ChangeTags(d.id, tags),
                 t('operations.change_tags.annotation'));
         }
     }
 
+    function singular() {
+        if (selection.length === 1) {
+            return mode.map.history().graph().entity(selection[0]);
+        }
+    }
+
+    mode.selection = function() {
+        return selection;
+    };
+
     mode.enter = function() {
         var map = mode.map,
-            graph = map.history().graph(),
             history = map.history(),
-            surface = mode.map.surface;
-
-        inspector.graph(graph);
+            graph = history.graph(),
+            surface = map.surface,
+            entity = singular();
 
         behaviors = [
             iD.behavior.Hover(),
@@ -36,7 +44,7 @@ iD.modes.Select = function(entity, initial) {
         });
 
         var operations = d3.values(iD.operations)
-            .map(function (o) { return o(entity.id, mode); })
+            .map(function (o) { return o(selection, mode); })
             .filter(function (o) { return o.available(); });
 
         operations.forEach(function(operation) {
@@ -49,45 +57,50 @@ iD.modes.Select = function(entity, initial) {
 
         var q = iD.util.stringQs(location.hash.substring(1));
         location.replace('#' + iD.util.qsString(_.assign(q, {
-            id: entity.id
+            id: selection.join(',')
         }), true));
 
-        d3.select('.inspector-wrap')
-            .style('display', 'block')
-            .style('opacity', 1)
-            .datum(entity)
-            .call(inspector);
+        if (entity) {
+            inspector.graph(graph);
 
-        if (d3.event) {
-            // Pan the map if the clicked feature intersects with the position
-            // of the inspector
-            var inspector_size = d3.select('.inspector-wrap').size(),
-                map_size = mode.map.size(),
-                offset = 50,
-                shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
-                center = (map_size[0] / 2) + shift_left + offset;
+            d3.select('.inspector-wrap')
+                .style('display', 'block')
+                .style('opacity', 1)
+                .datum(entity)
+                .call(inspector);
 
-            if (shift_left > 0 && inspector_size[1] > d3.event.y) {
-                mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+            if (d3.event) {
+                // Pan the map if the clicked feature intersects with the position
+                // of the inspector
+                var inspector_size = d3.select('.inspector-wrap').size(),
+                    map_size = mode.map.size(),
+                    offset = 50,
+                    shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
+                    center = (map_size[0] / 2) + shift_left + offset;
+
+                if (shift_left > 0 && inspector_size[1] > d3.event.y) {
+                    mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+                }
             }
+
+            inspector
+                .on('changeTags', changeTags)
+                .on('close', function() { mode.controller.exit(); });
+
+            history.on('change.select', function() {
+                // Exit mode if selected entity gets undone
+                var oldEntity = entity,
+                    newEntity = history.graph().entity(selection[0]);
+
+                if (!newEntity) {
+                    mode.controller.enter(iD.modes.Browse());
+                } else if (!_.isEqual(oldEntity.tags, newEntity.tags)) {
+                    inspector.tags(newEntity.tags);
+                }
+
+                surface.call(radialMenu.close);
+            });
         }
-
-        inspector
-            .on('changeTags', changeTags)
-            .on('close', function() { mode.controller.exit(); });
-
-        history.on('change.select', function() {
-            // Exit mode if selected entity gets undone
-            var old = entity;
-            entity = history.graph().entity(entity.id);
-            if (!entity) {
-                mode.controller.enter(iD.modes.Browse());
-            } else if(!_.isEqual(entity.tags, old.tags)) {
-                inspector.tags(entity.tags);
-            }
-
-            surface.call(radialMenu.close);
-        });
 
         map.on('move.select', function() {
             surface.call(radialMenu.close);
@@ -96,17 +109,17 @@ iD.modes.Select = function(entity, initial) {
         function click() {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
-                mode.controller.enter(iD.modes.Select(datum));
+                mode.controller.enter(iD.modes.Select([datum.id]));
             } else {
                 mode.controller.enter(iD.modes.Browse());
             }
         }
 
         function dblclick() {
-            var selection = d3.select(d3.event.target),
-                datum = selection.datum();
+            var target = d3.select(d3.event.target),
+                datum = target.datum();
 
-            if (datum instanceof iD.Way && !selection.classed('fill')) {
+            if (datum instanceof iD.Way && !target.classed('fill')) {
                 var choice = iD.geo.chooseIndex(datum,
                         d3.mouse(mode.map.surface.node()), mode.map),
                     node = iD.Node({ loc: choice.loc });
@@ -128,9 +141,7 @@ iD.modes.Select = function(entity, initial) {
             .call(keybinding);
 
         surface.selectAll("*")
-            .filter(function (d) {
-                return d && entity && d.id === entity.id;
-            })
+            .filter(function (d) { return d && selection.indexOf(d.id) >= 0; })
             .classed('selected', true);
 
         radialMenu = iD.ui.RadialMenu(operations);
@@ -138,7 +149,7 @@ iD.modes.Select = function(entity, initial) {
         if (d3.event && !initial) {
             var loc = map.mouseCoordinates();
 
-            if (entity.type === 'node') {
+            if (entity && entity.type === 'node') {
                 loc = entity.loc;
             }
 
@@ -150,8 +161,8 @@ iD.modes.Select = function(entity, initial) {
         var surface = mode.map.surface,
             history = mode.history;
 
-        if (entity) {
-            changeTags(entity, inspector.tags());
+        if (singular()) {
+            changeTags(singular(), inspector.tags());
         }
 
         d3.select('.inspector-wrap')

@@ -139,7 +139,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
 
         var way = history.graph().entity(wayId);
         if (way) {
-            controller.enter(iD.modes.Select(way, true));
+            controller.enter(iD.modes.Select([way.id], true));
         } else {
             controller.enter(iD.modes.Browse());
         }

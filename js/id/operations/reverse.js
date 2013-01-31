@@ -1,5 +1,6 @@
-iD.operations.Reverse = function(entityId, mode) {
-    var history = mode.map.history();
+iD.operations.Reverse = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history();
 
     var operation = function() {
         history.perform(
@@ -10,7 +11,8 @@ iD.operations.Reverse = function(entityId, mode) {
     operation.available = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId);
-        return entity.geometry(graph) === 'line';
+        return selection.length === 1 &&
+            entity.geometry(graph) === 'line';
     };
 
     operation.enabled = function() {

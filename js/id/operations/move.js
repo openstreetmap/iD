@@ -1,5 +1,6 @@
-iD.operations.Move = function(entityId, mode) {
-    var history = mode.map.history();
+iD.operations.Move = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history();
 
     var operation = function() {
         mode.controller.enter(iD.modes.MoveWay(entityId));
@@ -7,7 +8,8 @@ iD.operations.Move = function(entityId, mode) {
 
     operation.available = function() {
         var graph = history.graph();
-        return graph.entity(entityId).type === 'way';
+        return selection.length === 1 &&
+            graph.entity(entityId).type === 'way';
     };
 
     operation.enabled = function() {

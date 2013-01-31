@@ -1,5 +1,6 @@
-iD.operations.Unjoin = function(entityId, mode) {
-    var history = mode.map.history(),
+iD.operations.Unjoin = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history(),
         action = iD.actions.UnjoinNode(entityId);
 
     var operation = function() {
@@ -9,7 +10,8 @@ iD.operations.Unjoin = function(entityId, mode) {
     operation.available = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId);
-        return entity.geometry(graph) === 'vertex';
+        return selection.length === 1 &&
+            entity.geometry(graph) === 'vertex';
     };
 
     operation.enabled = function() {

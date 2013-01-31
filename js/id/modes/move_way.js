@@ -34,12 +34,12 @@ iD.modes.MoveWay = function(wayId) {
 
         function finish() {
             d3.event.stopPropagation();
-            controller.enter(iD.modes.Select(way, true));
+            controller.enter(iD.modes.Select([way.id], true));
         }
 
         function cancel() {
             history.pop();
-            controller.enter(iD.modes.Select(way, true));
+            controller.enter(iD.modes.Select([way.id], true));
         }
 
         function undone() {

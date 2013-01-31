@@ -24,7 +24,7 @@ iD.modes.Browse = function() {
         surface.on('click.browse', function () {
             var datum = d3.select(d3.event.target).datum();
             if (datum instanceof iD.Entity) {
-                mode.controller.enter(iD.modes.Select(datum));
+                mode.controller.enter(iD.modes.Select([datum.id]));
             }
         });
     };

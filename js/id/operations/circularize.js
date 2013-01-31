@@ -1,5 +1,6 @@
-iD.operations.Circularize = function(entityId, mode) {
-    var history = mode.map.history(),
+iD.operations.Circularize = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history(),
         action = iD.actions.Circularize(entityId, mode.map);
 
     var operation = function() {
@@ -13,7 +14,7 @@ iD.operations.Circularize = function(entityId, mode) {
     operation.available = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId);
-        return entity.type === 'way';
+        return selection.length === 1 && entity.type === 'way';
     };
 
     operation.enabled = function() {

@@ -20,7 +20,7 @@ iD.modes.AddPoint = function() {
                 iD.actions.AddEntity(node),
                 t('operations.add.annotation.point'));
 
-            controller.enter(iD.modes.Select(node, true));
+            controller.enter(iD.modes.Select([node.id], true));
         }
 
         function addWay(way, loc, index) {

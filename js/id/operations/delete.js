@@ -1,5 +1,6 @@
-iD.operations.Delete = function(entityId, mode) {
-    var history = mode.map.history();
+iD.operations.Delete = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history();
 
     var operation = function() {
         var graph = history.graph(),
@@ -15,7 +16,8 @@ iD.operations.Delete = function(entityId, mode) {
     operation.available = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId);
-        return entity.type === 'way' || entity.type === 'node';
+        return selection.length === 1 &&
+            (entity.type === 'way' || entity.type === 'node');
     };
 
     operation.enabled = function() {
