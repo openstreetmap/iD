@@ -4,7 +4,7 @@ iD.operations.Reverse = function(entityId, mode) {
     var operation = function() {
         history.perform(
             iD.actions.ReverseWay(entityId),
-            'reversed a line');
+            'Reversed a line.');
     };
 
     operation.available = function() {
@@ -20,7 +20,7 @@ iD.operations.Reverse = function(entityId, mode) {
     operation.id = "reverse";
     operation.key = "V";
     operation.title = "Reverse";
-    operation.description = "Make this way go in the opposite direction";
+    operation.description = "Make this way go in the opposite direction.";
 
     return operation;
 };

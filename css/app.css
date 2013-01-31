@@ -246,7 +246,6 @@ form.hide {
 
 button {
     line-height:20px;
-    position: relative;
     border:0;
     color:#222;
     background: white;
@@ -346,16 +345,16 @@ button.save .count {
 button.save.has-count .count {
     display: block;
     position: absolute;
-    left: 115%;
     top: 0;
     bottom: 0;
-    background: rgba(255,255,255,.5);
+    background: rgba(255, 255, 255, .5);
     color: #333;
     padding: 10px;
     height: 30px;
     line-height: 12px;
     border-radius: 4px;
     margin: auto;
+    margin-left: 8.3333%;
 }
 
 button.save.has-count .count::before {
@@ -929,50 +928,6 @@ div.typeahead a:first-child {
     left:0px; right:0px; top:0px; bottom:0px;
 }
 
-.commit-modal .user-info {
-    display: inline-block;
-}
-
-.commit-modal .commit-info {
-    margin-top: 10px;
-}
-
-.commit-modal .user-info img {
-    float: left;
-}
-
-.commit-modal h3 small.count {
-    margin-right: 10px;
-    text-align: center;
-    float: left;
-    height: 12px;
-    min-width: 12px;
-    font-size:12px;
-    line-height: 12px;
-    border-radius:24px;
-    padding:5px;
-    background:#7092ff;
-    color:#fff;
-}
-
-.commit-modal .changeset-list {
-    overflow: auto;
-    border:1px solid #ccc;
-    background:#fff;
-    max-height: 160px;
-}
-
-.commit-modal .warning-section .changeset-list  {
-    margin-right: 20px;
-    overflow-x: visible;
-}
-
-.commit-section.modal-section {
-    padding-bottom: 0;
-}
-
-.commit-section.modal-section:last-child { padding-bottom: 20px;}
-
 .modal-section {
     padding: 20px;
 }
@@ -1007,6 +962,56 @@ div.typeahead a:first-child {
     display:none;
 }
 
+.loading-modal {
+    text-align: center;
+}
+
+/* Commit Modal
+------------------------------------------------------- */
+
+.commit-modal .user-info {
+    display: inline-block;
+}
+
+.commit-modal .commit-info {
+    margin-top: 10px;
+}
+
+.commit-modal .user-info img {
+    float: left;
+}
+
+.commit-modal h3 small.count {
+    margin-right: 10px;
+    text-align: center;
+    float: left;
+    height: 12px;
+    min-width: 12px;
+    font-size:12px;
+    line-height: 12px;
+    border-radius:24px;
+    padding:5px;
+    background:#7092ff;
+    color:#fff;
+}
+
+.commit-modal .changeset-list {
+    overflow: auto;
+    border:1px solid #ccc;
+    background:#fff;
+    max-height: 160px;
+}
+
+.commit-modal .warning-section .changeset-list  button {
+    float: right;
+}
+
+.commit-section.modal-section {
+    padding-bottom: 0;
+}
+
+.commit-section.modal-section:last-child { padding-bottom: 20px;}
+
 .changeset-list li {
     border-top:1px solid #ccc;
     padding:5px 10px;
@@ -1029,10 +1034,6 @@ div.typeahead a:first-child {
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
 }
 
-.loading-modal {
-    text-align: center;
-}
-
 /* Success
 ------------------------------------------------------- */
 a.success-action {
@@ -1051,7 +1052,8 @@ a.success-action {
     text-align:center;
 }
 
-.notice .notice-inner {
+.notice .zoom-to {
+    width:100%;
     height: 40px;
     border-radius: 5px;
     line-height: 40px;
@@ -1060,22 +1062,27 @@ a.success-action {
     opacity: 0.9;
 }
 
-.notice .notice-inner .zoom-to {
-    width:40px;
-    height:40px;
+.notice .zoom-to:hover {
+    background: #bde5aa;
+}
+
+.notice .zoom-to .icon {
+    margin-top:10px;
     margin-right:10px;
+}
+
+.icon.zoom-in-invert {
+    background-position: -240px -40px;
 }
 
 /* Tooltips
 ------------------------------------------------------- */
 
 .tooltip {
-    white-space: normal;
+    width: 200px;
     position: absolute;
-    left: 0; right: 0; margin: auto;
     z-index: -1000;
     height: 0;
-    padding: 5px;
     opacity: 0;
     display: block;
 }
@@ -1087,98 +1094,130 @@ a.success-action {
 }
 
 .tooltip.top {
-  margin-top: -5px;
+    margin-top: -10px;
+    text-align: center;
 }
 
 .tooltip.right {
-  margin-left: 5px;
+    margin-left: 10px;
+    text-align: left;
 }
 
 .tooltip.bottom {
-  margin-top: 5px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .tooltip.left {
-  margin-left: -5px;
+    margin-left: -10px;
+    text-align: right;
 }
 
 .tooltip-inner {
-  text-align: left;
-  width: 200px;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 20px;
-  padding: 5px 10px;
-  color: #333;
-  background-color: white;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+    color: #333;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 20px;
+    background-color: white;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+
 }
 
 .tooltip-arrow {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
 }
 
 .tooltip.top .tooltip-arrow {
-  bottom: 0;
-  left: 50%;
-  margin-left: -5px;
-  border-top-color: white;
-  border-width: 5px 5px 0;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-top-color: white;
+    border-width: 5px 5px 0;
 }
 
 .tooltip.right .tooltip-arrow {
-  top: 50%;
-  left: 0;
-  margin-top: -5px;
-  border-right-color: white;
-  border-width: 5px 5px 5px 0;
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: white;
+    border-width: 5px 5px 5px 0;
 }
 
 .tooltip.left .tooltip-arrow {
-  top: 50%;
-  right: 0;
-  margin-top: -5px;
-  border-left-color: white;
-  border-width: 5px 0 5px 5px;
+    top: 50%;
+    right: 5px;
+    margin-top: -5px;
+    border-left-color: white;
+    border-width: 5px 0 5px 5px;
 }
 
 .tooltip.bottom .tooltip-arrow {
-  top: 0;
-  left: 50%;
-  margin-left: -5px;
-  border-bottom-color: white;
-  border-width: 0 5px 5px;
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-bottom-color: white;
+    border-width: 0 5px 5px;
 }
 
+.Browse .tooltip {
+    left: -20px !important; }
 .Browse .tooltip .tooltip-arrow {
-  left: 30px;
+    left: 60px;
+}
+
+.tooltip .keyhint-wrap {
+    padding: 5px 0 5px 0;
 }
 
 .tooltip .keyhint {
-    float: right;
-    background: #eee;
+    display: block;
+    color: #222;
     font-size: 10px;
-    padding: 0 4px;
-    background:#aaa;
-    color:#fff;
+    padding: 0px 7px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
     border-radius: 2px;
-    margin-left: 4px;
+    border: 1px solid #CCC;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    clear: both;
+}
+
+.tooltip .keyhint .keyhint-label{
+    display: inline-block;
+}
+
+.tooltip .keyhint::after {
+    content: "";
+    position: absolute;
+    border-radius: 2px;
+    height: 10px;
+    width: 100%;
+    z-index: 0;
+    bottom: -4px;
+    left: -1px;
+    border: 1px solid #CCC;
+    border-top: 0;
 }
 
 .tail {
-  pointer-events:none;
-  position: absolute;
-  background: rgba(255, 255, 255, 0.7);
-  max-width: 250px;
-  margin-top: -15px;
-  padding: 5px;
-  -webkit-border-radius: 4px;
+    pointer-events:none;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    max-width: 250px;
+    margin-top: -15px;
+    padding: 5px;
+    -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
 }

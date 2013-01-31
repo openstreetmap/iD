@@ -9,41 +9,20 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
     mode.enter = function() {
         var way = mode.history.graph().entity(wayId),
             index = (direction === 'forward') ? undefined : 0,
-            headId = (direction === 'forward') ? way.last() : way.first(),
-            tailId = (direction === 'forward') ? way.first() : way.last(),
-            annotation = way.isDegenerate() ? 'started a line' : 'continued a line';
+            headId = (direction === 'forward') ? way.last() : way.first();
 
-        function addHead() {
-            behavior.finish();
-        }
+        behavior = iD.behavior.DrawWay(wayId, index, mode, baseGraph)
+            .annotation(way.isDegenerate() ? 'Started a line.' : 'Continued a line.');
 
-        function addTail(node) {
-            // connect the way in a loop
-            if (way.nodes.length > 2) {
-                behavior.addNode(node, annotation);
+        var addNode = behavior.addNode;
+
+        behavior.addNode = function(node) {
+            if (node.id === headId) {
+                behavior.finish();
             } else {
-                behavior.cancel();
+                addNode(node);
             }
-        }
-
-        function addNode(node) {
-            behavior.addNode(node, annotation);
-        }
-
-        function addWay(way, loc, index) {
-            behavior.addWay(way, loc, index, annotation);
-        }
-
-        function add(loc) {
-            behavior.add(loc, annotation);
-        }
-
-        behavior = iD.behavior.DrawWay(wayId, headId, tailId, index, mode, baseGraph)
-            .on('addHead', addHead)
-            .on('addTail', addTail)
-            .on('addNode', addNode)
-            .on('addWay', addWay)
-            .on('add', add);
+        };
 
         mode.map.surface.call(behavior);
         mode.map.tail('Click to add more points to the line. ' +

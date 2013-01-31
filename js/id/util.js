@@ -94,3 +94,5 @@ iD.util.editDistance = function(a, b) {
     }
     return matrix[b.length][a.length];
 };
+
+iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };

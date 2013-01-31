@@ -10,12 +10,12 @@ iD.operations.Circularize = function(entityId, mode) {
         if (geometry === 'line') {
             history.perform(
                 action,
-                'made a line circular');
+                'Made a line circular.');
 
         } else if (geometry === 'area') {
             history.perform(
                 action,
-                'made an area circular');
+                'Made an area circular.');
         }
     };
 

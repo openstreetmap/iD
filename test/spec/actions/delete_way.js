@@ -31,8 +31,7 @@ describe("iD.actions.DeleteWay", function () {
         expect(graph.entity(node.id)).not.to.be.undefined;
     });
 
-    // See #508
-    xit("deletes multiple member nodes", function () {
+    it("deletes multiple member nodes", function () {
         var a      = iD.Node(),
             b      = iD.Node(),
             way    = iD.Way({nodes: [a.id, b.id]}),
@@ -42,7 +41,7 @@ describe("iD.actions.DeleteWay", function () {
         expect(graph.entity(b.id)).to.be.undefined;
     });
 
-    xit("deletes a circular way's start/end node", function () {
+    it("deletes a circular way's start/end node", function () {
         var a      = iD.Node(),
             b      = iD.Node(),
             c      = iD.Node(),

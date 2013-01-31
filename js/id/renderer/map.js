@@ -64,7 +64,7 @@ iD.Map = function() {
             for (var i = 0; i < parents.length; i++) {
                 var parent = parents[i];
                 if (only[parent.id] === undefined) {
-                    only[parent.id] = graph.entity(parent.id);
+                    only[parent.id] = parent;
                     addParents(graph.parentRelations(parent));
                 }
             }
@@ -92,7 +92,7 @@ iD.Map = function() {
 
             all = _.compact(_.values(only));
             filter = function(d) {
-                if (d.midpoint) {
+                if (d.type === 'midpoint') {
                     for (var i = 0; i < d.ways.length; i++) {
                         if (d.ways[i].id in only) return true;
                     }
@@ -112,7 +112,7 @@ iD.Map = function() {
                 .call(areas, graph, all, filter)
                 .call(multipolygons, graph, all, filter)
                 .call(midpoints, graph, all, filter)
-                .call(labels, graph, all, filter, dimensions);
+                .call(labels, graph, all, filter, dimensions, !difference);
         }
         dispatch.drawn(map);
     }
@@ -123,7 +123,7 @@ iD.Map = function() {
 
     function connectionLoad(err, result) {
         history.merge(result);
-        redraw(Object.keys(result.entities));
+        redraw(Object.keys(result));
     }
 
     function zoomPan() {
@@ -165,7 +165,8 @@ iD.Map = function() {
     }
 
     function resetTransform() {
-        if (!surface.style(transformProp)) return false;
+        var prop = surface.style(transformProp);
+        if (!prop || prop === 'none') return false;
         surface.style(transformProp, '');
         tilegroup.style(transformProp, '');
         return true;

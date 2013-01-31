@@ -14,7 +14,7 @@ iD.modes.Select = function(entity, initial) {
         if (!_.isEqual(entity.tags, tags)) {
             mode.history.perform(
                 iD.actions.ChangeEntityTags(d.id, tags),
-                'changed tags');
+                'Changed tags.');
         }
     }
 
@@ -116,7 +116,7 @@ iD.modes.Select = function(entity, initial) {
                 history.perform(
                     iD.actions.AddNode(node),
                     iD.actions.AddWayNode(datum.id, node.id, choice.index),
-                    'added a point to a road');
+                    'Added a point to a road.');
 
                 d3.event.preventDefault();
                 d3.event.stopPropagation();

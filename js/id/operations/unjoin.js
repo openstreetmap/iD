@@ -3,7 +3,7 @@ iD.operations.Unjoin = function(entityId, mode) {
         action = iD.actions.UnjoinNode(entityId);
 
     var operation = function() {
-        history.perform(action, 'unjoined lines');
+        history.perform(action, 'Unjoined lines.');
     };
 
     operation.available = function() {
@@ -20,7 +20,7 @@ iD.operations.Unjoin = function(entityId, mode) {
     operation.id = "unjoin";
     operation.key = "⇧-J";
     operation.title = "Unjoin";
-    operation.description = "Disconnect these ways from each other";
+    operation.description = "Disconnect these ways from each other.";
 
     return operation;
 };
