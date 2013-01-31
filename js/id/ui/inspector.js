@@ -1,7 +1,7 @@
 iD.ui.inspector = function() {
     var event = d3.dispatch('changeTags', 'close'),
         taginfo = iD.taginfo(),
-        presetData,
+        presetData = iD.presetData(),
         initial = false,
         graph,
         tagList;

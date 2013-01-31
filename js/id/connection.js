@@ -5,7 +5,7 @@ iD.Connection = function() {
         connection = {},
         user = {},
         version,
-        presetData,
+        presetData = iD.presetData(),
         keys,
         inflight = {},
         loadedTiles = {},
