@@ -234,7 +234,9 @@ window.iD = function(container) {
         d3.select(document)
             .call(keybinding);
 
-        var hash = iD.Hash().controller(controller).map(map);
+        var hash = iD.behavior.Hash(controller, map);
+
+        hash();
 
         if (!hash.hadHash) {
             map.centerZoom([-77.02271, 38.90085], 20);

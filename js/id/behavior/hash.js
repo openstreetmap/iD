@@ -1,9 +1,6 @@
-iD.Hash = function() {
-    var hash = { hadHash: false },
-        s0 = null, // cached location.hash
-        lat = 90 - 1e-8, // allowable latitude range
-        controller,
-        map;
+iD.behavior.Hash = function(controller, map) {
+    var s0 = null, // cached location.hash
+        lat = 90 - 1e-8; // allowable latitude range
 
     var parser = function(map, s) {
         var q = iD.util.stringQs(s);
@@ -61,32 +58,29 @@ iD.Hash = function() {
         map.on('drawn.hash', null);
     }
 
-    hash.controller = function(_) {
-        if (!arguments.length) return controller;
-        controller = _;
-        return hash;
-    };
+    function hash() {
+        map.on('move.hash', move);
 
-    hash.map = function(x) {
-        if (!arguments.length) return map;
-        if (map) {
-            map.on("move.hash", null);
-            window.removeEventListener("hashchange", hashchange, false);
-        }
-        map = x;
-        if (x) {
-            map.on("move.hash", move);
-            window.addEventListener("hashchange", hashchange, false);
-            if (location.hash) {
-                var q = iD.util.stringQs(location.hash.substring(1));
-                if (q.id) {
-                    willselect(q.id);
-                }
-                hashchange();
-                hash.hadHash = true;
+        d3.select(window)
+            .on('hashchange.hash', hashchange);
+
+        if (location.hash) {
+            var q = iD.util.stringQs(location.hash.substring(1));
+            if (q.id) {
+                willselect(q.id);
             }
+            hashchange();
+            hash.hadHash = true;
         }
-        return hash;
+    }
+
+    hash.off = function() {
+        map.on('move.hash', null);
+
+        d3.select(window)
+            .on('hashchange.hash', null);
+
+        location.hash = "";
     };
 
     return hash;
