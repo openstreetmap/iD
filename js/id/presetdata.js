@@ -16,7 +16,7 @@ iD.presetData = function() {
 
     presets.match = function(entity) {
         return data.filter(function(d) {
-            return _.contains(d.match.type, entity.type);
+            return _.contains(d.type, entity.type);
         });
     };
 

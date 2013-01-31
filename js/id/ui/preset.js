@@ -38,7 +38,7 @@ iD.ui.preset = function() {
 
     function presets(selection) {
         var sections = selection.selectAll('div.preset-section')
-            .data(preset.form)
+            .data(preset.main)
             .enter()
             .append('div')
             .attr('class', 'preset-section');

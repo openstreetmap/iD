@@ -136,7 +136,7 @@
         <div id="iD"></div><script>
             locale.current = 'en';
             d3.json('keys.json', function(err, keys) {
-                d3.json('presets/presets.json', function(err, presets_data) {
+                d3.json('presets/presets_josm.json', function(err, presets_data) {
                     var id = iD();
                     id.connection().keys(keys)
                         .presetData(iD.presetData().data(presets_data))
