@@ -113,7 +113,7 @@ iD.modes.Select = function(entity, initial) {
 
                 history.perform(
                     iD.actions.AddNode(node),
-                    iD.actions.AddWayNode(datum.id, node.id, choice.index),
+                    iD.actions.AddVertex(datum.id, node.id, choice.index),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();

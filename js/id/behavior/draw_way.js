@@ -14,7 +14,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
 
     history[way.isDegenerate() ? 'replace' : 'perform'](
         iD.actions.AddNode(node),
-        iD.actions.AddWayNode(wayId, node.id, index));
+        iD.actions.AddVertex(wayId, node.id, index));
 
     function move(datum) {
         var loc = map.mouseCoordinates();
@@ -100,7 +100,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
 
         history.perform(
             iD.actions.AddNode(newNode),
-            iD.actions.AddWayNode(way.id, newNode.id, wayIndex),
+            iD.actions.AddVertex(way.id, newNode.id, wayIndex),
             ReplaceTemporaryNode(newNode),
             annotation);
 

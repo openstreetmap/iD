@@ -23,8 +23,8 @@ iD.modes.AddArea = function() {
             history.perform(
                 iD.actions.AddNode(node),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
@@ -37,9 +37,9 @@ iD.modes.AddArea = function() {
             history.perform(
                 iD.actions.AddNode(node),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(other.id, node.id, index));
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(other.id, node.id, index));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
@@ -50,8 +50,8 @@ iD.modes.AddArea = function() {
 
             history.perform(
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
@@ -64,8 +64,8 @@ iD.modes.AddArea = function() {
             history.perform(
                 iD.actions.AddMidpoint(midpoint, node),
                 iD.actions.AddWay(way),
-                iD.actions.AddWayNode(way.id, node.id),
-                iD.actions.AddWayNode(way.id, node.id));
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
 
             controller.enter(iD.modes.DrawArea(way.id, graph));
         }
