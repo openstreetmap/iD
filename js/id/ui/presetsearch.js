@@ -15,7 +15,7 @@ iD.ui.presetsearch = function() {
         function showResults() {
             var values = filter(this.value).slice(0, 10);
 
-            var res = search_output.selectAll('div.preset-search-result')
+            var res = search_output.selectAll('button.preset-search-result')
                 .data(values, function(d) { return d.name; });
 
             res.exit().remove();
@@ -38,6 +38,7 @@ iD.ui.presetsearch = function() {
             .attr('class', 'preset-search-input')
             .append('h3')
             .append('input')
+            .attr('placeholder', 'preset search')
             .on('keyup', showResults)
             .on('change', showResults);
 
