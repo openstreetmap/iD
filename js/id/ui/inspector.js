@@ -26,7 +26,7 @@ iD.ui.inspector = function() {
 
         if (possiblePresets.length) {
             var inspectorpreset = inspectorwrap.append('div')
-                .attr('class', 'inspector-preset')
+                .attr('class', 'inspector-preset cf')
                 .call(iD.ui.preset()
                     .preset(possiblePresets[0]));
         }
@@ -46,7 +46,7 @@ iD.ui.inspector = function() {
             });
 
             newTag.append('span').attr('class', 'icon icon-pre-text plus');
-            newTag.append('span').attr('class','label').text('New tag')
+            newTag.append('span').attr('class','label').text('New tag');
 
         drawTags(entity.tags);
 

@@ -3,7 +3,14 @@ iD.ui.preset = function() {
 
     // generate form fields for a given field.
     function input(d) {
+
         switch (d.type) {
+
+            case 'text':
+                this.append('input')
+                    .attr('type', 'text')
+                    .attr('placeholder', d['default'] || '');
+                break;
 
             case 'tel':
                 this.append('input')
@@ -23,9 +30,19 @@ iD.ui.preset = function() {
                     .attr('placeholder', 'http://example.com/');
                 break;
 
+            case 'check':
+                this.append('input')
+                    .attr('type', 'checkbox')
+                    .each(function() {
+                        if (d['default']) {
+                            this.attr('checked', 'checked');
+                        }
+                    });
+                break;
+
             case 'select':
                 var select = this.append('select');
-                var options = d.option.slice();
+                var options = d.values.slice();
                 options.unshift('');
                 select.selectAll('option')
                     .data(options)
@@ -41,15 +58,21 @@ iD.ui.preset = function() {
             .data(preset.main)
             .enter()
             .append('div')
-            .attr('class', 'preset-section');
+            .attr('class', 'preset-section cf');
 
         sections.each(function(d) {
             var s = d3.select(this);
 
-            s.append('h4')
-                .text(d.title || d.tag);
+            var wrap = s.append('div')
+                .attr('class', 'preset-section-input cf');
 
-            input.call(s, d);
+           wrap 
+                .append('div')
+                .attr('class', 'col6')
+                .text(d.text);
+
+            input.call(wrap.append('div')
+                .attr('class', 'col6'), d);
         });
     }
 

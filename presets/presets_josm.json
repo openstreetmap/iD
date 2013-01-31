@@ -213,7 +213,7 @@
                     "no"
                 ], 
                 "text": "General Access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "access"
             }, 
             {
@@ -228,7 +228,7 @@
                     "no"
                 ], 
                 "text": "Foot", 
-                "type": "option", 
+                "type": "select", 
                 "key": "foot"
             }, 
             {
@@ -243,7 +243,7 @@
                     "no"
                 ], 
                 "text": "Horse", 
-                "type": "option", 
+                "type": "select", 
                 "key": "horse"
             }, 
             {
@@ -258,7 +258,7 @@
                     "no"
                 ], 
                 "text": "All vehicles", 
-                "type": "option", 
+                "type": "select", 
                 "key": "vehicle"
             }, 
             {
@@ -273,7 +273,7 @@
                     "no"
                 ], 
                 "text": "Bicycle", 
-                "type": "option", 
+                "type": "select", 
                 "key": "bicycle"
             }, 
             {
@@ -288,7 +288,7 @@
                     "no"
                 ], 
                 "text": "Motor vehicles", 
-                "type": "option", 
+                "type": "select", 
                 "key": "motor_vehicle"
             }, 
             {
@@ -305,7 +305,7 @@
                     "no"
                 ], 
                 "text": "Motorcycle", 
-                "type": "option", 
+                "type": "select", 
                 "key": "motorcycle"
             }, 
             {
@@ -322,7 +322,7 @@
                     "no"
                 ], 
                 "text": "Motorcar", 
-                "type": "option", 
+                "type": "select", 
                 "key": "motorcar"
             }, 
             {
@@ -339,7 +339,7 @@
                     "no"
                 ], 
                 "text": "Light Commercial Vehicles (goods)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "goods"
             }, 
             {
@@ -356,7 +356,7 @@
                     "no"
                 ], 
                 "text": "Heavy Goods Vehicles (hgv)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "hgv"
             }, 
             {
@@ -370,7 +370,7 @@
                     "no"
                 ], 
                 "text": "Agricultural", 
-                "type": "option", 
+                "type": "select", 
                 "key": "agricultural"
             }, 
             {
@@ -384,7 +384,7 @@
                     "no"
                 ], 
                 "text": "Emergency vehicles", 
-                "type": "option", 
+                "type": "select", 
                 "key": "emergency"
             }, 
             {
@@ -398,7 +398,7 @@
                     "no"
                 ], 
                 "text": "High-occupancy vehicles (hov)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "hov"
             }, 
             {
@@ -412,7 +412,7 @@
                     "no"
                 ], 
                 "text": "Public Service Vehicles (psv)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "psv"
             }, 
             {
@@ -459,7 +459,7 @@
                     "no"
                 ], 
                 "text": "Overtaking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "overtaking"
             }
         ], 
@@ -489,7 +489,7 @@
                     "construction"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "highway"
             }
         ], 
@@ -509,7 +509,7 @@
                     "aqueduct"
                 ], 
                 "text": "Bridge", 
-                "type": "option", 
+                "type": "select", 
                 "key": "bridge"
             }
         ], 
@@ -567,7 +567,7 @@
                     "shared_lane"
                 ], 
                 "text": "Cycleway", 
-                "type": "option", 
+                "type": "select", 
                 "key": "cycleway"
             }, 
             {
@@ -581,7 +581,7 @@
                     "shared_lane"
                 ], 
                 "text": "Cycleway left", 
-                "type": "option", 
+                "type": "select", 
                 "key": "cycleway:left"
             }, 
             {
@@ -595,7 +595,7 @@
                     "shared_lane"
                 ], 
                 "text": "Cycleway right", 
-                "type": "option", 
+                "type": "select", 
                 "key": "cycleway:right"
             }, 
             {
@@ -622,7 +622,7 @@
                     "construction"
                 ], 
                 "text": "Highway", 
-                "type": "option", 
+                "type": "select", 
                 "key": "highway"
             }, 
             {
@@ -740,7 +740,7 @@
                     "clockwise"
                 ], 
                 "text": "Direction", 
-                "type": "option", 
+                "type": "select", 
                 "key": "direction"
             }
         ], 
@@ -761,7 +761,7 @@
                     "unknown"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "crossing"
             }, 
             {
@@ -792,7 +792,7 @@
                     "tiger"
                 ], 
                 "text": "Type name (UK)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "crossing_ref"
             }
         ], 
@@ -814,7 +814,7 @@
                     "table"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "traffic_calming"
             }
         ], 
@@ -1456,7 +1456,7 @@
                     "-5"
                 ], 
                 "text": "Layer", 
-                "type": "option", 
+                "type": "select", 
                 "key": "layer"
             }
         ], 
@@ -1487,7 +1487,7 @@
                     "-5"
                 ], 
                 "text": "Layer", 
-                "type": "option", 
+                "type": "select", 
                 "key": "layer"
             }
         ], 
@@ -1518,7 +1518,7 @@
                     "-5"
                 ], 
                 "text": "Layer", 
-                "type": "option", 
+                "type": "select", 
                 "key": "layer"
             }
         ], 
@@ -1549,7 +1549,7 @@
                     "-5"
                 ], 
                 "text": "Layer", 
-                "type": "option", 
+                "type": "select", 
                 "key": "layer"
             }, 
             {
@@ -1585,7 +1585,7 @@
                     "-5"
                 ], 
                 "text": "Layer", 
-                "type": "option", 
+                "type": "select", 
                 "key": "layer"
             }, 
             {
@@ -1817,7 +1817,7 @@
                     "mangrove"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wetland"
             }
         ], 
@@ -1905,7 +1905,7 @@
                     "passengers;vehicle"
                 ], 
                 "text": "Cargo", 
-                "type": "option", 
+                "type": "select", 
                 "key": "cargo"
             }
         ], 
@@ -2071,7 +2071,7 @@
                     "spur"
                 ], 
                 "text": "Optional Types", 
-                "type": "option", 
+                "type": "select", 
                 "key": "service"
             }
         ], 
@@ -2360,7 +2360,7 @@
                     "underground"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "parking"
             }, 
             {
@@ -2377,7 +2377,7 @@
                     "no"
                 ], 
                 "text": "Access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "access"
             }, 
             {
@@ -2386,7 +2386,7 @@
                     "no"
                 ], 
                 "text": "Park and Ride", 
-                "type": "option", 
+                "type": "select", 
                 "key": "park_ride"
             }, 
             {
@@ -2395,7 +2395,7 @@
                     "no"
                 ], 
                 "text": "Fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }, 
             {
@@ -2418,7 +2418,7 @@
                     "3"
                 ], 
                 "text": "Spaces for Disabled", 
-                "type": "option", 
+                "type": "select", 
                 "key": "capacity:disabled"
             }, 
             {
@@ -2431,7 +2431,7 @@
                     "3"
                 ], 
                 "text": "Spaces for Women", 
-                "type": "option", 
+                "type": "select", 
                 "key": "capacity:women"
             }, 
             {
@@ -2444,7 +2444,7 @@
                     "3"
                 ], 
                 "text": "Spaces for Parents", 
-                "type": "option", 
+                "type": "select", 
                 "key": "capacity:parent"
             }
         ], 
@@ -2474,7 +2474,7 @@
                     "rooftop"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "parking"
             }, 
             {
@@ -2491,7 +2491,7 @@
                     "no"
                 ], 
                 "text": "Access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "access"
             }, 
             {
@@ -2501,7 +2501,7 @@
                     "interval"
                 ], 
                 "text": "Fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }, 
             {
@@ -2528,7 +2528,7 @@
                     "ground"
                 ], 
                 "text": "Surface", 
-                "type": "option", 
+                "type": "select", 
                 "key": "surface"
             }, 
             {
@@ -2537,7 +2537,7 @@
                     "no"
                 ], 
                 "text": "Covered (with roof)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "covered"
             }, 
             {
@@ -2548,7 +2548,7 @@
                     "30+"
                 ], 
                 "text": "Time Limit (minutes)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stay"
             }, 
             {
@@ -2558,7 +2558,7 @@
                     "interval"
                 ], 
                 "text": "Supervised", 
-                "type": "option", 
+                "type": "select", 
                 "key": "supervised"
             }, 
             {
@@ -2568,7 +2568,7 @@
                     "interval"
                 ], 
                 "text": "Lit", 
-                "type": "option", 
+                "type": "select", 
                 "key": "lit"
             }, 
             {
@@ -2578,7 +2578,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -2608,7 +2608,7 @@
                     "rooftop"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "parking"
             }, 
             {
@@ -2620,7 +2620,7 @@
                     "no"
                 ], 
                 "text": "Access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "access"
             }, 
             {
@@ -2630,7 +2630,7 @@
                     "interval"
                 ], 
                 "text": "Fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }, 
             {
@@ -2657,7 +2657,7 @@
                     "ground"
                 ], 
                 "text": "Surface", 
-                "type": "option", 
+                "type": "select", 
                 "key": "surface"
             }, 
             {
@@ -2666,7 +2666,7 @@
                     "no"
                 ], 
                 "text": "Covered (with roof)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "covered"
             }, 
             {
@@ -2677,7 +2677,7 @@
                     "30+"
                 ], 
                 "text": "Time Limit (minutes)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stay"
             }, 
             {
@@ -2687,7 +2687,7 @@
                     "interval"
                 ], 
                 "text": "Supervised", 
-                "type": "option", 
+                "type": "select", 
                 "key": "supervised"
             }, 
             {
@@ -2697,7 +2697,7 @@
                     "interval"
                 ], 
                 "text": "Lit", 
-                "type": "option", 
+                "type": "select", 
                 "key": "lit"
             }, 
             {
@@ -2707,7 +2707,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -2744,7 +2744,7 @@
                     "Independent"
                 ], 
                 "text": "Brand", 
-                "type": "option", 
+                "type": "select", 
                 "key": "brand"
             }
         ], 
@@ -2801,7 +2801,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -2854,7 +2854,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -2888,7 +2888,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -2942,7 +2942,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -2976,7 +2976,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -3010,7 +3010,7 @@
                     "underground"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "parking"
             }, 
             {
@@ -3019,7 +3019,7 @@
                     "no"
                 ], 
                 "text": "Fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }
         ], 
@@ -3041,7 +3041,7 @@
                     "independent"
                 ], 
                 "text": "Brand", 
-                "type": "option", 
+                "type": "select", 
                 "key": "brand"
             }, 
             {
@@ -3056,7 +3056,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -3067,7 +3067,7 @@
                     "no"
                 ], 
                 "text": "Sale", 
-                "type": "option", 
+                "type": "select", 
                 "key": "sale"
             }, 
             {
@@ -3077,7 +3077,7 @@
                     "no"
                 ], 
                 "text": "Rental", 
-                "type": "option", 
+                "type": "select", 
                 "key": "rental"
             }, 
             {
@@ -3088,7 +3088,7 @@
                     "no"
                 ], 
                 "text": "Repair", 
-                "type": "option", 
+                "type": "select", 
                 "key": "repair"
             }, 
             {
@@ -3101,7 +3101,7 @@
                     "no"
                 ], 
                 "text": "Safety inspection", 
-                "type": "option", 
+                "type": "select", 
                 "key": "safety_inspection"
             }, 
             {
@@ -3112,7 +3112,7 @@
                     "no"
                 ], 
                 "text": "Parts", 
-                "type": "option", 
+                "type": "select", 
                 "key": "parts"
             }, 
             {
@@ -3122,7 +3122,7 @@
                     "no"
                 ], 
                 "text": "Clothes", 
-                "type": "option", 
+                "type": "select", 
                 "key": "clothes"
             }, 
             {
@@ -3186,7 +3186,7 @@
                     "wall_loops"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "bicycle_parking"
             }, 
             {
@@ -3560,7 +3560,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -3572,7 +3572,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -3581,7 +3581,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -3593,7 +3593,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -3602,7 +3602,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -3655,7 +3655,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -3667,7 +3667,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -3676,7 +3676,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -3688,7 +3688,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -3697,7 +3697,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -3745,7 +3745,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -3757,7 +3757,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -3766,7 +3766,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -3778,7 +3778,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -3787,7 +3787,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -3835,7 +3835,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -3847,7 +3847,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -3856,7 +3856,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -3868,7 +3868,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -3877,7 +3877,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -3930,7 +3930,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -3942,7 +3942,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -3951,7 +3951,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -3963,7 +3963,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -3972,7 +3972,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4028,7 +4028,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4037,7 +4037,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4049,7 +4049,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4058,7 +4058,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4106,7 +4106,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -4118,7 +4118,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4127,7 +4127,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4139,7 +4139,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4148,7 +4148,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4163,7 +4163,7 @@
                     "interval"
                 ], 
                 "text": "Requires a fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }, 
             {
@@ -4223,7 +4223,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -4235,7 +4235,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4244,7 +4244,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4256,7 +4256,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4265,7 +4265,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4320,7 +4320,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -4334,7 +4334,7 @@
                     "7"
                 ], 
                 "text": "Stars", 
-                "type": "option", 
+                "type": "select", 
                 "key": "stars"
             }, 
             {
@@ -4346,7 +4346,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4355,7 +4355,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4367,7 +4367,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4376,7 +4376,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4441,7 +4441,7 @@
                     "chicken"
                 ], 
                 "text": "Cuisine", 
-                "type": "option", 
+                "type": "select", 
                 "key": "cuisine"
             }, 
             {
@@ -4451,7 +4451,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -4463,7 +4463,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4472,7 +4472,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4484,7 +4484,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4493,7 +4493,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4537,7 +4537,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -4549,7 +4549,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4558,7 +4558,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4570,7 +4570,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4579,7 +4579,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4626,7 +4626,7 @@
                     "ice_cream"
                 ], 
                 "text": "Cuisine", 
-                "type": "option", 
+                "type": "select", 
                 "key": "cuisine"
             }, 
             {
@@ -4636,7 +4636,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -4648,7 +4648,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4657,7 +4657,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4669,7 +4669,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4678,7 +4678,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4733,7 +4733,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -4745,7 +4745,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4754,7 +4754,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4766,7 +4766,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4775,7 +4775,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4819,7 +4819,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -4831,7 +4831,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4840,7 +4840,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4852,7 +4852,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4861,7 +4861,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4905,7 +4905,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -4917,7 +4917,7 @@
                     "no"
                 ], 
                 "text": "Internet access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access"
             }, 
             {
@@ -4926,7 +4926,7 @@
                     "no"
                 ], 
                 "text": "Internet access fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "internet_access:fee"
             }, 
             {
@@ -4938,7 +4938,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -4947,7 +4947,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -4991,7 +4991,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -5003,7 +5003,7 @@
                     "no"
                 ], 
                 "text": "Smoking", 
-                "type": "option", 
+                "type": "select", 
                 "key": "smoking"
             }, 
             {
@@ -5012,7 +5012,7 @@
                     "no"
                 ], 
                 "text": "Wheelchairs", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -5089,7 +5089,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -5113,7 +5113,7 @@
                     "scheme"
                 ], 
                 "text": "Detail Grade", 
-                "type": "option", 
+                "type": "select", 
                 "key": "map_type"
             }, 
             {
@@ -5123,7 +5123,7 @@
                     "region"
                 ], 
                 "text": "Shown Area", 
-                "type": "option", 
+                "type": "select", 
                 "key": "map_size"
             }, 
             {
@@ -5183,7 +5183,7 @@
                     "plants"
                 ], 
                 "text": "Board Content", 
-                "type": "option", 
+                "type": "select", 
                 "key": "board_type"
             }, 
             {
@@ -5273,7 +5273,7 @@
                     "no"
                 ], 
                 "text": "Fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }
         ], 
@@ -5310,7 +5310,7 @@
                     "no"
                 ], 
                 "text": "Fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }, 
             {
@@ -5372,7 +5372,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -5406,7 +5406,7 @@
                     "wall"
                 ], 
                 "text": "Barrier", 
-                "type": "option", 
+                "type": "select", 
                 "key": "barrier"
             }, 
             {
@@ -5416,7 +5416,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -5446,7 +5446,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -5488,7 +5488,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -5499,7 +5499,7 @@
                     "unknown"
                 ], 
                 "text": "Access", 
-                "type": "option", 
+                "type": "select", 
                 "key": "access"
             }
         ], 
@@ -5556,7 +5556,7 @@
                     "no"
                 ], 
                 "text": "Covered", 
-                "type": "option", 
+                "type": "select", 
                 "key": "covered"
             }, 
             {
@@ -5566,7 +5566,7 @@
                     "wood"
                 ], 
                 "text": "Fuel", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fuel"
             }
         ], 
@@ -5611,7 +5611,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -5655,7 +5655,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -5719,7 +5719,7 @@
                     "zoroastrian"
                 ], 
                 "text": "Religion", 
-                "type": "option", 
+                "type": "select", 
                 "key": "religion"
             }, 
             {
@@ -5741,7 +5741,7 @@
                     "sunni"
                 ], 
                 "text": "Denomination", 
-                "type": "option", 
+                "type": "select", 
                 "key": "denomination"
             }, 
             {
@@ -5751,7 +5751,7 @@
                     "Su 11:00"
                 ], 
                 "text": "Service Times", 
-                "type": "option", 
+                "type": "select", 
                 "key": "service_times"
             }, 
             {
@@ -5761,7 +5761,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours for visiting", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -5790,7 +5790,7 @@
                     "video"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "type"
             }, 
             {
@@ -5858,7 +5858,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6075,7 +6075,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6099,7 +6099,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6136,7 +6136,7 @@
                     "no"
                 ], 
                 "text": "Dispensing", 
-                "type": "option", 
+                "type": "select", 
                 "key": "dispensing"
             }, 
             {
@@ -6151,7 +6151,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6180,7 +6180,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6252,7 +6252,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6280,7 +6280,7 @@
                     "no"
                 ], 
                 "text": "Fee", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fee"
             }, 
             {
@@ -6290,7 +6290,7 @@
                     "yes"
                 ], 
                 "text": "Wheelchair", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wheelchair"
             }, 
             {
@@ -6418,7 +6418,7 @@
                     "centre"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "recycling_type"
             }
         ], 
@@ -6450,7 +6450,7 @@
                     "no"
                 ], 
                 "text": "Backrest", 
-                "type": "option", 
+                "type": "select", 
                 "key": "backrest"
             }, 
             {
@@ -6461,7 +6461,7 @@
                     "plastic"
                 ], 
                 "text": "Material", 
-                "type": "option", 
+                "type": "select", 
                 "key": "material"
             }, 
             {
@@ -6475,7 +6475,7 @@
                     "white"
                 ], 
                 "text": "Colour", 
-                "type": "option", 
+                "type": "select", 
                 "key": "colour"
             }, 
             {
@@ -6491,7 +6491,7 @@
                     "10"
                 ], 
                 "text": "Amount of Seats", 
-                "type": "option", 
+                "type": "select", 
                 "key": "seats"
             }
         ], 
@@ -6521,7 +6521,7 @@
                     "wildlife_hide"
                 ], 
                 "text": "Type of shelter", 
-                "type": "option", 
+                "type": "select", 
                 "key": "shelter_type"
             }
         ], 
@@ -6544,7 +6544,7 @@
                     "20"
                 ], 
                 "text": "Height", 
-                "type": "option", 
+                "type": "select", 
                 "key": "height"
             }, 
             {
@@ -6554,7 +6554,7 @@
                     "unknown"
                 ], 
                 "text": "Shelter", 
-                "type": "option", 
+                "type": "select", 
                 "key": "shelter"
             }, 
             {
@@ -6564,7 +6564,7 @@
                     "unknown"
                 ], 
                 "text": "Hide", 
-                "type": "option", 
+                "type": "select", 
                 "key": "hide"
             }, 
             {
@@ -6574,7 +6574,7 @@
                     "unknown"
                 ], 
                 "text": "Lock", 
-                "type": "option", 
+                "type": "select", 
                 "key": "lock"
             }
         ], 
@@ -6606,7 +6606,7 @@
                     "pond"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fire_hydrant:type"
             }, 
             {
@@ -6621,7 +6621,7 @@
                     "400"
                 ], 
                 "text": "Diameter (in mm)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fire_hydrant:diameter"
             }, 
             {
@@ -6647,7 +6647,7 @@
                     "green"
                 ], 
                 "text": "Position", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fire_hydrant:position"
             }, 
             {
@@ -6658,7 +6658,7 @@
                     "suction"
                 ], 
                 "text": "Pressure (in bar)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fire_hydrant:pressure"
             }, 
             {
@@ -6719,7 +6719,7 @@
                     "tennis"
                 ], 
                 "text": "sport", 
-                "type": "option", 
+                "type": "select", 
                 "key": "sport"
             }
         ], 
@@ -6776,7 +6776,7 @@
                     "tennis"
                 ], 
                 "text": "sport", 
-                "type": "option", 
+                "type": "select", 
                 "key": "sport"
             }
         ], 
@@ -6832,7 +6832,7 @@
                     "tennis"
                 ], 
                 "text": "sport", 
-                "type": "option", 
+                "type": "select", 
                 "key": "sport"
             }
         ], 
@@ -6888,7 +6888,7 @@
                     "tennis"
                 ], 
                 "text": "sport", 
-                "type": "option", 
+                "type": "select", 
                 "key": "sport"
             }
         ], 
@@ -6914,7 +6914,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6938,7 +6938,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -6963,7 +6963,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -6987,7 +6987,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7011,7 +7011,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7035,7 +7035,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7060,7 +7060,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7082,7 +7082,7 @@
                     "sports_centre"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7122,7 +7122,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7147,7 +7147,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7173,7 +7173,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7198,7 +7198,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7222,7 +7222,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7247,7 +7247,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7272,7 +7272,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7297,7 +7297,7 @@
                     "water_park"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7322,7 +7322,7 @@
                     "snow_park"
                 ], 
                 "text": "Piste type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "piste:type"
             }, 
             {
@@ -7335,7 +7335,7 @@
                     "freeride"
                 ], 
                 "text": "Difficulty", 
-                "type": "option", 
+                "type": "select", 
                 "key": "piste:difficulty"
             }, 
             {
@@ -7348,7 +7348,7 @@
                     "backcountry"
                 ], 
                 "text": "Grooming", 
-                "type": "option", 
+                "type": "select", 
                 "key": "piste:grooming"
             }
         ], 
@@ -7374,7 +7374,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7398,7 +7398,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7422,7 +7422,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7446,7 +7446,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7470,7 +7470,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7494,7 +7494,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7518,7 +7518,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7542,7 +7542,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7566,7 +7566,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7590,7 +7590,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7619,7 +7619,7 @@
                     "sports_centre"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7648,7 +7648,7 @@
                     "sports_centre"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7673,7 +7673,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7697,7 +7697,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7721,7 +7721,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7745,7 +7745,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7769,7 +7769,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7793,7 +7793,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7818,7 +7818,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7842,7 +7842,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7866,7 +7866,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7890,7 +7890,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7914,7 +7914,7 @@
                     "stadium"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7939,7 +7939,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7963,7 +7963,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -7987,7 +7987,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -8011,7 +8011,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -8035,7 +8035,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -8059,7 +8059,7 @@
                     "track"
                 ], 
                 "text": "type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "leisure"
             }
         ], 
@@ -8088,7 +8088,7 @@
                     "university"
                 ], 
                 "text": "Building", 
-                "type": "option", 
+                "type": "select", 
                 "key": "building"
             }, 
             {
@@ -8117,7 +8117,7 @@
                     "roof"
                 ], 
                 "text": "Building", 
-                "type": "option", 
+                "type": "select", 
                 "key": "building"
             }, 
             {
@@ -8146,7 +8146,7 @@
                     "observation"
                 ], 
                 "text": "Tower type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "tower:type"
             }
         ], 
@@ -8244,7 +8244,7 @@
                     "sewage"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "type"
             }, 
             {
@@ -8254,7 +8254,7 @@
                     "overground"
                 ], 
                 "text": "Location", 
-                "type": "option", 
+                "type": "select", 
                 "key": "location"
             }
         ], 
@@ -8290,7 +8290,7 @@
                     "air"
                 ], 
                 "text": "Function", 
-                "type": "option", 
+                "type": "select", 
                 "key": "mineshaft_type"
             }, 
             {
@@ -8324,7 +8324,7 @@
                     "zircon"
                 ], 
                 "text": "Resource", 
-                "type": "option", 
+                "type": "select", 
                 "key": "resource"
             }, 
             {
@@ -8333,7 +8333,7 @@
                     "no"
                 ], 
                 "text": "Visible Headframe", 
-                "type": "option", 
+                "type": "select", 
                 "key": "headframe"
             }, 
             {
@@ -8387,7 +8387,7 @@
                     "zircon"
                 ], 
                 "text": "Resource", 
-                "type": "option", 
+                "type": "select", 
                 "key": "resource"
             }, 
             {
@@ -8523,7 +8523,7 @@
                     "Mo-Fr 22:00-05:00"
                 ], 
                 "text": "Operation times", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -8552,7 +8552,7 @@
                     "weather"
                 ], 
                 "text": "Measurement", 
-                "type": "option", 
+                "type": "select", 
                 "key": "measurement"
             }, 
             {
@@ -8563,7 +8563,7 @@
                     "no"
                 ], 
                 "text": "Recording", 
-                "type": "option", 
+                "type": "select", 
                 "key": "recording"
             }, 
             {
@@ -8573,7 +8573,7 @@
                     "no"
                 ], 
                 "text": "Display", 
-                "type": "option", 
+                "type": "select", 
                 "key": "display"
             }
         ], 
@@ -8610,7 +8610,7 @@
                     "public"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "surveillance"
             }
         ], 
@@ -8648,7 +8648,7 @@
                     "wind"
                 ], 
                 "text": "Source", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:source"
             }, 
             {
@@ -8667,7 +8667,7 @@
                     "thermal"
                 ], 
                 "text": "Method", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:method"
             }, 
             {
@@ -8679,7 +8679,7 @@
                     "7 GW"
                 ], 
                 "text": "electricity", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:electricity"
             }, 
             {
@@ -8691,7 +8691,7 @@
                     "7 GW"
                 ], 
                 "text": "hot water", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:hot_water"
             }, 
             {
@@ -8703,7 +8703,7 @@
                     "7 GW"
                 ], 
                 "text": "hot air", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:hot_air"
             }, 
             {
@@ -8715,7 +8715,7 @@
                     "7 GW"
                 ], 
                 "text": "cold water", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:cold_water"
             }, 
             {
@@ -8727,7 +8727,7 @@
                     "7 GW"
                 ], 
                 "text": "cold air", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:cold_air"
             }, 
             {
@@ -8739,7 +8739,7 @@
                     "7 GW"
                 ], 
                 "text": "compressed air", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:compressed_air"
             }, 
             {
@@ -8751,7 +8751,7 @@
                     "7 GW"
                 ], 
                 "text": "steam", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:steam"
             }, 
             {
@@ -8763,7 +8763,7 @@
                     "7 GW"
                 ], 
                 "text": "vacuum", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:vacuum"
             }, 
             {
@@ -8775,7 +8775,7 @@
                     "7 GW"
                 ], 
                 "text": "battery charging", 
-                "type": "option", 
+                "type": "select", 
                 "key": "generator:output:battery_charging"
             }
         ], 
@@ -8880,7 +8880,7 @@
                     "minor_line"
                 ], 
                 "text": "Line type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "power"
             }, 
             {
@@ -8905,7 +8905,7 @@
                     "380000"
                 ], 
                 "text": "Voltage", 
-                "type": "option", 
+                "type": "select", 
                 "key": "voltage"
             }, 
             {
@@ -8921,7 +8921,7 @@
                     "quad"
                 ], 
                 "text": "Number of wires (better: conductors) per power cable", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wires"
             }
         ], 
@@ -8963,7 +8963,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -8987,7 +8987,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9109,7 +9109,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9133,7 +9133,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9157,7 +9157,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9181,7 +9181,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9205,7 +9205,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9234,7 +9234,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9263,7 +9263,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9287,7 +9287,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9316,7 +9316,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9346,7 +9346,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9365,7 +9365,7 @@
                     "only"
                 ], 
                 "text": "Organic/Bio", 
-                "type": "option", 
+                "type": "select", 
                 "key": "organic"
             }
         ], 
@@ -9384,7 +9384,7 @@
                     "only"
                 ], 
                 "text": "Fair Trade", 
-                "type": "option", 
+                "type": "select", 
                 "key": "fair_trade"
             }
         ], 
@@ -9408,7 +9408,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9432,7 +9432,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9456,7 +9456,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9485,7 +9485,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9509,7 +9509,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9533,7 +9533,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9557,7 +9557,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9581,7 +9581,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9605,7 +9605,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9629,7 +9629,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9658,7 +9658,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9682,7 +9682,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9706,7 +9706,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9735,7 +9735,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9764,7 +9764,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9788,7 +9788,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9812,7 +9812,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9841,7 +9841,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }, 
             {
@@ -9871,7 +9871,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9913,7 +9913,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9942,7 +9942,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9966,7 +9966,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -9990,7 +9990,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10014,7 +10014,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10043,7 +10043,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10072,7 +10072,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10096,7 +10096,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10120,7 +10120,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10144,7 +10144,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10168,7 +10168,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10197,7 +10197,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10221,7 +10221,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10250,7 +10250,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10279,7 +10279,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10308,7 +10308,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10332,7 +10332,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10361,7 +10361,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10385,7 +10385,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10409,7 +10409,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10438,7 +10438,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10462,7 +10462,7 @@
                     "Tu-Su 08:00-15:00;Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -10491,7 +10491,7 @@
                     "Tu-Su 08:00-15:00; Sa 08:00-12:00"
                 ], 
                 "text": "Opening Hours", 
-                "type": "option", 
+                "type": "select", 
                 "key": "opening_hours"
             }
         ], 
@@ -11162,7 +11162,7 @@
                     "mixed"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wood"
             }
         ], 
@@ -11187,7 +11187,7 @@
                     "mixed"
                 ], 
                 "text": "Type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "wood"
             }
         ], 
@@ -11491,7 +11491,7 @@
                     "zoroastrian"
                 ], 
                 "text": "Religion", 
-                "type": "option", 
+                "type": "select", 
                 "key": "religion"
             }, 
             {
@@ -11513,7 +11513,7 @@
                     "sunni"
                 ], 
                 "text": "Denomination", 
-                "type": "option", 
+                "type": "select", 
                 "key": "denomination"
             }
         ], 
@@ -11547,7 +11547,7 @@
                     "zoroastrian"
                 ], 
                 "text": "Religion", 
-                "type": "option", 
+                "type": "select", 
                 "key": "religion"
             }, 
             {
@@ -11569,7 +11569,7 @@
                     "sunni"
                 ], 
                 "text": "Denomination", 
-                "type": "option", 
+                "type": "select", 
                 "key": "denomination"
             }
         ], 
@@ -11772,7 +11772,7 @@
                     "alphabetic"
                 ], 
                 "text": "Numbering scheme", 
-                "type": "option", 
+                "type": "select", 
                 "key": "addr:interpolation"
             }
         ], 
@@ -11909,7 +11909,7 @@
                     "only_straight_on"
                 ], 
                 "text": "Restriction", 
-                "type": "option", 
+                "type": "select", 
                 "key": "restriction"
             }
         ], 
@@ -11930,7 +11930,7 @@
                     "check "
                 ], 
                 "text": "Type of enforcement", 
-                "type": "option", 
+                "type": "select", 
                 "key": "enforcement"
             }, 
             {
@@ -11971,7 +11971,7 @@
                     "subway"
                 ], 
                 "text": "Route type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "route"
             }, 
             {
@@ -12014,7 +12014,7 @@
                     "ferry"
                 ], 
                 "text": "Route type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "route"
             }, 
             {
@@ -12050,7 +12050,7 @@
                     "subway"
                 ], 
                 "text": "Route type", 
-                "type": "option", 
+                "type": "select", 
                 "key": "route"
             }, 
             {
@@ -12167,7 +12167,7 @@
                     "ditch"
                 ], 
                 "text": "Subtype of waterway (largest one of members)", 
-                "type": "option", 
+                "type": "select", 
                 "key": "waterway"
             }, 
             {
@@ -12198,7 +12198,7 @@
                     "-5"
                 ], 
                 "text": "Layer", 
-                "type": "option", 
+                "type": "select", 
                 "key": "layer"
             }, 
             {
@@ -12249,7 +12249,7 @@
                     "-5"
                 ], 
                 "text": "Layer", 
-                "type": "option", 
+                "type": "select", 
                 "key": "layer"
             }, 
             {

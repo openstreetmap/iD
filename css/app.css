@@ -1267,3 +1267,8 @@ a.success-action {
     .icon.icon-pre-text { margin-right: 0px;}
     .save .label, .apply .label { display: block;}
 }
+
+.preset-section.cf,
+.preset-section-input.cf {
+    width: 100%;
+}
