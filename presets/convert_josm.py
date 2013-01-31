@@ -1,15 +1,22 @@
 from xml.dom.minidom import parse
-import os
+import os, re, json
 dirr = os.path.dirname(__file__)
-import json
 
 def relative(x):
     return os.path.join(dirr, x)
+
 dom1 = parse(relative('./josm.xml'))
 
 items = dom1.getElementsByTagName('item')
 
 jsonOutput = []
+
+def isemail(x):
+    return re.search('email', x, flags=re.IGNORECASE)
+def iswebsite(x):
+    return re.search('web', x, flags=re.IGNORECASE)
+def istel(x):
+    return re.search('phone|tel|fax', x, flags=re.IGNORECASE)
 
 for item in items:
     jitem = {
@@ -20,8 +27,16 @@ for item in items:
     for n in item.childNodes:
         if n.nodeType != n.TEXT_NODE and n.nodeType != n.COMMENT_NODE:
             if n.tagName == 'text':
+                txt = n.getAttribute('text')
+                type = 'text'
+                if isemail(txt):
+                    type = 'email'
+                if iswebsite(txt):
+                    type = 'url'
+                if istel(txt):
+                    type = 'tel'
                 jitem['main'].append({
-                    'type': 'text',
+                    'type': type,
                     'key': n.getAttribute('key'),
                     'text': n.getAttribute('text')
                 })

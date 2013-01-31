@@ -94,7 +94,10 @@ a:hover {
 
 
 textarea,
-input[type=text] {
+input[type=text],
+input[type=url],
+input[type=tel],
+input[type=email] {
     background-color: white;
     border:1px solid #ccc;
     padding:10px;
@@ -1287,4 +1290,12 @@ a.success-action {
     padding: 0px 10px;
     height:30px;
     margin: 5px;
+}
+
+.preset-label {
+    padding: 5px;
+}
+
+.preset-input input {
+    width: 100%;
 }

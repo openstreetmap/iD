@@ -2893,22 +2893,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -2981,7 +2981,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -3132,22 +3132,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -3607,22 +3607,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -3702,22 +3702,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -3792,22 +3792,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -3882,22 +3882,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -3977,22 +3977,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4063,22 +4063,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4180,22 +4180,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4270,22 +4270,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4381,22 +4381,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4498,22 +4498,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4584,22 +4584,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4683,22 +4683,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4780,22 +4780,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4866,22 +4866,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -4952,22 +4952,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -5017,22 +5017,22 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }
         ], 
@@ -5315,7 +5315,7 @@
             }, 
             {
                 "text": "Phone number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }
         ], 
@@ -5795,12 +5795,12 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -6228,7 +6228,7 @@
             }, 
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }
         ], 
@@ -10730,7 +10730,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -10764,7 +10764,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -10798,7 +10798,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -10832,7 +10832,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -10866,7 +10866,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -10900,7 +10900,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -10934,7 +10934,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -10963,7 +10963,7 @@
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }
         ], 
@@ -11785,22 +11785,22 @@
         "main": [
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "email"
             }, 
             {
@@ -11826,22 +11826,22 @@
         "main": [
             {
                 "text": "Phone Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "contact:phone"
             }, 
             {
                 "text": "Fax Number", 
-                "type": "text", 
+                "type": "tel", 
                 "key": "contact:fax"
             }, 
             {
                 "text": "Website", 
-                "type": "text", 
+                "type": "url", 
                 "key": "contact:website"
             }, 
             {
                 "text": "Email Address", 
-                "type": "text", 
+                "type": "email", 
                 "key": "contact:email"
             }, 
             {

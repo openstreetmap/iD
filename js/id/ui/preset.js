@@ -69,11 +69,11 @@ iD.ui.preset = function() {
                 .attr('class', 'preset-section-input cf');
 
            wrap.append('div')
-                .attr('class', 'col6')
+                .attr('class', 'col4 preset-label')
                 .text(d.text);
 
             input.call(wrap.append('div')
-                .attr('class', 'col6'), d);
+                .attr('class', 'col8 preset-input'), d);
         });
     }
 
