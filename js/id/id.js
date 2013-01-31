@@ -246,10 +246,10 @@ window.iD = function(container) {
 
         controller.enter(iD.modes.Browse());
 
-//        if (!localStorage.sawSplash) {
+        if (!localStorage.sawSplash) {
             iD.ui.splash();
-//            localStorage.sawSplash = true;
-//        }
+            localStorage.sawSplash = true;
+        }
     }
 
     editor.connection = function(_) {
