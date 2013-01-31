@@ -1269,6 +1269,22 @@ a.success-action {
 }
 
 .preset-section.cf,
+.inspector-preset.cf,
 .preset-section-input.cf {
     width: 100%;
+}
+
+.preset-search-input {
+    width:100%;
+}
+
+.preset-search-input input {
+    width: 100%;
+    padding: 5px;
+}
+
+.preset-search-result {
+    padding: 0px 10px;
+    height:30px;
+    margin: 5px;
 }

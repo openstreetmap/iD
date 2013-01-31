@@ -66,8 +66,7 @@ iD.ui.preset = function() {
             var wrap = s.append('div')
                 .attr('class', 'preset-section-input cf');
 
-           wrap 
-                .append('div')
+           wrap.append('div')
                 .attr('class', 'col6')
                 .text(d.text);
 

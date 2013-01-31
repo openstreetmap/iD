@@ -9,8 +9,6 @@ iD.ui.inspector = function() {
     function inspector(selection) {
         var entity = selection.datum();
 
-        var possiblePresets = presetData.match(entity);
-
         var inspector = selection.append('div')
             .attr('class','inspector content');
 
@@ -24,12 +22,18 @@ iD.ui.inspector = function() {
         var inspectorwrap = inspectorbody.append('div')
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
-        if (possiblePresets.length) {
-            var inspectorpreset = inspectorwrap.append('div')
-                .attr('class', 'inspector-preset cf')
-                .call(iD.ui.preset()
-                    .preset(possiblePresets[0]));
-        }
+        var inspectorpresetsearch = inspectorwrap.append('div')
+            .attr('class', 'inspector-preset cf')
+            .call(iD.ui.presetsearch()
+                .entity(entity)
+                .presetData(presetData)
+                .on('choose', function(preset) {
+                    inspectorpreset.call(iD.ui.preset()
+                        .preset(preset));
+                }));
+
+        var inspectorpreset = inspectorwrap.append('div')
+            .attr('class', 'inspector-preset cf');
 
 
         inspectorwrap.append('h4')
