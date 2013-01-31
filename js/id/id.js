@@ -2,17 +2,22 @@ window.iD = function(container) {
     // the reported, displayed version of iD.
     var version = '0.0.0-alpha1';
 
-    var connection = iD.Connection()
-        .version(version),
-        history = iD.History(),
-        map = iD.Map()
-            .connection(connection)
-            .history(history),
-        controller = iD.Controller(map, history);
+    var context = iD.Context();
 
-    map.background.source(iD.BackgroundSource.Bing);
+    var connection = context.connection(),
+        history = context.history(),
+        map = context.map(),
+        controller = context.controller();
+
+    context.connection()
+        .version(version);
+
+    context.background()
+        .source(iD.BackgroundSource.Bing);
 
     function editor(container) {
+        context.container(container);
+
         if (!iD.supported()) {
             container.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
                       'and Internet Explorer 9 and above. Please upgrade your browser ' +
@@ -39,8 +44,14 @@ window.iD = function(container) {
         var buttons_joined = limiter.append('div')
             .attr('class', 'button-wrap joined col4');
 
+        var modes = [
+            iD.modes.Browse(context),
+            iD.modes.AddPoint(context),
+            iD.modes.AddLine(context),
+            iD.modes.AddArea(context)];
+
         var buttons = buttons_joined.selectAll('button.add-button')
-            .data([iD.modes.Browse(), iD.modes.AddPoint(), iD.modes.AddLine(), iD.modes.AddArea()])
+            .data(modes)
             .enter().append('button')
                 .attr('tabindex', -1)
                 .attr('class', function (mode) { return mode.title + ' add-button col3'; })
@@ -57,7 +68,7 @@ window.iD = function(container) {
             } else {
                 buttons.attr('disabled', 'disabled');
                 notice.message(true);
-                controller.enter(iD.modes.Browse());
+                controller.enter(iD.modes.Browse(context));
             }
         }
 
@@ -106,7 +117,7 @@ window.iD = function(container) {
 
         var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
             .attr('class', 'save col12')
-            .call(iD.ui.save().map(map).controller(controller));
+            .call(iD.ui.save(context));
 
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
@@ -227,14 +238,14 @@ window.iD = function(container) {
             .on('⌃+⇧+Z', function() { history.redo(); })
             .on('⌫', function() { d3.event.preventDefault(); });
 
-        [iD.modes.Browse(), iD.modes.AddPoint(), iD.modes.AddLine(), iD.modes.AddArea()].forEach(function(m) {
+        modes.forEach(function(m) {
             keybinding.on(m.key, function() { if (map.editable()) controller.enter(m); });
         });
 
         d3.select(document)
             .call(keybinding);
 
-        var hash = iD.behavior.Hash(controller, map);
+        var hash = iD.behavior.Hash(context);
 
         hash();
 
@@ -246,7 +257,7 @@ window.iD = function(container) {
             .on('logout.editor', connection.logout)
             .on('login.editor', connection.authenticate));
 
-        controller.enter(iD.modes.Browse());
+        controller.enter(iD.modes.Browse(context));
 
         if (!localStorage.sawSplash) {
             iD.ui.splash();

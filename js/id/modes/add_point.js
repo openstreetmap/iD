@@ -1,4 +1,4 @@
-iD.modes.AddPoint = function() {
+iD.modes.AddPoint = function(context) {
     var mode = {
         id: 'add-point',
         title: t('modes.add_point.title'),
@@ -9,18 +9,14 @@ iD.modes.AddPoint = function() {
     var behavior;
 
     mode.enter = function() {
-        var map = mode.map,
-            history = mode.history,
-            controller = mode.controller;
-
         function add(loc) {
             var node = iD.Node({loc: loc});
 
-            history.perform(
+            context.perform(
                 iD.actions.AddEntity(node),
                 t('operations.add.annotation.point'));
 
-            controller.enter(iD.modes.Select([node.id], true));
+            context.enter(iD.modes.Select(context, [node.id], true));
         }
 
         function addWay(way, loc, index) {
@@ -32,10 +28,10 @@ iD.modes.AddPoint = function() {
         }
 
         function cancel() {
-            controller.enter(iD.modes.Browse());
+            context.enter(iD.modes.Browse(context));
         }
 
-        behavior = iD.behavior.Draw(map)
+        behavior = iD.behavior.Draw(context)
             .on('click', add)
             .on('clickWay', addWay)
             .on('clickNode', addNode)
@@ -43,16 +39,13 @@ iD.modes.AddPoint = function() {
             .on('cancel', cancel)
             .on('finish', cancel);
 
-        mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.add_point.tail'));
+        context.install(behavior);
+        context.tail(t('modes.add_point.tail'));
     };
 
     mode.exit = function() {
-        var map = mode.map,
-            surface = map.surface;
-
-        map.tail(false);
-        behavior.off(surface);
+        context.tail(false);
+        context.uninstall(behavior);
     };
 
     return mode;

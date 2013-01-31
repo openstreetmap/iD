@@ -1,15 +1,13 @@
-iD.operations.Move = function(selection, mode) {
-    var entityId = selection[0],
-        history = mode.map.history();
+iD.operations.Move = function(selection, context) {
+    var entityId = selection[0];
 
     var operation = function() {
-        mode.controller.enter(iD.modes.MoveWay(entityId));
+        context.enter(iD.modes.MoveWay(context, entityId));
     };
 
     operation.available = function() {
-        var graph = history.graph();
         return selection.length === 1 &&
-            graph.entity(entityId).type === 'way';
+            context.entity(entityId).type === 'way';
     };
 
     operation.enabled = function() {

@@ -1,18 +1,15 @@
-iD.operations.Reverse = function(selection, mode) {
-    var entityId = selection[0],
-        history = mode.map.history();
+iD.operations.Reverse = function(selection, context) {
+    var entityId = selection[0];
 
     var operation = function() {
-        history.perform(
+        context.perform(
             iD.actions.ReverseWay(entityId),
             t('operations.reverse.annotation'));
     };
 
     operation.available = function() {
-        var graph = history.graph(),
-            entity = graph.entity(entityId);
         return selection.length === 1 &&
-            entity.geometry(graph) === 'line';
+            context.geometry(entityId) === 'line';
     };
 
     operation.enabled = function() {

@@ -1,22 +1,18 @@
-iD.operations.Unjoin = function(selection, mode) {
+iD.operations.Unjoin = function(selection, context) {
     var entityId = selection[0],
-        history = mode.map.history(),
         action = iD.actions.UnjoinNode(entityId);
 
     var operation = function() {
-        history.perform(action, 'Unjoined lines.');
+        context.perform(action, 'Unjoined lines.');
     };
 
     operation.available = function() {
-        var graph = history.graph(),
-            entity = graph.entity(entityId);
         return selection.length === 1 &&
-            entity.geometry(graph) === 'vertex';
+            context.geometry(entityId) === 'vertex';
     };
 
     operation.enabled = function() {
-        var graph = history.graph();
-        return action.enabled(graph);
+        return action.enabled(context.graph());
     };
 
     operation.id = "unjoin";

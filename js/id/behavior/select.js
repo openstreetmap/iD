@@ -1,12 +1,10 @@
-iD.behavior.Select = function(mode) {
-    var controller = mode.controller;
-
+iD.behavior.Select = function(context) {
     function click() {
         var datum = d3.select(d3.event.target).datum();
         if (datum instanceof iD.Entity) {
-            controller.enter(iD.modes.Select([datum.id]));
+            context.enter(iD.modes.Select(context, [datum.id]));
         } else {
-            controller.enter(iD.modes.Browse());
+            context.enter(iD.modes.Browse(context));
         }
     }
 

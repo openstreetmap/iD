@@ -1,7 +1,8 @@
-iD.behavior.Draw = function(map) {
+iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay', 'clickNode', 'clickMidpoint', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
-        down, surface, hover;
+        hover = iD.behavior.Hover(),
+        down;
 
     function datum() {
         if (d3.event.altKey) {
@@ -28,7 +29,7 @@ iD.behavior.Draw = function(map) {
     function click() {
         var d = datum();
         if (d.type === 'way') {
-            var choice = iD.geo.chooseIndex(d, d3.mouse(map.surface.node()), map);
+            var choice = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context.map());
             event.clickWay(d, choice.loc, choice.index);
 
         } else if (d.type === 'node') {
@@ -38,19 +39,19 @@ iD.behavior.Draw = function(map) {
             event.clickMidpoint(d);
 
         } else {
-            event.click(map.mouseCoordinates());
+            event.click(context.map().mouseCoordinates());
         }
     }
 
     function keydown() {
         if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            surface.call(hover.off);
+            context.uninstall(hover);
         }
     }
 
     function keyup() {
         if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            surface.call(hover);
+            context.install(hover);
         }
     }
 
@@ -70,8 +71,7 @@ iD.behavior.Draw = function(map) {
     }
 
     function draw(selection) {
-        surface = selection;
-        hover = iD.behavior.Hover();
+        context.install(hover);
 
         keybinding
             .on('⌫', backspace)
@@ -83,8 +83,7 @@ iD.behavior.Draw = function(map) {
             .on('mousedown.draw', mousedown)
             .on('mouseup.draw', mouseup)
             .on('mousemove.draw', mousemove)
-            .on('click.draw', click)
-            .call(hover);
+            .on('click.draw', click);
 
         d3.select(document)
             .call(keybinding)
@@ -95,12 +94,13 @@ iD.behavior.Draw = function(map) {
     }
 
     draw.off = function(selection) {
+        context.uninstall(hover);
+
         selection
             .on('mousedown.draw', null)
             .on('mouseup.draw', null)
             .on('mousemove.draw', null)
-            .on('click.draw', null)
-            .call(hover.off);
+            .on('click.draw', null);
 
         d3.select(document)
             .call(keybinding.off)

@@ -1,4 +1,4 @@
-iD.modes.MoveWay = function(wayId) {
+iD.modes.MoveWay = function(context, wayId) {
     var mode = {
         id: 'move-way'
     };
@@ -6,55 +6,53 @@ iD.modes.MoveWay = function(wayId) {
     var keybinding = d3.keybinding('move-way');
 
     mode.enter = function() {
-        var map = mode.map,
-            history = mode.history,
-            graph = history.graph(),
-            selection = map.surface,
-            controller = mode.controller,
-            projection = map.projection,
-            way = graph.entity(wayId),
-            origin = d3.mouse(selection.node()),
-            annotation = t('operations.move.annotation.' + way.geometry(graph));
+        var origin = point(),
+            annotation = t('operations.move.annotation.' + context.geometry(wayId));
 
         // If intiated via keyboard
         if (!origin[0] && !origin[1]) origin = null;
 
-        history.perform(
+        context.perform(
             iD.actions.Noop(),
             annotation);
 
+        function point() {
+            return d3.mouse(context.surface().node());
+        }
+
         function move() {
-            var p = d3.mouse(selection.node()),
+            var p = point(),
                 delta = origin ?
                     [p[0] - origin[0], p[1] - origin[1]] :
                     [0, 0];
 
             origin = p;
 
-            history.replace(
-                iD.actions.MoveWay(wayId, delta, projection),
+            context.replace(
+                iD.actions.MoveWay(wayId, delta, context.projection),
                 annotation);
         }
 
         function finish() {
             d3.event.stopPropagation();
-            controller.enter(iD.modes.Select([way.id], true));
+            context.enter(iD.modes.Select(context, [wayId], true));
         }
 
         function cancel() {
-            history.pop();
-            controller.enter(iD.modes.Select([way.id], true));
+            context.pop();
+            context.enter(iD.modes.Select(context, [wayId], true));
         }
 
         function undone() {
-            controller.enter(iD.modes.Browse());
+            context.enter(iD.modes.Browse(context));
         }
 
-        selection
+        context.selection()
             .on('mousemove.move-way', move)
             .on('click.move-way', finish);
 
-        history.on('undone.move-way', undone);
+        context.history()
+            .on('undone.move-way', undone);
 
         keybinding
             .on('⎋', cancel)
@@ -65,15 +63,12 @@ iD.modes.MoveWay = function(wayId) {
     };
 
     mode.exit = function() {
-        var map = mode.map,
-            history = mode.history,
-            selection = map.surface;
-
-        selection
+        context.selection()
             .on('mousemove.move-way', null)
             .on('click.move-way', null);
 
-        history.on('undone.move-way', null);
+        context.history()
+            .on('undone.move-way', null);
 
         keybinding.off();
     };

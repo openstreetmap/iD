@@ -1,19 +1,18 @@
 describe("iD.behavior.Hash", function () {
-    var hash, map, controller;
+    mocha.globals('__onhashchange.hash');
+
+    var hash, context;
 
     beforeEach(function () {
-        map = {
-            on:     function () { return map; },
-            zoom:   function () { return arguments.length ? map : 0; },
-            center: function () { return arguments.length ? map : [0, 0]; },
-            centerZoom: function () { return arguments.length ? map : [0, 0]; }
-        };
+        context = iD.Context();
 
-        controller = {
-            on: function () { return controller; }
-        };
+        // Neuter connection
+        context.connection().loadTiles = function () {};
 
-        hash = iD.behavior.Hash(controller, map);
+        hash = iD.behavior.Hash(context);
+
+        d3.select(document.createElement('div'))
+            .call(context.map());
     });
 
     afterEach(function () {
@@ -22,44 +21,41 @@ describe("iD.behavior.Hash", function () {
 
     it("sets hadHash if location.hash is present", function () {
         location.hash = "map=20.00/38.87952/-77.02405";
+
         hash();
+
         expect(hash.hadHash).to.be.true;
     });
 
     it("centerZooms map to requested level", function () {
         location.hash = "map=20.00/38.87952/-77.02405";
-        sinon.spy(map, 'centerZoom');
+
         hash();
-        expect(map.centerZoom).to.have.been.calledWith([-77.02405,38.87952], 20.0);
+
+        expect(context.map().center()[0]).to.be.closeTo(-77.02405, 0.1);
+        expect(context.map().center()[1]).to.be.closeTo(38.87952, 0.1);
+        expect(context.map().zoom()).to.equal(20.0);
     });
 
-    describe("on window hashchange events", function () {
-        beforeEach(function () {
-            hash();
+    it("centerZooms map at requested coordinates on hash change", function (done) {
+        hash();
+
+        d3.select(window).one('hashchange', function () {
+            expect(context.map().center()[0]).to.be.closeTo(-77.02405, 0.1);
+            expect(context.map().center()[1]).to.be.closeTo(38.87952, 0.1);
+            expect(context.map().zoom()).to.equal(20.0);
+            done();
         });
 
-        function onhashchange(fn) {
-            d3.select(window).one("hashchange", fn);
-        }
-
-        it("centerZooms map at requested coordinates", function (done) {
-            onhashchange(function () {
-                expect(map.centerZoom).to.have.been.calledWith([-77.02405,38.87952], 20.0);
-                done();
-            });
-
-            sinon.spy(map, 'centerZoom');
-            location.hash = "#map=20.00/38.87952/-77.02405";
-        });
+        location.hash = "#map=20.00/38.87952/-77.02405";
     });
 
-    describe("on map move events", function () {
-        it("stores the current zoom and coordinates in location.hash", function () {
-            sinon.stub(map, 'on')
-                .withArgs("move.hash", sinon.match.instanceOf(Function))
-                .yields();
-            hash();
-            expect(location.hash).to.equal("#map=0.00/0/0");
-        });
+    it("stores the current zoom and coordinates in location.hash on map move events", function () {
+        hash();
+
+        context.map().center([38.9, -77.0]);
+        context.map().zoom(2.0);
+
+        expect(location.hash).to.equal("#map=2.00/-77.0/38.9");
     });
 });

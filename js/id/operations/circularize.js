@@ -1,25 +1,19 @@
-iD.operations.Circularize = function(selection, mode) {
+iD.operations.Circularize = function(selection, context) {
     var entityId = selection[0],
-        history = mode.map.history(),
-        action = iD.actions.Circularize(entityId, mode.map);
+        action = iD.actions.Circularize(entityId, context.map());
 
     var operation = function() {
-        var graph = history.graph(),
-            entity = graph.entity(entityId),
-            annotation = t('operations.circularize.annotation.' + entity.geometry(graph));
-
-        history.perform(action, annotation);
+        var annotation = t('operations.circularize.annotation.' + context.geometry(entityId));
+        context.perform(action, annotation);
     };
 
     operation.available = function() {
-        var graph = history.graph(),
-            entity = graph.entity(entityId);
-        return selection.length === 1 && entity.type === 'way';
+        return selection.length === 1 &&
+            context.entity(entityId).type === 'way';
     };
 
     operation.enabled = function() {
-        var graph = history.graph();
-        return action.enabled(graph);
+        return action.enabled(context.graph());
     };
 
     operation.id = "circularize";

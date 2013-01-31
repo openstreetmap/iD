@@ -1,11 +1,8 @@
-iD.ui.save = function() {
-
-    var map, controller;
-
-    function save(selection) {
-
-        var history = map.history(),
-            connection = map.connection(),
+iD.ui.save = function(context) {
+    return function (selection) {
+        var map = context.map(),
+            history = context.history(),
+            connection = context.connection(),
             tooltip = bootstrap.tooltip()
                 .placement('bottom');
 
@@ -60,7 +57,7 @@ iD.ui.save = function() {
                             .on('fix', function(d) {
                                 map.extent(d.entity.extent(map.history().graph()));
                                 if (map.zoom() > 19) map.zoom(19);
-                                controller.enter(iD.modes.Select([d.entity.id]));
+                                context.enter(iD.modes.Select(context, [d.entity.id]));
                                 modal.remove();
                             })
                             .on('save', commit));
@@ -88,19 +85,5 @@ iD.ui.save = function() {
                 selection.call(tooltip.hide);
             }
         });
-    }
-
-    save.map = function(_) {
-        if (!arguments.length) return map;
-        map = _;
-        return save;
     };
-
-    save.controller = function(_) {
-        if (!arguments.length) return controller;
-        controller = _;
-        return save;
-    };
-
-    return save;
 };

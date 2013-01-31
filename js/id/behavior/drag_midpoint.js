@@ -1,16 +1,13 @@
-iD.behavior.DragMidpoint = function(mode) {
-    var history = mode.history,
-        projection = mode.map.projection;
-
+iD.behavior.DragMidpoint = function(context) {
     var behavior = iD.behavior.drag()
         .delegate(".midpoint")
         .origin(function(d) {
-            return projection(d.loc);
+            return context.projection(d.loc);
         })
         .on('start', function(d) {
             var node = iD.Node();
 
-            history.perform(iD.actions.AddMidpoint(d, node));
+            context.perform(iD.actions.AddMidpoint(d, node));
 
             var vertex = d3.selectAll('.vertex')
                 .filter(function(data) { return data.id === node.id; });
@@ -19,11 +16,11 @@ iD.behavior.DragMidpoint = function(mode) {
         })
         .on('move', function(d) {
             d3.event.sourceEvent.stopPropagation();
-            history.replace(
-                iD.actions.MoveNode(d.id, projection.invert(d3.event.point)));
+            context.replace(
+                iD.actions.MoveNode(d.id, context.projection.invert(d3.event.point)));
         })
         .on('end', function() {
-            history.replace(
+            context.replace(
                 iD.actions.Noop(),
                 t('operations.add.annotation.vertex'));
         });

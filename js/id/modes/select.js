@@ -1,4 +1,4 @@
-iD.modes.Select = function(selection, initial) {
+iD.modes.Select = function(context, selection, initial) {
     var mode = {
         id: 'select',
         button: 'browse'
@@ -6,12 +6,16 @@ iD.modes.Select = function(selection, initial) {
 
     var inspector = iD.ui.inspector().initial(!!initial),
         keybinding = d3.keybinding('select'),
-        behaviors,
+        behaviors = [
+            iD.behavior.Hover(),
+            iD.behavior.Select(context),
+            iD.behavior.DragNode(context),
+            iD.behavior.DragMidpoint(context)],
         radialMenu;
 
     function changeTags(d, tags) {
         if (!_.isEqual(singular().tags, tags)) {
-            mode.history.perform(
+            context.perform(
                 iD.actions.ChangeTags(d.id, tags),
                 t('operations.change_tags.annotation'));
         }
@@ -19,7 +23,7 @@ iD.modes.Select = function(selection, initial) {
 
     function singular() {
         if (selection.length === 1) {
-            return mode.map.history().graph().entity(selection[0]);
+            return context.entity(selection[0]);
         }
     }
 
@@ -28,24 +32,14 @@ iD.modes.Select = function(selection, initial) {
     };
 
     mode.enter = function() {
-        var map = mode.map,
-            history = map.history(),
-            graph = history.graph(),
-            surface = map.surface,
-            entity = singular();
-
-        behaviors = [
-            iD.behavior.Hover(),
-            iD.behavior.Select(mode),
-            iD.behavior.DragNode(mode),
-            iD.behavior.DragMidpoint(mode)];
+        var entity = singular();
 
         behaviors.forEach(function(behavior) {
-            behavior(surface);
+            context.install(behavior);
         });
 
         var operations = d3.values(iD.operations)
-            .map(function (o) { return o(selection, mode); })
+            .map(function (o) { return o(selection, context); })
             .filter(function (o) { return o.available(); });
 
         operations.forEach(function(operation) {
@@ -62,9 +56,10 @@ iD.modes.Select = function(selection, initial) {
         }), true));
 
         if (entity) {
-            inspector.graph(graph);
+            inspector.graph(context.graph());
 
-            d3.select('.inspector-wrap')
+            context.container()
+                .select('.inspector-wrap')
                 .style('display', 'block')
                 .style('opacity', 1)
                 .datum(entity)
@@ -73,38 +68,38 @@ iD.modes.Select = function(selection, initial) {
             if (d3.event) {
                 // Pan the map if the clicked feature intersects with the position
                 // of the inspector
-                var inspector_size = d3.select('.inspector-wrap').size(),
-                    map_size = mode.map.size(),
+                var inspector_size = context.container().select('.inspector-wrap').size(),
+                    map_size = context.map().size(),
                     offset = 50,
                     shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
                     center = (map_size[0] / 2) + shift_left + offset;
 
                 if (shift_left > 0 && inspector_size[1] > d3.event.y) {
-                    mode.map.centerEase(mode.map.projection.invert([center, map_size[1]/2]));
+                    context.map().centerEase(context.projection.invert([center, map_size[1]/2]));
                 }
             }
 
             inspector
                 .on('changeTags', changeTags)
-                .on('close', function() { mode.controller.enter(iD.modes.Browse()); });
+                .on('close', function() { context.enter(iD.modes.Browse(context)); });
 
-            history.on('change.select', function() {
+            context.history().on('change.select', function() {
                 // Exit mode if selected entity gets undone
                 var oldEntity = entity,
-                    newEntity = history.graph().entity(selection[0]);
+                    newEntity = context.entity(selection[0]);
 
                 if (!newEntity) {
-                    mode.controller.enter(iD.modes.Browse());
+                    context.enter(iD.modes.Browse(context));
                 } else if (!_.isEqual(oldEntity.tags, newEntity.tags)) {
                     inspector.tags(newEntity.tags);
                 }
 
-                surface.call(radialMenu.close);
+                context.surface().call(radialMenu.close);
             });
         }
 
-        map.on('move.select', function() {
-            surface.call(radialMenu.close);
+        context.map().on('move.select', function() {
+            context.surface().call(radialMenu.close);
         });
 
         function dblclick() {
@@ -113,10 +108,10 @@ iD.modes.Select = function(selection, initial) {
 
             if (datum instanceof iD.Way && !target.classed('fill')) {
                 var choice = iD.geo.chooseIndex(datum,
-                        d3.mouse(mode.map.surface.node()), mode.map),
+                        d3.mouse(context.surface().node()), context.map()),
                     node = iD.Node({ loc: choice.loc });
 
-                history.perform(
+                context.perform(
                     iD.actions.AddEntity(node),
                     iD.actions.AddVertex(datum.id, node.id, choice.index),
                     t('operations.add.annotation.vertex'));
@@ -129,7 +124,8 @@ iD.modes.Select = function(selection, initial) {
         d3.select(document)
             .call(keybinding);
 
-        surface.on('dblclick.select', dblclick)
+        context.surface()
+            .on('dblclick.select', dblclick)
             .selectAll("*")
             .filter(function (d) { return d && selection.indexOf(d.id) >= 0; })
             .classed('selected', true);
@@ -137,25 +133,23 @@ iD.modes.Select = function(selection, initial) {
         radialMenu = iD.ui.RadialMenu(operations);
 
         if (d3.event && !initial) {
-            var loc = map.mouseCoordinates();
+            var loc = context.map().mouseCoordinates();
 
             if (entity && entity.type === 'node') {
                 loc = entity.loc;
             }
 
-            surface.call(radialMenu, map.projection(loc));
+            context.surface().call(radialMenu, context.projection(loc));
         }
     };
 
     mode.exit = function () {
-        var surface = mode.map.surface,
-            history = mode.history;
-
         if (singular()) {
             changeTags(singular(), inspector.tags());
         }
 
-        d3.select('.inspector-wrap')
+        context.container()
+            .select('.inspector-wrap')
             .style('display', 'none')
             .html('');
 
@@ -164,7 +158,7 @@ iD.modes.Select = function(selection, initial) {
         d3.selectAll('div.typeahead').remove();
 
         behaviors.forEach(function(behavior) {
-            behavior.off(surface);
+            context.uninstall(behavior);
         });
 
         var q = iD.util.stringQs(location.hash.substring(1));
@@ -172,13 +166,14 @@ iD.modes.Select = function(selection, initial) {
 
         keybinding.off();
 
-        history.on('change.select', null);
+        context.history()
+            .on('change.select', null);
 
-        surface.on('dblclick.select', null)
+        context.surface()
+            .call(radialMenu.close)
+            .on('dblclick.select', null)
             .selectAll(".selected")
             .classed('selected', false);
-
-        surface.call(radialMenu.close);
     };
 
     return mode;

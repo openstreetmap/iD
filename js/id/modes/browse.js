@@ -1,4 +1,4 @@
-iD.modes.Browse = function() {
+iD.modes.Browse = function(context) {
     var mode = {
         button: 'browse',
         id: 'browse',
@@ -7,27 +7,21 @@ iD.modes.Browse = function() {
         key: t('modes.browse.key')
     };
 
-    var behaviors;
+    var behaviors = [
+        iD.behavior.Hover(),
+        iD.behavior.Select(context),
+        iD.behavior.DragNode(context),
+        iD.behavior.DragMidpoint(context)];
 
     mode.enter = function() {
-        var surface = mode.map.surface;
-
-        behaviors = [
-            iD.behavior.Hover(),
-            iD.behavior.Select(mode),
-            iD.behavior.DragNode(mode),
-            iD.behavior.DragMidpoint(mode)];
-
         behaviors.forEach(function(behavior) {
-            behavior(surface);
+            context.install(behavior);
         });
     };
 
     mode.exit = function() {
-        var surface = mode.map.surface;
-
         behaviors.forEach(function(behavior) {
-            behavior.off(surface);
+            context.uninstall(behavior);
         });
     };
 
