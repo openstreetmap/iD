@@ -86,7 +86,7 @@ iD.modes.Select = function(selection, initial) {
 
             inspector
                 .on('changeTags', changeTags)
-                .on('close', function() { mode.controller.exit(); });
+                .on('close', function() { mode.controller.enter(iD.modes.Browse()); });
 
             history.on('change.select', function() {
                 // Exit mode if selected entity gets undone

@@ -32,7 +32,7 @@ iD.modes.AddPoint = function() {
         }
 
         function cancel() {
-            controller.exit();
+            controller.enter(iD.modes.Browse());
         }
 
         behavior = iD.behavior.Draw(map)
