@@ -112,7 +112,7 @@ iD.Map = function() {
                 .call(areas, graph, all, filter)
                 .call(multipolygons, graph, all, filter)
                 .call(midpoints, graph, all, filter)
-                .call(labels, graph, all, filter, dimensions);
+                .call(labels, graph, all, filter, dimensions, !difference);
         }
         dispatch.drawn(map);
     }

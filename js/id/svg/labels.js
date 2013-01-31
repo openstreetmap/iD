@@ -156,7 +156,7 @@ iD.svg.Labels = function(projection) {
         for (var i = 0; i < nodes.length - 1; i++) {
             var current = segmentLength(i);
             var portion;
-            if (!start && sofar + current > from) {
+            if (!start && sofar + current >= from) {
                 portion = (from - sofar) / current;
                 start = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
@@ -164,7 +164,7 @@ iD.svg.Labels = function(projection) {
                 ];
                 i0 = i + 1;
             }
-            if (!end && sofar + current > to) {
+            if (!end && sofar + current >= to) {
                 portion = (to - sofar) / current;
                 end = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
@@ -183,13 +183,25 @@ iD.svg.Labels = function(projection) {
     }
 
 
-    return function drawLabels(surface, graph, entities, filter, dimensions) {
+    var rtree = new RTree(),
+        rectangles = {};
 
-        var rtree = new RTree();
+    return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
+
+
         var hidePoints = !d3.select('.node.point').node();
 
         var labelable = [], i, k, entity;
         for (i = 0; i < label_stack.length; i++) labelable.push([]);
+
+        if (fullRedraw) {
+            rtree = new RTree();
+            rectangles = {};
+        } else {
+            for (i = 0; i < entities.length; i++) {
+                rtree.remove(rectangles[entities[i].id], entities[i].id);
+            }
+        }
 
         // Split entities into groups specified by label_stack
         for (i = 0; i < entities.length; i++) {
@@ -252,7 +264,7 @@ iD.svg.Labels = function(projection) {
                     textAnchor: offset[2]
                 };
             var rect = new RTree.Rectangle(p.x - m, p.y - m, width + 2*m, height + 2*m);
-            if (tryInsert(rect)) return p;
+            if (tryInsert(rect, entity.id)) return p;
         }
 
 
@@ -275,7 +287,7 @@ iD.svg.Labels = function(projection) {
                     Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 30
                 );
                 if (rev) sub = sub.reverse();
-                if (tryInsert(rect)) return {
+                if (tryInsert(rect, entity.id)) return {
                     'font-size': height + 2,
                     lineString: lineString(sub),
                     startOffset: offset + '%'
@@ -298,16 +310,19 @@ iD.svg.Labels = function(projection) {
                 height: height
             };
             var rect = new RTree.Rectangle(p.x - width/2, p.y, width, height);
-            if (tryInsert(rect)) return p;
+            if (tryInsert(rect, entity.id)) return p;
 
         }
 
-        function tryInsert(rect) {
+        function tryInsert(rect, id) {
             // Check that label is visible
             if (rect.x1 < 0 || rect.y1 < 0 || rect.x2 > dimensions[0] ||
                 rect.y2 > dimensions[1]) return false;
             var v = rtree.search(rect, true).length === 0;
-            if (v) rtree.insert(rect);
+            if (v) {
+                rtree.insert(rect, id);
+                rectangles[id] = rect;
+            }
             return v;
         }
 
