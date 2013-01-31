@@ -18,7 +18,6 @@ iD.ui.presetsearch = function() {
         }
 
         function find(value) {
-            value = value;
             return _.find(viable, function(v) {
                 return v.name == value;
             });

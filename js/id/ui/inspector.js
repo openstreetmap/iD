@@ -32,9 +32,20 @@ iD.ui.inspector = function() {
                         .preset(preset));
                 }));
 
+        var inspectorpresetfavs = inspectorwrap.append('div')
+            .attr('class', 'inspector-preset cf')
+            .call(iD.ui.presetfavs()
+                .presetData(presetData)
+                .on('choose', function(preset) {
+                    inspectorpreset.call(iD.ui.preset()
+                        .preset(preset));
+                    inspectorpresetsearch
+                        .select('input')
+                        .property('value', preset.name);
+                }));
+
         var inspectorpreset = inspectorwrap.append('div')
             .attr('class', 'inspector-preset cf');
-
 
         inspectorwrap.append('h4')
             .text(t('edit_tags'));

@@ -8,9 +8,9 @@ iD.presetData = function() {
         return presets;
     };
 
-    presets.search = function(str) {
-        var edits = _.sortBydata.map(function(d) {
-            return iD.util.editDistance(d.title, str);
+    presets.favs = function() {
+        return data.filter(function(d) {
+            return d.favorite;
         });
     };
 

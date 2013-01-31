@@ -1296,6 +1296,12 @@ a.success-action {
     padding: 5px;
 }
 
+.preset-fav button.fav {
+    height: 30px;
+    margin: 5px;
+    padding: 0 10px;
+}
+
 .preset-input input {
     width: 100%;
 }
