@@ -50,7 +50,8 @@ iD.ui.inspector = function() {
         inspectorwrap.append('h4')
             .text(t('edit_tags'));
 
-        tagList = inspectorwrap.append('ul');
+        tagList = inspectorwrap.append('ul')
+            .attr('class', 'tag-list');
 
         var newTag = inspectorwrap.append('button')
                 .attr('class', 'add-tag');

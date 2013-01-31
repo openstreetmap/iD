@@ -43,14 +43,14 @@ describe("iD.ui.inspector", function () {
         element.remove();
         entity = entity.update({tags: {}});
         render();
-        expect(element.selectAll("input.value").property('value')).to.be.empty;
-        expect(element.selectAll("input.key").property('value')).to.be.empty;
+        expect(element.select('.tag-list').selectAll("input.value").property('value')).to.be.empty;
+        expect(element.select('.tag-list').selectAll("input.key").property('value')).to.be.empty;
     });
 
     it("adds tags when clicking the add button", function () {
         element.selectAll("button.add-tag").trigger('click');
-        expect(element.selectAll("input")[0][2].value).to.be.empty;
-        expect(element.selectAll("input")[0][3].value).to.be.empty;
+        expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
+        expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
     });
 
     it("removes tags when clicking the remove button", function () {
