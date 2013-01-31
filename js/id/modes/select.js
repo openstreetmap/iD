@@ -13,7 +13,7 @@ iD.modes.Select = function(entity, initial) {
     function changeTags(d, tags) {
         if (!_.isEqual(entity.tags, tags)) {
             mode.history.perform(
-                iD.actions.ChangeEntityTags(d.id, tags),
+                iD.actions.ChangeTags(d.id, tags),
                 t('operations.change_tags.annotation'));
         }
     }
