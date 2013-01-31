@@ -20,7 +20,7 @@ iD.ui.inspector = function() {
             .attr('class', 'icon big icon-pre-text big-' + entity.geometry(graph));
         var name = h2.append('input')
             .attr('placeholder', 'name')
-            .property('value', function(d) {
+            .property('value', function() {
                 return entity.tags.name || '';
             })
             .on('keyup', function() {
@@ -29,7 +29,8 @@ iD.ui.inspector = function() {
                 inspector.tags(tags);
                 event.change();
             });
-        event.on('change', function() {
+
+        event.on('change.name', function() {
             var tags = inspector.tags();
             name.property('value', tags.name);
         });
@@ -40,14 +41,26 @@ iD.ui.inspector = function() {
         var inspectorwrap = inspectorbody.append('div')
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
+        var presetUI = iD.ui.preset()
+            .on('change', function(tags) {
+                inspector.tags(_.extend(inspector.tags(), tags));
+                event.change();
+            });
+
+        event.on('change.preset', function() {
+            var tags = inspector.tags();
+            presetUI.change(tags);
+        });
+
         var inspectorpresetsearch = inspectorwrap.append('div')
             .attr('class', 'inspector-preset cf')
             .call(iD.ui.presetsearch()
                 .entity(entity)
                 .presetData(presetData)
                 .on('choose', function(preset) {
-                    inspectorpreset.call(iD.ui.preset()
-                        .preset(preset));
+                    inspectorpreset.call(presetUI
+                        .preset(preset)
+                        .change(inspector.tags()));
                 }));
 
         var inspectorpresetfavs = inspectorwrap.append('div')
@@ -55,8 +68,9 @@ iD.ui.inspector = function() {
             .call(iD.ui.presetfavs()
                 .presetData(presetData)
                 .on('choose', function(preset) {
-                    inspectorpreset.call(iD.ui.preset()
-                        .preset(preset));
+                    inspectorpreset.call(presetUI
+                        .preset(preset)
+                        .change(inspector.tags()));
                     inspectorpresetsearch
                         .select('input')
                         .property('value', preset.name);
