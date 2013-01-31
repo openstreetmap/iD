@@ -2,18 +2,36 @@ iD.svg.Labels = function(projection) {
 
     // Replace with dict and iterate over entities tags instead?
     var label_stack = [
+        ['line', 'aeroway'],
         ['line', 'highway'],
-        ['area', 'building', 'yes'],
-        ['area', 'leisure', 'park'],
+        ['line', 'railway'],
+        ['line', 'waterway'],
+        ['area', 'aeroway'],
+        ['area', 'amenity'],
+        ['area', 'building'],
+        ['area', 'historic'],
+        ['area', 'leisure'],
+        ['area', 'man_made'],
         ['area', 'natural'],
+        ['area', 'shop'],
+        ['area', 'tourism'],
+        ['point', 'aeroway'],
         ['point', 'amenity'],
-        ['point', 'shop']
+        ['point', 'building'],
+        ['point', 'historic'],
+        ['point', 'leisure'],
+        ['point', 'man_made'],
+        ['point', 'natural'],
+        ['point', 'shop'],
+        ['point', 'tourism'],
+        ['line', 'name'],
+        ['area', 'name'],
+        ['point', 'name']
     ];
 
     var default_size = 12;
     var font_sizes = label_stack.map(function(d) {
-        var style = iD.util.getStyle(
-            'text.' + d[0] + '.tag-' + d.slice(1).join('-'));
+        var style = iD.util.getStyle('text.' + d[0] + '.tag-' + d[1]);
         var m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
         if (!m) return default_size;
         return parseInt(m[1], 10);
@@ -210,7 +228,7 @@ iD.svg.Labels = function(projection) {
             if (hidePoints && entity.geometry(graph) === 'point') continue;
             for (k = 0; k < label_stack.length; k ++) {
                 if (entity.geometry(graph) === label_stack[k][0] &&
-                    entity.tags[label_stack[k][1]] && !entity.tags[label_stack[k][2]]) {
+                    entity.tags[label_stack[k][1]]) {
                     labelable[k].push(entity);
                     break;
                 }
