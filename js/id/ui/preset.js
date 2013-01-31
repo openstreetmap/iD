@@ -54,6 +54,8 @@ iD.ui.preset = function() {
     }
 
     function presets(selection) {
+        selection.html('');
+
         var sections = selection.selectAll('div.preset-section')
             .data(preset.main)
             .enter()

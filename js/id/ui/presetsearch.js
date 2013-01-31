@@ -9,41 +9,34 @@ iD.ui.presetsearch = function() {
             value = value.toLowerCase();
             return viable.filter(function(v) {
                 return v.name.toLowerCase().indexOf(value) !== -1;
+            }).map(function(v) {
+                return {
+                    title: v.name,
+                    value: v.name
+                };
             });
         }
 
-        function showResults() {
-            var values = filter(this.value).slice(0, 10);
-
-            var res = search_output.selectAll('button.preset-search-result')
-                .data(values, function(d) { return d.name; });
-
-            res.exit().remove();
-
-            res.enter()
-                .append('button')
-                .attr('class', 'preset-search-result')
-                .text(function(d) {
-                    return d.name;
-                })
-                .on('click', function(d) {
-                    search_output
-                        .selectAll('button.preset-search-result')
-                        .remove();
-                    event.choose(d);
-                });
+        function find(value) {
+            value = value;
+            return _.find(viable, function(v) {
+                return v.name == value;
+            });
         }
 
-        selection.append('div')
+        var preset_search_input = selection.append('div')
             .attr('class', 'preset-search-input')
             .append('h3')
             .append('input')
             .attr('placeholder', 'preset search')
-            .on('keyup', showResults)
-            .on('change', showResults);
-
-        var search_output = selection.append('div')
-            .attr('class', 'preset-search-output');
+            .call(d3.typeahead()
+                .autohighlight(true)
+                .data(function(_, callback) {
+                    callback(filter(preset_search_input.property('value')));
+                })
+                .on('accept', function() {
+                    event.choose(find(preset_search_input.property('value')));
+                }));
     }
 
     search.presetData = function(_) {
