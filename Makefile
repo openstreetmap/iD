@@ -23,6 +23,7 @@ all: \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/ohauth.js \
+	js/lib/rtree.js \
 	js/lib/sha.js \
 	js/id/start.js \
 	js/id/id.js \
