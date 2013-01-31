@@ -14,18 +14,12 @@ iD.modes.Browse = function() {
 
         behaviors = [
             iD.behavior.Hover(),
+            iD.behavior.Select(mode),
             iD.behavior.DragNode(mode),
             iD.behavior.DragMidpoint(mode)];
 
         behaviors.forEach(function(behavior) {
             behavior(surface);
-        });
-
-        surface.on('click.browse', function () {
-            var datum = d3.select(d3.event.target).datum();
-            if (datum instanceof iD.Entity) {
-                mode.controller.enter(iD.modes.Select([datum.id]));
-            }
         });
     };
 
@@ -35,8 +29,6 @@ iD.modes.Browse = function() {
         behaviors.forEach(function(behavior) {
             behavior.off(surface);
         });
-
-        surface.on('click.browse', null);
     };
 
     return mode;

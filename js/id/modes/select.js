@@ -36,6 +36,7 @@ iD.modes.Select = function(selection, initial) {
 
         behaviors = [
             iD.behavior.Hover(),
+            iD.behavior.Select(mode),
             iD.behavior.DragNode(mode),
             iD.behavior.DragMidpoint(mode)];
 
@@ -106,15 +107,6 @@ iD.modes.Select = function(selection, initial) {
             surface.call(radialMenu.close);
         });
 
-        function click() {
-            var datum = d3.select(d3.event.target).datum();
-            if (datum instanceof iD.Entity) {
-                mode.controller.enter(iD.modes.Select([datum.id]));
-            } else {
-                mode.controller.enter(iD.modes.Browse());
-            }
-        }
-
         function dblclick() {
             var target = d3.select(d3.event.target),
                 datum = target.datum();
@@ -134,13 +126,11 @@ iD.modes.Select = function(selection, initial) {
             }
         }
 
-        surface.on('click.select', click)
-            .on('dblclick.select', dblclick);
-
         d3.select(document)
             .call(keybinding);
 
-        surface.selectAll("*")
+        surface.on('dblclick.select', dblclick)
+            .selectAll("*")
             .filter(function (d) { return d && selection.indexOf(d.id) >= 0; })
             .classed('selected', true);
 
@@ -182,12 +172,10 @@ iD.modes.Select = function(selection, initial) {
 
         keybinding.off();
 
-        surface.on('click.select', null)
-            .on('dblclick.select', null);
-
         history.on('change.select', null);
 
-        surface.selectAll(".selected")
+        surface.on('dblclick.select', null)
+            .selectAll(".selected")
             .classed('selected', false);
 
         surface.call(radialMenu.close);
