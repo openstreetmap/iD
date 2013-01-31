@@ -235,44 +235,38 @@ iD.Graph.prototype = {
     },
 
     difference: function (graph) {
-        var result = [],
-            keys = Object.keys(this.entities),
-            entity, oldentity, id, i;
 
-        for (i = 0; i < keys.length; i++) {
-            id = keys[i];
-            entity = this.entities[id];
-            oldentity = graph.entities[id];
-            if (entity !== oldentity) {
+        function diff(a, b) {
+            var result = [],
+                keys = Object.keys(a.entities),
+                entity, oldentity, id, i;
 
-                if (entity && entity.type === 'way' &&
-                    oldentity && oldentity.type === 'way') {
-                    result = result
-                            .concat(_.difference(entity.nodes, oldentity.nodes))
-                            .concat(_.difference(oldentity.nodes, entity.nodes));
+            for (i = 0; i < keys.length; i++) {
+                id = keys[i];
+                entity = a.entities[id];
+                oldentity = b.entities[id];
+                if (entity !== oldentity) {
 
-                } else if (entity && entity.type === 'way') {
-                    result = result.concat(entity.nodes);
+                    if (entity && entity.type === 'way' &&
+                        oldentity && oldentity.type === 'way') {
+                        result = result
+                                .concat(_.difference(entity.nodes, oldentity.nodes))
+                                .concat(_.difference(oldentity.nodes, entity.nodes));
 
-                } else if (oldentity && oldentity.type === 'way') {
-                    result = result.concat(oldentity.nodes);
+                    } else if (entity && entity.type === 'way') {
+                        result = result.concat(entity.nodes);
+
+                    } else if (oldentity && oldentity.type === 'way') {
+                        result = result.concat(oldentity.nodes);
+                    }
+
+                    result.push(id);
                 }
-
-                result.push(id);
             }
+            return result;
         }
 
-        keys = Object.keys(graph.entities);
-        for (i = 0; i < keys.length; i++) {
-            id = keys[i];
-            entity = graph.entities[id];
-            if (entity && !this.entities.hasOwnProperty(id)) {
-                result.push(id);
-                if (entity.type === 'way') result = result.concat(entity.nodes);
-            }
-        }
-
-        return result.sort();
+        return _.unique(diff(this, graph).concat(diff(graph, this)).sort());
     },
 
     modified: function() {
