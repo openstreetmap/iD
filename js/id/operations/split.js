@@ -3,7 +3,7 @@ iD.operations.Split = function(entityId, mode) {
         action = iD.actions.SplitWay(entityId);
 
     var operation = function() {
-        history.perform(action, 'split a way');
+        history.perform(action, 'Split a way.');
     };
 
     operation.available = function() {
@@ -20,7 +20,7 @@ iD.operations.Split = function(entityId, mode) {
     operation.id = "split";
     operation.key = "X";
     operation.title = "Split";
-    operation.description = "Split this into two ways at this point";
+    operation.description = "Split this into two ways at this point.";
 
     return operation;
 };

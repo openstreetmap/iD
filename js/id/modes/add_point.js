@@ -21,7 +21,7 @@ iD.modes.AddPoint = function() {
 
             history.perform(
                 iD.actions.AddNode(node),
-                'added a point');
+                'Added a point.');
 
             controller.enter(iD.modes.Select(node, true));
         }

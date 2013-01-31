@@ -22,7 +22,7 @@ window.iD = function(container) {
         }
 
         function hintprefix(x, y) {
-            return '<span class="keyhint">' + x + '</span> ' + y;
+            return '<span>' + y + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + x + '</span></div>';
         }
 
         var m = container.append('div')
@@ -44,10 +44,10 @@ window.iD = function(container) {
             .enter().append('button')
                 .attr('tabindex', -1)
                 .attr('class', function (mode) { return mode.title + ' add-button col3'; })
+            .call(bootstrap.tooltip().placement('bottom').html(true))
             .attr('data-original-title', function (mode) {
                 return hintprefix(mode.key, mode.description);
             })
-            .call(bootstrap.tooltip().placement('bottom').html(true))
             .on('click.editor', function (mode) { controller.enter(mode); });
 
         function disableTooHigh() {
@@ -207,12 +207,12 @@ window.iD = function(container) {
 
             limiter.select('#undo')
                 .property('disabled', !undo)
-                .attr('data-original-title', hintprefix('⌘Z', undo))
+                .attr('data-original-title', hintprefix('⌘ + Z', undo))
                 .call(refreshTooltip);
 
             limiter.select('#redo')
                 .property('disabled', !redo)
-                .attr('data-original-title', hintprefix('⌘⇧Z', redo))
+                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo))
                 .call(refreshTooltip);
         });
 

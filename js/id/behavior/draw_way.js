@@ -4,7 +4,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
         controller = mode.controller,
         way = mode.history.graph().entity(wayId),
         finished = false,
-        annotation = 'added to a way',
+        annotation = 'Added to a way.',
         draw = iD.behavior.Draw(map);
 
     var node = iD.Node({loc: map.mouseCoordinates()}),
@@ -153,7 +153,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
     drawWay.cancel = function() {
         history.perform(
             d3.functor(baseGraph),
-            'cancelled drawing');
+            'Cancelled drawing.');
 
         finished = true;
         controller.enter(iD.modes.Browse());

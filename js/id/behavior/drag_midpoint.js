@@ -25,7 +25,7 @@ iD.behavior.DragMidpoint = function(mode) {
         .on('end', function() {
             history.replace(
                 iD.actions.Noop(),
-                'added a node to a way');
+                'Added a node to a way.');
         });
 
     return behavior;

@@ -18,7 +18,7 @@ iD.modes.MoveWay = function(wayId) {
 
         history.perform(
             iD.actions.Noop(),
-            'moved a way');
+            'Moved a way.');
 
         function move() {
             var p = d3.mouse(selection.node()),
@@ -29,7 +29,7 @@ iD.modes.MoveWay = function(wayId) {
 
             history.replace(
                 iD.actions.MoveWay(wayId, delta, projection),
-                'moved a way');
+                'Moved a way.');
         }
 
         function finish() {

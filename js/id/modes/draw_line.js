@@ -12,7 +12,7 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
             headId = (direction === 'forward') ? way.last() : way.first();
 
         behavior = iD.behavior.DrawWay(wayId, index, mode, baseGraph)
-            .annotation(way.isDegenerate() ? 'started a line' : 'continued a line');
+            .annotation(way.isDegenerate() ? 'Started a line.' : 'Continued a line.');
 
         var addNode = behavior.addNode;
 

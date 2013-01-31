@@ -1159,19 +1159,47 @@ a.success-action {
     border-width: 0 5px 5px;
 }
 
+.Browse .tooltip {
+    left: -20px !important; }
 .Browse .tooltip .tooltip-arrow {
-    left: 30px;
+    left: 60px;
+}
+
+.tooltip .keyhint-wrap {
+    padding: 5px 0 5px 0;
 }
 
 .tooltip .keyhint {
-    float: right;
-    background: #eee;
+    display: block;
+    color: #222;
     font-size: 10px;
-    padding: 0 4px;
-    background:#aaa;
-    color:#fff;
+    padding: 0px 7px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
     border-radius: 2px;
-    margin-left: 4px;
+    border: 1px solid #CCC;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    clear: both;
+}
+
+.tooltip .keyhint .keyhint-label{
+    display: inline-block;
+}
+
+.tooltip .keyhint::after {
+    content: "";
+    position: absolute;
+    border-radius: 2px;
+    height: 10px;
+    width: 100%;
+    z-index: 0;
+    bottom: -4px;
+    left: -1px;
+    border: 1px solid #CCC;
+    border-top: 0;
 }
 
 .tail {

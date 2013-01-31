@@ -3,7 +3,7 @@ iD.modes.Browse = function() {
         button: 'browse',
         id: 'browse',
         title: 'Browse',
-        description: 'Pan and zoom the map',
+        description: 'Pan and zoom the map.',
         key: 'b'
     };
 
