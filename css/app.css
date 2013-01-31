@@ -440,7 +440,7 @@ button[disabled] .label {
 .icon.geolocate  { background-position: -360px 0px;}
 .icon.warning    { background-position: -380px 0px;}
 
-.icon.close-modal { background-position: -200px -40px;}
+.icon.close-modal { background-position: -200px 0px;}
 
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
@@ -911,10 +911,14 @@ div.typeahead a:first-child {
     position: absolute;
     right:5px;
     top:5px;
-    border:0;
+    opacity: .5;
+    -webkit-transition: opacity 100ms;
+    -moz-transition: opacity 100ms;
+    transition: opacity 100ms;
 }
 .modal button.close-modal:hover {
     background-color: transparent;
+    opacity: 1;
 }
 
 .shaded {
@@ -932,12 +936,16 @@ div.typeahead a:first-child {
     padding: 20px;
 }
 
-.modal-section.header {
+.modal-section:first-child {
     border-radius: 4px 4px 0 0;
 }
 
 .modal-section:last-child {
     border-radius: 0 0 4px 4px;
+}
+
+.modal-section:only-child {
+    border-radius: 4px;
 }
 
 .modal-section .buttons {
@@ -966,10 +974,25 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
+/* Splash Modal
+------------------------------------------------------- */
+
+.modal-splash {
+    width: 33.3333%;
+    left: 33.3333%;
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto 20px auto;
+    background: url(../img/logo.png) 0 0 repeat;
+}
+
 /* Commit Modal
 ------------------------------------------------------- */
 
-.commit-modal .user-info {
+.commit-modal a.user-info {
     display: inline-block;
 }
 
@@ -1012,9 +1035,36 @@ div.typeahead a:first-child {
 
 .commit-section.modal-section:last-child { padding-bottom: 20px;}
 
-.changeset-list li {
+.commit-modal .changeset-list li {
+    position: relative;
     border-top:1px solid #ccc;
     padding:5px 10px;
+}
+
+.modal-section {
+    padding: 20px;
+}
+
+.modal-section .buttons {
+    padding-top: 10px;
+    width: 100%;
+}
+
+.modal-section img.wiki-image {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+}
+
+.modal-flash .content {
+    box-shadow: none;
+    border-radius: 4px;
+    background: #111;
+    color: #eee;
+}
+
+.modal-flash .close-modal {
+    display:none;
 }
 
 .changeset-list li span.count {
@@ -1257,5 +1307,5 @@ a.success-action {
     span.label {display: none;}
     /* override hide for save button */
     .icon.icon-pre-text { margin-right: 0px;}
-    .save .label, .apply .label { display: block;}
+    .save .label, .apply .label, .cancel .label { display: block;}
 }

@@ -39,8 +39,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4"
-     inkscape:cx="332.2911"
-     inkscape:cy="175.13176"
+     inkscape:cx="202.2911"
+     inkscape:cy="164.38176"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
      showgrid="false"
@@ -1344,10 +1344,16 @@
          style="fill:#ffffff;fill-opacity:1;display:inline" />
     </g>
     <path
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 231,4.9999992 -1,1 0,1 3,3 -3,2.9999998 0,1 1,1 1,0 3,-3 3,3 1,0 1,-1 0,-1 -3,-2.9999998 3,-3 0,-1 -1,-1 -1,0 -3,3 -3,-3 z"
+       style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 231,44.999999 -1,1 0,1 3,3 -3,3 0,1 1,1 1,0 3,-3 3,3 1,0 1,-1 0,-1 -3,-3 3,-3 0,-1 -1,-1 -1,0 -3,3 -3,-3 z"
        id="path11047"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccccccccccc" />
+    <path
+       sodipodi:nodetypes="ccccccccccccccccccccc"
+       inkscape:connector-curvature="0"
+       id="path4246"
+       d="m 231,4.999999 -1,1 0,1 3,3 -3,3 0,1 1,1 1,0 3,-3 3,3 1,0 1,-1 0,-1 -3,-3 3,-3 0,-1 -1,-1 -1,0 -3,3 -3,-3 z"
+       style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
 </svg>
