@@ -47,8 +47,7 @@ iD.svg.Midpoints = function(projection) {
 
         groups.attr('transform', iD.svg.PointTransform(projection));
 
-        groups.selectAll('circle')
-            .data(_.values(midpoints), function (d) { return d.id; });
+        groups.select('circle');
 
         groups.exit()
             .remove();
