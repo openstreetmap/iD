@@ -43,26 +43,31 @@ iD.ui.preset = function() {
             case 'text':
                 i = this.append('input')
                     .attr('type', 'text')
+                    .attr('id', 'input-' + d.key)
                     .attr('placeholder', d['default'] || '');
                 break;
             case 'tel':
                 i = this.append('input')
                     .attr('type', 'tel')
+                    .attr('id', 'input-' + d.key)
                     .attr('placeholder', '1-555-555-5555');
                 break;
             case 'email':
                 i = this.append('input')
                     .attr('type', 'email')
+                    .attr('id', 'input-' + d.key)
                     .attr('placeholder', 'email@domain.com');
                 break;
             case 'url':
                 i = this.append('input')
                     .attr('type', 'url')
+                    .attr('id', 'input-' + d.key)
                     .attr('placeholder', 'http://example.com/');
                 break;
             case 'check':
                 i = this.append('input')
                     .attr('type', 'checkbox')
+                    .attr('id', 'input-' + d.key)
                     .each(function() {
                         if (d['default']) {
                             this.attr('checked', 'checked');
@@ -98,6 +103,8 @@ iD.ui.preset = function() {
                 .attr('class', 'preset-section-input cf');
            wrap.append('div')
                 .attr('class', 'col4 preset-label')
+                .append('label')
+                .attr('for', 'input-' + d.key)
                 .text(d.text);
             input.call(wrap.append('div')
                 .attr('class', 'col8 preset-input'), d);
