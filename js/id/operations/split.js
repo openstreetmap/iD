@@ -3,7 +3,7 @@ iD.operations.Split = function(entityId, mode) {
         action = iD.actions.SplitWay(entityId);
 
     var operation = function() {
-        history.perform(action, 'Split a way.');
+        history.perform(action, t('operations.split.annotation'));
     };
 
     operation.available = function() {
@@ -18,9 +18,9 @@ iD.operations.Split = function(entityId, mode) {
     };
 
     operation.id = "split";
-    operation.key = "X";
-    operation.title = "Split";
-    operation.description = "Split this into two ways at this point.";
+    operation.key = t('operations.split.key');
+    operation.title = t('operations.split.title');
+    operation.description = t('operations.split.description');
 
     return operation;
 };

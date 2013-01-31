@@ -2,9 +2,9 @@ iD.modes.AddArea = function() {
     var mode = {
         id: 'add-area',
         button: 'area',
-        title: 'Area',
-        description: 'Add parks, buildings, lakes, or other areas to the map.',
-        key: 'a'
+        title: t('modes.add_area.title'),
+        description: t('modes.add_area.description'),
+        key: t('modes.add_area.key')
     };
 
     var behavior,
@@ -77,7 +77,7 @@ iD.modes.AddArea = function() {
             .on('startFromMidpoint', startFromMidpoint);
 
         mode.map.surface.call(behavior);
-        mode.map.tail('Click on the map to start drawing an area, like a park, lake, or building.', true);
+        mode.map.tail(t('modes.add_area.tail'), true);
     };
 
     mode.exit = function() {

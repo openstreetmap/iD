@@ -15,9 +15,9 @@ iD.operations.Move = function(entityId, mode) {
     };
 
     operation.id = "move";
-    operation.key = "M";
-    operation.title = "Move";
-    operation.description = "Move this to a different location";
+    operation.key = t('operations.move.key');
+    operation.title = t('operations.move.title');
+    operation.description = t('operations.move.description');
 
     return operation;
 };

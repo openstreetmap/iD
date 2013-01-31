@@ -2,9 +2,9 @@ iD.modes.Browse = function() {
     var mode = {
         button: 'browse',
         id: 'browse',
-        title: 'Browse',
-        description: 'Pan and zoom the map.',
-        key: 'b'
+        title: t('modes.browse.title'),
+        description: t('modes.browse.description'),
+        key: t('modes.browse.key')
     };
 
     var behaviors;

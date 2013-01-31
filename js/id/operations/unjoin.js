@@ -18,9 +18,9 @@ iD.operations.Unjoin = function(entityId, mode) {
     };
 
     operation.id = "unjoin";
-    operation.key = "⇧-J";
-    operation.title = "Unjoin";
-    operation.description = "Disconnect these ways from each other.";
+    operation.key = t('operations.unjoin.key');
+    operation.title = t('operations.unjoin.title');
+    operation.description = t('operations.unjoin.description');
 
     return operation;
 };

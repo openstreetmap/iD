@@ -11,14 +11,14 @@ iD.modes.MoveWay = function(wayId) {
             graph = history.graph(),
             selection = map.surface,
             controller = mode.controller,
-            projection = map.projection;
-
-        var way = graph.entity(wayId),
-            origin = d3.mouse(selection.node());
+            projection = map.projection,
+            way = graph.entity(wayId),
+            origin = d3.mouse(selection.node()),
+            annotation = t('operations.move.annotation.' + way.geometry(graph));
 
         history.perform(
             iD.actions.Noop(),
-            'Moved a way.');
+            annotation);
 
         function move() {
             var p = d3.mouse(selection.node()),
@@ -29,7 +29,7 @@ iD.modes.MoveWay = function(wayId) {
 
             history.replace(
                 iD.actions.MoveWay(wayId, delta, projection),
-                'Moved a way.');
+                annotation);
         }
 
         function finish() {

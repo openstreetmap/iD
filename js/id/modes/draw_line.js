@@ -11,8 +11,7 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
             index = (direction === 'forward') ? undefined : 0,
             headId = (direction === 'forward') ? way.last() : way.first();
 
-        behavior = iD.behavior.DrawWay(wayId, index, mode, baseGraph)
-            .annotation(way.isDegenerate() ? 'Started a line.' : 'Continued a line.');
+        behavior = iD.behavior.DrawWay(wayId, index, mode, baseGraph);
 
         var addNode = behavior.addNode;
 
@@ -25,9 +24,7 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
         };
 
         mode.map.surface.call(behavior);
-        mode.map.tail('Click to add more points to the line. ' +
-                      'Click on other lines to connect to them, and double-click to ' +
-                      'end the line.', true);
+        mode.map.tail(t('modes.draw_line.tail'), true);
     };
 
     mode.exit = function() {
