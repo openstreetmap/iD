@@ -920,7 +920,8 @@ div.typeahead a:first-child {
     border-radius: 0 0 4px 4px;
 }
 
-.modal-section:only-child { border-radius: 4px;
+.modal-section:only-child {
+    border-radius: 4px;
 }
 
 .modal-section .buttons {
@@ -949,8 +950,13 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
-/* Intro Modal
+/* Splash Modal
 ------------------------------------------------------- */
+
+.modal-splash {
+    width: 33.3333%;
+    left: 33.3333%;
+}
 
 .logo {
     height: 100px;
@@ -1026,10 +1032,6 @@ div.typeahead a:first-child {
 
 .modal-section.header {
     border-radius: 4px 4px 0 0;
-}
-
-.modal-section:last-child {
-    border-radius: 0 0 4px 4px;
 }
 
 .modal-section .buttons {
