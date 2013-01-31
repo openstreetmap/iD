@@ -136,7 +136,7 @@ iD.Map = function() {
         }
 
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
-            iD.flash()
+            iD.ui.flash()
                 .select('.content')
                 .text('Cannot zoom out further in current mode.');
             return map.zoom(16);
