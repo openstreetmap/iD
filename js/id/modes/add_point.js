@@ -44,7 +44,7 @@ iD.modes.AddPoint = function() {
             .on('finish', cancel);
 
         mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.add_point.tail'), true);
+        mode.map.tail(t('modes.add_point.tail'));
     };
 
     mode.exit = function() {

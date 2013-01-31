@@ -84,7 +84,7 @@ iD.modes.AddLine = function() {
             .on('startFromMidpoint', startFromMidpoint);
 
         mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.add_line.tail'), true);
+        mode.map.tail(t('modes.add_line.tail'));
     };
 
     mode.exit = function() {

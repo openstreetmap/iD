@@ -361,7 +361,7 @@ iD.Map = function() {
     };
 
     var usedTails = {};
-    map.tail = function (_, once) {
+    map.tail = function (_) {
         if (!_ || usedTails[_] === undefined) {
             tail.text(_);
             usedTails[_] = true;

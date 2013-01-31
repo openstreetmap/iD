@@ -77,7 +77,7 @@ iD.modes.AddArea = function() {
             .on('startFromMidpoint', startFromMidpoint);
 
         mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.add_area.tail'), true);
+        mode.map.tail(t('modes.add_area.tail'));
     };
 
     mode.exit = function() {

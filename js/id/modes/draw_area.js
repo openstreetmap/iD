@@ -24,7 +24,7 @@ iD.modes.DrawArea = function(wayId, baseGraph) {
         };
 
         mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.draw_area.tail'), true);
+        mode.map.tail(t('modes.draw_area.tail'));
     };
 
     mode.exit = function() {

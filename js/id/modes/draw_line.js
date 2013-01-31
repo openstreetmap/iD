@@ -24,7 +24,7 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
         };
 
         mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.draw_line.tail'), true);
+        mode.map.tail(t('modes.draw_line.tail'));
     };
 
     mode.exit = function() {
