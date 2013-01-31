@@ -616,6 +616,14 @@ text.pointlabel {
   pointer-events: none;
 }
 
+.layer-halo rect,
+.layer-halo path,
+.layer-label text {
+    -webkit-transition: opacity 100ms linear;
+    transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+}
+
 .pathlabel .textpath {
   dominant-baseline: middle;
 }
