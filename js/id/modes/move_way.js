@@ -16,14 +16,18 @@ iD.modes.MoveWay = function(wayId) {
             origin = d3.mouse(selection.node()),
             annotation = t('operations.move.annotation.' + way.geometry(graph));
 
+        // If intiated via keyboard
+        if (!origin[0] && !origin[1]) origin = null;
+
         history.perform(
             iD.actions.Noop(),
             annotation);
 
         function move() {
             var p = d3.mouse(selection.node()),
-                delta = [p[0] - origin[0],
-                         p[1] - origin[1]];
+                delta = origin ?
+                    [p[0] - origin[0], p[1] - origin[1]] :
+                    [0, 0];
 
             origin = p;
 

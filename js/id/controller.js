@@ -19,9 +19,5 @@ iD.Controller = function(map, history) {
         event.enter(mode);
     };
 
-    controller.exit = function() {
-        controller.enter(iD.modes.Browse());
-    };
-
     return d3.rebind(controller, event, 'on');
 };

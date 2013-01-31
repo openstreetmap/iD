@@ -200,12 +200,31 @@ iD.svg.Labels = function(projection) {
 
     }
 
+    function hideOnMouseover() {
+        var mouse = d3.mouse(this),
+            pad = 50,
+            rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
+            labels = _.pluck(rtree.search(rect, this), 'leaf'),
+            selection = d3.select(this);
+
+        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
+            .style('opacity', '');
+
+        if (!labels.length) return;
+        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
+            .filter(function(d) {
+                return _.contains(labels, d.id);
+            })
+            .style('opacity', 0);
+    }
 
     var rtree = new RTree(),
         rectangles = {};
 
     return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
 
+        d3.select(surface.node().parentNode)
+            .on('mousemove.hidelabels', hideOnMouseover);
 
         var hidePoints = !d3.select('.node.point').node();
 
