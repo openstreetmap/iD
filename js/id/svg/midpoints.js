@@ -47,6 +47,8 @@ iD.svg.Midpoints = function(projection) {
 
         groups.attr('transform', iD.svg.PointTransform(projection));
 
+        groups.select('circle');
+
         groups.exit()
             .remove();
     };
