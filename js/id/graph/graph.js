@@ -247,6 +247,7 @@ iD.Graph.prototype = {
                 oldentity = b.entities[id];
                 if (entity !== oldentity) {
 
+                    // maybe adding affected children better belongs in renderer/map.js?
                     if (entity && entity.type === 'way' &&
                         oldentity && oldentity.type === 'way') {
                         result = result

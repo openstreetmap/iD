@@ -345,12 +345,42 @@ describe('iD.Graph', function() {
             expect(graph2.difference(graph1)).to.eql([created.id, updated.id, deleted.id]);
         });
 
-        it("includes created entities that were subsequently deleted", function () {
+
+        it("includes created entities, and reverse", function () {
             var node = iD.Node(),
-                graph1 = iD.Graph([node]),
-                graph2 = graph1.remove(node);
+                graph1 = iD.Graph(),
+                graph2 = graph1.replace(node);
             expect(graph2.difference(graph1)).to.eql([node.id]);
+            expect(graph1.difference(graph2)).to.eql([node.id]);
         });
+
+        it("includes entities changed from base, and reverse", function () {
+            var node = iD.Node(),
+                graph1 = iD.Graph(node),
+                graph2 = graph1.replace(node.update());
+            expect(graph2.difference(graph1)).to.eql([node.id]);
+            expect(graph1.difference(graph2)).to.eql([node.id]);
+        });
+
+        it("includes already changed entities that were updated, and reverse", function () {
+            var node = iD.Node(),
+                graph1 = iD.Graph().replace(node),
+                graph2 = graph1.replace(node.update());
+            expect(graph2.difference(graph1)).to.eql([node.id]);
+            expect(graph1.difference(graph2)).to.eql([node.id]);
+        });
+
+        it("includes affected child nodes", function () {
+            var n = iD.Node({id: 'n'}),
+                n2 = iD.Node({id: 'n2'}),
+                w1 = iD.Way({id: 'w1', nodes: ['n']}),
+                w1_ = iD.Way({id: 'w1', nodes: ['n', 'n2']}),
+                graph1 = iD.Graph([n, n2, w1]),
+                graph2 = graph1.replace(w1_);
+            expect(graph2.difference(graph1)).to.eql(['n2', 'w1']);
+            expect(graph1.difference(graph2)).to.eql(['n2', 'w1']);
+        });
+
     });
 
     describe("#modified", function () {
