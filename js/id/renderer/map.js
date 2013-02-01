@@ -55,7 +55,6 @@ iD.Map = function() {
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
 
     function drawVector(difference) {
-        if (surface.style(transformProp) != 'none') return;
         var filter, all,
             extent = map.extent(),
             graph = history.graph();
@@ -367,24 +366,6 @@ iD.Map = function() {
             usedTails[_] = true;
         }
         return map;
-    };
-
-    map.hint = function (_) {
-        if (_ === false) {
-            d3.select('div.inspector-wrap')
-                .style('opacity', 0)
-                .style('display', 'none');
-        } else {
-            d3.select('div.inspector-wrap')
-                .html('')
-                .style('display', 'block')
-                .transition()
-                .style('opacity', 1);
-            d3.select('div.inspector-wrap')
-                .append('div')
-                .attr('class','inspector-inner')
-                .text(_);
-        }
     };
 
     map.editable = function() {

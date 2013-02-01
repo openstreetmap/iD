@@ -17,12 +17,12 @@ iD.ui.layerswitcher = function(map) {
         }, {
             name: 'MapBox',
             source: iD.BackgroundSource.MapBox,
-            description: 'Satellite and Aerial Imagery',
+            description: 'Satellite and aerial imagery.',
             link: 'http://mapbox.com'
         }, {
             name: 'Custom',
             source: iD.BackgroundSource.Custom,
-            description: 'A custom layer (requires configuration)'
+            description: 'A custom layer (requires configuration).'
         }],
         opacities = [1, 0.5, 0];
 
@@ -139,10 +139,10 @@ iD.ui.layerswitcher = function(map) {
             .attr('class', 'adjustments pad1');
 
         var directions = [
-            ['←', [-1, 0]],
-            ['↑', [0, -1]],
-            ['→', [1, 0]],
-            ['↓', [0, 1]]];
+            ['left', [-1, 0]],
+            ['top', [0, -1]],
+            ['right', [1, 0]],
+            ['bottom', [0, 1]]];
 
         function nudge(d) {
             map.background.nudge(d[1]);
@@ -150,17 +150,16 @@ iD.ui.layerswitcher = function(map) {
         }
 
         adjustments.append('a')
-            .text('▶ fix misalignment')
+            .text('Fix misalignment')
             .attr('href', '#')
+            .classed('alignment-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
                 var exp = d3.select(this).classed('expanded');
                 if (!exp) {
                     nudge_container.style('display', 'block');
-                    d3.select(this).text('▼ fix misalignment');
                 } else {
                     nudge_container.style('display', 'none');
-                    d3.select(this).text('▶ fix misalignment');
                 }
                 d3.select(this).classed('expanded', !exp);
                 d3.event.preventDefault();
@@ -174,7 +173,7 @@ iD.ui.layerswitcher = function(map) {
         nudge_container.selectAll('button')
             .data(directions).enter()
             .append('button')
-            .attr('class', 'nudge')
+            .attr('class', function(d) { return d[0] + ' nudge'; })
             .text(function(d) { return d[0]; })
             .on('click', nudge);
 
