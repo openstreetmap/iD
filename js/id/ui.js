@@ -103,7 +103,7 @@ iD.ui = function (context) {
             .on('click.editor', history.redo)
             .call(undo_tooltip);
 
-        var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
+        limiter.append('div').attr('class','button-wrap col1').append('button')
             .attr('class', 'save col12')
             .call(iD.ui.save(context));
 
@@ -127,7 +127,7 @@ iD.ui = function (context) {
                 .call(iD.ui.geolocate(map));
         }
 
-        var gc = container.append('div').attr('class', 'geocode-control map-control')
+        container.append('div').attr('class', 'geocode-control map-control')
             .call(iD.ui.geocoder().map(map));
 
         container.append('div').attr('class', 'map-control layerswitcher-control')
