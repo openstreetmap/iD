@@ -346,10 +346,6 @@ iD.Map = function(context) {
                 vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
                 newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
-                if(newZoom > 19){
-                        newZoom = 19;
-                }
-
             map.centerZoom(extent.center(), newZoom);
         }
     };
