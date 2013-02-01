@@ -22,9 +22,16 @@ def isfav(x):
     return x in prefs
 
 for item in items:
+    tags = []
+    for elem in item.getElementsByTagName('key'):
+        tags.append({
+            'key': elem.getAttribute('key'),
+            'value': elem.getAttribute('value')
+        })
     jitem = {
         "name": item.getAttribute('name'),
         "type": item.getAttribute('type').split(','),
+        "tags": tags,
         "main": []
     }
     if isfav(jitem['name']):
