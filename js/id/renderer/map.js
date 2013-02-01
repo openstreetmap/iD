@@ -369,24 +369,6 @@ iD.Map = function() {
         return map;
     };
 
-    map.hint = function (_) {
-        if (_ === false) {
-            d3.select('div.inspector-wrap')
-                .style('opacity', 0)
-                .style('display', 'none');
-        } else {
-            d3.select('div.inspector-wrap')
-                .html('')
-                .style('display', 'block')
-                .transition()
-                .style('opacity', 1);
-            d3.select('div.inspector-wrap')
-                .append('div')
-                .attr('class','inspector-inner')
-                .text(_);
-        }
-    };
-
     map.editable = function() {
         return map.zoom() >= 16;
     };
