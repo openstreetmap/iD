@@ -1,5 +1,6 @@
 iD.ui.preset = function() {
     var event = d3.dispatch('change'),
+        hidden,
         sections,
         exttags,
         preset;
@@ -92,6 +93,15 @@ iD.ui.preset = function() {
 
     function presets(selection) {
         selection.html('');
+        var showRawTags = selection.append('a')
+            .text('Show raw tags')
+            .on('click', function() {
+                hidden = !hidden;
+                showRawTags.text(hidden ? 'Hide raw tags' : 'Show raw tags');
+                if (hidden) sections.style('display', 'none');
+                else sections.style('display', '');
+                event.change(clean(getTags()));
+            });
         sections = selection.selectAll('div.preset-section')
             .data(preset.main)
             .enter()
@@ -126,7 +136,7 @@ iD.ui.preset = function() {
     };
 
     presets.tags = function() {
-        if (!preset || !sections) return {};
+        if (hidden || !preset || !sections) return {};
         return clean(getTags());
     };
 
