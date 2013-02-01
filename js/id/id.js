@@ -14,7 +14,7 @@ window.iD = function () {
     context.history    = function () { return history; };
     context.map        = function () { return map; };
 
-    /* History delegation. */
+    /* History */
     context.graph   = history.graph;
     context.perform = history.perform;
     context.replace = history.replace;
@@ -23,9 +23,16 @@ window.iD = function () {
     context.redo    = history.undo;
     context.changes = history.changes;
 
-    context.entity   = function (id) { return history.graph().entity(id); };
-    context.geometry = function (id) { return context.entity(id).geometry(history.graph()); };
+    /* Graph */
+    context.entity = function (id) {
+        return history.graph().entity(id);
+    };
 
+    context.geometry = function (id) {
+        return context.entity(id).geometry(history.graph());
+    };
+
+    /* Modes */
     context.enter = function(newMode) {
         if (mode) {
             mode.exit();
@@ -41,9 +48,16 @@ window.iD = function () {
         return mode;
     };
 
-    context.install   = function (behavior) { context.surface().call(behavior); };
-    context.uninstall = function (behavior) { context.surface().call(behavior.off); };
+    /* Behaviors */
+    context.install = function (behavior) {
+        context.surface().call(behavior);
+    };
 
+    context.uninstall = function (behavior) {
+        context.surface().call(behavior.off);
+    };
+
+    /* Map */
     context.background = function () { return map.background; };
     context.surface    = function () { return map.surface; };
     context.projection = map.projection;
