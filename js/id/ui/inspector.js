@@ -3,6 +3,7 @@ iD.ui.inspector = function() {
         taginfo = iD.taginfo(),
         presetData = iD.presetData(),
         initial = false,
+        presetUI,
         graph,
         tagList;
 
@@ -41,7 +42,7 @@ iD.ui.inspector = function() {
         var inspectorwrap = inspectorbody.append('div')
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
-        var presetUI = iD.ui.preset()
+        presetUI = iD.ui.preset()
             .on('change', function(tags) {
                 inspector.tags(_.extend(inspector.tags(), tags));
                 event.change();
@@ -130,6 +131,7 @@ iD.ui.inspector = function() {
     function drawTags(tags) {
         var entity = tagList.datum();
 
+        tags = _.omit(tags, _.keys(presetUI.tags() || {}));
         tags = d3.entries(tags);
 
         if (!tags.length) {
@@ -311,7 +313,7 @@ iD.ui.inspector = function() {
 
     inspector.tags = function(tags) {
         if (!arguments.length) {
-            tags = {};
+            tags = presetUI.tags();
             tagList.selectAll('li').each(function() {
                 var row = d3.select(this),
                     key = row.selectAll('.key').property('value'),

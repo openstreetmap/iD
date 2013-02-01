@@ -5,7 +5,7 @@ iD.ui.preset = function() {
         preset;
 
     function getTags() {
-        var tags = {};
+        var tags = _.clone(preset.tags);
         sections.selectAll('input,select')
             .each(function(d) {
                 tags[d.key] = this.value;
@@ -110,6 +110,7 @@ iD.ui.preset = function() {
                 .attr('class', 'col8 preset-input'), d);
         });
         if (exttags) setTags(exttags);
+        key();
     }
 
     presets.preset = function(_) {
@@ -122,6 +123,11 @@ iD.ui.preset = function() {
         exttags = _;
         setTags(_);
         return presets;
+    };
+
+    presets.tags = function() {
+        if (!preset || !sections) return {};
+        return clean(getTags());
     };
 
     return d3.rebind(presets, event, 'on');
