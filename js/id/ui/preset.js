@@ -76,14 +76,12 @@ iD.ui.preset = function() {
                     });
                 break;
             case 'select':
-                i = this.append('select');
-                var options = d.values.slice();
-                options.unshift('');
-                i.selectAll('option')
-                    .data(options)
-                    .enter()
-                    .append('option')
-                    .text(String);
+                var w = this.append('span').attr('class', 'input-wrap-position');
+                i = w.append('input');
+                w.call(d3.combobox()
+                    .data([''].concat(d.values.slice()).map(function(o) {
+                        return { value: o, title: o };
+                    })));
                 break;
         }
         if (i) {

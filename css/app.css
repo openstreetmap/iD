@@ -563,6 +563,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin-top: -1px;
     }
 
+.input-wrap-position {
+    position: relative;
+}
+
 .tag-row input {
     width: 50%;
     border-left: 0;
@@ -578,18 +582,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .tag-row input.key {
     border-left: 1px solid #ccc;
-}
-
-.input-wrap::after {
-    content: '';
-    position: absolute;
-    right: 9px;
-    top: 14px;
-    height: 0;
-    width: 0;
-    border-top: 5px solid #ccc;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
 }
 
 .tag-row button {
@@ -1435,11 +1427,9 @@ a.success-action {
 
 .preset-input input {
     width: 100%;
+}
 
-
-
-
-div.combobox {
+.combobox {
     width:155px;
     z-index: 9999;
     display: none;
@@ -1451,7 +1441,7 @@ div.combobox {
     border: 1px solid #ccc;
 }
 
-div.combobox a {
+.combobox a {
     height: 25px;
     line-height: 25px;
     cursor: pointer;
@@ -1462,18 +1452,26 @@ div.combobox a {
     white-space: nowrap;
 }
 
-div.combobox a:hover,
-div.combobox a.selected  {
+.combobox a:hover,
+.combobox a.selected  {
     background: #e1e8ff;
     color: #154dff;
 }
 
-div.combobox a:first-child {
+.combobox a:first-child {
     border-top: 0;
 }
 
-div.combobox-carat {
-    cursor: pointer;
-    padding:0 5px;
-    vertical-align:middle;
+.combobox-carat::after {
+    display:block;
+    content: '';
+    cursor:url(../img/cursor-pointer.png) 6 1, auto;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    height: 0;
+    width: 0;
+    border-top: 5px solid #ccc;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
 }

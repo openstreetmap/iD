@@ -140,21 +140,19 @@
     <body>
         <div id='foo'><input /></div>
         <div id='bar'><input /></div>
-        <div id="iD"></div><script>
+        <input />
+        <div id="iD"><script>
             var options = d3.range(0, 50).map(function(i) {
                 return {
-                    value: i * 10,
-                    title: i * 10
+                    value: '' + (i * 10),
+                    title: '' + (i * 10)
                 };
             });
+
             d3.select('#foo').call(d3.combobox()
-                .data(function(selection, cb) {
-                    cb(options);
-                }));
+                .data(options));
             d3.select('#bar').call(d3.combobox()
-                .data(function(selection, cb) {
-                    cb(options);
-                }));
+                .data(options));
         </script></body>
 
 <script type="text/javascript">

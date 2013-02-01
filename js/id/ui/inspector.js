@@ -11,14 +11,14 @@ iD.ui.inspector = function() {
         var entity = selection.datum();
 
         var iwrap = selection.append('div')
-            .attr('class','inspector content');
+                .attr('class','inspector content'),
+            head = iwrap.append('div')
+                .attr('class', 'head inspector-inner fillL'),
+            h2 = head.append('h2');
 
-        var head = iwrap.append('div')
-            .attr('class', 'head inspector-inner fillL');
-
-        var h2 = head.append('h2');
         h2.append('span')
             .attr('class', 'icon big icon-pre-text big-' + entity.geometry(graph));
+
         var name = h2.append('input')
             .attr('placeholder', 'name')
             .property('value', function() {
@@ -150,14 +150,18 @@ iD.ui.inspector = function() {
         var inputs = row.append('div')
             .attr('class', 'input-wrap');
 
-        inputs.append('input')
+        inputs.append('span')
+            .attr('class', 'key-wrap')
+            .append('input')
             .property('type', 'text')
             .attr('class', 'key')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.key; })
             .on('change', function(d) { d.key = this.value; event.change(); });
 
-        inputs.append('input')
+        inputs.append('span')
+            .attr('class', 'input-wrap-position')
+            .append('input')
             .property('type', 'text')
             .attr('class', 'value')
             .attr('maxlength', 255)
@@ -253,7 +257,7 @@ iD.ui.inspector = function() {
             geometry = entity.geometry(graph),
             row = d3.select(this),
             key = row.selectAll('.key'),
-            value = row.selectAll('.value');
+            value = row.selectAll('.input-wrap-position');
 
         function sort(value, data) {
             var sameletter = [],
@@ -278,14 +282,15 @@ iD.ui.inspector = function() {
                 });
             }, 500)));
 
-        value.call(d3.typeahead()
-            .data(_.debounce(function(_, callback) {
+        var valueinput = value.select('input');
+        value.call(d3.combobox()
+            .fetcher(_.debounce(function(_, __, callback) {
                 taginfo.values({
                     key: key.property('value'),
                     geometry: geometry,
-                    query: value.property('value')
+                    query: valueinput.property('value')
                 }, function(err, data) {
-                    if (!err) callback(sort(value.property('value'), data));
+                    if (!err) callback(sort(valueinput.property('value'), data));
                 });
             }, 500)));
     }
