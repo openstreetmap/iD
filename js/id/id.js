@@ -56,6 +56,14 @@ window.iD = function () {
         return mode;
     };
 
+    context.selection = function() {
+        if (mode.id === 'select') {
+            return mode.selection();
+        } else {
+            return [];
+        }
+    };
+
     /* Behaviors */
     context.install = function(behavior) {
         context.surface().call(behavior);
