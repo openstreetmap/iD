@@ -77,6 +77,12 @@ locale.en = {
                 multiple: "Deleted {n} objects."
             }
         },
+        disconnect: {
+            title: "Disconnect",
+            description: "Disconnect these ways from each other.",
+            key: "D",
+            annotation: "Disconnected ways."
+        },
         move: {
             title: "Move",
             description: "Move this to a different location.",
@@ -99,12 +105,6 @@ locale.en = {
             description: "Split this into two ways at this point.",
             key: "X",
             annotation: "Split a way."
-        },
-        unjoin: {
-            title: "Unjoin",
-            description: "Disconnect these ways from each other.",
-            key: "⇧-J",
-            annotation: "Unjoined ways."
         }
     },
 
