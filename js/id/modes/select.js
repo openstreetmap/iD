@@ -82,21 +82,22 @@ iD.modes.Select = function(context, selection, initial) {
             inspector
                 .on('changeTags', changeTags)
                 .on('close', function() { context.enter(iD.modes.Browse(context)); });
+        }
 
-            context.history().on('change.select', function() {
+        context.history().on('change.select', function() {
+            context.surface().call(radialMenu.close);
+
+            if (_.any(selection, function (id) { return !context.entity(id); })) {
                 // Exit mode if selected entity gets undone
-                var oldEntity = entity,
-                    newEntity = context.entity(selection[0]);
+                context.enter(iD.modes.Browse(context));
 
-                if (!newEntity) {
-                    context.enter(iD.modes.Browse(context));
-                } else if (!_.isEqual(oldEntity.tags, newEntity.tags)) {
+            } else if (entity) {
+                var newEntity = context.entity(selection[0]);
+                if (!_.isEqual(entity.tags, newEntity.tags)) {
                     inspector.tags(newEntity.tags);
                 }
-
-                context.surface().call(radialMenu.close);
-            });
-        }
+            }
+        });
 
         context.map().on('move.select', function() {
             context.surface().call(radialMenu.close);
