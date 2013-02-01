@@ -83,6 +83,12 @@ locale.en = {
             key: "D",
             annotation: "Disconnected ways."
         },
+        merge: {
+            title: "Merge",
+            description: "Merge these lines.",
+            key: "C",
+            annotation: "Merged {n} lines."
+        },
         move: {
             title: "Move",
             description: "Move this to a different location.",
