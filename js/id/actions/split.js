@@ -1,5 +1,7 @@
 // Split a way at the given node.
 //
+// This is the inverse of `iD.actions.Join`.
+//
 // For testing convenience, accepts an ID to assign to the new way.
 // Normally, this will be undefined and the way will automatically
 // be assigned a new ID.
