@@ -6,7 +6,7 @@ iD.ui.geocoder = function() {
         function keydown() {
             if (d3.event.keyCode !== 13) return;
             d3.event.preventDefault();
-	    var searchVal = this.value;
+            var searchVal = this.value;
             d3.json('http://nominatim.openstreetmap.org/search/' +
                 encodeURIComponent(searchVal) + '?limit=10&format=json', function(err, resp) {
                 if (err) return hide();
