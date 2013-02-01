@@ -50,12 +50,12 @@ iD.ui.save = function(context) {
                     modal.select('.content')
                         .classed('commit-modal', true)
                         .datum(changes)
-                        .call(iD.ui.commit(map)
+                        .call(iD.ui.commit(context)
                             .on('cancel', function() {
                                 modal.remove();
                             })
                             .on('fix', function(d) {
-                                map.extent(d.entity.extent(map.history().graph()));
+                                map.extent(d.entity.extent(context.graph()));
                                 if (map.zoom() > 19) map.zoom(19);
                                 context.enter(iD.modes.Select(context, [d.entity.id]));
                                 modal.remove();

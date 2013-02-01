@@ -14,11 +14,11 @@ iD.geo.dist = function(a, b) {
         Math.pow(a[1] - b[1], 2));
 };
 
-iD.geo.chooseIndex = function(way, point, map) {
+iD.geo.chooseIndex = function(way, point, context) {
     var dist = iD.geo.dist,
-        graph = map.history().graph(),
+        graph = context.graph(),
         nodes = graph.childNodes(way),
-        projNodes = nodes.map(function(n) { return map.projection(n.loc); });
+        projNodes = nodes.map(function(n) { return context.projection(n.loc); });
 
     for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
         changes[i] =

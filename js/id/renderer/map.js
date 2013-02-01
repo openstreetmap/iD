@@ -1,6 +1,5 @@
-iD.Map = function() {
-    var connection, history,
-        dimensions = [],
+iD.Map = function(context) {
+    var dimensions = [],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = d3.geo.mercator().scale(1024),
         roundedProjection = iD.svg.RoundProjection(projection),
@@ -27,6 +26,12 @@ iD.Map = function() {
         surface, tilegroup;
 
     function map(selection) {
+        context.connection()
+            .on('load.tile', connectionLoad);
+
+        context.history()
+            .on('change.map', redraw);
+
         selection.call(zoom);
 
         tilegroup = selection.append('div')
@@ -57,7 +62,7 @@ iD.Map = function() {
     function drawVector(difference) {
         var filter, all,
             extent = map.extent(),
-            graph = history.graph();
+            graph = context.graph();
 
         function addParents(parents) {
             for (var i = 0; i < parents.length; i++) {
@@ -121,7 +126,7 @@ iD.Map = function() {
     }
 
     function connectionLoad(err, result) {
-        history.merge(result);
+        context.history().merge(result);
         redraw(Object.keys(result));
     }
 
@@ -182,7 +187,7 @@ iD.Map = function() {
         tilegroup.call(background);
 
         if (map.editable()) {
-            connection.loadTiles(projection, dimensions);
+            context.connection().loadTiles(projection, dimensions);
             drawVector(difference);
         } else {
             editOff();
@@ -347,15 +352,8 @@ iD.Map = function() {
     };
 
     map.flush = function () {
-        connection.flush();
-        history.reset();
-        return map;
-    };
-
-    map.connection = function(_) {
-        if (!arguments.length) return connection;
-        connection = _;
-        connection.on('load.tile', connectionLoad);
+        context.connection().flush();
+        context.history().reset();
         return map;
     };
 
@@ -375,13 +373,6 @@ iD.Map = function() {
     map.minzoom = function(_) {
         if (!arguments.length) return minzoom;
         minzoom = _;
-        return map;
-    };
-
-    map.history = function (_) {
-        if (!arguments.length) return history;
-        history = _;
-        history.on('change.map', redraw);
         return map;
     };
 

@@ -19,7 +19,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         if (datum.type === 'node' || datum.type === 'midpoint') {
             loc = datum.loc;
         } else if (datum.type === 'way') {
-            loc = iD.geo.chooseIndex(datum, d3.mouse(context.surface().node()), context.map()).loc;
+            loc = iD.geo.chooseIndex(datum, d3.mouse(context.surface().node()), context).loc;
         }
 
         context.replace(iD.actions.MoveNode(nodeId, loc));

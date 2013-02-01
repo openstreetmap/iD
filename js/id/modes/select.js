@@ -108,7 +108,7 @@ iD.modes.Select = function(context, selection, initial) {
 
             if (datum instanceof iD.Way && !target.classed('fill')) {
                 var choice = iD.geo.chooseIndex(datum,
-                        d3.mouse(context.surface().node()), context.map()),
+                        d3.mouse(context.surface().node()), context),
                     node = iD.Node({ loc: choice.loc });
 
                 context.perform(

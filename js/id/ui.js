@@ -66,7 +66,7 @@ iD.ui = function (context) {
 
         map.on('move.editor', _.debounce(function() {
             disableTooHigh();
-            contributors.call(iD.ui.contributors(map));
+            contributors.call(iD.ui.contributors(context));
         }, 500));
 
         buttons.append('span')
@@ -131,7 +131,7 @@ iD.ui = function (context) {
             .call(iD.ui.geocoder().map(map));
 
         container.append('div').attr('class', 'map-control layerswitcher-control')
-            .call(iD.ui.layerswitcher(map));
+            .call(iD.ui.layerswitcher(context));
 
         container.append('div')
             .style('display', 'none')

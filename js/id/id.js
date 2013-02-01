@@ -6,7 +6,7 @@ window.iD = function () {
         mode,
         container,
         ui = iD.ui(context),
-        map = iD.Map().connection(connection).history(history);
+        map = iD.Map(context);
 
     /* Straight accessors. Avoid using these if you can. */
     context.ui         = function () { return ui; };
@@ -62,6 +62,7 @@ window.iD = function () {
     context.surface    = function () { return map.surface; };
     context.projection = map.projection;
     context.tail       = map.tail;
+    context.redraw     = map.redraw;
 
     context.container = function (_) {
         if (!arguments.length) return container;
