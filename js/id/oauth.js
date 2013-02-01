@@ -13,8 +13,8 @@ iD.OAuth = function(context) {
     }
 
     // token getter/setter, namespaced to the current `apibase` value.
-    function token(k, x) {
-        return context.storage(keyclean(baseurl) + k, x);
+    function token() {
+        return context.storage.apply(context, arguments);
     }
 
     if (token('oauth_token')) {
