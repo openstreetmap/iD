@@ -4,8 +4,7 @@ iD.ui = function (context) {
 
         var connection = context.connection(),
             history = context.history(),
-            map = context.map(),
-            controller = context.controller();
+            map = context.map();
 
         if (!iD.supported()) {
             container.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
@@ -48,7 +47,7 @@ iD.ui = function (context) {
             .attr('data-original-title', function (mode) {
                 return hintprefix(mode.key, mode.description);
             })
-            .on('click.editor', function (mode) { controller.enter(mode); });
+            .on('click.editor', function (mode) { context.enter(mode); });
 
         function disableTooHigh() {
             if (map.editable()) {
@@ -57,7 +56,7 @@ iD.ui = function (context) {
             } else {
                 buttons.attr('disabled', 'disabled');
                 notice.message(true);
-                controller.enter(iD.modes.Browse(context));
+                context.enter(iD.modes.Browse(context));
             }
         }
 
@@ -77,12 +76,12 @@ iD.ui = function (context) {
 
         buttons.append('span').attr('class', 'label').text(function (mode) { return mode.title; });
 
-        controller.on('enter.editor', function (entered) {
+        context.on('enter.editor', function (entered) {
             buttons.classed('active', function (mode) { return entered.button === mode.button; });
             container.classed("mode-" + entered.id, true);
         });
 
-        controller.on('exit.editor', function (exited) {
+        context.on('exit.editor', function (exited) {
             container.classed("mode-" + exited.id, false);
         });
 
@@ -228,7 +227,7 @@ iD.ui = function (context) {
             .on('⌫', function() { d3.event.preventDefault(); });
 
         modes.forEach(function(m) {
-            keybinding.on(m.key, function() { if (map.editable()) controller.enter(m); });
+            keybinding.on(m.key, function() { if (map.editable()) context.enter(m); });
         });
 
         d3.select(document)
@@ -246,7 +245,7 @@ iD.ui = function (context) {
             .on('logout.editor', connection.logout)
             .on('login.editor', connection.authenticate));
 
-        controller.enter(iD.modes.Browse(context));
+        context.enter(iD.modes.Browse(context));
 
         if (!localStorage.sawSplash) {
             iD.ui.splash();

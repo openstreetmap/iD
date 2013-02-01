@@ -48,7 +48,7 @@ iD.behavior.Hash = function(context) {
             context.enter(iD.modes.Select([id]));
         });
 
-        context.controller().on('enter.hash', function() {
+        context.on('enter.hash', function() {
             if (context.mode().id !== 'browse') selectoff();
         });
     }

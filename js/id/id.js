@@ -2,7 +2,8 @@ window.iD = function () {
     var context = {},
         history = iD.History(),
         connection = iD.Connection().version(iD.version),
-        controller = iD.Controller(),
+        dispatch = d3.dispatch('enter', 'exit'),
+        mode,
         container,
         ui = iD.ui(context),
         map = iD.Map().connection(connection).history(history);
@@ -11,7 +12,6 @@ window.iD = function () {
     context.ui         = function () { return ui; };
     context.connection = function () { return connection; };
     context.history    = function () { return history; };
-    context.controller = function () { return controller; };
     context.map        = function () { return map; };
 
     /* History delegation. */
@@ -26,8 +26,20 @@ window.iD = function () {
     context.entity   = function (id) { return history.graph().entity(id); };
     context.geometry = function (id) { return context.entity(id).geometry(history.graph()); };
 
-    context.enter = controller.enter;
-    context.mode = function () { return controller.mode; };
+    context.enter = function(newMode) {
+        if (mode) {
+            mode.exit();
+            dispatch.exit(mode);
+        }
+
+        mode = newMode;
+        mode.enter();
+        dispatch.enter(mode);
+    };
+
+    context.mode = function() {
+        return mode;
+    };
 
     context.install   = function (behavior) { context.surface().call(behavior); };
     context.uninstall = function (behavior) { context.surface().call(behavior.off); };
@@ -46,7 +58,7 @@ window.iD = function () {
     context.background()
         .source(iD.BackgroundSource.Bing);
 
-    return context;
+    return d3.rebind(context, dispatch, 'on');
 };
 
 iD.version = '0.0.0-alpha1';
