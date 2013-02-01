@@ -101,6 +101,13 @@ iD.ui.inspector = function() {
         inspectorbody.append('div')
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
+
+        var presetMatch = presetData.matchTags(entity);
+        if (presetMatch) {
+            inspectorpreset.call(presetUI
+                    .preset(presetMatch)
+                    .change(inspector.tags()));
+        }
     }
 
     function drawButtons(selection) {
