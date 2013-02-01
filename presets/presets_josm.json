@@ -109,12 +109,9 @@
             "way"
         ], 
         "name": "Motorway", 
-        "tags": [
-            {
-                "value": "motorway", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "motorway"
+        }
     }, 
     {
         "main": [
@@ -216,12 +213,9 @@
             "way"
         ], 
         "name": "Motorway Link", 
-        "tags": [
-            {
-                "value": "motorway_link", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "motorway_link"
+        }
     }, 
     {
         "main": [
@@ -339,12 +333,9 @@
             "way"
         ], 
         "name": "Trunk", 
-        "tags": [
-            {
-                "value": "trunk", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "trunk"
+        }
     }, 
     {
         "main": [
@@ -457,12 +448,9 @@
             "way"
         ], 
         "name": "Trunk Link", 
-        "tags": [
-            {
-                "value": "trunk_link", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "trunk_link"
+        }
     }, 
     {
         "main": [
@@ -593,12 +581,9 @@
             "way"
         ], 
         "name": "Primary", 
-        "tags": [
-            {
-                "value": "primary", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "primary"
+        }
     }, 
     {
         "main": [
@@ -719,12 +704,9 @@
             "way"
         ], 
         "name": "Primary Link", 
-        "tags": [
-            {
-                "value": "primary_link", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "primary_link"
+        }
     }, 
     {
         "main": [
@@ -849,12 +831,9 @@
             "way"
         ], 
         "name": "Secondary", 
-        "tags": [
-            {
-                "value": "secondary", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "secondary"
+        }
     }, 
     {
         "main": [
@@ -969,12 +948,9 @@
             "way"
         ], 
         "name": "Secondary Link", 
-        "tags": [
-            {
-                "value": "secondary_link", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "secondary_link"
+        }
     }, 
     {
         "main": [
@@ -1099,12 +1075,9 @@
             "way"
         ], 
         "name": "Tertiary", 
-        "tags": [
-            {
-                "value": "tertiary", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "tertiary"
+        }
     }, 
     {
         "main": [
@@ -1219,12 +1192,9 @@
             "way"
         ], 
         "name": "Tertiary Link", 
-        "tags": [
-            {
-                "value": "tertiary_link", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "tertiary_link"
+        }
     }, 
     {
         "main": [
@@ -1355,12 +1325,9 @@
             "way"
         ], 
         "name": "Unclassified", 
-        "tags": [
-            {
-                "value": "unclassified", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "unclassified"
+        }
     }, 
     {
         "main": [
@@ -1485,12 +1452,9 @@
             "way"
         ], 
         "name": "Residential", 
-        "tags": [
-            {
-                "value": "residential", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "residential"
+        }
     }, 
     {
         "main": [
@@ -1598,12 +1562,9 @@
             "way"
         ], 
         "name": "Living Street", 
-        "tags": [
-            {
-                "value": "living_street", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "living_street"
+        }
     }, 
     {
         "main": [
@@ -1713,12 +1674,9 @@
             "relation"
         ], 
         "name": "Pedestrian", 
-        "tags": [
-            {
-                "value": "pedestrian", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "pedestrian"
+        }
     }, 
     {
         "main": [
@@ -1847,12 +1805,9 @@
             "way"
         ], 
         "name": "Service", 
-        "tags": [
-            {
-                "value": "service", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "service"
+        }
     }, 
     {
         "main": [
@@ -1895,16 +1850,10 @@
             "way"
         ], 
         "name": "Parking Aisle", 
-        "tags": [
-            {
-                "value": "service", 
-                "key": "highway"
-            }, 
-            {
-                "value": "parking_aisle", 
-                "key": "service"
-            }
-        ]
+        "tags": {
+            "service": "parking_aisle", 
+            "highway": "service"
+        }
     }, 
     {
         "main": [
@@ -2017,12 +1966,9 @@
             "way"
         ], 
         "name": "Road (Unknown Type)", 
-        "tags": [
-            {
-                "value": "road", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "road"
+        }
     }, 
     {
         "main": [
@@ -2145,12 +2091,9 @@
             "way"
         ], 
         "name": "Construction", 
-        "tags": [
-            {
-                "value": "construction", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "construction"
+        }
     }, 
     {
         "main": [
@@ -2439,7 +2382,7 @@
             "way"
         ], 
         "name": "Road Restrictions", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -2553,12 +2496,9 @@
             "closedway"
         ], 
         "name": "Roundabout", 
-        "tags": [
-            {
-                "value": "roundabout", 
-                "key": "junction"
-            }
-        ]
+        "tags": {
+            "junction": "roundabout"
+        }
     }, 
     {
         "main": [
@@ -2629,7 +2569,7 @@
             "way"
         ], 
         "name": "Bridge", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -2684,12 +2624,9 @@
             "way"
         ], 
         "name": "Tunnel", 
-        "tags": [
-            {
-                "value": "yes", 
-                "key": "tunnel"
-            }
-        ]
+        "tags": {
+            "tunnel": "yes"
+        }
     }, 
     {
         "main": [
@@ -2717,12 +2654,9 @@
             "way"
         ], 
         "name": "Ford", 
-        "tags": [
-            {
-                "value": "yes", 
-                "key": "ford"
-            }
-        ]
+        "tags": {
+            "ford": "yes"
+        }
     }, 
     {
         "main": [
@@ -2915,12 +2849,9 @@
             "way"
         ], 
         "name": "Track", 
-        "tags": [
-            {
-                "value": "track", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "track"
+        }
     }, 
     {
         "main": [
@@ -3151,12 +3082,9 @@
             "way"
         ], 
         "name": "Path", 
-        "tags": [
-            {
-                "value": "path", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "path"
+        }
     }, 
     {
         "main": [
@@ -3269,12 +3197,9 @@
             "way"
         ], 
         "name": "Dedicated Bridleway", 
-        "tags": [
-            {
-                "value": "bridleway", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "bridleway"
+        }
     }, 
     {
         "main": [
@@ -3358,7 +3283,7 @@
             "way"
         ], 
         "name": "Cycle Lane", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -3476,12 +3401,9 @@
             "way"
         ], 
         "name": "Dedicated Cycleway", 
-        "tags": [
-            {
-                "value": "cycleway", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "cycleway"
+        }
     }, 
     {
         "main": [
@@ -3589,24 +3511,12 @@
             "way"
         ], 
         "name": "Segregated Foot- and Cycleway", 
-        "tags": [
-            {
-                "value": "path", 
-                "key": "highway"
-            }, 
-            {
-                "value": "designated", 
-                "key": "bicycle"
-            }, 
-            {
-                "value": "designated", 
-                "key": "foot"
-            }, 
-            {
-                "value": "yes", 
-                "key": "segregated"
-            }
-        ]
+        "tags": {
+            "foot": "designated", 
+            "bicycle": "designated", 
+            "segregated": "yes", 
+            "highway": "path"
+        }
     }, 
     {
         "main": [
@@ -3720,24 +3630,12 @@
             "way"
         ], 
         "name": "Combined Foot- and Cycleway", 
-        "tags": [
-            {
-                "value": "path", 
-                "key": "highway"
-            }, 
-            {
-                "value": "designated", 
-                "key": "bicycle"
-            }, 
-            {
-                "value": "designated", 
-                "key": "foot"
-            }, 
-            {
-                "value": "no", 
-                "key": "segregated"
-            }
-        ]
+        "tags": {
+            "foot": "designated", 
+            "bicycle": "designated", 
+            "segregated": "no", 
+            "highway": "path"
+        }
     }, 
     {
         "main": [
@@ -3845,12 +3743,9 @@
             "way"
         ], 
         "name": "Dedicated Footway", 
-        "tags": [
-            {
-                "value": "footway", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "footway"
+        }
     }, 
     {
         "main": [
@@ -3950,12 +3845,9 @@
             "way"
         ], 
         "name": "Steps", 
-        "tags": [
-            {
-                "value": "steps", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "steps"
+        }
     }, 
     {
         "main": [
@@ -3979,12 +3871,9 @@
             "node"
         ], 
         "name": "Motorway Junction", 
-        "tags": [
-            {
-                "value": "motorway_junction", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "motorway_junction"
+        }
     }, 
     {
         "main": [
@@ -4011,12 +3900,9 @@
             "relation"
         ], 
         "name": "Services", 
-        "tags": [
-            {
-                "value": "services", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "services"
+        }
     }, 
     {
         "main": [
@@ -4037,12 +3923,9 @@
             "closedway"
         ], 
         "name": "Rest Area", 
-        "tags": [
-            {
-                "value": "rest_area", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "rest_area"
+        }
     }, 
     {
         "main": [], 
@@ -4050,12 +3933,9 @@
             "node"
         ], 
         "name": "Emergency Phone", 
-        "tags": [
-            {
-                "value": "emergency_phone", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "emergency_phone"
+        }
     }, 
     {
         "main": [
@@ -4108,12 +3988,9 @@
             "node"
         ], 
         "name": "Traffic Signal", 
-        "tags": [
-            {
-                "value": "traffic_signals", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "traffic_signals"
+        }
     }, 
     {
         "main": [], 
@@ -4121,12 +3998,9 @@
             "node"
         ], 
         "name": "Stop", 
-        "tags": [
-            {
-                "value": "stop", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "stop"
+        }
     }, 
     {
         "main": [
@@ -4143,12 +4017,9 @@
             "node"
         ], 
         "name": "Mini-roundabout", 
-        "tags": [
-            {
-                "value": "mini_roundabout", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "mini_roundabout"
+        }
     }, 
     {
         "main": [
@@ -4201,12 +4072,9 @@
             "node"
         ], 
         "name": "Pedestrian Crossing", 
-        "tags": [
-            {
-                "value": "crossing", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "crossing"
+        }
     }, 
     {
         "main": [
@@ -4229,7 +4097,7 @@
             "node"
         ], 
         "name": "Traffic Calming", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [], 
@@ -4237,12 +4105,9 @@
             "node"
         ], 
         "name": "Passing Place", 
-        "tags": [
-            {
-                "value": "passing_place", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "passing_place"
+        }
     }, 
     {
         "main": [], 
@@ -4250,12 +4115,9 @@
             "node"
         ], 
         "name": "Turning Circle", 
-        "tags": [
-            {
-                "value": "turning_circle", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "turning_circle"
+        }
     }, 
     {
         "main": [
@@ -4274,12 +4136,9 @@
             "node"
         ], 
         "name": "City Limit", 
-        "tags": [
-            {
-                "value": "city_limit", 
-                "key": "traffic_sign"
-            }
-        ]
+        "tags": {
+            "traffic_sign": "city_limit"
+        }
     }, 
     {
         "main": [], 
@@ -4287,12 +4146,9 @@
             "node"
         ], 
         "name": "Speed Camera", 
-        "tags": [
-            {
-                "value": "speed_camera", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "speed_camera"
+        }
     }, 
     {
         "main": [], 
@@ -4300,12 +4156,9 @@
             "node"
         ], 
         "name": "Grit Bin", 
-        "tags": [
-            {
-                "value": "grit_bin", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "grit_bin"
+        }
     }, 
     {
         "main": [
@@ -4329,12 +4182,9 @@
             "node"
         ], 
         "name": "Mountain Pass", 
-        "tags": [
-            {
-                "value": "yes", 
-                "key": "mountain_pass"
-            }
-        ]
+        "tags": {
+            "mountain_pass": "yes"
+        }
     }, 
     {
         "main": [
@@ -4368,12 +4218,9 @@
             "way"
         ], 
         "name": "Bollard", 
-        "tags": [
-            {
-                "value": "bollard", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "bollard"
+        }
     }, 
     {
         "main": [
@@ -4406,12 +4253,9 @@
             "node"
         ], 
         "name": "Cycle Barrier", 
-        "tags": [
-            {
-                "value": "cycle_barrier", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "cycle_barrier"
+        }
     }, 
     {
         "main": [
@@ -4446,12 +4290,9 @@
             "closedway"
         ], 
         "name": "Block", 
-        "tags": [
-            {
-                "value": "block", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "block"
+        }
     }, 
     {
         "main": [
@@ -4484,12 +4325,9 @@
             "node"
         ], 
         "name": "Cattle Grid", 
-        "tags": [
-            {
-                "value": "cattle_grid", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "cattle_grid"
+        }
     }, 
     {
         "main": [], 
@@ -4497,12 +4335,9 @@
             "node"
         ], 
         "name": "Bus Trap", 
-        "tags": [
-            {
-                "value": "bus_trap", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "bus_trap"
+        }
     }, 
     {
         "main": [
@@ -4541,12 +4376,9 @@
             "node"
         ], 
         "name": "Spikes", 
-        "tags": [
-            {
-                "value": "spikes", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "spikes"
+        }
     }, 
     {
         "main": [
@@ -4566,12 +4398,9 @@
             "closedway"
         ], 
         "name": "Toll Booth", 
-        "tags": [
-            {
-                "value": "toll_booth", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "toll_booth"
+        }
     }, 
     {
         "main": [
@@ -4610,12 +4439,9 @@
             "node"
         ], 
         "name": "Border Control", 
-        "tags": [
-            {
-                "value": "border_control", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "border_control"
+        }
     }, 
     {
         "main": [], 
@@ -4625,12 +4451,9 @@
             "relation"
         ], 
         "name": "Hedge", 
-        "tags": [
-            {
-                "value": "hedge", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "hedge"
+        }
     }, 
     {
         "main": [
@@ -4654,12 +4477,9 @@
             "closedway"
         ], 
         "name": "Fence", 
-        "tags": [
-            {
-                "value": "fence", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "fence"
+        }
     }, 
     {
         "main": [], 
@@ -4668,12 +4488,9 @@
             "closedway"
         ], 
         "name": "Wall", 
-        "tags": [
-            {
-                "value": "wall", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "wall"
+        }
     }, 
     {
         "main": [], 
@@ -4682,12 +4499,9 @@
             "closedway"
         ], 
         "name": "City Wall", 
-        "tags": [
-            {
-                "value": "city_wall", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "city_wall"
+        }
     }, 
     {
         "main": [], 
@@ -4696,12 +4510,9 @@
             "closedway"
         ], 
         "name": "Retaining Wall", 
-        "tags": [
-            {
-                "value": "retaining_wall", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "retaining_wall"
+        }
     }, 
     {
         "main": [
@@ -4715,12 +4526,9 @@
             "way"
         ], 
         "name": "Ditch", 
-        "tags": [
-            {
-                "value": "ditch", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "ditch"
+        }
     }, 
     {
         "main": [
@@ -4759,12 +4567,9 @@
             "node"
         ], 
         "name": "Entrance", 
-        "tags": [
-            {
-                "value": "entrance", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "entrance"
+        }
     }, 
     {
         "main": [
@@ -4803,12 +4608,9 @@
             "node"
         ], 
         "name": "Gate", 
-        "tags": [
-            {
-                "value": "gate", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "gate"
+        }
     }, 
     {
         "main": [
@@ -4847,12 +4649,9 @@
             "node"
         ], 
         "name": "Lift Gate", 
-        "tags": [
-            {
-                "value": "lift_gate", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "lift_gate"
+        }
     }, 
     {
         "main": [
@@ -4891,12 +4690,9 @@
             "node"
         ], 
         "name": "Hampshire Gate", 
-        "tags": [
-            {
-                "value": "hampshire_gate", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "hampshire_gate"
+        }
     }, 
     {
         "main": [
@@ -4935,12 +4731,9 @@
             "node"
         ], 
         "name": "Bump Gate", 
-        "tags": [
-            {
-                "value": "bump_gate", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "bump_gate"
+        }
     }, 
     {
         "main": [
@@ -4961,12 +4754,9 @@
             "node"
         ], 
         "name": "Kissing Gate", 
-        "tags": [
-            {
-                "value": "kissing_gate", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "kissing_gate"
+        }
     }, 
     {
         "main": [
@@ -4987,12 +4777,9 @@
             "node"
         ], 
         "name": "Stile", 
-        "tags": [
-            {
-                "value": "stile", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "stile"
+        }
     }, 
     {
         "main": [
@@ -5013,12 +4800,9 @@
             "node"
         ], 
         "name": "Turnstile", 
-        "tags": [
-            {
-                "value": "turnstile", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "turnstile"
+        }
     }, 
     {
         "main": [
@@ -5057,12 +4841,9 @@
             "node"
         ], 
         "name": "Sally Port", 
-        "tags": [
-            {
-                "value": "sally_port", 
-                "key": "barrier"
-            }
-        ]
+        "tags": {
+            "barrier": "sally_port"
+        }
     }, 
     {
         "main": [
@@ -5094,12 +4875,9 @@
             "way"
         ], 
         "name": "Drain", 
-        "tags": [
-            {
-                "value": "drain", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "drain"
+        }
     }, 
     {
         "main": [
@@ -5131,12 +4909,9 @@
             "way"
         ], 
         "name": "Ditch", 
-        "tags": [
-            {
-                "value": "ditch", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "ditch"
+        }
     }, 
     {
         "main": [
@@ -5168,12 +4943,9 @@
             "way"
         ], 
         "name": "Stream", 
-        "tags": [
-            {
-                "value": "stream", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "stream"
+        }
     }, 
     {
         "main": [
@@ -5210,12 +4982,9 @@
             "way"
         ], 
         "name": "Canal", 
-        "tags": [
-            {
-                "value": "canal", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "canal"
+        }
     }, 
     {
         "main": [
@@ -5252,12 +5021,9 @@
             "way"
         ], 
         "name": "River", 
-        "tags": [
-            {
-                "value": "river", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "river"
+        }
     }, 
     {
         "main": [
@@ -5272,12 +5038,9 @@
             "closedway"
         ], 
         "name": "Spring", 
-        "tags": [
-            {
-                "value": "spring", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "spring"
+        }
     }, 
     {
         "main": [
@@ -5297,12 +5060,9 @@
             "way"
         ], 
         "name": "Waterfall", 
-        "tags": [
-            {
-                "value": "waterfall", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "waterfall"
+        }
     }, 
     {
         "main": [
@@ -5317,12 +5077,9 @@
             "way"
         ], 
         "name": "Weir", 
-        "tags": [
-            {
-                "value": "weir", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "weir"
+        }
     }, 
     {
         "main": [
@@ -5343,12 +5100,9 @@
             "closedway"
         ], 
         "name": "Dam", 
-        "tags": [
-            {
-                "value": "dam", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "dam"
+        }
     }, 
     {
         "main": [], 
@@ -5358,12 +5112,9 @@
             "closedway"
         ], 
         "name": "Groyne", 
-        "tags": [
-            {
-                "value": "groyne", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "groyne"
+        }
     }, 
     {
         "main": [
@@ -5383,12 +5134,9 @@
             "closedway"
         ], 
         "name": "Breakwater", 
-        "tags": [
-            {
-                "value": "breakwater", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "breakwater"
+        }
     }, 
     {
         "main": [
@@ -5404,12 +5152,9 @@
             "relation"
         ], 
         "name": "Basin", 
-        "tags": [
-            {
-                "value": "basin", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "basin"
+        }
     }, 
     {
         "main": [
@@ -5425,12 +5170,9 @@
             "relation"
         ], 
         "name": "Reservoir", 
-        "tags": [
-            {
-                "value": "reservoir", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "reservoir"
+        }
     }, 
     {
         "main": [
@@ -5446,12 +5188,9 @@
             "relation"
         ], 
         "name": "Covered Reservoir", 
-        "tags": [
-            {
-                "value": "reservoir_covered", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "reservoir_covered"
+        }
     }, 
     {
         "main": [
@@ -5467,12 +5206,9 @@
             "relation"
         ], 
         "name": "Water", 
-        "tags": [
-            {
-                "value": "water", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "water"
+        }
     }, 
     {
         "main": [
@@ -5488,12 +5224,9 @@
             "relation"
         ], 
         "name": "Land", 
-        "tags": [
-            {
-                "value": "land", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "land"
+        }
     }, 
     {
         "main": [
@@ -5510,12 +5243,9 @@
             "relation"
         ], 
         "name": "Coastline", 
-        "tags": [
-            {
-                "value": "coastline", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "coastline"
+        }
     }, 
     {
         "main": [
@@ -5530,12 +5260,9 @@
             "relation"
         ], 
         "name": "Riverbank", 
-        "tags": [
-            {
-                "value": "riverbank", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "riverbank"
+        }
     }, 
     {
         "main": [
@@ -5565,12 +5292,9 @@
             "relation"
         ], 
         "name": "Wetland", 
-        "tags": [
-            {
-                "value": "wetland", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "wetland"
+        }
     }, 
     {
         "main": [
@@ -5586,12 +5310,9 @@
             "relation"
         ], 
         "name": "Mud", 
-        "tags": [
-            {
-                "value": "mud", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "mud"
+        }
     }, 
     {
         "main": [
@@ -5607,12 +5328,9 @@
             "relation"
         ], 
         "name": "Beach", 
-        "tags": [
-            {
-                "value": "beach", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "beach"
+        }
     }, 
     {
         "main": [
@@ -5628,12 +5346,9 @@
             "relation"
         ], 
         "name": "Bay", 
-        "tags": [
-            {
-                "value": "bay", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "bay"
+        }
     }, 
     {
         "main": [
@@ -5650,12 +5365,9 @@
             "relation"
         ], 
         "name": "Cliff", 
-        "tags": [
-            {
-                "value": "cliff", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "cliff"
+        }
     }, 
     {
         "main": [
@@ -5682,12 +5394,9 @@
             "closedway"
         ], 
         "name": "Ferry Terminal", 
-        "tags": [
-            {
-                "value": "ferry_terminal", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "ferry_terminal"
+        }
     }, 
     {
         "main": [
@@ -5702,12 +5411,9 @@
             "closedway"
         ], 
         "name": "Ferry Route", 
-        "tags": [
-            {
-                "value": "ferry", 
-                "key": "route"
-            }
-        ]
+        "tags": {
+            "route": "ferry"
+        }
     }, 
     {
         "main": [
@@ -5722,12 +5428,9 @@
             "closedway"
         ], 
         "name": "Marina", 
-        "tags": [
-            {
-                "value": "marina", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "marina"
+        }
     }, 
     {
         "main": [
@@ -5742,12 +5445,9 @@
             "closedway"
         ], 
         "name": "Pier", 
-        "tags": [
-            {
-                "value": "pier", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "pier"
+        }
     }, 
     {
         "main": [], 
@@ -5755,12 +5455,9 @@
             "node"
         ], 
         "name": "Lock Gate", 
-        "tags": [
-            {
-                "value": "lock_gate", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "lock_gate"
+        }
     }, 
     {
         "main": [], 
@@ -5768,12 +5465,9 @@
             "node"
         ], 
         "name": "Turning Point", 
-        "tags": [
-            {
-                "value": "turning_point", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "turning_point"
+        }
     }, 
     {
         "main": [
@@ -5787,12 +5481,9 @@
             "node"
         ], 
         "name": "Slipway", 
-        "tags": [
-            {
-                "value": "slipway", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "slipway"
+        }
     }, 
     {
         "main": [
@@ -5807,12 +5498,9 @@
             "closedway"
         ], 
         "name": "Boatyard", 
-        "tags": [
-            {
-                "value": "boatyard", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "boatyard"
+        }
     }, 
     {
         "main": [
@@ -5827,12 +5515,9 @@
             "closedway"
         ], 
         "name": "Dock", 
-        "tags": [
-            {
-                "value": "dock", 
-                "key": "waterway"
-            }
-        ]
+        "tags": {
+            "waterway": "dock"
+        }
     }, 
     {
         "main": [
@@ -5920,12 +5605,9 @@
             "way"
         ], 
         "name": "Rail", 
-        "tags": [
-            {
-                "value": "rail", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "rail"
+        }
     }, 
     {
         "main": [
@@ -6001,12 +5683,9 @@
             "way"
         ], 
         "name": "Narrow Gauge Rail", 
-        "tags": [
-            {
-                "value": "narrow_gauge", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "narrow_gauge"
+        }
     }, 
     {
         "main": [
@@ -6061,12 +5740,9 @@
             "way"
         ], 
         "name": "Monorail", 
-        "tags": [
-            {
-                "value": "monorail", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "monorail"
+        }
     }, 
     {
         "main": [
@@ -6142,12 +5818,9 @@
             "way"
         ], 
         "name": "Preserved", 
-        "tags": [
-            {
-                "value": "preserved", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "preserved"
+        }
     }, 
     {
         "main": [
@@ -6223,12 +5896,9 @@
             "way"
         ], 
         "name": "Light Rail", 
-        "tags": [
-            {
-                "value": "light_rail", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "light_rail"
+        }
     }, 
     {
         "main": [
@@ -6304,12 +5974,9 @@
             "way"
         ], 
         "name": "Subway", 
-        "tags": [
-            {
-                "value": "subway", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "subway"
+        }
     }, 
     {
         "main": [
@@ -6385,12 +6052,9 @@
             "way"
         ], 
         "name": "Tram", 
-        "tags": [
-            {
-                "value": "tram", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "tram"
+        }
     }, 
     {
         "main": [
@@ -6497,12 +6161,9 @@
             "way"
         ], 
         "name": "Bus Guideway", 
-        "tags": [
-            {
-                "value": "bus_guideway", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "bus_guideway"
+        }
     }, 
     {
         "main": [
@@ -6521,12 +6182,9 @@
             "way"
         ], 
         "name": "Disused Rail", 
-        "tags": [
-            {
-                "value": "disused", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "disused"
+        }
     }, 
     {
         "main": [], 
@@ -6534,12 +6192,9 @@
             "way"
         ], 
         "name": "Abandoned Rail", 
-        "tags": [
-            {
-                "value": "abandoned", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "abandoned"
+        }
     }, 
     {
         "main": [], 
@@ -6547,12 +6202,9 @@
             "node"
         ], 
         "name": "Level Crossing", 
-        "tags": [
-            {
-                "value": "level_crossing", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "level_crossing"
+        }
     }, 
     {
         "main": [
@@ -6592,12 +6244,9 @@
             "node"
         ], 
         "name": "Crossing", 
-        "tags": [
-            {
-                "value": "crossing", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "crossing"
+        }
     }, 
     {
         "main": [], 
@@ -6606,12 +6255,9 @@
             "closedway"
         ], 
         "name": "Turntable", 
-        "tags": [
-            {
-                "value": "turntable", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "turntable"
+        }
     }, 
     {
         "main": [], 
@@ -6619,12 +6265,9 @@
             "node"
         ], 
         "name": "Buffer Stop", 
-        "tags": [
-            {
-                "value": "buffer_stop", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "buffer_stop"
+        }
     }, 
     {
         "main": [
@@ -6670,12 +6313,9 @@
             "way"
         ], 
         "name": "Chair Lift", 
-        "tags": [
-            {
-                "value": "chair_lift", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "chair_lift"
+        }
     }, 
     {
         "main": [
@@ -6704,12 +6344,9 @@
             "way"
         ], 
         "name": "Drag Lift", 
-        "tags": [
-            {
-                "value": "drag_lift", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "drag_lift"
+        }
     }, 
     {
         "main": [
@@ -6749,12 +6386,9 @@
             "way"
         ], 
         "name": "Cable Car", 
-        "tags": [
-            {
-                "value": "cable_car", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "cable_car"
+        }
     }, 
     {
         "main": [
@@ -6794,12 +6428,9 @@
             "way"
         ], 
         "name": "Gondola", 
-        "tags": [
-            {
-                "value": "gondola", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "gondola"
+        }
     }, 
     {
         "main": [
@@ -6845,12 +6476,9 @@
             "way"
         ], 
         "name": "Mixed Lift", 
-        "tags": [
-            {
-                "value": "mixed_lift", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "mixed_lift"
+        }
     }, 
     {
         "main": [
@@ -6879,12 +6507,9 @@
             "way"
         ], 
         "name": "T-bar Lift", 
-        "tags": [
-            {
-                "value": "t-bar", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "t-bar"
+        }
     }, 
     {
         "main": [
@@ -6913,12 +6538,9 @@
             "way"
         ], 
         "name": "J-bar Lift", 
-        "tags": [
-            {
-                "value": "j-bar", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "j-bar"
+        }
     }, 
     {
         "main": [
@@ -6947,12 +6569,9 @@
             "way"
         ], 
         "name": "Platter Lift", 
-        "tags": [
-            {
-                "value": "platter", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "platter"
+        }
     }, 
     {
         "main": [
@@ -6981,12 +6600,9 @@
             "way"
         ], 
         "name": "Rope Tow", 
-        "tags": [
-            {
-                "value": "rope_tow", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "rope_tow"
+        }
     }, 
     {
         "main": [
@@ -7015,12 +6631,9 @@
             "way"
         ], 
         "name": "Magic Carpet", 
-        "tags": [
-            {
-                "value": "magic_carpet", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "magic_carpet"
+        }
     }, 
     {
         "main": [
@@ -7044,12 +6657,9 @@
             "way"
         ], 
         "name": "Goods", 
-        "tags": [
-            {
-                "value": "goods", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "goods"
+        }
     }, 
     {
         "main": [
@@ -7064,12 +6674,9 @@
             "closedway"
         ], 
         "name": "Station", 
-        "tags": [
-            {
-                "value": "station", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "station"
+        }
     }, 
     {
         "main": [
@@ -7083,12 +6690,9 @@
             "node"
         ], 
         "name": "Pylon", 
-        "tags": [
-            {
-                "value": "pylon", 
-                "key": "aerialway"
-            }
-        ]
+        "tags": {
+            "aerialway": "pylon"
+        }
     }, 
     {
         "main": [
@@ -7202,12 +6806,9 @@
             "closedway"
         ], 
         "name": "Parking", 
-        "tags": [
-            {
-                "value": "parking", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "parking"
+        }
     }, 
     {
         "main": [
@@ -7342,12 +6943,9 @@
             "closedway"
         ], 
         "name": "Parking space", 
-        "tags": [
-            {
-                "value": "parking_space", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "parking_space"
+        }
     }, 
     {
         "main": [
@@ -7476,12 +7074,9 @@
             "node"
         ], 
         "name": "Parking entrance", 
-        "tags": [
-            {
-                "value": "parking_entrance", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "parking_entrance"
+        }
     }, 
     {
         "main": [
@@ -7647,12 +7242,9 @@
             "closedway"
         ], 
         "name": "Fuel", 
-        "tags": [
-            {
-                "value": "fuel", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "fuel"
+        }
     }, 
     {
         "main": [
@@ -7676,12 +7268,9 @@
             "node"
         ], 
         "name": "Charging Station", 
-        "tags": [
-            {
-                "value": "charging_station", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "charging_station"
+        }
     }, 
     {
         "main": [
@@ -7716,12 +7305,9 @@
             "closedway"
         ], 
         "name": "Wash", 
-        "tags": [
-            {
-                "value": "car_wash", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "car_wash"
+        }
     }, 
     {
         "main": [
@@ -7741,12 +7327,9 @@
             "closedway"
         ], 
         "name": "Car Dealer", 
-        "tags": [
-            {
-                "value": "car", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "car"
+        }
     }, 
     {
         "main": [
@@ -7781,12 +7364,9 @@
             "closedway"
         ], 
         "name": "Repair", 
-        "tags": [
-            {
-                "value": "car_repair", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "car_repair"
+        }
     }, 
     {
         "main": [
@@ -7841,12 +7421,9 @@
             "closedway"
         ], 
         "name": "Tyres", 
-        "tags": [
-            {
-                "value": "tyres", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "tyres"
+        }
     }, 
     {
         "main": [
@@ -7881,12 +7458,9 @@
             "closedway"
         ], 
         "name": "Rental", 
-        "tags": [
-            {
-                "value": "car_rental", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "car_rental"
+        }
     }, 
     {
         "main": [
@@ -7926,12 +7500,9 @@
             "closedway"
         ], 
         "name": "Sharing", 
-        "tags": [
-            {
-                "value": "car_sharing", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "car_sharing"
+        }
     }, 
     {
         "main": [
@@ -7970,12 +7541,9 @@
             "closedway"
         ], 
         "name": "Parking", 
-        "tags": [
-            {
-                "value": "motorcycle_parking", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "motorcycle_parking"
+        }
     }, 
     {
         "main": [
@@ -8104,12 +7672,9 @@
             "closedway"
         ], 
         "name": "Motorcycle Dealer", 
-        "tags": [
-            {
-                "value": "motorcycle", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "motorcycle"
+        }
     }, 
     {
         "main": [
@@ -8161,12 +7726,9 @@
             "closedway"
         ], 
         "name": "Parking", 
-        "tags": [
-            {
-                "value": "bicycle_parking", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bicycle_parking"
+        }
     }, 
     {
         "main": [
@@ -8223,12 +7785,9 @@
             "closedway"
         ], 
         "name": "Bike Dealer", 
-        "tags": [
-            {
-                "value": "bicycle", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "bicycle"
+        }
     }, 
     {
         "main": [
@@ -8243,12 +7802,9 @@
             "closedway"
         ], 
         "name": "Rental", 
-        "tags": [
-            {
-                "value": "bicycle_rental", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bicycle_rental"
+        }
     }, 
     {
         "main": [
@@ -8268,12 +7824,9 @@
             "closedway"
         ], 
         "name": "Station", 
-        "tags": [
-            {
-                "value": "station", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "station"
+        }
     }, 
     {
         "main": [
@@ -8287,12 +7840,9 @@
             "node"
         ], 
         "name": "Railway Halt", 
-        "tags": [
-            {
-                "value": "halt", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "halt"
+        }
     }, 
     {
         "main": [
@@ -8306,12 +7856,9 @@
             "node"
         ], 
         "name": "Tram Stop", 
-        "tags": [
-            {
-                "value": "tram_stop", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "tram_stop"
+        }
     }, 
     {
         "main": [
@@ -8337,12 +7884,9 @@
             "closedway"
         ], 
         "name": "Railway Platform", 
-        "tags": [
-            {
-                "value": "platform", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "platform"
+        }
     }, 
     {
         "main": [
@@ -8368,12 +7912,9 @@
             "node"
         ], 
         "name": "Subway Entrance", 
-        "tags": [
-            {
-                "value": "subway_entrance", 
-                "key": "railway"
-            }
-        ]
+        "tags": {
+            "railway": "subway_entrance"
+        }
     }, 
     {
         "favorite": true, 
@@ -8389,12 +7930,9 @@
             "closedway"
         ], 
         "name": "Bus Station", 
-        "tags": [
-            {
-                "value": "bus_station", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bus_station"
+        }
     }, 
     {
         "main": [
@@ -8435,12 +7973,9 @@
             "node"
         ], 
         "name": "Bus Stop", 
-        "tags": [
-            {
-                "value": "bus_stop", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "bus_stop"
+        }
     }, 
     {
         "main": [
@@ -8466,12 +8001,9 @@
             "closedway"
         ], 
         "name": "Bus Platform", 
-        "tags": [
-            {
-                "value": "platform", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "platform"
+        }
     }, 
     {
         "main": [
@@ -8531,16 +8063,10 @@
             "node"
         ], 
         "name": "Ticket Machine", 
-        "tags": [
-            {
-                "value": "vending_machine", 
-                "key": "amenity"
-            }, 
-            {
-                "value": "public_transport_tickets", 
-                "key": "vending"
-            }
-        ]
+        "tags": {
+            "amenity": "vending_machine", 
+            "vending": "public_transport_tickets"
+        }
     }, 
     {
         "main": [
@@ -8555,12 +8081,9 @@
             "closedway"
         ], 
         "name": "Taxi", 
-        "tags": [
-            {
-                "value": "taxi", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "taxi"
+        }
     }, 
     {
         "main": [
@@ -8590,12 +8113,9 @@
             "closedway"
         ], 
         "name": "Airport Ground", 
-        "tags": [
-            {
-                "value": "aerodrome", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "aerodrome"
+        }
     }, 
     {
         "main": [
@@ -8609,12 +8129,9 @@
             "way"
         ], 
         "name": "Runway", 
-        "tags": [
-            {
-                "value": "runway", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "runway"
+        }
     }, 
     {
         "main": [
@@ -8628,12 +8145,9 @@
             "way"
         ], 
         "name": "Taxiway", 
-        "tags": [
-            {
-                "value": "taxiway", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "taxiway"
+        }
     }, 
     {
         "main": [
@@ -8648,12 +8162,9 @@
             "closedway"
         ], 
         "name": "Helipad", 
-        "tags": [
-            {
-                "value": "helipad", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "helipad"
+        }
     }, 
     {
         "main": [], 
@@ -8661,12 +8172,9 @@
             "closedway"
         ], 
         "name": "Apron", 
-        "tags": [
-            {
-                "value": "apron", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "apron"
+        }
     }, 
     {
         "main": [], 
@@ -8675,12 +8183,9 @@
             "closedway"
         ], 
         "name": "Hangar", 
-        "tags": [
-            {
-                "value": "hangar", 
-                "key": "building"
-            }
-        ]
+        "tags": {
+            "building": "hangar"
+        }
     }, 
     {
         "main": [], 
@@ -8688,12 +8193,9 @@
             "node"
         ], 
         "name": "Beacon", 
-        "tags": [
-            {
-                "value": "beacon", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "beacon"
+        }
     }, 
     {
         "main": [], 
@@ -8701,12 +8203,9 @@
             "node"
         ], 
         "name": "Windsock", 
-        "tags": [
-            {
-                "value": "windsock", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "windsock"
+        }
     }, 
     {
         "main": [
@@ -8721,12 +8220,9 @@
             "closedway"
         ], 
         "name": "Terminal", 
-        "tags": [
-            {
-                "value": "terminal", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "terminal"
+        }
     }, 
     {
         "main": [
@@ -8740,12 +8236,9 @@
             "node"
         ], 
         "name": "Gate", 
-        "tags": [
-            {
-                "value": "gate", 
-                "key": "aeroway"
-            }
-        ]
+        "tags": {
+            "aeroway": "gate"
+        }
     }, 
     {
         "main": [
@@ -8841,12 +8334,9 @@
             "closedway"
         ], 
         "name": "Hotel", 
-        "tags": [
-            {
-                "value": "hotel", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "hotel"
+        }
     }, 
     {
         "main": [
@@ -8942,12 +8432,9 @@
             "closedway"
         ], 
         "name": "Motel", 
-        "tags": [
-            {
-                "value": "motel", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "motel"
+        }
     }, 
     {
         "main": [
@@ -9038,12 +8525,9 @@
             "closedway"
         ], 
         "name": "Guest House", 
-        "tags": [
-            {
-                "value": "guest_house", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "guest_house"
+        }
     }, 
     {
         "main": [
@@ -9134,12 +8618,9 @@
             "closedway"
         ], 
         "name": "Chalet", 
-        "tags": [
-            {
-                "value": "chalet", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "chalet"
+        }
     }, 
     {
         "main": [
@@ -9235,12 +8716,9 @@
             "closedway"
         ], 
         "name": "Hostel", 
-        "tags": [
-            {
-                "value": "hostel", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "hostel"
+        }
     }, 
     {
         "main": [
@@ -9327,12 +8805,9 @@
             "closedway"
         ], 
         "name": "Alpine Hut", 
-        "tags": [
-            {
-                "value": "alpine_hut", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "alpine_hut"
+        }
     }, 
     {
         "main": [
@@ -9450,12 +8925,9 @@
             "closedway"
         ], 
         "name": "Caravan Site", 
-        "tags": [
-            {
-                "value": "caravan_site", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "caravan_site"
+        }
     }, 
     {
         "main": [
@@ -9546,12 +9018,9 @@
             "closedway"
         ], 
         "name": "Camping Site", 
-        "tags": [
-            {
-                "value": "camp_site", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "camp_site"
+        }
     }, 
     {
         "favorite": true, 
@@ -9664,12 +9133,9 @@
             "closedway"
         ], 
         "name": "Restaurant", 
-        "tags": [
-            {
-                "value": "restaurant", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "restaurant"
+        }
     }, 
     {
         "main": [
@@ -9787,12 +9253,9 @@
             "closedway"
         ], 
         "name": "Fast Food", 
-        "tags": [
-            {
-                "value": "fast_food", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "fast_food"
+        }
     }, 
     {
         "main": [
@@ -9879,12 +9342,9 @@
             "closedway"
         ], 
         "name": "Food Court", 
-        "tags": [
-            {
-                "value": "food_court", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "food_court"
+        }
     }, 
     {
         "favorite": true, 
@@ -9985,12 +9445,9 @@
             "closedway"
         ], 
         "name": "Cafe", 
-        "tags": [
-            {
-                "value": "cafe", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "cafe"
+        }
     }, 
     {
         "main": [
@@ -10088,12 +9545,9 @@
             "closedway"
         ], 
         "name": "Pub", 
-        "tags": [
-            {
-                "value": "pub", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "pub"
+        }
     }, 
     {
         "main": [
@@ -10180,12 +9634,9 @@
             "closedway"
         ], 
         "name": "Biergarten", 
-        "tags": [
-            {
-                "value": "biergarten", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "biergarten"
+        }
     }, 
     {
         "favorite": true, 
@@ -10273,12 +9724,9 @@
             "closedway"
         ], 
         "name": "Bar", 
-        "tags": [
-            {
-                "value": "bar", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bar"
+        }
     }, 
     {
         "main": [
@@ -10344,12 +9792,9 @@
             "closedway"
         ], 
         "name": "Nightclub", 
-        "tags": [
-            {
-                "value": "nightclub", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "nightclub"
+        }
     }, 
     {
         "main": [
@@ -10369,12 +9814,9 @@
             "closedway"
         ], 
         "name": "Attraction", 
-        "tags": [
-            {
-                "value": "attraction", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "attraction"
+        }
     }, 
     {
         "main": [
@@ -10389,12 +9831,9 @@
             "closedway"
         ], 
         "name": "Viewpoint", 
-        "tags": [
-            {
-                "value": "viewpoint", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "viewpoint"
+        }
     }, 
     {
         "main": [
@@ -10419,16 +9858,10 @@
             "closedway"
         ], 
         "name": "Information Office", 
-        "tags": [
-            {
-                "value": "information", 
-                "key": "tourism"
-            }, 
-            {
-                "value": "office", 
-                "key": "information"
-            }
-        ]
+        "tags": {
+            "information": "office", 
+            "tourism": "information"
+        }
     }, 
     {
         "main": [
@@ -10497,16 +9930,10 @@
             "node"
         ], 
         "name": "Map", 
-        "tags": [
-            {
-                "value": "information", 
-                "key": "tourism"
-            }, 
-            {
-                "value": "map", 
-                "key": "information"
-            }
-        ]
+        "tags": {
+            "information": "map", 
+            "tourism": "information"
+        }
     }, 
     {
         "main": [
@@ -10537,16 +9964,10 @@
             "node"
         ], 
         "name": "Information Board", 
-        "tags": [
-            {
-                "value": "information", 
-                "key": "tourism"
-            }, 
-            {
-                "value": "board", 
-                "key": "information"
-            }
-        ]
+        "tags": {
+            "information": "board", 
+            "tourism": "information"
+        }
     }, 
     {
         "main": [
@@ -10595,16 +10016,10 @@
             "node"
         ], 
         "name": "Guidepost", 
-        "tags": [
-            {
-                "value": "information", 
-                "key": "tourism"
-            }, 
-            {
-                "value": "guidepost", 
-                "key": "information"
-            }
-        ]
+        "tags": {
+            "information": "guidepost", 
+            "tourism": "information"
+        }
     }, 
     {
         "main": [
@@ -10642,16 +10057,10 @@
             "node"
         ], 
         "name": "Information Terminal", 
-        "tags": [
-            {
-                "value": "information", 
-                "key": "tourism"
-            }, 
-            {
-                "value": "terminal", 
-                "key": "information"
-            }
-        ]
+        "tags": {
+            "information": "terminal", 
+            "tourism": "information"
+        }
     }, 
     {
         "main": [
@@ -10694,16 +10103,10 @@
             "node"
         ], 
         "name": "Audioguide", 
-        "tags": [
-            {
-                "value": "information", 
-                "key": "tourism"
-            }, 
-            {
-                "value": "audioguide", 
-                "key": "information"
-            }
-        ]
+        "tags": {
+            "information": "audioguide", 
+            "tourism": "information"
+        }
     }, 
     {
         "main": [
@@ -10723,12 +10126,9 @@
             "closedway"
         ], 
         "name": "Other Information Points", 
-        "tags": [
-            {
-                "value": "information", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "information"
+        }
     }, 
     {
         "main": [
@@ -10744,12 +10144,9 @@
             "relation"
         ], 
         "name": "Cinema", 
-        "tags": [
-            {
-                "value": "cinema", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "cinema"
+        }
     }, 
     {
         "main": [
@@ -10779,12 +10176,9 @@
             "closedway"
         ], 
         "name": "Zoo", 
-        "tags": [
-            {
-                "value": "zoo", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "zoo"
+        }
     }, 
     {
         "main": [
@@ -10830,12 +10224,9 @@
             "closedway"
         ], 
         "name": "Dog Park", 
-        "tags": [
-            {
-                "value": "dog_park", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "dog_park"
+        }
     }, 
     {
         "main": [
@@ -10860,12 +10251,9 @@
             "closedway"
         ], 
         "name": "Theme Park", 
-        "tags": [
-            {
-                "value": "theme_park", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "theme_park"
+        }
     }, 
     {
         "main": [
@@ -10880,12 +10268,9 @@
             "closedway"
         ], 
         "name": "Water Park", 
-        "tags": [
-            {
-                "value": "water_park", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "water_park"
+        }
     }, 
     {
         "main": [
@@ -10925,12 +10310,9 @@
             "closedway"
         ], 
         "name": "Sauna", 
-        "tags": [
-            {
-                "value": "sauna", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "sauna"
+        }
     }, 
     {
         "main": [
@@ -10945,12 +10327,9 @@
             "closedway"
         ], 
         "name": "Playground", 
-        "tags": [
-            {
-                "value": "playground", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "playground"
+        }
     }, 
     {
         "main": [
@@ -10971,12 +10350,9 @@
             "closedway"
         ], 
         "name": "Picnic Site", 
-        "tags": [
-            {
-                "value": "picnic_site", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "picnic_site"
+        }
     }, 
     {
         "main": [
@@ -11009,12 +10385,9 @@
             "node"
         ], 
         "name": "Public Grill", 
-        "tags": [
-            {
-                "value": "bbq", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bbq"
+        }
     }, 
     {
         "main": [
@@ -11029,12 +10402,9 @@
             "closedway"
         ], 
         "name": "Fishing", 
-        "tags": [
-            {
-                "value": "fishing", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "fishing"
+        }
     }, 
     {
         "main": [], 
@@ -11043,16 +10413,10 @@
             "closedway"
         ], 
         "name": "Private Swimming Pool", 
-        "tags": [
-            {
-                "value": "swimming_pool", 
-                "key": "leisure"
-            }, 
-            {
-                "value": "private", 
-                "key": "access"
-            }
-        ]
+        "tags": {
+            "access": "private", 
+            "leisure": "swimming_pool"
+        }
     }, 
     {
         "main": [
@@ -11082,12 +10446,9 @@
             "closedway"
         ], 
         "name": "Museum", 
-        "tags": [
-            {
-                "value": "museum", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "museum"
+        }
     }, 
     {
         "main": [
@@ -11103,12 +10464,9 @@
             "relation"
         ], 
         "name": "Theatre", 
-        "tags": [
-            {
-                "value": "theatre", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "theatre"
+        }
     }, 
     {
         "main": [
@@ -11134,12 +10492,9 @@
             "relation"
         ], 
         "name": "Library", 
-        "tags": [
-            {
-                "value": "library", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "library"
+        }
     }, 
     {
         "main": [
@@ -11155,12 +10510,9 @@
             "relation"
         ], 
         "name": "Arts Centre", 
-        "tags": [
-            {
-                "value": "arts_centre", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "arts_centre"
+        }
     }, 
     {
         "main": [
@@ -11176,12 +10528,9 @@
             "closedway"
         ], 
         "name": "Artwork", 
-        "tags": [
-            {
-                "value": "artwork", 
-                "key": "tourism"
-            }
-        ]
+        "tags": {
+            "tourism": "artwork"
+        }
     }, 
     {
         "favorite": true, 
@@ -11259,12 +10608,9 @@
             "relation"
         ], 
         "name": "Place of Worship", 
-        "tags": [
-            {
-                "value": "place_of_worship", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "place_of_worship"
+        }
     }, 
     {
         "main": [
@@ -11302,12 +10648,9 @@
             "node"
         ], 
         "name": "Recording Studio", 
-        "tags": [
-            {
-                "value": "studio", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "studio"
+        }
     }, 
     {
         "main": [
@@ -11323,12 +10666,9 @@
             "relation"
         ], 
         "name": "Public Building", 
-        "tags": [
-            {
-                "value": "public_building", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "public_building"
+        }
     }, 
     {
         "main": [
@@ -11344,12 +10684,9 @@
             "relation"
         ], 
         "name": "Town hall", 
-        "tags": [
-            {
-                "value": "townhall", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "townhall"
+        }
     }, 
     {
         "main": [
@@ -11379,12 +10716,9 @@
             "closedway"
         ], 
         "name": "Community Centre", 
-        "tags": [
-            {
-                "value": "community_centre", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "community_centre"
+        }
     }, 
     {
         "main": [
@@ -11400,12 +10734,9 @@
             "relation"
         ], 
         "name": "Embassy", 
-        "tags": [
-            {
-                "value": "embassy", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "embassy"
+        }
     }, 
     {
         "main": [
@@ -11421,12 +10752,9 @@
             "relation"
         ], 
         "name": "Courthouse", 
-        "tags": [
-            {
-                "value": "courthouse", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "courthouse"
+        }
     }, 
     {
         "main": [
@@ -11442,12 +10770,9 @@
             "relation"
         ], 
         "name": "Prison", 
-        "tags": [
-            {
-                "value": "prison", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "prison"
+        }
     }, 
     {
         "main": [
@@ -11463,12 +10788,9 @@
             "relation"
         ], 
         "name": "Police", 
-        "tags": [
-            {
-                "value": "police", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "police"
+        }
     }, 
     {
         "main": [
@@ -11484,12 +10806,9 @@
             "relation"
         ], 
         "name": "Fire Station", 
-        "tags": [
-            {
-                "value": "fire_station", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "fire_station"
+        }
     }, 
     {
         "main": [
@@ -11510,12 +10829,9 @@
             "relation"
         ], 
         "name": "Post Office", 
-        "tags": [
-            {
-                "value": "post_office", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "post_office"
+        }
     }, 
     {
         "main": [
@@ -11531,12 +10847,9 @@
             "relation"
         ], 
         "name": "Kindergarten", 
-        "tags": [
-            {
-                "value": "kindergarten", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "kindergarten"
+        }
     }, 
     {
         "main": [
@@ -11552,12 +10865,9 @@
             "relation"
         ], 
         "name": "School", 
-        "tags": [
-            {
-                "value": "school", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "school"
+        }
     }, 
     {
         "main": [
@@ -11573,12 +10883,9 @@
             "relation"
         ], 
         "name": "University", 
-        "tags": [
-            {
-                "value": "university", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "university"
+        }
     }, 
     {
         "main": [
@@ -11594,12 +10901,9 @@
             "relation"
         ], 
         "name": "College", 
-        "tags": [
-            {
-                "value": "college", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "college"
+        }
     }, 
     {
         "main": [
@@ -11624,12 +10928,9 @@
             "closedway"
         ], 
         "name": "Driving School", 
-        "tags": [
-            {
-                "value": "driving_school", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "driving_school"
+        }
     }, 
     {
         "favorite": true, 
@@ -11645,12 +10946,9 @@
             "closedway"
         ], 
         "name": "Hospital", 
-        "tags": [
-            {
-                "value": "hospital", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "hospital"
+        }
     }, 
     {
         "main": [
@@ -11675,12 +10973,9 @@
             "closedway"
         ], 
         "name": "Doctors", 
-        "tags": [
-            {
-                "value": "doctors", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "doctors"
+        }
     }, 
     {
         "main": [
@@ -11705,12 +11000,9 @@
             "closedway"
         ], 
         "name": "Dentist", 
-        "tags": [
-            {
-                "value": "dentist", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "dentist"
+        }
     }, 
     {
         "main": [
@@ -11730,12 +11022,9 @@
             "closedway"
         ], 
         "name": "Nursing Home", 
-        "tags": [
-            {
-                "value": "nursing_home", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "nursing_home"
+        }
     }, 
     {
         "main": [
@@ -11769,12 +11058,9 @@
             "closedway"
         ], 
         "name": "Pharmacy", 
-        "tags": [
-            {
-                "value": "pharmacy", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "pharmacy"
+        }
     }, 
     {
         "main": [
@@ -11804,12 +11090,9 @@
             "closedway"
         ], 
         "name": "Hearing Aids", 
-        "tags": [
-            {
-                "value": "hearing_aids", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "hearing_aids"
+        }
     }, 
     {
         "main": [
@@ -11829,12 +11112,9 @@
             "closedway"
         ], 
         "name": "Baby Hatch", 
-        "tags": [
-            {
-                "value": "baby_hatch", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "baby_hatch"
+        }
     }, 
     {
         "main": [
@@ -11864,12 +11144,9 @@
             "closedway"
         ], 
         "name": "Emergency Access Point", 
-        "tags": [
-            {
-                "value": "emergency_access_point", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "emergency_access_point"
+        }
     }, 
     {
         "main": [
@@ -11894,12 +11171,9 @@
             "closedway"
         ], 
         "name": "Veterinary", 
-        "tags": [
-            {
-                "value": "veterinary", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "veterinary"
+        }
     }, 
     {
         "main": [
@@ -11943,12 +11217,9 @@
             "closedway"
         ], 
         "name": "Toilets", 
-        "tags": [
-            {
-                "value": "toilets", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "toilets"
+        }
     }, 
     {
         "main": [
@@ -11962,12 +11233,9 @@
             "node"
         ], 
         "name": "Post Box", 
-        "tags": [
-            {
-                "value": "post_box", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "post_box"
+        }
     }, 
     {
         "main": [
@@ -12017,12 +11285,9 @@
             "node"
         ], 
         "name": "Telephone", 
-        "tags": [
-            {
-                "value": "telephone", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "telephone"
+        }
     }, 
     {
         "main": [
@@ -12087,12 +11352,9 @@
             "node"
         ], 
         "name": "Clock", 
-        "tags": [
-            {
-                "value": "clock", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "clock"
+        }
     }, 
     {
         "main": [
@@ -12147,12 +11409,9 @@
             "closedway"
         ], 
         "name": "Recycling", 
-        "tags": [
-            {
-                "value": "recycling", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "recycling"
+        }
     }, 
     {
         "main": [], 
@@ -12160,12 +11419,9 @@
             "node"
         ], 
         "name": "Waste Basket", 
-        "tags": [
-            {
-                "value": "waste_basket", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "waste_basket"
+        }
     }, 
     {
         "main": [], 
@@ -12173,12 +11429,9 @@
             "node"
         ], 
         "name": "Waste Disposal", 
-        "tags": [
-            {
-                "value": "waste_disposal", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "waste_disposal"
+        }
     }, 
     {
         "main": [
@@ -12237,12 +11490,9 @@
             "node"
         ], 
         "name": "Bench", 
-        "tags": [
-            {
-                "value": "bench", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bench"
+        }
     }, 
     {
         "main": [
@@ -12274,12 +11524,9 @@
             "closedway"
         ], 
         "name": "Shelter", 
-        "tags": [
-            {
-                "value": "shelter", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "shelter"
+        }
     }, 
     {
         "main": [
@@ -12332,12 +11579,9 @@
             "node"
         ], 
         "name": "Hunting Stand", 
-        "tags": [
-            {
-                "value": "hunting_stand", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "hunting_stand"
+        }
     }, 
     {
         "main": [
@@ -12351,12 +11595,9 @@
             "node"
         ], 
         "name": "Drinking Water", 
-        "tags": [
-            {
-                "value": "drinking_water", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "drinking_water"
+        }
     }, 
     {
         "main": [
@@ -12433,12 +11674,9 @@
             "node"
         ], 
         "name": "Fire Hydrant", 
-        "tags": [
-            {
-                "value": "fire_hydrant", 
-                "key": "emergency"
-            }
-        ]
+        "tags": {
+            "emergency": "fire_hydrant"
+        }
     }, 
     {
         "main": [
@@ -12496,12 +11734,9 @@
             "closedway"
         ], 
         "name": "Stadium", 
-        "tags": [
-            {
-                "value": "stadium", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "stadium"
+        }
     }, 
     {
         "main": [
@@ -12559,12 +11794,9 @@
             "closedway"
         ], 
         "name": "Sports Centre", 
-        "tags": [
-            {
-                "value": "sports_centre", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "sports_centre"
+        }
     }, 
     {
         "main": [
@@ -12621,12 +11853,9 @@
             "closedway"
         ], 
         "name": "Pitch", 
-        "tags": [
-            {
-                "value": "pitch", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "pitch"
+        }
     }, 
     {
         "main": [
@@ -12685,12 +11914,9 @@
             "relation"
         ], 
         "name": "Racetrack", 
-        "tags": [
-            {
-                "value": "track", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "track"
+        }
     }, 
     {
         "main": [
@@ -12715,12 +11941,9 @@
             "closedway"
         ], 
         "name": "Golf Course", 
-        "tags": [
-            {
-                "value": "golf_course", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "golf_course"
+        }
     }, 
     {
         "main": [
@@ -12745,12 +11968,9 @@
             "closedway"
         ], 
         "name": "Miniature Golf", 
-        "tags": [
-            {
-                "value": "miniature_golf", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "miniature_golf"
+        }
     }, 
     {
         "main": [
@@ -12776,12 +11996,9 @@
             "closedway"
         ], 
         "name": "Multi", 
-        "tags": [
-            {
-                "value": "multi", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "multi"
+        }
     }, 
     {
         "main": [
@@ -12806,12 +12023,9 @@
             "closedway"
         ], 
         "name": "9pin", 
-        "tags": [
-            {
-                "value": "9pin", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "9pin"
+        }
     }, 
     {
         "main": [
@@ -12836,12 +12050,9 @@
             "closedway"
         ], 
         "name": "10pin", 
-        "tags": [
-            {
-                "value": "10pin", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "10pin"
+        }
     }, 
     {
         "main": [
@@ -12866,12 +12077,9 @@
             "closedway"
         ], 
         "name": "Archery", 
-        "tags": [
-            {
-                "value": "archery", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "archery"
+        }
     }, 
     {
         "main": [
@@ -12897,12 +12105,9 @@
             "closedway"
         ], 
         "name": "Athletics", 
-        "tags": [
-            {
-                "value": "athletics", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "athletics"
+        }
     }, 
     {
         "main": [
@@ -12925,12 +12130,9 @@
             "closedway"
         ], 
         "name": "Climbing", 
-        "tags": [
-            {
-                "value": "climbing", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "climbing"
+        }
     }, 
     {
         "main": [
@@ -12946,12 +12148,9 @@
             "closedway"
         ], 
         "name": "Canoeing", 
-        "tags": [
-            {
-                "value": "canoe", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "canoe"
+        }
     }, 
     {
         "main": [
@@ -12977,12 +12176,9 @@
             "closedway"
         ], 
         "name": "Cycling", 
-        "tags": [
-            {
-                "value": "cycling", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "cycling"
+        }
     }, 
     {
         "main": [
@@ -13008,12 +12204,9 @@
             "closedway"
         ], 
         "name": "Dog Racing", 
-        "tags": [
-            {
-                "value": "dog_racing", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "dog_racing"
+        }
     }, 
     {
         "main": [
@@ -13040,12 +12233,9 @@
             "closedway"
         ], 
         "name": "Equestrian", 
-        "tags": [
-            {
-                "value": "equestrian", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "equestrian"
+        }
     }, 
     {
         "main": [
@@ -13071,12 +12261,9 @@
             "closedway"
         ], 
         "name": "Horse Racing", 
-        "tags": [
-            {
-                "value": "horse_racing", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "horse_racing"
+        }
     }, 
     {
         "main": [
@@ -13101,12 +12288,9 @@
             "closedway"
         ], 
         "name": "Gymnastics", 
-        "tags": [
-            {
-                "value": "gymnastics", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "gymnastics"
+        }
     }, 
     {
         "main": [
@@ -13132,12 +12316,9 @@
             "closedway"
         ], 
         "name": "Skating", 
-        "tags": [
-            {
-                "value": "skating", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "skating"
+        }
     }, 
     {
         "main": [
@@ -13163,12 +12344,9 @@
             "closedway"
         ], 
         "name": "Skateboard", 
-        "tags": [
-            {
-                "value": "skateboard", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "skateboard"
+        }
     }, 
     {
         "main": [
@@ -13194,12 +12372,9 @@
             "closedway"
         ], 
         "name": "Swimming", 
-        "tags": [
-            {
-                "value": "swimming", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "swimming"
+        }
     }, 
     {
         "main": [
@@ -13252,12 +12427,9 @@
             "closedway"
         ], 
         "name": "Skiing", 
-        "tags": [
-            {
-                "value": "skiing", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "skiing"
+        }
     }, 
     {
         "main": [
@@ -13283,12 +12455,9 @@
             "closedway"
         ], 
         "name": "Shooting", 
-        "tags": [
-            {
-                "value": "shooting", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "shooting"
+        }
     }, 
     {
         "main": [
@@ -13313,12 +12482,9 @@
             "closedway"
         ], 
         "name": "Soccer", 
-        "tags": [
-            {
-                "value": "soccer", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "soccer"
+        }
     }, 
     {
         "main": [
@@ -13343,12 +12509,9 @@
             "closedway"
         ], 
         "name": "Australian Football", 
-        "tags": [
-            {
-                "value": "australian_football", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "australian_football"
+        }
     }, 
     {
         "main": [
@@ -13373,12 +12536,9 @@
             "closedway"
         ], 
         "name": "American Football", 
-        "tags": [
-            {
-                "value": "american_football", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "american_football"
+        }
     }, 
     {
         "main": [
@@ -13403,12 +12563,9 @@
             "closedway"
         ], 
         "name": "Canadian Football", 
-        "tags": [
-            {
-                "value": "canadian_football", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "canadian_football"
+        }
     }, 
     {
         "main": [
@@ -13457,12 +12614,9 @@
             "closedway"
         ], 
         "name": "Gaelic Games", 
-        "tags": [
-            {
-                "value": "gaelic_games", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "gaelic_games"
+        }
     }, 
     {
         "main": [
@@ -13487,12 +12641,9 @@
             "closedway"
         ], 
         "name": "Rugby League", 
-        "tags": [
-            {
-                "value": "rugby_league", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "rugby_league"
+        }
     }, 
     {
         "main": [
@@ -13517,12 +12668,9 @@
             "closedway"
         ], 
         "name": "Rugby Union", 
-        "tags": [
-            {
-                "value": "rugby_union", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "rugby_union"
+        }
     }, 
     {
         "main": [
@@ -13547,12 +12695,9 @@
             "closedway"
         ], 
         "name": "Baseball", 
-        "tags": [
-            {
-                "value": "baseball", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "baseball"
+        }
     }, 
     {
         "main": [
@@ -13577,12 +12722,9 @@
             "closedway"
         ], 
         "name": "Basketball", 
-        "tags": [
-            {
-                "value": "basketball", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "basketball"
+        }
     }, 
     {
         "main": [
@@ -13612,12 +12754,9 @@
             "closedway"
         ], 
         "name": "Volleyball", 
-        "tags": [
-            {
-                "value": "volleyball", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "volleyball"
+        }
     }, 
     {
         "main": [
@@ -13647,12 +12786,9 @@
             "closedway"
         ], 
         "name": "Beachvolleyball", 
-        "tags": [
-            {
-                "value": "beachvolleyball", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "beachvolleyball"
+        }
     }, 
     {
         "main": [
@@ -13678,12 +12814,9 @@
             "closedway"
         ], 
         "name": "Golf", 
-        "tags": [
-            {
-                "value": "golf", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "golf"
+        }
     }, 
     {
         "main": [
@@ -13708,12 +12841,9 @@
             "closedway"
         ], 
         "name": "Boule", 
-        "tags": [
-            {
-                "value": "boules", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "boules"
+        }
     }, 
     {
         "main": [
@@ -13738,12 +12868,9 @@
             "closedway"
         ], 
         "name": "Bowls", 
-        "tags": [
-            {
-                "value": "bowls", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "bowls"
+        }
     }, 
     {
         "main": [
@@ -13768,12 +12895,9 @@
             "closedway"
         ], 
         "name": "Cricket", 
-        "tags": [
-            {
-                "value": "cricket", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "cricket"
+        }
     }, 
     {
         "main": [
@@ -13798,12 +12922,9 @@
             "closedway"
         ], 
         "name": "Cricket Nets", 
-        "tags": [
-            {
-                "value": "cricket_nets", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "cricket_nets"
+        }
     }, 
     {
         "main": [
@@ -13828,12 +12949,9 @@
             "closedway"
         ], 
         "name": "Croquet", 
-        "tags": [
-            {
-                "value": "croquet", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "croquet"
+        }
     }, 
     {
         "main": [
@@ -13859,12 +12977,9 @@
             "closedway"
         ], 
         "name": "Hockey", 
-        "tags": [
-            {
-                "value": "hockey", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "hockey"
+        }
     }, 
     {
         "main": [
@@ -13889,12 +13004,9 @@
             "closedway"
         ], 
         "name": "Pelota", 
-        "tags": [
-            {
-                "value": "pelota", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "pelota"
+        }
     }, 
     {
         "main": [
@@ -13919,12 +13031,9 @@
             "closedway"
         ], 
         "name": "Racquet", 
-        "tags": [
-            {
-                "value": "racquet", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "racquet"
+        }
     }, 
     {
         "main": [
@@ -13949,12 +13058,9 @@
             "closedway"
         ], 
         "name": "Table Tennis", 
-        "tags": [
-            {
-                "value": "table_tennis", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "table_tennis"
+        }
     }, 
     {
         "main": [
@@ -13979,12 +13085,9 @@
             "closedway"
         ], 
         "name": "Tennis", 
-        "tags": [
-            {
-                "value": "tennis", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "tennis"
+        }
     }, 
     {
         "main": [
@@ -14010,12 +13113,9 @@
             "closedway"
         ], 
         "name": "Motorsport", 
-        "tags": [
-            {
-                "value": "motor", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "motor"
+        }
     }, 
     {
         "main": [
@@ -14040,12 +13140,9 @@
             "closedway"
         ], 
         "name": "Karting", 
-        "tags": [
-            {
-                "value": "karting", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "karting"
+        }
     }, 
     {
         "main": [
@@ -14070,12 +13167,9 @@
             "closedway"
         ], 
         "name": "Motocross", 
-        "tags": [
-            {
-                "value": "motocross", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "motocross"
+        }
     }, 
     {
         "main": [
@@ -14100,12 +13194,9 @@
             "closedway"
         ], 
         "name": "Safety Training", 
-        "tags": [
-            {
-                "value": "safety_training", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "safety_training"
+        }
     }, 
     {
         "main": [
@@ -14130,12 +13221,9 @@
             "closedway"
         ], 
         "name": "Model Aerodrome", 
-        "tags": [
-            {
-                "value": "model_aerodrome", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "model_aerodrome"
+        }
     }, 
     {
         "main": [
@@ -14160,12 +13248,9 @@
             "closedway"
         ], 
         "name": "RC Car", 
-        "tags": [
-            {
-                "value": "rc_car", 
-                "key": "sport"
-            }
-        ]
+        "tags": {
+            "sport": "rc_car"
+        }
     }, 
     {
         "main": [
@@ -14201,7 +13286,7 @@
             "relation"
         ], 
         "name": "Building", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -14231,7 +13316,7 @@
             "relation"
         ], 
         "name": "Residential Building", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -14265,12 +13350,9 @@
             "closedway"
         ], 
         "name": "Tower", 
-        "tags": [
-            {
-                "value": "tower", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "tower"
+        }
     }, 
     {
         "main": [], 
@@ -14278,12 +13360,9 @@
             "node"
         ], 
         "name": "Flagpole", 
-        "tags": [
-            {
-                "value": "flagpole", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "flagpole"
+        }
     }, 
     {
         "main": [
@@ -14298,12 +13377,9 @@
             "closedway"
         ], 
         "name": "Works", 
-        "tags": [
-            {
-                "value": "works", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "works"
+        }
     }, 
     {
         "main": [
@@ -14327,12 +13403,9 @@
             "node"
         ], 
         "name": "Chimney", 
-        "tags": [
-            {
-                "value": "chimney", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "chimney"
+        }
     }, 
     {
         "main": [
@@ -14347,12 +13420,9 @@
             "closedway"
         ], 
         "name": "Windmill", 
-        "tags": [
-            {
-                "value": "windmill", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "windmill"
+        }
     }, 
     {
         "main": [
@@ -14367,12 +13437,9 @@
             "closedway"
         ], 
         "name": "Gasometer", 
-        "tags": [
-            {
-                "value": "gasometer", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "gasometer"
+        }
     }, 
     {
         "main": [
@@ -14408,12 +13475,9 @@
             "way"
         ], 
         "name": "Pipeline", 
-        "tags": [
-            {
-                "value": "pipeline", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "pipeline"
+        }
     }, 
     {
         "main": [
@@ -14428,12 +13492,9 @@
             "closedway"
         ], 
         "name": "Crane", 
-        "tags": [
-            {
-                "value": "crane", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "crane"
+        }
     }, 
     {
         "main": [
@@ -14506,12 +13567,9 @@
             "closedway"
         ], 
         "name": "Mineshaft", 
-        "tags": [
-            {
-                "value": "mineshaft", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "mineshaft"
+        }
     }, 
     {
         "main": [
@@ -14565,12 +13623,9 @@
             "node"
         ], 
         "name": "Adit", 
-        "tags": [
-            {
-                "value": "adit", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "adit"
+        }
     }, 
     {
         "main": [
@@ -14585,12 +13640,9 @@
             "closedway"
         ], 
         "name": "Water Tower", 
-        "tags": [
-            {
-                "value": "water_tower", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "water_tower"
+        }
     }, 
     {
         "main": [
@@ -14610,12 +13662,9 @@
             "closedway"
         ], 
         "name": "Water Works", 
-        "tags": [
-            {
-                "value": "water_works", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "water_works"
+        }
     }, 
     {
         "main": [
@@ -14630,12 +13679,9 @@
             "closedway"
         ], 
         "name": "Wastewater Plant", 
-        "tags": [
-            {
-                "value": "wastewater_plant", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "wastewater_plant"
+        }
     }, 
     {
         "main": [
@@ -14649,12 +13695,9 @@
             "node"
         ], 
         "name": "Watermill", 
-        "tags": [
-            {
-                "value": "watermill", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "watermill"
+        }
     }, 
     {
         "main": [
@@ -14669,12 +13712,9 @@
             "closedway"
         ], 
         "name": "Fountain", 
-        "tags": [
-            {
-                "value": "fountain", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "fountain"
+        }
     }, 
     {
         "main": [
@@ -14688,12 +13728,9 @@
             "node"
         ], 
         "name": "Water Well", 
-        "tags": [
-            {
-                "value": "water_well", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "water_well"
+        }
     }, 
     {
         "main": [
@@ -14708,12 +13745,9 @@
             "closedway"
         ], 
         "name": "Lighthouse", 
-        "tags": [
-            {
-                "value": "lighthouse", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "lighthouse"
+        }
     }, 
     {
         "main": [
@@ -14727,12 +13761,9 @@
             "node"
         ], 
         "name": "Beacon", 
-        "tags": [
-            {
-                "value": "beacon", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "beacon"
+        }
     }, 
     {
         "main": [
@@ -14749,12 +13780,9 @@
             "node"
         ], 
         "name": "Street Lamp", 
-        "tags": [
-            {
-                "value": "street_lamp", 
-                "key": "highway"
-            }
-        ]
+        "tags": {
+            "highway": "street_lamp"
+        }
     }, 
     {
         "main": [
@@ -14806,12 +13834,9 @@
             "closedway"
         ], 
         "name": "Measurement Station", 
-        "tags": [
-            {
-                "value": "measurement_station", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "measurement_station"
+        }
     }, 
     {
         "main": [
@@ -14825,12 +13850,9 @@
             "node"
         ], 
         "name": "Survey Point", 
-        "tags": [
-            {
-                "value": "survey_point", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "survey_point"
+        }
     }, 
     {
         "main": [
@@ -14855,12 +13877,9 @@
             "closedway"
         ], 
         "name": "Surveillance", 
-        "tags": [
-            {
-                "value": "surveillance", 
-                "key": "man_made"
-            }
-        ]
+        "tags": {
+            "man_made": "surveillance"
+        }
     }, 
     {
         "main": [
@@ -15026,12 +14045,9 @@
             "closedway"
         ], 
         "name": "Power Generator", 
-        "tags": [
-            {
-                "value": "generator", 
-                "key": "power"
-            }
-        ]
+        "tags": {
+            "power": "generator"
+        }
     }, 
     {
         "main": [
@@ -15056,12 +14072,9 @@
             "closedway"
         ], 
         "name": "Power Station", 
-        "tags": [
-            {
-                "value": "station", 
-                "key": "power"
-            }
-        ]
+        "tags": {
+            "power": "station"
+        }
     }, 
     {
         "main": [
@@ -15081,12 +14094,9 @@
             "closedway"
         ], 
         "name": "Power Sub Station", 
-        "tags": [
-            {
-                "value": "sub_station", 
-                "key": "power"
-            }
-        ]
+        "tags": {
+            "power": "sub_station"
+        }
     }, 
     {
         "main": [
@@ -15105,12 +14115,9 @@
             "node"
         ], 
         "name": "Cable Distribution Cabinet", 
-        "tags": [
-            {
-                "value": "cable_distribution_cabinet", 
-                "key": "power"
-            }
-        ]
+        "tags": {
+            "power": "cable_distribution_cabinet"
+        }
     }, 
     {
         "main": [
@@ -15124,12 +14131,9 @@
             "node"
         ], 
         "name": "Power Tower", 
-        "tags": [
-            {
-                "value": "tower", 
-                "key": "power"
-            }
-        ]
+        "tags": {
+            "power": "tower"
+        }
     }, 
     {
         "main": [
@@ -15143,12 +14147,9 @@
             "node"
         ], 
         "name": "Pole", 
-        "tags": [
-            {
-                "value": "pole", 
-                "key": "power"
-            }
-        ]
+        "tags": {
+            "power": "pole"
+        }
     }, 
     {
         "main": [
@@ -15207,7 +14208,7 @@
             "way"
         ], 
         "name": "Power Line", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -15227,12 +14228,9 @@
             "closedway"
         ], 
         "name": "Castle", 
-        "tags": [
-            {
-                "value": "castle", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "castle"
+        }
     }, 
     {
         "main": [
@@ -15257,12 +14255,9 @@
             "closedway"
         ], 
         "name": "Ruins", 
-        "tags": [
-            {
-                "value": "ruins", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "ruins"
+        }
     }, 
     {
         "main": [
@@ -15287,12 +14282,9 @@
             "closedway"
         ], 
         "name": "Archaeological Site", 
-        "tags": [
-            {
-                "value": "archaeological_site", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "archaeological_site"
+        }
     }, 
     {
         "main": [
@@ -15307,12 +14299,9 @@
             "closedway"
         ], 
         "name": "Battlefield", 
-        "tags": [
-            {
-                "value": "battlefield", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "battlefield"
+        }
     }, 
     {
         "main": [
@@ -15327,12 +14316,9 @@
             "closedway"
         ], 
         "name": "Palaeontological Site", 
-        "tags": [
-            {
-                "value": "palaeontological_site", 
-                "key": "geological"
-            }
-        ]
+        "tags": {
+            "geological": "palaeontological_site"
+        }
     }, 
     {
         "main": [
@@ -15347,12 +14333,9 @@
             "closedway"
         ], 
         "name": "Monument", 
-        "tags": [
-            {
-                "value": "monument", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "monument"
+        }
     }, 
     {
         "main": [
@@ -15367,12 +14350,9 @@
             "closedway"
         ], 
         "name": "Memorial", 
-        "tags": [
-            {
-                "value": "memorial", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "memorial"
+        }
     }, 
     {
         "main": [
@@ -15387,12 +14367,9 @@
             "closedway"
         ], 
         "name": "Wayside Cross", 
-        "tags": [
-            {
-                "value": "wayside_cross", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "wayside_cross"
+        }
     }, 
     {
         "main": [
@@ -15407,12 +14384,9 @@
             "closedway"
         ], 
         "name": "Wayside Shrine", 
-        "tags": [
-            {
-                "value": "wayside_shrine", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "wayside_shrine"
+        }
     }, 
     {
         "main": [
@@ -15427,12 +14401,9 @@
             "closedway"
         ], 
         "name": "Boundary Stone", 
-        "tags": [
-            {
-                "value": "boundary_stone", 
-                "key": "historic"
-            }
-        ]
+        "tags": {
+            "historic": "boundary_stone"
+        }
     }, 
     {
         "main": [
@@ -15457,12 +14428,9 @@
             "closedway"
         ], 
         "name": "Supermarket", 
-        "tags": [
-            {
-                "value": "supermarket", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "supermarket"
+        }
     }, 
     {
         "main": [
@@ -15487,12 +14455,9 @@
             "closedway"
         ], 
         "name": "Convenience Store", 
-        "tags": [
-            {
-                "value": "convenience", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "convenience"
+        }
     }, 
     {
         "main": [
@@ -15517,12 +14482,9 @@
             "closedway"
         ], 
         "name": "Kiosk", 
-        "tags": [
-            {
-                "value": "kiosk", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "kiosk"
+        }
     }, 
     {
         "main": [
@@ -15547,12 +14509,9 @@
             "closedway"
         ], 
         "name": "Baker", 
-        "tags": [
-            {
-                "value": "bakery", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "bakery"
+        }
     }, 
     {
         "main": [
@@ -15577,12 +14536,9 @@
             "closedway"
         ], 
         "name": "Butcher", 
-        "tags": [
-            {
-                "value": "butcher", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "butcher"
+        }
     }, 
     {
         "main": [
@@ -15612,12 +14568,9 @@
             "closedway"
         ], 
         "name": "Seafood", 
-        "tags": [
-            {
-                "value": "seafood", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "seafood"
+        }
     }, 
     {
         "main": [
@@ -15647,12 +14600,9 @@
             "closedway"
         ], 
         "name": "Deli (Fine Food)", 
-        "tags": [
-            {
-                "value": "deli", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "deli"
+        }
     }, 
     {
         "main": [
@@ -15677,12 +14627,9 @@
             "closedway"
         ], 
         "name": "Confectionery", 
-        "tags": [
-            {
-                "value": "confectionery", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "confectionery"
+        }
     }, 
     {
         "main": [
@@ -15713,12 +14660,9 @@
             "closedway"
         ], 
         "name": "Marketplace", 
-        "tags": [
-            {
-                "value": "marketplace", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "marketplace"
+        }
     }, 
     {
         "main": [
@@ -15748,12 +14692,9 @@
             "closedway"
         ], 
         "name": "Greengrocer", 
-        "tags": [
-            {
-                "value": "greengrocer", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "greengrocer"
+        }
     }, 
     {
         "main": [
@@ -15773,7 +14714,7 @@
             "closedway"
         ], 
         "name": "Organic", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -15793,7 +14734,7 @@
             "closedway"
         ], 
         "name": "Fair Trade", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -15818,12 +14759,9 @@
             "closedway"
         ], 
         "name": "Alcohol", 
-        "tags": [
-            {
-                "value": "alcohol", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "alcohol"
+        }
     }, 
     {
         "main": [
@@ -15848,12 +14786,9 @@
             "closedway"
         ], 
         "name": "Beverages", 
-        "tags": [
-            {
-                "value": "beverages", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "beverages"
+        }
     }, 
     {
         "main": [
@@ -15878,12 +14813,9 @@
             "closedway"
         ], 
         "name": "Clothes", 
-        "tags": [
-            {
-                "value": "clothes", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "clothes"
+        }
     }, 
     {
         "main": [
@@ -15913,12 +14845,9 @@
             "closedway"
         ], 
         "name": "Boutique", 
-        "tags": [
-            {
-                "value": "boutique", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "boutique"
+        }
     }, 
     {
         "main": [
@@ -15943,12 +14872,9 @@
             "closedway"
         ], 
         "name": "Shoes", 
-        "tags": [
-            {
-                "value": "shoes", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "shoes"
+        }
     }, 
     {
         "main": [
@@ -15973,12 +14899,9 @@
             "closedway"
         ], 
         "name": "Outdoor", 
-        "tags": [
-            {
-                "value": "outdoor", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "outdoor"
+        }
     }, 
     {
         "main": [
@@ -16003,12 +14926,9 @@
             "closedway"
         ], 
         "name": "Sports", 
-        "tags": [
-            {
-                "value": "sports", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "sports"
+        }
     }, 
     {
         "main": [
@@ -16033,12 +14953,9 @@
             "closedway"
         ], 
         "name": "Dry Cleaning", 
-        "tags": [
-            {
-                "value": "dry_cleaning", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "dry_cleaning"
+        }
     }, 
     {
         "main": [
@@ -16063,12 +14980,9 @@
             "closedway"
         ], 
         "name": "Laundry", 
-        "tags": [
-            {
-                "value": "laundry", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "laundry"
+        }
     }, 
     {
         "main": [
@@ -16093,12 +15007,9 @@
             "closedway"
         ], 
         "name": "Tailor", 
-        "tags": [
-            {
-                "value": "tailor", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "tailor"
+        }
     }, 
     {
         "main": [
@@ -16128,12 +15039,9 @@
             "closedway"
         ], 
         "name": "Fabric", 
-        "tags": [
-            {
-                "value": "fabric", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "fabric"
+        }
     }, 
     {
         "main": [
@@ -16158,12 +15066,9 @@
             "closedway"
         ], 
         "name": "Computer", 
-        "tags": [
-            {
-                "value": "computer", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "computer"
+        }
     }, 
     {
         "main": [
@@ -16188,12 +15093,9 @@
             "closedway"
         ], 
         "name": "Electronics", 
-        "tags": [
-            {
-                "value": "electronics", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "electronics"
+        }
     }, 
     {
         "main": [
@@ -16223,12 +15125,9 @@
             "closedway"
         ], 
         "name": "Mobile Phone", 
-        "tags": [
-            {
-                "value": "mobile_phone", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "mobile_phone"
+        }
     }, 
     {
         "main": [
@@ -16258,12 +15157,9 @@
             "closedway"
         ], 
         "name": "Vacuum Cleaner", 
-        "tags": [
-            {
-                "value": "vacuum_cleaner", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "vacuum_cleaner"
+        }
     }, 
     {
         "main": [
@@ -16288,12 +15184,9 @@
             "closedway"
         ], 
         "name": "Hifi", 
-        "tags": [
-            {
-                "value": "hifi", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "hifi"
+        }
     }, 
     {
         "main": [
@@ -16318,12 +15211,9 @@
             "closedway"
         ], 
         "name": "Video", 
-        "tags": [
-            {
-                "value": "video", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "video"
+        }
     }, 
     {
         "main": [
@@ -16359,12 +15249,9 @@
             "closedway"
         ], 
         "name": "Bank", 
-        "tags": [
-            {
-                "value": "bank", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bank"
+        }
     }, 
     {
         "main": [
@@ -16389,12 +15276,9 @@
             "closedway"
         ], 
         "name": "Money Exchange", 
-        "tags": [
-            {
-                "value": "bureau_de_change", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "bureau_de_change"
+        }
     }, 
     {
         "main": [
@@ -16408,12 +15292,9 @@
             "node"
         ], 
         "name": "Automated Teller Machine", 
-        "tags": [
-            {
-                "value": "atm", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "atm"
+        }
     }, 
     {
         "main": [
@@ -16443,12 +15324,9 @@
             "closedway"
         ], 
         "name": "Department Store", 
-        "tags": [
-            {
-                "value": "department_store", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "department_store"
+        }
     }, 
     {
         "main": [
@@ -16478,12 +15356,9 @@
             "closedway"
         ], 
         "name": "Mall", 
-        "tags": [
-            {
-                "value": "mall", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "mall"
+        }
     }, 
     {
         "main": [
@@ -16508,12 +15383,9 @@
             "closedway"
         ], 
         "name": "Chemist", 
-        "tags": [
-            {
-                "value": "chemist", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "chemist"
+        }
     }, 
     {
         "main": [
@@ -16538,12 +15410,9 @@
             "closedway"
         ], 
         "name": "Hairdresser", 
-        "tags": [
-            {
-                "value": "hairdresser", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "hairdresser"
+        }
     }, 
     {
         "main": [
@@ -16568,12 +15437,9 @@
             "closedway"
         ], 
         "name": "Optician", 
-        "tags": [
-            {
-                "value": "optician", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "optician"
+        }
     }, 
     {
         "main": [
@@ -16603,12 +15469,9 @@
             "closedway"
         ], 
         "name": "Jewelry", 
-        "tags": [
-            {
-                "value": "jewelry", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "jewelry"
+        }
     }, 
     {
         "main": [
@@ -16638,12 +15501,9 @@
             "closedway"
         ], 
         "name": "Erotic", 
-        "tags": [
-            {
-                "value": "erotic", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "erotic"
+        }
     }, 
     {
         "main": [
@@ -16668,12 +15528,9 @@
             "closedway"
         ], 
         "name": "Florist", 
-        "tags": [
-            {
-                "value": "florist", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "florist"
+        }
     }, 
     {
         "main": [
@@ -16698,12 +15555,9 @@
             "closedway"
         ], 
         "name": "Garden Centre", 
-        "tags": [
-            {
-                "value": "garden_centre", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "garden_centre"
+        }
     }, 
     {
         "main": [
@@ -16728,12 +15582,9 @@
             "closedway"
         ], 
         "name": "Do-it-yourself-store", 
-        "tags": [
-            {
-                "value": "doityourself", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "doityourself"
+        }
     }, 
     {
         "main": [
@@ -16758,12 +15609,9 @@
             "closedway"
         ], 
         "name": "Hardware", 
-        "tags": [
-            {
-                "value": "hardware", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "hardware"
+        }
     }, 
     {
         "main": [
@@ -16793,12 +15641,9 @@
             "closedway"
         ], 
         "name": "Paint", 
-        "tags": [
-            {
-                "value": "paint", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "paint"
+        }
     }, 
     {
         "main": [
@@ -16823,12 +15668,9 @@
             "closedway"
         ], 
         "name": "Furniture", 
-        "tags": [
-            {
-                "value": "furniture", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "furniture"
+        }
     }, 
     {
         "main": [
@@ -16858,12 +15700,9 @@
             "closedway"
         ], 
         "name": "Kitchen", 
-        "tags": [
-            {
-                "value": "kitchen", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "kitchen"
+        }
     }, 
     {
         "main": [
@@ -16893,12 +15732,9 @@
             "closedway"
         ], 
         "name": "Curtain", 
-        "tags": [
-            {
-                "value": "curtain", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "curtain"
+        }
     }, 
     {
         "main": [
@@ -16928,12 +15764,9 @@
             "closedway"
         ], 
         "name": "Frame", 
-        "tags": [
-            {
-                "value": "frame", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "frame"
+        }
     }, 
     {
         "main": [
@@ -16958,12 +15791,9 @@
             "closedway"
         ], 
         "name": "Stationery", 
-        "tags": [
-            {
-                "value": "stationery", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "stationery"
+        }
     }, 
     {
         "main": [
@@ -16993,12 +15823,9 @@
             "closedway"
         ], 
         "name": "Copyshop", 
-        "tags": [
-            {
-                "value": "copyshop", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "copyshop"
+        }
     }, 
     {
         "main": [
@@ -17023,12 +15850,9 @@
             "closedway"
         ], 
         "name": "Book Store", 
-        "tags": [
-            {
-                "value": "books", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "books"
+        }
     }, 
     {
         "main": [
@@ -17053,12 +15877,9 @@
             "closedway"
         ], 
         "name": "Travel Agency", 
-        "tags": [
-            {
-                "value": "travel_agency", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "travel_agency"
+        }
     }, 
     {
         "main": [
@@ -17088,12 +15909,9 @@
             "closedway"
         ], 
         "name": "Musical Instrument", 
-        "tags": [
-            {
-                "value": "musical_instrument", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "musical_instrument"
+        }
     }, 
     {
         "main": [
@@ -17118,12 +15936,9 @@
             "closedway"
         ], 
         "name": "Toys", 
-        "tags": [
-            {
-                "value": "toys", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "toys"
+        }
     }, 
     {
         "main": [
@@ -17153,12 +15968,9 @@
             "closedway"
         ], 
         "name": "Variety Store", 
-        "tags": [
-            {
-                "value": "variety_store", 
-                "key": "shop"
-            }
-        ]
+        "tags": {
+            "shop": "variety_store"
+        }
     }, 
     {
         "main": [
@@ -17218,12 +16030,9 @@
             "node"
         ], 
         "name": "Vending machine", 
-        "tags": [
-            {
-                "value": "vending_machine", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "vending_machine"
+        }
     }, 
     {
         "main": [
@@ -17238,12 +16047,9 @@
             "relation"
         ], 
         "name": "National", 
-        "tags": [
-            {
-                "value": "national", 
-                "key": "boundary"
-            }
-        ]
+        "tags": {
+            "boundary": "national"
+        }
     }, 
     {
         "main": [
@@ -17258,12 +16064,9 @@
             "relation"
         ], 
         "name": "Administrative", 
-        "tags": [
-            {
-                "value": "administrative", 
-                "key": "boundary"
-            }
-        ]
+        "tags": {
+            "boundary": "administrative"
+        }
     }, 
     {
         "main": [
@@ -17278,12 +16081,9 @@
             "relation"
         ], 
         "name": "Civil", 
-        "tags": [
-            {
-                "value": "civil", 
-                "key": "boundary"
-            }
-        ]
+        "tags": {
+            "boundary": "civil"
+        }
     }, 
     {
         "main": [
@@ -17298,12 +16098,9 @@
             "relation"
         ], 
         "name": "Political", 
-        "tags": [
-            {
-                "value": "political", 
-                "key": "boundary"
-            }
-        ]
+        "tags": {
+            "boundary": "political"
+        }
     }, 
     {
         "main": [
@@ -17318,12 +16115,9 @@
             "relation"
         ], 
         "name": "National park", 
-        "tags": [
-            {
-                "value": "national_park", 
-                "key": "boundary"
-            }
-        ]
+        "tags": {
+            "boundary": "national_park"
+        }
     }, 
     {
         "main": [
@@ -17343,12 +16137,9 @@
             "closedway"
         ], 
         "name": "Continent", 
-        "tags": [
-            {
-                "value": "continent", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "continent"
+        }
     }, 
     {
         "main": [
@@ -17368,12 +16159,9 @@
             "closedway"
         ], 
         "name": "Country", 
-        "tags": [
-            {
-                "value": "country", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "country"
+        }
     }, 
     {
         "main": [
@@ -17393,12 +16181,9 @@
             "closedway"
         ], 
         "name": "State", 
-        "tags": [
-            {
-                "value": "state", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "state"
+        }
     }, 
     {
         "main": [
@@ -17418,12 +16203,9 @@
             "closedway"
         ], 
         "name": "Region", 
-        "tags": [
-            {
-                "value": "region", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "region"
+        }
     }, 
     {
         "main": [
@@ -17458,12 +16240,9 @@
             "closedway"
         ], 
         "name": "County", 
-        "tags": [
-            {
-                "value": "county", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "county"
+        }
     }, 
     {
         "main": [
@@ -17498,12 +16277,9 @@
             "closedway"
         ], 
         "name": "City", 
-        "tags": [
-            {
-                "value": "city", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "city"
+        }
     }, 
     {
         "main": [
@@ -17538,12 +16314,9 @@
             "closedway"
         ], 
         "name": "Town", 
-        "tags": [
-            {
-                "value": "town", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "town"
+        }
     }, 
     {
         "main": [
@@ -17578,12 +16351,9 @@
             "closedway"
         ], 
         "name": "Suburb", 
-        "tags": [
-            {
-                "value": "suburb", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "suburb"
+        }
     }, 
     {
         "main": [
@@ -17618,12 +16388,9 @@
             "closedway"
         ], 
         "name": "Village", 
-        "tags": [
-            {
-                "value": "village", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "village"
+        }
     }, 
     {
         "main": [
@@ -17658,12 +16425,9 @@
             "closedway"
         ], 
         "name": "Hamlet", 
-        "tags": [
-            {
-                "value": "hamlet", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "hamlet"
+        }
     }, 
     {
         "main": [
@@ -17698,12 +16462,9 @@
             "closedway"
         ], 
         "name": "Isolated Dwelling", 
-        "tags": [
-            {
-                "value": "isolated_dwelling", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "isolated_dwelling"
+        }
     }, 
     {
         "main": [
@@ -17733,12 +16494,9 @@
             "closedway"
         ], 
         "name": "Neighbourhood", 
-        "tags": [
-            {
-                "value": "neighbourhood", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "neighbourhood"
+        }
     }, 
     {
         "main": [
@@ -17758,12 +16516,9 @@
             "closedway"
         ], 
         "name": "Locality", 
-        "tags": [
-            {
-                "value": "locality", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "locality"
+        }
     }, 
     {
         "main": [
@@ -17787,12 +16542,9 @@
             "node"
         ], 
         "name": "Peak", 
-        "tags": [
-            {
-                "value": "peak", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "peak"
+        }
     }, 
     {
         "main": [
@@ -17817,12 +16569,9 @@
             "closedway"
         ], 
         "name": "Glacier", 
-        "tags": [
-            {
-                "value": "glacier", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "glacier"
+        }
     }, 
     {
         "main": [
@@ -17847,12 +16596,9 @@
             "closedway"
         ], 
         "name": "Volcano", 
-        "tags": [
-            {
-                "value": "volcano", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "volcano"
+        }
     }, 
     {
         "main": [
@@ -17872,12 +16618,9 @@
             "closedway"
         ], 
         "name": "Cave Entrance", 
-        "tags": [
-            {
-                "value": "cave_entrance", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "cave_entrance"
+        }
     }, 
     {
         "main": [
@@ -17897,12 +16640,9 @@
             "closedway"
         ], 
         "name": "Island", 
-        "tags": [
-            {
-                "value": "island", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "island"
+        }
     }, 
     {
         "main": [
@@ -17922,12 +16662,9 @@
             "closedway"
         ], 
         "name": "Islet", 
-        "tags": [
-            {
-                "value": "islet", 
-                "key": "place"
-            }
-        ]
+        "tags": {
+            "place": "islet"
+        }
     }, 
     {
         "main": [
@@ -17956,12 +16693,9 @@
             "node"
         ], 
         "name": "Tree", 
-        "tags": [
-            {
-                "value": "tree", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "tree"
+        }
     }, 
     {
         "main": [
@@ -17987,12 +16721,9 @@
             "relation"
         ], 
         "name": "Wood", 
-        "tags": [
-            {
-                "value": "wood", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "wood"
+        }
     }, 
     {
         "main": [
@@ -18018,12 +16749,9 @@
             "relation"
         ], 
         "name": "Forest", 
-        "tags": [
-            {
-                "value": "forest", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "forest"
+        }
     }, 
     {
         "main": [
@@ -18039,12 +16767,9 @@
             "relation"
         ], 
         "name": "Nature Reserve", 
-        "tags": [
-            {
-                "value": "nature_reserve", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "nature_reserve"
+        }
     }, 
     {
         "main": [
@@ -18060,12 +16785,9 @@
             "relation"
         ], 
         "name": "Scree", 
-        "tags": [
-            {
-                "value": "scree", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "scree"
+        }
     }, 
     {
         "main": [
@@ -18081,12 +16803,9 @@
             "relation"
         ], 
         "name": "Fell", 
-        "tags": [
-            {
-                "value": "fell", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "fell"
+        }
     }, 
     {
         "main": [
@@ -18102,12 +16821,9 @@
             "relation"
         ], 
         "name": "Scrub", 
-        "tags": [
-            {
-                "value": "scrub", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "scrub"
+        }
     }, 
     {
         "main": [
@@ -18123,12 +16839,9 @@
             "relation"
         ], 
         "name": "Heath", 
-        "tags": [
-            {
-                "value": "heath", 
-                "key": "natural"
-            }
-        ]
+        "tags": {
+            "natural": "heath"
+        }
     }, 
     {
         "main": [
@@ -18143,12 +16856,9 @@
             "relation"
         ], 
         "name": "Farmyard", 
-        "tags": [
-            {
-                "value": "farmyard", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "farmyard"
+        }
     }, 
     {
         "main": [
@@ -18163,12 +16873,9 @@
             "relation"
         ], 
         "name": "Farmland", 
-        "tags": [
-            {
-                "value": "farmland", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "farmland"
+        }
     }, 
     {
         "main": [
@@ -18184,12 +16891,9 @@
             "relation"
         ], 
         "name": "Meadow", 
-        "tags": [
-            {
-                "value": "meadow", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "meadow"
+        }
     }, 
     {
         "main": [
@@ -18205,12 +16909,9 @@
             "relation"
         ], 
         "name": "Vineyard", 
-        "tags": [
-            {
-                "value": "vineyard", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "vineyard"
+        }
     }, 
     {
         "main": [
@@ -18229,12 +16930,9 @@
             "closedway"
         ], 
         "name": "Greenhouse Horticulture", 
-        "tags": [
-            {
-                "value": "greenhouse_horticulture", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "greenhouse_horticulture"
+        }
     }, 
     {
         "main": [
@@ -18250,12 +16948,9 @@
             "relation"
         ], 
         "name": "Allotments", 
-        "tags": [
-            {
-                "value": "allotments", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "allotments"
+        }
     }, 
     {
         "main": [
@@ -18271,12 +16966,9 @@
             "relation"
         ], 
         "name": "Garden", 
-        "tags": [
-            {
-                "value": "garden", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "garden"
+        }
     }, 
     {
         "main": [
@@ -18292,12 +16984,9 @@
             "relation"
         ], 
         "name": "Grass", 
-        "tags": [
-            {
-                "value": "grass", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "grass"
+        }
     }, 
     {
         "main": [
@@ -18313,12 +17002,9 @@
             "relation"
         ], 
         "name": "Village Green", 
-        "tags": [
-            {
-                "value": "village_green", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "village_green"
+        }
     }, 
     {
         "main": [
@@ -18334,12 +17020,9 @@
             "relation"
         ], 
         "name": "Common", 
-        "tags": [
-            {
-                "value": "common", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "common"
+        }
     }, 
     {
         "main": [
@@ -18355,12 +17038,9 @@
             "relation"
         ], 
         "name": "Park", 
-        "tags": [
-            {
-                "value": "park", 
-                "key": "leisure"
-            }
-        ]
+        "tags": {
+            "leisure": "park"
+        }
     }, 
     {
         "main": [
@@ -18376,12 +17056,9 @@
             "relation"
         ], 
         "name": "Recreation Ground", 
-        "tags": [
-            {
-                "value": "recreation_ground", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "recreation_ground"
+        }
     }, 
     {
         "main": [
@@ -18396,12 +17073,9 @@
             "relation"
         ], 
         "name": "Residential area", 
-        "tags": [
-            {
-                "value": "residential", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "residential"
+        }
     }, 
     {
         "main": [
@@ -18458,12 +17132,9 @@
             "relation"
         ], 
         "name": "Graveyard", 
-        "tags": [
-            {
-                "value": "grave_yard", 
-                "key": "amenity"
-            }
-        ]
+        "tags": {
+            "amenity": "grave_yard"
+        }
     }, 
     {
         "main": [
@@ -18520,12 +17191,9 @@
             "relation"
         ], 
         "name": "Cemetery", 
-        "tags": [
-            {
-                "value": "cemetery", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "cemetery"
+        }
     }, 
     {
         "main": [
@@ -18541,12 +17209,9 @@
             "relation"
         ], 
         "name": "Retail", 
-        "tags": [
-            {
-                "value": "retail", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "retail"
+        }
     }, 
     {
         "main": [
@@ -18562,12 +17227,9 @@
             "relation"
         ], 
         "name": "Commercial", 
-        "tags": [
-            {
-                "value": "commercial", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "commercial"
+        }
     }, 
     {
         "main": [
@@ -18583,12 +17245,9 @@
             "relation"
         ], 
         "name": "Industrial", 
-        "tags": [
-            {
-                "value": "industrial", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "industrial"
+        }
     }, 
     {
         "main": [
@@ -18607,12 +17266,9 @@
             "closedway"
         ], 
         "name": "Garages", 
-        "tags": [
-            {
-                "value": "garages", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "garages"
+        }
     }, 
     {
         "main": [
@@ -18627,12 +17283,9 @@
             "relation"
         ], 
         "name": "Railway land", 
-        "tags": [
-            {
-                "value": "railway", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "railway"
+        }
     }, 
     {
         "main": [
@@ -18648,12 +17301,9 @@
             "relation"
         ], 
         "name": "Military", 
-        "tags": [
-            {
-                "value": "military", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "military"
+        }
     }, 
     {
         "main": [
@@ -18669,12 +17319,9 @@
             "relation"
         ], 
         "name": "Construction area", 
-        "tags": [
-            {
-                "value": "construction", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "construction"
+        }
     }, 
     {
         "main": [
@@ -18690,12 +17337,9 @@
             "relation"
         ], 
         "name": "Brownfield", 
-        "tags": [
-            {
-                "value": "brownfield", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "brownfield"
+        }
     }, 
     {
         "main": [
@@ -18711,12 +17355,9 @@
             "relation"
         ], 
         "name": "Greenfield", 
-        "tags": [
-            {
-                "value": "greenfield", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "greenfield"
+        }
     }, 
     {
         "main": [
@@ -18732,12 +17373,9 @@
             "relation"
         ], 
         "name": "Landfill", 
-        "tags": [
-            {
-                "value": "landfill", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "landfill"
+        }
     }, 
     {
         "main": [
@@ -18753,12 +17391,9 @@
             "relation"
         ], 
         "name": "Quarry", 
-        "tags": [
-            {
-                "value": "quarry", 
-                "key": "landuse"
-            }
-        ]
+        "tags": {
+            "landuse": "quarry"
+        }
     }, 
     {
         "main": [
@@ -18809,7 +17444,7 @@
             "closedway"
         ], 
         "name": "Addresses", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -18829,7 +17464,7 @@
             "way"
         ], 
         "name": "Address Interpolation", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -18871,7 +17506,7 @@
             "relation"
         ], 
         "name": "Contact (common schema)", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -18913,7 +17548,7 @@
             "relation"
         ], 
         "name": "Contact (schema with 'contact:*' prefix)", 
-        "tags": []
+        "tags": {}
     }, 
     {
         "main": [
@@ -18927,12 +17562,9 @@
             "relation"
         ], 
         "name": "Multipolygon", 
-        "tags": [
-            {
-                "value": "multipolygon", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "multipolygon"
+        }
     }, 
     {
         "main": [
@@ -18974,12 +17606,9 @@
             "relation"
         ], 
         "name": "Boundary", 
-        "tags": [
-            {
-                "value": "boundary", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "boundary"
+        }
     }, 
     {
         "main": [
@@ -18993,12 +17622,9 @@
             "relation"
         ], 
         "name": "Site", 
-        "tags": [
-            {
-                "value": "site", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "site"
+        }
     }, 
     {
         "main": [
@@ -19026,12 +17652,9 @@
             "relation"
         ], 
         "name": "Turn restriction", 
-        "tags": [
-            {
-                "value": "restriction", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "restriction"
+        }
     }, 
     {
         "main": [
@@ -19068,12 +17691,9 @@
             "relation"
         ], 
         "name": "Enforcement", 
-        "tags": [
-            {
-                "value": "enforcement", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "enforcement"
+        }
     }, 
     {
         "main": [
@@ -19156,12 +17776,9 @@
             "relation"
         ], 
         "name": "Route", 
-        "tags": [
-            {
-                "value": "route", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "route"
+        }
     }, 
     {
         "main": [
@@ -19210,12 +17827,9 @@
             "relation"
         ], 
         "name": "Route master", 
-        "tags": [
-            {
-                "value": "route_master", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "route_master"
+        }
     }, 
     {
         "main": [
@@ -19288,12 +17902,9 @@
             "relation"
         ], 
         "name": "Directional Route (North America)", 
-        "tags": [
-            {
-                "value": "route", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "route"
+        }
     }, 
     {
         "main": [
@@ -19317,12 +17928,9 @@
             "relation"
         ], 
         "name": "Route network", 
-        "tags": [
-            {
-                "value": "network", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "network"
+        }
     }, 
     {
         "main": [
@@ -19336,12 +17944,9 @@
             "relation"
         ], 
         "name": "Associated street", 
-        "tags": [
-            {
-                "value": "associatedStreet", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "associatedStreet"
+        }
     }, 
     {
         "main": [
@@ -19355,12 +17960,9 @@
             "relation"
         ], 
         "name": "Street", 
-        "tags": [
-            {
-                "value": "street", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "street"
+        }
     }, 
     {
         "main": [
@@ -19399,12 +18001,9 @@
             "relation"
         ], 
         "name": "Destination sign", 
-        "tags": [
-            {
-                "value": "destination_sign", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "destination_sign"
+        }
     }, 
     {
         "main": [
@@ -19470,12 +18069,9 @@
             "relation"
         ], 
         "name": "Waterway", 
-        "tags": [
-            {
-                "value": "waterway", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "waterway"
+        }
     }, 
     {
         "main": [
@@ -19527,12 +18123,9 @@
             "relation"
         ], 
         "name": "Bridge", 
-        "tags": [
-            {
-                "value": "bridge", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "bridge"
+        }
     }, 
     {
         "main": [
@@ -19579,11 +18172,8 @@
             "relation"
         ], 
         "name": "Tunnel", 
-        "tags": [
-            {
-                "value": "tunnel", 
-                "key": "type"
-            }
-        ]
+        "tags": {
+            "type": "tunnel"
+        }
     }
 ]

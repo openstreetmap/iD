@@ -33,12 +33,9 @@ def isfav(x):
 
 for item in dom1.getElementsByTagName('item'):
 
-    tags = []
+    tags = {}
     for elem in item.getElementsByTagName('key'):
-        tags.append({
-            'key': elem.getAttribute('key'),
-            'value': elem.getAttribute('value')
-        })
+        tags[elem.getAttribute('key')] = elem.getAttribute('value')
 
     jitem = {
         "name": item.getAttribute('name'),
