@@ -263,7 +263,6 @@ iD.Map = function(context) {
             t[0] - ll[0] + c[0],
             t[1] - ll[1] + c[1]]);
         zoom.translate(projection.translate());
-        dispatch.move(map);
         return true;
     }
 
