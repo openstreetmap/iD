@@ -3,7 +3,11 @@ iD.operations.Delete = function(selection, context) {
 
     var operation = function() {
         var entity = context.entity(entityId),
-            action = {way: iD.actions.DeleteWay, node: iD.actions.DeleteNode}[entity.type],
+            action = {
+                way: iD.actions.DeleteWay,
+                node: iD.actions.DeleteNode,
+                relation: iD.actions.DeleteRelation
+            }[entity.type],
             annotation = t('operations.delete.annotation.' + context.geometry(entityId));
 
         context.perform(
@@ -12,9 +16,7 @@ iD.operations.Delete = function(selection, context) {
     };
 
     operation.available = function() {
-        var entity = context.entity(entityId);
-        return selection.length === 1 &&
-            (entity.type === 'way' || entity.type === 'node');
+        return selection.length === 1;
     };
 
     operation.enabled = function() {
