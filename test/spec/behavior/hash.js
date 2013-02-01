@@ -4,7 +4,7 @@ describe("iD.behavior.Hash", function () {
     var hash, context;
 
     beforeEach(function () {
-        context = iD.Context();
+        context = iD();
 
         // Neuter connection
         context.connection().loadTiles = function () {};

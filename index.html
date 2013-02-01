@@ -123,7 +123,6 @@
         <script src='js/id/graph/way.js'></script>
 
         <script src='js/id/connection.js'></script>
-        <script src='js/id/context.js'></script>
         <script src='js/id/controller.js'></script>
         <script src='js/id/validate.js'></script>
 
@@ -135,9 +134,13 @@
             locale.current = 'en';
             d3.json('keys.json', function(err, keys) {
                 var id = iD();
-                id.connection().keys(keys)
+
+                id.connection()
+                    .keys(keys)
                     .url('http://api06.dev.openstreetmap.org');
-                d3.select("#iD").call(id);
+
+                d3.select("#iD")
+                    .call(id.ui())
             });
         </script></body>
 

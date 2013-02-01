@@ -4,7 +4,7 @@ describe("iD.modes.AddPoint", function () {
     beforeEach(function () {
         var container = d3.select(document.createElement('div'));
 
-        context = iD.Context()
+        context = iD()
             .container(container);
 
         container.call(context.map())

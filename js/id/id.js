@@ -1,290 +1,55 @@
-window.iD = function(container) {
-    // the reported, displayed version of iD.
-    var version = '0.0.0-alpha1';
+window.iD = function () {
+    var context = {},
+        history = iD.History(),
+        connection = iD.Connection().version(iD.version),
+        controller = iD.Controller(),
+        container,
+        ui = iD.ui(context),
+        map = iD.Map().connection(connection).history(history);
 
-    var context = iD.Context();
+    /* Straight accessors. Avoid using these if you can. */
+    context.ui         = function () { return ui; };
+    context.connection = function () { return connection; };
+    context.history    = function () { return history; };
+    context.controller = function () { return controller; };
+    context.map        = function () { return map; };
 
-    var connection = context.connection(),
-        history = context.history(),
-        map = context.map(),
-        controller = context.controller();
+    /* History delegation. */
+    context.graph   = history.graph;
+    context.perform = history.perform;
+    context.replace = history.replace;
+    context.pop     = history.pop;
+    context.undo    = history.undo;
+    context.redo    = history.undo;
+    context.changes = history.changes;
 
-    context.connection()
-        .version(version);
+    context.entity   = function (id) { return history.graph().entity(id); };
+    context.geometry = function (id) { return context.entity(id).geometry(history.graph()); };
+
+    context.enter = controller.enter;
+    context.mode = function () { return controller.mode; };
+
+    context.install   = function (behavior) { context.surface().call(behavior); };
+    context.uninstall = function (behavior) { context.surface().call(behavior.off); };
+
+    context.background = function () { return map.background; };
+    context.surface    = function () { return map.surface; };
+    context.projection = map.projection;
+    context.tail       = map.tail;
+
+    context.container = function (_) {
+        if (!arguments.length) return container;
+        container = _;
+        return context;
+    };
 
     context.background()
         .source(iD.BackgroundSource.Bing);
 
-    function editor(container) {
-        context.container(container);
-
-        if (!iD.supported()) {
-            container.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
-                      'and Internet Explorer 9 and above. Please upgrade your browser ' +
-                      'or use Potlatch 2 to edit the map.')
-                .style('text-align:center;font-style:italic;');
-            return;
-        }
-
-        function hintprefix(x, y) {
-            return '<span>' + y + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + x + '</span></div>';
-        }
-
-        var m = container.append('div')
-            .attr('id', 'map')
-            .call(map);
-
-        var bar = container.append('div')
-            .attr('id', 'bar')
-            .attr('class','pad1 fillD');
-
-        var limiter = bar.append('div')
-            .attr('class', 'limiter');
-
-        var buttons_joined = limiter.append('div')
-            .attr('class', 'button-wrap joined col4');
-
-        var modes = [
-            iD.modes.Browse(context),
-            iD.modes.AddPoint(context),
-            iD.modes.AddLine(context),
-            iD.modes.AddArea(context)];
-
-        var buttons = buttons_joined.selectAll('button.add-button')
-            .data(modes)
-            .enter().append('button')
-                .attr('tabindex', -1)
-                .attr('class', function (mode) { return mode.title + ' add-button col3'; })
-            .call(bootstrap.tooltip().placement('bottom').html(true))
-            .attr('data-original-title', function (mode) {
-                return hintprefix(mode.key, mode.description);
-            })
-            .on('click.editor', function (mode) { controller.enter(mode); });
-
-        function disableTooHigh() {
-            if (map.editable()) {
-                notice.message(false);
-                buttons.attr('disabled', null);
-            } else {
-                buttons.attr('disabled', 'disabled');
-                notice.message(true);
-                controller.enter(iD.modes.Browse(context));
-            }
-        }
-
-        var notice = iD.ui.notice(limiter)
-            .message(false)
-            .on('zoom', function() { map.zoom(16); });
-
-        map.on('move.editor', _.debounce(function() {
-            disableTooHigh();
-            contributors.call(iD.ui.contributors(map));
-        }, 500));
-
-        buttons.append('span')
-            .attr('class', function(d) {
-                return d.id + ' icon icon-pre-text';
-            });
-
-        buttons.append('span').attr('class', 'label').text(function (mode) { return mode.title; });
-
-        controller.on('enter.editor', function (entered) {
-            buttons.classed('active', function (mode) { return entered.button === mode.button; });
-            container.classed("mode-" + entered.id, true);
-        });
-
-        controller.on('exit.editor', function (exited) {
-            container.classed("mode-" + exited.id, false);
-        });
-
-        var undo_buttons = limiter.append('div')
-            .attr('class', 'button-wrap joined col1'),
-            undo_tooltip = bootstrap.tooltip().placement('bottom').html(true);
-
-        undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'col6' })
-            .property('disabled', true)
-            .html("<span class='undo icon'></span><small></small>")
-            .on('click.editor', history.undo)
-            .call(undo_tooltip);
-
-        undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'col6' })
-            .property('disabled', true)
-            .html("<span class='redo icon'><small></small>")
-            .on('click.editor', history.redo)
-            .call(undo_tooltip);
-
-        var save_button = limiter.append('div').attr('class','button-wrap col1').append('button')
-            .attr('class', 'save col12')
-            .call(iD.ui.save(context));
-
-        var zoom = container.append('div')
-            .attr('class', 'zoombuttons map-control')
-            .selectAll('button')
-                .data([['zoom-in', '+', map.zoomIn, 'Zoom In'], ['zoom-out', '-', map.zoomOut, 'Zoom Out']])
-                .enter()
-                .append('button')
-                .attr('tabindex', -1)
-                .attr('class', function(d) { return d[0]; })
-                .attr('title', function(d) { return d[3]; })
-                .on('click.editor', function(d) { return d[2](); })
-                .append('span')
-                    .attr('class', function(d) {
-                        return d[0] + ' icon';
-                    });
-
-        if (navigator.geolocation) {
-            container.append('div')
-                .call(iD.ui.geolocate(map));
-        }
-
-        var gc = container.append('div').attr('class', 'geocode-control map-control')
-            .call(iD.ui.geocoder().map(map));
-
-        container.append('div').attr('class', 'map-control layerswitcher-control')
-            .call(iD.ui.layerswitcher(map));
-
-        container.append('div')
-            .style('display', 'none')
-            .attr('class', 'inspector-wrap fr col5');
-
-        var about = container.append('div')
-            .attr('class','col12 about-block fillD pad1');
-
-        about.append('div')
-            .attr('class', 'user-container')
-            .append('div')
-                .attr('class', 'hello');
-
-        var aboutList = about.append('ul')
-                .attr('id','about')
-                .attr('class','link-list');
-
-        var linkList = aboutList.append('ul')
-            .attr('id','about')
-            .attr('class','pad1 fillD about-block link-list');
-        linkList.append('li').append('a').attr('target', '_blank')
-            .attr('href', 'http://github.com/systemed/iD').text(version);
-        linkList.append('li').append('a').attr('target', '_blank')
-            .attr('href', 'http://github.com/systemed/iD/issues').text('report a bug');
-
-        var imagery = linkList.append('li').attr('id', 'attribution');
-        imagery.append('span').text('imagery');
-        imagery.append('a').attr('target', '_blank')
-            .attr('href', 'http://opengeodata.org/microsoft-imagery-details').text(' provided by bing');
-
-        linkList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
-            .text('dev')
-            .on('click.editor', function() {
-                d3.event.preventDefault();
-                if (d3.select(this).classed('live')) {
-                    map.flush().connection()
-                        .url('http://api06.dev.openstreetmap.org');
-                    d3.select(this).text('dev').classed('live', false);
-                } else {
-                    map.flush().connection()
-                        .url('http://www.openstreetmap.org');
-                    d3.select(this).text('live').classed('live', true);
-                }
-            });
-
-        var contributors = linkList.append('li')
-            .attr('id', 'user-list');
-        contributors.append('span')
-            .attr('class', 'icon nearby icon-pre-text');
-        contributors.append('span')
-            .text('Viewing contributions by ');
-        contributors.append('span')
-            .attr('class', 'contributor-list');
-        contributors.append('span')
-            .attr('class', 'contributor-count');
-
-        history.on('change.editor', function() {
-            window.onbeforeunload = history.hasChanges() ? function() {
-                return 'You have unsaved changes.';
-            } : null;
-
-            var undo = history.undoAnnotation(),
-                redo = history.redoAnnotation();
-
-            function refreshTooltip(selection) {
-                if (selection.property('disabled')) {
-                    selection.call(undo_tooltip.hide);
-                } else if (selection.property('tooltipVisible')) {
-                    selection.call(undo_tooltip.show);
-                }
-            }
-
-            limiter.select('#undo')
-                .property('disabled', !undo)
-                .attr('data-original-title', hintprefix('⌘ + Z', undo))
-                .call(refreshTooltip);
-
-            limiter.select('#redo')
-                .property('disabled', !redo)
-                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo))
-                .call(refreshTooltip);
-        });
-
-        d3.select(window).on('resize.editor', function() {
-            map.size(m.size());
-        });
-
-        var keybinding = d3.keybinding('main')
-            .on('⌘+Z', function() { history.undo(); })
-            .on('⌃+Z', function() { history.undo(); })
-            .on('⌘+⇧+Z', function() { history.redo(); })
-            .on('⌃+⇧+Z', function() { history.redo(); })
-            .on('⌫', function() { d3.event.preventDefault(); });
-
-        modes.forEach(function(m) {
-            keybinding.on(m.key, function() { if (map.editable()) controller.enter(m); });
-        });
-
-        d3.select(document)
-            .call(keybinding);
-
-        var hash = iD.behavior.Hash(context);
-
-        hash();
-
-        if (!hash.hadHash) {
-            map.centerZoom([-77.02271, 38.90085], 20);
-        }
-
-        d3.select('.user-container').call(iD.ui.userpanel(connection)
-            .on('logout.editor', connection.logout)
-            .on('login.editor', connection.authenticate));
-
-        controller.enter(iD.modes.Browse(context));
-
-        if (!localStorage.sawSplash) {
-            iD.ui.splash();
-            localStorage.sawSplash = true;
-        }
-    }
-
-    editor.connection = function(_) {
-        if (!arguments.length) return connection;
-        connection = _;
-        return editor;
-    };
-
-    editor.map = function() {
-        return map;
-    };
-
-    editor.controller = function() {
-        return controller;
-    };
-
-    if (arguments.length) {
-        d3.select(container).call(editor);
-    }
-
-    return editor;
+    return context;
 };
+
+iD.version = '0.0.0-alpha1';
 
 iD.supported = function() {
     if (navigator.appName !== 'Microsoft Internet Explorer') {

@@ -27,7 +27,6 @@ all: \
 	js/lib/sha.js \
 	js/id/start.js \
 	js/id/id.js \
-	js/id/context.js \
 	js/id/connection.js \
 	js/id/oauth.js \
 	js/id/services/*.js \
