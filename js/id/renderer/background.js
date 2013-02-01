@@ -83,7 +83,10 @@ iD.Background = function() {
             }
         });
 
-        requests = uniqueBy(requests, 3);
+        requests = uniqueBy(requests, 3).filter(function(r) {
+            // don't re-request tiles which have failed in the past
+            return cache[r[3]] !== false;
+        });
 
         function load(d) {
             cache[d[3]] = true;
@@ -125,7 +128,7 @@ iD.Background = function() {
             .attr('src', function(d) { return d[3]; })
             .on('error', error)
             .on('load', load);
-        
+
         image.style(transformProp, imageTransform);
 
         if (Object.keys(cache).length > 100) cache = {};
