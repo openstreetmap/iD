@@ -3,7 +3,7 @@ iD.operations.Reverse = function(selection, context) {
 
     var operation = function() {
         context.perform(
-            iD.actions.ReverseWay(entityId),
+            iD.actions.Reverse(entityId),
             t('operations.reverse.annotation'));
     };
 

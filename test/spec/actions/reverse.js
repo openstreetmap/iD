@@ -1,9 +1,9 @@
-describe("iD.actions.ReverseWay", function () {
+describe("iD.actions.Reverse", function () {
     it("reverses the order of nodes in the way", function () {
         var node1 = iD.Node(),
             node2 = iD.Node(),
             way = iD.Way({nodes: [node1.id, node2.id]}),
-            graph = iD.actions.ReverseWay(way.id)(iD.Graph([node1, node2, way]));
+            graph = iD.actions.Reverse(way.id)(iD.Graph([node1, node2, way]));
         expect(graph.entity(way.id).nodes).to.eql([node2.id, node1.id]);
     });
 
@@ -11,7 +11,7 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'highway': 'residential'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'highway': 'residential'});
     });
 
@@ -19,7 +19,7 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'oneway': 'yes'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'oneway': 'yes'});
     });
 
@@ -27,10 +27,10 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'cycleway:right': 'lane'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'cycleway:left': 'lane'});
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'cycleway:right': 'lane'});
     });
 
@@ -38,10 +38,10 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'maxspeed:forward': '25'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'maxspeed:backward': '25'});
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'maxspeed:forward': '25'});
     });
 
@@ -49,10 +49,10 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'incline': 'up'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'incline': 'down'});
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'incline': 'up'});
     });
 
@@ -60,10 +60,10 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'incline': 'up'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'incline': 'down'});
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'incline': 'up'});
     });
 
@@ -71,16 +71,16 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'incline': '5%'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'incline': '-5%'});
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'incline': '5%'});
 
         way = iD.Way({tags: {'incline': '.8°'}});
         graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'incline': '-.8°'});
     });
 
@@ -88,10 +88,10 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'sidewalk': 'right'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'sidewalk': 'left'});
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'sidewalk': 'right'});
     });
 
@@ -99,7 +99,7 @@ describe("iD.actions.ReverseWay", function () {
         var way = iD.Way({tags: {'maxspeed:forward': '25', 'maxspeed:backward': '30'}}),
             graph = iD.Graph([way]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(way.id).tags).to.eql({'maxspeed:backward': '25', 'maxspeed:forward': '30'});
     });
 
@@ -108,10 +108,10 @@ describe("iD.actions.ReverseWay", function () {
             relation = iD.Relation({members: [{type: 'way', id: way.id, role: 'forward'}]}),
             graph = iD.Graph([way, relation]);
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(relation.id).members[0].role).to.eql('backward');
 
-        graph = iD.actions.ReverseWay(way.id)(graph);
+        graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(relation.id).members[0].role).to.eql('forward');
     });
 });
