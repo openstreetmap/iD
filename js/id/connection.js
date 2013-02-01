@@ -4,7 +4,6 @@ iD.Connection = function() {
         url = 'http://www.openstreetmap.org',
         connection = {},
         user = {},
-        version,
         keys,
         inflight = {},
         loadedTiles = {},
@@ -186,7 +185,7 @@ iD.Connection = function() {
                 content: JXON.stringify(connection.changesetJXON({
                     imagery_used: imagery_used.join(';'),
                     comment: comment,
-                    created_by: 'iD ' + (version || '')
+                    created_by: 'iD ' + iD.version
                 }))
             }, function (err, changeset_id) {
                 if (err) return callback(err);
@@ -320,12 +319,6 @@ iD.Connection = function() {
             if (callback) callback(err, res);
         }
         return oauth.authenticate(done);
-    };
-
-    connection.version = function(_) {
-        if (!arguments.length) return version;
-        version = _;
-        return connection;
     };
 
     connection.bboxFromAPI = bboxFromAPI;

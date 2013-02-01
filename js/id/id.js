@@ -1,7 +1,7 @@
 window.iD = function () {
     var context = {},
         history = iD.History(),
-        connection = iD.Connection().version(iD.version),
+        connection = iD.Connection(),
         dispatch = d3.dispatch('enter', 'exit'),
         mode,
         container,
