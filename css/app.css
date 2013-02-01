@@ -33,6 +33,7 @@ div, textarea, input, span, ul, li, ol, a, button {
 a, button, input, textarea {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
     -webkit-touch-callout:none;
+    cursor:url(../img/cursor-pointer.png) 6 1, auto;
 }
 
 h2 {
@@ -186,6 +187,7 @@ ul.toggle-list li a {
     display:block;
     border-top: 1px solid rgba(0, 0, 0, .5);
 }
+ul.toggle-list li a:hover { background-color: #ececec;}
 
 ul.toggle-list .icon {
     float: left;
@@ -253,7 +255,6 @@ button {
     font-size:12px;
     display: inline-block;
     height:40px;
-    cursor:url(../img/cursor-pointer.png) 6 1, auto;
     border-radius:4px;
     -webkit-transition: background 100ms;
     -moz-transition: background 100ms;
@@ -620,6 +621,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: rgba(0,0,0,.5);
     border-radius: 0 0 4px 4px;
 }
+
 .inspector-inner .add-tag:hover {
     background: rgba(0,0,0,.8);
 }
@@ -635,25 +637,25 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position:absolute;
 }
 
-.map-control button {
-    width: 40px;
+.map-control > button {
+    width: 30px;
     background: rgba(0,0,0,.5);
     border-radius: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
-.map-control button:hover {
+.map-control > button:hover {
     background: rgba(0, 0, 0, .8);
 }
 
-.map-control button.active:hover {
+.map-control > button.active:hover {
     background: #6bc641;
 }
 
 .map-overlay {
     width: 150px;
     position:absolute;
-    left:50px;
+    left:40px;
     top:0;
     display: block;
     border-radius: 4px;
@@ -663,7 +665,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .zoombuttons {
     top:70px;
-    width: 40px;
+    width: 30px;
 }
 
 .zoombuttons button.zoom-in {
@@ -680,24 +682,94 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top:190px;
 }
 
+.nudge-container {
+    margin-top: 10px;
+}
+
 .layerswitcher-control .adjustments button {
-    opacity:0.5;
-    height:20px;
+    height:30px;
     font-size:10px;
-    font-weight:normal;
     padding:0 5px 3px 5px;
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 0;
+    border:0;
+    text-transform: uppercase;
+    font-weight: bold;
+
 }
 
 .layerswitcher-control .adjustments button:hover {
-    opacity: 1;
+    background:#ececec;
+}
+
+.layerswitcher-control .alignment-toggle:before {
+    content: '';
+    display: inline-block;
+    height: 0;
+    width: 0;
+    margin-right: 5px;
+    border-top:  4px solid transparent;
+    border-bottom:  4px solid transparent;
+    border-left:  8px solid #7092ff;
+}
+
+.layerswitcher-control .alignment-toggle.expanded:before {
+    border-top:  8px solid #7092ff;
+    border-bottom: 0;
+    border-right:  4px solid transparent;
+    border-left:  4px solid transparent;
+
 }
 
 .layerswitcher-control .nudge {
+    text-indent: -9999px;
+    overflow: hidden;
     width:20px;
-    margin-right:2px;
+    border-radius: 0;
+    margin-right:1px;
+    position: relative;
+}
+
+.layerswitcher-control .nudge::after {
+    content: '';
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0; right: 0; top: 0; bottom: 0;
+    height: 0;
+    width: 0;
+}
+
+.layerswitcher-control .nudge.left::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-left:  5px solid #222;
+}
+
+.layerswitcher-control .nudge.right::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-right:  5px solid #222;
+}
+
+.layerswitcher-control .nudge.top::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-bottom:  5px solid #222;
+}
+
+.layerswitcher-control .nudge.bottom::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-top:  5px solid #222;
+}
+
+.layerswitcher-control .nudge:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.layerswitcher-control .reset {
+    width: 45px;
+    border-radius: 0 4px 4px 0;
 }
 
 .opacity-options-wrapper {
@@ -711,6 +783,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: absolute;
     right: 10px;
     top: 10px;
+    border: 1px solid #ddd;
 }
 
 .opacity-options li {
@@ -723,7 +796,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .opacity-options li .select-box{
     position: absolute;
     width:20px;
-    height:20px;
+    height:18px;
     z-index: 9999;
 }
 
@@ -742,7 +815,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background:#222;
     display:inline-block;
     width:20px;
-    height:20px;
+    height:18px;
 }
 
 /* Geocoder */
