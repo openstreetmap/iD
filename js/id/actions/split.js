@@ -7,7 +7,7 @@
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-iD.actions.SplitWay = function(nodeId, newWayId) {
+iD.actions.Split = function(nodeId, newWayId) {
     function candidateWays(graph) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node);

@@ -1,6 +1,6 @@
 iD.operations.Split = function(selection, context) {
     var entityId = selection[0],
-        action = iD.actions.SplitWay(entityId);
+        action = iD.actions.Split(entityId);
 
     var operation = function() {
         context.perform(action, t('operations.split.annotation'));
