@@ -15,17 +15,21 @@ iD.presetData = function() {
     };
 
     presets.match = function(entity) {
+        var type = entity.type == 'node' ? 'node' : entity.geometry();
         return data.filter(function(d) {
-            return _.contains(d.type, entity.type);
+            return _.contains(d.type, type);
         });
     };
 
     presets.matchTags = function(entity) {
-        var tags, count, maxcount = 0, best;
+        var tags, count, best,
+            maxcount = 0,
+            type = entity.type == 'node' ? 'node' : entity.geometry();
+
         for (var i = 0; i < data.length; i++) {
             count = 0;
             tags = data[i].tags;
-            if (!_.contains(data[i].type, entity.type)) continue;
+            if (!_.contains(data[i].type, type)) continue;
             for (var k in tags) {
                 if (entity.tags[k] == tags[k]) count++;
             }

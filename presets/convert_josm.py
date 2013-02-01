@@ -39,7 +39,7 @@ for item in dom1.getElementsByTagName('item'):
 
     jitem = {
         "name": item.getAttribute('name'),
-        "type": item.getAttribute('type').split(','),
+        "type": item.getAttribute('type').replace('closedway', 'area').replace('way', 'line').split(','),
         "tags": tags,
         "main": []
     }

@@ -106,7 +106,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Motorway", 
         "tags": {
@@ -210,7 +210,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Motorway Link", 
         "tags": {
@@ -330,7 +330,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Trunk", 
         "tags": {
@@ -445,7 +445,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Trunk Link", 
         "tags": {
@@ -578,7 +578,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Primary", 
         "tags": {
@@ -701,7 +701,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Primary Link", 
         "tags": {
@@ -828,7 +828,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Secondary", 
         "tags": {
@@ -945,7 +945,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Secondary Link", 
         "tags": {
@@ -1072,7 +1072,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Tertiary", 
         "tags": {
@@ -1189,7 +1189,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Tertiary Link", 
         "tags": {
@@ -1322,7 +1322,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Unclassified", 
         "tags": {
@@ -1449,7 +1449,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Residential", 
         "tags": {
@@ -1559,7 +1559,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Living Street", 
         "tags": {
@@ -1669,8 +1669,8 @@
             }
         ], 
         "type": [
-            "way", 
-            "closedway", 
+            "line", 
+            "area", 
             "relation"
         ], 
         "name": "Pedestrian", 
@@ -1802,7 +1802,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Service", 
         "tags": {
@@ -1847,7 +1847,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Parking Aisle", 
         "tags": {
@@ -1963,7 +1963,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Road (Unknown Type)", 
         "tags": {
@@ -2088,7 +2088,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Construction", 
         "tags": {
@@ -2379,7 +2379,7 @@
         ], 
         "type": [
             "node", 
-            "way"
+            "line"
         ], 
         "name": "Road Restrictions", 
         "tags": {}
@@ -2493,7 +2493,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Roundabout", 
         "tags": {
@@ -2566,7 +2566,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Bridge", 
         "tags": {}
@@ -2621,7 +2621,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Tunnel", 
         "tags": {
@@ -2651,7 +2651,7 @@
         ], 
         "type": [
             "node", 
-            "way"
+            "line"
         ], 
         "name": "Ford", 
         "tags": {
@@ -2846,7 +2846,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Track", 
         "tags": {
@@ -3079,7 +3079,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Path", 
         "tags": {
@@ -3194,7 +3194,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Dedicated Bridleway", 
         "tags": {
@@ -3280,7 +3280,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Cycle Lane", 
         "tags": {}
@@ -3398,7 +3398,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Dedicated Cycleway", 
         "tags": {
@@ -3508,7 +3508,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Segregated Foot- and Cycleway", 
         "tags": {
@@ -3627,7 +3627,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Combined Foot- and Cycleway", 
         "tags": {
@@ -3740,7 +3740,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Dedicated Footway", 
         "tags": {
@@ -3842,7 +3842,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Steps", 
         "tags": {
@@ -3896,7 +3896,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Services", 
@@ -3920,7 +3920,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Rest Area", 
         "tags": {
@@ -4215,7 +4215,7 @@
         ], 
         "type": [
             "node", 
-            "way"
+            "line"
         ], 
         "name": "Bollard", 
         "tags": {
@@ -4286,8 +4286,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Block", 
         "tags": {
@@ -4395,7 +4395,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Toll Booth", 
         "tags": {
@@ -4446,8 +4446,8 @@
     {
         "main": [], 
         "type": [
-            "way", 
-            "closedway", 
+            "line", 
+            "area", 
             "relation"
         ], 
         "name": "Hedge", 
@@ -4473,8 +4473,8 @@
             }
         ], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Fence", 
         "tags": {
@@ -4484,8 +4484,8 @@
     {
         "main": [], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Wall", 
         "tags": {
@@ -4495,8 +4495,8 @@
     {
         "main": [], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "City Wall", 
         "tags": {
@@ -4506,8 +4506,8 @@
     {
         "main": [], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Retaining Wall", 
         "tags": {
@@ -4523,7 +4523,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Ditch", 
         "tags": {
@@ -4872,7 +4872,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Drain", 
         "tags": {
@@ -4906,7 +4906,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Ditch", 
         "tags": {
@@ -4940,7 +4940,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Stream", 
         "tags": {
@@ -4979,7 +4979,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Canal", 
         "tags": {
@@ -5018,7 +5018,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "River", 
         "tags": {
@@ -5035,7 +5035,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Spring", 
         "tags": {
@@ -5057,7 +5057,7 @@
         ], 
         "type": [
             "node", 
-            "way"
+            "line"
         ], 
         "name": "Waterfall", 
         "tags": {
@@ -5074,7 +5074,7 @@
         ], 
         "type": [
             "node", 
-            "way"
+            "line"
         ], 
         "name": "Weir", 
         "tags": {
@@ -5096,8 +5096,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Dam", 
         "tags": {
@@ -5108,8 +5108,8 @@
         "main": [], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Groyne", 
         "tags": {
@@ -5130,8 +5130,8 @@
             }
         ], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Breakwater", 
         "tags": {
@@ -5148,7 +5148,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Basin", 
@@ -5166,7 +5166,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Reservoir", 
@@ -5184,7 +5184,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Covered Reservoir", 
@@ -5202,7 +5202,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Water", 
@@ -5220,7 +5220,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Land", 
@@ -5238,8 +5238,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway", 
+            "line", 
+            "area", 
             "relation"
         ], 
         "name": "Coastline", 
@@ -5256,7 +5256,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Riverbank", 
@@ -5288,7 +5288,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Wetland", 
@@ -5306,7 +5306,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Mud", 
@@ -5324,7 +5324,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Beach", 
@@ -5342,7 +5342,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Bay", 
@@ -5360,8 +5360,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway", 
+            "line", 
+            "area", 
             "relation"
         ], 
         "name": "Cliff", 
@@ -5391,7 +5391,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Ferry Terminal", 
         "tags": {
@@ -5407,8 +5407,8 @@
             }
         ], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Ferry Route", 
         "tags": {
@@ -5425,7 +5425,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Marina", 
         "tags": {
@@ -5441,8 +5441,8 @@
             }
         ], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Pier", 
         "tags": {
@@ -5495,7 +5495,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Boatyard", 
         "tags": {
@@ -5512,7 +5512,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Dock", 
         "tags": {
@@ -5602,7 +5602,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Rail", 
         "tags": {
@@ -5680,7 +5680,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Narrow Gauge Rail", 
         "tags": {
@@ -5737,7 +5737,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Monorail", 
         "tags": {
@@ -5815,7 +5815,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Preserved", 
         "tags": {
@@ -5893,7 +5893,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Light Rail", 
         "tags": {
@@ -5971,7 +5971,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Subway", 
         "tags": {
@@ -6049,7 +6049,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Tram", 
         "tags": {
@@ -6158,7 +6158,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Bus Guideway", 
         "tags": {
@@ -6179,7 +6179,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Disused Rail", 
         "tags": {
@@ -6189,7 +6189,7 @@
     {
         "main": [], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Abandoned Rail", 
         "tags": {
@@ -6252,7 +6252,7 @@
         "main": [], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Turntable", 
         "tags": {
@@ -6310,7 +6310,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Chair Lift", 
         "tags": {
@@ -6341,7 +6341,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Drag Lift", 
         "tags": {
@@ -6383,7 +6383,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Cable Car", 
         "tags": {
@@ -6425,7 +6425,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Gondola", 
         "tags": {
@@ -6473,7 +6473,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Mixed Lift", 
         "tags": {
@@ -6504,7 +6504,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "T-bar Lift", 
         "tags": {
@@ -6535,7 +6535,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "J-bar Lift", 
         "tags": {
@@ -6566,7 +6566,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Platter Lift", 
         "tags": {
@@ -6597,7 +6597,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Rope Tow", 
         "tags": {
@@ -6628,7 +6628,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Magic Carpet", 
         "tags": {
@@ -6654,7 +6654,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Goods", 
         "tags": {
@@ -6671,7 +6671,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Station", 
         "tags": {
@@ -6803,7 +6803,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Parking", 
         "tags": {
@@ -6940,7 +6940,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Parking space", 
         "tags": {
@@ -7239,7 +7239,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Fuel", 
         "tags": {
@@ -7302,7 +7302,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Wash", 
         "tags": {
@@ -7324,7 +7324,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Car Dealer", 
         "tags": {
@@ -7361,7 +7361,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Repair", 
         "tags": {
@@ -7418,7 +7418,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Tyres", 
         "tags": {
@@ -7455,7 +7455,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Rental", 
         "tags": {
@@ -7497,7 +7497,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Sharing", 
         "tags": {
@@ -7538,7 +7538,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Parking", 
         "tags": {
@@ -7669,7 +7669,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Motorcycle Dealer", 
         "tags": {
@@ -7723,7 +7723,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Parking", 
         "tags": {
@@ -7782,7 +7782,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Bike Dealer", 
         "tags": {
@@ -7799,7 +7799,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Rental", 
         "tags": {
@@ -7821,7 +7821,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Station", 
         "tags": {
@@ -7880,8 +7880,8 @@
             }
         ], 
         "type": [
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Railway Platform", 
         "tags": {
@@ -7927,7 +7927,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Bus Station", 
         "tags": {
@@ -7998,7 +7998,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Bus Platform", 
         "tags": {
@@ -8078,7 +8078,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Taxi", 
         "tags": {
@@ -8110,7 +8110,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Airport Ground", 
         "tags": {
@@ -8126,7 +8126,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Runway", 
         "tags": {
@@ -8142,7 +8142,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Taxiway", 
         "tags": {
@@ -8159,7 +8159,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Helipad", 
         "tags": {
@@ -8169,7 +8169,7 @@
     {
         "main": [], 
         "type": [
-            "closedway"
+            "area"
         ], 
         "name": "Apron", 
         "tags": {
@@ -8180,7 +8180,7 @@
         "main": [], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hangar", 
         "tags": {
@@ -8217,7 +8217,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Terminal", 
         "tags": {
@@ -8331,7 +8331,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hotel", 
         "tags": {
@@ -8429,7 +8429,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Motel", 
         "tags": {
@@ -8522,7 +8522,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Guest House", 
         "tags": {
@@ -8615,7 +8615,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Chalet", 
         "tags": {
@@ -8713,7 +8713,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hostel", 
         "tags": {
@@ -8802,7 +8802,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Alpine Hut", 
         "tags": {
@@ -8922,7 +8922,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Caravan Site", 
         "tags": {
@@ -9015,7 +9015,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Camping Site", 
         "tags": {
@@ -9130,7 +9130,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Restaurant", 
         "tags": {
@@ -9250,7 +9250,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Fast Food", 
         "tags": {
@@ -9339,7 +9339,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Food Court", 
         "tags": {
@@ -9442,7 +9442,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Cafe", 
         "tags": {
@@ -9542,7 +9542,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Pub", 
         "tags": {
@@ -9631,7 +9631,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Biergarten", 
         "tags": {
@@ -9721,7 +9721,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Bar", 
         "tags": {
@@ -9789,7 +9789,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Nightclub", 
         "tags": {
@@ -9811,7 +9811,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Attraction", 
         "tags": {
@@ -9828,7 +9828,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Viewpoint", 
         "tags": {
@@ -9855,7 +9855,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Information Office", 
         "tags": {
@@ -10123,7 +10123,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Other Information Points", 
         "tags": {
@@ -10140,7 +10140,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Cinema", 
@@ -10173,7 +10173,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Zoo", 
         "tags": {
@@ -10221,7 +10221,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Dog Park", 
         "tags": {
@@ -10248,7 +10248,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Theme Park", 
         "tags": {
@@ -10265,7 +10265,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Water Park", 
         "tags": {
@@ -10307,7 +10307,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Sauna", 
         "tags": {
@@ -10324,7 +10324,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Playground", 
         "tags": {
@@ -10347,7 +10347,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Picnic Site", 
         "tags": {
@@ -10399,7 +10399,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Fishing", 
         "tags": {
@@ -10410,7 +10410,7 @@
         "main": [], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Private Swimming Pool", 
         "tags": {
@@ -10443,7 +10443,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Museum", 
         "tags": {
@@ -10460,7 +10460,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Theatre", 
@@ -10488,7 +10488,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Library", 
@@ -10506,7 +10506,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Arts Centre", 
@@ -10524,8 +10524,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Artwork", 
         "tags": {
@@ -10604,7 +10604,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Place of Worship", 
@@ -10662,7 +10662,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Public Building", 
@@ -10680,7 +10680,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Town hall", 
@@ -10713,7 +10713,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Community Centre", 
         "tags": {
@@ -10730,7 +10730,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Embassy", 
@@ -10748,7 +10748,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Courthouse", 
@@ -10766,7 +10766,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Prison", 
@@ -10784,7 +10784,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Police", 
@@ -10802,7 +10802,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Fire Station", 
@@ -10825,7 +10825,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Post Office", 
@@ -10843,7 +10843,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Kindergarten", 
@@ -10861,7 +10861,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "School", 
@@ -10879,7 +10879,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "University", 
@@ -10897,7 +10897,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "College", 
@@ -10925,7 +10925,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Driving School", 
         "tags": {
@@ -10943,7 +10943,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hospital", 
         "tags": {
@@ -10970,7 +10970,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Doctors", 
         "tags": {
@@ -10997,7 +10997,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Dentist", 
         "tags": {
@@ -11019,7 +11019,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Nursing Home", 
         "tags": {
@@ -11055,7 +11055,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Pharmacy", 
         "tags": {
@@ -11087,7 +11087,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hearing Aids", 
         "tags": {
@@ -11109,7 +11109,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Baby Hatch", 
         "tags": {
@@ -11141,7 +11141,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Emergency Access Point", 
         "tags": {
@@ -11168,7 +11168,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Veterinary", 
         "tags": {
@@ -11214,7 +11214,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Toilets", 
         "tags": {
@@ -11406,7 +11406,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Recycling", 
         "tags": {
@@ -11521,7 +11521,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Shelter", 
         "tags": {
@@ -11731,7 +11731,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Stadium", 
         "tags": {
@@ -11791,7 +11791,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Sports Centre", 
         "tags": {
@@ -11850,7 +11850,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Pitch", 
         "tags": {
@@ -11909,8 +11909,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway", 
+            "line", 
+            "area", 
             "relation"
         ], 
         "name": "Racetrack", 
@@ -11938,7 +11938,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Golf Course", 
         "tags": {
@@ -11965,7 +11965,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Miniature Golf", 
         "tags": {
@@ -11993,7 +11993,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Multi", 
         "tags": {
@@ -12020,7 +12020,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "9pin", 
         "tags": {
@@ -12047,7 +12047,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "10pin", 
         "tags": {
@@ -12074,7 +12074,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Archery", 
         "tags": {
@@ -12102,7 +12102,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Athletics", 
         "tags": {
@@ -12127,7 +12127,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Climbing", 
         "tags": {
@@ -12144,8 +12144,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Canoeing", 
         "tags": {
@@ -12173,7 +12173,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Cycling", 
         "tags": {
@@ -12201,7 +12201,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Dog Racing", 
         "tags": {
@@ -12230,7 +12230,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Equestrian", 
         "tags": {
@@ -12258,7 +12258,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Horse Racing", 
         "tags": {
@@ -12285,7 +12285,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Gymnastics", 
         "tags": {
@@ -12313,7 +12313,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Skating", 
         "tags": {
@@ -12341,7 +12341,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Skateboard", 
         "tags": {
@@ -12369,7 +12369,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Swimming", 
         "tags": {
@@ -12423,8 +12423,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Skiing", 
         "tags": {
@@ -12452,7 +12452,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Shooting", 
         "tags": {
@@ -12479,7 +12479,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Soccer", 
         "tags": {
@@ -12506,7 +12506,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Australian Football", 
         "tags": {
@@ -12533,7 +12533,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "American Football", 
         "tags": {
@@ -12560,7 +12560,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Canadian Football", 
         "tags": {
@@ -12611,7 +12611,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Gaelic Games", 
         "tags": {
@@ -12638,7 +12638,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Rugby League", 
         "tags": {
@@ -12665,7 +12665,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Rugby Union", 
         "tags": {
@@ -12692,7 +12692,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Baseball", 
         "tags": {
@@ -12719,7 +12719,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Basketball", 
         "tags": {
@@ -12751,7 +12751,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Volleyball", 
         "tags": {
@@ -12783,7 +12783,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Beachvolleyball", 
         "tags": {
@@ -12811,7 +12811,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Golf", 
         "tags": {
@@ -12838,7 +12838,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Boule", 
         "tags": {
@@ -12865,7 +12865,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Bowls", 
         "tags": {
@@ -12892,7 +12892,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Cricket", 
         "tags": {
@@ -12919,7 +12919,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Cricket Nets", 
         "tags": {
@@ -12946,7 +12946,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Croquet", 
         "tags": {
@@ -12974,7 +12974,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hockey", 
         "tags": {
@@ -13001,7 +13001,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Pelota", 
         "tags": {
@@ -13028,7 +13028,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Racquet", 
         "tags": {
@@ -13055,7 +13055,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Table Tennis", 
         "tags": {
@@ -13082,7 +13082,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Tennis", 
         "tags": {
@@ -13110,7 +13110,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Motorsport", 
         "tags": {
@@ -13137,7 +13137,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Karting", 
         "tags": {
@@ -13164,7 +13164,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Motocross", 
         "tags": {
@@ -13191,7 +13191,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Safety Training", 
         "tags": {
@@ -13218,7 +13218,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Model Aerodrome", 
         "tags": {
@@ -13245,7 +13245,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "RC Car", 
         "tags": {
@@ -13282,7 +13282,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Building", 
@@ -13312,7 +13312,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Residential Building", 
@@ -13347,7 +13347,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Tower", 
         "tags": {
@@ -13374,7 +13374,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Works", 
         "tags": {
@@ -13417,7 +13417,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Windmill", 
         "tags": {
@@ -13434,7 +13434,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Gasometer", 
         "tags": {
@@ -13472,7 +13472,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Pipeline", 
         "tags": {
@@ -13489,7 +13489,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Crane", 
         "tags": {
@@ -13564,7 +13564,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Mineshaft", 
         "tags": {
@@ -13637,7 +13637,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Water Tower", 
         "tags": {
@@ -13659,7 +13659,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Water Works", 
         "tags": {
@@ -13676,7 +13676,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Wastewater Plant", 
         "tags": {
@@ -13709,7 +13709,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Fountain", 
         "tags": {
@@ -13742,7 +13742,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Lighthouse", 
         "tags": {
@@ -13831,7 +13831,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Measurement Station", 
         "tags": {
@@ -13874,7 +13874,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Surveillance", 
         "tags": {
@@ -14042,7 +14042,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Power Generator", 
         "tags": {
@@ -14069,7 +14069,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Power Station", 
         "tags": {
@@ -14091,7 +14091,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Power Sub Station", 
         "tags": {
@@ -14205,7 +14205,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Power Line", 
         "tags": {}
@@ -14225,7 +14225,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Castle", 
         "tags": {
@@ -14252,7 +14252,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Ruins", 
         "tags": {
@@ -14279,7 +14279,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Archaeological Site", 
         "tags": {
@@ -14296,7 +14296,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Battlefield", 
         "tags": {
@@ -14313,7 +14313,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Palaeontological Site", 
         "tags": {
@@ -14330,7 +14330,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Monument", 
         "tags": {
@@ -14347,7 +14347,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Memorial", 
         "tags": {
@@ -14364,7 +14364,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Wayside Cross", 
         "tags": {
@@ -14381,7 +14381,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Wayside Shrine", 
         "tags": {
@@ -14398,7 +14398,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Boundary Stone", 
         "tags": {
@@ -14425,7 +14425,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Supermarket", 
         "tags": {
@@ -14452,7 +14452,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Convenience Store", 
         "tags": {
@@ -14479,7 +14479,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Kiosk", 
         "tags": {
@@ -14506,7 +14506,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Baker", 
         "tags": {
@@ -14533,7 +14533,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Butcher", 
         "tags": {
@@ -14565,7 +14565,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Seafood", 
         "tags": {
@@ -14597,7 +14597,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Deli (Fine Food)", 
         "tags": {
@@ -14624,7 +14624,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Confectionery", 
         "tags": {
@@ -14656,8 +14656,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Marketplace", 
         "tags": {
@@ -14689,7 +14689,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Greengrocer", 
         "tags": {
@@ -14711,7 +14711,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Organic", 
         "tags": {}
@@ -14731,7 +14731,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Fair Trade", 
         "tags": {}
@@ -14756,7 +14756,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Alcohol", 
         "tags": {
@@ -14783,7 +14783,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Beverages", 
         "tags": {
@@ -14810,7 +14810,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Clothes", 
         "tags": {
@@ -14842,7 +14842,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Boutique", 
         "tags": {
@@ -14869,7 +14869,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Shoes", 
         "tags": {
@@ -14896,7 +14896,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Outdoor", 
         "tags": {
@@ -14923,7 +14923,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Sports", 
         "tags": {
@@ -14950,7 +14950,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Dry Cleaning", 
         "tags": {
@@ -14977,7 +14977,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Laundry", 
         "tags": {
@@ -15004,7 +15004,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Tailor", 
         "tags": {
@@ -15036,7 +15036,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Fabric", 
         "tags": {
@@ -15063,7 +15063,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Computer", 
         "tags": {
@@ -15090,7 +15090,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Electronics", 
         "tags": {
@@ -15122,7 +15122,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Mobile Phone", 
         "tags": {
@@ -15154,7 +15154,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Vacuum Cleaner", 
         "tags": {
@@ -15181,7 +15181,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hifi", 
         "tags": {
@@ -15208,7 +15208,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Video", 
         "tags": {
@@ -15246,7 +15246,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Bank", 
         "tags": {
@@ -15273,7 +15273,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Money Exchange", 
         "tags": {
@@ -15321,7 +15321,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Department Store", 
         "tags": {
@@ -15353,7 +15353,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Mall", 
         "tags": {
@@ -15380,7 +15380,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Chemist", 
         "tags": {
@@ -15407,7 +15407,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hairdresser", 
         "tags": {
@@ -15434,7 +15434,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Optician", 
         "tags": {
@@ -15466,7 +15466,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Jewelry", 
         "tags": {
@@ -15498,7 +15498,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Erotic", 
         "tags": {
@@ -15525,7 +15525,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Florist", 
         "tags": {
@@ -15552,7 +15552,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Garden Centre", 
         "tags": {
@@ -15579,7 +15579,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Do-it-yourself-store", 
         "tags": {
@@ -15606,7 +15606,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hardware", 
         "tags": {
@@ -15638,7 +15638,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Paint", 
         "tags": {
@@ -15665,7 +15665,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Furniture", 
         "tags": {
@@ -15697,7 +15697,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Kitchen", 
         "tags": {
@@ -15729,7 +15729,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Curtain", 
         "tags": {
@@ -15761,7 +15761,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Frame", 
         "tags": {
@@ -15788,7 +15788,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Stationery", 
         "tags": {
@@ -15820,7 +15820,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Copyshop", 
         "tags": {
@@ -15847,7 +15847,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Book Store", 
         "tags": {
@@ -15874,7 +15874,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Travel Agency", 
         "tags": {
@@ -15906,7 +15906,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Musical Instrument", 
         "tags": {
@@ -15933,7 +15933,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Toys", 
         "tags": {
@@ -15965,7 +15965,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Variety Store", 
         "tags": {
@@ -16043,7 +16043,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "National", 
@@ -16060,7 +16060,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Administrative", 
@@ -16077,7 +16077,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Civil", 
@@ -16094,7 +16094,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Political", 
@@ -16111,7 +16111,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "National park", 
@@ -16134,7 +16134,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Continent", 
         "tags": {
@@ -16156,7 +16156,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Country", 
         "tags": {
@@ -16178,7 +16178,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "State", 
         "tags": {
@@ -16200,7 +16200,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Region", 
         "tags": {
@@ -16237,7 +16237,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "County", 
         "tags": {
@@ -16274,7 +16274,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "City", 
         "tags": {
@@ -16311,7 +16311,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Town", 
         "tags": {
@@ -16348,7 +16348,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Suburb", 
         "tags": {
@@ -16385,7 +16385,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Village", 
         "tags": {
@@ -16422,7 +16422,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Hamlet", 
         "tags": {
@@ -16459,7 +16459,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Isolated Dwelling", 
         "tags": {
@@ -16491,7 +16491,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Neighbourhood", 
         "tags": {
@@ -16513,7 +16513,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Locality", 
         "tags": {
@@ -16566,7 +16566,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Glacier", 
         "tags": {
@@ -16593,7 +16593,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Volcano", 
         "tags": {
@@ -16615,7 +16615,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Cave Entrance", 
         "tags": {
@@ -16637,7 +16637,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Island", 
         "tags": {
@@ -16659,7 +16659,7 @@
         ], 
         "type": [
             "node", 
-            "closedway"
+            "area"
         ], 
         "name": "Islet", 
         "tags": {
@@ -16717,7 +16717,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Wood", 
@@ -16745,7 +16745,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Forest", 
@@ -16763,7 +16763,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Nature Reserve", 
@@ -16781,7 +16781,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Scree", 
@@ -16799,7 +16799,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Fell", 
@@ -16817,7 +16817,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Scrub", 
@@ -16835,7 +16835,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Heath", 
@@ -16852,7 +16852,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Farmyard", 
@@ -16869,7 +16869,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Farmland", 
@@ -16887,7 +16887,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Meadow", 
@@ -16905,7 +16905,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Vineyard", 
@@ -16927,7 +16927,7 @@
             }
         ], 
         "type": [
-            "closedway"
+            "area"
         ], 
         "name": "Greenhouse Horticulture", 
         "tags": {
@@ -16944,7 +16944,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Allotments", 
@@ -16962,7 +16962,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Garden", 
@@ -16980,7 +16980,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Grass", 
@@ -16998,7 +16998,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Village Green", 
@@ -17016,7 +17016,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Common", 
@@ -17034,7 +17034,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Park", 
@@ -17052,7 +17052,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Recreation Ground", 
@@ -17069,7 +17069,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Residential area", 
@@ -17128,7 +17128,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Graveyard", 
@@ -17187,7 +17187,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Cemetery", 
@@ -17205,7 +17205,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Retail", 
@@ -17223,7 +17223,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Commercial", 
@@ -17241,7 +17241,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Industrial", 
@@ -17263,7 +17263,7 @@
             }
         ], 
         "type": [
-            "closedway"
+            "area"
         ], 
         "name": "Garages", 
         "tags": {
@@ -17279,7 +17279,7 @@
             }
         ], 
         "type": [
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Railway land", 
@@ -17297,7 +17297,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Military", 
@@ -17315,7 +17315,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Construction area", 
@@ -17333,7 +17333,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Brownfield", 
@@ -17351,7 +17351,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Greenfield", 
@@ -17369,7 +17369,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Landfill", 
@@ -17387,7 +17387,7 @@
         ], 
         "type": [
             "node", 
-            "closedway", 
+            "area", 
             "relation"
         ], 
         "name": "Quarry", 
@@ -17440,8 +17440,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway"
+            "line", 
+            "area"
         ], 
         "name": "Addresses", 
         "tags": {}
@@ -17461,7 +17461,7 @@
             }
         ], 
         "type": [
-            "way"
+            "line"
         ], 
         "name": "Address Interpolation", 
         "tags": {}
@@ -17501,8 +17501,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway", 
+            "line", 
+            "area", 
             "relation"
         ], 
         "name": "Contact (common schema)", 
@@ -17543,8 +17543,8 @@
         ], 
         "type": [
             "node", 
-            "way", 
-            "closedway", 
+            "line", 
+            "area", 
             "relation"
         ], 
         "name": "Contact (schema with 'contact:*' prefix)", 
