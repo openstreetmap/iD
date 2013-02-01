@@ -247,9 +247,9 @@ iD.ui = function (context) {
 
         context.enter(iD.modes.Browse(context));
 
-        if (!localStorage.sawSplash) {
+        if (!context.storage('sawSplash')) {
             iD.ui.splash();
-            localStorage.sawSplash = true;
+            context.storage('sawSplash', true);
         }
     };
 };

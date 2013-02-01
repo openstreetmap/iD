@@ -1,4 +1,4 @@
-iD.Connection = function() {
+iD.Connection = function(context) {
 
     var event = d3.dispatch('auth', 'load'),
         url = 'http://www.openstreetmap.org',
@@ -7,7 +7,7 @@ iD.Connection = function() {
         keys,
         inflight = {},
         loadedTiles = {},
-        oauth = iD.OAuth().url(url);
+        oauth = iD.OAuth(context).url(url);
 
     function changesetUrl(changesetId) {
         return url + '/browse/changeset/' + changesetId;

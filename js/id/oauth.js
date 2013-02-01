@@ -1,14 +1,10 @@
-iD.OAuth = function() {
+iD.OAuth = function(context) {
     var baseurl = 'http://www.openstreetmap.org',
         o = {},
         keys,
         oauth = {};
 
     function keyclean(x) { return x.replace(/\W/g, ''); }
-
-    if (token('oauth_token')) {
-        o.oauth_token = token('oauth_token');
-    }
 
     function timenonce(o) {
         o.oauth_timestamp = ohauth.timestamp();
@@ -18,10 +14,11 @@ iD.OAuth = function() {
 
     // token getter/setter, namespaced to the current `apibase` value.
     function token(k, x) {
-        if (arguments.length == 2) {
-            localStorage[keyclean(baseurl) + k] = x;
-        }
-        return localStorage[keyclean(baseurl) + k];
+        return context.storage(keyclean(baseurl) + k, x);
+    }
+
+    if (token('oauth_token')) {
+        o.oauth_token = token('oauth_token');
     }
 
     oauth.authenticated = function() {

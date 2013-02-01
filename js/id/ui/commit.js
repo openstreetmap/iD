@@ -38,7 +38,7 @@ iD.ui.commit = function(context) {
         comment_section.append('textarea')
             .attr('class', 'changeset-comment')
             .attr('placeholder', 'Brief Description of your contributions')
-            .property('value',  localStorage.comment || '')
+            .property('value',  context.storage('comment') || '')
             .node().select();
 
         var commit_info =

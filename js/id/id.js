@@ -1,34 +1,42 @@
 window.iD = function () {
     var context = {},
         history = iD.History(),
-        connection = iD.Connection(),
+        storage = localStorage || {},
         dispatch = d3.dispatch('enter', 'exit'),
         mode,
         container,
         ui = iD.ui(context),
         map = iD.Map(context);
 
+    context.storage = function(k, v) {
+        if (arguments.length === 1) return storage[k];
+        else storage[k] = v;
+    };
+
+    // the connection requires .storage() to be available on calling.
+    var connection = iD.Connection(context);
+
     /* Straight accessors. Avoid using these if you can. */
-    context.ui         = function () { return ui; };
-    context.connection = function () { return connection; };
-    context.history    = function () { return history; };
-    context.map        = function () { return map; };
+    context.ui = function() { return ui; };
+    context.connection = function() { return connection; };
+    context.history = function() { return history; };
+    context.map = function() { return map; };
 
     /* History */
-    context.graph   = history.graph;
+    context.graph = history.graph;
     context.perform = history.perform;
     context.replace = history.replace;
-    context.pop     = history.pop;
-    context.undo    = history.undo;
-    context.redo    = history.undo;
+    context.pop = history.pop;
+    context.undo = history.undo;
+    context.redo = history.undo;
     context.changes = history.changes;
 
     /* Graph */
-    context.entity = function (id) {
+    context.entity = function(id) {
         return history.graph().entity(id);
     };
 
-    context.geometry = function (id) {
+    context.geometry = function(id) {
         return context.entity(id).geometry(history.graph());
     };
 
@@ -49,22 +57,22 @@ window.iD = function () {
     };
 
     /* Behaviors */
-    context.install = function (behavior) {
+    context.install = function(behavior) {
         context.surface().call(behavior);
     };
 
-    context.uninstall = function (behavior) {
+    context.uninstall = function(behavior) {
         context.surface().call(behavior.off);
     };
 
     /* Map */
-    context.background = function () { return map.background; };
-    context.surface    = function () { return map.surface; };
+    context.background = function() { return map.background; };
+    context.surface = function() { return map.surface; };
     context.projection = map.projection;
-    context.tail       = map.tail;
-    context.redraw     = map.redraw;
+    context.tail = map.tail;
+    context.redraw = map.redraw;
 
-    context.container = function (_) {
+    context.container = function(_) {
         if (!arguments.length) return container;
         container = _;
         return context;
