@@ -1267,3 +1267,46 @@ a.success-action {
     .icon.icon-pre-text { margin-right: 0px;}
     .save .label, .apply .label { display: block;}
 }
+
+
+
+
+
+div.combobox {
+    width:155px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+    margin-top: -1px;
+    background: white;
+    max-height: 180px;
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+
+div.combobox a {
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+    display: block;
+    border-top:1px solid #ccc;
+    background-color: #fff;
+    padding:1px 4px;
+    white-space: nowrap;
+}
+
+div.combobox a:hover,
+div.combobox a.selected  {
+    background: #e1e8ff;
+    color: #154dff;
+}
+
+div.combobox a:first-child {
+    border-top: 0;
+}
+
+div.combobox-carat {
+    cursor: pointer;
+    padding:0 5px;
+    vertical-align:middle;
+}
