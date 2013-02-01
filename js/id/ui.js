@@ -167,11 +167,13 @@ iD.ui = function (context) {
             .on('click.editor', function() {
                 d3.event.preventDefault();
                 if (d3.select(this).classed('live')) {
-                    map.flush().connection()
+                    map.flush();
+                    context.connection()
                         .url('http://api06.dev.openstreetmap.org');
                     d3.select(this).text('dev').classed('live', false);
                 } else {
-                    map.flush().connection()
+                    map.flush();
+                    context.connection()
                         .url('http://www.openstreetmap.org');
                     d3.select(this).text('live').classed('live', true);
                 }
