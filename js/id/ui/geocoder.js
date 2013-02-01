@@ -19,7 +19,7 @@ iD.ui.geocoder = function() {
                 }
                 var bounds = resp[0].boundingbox;
                 map.extent(iD.geo.Extent([parseFloat(bounds[3]), parseFloat(bounds[0])], [parseFloat(bounds[2]), parseFloat(bounds[1])]));
-		if (map.zoom() > 19) map.zoom(19);
+                if (map.zoom() > 19) map.zoom(19);
             });
         }
 
