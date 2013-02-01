@@ -66,6 +66,20 @@ iD.Entity.prototype = {
         return iD.Entity(this, attrs, {_updated: true});
     },
 
+    mergeTags: function(tags) {
+        var merged = _.clone(this.tags);
+        for (var k in tags) {
+            var t1 = merged[k],
+                t2 = tags[k];
+            if (t1 && t1 !== t2) {
+                merged[k] = t1 + "; " + t2;
+            } else {
+                merged[k] = t2;
+            }
+        }
+        return this.update({tags: merged});
+    },
+
     created: function() {
         return this._updated && this.osmId().charAt(0) === '-';
     },

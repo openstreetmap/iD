@@ -69,6 +69,33 @@ describe('iD.Entity', function () {
         });
     });
 
+    describe("#mergeTags", function () {
+        it("returns a new Entity", function () {
+            var a = iD.Entity(),
+                b = a.mergeTags({});
+            expect(b instanceof iD.Entity).to.be.true;
+            expect(a).not.to.equal(b);
+        });
+
+        it("merges tags", function () {
+            var a = iD.Entity({tags: {a: 'a'}}),
+                b = a.mergeTags({b: 'b'});
+            expect(b.tags).to.eql({a: 'a', b: 'b'});
+        });
+
+        it("combines non-conflicting tags", function () {
+            var a = iD.Entity({tags: {a: 'a'}}),
+                b = a.mergeTags({a: 'a'});
+            expect(b.tags).to.eql({a: 'a'});
+        });
+
+        it("combines conflicting tags with semicolons", function () {
+            var a = iD.Entity({tags: {a: 'a'}}),
+                b = a.mergeTags({a: 'b'});
+            expect(b.tags).to.eql({a: 'a; b'});
+        });
+    });
+
     describe("#osmId", function () {
         it("returns an OSM ID as a string", function () {
             expect(iD.Entity({id: 'w1234'}).osmId()).to.eql('1234');
