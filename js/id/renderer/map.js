@@ -112,7 +112,7 @@ iD.Map = function() {
                 .call(areas, graph, all, filter)
                 .call(multipolygons, graph, all, filter)
                 .call(midpoints, graph, all, filter)
-                .call(labels, graph, all, filter, dimensions);
+                .call(labels, graph, all, filter, dimensions, !difference);
         }
         dispatch.drawn(map);
     }
@@ -136,7 +136,7 @@ iD.Map = function() {
         }
 
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
-            iD.flash()
+            iD.ui.flash()
                 .select('.content')
                 .text('Cannot zoom out further in current mode.');
             return map.zoom(16);
@@ -361,7 +361,7 @@ iD.Map = function() {
     };
 
     var usedTails = {};
-    map.tail = function (_, once) {
+    map.tail = function (_) {
         if (!_ || usedTails[_] === undefined) {
             tail.text(_);
             usedTails[_] = true;

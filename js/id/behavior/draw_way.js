@@ -2,17 +2,19 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
     var map = mode.map,
         history = mode.history,
         controller = mode.controller,
-        way = mode.history.graph().entity(wayId),
+        way = history.graph().entity(wayId),
         finished = false,
-        annotation = 'Added to a way.',
+        annotation = t((way.isDegenerate() ?
+            'operations.start.annotation.' :
+            'operations.continue.annotation.') + way.geometry(history.graph())),
         draw = iD.behavior.Draw(map);
 
     var node = iD.Node({loc: map.mouseCoordinates()}),
         nodeId = node.id;
 
     history[way.isDegenerate() ? 'replace' : 'perform'](
-        iD.actions.AddNode(node),
-        iD.actions.AddWayNode(wayId, node.id, index));
+        iD.actions.AddEntity(node),
+        iD.actions.AddVertex(wayId, node.id, index));
 
     function move(datum) {
         var loc = map.mouseCoordinates();
@@ -71,12 +73,6 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
         history.on('undone.draw', null);
     };
 
-    drawWay.annotation = function(_) {
-        if (!arguments.length) return annotation;
-        annotation = _;
-        return drawWay;
-    };
-
     function ReplaceTemporaryNode(newNode) {
         return function(graph) {
             return graph
@@ -90,7 +86,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
         var newNode = iD.Node({loc: loc});
 
         history.replace(
-            iD.actions.AddNode(newNode),
+            iD.actions.AddEntity(newNode),
             ReplaceTemporaryNode(newNode),
             annotation);
 
@@ -103,8 +99,8 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
         var newNode = iD.Node({loc: loc});
 
         history.perform(
-            iD.actions.AddNode(newNode),
-            iD.actions.AddWayNode(way.id, newNode.id, wayIndex),
+            iD.actions.AddEntity(newNode),
+            iD.actions.AddVertex(way.id, newNode.id, wayIndex),
             ReplaceTemporaryNode(newNode),
             annotation);
 
@@ -143,7 +139,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
 
         var way = history.graph().entity(wayId);
         if (way) {
-            controller.enter(iD.modes.Select(way, true));
+            controller.enter(iD.modes.Select([way.id], true));
         } else {
             controller.enter(iD.modes.Browse());
         }
@@ -153,7 +149,7 @@ iD.behavior.DrawWay = function(wayId, index, mode, baseGraph) {
     drawWay.cancel = function() {
         history.perform(
             d3.functor(baseGraph),
-            'Cancelled drawing.');
+            t('operations.cancel_draw.annotation'));
 
         finished = true;
         controller.enter(iD.modes.Browse());

@@ -32,7 +32,7 @@ iD.behavior.AddWay = function(mode) {
     };
 
     addWay.cancel = function() {
-        controller.exit();
+        controller.enter(iD.modes.Browse());
     };
 
     return d3.rebind(addWay, event, 'on');

@@ -1175,7 +1175,8 @@ a.success-action {
     text-align:center;
 }
 
-.notice .notice-inner {
+.notice .zoom-to {
+    width:100%;
     height: 40px;
     border-radius: 5px;
     line-height: 40px;
@@ -1184,10 +1185,17 @@ a.success-action {
     opacity: 0.9;
 }
 
-.notice .notice-inner .zoom-to {
-    width:40px;
-    height:40px;
+.notice .zoom-to:hover {
+    background: #bde5aa;
+}
+
+.notice .zoom-to .icon {
+    margin-top:10px;
     margin-right:10px;
+}
+
+.icon.zoom-in-invert {
+    background-position: -240px -40px;
 }
 
 /* Tooltips

@@ -23,6 +23,7 @@ all: \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/ohauth.js \
+	js/lib/rtree.js \
 	js/lib/sha.js \
 	js/id/start.js \
 	js/id/id.js \
@@ -40,13 +41,14 @@ all: \
 	js/id/modes/*.js \
 	js/id/operations.js \
 	js/id/operations/*.js \
-	js/id/controller/*.js \
+	js/id/controller.js \
 	js/id/graph/*.js \
 	js/id/renderer/*.js \
 	js/id/svg.js \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
+	js/id/validate.js \
 	js/id/end.js \
 	locale/locale.js \
 	locale/en.js

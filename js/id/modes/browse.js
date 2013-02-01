@@ -2,9 +2,9 @@ iD.modes.Browse = function() {
     var mode = {
         button: 'browse',
         id: 'browse',
-        title: 'Browse',
-        description: 'Pan and zoom the map.',
-        key: 'b'
+        title: t('modes.browse.title'),
+        description: t('modes.browse.description'),
+        key: t('modes.browse.key')
     };
 
     var behaviors;
@@ -14,18 +14,12 @@ iD.modes.Browse = function() {
 
         behaviors = [
             iD.behavior.Hover(),
+            iD.behavior.Select(mode),
             iD.behavior.DragNode(mode),
             iD.behavior.DragMidpoint(mode)];
 
         behaviors.forEach(function(behavior) {
             behavior(surface);
-        });
-
-        surface.on('click.browse', function () {
-            var datum = d3.select(d3.event.target).datum();
-            if (datum instanceof iD.Entity) {
-                mode.controller.enter(iD.modes.Select(datum));
-            }
         });
     };
 
@@ -35,8 +29,6 @@ iD.modes.Browse = function() {
         behaviors.forEach(function(behavior) {
             behavior.off(surface);
         });
-
-        surface.on('click.browse', null);
     };
 
     return mode;

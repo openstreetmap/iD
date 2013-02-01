@@ -1,15 +1,17 @@
-iD.operations.Split = function(entityId, mode) {
-    var history = mode.map.history(),
+iD.operations.Split = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history(),
         action = iD.actions.SplitWay(entityId);
 
     var operation = function() {
-        history.perform(action, 'Split a way.');
+        history.perform(action, t('operations.split.annotation'));
     };
 
     operation.available = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId);
-        return entity.geometry(graph) === 'vertex';
+        return selection.length === 1 &&
+            entity.geometry(graph) === 'vertex';
     };
 
     operation.enabled = function() {
@@ -18,9 +20,9 @@ iD.operations.Split = function(entityId, mode) {
     };
 
     operation.id = "split";
-    operation.key = "X";
-    operation.title = "Split";
-    operation.description = "Split this into two ways at this point.";
+    operation.key = t('operations.split.key');
+    operation.title = t('operations.split.title');
+    operation.description = t('operations.split.description');
 
     return operation;
 };

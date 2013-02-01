@@ -35,7 +35,7 @@ iD.svg.Lines = function(projection) {
 
     return function drawLines(surface, graph, entities, filter) {
         function drawPaths(group, lines, filter, classes, lineString) {
-            var paths = group.selectAll('path')
+            var paths = group.selectAll('path.line')
                 .filter(filter)
                 .data(lines, iD.Entity.key);
 

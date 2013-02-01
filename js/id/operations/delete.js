@@ -1,37 +1,23 @@
-iD.operations.Delete = function(entityId, mode) {
-    var history = mode.map.history();
+iD.operations.Delete = function(selection, mode) {
+    var entityId = selection[0],
+        history = mode.map.history();
 
     var operation = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId),
-            geometry = entity.geometry(graph);
+            action = {way: iD.actions.DeleteWay, node: iD.actions.DeleteNode}[entity.type],
+            annotation = t('operations.delete.annotation.' + entity.geometry(graph));
 
-        if (geometry === 'vertex') {
-            history.perform(
-                iD.actions.DeleteNode(entityId),
-                'Deleted a vertex.');
-
-        } else if (geometry === 'point') {
-            history.perform(
-                iD.actions.DeleteNode(entityId),
-                'Deleted a point.');
-
-        } else if (geometry === 'line') {
-            history.perform(
-                iD.actions.DeleteWay(entityId),
-                'Deleted a line.');
-
-        } else if (geometry === 'area') {
-            history.perform(
-                iD.actions.DeleteWay(entityId),
-                'Deleted an area.');
-        }
+        history.perform(
+            action(entityId),
+            annotation);
     };
 
     operation.available = function() {
         var graph = history.graph(),
             entity = graph.entity(entityId);
-        return _.contains(['vertex', 'point', 'line', 'area'], entity.geometry(graph));
+        return selection.length === 1 &&
+            (entity.type === 'way' || entity.type === 'node');
     };
 
     operation.enabled = function() {
@@ -39,9 +25,9 @@ iD.operations.Delete = function(entityId, mode) {
     };
 
     operation.id = "delete";
-    operation.key = "⌫";
-    operation.title = "Delete";
-    operation.description = "Remove this from the map.";
+    operation.key = t('operations.delete.key');
+    operation.title = t('operations.delete.title');
+    operation.description = t('operations.delete.description');
 
     return operation;
 };

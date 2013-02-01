@@ -16,7 +16,7 @@ g.point .shadow {
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
 }
-.behavior-hover g.point.hover .shadow {
+.behavior-hover g.point.hover:not(.selected) .shadow {
     fill: #E96666;
     fill-opacity: 0.3;
 }
@@ -106,7 +106,7 @@ g.vertex .shadow {
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
 }
-.behavior-hover g.vertex.hover .shadow {
+.behavior-hover g.vertex.hover:not(.selected) .shadow {
     fill: #E96666;
     fill-opacity: 0.3;
 }    
@@ -120,7 +120,7 @@ g.vertex.selected .shadow {
 g.midpoint .fill {
     fill:#aaa;
 }
-.behavior-hover g.midpoint .fill.hover {
+.behavior-hover g.midpoint .fill.hover:not(.selected) {
     fill:#fff;
     stroke:#000;
 }
@@ -133,7 +133,7 @@ g.midpoint .shadow {
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
 }
-.behavior-hover g.midpoint .shadow.hover {
+.behavior-hover g.midpoint .shadow.hover:not(.selected) {
     fill:#E96666;
     fill-opacity: 0.3;
 }
@@ -161,7 +161,7 @@ path.shadow {
     -webkit-transition: stroke 100ms linear;
 }
 
-.behavior-hover path.shadow.hover {
+.behavior-hover path.shadow.hover:not(.selected) {
     stroke: #E96666;
     stroke-opacity: 0.3;
 }
@@ -616,6 +616,14 @@ text.pointlabel {
   pointer-events: none;
 }
 
+.layer-halo rect,
+.layer-halo path,
+.layer-label text {
+    -webkit-transition: opacity 100ms linear;
+    transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+}
+
 .pathlabel .textpath {
   dominant-baseline: middle;
 }
@@ -628,12 +636,7 @@ text.pointlabel {
 }
 
 
-text.area.tag-leisure-park {
-  font-size: 16px;
-}
-
-text.point.tag-shop,
-text.point.tag-amenity {
+text.point {
   font-size: 9px;
 }
 

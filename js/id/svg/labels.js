@@ -2,18 +2,36 @@ iD.svg.Labels = function(projection) {
 
     // Replace with dict and iterate over entities tags instead?
     var label_stack = [
+        ['line', 'aeroway'],
         ['line', 'highway'],
-        ['area', 'building', 'yes'],
-        ['area', 'leisure', 'park'],
+        ['line', 'railway'],
+        ['line', 'waterway'],
+        ['area', 'aeroway'],
+        ['area', 'amenity'],
+        ['area', 'building'],
+        ['area', 'historic'],
+        ['area', 'leisure'],
+        ['area', 'man_made'],
         ['area', 'natural'],
+        ['area', 'shop'],
+        ['area', 'tourism'],
+        ['point', 'aeroway'],
         ['point', 'amenity'],
-        ['point', 'shop']
+        ['point', 'building'],
+        ['point', 'historic'],
+        ['point', 'leisure'],
+        ['point', 'man_made'],
+        ['point', 'natural'],
+        ['point', 'shop'],
+        ['point', 'tourism'],
+        ['line', 'name'],
+        ['area', 'name'],
+        ['point', 'name']
     ];
 
     var default_size = 12;
     var font_sizes = label_stack.map(function(d) {
-        var style = iD.util.getStyle(
-            'text.' + d[0] + '.tag-' + d.slice(1).join('-'));
+        var style = iD.util.getStyle('text.' + d[0] + '.tag-' + d[1]);
         var m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
         if (!m) return default_size;
         return parseInt(m[1], 10);
@@ -156,7 +174,7 @@ iD.svg.Labels = function(projection) {
         for (var i = 0; i < nodes.length - 1; i++) {
             var current = segmentLength(i);
             var portion;
-            if (!start && sofar + current > from) {
+            if (!start && sofar + current >= from) {
                 portion = (from - sofar) / current;
                 start = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
@@ -164,7 +182,7 @@ iD.svg.Labels = function(projection) {
                 ];
                 i0 = i + 1;
             }
-            if (!end && sofar + current > to) {
+            if (!end && sofar + current >= to) {
                 portion = (to - sofar) / current;
                 end = [
                     nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
@@ -182,14 +200,45 @@ iD.svg.Labels = function(projection) {
 
     }
 
+    function hideOnMouseover() {
+        var mouse = d3.mouse(this),
+            pad = 50,
+            rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
+            labels = _.pluck(rtree.search(rect, this), 'leaf'),
+            selection = d3.select(this);
 
-    return function drawLabels(surface, graph, entities, filter, dimensions) {
+        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
+            .style('opacity', '');
 
-        var rtree = new RTree();
+        if (!labels.length) return;
+        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
+            .filter(function(d) {
+                return _.contains(labels, d.id);
+            })
+            .style('opacity', 0);
+    }
+
+    var rtree = new RTree(),
+        rectangles = {};
+
+    return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
+
+        d3.select(surface.node().parentNode)
+            .on('mousemove.hidelabels', hideOnMouseover);
+
         var hidePoints = !d3.select('.node.point').node();
 
         var labelable = [], i, k, entity;
         for (i = 0; i < label_stack.length; i++) labelable.push([]);
+
+        if (fullRedraw) {
+            rtree = new RTree();
+            rectangles = {};
+        } else {
+            for (i = 0; i < entities.length; i++) {
+                rtree.remove(rectangles[entities[i].id], entities[i].id);
+            }
+        }
 
         // Split entities into groups specified by label_stack
         for (i = 0; i < entities.length; i++) {
@@ -198,7 +247,7 @@ iD.svg.Labels = function(projection) {
             if (hidePoints && entity.geometry(graph) === 'point') continue;
             for (k = 0; k < label_stack.length; k ++) {
                 if (entity.geometry(graph) === label_stack[k][0] &&
-                    entity.tags[label_stack[k][1]] && !entity.tags[label_stack[k][2]]) {
+                    entity.tags[label_stack[k][1]]) {
                     labelable[k].push(entity);
                     break;
                 }
@@ -252,7 +301,7 @@ iD.svg.Labels = function(projection) {
                     textAnchor: offset[2]
                 };
             var rect = new RTree.Rectangle(p.x - m, p.y - m, width + 2*m, height + 2*m);
-            if (tryInsert(rect)) return p;
+            if (tryInsert(rect, entity.id)) return p;
         }
 
 
@@ -275,7 +324,7 @@ iD.svg.Labels = function(projection) {
                     Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 30
                 );
                 if (rev) sub = sub.reverse();
-                if (tryInsert(rect)) return {
+                if (tryInsert(rect, entity.id)) return {
                     'font-size': height + 2,
                     lineString: lineString(sub),
                     startOffset: offset + '%'
@@ -298,16 +347,19 @@ iD.svg.Labels = function(projection) {
                 height: height
             };
             var rect = new RTree.Rectangle(p.x - width/2, p.y, width, height);
-            if (tryInsert(rect)) return p;
+            if (tryInsert(rect, entity.id)) return p;
 
         }
 
-        function tryInsert(rect) {
+        function tryInsert(rect, id) {
             // Check that label is visible
             if (rect.x1 < 0 || rect.y1 < 0 || rect.x2 > dimensions[0] ||
                 rect.y2 > dimensions[1]) return false;
             var v = rtree.search(rect, true).length === 0;
-            if (v) rtree.insert(rect);
+            if (v) {
+                rtree.insert(rect, id);
+                rectangles[id] = rect;
+            }
             return v;
         }
 

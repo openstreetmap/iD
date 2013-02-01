@@ -11,8 +11,7 @@ iD.modes.DrawArea = function(wayId, baseGraph) {
             headId = way.nodes[way.nodes.length - 2],
             tailId = way.first();
 
-        behavior = iD.behavior.DrawWay(wayId, -1, mode, baseGraph)
-            .annotation(way.isDegenerate() ? 'started an area' : 'continued an area');
+        behavior = iD.behavior.DrawWay(wayId, -1, mode, baseGraph);
 
         var addNode = behavior.addNode;
 
@@ -25,7 +24,7 @@ iD.modes.DrawArea = function(wayId, baseGraph) {
         };
 
         mode.map.surface.call(behavior);
-        mode.map.tail('Click to add points to your area. Click the first point to finish the area.', true);
+        mode.map.tail(t('modes.draw_area.tail'));
     };
 
     mode.exit = function() {

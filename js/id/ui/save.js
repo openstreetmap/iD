@@ -60,7 +60,7 @@ iD.ui.save = function() {
                             .on('fix', function(d) {
                                 map.extent(d.entity.extent(map.history().graph()));
                                 if (map.zoom() > 19) map.zoom(19);
-                                controller.enter(iD.modes.Select(d.entity));
+                                controller.enter(iD.modes.Select([d.entity.id]));
                                 modal.remove();
                             })
                             .on('save', commit));

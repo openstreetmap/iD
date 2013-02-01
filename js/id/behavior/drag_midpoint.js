@@ -25,7 +25,7 @@ iD.behavior.DragMidpoint = function(mode) {
         .on('end', function() {
             history.replace(
                 iD.actions.Noop(),
-                'Added a node to a way.');
+                t('operations.add.annotation.vertex'));
         });
 
     return behavior;
