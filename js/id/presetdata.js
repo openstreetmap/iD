@@ -20,5 +20,19 @@ iD.presetData = function() {
         });
     };
 
+    presets.matchTags = function(entity) {
+        var tags, count, maxcount = 0, best;
+        for (var i = 0; i < data.length; i++) {
+            count = 0;
+            tags = data[i].tags;
+            if (!_.contains(data[i].type, entity.type)) continue;
+            for (var k = 0; k < tags.length; k++) {
+                if (entity.tags[tags[k].key] == tags[k].value) count++;
+            }
+            if (count > maxcount) best = data[i], maxcount = count;
+        }
+        return best;
+    };
+
     return presets;
 };
