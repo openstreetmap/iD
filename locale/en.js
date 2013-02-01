@@ -73,7 +73,8 @@ locale.en = {
                 point: "Deleted a point.",
                 vertex: "Deleted a node from a way.",
                 line: "Deleted a line.",
-                area: "Deleted an area."
+                area: "Deleted an area.",
+                multiple: "Deleted {n} objects."
             }
         },
         move: {

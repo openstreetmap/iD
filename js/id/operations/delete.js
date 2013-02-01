@@ -1,22 +1,20 @@
 iD.operations.Delete = function(selection, context) {
-    var entityId = selection[0];
-
     var operation = function() {
-        var entity = context.entity(entityId),
-            action = {
-                way: iD.actions.DeleteWay,
-                node: iD.actions.DeleteNode,
-                relation: iD.actions.DeleteRelation
-            }[entity.type],
-            annotation = t('operations.delete.annotation.' + context.geometry(entityId));
+        var annotation;
+
+        if (selection.length === 1) {
+            annotation = t('operations.delete.annotation.' + context.geometry(selection[0]));
+        } else {
+            annotation = t('operations.delete.annotation.multiple', {n: selection.length});
+        }
 
         context.perform(
-            action(entityId),
+            iD.actions.DeleteMultiple(selection),
             annotation);
     };
 
     operation.available = function() {
-        return selection.length === 1;
+        return true;
     };
 
     operation.enabled = function() {
