@@ -55,7 +55,6 @@ iD.Map = function() {
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
 
     function drawVector(difference) {
-        if (surface.style(transformProp) != 'none') return;
         var filter, all,
             extent = map.extent(),
             graph = history.graph();
