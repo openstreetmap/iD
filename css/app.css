@@ -701,12 +701,20 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background:#ececec;
 }
 
+.layerswitcher-control .alignment-toggle {
+    display: block;
+    padding-left: 12px;
+    position: relative;
+}
+
 .layerswitcher-control .alignment-toggle:before {
     content: '';
-    display: inline-block;
+    display: block;
+    position: absolute;
     height: 0;
     width: 0;
-    margin-right: 5px;
+    left: 0;
+    top: 4px;
     border-top:  4px solid transparent;
     border-bottom:  4px solid transparent;
     border-left:  8px solid #7092ff;
