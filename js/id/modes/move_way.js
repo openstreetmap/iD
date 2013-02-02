@@ -47,7 +47,7 @@ iD.modes.MoveWay = function(context, wayId) {
             context.enter(iD.modes.Browse(context));
         }
 
-        context.selection()
+        context.surface()
             .on('mousemove.move-way', move)
             .on('click.move-way', finish);
 
@@ -63,7 +63,7 @@ iD.modes.MoveWay = function(context, wayId) {
     };
 
     mode.exit = function() {
-        context.selection()
+        context.surface()
             .on('mousemove.move-way', null)
             .on('click.move-way', null);
 
