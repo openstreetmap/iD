@@ -35,7 +35,7 @@ iD.ui.inspector = function() {
             });
 
             newTag.append('span').attr('class', 'icon icon-pre-text plus');
-            newTag.append('span').attr('class','label').text('New tag')
+            newTag.append('span').attr('class','label').text(t('inspector.new_tag'));
 
         drawTags(entity.tags);
 
@@ -63,7 +63,7 @@ iD.ui.inspector = function() {
                 .attr('class', 'apply action')
                 .on('click', apply);
 
-            inspectorButton.append('span').attr('class','label').text('Okay');
+            inspectorButton.append('span').attr('class','label').text(t('okay'));
 
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
 
@@ -148,7 +148,7 @@ iD.ui.inspector = function() {
                             iD.ui.flash()
                                 .select('.content')
                                 .append('h3')
-                                .text(t('no_documentation_combination'));
+                                .text(t('inspector.no_documentation_combination'));
                         }
                     });
                 } else if (d.key) {
@@ -166,7 +166,7 @@ iD.ui.inspector = function() {
                             iD.ui.flash()
                                 .select('.content')
                                 .append('h3')
-                                .text(t('no_documentation_key'));
+                                .text(t('inspector.no_documentation_key'));
                         }
                     });
                 }

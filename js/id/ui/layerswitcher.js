@@ -59,7 +59,7 @@ iD.ui.layerswitcher = function(context) {
             .append('div')
             .attr('class', 'opacity-options-wrapper');
 
-        opa.append('h4').text(t('layers'));
+        opa.append('h4').text(t('layerswitcher.layers'));
 
         opa.append('ul')
             .attr('class', 'opacity-options')
@@ -68,7 +68,7 @@ iD.ui.layerswitcher = function(context) {
             .enter()
             .append('li')
                 .attr('data-original-title', function(d) {
-                    return t('percent_opacity', { opacity: (d * 100) });
+                    return t('layerswitcher.percent_brightness', { opacity: (d * 100) });
                 })
                 .on('click.set-opacity', function(d) {
                     d3.select('#tile-g')
