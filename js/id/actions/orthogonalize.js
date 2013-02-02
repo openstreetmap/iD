@@ -19,7 +19,7 @@ iD.actions.Orthogonalize = function(wayId, map) {
             }
             var newScore = squareness();
             if (newScore > score) {
-                return false;
+                return graph;
             }
             score = newScore;
             if (score < 1.0e-8) {
@@ -31,8 +31,22 @@ iD.actions.Orthogonalize = function(wayId, map) {
         }
         quad_nodes.push(quad_nodes[0]);
 
-        for (var i = 0; i < nodes.length; i++) {
+        for (i = 0; i < nodes.length; i++) {
+            if (graph.parentWays(nodes[i]).length > 1) {
+                var closest, closest_dist = Infinity, dist;
+                for (var j = 0; j < quad_nodes.length; j++) {
+                    dist = iD.geo.dist(quad_nodes[j].loc, nodes[i].loc);
+                    if (dist < closest_dist) {
+                        closest_dist = dist;
+                        closest = j;
+                    }
+                }
+                quad_nodes.splice(closest, 1, nodes[i]);
+                if (closest === 0) quad_nodes.splice(quad_nodes.length - 1, 1, nodes[i]);
+                else if (closest === quad_nodes.length - 1) quad_nodes.splice(0, 1, nodes[i]);
+            } else {
                 graph = graph.remove(nodes[i]);
+            }
         }
 
         for (var i = 0; i < quad_nodes.length; i++) {
