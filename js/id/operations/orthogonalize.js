@@ -1,6 +1,6 @@
 iD.operations.Orthogonalize = function(selection, context) {
     var entityId = selection[0],
-        action = iD.actions.Orthogonalize(entityId, context.map());
+        action = iD.actions.Orthogonalize(entityId, context.projection);
 
     var operation = function() {
         var annotation = t('operations.orthogonalize.annotation.' + context.geometry(entityId));
