@@ -3,7 +3,9 @@ iD.operations.Split = function(selection, context) {
         action = iD.actions.Split(entityId);
 
     var operation = function() {
-        context.perform(action, t('operations.split.annotation'));
+        var annotation = t('operations.split.annotation'),
+            difference = context.perform(action, annotation);
+        context.enter(iD.modes.Select(context, difference.extantIDs()));
     };
 
     operation.available = function() {
