@@ -35,6 +35,14 @@ iD.Difference = function (base, head) {
         return changes;
     };
 
+    difference.extantIDs = function() {
+        var result = [];
+        _.each(changes, function(change, id) {
+            if (change.head) result.push(id);
+        });
+        return result;
+    };
+
     difference.modified = function() {
         var result = [];
         _.each(changes, function(change) {

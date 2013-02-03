@@ -59,6 +59,33 @@ describe("iD.Difference", function () {
         });
     });
 
+    describe("#extantIDs", function () {
+        it("includes the ids of created entities", function () {
+            var node = iD.Node({id: 'n'}),
+                base = iD.Graph(),
+                head = base.replace(node),
+                diff = iD.Difference(base, head);
+            expect(diff.extantIDs()).to.eql(['n']);
+        });
+
+        it("includes the ids of modified entities", function () {
+            var n1 = iD.Node({id: 'n'}),
+                n2 = n1.move([1, 2]),
+                base = iD.Graph([n1]),
+                head = base.replace(n2),
+                diff = iD.Difference(base, head);
+            expect(diff.extantIDs()).to.eql(['n']);
+        });
+
+        it("omits the ids of deleted entities", function () {
+            var node = iD.Node({id: 'n'}),
+                base = iD.Graph([node]),
+                head = base.remove(node),
+                diff = iD.Difference(base, head);
+            expect(diff.extantIDs()).to.eql([]);
+        });
+    });
+
     describe("#created", function () {
         it("returns an array of created entities", function () {
             var node = iD.Node({id: 'n'}),
