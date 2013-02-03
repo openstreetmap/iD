@@ -35,6 +35,8 @@ iD.History = function() {
             for (var i = 0; i < stack.length; i++) {
                 stack[i].graph.rebase(entities);
             }
+
+            dispatch.change();
         },
 
         perform: function () {

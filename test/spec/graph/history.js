@@ -13,6 +13,20 @@ describe("iD.History", function () {
         });
     });
 
+    describe("#merge", function () {
+        it("merges the entities into all graph versions", function () {
+            var n = iD.Node({id: 'n'});
+            history.merge({n: n});
+            expect(history.graph().entity('n')).to.equal(n);
+        });
+
+        it("emits a change event", function () {
+            history.on('change', spy);
+            history.merge({});
+            expect(spy).to.have.been.called;
+        });
+    });
+
     describe("#perform", function () {
         it("returns a difference", function () {
             expect(history.perform(action).changes()).to.eql({});
