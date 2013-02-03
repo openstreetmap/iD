@@ -26,9 +26,6 @@ iD.Map = function(context) {
         surface, tilegroup;
 
     function map(selection) {
-        context.connection()
-            .on('load.tile', connectionLoad);
-
         context.history()
             .on('change.map', redraw);
 
@@ -98,10 +95,6 @@ iD.Map = function(context) {
 
     function editOff() {
         surface.selectAll('.layer *').remove();
-    }
-
-    function connectionLoad(err, result) {
-        context.history().merge(result);
     }
 
     function zoomPan() {

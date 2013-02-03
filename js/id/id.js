@@ -16,6 +16,10 @@ window.iD = function () {
     // the connection requires .storage() to be available on calling.
     var connection = iD.Connection(context);
 
+    connection.on('load.context', function (err, result) {
+        history.merge(result);
+    });
+
     /* Straight accessors. Avoid using these if you can. */
     context.ui = function() { return ui; };
     context.connection = function() { return connection; };
