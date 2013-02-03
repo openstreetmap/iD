@@ -2,7 +2,7 @@ iD.actions.Circularize = function(wayId, projection) {
 
     var action = function(graph) {
         var way = graph.entity(wayId),
-            nodes = graph.childNodes(way),
+            nodes = _.uniq(graph.childNodes(way)),
             tags = {}, key, role;
 
         var points = nodes.map(function(n) {
@@ -36,8 +36,6 @@ iD.actions.Circularize = function(wayId, projection) {
                 circular_nodes.splice(closest, 1, nodes[i]);
                 if (closest === 0) circular_nodes.splice(circular_nodes.length - 1, 1, nodes[i]);
                 else if (closest === circular_nodes.length - 1) circular_nodes.splice(0, 1, nodes[i]);
-            } else {
-                graph = graph.remove(nodes[i]);
             }
         }
 
@@ -45,9 +43,16 @@ iD.actions.Circularize = function(wayId, projection) {
             graph = graph.replace(circular_nodes[i]);
         }
 
-        return graph.replace(way.update({
-            nodes: _.pluck(circular_nodes, 'id')
-        }));
+        var ids = _.pluck(circular_nodes, 'id'),
+            difference = _.difference(_.uniq(way.nodes), ids);
+
+        graph = graph.replace(way.update({nodes: ids}));
+
+        for (i = 0; i < difference.length; i++) {
+            graph = iD.actions.DeleteNode(difference[i])(graph);
+        }
+
+        return graph;
     };
 
     action.enabled = function(graph) {
