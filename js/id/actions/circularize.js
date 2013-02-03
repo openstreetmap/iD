@@ -2,8 +2,7 @@ iD.actions.Circularize = function(wayId, projection) {
 
     var action = function(graph) {
         var way = graph.entity(wayId),
-            nodes = _.uniq(graph.childNodes(way)),
-            tags = {}, key, role;
+            nodes = _.uniq(graph.childNodes(way));
 
         var points = nodes.map(function(n) {
                 return projection(n.loc);
@@ -21,8 +20,6 @@ iD.actions.Circularize = function(wayId, projection) {
             }));
         }
 
-        circular_nodes.push(circular_nodes[0]);
-
         for (i = 0; i < nodes.length; i++) {
             if (graph.parentWays(nodes[i]).length > 1) {
                 var closest, closest_dist = Infinity, dist;
@@ -34,8 +31,6 @@ iD.actions.Circularize = function(wayId, projection) {
                     }
                 }
                 circular_nodes.splice(closest, 1, nodes[i]);
-                if (closest === 0) circular_nodes.splice(circular_nodes.length - 1, 1, nodes[i]);
-                else if (closest === circular_nodes.length - 1) circular_nodes.splice(0, 1, nodes[i]);
             }
         }
 
@@ -45,6 +40,8 @@ iD.actions.Circularize = function(wayId, projection) {
 
         var ids = _.pluck(circular_nodes, 'id'),
             difference = _.difference(_.uniq(way.nodes), ids);
+
+        ids.push(ids[0]);
 
         graph = graph.replace(way.update({nodes: ids}));
 
