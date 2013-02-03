@@ -10,15 +10,6 @@ describe('iD.Way', function() {
         expect(iD.Way().type).to.equal("way");
     });
 
-    it("returns a created Entity if no ID is specified", function () {
-        expect(iD.Way().created()).to.be.ok;
-    });
-
-    it("returns an unmodified Entity if ID is specified", function () {
-        expect(iD.Way({id: 'w1234'}).created()).not.to.be.ok;
-        expect(iD.Way({id: 'w1234'}).modified()).not.to.be.ok;
-    });
-
     it("defaults nodes to an empty array", function () {
         expect(iD.Way().nodes).to.eql([]);
     });

@@ -52,12 +52,6 @@ describe('iD.Entity', function () {
             expect(e.id).to.equal('w1');
         });
 
-        it("tags the entity as updated", function () {
-            var tags = {foo: 'bar'},
-                e = iD.Entity().update({tags: tags});
-            expect(e._updated).to.to.be.true;
-        });
-
         it("doesn't modify the input", function () {
             var attrs = {tags: {foo: 'bar'}},
                 e = iD.Entity().update(attrs);
@@ -101,42 +95,6 @@ describe('iD.Entity', function () {
             expect(iD.Entity({id: 'w1234'}).osmId()).to.eql('1234');
             expect(iD.Entity({id: 'n1234'}).osmId()).to.eql('1234');
             expect(iD.Entity({id: 'r1234'}).osmId()).to.eql('1234');
-        });
-    });
-
-    describe("#created", function () {
-        it("returns falsy by default", function () {
-            expect(iD.Entity({id: 'w1234'}).created()).not.to.be.ok;
-        });
-
-        it("returns falsy for an unmodified Entity", function () {
-            expect(iD.Entity({id: 'w1234'}).created()).not.to.be.ok;
-        });
-
-        it("returns falsy for a modified Entity with positive ID", function () {
-            expect(iD.Entity({id: 'w1234'}).update({}).created()).not.to.be.ok;
-        });
-
-        it("returns truthy for a modified Entity with negative ID", function () {
-           expect(iD.Entity({id: 'w-1234'}).update({}).created()).to.be.ok;
-        });
-    });
-
-    describe("#modified", function () {
-        it("returns falsy by default", function () {
-            expect(iD.Entity({id: 'w1234'}).modified()).not.to.be.ok;
-        });
-
-        it("returns falsy for an unmodified Entity", function () {
-            expect(iD.Entity({id: 'w1234'}).modified()).not.to.be.ok;
-        });
-
-        it("returns truthy for a modified Entity with positive ID", function () {
-            expect(iD.Entity({id: 'w1234'}).update({}).modified()).to.be.ok;
-        });
-
-        it("returns falsy for a modified Entity with negative ID", function () {
-           expect(iD.Entity({id: 'w-1234'}).update({}).modified()).not.to.be.ok;
         });
     });
 

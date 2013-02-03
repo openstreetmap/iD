@@ -10,15 +10,6 @@ describe('iD.Relation', function () {
         expect(iD.Relation().type).to.equal("relation");
     });
 
-    it("returns a created Entity if no ID is specified", function () {
-        expect(iD.Relation().created()).to.be.ok;
-    });
-
-    it("returns an unmodified Entity if ID is specified", function () {
-        expect(iD.Relation({id: 'r1234'}).created()).not.to.be.ok;
-        expect(iD.Relation({id: 'r1234'}).modified()).not.to.be.ok;
-    });
-
     it("defaults members to an empty array", function () {
         expect(iD.Relation().members).to.eql([]);
     });
