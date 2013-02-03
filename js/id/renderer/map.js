@@ -26,9 +26,6 @@ iD.Map = function(context) {
         surface, tilegroup;
 
     function map(selection) {
-        context.connection()
-            .on('load.tile', connectionLoad);
-
         context.history()
             .on('change.map', redraw);
 
@@ -64,44 +61,19 @@ iD.Map = function(context) {
             extent = map.extent(),
             graph = context.graph();
 
-        function addParents(parents) {
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
-                if (only[parent.id] === undefined) {
-                    only[parent.id] = parent;
-                    addParents(graph.parentRelations(parent));
-                }
-            }
-        }
-
         if (!difference) {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
-            var only = {};
-
-            for (var j = 0; j < difference.length; j++) {
-                var id = difference[j],
-                    entity = graph.entity(id);
-
-                // Even if the entity is false (deleted), it needs to be
-                // removed from the surface
-                only[id] = entity;
-
-                if (entity && entity.intersects(extent, graph)) {
-                    addParents(graph.parentWays(only[id]));
-                    addParents(graph.parentRelations(only[id]));
-                }
-            }
-
-            all = _.compact(_.values(only));
+            var complete = difference.complete(extent);
+            all = _.compact(_.values(complete));
             filter = function(d) {
                 if (d.type === 'midpoint') {
                     for (var i = 0; i < d.ways.length; i++) {
-                        if (d.ways[i].id in only) return true;
+                        if (d.ways[i].id in complete) return true;
                     }
                 } else {
-                    return d.id in only;
+                    return d.id in complete;
                 }
             };
         }
@@ -123,11 +95,6 @@ iD.Map = function(context) {
 
     function editOff() {
         surface.selectAll('.layer *').remove();
-    }
-
-    function connectionLoad(err, result) {
-        context.history().merge(result);
-        redraw(Object.keys(result));
     }
 
     function zoomPan() {

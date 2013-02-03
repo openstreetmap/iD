@@ -1,6 +1,6 @@
 iD.operations.Circularize = function(selection, context) {
     var entityId = selection[0],
-        action = iD.actions.Circularize(entityId, context.map());
+        action = iD.actions.Circularize(entityId, context.projection);
 
     var operation = function() {
         var annotation = t('operations.circularize.annotation.' + context.geometry(entityId));

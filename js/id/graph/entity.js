@@ -43,7 +43,6 @@ iD.Entity.prototype = {
 
         if (!this.id && this.type) {
             this.id = iD.Entity.id(this.type);
-            this._updated = true;
         }
 
         if (iD.debug) {
@@ -63,7 +62,7 @@ iD.Entity.prototype = {
     },
 
     update: function(attrs) {
-        return iD.Entity(this, attrs, {_updated: true});
+        return iD.Entity(this, attrs);
     },
 
     mergeTags: function(tags) {
@@ -78,14 +77,6 @@ iD.Entity.prototype = {
             }
         }
         return this.update({tags: merged});
-    },
-
-    created: function() {
-        return this._updated && this.osmId().charAt(0) === '-';
-    },
-
-    modified: function() {
-        return this._updated && this.osmId().charAt(0) !== '-';
     },
 
     intersects: function(extent, resolver) {

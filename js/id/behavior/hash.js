@@ -45,7 +45,7 @@ iD.behavior.Hash = function(context) {
         context.map().on('drawn.hash', function() {
             if (!context.entity(id)) return;
             selectoff();
-            context.enter(iD.modes.Select([id]));
+            context.enter(iD.modes.Select(context, [id]));
         });
 
         context.on('enter.hash', function() {

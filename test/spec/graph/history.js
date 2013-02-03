@@ -13,7 +13,25 @@ describe("iD.History", function () {
         });
     });
 
+    describe("#merge", function () {
+        it("merges the entities into all graph versions", function () {
+            var n = iD.Node({id: 'n'});
+            history.merge({n: n});
+            expect(history.graph().entity('n')).to.equal(n);
+        });
+
+        it("emits a change event", function () {
+            history.on('change', spy);
+            history.merge({});
+            expect(spy).to.have.been.called;
+        });
+    });
+
     describe("#perform", function () {
+        it("returns a difference", function () {
+            expect(history.perform(action).changes()).to.eql({});
+        });
+
         it("updates the graph", function () {
             var node = iD.Node();
             history.perform(function (graph) { return graph.replace(node); });
@@ -27,8 +45,8 @@ describe("iD.History", function () {
 
         it("emits a change event", function () {
             history.on('change', spy);
-            history.perform(action);
-            expect(spy).to.have.been.calledWith([]);
+            var difference = history.perform(action);
+            expect(spy).to.have.been.calledWith(difference);
         });
 
         it("performs multiple actions", function () {
@@ -42,6 +60,10 @@ describe("iD.History", function () {
     });
 
     describe("#replace", function () {
+        it("returns a difference", function () {
+            expect(history.replace(action).changes()).to.eql({});
+        });
+
         it("updates the graph", function () {
             var node = iD.Node();
             history.replace(function (graph) { return graph.replace(node); });
@@ -56,8 +78,8 @@ describe("iD.History", function () {
 
         it("emits a change event", function () {
             history.on('change', spy);
-            history.replace(action);
-            expect(spy).to.have.been.calledWith([]);
+            var difference = history.replace(action);
+            expect(spy).to.have.been.calledWith(difference);
         });
 
         it("performs multiple actions", function () {
@@ -71,6 +93,11 @@ describe("iD.History", function () {
     });
 
     describe("#pop", function () {
+        it("returns a difference", function () {
+            history.perform(action, "annotation");
+            expect(history.pop().changes()).to.eql({});
+        });
+
         it("updates the graph", function () {
             history.perform(action, "annotation");
             history.pop();
@@ -86,12 +113,16 @@ describe("iD.History", function () {
         it("emits a change event", function () {
             history.perform(action);
             history.on('change', spy);
-            history.pop();
-            expect(spy).to.have.been.calledWith([]);
+            var difference = history.pop();
+            expect(spy).to.have.been.calledWith(difference);
         });
     });
 
     describe("#undo", function () {
+        it("returns a difference", function () {
+            expect(history.undo().changes()).to.eql({});
+        });
+
         it("pops the undo stack", function () {
             history.perform(action, "annotation");
             history.undo();
@@ -121,12 +152,16 @@ describe("iD.History", function () {
         it("emits a change event", function () {
             history.perform(action);
             history.on('change', spy);
-            history.undo();
-            expect(spy).to.have.been.calledWith([]);
+            var difference = history.undo();
+            expect(spy).to.have.been.calledWith(difference);
         });
     });
 
     describe("#redo", function () {
+        it("returns a difference", function () {
+            expect(history.redo().changes()).to.eql({});
+        });
+
         it("emits an redone event", function () {
             history.perform(action);
             history.undo();
@@ -139,8 +174,8 @@ describe("iD.History", function () {
             history.perform(action);
             history.undo();
             history.on('change', spy);
-            history.redo();
-            expect(spy).to.have.been.calledWith([]);
+            var difference = history.redo();
+            expect(spy).to.have.been.calledWith(difference);
         });
     });
 
