@@ -1,4 +1,4 @@
-iD.actions.Circularize = function(wayId, map) {
+iD.actions.Circularize = function(wayId, projection) {
 
     var action = function(graph) {
         var way = graph.entity(wayId),
@@ -6,7 +6,7 @@ iD.actions.Circularize = function(wayId, map) {
             tags = {}, key, role;
 
         var points = nodes.map(function(n) {
-                return map.projection(n.loc);
+                return projection(n.loc);
             }),
             centroid = d3.geom.polygon(points).centroid(),
             radius = d3.median(points, function(p) {
@@ -15,7 +15,7 @@ iD.actions.Circularize = function(wayId, map) {
             circular_nodes = [];
 
         for (var i = 0; i < 12; i++) {
-            circular_nodes.push(iD.Node({ loc: map.projection.invert([
+            circular_nodes.push(iD.Node({ loc: projection.invert([
                 centroid[0] + Math.cos((i / 12) * Math.PI * 2) * radius,
                 centroid[1] + Math.sin((i / 12) * Math.PI * 2) * radius])
             }));
