@@ -71,7 +71,7 @@ them.
 
 So let's say you've changed `js/ui/confirm.js`.
 
-1. Run `jshint src` to make sure your code is clean
+1. Run `jshint js/id` to make sure your code is clean
 2. Run tests with `npm test`
 3. Commit your changes with an informative commit message
 4. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `systemed/iD` project.

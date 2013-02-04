@@ -65,6 +65,15 @@ locale.en = {
                 area: "Made an area circular."
             }
         },
+        orthogonalize: {
+            title: "Orthogonalize",
+            description: "Square these corners.",
+            key: "Q",
+            annotation: {
+                line: "Squared the corners of a line.",
+                area: "Squared the corners of an area."
+            }
+        },
         delete: {
             title: "Delete",
             description: "Remove this from the map.",
