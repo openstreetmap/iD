@@ -117,6 +117,14 @@ g.vertex.selected .shadow {
 
 /* midpoints */
 
+.mode-draw-area g.midpoint,
+.mode-draw-line g.midpoint,
+.mode-add-area g.midpoint,
+.mode-add-line g.midpoint,
+.mode-add-point g.midpoint {
+  display: none;
+}
+
 g.midpoint .fill {
     fill:#aaa;
 }
