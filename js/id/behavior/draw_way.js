@@ -165,5 +165,5 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         context.enter(iD.modes.Browse(context));
     };
 
-    return d3.rebind(drawWay, event, 'on');
+    return drawWay;
 };
