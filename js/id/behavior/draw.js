@@ -1,8 +1,7 @@
 iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay', 'clickNode', 'clickMidpoint', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
-        hover = iD.behavior.Hover(),
-        down;
+        hover = iD.behavior.Hover();
 
     function datum() {
         if (d3.event.altKey) {
@@ -13,17 +12,17 @@ iD.behavior.Draw = function(context) {
     }
 
     function mousedown() {
-        down = true;
-    }
+        var selection = d3.select(this);
+        selection.on('mousemove.draw', null);
 
-    function mouseup() {
-        down = false;
+        d3.select(window)
+            .on('mouseup.draw', function() {
+            selection.on('mousemove.draw', mousemove);
+        });
     }
 
     function mousemove() {
-        if (!down) {
-            event.move(datum());
-        }
+        event.move(datum());
     }
 
     function click() {
@@ -81,7 +80,6 @@ iD.behavior.Draw = function(context) {
 
         selection
             .on('mousedown.draw', mousedown)
-            .on('mouseup.draw', mouseup)
             .on('mousemove.draw', mousemove)
             .on('click.draw', click);
 
@@ -98,7 +96,6 @@ iD.behavior.Draw = function(context) {
 
         selection
             .on('mousedown.draw', null)
-            .on('mouseup.draw', null)
             .on('mousemove.draw', null)
             .on('click.draw', null);
 
