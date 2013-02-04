@@ -1,25 +1,37 @@
 iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
+        isArea = way.geometry() === 'area',
         finished = false,
         annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
         draw = iD.behavior.Draw(context);
 
-    var node = iD.Node({loc: context.map().mouseCoordinates()}),
-        nodeId = node.id;
+    var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
+        start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+        end = iD.Node({loc: context.map().mouseCoordinates()}),
+        segment = iD.Way({
+            nodes: [start.id, end.id],
+            tags: _.clone(way.tags)
+        });
 
-    context[way.isDegenerate() ? 'replace' : 'perform'](
-        iD.actions.AddEntity(node),
-        iD.actions.AddVertex(wayId, node.id, index));
+    var f = context[way.isDegenerate() ? 'replace' : 'perform'];
+    if (isArea) {
+        f(iD.actions.AddEntity(end),
+            iD.actions.AddVertex(wayId, end.id, index));
+    } else {
+        f(iD.actions.AddEntity(start),
+            iD.actions.AddEntity(end),
+            iD.actions.AddEntity(segment));
+    }
 
     function move(datum) {
         var loc = context.map().mouseCoordinates();
 
         if (datum.type === 'node') {
-            if (datum.id === nodeId) {
+            if (datum.id === end.id) {
                 context.surface().selectAll('.way, .node')
-                    .filter(function (d) { return d.id === nodeId; })
+                    .filter(function (d) { return d.id === end.id; })
                     .classed('active', true);
             } else {
                 loc = datum.loc;
@@ -31,7 +43,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             loc = iD.geo.chooseIndex(way, d3.mouse(context.surface().node()), context).loc;
         }
 
-        context.replace(iD.actions.MoveNode(nodeId, loc));
+        context.replace(iD.actions.MoveNode(end.id, loc));
     }
 
     function undone() {
@@ -55,7 +67,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         surface.call(draw)
           .selectAll('.way, .node')
-            .filter(function (d) { return d.id === wayId || d.id === nodeId; })
+            .filter(function (d) { return d.id === segment.id || d.id === start.id || d.id === end.id; })
             .classed('active', true);
 
         context.history()
@@ -85,9 +97,18 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     function ReplaceTemporaryNode(newNode) {
         return function(graph) {
-            return graph
-                .replace(way.removeNode(nodeId).addNode(newNode.id, index))
-                .remove(node);
+            if (isArea) {
+                return graph
+                    .replace(way.removeNode(end.id).addNode(newNode.id, index))
+                    .remove(end);
+
+            } else {
+                return graph
+                    .replace(graph.entity(wayId).addNode(newNode.id, index))
+                    .remove(end)
+                    .remove(segment)
+                    .remove(start);
+            }
         };
     }
 
