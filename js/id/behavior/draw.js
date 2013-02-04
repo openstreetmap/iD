@@ -1,5 +1,5 @@
 iD.behavior.Draw = function(context) {
-    var event = d3.dispatch('move', 'click', 'clickWay', 'clickNode', 'clickMidpoint', 'undo', 'cancel', 'finish'),
+    var event = d3.dispatch('move', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
         hover = iD.behavior.Hover();
 
@@ -33,9 +33,6 @@ iD.behavior.Draw = function(context) {
 
         } else if (d.type === 'node') {
             event.clickNode(d);
-
-        } else if (d.type === 'midpoint') {
-            event.clickMidpoint(d);
 
         } else {
             event.click(context.map().mouseCoordinates());

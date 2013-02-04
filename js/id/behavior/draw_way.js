@@ -46,7 +46,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
-            .on('clickMidpoint', drawWay.addMidpoint)
             .on('undo', context.undo)
             .on('cancel', drawWay.cancel)
             .on('finish', drawWay.finish);
@@ -133,19 +132,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     // Connect the way to an existing node and continue drawing.
     drawWay.addNode = function(node) {
         context.perform(
-            ReplaceTemporaryNode(node),
-            annotation);
-
-        finished = true;
-        context.enter(mode);
-    };
-
-    // Add a midpoint, connect the way to it, and continue drawing.
-    drawWay.addMidpoint = function(midpoint) {
-        var node = iD.Node();
-
-        context.perform(
-            iD.actions.AddMidpoint(midpoint, node),
             ReplaceTemporaryNode(node),
             annotation);
 

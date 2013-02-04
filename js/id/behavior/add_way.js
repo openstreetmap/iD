@@ -1,12 +1,11 @@
 iD.behavior.AddWay = function(context) {
-    var event = d3.dispatch('start', 'startFromWay', 'startFromNode', 'startFromMidpoint'),
+    var event = d3.dispatch('start', 'startFromWay', 'startFromNode')
         draw = iD.behavior.Draw(context);
 
     var addWay = function(surface) {
         draw.on('click', event.start)
             .on('clickWay', event.startFromWay)
             .on('clickNode', event.startFromNode)
-            .on('clickMidpoint', event.startFromMidpoint)
             .on('cancel', addWay.cancel)
             .on('finish', addWay.cancel);
 
