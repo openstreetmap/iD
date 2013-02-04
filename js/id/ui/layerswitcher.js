@@ -151,7 +151,7 @@ iD.ui.layerswitcher = function(context) {
         }
 
         adjustments.append('a')
-            .text('Fix misalignment')
+            .text(t('layerswitcher.fix_misalignment'))
             .attr('href', '#')
             .classed('alignment-toggle', true)
             .classed('expanded', false)
@@ -179,7 +179,7 @@ iD.ui.layerswitcher = function(context) {
             .on('click', nudge);
 
         nudge_container.append('button')
-            .text('reset')
+            .text(t('layerswitcher.reset'))
             .attr('class', 'reset')
             .on('click', function() {
                 context.background().offset([0, 0]);

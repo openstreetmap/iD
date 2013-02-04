@@ -170,6 +170,8 @@ locale.en = {
     layerswitcher: {
         title: "Background",
         description: "Background Settings",
-        percent_brightness: "{opacity}% brightness"
+        percent_brightness: "{opacity}% brightness",
+        fix_misalignment: "Fix misalignment",
+        reset: "reset"
     }
 };
