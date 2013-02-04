@@ -40,7 +40,7 @@ iD.taginfo = function() {
     }
 
     function popularValues(parameters) {
-        return function(d) { return parseFloat(d['fraction']) > 0.01; };
+        return function(d) { return parseFloat(d.fraction) > 0.01; };
     }
 
     function valKey(d) { return { value: d.key }; }

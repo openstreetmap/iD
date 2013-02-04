@@ -127,7 +127,7 @@ iD.History = function() {
                 modified: difference.modified(),
                 created: difference.created(),
                 deleted: difference.deleted()
-            }
+            };
         },
 
         hasChanges: function() {

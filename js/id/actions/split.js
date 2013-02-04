@@ -17,7 +17,7 @@ iD.actions.Split = function(nodeId, newWayId) {
         return parents.filter(function (parent) {
             return parent.first() !== nodeId &&
                    parent.last()  !== nodeId;
-        })
+        });
     }
 
     var action = function(graph) {

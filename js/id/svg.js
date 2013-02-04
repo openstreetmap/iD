@@ -1,19 +1,19 @@
 iD.svg = {
-    RoundProjection: function (projection) {
-        return function (d) {
+    RoundProjection: function(projection) {
+        return function(d) {
             return iD.geo.roundCoords(projection(d));
         };
     },
 
-    PointTransform: function (projection) {
-        return function (entity) {
+    PointTransform: function(projection) {
+        return function(entity) {
             return 'translate(' + projection(entity.loc) + ')';
         };
     },
 
-    LineString: function (projection, graph) {
+    LineString: function(projection, graph) {
         var cache = {};
-        return function (entity) {
+        return function(entity) {
             if (cache[entity.id] !== undefined) {
                 return cache[entity.id];
             }
@@ -23,7 +23,9 @@ iD.svg = {
             }
 
             return (cache[entity.id] =
-                'M' + graph.childNodes(entity).map(function (n) { return projection(n.loc); }).join('L'));
-        }
+                'M' + graph.childNodes(entity).map(function(n) {
+                    return projection(n.loc);
+                }).join('L'));
+        };
     }
 };
