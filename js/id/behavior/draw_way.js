@@ -28,19 +28,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     function move(datum) {
         var loc = context.map().mouseCoordinates();
 
-        if (datum.type === 'node') {
-            if (datum.id === end.id) {
-                context.surface().selectAll('.way, .node')
-                    .filter(function (d) { return d.id === end.id; })
-                    .classed('active', true);
-            } else {
-                loc = datum.loc;
-            }
-        } else if (datum.type === 'midpoint' || datum.type === 'way') {
-            var way = datum.type === 'way' ?
-                datum :
-                context.entity(datum.ways[0].id);
-            loc = iD.geo.chooseIndex(way, d3.mouse(context.surface().node()), context).loc;
+        if (datum.type === 'node' || datum.type === 'midpoint') {
+            loc = datum.loc;
+        } else if (datum.type === 'way') {
+            loc = iD.geo.chooseIndex(datum, d3.mouse(context.surface().node()), context).loc;
         }
 
         context.replace(iD.actions.MoveNode(end.id, loc));
