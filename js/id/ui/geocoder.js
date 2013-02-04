@@ -38,9 +38,8 @@ iD.ui.geocoder = function() {
         function setVisible(show) {
             button.classed('active', show);
             gcForm.classed('hide', !show);
-            var input_node = d3.select('.map-overlay input').node();
-            if (show) input_node.focus();
-            else input_node.blur();
+            if (show) inputNode.node().focus();
+            else inputNode.node().blur();
         }
 
         var button = selection.append('button')
@@ -51,7 +50,7 @@ iD.ui.geocoder = function() {
 
         var gcForm = selection.append('form');
 
-        gcForm.attr('class','content fillD map-overlay hide')
+        var inputNode = gcForm.attr('class','content fillD map-overlay hide')
             .append('input')
                 .attr({ type: 'text', placeholder: t('geocoder.find_a_place') })
                 .on('keydown', keydown);
