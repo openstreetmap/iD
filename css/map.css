@@ -150,11 +150,6 @@ path.stroke {
     stroke-width: 2;
 }
 
-path.stroke,
-path.casing {
-    shape-rendering: optimizeSpeed;
-}
-
 path.shadow {
     pointer-events: stroke;
     stroke-width: 10;
