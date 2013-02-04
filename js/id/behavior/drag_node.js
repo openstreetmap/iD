@@ -1,8 +1,7 @@
 iD.behavior.DragNode = function(context) {
-    var size = context.map().size(),
-        nudgeInterval;
+    var nudgeInterval;
 
-    function edge(point) {
+    function edge(point, size) {
         var pad = [30, 100, 30, 100];
         if (point[0] > size[0] - pad[0]) return [-10, 0];
         else if (point[0] < pad[2]) return [10, 0];
@@ -39,7 +38,7 @@ iD.behavior.DragNode = function(context) {
         .on('move', function(entity) {
             d3.event.sourceEvent.stopPropagation();
 
-            var nudge = edge(d3.event.point);
+            var nudge = edge(d3.event.point, context.map().size());
             if (nudge) startNudge(nudge);
             else stopNudge();
 
