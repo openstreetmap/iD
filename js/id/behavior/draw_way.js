@@ -17,7 +17,13 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         var loc = context.map().mouseCoordinates();
 
         if (datum.type === 'node') {
-            loc = datum.loc;
+            if (datum.id === nodeId) {
+                context.surface().selectAll('.way, .node')
+                    .filter(function (d) { return d.id === nodeId; })
+                    .classed('active', true);
+            } else {
+                loc = datum.loc;
+            }
         } else if (datum.type === 'midpoint' || datum.type === 'way') {
             var way = datum.type === 'way' ?
                 datum :
