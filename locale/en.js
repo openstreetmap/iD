@@ -141,6 +141,9 @@ locale.en = {
     "zoom-in": "Zoom In",
     "zoom-out": "Zoom Out",
 
+    nothing_to_undo: "Nothing to undo.",
+    nothing_to_redo: "Nothing to redo.",
+
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
     "layer_settings": "Layer Settings",

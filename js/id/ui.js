@@ -91,14 +91,14 @@ iD.ui = function (context) {
 
         undo_buttons.append('button')
             .attr({ id: 'undo', 'class': 'col6' })
-            .property('disabled', true)
+            .classed('disabled', true)
             .html("<span class='undo icon'></span><small></small>")
             .on('click.editor', history.undo)
             .call(undo_tooltip);
 
         undo_buttons.append('button')
             .attr({ id: 'redo', 'class': 'col6' })
-            .property('disabled', true)
+            .classed('disabled', true)
             .html("<span class='redo icon'><small></small>")
             .on('click.editor', history.redo)
             .call(undo_tooltip);
@@ -209,13 +209,13 @@ iD.ui = function (context) {
             }
 
             limiter.select('#undo')
-                .property('disabled', !undo)
-                .attr('data-original-title', hintprefix('⌘ + Z', undo))
+                .classed('disabled', !undo)
+                .attr('data-original-title', hintprefix('⌘ + Z', undo || t('nothing_to_undo')))
                 .call(refreshTooltip);
 
             limiter.select('#redo')
-                .property('disabled', !redo)
-                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo))
+                .classed('disabled', !redo)
+                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo || t('nothing_to_redo')))
                 .call(refreshTooltip);
         });
 
