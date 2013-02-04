@@ -29,6 +29,13 @@ describe('iD.actions.DeprecateTags', function () {
         expect(graph.entity(entity.id).tags).to.eql(undeprecated);
     });
 
+    it('wipes out tags that should be entirely removed', function () {
+        var entity = iD.Entity({ tags: { 'tiger:source': 'foo' } }),
+            graph = iD.actions.DeprecateTags(entity.id)(iD.Graph([entity])),
+            undeprecated = { };
+        expect(graph.entity(entity.id).tags).to.eql(undeprecated);
+    });
+
     it('replaces keys', function () {
         var entity = iD.Entity({ tags: { power_rating: '1 billion volts' } }),
             graph = iD.actions.DeprecateTags(entity.id)(iD.Graph([entity])),
