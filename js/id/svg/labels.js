@@ -33,8 +33,11 @@ iD.svg.Labels = function(projection) {
     var font_sizes = label_stack.map(function(d) {
         var style = iD.util.getStyle('text.' + d[0] + '.tag-' + d[1]);
         var m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
-        if (!m) return default_size;
-        return parseInt(m[1], 10);
+        if (m) return parseInt(m[1], 10);
+        style = iD.util.getStyle('text.' + d[0]);
+        m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
+        if (m) return parseInt(m[1], 10);
+        return default_size;
     });
 
     var pointOffsets = [
@@ -281,7 +284,7 @@ iD.svg.Labels = function(projection) {
                     p = getAreaLabel(entity, width, font_size);
                 }
                 if (p) {
-                    p.classes = entity.geometry(graph) + ' tag-' + label_stack[k].slice(1).join('-');
+                    p.classes = entity.geometry(graph) + ' tag-' + label_stack[k][1];
                     positions[entity.geometry(graph)].push(p);
                     labelled[entity.geometry(graph)].push(entity);
                 }
