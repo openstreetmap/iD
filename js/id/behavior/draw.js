@@ -99,6 +99,8 @@ iD.behavior.Draw = function(context) {
             .on('mousemove.draw', null)
             .on('click.draw', null);
 
+        d3.select(window).on('mouseup.draw', null);
+
         d3.select(document)
             .call(keybinding.off)
             .on('keydown.draw', null)
