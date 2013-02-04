@@ -208,6 +208,7 @@ iD.Connection = function(context) {
 
     function userDetails(callback) {
         function done(err, user_details) {
+            if (err) return callback(err);
             var u = user_details.getElementsByTagName('user')[0],
                 img = u.getElementsByTagName('img'),
                 image_url = '';
