@@ -47,6 +47,6 @@ _.extend(iD.Node.prototype, {
                 type: 'Point',
                 coordinates: this.loc
             }
-        }
+        };
     }
 });

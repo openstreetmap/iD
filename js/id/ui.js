@@ -140,8 +140,10 @@ iD.ui = function (context) {
         var about = container.append('div')
             .attr('class','col12 about-block fillD pad1');
 
-        about.append('div')
-            .attr('class', 'user-container')
+        var userContainer = about.append('div')
+            .attr('class', 'user-container');
+
+        userContainer
             .append('div')
                 .attr('class', 'hello');
 
@@ -243,7 +245,7 @@ iD.ui = function (context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
-        d3.select('.user-container').call(iD.ui.userpanel(connection)
+        userContainer.call(iD.ui.userpanel(connection)
             .on('logout.editor', connection.logout)
             .on('login.editor', connection.authenticate));
 

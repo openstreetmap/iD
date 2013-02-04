@@ -16,8 +16,7 @@
 
 ## Participate!
 
-* [Read NOTES.md, our ongoing dev journal](https://github.com/systemed/iD/blob/master/NOTES.md)
-* Fork this project. We eagerly accept pull requests.
+* [Read up on Contributing and the code style of iD](CONTRIBUTING.md)
 * See [open issues in the issue tracker if you're looking for something to do](https://github.com/systemed/iD/issues?state=open)
 
 To run the code locally, just fork this project and run it from a local webserver.

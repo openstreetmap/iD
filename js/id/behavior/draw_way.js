@@ -82,7 +82,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             return graph
                 .replace(way.removeNode(nodeId).addNode(newNode.id, index))
                 .remove(node);
-        }
+        };
     }
 
     // Accept the current position of the temporary node and continue drawing.

@@ -14,6 +14,7 @@ iD.ui.save = function(context) {
             .on('click', function() {
 
             function commit(e) {
+
                 d3.select('.shaded').remove();
                 var l = iD.ui.loading(t('uploading_changes'), true);
                 connection.putChangeset(history.changes(), e.comment, history.imagery_used(), function(err, changeset_id) {
@@ -40,6 +41,7 @@ iD.ui.save = function(context) {
                                 }));
                     }
                 });
+
             }
 
             if (history.hasChanges()) {

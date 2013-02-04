@@ -61,9 +61,10 @@ iD.ui.layerswitcher = function(context) {
 
         opa.append('h4').text(t('layerswitcher.layers'));
 
-        opa.append('ul')
-            .attr('class', 'opacity-options')
-            .selectAll('div.opacity')
+        var opacityList = opa.append('ul')
+            .attr('class', 'opacity-options');
+
+        opacityList.selectAll('div.opacity')
             .data(opacities)
             .enter()
             .append('li')
@@ -71,11 +72,11 @@ iD.ui.layerswitcher = function(context) {
                     return t('layerswitcher.percent_brightness', { opacity: (d * 100) });
                 })
                 .on('click.set-opacity', function(d) {
-                    d3.select('#tile-g')
+                    context.map().tilesurface
                         .transition()
                         .style('opacity', d)
                         .attr('data-opacity', d);
-                    d3.selectAll('.opacity-options li')
+                    opacityList.selectAll('li')
                         .classed('selected', false);
                     d3.select(this)
                         .classed('selected', true);

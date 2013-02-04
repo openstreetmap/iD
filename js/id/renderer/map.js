@@ -49,6 +49,7 @@ iD.Map = function(context) {
 
         map.size(selection.size());
         map.surface = surface;
+        map.tilesurface = tilegroup;
 
         supersurface
             .call(tail);

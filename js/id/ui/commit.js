@@ -35,11 +35,12 @@ iD.ui.commit = function(context) {
 
         // Comment Box
         var comment_section = body.append('div').attr('class','modal-section fillD');
-        comment_section.append('textarea')
+        var commentField = comment_section.append('textarea')
             .attr('class', 'changeset-comment')
             .attr('placeholder', 'Brief Description of your contributions')
-            .property('value',  context.storage('comment') || '')
-            .node().select();
+            .property('value',  context.storage('comment') || '');
+
+        commentField.node().select();
 
         var commit_info =
             comment_section
@@ -73,7 +74,7 @@ iD.ui.commit = function(context) {
             .append('button')
             .attr('class', 'save action col6 button')
             .on('click.save', function() {
-                var comment = d3.select('textarea.changeset-comment').node().value;
+                var comment = commentField.node().value;
                 localStorage.comment = comment;
                 event.save({
                     comment: comment
