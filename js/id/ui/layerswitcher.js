@@ -35,7 +35,7 @@ iD.ui.layerswitcher = function(context) {
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'fillD')
-            .attr('title', t('layer_settings'))
+            .attr('title', t('layerswitcher.description'))
             .html("<span class='layers icon'></span>")
             .on('click.layerswitcher-toggle', toggle);
 
@@ -59,7 +59,7 @@ iD.ui.layerswitcher = function(context) {
             .append('div')
             .attr('class', 'opacity-options-wrapper');
 
-        opa.append('h4').text(t('layerswitcher.layers'));
+        opa.append('h4').text(t('layerswitcher.title'));
 
         var opacityList = opa.append('ul')
             .attr('class', 'opacity-options');
@@ -151,7 +151,7 @@ iD.ui.layerswitcher = function(context) {
         }
 
         adjustments.append('a')
-            .text('Fix misalignment')
+            .text(t('layerswitcher.fix_misalignment'))
             .attr('href', '#')
             .classed('alignment-toggle', true)
             .classed('expanded', false)
@@ -179,7 +179,7 @@ iD.ui.layerswitcher = function(context) {
             .on('click', nudge);
 
         nudge_container.append('button')
-            .text('reset')
+            .text(t('layerswitcher.reset'))
             .attr('class', 'reset')
             .on('click', function() {
                 context.background().offset([0, 0]);

@@ -146,8 +146,6 @@ locale.en = {
 
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
-    "layer_settings": "Layer Settings",
-
     inspector: {
         no_documentation_combination:  "This is no documentation available for this tag combination",
         no_documentation_key: "This is no documentation available for this key",
@@ -168,8 +166,12 @@ locale.en = {
     "description": "Description",
 
     "logout": "logout",
+
     layerswitcher: {
-        layers: "Layers",
-        percent_brightness: "{opacity}% brightness"
+        title: "Background",
+        description: "Background Settings",
+        percent_brightness: "{opacity}% brightness",
+        fix_misalignment: "Fix misalignment",
+        reset: "reset"
     }
 };
