@@ -3,6 +3,30 @@
 Thinking of contributing to iD? High five! Here are some basics for our habits
 so that you can write code that fits in perfectly.
 
+## Reporting Issues
+
+We'd love to hear what you think about iD, about any specific problems or
+concerns you have. Here's a quick list of things to consider:
+
+Please [search for your issue before filing it: many bugs and improvements have already been reported](https://github.com/systemed/iD/issues/search?q=)
+
+To report a bug:
+
+* Write specifically what browser (type and version, like Firefox 22), OS, and browser extensions you have installed
+* Write steps to replicate the error: when did it happen? What did you expect to happen? What happened instead?
+* Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
+* If you can, [enable web developer extensions](http://macwright.org/enable-web-developer-extensions/) and report the
+  Javascript error message.
+
+When in doubt, be over-descriptive of the bug and how you discovered it.
+
+To request a feature:
+
+* If the feature is available in some other software (like Potlatch), link to that software and the implementation.
+  We care about prior art.
+* Understand that iD is meant to be a simple editor and doesn't aim to be
+  as complete or complicated as JOSM or similar.
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with
