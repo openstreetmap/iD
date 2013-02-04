@@ -9,7 +9,7 @@ iD.behavior.DragMidpoint = function(context) {
 
             context.perform(iD.actions.AddMidpoint(d, node));
 
-            var vertex = d3.selectAll('.vertex')
+            var vertex = context.surface().selectAll('.vertex')
                 .filter(function(data) { return data.id === node.id; });
 
             behavior.target(vertex.node(), vertex.datum());

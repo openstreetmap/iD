@@ -226,7 +226,7 @@ iD.svg.Labels = function(projection) {
         d3.select(surface.node().parentNode)
             .on('mousemove.hidelabels', hideOnMouseover);
 
-        var hidePoints = !d3.select('.node.point').node();
+        var hidePoints = !surface.select('.node.point').node();
 
         var labelable = [], i, k, entity;
         for (i = 0; i < label_stack.length; i++) labelable.push([]);
@@ -253,7 +253,6 @@ iD.svg.Labels = function(projection) {
                 }
             }
         }
-
 
         var positions = {
             point: [],
