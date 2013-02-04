@@ -1,9 +1,9 @@
-describe("iD.actions.UnjoinNode", function () {
+describe("iD.actions.Disconnect", function () {
     describe("#enabled", function () {
         it("returns false for a node shared by less than two ways", function () {
             var graph = iD.Graph({'a': iD.Node()});
 
-            expect(iD.actions.UnjoinNode('a').enabled(graph)).to.equal(false);
+            expect(iD.actions.Disconnect('a').enabled(graph)).to.equal(false);
         });
 
         it("returns true for a node shared by two or more ways", function () {
@@ -19,7 +19,7 @@ describe("iD.actions.UnjoinNode", function () {
                     '|': iD.Way({id: '|', nodes: ['d', 'b']})
                 });
 
-            expect(iD.actions.UnjoinNode('b').enabled(graph)).to.equal(true);
+            expect(iD.actions.Disconnect('b').enabled(graph)).to.equal(true);
         });
     });
 
@@ -46,7 +46,7 @@ describe("iD.actions.UnjoinNode", function () {
                 '|': iD.Way({id: '|', nodes: ['d', 'b']})
             });
 
-        graph = iD.actions.UnjoinNode('b', 'e')(graph);
+        graph = iD.actions.Disconnect('b', 'e')(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('|').nodes).to.eql(['d', 'e']);
@@ -64,7 +64,7 @@ describe("iD.actions.UnjoinNode", function () {
                 '|': iD.Way({id: '|', nodes: ['d', 'b']})
             });
 
-        graph = iD.actions.UnjoinNode('b', 'e')(graph);
+        graph = iD.actions.Disconnect('b', 'e')(graph);
 
         // Immutable loc => should be shared by identity.
         expect(graph.entity('b').loc).to.equal(loc);

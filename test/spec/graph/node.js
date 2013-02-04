@@ -4,15 +4,6 @@ describe('iD.Node', function () {
         expect(iD.Node().type).to.equal("node");
     });
 
-    it("returns a created Entity if no ID is specified", function () {
-        expect(iD.Node().created()).to.be.ok;
-    });
-
-    it("returns an unmodified Entity if ID is specified", function () {
-        expect(iD.Node({id: 'n1234'}).created()).not.to.be.ok;
-        expect(iD.Node({id: 'n1234'}).modified()).not.to.be.ok;
-    });
-
     it("defaults tags to an empty object", function () {
         expect(iD.Node().tags).to.eql({});
     });

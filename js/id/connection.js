@@ -1,14 +1,13 @@
-iD.Connection = function() {
+iD.Connection = function(context) {
 
     var event = d3.dispatch('auth', 'load'),
         url = 'http://www.openstreetmap.org',
         connection = {},
         user = {},
-        version,
         keys,
         inflight = {},
         loadedTiles = {},
-        oauth = iD.OAuth().url(url);
+        oauth = iD.OAuth(context).url(url);
 
     function changesetUrl(changesetId) {
         return url + '/browse/changeset/' + changesetId;
@@ -186,7 +185,7 @@ iD.Connection = function() {
                 content: JXON.stringify(connection.changesetJXON({
                     imagery_used: imagery_used.join(';'),
                     comment: comment,
-                    created_by: 'iD ' + (version || '')
+                    created_by: 'iD ' + iD.version
                 }))
             }, function (err, changeset_id) {
                 if (err) return callback(err);
@@ -320,12 +319,6 @@ iD.Connection = function() {
             if (callback) callback(err, res);
         }
         return oauth.authenticate(done);
-    };
-
-    connection.version = function(_) {
-        if (!arguments.length) return version;
-        version = _;
-        return connection;
     };
 
     connection.bboxFromAPI = bboxFromAPI;

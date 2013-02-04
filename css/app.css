@@ -476,7 +476,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon-operation-circularize   { background-position: -20px -140px;}
 .icon-operation-straighten    { background-position: -40px -140px;}
 .icon-operation-split         { background-position: -60px -140px;}
-.icon-operation-unjoin        { background-position: -80px -140px;}
+.icon-operation-disconnect    { background-position: -80px -140px;}
 .icon-operation-reverse       { background-position: -100px -140px;}
 .icon-operation-move          { background-position: -120px -140px;}
 .icon-operation-merge         { background-position: -140px -140px;}
@@ -1397,4 +1397,47 @@ a.success-action {
     /* override hide for save button */
     .icon.icon-pre-text { margin-right: 0px;}
     .save .label, .apply .label, .cancel .label { display: block;}
+}
+
+
+
+
+
+div.combobox {
+    width:155px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+    margin-top: -1px;
+    background: white;
+    max-height: 180px;
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+
+div.combobox a {
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+    display: block;
+    border-top:1px solid #ccc;
+    background-color: #fff;
+    padding:1px 4px;
+    white-space: nowrap;
+}
+
+div.combobox a:hover,
+div.combobox a.selected  {
+    background: #e1e8ff;
+    color: #154dff;
+}
+
+div.combobox a:first-child {
+    border-top: 0;
+}
+
+div.combobox-carat {
+    cursor: pointer;
+    padding:0 5px;
+    vertical-align:middle;
 }

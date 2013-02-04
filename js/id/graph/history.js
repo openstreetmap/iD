@@ -21,7 +21,9 @@ iD.History = function() {
     }
 
     function change(previous) {
-        dispatch.change(history.graph().difference(previous));
+        var difference = iD.Difference(previous, history.graph());
+        dispatch.change(difference);
+        return difference;
     }
 
     var history = {
@@ -33,6 +35,8 @@ iD.History = function() {
             for (var i = 0; i < stack.length; i++) {
                 stack[i].graph.rebase(entities);
             }
+
+            dispatch.change();
         },
 
         perform: function () {
@@ -42,7 +46,7 @@ iD.History = function() {
             stack.push(perform(arguments));
             index++;
 
-            change(previous);
+            return change(previous);
         },
 
         replace: function () {
@@ -51,7 +55,7 @@ iD.History = function() {
             // assert(index == stack.length - 1)
             stack[index] = perform(arguments);
 
-            change(previous);
+            return change(previous);
         },
 
         pop: function () {
@@ -60,7 +64,7 @@ iD.History = function() {
             if (index > 0) {
                 index--;
                 stack.pop();
-                change(previous);
+                return change(previous);
             }
         },
 
@@ -80,7 +84,7 @@ iD.History = function() {
             }
 
             dispatch.undone();
-            change(previous);
+            return change(previous);
         },
 
         redo: function () {
@@ -92,7 +96,7 @@ iD.History = function() {
             }
 
             dispatch.redone();
-            change(previous);
+            return change(previous);
         },
 
         undoAnnotation: function () {
@@ -111,31 +115,27 @@ iD.History = function() {
             }
         },
 
-        changes: function () {
-            var initial = stack[0].graph,
-                current = stack[index].graph;
+        difference: function () {
+            var base = stack[0].graph,
+                head = stack[index].graph;
+            return iD.Difference(base, head);
+        },
 
+        changes: function () {
+            var difference = history.difference();
             return {
-                modified: current.modified().map(function (id) {
-                    return current.entity(id);
-                }),
-                created: current.created().map(function (id) {
-                    return current.entity(id);
-                }),
-                deleted: current.deleted().map(function (id) {
-                    return initial.entity(id);
-                })
-            };
+                modified: difference.modified(),
+                created: difference.created(),
+                deleted: difference.deleted()
+            }
         },
 
         hasChanges: function() {
-            return !!this.numChanges();
+            return this.difference().length() > 0;
         },
 
         numChanges: function() {
-            return d3.sum(d3.values(this.changes()).map(function(c) {
-                return c.length;
-            }));
+            return this.difference().length();
         },
 
         imagery_used: function(source) {

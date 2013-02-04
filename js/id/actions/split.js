@@ -1,5 +1,7 @@
 // Split a way at the given node.
 //
+// This is the inverse of `iD.actions.Join`.
+//
 // For testing convenience, accepts an ID to assign to the new way.
 // Normally, this will be undefined and the way will automatically
 // be assigned a new ID.
@@ -7,7 +9,7 @@
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-iD.actions.SplitWay = function(nodeId, newWayId) {
+iD.actions.Split = function(nodeId, newWayId) {
     function candidateWays(graph) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node);

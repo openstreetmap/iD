@@ -1,4 +1,4 @@
-iD.ui.layerswitcher = function(map) {
+iD.ui.layerswitcher = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         sources = [{
             name: 'Bing',
@@ -59,7 +59,7 @@ iD.ui.layerswitcher = function(map) {
             .append('div')
             .attr('class', 'opacity-options-wrapper');
 
-        opa.append('h4').text(t('layers'));
+        opa.append('h4').text(t('layerswitcher.layers'));
 
         opa.append('ul')
             .attr('class', 'opacity-options')
@@ -68,7 +68,7 @@ iD.ui.layerswitcher = function(map) {
             .enter()
             .append('li')
                 .attr('data-original-title', function(d) {
-                    return t('percent_opacity', { opacity: (d * 100) });
+                    return t('layerswitcher.percent_brightness', { opacity: (d * 100) });
                 })
                 .on('click.set-opacity', function(d) {
                     d3.select('#tile-g')
@@ -94,7 +94,7 @@ iD.ui.layerswitcher = function(map) {
         function selectLayer(d) {
             content.selectAll('a.layer')
                 .classed('selected', function(d) {
-                    return d.source === map.background.source();
+                    return d.source === context.background().source();
                 });
             d3.select('#attribution a')
                 .attr('href', d.link)
@@ -126,9 +126,9 @@ iD.ui.layerswitcher = function(map) {
                             d.source = configured;
                             d.name = 'Custom (configured)';
                         }
-                        map.background.source(d.source);
-                        map.history().imagery_used(d.name);
-                        map.redraw();
+                        context.background().source(d.source);
+                        context.history().imagery_used(d.name);
+                        context.redraw();
                         selectLayer(d);
                     })
                     .insert('span')
@@ -145,8 +145,8 @@ iD.ui.layerswitcher = function(map) {
             ['bottom', [0, 1]]];
 
         function nudge(d) {
-            map.background.nudge(d[1]);
-            map.redraw();
+            context.background().nudge(d[1]);
+            context.redraw();
         }
 
         adjustments.append('a')
@@ -181,12 +181,12 @@ iD.ui.layerswitcher = function(map) {
             .text('reset')
             .attr('class', 'reset')
             .on('click', function() {
-                map.background.offset([0, 0]);
-                map.redraw();
+                context.background().offset([0, 0]);
+                context.redraw();
             });
 
         selection.call(clickoutside);
-        selectLayer(map.background.source());
+        selectLayer(context.background().source());
     }
 
     return d3.rebind(layerswitcher, event, 'on');

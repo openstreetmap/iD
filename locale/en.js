@@ -73,8 +73,21 @@ locale.en = {
                 point: "Deleted a point.",
                 vertex: "Deleted a node from a way.",
                 line: "Deleted a line.",
-                area: "Deleted an area."
+                area: "Deleted an area.",
+                multiple: "Deleted {n} objects."
             }
+        },
+        disconnect: {
+            title: "Disconnect",
+            description: "Disconnect these ways from each other.",
+            key: "D",
+            annotation: "Disconnected ways."
+        },
+        merge: {
+            title: "Merge",
+            description: "Merge these lines.",
+            key: "C",
+            annotation: "Merged {n} lines."
         },
         move: {
             title: "Move",
@@ -98,12 +111,6 @@ locale.en = {
             description: "Split this into two ways at this point.",
             key: "X",
             annotation: "Split a way."
-        },
-        unjoin: {
-            title: "Unjoin",
-            description: "Disconnect these ways from each other.",
-            key: "⇧-J",
-            annotation: "Unjoined ways."
         }
     },
 
@@ -129,8 +136,11 @@ locale.en = {
 
     "layer_settings": "Layer Settings",
 
-    "no_documentation_combination":  "This is no documentation available for this tag combination",
-    "no_documentation_key": "This is no documentation available for this key",
+    inspector: {
+        no_documentation_combination:  "This is no documentation available for this tag combination",
+        no_documentation_key: "This is no documentation available for this key",
+        new_tag: "New Tag"
+    },
 
     "view_on_osm": "View on OSM",
 
@@ -138,13 +148,16 @@ locale.en = {
 
     "edit_tags": "Edit tags",
 
-    "find_location": "Find A Location",
-    "find_placeholder": "find a place",
+    geocoder: {
+        "find_location": "Find A Location",
+        "find_a_place": "find a place"
+    },
 
     "description": "Description",
 
     "logout": "logout",
-
-    "layers": "Layers",
-    "percent_opacity": "{opacity}% opacity"
+    layerswitcher: {
+        layers: "Layers",
+        percent_brightness: "{opacity}% brightness"
+    }
 };

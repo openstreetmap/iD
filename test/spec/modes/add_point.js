@@ -1,41 +1,36 @@
 describe("iD.modes.AddPoint", function () {
-    var container, map, history, controller, mode;
+    var context;
 
     beforeEach(function () {
-        container  = d3.select('body').append('div');
-        history    = iD.History();
-        map        = iD.Map().history(history);
-        controller = iD.Controller(map, history);
+        var container = d3.select(document.createElement('div'));
 
-        container.call(map);
-        container.append('div')
+        context = iD()
+            .container(container);
+
+        container.call(context.map())
+            .append('div')
             .attr('class', 'inspector-wrap');
 
-        mode = iD.modes.AddPoint();
-        controller.enter(mode);
-    });
-
-    afterEach(function() {
-        container.remove();
+        context.enter(iD.modes.AddPoint(context));
     });
 
     describe("clicking the map", function () {
         it("adds a node", function () {
-            happen.click(map.surface.node(), {});
-            expect(history.changes().created).to.have.length(1);
+            happen.click(context.surface().node(), {});
+            expect(context.changes().created).to.have.length(1);
         });
 
         it("selects the node", function () {
-            happen.click(map.surface.node(), {});
-            expect(controller.mode.id).to.equal('select');
-            expect(controller.mode.selection()).to.eql([history.changes().created[0].id]);
+            happen.click(context.surface().node(), {});
+            expect(context.mode().id).to.equal('select');
+            expect(context.mode().selection()).to.eql([context.changes().created[0].id]);
         });
     });
 
     describe("pressing ⎋", function () {
         it("exits to browse mode", function () {
             happen.keydown(document, {keyCode: 27});
-            expect(controller.mode.id).to.equal('browse');
+            expect(context.mode().id).to.equal('browse');
         });
     });
 });

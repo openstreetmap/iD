@@ -6,18 +6,20 @@ iD.ui.geocoder = function() {
         function keydown() {
             if (d3.event.keyCode !== 13) return;
             d3.event.preventDefault();
-            d3.json('http://a.tiles.mapbox.com/v3/openstreetmap.map-hn253zqn/geocode/' +
-                encodeURIComponent(this.value) + '.json', function(err, resp) {
+            var searchVal = this.value;
+            d3.json('http://nominatim.openstreetmap.org/search/' +
+                encodeURIComponent(searchVal) + '?limit=10&format=json', function(err, resp) {
                 if (err) return hide();
                 hide();
-                if (!resp.results.length) {
+                if (!resp.length) {
                     return iD.ui.flash()
                         .select('.content')
                         .append('h3')
-                        .text('No location found for "' + resp.query[0] + '"');
+                        .text('No location found for "' + searchVal + '"');
                 }
-                var bounds = resp.results[0][0].bounds;
-                map.extent(iD.geo.Extent([bounds[0], bounds[1]], [bounds[2], bounds[3]]));
+                var bounds = resp[0].boundingbox;
+                map.extent(iD.geo.Extent([parseFloat(bounds[3]), parseFloat(bounds[0])], [parseFloat(bounds[2]), parseFloat(bounds[1])]));
+                if (map.zoom() > 19) map.zoom(19);
             });
         }
 
@@ -43,7 +45,7 @@ iD.ui.geocoder = function() {
 
         var button = selection.append('button')
             .attr('tabindex', -1)
-            .attr('title', 'Find A Location')
+            .attr('title', t('geocoder.find_location'))
             .html('<span class=\'geocode icon\'></span>')
             .on('click', toggle);
 
@@ -51,7 +53,7 @@ iD.ui.geocoder = function() {
 
         gcForm.attr('class','content fillD map-overlay hide')
             .append('input')
-                .attr({ type: 'text', placeholder: 'find a place' })
+                .attr({ type: 'text', placeholder: t('geocoder.find_a_place') })
                 .on('keydown', keydown);
 
         selection.call(clickoutside);

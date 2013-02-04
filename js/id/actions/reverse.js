@@ -27,7 +27,7 @@
       http://wiki.openstreetmap.org/wiki/Route#Members
       http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/corrector/ReverseWayTagCorrector.java
  */
-iD.actions.ReverseWay = function(wayId) {
+iD.actions.Reverse = function(wayId) {
     var replacements = [
         [/:right$/, ':left'], [/:left$/, ':right'],
         [/:forward$/, ':backward'], [/:backward$/, ':forward']

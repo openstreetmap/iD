@@ -41,7 +41,6 @@ all: \
 	js/id/modes/*.js \
 	js/id/operations.js \
 	js/id/operations/*.js \
-	js/id/controller.js \
 	js/id/graph/*.js \
 	js/id/renderer/*.js \
 	js/id/svg.js \

@@ -1,4 +1,4 @@
-iD.modes.AddArea = function() {
+iD.modes.AddArea = function(context) {
     var mode = {
         id: 'add-area',
         button: 'area',
@@ -7,81 +7,75 @@ iD.modes.AddArea = function() {
         key: t('modes.add_area.key')
     };
 
-    var behavior,
-        defaultTags = {area: 'yes'};
-
-    mode.enter = function() {
-        var map = mode.map,
-            history = mode.history,
-            controller = mode.controller;
-
-        function start(loc) {
-            var graph = history.graph(),
-                node = iD.Node({loc: loc}),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddEntity(node),
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id),
-                iD.actions.AddVertex(way.id, node.id));
-
-            controller.enter(iD.modes.DrawArea(way.id, graph));
-        }
-
-        function startFromWay(other, loc, index) {
-            var graph = history.graph(),
-                node = iD.Node({loc: loc}),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddEntity(node),
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id),
-                iD.actions.AddVertex(way.id, node.id),
-                iD.actions.AddVertex(other.id, node.id, index));
-
-            controller.enter(iD.modes.DrawArea(way.id, graph));
-        }
-
-        function startFromNode(node) {
-            var graph = history.graph(),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id),
-                iD.actions.AddVertex(way.id, node.id));
-
-            controller.enter(iD.modes.DrawArea(way.id, graph));
-        }
-
-        function startFromMidpoint(midpoint) {
-            var graph = history.graph(),
-                node = iD.Node(),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddMidpoint(midpoint, node),
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id),
-                iD.actions.AddVertex(way.id, node.id));
-
-            controller.enter(iD.modes.DrawArea(way.id, graph));
-        }
-
-        behavior = iD.behavior.AddWay(mode)
+    var behavior = iD.behavior.AddWay(context)
             .on('start', start)
             .on('startFromWay', startFromWay)
             .on('startFromNode', startFromNode)
-            .on('startFromMidpoint', startFromMidpoint);
+            .on('startFromMidpoint', startFromMidpoint),
+        defaultTags = {area: 'yes'};
 
-        mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.add_area.tail'));
+    function start(loc) {
+        var graph = context.graph(),
+            node = iD.Node({loc: loc}),
+            way = iD.Way({tags: defaultTags});
+
+        context.perform(
+            iD.actions.AddEntity(node),
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id),
+            iD.actions.AddVertex(way.id, node.id));
+
+        context.enter(iD.modes.DrawArea(context, way.id, graph));
+    }
+
+    function startFromWay(other, loc, index) {
+        var graph = context.graph(),
+            node = iD.Node({loc: loc}),
+            way = iD.Way({tags: defaultTags});
+
+        context.perform(
+            iD.actions.AddEntity(node),
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id),
+            iD.actions.AddVertex(way.id, node.id),
+            iD.actions.AddVertex(other.id, node.id, index));
+
+        context.enter(iD.modes.DrawArea(context, way.id, graph));
+    }
+
+    function startFromNode(node) {
+        var graph = context.graph(),
+            way = iD.Way({tags: defaultTags});
+
+        context.perform(
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id),
+            iD.actions.AddVertex(way.id, node.id));
+
+        context.enter(iD.modes.DrawArea(context, way.id, graph));
+    }
+
+    function startFromMidpoint(midpoint) {
+        var graph = context.graph(),
+            node = iD.Node(),
+            way = iD.Way({tags: defaultTags});
+
+        context.perform(
+            iD.actions.AddMidpoint(midpoint, node),
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id),
+            iD.actions.AddVertex(way.id, node.id));
+
+        context.enter(iD.modes.DrawArea(context, way.id, graph));
+    }
+
+    mode.enter = function() {
+        context.install(behavior);
+        context.tail(t('modes.add_area.tail'));
     };
 
     mode.exit = function() {
-        mode.map.surface.call(behavior.off);
+        context.uninstall(behavior);
     };
 
     return mode;

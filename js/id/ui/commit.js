@@ -1,4 +1,4 @@
-iD.ui.commit = function(map) {
+iD.ui.commit = function(context) {
     var event = d3.dispatch('cancel', 'save', 'fix');
 
     function zipSame(d) {
@@ -38,7 +38,7 @@ iD.ui.commit = function(map) {
         comment_section.append('textarea')
             .attr('class', 'changeset-comment')
             .attr('placeholder', 'Brief Description of your contributions')
-            .property('value',  localStorage.comment || '')
+            .property('value',  context.storage('comment') || '')
             .node().select();
 
         var commit_info =
@@ -89,7 +89,7 @@ iD.ui.commit = function(map) {
             cancelbutton.append('span').attr('class','label').text('Cancel');
 
         var warnings = body.selectAll('div.warning-section')
-            .data(iD.validate(changes, map.history().graph()))
+            .data(iD.validate(changes, context.graph()))
             .enter()
             .append('div').attr('class', 'modal-section warning-section fillL');
 

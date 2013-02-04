@@ -18,6 +18,7 @@
         <script src='js/lib/ohauth.js'></script>
         <script src='js/lib/jxon.js'></script>
         <script src='js/lib/d3.typeahead.js'></script>
+        <script src='js/lib/d3.combobox.js'></script>
         <script src='js/lib/d3.geo.tile.js'></script>
         <script src='js/lib/d3.size.js'></script>
         <script src='js/lib/d3.trigger.js'></script>
@@ -38,6 +39,7 @@
         <script src='js/id/renderer/background.js'></script>
         <script src='js/id/renderer/background_source.js'></script>
         <script src='js/id/renderer/map.js'></script>
+        <script src='js/id/renderer/hash.js'></script>
 
         <script src="js/id/svg.js"></script>
         <script src="js/id/svg/areas.js"></script>
@@ -67,7 +69,6 @@
         <script src='js/id/ui/notice.js'></script>
         <script src='js/id/ui/flash.js'></script>
         <script src='js/id/ui/save.js'></script>
-        <script src='js/id/ui/splash.js'></script>
         <script src='js/id/ui/tag_reference.js'></script>
         <script src='js/id/ui/key_reference.js'></script>
 
@@ -76,12 +77,9 @@
         <script src='js/id/actions/add_entity.js'></script>
         <script src='js/id/actions/add_vertex.js'></script>
         <script src='js/id/actions/change_tags.js'></script>
-        <script src='js/id/actions/delete_multiple.js'></script>
         <script src='js/id/actions/delete_node.js'></script>
-        <script src="js/id/actions/delete_relation.js"></script>
         <script src="js/id/actions/delete_way.js"></script>
         <script src='js/id/actions/disconnect.js'></script>
-        <script src='js/id/actions/join.js'></script>
         <script src='js/id/actions/move_node.js'></script>
         <script src='js/id/actions/move_way.js'></script>
         <script src='js/id/actions/circularize.js'></script>
@@ -96,7 +94,6 @@
         <script src='js/id/behavior/drag_node.js'></script>
         <script src='js/id/behavior/draw.js'></script>
         <script src='js/id/behavior/draw_way.js'></script>
-        <script src='js/id/behavior/hash.js'></script>
         <script src='js/id/behavior/hover.js'></script>
         <script src='js/id/behavior/select.js'></script>
 
@@ -113,13 +110,11 @@
         <script src='js/id/operations.js'></script>
         <script src='js/id/operations/circularize.js'></script>
         <script src='js/id/operations/delete.js'></script>
-        <script src='js/id/operations/disconnect.js'></script>
-        <script src='js/id/operations/merge.js'></script>
         <script src='js/id/operations/move.js'></script>
         <script src='js/id/operations/reverse.js'></script>
         <script src='js/id/operations/split.js'></script>
+        <script src='js/id/operations/unjoin.js'></script>
 
-        <script src='js/id/graph/difference.js'></script>
         <script src='js/id/graph/entity.js'></script>
         <script src='js/id/graph/graph.js'></script>
         <script src='js/id/graph/history.js'></script>
@@ -127,26 +122,41 @@
         <script src='js/id/graph/relation.js'></script>
         <script src='js/id/graph/way.js'></script>
 
-        <script src='js/id/connection.js'></script>
+        <script src='js/id/controller.js'></script>
         <script src='js/id/validate.js'></script>
+        <script src='js/id/connection.js'></script>
 
         <script src='locale/locale.js'></script>
         <script src='locale/en.js'></script>
+        <style>
+            body {
+                margin:20px;
+            }
+            #foo, #bar {
+                position:relative;
+            }
+        </style>
     </head>
     <body>
+        <div id='foo'><input /></div>
+        <div id='bar'><input /></div>
         <div id="iD"></div><script>
-            locale.current = 'en';
-            d3.json('keys.json', function(err, keys) {
-                var id = iD();
-
-                id.connection()
-                    .keys(keys)
-                    .url('http://api06.dev.openstreetmap.org');
-
-                d3.select("#iD")
-                    .call(id.ui())
+            var options = d3.range(0, 50).map(function(i) {
+                return {
+                    value: i * 10,
+                    title: i * 10
+                };
             });
-        </script>
+            d3.select('#foo').call(d3.combobox()
+                .data(function(selection, cb) {
+                    cb(options);
+                }));
+            d3.select('#bar').call(d3.combobox()
+                .data(function(selection, cb) {
+                    cb(options);
+                }));
+        </script></body>
+
 <script type="text/javascript">
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-38039653-2']);
@@ -157,5 +167,4 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 </script>
-</body>
 </html>

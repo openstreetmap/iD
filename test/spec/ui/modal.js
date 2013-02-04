@@ -4,5 +4,6 @@ describe("iD.ui.modal", function () {
             .select('.content')
             .text('foo');
         expect(modal).to.be.ok;
+        happen.keydown(document, {keyCode: 27}); // dismiss
     });
 });

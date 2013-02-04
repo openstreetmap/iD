@@ -1,4 +1,4 @@
-iD.modes.DrawArea = function(wayId, baseGraph) {
+iD.modes.DrawArea = function(context, wayId, baseGraph) {
     var mode = {
         button: 'area',
         id: 'draw-area'
@@ -7,11 +7,11 @@ iD.modes.DrawArea = function(wayId, baseGraph) {
     var behavior;
 
     mode.enter = function() {
-        var way = mode.history.graph().entity(wayId),
+        var way = context.entity(wayId),
             headId = way.nodes[way.nodes.length - 2],
             tailId = way.first();
 
-        behavior = iD.behavior.DrawWay(wayId, -1, mode, baseGraph);
+        behavior = iD.behavior.DrawWay(context, wayId, -1, mode, baseGraph);
 
         var addNode = behavior.addNode;
 
@@ -23,12 +23,12 @@ iD.modes.DrawArea = function(wayId, baseGraph) {
             }
         };
 
-        mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.draw_area.tail'));
+        context.install(behavior);
+        context.tail(t('modes.draw_area.tail'));
     };
 
     mode.exit = function() {
-        mode.map.surface.call(behavior.off);
+        context.uninstall(behavior);
     };
 
     return mode;

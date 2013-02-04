@@ -1,8 +1,6 @@
-iD.behavior.DragNode = function(mode) {
-    var history = mode.history,
-        size = mode.map.size(),
-        nudgeInterval,
-        projection = mode.map.projection;
+iD.behavior.DragNode = function(context) {
+    var size = context.map().size(),
+        nudgeInterval;
 
     function edge(point) {
         var pad = [30, 100, 30, 100];
@@ -16,7 +14,7 @@ iD.behavior.DragNode = function(mode) {
     function startNudge(nudge) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
-            mode.map.pan(nudge).redraw();
+            context.map().pan(nudge).redraw();
         }, 50);
     }
 
@@ -26,16 +24,16 @@ iD.behavior.DragNode = function(mode) {
     }
 
     function annotation(entity) {
-        return t('operations.move.annotation.' + entity.geometry(mode.history.graph()));
+        return t('operations.move.annotation.' + entity.geometry(context.graph()));
     }
 
     return iD.behavior.drag()
         .delegate(".node")
         .origin(function(entity) {
-            return projection(entity.loc);
+            return context.projection(entity.loc);
         })
         .on('start', function() {
-            history.perform(
+            context.perform(
                 iD.actions.Noop());
         })
         .on('move', function(entity) {
@@ -45,13 +43,13 @@ iD.behavior.DragNode = function(mode) {
             if (nudge) startNudge(nudge);
             else stopNudge();
 
-            history.replace(
-                iD.actions.MoveNode(entity.id, projection.invert(d3.event.point)),
+            context.replace(
+                iD.actions.MoveNode(entity.id, context.projection.invert(d3.event.point)),
                 annotation(entity));
         })
         .on('end', function(entity) {
             stopNudge();
-            history.replace(
+            context.replace(
                 iD.actions.Noop(),
                 annotation(entity));
         });

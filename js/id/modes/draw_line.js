@@ -1,4 +1,4 @@
-iD.modes.DrawLine = function(wayId, direction, baseGraph) {
+iD.modes.DrawLine = function(context, wayId, direction, baseGraph) {
     var mode = {
         button: 'line',
         id: 'draw-line'
@@ -7,11 +7,11 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
     var behavior;
 
     mode.enter = function() {
-        var way = mode.history.graph().entity(wayId),
+        var way = context.entity(wayId),
             index = (direction === 'forward') ? undefined : 0,
             headId = (direction === 'forward') ? way.last() : way.first();
 
-        behavior = iD.behavior.DrawWay(wayId, index, mode, baseGraph);
+        behavior = iD.behavior.DrawWay(context, wayId, index, mode, baseGraph);
 
         var addNode = behavior.addNode;
 
@@ -23,12 +23,12 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
             }
         };
 
-        mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.draw_line.tail'));
+        context.install(behavior);
+        context.tail(t('modes.draw_line.tail'));
     };
 
     mode.exit = function() {
-        mode.map.surface.call(behavior.off);
+        context.uninstall(behavior);
     };
 
     return mode;

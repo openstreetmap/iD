@@ -1,4 +1,4 @@
-iD.modes.AddLine = function() {
+iD.modes.AddLine = function(context) {
     var mode = {
         id: 'add-line',
         button: 'line',
@@ -7,88 +7,82 @@ iD.modes.AddLine = function() {
         key: t('modes.add_line.key')
     };
 
-    var behavior,
-        defaultTags = {highway: 'residential'};
-
-    mode.enter = function() {
-        var map = mode.map,
-            history = mode.history,
-            controller = mode.controller;
-
-        function start(loc) {
-            var graph = history.graph(),
-                node = iD.Node({loc: loc}),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddEntity(node),
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id));
-
-            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
-        }
-
-        function startFromWay(other, loc, index) {
-            var graph = history.graph(),
-                node = iD.Node({loc: loc}),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddEntity(node),
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id),
-                iD.actions.AddVertex(other.id, node.id, index));
-
-            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
-        }
-
-        function startFromNode(node) {
-            var graph = history.graph(),
-                parent = graph.parentWays(node)[0],
-                isLine = parent && parent.geometry(graph) === 'line';
-
-            if (isLine && parent.first() === node.id) {
-                controller.enter(iD.modes.DrawLine(parent.id, 'backward', graph));
-
-            } else if (isLine && parent.last() === node.id) {
-                controller.enter(iD.modes.DrawLine(parent.id, 'forward', graph));
-
-            } else {
-                var way = iD.Way({tags: defaultTags});
-
-                history.perform(
-                    iD.actions.AddEntity(way),
-                    iD.actions.AddVertex(way.id, node.id));
-
-                controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
-            }
-        }
-
-        function startFromMidpoint(midpoint) {
-            var graph = history.graph(),
-                node = iD.Node(),
-                way = iD.Way({tags: defaultTags});
-
-            history.perform(
-                iD.actions.AddMidpoint(midpoint, node),
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id));
-
-            controller.enter(iD.modes.DrawLine(way.id, 'forward', graph));
-        }
-
-        behavior = iD.behavior.AddWay(mode)
+    var behavior = iD.behavior.AddWay(context)
             .on('start', start)
             .on('startFromWay', startFromWay)
             .on('startFromNode', startFromNode)
-            .on('startFromMidpoint', startFromMidpoint);
+            .on('startFromMidpoint', startFromMidpoint),
+        defaultTags = {highway: 'residential'};
 
-        mode.map.surface.call(behavior);
-        mode.map.tail(t('modes.add_line.tail'));
+    function start(loc) {
+        var graph = context.graph(),
+            node = iD.Node({loc: loc}),
+            way = iD.Way({tags: defaultTags});
+
+        context.perform(
+            iD.actions.AddEntity(node),
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id));
+
+        context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
+    }
+
+    function startFromWay(other, loc, index) {
+        var graph = context.graph(),
+            node = iD.Node({loc: loc}),
+            way = iD.Way({tags: defaultTags});
+
+        context.perform(
+            iD.actions.AddEntity(node),
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id),
+            iD.actions.AddVertex(other.id, node.id, index));
+
+        context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
+    }
+
+    function startFromNode(node) {
+        var graph = context.graph(),
+            parent = graph.parentWays(node)[0],
+            isLine = parent && parent.geometry(graph) === 'line';
+
+        if (isLine && parent.first() === node.id) {
+            context.enter(iD.modes.DrawLine(context, parent.id, 'backward', graph));
+
+        } else if (isLine && parent.last() === node.id) {
+            context.enter(iD.modes.DrawLine(context, parent.id, 'forward', graph));
+
+        } else {
+            var way = iD.Way({tags: defaultTags});
+
+            context.perform(
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id));
+
+            context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
+        }
+    }
+
+    function startFromMidpoint(midpoint) {
+        var graph = context.graph(),
+            node = iD.Node(),
+            way = iD.Way({tags: defaultTags});
+
+        context.perform(
+            iD.actions.AddMidpoint(midpoint, node),
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id));
+
+        context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
+    }
+
+    mode.enter = function() {
+        context.install(behavior);
+        context.tail(t('modes.add_line.tail'));
     };
 
     mode.exit = function() {
-        mode.map.surface.call(behavior.off);
+        context.uninstall(behavior);
     };
 
     return mode;
