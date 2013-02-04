@@ -127,7 +127,8 @@ locale.en = {
         untagged_point: "Untagged point which is not part of a line or area",
         untagged_line: "Untagged line",
         untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
+        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
+        deprecated_tags: "Deprecated tags: {tags}"
     },
 
     "save": "Save",

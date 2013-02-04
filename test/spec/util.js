@@ -6,8 +6,8 @@ describe('iD.Util', function() {
 
     it('.tagText', function() {
         expect(iD.util.tagText({})).to.eql('');
-        expect(iD.util.tagText({tags:{foo:'bar'}})).to.eql('foo: bar');
-        expect(iD.util.tagText({tags:{foo:'bar',two:'three'}})).to.eql('foo: bar\ntwo: three');
+        expect(iD.util.tagText({tags:{foo:'bar'}})).to.eql('foo=bar');
+        expect(iD.util.tagText({tags:{foo:'bar',two:'three'}})).to.eql('foo=bar, two=three');
     });
 
     it('.stringQs', function() {

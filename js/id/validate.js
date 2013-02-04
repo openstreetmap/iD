@@ -29,6 +29,14 @@ iD.validate = function(changes, graph) {
             warnings.push({ message: t('validations.untagged_line'), entity: change });
         }
 
+        var deprecatedTags = change.deprecatedTags();
+        if (!_.isEmpty(deprecatedTags)) {
+            warnings.push({
+                message: t('validations.deprecated_tags', {
+                    tags: iD.util.tagText({ tags: deprecatedTags })
+                }), entity: change });
+        }
+
         if (change.geometry(graph) === 'area' && _.isEmpty(change.tags)) {
             warnings.push({ message: t('validations.untagged_area'), entity: change });
         }
