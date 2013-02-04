@@ -21,7 +21,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         } else if (datum.type === 'midpoint' || datum.type === 'way') {
             var way = datum.type === 'way' ?
                 datum :
-                baseGraph.entity(datum.ways[0].id);
+                context.entity(datum.ways[0].id);
             loc = iD.geo.chooseIndex(way, d3.mouse(context.surface().node()), context).loc;
         }
 
