@@ -44,7 +44,7 @@ locale.en = {
                 area: "Started an area."
             }
         },
-        continue: {
+        'continue': {
             annotation: {
                 line: "Continued a line.",
                 area: "Continued an area."
@@ -74,7 +74,7 @@ locale.en = {
                 area: "Squared the corners of an area."
             }
         },
-        delete: {
+        'delete': {
             title: "Delete",
             description: "Remove this from the map.",
             key: "⌫",
