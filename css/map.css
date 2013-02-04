@@ -620,7 +620,7 @@ text.pointlabel {
 }
 
 .pathlabel .textpath {
-  dominant-baseline: middle;
+  baseline-shift: -33%;
 }
 
 .pointlabel-halo,
