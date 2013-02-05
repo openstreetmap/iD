@@ -28,8 +28,8 @@ iD.behavior.Draw = function(context) {
 
         d3.select(window).on('mouseup.draw', function() {
             target.on('mousemove.draw', mousemove);
-            if (iD.geo.dist(pos, point()) < tolerance ||
-                (+new Date() - time) < 500) {
+            if (iD.geo.dist(pos, point()) < tolerance &&
+                (+new Date() - time) < 1000) {
                 click();
             }
         });
