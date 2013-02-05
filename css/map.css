@@ -123,7 +123,8 @@ g.vertex.selected .shadow {
 .mode-draw-line g.midpoint,
 .mode-add-area g.midpoint,
 .mode-add-line g.midpoint,
-.mode-add-point g.midpoint {
+.mode-add-point g.midpoint,
+.behavior-drag-node g.midpoint {
   display: none;
 }
 
@@ -716,14 +717,16 @@ text.point {
 .mode-draw-line .behavior-hover .way,
 .mode-draw-area .behavior-hover .way,
 .mode-add-line  .behavior-hover .way,
-.mode-add-area  .behavior-hover .way {
+.mode-add-area  .behavior-hover .way,
+.behavior-drag-node.behavior-hover .way {
     cursor:url(../img/cursor-draw-connect-line.png) 9 9, auto;
 }
 
 .mode-draw-line .behavior-hover .vertex,
 .mode-draw-area .behavior-hover .vertex,
 .mode-add-line  .behavior-hover .vertex,
-.mode-add-area  .behavior-hover .vertex {
+.mode-add-area  .behavior-hover .vertex,
+.behavior-drag-node.behavior-hover .vertex {
     cursor:url(../img/cursor-draw-connect-vertex.png) 9 9, auto;
 }
 
@@ -734,12 +737,14 @@ text.point {
 /* Modes */
 
 .mode-draw-line .vertex.active,
-.mode-draw-area .vertex.active {
+.mode-draw-area .vertex.active,
+.behavior-drag-node .vertex.active {
     display: none;
 }
 
 .mode-draw-line .way.active,
-.mode-draw-area .way.active {
+.mode-draw-area .way.active,
+.behavior-drag-node .active {
     pointer-events: none;
 }
 

@@ -86,6 +86,14 @@ locale.en = {
                 multiple: "Deleted {n} objects."
             }
         },
+        connect: {
+            annotation: {
+                point: "Connected a way to a point.",
+                vertex: "Connected a way to another.",
+                line: "Connected a way to a line.",
+                area: "Connected a way to an area."
+            }
+        },
         disconnect: {
             title: "Disconnect",
             description: "Disconnect these ways from each other.",

@@ -4,6 +4,8 @@
 // Normally, this will be undefined and the way will automatically
 // be assigned a new ID.
 //
+// This is the inverse of `iD.actions.Connect`.
+//
 // Reference:
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
