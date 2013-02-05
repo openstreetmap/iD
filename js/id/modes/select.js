@@ -57,7 +57,7 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            inspector.graph(context.graph());
+            inspector.context(context);
 
             context.container()
                 .select('.inspector-wrap')

@@ -2,7 +2,7 @@ iD.ui.inspector = function() {
     var event = d3.dispatch('changeTags', 'close'),
         taginfo = iD.taginfo(),
         initial = false,
-        graph,
+        context,
         tagList;
 
     function inspector(selection) {
@@ -50,7 +50,7 @@ iD.ui.inspector = function() {
         var h2 = selection.append('h2');
 
         h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(graph));
+            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
 
         h2.append('span')
             .text(entity.friendlyName());
@@ -124,7 +124,7 @@ iD.ui.inspector = function() {
             .attr('class', 'tag-help minor')
             .on('click', function(d) {
                 var params = _.extend({}, d, {
-                    geometry: entity.geometry(graph)
+                    geometry: entity.geometry(context.graph())
                 });
                 if (d.key && d.value) {
                     taginfo.docs(params, function(err, docs) {
@@ -140,12 +140,12 @@ iD.ui.inspector = function() {
                             if (en.on_node) types.push('point');
                             if (en.on_way) types.push('line');
                             en.types = types;
-                            iD.ui.modal()
+                            iD.ui.modal(context.container())
                                 .select('.content')
                                 .datum(en)
                                 .call(iD.ui.tagReference);
                         } else {
-                            iD.ui.flash()
+                            iD.ui.flash(context.container())
                                 .select('.content')
                                 .append('h3')
                                 .text(t('inspector.no_documentation_combination'));
@@ -154,14 +154,14 @@ iD.ui.inspector = function() {
                 } else if (d.key) {
                     taginfo.values(params, function(err, values) {
                         if (!err && values.data.length) {
-                            iD.ui.modal()
+                            iD.ui.modal(context.container())
                                 .select('.content')
                                 .datum({
                                     data: values.data,
                                     title: 'Key:' + params.key,
                                     geometry: params.geometry
                                 })
-                                .call(iD.keyReference);
+                                .call(iD.keyReference(context));
                         } else {
                             iD.ui.flash()
                                 .select('.content')
@@ -194,7 +194,7 @@ iD.ui.inspector = function() {
 
     function bindTypeahead() {
         var entity = tagList.datum(),
-            geometry = entity.geometry(graph),
+            geometry = entity.geometry(context.graph()),
             row = d3.select(this),
             key = row.selectAll('.key'),
             value = row.selectAll('.value');
@@ -275,8 +275,8 @@ iD.ui.inspector = function() {
         return inspector;
     };
 
-    inspector.graph = function(_) {
-        graph = _;
+    inspector.context = function(_) {
+        context = _;
         return inspector;
     };
 

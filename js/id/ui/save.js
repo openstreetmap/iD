@@ -6,17 +6,32 @@ iD.ui.save = function(context) {
             tooltip = bootstrap.tooltip()
                 .placement('bottom');
 
-        selection.html("<span class='label'>" + t('save') + "</span><small id='as-username'></small>")
-            .attr('title', t('save_help'))
-            .attr('tabindex', -1)
-            .property('disabled', true)
-            .call(tooltip)
-            .on('click', function() {
+        function success(e, changeset_id) {
+            var modal = iD.ui.modal(context.container());
+            modal.select('.content')
+                .classed('success-modal', true)
+                .datum({
+                    id: changeset_id,
+                    comment: e.comment
+                })
+                .call(iD.ui.success(connection)
+                    .on('cancel', function() {
+                        modal.remove();
+                    }));
+        }
+
+        function clickFix(d) {
+            map.extent(d.entity.extent(context.graph()));
+            if (map.zoom() > 19) map.zoom(19);
+            context.enter(iD.modes.Select(context, [d.entity.id]));
+            modal.remove();
+        }
+
+        function click() {
 
             function commit(e) {
-
                 d3.select('.shaded').remove();
-                var l = iD.ui.loading(t('uploading_changes'), true);
+                var l = iD.ui.loading(context.container(), t('uploading_changes'), true);
 
                 connection.putChangeset(history.changes(),
                     e.comment,
@@ -31,25 +46,14 @@ iD.ui.save = function(context) {
                             .text(t('save_error'));
                         desc.append('p').text(err.responseText);
                     } else {
-                        var modal = iD.ui.modal();
-                        modal.select('.content')
-                            .classed('success-modal', true)
-                            .datum({
-                                id: changeset_id,
-                                comment: e.comment
-                            })
-                            .call(iD.ui.success(connection)
-                                .on('cancel', function() {
-                                    modal.remove();
-                                }));
+                        success(e, changeset_id);
                     }
                 });
-
             }
 
             if (history.hasChanges()) {
                 connection.authenticate(function(err) {
-                    var modal = iD.ui.modal();
+                    var modal = iD.ui.modal(context.container());
                     var changes = history.changes();
                     changes.connection = connection;
                     modal.select('.content')
@@ -59,20 +63,21 @@ iD.ui.save = function(context) {
                             .on('cancel', function() {
                                 modal.remove();
                             })
-                            .on('fix', function(d) {
-                                map.extent(d.entity.extent(context.graph()));
-                                if (map.zoom() > 19) map.zoom(19);
-                                context.enter(iD.modes.Select(context, [d.entity.id]));
-                                modal.remove();
-                            })
+                            .on('fix', clickFix)
                             .on('save', commit));
                 });
             } else {
                 iD.ui.confirm().select('.description')
                     .append('h3').text(t('no_changes'));
             }
+        }
 
-        });
+        selection.html("<span class='label'>" + t('save') + "</span><small id='as-username'></small>")
+            .attr('title', t('save_help'))
+            .attr('tabindex', -1)
+            .property('disabled', true)
+            .call(tooltip)
+            .on('click', click);
 
         selection.append('span')
             .attr('class', 'count');
