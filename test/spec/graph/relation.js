@@ -146,6 +146,34 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#asGeoJSON", function (){
+        it('converts a multipolygon to a GeoJSON MultiPolygon feature', function() {
+            var a = iD.Node({loc: [1, 1]}),
+                b = iD.Node({loc: [2, 2]}),
+                c = iD.Node({loc: [3, 3]}),
+                w = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                r = iD.Relation({tags: {type: 'multipolygon'}, members: [{id: w.id, type: 'way'}]}),
+                g = iD.Graph([a, b, c, w, r]),
+                json = r.asGeoJSON(g);
+
+            expect(json.type).to.equal('Feature');
+            expect(json.properties).to.eql({type: 'multipolygon'});
+            expect(json.geometry.type).to.equal('MultiPolygon');
+            expect(json.geometry.coordinates).to.eql([[[[1, 1], [2, 2], [3, 3], [1, 1]]]]);
+        });
+
+        it('converts a relation to a GeoJSON FeatureCollection', function() {
+            var a = iD.Node({loc: [1, 1]}),
+                r = iD.Relation({tags: {type: 'type'}, members: [{id: a.id, role: 'role'}]}),
+                g = iD.Graph([a, r]),
+                json = r.asGeoJSON(g);
+
+            expect(json.type).to.equal('FeatureCollection');
+            expect(json.properties).to.eql({type: 'type'});
+            expect(json.features).to.eql([_.extend({role: 'role'}, a.asGeoJSON(g))]);
+        });
+    });
+
     describe("#multipolygon", function () {
         specify("single polygon consisting of a single way", function () {
             var a = iD.Node({loc: [1, 1]}),
