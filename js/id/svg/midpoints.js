@@ -2,6 +2,10 @@ iD.svg.Midpoints = function(projection) {
     return function drawMidpoints(surface, graph, entities, filter) {
         var midpoints = {};
 
+        if (!surface.select('.layer-hit g.vertex').node()) {
+            return surface.selectAll('.layer-hit g.midpoint').remove();
+        }
+
         for (var i = 0; i < entities.length; i++) {
             if (entities[i].type !== 'way') continue;
 

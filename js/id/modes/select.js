@@ -39,11 +39,11 @@ iD.modes.Select = function(context, selection, initial) {
         });
 
         var operations = d3.values(iD.operations)
-            .map(function (o) { return o(selection, context); })
-            .filter(function (o) { return o.available(); });
+            .map(function(o) { return o(selection, context); })
+            .filter(function(o) { return o.available(); });
 
         operations.forEach(function(operation) {
-            keybinding.on(operation.key, function () {
+            keybinding.on(operation.key, function() {
                 if (operation.enabled()) {
                     operation();
                 }
@@ -87,7 +87,7 @@ iD.modes.Select = function(context, selection, initial) {
         context.history().on('change.select', function() {
             context.surface().call(radialMenu.close);
 
-            if (_.any(selection, function (id) { return !context.entity(id); })) {
+            if (_.any(selection, function(id) { return !context.entity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
 
@@ -128,7 +128,7 @@ iD.modes.Select = function(context, selection, initial) {
         context.surface()
             .on('dblclick.select', dblclick)
             .selectAll("*")
-            .filter(function (d) { return d && selection.indexOf(d.id) >= 0; })
+            .filter(function(d) { return d && selection.indexOf(d.id) >= 0; })
             .classed('selected', true);
 
         radialMenu = iD.ui.RadialMenu(operations);
@@ -144,7 +144,7 @@ iD.modes.Select = function(context, selection, initial) {
         }
     };
 
-    mode.exit = function () {
+    mode.exit = function() {
         if (singular()) {
             changeTags(singular(), inspector.tags());
         }

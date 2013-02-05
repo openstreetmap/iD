@@ -5,9 +5,11 @@ iD.ui.userpanel = function(connection) {
         function update() {
             if (connection.authenticated()) {
                 selection.style('display', 'block');
-                connection.userDetails(function(user_details) {
+                connection.userDetails(function(err, user_details) {
 
                     selection.html('');
+
+                    if (err) return;
 
                     // Link
                     var userLink = selection.append('a')

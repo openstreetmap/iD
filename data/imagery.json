@@ -1,0 +1,490 @@
+[
+    {
+        "name": "Bing aerial imagery",
+        "url": "http://ecn.t0.tiles.virtualearth.net/tiles/a{q}uadkey.jpeg?g=587&mkt=en-gb&n=z",
+        "sourcetag": "Bing",
+        "logo": "bing_maps.png",
+        "logo_url": "http://www.bing.com/maps",
+        "terms_url": "http://opengeodata.org/microsoft-imagery-details"
+    },
+    {
+        "name": "MapBox Satellite",
+        "url": "http://{t}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ]
+    },
+    {
+        "name": "MapQuest Open Aerial",
+        "url": "http://oatile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
+    },
+    {
+        "name": "OSM - Mapnik",
+        "url": "http://{t}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ]
+    },
+    {
+        "name": "OSM - OpenCycleMap",
+        "url": "http://tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
+    },
+    {
+        "name": "OSM - MapQuest",
+        "url": "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg"
+    },
+    {
+        "name": "OSM - Tiger Edited Map",
+        "url": "http://tiger-osm.mapquest.com/tiles/1.0.0/tiger/{z}/{x}/{y}.png",
+        "extent": [
+            24.055,
+            -124.81,
+            49.386,
+            -66.865
+        ]
+    },
+    {
+        "name": "OSM - Tiger Edited Map",
+        "url": "http://tiger-osm.mapquest.com/tiles/1.0.0/tiger/{z}/{x}/{y}.png",
+        "extent": [
+            50.858,
+            -179.754,
+            71.463,
+            -129.899
+        ]
+    },
+    {
+        "name": "OSM - Tiger Edited Map",
+        "url": "http://tiger-osm.mapquest.com/tiles/1.0.0/tiger/{z}/{x}/{y}.png",
+        "extent": [
+            18.702,
+            -174.46,
+            26.501,
+            -154.516
+        ]
+    },
+    {
+        "name": "OSM US TIGER 2012 Roads Overlay",
+        "url": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            24.055,
+            -124.81,
+            49.386,
+            -66.865
+        ]
+    },
+    {
+        "name": "OSM US TIGER 2012 Roads Overlay",
+        "url": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            50.858,
+            -179.754,
+            71.463,
+            -129.899
+        ]
+    },
+    {
+        "name": "OSM US TIGER 2012 Roads Overlay",
+        "url": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            18.702,
+            -174.46,
+            26.501,
+            -154.516
+        ]
+    },
+    {
+        "name": "OSM US USGS Topographic Maps",
+        "url": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            24.005,
+            -125.991,
+            50.009,
+            -65.988
+        ]
+    },
+    {
+        "name": "OSM US USGS Topographic Maps",
+        "url": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            18.902,
+            -160.579,
+            22.508,
+            -154.793
+        ]
+    },
+    {
+        "name": "OSM US USGS Topographic Maps",
+        "url": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            51.255,
+            -178.001,
+            71.999,
+            -130.004
+        ]
+    },
+    {
+        "name": "OSM US USGS Large Scale Aerial Imagery",
+        "url": "http://{t}.tile.openstreetmap.us/usgs_large_scale/{z}/{x}/{y}.jpg",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            24.496,
+            -124.819,
+            49.443,
+            -66.931
+        ]
+    },
+    {
+        "name": "British Columbia bc_mosaic",
+        "url": "http://{t}.imagery.paulnorman.ca/tiles/bc_mosaic/{z}/{x}/{y}.png",
+        "subdomains": [
+            "a",
+            "b",
+            "c",
+            "d"
+        ],
+        "extent": [
+            48.995,
+            -123.441,
+            50.426,
+            -121.346
+        ],
+        "sourcetag": "bc_mosaic",
+        "terms_url": "http://imagery.paulnorman.ca/tiles/about.html"
+    },
+    {
+        "name": "OS OpenData Streetview",
+        "url": "http://os.openstreetmap.org/sv/{z}/{x}/{y}.png",
+        "extent": [
+            49.86,
+            -8.72,
+            60.92,
+            1.84
+        ],
+        "sourcetag": "OS_OpenData_StreetView"
+    },
+    {
+        "name": "OS OpenData Locator",
+        "url": "http://tiles.itoworld.com/os_locator/{z}/{x}/{y}.png",
+        "extent": [
+            49.8,
+            -9,
+            61.1,
+            1.9
+        ],
+        "sourcetag": "OS_OpenData_Locator"
+    },
+    {
+        "name": "OS 1:25k historic (OSM)",
+        "url": "http://ooc.openstreetmap.org/os1/{z}/{x}/{y}.jpg",
+        "extent": [
+            49.8,
+            -9,
+            61.1,
+            1.9
+        ],
+        "sourcetag": "OS 1:25k"
+    },
+    {
+        "name": "OS 1:25k historic (NLS)",
+        "url": "http://geo.nls.uk/mapdata2/os/25000/{z}/{x}/{y}.png",
+        "extent": [
+            49.8,
+            -9,
+            61.1,
+            1.9
+        ],
+        "sourcetag": "OS 1:25k",
+        "logo": "icons/logo_nls70-nq8.png",
+        "logo_url": "http://geo.nls.uk/maps/"
+    },
+    {
+        "name": "OS 7th Series historic (OSM)",
+        "url": "http://ooc.openstreetmap.org/os7/{z}/{x}/{y}.jpg",
+        "extent": [
+            49.8,
+            -9,
+            61.1,
+            1.9
+        ],
+        "sourcetag": "OS7"
+    },
+    {
+        "name": "OS 7th Series historic (NLS)",
+        "url": "http://geo.nls.uk/mapdata2/os/seventh/{z}/{x}/{y}.png",
+        "extent": [
+            49.8,
+            -9,
+            61.1,
+            1.9
+        ],
+        "sourcetag": "OS7",
+        "logo": "icons/logo_nls70-nq8.png",
+        "logo_url": "http://geo.nls.uk/maps/"
+    },
+    {
+        "name": "OS New Popular Edition historic",
+        "url": "http://ooc.openstreetmap.org/npe/{z}/{x}/{y}.png",
+        "extent": [
+            49.8,
+            -5.8,
+            55.8,
+            1.9
+        ],
+        "sourcetag": "NPE"
+    },
+    {
+        "name": "OS Scottish Popular historic",
+        "url": "http://ooc.openstreetmap.org/npescotland/tiles/{z}/{x}/{y}.jpg",
+        "extent": [
+            54.5,
+            -7.8,
+            61.1,
+            -1.1
+        ],
+        "sourcetag": "NPE"
+    },
+    {
+        "name": "Surrey aerial",
+        "url": "http://gravitystorm.dev.openstreetmap.org/surrey/{z}/{x}/{y}.png",
+        "extent": [
+            51.071,
+            -0.856,
+            51.473,
+            0.062
+        ],
+        "sourcetag": "Surrey aerial"
+    },
+    {
+        "name": "Haiti - GeoEye Jan 13",
+        "url": "http://gravitystorm.dev.openstreetmap.org/imagery/haiti/{z}/{x}/{y}.jpg",
+        "extent": [
+            17.95,
+            -74.5,
+            20.12,
+            -71.58
+        ],
+        "sourcetag": "Haiti GeoEye"
+    },
+    {
+        "name": "Haiti - GeoEye Jan 13+",
+        "url": "http://maps.nypl.org/tilecache/1/geoeye/{z}/{x}/{y}.jpg",
+        "extent": [
+            17.95,
+            -74.5,
+            20.12,
+            -71.58
+        ],
+        "sourcetag": "Haiti GeoEye"
+    },
+    {
+        "name": "Haiti - DigitalGlobe",
+        "url": "http://maps.nypl.org/tilecache/1/dg_crisis/{z}/{x}/{y}.jpg",
+        "extent": [
+            17.95,
+            -74.5,
+            20.12,
+            -71.58
+        ],
+        "sourcetag": "Haiti DigitalGlobe"
+    },
+    {
+        "name": "Haiti - Street names",
+        "url": "http://hypercube.telascience.org/tiles/1.0.0/haiti-city/{z}/{x}/{y}.jpg",
+        "extent": [
+            17.95,
+            -74.5,
+            20.12,
+            -71.58
+        ],
+        "sourcetag": "Haiti streetnames"
+    },
+    {
+        "name": "National Agriculture Imagery Program",
+        "url": "http://cube.telascience.org/tilecache/tilecache.py/NAIP_ALL/{z}/{x}/{y}.png",
+        "extent": [
+            24.2,
+            -125.8,
+            49.5,
+            -62.3
+        ],
+        "sourcetag": "NAIP"
+    },
+    {
+        "name": "National Agriculture Imagery Program",
+        "url": "http://cube.telascience.org/tilecache/tilecache.py/NAIP_ALL/{z}/{x}/{y}.png",
+        "extent": [
+            55.3,
+            -168.5,
+            71.5,
+            -140
+        ],
+        "sourcetag": "NAIP"
+    },
+    {
+        "name": "Ireland - NLS Historic Maps",
+        "url": "http://geo.nls.uk/maps/ireland/gsgs4136/{z}/{x}/{y}.png",
+        "extent": [
+            51.32,
+            -10.71,
+            55.46,
+            -5.37
+        ],
+        "sourcetag": "NLS Historic Maps",
+        "logo": "icons/logo_nls70-nq8.png",
+        "logo_url": "http://geo.nls.uk/maps/"
+    },
+    {
+        "name": "Denmark - Fugro Aerial Imagery",
+        "url": "http://tile.openstreetmap.dk/fugro2005/{z}/{x}/{y}.jpg",
+        "extent": [
+            54.44,
+            7.81,
+            57.86,
+            15.49
+        ],
+        "sourcetag": "Fugro (2005)"
+    },
+    {
+        "name": "Denmark - Stevns Kommune",
+        "url": "http://tile.openstreetmap.dk/stevns/2009/{z}/{x}/{y}.jpg",
+        "extent": [
+            55.23403,
+            12.09144,
+            55.43647,
+            12.47712
+        ],
+        "sourcetag": "Stevns Kommune (2009)"
+    },
+    {
+        "name": "Austria - geoimage.at",
+        "url": "http://geoimage.openstreetmap.at/4d80de696cd562a63ce463a58a61488d/{z}/{x}/{y}.jpg",
+        "extent": [
+            46.33,
+            9.36,
+            49.09,
+            17.28
+        ],
+        "sourcetag": "geoimage.at"
+    },
+    {
+        "name": "Russia - Kosmosnimki.ru IRS Satellite",
+        "url": "http://irs.gis-lab.info/?layers=irs&request=GetTile&z={z}&x={x}&y={y}",
+        "extent": [
+            40.96,
+            19.02,
+            70.48,
+            77.34
+        ],
+        "sourcetag": "Kosmosnimki.ru IRS"
+    },
+    {
+        "name": "Belarus - Kosmosnimki.ru SPOT4 Satellite",
+        "url": "http://irs.gis-lab.info/?layers=spot&request=GetTile&z={z}&x={x}&y={y}",
+        "extent": [
+            51.25,
+            23.16,
+            56.19,
+            32.83
+        ],
+        "sourcetag": "Kosmosnimki.ru SPOT4"
+    },
+    {
+        "name": "Australia - Geographic Reference Image",
+        "url": "http://agri.openstreetmap.org/{z}/{x}/{y}.png",
+        "extent": [
+            -44,
+            96,
+            -9,
+            168
+        ],
+        "sourcetag": "AGRI"
+    },
+    {
+        "name": "Switzerland - Canton Aargau - AGIS 25cm 2011",
+        "url": "http://tiles.poole.ch/AGIS/OF2011/{z}/{x}/{y}.png",
+        "extent": [
+            47.13,
+            7.69,
+            47.63,
+            8.48
+        ],
+        "sourcetag": "AGIS OF2011"
+    },
+    {
+        "name": "Switzerland - Canton Solothurn - SOGIS 2007",
+        "url": "http://mapproxy.sosm.ch:8080/tiles/sogis2007/EPSG900913/{z}/{x}/{y}.png?origin=nw",
+        "extent": [
+            47.06,
+            7.33,
+            47.5,
+            8.04
+        ],
+        "sourcetag": "Orthofoto 2007 WMS Solothurn"
+    },
+    {
+        "name": "Poland - Media-Lab fleet GPS masstracks",
+        "url": "http://masstracks.media-lab.com.pl/{z}/{x}/{y}.png",
+        "extent": [
+            48.9,
+            14,
+            55,
+            24.2
+        ],
+        "sourcetag": "masstracks"
+    },
+    {
+        "name": "South Africa - CD:NGI Aerial",
+        "url": "http://{t}.aerial.openstreetmap.org.za/ngi-aerial/{z}/{x}/{y}.jpg",
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "extent": [
+            -34.95,
+            17.64,
+            -22.05,
+            32.87
+        ],
+        "sourcetag": "ngi-aerial"
+    }
+]

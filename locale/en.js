@@ -44,7 +44,7 @@ locale.en = {
                 area: "Started an area."
             }
         },
-        continue: {
+        'continue': {
             annotation: {
                 line: "Continued a line.",
                 area: "Continued an area."
@@ -74,7 +74,7 @@ locale.en = {
                 area: "Squared the corners of an area."
             }
         },
-        delete: {
+        'delete': {
             title: "Delete",
             description: "Remove this from the map.",
             key: "⌫",
@@ -127,7 +127,8 @@ locale.en = {
         untagged_point: "Untagged point which is not part of a line or area",
         untagged_line: "Untagged line",
         untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
+        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
+        deprecated_tags: "Deprecated tags: {tags}"
     },
 
     "save": "Save",
@@ -141,9 +142,10 @@ locale.en = {
     "zoom-in": "Zoom In",
     "zoom-out": "Zoom Out",
 
-    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    nothing_to_undo: "Nothing to undo.",
+    nothing_to_redo: "Nothing to redo.",
 
-    "layer_settings": "Layer Settings",
+    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
     inspector: {
         no_documentation_combination:  "This is no documentation available for this tag combination",
@@ -165,8 +167,12 @@ locale.en = {
     "description": "Description",
 
     "logout": "logout",
+
     layerswitcher: {
-        layers: "Layers",
-        percent_brightness: "{opacity}% brightness"
+        title: "Background",
+        description: "Background Settings",
+        percent_brightness: "{opacity}% brightness",
+        fix_misalignment: "Fix misalignment",
+        reset: "reset"
     }
 };

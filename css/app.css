@@ -273,7 +273,12 @@ button.active {
     cursor:url(../img/cursor-pointing.png) 6 1, auto;
 }
 
-button.active:not([disabled]) {
+button.disabled {
+    background: #6c6c6c;
+    cursor: auto;
+}
+
+button.active:not([disabled]):not(.disabled) {
     background: #6bc641;
 }
 
@@ -450,8 +455,8 @@ button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
 button[disabled] .icon.add-line   { background-position: -40px -40px;}
 button[disabled] .icon.add-area   { background-position: -60px -40px;}
-button[disabled] .icon.undo       { background-position: -80px -40px;}
-button[disabled] .icon.redo       { background-position: -100px -40px;}
+button.disabled  .icon.undo       { background-position: -80px -40px;}
+button.disabled  .icon.redo       { background-position: -100px -40px;}
 button[disabled] .apply.icon      { background-position: -120px -40px;}
 button[disabled] .save.icon       { background-position: -140px -40px;}
 button[disabled] .close.icon      { background-position: -160px -40px;}

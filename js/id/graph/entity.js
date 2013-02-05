@@ -9,22 +9,22 @@ iD.Entity = function(attrs) {
     return (new iD.Entity()).initialize(arguments);
 };
 
-iD.Entity.id = function (type) {
+iD.Entity.id = function(type) {
     return iD.Entity.id.fromOSM(type, iD.Entity.id.next[type]--);
 };
 
 iD.Entity.id.next = {node: -1, way: -1, relation: -1};
 
-iD.Entity.id.fromOSM = function (type, id) {
+iD.Entity.id.fromOSM = function(type, id) {
     return type[0] + id;
 };
 
-iD.Entity.id.toOSM = function (id) {
+iD.Entity.id.toOSM = function(id) {
     return id.slice(1);
 };
 
 // A function suitable for use as the second argument to d3.selection#data().
-iD.Entity.key = function (entity) {
+iD.Entity.key = function(entity) {
     return entity.id;
 };
 
@@ -84,13 +84,30 @@ iD.Entity.prototype = {
     },
 
     hasInterestingTags: function() {
-        return _.keys(this.tags).some(function (key) {
+        return _.keys(this.tags).some(function(key) {
             return key != "attribution" &&
                 key != "created_by" &&
                 key != "source" &&
                 key != 'odbl' &&
                 key.indexOf('tiger:') !== 0;
         });
+    },
+
+    deprecatedTags: function() {
+        var tags = _.pairs(this.tags);
+        var deprecated = {};
+
+        iD.data.deprecated.forEach(function(d) {
+            var match = _.pairs(d.old)[0];
+            tags.forEach(function(t) {
+                if (t[0] == match[0] &&
+                    (t[1] == match[1] || match[1] == '*')) {
+                    deprecated[t[0]] = t[1];
+                }
+            });
+        });
+
+        return deprecated;
     },
 
     friendlyName: function() {

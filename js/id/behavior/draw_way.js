@@ -1,31 +1,40 @@
 iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
+        isArea = way.geometry() === 'area',
         finished = false,
         annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
         draw = iD.behavior.Draw(context);
 
-    var node = iD.Node({loc: context.map().mouseCoordinates()}),
-        nodeId = node.id;
+    var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
+        start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+        end = iD.Node({loc: context.map().mouseCoordinates()}),
+        segment = iD.Way({
+            nodes: [start.id, end.id],
+            tags: _.clone(way.tags)
+        });
 
-    context[way.isDegenerate() ? 'replace' : 'perform'](
-        iD.actions.AddEntity(node),
-        iD.actions.AddVertex(wayId, node.id, index));
+    var f = context[way.isDegenerate() ? 'replace' : 'perform'];
+    if (isArea) {
+        f(iD.actions.AddEntity(end),
+            iD.actions.AddVertex(wayId, end.id, index));
+    } else {
+        f(iD.actions.AddEntity(start),
+            iD.actions.AddEntity(end),
+            iD.actions.AddEntity(segment));
+    }
 
     function move(datum) {
         var loc = context.map().mouseCoordinates();
 
         if (datum.type === 'node') {
             loc = datum.loc;
-        } else if (datum.type === 'midpoint' || datum.type === 'way') {
-            var way = datum.type === 'way' ?
-                datum :
-                context.entity(datum.ways[0].id);
-            loc = iD.geo.chooseIndex(way, d3.mouse(context.surface().node()), context).loc;
+        } else if (datum.type === 'way') {
+            loc = iD.geo.chooseIndex(datum, d3.mouse(context.surface().node()), context).loc;
         }
 
-        context.replace(iD.actions.MoveNode(nodeId, loc));
+        context.replace(iD.actions.MoveNode(end.id, loc));
     }
 
     function undone() {
@@ -37,7 +46,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
-            .on('clickMidpoint', drawWay.addMidpoint)
             .on('undo', context.undo)
             .on('cancel', drawWay.cancel)
             .on('finish', drawWay.finish);
@@ -49,7 +57,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         surface.call(draw)
           .selectAll('.way, .node')
-            .filter(function (d) { return d.id === wayId || d.id === nodeId; })
+            .filter(function (d) { return d.id === segment.id || d.id === start.id || d.id === end.id; })
             .classed('active', true);
 
         context.history()
@@ -79,9 +87,18 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     function ReplaceTemporaryNode(newNode) {
         return function(graph) {
-            return graph
-                .replace(way.removeNode(nodeId).addNode(newNode.id, index))
-                .remove(node);
+            if (isArea) {
+                return graph
+                    .replace(way.removeNode(end.id).addNode(newNode.id, index))
+                    .remove(end);
+
+            } else {
+                return graph
+                    .replace(graph.entity(wayId).addNode(newNode.id, index))
+                    .remove(end)
+                    .remove(segment)
+                    .remove(start);
+            }
         };
     }
 
@@ -122,19 +139,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         context.enter(mode);
     };
 
-    // Add a midpoint, connect the way to it, and continue drawing.
-    drawWay.addMidpoint = function(midpoint) {
-        var node = iD.Node();
-
-        context.perform(
-            iD.actions.AddMidpoint(midpoint, node),
-            ReplaceTemporaryNode(node),
-            annotation);
-
-        finished = true;
-        context.enter(mode);
-    };
-
     // Finish the draw operation, removing the temporary node. If the way has enough
     // nodes to be valid, it's selected. Otherwise, return to browse mode.
     drawWay.finish = function() {
@@ -159,5 +163,5 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         context.enter(iD.modes.Browse(context));
     };
 
-    return d3.rebind(drawWay, event, 'on');
+    return drawWay;
 };

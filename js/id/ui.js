@@ -1,4 +1,4 @@
-iD.ui = function (context) {
+iD.ui = function(context) {
     return function(container) {
         context.container(container);
 
@@ -42,12 +42,12 @@ iD.ui = function (context) {
             .data(modes)
             .enter().append('button')
                 .attr('tabindex', -1)
-                .attr('class', function (mode) { return mode.title + ' add-button col3'; })
+                .attr('class', function(mode) { return mode.title + ' add-button col3'; })
             .call(bootstrap.tooltip().placement('bottom').html(true))
-            .attr('data-original-title', function (mode) {
+            .attr('data-original-title', function(mode) {
                 return hintprefix(mode.key, mode.description);
             })
-            .on('click.editor', function (mode) { context.enter(mode); });
+            .on('click.editor', function(mode) { context.enter(mode); });
 
         function disableTooHigh() {
             if (map.editable()) {
@@ -74,14 +74,14 @@ iD.ui = function (context) {
                 return d.id + ' icon icon-pre-text';
             });
 
-        buttons.append('span').attr('class', 'label').text(function (mode) { return mode.title; });
+        buttons.append('span').attr('class', 'label').text(function(mode) { return mode.title; });
 
-        context.on('enter.editor', function (entered) {
-            buttons.classed('active', function (mode) { return entered.button === mode.button; });
+        context.on('enter.editor', function(entered) {
+            buttons.classed('active', function(mode) { return entered.button === mode.button; });
             container.classed("mode-" + entered.id, true);
         });
 
-        context.on('exit.editor', function (exited) {
+        context.on('exit.editor', function(exited) {
             container.classed("mode-" + exited.id, false);
         });
 
@@ -91,14 +91,14 @@ iD.ui = function (context) {
 
         undo_buttons.append('button')
             .attr({ id: 'undo', 'class': 'col6' })
-            .property('disabled', true)
+            .classed('disabled', true)
             .html("<span class='undo icon'></span><small></small>")
             .on('click.editor', history.undo)
             .call(undo_tooltip);
 
         undo_buttons.append('button')
             .attr({ id: 'redo', 'class': 'col6' })
-            .property('disabled', true)
+            .classed('disabled', true)
             .html("<span class='redo icon'><small></small>")
             .on('click.editor', history.redo)
             .call(undo_tooltip);
@@ -209,13 +209,13 @@ iD.ui = function (context) {
             }
 
             limiter.select('#undo')
-                .property('disabled', !undo)
-                .attr('data-original-title', hintprefix('⌘ + Z', undo))
+                .classed('disabled', !undo)
+                .attr('data-original-title', hintprefix('⌘ + Z', undo || t('nothing_to_undo')))
                 .call(refreshTooltip);
 
             limiter.select('#redo')
-                .property('disabled', !redo)
-                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo))
+                .classed('disabled', !redo)
+                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo || t('nothing_to_redo')))
                 .call(refreshTooltip);
         });
 

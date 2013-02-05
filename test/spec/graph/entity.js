@@ -114,6 +114,16 @@ describe('iD.Entity', function () {
         });
     });
 
+   describe("#hasDeprecatedTags", function () {
+        it("returns false if entity has no tags", function () {
+            expect(iD.Entity().deprecatedTags()).to.eql({});
+        });
+
+        it("returns true if entity has deprecated tags", function () {
+            expect(iD.Entity({ tags: { barrier: 'wire_fence' } }).deprecatedTags()).to.eql({ barrier: 'wire_fence' });
+        });
+   });
+
     describe("#hasInterestingTags", function () {
         it("returns false if the entity has no tags", function () {
             expect(iD.Entity().hasInterestingTags()).to.equal(false);

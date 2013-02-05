@@ -17,7 +17,10 @@ iD.ui.save = function(context) {
 
                 d3.select('.shaded').remove();
                 var l = iD.ui.loading(t('uploading_changes'), true);
-                connection.putChangeset(history.changes(), e.comment, history.imagery_used(), function(err, changeset_id) {
+
+                connection.putChangeset(history.changes(),
+                    e.comment,
+                    history.imagery_used(), function(err, changeset_id) {
                     l.remove();
                     history.reset();
                     map.flush().redraw();

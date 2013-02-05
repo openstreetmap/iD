@@ -11,7 +11,6 @@ iD.modes.AddLine = function(context) {
             .on('start', start)
             .on('startFromWay', startFromWay)
             .on('startFromNode', startFromNode)
-            .on('startFromMidpoint', startFromMidpoint),
         defaultTags = {highway: 'residential'};
 
     function start(loc) {
@@ -61,19 +60,6 @@ iD.modes.AddLine = function(context) {
 
             context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
         }
-    }
-
-    function startFromMidpoint(midpoint) {
-        var graph = context.graph(),
-            node = iD.Node(),
-            way = iD.Way({tags: defaultTags});
-
-        context.perform(
-            iD.actions.AddMidpoint(midpoint, node),
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id));
-
-        context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
     }
 
     mode.enter = function() {

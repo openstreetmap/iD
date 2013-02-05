@@ -27,11 +27,11 @@ iD.History = function() {
     }
 
     var history = {
-        graph: function () {
+        graph: function() {
             return stack[index].graph;
         },
 
-        merge: function (entities) {
+        merge: function(entities) {
             for (var i = 0; i < stack.length; i++) {
                 stack[i].graph.rebase(entities);
             }
@@ -39,7 +39,7 @@ iD.History = function() {
             dispatch.change();
         },
 
-        perform: function () {
+        perform: function() {
             var previous = stack[index].graph;
 
             stack = stack.slice(0, index + 1);
@@ -49,7 +49,7 @@ iD.History = function() {
             return change(previous);
         },
 
-        replace: function () {
+        replace: function() {
             var previous = stack[index].graph;
 
             // assert(index == stack.length - 1)
@@ -58,7 +58,7 @@ iD.History = function() {
             return change(previous);
         },
 
-        pop: function () {
+        pop: function() {
             var previous = stack[index].graph;
 
             if (index > 0) {
@@ -68,7 +68,7 @@ iD.History = function() {
             }
         },
 
-        undo: function () {
+        undo: function() {
             var previous = stack[index].graph;
 
             // Pop to the first annotated state.
@@ -87,7 +87,7 @@ iD.History = function() {
             return change(previous);
         },
 
-        redo: function () {
+        redo: function() {
             var previous = stack[index].graph;
 
             while (index < stack.length - 1) {
@@ -99,7 +99,7 @@ iD.History = function() {
             return change(previous);
         },
 
-        undoAnnotation: function () {
+        undoAnnotation: function() {
             var i = index;
             while (i >= 0) {
                 if (stack[i].annotation) return stack[i].annotation;
@@ -107,7 +107,7 @@ iD.History = function() {
             }
         },
 
-        redoAnnotation: function () {
+        redoAnnotation: function() {
             var i = index + 1;
             while (i <= stack.length - 1) {
                 if (stack[i].annotation) return stack[i].annotation;
@@ -115,13 +115,13 @@ iD.History = function() {
             }
         },
 
-        difference: function () {
+        difference: function() {
             var base = stack[0].graph,
                 head = stack[index].graph;
             return iD.Difference(base, head);
         },
 
-        changes: function () {
+        changes: function() {
             var difference = history.difference();
             return {
                 modified: difference.modified(),
@@ -145,7 +145,7 @@ iD.History = function() {
                     undefined, 'Custom');
         },
 
-        reset: function () {
+        reset: function() {
             stack = [{graph: iD.Graph()}];
             index = 0;
             dispatch.change();

@@ -11,7 +11,6 @@ iD.modes.AddArea = function(context) {
             .on('start', start)
             .on('startFromWay', startFromWay)
             .on('startFromNode', startFromNode)
-            .on('startFromMidpoint', startFromMidpoint),
         defaultTags = {area: 'yes'};
 
     function start(loc) {
@@ -48,20 +47,6 @@ iD.modes.AddArea = function(context) {
             way = iD.Way({tags: defaultTags});
 
         context.perform(
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddVertex(way.id, node.id));
-
-        context.enter(iD.modes.DrawArea(context, way.id, graph));
-    }
-
-    function startFromMidpoint(midpoint) {
-        var graph = context.graph(),
-            node = iD.Node(),
-            way = iD.Way({tags: defaultTags});
-
-        context.perform(
-            iD.actions.AddMidpoint(midpoint, node),
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id),
             iD.actions.AddVertex(way.id, node.id));

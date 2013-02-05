@@ -8,8 +8,8 @@ iD.util.trueObj = function(arr) {
 
 iD.util.tagText = function(entity) {
     return d3.entries(entity.tags).map(function(e) {
-        return e.key + ': ' + e.value;
-    }).join('\n');
+        return e.key + '=' + e.value;
+    }).join(', ');
 };
 
 iD.util.stringQs = function(str) {
