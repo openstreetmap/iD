@@ -14,7 +14,7 @@
     * Delegation is supported via the `delegate` function.
 
  */
-iD.behavior.drag = function () {
+iD.behavior.drag = function() {
     function d3_eventCancel() {
       d3.event.stopPropagation();
       d3.event.preventDefault();
@@ -50,21 +50,21 @@ iD.behavior.drag = function () {
             moved = 0;
 
         var w = d3.select(window)
-            .on(touchId != null ? "touchmove.drag-" + touchId : "mousemove.drag", dragmove)
-            .on(touchId != null ? "touchend.drag-" + touchId : "mouseup.drag", dragend, true);
+            .on(touchId !== null ? "touchmove.drag-" + touchId : "mousemove.drag", dragmove)
+            .on(touchId !== null ? "touchend.drag-" + touchId : "mouseup.drag", dragend, true);
 
         if (origin) {
             offset = origin.apply(target, arguments);
-            offset = [ offset[0] - origin_[0], offset[1] - origin_[1] ];
+            offset = [offset[0] - origin_[0], offset[1] - origin_[1]];
         } else {
-            offset = [ 0, 0 ];
+            offset = [0, 0];
         }
 
-        if (touchId == null) d3_eventCancel();
+        if (touchId === null) d3_eventCancel();
 
         function point() {
             var p = target.parentNode;
-            return touchId != null ? d3.touches(p).filter(function (p) {
+            return touchId !== null ? d3.touches(p).filter(function(p) {
                 return p.identifier === touchId;
             })[0] : d3.mouse(p);
         }
@@ -103,8 +103,8 @@ iD.behavior.drag = function () {
                 if (d3.event.target === eventTarget) w.on("click.drag", click, true);
             }
 
-            w.on(touchId != null ? "touchmove.drag-" + touchId : "mousemove.drag", null)
-                .on(touchId != null ? "touchend.drag-" + touchId : "mouseup.drag", null);
+            w.on(touchId !== null ? "touchmove.drag-" + touchId : "mousemove.drag", null)
+                .on(touchId !== null ? "touchend.drag-" + touchId : "mouseup.drag", null);
         }
 
         function click() {
