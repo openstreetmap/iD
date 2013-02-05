@@ -3,7 +3,7 @@ iD.behavior.Draw = function(context) {
         'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
         hover = iD.behavior.Hover(),
-        closeTolerance = 4;
+        closeTolerance = 4,
         tolerance = 12;
 
     function datum() {
