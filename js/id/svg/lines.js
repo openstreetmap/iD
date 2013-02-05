@@ -56,7 +56,9 @@ iD.svg.Lines = function(projection) {
         }
 
         if (!alength) {
-            var arrow = surface.append('text').text(arrowtext);
+            var arrow = surface.append('text')
+                .text(arrowtext)
+                .style('font-size', 7);
             alength = arrow.node().getComputedTextLength();
             arrow.remove();
         }
