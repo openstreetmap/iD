@@ -78,7 +78,6 @@ iD.Background = function() {
         tiles.forEach(function(d) {
             addSource(d);
             requests.push(d);
-            console.log(d[3]);
             if (!cache[d[3]] && lookUp(d)) {
                 requests.push(addSource(lookUp(d)));
             }
