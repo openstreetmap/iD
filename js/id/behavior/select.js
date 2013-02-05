@@ -1,4 +1,5 @@
 iD.behavior.Select = function(context) {
+
     function click() {
         var datum = d3.select(d3.event.target).datum();
         if (datum instanceof iD.Entity) {
