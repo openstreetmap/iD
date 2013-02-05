@@ -66,7 +66,7 @@ iD.behavior.DragNode = function(context) {
         var loc = context.map().mouseCoordinates();
 
         var d = datum();
-        if (d.type === 'node') {
+        if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way') {
             loc = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context).loc;
