@@ -103,13 +103,24 @@ _.extend(iD.Way.prototype, {
     },
 
     asGeoJSON: function(resolver) {
-        return {
-            type: 'Feature',
-            properties: this.tags,
-            geometry: {
-                type: 'LineString',
-                coordinates: _.pluck(resolver.childNodes(this), 'loc')
-            }
-        };
+        if (this.isArea()) {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [_.pluck(resolver.childNodes(this), 'loc')]
+                }
+            };
+        } else {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'LineString',
+                    coordinates: _.pluck(resolver.childNodes(this), 'loc')
+                }
+            };
+        }
     }
 });
