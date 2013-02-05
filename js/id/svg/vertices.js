@@ -26,7 +26,7 @@ iD.svg.Vertices = function(projection) {
             .attr('class', 'shadow');
 
         group.append('circle')
-            .attr('r', 6)
+            .attr('r', 4)
             .attr('class', 'stroke');
 
         group.append('circle')

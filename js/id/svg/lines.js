@@ -1,6 +1,6 @@
 iD.svg.Lines = function(projection) {
 
-    var arrowtext = '►\u3000\u3000',
+    var arrowtext = '►\u3000\u3000\u3000',
         alength;
 
     var highway_stack = {
