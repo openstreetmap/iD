@@ -56,11 +56,13 @@ iD.svg.Lines = function(projection) {
         }
 
         if (!alength) {
-            var arrow = surface.append('text')
-                .text(arrowtext)
-                .style('font-size', 7);
+            var container = surface.append('g')
+                    .attr('class', 'oneway'),
+                arrow = container.append('text')
+                    .attr('class', 'textpath')
+                    .text(arrowtext);
             alength = arrow.node().getComputedTextLength();
-            arrow.remove();
+            container.remove();
         }
 
         var lines = [],
