@@ -115,26 +115,27 @@ iD.modes.Select = function(context, selection, initial) {
 
                 var prev = datum.nodes[choice.index - 1],
                     next = datum.nodes[choice.index],
-                    prevParents = context.graph().parentWays({ id: prev });
+                    prevParents = context.graph().parentWays({ id: prev }),
+                    ways = [];
 
-                context.perform(iD.actions.AddEntity(node));
 
                 for (var i = 0; i < prevParents.length; i++) {
                     var p = prevParents[i];
                     for (var k = 0; k < p.nodes.length; k++) {
                         if (p.nodes[k] === prev) {
                             if (p.nodes[k-1] === next) {
-                                context.perform(iD.actions.AddVertex(p.id, node.id, k));
+                                ways.push({ id: p.id, index: k});
                                 break;
                             } else if (p.nodes[k+1] === next) {
-                                context.perform(iD.actions.AddVertex(p.id, node.id, k+1));
+                                ways.push({ id: p.id, index: k+1});
                                 break;
                             }
                         }
                     }
                 }
 
-                context.perform(iD.actions.Noop(),
+                context.perform(iD.actions.AddEntity(node),
+                    iD.actions.AddMidpoint({ ways: ways, loc: node.loc }, node),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();
