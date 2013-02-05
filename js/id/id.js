@@ -92,8 +92,7 @@ window.iD = function () {
 
     context.background()
         .source(_.find(iD.layers, function(l) {
-            console.log(_.keys(l));
-            return l.name === 'Bing aerial imagery';
+            return l.data.name === 'Bing aerial imagery';
         }));
 
     return d3.rebind(context, dispatch, 'on');

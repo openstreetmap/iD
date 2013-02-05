@@ -2,13 +2,13 @@ iD.ui.layerswitcher = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         opacities = [1, 0.5, 0];
 
-    var layers = iD.data.imagery.map(iD.BackgroundSource.template);
+    var layers = iD.layers;
 
     function getSources() {
         var ext = context.map().extent();
         return layers.filter(function(layer) {
-            return !layer.extent ||
-                iD.geo.polygonIntersectsPolygon(layer.extent, ext);
+            return !layer.data.extent ||
+                iD.geo.Extent(layer.data.extent).intersects(ext);
         });
     }
 
@@ -50,6 +50,17 @@ iD.ui.layerswitcher = function(context) {
         var opacityList = opa.append('ul')
             .attr('class', 'opacity-options');
 
+        function setOpacity(d) {
+            context.map().tilesurface
+                .transition()
+                .style('opacity', d)
+                .attr('data-opacity', d);
+            opacityList.selectAll('li')
+                .classed('selected', false);
+            d3.select(this)
+                .classed('selected', true);
+        }
+
         opacityList.selectAll('div.opacity')
             .data(opacities)
             .enter()
@@ -57,23 +68,12 @@ iD.ui.layerswitcher = function(context) {
                 .attr('data-original-title', function(d) {
                     return t('layerswitcher.percent_brightness', { opacity: (d * 100) });
                 })
-                .on('click.set-opacity', function(d) {
-                    context.map().tilesurface
-                        .transition()
-                        .style('opacity', d)
-                        .attr('data-opacity', d);
-                    opacityList.selectAll('li')
-                        .classed('selected', false);
-                    d3.select(this)
-                        .classed('selected', true);
-                })
+                .on('click.set-opacity', setOpacity)
                 .html("<div class='select-box'></div>")
                 .call(bootstrap.tooltip().placement('top'))
                 .append('div')
                     .attr('class', 'opacity')
-                    .style('opacity', function(d) {
-                        return d;
-                    });
+                    .style('opacity', String);
 
         // Make sure there is an active selection by default
         d3.select('.opacity-options li:nth-child(2)').classed('selected', true);
@@ -81,45 +81,54 @@ iD.ui.layerswitcher = function(context) {
         function selectLayer(d) {
             content.selectAll('a.layer')
                 .classed('selected', function(d) {
-                    return d.source === context.background().source();
+                    return d === context.background().source();
                 });
             d3.select('#attribution a')
-                .attr('href', d.link)
-                .text('provided by ' + d.name);
+                .attr('href', d.data.link)
+                .text('provided by ' + d.data.name);
         }
 
-        content
+        function clickSetSource(d) {
+            d3.event.preventDefault();
+            if (d.data.name === 'Custom') {
+                var configured = d();
+                if (!configured) return;
+                d = configured;
+            }
+            context.background().source(d);
+            context.history().imagery_used(d.name);
+            context.redraw();
+            selectLayer(d);
+        }
+
+        var layerList = content
             .append('ul')
-            .attr('class', 'toggle-list fillL')
-            .selectAll('a.layer')
-                .data(getSources())
-                .enter()
+            .attr('class', 'toggle-list fillL');
+
+        function update() {
+            var layerLinks = layerList.selectAll('a.layer')
+                .data(getSources(), function(d) {
+                    return d.data.name;
+                });
+            layerLinks.exit().remove();
+            layerLinks.enter()
                 .append('li')
                 .append('a')
                     .attr('data-original-title', function(d) {
-                        return d.description || '';
+                        return d.data.description || '';
                     })
                     .attr('href', '#')
                     .attr('class', 'layer')
                     .text(function(d) {
-                        return d.name;
+                        return d.data.name;
                     })
                     .call(bootstrap.tooltip().placement('right'))
-                    .on('click.set-source', function(d) {
-                        d3.event.preventDefault();
-                        if (d.name === 'Custom') {
-                            var configured = d.source();
-                            if (!configured) return;
-                            d.source = configured;
-                            d.name = 'Custom (configured)';
-                        }
-                        context.background().source(d.source);
-                        context.history().imagery_used(d.name);
-                        context.redraw();
-                        selectLayer(d);
-                    })
+                    .on('click.set-source', clickSetSource)
                     .insert('span')
                     .attr('class','icon toggle');
+        }
+
+        context.map().on('move.layerswitcher-update', _.debounce(update, 1000));
 
         var adjustments = content
             .append('div')

@@ -1,4 +1,4 @@
-[
+iD.data.imagery = [
     {
         "name": "Bing aerial imagery",
         "template": "http://ecn.t0.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z",
@@ -654,4 +654,4 @@
         ],
         "sourcetag": "ngi-aerial"
     }
-]
+];

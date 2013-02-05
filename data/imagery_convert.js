@@ -36,7 +36,7 @@ $('set').each(function(i) {
 
     var im = {
         name: $(this).find('name').first().text(),
-        url: $(this).find('url').first().text()
+        template: $(this).find('url').first().text()
     };
 
     if (censor[im.name]) return;
@@ -49,7 +49,8 @@ $('set').each(function(i) {
 
     var subdomains = [];
 
-    im.url = im.url
+    im.template = im.template
+        .replace('$quadkey', '{u}')
         .replace(/\$(\w)/g, function(m) {
             return '{' + m[1] + '}';
         })
@@ -62,10 +63,10 @@ $('set').each(function(i) {
 
     if (elem.attr('minlat')) {
         im.extent = [
-            +elem.attr('minlat'),
-            +elem.attr('minlon'),
-            +elem.attr('maxlat'),
-            +elem.attr('maxlon')];
+            [+elem.attr('minlon'),
+            +elem.attr('minlat')],
+            [+elem.attr('maxlon'),
+            +elem.attr('maxlat')]];
     }
 
     ['default', 'sourcetag', 'logo', 'logo_url', 'terms_url'].forEach(function(a) {
