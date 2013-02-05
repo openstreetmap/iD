@@ -83,6 +83,7 @@ locale.en = {
                 vertex: "Deleted a node from a way.",
                 line: "Deleted a line.",
                 area: "Deleted an area.",
+                relation: "Deleted a relation.",
                 multiple: "Deleted {n} objects."
             }
         },
