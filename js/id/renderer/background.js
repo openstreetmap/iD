@@ -78,6 +78,7 @@ iD.Background = function() {
         tiles.forEach(function(d) {
             addSource(d);
             requests.push(d);
+            console.log(d[3]);
             if (!cache[d[3]] && lookUp(d)) {
                 requests.push(addSource(lookUp(d)));
             }
@@ -130,8 +131,6 @@ iD.Background = function() {
             .on('load', load);
 
         image.style(transformProp, imageTransform);
-
-        if (Object.keys(cache).length > 100) cache = {};
     }
 
     background.offset = function(_) {
