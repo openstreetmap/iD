@@ -160,13 +160,13 @@ describe("iD.actions.Join", function () {
                 'c': iD.Node({id: 'c'}),
                 '-': iD.Way({id: '-', nodes: ['a', 'b']}),
                 '=': iD.Way({id: '=', nodes: ['b', 'c']}),
-                'r1': iD.Relation({id: 'r1', members: [{id: '=', role: 'r1'}]}),
-                'r2': iD.Relation({id: 'r2', members: [{id: '=', role: 'r1'}, {id: '-', role: 'r2'}]})
+                'r1': iD.Relation({id: 'r1', members: [{id: '=', role: 'r1', type: 'way'}]}),
+                'r2': iD.Relation({id: 'r2', members: [{id: '=', role: 'r1', type: 'way'}, {id: '-', role: 'r2', type: 'way'}]})
             });
 
         graph = iD.actions.Join('-', '=')(graph);
 
-        expect(graph.entity('r1').members).to.eql([{id: '-', role: 'r1'}]);
-        expect(graph.entity('r2').members).to.eql([{id: '-', role: 'r2'}]);
+        expect(graph.entity('r1').members).to.eql([{id: '-', role: 'r1', type: 'way'}]);
+        expect(graph.entity('r2').members).to.eql([{id: '-', role: 'r2', type: 'way'}]);
     });
 });

@@ -10,7 +10,7 @@ iD.modes.AddArea = function(context) {
     var behavior = iD.behavior.AddWay(context)
             .on('start', start)
             .on('startFromWay', startFromWay)
-            .on('startFromNode', startFromNode)
+            .on('startFromNode', startFromNode),
         defaultTags = {area: 'yes'};
 
     function start(loc) {

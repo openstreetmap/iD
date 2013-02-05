@@ -42,7 +42,7 @@ iD.actions.Join = function(idA, idB) {
                 var memberA = parent.memberById(idA),
                     memberB = parent.memberById(idB);
                 if (!memberA) {
-                    graph = graph.replace(parent.addMember({id: idA, role: memberB.role}));
+                    graph = graph.replace(parent.addMember({id: idA, role: memberB.role, type: 'way'}));
                 }
             });
 
