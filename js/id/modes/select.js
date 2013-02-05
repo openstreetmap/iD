@@ -143,13 +143,22 @@ iD.modes.Select = function(context, selection, initial) {
             }
         }
 
+        function selected(entity) {
+            if (!entity) return false;
+            if (selection.indexOf(entity.id) >= 0) return true;
+            return d3.select(this).classed('stroke') &&
+                _.any(context.graph().parentRelations(entity), function(parent) {
+                    return selection.indexOf(parent.id) >= 0;
+                });
+        }
+
         d3.select(document)
             .call(keybinding);
 
         context.surface()
             .on('dblclick.select', dblclick)
             .selectAll("*")
-            .filter(function(d) { return d && selection.indexOf(d.id) >= 0; })
+            .filter(selected)
             .classed('selected', true);
 
         radialMenu = iD.ui.RadialMenu(operations);

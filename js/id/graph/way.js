@@ -49,6 +49,7 @@ _.extend(iD.Way.prototype, {
     isArea: function() {
         return this.tags.area === 'yes' ||
             (this.isClosed() &&
+                !_.isEmpty(this.tags) &&
                 this.tags.area !== 'no' &&
                 !this.tags.highway &&
                 !this.tags.barrier);
