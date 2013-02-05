@@ -24,7 +24,7 @@ iD.svg.Multipolygons = function(projection) {
             multipolygon = _.flatten(multipolygon, true);
             return (lineStrings[entity.id] =
                 multipolygon.map(function (ring) {
-                    return 'M' + ring.map(function (node) { return projection(node.loc); }).join('L');
+                    return 'M' + ring.map(projection).join('L');
                 }).join(""));
         }
 

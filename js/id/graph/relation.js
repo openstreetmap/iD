@@ -145,22 +145,20 @@ _.extend(iD.Relation.prototype, {
                 }
             }
 
-            return joined;
+            return joined.map(function (nodes) { return _.pluck(nodes, 'loc'); });
         }
 
         function findOuter(inner) {
             var o, outer;
 
-            inner = _.pluck(inner, 'loc');
-
             for (o = 0; o < outers.length; o++) {
-                outer = _.pluck(outers[o], 'loc');
+                outer = outers[o];
                 if (iD.geo.polygonContainsPolygon(outer, inner))
                     return o;
             }
 
             for (o = 0; o < outers.length; o++) {
-                outer = _.pluck(outers[o], 'loc');
+                outer = outers[o];
                 if (iD.geo.polygonIntersectsPolygon(outer, inner))
                     return o;
             }
