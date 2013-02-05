@@ -1,8 +1,11 @@
 iD.BackgroundSource = {};
 
 // derive the url of a 'quadkey' style tile from a coordinate object
-iD.BackgroundSource.template = function(template, subdomains, scaleExtent) {
-    scaleExtent = scaleExtent || [0, 18];
+iD.BackgroundSource.template = function(options) {
+    var subdomains = options.subdomains || [],
+        template = options.template,
+        scaleExtent = options.scaleExtent || [0, 20];
+
     var generator = function(coord) {
         var u = '';
         for (var zoom = coord[2]; zoom > 0; zoom--) {
@@ -23,7 +26,11 @@ iD.BackgroundSource.template = function(template, subdomains, scaleExtent) {
             .replace('{z}', coord[2]);
     };
 
-    generator.scaleExtent = scaleExtent;
+    for (var k in options) {
+        generator[k] = options[k];
+        console.log(k, generator[k]);
+    }
+
 
     return generator;
 };
@@ -33,19 +40,3 @@ iD.BackgroundSource.Custom = function() {
     if (!template) return null;
     return iD.BackgroundSource.template(template, null, [0, 20]);
 };
-
-iD.BackgroundSource.Bing = iD.BackgroundSource.template(
-    'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
-    [0, 1, 2, 3], [0, 20]);
-
-iD.BackgroundSource.Tiger2012 = iD.BackgroundSource.template(
-    'http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png',
-    ['a', 'b', 'c'], [0, 17]);
-
-iD.BackgroundSource.OSM = iD.BackgroundSource.template(
-    'http://{t}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    ['a', 'b', 'c'], [0, 18]);
-
-iD.BackgroundSource.MapBox = iD.BackgroundSource.template(
-    'http://{t}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.jpg70',
-    ['a', 'b', 'c'], [0, 16]);

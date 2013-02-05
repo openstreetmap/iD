@@ -2,6 +2,12 @@
     {
         "name": "Bing aerial imagery",
         "url": "http://ecn.t0.tiles.virtualearth.net/tiles/a{q}uadkey.jpeg?g=587&mkt=en-gb&n=z",
+        "description": "Satellite imagery.",
+        "scaleExtent": [
+            0,
+            20
+        ],
+        "default": "yes",
         "sourcetag": "Bing",
         "logo": "bing_maps.png",
         "logo_url": "http://www.bing.com/maps",
@@ -10,6 +16,11 @@
     {
         "name": "MapBox Satellite",
         "url": "http://{t}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.png",
+        "description": "Satellite and aerial imagery",
+        "scaleExtent": [
+            0,
+            16
+        ],
         "subdomains": [
             "a",
             "b",
@@ -17,25 +28,18 @@
         ]
     },
     {
-        "name": "MapQuest Open Aerial",
-        "url": "http://oatile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
-    },
-    {
-        "name": "OSM - Mapnik",
+        "name": "OpenStreetMap",
         "url": "http://{t}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "description": "The default OpenStreetMap layer.",
+        "scaleExtent": [
+            0,
+            18
+        ],
         "subdomains": [
             "a",
             "b",
             "c"
         ]
-    },
-    {
-        "name": "OSM - OpenCycleMap",
-        "url": "http://tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
-    },
-    {
-        "name": "OSM - MapQuest",
-        "url": "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg"
     },
     {
         "name": "OSM - Tiger Edited Map",
@@ -70,6 +74,11 @@
     {
         "name": "OSM US TIGER 2012 Roads Overlay",
         "url": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
+        "description": "Public domain road data from the US Government.",
+        "scaleExtent": [
+            0,
+            17
+        ],
         "subdomains": [
             "a",
             "b",
@@ -85,6 +94,11 @@
     {
         "name": "OSM US TIGER 2012 Roads Overlay",
         "url": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
+        "description": "Public domain road data from the US Government.",
+        "scaleExtent": [
+            0,
+            17
+        ],
         "subdomains": [
             "a",
             "b",
@@ -100,6 +114,11 @@
     {
         "name": "OSM US TIGER 2012 Roads Overlay",
         "url": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
+        "description": "Public domain road data from the US Government.",
+        "scaleExtent": [
+            0,
+            17
+        ],
         "subdomains": [
             "a",
             "b",

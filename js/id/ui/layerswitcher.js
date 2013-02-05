@@ -1,30 +1,16 @@
 iD.ui.layerswitcher = function(context) {
     var event = d3.dispatch('cancel', 'save'),
-        sources = [{
-            name: 'Bing',
-            source: iD.BackgroundSource.Bing,
-            description: 'Satellite imagery.',
-            link: 'http://opengeodata.org/microsoft-imagery-details'
-        }, {
-            name: 'TIGER 2012',
-            source: iD.BackgroundSource.Tiger2012,
-            description: 'Public domain road data from the US Government.'
-        }, {
-            name: 'OSM',
-            source: iD.BackgroundSource.OSM,
-            description: 'The default OpenStreetMap layer.',
-            link: 'http://www.openstreetmap.org/'
-        }, {
-            name: 'MapBox',
-            source: iD.BackgroundSource.MapBox,
-            description: 'Satellite and aerial imagery.',
-            link: 'http://mapbox.com'
-        }, {
-            name: 'Custom',
-            source: iD.BackgroundSource.Custom,
-            description: 'A custom layer (requires configuration).'
-        }],
         opacities = [1, 0.5, 0];
+
+    var layers = iD.data.imagery.map(iD.BackgroundSource.template);
+
+    function getSources() {
+        var ext = context.map().extent();
+        return layers.filter(function(layer) {
+            return !layer.extent ||
+                iD.geo.polygonIntersectsPolygon(layer.extent, ext);
+        });
+    }
 
     function layerswitcher(selection) {
 
@@ -106,12 +92,12 @@ iD.ui.layerswitcher = function(context) {
             .append('ul')
             .attr('class', 'toggle-list fillL')
             .selectAll('a.layer')
-                .data(sources)
+                .data(getSources())
                 .enter()
                 .append('li')
                 .append('a')
                     .attr('data-original-title', function(d) {
-                        return d.description;
+                        return d.description || '';
                     })
                     .attr('href', '#')
                     .attr('class', 'layer')
