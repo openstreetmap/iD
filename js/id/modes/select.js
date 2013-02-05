@@ -38,9 +38,10 @@ iD.modes.Select = function(context, selection, initial) {
             context.install(behavior);
         });
 
-        var operations = d3.values(iD.operations)
+        var operations = _.without(d3.values(iD.operations), iD.operations.Delete)
             .map(function(o) { return o(selection, context); })
             .filter(function(o) { return o.available(); });
+        operations.unshift(iD.operations.Delete(selection, context));
 
         operations.forEach(function(operation) {
             keybinding.on(operation.key, function() {
@@ -56,7 +57,7 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            inspector.graph(context.graph());
+            inspector.context(context);
 
             context.container()
                 .select('.inspector-wrap')

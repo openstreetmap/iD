@@ -50,7 +50,9 @@ all: \
 	js/id/validate.js \
 	js/id/end.js \
 	locale/locale.js \
-	locale/en.js
+	locale/en.js \
+	data/data.js \
+	data/deprecated.js
 
 iD.js: Makefile
 	@rm -f $@

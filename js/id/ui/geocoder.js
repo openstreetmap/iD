@@ -1,6 +1,6 @@
 iD.ui.geocoder = function() {
 
-    var map;
+    var map, context;
 
     function geocoder(selection) {
         function keydown() {
@@ -28,7 +28,7 @@ iD.ui.geocoder = function() {
                 .on('click.geocoder-inside', function() {
                     return d3.event.stopPropagation();
                 });
-            d3.select('body').on('click.geocoder-outside', hide);
+            context.container().on('click.geocoder-outside', hide);
         }
 
         function show() { setVisible(true); }
@@ -61,6 +61,12 @@ iD.ui.geocoder = function() {
     geocoder.map = function(_) {
         if (!arguments.length) return map;
         map = _;
+        return geocoder;
+    };
+
+    geocoder.context = function(_) {
+        if (!arguments.length) return context;
+        context = _;
         return geocoder;
     };
 

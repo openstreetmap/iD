@@ -128,7 +128,7 @@ iD.ui = function(context) {
         }
 
         container.append('div').attr('class', 'geocode-control map-control')
-            .call(iD.ui.geocoder().map(map));
+            .call(iD.ui.geocoder().map(map).context(context));
 
         container.append('div').attr('class', 'map-control layerswitcher-control')
             .call(iD.ui.layerswitcher(context));

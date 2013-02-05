@@ -42,7 +42,7 @@ iD.svg.Midpoints = function(projection) {
             .attr('class', 'midpoint');
 
         group.append('circle')
-            .attr('r', 7)
+            .attr('r', 8)
             .attr('class', 'shadow');
 
         group.append('circle')
