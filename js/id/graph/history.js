@@ -1,4 +1,4 @@
-iD.History = function() {
+iD.History = function(context) {
     var stack, index,
         imagery_used = 'Bing',
         dispatch = d3.dispatch('change', 'undone', 'redone');
@@ -24,6 +24,10 @@ iD.History = function() {
         var difference = iD.Difference(previous, history.graph());
         dispatch.change(difference);
         return difference;
+    }
+
+    function getKey(n) {
+        return 'iD_' + window.location.origin + '_' + n;
     }
 
     var history = {
@@ -148,8 +152,47 @@ iD.History = function() {
         reset: function() {
             stack = [{graph: iD.Graph()}];
             index = 0;
+            this.load();
             dispatch.change();
+        },
+
+        save: function() {
+            var json = JSON.stringify(stack.map(function(i) {
+                return _.extend(i, {
+                    graph: i.graph.entities
+                });
+            }));
+
+            context.storage(getKey('history'), json);
+            context.storage(getKey('nextIDs'), JSON.stringify(iD.Entity.id.next));
+            context.storage(getKey('index'), index);
+            context.storage(getKey('lock'), '');
+        },
+
+        lock: function() {
+            if (context.storage(getKey('lock'))) return false;
+            context.storage(getKey('lock'), true);
+            return true;
+        },
+
+        load: function() {
+            if (!this.lock()) return;
+
+            var json = context.storage(getKey('history')),
+                nextIDs = context.storage(getKey('nextIDs')),
+                index_ = context.storage(getKey('index'));
+
+            if (!json) return;
+            if (nextIDs) iD.Entity.id.next = JSON.parse(nextIDs);
+            if (index_ !== null) index = parseInt(index_, 10);
+
+            stack = JSON.parse(json).map(function(d) {
+                d.graph = iD.Graph().load(d.graph);
+                return d;
+            });
+
         }
+
     };
 
     history.reset();
