@@ -9,8 +9,7 @@ iD.modes.Select = function(context, selection, initial) {
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.Select(context),
-            iD.behavior.DragNode(context),
-            iD.behavior.DragMidpoint(context)],
+            iD.behavior.DragNode(context)],
         radialMenu;
 
     function changeTags(d, tags) {
