@@ -19,6 +19,13 @@ describe("iD.svg.TagClasses", function () {
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
 
+    it('adds tags based on the result of the `tags` accessor', function() {
+        selection
+            .datum(iD.Entity())
+            .call(iD.svg.TagClasses().tags(d3.functor({highway: 'primary'})));
+        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+    });
+
     it('removes classes for tags that are no longer present', function() {
         selection
             .attr('class', 'tag-highway tag-highway-primary')

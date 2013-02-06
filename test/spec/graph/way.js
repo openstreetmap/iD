@@ -95,8 +95,12 @@ describe('iD.Way', function() {
             expect(iD.Way({tags: { area: 'yes' }}).isArea()).to.equal(true);
         });
 
-        it('returns true if the way is closed and has no tags', function() {
-            expect(iD.Way({nodes: ['n1', 'n1']}).isArea()).to.equal(true);
+        it('returns false if the way is closed and has no tags', function() {
+            expect(iD.Way({nodes: ['n1', 'n1']}).isArea()).to.equal(false);
+        });
+
+        it('returns true if the way is closed and has tags', function() {
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).to.equal(true);
         });
 
         it('returns false if the way is closed and has tag area=no', function() {
@@ -207,7 +211,7 @@ describe('iD.Way', function() {
     });
 
     describe("#asGeoJSON", function () {
-        it("converts to a GeoJSON LineString features", function () {
+        it("converts a line to a GeoJSON LineString features", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [3, 4]}),
                 w = iD.Way({tags: {highway: 'residential'}, nodes: [a.id, b.id]}),
@@ -218,6 +222,20 @@ describe('iD.Way', function() {
             expect(json.properties).to.eql({highway: 'residential'});
             expect(json.geometry.type).to.equal('LineString');
             expect(json.geometry.coordinates).to.eql([[1, 2], [3, 4]]);
+        });
+
+        it("converts an area to a GeoJSON Polygon features", function () {
+            var a = iD.Node({loc: [1, 2]}),
+                b = iD.Node({loc: [3, 4]}),
+                c = iD.Node({loc: [5, 6]}),
+                w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
+                graph = iD.Graph([a, b, c, w]),
+                json = w.asGeoJSON(graph);
+
+            expect(json.type).to.equal('Feature');
+            expect(json.properties).to.eql({area: 'yes'});
+            expect(json.geometry.type).to.equal('Polygon');
+            expect(json.geometry.coordinates).to.eql([[[1, 2], [3, 4], [5, 6], [1, 2]]]);
         });
     });
 });

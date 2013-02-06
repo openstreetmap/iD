@@ -335,9 +335,8 @@ iD.svg.Labels = function(projection) {
         }
 
         function getAreaLabel(entity, width, height) {
-            var nodes = _.pluck(graph.childNodes(entity), 'loc')
-                .map(iD.svg.RoundProjection(projection)),
-                centroid = d3.geom.polygon(nodes).centroid(),
+            var path = d3.geo.path().projection(projection),
+                centroid = path.centroid(entity.asGeoJSON(graph)),
                 extent = entity.extent(graph),
                 entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
 

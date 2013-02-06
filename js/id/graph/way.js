@@ -49,6 +49,7 @@ _.extend(iD.Way.prototype, {
     isArea: function() {
         return this.tags.area === 'yes' ||
             (this.isClosed() &&
+                !_.isEmpty(this.tags) &&
                 this.tags.area !== 'no' &&
                 !this.tags.highway &&
                 !this.tags.barrier);
@@ -103,13 +104,24 @@ _.extend(iD.Way.prototype, {
     },
 
     asGeoJSON: function(resolver) {
-        return {
-            type: 'Feature',
-            properties: this.tags,
-            geometry: {
-                type: 'LineString',
-                coordinates: _.pluck(resolver.childNodes(this), 'loc')
-            }
-        };
+        if (this.isArea()) {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [_.pluck(resolver.childNodes(this), 'loc')]
+                }
+            };
+        } else {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'LineString',
+                    coordinates: _.pluck(resolver.childNodes(this), 'loc')
+                }
+            };
+        }
     }
 });
