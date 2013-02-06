@@ -27,7 +27,7 @@ iD.behavior.Draw = function(context) {
 
         target.on('mousemove.draw', null);
 
-        d3.select(window).on('mouseup.draw', function() {
+        d3.select(window).on('click.draw', function() {
             target.on('mousemove.draw', mousemove);
             if (iD.geo.dist(pos, point()) < closeTolerance ||
                 (iD.geo.dist(pos, point()) < tolerance &&
@@ -35,7 +35,6 @@ iD.behavior.Draw = function(context) {
                 click();
             }
         });
-
     }
 
     function mousemove() {
@@ -111,7 +110,7 @@ iD.behavior.Draw = function(context) {
             .on('mousedown.draw', null)
             .on('mousemove.draw', null);
 
-        d3.select(window).on('mouseup.draw', null);
+        d3.select(window).on('click.draw', null);
 
         d3.select(document)
             .call(keybinding.off)
