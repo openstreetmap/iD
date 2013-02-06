@@ -161,8 +161,9 @@ iD.ui = function(context) {
 
         var imagery = linkList.append('li').attr('id', 'attribution');
         imagery.append('span').text('imagery');
-        imagery.append('a').attr('target', '_blank')
-            .attr('href', 'http://opengeodata.org/microsoft-imagery-details').text(' provided by bing');
+        imagery
+            .append('span')
+                .attr('class', 'provided-by');
 
         linkList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
             .text('dev')

@@ -38,7 +38,7 @@ iD.ui.layerswitcher = function(context) {
             selection.on('click.layerswitcher-inside', function() {
                 return d3.event.stopPropagation();
             });
-            d3.select('body').on('click.layerswitcher-outside', hide);
+            context.container().on('click.layerswitcher-outside', hide);
         }
 
         var opa = content
@@ -76,16 +76,28 @@ iD.ui.layerswitcher = function(context) {
                     .style('opacity', String);
 
         // Make sure there is an active selection by default
-        d3.select('.opacity-options li:nth-child(2)').classed('selected', true);
+        opa.select('.opacity-options li:nth-child(2)').classed('selected', true);
 
         function selectLayer(d) {
+
             content.selectAll('a.layer')
                 .classed('selected', function(d) {
                     return d === context.background().source();
                 });
-            d3.select('#attribution a')
-                .attr('href', d.data.link)
-                .text('provided by ' + d.data.name);
+
+            var provided_by = context.container().select('#attribution .provided-by')
+                .html('');
+
+            if (d.data.terms_url) {
+                provided_by.append('a')
+                    .attr('href', (d.data.terms_url || ''))
+                    .classed('disabled', !d.data.terms_url)
+                    .text(' provided by ' + (d.data.sourcetag || d.data.name));
+            } else {
+                provided_by
+                    .text(' provided by ' + (d.data.sourcetag || d.data.name));
+            }
+
         }
 
         function clickSetSource(d) {
@@ -96,7 +108,7 @@ iD.ui.layerswitcher = function(context) {
                 d = configured;
             }
             context.background().source(d);
-            context.history().imagery_used(d.name);
+            context.history().imagery_used(d.data.sourcetag || d.data.name);
             context.redraw();
             selectLayer(d);
         }
