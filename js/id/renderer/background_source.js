@@ -24,6 +24,7 @@ iD.BackgroundSource.template = function(template, subdomains, scaleExtent) {
     };
 
     generator.scaleExtent = scaleExtent;
+    generator.template = template;
 
     return generator;
 };
