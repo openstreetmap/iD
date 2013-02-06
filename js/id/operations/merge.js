@@ -1,5 +1,5 @@
 iD.operations.Merge = function(selection, context) {
-    var action = iD.actions.Join(selection[0], selection[1]);
+    var action = iD.actions.Join(selection);
 
     var operation = function() {
         var annotation = t('operations.merge.annotation', {n: selection.length}),
@@ -8,10 +8,7 @@ iD.operations.Merge = function(selection, context) {
     };
 
     operation.available = function() {
-        return selection.length === 2 &&
-            _.all(selection, function (id) {
-                return context.geometry(id) === 'line';
-            });
+        return selection.length > 1;
     };
 
     operation.enabled = function() {

@@ -10,7 +10,7 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['b', 'c']})
                 });
 
-            expect(iD.actions.Join('-', '=').enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
         });
 
         it("returns true for ways that share a start/end node", function () {
@@ -23,7 +23,7 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['c', 'b']})
                 });
 
-            expect(iD.actions.Join('-', '=').enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
         });
 
         it("returns true for ways that share a start/start node", function () {
@@ -36,7 +36,7 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['b', 'c']})
                 });
 
-            expect(iD.actions.Join('-', '=').enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
         });
 
         it("returns true for ways that share an end/end node", function () {
@@ -49,7 +49,7 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['c', 'b']})
                 });
 
-            expect(iD.actions.Join('-', '=').enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
         });
 
         it("returns false for ways that don't share the necessary nodes", function () {
@@ -65,7 +65,7 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['b', 'd']})
                 });
 
-            expect(iD.actions.Join('-', '=').enabled(graph)).to.be.false;
+            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.false;
         });
     });
 
@@ -80,7 +80,7 @@ describe("iD.actions.Join", function () {
                 '=': iD.Way({id: '=', nodes: ['b', 'c']})
             });
 
-        graph = iD.actions.Join('-', '=')(graph);
+        graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('=')).to.be.undefined;
@@ -97,7 +97,7 @@ describe("iD.actions.Join", function () {
                 '=': iD.Way({id: '=', nodes: ['c', 'b']})
             });
 
-        graph = iD.actions.Join('-', '=')(graph);
+        graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
         expect(graph.entity('=')).to.be.undefined;
@@ -115,7 +115,7 @@ describe("iD.actions.Join", function () {
                 '=': iD.Way({id: '=', nodes: ['b', 'c']})
             });
 
-        graph = iD.actions.Join('-', '=')(graph);
+        graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
         expect(graph.entity('=')).to.be.undefined;
@@ -133,7 +133,7 @@ describe("iD.actions.Join", function () {
                 '=': iD.Way({id: '=', nodes: ['c', 'b']})
             });
 
-        graph = iD.actions.Join('-', '=')(graph);
+        graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('=')).to.be.undefined;
@@ -148,7 +148,7 @@ describe("iD.actions.Join", function () {
                 '=': iD.Way({id: '=', nodes: ['b', 'c'], tags: {a: 'a', b: '=', d: 'd'}})
             });
 
-        graph = iD.actions.Join('-', '=')(graph);
+        graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').tags).to.eql({a: 'a', b: '-; =', c: 'c', d: 'd'});
     });
@@ -164,7 +164,7 @@ describe("iD.actions.Join", function () {
                 'r2': iD.Relation({id: 'r2', members: [{id: '=', role: 'r2', type: 'way'}, {id: '-', role: 'r2', type: 'way'}]})
             });
 
-        graph = iD.actions.Join('-', '=')(graph);
+        graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('r1').members).to.eql([{id: '-', role: 'r1', type: 'way'}]);
         expect(graph.entity('r2').members).to.eql([{id: '-', role: 'r2', type: 'way'}]);

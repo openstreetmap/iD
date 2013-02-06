@@ -6,7 +6,15 @@
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeWaysAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/CombineWayAction.java
 //
-iD.actions.Join = function(idA, idB) {
+iD.actions.Join = function(ids) {
+    var idA = ids[0],
+        idB = ids[1];
+
+    function groupEntitiesByGeometry(graph) {
+        var entities = ids.map(function(id) { return graph.entity(id); });
+        return _.extend({line: []}, _.groupBy(entities, function(entity) { return entity.geometry(graph); }));
+    }
+
     var action = function(graph) {
         var a = graph.entity(idA),
             b = graph.entity(idB),
@@ -48,8 +56,14 @@ iD.actions.Join = function(idA, idB) {
     };
 
     action.enabled = function(graph) {
+        var geometries = groupEntitiesByGeometry(graph);
+
+        if (ids.length !== 2 || ids.length !== geometries['line'].length)
+            return false;
+
         var a = graph.entity(idA),
             b = graph.entity(idB);
+
         return a.first() === b.first() ||
                a.first() === b.last()  ||
                a.last()  === b.first() ||
