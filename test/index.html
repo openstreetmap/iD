@@ -134,15 +134,6 @@
     <script src='../data/data.js'></script>
     <script src='../data/deprecated.js'></script>
 
-    <script>
-        iD.debug = true;
-        mocha.setup({
-            ui: 'bdd',
-            globals: ['__onresize.tail-size', '__onmousemove.zoom', '__onmouseup.zoom', '__onclick.draw']
-        });
-        var expect = chai.expect;
-    </script>
-
     <script src="spec/spec_helpers.js"></script>
 
     <!-- include spec files here... -->
