@@ -256,5 +256,10 @@ iD.ui = function(context) {
             iD.ui.splash(context.container());
             context.storage('sawSplash', true);
         }
+
+        if (history.restorableChanges()) {
+            iD.ui.restore(context.container(), history);
+        }
+
     };
 };

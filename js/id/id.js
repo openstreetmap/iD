@@ -4,6 +4,7 @@ window.iD = function () {
 
     context.storage = function(k, v) {
         if (arguments.length === 1) return storage[k];
+        else if (v === null) delete storage[k];
         else storage[k] = v;
     };
 
