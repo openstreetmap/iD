@@ -30,7 +30,7 @@ iD.ui.save = function(context) {
         function click() {
 
             function commit(e) {
-                d3.select('.shaded').remove();
+                context.container().select('.shaded').remove();
                 var l = iD.ui.loading(context.container(), t('uploading_changes'), true);
 
                 connection.putChangeset(history.changes(),
