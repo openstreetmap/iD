@@ -3,10 +3,11 @@ iD.svg.TagClasses = function() {
         'highway', 'railway', 'waterway', 'power', 'motorway', 'amenity',
         'natural', 'landuse', 'building', 'oneway', 'bridge', 'boundary',
         'leisure', 'construction'
-    ]), tagClassRe = /^tag-/;
+    ]), tagClassRe = /^tag-/,
+        tags = function(entity) { return entity.tags; };
 
-    return function tagClassesSelection(selection) {
-        selection.each(function tagClassesEach(d, i) {
+    var tagClasses = function(selection) {
+        selection.each(function tagClassesEach(entity) {
             var classes, value = this.className;
 
             if (value.baseVal !== undefined) value = value.baseVal;
@@ -15,11 +16,10 @@ iD.svg.TagClasses = function() {
                 return name.length && !tagClassRe.test(name);
             }).join(' ');
 
-            var tags = d.tags;
-            for (var k in tags) {
+            var t = tags(entity);
+            for (var k in t) {
                 if (!keys[k]) continue;
-                classes += ' tag-' + k + ' ' +
-                    'tag-' + k + '-' + tags[k];
+                classes += ' tag-' + k + ' ' + 'tag-' + k + '-' + t[k];
             }
 
             classes = classes.trim();
@@ -29,4 +29,12 @@ iD.svg.TagClasses = function() {
             }
         });
     };
+
+    tagClasses.tags = function(_) {
+        if (!arguments.length) return tags;
+        tags = _;
+        return tagClasses;
+    };
+
+    return tagClasses;
 };

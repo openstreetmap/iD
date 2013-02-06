@@ -227,10 +227,53 @@ iD.Graph.prototype = {
         var items = [];
         for (var i in this.entities) {
             var entity = this.entities[i];
-            if (entity && entity.intersects(extent, this)) {
+            if (entity && this.hasAllChildren(entity) && entity.intersects(extent, this)) {
                 items.push(entity);
             }
         }
         return items;
+    },
+
+    hasAllChildren: function(entity) {
+        // we're only checking changed entities, since we assume fetched data
+        // must have all children present
+        if (this.entities.hasOwnProperty(entity.id)) {
+            if (entity.type === 'way') {
+                for (i = 0; i < entity.nodes.length; i++) {
+                    if (!this.entities[entity.nodes[i]]) return false;
+                }
+            } else if (entity.type === 'relation') {
+                for (i = 0; i < entity.members.length; i++) {
+                    if (!this.entities[entity.members[i].id]) return false;
+                }
+            }
+        }
+        return true;
+    },
+
+    // Obliterates any existing entities
+    load: function(entities) {
+
+        var base = this.base(),
+            i, entity, prefix;
+        this.entities = Object.create(base.entities);
+
+        for (i in entities) {
+            entity = entities[i];
+            prefix = i[0];
+
+            if (prefix == 'n') {
+                this.entities[i] = new iD.Node(entity);
+
+            } else if (prefix == 'w') {
+                this.entities[i] = new iD.Way(entity);
+
+            } else if (prefix == 'r') {
+                this.entities[i] = new iD.Relation(entity);
+            }
+            this._updateCalculated(base.entities[i], this.entities[i]);
+        }
+        return this;
     }
+
 };

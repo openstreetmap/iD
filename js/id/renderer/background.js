@@ -130,8 +130,6 @@ iD.Background = function() {
             .on('load', load);
 
         image.style(transformProp, imageTransform);
-
-        if (Object.keys(cache).length > 100) cache = {};
     }
 
     background.offset = function(_) {

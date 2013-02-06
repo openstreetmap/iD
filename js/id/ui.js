@@ -195,6 +195,7 @@ iD.ui = function(context) {
 
         history.on('change.editor', function() {
             window.onbeforeunload = history.hasChanges() ? function() {
+                history.save();
                 return 'You have unsaved changes.';
             } : null;
 
@@ -253,8 +254,13 @@ iD.ui = function(context) {
         context.enter(iD.modes.Browse(context));
 
         if (!context.storage('sawSplash')) {
-            iD.ui.splash();
+            iD.ui.splash(context.container());
             context.storage('sawSplash', true);
         }
+
+        if (history.restorableChanges()) {
+            iD.ui.restore(context.container(), history);
+        }
+
     };
 };

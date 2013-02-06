@@ -1,17 +1,19 @@
 window.iD = function () {
     var context = {},
-        history = iD.History(),
-        storage = localStorage || {},
+        storage = localStorage || {};
+
+    context.storage = function(k, v) {
+        if (arguments.length === 1) return storage[k];
+        else if (v === null) delete storage[k];
+        else storage[k] = v;
+    };
+
+    var history = iD.History(context),
         dispatch = d3.dispatch('enter', 'exit'),
         mode,
         container,
         ui = iD.ui(context),
         map = iD.Map(context);
-
-    context.storage = function(k, v) {
-        if (arguments.length === 1) return storage[k];
-        else storage[k] = v;
-    };
 
     // the connection requires .storage() to be available on calling.
     var connection = iD.Connection(context);

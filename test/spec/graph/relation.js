@@ -146,107 +146,135 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#asGeoJSON", function (){
+        it('converts a multipolygon to a GeoJSON MultiPolygon feature', function() {
+            var a = iD.Node({loc: [1, 1]}),
+                b = iD.Node({loc: [2, 2]}),
+                c = iD.Node({loc: [3, 3]}),
+                w = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+                r = iD.Relation({tags: {type: 'multipolygon'}, members: [{id: w.id, type: 'way'}]}),
+                g = iD.Graph([a, b, c, w, r]),
+                json = r.asGeoJSON(g);
+
+            expect(json.type).to.equal('Feature');
+            expect(json.properties).to.eql({type: 'multipolygon'});
+            expect(json.geometry.type).to.equal('MultiPolygon');
+            expect(json.geometry.coordinates).to.eql([[[[1, 1], [2, 2], [3, 3], [1, 1]]]]);
+        });
+
+        it('converts a relation to a GeoJSON FeatureCollection', function() {
+            var a = iD.Node({loc: [1, 1]}),
+                r = iD.Relation({tags: {type: 'type'}, members: [{id: a.id, role: 'role'}]}),
+                g = iD.Graph([a, r]),
+                json = r.asGeoJSON(g);
+
+            expect(json.type).to.equal('FeatureCollection');
+            expect(json.properties).to.eql({type: 'type'});
+            expect(json.features).to.eql([_.extend({role: 'role'}, a.asGeoJSON(g))]);
+        });
+    });
+
     describe("#multipolygon", function () {
         specify("single polygon consisting of a single way", function () {
-            var a = iD.Node(),
-                b = iD.Node(),
-                c = iD.Node(),
+            var a = iD.Node({loc: [1, 1]}),
+                b = iD.Node({loc: [2, 2]}),
+                c = iD.Node({loc: [3, 3]}),
                 w = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
                 r = iD.Relation({members: [{id: w.id, type: 'way'}]}),
                 g = iD.Graph([a, b, c, w, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, a]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         specify("single polygon consisting of multiple ways", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
-                d  = iD.Node(),
+            var a  = iD.Node({loc: [1, 1]}),
+                b  = iD.Node({loc: [2, 2]}),
+                c  = iD.Node({loc: [3, 3]}),
+                d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [c.id, d.id, a.id]}),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, d, a]]]); // TODO: not the only valid ordering
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc, a.loc]]]); // TODO: not the only valid ordering
         });
 
         specify("single polygon consisting of multiple ways, one needing reversal", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
-                d  = iD.Node(),
+            var a  = iD.Node({loc: [1, 1]}),
+                b  = iD.Node({loc: [2, 2]}),
+                c  = iD.Node({loc: [3, 3]}),
+                d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [a.id, d.id, c.id]}),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, d, a]]]); // TODO: not the only valid ordering
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc, a.loc]]]); // TODO: not the only valid ordering
         });
 
         specify("multiple polygons consisting of single ways", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
-                d  = iD.Node(),
-                e  = iD.Node(),
-                f  = iD.Node(),
+            var a  = iD.Node({loc: [1, 1]}),
+                b  = iD.Node({loc: [2, 2]}),
+                c  = iD.Node({loc: [3, 3]}),
+                d  = iD.Node({loc: [4, 4]}),
+                e  = iD.Node({loc: [5, 5]}),
+                f  = iD.Node({loc: [6, 6]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
                 w2 = iD.Way({nodes: [d.id, e.id, f.id, d.id]}),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, e, f, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, a]], [[d, e, f, d]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]], [[d.loc, e.loc, f.loc, d.loc]]]);
         });
 
         specify("invalid geometry: unclosed ring consisting of a single way", function () {
-            var a = iD.Node(),
-                b = iD.Node(),
-                c = iD.Node(),
+            var a = iD.Node({loc: [1, 1]}),
+                b = iD.Node({loc: [2, 2]}),
+                c = iD.Node({loc: [3, 3]}),
                 w = iD.Way({nodes: [a.id, b.id, c.id]}),
                 r = iD.Relation({members: [{id: w.id, type: 'way'}]}),
                 g = iD.Graph([a, b, c, w, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc]]]);
         });
 
         specify("invalid geometry: unclosed ring consisting of multiple ways", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
-                d  = iD.Node(),
+            var a  = iD.Node({loc: [1, 1]}),
+                b  = iD.Node({loc: [2, 2]}),
+                c  = iD.Node({loc: [3, 3]}),
+                d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [c.id, d.id]}),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
         });
 
         specify("invalid geometry: unclosed ring consisting of multiple ways, alternate order", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
-                d  = iD.Node(),
+            var a  = iD.Node({loc: [1, 1]}),
+                b  = iD.Node({loc: [2, 2]}),
+                c  = iD.Node({loc: [3, 3]}),
+                d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [c.id, d.id]}),
                 w2 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
         });
 
         specify("invalid geometry: unclosed ring consisting of multiple ways, one needing reversal", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
-                d  = iD.Node(),
+            var a  = iD.Node({loc: [1, 1]}),
+                b  = iD.Node({loc: [2, 2]}),
+                c  = iD.Node({loc: [3, 3]}),
+                d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [d.id, c.id]}),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
         });
 
         specify("invalid geometry: unclosed ring consisting of multiple ways, one needing reversal, alternate order", function () {
@@ -259,7 +287,7 @@ describe('iD.Relation', function () {
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, d]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
         });
 
         specify("single polygon with single single-way inner", function () {
@@ -274,7 +302,7 @@ describe('iD.Relation', function () {
                 r = iD.Relation({members: [{id: outer.id, type: 'way'}, {id: inner.id, role: 'inner', type: 'way'}]}),
                 g = iD.Graph([a, b, c, d, e, f, outer, inner, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, a], [d, e, f, d]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
         });
 
         specify("single polygon with single multi-way inner", function () {
@@ -293,7 +321,7 @@ describe('iD.Relation', function () {
                     {id: inner1.id, role: 'inner', type: 'way'}]}),
                 graph = iD.Graph([a, b, c, d, e, f, outer, inner1, inner2, r]);
 
-            expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d]]]);
+            expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
         });
 
         specify("single polygon with multiple single-way inners", function () {
@@ -315,7 +343,7 @@ describe('iD.Relation', function () {
                     {id: inner1.id, role: 'inner', type: 'way'}]}),
                 graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer, inner1, inner2, r]);
 
-            expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d], [g, h, i, g]]]);
+            expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc], [g.loc, h.loc, i.loc, g.loc]]]);
         });
 
         specify("multiple polygons with single single-way inner", function () {
@@ -337,30 +365,30 @@ describe('iD.Relation', function () {
                     {id: inner.id, role: 'inner', type: 'way'}]}),
                 graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer1, outer2, inner, r]);
 
-            expect(r.multipolygon(graph)).to.eql([[[a, b, c, a], [d, e, f, d]], [[g, h, i, g]]]);
+            expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]], [[g.loc, h.loc, i.loc, g.loc]]]);
         });
 
         specify("invalid geometry: unmatched inner", function () {
-            var a = iD.Node(),
-                b = iD.Node(),
-                c = iD.Node(),
+            var a = iD.Node({loc: [1, 1]}),
+                b = iD.Node({loc: [2, 2]}),
+                c = iD.Node({loc: [3, 3]}),
                 w = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
                 r = iD.Relation({members: [{id: w.id, role: 'inner', type: 'way'}]}),
                 g = iD.Graph([a, b, c, w, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c, a]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         specify("incomplete relation", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
+            var a = iD.Node({loc: [1, 1]}),
+                b = iD.Node({loc: [2, 2]}),
+                c = iD.Node({loc: [3, 3]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way(),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, w1, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a, b, c]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc]]]);
         });
     });
 });

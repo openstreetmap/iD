@@ -1,5 +1,6 @@
 iD.behavior.DragNode = function(context) {
-    var nudgeInterval;
+    var nudgeInterval,
+        wasMidpoint;
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -35,6 +36,23 @@ iD.behavior.DragNode = function(context) {
     }
 
     function start(entity) {
+
+        wasMidpoint = entity.type === 'midpoint';
+        if (wasMidpoint) {
+            var midpoint = entity;
+            entity = iD.Node();
+            context.perform(iD.actions.AddMidpoint(midpoint, entity));
+
+             var vertex = context.surface()
+                .selectAll('.vertex')
+                .filter(function(d) { return d.id === entity.id; });
+             behavior.target(vertex.node(), entity);
+
+        } else {
+            context.perform(
+                iD.actions.Noop());
+        }
+
         var activeIDs = _.pluck(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
 
@@ -43,9 +61,6 @@ iD.behavior.DragNode = function(context) {
             .selectAll('.node, .way')
             .filter(function (d) { return activeIDs.indexOf(d.id) >= 0; })
             .classed('active', true);
-
-        context.perform(
-            iD.actions.Noop());
     }
 
     function datum() {
@@ -66,7 +81,7 @@ iD.behavior.DragNode = function(context) {
         var loc = context.map().mouseCoordinates();
 
         var d = datum();
-        if (d.type === 'node') {
+        if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way') {
             loc = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context).loc;
@@ -96,6 +111,11 @@ iD.behavior.DragNode = function(context) {
                 iD.actions.Connect([entity.id, d.id]),
                 connectAnnotation(d));
 
+        } else if (wasMidpoint) {
+            context.replace(
+                iD.actions.Noop(),
+                t('operations.add.annotation.vertex'));
+
         } else {
             context.replace(
                 iD.actions.Noop(),
@@ -103,10 +123,12 @@ iD.behavior.DragNode = function(context) {
         }
     }
 
-    return iD.behavior.drag()
-        .delegate("g.node")
+    var behavior = iD.behavior.drag()
+        .delegate("g.node, g.midpoint")
         .origin(origin)
         .on('start', start)
         .on('move', move)
         .on('end', end);
+
+    return behavior;
 };

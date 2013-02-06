@@ -27,5 +27,17 @@ iD.svg = {
                     return projection(n.loc);
                 }).join('L'));
         };
+    },
+
+    MultipolygonMemberTags: function (graph) {
+        return function (entity) {
+            var tags = entity.tags;
+            graph.parentRelations(entity).forEach(function (relation) {
+                if (relation.isMultipolygon()) {
+                    tags = _.extend({}, relation.tags, tags);
+                }
+            });
+            return tags;
+        }
     }
 };

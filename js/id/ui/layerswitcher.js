@@ -108,7 +108,13 @@ iD.ui.layerswitcher = function(context) {
                 d = configured;
             }
             context.background().source(d);
-            context.history().imagery_used(d.data.sourcetag || d.data.name);
+            if (d.data.name === 'Custom (customized)') {
+                context.history()
+                    .imagery_used('Custom (' + d.data.template + ')');
+            } else {
+                context.history()
+                    .imagery_used(d.data.sourcetag || d.data.name);
+            }
             context.redraw();
             selectLayer(d);
         }

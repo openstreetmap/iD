@@ -52,7 +52,6 @@
     <script src="../js/id/svg/lines.js"></script>
     <script src="../js/id/svg/member_classes.js"></script>
     <script src="../js/id/svg/midpoints.js"></script>
-    <script src="../js/id/svg/multipolygons.js"></script>
     <script src="../js/id/svg/points.js"></script>
     <script src="../js/id/svg/surface.js"></script>
     <script src="../js/id/svg/tag_classes.js"></script>
@@ -96,7 +95,6 @@
     <script src='../js/id/behavior.js'></script>
     <script src='../js/id/behavior/add_way.js'></script>
     <script src='../js/id/behavior/drag.js'></script>
-    <script src='../js/id/behavior/drag_midpoint.js'></script>
     <script src='../js/id/behavior/drag_node.js'></script>
     <script src='../js/id/behavior/draw.js'></script>
     <script src='../js/id/behavior/draw_way.js'></script>
@@ -142,7 +140,7 @@
         iD.debug = true;
         mocha.setup({
             ui: 'bdd',
-            globals: ['__onresize.tail-size']
+            globals: ['__onresize.tail-size', '__onmousemove.zoom', '__onmouseup.zoom', '__onclick.draw']
         });
         var expect = chai.expect;
     </script>
@@ -187,7 +185,6 @@
     <script src="spec/svg/lines.js"></script>
     <script src="spec/svg/member_classes.js"></script>
     <script src="spec/svg/midpoints.js"></script>
-    <script src="spec/svg/multipolygons.js"></script>
     <script src="spec/svg/points.js"></script>
     <script src="spec/svg/vertices.js"></script>
     <script src="spec/svg/tag_classes.js"></script>

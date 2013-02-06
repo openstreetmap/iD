@@ -26,7 +26,7 @@ _.extend(iD.Relation.prototype, {
     },
 
     geometry: function() {
-        return 'relation';
+        return this.isMultipolygon() ? 'area' : 'relation';
     },
 
     // Return the first member with the given role. A copy of the member object
@@ -81,6 +81,31 @@ _.extend(iD.Relation.prototype, {
         };
         if (changeset_id) r.relation['@changeset'] = changeset_id;
         return r;
+    },
+
+    asGeoJSON: function(resolver) {
+        if (this.isMultipolygon()) {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'MultiPolygon',
+                    coordinates: this.multipolygon(resolver)
+                }
+            };
+        } else {
+            return {
+                type: 'FeatureCollection',
+                properties: this.tags,
+                features: this.members.map(function(member) {
+                    return _.extend({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
+                })
+            };
+        }
+    },
+
+    isMultipolygon: function() {
+        return this.tags.type === 'multipolygon';
     },
 
     isRestriction: function() {
@@ -145,22 +170,20 @@ _.extend(iD.Relation.prototype, {
                 }
             }
 
-            return joined;
+            return joined.map(function (nodes) { return _.pluck(nodes, 'loc'); });
         }
 
         function findOuter(inner) {
             var o, outer;
 
-            inner = _.pluck(inner, 'loc');
-
             for (o = 0; o < outers.length; o++) {
-                outer = _.pluck(outers[o], 'loc');
+                outer = outers[o];
                 if (iD.geo.polygonContainsPolygon(outer, inner))
                     return o;
             }
 
             for (o = 0; o < outers.length; o++) {
-                outer = _.pluck(outers[o], 'loc');
+                outer = outers[o];
                 if (iD.geo.polygonIntersectsPolygon(outer, inner))
                     return o;
             }

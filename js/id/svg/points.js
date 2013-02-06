@@ -79,7 +79,7 @@ iD.svg.Points.imageIndex = [
     },
     {
         tags: { man_made: 'lighthouse' },
-        icon: 'lighthouselevel_crossing'
+        icon: 'lighthouse'
     },
     {
         tags: { natural: 'peak' },
