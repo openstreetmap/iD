@@ -14,14 +14,16 @@ var censor = {
 };
 
 var replace = {
-    'OSM - Mapnik': 'OpenStreetMap'
+    'OSM - Mapnik': 'OpenStreetMap',
+    'National Agriculture Imagery Program': 'NAIP'
 };
 
 var description = {
     'MapBox Satellite': 'Satellite and aerial imagery',
     'OpenStreetMap': 'The default OpenStreetMap layer.',
     'OSM US TIGER 2012 Roads Overlay': 'Public domain road data from the US Government.',
-    'Bing aerial imagery': 'Satellite imagery.'
+    'Bing aerial imagery': 'Satellite imagery.',
+    'NAIP': 'National Agriculture Imagery Program'
 };
 
 var scaleExtent = {
@@ -39,7 +41,11 @@ $('set').each(function(i) {
         template: $(this).find('url').first().text()
     };
 
+    // no luck with mapquest servers currently...
+    if (im.template.match(/mapquest/g)) return;
     if (censor[im.name]) return;
+
+    im.name = im.name.replace('OSM US', '');
 
     if (replace[im.name]) im.name = replace[im.name];
 

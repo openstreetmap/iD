@@ -122,10 +122,16 @@ iD.ui.layerswitcher = function(context) {
                     .text(function(d) {
                         return d.data.name;
                     })
-                    .call(bootstrap.tooltip().placement('right'))
+                    .each(function(d) {
+                        // only set tooltips for layers with tooltips
+                        if (d.data.description) {
+                            d3.select(this).call(bootstrap.tooltip().placement('right'));
+                        }
+                    })
                     .on('click.set-source', clickSetSource)
                     .insert('span')
                     .attr('class','icon toggle');
+            selectLayer(context.background().source());
         }
 
         context.map().on('move.layerswitcher-update', _.debounce(update, 1000));

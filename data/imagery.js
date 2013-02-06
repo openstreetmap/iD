@@ -42,55 +42,8 @@ iD.data.imagery = [
         ]
     },
     {
-        "name": "OSM - Tiger Edited Map",
-        "template": "http://tiger-osm.mapquest.com/tiles/1.0.0/tiger/{z}/{x}/{y}.png",
-        "extent": [
-            [
-                -124.81,
-                24.055
-            ],
-            [
-                -66.865,
-                49.386
-            ]
-        ]
-    },
-    {
-        "name": "OSM - Tiger Edited Map",
-        "template": "http://tiger-osm.mapquest.com/tiles/1.0.0/tiger/{z}/{x}/{y}.png",
-        "extent": [
-            [
-                -179.754,
-                50.858
-            ],
-            [
-                -129.899,
-                71.463
-            ]
-        ]
-    },
-    {
-        "name": "OSM - Tiger Edited Map",
-        "template": "http://tiger-osm.mapquest.com/tiles/1.0.0/tiger/{z}/{x}/{y}.png",
-        "extent": [
-            [
-                -174.46,
-                18.702
-            ],
-            [
-                -154.516,
-                26.501
-            ]
-        ]
-    },
-    {
-        "name": "OSM US TIGER 2012 Roads Overlay",
+        "name": " TIGER 2012 Roads Overlay",
         "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
-        "description": "Public domain road data from the US Government.",
-        "scaleExtent": [
-            0,
-            17
-        ],
         "subdomains": [
             "a",
             "b",
@@ -108,13 +61,8 @@ iD.data.imagery = [
         ]
     },
     {
-        "name": "OSM US TIGER 2012 Roads Overlay",
+        "name": " TIGER 2012 Roads Overlay",
         "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
-        "description": "Public domain road data from the US Government.",
-        "scaleExtent": [
-            0,
-            17
-        ],
         "subdomains": [
             "a",
             "b",
@@ -132,13 +80,8 @@ iD.data.imagery = [
         ]
     },
     {
-        "name": "OSM US TIGER 2012 Roads Overlay",
+        "name": " TIGER 2012 Roads Overlay",
         "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
-        "description": "Public domain road data from the US Government.",
-        "scaleExtent": [
-            0,
-            17
-        ],
         "subdomains": [
             "a",
             "b",
@@ -156,7 +99,7 @@ iD.data.imagery = [
         ]
     },
     {
-        "name": "OSM US USGS Topographic Maps",
+        "name": " USGS Topographic Maps",
         "template": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
         "subdomains": [
             "a",
@@ -175,7 +118,7 @@ iD.data.imagery = [
         ]
     },
     {
-        "name": "OSM US USGS Topographic Maps",
+        "name": " USGS Topographic Maps",
         "template": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
         "subdomains": [
             "a",
@@ -194,7 +137,7 @@ iD.data.imagery = [
         ]
     },
     {
-        "name": "OSM US USGS Topographic Maps",
+        "name": " USGS Topographic Maps",
         "template": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
         "subdomains": [
             "a",
@@ -213,7 +156,7 @@ iD.data.imagery = [
         ]
     },
     {
-        "name": "OSM US USGS Large Scale Aerial Imagery",
+        "name": " USGS Large Scale Aerial Imagery",
         "template": "http://{t}.tile.openstreetmap.us/usgs_large_scale/{z}/{x}/{y}.jpg",
         "subdomains": [
             "a",
@@ -453,8 +396,9 @@ iD.data.imagery = [
         "sourcetag": "Haiti streetnames"
     },
     {
-        "name": "National Agriculture Imagery Program",
+        "name": "NAIP",
         "template": "http://cube.telascience.org/tilecache/tilecache.py/NAIP_ALL/{z}/{x}/{y}.png",
+        "description": "National Agriculture Imagery Program",
         "extent": [
             [
                 -125.8,
@@ -468,8 +412,9 @@ iD.data.imagery = [
         "sourcetag": "NAIP"
     },
     {
-        "name": "National Agriculture Imagery Program",
+        "name": "NAIP",
         "template": "http://cube.telascience.org/tilecache/tilecache.py/NAIP_ALL/{z}/{x}/{y}.png",
+        "description": "National Agriculture Imagery Program",
         "extent": [
             [
                 -168.5,
