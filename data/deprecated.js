@@ -108,13 +108,5 @@ iD.data.deprecated = [
             shop: 'supermarket',
             organic: 'only'
         }
-    },
-    // entirely discarded tags
-    { old: { 'tiger:upload_uuid': '*' } },
-    { old: { 'tiger:tlid': '*' } },
-    { old: { 'tiger:source': '*' } },
-    { old: { 'tiger:separated': '*' } },
-    { old: { 'geobase:datasetName': '*' } },
-    { old: { 'geobase:uuid': '*' } },
-    { old: { 'sub_sea:type': '*' } }
+    }
 ];

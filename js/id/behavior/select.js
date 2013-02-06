@@ -42,7 +42,7 @@ iD.behavior.Select = function(context) {
                         selection.on('mousemove.select', null);
                     };
                 // save the event for the click handler
-                })(d3.event), 400);
+                })(d3.event), 200);
             }
         }
 
