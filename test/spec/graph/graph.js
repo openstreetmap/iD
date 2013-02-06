@@ -196,10 +196,16 @@ describe('iD.Graph', function() {
     });
 
     describe("#replace", function () {
+        it("is a no-op if the replacement is identical to the existing entity", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(graph.replace(node)).to.equal(graph);
+        });
+
         it("returns a new graph", function () {
             var node = iD.Node(),
                 graph = iD.Graph([node]);
-            expect(graph.replace(node)).not.to.equal(graph);
+            expect(graph.replace(node.update())).not.to.equal(graph);
         });
 
         it("doesn't modify the receiver", function () {
@@ -257,7 +263,6 @@ describe('iD.Graph', function() {
             graph = iD.Graph([node, r1]);
             expect(graph.replace(r1).parentRelations(node)).to.eql([r1]);
         });
-
     });
 
     describe("#update", function () {

@@ -189,6 +189,9 @@ iD.Graph.prototype = {
     },
 
     replace: function(entity) {
+        if (this.entities[entity.id] === entity)
+            return this;
+
         return this.update(function () {
             this._updateCalculated(this.entities[entity.id], entity);
             this.entities[entity.id] = entity;
