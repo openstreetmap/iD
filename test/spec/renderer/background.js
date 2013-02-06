@@ -27,27 +27,21 @@ describe('iD.Background', function() {
         });
     });
 
-    describe('iD.BackgroundSource.Bing', function() {
-        it('generates tiles', function() {
-            expect(iD.BackgroundSource.Bing([0,0,0])).to.equal('http://ecn.t0.tiles.virtualearth.net/tiles/a.jpeg?g=587&mkt=en-gb&n=z');
-        });
-    });
-
     describe('iD.BackgroundSource.Template', function() {
         it('does not error with blank template', function() {
-            var source = iD.BackgroundSource.template('');
+            var source = iD.BackgroundSource.template({ template: '' });
             expect(source([0,1,2])).to.equal('');
         });
         it('generates a tile-generating source', function() {
-            var source = iD.BackgroundSource.template('{z}/{x}/{y}');
+            var source = iD.BackgroundSource.template({ template: '{z}/{x}/{y}' });
             expect(source([0,1,2])).to.equal('2/0/1');
         });
         it('supports subdomains', function() {
-            var source = iD.BackgroundSource.template('{t}/{z}/{x}/{y}', ['apples', 'oranges']);
+            var source = iD.BackgroundSource.template({ template: '{t}/{z}/{x}/{y}', subdomains: ['apples', 'oranges'] });
             expect(source([0,1,2])).to.equal('apples/2/0/1');
         });
         it('distributes requests between subdomains', function() {
-            var source = iD.BackgroundSource.template('{t}/{z}/{x}/{y}', ['apples', 'oranges']);
+            var source = iD.BackgroundSource.template({ template: '{t}/{z}/{x}/{y}', subdomains: ['apples', 'oranges'] });
             expect(source([0,1,1])).to.equal('oranges/1/0/1');
         });
     });
