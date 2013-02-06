@@ -112,13 +112,14 @@ describe("iD.actions.Join", function () {
                 'b': iD.Node({id: 'b'}),
                 'c': iD.Node({id: 'c'}),
                 '-': iD.Way({id: '-', nodes: ['b', 'a']}),
-                '=': iD.Way({id: '=', nodes: ['b', 'c']})
+                '=': iD.Way({id: '=', nodes: ['b', 'c'], tags: {'lanes:forward': 2}})
             });
 
         graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
         expect(graph.entity('=')).to.be.undefined;
+        expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
     it("joins a --> b <== c", function () {
@@ -130,13 +131,14 @@ describe("iD.actions.Join", function () {
                 'b': iD.Node({id: 'b'}),
                 'c': iD.Node({id: 'c'}),
                 '-': iD.Way({id: '-', nodes: ['a', 'b']}),
-                '=': iD.Way({id: '=', nodes: ['c', 'b']})
+                '=': iD.Way({id: '=', nodes: ['c', 'b'], tags: {'lanes:forward': 2}})
             });
 
         graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('=')).to.be.undefined;
+        expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
     it("merges tags", function () {
