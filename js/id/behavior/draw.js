@@ -27,12 +27,18 @@ iD.behavior.Draw = function(context) {
 
         target.on('mousemove.draw', null);
 
-        d3.select(window).on('click.draw', function() {
+        d3.select(window).on('mouseup.draw', function() {
             target.on('mousemove.draw', mousemove);
             if (iD.geo.dist(pos, point()) < closeTolerance ||
                 (iD.geo.dist(pos, point()) < tolerance &&
                 (+new Date() - time) < 500)) {
                 click();
+            }
+            if (target.node() === d3.event.target) {
+                d3.select(window).on('click.draw', function() {
+                    d3.select(window).on('click.draw', null);
+                    d3.event.stopPropagation();
+                });
             }
         });
     }
@@ -110,7 +116,7 @@ iD.behavior.Draw = function(context) {
             .on('mousedown.draw', null)
             .on('mousemove.draw', null);
 
-        d3.select(window).on('click.draw', null);
+        d3.select(window).on('mouseup.draw', null);
 
         d3.select(document)
             .call(keybinding.off)
