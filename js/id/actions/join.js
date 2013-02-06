@@ -10,7 +10,7 @@ iD.actions.Join = function(idA, idB) {
     var action = function(graph) {
         var a = graph.entity(idA),
             b = graph.entity(idB),
-            nodes, tags;
+            nodes;
 
         if (a.first() === b.first()) {
             // a <-- b ==> c
@@ -37,14 +37,9 @@ iD.actions.Join = function(idA, idB) {
             nodes = a.nodes.concat(b.nodes.slice().reverse().slice(1));
         }
 
-        graph.parentRelations(b)
-            .forEach(function (parent) {
-                var memberA = parent.memberById(idA),
-                    memberB = parent.memberById(idB);
-                if (!memberA) {
-                    graph = graph.replace(parent.addMember({id: idA, role: memberB.role, type: 'way'}));
-                }
-            });
+        graph.parentRelations(b).forEach(function (parent) {
+            graph = graph.replace(parent.replaceMember(b, a));
+        });
 
         graph = graph.replace(a.mergeTags(b.tags).update({nodes: nodes}));
         graph = iD.actions.DeleteWay(idB)(graph);
