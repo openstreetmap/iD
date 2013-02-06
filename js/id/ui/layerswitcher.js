@@ -125,7 +125,7 @@ iD.ui.layerswitcher = function(context) {
                             var configured = d.source();
                             if (!configured) return;
                             d.source = configured;
-                            d.name = 'Custom (configured)';
+                            d.name = 'Custom (' + d.source.template + ')';
                         }
                         context.background().source(d.source);
                         context.history().imagery_used(d.name);
