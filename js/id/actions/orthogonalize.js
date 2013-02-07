@@ -1,9 +1,14 @@
+/*
+ * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
+ */
+
 iD.actions.Orthogonalize = function(wayId, projection) {
     var action = function(graph) {
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
             points = nodes.map(function(n) { return projection(n.loc); }),
-            quad_nodes = [], i, j;
+            quad_nodes = [],
+            best, i, j;
 
         var score = squareness();
         for (i = 0; i < 1000; i++) {
@@ -12,14 +17,15 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                 points[j] = addPoints(points[j],motions[j]);
             }
             var newScore = squareness();
-            if (newScore > score) {
-                return graph;
+            if (newScore < score) {
+                best = _.clone(points);
+                score = newScore;
             }
-            score = newScore;
             if (score < 1.0e-8) {
                 break;
             }
         }
+        points = best;
 
         for (i = 0; i < points.length - 1; i++) {
             quad_nodes.push(iD.Node({ loc: projection.invert(points[i]) }));
