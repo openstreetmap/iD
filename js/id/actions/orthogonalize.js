@@ -28,36 +28,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
         points = best;
 
         for (i = 0; i < points.length - 1; i++) {
-            quad_nodes.push(iD.Node({ loc: projection.invert(points[i]) }));
-        }
-
-        for (i = 0; i < nodes.length; i++) {
-            if (graph.parentWays(nodes[i]).length > 1) {
-                var closest, closest_dist = Infinity, dist;
-                for (j = 0; j < quad_nodes.length; j++) {
-                    dist = iD.geo.dist(quad_nodes[j].loc, nodes[i].loc);
-                    if (dist < closest_dist) {
-                        closest_dist = dist;
-                        closest = j;
-                    }
-                }
-                quad_nodes.splice(closest, 1, nodes[i]);
-            }
-        }
-
-        for (i = 0; i < quad_nodes.length; i++) {
-            graph = graph.replace(quad_nodes[i]);
-        }
-
-        var ids = _.pluck(quad_nodes, 'id'),
-            difference = _.difference(_.uniq(way.nodes), ids);
-
-        ids.push(ids[0]);
-
-        graph = graph.replace(way.update({nodes: ids}));
-
-        for (i = 0; i < difference.length; i++) {
-            graph = iD.actions.DeleteNode(difference[i])(graph);
+            graph = graph.replace(graph.entity(nodes[i].id).move(projection.invert(points[i])));
         }
 
         return graph;
