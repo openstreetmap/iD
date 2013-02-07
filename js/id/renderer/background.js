@@ -63,7 +63,7 @@ iD.Background = function() {
         var sel = this,
             tiles = tile
             .scale(projection.scale())
-            .scaleExtent(source.scaleExtent || [1, 17])
+            .scaleExtent(source.data.scaleExtent || [1, 17])
             .translate(projection.translate())(),
             requests = [],
             scaleExtent = tile.scaleExtent(),
