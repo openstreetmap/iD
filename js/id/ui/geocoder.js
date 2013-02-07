@@ -12,7 +12,7 @@ iD.ui.geocoder = function() {
                 if (err) return hide();
                 hide();
                 if (!resp.length) {
-                    return iD.ui.flash()
+                    return iD.ui.flash(context.container())
                         .select('.content')
                         .append('h3')
                         .text('No location found for "' + searchVal + '"');
