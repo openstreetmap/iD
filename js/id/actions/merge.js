@@ -6,8 +6,8 @@ iD.actions.Merge = function(ids) {
 
     var action = function(graph) {
         var geometries = groupEntitiesByGeometry(graph),
-            area = geometries['area'][0],
-            points = geometries['point'];
+            area = geometries.area[0],
+            points = geometries.point;
 
         points.forEach(function (point) {
             area = area.mergeTags(point.tags);
@@ -26,9 +26,9 @@ iD.actions.Merge = function(ids) {
 
     action.enabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
-        return geometries['area'].length === 1 &&
-            geometries['point'].length > 0 &&
-            (geometries['area'].length + geometries['point'].length) === ids.length;
+        return geometries.area.length === 1 &&
+            geometries.point.length > 0 &&
+            (geometries.area.length + geometries.point.length) === ids.length;
     };
 
     return action;
