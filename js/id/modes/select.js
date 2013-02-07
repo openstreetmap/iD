@@ -42,6 +42,10 @@ iD.modes.Select = function(context, selection, initial) {
             .filter(function(o) { return o.available(); });
         operations.unshift(iD.operations.Delete(selection, context));
 
+        keybinding.on('⎋', function() {
+            context.enter(iD.modes.Browse(context));
+        });
+
         operations.forEach(function(operation) {
             keybinding.on(operation.key, function() {
                 if (operation.enabled()) {

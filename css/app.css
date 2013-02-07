@@ -93,7 +93,6 @@ a:hover {
     color:#597be7;
 }
 
-
 textarea,
 input[type=text] {
     background-color: white;
@@ -186,6 +185,8 @@ ul.toggle-list li a {
     border-top: 1px solid white;
     display:block;
     border-top: 1px solid rgba(0, 0, 0, .5);
+    text-wrap:no-wrap;
+    overflow:hidden;
 }
 ul.toggle-list li a:hover { background-color: #ececec;}
 
@@ -685,6 +686,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .layerswitcher-control {
     top:190px;
+}
+
+.layerswitcher-control .map-overlay {
+    width:250px;
 }
 
 .nudge-container {
@@ -1393,6 +1398,13 @@ a.success-action {
             border-radius: 4px;
 }
 
+.lasso-box {
+    fill-opacity:0.2;
+    fill: #bde5aa;
+    stroke: #000;
+    stroke-width: 1;
+}
+
 /* Media Queries
 ------------------------------------------------------- */
 
@@ -1402,10 +1414,6 @@ a.success-action {
     .icon.icon-pre-text { margin-right: 0px;}
     .save .label, .apply .label, .cancel .label { display: block;}
 }
-
-
-
-
 
 div.combobox {
     width:155px;

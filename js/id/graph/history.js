@@ -132,9 +132,16 @@ iD.History = function(context) {
 
         changes: function() {
             var difference = history.difference();
+
+            function discardTags(entity) {
+                return entity.update({
+                    tags: _.omit(entity.tags, iD.data.discarded)
+                });
+            }
+
             return {
-                modified: difference.modified().map(iD.actions.DiscardTags),
-                created: difference.created().map(iD.actions.DiscardTags),
+                modified: difference.modified().map(discardTags),
+                created: difference.created().map(discardTags),
                 deleted: difference.deleted()
             };
         },

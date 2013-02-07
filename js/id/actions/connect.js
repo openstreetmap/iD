@@ -30,11 +30,7 @@ iD.actions.Connect = function(nodeIds) {
             });
 
             graph.parentRelations(node).forEach(function (parent) {
-                var memberA = parent.memberById(survivor.id),
-                    memberB = parent.memberById(node.id);
-                if (!memberA) {
-                    graph = graph.replace(parent.addMember({id: survivor.id, role: memberB.role, type: 'node'}));
-                }
+                graph = graph.replace(parent.replaceMember(node, survivor));
             });
 
             survivor = survivor.mergeTags(node.tags);

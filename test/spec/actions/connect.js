@@ -99,7 +99,7 @@ describe("iD.actions.Connect", function() {
                 '-': iD.Way({id: '-', nodes: ['a', 'b']}),
                 '=': iD.Way({id: '=', nodes: ['c', 'd']}),
                 'r1': iD.Relation({id: 'r1', members: [{id: 'b', role: 'r1', type: 'node'}]}),
-                'r2': iD.Relation({id: 'r2', members: [{id: 'b', role: 'r1', type: 'node'}, {id: 'c', role: 'r2', type: 'node'}]})
+                'r2': iD.Relation({id: 'r2', members: [{id: 'b', role: 'r2', type: 'node'}, {id: 'c', role: 'r2', type: 'node'}]})
             });
 
         graph = iD.actions.Connect(['b', 'c'])(graph);

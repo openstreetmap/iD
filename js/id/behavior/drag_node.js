@@ -84,7 +84,11 @@ iD.behavior.DragNode = function(context) {
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way') {
-            loc = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context).loc;
+            var point = d3.mouse(context.surface().node()),
+                index = iD.geo.chooseIndex(d, point, context);
+            if (iD.geo.dist(point, context.projection(index.loc)) < 10) {
+                loc = index.loc;
+            }
         }
 
         context.replace(iD.actions.MoveNode(entity.id, loc));
@@ -100,13 +104,18 @@ iD.behavior.DragNode = function(context) {
 
         var d = datum();
         if (d.type === 'way') {
-            var choice = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context);
-            context.replace(
-                iD.actions.MoveNode(entity.id, choice.loc),
-                iD.actions.AddVertex(d.id, entity.id, choice.index),
-                connectAnnotation(d));
+            var point = d3.mouse(context.surface().node()),
+                choice = iD.geo.chooseIndex(d, point, context);
+            if (iD.geo.dist(point, context.projection(choice.loc)) < 10) {
+                context.replace(
+                    iD.actions.MoveNode(entity.id, choice.loc),
+                    iD.actions.AddVertex(d.id, entity.id, choice.index),
+                    connectAnnotation(d));
+                return;
+            }
+        }
 
-        } else if (d.type === 'node' && d.id !== entity.id) {
+        if (d.type === 'node' && d.id !== entity.id) {
             context.replace(
                 iD.actions.Connect([entity.id, d.id]),
                 connectAnnotation(d));

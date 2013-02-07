@@ -17,13 +17,13 @@ describe("iD.modes.AddPoint", function() {
     describe("clicking the map", function () {
         it("adds a node", function() {
             happen.mousedown(context.surface().node(), {});
-            happen.click(window, {});
+            happen.mouseup(window, {});
             expect(context.changes().created).to.have.length(1);
         });
 
         it("selects the node", function() {
             happen.mousedown(context.surface().node(), {});
-            happen.click(window, {});
+            happen.mouseup(window, {});
             expect(context.mode().id).to.equal('select');
             expect(context.mode().selection()).to.eql([context.changes().created[0].id]);
         });

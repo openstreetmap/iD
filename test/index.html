@@ -35,12 +35,17 @@
     <script src='../js/id/oauth.js'></script>
     <script src='../js/id/services/taginfo.js'></script>
 
+    <script src='../data/data.js'></script>
+    <script src='../data/deprecated.js'></script>
+    <script src='../data/imagery.js'></script>
+
     <script src="../js/id/geo.js"></script>
     <script src="../js/id/geo/extent.js"></script>
 
     <script src='../js/id/renderer/background.js'></script>
     <script src='../js/id/renderer/background_source.js'></script>
     <script src='../js/id/renderer/map.js'></script>
+    <script src='../js/id/renderer/layers.js'></script>
 
     <script src="../js/id/svg.js"></script>
     <script src="../js/id/svg/areas.js"></script>
@@ -62,6 +67,7 @@
     <script src='../js/id/ui/geocoder.js'></script>
     <script src='../js/id/ui/notice.js'></script>
     <script src='../js/id/ui/modal.js'></script>
+    <script src='../js/id/ui/lasso.js'></script>
     <script src='../js/id/ui/flash.js'></script>
     <script src='../js/id/ui/confirm.js'></script>
     <script src='../js/id/ui/splash.js'></script>
@@ -80,6 +86,7 @@
     <script src="../js/id/actions/delete_way.js"></script>
     <script src='../js/id/actions/disconnect.js'></script>
     <script src='../js/id/actions/join.js'></script>
+    <script src='../js/id/actions/merge.js'></script>
     <script src='../js/id/actions/move_node.js'></script>
     <script src='../js/id/actions/move_way.js'></script>
     <script src='../js/id/actions/noop.js'></script>
@@ -95,6 +102,7 @@
     <script src='../js/id/behavior/draw_way.js'></script>
     <script src='../js/id/behavior/hash.js'></script>
     <script src='../js/id/behavior/hover.js'></script>
+    <script src='../js/id/behavior/lasso.js'></script>
     <script src='../js/id/behavior/select.js'></script>
 
     <script src='../js/id/modes.js'></script>
@@ -130,17 +138,6 @@
     <script src='../locale/locale.js'></script>
     <script src='../locale/en.js'></script>
 
-    <script src='../data/data.js'></script>
-    <script src='../data/deprecated.js'></script>
-
-    <script>
-        iD.debug = true;
-        mocha.setup({
-            ui: 'bdd',
-            globals: ['__onresize.tail-size', '__onmousemove.zoom', '__onmouseup.zoom', '__onclick.draw']
-        });
-        var expect = chai.expect;
-    </script>
 
     <script src="spec/spec_helpers.js"></script>
 
@@ -157,6 +154,7 @@
     <script src="spec/actions/delete_way.js"></script>
     <script src='spec/actions/disconnect.js'></script>
     <script src="spec/actions/join.js"></script>
+    <script src='spec/actions/merge.js'></script>
     <script src="spec/actions/move_node.js"></script>
     <script src="spec/actions/move_way.js"></script>
     <script src="spec/actions/noop.js"></script>

@@ -163,7 +163,7 @@ iD.ui.inspector = function() {
                                 })
                                 .call(iD.keyReference(context));
                         } else {
-                            iD.ui.flash()
+                            iD.ui.flash(context.container())
                                 .select('.content')
                                 .append('h3')
                                 .text(t('inspector.no_documentation_key'));
