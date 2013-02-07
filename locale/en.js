@@ -140,13 +140,13 @@ locale.en = {
         deprecated_tags: "Deprecated tags: {tags}"
     },
 
-    "save": "Save",
-    "save_help": "Save changes to OpenStreetMap, making them visible to other users",
-    "no_changes": "You don't have any changes to save.",
-    "save_error": "An error occurred while trying to save",
-    "uploading_changes": "Uploading changes to OpenStreetMap.",
-    "just_edited": "You Just Edited OpenStreetMap!",
-    "okay": "Okay",
+    save: "Save",
+    save_help: "Save changes to OpenStreetMap, making them visible to other users",
+    no_changes: "You don't have any changes to save.",
+    save_error: "An error occurred while trying to save",
+    uploading_changes: "Uploading changes to OpenStreetMap.",
+    just_edited: "You Just Edited OpenStreetMap!",
+    okay: "Okay",
 
     "zoom-in": "Zoom In",
     "zoom-out": "Zoom Out",
@@ -154,7 +154,7 @@ locale.en = {
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
 
-    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
     inspector: {
         no_documentation_combination:  "This is no documentation available for this tag combination",
@@ -162,20 +162,20 @@ locale.en = {
         new_tag: "New Tag"
     },
 
-    "view_on_osm": "View on OSM",
+    view_on_osm: "View on OSM",
 
-    "zoom_in_edit": "zoom in to edit the map",
+    zoom_in_edit: "zoom in to edit the map",
 
-    "edit_tags": "Edit tags",
+    edit_tags: "Edit tags",
 
     geocoder: {
         "find_location": "Find A Location",
         "find_a_place": "find a place"
     },
 
-    "description": "Description",
+    description: "Description",
 
-    "logout": "logout",
+    logout: "logout",
 
     layerswitcher: {
         title: "Background",
