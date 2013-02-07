@@ -147,7 +147,10 @@
     </head>
     <body>
         <div id='iD'></div><script>
-            locale.current = 'en';
+            locale
+                .current('en')
+                .current(iD.detect().locale);
+
             d3.json('keys.json', function(err, keys) {
                 var id = iD();
 

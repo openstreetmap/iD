@@ -1,8 +1,14 @@
-var locale = { current: 'en' };
+var locale = { _current: 'en' };
+
+locale.current = function(_) {
+    if (!arguments.length) return locale._current;
+    if (locale[_] !== undefined) locale._current = _;
+    return locale;
+};
 
 function t(s, o) {
     var path = s.split(".").reverse(),
-        rep = locale[locale.current];
+        rep = locale[locale._current];
 
     while (rep !== undefined && path.length) rep = rep[path.pop()];
 
