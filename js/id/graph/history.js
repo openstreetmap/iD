@@ -134,9 +134,13 @@ iD.History = function(context) {
             var difference = history.difference();
 
             function discardTags(entity) {
-                return entity.update({
-                    tags: _.omit(entity.tags, iD.data.discarded)
-                });
+                if (_.isEmpty(entity.tags)) {
+                    return entity;
+                } else {
+                    return entity.update({
+                        tags: _.omit(entity.tags, iD.data.discarded)
+                    });
+                }
             }
 
             return {
