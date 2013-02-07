@@ -18,7 +18,11 @@ iD.History = function(context) {
             graph = actions[i](graph);
         }
 
-        return {graph: graph, annotation: annotation, imagery_used: imagery_used};
+        return {
+            graph: graph,
+            annotation: annotation,
+            imagery_used: imagery_used
+        };
     }
 
     function change(previous) {
@@ -128,9 +132,16 @@ iD.History = function(context) {
 
         changes: function() {
             var difference = history.difference();
+
+            function discardTags(entity) {
+                return entity.update({
+                    tags: _.omit(entity.tags, iD.data.discarded)
+                });
+            }
+
             return {
-                modified: difference.modified(),
-                created: difference.created(),
+                modified: difference.modified().map(discardTags),
+                created: difference.created().map(discardTags),
                 deleted: difference.deleted()
             };
         },
