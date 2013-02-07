@@ -1398,6 +1398,13 @@ a.success-action {
             border-radius: 4px;
 }
 
+.lasso-box {
+    fill-opacity:0.2;
+    fill: #bde5aa;
+    stroke: #000;
+    stroke-width: 1;
+}
+
 /* Media Queries
 ------------------------------------------------------- */
 
@@ -1407,10 +1414,6 @@ a.success-action {
     .icon.icon-pre-text { margin-right: 0px;}
     .save .label, .apply .label, .cancel .label { display: block;}
 }
-
-
-
-
 
 div.combobox {
     width:155px;
