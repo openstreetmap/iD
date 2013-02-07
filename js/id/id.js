@@ -125,6 +125,7 @@ iD.detect = function() {
     else if (nav('Mac')) browser.os = 'mac';
     else if (nav('X11')) browser.os = 'linux';
     else if (nav('Linux')) browser.os = 'linux';
+    else browser.os = 'win';
 
     return browser;
 };

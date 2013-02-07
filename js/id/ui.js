@@ -210,14 +210,20 @@ iD.ui = function(context) {
                 }
             }
 
+            var mod = {
+                'mac': '⌘',
+                'win': 'Ctrl',
+                'linux': 'Ctrl'
+            }[iD.detect().os];
+
             limiter.select('#undo')
                 .classed('disabled', !undo)
-                .attr('data-original-title', hintprefix('⌘ + Z', undo || t('nothing_to_undo')))
+                .attr('data-original-title', hintprefix(mod + ' + Z', undo || t('nothing_to_undo')))
                 .call(refreshTooltip);
 
             limiter.select('#redo')
                 .classed('disabled', !redo)
-                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo || t('nothing_to_redo')))
+                .attr('data-original-title', hintprefix(mod + ' + ⇧ + Z', redo || t('nothing_to_redo')))
                 .call(refreshTooltip);
         });
 
