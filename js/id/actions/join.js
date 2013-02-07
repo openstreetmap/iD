@@ -51,7 +51,7 @@ iD.actions.Join = function(ids) {
             graph = graph.replace(parent.replaceMember(b, a));
         });
 
-        graph = graph.replace(a.mergeTags(b.tags).update({nodes: nodes}));
+        graph = graph.replace(a.mergeTags(b.tags).update({ nodes: nodes }));
         graph = iD.actions.DeleteWay(idB)(graph);
 
         return graph;
@@ -60,7 +60,7 @@ iD.actions.Join = function(ids) {
     action.enabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
 
-        if (ids.length !== 2 || ids.length !== geometries['line'].length)
+        if (ids.length !== 2 || ids.length !== geometries.line.length)
             return false;
 
         var a = graph.entity(idA),
