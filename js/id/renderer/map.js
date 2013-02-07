@@ -42,6 +42,9 @@ iD.Map = function(context) {
                     d3.event.stopPropagation();
                 }
             }, true)
+            .on('mouseup.zoom', function() {
+                if (resetTransform) redraw();
+            })
             .attr('id', 'surface')
             .call(iD.svg.Surface());
 
