@@ -102,16 +102,29 @@ window.iD = function () {
 
 iD.version = '0.0.0-alpha1';
 
-iD.supported = function() {
-    if (navigator.appName !== 'Microsoft Internet Explorer') {
-        return true;
+iD.detect = function() {
+    var browser = {};
+
+    var ua = navigator.userAgent,
+        msie = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
+
+    if (msie.exec(ua) !== null) {
+        var rv = parseFloat(RegExp.$1);
+        browser.support = !(rv && rv < 9);
     } else {
-        var ua = navigator.userAgent;
-        var re = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
-        if (re.exec(ua) !== null) {
-            rv = parseFloat( RegExp.$1 );
-        }
-        if (rv && rv < 9) return false;
-        else return true;
+        browser.support = true;
     }
+
+    browser.locale = navigator.language;
+
+    function nav(x) {
+        return navigator.userAgent.indexOf(x) !== -1;
+    }
+
+    if (nav('Win')) browser.os = 'win';
+    else if (nav('Mac')) browser.os = 'mac';
+    else if (nav('X11')) browser.os = 'linux';
+    else if (nav('Linux')) browser.os = 'linux';
+
+    return browser;
 };

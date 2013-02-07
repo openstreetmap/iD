@@ -6,7 +6,7 @@ iD.ui = function(context) {
             history = context.history(),
             map = context.map();
 
-        if (!iD.supported()) {
+        if (!iD.detect().support) {
             container.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
                       'and Internet Explorer 9 and above. Please upgrade your browser ' +
                       'or use Potlatch 2 to edit the map.')
