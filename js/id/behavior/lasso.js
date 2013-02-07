@@ -28,25 +28,32 @@ iD.behavior.Lasso = function(context) {
             lasso.b(d3.mouse(context.surface().node()));
         }
 
+        function normalize(a, b) {
+            return [
+                [Math.min(a[0], b[0]), Math.min(a[1], b[1])],
+                [Math.max(a[0], b[0]), Math.max(a[1], b[1])]];
+        }
+
         function mouseup() {
             var extent = iD.geo.Extent(
-                context.projection.invert(lasso.a()),
-                context.projection.invert(lasso.b()));
+                normalize(context.projection.invert(lasso.a()),
+                context.projection.invert(lasso.b())));
 
             lasso.close();
 
             var selected = context.graph().intersects(extent);
 
+            selection
+                .on('mousemove.lasso', null)
+                .on('mouseup.lasso', null);
+
             if (selected.length) {
                 context.enter(iD.modes.Select(context, _.pluck(selected, 'id')));
             }
-
-            selection
-                .on('mousemove.lasso', null);
         }
 
         selection
-            .on('mousedown.select', mousedown);
+            .on('mousedown.lasso', mousedown);
     };
 
     behavior.off = function(selection) {
