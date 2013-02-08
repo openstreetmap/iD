@@ -22,8 +22,8 @@ iD.behavior.Select = function(context) {
 
         function mousedown() {
             var datum = d3.event.target.__data__;
+            pos = [d3.event.x, d3.event.y];
             if (datum instanceof iD.Entity || (datum && datum.type === 'midpoint')) {
-                pos = [d3.event.x, d3.event.y];
                 selection
                     .on('mousemove.select', mousemove)
                     .on('touchmove.select', mousemove);
@@ -46,8 +46,6 @@ iD.behavior.Select = function(context) {
                     // save the event for the click handler
                     })(d3.event), 200);
                 }
-            } else {
-                context.enter(iD.modes.Browse(context));
             }
         }
 
@@ -61,6 +59,10 @@ iD.behavior.Select = function(context) {
 
         function mouseup() {
             selection.on('mousemove.select', null);
+            if (d3.event.x === pos[0] && d3.event.y === pos[1] &&
+                !(d3.event.target.__data__ instanceof iD.Entity)) {
+                context.enter(iD.modes.Browse(context));
+            }
         }
 
         selection

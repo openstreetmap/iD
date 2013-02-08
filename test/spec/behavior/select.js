@@ -42,6 +42,7 @@ describe("iD.behavior.Select", function() {
         context.enter(iD.modes.Select(context, [a.id]));
         happen.click(context.surface().node());
         happen.mousedown(context.surface().node());
+        happen.mouseup(context.surface().node());
         window.setTimeout(function() {
             expect(context.selection()).to.eql([]);
             done();

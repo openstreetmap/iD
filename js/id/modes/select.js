@@ -9,6 +9,7 @@ iD.modes.Select = function(context, selection, initial) {
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.Select(context),
+            iD.behavior.Lasso(context),
             iD.behavior.DragNode(context)],
         radialMenu;
 
