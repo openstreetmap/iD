@@ -22,7 +22,7 @@ iD.behavior.Select = function(context) {
 
         function mousedown() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof iD.Entity) {
+            if (datum instanceof iD.Entity || (datum && datum.type === 'midpoint')) {
                 pos = [d3.event.x, d3.event.y];
                 selection
                     .on('mousemove.select', mousemove)
