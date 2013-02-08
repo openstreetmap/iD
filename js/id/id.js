@@ -18,7 +18,7 @@ window.iD = function () {
     // the connection requires .storage() to be available on calling.
     var connection = iD.Connection(context);
 
-    connection.on('load.context', function (err, result) {
+    connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
     });
 
