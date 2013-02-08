@@ -12,7 +12,7 @@ _.extend(iD.Node.prototype, {
     type: "node",
 
     extent: function() {
-        return iD.geo.Extent(this.loc);
+        return new iD.geo.Extent(this.loc);
     },
 
     geometry: function(graph) {

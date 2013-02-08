@@ -7,7 +7,7 @@ iD.svg = {
 
     PointTransform: function(projection) {
         return function(entity) {
-            return 'translate(' + projection(entity.loc) + ')';
+            return 'translate(' + projection(entity.loc).join(',') + ')';
         };
     },
 

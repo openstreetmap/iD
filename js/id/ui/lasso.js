@@ -22,7 +22,7 @@ iD.ui.lasso = function() {
     // top-left
     function topLeft(d) {
         return 'translate(' +
-            [Math.min(d[0][0], d[1][0]), Math.min(d[0][1], d[1][1])] + ')';
+            [Math.min(d[0][0], d[1][0]), Math.min(d[0][1], d[1][1])].join(',') + ')';
     }
 
     function width(d) { return Math.abs(d[0][0] - d[1][0]); }

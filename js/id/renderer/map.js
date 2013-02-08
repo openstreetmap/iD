@@ -301,7 +301,7 @@ iD.Map = function(context) {
 
     map.extent = function(_) {
         if (!arguments.length) {
-            return iD.geo.Extent(projection.invert([0, dimensions[1]]),
+            return new iD.geo.Extent(projection.invert([0, dimensions[1]]),
                                  projection.invert([dimensions[0], 0]));
         } else {
             var extent = iD.geo.Extent(_),
