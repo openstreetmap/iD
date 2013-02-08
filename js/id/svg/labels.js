@@ -82,7 +82,7 @@ iD.svg.Labels = function(projection) {
                 'startOffset': '50%',
                 'xlink:href': function(d, i) { return '#halo-' + d.id; }
             })
-            .text(function(d, i) { return d.tags.name; });
+            .text(function(d, i) { return name(d); });
 
         texts.exit().remove();
 
@@ -119,14 +119,14 @@ iD.svg.Labels = function(projection) {
             'x': function(d, i) {
                 var x = labels[i].x - 2;
                 if (labels[i].textAnchor === 'middle') {
-                    x -= textWidth(d.tags.name, labels[i].height) / 2;
+                    x -= textWidth(name(d), labels[i].height) / 2;
                 }
                 return x;
             },
             'y': function(d, i) { return labels[i].y - labels[i].height + 1 - 2; },
             'rx': 3,
             'ry': 3,
-            'width': function(d, i) { return textWidth(d.tags.name, labels[i].height) + 4; },
+            'width': function(d, i) { return textWidth(name(d), labels[i].height) + 4; },
             'height': function(d, i) { return labels[i].height + 4; },
             'fill': 'white'
         });
@@ -149,8 +149,8 @@ iD.svg.Labels = function(projection) {
             .attr('y', get(labels, 'y'))
             .attr('transform', get(labels, 'transform'))
             .style('text-anchor', get(labels, 'textAnchor'))
-            .text(function(d) { return d.tags.name; })
-            .each(function(d, i) { textWidth(d.tags.name, labels[i].height, this); });
+            .text(function(d) { return name(d); })
+            .each(function(d, i) { textWidth(name(d), labels[i].height, this); });
 
         texts.exit().remove();
         return texts;
@@ -233,8 +233,13 @@ iD.svg.Labels = function(projection) {
             .property('_opacity', 0);
     }
 
+    function name(d) {
+        return d.tags[lang] || d.tags.name;
+    }
+
     var rtree = new RTree(),
         rectangles = {},
+        lang = 'name:' + iD.detect().locale.toLowerCase().split('-')[0],
         mousePosition, cacheDimensions;
 
     return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
@@ -264,7 +269,7 @@ iD.svg.Labels = function(projection) {
         // Split entities into groups specified by label_stack
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
-            if (!entity.tags.name) continue;
+            if (!name(entity)) continue;
             if (hidePoints && entity.geometry(graph) === 'point') continue;
             for (k = 0; k < label_stack.length; k ++) {
                 if (entity.geometry(graph) === label_stack[k][0] &&
@@ -292,7 +297,7 @@ iD.svg.Labels = function(projection) {
             var font_size = font_sizes[k];
             for (i = 0; i < labelable[k].length; i ++) {
                 entity = labelable[k][i];
-                var width = textWidth(entity.tags.name, font_size),
+                var width = textWidth(name(entity), font_size),
                     p;
                 if (entity.geometry(graph) === 'point') {
                     p = getPointLabel(entity, width, font_size);
