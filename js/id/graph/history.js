@@ -175,7 +175,7 @@ iD.History = function(context) {
             if (!lock) return;
             context.storage(getKey('lock'), null);
 
-            if (!stack.length) {
+            if (stack.length <= 1) {
                 context.storage(getKey('history'), null);
                 context.storage(getKey('nextIDs'), null);
                 context.storage(getKey('index'), null);
@@ -183,9 +183,11 @@ iD.History = function(context) {
             }
 
             var json = JSON.stringify(stack.map(function(i) {
-                return _.extend(i, {
-                    graph: i.graph.entities
-                });
+                return {
+                    annotation: i.annotation,
+                    imagery_used: i.imagery_used,
+                    entities: i.graph.entities
+                }
             }));
 
             context.storage(getKey('history'), json);
@@ -201,8 +203,7 @@ iD.History = function(context) {
         },
 
         restorableChanges: function() {
-            if (!this.lock()) return false;
-            return !!context.storage(getKey('history'));
+            return lock && !!context.storage(getKey('history'));
         },
 
         load: function() {
@@ -221,7 +222,7 @@ iD.History = function(context) {
             context.storage(getKey('index', null));
 
             stack = JSON.parse(json).map(function(d, i) {
-                d.graph = iD.Graph(stack[0].graph).load(d.graph);
+                d.graph = iD.Graph(stack[0].graph).load(d.entities);
                 return d;
             });
             dispatch.change();

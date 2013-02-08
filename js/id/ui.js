@@ -193,11 +193,12 @@ iD.ui = function(context) {
         contributors.append('span')
             .attr('class', 'contributor-count');
 
+        window.onbeforeunload = function() {
+            history.save();
+            if (history.hasChanges()) return 'You have unsaved changes';
+        };
+
         history.on('change.editor', function() {
-            window.onbeforeunload = history.hasChanges() ? function() {
-                history.save();
-                return 'You have unsaved changes.';
-            } : null;
 
             var undo = history.undoAnnotation(),
                 redo = history.redoAnnotation();
@@ -264,7 +265,7 @@ iD.ui = function(context) {
             context.storage('sawSplash', true);
         }
 
-        if (history.restorableChanges()) {
+        if (history.lock() && history.restorableChanges()) {
             iD.ui.restore(context.container(), history);
         }
 
