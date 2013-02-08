@@ -112,8 +112,11 @@ iD.Background = function() {
             .each(function() {
                 var tile = this;
                 window.setTimeout(function() {
-                    tile.parentNode.removeChild(tile);
-                });
+                    // this tile may already be removed
+                    if (tile.parentNode) {
+                        tile.parentNode.removeChild(tile);
+                    }
+                }, 300);
             });
 
         image.enter().append('img')
