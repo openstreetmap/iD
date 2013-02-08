@@ -7,7 +7,9 @@ iD.svg = {
 
     PointTransform: function(projection) {
         return function(entity) {
-            return 'translate(' + projection(entity.loc).join(',') + ')';
+            // http://jsperf.com/short-array-join
+            var pt = projection(entity.loc);
+            return 'translate(' + pt[0] + ',' + pt[1] + ')';
         };
     },
 
@@ -24,7 +26,8 @@ iD.svg = {
 
             return (cache[entity.id] =
                 'M' + graph.childNodes(entity).map(function(n) {
-                    return projection(n.loc);
+                    var pt = projection(n.loc);
+                    return pt[0] + ',' + pt[1];
                 }).join('L'));
         };
     },
