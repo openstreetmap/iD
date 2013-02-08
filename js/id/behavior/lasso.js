@@ -10,6 +10,8 @@ iD.behavior.Lasso = function(context) {
         function mousedown() {
             if (d3.event.shiftKey === true) {
 
+                pos = [d3.event.x, d3.event.y];
+
                 lasso = iD.ui.lasso().a(d3.mouse(context.surface().node()));
 
                 context.surface().call(lasso);
@@ -35,20 +37,23 @@ iD.behavior.Lasso = function(context) {
         }
 
         function mouseup() {
+
             var extent = iD.geo.Extent(
                 normalize(context.projection.invert(lasso.a()),
                 context.projection.invert(lasso.b())));
 
             lasso.close();
 
-            var selected = context.graph().intersects(extent);
-
             selection
                 .on('mousemove.lasso', null)
                 .on('mouseup.lasso', null);
 
-            if (selected.length) {
-                context.enter(iD.modes.Select(context, _.pluck(selected, 'id')));
+            if (d3.event.x !== pos[0] || d3.event.y !== pos[1]) {
+                var selected = context.graph().intersects(extent);
+
+                if (selected.length) {
+                    context.enter(iD.modes.Select(context, _.pluck(selected, 'id')));
+                }
             }
         }
 
