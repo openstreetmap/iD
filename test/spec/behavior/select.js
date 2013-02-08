@@ -26,6 +26,7 @@ describe("iD.behavior.Select", function() {
 
     afterEach(function() {
         context.uninstall(behavior);
+        context.mode().exit();
         container.remove();
     });
 
