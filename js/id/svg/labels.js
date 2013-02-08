@@ -203,11 +203,13 @@ iD.svg.Labels = function(projection) {
 
     }
 
+
     function hideOnMouseover() {
-        var mouse = d3.mouse(this),
+        var mouse = mousePosition(d3.event),
             pad = 50,
             rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
             labels = _.pluck(rtree.search(rect, this), 'leaf'),
+            containsLabel = iD.util.trueObj(labels),
             selection = d3.select(this);
 
         selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
@@ -216,15 +218,18 @@ iD.svg.Labels = function(projection) {
         if (!labels.length) return;
         selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
             .filter(function(d) {
-                return _.contains(labels, d.id);
+                return containsLabel[d.id];
             })
             .style('opacity', 0);
     }
 
     var rtree = new RTree(),
-        rectangles = {};
+        rectangles = {},
+        mousePosition;
 
     return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
+
+        mousePosition = iD.util.fastMouse(surface.node().parentNode);
 
         d3.select(surface.node().parentNode)
             .on('mousemove.hidelabels', hideOnMouseover);

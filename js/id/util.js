@@ -75,4 +75,18 @@ iD.util.getStyle = function(selector) {
     }
 };
 
+// a d3.mouse-alike which
+// 1. Only works on HTML elements, not SVG
+// 2. Does not cause style recalculation
+iD.util.fastMouse = function(container) {
+    var rect = _.clone(container.getBoundingClientRect()),
+        clientLeft = +container.clientLeft,
+        clientTop = +container.clientTop;
+    return function(e) {
+        return [
+            e.clientX - rect.left - container.clientLeft,
+            e.clientY - rect.top - container.clientTop];
+    };
+};
+
 iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
