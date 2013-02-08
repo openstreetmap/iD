@@ -1,4 +1,4 @@
-iD.geo.Extent = function (min, max) {
+iD.geo.Extent = function geoExtent(min, max) {
     if (!(this instanceof iD.geo.Extent)) return new iD.geo.Extent(min, max);
     if (min instanceof iD.geo.Extent) {
         return min;
