@@ -59,7 +59,7 @@ iD.behavior.Select = function(context) {
 
         function mouseup() {
             selection.on('mousemove.select', null);
-            if (d3.event.x === pos[0] && d3.event.y === pos[1] &&
+            if (pos && d3.event.x === pos[0] && d3.event.y === pos[1] &&
                 !(d3.event.target.__data__ instanceof iD.Entity)) {
                 context.enter(iD.modes.Browse(context));
             }
