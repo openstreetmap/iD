@@ -12,16 +12,6 @@ iD.Background = function() {
         transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
-    var imgstyle = 'position:absolute;transform-origin:0 0;' +
-        '-ms-transform-origin:0 0;' +
-        '-webkit-transform-origin:0 0;' +
-        '-moz-transform-origin:0 0;' +
-        '-o-transform-origin:0 0;' +
-        '-webkit-user-select: none;' +
-        '-webkit-user-drag: none;' +
-        '-moz-user-drag: none;' +
-        'opacity:0;';
-
     function tileSizeAtZoom(d, z) {
         return Math.ceil(tileSize[0] * Math.pow(2, z - d[2])) / tileSize[0];
     }
@@ -92,8 +82,7 @@ iD.Background = function() {
             cache[d[3]] = true;
             d3.select(this)
                 .on('load', null)
-                .transition()
-                .style('opacity', 1);
+                .classed('tile-loaded', true);
             background.apply(sel);
         }
 
@@ -119,12 +108,16 @@ iD.Background = function() {
 
         image.exit()
             .style(transformProp, imageTransform)
-            .transition()
-            .style('opacity', 0)
-            .remove();
+            .classed('tile-loaded', false)
+            .each(function() {
+                var tile = this;
+                window.setTimeout(function() {
+                    tile.remove();
+                });
+            });
 
         image.enter().append('img')
-            .attr('style', imgstyle)
+            .attr('class', 'tile')
             .attr('src', function(d) { return d[3]; })
             .on('error', error)
             .on('load', load);
