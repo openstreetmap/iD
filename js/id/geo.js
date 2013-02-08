@@ -9,9 +9,10 @@ iD.geo.interp = function(p1, p2, t) {
             p1[1] + (p2[1] - p1[1]) * t];
 };
 
+// http://jsperf.com/id-dist-optimization
 iD.geo.dist = function(a, b) {
-    return Math.sqrt(Math.pow(a[0] - b[0], 2) +
-        Math.pow(a[1] - b[1], 2));
+    var x = a[0] - b[0], y = a[1] - b[1];
+    return Math.sqrt((x * x) + (y * y));
 };
 
 iD.geo.chooseIndex = function(way, point, context) {
