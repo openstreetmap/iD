@@ -19,6 +19,7 @@ describe("iD.modes.AddPoint", function() {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
             expect(context.changes().created).to.have.length(1);
+            context.mode().exit();
         });
 
         it("selects the node", function() {
@@ -26,13 +27,17 @@ describe("iD.modes.AddPoint", function() {
             happen.mouseup(window, {});
             expect(context.mode().id).to.equal('select');
             expect(context.mode().selection()).to.eql([context.changes().created[0].id]);
+            context.mode().exit();
         });
     });
 
     describe("pressing ⎋", function() {
-        it("exits to browse mode", function() {
+        it("exits to browse mode", function(done) {
             happen.keydown(document, {keyCode: 27});
-            expect(context.mode().id).to.equal('browse');
+            window.setTimeout(function() {
+                expect(context.mode().id).to.equal('browse');
+                done();
+            }, 200);
         });
     });
 });
