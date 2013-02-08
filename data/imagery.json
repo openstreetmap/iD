@@ -1,11 +1,17 @@
 [
     {
         "name": "Bing aerial imagery",
-        "template": "http://ecn.t0.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z",
+        "template": "http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z",
         "description": "Satellite imagery.",
         "scaleExtent": [
             0,
             20
+        ],
+        "subdomains": [
+            "0",
+            "1",
+            "2",
+            "3"
         ],
         "default": "yes",
         "sourcetag": "Bing",
@@ -25,7 +31,8 @@
             "a",
             "b",
             "c"
-        ]
+        ],
+        "terms_url": "http://mapbox.com/tos/"
     },
     {
         "name": "OpenStreetMap",
