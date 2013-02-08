@@ -212,15 +212,25 @@ iD.svg.Labels = function(projection) {
             containsLabel = iD.util.trueObj(labels),
             selection = d3.select(this);
 
+        // ensures that simply resetting opacity
+        // does not force style recalculation
+        function resetOpacity() {
+            if (this._opacity !== '') {
+                this.style.opacity = '';
+                this._opacity = '';
+            }
+        }
+
         selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
-            .style('opacity', '');
+            .each(resetOpacity);
 
         if (!labels.length) return;
         selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
             .filter(function(d) {
                 return containsLabel[d.id];
             })
-            .style('opacity', 0);
+            .style('opacity', 0)
+            .property('_opacity', 0);
     }
 
     var rtree = new RTree(),
