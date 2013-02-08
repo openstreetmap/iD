@@ -20,13 +20,7 @@ iD.actions.Connect = function(nodeIds) {
             var node = graph.entity(nodeIds[i]), index;
 
             graph.parentWays(node).forEach(function (parent) {
-                while (true) {
-                    index = parent.nodes.indexOf(node.id);
-                    if (index < 0)
-                        break;
-                    parent = parent.updateNode(survivor.id, index);
-                }
-                graph = graph.replace(parent);
+                graph = graph.replace(parent.replaceNode(node.id, survivor.id));
             });
 
             graph.parentRelations(node).forEach(function (parent) {

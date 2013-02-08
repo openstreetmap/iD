@@ -75,6 +75,19 @@ _.extend(iD.Way.prototype, {
         return this.update({nodes: nodes});
     },
 
+    replaceNode: function(needle, replacement) {
+        if (this.nodes.indexOf(needle) < 0)
+            return this;
+
+        var nodes = this.nodes.slice();
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i] === needle) {
+                nodes[i] = replacement;
+            }
+        }
+        return this.update({nodes: nodes});
+    },
+
     removeNode: function(id) {
         var nodes = _.without(this.nodes, id);
 
