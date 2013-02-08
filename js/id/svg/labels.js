@@ -225,11 +225,14 @@ iD.svg.Labels = function(projection) {
 
     var rtree = new RTree(),
         rectangles = {},
-        mousePosition;
+        mousePosition, cacheDimensions;
 
     return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
 
-        mousePosition = iD.util.fastMouse(surface.node().parentNode);
+        if (!mousePosition || dimensions.join(',') !== cacheDimensions) {
+            mousePosition = iD.util.fastMouse(surface.node().parentNode);
+            cacheDimensions = dimensions.join(',');
+        }
 
         d3.select(surface.node().parentNode)
             .on('mousemove.hidelabels', hideOnMouseover);
