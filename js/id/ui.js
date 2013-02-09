@@ -251,7 +251,11 @@ iD.ui = function(context) {
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
-            .on('↓', pan([0, -pa]));
+            .on('↓', pan([0, -pa]))
+            .on('⇧+=', function() { map.zoomIn(); })
+            .on('+', function() { map.zoomIn(); })
+            .on('-', function() { map.zoomOut(); })
+            .on('dash', function() { map.zoomOut(); });
 
         modes.forEach(function(m) {
             keybinding.on(m.key, function() { if (map.editable()) context.enter(m); });
