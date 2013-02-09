@@ -165,8 +165,11 @@ iD.ui = function(context) {
             .append('span')
                 .attr('class', 'provided-by');
 
-        linkList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
-            .text('dev')
+        linkList.append('li')
+            .attr('class', 'source-switch')
+            .append('a').attr('href', '#')
+            .text('live')
+            .classed('live', true)
             .on('click.editor', function() {
                 d3.event.preventDefault();
                 if (d3.select(this).classed('live')) {

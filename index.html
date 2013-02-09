@@ -155,8 +155,7 @@
                 var id = iD();
 
                 id.connection()
-                    .keys(keys)
-                    .url('http://api06.dev.openstreetmap.org');
+                    .keys(keys);
 
                 d3.select("#iD")
                     .call(id.ui())
