@@ -22,8 +22,8 @@ describe('iD.Background', function() {
         });
 
         it('#source', function() {
-            expect(c.source(iD.BackgroundSource.Bing)).to.equal(c);
-            expect(c.source()).to.equal(iD.BackgroundSource.Bing);
+            expect(c.source(iD.layers[0])).to.equal(c);
+            expect(c.source()).to.equal(iD.layers[0]);
         });
     });
 
