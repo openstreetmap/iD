@@ -17,6 +17,8 @@
 * [Read up on Contributing and the code style of iD](CONTRIBUTING.md)
 * See [open issues in the issue tracker](https://github.com/systemed/iD/issues?state=open) if you're looking for something to do
 
+## Installation
+
 To run the current development version, fork this project and serve it locally.
 If you have Python handy, just `cd` into the project root directory and run
 
