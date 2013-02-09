@@ -47,6 +47,14 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         context.enter(iD.modes.Browse(context));
     }
 
+    function lineActives(d) {
+        return d.id === segment.id || d.id === start.id || d.id === end.id;
+    }
+
+    function areaActives(d) {
+        return d.id === wayId || d.id === end.id;
+    }
+
     var drawWay = function(surface) {
         draw.on('move', move)
             .on('click', drawWay.add)
@@ -63,7 +71,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         surface.call(draw)
           .selectAll('.way, .node')
-            .filter(function (d) { return d.id === segment.id || d.id === start.id || d.id === end.id; })
+            .filter(isArea ? areaActives : lineActives)
             .classed('active', true);
 
         context.history()
