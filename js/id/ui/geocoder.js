@@ -32,7 +32,7 @@ iD.ui.geocoder = function() {
                             })
                             .append('a')
                             .text(function(d) {
-                                if (d.display_name > 80) {
+                                if (d.display_name.length > 80) {
                                     return d.display_name.substr(0, 80) + '…';
                                 } else {
                                     return d.display_name;
