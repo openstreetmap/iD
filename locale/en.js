@@ -169,8 +169,9 @@ locale.en = {
     edit_tags: "Edit tags",
 
     geocoder: {
-        "find_location": "Find A Location",
-        "find_a_place": "find a place"
+        title: "Find A Place",
+        placeholder: "find a place",
+        no_results: "Couldn't locate a place named '{name}'"
     },
 
     description: "Description",

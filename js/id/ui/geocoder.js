@@ -1,7 +1,4 @@
-iD.ui.geocoder = function() {
-
-    var map, context;
-
+iD.ui.geocoder = function(context) {
     function resultExtent(bounds) {
         return new iD.geo.Extent(
             [parseFloat(bounds[3]), parseFloat(bounds[0])],
@@ -20,7 +17,7 @@ iD.ui.geocoder = function() {
                         return iD.ui.flash(context.container())
                             .select('.content')
                             .append('h3')
-                            .text('No location found for "' + searchVal + '"');
+                            .text(t('geocoder.no_results', {name: searchVal}));
                     } else if (resp.length > 1) {
                         var spans = resultsList.selectAll('span')
                             .data(resp, function (d) { return d.place_id; });
@@ -53,19 +50,11 @@ iD.ui.geocoder = function() {
 
         function applyBounds(extent) {
             hide();
+            var map = context.map();
             map.extent(extent);
             if (map.zoom() > 19) map.zoom(19);
         }
 
-        function clickoutside(selection) {
-            selection
-                .on('click.geocoder-inside', function() {
-                    return d3.event.stopPropagation();
-                });
-            context.container().on('click.geocoder-outside', hide);
-        }
-
-        function show() { setVisible(true); }
         function hide() { setVisible(false); }
         function toggle() { setVisible(gcForm.classed('hide')); }
 
@@ -79,34 +68,26 @@ iD.ui.geocoder = function() {
 
         var button = selection.append('button')
             .attr('tabindex', -1)
-            .attr('title', t('geocoder.find_location'))
+            .attr('title', t('geocoder.title'))
             .html('<span class=\'geocode icon\'></span>')
             .on('click', toggle);
 
         var gcForm = selection.append('form');
 
-        var inputNode = gcForm.attr('class','content fillD map-overlay hide')
+        var inputNode = gcForm.attr('class', 'content fillD map-overlay hide')
             .append('input')
-                .attr({ type: 'text', placeholder: t('geocoder.find_a_place') })
-                .on('keydown', keydown);
+            .attr({ type: 'text', placeholder: t('geocoder.placeholder') })
+            .on('keydown', keydown);
 
         var resultsList = selection.append('div')
-            .attr('class','content fillD map-overlay hide');
+            .attr('class', 'content fillD map-overlay hide');
 
-        selection.call(clickoutside);
+        selection.on('click.geocoder-inside', function() {
+            return d3.event.stopPropagation();
+        });
+
+        context.container().on('click.geocoder-outside', hide);
     }
-
-    geocoder.map = function(_) {
-        if (!arguments.length) return map;
-        map = _;
-        return geocoder;
-    };
-
-    geocoder.context = function(_) {
-        if (!arguments.length) return context;
-        context = _;
-        return geocoder;
-    };
 
     return geocoder;
 };
