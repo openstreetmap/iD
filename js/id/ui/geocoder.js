@@ -2,48 +2,53 @@ iD.ui.geocoder = function() {
 
     var map, context;
 
+    function resultExtent(bounds) {
+        return new iD.geo.Extent(
+            [parseFloat(bounds[3]), parseFloat(bounds[0])],
+            [parseFloat(bounds[2]), parseFloat(bounds[1])]);
+    }
+
     function geocoder(selection) {
         function keydown() {
             if (d3.event.keyCode !== 13) return;
             d3.event.preventDefault();
             var searchVal = this.value;
             d3.json('http://nominatim.openstreetmap.org/search/' +
-                encodeURIComponent(searchVal) + '?limit=10&format=json', function (err, resp) {
+                encodeURIComponent(searchVal) + '?limit=10&format=json', function(err, resp) {
                     if (err) return hide();
                     if (!resp.length) {
                         return iD.ui.flash(context.container())
                             .select('.content')
                             .append('h3')
                             .text('No location found for "' + searchVal + '"');
-                    }
-                    if(resp.length > 1) {
+                    } else if (resp.length > 1) {
                         var spans = resultsList.selectAll('span')
                             .data(resp, function (d) { return d.place_id; });
+
                         spans.enter()
                             .append('span')
-                            .text(function(d) { 
+                            .text(function(d) {
                                 return d.type.charAt(0).toUpperCase() + d.type.slice(1) + ': ';
                             })
                             .append('a')
                             .text(function(d) {
-                                if(d.display_name > 80) return d.display_name.substr(0,80) + '...';
-                                return d.display_name;
+                                if (d.display_name > 80) {
+                                    return d.display_name.substr(0, 80) + '…';
+                                } else {
+                                    return d.display_name;
+                                }
                             })
                             .on('click', clickResult);
                         spans.exit().remove();
-                        resultsList.classed('hide',false); 
+                        resultsList.classed('hide', false);
                     } else {
-                        var bounds = resp[0].boundingbox;
-                        var extent = iD.geo.Extent([parseFloat(bounds[3]), parseFloat(bounds[0])], [parseFloat(bounds[2]), parseFloat(bounds[1])]);
-                        applyBounds(extent);
+                        applyBounds(resultExtent(resp[0].boundingbox));
                     }
                 });
         }
 
-        function clickResult(data) {
-            var bounds = data.boundingbox;
-            var extent = iD.geo.Extent([parseFloat(bounds[3]), parseFloat(bounds[0])], [parseFloat(bounds[2]), parseFloat(bounds[1])]);
-            applyBounds(extent);
+        function clickResult(d) {
+            applyBounds(resultExtent(d.boundingbox));
         }
 
         function applyBounds(extent) {

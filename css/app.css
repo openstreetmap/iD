@@ -859,10 +859,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-bottom: 1px solid #333;
 }
 
-.geocode-control div span:hover {
-    background-color: #333;
-}
-
 /* Geolocator */
 
 .geolocate-control {
