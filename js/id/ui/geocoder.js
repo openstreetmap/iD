@@ -9,44 +9,40 @@ iD.ui.geocoder = function() {
             var searchVal = this.value;
             d3.json('http://nominatim.openstreetmap.org/search/' +
                 encodeURIComponent(searchVal) + '?limit=10&format=json', function (err, resp) {
-                if (err) return hide();
-                if (!resp.length) {
-                    return iD.ui.flash(context.container())
-                        .select('.content')
-                        .append('h3')
-                        .text('No location found for "' + searchVal + '"');
-                }
-                if(resp.length > 1) {
-                    for (var i=0; i < resp.length; i++) {
-                        var displayName, elementType, typeStr, span;
-                        displayName = resp[i].display_name,
-                        elementType = resp[i].type,
-                        typeStr = elementType.charAt(0).toUpperCase() + elementType.slice(1) + ': ',
-                        span = resultsList.append('span').text(typeStr);
-                        if(displayName.length > 80) displayName = displayName.substr(0,80) + '...';
-                        span.append('a')
-                            .attr('data-min-lon',resp[i].boundingbox[3])
-                            .attr('data-min-lat',resp[i].boundingbox[0])
-                            .attr('data-max-lon',resp[i].boundingbox[2])
-                            .attr('data-max-lat',resp[i].boundingbox[1])
-                            .text(displayName)
-                            .on('click', clickResult);
+                    if (err) return hide();
+                    if (!resp.length) {
+                        return iD.ui.flash(context.container())
+                            .select('.content')
+                            .append('h3')
+                            .text('No location found for "' + searchVal + '"');
                     }
-                    resultsList.classed('hide',false); 
-                } else {
-                    var bounds = resp[0].boundingbox;
-                    var extent = iD.geo.Extent([parseFloat(bounds[3]), parseFloat(bounds[0])], [parseFloat(bounds[2]), parseFloat(bounds[1])]);
-                    applyBounds(extent);
-                }
-            });
+                    if(resp.length > 1) {
+                        var spans = resultsList.selectAll('span')
+                            .data(resp, function (d) { return d.place_id; });
+                        spans.enter()
+                            .append('span')
+                            .text(function(d) { 
+                                return d.type.charAt(0).toUpperCase() + d.type.slice(1) + ': ';
+                            })
+                            .append('a')
+                            .text(function(d) {
+                                if(d.display_name > 80) return d.display_name.substr(0,80) + '...';
+                                return d.display_name;
+                            })
+                            .on('click', clickResult);
+                        spans.exit().remove();
+                        resultsList.classed('hide',false); 
+                    } else {
+                        var bounds = resp[0].boundingbox;
+                        var extent = iD.geo.Extent([parseFloat(bounds[3]), parseFloat(bounds[0])], [parseFloat(bounds[2]), parseFloat(bounds[1])]);
+                        applyBounds(extent);
+                    }
+                });
         }
 
-        function clickResult() {
-            var result = d3.select(this);
-            var extent = iD.geo.Extent( 
-                [parseFloat(result.attr('data-min-lon')),  parseFloat(result.attr('data-min-lat'))], 
-                [parseFloat(result.attr('data-max-lon')),  parseFloat(result.attr('data-max-lat'))] 
-            );
+        function clickResult(data) {
+            var bounds = data.boundingbox;
+            var extent = iD.geo.Extent([parseFloat(bounds[3]), parseFloat(bounds[0])], [parseFloat(bounds[2]), parseFloat(bounds[1])]);
             applyBounds(extent);
         }
 
