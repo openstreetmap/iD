@@ -175,12 +175,15 @@ describe("iD.actions.Split", function () {
                 'b': iD.Node({id: 'b'}),
                 'c': iD.Node({id: 'c'}),
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
-                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
+                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way', role: 'forward'}]})
             });
 
         graph = iD.actions.Split('b', '=')(graph);
 
-        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=']);
+        expect(graph.entity('r').members).to.eql([
+            {id: '-', type: 'way', role: 'forward'},
+            {id: '=', type: 'way', role: 'forward'}
+        ]);
     });
 
     it("adds the new way to parent relations (forward order)", function () {

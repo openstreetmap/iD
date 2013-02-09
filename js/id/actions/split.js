@@ -73,7 +73,7 @@ iD.actions.Split = function(nodeId, newWayId) {
                     }
                 }
 
-                relation = relation.addMember({id: wayB.id, type: 'wayA', role: role}, i <= j ? i + 1 : i);
+                relation = relation.addMember({id: wayB.id, type: 'way', role: role}, i <= j ? i + 1 : i);
                 graph = graph.replace(relation);
             }
         });
