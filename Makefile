@@ -44,7 +44,7 @@ all: \
 	js/id/modes/*.js \
 	js/id/operations.js \
 	js/id/operations/*.js \
-	js/id/graph/*.js \
+	js/id/core/*.js \
 	js/id/renderer/*.js \
 	js/id/svg.js \
 	js/id/svg/*.js \
