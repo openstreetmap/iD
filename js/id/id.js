@@ -92,10 +92,19 @@ window.iD = function () {
         return context;
     };
 
-    context.background()
-        .source(_.find(iD.layers, function(l) {
-            return l.data.name === 'Bing aerial imagery';
-        }));
+    var q = iD.util.stringQs(location.hash.substring(1));
+    if (q.layer) {
+        context.background()
+                .source(_.find(iD.layers, function(l) {
+                    return l.data.sourcetag === q.layer;
+                }));
+    }
+    if (!context.background()) {
+        context.background()
+            .source(_.find(iD.layers, function(l) {
+                return l.data.name === 'Bing aerial imagery';
+            }));
+    }
 
     return d3.rebind(context, dispatch, 'on');
 };

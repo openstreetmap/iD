@@ -152,9 +152,22 @@ iD.Background = function() {
         return background;
     };
 
+    function setPermalink(source) {
+        var tag = source.data.sourcetag;
+        var q = iD.util.stringQs(location.hash.substring(1));
+        if (tag) {
+            location.replace('#' + iD.util.qsString(_.assign(q, {
+                layer: tag
+            }), true));
+        } else {
+            location.replace('#' + iD.util.qsString(_.omit(q, 'layer'), true));
+        }
+    }
+
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
+        setPermalink(source);
         return background;
     };
 
