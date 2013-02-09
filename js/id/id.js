@@ -92,14 +92,17 @@ window.iD = function () {
         return context;
     };
 
-    var q = iD.util.stringQs(location.hash.substring(1));
+    var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
     if (q.layer) {
         context.background()
-                .source(_.find(iD.layers, function(l) {
-                    return l.data.sourcetag === q.layer;
-                }));
+           .source(_.find(iD.layers, function(l) {
+               if (l.data.sourcetag === q.layer) {
+                   return (detected = true);
+               }
+           }));
     }
-    if (!context.background()) {
+
+    if (!detected) {
         context.background()
             .source(_.find(iD.layers, function(l) {
                 return l.data.name === 'Bing aerial imagery';

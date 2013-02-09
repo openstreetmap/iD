@@ -232,12 +232,26 @@ iD.ui = function(context) {
             map.size(m.size());
         });
 
+        function pan(d) {
+            return function() {
+                map.pan(d);
+                map.redraw();
+            };
+        }
+
+        // pan amount
+        var pa = 5;
+
         var keybinding = d3.keybinding('main')
             .on('⌘+Z', function() { history.undo(); })
             .on('⌃+Z', function() { history.undo(); })
             .on('⌘+⇧+Z', function() { history.redo(); })
             .on('⌃+⇧+Z', function() { history.redo(); })
-            .on('⌫', function() { d3.event.preventDefault(); });
+            .on('⌫', function() { d3.event.preventDefault(); })
+            .on('←', pan([pa, 0]))
+            .on('↑', pan([0, pa]))
+            .on('→', pan([-pa, 0]))
+            .on('↓', pan([0, -pa]));
 
         modes.forEach(function(m) {
             keybinding.on(m.key, function() { if (map.editable()) context.enter(m); });
