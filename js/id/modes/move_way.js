@@ -1,6 +1,7 @@
 iD.modes.MoveWay = function(context, wayId) {
     var mode = {
-        id: 'move-way'
+        id: 'move-way',
+        button: 'browse'
     };
 
     var keybinding = d3.keybinding('move-way');
