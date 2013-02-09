@@ -141,6 +141,7 @@ locale.en = {
     },
 
     save: "Save",
+    unsaved_changes: "You have unsaved changes",
     save_help: "Save changes to OpenStreetMap, making them visible to other users",
     no_changes: "You don't have any changes to save.",
     save_error: "An error occurred while trying to save",
@@ -177,6 +178,10 @@ locale.en = {
     description: "Description",
 
     logout: "logout",
+
+    live: "live",
+    dev: "dev",
+    report_a_bug: "report a bug",
 
     layerswitcher: {
         title: "Background",

@@ -7,9 +7,7 @@ iD.ui = function(context) {
             map = context.map();
 
         if (!iD.detect().support) {
-            container.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
-                      'and Internet Explorer 9 and above. Please upgrade your browser ' +
-                      'or use Potlatch 2 to edit the map.')
+            container.text(t('browser_notice'))
                 .style('text-align:center;font-style:italic;');
             return;
         }
@@ -110,7 +108,7 @@ iD.ui = function(context) {
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
             .selectAll('button')
-                .data([['zoom-in', '+', map.zoomIn, 'Zoom In'], ['zoom-out', '-', map.zoomOut, 'Zoom Out']])
+                .data([['zoom-in', '+', map.zoomIn, t('zoom-in')], ['zoom-out', '-', map.zoomOut, t('zoom-out')]])
                 .enter()
                 .append('button')
                 .attr('tabindex', -1)
@@ -154,21 +152,33 @@ iD.ui = function(context) {
         var linkList = aboutList.append('ul')
             .attr('id','about')
             .attr('class','pad1 fillD about-block link-list');
-        linkList.append('li').append('a').attr('target', '_blank')
-            .attr('href', 'http://github.com/systemed/iD').text(iD.version);
-        linkList.append('li').append('a').attr('target', '_blank')
-            .attr('href', 'http://github.com/systemed/iD/issues').text('report a bug');
 
-        var imagery = linkList.append('li').attr('id', 'attribution');
-        imagery.append('span').text('imagery');
+        linkList.append('li')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', 'http://github.com/systemed/iD')
+            .text(iD.version);
+
+        linkList.append('li')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', 'http://github.com/systemed/iD/issues')
+            .text(t('report_a_bug'));
+
+        var imagery = linkList.append('li')
+            .attr('id', 'attribution');
+
+        imagery.append('span')
+            .text('imagery');
+
         imagery
             .append('span')
-                .attr('class', 'provided-by');
+            .attr('class', 'provided-by');
 
         linkList.append('li')
             .attr('class', 'source-switch')
             .append('a').attr('href', '#')
-            .text('live')
+            .text(t('live'))
             .classed('live', true)
             .on('click.editor', function() {
                 d3.event.preventDefault();
@@ -176,12 +186,12 @@ iD.ui = function(context) {
                     map.flush();
                     context.connection()
                         .url('http://api06.dev.openstreetmap.org');
-                    d3.select(this).text('dev').classed('live', false);
+                    d3.select(this).text(t('dev')).classed('live', false);
                 } else {
                     map.flush();
                     context.connection()
                         .url('http://www.openstreetmap.org');
-                    d3.select(this).text('live').classed('live', true);
+                    d3.select(this).text(t('live')).classed('live', true);
                 }
             });
 
@@ -198,7 +208,7 @@ iD.ui = function(context) {
 
         window.onbeforeunload = function() {
             history.save();
-            if (history.hasChanges()) return 'You have unsaved changes';
+            if (history.hasChanges()) return t('unsaved_changes');
         };
 
         history.on('change.editor', function() {
