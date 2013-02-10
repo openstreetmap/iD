@@ -3,13 +3,13 @@ locale.de = {
         add_area: {
             title: "Fläche",
             description: "Füge Parks, Gebäude, Seen oder andere Flächen zur Karte hinzu.",
-            tail: "Klicke in die Karte um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten.",
+            tail: "Klicke in die Karte, um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten.",
             key: "A"
         },
         add_line: {
             title: "Linie",
             description: "Linien können Autobahnen, Straßen, Fußwege oder sogar Kanäle sein.",
-            tail: "Klicke in die Karte um das Zeichnen einer Straße eines Pfades oder einer Route zu starten.",
+            tail: "Klicke in die Karte, um das Zeichnen einer Straße eines Pfades oder einer Route zu starten.",
             key: "L"
         },
         add_point: {
@@ -24,10 +24,10 @@ locale.de = {
             key: "B"
         },
         draw_area: {
-            tail: "Klicke, um Punkte zur Fläche hinzuzufügen. Klicke den ersten Punkt, um die Fläche abzuschließen."
+            tail: "Klicke, um Punkte zur Fläche hinzuzufügen. Klicke auf den ersten Punkt, um die Fläche abzuschließen."
         },
         draw_line: {
-            tail: "Klicke, um mehr Punkte zur Linie hizuzufügen. Klicke auf eine andere Linie um die Linien zu verbinden, und klicke doppelt, um die Linie zu beenden."
+            tail: "Klicke, um mehr Punkte zur Linie hizuzufügen. Klicke auf eine andere Linie um die Linien zu verbinden und klicke doppelt, um die Linie zu beenden."
         }
     },
 
@@ -79,11 +79,11 @@ locale.de = {
             description: "Lösche dies aus der Karte.",
             key: "⌫",
             annotation: {
-                point: "Punkt gelöscht.Deleted a point.",
+                point: "Punkt gelöscht.",
                 vertex: "Stützpunkt aus einem Weg gelöscht.",
                 line: "Linie gelöscht.",
                 area: "Fläche gelöscht.",
-                relation: "Relation gelöscht.",
+                relation: "Verbindung gelöscht.",
                 multiple: "{n} Objekte gelöscht."
             }
         },
@@ -120,7 +120,7 @@ locale.de = {
         },
         reverse: {
             title: "Umkehren",
-            description: "Ändere die Richtung diese Linie.",
+            description: "Ändere die Richtung dieser Linie.",
             key: "V",
             annotation: "Linienrichtung umgekehrt."
         },
@@ -133,7 +133,7 @@ locale.de = {
     },
 
     validations: {
-        untagged_point: "Punkt, der kein Teil einer Linie oder Fläche ist entmarkiert",
+        untagged_point: "Punkt, der kein Teil einer Linie oder Fläche ist, entmarkiert",
         untagged_line: "Linie entmarkiert",
         untagged_area: "Fläche entmarkiert",
         tag_suggests_area: "Die Markierung {tag} suggeriert eine Fläche, ist aber keine Fläche",
