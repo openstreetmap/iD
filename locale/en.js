@@ -51,7 +51,7 @@ locale.en = {
             }
         },
         cancel_draw: {
-            annotation: "Cancelled drawing."
+            annotation: "Canceled drawing."
         },
         change_tags: {
             annotation: "Changed tags."
@@ -158,7 +158,7 @@ locale.en = {
     browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
     inspector: {
-        no_documentation_combination:  "There is no documentation available for this tag combination",
+        no_documentation_combination: "There is no documentation available for this tag combination",
         no_documentation_key: "There is no documentation available for this key",
         new_tag: "New Tag"
     },
