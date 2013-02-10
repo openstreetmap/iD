@@ -165,7 +165,7 @@ locale.lv = {
 
     view_on_osm: "Apskatīt OSM lapu",
 
-    zoom_in_edit: "pietuviniet, lai rediģētu karti,
+    zoom_in_edit: "pietuviniet, lai rediģētu karti",
 
     edit_tags: "Rediģēt apzīmējumus",
 
