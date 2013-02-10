@@ -1,185 +1,185 @@
 locale.fr = {
     modes: {
         add_area: {
-            title: "Area",
-            description: "Add parks, buildings, lakes, or other areas to the map.",
-            tail: "Click on the map to start drawing an area, like a park, lake, or building.",
+            title: "Polygone",
+            description: "Les polygones peuvent être des parcs, des batîments, des lacs ou tout autre objet surfacique.",
+            tail: "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment.",
             key: "A"
         },
         add_line: {
-            title: "Line",
-            description: "Lines can be highways, streets, pedestrian paths, or even canals.",
-            tail: "Click on the map to start drawing an road, path, or route.",
+            title: "Ligne",
+            description: "Les lignes peuvent être des autoroutes, des routes, des chemins ou encore des caneaux.",
+            tail: "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un nouveau chemin.",
             key: "L"
         },
         add_point: {
             title: "Point",
-            description: "Restaurants, monuments, and postal boxes are points.",
-            tail: "Click on the map to add a point.",
+            description: "Les points peuvent être des restaurants, des monuments, ou encore des boites aux lettres.",
+            tail: "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument.",
             key: "P"
         },
         browse: {
-            title: "Browse",
-            description: "Pan and zoom the map.",
+            title: "Navigation",
+            description: "Naviguer ou zoomer sur la carte.",
             key: "B"
         },
         draw_area: {
-            tail: "Click to add points to your area. Click the first point to finish the area."
+            tail: "Cliquez pour ajouter un point à la zone. Cliquez sur le dernier point pour fermer la zone."
         },
         draw_line: {
-            tail: "Click to add more points to the line. Click on other lines to connect to them, and double-click to end the line."
+            tail: "Cliquez pour ajouter un point à la ligne. Cliquez sur une autre ligne pour les connecter, puis faîtes un double-clique pour terminer la ligne."
         }
     },
 
     operations: {
         add: {
             annotation: {
-                point: "Added a point.",
-                vertex: "Added a node to a way."
+                point: "Ajouter un point.",
+                vertex: "Ajouter un noeud à une ligne."
             }
         },
         start: {
             annotation: {
-                line: "Started a line.",
-                area: "Started an area."
+                line: "Commencer une nouvelle ligne.",
+                area: "Commencer un polygone."
             }
         },
         'continue': {
             annotation: {
-                line: "Continued a line.",
-                area: "Continued an area."
+                line: "Continuer une ligne.",
+                area: "Continuer un polygone."
             }
         },
         cancel_draw: {
-            annotation: "Cancelled drawing."
+            annotation: "Annuler un ajout."
         },
         change_tags: {
-            annotation: "Changed tags."
+            annotation: "Modifier les tags."
         },
         circularize: {
             title: "Circularize",
-            description: "Make this round.",
+            description: "Créer un cercle.",
             key: "O",
             annotation: {
-                line: "Made a line circular.",
-                area: "Made an area circular."
+                line: "Créer un cercle linéaire.",
+                area: "Créer un cercle surfacique (disque)."
             }
         },
         orthogonalize: {
-            title: "Orthogonalize",
-            description: "Square these corners.",
+            title: "Orthogonaliser",
+            description: "Rendre une forme orthogonale.",
             key: "Q",
             annotation: {
-                line: "Squared the corners of a line.",
-                area: "Squared the corners of an area."
+                line: "Orthogonaliser une ligne orthogonale.",
+                area: "Orthogonaliser un polygone orthogonale."
             }
         },
         'delete': {
-            title: "Delete",
-            description: "Remove this from the map.",
+            title: "Supprimer",
+            description: "Supprime l'élément de la carte.",
             key: "⌫",
             annotation: {
-                point: "Deleted a point.",
-                vertex: "Deleted a node from a way.",
-                line: "Deleted a line.",
-                area: "Deleted an area.",
-                relation: "Deleted a relation.",
-                multiple: "Deleted {n} objects."
+                point: "Supprime un point.",
+                vertex: "Supprime le noeud d'une ligne.",
+                line: "Supprime une ligne.",
+                area: "Supprime un polygone.",
+                relation: "Supprime une relation.",
+                multiple: "Supprime {n} objets."
             }
         },
         connect: {
             annotation: {
-                point: "Connected a way to a point.",
-                vertex: "Connected a way to another.",
-                line: "Connected a way to a line.",
-                area: "Connected a way to an area."
+                point: "Joindre une ligne à un point.",
+                vertex: "Joindre les noeuds à une ligne.",
+                line: "Joindre les chemins ensemble.",
+                area: "Joindre une ligne à un polygone."
             }
         },
         disconnect: {
-            title: "Disconnect",
-            description: "Disconnect these ways from each other.",
+            title: "Séparer",
+            description: "Sépare les lignes l'une de l'autre.",
             key: "D",
-            annotation: "Disconnected ways."
+            annotation: "Sépare les lignes."
         },
         merge: {
-            title: "Merge",
-            description: "Merge these lines.",
+            title: "Fusionner",
+            description: "Fusionne les lignes.",
             key: "C",
-            annotation: "Merged {n} lines."
+            annotation: "Fusionne les {n} ligne."
         },
         move: {
-            title: "Move",
-            description: "Move this to a different location.",
+            title: "Déplacer",
+            description: "Déplace l'élément à un autre endroit.",
             key: "M",
             annotation: {
-                point: "Moved a point.",
-                vertex: "Moved a node in a way.",
-                line: "Moved a line.",
-                area: "Moved an area."
+                point: "Déplace un point.",
+                vertex: "Déplace le noeud d'une ligne.",
+                line: "Déplace une ligne.",
+                area: "Déplace un polygone."
             }
         },
         reverse: {
-            title: "Reverse",
-            description: "Make this line go in the opposite direction.",
+            title: "Inverser",
+            description: "Inverse le sens d'une ligne.",
             key: "V",
-            annotation: "Reversed a line."
+            annotation: "Inverse le sens d'une ligne."
         },
         split: {
-            title: "Split",
-            description: "Split this into two ways at this point.",
+            title: "Couper",
+            description: "Coupe une ligne en deux par rapport au point sélectionné.",
             key: "X",
-            annotation: "Split a way."
+            annotation: "Coupe une ligne."
         }
     },
 
     validations: {
-        untagged_point: "Untagged point which is not part of a line or area",
-        untagged_line: "Untagged line",
-        untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
-        deprecated_tags: "Deprecated tags: {tags}"
+        untagged_point: "Point sans aucun tag ne faisant partie ni d'une ligne, ni d'un polygone",
+        untagged_line: "Ligne sans aucun tag",
+        untagged_area: "Polygone sans aucun tag",
+        tag_suggests_area: "Ce tag {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
+        deprecated_tags: "Tags obsolètes : {tags}"
     },
 
-    save: "Save",
-    save_help: "Save changes to OpenStreetMap, making them visible to other users",
-    no_changes: "You don't have any changes to save.",
-    save_error: "An error occurred while trying to save",
-    uploading_changes: "Uploading changes to OpenStreetMap.",
-    just_edited: "You Just Edited OpenStreetMap!",
+    save: "Sauvegarder",
+    save_help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
+    no_changes: "Vous n'avez aucune modification à enregistrer.",
+    save_error: "Une erreur est survenue lors de l'enregistrement des données",
+    uploading_changes: "Envoie des modifications vers OpenStreetMap.",
+    just_edited: "Vous venez de participer à OpenStreetMap!",
     okay: "Okay",
 
-    "zoom-in": "Zoom In",
-    "zoom-out": "Zoom Out",
+    "zoom-in": "Zoomer",
+    "zoom-out": "Dézoomer",
 
-    nothing_to_undo: "Nothing to undo.",
-    nothing_to_redo: "Nothing to redo.",
+    nothing_to_undo: "Rien à annuler.",
+    nothing_to_redo: "Rien à refaire.",
 
-    browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    browser_notice: "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
 
     inspector: {
-        no_documentation_combination:  "This is no documentation available for this tag combination",
-        no_documentation_key: "This is no documentation available for this key",
-        new_tag: "New Tag"
+        no_documentation_combination:  "Aucune documentation n'est disponible pour cette combinaison de tag,
+        no_documentation_key: "Aucune documentation n'est disponible pour cette clé",
+        new_tag: "Nouveau tag"
     },
 
-    view_on_osm: "View on OSM",
+    view_on_osm: "Consulter dans OSM",
 
-    zoom_in_edit: "zoom in to edit the map",
+    zoom_in_edit: "Zoomer pour modifier la carte
 
-    edit_tags: "Edit tags",
+    edit_tags: "Editer les tags
 
     geocoder: {
-        "find_location": "Find A Location",
-        "find_a_place": "find a place"
+        "find_location": "Trouver un emplacement",
+        "find_a_place": "Trouver un endroit"
     },
 
     description: "Description",
 
-    logout: "logout",
+    logout: "Déconnexion",
 
     layerswitcher: {
-        title: "Background",
-        description: "Background Settings",
+        title: "Fond de carte",
+        description: "Paramètres du fond de carte",
         percent_brightness: "{opacity}% brightness",
         fix_misalignment: "Fix misalignment",
         reset: "reset"
