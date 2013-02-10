@@ -189,5 +189,10 @@ locale.en = {
         percent_brightness: "{opacity}% brightness",
         fix_misalignment: "Fix misalignment",
         reset: "reset"
+    },
+
+    contributors: {
+        list: "Viewing contributions by {users}",
+        truncated_list: "Viewing contributions by {users} and {count} others"
     }
 };

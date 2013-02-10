@@ -62,10 +62,7 @@ iD.ui = function(context) {
             .message(false)
             .on('zoom', function() { map.zoom(16); });
 
-        map.on('move.editor', _.debounce(function() {
-            disableTooHigh();
-            contributors.call(iD.ui.contributors(context));
-        }, 500));
+        map.on('move.editor', _.debounce(disableTooHigh, 500));
 
         buttons.append('span')
             .attr('class', function(d) {
@@ -195,16 +192,9 @@ iD.ui = function(context) {
                 }
             });
 
-        var contributors = linkList.append('li')
-            .attr('id', 'user-list');
-        contributors.append('span')
-            .attr('class', 'icon nearby icon-pre-text');
-        contributors.append('span')
-            .text('Viewing contributions by ');
-        contributors.append('span')
-            .attr('class', 'contributor-list');
-        contributors.append('span')
-            .attr('class', 'contributor-count');
+        linkList.append('li')
+            .attr('id', 'user-list')
+            .call(iD.ui.contributors(context));
 
         window.onbeforeunload = function() {
             history.save();
