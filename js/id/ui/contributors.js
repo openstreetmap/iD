@@ -56,6 +56,10 @@ iD.ui.contributors = function(context) {
     return function(selection) {
         update(selection);
 
+        context.connection().on('load.contributors', function() {
+            update(selection);
+        });
+
         context.map().on('move.contributors', _.debounce(function() {
             update(selection);
         }, 500));
