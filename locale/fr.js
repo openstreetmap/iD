@@ -157,16 +157,16 @@ locale.fr = {
     browser_notice: "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
 
     inspector: {
-        no_documentation_combination:  "Aucune documentation n'est disponible pour cette combinaison de tag,
+        no_documentation_combination:  "Aucune documentation n'est disponible pour cette combinaison de tag",
         no_documentation_key: "Aucune documentation n'est disponible pour cette clé",
         new_tag: "Nouveau tag"
     },
 
     view_on_osm: "Consulter dans OSM",
 
-    zoom_in_edit: "Zoomer pour modifier la carte
+    zoom_in_edit: "Zoomer pour modifier la carte",
 
-    edit_tags: "Editer les tags
+    edit_tags: "Editer les tags",
 
     geocoder: {
         "find_location": "Trouver un emplacement",
