@@ -174,23 +174,7 @@ iD.ui = function(context) {
 
         linkList.append('li')
             .attr('class', 'source-switch')
-            .append('a').attr('href', '#')
-            .text(t('live'))
-            .classed('live', true)
-            .on('click.editor', function() {
-                d3.event.preventDefault();
-                if (d3.select(this).classed('live')) {
-                    map.flush();
-                    context.connection()
-                        .url('http://api06.dev.openstreetmap.org');
-                    d3.select(this).text(t('dev')).classed('live', false);
-                } else {
-                    map.flush();
-                    context.connection()
-                        .url('http://www.openstreetmap.org');
-                    d3.select(this).text(t('live')).classed('live', true);
-                }
-            });
+            .call(iD.ui.SourceSwitch(context));
 
         linkList.append('li')
             .attr('id', 'user-list')

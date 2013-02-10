@@ -179,8 +179,6 @@ locale.en = {
 
     logout: "logout",
 
-    live: "live",
-    dev: "dev",
     report_a_bug: "report a bug",
 
     layerswitcher: {
@@ -194,5 +192,10 @@ locale.en = {
     contributors: {
         list: "Viewing contributions by {users}",
         truncated_list: "Viewing contributions by {users} and {count} others"
+    },
+
+    source_switch: {
+        live: "live",
+        dev: "dev"
     }
 };
