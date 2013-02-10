@@ -1,60 +1,60 @@
 locale.tr = {
     modes: {
         add_area: {
-            title: "Area",
-            description: "Add parks, buildings, lakes, or other areas to the map.",
-            tail: "Click on the map to start drawing an area, like a park, lake, or building.",
+            title: "Alan",
+            description: "Park, bina, göl ve benzeri alanları haritaya ekle.",
+            tail: "Park, göl ya da bina gibi alanları çizmek için haritaya tıklayın.",
             key: "A"
         },
         add_line: {
-            title: "Line",
-            description: "Lines can be highways, streets, pedestrian paths, or even canals.",
-            tail: "Click on the map to start drawing an road, path, or route.",
+            title: "Çizgi",
+            description: "Yollar, sokaklar, patikalar ya da kanallar çizgi ile çizilebilir.",
+            tail: "Yol, patika yada rota çizmek için haritaya tıklayın.",
             key: "L"
         },
         add_point: {
-            title: "Point",
-            description: "Restaurants, monuments, and postal boxes are points.",
-            tail: "Click on the map to add a point.",
+            title: "Nokta",
+            description: "Restoranlar, anıtlar ya da posta kutuları nokta ile gösterilebilir.",
+            tail: "Nokta eklemek için haritaya tıklayın.",
             key: "P"
         },
         browse: {
-            title: "Browse",
-            description: "Pan and zoom the map.",
+            title: "Tara",
+            description: "Harita üzerinde dolan ve yaklaş.",
             key: "B"
         },
         draw_area: {
-            tail: "Click to add points to your area. Click the first point to finish the area."
+            tail: "Alanınıza nokta eklemek için tıklayınız. İlk noktaya tıklayarak alan çizimini bitirebilirsiniz."
         },
         draw_line: {
-            tail: "Click to add more points to the line. Click on other lines to connect to them, and double-click to end the line."
+            tail: "Çizgiye daha fazla nokta eklemek için tıklayınız. Diğer çizgilerle bağlamak için üstlerine tıklyınız ve bitirmek için de son noktada çift tıklayınız."
         }
     },
 
     operations: {
         add: {
             annotation: {
-                point: "Added a point.",
-                vertex: "Added a node to a way."
+                point: "Nokta eklendi.",
+                vertex: "Çizgiye bir nod eklendi."
             }
         },
         start: {
             annotation: {
-                line: "Started a line.",
-                area: "Started an area."
+                line: "Çizgi çizimi başlatıldı.",
+                area: "Alan çizimi başlatıldı."
             }
         },
         'continue': {
             annotation: {
-                line: "Continued a line.",
-                area: "Continued an area."
+                line: "Çizgiye devam edildi.",
+                area: "Alana devam edildi."
             }
         },
         cancel_draw: {
-            annotation: "Cancelled drawing."
+            annotation: "Çizim iptal edildi."
         },
         change_tags: {
-            annotation: "Changed tags."
+            annotation: "Etiketler değiştirildi."
         },
         circularize: {
             title: "Circularize",
