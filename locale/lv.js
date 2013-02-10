@@ -3,13 +3,13 @@ locale.lv = {
         add_area: {
             title: "Apgabals",
             description: "Pievieno parkus, ēkas, ezerus un citus apgabalus.",
-            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt apgablalu, piemēram parku, ezeru, vai ēku.",
+            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt apgabalu, piemēram parku, ezeru, vai ēku.",
             key: "A"
         },
         add_line: {
             title: "Līnija",
             description: "Līnijas var būt ceļi, ielas, takas vai pat kanāli.",
-            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt līniju, piemēram ceļu vai taku.",
+            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt līniju, piemēram, ceļu vai taku.",
             key: "L"
         },
         add_point: {
@@ -120,13 +120,13 @@ locale.lv = {
         },
         reverse: {
             title: "Mainīt virzienu",
-            description: "Maini līnijas virzienu.",
+            description: "Mainīt līnijas virzienu.",
             key: "V",
             annotation: "Līnijas virziens mainīts."
         },
         split: {
             title: "Sadalīt",
-            description: "Sadali līniju pie ši punkta.",
+            description: "Sadalīt līniju pie šī punkta.",
             key: "X",
             annotation: "Līnija sadalīta."
         }
@@ -136,14 +136,14 @@ locale.lv = {
         untagged_point: "Neapzīmēts punkts",
         untagged_line: "Neapzīmēta līnija",
         untagged_area: "Neapzīmēts apgabals",
-        tag_suggests_area: "Apzīmējums {tag} parasti lietots apgabaliem, bet objekts nav apgabals",
-        deprecated_tags: "Novecojūši apzīmējumi: {tags}"
+        tag_suggests_area: "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
+        deprecated_tags: "Novecojuši apzīmējumi: {tags}"
     },
 
     save: "Saglabāt",
-    unsaved_changes: "Jums ir nesaglabātas maiņas",
-    save_help: "Saglabā maiņas, padarot tās redzamas citiem",
-    no_changes: "Jums nav maiņas ko saglabāt",
+    unsaved_changes: "Jums ir nesaglabātas izmaiņas",
+    save_help: "Saglabā izmaiņas, padarot tās redzamas citiem",
+    no_changes: "Jums nav izmaiņu, ko saglabāt",
     save_error: "Kļūda. Nevarēja saglabāt maiņas",
     uploading_changes: "Augšupielādē",
     just_edited: "Jūs nupat rediģējāt OpenStreetMap",
@@ -152,8 +152,8 @@ locale.lv = {
     "zoom-in": "Pietuvināt",
     "zoom-out": "Attālināt",
 
-    nothing_to_undo: "Nekas ko atcelt",
-    nothing_to_redo: "Nekas ko atatsaukt",
+    nothing_to_undo: "Nav nekā, ko atcelt",
+    nothing_to_redo: "Nav nekā, ko atsaukt",
 
     browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
@@ -171,8 +171,8 @@ locale.lv = {
 
     geocoder: {
         title: "Atrast vietu",
-        placeholder: "atrod vietu",
-        no_results: "Nevarēja atrast vietu vārdā '{name}'"
+        placeholder: "meklē vietu",
+        no_results: "Nevarēja atrast vietu '{name}'"
     },
 
     description: "Apraksts",
@@ -192,7 +192,7 @@ locale.lv = {
     },
 
     contributors: {
-        list: "{users} papildinājumi redzāmi",
-        truncated_list: "{users} un {count} citu papildinājumi redzāmi"
+        list: "{users} papildinājumi redzami",
+        truncated_list: "{users} un {count} citu papildinājumi redzami"
     }
 };
