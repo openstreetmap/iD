@@ -155,7 +155,7 @@ locale.lv = {
     nothing_to_undo: "Nav nekā, ko atcelt",
     nothing_to_redo: "Nav nekā, ko atsaukt",
 
-    browser_notice: "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 to kartes rediģēšanai,
+    browser_notice: "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 to kartes rediģēšanai",
 
     inspector: {
         no_documentation_combination: "Šai apzīmējumu kombinācijai nav piejama dokumetācija",
