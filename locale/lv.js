@@ -3,7 +3,7 @@ locale.lv = {
         add_area: {
             title: "Apgabals",
             description: "Pievieno parkus, ēkas, ezerus un citus apgabalus.",
-            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt apgabalu, piemēram parku, ezeru, vai ēku.",
+            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt apgabalu, piemēram, parku, ezeru, vai ēku.",
             key: "A"
         },
         add_line: {
@@ -46,7 +46,7 @@ locale.lv = {
         },
         'continue': {
             annotation: {
-                line: "Linija turpināta.",
+                line: "Līnija turpināta.",
                 area: "Apgabals turpināts."
             }
         },
@@ -57,26 +57,26 @@ locale.lv = {
             annotation: "Apzīmējumi mainīti."
         },
         circularize: {
-            title: "Circularize",
-            description: "Make this round.",
+            title: "Pārveidot par apļveida",
+            description: "Pārveidot šo objektu par apļveida.",
             key: "O",
             annotation: {
-                line: "Made a line circular.",
-                area: "Made an area circular."
+                line: "Līnija pārveidota par apļveida.",
+                area: "Apgabals pārveidots par apļveida."
             }
         },
         orthogonalize: {
-            title: "Orthogonalize",
-            description: "Square these corners.",
+            title: "Ortogonalizēt",
+            description: "Pārveidot, lai visi leņķi būtu tasnleņķi.",
             key: "Q",
             annotation: {
-                line: "Squared the corners of a line.",
-                area: "Squared the corners of an area."
+                line: "Līnijas leņķi pārvedoti par taisnleņķiem.",
+                area: "Apgabala leņķi pārvedoti par taisnleņķiem."
             }
         },
         'delete': {
             title: "Dzēst",
-            description: "Noņemt no kartes.",
+            description: "Izdzēst no kartes.",
             key: "⌫",
             annotation: {
                 point: "Punkts dzēsts.",
@@ -90,7 +90,7 @@ locale.lv = {
         connect: {
             annotation: {
                 point: "Līnija savienota ar punktu.",
-                vertex: "Līnija savienota ar otru.",
+                vertex: "Līnija savienota ar citu.",
                 line: "Līnija savienota ar līniju.",
                 area: "Līnija savienota ar apgabalu."
             }
@@ -155,29 +155,29 @@ locale.lv = {
     nothing_to_undo: "Nav nekā, ko atcelt",
     nothing_to_redo: "Nav nekā, ko atsaukt",
 
-    browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    browser_notice: "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 to kartes rediģēšanai,
 
     inspector: {
-        no_documentation_combination:  "This is no documentation available for this tag combination",
-        no_documentation_key: "This is no documentation available for this key",
-        new_tag: "Jauns apzīmejums"
+        no_documentation_combination: "Šai apzīmējumu kombinācijai nav piejama dokumetācija",
+        no_documentation_key: "There is no documentation available for this key",
+        new_tag: "Jauns apzīmējums"
     },
 
     view_on_osm: "Apskatīt OSM lapu",
 
-    zoom_in_edit: "zoom in to edit the map",
+    zoom_in_edit: "pietuviniet, lai rediģētu karti,
 
     edit_tags: "Rediģēt apzīmējumus",
 
     geocoder: {
         title: "Atrast vietu",
         placeholder: "meklē vietu",
-        no_results: "Nevarēja atrast vietu '{name}'"
+        no_results: "Nevar atrast vietu '{name}'"
     },
 
     description: "Apraksts",
 
-    logout: "logout",
+    logout: "atslēgties",
 
     live: "live",
     dev: "dev",
