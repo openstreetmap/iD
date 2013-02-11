@@ -8,21 +8,18 @@ iD.ui.lasso = function() {
     function lasso(selection) {
 
         group = selection.append('g')
-            .attr('class', 'lasso')
-            .attr('opacity', 0);
+            .attr('class', 'lasso hide');
 
         box = group.append('rect')
             .attr('class', 'lasso-box');
 
-        group.transition()
-            .style('opacity', 1);
+        group.call(iD.ui.toggle(true));
 
     }
 
     // top-left
     function topLeft(d) {
-        return 'translate(' +
-            [Math.min(d[0][0], d[1][0]), Math.min(d[0][1], d[1][1])].join(',') + ')';
+        return 'translate(' + Math.min(d[0][0], d[1][0]) + ',' + Math.min(d[0][1], d[1][1]) + ')';
     }
 
     function width(d) { return Math.abs(d[0][0] - d[1][0]); }
@@ -53,9 +50,9 @@ iD.ui.lasso = function() {
 
     lasso.close = function(selection) {
         if (group) {
-            group.transition()
-                .attr('opacity', 0)
-                .remove();
+            group.call(iD.ui.toggle(false, function() {
+                d3.select(this).remove();
+            }));
         }
     };
 
