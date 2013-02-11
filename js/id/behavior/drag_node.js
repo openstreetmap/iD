@@ -36,6 +36,8 @@ iD.behavior.DragNode = function(context) {
     }
 
     function start(entity) {
+        context.history()
+            .on('undone.drag-node', cancel);
 
         wasMidpoint = entity.type === 'midpoint';
         if (wasMidpoint) {
@@ -95,12 +97,7 @@ iD.behavior.DragNode = function(context) {
     }
 
     function end(entity) {
-        context.surface()
-            .classed('behavior-drag-node', false)
-            .selectAll('.active')
-            .classed('active', false);
-
-        stopNudge();
+        off();
 
         var d = datum();
         if (d.type === 'way') {
@@ -130,6 +127,23 @@ iD.behavior.DragNode = function(context) {
                 iD.actions.Noop(),
                 moveAnnotation(entity));
         }
+    }
+
+    function off() {
+        context.history()
+            .on('undone.drag_node', null);
+
+        context.surface()
+            .classed('behavior-drag-node', false)
+            .selectAll('.active')
+            .classed('active', false);
+
+        stopNudge();
+    }
+
+    function cancel() {
+        off();
+        behavior.cancel();
     }
 
     var behavior = iD.behavior.drag()
