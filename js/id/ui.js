@@ -200,20 +200,14 @@ iD.ui = function(context) {
                 }
             }
 
-            var mod = {
-                'mac': '⌘',
-                'win': 'Ctrl',
-                'linux': 'Ctrl'
-            }[iD.detect().os];
-
             limiter.select('#undo')
                 .classed('disabled', !undo)
-                .attr('data-original-title', hintprefix(mod + ' + Z', undo || t('nothing_to_undo')))
+                .attr('data-original-title', hintprefix(iD.ui.cmd('⌘Z'), undo || t('nothing_to_undo')))
                 .call(refreshTooltip);
 
             limiter.select('#redo')
                 .classed('disabled', !redo)
-                .attr('data-original-title', hintprefix(mod + ' + ⇧ + Z', redo || t('nothing_to_redo')))
+                .attr('data-original-title', hintprefix(iD.ui.cmd('⌘⇧Z'), redo || t('nothing_to_redo')))
                 .call(refreshTooltip);
         });
 
@@ -232,16 +226,14 @@ iD.ui = function(context) {
         var pa = 5;
 
         var keybinding = d3.keybinding('main')
-            .on('⌘+Z', function() { history.undo(); })
-            .on('⌃+Z', function() { history.undo(); })
-            .on('⌘+⇧+Z', function() { history.redo(); })
-            .on('⌃+⇧+Z', function() { history.redo(); })
+            .on(iD.ui.cmd('⌘Z'), function() { history.undo(); })
+            .on(iD.ui.cmd('⌘⇧Z'), function() { history.redo(); })
             .on('⌫', function() { d3.event.preventDefault(); })
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
             .on('↓', pan([0, -pa]))
-            .on('⇧+=', function() { map.zoomIn(); })
+            .on('⇧=', function() { map.zoomIn(); })
             .on('+', function() { map.zoomIn(); })
             .on('-', function() { map.zoomOut(); })
             .on('dash', function() { map.zoomOut(); });

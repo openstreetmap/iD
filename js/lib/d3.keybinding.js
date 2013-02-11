@@ -63,7 +63,7 @@ d3.keybinding = function(namespace) {
             callback: callback
         };
 
-        code = code.toLowerCase().match(/(?:(?:[^+])+|\+\+|^\+$)/g);
+        code = code.toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
 
         for (var i = 0; i < code.length; i++) {
             // Normalise matching errors
