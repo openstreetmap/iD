@@ -903,6 +903,10 @@ img.tile {
     -o-transform-origin:0 0;
 }
 
+#surface {
+  position: static;
+}
+
 #tile-g {
   opacity: 0.5;
 }
