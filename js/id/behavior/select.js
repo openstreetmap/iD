@@ -22,7 +22,7 @@ iD.behavior.Select = function(context) {
 
         function mousedown() {
             var datum = d3.event.target.__data__;
-            pos = [d3.event.x, d3.event.y];
+            pos = [d3.event.clientX, d3.event.clientY];
             if (datum instanceof iD.Entity || (datum && datum.type === 'midpoint')) {
                 selection
                     .on('mousemove.select', mousemove)
@@ -51,7 +51,7 @@ iD.behavior.Select = function(context) {
 
         // allow mousemoves to cancel the click
         function mousemove() {
-            if (iD.geo.dist([d3.event.x, d3.event.y], pos) > 4) {
+            if (iD.geo.dist([d3.event.clientX, d3.event.clientY], pos) > 4) {
                 window.clearTimeout(timeout);
                 timeout = null;
             }
@@ -59,7 +59,7 @@ iD.behavior.Select = function(context) {
 
         function mouseup() {
             selection.on('mousemove.select', null);
-            if (pos && d3.event.x === pos[0] && d3.event.y === pos[1] &&
+            if (pos && d3.event.clientX === pos[0] && d3.event.clientY === pos[1] &&
                 !(d3.event.target.__data__ instanceof iD.Entity)) {
                 context.enter(iD.modes.Browse(context));
             }

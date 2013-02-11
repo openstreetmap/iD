@@ -76,10 +76,10 @@ iD.modes.Select = function(context, selection, initial) {
                 var inspector_size = context.container().select('.inspector-wrap').size(),
                     map_size = context.map().size(),
                     offset = 50,
-                    shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
+                    shift_left = d3.event.clientX - map_size[0] + inspector_size[0] + offset,
                     center = (map_size[0] / 2) + shift_left + offset;
 
-                if (shift_left > 0 && inspector_size[1] > d3.event.y) {
+                if (shift_left > 0 && inspector_size[1] > d3.event.clientY) {
                     context.map().centerEase(context.projection.invert([center, map_size[1]/2]));
                 }
             }
