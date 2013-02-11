@@ -147,7 +147,7 @@ iD.behavior.DragNode = function(context) {
     }
 
     var behavior = iD.behavior.drag()
-        .delegate("g.node, g.midpoint")
+        .delegate("g.node, g.point, g.midpoint")
         .origin(origin)
         .on('start', start)
         .on('move', move)

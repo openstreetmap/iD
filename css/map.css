@@ -52,6 +52,10 @@ g.point.selected .shadow {
     fill-opacity: 0.7;
 }
 
+g.point.active, g.point.active * {
+    pointer-events: none;
+}
+
 /* vertices */
 
 g.vertex .fill {
