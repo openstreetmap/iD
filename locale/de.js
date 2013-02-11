@@ -141,12 +141,12 @@ locale.de = {
     },
 
     save: "Speichern",
-    save_help: "Speichere Änderungen zu OpenStreetMap, so dass sie für andere Nutzer sichtbar werden",
+    save_help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
     no_changes: "Sie haben keine Änderungen zum Speichern.",
-    save_error: "Es ist ein Fehler aufgetreten beim Versuch des Speicherns",
-    uploading_changes: "Lade Änderungen zu OpenStreetMap.",
+    save_error: "Beim Speichern ist ein Fehler aufgetreten",
+    uploading_changes: "Änderungen werden zu OpenStreetMap hochgeladen.",
     just_edited: "Sie haben gerade OpenStreetMap editiert!",
-    okay: "Okay",
+    okay: "OK",
 
     "zoom-in": "Hineinzoomen",
     "zoom-out": "Herauszoomen",
@@ -154,7 +154,7 @@ locale.de = {
     nothing_to_undo: "Nichts zum Rückgängigmachen.",
     nothing_to_redo: "Nichts zum Wiederherstellen.",
 
-    browser_notice: "Dieser Editor wird in Firefox, Chrome, Safari, Opera, und Internet Explorer 9 und höher unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
+    browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
 
     inspector: {
         no_documentation_combination:  "Für dieses Attribut ist keine Dokumentation verfügbar.",
@@ -162,9 +162,9 @@ locale.de = {
         new_tag: "Neues Attribut"
     },
 
-    view_on_osm: "Bei OSM anschauen",
+    view_on_osm: "Auf OSM anschauen",
 
-    zoom_in_edit: "Hineinzoomen, um die Karte zu editieren",
+    zoom_in_edit: "Hineinzoomen, um die Karte zu bearbeiten",
 
     edit_tags: "Attribute bearbeiten",
 
