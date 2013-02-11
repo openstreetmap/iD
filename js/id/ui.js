@@ -12,6 +12,8 @@ iD.ui = function(context) {
             return;
         }
 
+        if (iD.detect().opera) container.classed('opera', true);
+
         function hintprefix(x, y) {
             return '<span>' + y + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + x + '</span></div>';
         }

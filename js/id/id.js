@@ -127,6 +127,8 @@ iD.detect = function() {
         browser.support = true;
     }
 
+    browser.opera = ua.indexOf('Opera') >= 0;
+
     browser.locale = navigator.language;
 
     function nav(x) {
