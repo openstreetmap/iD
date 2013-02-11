@@ -651,7 +651,7 @@ text.pointlabel {
   dominant-baseline: middle;
 }
 
-/* Opera doesn't support dominant-baseline */
+/* Opera doesn't support dominant-baseline. See #715 */
 .opera .pathlabel .textpath {
   baseline-shift: -33%;
   dominant-baseline: auto;

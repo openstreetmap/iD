@@ -127,6 +127,7 @@ iD.detect = function() {
         browser.support = true;
     }
 
+    // Added due to incomplete svg style support. See #715
     browser.opera = ua.indexOf('Opera') >= 0;
 
     browser.locale = navigator.language;
