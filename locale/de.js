@@ -157,16 +157,16 @@ locale.de = {
     browser_notice: "Dieser Editor wird in Firefox, Chrome, Safari, Opera, und Internet Explorer 9 und höher unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
 
     inspector: {
-        no_documentation_combination:  "Es ist keine Dokumentation verfügbar für diese Markierungskombination.",
-        no_documentation_key: "Es ist keine Dokumentation verfügbar für dieses Schlüsselwort",
-        new_tag: "Neue Markierung"
+        no_documentation_combination:  "Für dieses Attribut ist keine Dokumentation verfügbar.",
+        no_documentation_key: "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
+        new_tag: "Neues Attribut"
     },
 
     view_on_osm: "Bei OSM anschauen",
 
     zoom_in_edit: "Hineinzoomen, um die Karte zu editieren",
 
-    edit_tags: "Markierungen bearbeiten",
+    edit_tags: "Attribute bearbeiten",
 
     geocoder: {
         "find_location": "Finde einen Ort",
