@@ -41,6 +41,6 @@ iD.svg = {
                 }
             });
             return tags;
-        }
+        };
     }
 };

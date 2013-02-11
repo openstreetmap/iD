@@ -21,5 +21,5 @@ iD.ui.SourceSwitch = function(context) {
             .text(t('source_switch.live'))
             .classed('live', true)
             .on('click', click);
-    }
+    };
 };

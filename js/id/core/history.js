@@ -187,7 +187,7 @@ iD.History = function(context) {
                     annotation: i.annotation,
                     imagery_used: i.imagery_used,
                     entities: i.graph.entities
-                }
+                };
             }));
 
             context.storage(getKey('history'), json);
