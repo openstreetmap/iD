@@ -141,6 +141,8 @@ locale.fr = {
     },
 
     save: "Sauvegarder",
+    // TODO
+    unsaved_changes: "You have unsaved changes",
     save_help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
     no_changes: "Vous n'avez aucune modification à enregistrer.",
     save_error: "Une erreur est survenue lors de l'enregistrement des données",
@@ -169,13 +171,23 @@ locale.fr = {
     edit_tags: "Editer les tags",
 
     geocoder: {
-        "find_location": "Trouver un emplacement",
-        "find_a_place": "Trouver un endroit"
+        title: "Trouver un emplacement",
+        placeholder: "Trouver un endroit",
+        // TODO
+        no_results: "Couldn't locate a place named '{name}'"
     },
 
     description: "Description",
 
     logout: "Déconnexion",
+
+    // TODO
+    report_a_bug: "report a bug",
+
+    contributors: {
+        list: "Viewing contributions by {users}",
+        truncated_list: "Viewing contributions by {users} and {count} others"
+    },
 
     layerswitcher: {
         title: "Fond de carte",
@@ -183,5 +195,10 @@ locale.fr = {
         percent_brightness: "{opacity}% brightness",
         fix_misalignment: "Fix misalignment",
         reset: "reset"
+    },
+
+    source_switch: {
+        live: "live",
+        dev: "dev"
     }
 };

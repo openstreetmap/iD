@@ -141,6 +141,8 @@ locale.de = {
     },
 
     save: "Speichern",
+    // TODO
+    unsaved_changes: "You have unsaved changes",
     save_help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
     no_changes: "Sie haben keine Änderungen zum Speichern.",
     save_error: "Beim Speichern ist ein Fehler aufgetreten",
@@ -176,7 +178,16 @@ locale.de = {
 
     description: "Beschreibung",
 
+    // TODO
+    report_a_bug: "report a bug",
+
     logout: "Abmelden",
+
+    // TODO
+    contributors: {
+        list: "Viewing contributions by {users}",
+        truncated_list: "Viewing contributions by {users} and {count} others"
+    },
 
     layerswitcher: {
         title: "Hintergrund",
@@ -184,5 +195,11 @@ locale.de = {
         percent_brightness: "{opacity}% Helligkeit",
         fix_misalignment: "Fehlerhafte Ausrichtung reparieren",
         reset: "Zurücksetzen"
+    },
+
+    // TODO
+    source_switch: {
+        live: "live",
+        dev: "dev"
     }
 };
