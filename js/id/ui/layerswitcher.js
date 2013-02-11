@@ -15,7 +15,8 @@ iD.ui.layerswitcher = function(context) {
     function layerswitcher(selection) {
 
         var content = selection
-            .append('div').attr('class', 'content fillD map-overlay hide');
+            .append('div').attr('class', 'content fillD map-overlay hide'),
+            shown = false;
 
         var button = selection
             .append('button')
@@ -30,8 +31,11 @@ iD.ui.layerswitcher = function(context) {
         function toggle() { setVisible(content.classed('hide')); }
 
         function setVisible(show) {
-            button.classed('active', show);
-            content.classed('hide', !show);
+            if (show !== shown) {
+                button.classed('active', show);
+                content.call(iD.ui.toggle(show));
+                shown = show;
+            }
         }
 
         function clickoutside(selection) {

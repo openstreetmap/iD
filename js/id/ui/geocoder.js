@@ -6,6 +6,9 @@ iD.ui.geocoder = function(context) {
     }
 
     function geocoder(selection) {
+
+        var shown = false;
+
         function keydown() {
             if (d3.event.keyCode !== 13) return;
             d3.event.preventDefault();
@@ -59,11 +62,14 @@ iD.ui.geocoder = function(context) {
         function toggle() { setVisible(gcForm.classed('hide')); }
 
         function setVisible(show) {
-            button.classed('active', show);
-            gcForm.classed('hide', !show);
-            if (!show) resultsList.classed('hide', !show);
-            if (show) inputNode.node().focus();
-            else inputNode.node().blur();
+            if (show !== shown) {
+                button.classed('active', show);
+                gcForm.call(iD.ui.toggle(show));
+                if (!show) resultsList.classed('hide', !show);
+                if (show) inputNode.node().focus();
+                else inputNode.node().blur();
+                shown = show;
+            }
         }
 
         var button = selection.append('button')

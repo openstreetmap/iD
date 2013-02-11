@@ -9,7 +9,7 @@ iD.ui.inspector = function() {
         var entity = selection.datum();
 
         var inspector = selection.append('div')
-            .attr('class','inspector content');
+            .attr('class','inspector content hide');
 
         inspector.append('div')
             .attr('class', 'head inspector-inner fillL')
@@ -42,6 +42,8 @@ iD.ui.inspector = function() {
         inspectorbody.append('div')
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
+
+        inspector.call(iD.ui.toggle(true));
     }
 
     function drawHead(selection) {
