@@ -169,8 +169,9 @@ locale.de = {
     edit_tags: "Attribute bearbeiten",
 
     geocoder: {
-        "find_location": "Finde einen Ort",
-        "find_a_place": "Finde einen Platz"
+        title: "Suche einen Ort",
+        placeholder: "suche einen Ort",
+        no_results: "Der Ort '{name}' konnte nicht gefunden werden"
     },
 
     description: "Beschreibung",
