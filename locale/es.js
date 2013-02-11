@@ -4,7 +4,7 @@ locale.es = {
             title: "Zona", //"Area",
             description: "Agregar parques, edificios, lagos u otras zonas en el mapa", //"Add parks, buildings, lakes, or other areas to the map.",
             tail: "Hacer click en el mapa para empezar a dibujar una zona como un parque, lago o edificio", //"Click on the map to start drawing an area, like a park, lake, or building.",
-            key: "Z", //"A"
+            key: "Z" //"A"
         },
         add_line: {
             title: "Línea", //"Line",
