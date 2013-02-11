@@ -10,7 +10,7 @@ iD.behavior.Lasso = function(context) {
         function mousedown() {
             if (d3.event.shiftKey === true) {
 
-                pos = [d3.event.x, d3.event.y];
+                pos = [d3.event.clientX, d3.event.clientY];
 
                 lasso = iD.ui.lasso().a(d3.mouse(context.surface().node()));
 
@@ -48,7 +48,7 @@ iD.behavior.Lasso = function(context) {
                 .on('mousemove.lasso', null)
                 .on('mouseup.lasso', null);
 
-            if (d3.event.x !== pos[0] || d3.event.y !== pos[1]) {
+            if (d3.event.clientX !== pos[0] || d3.event.clientY !== pos[1]) {
                 var selected = context.graph().intersects(extent);
 
                 if (selected.length) {
