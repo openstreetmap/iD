@@ -133,11 +133,11 @@ locale.de = {
     },
 
     validations: {
-        untagged_point: "Punkt, der kein Teil einer Linie oder Fläche ist, entmarkiert",
-        untagged_line: "Linie entmarkiert",
-        untagged_area: "Fläche entmarkiert",
-        tag_suggests_area: "Die Markierung {tag} suggeriert eine Fläche, ist aber keine Fläche",
-        deprecated_tags: "Abgelehnte Markierungen: {tags}"
+        untagged_point: "Punkt ohne Attribute, der kein Teil einer Linie oder Fläche ist",
+        untagged_line: "Linie ohne Attribute",
+        untagged_area: "Fläche ohne Attribute",
+        tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
+        deprecated_tags: "Veralterte Attribute: {tags}"
     },
 
     save: "Speichern",
