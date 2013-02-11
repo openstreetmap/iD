@@ -179,8 +179,6 @@ locale.lv = {
 
     logout: "atslēgties",
 
-    live: "live",
-    dev: "dev",
     report_a_bug: "ziņot par kļūdu",
 
     layerswitcher: {
@@ -194,5 +192,10 @@ locale.lv = {
     contributors: {
         list: "{users} papildinājumi redzami",
         truncated_list: "{users} un {count} citu papildinājumi redzami"
+    },
+
+    source_switch: {
+        live: "live",
+        dev: "dev"
     }
 };
