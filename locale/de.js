@@ -133,20 +133,20 @@ locale.de = {
     },
 
     validations: {
-        untagged_point: "Punkt, der kein Teil einer Linie oder Fläche ist, entmarkiert",
-        untagged_line: "Linie entmarkiert",
-        untagged_area: "Fläche entmarkiert",
-        tag_suggests_area: "Die Markierung {tag} suggeriert eine Fläche, ist aber keine Fläche",
-        deprecated_tags: "Abgelehnte Markierungen: {tags}"
+        untagged_point: "Punkt ohne Attribute, der kein Teil einer Linie oder Fläche ist",
+        untagged_line: "Linie ohne Attribute",
+        untagged_area: "Fläche ohne Attribute",
+        tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
+        deprecated_tags: "Veralterte Attribute: {tags}"
     },
 
     save: "Speichern",
-    save_help: "Speichere Änderungen zu OpenStreetMap, so dass sie für andere Nutzer sichtbar werden",
+    save_help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
     no_changes: "Sie haben keine Änderungen zum Speichern.",
-    save_error: "Es ist ein Fehler aufgetreten beim Versuch des Speicherns",
-    uploading_changes: "Lade Änderungen zu OpenStreetMap.",
+    save_error: "Beim Speichern ist ein Fehler aufgetreten",
+    uploading_changes: "Änderungen werden zu OpenStreetMap hochgeladen.",
     just_edited: "Sie haben gerade OpenStreetMap editiert!",
-    okay: "Okay",
+    okay: "OK",
 
     "zoom-in": "Hineinzoomen",
     "zoom-out": "Herauszoomen",
@@ -154,23 +154,24 @@ locale.de = {
     nothing_to_undo: "Nichts zum Rückgängigmachen.",
     nothing_to_redo: "Nichts zum Wiederherstellen.",
 
-    browser_notice: "Dieser Editor wird in Firefox, Chrome, Safari, Opera, und Internet Explorer 9 und höher unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
+    browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
 
     inspector: {
-        no_documentation_combination:  "Es ist keine Dokumentation verfügbar für diese Markierungskombination.",
-        no_documentation_key: "Es ist keine Dokumentation verfügbar für dieses Schlüsselwort",
-        new_tag: "Neue Markierung"
+        no_documentation_combination:  "Für dieses Attribut ist keine Dokumentation verfügbar.",
+        no_documentation_key: "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
+        new_tag: "Neues Attribut"
     },
 
-    view_on_osm: "Bei OSM anschauen",
+    view_on_osm: "Auf OSM anschauen",
 
-    zoom_in_edit: "Hineinzoomen, um die Karte zu editieren",
+    zoom_in_edit: "Hineinzoomen, um die Karte zu bearbeiten",
 
-    edit_tags: "Markierungen bearbeiten",
+    edit_tags: "Attribute bearbeiten",
 
     geocoder: {
-        "find_location": "Finde einen Ort",
-        "find_a_place": "Finde einen Platz"
+        title: "Suche einen Ort",
+        placeholder: "suche einen Ort",
+        no_results: "Der Ort '{name}' konnte nicht gefunden werden"
     },
 
     description: "Beschreibung",
