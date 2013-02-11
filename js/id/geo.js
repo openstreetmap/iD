@@ -15,24 +15,42 @@ iD.geo.dist = function(a, b) {
     return Math.sqrt((x * x) + (y * y));
 };
 
-iD.geo.chooseIndex = function(way, point, context) {
+// Choose the edge with the minimal distance from `point` to its orthogonal
+// projection onto that edge, if such a projection exists. Returns an object
+// with the `index`of the chosen edge, `distance` to the orthogonal projection,
+// and its `loc`.
+iD.geo.chooseEdge = function(nodes, point, projection) {
     var dist = iD.geo.dist,
-        graph = context.graph(),
-        nodes = graph.childNodes(way),
-        projNodes = nodes.map(function(n) { return context.projection(n.loc); });
+        points = nodes.map(function(n) { return projection(n.loc); }),
+        min = Infinity,
+        idx, loc;
 
-    for (var i = 0, changes = []; i < projNodes.length - 1; i++) {
-        changes[i] =
-            (dist(projNodes[i], point) + dist(point, projNodes[i + 1])) /
-            dist(projNodes[i], projNodes[i + 1]);
+    function dot(p, q) {
+        return p[0] * q[0] + p[1] * q[1];
     }
 
-    var idx = _.indexOf(changes, _.min(changes)),
-        ratio = dist(projNodes[idx], point) / dist(projNodes[idx], projNodes[idx + 1]),
-        loc = iD.geo.interp(nodes[idx].loc, nodes[idx + 1].loc, ratio);
+    for (var i = 0; i < points.length - 1; i++) {
+        var o = points[i],
+            s = [points[i + 1][0] - o[0], points[i + 1][1] - o[1]],
+            v = [point[0] - o[0], point[1] - o[1]],
+            proj = dot(v, s) / dot(s, s);
+
+        // Only consider projections that lie on the edge itself.
+        if (proj >= 0 && proj <= 1) {
+            var p = [o[0] + proj * s[0], o[1] + proj * s[1]],
+                d = dist(p, point);
+
+            if (d < min) {
+                min = d;
+                idx = i + 1;
+                loc = projection.invert(p);
+            }
+        }
+    }
 
     return {
-        index: idx + 1,
+        index: idx,
+        distance: min,
         loc: loc
     };
 };
