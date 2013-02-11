@@ -32,6 +32,10 @@ g.point circle {
     fill:#fff;
 }
 
+g.point image {
+  pointer-events: none;
+}
+
 g.point .shadow {
     fill: none;
     pointer-events: all;
