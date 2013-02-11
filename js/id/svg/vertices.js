@@ -40,8 +40,7 @@ iD.svg.Vertices = function(projection) {
 
         // Selecting the following implicitly
         // sets the data (vertix entity) on the elements
-        groups.select('circle.fill');
-        groups.select('circle.stroke');
+        groups.select('circle.fill, circle.stroke, circle.shadow');
 
         groups.exit()
             .remove();
