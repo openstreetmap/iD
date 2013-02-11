@@ -141,10 +141,9 @@ locale.de = {
     },
 
     save: "Speichern",
-    // TODO
-    unsaved_changes: "You have unsaved changes",
+    unsaved_changes: "Ungespeicherte Änderugen vorhanden",
     save_help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
-    no_changes: "Sie haben keine Änderungen zum Speichern.",
+    no_changes: "Keine Änderungen zum Speichern vorhanden.",
     save_error: "Beim Speichern ist ein Fehler aufgetreten",
     uploading_changes: "Änderungen werden zu OpenStreetMap hochgeladen.",
     just_edited: "Sie haben gerade OpenStreetMap editiert!",
@@ -178,15 +177,13 @@ locale.de = {
 
     description: "Beschreibung",
 
-    // TODO
-    report_a_bug: "report a bug",
+    report_a_bug: "Programmfehler melden",
 
     logout: "Abmelden",
 
-    // TODO
     contributors: {
-        list: "Viewing contributions by {users}",
-        truncated_list: "Viewing contributions by {users} and {count} others"
+        list: "Diese Kartenansicht enthält Beiträge von:",
+        truncated_list: "Diese Kartenansicht enthält Beiträge von: {users} und {count} Anderen"
     },
 
     layerswitcher: {
@@ -197,7 +194,6 @@ locale.de = {
         reset: "Zurücksetzen"
     },
 
-    // TODO
     source_switch: {
         live: "live",
         dev: "dev"
