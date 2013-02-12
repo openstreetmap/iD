@@ -188,14 +188,11 @@ iD.ui = function(context) {
         };
 
         history.on('change.editor', function() {
-
             var undo = history.undoAnnotation(),
                 redo = history.redoAnnotation();
 
             function refreshTooltip(selection) {
-                if (selection.property('disabled')) {
-                    selection.call(undo_tooltip.hide);
-                } else if (selection.property('tooltipVisible')) {
+                if (selection.property('tooltipVisible')) {
                     selection.call(undo_tooltip.show);
                 }
             }
