@@ -145,9 +145,6 @@ locale.es = {
     just_edited: "Acabas de editar OpenStreetMap!", //"You Just Edited OpenStreetMap!",
     okay: "OK", //"Okay",
 
-    "zoom-in": "Aumentar", // "Zoom In",
-    "zoom-out": "Alejar", //"Zoom Out",
-
     nothing_to_undo: "Nada para deshacer", //"Nothing to undo.",
     nothing_to_redo: "Nada para rehacer", //"Nothing to redo.",
 
@@ -193,5 +190,10 @@ locale.es = {
     source_switch: {
         live: "en vivo", //"live",
         dev: "dev"
+    },
+
+    zoom: {
+        in: "Aumentar", // "Zoom In",
+        out: "Alejar" //"Zoom Out",
     }
 };

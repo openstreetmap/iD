@@ -145,9 +145,6 @@ locale.de = {
     just_edited: "Sie haben gerade OpenStreetMap editiert!",
     okay: "OK",
 
-    "zoom-in": "Hineinzoomen",
-    "zoom-out": "Herauszoomen",
-
     nothing_to_undo: "Nichts zum Rückgängigmachen.",
     nothing_to_redo: "Nichts zum Wiederherstellen.",
 
@@ -193,5 +190,10 @@ locale.de = {
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    zoom: {
+        in: "Hineinzoomen",
+        out: "Herauszoomen"
     }
 };

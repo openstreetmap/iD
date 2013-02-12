@@ -145,9 +145,6 @@ locale.lv = {
     just_edited: "Jūs nupat rediģējāt OpenStreetMap",
     okay: "Labi",
 
-    "zoom-in": "Pietuvināt",
-    "zoom-out": "Attālināt",
-
     nothing_to_undo: "Nav nekā, ko atcelt",
     nothing_to_redo: "Nav nekā, ko atsaukt",
 
@@ -193,5 +190,10 @@ locale.lv = {
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    zoom: {
+        in: "Pietuvināt",
+        out: "Attālināt"
     }
 };

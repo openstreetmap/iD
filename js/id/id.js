@@ -85,6 +85,8 @@ window.iD = function () {
     context.projection = map.projection;
     context.tail = map.tail;
     context.redraw = map.redraw;
+    context.zoomIn = map.zoomIn;
+    context.zoomOut = map.zoomOut;
 
     context.container = function(_) {
         if (!arguments.length) return container;

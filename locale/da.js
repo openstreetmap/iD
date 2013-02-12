@@ -149,9 +149,6 @@ locale.da = {
     just_edited: "Du har lige rettede i OpenStreetMap!",
     okay: "Ok",
 
-    "zoom-in": "Zoom ind",
-    "zoom-out": "Zoom ud",
-
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
 
@@ -197,5 +194,10 @@ locale.da = {
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    zoom: {
+        in: "Zoom ind",
+        out: "Zoom ud"
     }
 };

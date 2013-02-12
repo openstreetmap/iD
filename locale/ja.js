@@ -145,9 +145,6 @@ locale.ja = {
     just_edited: "OpenStreetMap編集完了！",
     okay: "OK",
 
-    "zoom-in": "ズームイン",
-    "zoom-out": "ズームアウト",
-
     nothing_to_undo: "やり直す変更点がありません",
     nothing_to_redo: "やり直した変更点がありません",
 
@@ -193,5 +190,10 @@ locale.ja = {
     source_switch: {
         live: "本番サーバ",
         dev: "開発サーバ"
+    },
+
+    zoom: {
+        in: "ズームイン",
+        out: "ズームアウト"
     }
 };
