@@ -2,8 +2,9 @@ iD.behavior.Select = function(context) {
     var behavior = function(selection) {
         function click() {
             var datum = d3.event.target.__data__;
-            if (!(datum instanceof iD.Entity) && !d3.event.shiftKey) {
-                context.enter(iD.modes.Browse(context));
+            if (!(datum instanceof iD.Entity)) {
+                if (!d3.event.shiftKey)
+                    context.enter(iD.modes.Browse(context));
 
             } else if (!d3.event.shiftKey) {
                 // Avoid re-entering Select mode with same entity.
