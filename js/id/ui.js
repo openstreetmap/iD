@@ -38,19 +38,20 @@ iD.ui = function(context) {
             .call(iD.ui.Save(context));
 
         container.append('div')
-            .attr('class', 'zoombuttons map-control')
+            .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));
 
-        if (navigator.geolocation) {
-            container.append('div')
-                .call(iD.ui.geolocate(map));
-        }
+        container.append('div')
+            .attr('class', 'map-control geocode-control')
+            .call(iD.ui.Geocoder(context));
 
-        container.append('div').attr('class', 'geocode-control map-control')
-            .call(iD.ui.geocoder(context));
-
-        container.append('div').attr('class', 'map-control layerswitcher-control')
+        container.append('div')
+            .attr('class', 'map-control layerswitcher-control')
             .call(iD.ui.layerswitcher(context));
+
+        container.append('div')
+            .attr('class', 'map-control geolocate-control')
+            .call(iD.ui.Geolocate(map));
 
         container.append('div')
             .style('display', 'none')

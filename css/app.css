@@ -849,13 +849,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: 4px;
 }
 
-.geocode-control div {
+.geocode-control div.content {
     top: 50px;
     width: 340px;
     margin: 4px;
     padding: 5px;
 }
-.geocode-control div span {
+.geocode-control div.content span {
     display: inline-block;
     border-bottom: 1px solid #333;
 }
