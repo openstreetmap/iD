@@ -15,14 +15,14 @@ iD.behavior.Hover = function() {
             var datum = d3.event.target.__data__;
             if (datum) {
                 selection.selectAll('*')
-                    .filter(function (d) { return d === datum; })
+                    .filter(function(d) { return d === datum; })
                     .classed('hover', true);
             }
         }
 
         selection.on('mouseover.hover', mouseover);
 
-        selection.on('mouseout.hover', function () {
+        selection.on('mouseout.hover', function() {
             selection.selectAll('.hover')
                 .classed('hover', false);
         });

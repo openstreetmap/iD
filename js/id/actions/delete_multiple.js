@@ -6,7 +6,7 @@ iD.actions.DeleteMultiple = function(ids) {
             relation: iD.actions.DeleteRelation
         };
 
-        ids.forEach(function (id) {
+        ids.forEach(function(id) {
             var entity = graph.entity(id);
             if (entity) { // It may have been deleted aready.
                 graph = actions[entity.type](id)(graph);

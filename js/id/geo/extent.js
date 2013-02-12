@@ -14,7 +14,7 @@ iD.geo.Extent = function geoExtent(min, max) {
 iD.geo.Extent.prototype = [[], []];
 
 _.extend(iD.geo.Extent.prototype, {
-    extend: function (obj) {
+    extend: function(obj) {
         if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
         return iD.geo.Extent([Math.min(obj[0][0], this[0][0]),
                               Math.min(obj[0][1], this[0][1])],
@@ -22,12 +22,12 @@ _.extend(iD.geo.Extent.prototype, {
                               Math.max(obj[1][1], this[1][1])]);
     },
 
-    center: function () {
+    center: function() {
         return [(this[0][0] + this[1][0]) / 2,
                 (this[0][1] + this[1][1]) / 2];
     },
 
-    intersects: function (obj) {
+    intersects: function(obj) {
         if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
         return obj[0][0] <= this[1][0] &&
                obj[0][1] <= this[1][1] &&

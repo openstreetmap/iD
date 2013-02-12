@@ -42,10 +42,10 @@ iD.ui.RadialMenu = function(operations) {
             });
 
         button.append('circle')
-            .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
+            .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('r', 15)
-            .attr('title', function (d) { return d.title; })
-            .classed('disabled', function (d) { return !d.enabled(); })
+            .attr('title', function(d) { return d.title; })
+            .classed('disabled', function(d) { return !d.enabled(); })
             .on('click', click)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
@@ -58,7 +58,7 @@ iD.ui.RadialMenu = function(operations) {
             .attr('y', -10);
 
         image.append('xhtml:span')
-            .attr('class', function (d) { return 'icon icon-operation icon-operation-' + d.id; });
+            .attr('class', function(d) { return 'icon icon-operation icon-operation-' + d.id; });
 
         var tooltip = menu.append('foreignObject')
             .style('display', 'none')

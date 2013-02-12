@@ -319,14 +319,14 @@ iD.Map = function(context) {
         }
     };
 
-    map.flush = function () {
+    map.flush = function() {
         context.connection().flush();
         context.history().reset();
         return map;
     };
 
     var usedTails = {};
-    map.tail = function (_) {
+    map.tail = function(_) {
         if (!_ || usedTails[_] === undefined) {
             tail.text(_);
             usedTails[_] = true;

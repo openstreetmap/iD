@@ -10,7 +10,7 @@ iD.ui.Save = function(context) {
 
         if (!history.hasChanges()) return;
 
-        connection.authenticate(function (err) {
+        connection.authenticate(function(err) {
             var modal = iD.ui.modal(context.container());
             var changes = history.changes();
             changes.connection = connection;
@@ -18,7 +18,7 @@ iD.ui.Save = function(context) {
                 .classed('commit-modal', true)
                 .datum(changes)
                 .call(iD.ui.commit(context)
-                    .on('cancel', function () {
+                    .on('cancel', function() {
                         modal.remove();
                     })
                     .on('fix', clickFix)
@@ -73,7 +73,7 @@ iD.ui.Save = function(context) {
         modal.remove();
     }
 
-    return function (selection) {
+    return function(selection) {
         var button = selection.append('button')
             .attr('class', 'save col12 disabled')
             .attr('tabindex', -1)

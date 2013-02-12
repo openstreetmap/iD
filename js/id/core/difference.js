@@ -6,7 +6,7 @@
     of entities that will require a redraw, taking into account
     child and parent relationships.
  */
-iD.Difference = function (base, head) {
+iD.Difference = function(base, head) {
     var changes = {}, length = 0;
 
     _.each(head.entities, function(h, id) {
@@ -27,7 +27,7 @@ iD.Difference = function (base, head) {
 
     var difference = {};
 
-    difference.length = function () {
+    difference.length = function() {
         return length;
     };
 
@@ -105,7 +105,7 @@ iD.Difference = function (base, head) {
                 }
 
                 diff = _.difference(nb, nh);
-                for (var i = 0; i < diff.length; i++) {
+                for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.entity(diff[i]);
                 }
             }

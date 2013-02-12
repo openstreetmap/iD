@@ -32,10 +32,10 @@ iD.svg = {
         };
     },
 
-    MultipolygonMemberTags: function (graph) {
-        return function (entity) {
+    MultipolygonMemberTags: function(graph) {
+        return function(entity) {
             var tags = entity.tags;
-            graph.parentRelations(entity).forEach(function (relation) {
+            graph.parentRelations(entity).forEach(function(relation) {
                 if (relation.isMultipolygon()) {
                     tags = _.extend({}, relation.tags, tags);
                 }

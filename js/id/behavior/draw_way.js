@@ -30,7 +30,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         if (datum.id === end.id || datum.id === segment.id) {
             context.surface().selectAll('.way, .node')
-                .filter(function (d) {
+                .filter(function(d) {
                     return d.id === end.id || d.id === segment.id;
                 })
                 .classed('active', true);

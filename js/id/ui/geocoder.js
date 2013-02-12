@@ -23,7 +23,7 @@ iD.ui.geocoder = function(context) {
                             .text(t('geocoder.no_results', {name: searchVal}));
                     } else if (resp.length > 1) {
                         var spans = resultsList.selectAll('span')
-                            .data(resp, function (d) { return d.place_id; });
+                            .data(resp, function(d) { return d.place_id; });
 
                         spans.enter()
                             .append('span')

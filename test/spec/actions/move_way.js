@@ -1,5 +1,5 @@
-describe("iD.actions.MoveWay", function () {
-    it("moves all nodes in a way by the given amount", function () {
+describe("iD.actions.MoveWay", function() {
+    it("moves all nodes in a way by the given amount", function() {
         var node1  = iD.Node({loc: [0, 0]}),
             node2  = iD.Node({loc: [5, 10]}),
             way    = iD.Way({nodes: [node1.id, node2.id]}),
@@ -14,7 +14,7 @@ describe("iD.actions.MoveWay", function () {
         expect(loc2[1]).to.be.closeTo( 7.866, 0.001);
     });
 
-    it("moves repeated nodes only once", function () {
+    it("moves repeated nodes only once", function() {
         var node   = iD.Node({loc: [0, 0]}),
             way    = iD.Way({nodes: [node.id, node.id]}),
             delta  = [2, 3],

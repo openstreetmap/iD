@@ -28,11 +28,11 @@ iD.svg.Areas = function(projection) {
 
             paths.enter()
                 .append('path')
-                .attr('class', function (d) { return d.type + ' area ' + klass; });
+                .attr('class', function(d) { return d.type + ' area ' + klass; });
 
             paths
                 .order()
-                .attr('d', function (entity) { return path(entity.asGeoJSON(graph)); })
+                .attr('d', function(entity) { return path(entity.asGeoJSON(graph)); })
                 .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
 
@@ -44,7 +44,7 @@ iD.svg.Areas = function(projection) {
 
         areas = _.pluck(areas, 'entity');
 
-        var strokes = areas.filter(function (area) {
+        var strokes = areas.filter(function(area) {
             return area.type === 'way';
         });
 
