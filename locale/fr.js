@@ -136,9 +136,8 @@ locale.fr = {
         deprecated_tags: "Tags obsolètes : {tags}"
     },
 
-    save: "Sauvegarder",
-    // TODO
-    unsaved_changes: "You have unsaved changes",
+    save: "Sauvegarder",    
+    unsaved_changes: "Vous avez des modifications non enregistrées",
     save_help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
     no_changes: "Vous n'avez aucune modification à enregistrer.",
     save_error: "Une erreur est survenue lors de l'enregistrement des données",
@@ -168,21 +167,19 @@ locale.fr = {
 
     geocoder: {
         title: "Trouver un emplacement",
-        placeholder: "Trouver un endroit",
-        // TODO
-        no_results: "Couldn't locate a place named '{name}'"
+        placeholder: "Trouver un endroit",      
+        no_results: "Impossible de localiser l'endroit nommé '{name}'"
     },
 
-    description: "Description",
+    description: "Déscription",
 
     logout: "Déconnexion",
 
-    // TODO
-    report_a_bug: "report a bug",
+    report_a_bug: "Signaler un bug",
 
     contributors: {
-        list: "Viewing contributions by {users}",
-        truncated_list: "Viewing contributions by {users} and {count} others"
+        list: "Consulter les contributions de {users}",
+        truncated_list: "Consulter les contributions de {users} et {count} les autres"
     },
 
     layerswitcher: {
