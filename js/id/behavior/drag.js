@@ -24,7 +24,7 @@ iD.behavior.drag = function() {
         origin = null,
         selector = '',
         filter = null,
-        event_, target;
+        event_, target, surface;
 
     event.of = function(thiz, argumentz) {
       return function(e1) {
@@ -62,14 +62,13 @@ iD.behavior.drag = function() {
         if (touchId === null) d3_eventCancel();
 
         function point() {
-            var p = target.parentNode;
+            var p = target.parentNode || surface;
             return touchId !== null ? d3.touches(p).filter(function(p) {
                 return p.identifier === touchId;
             })[0] : d3.mouse(p);
         }
 
         function dragmove() {
-            if (!target.parentNode) return dragend();
 
             var p = point(),
                 dx = p[0] - origin_[0],
@@ -167,6 +166,12 @@ iD.behavior.drag = function() {
         if (!arguments.length) return target;
         target = arguments[0];
         event_ = event.of(target, Array.prototype.slice.call(arguments, 1));
+        return drag;
+    };
+
+    drag.surface = function() {
+        if (!arguments.length) return surface;
+        surface = arguments[0];
         return drag;
     };
 

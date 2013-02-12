@@ -148,6 +148,7 @@ iD.behavior.DragNode = function(context) {
 
     var behavior = iD.behavior.drag()
         .delegate("g.node, g.point, g.midpoint")
+        .surface(context.surface().node())
         .origin(origin)
         .on('start', start)
         .on('move', move)
