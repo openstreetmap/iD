@@ -4,6 +4,9 @@ iD.History = function(context) {
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = false;
 
+    var rtree = new RTree(),
+        treeGraph;
+
     function perform(actions) {
         actions = Array.prototype.slice.call(actions);
 
@@ -35,16 +38,49 @@ iD.History = function(context) {
         return 'iD_' + window.location.origin + '_' + n;
     }
 
+    function rebaseTree(entities) {
+        for (var i = 0; i < entities.length; i++) {
+            insert(treeGraph.entities[entities[i]]);
+        }
+    }
+
+    function getRectangle(entity) {
+        return extentRectangle(entity.extent(treeGraph));
+    }
+
+    function extentRectangle(extent) {
+        var m = 1000 * 1000 * 100,
+            x = m * extent[0][0],
+            y = m * extent[0][1],
+            dx = m * extent[1][0] - x || 2,
+            dy = m * extent[1][1] - y || 2;
+        return new RTree.Rectangle(~~x, ~~y, ~~dx - 1, ~~dy - 1);
+    }
+
+    function insert(entity) {
+        rtree.insert(getRectangle(entity), entity.id);
+    }
+
+    function remove(entity) {
+        rtree.remove(getRectangle(entity), entity.id);
+    }
+
     var history = {
         graph: function() {
             return stack[index].graph;
         },
 
         merge: function(entities) {
+
+            var base = treeGraph.base(),
+                newentities = Object.keys(entities).filter(function(i) {
+                return !treeGraph.entities.hasOwnProperty(i) && !base.entities[i];
+            });
+
             for (var i = 0; i < stack.length; i++) {
                 stack[i].graph.rebase(entities);
             }
-
+            rebaseTree(newentities);
             dispatch.change();
         },
 
@@ -124,6 +160,11 @@ iD.History = function(context) {
             }
         },
 
+        intersects: function(extent) {
+            return rtree.search(extentRectangle(extent))
+                .map(function(id) { return treeGraph.entity(id) });
+        },
+
         difference: function() {
             var base = stack[0].graph,
                 head = stack[index].graph;
@@ -168,6 +209,7 @@ iD.History = function(context) {
         reset: function() {
             stack = [{graph: iD.Graph()}];
             index = 0;
+            treeGraph = stack[0].graph;
             dispatch.change();
         },
 
