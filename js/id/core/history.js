@@ -40,12 +40,8 @@ iD.History = function(context) {
 
     function rebaseTree(entities) {
         for (var i = 0; i < entities.length; i++) {
-            insert(treeGraph.entities[entities[i]]);
+            insert(stack[index].graph.entities[entities[i]]);
         }
-    }
-
-    function getRectangle(entity) {
-        return extentRectangle(entity.extent(treeGraph));
     }
 
     function extentRectangle(extent) {
@@ -58,11 +54,16 @@ iD.History = function(context) {
     }
 
     function insert(entity) {
-        rtree.insert(getRectangle(entity), entity.id);
+        rtree.insert(extentRectangle(entity.extent(stack[index].graph)), entity.id);
     }
 
     function remove(entity) {
-        rtree.remove(getRectangle(entity), entity.id);
+        var r= rtree.remove(extentRectangle(entity.extent(treeGraph)), entity.id);
+    }
+
+    function reinsert(entity) {
+        remove(treeGraph.entities[entity.id]);
+        insert(entity);
     }
 
     var history = {
@@ -161,8 +162,26 @@ iD.History = function(context) {
         },
 
         intersects: function(extent) {
+            if (treeGraph !== stack[index].graph) {
+                var diff = iD.Difference(treeGraph, stack[index].graph),
+                    modified = {};
+
+                diff.modified().forEach(function(d) {
+                    var loc = treeGraph.entities[d.id].loc;
+                    if (!loc || loc[0] !== d.loc[0] || loc[1] !== d.loc[1]) {
+                        modified[d.id] = d;
+                    }
+                });
+
+                d3.values(diff.addParents(modified)).map(reinsert);
+                diff.created().forEach(insert);
+                diff.deleted().forEach(remove);
+
+                treeGraph = stack[index].graph;
+            }
+
             return rtree.search(extentRectangle(extent))
-                .map(function(id) { return treeGraph.entity(id) });
+                .map(function(id) { return treeGraph.entity(id); });
         },
 
         difference: function() {
@@ -185,7 +204,7 @@ iD.History = function(context) {
             }
 
             return {
-                modified: difference.modified().map(discardTags),
+                modified: d3.values(difference.modified()).map(discardTags),
                 created: difference.created().map(discardTags),
                 deleted: difference.deleted()
             };

@@ -25,6 +25,18 @@ iD.Difference = function (base, head) {
         }
     });
 
+    function addParents(parents, result) {
+        for (var i = 0; i < parents.length; i++) {
+            var parent = parents[i];
+
+            if (parent.id in result)
+                continue;
+
+            result[parent.id] = parent;
+            addParents(head.parentRelations(parent), result);
+        }
+    }
+
     var difference = {};
 
     difference.length = function () {
@@ -67,20 +79,17 @@ iD.Difference = function (base, head) {
         return result;
     };
 
+    difference.addParents = function(entities) {
+
+        for (var i in entities) {
+            addParents(head.parentWays(entities[i]), entities);
+            addParents(head.parentRelations(entities[i]), entities);
+        }
+        return entities;
+    },
+
     difference.complete = function(extent) {
         var result = {}, id, change;
-
-        function addParents(parents) {
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
-
-                if (parent.id in result)
-                    continue;
-
-                result[parent.id] = parent;
-                addParents(head.parentRelations(parent));
-            }
-        }
 
         for (id in changes) {
             change = changes[id];
@@ -97,21 +106,21 @@ iD.Difference = function (base, head) {
             if (entity.type === 'way') {
                 var nh = h ? h.nodes : [],
                     nb = b ? b.nodes : [],
-                    diff;
+                    diff, i;
 
                 diff = _.difference(nh, nb);
-                for (var i = 0; i < diff.length; i++) {
+                for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.entity(diff[i]);
                 }
 
                 diff = _.difference(nb, nh);
-                for (var i = 0; i < diff.length; i++) {
+                for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.entity(diff[i]);
                 }
             }
+            addParents(head.parentWays(entity), result);
+            addParents(head.parentRelations(entity), result);
 
-            addParents(head.parentWays(entity));
-            addParents(head.parentRelations(entity));
         }
 
         return result;
