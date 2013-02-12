@@ -43,7 +43,7 @@ iD.Map = function(context) {
                 }
             }, true)
             .on('mouseup.zoom', function() {
-                if (resetTransform) redraw();
+                if (resetTransform()) redraw();
             })
             .attr('id', 'surface')
             .call(iD.svg.Surface());
@@ -65,7 +65,7 @@ iD.Map = function(context) {
             graph = context.graph();
 
         if (!difference) {
-            all = graph.intersects(extent);
+            all = context.history().intersects(extent);
             filter = d3.functor(true);
         } else {
             var complete = difference.complete(extent);
