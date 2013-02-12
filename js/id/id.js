@@ -34,7 +34,7 @@ window.iD = function () {
     context.replace = history.replace;
     context.pop = history.pop;
     context.undo = history.undo;
-    context.redo = history.undo;
+    context.redo = history.redo;
     context.changes = history.changes;
 
     /* Graph */

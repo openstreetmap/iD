@@ -29,23 +29,9 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap joined col4')
             .call(iD.ui.Modes(context), limiter);
 
-        var undo_buttons = limiter.append('div')
-            .attr('class', 'button-wrap joined col1'),
-            undo_tooltip = bootstrap.tooltip().placement('bottom').html(true);
-
-        undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'col6' })
-            .classed('disabled', true)
-            .html("<span class='undo icon'></span><small></small>")
-            .on('click.editor', history.undo)
-            .call(undo_tooltip);
-
-        undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'col6' })
-            .classed('disabled', true)
-            .html("<span class='redo icon'><small></small>")
-            .on('click.editor', history.redo)
-            .call(undo_tooltip);
+        limiter.append('div')
+            .attr('class', 'button-wrap joined col1')
+            .call(iD.ui.UndoRedo(context));
 
         limiter.append('div').attr('class','button-wrap col1').append('button')
             .attr('class', 'save col12')
@@ -134,27 +120,6 @@ iD.ui = function(context) {
             if (history.hasChanges()) return t('unsaved_changes');
         };
 
-        history.on('change.editor', function() {
-            var undo = history.undoAnnotation(),
-                redo = history.redoAnnotation();
-
-            function refreshTooltip(selection) {
-                if (selection.property('tooltipVisible')) {
-                    selection.call(undo_tooltip.show);
-                }
-            }
-
-            limiter.select('#undo')
-                .classed('disabled', !undo)
-                .attr('data-original-title', iD.ui.tooltipHtml(undo || t('nothing_to_undo'), iD.ui.cmd('⌘Z')))
-                .call(refreshTooltip);
-
-            limiter.select('#redo')
-                .classed('disabled', !redo)
-                .attr('data-original-title', iD.ui.tooltipHtml(redo || t('nothing_to_redo'), iD.ui.cmd('⌘⇧Z')))
-                .call(refreshTooltip);
-        });
-
         d3.select(window).on('resize.editor', function() {
             map.size(m.size());
         });
@@ -170,8 +135,6 @@ iD.ui = function(context) {
         var pa = 5;
 
         var keybinding = d3.keybinding('main')
-            .on(iD.ui.cmd('⌘Z'), function() { history.undo(); })
-            .on(iD.ui.cmd('⌘⇧Z'), function() { history.redo(); })
             .on('⌫', function() { d3.event.preventDefault(); })
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
