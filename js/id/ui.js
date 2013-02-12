@@ -43,10 +43,12 @@ iD.ui = function(context) {
             .enter().append('button')
                 .attr('tabindex', -1)
                 .attr('class', function(mode) { return mode.title + ' add-button col3'; })
-            .call(bootstrap.tooltip().placement('bottom').html(true))
-            .attr('data-original-title', function(mode) {
-                return hintprefix(mode.key, mode.description);
-            })
+            .call(bootstrap.tooltip()
+                .placement('bottom')
+                .html(true)
+                .title(function(mode) {
+                    return hintprefix(mode.key, mode.description);
+                }))
             .on('click.editor', function(mode) { context.enter(mode); });
 
         function disableTooHigh() {
