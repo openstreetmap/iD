@@ -1,4 +1,4 @@
-locale.en = {
+locale.ja = {
     modes: {
         add_area: {
             title: "エリア",
