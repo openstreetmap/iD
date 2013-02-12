@@ -192,14 +192,14 @@ iD.Graph.prototype = {
         if (this.entities[entity.id] === entity)
             return this;
 
-        return this.update(function () {
+        return this.update(function() {
             this._updateCalculated(this.entities[entity.id], entity);
             this.entities[entity.id] = entity;
         });
     },
 
     remove: function(entity) {
-        return this.update(function () {
+        return this.update(function() {
             this._updateCalculated(entity, undefined);
             this.entities[entity.id] = undefined;
         });

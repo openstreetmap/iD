@@ -95,7 +95,7 @@ iD.svg.Lines = function(projection) {
 
         // Determine the lengths of oneway paths
         var lengths = {},
-            oneways = strokes.filter(function (d) { return d.isOneWay(); }).each(function(d) {
+            oneways = strokes.filter(function(d) { return d.isOneWay(); }).each(function(d) {
                 lengths[d.id] = Math.floor(this.getTotalLength() / alength);
             }).data();
 

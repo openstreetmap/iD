@@ -62,8 +62,8 @@ iD.actions.Reverse = function(wayId) {
             tags[reverseKey(key)] = reverseValue(key, way.tags[key]);
         }
 
-        graph.parentRelations(way).forEach(function (relation) {
-            relation.members.forEach(function (member, index) {
+        graph.parentRelations(way).forEach(function(relation) {
+            relation.members.forEach(function(member, index) {
                 if (member.id === way.id && (role = {forward: 'backward', backward: 'forward'}[member.role])) {
                     relation = relation.updateMember({role: role}, index);
                     graph = graph.replace(relation);

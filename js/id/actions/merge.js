@@ -9,10 +9,10 @@ iD.actions.Merge = function(ids) {
             area = geometries.area[0],
             points = geometries.point;
 
-        points.forEach(function (point) {
+        points.forEach(function(point) {
             area = area.mergeTags(point.tags);
 
-            graph.parentRelations(point).forEach(function (parent) {
+            graph.parentRelations(point).forEach(function(parent) {
                 graph = graph.replace(parent.replaceMember(point, area));
             });
 

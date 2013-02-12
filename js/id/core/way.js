@@ -14,7 +14,7 @@ _.extend(iD.Way.prototype, {
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            return this.nodes.reduce(function (extent, id) {
+            return this.nodes.reduce(function(extent, id) {
                 return extent.extend(resolver.entity(id).extent(resolver));
             }, iD.geo.Extent());
         });

@@ -61,7 +61,7 @@ iD.behavior.DragNode = function(context) {
         context.surface()
             .classed('behavior-drag-node', true)
             .selectAll('.node, .way')
-            .filter(function (d) { return activeIDs.indexOf(d.id) >= 0; })
+            .filter(function(d) { return activeIDs.indexOf(d.id) >= 0; })
             .classed('active', true);
     }
 

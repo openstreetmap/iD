@@ -35,7 +35,7 @@ iD.svg.Midpoints = function(projection) {
 
         var groups = surface.select('.layer-hit').selectAll('g.midpoint')
             .filter(filter)
-            .data(_.values(midpoints), function (d) { return d.id; });
+            .data(_.values(midpoints), function(d) { return d.id; });
 
         var group = groups.enter()
             .insert('g', ':first-child')
