@@ -1,7 +1,8 @@
 iD.ui.RadialMenu = function(operations) {
-    var menu;
+    var menu,
+        center = [0, 0];
 
-    var radialMenu = function(selection, center) {
+    var radialMenu = function(selection) {
         if (!operations.length)
             return;
 
@@ -92,6 +93,12 @@ iD.ui.RadialMenu = function(operations) {
                 .attr('opacity', 0)
                 .remove();
         }
+    };
+
+    radialMenu.center = function(_) {
+        if (!arguments.length) return center;
+        center = _;
+        return radialMenu;
     };
 
     return radialMenu;

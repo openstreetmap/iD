@@ -169,14 +169,14 @@ iD.modes.Select = function(context, selection, initial) {
         radialMenu = iD.ui.RadialMenu(operations);
 
         if (d3.event && !initial) {
-            var loc = context.map().mouseCoordinates();
-
             if (entity && entity.type === 'node') {
-                loc = entity.loc;
+                radialMenu.center(context.projection(entity.loc));
+            } else {
+                radialMenu.center(d3.mouse(context.surface().node()));
             }
 
             radialTime = window.setTimeout(function() {
-                context.surface().call(radialMenu, context.projection(loc));
+                context.surface().call(radialMenu);
             }, 300);
         }
     };
