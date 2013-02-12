@@ -6,7 +6,9 @@ iD.behavior.Select = function(context) {
                 context.enter(iD.modes.Browse(context));
 
             } else if (!d3.event.shiftKey) {
-                context.enter(iD.modes.Select(context, [datum.id]));
+                // Avoid re-entering Select mode with same entity.
+                if (context.selection().length !== 1 || context.selection()[0] !== datum.id)
+                    context.enter(iD.modes.Select(context, [datum.id]));
 
             } else if (context.selection().indexOf(datum.id) >= 0) {
                 var selection = _.without(context.selection(), datum.id);

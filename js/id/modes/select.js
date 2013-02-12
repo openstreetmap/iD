@@ -6,7 +6,7 @@ iD.modes.Select = function(context, selection, initial) {
 
     var inspector = iD.ui.inspector().initial(!!initial),
         keybinding = d3.keybinding('select'),
-        radialTime = null,
+        timeout = null,
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.Select(context),
@@ -161,24 +161,27 @@ iD.modes.Select = function(context, selection, initial) {
             .call(keybinding);
 
         context.surface()
-            .on('dblclick.select', dblclick)
             .selectAll("*")
             .filter(selected)
             .classed('selected', true);
 
         radialMenu = iD.ui.RadialMenu(operations);
+        var showMenu = d3.event && !initial;
 
-        if (d3.event && !initial) {
+        if (showMenu) {
             if (entity && entity.type === 'node') {
                 radialMenu.center(context.projection(entity.loc));
             } else {
                 radialMenu.center(d3.mouse(context.surface().node()));
             }
-
-            radialTime = window.setTimeout(function() {
-                context.surface().call(radialMenu);
-            }, 300);
         }
+
+        timeout = window.setTimeout(function() {
+            if (showMenu) context.surface().call(radialMenu);
+
+            context.surface()
+                .on('dblclick.select', dblclick)
+        }, 300);
     };
 
     mode.exit = function() {
@@ -186,7 +189,7 @@ iD.modes.Select = function(context, selection, initial) {
             changeTags(singular(), inspector.tags());
         }
 
-        if (radialTime) window.clearTimeout(radialTime);
+        if (timeout) window.clearTimeout(timeout);
 
         context.container()
             .select('.inspector-wrap')
