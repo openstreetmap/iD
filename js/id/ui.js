@@ -14,10 +14,6 @@ iD.ui = function(context) {
 
         if (iD.detect().opera) container.classed('opera', true);
 
-        function hintprefix(x, y) {
-            return '<span>' + y + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + x + '</span></div>';
-        }
-
         var m = container.append('div')
             .attr('id', 'map')
             .call(map);
@@ -29,60 +25,9 @@ iD.ui = function(context) {
         var limiter = bar.append('div')
             .attr('class', 'limiter');
 
-        var buttons_joined = limiter.append('div')
-            .attr('class', 'button-wrap joined col4');
-
-        var modes = [
-            iD.modes.Browse(context),
-            iD.modes.AddPoint(context),
-            iD.modes.AddLine(context),
-            iD.modes.AddArea(context)];
-
-        var buttons = buttons_joined.selectAll('button.add-button')
-            .data(modes)
-            .enter().append('button')
-                .attr('tabindex', -1)
-                .attr('class', function(mode) { return mode.title + ' add-button col3'; })
-            .call(bootstrap.tooltip()
-                .placement('bottom')
-                .html(true)
-                .title(function(mode) {
-                    return hintprefix(mode.key, mode.description);
-                }))
-            .on('click.editor', function(mode) { context.enter(mode); });
-
-        function disableTooHigh() {
-            if (map.editable()) {
-                notice.message(false);
-                buttons.attr('disabled', null);
-            } else {
-                buttons.attr('disabled', 'disabled');
-                notice.message(true);
-                context.enter(iD.modes.Browse(context));
-            }
-        }
-
-        var notice = iD.ui.notice(limiter)
-            .message(false)
-            .on('zoom', function() { map.zoom(16); });
-
-        map.on('move.editor', _.debounce(disableTooHigh, 500));
-
-        buttons.append('span')
-            .attr('class', function(d) {
-                return d.id + ' icon icon-pre-text';
-            });
-
-        buttons.append('span').attr('class', 'label').text(function(mode) { return mode.title; });
-
-        context.on('enter.editor', function(entered) {
-            buttons.classed('active', function(mode) { return entered.button === mode.button; });
-            container.classed("mode-" + entered.id, true);
-        });
-
-        context.on('exit.editor', function(exited) {
-            container.classed("mode-" + exited.id, false);
-        });
+        limiter.append('div')
+            .attr('class', 'button-wrap joined col4')
+            .call(iD.ui.Modes(context), limiter);
 
         var undo_buttons = limiter.append('div')
             .attr('class', 'button-wrap joined col1'),
@@ -201,12 +146,12 @@ iD.ui = function(context) {
 
             limiter.select('#undo')
                 .classed('disabled', !undo)
-                .attr('data-original-title', hintprefix(iD.ui.cmd('⌘Z'), undo || t('nothing_to_undo')))
+                .attr('data-original-title', iD.ui.tooltipHtml(undo || t('nothing_to_undo'), iD.ui.cmd('⌘Z')))
                 .call(refreshTooltip);
 
             limiter.select('#redo')
                 .classed('disabled', !redo)
-                .attr('data-original-title', hintprefix(iD.ui.cmd('⌘⇧Z'), redo || t('nothing_to_redo')))
+                .attr('data-original-title', iD.ui.tooltipHtml(redo || t('nothing_to_redo'), iD.ui.cmd('⌘⇧Z')))
                 .call(refreshTooltip);
         });
 
@@ -237,10 +182,6 @@ iD.ui = function(context) {
             .on('-', function() { map.zoomOut(); })
             .on('dash', function() { map.zoomOut(); });
 
-        modes.forEach(function(m) {
-            keybinding.on(m.key, function() { if (map.editable()) context.enter(m); });
-        });
-
         d3.select(document)
             .call(keybinding);
 
@@ -268,4 +209,8 @@ iD.ui = function(context) {
         }
 
     };
+};
+
+iD.ui.tooltipHtml = function(text, key) {
+    return '<span>' + text + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + key + '</span></div>';
 };
