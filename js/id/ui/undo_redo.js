@@ -43,5 +43,5 @@ iD.ui.UndoRedo = function(context) {
                 .attr('data-original-title', iD.ui.tooltipHtml(redo || t('nothing_to_redo'), iD.ui.cmd('⌘⇧Z')))
                 .call(refreshTooltip);
         });
-    }
+    };
 };
