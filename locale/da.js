@@ -44,7 +44,7 @@ locale.da = {
                 area: "Startede et område."
             }
         },
-        'Forsæt': {
+        'continue': {
             annotation: {
                 line: "Forsatte en linje.",
                 area: "Forsatte et område."
@@ -74,7 +74,7 @@ locale.da = {
                 area: "Squared the corners of an area."
             }
         },
-        'slet': {
+        'delete': {
             title: "Slet",
             description: "Fjern dette fra kortet.",
             key: "⌫",
@@ -149,8 +149,8 @@ locale.da = {
     just_edited: "Du har lige rettede i OpenStreetMap!",
     okay: "Ok",
 
-    "zoom-ind": "Zoom ind",
-    "zoom-ud": "Zoom ud",
+    "zoom-in": "Zoom ind",
+    "zoom-out": "Zoom ud",
 
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
