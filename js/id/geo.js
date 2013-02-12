@@ -55,6 +55,23 @@ iD.geo.chooseEdge = function(nodes, point, projection) {
     };
 };
 
+iD.geo.chooseVertex = function(nodes, point, projection) {
+    var idx, min = Infinity, dist;
+
+    for (var i = 0; i < nodes.length; i++) {
+        dist = iD.geo.dist(projection(nodes[i].loc), point);
+        if (dist < min) {
+            min = dist;
+            idx = i;
+        }
+    }
+
+    return {
+        index: idx,
+        distance: min
+    };
+};
+
 // Return whether point is contained in polygon.
 //
 // `point` should be a 2-item array of coordinates.

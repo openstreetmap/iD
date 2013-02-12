@@ -2,15 +2,7 @@ iD.actions.Circularize = function(wayId, projection, count) {
     count = count || 12;
 
     function closestIndex(nodes, loc) {
-        var idx, min = Infinity, dist;
-        for (var i = 0; i < nodes.length; i++) {
-            dist = iD.geo.dist(nodes[i].loc, loc);
-            if (dist < min) {
-                min = dist;
-                idx = i;
-            }
-        }
-        return idx;
+        return iD.geo.chooseVertex(nodes, projection(loc), projection).index;
     }
 
     var action = function(graph) {
