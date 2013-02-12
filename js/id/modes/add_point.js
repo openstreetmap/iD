@@ -3,7 +3,7 @@ iD.modes.AddPoint = function(context) {
         id: 'add-point',
         title: t('modes.add_point.title'),
         description: t('modes.add_point.description'),
-        key: t('modes.add_point.key')
+        key: '2'
     };
 
     var behavior = iD.behavior.Draw(context)

@@ -3,25 +3,21 @@ locale.es = {
         add_area: {
             title: "Zona", //"Area",
             description: "Agregar parques, edificios, lagos u otras zonas en el mapa", //"Add parks, buildings, lakes, or other areas to the map.",
-            tail: "Hacer click en el mapa para empezar a dibujar una zona como un parque, lago o edificio", //"Click on the map to start drawing an area, like a park, lake, or building.",
-            key: "Z" //"A"
+            tail: "Hacer click en el mapa para empezar a dibujar una zona como un parque, lago o edificio" //"Click on the map to start drawing an area, like a park, lake, or building."
         },
         add_line: {
             title: "Línea", //"Line",
             description: "Las líneas pueden ser autopistas, calles, pasos peatonales o canales.", //"Lines can be highways, streets, pedestrian paths, or even canals.",
-            tail: "Hace clic para dibujar en el mapa, una calle, camino o ruta.", //"Click on the map to start drawing an road, path, or route.",
-            key: "L"
+            tail: "Hace clic para dibujar en el mapa, una calle, camino o ruta." //"Click on the map to start drawing an road, path, or route.",
         },
         add_point: {
             title: "Punto", //"Point",
             description: "Son puntos los restaurantes, monumentos y buzones", //"Restaurants, monuments, and postal boxes are points.",
-            tail: "Hacer clic para agregar un punto en el mapa", //"Click on the map to add a point.",
-            key: "P"
+            tail: "Hacer clic para agregar un punto en el mapa" //"Click on the map to add a point.",
         },
         browse: {
             title: "Navegar", //"Browse",
-            description: "Aumentar y navegar el mapa", //"Pan and zoom the map.",
-            key: "N" //"B"
+            description: "Aumentar y navegar el mapa" //"Pan and zoom the map.",
         },
         draw_area: {
             tail: "Hacer clic para agregar puntos en tu zona. Hacer hacer click en el primer punto para finalizar la zona." //"Click to add points to your area. Click the first point to finish the area."

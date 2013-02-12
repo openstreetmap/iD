@@ -3,25 +3,21 @@ locale.fr = {
         add_area: {
             title: "Polygone",
             description: "Les polygones peuvent être des parcs, des batîments, des lacs ou tout autre objet surfacique.",
-            tail: "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment.",
-            key: "A"
+            tail: "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment."
         },
         add_line: {
             title: "Ligne",
             description: "Les lignes peuvent être des autoroutes, des routes, des chemins ou encore des caneaux.",
-            tail: "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un nouveau chemin.",
-            key: "L"
+            tail: "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un nouveau chemin."
         },
         add_point: {
             title: "Point",
             description: "Les points peuvent être des restaurants, des monuments, ou encore des boites aux lettres.",
-            tail: "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument.",
-            key: "P"
+            tail: "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument."
         },
         browse: {
             title: "Navigation",
-            description: "Naviguer ou zoomer sur la carte.",
-            key: "B"
+            description: "Naviguer ou zoomer sur la carte."
         },
         draw_area: {
             tail: "Cliquez pour ajouter un point à la zone. Cliquez sur le dernier point pour fermer la zone."
