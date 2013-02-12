@@ -181,7 +181,7 @@ iD.modes.Select = function(context, selection, initial) {
 
             context.surface()
                 .on('dblclick.select', dblclick)
-        }, 300);
+        }, 200);
     };
 
     mode.exit = function() {
