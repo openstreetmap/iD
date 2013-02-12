@@ -4,7 +4,7 @@ iD.modes.AddArea = function(context) {
         button: 'area',
         title: t('modes.add_area.title'),
         description: t('modes.add_area.description'),
-        key: t('modes.add_area.key')
+        key: '4'
     };
 
     var behavior = iD.behavior.AddWay(context)

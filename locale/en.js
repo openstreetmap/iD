@@ -3,25 +3,21 @@ locale.en = {
         add_area: {
             title: "Area",
             description: "Add parks, buildings, lakes, or other areas to the map.",
-            tail: "Click on the map to start drawing an area, like a park, lake, or building.",
-            key: "A"
+            tail: "Click on the map to start drawing an area, like a park, lake, or building."
         },
         add_line: {
             title: "Line",
             description: "Lines can be highways, streets, pedestrian paths, or even canals.",
-            tail: "Click on the map to start drawing an road, path, or route.",
-            key: "L"
+            tail: "Click on the map to start drawing an road, path, or route."
         },
         add_point: {
             title: "Point",
             description: "Restaurants, monuments, and postal boxes are points.",
-            tail: "Click on the map to add a point.",
-            key: "P"
+            tail: "Click on the map to add a point."
         },
         browse: {
             title: "Browse",
-            description: "Pan and zoom the map.",
-            key: "B"
+            description: "Pan and zoom the map."
         },
         draw_area: {
             tail: "Click to add points to your area. Click the first point to finish the area."

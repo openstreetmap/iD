@@ -4,7 +4,7 @@ iD.modes.Browse = function(context) {
         id: 'browse',
         title: t('modes.browse.title'),
         description: t('modes.browse.description'),
-        key: t('modes.browse.key')
+        key: '1'
     };
 
     var behaviors = [

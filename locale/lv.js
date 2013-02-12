@@ -3,25 +3,21 @@ locale.lv = {
         add_area: {
             title: "Apgabals",
             description: "Pievieno parkus, ēkas, ezerus un citus apgabalus.",
-            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt apgabalu, piemēram, parku, ezeru, vai ēku.",
-            key: "A"
+            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt apgabalu, piemēram, parku, ezeru, vai ēku."
         },
         add_line: {
             title: "Līnija",
             description: "Līnijas var būt ceļi, ielas, takas vai pat kanāli.",
-            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt līniju, piemēram, ceļu vai taku.",
-            key: "L"
+            tail: "Klikšķiniet uz kartes, lai sāktu zīmēt līniju, piemēram, ceļu vai taku."
         },
         add_point: {
             title: "Punkts",
             description: "Kafejnīcas, pieminekļi, un veikali var būt punkti.",
-            tail: "Klikšķiniet uz kartes, lai pievienotu interešu punktu.",
-            key: "P"
+            tail: "Klikšķiniet uz kartes, lai pievienotu interešu punktu."
         },
         browse: {
             title: "Pārlūkot",
-            description: "Pārlūko karti.",
-            key: "B"
+            description: "Pārlūko karti."
         },
         draw_area: {
             tail: "Klikšķiniet, lai pievinotu mezglus apgabalam. Lai beigtu zīmēt apgabalu, klikšķiniet uz sākuma mezgla."

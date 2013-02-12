@@ -3,25 +3,21 @@ locale.tr = {
         add_area: {
             title: "Alan",
             description: "Park, bina, göl ve benzeri alanları haritaya ekle.",
-            tail: "Park, göl ya da bina gibi alanları çizmek için haritaya tıklayın.",
-            key: "A"
+            tail: "Park, göl ya da bina gibi alanları çizmek için haritaya tıklayın."
         },
         add_line: {
             title: "Çizgi",
             description: "Yollar, sokaklar, patikalar ya da kanallar çizgi ile çizilebilir.",
-            tail: "Yol, patika yada rota çizmek için haritaya tıklayın.",
-            key: "L"
+            tail: "Yol, patika yada rota çizmek için haritaya tıklayın."
         },
         add_point: {
             title: "Nokta",
             description: "Restoranlar, anıtlar ya da posta kutuları nokta ile gösterilebilir.",
-            tail: "Nokta eklemek için haritaya tıklayın.",
-            key: "P"
+            tail: "Nokta eklemek için haritaya tıklayın."
         },
         browse: {
             title: "Tara",
-            description: "Harita üzerinde dolan ve yaklaş.",
-            key: "B"
+            description: "Harita üzerinde dolan ve yaklaş."
         },
         draw_area: {
             tail: "Alanınıza nokta eklemek için tıklayınız. İlk noktaya tıklayarak alan çizimini bitirebilirsiniz."

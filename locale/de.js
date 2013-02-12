@@ -3,25 +3,21 @@ locale.de = {
         add_area: {
             title: "Fläche",
             description: "Füge Parks, Gebäude, Seen oder andere Flächen zur Karte hinzu.",
-            tail: "Klicke in die Karte, um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten.",
-            key: "A"
+            tail: "Klicke in die Karte, um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten."
         },
         add_line: {
             title: "Linie",
             description: "Linien können Autobahnen, Straßen, Fußwege oder sogar Kanäle sein.",
-            tail: "Klicke in die Karte, um das Zeichnen einer Straße eines Pfades oder einer Route zu starten.",
-            key: "L"
+            tail: "Klicke in die Karte, um das Zeichnen einer Straße eines Pfades oder einer Route zu starten."
         },
         add_point: {
             title: "Punkt",
             description: "Restaurants, Denkmäler und Briefkästen sind Punkte",
-            tail: "Klicke in die Karte, um einen Punkt hinzuzufügen.",
-            key: "P"
+            tail: "Klicke in die Karte, um einen Punkt hinzuzufügen."
         },
         browse: {
             title: "Navigation",
-            description: "Verschieben und Vergrößern/Verkleinern des Kartenausschnitts.",
-            key: "B"
+            description: "Verschieben und Vergrößern/Verkleinern des Kartenausschnitts."
         },
         draw_area: {
             tail: "Klicke, um Punkte zur Fläche hinzuzufügen. Klicke auf den ersten Punkt, um die Fläche abzuschließen."
