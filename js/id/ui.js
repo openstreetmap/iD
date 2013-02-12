@@ -33,9 +33,9 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap joined col1')
             .call(iD.ui.UndoRedo(context));
 
-        limiter.append('div').attr('class','button-wrap col1').append('button')
-            .attr('class', 'save col12')
-            .call(iD.ui.save(context));
+        limiter.append('div')
+            .attr('class', 'button-wrap col1')
+            .call(iD.ui.Save(context));
 
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')

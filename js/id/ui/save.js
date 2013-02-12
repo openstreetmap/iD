@@ -1,99 +1,110 @@
-iD.ui.save = function(context) {
-    return function (selection) {
-        var map = context.map(),
-            history = context.history(),
-            connection = context.connection(),
-            tooltip = bootstrap.tooltip()
-                .placement('bottom');
+iD.ui.Save = function(context) {
+    var map = context.map(),
+        history = context.history(),
+        connection = context.connection(),
+        key = iD.ui.cmd('⌘S'),
+        modal;
 
-        function success(e, changeset_id) {
+    function save() {
+        d3.event.preventDefault();
+
+        if (!history.hasChanges()) return;
+
+        connection.authenticate(function (err) {
             var modal = iD.ui.modal(context.container());
+            var changes = history.changes();
+            changes.connection = connection;
             modal.select('.content')
-                .classed('success-modal', true)
-                .datum({
-                    id: changeset_id,
-                    comment: e.comment
-                })
-                .call(iD.ui.success(connection)
-                    .on('cancel', function() {
+                .classed('commit-modal', true)
+                .datum(changes)
+                .call(iD.ui.commit(context)
+                    .on('cancel', function () {
                         modal.remove();
-                    }));
-        }
+                    })
+                    .on('fix', clickFix)
+                    .on('save', commit));
+        });
+    }
 
-        function clickFix(d) {
-            map.extent(d.entity.extent(context.graph()));
-            if (map.zoom() > 19) map.zoom(19);
-            context.enter(iD.modes.Select(context, [d.entity.id]));
-            modal.remove();
-        }
+    function commit(e) {
+        context.container().select('.shaded')
+            .remove();
 
-        function click() {
+        var loading = iD.ui.loading(context.container(), t('uploading_changes'), true);
 
-            function commit(e) {
-                context.container().select('.shaded').remove();
-                var l = iD.ui.loading(context.container(), t('uploading_changes'), true);
+        connection.putChangeset(
+            history.changes(),
+            e.comment,
+            history.imagery_used(),
+            function(err, changeset_id) {
+                loading.remove();
+                history.reset();
+                map.flush().redraw();
+                if (err) {
+                    var desc = iD.ui.confirm()
+                        .select('.description');
+                    desc.append('h2')
+                        .text(t('save_error'));
+                    desc.append('p').text(err.responseText);
+                } else {
+                    success(e, changeset_id);
+                }
+            });
+    }
 
-                connection.putChangeset(history.changes(),
-                    e.comment,
-                    history.imagery_used(), function(err, changeset_id) {
-                    l.remove();
-                    history.reset();
-                    map.flush().redraw();
-                    if (err) {
-                        var desc = iD.ui.confirm()
-                            .select('.description');
-                        desc.append('h2')
-                            .text(t('save_error'));
-                        desc.append('p').text(err.responseText);
-                    } else {
-                        success(e, changeset_id);
-                    }
-                });
-            }
+    function success(e, changeset_id) {
+        modal = iD.ui.modal(context.container());
+        modal.select('.content')
+            .classed('success-modal', true)
+            .datum({
+                id: changeset_id,
+                comment: e.comment
+            })
+            .call(iD.ui.success(connection)
+                .on('cancel', function() {
+                    modal.remove();
+                }));
+    }
 
-            if (history.hasChanges()) {
-                connection.authenticate(function(err) {
-                    var modal = iD.ui.modal(context.container());
-                    var changes = history.changes();
-                    changes.connection = connection;
-                    modal.select('.content')
-                        .classed('commit-modal', true)
-                        .datum(changes)
-                        .call(iD.ui.commit(context)
-                            .on('cancel', function() {
-                                modal.remove();
-                            })
-                            .on('fix', clickFix)
-                            .on('save', commit));
-                });
-            } else {
-                iD.ui.confirm().select('.description')
-                    .append('h3').text(t('no_changes'));
-            }
-        }
+    function clickFix(d) {
+        map.extent(d.entity.extent(context.graph()));
+        if (map.zoom() > 19) map.zoom(19);
+        context.enter(iD.modes.Select(context, [d.entity.id]));
+        modal.remove();
+    }
 
-        selection.html("<span class='label'>" + t('save') + "</span><small id='as-username'></small>")
-            .attr('title', t('save_help'))
+    return function (selection) {
+        var button = selection.append('button')
+            .attr('class', 'save col12 disabled')
             .attr('tabindex', -1)
-            .property('disabled', true)
-            .call(tooltip)
-            .on('click', click);
+            .on('click', save)
+            .call(bootstrap.tooltip()
+                .placement('bottom')
+                .html(true)
+                .title(iD.ui.tooltipHtml(t('save_help'), key)));
 
-        selection.append('span')
+        button.append('span')
+            .attr('class', 'label')
+            .text(t('save'));
+
+        button.append('span')
             .attr('class', 'count');
 
-        history.on('change.save-button', function() {
+        var keybinding = d3.keybinding('undo-redo')
+            .on(key, save);
+
+        d3.select(document)
+            .call(keybinding);
+
+        context.history().on('change.save', function() {
             var hasChanges = history.hasChanges();
 
-            selection
-                .property('disabled', !hasChanges)
-                .classed('has-count', hasChanges)
-                .select('span.count')
-                    .text(history.numChanges());
+            button
+                .classed('disabled', !hasChanges)
+                .classed('has-count', hasChanges);
 
-            if (!hasChanges) {
-                selection.call(tooltip.hide);
-            }
+            button.select('span.count')
+                .text(history.numChanges());
         });
     };
 };
