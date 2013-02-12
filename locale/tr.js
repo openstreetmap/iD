@@ -57,145 +57,145 @@ locale.tr = {
             annotation: "Etiketler değiştirildi."
         },
         circularize: {
-            title: "Circularize",
-            description: "Make this round.",
+            title: "Daireleştir",
+            description: "Yuvarlak hale getir",
             key: "O",
             annotation: {
-                line: "Made a line circular.",
-                area: "Made an area circular."
+                line: "Çizgiyi daireleştirin.",
+                area: "Alanı daireleştirin."
             }
         },
         orthogonalize: {
-            title: "Orthogonalize",
-            description: "Square these corners.",
+            title: "Doğrultmak",
+            description: "Köşeleri doğrultun.",
             key: "Q",
             annotation: {
-                line: "Squared the corners of a line.",
-                area: "Squared the corners of an area."
+                line: "Çizginin köşeleri doğrultuldu.",
+                area: "Alanın köşeleri doğrultuldu."
             }
         },
         'delete': {
-            title: "Delete",
-            description: "Remove this from the map.",
+            title: "Sil",
+            description: "Haritan bunu sil.",
             key: "⌫",
             annotation: {
-                point: "Deleted a point.",
-                vertex: "Deleted a node from a way.",
-                line: "Deleted a line.",
-                area: "Deleted an area.",
-                relation: "Deleted a relation.",
-                multiple: "Deleted {n} objects."
+                point: "Bir nokta silindi.",
+                vertex: "Yoldan bir nod silindi.",
+                line: "Bir çizgi silindi.",
+                area: "Bir alan silindi.",
+                relation: "Bir ilişki silindi.",
+                multiple: "{n} adet obje silindi."
             }
         },
         connect: {
             annotation: {
-                point: "Connected a way to a point.",
-                vertex: "Connected a way to another.",
-                line: "Connected a way to a line.",
-                area: "Connected a way to an area."
+                point: "Taraf bir noktaya bağlandı.",
+                vertex: "Bir taraf diğerine bağlandı.",
+                line: "Taraf bir çizgiye bağlandı.",
+                area: "Taraf bir alana bağlandı."
             }
         },
         disconnect: {
-            title: "Disconnect",
-            description: "Disconnect these ways from each other.",
+            title: "Birbirinden Ayır",
+            description: "Her iki tarafı da ayır.",
             key: "D",
-            annotation: "Disconnected ways."
+            annotation: "Taraflar birbirinden ayrıldı."
         },
         merge: {
-            title: "Merge",
-            description: "Merge these lines.",
+            title: "Birleştir",
+            description: "Bu çizgileri birleştir.",
             key: "C",
-            annotation: "Merged {n} lines."
+            annotation: "{n} adet çizgi birleştirildi."
         },
         move: {
-            title: "Move",
-            description: "Move this to a different location.",
+            title: "Taşı",
+            description: "Bunu farklı bir konuma taşı.",
             key: "M",
             annotation: {
-                point: "Moved a point.",
-                vertex: "Moved a node in a way.",
-                line: "Moved a line.",
-                area: "Moved an area."
+                point: "Bir nokta taşındı.",
+                vertex: "Yoldan bir nokta taşındı.",
+                line: "Bir çizgi taşındı.",
+                area: "Bir alan taşındı."
             }
         },
         reverse: {
-            title: "Reverse",
-            description: "Make this line go in the opposite direction.",
+            title: "Ters çevir",
+            description: "Bu çizgiyi ters yönde çevir.",
             key: "V",
-            annotation: "Reversed a line."
+            annotation: "Çizgi ters çevrildi."
         },
         split: {
-            title: "Split",
-            description: "Split this into two ways at this point.",
+            title: "Ayır",
+            description: "Bu yolu bu noktadan ikiye ayır.",
             key: "X",
-            annotation: "Split a way."
+            annotation: "Yolu ayır."
         }
     },
 
     validations: {
-        untagged_point: "Untagged point which is not part of a line or area",
-        untagged_line: "Untagged line",
-        untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
-        deprecated_tags: "Deprecated tags: {tags}"
+        untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
+        untagged_line: "Etiketlenmemiş çizgi",
+        untagged_area: "Etiketlenmemiş alan",
+        tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
+        deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
     },
 
-    save: "Save",
-    unsaved_changes: "You have unsaved changes",
-    save_help: "Save changes to OpenStreetMap, making them visible to other users",
-    no_changes: "You don't have any changes to save.",
-    save_error: "An error occurred while trying to save",
-    uploading_changes: "Uploading changes to OpenStreetMap.",
-    just_edited: "You Just Edited OpenStreetMap!",
-    okay: "Okay",
+    save: "Kaydet",
+    unsaved_changes: "Kaydedilmemiş değişiklikleriniz var",
+    save_help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",
+    no_changes: "Kaydedecek hiçbir değişikliğiniz yok",
+    save_error: "Kaydederken bir hata oluştu",
+    uploading_changes: "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
+    just_edited: "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
+    okay: "Tamam",
 
-    "zoom-in": "Zoom In",
-    "zoom-out": "Zoom Out",
+    "zoom-in": "Yaklaş",
+    "zoom-out": "Uzaklaş",
 
-    nothing_to_undo: "Nothing to undo.",
-    nothing_to_redo: "Nothing to redo.",
+    nothing_to_undo: "Geri alınacak birşey yok.",
+    nothing_to_redo: "Tekrar yapılacak birşey yok.",
 
-    browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    browser_notice: "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
 
     inspector: {
-        no_documentation_combination:  "This is no documentation available for this tag combination",
-        no_documentation_key: "This is no documentation available for this key",
-        new_tag: "New Tag"
+        no_documentation_combination:  "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
+        no_documentation_key: "Bu anahtar için dökümantasyon bulunmamaktadır.",
+        new_tag: "Yeni Etiket"
     },
 
-    view_on_osm: "View on OSM",
+    view_on_osm: "OSM üstünde Gör",
 
-    zoom_in_edit: "zoom in to edit the map",
+    zoom_in_edit: "Güncelleme yapmak için haritada yakınlaşmalısınız",
 
-    edit_tags: "Edit tags",
+    edit_tags: "Etiketleri güncelle",
 
     geocoder: {
-        title: "Find A Place",
-        placeholder: "find a place",
-        no_results: "Couldn't locate a place named '{name}'"
+        title: "Bir Yer Bul",
+        placeholder: "bir yer bul",
+        no_results: "'{name}' ismindeki yer bulunamadı"
     },
 
-    description: "Description",
+    description: "Açıklama",
 
-    logout: "logout",
+    logout: "Çıkış",
 
-    report_a_bug: "report a bug",
+    report_a_bug: "Hata rapor et",
 
     layerswitcher: {
-        title: "Background",
-        description: "Background Settings",
-        percent_brightness: "{opacity}% brightness",
-        fix_misalignment: "Fix misalignment",
-        reset: "reset"
+        title: "Arkaplan",
+        description: "Arkaplan Ayarları",
+        percent_brightness: "{opacity}% parlaklık",
+        fix_misalignment: "Yanlış hizalamayı düzelt",
+        reset: "Sıfırla"
     },
 
     contributors: {
-        list: "Viewing contributions by {users}",
-        truncated_list: "Viewing contributions by {users} and {count} others"
+        list: "{users} tarafından yapılan katkılar görünmektedir",
+        truncated_list: "{users} ve diğer {count} tarafından yapılan katkılar görünmektedir"
     },
 
     source_switch: {
-        live: "live",
-        dev: "dev"
+        live: "canlı",
+        dev: "geliştirme"
     }
 };
