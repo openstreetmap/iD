@@ -89,7 +89,9 @@ iD.Difference = function(base, head) {
                 b = change.base,
                 entity = h || b;
 
-            if (extent && !entity.intersects(extent, h ? head : base))
+            if (extent &&
+                (!h || !h.intersects(extent, head)) &&
+                (!b || !b.intersects(extent, base)))
                 continue;
 
             result[id] = h;
