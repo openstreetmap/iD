@@ -1,38 +1,39 @@
 iD.svg.Areas = function(projection) {
     return function drawAreas(surface, graph, entities, filter) {
-        var areas = [];
+        var path = d3.geo.path().projection(projection),
+            areas = [];
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             if (entity.geometry(graph) === 'area') {
-                var points = graph.childNodes(entity).map(function(n) {
-                    return projection(n.loc);
-                });
-
                 areas.push({
                     entity: entity,
-                    area: entity.isDegenerate() ? 0 : Math.abs(d3.geom.polygon(points).area())
+                    area: Math.abs(path.area(entity.asGeoJSON(graph)))
                 });
             }
         }
 
         areas.sort(function(a, b) { return b.area - a.area; });
 
-        var lineString = iD.svg.LineString(projection, graph);
+        function drawPaths(group, areas, filter, klass) {
+            var tagClasses = iD.svg.TagClasses();
 
-        function drawPaths(group, areas, filter, classes) {
+            if (klass === 'stroke') {
+                tagClasses.tags(iD.svg.MultipolygonMemberTags(graph));
+            }
+
             var paths = group.selectAll('path.area')
                 .filter(filter)
                 .data(areas, iD.Entity.key);
 
             paths.enter()
                 .append('path')
-                .attr('class', classes);
+                .attr('class', function (d) { return d.type + ' area ' + klass; });
 
             paths
                 .order()
-                .attr('d', lineString)
-                .call(iD.svg.TagClasses())
+                .attr('d', function (entity) { return path(entity.asGeoJSON(graph)); })
+                .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
 
             paths.exit()
@@ -43,9 +44,14 @@ iD.svg.Areas = function(projection) {
 
         areas = _.pluck(areas, 'entity');
 
+        var strokes = areas.filter(function (area) {
+            return area.type === 'way';
+        });
+
         var fill = surface.select('.layer-fill'),
-            stroke = surface.select('.layer-stroke'),
-            fills = drawPaths(fill, areas, filter, 'way area fill'),
-            strokes = drawPaths(stroke, areas, filter, 'way area stroke');
+            stroke = surface.select('.layer-stroke');
+
+        drawPaths(fill, areas, filter, 'fill');
+        drawPaths(stroke, strokes, filter, 'stroke');
     };
 };

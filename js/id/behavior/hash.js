@@ -29,7 +29,7 @@ iD.behavior.Hash = function(context) {
     var move = _.throttle(function() {
         var s1 = formatter(context.map());
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
-    }, 100);
+    }, 500);
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
@@ -66,11 +66,9 @@ iD.behavior.Hash = function(context) {
 
         if (location.hash) {
             var q = iD.util.stringQs(location.hash.substring(1));
-            if (q.id) {
-                willselect(q.id);
-            }
+            if (q.id) willselect(q.id);
             hashchange();
-            hash.hadHash = true;
+            if (q.map) hash.hadHash = true;
         }
     }
 

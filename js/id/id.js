@@ -1,22 +1,24 @@
 window.iD = function () {
     var context = {},
-        history = iD.History(),
-        storage = localStorage || {},
+        storage = localStorage || {};
+
+    context.storage = function(k, v) {
+        if (arguments.length === 1) return storage[k];
+        else if (v === null) delete storage[k];
+        else storage[k] = v;
+    };
+
+    var history = iD.History(context),
         dispatch = d3.dispatch('enter', 'exit'),
         mode,
         container,
         ui = iD.ui(context),
         map = iD.Map(context);
 
-    context.storage = function(k, v) {
-        if (arguments.length === 1) return storage[k];
-        else storage[k] = v;
-    };
-
     // the connection requires .storage() to be available on calling.
     var connection = iD.Connection(context);
 
-    connection.on('load.context', function (err, result) {
+    connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
     });
 
@@ -32,7 +34,7 @@ window.iD = function () {
     context.replace = history.replace;
     context.pop = history.pop;
     context.undo = history.undo;
-    context.redo = history.undo;
+    context.redo = history.redo;
     context.changes = history.changes;
 
     /* Graph */
@@ -90,24 +92,55 @@ window.iD = function () {
         return context;
     };
 
-    context.background()
-        .source(iD.BackgroundSource.Bing);
+    var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
+    if (q.layer) {
+        context.background()
+           .source(_.find(iD.layers, function(l) {
+               if (l.data.sourcetag === q.layer) {
+                   return (detected = true);
+               }
+           }));
+    }
+
+    if (!detected) {
+        context.background()
+            .source(_.find(iD.layers, function(l) {
+                return l.data.name === 'Bing aerial imagery';
+            }));
+    }
 
     return d3.rebind(context, dispatch, 'on');
 };
 
 iD.version = '0.0.0-alpha1';
 
-iD.supported = function() {
-    if (navigator.appName !== 'Microsoft Internet Explorer') {
-        return true;
+iD.detect = function() {
+    var browser = {};
+
+    var ua = navigator.userAgent,
+        msie = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
+
+    if (msie.exec(ua) !== null) {
+        var rv = parseFloat(RegExp.$1);
+        browser.support = !(rv && rv < 9);
     } else {
-        var ua = navigator.userAgent;
-        var re = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
-        if (re.exec(ua) !== null) {
-            rv = parseFloat( RegExp.$1 );
-        }
-        if (rv && rv < 9) return false;
-        else return true;
+        browser.support = true;
     }
+
+    // Added due to incomplete svg style support. See #715
+    browser.opera = ua.indexOf('Opera') >= 0;
+
+    browser.locale = navigator.language;
+
+    function nav(x) {
+        return navigator.userAgent.indexOf(x) !== -1;
+    }
+
+    if (nav('Win')) browser.os = 'win';
+    else if (nav('Mac')) browser.os = 'mac';
+    else if (nav('X11')) browser.os = 'linux';
+    else if (nav('Linux')) browser.os = 'linux';
+    else browser.os = 'win';
+
+    return browser;
 };

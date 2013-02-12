@@ -6,17 +6,13 @@ iD.ui = function(context) {
             history = context.history(),
             map = context.map();
 
-        if (!iD.supported()) {
-            container.html('This editor is supported in Firefox, Chrome, Safari, Opera, ' +
-                      'and Internet Explorer 9 and above. Please upgrade your browser ' +
-                      'or use Potlatch 2 to edit the map.')
+        if (!iD.detect().support) {
+            container.text(t('browser_notice'))
                 .style('text-align:center;font-style:italic;');
             return;
         }
 
-        function hintprefix(x, y) {
-            return '<span>' + y + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + x + '</span></div>';
-        }
+        if (iD.detect().opera) container.classed('opera', true);
 
         var m = container.append('div')
             .attr('id', 'map')
@@ -29,88 +25,22 @@ iD.ui = function(context) {
         var limiter = bar.append('div')
             .attr('class', 'limiter');
 
-        var buttons_joined = limiter.append('div')
-            .attr('class', 'button-wrap joined col4');
+        limiter.append('div')
+            .attr('class', 'button-wrap joined col4')
+            .call(iD.ui.Modes(context), limiter);
 
-        var modes = [
-            iD.modes.Browse(context),
-            iD.modes.AddPoint(context),
-            iD.modes.AddLine(context),
-            iD.modes.AddArea(context)];
+        limiter.append('div')
+            .attr('class', 'button-wrap joined col1')
+            .call(iD.ui.UndoRedo(context));
 
-        var buttons = buttons_joined.selectAll('button.add-button')
-            .data(modes)
-            .enter().append('button')
-                .attr('tabindex', -1)
-                .attr('class', function(mode) { return mode.title + ' add-button col3'; })
-            .call(bootstrap.tooltip().placement('bottom').html(true))
-            .attr('data-original-title', function(mode) {
-                return hintprefix(mode.key, mode.description);
-            })
-            .on('click.editor', function(mode) { context.enter(mode); });
-
-        function disableTooHigh() {
-            if (map.editable()) {
-                notice.message(false);
-                buttons.attr('disabled', null);
-            } else {
-                buttons.attr('disabled', 'disabled');
-                notice.message(true);
-                context.enter(iD.modes.Browse(context));
-            }
-        }
-
-        var notice = iD.ui.notice(limiter)
-            .message(false)
-            .on('zoom', function() { map.zoom(16); });
-
-        map.on('move.editor', _.debounce(function() {
-            disableTooHigh();
-            contributors.call(iD.ui.contributors(context));
-        }, 500));
-
-        buttons.append('span')
-            .attr('class', function(d) {
-                return d.id + ' icon icon-pre-text';
-            });
-
-        buttons.append('span').attr('class', 'label').text(function(mode) { return mode.title; });
-
-        context.on('enter.editor', function(entered) {
-            buttons.classed('active', function(mode) { return entered.button === mode.button; });
-            container.classed("mode-" + entered.id, true);
-        });
-
-        context.on('exit.editor', function(exited) {
-            container.classed("mode-" + exited.id, false);
-        });
-
-        var undo_buttons = limiter.append('div')
-            .attr('class', 'button-wrap joined col1'),
-            undo_tooltip = bootstrap.tooltip().placement('bottom').html(true);
-
-        undo_buttons.append('button')
-            .attr({ id: 'undo', 'class': 'col6' })
-            .classed('disabled', true)
-            .html("<span class='undo icon'></span><small></small>")
-            .on('click.editor', history.undo)
-            .call(undo_tooltip);
-
-        undo_buttons.append('button')
-            .attr({ id: 'redo', 'class': 'col6' })
-            .classed('disabled', true)
-            .html("<span class='redo icon'><small></small>")
-            .on('click.editor', history.redo)
-            .call(undo_tooltip);
-
-        limiter.append('div').attr('class','button-wrap col1').append('button')
-            .attr('class', 'save col12')
-            .call(iD.ui.save(context));
+        limiter.append('div')
+            .attr('class', 'button-wrap col1')
+            .call(iD.ui.Save(context));
 
         var zoom = container.append('div')
             .attr('class', 'zoombuttons map-control')
             .selectAll('button')
-                .data([['zoom-in', '+', map.zoomIn, 'Zoom In'], ['zoom-out', '-', map.zoomOut, 'Zoom Out']])
+                .data([['zoom-in', '+', map.zoomIn, t('zoom-in')], ['zoom-out', '-', map.zoomOut, t('zoom-out')]])
                 .enter()
                 .append('button')
                 .attr('tabindex', -1)
@@ -128,7 +58,7 @@ iD.ui = function(context) {
         }
 
         container.append('div').attr('class', 'geocode-control map-control')
-            .call(iD.ui.geocoder().map(map));
+            .call(iD.ui.geocoder(context));
 
         container.append('div').attr('class', 'map-control layerswitcher-control')
             .call(iD.ui.layerswitcher(context));
@@ -154,85 +84,66 @@ iD.ui = function(context) {
         var linkList = aboutList.append('ul')
             .attr('id','about')
             .attr('class','pad1 fillD about-block link-list');
-        linkList.append('li').append('a').attr('target', '_blank')
-            .attr('href', 'http://github.com/systemed/iD').text(iD.version);
-        linkList.append('li').append('a').attr('target', '_blank')
-            .attr('href', 'http://github.com/systemed/iD/issues').text('report a bug');
 
-        var imagery = linkList.append('li').attr('id', 'attribution');
-        imagery.append('span').text('imagery');
-        imagery.append('a').attr('target', '_blank')
-            .attr('href', 'http://opengeodata.org/microsoft-imagery-details').text(' provided by bing');
+        linkList.append('li')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', 'http://github.com/systemed/iD')
+            .text(iD.version);
 
-        linkList.append('li').attr('class', 'source-switch').append('a').attr('href', '#')
-            .text('dev')
-            .on('click.editor', function() {
-                d3.event.preventDefault();
-                if (d3.select(this).classed('live')) {
-                    map.flush();
-                    context.connection()
-                        .url('http://api06.dev.openstreetmap.org');
-                    d3.select(this).text('dev').classed('live', false);
-                } else {
-                    map.flush();
-                    context.connection()
-                        .url('http://www.openstreetmap.org');
-                    d3.select(this).text('live').classed('live', true);
-                }
-            });
+        linkList.append('li')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', 'http://github.com/systemed/iD/issues')
+            .text(t('report_a_bug'));
 
-        var contributors = linkList.append('li')
-            .attr('id', 'user-list');
-        contributors.append('span')
-            .attr('class', 'icon nearby icon-pre-text');
-        contributors.append('span')
-            .text('Viewing contributions by ');
-        contributors.append('span')
-            .attr('class', 'contributor-list');
-        contributors.append('span')
-            .attr('class', 'contributor-count');
+        var imagery = linkList.append('li')
+            .attr('id', 'attribution');
 
-        history.on('change.editor', function() {
-            window.onbeforeunload = history.hasChanges() ? function() {
-                return 'You have unsaved changes.';
-            } : null;
+        imagery.append('span')
+            .text('imagery');
 
-            var undo = history.undoAnnotation(),
-                redo = history.redoAnnotation();
+        imagery
+            .append('span')
+            .attr('class', 'provided-by');
 
-            function refreshTooltip(selection) {
-                if (selection.property('disabled')) {
-                    selection.call(undo_tooltip.hide);
-                } else if (selection.property('tooltipVisible')) {
-                    selection.call(undo_tooltip.show);
-                }
-            }
+        linkList.append('li')
+            .attr('class', 'source-switch')
+            .call(iD.ui.SourceSwitch(context));
 
-            limiter.select('#undo')
-                .classed('disabled', !undo)
-                .attr('data-original-title', hintprefix('⌘ + Z', undo || t('nothing_to_undo')))
-                .call(refreshTooltip);
+        linkList.append('li')
+            .attr('id', 'user-list')
+            .call(iD.ui.contributors(context));
 
-            limiter.select('#redo')
-                .classed('disabled', !redo)
-                .attr('data-original-title', hintprefix('⌘ + ⇧ + Z', redo || t('nothing_to_redo')))
-                .call(refreshTooltip);
-        });
+        window.onbeforeunload = function() {
+            history.save();
+            if (history.hasChanges()) return t('unsaved_changes');
+        };
 
         d3.select(window).on('resize.editor', function() {
             map.size(m.size());
         });
 
-        var keybinding = d3.keybinding('main')
-            .on('⌘+Z', function() { history.undo(); })
-            .on('⌃+Z', function() { history.undo(); })
-            .on('⌘+⇧+Z', function() { history.redo(); })
-            .on('⌃+⇧+Z', function() { history.redo(); })
-            .on('⌫', function() { d3.event.preventDefault(); });
+        function pan(d) {
+            return function() {
+                map.pan(d);
+                map.redraw();
+            };
+        }
 
-        modes.forEach(function(m) {
-            keybinding.on(m.key, function() { if (map.editable()) context.enter(m); });
-        });
+        // pan amount
+        var pa = 5;
+
+        var keybinding = d3.keybinding('main')
+            .on('⌫', function() { d3.event.preventDefault(); })
+            .on('←', pan([pa, 0]))
+            .on('↑', pan([0, pa]))
+            .on('→', pan([-pa, 0]))
+            .on('↓', pan([0, -pa]))
+            .on('⇧=', function() { map.zoomIn(); })
+            .on('+', function() { map.zoomIn(); })
+            .on('-', function() { map.zoomOut(); })
+            .on('dash', function() { map.zoomOut(); });
 
         d3.select(document)
             .call(keybinding);
@@ -252,8 +163,17 @@ iD.ui = function(context) {
         context.enter(iD.modes.Browse(context));
 
         if (!context.storage('sawSplash')) {
-            iD.ui.splash();
+            iD.ui.splash(context.container());
             context.storage('sawSplash', true);
         }
+
+        if (history.lock() && history.restorableChanges()) {
+            iD.ui.restore(context.container(), history);
+        }
+
     };
+};
+
+iD.ui.tooltipHtml = function(text, key) {
+    return '<span>' + text + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + key + '</span></div>';
 };

@@ -9,4 +9,13 @@ describe("iD.actions.DeleteMultiple", function () {
         expect(graph.entity(w.id)).to.be.undefined;
         expect(graph.entity(r.id)).to.be.undefined;
     });
+
+    it("deletes a way and one of its nodes", function () {
+        var n      = iD.Node(),
+            w      = iD.Way({nodes: [n.id]}),
+            action = iD.actions.DeleteMultiple([w.id, n.id]),
+            graph  = action(iD.Graph([n, w]));
+        expect(graph.entity(w.id)).to.be.undefined;
+        expect(graph.entity(n.id)).to.be.undefined;
+    });
 });

@@ -39,6 +39,16 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.line')).to.be.classed('member-type-route');
     });
 
+    it("adds stroke classes for the tags of the parent relation of multipolygon members", function() {
+        var line = iD.Way(),
+            relation = iD.Relation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}}),
+            graph = iD.Graph([line, relation]);
+
+        surface.call(iD.svg.Lines(projection), graph, [line], filter);
+
+        expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
+    });
+
     it("preserves non-line paths", function () {
         var line = iD.Way(),
             graph = iD.Graph([line]);

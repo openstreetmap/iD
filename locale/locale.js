@@ -1,8 +1,16 @@
-var locale = { current: 'en' };
+var locale = { _current: 'en' };
 
-function t(s, o) {
+locale.current = function(_) {
+    if (!arguments.length) return locale._current;
+    if (locale[_] !== undefined) locale._current = _;
+    return locale;
+};
+
+function t(s, o, loc) {
+    loc = loc || locale._current;
+
     var path = s.split(".").reverse(),
-        rep = locale[locale.current];
+        rep = locale[loc];
 
     while (rep !== undefined && path.length) rep = rep[path.pop()];
 
@@ -10,6 +18,9 @@ function t(s, o) {
         if (o) for (var k in o) rep = rep.replace('{' + k + '}', o[k]);
         return rep;
     } else {
-        if (console) console.error('key ' + s + ' not found');
+        var missing = 'Missing translation: ' + s;
+        if (console) console.error(missing);
+        if (loc !== 'en') return t(s, o, 'en');
+        return missing;
     }
 }

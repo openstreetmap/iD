@@ -15,37 +15,55 @@ iD.actions.Split = function(nodeId, newWayId) {
             parents = graph.parentWays(node);
 
         return parents.filter(function (parent) {
-            return parent.first() !== nodeId &&
-                   parent.last()  !== nodeId;
+            return parent.isClosed() ||
+                (parent.first() !== nodeId &&
+                 parent.last()  !== nodeId);
         });
     }
 
     var action = function(graph) {
-        if (!action.enabled(graph))
-            return graph;
+        var wayA = candidateWays(graph)[0],
+            wayB = iD.Way({id: newWayId, tags: wayA.tags}),
+            nodesA,
+            nodesB,
+            isArea = wayA.isArea();
 
-        var way = candidateWays(graph)[0],
-            idx = _.indexOf(way.nodes, nodeId);
+        if (wayA.isClosed()) {
+            var nodes = wayA.nodes.slice(0, -1),
+                idxA = _.indexOf(nodes, nodeId),
+                idxB = idxA + Math.floor(nodes.length / 2);
 
-        // Create a 'b' way that contains all of the tags in the second
-        // half of this way
-        var newWay = iD.Way({id: newWayId, tags: way.tags, nodes: way.nodes.slice(idx)});
-        graph = graph.replace(newWay);
+            if (idxB >= nodes.length) {
+                idxB %= nodes.length;
+                nodesA = nodes.slice(idxA).concat(nodes.slice(0, idxB + 1));
+                nodesB = nodes.slice(idxB, idxA + 1);
+            } else {
+                nodesA = nodes.slice(idxA, idxB + 1);
+                nodesB = nodes.slice(idxB).concat(nodes.slice(0, idxA + 1));
+            }
+        } else {
+            var idx = _.indexOf(wayA.nodes, nodeId);
+            nodesA = wayA.nodes.slice(0, idx + 1);
+            nodesB = wayA.nodes.slice(idx);
+        }
 
-        // Reduce the original way to only contain the first set of nodes
-        graph = graph.replace(way.update({nodes: way.nodes.slice(0, idx + 1)}));
+        wayA = wayA.update({nodes: nodesA});
+        wayB = wayB.update({nodes: nodesB});
 
-        graph.parentRelations(way).forEach(function(relation) {
+        graph = graph.replace(wayA);
+        graph = graph.replace(wayB);
+
+        graph.parentRelations(wayA).forEach(function(relation) {
             if (relation.isRestriction()) {
                 var via = relation.memberByRole('via');
-                if (via && newWay.contains(via.id)) {
-                    relation = relation.updateMember({id: newWay.id}, relation.memberById(way.id).index);
+                if (via && wayB.contains(via.id)) {
+                    relation = relation.updateMember({id: wayB.id}, relation.memberById(wayA.id).index);
                     graph = graph.replace(relation);
                 }
             } else {
-                var role = relation.memberById(way.id).role,
-                    last = newWay.last(),
-                    i = relation.memberById(way.id).index,
+                var role = relation.memberById(wayA.id).role,
+                    last = wayB.last(),
+                    i = relation.memberById(wayA.id).index,
                     j;
 
                 for (j = 0; j < relation.members.length; j++) {
@@ -55,10 +73,23 @@ iD.actions.Split = function(nodeId, newWayId) {
                     }
                 }
 
-                relation = relation.addMember({id: newWay.id, type: 'way', role: role}, i <= j ? i + 1 : i);
+                relation = relation.addMember({id: wayB.id, type: 'way', role: role}, i <= j ? i + 1 : i);
                 graph = graph.replace(relation);
             }
         });
+
+        if (isArea) {
+            var multipolygon = iD.Relation({
+                tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
+                members: [
+                    {id: wayA.id, role: 'outer', type: 'way'},
+                    {id: wayB.id, role: 'outer', type: 'way'}
+                ]});
+
+            graph = graph.replace(multipolygon);
+            graph = graph.replace(wayA.update({tags: {}}));
+            graph = graph.replace(wayB.update({tags: {}}));
+        }
 
         return graph;
     };

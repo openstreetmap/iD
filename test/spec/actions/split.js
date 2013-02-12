@@ -99,6 +99,66 @@ describe("iD.actions.Split", function () {
         expect(graph.entity('|').nodes).to.eql(['d', 'b']);
     });
 
+    it("splits a closed way at the given point and its antipode", function () {
+        // Situation:
+        //    a ---- b
+        //    |      |
+        //    d ---- c
+        //
+        // Split at a.
+        //
+        // Expected result:
+        //    a ---- b
+        //    ||     |
+        //    d ==== c
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            });
+
+        var g1 = iD.actions.Split('a', '=')(graph);
+        expect(g1.entity('-').nodes).to.eql(['a', 'b', 'c']);
+        expect(g1.entity('=').nodes).to.eql(['c', 'd', 'a']);
+
+        var g2 = iD.actions.Split('b', '=')(graph);
+        expect(g2.entity('-').nodes).to.eql(['b', 'c', 'd']);
+        expect(g2.entity('=').nodes).to.eql(['d', 'a', 'b']);
+
+        var g3 = iD.actions.Split('c', '=')(graph);
+        expect(g3.entity('-').nodes).to.eql(['c', 'd', 'a']);
+        expect(g3.entity('=').nodes).to.eql(['a', 'b', 'c']);
+
+        var g4 = iD.actions.Split('d', '=')(graph);
+        expect(g4.entity('-').nodes).to.eql(['d', 'a', 'b']);
+        expect(g4.entity('=').nodes).to.eql(['b', 'c', 'd']);
+    });
+
+    it("splits an area by converting it to a multipolygon", function () {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                '-': iD.Way({id: '-', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+            });
+
+        graph = iD.actions.Split('a', '=')(graph);
+        expect(graph.entity('-').tags).to.eql({});
+        expect(graph.entity('=').tags).to.eql({});
+        expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
+
+        var relation = graph.parentRelations(graph.entity('-'))[0];
+        expect(relation.tags).to.eql({type: 'multipolygon', building: 'yes'});
+        expect(relation.members).to.eql([
+            {id: '-', role: 'outer', type: 'way'},
+            {id: '=', role: 'outer', type: 'way'}
+        ]);
+    });
+
     it("adds the new way to parent relations (no connections)", function () {
         // Situation:
         //    a ---- b ---- c
@@ -115,12 +175,15 @@ describe("iD.actions.Split", function () {
                 'b': iD.Node({id: 'b'}),
                 'c': iD.Node({id: 'c'}),
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
-                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
+                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way', role: 'forward'}]})
             });
 
         graph = iD.actions.Split('b', '=')(graph);
 
-        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=']);
+        expect(graph.entity('r').members).to.eql([
+            {id: '-', type: 'way', role: 'forward'},
+            {id: '=', type: 'way', role: 'forward'}
+        ]);
     });
 
     it("adds the new way to parent relations (forward order)", function () {

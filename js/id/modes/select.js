@@ -9,8 +9,8 @@ iD.modes.Select = function(context, selection, initial) {
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.Select(context),
-            iD.behavior.DragNode(context),
-            iD.behavior.DragMidpoint(context)],
+            iD.behavior.Lasso(context),
+            iD.behavior.DragNode(context)],
         radialMenu;
 
     function changeTags(d, tags) {
@@ -43,6 +43,10 @@ iD.modes.Select = function(context, selection, initial) {
             .filter(function(o) { return o.available(); });
         operations.unshift(iD.operations.Delete(selection, context));
 
+        keybinding.on('⎋', function() {
+            context.enter(iD.modes.Browse(context));
+        });
+
         operations.forEach(function(operation) {
             keybinding.on(operation.key, function() {
                 if (operation.enabled()) {
@@ -57,7 +61,7 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            inspector.graph(context.graph());
+            inspector.context(context);
 
             context.container()
                 .select('.inspector-wrap')
@@ -72,10 +76,10 @@ iD.modes.Select = function(context, selection, initial) {
                 var inspector_size = context.container().select('.inspector-wrap').size(),
                     map_size = context.map().size(),
                     offset = 50,
-                    shift_left = d3.event.x - map_size[0] + inspector_size[0] + offset,
+                    shift_left = d3.event.clientX - map_size[0] + inspector_size[0] + offset,
                     center = (map_size[0] / 2) + shift_left + offset;
 
-                if (shift_left > 0 && inspector_size[1] > d3.event.y) {
+                if (shift_left > 0 && inspector_size[1] > d3.event.clientY) {
                     context.map().centerEase(context.projection.invert([center, map_size[1]/2]));
                 }
             }
@@ -113,14 +117,43 @@ iD.modes.Select = function(context, selection, initial) {
                         d3.mouse(context.surface().node()), context),
                     node = iD.Node({ loc: choice.loc });
 
-                context.perform(
-                    iD.actions.AddEntity(node),
-                    iD.actions.AddVertex(datum.id, node.id, choice.index),
+                var prev = datum.nodes[choice.index - 1],
+                    next = datum.nodes[choice.index],
+                    prevParents = context.graph().parentWays({ id: prev }),
+                    ways = [];
+
+
+                for (var i = 0; i < prevParents.length; i++) {
+                    var p = prevParents[i];
+                    for (var k = 0; k < p.nodes.length; k++) {
+                        if (p.nodes[k] === prev) {
+                            if (p.nodes[k-1] === next) {
+                                ways.push({ id: p.id, index: k});
+                                break;
+                            } else if (p.nodes[k+1] === next) {
+                                ways.push({ id: p.id, index: k+1});
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                context.perform(iD.actions.AddEntity(node),
+                    iD.actions.AddMidpoint({ ways: ways, loc: node.loc }, node),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
             }
+        }
+
+        function selected(entity) {
+            if (!entity) return false;
+            if (selection.indexOf(entity.id) >= 0) return true;
+            return d3.select(this).classed('stroke') &&
+                _.any(context.graph().parentRelations(entity), function(parent) {
+                    return selection.indexOf(parent.id) >= 0;
+                });
         }
 
         d3.select(document)
@@ -129,7 +162,7 @@ iD.modes.Select = function(context, selection, initial) {
         context.surface()
             .on('dblclick.select', dblclick)
             .selectAll("*")
-            .filter(function(d) { return d && selection.indexOf(d.id) >= 0; })
+            .filter(selected)
             .classed('selected', true);
 
         radialMenu = iD.ui.RadialMenu(operations);

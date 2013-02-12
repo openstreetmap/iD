@@ -28,7 +28,13 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     function move(datum) {
         var loc = context.map().mouseCoordinates();
 
-        if (datum.type === 'node') {
+        if (datum.id === end.id || datum.id === segment.id) {
+            context.surface().selectAll('.way, .node')
+                .filter(function (d) {
+                    return d.id === end.id || d.id === segment.id;
+                })
+                .classed('active', true);
+        } else if (datum.type === 'node') {
             loc = datum.loc;
         } else if (datum.type === 'way') {
             loc = iD.geo.chooseIndex(datum, d3.mouse(context.surface().node()), context).loc;
@@ -39,6 +45,14 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     function undone() {
         context.enter(iD.modes.Browse(context));
+    }
+
+    function lineActives(d) {
+        return d.id === segment.id || d.id === start.id || d.id === end.id;
+    }
+
+    function areaActives(d) {
+        return d.id === wayId || d.id === end.id;
     }
 
     var drawWay = function(surface) {
@@ -57,7 +71,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         surface.call(draw)
           .selectAll('.way, .node')
-            .filter(function (d) { return d.id === segment.id || d.id === start.id || d.id === end.id; })
+            .filter(isArea ? areaActives : lineActives)
             .classed('active', true);
 
         context.history()

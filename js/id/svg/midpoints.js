@@ -51,7 +51,9 @@ iD.svg.Midpoints = function(projection) {
 
         groups.attr('transform', iD.svg.PointTransform(projection));
 
-        groups.select('circle');
+        // Propagate data bindings.
+        groups.select('circle.shadow');
+        groups.select('circle.fill');
 
         groups.exit()
             .remove();

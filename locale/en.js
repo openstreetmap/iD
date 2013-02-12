@@ -3,25 +3,21 @@ locale.en = {
         add_area: {
             title: "Area",
             description: "Add parks, buildings, lakes, or other areas to the map.",
-            tail: "Click on the map to start drawing an area, like a park, lake, or building.",
-            key: "A"
+            tail: "Click on the map to start drawing an area, like a park, lake, or building."
         },
         add_line: {
             title: "Line",
             description: "Lines can be highways, streets, pedestrian paths, or even canals.",
-            tail: "Click on the map to start drawing an road, path, or route.",
-            key: "L"
+            tail: "Click on the map to start drawing an road, path, or route."
         },
         add_point: {
             title: "Point",
             description: "Restaurants, monuments, and postal boxes are points.",
-            tail: "Click on the map to add a point.",
-            key: "P"
+            tail: "Click on the map to add a point."
         },
         browse: {
             title: "Browse",
-            description: "Pan and zoom the map.",
-            key: "B"
+            description: "Pan and zoom the map."
         },
         draw_area: {
             tail: "Click to add points to your area. Click the first point to finish the area."
@@ -51,7 +47,7 @@ locale.en = {
             }
         },
         cancel_draw: {
-            annotation: "Cancelled drawing."
+            annotation: "Canceled drawing."
         },
         change_tags: {
             annotation: "Changed tags."
@@ -140,13 +136,14 @@ locale.en = {
         deprecated_tags: "Deprecated tags: {tags}"
     },
 
-    "save": "Save",
-    "save_help": "Save changes to OpenStreetMap, making them visible to other users",
-    "no_changes": "You don't have any changes to save.",
-    "save_error": "An error occurred while trying to save",
-    "uploading_changes": "Uploading changes to OpenStreetMap.",
-    "just_edited": "You Just Edited OpenStreetMap!",
-    "okay": "Okay",
+    save: "Save",
+    unsaved_changes: "You have unsaved changes",
+    save_help: "Save changes to OpenStreetMap, making them visible to other users",
+    no_changes: "You don't have any changes to save.",
+    save_error: "An error occurred while trying to save",
+    uploading_changes: "Uploading changes to OpenStreetMap.",
+    just_edited: "You Just Edited OpenStreetMap!",
+    okay: "Okay",
 
     "zoom-in": "Zoom In",
     "zoom-out": "Zoom Out",
@@ -154,28 +151,31 @@ locale.en = {
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
 
-    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
     inspector: {
-        no_documentation_combination:  "This is no documentation available for this tag combination",
-        no_documentation_key: "This is no documentation available for this key",
+        no_documentation_combination: "There is no documentation available for this tag combination",
+        no_documentation_key: "There is no documentation available for this key",
         new_tag: "New Tag"
     },
 
-    "view_on_osm": "View on OSM",
+    view_on_osm: "View on OSM",
 
-    "zoom_in_edit": "zoom in to edit the map",
+    zoom_in_edit: "zoom in to edit the map",
 
-    "edit_tags": "Edit tags",
+    edit_tags: "Edit tags",
 
     geocoder: {
-        "find_location": "Find A Location",
-        "find_a_place": "find a place"
+        title: "Find A Place",
+        placeholder: "find a place",
+        no_results: "Couldn't locate a place named '{name}'"
     },
 
-    "description": "Description",
+    description: "Description",
 
-    "logout": "logout",
+    logout: "logout",
+
+    report_a_bug: "report a bug",
 
     layerswitcher: {
         title: "Background",
@@ -183,5 +183,15 @@ locale.en = {
         percent_brightness: "{opacity}% brightness",
         fix_misalignment: "Fix misalignment",
         reset: "reset"
+    },
+
+    contributors: {
+        list: "Viewing contributions by {users}",
+        truncated_list: "Viewing contributions by {users} and {count} others"
+    },
+
+    source_switch: {
+        live: "live",
+        dev: "dev"
     }
 };

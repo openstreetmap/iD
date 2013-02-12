@@ -1,9 +1,14 @@
+/*
+ * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
+ */
+
 iD.actions.Orthogonalize = function(wayId, projection) {
     var action = function(graph) {
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
             points = nodes.map(function(n) { return projection(n.loc); }),
-            quad_nodes = [], i, j;
+            quad_nodes = [],
+            best, i, j;
 
         var score = squareness();
         for (i = 0; i < 1000; i++) {
@@ -12,46 +17,18 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                 points[j] = addPoints(points[j],motions[j]);
             }
             var newScore = squareness();
-            if (newScore > score) {
-                return graph;
+            if (newScore < score) {
+                best = _.clone(points);
+                score = newScore;
             }
-            score = newScore;
             if (score < 1.0e-8) {
                 break;
             }
         }
+        points = best;
 
         for (i = 0; i < points.length - 1; i++) {
-            quad_nodes.push(iD.Node({ loc: projection.invert(points[i]) }));
-        }
-
-        for (i = 0; i < nodes.length; i++) {
-            if (graph.parentWays(nodes[i]).length > 1) {
-                var closest, closest_dist = Infinity, dist;
-                for (j = 0; j < quad_nodes.length; j++) {
-                    dist = iD.geo.dist(quad_nodes[j].loc, nodes[i].loc);
-                    if (dist < closest_dist) {
-                        closest_dist = dist;
-                        closest = j;
-                    }
-                }
-                quad_nodes.splice(closest, 1, nodes[i]);
-            }
-        }
-
-        for (i = 0; i < quad_nodes.length; i++) {
-            graph = graph.replace(quad_nodes[i]);
-        }
-
-        var ids = _.pluck(quad_nodes, 'id'),
-            difference = _.difference(_.uniq(way.nodes), ids);
-
-        ids.push(ids[0]);
-
-        graph = graph.replace(way.update({nodes: ids}));
-
-        for (i = 0; i < difference.length; i++) {
-            graph = iD.actions.DeleteNode(difference[i])(graph);
+            graph = graph.replace(graph.entity(nodes[i].id).move(projection.invert(points[i])));
         }
 
         return graph;
@@ -62,7 +39,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                 p = subtractPoints(a, b),
                 q = subtractPoints(c, b);
 
-            var scale = p.length + q.length;
+            var scale = iD.geo.dist(p, [0, 0]) + iD.geo.dist(q, [0, 0]);
             p = normalizePoint(p, 1.0);
             q = normalizePoint(q, 1.0);
 

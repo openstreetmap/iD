@@ -20,21 +20,11 @@ iD.actions.Connect = function(nodeIds) {
             var node = graph.entity(nodeIds[i]), index;
 
             graph.parentWays(node).forEach(function (parent) {
-                while (true) {
-                    index = parent.nodes.indexOf(node.id);
-                    if (index < 0)
-                        break;
-                    parent = parent.updateNode(survivor.id, index);
-                }
-                graph = graph.replace(parent);
+                graph = graph.replace(parent.replaceNode(node.id, survivor.id));
             });
 
             graph.parentRelations(node).forEach(function (parent) {
-                var memberA = parent.memberById(survivor.id),
-                    memberB = parent.memberById(node.id);
-                if (!memberA) {
-                    graph = graph.replace(parent.addMember({id: survivor.id, role: memberB.role, type: 'node'}));
-                }
+                graph = graph.replace(parent.replaceMember(node, survivor));
             });
 
             survivor = survivor.mergeTags(node.tags);

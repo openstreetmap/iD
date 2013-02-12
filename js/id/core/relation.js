@@ -26,7 +26,7 @@ _.extend(iD.Relation.prototype, {
     },
 
     geometry: function() {
-        return 'relation';
+        return this.isMultipolygon() ? 'area' : 'relation';
     },
 
     // Return the first member with the given role. A copy of the member object
@@ -49,6 +49,16 @@ _.extend(iD.Relation.prototype, {
         }
     },
 
+    // Return the first member with the given id and role. A copy of the member object
+    // is returned, extended with an 'index' property whose value is the member index.
+    memberByIdAndRole: function(id, role) {
+        for (var i = 0; i < this.members.length; i++) {
+            if (this.members[i].id === id && this.members[i].role === role) {
+                return _.extend({}, this.members[i], {index: i});
+            }
+        }
+    },
+
     addMember: function(member, index) {
         var members = this.members.slice();
         members.splice(index === undefined ? members.length : index, 0, member);
@@ -63,6 +73,28 @@ _.extend(iD.Relation.prototype, {
 
     removeMember: function(id) {
         var members = _.reject(this.members, function(m) { return m.id === id; });
+        return this.update({members: members});
+    },
+
+    // Wherever a member appears with id `needle.id`, replace it with a member
+    // with id `replacement.id`, type `replacement.type`, and the original role,
+    // unless a member already exists with that id and role. Return an updated
+    // relation.
+    replaceMember: function(needle, replacement) {
+        if (!this.memberById(needle.id))
+            return this;
+
+        var members = [];
+
+        for (var i = 0; i < this.members.length; i++) {
+            var member = this.members[i];
+            if (member.id !== needle.id) {
+                members.push(member);
+            } else if (!this.memberByIdAndRole(replacement.id, member.role)) {
+                members.push({id: replacement.id, type: replacement.type, role: member.role});
+            }
+        }
+
         return this.update({members: members});
     },
 
@@ -81,6 +113,31 @@ _.extend(iD.Relation.prototype, {
         };
         if (changeset_id) r.relation['@changeset'] = changeset_id;
         return r;
+    },
+
+    asGeoJSON: function(resolver) {
+        if (this.isMultipolygon()) {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'MultiPolygon',
+                    coordinates: this.multipolygon(resolver)
+                }
+            };
+        } else {
+            return {
+                type: 'FeatureCollection',
+                properties: this.tags,
+                features: this.members.map(function(member) {
+                    return _.extend({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
+                })
+            };
+        }
+    },
+
+    isMultipolygon: function() {
+        return this.tags.type === 'multipolygon';
     },
 
     isRestriction: function() {
@@ -145,22 +202,20 @@ _.extend(iD.Relation.prototype, {
                 }
             }
 
-            return joined;
+            return joined.map(function (nodes) { return _.pluck(nodes, 'loc'); });
         }
 
         function findOuter(inner) {
             var o, outer;
 
-            inner = _.pluck(inner, 'loc');
-
             for (o = 0; o < outers.length; o++) {
-                outer = _.pluck(outers[o], 'loc');
+                outer = outers[o];
                 if (iD.geo.polygonContainsPolygon(outer, inner))
                     return o;
             }
 
             for (o = 0; o < outers.length; o++) {
-                outer = _.pluck(outers[o], 'loc');
+                outer = outers[o];
                 if (iD.geo.polygonIntersectsPolygon(outer, inner))
                     return o;
             }

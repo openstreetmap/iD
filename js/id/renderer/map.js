@@ -19,7 +19,6 @@ iD.Map = function(context) {
         vertices = iD.svg.Vertices(roundedProjection),
         lines = iD.svg.Lines(roundedProjection),
         areas = iD.svg.Areas(roundedProjection),
-        multipolygons = iD.svg.Multipolygons(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
         labels = iD.svg.Labels(roundedProjection),
         tail = d3.tail(),
@@ -43,6 +42,9 @@ iD.Map = function(context) {
                     d3.event.stopPropagation();
                 }
             }, true)
+            .on('mouseup.zoom', function() {
+                if (resetTransform()) redraw();
+            })
             .attr('id', 'surface')
             .call(iD.svg.Surface());
 
@@ -87,7 +89,6 @@ iD.Map = function(context) {
                 .call(vertices, graph, all, filter)
                 .call(lines, graph, all, filter)
                 .call(areas, graph, all, filter)
-                .call(multipolygons, graph, all, filter)
                 .call(midpoints, graph, all, filter)
                 .call(labels, graph, all, filter, dimensions, !difference);
         }
@@ -108,7 +109,7 @@ iD.Map = function(context) {
         }
 
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
-            iD.ui.flash()
+            iD.ui.flash(context.container())
                 .select('.content')
                 .text('Cannot zoom out further in current mode.');
             return map.zoom(16);
@@ -300,7 +301,7 @@ iD.Map = function(context) {
 
     map.extent = function(_) {
         if (!arguments.length) {
-            return iD.geo.Extent(projection.invert([0, dimensions[1]]),
+            return new iD.geo.Extent(projection.invert([0, dimensions[1]]),
                                  projection.invert([dimensions[0], 0]));
         } else {
             var extent = iD.geo.Extent(_),

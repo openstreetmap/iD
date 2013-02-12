@@ -52,6 +52,7 @@ iD.svg.Points = function(projection) {
         // sets the data (point entity) on the element
         groups.select('image')
             .attr('xlink:href', imageHref);
+        groups.select('.shadow, .stroke');
 
         groups.exit()
             .remove();
@@ -79,7 +80,7 @@ iD.svg.Points.imageIndex = [
     },
     {
         tags: { man_made: 'lighthouse' },
-        icon: 'lighthouselevel_crossing'
+        icon: 'lighthouse'
     },
     {
         tags: { natural: 'peak' },

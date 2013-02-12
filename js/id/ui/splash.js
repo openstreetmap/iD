@@ -1,5 +1,5 @@
-iD.ui.splash = function() {
-    var modal = iD.ui.modal();
+iD.ui.splash = function(selection) {
+    var modal = iD.ui.modal(selection);
 
     modal.select('.modal')
         .attr('class', 'modal-splash modal');

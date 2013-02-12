@@ -7,18 +7,20 @@
    Only one of these elements can have the :hover pseudo-class, but all of them will
    have the .hover class.
  */
-iD.behavior.Hover = function () {
+iD.behavior.Hover = function() {
     var hover = function(selection) {
         selection.classed('behavior-hover', true);
 
-        selection.on('mouseover.hover', function () {
+        function mouseover() {
             var datum = d3.event.target.__data__;
             if (datum) {
                 selection.selectAll('*')
                     .filter(function (d) { return d === datum; })
                     .classed('hover', true);
             }
-        });
+        }
+
+        selection.on('mouseover.hover', mouseover);
 
         selection.on('mouseout.hover', function () {
             selection.selectAll('.hover')

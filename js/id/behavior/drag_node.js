@@ -1,5 +1,6 @@
 iD.behavior.DragNode = function(context) {
-    var nudgeInterval;
+    var nudgeInterval,
+        wasMidpoint;
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -35,6 +36,25 @@ iD.behavior.DragNode = function(context) {
     }
 
     function start(entity) {
+        context.history()
+            .on('undone.drag-node', cancel);
+
+        wasMidpoint = entity.type === 'midpoint';
+        if (wasMidpoint) {
+            var midpoint = entity;
+            entity = iD.Node();
+            context.perform(iD.actions.AddMidpoint(midpoint, entity));
+
+             var vertex = context.surface()
+                .selectAll('.vertex')
+                .filter(function(d) { return d.id === entity.id; });
+             behavior.target(vertex.node(), entity);
+
+        } else {
+            context.perform(
+                iD.actions.Noop());
+        }
+
         var activeIDs = _.pluck(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
 
@@ -43,9 +63,6 @@ iD.behavior.DragNode = function(context) {
             .selectAll('.node, .way')
             .filter(function (d) { return activeIDs.indexOf(d.id) >= 0; })
             .classed('active', true);
-
-        context.perform(
-            iD.actions.Noop());
     }
 
     function datum() {
@@ -66,35 +83,44 @@ iD.behavior.DragNode = function(context) {
         var loc = context.map().mouseCoordinates();
 
         var d = datum();
-        if (d.type === 'node') {
+        if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way') {
-            loc = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context).loc;
+            var point = d3.mouse(context.surface().node()),
+                index = iD.geo.chooseIndex(d, point, context);
+            if (iD.geo.dist(point, context.projection(index.loc)) < 10) {
+                loc = index.loc;
+            }
         }
 
         context.replace(iD.actions.MoveNode(entity.id, loc));
     }
 
     function end(entity) {
-        context.surface()
-            .classed('behavior-drag-node', false)
-            .selectAll('.active')
-            .classed('active', false);
-
-        stopNudge();
+        off();
 
         var d = datum();
         if (d.type === 'way') {
-            var choice = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context);
-            context.replace(
-                iD.actions.MoveNode(entity.id, choice.loc),
-                iD.actions.AddVertex(d.id, entity.id, choice.index),
-                connectAnnotation(d));
+            var point = d3.mouse(context.surface().node()),
+                choice = iD.geo.chooseIndex(d, point, context);
+            if (iD.geo.dist(point, context.projection(choice.loc)) < 10) {
+                context.replace(
+                    iD.actions.MoveNode(entity.id, choice.loc),
+                    iD.actions.AddVertex(d.id, entity.id, choice.index),
+                    connectAnnotation(d));
+                return;
+            }
+        }
 
-        } else if (d.type === 'node' && d.id !== entity.id) {
+        if (d.type === 'node' && d.id !== entity.id) {
             context.replace(
                 iD.actions.Connect([entity.id, d.id]),
                 connectAnnotation(d));
+
+        } else if (wasMidpoint) {
+            context.replace(
+                iD.actions.Noop(),
+                t('operations.add.annotation.vertex'));
 
         } else {
             context.replace(
@@ -103,10 +129,30 @@ iD.behavior.DragNode = function(context) {
         }
     }
 
-    return iD.behavior.drag()
-        .delegate("g.node")
+    function off() {
+        context.history()
+            .on('undone.drag_node', null);
+
+        context.surface()
+            .classed('behavior-drag-node', false)
+            .selectAll('.active')
+            .classed('active', false);
+
+        stopNudge();
+    }
+
+    function cancel() {
+        off();
+        behavior.cancel();
+    }
+
+    var behavior = iD.behavior.drag()
+        .delegate("g.node, g.point, g.midpoint")
+        .surface(context.surface().node())
         .origin(origin)
         .on('start', start)
         .on('move', move)
         .on('end', end);
+
+    return behavior;
 };

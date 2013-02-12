@@ -49,6 +49,7 @@ _.extend(iD.Way.prototype, {
     isArea: function() {
         return this.tags.area === 'yes' ||
             (this.isClosed() &&
+                !_.isEmpty(this.tags) &&
                 this.tags.area !== 'no' &&
                 !this.tags.highway &&
                 !this.tags.barrier);
@@ -71,6 +72,19 @@ _.extend(iD.Way.prototype, {
     updateNode: function(id, index) {
         var nodes = this.nodes.slice();
         nodes.splice(index, 1, id);
+        return this.update({nodes: nodes});
+    },
+
+    replaceNode: function(needle, replacement) {
+        if (this.nodes.indexOf(needle) < 0)
+            return this;
+
+        var nodes = this.nodes.slice();
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i] === needle) {
+                nodes[i] = replacement;
+            }
+        }
         return this.update({nodes: nodes});
     },
 
@@ -103,13 +117,24 @@ _.extend(iD.Way.prototype, {
     },
 
     asGeoJSON: function(resolver) {
-        return {
-            type: 'Feature',
-            properties: this.tags,
-            geometry: {
-                type: 'LineString',
-                coordinates: _.pluck(resolver.childNodes(this), 'loc')
-            }
-        };
+        if (this.isArea()) {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [_.pluck(resolver.childNodes(this), 'loc')]
+                }
+            };
+        } else {
+            return {
+                type: 'Feature',
+                properties: this.tags,
+                geometry: {
+                    type: 'LineString',
+                    coordinates: _.pluck(resolver.childNodes(this), 'loc')
+                }
+            };
+        }
     }
 });

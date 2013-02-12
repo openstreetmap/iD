@@ -1,3 +1,12 @@
+iD.debug = true;
+
+mocha.setup({
+    ui: 'bdd',
+    globals: ['__onresize.tail-size', '__onmousemove.zoom', '__onmouseup.zoom', '__onclick.draw']
+});
+
+var expect = chai.expect;
+
 chai.use(function (chai, utils) {
     var flag = utils.flag;
 

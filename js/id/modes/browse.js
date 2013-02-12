@@ -4,14 +4,14 @@ iD.modes.Browse = function(context) {
         id: 'browse',
         title: t('modes.browse.title'),
         description: t('modes.browse.description'),
-        key: t('modes.browse.key')
+        key: '1'
     };
 
     var behaviors = [
         iD.behavior.Hover(),
         iD.behavior.Select(context),
-        iD.behavior.DragNode(context),
-        iD.behavior.DragMidpoint(context)];
+        iD.behavior.Lasso(context),
+        iD.behavior.DragNode(context)];
 
     mode.enter = function() {
         behaviors.forEach(function(behavior) {

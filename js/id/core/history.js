@@ -1,7 +1,8 @@
-iD.History = function() {
+iD.History = function(context) {
     var stack, index,
         imagery_used = 'Bing',
-        dispatch = d3.dispatch('change', 'undone', 'redone');
+        dispatch = d3.dispatch('change', 'undone', 'redone'),
+        lock = false;
 
     function perform(actions) {
         actions = Array.prototype.slice.call(actions);
@@ -17,13 +18,21 @@ iD.History = function() {
             graph = actions[i](graph);
         }
 
-        return {graph: graph, annotation: annotation, imagery_used: imagery_used};
+        return {
+            graph: graph,
+            annotation: annotation,
+            imagery_used: imagery_used
+        };
     }
 
     function change(previous) {
         var difference = iD.Difference(previous, history.graph());
         dispatch.change(difference);
         return difference;
+    }
+
+    function getKey(n) {
+        return 'iD_' + window.location.origin + '_' + n;
     }
 
     var history = {
@@ -123,9 +132,20 @@ iD.History = function() {
 
         changes: function() {
             var difference = history.difference();
+
+            function discardTags(entity) {
+                if (_.isEmpty(entity.tags)) {
+                    return entity;
+                } else {
+                    return entity.update({
+                        tags: _.omit(entity.tags, iD.data.discarded)
+                    });
+                }
+            }
+
             return {
-                modified: difference.modified(),
-                created: difference.created(),
+                modified: difference.modified().map(discardTags),
+                created: difference.created().map(discardTags),
                 deleted: difference.deleted()
             };
         },
@@ -149,7 +169,66 @@ iD.History = function() {
             stack = [{graph: iD.Graph()}];
             index = 0;
             dispatch.change();
+        },
+
+        save: function() {
+            if (!lock) return;
+            context.storage(getKey('lock'), null);
+
+            if (stack.length <= 1) {
+                context.storage(getKey('history'), null);
+                context.storage(getKey('nextIDs'), null);
+                context.storage(getKey('index'), null);
+                return;
+            }
+
+            var json = JSON.stringify(stack.map(function(i) {
+                return {
+                    annotation: i.annotation,
+                    imagery_used: i.imagery_used,
+                    entities: i.graph.entities
+                };
+            }));
+
+            context.storage(getKey('history'), json);
+            context.storage(getKey('nextIDs'), JSON.stringify(iD.Entity.id.next));
+            context.storage(getKey('index'), index);
+        },
+
+        lock: function() {
+            if (context.storage(getKey('lock'))) return false;
+            context.storage(getKey('lock'), true);
+            lock = true;
+            return lock;
+        },
+
+        restorableChanges: function() {
+            return lock && !!context.storage(getKey('history'));
+        },
+
+        load: function() {
+            if (!lock) return;
+
+            var json = context.storage(getKey('history')),
+                nextIDs = context.storage(getKey('nextIDs')),
+                index_ = context.storage(getKey('index'));
+
+            if (!json) return;
+            if (nextIDs) iD.Entity.id.next = JSON.parse(nextIDs);
+            if (index_ !== null) index = parseInt(index_, 10);
+
+            context.storage(getKey('history', null));
+            context.storage(getKey('nextIDs', null));
+            context.storage(getKey('index', null));
+
+            stack = JSON.parse(json).map(function(d, i) {
+                d.graph = iD.Graph(stack[0].graph).load(d.entities);
+                return d;
+            });
+            dispatch.change();
+
         }
+
     };
 
     history.reset();

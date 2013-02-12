@@ -51,6 +51,8 @@ describe("iD.behavior.Hash", function () {
     });
 
     it("stores the current zoom and coordinates in location.hash on map move events", function () {
+        location.hash = "";
+
         hash();
 
         context.map().center([38.9, -77.0]);

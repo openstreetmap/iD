@@ -18,7 +18,7 @@
     "editor",
     "openstreetmap"
   ],
-  "license": "BSD",
+  "license": "WTFPL",
   "devDependencies": {
     "uglify-js": "~2.2.2",
     "mocha-phantomjs": "~1.1.1"

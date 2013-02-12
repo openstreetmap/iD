@@ -1,7 +1,5 @@
 iD.ui.contributors = function(context) {
-
-    function contributors(selection) {
-
+    function update(selection) {
         var users = {},
             limit = 3,
             entities = context.graph().intersects(context.map().extent());
@@ -13,28 +11,25 @@ iD.ui.contributors = function(context) {
         var u = Object.keys(users),
             subset = u.slice(0, limit);
 
-        var l = selection
-            .select('.contributor-list')
-            .selectAll('a.user-link')
-            .data(subset, function(d) { return d; });
+        selection.html('')
+            .append('span')
+            .attr('class', 'icon nearby icon-pre-text');
 
+        var userList = d3.select(document.createElement('span'));
 
-        l.enter().append('a')
+        userList.selectAll()
+            .data(subset)
+            .enter()
+            .append('a')
             .attr('class', 'user-link')
             .attr('href', function(d) { return context.connection().userUrl(d); })
             .attr('target', '_blank')
             .text(String);
 
-        l.exit().remove();
-
-        selection
-            .select('.contributor-count')
-            .html('');
-
         if (u.length > limit) {
-            selection
-                .select('.contributor-count')
-                .append('a')
+            var count = d3.select(document.createElement('span'));
+
+            count.append('a')
                 .attr('target', '_blank')
                 .attr('href', function() {
                     var ext = context.map().extent();
@@ -42,11 +37,13 @@ iD.ui.contributors = function(context) {
                         ext[0][0], ext[0][1],
                         ext[1][0], ext[1][1]];
                 })
-                .text(' and ' + (u.length - limit) + ' others');
+                .text(u.length - limit);
+
+            selection.append('span')
+                .html(t('contributors.truncated_list', {users: userList.html(), count: count.html()}));
         } else {
-            selection
-                .select('.contributor-count')
-                .html('');
+            selection.append('span')
+                .html(t('contributors.list', {users: userList.html()}));
         }
 
         if (!u.length) {
@@ -54,9 +51,17 @@ iD.ui.contributors = function(context) {
         } else if (selection.style('opacity') === '0') {
             selection.transition().style('opacity', 1);
         }
-
     }
 
-    return contributors;
+    return function(selection) {
+        update(selection);
 
+        context.connection().on('load.contributors', function() {
+            update(selection);
+        });
+
+        context.map().on('move.contributors', _.debounce(function() {
+            update(selection);
+        }, 500));
+    };
 };

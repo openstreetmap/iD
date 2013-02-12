@@ -2,14 +2,14 @@ iD.ui.inspector = function() {
     var event = d3.dispatch('changeTags', 'close'),
         taginfo = iD.taginfo(),
         initial = false,
-        graph,
+        context,
         tagList;
 
     function inspector(selection) {
         var entity = selection.datum();
 
         var inspector = selection.append('div')
-            .attr('class','inspector content');
+            .attr('class','inspector content hide');
 
         inspector.append('div')
             .attr('class', 'head inspector-inner fillL')
@@ -42,6 +42,8 @@ iD.ui.inspector = function() {
         inspectorbody.append('div')
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
+
+        inspector.call(iD.ui.toggle(true));
     }
 
     function drawHead(selection) {
@@ -50,7 +52,7 @@ iD.ui.inspector = function() {
         var h2 = selection.append('h2');
 
         h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(graph));
+            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
 
         h2.append('span')
             .text(entity.friendlyName());
@@ -119,56 +121,83 @@ iD.ui.inspector = function() {
         removeBtn.append('span')
             .attr('class', 'icon delete');
 
+        function findLocal(docs) {
+            var locale = iD.detect().locale.toLowerCase(),
+                localized;
+
+            localized = _.find(docs, function(d) {
+                return d.lang.toLowerCase() === locale;
+            });
+            if (localized) return localized;
+
+            // try the non-regional version of a language, like
+            // 'en' if the language is 'en-US'
+            if (locale.indexOf('-') !== -1) {
+                var first = locale.split('-')[0];
+                localized = _.find(docs, function(d) {
+                    return d.lang.toLowerCase() === first;
+                });
+                if (localized) return localized;
+            }
+
+            // finally fall back to english
+            return _.find(docs, function(d) {
+                return d.lang.toLowerCase() === 'en';
+            });
+        }
+
+        function keyValueReference(err, docs) {
+            var local;
+            if (!err && docs) {
+                local = findLocal(docs);
+            }
+            if (local) {
+                var types = [];
+                if (local.on_area) types.push('area');
+                if (local.on_node) types.push('point');
+                if (local.on_way) types.push('line');
+                local.types = types;
+                iD.ui.modal(context.container())
+                    .select('.content')
+                    .datum(local)
+                    .call(iD.ui.tagReference);
+            } else {
+                iD.ui.flash(context.container())
+                    .select('.content')
+                    .append('h3')
+                    .text(t('inspector.no_documentation_combination'));
+            }
+        }
+
+        function keyReference(err, values) {
+            if (!err && values.data.length) {
+                iD.ui.modal(context.container())
+                    .select('.content')
+                    .datum({
+                        data: values.data,
+                        title: 'Key:' + params.key,
+                        geometry: params.geometry
+                    })
+                    .call(iD.keyReference(context));
+            } else {
+                iD.ui.flash(context.container())
+                    .select('.content')
+                    .append('h3')
+                    .text(t('inspector.no_documentation_key'));
+            }
+        }
+
         var helpBtn = row.append('button')
             .attr('tabindex', -1)
             .attr('class', 'tag-help minor')
             .on('click', function(d) {
                 var params = _.extend({}, d, {
-                    geometry: entity.geometry(graph)
+                    geometry: entity.geometry(context.graph())
                 });
                 if (d.key && d.value) {
-                    taginfo.docs(params, function(err, docs) {
-                        var en;
-                        if (!err && docs) {
-                            en = _.find(docs, function(d) {
-                                return d.lang == 'en';
-                            });
-                        }
-                        if (en) {
-                            var types = [];
-                            if (en.on_area) types.push('area');
-                            if (en.on_node) types.push('point');
-                            if (en.on_way) types.push('line');
-                            en.types = types;
-                            iD.ui.modal()
-                                .select('.content')
-                                .datum(en)
-                                .call(iD.ui.tagReference);
-                        } else {
-                            iD.ui.flash()
-                                .select('.content')
-                                .append('h3')
-                                .text(t('inspector.no_documentation_combination'));
-                        }
-                    });
+                    taginfo.docs(params, keyValueReference);
                 } else if (d.key) {
-                    taginfo.values(params, function(err, values) {
-                        if (!err && values.data.length) {
-                            iD.ui.modal()
-                                .select('.content')
-                                .datum({
-                                    data: values.data,
-                                    title: 'Key:' + params.key,
-                                    geometry: params.geometry
-                                })
-                                .call(iD.keyReference);
-                        } else {
-                            iD.ui.flash()
-                                .select('.content')
-                                .append('h3')
-                                .text(t('inspector.no_documentation_key'));
-                        }
-                    });
+                    taginfo.values(params, keyReference);
                 }
             });
 
@@ -194,7 +223,7 @@ iD.ui.inspector = function() {
 
     function bindTypeahead() {
         var entity = tagList.datum(),
-            geometry = entity.geometry(graph),
+            geometry = entity.geometry(context.graph()),
             row = d3.select(this),
             key = row.selectAll('.key'),
             value = row.selectAll('.value');
@@ -275,8 +304,8 @@ iD.ui.inspector = function() {
         return inspector;
     };
 
-    inspector.graph = function(_) {
-        graph = _;
+    inspector.context = function(_) {
+        context = _;
         return inspector;
     };
 

@@ -1,6 +1,7 @@
-iD.ui.modal = function(blocking) {
+iD.ui.modal = function(selection, blocking) {
 
-    var animate = d3.select('div.modal').empty();
+    var previous = selection.select('div.modal');
+    var animate = previous.empty();
 
     var keybinding = d3.keybinding('modal')
         .on('⌫', close)
@@ -8,10 +9,10 @@ iD.ui.modal = function(blocking) {
 
     d3.select(document).call(keybinding);
 
-    d3.select('div.modal').transition()
+    previous.transition()
         .style('opacity', 0).remove();
 
-    var shaded = d3.select(document.body)
+    var shaded = selection
         .append('div')
         .attr('class', 'shaded')
         .style('opacity', 0)

@@ -2,7 +2,7 @@
 <imagery>
   <set>
     <name>Bing aerial imagery</name>
-    <url>http://ecn.t0.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&amp;mkt=en-gb&amp;n=z</url>
+    <url>http://ecn.t${0|1|2|3}.tiles.virtualearth.net/tiles/a$quadkey.jpeg?g=587&amp;mkt=en-gb&amp;n=z</url>
     <scheme>microsoft</scheme>
     <sourcetag>Bing</sourcetag>
     <attribution_url>http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/0,0?zl=1&amp;mapVersion=v1&amp;key=Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU&amp;include=ImageryProviders&amp;output=xml</attribution_url>
@@ -14,10 +14,12 @@
   <set>
     <name>MapBox Satellite</name>
     <url>http://${a|b|c}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/$z/$x/$y.png</url>
+    <terms_url>http://mapbox.com/tos/</terms_url>
   </set>
   <set>
     <name>MapQuest Open Aerial</name>
     <url>http://oatile1.mqcdn.com/tiles/1.0.0/sat/$z/$x/$y.jpg</url>
+    <terms_url>http://developer.mapquest.com/web/products/open/map#terms</terms_url>
   </set>
   <set>
     <name>OSM - Mapnik</name>

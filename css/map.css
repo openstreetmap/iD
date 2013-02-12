@@ -1,3 +1,26 @@
+/* tiles */
+img.tile {
+    position:absolute;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+
+    opacity: 0;
+
+    -webkit-transition: opacity 200ms linear;
+    transition: opacity 200ms linear;
+    -moz-transition: opacity 200ms linear;
+}
+
+img.tile-loaded {
+    opacity: 1;
+}
+
 /* base styles */
 path {
     fill: none;
@@ -7,6 +30,10 @@ path {
 
 g.point circle {
     fill:#fff;
+}
+
+g.point image {
+  pointer-events: none;
 }
 
 g.point .shadow {
@@ -23,6 +50,10 @@ g.point .shadow {
 g.point.selected .shadow {
     fill: #f6634f;
     fill-opacity: 0.7;
+}
+
+g.point.active, g.point.active * {
+    pointer-events: none;
 }
 
 /* vertices */
@@ -181,95 +212,72 @@ path.shadow.selected {
 }
 
 path.area.stroke,
-path.multipolygon {
+path.line.member-type-multipolygon.stroke {
     stroke-width:2;
-    stroke:#fff;
 }
-path.area.fill,
-path.multipolygon {
-    fill:#fff;
-    fill-opacity:0.3;
-}
-
-path.multipolygon {
-    fill-rule: evenodd;
-}
-
-path.area.fill.member-type-multipolygon {
-    fill: none;
-}
-
-path.area.stroke.selected {
+path.area.stroke.selected,
+path.line.member-type-multipolygon.stroke.selected {
     stroke-width:4 !important;
 }
 
-path.area.stroke.tag-natural,
-path.multipolygon.tag-natural {
+path.area.stroke {
+    stroke:#fff;
+}
+path.area.fill {
+    fill:#fff;
+    fill-opacity:0.3;
+    fill-rule: evenodd;
+}
+
+path.stroke.tag-natural {
     stroke: #b6e199;
     stroke-width:1;
 }
-path.area.fill.tag-natural,
-path.multipolygon.tag-natural {
+path.fill.tag-natural {
     fill: #b6e199;
 }
 
-path.area.stroke.tag-natural-water,
-path.multipolygon.tag-natural-water {
+path.stroke.tag-natural-water {
     stroke: #77d3de;
 }
-path.area.fill.tag-natural-water,
-path.multipolygon.tag-natural-water {
+path.fill.tag-natural-water {
     fill: #77d3de;
 }
 
-path.area.stroke.tag-building,
-path.multipolygon.tag-building {
+path.stroke.tag-building {
     stroke: #e06e5f;
     stroke-width: 1;
 }
-path.area.fill.tag-building,
-path.multipolygon.tag-building {
+path.fill.tag-building {
     fill: #e06e5f;
 }
 
-path.area.stroke.tag-landuse,
-path.area.stroke.tag-natural-wood,
-path.area.stroke.tag-natural-tree,
-path.area.stroke.tag-natural-grassland,
-path.area.stroke.tag-leisure-park,
-path.multipolygon.tag-landuse,
-path.multipolygon.tag-natural-wood,
-path.multipolygon.tag-natural-tree,
-path.multipolygon.tag-natural-grassland,
-path.multipolygon.tag-leisure-park {
+path.stroke.tag-landuse,
+path.stroke.tag-natural-wood,
+path.stroke.tag-natural-tree,
+path.stroke.tag-natural-grassland,
+path.stroke.tag-leisure-park {
     stroke: #8cd05f;
     stroke-width: 1;
 }
-path.area.fill.tag-landuse,
-path.area.fill.tag-natural-wood,
-path.area.fill.tag-natural-tree,
-path.area.fill.tag-natural-grassland,
-path.area.fill.tag-leisure-park,
-path.multipolygon.tag-landuse,
-path.multipolygon.tag-natural-wood,
-path.multipolygon.tag-natural-tree,
-path.multipolygon.tag-natural-grassland,
-path.multipolygon.tag-leisure-park {
+path.fill.tag-landuse,
+path.fill.tag-natural-wood,
+path.fill.tag-natural-tree,
+path.fill.tag-natural-grassland,
+path.fill.tag-leisure-park {
     fill: #8cd05f;
     fill-opacity: 0.2;
 }
 
-path.area.stroke.tag-amenity-parking,
-path.multipolygon.tag-amenity-parking {
+path.stroke.tag-amenity-parking {
     stroke: #aaa;
     stroke-width: 1;
 }
-path.area.fill.tag-amenity-parking,
-path.multipolygon.tag-amenity-parking {
+path.fill.tag-amenity-parking {
     fill: #aaa;
 }
 
-path.multipolygon.tag-boundary {
+path.fill.tag-boundary {
     fill: none;
 }
 
@@ -526,7 +534,7 @@ path.casing.tag-railway-subway {
 
 /* waterways */
 
-path.area.fill.tag-waterway {
+path.fill.tag-waterway {
     fill: #77d3de;
 }
 
@@ -644,7 +652,13 @@ text.pointlabel {
 }
 
 .pathlabel .textpath {
+  dominant-baseline: middle;
+}
+
+/* Opera doesn't support dominant-baseline. See #715 */
+.opera .pathlabel .textpath {
   baseline-shift: -33%;
+  dominant-baseline: auto;
 }
 
 .pointlabel-halo,
@@ -686,9 +700,7 @@ text.point {
 }
 
 .mode-select .area,
-.mode-browse .area,
-.mode-select .multipolygon,
-.mode-browse .multipolygon {
+.mode-browse .area {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 
@@ -701,7 +713,6 @@ text.point {
 .vertex:active,
 .line:active,
 .area:active,
-.multipolygon:active,
 .midpoint:active,
 .mode-select .selected {
     cursor: url(../img/cursor-select-acting.png), pointer;
