@@ -1,4 +1,4 @@
-iD.ui.layerswitcher = function(context) {
+iD.ui.LayerSwitcher = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         opacities = [1, 0.5, 0];
 
@@ -36,7 +36,7 @@ iD.ui.layerswitcher = function(context) {
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
-                content.call(iD.ui.toggle(show));
+                content.call(iD.ui.Toggle(show));
                 shown = show;
             }
         }

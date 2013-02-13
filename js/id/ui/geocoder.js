@@ -64,7 +64,7 @@ iD.ui.Geocoder = function(context) {
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
-                gcForm.call(iD.ui.toggle(show));
+                gcForm.call(iD.ui.Toggle(show));
                 if (!show) resultsList.classed('hide', !show);
                 if (show) inputNode.node().focus();
                 else inputNode.node().blur();

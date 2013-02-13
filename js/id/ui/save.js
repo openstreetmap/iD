@@ -17,7 +17,7 @@ iD.ui.Save = function(context) {
             modal.select('.content')
                 .classed('commit-modal', true)
                 .datum(changes)
-                .call(iD.ui.commit(context)
+                .call(iD.ui.Commit(context)
                     .on('cancel', function() {
                         modal.remove();
                     })
@@ -60,7 +60,7 @@ iD.ui.Save = function(context) {
                 id: changeset_id,
                 comment: e.comment
             })
-            .call(iD.ui.success(connection)
+            .call(iD.ui.Success(connection)
                 .on('cancel', function() {
                     modal.remove();
                 }));

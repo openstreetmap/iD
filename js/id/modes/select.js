@@ -4,7 +4,7 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    var inspector = iD.ui.inspector().initial(!!initial),
+    var inspector = iD.ui.Inspector().initial(!!initial),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [

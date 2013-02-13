@@ -1,4 +1,4 @@
-iD.ui.commit = function(context) {
+iD.ui.Commit = function(context) {
     var event = d3.dispatch('cancel', 'save', 'fix');
 
     function zipSame(d) {

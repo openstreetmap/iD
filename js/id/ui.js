@@ -47,7 +47,7 @@ iD.ui = function(context) {
 
         container.append('div')
             .attr('class', 'map-control layerswitcher-control')
-            .call(iD.ui.layerswitcher(context));
+            .call(iD.ui.LayerSwitcher(context));
 
         container.append('div')
             .attr('class', 'map-control geolocate-control')
@@ -103,7 +103,7 @@ iD.ui = function(context) {
 
         linkList.append('li')
             .attr('id', 'user-list')
-            .call(iD.ui.contributors(context));
+            .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {
             history.save();
@@ -142,7 +142,7 @@ iD.ui = function(context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
-        userContainer.call(iD.ui.userpanel(connection)
+        userContainer.call(iD.ui.UserPanel(connection)
             .on('logout.editor', connection.logout)
             .on('login.editor', connection.authenticate));
 
