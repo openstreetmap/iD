@@ -1,4 +1,4 @@
-iD.ui.UserPanel = function(context) {
+iD.ui.Account = function(context) {
     var connection = context.connection();
 
     function update(selection) {

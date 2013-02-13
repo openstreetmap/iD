@@ -936,11 +936,11 @@ img.tile {
 
 /* Account Information */
 
-.user-container {
+.account {
     float: left;
 }
 
-.user-container .logout {
+.account .logout {
     margin-left:10px;
     border-left: 1px solid white;
     padding-left: 10px;

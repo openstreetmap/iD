@@ -61,7 +61,7 @@ iD.ui = function(context) {
             .attr('class','col12 about-block fillD pad1');
 
         about.append('div')
-            .attr('class', 'user-container')
+            .attr('class', 'account')
             .call(iD.ui.UserPanel(context));
 
         var linkList = about.append('ul')
