@@ -60,15 +60,9 @@ iD.ui = function(context) {
         var about = container.append('div')
             .attr('class','col12 about-block fillD pad1');
 
-        var userContainer = about.append('div')
-            .attr('class', 'user-container');
-
-        userContainer.append('div')
-            .attr('class', 'hello');
-
-        userContainer.call(iD.ui.UserPanel(connection)
-            .on('logout.editor', connection.logout)
-            .on('login.editor', connection.authenticate));
+        about.append('div')
+            .attr('class', 'user-container')
+            .call(iD.ui.UserPanel(context));
 
         var linkList = about.append('ul')
             .attr('id', 'about')
