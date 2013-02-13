@@ -186,6 +186,18 @@ locale.en = {
         reset: "reset"
     },
 
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
+    },
+
     contributors: {
         list: "Viewing contributions by {users}",
         truncated_list: "Viewing contributions by {users} and {count} others"
