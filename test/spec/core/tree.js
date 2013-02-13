@@ -12,6 +12,16 @@ describe("iD.Tree", function() {
             tree.rebase(['n']);
             expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), tree.graph())).to.eql([node]);
         });
+
+        it("does not insert if entity has a modified version", function() {
+            var node = iD.Node({ id: 'n', loc: [1, 1]}),
+                node_ = node.update({ loc: [10, 10]}),
+                g = tree.graph().replace(node_);
+            expect(tree.intersects(iD.geo.Extent([9, 9], [11, 11]), g)).to.eql([node_]);
+            tree.graph().rebase({ 'n': node });
+            tree.rebase(['n']);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), tree.graph())).to.eql([]);
+        });
     });
 
     describe("#intersects", function() {

@@ -1,3 +1,5 @@
+
+
 iD.Tree = function(graph) {
 
     var rtree = new RTree(),
@@ -32,7 +34,9 @@ iD.Tree = function(graph) {
 
         rebase: function(entities) {
             for (var i = 0; i < entities.length; i++) {
-                insert(graph.entity(entities[i]), true);
+                if (!graph.hasOwnProperty(entities[i])) {
+                    insert(graph.entity(entities[i]), true);
+                }
             }
             rebased = true;
             return tree;
