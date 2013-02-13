@@ -1,6 +1,7 @@
 iD.behavior.DragNode = function(context) {
     var nudgeInterval,
-        wasMidpoint;
+        wasMidpoint,
+        cancelled;
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -36,6 +37,9 @@ iD.behavior.DragNode = function(context) {
     }
 
     function start(entity) {
+        cancelled = d3.event.sourceEvent.shiftKey;
+        if (cancelled) return behavior.cancel();
+
         context.history()
             .on('undone.drag-node', cancel);
 
@@ -74,6 +78,7 @@ iD.behavior.DragNode = function(context) {
     }
 
     function move(entity) {
+        if (cancelled) return;
         d3.event.sourceEvent.stopPropagation();
 
         var nudge = edge(d3.event.point, context.map().size());
@@ -97,6 +102,7 @@ iD.behavior.DragNode = function(context) {
     }
 
     function end(entity) {
+        if (cancelled) return;
         off();
 
         var d = datum();
