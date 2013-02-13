@@ -509,7 +509,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-wrap {
     opacity:0;
     display:none;
-    padding-left: 10px;
     max-width: 500px;
 }
 
