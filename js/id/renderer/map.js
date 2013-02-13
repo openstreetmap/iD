@@ -112,7 +112,7 @@ iD.Map = function(context) {
             iD.ui.flash(context.container())
                 .select('.content')
                 .text('Cannot zoom out further in current mode.');
-            return map.zoom(16);
+            return setZoom(16, true);
         }
 
         projection
@@ -214,8 +214,8 @@ iD.Map = function(context) {
         return map;
     };
 
-    function setZoom(z) {
-        if (z === map.zoom())
+    function setZoom(z, force) {
+        if (z === map.zoom() && !force)
             return false;
         var scale = 256 * Math.pow(2, z),
             center = pxCenter(),
