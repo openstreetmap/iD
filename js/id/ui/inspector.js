@@ -176,16 +176,16 @@ iD.ui.Inspector = function() {
             }
         }
 
-        function keyReference(err, values) {
-            if (!err && values.data.length) {
+        function keyReference(err, values, params) {
+            if (!err && values.length) {
                 iD.ui.modal(context.container())
                     .select('.content')
                     .datum({
-                        data: values.data,
+                        data: values,
                         title: 'Key:' + params.key,
                         geometry: params.geometry
                     })
-                    .call(iD.keyReference(context));
+                    .call(iD.ui.keyReference);
             } else {
                 iD.ui.flash(context.container())
                     .select('.content')
