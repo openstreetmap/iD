@@ -6,19 +6,21 @@ iD.ui.restore = function(selection, history) {
 
     var introModal = modal.select('.content');
 
-        introModal.append('div')
-            .attr('class', 'modal-section fillL')
-            .append('h3').text('You have unsaved changes from a previous editing session. Do you wish to restore these changes?');
-        var buttonWrap = introModal.append('div')
-            .attr('class', 'modal-section fillD cf col12');
+    introModal.append('div')
+        .attr('class', 'modal-section fillL')
+        .append('h3')
+        .text(t('restore.description'));
 
-    buttons = buttonWrap
-            .append('div')
-            .attr('class', 'button-wrap joined col6');
+    var buttonWrap = introModal.append('div')
+        .attr('class', 'modal-section fillD cf col12');
+
+    var buttons = buttonWrap
+        .append('div')
+        .attr('class', 'button-wrap joined col6');
 
     buttons.append('button')
         .attr('class', 'save action button col6')
-        .text('Restore')
+        .text(t('restore.restore'))
         .on('click', function() {
             history.load();
             modal.remove();
@@ -26,7 +28,7 @@ iD.ui.restore = function(selection, history) {
 
     buttons.append('button')
         .attr('class', 'cancel button col6')
-        .text('Reset')
+        .text(t('restore.reset'))
         .on('click', function() {
             modal.remove();
         });

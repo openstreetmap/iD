@@ -182,6 +182,12 @@ locale.es = {
         reset: "reiniciar" //"reset"
     },
 
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
     save: {
         title: "Guardar", //"Save",
         help: "Guardar los cambios en OpenStreetMap haciéndolos visibles a otros usuarios", //"Save changes to OpenStreetMap, making them visible to other users",

@@ -182,6 +182,12 @@ locale.tr = {
         reset: "Sıfırla"
     },
 
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
     save: {
         title: "Kaydet",
         help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",

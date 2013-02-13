@@ -182,6 +182,12 @@ locale.fr = {
         reset: "reset"
     },
 
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
     save: {
         title: "Sauvegarder",
         help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",

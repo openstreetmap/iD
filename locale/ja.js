@@ -182,6 +182,12 @@ locale.ja = {
         reset: "設定リセット"
     },
 
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
     save: {
         title: "Save",
         help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします",

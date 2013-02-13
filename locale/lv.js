@@ -182,6 +182,12 @@ locale.lv = {
         reset: "Pārstatīt"
     },
 
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
     save: {
         title: "Saglabāt",
         help: "Saglabā izmaiņas, padarot tās redzamas citiem",
