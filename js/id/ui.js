@@ -62,7 +62,7 @@ iD.ui = function(context) {
 
         about.append('div')
             .attr('class', 'account')
-            .call(iD.ui.UserPanel(context));
+            .call(iD.ui.Account(context));
 
         var linkList = about.append('ul')
             .attr('id', 'about')

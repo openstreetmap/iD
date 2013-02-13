@@ -841,7 +841,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     width: 100%;
 }
 
-.geocode-control div {
+.geocode-control div.content {
     z-index: 100;
     top: 190px;
     max-height: 300px;
