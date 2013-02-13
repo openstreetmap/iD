@@ -168,6 +168,10 @@ locale.en = {
         no_results: "Couldn't locate a place named '{name}'"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "Description",
 
     logout: "logout",

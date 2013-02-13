@@ -15,7 +15,7 @@ iD.ui.Geolocate = function(map) {
 
         var button = selection.append('button')
             .attr('tabindex', -1)
-            .attr('title', 'Show My Location')
+            .attr('title', t('geolocate.title'))
             .on('click', click)
             .call(bootstrap.tooltip()
                 .placement('right'));
