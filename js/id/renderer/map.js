@@ -152,8 +152,12 @@ iD.Map = function(context) {
         if (resetTransform())
             difference = undefined;
 
-        surface.attr('data-zoom', ~~map.zoom());
-        tilegroup.call(background);
+        var zoom = String(~~map.zoom());
+        if (surface.attr('data-zoom') !== zoom)
+            surface.attr('data-zoom', zoom);
+
+        if (!difference)
+            tilegroup.call(background);
 
         if (map.editable()) {
             context.connection().loadTiles(projection, dimensions);
