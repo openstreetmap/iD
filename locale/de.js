@@ -139,15 +139,15 @@ locale.de = {
     report_a_bug: "Programmfehler melden",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Änderungen speichern",
+        description_placeholder: "Eine kurze Beschreibung deiner Beiträge",
+        upload_explanation: "Änderungen, die du als {user} hochlädst werden sichtbar auf allen Karte, die OpenStreetMap nutzen.",
+        save: "Speichern",
+        cancel: "Abbrechen",
+        warnings: "Warnungen",
+        modified: "Verändert",
+        deleted: "Gelöscht",
+        created: "Erstellt"
     },
 
     contributors: {
@@ -162,7 +162,7 @@ locale.de = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Zeige meine Position"
     },
 
     inspector: {
@@ -171,7 +171,7 @@ locale.de = {
         new_tag: "Neues Attribut",
         edit_tags: "Attribute bearbeiten",
         okay: "OK",
-        view_on_osm: "View on OSM"
+        view_on_osm: "auf OSM ansehen"
     },
 
     layerswitcher: {
@@ -183,9 +183,9 @@ locale.de = {
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Es gibt ungespeicherte Änderungen aus einer vorherigen Sitzung. Möchtest du diese Änderungen wiederherstellen?",
+        restore: "Wiederherstellen",
+        reset: "Zurücksetzen"
     },
 
     save: {
@@ -197,8 +197,8 @@ locale.de = {
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "Willkommen beim iD OpenStreetMap editor",
+        text: "Dies ist eine Entwicklungsversion {version}. Für weitere Informationen besuche {website} und melde Fehler unter {github}."
     },
 
     source_switch: {
@@ -208,8 +208,8 @@ locale.de = {
 
     tag_reference: {
         description: "Beschreibung",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        on_wiki: "{tag} auf wiki.osm.org",
+        used_with: "benutzt mit {type}"
     },
 
     validations: {
