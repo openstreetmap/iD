@@ -34,7 +34,8 @@ iD.ui.Restore = function(context) {
             .attr('class', 'cancel button col6')
             .text(t('restore.reset'))
             .on('click', function() {
+                context.history().clearSaved();
                 modal.remove();
             });
-    }
+    };
 };

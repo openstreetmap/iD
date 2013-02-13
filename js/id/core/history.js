@@ -175,12 +175,7 @@ iD.History = function(context) {
             if (!lock) return;
             context.storage(getKey('lock'), null);
 
-            if (stack.length <= 1) {
-                context.storage(getKey('history'), null);
-                context.storage(getKey('nextIDs'), null);
-                context.storage(getKey('index'), null);
-                return;
-            }
+            if (stack.length <= 1) return;
 
             var json = JSON.stringify(stack.map(function(i) {
                 return {
@@ -196,6 +191,13 @@ iD.History = function(context) {
             context.storage(getKey('history'), json);
             context.storage(getKey('nextIDs'), JSON.stringify(iD.Entity.id.next));
             context.storage(getKey('index'), index);
+        },
+
+        clearSaved: function() {
+            if (!lock) return;
+            context.storage(getKey('history'), null);
+            context.storage(getKey('nextIDs'), null);
+            context.storage(getKey('index'), null);
         },
 
         lock: function() {
