@@ -327,7 +327,7 @@ button.centered {
     border-radius:0 4px 4px 0;
 }
 
-button.Browse .label { display: none;}
+button.browse .label { display: none;}
 
 button.action {
     background: #7092ff;
