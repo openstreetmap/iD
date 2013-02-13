@@ -196,6 +196,11 @@ locale.ja = {
         unsaved_changes: "変更が保存されていません"
     },
 
+    splash: {
+        welcome: "Welcome to the iD OpenStreetMap editor",
+        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+    },
+
     source_switch: {
         live: "本番サーバ",
         dev: "開発サーバ"

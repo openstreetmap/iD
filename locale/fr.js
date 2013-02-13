@@ -196,6 +196,11 @@ locale.fr = {
         unsaved_changes: "Vous avez des modifications non enregistrées"
     },
 
+    splash: {
+        welcome: "Welcome to the iD OpenStreetMap editor",
+        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+    },
+
     source_switch: {
         live: "live",
         dev: "dev"

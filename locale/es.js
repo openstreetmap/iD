@@ -196,6 +196,11 @@ locale.es = {
         unsaved_changes: "Tienes cambios sin guardar" //"You have unsaved changes",
     },
 
+    splash: {
+        welcome: "Welcome to the iD OpenStreetMap editor",
+        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+    },
+
     source_switch: {
         live: "en vivo", //"live",
         dev: "dev"

@@ -148,10 +148,8 @@ iD.ui = function(context) {
 
         context.enter(iD.modes.Browse(context));
 
-        if (!context.storage('sawSplash')) {
-            iD.ui.splash(context.container());
-            context.storage('sawSplash', true);
-        }
+        context.container()
+            .call(iD.ui.Splash(context));
 
         if (history.lock() && history.restorableChanges()) {
             context.container()
