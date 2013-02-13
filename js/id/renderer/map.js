@@ -308,19 +308,23 @@ iD.Map = function(context) {
             return new iD.geo.Extent(projection.invert([0, dimensions[1]]),
                                  projection.invert([dimensions[0], 0]));
         } else {
-            var extent = iD.geo.Extent(_),
-                tl = projection([extent[0][0], extent[1][1]]),
-                br = projection([extent[1][0], extent[0][1]]);
-
-            // Calculate maximum zoom that fits extent
-            var hFactor = (br[0] - tl[0]) / dimensions[0],
-                vFactor = (br[1] - tl[1]) / dimensions[1],
-                hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
-                vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
-                newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
-
-            map.centerZoom(extent.center(), newZoom);
+            map.centerZoom(extent.center(), map.extentZoom(extent));
         }
+    };
+
+    map.extentZoom = function(_) {
+        var extent = iD.geo.Extent(_),
+            tl = projection([extent[0][0], extent[1][1]]),
+            br = projection([extent[1][0], extent[0][1]]);
+
+        // Calculate maximum zoom that fits extent
+        var hFactor = (br[0] - tl[0]) / dimensions[0],
+            vFactor = (br[1] - tl[1]) / dimensions[1],
+            hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
+            vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
+            newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
+
+        return newZoom;
     };
 
     map.flush = function() {

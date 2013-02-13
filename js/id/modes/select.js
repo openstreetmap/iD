@@ -180,7 +180,7 @@ iD.modes.Select = function(context, selection, initial) {
             if (showMenu) context.surface().call(radialMenu);
 
             context.surface()
-                .on('dblclick.select', dblclick)
+                .on('dblclick.select', dblclick);
         }, 200);
     };
 

@@ -11,7 +11,7 @@ iD.ui.Save = function(context) {
         if (!history.hasChanges()) return;
 
         connection.authenticate(function(err) {
-            var modal = iD.ui.modal(context.container());
+            modal = iD.ui.modal(context.container());
             var changes = history.changes();
             changes.connection = connection;
             modal.select('.content')
@@ -67,8 +67,8 @@ iD.ui.Save = function(context) {
     }
 
     function clickFix(d) {
-        map.extent(d.entity.extent(context.graph()));
-        if (map.zoom() > 19) map.zoom(19);
+        var extent = d.entity.extent(context.graph());
+        map.centerZoom(extent.center(), Math.min(19, map.extentZoom(extent)));
         context.enter(iD.modes.Select(context, [d.entity.id]));
         modal.remove();
     }
