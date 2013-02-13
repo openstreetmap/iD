@@ -195,7 +195,9 @@ locale.ja = {
     },
 
     tag_reference: {
-        description: "説明"
+        description: "説明",
+        on_wiki: "{tag} on wiki.osm.org",
+        used_with: "used with {type}"
     },
 
     validations: {

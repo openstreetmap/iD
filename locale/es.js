@@ -195,7 +195,9 @@ locale.es = {
     },
 
     tag_reference: {
-        description: "Descripción" //"Description",
+        description: "Descripción",
+        on_wiki: "{tag} on wiki.osm.org",
+        used_with: "used with {type}"
     },
 
     validations: {

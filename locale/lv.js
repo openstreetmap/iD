@@ -195,7 +195,9 @@ locale.lv = {
     },
 
     tag_reference: {
-        description: "Apraksts"
+        description: "Apraksts",
+        on_wiki: "{tag} on wiki.osm.org",
+        used_with: "used with {type}"
     },
 
     validations: {
