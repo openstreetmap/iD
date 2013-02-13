@@ -6,8 +6,12 @@ iD.ui = function(context) {
             map = context.map();
 
         if (!iD.detect().support) {
-            container.text(t('browser_notice'))
-                .style('text-align:center;font-style:italic;');
+            container
+                .text(t('browser_notice'))
+                .style({
+                    'text-align': 'center',
+                    'font-style': 'italic'
+                });
             return;
         }
 
