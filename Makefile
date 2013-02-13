@@ -52,8 +52,8 @@ all: \
 	js/id/ui/*.js \
 	js/id/validate.js \
 	js/id/end.js \
-	locale/locale.js \
-	locale/en.js
+	js/lib/locale.js \
+	locale/*.js
 
 iD.js: Makefile
 	@rm -f $@
