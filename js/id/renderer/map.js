@@ -317,6 +317,7 @@ iD.Map = function(context) {
             return new iD.geo.Extent(projection.invert([0, dimensions[1]]),
                                  projection.invert([dimensions[0], 0]));
         } else {
+            var extent = iD.geo.Extent(_);
             map.centerZoom(extent.center(), map.extentZoom(extent));
         }
     };
