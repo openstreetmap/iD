@@ -1,10 +1,13 @@
 describe("iD.History", function () {
-    var history, spy,
+    var context, history, spy,
         action = function() { return iD.Graph(); };
 
     beforeEach(function () {
-        history = iD.History();
+        context = iD();
+        history = context.history();
         spy = sinon.spy();
+        // clear lock
+        context.storage(history._getKey('lock'), null);
     });
 
     describe("#graph", function () {
@@ -244,6 +247,53 @@ describe("iD.History", function () {
             history.on('change', spy);
             history.reset();
             expect(spy).to.have.been.called;
+        });
+    });
+
+    describe("#lock", function() {
+        it("acquires lock if possible", function() {
+            expect(history.lock()).to.be.true;
+            expect(history.lock()).to.be.false;
+        });
+    });
+
+    describe("#save", function() {
+
+        it("doesn't do anything if it doesn't have the lock", function() {
+            var key = history._getKey('history');
+            context.storage(key, null);
+            history.save();
+            expect(context.storage(key)).to.be.undefined;
+            context.storage(key, 'something');
+            expect(context.storage(key)).to.equal('something');
+            history.save();
+            context.storage(key, null);
+        });
+
+        it("saves to localStorage", function() {
+            var node = iD.Node({ id: 'n' });
+            history.lock();
+            history.perform(iD.actions.AddEntity(node));
+            history.save();
+            var saved = JSON.parse(context.storage(history._getKey('history')));
+            expect(saved[1].entities.n.id).to.eql('n');
+        });
+    });
+
+    describe("#load", function() {
+        it("saves and loads a created and deleted entities", function() {
+            var node = iD.Node({ id: 'n' }),
+                node2 = iD.Node({ id: 'n2' });
+            history.lock();
+            history.perform(iD.actions.AddEntity(node));
+            history.perform(iD.actions.AddEntity(node2));
+            history.perform(iD.actions.DeleteNode('n2'));
+            history.save();
+            history.reset();
+            expect(history.graph().entity('n')).to.be.undefined
+            history.load();
+            expect(history.graph().entity('n').id).to.equal('n');
+            expect(history.graph().entity('n2')).to.be.undefined;
         });
     });
 });

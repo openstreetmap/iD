@@ -265,7 +265,9 @@ iD.Graph.prototype = {
             entity = entities[i];
             prefix = i[0];
 
-            if (prefix == 'n') {
+            if (entity === 'undefined') {
+                this.entities[i] = undefined;
+            } else if (prefix == 'n') {
                 this.entities[i] = new iD.Node(entity);
 
             } else if (prefix == 'w') {
