@@ -80,12 +80,14 @@ iD.util.getStyle = function(selector) {
 // 2. Does not cause style recalculation
 iD.util.fastMouse = function(container) {
     var rect = _.clone(container.getBoundingClientRect()),
+        rectLeft = rect.left,
+        rectTop = rect.top,
         clientLeft = +container.clientLeft,
         clientTop = +container.clientTop;
     return function(e) {
         return [
-            e.clientX - rect.left - container.clientLeft,
-            e.clientY - rect.top - container.clientTop];
+            e.clientX - rectLeft - clientLeft,
+            e.clientY - rectTop - clientTop];
     };
 };
 
