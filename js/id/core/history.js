@@ -225,6 +225,7 @@ iD.History = function(context) {
                 d.graph = iD.Graph(stack[0].graph).load(d.entities);
                 return d;
             });
+            stack[0].graph.inherited = false;
             dispatch.change();
 
         }
