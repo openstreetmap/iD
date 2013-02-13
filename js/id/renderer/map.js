@@ -65,7 +65,7 @@ iD.Map = function(context) {
             graph = context.graph();
 
         if (!difference) {
-            all = context.history().intersects(extent);
+            all = context.intersects(extent);
             filter = d3.functor(true);
         } else {
             var complete = difference.complete(extent);

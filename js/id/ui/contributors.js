@@ -2,7 +2,7 @@ iD.ui.Contributors = function(context) {
     function update(selection) {
         var users = {},
             limit = 3,
-            entities = context.history().intersects(context.map().extent());
+            entities = context.intersects(context.map().extent());
 
         for (var i in entities) {
             if (entities[i].user) users[entities[i].user] = true;
