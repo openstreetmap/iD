@@ -22,6 +22,10 @@ Let's look at an example line from `en.js`:
 no_results: "Couldn't locate a place named '{name}'"
 ```
 
+`no_results` is the translation _key_, and should not be translated.
+The text to the right of the colon, `"Couldn't locate a place named '{name}'"`,
+is the string to be translated.
+
 The word in brackets, `{name}`, should **not** be translated into a new
 language: it's replaced with a place name when iD presents the text. So
 a French translation would look like
@@ -29,6 +33,15 @@ a French translation would look like
 ```javascript
 no_results: "Impossible de localiser l'endroit nommé '{name}'"
 ```
+
+For technical reasons, a few translation keys are quoted. For example:
+
+```
+'delete': "Delete"
+```
+
+Only translate the value to the right of the colon, not the quoted key on
+the left.
 
 ## License
 
