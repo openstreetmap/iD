@@ -146,6 +146,8 @@ iD.Map = function(context) {
     }
 
     function redraw(difference) {
+        clearTimeout(timeoutId);
+
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
         // It would result in artifacts where differenced entities are redrawn with
         // one transform and unchanged entities with another.
@@ -173,7 +175,11 @@ iD.Map = function(context) {
         return map;
     }
 
-    var queueRedraw = _.debounce(redraw, 200);
+    var timeoutId;
+    function queueRedraw() {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(function() { redraw(); }, 300);
+    }
 
     function pointLocation(p) {
         var translate = projection.translate(),
