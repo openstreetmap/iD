@@ -170,7 +170,8 @@ locale.es = {
         no_documentation_key: "No hay documentación disponible para esta tecla", //"This is no documentation available for this key",
         new_tag: "Nueve etiqueta", //"New Tag"
         edit_tags: "Editar etiquetas", //"Edit tags",
-        okay: "OK" //"Okay",
+        okay: "OK",
+        view_on_osm: "View on OSM"
     },
 
     layerswitcher: {

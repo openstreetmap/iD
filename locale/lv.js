@@ -170,7 +170,8 @@ locale.lv = {
         no_documentation_key: "There is no documentation available for this key",
         new_tag: "Jauns apzīmējums",
         edit_tags: "Rediģēt apzīmējumus",
-        okay: "Labi"
+        okay: "Labi",
+        view_on_osm: "View on OSM"
     },
 
     layerswitcher: {

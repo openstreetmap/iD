@@ -170,7 +170,8 @@ locale.fr = {
         no_documentation_key: "Aucune documentation n'est disponible pour cette clé",
         new_tag: "Nouveau tag",
         edit_tags: "Editer les tags",
-        okay: "Okay"
+        okay: "Okay",
+        view_on_osm: "View on OSM"
     },
 
     layerswitcher: {

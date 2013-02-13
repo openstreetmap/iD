@@ -27,15 +27,19 @@ iD.ui.Inspector = function() {
         tagList = inspectorwrap.append('ul');
 
         var newTag = inspectorwrap.append('button')
-                .attr('class', 'add-tag');
+            .attr('class', 'add-tag');
 
-            newTag.on('click', function() {
-                addTag();
-                focusNewKey();
-            });
+        newTag.on('click', function () {
+            addTag();
+            focusNewKey();
+        });
 
-            newTag.append('span').attr('class', 'icon icon-pre-text plus');
-            newTag.append('span').attr('class','label').text(t('inspector.new_tag'));
+        newTag.append('span')
+            .attr('class', 'icon icon-pre-text plus');
+
+        newTag.append('span')
+            .attr('class', 'label')
+            .text(t('inspector.new_tag'));
 
         drawTags(entity.tags);
 
@@ -62,17 +66,20 @@ iD.ui.Inspector = function() {
         var entity = selection.datum();
 
         var inspectorButton = selection.append('button')
-                .attr('class', 'apply action')
-                .on('click', apply);
+            .attr('class', 'apply action')
+            .on('click', apply);
 
-            inspectorButton.append('span').attr('class','label').text(t('inspector.okay'));
+        inspectorButton.append('span')
+            .attr('class','label')
+            .text(t('inspector.okay'));
 
-        var minorButtons = selection.append('div').attr('class','minor-buttons fl');
+        var minorButtons = selection.append('div')
+            .attr('class','minor-buttons fl');
 
-            minorButtons.append('a')
-                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-                .attr('target', '_blank')
-                .text('View on OSM');
+        minorButtons.append('a')
+            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+            .attr('target', '_blank')
+            .text(t('inspector.view_on_osm'));
     }
 
     function drawTags(tags) {

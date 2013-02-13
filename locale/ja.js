@@ -170,7 +170,8 @@ locale.ja = {
         no_documentation_key: "このキーに対する説明文はありません",
         new_tag: "新規タグ",
         edit_tags: "タグを編集",
-        okay: "OK"
+        okay: "OK",
+        view_on_osm: "View on OSM"
     },
 
     layerswitcher: {

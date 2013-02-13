@@ -178,7 +178,8 @@ locale.da = {
         no_documentation_key: "Der er ingen dokumenation tilgængelig for denne nøgle",
         new_tag: "Nyt Tag",
         edit_tags: "Ret tags",
-        okay: "Ok"
+        okay: "Ok",
+        view_on_osm: "View on OSM"
     },
 
     save: {

@@ -170,7 +170,8 @@ locale.de = {
         no_documentation_key: "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
         new_tag: "Neues Attribut",
         edit_tags: "Attribute bearbeiten",
-        okay: "OK"
+        okay: "OK",
+        view_on_osm: "View on OSM"
     },
 
     layerswitcher: {

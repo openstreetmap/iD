@@ -170,7 +170,8 @@ locale.tr = {
         no_documentation_key: "Bu anahtar için dökümantasyon bulunmamaktadır.",
         new_tag: "Yeni Etiket",
         edit_tags: "Etiketleri güncelle",
-        okay: "Tamam"
+        okay: "Tamam",
+        view_on_osm: "View on OSM"
     },
 
     layerswitcher: {
