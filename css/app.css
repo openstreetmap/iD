@@ -225,7 +225,7 @@ ul.link-list li:last-child {
 
 .fillD {
     background:rgba(0,0,0,.8);
-    color: #a9a9a9;
+    color: #6C6C6C;
 }
 
 
@@ -660,10 +660,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .map-overlay {
-    width: 150px;
-    position:absolute;
-    left:40px;
-    top:0;
+    right: 75%;
+    max-width: 260px;
+    min-width: 210px;
+    position: fixed;
+    left: 40px;
     display: block;
     border-radius: 4px;
 }
@@ -689,10 +690,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top:190px;
 }
 
-.layerswitcher-control .map-overlay {
-    width:250px;
-}
-
 .nudge-container {
     margin-top: 10px;
 }
@@ -702,10 +699,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     font-size:10px;
     padding:0 5px 3px 5px;
     background: white;
-    border:0;
     text-transform: uppercase;
     font-weight: bold;
-
 }
 
 .layerswitcher-control .adjustments button:hover {
@@ -742,9 +737,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .layerswitcher-control .nudge {
     text-indent: -9999px;
     overflow: hidden;
-    width:20px;
+    width:16.6666%;
     border-radius: 0;
-    margin-right:1px;
+    border-right: 1px solid rgba(0, 0, 0, .5);
     position: relative;
 }
 
@@ -787,7 +782,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .layerswitcher-control .reset {
-    width: 45px;
+    width: 33.3333%;
     border-radius: 0 4px 4px 0;
 }
 

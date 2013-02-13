@@ -133,7 +133,7 @@ iD.ui.layerswitcher = function(context) {
                     return d.data.name;
                 });
             layerLinks.exit().remove();
-            layerLinks.enter()
+            var LayerInner = layerLinks.enter()
                 .append('li')
                 .append('a')
                     .attr('data-original-title', function(d) {
@@ -141,18 +141,19 @@ iD.ui.layerswitcher = function(context) {
                     })
                     .attr('href', '#')
                     .attr('class', 'layer')
-                    .text(function(d) {
-                        return d.data.name;
-                    })
                     .each(function(d) {
                         // only set tooltips for layers with tooltips
                         if (d.data.description) {
                             d3.select(this).call(bootstrap.tooltip().placement('right'));
                         }
                     })
-                    .on('click.set-source', clickSetSource)
-                    .insert('span')
+                    .on('click.set-source', clickSetSource);
+                    LayerInner.insert('span')
                     .attr('class','icon toggle');
+                    LayerInner.insert('span').text(function(d) {
+                        return d.data.name;
+                    });
+
             selectLayer(context.background().source());
         }
 
