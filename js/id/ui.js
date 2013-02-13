@@ -90,15 +90,9 @@ iD.ui = function(context) {
             .attr('href', 'http://github.com/systemed/iD/issues')
             .text(t('report_a_bug'));
 
-        var imagery = linkList.append('li')
-            .attr('id', 'attribution');
-
-        imagery.append('span')
-            .text('imagery');
-
-        imagery
-            .append('span')
-            .attr('class', 'provided-by');
+        linkList.append('li')
+            .attr('id', 'attribution')
+            .call(iD.ui.Attribution(context));
 
         linkList.append('li')
             .attr('class', 'source-switch')
