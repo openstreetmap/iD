@@ -44,5 +44,12 @@ describe("iD.Tree", function() {
             tree.rebase(['n']);
             expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([way, node]);
         });
+
+        it("includes entities within extent, excludes those without", function() {
+            var n1 = iD.Node({ id: 'n1', loc: [1, 1]});
+            var n2 = iD.Node({ id: 'n2', loc: [3, 3]});
+            var g = tree.graph().replace(n1).replace(n2);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [1.1, 1.1]), g)).to.eql([n1]);
+        });
     });
 });
