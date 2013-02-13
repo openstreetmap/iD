@@ -2,7 +2,10 @@ iD.Tree = function(graph) {
 
     var rtree = new RTree(),
         m = 1000 * 1000 * 100,
-        head = graph;
+        head = graph,
+        queuedCreated = [],
+        queuedModified = [],
+        x, y, dx, dy;
 
     function extentRectangle(extent) {
             x = m * extent[0][0],
@@ -29,7 +32,7 @@ iD.Tree = function(graph) {
 
         rebase: function(entities) {
             for (var i = 0; i < entities.length; i++) {
-                insert(graph.entities[entities[i]]);
+                insert(graph.entity(entities[i]), true);
             }
             return tree;
         },
@@ -49,8 +52,21 @@ iD.Tree = function(graph) {
                     }
                 });
 
-                d3.values(diff.addParents(modified)).map(reinsert);
-                diff.created().forEach(insert);
+                var created = diff.created().concat(queuedCreated);
+                modified = d3.values(diff.addParents(modified)).concat(queuedModified);
+                queuedCreated = [];
+                queuedModified = [];
+
+                modified.forEach(function(d) {
+                    if (head.hasAllChildren(d)) reinsert(d);
+                    else queuedModified.push(d);
+                });
+
+                created.forEach(function(d) {
+                    if (head.hasAllChildren(d)) insert(d);
+                    else queuedCreated.push(d);
+                });
+
                 diff.deleted().forEach(remove);
 
                 graph = head;

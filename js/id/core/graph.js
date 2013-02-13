@@ -225,21 +225,10 @@ iD.Graph.prototype = {
         return this;
     },
 
-    // get all objects that intersect an extent.
-    intersects: function(extent) {
-        var items = [];
-        for (var i in this.entities) {
-            var entity = this.entities[i];
-            if (entity && this.hasAllChildren(entity) && entity.intersects(extent, this)) {
-                items.push(entity);
-            }
-        }
-        return items;
-    },
-
     hasAllChildren: function(entity) {
         // we're only checking changed entities, since we assume fetched data
         // must have all children present
+        var i;
         if (this.entities.hasOwnProperty(entity.id)) {
             if (entity.type === 'way') {
                 for (i = 0; i < entity.nodes.length; i++) {

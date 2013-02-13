@@ -1,5 +1,5 @@
 iD.History = function(context) {
-    var stack, index, tree;
+    var stack, index, tree,
         imagery_used = 'Bing',
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = false;
