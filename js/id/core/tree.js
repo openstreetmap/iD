@@ -34,7 +34,7 @@ iD.Tree = function(graph) {
 
         rebase: function(entities) {
             for (var i = 0; i < entities.length; i++) {
-                if (!graph.hasOwnProperty(entities[i])) {
+                if (!graph.entities.hasOwnProperty(entities[i])) {
                     insert(graph.entity(entities[i]), true);
                 }
             }

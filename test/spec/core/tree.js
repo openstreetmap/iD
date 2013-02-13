@@ -20,7 +20,8 @@ describe("iD.Tree", function() {
             expect(tree.intersects(iD.geo.Extent([9, 9], [11, 11]), g)).to.eql([node_]);
             tree.graph().rebase({ 'n': node });
             tree.rebase(['n']);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), tree.graph())).to.eql([]);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [11, 11]), g)).to.eql([node_]);
         });
     });
 
