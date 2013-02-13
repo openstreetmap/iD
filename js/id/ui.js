@@ -2,8 +2,7 @@ iD.ui = function(context) {
     return function(container) {
         context.container(container);
 
-        var connection = context.connection(),
-            history = context.history(),
+        var history = context.history(),
             map = context.map();
 
         if (!iD.detect().support) {
@@ -103,8 +102,7 @@ iD.ui = function(context) {
 
         function pan(d) {
             return function() {
-                map.pan(d);
-                map.redraw();
+                context.pan(d);
             };
         }
 

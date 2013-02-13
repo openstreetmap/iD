@@ -14,7 +14,7 @@ iD.behavior.DragNode = function(context) {
     function startNudge(nudge) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
-            context.map().pan(nudge).redraw();
+            context.pan(nudge);
         }, 50);
     }
 

@@ -241,7 +241,7 @@ iD.Map = function(context) {
         t[1] += d[1];
         projection.translate(t);
         zoom.translate(projection.translate());
-        return map;
+        return redraw();
     };
 
     map.size = function(_) {
