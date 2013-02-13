@@ -54,7 +54,7 @@ locale.es = {
         },
         circularize: {
             title: "Redondear", //"Circularize",
-            description: "Hacer esto redondo.", //"Make this round.",
+            description: "Redondear esto.", //"Make this round.",
             key: "O",
             annotation: {
                 line: "Redondear una línea.", //"Made a line circular.",
@@ -139,15 +139,15 @@ locale.es = {
     report_a_bug: "reportar un error", //"report a bug",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Guardar Cambios", // "Save Changes"
+        description_placeholder: "Breve descripción de tus contribuciones", //"Brief description of your contributions"
+        upload_explanation: "Los cambios que subes como {user} serán visibles en todos los mapas que usen datos de OpenStreetMap.", //"The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
+        save: "Guardar", //"Save"
+        cancel: "Cancelar", //"Cancel"
+        warnings: "Avisos", //"Warnings"
+        modified: "Modificado", //"Modified"
+        deleted: "Borrado", //"Deleted"
+        created: "Creado" //"Created"
     },
 
     contributors: {
@@ -162,7 +162,7 @@ locale.es = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Mostrar Mi Localización" //"Show My Location"
     },
 
     inspector: {
@@ -171,7 +171,7 @@ locale.es = {
         new_tag: "Nueve etiqueta", //"New Tag"
         edit_tags: "Editar etiquetas", //"Edit tags",
         okay: "OK",
-        view_on_osm: "View on OSM"
+        view_on_osm: "Ver en OSM" //"View on OSM"
     },
 
     layerswitcher: {
@@ -183,9 +183,9 @@ locale.es = {
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Tienes cambios no guardados de una sesión de edición previa. ¿Quieres recuperar esos cambios?", //"You have unsaved changes from a previous editing session. Do you wish to restore these changes?"
+        restore: "Restaurar", //"Restore"
+        reset: "Restablecer" //"Reset"
     },
 
     save: {
@@ -197,8 +197,8 @@ locale.es = {
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "Bienvenido al editor de OpenStreetMap iD", //"Welcome to the iD OpenStreetMap editor"
+        text: "Esta es la versión {version} de desarrollo. Para más información visita {website} y reporta cualquier error en {github}." //"This is development version {version}. For more information see {website} and report bugs at {github}."
     },
 
     source_switch: {
@@ -208,8 +208,8 @@ locale.es = {
 
     tag_reference: {
         description: "Descripción",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        on_wiki: "{tag} en wiki.osm.org", //"{tag} on wiki.osm.org"
+        used_with: "usado con {type}" //"used with {type}"
     },
 
     validations: {
