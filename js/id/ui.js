@@ -70,12 +70,8 @@ iD.ui = function(context) {
             .on('logout.editor', connection.logout)
             .on('login.editor', connection.authenticate));
 
-        var aboutList = about.append('ul')
-            .attr('id','about')
-            .attr('class', 'link-list');
-
-        var linkList = aboutList.append('ul')
-            .attr('id','about')
+        var linkList = about.append('ul')
+            .attr('id', 'about')
             .attr('class', 'pad1 fillD about-block link-list');
 
         linkList.append('li')
@@ -91,7 +87,7 @@ iD.ui = function(context) {
             .text(t('report_a_bug'));
 
         linkList.append('li')
-            .attr('id', 'attribution')
+            .attr('class', 'attribution')
             .call(iD.ui.Attribution(context));
 
         linkList.append('li')
@@ -99,7 +95,7 @@ iD.ui = function(context) {
             .call(iD.ui.SourceSwitch(context));
 
         linkList.append('li')
-            .attr('id', 'user-list')
+            .attr('class', 'user-list')
             .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {

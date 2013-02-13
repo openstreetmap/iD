@@ -92,7 +92,7 @@ iD.ui.LayerSwitcher = function(context) {
                     return d === context.background().source();
                 });
 
-            var provided_by = context.container().select('#attribution .provided-by')
+            var provided_by = context.container().select('.attribution .provided-by')
                 .html('');
 
             if (d.data.terms_url) {

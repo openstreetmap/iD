@@ -930,7 +930,7 @@ img.tile {
     color:#fff;
 }
 
-#user-list a:not(:last-child):after {
+.user-list a:not(:last-child):after {
     content: ', ';
 }
 
