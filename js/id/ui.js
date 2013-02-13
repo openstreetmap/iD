@@ -37,31 +37,21 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap col1')
             .call(iD.ui.Save(context));
 
-        var zoom = container.append('div')
-            .attr('class', 'zoombuttons map-control')
-            .selectAll('button')
-                .data([['zoom-in', '+', map.zoomIn, t('zoom-in')], ['zoom-out', '-', map.zoomOut, t('zoom-out')]])
-                .enter()
-                .append('button')
-                .attr('tabindex', -1)
-                .attr('class', function(d) { return d[0]; })
-                .attr('title', function(d) { return d[3]; })
-                .on('click.editor', function(d) { return d[2](); })
-                .append('span')
-                    .attr('class', function(d) {
-                        return d[0] + ' icon';
-                    });
+        container.append('div')
+            .attr('class', 'map-control zoombuttons')
+            .call(iD.ui.Zoom(context));
 
-        if (navigator.geolocation) {
-            container.append('div')
-                .call(iD.ui.geolocate(map));
-        }
+        container.append('div')
+            .attr('class', 'map-control geocode-control')
+            .call(iD.ui.Geocoder(context));
 
-        container.append('div').attr('class', 'geocode-control map-control')
-            .call(iD.ui.geocoder(context));
+        container.append('div')
+            .attr('class', 'map-control layerswitcher-control')
+            .call(iD.ui.LayerSwitcher(context));
 
-        container.append('div').attr('class', 'map-control layerswitcher-control')
-            .call(iD.ui.layerswitcher(context));
+        container.append('div')
+            .attr('class', 'map-control geolocate-control')
+            .call(iD.ui.Geolocate(map));
 
         container.append('div')
             .style('display', 'none')
@@ -70,20 +60,13 @@ iD.ui = function(context) {
         var about = container.append('div')
             .attr('class','col12 about-block fillD pad1');
 
-        var userContainer = about.append('div')
-            .attr('class', 'user-container');
+        about.append('div')
+            .attr('class', 'account')
+            .call(iD.ui.Account(context));
 
-        userContainer
-            .append('div')
-                .attr('class', 'hello');
-
-        var aboutList = about.append('ul')
-                .attr('id','about')
-                .attr('class','link-list');
-
-        var linkList = aboutList.append('ul')
-            .attr('id','about')
-            .attr('class','pad1 fillD about-block link-list');
+        var linkList = about.append('ul')
+            .attr('id', 'about')
+            .attr('class', 'pad1 fillD about-block link-list');
 
         linkList.append('li')
             .append('a')
@@ -97,27 +80,21 @@ iD.ui = function(context) {
             .attr('href', 'http://github.com/systemed/iD/issues')
             .text(t('report_a_bug'));
 
-        var imagery = linkList.append('li')
-            .attr('id', 'attribution');
-
-        imagery.append('span')
-            .text('imagery');
-
-        imagery
-            .append('span')
-            .attr('class', 'provided-by');
+        linkList.append('li')
+            .attr('class', 'attribution')
+            .call(iD.ui.Attribution(context));
 
         linkList.append('li')
             .attr('class', 'source-switch')
             .call(iD.ui.SourceSwitch(context));
 
         linkList.append('li')
-            .attr('id', 'user-list')
-            .call(iD.ui.contributors(context));
+            .attr('class', 'user-list')
+            .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {
             history.save();
-            if (history.hasChanges()) return t('unsaved_changes');
+            if (history.hasChanges()) return t('save.unsaved_changes');
         };
 
         d3.select(window).on('resize.editor', function() {
@@ -139,11 +116,7 @@ iD.ui = function(context) {
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
-            .on('↓', pan([0, -pa]))
-            .on('⇧=', function() { map.zoomIn(); })
-            .on('+', function() { map.zoomIn(); })
-            .on('-', function() { map.zoomOut(); })
-            .on('dash', function() { map.zoomOut(); });
+            .on('↓', pan([0, -pa]));
 
         d3.select(document)
             .call(keybinding);
@@ -156,21 +129,11 @@ iD.ui = function(context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
-        userContainer.call(iD.ui.userpanel(connection)
-            .on('logout.editor', connection.logout)
-            .on('login.editor', connection.authenticate));
-
         context.enter(iD.modes.Browse(context));
 
-        if (!context.storage('sawSplash')) {
-            iD.ui.splash(context.container());
-            context.storage('sawSplash', true);
-        }
-
-        if (history.lock() && history.restorableChanges()) {
-            iD.ui.restore(context.container(), history);
-        }
-
+        context.container()
+            .call(iD.ui.Splash(context))
+            .call(iD.ui.Restore(context));
     };
 };
 

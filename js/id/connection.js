@@ -228,7 +228,7 @@ iD.Connection = function(context) {
             if (img && img[0].getAttribute('href')) {
                 image_url = img[0].getAttribute('href');
             }
-            callback(connection.user({
+            callback(undefined, connection.user({
                 display_name: u.attributes.display_name.nodeValue,
                 image_url: image_url,
                 id: u.attributes.id.nodeValue

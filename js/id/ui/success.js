@@ -1,4 +1,4 @@
-iD.ui.success = function(connection) {
+iD.ui.Success = function(connection) {
     var event = d3.dispatch('cancel', 'save');
 
     function success(selection) {

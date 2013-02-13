@@ -27,7 +27,8 @@ describe('translations', function() {
             var allkeys = _.flatten(_.values(languageKeys));
 
             _.forEach(languageKeys, function(l, k) {
-                expect(_.difference(allkeys, l)).to.eql([]);
+                var diff = _.difference(allkeys, l).join(", ");
+                expect(diff).to.equal("");
             });
         });
 

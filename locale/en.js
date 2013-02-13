@@ -128,42 +128,32 @@ locale.en = {
         }
     },
 
-    validations: {
-        untagged_point: "Untagged point which is not part of a line or area",
-        untagged_line: "Untagged line",
-        untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
-        deprecated_tags: "Deprecated tags: {tags}"
-    },
-
-    save: "Save",
-    unsaved_changes: "You have unsaved changes",
-    save_help: "Save changes to OpenStreetMap, making them visible to other users",
-    no_changes: "You don't have any changes to save.",
-    save_error: "An error occurred while trying to save",
-    uploading_changes: "Uploading changes to OpenStreetMap.",
-    just_edited: "You Just Edited OpenStreetMap!",
-    okay: "Okay",
-
-    "zoom-in": "Zoom In",
-    "zoom-out": "Zoom Out",
-
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
 
+    just_edited: "You Just Edited OpenStreetMap!",
     browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    view_on_osm: "View on OSM",
+    zoom_in_edit: "zoom in to edit the map",
+    logout: "logout",
+    report_a_bug: "report a bug",
 
-    inspector: {
-        no_documentation_combination: "There is no documentation available for this tag combination",
-        no_documentation_key: "There is no documentation available for this key",
-        new_tag: "New Tag"
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
-    view_on_osm: "View on OSM",
-
-    zoom_in_edit: "zoom in to edit the map",
-
-    edit_tags: "Edit tags",
+    contributors: {
+        list: "Viewing contributions by {users}",
+        truncated_list: "Viewing contributions by {users} and {count} others"
+    },
 
     geocoder: {
         title: "Find A Place",
@@ -171,11 +161,18 @@ locale.en = {
         no_results: "Couldn't locate a place named '{name}'"
     },
 
-    description: "Description",
+    geolocate: {
+        title: "Show My Location"
+    },
 
-    logout: "logout",
-
-    report_a_bug: "report a bug",
+    inspector: {
+        no_documentation_combination: "There is no documentation available for this tag combination",
+        no_documentation_key: "There is no documentation available for this key",
+        new_tag: "New Tag",
+        edit_tags: "Edit tags",
+        okay: "Okay",
+        view_on_osm: "View on OSM"
+    },
 
     layerswitcher: {
         title: "Background",
@@ -185,13 +182,46 @@ locale.en = {
         reset: "reset"
     },
 
-    contributors: {
-        list: "Viewing contributions by {users}",
-        truncated_list: "Viewing contributions by {users} and {count} others"
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
+    save: {
+        title: "Save",
+        help: "Save changes to OpenStreetMap, making them visible to other users",
+        error: "An error occurred while trying to save",
+        uploading: "Uploading changes to OpenStreetMap.",
+        unsaved_changes: "You have unsaved changes"
+    },
+
+    splash: {
+        welcome: "Welcome to the iD OpenStreetMap editor",
+        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
     },
 
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    tag_reference: {
+        description: "Description",
+        on_wiki: "{tag} on wiki.osm.org",
+        used_with: "used with {type}"
+    },
+
+    validations: {
+        untagged_point: "Untagged point which is not part of a line or area",
+        untagged_line: "Untagged line",
+        untagged_area: "Untagged area",
+        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
+        deprecated_tags: "Deprecated tags: {tags}"
+    },
+
+    zoom: {
+        in: "Zoom In",
+        out: "Zoom Out"
     }
 };

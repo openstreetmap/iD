@@ -1,34 +1,40 @@
-iD.ui.restore = function(selection, history) {
-    var modal = iD.ui.modal(selection);
+iD.ui.Restore = function(context) {
+    return function(selection) {
+        if (!context.history().lock() || !context.history().restorableChanges())
+            return;
 
-    modal.select('.modal')
-        .attr('class', 'modal-splash modal');
+        var modal = iD.ui.modal(selection);
 
-    var introModal = modal.select('.content')
-        .append('div')
-        .attr('class', 'modal-section fillL')
-        .text('You have unsaved changes from a previous editing session. Do you wish to restore these changes?');
+        modal.select('.modal')
+            .attr('class', 'modal-splash modal');
 
-    buttons = introModal
-        .append('div')
-        .attr('class', 'buttons cf')
+        var introModal = modal.select('.content');
+
+        introModal.append('div')
+            .attr('class', 'modal-section fillL')
+            .append('h3')
+            .text(t('restore.description'));
+
+        var buttonWrap = introModal.append('div')
+            .attr('class', 'modal-section fillD cf col12');
+
+        var buttons = buttonWrap
             .append('div')
-            .attr('class', 'button-wrap joined col4');
+            .attr('class', 'button-wrap joined col6');
 
-    buttons.append('button')
-        .attr('class', 'save action button col6')
-        .text('Restore')
-        .on('click', function() {
-            history.load();
-            modal.remove();
-        });
+        buttons.append('button')
+            .attr('class', 'save action button col6')
+            .text(t('restore.restore'))
+            .on('click', function() {
+                context.history().load();
+                modal.remove();
+            });
 
-    buttons.append('button')
-        .attr('class', 'cancel button col6')
-        .text('Reset')
-        .on('click', function() {
-            modal.remove();
-        });
-
-    return modal;
+        buttons.append('button')
+            .attr('class', 'cancel button col6')
+            .text(t('restore.reset'))
+            .on('click', function() {
+                modal.remove();
+            });
+    }
 };

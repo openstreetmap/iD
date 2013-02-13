@@ -12,7 +12,7 @@ iD.behavior.Lasso = function(context) {
 
                 pos = [d3.event.clientX, d3.event.clientY];
 
-                lasso = iD.ui.lasso().a(d3.mouse(context.surface().node()));
+                lasso = iD.ui.Lasso().a(d3.mouse(context.surface().node()));
 
                 context.surface().call(lasso);
 
