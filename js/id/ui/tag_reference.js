@@ -19,7 +19,7 @@ iD.ui.tagReference = function(selection) {
             header.append('span')
                 .text(g('title'));
 
-        referenceBody =  selection.append('div')
+        var referenceBody = selection.append('div')
             .attr('class','modal-section fillL2');
 
         referenceBody

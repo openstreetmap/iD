@@ -34,27 +34,27 @@ locale.da = {
     operations: {
         add: {
             annotation: {
-                point: "Added a point.",
-                vertex: "Added a node to a way."
+                point: "Tilføjede et punkt.",
+                vertex: "Tilføjede en node til en vej."
             }
         },
         start: {
             annotation: {
-                line: "Started a line.",
-                area: "Started an area."
+                line: "Startede en linje.",
+                area: "Startede et område."
             }
         },
         'continue': {
             annotation: {
-                line: "Continued a line.",
-                area: "Continued an area."
+                line: "Forsatte en linje.",
+                area: "Forsatte et område."
             }
         },
         cancel_draw: {
-            annotation: "Cancelled drawing."
+            annotation: "Annulleret indtegning."
         },
         change_tags: {
-            annotation: "Changed tags."
+            annotation: "Ændret tags."
         },
         circularize: {
             title: "Circularize",
@@ -75,16 +75,16 @@ locale.da = {
             }
         },
         'delete': {
-            title: "Delete",
-            description: "Remove this from the map.",
+            title: "Slet",
+            description: "Fjern dette fra kortet.",
             key: "⌫",
             annotation: {
-                point: "Deleted a point.",
-                vertex: "Deleted a node from a way.",
-                line: "Deleted a line.",
-                area: "Deleted an area.",
-                relation: "Deleted a relation.",
-                multiple: "Deleted {n} objects."
+                point: "Slettede et punkt.",
+                vertex: "Slettede en node fra en vej.",
+                line: "Slettede en linje.",
+                area: "Slettede et område.",
+                relation: "Sletede en relation.",
+                multiple: "Slettede {n} objekter."
             }
         },
         connect: {
@@ -108,14 +108,14 @@ locale.da = {
             annotation: "Merged {n} lines."
         },
         move: {
-            title: "Move",
-            description: "Move this to a different location.",
+            title: "Flyt",
+            description: "Flyt dette til anden lokation.",
             key: "M",
             annotation: {
-                point: "Moved a point.",
-                vertex: "Moved a node in a way.",
-                line: "Moved a line.",
-                area: "Moved an area."
+                point: "Flyttede et punktMoved.",
+                vertex: "Flyttede en node i en vej.",
+                line: "Flyttede en linje.",
+                area: "Flyttede et område."
             }
         },
         reverse: {
@@ -125,10 +125,10 @@ locale.da = {
             annotation: "Reversed a line."
         },
         split: {
-            title: "Split",
-            description: "Split this into two ways at this point.",
+            title: "Del op",
+            description: "Del op i to vej ved dette punkt.",
             key: "X",
-            annotation: "Split a way."
+            annotation: "Del op en vej."
         }
     },
 
@@ -140,17 +140,14 @@ locale.da = {
         deprecated_tags: "Deprecated tags: {tags}"
     },
 
-    save: "Save",
-    unsaved_changes: "You have unsaved changes",
-    save_help: "Save changes to OpenStreetMap, making them visible to other users",
-    no_changes: "You don't have any changes to save.",
-    save_error: "An error occurred while trying to save",
-    uploading_changes: "Uploading changes to OpenStreetMap.",
-    just_edited: "You Just Edited OpenStreetMap!",
-    okay: "Okay",
-
-    "zoom-in": "Zoom ind",
-    "zoom-out": "Zoom ud",
+    save: "Gem",
+    unsaved_changes: "Du har ændringer der ikke er gemt endnu",
+    save_help: "Gem ændringer til OpenStreetMap gør dem synlige for andre brugere",
+    no_changes: "Du har ingen ændringer til at gemme endnu.",
+    save_error: "Der skete en fejl da du prøvede at gemme",
+    uploading_changes: "Gemmer nu ændringer til OpenStreetMap.",
+    just_edited: "Du har lige rettede i OpenStreetMap!",
+    okay: "Ok",
 
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
@@ -158,8 +155,8 @@ locale.da = {
     browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
 
     inspector: {
-        no_documentation_combination:  "This is no documentation available for this tag combination",
-        no_documentation_key: "This is no documentation available for this key",
+        no_documentation_combination:  "Der er ingen dokumentation for denne tag kombination",
+        no_documentation_key: "Der er ingen dokumenation tilgængelig for denne nøgle",
         new_tag: "Nyt Tag"
     },
 
@@ -197,5 +194,10 @@ locale.da = {
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    zoom: {
+        in: "Zoom ind",
+        out: "Zoom ud"
     }
 };

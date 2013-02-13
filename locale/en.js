@@ -145,9 +145,6 @@ locale.en = {
     just_edited: "You Just Edited OpenStreetMap!",
     okay: "Okay",
 
-    "zoom-in": "Zoom In",
-    "zoom-out": "Zoom Out",
-
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
 
@@ -169,6 +166,10 @@ locale.en = {
         title: "Find A Place",
         placeholder: "find a place",
         no_results: "Couldn't locate a place named '{name}'"
+    },
+
+    geolocate: {
+        title: "Show My Location"
     },
 
     description: "Description",
@@ -193,5 +194,10 @@ locale.en = {
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    zoom: {
+        in: "Zoom In",
+        out: "Zoom Out"
     }
 };

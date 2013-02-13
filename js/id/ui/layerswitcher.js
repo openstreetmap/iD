@@ -1,4 +1,4 @@
-iD.ui.layerswitcher = function(context) {
+iD.ui.LayerSwitcher = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         opacities = [1, 0.5, 0];
 
@@ -23,17 +23,20 @@ iD.ui.layerswitcher = function(context) {
             .attr('tabindex', -1)
             .attr('class', 'fillD')
             .attr('title', t('layerswitcher.description'))
-            .html("<span class='layers icon'></span>")
-            .on('click.layerswitcher-toggle', toggle);
+            .on('click.layerswitcher-toggle', toggle)
+            .call(bootstrap.tooltip()
+                .placement('right'));
 
-        function show() { setVisible(true); }
+        button.append('span')
+            .attr('class', 'layers icon');
+
         function hide() { setVisible(false); }
         function toggle() { setVisible(content.classed('hide')); }
 
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
-                content.call(iD.ui.toggle(show));
+                content.call(iD.ui.Toggle(show));
                 shown = show;
             }
         }

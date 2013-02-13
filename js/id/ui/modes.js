@@ -11,7 +11,7 @@ iD.ui.Modes = function(context) {
 
        buttons.enter().append('button')
            .attr('tabindex', -1)
-           .attr('class', function(mode) { return mode.title + ' add-button col3'; })
+           .attr('class', function(mode) { return mode.id + ' add-button col3'; })
            .on('click.mode-buttons', function(mode) { context.enter(mode); })
            .call(bootstrap.tooltip()
                .placement('bottom')

@@ -145,9 +145,6 @@ locale.fr = {
     just_edited: "Vous venez de participer à OpenStreetMap!",
     okay: "Okay",
 
-    "zoom-in": "Zoomer",
-    "zoom-out": "Dézoomer",
-
     nothing_to_undo: "Rien à annuler.",
     nothing_to_redo: "Rien à refaire.",
 
@@ -193,5 +190,10 @@ locale.fr = {
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    zoom: {
+        in: "Zoomer",
+        out: "Dézoomer"
     }
 };

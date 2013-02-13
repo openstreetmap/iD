@@ -1,10 +1,10 @@
-describe("iD.ui.inspector", function () {
+describe("iD.ui.Inspector", function () {
     var inspector, element,
         tags = {highway: 'residential'},
         entity, graph, context;
 
     function render() {
-        inspector = iD.ui.inspector().context(context);
+        inspector = iD.ui.Inspector().context(context);
         element = d3.select('body')
             .append('div')
             .attr('id', 'inspector-wrap')

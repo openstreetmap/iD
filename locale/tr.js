@@ -145,9 +145,6 @@ locale.tr = {
     just_edited: "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
     okay: "Tamam",
 
-    "zoom-in": "Yaklaş",
-    "zoom-out": "Uzaklaş",
-
     nothing_to_undo: "Geri alınacak birşey yok.",
     nothing_to_redo: "Tekrar yapılacak birşey yok.",
 
@@ -193,5 +190,10 @@ locale.tr = {
     source_switch: {
         live: "canlı",
         dev: "geliştirme"
+    },
+
+    zoom: {
+        in: "Yaklaş",
+        out: "Uzaklaş"
     }
 };

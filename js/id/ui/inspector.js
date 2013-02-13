@@ -1,4 +1,4 @@
-iD.ui.inspector = function() {
+iD.ui.Inspector = function() {
     var event = d3.dispatch('changeTags', 'close'),
         taginfo = iD.taginfo(),
         initial = false,
@@ -43,7 +43,7 @@ iD.ui.inspector = function() {
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
 
-        inspector.call(iD.ui.toggle(true));
+        inspector.call(iD.ui.Toggle(true));
     }
 
     function drawHead(selection) {

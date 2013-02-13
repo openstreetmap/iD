@@ -37,31 +37,21 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap col1')
             .call(iD.ui.Save(context));
 
-        var zoom = container.append('div')
-            .attr('class', 'zoombuttons map-control')
-            .selectAll('button')
-                .data([['zoom-in', '+', map.zoomIn, t('zoom-in')], ['zoom-out', '-', map.zoomOut, t('zoom-out')]])
-                .enter()
-                .append('button')
-                .attr('tabindex', -1)
-                .attr('class', function(d) { return d[0]; })
-                .attr('title', function(d) { return d[3]; })
-                .on('click.editor', function(d) { return d[2](); })
-                .append('span')
-                    .attr('class', function(d) {
-                        return d[0] + ' icon';
-                    });
+        container.append('div')
+            .attr('class', 'map-control zoombuttons')
+            .call(iD.ui.Zoom(context));
 
-        if (navigator.geolocation) {
-            container.append('div')
-                .call(iD.ui.geolocate(map));
-        }
+        container.append('div')
+            .attr('class', 'map-control geocode-control')
+            .call(iD.ui.Geocoder(context));
 
-        container.append('div').attr('class', 'geocode-control map-control')
-            .call(iD.ui.geocoder(context));
+        container.append('div')
+            .attr('class', 'map-control layerswitcher-control')
+            .call(iD.ui.LayerSwitcher(context));
 
-        container.append('div').attr('class', 'map-control layerswitcher-control')
-            .call(iD.ui.layerswitcher(context));
+        container.append('div')
+            .attr('class', 'map-control geolocate-control')
+            .call(iD.ui.Geolocate(map));
 
         container.append('div')
             .style('display', 'none')
@@ -113,7 +103,7 @@ iD.ui = function(context) {
 
         linkList.append('li')
             .attr('id', 'user-list')
-            .call(iD.ui.contributors(context));
+            .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {
             history.save();
@@ -139,11 +129,7 @@ iD.ui = function(context) {
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
-            .on('↓', pan([0, -pa]))
-            .on('⇧=', function() { map.zoomIn(); })
-            .on('+', function() { map.zoomIn(); })
-            .on('-', function() { map.zoomOut(); })
-            .on('dash', function() { map.zoomOut(); });
+            .on('↓', pan([0, -pa]));
 
         d3.select(document)
             .call(keybinding);
@@ -156,7 +142,7 @@ iD.ui = function(context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
-        userContainer.call(iD.ui.userpanel(connection)
+        userContainer.call(iD.ui.UserPanel(connection)
             .on('logout.editor', connection.logout)
             .on('login.editor', connection.authenticate));
 

@@ -322,7 +322,7 @@ button.centered {
     border-radius:0 4px 4px 0;
 }
 
-button.Browse .label { display: none;}
+button.browse .label { display: none;}
 
 button.action {
     background: #7092ff;
@@ -848,7 +848,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     overflow-y: auto;
 }
 
-.geocode-control div span {
+.geocode-control div.content span {
     display: inline-block;
     border-bottom: 1px solid #333;
     padding: 5px 10px;
