@@ -154,7 +154,8 @@ iD.ui = function(context) {
         }
 
         if (history.lock() && history.restorableChanges()) {
-            iD.ui.restore(context.container(), history);
+            context.container()
+                .call(iD.ui.Restore(context))
         }
 
     };
