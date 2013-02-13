@@ -63,17 +63,20 @@ iD.ui = function(context) {
         var userContainer = about.append('div')
             .attr('class', 'user-container');
 
-        userContainer
-            .append('div')
-                .attr('class', 'hello');
+        userContainer.append('div')
+            .attr('class', 'hello');
+
+        userContainer.call(iD.ui.UserPanel(connection)
+            .on('logout.editor', connection.logout)
+            .on('login.editor', connection.authenticate));
 
         var aboutList = about.append('ul')
-                .attr('id','about')
-                .attr('class','link-list');
+            .attr('id','about')
+            .attr('class', 'link-list');
 
         var linkList = aboutList.append('ul')
             .attr('id','about')
-            .attr('class','pad1 fillD about-block link-list');
+            .attr('class', 'pad1 fillD about-block link-list');
 
         linkList.append('li')
             .append('a')
@@ -141,10 +144,6 @@ iD.ui = function(context) {
         if (!hash.hadHash) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
-
-        userContainer.call(iD.ui.UserPanel(connection)
-            .on('logout.editor', connection.logout)
-            .on('login.editor', connection.authenticate));
 
         context.enter(iD.modes.Browse(context));
 
