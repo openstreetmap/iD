@@ -5,13 +5,33 @@ describe("iD.Tree", function() {
         tree = iD.Tree(iD.Graph());
     });
 
-    describe("intersects", function() {
+    describe("#rebase", function() {
+        it("adds entities to the tree", function() {
+            var node = iD.Node({ id: 'n', loc: [1, 1]});
+            tree.graph().rebase({ 'n': node });
+            tree.rebase(['n']);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), tree.graph())).to.eql([node]);
+        });
+    });
+
+    describe("#intersects", function() {
         it("excludes entities with missing children, adds them when all are present", function() {
             var way = iD.Way({id: 'w1', nodes: ['n']});
-            var g = tree.base().replace(way);
+            var g = tree.graph().replace(way);
             expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([]);
             var node = iD.Node({id: 'n', loc: [0.5, 0.5]});
-            g = tree.base().replace(node);
+            g = tree.graph().replace(node);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([way, node]);
+        });
+
+        it("includes entities that used to have missing children, after rebase added them", function() {
+            var base = tree.graph();
+            var way = iD.Way({id: 'w1', nodes: ['n']});
+            var g = base.replace(way);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([]);
+            var node = iD.Node({id: 'n', loc: [0.5, 0.5]});
+            base.rebase({ 'n': node });
+            tree.rebase(['n']);
             expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([way, node]);
         });
     });

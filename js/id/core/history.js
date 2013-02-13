@@ -42,7 +42,7 @@ iD.History = function(context) {
 
         merge: function(entities) {
 
-            var base = tree.base(),
+            var base = tree.graph(),
                 newentities = Object.keys(entities).filter(function(i) {
                     return !base.entities.hasOwnProperty(i) && !base.entities[i];
                 });

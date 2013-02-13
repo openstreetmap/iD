@@ -5,7 +5,7 @@ iD.Tree = function(graph) {
         head = graph,
         queuedCreated = [],
         queuedModified = [],
-        x, y, dx, dy;
+        x, y, dx, dy, rebased;
 
     function extentRectangle(extent) {
             x = m * extent[0][0],
@@ -34,6 +34,7 @@ iD.Tree = function(graph) {
             for (var i = 0; i < entities.length; i++) {
                 insert(graph.entity(entities[i]), true);
             }
+            rebased = true;
             return tree;
         },
 
@@ -41,7 +42,7 @@ iD.Tree = function(graph) {
 
             head = g;
 
-            if (graph !== head) {
+            if (graph !== head || rebased) {
                 var diff = iD.Difference(graph, head),
                     modified = {};
 
@@ -70,13 +71,14 @@ iD.Tree = function(graph) {
                 diff.deleted().forEach(remove);
 
                 graph = head;
+                rebased = false;
             }
 
             return rtree.search(extentRectangle(extent))
                 .map(function(id) { return graph.entity(id); });
         },
 
-        base: function() {
+        graph: function() {
             return graph;
         }
 
