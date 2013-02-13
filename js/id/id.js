@@ -36,6 +36,7 @@ window.iD = function () {
     context.undo = history.undo;
     context.redo = history.redo;
     context.changes = history.changes;
+    context.intersects = history.intersects;
 
     /* Graph */
     context.entity = function(id) {
