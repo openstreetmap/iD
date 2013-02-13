@@ -151,15 +151,18 @@ iD.Map = function(context) {
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
         // It would result in artifacts where differenced entities are redrawn with
         // one transform and unchanged entities with another.
-        if (resetTransform())
+        if (resetTransform()) {
             difference = undefined;
+        }
 
         var zoom = String(~~map.zoom());
-        if (surface.attr('data-zoom') !== zoom)
+        if (surface.attr('data-zoom') !== zoom) {
             surface.attr('data-zoom', zoom);
+        }
 
-        if (!difference)
+        if (!difference) {
             tilegroup.call(background);
+        }
 
         if (map.editable()) {
             context.connection().loadTiles(projection, dimensions);
