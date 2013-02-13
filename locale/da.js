@@ -3,25 +3,21 @@ locale.da = {
         add_area: {
             title: "Område",
             description: "Tilføj parker, bygninger, søer, eller andre områder til kortet.",
-            tail: "Klik på kortet for at indtegne et område fx en park, sø eller bygning.",
-            key: "A"
+            tail: "Klik på kortet for at indtegne et område fx en park, sø eller bygning."
         },
         add_line: {
             title: "Linje",
             description: "Linjer kan være veje, gader eller stier selv kanaler kan være linjer.",
-            tail: "Klik på koret for at indtegne en vej, sti eller rute.",
-            key: "L"
+            tail: "Klik på koret for at indtegne en vej, sti eller rute."
         },
         add_point: {
             title: "Punkt",
             description: "Restauranter, mindesmærker og postkasser er punkter.",
-            tail: "Klik på kortet for at tilføje et punkt.",
-            key: "P"
+            tail: "Klik på kortet for at tilføje et punkt."
         },
         browse: {
             title: "Browse",
-            description: "Træk rundt og zoom på kortet.",
-            key: "B"
+            description: "Træk rundt og zoom på kortet."
         },
         draw_area: {
             tail: "Klik her for at tilføje punkter til dit område. Click the first point to finish the area."
@@ -172,6 +168,10 @@ locale.da = {
         no_results: "Kunne ikke finde '{name}'"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "Description",
 
     logout: "log ud",
@@ -184,6 +184,18 @@ locale.da = {
         percent_brightness: "{opacity}% brightness",
         fix_misalignment: "Fix misalignment",
         reset: "nulstill"
+    },
+
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
     contributors: {

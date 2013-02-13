@@ -168,6 +168,10 @@ locale.es = {
         no_results: "No se pudo encontrar el lugar llamado '{name}'" //"Couldn't locate a place named '{name}'"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "Descripción", //"Description",
 
     logout: "cerrar sesión", //"logout",
@@ -180,6 +184,18 @@ locale.es = {
         percent_brightness: "{opacity}% brillo", //"{opacity}% brightness",
         fix_misalignment: "Arreglar alineamiento", //"Fix misalignment",
         reset: "reiniciar" //"reset"
+    },
+
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
     contributors: {

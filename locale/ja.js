@@ -168,6 +168,10 @@ locale.ja = {
         no_results: "'{name}' という名称の地点が見つかりません"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "説明",
 
     logout: "ログアウト",
@@ -180,6 +184,18 @@ locale.ja = {
         percent_brightness: "{opacity}% 輝度",
         fix_misalignment: "背景画像を移動",
         reset: "設定リセット"
+    },
+
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
     contributors: {

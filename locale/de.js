@@ -168,11 +168,27 @@ locale.de = {
         no_results: "Der Ort '{name}' konnte nicht gefunden werden"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "Beschreibung",
 
     report_a_bug: "Programmfehler melden",
 
     logout: "Abmelden",
+
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
+    },
 
     contributors: {
         list: "Diese Kartenansicht enthält Beiträge von:",

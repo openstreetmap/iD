@@ -168,6 +168,10 @@ locale.fr = {
         no_results: "Impossible de localiser l'endroit nommé '{name}'"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "Déscription",
 
     logout: "Déconnexion",
@@ -177,6 +181,18 @@ locale.fr = {
     contributors: {
         list: "Consulter les contributions de {users}",
         truncated_list: "Consulter les contributions de {users} et {count} les autres"
+    },
+
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
     layerswitcher: {

@@ -168,6 +168,10 @@ locale.tr = {
         no_results: "'{name}' ismindeki yer bulunamadı"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "Açıklama",
 
     logout: "Çıkış",
@@ -180,6 +184,18 @@ locale.tr = {
         percent_brightness: "{opacity}% parlaklık",
         fix_misalignment: "Yanlış hizalamayı düzelt",
         reset: "Sıfırla"
+    },
+
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
     contributors: {

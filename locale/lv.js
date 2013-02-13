@@ -168,6 +168,10 @@ locale.lv = {
         no_results: "Nevar atrast vietu '{name}'"
     },
 
+    geolocate: {
+        title: "Show My Location"
+    },
+
     description: "Apraksts",
 
     logout: "atslēgties",
@@ -180,6 +184,18 @@ locale.lv = {
         percent_brightness: "{opacity}% gaišums",
         fix_misalignment: "Labot fona nolīdzināšanu",
         reset: "Pārstatīt"
+    },
+
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
     contributors: {
