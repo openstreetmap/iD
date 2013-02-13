@@ -1,5 +1,8 @@
 iD.ui.Restore = function(context) {
     return function(selection) {
+        if (!context.history().lock() || !context.history().restorableChanges())
+            return;
+
         var modal = iD.ui.modal(selection);
 
         modal.select('.modal')

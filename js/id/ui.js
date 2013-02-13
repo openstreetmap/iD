@@ -149,13 +149,8 @@ iD.ui = function(context) {
         context.enter(iD.modes.Browse(context));
 
         context.container()
-            .call(iD.ui.Splash(context));
-
-        if (history.lock() && history.restorableChanges()) {
-            context.container()
-                .call(iD.ui.Restore(context))
-        }
-
+            .call(iD.ui.Splash(context))
+            .call(iD.ui.Restore(context));
     };
 };
 
