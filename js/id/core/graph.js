@@ -192,14 +192,14 @@ iD.Graph.prototype = {
         if (this.entities[entity.id] === entity)
             return this;
 
-        return this.update(function () {
+        return this.update(function() {
             this._updateCalculated(this.entities[entity.id], entity);
             this.entities[entity.id] = entity;
         });
     },
 
     remove: function(entity) {
-        return this.update(function () {
+        return this.update(function() {
             this._updateCalculated(entity, undefined);
             this.entities[entity.id] = undefined;
         });
@@ -254,7 +254,9 @@ iD.Graph.prototype = {
             entity = entities[i];
             prefix = i[0];
 
-            if (prefix == 'n') {
+            if (entity === 'undefined') {
+                this.entities[i] = undefined;
+            } else if (prefix == 'n') {
                 this.entities[i] = new iD.Node(entity);
 
             } else if (prefix == 'w') {

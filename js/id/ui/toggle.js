@@ -2,7 +2,7 @@
 // hide class, which sets display=none, and a d3 transition for opacity.
 // this will cause blinking when called repeatedly, so check that the
 // value actually changes between calls.
-iD.ui.toggle = function(show, callback) {
+iD.ui.Toggle = function(show, callback) {
     return function(selection) {
         selection.style('opacity', show ? 0 : 1)
             .classed('hide', false)

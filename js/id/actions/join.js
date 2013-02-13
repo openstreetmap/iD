@@ -47,7 +47,7 @@ iD.actions.Join = function(ids) {
             nodes = a.nodes.concat(b.nodes.slice().slice(1));
         }
 
-        graph.parentRelations(b).forEach(function (parent) {
+        graph.parentRelations(b).forEach(function(parent) {
             graph = graph.replace(parent.replaceMember(b, a));
         });
 

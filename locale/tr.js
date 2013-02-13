@@ -3,25 +3,21 @@ locale.tr = {
         add_area: {
             title: "Alan",
             description: "Park, bina, göl ve benzeri alanları haritaya ekle.",
-            tail: "Park, göl ya da bina gibi alanları çizmek için haritaya tıklayın.",
-            key: "A"
+            tail: "Park, göl ya da bina gibi alanları çizmek için haritaya tıklayın."
         },
         add_line: {
             title: "Çizgi",
             description: "Yollar, sokaklar, patikalar ya da kanallar çizgi ile çizilebilir.",
-            tail: "Yol, patika yada rota çizmek için haritaya tıklayın.",
-            key: "L"
+            tail: "Yol, patika yada rota çizmek için haritaya tıklayın."
         },
         add_point: {
             title: "Nokta",
             description: "Restoranlar, anıtlar ya da posta kutuları nokta ile gösterilebilir.",
-            tail: "Nokta eklemek için haritaya tıklayın.",
-            key: "P"
+            tail: "Nokta eklemek için haritaya tıklayın."
         },
         browse: {
             title: "Tara",
-            description: "Harita üzerinde dolan ve yaklaş.",
-            key: "B"
+            description: "Harita üzerinde dolan ve yaklaş."
         },
         draw_area: {
             tail: "Alanınıza nokta eklemek için tıklayınız. İlk noktaya tıklayarak alan çizimini bitirebilirsiniz."
@@ -132,42 +128,32 @@ locale.tr = {
         }
     },
 
-    validations: {
-        untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
-        untagged_line: "Etiketlenmemiş çizgi",
-        untagged_area: "Etiketlenmemiş alan",
-        tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
-        deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
-    },
-
-    save: "Kaydet",
-    unsaved_changes: "Kaydedilmemiş değişiklikleriniz var",
-    save_help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",
-    no_changes: "Kaydedecek hiçbir değişikliğiniz yok",
-    save_error: "Kaydederken bir hata oluştu",
-    uploading_changes: "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
-    just_edited: "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
-    okay: "Tamam",
-
-    "zoom-in": "Yaklaş",
-    "zoom-out": "Uzaklaş",
-
     nothing_to_undo: "Geri alınacak birşey yok.",
     nothing_to_redo: "Tekrar yapılacak birşey yok.",
 
+    just_edited: "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
     browser_notice: "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
+    view_on_osm: "OSM üstünde Gör",
+    zoom_in_edit: "Güncelleme yapmak için haritada yakınlaşmalısınız",
+    logout: "Çıkış",
+    report_a_bug: "Hata rapor et",
 
-    inspector: {
-        no_documentation_combination:  "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
-        no_documentation_key: "Bu anahtar için dökümantasyon bulunmamaktadır.",
-        new_tag: "Yeni Etiket"
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
-    view_on_osm: "OSM üstünde Gör",
-
-    zoom_in_edit: "Güncelleme yapmak için haritada yakınlaşmalısınız",
-
-    edit_tags: "Etiketleri güncelle",
+    contributors: {
+        list: "{users} tarafından yapılan katkılar görünmektedir",
+        truncated_list: "{users} ve diğer {count} tarafından yapılan katkılar görünmektedir"
+    },
 
     geocoder: {
         title: "Bir Yer Bul",
@@ -175,11 +161,18 @@ locale.tr = {
         no_results: "'{name}' ismindeki yer bulunamadı"
     },
 
-    description: "Açıklama",
+    geolocate: {
+        title: "Show My Location"
+    },
 
-    logout: "Çıkış",
-
-    report_a_bug: "Hata rapor et",
+    inspector: {
+        no_documentation_combination:  "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
+        no_documentation_key: "Bu anahtar için dökümantasyon bulunmamaktadır.",
+        new_tag: "Yeni Etiket",
+        edit_tags: "Etiketleri güncelle",
+        okay: "Tamam",
+        view_on_osm: "View on OSM"
+    },
 
     layerswitcher: {
         title: "Arkaplan",
@@ -189,13 +182,46 @@ locale.tr = {
         reset: "Sıfırla"
     },
 
-    contributors: {
-        list: "{users} tarafından yapılan katkılar görünmektedir",
-        truncated_list: "{users} ve diğer {count} tarafından yapılan katkılar görünmektedir"
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
+    save: {
+        title: "Kaydet",
+        help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",
+        error: "Kaydederken bir hata oluştu",
+        uploading: "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
+        unsaved_changes: "Kaydedilmemiş değişiklikleriniz var"
+    },
+
+    splash: {
+        welcome: "Welcome to the iD OpenStreetMap editor",
+        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
     },
 
     source_switch: {
         live: "canlı",
         dev: "geliştirme"
+    },
+
+    tag_reference: {
+        description: "Açıklama",
+        on_wiki: "{tag} on wiki.osm.org",
+        used_with: "used with {type}"
+    },
+
+    validations: {
+        untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
+        untagged_line: "Etiketlenmemiş çizgi",
+        untagged_area: "Etiketlenmemiş alan",
+        tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
+        deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
+    },
+
+    zoom: {
+        in: "Yaklaş",
+        out: "Uzaklaş"
     }
 };

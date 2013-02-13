@@ -1,4 +1,4 @@
-iD.ui.geocoder = function(context) {
+iD.ui.Geocoder = function(context) {
     function resultExtent(bounds) {
         return new iD.geo.Extent(
             [parseFloat(bounds[3]), parseFloat(bounds[0])],
@@ -23,7 +23,7 @@ iD.ui.geocoder = function(context) {
                             .text(t('geocoder.no_results', {name: searchVal}));
                     } else if (resp.length > 1) {
                         var spans = resultsList.selectAll('span')
-                            .data(resp, function (d) { return d.place_id; });
+                            .data(resp, function(d) { return d.place_id; });
 
                         spans.enter()
                             .append('span')
@@ -64,7 +64,7 @@ iD.ui.geocoder = function(context) {
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
-                gcForm.call(iD.ui.toggle(show));
+                gcForm.call(iD.ui.Toggle(show));
                 if (!show) resultsList.classed('hide', !show);
                 if (show) inputNode.node().focus();
                 else inputNode.node().blur();
@@ -75,8 +75,12 @@ iD.ui.geocoder = function(context) {
         var button = selection.append('button')
             .attr('tabindex', -1)
             .attr('title', t('geocoder.title'))
-            .html('<span class=\'geocode icon\'></span>')
-            .on('click', toggle);
+            .on('click', toggle)
+            .call(bootstrap.tooltip()
+                .placement('right'));
+
+        button.append('span')
+            .attr('class', 'icon geocode');
 
         var gcForm = selection.append('form');
 

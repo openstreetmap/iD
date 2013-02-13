@@ -1,4 +1,8 @@
-iD.ui.geolocate = function(map) {
+iD.ui.Geolocate = function(map) {
+    function click() {
+        navigator.geolocation.getCurrentPosition(
+            success, error);
+    }
 
     function success(position) {
         map.center([position.coords.longitude, position.coords.latitude]);
@@ -7,17 +11,16 @@ iD.ui.geolocate = function(map) {
     function error() { }
 
     return function(selection) {
-        selection
-            .attr('class', 'geolocate-control map-control')
-            .append('button')
-            .attr('tabindex', -1)
-            .attr('title', 'Show My Location')
-            .on('click', function() {
-                navigator.geolocation.getCurrentPosition(
-                    success, error);
-            })
-            .append('span')
-                .attr('class','icon geolocate');
-    };
+        if (!navigator.geolocation) return;
 
+        var button = selection.append('button')
+            .attr('tabindex', -1)
+            .attr('title', t('geolocate.title'))
+            .on('click', click)
+            .call(bootstrap.tooltip()
+                .placement('right'));
+
+         button.append('span')
+             .attr('class', 'icon geolocate');
+    };
 };

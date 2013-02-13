@@ -76,7 +76,7 @@ iD.taginfo = function() {
                 page: 1
             }, parameters)), function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(popularValues()).map(valKeyDescription));
+                callback(null, d.data.filter(popularValues()).map(valKeyDescription), parameters);
             });
     };
 

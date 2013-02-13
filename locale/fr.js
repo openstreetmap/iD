@@ -3,25 +3,21 @@ locale.fr = {
         add_area: {
             title: "Polygone",
             description: "Les polygones peuvent être des parcs, des batîments, des lacs ou tout autre objet surfacique.",
-            tail: "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment.",
-            key: "A"
+            tail: "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment."
         },
         add_line: {
             title: "Ligne",
             description: "Les lignes peuvent être des autoroutes, des routes, des chemins ou encore des caneaux.",
-            tail: "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un nouveau chemin.",
-            key: "L"
+            tail: "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un nouveau chemin."
         },
         add_point: {
             title: "Point",
             description: "Les points peuvent être des restaurants, des monuments, ou encore des boites aux lettres.",
-            tail: "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument.",
-            key: "P"
+            tail: "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument."
         },
         browse: {
             title: "Navigation",
-            description: "Naviguer ou zoomer sur la carte.",
-            key: "B"
+            description: "Naviguer ou zoomer sur la carte."
         },
         draw_area: {
             tail: "Cliquez pour ajouter un point à la zone. Cliquez sur le dernier point pour fermer la zone."
@@ -132,61 +128,50 @@ locale.fr = {
         }
     },
 
-    validations: {
-        untagged_point: "Point sans aucun tag ne faisant partie ni d'une ligne, ni d'un polygone",
-        untagged_line: "Ligne sans aucun tag",
-        untagged_area: "Polygone sans aucun tag",
-        tag_suggests_area: "Ce tag {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
-        deprecated_tags: "Tags obsolètes : {tags}"
-    },
-
-    save: "Sauvegarder",
-    // TODO
-    unsaved_changes: "You have unsaved changes",
-    save_help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
-    no_changes: "Vous n'avez aucune modification à enregistrer.",
-    save_error: "Une erreur est survenue lors de l'enregistrement des données",
-    uploading_changes: "Envoie des modifications vers OpenStreetMap.",
-    just_edited: "Vous venez de participer à OpenStreetMap!",
-    okay: "Okay",
-
-    "zoom-in": "Zoomer",
-    "zoom-out": "Dézoomer",
-
     nothing_to_undo: "Rien à annuler.",
     nothing_to_redo: "Rien à refaire.",
 
+    just_edited: "Vous venez de participer à OpenStreetMap!",
     browser_notice: "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
+    view_on_osm: "Consulter dans OSM",
+    zoom_in_edit: "Zoomer pour modifier la carte",
+    logout: "Déconnexion",
+    report_a_bug: "Signaler un bug",
 
-    inspector: {
-        no_documentation_combination:  "Aucune documentation n'est disponible pour cette combinaison de tag",
-        no_documentation_key: "Aucune documentation n'est disponible pour cette clé",
-        new_tag: "Nouveau tag"
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
-    view_on_osm: "Consulter dans OSM",
-
-    zoom_in_edit: "Zoomer pour modifier la carte",
-
-    edit_tags: "Editer les tags",
+    contributors: {
+        list: "Consulter les contributions de {users}",
+        truncated_list: "Consulter les contributions de {users} et {count} les autres"
+    },
 
     geocoder: {
         title: "Trouver un emplacement",
         placeholder: "Trouver un endroit",
-        // TODO
-        no_results: "Couldn't locate a place named '{name}'"
+        no_results: "Impossible de localiser l'endroit nommé '{name}'"
     },
 
-    description: "Description",
+    geolocate: {
+        title: "Show My Location"
+    },
 
-    logout: "Déconnexion",
-
-    // TODO
-    report_a_bug: "report a bug",
-
-    contributors: {
-        list: "Viewing contributions by {users}",
-        truncated_list: "Viewing contributions by {users} and {count} others"
+    inspector: {
+        no_documentation_combination:  "Aucune documentation n'est disponible pour cette combinaison de tag",
+        no_documentation_key: "Aucune documentation n'est disponible pour cette clé",
+        new_tag: "Nouveau tag",
+        edit_tags: "Editer les tags",
+        okay: "Okay",
+        view_on_osm: "View on OSM"
     },
 
     layerswitcher: {
@@ -197,8 +182,46 @@ locale.fr = {
         reset: "reset"
     },
 
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
+    save: {
+        title: "Sauvegarder",
+        help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
+        error: "Une erreur est survenue lors de l'enregistrement des données",
+        uploading: "Envoie des modifications vers OpenStreetMap.",
+        unsaved_changes: "Vous avez des modifications non enregistrées"
+    },
+
+    splash: {
+        welcome: "Welcome to the iD OpenStreetMap editor",
+        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+    },
+
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    tag_reference: {
+        description: "Déscription",
+        on_wiki: "{tag} on wiki.osm.org",
+        used_with: "used with {type}"
+    },
+
+    validations: {
+        untagged_point: "Point sans aucun tag ne faisant partie ni d'une ligne, ni d'un polygone",
+        untagged_line: "Ligne sans aucun tag",
+        untagged_area: "Polygone sans aucun tag",
+        tag_suggests_area: "Ce tag {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
+        deprecated_tags: "Tags obsolètes : {tags}"
+    },
+
+    zoom: {
+        in: "Zoomer",
+        out: "Dézoomer"
     }
 };

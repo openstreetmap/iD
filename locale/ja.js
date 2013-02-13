@@ -1,27 +1,23 @@
-locale.en = {
+locale.ja = {
     modes: {
         add_area: {
             title: "エリア",
             description: "公園や建物、湖沼、をマップに追加します",
-            tail: "マップをクリックすると、公園や湖沼、建物などのエリアの描画が開始されます。",
-            key: "A"
+            tail: "マップをクリックすると、公園や湖沼、建物などのエリアの描画が開始されます。"
         },
         add_line: {
             title: "ライン",
             description: "ラインは車両用の道路や歩道、用水路を表すことができます",
-            tail: "マップをクリックすると、道路や歩道、流水経路の描画が始まります",
-            key: "L"
+            tail: "マップをクリックすると、道路や歩道、流水経路の描画が始まります"
         },
         add_point: {
             title: "ポイント",
             description: "レストランや記念碑、郵便ボックスはポイントで表現します",
-            tail: "マップをクリックするとポイントを追加できます",
-            key: "P"
+            tail: "マップをクリックするとポイントを追加できます"
         },
         browse: {
             title: "ブラウズ",
-            description: "マップを拡大縮小します",
-            key: "B"
+            description: "マップを拡大縮小します"
         },
         draw_area: {
             tail: "クリックするとエリア上にポイントを追加できます。起点となっているポイントをクリックするとエリアが作成されます"
@@ -132,42 +128,32 @@ locale.en = {
         }
     },
 
-    validations: {
-        untagged_point: "ポイントにタグが付与されておらず、ラインやエリアの一部でもありません",
-        untagged_line: "ラインにタグが付与されていません",
-        untagged_area: "エリアにタグが付与されていません",
-        tag_suggests_area: "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
-        deprecated_tags: "タグの重複: {tags}"
-    },
-
-    save: "Save",
-    unsaved_changes: "変更が保存されていません",
-    save_help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします",
-    no_changes: "変更点がありません",
-    save_error: "データ保存中にエラーが発生しました",
-    uploading_changes: "変更点をOpenStreetMapへアップロードしています",
-    just_edited: "OpenStreetMap編集完了！",
-    okay: "OK",
-
-    "zoom-in": "ズームイン",
-    "zoom-out": "ズームアウト",
-
     nothing_to_undo: "やり直す変更点がありません",
     nothing_to_redo: "やり直した変更点がありません",
 
+    just_edited: "OpenStreetMap編集完了！",
     browser_notice: "このエディタは Firefox, Chrome, Safari, Opera, および Internet Explorer 9 以上をサポートしています。ブラウザのバージョンを更新するか、Potlatch 2を使用して編集してください",
+    view_on_osm: "OSMで確認",
+    zoom_in_edit: "編集するにはさらに地図を拡大してください",
+    logout: "ログアウト",
+    report_a_bug: "バグを報告",
 
-    inspector: {
-        no_documentation_combination: "このタグの組み合わせに関する説明文はありません",
-        no_documentation_key: "このキーに対する説明文はありません",
-        new_tag: "新規タグ"
+    commit: {
+        title: "Save Changes",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        save: "Save",
+        cancel: "Cancel",
+        warnings: "Warnings",
+        modified: "Modified",
+        deleted: "Deleted",
+        created: "Created"
     },
 
-    view_on_osm: "OSMで確認",
-
-    zoom_in_edit: "編集するにはさらに地図を拡大してください",
-
-    edit_tags: "タグを編集",
+    contributors: {
+        list: "{users} による編集履歴を確認",
+        truncated_list: "{users} とその他 {count} 人による編集履歴を表示"
+    },
 
     geocoder: {
         title: "特定地点を検索",
@@ -175,11 +161,18 @@ locale.en = {
         no_results: "'{name}' という名称の地点が見つかりません"
     },
 
-    description: "説明",
+    geolocate: {
+        title: "Show My Location"
+    },
 
-    logout: "ログアウト",
-
-    report_a_bug: "バグを報告",
+    inspector: {
+        no_documentation_combination: "このタグの組み合わせに関する説明文はありません",
+        no_documentation_key: "このキーに対する説明文はありません",
+        new_tag: "新規タグ",
+        edit_tags: "タグを編集",
+        okay: "OK",
+        view_on_osm: "View on OSM"
+    },
 
     layerswitcher: {
         title: "背景画像",
@@ -189,13 +182,46 @@ locale.en = {
         reset: "設定リセット"
     },
 
-    contributors: {
-        list: "{users} による編集履歴を確認",
-        truncated_list: "{users} とその他 {count} 人による編集履歴を表示"
+    restore: {
+        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        restore: "Restore",
+        reset: "Reset"
+    },
+
+    save: {
+        title: "Save",
+        help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします",
+        error: "データ保存中にエラーが発生しました",
+        uploading: "変更点をOpenStreetMapへアップロードしています",
+        unsaved_changes: "変更が保存されていません"
+    },
+
+    splash: {
+        welcome: "Welcome to the iD OpenStreetMap editor",
+        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
     },
 
     source_switch: {
         live: "本番サーバ",
         dev: "開発サーバ"
+    },
+
+    tag_reference: {
+        description: "説明",
+        on_wiki: "{tag} on wiki.osm.org",
+        used_with: "used with {type}"
+    },
+
+    validations: {
+        untagged_point: "ポイントにタグが付与されておらず、ラインやエリアの一部でもありません",
+        untagged_line: "ラインにタグが付与されていません",
+        untagged_area: "エリアにタグが付与されていません",
+        tag_suggests_area: "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
+        deprecated_tags: "タグの重複: {tags}"
+    },
+
+    zoom: {
+        in: "ズームイン",
+        out: "ズームアウト"
     }
 };

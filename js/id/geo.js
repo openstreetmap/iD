@@ -64,13 +64,13 @@ iD.geo.pointInPolygon = function(point, polygon) {
 };
 
 iD.geo.polygonContainsPolygon = function(outer, inner) {
-    return _.every(inner, function (point) {
+    return _.every(inner, function(point) {
         return iD.geo.pointInPolygon(point, outer);
     });
 };
 
 iD.geo.polygonIntersectsPolygon = function(outer, inner) {
-    return _.some(inner, function (point) {
+    return _.some(inner, function(point) {
         return iD.geo.pointInPolygon(point, outer);
     });
 };

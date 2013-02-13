@@ -1,4 +1,4 @@
-iD.ui.contributors = function(context) {
+iD.ui.Contributors = function(context) {
     function update(selection) {
         var users = {},
             limit = 3,

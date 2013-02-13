@@ -1,4 +1,4 @@
-iD.ui.lasso = function() {
+iD.ui.Lasso = function() {
 
     var center, box,
         group,
@@ -13,7 +13,7 @@ iD.ui.lasso = function() {
         box = group.append('rect')
             .attr('class', 'lasso-box');
 
-        group.call(iD.ui.toggle(true));
+        group.call(iD.ui.Toggle(true));
 
     }
 
@@ -50,7 +50,7 @@ iD.ui.lasso = function() {
 
     lasso.close = function(selection) {
         if (group) {
-            group.call(iD.ui.toggle(false, function() {
+            group.call(iD.ui.Toggle(false, function() {
                 d3.select(this).remove();
             }));
         }

@@ -200,19 +200,19 @@ iD.Connection = function(context) {
                     comment: comment,
                     created_by: 'iD ' + iD.version
                 }))
-            }, function (err, changeset_id) {
+            }, function(err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({
                     method: 'POST',
                     path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
                     content: JXON.stringify(connection.osmChangeJXON(user.id, changeset_id, changes))
-                }, function (err) {
+                }, function(err) {
                     if (err) return callback(err);
                     oauth.xhr({
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close'
-                    }, function (err) {
+                    }, function(err) {
                         callback(err, changeset_id);
                     });
                 });
@@ -228,7 +228,7 @@ iD.Connection = function(context) {
             if (img && img[0].getAttribute('href')) {
                 image_url = img[0].getAttribute('href');
             }
-            callback(connection.user({
+            callback(undefined, connection.user({
                 display_name: u.attributes.display_name.nodeValue,
                 image_url: image_url,
                 id: u.attributes.id.nodeValue

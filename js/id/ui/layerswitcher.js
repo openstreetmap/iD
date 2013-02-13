@@ -1,4 +1,4 @@
-iD.ui.layerswitcher = function(context) {
+iD.ui.LayerSwitcher = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         opacities = [1, 0.5, 0];
 
@@ -23,17 +23,20 @@ iD.ui.layerswitcher = function(context) {
             .attr('tabindex', -1)
             .attr('class', 'fillD')
             .attr('title', t('layerswitcher.description'))
-            .html("<span class='layers icon'></span>")
-            .on('click.layerswitcher-toggle', toggle);
+            .on('click.layerswitcher-toggle', toggle)
+            .call(bootstrap.tooltip()
+                .placement('right'));
 
-        function show() { setVisible(true); }
+        button.append('span')
+            .attr('class', 'layers icon');
+
         function hide() { setVisible(false); }
         function toggle() { setVisible(content.classed('hide')); }
 
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
-                content.call(iD.ui.toggle(show));
+                content.call(iD.ui.Toggle(show));
                 shown = show;
             }
         }
@@ -89,7 +92,7 @@ iD.ui.layerswitcher = function(context) {
                     return d === context.background().source();
                 });
 
-            var provided_by = context.container().select('#attribution .provided-by')
+            var provided_by = context.container().select('.attribution .provided-by')
                 .html('');
 
             if (d.data.terms_url) {
@@ -133,7 +136,7 @@ iD.ui.layerswitcher = function(context) {
                     return d.data.name;
                 });
             layerLinks.exit().remove();
-            layerLinks.enter()
+            var LayerInner = layerLinks.enter()
                 .append('li')
                 .append('a')
                     .attr('data-original-title', function(d) {
@@ -141,18 +144,19 @@ iD.ui.layerswitcher = function(context) {
                     })
                     .attr('href', '#')
                     .attr('class', 'layer')
-                    .text(function(d) {
-                        return d.data.name;
-                    })
                     .each(function(d) {
                         // only set tooltips for layers with tooltips
                         if (d.data.description) {
                             d3.select(this).call(bootstrap.tooltip().placement('right'));
                         }
                     })
-                    .on('click.set-source', clickSetSource)
-                    .insert('span')
+                    .on('click.set-source', clickSetSource);
+                    LayerInner.insert('span')
                     .attr('class','icon toggle');
+                    LayerInner.insert('span').text(function(d) {
+                        return d.data.name;
+                    });
+
             selectLayer(context.background().source());
         }
 

@@ -34,7 +34,7 @@ window.iD = function () {
     context.replace = history.replace;
     context.pop = history.pop;
     context.undo = history.undo;
-    context.redo = history.undo;
+    context.redo = history.redo;
     context.changes = history.changes;
 
     /* Graph */
@@ -85,6 +85,8 @@ window.iD = function () {
     context.projection = map.projection;
     context.tail = map.tail;
     context.redraw = map.redraw;
+    context.zoomIn = map.zoomIn;
+    context.zoomOut = map.zoomOut;
 
     context.container = function(_) {
         if (!arguments.length) return container;

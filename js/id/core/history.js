@@ -200,7 +200,10 @@ iD.History = function(context) {
                     imagery_used: i.imagery_used,
                     entities: i.graph.entities
                 };
-            }));
+            }), function includeUndefined(key, value) {
+                if (typeof value === 'undefined') return 'undefined';
+                return value;
+            });
 
             context.storage(getKey('history'), json);
             context.storage(getKey('nextIDs'), JSON.stringify(iD.Entity.id.next));
@@ -237,9 +240,12 @@ iD.History = function(context) {
                 d.graph = iD.Graph(stack[0].graph).load(d.entities);
                 return d;
             });
+            stack[0].graph.inherited = false;
             dispatch.change();
 
-        }
+        },
+
+        _getKey: getKey
 
     };
 

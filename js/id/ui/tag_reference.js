@@ -11,7 +11,7 @@ iD.ui.tagReference = function(selection) {
             .enter()
             .append('span')
             .attr('title', function(d) {
-                return 'used with ' + d;
+                return t('tag_reference.used_with', {type: d});
             })
             .attr('class', function(d) {
                 return 'icon big icon-pre-text big-' + d;
@@ -19,12 +19,12 @@ iD.ui.tagReference = function(selection) {
             header.append('span')
                 .text(g('title'));
 
-        referenceBody =  selection.append('div')
+        var referenceBody = selection.append('div')
             .attr('class','modal-section fillL2');
 
         referenceBody
             .append('h5')
-            .text(t('description'));
+            .text(t('tag_reference.description'));
 
         if (selection.datum().image) {
             referenceBody
@@ -36,6 +36,7 @@ iD.ui.tagReference = function(selection) {
         referenceBody
             .append('p')
             .text(g('description'));
+
         referenceBody
             .append('a')
             .attr('target', '_blank')
@@ -43,7 +44,7 @@ iD.ui.tagReference = function(selection) {
                 return 'http://wiki.openstreetmap.org/wiki/' + d.title;
             })
             .text(function(d) {
-                return d.title + ' on wiki.osm.org';
+                return t('tag_reference.on_wiki', {tag: d.title});
             });
     });
 };

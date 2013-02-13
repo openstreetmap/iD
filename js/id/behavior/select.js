@@ -1,78 +1,32 @@
 iD.behavior.Select = function(context) {
-
     var behavior = function(selection) {
-
-        var timeout = null,
-            // the position of the first mousedown
-            pos = null;
-
-        function click(event) {
-            d3.event = event;
+        function click() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof iD.Entity) {
-                if (d3.event.shiftKey) {
-                    context.enter(iD.modes.Select(context, context.selection().concat([datum.id])));
-                } else {
-                    context.enter(iD.modes.Select(context, [datum.id]));
-                }
+            if (!(datum instanceof iD.Entity)) {
+                if (!d3.event.shiftKey)
+                    context.enter(iD.modes.Browse(context));
+
             } else if (!d3.event.shiftKey) {
-                context.enter(iD.modes.Browse(context));
+                // Avoid re-entering Select mode with same entity.
+                if (context.selection().length !== 1 || context.selection()[0] !== datum.id)
+                    context.enter(iD.modes.Select(context, [datum.id]));
+
+            } else if (context.selection().indexOf(datum.id) >= 0) {
+                var selection = _.without(context.selection(), datum.id);
+                context.enter(selection.length ?
+                    iD.modes.Select(context, selection) :
+                    iD.modes.Browse(context));
+
+            } else {
+                context.enter(iD.modes.Select(context, context.selection().concat([datum.id])));
             }
         }
 
-        function mousedown() {
-            var datum = d3.event.target.__data__;
-            pos = [d3.event.clientX, d3.event.clientY];
-            if (datum instanceof iD.Entity || (datum && datum.type === 'midpoint')) {
-                selection
-                    .on('mousemove.select', mousemove)
-                    .on('touchmove.select', mousemove);
-
-                // we've seen a mousedown within 400ms of this one, so ignore
-                // both because they will be a double click
-                if (timeout !== null) {
-                    window.clearTimeout(timeout);
-                    selection.on('mousemove.select', null);
-                    timeout = null;
-                } else {
-                    // queue the click handler to fire in 400ms if no other clicks
-                    // are detected
-                    timeout = window.setTimeout((function(event) {
-                        return function() {
-                            click(event);
-                            timeout = null;
-                            selection.on('mousemove.select', null);
-                        };
-                    // save the event for the click handler
-                    })(d3.event), 200);
-                }
-            }
-        }
-
-        // allow mousemoves to cancel the click
-        function mousemove() {
-            if (iD.geo.dist([d3.event.clientX, d3.event.clientY], pos) > 4) {
-                window.clearTimeout(timeout);
-                timeout = null;
-            }
-        }
-
-        function mouseup() {
-            selection.on('mousemove.select', null);
-            if (pos && d3.event.clientX === pos[0] && d3.event.clientY === pos[1] &&
-                !(d3.event.target.__data__ instanceof iD.Entity)) {
-                context.enter(iD.modes.Browse(context));
-            }
-        }
-
-        selection
-            .on('mousedown.select', mousedown)
-            .on('mouseup.select', mouseup)
-            .on('touchstart.select', mousedown);
+        selection.on('click.select', click);
     };
 
     behavior.off = function(selection) {
-        selection.on('mousedown.select', null);
+        selection.on('click.select', null);
     };
 
     return behavior;

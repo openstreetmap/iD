@@ -19,11 +19,11 @@ iD.actions.Connect = function(nodeIds) {
         for (var i = 0; i < nodeIds.length - 1; i++) {
             var node = graph.entity(nodeIds[i]), index;
 
-            graph.parentWays(node).forEach(function (parent) {
+            graph.parentWays(node).forEach(function(parent) {
                 graph = graph.replace(parent.replaceNode(node.id, survivor.id));
             });
 
-            graph.parentRelations(node).forEach(function (parent) {
+            graph.parentRelations(node).forEach(function(parent) {
                 graph = graph.replace(parent.replaceMember(node, survivor));
             });
 

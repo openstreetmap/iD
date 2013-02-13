@@ -14,7 +14,7 @@ iD.actions.Split = function(nodeId, newWayId) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node);
 
-        return parents.filter(function (parent) {
+        return parents.filter(function(parent) {
             return parent.isClosed() ||
                 (parent.first() !== nodeId &&
                  parent.last()  !== nodeId);

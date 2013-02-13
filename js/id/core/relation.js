@@ -14,7 +14,7 @@ _.extend(iD.Relation.prototype, {
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            return this.members.reduce(function (extent, member) {
+            return this.members.reduce(function(extent, member) {
                 member = resolver.entity(member.id);
                 if (member) {
                     return extent.extend(member.extent(resolver));
@@ -156,8 +156,8 @@ _.extend(iD.Relation.prototype, {
     //
     multipolygon: function(resolver) {
         var members = this.members
-            .filter(function (m) { return m.type === 'way' && resolver.entity(m.id); })
-            .map(function (m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.childNodes(resolver.entity(m.id)) }; });
+            .filter(function(m) { return m.type === 'way' && resolver.entity(m.id); })
+            .map(function(m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.childNodes(resolver.entity(m.id)) }; });
 
         function join(ways) {
             var joined = [], current, first, last, i, how, what;
@@ -202,7 +202,7 @@ _.extend(iD.Relation.prototype, {
                 }
             }
 
-            return joined.map(function (nodes) { return _.pluck(nodes, 'loc'); });
+            return joined.map(function(nodes) { return _.pluck(nodes, 'loc'); });
         }
 
         function findOuter(inner) {
@@ -221,9 +221,9 @@ _.extend(iD.Relation.prototype, {
             }
         }
 
-        var outers = join(members.filter(function (m) { return m.role === 'outer'; })),
-            inners = join(members.filter(function (m) { return m.role === 'inner'; })),
-            result = outers.map(function (o) { return [o]; });
+        var outers = join(members.filter(function(m) { return m.role === 'outer'; })),
+            inners = join(members.filter(function(m) { return m.role === 'inner'; })),
+            result = outers.map(function(o) { return [o]; });
 
         for (var i = 0; i < inners.length; i++) {
             var o = findOuter(inners[i]);
