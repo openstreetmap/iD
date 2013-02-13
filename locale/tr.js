@@ -128,63 +128,15 @@ locale.tr = {
         }
     },
 
-    validations: {
-        untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
-        untagged_line: "Etiketlenmemiş çizgi",
-        untagged_area: "Etiketlenmemiş alan",
-        tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
-        deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
-    },
-
-    save: "Kaydet",
-    unsaved_changes: "Kaydedilmemiş değişiklikleriniz var",
-    save_help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",
-    no_changes: "Kaydedecek hiçbir değişikliğiniz yok",
-    save_error: "Kaydederken bir hata oluştu",
-    uploading_changes: "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
-    just_edited: "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
-    okay: "Tamam",
-
     nothing_to_undo: "Geri alınacak birşey yok.",
     nothing_to_redo: "Tekrar yapılacak birşey yok.",
 
+    just_edited: "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
     browser_notice: "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
-
-    inspector: {
-        no_documentation_combination:  "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
-        no_documentation_key: "Bu anahtar için dökümantasyon bulunmamaktadır.",
-        new_tag: "Yeni Etiket"
-    },
-
     view_on_osm: "OSM üstünde Gör",
-
     zoom_in_edit: "Güncelleme yapmak için haritada yakınlaşmalısınız",
-
-    edit_tags: "Etiketleri güncelle",
-
-    geocoder: {
-        title: "Bir Yer Bul",
-        placeholder: "bir yer bul",
-        no_results: "'{name}' ismindeki yer bulunamadı"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "Açıklama",
-
     logout: "Çıkış",
-
     report_a_bug: "Hata rapor et",
-
-    layerswitcher: {
-        title: "Arkaplan",
-        description: "Arkaplan Ayarları",
-        percent_brightness: "{opacity}% parlaklık",
-        fix_misalignment: "Yanlış hizalamayı düzelt",
-        reset: "Sıfırla"
-    },
 
     commit: {
         title: "Save Changes",
@@ -203,9 +155,55 @@ locale.tr = {
         truncated_list: "{users} ve diğer {count} tarafından yapılan katkılar görünmektedir"
     },
 
+    geocoder: {
+        title: "Bir Yer Bul",
+        placeholder: "bir yer bul",
+        no_results: "'{name}' ismindeki yer bulunamadı"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination:  "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
+        no_documentation_key: "Bu anahtar için dökümantasyon bulunmamaktadır.",
+        new_tag: "Yeni Etiket",
+        edit_tags: "Etiketleri güncelle",
+        okay: "Tamam"
+    },
+
+    layerswitcher: {
+        title: "Arkaplan",
+        description: "Arkaplan Ayarları",
+        percent_brightness: "{opacity}% parlaklık",
+        fix_misalignment: "Yanlış hizalamayı düzelt",
+        reset: "Sıfırla"
+    },
+
+    save: {
+        title: "Kaydet",
+        help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",
+        error: "Kaydederken bir hata oluştu",
+        uploading: "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
+        unsaved_changes: "Kaydedilmemiş değişiklikleriniz var"
+    },
+
     source_switch: {
         live: "canlı",
         dev: "geliştirme"
+    },
+
+    tag_reference: {
+        description: "Açıklama"
+    },
+
+    validations: {
+        untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
+        untagged_line: "Etiketlenmemiş çizgi",
+        untagged_area: "Etiketlenmemiş alan",
+        tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
+        deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
     },
 
     zoom: {

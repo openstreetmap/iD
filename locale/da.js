@@ -128,54 +128,14 @@ locale.da = {
         }
     },
 
-    validations: {
-        untagged_point: "Untagged point which is not part of a line or area",
-        untagged_line: "Untagged line",
-        untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
-        deprecated_tags: "Deprecated tags: {tags}"
-    },
-
-    save: "Gem",
-    unsaved_changes: "Du har ændringer der ikke er gemt endnu",
-    save_help: "Gem ændringer til OpenStreetMap gør dem synlige for andre brugere",
-    no_changes: "Du har ingen ændringer til at gemme endnu.",
-    save_error: "Der skete en fejl da du prøvede at gemme",
-    uploading_changes: "Gemmer nu ændringer til OpenStreetMap.",
-    just_edited: "Du har lige rettede i OpenStreetMap!",
-    okay: "Ok",
-
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
 
+    just_edited: "Du har lige rettede i OpenStreetMap!",
     browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
-
-    inspector: {
-        no_documentation_combination:  "Der er ingen dokumentation for denne tag kombination",
-        no_documentation_key: "Der er ingen dokumenation tilgængelig for denne nøgle",
-        new_tag: "Nyt Tag"
-    },
-
     view_on_osm: "Vis på OSM",
-
     zoom_in_edit: "zoom ind for at rette kortet",
-
-    edit_tags: "Ret tags",
-
-    geocoder: {
-        title: "Find  et sted",
-        placeholder: "find et sted",
-        no_results: "Kunne ikke finde '{name}'"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "Description",
-
     logout: "log ud",
-
     report_a_bug: "report a bug",
 
     layerswitcher: {
@@ -203,13 +163,51 @@ locale.da = {
         truncated_list: "Vis bidrag fra {users} og {count} andre"
     },
 
+    geocoder: {
+        title: "Find  et sted",
+        placeholder: "find et sted",
+        no_results: "Kunne ikke finde '{name}'"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination:  "Der er ingen dokumentation for denne tag kombination",
+        no_documentation_key: "Der er ingen dokumenation tilgængelig for denne nøgle",
+        new_tag: "Nyt Tag",
+        edit_tags: "Ret tags",
+        okay: "Ok"
+    },
+
+    save: {
+        title: "Gem",
+        help: "Gem ændringer til OpenStreetMap gør dem synlige for andre brugere",
+        error: "Der skete en fejl da du prøvede at gemme",
+        uploading: "Gemmer nu ændringer til OpenStreetMap.",
+        unsaved_changes: "Du har ændringer der ikke er gemt endnu",
+    },
+
     source_switch: {
         live: "live",
         dev: "dev"
     },
 
+    tag_reference: {
+        description: "Description"
+    },
+
     zoom: {
         in: "Zoom ind",
         out: "Zoom ud"
+    },
+
+    validations: {
+        untagged_point: "Untagged point which is not part of a line or area",
+        untagged_line: "Untagged line",
+        untagged_area: "Untagged area",
+        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
+        deprecated_tags: "Deprecated tags: {tags}"
     }
 };

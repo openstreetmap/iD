@@ -128,55 +128,15 @@ locale.de = {
         }
     },
 
-    validations: {
-        untagged_point: "Punkt ohne Attribute, der kein Teil einer Linie oder Fläche ist",
-        untagged_line: "Linie ohne Attribute",
-        untagged_area: "Fläche ohne Attribute",
-        tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
-        deprecated_tags: "Veralterte Attribute: {tags}"
-    },
-
-    save: "Speichern",
-    unsaved_changes: "Ungespeicherte Änderugen vorhanden",
-    save_help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
-    no_changes: "Keine Änderungen zum Speichern vorhanden.",
-    save_error: "Beim Speichern ist ein Fehler aufgetreten",
-    uploading_changes: "Änderungen werden zu OpenStreetMap hochgeladen.",
-    just_edited: "Sie haben gerade OpenStreetMap editiert!",
-    okay: "OK",
-
     nothing_to_undo: "Nichts zum Rückgängigmachen.",
     nothing_to_redo: "Nichts zum Wiederherstellen.",
 
+    just_edited: "Sie haben gerade OpenStreetMap editiert!",
     browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
-
-    inspector: {
-        no_documentation_combination:  "Für dieses Attribut ist keine Dokumentation verfügbar.",
-        no_documentation_key: "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
-        new_tag: "Neues Attribut"
-    },
-
     view_on_osm: "Auf OSM anschauen",
-
     zoom_in_edit: "Hineinzoomen, um die Karte zu bearbeiten",
-
-    edit_tags: "Attribute bearbeiten",
-
-    geocoder: {
-        title: "Suche einen Ort",
-        placeholder: "suche einen Ort",
-        no_results: "Der Ort '{name}' konnte nicht gefunden werden"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "Beschreibung",
-
-    report_a_bug: "Programmfehler melden",
-
     logout: "Abmelden",
+    report_a_bug: "Programmfehler melden",
 
     commit: {
         title: "Save Changes",
@@ -195,6 +155,24 @@ locale.de = {
         truncated_list: "Diese Kartenansicht enthält Beiträge von: {users} und {count} Anderen"
     },
 
+    geocoder: {
+        title: "Suche einen Ort",
+        placeholder: "suche einen Ort",
+        no_results: "Der Ort '{name}' konnte nicht gefunden werden"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination:  "Für dieses Attribut ist keine Dokumentation verfügbar.",
+        no_documentation_key: "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
+        new_tag: "Neues Attribut",
+        edit_tags: "Attribute bearbeiten",
+        okay: "OK"
+    },
+
     layerswitcher: {
         title: "Hintergrund",
         description: "Hintergrundeinstellungen",
@@ -203,9 +181,29 @@ locale.de = {
         reset: "Zurücksetzen"
     },
 
+    save: {
+        title: "Speichern",
+        help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
+        error: "Beim Speichern ist ein Fehler aufgetreten",
+        uploading: "Änderungen werden zu OpenStreetMap hochgeladen.",
+        unsaved_changes: "Ungespeicherte Änderugen vorhanden",
+    },
+
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    tag_reference: {
+        description: "Beschreibung"
+    },
+
+    validations: {
+        untagged_point: "Punkt ohne Attribute, der kein Teil einer Linie oder Fläche ist",
+        untagged_line: "Linie ohne Attribute",
+        untagged_area: "Fläche ohne Attribute",
+        tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
+        deprecated_tags: "Veralterte Attribute: {tags}"
     },
 
     zoom: {

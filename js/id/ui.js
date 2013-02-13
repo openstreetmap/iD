@@ -107,7 +107,7 @@ iD.ui = function(context) {
 
         window.onbeforeunload = function() {
             history.save();
-            if (history.hasChanges()) return t('unsaved_changes');
+            if (history.hasChanges()) return t('save.unsaved_changes');
         };
 
         d3.select(window).on('resize.editor', function() {

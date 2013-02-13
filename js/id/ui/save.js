@@ -30,7 +30,7 @@ iD.ui.Save = function(context) {
         context.container().select('.shaded')
             .remove();
 
-        var loading = iD.ui.loading(context.container(), t('uploading_changes'), true);
+        var loading = iD.ui.loading(context.container(), t('save.uploading'), true);
 
         connection.putChangeset(
             history.changes(),
@@ -44,7 +44,7 @@ iD.ui.Save = function(context) {
                     var desc = iD.ui.confirm()
                         .select('.description');
                     desc.append('h2')
-                        .text(t('save_error'));
+                        .text(t('save.error'));
                     desc.append('p').text(err.responseText);
                 } else {
                     success(e, changeset_id);
@@ -81,11 +81,11 @@ iD.ui.Save = function(context) {
             .call(bootstrap.tooltip()
                 .placement('bottom')
                 .html(true)
-                .title(iD.ui.tooltipHtml(t('save_help'), key)));
+                .title(iD.ui.tooltipHtml(t('save.help'), key)));
 
         button.append('span')
             .attr('class', 'label')
-            .text(t('save'));
+            .text(t('save.title'));
 
         button.append('span')
             .attr('class', 'count');

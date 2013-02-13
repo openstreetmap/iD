@@ -128,63 +128,15 @@ locale.en = {
         }
     },
 
-    validations: {
-        untagged_point: "Untagged point which is not part of a line or area",
-        untagged_line: "Untagged line",
-        untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
-        deprecated_tags: "Deprecated tags: {tags}"
-    },
-
-    save: "Save",
-    unsaved_changes: "You have unsaved changes",
-    save_help: "Save changes to OpenStreetMap, making them visible to other users",
-    no_changes: "You don't have any changes to save.",
-    save_error: "An error occurred while trying to save",
-    uploading_changes: "Uploading changes to OpenStreetMap.",
-    just_edited: "You Just Edited OpenStreetMap!",
-    okay: "Okay",
-
     nothing_to_undo: "Nothing to undo.",
     nothing_to_redo: "Nothing to redo.",
 
+    just_edited: "You Just Edited OpenStreetMap!",
     browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
-
-    inspector: {
-        no_documentation_combination: "There is no documentation available for this tag combination",
-        no_documentation_key: "There is no documentation available for this key",
-        new_tag: "New Tag"
-    },
-
     view_on_osm: "View on OSM",
-
     zoom_in_edit: "zoom in to edit the map",
-
-    edit_tags: "Edit tags",
-
-    geocoder: {
-        title: "Find A Place",
-        placeholder: "find a place",
-        no_results: "Couldn't locate a place named '{name}'"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "Description",
-
     logout: "logout",
-
     report_a_bug: "report a bug",
-
-    layerswitcher: {
-        title: "Background",
-        description: "Background Settings",
-        percent_brightness: "{opacity}% brightness",
-        fix_misalignment: "Fix misalignment",
-        reset: "reset"
-    },
 
     commit: {
         title: "Save Changes",
@@ -203,9 +155,55 @@ locale.en = {
         truncated_list: "Viewing contributions by {users} and {count} others"
     },
 
+    geocoder: {
+        title: "Find A Place",
+        placeholder: "find a place",
+        no_results: "Couldn't locate a place named '{name}'"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination: "There is no documentation available for this tag combination",
+        no_documentation_key: "There is no documentation available for this key",
+        new_tag: "New Tag",
+        edit_tags: "Edit tags",
+        okay: "Okay"
+    },
+
+    layerswitcher: {
+        title: "Background",
+        description: "Background Settings",
+        percent_brightness: "{opacity}% brightness",
+        fix_misalignment: "Fix misalignment",
+        reset: "reset"
+    },
+
+    save: {
+        title: "Save",
+        help: "Save changes to OpenStreetMap, making them visible to other users",
+        error: "An error occurred while trying to save",
+        uploading: "Uploading changes to OpenStreetMap.",
+        unsaved_changes: "You have unsaved changes"
+    },
+
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    tag_reference: {
+        description: 'Description'
+    },
+
+    validations: {
+        untagged_point: "Untagged point which is not part of a line or area",
+        untagged_line: "Untagged line",
+        untagged_area: "Untagged area",
+        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
+        deprecated_tags: "Deprecated tags: {tags}"
     },
 
     zoom: {

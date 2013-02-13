@@ -128,63 +128,15 @@ locale.lv = {
         }
     },
 
-    validations: {
-        untagged_point: "Neapzīmēts punkts",
-        untagged_line: "Neapzīmēta līnija",
-        untagged_area: "Neapzīmēts apgabals",
-        tag_suggests_area: "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
-        deprecated_tags: "Novecojuši apzīmējumi: {tags}"
-    },
-
-    save: "Saglabāt",
-    unsaved_changes: "Jums ir nesaglabātas izmaiņas",
-    save_help: "Saglabā izmaiņas, padarot tās redzamas citiem",
-    no_changes: "Jums nav izmaiņu, ko saglabāt",
-    save_error: "Kļūda. Nevarēja saglabāt maiņas",
-    uploading_changes: "Augšupielādē",
-    just_edited: "Jūs nupat rediģējāt OpenStreetMap",
-    okay: "Labi",
-
     nothing_to_undo: "Nav nekā, ko atcelt",
     nothing_to_redo: "Nav nekā, ko atsaukt",
 
+    just_edited: "Jūs nupat rediģējāt OpenStreetMap",
     browser_notice: "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 to kartes rediģēšanai",
-
-    inspector: {
-        no_documentation_combination: "Šai apzīmējumu kombinācijai nav piejama dokumetācija",
-        no_documentation_key: "There is no documentation available for this key",
-        new_tag: "Jauns apzīmējums"
-    },
-
     view_on_osm: "Apskatīt OSM lapu",
-
     zoom_in_edit: "pietuviniet, lai rediģētu karti",
-
-    edit_tags: "Rediģēt apzīmējumus",
-
-    geocoder: {
-        title: "Atrast vietu",
-        placeholder: "meklē vietu",
-        no_results: "Nevar atrast vietu '{name}'"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "Apraksts",
-
     logout: "atslēgties",
-
     report_a_bug: "ziņot par kļūdu",
-
-    layerswitcher: {
-        title: "Fons",
-        description: "Fona iestatījumi",
-        percent_brightness: "{opacity}% gaišums",
-        fix_misalignment: "Labot fona nolīdzināšanu",
-        reset: "Pārstatīt"
-    },
 
     commit: {
         title: "Save Changes",
@@ -203,9 +155,55 @@ locale.lv = {
         truncated_list: "{users} un {count} citu papildinājumi redzami"
     },
 
+    geocoder: {
+        title: "Atrast vietu",
+        placeholder: "meklē vietu",
+        no_results: "Nevar atrast vietu '{name}'"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination: "Šai apzīmējumu kombinācijai nav piejama dokumetācija",
+        no_documentation_key: "There is no documentation available for this key",
+        new_tag: "Jauns apzīmējums",
+        edit_tags: "Rediģēt apzīmējumus",
+        okay: "Labi"
+    },
+
+    layerswitcher: {
+        title: "Fons",
+        description: "Fona iestatījumi",
+        percent_brightness: "{opacity}% gaišums",
+        fix_misalignment: "Labot fona nolīdzināšanu",
+        reset: "Pārstatīt"
+    },
+
+    save: {
+        title: "Saglabāt",
+        help: "Saglabā izmaiņas, padarot tās redzamas citiem",
+        error: "Kļūda. Nevarēja saglabāt maiņas",
+        uploading: "Augšupielādē",
+        unsaved_changes: "Jums ir nesaglabātas izmaiņas"
+    },
+
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    tag_reference: {
+        description: "Apraksts"
+    },
+
+    validations: {
+        untagged_point: "Neapzīmēts punkts",
+        untagged_line: "Neapzīmēta līnija",
+        untagged_area: "Neapzīmēts apgabals",
+        tag_suggests_area: "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
+        deprecated_tags: "Novecojuši apzīmējumi: {tags}"
     },
 
     zoom: {

@@ -128,63 +128,15 @@ locale.ja = {
         }
     },
 
-    validations: {
-        untagged_point: "ポイントにタグが付与されておらず、ラインやエリアの一部でもありません",
-        untagged_line: "ラインにタグが付与されていません",
-        untagged_area: "エリアにタグが付与されていません",
-        tag_suggests_area: "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
-        deprecated_tags: "タグの重複: {tags}"
-    },
-
-    save: "Save",
-    unsaved_changes: "変更が保存されていません",
-    save_help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします",
-    no_changes: "変更点がありません",
-    save_error: "データ保存中にエラーが発生しました",
-    uploading_changes: "変更点をOpenStreetMapへアップロードしています",
-    just_edited: "OpenStreetMap編集完了！",
-    okay: "OK",
-
     nothing_to_undo: "やり直す変更点がありません",
     nothing_to_redo: "やり直した変更点がありません",
 
+    just_edited: "OpenStreetMap編集完了！",
     browser_notice: "このエディタは Firefox, Chrome, Safari, Opera, および Internet Explorer 9 以上をサポートしています。ブラウザのバージョンを更新するか、Potlatch 2を使用して編集してください",
-
-    inspector: {
-        no_documentation_combination: "このタグの組み合わせに関する説明文はありません",
-        no_documentation_key: "このキーに対する説明文はありません",
-        new_tag: "新規タグ"
-    },
-
     view_on_osm: "OSMで確認",
-
     zoom_in_edit: "編集するにはさらに地図を拡大してください",
-
-    edit_tags: "タグを編集",
-
-    geocoder: {
-        title: "特定地点を検索",
-        placeholder: "地点を検索",
-        no_results: "'{name}' という名称の地点が見つかりません"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "説明",
-
     logout: "ログアウト",
-
     report_a_bug: "バグを報告",
-
-    layerswitcher: {
-        title: "背景画像",
-        description: "背景画像設定",
-        percent_brightness: "{opacity}% 輝度",
-        fix_misalignment: "背景画像を移動",
-        reset: "設定リセット"
-    },
 
     commit: {
         title: "Save Changes",
@@ -203,9 +155,55 @@ locale.ja = {
         truncated_list: "{users} とその他 {count} 人による編集履歴を表示"
     },
 
+    geocoder: {
+        title: "特定地点を検索",
+        placeholder: "地点を検索",
+        no_results: "'{name}' という名称の地点が見つかりません"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination: "このタグの組み合わせに関する説明文はありません",
+        no_documentation_key: "このキーに対する説明文はありません",
+        new_tag: "新規タグ",
+        edit_tags: "タグを編集",
+        okay: "OK"
+    },
+
+    layerswitcher: {
+        title: "背景画像",
+        description: "背景画像設定",
+        percent_brightness: "{opacity}% 輝度",
+        fix_misalignment: "背景画像を移動",
+        reset: "設定リセット"
+    },
+
+    save: {
+        title: "Save",
+        help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします",
+        error: "データ保存中にエラーが発生しました",
+        uploading: "変更点をOpenStreetMapへアップロードしています",
+        unsaved_changes: "変更が保存されていません"
+    },
+
     source_switch: {
         live: "本番サーバ",
         dev: "開発サーバ"
+    },
+
+    tag_reference: {
+        description: "説明"
+    },
+
+    validations: {
+        untagged_point: "ポイントにタグが付与されておらず、ラインやエリアの一部でもありません",
+        untagged_line: "ラインにタグが付与されていません",
+        untagged_area: "エリアにタグが付与されていません",
+        tag_suggests_area: "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
+        deprecated_tags: "タグの重複: {tags}"
     },
 
     zoom: {

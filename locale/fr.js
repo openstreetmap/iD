@@ -128,60 +128,15 @@ locale.fr = {
         }
     },
 
-    validations: {
-        untagged_point: "Point sans aucun tag ne faisant partie ni d'une ligne, ni d'un polygone",
-        untagged_line: "Ligne sans aucun tag",
-        untagged_area: "Polygone sans aucun tag",
-        tag_suggests_area: "Ce tag {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
-        deprecated_tags: "Tags obsolètes : {tags}"
-    },
-
-    save: "Sauvegarder",    
-    unsaved_changes: "Vous avez des modifications non enregistrées",
-    save_help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
-    no_changes: "Vous n'avez aucune modification à enregistrer.",
-    save_error: "Une erreur est survenue lors de l'enregistrement des données",
-    uploading_changes: "Envoie des modifications vers OpenStreetMap.",
-    just_edited: "Vous venez de participer à OpenStreetMap!",
-    okay: "Okay",
-
     nothing_to_undo: "Rien à annuler.",
     nothing_to_redo: "Rien à refaire.",
 
+    just_edited: "Vous venez de participer à OpenStreetMap!",
     browser_notice: "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
-
-    inspector: {
-        no_documentation_combination:  "Aucune documentation n'est disponible pour cette combinaison de tag",
-        no_documentation_key: "Aucune documentation n'est disponible pour cette clé",
-        new_tag: "Nouveau tag"
-    },
-
     view_on_osm: "Consulter dans OSM",
-
     zoom_in_edit: "Zoomer pour modifier la carte",
-
-    edit_tags: "Editer les tags",
-
-    geocoder: {
-        title: "Trouver un emplacement",
-        placeholder: "Trouver un endroit",      
-        no_results: "Impossible de localiser l'endroit nommé '{name}'"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "Déscription",
-
     logout: "Déconnexion",
-
     report_a_bug: "Signaler un bug",
-
-    contributors: {
-        list: "Consulter les contributions de {users}",
-        truncated_list: "Consulter les contributions de {users} et {count} les autres"
-    },
 
     commit: {
         title: "Save Changes",
@@ -195,6 +150,29 @@ locale.fr = {
         created: "Created"
     },
 
+    contributors: {
+        list: "Consulter les contributions de {users}",
+        truncated_list: "Consulter les contributions de {users} et {count} les autres"
+    },
+
+    geocoder: {
+        title: "Trouver un emplacement",
+        placeholder: "Trouver un endroit",
+        no_results: "Impossible de localiser l'endroit nommé '{name}'"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination:  "Aucune documentation n'est disponible pour cette combinaison de tag",
+        no_documentation_key: "Aucune documentation n'est disponible pour cette clé",
+        new_tag: "Nouveau tag",
+        edit_tags: "Editer les tags",
+        okay: "Okay"
+    },
+
     layerswitcher: {
         title: "Fond de carte",
         description: "Paramètres du fond de carte",
@@ -203,9 +181,29 @@ locale.fr = {
         reset: "reset"
     },
 
+    save: {
+        title: "Sauvegarder",
+        help: "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
+        error: "Une erreur est survenue lors de l'enregistrement des données",
+        uploading: "Envoie des modifications vers OpenStreetMap.",
+        unsaved_changes: "Vous avez des modifications non enregistrées"
+    },
+
     source_switch: {
         live: "live",
         dev: "dev"
+    },
+
+    tag_reference: {
+        description: "Déscription"
+    },
+
+    validations: {
+        untagged_point: "Point sans aucun tag ne faisant partie ni d'une ligne, ni d'un polygone",
+        untagged_line: "Ligne sans aucun tag",
+        untagged_area: "Polygone sans aucun tag",
+        tag_suggests_area: "Ce tag {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
+        deprecated_tags: "Tags obsolètes : {tags}"
     },
 
     zoom: {

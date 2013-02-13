@@ -22,7 +22,7 @@ iD.ui.Inspector = function() {
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
         inspectorwrap.append('h4')
-            .text(t('edit_tags'));
+            .text(t('inspector.edit_tags'));
 
         tagList = inspectorwrap.append('ul');
 
@@ -65,7 +65,7 @@ iD.ui.Inspector = function() {
                 .attr('class', 'apply action')
                 .on('click', apply);
 
-            inspectorButton.append('span').attr('class','label').text(t('okay'));
+            inspectorButton.append('span').attr('class','label').text(t('inspector.okay'));
 
         var minorButtons = selection.append('div').attr('class','minor-buttons fl');
 

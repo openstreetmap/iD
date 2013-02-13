@@ -24,7 +24,7 @@ iD.ui.tagReference = function(selection) {
 
         referenceBody
             .append('h5')
-            .text(t('description'));
+            .text(t('tag_reference.description'));
 
         if (selection.datum().image) {
             referenceBody

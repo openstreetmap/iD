@@ -128,63 +128,15 @@ locale.es = {
         }
     },
 
-    validations: {
-        untagged_point: "Punto sin etiquetar que no es parte de una línea ni zona.", //"Untagged point which is not part of a line or area",
-        untagged_line: "Línea sin etiquetar", //"Untagged line",
-        untagged_area: "Zona sin etiquetar", //"Untagged area",
-        tag_suggests_area: "La etiqueta {tag} sugiere que esta línea debería ser una zona, pero no lo es.", //"The tag {tag} suggests line should be area, but it is not an area",
-        deprecated_tags: "Etiquetas obsoletas: {tags}" //"Deprecated tags: {tags}"
-    },
-
-    save: "Guardar", //"Save",
-    unsaved_changes: "Tienes cambios sin guardar", //"You have unsaved changes",
-    save_help: "Guardar los cambios en OpenStreetMap haciéndolos visibles a otros usuarios", //"Save changes to OpenStreetMap, making them visible to other users",
-    no_changes: "No tienes cambios sin guardar", //"You don't have any changes to save.",
-    save_error: "Ha ocurrido un error tratando de guardar", //"An error occurred while trying to save",
-    uploading_changes: "Subiendo cambios a OpenStreetMap", //"Uploading changes to OpenStreetMap.",
-    just_edited: "Acabas de editar OpenStreetMap!", //"You Just Edited OpenStreetMap!",
-    okay: "OK", //"Okay",
-
     nothing_to_undo: "Nada para deshacer", //"Nothing to undo.",
     nothing_to_redo: "Nada para rehacer", //"Nothing to redo.",
 
+    just_edited: "Acabas de editar OpenStreetMap!", //"You Just Edited OpenStreetMap!",
     browser_notice: "Este editor soporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 o superior. Por favor actualiza tu navegador o utiliza Potlatch 2 para editar el mapa.", //"This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
-
-    inspector: {
-        no_documentation_combination: "No hay documentación disponible para esta combinación de etiquetas", //"This is no documentation available for this tag combination",
-        no_documentation_key: "No hay documentación disponible para esta tecla", //"This is no documentation available for this key",
-        new_tag: "Nueve etiqueta" //"New Tag"
-    },
-
     view_on_osm: "Ver en OSM", //"View on OSM",
-
     zoom_in_edit: "acercar para editar el mapa", //"zoom in to edit the map",
-
-    edit_tags: "Editar etiquetas", //"Edit tags",
-
-    geocoder: {
-        title: "Encontrar un lugar", //"Find A Place",
-        placeholder: "encontrar un lugar", //"find a place",
-        no_results: "No se pudo encontrar el lugar llamado '{name}'" //"Couldn't locate a place named '{name}'"
-    },
-
-    geolocate: {
-        title: "Show My Location"
-    },
-
-    description: "Descripción", //"Description",
-
     logout: "cerrar sesión", //"logout",
-
     report_a_bug: "reportar un error", //"report a bug",
-
-    layerswitcher: {
-        title: "Fondo", //"Background",
-        description: "Configuración de fondo", //"Background Settings",
-        percent_brightness: "{opacity}% brillo", //"{opacity}% brightness",
-        fix_misalignment: "Arreglar alineamiento", //"Fix misalignment",
-        reset: "reiniciar" //"reset"
-    },
 
     commit: {
         title: "Save Changes",
@@ -203,9 +155,55 @@ locale.es = {
         truncated_list: "Viendo las contribuciones de {users} y {count} más" //"Viewing contributions by {users} and {count} others"
     },
 
+    geocoder: {
+        title: "Encontrar un lugar", //"Find A Place",
+        placeholder: "encontrar un lugar", //"find a place",
+        no_results: "No se pudo encontrar el lugar llamado '{name}'" //"Couldn't locate a place named '{name}'"
+    },
+
+    geolocate: {
+        title: "Show My Location"
+    },
+
+    inspector: {
+        no_documentation_combination: "No hay documentación disponible para esta combinación de etiquetas", //"This is no documentation available for this tag combination",
+        no_documentation_key: "No hay documentación disponible para esta tecla", //"This is no documentation available for this key",
+        new_tag: "Nueve etiqueta", //"New Tag"
+        edit_tags: "Editar etiquetas", //"Edit tags",
+        okay: "OK" //"Okay",
+    },
+
+    layerswitcher: {
+        title: "Fondo", //"Background",
+        description: "Configuración de fondo", //"Background Settings",
+        percent_brightness: "{opacity}% brillo", //"{opacity}% brightness",
+        fix_misalignment: "Arreglar alineamiento", //"Fix misalignment",
+        reset: "reiniciar" //"reset"
+    },
+
+    save: {
+        title: "Guardar", //"Save",
+        help: "Guardar los cambios en OpenStreetMap haciéndolos visibles a otros usuarios", //"Save changes to OpenStreetMap, making them visible to other users",
+        error: "Ha ocurrido un error tratando de guardar", //"An error occurred while trying to save",
+        uploading: "Subiendo cambios a OpenStreetMap", //"Uploading changes to OpenStreetMap.",
+        unsaved_changes: "Tienes cambios sin guardar" //"You have unsaved changes",
+    },
+
     source_switch: {
         live: "en vivo", //"live",
         dev: "dev"
+    },
+
+    tag_reference: {
+        description: "Descripción" //"Description",
+    },
+
+    validations: {
+        untagged_point: "Punto sin etiquetar que no es parte de una línea ni zona.", //"Untagged point which is not part of a line or area",
+        untagged_line: "Línea sin etiquetar", //"Untagged line",
+        untagged_area: "Zona sin etiquetar", //"Untagged area",
+        tag_suggests_area: "La etiqueta {tag} sugiere que esta línea debería ser una zona, pero no lo es.", //"The tag {tag} suggests line should be area, but it is not an area",
+        deprecated_tags: "Etiquetas obsoletas: {tags}" //"Deprecated tags: {tags}"
     },
 
     zoom: {
