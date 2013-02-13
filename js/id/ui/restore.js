@@ -4,16 +4,17 @@ iD.ui.restore = function(selection, history) {
     modal.select('.modal')
         .attr('class', 'modal-splash modal');
 
-    var introModal = modal.select('.content')
-        .append('div')
-        .attr('class', 'modal-section fillL')
-        .text('You have unsaved changes from a previous editing session. Do you wish to restore these changes?');
+    var introModal = modal.select('.content');
 
-    buttons = introModal
-        .append('div')
-        .attr('class', 'buttons cf')
+        introModal.append('div')
+            .attr('class', 'modal-section fillL')
+            .append('h3').text('You have unsaved changes from a previous editing session. Do you wish to restore these changes?');
+        var buttonWrap = introModal.append('div')
+            .attr('class', 'modal-section fillD cf col12');
+
+    buttons = buttonWrap
             .append('div')
-            .attr('class', 'button-wrap joined col4');
+            .attr('class', 'button-wrap joined col6');
 
     buttons.append('button')
         .attr('class', 'save action button col6')

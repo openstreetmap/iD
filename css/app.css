@@ -23,7 +23,7 @@ body {
     max-width: 1200px;
 }
 
-div, textarea, input, span, ul, li, ol, a, button {
+div, textarea, input, form, span, ul, li, ol, a, button {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -121,7 +121,7 @@ input[type=text]:focus {
 }
 
 input[type=text] {
-    padding:4px 10px;
+    padding:5px 10px;
     height:30px;
     resize: none;
 }
@@ -182,10 +182,9 @@ ul li { list-style: none;}
 ul.toggle-list li a {
     font-weight: bold;
     color: #333;
-    padding: 10px;
-    border-top: 1px solid white;
+    padding: 5px 10px;
     display:block;
-    border-top: 1px solid rgba(0, 0, 0, .5);
+    border-top: 1px solid #ccc;
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
@@ -268,10 +267,6 @@ button:hover {
     background-color: #ececec;
 }
 
-button.col3:hover {
-    background: #bde5aa;
-}
-
 button.active {
     cursor:url(../img/cursor-pointing.png) 6 1, auto;
 }
@@ -282,7 +277,7 @@ button.disabled {
 }
 
 button.active:not([disabled]):not(.disabled) {
-    background: #6bc641;
+    background: #7092ff;
 }
 
 button.minor {
@@ -656,7 +651,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .map-control > button.active:hover {
-    background: #6bc641;
+    background: #7092ff;
 }
 
 .map-overlay {
@@ -816,8 +811,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .layerswitcher-control li:hover .select-box,
 .layerswitcher-control li.selected .select-box {
-    border: 2px solid #6bc641;
-    background: rgba(107, 198, 65, .5);
+    border: 2px solid #7092ff;
+    background: rgba(89, 123, 231, .5);
     opacity: .5;
 }
 .layerswitcher-control li.selected:hover .select-box,
@@ -834,25 +829,29 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* Geocoder */
 
-.geocode-control {
+.geocode-control, .geocode-control form {
     top:150px;
 }
 
+.geocode-control form {
+    padding: 4px;
+}
+
 .geocode-control input {
-    width: 140px;
-    border: 1px solid #ccc;
-    margin: 4px;
+    width: 100%;
 }
 
 .geocode-control div {
-    top: 50px;
-    width: 340px;
-    margin: 4px;
-    padding: 5px;
+    z-index: 100;
+    top: 190px;
+    max-height: 300px;
+    overflow-y: auto;
 }
+
 .geocode-control div span {
     display: inline-block;
     border-bottom: 1px solid #333;
+    padding: 5px 10px;
 }
 
 /* Geolocator */
@@ -1146,11 +1145,6 @@ div.typeahead a:first-child {
     padding: 20px;
 }
 
-.modal-section .buttons {
-    padding-top: 10px;
-    width: 100%;
-}
-
 .modal-section img.wiki-image {
     max-width: 100%;
     max-height: 300px;
@@ -1214,7 +1208,7 @@ a.success-action {
 }
 
 .notice .zoom-to:hover {
-    background: #bde5aa;
+    background: #d8e1ff;
 }
 
 .notice .zoom-to .icon {
