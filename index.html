@@ -165,9 +165,9 @@
                 .current('en')
                 .current(iD.detect().locale);
 
-            d3.json('keys.json', function(err, keys) {
-                var id = iD();
+            var id = iD();
 
+            d3.json('keys.json', function(err, keys) {
                 id.connection()
                     .keys(keys);
 
