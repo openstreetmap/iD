@@ -1,4 +1,4 @@
-iD.ui.commit = function(map) {
+iD.ui.Commit = function(context) {
     var event = d3.dispatch('cancel', 'save', 'fix');
 
     function zipSame(d) {
@@ -31,110 +31,117 @@ iD.ui.commit = function(map) {
             header = selection.append('div').attr('class', 'header modal-section fillL'),
             body = selection.append('div').attr('class', 'body');
 
-        header.append('h2').text('Save Changes');
+        header.append('h2')
+            .text(t('commit.title'));
 
-        // Comment Box
-        var comment_section = body.append('div').attr('class','modal-section fillD');
-        comment_section.append('textarea')
+        var commentSection = body.append('div')
+            .attr('class', 'modal-section fillD');
+
+        var commentField = commentSection.append('textarea')
             .attr('class', 'changeset-comment')
-            .attr('placeholder', 'Brief Description of your contributions')
-            .property('value',  localStorage.comment || '')
-            .node().select();
+            .attr('placeholder', t('commit.description_placeholder'))
+            .property('value',  context.storage('comment') || '');
 
-        var commit_info =
-            comment_section
-                .append('p')
-                .attr('class','commit-info');
+        commentField.node().select();
 
-                commit_info.append('span').text('The changes you upload as ');
+        var userLink = d3.select(document.createElement('div'));
 
-                var user_link = commit_info.append('a')
-                    .attr('class','user-info')
-                    .text(user.display_name)
-                    .attr('href', connection.url() + '/user/' + user.display_name)
-                    .attr('target', '_blank');
-
-                commit_info.append('span').text(' will be visible on all maps that use OpenStreetMap data:');
+        userLink.append('a')
+            .attr('class','user-info')
+            .text(user.display_name)
+            .attr('href', connection.url() + '/user/' + user.display_name)
+            .attr('target', '_blank');
 
         if (user.image_url) {
-            user_link
-                .append('img')
-                    .attr('src', user.image_url)
-                    .attr('class', 'icon icon-pre-text user-icon');
+            userLink.append('img')
+                .attr('src', user.image_url)
+                .attr('class', 'icon icon-pre-text user-icon');
         }
 
-        // Confirm / Cancel Buttons
-        var buttonwrap = comment_section.append('div')
-            .attr('class', 'buttons cf')
-                .append('div')
-                .attr('class', 'button-wrap joined col4');
+        commentSection.append('p')
+            .attr('class', 'commit-info')
+            .html(t('commit.upload_explanation', {user: userLink.html()}));
 
-        var savebutton = buttonwrap
-            .append('button')
+        // Confirm / Cancel Buttons
+        var buttonWrap = commentSection.append('div')
+            .attr('class', 'buttons cf')
+            .append('div')
+            .attr('class', 'button-wrap joined col4');
+
+        var saveButton = buttonWrap.append('button')
             .attr('class', 'save action col6 button')
             .on('click.save', function() {
-                var comment = d3.select('textarea.changeset-comment').node().value;
+                var comment = commentField.node().value;
                 localStorage.comment = comment;
                 event.save({
                     comment: comment
                 });
             });
-            savebutton.append('span').attr('class','label').text('Save');
 
-        var cancelbutton = buttonwrap.append('button')
+        saveButton.append('span')
+            .attr('class', 'label')
+            .text(t('commit.save'));
+
+        var cancelButton = buttonWrap.append('button')
             .attr('class', 'cancel col6 button')
             .on('click.cancel', function() {
                 event.cancel();
             });
-            cancelbutton.append('span').attr('class','label').text('Cancel');
+
+        cancelButton.append('span')
+            .attr('class', 'label')
+            .text(t('commit.cancel'));
 
         var warnings = body.selectAll('div.warning-section')
-            .data(iD.validate(changes, map.history().graph()))
+            .data(iD.validate(changes, context.graph()))
             .enter()
-            .append('div').attr('class', 'modal-section warning-section fillL');
+            .append('div')
+            .attr('class', 'modal-section warning-section fillL');
 
         warnings.append('h3')
-            .text('Warnings');
+            .text(t('commit.warnings'));
 
-        var warning_li = warnings.append('ul')
+        var warningLi = warnings.append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
             .data(function(d) { return d; })
             .enter()
             .append('li');
 
-        warning_li.append('button')
+        warningLi.append('button')
             .attr('class', 'minor')
             .on('click', event.fix)
             .append('span')
             .attr('class', 'icon warning');
 
-        warning_li.append('strong').text(function(d) {
+        warningLi.append('strong').text(function(d) {
             return d.message;
         });
 
         var section = body.selectAll('div.commit-section')
             .data(['modified', 'deleted', 'created'].filter(changesLength))
             .enter()
-            .append('div').attr('class', 'commit-section modal-section fillL2');
+            .append('div')
+            .attr('class', 'commit-section modal-section fillL2');
 
-        section.append('h3').text(function(d) {
-            return d.charAt(0).toUpperCase() + d.slice(1);
-            })
+        section.append('h3')
+            .text(function(d) { return t('commit.' + d); })
             .append('small')
             .attr('class', 'count')
             .text(changesLength);
 
         var li = section.append('ul')
-            .attr('class','changeset-list')
+            .attr('class', 'changeset-list')
             .selectAll('li')
             .data(function(d) { return zipSame(changes[d]); })
             .enter()
             .append('li');
 
-        li.append('strong').text(function(d) {
-            return (d.count > 1) ? d.type + 's ' : d.type + ' ';
-        });
+        li.append('strong')
+            .text(function(d) {
+                return (d.count > 1) ? d.type + 's ' : d.type + ' ';
+            });
+
         li.append('span')
             .text(function(d) { return d.name; })
             .attr('title', function(d) { return d.tagText; });

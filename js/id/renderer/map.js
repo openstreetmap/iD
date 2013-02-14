@@ -1,6 +1,5 @@
-iD.Map = function() {
-    var connection, history,
-        dimensions = [],
+iD.Map = function(context) {
+    var dimensions = [],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = d3.geo.mercator().scale(1024),
         roundedProjection = iD.svg.RoundProjection(projection),
@@ -20,13 +19,15 @@ iD.Map = function() {
         vertices = iD.svg.Vertices(roundedProjection),
         lines = iD.svg.Lines(roundedProjection),
         areas = iD.svg.Areas(roundedProjection),
-        multipolygons = iD.svg.Multipolygons(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
         labels = iD.svg.Labels(roundedProjection),
         tail = d3.tail(),
         surface, tilegroup;
 
     function map(selection) {
+        context.history()
+            .on('change.map', redraw);
+
         selection.call(zoom);
 
         tilegroup = selection.append('div')
@@ -41,12 +42,16 @@ iD.Map = function() {
                     d3.event.stopPropagation();
                 }
             }, true)
+            .on('mouseup.zoom', function() {
+                if (resetTransform()) redraw();
+            })
             .attr('id', 'surface')
             .call(iD.svg.Surface());
 
 
         map.size(selection.size());
         map.surface = surface;
+        map.tilesurface = tilegroup;
 
         supersurface
             .call(tail);
@@ -57,46 +62,21 @@ iD.Map = function() {
     function drawVector(difference) {
         var filter, all,
             extent = map.extent(),
-            graph = history.graph();
-
-        function addParents(parents) {
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
-                if (only[parent.id] === undefined) {
-                    only[parent.id] = parent;
-                    addParents(graph.parentRelations(parent));
-                }
-            }
-        }
+            graph = context.graph();
 
         if (!difference) {
             all = graph.intersects(extent);
             filter = d3.functor(true);
         } else {
-            var only = {};
-
-            for (var j = 0; j < difference.length; j++) {
-                var id = difference[j],
-                    entity = graph.entity(id);
-
-                // Even if the entity is false (deleted), it needs to be
-                // removed from the surface
-                only[id] = entity;
-
-                if (entity && entity.intersects(extent, graph)) {
-                    addParents(graph.parentWays(only[id]));
-                    addParents(graph.parentRelations(only[id]));
-                }
-            }
-
-            all = _.compact(_.values(only));
+            var complete = difference.complete(extent);
+            all = _.compact(_.values(complete));
             filter = function(d) {
                 if (d.type === 'midpoint') {
                     for (var i = 0; i < d.ways.length; i++) {
-                        if (d.ways[i].id in only) return true;
+                        if (d.ways[i].id in complete) return true;
                     }
                 } else {
-                    return d.id in only;
+                    return d.id in complete;
                 }
             };
         }
@@ -109,7 +89,6 @@ iD.Map = function() {
                 .call(vertices, graph, all, filter)
                 .call(lines, graph, all, filter)
                 .call(areas, graph, all, filter)
-                .call(multipolygons, graph, all, filter)
                 .call(midpoints, graph, all, filter)
                 .call(labels, graph, all, filter, dimensions, !difference);
         }
@@ -118,11 +97,6 @@ iD.Map = function() {
 
     function editOff() {
         surface.selectAll('.layer *').remove();
-    }
-
-    function connectionLoad(err, result) {
-        history.merge(result);
-        redraw(Object.keys(result));
     }
 
     function zoomPan() {
@@ -135,10 +109,10 @@ iD.Map = function() {
         }
 
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
-            iD.ui.flash()
+            iD.ui.flash(context.container())
                 .select('.content')
                 .text('Cannot zoom out further in current mode.');
-            return map.zoom(16);
+            return setZoom(16, true);
         }
 
         projection
@@ -172,17 +146,26 @@ iD.Map = function() {
     }
 
     function redraw(difference) {
+        clearTimeout(timeoutId);
+
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
         // It would result in artifacts where differenced entities are redrawn with
         // one transform and unchanged entities with another.
-        if (resetTransform())
+        if (resetTransform()) {
             difference = undefined;
+        }
 
-        surface.attr('data-zoom', ~~map.zoom());
-        tilegroup.call(background);
+        var zoom = String(~~map.zoom());
+        if (surface.attr('data-zoom') !== zoom) {
+            surface.attr('data-zoom', zoom);
+        }
+
+        if (!difference) {
+            tilegroup.call(background);
+        }
 
         if (map.editable()) {
-            connection.loadTiles(projection, dimensions);
+            context.connection().loadTiles(projection, dimensions);
             drawVector(difference);
         } else {
             editOff();
@@ -195,7 +178,11 @@ iD.Map = function() {
         return map;
     }
 
-    var queueRedraw = _.debounce(redraw, 200);
+    var timeoutId;
+    function queueRedraw() {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(function() { redraw(); }, 300);
+    }
 
     function pointLocation(p) {
         var translate = projection.translate(),
@@ -230,8 +217,8 @@ iD.Map = function() {
         return map;
     };
 
-    function setZoom(z) {
-        if (z === map.zoom())
+    function setZoom(z, force) {
+        if (z === map.zoom() && !force)
             return false;
         var scale = 256 * Math.pow(2, z),
             center = pxCenter(),
@@ -258,7 +245,6 @@ iD.Map = function() {
             t[0] - ll[0] + c[0],
             t[1] - ll[1] + c[1]]);
         zoom.translate(projection.translate());
-        dispatch.move(map);
         return true;
     }
 
@@ -268,7 +254,7 @@ iD.Map = function() {
         t[1] += d[1];
         projection.translate(t);
         zoom.translate(projection.translate());
-        return map;
+        return redraw();
     };
 
     map.size = function(_) {
@@ -328,39 +314,37 @@ iD.Map = function() {
 
     map.extent = function(_) {
         if (!arguments.length) {
-            return iD.geo.Extent(projection.invert([0, dimensions[1]]),
+            return new iD.geo.Extent(projection.invert([0, dimensions[1]]),
                                  projection.invert([dimensions[0], 0]));
         } else {
-            var extent = iD.geo.Extent(_),
-                tl = projection([extent[0][0], extent[1][1]]),
-                br = projection([extent[1][0], extent[0][1]]);
-
-            // Calculate maximum zoom that fits extent
-            var hFactor = (br[0] - tl[0]) / dimensions[0],
-                vFactor = (br[1] - tl[1]) / dimensions[1],
-                hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
-                vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
-                newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
-
-            map.centerZoom(extent.center(), newZoom);
+            var extent = iD.geo.Extent(_);
+            map.centerZoom(extent.center(), map.extentZoom(extent));
         }
     };
 
-    map.flush = function () {
-        connection.flush();
-        history.reset();
-        return map;
+    map.extentZoom = function(_) {
+        var extent = iD.geo.Extent(_),
+            tl = projection([extent[0][0], extent[1][1]]),
+            br = projection([extent[1][0], extent[0][1]]);
+
+        // Calculate maximum zoom that fits extent
+        var hFactor = (br[0] - tl[0]) / dimensions[0],
+            vFactor = (br[1] - tl[1]) / dimensions[1],
+            hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
+            vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
+            newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
+
+        return newZoom;
     };
 
-    map.connection = function(_) {
-        if (!arguments.length) return connection;
-        connection = _;
-        connection.on('load.tile', connectionLoad);
+    map.flush = function() {
+        context.connection().flush();
+        context.history().reset();
         return map;
     };
 
     var usedTails = {};
-    map.tail = function (_) {
+    map.tail = function(_) {
         if (!_ || usedTails[_] === undefined) {
             tail.text(_);
             usedTails[_] = true;
@@ -375,13 +359,6 @@ iD.Map = function() {
     map.minzoom = function(_) {
         if (!arguments.length) return minzoom;
         minzoom = _;
-        return map;
-    };
-
-    map.history = function (_) {
-        if (!arguments.length) return history;
-        history = _;
-        history.on('change.map', redraw);
         return map;
     };
 

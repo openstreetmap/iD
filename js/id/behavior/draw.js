@@ -1,56 +1,75 @@
-iD.behavior.Draw = function(map) {
-    var event = d3.dispatch('move', 'click', 'clickWay', 'clickNode', 'clickMidpoint', 'undo', 'cancel', 'finish'),
+iD.behavior.Draw = function(context) {
+    var event = d3.dispatch('move', 'click', 'clickWay',
+        'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
-        down, surface, hover;
+        hover = iD.behavior.Hover(),
+        closeTolerance = 4,
+        tolerance = 12;
 
     function datum() {
-        if (d3.event.altKey) {
-            return {};
-        } else {
-            return d3.event.target.__data__ || {};
-        }
+        if (d3.event.altKey) return {};
+        else return d3.event.target.__data__ || {};
     }
 
     function mousedown() {
-        down = true;
-    }
 
-    function mouseup() {
-        down = false;
+        function point() {
+            var p = target.node().parentNode;
+            return touchId !== null ? d3.touches(p).filter(function(p) {
+                return p.identifier === touchId;
+            })[0] : d3.mouse(p);
+        }
+
+        var target = d3.select(this),
+            touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
+            time = +new Date(),
+            pos = point();
+
+        target.on('mousemove.draw', null);
+
+        d3.select(window).on('mouseup.draw', function() {
+            target.on('mousemove.draw', mousemove);
+            if (iD.geo.dist(pos, point()) < closeTolerance ||
+                (iD.geo.dist(pos, point()) < tolerance &&
+                (+new Date() - time) < 500)) {
+                click();
+            }
+            if (target.node() === d3.event.target) {
+                d3.select(window).on('click.draw', function() {
+                    d3.select(window).on('click.draw', null);
+                    d3.event.stopPropagation();
+                });
+            }
+        });
     }
 
     function mousemove() {
-        if (!down) {
-            event.move(datum());
-        }
+        event.move(datum());
     }
 
     function click() {
         var d = datum();
         if (d.type === 'way') {
-            var choice = iD.geo.chooseIndex(d, d3.mouse(map.surface.node()), map);
+            var choice = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context);
             event.clickWay(d, choice.loc, choice.index);
 
         } else if (d.type === 'node') {
             event.clickNode(d);
 
-        } else if (d.type === 'midpoint') {
-            event.clickMidpoint(d);
-
         } else {
-            event.click(map.mouseCoordinates());
+            event.click(context.map().mouseCoordinates());
         }
     }
 
     function keydown() {
         if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            surface.call(hover.off);
+            context.uninstall(hover);
         }
     }
 
     function keyup() {
         if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            surface.call(hover);
+            context.install(hover);
         }
     }
 
@@ -70,8 +89,7 @@ iD.behavior.Draw = function(map) {
     }
 
     function draw(selection) {
-        surface = selection;
-        hover = iD.behavior.Hover();
+        context.install(hover);
 
         keybinding
             .on('⌫', backspace)
@@ -81,10 +99,7 @@ iD.behavior.Draw = function(map) {
 
         selection
             .on('mousedown.draw', mousedown)
-            .on('mouseup.draw', mouseup)
-            .on('mousemove.draw', mousemove)
-            .on('click.draw', click)
-            .call(hover);
+            .on('mousemove.draw', mousemove);
 
         d3.select(document)
             .call(keybinding)
@@ -95,12 +110,13 @@ iD.behavior.Draw = function(map) {
     }
 
     draw.off = function(selection) {
+        context.uninstall(hover);
+
         selection
             .on('mousedown.draw', null)
-            .on('mouseup.draw', null)
-            .on('mousemove.draw', null)
-            .on('click.draw', null)
-            .call(hover.off);
+            .on('mousemove.draw', null);
+
+        d3.select(window).on('mouseup.draw', null);
 
         d3.select(document)
             .call(keybinding.off)

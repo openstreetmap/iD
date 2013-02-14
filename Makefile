@@ -30,6 +30,9 @@ all: \
 	js/id/connection.js \
 	js/id/oauth.js \
 	js/id/services/*.js \
+	data/data.js \
+	data/imagery.js \
+	data/deprecated.js \
 	js/id/util.js \
 	js/id/geo.js \
 	js/id/geo/*.js \
@@ -41,8 +44,7 @@ all: \
 	js/id/modes/*.js \
 	js/id/operations.js \
 	js/id/operations/*.js \
-	js/id/controller.js \
-	js/id/graph/*.js \
+	js/id/core/*.js \
 	js/id/renderer/*.js \
 	js/id/svg.js \
 	js/id/svg/*.js \
@@ -50,8 +52,8 @@ all: \
 	js/id/ui/*.js \
 	js/id/validate.js \
 	js/id/end.js \
-	locale/locale.js \
-	locale/en.js
+	js/lib/locale.js \
+	locale/*.js
 
 iD.js: Makefile
 	@rm -f $@

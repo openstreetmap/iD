@@ -2,7 +2,8 @@ describe('iD.OAuth', function() {
     var o;
 
     beforeEach(function() {
-        o = iD.OAuth();
+        context = iD();
+        o = iD.OAuth(context);
     });
 
     describe('#logout', function() {

@@ -1,4 +1,4 @@
-iD.Connection = function() {
+iD.Connection = function(context) {
 
     var event = d3.dispatch('auth', 'load'),
         url = 'http://www.openstreetmap.org',
@@ -9,7 +9,13 @@ iD.Connection = function() {
         keys,
         inflight = {},
         loadedTiles = {},
-        oauth = iD.OAuth().url(url);
+        oauth = iD.OAuth(context).url(url),
+        ndStr = 'nd',
+        tagStr = 'tag',
+        memberStr = 'member',
+        nodeStr = 'node',
+        wayStr = 'way',
+        relationStr = 'relation';
 
     function changesetUrl(changesetId) {
         return url + '/browse/changeset/' + changesetId;
@@ -36,92 +42,99 @@ iD.Connection = function() {
     }
 
     function getNodes(obj) {
-        var nelems = obj.getElementsByTagName('nd'), nodes = new Array(nelems.length);
-        for (var i = 0, l = nelems.length; i < l; i++) {
-            nodes[i] = 'n' + nelems[i].attributes.ref.nodeValue;
+        var elems = obj.getElementsByTagName(ndStr),
+            nodes = new Array(elems.length);
+        for (var i = 0, l = elems.length; i < l; i++) {
+            nodes[i] = 'n' + elems[i].attributes.ref.nodeValue;
         }
         return nodes;
     }
 
     function getTags(obj) {
-        var tags = {}, tagelems = obj.getElementsByTagName('tag');
-        for (var i = 0, l = tagelems.length; i < l; i++) {
-            var item = tagelems[i];
-            tags[item.attributes.k.nodeValue] = item.attributes.v.nodeValue;
+        var elems = obj.getElementsByTagName(tagStr),
+            tags = {};
+        for (var i = 0, l = elems.length; i < l; i++) {
+            var attrs = elems[i].attributes;
+            tags[attrs.k.nodeValue] = attrs.v.nodeValue;
         }
         return tags;
     }
 
     function getMembers(obj) {
-        var elems = obj.getElementsByTagName('member'),
+        var elems = obj.getElementsByTagName(memberStr),
             members = new Array(elems.length);
-
         for (var i = 0, l = elems.length; i < l; i++) {
+            var attrs = elems[i].attributes;
             members[i] = {
-                id: elems[i].attributes.type.nodeValue[0] + elems[i].attributes.ref.nodeValue,
-                type: elems[i].attributes.type.nodeValue,
-                role: elems[i].attributes.role.nodeValue
+                id: attrs.type.nodeValue[0] + attrs.ref.nodeValue,
+                type: attrs.type.nodeValue,
+                role: attrs.role.nodeValue
             };
         }
         return members;
     }
 
-    function nodeData(obj) {
-        var o = { type: 'node', tags: getTags(obj) };
-        for (var i = 0, l = obj.attributes.length; i < l; i++) {
-            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
-        }
-        if (o.lon && o.lat) {
-            o.loc = [parseFloat(o.lon), parseFloat(o.lat)];
-            delete o.lon; delete o.lat;
-        }
-        o.id = iD.Entity.id.fromOSM('node', o.id);
-        return new iD.Node(o);
-    }
+    var parsers = {
+        node: function nodeData(obj) {
+            var attrs = obj.attributes;
+            return new iD.Node({
+                id: iD.Entity.id.fromOSM(nodeStr, attrs.id.nodeValue),
+                loc: [parseFloat(attrs.lon.nodeValue), parseFloat(attrs.lat.nodeValue)],
+                version: attrs.version.nodeValue,
+                changeset: attrs.changeset.nodeValue,
+                user: attrs.user.nodeValue,
+                uid: attrs.uid.nodeValue,
+                visible: attrs.visible.nodeValue,
+                timestamp: attrs.timestamp.nodeValue,
+                tags: getTags(obj)
+            });
+        },
 
-    function wayData(obj) {
-        var o = { type: 'way', nodes: getNodes(obj),
-            tags: getTags(obj)
-        };
-        for (var i = 0, l = obj.attributes.length; i < l; i++) {
-            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
-        }
-        o.id = iD.Entity.id.fromOSM('way', o.id);
-        return new iD.Way(o);
-    }
+        way: function wayData(obj) {
+            var attrs = obj.attributes;
+            return new iD.Way({
+                id: iD.Entity.id.fromOSM(wayStr, attrs.id.nodeValue),
+                version: attrs.version.nodeValue,
+                changeset: attrs.changeset.nodeValue,
+                user: attrs.user.nodeValue,
+                uid: attrs.uid.nodeValue,
+                visible: attrs.visible.nodeValue,
+                timestamp: attrs.timestamp.nodeValue,
+                tags: getTags(obj),
+                nodes: getNodes(obj)
+            });
+        },
 
-    function relationData(obj) {
-        var o = {
-            type: 'relation', members: getMembers(obj),
-            tags: getTags(obj)
-        };
-        for (var i = 0, l = obj.attributes.length; i < l; i++) {
-            o[obj.attributes[i].nodeName] = obj.attributes[i].nodeValue;
+        relation: function relationData(obj) {
+            var attrs = obj.attributes;
+            return new iD.Relation({
+                id: iD.Entity.id.fromOSM(relationStr, attrs.id.nodeValue),
+                version: attrs.version.nodeValue,
+                changeset: attrs.changeset.nodeValue,
+                user: attrs.user.nodeValue,
+                uid: attrs.uid.nodeValue,
+                visible: attrs.visible.nodeValue,
+                timestamp: attrs.timestamp.nodeValue,
+                tags: getTags(obj),
+                members: getMembers(obj)
+            });
         }
-        o.id = iD.Entity.id.fromOSM('relation', o.id);
-        return new iD.Relation(o);
-    }
+    };
 
     function parse(dom) {
         if (!dom || !dom.childNodes) return new Error('Bad request');
-        var root = dom.childNodes[0];
-        var entities = {};
+
+        var root = dom.childNodes[0],
+            children = root.childNodes,
+            entities = {};
 
         var i, o, l;
-        for (i = 0, l = root.childNodes.length; i < l; i++) {
-            switch(root.childNodes[i].nodeName) {
-                case 'node':
-                    o = nodeData(root.childNodes[i]);
-                    entities[o.id] = o;
-                    break;
-                case 'way':
-                    o = wayData(root.childNodes[i]);
-                    entities[o.id] = o;
-                    break;
-                case 'relation':
-                    o = relationData(root.childNodes[i]);
-                    entities[o.id] = o;
-                    break;
+        for (i = 0, l = children.length; i < l; i++) {
+            var child = children[i],
+                parser = parsers[child.nodeName];
+            if (parser) {
+                o = parser(child);
+                entities[o.id] = o;
             }
         }
 
@@ -187,21 +200,21 @@ iD.Connection = function() {
                 content: JXON.stringify(connection.changesetJXON({
                     imagery_used: imagery_used.join(';'),
                     comment: comment,
-                    created_by: 'iD ' + (version || '')
+                    created_by: 'iD ' + iD.version
                 }))
-            }, function (err, changeset_id) {
+            }, function(err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({
                     method: 'POST',
                     path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
                     content: JXON.stringify(connection.osmChangeJXON(user.id, changeset_id, changes))
-                }, function (err) {
+                }, function(err) {
                     if (err) return callback(err);
                     oauth.xhr({
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close'
-                    }, function (err) {
+                    }, function(err) {
                         callback(err, changeset_id);
                     });
                 });
@@ -210,13 +223,14 @@ iD.Connection = function() {
 
     function userDetails(callback) {
         function done(err, user_details) {
+            if (err) return callback(err);
             var u = user_details.getElementsByTagName('user')[0],
                 img = u.getElementsByTagName('img'),
                 image_url = '';
             if (img && img[0].getAttribute('href')) {
                 image_url = img[0].getAttribute('href');
             }
-            callback(connection.user({
+            callback(undefined, connection.user({
                 display_name: u.attributes.display_name.nodeValue,
                 image_url: image_url,
                 id: u.attributes.id.nodeValue
@@ -327,12 +341,6 @@ iD.Connection = function() {
             if (callback) callback(err, res);
         }
         return oauth.authenticate(done);
-    };
-
-    connection.version = function(_) {
-        if (!arguments.length) return version;
-        version = _;
-        return connection;
     };
 
     connection.bboxFromAPI = bboxFromAPI;

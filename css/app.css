@@ -19,10 +19,11 @@ body {
 }
 
 .limiter {
+    position: relative;
     max-width: 1200px;
 }
 
-div, textarea, input, span, ul, li, ol, a, button {
+div, textarea, input, form, span, ul, li, ol, a, button {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -93,7 +94,6 @@ a:hover {
     color:#597be7;
 }
 
-
 textarea,
 input[type=text],
 input[type=url],
@@ -124,7 +124,7 @@ input[type=text]:focus {
 }
 
 input[type=text] {
-    padding:4px 10px;
+    padding:5px 10px;
     height:30px;
     resize: none;
 }
@@ -185,10 +185,12 @@ ul li { list-style: none;}
 ul.toggle-list li a {
     font-weight: bold;
     color: #333;
-    padding: 10px;
-    border-top: 1px solid white;
+    padding: 5px 10px;
     display:block;
-    border-top: 1px solid rgba(0, 0, 0, .5);
+    border-top: 1px solid #ccc;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
 }
 ul.toggle-list li a:hover { background-color: #ececec;}
 
@@ -225,7 +227,7 @@ ul.link-list li:last-child {
 
 .fillD {
     background:rgba(0,0,0,.8);
-    color: #a9a9a9;
+    color: #6C6C6C;
 }
 
 
@@ -268,16 +270,17 @@ button:hover {
     background-color: #ececec;
 }
 
-button.col3:hover {
-    background: #bde5aa;
-}
-
 button.active {
     cursor:url(../img/cursor-pointing.png) 6 1, auto;
 }
 
-button.active:not([disabled]) {
-    background: #6bc641;
+button.disabled {
+    background: #6c6c6c;
+    cursor: auto;
+}
+
+button.active:not([disabled]):not(.disabled) {
+    background: #7092ff;
 }
 
 button.minor {
@@ -322,7 +325,7 @@ button.centered {
     border-radius:0 4px 4px 0;
 }
 
-button.Browse .label { display: none;}
+button.browse .label { display: none;}
 
 button.action {
     background: #7092ff;
@@ -349,8 +352,7 @@ button.save .count {
 button.save.has-count .count {
     display: block;
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: 5px;
     background: rgba(255, 255, 255, .5);
     color: #333;
     padding: 10px;
@@ -453,8 +455,8 @@ button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
 button[disabled] .icon.add-line   { background-position: -40px -40px;}
 button[disabled] .icon.add-area   { background-position: -60px -40px;}
-button[disabled] .icon.undo       { background-position: -80px -40px;}
-button[disabled] .icon.redo       { background-position: -100px -40px;}
+button.disabled  .icon.undo       { background-position: -80px -40px;}
+button.disabled  .icon.redo       { background-position: -100px -40px;}
 button[disabled] .apply.icon      { background-position: -120px -40px;}
 button[disabled] .save.icon       { background-position: -140px -40px;}
 button[disabled] .close.icon      { background-position: -160px -40px;}
@@ -479,7 +481,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon-operation-circularize   { background-position: -20px -140px;}
 .icon-operation-straighten    { background-position: -40px -140px;}
 .icon-operation-split         { background-position: -60px -140px;}
-.icon-operation-unjoin        { background-position: -80px -140px;}
+.icon-operation-disconnect    { background-position: -80px -140px;}
 .icon-operation-reverse       { background-position: -100px -140px;}
 .icon-operation-move          { background-position: -120px -140px;}
 .icon-operation-merge         { background-position: -140px -140px;}
@@ -643,14 +645,15 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .map-control > button.active:hover {
-    background: #6bc641;
+    background: #7092ff;
 }
 
 .map-overlay {
-    width: 150px;
-    position:absolute;
-    left:40px;
-    top:0;
+    right: 75%;
+    max-width: 260px;
+    min-width: 210px;
+    position: fixed;
+    left: 40px;
     display: block;
     border-radius: 4px;
 }
@@ -685,10 +688,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     font-size:10px;
     padding:0 5px 3px 5px;
     background: white;
-    border:0;
     text-transform: uppercase;
     font-weight: bold;
-
 }
 
 .layerswitcher-control .adjustments button:hover {
@@ -725,9 +726,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .layerswitcher-control .nudge {
     text-indent: -9999px;
     overflow: hidden;
-    width:20px;
+    width:16.6666%;
     border-radius: 0;
-    margin-right:1px;
+    border-right: 1px solid rgba(0, 0, 0, .5);
     position: relative;
 }
 
@@ -770,7 +771,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .layerswitcher-control .reset {
-    width: 45px;
+    width: 33.3333%;
     border-radius: 0 4px 4px 0;
 }
 
@@ -804,8 +805,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .layerswitcher-control li:hover .select-box,
 .layerswitcher-control li.selected .select-box {
-    border: 2px solid #6bc641;
-    background: rgba(107, 198, 65, .5);
+    border: 2px solid #7092ff;
+    background: rgba(89, 123, 231, .5);
     opacity: .5;
 }
 .layerswitcher-control li.selected:hover .select-box,
@@ -822,14 +823,29 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* Geocoder */
 
-.geocode-control {
+.geocode-control, .geocode-control form {
     top:150px;
 }
 
+.geocode-control form {
+    padding: 4px;
+}
+
 .geocode-control input {
-    width: 140px;
-    border: 1px solid #ccc;
-    margin: 4px;
+    width: 100%;
+}
+
+.geocode-control div.content {
+    z-index: 100;
+    top: 190px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.geocode-control div.content span {
+    display: inline-block;
+    border-bottom: 1px solid #333;
+    padding: 5px 10px;
 }
 
 /* Geolocator */
@@ -876,6 +892,10 @@ img.tile {
     -o-transform-origin:0 0;
 }
 
+#surface {
+  position: static;
+}
+
 #tile-g {
   opacity: 0.5;
 }
@@ -904,17 +924,17 @@ img.tile {
     color:#fff;
 }
 
-#user-list a:not(:last-child):after {
+.user-list a:not(:last-child):after {
     content: ', ';
 }
 
 /* Account Information */
 
-.user-container {
+.account {
     float: left;
 }
 
-.user-container .logout {
+.account .logout {
     margin-left:10px;
     border-left: 1px solid white;
     padding-left: 10px;
@@ -1054,7 +1074,6 @@ div.typeahead a:first-child {
 
 .modal-splash {
     width: 33.3333%;
-    left: 33.3333%;
 }
 
 .logo {
@@ -1120,11 +1139,6 @@ div.typeahead a:first-child {
     padding: 20px;
 }
 
-.modal-section .buttons {
-    padding-top: 10px;
-    width: 100%;
-}
-
 .modal-section img.wiki-image {
     max-width: 100%;
     max-height: 300px;
@@ -1188,7 +1202,7 @@ a.success-action {
 }
 
 .notice .zoom-to:hover {
-    background: #bde5aa;
+    background: #d8e1ff;
 }
 
 .notice .zoom-to .icon {
@@ -1307,7 +1321,6 @@ a.success-action {
     color: #222;
     font-size: 10px;
     padding: 0px 7px;
-    text-transform: uppercase;
     font-weight: bold;
     display: inline-block;
     border-radius: 2px;
@@ -1383,6 +1396,13 @@ a.success-action {
             border-radius: 4px;
 }
 
+.lasso-box {
+    fill-opacity:0.2;
+    fill: #bde5aa;
+    stroke: #000;
+    stroke-width: 1;
+}
+
 /* Media Queries
 ------------------------------------------------------- */
 
@@ -1428,7 +1448,7 @@ a.success-action {
     width: 100%;
 }
 
-.combobox {
+div.combobox {
     width:155px;
     z-index: 9999;
     display: none;

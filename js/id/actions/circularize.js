@@ -1,53 +1,59 @@
-iD.actions.Circularize = function(wayId, map) {
+iD.actions.Circularize = function(wayId, projection, count) {
+    count = count || 12;
+
+    function closestIndex(nodes, loc) {
+        var idx, min = Infinity, dist;
+        for (var i = 0; i < nodes.length; i++) {
+            dist = iD.geo.dist(nodes[i].loc, loc);
+            if (dist < min) {
+                min = dist;
+                idx = i;
+            }
+        }
+        return idx;
+    }
 
     var action = function(graph) {
         var way = graph.entity(wayId),
-            nodes = graph.childNodes(way),
-            tags = {}, key, role;
-
-        var points = nodes.map(function(n) {
-                return map.projection(n.loc);
-            }),
+            nodes = _.uniq(graph.childNodes(way)),
+            points = nodes.map(function(n) { return projection(n.loc); }),
             centroid = d3.geom.polygon(points).centroid(),
             radius = d3.median(points, function(p) {
                 return iD.geo.dist(centroid, p);
             }),
-            circular_nodes = [];
+            ids = [];
 
-        for (var i = 0; i < 12; i++) {
-            circular_nodes.push(iD.Node({ loc: map.projection.invert([
-                centroid[0] + Math.cos((i / 12) * Math.PI * 2) * radius,
-                centroid[1] + Math.sin((i / 12) * Math.PI * 2) * radius])
-            }));
+        for (var i = 0; i < count; i++) {
+            var node,
+                loc = projection.invert([
+                    centroid[0] + Math.cos((i / 12) * Math.PI * 2) * radius,
+                    centroid[1] + Math.sin((i / 12) * Math.PI * 2) * radius]);
+
+            if (nodes.length) {
+                var idx = closestIndex(nodes, loc);
+                node = nodes[idx];
+                nodes.splice(idx, 1);
+            } else {
+                node = iD.Node();
+            }
+
+            ids.push(node.id);
+            graph = graph.replace(node.move(loc));
         }
 
-        circular_nodes.push(circular_nodes[0]);
+        ids.push(ids[0]);
+        graph = graph.replace(way.update({nodes: ids}));
 
         for (i = 0; i < nodes.length; i++) {
-            if (graph.parentWays(nodes[i]).length > 1) {
-                var closest, closest_dist = Infinity, dist;
-                for (var j = 0; j < circular_nodes.length; j++) {
-                    dist = iD.geo.dist(circular_nodes[j].loc, nodes[i].loc);
-                    if (dist < closest_dist) {
-                        closest_dist = dist;
-                        closest = j;
-                    }
-                }
-                circular_nodes.splice(closest, 1, nodes[i]);
-                if (closest === 0) circular_nodes.splice(circular_nodes.length - 1, 1, nodes[i]);
-                else if (closest === circular_nodes.length - 1) circular_nodes.splice(0, 1, nodes[i]);
-            } else {
-                graph = graph.remove(nodes[i]);
-            }
+            graph.parentWays(nodes[i]).forEach(function(parent) {
+                graph = graph.replace(parent.replaceNode(nodes[i].id,
+                    ids[closestIndex(graph.childNodes(way), nodes[i].loc)]));
+            });
+
+            graph = iD.actions.DeleteNode(nodes[i].id)(graph);
         }
 
-        for (i = 0; i < circular_nodes.length; i++) {
-            graph = graph.replace(circular_nodes[i]);
-        }
-
-        return graph.replace(way.update({
-            nodes: _.pluck(circular_nodes, 'id')
-        }));
+        return graph;
     };
 
     action.enabled = function(graph) {

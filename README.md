@@ -2,30 +2,29 @@
 
 [![Build Status](https://secure.travis-ci.org/systemed/iD.png)](https://travis-ci.org/systemed/iD)
 
-[![](http://ideditor.com/img/editor.png)](http://geowiki.com/iD/)
-
-[Try the online demo of the most recent code.](http://geowiki.com/iD/) and
-[open issues for bugs and ideas!](https://github.com/systemed/iD/issues)
+[![](http://ideditor.com/img/editor.png)](http://ideditor.com/)
 
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](http://www.openstreetmap.org/) editor.
 * It's intentionally simple. It lets you do the most basic tasks while
   not breaking other people's data.
-* We support modern browsers. Data is rendered with [d3](http://d3js.org/).
+* It supports modern browsers. Data is rendered with [d3](http://d3js.org/).
 
 ## Participate!
 
-* [Read NOTES.md, our ongoing dev journal](https://github.com/systemed/iD/blob/master/NOTES.md)
-* Fork this project. We eagerly accept pull requests.
-* See [open issues in the issue tracker if you're looking for something to do](https://github.com/systemed/iD/issues?state=open)
+* [Try out the latest stable release](http://geowiki.com/iD/)
+* [Read up on Contributing and the code style of iD](CONTRIBUTING.md)
+* See [open issues in the issue tracker](https://github.com/systemed/iD/issues?state=open) if you're looking for something to do
 
-To run the code locally, just fork this project and run it from a local webserver.
-With a Mac, you can enable Web Sharing and drop this in your website directory.
+## Installation
 
-If you have Python handy, just `cd` into `iD` and run
+To run the current development version, fork this project and serve it locally.
+If you have Python handy, just `cd` into the project root directory and run
 
      python -m SimpleHTTPServer
+
+Or, with a Mac, you can enable Web Sharing and clone iD into your website directory.
 
 Come on in, the water's lovely. More help? Ping RichardF, tmcw, or jfire on IRC
 (`irc.oftc.net`, in `#osm-dev` or `#osm`), on the OSM mailing lists or at

@@ -1,60 +1,87 @@
-iD.modes.MoveWay = function(wayId) {
+iD.modes.MoveWay = function(context, wayId) {
     var mode = {
-        id: 'move-way'
+        id: 'move-way',
+        button: 'browse'
     };
 
     var keybinding = d3.keybinding('move-way');
 
     mode.enter = function() {
-        var map = mode.map,
-            history = mode.history,
-            graph = history.graph(),
-            selection = map.surface,
-            controller = mode.controller,
-            projection = map.projection,
-            way = graph.entity(wayId),
-            origin = d3.mouse(selection.node()),
-            annotation = t('operations.move.annotation.' + way.geometry(graph));
+        var origin = context.map().mouseCoordinates(),
+            nudgeInterval,
+            annotation = t('operations.move.annotation.' + context.geometry(wayId));
 
         // If intiated via keyboard
         if (!origin[0] && !origin[1]) origin = null;
 
-        history.perform(
+        context.perform(
             iD.actions.Noop(),
             annotation);
 
+        function edge(point, size) {
+            var pad = [30, 100, 30, 100];
+            if (point[0] > size[0] - pad[0]) return [-10, 0];
+            else if (point[0] < pad[2]) return [10, 0];
+            else if (point[1] > size[1] - pad[1]) return [0, -10];
+            else if (point[1] < pad[3]) return [0, 10];
+            return null;
+        }
+
+        function startNudge(nudge) {
+            if (nudgeInterval) window.clearInterval(nudgeInterval);
+            nudgeInterval = window.setInterval(function() {
+                context.pan(nudge);
+            }, 50);
+        }
+
+        function stopNudge() {
+            if (nudgeInterval) window.clearInterval(nudgeInterval);
+            nudgeInterval = null;
+        }
+
+        function point() {
+            return d3.mouse(context.map().surface.node());
+        }
+
         function move() {
-            var p = d3.mouse(selection.node()),
-                delta = origin ?
-                    [p[0] - origin[0], p[1] - origin[1]] :
-                    [0, 0];
+            var p = point();
 
-            origin = p;
+            var delta = origin ?
+                [p[0] - context.projection(origin)[0],
+                p[1] - context.projection(origin)[1]] :
+                [0, 0];
 
-            history.replace(
-                iD.actions.MoveWay(wayId, delta, projection),
+            var nudge = edge(p, context.map().size());
+            if (nudge) startNudge(nudge);
+            else stopNudge();
+
+            origin = context.map().mouseCoordinates();
+
+            context.replace(
+                iD.actions.MoveWay(wayId, delta, context.projection),
                 annotation);
         }
 
         function finish() {
             d3.event.stopPropagation();
-            controller.enter(iD.modes.Select([way.id], true));
+            context.enter(iD.modes.Select(context, [wayId], true));
         }
 
         function cancel() {
-            history.pop();
-            controller.enter(iD.modes.Select([way.id], true));
+            context.pop();
+            context.enter(iD.modes.Select(context, [wayId], true));
         }
 
         function undone() {
-            controller.enter(iD.modes.Browse());
+            context.enter(iD.modes.Browse(context));
         }
 
-        selection
+        context.surface()
             .on('mousemove.move-way', move)
             .on('click.move-way', finish);
 
-        history.on('undone.move-way', undone);
+        context.history()
+            .on('undone.move-way', undone);
 
         keybinding
             .on('⎋', cancel)
@@ -65,15 +92,12 @@ iD.modes.MoveWay = function(wayId) {
     };
 
     mode.exit = function() {
-        var map = mode.map,
-            history = mode.history,
-            selection = map.surface;
-
-        selection
+        context.surface()
             .on('mousemove.move-way', null)
             .on('click.move-way', null);
 
-        history.on('undone.move-way', null);
+        context.history()
+            .on('undone.move-way', null);
 
         keybinding.off();
     };

@@ -1,4 +1,4 @@
-iD.behavior.Hash = function(controller, map) {
+iD.behavior.Hash = function(context) {
     var s0 = null, // cached location.hash
         lat = 90 - 1e-8; // allowable latitude range
 
@@ -27,13 +27,13 @@ iD.behavior.Hash = function(controller, map) {
     };
 
     var move = _.throttle(function() {
-        var s1 = formatter(map);
+        var s1 = formatter(context.map());
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
-    }, 100);
+    }, 500);
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
-        if (parser(map, (s0 = location.hash).substring(1))) {
+        if (parser(context.map(), (s0 = location.hash).substring(1))) {
             move(); // replace bogus hash
         }
     }
@@ -42,40 +42,39 @@ iD.behavior.Hash = function(controller, map) {
     // do so before any features are loaded. thus wait for the feature to
     // be loaded and then select
     function willselect(id) {
-        map.on('drawn.hash', function() {
-            var entity = map.history().graph().entity(id);
-            if (entity === undefined) return;
-            else selectoff();
-            controller.enter(iD.modes.Select([entity.id]));
-            map.on('drawn.hash', null);
+        context.map().on('drawn.hash', function() {
+            if (!context.entity(id)) return;
+            selectoff();
+            context.enter(iD.modes.Select(context, [id]));
         });
-        controller.on('enter.hash', function() {
-            if (controller.mode.id !== 'browse') selectoff();
+
+        context.on('enter.hash', function() {
+            if (context.mode().id !== 'browse') selectoff();
         });
     }
 
     function selectoff() {
-        map.on('drawn.hash', null);
+        context.map().on('drawn.hash', null);
     }
 
     function hash() {
-        map.on('move.hash', move);
+        context.map()
+            .on('move.hash', move);
 
         d3.select(window)
             .on('hashchange.hash', hashchange);
 
         if (location.hash) {
             var q = iD.util.stringQs(location.hash.substring(1));
-            if (q.id) {
-                willselect(q.id);
-            }
+            if (q.id) willselect(q.id);
             hashchange();
-            hash.hadHash = true;
+            if (q.map) hash.hadHash = true;
         }
     }
 
     hash.off = function() {
-        map.on('move.hash', null);
+        context.map()
+            .on('move.hash', null);
 
         d3.select(window)
             .on('hashchange.hash', null);

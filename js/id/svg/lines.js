@@ -1,6 +1,6 @@
 iD.svg.Lines = function(projection) {
 
-    var arrowtext = '►\u3000\u3000',
+    var arrowtext = '►\u3000\u3000\u3000',
         alength;
 
     var highway_stack = {
@@ -34,19 +34,25 @@ iD.svg.Lines = function(projection) {
     }
 
     return function drawLines(surface, graph, entities, filter) {
-        function drawPaths(group, lines, filter, classes, lineString) {
+        function drawPaths(group, lines, filter, klass, lineString) {
+            var tagClasses = iD.svg.TagClasses();
+
+            if (klass === 'stroke') {
+                tagClasses.tags(iD.svg.MultipolygonMemberTags(graph));
+            }
+
             var paths = group.selectAll('path.line')
                 .filter(filter)
                 .data(lines, iD.Entity.key);
 
             paths.enter()
                 .append('path')
-                .attr('class', classes);
+                .attr('class', 'way line ' + klass);
 
             paths
                 .order()
                 .attr('d', lineString)
-                .call(iD.svg.TagClasses())
+                .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
 
             paths.exit()
@@ -56,13 +62,16 @@ iD.svg.Lines = function(projection) {
         }
 
         if (!alength) {
-            var arrow = surface.append('text').text(arrowtext);
+            var container = surface.append('g')
+                    .attr('class', 'oneway'),
+                arrow = container.append('text')
+                    .attr('class', 'textpath')
+                    .text(arrowtext);
             alength = arrow.node().getComputedTextLength();
-            arrow.remove();
+            container.remove();
         }
 
-        var lines = [],
-            lineStrings = {};
+        var lines = [];
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -80,13 +89,13 @@ iD.svg.Lines = function(projection) {
             stroke = surface.select('.layer-stroke'),
             defs   = surface.select('defs'),
             text   = surface.select('.layer-text'),
-            shadows = drawPaths(shadow, lines, filter, 'way line shadow', lineString),
-            casings = drawPaths(casing, lines, filter, 'way line casing', lineString),
-            strokes = drawPaths(stroke, lines, filter, 'way line stroke', lineString);
+            shadows = drawPaths(shadow, lines, filter, 'shadow', lineString),
+            casings = drawPaths(casing, lines, filter, 'casing', lineString),
+            strokes = drawPaths(stroke, lines, filter, 'stroke', lineString);
 
         // Determine the lengths of oneway paths
         var lengths = {},
-            oneways = strokes.filter(function (d) { return d.isOneWay(); }).each(function(d) {
+            oneways = strokes.filter(function(d) { return d.isOneWay(); }).each(function(d) {
                 lengths[d.id] = Math.floor(this.getTotalLength() / alength);
             }).data();
 

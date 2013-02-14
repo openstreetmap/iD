@@ -17,7 +17,7 @@ iD.svg.MemberClasses = function(graph) {
                 classes += ' member';
             }
 
-            relations.forEach(function (relation) {
+            relations.forEach(function(relation) {
                 classes += ' member-type-' + relation.tags.type;
                 classes += ' member-role-' + relation.memberById(d.id).role;
             });

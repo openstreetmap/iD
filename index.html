@@ -9,8 +9,8 @@
 
         <!-- mobile devices -->
         <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name='apple-mobile-web-app-capable' content='yes' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 
         <script src='js/lib/lodash.js'></script>
         <script src='js/lib/d3.v3.js'></script>
@@ -34,19 +34,24 @@
         <script src='js/id/presetdata.js'></script>
         <script src='js/id/services/taginfo.js'></script>
 
+        <script src='data/data.js'></script>
+        <script src='data/deprecated.js'></script>
+        <script src='data/imagery.js'></script>
+        <script src='data/discarded.js'></script>
+
         <script src="js/id/geo.js"></script>
         <script src="js/id/geo/extent.js"></script>
 
         <script src='js/id/renderer/background.js'></script>
         <script src='js/id/renderer/background_source.js'></script>
         <script src='js/id/renderer/map.js'></script>
+        <script src='js/id/renderer/layers.js'></script>
 
         <script src="js/id/svg.js"></script>
         <script src="js/id/svg/areas.js"></script>
         <script src="js/id/svg/lines.js"></script>
         <script src="js/id/svg/member_classes.js"></script>
         <script src="js/id/svg/midpoints.js"></script>
-        <script src="js/id/svg/multipolygons.js"></script>
         <script src="js/id/svg/points.js"></script>
         <script src="js/id/svg/surface.js"></script>
         <script src="js/id/svg/tag_classes.js"></script>
@@ -54,15 +59,18 @@
         <script src="js/id/svg/labels.js"></script>
 
         <script src="js/id/ui.js"></script>
+        <script src='js/id/ui/attribution.js'></script>
         <script src='js/id/ui/radial_menu.js'></script>
         <script src='js/id/ui/inspector.js'></script>
         <script src='js/id/ui/modal.js'></script>
+        <script src='js/id/ui/cmd.js'></script>
         <script src='js/id/ui/confirm.js'></script>
         <script src='js/id/ui/commit.js'></script>
         <script src='js/id/ui/success.js'></script>
         <script src='js/id/ui/loading.js'></script>
-        <script src='js/id/ui/userpanel.js'></script>
+        <script src='js/id/ui/account.js'></script>
         <script src='js/id/ui/layerswitcher.js'></script>
+        <script src='js/id/ui/modes.js'></script>
         <script src='js/id/ui/contributors.js'></script>
         <script src='js/id/ui/geocoder.js'></script>
         <script src='js/id/ui/geolocate.js'></script>
@@ -70,33 +78,45 @@
         <script src='js/id/ui/flash.js'></script>
         <script src='js/id/ui/save.js'></script>
         <script src='js/id/ui/splash.js'></script>
+        <script src='js/id/ui/restore.js'></script>
         <script src='js/id/ui/tag_reference.js'></script>
         <script src='js/id/ui/key_reference.js'></script>
         <script src='js/id/ui/preset.js'></script>
         <script src='js/id/ui/presetsearch.js'></script>
         <script src='js/id/ui/presetfavs.js'></script>
+        <script src='js/id/ui/lasso.js'></script>
+        <script src='js/id/ui/source_switch.js'></script>
+        <script src='js/id/ui/toggle.js'></script>
+        <script src='js/id/ui/undo_redo.js'></script>
+        <script src='js/id/ui/zoom.js'></script>
 
         <script src='js/id/actions.js'></script>
         <script src="js/id/actions/add_midpoint.js"></script>
         <script src='js/id/actions/add_entity.js'></script>
         <script src='js/id/actions/add_vertex.js'></script>
         <script src='js/id/actions/change_tags.js'></script>
+        <script src='js/id/actions/connect.js'></script>
+        <script src='js/id/actions/delete_multiple.js'></script>
         <script src='js/id/actions/delete_node.js'></script>
+        <script src="js/id/actions/delete_relation.js"></script>
         <script src="js/id/actions/delete_way.js"></script>
+        <script src='js/id/actions/disconnect.js'></script>
+        <script src='js/id/actions/join.js'></script>
+        <script src='js/id/actions/merge.js'></script>
         <script src='js/id/actions/move_node.js'></script>
         <script src='js/id/actions/move_way.js'></script>
         <script src='js/id/actions/circularize.js'></script>
+        <script src='js/id/actions/orthogonalize.js'></script>
         <script src='js/id/actions/noop.js'></script>
-        <script src='js/id/actions/reverse_way.js'></script>
-        <script src='js/id/actions/split_way.js'></script>
-        <script src='js/id/actions/unjoin_node.js'></script>
+        <script src='js/id/actions/reverse.js'></script>
+        <script src='js/id/actions/split.js'></script>
 
         <script src='js/id/behavior.js'></script>
         <script src='js/id/behavior/add_way.js'></script>
         <script src='js/id/behavior/drag.js'></script>
-        <script src='js/id/behavior/drag_midpoint.js'></script>
         <script src='js/id/behavior/drag_node.js'></script>
         <script src='js/id/behavior/draw.js'></script>
+        <script src='js/id/behavior/lasso.js'></script>
         <script src='js/id/behavior/draw_way.js'></script>
         <script src='js/id/behavior/hash.js'></script>
         <script src='js/id/behavior/hover.js'></script>
@@ -114,41 +134,59 @@
 
         <script src='js/id/operations.js'></script>
         <script src='js/id/operations/circularize.js'></script>
+        <script src='js/id/operations/orthogonalize.js'></script>
         <script src='js/id/operations/delete.js'></script>
+        <script src='js/id/operations/disconnect.js'></script>
+        <script src='js/id/operations/merge.js'></script>
         <script src='js/id/operations/move.js'></script>
         <script src='js/id/operations/reverse.js'></script>
         <script src='js/id/operations/split.js'></script>
-        <script src='js/id/operations/unjoin.js'></script>
 
-        <script src='js/id/graph/entity.js'></script>
-        <script src='js/id/graph/graph.js'></script>
-        <script src='js/id/graph/history.js'></script>
-        <script src='js/id/graph/node.js'></script>
-        <script src='js/id/graph/relation.js'></script>
-        <script src='js/id/graph/way.js'></script>
+        <script src='js/id/core/difference.js'></script>
+        <script src='js/id/core/entity.js'></script>
+        <script src='js/id/core/graph.js'></script>
+        <script src='js/id/core/history.js'></script>
+        <script src='js/id/core/node.js'></script>
+        <script src='js/id/core/relation.js'></script>
+        <script src='js/id/core/way.js'></script>
 
-        <script src='js/id/controller.js'></script>
-        <script src='js/id/validate.js'></script>
         <script src='js/id/connection.js'></script>
+        <script src='js/id/validate.js'></script>
 
-        <script src='locale/locale.js'></script>
+        <script src='js/lib/locale.js'></script>
+        <script src='locale/da.js'></script>
+        <script src='locale/de.js'></script>
         <script src='locale/en.js'></script>
+        <script src='locale/es.js'></script>
+        <script src='locale/fr.js'></script>
+        <script src='locale/ja.js'></script>
+        <script src='locale/lv.js'></script>
+        <script src='locale/tr.js'></script>
+
     </head>
     <body>
-        <div id="iD"></div><script>
-            locale.current = 'en';
+        <div id='iD'></div><script>
+            locale
+                .current('en')
+                .current(iD.detect().locale);
+
+            var id = iD();
+
             d3.json('keys.json', function(err, keys) {
                 d3.json('presets/presets_josm.json', function(err, presets_data) {
-                    var id = iD();
-                    id.connection().keys(keys)
-                        .presetData(iD.presetData().data(presets_data))
-                        .url('http://api06.dev.openstreetmap.org');
-                    d3.select("#iD").call(id);
+
+                    id.connection()
+                        .keys(keys)
+                        .presetData(iD.presetData().data(presets_data));
+
+                    d3.select("#iD")
+                        .call(id.ui())
                 });
             });
-        </script></body>
+        </script>
 
-<script type="text/javascript">
+<!-- google analytics -->
+<script type='text/javascript'>
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-38039653-2']);
 _gaq.push(['_trackPageview']);
@@ -156,6 +194,26 @@ _gaq.push(['_trackPageview']);
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+  // javascript errors
+  var lastev = '';
+  window.onerror = function(message, file, lineNumber) {
+      var ev = ['_trackEvent', 'error', file + ':' + lineNumber, message + ''];
+      if (ev.join(',') !== lastev) {
+          _gaq.push(ev);
+          lastev = ev.join(',');
+      }
+  };
 })();
+
 </script>
+
+<!-- crazyegg -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+</body>
 </html>

@@ -14,6 +14,8 @@ describe("iD.svg.Midpoints", function () {
             line = iD.Way({nodes: [a.id, b.id]}),
             graph = iD.Graph([a, b, line]);
 
+        // If no vertices are drawn, no midpoints are drawn. This dependence needs to be removed
+        surface.call(iD.svg.Vertices(projection), graph, [a], filter);
         surface.call(iD.svg.Midpoints(projection), graph, [line], filter);
 
         expect(surface.select('.midpoint').datum().loc).to.eql([25, 0]);
@@ -42,6 +44,8 @@ describe("iD.svg.Midpoints", function () {
             graph = iD.Graph([a, b, c, d, l1, l2, l3, l4]),
             ab = function (d) { return d.id === [a.id, b.id].sort().join("-"); };
 
+        // If no vertices are drawn, no midpoints are drawn. This dependence needs to be removed
+        surface.call(iD.svg.Vertices(projection), graph, [a], filter);
         surface.call(iD.svg.Midpoints(projection), graph, [l1, l2, l3, l4], filter);
 
         expect(surface.selectAll('.midpoint').filter(ab).datum().ways).to.eql([

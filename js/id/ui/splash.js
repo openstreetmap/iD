@@ -1,16 +1,32 @@
-iD.ui.splash = function() {
-    var modal = iD.ui.modal();
+iD.ui.Splash = function(context) {
+    return function(selection) {
+        if (context.storage('sawSplash'))
+            return;
 
-    modal.select('.modal')
-        .attr('class', 'modal-splash modal')
+        context.storage('sawSplash', true);
 
-    var introModal = modal.select('.content')
-        .append('div')
-        .attr('class', 'modal-section fillL');
+        var modal = iD.ui.modal(selection);
 
-        introModal.append('div').attr('class','logo');
+        modal.select('.modal')
+            .attr('class', 'modal-splash modal');
 
-        introModal.append('div').html("<h2 class>Welcome to the iD OpenStreetMap editor</h2><p>This is development version 0.0.0-alpha1. For more information see <a href='http://ideditor.com/'>ideditor.com</a> and report bugs at <a href='https://github.com'>github.com.systemed/iD</a>.</p>");
+        var introModal = modal.select('.content')
+            .append('div')
+            .attr('class', 'modal-section fillL');
 
-    return modal;
+        introModal.append('div')
+            .attr('class', 'logo');
+
+        var div = introModal.append('div');
+
+        div.append("h2")
+            .text(t('splash.welcome'));
+
+        div.append("p")
+            .html(t('splash.text', {
+                version: iD.version,
+                website: '<a href="http://ideditor.com/">ideditor.com</a>',
+                github: '<a href="https://github.com/systemed/iD">github.com</a>'
+            }));
+    }
 };
