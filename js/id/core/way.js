@@ -47,12 +47,14 @@ _.extend(iD.Way.prototype, {
     //   - doesn't have area=no
     //   - doesn't have highway tag
     isArea: function() {
-        return this.tags.area === 'yes' ||
-            (this.isClosed() &&
-                !_.isEmpty(this.tags) &&
-                this.tags.area !== 'no' &&
-                !this.tags.highway &&
-                !this.tags.barrier);
+        if (this.tags.area === 'yes')
+            return true;
+        if (!this.isClosed() || this.tags.area === 'no')
+            return false;
+        for (var key in this.tags)
+            if (key in iD.Way.areaKeys)
+                return true;
+        return false;
     },
 
     isDegenerate: function() {
@@ -138,3 +140,7 @@ _.extend(iD.Way.prototype, {
         }
     }
 });
+
+iD.Way.areaKeys = iD.util.trueObj(['area', 'building', 'leisure', 'tourism', 'ruins',
+    'historic', 'landuse', 'military', 'natural', 'amenity', 'shop', 'man_made',
+    'public_transport']);

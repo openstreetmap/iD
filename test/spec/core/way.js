@@ -99,16 +99,16 @@ describe('iD.Way', function() {
             expect(iD.Way({nodes: ['n1', 'n1']}).isArea()).to.equal(false);
         });
 
-        it('returns true if the way is closed and has tags', function() {
-            expect(iD.Way({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).to.equal(true);
+        it('returns true if the way is closed and has a key in iD.Way.areaKeys', function() {
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: {building: 'yes'}}).isArea()).to.equal(true);
+        });
+
+        it('returns false if the way is closed and has no keys in iD.Way.areaKeys', function() {
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).to.equal(false);
         });
 
         it('returns false if the way is closed and has tag area=no', function() {
-            expect(iD.Way({tags: { area: 'no' }, nodes: ['n1', 'n1']}).isArea()).to.equal(false);
-        });
-
-        it('returns false if the way is closed and has highway tag', function() {
-            expect(iD.Way({tags: { highway: 'residential' }, nodes: ['n1', 'n1']}).isArea()).to.equal(false);
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: {area: 'no', building: 'yes'}}).isArea()).to.equal(false);
         });
     });
 
