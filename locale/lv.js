@@ -63,7 +63,7 @@ locale.lv = {
         },
         orthogonalize: {
             title: "Ortogonalizēt",
-            description: "Pārveidot, lai visi leņķi būtu tasnleņķi.",
+            description: "Pārveidot, lai visi leņķi būtu taisnleņķi.",
             key: "Q",
             annotation: {
                 line: "Līnijas leņķi pārvedoti par taisnleņķiem.",
@@ -132,22 +132,22 @@ locale.lv = {
     nothing_to_redo: "Nav nekā, ko atsaukt",
 
     just_edited: "Jūs nupat rediģējāt OpenStreetMap",
-    browser_notice: "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 to kartes rediģēšanai",
+    browser_notice: "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 kartes rediģēšanai",
     view_on_osm: "Apskatīt OSM lapu",
-    zoom_in_edit: "pietuviniet, lai rediģētu karti",
+    zoom_in_edit: "pietuviniet, lai labotu karti",
     logout: "atslēgties",
     report_a_bug: "ziņot par kļūdu",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Saglabāt izmaiņas",
+        description_placeholder: "Īss apraksts par jūsu ieguldījumu",
+        upload_explanation: "Izmaiņas, kuras jūs augšupielādējat kā {user}, būs pieejamas visās kartēs, kuras izmanto OpenStreetMap datus.",
+        save: "Saglabāt",
+        cancel: "Atcelt",
+        warnings: "Brīdinājumi",
+        modified: "Mainīts",
+        deleted: "Dzēsts",
+        created: "Izveidots"
     },
 
     contributors: {
@@ -162,43 +162,43 @@ locale.lv = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Parādīt manu atrašanās vietu"
     },
 
     inspector: {
-        no_documentation_combination: "Šai apzīmējumu kombinācijai nav piejama dokumetācija",
-        no_documentation_key: "There is no documentation available for this key",
+        no_documentation_combination: "Šai apzīmējumu kombinācijai nav piejama dokumentācija",
+        no_documentation_key: "Šai vērtībai nav piejama dokumentācija",
         new_tag: "Jauns apzīmējums",
-        edit_tags: "Rediģēt apzīmējumus",
+        edit_tags: "Labot apzīmējumus",
         okay: "Labi",
-        view_on_osm: "View on OSM"
+        view_on_osm: "Apskatīt OSM"
     },
 
     layerswitcher: {
         title: "Fons",
         description: "Fona iestatījumi",
-        percent_brightness: "{opacity}% gaišums",
-        fix_misalignment: "Labot fona nolīdzināšanu",
-        reset: "Pārstatīt"
+        percent_brightness: "{opacity}% caurspīdīgums",
+        fix_misalignment: "Labot fona nobīdi",
+        reset: "Atiestatīt"
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Jums ir nesaglabātas izmaiņas no iepriekšējās labošanas sesijas. Vai vēlaties ielādēt šīs izmaiņas?",
+        restore: "Ielādēt",
+        reset: "Atmest"
     },
 
     save: {
         title: "Saglabāt",
         help: "Saglabā izmaiņas, padarot tās redzamas citiem",
-        error: "Kļūda. Nevarēja saglabāt maiņas",
+        error: "Kļūda. Nevarēja saglabāt izmaiņas",
         uploading: "Augšupielādē",
         unsaved_changes: "Jums ir nesaglabātas izmaiņas"
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "Laipni lūgti iD OpenStreetMap redaktorā",
+        text: "Šī ir izstrādes versija {version}. Papildus informācijai skatīt {website} un ziņot par kļūdām {github}."
     },
 
     source_switch: {
