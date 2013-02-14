@@ -20,10 +20,10 @@ locale.da = {
             description: "Træk rundt og zoom på kortet."
         },
         draw_area: {
-            tail: "Klik her for at tilføje punkter til dit område. Click the first point to finish the area."
+            tail: "Klik her for at tilføje punkter til dit område. Klik på første punkt igen for at færdiggøre området."
         },
         draw_line: {
-            tail: "Click to add more points to the line. Click on other lines to connect to them, and double-click to end the line."
+            tail: "Klik her for at tilføje flere punkter til linjen. Klik på andre linjer for at forbinde dem og dobbeltklik for at afslutte linjen."
         }
     },
 
@@ -42,32 +42,32 @@ locale.da = {
         },
         'continue': {
             annotation: {
-                line: "Forsatte en linje.",
-                area: "Forsatte et område."
+                line: "Fortsatte en linje.",
+                area: "Fortsatte et område."
             }
         },
         cancel_draw: {
-            annotation: "Annulleret indtegning."
+            annotation: "Annullerede indtegning."
         },
         change_tags: {
             annotation: "Ændret tags."
         },
         circularize: {
-            title: "Circularize",
-            description: "Make this round.",
+            title: "Cirkularisere",
+            description: "Lav denne rund.",
             key: "O",
             annotation: {
-                line: "Made a line circular.",
-                area: "Made an area circular."
+                line: "Lavede en linje rund.",
+                area: "Lave et område rundt."
             }
         },
         orthogonalize: {
-            title: "Orthogonalize",
-            description: "Square these corners.",
+            title: "Ortogonalisering",
+            description: "Gør disse hjørner firkantet.",
             key: "Q",
             annotation: {
-                line: "Squared the corners of a line.",
-                area: "Squared the corners of an area."
+                line: "Lavede hjørner på en linje firkantet.",
+                area: "Lavede hjørner på et område firkantet."
             }
         },
         'delete': {
@@ -85,77 +85,77 @@ locale.da = {
         },
         connect: {
             annotation: {
-                point: "Connected a way to a point.",
-                vertex: "Connected a way to another.",
-                line: "Connected a way to a line.",
-                area: "Connected a way to an area."
+                point: "Forbandt en vej til et punkt.",
+                vertex: "Forbandt en vej til en anden vej.",
+                line: "Forbandt en vej til en linje.",
+                area: "Forbandt en vej til et område."
             }
         },
         disconnect: {
-            title: "Disconnect",
-            description: "Disconnect these ways from each other.",
+            title: "Afbryd",
+            description: "Afbryd disse veje fra hinanden.",
             key: "D",
-            annotation: "Disconnected ways."
+            annotation: "Afbrød vejene."
         },
         merge: {
-            title: "Merge",
-            description: "Merge these lines.",
+            title: "Flet",
+            description: "Flet disse linjer.",
             key: "C",
-            annotation: "Merged {n} lines."
+            annotation: "Flettede {n} linjer."
         },
         move: {
             title: "Flyt",
-            description: "Flyt dette til anden lokation.",
+            description: "Flyt dette til en anden lokation.",
             key: "M",
             annotation: {
-                point: "Flyttede et punktMoved.",
+                point: "Flyttede et punkt.",
                 vertex: "Flyttede en node i en vej.",
                 line: "Flyttede en linje.",
                 area: "Flyttede et område."
             }
         },
         reverse: {
-            title: "Reverse",
-            description: "Make this line go in the opposite direction.",
+            title: "Omvendt",
+            description: "Lad denne linje gå i modsat retning.",
             key: "V",
-            annotation: "Reversed a line."
+            annotation: "Omvendte en linje."
         },
         split: {
             title: "Del op",
-            description: "Del op i to vej ved dette punkt.",
+            description: "Del op i to veje ved dette punkt.",
             key: "X",
-            annotation: "Del op en vej."
+            annotation: "Del en vej op."
         }
     },
 
-    nothing_to_undo: "Nothing to undo.",
-    nothing_to_redo: "Nothing to redo.",
+    nothing_to_undo: "Ingenting at fortryde.",
+    nothing_to_redo: "Ingenting at gendanne.",
 
-    just_edited: "Du har lige rettede i OpenStreetMap!",
-    browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    just_edited: "Du har lige rettet i OpenStreetMap!",
+    browser_notice: "Dette værktøj er understøttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og højere. Vær venlig at opgradere din browser eller benyt Potlatch 2 for at rette i kortet.",
     view_on_osm: "Vis på OSM",
-    zoom_in_edit: "zoom ind for at rette kortet",
+    zoom_in_edit: "zoom ind for at rette på kortet",
     logout: "log ud",
-    report_a_bug: "report a bug",
+    report_a_bug: "rapportere en fejl",
 
     layerswitcher: {
-        title: "Background",
-        description: "Background Settings",
-        percent_brightness: "{opacity}% brightness",
-        fix_misalignment: "Fix misalignment",
-        reset: "nulstill"
+        title: "Baggrund",
+        description: "Baggrundsindstillinger",
+        percent_brightness: "{opacity}% lysstyrke",
+        fix_misalignment: "Lav fejljustering",
+        reset: "nulstil"
     },
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Gem ændringer",
+        description_placeholder: "Kort beskrivelse af dine bidrag",
+        upload_explanation: "Dine ændringer vil som brugernavn {user} blive synligt på alle kort der bruger OpenStreetMap data.",
+        save: "Gem",
+        cancel: "Fortryd",
+        warnings: "Advarsler",
+        modified: "Modificeret",
+        deleted: "Slettede",
+        created: "Lavede"
     },
 
     contributors: {
@@ -164,41 +164,41 @@ locale.da = {
     },
 
     geocoder: {
-        title: "Find  et sted",
+        title: "Find et sted",
         placeholder: "find et sted",
         no_results: "Kunne ikke finde '{name}'"
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Vis min lokalitet"
     },
 
     inspector: {
         no_documentation_combination:  "Der er ingen dokumentation for denne tag kombination",
-        no_documentation_key: "Der er ingen dokumenation tilgængelig for denne nøgle",
-        new_tag: "Nyt Tag",
+        no_documentation_key: "Der er ingen dokumentation tilgængelig for denne nøgle",
+        new_tag: "Nyt tag",
         edit_tags: "Ret tags",
         okay: "Ok",
-        view_on_osm: "View on OSM"
+        view_on_osm: "Vis på OSM"
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Du har ændringer fra forrige session som ikke er gemt. Ønsker du at gendanne disse ændringer?",
+        restore: "Gendan",
+        reset: "Nulstil"
     },
 
     save: {
         title: "Gem",
-        help: "Gem ændringer til OpenStreetMap gør dem synlige for andre brugere",
+        help: "Gem ændringer til OpenStreetMap vil gøre dem synlige for andre brugere",
         error: "Der skete en fejl da du prøvede at gemme",
         uploading: "Gemmer nu ændringer til OpenStreetMap.",
         unsaved_changes: "Du har ændringer der ikke er gemt endnu",
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "Velkommen til iD OpenStreetMap værktøjet",
+        text: "Dette er udviklingsversion {version}. Mere information se {website} og rapportere fejl på {github}."
     },
 
     source_switch: {
@@ -207,9 +207,9 @@ locale.da = {
     },
 
     tag_reference: {
-        description: "Description",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        description: "Beskrivelse",
+        on_wiki: "{tag} på wiki.osm.org",
+        used_with: "brugt med {type}"
     },
 
     zoom: {
@@ -218,10 +218,10 @@ locale.da = {
     },
 
     validations: {
-        untagged_point: "Untagged point which is not part of a line or area",
-        untagged_line: "Untagged line",
-        untagged_area: "Untagged area",
-        tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
-        deprecated_tags: "Deprecated tags: {tags}"
+        untagged_point: "Mangler et tag på punkt som ikke er del af en linje eller område",
+        untagged_line: "Mangler tag på linje",
+        untagged_area: "Mangler tag på område",
+        tag_suggests_area: "Dette tag {tag} mener denne linje skule være et område, men dette er ikke et område",
+        deprecated_tags: "Uønskede tags: {tags}"
     }
 };
