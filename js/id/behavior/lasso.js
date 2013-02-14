@@ -49,7 +49,9 @@ iD.behavior.Lasso = function(context) {
                 .on('mouseup.lasso', null);
 
             if (d3.event.clientX !== pos[0] || d3.event.clientY !== pos[1]) {
-                var selected = context.graph().intersects(extent);
+                var selected = context.graph().intersects(extent).filter(function (entity) {
+                    return entity.type === 'node';
+                });
 
                 if (selected.length) {
                     context.enter(iD.modes.Select(context, _.pluck(selected, 'id')));
