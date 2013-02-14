@@ -28,8 +28,29 @@ iD.modes.Select = function(context, selection, initial) {
         }
     }
 
+    function positionMenu() {
+        var entity = singular();
+
+        if (entity && entity.type === 'node') {
+            radialMenu.center(context.projection(entity.loc));
+        } else {
+            radialMenu.center(d3.mouse(context.surface().node()));
+        }
+    }
+
+    function showMenu() {
+        context.surface()
+            .call(radialMenu.close)
+            .call(radialMenu);
+    }
+
     mode.selection = function() {
         return selection;
+    };
+
+    mode.reselect = function() {
+        positionMenu();
+        showMenu();
     };
 
     mode.enter = function() {
@@ -166,18 +187,16 @@ iD.modes.Select = function(context, selection, initial) {
             .classed('selected', true);
 
         radialMenu = iD.ui.RadialMenu(operations);
-        var showMenu = d3.event && !initial;
+        var show = d3.event && !initial;
 
-        if (showMenu) {
-            if (entity && entity.type === 'node') {
-                radialMenu.center(context.projection(entity.loc));
-            } else {
-                radialMenu.center(d3.mouse(context.surface().node()));
-            }
+        if (show) {
+            positionMenu();
         }
 
         timeout = window.setTimeout(function() {
-            if (showMenu) context.surface().call(radialMenu);
+            if (show) {
+                showMenu();
+            }
 
             context.surface()
                 .on('dblclick.select', dblclick);

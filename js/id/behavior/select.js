@@ -8,9 +8,11 @@ iD.behavior.Select = function(context) {
 
             } else if (!d3.event.shiftKey) {
                 // Avoid re-entering Select mode with same entity.
-                if (context.selection().length !== 1 || context.selection()[0] !== datum.id)
+                if (context.selection().length !== 1 || context.selection()[0] !== datum.id) {
                     context.enter(iD.modes.Select(context, [datum.id]));
-
+                } else {
+                    context.mode().reselect();
+                }
             } else if (context.selection().indexOf(datum.id) >= 0) {
                 var selection = _.without(context.selection(), datum.id);
                 context.enter(selection.length ?
