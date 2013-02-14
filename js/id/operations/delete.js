@@ -1,34 +1,20 @@
-iD.operations.Delete = function(entityId) {
-    var operation = function(history) {
-        var graph = history.graph(),
-            entity = graph.entity(entityId),
-            geometry = entity.geometry(graph);
+iD.operations.Delete = function(selection, context) {
+    var operation = function() {
+        var annotation;
 
-        if (geometry === 'vertex') {
-            history.perform(
-                iD.actions.DeleteNode(entityId),
-                'deleted a vertex');
-
-        } else if (geometry === 'point') {
-            history.perform(
-                iD.actions.DeleteNode(entityId),
-                'deleted a point');
-
-        } else if (geometry === 'line') {
-            history.perform(
-                iD.actions.DeleteWay(entityId),
-                'deleted a line');
-
-        } else if (geometry === 'area') {
-            history.perform(
-                iD.actions.DeleteWay(entityId),
-                'deleted an area');
+        if (selection.length === 1) {
+            annotation = t('operations.delete.annotation.' + context.geometry(selection[0]));
+        } else {
+            annotation = t('operations.delete.annotation.multiple', {n: selection.length});
         }
+
+        context.perform(
+            iD.actions.DeleteMultiple(selection),
+            annotation);
     };
 
-    operation.available = function(graph) {
-        var entity = graph.entity(entityId);
-        return _.contains(['vertex', 'point', 'line', 'area'], entity.geometry(graph));
+    operation.available = function() {
+        return true;
     };
 
     operation.enabled = function() {
@@ -36,7 +22,9 @@ iD.operations.Delete = function(entityId) {
     };
 
     operation.id = "delete";
-    operation.title = "Delete";
+    operation.key = t('operations.delete.key');
+    operation.title = t('operations.delete.title');
+    operation.description = t('operations.delete.description');
 
     return operation;
 };

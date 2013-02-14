@@ -8,7 +8,7 @@ iD.actions.DeleteWay = function(wayId) {
                 graph = graph.replace(parent.removeMember(wayId));
             });
 
-        way.nodes.forEach(function (nodeId) {
+        way.nodes.forEach(function(nodeId) {
             var node = graph.entity(nodeId);
 
             // Circular ways include nodes more than once, so they

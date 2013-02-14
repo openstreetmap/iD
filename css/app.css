@@ -19,10 +19,11 @@ body {
 }
 
 .limiter {
+    position: relative;
     max-width: 1200px;
 }
 
-div, textarea, input, span, ul, li, ol, a, button {
+div, textarea, input, form, span, ul, li, ol, a, button {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -33,6 +34,7 @@ div, textarea, input, span, ul, li, ol, a, button {
 a, button, input, textarea {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
     -webkit-touch-callout:none;
+    cursor:url(../img/cursor-pointer.png) 6 1, auto;
 }
 
 h2 {
@@ -92,7 +94,6 @@ a:hover {
     color:#597be7;
 }
 
-
 textarea,
 input[type=text] {
     background-color: white;
@@ -120,7 +121,7 @@ input[type=text]:focus {
 }
 
 input[type=text] {
-    padding:4px 10px;
+    padding:5px 10px;
     height:30px;
     resize: none;
 }
@@ -181,11 +182,14 @@ ul li { list-style: none;}
 ul.toggle-list li a {
     font-weight: bold;
     color: #333;
-    padding: 10px;
-    border-top: 1px solid white;
+    padding: 5px 10px;
     display:block;
-    border-top: 1px solid rgba(0, 0, 0, .5);
+    border-top: 1px solid #ccc;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
 }
+ul.toggle-list li a:hover { background-color: #ececec;}
 
 ul.toggle-list .icon {
     float: left;
@@ -220,7 +224,7 @@ ul.link-list li:last-child {
 
 .fillD {
     background:rgba(0,0,0,.8);
-    color: #a9a9a9;
+    color: #6C6C6C;
 }
 
 
@@ -246,7 +250,6 @@ form.hide {
 
 button {
     line-height:20px;
-    position: relative;
     border:0;
     color:#222;
     background: white;
@@ -254,7 +257,6 @@ button {
     font-size:12px;
     display: inline-block;
     height:40px;
-    cursor:url(../img/cursor-pointer.png) 6 1, auto;
     border-radius:4px;
     -webkit-transition: background 100ms;
     -moz-transition: background 100ms;
@@ -265,16 +267,17 @@ button:hover {
     background-color: #ececec;
 }
 
-button.col3:hover {
-    background: #bde5aa;
-}
-
 button.active {
     cursor:url(../img/cursor-pointing.png) 6 1, auto;
 }
 
-button.active:not([disabled]) {
-    background: #6bc641;
+button.disabled {
+    background: #6c6c6c;
+    cursor: auto;
+}
+
+button.active:not([disabled]):not(.disabled) {
+    background: #7092ff;
 }
 
 button.minor {
@@ -283,11 +286,11 @@ button.minor {
     width: 20px;
     border: 0;
     box-shadow: none;
-    background-color: transparent;
+    background: rgba(0,0,0,.5);
 }
 
 button.minor:hover {
-    background: white;
+    background: #222;
 }
 
 button.centered {
@@ -319,6 +322,8 @@ button.centered {
     border-radius:0 4px 4px 0;
 }
 
+button.browse .label { display: none;}
+
 button.action {
     background: #7092ff;
 }
@@ -344,16 +349,15 @@ button.save .count {
 button.save.has-count .count {
     display: block;
     position: absolute;
-    left: 115%;
-    top: 0;
-    bottom: 0;
-    background: rgba(255,255,255,.5);
+    top: 5px;
+    background: rgba(255, 255, 255, .5);
     color: #333;
     padding: 10px;
     height: 30px;
     line-height: 12px;
     border-radius: 4px;
     margin: auto;
+    margin-left: 8.3333%;
 }
 
 button.save.has-count .count::before {
@@ -416,12 +420,12 @@ button[disabled] .label {
 }
 
 /* Definitions for every icon */
-.icon.browse     { background-position:   0px -20px;}
-.icon.add-point  { background-position: -20px -20px;}
-.icon.add-line   { background-position: -40px -20px;}
-.icon.add-area   { background-position: -60px -20px;}
-.icon.undo       { background-position: -80px -20px;}
-.icon.redo      { background-position: -100px -20px;}
+.icon.browse     { background-position:   0px 0px;}
+.icon.add-point  { background-position: -20px 0px;}
+.icon.add-line   { background-position: -40px 0px;}
+.icon.add-area   { background-position: -60px 0px;}
+.icon.undo       { background-position: -80px 0px;}
+.icon.redo      { background-position: -100px 0px;}
 
 .icon.apply      { background-position: -120px 0px;}
 .icon.save       { background-position: -140px 0px;}
@@ -431,6 +435,7 @@ button[disabled] .label {
 .icon.inspect    { background-position: -220px 0px;}
 .icon.zoom-in    { background-position: -240px 0px;}
 .icon.zoom-out   { background-position: -260px 0px;}
+.icon.plus       { background-position: -240px 0px;}
 .icon.geocode    { background-position: -280px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
@@ -438,16 +443,7 @@ button[disabled] .label {
 .icon.geolocate  { background-position: -360px 0px;}
 .icon.warning    { background-position: -380px 0px;}
 
-.icon.close-modal{ background-position: -200px -40px;}
-
-.icon.invert.zoom-in    { background-position: -240px -40px;}
-
-.icon.browse     { background-position:   0px 0px;}
-.icon.add-point  { background-position: -20px 0px;}
-.icon.add-line   { background-position: -40px 0px;}
-.icon.add-area   { background-position: -60px 0px;}
-.icon.undo       { background-position: -80px 0px;}
-.icon.redo      { background-position: -100px 0px;}
+.icon.close-modal { background-position: -200px 0px;}
 
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
@@ -456,8 +452,8 @@ button[disabled] .icon.browse     { background-position:   0px -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
 button[disabled] .icon.add-line   { background-position: -40px -40px;}
 button[disabled] .icon.add-area   { background-position: -60px -40px;}
-button[disabled] .icon.undo       { background-position: -80px -40px;}
-button[disabled] .icon.redo       { background-position: -100px -40px;}
+button.disabled  .icon.undo       { background-position: -80px -40px;}
+button.disabled  .icon.redo       { background-position: -100px -40px;}
 button[disabled] .apply.icon      { background-position: -120px -40px;}
 button[disabled] .save.icon       { background-position: -140px -40px;}
 button[disabled] .close.icon      { background-position: -160px -40px;}
@@ -471,12 +467,23 @@ button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
-.icon.big-line    { background-position: 0px -80px;}
-.icon.big-point   { background-position: -40px -80px;}
-.icon.big-area    { background-position: -80px -80px;}
-.icon.big-vertex { background-position: -120px -80px;}
-.icon.big-inspect { background-position: -160px -80px;}
+.icon.big-line     { background-position: 0px -80px;}
+.icon.big-point    { background-position: -40px -80px;}
+.icon.big-area     { background-position: -80px -80px;}
+.icon.big-vertex   { background-position: -120px -80px;}
+.icon.big-inspect  { background-position: -160px -80px;}
 .icon.big-relation { background-position: -200px -80px;}
+
+.icon-operation-delete        { background-position: 0px -140px;}
+.icon-operation-circularize   { background-position: -20px -140px;}
+.icon-operation-straighten    { background-position: -40px -140px;}
+.icon-operation-split         { background-position: -60px -140px;}
+.icon-operation-disconnect    { background-position: -80px -140px;}
+.icon-operation-reverse       { background-position: -100px -140px;}
+.icon-operation-move          { background-position: -120px -140px;}
+.icon-operation-merge         { background-position: -140px -140px;}
+.icon-operation-orthogonalize { background-position: -160px -140px;}
+
 
 /* Toggle icon is special */
 .toggle.icon                   { background-position: 0px -180px;}
@@ -609,19 +616,20 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     width: 60%;
 }
 
-.inspector-inner .add-tag-row {
-    width: 100%;
-}
-
-.inspector-inner .add-tag-row button {
+.inspector-inner .add-tag {
+    width: 20%;
+    height: 30px;
+    border-top: 0;
+    background: rgba(0,0,0,.5);
     border-radius: 0 0 4px 4px;
 }
 
-.inspector-inner .add-tag {
-    width: 40%;
-    height: 30px;
-    border: 1px solid #ccc;
-    border-top: 0;
+.inspector-inner .add-tag:hover {
+    background: rgba(0,0,0,.8);
+}
+
+.inspector-inner .add-tag  .label {
+    display: none;
 }
 
 /* Map Controls */
@@ -631,25 +639,27 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position:absolute;
 }
 
-.map-control button {
-    width: 40px;
-    background: rgba(0,0,0,.8);
-    border-radius: 0 4px 4px 0;
+.map-control > button {
+    width: 30px;
+    background: rgba(0,0,0,.5);
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
-.map-control button:hover {
-    background: rgba(0, 0, 0, .9);
+.map-control > button:hover {
+    background: rgba(0, 0, 0, .8);
 }
 
-.map-control button.active:hover {
-    background: #6bc641;
+.map-control > button.active:hover {
+    background: #7092ff;
 }
 
 .map-overlay {
-    width: 150px;
-    position:absolute;
-    left:50px;
-    top:0;
+    right: 75%;
+    max-width: 260px;
+    min-width: 210px;
+    position: fixed;
+    left: 40px;
     display: block;
     border-radius: 4px;
 }
@@ -658,43 +668,117 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .zoombuttons {
     top:70px;
-    width: 40px;
+    width: 30px;
 }
 
 .zoombuttons button.zoom-in {
     border-radius:0 4px 0 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .5);
 }
 
 .zoombuttons button.zoom-out {
     border-top:0;
-    border-radius:0 0 4px 0;
 }
 
 /* Layer Switcher */
 
 .layerswitcher-control {
-    top:210px;
+    top:190px;
+}
+
+.nudge-container {
+    margin-top: 10px;
 }
 
 .layerswitcher-control .adjustments button {
-    opacity:0.5;
-    height:20px;
+    height:30px;
     font-size:10px;
-    font-weight:normal;
     padding:0 5px 3px 5px;
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .layerswitcher-control .adjustments button:hover {
-    opacity: 1;
+    background:#ececec;
+}
+
+.layerswitcher-control .alignment-toggle {
+    display: block;
+    padding-left: 12px;
+    position: relative;
+}
+
+.layerswitcher-control .alignment-toggle:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    left: 0;
+    top: 4px;
+    border-top:  4px solid transparent;
+    border-bottom:  4px solid transparent;
+    border-left:  8px solid #7092ff;
+}
+
+.layerswitcher-control .alignment-toggle.expanded:before {
+    border-top:  8px solid #7092ff;
+    border-bottom: 0;
+    border-right:  4px solid transparent;
+    border-left:  4px solid transparent;
+
 }
 
 .layerswitcher-control .nudge {
-    width:20px;
-    margin-right:2px;
+    text-indent: -9999px;
+    overflow: hidden;
+    width:16.6666%;
+    border-radius: 0;
+    border-right: 1px solid rgba(0, 0, 0, .5);
+    position: relative;
+}
+
+.layerswitcher-control .nudge::after {
+    content: '';
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0; right: 0; top: 0; bottom: 0;
+    height: 0;
+    width: 0;
+}
+
+.layerswitcher-control .nudge.left::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-left:  5px solid #222;
+}
+
+.layerswitcher-control .nudge.right::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-right:  5px solid #222;
+}
+
+.layerswitcher-control .nudge.top::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-bottom:  5px solid #222;
+}
+
+.layerswitcher-control .nudge.bottom::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-top:  5px solid #222;
+}
+
+.layerswitcher-control .nudge:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.layerswitcher-control .reset {
+    width: 33.3333%;
+    border-radius: 0 4px 4px 0;
 }
 
 .opacity-options-wrapper {
@@ -708,6 +792,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: absolute;
     right: 10px;
     top: 10px;
+    border: 1px solid #ddd;
 }
 
 .opacity-options li {
@@ -720,14 +805,14 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .opacity-options li .select-box{
     position: absolute;
     width:20px;
-    height:20px;
+    height:18px;
     z-index: 9999;
 }
 
 .layerswitcher-control li:hover .select-box,
 .layerswitcher-control li.selected .select-box {
-    border: 2px solid #6bc641;
-    background: rgba(107, 198, 65, .5);
+    border: 2px solid #7092ff;
+    background: rgba(89, 123, 231, .5);
     opacity: .5;
 }
 .layerswitcher-control li.selected:hover .select-box,
@@ -739,23 +824,45 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background:#222;
     display:inline-block;
     width:20px;
-    height:20px;
+    height:18px;
 }
 
 /* Geocoder */
 
-.geocode-control {
-    top:160px;
+.geocode-control, .geocode-control form {
+    top:150px;
+}
+
+.geocode-control form {
+    padding: 4px;
 }
 
 .geocode-control input {
-    width: 140px;
-    border: 1px solid #ccc;
-    margin: 4px;
+    width: 100%;
 }
 
+.geocode-control div.content {
+    z-index: 100;
+    top: 190px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.geocode-control div.content span {
+    display: inline-block;
+    border-bottom: 1px solid #333;
+    padding: 5px 10px;
+}
+
+/* Geolocator */
+
 .geolocate-control {
-    top:260px;
+    top:230px;
+}
+
+.geolocate-control button {
+    border-radius: 0 0 4px 0;
+    border-bottom: 0;
 }
 
 /* Map
@@ -791,6 +898,10 @@ img.tile {
     -o-transform-origin:0 0;
 }
 
+#surface {
+  position: static;
+}
+
 #tile-g {
   opacity: 0.5;
 }
@@ -819,17 +930,17 @@ img.tile {
     color:#fff;
 }
 
-#user-list a:not(:last-child):after {
+.user-list a:not(:last-child):after {
     content: ', ';
 }
 
 /* Account Information */
 
-.user-container {
+.account {
     float: left;
 }
 
-.user-container .logout {
+.account .logout {
     margin-left:10px;
     border-left: 1px solid white;
     padding-left: 10px;
@@ -878,9 +989,11 @@ div.typeahead a:first-child {
     display: inline-block;
     position:absolute;
     width: 50%;
-    left: 25%;
+    left: 0;
+    right: 0;
+    margin: auto;
     max-width: 600px;
-    top:80px;
+    top: 80px;
     z-index: 3;
 }
 
@@ -899,10 +1012,14 @@ div.typeahead a:first-child {
     position: absolute;
     right:5px;
     top:5px;
-    border:0;
+    opacity: .5;
+    -webkit-transition: opacity 100ms;
+    -moz-transition: opacity 100ms;
+    transition: opacity 100ms;
 }
 .modal button.close-modal:hover {
     background-color: transparent;
+    opacity: 1;
 }
 
 .shaded {
@@ -920,7 +1037,7 @@ div.typeahead a:first-child {
     padding: 20px;
 }
 
-.modal-section.header {
+.modal-section:first-child {
     border-radius: 4px 4px 0 0;
 }
 
@@ -963,7 +1080,6 @@ div.typeahead a:first-child {
 
 .modal-splash {
     width: 33.3333%;
-    left: 33.3333%;
 }
 
 .logo {
@@ -976,7 +1092,7 @@ div.typeahead a:first-child {
 /* Commit Modal
 ------------------------------------------------------- */
 
-.commit-modal .user-info {
+.commit-modal a.user-info {
     display: inline-block;
 }
 
@@ -1007,11 +1123,10 @@ div.typeahead a:first-child {
     border:1px solid #ccc;
     background:#fff;
     max-height: 160px;
-    overflow: visible;
 }
 
-.commit-modal .warning-section .changeset-list  {
-    margin-right: 20px;
+.commit-modal .warning-section .changeset-list  button {
+    float: right;
 }
 
 .commit-section.modal-section {
@@ -1022,30 +1137,17 @@ div.typeahead a:first-child {
 
 .commit-modal .changeset-list li {
     position: relative;
-}
-
-.commit-modal .changeset-list li button {
-    position: absolute;
-    right: -30px;
+    border-top:1px solid #ccc;
+    padding:5px 10px;
 }
 
 .modal-section {
     padding: 20px;
 }
 
-.modal-section.header {
-    border-radius: 4px 4px 0 0;
-}
-
-.modal-section .buttons {
-    padding-top: 10px;
-    width: 100%;
-}
-
 .modal-section img.wiki-image {
-    max-width: 400px;
+    max-width: 100%;
     max-height: 300px;
-    padding: 10px;
     display: block;
 }
 
@@ -1058,11 +1160,6 @@ div.typeahead a:first-child {
 
 .modal-flash .close-modal {
     display:none;
-}
-
-.changeset-list li {
-    border-top:1px solid #ccc;
-    padding:5px 10px;
 }
 
 .changeset-list li span.count {
@@ -1080,10 +1177,6 @@ div.typeahead a:first-child {
     width:100%;
     /* firefox uses monospace in textareas */
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
-}
-
-.loading-modal {
-    text-align: center;
 }
 
 /* Success
@@ -1104,7 +1197,8 @@ a.success-action {
     text-align:center;
 }
 
-.notice .notice-inner {
+.notice .zoom-to {
+    width:100%;
     height: 40px;
     border-radius: 5px;
     line-height: 40px;
@@ -1113,22 +1207,27 @@ a.success-action {
     opacity: 0.9;
 }
 
-.notice .notice-inner .zoom-to {
-    width:40px;
-    height:40px;
+.notice .zoom-to:hover {
+    background: #d8e1ff;
+}
+
+.notice .zoom-to .icon {
+    margin-top:10px;
     margin-right:10px;
+}
+
+.icon.zoom-in-invert {
+    background-position: -240px -40px;
 }
 
 /* Tooltips
 ------------------------------------------------------- */
 
 .tooltip {
-    white-space: normal;
+    width: 200px;
     position: absolute;
-    left: 0; right: 0; margin: auto;
     z-index: -1000;
     height: 0;
-    padding: 5px;
     opacity: 0;
     display: block;
 }
@@ -1140,106 +1239,140 @@ a.success-action {
 }
 
 .tooltip.top {
-  margin-top: -5px;
+    margin-top: -10px;
+    text-align: center;
 }
 
 .tooltip.right {
-  margin-left: 5px;
+    margin-left: 10px;
+    text-align: left;
 }
 
 .tooltip.bottom {
-  margin-top: 5px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .tooltip.left {
-  margin-left: -5px;
+    margin-left: -10px;
+    text-align: right;
 }
 
 .tooltip-inner {
-  text-align: left;
-  width: 200px;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 20px;
-  padding: 5px 10px;
-  color: #333;
-  background-color: white;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+    color: #333;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 20px;
+    background-color: white;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+
 }
 
 .tooltip-arrow {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
 }
 
 .tooltip.top .tooltip-arrow {
-  bottom: 0;
-  left: 50%;
-  margin-left: -5px;
-  border-top-color: white;
-  border-width: 5px 5px 0;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-top-color: white;
+    border-width: 5px 5px 0;
 }
 
 .tooltip.right .tooltip-arrow {
-  top: 50%;
-  left: 0;
-  margin-top: -5px;
-  border-right-color: white;
-  border-width: 5px 5px 5px 0;
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: white;
+    border-width: 5px 5px 5px 0;
 }
 
 .tooltip.left .tooltip-arrow {
-  top: 50%;
-  right: 0;
-  margin-top: -5px;
-  border-left-color: white;
-  border-width: 5px 0 5px 5px;
+    top: 50%;
+    right: 5px;
+    margin-top: -5px;
+    border-left-color: white;
+    border-width: 5px 0 5px 5px;
 }
 
 .tooltip.bottom .tooltip-arrow {
-  top: 0;
-  left: 50%;
-  margin-left: -5px;
-  border-bottom-color: white;
-  border-width: 0 5px 5px;
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-bottom-color: white;
+    border-width: 0 5px 5px;
 }
 
+.Browse .tooltip {
+    left: -20px !important; }
 .Browse .tooltip .tooltip-arrow {
-  left: 30px;
+    left: 60px;
+}
+
+.tooltip .keyhint-wrap {
+    padding: 5px 0 5px 0;
 }
 
 .tooltip .keyhint {
-    float: right;
-    background: #eee;
+    display: block;
+    color: #222;
     font-size: 10px;
-    padding: 0 4px;
-    background:#aaa;
-    color:#fff;
+    padding: 0px 7px;
+    font-weight: bold;
+    display: inline-block;
     border-radius: 2px;
-    margin-left: 4px;
+    border: 1px solid #CCC;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    clear: both;
+}
+
+.tooltip .keyhint .keyhint-label{
+    display: inline-block;
+}
+
+.tooltip .keyhint::after {
+    content: "";
+    position: absolute;
+    border-radius: 2px;
+    height: 10px;
+    width: 100%;
+    z-index: 0;
+    bottom: -4px;
+    left: -1px;
+    border: 1px solid #CCC;
+    border-top: 0;
 }
 
 .tail {
-  pointer-events:none;
-  position: absolute;
-  background: rgba(255, 255, 255, 0.7);
-  max-width: 250px;
-  margin-top: -15px;
-  padding: 5px;
-  -webkit-border-radius: 4px;
+    pointer-events:none;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    max-width: 250px;
+    margin-top: -15px;
+    padding: 5px;
+    -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
 }
 
+.radial-menu-background {
+    stroke: #aaa;
+    stroke-opacity: 0.4;
+}
+
 .radial-menu-item {
-    fill: white;
-    stroke: black;
-    stroke-width: 1;
+    fill: black;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
 }
 
@@ -1257,6 +1390,24 @@ a.success-action {
     fill: rgba(255,255,255,.5);
 }
 
+.radial-menu .icon {
+    pointer-events: none;
+}
+
+.radial-menu-tooltip {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
+
+.lasso-box {
+    fill-opacity:0.2;
+    fill: #bde5aa;
+    stroke: #000;
+    stroke-width: 1;
+}
 
 /* Media Queries
 ------------------------------------------------------- */
@@ -1265,5 +1416,44 @@ a.success-action {
     span.label {display: none;}
     /* override hide for save button */
     .icon.icon-pre-text { margin-right: 0px;}
-    .save .label { display: block;}
+    .save .label, .apply .label, .cancel .label { display: block;}
+}
+
+div.combobox {
+    width:155px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+    margin-top: -1px;
+    background: white;
+    max-height: 180px;
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+
+div.combobox a {
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+    display: block;
+    border-top:1px solid #ccc;
+    background-color: #fff;
+    padding:1px 4px;
+    white-space: nowrap;
+}
+
+div.combobox a:hover,
+div.combobox a.selected  {
+    background: #e1e8ff;
+    color: #154dff;
+}
+
+div.combobox a:first-child {
+    border-top: 0;
+}
+
+div.combobox-carat {
+    cursor: pointer;
+    padding:0 5px;
+    vertical-align:middle;
 }

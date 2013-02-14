@@ -4,21 +4,18 @@ iD.ui.notice = function(selection) {
         notice = {};
 
     var div = selection.append('div')
-        .attr('class', 'notice')
-        .append('div')
-        .attr('class', 'notice-inner');
+        .attr('class', 'notice');
 
-    div.append('button')
-        .attr('class', 'zoom-to')
-        .on('click', function() {
-            event.zoom();
-        })
-        .append('span')
-        .attr('class', 'icon invert zoom-in');
+    var button = div.append('button')
+        .attr('class', 'zoom-to notice')
+        .on('click', event.zoom);
 
-    div.append('span')
-        .attr('class', 'notice-text')
-        .text('zoom in to edit the map');
+    button.append('span')
+        .attr('class', 'icon zoom-in-invert');
+
+    button.append('span')
+        .attr('class', 'label')
+        .text(t('zoom_in_edit'));
 
     notice.message = function(_) {
         if (_) {

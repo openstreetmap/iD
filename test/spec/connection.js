@@ -2,7 +2,8 @@ describe('iD.Connection', function () {
     var c;
 
     beforeEach(function () {
-        c = new iD.Connection();
+        context = iD();
+        c = new iD.Connection(context);
     });
 
     it('is instantiated', function () {
@@ -26,24 +27,24 @@ describe('iD.Connection', function () {
             c.loadFromURL('data/node.xml', done);
         });
 
-        it('returns a graph', function (done) {
+        it('returns an object', function (done) {
             c.loadFromURL('data/node.xml', function (err, graph) {
                 expect(err).to.not.be.ok;
-                expect(graph).to.be.instanceOf(iD.Graph);
+                expect(typeof graph).to.eql('object');
                 done();
             });
         });
 
         it('parses a node', function (done) {
             c.loadFromURL('data/node.xml', function (err, graph) {
-                expect(graph.entity('n356552551')).to.be.instanceOf(iD.Entity);
+                expect(graph.n356552551).to.be.instanceOf(iD.Entity);
                 done();
             });
         });
 
         it('parses a way', function (done) {
             c.loadFromURL('data/way.xml', function (err, graph) {
-                expect(graph.entity('w19698713')).to.be.instanceOf(iD.Entity);
+                expect(graph.w19698713).to.be.instanceOf(iD.Entity);
                 done();
             });
         });

@@ -8,8 +8,8 @@ iD.util.trueObj = function(arr) {
 
 iD.util.tagText = function(entity) {
     return d3.entries(entity.tags).map(function(e) {
-        return e.key + ': ' + e.value;
-    }).join('\n');
+        return e.key + '=' + e.value;
+    }).join(', ');
 };
 
 iD.util.stringQs = function(str) {
@@ -74,3 +74,21 @@ iD.util.getStyle = function(selector) {
         }
     }
 };
+
+// a d3.mouse-alike which
+// 1. Only works on HTML elements, not SVG
+// 2. Does not cause style recalculation
+iD.util.fastMouse = function(container) {
+    var rect = _.clone(container.getBoundingClientRect()),
+        rectLeft = rect.left,
+        rectTop = rect.top,
+        clientLeft = +container.clientLeft,
+        clientTop = +container.clientTop;
+    return function(e) {
+        return [
+            e.clientX - rectLeft - clientLeft,
+            e.clientY - rectTop - clientTop];
+    };
+};
+
+iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };

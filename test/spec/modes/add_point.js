@@ -1,41 +1,43 @@
-describe("iD.modes.AddPoint", function () {
-    var container, map, history, controller, mode;
+describe("iD.modes.AddPoint", function() {
+    var context;
 
-    beforeEach(function () {
-        container  = d3.select('body').append('div');
-        history    = iD.History();
-        map        = iD.Map().history(history);
-        controller = iD.Controller(map, history);
+    beforeEach(function() {
+        var container = d3.select(document.createElement('div'));
 
-        container.call(map);
-        container.append('div')
+        context = iD()
+            .container(container);
+
+        container.call(context.map())
+            .append('div')
             .attr('class', 'inspector-wrap');
 
-        mode = iD.modes.AddPoint();
-        controller.enter(mode);
-    });
-
-    afterEach(function() {
-        container.remove();
+        context.enter(iD.modes.AddPoint(context));
     });
 
     describe("clicking the map", function () {
-        it("adds a node", function () {
-            happen.click(map.surface.node(), {});
-            expect(history.changes().created).to.have.length(1);
+        it("adds a node", function() {
+            happen.mousedown(context.surface().node(), {});
+            happen.mouseup(window, {});
+            expect(context.changes().created).to.have.length(1);
+            context.mode().exit();
         });
 
-        it("selects the node", function () {
-            happen.click(map.surface.node(), {});
-            expect(controller.mode.id).to.equal('select');
-            expect(controller.mode.entity).to.equal(history.changes().created[0]);
+        it("selects the node", function() {
+            happen.mousedown(context.surface().node(), {});
+            happen.mouseup(window, {});
+            expect(context.mode().id).to.equal('select');
+            expect(context.mode().selection()).to.eql([context.changes().created[0].id]);
+            context.mode().exit();
         });
     });
 
-    describe("pressing ⎋", function () {
-        it("exits to browse mode", function () {
+    describe("pressing ⎋", function() {
+        it("exits to browse mode", function(done) {
             happen.keydown(document, {keyCode: 27});
-            expect(controller.mode.id).to.equal('browse');
+            window.setTimeout(function() {
+                expect(context.mode().id).to.equal('browse');
+                done();
+            }, 200);
         });
     });
 });

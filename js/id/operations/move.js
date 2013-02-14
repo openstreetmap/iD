@@ -1,10 +1,13 @@
-iD.operations.Move = function(entityId, mode) {
+iD.operations.Move = function(selection, context) {
+    var entityId = selection[0];
+
     var operation = function() {
-        mode.controller.enter(iD.modes.MoveWay(entityId));
+        context.enter(iD.modes.MoveWay(context, entityId));
     };
 
-    operation.available = function(graph) {
-        return graph.entity(entityId).type === 'way';
+    operation.available = function() {
+        return selection.length === 1 &&
+            context.entity(entityId).type === 'way';
     };
 
     operation.enabled = function() {
@@ -12,7 +15,9 @@ iD.operations.Move = function(entityId, mode) {
     };
 
     operation.id = "move";
-    operation.title = "Move";
+    operation.key = t('operations.move.key');
+    operation.title = t('operations.move.title');
+    operation.description = t('operations.move.description');
 
     return operation;
 };

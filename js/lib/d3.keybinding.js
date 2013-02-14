@@ -63,7 +63,7 @@ d3.keybinding = function(namespace) {
             callback: callback
         };
 
-        code = code.toLowerCase().match(/(?:(?:[^+])+|\+\+|^\+$)/g);
+        code = code.toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
 
         for (var i = 0; i < code.length; i++) {
             // Normalise matching errors
@@ -151,7 +151,7 @@ d3.keybinding = function(namespace) {
         '=': 187, 'equals': 187,
         // Comma, or ,
         ',': 188, comma: 188,
-        //'-': 189, //???
+        'dash': 189, //???
         // Period, or ., or full-stop
         '.': 190, period: 190, 'full-stop': 190,
         // Slash, or /, or forward-slash

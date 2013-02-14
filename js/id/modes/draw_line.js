@@ -1,4 +1,4 @@
-iD.modes.DrawLine = function(wayId, direction, baseGraph) {
+iD.modes.DrawLine = function(context, wayId, direction, baseGraph) {
     var mode = {
         button: 'line',
         id: 'draw-line'
@@ -7,52 +7,28 @@ iD.modes.DrawLine = function(wayId, direction, baseGraph) {
     var behavior;
 
     mode.enter = function() {
-        var way = mode.history.graph().entity(wayId),
+        var way = context.entity(wayId),
             index = (direction === 'forward') ? undefined : 0,
-            headId = (direction === 'forward') ? way.last() : way.first(),
-            tailId = (direction === 'forward') ? way.first() : way.last(),
-            annotation = way.isDegenerate() ? 'started a line' : 'continued a line';
+            headId = (direction === 'forward') ? way.last() : way.first();
 
-        function addHead() {
-            behavior.finish();
-        }
+        behavior = iD.behavior.DrawWay(context, wayId, index, mode, baseGraph);
 
-        function addTail(node) {
-            // connect the way in a loop
-            if (way.nodes.length > 2) {
-                behavior.addNode(node, annotation);
+        var addNode = behavior.addNode;
+
+        behavior.addNode = function(node) {
+            if (node.id === headId) {
+                behavior.finish();
             } else {
-                behavior.cancel();
+                addNode(node);
             }
-        }
+        };
 
-        function addNode(node) {
-            behavior.addNode(node, annotation);
-        }
-
-        function addWay(way, loc, index) {
-            behavior.addWay(way, loc, index, annotation);
-        }
-
-        function add(loc) {
-            behavior.add(loc, annotation);
-        }
-
-        behavior = iD.behavior.DrawWay(wayId, headId, tailId, index, mode, baseGraph)
-            .on('addHead', addHead)
-            .on('addTail', addTail)
-            .on('addNode', addNode)
-            .on('addWay', addWay)
-            .on('add', add);
-
-        mode.map.surface.call(behavior);
-        mode.map.tail('Click to add more points to the line. ' +
-                      'Click on other lines to connect to them, and double-click to ' +
-                      'end the line.', true);
+        context.install(behavior);
+        context.tail(t('modes.draw_line.tail'));
     };
 
     mode.exit = function() {
-        mode.map.surface.call(behavior.off);
+        context.uninstall(behavior);
     };
 
     return mode;

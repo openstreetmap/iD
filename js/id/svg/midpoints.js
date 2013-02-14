@@ -2,6 +2,10 @@ iD.svg.Midpoints = function(projection) {
     return function drawMidpoints(surface, graph, entities, filter) {
         var midpoints = {};
 
+        if (!surface.select('.layer-hit g.vertex').node()) {
+            return surface.selectAll('.layer-hit g.midpoint').remove();
+        }
+
         for (var i = 0; i < entities.length; i++) {
             if (entities[i].type !== 'way') continue;
 
@@ -15,19 +19,15 @@ iD.svg.Midpoints = function(projection) {
                     b = nodes[j + 1],
                     id = [a.id, b.id].sort().join('-');
 
-                if (!midpoints[id] &&
-                    iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
+                if (midpoints[id]) {
+                    midpoints[id].ways.push({id: entity.id, index: j + 1});
 
-                    var midpoint_loc = iD.geo.interp(a.loc, b.loc, 0.5),
-                        parents = _.intersection(graph.parentWays(a),
-                            graph.parentWays(b));
-
+                } else if (iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
                     midpoints[id] = {
-                        loc: midpoint_loc,
-                        ways: parents,
-                        nodes: [a.id, b.id],
+                        type: 'midpoint',
                         id: id,
-                        midpoint: true
+                        loc: iD.geo.interp(a.loc, b.loc, 0.5),
+                        ways: [{id: entity.id, index: j + 1}]
                     };
                 }
             }
@@ -35,14 +35,14 @@ iD.svg.Midpoints = function(projection) {
 
         var groups = surface.select('.layer-hit').selectAll('g.midpoint')
             .filter(filter)
-            .data(_.values(midpoints), function (d) { return [d.parents, d.id].join(","); });
+            .data(_.values(midpoints), function(d) { return d.id; });
 
         var group = groups.enter()
             .insert('g', ':first-child')
             .attr('class', 'midpoint');
 
         group.append('circle')
-            .attr('r', 7)
+            .attr('r', 8)
             .attr('class', 'shadow');
 
         group.append('circle')
@@ -50,6 +50,10 @@ iD.svg.Midpoints = function(projection) {
             .attr('class', 'fill');
 
         groups.attr('transform', iD.svg.PointTransform(projection));
+
+        // Propagate data bindings.
+        groups.select('circle.shadow');
+        groups.select('circle.fill');
 
         groups.exit()
             .remove();

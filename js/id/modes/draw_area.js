@@ -1,4 +1,4 @@
-iD.modes.DrawArea = function(wayId, baseGraph) {
+iD.modes.DrawArea = function(context, wayId, baseGraph) {
     var mode = {
         button: 'area',
         id: 'draw-area'
@@ -7,41 +7,28 @@ iD.modes.DrawArea = function(wayId, baseGraph) {
     var behavior;
 
     mode.enter = function() {
-        var way = mode.history.graph().entity(wayId),
-            index = -1,
+        var way = context.entity(wayId),
             headId = way.nodes[way.nodes.length - 2],
-            tailId = way.first(),
-            annotation = way.isDegenerate() ? 'started an area' : 'continued an area';
+            tailId = way.first();
 
-        function addHeadTail() {
-            behavior.finish();
-        }
+        behavior = iD.behavior.DrawWay(context, wayId, -1, mode, baseGraph);
 
-        function addNode(node) {
-            behavior.addNode(node, annotation);
-        }
+        var addNode = behavior.addNode;
 
-        function addWay(way, loc, index) {
-            behavior.addWay(way, loc, index, annotation);
-        }
+        behavior.addNode = function(node) {
+            if (node.id === headId || node.id === tailId) {
+                behavior.finish();
+            } else {
+                addNode(node);
+            }
+        };
 
-        function add(loc) {
-            behavior.add(loc, annotation);
-        }
-
-        behavior = iD.behavior.DrawWay(wayId, headId, tailId, index, mode, baseGraph)
-            .on('addHead', addHeadTail)
-            .on('addTail', addHeadTail)
-            .on('addNode', addNode)
-            .on('addWay', addWay)
-            .on('add', add);
-
-        mode.map.surface.call(behavior);
-        mode.map.tail('Click to add points to your area. Click the first point to finish the area.', true);
+        context.install(behavior);
+        context.tail(t('modes.draw_area.tail'));
     };
 
     mode.exit = function() {
-        mode.map.surface.call(behavior.off);
+        context.uninstall(behavior);
     };
 
     return mode;

@@ -1,22 +1,10 @@
 describe('iD.Map', function() {
-    var container, map;
+    var map;
 
     beforeEach(function() {
-        container = d3.select('body').append('div');
-        map = iD.Map();
-        container.call(map);
-    });
-
-    afterEach(function() {
-        container.remove();
-    });
-
-    describe('#connection', function() {
-        it('gets and sets connection', function() {
-            var connection = iD.Connection();
-            expect(map.connection(connection)).to.equal(map);
-            expect(map.connection()).to.equal(connection);
-        });
+        map = iD().map();
+        d3.select(document.createElement('div'))
+            .call(map);
     });
 
     describe('#zoom', function() {

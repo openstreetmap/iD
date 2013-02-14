@@ -1,26 +1,16 @@
-iD.behavior.AddWay = function(mode) {
-    var map = mode.map,
-        history = mode.history,
-        controller = mode.controller,
-        event = d3.dispatch('startFromNode', 'startFromWay', 'start'),
-        draw;
-
-    function add(datum) {
-        if (datum.type === 'node') {
-            event.startFromNode(datum);
-        } else if (datum.type === 'way') {
-            var choice = iD.geo.chooseIndex(datum, d3.mouse(map.surface.node()), map);
-            event.startFromWay(datum, choice.loc, choice.index);
-        } else if (datum.midpoint) {
-            var way = history.graph().entity(datum.way);
-            event.startFromWay(way, datum.loc, datum.index);
-        } else {
-            event.start(map.mouseCoordinates());
-        }
-    }
+iD.behavior.AddWay = function(context) {
+    var event = d3.dispatch('start', 'startFromWay', 'startFromNode'),
+        draw = iD.behavior.Draw(context);
 
     var addWay = function(surface) {
-        map.fastEnable(false)
+        draw.on('click', event.start)
+            .on('clickWay', event.startFromWay)
+            .on('clickNode', event.startFromNode)
+            .on('cancel', addWay.cancel)
+            .on('finish', addWay.cancel);
+
+        context.map()
+            .fastEnable(false)
             .minzoom(16)
             .dblclickEnable(false);
 
@@ -28,25 +18,21 @@ iD.behavior.AddWay = function(mode) {
     };
 
     addWay.off = function(surface) {
-        map.fastEnable(true)
+        context.map()
+            .fastEnable(true)
             .minzoom(0)
             .tail(false);
 
         window.setTimeout(function() {
-            map.dblclickEnable(true);
+            context.map().dblclickEnable(true);
         }, 1000);
 
         surface.call(draw.off);
     };
 
     addWay.cancel = function() {
-        controller.exit();
+        context.enter(iD.modes.Browse(context));
     };
-
-    draw = iD.behavior.Draw()
-        .on('add', add)
-        .on('cancel', addWay.cancel)
-        .on('finish', addWay.cancel);
 
     return d3.rebind(addWay, event, 'on');
 };

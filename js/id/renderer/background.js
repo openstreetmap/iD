@@ -1,4 +1,10 @@
 iD.Background = function() {
+
+    var deviceRatio = (window.devicePixelRatio &&
+        window.devicePixelRatio === 2) ? 0.5 : 1;
+        // tileSize = (deviceRatio === 0.5) ? [128,128] : [256,256];
+    var tileSize = [256, 256];
+
     var tile = d3.geo.tile(),
         projection,
         cache = {},
@@ -6,14 +12,9 @@ iD.Background = function() {
         transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
-    var imgstyle = 'position:absolute;transform-origin:0 0;' +
-        '-ms-transform-origin:0 0;' +
-        '-webkit-transform-origin:0 0;' +
-        '-moz-transform-origin:0 0;' +
-        '-o-transform-origin:0 0;' +
-        '-webkit-user-select: none;' +
-        '-webkit-user-drag: none;' +
-        '-moz-user-drag: none;';
+    function tileSizeAtZoom(d, z) {
+        return Math.ceil(tileSize[0] * Math.pow(2, z - d[2])) / tileSize[0];
+    }
 
     function atZoom(t, distance) {
         var power = Math.pow(2, distance);
@@ -21,24 +22,7 @@ iD.Background = function() {
             Math.floor(t[0] * power),
             Math.floor(t[1] * power),
             t[2] + distance];
-        az.push(source(az));
         return az;
-    }
-
-    function upZoom(t, distance) {
-        var az = atZoom(t, distance), tiles = [];
-        for (var x = 0; x < 2; x++) {
-            for (var y = 0; y < 2; y++) {
-                var up = [az[0] + x, az[1] + y, az[2]];
-                up.push(source(up));
-                tiles.push(up);
-            }
-        }
-        return tiles;
-    }
-
-    function tileSize(d, z) {
-        return Math.ceil(256 * Math.pow(2, z - d[2])) / 256;
     }
 
     function lookUp(d) {
@@ -47,84 +31,101 @@ iD.Background = function() {
         }
     }
 
+    function uniqueBy(a, n) {
+        var o = [], seen = {};
+        for (var i = 0; i < a.length; i++) {
+            if (seen[a[i][n]] === undefined) {
+                o.push(a[i]);
+                seen[a[i][n]] = true;
+            }
+        }
+        return o;
+    }
+
+    function addSource(d) {
+        d.push(source(d));
+        return d;
+    }
+
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`
     function background() {
-        var tiles = tile
+        var sel = this,
+            tiles = tile
             .scale(projection.scale())
-            .scaleExtent(source.scaleExtent || [1, 17])
+            .scaleExtent((source.data && source.data.scaleExtent) || [1, 17])
             .translate(projection.translate())(),
+            requests = [],
             scaleExtent = tile.scaleExtent(),
             z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),
-            rz = Math.max(scaleExtent[0], Math.min(scaleExtent[1], Math.floor(z))),
-            ts = 256 * Math.pow(2, z - rz),
+            rz = Math.max(scaleExtent[0],
+                Math.min(scaleExtent[1], Math.floor(z))),
+            ts = tileSize[0] * Math.pow(2, z - rz),
             tile_origin = [
                 projection.scale() / 2 - projection.translate()[0],
-                projection.scale() / 2 - projection.translate()[1]],
-            ups = {};
+                projection.scale() / 2 - projection.translate()[1]];
 
         tiles.forEach(function(d) {
-
-            if (cache[d] === true) {
-                d.push(source(d));
-            } else if (cache[d] === false &&
-                cache[atZoom(d, -1)] !== false &&
-                !ups[atZoom(d, -1)]) {
-
-                ups[atZoom(d, -1)] = true;
-                tiles.push(atZoom(d, -1));
-
-            } else if (cache[d] === undefined &&
-                lookUp(d)) {
-
-                var upTile = lookUp(d);
-                if (!ups[upTile]) {
-                    ups[upTile] = true;
-                    tiles.push(upTile);
-                }
-
-            } else if (cache[d] === undefined ||
-                cache[d] === false) {
-                upZoom(d, 1).forEach(function(u) {
-                    if (cache[u] && !ups[u]) {
-                        ups[u] = true;
-                        tiles.push(u);
-                    }
-                });
+            addSource(d);
+            requests.push(d);
+            if (!cache[d[3]] && lookUp(d)) {
+                requests.push(addSource(lookUp(d)));
             }
         });
 
-        var image = this
-            .selectAll('img')
-            .data(tiles, function(d) { return d; });
+        requests = uniqueBy(requests, 3).filter(function(r) {
+            // don't re-request tiles which have failed in the past
+            return cache[r[3]] !== false;
+        });
 
         function load(d) {
-            cache[d.slice(0, 3)] = true;
-            d3.select(this).on('load', null);
+            cache[d[3]] = true;
+            d3.select(this)
+                .on('load', null)
+                .classed('tile-loaded', true);
+            background.apply(sel);
         }
 
         function error(d) {
-            cache[d.slice(0, 3)] = false;
+            cache[d[3]] = false;
+            d3.select(this).on('load', null);
             d3.select(this).remove();
+            background.apply(sel);
         }
 
+        function imageTransform(d) {
+            var _ts = tileSize[0] * Math.pow(2, z - d[2]);
+            var scale = tileSizeAtZoom(d, z);
+            return 'translate(' +
+                (Math.round((d[0] * _ts) - tile_origin[0]) + offset[0]) + 'px,' +
+                (Math.round((d[1] * _ts) - tile_origin[1]) + offset[1]) + 'px)' +
+                'scale(' + scale + ',' + scale + ')';
+        }
+
+        var image = this
+            .selectAll('img')
+            .data(requests, function(d) { return d[3]; });
+
+        image.exit()
+            .style(transformProp, imageTransform)
+            .classed('tile-loaded', false)
+            .each(function() {
+                var tile = this;
+                window.setTimeout(function() {
+                    // this tile may already be removed
+                    if (tile.parentNode) {
+                        tile.parentNode.removeChild(tile);
+                    }
+                }, 300);
+            });
+
         image.enter().append('img')
-            .attr('style', imgstyle)
+            .attr('class', 'tile')
             .attr('src', function(d) { return d[3]; })
             .on('error', error)
             .on('load', load);
 
-        image.exit().remove();
-
-        image.style(transformProp, function(d) {
-            var _ts = 256 * Math.pow(2, z - d[2]);
-            var scale = tileSize(d, z);
-            return 'translate(' +
-                (Math.round((d[0] * _ts) - tile_origin[0]) + offset[0]) + 'px,' +
-                (Math.round((d[1] * _ts) - tile_origin[1]) + offset[1]) + 'px) scale(' + scale + ',' + scale + ')';
-        });
-
-        if (Object.keys(cache).length > 100) cache = {};
+        image.style(transformProp, imageTransform);
     }
 
     background.offset = function(_) {
@@ -151,9 +152,22 @@ iD.Background = function() {
         return background;
     };
 
+    function setPermalink(source) {
+        var tag = source.data.sourcetag;
+        var q = iD.util.stringQs(location.hash.substring(1));
+        if (tag) {
+            location.replace('#' + iD.util.qsString(_.assign(q, {
+                layer: tag
+            }), true));
+        } else {
+            location.replace('#' + iD.util.qsString(_.omit(q, 'layer'), true));
+        }
+    }
+
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
+        setPermalink(source);
         return background;
     };
 

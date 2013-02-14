@@ -1,42 +1,28 @@
-iD.modes.Browse = function() {
+iD.modes.Browse = function(context) {
     var mode = {
         button: 'browse',
         id: 'browse',
-        title: 'Browse',
-        description: 'Pan and zoom the map',
-        key: 'b'
+        title: t('modes.browse.title'),
+        description: t('modes.browse.description'),
+        key: '1'
     };
 
-    var behaviors;
+    var behaviors = [
+        iD.behavior.Hover(),
+        iD.behavior.Select(context),
+        iD.behavior.Lasso(context),
+        iD.behavior.DragNode(context)];
 
     mode.enter = function() {
-        var surface = mode.map.surface;
-
-        behaviors = [
-            iD.behavior.Hover(),
-            iD.behavior.DragNode(mode),
-            iD.behavior.DragMidpoint(mode)];
-
         behaviors.forEach(function(behavior) {
-            behavior(surface);
-        });
-
-        surface.on('click.browse', function () {
-            var datum = d3.select(d3.event.target).datum();
-            if (datum instanceof iD.Entity) {
-                mode.controller.enter(iD.modes.Select(datum));
-            }
+            context.install(behavior);
         });
     };
 
     mode.exit = function() {
-        var surface = mode.map.surface;
-
         behaviors.forEach(function(behavior) {
-            behavior.off(surface);
+            context.uninstall(behavior);
         });
-
-        surface.on('click.browse', null);
     };
 
     return mode;

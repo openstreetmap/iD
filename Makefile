@@ -23,12 +23,16 @@ all: \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/ohauth.js \
+	js/lib/rtree.js \
 	js/lib/sha.js \
 	js/id/start.js \
 	js/id/id.js \
 	js/id/connection.js \
 	js/id/oauth.js \
 	js/id/services/*.js \
+	data/data.js \
+	data/imagery.js \
+	data/deprecated.js \
 	js/id/util.js \
 	js/id/geo.js \
 	js/id/geo/*.js \
@@ -40,14 +44,16 @@ all: \
 	js/id/modes/*.js \
 	js/id/operations.js \
 	js/id/operations/*.js \
-	js/id/controller/*.js \
-	js/id/graph/*.js \
+	js/id/core/*.js \
 	js/id/renderer/*.js \
 	js/id/svg.js \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
-	js/id/end.js
+	js/id/validate.js \
+	js/id/end.js \
+	js/lib/locale.js \
+	locale/*.js
 
 iD.js: Makefile
 	@rm -f $@

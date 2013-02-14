@@ -1,48 +1,48 @@
-iD.modes.AddPoint = function() {
+iD.modes.AddPoint = function(context) {
     var mode = {
         id: 'add-point',
-        title: 'Point',
-        description: 'Restaurants, monuments, and postal boxes are points.',
-        key: 'p'
+        title: t('modes.add_point.title'),
+        description: t('modes.add_point.description'),
+        key: '2'
     };
 
-    var behavior;
+    var behavior = iD.behavior.Draw(context)
+        .on('click', add)
+        .on('clickWay', addWay)
+        .on('clickNode', addNode)
+        .on('cancel', cancel)
+        .on('finish', cancel);
+
+    function add(loc) {
+        var node = iD.Node({loc: loc});
+
+        context.perform(
+            iD.actions.AddEntity(node),
+            t('operations.add.annotation.point'));
+
+        context.enter(iD.modes.Select(context, [node.id], true));
+    }
+
+    function addWay(way, loc, index) {
+        add(loc);
+    }
+
+    function addNode(node) {
+        add(node.loc);
+    }
+
+    function cancel() {
+        context.enter(iD.modes.Browse(context));
+    }
 
     mode.enter = function() {
-        var map = mode.map,
-            surface = map.surface,
-            history = mode.history,
-            controller = mode.controller;
-
-        map.tail('Click on the map to add a point.', true);
-
-        function add() {
-            var node = iD.Node({loc: map.mouseCoordinates()});
-
-            history.perform(
-                iD.actions.AddNode(node),
-                'added a point');
-
-            controller.enter(iD.modes.Select(node, true));
-        }
-
-        function cancel() {
-            controller.exit();
-        }
-
-        behavior = iD.behavior.Draw()
-            .on('add', add)
-            .on('cancel', cancel)
-            .on('finish', cancel)
-            (surface);
+        context.install(behavior);
+        context.tail(t('modes.add_point.tail'));
     };
 
     mode.exit = function() {
-        var map = mode.map,
-            surface = map.surface;
-
-        map.tail(false);
-        behavior.off(surface);
+        context.uninstall(behavior);
+        context.tail(false);
     };
 
     return mode;

@@ -35,20 +35,23 @@
     <script src='../js/id/oauth.js'></script>
     <script src='../js/id/services/taginfo.js'></script>
 
+    <script src='../data/data.js'></script>
+    <script src='../data/deprecated.js'></script>
+    <script src='../data/imagery.js'></script>
+
     <script src="../js/id/geo.js"></script>
     <script src="../js/id/geo/extent.js"></script>
 
     <script src='../js/id/renderer/background.js'></script>
     <script src='../js/id/renderer/background_source.js'></script>
     <script src='../js/id/renderer/map.js'></script>
-    <script src='../js/id/renderer/hash.js'></script>
+    <script src='../js/id/renderer/layers.js'></script>
 
     <script src="../js/id/svg.js"></script>
     <script src="../js/id/svg/areas.js"></script>
     <script src="../js/id/svg/lines.js"></script>
     <script src="../js/id/svg/member_classes.js"></script>
     <script src="../js/id/svg/midpoints.js"></script>
-    <script src="../js/id/svg/multipolygons.js"></script>
     <script src="../js/id/svg/points.js"></script>
     <script src="../js/id/svg/surface.js"></script>
     <script src="../js/id/svg/tag_classes.js"></script>
@@ -60,36 +63,48 @@
     <script src='../js/id/ui/inspector.js'></script>
     <script src='../js/id/ui/commit.js'></script>
     <script src='../js/id/ui/loading.js'></script>
-    <script src='../js/id/ui/userpanel.js'></script>
+    <script src='../js/id/ui/account.js'></script>
     <script src='../js/id/ui/geocoder.js'></script>
     <script src='../js/id/ui/notice.js'></script>
     <script src='../js/id/ui/modal.js'></script>
+    <script src='../js/id/ui/lasso.js'></script>
     <script src='../js/id/ui/flash.js'></script>
     <script src='../js/id/ui/confirm.js'></script>
     <script src='../js/id/ui/splash.js'></script>
+    <script src='../js/id/ui/source_switch.js'></script>
+    <script src='../js/id/ui/toggle.js'></script>
 
     <script src='../js/id/actions.js'></script>
-    <script src='../js/id/actions/add_node.js'></script>
-    <script src='../js/id/actions/add_way.js'></script>
-    <script src='../js/id/actions/add_way_node.js'></script>
-    <script src='../js/id/actions/change_entity_tags.js'></script>
+    <script src="../js/id/actions/add_midpoint.js"></script>
+    <script src='../js/id/actions/add_entity.js'></script>
+    <script src='../js/id/actions/add_vertex.js'></script>
+    <script src='../js/id/actions/change_tags.js'></script>
+    <script src='../js/id/actions/connect.js'></script>
+    <script src='../js/id/actions/circularize.js'></script>
+    <script src='../js/id/actions/orthogonalize.js'></script>
+    <script src="../js/id/actions/delete_multiple.js"></script>
     <script src="../js/id/actions/delete_node.js"></script>
+    <script src="../js/id/actions/delete_relation.js"></script>
     <script src="../js/id/actions/delete_way.js"></script>
+    <script src='../js/id/actions/disconnect.js'></script>
+    <script src='../js/id/actions/join.js'></script>
+    <script src='../js/id/actions/merge.js'></script>
     <script src='../js/id/actions/move_node.js'></script>
     <script src='../js/id/actions/move_way.js'></script>
     <script src='../js/id/actions/noop.js'></script>
-    <script src='../js/id/actions/reverse_way.js'></script>
-    <script src='../js/id/actions/split_way.js'></script>
-    <script src='../js/id/actions/unjoin_node.js'></script>
+    <script src='../js/id/actions/reverse.js'></script>
+    <script src='../js/id/actions/split.js'></script>
 
     <script src='../js/id/behavior.js'></script>
     <script src='../js/id/behavior/add_way.js'></script>
     <script src='../js/id/behavior/drag.js'></script>
-    <script src='../js/id/behavior/drag_midpoint.js'></script>
     <script src='../js/id/behavior/drag_node.js'></script>
     <script src='../js/id/behavior/draw.js'></script>
     <script src='../js/id/behavior/draw_way.js'></script>
+    <script src='../js/id/behavior/hash.js'></script>
     <script src='../js/id/behavior/hover.js'></script>
+    <script src='../js/id/behavior/lasso.js'></script>
+    <script src='../js/id/behavior/select.js'></script>
 
     <script src='../js/id/modes.js'></script>
     <script src='../js/id/modes/add_area.js'></script>
@@ -102,72 +117,77 @@
     <script src='../js/id/modes/select.js'></script>
 
     <script src='../js/id/operations.js'></script>
-    <script src='../js/id/operations/circular.js'></script>
+    <script src='../js/id/operations/circularize.js'></script>
+    <script src='../js/id/operations/orthogonalize.js'></script>
     <script src='../js/id/operations/delete.js'></script>
+    <script src='../js/id/operations/disconnect.js'></script>
+    <script src='../js/id/operations/merge.js'></script>
     <script src='../js/id/operations/move.js'></script>
     <script src='../js/id/operations/reverse.js'></script>
     <script src='../js/id/operations/split.js'></script>
-    <script src='../js/id/operations/unjoin.js'></script>
 
-    <script src='../js/id/controller/controller.js'></script>
-
-    <script src='../js/id/graph/entity.js'></script>
-    <script src='../js/id/graph/graph.js'></script>
-    <script src='../js/id/graph/history.js'></script>
-    <script src='../js/id/graph/node.js'></script>
-    <script src='../js/id/graph/relation.js'></script>
-    <script src='../js/id/graph/way.js'></script>
+    <script src='../js/id/core/difference.js'></script>
+    <script src='../js/id/core/entity.js'></script>
+    <script src='../js/id/core/graph.js'></script>
+    <script src='../js/id/core/history.js'></script>
+    <script src='../js/id/core/node.js'></script>
+    <script src='../js/id/core/relation.js'></script>
+    <script src='../js/id/core/way.js'></script>
 
     <script src='../js/id/connection.js'></script>
 
-    <script>
-        iD.debug = true;
-        mocha.setup({
-            ui: 'bdd',
-            globals: ['__onresize.tail-size']
-        });
-        var expect = chai.expect;
-    </script>
+    <script src='../js/lib/locale.js'></script>
+    <script src='../locale/da.js'></script>
+    <script src='../locale/de.js'></script>
+    <script src='../locale/en.js'></script>
+    <script src='../locale/es.js'></script>
+    <script src='../locale/fr.js'></script>
+    <script src='../locale/ja.js'></script>
+    <script src='../locale/lv.js'></script>
+    <script src='../locale/tr.js'></script>
 
     <script src="spec/spec_helpers.js"></script>
 
     <!-- include spec files here... -->
     <script src="spec/lib/d3.keybinding.js"></script>
+    <script src="spec/lib/locale.js"></script>
 
-    <script src="spec/actions/add_node.js"></script>
-    <script src="spec/actions/add_way.js"></script>
-    <script src="spec/actions/change_entity_tags.js"></script>
+    <script src="spec/actions/add_midpoint.js"></script>
+    <script src="spec/actions/add_entity.js"></script>
+    <script src="spec/actions/change_tags.js"></script>
+    <script src='spec/actions/circularize.js'></script>
+    <script src='spec/actions/connect.js'></script>
+    <script src="spec/actions/delete_multiple.js"></script>
     <script src="spec/actions/delete_node.js"></script>
+    <script src="spec/actions/delete_relation.js"></script>
     <script src="spec/actions/delete_way.js"></script>
+    <script src='spec/actions/disconnect.js'></script>
+    <script src="spec/actions/join.js"></script>
+    <script src='spec/actions/merge.js'></script>
     <script src="spec/actions/move_node.js"></script>
     <script src="spec/actions/move_way.js"></script>
     <script src="spec/actions/noop.js"></script>
-    <script src="spec/actions/reverse_way.js"></script>
-    <script src="spec/actions/split_way.js"></script>
-    <script src='spec/actions/unjoin_node.js'></script>
-
-    <script src="spec/behavior/hover.js"></script>
+    <script src="spec/actions/reverse.js"></script>
+    <script src="spec/actions/split.js"></script>
 
     <script src="spec/geo/extent.js"></script>
 
-    <script src="spec/graph/graph.js"></script>
-    <script src="spec/graph/entity.js"></script>
-    <script src="spec/graph/node.js"></script>
-    <script src="spec/graph/way.js"></script>
-    <script src="spec/graph/relation.js"></script>
-    <script src="spec/graph/history.js"></script>
-
-    <script src="spec/modes/add_point.js"></script>
+    <script src="spec/core/graph.js"></script>
+    <script src="spec/core/entity.js"></script>
+    <script src="spec/core/node.js"></script>
+    <script src="spec/core/way.js"></script>
+    <script src="spec/core/relation.js"></script>
+    <script src="spec/core/history.js"></script>
+    <script src="spec/core/difference.js"></script>
 
     <script src="spec/renderer/background.js"></script>
-    <script src="spec/renderer/hash.js"></script>
     <script src="spec/renderer/map.js"></script>
 
     <script src="spec/svg.js"></script>
     <script src="spec/svg/areas.js"></script>
     <script src="spec/svg/lines.js"></script>
     <script src="spec/svg/member_classes.js"></script>
-    <script src="spec/svg/multipolygons.js"></script>
+    <script src="spec/svg/midpoints.js"></script>
     <script src="spec/svg/points.js"></script>
     <script src="spec/svg/vertices.js"></script>
     <script src="spec/svg/tag_classes.js"></script>
@@ -179,9 +199,17 @@
     <script src="spec/ui/confirm.js"></script>
 
     <script src="spec/connection.js"></script>
+    <script src="spec/geo.js"></script>
     <script src="spec/oauth.js"></script>
     <script src="spec/taginfo.js"></script>
     <script src="spec/util.js"></script>
+    <script src="spec/translation.js"></script>
+
+    <script src="spec/behavior/hash.js"></script>
+    <script src="spec/behavior/hover.js"></script>
+    <script src="spec/behavior/select.js"></script>
+
+    <script src="spec/modes/add_point.js"></script>
 
     <script>
         (window.mochaPhantomJS || window.mocha).run();

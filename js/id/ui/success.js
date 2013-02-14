@@ -1,4 +1,4 @@
-iD.ui.success = function(connection) {
+iD.ui.Success = function(connection) {
     var event = d3.dispatch('cancel', 'save');
 
     function success(selection) {
@@ -8,7 +8,7 @@ iD.ui.success = function(connection) {
 
         var section = body.append('div').attr('class','modal-section fillD');
 
-        header.append('h2').text('You Just Edited OpenStreetMap!');
+        header.append('h2').text(t('just_edited'));
 
         var m = '';
         if (changeset.comment) {
@@ -24,7 +24,7 @@ iD.ui.success = function(connection) {
             })
             .attr('target', '_blank')
             .attr('class', 'success-action')
-            .text('View on OSM');
+            .text(t('view_on_osm'));
 
         header.append('a')
             .attr('target', '_blank')
