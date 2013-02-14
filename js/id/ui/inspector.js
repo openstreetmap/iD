@@ -4,11 +4,12 @@ iD.ui.Inspector = function() {
         presetData = iD.presetData(),
         initial = false,
         presetUI,
-        context,
-        tagList = iD.ui.Taglist();
+        tagList,
+        context;
 
     function inspector(selection) {
-        var entity = selection.datum();
+        var entity = selection.datum(),
+            presetMatch = presetData.matchTags(entity);
 
         var iwrap = selection.append('div')
                 .attr('class','inspector content hide'),
@@ -44,14 +45,14 @@ iD.ui.Inspector = function() {
 
         presetUI = iD.ui.preset()
             .on('change', function(tags) {
-                inspector.tags(_.extend(inspector.tags(), tags));
                 event.change();
             });
 
-        event.on('change.preset', function() {
-            var tags = inspector.tags();
-            presetUI.change(tags);
-        });
+        tagList = iD.ui.Taglist()
+            .context(context)
+            .on('change', function(tags) {
+                event.change();
+            });
 
         var inspectorpresetsearch = inspectorwrap.append('div')
             .attr('class', 'inspector-preset cf')
@@ -80,21 +81,18 @@ iD.ui.Inspector = function() {
         var inspectorpreset = inspectorwrap.append('div')
             .attr('class', 'inspector-preset cf');
 
-        inspectorwrap.append('h4')
-            .text(t('inspector.edit_tags'));
+        if (presetMatch) {
+            inspectorpreset.call(presetUI
+                    .preset(presetMatch));
+        }
 
-        inspectorwrap.call(tagList);
+        var taglistwrap = inspectorwrap.append('div').call(tagList);
+
+        inspector.tags(entity.tags);
 
         inspectorbody.append('div')
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
-
-        var presetMatch = presetData.matchTags(entity);
-        if (presetMatch) {
-            inspectorpreset.call(presetUI
-                    .preset(presetMatch)
-                    .change(inspector.tags()));
-        }
 
         iwrap.call(iD.ui.Toggle(true));
     }
@@ -140,7 +138,8 @@ iD.ui.Inspector = function() {
         if (!arguments.length) {
             return _.extend(presetUI.tags(), tagList.tags());
         } else {
-            tagList.tags(tags);
+            presetUI.change(tags);
+            tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
         }
     };
 
@@ -156,7 +155,6 @@ iD.ui.Inspector = function() {
 
     inspector.context = function(_) {
         context = _;
-        tagList.context(context);
         return inspector;
     };
 

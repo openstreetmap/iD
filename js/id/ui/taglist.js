@@ -1,22 +1,19 @@
 iD.ui.Taglist = function() {
-    var event = d3.dispatch('changeTags', 'close', 'change'),
+    var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         initial = false,
         list,
         context;
 
     function taglist(selection) {
-        var entity = selection.datum();
 
-        var wrap = selection.append('div');
-
-        wrap.append('h4')
+        selection.append('h4')
             .text(t('inspector.edit_tags'));
 
-        list = wrap.append('ul')
+        list = selection.append('ul')
             .attr('class', 'tag-list');
 
-        var newTag = wrap.append('button')
+        var newTag = selection.append('button')
             .attr('class', 'add-tag');
 
         newTag.on('click', function() {
@@ -30,8 +27,6 @@ iD.ui.Taglist = function() {
         newTag.append('span')
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
-
-        drawTags(entity.tags);
 
     }
 
@@ -233,20 +228,15 @@ iD.ui.Taglist = function() {
     }
 
     function addTag() {
-        var tags = inspector.tags();
+        var tags = taglist.tags();
         tags[''] = '';
         drawTags(tags);
     }
 
     function removeTag(d) {
-        var tags = inspector.tags();
+        var tags = taglist.tags();
         delete tags[d.key];
         drawTags(tags);
-    }
-
-    function apply(entity) {
-        event.changeTags(entity, taglist.tags());
-        event.close(entity);
     }
 
     taglist.tags = function(tags) {

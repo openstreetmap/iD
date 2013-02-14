@@ -98,7 +98,6 @@ iD.ui.preset = function() {
                 showRawTags.text(hidden ? 'Hide raw tags' : 'Show raw tags');
                 if (hidden) sections.style('display', 'none');
                 else sections.style('display', '');
-                event.change(clean(getTags()));
             });
         sections = selection.selectAll('div.preset-section')
             .data(preset.main)
@@ -118,7 +117,6 @@ iD.ui.preset = function() {
                 .attr('class', 'col8 preset-input'), d);
         });
         if (exttags) setTags(exttags);
-        key();
     }
 
     presets.preset = function(_) {
