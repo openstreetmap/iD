@@ -1,53 +1,112 @@
 iD.ui.Inspector = function() {
-    var event = d3.dispatch('changeTags', 'close'),
+    var event = d3.dispatch('changeTags', 'close', 'change'),
         taginfo = iD.taginfo(),
+        presetData = iD.presetData(),
         initial = false,
-        context,
-        tagList;
+        expert = false,
+        inspectorbody,
+        presetUI,
+        tagList,
+        context;
 
     function inspector(selection) {
+
         var entity = selection.datum();
+            presetMatch = presetData.matchTags(entity);
 
-        var inspector = selection.append('div')
-            .attr('class','inspector content hide');
+        var iwrap = selection.append('div')
+                .attr('class','inspector content hide'),
+            messagewrap = iwrap.append('div')
+                .attr('class', 'message inspector-inner fillL2'),
+            message = messagewrap.append('h4');
 
-        inspector.append('div')
-            .attr('class', 'head inspector-inner fillL')
-            .call(drawHead);
-
-        var inspectorbody = inspector.append('div')
-            .attr('class', 'inspector-body');
-
-        var inspectorwrap = inspectorbody.append('div')
-            .attr('class', 'inspector-inner tag-wrap fillL2');
-
-        inspectorwrap.append('h4')
-            .text(t('inspector.edit_tags'));
-
-        tagList = inspectorwrap.append('ul');
-
-        var newTag = inspectorwrap.append('button')
-            .attr('class', 'add-tag');
-
-        newTag.on('click', function () {
-            addTag();
-            focusNewKey();
-        });
-
-        newTag.append('span')
-            .attr('class', 'icon icon-pre-text plus');
-
-        newTag.append('span')
-            .attr('class', 'label')
-            .text(t('inspector.new_tag'));
-
-        drawTags(entity.tags);
-
-        inspectorbody.append('div')
+        inspectorbody = iwrap.append('div')
+            .attr('class', 'inspector-body'),
+        iwrap.append('div')
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
 
-        inspector.call(iD.ui.Toggle(true));
+        if (initial) {
+            inspectorbody.call(iD.ui.PresetGrid()
+                    .presetData(presetData)
+                    .entity(selection.datum())
+                    .on('choose', function(preset) {
+                        inspectorbody.call(drawEditor, entity, preset);
+                    }));
+        } else {
+            inspectorbody.call(drawEditor, entity, presetMatch);
+        }
+
+        iwrap.call(iD.ui.Toggle(true));
+    }
+
+    function drawEditor(selection, entity, presetMatch) {
+        selection.html('');
+
+        var editorwrap = selection.append('div')
+            .attr('class', 'inspector-inner tag-wrap fillL2');
+
+        var typewrap = editorwrap.append('div')
+            .attr('class', 'type inspector-inner fillL');
+
+        typewrap.append('h4')
+            .text('Type');
+
+        typewrap.append('img')
+            .attr('class', 'preset-icon');
+
+        typewrap.append('h3')
+            .attr('class', 'preset-name')
+            .text(presetMatch ? presetMatch.name : '');
+
+
+        var namewrap = editorwrap.append('div')
+                .attr('class', 'head inspector-inner fillL'),
+            h2 = namewrap.append('h2');
+
+        h2.append('span')
+            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
+
+        var name = h2.append('input')
+            .attr('placeholder', 'name')
+            .property('value', function() {
+                return entity.tags.name || '';
+            })
+            .on('keyup', function() {
+                var tags = inspector.tags();
+                tags.name = this.value;
+                inspector.tags(tags);
+                event.change();
+            });
+
+        event.on('change.name', function() {
+            var tags = inspector.tags();
+            name.property('value', tags.name);
+        });
+
+
+        presetUI = iD.ui.preset()
+            .on('change', function(tags) {
+                event.change();
+            });
+
+        tagList = iD.ui.Taglist()
+            .context(context)
+            .on('change', function(tags) {
+                event.change();
+            });
+
+        var inspectorpreset = editorwrap.append('div')
+            .attr('class', 'inspector-preset cf');
+
+        if (presetMatch && !expert) {
+            inspectorpreset.call(presetUI
+                    .preset(presetMatch));
+        }
+
+        var taglistwrap = editorwrap.append('div').call(tagList);
+
+        inspector.tags(entity.tags);
     }
 
     function drawHead(selection) {
@@ -80,210 +139,16 @@ iD.ui.Inspector = function() {
             .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
             .text(t('inspector.view_on_osm'));
-    }
 
-    function drawTags(tags) {
-        var entity = tagList.datum();
-
-        tags = d3.entries(tags);
-
-        if (!tags.length) {
-            tags = [{key: '', value: ''}];
-        }
-
-        var li = tagList.html('')
-            .selectAll('li')
-            .data(tags, function(d) { return d.key; });
-
-        li.exit().remove();
-
-        var row = li.enter().append('li')
-            .attr('class', 'tag-row');
-
-        var inputs = row.append('div')
-            .attr('class', 'input-wrap');
-
-        inputs.append('input')
-            .property('type', 'text')
-            .attr('class', 'key')
-            .attr('maxlength', 255)
-            .property('value', function(d) { return d.key; })
-            .on('change', function(d) { d.key = this.value; });
-
-        inputs.append('input')
-            .property('type', 'text')
-            .attr('class', 'value')
-            .attr('maxlength', 255)
-            .property('value', function(d) { return d.value; })
-            .on('change', function(d) { d.value = this.value; })
-            .on('keydown.push-more', pushMore);
-
-        inputs.each(bindTypeahead);
-
-        var removeBtn = row.append('button')
-            .attr('tabindex', -1)
-            .attr('class','remove minor')
-            .on('click', removeTag);
-
-        removeBtn.append('span')
-            .attr('class', 'icon delete');
-
-        function findLocal(docs) {
-            var locale = iD.detect().locale.toLowerCase(),
-                localized;
-
-            localized = _.find(docs, function(d) {
-                return d.lang.toLowerCase() === locale;
-            });
-            if (localized) return localized;
-
-            // try the non-regional version of a language, like
-            // 'en' if the language is 'en-US'
-            if (locale.indexOf('-') !== -1) {
-                var first = locale.split('-')[0];
-                localized = _.find(docs, function(d) {
-                    return d.lang.toLowerCase() === first;
-                });
-                if (localized) return localized;
-            }
-
-            // finally fall back to english
-            return _.find(docs, function(d) {
-                return d.lang.toLowerCase() === 'en';
-            });
-        }
-
-        function keyValueReference(err, docs) {
-            var local;
-            if (!err && docs) {
-                local = findLocal(docs);
-            }
-            if (local) {
-                var types = [];
-                if (local.on_area) types.push('area');
-                if (local.on_node) types.push('point');
-                if (local.on_way) types.push('line');
-                local.types = types;
-                iD.ui.modal(context.container())
-                    .select('.content')
-                    .datum(local)
-                    .call(iD.ui.tagReference);
-            } else {
-                iD.ui.flash(context.container())
-                    .select('.content')
-                    .append('h3')
-                    .text(t('inspector.no_documentation_combination'));
-            }
-        }
-
-        function keyReference(err, values, params) {
-            if (!err && values.length) {
-                iD.ui.modal(context.container())
-                    .select('.content')
-                    .datum({
-                        data: values,
-                        title: 'Key:' + params.key,
-                        geometry: params.geometry
-                    })
-                    .call(iD.ui.keyReference);
-            } else {
-                iD.ui.flash(context.container())
-                    .select('.content')
-                    .append('h3')
-                    .text(t('inspector.no_documentation_key'));
-            }
-        }
-
-        var helpBtn = row.append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'tag-help minor')
-            .on('click', function(d) {
-                var params = _.extend({}, d, {
-                    geometry: entity.geometry(context.graph())
-                });
-                if (d.key && d.value) {
-                    taginfo.docs(params, keyValueReference);
-                } else if (d.key) {
-                    taginfo.values(params, keyReference);
-                }
+        var expertButton = selection.append('button')
+            .attr('class', 'apply')
+            .text('Tag view')
+            .on('click', function() {
+                expert = !expert;
+                expertButton.text(expert ? 'Preset view' : 'Tag view');
+                inspectorbody.call(drawEditor);
             });
 
-        helpBtn.append('span')
-            .attr('class', 'icon inspect');
-
-        if (initial && tags.length === 1 &&
-            tags[0].key === '' && tags[0].value === '') {
-            focusNewKey();
-        }
-
-        return li;
-    }
-
-    function pushMore() {
-        if (d3.event.keyCode === 9 &&
-            tagList.selectAll('li:last-child input.value').node() === this) {
-            addTag();
-            focusNewKey();
-            d3.event.preventDefault();
-        }
-    }
-
-    function bindTypeahead() {
-        var entity = tagList.datum(),
-            geometry = entity.geometry(context.graph()),
-            row = d3.select(this),
-            key = row.selectAll('.key'),
-            value = row.selectAll('.value');
-
-        function sort(value, data) {
-            var sameletter = [],
-                other = [];
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].value.substring(0, value.length) === value) {
-                    sameletter.push(data[i]);
-                } else {
-                    other.push(data[i]);
-                }
-            }
-            return sameletter.concat(other);
-        }
-
-        key.call(d3.typeahead()
-            .data(_.debounce(function(_, callback) {
-                taginfo.keys({
-                    geometry: geometry,
-                    query: key.property('value')
-                }, function(err, data) {
-                    if (!err) callback(sort(key.property('value'), data));
-                });
-            }, 500)));
-
-        value.call(d3.typeahead()
-            .data(_.debounce(function(_, callback) {
-                taginfo.values({
-                    key: key.property('value'),
-                    geometry: geometry,
-                    query: value.property('value')
-                }, function(err, data) {
-                    if (!err) callback(sort(value.property('value'), data));
-                });
-            }, 500)));
-    }
-
-    function focusNewKey() {
-        tagList.selectAll('li:last-child input.key').node().focus();
-    }
-
-    function addTag() {
-        var tags = inspector.tags();
-        tags[''] = '';
-        drawTags(tags);
-    }
-
-    function removeTag(d) {
-        var tags = inspector.tags();
-        delete tags[d.key];
-        drawTags(tags);
     }
 
     function apply(entity) {
@@ -293,21 +158,20 @@ iD.ui.Inspector = function() {
 
     inspector.tags = function(tags) {
         if (!arguments.length) {
-            tags = {};
-            tagList.selectAll('li').each(function() {
-                var row = d3.select(this),
-                    key = row.selectAll('.key').property('value'),
-                    value = row.selectAll('.value').property('value');
-                if (key !== '') tags[key] = value;
-            });
-            return tags;
+            return _.extend(presetUI.tags(), tagList.tags());
         } else {
-            drawTags(tags);
+            presetUI.change(tags);
+            tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
         }
     };
 
     inspector.initial = function(_) {
         initial = _;
+        return inspector;
+    };
+
+    inspector.presetData = function(_) {
+        presetData = _;
         return inspector;
     };
 

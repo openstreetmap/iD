@@ -1,0 +1,1265 @@
+[
+    {
+        "type": "freetext", 
+        "description": "The name", 
+        "key": "name", 
+        "name": "Name"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "A reference number or code used to identify this thing.", 
+        "key": "ref", 
+        "name": "Reference number"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "Brand, i.e. Acme", 
+        "key": "brand", 
+        "name": "Brand"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "Operator, i.e. Acme Springfield Ltd", 
+        "key": "operator", 
+        "name": "Operator"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The primary source of information for this object (GPS, survey, Bing, ...)", 
+        "key": "source", 
+        "name": "Source"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The official designation or classification (if any). Only use this if the organisation that runs it has its own classification system.", 
+        "key": "designation", 
+        "name": "Official classification"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The most common name", 
+        "key": "name", 
+        "name": "Name"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The internationally recognised name", 
+        "key": "int_name", 
+        "name": "International Name"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The historic or previous name", 
+        "key": "old_name", 
+        "name": "Historical Name"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "An alternative, currently used, name", 
+        "key": "alt_name", 
+        "name": "Alternative Name"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Free", 
+                "value": "free"
+            }, 
+            {
+                "text": "Yes", 
+                "value": "yes"
+            }, 
+            {
+                "text": "No", 
+                "value": "no"
+            }
+        ], 
+        "type": "choice", 
+        "description": "", 
+        "key": "wifi", 
+        "name": "Wifi"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The number of the house, e.g. 156 or 10-12", 
+        "key": "addr:housenumber", 
+        "name": "House Number"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The name of the house, e.g. Riverbank Cottage", 
+        "key": "addr:housename", 
+        "name": "Building Name"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The Street Name (optional)", 
+        "key": "addr:street", 
+        "name": "Street Name"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The postcode", 
+        "key": "addr:postcode", 
+        "name": "Postcode"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The URL of the website", 
+        "key": "website", 
+        "name": "Website"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Burger", 
+                "value": "burger"
+            }, 
+            {
+                "text": "Chicken", 
+                "value": "chicken"
+            }, 
+            {
+                "text": "Chinese", 
+                "value": "chinese"
+            }, 
+            {
+                "text": "Coffee Shop", 
+                "value": "coffee_shop"
+            }, 
+            {
+                "text": "Greek", 
+                "value": "greek"
+            }, 
+            {
+                "text": "Pizza", 
+                "value": "pizza"
+            }, 
+            {
+                "text": "Sandwich", 
+                "value": "sandwich"
+            }, 
+            {
+                "text": "Sea Food", 
+                "value": "seafood"
+            }, 
+            {
+                "text": "Regional", 
+                "value": "regional"
+            }, 
+            {
+                "text": "Italian", 
+                "value": "italian"
+            }, 
+            {
+                "text": "German", 
+                "value": "german"
+            }, 
+            {
+                "text": "Kebab/souvlaki/gyro", 
+                "value": "kebab"
+            }, 
+            {
+                "text": "Indian", 
+                "value": "indian"
+            }, 
+            {
+                "text": "Asian", 
+                "value": "asian"
+            }, 
+            {
+                "text": "Mexican", 
+                "value": "mexican"
+            }, 
+            {
+                "text": "Thai", 
+                "value": "thai"
+            }, 
+            {
+                "text": "Japanese", 
+                "value": "japanese"
+            }, 
+            {
+                "text": "Ice-cream", 
+                "value": "ice_cream"
+            }, 
+            {
+                "text": "Fish & Chips", 
+                "value": "fish_and_chips"
+            }, 
+            {
+                "text": "Turkish", 
+                "value": "turkish"
+            }, 
+            {
+                "text": "French", 
+                "value": "french"
+            }, 
+            {
+                "text": "Sushi", 
+                "value": "sushi"
+            }, 
+            {
+                "text": "American", 
+                "value": "american"
+            }, 
+            {
+                "text": "Steak House", 
+                "value": "steak_house"
+            }, 
+            {
+                "text": "International", 
+                "value": "international"
+            }, 
+            {
+                "text": "Spanish", 
+                "value": "spanish"
+            }, 
+            {
+                "text": "Vietnamese", 
+                "value": "vietnamese"
+            }, 
+            {
+                "text": "Fish", 
+                "value": "fish"
+            }, 
+            {
+                "text": "Bavarian", 
+                "value": "bavarian"
+            }, 
+            {
+                "text": "Vegetarian", 
+                "value": "vegetarian"
+            }
+        ], 
+        "type": "choice", 
+        "description": "The type of food that they serve", 
+        "key": "cuisine", 
+        "name": "Cuisine"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The official reference number", 
+        "key": "ref", 
+        "name": "Reference"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The official international reference number", 
+        "key": "int_ref", 
+        "name": "International Reference"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The historic or previous reference number", 
+        "key": "old_ref", 
+        "name": "Old Reference"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "Width of the road", 
+        "key": "width", 
+        "name": "Width"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Unpaved", 
+                "value": "unpaved"
+            }, 
+            {
+                "text": "Paved", 
+                "value": "paved"
+            }, 
+            {
+                "text": "Asphalt", 
+                "value": "asphalt"
+            }, 
+            {
+                "text": "Concrete", 
+                "value": "concrete"
+            }, 
+            {
+                "text": "Paving stones", 
+                "value": "paving_stones"
+            }, 
+            {
+                "text": "Cobblestone", 
+                "value": "cobblestone"
+            }, 
+            {
+                "text": "Sand", 
+                "value": "sand"
+            }, 
+            {
+                "text": "Gravel", 
+                "value": "gravel"
+            }, 
+            {
+                "text": "Dirt", 
+                "value": "dirt"
+            }, 
+            {
+                "text": "Grass", 
+                "value": "grass"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Type of road surface", 
+        "key": "surface", 
+        "name": "Surface"
+    }, 
+    {
+        "type": "checkbox", 
+        "description": "The way is a large open space, like at a dock, where vehicles can move anywhere within the space, rather than just along the edge.", 
+        "key": "area", 
+        "name": "Open area"
+    }, 
+    {
+        "description": "Total number of lanes, counting both directions", 
+        "maximum": 10.0, 
+        "minimum": 1.0, 
+        "key": "lanes", 
+        "type": "number", 
+        "name": "Lanes"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Generic Bridge", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Viaduct", 
+                "value": "viaduct"
+            }, 
+            {
+                "text": "Suspension bridge", 
+                "value": "suspension"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Road goes over a bridge", 
+        "key": "bridge", 
+        "name": "Bridge"
+    }, 
+    {}, 
+    {
+        "choices": [
+            {
+                "text": "Tunnel", 
+                "value": "yes"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Road goes into a tunnel", 
+        "key": "tunnel", 
+        "name": "Tunnel"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Embankment", 
+                "value": "yes"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Road supported on a raised bed of earth and rock.", 
+        "key": "embankment", 
+        "name": "Embankment"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Cutting", 
+                "value": "yes"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Road carved out of hill on one or both sides.", 
+        "key": "cutting", 
+        "name": "Cutting"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Yes", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Overhead line", 
+                "value": "contact_line"
+            }, 
+            {
+                "text": "Third rail", 
+                "value": "rail"
+            }, 
+            {
+                "text": "No", 
+                "value": "no"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Is the track electrified (whether by 3rd rail, overhead wires, etc)?", 
+        "key": "electrified", 
+        "name": "Electrified"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "600V", 
+                "value": "600"
+            }, 
+            {
+                "text": "750V", 
+                "value": "750"
+            }, 
+            {
+                "text": "1500V", 
+                "value": "1500"
+            }, 
+            {
+                "text": "3000V", 
+                "value": "3000"
+            }, 
+            {
+                "text": "12kV", 
+                "value": "12000"
+            }, 
+            {
+                "text": "15kV", 
+                "value": "15000"
+            }, 
+            {
+                "text": "25kV", 
+                "value": "25000"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Nominal voltage of electric wires", 
+        "key": "voltage", 
+        "name": "Voltage"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "DC", 
+                "value": "0"
+            }, 
+            {
+                "text": "16.67 Hz", 
+                "value": "16.67"
+            }, 
+            {
+                "text": "16.7 Hz", 
+                "value": "16.7"
+            }, 
+            {
+                "text": "25 Hz", 
+                "value": "25"
+            }, 
+            {
+                "text": "50 Hz", 
+                "value": "50"
+            }, 
+            {
+                "text": "60 Hz", 
+                "value": "60"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Frequency in Hertz of alternating current power supply", 
+        "key": "frequency", 
+        "name": "Frequency"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The charge/cost of using this amenity", 
+        "key": "fee", 
+        "name": "Fee"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "One way", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Two way", 
+                "value": "no"
+            }, 
+            {
+                "text": "One way reverse", 
+                "value": "-1"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Oneway roads", 
+        "key": "oneway", 
+        "name": "Oneway"
+    }, 
+    {}, 
+    {
+        "choices": [
+            {
+                "text": "Yes", 
+                "value": "roundabout"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Whether this road is a roundabout. Make the way face the direction appropriate for the country.", 
+        "key": "junction", 
+        "name": "Roundabout"
+    }, 
+    {}, 
+    {
+        "choices": [
+            {
+                "text": "Yes", 
+                "value": "traffic_signals"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Intersection controlled by traffic lights", 
+        "key": "highway", 
+        "name": "Traffic signals"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Allowed", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Prohibited", 
+                "value": "no"
+            }, 
+            {
+                "text": "Designated", 
+                "value": "designated"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Can pedestrians use this road, including footpaths if any?", 
+        "key": "foot", 
+        "name": "Pedestrians permitted"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Both", 
+                "value": "both"
+            }, 
+            {
+                "text": "Left", 
+                "value": "left"
+            }, 
+            {
+                "text": "Right", 
+                "value": "right"
+            }, 
+            {
+                "text": "Separate", 
+                "value": "separate"
+            }, 
+            {
+                "text": "None", 
+                "value": "none"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Whether there is a sidewalk at the side of the street", 
+        "key": "sidewalk", 
+        "name": "Sidewalks"
+    }, 
+    {}, 
+    {}, 
+    {}, 
+    {
+        "type": "freetext", 
+        "description": "12 character internal Naptan ID", 
+        "key": "naptan:AtcoCode", 
+        "name": "Atco Code"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "N", 
+                "value": "N"
+            }, 
+            {
+                "text": "NE", 
+                "value": "NE"
+            }, 
+            {
+                "text": "E", 
+                "value": "E"
+            }, 
+            {
+                "text": "SE", 
+                "value": "SE"
+            }, 
+            {
+                "text": "S", 
+                "value": "S"
+            }, 
+            {
+                "text": "SW", 
+                "value": "SW"
+            }, 
+            {
+                "text": "W", 
+                "value": "W"
+            }, 
+            {
+                "text": "NW", 
+                "value": "NW"
+            }
+        ], 
+        "type": "choice", 
+        "description": "The eight-point compass bearning", 
+        "key": "naptan:Bearing", 
+        "name": "Naptan Bearing"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The naptan common name", 
+        "key": "naptan:CommonName", 
+        "name": "Naptan Common Name (read-only)"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "", 
+        "key": "naptan:Indicator", 
+        "name": "Naptan Indicator (read-only)"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "", 
+        "key": "naptan:Street", 
+        "name": "Naptan Street (read-only)"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "Delete this when the details have been verified on-the-ground", 
+        "key": "naptan:verified", 
+        "name": "Naptan Verified?"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The name of the bus stop", 
+        "key": "name", 
+        "name": "Stop Name"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The local reference of the stop, usually one or two letters above the main flag, used at bus interchanges, e.g. L, BX", 
+        "key": "local_ref", 
+        "name": "Local Ref"
+    }, 
+    {}, 
+    {}, 
+    {}, 
+    {}, 
+    {}, 
+    {}, 
+    {}, 
+    {
+        "choices": [
+            {
+                "text": "Allowed", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Prohibited", 
+                "value": "no"
+            }, 
+            {
+                "text": "Private", 
+                "value": "private"
+            }, 
+            {
+                "text": "Cyclists dismount", 
+                "value": "dismount"
+            }, 
+            {
+                "text": "Designated", 
+                "value": "designated"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Are bicyles allowed to use this road (regardless of physical suitability)?", 
+        "key": "bicycle", 
+        "name": "Bicycles permitted"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "No bike lanes", 
+                "value": "no"
+            }, 
+            {
+                "text": "On-road bike lane", 
+                "value": "lane"
+            }, 
+            {
+                "text": "Parallel track", 
+                "value": "track"
+            }, 
+            {
+                "text": "Contraflow lane", 
+                "value": "opposite_lane"
+            }, 
+            {
+                "text": "Contraflow track", 
+                "value": "opposite_track"
+            }, 
+            {
+                "text": "Contraflow unmarked", 
+                "value": "opposite"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Road has bike lanes within the road surface", 
+        "key": "cycleway", 
+        "name": "Bike lanes"
+    }, 
+    {
+        "type": "freetext", 
+        "description": "The width in metres", 
+        "key": "width", 
+        "name": "Width"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Allowed", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Prohibited", 
+                "value": "no"
+            }, 
+            {
+                "text": "Permissive", 
+                "value": "permissive"
+            }, 
+            {
+                "text": "Private", 
+                "value": "private"
+            }, 
+            {
+                "text": "Designated", 
+                "value": "designated"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Are boats allowed to use this waterway?", 
+        "key": "boat", 
+        "name": "Boat permission"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Allowed", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Prohibited", 
+                "value": "no"
+            }, 
+            {
+                "text": "Permissive", 
+                "value": "permissive"
+            }, 
+            {
+                "text": "Private", 
+                "value": "private"
+            }, 
+            {
+                "text": "Designated", 
+                "value": "designated"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Is there a general right of access, regardless of mode of transport?", 
+        "key": "access", 
+        "name": "General access"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Allowed", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Prohibited", 
+                "value": "no"
+            }, 
+            {
+                "text": "Permissive", 
+                "value": "permissive"
+            }, 
+            {
+                "text": "Private", 
+                "value": "private"
+            }, 
+            {
+                "text": "Designated", 
+                "value": "designated"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Are cars and other private vehicles allowed?", 
+        "key": "motor_vehicle", 
+        "name": "Motor vehicles"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Allowed", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Prohibited", 
+                "value": "no"
+            }, 
+            {
+                "text": "Permissive", 
+                "value": "permissive"
+            }, 
+            {
+                "text": "Private", 
+                "value": "private"
+            }, 
+            {
+                "text": "Designated", 
+                "value": "designated"
+            }
+        ], 
+        "type": "choice", 
+        "description": "Are horses allowed?", 
+        "key": "horse", 
+        "name": "Horses"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Locality", 
+                "value": "locality"
+            }, 
+            {
+                "text": "Hamlet", 
+                "value": "hamlet"
+            }, 
+            {
+                "text": "Village", 
+                "value": "village"
+            }, 
+            {
+                "text": "Suburb", 
+                "value": "suburb"
+            }, 
+            {
+                "text": "Town", 
+                "value": "town"
+            }, 
+            {
+                "text": "City", 
+                "value": "city"
+            }, 
+            {
+                "text": "County", 
+                "value": "county"
+            }, 
+            {
+                "text": "Region", 
+                "value": "region"
+            }, 
+            {
+                "text": "State", 
+                "value": "state"
+            }, 
+            {
+                "text": "Country", 
+                "value": "country"
+            }, 
+            {
+                "text": "Continent", 
+                "value": "continent"
+            }, 
+            {
+                "text": "Island", 
+                "value": "island"
+            }, 
+            {
+                "text": "Islet", 
+                "value": "islet"
+            }
+        ], 
+        "type": "choice", 
+        "description": "", 
+        "key": "place", 
+        "name": "Type of Place"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Generic building", 
+                "value": "yes"
+            }, 
+            {
+                "text": "Generic residential", 
+                "value": "residential"
+            }, 
+            {
+                "text": "Big apartments house", 
+                "value": "apartments"
+            }, 
+            {
+                "text": "Terraced house", 
+                "value": "terrace"
+            }, 
+            {
+                "text": "Family house", 
+                "value": "house"
+            }, 
+            {
+                "text": "Small hut", 
+                "value": "hut"
+            }, 
+            {
+                "text": "A garage", 
+                "value": "garage"
+            }, 
+            {
+                "text": "Block of garages", 
+                "value": "garages"
+            }, 
+            {
+                "text": "Office building", 
+                "value": "office"
+            }, 
+            {
+                "text": "Public building", 
+                "value": "public"
+            }, 
+            {
+                "text": "Generic industrial", 
+                "value": "industrial"
+            }, 
+            {
+                "text": "Manufacture", 
+                "value": "manufacture"
+            }, 
+            {
+                "text": "Warehouse", 
+                "value": "warehouse"
+            }, 
+            {
+                "text": "Hangar", 
+                "value": "hangar"
+            }, 
+            {
+                "text": "Fluids storage tank", 
+                "value": "storage_tank"
+            }, 
+            {
+                "text": "Retail", 
+                "value": "retail"
+            }, 
+            {
+                "text": "Supermarket", 
+                "value": "supermarket"
+            }, 
+            {
+                "text": "Train station", 
+                "value": "train_station"
+            }, 
+            {
+                "text": "Church", 
+                "value": "church"
+            }, 
+            {
+                "text": "School", 
+                "value": "school"
+            }, 
+            {
+                "text": "Military bunker", 
+                "value": "bunker"
+            }, 
+            {
+                "text": "Collapsed building", 
+                "value": "collapsed"
+            }, 
+            {
+                "text": "Just a roof", 
+                "value": "roof"
+            }
+        ], 
+        "type": "choice", 
+        "description": "", 
+        "key": "building", 
+        "name": "Building type, if it is one"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "2", 
+                "value": "2"
+            }, 
+            {
+                "text": "3", 
+                "value": "3"
+            }, 
+            {
+                "text": "4", 
+                "value": "4"
+            }, 
+            {
+                "text": "6", 
+                "value": "6"
+            }, 
+            {
+                "text": "8", 
+                "value": "8"
+            }, 
+            {
+                "text": "10", 
+                "value": "10"
+            }, 
+            {
+                "text": "12", 
+                "value": "12"
+            }
+        ], 
+        "type": "choice", 
+        "description": "", 
+        "key": "cables", 
+        "name": "Cables"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "400 V", 
+                "value": "400"
+            }, 
+            {
+                "text": "600 V", 
+                "value": "600"
+            }, 
+            {
+                "text": "750 V", 
+                "value": "750"
+            }, 
+            {
+                "text": "1500 V", 
+                "value": "1500"
+            }, 
+            {
+                "text": "3000 V", 
+                "value": "3000"
+            }, 
+            {
+                "text": "15 kV", 
+                "value": "15000"
+            }, 
+            {
+                "text": "20 kV", 
+                "value": "20000"
+            }, 
+            {
+                "text": "35 kV", 
+                "value": "35000"
+            }, 
+            {
+                "text": "110 kV", 
+                "value": "110000"
+            }, 
+            {
+                "text": "132 kV", 
+                "value": "132000"
+            }, 
+            {
+                "text": "138 kV", 
+                "value": "138000"
+            }, 
+            {
+                "text": "220 kV", 
+                "value": "220000"
+            }, 
+            {
+                "text": "380 kV", 
+                "value": "380000"
+            }, 
+            {
+                "text": "500 kV", 
+                "value": "500000"
+            }
+        ], 
+        "type": "choice", 
+        "description": "", 
+        "key": "voltage", 
+        "name": "Voltage"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "9 pin bowling", 
+                "value": "9pin"
+            }, 
+            {
+                "text": "10 pin bowling", 
+                "value": "10pin"
+            }, 
+            {
+                "text": "American football", 
+                "value": "american_football"
+            }, 
+            {
+                "text": "Archery", 
+                "value": "archery"
+            }, 
+            {
+                "text": "Athletics", 
+                "value": "athletics"
+            }, 
+            {
+                "text": "Australian Rules Football", 
+                "value": "australian_football"
+            }, 
+            {
+                "text": "Baseball", 
+                "value": "baseball"
+            }, 
+            {
+                "text": "Basketball", 
+                "value": "basketball"
+            }, 
+            {
+                "text": "Beach volleyball", 
+                "value": "beachvolleyball"
+            }, 
+            {
+                "text": "Boules/petanque/bocci", 
+                "value": "boules"
+            }, 
+            {
+                "text": "Lawn bowls", 
+                "value": "bowls"
+            }, 
+            {
+                "text": "Canadian football", 
+                "value": "canadian_football"
+            }, 
+            {
+                "text": "Chess", 
+                "value": "chess"
+            }, 
+            {
+                "text": "Cricket", 
+                "value": "cricket"
+            }, 
+            {
+                "text": "Cricket nets", 
+                "value": "cricket_nets"
+            }, 
+            {
+                "text": "Croquet", 
+                "value": "croquet"
+            }, 
+            {
+                "text": "Equestrian", 
+                "value": "equestrian"
+            }, 
+            {
+                "text": "Gaelic football", 
+                "value": "gaelic_football"
+            }, 
+            {
+                "text": "Gymnastics", 
+                "value": "gymnastics"
+            }, 
+            {
+                "text": "(Team) handball", 
+                "value": "team_handball"
+            }, 
+            {
+                "text": "(Field) hockey", 
+                "value": "hockey"
+            }, 
+            {
+                "text": "Korball", 
+                "value": "korfball"
+            }, 
+            {
+                "text": "Pelota", 
+                "value": "pelota"
+            }, 
+            {
+                "text": "Rugby league", 
+                "value": "rugby_league"
+            }, 
+            {
+                "text": "Rugby union", 
+                "value": "rugby_union"
+            }, 
+            {
+                "text": "Shooting", 
+                "value": "shooting"
+            }, 
+            {
+                "text": "Ice skating", 
+                "value": "skating"
+            }, 
+            {
+                "text": "Skateboarding", 
+                "value": "skateboard"
+            }, 
+            {
+                "text": "Soccer/football", 
+                "value": "soccer"
+            }, 
+            {
+                "text": "Swimming", 
+                "value": "swimming"
+            }, 
+            {
+                "text": "Table tennis", 
+                "value": "table_tennis"
+            }, 
+            {
+                "text": "Tennis", 
+                "value": "tennis"
+            }, 
+            {
+                "text": "Volleyball", 
+                "value": "volleyball"
+            }
+        ], 
+        "type": "choice", 
+        "description": "The sport that is predominantly played here.", 
+        "key": "sport", 
+        "name": "Sport"
+    }, 
+    {
+        "choices": [
+            {
+                "text": "Yes: ramps/elevators/etc", 
+                "value": "yes"
+            }, 
+            {
+                "text": "No: inaccessible to wheelchairs", 
+                "value": "no"
+            }, 
+            {
+                "text": "Limited accessibility", 
+                "value": "limited"
+            }
+        ], 
+        "type": "choice", 
+        "description": "", 
+        "key": "wheelchair", 
+        "name": "Wheelchair"
+    }
+]
