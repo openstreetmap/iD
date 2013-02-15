@@ -555,11 +555,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     display: inline-block
 }
 
-.inspector-inner.tag-wrap {
-    max-height: 300px;
-    overflow: auto;
-}
-
 .inspector-toggle {
     color:#fff;
     width: 100%;
@@ -570,6 +565,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-body {
     position:relative;
+    max-height: 400px;
+    overflow: auto;
 }
 
 .tag-row {

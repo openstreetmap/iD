@@ -3,6 +3,8 @@ iD.ui.Inspector = function() {
         taginfo = iD.taginfo(),
         presetData = iD.presetData(),
         initial = false,
+        expert = false,
+        inspectorbody,
         presetUI,
         tagList,
         context;
@@ -13,29 +15,33 @@ iD.ui.Inspector = function() {
                 .attr('class','inspector content hide'),
             messagewrap = iwrap.append('div')
                 .attr('class', 'message inspector-inner fillL2'),
-            message = messagewrap.append('h4'),
-            main = iwrap.append('div');
-            buttons = iwrap.append('div')
+            message = messagewrap.append('h4');
+
+        inspectorbody = iwrap.append('div')
+            .attr('class', 'inspector-body'),
+        iwrap.append('div')
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
 
-
         if (false && initial) {
-            main.call(iD.ui.presetfavs());
+            inspectorbody.call(iD.ui.presetfavs());
         } else {
-            main.call(drawEditor);
+            inspectorbody.call(drawEditor);
         }
+
         iwrap.call(iD.ui.Toggle(true));
     }
 
     function drawEditor(selection) {
+        selection.html('');
 
         var entity = selection.datum();
             presetMatch = presetData.matchTags(entity);
 
-            console.log(presetMatch);
+        var editorwrap = selection.append('div')
+            .attr('class', 'inspector-inner tag-wrap fillL2');
 
-        var typewrap = selection.append('div')
+        var typewrap = editorwrap.append('div')
             .attr('class', 'type inspector-inner fillL');
 
         typewrap.append('h4')
@@ -49,7 +55,7 @@ iD.ui.Inspector = function() {
             .text(presetMatch ? presetMatch.name : '');
 
 
-        var namewrap = selection.append('div')
+        var namewrap = editorwrap.append('div')
                 .attr('class', 'head inspector-inner fillL'),
             h2 = namewrap.append('h2');
 
@@ -73,11 +79,6 @@ iD.ui.Inspector = function() {
             name.property('value', tags.name);
         });
 
-        var inspectorbody = selection.append('div')
-            .attr('class', 'inspector-body');
-
-        var inspectorwrap = inspectorbody.append('div')
-            .attr('class', 'inspector-inner tag-wrap fillL2');
 
         presetUI = iD.ui.preset()
             .on('change', function(tags) {
@@ -90,19 +91,17 @@ iD.ui.Inspector = function() {
                 event.change();
             });
 
-        var inspectorpreset = inspectorwrap.append('div')
+        var inspectorpreset = editorwrap.append('div')
             .attr('class', 'inspector-preset cf');
 
-        if (presetMatch) {
+        if (presetMatch && !expert) {
             inspectorpreset.call(presetUI
                     .preset(presetMatch));
         }
 
-        var taglistwrap = inspectorwrap.append('div').call(tagList);
+        var taglistwrap = editorwrap.append('div').call(tagList);
 
         inspector.tags(entity.tags);
-
-
     }
 
     function drawHead(selection) {
@@ -135,6 +134,16 @@ iD.ui.Inspector = function() {
             .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
             .text(t('inspector.view_on_osm'));
+
+        var expertButton = selection.append('button')
+            .attr('class', 'apply')
+            .text('Tag view')
+            .on('click', function() {
+                expert = !expert;
+                expertButton.text(expert ? 'Preset view' : 'Tag view');
+                inspectorbody.call(drawEditor);
+            });
+
     }
 
     function apply(entity) {

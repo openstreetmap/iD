@@ -7,8 +7,8 @@ iD.ui.Taglist = function() {
 
     function taglist(selection) {
 
-        selection.append('h4')
-            .text(t('inspector.edit_tags'));
+        //selection.append('h4')
+            //.text(t('inspector.edit_tags'));
 
         list = selection.append('ul')
             .attr('class', 'tag-list');
