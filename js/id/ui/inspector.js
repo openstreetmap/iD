@@ -5,14 +5,16 @@ iD.ui.Inspector = function() {
         initial = false,
         expert = false,
         inspectorbody,
+        entity,
+        presetMatch,
         presetUI,
         tagList,
         context;
 
     function inspector(selection) {
 
-        var entity = selection.datum();
-            presetMatch = presetData.matchTags(entity);
+       entity = selection.datum();
+       presetMatch = presetData.matchTags(entity);
 
         var iwrap = selection.append('div')
                 .attr('class','inspector content hide'),
@@ -31,16 +33,17 @@ iD.ui.Inspector = function() {
                     .presetData(presetData)
                     .entity(selection.datum())
                     .on('choose', function(preset) {
-                        inspectorbody.call(drawEditor, entity, preset);
+                        presetMatch = preset;
+                        inspectorbody.call(drawEditor);
                     }));
         } else {
-            inspectorbody.call(drawEditor, entity, presetMatch);
+            inspectorbody.call(drawEditor);
         }
 
         iwrap.call(iD.ui.Toggle(true));
     }
 
-    function drawEditor(selection, entity, presetMatch) {
+    function drawEditor(selection) {
         selection.html('');
 
         var editorwrap = selection.append('div')
