@@ -30,7 +30,8 @@ iD.ui.Inspector = function() {
         presetGrid = iD.ui.PresetGrid()
             .presetData(presetData)
             .entity(entity)
-            .on('message', message.text)
+            .context(context)
+            .on('message', changeMessage)
             .on('choose', function(preset) {
                 inspectorbody.call(tagEditor, expert, preset);
             });
@@ -38,10 +39,12 @@ iD.ui.Inspector = function() {
         tagEditor = iD.ui.TagEditor()
             .presetData(presetData)
             .context(context)
-            .on('message', message.text)
+            .on('message', changeMessage)
             .on('choose', function() {
                 inspectorbody.call(presetGrid);
             });
+
+        function changeMessage(msg) { message.text(msg);}
 
 
         if (initial) {

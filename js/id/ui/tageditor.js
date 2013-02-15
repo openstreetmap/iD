@@ -2,7 +2,6 @@ iD.ui.TagEditor = function() {
     var event = d3.dispatch('changeTags', 'choose', 'close', 'change', 'message'),
         taginfo = iD.taginfo(),
         presetData = iD.presetData(),
-        expert = false,
         inspectorbody,
         entity,
         presetMatch,
@@ -22,7 +21,10 @@ iD.ui.TagEditor = function() {
             .attr('class', 'inspector-inner tag-wrap fillL2');
 
         var typewrap = editorwrap.append('div')
-            .attr('class', 'type inspector-inner fillL');
+            .attr('class', 'type inspector-inner fillL')
+            .on('click', function() {
+                event.choose();
+            });
 
         typewrap.append('h4')
             .text('Type');
@@ -78,6 +80,8 @@ iD.ui.TagEditor = function() {
             tageditorpreset.call(presetUI
                     .preset(presetMatch));
         }
+
+        event.message('Edit ' + (presetMatch && presetMatch.name || ''));
 
         var taglistwrap = editorwrap.append('div').call(tagList);
 
