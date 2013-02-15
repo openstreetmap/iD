@@ -16,7 +16,7 @@ locale.tr = {
             tail: "Nokta eklemek için haritaya tıklayın."
         },
         browse: {
-            title: "Tara",
+            title: "Dolaş",
             description: "Harita üzerinde dolan ve yaklaş."
         },
         draw_area: {
@@ -139,15 +139,15 @@ locale.tr = {
     report_a_bug: "Hata rapor et",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Değişiklikleri kaydet",
+        description_placeholder: "Katkı sağlayanlar hakkında kısa açıklama",
+        upload_explanation: "{user} kullanıcısı olarak yaptığınız değişiklikler tüm OpenStreetMap kullanan haritalarda görünür olacaktır.",
+        save: "Kaydet",
+        cancel: "İptal",
+        warnings: "Uyarılar",
+        modified: "Değiştirildi",
+        deleted: "Silindi",
+        created: "Oluşturuldu"
     },
 
     contributors: {
@@ -162,7 +162,7 @@ locale.tr = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Konumumu göster"
     },
 
     inspector: {
@@ -183,9 +183,9 @@ locale.tr = {
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Daha önceki oturumunuzdan kaydedilmemiş değişiklikler var. Bu değişiklikleri geri getirmek ister misiniz?",
+        restore: "Geri Getir",
+        reset: "Sıfırla"
     },
 
     save: {
@@ -197,8 +197,8 @@ locale.tr = {
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "OpenStreetMap Editörü iD'ye hoşgeldiniz",
+        text: "Bu {version} versiyonu geliştirme versiyonudur. Daha fazla bilgi için {website} sitesine bakabilirsiniz ve hataları {github} sitesine raporlayabilirsiniz."
     },
 
     source_switch: {
@@ -208,8 +208,8 @@ locale.tr = {
 
     tag_reference: {
         description: "Açıklama",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        on_wiki: "wiki.osm.org sitesindeki {tag} ",
+        used_with: "{type} ile birlikte"
     },
 
     validations: {
