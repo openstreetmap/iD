@@ -139,15 +139,15 @@ locale.fr = {
     report_a_bug: "Signaler un bug",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Sauvegarder vos modifications",
+        description_placeholder: "Description succinte de vos contributions",
+        upload_explanation: "{user} : les modifications apportées seront visibles par l'ensemble des services utilisant les données d'OpenStreetMap.",
+        save: "Sauvegarder",
+        cancel: "Annuler",
+        warnings: "Attention",
+        modified: "Modifié",
+        deleted: "Supprimé",
+        created: "Créé"
     },
 
     contributors: {
@@ -183,9 +183,9 @@ locale.fr = {
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Vous avez des changements d'une précédente édition non sauvegardés. Souhaitez-vous restaurer ces changements?",
+        restore: "Restaurer",
+        reset: "Annuler"
     },
 
     save: {
@@ -197,8 +197,8 @@ locale.fr = {
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "Bienvenue sur ID l'editeur en ligne d'OpenStreetMap",
+        text: "Cette version {version}, est une version de développement. Si vous souhaitez plus d'informations, veuillez consulter {website} ou pour signaler un bug   {github}."
     },
 
     source_switch: {
@@ -208,8 +208,8 @@ locale.fr = {
 
     tag_reference: {
         description: "Déscription",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        on_wiki: "{tag} sur le wiki.osm.org",
+        used_with: "Utilisé avec {type}"
     },
 
     validations: {
