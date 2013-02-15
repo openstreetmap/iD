@@ -11,6 +11,9 @@ iD.ui.Inspector = function() {
 
     function inspector(selection) {
 
+        var entity = selection.datum();
+            presetMatch = presetData.matchTags(entity);
+
         var iwrap = selection.append('div')
                 .attr('class','inspector content hide'),
             messagewrap = iwrap.append('div')
@@ -23,20 +26,22 @@ iD.ui.Inspector = function() {
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
 
-        if (false && initial) {
-            inspectorbody.call(iD.ui.presetfavs());
+        if (initial) {
+            inspectorbody.call(iD.ui.PresetGrid()
+                    .presetData(presetData)
+                    .entity(selection.datum())
+                    .on('choose', function(preset) {
+                        inspectorbody.call(drawEditor, entity, preset);
+                    }));
         } else {
-            inspectorbody.call(drawEditor);
+            inspectorbody.call(drawEditor, entity, presetMatch);
         }
 
         iwrap.call(iD.ui.Toggle(true));
     }
 
-    function drawEditor(selection) {
+    function drawEditor(selection, entity, presetMatch) {
         selection.html('');
-
-        var entity = selection.datum();
-            presetMatch = presetData.matchTags(entity);
 
         var editorwrap = selection.append('div')
             .attr('class', 'inspector-inner tag-wrap fillL2');

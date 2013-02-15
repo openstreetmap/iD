@@ -643,6 +643,31 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     display: none;
 }
 
+/* Preset grid */
+/* temp */
+
+.preset-grid {
+  max-height:  360px;
+}
+
+.preset-grid .grid-entry {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: red;
+  color: black;
+  margin: 10px;
+}
+
+.preset-grid-search-wrap {
+  padding: 20px;
+}
+
+.preset-grid-search {
+  width: 100%;
+  height: 20px;
+}
+
 /* Map Controls */
 
 .map-control {
