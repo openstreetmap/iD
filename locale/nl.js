@@ -1,29 +1,29 @@
 locale.nl = {
     modes: {
         add_area: {
-            title: "Vlakken",
+            title: "Vlak",
             description: "Voeg parken, gebouwen, meren of andere vlakken aan de kaart toe.",
             tail: "Klik in de kaart om het tekenen van een vlak zoals een park, gebouw of meer te starten."
         },
         add_line: {
             title: "Lijn",
-            description: "Lijnen zijn rijkswegen, straten, voetpaden of kanalen.",
+            description: "Lijnen zijn bijvoorbeeld rijkswegen, straten, voetpaden of kanalen.",
             tail: "Klik in de kaart om het tekenen van straat, pad of route te starten."
         },
         add_point: {
             title: "Punt",
-            description: "Restaurants, monumenten en brievenbussen zijn punten.",
+            description: "Restaurants, monumenten en brievenbussen zijn bijvoorbeeld punten.",
             tail: "Klik in de kaart om een punt toe te voegen."
         },
         browse: {
             title: "Navigatie",
-            description: "Verschuiven en vergroten/verkleinen van de kaartuitsnede."
+            description: "Verschuif en zoom in op de kaart."
         },
         draw_area: {
             tail: "Klik om punten aan het vlak toe te voegen. Klik op het eerste punt om het vlak te sluiten."
         },
         draw_line: {
-            tail: "Klik om  meer punten aan de lijn toe te voegen. Klik op een andere lijn om de lijnen te verbinden en dubbelklik om het tekenen te stoppen."
+            tail: "Klik om meer punten aan de lijn toe te voegen. Klik op een andere lijn om de lijnen te verbinden en dubbelklik om de lijn af te sluiten."
         }
     },
 
@@ -31,7 +31,7 @@ locale.nl = {
         add: {
             annotation: {
                 point: "Punt toegevoegd.",
-                vertex: "Stützpunkt einem Weg hinzugefügt."
+                vertex: "Knoop aan een weg toegevoegd."
             }
         },
         start: {
@@ -50,33 +50,33 @@ locale.nl = {
             annotation: "Tekenen afgebroken."
         },
         change_tags: {
-            annotation: "Tags veranderd."
+            annotation: "Tags aangepast."
         },
         circularize: {
-            title: "Abrunden",
-            description: "Runde dies ab.",
+            title: "Rond maken",
+            description: "Maak dit rond.",
             key: "O",
             annotation: {
-                line: "Runde eine Linie ab.",
-                area: "Runde eine Fläche ab."
+                line: "Maak een lijn rond.",
+                area: "Maak een vlak rond."
             }
         },
         orthogonalize: {
-            title: "Rechtwinkligkeit herstellen",
-            description: "Diese Ecken rechtwinklig ausrichten.",
+            title: "Haaks maken",
+            description: "Maak deze hoeken haaks.",
             key: "Q",
             annotation: {
-                line: "Die Ecken einer Linie rechtwinklig ausgerichtet.",
-                area: "Die Ecken einer Fläche rechtwinklig ausgerichtet."
+                line: "Hoeken van een lijn zijn haaks gemaakt.",
+                area: "Hoeken van een vlak zijn haaks gemaakt."
             }
         },
         'delete': {
             title: "Verwijderen",
-            description: "Verwijder deze van de kaart.",
+            description: "Verwijder dit van de kaart.",
             key: "⌫",
             annotation: {
                 point: "Punt verwijderd.",
-                vertex: "Stützpunkt aus einem Weg gelöscht.",
+                vertex: "Knoop uit een weg verwijderd.",
                 line: "Lijn verwijderd.",
                 area: "Vlak verwijderd.",
                 relation: "Relatie verwijderd.",
@@ -85,23 +85,23 @@ locale.nl = {
         },
         connect: {
             annotation: {
-                point: "Weg mit einem Punkt verbunden.",
-                vertex: "Weg mit einem anderem Weg verbunden.",
-                line: "Weg mit einer Linie verbunden.",
-                area: "Weg mit einer Fläche verbunden."
+                point: "Weg aan een punt verbonden.",
+                vertex: "Weg aan een andere weg verbonden.",
+                line: "Weg aan een lijn  verbonden.",
+                area: "Weg aan een vlak verbonden."
             }
         },
         disconnect: {
-            title: "Trennen",
-            description: "Trenne diese Wege voneinander.",
+            title: "Losmaken",
+            description: "Maak deze wegen van elkaar los.",
             key: "D",
-            annotation: "Wege getrennt."
+            annotation: "Wegen losgemaakt."
         },
         merge: {
-            title: "Vereinigen",
-            description: "Vereinige diese Linien.",
+            title: "Samenvoegen",
+            description: "Voeg deze lijnen samen.",
             key: "C",
-            annotation: "{n} Linien vereinigt."
+            annotation: "{n} lijnen samengevoegd."
         },
         move: {
             title: "Verschuiven",
@@ -109,7 +109,7 @@ locale.nl = {
             key: "M",
             annotation: {
                 point: "Punt verschoven.",
-                vertex: "Stützpunkt in einen Weg veschoben.",
+                vertex: "Knoop van een weg verschoven.",
                 line: "Lijn verschoven.",
                 area: "Vlak verschoven."
             }
@@ -122,26 +122,26 @@ locale.nl = {
         },
         split: {
             title: "Splitsen",
-            description: "Splits dit in twee wegen op dit punt.",
+            description: "Splits deze weg op het geselecteerde punt.",
             key: "X",
             annotation: "Weg opgesplitst."
         }
     },
 
-    nothing_to_undo: "Nichts zum Rückgängigmachen.",
-    nothing_to_redo: "Nichts zum Wiederherstellen.",
+    nothing_to_undo: "Niets om ongedaan te maken.",
+    nothing_to_redo: "Niets om opnieuw uit te voeren.",
 
     just_edited: "Je hebt zojuist OpenStreetMap aangepast!",
     browser_notice: "Deze editor wordt door Firefox, Chrome, Safari, Opera en Internet Explorer (versie 9 en hoger) ondersteund. Download een nieuwere versie van je browser of gebruik Potlatch 2 om de kaart aan te passen.",
-    view_on_osm: "Op OSM bekijken",
+    view_on_osm: "Bekijk op OSM",
     zoom_in_edit: "Zoom in om de kaart aan te passen.",
     logout: "Afmelden",
-    report_a_bug: "Softwareprobleem melden",
+    report_a_bug: "Meld een softwareprobleem",
 
     commit: {
         title: "Aanpassingen opslaan",
         description_placeholder: "Een korte omschrijving van je bijdragen",
-        upload_explanation: "Aanpassingen die je als {user} uploadt worden zichtbaar op alle kaarten die OpenStreetMap gebruiken.",
+        upload_explanation: "Aanpassingen die je als {user} uploadt worden zichtbaar op alle kaarten die de gegevens van OpenStreetMap gebruiken.",
         save: "Opslaan",
         cancel: "Afbreken",
         warnings: "Waarschuwingen",
@@ -162,38 +162,38 @@ locale.nl = {
     },
 
     geolocate: {
-        title: "Toen mijn locatie"
+        title: "Toon mijn locatie"
     },
 
     inspector: {
-        no_documentation_combination: "Voor dit attribuut is geen documentatie beschikbaar.",
-        no_documentation_key: "Voor dit trefwoord is geen documentatie beschikbaar",
-        new_tag: "Nieuw attribuut",
-        edit_tags: "Attribuut aanpassen",
+        no_documentation_combination: "Voor deze tag is geen documentatie beschikbaar.",
+        no_documentation_key: "Voor deze sleutel is geen documentatie beschikbaar",
+        new_tag: "Nieuwe tag",
+        edit_tags: "Tags aanpassen",
         okay: "OK",
-        view_on_osm: "op OSM bekijken"
+        view_on_osm: "Bekijk op OSM"
     },
 
     layerswitcher: {
         title: "Achtergrond",
         description: "Achtergrondinstellingen",
         percent_brightness: "{opacity}% helderheid",
-        fix_misalignment: "Fehlerhafte Ausrichtung reparieren",
-        reset: "Terugzetten"
+        fix_misalignment: "Repareer de verkeerde ligging",
+        reset: "Ongedaan maken"
     },
 
     restore: {
-        description: "Er zijn niet-opgeslagen aanpassingen uit een vorige sessie. Wil je deze aanpassingen herstellen?",
-        restore: "Herstellen",
-        reset: "Terugzetten"
+        description: "Er zijn niet-opgeslagen aanpassingen uit een vorige sessie. Wil je deze aanpassingen behouden?",
+        restore: "Behouden",
+        reset: "Ongedaan maken"
     },
 
     save: {
         title: "Opslaan",
-        help: "Sla de aanpassingen op op OpenStreetMap om deze voor andere gebruikers zichtbaar te maken",
+        help: "Sla de aanpassingen bij OpenStreetMap op om deze voor andere gebruikers zichtbaar te maken",
         error: "Bij het opslaan is een fout opgetreden",
-        uploading: "De aanpassingen zijn naar OpenStreetMap geüpload.",
-        unsaved_changes: "Niet-opgeslagen aanpassingen beschikbaar",
+        uploading: "De aanpassingen worden naar OpenStreetMap geüpload.",
+        unsaved_changes: "Je hebt niet-opgeslagen aanpassingen",
     },
 
     splash: {
@@ -207,21 +207,21 @@ locale.nl = {
     },
 
     tag_reference: {
-        description: "Beschreibung",
-        on_wiki: "{tag} auf wiki.osm.org",
-        used_with: "benutzt mit {type}"
+        description: "Omschrijving",
+        on_wiki: "{tag} op wiki.osm.org",
+        used_with: "gebruikt met {type}"
     },
 
     validations: {
-        untagged_point: "Punkt ohne Attribute, der kein Teil einer Linie oder Fläche ist",
-        untagged_line: "Linie ohne Attribute",
-        untagged_area: "Fläche ohne Attribute",
-        tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
-        deprecated_tags: "Veralterte Attribute: {tags}"
+        untagged_point: "Punt zonder tags, dat geen onderdeel is van een lijn of vlak",
+        untagged_line: "Lijn zonder tags",
+        untagged_area: "Vlak zonder tags",
+        tag_suggests_area: "De tag {tag} suggereert dat de lijn een vlak is, maar het is geen vlak",
+        deprecated_tags: "Afgeschafte tags: {tags}"
     },
 
     zoom: {
-        in: "Hineinzoomen",
-        out: "Herauszoomen"
+        in: "Inzoomen",
+        out: "Uitzoomen"
     }
 };
