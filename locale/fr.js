@@ -151,8 +151,8 @@ locale.fr = {
     },
 
     contributors: {
-        list: "Consulter les contributions de {users}",
-        truncated_list: "Consulter les contributions de {users} et {count} les autres"
+        list: "Contributions réalisées par {users}",
+        truncated_list: "Contributions réalisées par {users} et {count} autres personnes"
     },
 
     geocoder: {
@@ -162,7 +162,7 @@ locale.fr = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Me localiser"
     },
 
     inspector: {
@@ -177,13 +177,13 @@ locale.fr = {
     layerswitcher: {
         title: "Fond de carte",
         description: "Paramètres du fond de carte",
-        percent_brightness: "{opacity}% brightness",
+        percent_brightness: "{opacity}% luminosité",
         fix_misalignment: "Fix misalignment",
         reset: "reset"
     },
 
     restore: {
-        description: "Vous avez des changements d'une précédente édition non sauvegardés. Souhaitez-vous restaurer ces changements?",
+        description: "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements?",
         restore: "Restaurer",
         reset: "Annuler"
     },
