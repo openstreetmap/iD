@@ -6,15 +6,14 @@ iD.ui.Inspector = function() {
         expert = false,
         inspectorbody,
         entity,
-        presetMatch,
         presetUI,
+        presetGrid,
         tagList,
         context;
 
     function inspector(selection) {
 
-       entity = selection.datum();
-       presetMatch = presetData.matchTags(entity);
+        entity = selection.datum();
 
         var iwrap = selection.append('div')
                 .attr('class','inspector content hide'),
@@ -28,100 +27,30 @@ iD.ui.Inspector = function() {
             .attr('class', 'inspector-buttons pad1 fillD')
             .call(drawButtons);
 
+        presetGrid = iD.ui.PresetGrid()
+            .presetData(presetData)
+            .entity(entity)
+            .on('message', message.text)
+            .on('choose', function(preset) {
+                inspectorbody.call(tagEditor, expert, preset);
+            });
+
+        tagEditor = iD.ui.TagEditor()
+            .presetData(presetData)
+            .context(context)
+            .on('message', message.text)
+            .on('choose', function() {
+                inspectorbody.call(presetGrid);
+            });
+
+
         if (initial) {
-            inspectorbody.call(iD.ui.PresetGrid()
-                    .presetData(presetData)
-                    .entity(selection.datum())
-                    .on('choose', function(preset) {
-                        presetMatch = preset;
-                        inspectorbody.call(drawEditor);
-                    }));
+            inspectorbody.call(presetGrid);
         } else {
-            inspectorbody.call(drawEditor);
+            inspectorbody.call(tagEditor);
         }
 
         iwrap.call(iD.ui.Toggle(true));
-    }
-
-    function drawEditor(selection) {
-        selection.html('');
-
-        var editorwrap = selection.append('div')
-            .attr('class', 'inspector-inner tag-wrap fillL2');
-
-        var typewrap = editorwrap.append('div')
-            .attr('class', 'type inspector-inner fillL');
-
-        typewrap.append('h4')
-            .text('Type');
-
-        typewrap.append('img')
-            .attr('class', 'preset-icon');
-
-        typewrap.append('h3')
-            .attr('class', 'preset-name')
-            .text(presetMatch ? presetMatch.name : '');
-
-
-        var namewrap = editorwrap.append('div')
-                .attr('class', 'head inspector-inner fillL'),
-            h2 = namewrap.append('h2');
-
-        h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
-
-        var name = h2.append('input')
-            .attr('placeholder', 'name')
-            .property('value', function() {
-                return entity.tags.name || '';
-            })
-            .on('keyup', function() {
-                var tags = inspector.tags();
-                tags.name = this.value;
-                inspector.tags(tags);
-                event.change();
-            });
-
-        event.on('change.name', function() {
-            var tags = inspector.tags();
-            name.property('value', tags.name);
-        });
-
-
-        presetUI = iD.ui.preset()
-            .on('change', function(tags) {
-                event.change();
-            });
-
-        tagList = iD.ui.Taglist()
-            .context(context)
-            .on('change', function(tags) {
-                event.change();
-            });
-
-        var inspectorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset cf');
-
-        if (presetMatch && !expert) {
-            inspectorpreset.call(presetUI
-                    .preset(presetMatch));
-        }
-
-        var taglistwrap = editorwrap.append('div').call(tagList);
-
-        inspector.tags(entity.tags);
-    }
-
-    function drawHead(selection) {
-        var entity = selection.datum();
-
-        var h2 = selection.append('h2');
-
-        h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
-
-        h2.append('span')
-            .text(entity.friendlyName());
     }
 
     function drawButtons(selection) {
@@ -149,7 +78,7 @@ iD.ui.Inspector = function() {
             .on('click', function() {
                 expert = !expert;
                 expertButton.text(expert ? 'Preset view' : 'Tag view');
-                inspectorbody.call(drawEditor);
+                inspectorbody.call(tagEditor, expert);
             });
 
     }
@@ -161,10 +90,10 @@ iD.ui.Inspector = function() {
 
     inspector.tags = function(tags) {
         if (!arguments.length) {
-            return _.extend(presetUI.tags(), tagList.tags());
+            return tagEditor.tags();
         } else {
-            presetUI.change(tags);
-            tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
+            tagEditor.tags.apply(this, arguments);
+            return inspector;
         }
     };
 

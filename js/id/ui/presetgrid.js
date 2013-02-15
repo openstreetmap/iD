@@ -1,5 +1,5 @@
 iD.ui.PresetGrid = function() {
-    var event = d3.dispatch('choose'),
+    var event = d3.dispatch('choose', 'message'),
         entity,
         presetData;
 

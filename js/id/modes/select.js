@@ -206,9 +206,11 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.exit = function() {
+        /*
         if (singular()) {
             changeTags(singular(), inspector.tags());
         }
+        */
 
         if (timeout) window.clearTimeout(timeout);
 
