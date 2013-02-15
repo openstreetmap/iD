@@ -115,10 +115,10 @@ locale.vi = {
             }
         },
         reverse: {
-            title: "Đảo nguợc",
+            title: "Đảo ngược",
             description: "Làm cho đường kẻ này hướng về phía ngược.",
             key: "V",
-            annotation: "Đảo nguợc đường kẻ."
+            annotation: "Đảo ngược đường kẻ."
         },
         split: {
             title: "Chia cắt",
@@ -141,7 +141,7 @@ locale.vi = {
     commit: {
         title: "Lưu các Thay đổi",
         description_placeholder: "Tóm lược các đóng góp của bạn",
-        upload_explanation: "Các thay đổi bạn thực hiện duới tên {user} sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
+        upload_explanation: "Các thay đổi bạn thực hiện dưới tên {user} sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
         save: "Lưu",
         cancel: "Hủy bỏ",
         warnings: "Cảnh báo",
@@ -152,7 +152,7 @@ locale.vi = {
 
     contributors: {
         list: "Đang xem các đóng góp của {users}",
-        truncated_list: "Đang xem các đóng góp của {users} và {count} nguời khác"
+        truncated_list: "Đang xem các đóng góp của {users} và {count} người khác"
     },
 
     geocoder: {
@@ -183,14 +183,14 @@ locale.vi = {
     },
 
     restore: {
-        description: "Bạn có thay đổi chưa lưu từ một phiên làm việc truớc đây. Bạn có muốn khôi phục các thay đổi này không?",
+        description: "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?",
         restore: "Khôi phục",
         reset: "Đặt lại"
     },
 
     save: {
         title: "Lưu",
-        help: "Lưu các thay đổi vào OpenStreetMap để cho mọi nguời xem",
+        help: "Lưu các thay đổi vào OpenStreetMap để cho mọi người xem",
         error: "Đã xuất hiện lỗi khi lưu",
         uploading: "Đang tải các thay đổi lên OpenStreetMap.",
         unsaved_changes: "Bạn có Thay đổi Chưa lưu"
