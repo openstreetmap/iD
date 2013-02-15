@@ -524,6 +524,26 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     padding: 10px;
 }
 
+.inspector-inner.message {
+    padding: 20px;
+    height: 60px;
+}
+
+.inspector-inner.type {
+    z-index:1;
+    position:relative;
+}
+
+.inspector-inner.type .preset-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.inspector-inner.type .preset-name {
+    display: inline-block;
+    margin-left: 20px;
+}
+
 .inspector-inner.head {
     z-index:1;
     position:relative;
@@ -536,7 +556,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner.tag-wrap {
-    max-height: 200px;
+    max-height: 300px;
     overflow: auto;
 }
 

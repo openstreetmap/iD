@@ -8,14 +8,50 @@ iD.ui.Inspector = function() {
         context;
 
     function inspector(selection) {
-        var entity = selection.datum(),
-            presetMatch = presetData.matchTags(entity);
 
         var iwrap = selection.append('div')
                 .attr('class','inspector content hide'),
-            head = iwrap.append('div')
+            messagewrap = iwrap.append('div')
+                .attr('class', 'message inspector-inner fillL2'),
+            message = messagewrap.append('h4'),
+            main = iwrap.append('div');
+            buttons = iwrap.append('div')
+            .attr('class', 'inspector-buttons pad1 fillD')
+            .call(drawButtons);
+
+
+        if (false && initial) {
+            main.call(iD.ui.presetfavs());
+        } else {
+            main.call(drawEditor);
+        }
+        iwrap.call(iD.ui.Toggle(true));
+    }
+
+    function drawEditor(selection) {
+
+        var entity = selection.datum();
+            presetMatch = presetData.matchTags(entity);
+
+            console.log(presetMatch);
+
+        var typewrap = selection.append('div')
+            .attr('class', 'type inspector-inner fillL');
+
+        typewrap.append('h4')
+            .text('Type');
+
+        typewrap.append('img')
+            .attr('class', 'preset-icon');
+
+        typewrap.append('h3')
+            .attr('class', 'preset-name')
+            .text(presetMatch ? presetMatch.name : '');
+
+
+        var namewrap = selection.append('div')
                 .attr('class', 'head inspector-inner fillL'),
-            h2 = head.append('h2');
+            h2 = namewrap.append('h2');
 
         h2.append('span')
             .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
@@ -37,7 +73,7 @@ iD.ui.Inspector = function() {
             name.property('value', tags.name);
         });
 
-        var inspectorbody = iwrap.append('div')
+        var inspectorbody = selection.append('div')
             .attr('class', 'inspector-body');
 
         var inspectorwrap = inspectorbody.append('div')
@@ -54,30 +90,6 @@ iD.ui.Inspector = function() {
                 event.change();
             });
 
-        var inspectorpresetsearch = inspectorwrap.append('div')
-            .attr('class', 'inspector-preset cf')
-            .call(iD.ui.presetsearch()
-                .entity(entity)
-                .presetData(presetData)
-                .on('choose', function(preset) {
-                    inspectorpreset.call(presetUI
-                        .preset(preset)
-                        .change(inspector.tags()));
-                }));
-
-        var inspectorpresetfavs = inspectorwrap.append('div')
-            .attr('class', 'inspector-preset cf')
-            .call(iD.ui.presetfavs()
-                .presetData(presetData)
-                .on('choose', function(preset) {
-                    inspectorpreset.call(presetUI
-                        .preset(preset)
-                        .change(inspector.tags()));
-                    inspectorpresetsearch
-                        .select('input')
-                        .property('value', preset.name);
-                }));
-
         var inspectorpreset = inspectorwrap.append('div')
             .attr('class', 'inspector-preset cf');
 
@@ -90,11 +102,7 @@ iD.ui.Inspector = function() {
 
         inspector.tags(entity.tags);
 
-        inspectorbody.append('div')
-            .attr('class', 'inspector-buttons pad1 fillD')
-            .call(drawButtons);
 
-        iwrap.call(iD.ui.Toggle(true));
     }
 
     function drawHead(selection) {

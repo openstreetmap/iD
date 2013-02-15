@@ -91,14 +91,6 @@ iD.ui.preset = function() {
 
     function presets(selection) {
         selection.html('');
-        var showRawTags = selection.append('a')
-            .text('Show raw tags')
-            .on('click', function() {
-                hidden = !hidden;
-                showRawTags.text(hidden ? 'Hide raw tags' : 'Show raw tags');
-                if (hidden) sections.style('display', 'none');
-                else sections.style('display', '');
-            });
         sections = selection.selectAll('div.preset-section')
             .data(preset.main)
             .enter()
