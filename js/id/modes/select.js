@@ -83,7 +83,9 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            inspector.context(context);
+            inspector
+                .context(context)
+                .presetData(context.connection().presetData());
 
             context.container()
                 .select('.inspector-wrap')
@@ -204,9 +206,11 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.exit = function() {
+        /*
         if (singular()) {
             changeTags(singular(), inspector.tags());
         }
+        */
 
         if (timeout) window.clearTimeout(timeout);
 

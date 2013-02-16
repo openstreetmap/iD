@@ -38,7 +38,7 @@ iD.behavior.Draw = function(context) {
                 d3.select(window).on('click.draw', function() {
                     d3.select(window).on('click.draw', null);
                     d3.event.stopPropagation();
-                });
+                }, true);
             }
         });
     }

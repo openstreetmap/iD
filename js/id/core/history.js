@@ -1,5 +1,5 @@
 iD.History = function(context) {
-    var stack, index,
+    var stack, index, tree,
         imagery_used = 'Bing',
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = false;
@@ -41,9 +41,18 @@ iD.History = function(context) {
         },
 
         merge: function(entities) {
+
+
+            var base = stack[0].graph.base(),
+                newentities = Object.keys(entities).filter(function(i) {
+                    return !base.entities[i];
+                });
+
             for (var i = 0; i < stack.length; i++) {
                 stack[i].graph.rebase(entities);
             }
+
+            tree.rebase(newentities);
 
             dispatch.change();
         },
@@ -124,6 +133,10 @@ iD.History = function(context) {
             }
         },
 
+        intersects: function(extent) {
+            return tree.intersects(extent, stack[index].graph);
+        },
+
         difference: function() {
             var base = stack[0].graph,
                 head = stack[index].graph;
@@ -168,6 +181,7 @@ iD.History = function(context) {
         reset: function() {
             stack = [{graph: iD.Graph()}];
             index = 0;
+            tree = iD.Tree(stack[0].graph);
             dispatch.change();
         },
 

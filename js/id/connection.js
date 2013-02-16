@@ -1,9 +1,11 @@
 iD.Connection = function(context) {
 
     var event = d3.dispatch('auth', 'load'),
-        url = 'http://www.openstreetmap.org',
+        url = 'http://api06.dev.openstreetmap.org',
         connection = {},
         user = {},
+        version,
+        presetData = iD.presetData(),
         keys,
         inflight = {},
         loadedTiles = {},
@@ -324,6 +326,12 @@ iD.Connection = function(context) {
         if (!arguments.length) return keys;
         keys = _;
         oauth.keys(keys);
+        return connection;
+    };
+
+    connection.presetData = function(_) {
+        if (!arguments.length) return presetData;
+        presetData = _;
         return connection;
     };
 

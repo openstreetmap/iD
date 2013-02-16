@@ -139,20 +139,20 @@ locale.fr = {
     report_a_bug: "Signaler un bug",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Sauvegarder vos modifications",
+        description_placeholder: "Description succinte de vos contributions",
+        upload_explanation: "{user} : les modifications apportées seront visibles par l'ensemble des services utilisant les données d'OpenStreetMap.",
+        save: "Sauvegarder",
+        cancel: "Annuler",
+        warnings: "Attention",
+        modified: "Modifié",
+        deleted: "Supprimé",
+        created: "Créé"
     },
 
     contributors: {
-        list: "Consulter les contributions de {users}",
-        truncated_list: "Consulter les contributions de {users} et {count} les autres"
+        list: "Contributions réalisées par {users}",
+        truncated_list: "Contributions réalisées par {users} et {count} autres personnes"
     },
 
     geocoder: {
@@ -162,7 +162,7 @@ locale.fr = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Me localiser"
     },
 
     inspector: {
@@ -177,15 +177,15 @@ locale.fr = {
     layerswitcher: {
         title: "Fond de carte",
         description: "Paramètres du fond de carte",
-        percent_brightness: "{opacity}% brightness",
+        percent_brightness: "{opacity}% luminosité",
         fix_misalignment: "Fix misalignment",
         reset: "reset"
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements?",
+        restore: "Restaurer",
+        reset: "Annuler"
     },
 
     save: {
@@ -197,8 +197,8 @@ locale.fr = {
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "Bienvenue sur ID l'editeur en ligne d'OpenStreetMap",
+        text: "Cette version {version}, est une version de développement. Si vous souhaitez plus d'informations, veuillez consulter {website} ou pour signaler un bug   {github}."
     },
 
     source_switch: {
@@ -208,8 +208,8 @@ locale.fr = {
 
     tag_reference: {
         description: "Déscription",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        on_wiki: "{tag} sur le wiki.osm.org",
+        used_with: "Utilisé avec {type}"
     },
 
     validations: {
