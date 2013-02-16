@@ -1,4 +1,4 @@
-locale.en = {
+locale.ru = {
     modes: {
         add_area: {
             title: "Контур",
