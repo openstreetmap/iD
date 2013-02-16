@@ -1,8 +1,11 @@
 iD.ui.confirm = function(selection) {
     var modal = iD.ui.modal(selection);
-    modal.select('.modal').classed('modal-alert', true);
+
+    modal.select('.modal')
+        .classed('modal-alert', true);
+
     var section = modal.select('.content')
-        .attr('class','modal-section fillD')
+        .attr('class', 'modal-section fillD');
 
     var description = section.append('div')
         .attr('class', 'description');
@@ -16,8 +19,12 @@ iD.ui.confirm = function(selection) {
             modal.remove();
         });
 
-    okbutton.append('span').attr('class','icon apply icon-pre-text');
-    okbutton.append('span').attr('class','label').text('Okay');
+    okbutton.append('span')
+        .attr('class', 'icon apply icon-pre-text');
+
+    okbutton.append('span')
+        .attr('class', 'label')
+        .text('Okay');
 
     return modal;
 };
