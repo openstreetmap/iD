@@ -13,6 +13,7 @@ all: \
 .INTERMEDIATE iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
+	js/lib/d3.combobox.js \
 	js/lib/d3.geo.tile.js \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
@@ -50,6 +51,7 @@ all: \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
+	js/id/presetdata.js \
 	js/id/validate.js \
 	js/id/end.js \
 	js/lib/locale.js \
