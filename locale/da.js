@@ -190,7 +190,7 @@ locale.da = {
 
     save: {
         title: "Gem",
-        help: "Gem ændringer til OpenStreetMap vil gøre dem synlige for andre brugere",
+        help: "Gem ændringer til OpenStreetMap vil gøre dem synlige for andre brugere.",
         error: "Der skete en fejl da du prøvede at gemme",
         uploading: "Gemmer nu ændringer til OpenStreetMap.",
         unsaved_changes: "Du har ændringer der ikke er gemt endnu",

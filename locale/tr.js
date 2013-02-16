@@ -190,7 +190,7 @@ locale.tr = {
 
     save: {
         title: "Kaydet",
-        help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",
+        help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz.",
         error: "Kaydederken bir hata oluştu",
         uploading: "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
         unsaved_changes: "Kaydedilmemiş değişiklikleriniz var"

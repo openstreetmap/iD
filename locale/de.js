@@ -190,7 +190,7 @@ locale.de = {
 
     save: {
         title: "Speichern",
-        help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
+        help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen.",
         error: "Beim Speichern ist ein Fehler aufgetreten",
         uploading: "Änderungen werden zu OpenStreetMap hochgeladen.",
         unsaved_changes: "Ungespeicherte Änderungen vorhanden"

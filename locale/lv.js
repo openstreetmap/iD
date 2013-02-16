@@ -190,7 +190,7 @@ locale.lv = {
 
     save: {
         title: "Saglabāt",
-        help: "Saglabā izmaiņas, padarot tās redzamas citiem",
+        help: "Saglabā izmaiņas, padarot tās redzamas citiem.",
         error: "Kļūda. Nevarēja saglabāt izmaiņas",
         uploading: "Augšupielādē",
         unsaved_changes: "Jums ir nesaglabātas izmaiņas"
