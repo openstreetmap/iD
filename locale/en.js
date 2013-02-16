@@ -190,7 +190,7 @@ locale.en = {
 
     save: {
         title: "Save",
-        help: "Save changes to OpenStreetMap, making them visible to other users",
+        help: "Save changes to OpenStreetMap, making them visible to other users.",
         error: "An error occurred while trying to save",
         uploading: "Uploading changes to OpenStreetMap.",
         unsaved_changes: "You have unsaved changes"
