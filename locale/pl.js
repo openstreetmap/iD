@@ -1,4 +1,4 @@
-locale.en = {
+locale.pl = {
     modes: {
         add_area: {
             title: "Obszar",
