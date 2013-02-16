@@ -23,7 +23,7 @@ locale.de = {
             tail: "Klicke, um Punkte zur Fläche hinzuzufügen. Klicke auf den ersten Punkt, um die Fläche abzuschließen."
         },
         draw_line: {
-            tail: "Klicke, um mehr Punkte zur Linie hizuzufügen. Klicke auf eine andere Linie um die Linien zu verbinden und klicke doppelt, um die Linie zu beenden."
+            tail: "Klicke, um mehr Punkte zur Linie hizuzufügen. Klicke auf eine andere Linie, um die Linien zu verbinden und klicke doppelt, um die Linie zu beenden."
         }
     },
 
@@ -132,7 +132,7 @@ locale.de = {
     nothing_to_redo: "Nichts zum Wiederherstellen.",
 
     just_edited: "Sie haben gerade OpenStreetMap editiert!",
-    browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
+    browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
     view_on_osm: "Auf OSM anschauen",
     zoom_in_edit: "Hineinzoomen, um die Karte zu bearbeiten",
     logout: "Abmelden",
@@ -152,7 +152,7 @@ locale.de = {
 
     contributors: {
         list: "Diese Kartenansicht enthält Beiträge von:",
-        truncated_list: "Diese Kartenansicht enthält Beiträge von: {users} und {count} Anderen"
+        truncated_list: "Diese Kartenansicht enthält Beiträge von: {users} und {count} anderen"
     },
 
     geocoder: {
@@ -193,11 +193,11 @@ locale.de = {
         help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
         error: "Beim Speichern ist ein Fehler aufgetreten",
         uploading: "Änderungen werden zu OpenStreetMap hochgeladen.",
-        unsaved_changes: "Ungespeicherte Änderugen vorhanden",
+        unsaved_changes: "Ungespeicherte Änderungen vorhanden"
     },
 
     splash: {
-        welcome: "Willkommen beim iD OpenStreetMap editor",
+        welcome: "Willkommen beim iD OpenStreetMap-Editor",
         text: "Dies ist eine Entwicklungsversion {version}. Für weitere Informationen besuche {website} und melde Fehler unter {github}."
     },
 
@@ -217,7 +217,7 @@ locale.de = {
         untagged_line: "Linie ohne Attribute",
         untagged_area: "Fläche ohne Attribute",
         tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
-        deprecated_tags: "Veralterte Attribute: {tags}"
+        deprecated_tags: "Veraltete Attribute: {tags}"
     },
 
     zoom: {
