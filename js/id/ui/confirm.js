@@ -1,17 +1,23 @@
 iD.ui.confirm = function(selection) {
     var modal = iD.ui.modal(selection);
     modal.select('.modal').classed('modal-alert', true);
-    modal.select('.content')
+    var section = modal.select('.content')
         .attr('class','modal-section fillD')
-        .append('div')
+
+    var description = section.append('div')
         .attr('class', 'description');
-    var nochanges = modal.select('.content')
-        .append('button')
-        .attr('class','action centered')
+
+    var buttonwrap = section.append('div')
+        .attr('class', 'buttons cf');
+
+    var okbutton = buttonwrap.append('button')
+        .attr('class', 'action centered')
         .on('click.confirm', function() {
             modal.remove();
         });
-        nochanges.append('span').attr('class','label').text('Okay');
+
+    okbutton.append('span').attr('class','icon apply icon-pre-text');
+    okbutton.append('span').attr('class','label').text('Okay');
 
     return modal;
 };
