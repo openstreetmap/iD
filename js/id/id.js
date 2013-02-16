@@ -1,6 +1,11 @@
 window.iD = function () {
     var context = {},
-        storage = localStorage || {};
+        storage;
+
+    // https://github.com/systemed/iD/issues/772
+    // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
+    try { storage = localStorage } catch (e) {}
+    storage = storage || {};
 
     context.storage = function(k, v) {
         if (arguments.length === 1) return storage[k];
