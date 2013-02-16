@@ -190,7 +190,7 @@ locale.es = {
 
     save: {
         title: "Guardar", //"Save",
-        help: "Guardar los cambios en OpenStreetMap haciéndolos visibles a otros usuarios", //"Save changes to OpenStreetMap, making them visible to other users",
+        help: "Guardar los cambios en OpenStreetMap haciéndolos visibles a otros usuarios.", //"Save changes to OpenStreetMap, making them visible to other users.",
         error: "Ha ocurrido un error tratando de guardar", //"An error occurred while trying to save",
         uploading: "Subiendo cambios a OpenStreetMap", //"Uploading changes to OpenStreetMap.",
         unsaved_changes: "Tienes cambios sin guardar" //"You have unsaved changes",

@@ -9,6 +9,7 @@ iD.ui.Inspector = function() {
         presetUI,
         presetGrid,
         tagList,
+        tagEditor,
         context;
 
     function inspector(selection) {

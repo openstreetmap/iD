@@ -29,7 +29,7 @@ d3.combobox = function() {
                 top: rect.height + 'px'
             });
 
-        carat = selection
+        selection
             .insert('a', ':first-child')
             .attr('class', 'combobox-carat')
             .style({
