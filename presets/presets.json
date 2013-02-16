@@ -1,23 +1,5 @@
 [
     {
-        "title": "Highway",
-        "name": "highway",
-        "match": {
-            "type": ["line"],
-            "tags": {
-                "highway": "*"
-            }
-        },
-        "form": [
-            {
-                "tag": "highway",
-                "title": "Highway Type",
-                "type": "select",
-                "option": ["primary", "secondary", "tertiary"]
-            }
-        ]
-    },
-    {
         "title": "Cafe",
         "name": "cafe",
         "match": {
@@ -26,31 +8,16 @@
                 "amenity": "cafe"
             }
         },
+        "icon": "cafe-24.png",
         "form": [
             {
-                "tag": "phone",
-                "type": "tel"
-            },
-            {
-                "tag": "fax",
-                "type": "tel"
-            },
-            {
-                "tag": "website",
-                "type": "url"
-            },
-            {
-                "tag": "email",
-                "type": "email"
-            },
-            {
-                "tag": "internet_access",
+                "key": "internet_access",
                 "title": "Internet Access",
                 "type": "select",
                 "option": ["yes", "wlan","wired","terminal","no"]
             },
             {
-                "tag": "internet_access:fee",
+                "key": "internet_access:fee",
                 "title": "Internet Access Fee",
                 "type": "select",
                 "option": ["yes", "no"]

@@ -6,7 +6,7 @@ iD.ui.preset = function() {
         preset;
 
     function getTags() {
-        var tags = _.clone(preset.tags);
+        var tags = _.clone(preset.match.tags);
         sections.selectAll('input,select')
             .each(function(d) {
                 tags[d.key] = this.value;
@@ -79,7 +79,7 @@ iD.ui.preset = function() {
                 var w = this.append('span').attr('class', 'input-wrap-position');
                 i = w.append('input');
                 w.call(d3.combobox()
-                    .data([''].concat(d.values.slice()).map(function(o) {
+                    .data([''].concat(d.option.slice()).map(function(o) {
                         return { value: o, title: o };
                     })));
                 break;
@@ -92,7 +92,7 @@ iD.ui.preset = function() {
     function presets(selection) {
         selection.html('');
         sections = selection.selectAll('div.preset-section')
-            .data(preset.main)
+            .data(preset.form)
             .enter()
             .append('div')
             .attr('class', 'preset-section cf');
@@ -104,7 +104,7 @@ iD.ui.preset = function() {
                 .attr('class', 'col4 preset-label')
                 .append('label')
                 .attr('for', 'input-' + d.key)
-                .text(d.text);
+                .text(d.key);
             input.call(wrap.append('div')
                 .attr('class', 'col8 preset-input'), d);
         });

@@ -30,19 +30,31 @@ iD.ui.TagEditor = function() {
             .text('Type');
 
         typewrap.append('img')
-            .attr('class', 'preset-icon');
+            .attr('class', 'preset-icon')
+            .attr('src', presetMatch ? '/presets/maki/' + presetMatch.icon : '');
 
-        typewrap.append('h3')
+        var typelabel = typewrap.append('div')
+            .attr('class', 'preset-label-wrap');
+
+        typelabel.append('h3')
             .attr('class', 'preset-name')
             .text(presetMatch ? presetMatch.name : '');
 
+        typelabel.append('span')
+            .attr('class', 'preset-geometry')
+            .text(entity.geometry(context.graph()));
+
+        typewrap.append('div')
+            .attr('class', 'info fillD');
 
         var namewrap = editorwrap.append('div')
                 .attr('class', 'head inspector-inner fillL'),
+            namelabel = namewrap.append('h4')
+                .text('Name'),
             h2 = namewrap.append('h2');
 
-        h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
+        h2.append('div')
+            .attr('class', 'info fillD');
 
         var name = h2.append('input')
             .attr('placeholder', 'name')

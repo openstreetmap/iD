@@ -47,13 +47,16 @@ iD.ui.PresetGrid = function() {
             .selectAll('div.grid-entry')
             .data(presets.slice(0, 12), name);
 
-        entries.enter()
+        var entered = entries.enter()
             .append('div')
             .attr('class', 'grid-entry')
-            .text(name)
             .on('click', function(d) {
                 event.choose(d);
             });
+
+        entered.append('img')
+            .attr('src', function(d) { return '/presets/maki/' + d.icon; });
+        entered.append('span').text(name);
 
         entries.exit().remove();
     }

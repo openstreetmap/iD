@@ -180,7 +180,7 @@
             var id = iD();
 
             d3.json('keys.json', function(err, keys) {
-                d3.json('presets/presets_josm.json', function(err, presets_data) {
+                d3.json('presets/presets.json', function(err, presets_data) {
 
                     id.connection()
                         .keys(keys)

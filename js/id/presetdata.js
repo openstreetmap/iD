@@ -17,7 +17,7 @@ iD.presetData = function() {
     presets.match = function(entity) {
         var type = entity.type == 'node' ? 'node' : entity.geometry();
         return data.filter(function(d) {
-            return _.contains(d.type, type);
+            return _.contains(d.match.type, type);
         });
     };
 
@@ -28,8 +28,8 @@ iD.presetData = function() {
 
         for (var i = 0; i < data.length; i++) {
             count = 0;
-            tags = data[i].tags;
-            if (!_.contains(data[i].type, type)) continue;
+            tags = data[i].match.tags;
+            if (!_.contains(data[i].match.type, type)) continue;
             for (var k in tags) {
                 if (entity.tags[k] == tags[k]) count++;
             }

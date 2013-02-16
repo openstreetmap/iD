@@ -530,21 +530,39 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner.type {
+    border: 1px solid #eee;
     z-index:1;
     position:relative;
 }
 
 .inspector-inner.type .preset-icon {
-    width: 50px;
+    width: 24px;
+    height: 24px;
+    padding: 13px;
+    background: #eee;
+}
+
+.inspector-inner.type .preset-label-wrap {
     height: 50px;
+    display: inline-block;
+    padding: 10px;
 }
 
 .inspector-inner.type .preset-name {
-    display: inline-block;
-    margin-left: 20px;
+  margin: 0;
+}
+
+.inspector-inner .info {
+    color: white;
+    border-radius: 3px;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    float: right;
 }
 
 .inspector-inner.head {
+    border: 1px solid #eee;
     z-index:1;
     position:relative;
 }
@@ -654,9 +672,17 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
   float: left;
   width: 100px;
   height: 100px;
-  background: red;
+  //background: red;
   color: black;
   margin: 10px;
+  text-align: center;
+}
+.preset-grid .grid-entry img {
+  width: 24px;
+  margin-left: 20px;
+  padding: 18px;
+  background: #eee;
+  display: block;
 }
 
 .preset-grid-search-wrap {
@@ -1459,6 +1485,7 @@ a.success-action {
 .inspector-preset.cf,
 .preset-section-input.cf {
     width: 100%;
+    margin: 5px 0;
 }
 
 .preset-search-input {
