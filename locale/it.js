@@ -190,7 +190,7 @@ locale.it = {
 
     save: {
         title: "Salva",
-        help: "Salva i cambiamenti su OpenStreetMap, rendendoli visibili ad altri utenti",
+        help: "Salva i cambiamenti su OpenStreetMap, rendendoli visibili ad altri utenti.",
         error: "E' accaduto un errore mentre veniva tentato il salvataggio",
         uploading: "Caricando le modifiche su OpenStreetMap.",
         unsaved_changes: "Hai modifiche non salvate"

@@ -190,7 +190,7 @@ locale.ja = {
 
     save: {
         title: "Save",
-        help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします",
+        help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします。",
         error: "データ保存中にエラーが発生しました",
         uploading: "変更点をOpenStreetMapへアップロードしています",
         unsaved_changes: "変更が保存されていません"
