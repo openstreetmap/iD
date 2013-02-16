@@ -133,7 +133,7 @@ locale.de = {
 
     just_edited: "Sie haben gerade OpenStreetMap editiert!",
     browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
-    view_on_osm: "Auf OSM anschauen",
+    view_on_osm: "Auf OpenStreetMap anschauen",
     zoom_in_edit: "Hineinzoomen, um die Karte zu bearbeiten",
     logout: "Abmelden",
     report_a_bug: "Programmfehler melden",
@@ -171,7 +171,7 @@ locale.de = {
         new_tag: "Neues Attribut",
         edit_tags: "Attribute bearbeiten",
         okay: "OK",
-        view_on_osm: "auf OSM ansehen"
+        view_on_osm: "auf OpenStreetMap ansehen"
     },
 
     layerswitcher: {
