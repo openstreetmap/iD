@@ -4,6 +4,7 @@ iD.ui.TagEditor = function() {
         presetData = iD.presetData(),
         inspectorbody,
         entity,
+        tags,
         presetMatch,
         presetUI,
         presetGrid,
@@ -13,6 +14,11 @@ iD.ui.TagEditor = function() {
     function tageditor(selection, tagview, preset) {
 
         entity = selection.datum();
+
+        if (preset) {
+            tags = _.omit(tags, _.keys(presetMatch.match.tags));
+        }
+
         presetMatch = preset || presetData.matchTags(entity);
 
         selection.html('');
@@ -97,7 +103,7 @@ iD.ui.TagEditor = function() {
 
         var taglistwrap = editorwrap.append('div').call(tagList);
 
-        tageditor.tags(entity.tags);
+        tageditor.tags(tags);
     }
 
     function drawHead(selection) {
@@ -112,12 +118,16 @@ iD.ui.TagEditor = function() {
             .text(entity.friendlyName());
     }
 
-    tageditor.tags = function(tags) {
+    tageditor.tags = function(newtags) {
         if (!arguments.length) {
             return _.extend(presetUI.tags(), tagList.tags());
         } else {
-            presetUI.change(tags);
-            tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
+            tags = newtags;
+            if (presetUI && tagList) {
+                presetUI.change(tags);
+                tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
+            }
+            return tageditor;
         }
     };
 

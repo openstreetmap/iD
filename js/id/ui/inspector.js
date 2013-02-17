@@ -39,6 +39,7 @@ iD.ui.Inspector = function() {
 
         tagEditor = iD.ui.TagEditor()
             .presetData(presetData)
+            .tags(entity.tags)
             .context(context)
             .on('message', changeMessage)
             .on('choose', function() {
