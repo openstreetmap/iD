@@ -51,8 +51,11 @@ iD.ui.TagEditor = function() {
             .attr('class', 'preset-geometry')
             .text(entity.geometry(context.graph()));
 
-        typewrap.append('div')
-            .attr('class', 'info fillD');
+        typewrap.append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'minor preset-help')
+            .append('span')
+                .attr('class', 'icon inspect');
 
         var namewrap = editorwrap.append('div')
                 .attr('class', 'head inspector-inner fillL'),
@@ -60,8 +63,12 @@ iD.ui.TagEditor = function() {
                 .text('Name'),
             h2 = namewrap.append('h2');
 
-        h2.append('div')
-            .attr('class', 'info fillD');
+        namewrap.append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'minor name-help')
+            .append('span')
+                .attr('class', 'icon inspect');
+
 
         var name = h2.append('input')
             .attr('placeholder', 'name')
