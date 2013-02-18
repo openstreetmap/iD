@@ -7,6 +7,7 @@ body {
     padding:0;
     min-width: 768px;
     color:#222;
+    overflow: hidden;
     /* text-rendering: optimizeLegibility;  */
     -webkit-font-smoothing: subpixel-antialiased;
 }
@@ -1546,15 +1547,11 @@ div.combobox {
     border-top: 0;
 }
 
-.combobox-carat::after {
-    display:block;
-    content: '';
+.combobox-carat {
+    margin-left: -15px;
+    margin-right: 5px;
+    display:inline-block;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    height: 0;
-    width: 0;
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;

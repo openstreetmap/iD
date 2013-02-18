@@ -12,33 +12,33 @@ d3.combobox = function() {
     };
 
     var typeahead = function(selection) {
-        var idx = -1,
-            rect = selection.select('input')
-                .node()
-                .getBoundingClientRect();
+        var idx = -1;
         input = selection.select('input');
 
-        container = selection
+        container = d3.select(document.body)
             .insert('div', ':first-child')
             .attr('class', 'combobox')
             .style({
                 position: 'absolute',
                 display: 'none',
-                left: '0px',
-                width: rect.width + 'px',
-                top: rect.height + 'px'
+                left: '0px'
             });
 
-        selection
-            .insert('a', ':first-child')
+        selection.append('a', selection.select('input'))
             .attr('class', 'combobox-carat')
-            .style({
-                position: 'absolute',
-                left: rect.width + 'px',
-                top: '0px'
-            })
             .on('mousedown', stop)
             .on('click', click);
+
+        function updateSize() {
+            var rect = selection.select('input')
+                .node()
+                .getBoundingClientRect();
+            container.style({
+                'left': rect.left + 'px',
+                'width': rect.width + 'px',
+                'top': rect.height + rect.top + 'px'
+            });
+        }
 
         function stop() {
             // prevent the form element from blurring. it blurs
@@ -155,6 +155,8 @@ d3.combobox = function() {
             function render(data) {
                 if (data.length) show();
                 else hide();
+
+                updateSize();
 
                 var options = container
                     .selectAll('a.combobox-option')
