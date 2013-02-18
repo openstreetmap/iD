@@ -16,10 +16,10 @@ iD.ui.TagEditor = function() {
         entity = selection.datum();
 
         if (preset) {
-            tags = _.omit(tags, _.keys(presetMatch.match.tags));
+            tags = _.extend(_.omit(tags, _.keys(presetMatch.match.tags)), preset.match.tags);
         }
 
-        presetMatch = preset || presetData.matchTags(entity);
+        presetMatch = preset || presetMatch || presetData.matchTags(entity);
 
         selection.html('');
 
@@ -44,7 +44,7 @@ iD.ui.TagEditor = function() {
 
         typelabel.append('h3')
             .attr('class', 'preset-name')
-            .text(presetMatch ? presetMatch.name : '');
+            .text(presetMatch ? presetMatch.name : 'Unknown type');
 
         typelabel.append('span')
             .attr('class', 'preset-geometry')
