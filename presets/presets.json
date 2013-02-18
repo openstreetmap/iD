@@ -14,14 +14,190 @@
                 "key": "internet_access",
                 "title": "Internet Access",
                 "type": "select",
-                "option": ["yes", "wlan","wired","terminal","no"]
+                "options": ["yes", "no", "wlan", "wired", "terminal"]
+            }
+        ]
+    },
+    {
+        "title": "Supermarket",
+        "name": "supermarket",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "shop": "supermarket"
+            }
+        },
+        "icon": "grocery-24.png",
+        "form": [
+            {
+                "key": "operator",
+                "type": "text"
+            }
+        ]
+    },
+    {
+        "title": "Restaurant",
+        "name": "restaurant",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "restaurant"
+            }
+        },
+        "icon": "restaurant-24.png",
+        "form": [
+            {
+                "key": "cuisine",
+                "type": "combo"
+            }
+        ]
+    },
+    {
+        "title": "Place of worship",
+        "name": "place of worship",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "place_of_worship"
+            }
+        },
+        "icon": "",
+        "form": [
+            {
+                "key": "religion",
+                "type": "select",
+                "options": ["christian", "muslim", "buddhist", "jewish", "hindu", "shinto", "taoist"]
             },
             {
-                "key": "internet_access:fee",
-                "title": "Internet Access Fee",
-                "type": "select",
-                "option": ["yes", "no"]
+                "key": "denomination",
+                "type": "combo"
             }
+        ]
+    },
+    {
+        "title": "School",
+        "name": "school",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "school"
+            }
+        },
+        "icon": "school-24.png",
+        "form": [
+            {
+                "key": "operator",
+                "type": "text"
+            }
+        ]
+    },
+    {
+        "title": "Parking",
+        "name": "parking",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "parking"
+            }
+        },
+        "icon": "parking-24.png",
+        "form": [
+            {
+                "key": "fee",
+                "type": "select",
+                "options": ["yes", "no"]
+            }
+        ]
+    },
+    {
+        "title": "Bank",
+        "name": "bank",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "bank"
+            }
+        },
+        "icon": "bank-24.png",
+        "form": [
+            {
+                "key": "atm",
+                "type": "select",
+                "options": ["yes", "no"]
+            }
+        ]
+    },
+    {
+        "title": "Fast food",
+        "name": "fast food",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "fast_food"
+            }
+        },
+        "icon": "fast-food-24.png",
+        "form": [
+            {
+                "key": "cuisine",
+                "type": "combo"
+            }
+        ]
+    },
+    {
+        "title": "Bar",
+        "name": "bar",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "bar"
+            }
+        },
+        "icon": "bar-24.png",
+        "form": [
+        ]
+    },
+    {
+        "title": "Bus stop",
+        "name": "bus stop",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "highway": "bus_stop"
+            }
+        },
+        "icon": "bus-24.png",
+        "form": [
+            {
+                "key": "operator",
+                "type": "text"
+            }
+        ]
+    },
+    {
+        "title": "Cinema",
+        "name": "cinema",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "cinema"
+            }
+        },
+        "icon": "cinema-24.png",
+        "form": [
+        ]
+    },
+    {
+        "title": "Hospital",
+        "name": "hospital",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "amenity": "hospital"
+            }
+        },
+        "icon": "hospital-24.png",
+        "form": [
         ]
     }
 ]
