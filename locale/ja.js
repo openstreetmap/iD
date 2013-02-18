@@ -1,135 +1,215 @@
-locale.en = {
+locale.ja = {
     modes: {
         add_area: {
             title: "エリア",
-            description: "公園や建物、湖沼、をマップに追加します",
-            tail: "マップをクリックすると、公園や湖沼、建物などのエリアの描画が開始されます。",
-            key: "A"
+            description: "公園や建物、湖沼等をマップに追加",
+            tail: "クリックした地点から公園や湖沼、建物など、エリアの描画を行います"
         },
         add_line: {
             title: "ライン",
-            description: "ラインは車両用の道路や歩道、用水路を表すことができます",
-            tail: "マップをクリックすると、道路や歩道、流水経路の描画が始まります",
-            key: "L"
+            description: "道路や歩道、用水路などのラインを描画",
+            tail: "クリックした地点から道路や歩道、流水経路など、ラインの描画を開始します"
         },
         add_point: {
             title: "ポイント",
-            description: "レストランや記念碑、郵便ボックスはポイントで表現します",
-            tail: "マップをクリックするとポイントを追加できます",
-            key: "P"
+            description: "レストランや記念碑、郵便ボックス等、ポイント情報を追加",
+            tail: "クリックした地点にポイントを追加します"
         },
         browse: {
             title: "ブラウズ",
-            description: "マップを拡大縮小します",
-            key: "B"
+            description: "マップの拡大縮小"
         },
         draw_area: {
-            tail: "クリックするとエリア上にポイントを追加できます。起点となっているポイントをクリックするとエリアが作成されます"
+            tail: "クリックするとエリア上にポイントを追加できます。ラインの起点となっているポイントをクリックするとエリアが作成されます"
         },
         draw_line: {
-            tail: "クリックするとライン上にポイントを追加できます。クリックすることで他のラインと接続することが可能です。ライン描画を終了するにはダブルクリックしてください"
+            tail: "クリックするとライン上にポイントを追加できます。ラインを描画中に他のラインをクリックすることで、2つのラインを接続することが可能です。描画を終了するにはダブルクリックしてください"
         }
     },
 
     operations: {
         add: {
             annotation: {
-                point: "ポイントを追加しました",
-                vertex: "ウェイにノードを追加しました"
+                point: "ポイントの追加",
+                vertex: "ウェイへのノード追加"
             }
         },
         start: {
             annotation: {
-                line: "ラインの描画を開始しました",
-                area: "エリアの描画を開始しました"
+                line: "ラインの描画開始",
+                area: "エリアの描画開始"
             }
         },
         'continue': {
             annotation: {
-                line: "ライン描画を継続中",
-                area: "エリア描画を継続中"
+                line: "ライン描画の継続",
+                area: "エリア描画の継続"
             }
         },
         cancel_draw: {
-            annotation: "描画をキャンセルしました"
+            annotation: "描画のキャンセル"
         },
         change_tags: {
-            annotation: "タグを変更しました"
+            annotation: "タグの変更"
         },
         circularize: {
             title: "円状に並べる",
-            description: "この地物を円状に配置します",
+            description: "この地物を円状に配置",
             key: "O",
             annotation: {
-                line: "ラインを円状にしました",
-                area: "エリアを円状にしました"
+                line: "ラインを円状に整形",
+                area: "エリアを円状に整形"
             }
         },
         orthogonalize: {
-            title: "角の直交化Orthogonalize",
-            description: "角を90度に配置します",
+            title: "角の直交化",
+            description: "角を90度に整形",
             key: "Q",
             annotation: {
-                line: "ラインの角を90度にしました",
-                area: "エリアの角を90度にしました"
+                line: "ラインの角を90度に整形",
+                area: "エリアの角を90度に整形"
             }
         },
         'delete': {
             title: "削除",
-            description: "この地物をマップから削除します",
+            description: "この地物をマップから削除",
             key: "⌫",
             annotation: {
-                point: "ポイント削除しました",
-                vertex: "ウェイ上のノードを削除しました",
-                line: "ライン削除しました",
-                area: "エリア削除しました",
-                relation: "リレーション削除しました",
-                multiple: "{n} 個のオブジェクトを削除しました"
+                point: "ポイントを削除",
+                vertex: "ウェイ上のノードを削除",
+                line: "ライン削除",
+                area: "エリア削除",
+                relation: "リレーション削除",
+                multiple: "{n} 個のオブジェクトを削除"
             }
         },
         connect: {
             annotation: {
-                point: "ウェイをポイントに接続しました",
-                vertex: "ウェイを他のウェイト接続しました",
-                line: "ウェイとラインを接続しました",
-                area: "ウェイとエリアを接続しました"
+                point: "ウェイをポイントに接続",
+                vertex: "ウェイを他のウェイト接続",
+                line: "ウェイとラインを接続",
+                area: "ウェイとエリアを接続"
             }
         },
         disconnect: {
             title: "接続解除",
-            description: "ウェイの接続を解除して切り離します",
+            description: "ウェイの接続を解除して切り離す",
             key: "D",
-            annotation: "ウェイの接続を解除しました"
+            annotation: "ウェイの接続を解除"
         },
         merge: {
             title: "結合",
-            description: "複数のラインを結合します",
+            description: "複数のラインを結合",
             key: "C",
-            annotation: "{n} 本のラインを結合しました"
+            annotation: "{n} 本のラインを結合"
         },
         move: {
             title: "移動",
-            description: "この地物を別の位置に移動させます",
+            description: "この地物を別の位置へ移動",
             key: "M",
             annotation: {
-                point: "ポイントを移動しました",
-                vertex: "ウェイ上のノードを移動しました",
-                line: "ラインを移動しました",
-                area: "エリアを移動しました"
+                point: "ポイントを移動",
+                vertex: "ウェイ上のノードを移動",
+                line: "ラインの移動",
+                area: "エリアの移動"
             }
         },
         reverse: {
             title: "方向反転",
-            description: "ラインの向きを反転させます",
+            description: "ラインの向きを反転",
             key: "V",
-            annotation: "ラインの向きを反転しました"
+            annotation: "ラインの方向反転"
         },
         split: {
             title: "分割",
-            description: "このポイントを境目としてウェイを2つに分割します",
+            description: "このポイントを境としてウェイを分割",
             key: "X",
-            annotation: "ウェイを分割しました"
+            annotation: "ウェイの分割"
         }
+    },
+
+    nothing_to_undo: "やり直す変更点がありません",
+    nothing_to_redo: "やり直した変更点がありません",
+
+    just_edited: "OpenStreetMap編集完了！",
+    browser_notice: "このエディタは Firefox, Chrome, Safari, Opera, および Internet Explorer 9 以上をサポートしています。ブラウザのバージョンを更新するか、Potlatch 2を使用して編集してください",
+    view_on_osm: "OSMで確認",
+    zoom_in_edit: "編集するにはさらに地図を拡大してください",
+    logout: "ログアウト",
+    report_a_bug: "バグ報告",
+
+    commit: {
+        title: "編集結果を保存",
+        description_placeholder: "Brief description of your contributions",
+        upload_explanation: "編集した内容を {user} アカウントでアップロードし、OpenStreetMapを利用しているすべてのユーザが閲覧できるようにします",
+        save: "Save",
+        cancel: "キャンセル",
+        warnings: "注意",
+        modified: "変更した地物",
+        deleted: "削除した地物",
+        created: "作成した地物"
+    },
+
+    contributors: {
+        list: "{users} による編集履歴を確認",
+        truncated_list: "{users} とその他 {count} 人による編集履歴を表示"
+    },
+
+    geocoder: {
+        title: "特定地点を検索",
+        placeholder: "対象地点の名称",
+        no_results: "'{name}' という名称の地点が見つかりません"
+    },
+
+    geolocate: {
+        title: "編集画面を現在地へ移動"
+    },
+
+    inspector: {
+        no_documentation_combination: "このタグの組み合わせに関する説明文はありません",
+        no_documentation_key: "このキーに対する説明文はありません",
+        new_tag: "新規タグ",
+        edit_tags: "タグ編集",
+        okay: "OK",
+        view_on_osm: "詳細情報確認"
+    },
+
+    layerswitcher: {
+        title: "背景画像",
+        description: "背景画像設定",
+        percent_brightness: "{opacity}% 輝度",
+        fix_misalignment: "背景画像をずらす",
+        reset: "設定リセット"
+    },
+
+    restore: {
+        description: "前回作業した編集内容がアップロードされていません。編集内容を復元しますか？",
+        restore: "復元",
+        reset: "破棄"
+    },
+
+    save: {
+        title: "Save",
+        help: "編集内容をOpenStreetMapへ保存し、他ユーザへ公開",
+        error: "データ保存中にエラーが発生しました",
+        uploading: "編集内容をOpenStreetMapへアップロードしています",
+        unsaved_changes: "編集内容が保存されていません"
+    },
+
+    splash: {
+        welcome: "iD 起動中",
+        text: "開発版 {version} を起動します。詳細は {website} を参照してください。バグ報告は {github} で受付中です"
+    },
+
+    source_switch: {
+        live: "本番サーバ",
+        dev: "開発サーバ"
+    },
+
+    tag_reference: {
+        description: "説明",
+        on_wiki: "wiki.osm.org の {tag} 説明",
+        used_with: "used with {type}"
     },
 
     validations: {
@@ -140,62 +220,8 @@ locale.en = {
         deprecated_tags: "タグの重複: {tags}"
     },
 
-    save: "Save",
-    unsaved_changes: "変更が保存されていません",
-    save_help: "変更点をOpenStreetMapに保存し、他ユーザが確認できるようにします",
-    no_changes: "変更点がありません",
-    save_error: "データ保存中にエラーが発生しました",
-    uploading_changes: "変更点をOpenStreetMapへアップロードしています",
-    just_edited: "OpenStreetMap編集完了！",
-    okay: "OK",
-
-    "zoom-in": "ズームイン",
-    "zoom-out": "ズームアウト",
-
-    nothing_to_undo: "やり直す変更点がありません",
-    nothing_to_redo: "やり直した変更点がありません",
-
-    browser_notice: "このエディタは Firefox, Chrome, Safari, Opera, および Internet Explorer 9 以上をサポートしています。ブラウザのバージョンを更新するか、Potlatch 2を使用して編集してください",
-
-    inspector: {
-        no_documentation_combination: "このタグの組み合わせに関する説明文はありません",
-        no_documentation_key: "このキーに対する説明文はありません",
-        new_tag: "新規タグ"
-    },
-
-    view_on_osm: "OSMで確認",
-
-    zoom_in_edit: "編集するにはさらに地図を拡大してください",
-
-    edit_tags: "タグを編集",
-
-    geocoder: {
-        title: "特定地点を検索",
-        placeholder: "地点を検索",
-        no_results: "'{name}' という名称の地点が見つかりません"
-    },
-
-    description: "説明",
-
-    logout: "ログアウト",
-
-    report_a_bug: "バグを報告",
-
-    layerswitcher: {
-        title: "背景画像",
-        description: "背景画像設定",
-        percent_brightness: "{opacity}% 輝度",
-        fix_misalignment: "背景画像を移動",
-        reset: "設定リセット"
-    },
-
-    contributors: {
-        list: "{users} による編集履歴を確認",
-        truncated_list: "{users} とその他 {count} 人による編集履歴を表示"
-    },
-
-    source_switch: {
-        live: "本番サーバ",
-        dev: "開発サーバ"
+    zoom: {
+        in: "ズームイン",
+        out: "ズームアウト"
     }
 };
