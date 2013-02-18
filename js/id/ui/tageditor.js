@@ -16,7 +16,8 @@ iD.ui.TagEditor = function() {
         entity = selection.datum();
 
         if (preset) {
-            tags = _.extend(_.omit(tags, _.keys(presetMatch.match.tags)), preset.match.tags);
+            if (presetMatch) tags = _.omit(tags, _.keys(presetMatch.match.tags));
+            tags = _.extend(_.omit(tags), preset.match.tags);
         }
 
         presetMatch = preset || presetMatch || presetData.matchTags(entity);
