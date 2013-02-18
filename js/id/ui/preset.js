@@ -1,5 +1,6 @@
 iD.ui.preset = function() {
     var event = d3.dispatch('change'),
+        taginfo = iD.taginfo(),
         hidden,
         sections,
         exttags,
@@ -84,12 +85,19 @@ iD.ui.preset = function() {
                         .attr('label', function(d) { return d; });
                 break;
             case 'combo':
-                var w = this.append('span').attr('class', 'input-wrap-position');
+                var w = this.append('span').attr('class', 'input-wrap-position'),
+                    combobox = d3.combobox();
                 i = w.append('input');
-                w.call(d3.combobox()
-                    .data([''].map(function(o) {
-                        return { value: o, title: o };
-                    })));
+                w.call(combobox);
+                taginfo.values({
+                    key: d.key
+                }, function(err, data) {
+                    if (!err) combobox.data(data.map(function(d) {
+                        d.title = d.value = d.value.replace('_', ' ');
+                        return d;
+                    }));
+                });
+
                 break;
         }
         if (i) {

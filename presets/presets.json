@@ -15,6 +15,10 @@
                 "title": "Internet Access",
                 "type": "select",
                 "options": ["yes", "no", "wlan", "wired", "terminal"]
+            },
+            {
+                "key": "cuisine",
+                "type": "combo"
             }
         ]
     },
