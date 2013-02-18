@@ -189,11 +189,45 @@ d3.combobox = function() {
             event.accept(d);
             hide();
         }
+
+        function mousedown() {
+            update();
+
+            var entries = container.selectAll('a'),
+                height = container.node().scrollHeight / entries[0].length,
+                w = d3.select(window);
+
+            function getIndex(m) {
+                return Math.floor((m[1] + container.node().scrollTop) / height);
+            }
+
+            function withinBounds(m) {
+                var n = container.node();
+                return m[0] >= 0 && m[0] < n.offsetWidth &&
+                    m[1] >= 0 && m[1] < n.offsetHeight;
+            }
+
+            w.on('mousemove.typeahead', function() {
+                var m = d3.mouse(container.node());
+                var within = withinBounds(m);
+                var n = getIndex(m);
+                entries.classed('selected', function(d, i) { return within && i === n; });
+            });
+
+            w.on('mouseup.typeahead', function() {
+                var m = d3.mouse(container.node());
+                if (withinBounds(m)) select(d3.select(entries[0][getIndex(m)]).datum());
+                entries.classed('selected', false);
+                w.on('mouseup.typeahead', null);
+                w.on('mousemove.typeahead', null);
+            });
+        }
         
         input
             .on('blur.typeahead', blur)
             .on('keydown.typeahead', keydown)
-            .on('keyup.typeahead', keyup);
+            .on('keyup.typeahead', keyup)
+            .on('mousedown.typeahead', mousedown);
     };
 
     typeahead.fetcher = function(_) {
