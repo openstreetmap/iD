@@ -552,13 +552,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
   margin: 0;
 }
 
-.inspector-inner .info {
-    color: white;
-    border-radius: 3px;
-    text-align: center;
-    width: 20px;
-    height: 20px;
-    float: right;
+.inspector-inner .name-help,
+.inspector-inner .type-help {
+  float: right;
 }
 
 .inspector-inner.head {

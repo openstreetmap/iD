@@ -53,25 +53,18 @@ iD.ui.TagEditor = function() {
 
         typewrap.append('button')
             .attr('tabindex', -1)
-            .attr('class', 'minor preset-help')
+            .attr('class', 'minor type-help')
             .append('span')
                 .attr('class', 'icon inspect');
 
         var namewrap = editorwrap.append('div')
                 .attr('class', 'head inspector-inner fillL'),
             namelabel = namewrap.append('h4')
-                .text('Name'),
-            h2 = namewrap.append('h2');
+                .text('Name');
 
-        namewrap.append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'minor name-help')
-            .append('span')
-                .attr('class', 'icon inspect');
-
-
-        var name = h2.append('input')
+        var name = namewrap.append('input')
             .attr('placeholder', 'name')
+            .attr('type', 'text')
             .property('value', function() {
                 return entity.tags.name || '';
             })
@@ -81,6 +74,12 @@ iD.ui.TagEditor = function() {
                 tageditor.tags(tags);
                 event.change();
             });
+
+        namewrap.append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'minor name-help')
+            .append('span')
+                .attr('class', 'icon inspect');
 
         event.on('change.name', function() {
             var tags = tageditor.tags();
@@ -109,7 +108,7 @@ iD.ui.TagEditor = function() {
 
         event.message('Edit ' + (presetMatch && presetMatch.name || ''));
 
-        var taglistwrap = editorwrap.append('div').call(tagList);
+        var taglistwrap = editorwrap.append('div').call(tagList, !tagview);
 
         tageditor.tags(tags);
     }

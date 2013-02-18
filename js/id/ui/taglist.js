@@ -5,15 +5,22 @@ iD.ui.Taglist = function() {
         list,
         context;
 
-    function taglist(selection) {
+    function taglist(selection, collapsed) {
 
-        //selection.append('h4')
-            //.text(t('inspector.edit_tags'));
+        if (collapsed) {
+            selection.append('h4')
+                .text('Additional tags')
+                .on('click', function() {
+                    wrap.call(iD.ui.Toggle(wrap.classed('hide')));
+                });
+        }
 
-        list = selection.append('ul')
+        var wrap = selection.append('div');
+
+        list = wrap.append('ul')
             .attr('class', 'tag-list');
 
-        var newTag = selection.append('button')
+        var newTag = wrap.append('button')
             .attr('class', 'add-tag');
 
         newTag.on('click', function() {
@@ -27,6 +34,8 @@ iD.ui.Taglist = function() {
         newTag.append('span')
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
+
+        if (collapsed) wrap.classed('hide', true);
 
     }
 

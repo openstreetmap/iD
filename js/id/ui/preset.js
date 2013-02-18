@@ -76,10 +76,18 @@ iD.ui.preset = function() {
                     });
                 break;
             case 'select':
+                this.append('select')
+                    .selectAll('options')
+                    .data([''].concat(d.options.slice()))
+                    .enter().append('option')
+                        .attr('value', function(d) { return d; })
+                        .attr('label', function(d) { return d; });
+                break;
+            case 'combo':
                 var w = this.append('span').attr('class', 'input-wrap-position');
                 i = w.append('input');
                 w.call(d3.combobox()
-                    .data([''].concat(d.option.slice()).map(function(o) {
+                    .data([''].map(function(o) {
                         return { value: o, title: o };
                     })));
                 break;
@@ -104,7 +112,7 @@ iD.ui.preset = function() {
                 .attr('class', 'col4 preset-label')
                 .append('label')
                 .attr('for', 'input-' + d.key)
-                .text(d.key);
+                .text(d.title || d.key);
             input.call(wrap.append('div')
                 .attr('class', 'col8 preset-input'), d);
         });

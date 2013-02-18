@@ -22,6 +22,7 @@ iD.ui.PresetGrid = function() {
 
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
+            .attr('type', 'search')
             .on('keyup', function() {
                 var value = search.property('value'),
                     presets = filter(value);
