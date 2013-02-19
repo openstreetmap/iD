@@ -1,6 +1,8 @@
 iD.ui.preset = function() {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
+        context,
+        entity,
         hidden,
         sections,
         exttags,
@@ -93,7 +95,7 @@ iD.ui.preset = function() {
                     key: d.key
                 }, function(err, data) {
                     if (!err) combobox.data(data.map(function(d) {
-                        d.title = d.value = d.value.replace('_', ' ');
+                        d.title = d.value;
                         return d;
                     }));
                 });
@@ -102,6 +104,7 @@ iD.ui.preset = function() {
         }
         if (i) {
             i.on('change', key);
+            i.on('blur', key);
         }
     }
 
@@ -116,13 +119,23 @@ iD.ui.preset = function() {
             var s = d3.select(this);
             var wrap = s.append('div')
                 .attr('class', 'preset-section-input cf');
+
            wrap.append('div')
                 .attr('class', 'col4 preset-label')
                 .append('label')
                 .attr('for', 'input-' + d.key)
                 .text(d.title || d.key);
-            input.call(wrap.append('div')
-                .attr('class', 'col8 preset-input'), d);
+
+            // Single input element
+            if (d.key) {
+                input.call(wrap.append('div')
+                    .attr('class', 'col8 preset-input'), d);
+
+            // Multiple elements, eg, address
+            } else {
+                if (d.type === 'address') {
+                }
+            }
         });
         if (exttags) setTags(exttags);
     }
@@ -142,6 +155,18 @@ iD.ui.preset = function() {
     presets.tags = function() {
         if (hidden || !preset || !sections) return {};
         return clean(getTags());
+    };
+
+    presets.context = function(_) {
+        if (!arguments.length) return context;
+        context = _;
+        return presets;
+    };
+
+    presets.entity = function(_) {
+        if (!arguments.length) return entity;
+        entity = _;
+        return presets;
     };
 
     return d3.rebind(presets, event, 'on');

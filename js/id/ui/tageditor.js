@@ -87,14 +87,16 @@ iD.ui.TagEditor = function() {
 
 
         presetUI = iD.ui.preset()
+            .context(context)
+            .entity(entity)
             .on('change', function(tags) {
-                event.change();
+                event.change(tags);
             });
 
         tagList = iD.ui.Taglist()
             .context(context)
             .on('change', function(tags) {
-                event.change();
+                event.change(tags);
             });
 
         var tageditorpreset = editorwrap.append('div')

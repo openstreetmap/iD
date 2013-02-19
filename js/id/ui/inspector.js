@@ -41,6 +41,9 @@ iD.ui.Inspector = function() {
             .tags(entity.tags)
             .context(context)
             .on('message', changeMessage)
+            .on('change', function() {
+                event.changeTags(entity, inspector.tags());
+            })
             .on('choose', function() {
                 inspectorbody.call(presetGrid);
             });

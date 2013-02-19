@@ -35,7 +35,7 @@ iD.ui.Taglist = function() {
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
 
-        if (collapsed) wrap.classed('hide', true);
+        wrap.classed('hide', collapsed);
 
     }
 
