@@ -182,7 +182,8 @@ iD.ui.Taglist = function() {
 
     function pushMore() {
         if (d3.event.keyCode === 9 &&
-            list.selectAll('li:last-child input.value').node() === this) {
+            list.selectAll('li:last-child input.value').node() === this &&
+            !d3.event.shiftKey) {
             addTag();
             focusNewKey();
             d3.event.preventDefault();
