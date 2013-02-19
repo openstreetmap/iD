@@ -91,7 +91,6 @@ d3.combobox = function() {
                    d3.event.preventDefault();
                    break;
                // escape, tab
-               case 9:
                case 13:
                    d3.event.preventDefault();
                    break;
@@ -136,6 +135,34 @@ d3.combobox = function() {
             highlight();
         }
 
+        var prevValue, prevCompletion;
+
+        function autocomplete() {
+
+            var value = input.property('value'),
+                match;
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].value.indexOf(value) === 0) {
+                    match = data[i].value;
+                    break;
+                }
+            }
+
+            // backspace
+            if (d3.event.keyCode === 8) {
+                prevValue = value;
+                prevCompletion = '';
+
+            } else if (value && match && value !== prevValue + prevCompletion) {
+                prevValue = value;
+                prevCompletion = match.substr(value.length);
+                input.property('value', prevValue + prevCompletion);
+                input.node().setSelectionRange(value.length, value.length + prevCompletion.length);
+            }
+        }
+
+
         function highlight() {
             container
                 .selectAll('a')
@@ -150,11 +177,18 @@ d3.combobox = function() {
             }
         }
 
-        function update() {
+        function update(value) {
+
+            if (typeof value === 'undefined') {
+                value = input.property('value');
+            }
 
             function render(data) {
+
                 if (data.length) show();
                 else hide();
+
+                autocomplete();
 
                 updateSize();
 
@@ -176,9 +210,7 @@ d3.combobox = function() {
                     .order();
             }
 
-            fetcher.apply(selection, [
-                selection.select('input').property('value'),
-                data, render]);
+            fetcher.apply(selection, [value, data, render]);
         }
 
         // select the choice given as d
@@ -191,7 +223,7 @@ d3.combobox = function() {
         }
 
         function mousedown() {
-            update();
+            update('');
 
             var entries = container.selectAll('a'),
                 height = container.node().scrollHeight / entries[0].length,
