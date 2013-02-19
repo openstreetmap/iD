@@ -52,5 +52,13 @@ describe("iD.Tree", function() {
             var g = tree.graph().replace(n1).replace(n2);
             expect(tree.intersects(iD.geo.Extent([0, 0], [1.1, 1.1]), g)).to.eql([n1]);
         });
+
+        it("doesn't include removed entities", function() {
+            var n1 = iD.Node({ id: 'n1', loc: [1, 1]});
+            var g = tree.graph().replace(n1);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([n1]);
+            g = g.remove(n1);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
+        });
     });
 });
