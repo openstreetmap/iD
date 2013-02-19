@@ -8,13 +8,13 @@ iD.ui.PresetGrid = function() {
 
         selection.html('');
         var wrap = selection.append('div')
-            .attr('class', 'fillL');
+            .attr('class', '');
 
         var viable = presetData.match(entity);
         event.message('What kind of ' + entity.geometry(context.graph()) + ' are you adding?');
 
         var grid = wrap.append('div')
-            .attr('class', 'preset-grid')
+            .attr('class', 'preset-grid pad1')
             .call(drawGrid, filter(''));
 
         var searchwrap = wrap.append('div')
@@ -50,14 +50,16 @@ iD.ui.PresetGrid = function() {
 
         var entered = entries.enter()
             .append('div')
-            .attr('class', 'grid-entry')
+            .attr('class', 'grid-entry col3')
             .on('click', function(d) {
                 event.choose(d);
             });
 
         entered.append('div')
-            .attr('class', function(d) { return 'maki-' + d.icon + '-24'; });
-        entered.append('span').text(name);
+            .attr('class','grid-inner fillL')
+            .append('div')
+                .attr('class', function(d) { return 'maki-' + d.icon + '-24 icon'; });
+        entered.append('span').attr('class','label').text(name);
 
         entries.exit().remove();
     }

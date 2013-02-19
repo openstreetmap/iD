@@ -16,16 +16,15 @@ iD.ui.Inspector = function() {
 
         entity = selection.datum();
 
-        var iwrap = selection.append('div')
-                .attr('class','inspector content hide'),
+        var iwrap = selection
             messagewrap = iwrap.append('div')
-                .attr('class', 'message inspector-inner fillL2'),
-            message = messagewrap.append('h4');
+                .attr('class', 'message inspector-inner fillL'),
+            message = messagewrap.append('h3');
 
         inspectorbody = iwrap.append('div')
-            .attr('class', 'inspector-body'),
+            .attr('class', 'inspector-body fillL'),
         iwrap.append('div')
-            .attr('class', 'inspector-buttons pad1 fillD')
+            .attr('class', 'inspector-actions pad1 col12')
             .call(drawButtons);
 
         presetGrid = iD.ui.PresetGrid()

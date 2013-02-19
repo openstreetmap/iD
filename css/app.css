@@ -30,9 +30,7 @@ div, textarea, input, form, span, ul, li, ol, a, button {
     box-sizing: border-box;
 }
 
-/* Mobile Tweaks
-------------------------------------------------------- */
-a, button, input, textarea {
+a, button, input, textarea, .preset-grid .grid-inner {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
     -webkit-touch-callout:none;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
@@ -95,6 +93,33 @@ a:hover {
     color:#597be7;
 }
 
+/* Forms
+------------------------------------------------------- */
+
+input[type=text] {
+    padding:5px 10px;
+    height:30px;
+    resize: none;
+}
+
+.fillD textarea,
+.fillD input[type=text] {
+    background-color: black;
+    border:1px solid rgba(255, 255, 255, .25);
+    color: white;
+}
+
+.fillD textarea:focus,
+.fillD input[type=text]:focus {
+    background-color: black;
+    border:1px solid rgba(255, 255, 255, .5);
+}
+
+.fillL textarea,
+.fillL input[type=text],
+.fillL input[type=url],
+.fillL input[type=tel],
+.fillL input[type=email],
 textarea,
 input[type=text],
 input[type=url],
@@ -106,28 +131,11 @@ input[type=email] {
     resize: vertical;
 }
 
-.fillD textarea,
-.fillD input[type=text] {
-    background-color: black;
-    border:1px solid rgba(255, 255, 255, .25);
-    color: white;
-}
-
+.fillL textarea:focus,
+.fillL input[type=text]:focus,
 textarea:focus,
 input[type=text]:focus {
     background-color: #ececec;
-}
-
-.fillD textarea:focus,
-.fillD input[type=text]:focus {
-    background-color: black;
-    border:1px solid rgba(255, 255, 255, .5);
-}
-
-input[type=text] {
-    padding:5px 10px;
-    height:30px;
-    resize: none;
 }
 
 /* tables */
@@ -513,6 +521,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity:0;
     display:none;
     max-width: 500px;
+    height: 100%;
+    position: relative;
 }
 
 .inspector {
@@ -526,9 +536,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner.message {
-    padding: 20px;
     height: 60px;
+    border-bottom: 1px solid #ccc;
 }
+
+.inspector-inner.message h3 { line-height: 40px;}
 
 .inspector-inner.type {
     border: 1px solid #eee;
@@ -577,9 +589,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body {
-    position:relative;
-    max-height: 400px;
-    overflow: auto;
 }
 
 .tag-row {
@@ -624,17 +633,17 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .tag-row button.tag-help {
     right: -30px;
 }
-.inspector-buttons {
-    border-radius: 0 0 0 10px;
+
+.inspector-actions {
     height: 60px;
 }
 
-.inspector-buttons button {
+.inspector-actions button {
     width: 20%;
     float: left;
 }
 
-.inspector-buttons .minor-buttons {
+.inspector-actions .minor-buttons {
     padding-left: 10px;
     line-height: 40px;
     width: 60%;
@@ -660,26 +669,45 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 /* temp */
 
 .preset-grid {
-  max-height:  360px;
+    overflow: auto;
 }
 
 .preset-grid .grid-entry {
-  float: left;
-  width: 100px;
-  height: 100px;
-  color: black;
-  margin: 10px;
-  text-align: center;
+    padding-bottom: 25%;
+    position: relative;
+    margin-bottom: 20px;
 }
-.preset-grid .grid-entry div {
-  width: 24px;
-  height: 24px;
-  margin-left: 20px;
-  display: block;
-  overflow: hidden;
+
+.preset-grid .grid-entry .grid-inner:hover {
+    background: #ececec;
+}
+
+.grid-entry .grid-inner {
+    position: absolute;
+    border: 1px solid #ccc;
+    left: 10px; right: 10px; top: 10px; bottom: 10px;
+    border-radius: 4px;
+}
+.preset-grid .grid-entry .icon {
+    left: 0; right: 0; top: 0; bottom: 0;
+    position: absolute;
+    display: block;
+    margin: auto;
+}
+
+.preset-grid .grid-entry .label {
+    text-align: center;
+    display: block;
+    position: absolute;
+    bottom: -15px;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .preset-grid-search-wrap {
+    border-top: 1px solid #ccc;
   padding: 20px;
 }
 
