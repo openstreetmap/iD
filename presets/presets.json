@@ -8,7 +8,7 @@
                 "amenity": "cafe"
             }
         },
-        "icon": "cafe-24.png",
+        "icon": "cafe",
         "form": [
             {
                 "key": "internet_access",
@@ -31,7 +31,7 @@
                 "shop": "supermarket"
             }
         },
-        "icon": "grocery-24.png",
+        "icon": "grocery",
         "form": [
             {
                 "key": "operator",
@@ -48,7 +48,7 @@
                 "amenity": "restaurant"
             }
         },
-        "icon": "restaurant-24.png",
+        "icon": "restaurant",
         "form": [
             {
                 "key": "cuisine",
@@ -87,7 +87,7 @@
                 "amenity": "school"
             }
         },
-        "icon": "school-24.png",
+        "icon": "school",
         "form": [
             {
                 "key": "operator",
@@ -104,7 +104,7 @@
                 "amenity": "parking"
             }
         },
-        "icon": "parking-24.png",
+        "icon": "parking",
         "form": [
             {
                 "key": "fee",
@@ -122,7 +122,7 @@
                 "amenity": "bank"
             }
         },
-        "icon": "bank-24.png",
+        "icon": "bank",
         "form": [
             {
                 "key": "atm",
@@ -140,10 +140,14 @@
                 "amenity": "fast_food"
             }
         },
-        "icon": "fast-food-24.png",
+        "icon": "fast-food",
         "form": [
             {
                 "key": "cuisine",
+                "type": "combo"
+            },
+            {
+                "key": "monkey",
                 "type": "combo"
             }
         ]
@@ -157,7 +161,7 @@
                 "amenity": "bar"
             }
         },
-        "icon": "bar-24.png",
+        "icon": "bar",
         "form": [
         ]
     },
@@ -170,7 +174,7 @@
                 "highway": "bus_stop"
             }
         },
-        "icon": "bus-24.png",
+        "icon": "bus",
         "form": [
             {
                 "key": "operator",
@@ -187,7 +191,7 @@
                 "amenity": "cinema"
             }
         },
-        "icon": "cinema-24.png",
+        "icon": "cinema",
         "form": [
         ]
     },
@@ -200,7 +204,7 @@
                 "amenity": "hospital"
             }
         },
-        "icon": "hospital-24.png",
+        "icon": "hospital",
         "form": [
         ]
     }

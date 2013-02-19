@@ -55,8 +55,8 @@ iD.ui.PresetGrid = function() {
                 event.choose(d);
             });
 
-        entered.append('img')
-            .attr('src', function(d) { return '/presets/maki/' + d.icon; });
+        entered.append('div')
+            .attr('class', function(d) { return 'maki-' + d.icon + '-24'; });
         entered.append('span').text(name);
 
         entries.exit().remove();

@@ -36,9 +36,8 @@ iD.ui.TagEditor = function() {
         typewrap.append('h4')
             .text('Type');
 
-        typewrap.append('img')
-            .attr('class', 'preset-icon')
-            .attr('src', presetMatch ? '/presets/maki/' + presetMatch.icon : '');
+        typewrap.append('div')
+            .attr('class', 'preset-icon' + (presetMatch ?  ' maki-' + presetMatch.icon + '-24' : ''));
 
         var typelabel = typewrap.append('div')
             .attr('class', 'preset-label-wrap');

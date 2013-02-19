@@ -539,8 +539,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-inner.type .preset-icon {
     width: 24px;
     height: 24px;
-    padding: 13px;
-    background: #eee;
 }
 
 .inspector-inner.type .preset-label-wrap {
@@ -669,17 +667,16 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
   float: left;
   width: 100px;
   height: 100px;
-  //background: red;
   color: black;
   margin: 10px;
   text-align: center;
 }
-.preset-grid .grid-entry img {
+.preset-grid .grid-entry div {
   width: 24px;
+  height: 24px;
   margin-left: 20px;
-  padding: 18px;
-  background: #eee;
   display: block;
+  overflow: hidden;
 }
 
 .preset-grid-search-wrap {
@@ -1478,11 +1475,14 @@ a.success-action {
     .save .label, .apply .label, .cancel .label { display: block;}
 }
 
-.preset-section.cf,
 .inspector-preset.cf,
 .preset-section-input.cf {
     width: 100%;
-    margin: 5px 0;
+}
+
+.preset-section.cf {
+    width: 100%;
+    margin-top: 10px;
 }
 
 .preset-search-input {

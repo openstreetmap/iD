@@ -87,7 +87,7 @@ iD.ui.preset = function() {
             case 'combo':
                 var w = this.append('span').attr('class', 'input-wrap-position'),
                     combobox = d3.combobox();
-                i = w.append('input');
+                i = w.append('input').attr('type', 'text');
                 w.call(combobox);
                 taginfo.values({
                     key: d.key
