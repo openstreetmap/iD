@@ -1486,10 +1486,11 @@ a.success-action {
 }
 
 .lasso-box {
-    fill-opacity:0.2;
-    fill: #bde5aa;
-    stroke: #000;
+    fill-opacity:0.1;
+    stroke: #fff;
     stroke-width: 1;
+    stroke-opacity: 1;
+    stroke-dasharray: 5, 5;
 }
 
 .inspector-preset.cf,
