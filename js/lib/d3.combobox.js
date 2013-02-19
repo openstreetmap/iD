@@ -137,7 +137,7 @@ d3.combobox = function() {
 
         var prevValue, prevCompletion;
 
-        function autocomplete() {
+        function autocomplete(e, data) {
 
             var value = input.property('value'),
                 match;
@@ -150,7 +150,7 @@ d3.combobox = function() {
             }
 
             // backspace
-            if (d3.event.keyCode === 8) {
+            if (e.keyCode === 8) {
                 prevValue = value;
                 prevCompletion = '';
 
@@ -183,12 +183,14 @@ d3.combobox = function() {
                 value = input.property('value');
             }
 
+            var e = d3.event;
+
             function render(data) {
 
                 if (data.length) show();
                 else hide();
 
-                autocomplete();
+                autocomplete(e, data);
 
                 updateSize();
 
