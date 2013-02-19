@@ -75,4 +75,21 @@ describe("iD.ui.Inspector", function () {
 
         expect(spy).to.have.been.calledWith(entity, tags);
     });
+
+    it("adds tags when pressing the TAB key on last input.value", function () {
+        expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
+        var input = d3.select('.tag-list li:last-child input.value')[0][0];
+        happen.keydown(d3.select(input).node(), {keyCode: 9});
+        expect(element.selectAll('.tag-list li')[0].length).to.eql(2);
+        expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
+        expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
+    });
+
+    it("does not add a tag when pressing TAB while shift is pressed", function () {
+        expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
+        var input = d3.select('.tag-list li:last-child input.value')[0][0];
+        happen.keydown(d3.select(input).node(), {keyCode: 9, shiftKey: true});
+        expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
+    });
+
 });
