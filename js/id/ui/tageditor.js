@@ -25,7 +25,7 @@ iD.ui.TagEditor = function() {
         selection.html('');
 
         var editorwrap = selection.append('div')
-            .attr('class', 'inspector-inner tag-wrap');
+            .attr('class', 'inspector-inner tag-wrap inspector-body');
 
         var typewrap = editorwrap.append('div')
             .attr('class', 'type inspector-inner fillL')

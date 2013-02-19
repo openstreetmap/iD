@@ -69,7 +69,7 @@ iD.ui = function(context) {
 
         var linkList = about.append('ul')
             .attr('id', 'about')
-            .attr('class', 'pad1 fillD about-block link-list');
+            .attr('class', 'pad1 about-block link-list');
 
         linkList.append('li')
             .append('a')

@@ -22,7 +22,7 @@ iD.ui.Inspector = function() {
             message = messagewrap.append('h3');
 
         inspectorbody = iwrap.append('div')
-            .attr('class', 'inspector-body fillL'),
+            .attr('class', 'fillL'),
         iwrap.append('div')
             .attr('class', 'inspector-actions pad1 col12')
             .call(drawButtons);
