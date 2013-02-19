@@ -7,6 +7,8 @@ iD.ui.Lasso = function() {
 
     function lasso(selection) {
 
+        d3.select('#iD').classed('lasso', true);
+
         group = selection.append('g')
             .attr('class', 'lasso hide');
 
@@ -54,6 +56,7 @@ iD.ui.Lasso = function() {
                 d3.select(this).remove();
             }));
         }
+        d3.select('#iD').classed('lasso', false);
     };
 
     return lasso;
