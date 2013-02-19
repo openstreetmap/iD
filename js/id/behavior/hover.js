@@ -32,6 +32,9 @@ iD.behavior.Hover = function() {
         selection.classed('behavior-hover', false)
             .on('mouseover.hover', null)
             .on('mouseout.hover', null);
+
+        selection.selectAll('.hover')
+            .classed('hover', false);
     };
 
     return hover;

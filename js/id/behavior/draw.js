@@ -89,7 +89,9 @@ iD.behavior.Draw = function(context) {
     }
 
     function draw(selection) {
-        context.install(hover);
+        if (!d3.event || !d3.event.altKey) {
+            context.install(hover);
+        }
 
         keybinding
             .on('⌫', backspace)
