@@ -16,14 +16,13 @@ iD.ui.Inspector = function() {
 
         entity = selection.datum();
 
-        var iwrap = selection
-            messagewrap = iwrap.append('div')
+        var messagewrap = selection.append('div')
                 .attr('class', 'message inspector-inner fillL'),
             message = messagewrap.append('h3');
 
-        inspectorbody = iwrap.append('div')
+        inspectorbody = selection.append('div')
             .attr('class', 'fillL'),
-        iwrap.append('div')
+        selection.append('div')
             .attr('class', 'inspector-actions pad1 col12')
             .call(drawButtons);
 
@@ -57,7 +56,7 @@ iD.ui.Inspector = function() {
             inspectorbody.call(tagEditor);
         }
 
-        iwrap.call(iD.ui.Toggle(true));
+        selection.call(iD.ui.Toggle(true));
     }
 
     function drawButtons(selection) {
