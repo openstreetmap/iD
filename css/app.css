@@ -521,7 +521,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity:0;
     display:none;
     max-width: 500px;
-    height: 100%;
     position: relative;
 }
 
@@ -540,7 +539,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-bottom: 1px solid #ccc;
 }
 
-.inspector-inner.message h3 { line-height: 40px;}
+.inspector-inner.message h3 {
+    line-height: 40px;
+}
 
 .inspector-inner.type {
     border: 1px solid #eee;
@@ -589,6 +590,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body {
+    overflow: auto;
+    max-height: 440px;
 }
 
 .tag-row {
@@ -667,10 +670,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* Preset grid */
 /* temp */
-
-.preset-grid {
-    overflow: auto;
-}
 
 .preset-grid .grid-entry {
     padding-bottom: 25%;
@@ -1493,16 +1492,6 @@ a.success-action {
     stroke-width: 1;
 }
 
-/* Media Queries
-------------------------------------------------------- */
-
-@media only screen and (max-width: 840px) {
-    span.label {display: none;}
-    /* override hide for save button */
-    .icon.icon-pre-text { margin-right: 0px;}
-    .save .label, .apply .label, .cancel .label { display: block;}
-}
-
 .inspector-preset.cf,
 .preset-section-input.cf {
     width: 100%;
@@ -1583,4 +1572,17 @@ div.combobox {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
+}
+
+/* Media Queries
+------------------------------------------------------- */
+
+@media only screen and (max-width: 840px) {
+    span.label {display: none;}
+    /* override hide for save button */
+    .icon.icon-pre-text { margin-right: 0px;}
+    .save .label, .apply .label, .cancel .label { display: block;}
+}
+
+@media only screen and (max-height: 840px) {
 }

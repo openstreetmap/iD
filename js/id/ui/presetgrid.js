@@ -7,17 +7,15 @@ iD.ui.PresetGrid = function() {
     function presetgrid(selection) {
 
         selection.html('');
-        var wrap = selection.append('div')
-            .attr('class', '');
 
         var viable = presetData.match(entity);
         event.message('What kind of ' + entity.geometry(context.graph()) + ' are you adding?');
 
-        var grid = wrap.append('div')
-            .attr('class', 'preset-grid pad1')
+        var grid = selection.append('div')
+            .attr('class', 'preset-grid inspector-body pad1')
             .call(drawGrid, filter(''));
 
-        var searchwrap = wrap.append('div')
+        var searchwrap = selection.append('div')
             .attr('class', 'preset-grid-search-wrap');
 
         var search = searchwrap.append('input')
