@@ -57,7 +57,7 @@ iD.ui.PresetGrid = function() {
             .attr('class','grid-inner fillL');
         inner.append('div')
             .attr('class', function(d) {
-                var s = 'preset-icon-fill ' + d.match.type.join(' ');
+                var s = 'preset-icon-fill ' + entity.geometry(context.graph());
                 for (var i in d.match.tags) {
                     s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
                 }
