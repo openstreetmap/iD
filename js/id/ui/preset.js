@@ -134,6 +134,11 @@ iD.ui.preset = function() {
             // Multiple elements, eg, address
             } else {
                 if (d.type === 'address') {
+                    wrap.append('div')
+                        .attr('class', 'col8 preset-input', d)
+                        .call(iD.ui.preset.address()
+                        .context(context)
+                        .entity(entity));
                 }
             }
         });
