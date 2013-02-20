@@ -11,12 +11,12 @@ iD.ui.PresetGrid = function() {
         var viable = presetData.match(entity);
         event.message('What kind of ' + entity.geometry(context.graph()) + ' are you adding?');
 
+        var searchwrap = selection.append('div')
+            .attr('class', 'preset-grid-search-wrap pad2');
+
         var grid = selection.append('div')
             .attr('class', 'preset-grid fillD inspector-body')
             .call(drawGrid, filter(''));
-
-        var searchwrap = selection.append('div')
-            .attr('class', 'preset-grid-search-wrap pad2');
 
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
@@ -49,7 +49,7 @@ iD.ui.PresetGrid = function() {
     function drawGrid(selection, presets) {
 
         var entries = selection
-            .selectAll('div.grid-entry')
+            .selectAll('button.grid-entry')
             .data(presets.slice(0, 12), name);
 
         var entered = entries.enter()

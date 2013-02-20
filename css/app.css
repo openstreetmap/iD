@@ -658,7 +658,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin-bottom: 20px;
 }
 
-.preset-grid.filtered .grid-entry:first-child .grid-inner,
+.preset-grid.filtered .grid-entry:first-child,
 .preset-grid .grid-entry .grid-inner:hover {
     background: #ececec;
 }
