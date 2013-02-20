@@ -53,10 +53,18 @@ iD.ui.PresetGrid = function() {
                 event.choose(d);
             });
 
-        entered.append('div')
-            .attr('class','grid-inner fillL')
-            .append('div')
-                .attr('class', function(d) { return 'maki-' + d.icon + '-24 icon'; });
+        var inner = entered.append('div')
+            .attr('class','grid-inner fillL');
+        inner.append('div')
+            .attr('class', function(d) {
+                var s = 'preset-icon-fill ' + d.match.type.join(' ');
+                for (var i in d.match.tags) {
+                    s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                }
+                return s;
+            });
+        inner.append('div')
+            .attr('class', function(d) { return 'maki-' + d.icon + '-24 icon'; });
         entered.append('span').attr('class','label').text(name);
 
         entries.exit().remove();

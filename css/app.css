@@ -687,6 +687,16 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     left: 10px; right: 10px; top: 10px; bottom: 10px;
     border-radius: 4px;
 }
+.grid-entry .grid-inner .preset-icon-fill.area {
+    position: absolute;
+    opacity: 0.4;
+    left: 0; right: 0; top: 0; bottom: 0;
+    border-radius: 4px;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+}
+
 .preset-grid .grid-entry .icon {
     left: 0; right: 0; top: 0; bottom: 0;
     position: absolute;
@@ -714,6 +724,31 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
   width: 100%;
   height: 20px;
 }
+
+/* Preset icon colors */
+
+.preset-icon-fill.tag-amenity,
+.preset-icon-fill.tag-shop,
+.preset-icon-fill.tag-building {
+    background-color: #e06e5f;
+}
+
+.preset-icon-fill.tag-natural-water {
+    background-color: #77d3de;
+}
+
+.preset-icon-fill.tag-landuse,
+.preset-icon-fill.tag-natural-wood,
+.preset-icon-fill.tag-natural-tree,
+.preset-icon-fill.tag-natural-grassland,
+.preset-icon-fill.tag-leisure-park {
+    background-color: #8cd05f;
+}
+
+.preset-icon-fill.tag-amenity-parking {
+    background-color: #aaa;
+}
+
 
 /* Map Controls */
 

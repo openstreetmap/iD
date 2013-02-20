@@ -27,6 +27,30 @@
         ]
     },
     {
+        "title": "Park",
+        "name": "park",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "leisure": "park"
+            }
+        },
+        "icon": "park",
+        "form": []
+    },
+    {
+        "title": "Water",
+        "name": "water",
+        "match": {
+            "type": ["node", "area"],
+            "tags": {
+                "natural": "water"
+            }
+        },
+        "icon": "",
+        "form": []
+    },
+    {
         "title": "Supermarket",
         "name": "supermarket",
         "match": {
