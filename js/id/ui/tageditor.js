@@ -59,7 +59,7 @@ iD.ui.TagEditor = function() {
 
         namewrap.append('h4').text('Name');
 
-        var name = namewrap.append('input')
+        name = namewrap.append('input')
             .attr('placeholder', 'unkown')
             .attr('class', 'major')
             .attr('type', 'text')

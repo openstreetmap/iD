@@ -674,9 +674,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .grid-entry .preset-icon-fill.area {
     position: absolute;
     opacity: 0.4;
-    left: 0; right: 0; top: 0; bottom: 0;
+    left: 0; right: 0; top: 20%;
     border-radius: 4px;
     margin: auto;
+    margin-top: -8px;
     width: 40px;
     height: 40px;
 }
