@@ -226,6 +226,8 @@ d3.combobox = function() {
         }
 
         function mousedown() {
+
+            input.node().focus();
             update('');
 
             var entries = container.selectAll('a'),

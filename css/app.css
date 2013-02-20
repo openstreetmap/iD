@@ -1587,3 +1587,18 @@ div.combobox {
 
 @media only screen and (max-height: 840px) {
 }
+
+/* Address input */
+
+.preset-input .addr-housename {
+    width: 300px;
+    display: block;
+}
+
+.preset-input .addr-number {
+    width: 50px;
+}
+
+.preset-input .addr-streetname {
+    width: 250px;
+}
