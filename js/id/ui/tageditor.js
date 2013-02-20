@@ -5,6 +5,7 @@ iD.ui.TagEditor = function() {
         inspectorbody,
         entity,
         tags,
+        name,
         presetMatch,
         presetUI,
         presetGrid,
@@ -61,13 +62,13 @@ iD.ui.TagEditor = function() {
             namelabel = namewrap.append('h4')
                 .text('Name');
 
-        var name = namewrap.append('input')
+        name = namewrap.append('input')
             .attr('placeholder', 'name')
             .attr('type', 'text')
             .property('value', function() {
                 return entity.tags.name || '';
             })
-            .on('keyup', function() {
+            .on('blur', function() {
                 var tags = tageditor.tags();
                 tags.name = this.value;
                 tageditor.tags(tags);
@@ -132,6 +133,7 @@ iD.ui.TagEditor = function() {
         } else {
             tags = newtags;
             if (presetUI && tagList) {
+                name.property('value', tags.name || '');
                 presetUI.change(tags);
                 tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
             }
