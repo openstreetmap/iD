@@ -125,6 +125,7 @@ iD.modes.Select = function(context, selection, initial) {
                 if (!_.isEqual(entity.tags, newEntity.tags)) {
                     inspector.tags(newEntity.tags);
                 }
+                entity = newEntity;
             }
         });
 

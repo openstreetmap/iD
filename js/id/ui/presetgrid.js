@@ -54,7 +54,17 @@ iD.ui.PresetGrid = function() {
             });
 
         entered.append('div')
+            .attr('class', function(d) {
+                var s = 'preset-icon-fill ' + entity.geometry(context.graph());
+                for (var i in d.match.tags) {
+                    s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                }
+                return s;
+            });
+
+        entered.append('div')
             .attr('class', function(d) { return 'maki-' + d.icon + '-24 icon'; });
+
         entered.append('span').attr('class','label').text(name);
 
         entries.exit().remove();

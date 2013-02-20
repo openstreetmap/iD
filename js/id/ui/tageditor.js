@@ -5,6 +5,7 @@ iD.ui.TagEditor = function() {
         inspectorbody,
         entity,
         tags,
+        name,
         presetMatch,
         presetUI,
         presetGrid,
@@ -40,10 +41,6 @@ iD.ui.TagEditor = function() {
                 event.choose();
             });
 
-        // typewrap.append('em')
-        //     .attr('class', 'preset-geometry')
-        //     .text(entity.geometry(context.graph()));
-
         typelabel.append('div')
             .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' maki-' + presetMatch.icon + '-24' : ''));
 
@@ -69,7 +66,7 @@ iD.ui.TagEditor = function() {
             .property('value', function() {
                 return entity.tags.name || '';
             })
-            .on('keyup', function() {
+            .on('blur', function() {
                 var tags = tageditor.tags();
                 tags.name = this.value;
                 tageditor.tags(tags);
@@ -134,6 +131,7 @@ iD.ui.TagEditor = function() {
         } else {
             tags = newtags;
             if (presetUI && tagList) {
+                name.property('value', tags.name || '');
                 presetUI.change(tags);
                 tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
             }
