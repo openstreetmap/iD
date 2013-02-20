@@ -655,6 +655,19 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .grid-inner {
+    margin-bottom: 20px;
+}
+
+.preset-grid.filtered .grid-entry:first-child .grid-inner,
+.preset-grid .grid-entry .grid-inner:hover {
+    background: #ececec;
+}
+
+.preset-grid .grid-entry .grid-inner:hover {
+    background: inherit;
+}
+
+.grid-entry .grid-inner {
     position: absolute;
 }
 

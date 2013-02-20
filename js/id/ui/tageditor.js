@@ -111,6 +111,7 @@ iD.ui.TagEditor = function() {
             .attr('class','inspector-inner col12 fillL2').call(tagList, !tagview);
 
         tageditor.tags(tags);
+        event.change(tags);
     }
 
     function drawHead(selection) {
