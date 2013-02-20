@@ -23,7 +23,7 @@ iD.ui.Inspector = function() {
         inspectorbody = selection.append('div')
             .attr('class', 'fillL'),
         selection.append('div')
-            .attr('class', 'inspector-actions pad1 col12')
+            .attr('class', 'inspector-actions pad1 fillD col12')
             .call(drawButtons);
 
         presetGrid = iD.ui.PresetGrid()
