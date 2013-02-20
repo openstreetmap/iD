@@ -677,8 +677,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin-bottom: 20px;
 }
 
+.preset-grid.filtered .grid-entry:first-child .grid-inner,
 .preset-grid .grid-entry .grid-inner:hover {
     background: #ececec;
+}
+
+.preset-grid .grid-entry .grid-inner:hover {
+    background: inherit;
 }
 
 .grid-entry .grid-inner {
@@ -687,6 +692,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     left: 10px; right: 10px; top: 10px; bottom: 10px;
     border-radius: 4px;
 }
+
 .grid-entry .grid-inner .preset-icon-fill.area {
     position: absolute;
     opacity: 0.4;

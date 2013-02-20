@@ -113,6 +113,7 @@ iD.ui.TagEditor = function() {
         var taglistwrap = editorwrap.append('div').call(tagList, !tagview);
 
         tageditor.tags(tags);
+        event.change(tags);
     }
 
     function drawHead(selection) {

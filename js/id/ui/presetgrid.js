@@ -26,7 +26,13 @@ iD.ui.PresetGrid = function() {
                     presets = filter(value);
                 event.message('' + presets.length + ' results for ' + value);
                 grid.call(drawGrid, presets);
+                grid.classed('filtered', value.length);
+            })
+            .on('change', function() {
+                var chosen = grid.selectAll('.grid-entry:first-child').datum();
+                if (chosen) event.choose(chosen);
             });
+        search.node().focus();
 
 
         function filter(value) {
