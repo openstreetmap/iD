@@ -12,11 +12,11 @@ iD.ui.PresetGrid = function() {
         event.message('What kind of ' + entity.geometry(context.graph()) + ' are you adding?');
 
         var grid = selection.append('div')
-            .attr('class', 'preset-grid fillL2 inspector-body pad1')
+            .attr('class', 'preset-grid fillD inspector-body')
             .call(drawGrid, filter(''));
 
         var searchwrap = selection.append('div')
-            .attr('class', 'preset-grid-search-wrap');
+            .attr('class', 'preset-grid-search-wrap pad2');
 
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
@@ -47,16 +47,14 @@ iD.ui.PresetGrid = function() {
             .data(presets.slice(0, 12), name);
 
         var entered = entries.enter()
-            .append('div')
+            .append('button')
             .attr('class', 'grid-entry col3')
             .on('click', function(d) {
                 event.choose(d);
             });
 
         entered.append('div')
-            .attr('class','grid-inner fillL')
-            .append('div')
-                .attr('class', function(d) { return 'maki-' + d.icon + '-24 icon'; });
+            .attr('class', function(d) { return 'maki-' + d.icon + '-24 icon'; });
         entered.append('span').attr('class','label').text(name);
 
         entries.exit().remove();

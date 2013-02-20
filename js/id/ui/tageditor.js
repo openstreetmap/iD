@@ -25,44 +25,46 @@ iD.ui.TagEditor = function() {
         selection.html('');
 
         var editorwrap = selection.append('div')
-            .attr('class', 'inspector-inner tag-wrap inspector-body');
+            .attr('class', 'tag-wrap inspector-body');
 
-        var typewrap = editorwrap.append('div')
-            .attr('class', 'type inspector-inner fillL')
+        var headerwrap = editorwrap.append('div').attr('class','col12 head inspector-inner');
+
+        typewrap = headerwrap.append('div')
+            .attr('class','col3');
+
+        typewrap.append('h4').text('Type');
+
+        typelabel = typewrap.append('button')
+            .attr('class','type col12')
             .on('click', function() {
                 event.choose();
             });
 
-        typewrap.append('h4')
-            .text('Type');
+        // typewrap.append('em')
+        //     .attr('class', 'preset-geometry')
+        //     .text(entity.geometry(context.graph()));
 
-        typewrap.append('div')
-            .attr('class', 'preset-icon' + (presetMatch ?  ' maki-' + presetMatch.icon + '-24' : ''));
+        typelabel.append('div')
+            .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' maki-' + presetMatch.icon + '-24' : ''));
 
-        var typelabel = typewrap.append('div')
-            .attr('class', 'preset-label-wrap');
-
-        typelabel.append('h3')
-            .attr('class', 'preset-name')
-            .text(presetMatch ? presetMatch.name : 'Unknown type');
-
-        typelabel.append('span')
-            .attr('class', 'preset-geometry')
-            .text(entity.geometry(context.graph()));
-
-        typewrap.append('button')
+        typelabel.append('button')
             .attr('tabindex', -1)
             .attr('class', 'minor type-help')
             .append('span')
                 .attr('class', 'icon inspect');
 
-        var namewrap = editorwrap.append('div')
-                .attr('class', 'head inspector-inner fillL'),
-            namelabel = namewrap.append('h4')
-                .text('Name');
+         var namewrap = headerwrap.append('div')
+                 .attr('class', 'name col9');
+
+        typelabel.append('span')
+        .attr('class','label')
+        .text(presetMatch ? presetMatch.name : 'Unknown type');
+
+        namewrap.append('h4').text('Name');
 
         var name = namewrap.append('input')
-            .attr('placeholder', 'name')
+            .attr('placeholder', 'unkown')
+            .attr('class', 'major')
             .attr('type', 'text')
             .property('value', function() {
                 return entity.tags.name || '';
@@ -85,7 +87,6 @@ iD.ui.TagEditor = function() {
             name.property('value', tags.name);
         });
 
-
         presetUI = iD.ui.preset()
             .context(context)
             .entity(entity)
@@ -100,7 +101,7 @@ iD.ui.TagEditor = function() {
             });
 
         var tageditorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset cf');
+            .attr('class', 'inspector-preset');
 
         if (presetMatch && !tagview) {
             tageditorpreset.call(presetUI
@@ -109,7 +110,8 @@ iD.ui.TagEditor = function() {
 
         event.message('Edit ' + (presetMatch && presetMatch.name || ''));
 
-        var taglistwrap = editorwrap.append('div').call(tagList, !tagview);
+        var taglistwrap = editorwrap.append('div')
+            .attr('class','inspector-inner col12 fillL2').call(tagList, !tagview);
 
         tageditor.tags(tags);
     }

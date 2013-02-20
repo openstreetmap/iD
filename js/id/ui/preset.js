@@ -114,14 +114,14 @@ iD.ui.preset = function() {
             .data(preset.form)
             .enter()
             .append('div')
-            .attr('class', 'preset-section cf');
+            .attr('class', 'preset-section inspector-inner col12');
         sections.each(function(d) {
             var s = d3.select(this);
             var wrap = s.append('div')
-                .attr('class', 'preset-section-input cf');
+                .attr('class', 'preset-section-input');
 
            wrap.append('div')
-                .attr('class', 'col4 preset-label')
+                .attr('class', 'col3 preset-label')
                 .append('label')
                 .attr('for', 'input-' + d.key)
                 .text(d.title || d.key);
@@ -129,13 +129,13 @@ iD.ui.preset = function() {
             // Single input element
             if (d.key) {
                 input.call(wrap.append('div')
-                    .attr('class', 'col8 preset-input'), d);
+                    .attr('class', 'col9 preset-input'), d);
 
             // Multiple elements, eg, address
             } else {
                 if (d.type === 'address') {
                     wrap.append('div')
-                        .attr('class', 'col8 preset-input', d)
+                        .attr('class', 'col9 preset-input', d)
                         .call(iD.ui.preset.address()
                         .context(context)
                         .entity(entity));

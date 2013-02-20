@@ -30,7 +30,7 @@ div, textarea, input, form, span, ul, li, ol, a, button {
     box-sizing: border-box;
 }
 
-a, button, input, textarea, .preset-grid .grid-inner {
+a, button, input, textarea {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
     -webkit-touch-callout:none;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
@@ -56,8 +56,7 @@ h3 {
 
 h4 {
     font-size: 12px;
-    font-weight: normal;
-    font-style: italic;
+    font-weight: bold;
     padding-bottom: 10px;
 }
 
@@ -96,12 +95,6 @@ a:hover {
 /* Forms
 ------------------------------------------------------- */
 
-input[type=text] {
-    padding:5px 10px;
-    height:30px;
-    resize: none;
-}
-
 .fillD textarea,
 .fillD input[type=text] {
     background-color: black;
@@ -115,11 +108,6 @@ input[type=text] {
     border:1px solid rgba(255, 255, 255, .5);
 }
 
-.fillL textarea,
-.fillL input[type=text],
-.fillL input[type=url],
-.fillL input[type=tel],
-.fillL input[type=email],
 textarea,
 input[type=text],
 input[type=url],
@@ -131,12 +119,26 @@ input[type=email] {
     resize: vertical;
 }
 
-.fillL textarea:focus,
-.fillL input[type=text]:focus,
 textarea:focus,
 input[type=text]:focus {
     background-color: #ececec;
 }
+
+input[type=text] {
+    padding:5px 10px;
+    height:30px;
+    resize: none;
+}
+
+input[type=text].major {
+    width: 100%;
+    padding:5px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    height:40px;
+    resize: none;
+}
+
 
 /* tables */
 
@@ -524,62 +526,25 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
 }
 
-.inspector {
-    min-height: 60px;
-    position: relative;
-    border-radius: 0 0 0 10px;
+.inspector-body {
+    overflow: auto;
+    max-height: 440px;
 }
 
 .inspector-inner {
     padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .inspector-inner.message {
     height: 60px;
-    border-bottom: 1px solid #ccc;
 }
 
 .inspector-inner.message h3 {
     line-height: 40px;
 }
 
-.inspector-inner.type {
-    border: 1px solid #eee;
-    z-index:1;
-    position:relative;
-}
-
-.inspector-inner.type .preset-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.inspector-inner.type .preset-label-wrap {
-    height: 50px;
-    display: inline-block;
-    padding: 10px;
-}
-
-.inspector-inner.type .preset-name {
-  margin: 0;
-}
-
-.inspector-inner .name-help,
-.inspector-inner .type-help {
-  float: right;
-}
-
-.inspector-inner.head {
-    border: 1px solid #eee;
-    z-index:1;
-    position:relative;
-}
-
-.inspector-inner.head a {
-    text-decoration:none;
-    margin-right: 10px;
-    display: inline-block
-}
+.head label { display: block;}
 
 .inspector-toggle {
     color:#fff;
@@ -589,10 +554,20 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border: 0;
 }
 
-.inspector-body {
-    overflow: auto;
-    max-height: 440px;
+/* preset form */
+
+.inspector-body .name-help,
+.inspector-body .type-help {
+  position: absolute;
+  right: -10px;
 }
+
+.inspector-body .head .name {
+    padding-left: 10px;
+}
+
+.preset-input { padding-left: 10px;}
+/* tag editor */
 
 .tag-row {
     width: 80%;
@@ -669,51 +644,49 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 /* Preset grid */
-/* temp */
 
-.preset-grid .grid-entry {
-    padding-bottom: 25%;
+.grid-entry {
+    padding-bottom: 16.6666%;
+    min-height: 60px;
+    height: auto;
     position: relative;
-    margin-bottom: 20px;
+    border-right: 1px solid #ccc; border-bottom: 1px solid #ccc;
+    border-radius: 0;
 }
 
-.preset-grid .grid-entry .grid-inner:hover {
-    background: #ececec;
+.grid-inner {
+    position: absolute;
 }
 
-.grid-entry .grid-inner {
+.grid-entry .icon {
     position: absolute;
-    border: 1px solid #ccc;
-    left: 10px; right: 10px; top: 10px; bottom: 10px;
-    border-radius: 4px;
-}
-.preset-grid .grid-entry .icon {
-    left: 0; right: 0; top: 0; bottom: 0;
-    position: absolute;
-    display: block;
+    top: 20%;left: 0; right: 0;
     margin: auto;
 }
 
-.preset-grid .grid-entry .label {
+.grid-entry .label {
     text-align: center;
     display: block;
     position: absolute;
-    bottom: -15px;
-    width: 100%;
+    top: 60%;
+    width: 80%;
+    left: 0; right: 0;
+    margin: auto;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
 .preset-grid-search-wrap {
-    border-top: 1px solid #ccc;
-  padding: 20px;
 }
 
 .preset-grid-search {
   width: 100%;
   height: 20px;
 }
+
+/* Preset form */
+
 
 /* Map Controls */
 
@@ -1491,16 +1464,6 @@ a.success-action {
     stroke-width: 1;
     stroke-opacity: 1;
     stroke-dasharray: 5, 5;
-}
-
-.inspector-preset.cf,
-.preset-section-input.cf {
-    width: 100%;
-}
-
-.preset-section.cf {
-    width: 100%;
-    margin-top: 10px;
 }
 
 .preset-search-input {
