@@ -113,7 +113,11 @@ iD.modes.Select = function(context, selection, initial) {
                 .on('close', function() { context.enter(iD.modes.Browse(context)); });
         }
 
-        context.history().on('change.select', function() {
+        context.history()
+            .on('undone.select', updateInspector)
+            .on('redone.select', updateInspector);
+
+        function updateInspector() {
             context.surface().call(radialMenu.close);
 
             if (_.any(selection, function(id) { return !context.entity(id); })) {
@@ -127,7 +131,7 @@ iD.modes.Select = function(context, selection, initial) {
                 }
                 entity = newEntity;
             }
-        });
+        }
 
         context.map().on('move.select', function() {
             context.surface().call(radialMenu.close);
