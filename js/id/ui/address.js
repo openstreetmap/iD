@@ -6,16 +6,19 @@ iD.ui.preset.address = function() {
 
     function getStreets() {
 
-        var l = entity.loc,
-            dist = iD.geo.metresToCoordinates(entity.loc, [200, 200]),
-            extent = iD.geo.Extent(
-                    [entity.loc[0] - dist[0], entity.loc[1] - dist[1]],
-                    [entity.loc[0] + dist[0], entity.loc[1] + dist[1]]);
+        var l = entity.loc || context.entity(entity.nodes[0]).loc,
+            dist = iD.geo.metresToCoordinates(l, [200, 200]),
+            extent = entity.extent(context.graph()),
+            box = iD.geo.Extent(
+                    [extent[0][0] - dist[0], extent[0][1] - dist[1]],
+                    [extent[1][0] + dist[0], extent[1][1] + dist[1]]);
 
-        return context.intersects(extent)
+        return context.intersects(box)
             .filter(isAddressable)
             .map(function(d) {
-                var loc = context.projection(entity.loc),
+                var loc = context.projection([
+                    (extent[0][0] + extent[1][0]) / 2,
+                    (extent[0][1] + extent[1][1]) / 2]),
                     closest = context.projection(iD.geo.chooseIndex(d, loc, context).loc);
                 return {
                     title: d.tags.name,
