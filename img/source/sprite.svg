@@ -38,9 +38,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="116.05141"
-     inkscape:cy="54.058916"
+     inkscape:zoom="5.5399238"
+     inkscape:cx="57.534044"
+     inkscape:cy="58.349624"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
      showgrid="false"
@@ -194,7 +194,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-25,-62.362183)"
-     style="display:inline">
+     style="display:none">
     <rect
        style="color:#000000;fill:#323232;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4478"
@@ -1148,16 +1148,9 @@
        id="g9974">
       <path
          style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         d="m 227,917.36218 -4,-5 4,-5 2,0 0,1 -3.5,4 3.5,4 0,1 z"
-         id="path9842"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="ccccccccc" />
-      <path
-         sodipodi:nodetypes="ccccccccc"
-         inkscape:connector-curvature="0"
-         id="path9910"
-         d="m 233,917.36218 -4,-5 4,-5 2,0 0,1 -3.5,4 3.5,4 0,1 z"
-         style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         d="M 108 145 L 104 150 L 108 155 L 110 155 L 110 154 L 106.5 150 L 110 146 L 110 145 L 108 145 z M 114 145 L 110 150 L 114 155 L 116 155 L 116 154 L 112.5 150 L 116 146 L 116 145 L 114 145 z "
+         transform="translate(119,762.36218)"
+         id="path9842" />
     </g>
     <g
        id="g9683"
@@ -1180,35 +1173,10 @@
          transform="translate(-41,-179.00001)"
          id="rect9866-2" />
       <path
-         d="m 52,739.36218 c 0,1.10457 -0.895431,2 -2,2 -1.104569,0 -2,-0.89543 -2,-2 0,-1.10457 0.895431,-2 2,-2 1.104569,0 2,0.89543 2,2 z"
-         sodipodi:ry="2"
-         sodipodi:rx="2"
-         sodipodi:cy="739.36218"
-         sodipodi:cx="50"
-         id="path9870-1"
          style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375000000006;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         sodipodi:type="arc"
-         transform="translate(249,-3)" />
-      <path
-         transform="translate(241,-3)"
-         sodipodi:type="arc"
-         style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375000000006;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path9878-4"
-         sodipodi:cx="50"
-         sodipodi:cy="739.36218"
-         sodipodi:rx="2"
-         sodipodi:ry="2"
-         d="m 52,739.36218 c 0,1.10457 -0.895431,2 -2,2 -1.104569,0 -2,-0.89543 -2,-2 0,-1.10457 0.895431,-2 2,-2 1.104569,0 2,0.89543 2,2 z" />
-      <path
-         transform="translate(241,-11)"
-         sodipodi:type="arc"
-         style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375000000006;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path9880-9"
-         sodipodi:cx="50"
-         sodipodi:cy="739.36218"
-         sodipodi:rx="2"
-         sodipodi:ry="2"
-         d="m 52,739.36218 c 0,1.10457 -0.895431,2 -2,2 -1.104569,0 -2,-0.89543 -2,-2 0,-1.10457 0.895431,-2 2,-2 1.104569,0 2,0.89543 2,2 z" />
+         d="M 166 144 C 164.89543 144 164 144.89543 164 146 C 164 147.10457 164.89543 148 166 148 C 167.10457 148 168 147.10457 168 146 C 168 144.89543 167.10457 144 166 144 z M 166 152 C 164.89543 152 164 152.89543 164 154 C 164 155.10457 164.89543 156 166 156 C 167.10457 156 168 155.10457 168 154 C 168 152.89543 167.10457 152 166 152 z M 174 152 C 172.89543 152 172 152.89543 172 154 C 172 155.10457 172.89543 156 174 156 C 175.10457 156 176 155.10457 176 154 C 176 152.89543 175.10457 152 174 152 z "
+         transform="translate(125,582.36218)"
+         id="path9870-1" />
     </g>
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
