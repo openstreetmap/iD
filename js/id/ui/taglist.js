@@ -5,21 +5,20 @@ iD.ui.Taglist = function() {
         list,
         context;
 
-    function taglist(selection, collapsed) {
+    function taglist(selection) {
 
-        if (collapsed) {
-            var collapsebutton = selection.append('a')
-                .attr('href','#')
-                .attr('class','hide-toggle')
-                .text('Additional tags')
-                .on('click', function() {
-                    collapsebutton.classed('expanded', wrap.classed('hide'));
-                    wrap.call(iD.ui.Toggle(wrap.classed('hide')));
-                    selection.node().parentNode.scrollTop += 200;
-                });
-        }
+        var collapsebutton = selection.append('a')
+            .attr('href','#')
+            .attr('class','hide-toggle')
+            .text('Additional tags')
+            .on('click', function() {
+                collapsebutton.classed('expanded', wrap.classed('hide'));
+                wrap.call(iD.ui.Toggle(wrap.classed('hide')));
+                selection.node().parentNode.scrollTop += 200;
+            });
 
-        var wrap = selection.append('div');
+        var wrap = selection.append('div')
+            .attr('class', 'hide');
 
         list = wrap.append('ul')
             .attr('class', 'tag-list');
@@ -38,8 +37,6 @@ iD.ui.Taglist = function() {
         newTag.append('span')
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
-
-        wrap.classed('hide', collapsed);
     }
 
     function drawTags(tags) {

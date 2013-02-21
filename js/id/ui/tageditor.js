@@ -12,7 +12,7 @@ iD.ui.TagEditor = function() {
         tagList,
         context;
 
-    function tageditor(selection, tagview, preset) {
+    function tageditor(selection, preset) {
 
         entity = selection.datum();
 
@@ -100,7 +100,7 @@ iD.ui.TagEditor = function() {
         var tageditorpreset = editorwrap.append('div')
             .attr('class', 'inspector-preset');
 
-        if (presetMatch && !tagview) {
+        if (presetMatch) {
             tageditorpreset.call(presetUI
                     .preset(presetMatch));
         }
@@ -108,7 +108,7 @@ iD.ui.TagEditor = function() {
         event.message('Edit ' + (presetMatch && presetMatch.name || ''));
 
         var taglistwrap = editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2').call(tagList, !tagview);
+            .attr('class','inspector-inner col12 fillL2').call(tagList);
 
         tageditor.tags(tags);
         event.change(tags);

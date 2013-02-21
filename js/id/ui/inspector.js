@@ -3,7 +3,6 @@ iD.ui.Inspector = function() {
         taginfo = iD.taginfo(),
         presetData = iD.presetData(),
         initial = false,
-        expert = false,
         inspectorbody,
         entity,
         presetUI,
@@ -32,7 +31,7 @@ iD.ui.Inspector = function() {
             .context(context)
             .on('message', changeMessage)
             .on('choose', function(preset) {
-                inspectorbody.call(tagEditor, expert, preset);
+                inspectorbody.call(tagEditor, preset);
             });
 
         tagEditor = iD.ui.TagEditor()
@@ -77,16 +76,6 @@ iD.ui.Inspector = function() {
             .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
             .text(t('inspector.view_on_osm'));
-
-        var expertButton = selection.append('button')
-            .attr('class', 'apply')
-            .text('Tag view')
-            .on('click', function() {
-                expert = !expert;
-                expertButton.text(expert ? 'Preset view' : 'Tag view');
-                inspectorbody.call(tagEditor, expert);
-            });
-
     }
 
     function apply(entity) {
