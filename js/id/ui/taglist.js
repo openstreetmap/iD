@@ -8,12 +8,14 @@ iD.ui.Taglist = function() {
     function taglist(selection, collapsed) {
 
         if (collapsed) {
-            selection.append('h4')
+            collapsebutton = selection.append('a')
+                .attr('href','#')
+                .attr('class','hide-toggle')
                 .text('Additional tags')
                 .on('click', function() {
                     wrap.call(iD.ui.Toggle(wrap.classed('hide')));
-                });
-        }
+                })
+        };
 
         var wrap = selection.append('div');
 
@@ -35,8 +37,8 @@ iD.ui.Taglist = function() {
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
 
+        collapsebutton.classed('expanded', collapsed);
         wrap.classed('hide', collapsed);
-
     }
 
     function drawTags(tags) {

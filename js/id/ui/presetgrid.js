@@ -12,7 +12,7 @@ iD.ui.PresetGrid = function() {
         event.message('What kind of ' + entity.geometry(context.graph()) + ' are you adding?');
 
         var searchwrap = selection.append('div')
-            .attr('class', 'preset-grid-search-wrap pad2');
+            .attr('class', 'preset-grid-search-wrap inspector-inner');
 
         var grid = selection.append('div')
             .attr('class', 'preset-grid fillD inspector-body')

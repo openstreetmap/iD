@@ -28,15 +28,15 @@ iD.ui.TagEditor = function() {
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body');
 
-        var headerwrap = editorwrap.append('div').attr('class','col12 head inspector-inner');
+        var headerwrap = editorwrap.append('div').attr('class','col12 head');
 
         typewrap = headerwrap.append('div')
-            .attr('class','col3');
+            .attr('class','col3 type inspector-inner');
 
         typewrap.append('h4').text('Type');
 
         typelabel = typewrap.append('button')
-            .attr('class','type col12')
+            .attr('class','col12')
             .on('click', function() {
                 event.choose();
             });
@@ -51,7 +51,7 @@ iD.ui.TagEditor = function() {
                 .attr('class', 'icon inspect');
 
          var namewrap = headerwrap.append('div')
-                 .attr('class', 'name col9');
+                 .attr('class', 'name col9 inspector-inner');
 
         typelabel.append('span')
         .attr('class','label')
