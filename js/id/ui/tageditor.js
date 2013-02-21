@@ -30,12 +30,12 @@ iD.ui.TagEditor = function() {
 
         var headerwrap = editorwrap.append('div').attr('class','col12 head');
 
-        typewrap = headerwrap.append('div')
+        var typewrap = headerwrap.append('div')
             .attr('class','col3 type inspector-inner');
 
         typewrap.append('h4').text('Type');
 
-        typelabel = typewrap.append('button')
+        var typelabel = typewrap.append('button')
             .attr('class','col12')
             .on('click', function() {
                 event.choose();

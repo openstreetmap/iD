@@ -8,7 +8,7 @@ iD.ui.Taglist = function() {
     function taglist(selection, collapsed) {
 
         if (collapsed) {
-            collapsebutton = selection.append('a')
+            var collapsebutton = selection.append('a')
                 .attr('href','#')
                 .attr('class','hide-toggle')
                 .text('Additional tags')
@@ -39,7 +39,6 @@ iD.ui.Taglist = function() {
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
 
-        collapsebutton.classed('expanded', !collapsed);
         wrap.classed('hide', collapsed);
     }
 
