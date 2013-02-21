@@ -17,7 +17,7 @@ iD.ui.RadialMenu = function(operations) {
             .attr('opacity', 0);
 
         menu.transition()
-            .attr('opacity', 0.8);
+            .attr('opacity', 1);
 
         var r = 50,
             a = Math.PI / 4,
@@ -67,7 +67,7 @@ iD.ui.RadialMenu = function(operations) {
             .attr('height', 400);
 
         tooltip.append('xhtml:div')
-            .attr('class', 'radial-menu-tooltip');
+            .attr('class', 'radial-menu-tooltip tooltip-inner');
 
         function mouseover(d, i) {
             var angle = a0 + i * a,
@@ -75,8 +75,8 @@ iD.ui.RadialMenu = function(operations) {
                 dy = 0;
 
             tooltip
-                .attr('x', (r + 30) * Math.sin(angle) + dx)
-                .attr('y', (r + 30) * Math.cos(angle) + dy)
+                .attr('x', (r + 25) * Math.sin(angle) + dx)
+                .attr('y', (r + 25) * Math.cos(angle) + dy)
                 .style('display', 'block')
                 .select('div')
                 .text(d.description);

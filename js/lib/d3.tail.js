@@ -1,7 +1,7 @@
 d3.tail = function() {
     var text = false,
         container,
-        xmargin = 20,
+        xmargin = 25,
         tooltip_size = [0, 0],
         selection_size = [0, 0],
         transformProp = iD.util.prefixCSSProperty('Transform');
@@ -15,7 +15,7 @@ d3.tail = function() {
         function setup() {
 
             container = d3.select(document.body)
-                .append('div').attr('class', 'tail');
+                .append('div').attr('class', 'tail tooltip-inner');
 
             selection
                 .on('mousemove.tail', mousemove)

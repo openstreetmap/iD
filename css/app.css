@@ -500,6 +500,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
 
 /* Toggle icon is special */
+
 .toggle.icon                   { background-position: 0px -180px;}
 a:hover .toggle.icon           { background-position: -20px -180px;}
 .selected .toggle.icon,
@@ -565,6 +566,95 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .preset-input { padding-left: 10px;}
+
+.preset-search-input {
+    width:100%;
+}
+
+.preset-search-input input {
+    width: 100%;
+    padding: 5px;
+}
+
+.preset-search-result {
+    padding: 0px 10px;
+    height:30px;
+    margin: 5px;
+}
+
+.preset-label {
+    padding: 5px;
+}
+
+.preset-fav button.fav {
+    height: 30px;
+    margin: 5px;
+    padding: 0 10px;
+}
+
+.preset-input input {
+    width: 100%;
+}
+
+div.combobox {
+    width:155px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+    margin-top: -1px;
+    background: white;
+    max-height: 180px;
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+
+.combobox a {
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+    display: block;
+    border-top:1px solid #ccc;
+    background-color: #fff;
+    padding:1px 4px;
+    white-space: nowrap;
+    height: 30px;
+}
+
+.combobox a:hover,
+.combobox a.selected  {
+    background: #e1e8ff;
+    color: #154dff;
+}
+
+.combobox a:first-child {
+    border-top: 0;
+}
+
+.combobox-carat {
+    margin-left: -15px;
+    margin-right: 5px;
+    display:inline-block;
+    cursor:url(../img/cursor-pointer.png) 6 1, auto;
+    border-top: 5px solid #ccc;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+/* Address input */
+
+.preset-input .addr-housename {
+    border-bottom: none;
+    width:100%;
+}
+
+.preset-input .addr-number {
+    width: 20%;
+    border-right: none;
+}
+
+.preset-input .addr-streetname {
+    width: 80%;
+}
 
 /* tag editor */
 
@@ -1021,7 +1111,9 @@ img.tile {
     border-radius: 0;
 }
 
-#about { text-align: right;}
+#about { 
+    text-align: right;
+}
 
 .source-switch a {
     padding: 2px 5px;
@@ -1098,7 +1190,9 @@ div.typeahead a:first-child {
     z-index: 3;
 }
 
-.modal .loader { margin-bottom: 10px;}
+.modal .loader { 
+    margin-bottom: 10px;
+}
 
 .modal .content {
     margin-bottom: 40px;
@@ -1118,6 +1212,7 @@ div.typeahead a:first-child {
     -moz-transition: opacity 100ms;
     transition: opacity 100ms;
 }
+
 .modal button.close-modal:hover {
     background-color: transparent;
     opacity: 1;
@@ -1360,17 +1455,36 @@ a.success-action {
 }
 
 .tooltip-inner {
-    color: #333;
     display: inline-block;
     padding: 5px 10px;
     font-size: 11px;
     font-weight: bold;
-    line-height: 20px;
     background-color: white;
     -webkit-border-radius: 4px;
        -moz-border-radius: 4px;
             border-radius: 4px;
+}
 
+.tail {
+    width: 200px;
+    pointer-events: none;
+    opacity: .8;
+    margin-top: -15px;
+    position: absolute;
+}
+
+.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    border-left-color: white;
+    border-width: 5px 0 5px 5px;
 }
 
 .tooltip-arrow {
@@ -1438,7 +1552,7 @@ a.success-action {
     clear: both;
 }
 
-.tooltip .keyhint .keyhint-label{
+.tooltip .keyhint .keyhint-label {
     display: inline-block;
 }
 
@@ -1455,34 +1569,27 @@ a.success-action {
     border-top: 0;
 }
 
-.tail {
-    pointer-events:none;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.7);
-    max-width: 250px;
-    margin-top: -15px;
-    padding: 5px;
-    -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+.radial-menu-tooltip {
+/* for some reason this breaks layout
+    opacity: .8; */
 }
 
 .radial-menu-background {
-    stroke: #aaa;
-    stroke-opacity: 0.4;
+    stroke: black;
+    stroke-opacity: 0.5;
 }
 
 .radial-menu-item {
-    fill: black;
+    fill: white;
     cursor:url(../img/cursor-pointer.png) 6 1, auto;
 }
 
 .radial-menu-item:hover {
-    fill: #bde5aa;
+    fill: #ececec;
 }
 
 .radial-menu-item:active {
-    fill: #6bc641;
+    fill: #ececec;
 }
 
 .radial-menu-item.disabled {
@@ -1495,93 +1602,12 @@ a.success-action {
     pointer-events: none;
 }
 
-.radial-menu-tooltip {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 5px;
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
-}
-
 .lasso-box {
     fill-opacity:0.1;
     stroke: #fff;
     stroke-width: 1;
     stroke-opacity: 1;
     stroke-dasharray: 5, 5;
-}
-
-.preset-search-input {
-    width:100%;
-}
-
-.preset-search-input input {
-    width: 100%;
-    padding: 5px;
-}
-
-.preset-search-result {
-    padding: 0px 10px;
-    height:30px;
-    margin: 5px;
-}
-
-.preset-label {
-    padding: 5px;
-}
-
-.preset-fav button.fav {
-    height: 30px;
-    margin: 5px;
-    padding: 0 10px;
-}
-
-.preset-input input {
-    width: 100%;
-}
-
-div.combobox {
-    width:155px;
-    z-index: 9999;
-    display: none;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
-    margin-top: -1px;
-    background: white;
-    max-height: 180px;
-    overflow: auto;
-    border: 1px solid #ccc;
-}
-
-.combobox a {
-    height: 25px;
-    line-height: 25px;
-    cursor: pointer;
-    display: block;
-    border-top:1px solid #ccc;
-    background-color: #fff;
-    padding:1px 4px;
-    white-space: nowrap;
-    height: 30px;
-}
-
-.combobox a:hover,
-.combobox a.selected  {
-    background: #e1e8ff;
-    color: #154dff;
-}
-
-.combobox a:first-child {
-    border-top: 0;
-}
-
-.combobox-carat {
-    margin-left: -15px;
-    margin-right: 5px;
-    display:inline-block;
-    cursor:url(../img/cursor-pointer.png) 6 1, auto;
-    border-top: 5px solid #ccc;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
 }
 
 /* Media Queries
@@ -1595,20 +1621,4 @@ div.combobox {
 }
 
 @media only screen and (max-height: 840px) {
-}
-
-/* Address input */
-
-.preset-input .addr-housename {
-    border-bottom: none;
-    width:100%;
-}
-
-.preset-input .addr-number {
-    width: 20%;
-    border-right: none;
-}
-
-.preset-input .addr-streetname {
-    width: 80%;
 }
