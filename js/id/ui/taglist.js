@@ -14,8 +14,9 @@ iD.ui.Taglist = function() {
                 .text('Additional tags')
                 .on('click', function() {
                     wrap.call(iD.ui.Toggle(wrap.classed('hide')));
-                })
-        };
+                    selection.node().parentNode.scrollTop += 200;
+                });
+        }
 
         var wrap = selection.append('div');
 

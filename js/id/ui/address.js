@@ -35,6 +35,12 @@ iD.ui.preset.address = function() {
 
         selection.append('input')
             .property('type', 'text')
+            .attr('placeholder', 'Housename')
+            .attr('class', 'addr-housename')
+            .data({ 'key': 'addr:housename' });
+
+        selection.append('input')
+            .property('type', 'text')
             .attr('placeholder', '123')
             .attr('class', 'addr-number')
             .data({ 'key': 'addr:housenumber' });

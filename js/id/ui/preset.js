@@ -42,7 +42,7 @@ iD.ui.preset = function() {
 
     // generate form fields for a given field.
     function input(d) {
-        var i;
+        var i, wrap;
         switch (d.type) {
             case 'text':
                 i = this.append('input')
@@ -79,18 +79,20 @@ iD.ui.preset = function() {
                     });
                 break;
             case 'select':
-                this.append('select')
-                    .selectAll('options')
-                    .data([''].concat(d.options.slice()))
-                    .enter().append('option')
-                        .attr('value', function(d) { return d; })
-                        .attr('label', function(d) { return d; });
+                wrap = this.append('span').attr('class', 'input-wrap-position'),
+                i = wrap.append('input').attr('type', 'text');
+                wrap.call(d3.combobox().data(d.options.map(function(d) {
+                    return {
+                        title: d,
+                        value: d
+                    };
+                })));
                 break;
             case 'combo':
-                var w = this.append('span').attr('class', 'input-wrap-position'),
-                    combobox = d3.combobox();
-                i = w.append('input').attr('type', 'text');
-                w.call(combobox);
+                var combobox = d3.combobox();
+                wrap = this.append('span').attr('class', 'input-wrap-position'),
+                i = wrap.append('input').attr('type', 'text');
+                wrap.call(combobox);
                 taginfo.values({
                     key: d.key
                 }, function(err, data) {

@@ -1561,6 +1561,7 @@ div.combobox {
     background-color: #fff;
     padding:1px 4px;
     white-space: nowrap;
+    height: 30px;
 }
 
 .combobox a:hover,
@@ -1599,14 +1600,15 @@ div.combobox {
 /* Address input */
 
 .preset-input .addr-housename {
-    width: 300px;
-    display: block;
+    border-bottom: none;
+    width:100%;
 }
 
 .preset-input .addr-number {
-    width: 50px;
+    width: 20%;
+    border-right: none;
 }
 
 .preset-input .addr-streetname {
-    width: 250px;
+    width: 80%;
 }
