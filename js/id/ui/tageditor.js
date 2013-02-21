@@ -134,7 +134,7 @@ iD.ui.TagEditor = function() {
             if (presetUI && tagList) {
                 name.property('value', tags.name || '');
                 presetUI.change(tags);
-                tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
+                tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {}).concat(['name'])));
             }
             return tageditor;
         }
