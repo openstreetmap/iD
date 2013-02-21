@@ -3,6 +3,7 @@ iD.ui.preset = function() {
         taginfo = iD.taginfo(),
         context,
         entity,
+        type,
         hidden,
         sections,
         exttags,
@@ -42,13 +43,14 @@ iD.ui.preset = function() {
 
     // generate form fields for a given field.
     function input(d) {
-        var i, wrap;
+        var i, wrap,
+            default_ = d['default'] && d['default'][type];
         switch (d.type) {
             case 'text':
                 i = this.append('input')
                     .attr('type', 'text')
                     .attr('id', 'input-' + d.key)
-                    .attr('placeholder', d['default'] || '');
+                    .attr('placeholder', default_ || '');
                 break;
             case 'tel':
                 i = this.append('input')
@@ -73,7 +75,7 @@ iD.ui.preset = function() {
                     .attr('type', 'checkbox')
                     .attr('id', 'input-' + d.key)
                     .each(function() {
-                        if (d['default']) {
+                        if (default_) {
                             this.attr('checked', 'checked');
                         }
                     });
@@ -87,6 +89,7 @@ iD.ui.preset = function() {
                         value: d
                     };
                 })));
+                if (default_) i.property('value', default_);
                 break;
             case 'combo':
                 var combobox = d3.combobox();
@@ -173,6 +176,7 @@ iD.ui.preset = function() {
     presets.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
+        type = entity.type === 'node' ? entity.type : entity.geometry();
         return presets;
     };
 

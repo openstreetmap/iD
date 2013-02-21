@@ -15,10 +15,24 @@ iD.ui.TagEditor = function() {
     function tageditor(selection, preset) {
 
         entity = selection.datum();
+        var type = entity.type === 'node' ? entity.type : entity.geometry();
 
         if (preset) {
-            if (presetMatch) tags = _.omit(tags, _.keys(presetMatch.match.tags));
-            tags = _.extend(_.omit(tags), preset.match.tags);
+            if (presetMatch) {
+                // Strip preset's match tags
+                tags = _.omit(tags, _.keys(presetMatch.match.tags));
+
+                // Strip preset's default tags
+                for (var i in presetMatch.form) {
+                    var field = presetMatch.form[i];
+                    if (field['default'] && field['default'][type] == tags[field.key]) {
+                        delete tags[field.key];
+                    }
+                }
+            }
+
+            // Add new preset's match tags
+            tags = _.extend(tags, preset.match.tags);
         }
 
         presetMatch = preset || presetMatch || presetData.matchTags(entity);
@@ -115,8 +129,6 @@ iD.ui.TagEditor = function() {
     }
 
     function drawHead(selection) {
-        var entity = selection.datum();
-
         var h2 = selection.append('h2');
 
         h2.append('span')

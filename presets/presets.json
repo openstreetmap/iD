@@ -11,6 +11,15 @@
         "icon": "cafe",
         "form": [
             {
+                "key": "building",
+                "type": "select",
+                "options": ["yes", "no"],
+                "default": {
+                    "area": "yes",
+                    "node": "no"
+                }
+            },
+            {
                 "key": "internet_access",
                 "title": "Internet Access",
                 "type": "select",
