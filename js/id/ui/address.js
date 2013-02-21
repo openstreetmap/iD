@@ -37,22 +37,22 @@ iD.ui.preset.address = function() {
             .property('type', 'text')
             .attr('placeholder', 'Housename')
             .attr('class', 'addr-housename')
-            .data({ 'key': 'addr:housename' });
+            .datum({ 'key': 'addr:housename' });
 
         selection.append('input')
             .property('type', 'text')
             .attr('placeholder', '123')
             .attr('class', 'addr-number')
-            .data({ 'key': 'addr:housenumber' });
+            .datum({ 'key': 'addr:housenumber' });
 
         var streetwrap = selection.append('span')
-            .attr('class', 'input-wrap-position');
+            .attr('class', 'input-wrap-position')
+            .datum({ 'key': 'addr:streetname' });
 
         streetwrap.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Oak Street')
-            .attr('class', 'addr-streetname')
-            .data({ 'key': 'addr:streetname' });
+            .attr('class', 'addr-streetname');
 
         streetwrap.call(d3.combobox().data(getStreets()));
     }
