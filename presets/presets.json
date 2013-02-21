@@ -247,5 +247,125 @@
         },
         "icon": "waterway-river",
         "form": []
+    },
+    {
+        "title": "Motorway",
+        "name": "motorway",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "motorway"
+            }
+        },
+        "icon": "highway-motorway",
+        "form": []
+    },
+    {
+        "title": "Residential",
+        "name": "residential",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "residential"
+            }
+        },
+        "icon": "highway-residential",
+        "form": []
+    },
+    {
+        "title": "Primary Road",
+        "name": "primary road",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "primary"
+            }
+        },
+        "icon": "highway-primary",
+        "form": []
+    },
+    {
+        "title": "Secondary Road",
+        "name": "secondary road",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "secondary"
+            }
+        },
+        "icon": "highway-secondary",
+        "form": []
+    },
+    {
+        "title": "Tertiary Road",
+        "name": "tertiary road",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "tertiary"
+            }
+        },
+        "icon": "highway-tertiary",
+        "form": []
+    },
+    {
+        "title": "Service Road",
+        "name": "service road",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "service"
+            }
+        },
+        "icon": "highway-service",
+        "form": []
+    },
+    {
+        "title": "Rail",
+        "name": "rail",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "railway": "rail"
+            }
+        },
+        "icon": "railway-rail",
+        "form": []
+    },
+    {
+        "title": "Trunk highway",
+        "name": "trunk highway",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "trunk"
+            }
+        },
+        "icon": "highway-trunk",
+        "form": []
+    },
+    {
+        "title": "Foot path",
+        "name": "foot path",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "footway"
+            }
+        },
+        "icon": "highway-footway",
+        "form": []
+    },
+    {
+        "title": "Cycle path",
+        "name": "cycle path",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "highway": "cycleway"
+            }
+        },
+        "icon": "highway-cycleway",
+        "form": []
     }
 ]
