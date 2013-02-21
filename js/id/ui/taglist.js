@@ -13,6 +13,7 @@ iD.ui.Taglist = function() {
                 .attr('class','hide-toggle')
                 .text('Additional tags')
                 .on('click', function() {
+                    collapsebutton.classed('expanded', wrap.classed('hide'));
                     wrap.call(iD.ui.Toggle(wrap.classed('hide')));
                     selection.node().parentNode.scrollTop += 200;
                 });
@@ -38,7 +39,7 @@ iD.ui.Taglist = function() {
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
 
-        collapsebutton.classed('expanded', collapsed);
+        collapsebutton.classed('expanded', !collapsed);
         wrap.classed('hide', collapsed);
     }
 
