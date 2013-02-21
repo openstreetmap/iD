@@ -1101,7 +1101,8 @@ img.tile {
 ------------------------------------------------------- */
 
 .about-block {
-    height: 40px;
+    padding: 5px;
+    height: 30px;
     position: absolute;
     right:0px;
     bottom:0px;
@@ -1109,9 +1110,18 @@ img.tile {
     white-space: nowrap;
     text-overflow: ellipsis;
     border-radius: 0;
+    opacity: .625;
+    -webkit-transition: opacity 200ms;
+    -moz-transition: opacity 200ms;
+    transition: opacity 200ms;
+}
+
+.about-block:hover {
+    opacity: 1;
 }
 
 #about { 
+    height: 20px;
     text-align: right;
 }
 
