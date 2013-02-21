@@ -235,5 +235,17 @@
         "icon": "hospital",
         "form": [
         ]
+    },
+    {
+        "title": "River",
+        "name": "river",
+        "match": {
+            "type": ["line"],
+            "tags": {
+                "waterway": "river"
+            }
+        },
+        "icon": "waterway-river",
+        "form": []
     }
 ]

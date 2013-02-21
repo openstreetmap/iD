@@ -69,7 +69,7 @@ iD.ui.PresetGrid = function() {
             });
 
         entered.append('div')
-            .attr('class', function(d) { return 'maki-' + d.icon + '-24 icon'; });
+            .attr('class', function(d) { return 'preset-' + d.icon + ' icon'; });
 
         entered.append('span').attr('class','label').text(name);
 

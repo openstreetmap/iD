@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [[ -z `which glue` ]] ; then
+    echo "You need to install glue."
+    echo "http://glue.readthedocs.org/en/latest/installation.html"
+    exit 1
+fi
+
+MAKIPATH=$1
+
+if [[ -z $MAKIPATH ]]; then
+    echo "Usage: makesprite PATHTOMAKI"
+    exit 1
+fi
+
+
+dir=$(dirname $0)
+img="$dir/.."
+css="$dir/../../css"
+
+cd $dir
+mkdir preset-icons
+
+cp $MAKIPATH/renders/* preset-icons
+rm preset-icons/*-18.png
+rm preset-icons/*-12.png
+for x in preset-icons/*.png; do
+    mv $x `echo $x | sed "s/-24//"`
+done
+cp renders/line-presets/* preset-icons
+
+
+glue --namespace=preset --sprite-namespace= preset-icons --css=$css --img=$img
+
+rm preset-icons/*
+rmdir preset-icons
