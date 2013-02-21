@@ -140,7 +140,7 @@ iD.ui.TagEditor = function() {
 
     tageditor.tags = function(newtags) {
         if (!arguments.length) {
-            return _.extend(presetUI.tags(), tagList.tags());
+            return _.extend(presetUI.tags(), tagList.tags(), { name: name.property('value') });
         } else {
             tags = newtags;
             if (presetUI && tagList) {
