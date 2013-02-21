@@ -42,7 +42,7 @@ iD.ui.TagEditor = function() {
             });
 
         typelabel.append('div')
-            .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' maki-' + presetMatch.icon + '-24' : ''));
+            .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' preset-' + presetMatch.icon : ''));
 
         typelabel.append('button')
             .attr('tabindex', -1)
