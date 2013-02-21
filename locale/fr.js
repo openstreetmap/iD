@@ -53,7 +53,7 @@ locale.fr = {
             annotation: "Modifier les tags."
         },
         circularize: {
-            title: "Circularize",
+            title: "Arrondir",
             description: "Créer un cercle.",
             key: "O",
             annotation: {
@@ -171,14 +171,14 @@ locale.fr = {
         new_tag: "Nouveau tag",
         edit_tags: "Editer les tags",
         okay: "Okay",
-        view_on_osm: "View on OSM"
+        view_on_osm: "Visualiser sur OSM"
     },
 
     layerswitcher: {
         title: "Fond de carte",
         description: "Paramètres du fond de carte",
         percent_brightness: "{opacity}% luminosité",
-        fix_misalignment: "Fix misalignment",
+        fix_misalignment: "Corriger le décalage",
         reset: "reset"
     },
 
@@ -207,7 +207,7 @@ locale.fr = {
     },
 
     tag_reference: {
-        description: "Déscription",
+        description: "Description",
         on_wiki: "{tag} sur le wiki.osm.org",
         used_with: "Utilisé avec {type}"
     },
