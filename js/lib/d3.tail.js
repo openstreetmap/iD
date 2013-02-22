@@ -31,11 +31,11 @@ d3.tail = function() {
 
         function mousemove() {
             if (text === false) return;
-            var xoffset = ((d3.event.x + tooltip_size[0] + xmargin) > selection_size[0]) ?
+            var xoffset = ((d3.event.clientX + tooltip_size[0] + xmargin) > selection_size[0]) ?
                 -tooltip_size[0] - xmargin : xmargin;
             container.style(transformProp, 'translate(' +
-                (~~d3.event.x + xoffset) + 'px,' +
-                ~~d3.event.y + 'px)');
+                (~~d3.event.clientX + xoffset) + 'px,' +
+                ~~d3.event.clientY + 'px)');
         }
 
         function mouseout() {
