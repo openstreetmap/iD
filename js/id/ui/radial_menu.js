@@ -45,7 +45,6 @@ iD.ui.RadialMenu = function(operations) {
         button.append('circle')
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('r', 15)
-            .attr('title', function(d) { return d.title; })
             .classed('disabled', function(d) { return !d.enabled(); })
             .on('click', click)
             .on('mouseover', mouseover)
