@@ -1509,6 +1509,20 @@ a.success-action {
     border-width: 5px 0 5px 5px;
 }
 
+.left.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: white;
+    border-width: 5px 5px 5px 0;
+}
+
 .tooltip-arrow {
     position: absolute;
     width: 0;

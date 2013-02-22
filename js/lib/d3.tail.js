@@ -33,6 +33,7 @@ d3.tail = function() {
             if (text === false) return;
             var xoffset = ((d3.event.clientX + tooltip_size[0] + xmargin) > selection_size[0]) ?
                 -tooltip_size[0] - xmargin : xmargin;
+            container.classed('left', xoffset > 0);
             container.style(transformProp, 'translate(' +
                 (~~d3.event.clientX + xoffset) + 'px,' +
                 ~~d3.event.clientY + 'px)');
