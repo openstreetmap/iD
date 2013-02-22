@@ -36,6 +36,8 @@ iD.ui.PresetGrid = function() {
 
 
         function filter(value) {
+            if (!value) return presetData.defaults(entity);
+
             value = value.toLowerCase();
             return viable.filter(function(v) {
                 return v.name.toLowerCase().indexOf(value) !== -1;

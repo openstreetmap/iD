@@ -1,16 +1,21 @@
 iD.presetData = function() {
     var presets = {},
-        data = [];
+        data = [],
+        defaults;
 
     presets.data = function(_) {
         if (!arguments.length) return data;
-        data = _;
+        data = _.presets;
+        defaults = _.defaults;
         return presets;
     };
 
-    presets.favs = function() {
-        return data.filter(function(d) {
-            return d.favorite;
+    presets.defaults = function(entity) {
+        var type = entity.type == 'node' ? 'node' : entity.geometry();
+        return defaults[type].map(function(def) {
+            return _.find(data, function(d) {
+                return d.name === def;
+            });
         });
     };
 
