@@ -60,12 +60,6 @@ iD.ui.TagEditor = function() {
         typelabel.append('div')
             .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' preset-' + presetMatch.icon : ''));
 
-        typelabel.append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'minor type-help')
-            .append('span')
-                .attr('class', 'icon inspect');
-
          var namewrap = headerwrap.append('div')
                  .attr('class', 'name col9 inspector-inner');
 
@@ -83,12 +77,6 @@ iD.ui.TagEditor = function() {
             .on('blur', function() {
                 event.change();
             });
-
-        namewrap.append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'minor name-help')
-            .append('span')
-                .attr('class', 'icon inspect');
 
         presetUI = iD.ui.preset()
             .context(context)
