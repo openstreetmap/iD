@@ -15,7 +15,7 @@ iD.ui.PresetGrid = function() {
             .attr('class', 'preset-grid-search-wrap inspector-inner');
 
         var grid = selection.append('div')
-            .attr('class', 'preset-grid fillD inspector-body')
+            .attr('class', 'preset-grid fillD inspector-body ' + entity.geometry(context.graph()))
             .call(drawGrid, filter(''));
 
         var search = searchwrap.append('input')

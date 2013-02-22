@@ -747,6 +747,10 @@ div.combobox {
     border-radius: 0;
 }
 
+.line .grid-entry {
+    min-height: 120px;
+}
+
 .grid-inner {
     margin-bottom: 20px;
 }
@@ -781,6 +785,10 @@ div.combobox {
     margin: auto;
 }
 
+.line .grid-entry .icon {
+    top: 10%;
+}
+
 .grid-entry .label {
     text-align: center;
     display: block;
@@ -792,6 +800,10 @@ div.combobox {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.line .grid-entry .label {
+  top: 80%;
 }
 
 .preset-grid-search {
