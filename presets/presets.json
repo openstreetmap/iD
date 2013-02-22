@@ -1,5 +1,25 @@
 [
     {
+        "title": "Building",
+        "name": "building",
+        "match": {
+            "type": ["area"],
+            "tags": {
+                "building": "*"
+            }
+        },
+        "icon": "warehouse",
+        "form": [
+            {
+                "key": "building",
+                "type": "combo",
+                "default": {
+                    "area": "yes"
+                }
+            }
+        ]
+    },
+    {
         "title": "Cafe",
         "name": "cafe",
         "match": {
@@ -11,15 +31,6 @@
         "icon": "cafe",
         "form": [
             {
-                "key": "building",
-                "type": "select",
-                "options": ["yes", "no"],
-                "default": {
-                    "area": "yes",
-                    "node": "no"
-                }
-            },
-            {
                 "key": "internet_access",
                 "title": "Internet Access",
                 "type": "select",
@@ -28,6 +39,14 @@
             {
                 "key": "cuisine",
                 "type": "combo"
+            },
+            {
+                "key": "building",
+                "type": "select",
+                "options": ["yes", "no"],
+                "default": {
+                    "area": "yes"
+                }
             },
             {
                 "type": "address",
@@ -102,7 +121,7 @@
                 "amenity": "place_of_worship"
             }
         },
-        "icon": "",
+        "icon": "place-of-worship",
         "form": [
             {
                 "key": "religion",
@@ -206,7 +225,7 @@
         "title": "Bus stop",
         "name": "bus stop",
         "match": {
-            "type": ["node", "area"],
+            "type": ["node"],
             "tags": {
                 "highway": "bus_stop"
             }
@@ -375,6 +394,26 @@
             }
         },
         "icon": "highway-cycleway",
+        "form": []
+    },
+    {
+        "title": "Other",
+        "name": "other",
+        "match": {
+            "type": ["line", "area"],
+            "tags": {}
+        },
+        "icon": "square-stroked",
+        "form": []
+    },
+    {
+        "title": "Other",
+        "name": "other",
+        "match": {
+            "type": ["node"],
+            "tags": {}
+        },
+        "icon": "marker-stroked",
         "form": []
     }
 ]

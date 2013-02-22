@@ -104,7 +104,7 @@ iD.ui.preset = function() {
                         return d;
                     }));
                 });
-
+                if (default_) i.property('value', default_);
                 break;
         }
         if (i) {

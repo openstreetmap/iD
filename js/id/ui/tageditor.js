@@ -32,7 +32,9 @@ iD.ui.TagEditor = function() {
             }
 
             // Add new preset's match tags
-            tags = _.extend(tags, preset.match.tags);
+            for (var k in preset.match.tags) {
+                if (preset.match.tags[k] !== '*') tags[k] = preset.match.tags[k];
+            }
         }
 
         presetMatch = preset || presetMatch || presetData.matchTags(entity);
@@ -69,21 +71,16 @@ iD.ui.TagEditor = function() {
 
         typelabel.append('span')
         .attr('class','label')
-        .text(presetMatch ? presetMatch.name : 'Unknown type');
+        .text(presetMatch ? presetMatch.name : 'Other');
 
         namewrap.append('h4').text('Name');
 
         name = namewrap.append('input')
-            .attr('placeholder', 'unkown')
+            .attr('placeholder', 'unknown')
             .attr('class', 'major')
             .attr('type', 'text')
-            .property('value', function() {
-                return entity.tags.name || '';
-            })
+            .property('value', entity.tags.name || 'this')
             .on('blur', function() {
-                var tags = tageditor.tags();
-                tags.name = this.value;
-                tageditor.tags(tags);
                 event.change();
             });
 
@@ -92,11 +89,6 @@ iD.ui.TagEditor = function() {
             .attr('class', 'minor name-help')
             .append('span')
                 .attr('class', 'icon inspect');
-
-        event.on('change.name', function() {
-            var tags = tageditor.tags();
-            name.property('value', tags.name);
-        });
 
         presetUI = iD.ui.preset()
             .context(context)
@@ -140,9 +132,11 @@ iD.ui.TagEditor = function() {
 
     tageditor.tags = function(newtags) {
         if (!arguments.length) {
-            return _.extend(presetUI.tags(), tagList.tags(), { name: name.property('value') });
+            tags = _.extend(presetUI.tags(), tagList.tags());
+            if (name.property('value')) tags.name = name.property('value');
+            return tags;
         } else {
-            tags = newtags;
+            tags = _.clone(newtags);
             if (presetUI && tagList) {
                 name.property('value', tags.name || '');
                 presetUI.change(tags);

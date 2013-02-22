@@ -74,6 +74,7 @@ iD.ui.PresetGrid = function() {
         entered.append('span').attr('class','label').text(name);
 
         entries.exit().remove();
+        entries.order();
     }
 
     presetgrid.presetData = function(_) {

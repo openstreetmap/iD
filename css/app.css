@@ -110,6 +110,7 @@ a:hover {
 
 textarea,
 input[type=text],
+input[type=search],
 input[type=url],
 input[type=tel],
 input[type=email] {
@@ -814,7 +815,6 @@ div.combobox {
 
 /* Preset icon colors */
 
-.preset-icon-fill.tag-amenity,
 .preset-icon-fill.tag-shop,
 .preset-icon-fill.tag-building {
     background-color: #e06e5f;

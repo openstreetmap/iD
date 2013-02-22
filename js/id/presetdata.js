@@ -23,17 +23,19 @@ iD.presetData = function() {
 
     presets.matchTags = function(entity) {
         var tags, count, best,
-            maxcount = 0,
+            maxcount = -1,
             type = entity.type == 'node' ? 'node' : entity.geometry();
 
         for (var i = 0; i < data.length; i++) {
             count = 0;
             tags = data[i].match.tags;
-            if (!_.contains(data[i].match.type, type)) continue;
             for (var k in tags) {
-                if (entity.tags[k] == tags[k]) count++;
+                if (entity.tags[k] == tags[k] || (tags[k] === '*' && entity.tags[k])) count++;
+                else break;
             }
-            if (count > maxcount) best = data[i], maxcount = count;
+            if (Object.keys(tags).length === count && count > maxcount) {
+                best = data[i], maxcount = count;
+            }
         }
         return best;
     };
