@@ -3,18 +3,14 @@ iD.behavior.Lasso = function(context) {
     var behavior = function(selection) {
 
         var timeout = null,
-            // the position of the first mousedown
-            pos = null,
+            mouse = null,
             lasso;
 
         function mousedown() {
             if (d3.event.shiftKey === true) {
 
-                pos = [d3.event.clientX, d3.event.clientY];
-
-                lasso = iD.ui.Lasso().a(d3.mouse(context.surface().node()));
-
-                context.surface().call(lasso);
+                mouse = d3.mouse(context.surface().node());
+                lasso = null;
 
                 selection
                     .on('mousemove.lasso', mousemove)
@@ -27,6 +23,11 @@ iD.behavior.Lasso = function(context) {
         }
 
         function mousemove() {
+            if (!lasso) {
+                lasso = iD.ui.Lasso().a(mouse);
+                context.surface().call(lasso);
+            }
+
             lasso.b(d3.mouse(context.surface().node()));
         }
 
@@ -38,24 +39,24 @@ iD.behavior.Lasso = function(context) {
 
         function mouseup() {
 
+            selection
+                .on('mousemove.lasso', null)
+                .on('mouseup.lasso', null);
+
+            if (!lasso) return;
+
             var extent = iD.geo.Extent(
                 normalize(context.projection.invert(lasso.a()),
                 context.projection.invert(lasso.b())));
 
             lasso.close();
 
-            selection
-                .on('mousemove.lasso', null)
-                .on('mouseup.lasso', null);
+            var selected = context.intersects(extent).filter(function (entity) {
+                return entity.type === 'node';
+            });
 
-            if (d3.event.clientX !== pos[0] || d3.event.clientY !== pos[1]) {
-                var selected = context.intersects(extent).filter(function (entity) {
-                    return entity.type === 'node';
-                });
-
-                if (selected.length) {
-                    context.enter(iD.modes.Select(context, _.pluck(selected, 'id')));
-                }
+            if (selected.length) {
+                context.enter(iD.modes.Select(context, _.pluck(selected, 'id')));
             }
         }
 
