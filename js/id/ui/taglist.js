@@ -194,7 +194,7 @@ iD.ui.Taglist = function() {
         var entity = list.datum(),
             geometry = entity.geometry(context.graph()),
             row = d3.select(this),
-            key = row.selectAll('.key'),
+            key = row.selectAll('.key-wrap'),
             value = row.selectAll('.input-wrap-position');
 
         function sort(value, data) {
@@ -210,13 +210,14 @@ iD.ui.Taglist = function() {
             return sameletter.concat(other);
         }
 
-        key.call(d3.typeahead()
-            .data(_.debounce(function(_, callback) {
+        var keyinput = key.select('input');
+        key.call(d3.combobox()
+            .fetcher(_.debounce(function(_, __, callback) {
                 taginfo.keys({
                     geometry: geometry,
-                    query: key.property('value')
+                    query: keyinput.property('value')
                 }, function(err, data) {
-                    if (!err) callback(sort(key.property('value'), data));
+                    if (!err) callback(sort(keyinput.property('value'), data));
                 });
             }, 500)));
 
@@ -224,7 +225,7 @@ iD.ui.Taglist = function() {
         value.call(d3.combobox()
             .fetcher(_.debounce(function(_, __, callback) {
                 taginfo.values({
-                    key: key.property('value'),
+                    key: keyinput.property('value'),
                     geometry: geometry,
                     query: valueinput.property('value')
                 }, function(err, data) {
