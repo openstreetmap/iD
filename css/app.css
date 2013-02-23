@@ -1573,8 +1573,7 @@ a.success-action {
     padding: 5px 0 5px 0;
 }
 
-.tooltip .keyhint {
-    display: block;
+.tooltip-inner .keyhint {
     color: #222;
     font-size: 10px;
     padding: 0px 7px;
@@ -1592,7 +1591,7 @@ a.success-action {
     display: inline-block;
 }
 
-.tooltip .keyhint::after {
+.tooltip-inner .keyhint::after {
     content: "";
     position: absolute;
     border-radius: 2px;

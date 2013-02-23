@@ -78,7 +78,11 @@ iD.ui.RadialMenu = function(operations) {
                 .attr('y', (r + 25) * Math.cos(angle) + dy)
                 .style('display', 'block')
                 .select('div')
-                .text(d.description);
+                .text(d.description + ' ')
+                .append('span')
+                    .style('position', 'static')
+                    .attr('class', 'keyhint')
+                    .text(d.key.replace('⌫', 'Esc'));
         }
 
         function mouseout() {
