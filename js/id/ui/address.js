@@ -1,6 +1,6 @@
 iD.ui.preset.address = function() {
 
-    var event = d3.dispatch(),
+    var event = d3.dispatch('change'),
         context,
         entity;
 
@@ -36,17 +36,23 @@ iD.ui.preset.address = function() {
 
     function address(selection) {
 
+        function change() { event.change(); }
+
         selection.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Housename')
             .attr('class', 'addr-housename')
-            .datum({ 'key': 'addr:housename' });
+            .datum({ 'key': 'addr:housename' })
+            .on('blur', change)
+            .on('change', change);
 
         selection.append('input')
             .property('type', 'text')
             .attr('placeholder', '123')
             .attr('class', 'addr-number')
-            .datum({ 'key': 'addr:housenumber' });
+            .datum({ 'key': 'addr:housenumber' })
+            .on('blur', change)
+            .on('change', change);
 
         var streetwrap = selection.append('span')
             .attr('class', 'input-wrap-position')
@@ -55,7 +61,9 @@ iD.ui.preset.address = function() {
         streetwrap.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Oak Street')
-            .attr('class', 'addr-streetname');
+            .attr('class', 'addr-streetname')
+            .on('blur', change)
+            .on('change', change);
 
         streetwrap.call(d3.combobox().data(getStreets()));
     }

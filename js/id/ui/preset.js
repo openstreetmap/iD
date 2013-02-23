@@ -22,9 +22,7 @@ iD.ui.preset = function() {
         if (!sections) return;
         sections.selectAll('input,select')
             .each(function(d) {
-                if (tags[d.key]) {
-                    this.value = tags[d.key];
-                }
+                this.value = tags[d.key] || '';
             });
     }
 
@@ -142,8 +140,9 @@ iD.ui.preset = function() {
                     wrap.append('div')
                         .attr('class', 'col9 preset-input', d)
                         .call(iD.ui.preset.address()
-                        .context(context)
-                        .entity(entity));
+                            .context(context)
+                            .on('change', key)
+                            .entity(entity));
                 }
             }
         });

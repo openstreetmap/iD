@@ -124,12 +124,8 @@ iD.modes.Select = function(context, selection, initial) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
 
-            } else if (entity) {
-                var newEntity = context.entity(selection[0]);
-                if (!_.isEqual(entity.tags, newEntity.tags)) {
-                    inspector.tags(newEntity.tags);
-                }
-                entity = newEntity;
+            } else if (singular()) {
+                inspector.tags(context.entity(selection[0]).tags);
             }
         }
 
@@ -238,7 +234,8 @@ iD.modes.Select = function(context, selection, initial) {
         keybinding.off();
 
         context.history()
-            .on('change.select', null);
+            .on('undone.select', null)
+            .on('redone.select', null);
 
         context.surface()
             .call(radialMenu.close)
