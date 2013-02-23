@@ -1,7 +1,7 @@
 iD.ui.Contributors = function(context) {
     function update(selection) {
         var users = {},
-            limit = 3,
+            limit = 4,
             entities = context.intersects(context.map().extent());
 
         for (var i in entities) {
@@ -9,7 +9,7 @@ iD.ui.Contributors = function(context) {
         }
 
         var u = Object.keys(users),
-            subset = u.slice(0, limit);
+            subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
         selection.html('')
             .append('span')
@@ -37,7 +37,7 @@ iD.ui.Contributors = function(context) {
                         ext[0][0], ext[0][1],
                         ext[1][0], ext[1][1]];
                 })
-                .text(u.length - limit);
+                .text(u.length - limit + 1);
 
             selection.append('span')
                 .html(t('contributors.truncated_list', {users: userList.html(), count: count.html()}));
