@@ -7,12 +7,9 @@ iD.modes.MoveWay = function(context, wayId) {
     var keybinding = d3.keybinding('move-way');
 
     mode.enter = function() {
-        var origin = context.map().mouseCoordinates(),
+        var origin,
             nudgeInterval,
             annotation = t('operations.move.annotation.' + context.geometry(wayId));
-
-        // If intiated via keyboard
-        if (!origin[0] && !origin[1]) origin = null;
 
         context.perform(
             iD.actions.Noop(),
