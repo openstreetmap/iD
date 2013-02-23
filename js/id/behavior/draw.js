@@ -14,31 +14,32 @@ iD.behavior.Draw = function(context) {
     function mousedown() {
 
         function point() {
-            var p = target.node().parentNode;
+            var p = element.node().parentNode;
             return touchId !== null ? d3.touches(p).filter(function(p) {
                 return p.identifier === touchId;
             })[0] : d3.mouse(p);
         }
 
-        var target = d3.select(this),
+        var eventTarget = d3.event.target,
+            element = d3.select(this),
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             time = +new Date(),
             pos = point();
 
-        target.on('mousemove.draw', null);
+        element.on('mousemove.draw', null);
 
         d3.select(window).on('mouseup.draw', function() {
-            target.on('mousemove.draw', mousemove);
+            element.on('mousemove.draw', mousemove);
             if (iD.geo.dist(pos, point()) < closeTolerance ||
                 (iD.geo.dist(pos, point()) < tolerance &&
                 (+new Date() - time) < 500)) {
                 click();
             }
-            if (target.node() === d3.event.target) {
+            if (eventTarget === d3.event.target)  {
                 d3.select(window).on('click.draw', function() {
                     d3.select(window).on('click.draw', null);
                     d3.event.stopPropagation();
-                });
+                }, true);
             }
         });
     }
