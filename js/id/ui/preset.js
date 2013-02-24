@@ -41,14 +41,12 @@ iD.ui.preset = function() {
 
     // generate form fields for a given field.
     function input(d) {
-        var i, wrap,
-            default_ = d['default'] && d['default'][type];
+        var i, wrap;
         switch (d.type) {
             case 'text':
                 i = this.append('input')
                     .attr('type', 'text')
-                    .attr('id', 'input-' + d.key)
-                    .attr('placeholder', default_ || '');
+                    .attr('id', 'input-' + d.key);
                 break;
             case 'tel':
                 i = this.append('input')
@@ -71,12 +69,7 @@ iD.ui.preset = function() {
             case 'check':
                 i = this.append('input')
                     .attr('type', 'checkbox')
-                    .attr('id', 'input-' + d.key)
-                    .each(function() {
-                        if (default_) {
-                            this.attr('checked', 'checked');
-                        }
-                    });
+                    .attr('id', 'input-' + d.key);
                 break;
             case 'select':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
@@ -87,7 +80,6 @@ iD.ui.preset = function() {
                         value: d
                     };
                 })));
-                if (default_) i.property('value', default_);
                 break;
             case 'combo':
                 var combobox = d3.combobox();
@@ -102,7 +94,6 @@ iD.ui.preset = function() {
                         return d;
                     }));
                 });
-                if (default_) i.property('value', default_);
                 break;
         }
         if (i) {

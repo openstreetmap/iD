@@ -17,6 +17,7 @@ iD.ui.TagEditor = function() {
         entity = selection.datum();
         var type = entity.type === 'node' ? entity.type : entity.geometry();
 
+        // preset was explicitly chosen
         if (preset) {
             if (presetMatch) {
                 // Strip preset's match tags
@@ -34,6 +35,14 @@ iD.ui.TagEditor = function() {
             // Add new preset's match tags
             for (var k in preset.match.tags) {
                 if (preset.match.tags[k] !== '*') tags[k] = preset.match.tags[k];
+            }
+
+            // Add new preset's defaults
+            for (var f in preset.form) {
+                f = preset.form[f];
+                if (f.key && !tags[f.key] && f['default'] && f['default'][type]) {
+                    tags[f.key] = f['default'][type];
+                }
             }
         }
 
