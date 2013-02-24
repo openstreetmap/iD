@@ -1,7 +1,11 @@
 iD.presetData = function() {
     var presets = {},
         data = [],
-        defaults;
+        defaults = {
+            node: [],
+            area: [],
+            line: []
+        };
 
     presets.data = function(_) {
         if (!arguments.length) return data;
