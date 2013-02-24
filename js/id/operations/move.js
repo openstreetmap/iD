@@ -1,13 +1,12 @@
 iD.operations.Move = function(selection, context) {
-    var entityId = selection[0];
 
     var operation = function() {
-        context.enter(iD.modes.MoveWay(context, entityId));
+        context.enter(iD.modes.Move(context, selection));
     };
 
     operation.available = function() {
-        return selection.length === 1 &&
-            context.entity(entityId).type === 'way';
+        return selection.length > 1 ||
+            context.entity(selection[0]).type === 'way';
     };
 
     operation.enabled = function() {

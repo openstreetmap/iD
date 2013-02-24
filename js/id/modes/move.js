@@ -1,15 +1,18 @@
-iD.modes.MoveWay = function(context, wayId) {
+iD.modes.Move = function(context, entityIDs) {
     var mode = {
-        id: 'move-way',
+        id: 'move',
         button: 'browse'
     };
 
-    var keybinding = d3.keybinding('move-way');
+    var keybinding = d3.keybinding('move'),
+        entities = entityIDs.map(context.entity);
 
     mode.enter = function() {
         var origin,
             nudgeInterval,
-            annotation = t('operations.move.annotation.' + context.geometry(wayId));
+            annotation = entities.length === 1 ?
+                t('operations.move.annotation.' + context.geometry(entities[0].id)) :
+                t('operations.move.annotation.multiple');
 
         context.perform(
             iD.actions.Noop(),
@@ -54,19 +57,29 @@ iD.modes.MoveWay = function(context, wayId) {
 
             origin = context.map().mouseCoordinates();
 
-            context.replace(
-                iD.actions.MoveWay(wayId, delta, context.projection),
-                annotation);
+            entities.forEach(function(entity) {
+                if (entity.type === 'way') {
+                    context.replace(
+                        iD.actions.MoveWay(entity.id, delta, context.projection));
+                } else if (entity.type === 'node') {
+                    var start = context.projection(context.entity(entity.id).loc),
+                        end = [start[0] + delta[0], start[1] + delta[1]],
+                        loc = context.projection.invert(end);
+                    context.replace(iD.actions.MoveNode(entity.id, loc));
+                }
+            });
+
+            context.replace(iD.actions.Noop(), annotation);
         }
 
         function finish() {
             d3.event.stopPropagation();
-            context.enter(iD.modes.Select(context, [wayId], true));
+            context.enter(iD.modes.Select(context, entityIDs, true));
         }
 
         function cancel() {
             context.pop();
-            context.enter(iD.modes.Select(context, [wayId], true));
+            context.enter(iD.modes.Select(context, entityIDs, true));
         }
 
         function undone() {
@@ -74,11 +87,11 @@ iD.modes.MoveWay = function(context, wayId) {
         }
 
         context.surface()
-            .on('mousemove.move-way', move)
-            .on('click.move-way', finish);
+            .on('mousemove.move', move)
+            .on('click.move', finish);
 
         context.history()
-            .on('undone.move-way', undone);
+            .on('undone.move', undone);
 
         keybinding
             .on('⎋', cancel)
@@ -90,11 +103,11 @@ iD.modes.MoveWay = function(context, wayId) {
 
     mode.exit = function() {
         context.surface()
-            .on('mousemove.move-way', null)
-            .on('click.move-way', null);
+            .on('mousemove.move', null)
+            .on('click.move', null);
 
         context.history()
-            .on('undone.move-way', null);
+            .on('undone.move', null);
 
         keybinding.off();
     };
