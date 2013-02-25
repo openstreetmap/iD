@@ -22,15 +22,17 @@ iD.ui.PresetGrid = function() {
             .attr('class', 'preset-grid-search')
             .attr('type', 'search')
             .on('keyup', function() {
-                var value = search.property('value'),
-                    presets = filter(value);
-                event.message('' + presets.length + ' results for ' + value);
-                grid.call(drawGrid, presets);
-                grid.classed('filtered', value.length);
-            })
-            .on('change', function() {
-                var chosen = grid.selectAll('.grid-entry:first-child').datum();
-                if (chosen) event.choose(chosen);
+                // enter
+                if (d3.event.keyCode === 13) {
+                    var chosen = grid.selectAll('.grid-entry:first-child').datum();
+                    if (chosen) event.choose(chosen);
+                } else {
+                    var value = search.property('value'),
+                        presets = filter(value);
+                    event.message('' + presets.length + ' results for ' + value);
+                    grid.call(drawGrid, presets);
+                    grid.classed('filtered', value.length);
+                }
             });
         search.node().focus();
 
@@ -58,14 +60,25 @@ iD.ui.PresetGrid = function() {
             .append('button')
             .attr('class', 'grid-entry col3')
             .on('click', function(d) {
-                event.choose(d);
+                // Category
+                if (d.members) {
+                    drawGrid(selection, presetData.categories(d.name));
+
+                // Preset
+                } else {
+                    event.choose(d);
+                }
             });
 
         entered.append('div')
             .attr('class', function(d) {
                 var s = 'preset-icon-fill ' + entity.geometry(context.graph());
-                for (var i in d.match.tags) {
-                    s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                if (d.members) {
+                    s += 'category';
+                } else {
+                    for (var i in d.match.tags) {
+                        s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                    }
                 }
                 return s;
             });
