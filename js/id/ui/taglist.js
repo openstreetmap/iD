@@ -2,12 +2,13 @@ iD.ui.Taglist = function() {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         initial = false,
+        collapsebutton,
         list,
         context;
 
     function taglist(selection) {
 
-        var collapsebutton = selection.append('a')
+        collapsebutton = selection.append('a')
             .attr('href','#')
             .attr('class','hide-toggle')
             .text('Additional tags')
@@ -41,6 +42,8 @@ iD.ui.Taglist = function() {
 
     function drawTags(tags) {
         var entity = list.datum();
+
+        collapsebutton.text('Additional tags (' + Object.keys(tags).length + ')');
 
         tags = d3.entries(tags);
 
