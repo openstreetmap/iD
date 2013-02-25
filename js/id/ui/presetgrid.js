@@ -22,15 +22,17 @@ iD.ui.PresetGrid = function() {
             .attr('class', 'preset-grid-search')
             .attr('type', 'search')
             .on('keyup', function() {
-                var value = search.property('value'),
-                    presets = filter(value);
-                event.message('' + presets.length + ' results for ' + value);
-                grid.call(drawGrid, presets);
-                grid.classed('filtered', value.length);
-            })
-            .on('change', function() {
-                var chosen = grid.selectAll('.grid-entry:first-child').datum();
-                if (chosen) event.choose(chosen);
+                // enter
+                if (d3.event.keyCode === 13) {
+                    var chosen = grid.selectAll('.grid-entry:first-child').datum();
+                    if (chosen) event.choose(chosen);
+                } else {
+                    var value = search.property('value'),
+                        presets = filter(value);
+                    event.message('' + presets.length + ' results for ' + value);
+                    grid.call(drawGrid, presets);
+                    grid.classed('filtered', value.length);
+                }
             });
         search.node().focus();
 
@@ -39,8 +41,22 @@ iD.ui.PresetGrid = function() {
             if (!value) return presetData.defaults(entity);
 
             value = value.toLowerCase();
-            return viable.filter(function(v) {
-                return v.name.toLowerCase().indexOf(value) !== -1;
+
+            // Uses levenshtein distance, with a couple of hacks
+            // to prioritize exact substring matches
+            return viable.sort(function(a, b) {
+                var ia = a.name.indexOf(value) >= 0,
+                    ib = b.name.indexOf(value) >= 0;
+
+                if (ia && !ib) {
+                    return -1;
+                } else if (ib && !ia) {
+                    return 1;
+                }
+
+                return iD.util.editDistance(value, a.name) - iD.util.editDistance(value, b.name);
+            }).filter(function(d) {
+                return iD.util.editDistance(value, d.name) - d.name.length + value.length < 3;
             });
         }
 
@@ -58,14 +74,25 @@ iD.ui.PresetGrid = function() {
             .append('button')
             .attr('class', 'grid-entry col3')
             .on('click', function(d) {
-                event.choose(d);
+                // Category
+                if (d.members) {
+                    drawGrid(selection, presetData.categories(d.name));
+
+                // Preset
+                } else {
+                    event.choose(d);
+                }
             });
 
         entered.append('div')
             .attr('class', function(d) {
                 var s = 'preset-icon-fill ' + entity.geometry(context.graph());
-                for (var i in d.match.tags) {
-                    s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                if (d.members) {
+                    s += 'category';
+                } else {
+                    for (var i in d.match.tags) {
+                        s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                    }
                 }
                 return s;
             });

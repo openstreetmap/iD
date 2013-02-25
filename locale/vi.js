@@ -111,7 +111,8 @@ locale.vi = {
                 point: "Di chuyển địa điểm.",
                 vertex: "Di chuyển nốt trong lối.",
                 line: "Di chuyển đường kẻ.",
-                area: "Di chuyển vùng."
+                area: "Di chuyển vùng.",
+                multiple: "Di chuyển hơn một đối tượng"
             }
         },
         reverse: {
@@ -221,7 +222,7 @@ locale.vi = {
     },
 
     zoom: {
-        in: "Phóng to",
+        'in': "Phóng to",
         out: "Thu nhỏ"
     }
 };
