@@ -212,18 +212,18 @@ iD.ui.Taglist = function() {
 
         var keyinput = key.select('input');
         key.call(d3.combobox()
-            .fetcher(_.debounce(function(_, __, callback) {
+            .fetcher(function(_, __, callback) {
                 taginfo.keys({
                     geometry: geometry,
                     query: keyinput.property('value')
                 }, function(err, data) {
                     if (!err) callback(sort(keyinput.property('value'), data));
                 });
-            }, 500)));
+            }));
 
         var valueinput = value.select('input');
         value.call(d3.combobox()
-            .fetcher(_.debounce(function(_, __, callback) {
+            .fetcher(function(_, __, callback) {
                 taginfo.values({
                     key: keyinput.property('value'),
                     geometry: geometry,
@@ -231,7 +231,7 @@ iD.ui.Taglist = function() {
                 }, function(err, data) {
                     if (!err) callback(sort(valueinput.property('value'), data));
                 });
-            }, 500)));
+            }));
     }
 
     function focusNewKey() {

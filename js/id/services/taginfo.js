@@ -35,6 +35,15 @@ iD.taginfo = function() {
         return _.omit(parameters, 'geometry');
     }
 
+    function shorten(parameters) {
+        if (!parameters.query) {
+            delete parameters.query;
+        } else {
+            parameters.query = parameters.query.slice(0, 3);
+        }
+        return parameters;
+    }
+
     function popularKeys(parameters) {
         var pop_field = 'count_all';
         if (parameters.filter) pop_field = 'count_' + parameters.filter;
@@ -68,10 +77,10 @@ iD.taginfo = function() {
     }
 
     taginfo.keys = function(parameters, callback) {
-        parameters = clean(setSort(setFilter(parameters)));
+        parameters = clean(shorten(setSort(setFilter(parameters))));
         request(endpoint + 'keys/all?' +
             iD.util.qsString(_.extend({
-                rp: 6,
+                rp: 10,
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
@@ -82,7 +91,7 @@ iD.taginfo = function() {
     };
 
     taginfo.values = function(parameters, callback) {
-        parameters = clean(setSort(setFilter(parameters)));
+        parameters = clean(shorten(setSort(setFilter(parameters))));
         request(endpoint + 'key/values?' +
             iD.util.qsString(_.extend({
                 rp: 20,
