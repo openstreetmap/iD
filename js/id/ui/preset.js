@@ -13,7 +13,9 @@ iD.ui.preset = function() {
         var tags = _.clone(preset.match.tags);
         sections.selectAll('input,select')
             .each(function(d) {
-                tags[d.key] = this.value;
+                tags[d.key] = d.type === 'combo' || d.type === 'select' ?
+                    this.value.replace(' ', '_') :
+                    this.value;
             });
         return tags;
     }
@@ -23,6 +25,9 @@ iD.ui.preset = function() {
         sections.selectAll('input,select')
             .each(function(d) {
                 this.value = tags[d.key] || '';
+                if (d.type === 'combo' || d.type === 'select') {
+                    this.value = this.value.replace('_', ' ');
+                }
             });
     }
 
@@ -75,10 +80,9 @@ iD.ui.preset = function() {
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
                 i = wrap.append('input').attr('type', 'text');
                 wrap.call(d3.combobox().data(d.options.map(function(d) {
-                    return {
-                        title: d,
-                        value: d
-                    };
+                    var o = {};
+                    o.title = o.value = d.replace('_', ' ');
+                    return o;
                 })));
                 break;
             case 'combo':
@@ -90,7 +94,7 @@ iD.ui.preset = function() {
                     key: d.key
                 }, function(err, data) {
                     if (!err) combobox.data(data.map(function(d) {
-                        d.title = d.value;
+                        d.title = d.value = d.value.replace('_', ' ');
                         return d;
                     }));
                 });
