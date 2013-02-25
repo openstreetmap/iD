@@ -3,6 +3,7 @@ var locale = { _current: 'en' };
 locale.current = function(_) {
     if (!arguments.length) return locale._current;
     if (locale[_] !== undefined) locale._current = _;
+    else if (locale[_.split('-')[0]]) locale._current = _.split('-')[0];
     return locale;
 };
 
