@@ -208,4 +208,101 @@ the history, and then enter the appropriate mode. For example,
 `iD.operations.Split` performs `iD.actions.Split`, then enters
 `iD.modes.Select` with the resulting ways selected.
 
-## Rendering and other UI
+## Map Rendering
+
+Finally, we get to the parts of iD that actually draw and manipulate the map
+entities on screen. The rendering is coordinated by `iD.Map`, which takes care
+of setting up a [Spherical Mercator](http://bl.ocks.org/mbostock/3757132)
+projection and the [zoom
+behavior](https://github.com/mbostock/d3/wiki/Zoom-Behavior), and provides
+accessors for such things as the current zoom level and map center.
+
+For rendering entities on screen, we found it convenient to adopt a geometric
+vocabulary that provides a slightly higher-level representation than the basic
+entity types of the OSM data model:
+
+* A _point_ is a node that is not a member of any way.
+* A _vertex_ is a node that is a member of one or more ways.
+* A _line_ is a way that is not an area.
+* An _area_ is a way that is circular and has certain tags, or a series of one
+  or more ways grouped in a multipolygon relation.
+
+For each of these geometric types, `iD.svg` has a corresponding module:
+`iD.svg.Points`, `iD.svg.Vertices`, `iD.svg.Lines`, and `iD.svg.Areas`. To
+render entities on screen, `iD.Map` delegates to these modules. Internally,
+they make heavy use of [d3 joins](http://bost.ocks.org/mike/join/) to
+manipulate the SVG elements that visually represent the map entities. When an
+entity is rendered for the first time, it is part of the _enter_ selection,
+and the SVG elements needed to represent it are created. When an entity is
+modified, it is part of the _update_ selection, and the appropriate attributes
+of the SVG element (for example, those that specify the location on screen)
+are updated. And when an entity is deleted (or simply moves offscreen), the
+corresponding SVG element is in the _exit_ selection, and will be removed.
+
+The `iD.svg` modules apply classes to the SVG elements based on the entity
+tags, via `iD.svg.TagClasses`. For example, an entity tagged with
+`highway=residential` gets two classes: `tag-highway` and
+`tag-highway-residential`. This allows distinct visual styles to be applied
+via CSS at either the key or key-value levels. SVG elements also receive a
+class corresponding to their entity type (`node`, `way`, or `relation`) and
+one corresponding to their geometry type (`point`, `line`, or `area`).
+
+The `iD.svg` namespace has a few other modules that don't have a one-to-one
+correspondence with entities:
+
+* `iD.svg.Midpoints` renders the small "virtual node" at the midpoint between
+  two vertices.
+* `iD.svg.Labels` renders the textual
+  [labels](http://mapbox.com/osmdev/2013/02/12/labeling-id/).
+* `iD.svg.Surface` sets up a number of layers that ensure that map elements
+  appear in an appropriate z-order.
+
+## Other UI
+
+iD provides a lot of user interface elements other than the core map component:
+the page footer, the interface for saving changes, the splash screen you see
+the first time you use iD, the geocoding and background layer controls, and the
+tag/preset editor, for example.
+
+![Geocoder UI](img/geocoder.png)
+
+The implementations for all non-map UI components live in the `iD.ui` namespace.
+Many of the modules in this namespace follow a pattern for reusable d3
+components [originally suggested](http://bost.ocks.org/mike/chart/) by Mike
+Bostock in the context of charts. The entry point to a UI element is a
+constructor function, e.g. `iD.ui.Geocoder()`. The constructor function may
+require a set of mandatory arguments; for most UI components exactly one
+argument is required, a `context` object produced by the top-level `iD()`
+function.
+
+A component needs some way to be rendered on screen by creating new DOM
+elements or manipulating existing elements. This is done by calling the
+component as a function, and passing a d3 selection where the component should
+render itself:
+
+```
+var container = d3.select('body').append('div')
+    .attr('class', 'map-control geocode-control');
+
+var geocoder = iD.ui.Geocoder(context)(container);
+```
+
+Alternatively, and more commonly, the same result is accomplished with
+[d3.selection#call](https://github.com/mbostock/d3/wiki/Selections#wiki-call):
+
+```
+d3.select('body').append('div')
+    .attr('class', 'map-control geocode-control')
+    .call(iD.ui.Geocoder(context));
+```
+
+Some components are reconfigurable, and some provide functionality beyond
+basic rendering. Both reconfiguration and extended functionality are exposed
+via module functions:
+
+```
+var inspector = iD.ui.Inspector();
+inspector(container); // render the inspector
+inspector.tags(); // retrieve the current tags
+inspector.on('change', callback); // get notified when a tag change is made
+```
