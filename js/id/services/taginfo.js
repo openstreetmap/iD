@@ -14,6 +14,8 @@ iD.taginfo = function() {
             line: 'ways'
         };
 
+    var cache = this.cache = {};
+
     function sets(parameters, n, o) {
         if (parameters.geometry && o[parameters.geometry]) {
             parameters[n] = o[parameters.geometry];
@@ -34,9 +36,9 @@ iD.taginfo = function() {
     }
 
     function popularKeys(parameters) {
-        var pop_field = 'count_all_fraction';
-        if (parameters.filter) pop_field = 'count_' + parameters.filter + '_fraction';
-        return function(d) { return parseFloat(d[pop_field]) > 0.01; };
+        var pop_field = 'count_all';
+        if (parameters.filter) pop_field = 'count_' + parameters.filter;
+        return function(d) { return parseFloat(d[pop_field]) > 10000; };
     }
 
     function popularValues(parameters) {
@@ -52,9 +54,22 @@ iD.taginfo = function() {
         };
     }
 
+    var debounced = _.debounce(d3.json, 100, true);
+
+    function request(url, callback) {
+        if (cache[url]) {
+            callback(null, cache[url]);
+        } else {
+            debounced(url, function(err, data) {
+                if (!err) cache[url] = data;
+                callback(err, data);
+            });
+        }
+    }
+
     taginfo.keys = function(parameters, callback) {
         parameters = clean(setSort(setFilter(parameters)));
-        d3.json(endpoint + 'keys/all?' +
+        request(endpoint + 'keys/all?' +
             iD.util.qsString(_.extend({
                 rp: 6,
                 sortname: 'count_all',
@@ -68,7 +83,7 @@ iD.taginfo = function() {
 
     taginfo.values = function(parameters, callback) {
         parameters = clean(setSort(setFilter(parameters)));
-        d3.json(endpoint + 'key/values?' +
+        request(endpoint + 'key/values?' +
             iD.util.qsString(_.extend({
                 rp: 20,
                 sortname: 'count_all',
@@ -82,7 +97,7 @@ iD.taginfo = function() {
 
     taginfo.docs = function(parameters, callback) {
         parameters = clean(setSort(parameters));
-        d3.json(endpoint + 'tag/wiki_pages?' +
+        request(endpoint + 'tag/wiki_pages?' +
             iD.util.qsString(parameters), callback);
     };
 
