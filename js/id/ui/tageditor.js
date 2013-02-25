@@ -74,15 +74,15 @@ iD.ui.TagEditor = function() {
 
         typelabel.append('span')
         .attr('class','label')
-        .text(presetMatch ? presetMatch.name : 'Other');
+        .text(presetMatch.name);
 
-        namewrap.append('h4').text('Name');
+        namewrap.append('h4').text(t('inspector.name'));
 
         name = namewrap.append('input')
             .attr('placeholder', 'unknown')
             .attr('class', 'major')
             .attr('type', 'text')
-            .property('value', entity.tags.name || 'this')
+            .property('value', entity.tags.name)
             .on('blur', function() {
                 event.change();
             });
@@ -108,7 +108,7 @@ iD.ui.TagEditor = function() {
                     .preset(presetMatch));
         }
 
-        event.message('Edit ' + (presetMatch && presetMatch.name || ''));
+        event.message(t('inspector.editing', { type: presetMatch.name }));
 
         var taglistwrap = editorwrap.append('div')
             .attr('class','inspector-inner col12 fillL2').call(tagList);

@@ -9,7 +9,7 @@ iD.ui.PresetGrid = function() {
         selection.html('');
 
         var viable = presetData.match(entity);
-        event.message('What kind of ' + entity.geometry(context.graph()) + ' are you adding?');
+        event.message(t('inspector.choose'));
 
         var searchwrap = selection.append('div')
             .attr('class', 'preset-grid-search-wrap inspector-inner');

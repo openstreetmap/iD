@@ -11,7 +11,7 @@ iD.ui.Taglist = function() {
         collapsebutton = selection.append('a')
             .attr('href','#')
             .attr('class','hide-toggle')
-            .text('Additional tags')
+            .text(t('inspector.additional'))
             .on('click', function() {
                 collapsebutton.classed('expanded', wrap.classed('hide'));
                 wrap.call(iD.ui.Toggle(wrap.classed('hide')));
@@ -43,7 +43,7 @@ iD.ui.Taglist = function() {
     function drawTags(tags) {
         var entity = list.datum();
 
-        collapsebutton.text('Additional tags (' + Object.keys(tags).length + ')');
+        collapsebutton.text(t('inspector.additional') + ' (' + Object.keys(tags).length + ')');
 
         tags = d3.entries(tags);
 
