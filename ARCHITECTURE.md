@@ -20,9 +20,9 @@ which implements map panning and zooming.
 ## Core
 
 The iD *core* implements the OSM data types, a graph of OSM object's
-relationships to each other, and an undo/redo history for changes made during
-editing. It aims to be generic enough to be used by other JavaScript-based
-tools for OpenStreetMap.
+relationships to each other, an undo/redo history for changes made during
+editing, and a couple of important auxiliary classes. It aims to be generic
+enough to be used by other JavaScript-based tools for OpenStreetMap.
 
 Briefly, the OSM data model includes three basic data types: nodes, ways, and
 relations. A _node_ is a point type, having a single geographic coordinate. A
@@ -77,17 +77,23 @@ references to entities that have not changed, keeping memory use to a minimum.
 If you are familiar with how git works internally, this persistent data
 structure approach is very similar.
 
-The final component of the core is comprised of `iD.History` and
-`iD.Difference`, which track the changes made in an editing session and
-provide undo/redo capabilities. Here, the immutable nature of the core types
-really pays off: the history is a simple stack of graphs, each representing
-the state of the data at a particular point in editing. The graph at the top
-of the stack is the current state, off which all rendering is based. To undo
-the last change, this graph is popped off the stack, and the map is
-re-rendered based on the new top of the stack. Contrast this to a mutable
-graph as used in JOSM and Potlatch: every command that changes the graph must
-implement an equal and opposite undo command that restores the graph to the
-previous state.
+The last major component of the core is `iD.History`, which tracks the changes
+made in an editing session and provide undo/redo capabilities. Here, the
+immutable nature of the core types really pays off: the history is a simple
+stack of graphs, each representing the state of the data at a particular point
+in editing. The graph at the top of the stack is the current state, off which
+all rendering is based. To undo the last change, this graph is popped off the
+stack, and the map is re-rendered based on the new top of the stack. Contrast
+this to a mutable graph as used in JOSM and Potlatch: every command that
+changes the graph must implement an equal and opposite undo command that
+restores the graph to the previous state.
+
+Finally, we have the auxiliary classes `iD.Difference` and `iD.Tree`. The first
+encapsulates the difference between two graphs, and knows how to calculate the
+set of entities that were created, modified, or deleted, and need to be redrawn.
+The second provides a means of calculating which entities, out of all that have
+been downloaded, are currently visible. In order to do this very quickly as you
+pan or zoom the map, it uses an [R-tree](http://en.wikipedia.org/wiki/R-tree).
 
 ## Actions
 
