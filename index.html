@@ -6,6 +6,7 @@
         <link rel='stylesheet' href='css/reset.css'>
         <link rel='stylesheet' href='css/map.css'>
         <link rel='stylesheet' href='css/app.css'>
+        <link rel='stylesheet' href='css/preset-icons.css'>
 
         <!-- mobile devices -->
         <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
@@ -82,8 +83,6 @@
         <script src='js/id/ui/tag_reference.js'></script>
         <script src='js/id/ui/key_reference.js'></script>
         <script src='js/id/ui/preset.js'></script>
-        <script src='js/id/ui/presetsearch.js'></script>
-        <script src='js/id/ui/presetfavs.js'></script>
         <script src='js/id/ui/lasso.js'></script>
         <script src='js/id/ui/source_switch.js'></script>
         <script src='js/id/ui/toggle.js'></script>
@@ -92,6 +91,7 @@
         <script src='js/id/ui/taglist.js'></script>
         <script src='js/id/ui/presetgrid.js'></script>
         <script src='js/id/ui/tageditor.js'></script>
+        <script src='js/id/ui/address.js'></script>
 
         <script src='js/id/actions.js'></script>
         <script src="js/id/actions/add_midpoint.js"></script>
@@ -132,7 +132,7 @@
         <script src='js/id/modes/browse.js'></script>
         <script src='js/id/modes/draw_area.js'></script>
         <script src='js/id/modes/draw_line.js'></script>
-        <script src='js/id/modes/move_way.js'></script>
+        <script src='js/id/modes/move.js'></script>
         <script src='js/id/modes/select.js'></script>
 
         <script src='js/id/operations.js'></script>
@@ -167,7 +167,10 @@
         <script src='locale/ja.js'></script>
         <script src='locale/lv.js'></script>
         <script src='locale/nl.js'></script>
+        <script src='locale/pl.js'></script>
+        <script src='locale/ru.js'></script>
         <script src='locale/tr.js'></script>
+        <script src='locale/uk.js'></script>
         <script src='locale/vi.js'></script>
 
     </head>
@@ -180,7 +183,7 @@
             var id = iD();
 
             d3.json('keys.json', function(err, keys) {
-                d3.json('presets/presets_josm.json', function(err, presets_data) {
+                d3.json('presets/presets.json', function(err, presets_data) {
 
                     id.connection()
                         .keys(keys)

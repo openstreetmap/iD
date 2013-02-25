@@ -111,7 +111,8 @@ locale.en = {
                 point: "Moved a point.",
                 vertex: "Moved a node in a way.",
                 line: "Moved a line.",
-                area: "Moved an area."
+                area: "Moved an area.",
+                multiple: "Moved multiple objects"
             }
         },
         reverse: {
@@ -221,7 +222,7 @@ locale.en = {
     },
 
     zoom: {
-        in: "Zoom In",
+        'in': "Zoom In",
         out: "Zoom Out"
     }
 };

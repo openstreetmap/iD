@@ -7,13 +7,23 @@ iD.ui.Taglist = function() {
 
     function taglist(selection) {
 
-        //selection.append('h4')
-            //.text(t('inspector.edit_tags'));
+        var collapsebutton = selection.append('a')
+            .attr('href','#')
+            .attr('class','hide-toggle')
+            .text('Additional tags')
+            .on('click', function() {
+                collapsebutton.classed('expanded', wrap.classed('hide'));
+                wrap.call(iD.ui.Toggle(wrap.classed('hide')));
+                selection.node().parentNode.scrollTop += 200;
+            });
 
-        list = selection.append('ul')
+        var wrap = selection.append('div')
+            .attr('class', 'hide');
+
+        list = wrap.append('ul')
             .attr('class', 'tag-list');
 
-        var newTag = selection.append('button')
+        var newTag = wrap.append('button')
             .attr('class', 'add-tag');
 
         newTag.on('click', function() {
@@ -27,7 +37,6 @@ iD.ui.Taglist = function() {
         newTag.append('span')
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
-
     }
 
     function drawTags(tags) {
@@ -173,7 +182,8 @@ iD.ui.Taglist = function() {
 
     function pushMore() {
         if (d3.event.keyCode === 9 &&
-            list.selectAll('li:last-child input.value').node() === this) {
+            list.selectAll('li:last-child input.value').node() === this &&
+            !d3.event.shiftKey) {
             addTag();
             focusNewKey();
             d3.event.preventDefault();
@@ -184,7 +194,7 @@ iD.ui.Taglist = function() {
         var entity = list.datum(),
             geometry = entity.geometry(context.graph()),
             row = d3.select(this),
-            key = row.selectAll('.key'),
+            key = row.selectAll('.key-wrap'),
             value = row.selectAll('.input-wrap-position');
 
         function sort(value, data) {
@@ -200,13 +210,14 @@ iD.ui.Taglist = function() {
             return sameletter.concat(other);
         }
 
-        key.call(d3.typeahead()
-            .data(_.debounce(function(_, callback) {
+        var keyinput = key.select('input');
+        key.call(d3.combobox()
+            .fetcher(_.debounce(function(_, __, callback) {
                 taginfo.keys({
                     geometry: geometry,
-                    query: key.property('value')
+                    query: keyinput.property('value')
                 }, function(err, data) {
-                    if (!err) callback(sort(key.property('value'), data));
+                    if (!err) callback(sort(keyinput.property('value'), data));
                 });
             }, 500)));
 
@@ -214,7 +225,7 @@ iD.ui.Taglist = function() {
         value.call(d3.combobox()
             .fetcher(_.debounce(function(_, __, callback) {
                 taginfo.values({
-                    key: key.property('value'),
+                    key: keyinput.property('value'),
                     geometry: geometry,
                     query: valueinput.property('value')
                 }, function(err, data) {

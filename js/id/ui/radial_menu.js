@@ -17,7 +17,7 @@ iD.ui.RadialMenu = function(operations) {
             .attr('opacity', 0);
 
         menu.transition()
-            .attr('opacity', 0.8);
+            .attr('opacity', 1);
 
         var r = 50,
             a = Math.PI / 4,
@@ -45,7 +45,6 @@ iD.ui.RadialMenu = function(operations) {
         button.append('circle')
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('r', 15)
-            .attr('title', function(d) { return d.title; })
             .classed('disabled', function(d) { return !d.enabled(); })
             .on('click', click)
             .on('mouseover', mouseover)
@@ -67,7 +66,7 @@ iD.ui.RadialMenu = function(operations) {
             .attr('height', 400);
 
         tooltip.append('xhtml:div')
-            .attr('class', 'radial-menu-tooltip');
+            .attr('class', 'radial-menu-tooltip tooltip-inner');
 
         function mouseover(d, i) {
             var angle = a0 + i * a,
@@ -75,11 +74,15 @@ iD.ui.RadialMenu = function(operations) {
                 dy = 0;
 
             tooltip
-                .attr('x', (r + 30) * Math.sin(angle) + dx)
-                .attr('y', (r + 30) * Math.cos(angle) + dy)
+                .attr('x', (r + 25) * Math.sin(angle) + dx)
+                .attr('y', (r + 25) * Math.cos(angle) + dy)
                 .style('display', 'block')
                 .select('div')
-                .text(d.description);
+                .text(d.description + ' ')
+                .append('span')
+                    .style('position', 'static')
+                    .attr('class', 'keyhint')
+                    .text(d.key.replace('⌫', 'Esc'));
         }
 
         function mouseout() {

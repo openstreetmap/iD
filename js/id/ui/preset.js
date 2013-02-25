@@ -1,12 +1,16 @@
 iD.ui.preset = function() {
     var event = d3.dispatch('change'),
+        taginfo = iD.taginfo(),
+        context,
+        entity,
+        type,
         hidden,
         sections,
         exttags,
         preset;
 
     function getTags() {
-        var tags = _.clone(preset.tags);
+        var tags = _.clone(preset.match.tags);
         sections.selectAll('input,select')
             .each(function(d) {
                 tags[d.key] = this.value;
@@ -18,9 +22,7 @@ iD.ui.preset = function() {
         if (!sections) return;
         sections.selectAll('input,select')
             .each(function(d) {
-                if (tags[d.key]) {
-                    this.value = tags[d.key];
-                }
+                this.value = tags[d.key] || '';
             });
     }
 
@@ -39,13 +41,12 @@ iD.ui.preset = function() {
 
     // generate form fields for a given field.
     function input(d) {
-        var i;
+        var i, wrap;
         switch (d.type) {
             case 'text':
                 i = this.append('input')
                     .attr('type', 'text')
-                    .attr('id', 'input-' + d.key)
-                    .attr('placeholder', d['default'] || '');
+                    .attr('id', 'input-' + d.key);
                 break;
             case 'tel':
                 i = this.append('input')
@@ -68,45 +69,73 @@ iD.ui.preset = function() {
             case 'check':
                 i = this.append('input')
                     .attr('type', 'checkbox')
-                    .attr('id', 'input-' + d.key)
-                    .each(function() {
-                        if (d['default']) {
-                            this.attr('checked', 'checked');
-                        }
-                    });
+                    .attr('id', 'input-' + d.key);
                 break;
             case 'select':
-                var w = this.append('span').attr('class', 'input-wrap-position');
-                i = w.append('input');
-                w.call(d3.combobox()
-                    .data([''].concat(d.values.slice()).map(function(o) {
-                        return { value: o, title: o };
-                    })));
+                wrap = this.append('span').attr('class', 'input-wrap-position'),
+                i = wrap.append('input').attr('type', 'text');
+                wrap.call(d3.combobox().data(d.options.map(function(d) {
+                    return {
+                        title: d,
+                        value: d
+                    };
+                })));
+                break;
+            case 'combo':
+                var combobox = d3.combobox();
+                wrap = this.append('span').attr('class', 'input-wrap-position'),
+                i = wrap.append('input').attr('type', 'text');
+                wrap.call(combobox);
+                taginfo.values({
+                    key: d.key
+                }, function(err, data) {
+                    if (!err) combobox.data(data.map(function(d) {
+                        d.title = d.value;
+                        return d;
+                    }));
+                });
                 break;
         }
         if (i) {
             i.on('change', key);
+            i.on('blur', key);
         }
     }
 
     function presets(selection) {
         selection.html('');
         sections = selection.selectAll('div.preset-section')
-            .data(preset.main)
+            .data(preset.form)
             .enter()
             .append('div')
-            .attr('class', 'preset-section cf');
+            .attr('class', 'preset-section inspector-inner col12');
         sections.each(function(d) {
             var s = d3.select(this);
             var wrap = s.append('div')
-                .attr('class', 'preset-section-input cf');
+                .attr('class', 'preset-section-input');
+
            wrap.append('div')
-                .attr('class', 'col4 preset-label')
+                .attr('class', 'col3 preset-label')
                 .append('label')
                 .attr('for', 'input-' + d.key)
-                .text(d.text);
-            input.call(wrap.append('div')
-                .attr('class', 'col8 preset-input'), d);
+                .text(d.title || d.key);
+
+            // Single input element
+            if (d.key) {
+                input.call(wrap.append('div')
+                    .attr('class', 'col9 preset-input'), d);
+
+            // Multiple elements, eg, address
+            } else {
+                if (d.type === 'address') {
+                    wrap.append('div')
+                        .attr('class', 'col9 preset-input', d)
+                        .call(iD.ui.preset.address()
+                            .context(context)
+                            .on('change', key)
+                            .entity(entity));
+                }
+            }
         });
         if (exttags) setTags(exttags);
     }
@@ -126,6 +155,19 @@ iD.ui.preset = function() {
     presets.tags = function() {
         if (hidden || !preset || !sections) return {};
         return clean(getTags());
+    };
+
+    presets.context = function(_) {
+        if (!arguments.length) return context;
+        context = _;
+        return presets;
+    };
+
+    presets.entity = function(_) {
+        if (!arguments.length) return entity;
+        entity = _;
+        type = entity.type === 'node' ? entity.type : entity.geometry();
+        return presets;
     };
 
     return d3.rebind(presets, event, 'on');

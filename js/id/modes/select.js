@@ -113,20 +113,21 @@ iD.modes.Select = function(context, selection, initial) {
                 .on('close', function() { context.enter(iD.modes.Browse(context)); });
         }
 
-        context.history().on('change.select', function() {
+        context.history()
+            .on('undone.select', updateInspector)
+            .on('redone.select', updateInspector);
+
+        function updateInspector() {
             context.surface().call(radialMenu.close);
 
             if (_.any(selection, function(id) { return !context.entity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
 
-            } else if (entity) {
-                var newEntity = context.entity(selection[0]);
-                if (!_.isEqual(entity.tags, newEntity.tags)) {
-                    inspector.tags(newEntity.tags);
-                }
+            } else if (singular()) {
+                inspector.tags(context.entity(selection[0]).tags);
             }
-        });
+        }
 
         context.map().on('move.select', function() {
             context.surface().call(radialMenu.close);
@@ -233,7 +234,8 @@ iD.modes.Select = function(context, selection, initial) {
         keybinding.off();
 
         context.history()
-            .on('change.select', null);
+            .on('undone.select', null)
+            .on('redone.select', null);
 
         context.surface()
             .call(radialMenu.close)

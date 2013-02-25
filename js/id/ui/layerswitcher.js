@@ -180,7 +180,7 @@ iD.ui.LayerSwitcher = function(context) {
         adjustments.append('a')
             .text(t('layerswitcher.fix_misalignment'))
             .attr('href', '#')
-            .classed('alignment-toggle', true)
+            .classed('hide-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
                 var exp = d3.select(this).classed('expanded');

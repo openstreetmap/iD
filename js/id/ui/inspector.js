@@ -3,28 +3,26 @@ iD.ui.Inspector = function() {
         taginfo = iD.taginfo(),
         presetData = iD.presetData(),
         initial = false,
-        expert = false,
         inspectorbody,
         entity,
         presetUI,
         presetGrid,
         tagList,
+        tagEditor,
         context;
 
     function inspector(selection) {
 
         entity = selection.datum();
 
-        var iwrap = selection.append('div')
-                .attr('class','inspector content hide'),
-            messagewrap = iwrap.append('div')
-                .attr('class', 'message inspector-inner fillL2'),
-            message = messagewrap.append('h4');
+        var messagewrap = selection.append('div')
+                .attr('class', 'message inspector-inner fillL'),
+            message = messagewrap.append('h3');
 
-        inspectorbody = iwrap.append('div')
-            .attr('class', 'inspector-body'),
-        iwrap.append('div')
-            .attr('class', 'inspector-buttons pad1 fillD')
+        inspectorbody = selection.append('div')
+            .attr('class', 'fillL'),
+        selection.append('div')
+            .attr('class', 'inspector-actions pad1 fillD col12')
             .call(drawButtons);
 
         presetGrid = iD.ui.PresetGrid()
@@ -33,13 +31,17 @@ iD.ui.Inspector = function() {
             .context(context)
             .on('message', changeMessage)
             .on('choose', function(preset) {
-                inspectorbody.call(tagEditor, expert, preset);
+                inspectorbody.call(tagEditor, preset);
             });
 
         tagEditor = iD.ui.TagEditor()
             .presetData(presetData)
+            .tags(entity.tags)
             .context(context)
             .on('message', changeMessage)
+            .on('change', function() {
+                event.changeTags(entity, inspector.tags());
+            })
             .on('choose', function() {
                 inspectorbody.call(presetGrid);
             });
@@ -53,7 +55,7 @@ iD.ui.Inspector = function() {
             inspectorbody.call(tagEditor);
         }
 
-        iwrap.call(iD.ui.Toggle(true));
+        selection.call(iD.ui.Toggle(true));
     }
 
     function drawButtons(selection) {
@@ -74,16 +76,6 @@ iD.ui.Inspector = function() {
             .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
             .text(t('inspector.view_on_osm'));
-
-        var expertButton = selection.append('button')
-            .attr('class', 'apply')
-            .text('Tag view')
-            .on('click', function() {
-                expert = !expert;
-                expertButton.text(expert ? 'Preset view' : 'Tag view');
-                inspectorbody.call(tagEditor, expert);
-            });
-
     }
 
     function apply(entity) {

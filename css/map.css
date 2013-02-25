@@ -745,6 +745,16 @@ text.point {
     cursor:url(../img/cursor-draw-point.png) 18 18, auto;
 }
 
+.lasso #map:hover,
+.lasso .way,
+.lasso .vertex {
+    cursor:url(../img/cursor-draw.png) 9 9, auto;
+}
+
+.lasso #map {
+    pointer-events: visibleStroke;
+}
+
 /* Modes */
 
 .mode-draw-line .vertex.active,

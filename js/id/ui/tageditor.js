@@ -4,93 +4,120 @@ iD.ui.TagEditor = function() {
         presetData = iD.presetData(),
         inspectorbody,
         entity,
+        tags,
+        name,
         presetMatch,
         presetUI,
         presetGrid,
         tagList,
         context;
 
-    function tageditor(selection, tagview, preset) {
+    function tageditor(selection, preset) {
 
         entity = selection.datum();
-        presetMatch = preset || presetData.matchTags(entity);
+        var type = entity.type === 'node' ? entity.type : entity.geometry();
+
+        // preset was explicitly chosen
+        if (preset) {
+            if (presetMatch) {
+                // Strip preset's match tags
+                tags = _.omit(tags, _.keys(presetMatch.match.tags));
+
+                // Strip preset's default tags
+                for (var i in presetMatch.form) {
+                    var field = presetMatch.form[i];
+                    if (field['default'] && field['default'][type] == tags[field.key]) {
+                        delete tags[field.key];
+                    }
+                }
+            }
+
+            // Add new preset's match tags
+            for (var k in preset.match.tags) {
+                if (preset.match.tags[k] !== '*') tags[k] = preset.match.tags[k];
+            }
+
+            // Add new preset's defaults
+            for (var f in preset.form) {
+                f = preset.form[f];
+                if (f.key && !tags[f.key] && f['default'] && f['default'][type]) {
+                    tags[f.key] = f['default'][type];
+                }
+            }
+        }
+
+        presetMatch = preset || presetMatch || presetData.matchTags(entity);
 
         selection.html('');
 
         var editorwrap = selection.append('div')
-            .attr('class', 'inspector-inner tag-wrap fillL2');
+            .attr('class', 'tag-wrap inspector-body');
 
-        var typewrap = editorwrap.append('div')
-            .attr('class', 'type inspector-inner fillL')
+        var headerwrap = editorwrap.append('div').attr('class','col12 head');
+
+        var typewrap = headerwrap.append('div')
+            .attr('class','col3 type inspector-inner');
+
+        typewrap.append('h4').text('Type');
+
+        var typelabel = typewrap.append('button')
+            .attr('class','col12')
             .on('click', function() {
                 event.choose();
             });
 
-        typewrap.append('h4')
-            .text('Type');
+        typelabel.append('div')
+            .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' preset-' + presetMatch.icon : ''));
 
-        typewrap.append('img')
-            .attr('class', 'preset-icon');
+         var namewrap = headerwrap.append('div')
+                 .attr('class', 'name col9 inspector-inner');
 
-        typewrap.append('h3')
-            .attr('class', 'preset-name')
-            .text(presetMatch ? presetMatch.name : '');
+        typelabel.append('span')
+        .attr('class','label')
+        .text(presetMatch ? presetMatch.name : 'Other');
 
+        namewrap.append('h4').text('Name');
 
-        var namewrap = editorwrap.append('div')
-                .attr('class', 'head inspector-inner fillL'),
-            h2 = namewrap.append('h2');
-
-        h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
-
-        var name = h2.append('input')
-            .attr('placeholder', 'name')
-            .property('value', function() {
-                return entity.tags.name || '';
-            })
-            .on('keyup', function() {
-                var tags = tageditor.tags();
-                tags.name = this.value;
-                tageditor.tags(tags);
+        name = namewrap.append('input')
+            .attr('placeholder', 'unknown')
+            .attr('class', 'major')
+            .attr('type', 'text')
+            .property('value', entity.tags.name || 'this')
+            .on('blur', function() {
                 event.change();
             });
 
-        event.on('change.name', function() {
-            var tags = tageditor.tags();
-            name.property('value', tags.name);
-        });
-
-
         presetUI = iD.ui.preset()
+            .context(context)
+            .entity(entity)
             .on('change', function(tags) {
-                event.change();
+                event.change(tags);
             });
 
         tagList = iD.ui.Taglist()
             .context(context)
             .on('change', function(tags) {
-                event.change();
+                event.change(tags);
             });
 
         var tageditorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset cf');
+            .attr('class', 'inspector-preset');
 
-        if (presetMatch && !tagview) {
+        if (presetMatch) {
             tageditorpreset.call(presetUI
                     .preset(presetMatch));
         }
 
         event.message('Edit ' + (presetMatch && presetMatch.name || ''));
 
-        var taglistwrap = editorwrap.append('div').call(tagList);
+        var taglistwrap = editorwrap.append('div')
+            .attr('class','inspector-inner col12 fillL2').call(tagList);
 
-        tageditor.tags(entity.tags);
+        tageditor.tags(tags);
+        event.change(tags);
     }
 
     function drawHead(selection) {
-        var entity = selection.datum();
-
         var h2 = selection.append('h2');
 
         h2.append('span')
@@ -100,12 +127,19 @@ iD.ui.TagEditor = function() {
             .text(entity.friendlyName());
     }
 
-    tageditor.tags = function(tags) {
+    tageditor.tags = function(newtags) {
         if (!arguments.length) {
-            return _.extend(presetUI.tags(), tagList.tags());
+            tags = _.extend(presetUI.tags(), tagList.tags());
+            if (name.property('value')) tags.name = name.property('value');
+            return tags;
         } else {
-            presetUI.change(tags);
-            tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {})));
+            tags = _.clone(newtags);
+            if (presetUI && tagList) {
+                name.property('value', tags.name || '');
+                presetUI.change(tags);
+                tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {}).concat(['name'])));
+            }
+            return tageditor;
         }
     };
 

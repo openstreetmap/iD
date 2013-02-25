@@ -1,7 +1,7 @@
 d3.tail = function() {
     var text = false,
         container,
-        xmargin = 20,
+        xmargin = 25,
         tooltip_size = [0, 0],
         selection_size = [0, 0],
         transformProp = iD.util.prefixCSSProperty('Transform');
@@ -15,7 +15,7 @@ d3.tail = function() {
         function setup() {
 
             container = d3.select(document.body)
-                .append('div').attr('class', 'tail');
+                .append('div').attr('class', 'tail tooltip-inner');
 
             selection
                 .on('mousemove.tail', mousemove)
@@ -31,11 +31,12 @@ d3.tail = function() {
 
         function mousemove() {
             if (text === false) return;
-            var xoffset = ((d3.event.x + tooltip_size[0] + xmargin) > selection_size[0]) ?
+            var xoffset = ((d3.event.clientX + tooltip_size[0] + xmargin) > selection_size[0]) ?
                 -tooltip_size[0] - xmargin : xmargin;
+            container.classed('left', xoffset > 0);
             container.style(transformProp, 'translate(' +
-                (~~d3.event.x + xoffset) + 'px,' +
-                ~~d3.event.y + 'px)');
+                (~~d3.event.clientX + xoffset) + 'px,' +
+                ~~d3.event.clientY + 'px)');
         }
 
         function mouseout() {

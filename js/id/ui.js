@@ -58,10 +58,10 @@ iD.ui = function(context) {
 
         container.append('div')
             .style('display', 'none')
-            .attr('class', 'inspector-wrap fr col5');
+            .attr('class', 'inspector-wrap fr content col5');
 
         var about = container.append('div')
-            .attr('class','col12 about-block fillD pad1');
+            .attr('class','col12 about-block fillD');
 
         about.append('div')
             .attr('class', 'account')
@@ -69,7 +69,7 @@ iD.ui = function(context) {
 
         var linkList = about.append('ul')
             .attr('id', 'about')
-            .attr('class', 'pad1 fillD about-block link-list');
+            .attr('class', 'link-list');
 
         linkList.append('li')
             .append('a')

@@ -12,11 +12,12 @@ describe("iD.svg.Midpoints", function () {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [50, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
-            graph = iD.Graph([a, b, line]);
+            graph = iD.Graph([a, b, line]),
+            extent = iD.geo.Extent([0, 0], [100, 100]);
 
         // If no vertices are drawn, no midpoints are drawn. This dependence needs to be removed
-        surface.call(iD.svg.Vertices(projection), graph, [a], filter);
-        surface.call(iD.svg.Midpoints(projection), graph, [line], filter);
+        surface.call(iD.svg.Vertices(projection), graph, [a], filter, extent);
+        surface.call(iD.svg.Midpoints(projection), graph, [line], filter, extent);
 
         expect(surface.select('.midpoint').datum().loc).to.eql([25, 0]);
     });
@@ -25,9 +26,10 @@ describe("iD.svg.Midpoints", function () {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [39, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
-            graph = iD.Graph([a, b, line]);
+            graph = iD.Graph([a, b, line]),
+            extent = iD.geo.Extent([0, 0], [100, 100]);
 
-        surface.call(iD.svg.Midpoints(projection), graph, [line], filter);
+        surface.call(iD.svg.Midpoints(projection), graph, [line], filter, extent);
 
         expect(surface.selectAll('.midpoint')[0]).to.have.length(0);
     });
@@ -42,11 +44,12 @@ describe("iD.svg.Midpoints", function () {
             l3 = iD.Way({nodes: [c.id, a.id, b.id, d.id]}),
             l4 = iD.Way({nodes: [a.id, d.id, b.id]}),
             graph = iD.Graph([a, b, c, d, l1, l2, l3, l4]),
-            ab = function (d) { return d.id === [a.id, b.id].sort().join("-"); };
+            ab = function (d) { return d.id === [a.id, b.id].sort().join("-"); },
+            extent = iD.geo.Extent([0, 0], [100, 100]);
 
         // If no vertices are drawn, no midpoints are drawn. This dependence needs to be removed
-        surface.call(iD.svg.Vertices(projection), graph, [a], filter);
-        surface.call(iD.svg.Midpoints(projection), graph, [l1, l2, l3, l4], filter);
+        surface.call(iD.svg.Vertices(projection), graph, [a], filter, extent);
+        surface.call(iD.svg.Midpoints(projection), graph, [l1, l2, l3, l4], filter, extent);
 
         expect(surface.selectAll('.midpoint').filter(ab).datum().ways).to.eql([
             {id: l1.id, index: 1},

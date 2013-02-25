@@ -7,30 +7,37 @@ iD.ui.PresetGrid = function() {
     function presetgrid(selection) {
 
         selection.html('');
-        var wrap = selection.append('div')
-            .attr('class', 'fillL');
 
         var viable = presetData.match(entity);
         event.message('What kind of ' + entity.geometry(context.graph()) + ' are you adding?');
 
-        var grid = wrap.append('div')
-            .attr('class', 'preset-grid')
-            .call(drawGrid, filter(''));
+        var searchwrap = selection.append('div')
+            .attr('class', 'preset-grid-search-wrap inspector-inner');
 
-        var searchwrap = wrap.append('div')
-            .attr('class', 'preset-grid-search-wrap');
+        var grid = selection.append('div')
+            .attr('class', 'preset-grid fillD inspector-body ' + entity.geometry(context.graph()))
+            .call(drawGrid, filter(''));
 
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
+            .attr('type', 'search')
             .on('keyup', function() {
                 var value = search.property('value'),
                     presets = filter(value);
                 event.message('' + presets.length + ' results for ' + value);
                 grid.call(drawGrid, presets);
+                grid.classed('filtered', value.length);
+            })
+            .on('change', function() {
+                var chosen = grid.selectAll('.grid-entry:first-child').datum();
+                if (chosen) event.choose(chosen);
             });
+        search.node().focus();
 
 
         function filter(value) {
+            if (!value) return presetData.defaults(entity);
+
             value = value.toLowerCase();
             return viable.filter(function(v) {
                 return v.name.toLowerCase().indexOf(value) !== -1;
@@ -44,18 +51,32 @@ iD.ui.PresetGrid = function() {
     function drawGrid(selection, presets) {
 
         var entries = selection
-            .selectAll('div.grid-entry')
+            .selectAll('button.grid-entry')
             .data(presets.slice(0, 12), name);
 
-        entries.enter()
-            .append('div')
-            .attr('class', 'grid-entry')
-            .text(name)
+        var entered = entries.enter()
+            .append('button')
+            .attr('class', 'grid-entry col3')
             .on('click', function(d) {
                 event.choose(d);
             });
 
+        entered.append('div')
+            .attr('class', function(d) {
+                var s = 'preset-icon-fill ' + entity.geometry(context.graph());
+                for (var i in d.match.tags) {
+                    s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                }
+                return s;
+            });
+
+        entered.append('div')
+            .attr('class', function(d) { return 'preset-' + d.icon + ' icon'; });
+
+        entered.append('span').attr('class','label').text(name);
+
         entries.exit().remove();
+        entries.order();
     }
 
     presetgrid.presetData = function(_) {

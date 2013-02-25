@@ -41,7 +41,7 @@ iD.ui.Save = function(context) {
                 history.reset();
                 map.flush().redraw();
                 if (err) {
-                    var desc = iD.ui.confirm()
+                    var desc = iD.ui.confirm(context.container())
                         .select('.description');
                     desc.append('h2')
                         .text(t('save.error'));
