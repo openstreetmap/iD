@@ -41,8 +41,22 @@ iD.ui.PresetGrid = function() {
             if (!value) return presetData.defaults(entity);
 
             value = value.toLowerCase();
-            return viable.filter(function(v) {
-                return v.name.toLowerCase().indexOf(value) !== -1;
+
+            // Uses levenshtein distance, with a couple of hacks
+            // to prioritize exact substring matches
+            return viable.sort(function(a, b) {
+                var ia = a.name.indexOf(value) >= 0,
+                    ib = b.name.indexOf(value) >= 0;
+
+                if (ia && !ib) {
+                    return -1;
+                } else if (ib && !ia) {
+                    return 1;
+                }
+
+                return iD.util.editDistance(value, a.name) - iD.util.editDistance(value, b.name);
+            }).filter(function(d) {
+                return iD.util.editDistance(value, d.name) - d.name.length + value.length < 3;
             });
         }
 
