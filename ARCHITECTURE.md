@@ -102,8 +102,10 @@ modified graph as output. Actions typically need other inputs as well; for
 example, `iD.actions.DeleteNode` also requires the ID of a node to delete. The
 additional input is passed to the action's constructor:
 
-``` var action = iD.actions.DeleteNode('n123456'); // construct the action var
-newGraph = action(oldGraph); // apply the action ```
+```
+var action = iD.actions.DeleteNode('n123456'); // construct the action var
+newGraph = action(oldGraph); // apply the action
+```
 
 iD provides actions for all the typical things an editor needs to do: add a
 new entity, split a way in two, connect the vertices of two ways together, and
