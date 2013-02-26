@@ -70,11 +70,11 @@ iD.ui.TagEditor = function() {
             .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' preset-' + presetMatch.icon : ''));
 
          var namewrap = headerwrap.append('div')
-                 .attr('class', 'name col9 inspector-inner');
+             .attr('class', 'name col9 inspector-inner');
 
         typelabel.append('span')
-        .attr('class','label')
-        .text(presetMatch.name);
+            .attr('class','label')
+            .text(presetMatch.name);
 
         namewrap.append('h4').text(t('inspector.name'));
 
@@ -105,7 +105,7 @@ iD.ui.TagEditor = function() {
 
         if (presetMatch) {
             tageditorpreset.call(presetUI
-                    .preset(presetMatch));
+                .preset(presetMatch));
         }
 
         event.message(t('inspector.editing', { type: presetMatch.name }));
