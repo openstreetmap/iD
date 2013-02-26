@@ -100,6 +100,41 @@ iD.ui.PresetGrid = function() {
         entered.append('div')
             .attr('class', function(d) { return 'preset-' + d.icon + ' icon'; });
 
+        var presetinspect;
+
+        entered.append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'preset-help minor')
+            .on('click', function(d) {
+
+                // Display description box inline
+
+                d3.event.stopPropagation();
+
+                var entry = this.parentNode,
+                    index,
+                    entries = selection.selectAll('button.grid-entry');
+
+                if (presetinspect && presetinspect.remove().datum() === d) {
+                    presetinspect = null;
+                    return;
+                }
+
+                entries.each(function(d, i) {
+                    if (this === entry) index = i;
+                });
+
+                var selector = '.grid-entry:nth-child(' + (Math.floor(index/4) * 4 + 5 ) + ')';
+
+                presetinspect = selection.insert('div', selector)
+                    .attr('class', 'preset-inspect col12')
+                    .datum(d);
+
+                presetinspect.append('h2').text(d.title || d.name);
+            })
+            .append('span')
+                .attr('class', 'icon inspect');
+
         entered.append('span').attr('class','label').text(name);
 
         entries.exit().remove();

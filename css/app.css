@@ -769,6 +769,16 @@ div.combobox {
     position: absolute;
 }
 
+.grid-entry .preset-help {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.preset-inspect {
+  position: relative;
+}
+
 .grid-entry .preset-icon-fill.area {
     position: absolute;
     opacity: 0.4;
