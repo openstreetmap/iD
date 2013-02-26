@@ -179,7 +179,11 @@ locale.da = {
         new_tag: "Nyt tag",
         edit_tags: "Ret tags",
         okay: "Ok",
-        view_on_osm: "Vis på OSM"
+        view_on_osm: "Vis på OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     restore: {

@@ -171,7 +171,11 @@ locale.pl = {
         new_tag: "Nowy tag",
         edit_tags: "Edytuj tagi",
         okay: "Okej",
-        view_on_osm: "Zobacz w OSM"
+        view_on_osm: "Zobacz w OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

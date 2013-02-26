@@ -171,7 +171,11 @@ locale.nl = {
         new_tag: "Nieuwe tag",
         edit_tags: "Tags aanpassen",
         okay: "OK",
-        view_on_osm: "Bekijk op OSM"
+        view_on_osm: "Bekijk op OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

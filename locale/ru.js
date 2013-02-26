@@ -171,7 +171,11 @@ locale.ru = {
         new_tag: "Новый тег",
         edit_tags: "Править теги",
         okay: "Готово",
-        view_on_osm: "Посмотреть в OSM"
+        view_on_osm: "Посмотреть в OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

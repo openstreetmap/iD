@@ -171,7 +171,11 @@ locale.fr = {
         new_tag: "Nouveau tag",
         edit_tags: "Editer les tags",
         okay: "Okay",
-        view_on_osm: "Visualiser sur OSM"
+        view_on_osm: "Visualiser sur OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

@@ -171,7 +171,11 @@ locale.ja = {
         new_tag: "新規タグ",
         edit_tags: "タグ編集",
         okay: "OK",
-        view_on_osm: "詳細情報確認"
+        view_on_osm: "詳細情報確認",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

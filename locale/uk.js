@@ -171,7 +171,11 @@ locale.uk = {
         new_tag: "Новий теґ",
         edit_tags: "Редагувати теґи",
         okay: "Готово",
-        view_on_osm: "Подивтись в ОСМ"
+        view_on_osm: "Подивтись в ОСМ",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

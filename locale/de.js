@@ -171,7 +171,11 @@ locale.de = {
         new_tag: "Neues Attribut",
         edit_tags: "Attribute bearbeiten",
         okay: "OK",
-        view_on_osm: "auf OpenStreetMap ansehen"
+        view_on_osm: "auf OpenStreetMap ansehen",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

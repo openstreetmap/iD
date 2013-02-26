@@ -171,7 +171,11 @@ locale.es = {
         new_tag: "Nueva etiqueta", //"New Tag"
         edit_tags: "Editar etiquetas", //"Edit tags",
         okay: "OK",
-        view_on_osm: "Ver en OSM" //"View on OSM"
+        view_on_osm: "Ver en OSM", //"View on OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

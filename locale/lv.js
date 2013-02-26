@@ -171,7 +171,11 @@ locale.lv = {
         new_tag: "Jauns apzīmējums",
         edit_tags: "Labot apzīmējumus",
         okay: "Labi",
-        view_on_osm: "Apskatīt OSM"
+        view_on_osm: "Apskatīt OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

@@ -171,7 +171,11 @@ locale.tr = {
         new_tag: "Yeni Etiket",
         edit_tags: "Etiketleri güncelle",
         okay: "Tamam",
-        view_on_osm: "View on OSM"
+        view_on_osm: "View on OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {

@@ -172,7 +172,11 @@ locale.vi = {
         new_tag: "Thẻ Mới",
         edit_tags: "Sửa đổi các thẻ",
         okay: "OK",
-        view_on_osm: "Xem tại OSM"
+        view_on_osm: "Xem tại OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
