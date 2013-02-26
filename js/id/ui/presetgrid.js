@@ -24,8 +24,7 @@ iD.ui.PresetGrid = function() {
             .on('keyup', function() {
                 // enter
                 if (d3.event.keyCode === 13) {
-                    var chosen = grid.selectAll('.grid-entry:first-child').datum();
-                    if (chosen) event.choose(chosen);
+                    choose(grid.selectAll('.grid-entry:first-child').datum());
                 } else {
                     var value = search.property('value'),
                         presets = filter(value);
@@ -66,85 +65,89 @@ iD.ui.PresetGrid = function() {
             });
         }
 
-    }
 
-    function name(d) { return d.name; }
+        function choose(d) {
+            // Category
+            if (d.members) {
+                search.property('value', '');
+                viable = presetData.categories(d.name);
+                drawGrid(selection, viable);
 
-    function drawGrid(selection, presets) {
+            // Preset
+            } else {
+                event.choose(d);
+            }
+        }
 
-        var entries = selection
-            .selectAll('button.grid-entry')
-            .data(presets.slice(0, 12), name);
+        function name(d) { return d.name; }
 
-        var entered = entries.enter()
-            .append('button')
-            .attr('class', 'grid-entry col3')
-            .on('click', function(d) {
-                // Category
-                if (d.members) {
-                    drawGrid(selection, presetData.categories(d.name));
+        function drawGrid(selection, presets) {
 
-                // Preset
-                } else {
-                    event.choose(d);
-                }
-            });
+            var entries = selection
+                .selectAll('button.grid-entry')
+                .data(presets.slice(0, 12), name);
 
-        entered.append('div')
-            .attr('class', function(d) {
-                var s = 'preset-icon-fill ' + entity.geometry(context.graph());
-                if (d.members) {
-                    s += 'category';
-                } else {
-                    for (var i in d.match.tags) {
-                        s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+            var entered = entries.enter()
+                .append('button')
+                .attr('class', 'grid-entry col3')
+                .on('click', choose);
+
+            entered.append('div')
+                .attr('class', function(d) {
+                    var s = 'preset-icon-fill ' + entity.geometry(context.graph());
+                    if (d.members) {
+                        s += 'category';
+                    } else {
+                        for (var i in d.match.tags) {
+                            s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                        }
                     }
-                }
-                return s;
-            });
-
-        entered.append('div')
-            .attr('class', function(d) { return 'preset-' + d.icon + ' icon'; });
-
-        var presetinspect;
-
-        entered.append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'preset-help minor')
-            .on('click', function(d) {
-
-                // Display description box inline
-
-                d3.event.stopPropagation();
-
-                var entry = this.parentNode,
-                    index,
-                    entries = selection.selectAll('button.grid-entry');
-
-                if (presetinspect && presetinspect.remove().datum() === d) {
-                    presetinspect = null;
-                    return;
-                }
-
-                entries.each(function(d, i) {
-                    if (this === entry) index = i;
+                    return s;
                 });
 
-                var selector = '.grid-entry:nth-child(' + (Math.floor(index/4) * 4 + 5 ) + ')';
+            entered.append('div')
+                .attr('class', function(d) { return 'preset-' + d.icon + ' icon'; });
 
-                presetinspect = selection.insert('div', selector)
-                    .attr('class', 'preset-inspect col12')
-                    .datum(d);
+            var presetinspect;
 
-                presetinspect.append('h2').text(d.title || d.name);
-            })
-            .append('span')
-                .attr('class', 'icon inspect');
+            entered.append('button')
+                .attr('tabindex', -1)
+                .attr('class', 'preset-help minor')
+                .on('click', function(d) {
 
-        entered.append('span').attr('class','label').text(name);
+                    // Display description box inline
 
-        entries.exit().remove();
-        entries.order();
+                    d3.event.stopPropagation();
+
+                    var entry = this.parentNode,
+                        index,
+                        entries = selection.selectAll('button.grid-entry');
+
+                    if (presetinspect && presetinspect.remove().datum() === d) {
+                        presetinspect = null;
+                        return;
+                    }
+
+                    entries.each(function(d, i) {
+                        if (this === entry) index = i;
+                    });
+
+                    var selector = '.grid-entry:nth-child(' + (Math.floor(index/4) * 4 + 5 ) + ')';
+
+                    presetinspect = selection.insert('div', selector)
+                        .attr('class', 'preset-inspect col12')
+                        .datum(d);
+
+                    presetinspect.append('h2').text(d.title || d.name);
+                })
+                .append('span')
+                    .attr('class', 'icon inspect');
+
+            entered.append('span').attr('class','label').text(name);
+
+            entries.exit().remove();
+            entries.order();
+        }
     }
 
     function cancel() {
