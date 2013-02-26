@@ -278,6 +278,7 @@ button {
     transition: background 100ms;
 }
 
+button:focus,
 button:hover {
     background-color: #ececec;
 }
@@ -756,17 +757,8 @@ div.combobox {
     margin-bottom: 20px;
 }
 
-.preset-grid.filtered .grid-entry:first-child,
-.preset-grid .grid-entry .grid-inner:hover {
+.preset-grid.filtered .grid-entry:first-child {
     background: #ececec;
-}
-
-.preset-grid .grid-entry .grid-inner:hover {
-    background: inherit;
-}
-
-.grid-entry .grid-inner {
-    position: absolute;
 }
 
 .grid-entry .preset-help {
