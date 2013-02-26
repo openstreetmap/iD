@@ -192,7 +192,7 @@ d3.combobox = function() {
 
                 if (data.length &&
                     document.activeElement === input.node()) show();
-                else hide();
+                else return hide();
 
                 autocomplete(e, data);
 
