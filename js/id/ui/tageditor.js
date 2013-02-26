@@ -57,19 +57,21 @@ iD.ui.TagEditor = function() {
 
         typewrap.append('h4').text('Type');
 
-        var typelabel = typewrap.append('button')
+        var typebutton = typewrap.append('button')
             .attr('class','col12')
             .on('click', function() {
                 event.choose();
             });
 
-        typelabel.append('div')
+        typebutton.append('div')
             .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' preset-' + presetMatch.icon : ''));
+
+        typebutton.node().focus();
 
          var namewrap = headerwrap.append('div')
              .attr('class', 'name col9 inspector-inner');
 
-        typelabel.append('span')
+        typebutton.append('span')
             .attr('class','label')
             .text(presetMatch.name);
 
