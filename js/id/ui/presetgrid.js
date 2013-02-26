@@ -56,7 +56,8 @@ iD.ui.PresetGrid = function() {
 
                 return iD.util.editDistance(value, a.name) - iD.util.editDistance(value, b.name);
             }).filter(function(d) {
-                return iD.util.editDistance(value, d.name) - d.name.length + value.length < 3;
+                return iD.util.editDistance(value, d.name) - d.name.length + value.length < 3 ||
+                    d.name === 'other';
             });
         }
 
