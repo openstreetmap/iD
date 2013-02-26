@@ -1,5 +1,5 @@
 iD.ui.TagEditor = function() {
-    var event = d3.dispatch('changeTags', 'choose', 'close', 'change', 'message'),
+    var event = d3.dispatch('changeTags', 'choose', 'close', 'message'),
         presetData = iD.presetData(),
         entity,
         tags,
@@ -83,20 +83,20 @@ iD.ui.TagEditor = function() {
             .attr('type', 'text')
             .property('value', entity.tags.name)
             .on('blur', function() {
-                event.change();
+                event.changeTags();
             });
 
         presetUI = iD.ui.preset()
             .context(context)
             .entity(entity)
             .on('change', function(tags) {
-                event.change(tags);
+                event.changeTags();
             });
 
         tagList = iD.ui.Taglist()
             .context(context)
             .on('change', function(tags) {
-                event.change(tags);
+                event.changeTags();
             });
 
         var tageditorpreset = editorwrap.append('div')
@@ -112,8 +112,37 @@ iD.ui.TagEditor = function() {
         editorwrap.append('div')
             .attr('class','inspector-inner col12 fillL2').call(tagList, presetMatch.name === 'other');
 
+        selection.append('div')
+            .attr('class', 'inspector-actions pad1 fillD col12')
+            .call(drawButtons);
+
         tageditor.tags(tags);
-        event.change(tags);
+
+        event.changeTags();
+    }
+
+    function apply(entity) {
+        event.changeTags();
+        event.close();
+    }
+
+    function drawButtons(selection) {
+
+        var inspectorButton = selection.append('button')
+            .attr('class', 'apply action')
+            .on('click', apply);
+
+        inspectorButton.append('span')
+            .attr('class','label')
+            .text(t('inspector.okay'));
+
+        var minorButtons = selection.append('div')
+            .attr('class','minor-buttons fl');
+
+        minorButtons.append('a')
+            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+            .attr('target', '_blank')
+            .text(t('inspector.view_on_osm'));
     }
 
     tageditor.tags = function(newtags) {

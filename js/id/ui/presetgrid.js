@@ -4,7 +4,7 @@ iD.ui.PresetGrid = function() {
         context,
         presetData;
 
-    function presetgrid(selection) {
+    function presetgrid(selection, preset) {
 
         selection.html('');
 
@@ -36,6 +36,11 @@ iD.ui.PresetGrid = function() {
             });
         search.node().focus();
 
+        if (preset) {
+            selection.append('div')
+                .attr('class', 'inspector-actions pad1 fillD col12')
+                .call(drawButtons);
+        }
 
         function filter(value) {
             if (!value) return presetData.defaults(entity);
@@ -140,6 +145,21 @@ iD.ui.PresetGrid = function() {
 
         entries.exit().remove();
         entries.order();
+    }
+
+    function cancel() {
+        event.choose();
+    }
+
+    function drawButtons(selection) {
+
+        var inspectorButton = selection.append('button')
+            .attr('class', 'apply action')
+            .on('click', cancel);
+
+        inspectorButton.append('span')
+            .attr('class','label')
+            .text(t('commit.cancel'));
     }
 
     presetgrid.presetData = function(_) {
