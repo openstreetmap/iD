@@ -51,6 +51,7 @@ all: \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
+	js/id/ui/preset/*.js \
 	js/id/presetdata.js \
 	js/id/validate.js \
 	js/id/end.js \
