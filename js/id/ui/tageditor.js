@@ -1,14 +1,11 @@
 iD.ui.TagEditor = function() {
     var event = d3.dispatch('changeTags', 'choose', 'close', 'change', 'message'),
-        taginfo = iD.taginfo(),
         presetData = iD.presetData(),
-        inspectorbody,
         entity,
         tags,
         name,
         presetMatch,
         presetUI,
-        presetGrid,
         tagList,
         context;
 
@@ -110,21 +107,11 @@ iD.ui.TagEditor = function() {
 
         event.message(t('inspector.editing', { type: presetMatch.name }));
 
-        var taglistwrap = editorwrap.append('div')
+        editorwrap.append('div')
             .attr('class','inspector-inner col12 fillL2').call(tagList);
 
         tageditor.tags(tags);
         event.change(tags);
-    }
-
-    function drawHead(selection) {
-        var h2 = selection.append('h2');
-
-        h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
-
-        h2.append('span')
-            .text(entity.friendlyName());
     }
 
     tageditor.tags = function(newtags) {
