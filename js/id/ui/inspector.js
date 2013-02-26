@@ -1,13 +1,10 @@
 iD.ui.Inspector = function() {
     var event = d3.dispatch('changeTags', 'close', 'change'),
-        taginfo = iD.taginfo(),
         presetData = iD.presetData(),
         initial = false,
         inspectorbody,
         entity,
-        presetUI,
         presetGrid,
-        tagList,
         tagEditor,
         context;
 
