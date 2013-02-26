@@ -32,7 +32,7 @@ iD.taginfo = function() {
     }
 
     function clean(parameters) {
-        return _.omit(parameters, 'geometry');
+        return _.omit(parameters, 'geometry', 'debounce');
     }
 
     function shorten(parameters) {
@@ -65,18 +65,23 @@ iD.taginfo = function() {
 
     var debounced = _.debounce(d3.json, 100, true);
 
-    function request(url, callback) {
+    function request(url, debounce, callback) {
         if (cache[url]) {
             callback(null, cache[url]);
+        } else if (debounce) {
+            debounced(url, done);
         } else {
-            debounced(url, function(err, data) {
-                if (!err) cache[url] = data;
-                callback(err, data);
-            });
+            d3.json(url, done);
+        }
+
+        function done(err, data) {
+            if (!err) cache[url] = data;
+            callback(err, data);
         }
     }
 
     taginfo.keys = function(parameters, callback) {
+        var debounce = parameters.debounce;
         parameters = clean(shorten(setSort(setFilter(parameters))));
         request(endpoint + 'keys/all?' +
             iD.util.qsString(_.extend({
@@ -84,13 +89,14 @@ iD.taginfo = function() {
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
-            }, parameters)), function(err, d) {
+            }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
                 callback(null, d.data.filter(popularKeys(parameters)).map(valKey));
             });
     };
 
     taginfo.values = function(parameters, callback) {
+        var debounce = parameters.debounce;
         parameters = clean(shorten(setSort(setFilter(parameters))));
         request(endpoint + 'key/values?' +
             iD.util.qsString(_.extend({
@@ -98,16 +104,17 @@ iD.taginfo = function() {
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
-            }, parameters)), function(err, d) {
+            }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
                 callback(null, d.data.filter(popularValues()).map(valKeyDescription), parameters);
             });
     };
 
     taginfo.docs = function(parameters, callback) {
+        var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
         request(endpoint + 'tag/wiki_pages?' +
-            iD.util.qsString(parameters), callback);
+            iD.util.qsString(parameters), debounce, callback);
     };
 
     taginfo.endpoint = function(_) {

@@ -233,6 +233,8 @@ d3.combobox = function() {
             input.node().focus();
             update('');
 
+            if (!container) return;
+
             var entries = container.selectAll('a'),
                 height = container.node().scrollHeight / entries[0].length,
                 w = d3.select(window);

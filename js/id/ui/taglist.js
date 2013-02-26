@@ -217,6 +217,7 @@ iD.ui.Taglist = function() {
         key.call(d3.combobox()
             .fetcher(function(_, __, callback) {
                 taginfo.keys({
+                    debounce: true,
                     geometry: geometry,
                     query: keyinput.property('value')
                 }, function(err, data) {
@@ -228,6 +229,7 @@ iD.ui.Taglist = function() {
         value.call(d3.combobox()
             .fetcher(function(_, __, callback) {
                 taginfo.values({
+                    debounce: true,
                     key: keyinput.property('value'),
                     geometry: geometry,
                     query: valueinput.property('value')
