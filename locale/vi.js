@@ -112,7 +112,7 @@ locale.vi = {
                 vertex: "Di chuyển nốt trong lối.",
                 line: "Di chuyển đường kẻ.",
                 area: "Di chuyển vùng.",
-                multiple: "Di chuyển hơn một đối tượng"
+                multiple: "Di chuyển hơn một đối tượng."
             }
         },
         reverse: {

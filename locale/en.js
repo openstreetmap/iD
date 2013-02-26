@@ -112,7 +112,7 @@ locale.en = {
                 vertex: "Moved a node in a way.",
                 line: "Moved a line.",
                 area: "Moved an area.",
-                multiple: "Moved multiple objects"
+                multiple: "Moved multiple objects."
             }
         },
         reverse: {
