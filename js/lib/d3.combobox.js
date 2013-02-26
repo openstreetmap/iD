@@ -15,15 +15,6 @@ d3.combobox = function() {
         var idx = -1;
         input = selection.select('input');
 
-        container = d3.select(document.body)
-            .insert('div', ':first-child')
-            .attr('class', 'combobox')
-            .style({
-                position: 'absolute',
-                display: 'none',
-                left: '0px'
-            });
-
         selection.append('a', selection.select('input'))
             .attr('class', 'combobox-carat')
             .on('mousedown', stop)
@@ -64,14 +55,26 @@ d3.combobox = function() {
         }
 
         function show() {
-            container.style('display', 'block');   
-            shown = true;
+            if (!shown) {
+                container = d3.select(document.body)
+                    .insert('div', ':first-child')
+                    .attr('class', 'combobox')
+                    .style({
+                        position: 'absolute',
+                        display: 'block',
+                        left: '0px'
+                    });
+
+                shown = true;
+            }
         }
 
         function hide() {
-            idx = -1;
-            container.style('display', 'none');   
-            shown = false;
+            if (shown) {
+                idx = -1;
+                container.remove();
+                shown = false;
+            }
         }
 
         function slowHide() {
