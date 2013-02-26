@@ -5,6 +5,7 @@ iD.ui.TagEditor = function() {
         tags,
         name,
         presetMatch,
+        selection_,
         presetUI,
         tagList,
         context;
@@ -12,6 +13,7 @@ iD.ui.TagEditor = function() {
     function tageditor(selection, preset) {
 
         entity = selection.datum();
+        selection_ = selection;
         var type = entity.type === 'node' ? entity.type : entity.geometry();
 
         // preset was explicitly chosen
@@ -153,6 +155,13 @@ iD.ui.TagEditor = function() {
         } else {
             tags = _.clone(newtags);
             if (presetUI && tagList) {
+
+                // change preset if necessary (undos/redos)
+                var newmatch = presetData.matchTags(entity.update({ tags: tags }));
+                if (newmatch !== presetMatch) {
+                    return tageditor(selection_, newmatch);
+                }
+
                 name.property('value', tags.name || '');
                 presetUI.change(tags);
                 tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {}).concat(['name'])));
