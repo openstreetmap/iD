@@ -74,12 +74,12 @@ iD.modes.Move = function(context, entityIDs) {
 
         function finish() {
             d3.event.stopPropagation();
-            context.enter(iD.modes.Select(context, entityIDs, true));
+            context.enter(iD.modes.Select(context, entityIDs));
         }
 
         function cancel() {
             context.pop();
-            context.enter(iD.modes.Select(context, entityIDs, true));
+            context.enter(iD.modes.Select(context, entityIDs));
         }
 
         function undone() {
