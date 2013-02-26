@@ -6,7 +6,7 @@ iD.ui.Taglist = function() {
         list,
         context;
 
-    function taglist(selection) {
+    function taglist(selection, expanded) {
 
         collapsebutton = selection.append('a')
             .attr('href','#')
@@ -16,10 +16,11 @@ iD.ui.Taglist = function() {
                 collapsebutton.classed('expanded', wrap.classed('hide'));
                 wrap.call(iD.ui.Toggle(wrap.classed('hide')));
                 selection.node().parentNode.scrollTop += 200;
-            });
+            })
+            .classed('expanded', expanded);
 
         var wrap = selection.append('div')
-            .attr('class', 'hide');
+            .classed('hide', !expanded);
 
         list = wrap.append('ul')
             .attr('class', 'tag-list');

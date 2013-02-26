@@ -110,7 +110,7 @@ iD.ui.TagEditor = function() {
         event.message(t('inspector.editing', { type: presetMatch.name }));
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2').call(tagList);
+            .attr('class','inspector-inner col12 fillL2').call(tagList, presetMatch.name === 'other');
 
         tageditor.tags(tags);
         event.change(tags);
