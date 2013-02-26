@@ -229,6 +229,11 @@ path.area.fill {
     fill-rule: evenodd;
 }
 
+path.line.stroke {
+    stroke: white;
+    stroke-width: 2;
+}
+
 path.stroke.tag-natural {
     stroke: #b6e199;
     stroke-width:1;
