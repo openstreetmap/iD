@@ -82,7 +82,7 @@ iD.ui.TagEditor = function(context) {
             .attr('placeholder', 'unknown')
             .attr('class', 'major')
             .attr('type', 'text')
-            .property('value', entity.tags.name)
+            .property('value', entity.tags.name || '')
             .on('blur', function() {
                 event.changeTags();
             });
