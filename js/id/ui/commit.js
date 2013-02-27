@@ -108,7 +108,9 @@ iD.ui.Commit = function(context) {
             .enter()
             .append('li');
 
-        warningLi.append('button')
+        // only show the fix icon when an entity is given
+        warningLi.filter(function(d) { return d.entity; })
+            .append('button')
             .attr('class', 'minor')
             .on('click', event.fix)
             .append('span')
