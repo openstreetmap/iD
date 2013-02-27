@@ -240,7 +240,7 @@ iD.History = function(context) {
             context.storage(getKey('nextIDs', null));
             context.storage(getKey('index', null));
 
-            stack = JSON.parse(json).map(function(d, i) {
+            stack = JSON.parse(json).map(function(d) {
                 d.graph = iD.Graph(stack[0].graph).load(d.entities);
                 return d;
             });

@@ -52,7 +52,7 @@ iD.ui.Inspector = function(context) {
         selection.call(iD.ui.Toggle(true));
     }
 
-    inspector.tags = function(tags) {
+    inspector.tags = function() {
         if (!arguments.length) {
             return tagEditor.tags();
         } else {

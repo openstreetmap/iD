@@ -49,7 +49,7 @@ iD.ui.Lasso = function() {
         return lasso;
     };
 
-    lasso.close = function(selection) {
+    lasso.close = function() {
         if (group) {
             group.call(iD.ui.Toggle(false, function() {
                 d3.select(this).remove();

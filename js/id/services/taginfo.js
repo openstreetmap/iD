@@ -50,7 +50,7 @@ iD.taginfo = function() {
         return function(d) { return parseFloat(d[pop_field]) > 10000; };
     }
 
-    function popularValues(parameters) {
+    function popularValues() {
         return function(d) { return parseFloat(d.fraction) > 0.01; };
     }
 
