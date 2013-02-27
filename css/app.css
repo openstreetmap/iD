@@ -642,6 +642,26 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
+.rowselect .item {
+    cursor: pointer;
+}
+
+.rowselect .item label:hover{
+    background-color: #ececec;
+}
+
+.rowselect .item label {
+    padding: 5px;
+    width: 100%;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+}
+
+.rowselect .item div {
+    text-align: center;
+}
+
 /* Address input */
 
 .preset-input .addr-housename {
