@@ -59,7 +59,7 @@ iD.ui.Geocoder = function(context) {
         }
 
         function hide() { setVisible(false); }
-        function toggle() { setVisible(gcForm.classed('hide')); }
+        function toggle() { tooltip.hide(button); setVisible(gcForm.classed('hide')); }
 
         function setVisible(show) {
             if (show !== shown) {
@@ -71,13 +71,13 @@ iD.ui.Geocoder = function(context) {
                 shown = show;
             }
         }
+        var tooltip = bootstrap.tooltip().placement('right');
 
         var button = selection.append('button')
             .attr('tabindex', -1)
             .attr('title', t('geocoder.title'))
             .on('click', toggle)
-            .call(bootstrap.tooltip()
-                .placement('right'));
+            .call(tooltip);
 
         button.append('span')
             .attr('class', 'icon geocode');
