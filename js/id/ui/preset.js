@@ -76,11 +76,6 @@ iD.ui.preset = function(context) {
                     .attr('id', 'input-' + d.key)
                     .attr('placeholder', 'http://example.com/');
                 break;
-            case 'check':
-                i = this.append('input')
-                    .attr('type', 'checkbox')
-                    .attr('id', 'input-' + d.key);
-                break;
             case 'select':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
                 i = wrap.append('input').attr('type', 'text');
