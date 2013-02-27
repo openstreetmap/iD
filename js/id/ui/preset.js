@@ -1,7 +1,6 @@
-iD.ui.preset = function() {
+iD.ui.preset = function(context) {
     var event = d3.dispatch('change', 'setTags'),
         taginfo = iD.taginfo(),
-        context,
         entity,
         type,
         hidden,
@@ -151,8 +150,7 @@ iD.ui.preset = function() {
                 if (d.type === 'address') {
                     wrap.append('div')
                         .attr('class', 'col9 preset-input', d)
-                        .call(iD.ui.preset.address()
-                            .context(context)
+                        .call(iD.ui.preset.address(context)
                             .on('change', key)
                             .entity(entity));
                 }
@@ -176,12 +174,6 @@ iD.ui.preset = function() {
     presets.tags = function() {
         if (hidden || !preset || !sections) return {};
         return clean(getTags());
-    };
-
-    presets.context = function(_) {
-        if (!arguments.length) return context;
-        context = _;
-        return presets;
     };
 
     presets.entity = function(_) {

@@ -1,7 +1,6 @@
-iD.ui.PresetGrid = function() {
+iD.ui.PresetGrid = function(context) {
     var event = d3.dispatch('choose', 'message'),
         entity,
-        context,
         presetData;
 
     function presetgrid(selection, preset) {
@@ -171,19 +170,11 @@ iD.ui.PresetGrid = function() {
         return presetgrid;
     };
 
-    presetgrid.context = function(_) {
-        if (!arguments.length) return context;
-        context = _;
-        return presetgrid;
-    };
-
     presetgrid.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
         return presetgrid;
     };
-
-
 
     return d3.rebind(presetgrid, event, 'on');
 };

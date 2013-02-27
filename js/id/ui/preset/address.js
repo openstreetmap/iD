@@ -1,7 +1,6 @@
-iD.ui.preset.address = function() {
+iD.ui.preset.address = function(context) {
 
     var event = d3.dispatch('change'),
-        context,
         entity;
 
     function getStreets() {
@@ -71,12 +70,6 @@ iD.ui.preset.address = function() {
     address.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
-        return address;
-    };
-
-    address.context = function(_) {
-        if (!arguments.length) return context;
-        context = _;
         return address;
     };
 

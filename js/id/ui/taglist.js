@@ -1,10 +1,9 @@
-iD.ui.Taglist = function() {
+iD.ui.Taglist = function(context) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         initial = false,
         collapsebutton,
-        list,
-        context;
+        list;
 
     function taglist(selection, expanded) {
 
@@ -269,11 +268,6 @@ iD.ui.Taglist = function() {
         } else {
             drawTags(tags);
         }
-    };
-
-    taglist.context = function(_) {
-        context = _;
-        return taglist;
     };
 
     return d3.rebind(taglist, event, 'on');
