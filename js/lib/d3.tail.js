@@ -31,11 +31,14 @@ d3.tail = function() {
 
         }
 
+        function show() {
+            container.style('display', 'block');
+            tooltip_size = container.size();
+        }
+
         function mousemove() {
             if (text === false) return;
-            if (container.style('display') == 'none') {
-                container.style('display', 'block');
-            }
+            if (container.style('display') === 'none') show();
             var xoffset = ((d3.event.clientX + tooltip_size[0] + xmargin) > selection_size[0]) ?
                 -tooltip_size[0] - xmargin : xmargin;
             container.classed('left', xoffset > 0);
@@ -51,7 +54,7 @@ d3.tail = function() {
 
         function mouseover() {
             if (d3.event.relatedTarget !== container.node() &&
-                text !== false) container.style('display', 'block');
+                text !== false) show();
         }
 
         if (!container) setup();
