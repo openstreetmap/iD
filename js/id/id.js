@@ -4,7 +4,7 @@ window.iD = function () {
 
     // https://github.com/systemed/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
-    try { storage = localStorage } catch (e) {}
+    try { storage = localStorage; } catch (e) {}
     storage = storage || {};
 
     context.storage = function(k, v) {
@@ -106,7 +106,8 @@ window.iD = function () {
         context.background()
            .source(_.find(iD.layers, function(l) {
                if (l.data.sourcetag === q.layer) {
-                   return (detected = true);
+                   detected = true;
+                   return true;
                }
            }));
     }
