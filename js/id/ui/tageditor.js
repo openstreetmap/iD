@@ -89,12 +89,12 @@ iD.ui.TagEditor = function(context) {
 
         presetUI = iD.ui.preset(context)
             .entity(entity)
-            .on('change', function(tags) {
+            .on('change', function() {
                 event.changeTags();
             });
 
         tagList = iD.ui.Taglist(context)
-            .on('change', function(tags) {
+            .on('change', function() {
                 event.changeTags();
             });
 
@@ -120,7 +120,7 @@ iD.ui.TagEditor = function(context) {
         event.changeTags();
     }
 
-    function apply(entity) {
+    function apply() {
         event.changeTags();
         event.close();
     }

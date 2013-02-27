@@ -1,7 +1,6 @@
 iD.ui.Lasso = function() {
 
-    var center, box,
-        group,
+    var box, group,
         a = [0, 0],
         b = [0, 0];
 

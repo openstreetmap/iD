@@ -127,7 +127,7 @@ iD.svg.Lines = function(projection) {
 
         text.selectAll('.textpath')
             .filter(filter)
-            .attr('xlink:href', function(d, i) { return '#shadow-' + d.id; })
+            .attr('xlink:href', function(d) { return '#shadow-' + d.id; })
             .text(function(d) {
                 // adding longer text than necessary, since overflow is hidden
                 return (new Array(Math.floor(lengths[d.id] * 1.1))).join(arrowtext);

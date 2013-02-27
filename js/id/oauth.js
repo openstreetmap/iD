@@ -4,8 +4,6 @@ iD.OAuth = function(context) {
         keys,
         oauth = {};
 
-    function keyclean(x) { return x.replace(/\W/g, ''); }
-
     function timenonce(o) {
         o.oauth_timestamp = ohauth.timestamp();
         o.oauth_nonce = ohauth.nonce();
