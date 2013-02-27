@@ -113,7 +113,7 @@ iD.taginfo = function() {
     taginfo.docs = function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
-        request(endpoint + 'tag/wiki_pages?' +
+        request(endpoint + (parameters.value ? 'tag/wiki_pages?' : 'key/wiki_pages?') +
             iD.util.qsString(parameters), debounce, callback);
     };
 

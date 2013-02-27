@@ -1,7 +1,8 @@
 iD.ui.PresetGrid = function(context) {
     var event = d3.dispatch('choose', 'message'),
         entity,
-        presetData;
+        presetData,
+        taginfo = iD.taginfo();
 
     function presetgrid(selection, preset) {
 
@@ -109,9 +110,11 @@ iD.ui.PresetGrid = function(context) {
 
             var presetinspect;
 
-            entered.append('button')
+            entered.append('span').attr('class','label').text(name);
+
+            entered.append('div')
                 .attr('tabindex', -1)
-                .attr('class', 'preset-help minor')
+                .attr('class', 'preset-help')
                 .on('click', function(d) {
 
                     // Display description box inline
@@ -138,11 +141,28 @@ iD.ui.PresetGrid = function(context) {
                         .datum(d);
 
                     presetinspect.append('h2').text(d.title || d.name);
+
+                    var description = presetinspect.append('p');
+                    var link = presetinspect.append('a');
+
+                    var params = {},
+                        locale = iD.detect().locale.split('-')[0] || 'en';
+
+                    params.key = Object.keys(d.match.tags)[0];
+                    if (d.match.tags[params.key] !== '*') {
+                        params.value = d.match.tags[params.key];
+                    }
+
+                    taginfo.docs(params, function(err, data) {
+                        var doc = _.find(data, function(d) { return d.lang === locale; }) ||
+                            _.find(data, function(d) { return d.lang === 'en'; });
+                        description.text(doc.description);
+                        link.attr('href', 'http://wiki.openstreetmap.org/wiki/' + encodeURIComponent(doc.title));
+                        link.text(doc.title);
+                    });
                 })
                 .append('span')
                     .attr('class', 'icon inspect');
-
-            entered.append('span').attr('class','label').text(name);
 
             entries.exit().remove();
             entries.order();
