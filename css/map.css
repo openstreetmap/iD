@@ -512,28 +512,28 @@ svg[data-zoom="16"] path.casing.tag-highway-construction {
 
 /* railways */
 
-path.stroke.tag-railway {
+.line.stroke.tag-railway {
     stroke: #eee;
     stroke-width: 2;
     stroke-linecap: butt;
     stroke-dasharray: 12,12;
 }
-path.casing.tag-railway {
+.line.casing.tag-railway {
     stroke: #555;
     stroke-width: 4;
 }
 
-path.stroke.tag-railway-abandoned {
+.line.stroke.tag-railway-abandoned {
     stroke: #eee;
 }
-path.casing.tag-railway-abandoned {
+.line.casing.tag-railway-abandoned {
     stroke: #999;
 }
 
-path.stroke.tag-railway-subway {
+.line.stroke.tag-railway-subway {
     stroke: #666;
 }
-path.casing.tag-railway-subway {
+.line.casing.tag-railway-subway {
     stroke: #222;
 }
 
