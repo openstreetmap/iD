@@ -17,7 +17,7 @@ iD.validate = function(changes, graph) {
 
     if (changes.deleted.length > 100) {
         warnings.push({
-            message: t('validations.many_deletions')
+            message: t('validations.many_deletions', { n: changes.deleted.length })
         });
     }
 
