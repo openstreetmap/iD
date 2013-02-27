@@ -98,7 +98,8 @@ iD.behavior.DragNode = function(context) {
             }
         }
 
-        context.replace(iD.actions.MoveNode(entity.id, loc));
+        context.replace(iD.actions.MoveNode(entity.id, loc),
+                t('operations.move.annotation.' + entity.geometry(context.graph())));
     }
 
     function end(entity) {
