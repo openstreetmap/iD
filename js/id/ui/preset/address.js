@@ -56,12 +56,12 @@ iD.ui.preset.address = function() {
 
         var streetwrap = selection.append('span')
             .attr('class', 'input-wrap-position')
-            .datum({ 'key': 'addr:streetname' });
+            .datum({ 'key': 'addr:street' });
 
         streetwrap.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Oak Street')
-            .attr('class', 'addr-streetname')
+            .attr('class', 'addr-street')
             .on('blur', change)
             .on('change', change);
 

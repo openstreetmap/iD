@@ -1,5 +1,5 @@
 iD.ui.preset = function() {
-    var event = d3.dispatch('change'),
+    var event = d3.dispatch('change', 'setTags'),
         taginfo = iD.taginfo(),
         context,
         entity,
@@ -13,9 +13,11 @@ iD.ui.preset = function() {
         var tags = _.clone(preset.match.tags);
         sections.selectAll('input,select')
             .each(function(d) {
-                tags[d.key] = d.type === 'combo' || d.type === 'select' ?
-                    this.value.replace(' ', '_') :
-                    this.value;
+                if (d && d.key) {
+                    tags[d.key] = d.type === 'combo' || d.type === 'select' ?
+                        this.value.replace(' ', '_') :
+                        this.value;
+                }
             });
         return tags;
     }
@@ -24,11 +26,15 @@ iD.ui.preset = function() {
         if (!sections) return;
         sections.selectAll('input,select')
             .each(function(d) {
-                this.value = tags[d.key] || '';
-                if (d.type === 'combo' || d.type === 'select') {
-                    this.value = this.value.replace('_', ' ');
+                if (d && d.key) {
+                    this.value = tags[d.key] || '';
+                    if (d.type === 'combo' || d.type === 'select') {
+                        this.value = this.value.replace('_', ' ');
+                    }
                 }
             });
+
+        event.setTags();
     }
 
     function clean(o) {
@@ -79,11 +85,22 @@ iD.ui.preset = function() {
             case 'select':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
                 i = wrap.append('input').attr('type', 'text');
-                wrap.call(d3.combobox().data(d.options.map(function(d) {
-                    var o = {};
-                    o.title = o.value = d.replace('_', ' ');
-                    return o;
-                })));
+
+                if (d.options.length <= 5) {
+                    var select = d3.rowselect()
+                        .data(d.options)
+                        .on('change', key);
+                    i.datum(d);
+                    wrap.call(select);
+                    event.on('setTags.' + d.key, select.update);
+
+                } else {
+                    wrap.call(d3.combobox().data(d.options.map(function(d) {
+                        var o = {};
+                        o.title = o.value = d.replace('_', ' ');
+                        return o;
+                    })));
+                }
                 break;
             case 'combo':
                 var combobox = d3.combobox();
