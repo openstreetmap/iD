@@ -8,14 +8,14 @@ iD.svg.Areas = function(projection) {
             if (entity.geometry(graph) === 'area') {
                 areas.push({
                     entity: entity,
-                    area: Math.abs(path.area(entity.asGeoJSON(graph)))
+                    area: Math.abs(path.area(entity.asGeoJSON(graph, true)))
                 });
             }
         }
 
         areas.sort(function(a, b) { return b.area - a.area; });
 
-        function drawPaths(group, areas, filter, klass) {
+        function drawPaths(group, areas, filter, klass, closeWay) {
             var tagClasses = iD.svg.TagClasses();
 
             if (klass === 'stroke') {
@@ -32,7 +32,7 @@ iD.svg.Areas = function(projection) {
 
             paths
                 .order()
-                .attr('d', function(entity) { return path(entity.asGeoJSON(graph)); })
+                .attr('d', function(entity) { return path(entity.asGeoJSON(graph, closeWay)); })
                 .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
 
@@ -51,7 +51,7 @@ iD.svg.Areas = function(projection) {
         var fill = surface.select('.layer-fill'),
             stroke = surface.select('.layer-stroke');
 
-        drawPaths(fill, areas, filter, 'fill');
+        drawPaths(fill, areas, filter, 'fill', true);
         drawPaths(stroke, strokes, filter, 'stroke');
     };
 };

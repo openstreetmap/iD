@@ -118,14 +118,22 @@ _.extend(iD.Way.prototype, {
         return r;
     },
 
-    asGeoJSON: function(resolver) {
-        if (this.isArea()) {
+    asGeoJSON: function(resolver, close) {
+
+        var childnodes = resolver.childNodes(this);
+
+        // Close unclosed way
+        if (close && !this.isClosed()) {
+            childnodes = childnodes.concat([childnodes[0]]);
+        }
+
+        if (this.isArea() && (close || this.isClosed())) {
             return {
                 type: 'Feature',
                 properties: this.tags,
                 geometry: {
                     type: 'Polygon',
-                    coordinates: [_.pluck(resolver.childNodes(this), 'loc')]
+                    coordinates: [_.pluck(childnodes, 'loc')]
                 }
             };
         } else {
@@ -134,7 +142,7 @@ _.extend(iD.Way.prototype, {
                 properties: this.tags,
                 geometry: {
                     type: 'LineString',
-                    coordinates: _.pluck(resolver.childNodes(this), 'loc')
+                    coordinates: _.pluck(childnodes, 'loc')
                 }
             };
         }
