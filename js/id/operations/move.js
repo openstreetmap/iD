@@ -6,7 +6,7 @@ iD.operations.Move = function(selection, context) {
 
     operation.available = function() {
         return selection.length > 1 ||
-            context.entity(selection[0]).type === 'way';
+            context.entity(selection[0]).type !== 'node';
     };
 
     operation.enabled = function() {
