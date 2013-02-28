@@ -11,8 +11,9 @@ iD.modes.RotateWay = function(context, wayId) {
         var annotation = t('operations.rotate.annotation.' + context.geometry(wayId)),
             way = context.graph().entity(wayId),
             nodes = _.uniq(context.graph().childNodes(way)),
-            ref_points = nodes.map(function(n) { return context.projection(n.loc); }),
-            pivot = d3.geom.polygon(ref_points).centroid();
+            points = nodes.map(function(n) { return context.projection(n.loc); }),
+            pivot = d3.geom.polygon(points).centroid(),
+            angle;
 
         context.perform(
             iD.actions.Noop(),
@@ -23,11 +24,17 @@ iD.modes.RotateWay = function(context, wayId) {
         }
 
         function rotate() {
-            var mousePoint = point();
+
+            var mousePoint = point(),
+                newAngle = Math.atan2(mousePoint[1] - pivot[1], mousePoint[0] - pivot[0]);
+
+            if (typeof angle === 'undefined') angle = newAngle;
 
             context.replace(
-                iD.actions.RotateWay(wayId, ref_points, pivot, mousePoint, context.projection),
+                iD.actions.RotateWay(wayId, pivot, newAngle - angle, context.projection),
                 annotation);
+
+            angle = newAngle;
         }
 
         function finish() {
