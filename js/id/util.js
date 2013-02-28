@@ -112,3 +112,18 @@ iD.util.fastMouse = function(container) {
 };
 
 iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+
+iD.util.asyncMap = function(inputs, func, callback) {
+    var remaining = inputs.length,
+        results = [],
+        errors = [];
+
+    inputs.forEach(function(d, i) {
+        func(d, function done(err, data) {
+            errors[i] = err;
+            results[i] = data;
+            remaining --;
+            if (!remaining) callback(errors, results);
+        });
+    });
+};
