@@ -186,16 +186,13 @@
 
             var id = iD();
 
-            d3.json('keys.json', function(err, keys) {
-                d3.json('presets/presets.json', function(err, presets_data) {
+            iD.util.asyncMap(['keys.json', 'presets/presets.json'], d3.json, function(err, data) {
+                  id.connection()
+                      .keys(data[0])
+                      .presetData(iD.presetData().data(data[1]));
 
-                    id.connection()
-                        .keys(keys)
-                        .presetData(iD.presetData().data(presets_data));
-
-                    d3.select("#iD")
-                        .call(id.ui())
-                });
+                  d3.select("#iD")
+                      .call(id.ui())
             });
         </script>
 
