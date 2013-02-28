@@ -1,5 +1,5 @@
 iD.Map = function(context) {
-    var dimensions = [],
+    var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = d3.geo.mercator().scale(1024),
         roundedProjection = iD.svg.RoundProjection(projection),
@@ -148,6 +148,9 @@ iD.Map = function(context) {
     }
 
     function redraw(difference) {
+
+        if (!surface) return;
+
         clearTimeout(timeoutId);
 
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
