@@ -174,7 +174,7 @@ iD.ui.LayerSwitcher = function(context) {
             ['bottom', [0, 1]]];
 
         function nudge(d) {
-            context.background().nudge(d[1]);
+            context.background().nudge(d[1], context.map().zoom());
             context.redraw();
         }
 

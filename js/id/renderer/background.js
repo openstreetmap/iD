@@ -78,6 +78,11 @@ iD.Background = function() {
             return cache[r[3]] !== false;
         });
 
+        var pixeloffset = [
+            Math.round(offset[0] * Math.pow(2, z)),
+            Math.round(offset[1] * Math.pow(2, z))
+        ];
+
         function load(d) {
             cache[d[3]] = true;
             d3.select(this)
@@ -97,8 +102,8 @@ iD.Background = function() {
             var _ts = tileSize[0] * Math.pow(2, z - d[2]);
             var scale = tileSizeAtZoom(d, z);
             return 'translate(' +
-                (Math.round((d[0] * _ts) - tile_origin[0]) + offset[0]) + 'px,' +
-                (Math.round((d[1] * _ts) - tile_origin[1]) + offset[1]) + 'px)' +
+                (Math.round((d[0] * _ts) - tile_origin[0]) + pixeloffset[0]) + 'px,' +
+                (Math.round((d[1] * _ts) - tile_origin[1]) + pixeloffset[1]) + 'px)' +
                 'scale(' + scale + ',' + scale + ')';
         }
 
@@ -134,9 +139,9 @@ iD.Background = function() {
         return background;
     };
 
-    background.nudge = function(_) {
-        offset[0] += _[0];
-        offset[1] += _[1];
+    background.nudge = function(_, zoomlevel) {
+        offset[0] += _[0] / Math.pow(2, zoomlevel);
+        offset[1] += _[1] / Math.pow(2, zoomlevel);
         return background;
     };
 
