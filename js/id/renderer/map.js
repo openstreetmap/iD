@@ -21,7 +21,7 @@ iD.Map = function(context) {
         areas = iD.svg.Areas(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
         labels = iD.svg.Labels(roundedProjection),
-        tail = d3.tail(),
+        tail = iD.ui.Tail(),
         surface, tilegroup;
 
     function map(selection) {

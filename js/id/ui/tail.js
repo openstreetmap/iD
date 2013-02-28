@@ -1,4 +1,4 @@
-d3.tail = function() {
+iD.ui.Tail = function() {
     var text = false,
         container,
         inner,
@@ -7,8 +7,7 @@ d3.tail = function() {
         selection_size = [0, 0],
         transformProp = iD.util.prefixCSSProperty('Transform');
 
-    var tail = function(selection) {
-
+    function tail(selection) {
         d3.select(window).on('resize.tail-size', function() {
             selection_size = selection.size();
         });
@@ -59,8 +58,7 @@ d3.tail = function() {
         }
 
         if (!container) setup();
-
-    };
+    }
 
     tail.text = function(_) {
         if (!arguments.length) return text;

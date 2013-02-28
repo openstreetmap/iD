@@ -18,7 +18,6 @@ all: \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
 	js/lib/d3.size.js \
-	js/lib/d3.tail.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
 	js/lib/jxon.js \
