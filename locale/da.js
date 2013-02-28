@@ -225,6 +225,7 @@ locale.da = {
         untagged_point: "Mangler et tag på punkt som ikke er del af en linje eller område",
         untagged_line: "Mangler tag på linje",
         untagged_area: "Mangler tag på område",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Dette tag {tag} mener denne linje skule være et område, men dette er ikke et område",
         deprecated_tags: "Uønskede tags: {tags}"
     }

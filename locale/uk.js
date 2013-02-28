@@ -220,6 +220,7 @@ locale.uk = {
         untagged_point: "Точка без теґів, що не є частиною лінію чи полігону",
         untagged_line: "Лінія без теґів",
         untagged_area: "Полігон без  теґів",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Теґ {tag} зазвичай ставться на полігони, але об’єкт ним не є",
         deprecated_tags: "Застарілі теґи: {tags}"
     },

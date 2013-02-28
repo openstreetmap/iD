@@ -220,6 +220,7 @@ locale.nl = {
         untagged_point: "Punt zonder tags, dat geen onderdeel is van een lijn of vlak",
         untagged_line: "Lijn zonder tags",
         untagged_area: "Vlak zonder tags",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "De tag {tag} suggereert dat de lijn een vlak is, maar het is geen vlak",
         deprecated_tags: "Afgeschafte tags: {tags}"
     },

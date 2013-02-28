@@ -1638,8 +1638,7 @@ a.success-action {
 }
 
 .radial-menu-tooltip {
-/* for some reason this breaks layout
-    opacity: .8; */
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .radial-menu-background {

@@ -124,6 +124,15 @@ locale.en = {
                 multiple: "Moved multiple objects."
             }
         },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
+            }
+        },
         reverse: {
             title: "Reverse",
             description: "Make this line go in the opposite direction.",

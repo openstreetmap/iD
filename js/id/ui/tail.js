@@ -1,23 +1,24 @@
-d3.tail = function() {
+iD.ui.Tail = function() {
     var text = false,
         container,
+        inner,
         xmargin = 25,
         tooltip_size = [0, 0],
         selection_size = [0, 0],
         transformProp = iD.util.prefixCSSProperty('Transform');
 
-    var tail = function(selection) {
-
+    function tail(selection) {
         d3.select(window).on('resize.tail-size', function() {
             selection_size = selection.size();
         });
 
         function setup() {
-
             container = d3.select(document.body)
                 .append('div')
-                    .style('display', 'none')
-                    .attr('class', 'tail tooltip-inner');
+                .style('display', 'none')
+                .attr('class', 'tail tooltip-inner');
+
+            inner = container.append('div');
 
             selection
                 .on('mousemove.tail', mousemove)
@@ -28,7 +29,6 @@ d3.tail = function() {
                 .on('mousemove.tail', mousemove);
 
             selection_size = selection.size();
-
         }
 
         function show() {
@@ -58,8 +58,7 @@ d3.tail = function() {
         }
 
         if (!container) setup();
-
-    };
+    }
 
     tail.text = function(_) {
         if (!arguments.length) return text;
@@ -69,7 +68,7 @@ d3.tail = function() {
             return tail;
         }
         text = _;
-        container.text(text);
+        inner.text(text);
         tooltip_size = container.size();
         return tail;
     };

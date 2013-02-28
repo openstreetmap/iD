@@ -1,5 +1,5 @@
 iD.Map = function(context) {
-    var dimensions = [],
+    var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = d3.geo.mercator().scale(1024),
         roundedProjection = iD.svg.RoundProjection(projection),
@@ -21,7 +21,7 @@ iD.Map = function(context) {
         areas = iD.svg.Areas(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
         labels = iD.svg.Labels(roundedProjection),
-        tail = d3.tail(),
+        tail = iD.ui.Tail(),
         surface, tilegroup;
 
     function map(selection) {
@@ -72,9 +72,11 @@ iD.Map = function(context) {
             all = _.compact(_.values(complete));
             filter = function(d) {
                 if (d.type === 'midpoint') {
-                    for (var i = 0; i < d.ways.length; i++) {
-                        if (d.ways[i].id in complete) return true;
-                    }
+                    var a = graph.entity(d.edge[0]),
+                        b = graph.entity(d.edge[1]);
+                    return !a || !b ||
+                        _.intersection(graph.parentWays(a), all).length ||
+                        _.intersection(graph.parentWays(b), all).length;
                 } else {
                     return d.id in complete;
                 }
@@ -146,6 +148,9 @@ iD.Map = function(context) {
     }
 
     function redraw(difference) {
+
+        if (!surface) return;
+
         clearTimeout(timeoutId);
 
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
@@ -259,9 +264,11 @@ iD.Map = function(context) {
 
     map.size = function(_) {
         if (!arguments.length) return dimensions;
+        var center = map.center();
         dimensions = _;
         surface.size(dimensions);
         background.size(dimensions);
+        setCenter(center);
         return redraw();
     };
 

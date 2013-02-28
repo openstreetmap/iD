@@ -86,7 +86,7 @@ iD.Difference = function(base, head) {
             addParents(head.parentRelations(entities[i]), entities);
         }
         return entities;
-    },
+    };
 
     difference.complete = function(extent) {
         var result = {}, id, change;
@@ -120,9 +120,9 @@ iD.Difference = function(base, head) {
                     result[diff[i]] = head.entity(diff[i]);
                 }
             }
+
             addParents(head.parentWays(entity), result);
             addParents(head.parentRelations(entity), result);
-
         }
 
         return result;

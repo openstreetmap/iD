@@ -11,6 +11,8 @@ iD.operations.Delete = function(selection, context) {
         context.perform(
             iD.actions.DeleteMultiple(selection),
             annotation);
+
+        context.enter(iD.modes.Browse(context));
     };
 
     operation.available = function() {

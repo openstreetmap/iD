@@ -17,6 +17,14 @@ iD.ui = function(context) {
 
         if (iD.detect().opera) container.classed('opera', true);
 
+        var hash = iD.behavior.Hash(context);
+
+        hash();
+
+        if (!hash.hadHash) {
+            map.centerZoom([-77.02271, 38.90085], 20);
+        }
+
         var m = container.append('div')
             .attr('id', 'map')
             .call(map);
@@ -122,14 +130,6 @@ iD.ui = function(context) {
 
         d3.select(document)
             .call(keybinding);
-
-        var hash = iD.behavior.Hash(context);
-
-        hash();
-
-        if (!hash.hadHash) {
-            map.centerZoom([-77.02271, 38.90085], 20);
-        }
 
         context.enter(iD.modes.Browse(context));
 
