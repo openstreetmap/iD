@@ -1,5 +1,11 @@
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as
 iD.actions.DeleteWay = function(wayId) {
+    function deleteNode(node, graph) {
+        return !graph.parentWays(node).length &&
+            !graph.parentRelations(node).length &&
+            !node.hasInterestingTags();
+    }
+
     return function(graph) {
         var way = graph.entity(wayId);
 
@@ -8,20 +14,12 @@ iD.actions.DeleteWay = function(wayId) {
                 graph = graph.replace(parent.removeMember(wayId));
             });
 
-        way.nodes.forEach(function(nodeId) {
-            var node = graph.entity(nodeId);
-
-            // Circular ways include nodes more than once, so they
-            // can be deleted on earlier iterations of this loop.
-            if (!node) return;
-
+        _.uniq(way.nodes).forEach(function(nodeId) {
             graph = graph.replace(way.removeNode(nodeId));
 
-            if (!graph.parentWays(node).length &&
-                !graph.parentRelations(node).length) {
-                if (!node.hasInterestingTags()) {
-                    graph = graph.remove(node);
-                }
+            var node = graph.entity(nodeId);
+            if (deleteNode(node, graph)) {
+                graph = graph.remove(node);
             }
         });
 
