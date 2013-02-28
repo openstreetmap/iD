@@ -39,12 +39,12 @@ iD.modes.RotateWay = function(context, wayId) {
 
         function finish() {
             d3.event.stopPropagation();
-            context.enter(iD.modes.Select(context, [wayId], true));
+            context.enter(iD.modes.Select(context, [wayId]));
         }
 
         function cancel() {
             context.pop();
-            context.enter(iD.modes.Select(context, [wayId], true));
+            context.enter(iD.modes.Select(context, [wayId]));
         }
 
         function undone() {
