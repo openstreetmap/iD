@@ -264,9 +264,11 @@ iD.Map = function(context) {
 
     map.size = function(_) {
         if (!arguments.length) return dimensions;
+        var center = map.center();
         dimensions = _;
         surface.size(dimensions);
         background.size(dimensions);
+        setCenter(center);
         return redraw();
     };
 
