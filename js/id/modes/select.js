@@ -139,31 +139,13 @@ iD.modes.Select = function(context, selection, initial) {
             if (datum instanceof iD.Way && !target.classed('fill')) {
                 var choice = iD.geo.chooseIndex(datum,
                         d3.mouse(context.surface().node()), context),
-                    node = iD.Node({ loc: choice.loc });
+                    node = iD.Node();
 
                 var prev = datum.nodes[choice.index - 1],
-                    next = datum.nodes[choice.index],
-                    prevParents = context.graph().parentWays({ id: prev }),
-                    ways = [];
+                    next = datum.nodes[choice.index];
 
-
-                for (var i = 0; i < prevParents.length; i++) {
-                    var p = prevParents[i];
-                    for (var k = 0; k < p.nodes.length; k++) {
-                        if (p.nodes[k] === prev) {
-                            if (p.nodes[k-1] === next) {
-                                ways.push({ id: p.id, index: k});
-                                break;
-                            } else if (p.nodes[k+1] === next) {
-                                ways.push({ id: p.id, index: k+1});
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                context.perform(iD.actions.AddEntity(node),
-                    iD.actions.AddMidpoint({ ways: ways, loc: node.loc }, node),
+                context.perform(
+                    iD.actions.AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();

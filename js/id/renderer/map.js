@@ -72,9 +72,11 @@ iD.Map = function(context) {
             all = _.compact(_.values(complete));
             filter = function(d) {
                 if (d.type === 'midpoint') {
-                    for (var i = 0; i < d.ways.length; i++) {
-                        if (d.ways[i].id in complete) return true;
-                    }
+                    var a = graph.entity(d.edge[0]),
+                        b = graph.entity(d.edge[1]);
+                    return !a || !b ||
+                        _.intersection(graph.parentWays(a), all).length ||
+                        _.intersection(graph.parentWays(b), all).length;
                 } else {
                     return d.id in complete;
                 }
