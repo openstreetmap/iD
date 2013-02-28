@@ -6,6 +6,8 @@ iD.ui.RadialMenu = function(operations) {
         if (!operations.length)
             return;
 
+        selection.node().focus();
+
         function click(operation) {
             d3.event.stopPropagation();
             operation();

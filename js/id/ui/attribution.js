@@ -6,5 +6,5 @@ iD.ui.Attribution = function(context) {
         selection
             .append('span')
             .attr('class', 'provided-by');
-    }
+    };
 };

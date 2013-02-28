@@ -4,7 +4,7 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    var inspector = iD.ui.Inspector().initial(!!initial),
+    var inspector = iD.ui.Inspector(context).initial(!!initial),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
@@ -84,7 +84,6 @@ iD.modes.Select = function(context, selection, initial) {
 
         if (entity) {
             inspector
-                .context(context)
                 .presetData(context.connection().presetData());
 
             context.container()

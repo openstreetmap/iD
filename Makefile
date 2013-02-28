@@ -18,7 +18,6 @@ all: \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
 	js/lib/d3.size.js \
-	js/lib/d3.tail.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
 	js/lib/jxon.js \
@@ -51,6 +50,7 @@ all: \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
+	js/id/ui/preset/*.js \
 	js/id/presetdata.js \
 	js/id/validate.js \
 	js/id/end.js \
@@ -63,7 +63,7 @@ iD.js: Makefile
 
 %.min.js: %.js Makefile
 	@rm -f $@
-	$(JS_COMPILER) $< -o $@
+	$(JS_COMPILER) $< -c -m -o $@
 
 clean:
 	rm -f iD*.js

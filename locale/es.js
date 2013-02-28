@@ -171,7 +171,11 @@ locale.es = {
         new_tag: "Nueva etiqueta", //"New Tag"
         edit_tags: "Editar etiquetas", //"Edit tags",
         okay: "OK",
-        view_on_osm: "Ver en OSM" //"View on OSM"
+        view_on_osm: "Ver en OSM", //"View on OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -216,6 +220,7 @@ locale.es = {
         untagged_point: "Punto sin etiquetar que no es parte de una línea ni de un área.", //"Untagged point which is not part of a line or area",
         untagged_line: "Línea sin etiquetar", //"Untagged line",
         untagged_area: "Área sin etiquetar", //"Untagged area",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "La etiqueta {tag} sugiere que esta línea debería ser una área, pero no lo es.", //"The tag {tag} suggests line should be area, but it is not an area",
         deprecated_tags: "Etiquetas obsoletas: {tags}" //"Deprecated tags: {tags}"
     },

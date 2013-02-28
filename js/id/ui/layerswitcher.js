@@ -18,20 +18,21 @@ iD.ui.LayerSwitcher = function(context) {
             .append('div').attr('class', 'content fillD map-overlay hide'),
             shown = false;
 
+        var tooltip = bootstrap.tooltip().placement('right');
+
         var button = selection
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'fillD')
             .attr('title', t('layerswitcher.description'))
             .on('click.layerswitcher-toggle', toggle)
-            .call(bootstrap.tooltip()
-                .placement('right'));
+            .call(tooltip);
 
         button.append('span')
             .attr('class', 'layers icon');
 
         function hide() { setVisible(false); }
-        function toggle() { setVisible(content.classed('hide')); }
+        function toggle() { tooltip.hide(button); setVisible(content.classed('hide')); }
 
         function setVisible(show) {
             if (show !== shown) {

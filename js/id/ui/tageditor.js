@@ -1,20 +1,18 @@
-iD.ui.TagEditor = function() {
-    var event = d3.dispatch('changeTags', 'choose', 'close', 'change', 'message'),
-        taginfo = iD.taginfo(),
+iD.ui.TagEditor = function(context) {
+    var event = d3.dispatch('changeTags', 'choose', 'close', 'message'),
         presetData = iD.presetData(),
-        inspectorbody,
         entity,
         tags,
         name,
         presetMatch,
+        selection_,
         presetUI,
-        presetGrid,
-        tagList,
-        context;
+        tagList;
 
     function tageditor(selection, preset) {
 
         entity = selection.datum();
+        selection_ = selection;
         var type = entity.type === 'node' ? entity.type : entity.geometry();
 
         // preset was explicitly chosen
@@ -60,44 +58,44 @@ iD.ui.TagEditor = function() {
 
         typewrap.append('h4').text('Type');
 
-        var typelabel = typewrap.append('button')
+        var typebutton = typewrap.append('button')
             .attr('class','col12')
             .on('click', function() {
                 event.choose();
             });
 
-        typelabel.append('div')
+        typebutton.append('div')
             .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' preset-' + presetMatch.icon : ''));
 
+        typebutton.node().focus();
+
          var namewrap = headerwrap.append('div')
-                 .attr('class', 'name col9 inspector-inner');
+             .attr('class', 'name col9 inspector-inner');
 
-        typelabel.append('span')
-        .attr('class','label')
-        .text(presetMatch ? presetMatch.name : 'Other');
+        typebutton.append('span')
+            .attr('class','label')
+            .text(presetMatch.name);
 
-        namewrap.append('h4').text('Name');
+        namewrap.append('h4').text(t('inspector.name'));
 
         name = namewrap.append('input')
             .attr('placeholder', 'unknown')
             .attr('class', 'major')
             .attr('type', 'text')
-            .property('value', entity.tags.name || 'this')
+            .property('value', entity.tags.name || '')
             .on('blur', function() {
-                event.change();
+                event.changeTags();
             });
 
-        presetUI = iD.ui.preset()
-            .context(context)
+        presetUI = iD.ui.preset(context)
             .entity(entity)
-            .on('change', function(tags) {
-                event.change(tags);
+            .on('change', function() {
+                event.changeTags();
             });
 
-        tagList = iD.ui.Taglist()
-            .context(context)
-            .on('change', function(tags) {
-                event.change(tags);
+        tagList = iD.ui.Taglist(context)
+            .on('change', function() {
+                event.changeTags();
             });
 
         var tageditorpreset = editorwrap.append('div')
@@ -105,26 +103,45 @@ iD.ui.TagEditor = function() {
 
         if (presetMatch) {
             tageditorpreset.call(presetUI
-                    .preset(presetMatch));
+                .preset(presetMatch));
         }
 
-        event.message('Edit ' + (presetMatch && presetMatch.name || ''));
+        event.message(t('inspector.editing', { type: presetMatch.name }));
 
-        var taglistwrap = editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2').call(tagList);
+        editorwrap.append('div')
+            .attr('class','inspector-inner col12 fillL2').call(tagList, presetMatch.name === 'other');
+
+        selection.append('div')
+            .attr('class', 'inspector-actions pad1 fillD col12')
+            .call(drawButtons);
 
         tageditor.tags(tags);
-        event.change(tags);
+
+        event.changeTags();
     }
 
-    function drawHead(selection) {
-        var h2 = selection.append('h2');
+    function apply() {
+        event.changeTags();
+        event.close();
+    }
 
-        h2.append('span')
-            .attr('class', 'icon big icon-pre-text big-' + entity.geometry(context.graph()));
+    function drawButtons(selection) {
 
-        h2.append('span')
-            .text(entity.friendlyName());
+        var inspectorButton = selection.append('button')
+            .attr('class', 'apply action')
+            .on('click', apply);
+
+        inspectorButton.append('span')
+            .attr('class','label')
+            .text(t('inspector.okay'));
+
+        var minorButtons = selection.append('div')
+            .attr('class','minor-buttons fl');
+
+        minorButtons.append('a')
+            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+            .attr('target', '_blank')
+            .text(t('inspector.view_on_osm'));
     }
 
     tageditor.tags = function(newtags) {
@@ -135,6 +152,13 @@ iD.ui.TagEditor = function() {
         } else {
             tags = _.clone(newtags);
             if (presetUI && tagList) {
+
+                // change preset if necessary (undos/redos)
+                var newmatch = presetData.matchTags(entity.update({ tags: tags }));
+                if (newmatch !== presetMatch) {
+                    return tageditor(selection_, newmatch);
+                }
+
                 name.property('value', tags.name || '');
                 presetUI.change(tags);
                 tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {}).concat(['name'])));
@@ -145,11 +169,6 @@ iD.ui.TagEditor = function() {
 
     tageditor.presetData = function(_) {
         presetData = _;
-        return tageditor;
-    };
-
-    tageditor.context = function(_) {
-        context = _;
         return tageditor;
     };
 

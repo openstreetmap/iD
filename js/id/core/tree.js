@@ -1,5 +1,3 @@
-
-
 iD.Tree = function(graph) {
 
     var rtree = new RTree(),
@@ -58,7 +56,10 @@ iD.Tree = function(graph) {
                 });
 
                 var created = diff.created().concat(queuedCreated);
-                modified = d3.values(diff.addParents(modified)).concat(queuedModified);
+                modified = d3.values(diff.addParents(modified))
+                    // some parents might be created, not modified
+                    .filter(function(d) { return !!graph.entity(d.id); })
+                    .concat(queuedModified);
                 queuedCreated = [];
                 queuedModified = [];
 

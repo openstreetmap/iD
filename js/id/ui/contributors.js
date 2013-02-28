@@ -4,9 +4,9 @@ iD.ui.Contributors = function(context) {
             limit = 4,
             entities = context.intersects(context.map().extent());
 
-        for (var i in entities) {
-            if (entities[i].user) users[entities[i].user] = true;
-        }
+        entities.forEach(function(entity) {
+            if (entity && entity.user) users[entity.user] = true;
+        });
 
         var u = Object.keys(users),
             subset = u.slice(0, u.length > limit ? limit - 1 : limit);

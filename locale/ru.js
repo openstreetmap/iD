@@ -171,7 +171,11 @@ locale.ru = {
         new_tag: "Новый тег",
         edit_tags: "Править теги",
         okay: "Готово",
-        view_on_osm: "Посмотреть в OSM"
+        view_on_osm: "Посмотреть в OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -216,6 +220,7 @@ locale.ru = {
         untagged_point: "Точка без тегов и не в составе линии или контура",
         untagged_line: "Линия без тегов",
         untagged_area: "Контур без тегов",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Тег {tag} обычно ставится на замкнутые контуры, но это не контур",
         deprecated_tags: "Теги устарели: {tags}"
     },

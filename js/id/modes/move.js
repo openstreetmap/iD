@@ -4,14 +4,13 @@ iD.modes.Move = function(context, entityIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3.keybinding('move'),
-        entities = entityIDs.map(context.entity);
+    var keybinding = d3.keybinding('move');
 
     mode.enter = function() {
         var origin,
             nudgeInterval,
-            annotation = entities.length === 1 ?
-                t('operations.move.annotation.' + context.geometry(entities[0].id)) :
+            annotation = entityIDs.length === 1 ?
+                t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
                 t('operations.move.annotation.multiple');
 
         context.perform(
@@ -57,29 +56,19 @@ iD.modes.Move = function(context, entityIDs) {
 
             origin = context.map().mouseCoordinates();
 
-            entities.forEach(function(entity) {
-                if (entity.type === 'way') {
-                    context.replace(
-                        iD.actions.MoveWay(entity.id, delta, context.projection));
-                } else if (entity.type === 'node') {
-                    var start = context.projection(context.entity(entity.id).loc),
-                        end = [start[0] + delta[0], start[1] + delta[1]],
-                        loc = context.projection.invert(end);
-                    context.replace(iD.actions.MoveNode(entity.id, loc));
-                }
-            });
-
-            context.replace(iD.actions.Noop(), annotation);
+            context.replace(
+                iD.actions.Move(entityIDs, delta, context.projection),
+                annotation);
         }
 
         function finish() {
             d3.event.stopPropagation();
-            context.enter(iD.modes.Select(context, entityIDs, true));
+            context.enter(iD.modes.Select(context, entityIDs));
         }
 
         function cancel() {
             context.pop();
-            context.enter(iD.modes.Select(context, entityIDs, true));
+            context.enter(iD.modes.Select(context, entityIDs));
         }
 
         function undone() {

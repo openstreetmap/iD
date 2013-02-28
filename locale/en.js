@@ -112,7 +112,7 @@ locale.en = {
                 vertex: "Moved a node in a way.",
                 line: "Moved a line.",
                 area: "Moved an area.",
-                multiple: "Moved multiple objects"
+                multiple: "Moved multiple objects."
             }
         },
         rotate: {
@@ -181,7 +181,11 @@ locale.en = {
         new_tag: "New Tag",
         edit_tags: "Edit tags",
         okay: "Okay",
-        view_on_osm: "View on OSM"
+        view_on_osm: "View on OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -226,6 +230,7 @@ locale.en = {
         untagged_point: "Untagged point which is not part of a line or area",
         untagged_line: "Untagged line",
         untagged_area: "Untagged area",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
         deprecated_tags: "Deprecated tags: {tags}"
     },

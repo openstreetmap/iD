@@ -80,9 +80,9 @@ iD.svg.Labels = function(projection) {
             .data(entities, iD.Entity.key)
             .attr({
                 'startOffset': '50%',
-                'xlink:href': function(d, i) { return '#halo-' + d.id; }
+                'xlink:href': function(d) { return '#halo-' + d.id; }
             })
-            .text(function(d, i) { return name(d); });
+            .text(function(d) { return name(d); });
 
         texts.exit().remove();
 
@@ -97,7 +97,7 @@ iD.svg.Labels = function(projection) {
         halos.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d, i) { return 'halo-' + d.id; })
+            .attr('id', function(d) { return 'halo-' + d.id; })
             .attr('class', classes);
 
         halos.attr('d', get(labels, 'lineString'));

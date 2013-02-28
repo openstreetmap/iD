@@ -4,8 +4,6 @@ iD.OAuth = function(context) {
         keys,
         oauth = {};
 
-    function keyclean(x) { return x.replace(/\W/g, ''); }
-
     function timenonce(o) {
         o.oauth_timestamp = ohauth.timestamp();
         o.oauth_nonce = ohauth.nonce();
@@ -73,17 +71,13 @@ iD.OAuth = function(context) {
                 ['top', screen.height / 2 - h / 2]].map(function(x) {
                     return x.join('=');
                 }).join(','),
-            popup = window.open("about:blank", 'oauth_window', settings),
-            locationCheck = window.setInterval(function() {
-                if (popup.closed) return window.clearInterval(locationCheck);
-                if (popup.location.search) {
-                    var search = popup.location.search,
-                        oauth_token = ohauth.stringQs(search.slice(1));
-                    popup.close();
-                    get_access_token(oauth_token);
-                    window.clearInterval(locationCheck);
-                }
-            }, 100);
+            popup = window.open("about:blank", 'oauth_window', settings);
+
+        window.authComplete = function(token) {
+            var oauth_token = ohauth.stringQs(token);
+            get_access_token(oauth_token);
+            delete window.authComplete;
+        };
 
         function reqTokenDone(err, xhr) {
             if (err) callback(err);

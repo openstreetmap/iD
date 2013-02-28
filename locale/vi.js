@@ -112,7 +112,7 @@ locale.vi = {
                 vertex: "Di chuyển nốt trong lối.",
                 line: "Di chuyển đường kẻ.",
                 area: "Di chuyển vùng.",
-                multiple: "Di chuyển hơn một đối tượng"
+                multiple: "Di chuyển hơn một đối tượng."
             }
         },
         reverse: {
@@ -172,7 +172,11 @@ locale.vi = {
         new_tag: "Thẻ Mới",
         edit_tags: "Sửa đổi các thẻ",
         okay: "OK",
-        view_on_osm: "Xem tại OSM"
+        view_on_osm: "Xem tại OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -217,6 +221,7 @@ locale.vi = {
         untagged_point: "Địa điểm không có thẻ mà không trực thuộc đường kẻ hoặc vùng",
         untagged_line: "Đường kẻ không có thẻ",
         untagged_area: "Vùng không có thẻ",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
         deprecated_tags: "Thẻ bị phản đối: {tags}"
     },

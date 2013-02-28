@@ -171,7 +171,11 @@ locale.de = {
         new_tag: "Neues Attribut",
         edit_tags: "Attribute bearbeiten",
         okay: "OK",
-        view_on_osm: "auf OpenStreetMap ansehen"
+        view_on_osm: "auf OpenStreetMap ansehen",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -216,6 +220,7 @@ locale.de = {
         untagged_point: "Punkt ohne Attribute, der kein Teil einer Linie oder Fläche ist",
         untagged_line: "Linie ohne Attribute",
         untagged_area: "Fläche ohne Attribute",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
         deprecated_tags: "Veraltete Attribute: {tags}"
     },

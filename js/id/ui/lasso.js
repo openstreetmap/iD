@@ -1,7 +1,6 @@
 iD.ui.Lasso = function() {
 
-    var center, box,
-        group,
+    var box, group,
         a = [0, 0],
         b = [0, 0];
 
@@ -50,7 +49,7 @@ iD.ui.Lasso = function() {
         return lasso;
     };
 
-    lasso.close = function(selection) {
+    lasso.close = function() {
         if (group) {
             group.call(iD.ui.Toggle(false, function() {
                 d3.select(this).remove();

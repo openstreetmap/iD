@@ -171,7 +171,11 @@ locale.fr = {
         new_tag: "Nouveau tag",
         edit_tags: "Editer les tags",
         okay: "Okay",
-        view_on_osm: "Visualiser sur OSM"
+        view_on_osm: "Visualiser sur OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -216,6 +220,7 @@ locale.fr = {
         untagged_point: "Point sans aucun tag ne faisant partie ni d'une ligne, ni d'un polygone",
         untagged_line: "Ligne sans aucun tag",
         untagged_area: "Polygone sans aucun tag",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Ce tag {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
         deprecated_tags: "Tags obsolètes : {tags}"
     },

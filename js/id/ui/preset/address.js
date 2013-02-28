@@ -1,14 +1,13 @@
-iD.ui.preset.address = function() {
+iD.ui.preset.address = function(context) {
 
     var event = d3.dispatch('change'),
-        context,
         entity;
 
     function getStreets() {
 
-        var l = entity.loc || context.entity(entity.nodes[0]).loc,
+        var extent = entity.extent(context.graph()),
+            l = extent.center(),
             dist = iD.geo.metresToCoordinates(l, [200, 200]),
-            extent = entity.extent(context.graph()),
             box = iD.geo.Extent(
                     [extent[0][0] - dist[0], extent[0][1] - dist[1]],
                     [extent[1][0] + dist[0], extent[1][1] + dist[1]]);
@@ -56,12 +55,12 @@ iD.ui.preset.address = function() {
 
         var streetwrap = selection.append('span')
             .attr('class', 'input-wrap-position')
-            .datum({ 'key': 'addr:streetname' });
+            .datum({ 'key': 'addr:street' });
 
         streetwrap.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Oak Street')
-            .attr('class', 'addr-streetname')
+            .attr('class', 'addr-street')
             .on('blur', change)
             .on('change', change);
 
@@ -71,12 +70,6 @@ iD.ui.preset.address = function() {
     address.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
-        return address;
-    };
-
-    address.context = function(_) {
-        if (!arguments.length) return context;
-        context = _;
         return address;
     };
 

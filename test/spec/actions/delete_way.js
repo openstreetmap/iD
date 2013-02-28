@@ -47,7 +47,7 @@ describe("iD.actions.DeleteWay", function() {
             c      = iD.Node(),
             way    = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
             action = iD.actions.DeleteWay(way.id),
-            graph  = iD.Graph([a, b, way]).update(action);
+            graph  = iD.Graph([a, b, c, way]).update(action);
         expect(graph.entity(a.id)).to.be.undefined;
         expect(graph.entity(b.id)).to.be.undefined;
         expect(graph.entity(c.id)).to.be.undefined;

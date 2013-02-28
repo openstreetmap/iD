@@ -13,7 +13,8 @@
             "form": [
                 {
                     "key": "cuisine",
-                    "type": "combo"
+                    "type": "combo",
+                    "indexed": true
                 },
                 {
                     "key": "internet_access",
@@ -645,26 +646,6 @@
                     "title": "Address"
                 }
             ]
-        },
-        {
-            "title": "Other",
-            "name": "other",
-            "match": {
-                "type": ["line", "area"],
-                "tags": {}
-            },
-            "icon": "square-stroked",
-            "form": []
-        },
-        {
-            "title": "Other",
-            "name": "other",
-            "match": {
-                "type": ["node"],
-                "tags": {}
-            },
-            "icon": "marker-stroked",
-            "form": []
         }
     ],
     

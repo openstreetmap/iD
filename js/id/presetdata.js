@@ -1,7 +1,19 @@
 iD.presetData = function() {
+
+    var other = {
+        name: 'other',
+        title: 'Other',
+        icon: 'marker-stroked',
+        match: {
+            tags: {},
+            type: ['node', 'line', 'area']
+        },
+        form: []
+    };
+
     var presets = {},
-        data = [],
-        categories = {},
+        data = [other],
+        categories = [],
         defaults = {
             node: [],
             area: [],
@@ -16,7 +28,7 @@ iD.presetData = function() {
 
     presets.data = function(_) {
         if (!arguments.length) return data;
-        data = _.presets;
+        data = _.presets.concat([other]);
         categories = _.categories;
         defaults = _.defaults;
         return presets;

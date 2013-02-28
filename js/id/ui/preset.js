@@ -1,7 +1,6 @@
-iD.ui.preset = function() {
-    var event = d3.dispatch('change'),
+iD.ui.preset = function(context) {
+    var event = d3.dispatch('change', 'setTags'),
         taginfo = iD.taginfo(),
-        context,
         entity,
         type,
         hidden,
@@ -13,7 +12,11 @@ iD.ui.preset = function() {
         var tags = _.clone(preset.match.tags);
         sections.selectAll('input,select')
             .each(function(d) {
-                tags[d.key] = this.value;
+                if (d && d.key) {
+                    tags[d.key] = d.type === 'combo' || d.type === 'select' ?
+                        this.value.replace(' ', '_') :
+                        this.value;
+                }
             });
         return tags;
     }
@@ -22,8 +25,15 @@ iD.ui.preset = function() {
         if (!sections) return;
         sections.selectAll('input,select')
             .each(function(d) {
-                this.value = tags[d.key] || '';
+                if (d && d.key) {
+                    this.value = tags[d.key] || '';
+                    if (d.type === 'combo' || d.type === 'select') {
+                        this.value = this.value.replace('_', ' ');
+                    }
+                }
             });
+
+        event.setTags();
     }
 
     function clean(o) {
@@ -66,20 +76,25 @@ iD.ui.preset = function() {
                     .attr('id', 'input-' + d.key)
                     .attr('placeholder', 'http://example.com/');
                 break;
-            case 'check':
-                i = this.append('input')
-                    .attr('type', 'checkbox')
-                    .attr('id', 'input-' + d.key);
-                break;
             case 'select':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
                 i = wrap.append('input').attr('type', 'text');
-                wrap.call(d3.combobox().data(d.options.map(function(d) {
-                    return {
-                        title: d,
-                        value: d
-                    };
-                })));
+
+                if (d.options.length <= 5) {
+                    var select = d3.rowselect()
+                        .data(d.options)
+                        .on('change', key);
+                    i.datum(d);
+                    wrap.call(select);
+                    event.on('setTags.' + d.key, select.update);
+
+                } else {
+                    wrap.call(d3.combobox().data(d.options.map(function(d) {
+                        var o = {};
+                        o.title = o.value = d.replace('_', ' ');
+                        return o;
+                    })));
+                }
                 break;
             case 'combo':
                 var combobox = d3.combobox();
@@ -90,7 +105,7 @@ iD.ui.preset = function() {
                     key: d.key
                 }, function(err, data) {
                     if (!err) combobox.data(data.map(function(d) {
-                        d.title = d.value;
+                        d.title = d.value = d.value.replace('_', ' ');
                         return d;
                     }));
                 });
@@ -130,8 +145,7 @@ iD.ui.preset = function() {
                 if (d.type === 'address') {
                     wrap.append('div')
                         .attr('class', 'col9 preset-input', d)
-                        .call(iD.ui.preset.address()
-                            .context(context)
+                        .call(iD.ui.preset.address(context)
                             .on('change', key)
                             .entity(entity));
                 }
@@ -155,12 +169,6 @@ iD.ui.preset = function() {
     presets.tags = function() {
         if (hidden || !preset || !sections) return {};
         return clean(getTags());
-    };
-
-    presets.context = function(_) {
-        if (!arguments.length) return context;
-        context = _;
-        return presets;
     };
 
     presets.entity = function(_) {

@@ -171,7 +171,11 @@ locale.tr = {
         new_tag: "Yeni Etiket",
         edit_tags: "Etiketleri güncelle",
         okay: "Tamam",
-        view_on_osm: "View on OSM"
+        view_on_osm: "View on OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -216,6 +220,7 @@ locale.tr = {
         untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
         untagged_line: "Etiketlenmemiş çizgi",
         untagged_area: "Etiketlenmemiş alan",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
         deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
     },

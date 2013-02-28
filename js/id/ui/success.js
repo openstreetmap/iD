@@ -19,7 +19,7 @@ iD.ui.Success = function(connection) {
             connection.changesetUrl(changeset.id);
 
         header.append('a')
-            .attr('href', function(d) {
+            .attr('href', function() {
                 return connection.changesetUrl(changeset.id);
             })
             .attr('target', '_blank')
@@ -28,7 +28,7 @@ iD.ui.Success = function(connection) {
 
         header.append('a')
             .attr('target', '_blank')
-            .attr('href', function(d) {
+            .attr('href', function() {
                 return 'https://twitter.com/intent/tweet?source=webclient&text=' +
                     encodeURIComponent(message);
             })

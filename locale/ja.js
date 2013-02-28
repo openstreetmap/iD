@@ -171,7 +171,11 @@ locale.ja = {
         new_tag: "新規タグ",
         edit_tags: "タグ編集",
         okay: "OK",
-        view_on_osm: "詳細情報確認"
+        view_on_osm: "詳細情報確認",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?"
     },
 
     layerswitcher: {
@@ -216,6 +220,7 @@ locale.ja = {
         untagged_point: "ポイントにタグが付与されておらず、ラインやエリアの一部でもありません",
         untagged_line: "ラインにタグが付与されていません",
         untagged_area: "エリアにタグが付与されていません",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
         deprecated_tags: "タグの重複: {tags}"
     },

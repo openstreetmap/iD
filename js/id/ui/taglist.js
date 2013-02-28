@@ -1,24 +1,25 @@
-iD.ui.Taglist = function() {
+iD.ui.Taglist = function(context) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         initial = false,
-        list,
-        context;
+        collapsebutton,
+        list;
 
-    function taglist(selection) {
+    function taglist(selection, expanded) {
 
-        var collapsebutton = selection.append('a')
+        collapsebutton = selection.append('a')
             .attr('href','#')
             .attr('class','hide-toggle')
-            .text('Additional tags')
+            .text(t('inspector.additional'))
             .on('click', function() {
                 collapsebutton.classed('expanded', wrap.classed('hide'));
                 wrap.call(iD.ui.Toggle(wrap.classed('hide')));
                 selection.node().parentNode.scrollTop += 200;
-            });
+            })
+            .classed('expanded', expanded);
 
         var wrap = selection.append('div')
-            .attr('class', 'hide');
+            .classed('hide', !expanded);
 
         list = wrap.append('ul')
             .attr('class', 'tag-list');
@@ -41,6 +42,8 @@ iD.ui.Taglist = function() {
 
     function drawTags(tags) {
         var entity = list.datum();
+
+        collapsebutton.text(t('inspector.additional') + ' (' + Object.keys(tags).length + ')');
 
         tags = d3.entries(tags);
 
@@ -212,26 +215,28 @@ iD.ui.Taglist = function() {
 
         var keyinput = key.select('input');
         key.call(d3.combobox()
-            .fetcher(_.debounce(function(_, __, callback) {
+            .fetcher(function(_, __, callback) {
                 taginfo.keys({
+                    debounce: true,
                     geometry: geometry,
                     query: keyinput.property('value')
                 }, function(err, data) {
                     if (!err) callback(sort(keyinput.property('value'), data));
                 });
-            }, 500)));
+            }));
 
         var valueinput = value.select('input');
         value.call(d3.combobox()
-            .fetcher(_.debounce(function(_, __, callback) {
+            .fetcher(function(_, __, callback) {
                 taginfo.values({
+                    debounce: true,
                     key: keyinput.property('value'),
                     geometry: geometry,
                     query: valueinput.property('value')
                 }, function(err, data) {
                     if (!err) callback(sort(valueinput.property('value'), data));
                 });
-            }, 500)));
+            }));
     }
 
     function focusNewKey() {
@@ -263,11 +268,6 @@ iD.ui.Taglist = function() {
         } else {
             drawTags(tags);
         }
-    };
-
-    taglist.context = function(_) {
-        context = _;
-        return taglist;
     };
 
     return d3.rebind(taglist, event, 'on');
