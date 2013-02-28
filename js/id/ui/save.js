@@ -38,8 +38,6 @@ iD.ui.Save = function(context) {
             history.imagery_used(),
             function(err, changeset_id) {
                 loading.remove();
-                history.reset();
-                map.flush().redraw();
                 if (err) {
                     var desc = iD.ui.confirm(context.container())
                         .select('.description');
@@ -47,6 +45,8 @@ iD.ui.Save = function(context) {
                         .text(t('save.error'));
                     desc.append('p').text(err.responseText);
                 } else {
+                    history.reset();
+                    map.flush().redraw();
                     success(e, changeset_id);
                 }
             });
