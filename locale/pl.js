@@ -220,6 +220,7 @@ locale.pl = {
         untagged_point: "Nieopisany punkt, który nie jest częścią linii lub obszaru.",
         untagged_line: "Nieopisana linia.",
         untagged_area: "Nieopisany obszar.",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Tag {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
         deprecated_tags: "Przestarzałe tagi: {tags}"
     },

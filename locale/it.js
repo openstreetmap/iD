@@ -220,6 +220,7 @@ locale.it = {
         untagged_point: "Punto senza tag che non è parte di una linea o di un'area",
         untagged_line: "Linea senza tag",
         untagged_area: "Area senza tag",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Il tag {tag} fa pensare che la linea sia un'area, ma non rappresenta un'area",
         deprecated_tags: "Tag deprecati: {tags}"
     },

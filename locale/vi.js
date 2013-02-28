@@ -221,6 +221,7 @@ locale.vi = {
         untagged_point: "Địa điểm không có thẻ mà không trực thuộc đường kẻ hoặc vùng",
         untagged_line: "Đường kẻ không có thẻ",
         untagged_area: "Vùng không có thẻ",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
         deprecated_tags: "Thẻ bị phản đối: {tags}"
     },

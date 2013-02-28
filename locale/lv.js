@@ -220,6 +220,7 @@ locale.lv = {
         untagged_point: "Neapzīmēts punkts",
         untagged_line: "Neapzīmēta līnija",
         untagged_area: "Neapzīmēts apgabals",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
         deprecated_tags: "Novecojuši apzīmējumi: {tags}"
     },
