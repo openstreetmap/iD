@@ -123,7 +123,7 @@ _.extend(iD.Way.prototype, {
         var childnodes = resolver.childNodes(this);
 
         // Close unclosed way
-        if (close && !this.isClosed()) {
+        if (close && !this.isClosed() && childnodes.length) {
             childnodes = childnodes.concat([childnodes[0]]);
         }
 
