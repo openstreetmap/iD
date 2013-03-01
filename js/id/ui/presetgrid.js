@@ -1,7 +1,7 @@
 iD.ui.PresetGrid = function(context) {
     var event = d3.dispatch('choose', 'message'),
         entity,
-        presetData,
+        presetData = context.presetData(),
         taginfo = iD.taginfo();
 
     function presetgrid(selection, preset) {
@@ -183,12 +183,6 @@ iD.ui.PresetGrid = function(context) {
             .attr('class','label')
             .text(t('commit.cancel'));
     }
-
-    presetgrid.presetData = function(_) {
-        if (!arguments.length) return presetData;
-        presetData = _;
-        return presetgrid;
-    };
 
     presetgrid.entity = function(_) {
         if (!arguments.length) return entity;

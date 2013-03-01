@@ -95,6 +95,13 @@ window.iD = function () {
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
 
+    /* Presets */
+    var presetData = iD.presetData();
+
+    context.presetData = function() {
+        return presetData;
+    };
+
     context.container = function(_) {
         if (!arguments.length) return container;
         container = _;

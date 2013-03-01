@@ -83,9 +83,6 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            inspector
-                .presetData(context.connection().presetData());
-
             context.container()
                 .select('.inspector-wrap')
                 .style('display', 'block')

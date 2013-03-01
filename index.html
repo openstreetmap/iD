@@ -190,12 +190,14 @@
             var id = iD();
 
             iD.util.asyncMap(['keys.json', 'presets/presets.json'], d3.json, function(err, data) {
-                  id.connection()
-                      .keys(data[0])
-                      .presetData(iD.presetData().data(data[1]));
+                id.connection()
+                    .keys(data[0]);
 
-                  d3.select("#iD")
-                      .call(id.ui())
+                id.presetData()
+                    .data(data[1]);
+
+                d3.select("#iD")
+                    .call(id.ui());
             });
         </script>
 
