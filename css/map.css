@@ -682,11 +682,11 @@ text.point {
 /* Cursors */
 
 #map:hover {
-    cursor:url(../img/cursor-grab.png) 9 9, auto;
+    cursor: url(../img/cursor-grab.png) 9 9, auto;
 }
 
 #map:active {
-    cursor:url(../img/cursor-grabbing.png) 9 9, auto;
+    cursor: url(../img/cursor-grabbing.png) 9 9, auto;
 }
 
 .mode-browse .point,
@@ -727,7 +727,8 @@ text.point {
 .mode-draw-area #map:hover,
 .mode-add-line  #map:hover,
 .mode-add-area  #map:hover {
-    cursor:url(../img/cursor-draw.png) 9 9, auto;
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw.png) 9 9, crosshair;
 }
 
 .mode-draw-line .behavior-hover .way,
@@ -735,7 +736,8 @@ text.point {
 .mode-add-line  .behavior-hover .way,
 .mode-add-area  .behavior-hover .way,
 .behavior-drag-node.behavior-hover .way {
-    cursor:url(../img/cursor-draw-connect-line.png) 9 9, auto;
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw-connect-line.png) 9 9, crosshair;
 }
 
 .mode-draw-line .behavior-hover .vertex,
@@ -743,17 +745,20 @@ text.point {
 .mode-add-line  .behavior-hover .vertex,
 .mode-add-area  .behavior-hover .vertex,
 .behavior-drag-node.behavior-hover .vertex {
-    cursor:url(../img/cursor-draw-connect-vertex.png) 9 9, auto;
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw-connect-vertex.png) 9 9, crosshair;
 }
 
 .mode-add-point #map:hover {
-    cursor:url(../img/cursor-draw-point.png) 18 18, auto;
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw-point.png) 18 18, crosshair;
 }
 
 .lasso #map:hover,
 .lasso .way,
 .lasso .vertex {
-    cursor:url(../img/cursor-draw.png) 9 9, auto;
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw.png) 9 9, crosshair;
 }
 
 .lasso #map {

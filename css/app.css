@@ -33,7 +33,8 @@ div, textarea, input, form, span, ul, li, ol, a, button {
 a, button, input, textarea {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
     -webkit-touch-callout:none;
-    cursor:url(../img/cursor-pointer.png) 6 1, auto;
+    cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
 h2 {
@@ -284,7 +285,8 @@ button:hover {
 }
 
 button.active {
-    cursor:url(../img/cursor-pointing.png) 6 1, auto;
+    cursor: pointer;
+    cursor: url(../img/cursor-pointing.png) 6 1, pointer;
 }
 
 button.disabled {
@@ -636,7 +638,8 @@ div.combobox {
     margin-left: -15px;
     margin-right: 5px;
     display:inline-block;
-    cursor:url(../img/cursor-pointer.png) 6 1, auto;
+    cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -1648,7 +1651,8 @@ a.success-action {
 
 .radial-menu-item {
     fill: white;
-    cursor:url(../img/cursor-pointer.png) 6 1, auto;
+    cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
 .radial-menu-item:hover {
