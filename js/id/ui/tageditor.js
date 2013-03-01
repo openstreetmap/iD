@@ -1,6 +1,6 @@
 iD.ui.TagEditor = function(context) {
     var event = d3.dispatch('changeTags', 'choose', 'close', 'message'),
-        presetData = iD.presetData(),
+        presetData = context.presetData(),
         entity,
         tags,
         name,
@@ -165,11 +165,6 @@ iD.ui.TagEditor = function(context) {
             }
             return tageditor;
         }
-    };
-
-    tageditor.presetData = function(_) {
-        presetData = _;
-        return tageditor;
     };
 
     return d3.rebind(tageditor, event, 'on');

@@ -1,6 +1,5 @@
 iD.ui.Inspector = function(context) {
     var event = d3.dispatch('changeTags', 'close', 'change'),
-        presetData = iD.presetData(),
         initial = false,
         inspectorbody,
         entity,
@@ -19,7 +18,6 @@ iD.ui.Inspector = function(context) {
             .attr('class', 'fillL'),
 
         presetGrid = iD.ui.PresetGrid(context)
-            .presetData(presetData)
             .entity(entity)
             .on('message', changeMessage)
             .on('choose', function(preset) {
@@ -27,7 +25,6 @@ iD.ui.Inspector = function(context) {
             });
 
         tagEditor = iD.ui.TagEditor(context)
-            .presetData(presetData)
             .tags(entity.tags)
             .on('message', changeMessage)
             .on('changeTags', function() {
@@ -63,11 +60,6 @@ iD.ui.Inspector = function(context) {
 
     inspector.initial = function(_) {
         initial = _;
-        return inspector;
-    };
-
-    inspector.presetData = function(_) {
-        presetData = _;
         return inspector;
     };
 
