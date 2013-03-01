@@ -144,10 +144,13 @@ iD.ui.TagEditor = function(context) {
         var minorButtons = selection.append('div')
             .attr('class','minor-buttons fl');
 
-        minorButtons.append('a')
-            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-            .attr('target', '_blank')
-            .text(t('inspector.view_on_osm'));
+        // Don't add for created entities
+        if (entity.osmId() > 0) {
+            minorButtons.append('a')
+                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                .attr('target', '_blank')
+                .text(t('inspector.view_on_osm'));
+        }
     }
 
     tageditor.tags = function(newtags) {
