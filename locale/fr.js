@@ -172,10 +172,10 @@ locale.fr = {
         edit_tags: "Editer les tags",
         okay: "Okay",
         view_on_osm: "Visualiser sur OSM",
-        name: "Name",
-        editing: "Editing {type}",
-        additional: "Additional tags",
-        choose: "What are you adding?"
+        name: "Nom",
+        editing: "Edité {type}",
+        additional: "Tags complémentaires",
+        choose: "Que souhaitez vous ajouter?"
     },
 
     layerswitcher: {
@@ -183,7 +183,7 @@ locale.fr = {
         description: "Paramètres du fond de carte",
         percent_brightness: "{opacity}% luminosité",
         fix_misalignment: "Corriger le décalage",
-        reset: "reset"
+        reset: "réinitialiser"
     },
 
     restore: {
