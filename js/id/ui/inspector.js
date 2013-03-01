@@ -1,23 +1,20 @@
 iD.ui.Inspector = function(context) {
     var event = d3.dispatch('changeTags', 'close', 'change'),
         initial = false,
-        inspectorbody,
-        entity,
-        presetGrid,
         tagEditor;
 
     function inspector(selection) {
-
-        entity = selection.datum();
+        var entity = selection.datum();
 
         var messagewrap = selection.append('div')
-                .attr('class', 'message inspector-inner fillL'),
-            message = messagewrap.append('h3');
+            .attr('class', 'message inspector-inner fillL');
 
-        inspectorbody = selection.append('div')
-            .attr('class', 'fillL'),
+        var message = messagewrap.append('h3');
 
-        presetGrid = iD.ui.PresetGrid(context)
+        var inspectorbody = selection.append('div')
+            .attr('class', 'fillL');
+
+        var presetGrid = iD.ui.PresetGrid(context)
             .entity(entity)
             .on('message', changeMessage)
             .on('choose', function(preset) {
@@ -38,7 +35,6 @@ iD.ui.Inspector = function(context) {
             });
 
         function changeMessage(msg) { message.text(msg);}
-
 
         if (initial) {
             inspectorbody.call(presetGrid);
