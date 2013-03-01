@@ -248,7 +248,7 @@ iD.Connection = function(context) {
         bboxFromAPI(e.box, e.tile, done);
     }
 
-    function loadTiles(projection, dimensions) {
+    connection.loadTiles = function(projection, dimensions) {
         var scaleExtent = [16, 16],
             s = projection.scale(),
             tiles = d3.geo.tile()
@@ -286,7 +286,7 @@ iD.Connection = function(context) {
             .filter(tileAlreadyLoaded)
             .map(apiExtentBox)
             .forEach(loadTile);
-    }
+    };
 
     connection.userUrl = function(username) {
         return url + "/user/" + username;
@@ -334,8 +334,6 @@ iD.Connection = function(context) {
         }
         return oauth.authenticate(done);
     };
-
-    connection.loadTiles = _.debounce(loadTiles, 100);
 
     return d3.rebind(connection, event, 'on');
 };
