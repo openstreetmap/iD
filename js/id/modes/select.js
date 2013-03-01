@@ -87,9 +87,10 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            context.container()
-                .select('.inspector-wrap')
-                .style('display', 'block')
+            var wrap = context.container()
+                .select('.inspector-wrap');
+
+            wrap.style('display', 'block')
                 .style('opacity', 1)
                 .datum(entity)
                 .call(inspector);
@@ -97,14 +98,14 @@ iD.modes.Select = function(context, selection, initial) {
             if (d3.event) {
                 // Pan the map if the clicked feature intersects with the position
                 // of the inspector
-                var inspector_size = context.container().select('.inspector-wrap').size(),
-                    map_size = context.map().size(),
+                var inspectorSize = wrap.size(),
+                    mapSize = context.map().size(),
                     offset = 50,
-                    shift_left = d3.event.clientX - map_size[0] + inspector_size[0] + offset,
-                    center = (map_size[0] / 2) + shift_left + offset;
+                    shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
+                    center = (mapSize[0] / 2) + shiftLeft + offset;
 
-                if (shift_left > 0 && inspector_size[1] > d3.event.clientY) {
-                    context.map().centerEase(context.projection.invert([center, map_size[1]/2]));
+                if (shiftLeft > 0 && inspectorSize[1] > d3.event.clientY) {
+                    context.map().centerEase(context.projection.invert([center, mapSize[1]/2]));
                 }
             }
 
@@ -189,12 +190,6 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.exit = function() {
-        /*
-        if (singular()) {
-            changeTags(singular(), inspector.tags());
-        }
-        */
-
         if (timeout) window.clearTimeout(timeout);
 
         context.container()

@@ -8,7 +8,7 @@ locale.en = {
         add_line: {
             title: "Line",
             description: "Lines can be highways, streets, pedestrian paths, or even canals.",
-            tail: "Click on the map to start drawing an road, path, or route."
+            tail: "Click on the map to start drawing a road, path, or route."
         },
         add_point: {
             title: "Point",
