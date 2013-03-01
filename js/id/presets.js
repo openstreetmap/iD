@@ -14,7 +14,7 @@ iD.presets = function(context) {
             form: []
         },
         all = iD.presets.Collection([iD.presets.Preset(other)]),
-        defaults = {},
+        defaults = { area: all, line: all, point: all, vertex: all },
         forms = {};
 
     all.load = function(d) {
