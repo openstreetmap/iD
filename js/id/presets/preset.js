@@ -1,4 +1,12 @@
-iD.presets.Preset = function(preset) {
+iD.presets.Preset = function(preset, forms) {
+
+    preset.form = preset.form.map(function(f) {
+        if (typeof f === 'string') {
+            return forms[f];
+        } else {
+            return f;
+        }
+    });
 
     preset.matchType = function(entity, resolver) {
         return preset.match.type.indexOf(entity.geometry(resolver)) >= 0;

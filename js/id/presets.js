@@ -14,13 +14,18 @@ iD.presets = function(context) {
             form: []
         },
         all = iD.presets.Collection([iD.presets.Preset(other)]),
-        defaults = {};
+        defaults = {},
+        forms = {};
 
     all.load = function(d) {
 
+        if (d.forms) {
+            forms = d.forms;
+        }
+
         if (d.presets) {
             d.presets.forEach(function(d) {
-                all.collection.push(iD.presets.Preset(d));
+                all.collection.push(iD.presets.Preset(d, forms));
             });
         }
 
