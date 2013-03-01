@@ -4,6 +4,10 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
+    if (!initial) {
+        initial = singular() && !_.without(Object.keys(singular().tags), 'area').length;
+    }
+
     var inspector = iD.ui.Inspector(context).initial(!!initial),
         keybinding = d3.keybinding('select'),
         timeout = null,
