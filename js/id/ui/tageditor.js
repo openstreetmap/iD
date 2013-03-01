@@ -1,5 +1,5 @@
 iD.ui.TagEditor = function(context) {
-    var event = d3.dispatch('changeTags', 'choose', 'close', 'message'),
+    var event = d3.dispatch('changeTags', 'choose', 'close'),
         presetData = context.presetData(),
         entity,
         tags,
@@ -47,6 +47,12 @@ iD.ui.TagEditor = function(context) {
         presetMatch = preset || presetMatch || presetData.matchTags(entity);
 
         selection.html('');
+
+        var messagewrap = selection.append('div')
+            .attr('class', 'message inspector-inner fillL');
+
+        var message = messagewrap.append('h3')
+            .text(t('inspector.choose'));
 
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body');
@@ -106,7 +112,7 @@ iD.ui.TagEditor = function(context) {
                 .preset(presetMatch));
         }
 
-        event.message(t('inspector.editing', { type: presetMatch.name }));
+        message.text(t('inspector.editing', { type: presetMatch.name }));
 
         editorwrap.append('div')
             .attr('class','inspector-inner col12 fillL2').call(tagList, presetMatch.name === 'other');

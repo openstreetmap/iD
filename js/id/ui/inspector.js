@@ -6,24 +6,17 @@ iD.ui.Inspector = function(context) {
     function inspector(selection) {
         var entity = selection.datum();
 
-        var messagewrap = selection.append('div')
-            .attr('class', 'message inspector-inner fillL');
-
-        var message = messagewrap.append('h3');
-
         var inspectorbody = selection.append('div')
             .attr('class', 'fillL');
 
         var presetGrid = iD.ui.PresetGrid(context)
             .entity(entity)
-            .on('message', changeMessage)
             .on('choose', function(preset) {
                 inspectorbody.call(tagEditor, preset);
             });
 
         tagEditor = iD.ui.TagEditor(context)
             .tags(entity.tags)
-            .on('message', changeMessage)
             .on('changeTags', function() {
                 event.changeTags(entity, inspector.tags());
             })
@@ -33,8 +26,6 @@ iD.ui.Inspector = function(context) {
             .on('choose', function() {
                 inspectorbody.call(presetGrid, true);
             });
-
-        function changeMessage(msg) { message.text(msg);}
 
         if (initial) {
             inspectorbody.call(presetGrid);

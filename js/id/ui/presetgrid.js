@@ -1,5 +1,5 @@
 iD.ui.PresetGrid = function(context) {
-    var event = d3.dispatch('choose', 'message'),
+    var event = d3.dispatch('choose'),
         entity,
         presetData = context.presetData(),
         taginfo = iD.taginfo();
@@ -9,7 +9,12 @@ iD.ui.PresetGrid = function(context) {
         selection.html('');
 
         var viable = presetData.match(entity);
-        event.message(t('inspector.choose'));
+
+        var messagewrap = selection.append('div')
+            .attr('class', 'message inspector-inner fillL');
+
+        var message = messagewrap.append('h3')
+            .text(t('inspector.choose'));
 
         var searchwrap = selection.append('div')
             .attr('class', 'preset-grid-search-wrap inspector-inner');
@@ -28,7 +33,7 @@ iD.ui.PresetGrid = function(context) {
                 } else {
                     var value = search.property('value'),
                         presets = filter(value);
-                    event.message('' + presets.length + ' results for ' + value);
+                    message.text('' + presets.length + ' results for ' + value);
                     grid.call(drawGrid, presets);
                     grid.classed('filtered', value.length);
                 }
