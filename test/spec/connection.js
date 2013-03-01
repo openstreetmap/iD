@@ -1,5 +1,5 @@
 describe('iD.Connection', function () {
-    var c;
+    var c, context;
 
     beforeEach(function () {
         context = iD();
