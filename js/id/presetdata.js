@@ -35,7 +35,7 @@ iD.presetData = function() {
     };
 
     presets.defaults = function(entity) {
-        var type = entity.type == 'node' ? 'node' : entity.geometry();
+        var type = entity.type === 'node' ? 'node' : entity.geometry();
         return defaults[type].map(getPreset);
     };
 
@@ -47,7 +47,7 @@ iD.presetData = function() {
     };
 
     presets.match = function(entity) {
-        var type = entity.type == 'node' ? 'node' : entity.geometry();
+        var type = entity.type === 'node' ? 'node' : entity.geometry();
         return data.concat(categories).filter(function(d) {
             return _.contains(d.match.type, type);
         });
@@ -55,20 +55,23 @@ iD.presetData = function() {
 
     presets.matchTags = function(entity) {
         var tags, count, best,
-            maxcount = -1,
-            type = entity.type == 'node' ? 'node' : entity.geometry();
+            maxcount = -1;
 
         for (var i = 0; i < data.length; i++) {
             count = 0;
             tags = data[i].match.tags;
+
             for (var k in tags) {
-                if (entity.tags[k] == tags[k] || (tags[k] === '*' && entity.tags[k])) count++;
+                if (entity.tags[k] === tags[k] || (tags[k] === '*' && k in entity.tags)) count++;
                 else break;
             }
+
             if (Object.keys(tags).length === count && count > maxcount) {
-                best = data[i], maxcount = count;
+                best = data[i];
+                maxcount = count;
             }
         }
+
         return best;
     };
 
