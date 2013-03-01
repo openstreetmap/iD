@@ -300,7 +300,15 @@
     "form": ["oneway", "access", "maxspeed"]
 },
 {
-    "title": "Basketball court",
+    "name": "sport pitch",
+    "match": {
+        "type": ["point", "area"],
+        "tags": { "leisure": "pitch" }
+    },
+    "icon": "pitch",
+    "form": ["surface"]
+},
+{
     "name": "basketball court",
     "match": {
         "type": ["point", "area"],
@@ -313,6 +321,42 @@
     "form": ["surface"]
 },
 {
+    "name": "baseball diamond",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "baseball"
+        }
+    },
+    "icon": "baseball",
+    "form": ["surface"]
+},
+{
+    "name": "soccer field",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "soccer"
+        }
+    },
+    "icon": "soccer",
+    "form": ["surface"]
+},
+{
+    "name": "tennis court",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "tennis"
+        }
+    },
+    "icon": "tennis",
+    "form": ["surface"]
+},
+{
     "title": "Building",
     "name": "building",
     "match": {
@@ -322,6 +366,6 @@
         }
     },
     "icon": "warehouse",
-    "form": ["building", "address"]
+    "form": ["building_yes", "address"]
 }
 ]

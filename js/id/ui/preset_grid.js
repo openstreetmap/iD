@@ -28,15 +28,15 @@ iD.ui.PresetGrid = function(context) {
             .attr('type', 'search')
             .on('keyup', function() {
                 // enter
-                if (d3.event.keyCode === 13) {
+                var value = search.property('value');
+                if (d3.event.keyCode === 13 && value.length) {
                     choose(grid.selectAll('.grid-entry:first-child').datum());
                 } else {
-                    var value = search.property('value');
+                    grid.classed('filtered', value.length);
                     if (value.length) {
                         var results = presets.search(value);
-                        message.text(t('inspector.results', {n: results.length, search: value}));
+                        message.text(t('inspector.results', {n: results.collection.length, search: value}));
                         grid.call(drawGrid, results);
-                        grid.classed('filtered', value.length);
                     } else {
                         grid.call(drawGrid, context.presets().defaults(entity));
                     }
