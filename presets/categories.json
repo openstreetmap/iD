@@ -1,0 +1,14 @@
+[
+{
+    "match": {
+        "type": "line"
+    },
+    "icon": "road",
+    "name": "roads",
+    "members": [
+        "residential road",
+        "primary road"
+    ]
+}
+]
+

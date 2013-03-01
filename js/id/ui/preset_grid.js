@@ -8,7 +8,7 @@ iD.ui.PresetGrid = function(context) {
 
         selection.html('');
 
-        presets = presets.matchType(entity);
+        presets = presets.matchType(entity, context.graph());
 
         var messagewrap = selection.append('div')
             .attr('class', 'message inspector-inner fillL');
@@ -54,8 +54,8 @@ iD.ui.PresetGrid = function(context) {
             // Category
             if (d.members) {
                 search.property('value', '');
-                viable = presetData.categories(d.name);
-                drawGrid(selection, viable);
+                presets = d.members;
+                drawGrid(selection, presets);
 
             // Preset
             } else {
