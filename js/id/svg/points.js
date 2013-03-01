@@ -52,7 +52,8 @@ iD.svg.Points = function(projection) {
         // sets the data (point entity) on the element
         groups.select('image')
             .attr('xlink:href', imageHref);
-        groups.select('.shadow, .stroke');
+        groups.select('.shadow');
+        groups.select('.stroke');
 
         groups.exit()
             .remove();
