@@ -87,9 +87,10 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            context.container()
-                .select('.inspector-wrap')
-                .style('display', 'block')
+            var wrap = context.container()
+                .select('.inspector-wrap');
+
+            wrap.style('display', 'block')
                 .style('opacity', 1)
                 .datum(entity)
                 .call(inspector);
@@ -97,7 +98,7 @@ iD.modes.Select = function(context, selection, initial) {
             if (d3.event) {
                 // Pan the map if the clicked feature intersects with the position
                 // of the inspector
-                var inspectorSize = context.container().select('.inspector-wrap').size(),
+                var inspectorSize = wrap.size(),
                     mapSize = context.map().size(),
                     offset = 50,
                     shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
