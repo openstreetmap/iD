@@ -9,31 +9,7 @@
         }
     },
     "icon": "cafe",
-    "form": [
-    {
-        "key": "cuisine",
-        "type": "combo",
-        "indexed": true
-    },
-    {
-        "key": "internet_access",
-        "title": "Internet Access",
-        "type": "select",
-        "options": ["yes", "no", "wlan", "wired", "terminal"]
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["cuisine", "internet_access", "building_area", "address"]
 },
 {
     "title": "Park",
@@ -69,24 +45,7 @@
         }
     },
     "icon": "grocery",
-    "form": [
-    {
-        "key": "operator",
-        "type": "text"
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["operator", "building_area", "address"]
 },
 {
     "title": "Restaurant",
@@ -98,24 +57,7 @@
         }
     },
     "icon": "restaurant",
-    "form": [
-    {
-        "key": "cuisine",
-        "type": "combo"
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["cuisine", "building_area", "address"]
 },
 {
     "title": "Place of worship",
@@ -127,29 +69,7 @@
         }
     },
     "icon": "place-of-worship",
-    "form": [
-    {
-        "key": "religion",
-        "type": "select",
-        "options": ["christian", "muslim", "buddhist", "jewish", "hindu", "shinto", "taoist"]
-    },
-    {
-        "key": "denomination",
-        "type": "combo"
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["religion", "denomination", "building_area", "address"]
 },
 {
     "title": "School",
@@ -161,21 +81,7 @@
         }
     },
     "icon": "school",
-    "form": [
-    {
-        "key": "operator",
-        "type": "text"
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["operator", "building", "address"]
 },
 {
     "title": "Parking",
@@ -187,21 +93,7 @@
         }
     },
     "icon": "parking",
-    "form": [
-    {
-        "key": "fee",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["fee", "access", "address"]
 },
 {
     "title": "Bank",
@@ -213,25 +105,7 @@
         }
     },
     "icon": "bank",
-    "form": [
-    {
-        "key": "atm",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["atm", "building_area", "address"]
 },
 {
     "title": "Fast food",
@@ -243,24 +117,7 @@
         }
     },
     "icon": "fast-food",
-    "form": [
-    {
-        "key": "cuisine",
-        "type": "combo"
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["cuisine", "building_area", "address"]
 },
 {
     "title": "Bar",
@@ -272,20 +129,7 @@
         }
     },
     "icon": "bar",
-    "form": [
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["building_area", "address"]
 },
 {
     "title": "Bus stop",
@@ -297,17 +141,7 @@
         }
     },
     "icon": "bus",
-    "form": [
-    {
-        "key": "operator",
-        "type": "text"
-    },
-    {
-        "key": "shelter",
-        "type": "select",
-        "options": ["yes", "no"]
-    }
-    ]
+    "form": ["operator", "shelter"]
 },
 {
     "title": "Cinema",
@@ -319,20 +153,7 @@
         }
     },
     "icon": "cinema",
-    "form": [
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["building_area", "address"]
 },
 {
     "title": "Hospital",
@@ -344,25 +165,7 @@
         }
     },
     "icon": "hospital",
-    "form": [
-    {
-        "key": "emergency",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "building",
-        "type": "select",
-        "options": ["yes", "no"],
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["emergency", "building_area", "address"]
 },
 {
     "title": "River",
@@ -386,21 +189,7 @@
         }
     },
     "icon": "highway-motorway",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Residential road",
@@ -412,21 +201,7 @@
         }
     },
     "icon": "highway-residential",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Primary Road",
@@ -438,21 +213,7 @@
         }
     },
     "icon": "highway-primary",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Secondary Road",
@@ -464,21 +225,7 @@
         }
     },
     "icon": "highway-secondary",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Tertiary Road",
@@ -490,21 +237,7 @@
         }
     },
     "icon": "highway-tertiary",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Service Road",
@@ -516,21 +249,7 @@
         }
     },
     "icon": "highway-service",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Rail",
@@ -554,21 +273,7 @@
         }
     },
     "icon": "highway-trunk",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Foot path",
@@ -580,21 +285,7 @@
         }
     },
     "icon": "highway-footway",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": []
 },
 {
     "title": "Cycle path",
@@ -606,21 +297,7 @@
         }
     },
     "icon": "highway-cycleway",
-    "form": [
-    {
-        "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
-    },
-    {
-        "key": "access",
-        "type": "combo"
-    },
-    {
-        "key": "maxspeed",
-        "type": "combo"
-    }
-    ]
+    "form": ["oneway", "access", "maxspeed"]
 },
 {
     "title": "Basketball court",
@@ -633,12 +310,7 @@
         }
     },
     "icon": "basketball",
-    "form": [
-    {
-        "key": "surface",
-        "type": "combo"
-    }
-    ]
+    "form": ["surface"]
 },
 {
     "title": "Building",
@@ -650,18 +322,6 @@
         }
     },
     "icon": "warehouse",
-    "form": [
-    {
-        "key": "building",
-        "type": "combo",
-        "default": {
-            "area": "yes"
-        }
-    },
-    {
-        "type": "address",
-        "title": "Address"
-    }
-    ]
+    "form": ["building", "address"]
 }
 ]

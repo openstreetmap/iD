@@ -163,7 +163,7 @@
         <script src='js/id/presets.js'></script>
         <script src='js/id/presets/preset.js'></script>
         <script src='js/id/presets/category.js'></script>
-        <script src='js/id/presets/presets.js'></script>
+        <script src='js/id/presets/collection.js'></script>
 
         <script src='js/id/connection.js'></script>
         <script src='js/id/validate.js'></script>
@@ -193,7 +193,8 @@
 
             var id = iD();
 
-            iD.util.asyncMap(['keys.json', 'presets/presets.json', 'presets/defaults.json', 'presets/categories.json'], d3.json, function(err, data) {
+            iD.util.asyncMap(['keys.json', 'presets/presets.json', 'presets/defaults.json',
+            'presets/categories.json', 'presets/forms.json'], d3.json, function(err, data) {
                 id.connection()
                     .keys(data[0]);
 
@@ -201,7 +202,8 @@
                     .load({
                         presets: data[1],
                         defaults: data[2],
-                        categories: data[3]
+                        categories: data[3],
+                        forms: data[4]
                     });
 
                 d3.select("#iD")

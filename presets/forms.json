@@ -1,0 +1,81 @@
+{
+    "cuisine": {
+        "key": "cuisine",
+        "type": "combo",
+        "indexed": true
+    },
+    "internet_access": {
+        "key": "internet_access",
+        "title": "Internet Access",
+        "type": "select",
+        "options": ["yes", "no", "wlan", "wired", "terminal"]
+    },
+    "building_area": {
+        "key": "building",
+        "type": "select",
+        "default": { "area": "yes" },
+        "options": ["yes", "no"]
+    },
+    "address": {
+        "type": "address",
+        "title": "Address"
+    },
+    "operator": {
+        "key": "operator",
+        "type": "text"
+    },
+    "religion": {
+        "key": "religion",
+        "type": "select",
+        "options": ["christian", "muslim", "buddhist", "jewish", "hindu", "shinto", "taoist"]
+    },
+    "denomination": {
+        "key": "denomination",
+        "type": "combo"
+    },
+    "building": {
+        "key": "building",
+        "type": "combo"
+    },
+    "fee": {
+        "key": "fee",
+        "type": "select",
+        "options": ["yes", "no"]
+    },
+    "access": {
+        "key": "access",
+        "type": "combo"
+    },
+    "atm": {
+        "key": "atm",
+        "type": "select",
+        "options": ["yes", "no"]
+    },
+    "shelter": {
+        "key": "shelter",
+        "type": "select",
+        "options": ["yes", "no"]
+    },
+    "emergency": {
+        "key": "emergency",
+        "type": "select",
+        "options": ["yes", "no"]
+    },
+    "oneway": {
+        "key": "oneway",
+        "type": "select",
+        "options": ["yes", "no"]
+    },
+    "access": {
+        "key": "access",
+        "type": "combo"
+    },
+    "maxspeed": {
+        "key": "maxspeed",
+        "type": "combo"
+    },
+    "surface": {
+        "key": "surface",
+        "type": "combo"
+    }
+}
