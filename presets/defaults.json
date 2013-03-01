@@ -1,0 +1,47 @@
+{
+    "area": [
+        "building",
+        "park",
+        "water",
+        "parking",
+        "hospital",
+        "place of worship",
+        "cafe",
+        "restaurant",
+        "bar",
+        "fast food",
+        "bank",
+        "other"
+    ],
+    "line": [
+        "residential road",
+        "primary road",
+        "secondary road",
+        "tertiary road",
+        "foot path",
+        "cycle path",
+        "motorway",
+        "trunk highway",
+        "service road",
+        "river",
+        "rail",
+        "other"
+    ],
+    "point": [
+        "bus stop",
+        "park",
+        "hospital",
+        "place of worship",
+        "cafe",
+        "restaurant",
+        "bar",
+        "fast food",
+        "bank",
+        "cinema",
+        "supermarket",
+        "other"
+    ],
+    "vertex": [
+        "other"
+    ]
+}
