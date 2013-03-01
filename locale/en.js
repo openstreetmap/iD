@@ -194,7 +194,8 @@ locale.en = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
