@@ -1,14 +1,14 @@
 iD.ui.PresetGrid = function(context) {
     var event = d3.dispatch('choose'),
         entity,
-        presetData = context.presetData(),
+        presets = context.presets(),
         taginfo = iD.taginfo();
 
     function presetgrid(selection, preset) {
 
         selection.html('');
 
-        var viable = presetData.match(entity);
+        presets = presets.matchType(entity);
 
         var messagewrap = selection.append('div')
             .attr('class', 'message inspector-inner fillL');
@@ -21,7 +21,7 @@ iD.ui.PresetGrid = function(context) {
 
         var grid = selection.append('div')
             .attr('class', 'preset-grid fillD inspector-body ' + entity.geometry(context.graph()))
-            .call(drawGrid, filter(''));
+            .call(drawGrid, context.presets().defaults(entity));
 
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
@@ -31,11 +31,15 @@ iD.ui.PresetGrid = function(context) {
                 if (d3.event.keyCode === 13) {
                     choose(grid.selectAll('.grid-entry:first-child').datum());
                 } else {
-                    var value = search.property('value'),
-                        presets = filter(value);
-                    message.text(t('inspector.results', {n: presets.length, search: value}));
-                    grid.call(drawGrid, presets);
-                    grid.classed('filtered', value.length);
+                    var value = search.property('value');
+                    if (value.length) {
+                        var results = presets.search(value);
+                        message.text(t('inspector.results', {n: results.length, search: value}));
+                        grid.call(drawGrid, results);
+                        grid.classed('filtered', value.length);
+                    } else {
+                        grid.call(drawGrid, context.presets().defaults(entity));
+                    }
                 }
             });
         search.node().focus();
@@ -45,31 +49,6 @@ iD.ui.PresetGrid = function(context) {
                 .attr('class', 'inspector-actions pad1 fillD col12')
                 .call(drawButtons);
         }
-
-        function filter(value) {
-            if (!value) return presetData.defaults(entity);
-
-            value = value.toLowerCase();
-
-            // Uses levenshtein distance, with a couple of hacks
-            // to prioritize exact substring matches
-            return viable.sort(function(a, b) {
-                var ia = a.name.indexOf(value) >= 0,
-                    ib = b.name.indexOf(value) >= 0;
-
-                if (ia && !ib) {
-                    return -1;
-                } else if (ib && !ia) {
-                    return 1;
-                }
-
-                return iD.util.editDistance(value, a.name) - iD.util.editDistance(value, b.name);
-            }).filter(function(d) {
-                return iD.util.editDistance(value, d.name) - d.name.length + value.length < 3 ||
-                    d.name === 'other';
-            });
-        }
-
 
         function choose(d) {
             // Category
@@ -90,7 +69,7 @@ iD.ui.PresetGrid = function(context) {
 
             var entries = selection
                 .selectAll('button.grid-entry')
-                .data(presets.slice(0, 12), name);
+                .data(presets.collection.slice(0, 12), name);
 
             var entered = entries.enter()
                 .append('button')

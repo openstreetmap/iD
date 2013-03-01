@@ -96,10 +96,10 @@ window.iD = function () {
     context.zoomOut = map.zoomOut;
 
     /* Presets */
-    var presetData = iD.presetData();
+    var presets = iD.presets(context);
 
-    context.presetData = function() {
-        return presetData;
+    context.presets = function() {
+        return presets;
     };
 
     context.container = function(_) {

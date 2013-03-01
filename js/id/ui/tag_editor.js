@@ -1,6 +1,6 @@
 iD.ui.TagEditor = function(context) {
     var event = d3.dispatch('changeTags', 'choose', 'close'),
-        presetData = context.presetData(),
+        presets = context.presets(),
         entity,
         tags,
         name,
@@ -44,7 +44,7 @@ iD.ui.TagEditor = function(context) {
             }
         }
 
-        presetMatch = preset || presetMatch || presetData.matchTags(entity);
+        presetMatch = preset || presetMatch || presets.matchType(entity).matchTags(entity);
 
         selection.html('');
 
@@ -163,7 +163,7 @@ iD.ui.TagEditor = function(context) {
             if (presetUI && tagList) {
 
                 // change preset if necessary (undos/redos)
-                var newmatch = presetData.matchTags(entity.update({ tags: tags }));
+                var newmatch = presets.matchType(entity).matchTags(entity.update({ tags: tags }));
                 if (newmatch !== presetMatch) {
                     return tageditor(selection_, newmatch);
                 }
