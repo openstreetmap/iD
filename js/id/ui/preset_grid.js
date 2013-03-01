@@ -33,7 +33,7 @@ iD.ui.PresetGrid = function(context) {
                 } else {
                     var value = search.property('value'),
                         presets = filter(value);
-                    message.text('' + presets.length + ' results for ' + value);
+                    message.text(t('inspector.results', {n: presets.length, search: value}));
                     grid.call(drawGrid, presets);
                     grid.classed('filtered', value.length);
                 }
