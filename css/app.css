@@ -785,6 +785,7 @@ div.combobox {
 }
 
 .grid-entry .preset-help {
+    display:none;
     position: absolute;
     bottom: 0px;
     right: 0px;

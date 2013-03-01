@@ -37,6 +37,11 @@
         "key": "building",
         "type": "combo"
     },
+    "building_yes": {
+        "key": "building",
+        "type": "combo",
+        "default": { "area": "yes" }
+    },
     "fee": {
         "key": "fee",
         "type": "select",
