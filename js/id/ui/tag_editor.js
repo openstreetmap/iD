@@ -44,7 +44,7 @@ iD.ui.TagEditor = function(context) {
             }
         }
 
-        presetMatch = preset || presetMatch || presets.matchType(entity).matchTags(entity);
+        presetMatch = preset || presetMatch || presets.matchType(entity, context.graph()).matchTags(entity);
 
         selection.html('');
 
@@ -163,7 +163,7 @@ iD.ui.TagEditor = function(context) {
             if (presetUI && tagList) {
 
                 // change preset if necessary (undos/redos)
-                var newmatch = presets.matchType(entity).matchTags(entity.update({ tags: tags }));
+                var newmatch = presets.matchType(entity, context.graph()).matchTags(entity.update({ tags: tags }));
                 if (newmatch !== presetMatch) {
                     return tageditor(selection_, newmatch);
                 }

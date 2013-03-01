@@ -1,21 +1,8 @@
-iD.presets.Collection = function(context, collection) {
+iD.presets.Collection = function(collection) {
 
     var presets = {
 
         collection: collection,
-
-        load: function(_) {
-            if (_.presets) {
-                _.presets.forEach(function(d) {
-                    collection.push(iD.presets.Preset(d));
-                });
-            }
-            if (_.categories) {
-                _.categories.forEach(function(d) {
-                    collection.push(iD.presets.Category(d, presets));
-                });
-            }
-        },
 
         item: function(id) {
             return _.find(collection, function(d) {
@@ -23,12 +10,12 @@ iD.presets.Collection = function(context, collection) {
             });
         },
 
-        matchType: function(entity) {
+        matchType: function(entity, resolver) {
             var newcollection = collection.filter(function(d) {
-                return d.matchType(entity, context.graph());
+                return d.matchType(entity, resolver);
             });
 
-            return iD.presets.Collection(context, newcollection);
+            return iD.presets.Collection(newcollection);
 
         },
 
@@ -55,7 +42,7 @@ iD.presets.Collection = function(context, collection) {
 
             // Uses levenshtein distance, with a couple of hacks
             // to prioritize exact substring matches
-            return iD.presets.Collection(context, collection.sort(function(a, b) {
+            return iD.presets.Collection(collection.sort(function(a, b) {
                 var ia = a.name.indexOf(value) >= 0,
                     ib = b.name.indexOf(value) >= 0;
 
