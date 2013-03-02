@@ -76,6 +76,14 @@ iD.ui.preset = function(context) {
                     .attr('id', 'input-' + d.key)
                     .attr('placeholder', 'http://example.com/');
                 break;
+            case 'check':
+                wrap = this.append('span').attr('class', 'input-wrap-position'),
+                i = wrap.append('input').attr('type', 'text');
+                var check = d3.checkselect().on('change', key);
+                wrap.call(check);
+                event.on('setTags.' + d.key, check.update);
+                break;
+
             case 'select':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
                 i = wrap.append('input').attr('type', 'text');
