@@ -221,18 +221,7 @@ _gaq.push(['_trackPageview']);
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-
-  // javascript errors
-  var lastev = '';
-  window.onerror = function(message, file, lineNumber) {
-      var ev = ['_trackEvent', 'error', file + ':' + lineNumber, message + ''];
-      if (ev.join(',') !== lastev) {
-          _gaq.push(ev);
-          lastev = ev.join(',');
-      }
-  };
 })();
-
 </script>
 
 <!-- crazyegg -->
@@ -241,6 +230,12 @@ setTimeout(function(){var a=document.createElement("script");
 var b=document.getElementsByTagName("script")[0];
 a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
 a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+
+<!-- sentry error reporting -->
+<script src="//d3nslu0hdya83q.cloudfront.net/dist/1.0/raven.min.js"></script>
+<script>
+Raven.config('https://af8ce79129b24fa28d91ede59302369c@app.getsentry.com/6009').install();
 </script>
 </body>
 </html>
