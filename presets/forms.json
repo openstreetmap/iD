@@ -12,9 +12,8 @@
     },
     "building_area": {
         "key": "building",
-        "type": "select",
-        "default": { "area": "yes" },
-        "options": ["yes", "no"]
+        "type": "check",
+        "default": { "area": "yes" }
     },
     "address": {
         "type": "address",
@@ -44,8 +43,7 @@
     },
     "fee": {
         "key": "fee",
-        "type": "select",
-        "options": ["yes", "no"]
+        "type": "check"
     },
     "access": {
         "key": "access",
@@ -53,23 +51,19 @@
     },
     "atm": {
         "key": "atm",
-        "type": "select",
-        "options": ["yes", "no"]
+        "type": "check"
     },
     "shelter": {
         "key": "shelter",
-        "type": "select",
-        "options": ["yes", "no"]
+        "type": "check"
     },
     "emergency": {
         "key": "emergency",
-        "type": "select",
-        "options": ["yes", "no"]
+        "type": "check"
     },
     "oneway": {
         "key": "oneway",
-        "type": "select",
-        "options": ["yes", "no"]
+        "type": "check"
     },
     "access": {
         "key": "access",
