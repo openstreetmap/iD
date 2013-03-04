@@ -45,7 +45,9 @@ iD.Graph.prototype = {
             return transients[key];
         }
 
-        return transients[key] = fn.call(entity);
+        transients[key] = fn.call(entity);
+
+        return transients[key];
     },
 
     parentWays: function(entity) {
@@ -75,7 +77,8 @@ iD.Graph.prototype = {
             nodes[i] = this.entity(entity.nodes[i]);
         }
 
-        return (this._childNodes[entity.id] = nodes);
+        this._childNodes[entity.id] = nodes;
+        return this._childNodes[entity.id];
     },
 
     base: function() {

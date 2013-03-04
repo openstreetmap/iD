@@ -58,7 +58,10 @@ iD.svg.Labels = function(projection) {
         var c = textWidthCache[size];
         if (!c) c = textWidthCache[size] = {};
         if (c[text]) return c[text];
-        else if (elem) return c[text] = elem.getComputedTextLength();
+        else if (elem) {
+            c[text] = elem.getComputedTextLength();
+            return c[text];
+        }
         else return size / 3 * 2 * text.length;
     }
 

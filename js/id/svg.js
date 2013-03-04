@@ -28,15 +28,18 @@ iD.svg = {
             }));
 
             if (segments.length === 0) {
-                return (cache[entity.id] = null);
+                cache[entity.id] = null;
+                return cache[entity.id];
             }
 
-            return (cache[entity.id] =
+            cache[entity.id] =
                 segments.map(function(points) {
                     return 'M' + points.map(function(p) {
                         return p[0] + ',' + p[1];
                     }).join('L');
-                }).join(''));
+                }).join('');
+
+            return cache[entity.id];
         };
     },
 
