@@ -6,7 +6,7 @@ describe("iD.svg.LineString", function () {
             graph = iD.Graph([a, b, way]),
             projection = Object;
 
-        expect(iD.svg.LineString(projection, graph)(way)).to.equal("M0,0L2,3");
+        expect(iD.svg.LineString(projection, graph, [10, 10])(way)).to.equal("M0,0L2,3");
     });
 
     it("returns null for an entity with no nodes", function () {
@@ -14,6 +14,6 @@ describe("iD.svg.LineString", function () {
             graph = iD.Graph([way]),
             projection = Object;
 
-        expect(iD.svg.LineString(projection, graph)(way)).to.be.null;
+        expect(iD.svg.LineString(projection, graph, [10, 10])(way)).to.be.null;
     });
 });
