@@ -703,10 +703,16 @@ div.combobox {
 .preset-input .addr-number {
     width: 20%;
     border-right: none;
+    border-bottom: none;
 }
 
 .preset-input .addr-street {
     width: 80%;
+    border-bottom: none;
+}
+
+.preset-input .addr-city {
+    width:100%;
 }
 
 /* tag editor */
