@@ -59,8 +59,16 @@ iD.ui.preset.address = function(context) {
 
         streetwrap.append('input')
             .property('type', 'text')
-            .attr('placeholder', 'Oak Street')
+            .attr('placeholder', 'Street')
             .attr('class', 'addr-street')
+            .on('blur', change)
+            .on('change', change);
+
+        selection.append('input')
+            .property('type', 'text')
+            .attr('placeholder', 'City')
+            .attr('class', 'addr-city')
+            .datum({ 'key': 'addr:city' })
             .on('blur', change)
             .on('change', change);
 
