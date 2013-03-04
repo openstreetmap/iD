@@ -559,10 +559,19 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* preset form */
 
+
 .inspector-body .name-help,
 .inspector-body .type-help {
   position: absolute;
   right: -10px;
+}
+
+.inspector-body.line .type button {
+    height: 100px;
+}
+
+.inspector-body .type button {
+    height: 70px;
 }
 
 .inspector-body .head .name {
