@@ -4,11 +4,9 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    if (!initial) {
-        initial = singular() && !_.without(Object.keys(singular().tags), 'area').length;
-    }
+    var showgrid = singular() && !_.without(Object.keys(singular().tags), 'area').length;
 
-    var inspector = iD.ui.Inspector(context).initial(!!initial),
+    var inspector = iD.ui.Inspector(context).initial(showgrid),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
