@@ -1,6 +1,5 @@
 [
 {
-    "title": "Cafe",
     "name": "cafe",
     "match": {
         "type": ["point", "area"],
@@ -12,7 +11,6 @@
     "form": ["cuisine", "internet_access", "building_area", "address"]
 },
 {
-    "title": "Park",
     "name": "park",
     "match": {
         "type": ["point", "area"],
@@ -24,7 +22,6 @@
     "form": []
 },
 {
-    "title": "Water",
     "name": "water",
     "match": {
         "type": ["point", "area"],
@@ -36,7 +33,6 @@
     "form": []
 },
 {
-    "title": "Supermarket",
     "name": "supermarket",
     "match": {
         "type": ["point", "area"],
@@ -48,7 +44,6 @@
     "form": ["operator", "building_area", "address"]
 },
 {
-    "title": "Restaurant",
     "name": "restaurant",
     "match": {
         "type": ["point", "area"],
@@ -60,7 +55,6 @@
     "form": ["cuisine", "building_area", "address"]
 },
 {
-    "title": "Place of worship",
     "name": "place of worship",
     "match": {
         "type": ["point", "area"],
@@ -72,7 +66,6 @@
     "form": ["religion", "denomination", "building_area", "address"]
 },
 {
-    "title": "School",
     "name": "school",
     "match": {
         "type": ["point", "area"],
@@ -84,7 +77,6 @@
     "form": ["operator", "building", "address"]
 },
 {
-    "title": "Parking",
     "name": "parking",
     "match": {
         "type": ["point", "area"],
@@ -96,7 +88,6 @@
     "form": ["fee", "access", "address"]
 },
 {
-    "title": "Bank",
     "name": "bank",
     "match": {
         "type": ["point", "area"],
@@ -108,7 +99,6 @@
     "form": ["atm", "building_area", "address"]
 },
 {
-    "title": "Fast food",
     "name": "fast food",
     "match": {
         "type": ["point", "area"],
@@ -120,7 +110,6 @@
     "form": ["cuisine", "building_area", "address"]
 },
 {
-    "title": "Bar",
     "name": "bar",
     "match": {
         "type": ["point", "area"],
@@ -132,7 +121,6 @@
     "form": ["building_area", "address"]
 },
 {
-    "title": "Bus stop",
     "name": "bus stop",
     "match": {
         "type": ["point"],
@@ -144,7 +132,6 @@
     "form": ["operator", "shelter"]
 },
 {
-    "title": "Cinema",
     "name": "cinema",
     "match": {
         "type": ["point", "area"],
@@ -156,7 +143,6 @@
     "form": ["building_area", "address"]
 },
 {
-    "title": "Hospital",
     "name": "hospital",
     "match": {
         "type": ["point", "area"],
@@ -168,7 +154,61 @@
     "form": ["emergency", "building_area", "address"]
 },
 {
-    "title": "River",
+    "name": "pharmacy",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "amenity": "pharmacy"
+        }
+    },
+    "icon": "police",
+    "form": ["dispensing", "operator", "building_area", "address"]
+},
+{
+    "name": "fire station",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "amenity": "fire_station"
+        }
+    },
+    "icon": "fire-station",
+    "form": ["operator", "building_area", "address"]
+},
+{
+    "name": "police",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "amenity": "police"
+        }
+    },
+    "icon": "pharmacy",
+    "form": ["operator", "building_area", "address"]
+},
+{
+    "name": "museum",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "tourism": "museum"
+        }
+    },
+    "icon": "museum",
+    "form": ["operator", "building_area", "address"]
+},
+{
+    "name": "golf course",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "leisure": "golf_course"
+        }
+    },
+    "icon": "golf",
+    "form": ["operator", "address"]
+},
+{
     "name": "river",
     "match": {
         "type": ["line"],
@@ -191,7 +231,6 @@
     "form": ["layer"]
 },
 {
-    "title": "Motorway",
     "name": "motorway",
     "match": {
         "type": ["line"],
@@ -203,7 +242,6 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
-    "title": "Residential road",
     "name": "residential road",
     "match": {
         "type": ["line"],
@@ -215,7 +253,6 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
-    "title": "Primary Road",
     "name": "primary road",
     "match": {
         "type": ["line"],
@@ -227,7 +264,6 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
-    "title": "Secondary Road",
     "name": "secondary road",
     "match": {
         "type": ["line"],
@@ -239,7 +275,6 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
-    "title": "Tertiary Road",
     "name": "tertiary road",
     "match": {
         "type": ["line"],
@@ -251,7 +286,6 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
-    "title": "Service Road",
     "name": "service road",
     "match": {
         "type": ["line"],
@@ -263,7 +297,6 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
-    "title": "Rail",
     "name": "rail",
     "match": {
         "type": ["line"],
@@ -275,7 +308,17 @@
     "form": []
 },
 {
-    "title": "Trunk highway",
+    "name": "subway",
+    "match": {
+        "type": ["line"],
+        "tags": {
+            "railway": "subway"
+        }
+    },
+    "icon": "railway-rail",
+    "form": []
+},
+{
     "name": "trunk highway",
     "match": {
         "type": ["line"],
@@ -287,7 +330,6 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
-    "title": "Foot path",
     "name": "foot path",
     "match": {
         "type": ["line"],
@@ -299,7 +341,6 @@
     "form": []
 },
 {
-    "title": "Cycle path",
     "name": "cycle path",
     "match": {
         "type": ["line"],
@@ -368,7 +409,6 @@
     "form": ["surface"]
 },
 {
-    "title": "Building",
     "name": "building",
     "match": {
         "type": ["area"],
