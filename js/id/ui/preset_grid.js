@@ -60,6 +60,22 @@ iD.ui.PresetGrid = function(context) {
                 .call(drawButtons);
         }
 
+        function choose(d) {
+            // Category
+            if (d.members) {
+                search.property('value', '');
+                presets = d.members;
+                drawGrid(grid, presets);
+
+            // Preset
+            } else {
+                context.presets().choose(d);
+                event.choose(d);
+            }
+        }
+
+        function name(d) { return d.name; }
+
         function drawGrid(selection, presets) {
 
             var entries = selection
@@ -145,24 +161,7 @@ iD.ui.PresetGrid = function(context) {
 
             entries.exit().remove();
             entries.order();
-
-            function choose(d) {
-                // Category
-                if (d.members) {
-                    search.property('value', '');
-                    presets = d.members;
-                    drawGrid(selection, presets);
-
-                // Preset
-                } else {
-                    context.presets().choose(d);
-                    event.choose(d);
-                }
-            }
-
-            function name(d) { return d.name; }
-
-            }
+        }
     }
 
     function cancel() {
