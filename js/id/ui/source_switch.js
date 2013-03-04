@@ -4,11 +4,11 @@ iD.ui.SourceSwitch = function(context) {
 
         var live = d3.select(this).classed('live');
 
-        context.map()
-            .flush();
-
         context.connection()
             .url(live ? 'http://api06.dev.openstreetmap.org' : 'http://www.openstreetmap.org');
+
+        context.map()
+            .flush();
 
         d3.select(this)
             .text(live ? t('source_switch.dev') : t('source_switch.live'))
