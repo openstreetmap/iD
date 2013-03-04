@@ -588,6 +588,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .preset-label {
     padding: 5px;
+    text-align: right;
 }
 
 .preset-fav button.fav {
