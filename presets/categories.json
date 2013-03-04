@@ -3,11 +3,17 @@
     "match": {
         "type": "line"
     },
-    "icon": "road",
+    "icon": "highway",
     "name": "roads",
     "members": [
         "residential road",
-        "primary road"
+        "primary road",
+        "secondary road",
+        "tertiary road",
+        "motorway",
+        "trunk highway",
+        "service road",
+        "other"
     ]
 }
 ]
