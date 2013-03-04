@@ -21,7 +21,7 @@ iD.ui.PresetGrid = function(context) {
 
         var grid = selection.append('div')
             .attr('class', 'preset-grid fillD inspector-body ' + entity.geometry(context.graph()))
-            .call(drawGrid, context.presets().defaults(entity));
+            .call(drawGrid, context.presets().defaults(entity, 12));
 
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
@@ -48,7 +48,7 @@ iD.ui.PresetGrid = function(context) {
                         message.text(t('inspector.results', {n: results.collection.length, search: value}));
                         grid.call(drawGrid, results);
                     } else {
-                        grid.call(drawGrid, context.presets().defaults(entity));
+                        grid.call(drawGrid, context.presets().defaults(entity, 12));
                     }
                 }
             });
@@ -69,6 +69,7 @@ iD.ui.PresetGrid = function(context) {
 
             // Preset
             } else {
+                context.presets().choose(d);
                 event.choose(d);
             }
         }
