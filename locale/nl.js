@@ -111,7 +111,17 @@ locale.nl = {
                 point: "Punt verschoven.",
                 vertex: "Knoop van een weg verschoven.",
                 line: "Lijn verschoven.",
-                area: "Vlak verschoven."
+                area: "Vlak verschoven.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.nl = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.nl = {
     },
 
     zoom: {
-        in: "Inzoomen",
+        'in': "Inzoomen",
         out: "Uitzoomen"
     }
 };

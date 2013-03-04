@@ -111,7 +111,17 @@ locale.pl = {
                 point: "Przesunięto punkt.",
                 vertex: "Przesunięto węzeł drogi.",
                 line: "Przesunięto linię.",
-                area: "Przesunięto obszar."
+                area: "Przesunięto obszar.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.pl = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.pl = {
     },
 
     zoom: {
-        in: "Powiększ",
+        'in': "Powiększ",
         out: "Zmniejsz"
     }
 };

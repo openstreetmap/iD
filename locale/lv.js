@@ -111,7 +111,17 @@ locale.lv = {
                 point: "Punkts pārvietots.",
                 vertex: "Mezgls pārvietots.",
                 line: "Līnija pārvietota.",
-                area: "Apgabals pārvietots."
+                area: "Apgabals pārvietots.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.lv = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.lv = {
     },
 
     zoom: {
-        in: "Pietuvināt",
+        'in': "Pietuvināt",
         out: "Attālināt"
     }
 };

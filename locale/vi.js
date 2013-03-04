@@ -115,6 +115,15 @@ locale.vi = {
                 multiple: "Di chuyển hơn một đối tượng."
             }
         },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
+            }
+        },
         reverse: {
             title: "Đảo ngược",
             description: "Làm cho đường kẻ này hướng về phía ngược.",

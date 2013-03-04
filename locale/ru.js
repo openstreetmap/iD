@@ -111,7 +111,17 @@ locale.ru = {
                 point: "Смещена точка.",
                 vertex: "Смещена точка линии.",
                 line: "Смещена линия.",
-                area: "Смещён контур."
+                area: "Смещён контур.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.ru = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.ru = {
     },
 
     zoom: {
-        in: "Приблизить",
+        'in': "Приблизить",
         out: "Отдалить"
     }
 };
