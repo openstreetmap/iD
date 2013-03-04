@@ -111,7 +111,17 @@ locale.de = {
                 point: "Punkt verschoben.",
                 vertex: "Stützpunkt in einen Weg veschoben.",
                 line: "Linie verschoben.",
-                area: "Fläche verschoben."
+                area: "Fläche verschoben.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.de = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.de = {
     },
 
     zoom: {
-        in: "Hineinzoomen",
+        'in': "Hineinzoomen",
         out: "Herauszoomen"
     }
 };

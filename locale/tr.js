@@ -111,7 +111,17 @@ locale.tr = {
                 point: "Bir nokta taşındı.",
                 vertex: "Yoldan bir nokta taşındı.",
                 line: "Bir çizgi taşındı.",
-                area: "Bir alan taşındı."
+                area: "Bir alan taşındı.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.tr = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.tr = {
     },
 
     zoom: {
-        in: "Yaklaş",
+        'in': "Yaklaş",
         out: "Uzaklaş"
     }
 };
