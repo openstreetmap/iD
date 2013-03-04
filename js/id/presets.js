@@ -54,7 +54,9 @@ iD.presets = function(context) {
     };
 
     all.choose = function(preset) {
-        recent = iD.presets.Collection(_.unique([preset].concat(recent.collection)));
+        if (preset !== other) {
+            recent = iD.presets.Collection(_.unique([preset].concat(recent.collection)));
+        }
         return all;
     };
 
