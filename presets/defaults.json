@@ -14,17 +14,12 @@
         "other"
     ],
     "line": [
-        "residential road",
-        "primary road",
-        "secondary road",
-        "tertiary road",
+        "roads",
         "foot path",
         "cycle path",
-        "motorway",
-        "trunk highway",
-        "service road",
-        "river",
         "rail",
+        "river",
+        "stream",
         "other"
     ],
     "point": [

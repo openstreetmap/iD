@@ -84,5 +84,9 @@
     "surface": {
         "key": "surface",
         "type": "combo"
+    },
+    "layer": {
+        "key": "layer",
+        "type": "combo"
     }
 }

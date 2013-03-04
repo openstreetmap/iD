@@ -180,6 +180,17 @@
     "form": []
 },
 {
+    "name": "stream",
+    "match": {
+        "type": ["line"],
+        "tags": {
+            "waterway": "stream"
+        }
+    },
+    "icon": "waterway-river",
+    "form": ["layer"]
+},
+{
     "title": "Motorway",
     "name": "motorway",
     "match": {
