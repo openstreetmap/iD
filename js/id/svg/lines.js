@@ -33,8 +33,12 @@ iD.svg.Lines = function(projection) {
         return as - bs;
     }
 
-    return function drawLines(surface, graph, entities, filter) {
+    return function drawLines(surface, graph, entities, filter, dimensions) {
         function drawPaths(group, lines, filter, klass, lineString) {
+            lines = lines.filter(function(line) {
+                return lineString(line);
+            });
+
             var tagClasses = iD.svg.TagClasses();
 
             if (klass === 'stroke') {
@@ -82,7 +86,7 @@ iD.svg.Lines = function(projection) {
 
         lines.sort(waystack);
 
-        var lineString = iD.svg.LineString(projection, graph);
+        var lineString = iD.svg.LineString(projection, graph, dimensions);
 
         var shadow = surface.select('.layer-shadow'),
             casing = surface.select('.layer-casing'),
