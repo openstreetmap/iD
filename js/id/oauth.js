@@ -1,5 +1,6 @@
 iD.OAuth = function(context) {
-    var baseurl = 'http://www.openstreetmap.org',
+    var ohauth = require('ohauth'),
+        baseurl = 'http://www.openstreetmap.org',
         o = {},
         keys,
         oauth = {};
