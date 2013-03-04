@@ -15,7 +15,8 @@ iD.presets = function(context) {
         },
         all = iD.presets.Collection([iD.presets.Preset(other)]),
         defaults = { area: all, line: all, point: all, vertex: all },
-        forms = {};
+        forms = {},
+        recent = iD.presets.Collection([]);
 
     all.load = function(d) {
 
@@ -46,8 +47,15 @@ iD.presets = function(context) {
         }
     };
 
-    all.defaults = function(entity) {
-        return defaults[entity.geometry(context.graph())];
+    all.defaults = function(entity, n) {
+        var rec = recent.matchType(entity, context.graph()).collection.slice(0, 4),
+            def = defaults[entity.geometry(context.graph())].collection.slice(0, n - rec.length - 1);
+        return iD.presets.Collection(_.unique(rec.concat(def).concat(other)));
+    };
+
+    all.choose = function(preset) {
+        recent = iD.presets.Collection(_.unique([preset].concat(recent.collection)));
+        return all;
     };
 
 
