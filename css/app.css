@@ -676,10 +676,10 @@ div.combobox {
 
 .checkselect label:hover {
     cursor: pointer;
+    background: #eee;
 }
 
 .checkselect .set {
-    background: #eee;
     color: inherit;
 }
 
