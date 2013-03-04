@@ -49,7 +49,7 @@ iD.presets = function(context) {
 
     all.defaults = function(entity, n) {
         var rec = recent.matchType(entity, context.graph()).collection.slice(0, 4),
-            def = defaults[entity.geometry(context.graph())].collection.slice(0, n - rec.length - 1);
+            def = _.uniq(rec.concat(defaults[entity.geometry(context.graph())].collection)).slice(0, n - 1);
         return iD.presets.Collection(_.unique(rec.concat(def).concat(other)));
     };
 
