@@ -5,11 +5,11 @@ iD.BackgroundSource.template = function(data) {
     var generator = function(coord) {
         var u = '';
         for (var zoom = coord[2]; zoom > 0; zoom--) {
-            var byte = 0;
+            var b = 0;
             var mask = 1 << (zoom - 1);
-            if ((coord[0] & mask) !== 0) byte++;
-            if ((coord[1] & mask) !== 0) byte += 2;
-            u += byte.toString();
+            if ((coord[0] & mask) !== 0) b++;
+            if ((coord[1] & mask) !== 0) b += 2;
+            u += b.toString();
         }
 
         return data.template
