@@ -73,7 +73,7 @@ locale.pl = {
         'delete': {
             title: "Usuń",
             description: "Usuń to z mapy.",
-            key: "⌫",
+            key: "⌦",
             annotation: {
                 point: "Usunięto punkt.",
                 vertex: "Usunięto węzeł z drogi.",

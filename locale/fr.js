@@ -73,7 +73,7 @@ locale.fr = {
         'delete': {
             title: "Supprimer",
             description: "Supprime l'élément de la carte.",
-            key: "⌫",
+            key: "⌦",
             annotation: {
                 point: "Supprime un point.",
                 vertex: "Supprime le noeud d'une ligne.",

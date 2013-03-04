@@ -73,7 +73,7 @@ locale.da = {
         'delete': {
             title: "Slet",
             description: "Fjern dette fra kortet.",
-            key: "⌫",
+            key: "⌦",
             annotation: {
                 point: "Slettede et punkt.",
                 vertex: "Slettede en node fra en vej.",
