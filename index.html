@@ -13,10 +13,12 @@
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 
-        <script src='js/lib/lodash.js'></script>
+        <script src='js/lib/bundle.js'></script>
+        <script>
+            var _ = require('lodash');
+        </script>
         <script src='js/lib/d3.v3.js'></script>
         <script src='js/lib/sha.js'></script>
-        <script src='js/lib/ohauth.js'></script>
         <script src='js/lib/jxon.js'></script>
         <script src='js/lib/d3.typeahead.js'></script>
         <script src='js/lib/d3.combobox.js'></script>
@@ -28,7 +30,6 @@
         <script src='js/lib/d3-compat.js'></script>
         <script src='js/lib/bootstrap-tooltip.js'></script>
         <script src='js/lib/rtree.js'></script>
-        <script src='js/lib/simplify.js'></script>
 
         <script src='js/id/id.js'></script>
         <script src='js/id/util.js'></script>

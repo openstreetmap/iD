@@ -1,5 +1,7 @@
 iD.actions.Simplify = function(wayId, projection) {
-    
+
+    var simplify = require('simplify');
+
     function closestIndex(nodes, loc) {
         var idx, min = Infinity, dist;
         for (var i = 0; i < nodes.length; i++) {
@@ -13,7 +15,7 @@ iD.actions.Simplify = function(wayId, projection) {
     }
 
     // Handles two corner cases
-    // 
+    //
     // 1. Reuse as many old nodes as possible
     // 2. Don't move or eliminate any nodes that have more than one
     //    parent way.

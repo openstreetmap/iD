@@ -22,5 +22,10 @@
   "devDependencies": {
     "uglify-js": "~2.2.2",
     "mocha-phantomjs": "~1.1.1"
+  },
+  "dependencies": {
+    "simplify-js": "~1.0.0",
+    "ohauth": "0.0.0",
+    "lodash": "~1.0.1"
   }
 }

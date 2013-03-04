@@ -10,6 +10,11 @@ all: \
 	iD.js \
 	iD.min.js
 
+js/lib/bundle.js: package.json
+	browserify -r simplify-js \
+		-r ohauth \
+		-r lodash > js/lib/bundle.js
+
 .INTERMEDIATE iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
@@ -21,9 +26,8 @@ all: \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
 	js/lib/jxon.js \
-	js/lib/lodash.js \
-	js/lib/ohauth.js \
 	js/lib/rtree.js \
+	js/lib/bundle.js \
 	js/lib/sha.js \
 	js/id/start.js \
 	js/id/id.js \
