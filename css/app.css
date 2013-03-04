@@ -670,6 +670,7 @@ div.combobox {
     display: block;
     padding: 5px;
     width: 100%;
+    box-sizing: border-box;
     color: #999;
 }
 

@@ -189,7 +189,7 @@
         }
     },
     "icon": "highway-motorway",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "title": "Residential road",
@@ -201,7 +201,7 @@
         }
     },
     "icon": "highway-residential",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "title": "Primary Road",
@@ -213,7 +213,7 @@
         }
     },
     "icon": "highway-primary",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "title": "Secondary Road",
@@ -225,7 +225,7 @@
         }
     },
     "icon": "highway-secondary",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "title": "Tertiary Road",
@@ -237,7 +237,7 @@
         }
     },
     "icon": "highway-tertiary",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "title": "Service Road",
@@ -249,7 +249,7 @@
         }
     },
     "icon": "highway-service",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "title": "Rail",
@@ -273,7 +273,7 @@
         }
     },
     "icon": "highway-trunk",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "title": "Foot path",
@@ -297,7 +297,7 @@
         }
     },
     "icon": "highway-cycleway",
-    "form": ["oneway", "access", "maxspeed"]
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
     "name": "sport pitch",

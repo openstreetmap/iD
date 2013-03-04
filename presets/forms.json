@@ -65,6 +65,14 @@
         "key": "oneway",
         "type": "check"
     },
+    "bridge": {
+        "key": "bridge",
+        "type": "check"
+    },
+    "tunnel": {
+        "key": "tunnel",
+        "type": "check"
+    },
     "access": {
         "key": "access",
         "type": "combo"
