@@ -73,7 +73,7 @@ locale.vi = {
         'delete': {
             title: "Xóa",
             description: "Xóa đối tượng này khỏi bản đồ.",
-            key: "⌫",
+            key: "⌦",
             annotation: {
                 point: "Xóa địa điểm.",
                 vertex: "Xóa nốt khỏi lối.",

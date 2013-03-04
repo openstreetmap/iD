@@ -73,7 +73,7 @@ locale.lv = {
         'delete': {
             title: "Dzēst",
             description: "Izdzēst no kartes.",
-            key: "⌫",
+            key: "⌦",
             annotation: {
                 point: "Punkts dzēsts.",
                 vertex: "Mezgls dzests.",

@@ -11,6 +11,9 @@ iD.ui.Inspector = function(context) {
 
         var presetGrid = iD.ui.PresetGrid(context)
             .entity(entity)
+            .on('close', function() {
+                event.close();
+            })
             .on('choose', function(preset) {
                 inspectorbody.call(tagEditor, preset);
             });

@@ -73,7 +73,7 @@ locale.ja = {
         'delete': {
             title: "削除",
             description: "この地物をマップから削除",
-            key: "⌫",
+            key: "⌦",
             annotation: {
                 point: "ポイントを削除",
                 vertex: "ウェイ上のノードを削除",

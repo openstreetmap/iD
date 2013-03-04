@@ -73,7 +73,7 @@ locale.en = {
         'delete': {
             title: "Delete",
             description: "Remove this from the map.",
-            key: "⌫",
+            key: "⌦",
             annotation: {
                 point: "Deleted a point.",
                 vertex: "Deleted a node from a way.",

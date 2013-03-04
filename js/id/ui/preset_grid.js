@@ -1,5 +1,5 @@
 iD.ui.PresetGrid = function(context) {
-    var event = d3.dispatch('choose'),
+    var event = d3.dispatch('choose', 'close'),
         entity,
         presets = context.presets(),
         taginfo = iD.taginfo();
@@ -26,6 +26,16 @@ iD.ui.PresetGrid = function(context) {
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
             .attr('type', 'search')
+            .on('keydown', function() {
+                // hack to let delete shortcut work when search is autofocused
+                if (d3.event.keyCode === 46 && search.property('value').length === 0) {
+                    annotation = t('operations.delete.annotation.' + context.geometry(entity.id));
+                    context.perform(
+                        iD.actions.DeleteMultiple([entity.id]),
+                        annotation);
+                    event.close();
+                }
+            })
             .on('keyup', function() {
                 // enter
                 var value = search.property('value');
