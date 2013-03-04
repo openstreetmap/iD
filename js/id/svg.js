@@ -13,22 +13,30 @@ iD.svg = {
         };
     },
 
-    LineString: function(projection, graph) {
+    LineString: function(projection, graph, dimensions) {
         var cache = {};
         return function(entity) {
             if (cache[entity.id] !== undefined) {
                 return cache[entity.id];
             }
 
-            if (entity.nodes.length === 0) {
+            var clip = d3.clip.cohenSutherland()
+                .bounds([0, 0, dimensions[0], dimensions[1]]);
+
+            var segments = clip(graph.childNodes(entity).map(function(n) {
+                return projection(n.loc);
+            }));
+
+            if (segments.length === 0) {
                 return (cache[entity.id] = null);
             }
 
             return (cache[entity.id] =
-                'M' + graph.childNodes(entity).map(function(n) {
-                    var pt = projection(n.loc);
-                    return pt[0] + ',' + pt[1];
-                }).join('L'));
+                segments.map(function(points) {
+                    return 'M' + points.map(function(p) {
+                        return p[0] + ',' + p[1];
+                    }).join('L');
+                }).join(''));
         };
     },
 

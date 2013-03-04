@@ -13,6 +13,7 @@ all: \
 .INTERMEDIATE iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
+	js/lib/d3.clip.js \
 	js/lib/d3.combobox.js \
 	js/lib/d3.geo.tile.js \
 	js/lib/d3.keybinding.js \
