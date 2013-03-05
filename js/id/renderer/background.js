@@ -53,7 +53,7 @@ iD.Background = function() {
             .translate(projection.translate())(),
             requests = [],
             z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),
-            tile_origin = [
+            tileOrigin = [
                 projection.scale() / 2 - projection.translate()[0],
                 projection.scale() / 2 - projection.translate()[1]];
 
@@ -70,7 +70,7 @@ iD.Background = function() {
             return cache[r[3]] !== false;
         });
 
-        var pixeloffset = [
+        var pixelOffset = [
             Math.round(offset[0] * Math.pow(2, z)),
             Math.round(offset[1] * Math.pow(2, z))
         ];
@@ -95,8 +95,8 @@ iD.Background = function() {
             var _ts = tileSize[0] * Math.pow(2, z - d[2]);
             var scale = tileSizeAtZoom(d, z);
             return 'translate(' +
-                (Math.round((d[0] * _ts) - tile_origin[0]) + pixeloffset[0]) + 'px,' +
-                (Math.round((d[1] * _ts) - tile_origin[1]) + pixeloffset[1]) + 'px)' +
+                (Math.round((d[0] * _ts) - tileOrigin[0]) + pixelOffset[0]) + 'px,' +
+                (Math.round((d[1] * _ts) - tileOrigin[1]) + pixelOffset[1]) + 'px)' +
                 'scale(' + scale + ',' + scale + ')';
         }
 
