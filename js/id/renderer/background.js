@@ -46,9 +46,8 @@ iD.Background = function() {
 
     // derive the tiles onscreen, remove those offscreen and position tiles
     // correctly for the currentstate of `projection`
-    function background() {
-        var sel = this,
-            tiles = tile
+    function background(selection) {
+        var tiles = tile
             .scale(projection.scale())
             .scaleExtent((source.data && source.data.scaleExtent) || [1, 17])
             .translate(projection.translate())(),
@@ -85,14 +84,15 @@ iD.Background = function() {
             d3.select(this)
                 .on('load', null)
                 .classed('tile-loaded', true);
-            background.apply(sel);
+            background(selection);
         }
 
         function error(d) {
             cache[d[3]] = false;
-            d3.select(this).on('load', null);
-            d3.select(this).remove();
-            background.apply(sel);
+            d3.select(this)
+                .on('load', null)
+                .remove();
+            background(selection);
         }
 
         function imageTransform(d) {
@@ -104,7 +104,7 @@ iD.Background = function() {
                 'scale(' + scale + ',' + scale + ')';
         }
 
-        var image = this
+        var image = selection
             .selectAll('img')
             .data(requests, function(d) { return d[3]; });
 
