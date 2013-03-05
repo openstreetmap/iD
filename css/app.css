@@ -33,6 +33,9 @@ div, textarea, input, form, span, ul, li, ol, a, button {
 a, button, input, textarea {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
     -webkit-touch-callout:none;
+}
+
+a, button {
     cursor: pointer;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
