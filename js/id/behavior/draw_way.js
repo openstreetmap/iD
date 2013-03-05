@@ -65,7 +65,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .on('finish', drawWay.finish);
 
         context.map()
-            .fastEnable(false)
             .minzoom(16)
             .dblclickEnable(false);
 
@@ -83,7 +82,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             context.pop();
 
         context.map()
-            .fastEnable(true)
             .minzoom(0)
             .tail(false);
 
