@@ -164,6 +164,8 @@ iD.ui.Background = function(context) {
 
         context.map().on('move.background-update', _.debounce(update, 1000));
 
+        update();
+
         var adjustments = content
             .append('div')
             .attr('class', 'adjustments pad1');
@@ -216,7 +218,6 @@ iD.ui.Background = function(context) {
             });
 
         selection.call(clickoutside);
-        selectLayer(context.background().source());
     }
 
     return d3.rebind(background, event, 'on');
