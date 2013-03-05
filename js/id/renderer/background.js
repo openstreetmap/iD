@@ -52,11 +52,7 @@ iD.Background = function() {
             .scaleExtent((source.data && source.data.scaleExtent) || [1, 17])
             .translate(projection.translate())(),
             requests = [],
-            scaleExtent = tile.scaleExtent(),
             z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),
-            rz = Math.max(scaleExtent[0],
-                Math.min(scaleExtent[1], Math.floor(z))),
-            ts = tileSize[0] * Math.pow(2, z - rz),
             tile_origin = [
                 projection.scale() / 2 - projection.translate()[0],
                 projection.scale() / 2 - projection.translate()[1]];
