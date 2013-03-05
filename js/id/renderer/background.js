@@ -1,8 +1,5 @@
 iD.Background = function() {
 
-    var deviceRatio = (window.devicePixelRatio &&
-        window.devicePixelRatio === 2) ? 0.5 : 1;
-        // tileSize = (deviceRatio === 0.5) ? [128,128] : [256,256];
     var tileSize = [256, 256];
 
     var tile = d3.geo.tile(),

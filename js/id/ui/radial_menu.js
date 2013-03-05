@@ -92,7 +92,7 @@ iD.ui.RadialMenu = function(operations) {
         }
     };
 
-    radialMenu.close = function(selection) {
+    radialMenu.close = function() {
         if (menu) {
             menu.transition()
                 .attr('opacity', 0)
