@@ -33,6 +33,17 @@
     "form": []
 },
 {
+    "name": "wetland",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "natural": "wetland"
+        }
+    },
+    "icon": "",
+    "form": []
+},
+{
     "name": "wood",
     "match": {
         "type": ["point", "area"],
