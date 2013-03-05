@@ -73,7 +73,6 @@ locale.it = {
         'delete': {
             title: "Cancella",
             description: "Cancella questo dalla mappa.",
-            key: "⌦",
             annotation: {
                 point: "Cancellato un punto.",
                 vertex: "Cancellato un punto da una linea.",

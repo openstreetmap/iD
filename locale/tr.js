@@ -73,7 +73,6 @@ locale.tr = {
         'delete': {
             title: "Sil",
             description: "Haritan bunu sil.",
-            key: "⌦",
             annotation: {
                 point: "Bir nokta silindi.",
                 vertex: "Yoldan bir nod silindi.",

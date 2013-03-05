@@ -73,7 +73,6 @@ locale.uk = {
         'delete': {
             title: "Вилучити",
             description: "Вилучити об’єкт з мапи.",
-            key: "⌦",
             annotation: {
                 point: "Вилучено точку.",
                 vertex: "Вилучено точку з лінії.",

@@ -16,7 +16,7 @@ iD.operations.Rotate = function(selection, context) {
     };
 
     operation.id = "rotate";
-    operation.key = t('operations.rotate.key');
+    operation.keys = [t('operations.rotate.key')];
     operation.title = t('operations.rotate.title');
     operation.description = t('operations.rotate.description');
 

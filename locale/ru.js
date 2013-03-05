@@ -73,7 +73,6 @@ locale.ru = {
         'delete': {
             title: "Удалить",
             description: "Убрать объект с карты.",
-            key: "⌦",
             annotation: {
                 point: "Удалена точка.",
                 vertex: "Удалёна точка из линии.",

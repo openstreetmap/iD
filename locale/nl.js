@@ -73,7 +73,6 @@ locale.nl = {
         'delete': {
             title: "Verwijderen",
             description: "Verwijder dit van de kaart.",
-            key: "⌦",
             annotation: {
                 point: "Punt verwijderd.",
                 vertex: "Knoop uit een weg verwijderd.",
