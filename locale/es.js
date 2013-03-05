@@ -188,7 +188,7 @@ locale.es = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Fondo", //"Background",
         description: "Configuración de fondo", //"Background Settings",
         percent_brightness: "{opacity}% brillo", //"{opacity}% brightness",

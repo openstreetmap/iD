@@ -1,4 +1,4 @@
-iD.ui.LayerSwitcher = function(context) {
+iD.ui.Background = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         opacities = [1, 0.5, 0];
 
@@ -12,27 +12,29 @@ iD.ui.LayerSwitcher = function(context) {
         });
     }
 
-    function layerswitcher(selection) {
+    function background(selection) {
 
-        var content = selection
-            .append('div').attr('class', 'content fillD map-overlay hide'),
+        var content = selection.append('div')
+                .attr('class', 'content fillD map-overlay hide'),
             shown = false;
 
-        var tooltip = bootstrap.tooltip().placement('right');
+        var tooltip = bootstrap.tooltip()
+            .placement('right');
 
-        var button = selection
-            .append('button')
+        var button = selection.append('button')
             .attr('tabindex', -1)
             .attr('class', 'fillD')
-            .attr('title', t('layerswitcher.description'))
-            .on('click.layerswitcher-toggle', toggle)
+            .attr('title', t('background.description'))
+            .on('click.background-toggle', toggle)
             .call(tooltip);
 
         button.append('span')
             .attr('class', 'layers icon');
 
-        function hide() { setVisible(false); }
-        function toggle() { tooltip.hide(button); setVisible(content.classed('hide')); }
+        function toggle() {
+            tooltip.hide(button);
+            setVisible(content.classed('hide'));
+        }
 
         function setVisible(show) {
             if (show !== shown) {
@@ -42,18 +44,20 @@ iD.ui.LayerSwitcher = function(context) {
             }
         }
 
-        function clickoutside(selection) {
-            selection.on('click.layerswitcher-inside', function() {
-                return d3.event.stopPropagation();
-            });
-            context.container().on('click.layerswitcher-outside', hide);
-        }
+        selection.on('click.background-inside', function() {
+            return d3.event.stopPropagation();
+        });
+
+        context.container().on('click.background-outside', function() {
+            setVisible(false);
+        });
 
         var opa = content
             .append('div')
             .attr('class', 'opacity-options-wrapper');
 
-        opa.append('h4').text(t('layerswitcher.title'));
+        opa.append('h4')
+            .text(t('background.title'));
 
         var opacityList = opa.append('ul')
             .attr('class', 'opacity-options');
@@ -73,18 +77,20 @@ iD.ui.LayerSwitcher = function(context) {
             .data(opacities)
             .enter()
             .append('li')
-                .attr('data-original-title', function(d) {
-                    return t('layerswitcher.percent_brightness', { opacity: (d * 100) });
-                })
-                .on('click.set-opacity', setOpacity)
-                .html("<div class='select-box'></div>")
-                .call(bootstrap.tooltip().placement('top'))
-                .append('div')
-                    .attr('class', 'opacity')
-                    .style('opacity', String);
+            .attr('data-original-title', function(d) {
+                return t('background.percent_brightness', { opacity: (d * 100) });
+            })
+            .on('click.set-opacity', setOpacity)
+            .html("<div class='select-box'></div>")
+            .call(bootstrap.tooltip()
+                .placement('top'))
+            .append('div')
+            .attr('class', 'opacity')
+            .style('opacity', String);
 
         // Make sure there is an active selection by default
-        opa.select('.opacity-options li:nth-child(2)').classed('selected', true);
+        opa.select('.opacity-options li:nth-child(2)')
+            .classed('selected', true);
 
         function selectLayer(d) {
 
@@ -137,32 +143,40 @@ iD.ui.LayerSwitcher = function(context) {
                 .data(getSources(), function(d) {
                     return d.data.name;
                 });
-            layerLinks.exit().remove();
-            var LayerInner = layerLinks.enter()
+
+            var layerInner = layerLinks.enter()
                 .append('li')
-                .append('a')
-                    .attr('data-original-title', function(d) {
-                        return d.data.description || '';
-                    })
-                    .attr('href', '#')
-                    .attr('class', 'layer')
-                    .each(function(d) {
-                        // only set tooltips for layers with tooltips
-                        if (d.data.description) {
-                            d3.select(this).call(bootstrap.tooltip().placement('right'));
-                        }
-                    })
-                    .on('click.set-source', clickSetSource);
-                    LayerInner.insert('span')
-                    .attr('class','icon toggle');
-                    LayerInner.insert('span').text(function(d) {
-                        return d.data.name;
-                    });
+                .append('a');
+
+            layerInner
+                .attr('href', '#')
+                .attr('class', 'layer')
+                .on('click.set-source', clickSetSource);
+
+            // only set tooltips for layers with tooltips
+            layerInner
+                .filter(function(d) { return d.data.description; })
+                .call(bootstrap.tooltip()
+                    .title(function(d) { return d.data.description; })
+                    .placement('right')
+                );
+
+            layerInner.insert('span')
+                .attr('class', 'icon toggle');
+
+            layerInner.insert('span').text(function(d) {
+                return d.data.name;
+            });
+
+            layerLinks.exit()
+                .remove();
 
             selectLayer(context.background().source());
         }
 
-        context.map().on('move.layerswitcher-update', _.debounce(update, 1000));
+        context.map().on('move.background-update', _.debounce(update, 1000));
+
+        update();
 
         var adjustments = content
             .append('div')
@@ -174,23 +188,14 @@ iD.ui.LayerSwitcher = function(context) {
             ['right', [1, 0]],
             ['bottom', [0, 1]]];
 
-        function nudge(d) {
-            context.background().nudge(d[1], context.map().zoom());
-            context.redraw();
-        }
-
         adjustments.append('a')
-            .text(t('layerswitcher.fix_misalignment'))
+            .text(t('background.fix_misalignment'))
             .attr('href', '#')
             .classed('hide-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
                 var exp = d3.select(this).classed('expanded');
-                if (!exp) {
-                    nudge_container.style('display', 'block');
-                } else {
-                    nudge_container.style('display', 'none');
-                }
+                nudge_container.style('display', exp ? 'none' : 'block');
                 d3.select(this).classed('expanded', !exp);
                 d3.event.preventDefault();
             });
@@ -205,19 +210,19 @@ iD.ui.LayerSwitcher = function(context) {
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .text(function(d) { return d[0]; })
-            .on('click', nudge);
+            .on('click', function(d) {
+                context.background().nudge(d[1], context.map().zoom());
+                context.redraw();
+            });
 
         nudge_container.append('button')
-            .text(t('layerswitcher.reset'))
+            .text(t('background.reset'))
             .attr('class', 'reset')
             .on('click', function() {
                 context.background().offset([0, 0]);
                 context.redraw();
             });
-
-        selection.call(clickoutside);
-        selectLayer(context.background().source());
     }
 
-    return d3.rebind(layerswitcher, event, 'on');
+    return d3.rebind(background, event, 'on');
 };

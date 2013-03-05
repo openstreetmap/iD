@@ -57,8 +57,8 @@ iD.ui = function(context) {
             .call(iD.ui.Geocoder(context));
 
         container.append('div')
-            .attr('class', 'map-control layerswitcher-control')
-            .call(iD.ui.LayerSwitcher(context));
+            .attr('class', 'map-control background-control')
+            .call(iD.ui.Background(context));
 
         container.append('div')
             .attr('class', 'map-control geolocate-control')

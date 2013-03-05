@@ -188,7 +188,7 @@ locale.uk = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Фон",
         description: "Налаштування фону",
         percent_brightness: "прозорість {opacity}%",

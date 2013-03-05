@@ -188,7 +188,7 @@ locale.vi = {
         results: "{n} kết quả cho {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Hình nền",
         description: "Tùy chọn Hình nền",
         percent_brightness: "Sáng {opacity}%",

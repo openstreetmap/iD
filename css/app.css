@@ -963,9 +963,9 @@ div.combobox {
     border-top:0;
 }
 
-/* Layer Switcher */
+/* Background Settings */
 
-.layerswitcher-control {
+.background-control {
     top:190px;
 }
 
@@ -973,7 +973,7 @@ div.combobox {
     margin-top: 10px;
 }
 
-.layerswitcher-control .adjustments button {
+.background-control .adjustments button {
     height:30px;
     font-size:10px;
     padding:0 5px 3px 5px;
@@ -982,7 +982,7 @@ div.combobox {
     font-weight: bold;
 }
 
-.layerswitcher-control .adjustments button:hover {
+.background-control .adjustments button:hover {
     background:#ececec;
 }
 
@@ -1012,7 +1012,7 @@ div.combobox {
     border-left:  4px solid transparent;
 }
 
-.layerswitcher-control .nudge {
+.background-control .nudge {
     text-indent: -9999px;
     overflow: hidden;
     width:16.6666%;
@@ -1021,7 +1021,7 @@ div.combobox {
     position: relative;
 }
 
-.layerswitcher-control .nudge::after {
+.background-control .nudge::after {
     content: '';
     display: block;
     position: absolute;
@@ -1031,35 +1031,35 @@ div.combobox {
     width: 0;
 }
 
-.layerswitcher-control .nudge.left::after {
+.background-control .nudge.left::after {
     border-top:  5px solid transparent;
     border-bottom:  5px solid transparent;
     border-left:  5px solid #222;
 }
 
-.layerswitcher-control .nudge.right::after {
+.background-control .nudge.right::after {
     border-top:  5px solid transparent;
     border-bottom:  5px solid transparent;
     border-right:  5px solid #222;
 }
 
-.layerswitcher-control .nudge.top::after {
+.background-control .nudge.top::after {
     border-right:  5px solid transparent;
     border-left:  5px solid transparent;
     border-bottom:  5px solid #222;
 }
 
-.layerswitcher-control .nudge.bottom::after {
+.background-control .nudge.bottom::after {
     border-right:  5px solid transparent;
     border-left:  5px solid transparent;
     border-top:  5px solid #222;
 }
 
-.layerswitcher-control .nudge:first-child {
+.background-control .nudge:first-child {
     border-radius: 4px 0 0 4px;
 }
 
-.layerswitcher-control .reset {
+.background-control .reset {
     width: 33.3333%;
     border-radius: 0 4px 4px 0;
 }
@@ -1092,18 +1092,18 @@ div.combobox {
     z-index: 9999;
 }
 
-.layerswitcher-control li:hover .select-box,
-.layerswitcher-control li.selected .select-box {
+.background-control li:hover .select-box,
+.background-control li.selected .select-box {
     border: 2px solid #7092ff;
     background: rgba(89, 123, 231, .5);
     opacity: .5;
 }
-.layerswitcher-control li.selected:hover .select-box,
-.layerswitcher-control li.selected .select-box {
+.background-control li.selected:hover .select-box,
+.background-control li.selected .select-box {
     opacity: 1;
 }
 
-.layerswitcher-control .opacity {
+.background-control .opacity {
     background:#222;
     display:inline-block;
     width:20px;
@@ -1528,16 +1528,14 @@ a.success-action {
 .tooltip {
     width: 200px;
     position: absolute;
-    z-index: -1000;
-    height: 0;
-    opacity: 0;
-    display: block;
+    display: none;
 }
 
 .tooltip.in {
     opacity: 0.8;
     z-index: 1030;
     height: auto;
+    display: block;
 }
 
 .tooltip.top {
