@@ -19,17 +19,20 @@
     <script src='../js/lib/lodash.js'></script>
     <script src='../js/lib/d3.v3.js'></script>
     <script src='../js/lib/sha.js'></script>
-    <script src='../js/lib/d3.clip.js'></script>
-    <script src='../js/lib/d3.combobox.js'></script>
-    <script src='../js/lib/d3.geo.tile.js'></script>
-    <script src='../js/lib/d3.keybinding.js'></script>
-    <script src='../js/lib/d3.size.js'></script>
-    <script src='../js/lib/d3.trigger.js'></script>
-    <script src='../js/lib/d3.typeahead.js'></script>
-    <script src='../js/lib/d3.one.js'></script>
     <script src='../js/lib/ohauth.js'></script>
     <script src='../js/lib/jxon.js'></script>
-    <script src="../js/lib/rtree.js"></script>
+    <script src='../js/lib/d3.typeahead.js'></script>
+    <script src='../js/lib/d3.combobox.js'></script>
+    <script src='../js/lib/d3.rowselect.js'></script>
+    <script src='../js/lib/d3.checkselect.js'></script>
+    <script src='../js/lib/d3.geo.tile.js'></script>
+    <script src='../js/lib/d3.size.js'></script>
+    <script src='../js/lib/d3.trigger.js'></script>
+    <script src='../js/lib/d3.keybinding.js'></script>
+    <script src='../js/lib/d3.clip.js'></script>
+    <script src='../js/lib/d3-compat.js'></script>
+    <script src='../js/lib/bootstrap-tooltip.js'></script>
+    <script src='../js/lib/rtree.js'></script>
 
     <script src='../js/id/id.js'></script>
     <script src='../js/id/util.js'></script>
@@ -39,6 +42,7 @@
     <script src='../data/data.js'></script>
     <script src='../data/deprecated.js'></script>
     <script src='../data/imagery.js'></script>
+    <script src='../data/discarded.js'></script>
 
     <script src="../js/id/geo.js"></script>
     <script src="../js/id/geo/extent.js"></script>
@@ -59,26 +63,40 @@
     <script src="../js/id/svg/vertices.js"></script>
     <script src="../js/id/svg/labels.js"></script>
 
-    <script src='../js/id/ui.js'></script>
+    <script src="../js/id/ui.js"></script>
+    <script src='../js/id/ui/attribution.js'></script>
     <script src='../js/id/ui/radial_menu.js'></script>
     <script src='../js/id/ui/inspector.js'></script>
+    <script src='../js/id/ui/modal.js'></script>
+    <script src='../js/id/ui/cmd.js'></script>
+    <script src='../js/id/ui/confirm.js'></script>
     <script src='../js/id/ui/commit.js'></script>
+    <script src='../js/id/ui/success.js'></script>
     <script src='../js/id/ui/loading.js'></script>
     <script src='../js/id/ui/account.js'></script>
+    <script src='../js/id/ui/layerswitcher.js'></script>
+    <script src='../js/id/ui/modes.js'></script>
+    <script src='../js/id/ui/contributors.js'></script>
     <script src='../js/id/ui/geocoder.js'></script>
+    <script src='../js/id/ui/geolocate.js'></script>
     <script src='../js/id/ui/notice.js'></script>
-    <script src='../js/id/ui/modal.js'></script>
-    <script src='../js/id/ui/lasso.js'></script>
     <script src='../js/id/ui/flash.js'></script>
-    <script src='../js/id/ui/confirm.js'></script>
-    <script src='../js/id/ui/preset.js'></script>
-    <script src="../js/id/ui/preset_grid.js"></script>
+    <script src='../js/id/ui/save.js'></script>
     <script src='../js/id/ui/splash.js'></script>
+    <script src='../js/id/ui/restore.js'></script>
+    <script src='../js/id/ui/tag_reference.js'></script>
+    <script src='../js/id/ui/key_reference.js'></script>
+    <script src='../js/id/ui/preset.js'></script>
+    <script src='../js/id/ui/lasso.js'></script>
     <script src='../js/id/ui/source_switch.js'></script>
-    <script src='../js/id/ui/tag_editor.js'></script>
-    <script src='../js/id/ui/taglist.js'></script>
-    <script src='../js/id/ui/tail.js'></script>
     <script src='../js/id/ui/toggle.js'></script>
+    <script src='../js/id/ui/undo_redo.js'></script>
+    <script src='../js/id/ui/zoom.js'></script>
+    <script src='../js/id/ui/taglist.js'></script>
+    <script src='../js/id/ui/preset_grid.js'></script>
+    <script src='../js/id/ui/tag_editor.js'></script>
+    <script src='../js/id/ui/tail.js'></script>
+    <script src='../js/id/ui/preset/address.js'></script>
 
     <script src='../js/id/actions.js'></script>
     <script src="../js/id/actions/add_midpoint.js"></script>
@@ -86,10 +104,8 @@
     <script src='../js/id/actions/add_vertex.js'></script>
     <script src='../js/id/actions/change_tags.js'></script>
     <script src='../js/id/actions/connect.js'></script>
-    <script src='../js/id/actions/circularize.js'></script>
-    <script src='../js/id/actions/orthogonalize.js'></script>
-    <script src="../js/id/actions/delete_multiple.js"></script>
-    <script src="../js/id/actions/delete_node.js"></script>
+    <script src='../js/id/actions/delete_multiple.js'></script>
+    <script src='../js/id/actions/delete_node.js'></script>
     <script src="../js/id/actions/delete_relation.js"></script>
     <script src="../js/id/actions/delete_way.js"></script>
     <script src='../js/id/actions/disconnect.js'></script>
@@ -98,6 +114,8 @@
     <script src='../js/id/actions/move_node.js'></script>
     <script src='../js/id/actions/move.js'></script>
     <script src='../js/id/actions/rotate_way.js'></script>
+    <script src='../js/id/actions/circularize.js'></script>
+    <script src='../js/id/actions/orthogonalize.js'></script>
     <script src='../js/id/actions/noop.js'></script>
     <script src='../js/id/actions/reverse.js'></script>
     <script src='../js/id/actions/split.js'></script>
@@ -150,6 +168,7 @@
     <script src='../js/id/presets/collection.js'></script>
 
     <script src='../js/id/connection.js'></script>
+    <script src='../js/id/validate.js'></script>
 
     <script src='../js/lib/locale.js'></script>
     <script src='../locale/da.js'></script>
