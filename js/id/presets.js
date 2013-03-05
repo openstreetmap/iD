@@ -5,7 +5,6 @@ iD.presets = function(context) {
 
     var other = {
             name: 'other',
-            title: 'Other',
             icon: 'marker-stroked',
             match: {
                 tags: {},
