@@ -73,6 +73,7 @@ locale.tr = {
         'delete': {
             title: "Sil",
             description: "Haritan bunu sil.",
+            key: "⌫",
             annotation: {
                 point: "Bir nokta silindi.",
                 vertex: "Yoldan bir nod silindi.",
@@ -110,17 +111,7 @@ locale.tr = {
                 point: "Bir nokta taşındı.",
                 vertex: "Yoldan bir nokta taşındı.",
                 line: "Bir çizgi taşındı.",
-                area: "Bir alan taşındı.",
-                multiple: "Moved multiple objects."
-            }
-        },
-        rotate: {
-            title: "Rotate",
-            description: "Rotate this object around its centre point.",
-            key: "R",
-            annotation: {
-                line: "Rotated a line.",
-                area: "Rotated an area."
+                area: "Bir alan taşındı."
             }
         },
         reverse: {
@@ -180,12 +171,11 @@ locale.tr = {
         new_tag: "Yeni Etiket",
         edit_tags: "Etiketleri güncelle",
         okay: "Tamam",
-        view_on_osm: "View on OSM",
-        name: "Name",
-        editing: "Editing {type}",
-        additional: "Additional tags",
-        choose: "What are you adding?",
-        results: "{n} results for {search}"
+        view_on_osm: "OSM üzerinde gör",
+        name: "İsim",
+        editing: "{type} düzenleniyor",
+        additional: "Ekstra etiketler",
+        choose: "Neyi ekliyorsunuz?"
     },
 
     layerswitcher: {
@@ -230,13 +220,13 @@ locale.tr = {
         untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
         untagged_line: "Etiketlenmemiş çizgi",
         untagged_area: "Etiketlenmemiş alan",
-        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+        many_deletions: "Şu an {n} adet objeyi siliyorsunuz. Bunu yapmak istediğinize emin misiniz? Bu işlem ile ilgili objelerin tamamı herkesin ziyaret ettiği openstreetmap.org üzerinden de silinmiş olacaktır.",
         tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
         deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
     },
 
     zoom: {
-        'in': "Yaklaş",
+        in: "Yaklaş",
         out: "Uzaklaş"
     }
 };
