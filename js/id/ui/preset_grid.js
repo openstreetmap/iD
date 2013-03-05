@@ -31,11 +31,9 @@ iD.ui.PresetGrid = function(context) {
                 if (search.property('value').length === 0 &&
                     (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
                      d3.event.keyCode === d3.keybinding.keyCodes['⌦'])) {
-                    annotation = t('operations.delete.annotation.' + context.geometry(entity.id));
-                    context.perform(
-                        iD.actions.DeleteMultiple([entity.id]),
-                        annotation);
-                    event.close();
+                    d3.event.preventDefault();
+                    d3.event.stopPropagation();
+                    iD.operations.Delete([entity.id], context)();
                 }
             })
             .on('keyup', function() {
