@@ -23,14 +23,15 @@ iD.behavior.AddWay = function(context) {
             .minzoom(0)
             .tail(false);
 
-        window.setTimeout(function() {
-            context.map().dblclickEnable(true);
-        }, 1000);
-
         surface.call(draw.off);
     };
 
     addWay.cancel = function() {
+
+        window.setTimeout(function() {
+            context.map().dblclickEnable(true);
+        }, 1000);
+
         context.enter(iD.modes.Browse(context));
     };
 
