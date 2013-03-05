@@ -26,7 +26,7 @@ iD.ui.PresetGrid = function(context) {
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search')
             .attr('type', 'search')
-            .on('keydown', function() {
+            .one('keydown', function() {
                 // hack to let delete shortcut work when search is autofocused
                 if (search.property('value').length === 0 &&
                     (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
