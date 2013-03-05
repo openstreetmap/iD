@@ -44,6 +44,17 @@
     "form": []
 },
 {
+    "name": "coastline",
+    "match": {
+        "type": ["line"],
+        "tags": {
+            "natural": "coastline"
+        }
+    },
+    "icon": "",
+    "form": []
+},
+{
     "name": "supermarket",
     "match": {
         "type": ["point", "area"],
