@@ -78,7 +78,7 @@ iD.ui.PresetGrid = function(context) {
 
         function drawGrid(selection, presets) {
 
-            var entries = selection
+            var entries = selection.html('')
                 .selectAll('button.grid-entry')
                 .data(presets.collection.slice(0, 12), name);
 
@@ -132,7 +132,7 @@ iD.ui.PresetGrid = function(context) {
                     var selector = '.grid-entry:nth-child(' + (Math.floor(index/4) * 4 + 5 ) + ')';
 
                     presetinspect = selection.insert('div', selector)
-                        .attr('class', 'preset-inspect col12')
+                        .attr('class', 'inspector-inner preset-inspect col12')
                         .datum(d);
 
                     presetinspect.append('h2').text(d.title || d.name);
@@ -149,6 +149,7 @@ iD.ui.PresetGrid = function(context) {
                     }
 
                     taginfo.docs(params, function(err, data) {
+                        if (err) return description.text(t('inspector.no_documentation_combination'));
                         var doc = _.find(data, function(d) { return d.lang === locale; }) ||
                             _.find(data, function(d) { return d.lang === 'en'; });
                         description.text(doc.description);
