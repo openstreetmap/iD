@@ -78,10 +78,11 @@ iD.ui.Save = function(context) {
             .attr('class', 'save col12 disabled')
             .attr('tabindex', -1)
             .on('click', save)
+            .attr('data-original-title',
+                iD.ui.tooltipHtml(t('save.no_changes'), key))
             .call(bootstrap.tooltip()
                 .placement('bottom')
-                .html(true)
-                .title(iD.ui.tooltipHtml(t('save.help'), key)));
+                .html(true));
 
         button.append('span')
             .attr('class', 'label')
@@ -98,6 +99,11 @@ iD.ui.Save = function(context) {
 
         context.history().on('change.save', function() {
             var hasChanges = history.hasChanges();
+
+            button
+                .attr('data-original-title',
+                    iD.ui.tooltipHtml(t(hasChanges ?
+                        'save.help' : 'save.no_changes'), key));
 
             button
                 .classed('disabled', !hasChanges)
