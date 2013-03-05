@@ -1,6 +1,5 @@
 iD.ui.notice = function(selection) {
     var event = d3.dispatch('zoom'),
-        message = '',
         notice = {};
 
     var div = selection.append('div')

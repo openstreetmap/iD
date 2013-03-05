@@ -2,8 +2,7 @@ iD.behavior.Lasso = function(context) {
 
     var behavior = function(selection) {
 
-        var timeout = null,
-            mouse = null,
+        var mouse = null,
             lasso;
 
         function mousedown() {
