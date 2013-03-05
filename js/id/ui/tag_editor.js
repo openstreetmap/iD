@@ -4,47 +4,30 @@ iD.ui.TagEditor = function(context) {
         entity,
         tags,
         name,
-        presetMatch,
+        preset,
         selection_,
         presetUI,
         tagList;
 
-    function tageditor(selection, preset) {
+    function tageditor(selection, newpreset) {
 
         entity = selection.datum();
         selection_ = selection;
-        var type = entity.type === 'node' ? entity.type : entity.geometry();
+        geometry = entity.geometry(context.graph());
 
         // preset was explicitly chosen
-        if (preset) {
-            if (presetMatch) {
-                // Strip preset's match tags
-                tags = _.omit(tags, _.keys(presetMatch.match.tags));
-
-                // Strip preset's default tags
-                for (var i in presetMatch.form) {
-                    var field = presetMatch.form[i];
-                    if (field['default'] && field['default'][type] == tags[field.key]) {
-                        delete tags[field.key];
-                    }
-                }
+        if (newpreset) {
+            if (preset) {
+                tags = preset.removeTags(tags, geometry);
             }
 
-            // Add new preset's match tags
-            for (var k in preset.match.tags) {
-                if (preset.match.tags[k] !== '*') tags[k] = preset.match.tags[k];
-            }
+            newpreset.applyTags(tags, geometry);
+            preset = newpreset;
 
-            // Add new preset's defaults
-            for (var f in preset.form) {
-                f = preset.form[f];
-                if (f.key && !tags[f.key] && f['default'] && f['default'][type]) {
-                    tags[f.key] = f['default'][type];
-                }
-            }
+        // find a preset that best fits
+        } else if (!preset) {
+            preset = presets.matchType(entity, context.graph()).matchTags(entity);
         }
-
-        presetMatch = preset || presetMatch || presets.matchType(entity, context.graph()).matchTags(entity);
 
         selection.html('');
 
@@ -69,7 +52,7 @@ iD.ui.TagEditor = function(context) {
             });
 
         typebutton.append('div')
-            .attr('class', 'icon icon-pre-text' + (presetMatch ?  ' preset-' + presetMatch.icon : ''));
+            .attr('class', 'icon icon-pre-text' + (preset ?  ' preset-' + preset.icon : ''));
 
         typebutton.node().focus();
 
@@ -78,7 +61,7 @@ iD.ui.TagEditor = function(context) {
 
         typebutton.append('span')
             .attr('class','label')
-            .text(presetMatch.name);
+            .text(preset.name);
 
         namewrap.append('h4').text(t('inspector.name'));
 
@@ -105,15 +88,15 @@ iD.ui.TagEditor = function(context) {
         var tageditorpreset = editorwrap.append('div')
             .attr('class', 'inspector-preset');
 
-        if (presetMatch) {
+        if (preset) {
             tageditorpreset.call(presetUI
-                .preset(presetMatch));
+                .preset(preset));
         }
 
-        message.text(t('inspector.editing', { type: presetMatch.name }));
+        message.text(t('inspector.editing', { type: preset.name }));
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2').call(tagList, presetMatch.name === 'other');
+            .attr('class','inspector-inner col12 fillL2').call(tagList, preset.name === 'other');
 
         selection.append('div')
             .attr('class', 'inspector-actions pad1 fillD col12')
@@ -162,7 +145,7 @@ iD.ui.TagEditor = function(context) {
 
                 // change preset if necessary (undos/redos)
                 var newmatch = presets.matchType(entity, context.graph()).matchTags(entity.update({ tags: tags }));
-                if (newmatch !== presetMatch) {
+                if (newmatch !== preset) {
                     return tageditor(selection_, newmatch);
                 }
 
