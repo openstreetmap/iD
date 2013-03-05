@@ -53,7 +53,9 @@ iD.OAuth = function(context) {
 
         oauth.logout();
 
+        setAuth();
         o = timenonce(o);
+
         var url = baseurl + '/oauth/request_token';
         o.oauth_signature = ohauth.signature(oauth_secret, '',
             ohauth.baseString('POST', url, o));
@@ -121,7 +123,7 @@ iD.OAuth = function(context) {
 
     function setAuth() {
         if (baseurl && keys && keys[baseurl]) {
-            o = _.assign(o, _.omit(keys[baseurl], 'oauth_secret'));
+            o = _.assign({}, _.omit(keys[baseurl], 'oauth_secret'));
             oauth_secret = keys[baseurl].oauth_secret;
         }
     }
