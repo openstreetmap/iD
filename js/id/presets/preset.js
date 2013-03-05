@@ -45,6 +45,7 @@ iD.presets.Preset = function(preset, forms) {
                 tags[f.key] = f['default'][geometry];
             }
         }
+        return tags;
     };
 
     return preset;
