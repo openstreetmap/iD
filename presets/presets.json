@@ -33,6 +33,17 @@
     "form": []
 },
 {
+    "name": "wood",
+    "match": {
+        "type": ["point", "area"],
+        "tags": {
+            "natural": "wood"
+        }
+    },
+    "icon": "",
+    "form": []
+},
+{
     "name": "supermarket",
     "match": {
         "type": ["point", "area"],
