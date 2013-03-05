@@ -418,5 +418,16 @@
     },
     "icon": "warehouse",
     "form": ["building_yes", "address"]
+},
+{
+    "name": "turning circle",
+    "match": {
+        "type": ["vertex"],
+        "tags": {
+            "highway": "turning_circle"
+        }
+    },
+    "icon": "circle",
+    "form": []
 }
 ]
