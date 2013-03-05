@@ -324,6 +324,17 @@
     "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
 },
 {
+    "name": "track",
+    "match": {
+        "type": ["line"],
+        "tags": {
+            "highway": "track"
+        }
+    },
+    "icon": "highway-track",
+    "form": ["oneway", "bridge", "tunnel", "access", "maxspeed"]
+},
+{
     "name": "rail",
     "match": {
         "type": ["line"],
