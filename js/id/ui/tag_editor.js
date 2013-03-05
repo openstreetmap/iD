@@ -13,7 +13,7 @@ iD.ui.TagEditor = function(context) {
 
         entity = selection.datum();
         selection_ = selection;
-        geometry = entity.geometry(context.graph());
+        var geometry = entity.geometry(context.graph());
 
         // preset was explicitly chosen
         if (newpreset) {
