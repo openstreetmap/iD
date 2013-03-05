@@ -111,7 +111,17 @@ locale.uk = {
                 point: "Точку посунуто.",
                 vertex: "Точку лінії посунуто.",
                 line: "Лінію посунуто.",
-                area: "Полігон посунуто."
+                area: "Полігон посунуто.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.uk = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.uk = {
     },
 
     zoom: {
-        in: "Наблизитись",
+        'in': "Наблизитись",
         out: "Віддалитись"
     }
 };

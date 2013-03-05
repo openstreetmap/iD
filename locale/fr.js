@@ -111,7 +111,17 @@ locale.fr = {
                 point: "Déplace un point.",
                 vertex: "Déplace le noeud d'une ligne.",
                 line: "Déplace une ligne.",
-                area: "Déplace un polygone."
+                area: "Déplace un polygone.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.fr = {
         name: "Nom",
         editing: "Edité {type}",
         additional: "Tags complémentaires",
-        choose: "Que souhaitez vous ajouter?"
+        choose: "Que souhaitez vous ajouter?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.fr = {
     },
 
     zoom: {
-        in: "Zoomer",
+        'in': "Zoomer",
         out: "Dézoomer"
     }
 };
