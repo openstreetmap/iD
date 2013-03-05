@@ -86,6 +86,6 @@ iD.geo.pathLength = function(path) {
     return length;
 };
 
-iD.geo.metresToCoordinates = function(loc, vector) {
+iD.geo.metersToCoordinates = function(loc, vector) {
     return [vector[1] / 111200, vector[0] / 111200 / Math.abs(Math.cos(loc[1]))];
 };
