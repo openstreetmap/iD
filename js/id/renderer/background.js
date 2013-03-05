@@ -165,6 +165,7 @@ iD.Background = function() {
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
+        cache = {};
         setPermalink(source);
         return background;
     };
