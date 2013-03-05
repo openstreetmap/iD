@@ -111,7 +111,17 @@ locale.da = {
                 point: "Flyttede et punkt.",
                 vertex: "Flyttede en node i en vej.",
                 line: "Flyttede en linje.",
-                area: "Flyttede et område."
+                area: "Flyttede et område.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -137,14 +147,6 @@ locale.da = {
     zoom_in_edit: "zoom ind for at rette på kortet",
     logout: "log ud",
     report_a_bug: "rapportere en fejl",
-
-    layerswitcher: {
-        title: "Baggrund",
-        description: "Baggrundsindstillinger",
-        percent_brightness: "{opacity}% lysstyrke",
-        fix_misalignment: "Lav fejljustering",
-        reset: "nulstil"
-    },
 
     commit: {
         title: "Gem ændringer",
@@ -183,7 +185,16 @@ locale.da = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
+    },
+
+    layerswitcher: {
+        title: "Baggrund",
+        description: "Baggrundsindstillinger",
+        percent_brightness: "{opacity}% lysstyrke",
+        fix_misalignment: "Lav fejljustering",
+        reset: "nulstil"
     },
 
     restore: {
@@ -216,11 +227,6 @@ locale.da = {
         used_with: "brugt med {type}"
     },
 
-    zoom: {
-        in: "Zoom ind",
-        out: "Zoom ud"
-    },
-
     validations: {
         untagged_point: "Mangler et tag på punkt som ikke er del af en linje eller område",
         untagged_line: "Mangler tag på linje",
@@ -228,5 +234,10 @@ locale.da = {
         many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Dette tag {tag} mener denne linje skule være et område, men dette er ikke et område",
         deprecated_tags: "Uønskede tags: {tags}"
+    },
+
+    zoom: {
+        'in': "Zoom ind",
+        out: "Zoom ud"
     }
 };

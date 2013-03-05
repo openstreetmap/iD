@@ -111,7 +111,17 @@ locale.it = {
                 point: "Mosso un punto.",
                 vertex: "Mosso un nodo su una strada.",
                 line: "Mossa una linea.",
-                area: "Mossa un'area."
+                area: "Mossa un'area.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.it = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.it = {
     },
 
     zoom: {
-        in: "Zoom Maggiore",
+        'in': "Zoom Maggiore",
         out: "Zoom Minore"
     }
 };

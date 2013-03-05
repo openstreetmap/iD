@@ -111,7 +111,17 @@ locale.es = {
                 point: "Punto movido", //"Moved a point.",
                 vertex: "Vertice movido", //"Moved a node in a way.",
                 line: "Línea movida", //"Moved a line.",
-                area: "Área movida" //"Moved an area."
+                area: "Área movida" //"Moved an area.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -175,7 +185,8 @@ locale.es = {
         name: "Name",
         editing: "Editing {type}",
         additional: "Additional tags",
-        choose: "What are you adding?"
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
     layerswitcher: {
@@ -226,7 +237,7 @@ locale.es = {
     },
 
     zoom: {
-        in: "Acercar", // "Zoom In",
+        'in': "Acercar", // "Zoom In",
         out: "Alejar" //"Zoom Out",
     }
 };
