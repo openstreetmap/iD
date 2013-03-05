@@ -22,6 +22,24 @@ describe('iD.Connection', function () {
         expect(c.user()).to.equal(user);
     });
 
+    describe('#changesetUrl', function() {
+        it('provides a changeset url', function() {
+            expect(c.changesetUrl(2)).to.eql('http://api06.dev.openstreetmap.org/browse/changeset/2');
+        });
+    });
+
+    describe('#userUrl', function() {
+        it('provides a user url', function() {
+            expect(c.userUrl('bob')).to.eql('http://api06.dev.openstreetmap.org/user/bob');
+        });
+    });
+
+    describe('#flush', function() {
+        it('flushes the connection', function() {
+            expect(c.flush()).to.eql(c);
+        });
+    });
+
     describe('#loadFromURL', function () {
         it('loads test data', function (done) {
             c.loadFromURL('data/node.xml', done);

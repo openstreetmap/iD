@@ -7,7 +7,7 @@ iD.ui.preset.address = function(context) {
 
         var extent = entity.extent(context.graph()),
             l = extent.center(),
-            dist = iD.geo.metresToCoordinates(l, [200, 200]),
+            dist = iD.geo.metersToCoordinates(l, [200, 200]),
             box = iD.geo.Extent(
                     [extent[0][0] - dist[0], extent[0][1] - dist[1]],
                     [extent[1][0] + dist[0], extent[1][1] + dist[1]]);
