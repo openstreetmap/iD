@@ -87,10 +87,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .minzoom(0)
             .tail(false);
 
-        window.setTimeout(function() {
-            context.map().dblclickEnable(true);
-        }, 1000);
-
         surface.call(draw.off)
           .selectAll('.way, .node')
             .classed('active', false);
@@ -159,6 +155,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         context.pop();
         finished = true;
 
+        window.setTimeout(function() {
+            context.map().dblclickEnable(true);
+        }, 1000);
+
         var way = context.entity(wayId);
         if (way) {
             context.enter(iD.modes.Select(context, [way.id], true));
@@ -172,6 +172,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         context.perform(
             d3.functor(baseGraph),
             t('operations.cancel_draw.annotation'));
+
+        window.setTimeout(function() {
+            context.map().dblclickEnable(true);
+        }, 1000);
 
         finished = true;
         context.enter(iD.modes.Browse(context));
