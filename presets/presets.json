@@ -18,8 +18,7 @@
             "leisure": "park"
         }
     },
-    "icon": "park",
-    "form": []
+    "icon": "park"
 },
 {
     "name": "water",
@@ -29,8 +28,7 @@
             "natural": "water"
         }
     },
-    "icon": "",
-    "form": []
+    "icon": ""
 },
 {
     "name": "wetland",
@@ -40,8 +38,7 @@
             "natural": "wetland"
         }
     },
-    "icon": "",
-    "form": []
+    "icon": ""
 },
 {
     "name": "wood",
@@ -51,8 +48,7 @@
             "natural": "wood"
         }
     },
-    "icon": "",
-    "form": []
+    "icon": ""
 },
 {
     "name": "coastline",
@@ -62,8 +58,7 @@
             "natural": "coastline"
         }
     },
-    "icon": "",
-    "form": []
+    "icon": ""
 },
 {
     "name": "supermarket",
@@ -249,8 +244,7 @@
             "waterway": "river"
         }
     },
-    "icon": "waterway-river",
-    "form": []
+    "icon": "waterway-river"
 },
 {
     "name": "stream",
@@ -337,8 +331,7 @@
             "railway": "rail"
         }
     },
-    "icon": "railway-rail",
-    "form": []
+    "icon": "railway-rail"
 },
 {
     "name": "subway",
@@ -348,8 +341,7 @@
             "railway": "subway"
         }
     },
-    "icon": "railway-rail",
-    "form": []
+    "icon": "railway-rail"
 },
 {
     "name": "trunk highway",
@@ -370,8 +362,7 @@
             "highway": "footway"
         }
     },
-    "icon": "highway-footway",
-    "form": []
+    "icon": "highway-footway"
 },
 {
     "name": "cycle path",
@@ -460,7 +451,6 @@
             "highway": "turning_circle"
         }
     },
-    "icon": "circle",
-    "form": []
+    "icon": "circle"
 }
 ]
