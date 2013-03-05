@@ -569,12 +569,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
   right: -10px;
 }
 
-.inspector-body.line .type button {
-    height: 100px;
-}
-
 .inspector-body .type button {
     height: 70px;
+}
+
+.inspector-body-line .type button {
+    height: 100px;
 }
 
 .inspector-body .head .name {
@@ -819,7 +819,7 @@ div.combobox {
     border-radius: 0;
 }
 
-.line .grid-entry {
+.inspector-body-line .grid-entry {
     min-height: 120px;
 }
 
@@ -866,7 +866,7 @@ div.combobox {
     margin: auto;
 }
 
-.line .grid-entry .icon {
+.inspector-body-line .grid-entry .icon {
     top: 10%;
 }
 
@@ -883,7 +883,7 @@ div.combobox {
     overflow: hidden;
 }
 
-.line .grid-entry .label {
+.inspector-body-line .grid-entry .label {
   top: 80%;
 }
 

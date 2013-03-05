@@ -38,7 +38,7 @@ iD.ui.TagEditor = function(context) {
             .text(t('inspector.choose'));
 
         var editorwrap = selection.append('div')
-            .attr('class', 'tag-wrap inspector-body ' + entity.geometry(context.graph()));
+            .attr('class', 'tag-wrap inspector-body inspector-body-' + entity.geometry(context.graph()));
 
         var headerwrap = editorwrap.append('div').attr('class','col12 inspector-inner head');
 
