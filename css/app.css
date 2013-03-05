@@ -1528,16 +1528,14 @@ a.success-action {
 .tooltip {
     width: 200px;
     position: absolute;
-    z-index: -1000;
-    height: 0;
-    opacity: 0;
-    display: block;
+    display: none;
 }
 
 .tooltip.in {
     opacity: 0.8;
     z-index: 1030;
     height: auto;
+    display: block;
 }
 
 .tooltip.top {
