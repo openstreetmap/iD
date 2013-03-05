@@ -9,7 +9,6 @@ iD.Map = function(context) {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
-        fastEnabled = true,
         transformStart,
         minzoom = 0,
         background = iD.Background()
@@ -213,12 +212,6 @@ iD.Map = function(context) {
     map.dblclickEnable = function(_) {
         if (!arguments.length) return dblclickEnabled;
         dblclickEnabled = _;
-        return map;
-    };
-
-    map.fastEnable = function(_) {
-        if (!arguments.length) return fastEnabled;
-        fastEnabled = _;
         return map;
     };
 

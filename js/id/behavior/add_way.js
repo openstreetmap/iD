@@ -10,7 +10,6 @@ iD.behavior.AddWay = function(context) {
             .on('finish', addWay.cancel);
 
         context.map()
-            .fastEnable(false)
             .minzoom(16)
             .dblclickEnable(false);
 
@@ -19,7 +18,6 @@ iD.behavior.AddWay = function(context) {
 
     addWay.off = function(surface) {
         context.map()
-            .fastEnable(true)
             .minzoom(0)
             .tail(false);
 
