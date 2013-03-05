@@ -1,5 +1,5 @@
 iD.ui.preset = function(context) {
-    var event = d3.dispatch('change', 'setTags'),
+    var event = d3.dispatch('change', 'setTags', 'close'),
         taginfo = iD.taginfo(),
         entity,
         type,
@@ -56,25 +56,29 @@ iD.ui.preset = function(context) {
             case 'text':
                 i = this.append('input')
                     .attr('type', 'text')
-                    .attr('id', 'input-' + d.key);
+                    .attr('id', 'input-' + d.key)
+                    .call(iD.behavior.accept().on('accept', event.close));
                 break;
             case 'tel':
                 i = this.append('input')
                     .attr('type', 'tel')
                     .attr('id', 'input-' + d.key)
-                    .attr('placeholder', '1-555-555-5555');
+                    .attr('placeholder', '1-555-555-5555')
+                    .call(iD.behavior.accept().on('accept', event.close));
                 break;
             case 'email':
                 i = this.append('input')
                     .attr('type', 'email')
                     .attr('id', 'input-' + d.key)
-                    .attr('placeholder', 'email@domain.com');
+                    .attr('placeholder', 'email@domain.com')
+                    .call(iD.behavior.accept().on('accept', event.close));
                 break;
             case 'url':
                 i = this.append('input')
                     .attr('type', 'url')
                     .attr('id', 'input-' + d.key)
-                    .attr('placeholder', 'http://example.com/');
+                    .attr('placeholder', 'http://example.com/')
+                    .call(iD.behavior.accept().on('accept', event.close));
                 break;
             case 'check':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
@@ -155,6 +159,7 @@ iD.ui.preset = function(context) {
                         .attr('class', 'col9 preset-input', d)
                         .call(iD.ui.preset.address(context)
                             .on('change', key)
+                            .on('close', event.close)
                             .entity(entity));
                 }
             }

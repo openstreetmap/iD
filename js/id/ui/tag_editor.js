@@ -78,7 +78,8 @@ iD.ui.TagEditor = function(context) {
             .entity(entity)
             .on('change', function() {
                 event.changeTags();
-            });
+            })
+            .on('close', event.close);
 
         tagList = iD.ui.Taglist(context)
             .on('change', function() {

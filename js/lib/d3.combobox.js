@@ -264,7 +264,7 @@ d3.combobox = function() {
                 w.on('mousemove.typeahead', null);
             });
         }
-        
+
         input
             .on('blur.typeahead', blur)
             .on('keydown.typeahead', keydown)

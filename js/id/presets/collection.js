@@ -16,7 +16,6 @@ iD.presets.Collection = function(collection) {
             });
 
             return iD.presets.Collection(newcollection);
-
         },
 
         matchTags: function(entity) {
@@ -34,7 +33,7 @@ iD.presets.Collection = function(collection) {
 
             return match;
         },
-        
+
         search: function(value) {
             if (!value) return this;
 
@@ -58,8 +57,6 @@ iD.presets.Collection = function(collection) {
                     d.name === 'other';
             }));
         }
-
-
 
     };
 

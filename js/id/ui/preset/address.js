@@ -1,6 +1,6 @@
 iD.ui.preset.address = function(context) {
 
-    var event = d3.dispatch('change'),
+    var event = d3.dispatch('change', 'close'),
         entity;
 
     function getStreets() {
@@ -37,13 +37,16 @@ iD.ui.preset.address = function(context) {
 
         function change() { event.change(); }
 
+        function close() { return iD.behavior.accept().on('accept', event.close); }
+
         selection.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Housename')
             .attr('class', 'addr-housename')
             .datum({ 'key': 'addr:housename' })
             .on('blur', change)
-            .on('change', change);
+            .on('change', change)
+            .call(close());
 
         selection.append('input')
             .property('type', 'text')
@@ -51,7 +54,8 @@ iD.ui.preset.address = function(context) {
             .attr('class', 'addr-number')
             .datum({ 'key': 'addr:housenumber' })
             .on('blur', change)
-            .on('change', change);
+            .on('change', change)
+            .call(close());
 
         var streetwrap = selection.append('span')
             .attr('class', 'input-wrap-position')
@@ -70,7 +74,8 @@ iD.ui.preset.address = function(context) {
             .attr('class', 'addr-city')
             .datum({ 'key': 'addr:city' })
             .on('blur', change)
-            .on('change', change);
+            .on('change', change)
+            .call(close());
 
         streetwrap.call(d3.combobox().data(getStreets()));
     }
