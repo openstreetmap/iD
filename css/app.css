@@ -831,22 +831,27 @@ div.combobox {
     background: #ececec;
 }
 
+.grid-entry:hover .preset-help {
+    display: block;
+}
+
 .grid-entry .preset-help {
-    display:none;
+    display: none;
     position: absolute;
     bottom: 0px;
     right: 0px;
     width: 20px;
     height: 20px;
-    background: black;
+    background: #aaa;
 }
 
 .grid-entry .preset-help:hover {
-  background: grey;
+  background: #888;
 }
 
 .preset-inspect {
   position: relative;
+  background: #fff;
 }
 
 .grid-entry .preset-icon-fill.area {
