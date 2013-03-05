@@ -5,4 +5,5 @@ d3.selection.prototype.one = function (type, listener, capture) {
         listener.apply(this, arguments);
     }
     target.on(typeOnce, one, capture);
+    return this;
 };
