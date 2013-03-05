@@ -110,7 +110,7 @@ locale.es = {
                 point: "Punto movido", //"Moved a point.",
                 vertex: "Vertice movido", //"Moved a node in a way.",
                 line: "Línea movida", //"Moved a line.",
-                area: "Área movida" //"Moved an area.",
+                area: "Área movida", //"Moved an area.",
                 multiple: "Moved multiple objects."
             }
         },
