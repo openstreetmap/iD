@@ -73,7 +73,6 @@ locale.es = {
         'delete': {
             title: "Eliminar", //"Delete",
             description: "Eliminar del mapa.", //"Remove this from the map.",
-            key: "⌦",
             annotation: {
                 point: "Punto eliminado.", //"Deleted a point.",
                 vertex: "Vértice elimnado de la ruta.", //"Deleted a node from a way.",

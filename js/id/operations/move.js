@@ -14,7 +14,7 @@ iD.operations.Move = function(selection, context) {
     };
 
     operation.id = "move";
-    operation.key = t('operations.move.key');
+    operation.keys = [t('operations.move.key')];
     operation.title = t('operations.move.title');
     operation.description = t('operations.move.description');
 

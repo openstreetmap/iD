@@ -18,7 +18,7 @@ iD.operations.Split = function(selection, context) {
     };
 
     operation.id = "split";
-    operation.key = t('operations.split.key');
+    operation.keys = [t('operations.split.key')];
     operation.title = t('operations.split.title');
     operation.description = t('operations.split.description');
 

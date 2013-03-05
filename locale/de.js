@@ -73,7 +73,6 @@ locale.de = {
         'delete': {
             title: "Löschen",
             description: "Lösche dies aus der Karte.",
-            key: "⌦",
             annotation: {
                 point: "Punkt gelöscht.",
                 vertex: "Stützpunkt aus einem Weg gelöscht.",

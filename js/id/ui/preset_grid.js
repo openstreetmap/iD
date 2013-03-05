@@ -28,7 +28,9 @@ iD.ui.PresetGrid = function(context) {
             .attr('type', 'search')
             .on('keydown', function() {
                 // hack to let delete shortcut work when search is autofocused
-                if (d3.event.keyCode === 46 && search.property('value').length === 0) {
+                if (search.property('value').length === 0 &&
+                    (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
+                     d3.event.keyCode === d3.keybinding.keyCodes['⌦'])) {
                     annotation = t('operations.delete.annotation.' + context.geometry(entity.id));
                     context.perform(
                         iD.actions.DeleteMultiple([entity.id]),
