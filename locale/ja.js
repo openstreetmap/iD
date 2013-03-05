@@ -188,7 +188,7 @@ locale.ja = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "背景画像",
         description: "背景画像設定",
         percent_brightness: "{opacity}% 輝度",

@@ -188,7 +188,7 @@ locale.pl = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Tło",
         description: "Ustawienia tła",
         percent_brightness: "jasność {opacity}%",

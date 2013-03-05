@@ -188,7 +188,7 @@ locale.de = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Hintergrund",
         description: "Hintergrundeinstellungen",
         percent_brightness: "{opacity}% Helligkeit",

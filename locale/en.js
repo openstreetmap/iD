@@ -197,7 +197,7 @@ locale.en = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Background",
         description: "Background Settings",
         percent_brightness: "{opacity}% brightness",

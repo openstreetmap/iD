@@ -188,7 +188,7 @@ locale.lv = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Fons",
         description: "Fona iestatījumi",
         percent_brightness: "{opacity}% caurspīdīgums",

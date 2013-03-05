@@ -188,7 +188,7 @@ locale.da = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Baggrund",
         description: "Baggrundsindstillinger",
         percent_brightness: "{opacity}% lysstyrke",
