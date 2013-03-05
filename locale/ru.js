@@ -188,7 +188,7 @@ locale.ru = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Подложка",
         description: "Настройка подложки",
         percent_brightness: "яркость {opacity}%",

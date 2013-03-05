@@ -188,7 +188,7 @@ locale.tr = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Arkaplan",
         description: "Arkaplan Ayarları",
         percent_brightness: "{opacity}% parlaklık",

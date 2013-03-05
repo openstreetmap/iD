@@ -188,7 +188,7 @@ locale.fr = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Fond de carte",
         description: "Paramètres du fond de carte",
         percent_brightness: "{opacity}% luminosité",

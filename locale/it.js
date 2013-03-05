@@ -188,7 +188,7 @@ locale.it = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Sfondo",
         description: "Impostazioni dello sfondo",
         percent_brightness: "{opacity}% opacità",

@@ -1,4 +1,4 @@
-iD.ui.LayerSwitcher = function(context) {
+iD.ui.Background = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         opacities = [1, 0.5, 0];
 
@@ -12,7 +12,7 @@ iD.ui.LayerSwitcher = function(context) {
         });
     }
 
-    function layerswitcher(selection) {
+    function background(selection) {
 
         var content = selection
             .append('div').attr('class', 'content fillD map-overlay hide'),
@@ -24,8 +24,8 @@ iD.ui.LayerSwitcher = function(context) {
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'fillD')
-            .attr('title', t('layerswitcher.description'))
-            .on('click.layerswitcher-toggle', toggle)
+            .attr('title', t('background.description'))
+            .on('click.background-toggle', toggle)
             .call(tooltip);
 
         button.append('span')
@@ -43,17 +43,17 @@ iD.ui.LayerSwitcher = function(context) {
         }
 
         function clickoutside(selection) {
-            selection.on('click.layerswitcher-inside', function() {
+            selection.on('click.background-inside', function() {
                 return d3.event.stopPropagation();
             });
-            context.container().on('click.layerswitcher-outside', hide);
+            context.container().on('click.background-outside', hide);
         }
 
         var opa = content
             .append('div')
             .attr('class', 'opacity-options-wrapper');
 
-        opa.append('h4').text(t('layerswitcher.title'));
+        opa.append('h4').text(t('background.title'));
 
         var opacityList = opa.append('ul')
             .attr('class', 'opacity-options');
@@ -74,7 +74,7 @@ iD.ui.LayerSwitcher = function(context) {
             .enter()
             .append('li')
                 .attr('data-original-title', function(d) {
-                    return t('layerswitcher.percent_brightness', { opacity: (d * 100) });
+                    return t('background.percent_brightness', { opacity: (d * 100) });
                 })
                 .on('click.set-opacity', setOpacity)
                 .html("<div class='select-box'></div>")
@@ -162,7 +162,7 @@ iD.ui.LayerSwitcher = function(context) {
             selectLayer(context.background().source());
         }
 
-        context.map().on('move.layerswitcher-update', _.debounce(update, 1000));
+        context.map().on('move.background-update', _.debounce(update, 1000));
 
         var adjustments = content
             .append('div')
@@ -180,7 +180,7 @@ iD.ui.LayerSwitcher = function(context) {
         }
 
         adjustments.append('a')
-            .text(t('layerswitcher.fix_misalignment'))
+            .text(t('background.fix_misalignment'))
             .attr('href', '#')
             .classed('hide-toggle', true)
             .classed('expanded', false)
@@ -208,7 +208,7 @@ iD.ui.LayerSwitcher = function(context) {
             .on('click', nudge);
 
         nudge_container.append('button')
-            .text(t('layerswitcher.reset'))
+            .text(t('background.reset'))
             .attr('class', 'reset')
             .on('click', function() {
                 context.background().offset([0, 0]);
@@ -219,5 +219,5 @@ iD.ui.LayerSwitcher = function(context) {
         selectLayer(context.background().source());
     }
 
-    return d3.rebind(layerswitcher, event, 'on');
+    return d3.rebind(background, event, 'on');
 };

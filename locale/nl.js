@@ -188,7 +188,7 @@ locale.nl = {
         results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Achtergrond",
         description: "Achtergrondinstellingen",
         percent_brightness: "{opacity}% helderheid",
