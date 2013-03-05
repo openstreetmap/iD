@@ -24,6 +24,10 @@ body {
     max-width: 1200px;
 }
 
+.spinner {
+    float: right;
+}
+
 div, textarea, input, form, span, ul, li, ol, a, button {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
