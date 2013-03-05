@@ -99,6 +99,7 @@ iD.ui.LayerSwitcher = function(context) {
             if (d.data.terms_url) {
                 provided_by.append('a')
                     .attr('href', (d.data.terms_url || ''))
+                    .attr('target', '_blank')
                     .classed('disabled', !d.data.terms_url)
                     .text(' provided by ' + (d.data.sourcetag || d.data.name));
             } else {
