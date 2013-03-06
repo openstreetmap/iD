@@ -932,7 +932,6 @@ div.combobox {
     width: 30px;
     background: rgba(0,0,0,.5);
     border-radius: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
 .map-control > button:hover {
