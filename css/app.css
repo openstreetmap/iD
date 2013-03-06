@@ -1232,6 +1232,7 @@ div.combobox {
 
 .account {
     float: left;
+    padding: 5px 10px;
 }
 
 .account .logout {
