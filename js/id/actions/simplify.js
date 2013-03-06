@@ -1,5 +1,6 @@
 iD.actions.Simplify = function(wayId, projection) {
-    
+
+
     function closestIndex(nodes, loc) {
         var idx, min = Infinity, dist;
         for (var i = 0; i < nodes.length; i++) {
@@ -13,11 +14,15 @@ iD.actions.Simplify = function(wayId, projection) {
     }
 
     // Handles two corner cases
-    // 
+    //
     // 1. Reuse as many old nodes as possible
     // 2. Don't move or eliminate any nodes that have more than one
     //    parent way.
     var action = function(graph) {
+
+        // The equivalent of zoom 18: (256 << 18)
+        var fixedproj = d3.geo.mercator().scale(67108864);
+
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
             node, i, j, ids = [], idx,
@@ -31,15 +36,15 @@ iD.actions.Simplify = function(wayId, projection) {
         // all points that have a single way parent
         var points = singleParent.map(function(n) {
             // simplify.js accepts {x,y} objects.
-            var p = projection(n.loc);
+            var p = fixedproj(n.loc);
             return { x: p[0], y: p[1] };
         });
 
         // tolerance of 0.8 - adjust as needed. simplification is guaranteed
         // to produce fewer points in output than input
-        var simplified = simplify(points, 0.8).map(function(p) {
+        var simplified = simplify(points, 0.7).map(function(p) {
             // convert back to iD's 2-elem array pattern
-            return { loc: projection.invert([p.x, p.y]) };
+            return { loc: fixedproj.invert([p.x, p.y]) };
         });
 
         // first reuse all singleParent nodes. the

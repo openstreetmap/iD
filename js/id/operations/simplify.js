@@ -17,7 +17,7 @@ iD.operations.Simplify = function(selection, context) {
     };
 
     operation.id = "simplify";
-    operation.key = t('operations.simplify.key');
+    operation.keys = [t('operations.simplify.key')];
     operation.title = t('operations.simplify.title');
     operation.description = t('operations.simplify.description');
 
