@@ -4,6 +4,8 @@ iD.Background = function() {
         projection,
         cache = {},
         offset = [0, 0],
+        tileOrigin,
+        z,
         transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
@@ -41,20 +43,27 @@ iD.Background = function() {
         return d;
     }
 
-    // derive the tiles onscreen, remove those offscreen and position tiles
-    // correctly for the currentstate of `projection`
+    // Update tiles based on current state of `projection`.
     function background(selection) {
-        var tiles = tile
-            .scale(projection.scale())
-            .scaleExtent((source.data && source.data.scaleExtent) || [1, 17])
-            .translate(projection.translate())(),
-            requests = [],
-            z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0),
-            tileOrigin = [
-                projection.scale() / 2 - projection.translate()[0],
-                projection.scale() / 2 - projection.translate()[1]];
+        tile.scale(projection.scale())
+            .translate(projection.translate());
 
-        tiles.forEach(function(d) {
+        tileOrigin = [
+            projection.scale() / 2 - projection.translate()[0],
+            projection.scale() / 2 - projection.translate()[1]];
+
+        z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0);
+
+        render(selection);
+    }
+
+    // Derive the tiles onscreen, remove those offscreen and position them.
+    // Important that this part not depend on `projection` because it's
+    // rentered when tiles load/error (see #644).
+    function render(selection) {
+        var requests = [];
+
+        tile().forEach(function(d) {
             addSource(d);
             requests.push(d);
             if (!cache[d[3]] && lookUp(d)) {
@@ -77,7 +86,7 @@ iD.Background = function() {
             d3.select(this)
                 .on('load', null)
                 .classed('tile-loaded', true);
-            background(selection);
+            render(selection);
         }
 
         function error(d) {
@@ -85,7 +94,7 @@ iD.Background = function() {
             d3.select(this)
                 .on('load', null)
                 .remove();
-            background(selection);
+            render(selection);
         }
 
         function imageTransform(d) {
@@ -163,6 +172,7 @@ iD.Background = function() {
         if (!arguments.length) return source;
         source = _;
         cache = {};
+        tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 17]);
         setPermalink(source);
         return background;
     };
