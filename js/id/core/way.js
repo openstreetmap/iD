@@ -52,7 +52,7 @@ _.extend(iD.Way.prototype, {
         if (!this.isClosed() || this.tags.area === 'no')
             return false;
         for (var key in this.tags)
-            if (key in iD.Way.areaKeys)
+            if (key in iD.Way.areaKeys && !(this.tags[key] in iD.Way.areaKeys[key]))
                 return true;
         return false;
     },
@@ -149,6 +149,21 @@ _.extend(iD.Way.prototype, {
     }
 });
 
-iD.Way.areaKeys = iD.util.trueObj(['area', 'building', 'leisure', 'tourism', 'ruins',
-    'historic', 'landuse', 'military', 'natural', 'amenity', 'shop', 'man_made',
-    'public_transport']);
+// A closed way is considered to be an area if it has a tag with one
+// of the following keys, and the value is _not_ one of the associated
+// values for the respective key.
+iD.Way.areaKeys = {
+    area: {},
+    building: {},
+    leisure: {},
+    tourism: {},
+    ruins: {},
+    historic: {},
+    landuse: {},
+    military: {},
+    natural: iD.util.trueObj(['coastline']),
+    amenity: {},
+    shop: {},
+    man_made: {},
+    public_transport: {}
+};
