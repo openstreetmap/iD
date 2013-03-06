@@ -1,7 +1,7 @@
 iD.Connection = function(context) {
 
     var event = d3.dispatch('auth', 'load'),
-        url = 'http://api06.dev.openstreetmap.org',
+        url = 'http://www.openstreetmap.org',
         connection = {},
         user = {},
         keys,

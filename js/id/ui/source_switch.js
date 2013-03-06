@@ -18,8 +18,8 @@ iD.ui.SourceSwitch = function(context) {
     return function(selection) {
         selection.append('a')
             .attr('href', '#')
-            .text(t('source_switch.dev'))
-            .classed('live', false)
+            .text(t('source_switch.live'))
+            .classed('live', true)
             .on('click', click);
     };
 };

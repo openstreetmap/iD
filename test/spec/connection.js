@@ -24,13 +24,13 @@ describe('iD.Connection', function () {
 
     describe('#changesetUrl', function() {
         it('provides a changeset url', function() {
-            expect(c.changesetUrl(2)).to.eql('http://api06.dev.openstreetmap.org/browse/changeset/2');
+            expect(c.changesetUrl(2)).to.eql('http://www.openstreetmap.org/browse/changeset/2');
         });
     });
 
     describe('#userUrl', function() {
         it('provides a user url', function() {
-            expect(c.userUrl('bob')).to.eql('http://api06.dev.openstreetmap.org/user/bob');
+            expect(c.userUrl('bob')).to.eql('http://www.openstreetmap.org/user/bob');
         });
     });
 
