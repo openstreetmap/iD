@@ -505,6 +505,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon-operation-merge         { background-position: -140px -140px;}
 .icon-operation-orthogonalize { background-position: -160px -140px;}
 .icon-operation-rotate        { background-position: -180px -140px;}
+.icon-operation-simplify      { background-position: -200px -140px;}
 
 
 /* Toggle icon is special */
