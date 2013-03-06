@@ -2,7 +2,7 @@ iD.ui.Background = function(context) {
     var event = d3.dispatch('cancel', 'save'),
         opacities = [1, 0.5, 0];
 
-    var layers = iD.layers;
+    var layers = context.backgroundSources();
 
     function getSources() {
         var ext = context.map().extent();

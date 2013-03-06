@@ -95,6 +95,14 @@ window.iD = function () {
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
 
+    /* Background */
+    var backgroundSources = iD.data.imagery.map(iD.BackgroundSource.template);
+    backgroundSources.push(iD.BackgroundSource.Custom);
+
+    context.backgroundSources = function() {
+        return backgroundSources;
+    };
+
     /* Presets */
     var presets = iD.presets(context);
 
@@ -111,7 +119,7 @@ window.iD = function () {
     var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
     if (q.layer) {
         context.background()
-           .source(_.find(iD.layers, function(l) {
+           .source(_.find(backgroundSources, function(l) {
                if (l.data.sourcetag === q.layer) {
                    detected = true;
                    return true;
@@ -121,7 +129,7 @@ window.iD = function () {
 
     if (!detected) {
         context.background()
-            .source(_.find(iD.layers, function(l) {
+            .source(_.find(backgroundSources, function(l) {
                 return l.data.name === 'Bing aerial imagery';
             }));
     }
