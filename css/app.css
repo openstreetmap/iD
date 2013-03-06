@@ -1823,12 +1823,7 @@ img.wiki-image {
     background:#000;
 }
 
-#surface, #layer-g, .layer-layer {
-    position:absolute;
-    top:0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+#supersurface {
     transform-origin:0 0;
     -ms-transform-origin:0 0;
     -webkit-transform-origin:0 0;
@@ -1840,8 +1835,8 @@ img.wiki-image {
     user-select: none;
 }
 
-#surface {
-  position: static;
+#surface, #layer-g, .layer-layer {
+    position: absolute;
 }
 
 /* About Section

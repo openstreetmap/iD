@@ -24,7 +24,7 @@ iD.Map = function(context) {
         midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(roundedProjection, context),
         tail = iD.ui.Tail(),
-        surface, layergroup;
+        supersurface, surface, layergroup;
 
     function map(selection) {
         context.history()
@@ -36,11 +36,11 @@ iD.Map = function(context) {
 
         selection.call(zoom);
 
-        layergroup = selection.append('div')
-            .attr('id', 'layer-g');
+        supersurface = selection.append('div')
+            .attr('id', 'supersurface');
 
-        var supersurface = selection.append('div')
-            .style('position', 'absolute');
+        layergroup = supersurface.append('div')
+            .attr('id', 'layer-g');
 
         surface = supersurface.append('svg')
             .on('mousedown.zoom', function() {
@@ -166,22 +166,20 @@ iD.Map = function(context) {
             'scale(' + scale + ')' +
             'translate(' + tX + 'px,' + tY + 'px) ';
 
-        layergroup.style(transformProp, transform);
-        surface.style(transformProp, transform);
+        supersurface.style(transformProp, transform);
         queueRedraw();
 
         dispatch.move(map);
     }
 
     function isTransformed() {
-        var prop = surface.node().style[transformProp];
+        var prop = supersurface.style(transformProp);
         return prop && prop !== 'none';
     }
 
     function resetTransform() {
         if (!isTransformed()) return false;
-        surface.node().style[transformProp] = '';
-        layergroup.node().style[transformProp] = '';
+        supersurface.style(transformProp, '');
         return true;
     }
 
