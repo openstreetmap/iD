@@ -41,7 +41,7 @@ iD.svg.Labels = function(projection) {
     });
 
     var pointOffsets = [
-        [15, 3, 'start'], // right
+        [15, 2, 'start'], // right
         [10, 0, 'start'], // unused right now
         [-15, 0, 'end']
     ];
@@ -126,11 +126,11 @@ iD.svg.Labels = function(projection) {
                 }
                 return x;
             },
-            'y': function(d, i) { return labels[i].y - labels[i].height + 1 - 2; },
+            'y': function(d, i) { return labels[i].y - labels[i].height + 1; },
             'rx': 3,
             'ry': 3,
             'width': function(d, i) { return textWidth(name(d), labels[i].height) + 4; },
-            'height': function(d, i) { return labels[i].height + 4; },
+            'height': function(d, i) { return labels[i].height + 2; },
             'fill': 'white'
         });
 

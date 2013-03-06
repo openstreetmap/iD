@@ -673,7 +673,6 @@ text.pointlabel {
 
 text.point {
   font-size: 10px;
-  baseline-shift: 2px;
 }
 
 /* Cursors */
