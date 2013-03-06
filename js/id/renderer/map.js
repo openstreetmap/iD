@@ -139,10 +139,10 @@ iD.Map = function(context) {
     }
 
     function resetTransform() {
-        var prop = surface.style(transformProp);
+        var prop = surface.node().style[transformProp];
         if (!prop || prop === 'none') return false;
-        surface.style(transformProp, '');
-        tilegroup.style(transformProp, '');
+        surface.node().style[transformProp] = '';
+        tilegroup.node().style[transformProp] = '';
         return true;
     }
 
