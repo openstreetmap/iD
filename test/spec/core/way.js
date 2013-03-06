@@ -110,6 +110,10 @@ describe('iD.Way', function() {
         it('returns false if the way is closed and has tag area=no', function() {
             expect(iD.Way({nodes: ['n1', 'n1'], tags: {area: 'no', building: 'yes'}}).isArea()).to.equal(false);
         });
+
+        it('returns false for coastline', function() {
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: {natural: 'coastline'}}).isArea()).to.equal(false);
+        });
     });
 
     describe("#isDegenerate", function() {
