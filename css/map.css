@@ -622,6 +622,10 @@ text {
     opacity: .7;
 }
 
+.oneway .textpath.tag-waterway {
+    fill: #002F35;
+}
+
 text.tag-oneway {
     fill:#91CFFF;
     stroke:#2C6B9B;

@@ -105,8 +105,9 @@ iD.svg.Lines = function(projection) {
         var lines = [];
 
         for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i], outer;
-            if (outer = simpleMultipolygonOuterMember(entity, graph)) {
+            var entity = entities[i],
+                outer = simpleMultipolygonOuterMember(entity, graph);
+            if (outer) {
                 lines.push(entity.mergeTags(outer.tags));
             } else if (entity.geometry(graph) === 'line') {
                 lines.push(entity);
@@ -150,11 +151,14 @@ iD.svg.Lines = function(projection) {
             .filter(filter)
             .data(oneways, iD.Entity.key);
 
+        var tagClasses = iD.svg.TagClasses();
+
         var tp = labels.enter()
             .append('text')
                 .attr({ 'class': 'oneway', dy: 4 })
             .append('textPath')
-                .attr('class', 'textpath');
+                .attr('class', 'textpath')
+                .call(tagClasses);
 
         labels.exit().remove();
 
