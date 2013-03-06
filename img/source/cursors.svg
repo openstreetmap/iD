@@ -54,7 +54,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="7.858048"
      inkscape:cx="-450.57489"
-     inkscape:cy="1000.1863"
+     inkscape:cy="974.73471"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -674,7 +674,10 @@
     </g>
     <g
        id="cursor-draw-connect-vertex"
-       inkscape:label="cursor-draw-connect-vertex">
+       inkscape:label="cursor-draw-connect-vertex"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect-vertex.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <g
          transform="translate(-387,-20)"
          inkscape:export-ydpi="90"
@@ -760,7 +763,10 @@
     </g>
     <g
        id="cursor-draw-connect-line"
-       inkscape:label="cursor-draw-connect-line">
+       inkscape:label="cursor-draw-connect-line"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect-line.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <g
          transform="translate(-387,-20)"
          inkscape:export-ydpi="90"
