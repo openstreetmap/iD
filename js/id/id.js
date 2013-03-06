@@ -1,4 +1,8 @@
 window.iD = function () {
+    locale
+        .current('en')
+        .current(iD.detect().locale);
+
     var context = {},
         storage;
 
@@ -21,7 +25,8 @@ window.iD = function () {
         map = iD.Map(context);
 
     // the connection requires .storage() to be available on calling.
-    var connection = iD.Connection(context);
+    var connection = iD.Connection(context)
+        .keys(iD.data.keys);
 
     connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
@@ -104,7 +109,8 @@ window.iD = function () {
     };
 
     /* Presets */
-    var presets = iD.presets(context);
+    var presets = iD.presets(context)
+        .load(iD.data.presets);
 
     context.presets = function() {
         return presets;

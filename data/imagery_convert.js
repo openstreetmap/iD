@@ -84,4 +84,3 @@ $('set').each(function(i) {
 });
 
 fs.writeFileSync('imagery.json', JSON.stringify(imagery, null, 4));
-fs.writeFileSync('imagery.js', 'iD.data.imagery = ' + JSON.stringify(imagery, null, 4) + ';');

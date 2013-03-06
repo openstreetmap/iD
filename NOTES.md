@@ -306,3 +306,15 @@ The graph supports `transient`, which is storage for non-versioned mutable
 properties _about_ entities that are stored outside of entities. For instance,
 `extent` is about an entity, but can be invalidated and stored without getting
 a new graph.
+
+## Data sources
+
+*deprecated.json*
+from http://wiki.openstreetmap.org/wiki/Deprecated_features
+TODO: deal with deprecated 'class' tag
+does not deal with landuse=wood because of indecision
+we will not care about http://taginfo.openstreetmap.org/tags/bicycle_parking=sheffield
+
+*discarded.json*
+entirely discarded tags
+https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/XMLConnection.as#L24

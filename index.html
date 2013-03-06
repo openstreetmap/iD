@@ -37,10 +37,7 @@
         <script src='js/id/oauth.js'></script>
         <script src='js/id/services/taginfo.js'></script>
 
-        <script src='data/data.js'></script>
-        <script src='data/deprecated.js'></script>
-        <script src='data/imagery.js'></script>
-        <script src='data/discarded.js'></script>
+        <script src='data/data_dev.js'></script>
 
         <script src="js/id/geo.js"></script>
         <script src="js/id/geo/extent.js"></script>
@@ -186,29 +183,10 @@
 
     </head>
     <body>
-        <div id='iD'></div><script>
-            locale
-                .current('en')
-                .current(iD.detect().locale);
-
-            var id = iD();
-
-            iD.util.asyncMap(['keys.json',
-                'data/presets/presets.json',
-                'data/presets/defaults.json',
-                'data/presets/categories.json',
-                'data/presets/forms.json'], d3.json, function(err, data) {
-                id.connection()
-                    .keys(data[0]);
-
-                id.presets()
-                    .load({
-                        presets: data[1],
-                        defaults: data[2],
-                        categories: data[3],
-                        forms: data[4]
-                    });
-
+        <div id='iD'></div>
+        <script>
+            iD.data.load(function() {
+                var id = iD();
                 d3.select("#iD")
                     .call(id.ui());
             });
