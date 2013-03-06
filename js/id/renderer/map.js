@@ -133,16 +133,16 @@ iD.Map = function(context) {
 
         tilegroup.style(transformProp, transform);
         surface.style(transformProp, transform);
-        queueRedraw();
+        queueRedraw(scale === 1 ? 500 : 100);
 
         dispatch.move(map);
     }
 
     function resetTransform() {
-        var prop = surface.style(transformProp);
+        var prop = surface.node().style[transformProp];
         if (!prop || prop === 'none') return false;
-        surface.style(transformProp, '');
-        tilegroup.style(transformProp, '');
+        surface.node().style[transformProp] = '';
+        tilegroup.node().style[transformProp] = '';
         return true;
     }
 
@@ -183,9 +183,9 @@ iD.Map = function(context) {
     }
 
     var timeoutId;
-    function queueRedraw() {
+    function queueRedraw(t) {
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(function() { redraw(); }, 300);
+        timeoutId = setTimeout(function() { redraw(); }, t);
     }
 
     function pointLocation(p) {
