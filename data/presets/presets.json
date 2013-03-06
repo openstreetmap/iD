@@ -221,6 +221,7 @@
                 "chancel",
                 "chantry",
                 "chapel",
+                "church",
                 "fold",
                 "house of God",
                 "house of prayer",
@@ -549,6 +550,24 @@
             }
         },
         "icon": "pharmacy",
+        "form": [
+            "operator",
+            "building_area",
+            "address"
+        ]
+    },
+    {
+        "name": "library",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "library"
+            }
+        },
+        "icon": "library",
         "form": [
             "operator",
             "building_area",
