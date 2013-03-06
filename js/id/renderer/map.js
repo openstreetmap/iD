@@ -133,7 +133,7 @@ iD.Map = function(context) {
 
         tilegroup.style(transformProp, transform);
         surface.style(transformProp, transform);
-        queueRedraw(scale === 1 ? 500 : 100);
+        queueRedraw();
 
         dispatch.move(map);
     }
@@ -183,9 +183,9 @@ iD.Map = function(context) {
     }
 
     var timeoutId;
-    function queueRedraw(t) {
+    function queueRedraw() {
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(function() { redraw(); }, t);
+        timeoutId = setTimeout(function() { redraw(); }, 300);
     }
 
     function pointLocation(p) {
