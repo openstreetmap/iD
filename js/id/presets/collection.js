@@ -39,25 +39,34 @@ iD.presets.Collection = function(collection) {
 
             value = value.toLowerCase();
 
-            // Uses levenshtein distance, with a couple of hacks
-            // to prioritize exact substring matches
-            return iD.presets.Collection(collection.sort(function(a, b) {
-                var ia = a.name.indexOf(value) >= 0,
-                    ib = b.name.indexOf(value) >= 0;
+            var substring_name = _.filter(collection, function(a) {
+                return a.name.indexOf(value) !== -1;
+            }),
+            substring_terms = _.filter(collection, function(a) {
+                return _.any(a.match.terms || [], function(b) {
+                    return iD.util.editDistance(value, b) - b.length + value.length < 3;
+                });
+            }),
+            levenstein_name = collection.map(function(a) {
+                return { preset: a, dist: iD.util.editDistance(value, a.name) };
+            }).filter(function(a) {
+                return a.dist - a.preset.name.length + value.length < 3;
+            }).sort(function(a, b) {
+                return a.dist - b.dist;
+            }).map(function(a) {
+                return a.preset;
+            }),
+            other = _.find(collection, function(a) {
+                return a.name === 'other';
+            });
 
-                if (ia && !ib) {
-                    return -1;
-                } else if (ib && !ia) {
-                    return 1;
-                }
-
-                return iD.util.editDistance(value, a.name) - iD.util.editDistance(value, b.name);
-            }).filter(function(d) {
-                return iD.util.editDistance(value, d.name) - d.name.length + value.length < 3 ||
-                    d.name === 'other';
-            }));
+            return iD.presets.Collection(
+                _.unique(
+                    substring_name.concat(
+                        substring_terms,
+                        levenstein_name,
+                        other)));
         }
-
     };
 
     return presets;
