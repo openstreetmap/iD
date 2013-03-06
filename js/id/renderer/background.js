@@ -1,8 +1,6 @@
 iD.Background = function() {
-
-    var tileSize = [256, 256];
-
-    var tile = d3.geo.tile(),
+    var tileSize = 256,
+        tile = d3.geo.tile(),
         projection,
         cache = {},
         offset = [0, 0],
@@ -10,16 +8,15 @@ iD.Background = function() {
         source = d3.functor('');
 
     function tileSizeAtZoom(d, z) {
-        return Math.ceil(tileSize[0] * Math.pow(2, z - d[2])) / tileSize[0];
+        return Math.ceil(tileSize * Math.pow(2, z - d[2])) / tileSize;
     }
 
     function atZoom(t, distance) {
         var power = Math.pow(2, distance);
-        var az = [
+        return [
             Math.floor(t[0] * power),
             Math.floor(t[1] * power),
             t[2] + distance];
-        return az;
     }
 
     function lookUp(d) {
@@ -92,7 +89,7 @@ iD.Background = function() {
         }
 
         function imageTransform(d) {
-            var _ts = tileSize[0] * Math.pow(2, z - d[2]);
+            var _ts = tileSize * Math.pow(2, z - d[2]);
             var scale = tileSizeAtZoom(d, z);
             return 'translate(' +
                 (Math.round((d[0] * _ts) - tileOrigin[0]) + pixelOffset[0]) + 'px,' +
