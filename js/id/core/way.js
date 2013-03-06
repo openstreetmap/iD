@@ -40,12 +40,6 @@ _.extend(iD.Way.prototype, {
         return this.nodes.length > 0 && this.first() === this.last();
     },
 
-    // a way is an area if:
-    //
-    // - area=yes
-    // - closed and
-    //   - doesn't have area=no
-    //   - doesn't have highway tag
     isArea: function() {
         if (this.tags.area === 'yes')
             return true;
