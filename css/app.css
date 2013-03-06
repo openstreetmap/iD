@@ -201,7 +201,6 @@ ul li { list-style: none;}
 ul.toggle-list li a {
     font-weight: bold;
     color: #333;
-    padding: 5px 10px;
     display:block;
     border-top: 1px solid #ccc;
     white-space:nowrap;
@@ -218,9 +217,9 @@ ul.toggle-list .icon {
 ul.link-list li {
     display: inline-block;
     float: right;
-    margin-left: 10px;
-    padding-left: 10px;
-    border-left: 1px solid white;
+    border-left: 1px solid rgba(255,255,255,.5);
+    padding: 5px 0px 5px 5px;
+    margin-left: 5px;
 }
 
 ul.link-list li:last-child {
@@ -1194,8 +1193,6 @@ div.combobox {
 ------------------------------------------------------- */
 
 .about-block {
-    padding: 5px;
-    height: 30px;
     position: absolute;
     right:0px;
     bottom:0px;
@@ -1214,12 +1211,13 @@ div.combobox {
 }
 
 #about { 
-    height: 20px;
     text-align: right;
+    margin-right: 10px;
 }
 
 .source-switch a {
-    padding: 2px 5px;
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
 }
 .source-switch a.live {
     background: #d32232;
