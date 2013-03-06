@@ -194,8 +194,11 @@
 
             var id = iD();
 
-            iD.util.asyncMap(['keys.json', 'presets/presets.json', 'presets/defaults.json',
-            'presets/categories.json', 'presets/forms.json'], d3.json, function(err, data) {
+            iD.util.asyncMap(['keys.json',
+                'data/presets/presets.json',
+                'data/presets/defaults.json',
+                'data/presets/categories.json',
+                'data/presets/forms.json'], d3.json, function(err, data) {
                 id.connection()
                     .keys(data[0]);
 
