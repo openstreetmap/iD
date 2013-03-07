@@ -104,6 +104,7 @@ iD.svg.Lines = function(projection) {
         lines.sort(waystack);
 
         var lineString = iD.svg.LineString(projection, graph, dimensions);
+        var lineStringResampled = iD.svg.LineString(projection, graph, dimensions, 20);
 
         var shadow = surface.select('.layer-shadow'),
             casing = surface.select('.layer-casing'),
@@ -117,6 +118,6 @@ iD.svg.Lines = function(projection) {
             strokes
                 .filter(function(d) { return d.isOneWay(); })
                 .attr('marker-mid', 'url(#oneway-marker)')
-                .attr('d', iD.svg.resample(60));
+                .attr('d', lineStringResampled);
     };
 };
