@@ -10,6 +10,11 @@ all: \
 	iD.js \
 	iD.min.js
 
+PRESET_FILES = $(shell find data/presets/presets -type f -name '*.json')
+
+data/presets/presets.json: $(PRESET_FILES)
+	cd data/presets && node build
+
 # TODO: write a nice node script for this
 data/data.js: \
 	data/deprecated.json \
