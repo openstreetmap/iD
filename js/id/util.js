@@ -1,11 +1,5 @@
 iD.util = {};
 
-iD.util.trueObj = function(arr) {
-    var o = {};
-    for (var i = 0, l = arr.length; i < l; i++) o[arr[i]] = true;
-    return o;
-};
-
 iD.util.tagText = function(entity) {
     return d3.entries(entity.tags).map(function(e) {
         return e.key + '=' + e.value;

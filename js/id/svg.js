@@ -13,30 +13,6 @@ iD.svg = {
         };
     },
 
-    resample: function(points, dx) {
-        var o = [];
-        for (var i = 0; i < points.length - 1; i++) {
-            var a = points[i], b = points[i + 1],
-                span = iD.geo.dist(a, b);
-            o.push(a);
-            // if there is space to fit one or more oneway mark
-            // in this segment
-            if (span > dx) {
-                // the angle from a to b
-                var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
-                    to = points[i].slice();
-                while (iD.geo.dist(a, to) < (span - dx)) {
-                    // a dx-length line segment in that angle
-                    to[0] += Math.cos(angle) * dx;
-                    to[1] += Math.sin(angle) * dx;
-                    o.push(to.slice());
-                }
-            }
-            o.push(b);
-        }
-        return o;
-    },
-
     LineString: function(projection, graph, dimensions, dx) {
         var cache = {},
             resample = this.resample;
@@ -46,27 +22,55 @@ iD.svg = {
                 return cache[entity.id];
             }
 
-            var clip = d3.clip.cohenSutherland()
-                .bounds([0, 0, dimensions[0], dimensions[1]]);
+            var segments = [],
+                last,
+                next,
+                segment = [],
+                started = false,
+                d = '';
 
-            var segments = clip(graph.childNodes(entity).map(function(n) {
-                return projection(n.loc);
-            }));
+            projection.stream(
+                d3.geo.stream({
+                    type: 'LineString',
+                    coordinates: graph.childNodes(entity).map(function(n) {
+                        return n.loc;
+                    })
+                }, projection.stream({
+                    lineStart: function() { last = null; started = false; },
+                    lineEnd: function() { },
+                    point: function(x, y) {
+                        if (!started) d += 'M';
+                        next = [Math.floor(x), Math.floor(y)];
+                        if (dx && last && iD.geo.dist(last, next) > dx) {
+                            var span = iD.geo.dist(last, next),
+                                angle = Math.atan2(next[1] - last[1], next[0] - last[0]),
+                                to = last.slice();
+                            to[0] += Math.cos(angle) * dx;
+                            to[1] += Math.sin(angle) * dx;
+                            while (iD.geo.dist(last, to) < (span)) {
+                                // a dx-length line segment in that angle
+                                if (started) d += 'L';
+                                d += Math.floor(to[0]) + ',' + Math.floor(to[1]);
+                                started = started || true;
+                                to[0] += Math.cos(angle) * dx;
+                                to[1] += Math.sin(angle) * dx;
+                            }
+                        }
+                        if (started) d += 'L';
+                        d += next[0] + ',' + next[1];
+                        started = started || true;
+                        last = next;
+                    }
+                }))
+            );
 
-            if (segments.length === 0) {
+            if (d === '') {
                 cache[entity.id] = null;
                 return cache[entity.id];
+            } else {
+                cache[entity.id] = d;
+                return cache[entity.id];
             }
-
-            cache[entity.id] =
-                segments.map(function(points) {
-                    if (dx) points = resample(points, dx);
-                    return 'M' + points.map(function(p) {
-                        return p[0] + ',' + p[1];
-                    }).join('L');
-                }).join('');
-
-            return cache[entity.id];
         };
     },
 

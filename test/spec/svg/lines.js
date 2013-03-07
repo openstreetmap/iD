@@ -1,6 +1,6 @@
 describe("iD.svg.Lines", function () {
     var surface,
-        projection = Object,
+        projection = d3.geo.mercator(),
         filter = d3.functor(true),
         dimensions = [10, 10];
 
