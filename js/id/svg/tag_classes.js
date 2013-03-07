@@ -2,7 +2,7 @@ iD.svg.TagClasses = function() {
     var keys = iD.util.trueObj([
         'highway', 'railway', 'waterway', 'power', 'motorway', 'amenity',
         'natural', 'landuse', 'building', 'oneway', 'bridge', 'boundary',
-        'leisure', 'construction'
+        'leisure', 'construction', 'place'
     ]), tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
 

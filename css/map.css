@@ -359,6 +359,7 @@ path.fill.tag-amenity-parking {
     fill: #aaa;
 }
 
+path.fill.tag-place,
 path.fill.tag-boundary {
     fill: none;
 }

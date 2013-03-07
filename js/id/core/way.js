@@ -161,5 +161,6 @@ iD.Way.areaKeys = {
     amenity: {},
     shop: {},
     man_made: {},
-    public_transport: {}
+    public_transport: {},
+    place: {}
 };
