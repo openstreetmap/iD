@@ -5,6 +5,21 @@ iD.svg = {
         };
     },
 
+    resample: function resample(dx) {
+        return function() {
+            var line = d3.svg.line();
+            var path = this,
+                l = path.getTotalLength(),
+                t = [0], i = 0, dt = dx / l;
+            while ((i += dt) < 1) t.push(i);
+            t.push(1);
+            return line(t.map(function(t) {
+                var p = path.getPointAtLength(t * l);
+                return [p.x, p.y];
+            }));
+        };
+    },
+
     PointTransform: function(projection) {
         return function(entity) {
             // http://jsperf.com/short-array-join
