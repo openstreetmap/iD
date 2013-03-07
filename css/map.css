@@ -254,6 +254,9 @@ path.fill.tag-building {
     fill: #e06e5f;
 }
 
+/* Landuse */
+
+
 path.stroke.tag-landuse,
 path.stroke.tag-natural-wood,
 path.stroke.tag-natural-tree,
@@ -262,13 +265,79 @@ path.stroke.tag-leisure-park {
     stroke: #8cd05f;
     stroke-width: 1;
 }
+
+path.stroke.tag-landuse-residential { 
+    stroke: #e06e5f;
+}
+
+path.stroke.tag-landuse-commercial { 
+    stroke: #eab056;
+}
+
+path.stroke.tag-landuse-industrial {
+    stroke: #e4a4f5;
+}
+
 path.fill.tag-landuse,
 path.fill.tag-natural-wood,
 path.fill.tag-natural-tree,
 path.fill.tag-natural-grassland,
+path.fill.tag-natural-grass,
 path.fill.tag-leisure-park {
     fill: #8cd05f;
     fill-opacity: 0.2;
+}
+
+path.fill.tag-landuse-residential,
+path.fill.tag-landuse-commercial,
+path.fill.tag-landuse-industrial,
+path.fill.tag-landuse-construction {
+    fill-opacity: 0.1;
+}
+
+path.fill.tag-landuse-basin,
+path.fill.tag-landuse-reservoir { 
+    fill: #77d3de;
+}
+
+path.fill.tag-landuse-quarry { 
+    fill: #a6957b;
+}
+
+path.fill.tag-landuse-residential { 
+    /*fill: #e06e5f;*/
+}
+
+path.fill.tag-landuse-farmland { 
+    fill: url(#) #8cd05f;
+}
+
+path.fill.tag-landuse-meadow { 
+    fill: url(#) #b6e199;
+}
+
+path.fill.tag-natural-wetland { 
+    fill: url(#) #b6e199;
+}
+
+path.fill.tag-landuse-cemetery { 
+    fill: url(#) #8cd05f;
+}
+
+path.fill.tag-landuse-orchard { 
+    fill: url(#) #8cd05f;
+}
+
+path.fill.tag-landuse-construction { 
+    fill: url(#) #e06e5f;
+}
+
+path.fill.tag-landuse-commercial { 
+    fill: #eab056;
+}
+
+path.fill.tag-landuse-industrial { 
+    fill: #e4a4f5;
 }
 
 path.stroke.tag-amenity-parking {
