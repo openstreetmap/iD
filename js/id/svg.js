@@ -5,21 +5,6 @@ iD.svg = {
         };
     },
 
-    resample: function resample(dx) {
-        return function() {
-            var line = d3.svg.line();
-            var path = this,
-                l = path.getTotalLength(),
-                t = [0], i = 0, dt = dx / l;
-            while ((i += dt) < 1) t.push(i);
-            t.push(1);
-            return line(t.map(function(t) {
-                var p = path.getPointAtLength(t * l);
-                return [p.x, p.y];
-            }));
-        };
-    },
-
     PointTransform: function(projection) {
         return function(entity) {
             // http://jsperf.com/short-array-join
@@ -28,8 +13,34 @@ iD.svg = {
         };
     },
 
-    LineString: function(projection, graph, dimensions) {
-        var cache = {};
+    resample: function(points, dx) {
+        var o = [];
+        for (var i = 0; i < points.length - 1; i++) {
+            var a = points[i], b = points[i + 1],
+                span = iD.geo.dist(a, b);
+            o.push(a);
+            // if there is space to fit one or more oneway mark
+            // in this segment
+            if (span > dx) {
+                // the angle from a to b
+                var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
+                    to = points[i].slice();
+                while (iD.geo.dist(a, to) < (span - dx)) {
+                    // a dx-length line segment in that angle
+                    to[0] += Math.cos(angle) * dx;
+                    to[1] += Math.sin(angle) * dx;
+                    o.push(to.slice());
+                }
+            }
+            o.push(b);
+        }
+        return o;
+    },
+
+    LineString: function(projection, graph, dimensions, dx) {
+        var cache = {},
+            resample = this.resample;
+
         return function(entity) {
             if (cache[entity.id] !== undefined) {
                 return cache[entity.id];
@@ -49,10 +60,11 @@ iD.svg = {
 
             cache[entity.id] =
                 segments.map(function(points) {
+                    if (dx) points = resample(points, dx);
                     return 'M' + points.map(function(p) {
                         return p[0] + ',' + p[1];
                     }).join('L');
-                }).join('');
+                }.bind(this)).join('');
 
             return cache[entity.id];
         };
