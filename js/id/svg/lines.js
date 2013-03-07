@@ -1,8 +1,5 @@
 iD.svg.Lines = function(projection) {
 
-    var arrowtext = '►\u3000\u3000\u3000',
-        alength;
-
     var highway_stack = {
         motorway: 0,
         motorway_link: 1,
@@ -92,16 +89,6 @@ iD.svg.Lines = function(projection) {
             return paths;
         }
 
-        if (!alength) {
-            var container = surface.append('g')
-                    .attr('class', 'oneway'),
-                arrow = container.append('text')
-                    .attr('class', 'textpath')
-                    .text(arrowtext);
-            alength = arrow.node().getComputedTextLength();
-            container.remove();
-        }
-
         var lines = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -127,47 +114,9 @@ iD.svg.Lines = function(projection) {
             casings = drawPaths(casing, lines, filter, 'casing', lineString),
             strokes = drawPaths(stroke, lines, filter, 'stroke', lineString);
 
-        // Determine the lengths of oneway paths
-        var lengths = {},
-            oneways = strokes.filter(function(d) { return d.isOneWay(); }).each(function(d) {
-                lengths[d.id] = Math.floor(this.getTotalLength() / alength);
-            }).data();
-
-        var uses = defs.selectAll('path')
-            .filter(filter)
-            .data(oneways, iD.Entity.key);
-
-        uses.enter()
-            .append('path');
-
-        uses
-            .attr('id', function(d) { return 'shadow-' + d.id; })
-            .attr('d', lineString);
-
-        uses.exit()
-            .remove();
-
-        var labels = text.selectAll('text')
-            .filter(filter)
-            .data(oneways, iD.Entity.key);
-
-        var tagClasses = iD.svg.TagClasses();
-
-        var tp = labels.enter()
-            .append('text')
-                .attr({ 'class': 'oneway', dy: 4 })
-            .append('textPath')
-                .attr('class', 'textpath')
-                .call(tagClasses);
-
-        labels.exit().remove();
-
-        text.selectAll('.textpath')
-            .filter(filter)
-            .attr('xlink:href', function(d) { return '#shadow-' + d.id; })
-            .text(function(d) {
-                // adding longer text than necessary, since overflow is hidden
-                return (new Array(Math.floor(lengths[d.id] * 1.1))).join(arrowtext);
-            });
+            strokes
+                .filter(function(d) { return d.isOneWay(); })
+                .attr('marker-mid', 'url(#oneway-marker)')
+                .attr('d', iD.svg.resample(60));
     };
 };

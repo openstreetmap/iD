@@ -695,15 +695,12 @@ text {
     opacity: 1;
 }
 
-.oneway .textpath {
-    pointer-events: none;
-    font-size: 7px;
-    baseline-shift: 2px;
-    opacity: .7;
-}
-
 .oneway .textpath.tag-waterway {
     fill: #002F35;
+}
+
+marker#oneway-marker path {
+    fill:#000;
 }
 
 text.tag-oneway {
