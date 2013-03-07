@@ -131,7 +131,6 @@ g.vertex.shared .fill {
 g.vertex .shadow {
     fill: none;
     pointer-events: all;
-    stroke-width: 20;
     -webkit-transition: -webkit-transform 100ms linear;
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
