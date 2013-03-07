@@ -17,8 +17,8 @@ describe("iD.svg.Lines", function () {
 
         surface.call(iD.svg.Lines(projection), graph, [line], filter, dimensions);
 
-        expect(surface.select('path')).to.be.classed('way');
-        expect(surface.select('path')).to.be.classed('line');
+        expect(surface.select('path.way')).to.be.classed('way');
+        expect(surface.select('path.line')).to.be.classed('line');
     });
 
     it("adds tag classes", function () {
