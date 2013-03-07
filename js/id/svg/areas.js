@@ -83,9 +83,11 @@ iD.svg.Areas = function(projection) {
             return area.type === 'way';
         });
 
-        var fill = surface.select('.layer-fill'),
+        var shadow = surface.select('.layer-shadow'),
+            fill   = surface.select('.layer-fill'),
             stroke = surface.select('.layer-stroke');
 
+        drawPaths(shadow, strokes, filter, 'shadow');
         drawPaths(fill, areas, filter, 'fill', true);
         drawPaths(stroke, strokes, filter, 'stroke');
     };
