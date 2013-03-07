@@ -172,7 +172,7 @@ iD.Background = function() {
         if (!arguments.length) return source;
         source = _;
         cache = {};
-        tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 17]);
+        tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 20]);
         setPermalink(source);
         return background;
     };
