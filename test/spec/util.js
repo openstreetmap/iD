@@ -28,4 +28,23 @@ describe('iD.Util', function() {
         expect(iD.util.getPrototypeOf({})).to.eql({});
         expect(iD.util.getPrototypeOf(new a())).to.eql({ foo: 'foo' });
     });
+
+    describe('#asyncMap', function() {
+        it('handles correct replies', function() {
+            iD.util.asyncMap([1, 2, 3],
+                function(d, c) { c(null, d * 2); },
+                function(err, res) {
+                    expect(err).to.eql([null, null, null]);
+                    expect(res).to.eql([2, 4, 6]);
+                });
+        });
+        it('handles errors', function() {
+            iD.util.asyncMap([1, 2, 3],
+                function(d, c) { c('whoops ' + d, null); },
+                function(err, res) {
+                    expect(err).to.eql(['whoops 1', 'whoops 2', 'whoops 3']);
+                    expect(res).to.eql([null, null, null]);
+                });
+        });
+    });
 });
