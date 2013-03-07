@@ -25,7 +25,22 @@ body {
 }
 
 .spinner {
-    float: right;
+    opacity: .5;
+}
+
+.spinner img {
+    position: fixed;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    border-radius: 5px;
+    background: black;
+    pointer-events:none;
 }
 
 div, textarea, input, form, span, ul, li, ol, a, button {
@@ -1172,7 +1187,7 @@ img.tile {
     opacity: 1;
 }
 
-#about { 
+#about {
     height: 20px;
     text-align: right;
 }
@@ -1252,7 +1267,7 @@ div.typeahead a:first-child {
     z-index: 3;
 }
 
-.modal .loader { 
+.modal .loader {
     margin-bottom: 10px;
 }
 
