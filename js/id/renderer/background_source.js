@@ -31,7 +31,8 @@ iD.BackgroundSource.Custom = function() {
     if (!template) return null;
     return iD.BackgroundSource.template({
         template: template,
-        name: 'Custom (customized)'
+        name: 'Custom'
     });
 };
+
 iD.BackgroundSource.Custom.data = { 'name': 'Custom' };

@@ -24,6 +24,7 @@ iD.ui.Contributors = function(context) {
             .attr('class', 'user-link')
             .attr('href', function(d) { return context.connection().userUrl(d); })
             .attr('target', '_blank')
+            .attr('tabindex', -1)
             .text(String);
 
         if (u.length > limit) {
@@ -31,6 +32,7 @@ iD.ui.Contributors = function(context) {
 
             count.append('a')
                 .attr('target', '_blank')
+                .attr('tabindex', -1)
                 .attr('href', function() {
                     var ext = context.map().extent();
                     return 'http://www.openstreetmap.org/browse/changesets?bbox=' + [

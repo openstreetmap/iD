@@ -20,6 +20,7 @@ iD.ui.SourceSwitch = function(context) {
             .attr('href', '#')
             .text(t('source_switch.live'))
             .classed('live', true)
+            .attr('tabindex', -1)
             .on('click', click);
     };
 };

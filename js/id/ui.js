@@ -86,17 +86,20 @@ iD.ui = function(context) {
         linkList.append('li')
             .append('a')
             .attr('target', '_blank')
+            .attr('tabindex', -1)
             .attr('href', 'http://github.com/systemed/iD')
             .text(iD.version);
 
         linkList.append('li')
             .append('a')
             .attr('target', '_blank')
+            .attr('tabindex', -1)
             .attr('href', 'http://github.com/systemed/iD/issues')
             .text(t('report_a_bug'));
 
         linkList.append('li')
             .attr('class', 'attribution')
+            .attr('tabindex', -1)
             .call(iD.ui.Attribution(context));
 
         linkList.append('li')
@@ -105,6 +108,7 @@ iD.ui = function(context) {
 
         linkList.append('li')
             .attr('class', 'user-list')
+            .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {

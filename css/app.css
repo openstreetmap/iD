@@ -1161,6 +1161,10 @@ div.combobox {
     padding: 5px 10px;
 }
 
+.geocode-control a:focus {
+    text-decoration: underline;
+}
+
 /* Geolocator */
 
 .geolocate-control {

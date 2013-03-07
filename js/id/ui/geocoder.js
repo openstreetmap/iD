@@ -31,6 +31,7 @@ iD.ui.Geocoder = function(context) {
                                 return d.type.charAt(0).toUpperCase() + d.type.slice(1) + ': ';
                             })
                             .append('a')
+                            .attr('tabindex', function(d, i) { return i + 1; })
                             .text(function(d) {
                                 if (d.display_name.length > 80) {
                                     return d.display_name.substr(0, 80) + '…';
@@ -38,7 +39,12 @@ iD.ui.Geocoder = function(context) {
                                     return d.display_name;
                                 }
                             })
-                            .on('click', clickResult);
+                            .on('click', clickResult)
+                            .on('keydown', function(d) {
+                                // support tabbing to and accepting this
+                                // entry
+                                if (d3.event.keyCode == 13) clickResult(d);
+                            });
                         spans.exit().remove();
                         resultsList.classed('hide', false);
                     } else {
@@ -59,7 +65,11 @@ iD.ui.Geocoder = function(context) {
         }
 
         function hide() { setVisible(false); }
-        function toggle() { tooltip.hide(button); setVisible(gcForm.classed('hide')); }
+        function toggle() {
+            if (d3.event) d3.event.preventDefault();
+            tooltip.hide(button);
+            setVisible(gcForm.classed('hide'));
+        }
 
         function setVisible(show) {
             if (show !== shown) {
@@ -97,6 +107,13 @@ iD.ui.Geocoder = function(context) {
         });
 
         context.container().on('click.geocoder-outside', hide);
+
+        var keybinding = d3.keybinding('geocoder');
+
+        keybinding.on('f', toggle);
+
+        d3.select(document)
+            .call(keybinding);
     }
 
     return geocoder;

@@ -96,10 +96,11 @@ iD.ui.Background = function(context) {
 
             content.selectAll('a.layer')
                 .classed('selected', function(d) {
-                    return d === context.background().source();
+                    return d.data.name === context.background().source().data.name;
                 });
 
-            var provided_by = context.container().select('.attribution .provided-by')
+            var provided_by = context.container()
+                .select('.attribution .provided-by')
                 .html('');
 
             if (d.data.terms_url) {
