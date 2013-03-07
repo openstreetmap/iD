@@ -10,5 +10,11 @@
         },
         "terms": []
     },
+    "form": [
+        {
+            "key": "wood",
+            "type": "combo"
+        }
+    ],
     "icon": "park2"
 }

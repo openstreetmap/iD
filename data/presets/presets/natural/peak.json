@@ -1,0 +1,28 @@
+{
+    "name": "peak",
+    "match": {
+        "type": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "natural": "peak"
+        },
+        "terms": [
+            "acme",
+            "aiguille",
+            "alp",
+            "climax",
+            "crest",
+            "crown",
+            "hill",
+            "mount",
+            "mountain",
+            "pinnacle",
+            "summit",
+            "tip",
+            "top"
+        ]
+    },
+    "icon": ""
+}

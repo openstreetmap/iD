@@ -10,7 +10,10 @@
         "terms": []
     },
     "form": [
-        "water"
+        {
+            "key": "water",
+            "type": "combo"
+        }
     ],
     "icon": ""
 }

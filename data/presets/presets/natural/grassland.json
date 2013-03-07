@@ -1,0 +1,15 @@
+{
+    "name": "grassland",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+        ],
+        "tags": {
+            "natural": "grassland"
+        }
+    },
+    "icon": ""
+}

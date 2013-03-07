@@ -59,6 +59,53 @@
         "icon": "park"
     },
     {
+        "name": "bay",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "bay"
+            }
+        },
+        "icon": ""
+    },
+    {
+        "name": "beach",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "beach"
+            }
+        },
+        "form": [
+            "surface"
+        ],
+        "icon": ""
+    },
+    {
+        "name": "cliff",
+        "match": {
+            "type": [
+                "point",
+                "vertex",
+                "line",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "cliff"
+            }
+        },
+        "icon": ""
+    },
+    {
         "name": "coastline",
         "match": {
             "type": [
@@ -74,7 +121,102 @@
         "icon": ""
     },
     {
-        "name": "truee",
+        "name": "glacier",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "glacier"
+            }
+        },
+        "icon": ""
+    },
+    {
+        "name": "grassland",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "grassland"
+            }
+        },
+        "icon": ""
+    },
+    {
+        "name": "heath",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "heath"
+            }
+        },
+        "icon": ""
+    },
+    {
+        "name": "peak",
+        "match": {
+            "type": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "natural": "peak"
+            },
+            "terms": [
+                "acme",
+                "aiguille",
+                "alp",
+                "climax",
+                "crest",
+                "crown",
+                "hill",
+                "mount",
+                "mountain",
+                "pinnacle",
+                "summit",
+                "tip",
+                "top"
+            ]
+        },
+        "icon": ""
+    },
+    {
+        "name": "scrub",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "natural": "scrub"
+            },
+            "terms": []
+        },
+        "icon": ""
+    },
+    {
+        "name": "spring",
+        "match": {
+            "type": [
+                "point",
+                "vertex"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "spring"
+            }
+        },
+        "icon": ""
+    },
+    {
+        "name": "tree",
         "match": {
             "type": [
                 "point",
@@ -105,7 +247,10 @@
             "terms": []
         },
         "form": [
-            "water"
+            {
+                "key": "water",
+                "type": "combo"
+            }
         ],
         "icon": ""
     },
@@ -173,6 +318,12 @@
             },
             "terms": []
         },
+        "form": [
+            {
+                "key": "wetland",
+                "type": "combo"
+            }
+        ],
         "icon": ""
     },
     {
@@ -187,6 +338,12 @@
             },
             "terms": []
         },
+        "form": [
+            {
+                "key": "wood",
+                "type": "combo"
+            }
+        ],
         "icon": "park2"
     },
     {

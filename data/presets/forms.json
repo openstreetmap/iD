@@ -84,9 +84,5 @@
     "layer": {
         "key": "layer",
         "type": "combo"
-    },
-    "water": {
-        "key": "water",
-        "type": "combo"
     }
 }
