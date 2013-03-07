@@ -2,7 +2,8 @@ iD.OAuth = function(context) {
     var baseurl = 'http://www.openstreetmap.org',
         o = {},
         keys,
-        oauth = {};
+        oauth = {},
+        oauth_secret;
 
     function timenonce(o) {
         o.oauth_timestamp = ohauth.timestamp();

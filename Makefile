@@ -10,14 +10,43 @@ all: \
 	iD.js \
 	iD.min.js
 
+# TODO: write a nice node script for this
+data/data.js: \
+	data/deprecated.json \
+	data/discarded.json \
+	data/imagery.json \
+	data/keys.json
+	echo 'iD.data = {' > $@
+	echo 'deprecated: ' >> $@
+	cat data/deprecated.json >> $@
+	echo ', discarded: ' >> $@
+	cat data/discarded.json >> $@
+	echo ', imagery: ' >> $@
+	cat data/imagery.json >> $@
+	echo ', keys: ' >> $@
+	cat data/keys.json >> $@
+	echo ', presets: {' >> $@
+	echo 'presets: ' >> $@
+	cat data/presets/presets.json >> $@
+	echo ', defaults: ' >> $@
+	cat data/presets/defaults.json >> $@
+	echo ', categories: ' >> $@
+	cat data/presets/categories.json >> $@
+	echo ', forms: ' >> $@
+	cat data/presets/forms.json >> $@
+	echo '}' >> $@
+	echo '};' >> $@
+
 .INTERMEDIATE iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
+	js/lib/d3.checkselect.js \
 	js/lib/d3.clip.js \
 	js/lib/d3.combobox.js \
 	js/lib/d3.geo.tile.js \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
+	js/lib/d3.rowselect.js \
 	js/lib/d3.size.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
@@ -32,8 +61,6 @@ all: \
 	js/id/oauth.js \
 	js/id/services/*.js \
 	data/data.js \
-	data/imagery.js \
-	data/deprecated.js \
 	js/id/util.js \
 	js/id/geo.js \
 	js/id/geo/*.js \

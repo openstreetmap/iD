@@ -459,15 +459,22 @@ path.casing.tag-highway-living_street {
     stroke-width:6;
 }
 
-path.stroke.tag-highway-pedestrian {
+path.stroke.line.tag-highway-pedestrian {
     stroke:#fff;
     stroke-dasharray: 2, 8;
     stroke-width:4 !important;
     shapeRendering: auto;
 }
-path.casing.tag-highway-pedestrian {
+path.casing.line.tag-highway-pedestrian {
     stroke:#8cd05f;
     stroke-width:6 !important;
+}
+path.stroke.area.tag-highway-pedestrian {
+    stroke:#fff;
+    stroke-width: 2;
+}
+path.fill.area.tag-highway-pedestrian {
+    fill:#ccc;
 }
 
 path.stroke.tag-highway-service {
@@ -682,6 +689,10 @@ text {
     font-size: 7px;
     baseline-shift: 2px;
     opacity: .7;
+}
+
+.oneway .textpath.tag-waterway {
+    fill: #002F35;
 }
 
 text.tag-oneway {

@@ -1,4 +1,8 @@
 window.iD = function () {
+    locale
+        .current('en')
+        .current(iD.detect().locale);
+
     var context = {},
         storage;
 
@@ -21,7 +25,8 @@ window.iD = function () {
         map = iD.Map(context);
 
     // the connection requires .storage() to be available on calling.
-    var connection = iD.Connection(context);
+    var connection = iD.Connection(context)
+        .keys(iD.data.keys);
 
     connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
@@ -95,8 +100,17 @@ window.iD = function () {
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
 
+    /* Background */
+    var backgroundSources = iD.data.imagery.map(iD.BackgroundSource.template);
+    backgroundSources.push(iD.BackgroundSource.Custom);
+
+    context.backgroundSources = function() {
+        return backgroundSources;
+    };
+
     /* Presets */
-    var presets = iD.presets(context);
+    var presets = iD.presets(context)
+        .load(iD.data.presets);
 
     context.presets = function() {
         return presets;
@@ -111,7 +125,7 @@ window.iD = function () {
     var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
     if (q.layer) {
         context.background()
-           .source(_.find(iD.layers, function(l) {
+           .source(_.find(backgroundSources, function(l) {
                if (l.data.sourcetag === q.layer) {
                    detected = true;
                    return true;
@@ -121,7 +135,7 @@ window.iD = function () {
 
     if (!detected) {
         context.background()
-            .source(_.find(iD.layers, function(l) {
+            .source(_.find(backgroundSources, function(l) {
                 return l.data.name === 'Bing aerial imagery';
             }));
     }

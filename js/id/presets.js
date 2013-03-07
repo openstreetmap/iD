@@ -44,6 +44,8 @@ iD.presets = function(context) {
                 vertex: iD.presets.Collection(d.defaults.vertex.map(getItem))
             };
         }
+
+        return all;
     };
 
     all.defaults = function(entity, n) {

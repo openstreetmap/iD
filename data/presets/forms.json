@@ -73,10 +73,6 @@
         "key": "tunnel",
         "type": "check"
     },
-    "access": {
-        "key": "access",
-        "type": "combo"
-    },
     "maxspeed": {
         "key": "maxspeed",
         "type": "combo"

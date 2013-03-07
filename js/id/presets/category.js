@@ -1,4 +1,5 @@
 iD.presets.Category = function(category, all) {
+    category = _.clone(category);
 
     category.members = iD.presets.Collection(category.members.map(function(name) {
         return all.item(name);

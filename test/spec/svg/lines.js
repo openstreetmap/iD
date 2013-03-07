@@ -58,6 +58,33 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
     });
 
+    it("renders stroke for outer way of multipolygon with tags on the outer way", function() {
+        var a = iD.Node({loc: [1, 1]}),
+            b = iD.Node({loc: [2, 2]}),
+            c = iD.Node({loc: [3, 3]}),
+            w = iD.Way({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]}),
+            r = iD.Relation({members: [{id: w.id}], tags: {type: 'multipolygon'}}),
+            graph = iD.Graph([a, b, c, w, r]);
+
+        surface.call(iD.svg.Lines(projection), graph, [w], filter, dimensions);
+
+        expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
+    });
+
+    it("adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way", function() {
+        var a = iD.Node({loc: [1, 1]}),
+            b = iD.Node({loc: [2, 2]}),
+            c = iD.Node({loc: [3, 3]}),
+            o = iD.Way({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]}),
+            i = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
+            r = iD.Relation({members: [{id: o.id, role: 'outer'}, {id: i.id, role: 'inner'}], tags: {type: 'multipolygon'}}),
+            graph = iD.Graph([a, b, c, o, i, r]);
+
+        surface.call(iD.svg.Lines(projection), graph, [i], filter, dimensions);
+
+        expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
+    });
+
     it("preserves non-line paths", function () {
         var line = iD.Way(),
             graph = iD.Graph([line]);

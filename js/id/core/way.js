@@ -33,7 +33,9 @@ _.extend(iD.Way.prototype, {
     },
 
     isOneWay: function() {
-        return this.tags.oneway === 'yes';
+        return this.tags.oneway === 'yes' ||
+            this.tags.waterway === 'river' ||
+            this.tags.waterway === 'stream';
     },
 
     isClosed: function() {

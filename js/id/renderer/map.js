@@ -304,8 +304,16 @@ iD.Map = function(context) {
     };
 
     map.centerEase = function(loc) {
-        var from = map.center().slice(), t = 0;
+        var from = map.center().slice(),
+            t = 0,
+            stop;
+
+        surface.one('mousedown.ease', function() {
+            stop = true;
+        });
+
         d3.timer(function() {
+            if (stop) return true;
             map.center(iD.geo.interp(from, loc, (t += 1) / 10));
             return t == 10;
         }, 20);
