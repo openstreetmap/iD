@@ -200,6 +200,7 @@ ul li { list-style: none;}
 
 ul.toggle-list li a {
     font-weight: bold;
+    padding: 5px 10px;
     color: #333;
     display:block;
     border-top: 1px solid #ccc;
@@ -1210,7 +1211,7 @@ div.combobox {
     opacity: 1;
 }
 
-#about { 
+#about {
     text-align: right;
     margin-right: 10px;
 }
@@ -1292,7 +1293,7 @@ div.typeahead a:first-child {
     z-index: 3;
 }
 
-.modal .loader { 
+.modal .loader {
     margin-bottom: 10px;
 }
 
