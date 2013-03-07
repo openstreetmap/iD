@@ -60,7 +60,7 @@ a, button {
 
 h2 {
     font-size: 25px;
-    line-height: 1.6;
+    line-height: 1.25;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -333,9 +333,10 @@ button.minor:hover {
 }
 
 button.centered {
-    display: block;
+    float: none;
     margin-left: auto;
     margin-right: auto;
+    display: block;
 }
 
 .button-wrap {
@@ -1369,7 +1370,7 @@ div.typeahead a:first-child {
     border-radius: 0 0 4px 4px;
 }
 
-.modal-section:only-child {
+.modal-section:only-of-type {
     border-radius: 4px;
 }
 
