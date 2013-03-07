@@ -31,7 +31,7 @@ iD.ui.Geocoder = function(context) {
                                 return d.type.charAt(0).toUpperCase() + d.type.slice(1) + ': ';
                             })
                             .append('a')
-                            .attr('tabindex', function(d, i) { return i + 1; })
+                            .attr('tabindex', 1)
                             .text(function(d) {
                                 if (d.display_name.length > 80) {
                                     return d.display_name.substr(0, 80) + '…';
@@ -97,6 +97,7 @@ iD.ui.Geocoder = function(context) {
         var inputNode = gcForm.attr('class', 'content fillD map-overlay hide')
             .append('input')
             .attr({ type: 'text', placeholder: t('geocoder.placeholder') })
+            .attr('tabindex', 1)
             .on('keydown', keydown);
 
         var resultsList = selection.append('div')
