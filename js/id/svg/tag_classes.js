@@ -1,5 +1,5 @@
 iD.svg.TagClasses = function() {
-    var keys = iD.util.trueObj([
+    var keys = d3.set([
         'highway', 'railway', 'waterway', 'power', 'motorway', 'amenity',
         'natural', 'landuse', 'building', 'oneway', 'bridge', 'boundary',
         'leisure', 'construction', 'place'
@@ -18,7 +18,7 @@ iD.svg.TagClasses = function() {
 
             var t = tags(entity);
             for (var k in t) {
-                if (!keys[k]) continue;
+                if (!keys.has(k)) continue;
                 classes += ' tag-' + k + ' ' + 'tag-' + k + '-' + t[k];
             }
 

@@ -16,7 +16,7 @@ iD.Map = function(context) {
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection),
         vertices = iD.svg.Vertices(roundedProjection),
-        lines = iD.svg.Lines(roundedProjection),
+        lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
         labels = iD.svg.Labels(roundedProjection),
@@ -261,6 +261,7 @@ iD.Map = function(context) {
         dimensions = _;
         surface.size(dimensions);
         background.size(dimensions);
+        projection.clipExtent([[0, 0], dimensions]);
         setCenter(center);
         return redraw();
     };
