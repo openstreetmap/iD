@@ -98,7 +98,7 @@
             },
             "terms": []
         },
-        "icon": ""
+        "icon": "park2"
     },
     {
         "name": "coastline",
@@ -310,6 +310,24 @@
         ]
     },
     {
+        "name": "university",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "university"
+            },
+            "terms": []
+        },
+        "icon": "college",
+        "form": [
+            "operator",
+            "address"
+        ]
+    },
+    {
         "name": "parking",
         "match": {
             "type": [
@@ -401,6 +419,24 @@
             "terms": []
         },
         "icon": "bar",
+        "form": [
+            "building_area",
+            "address"
+        ]
+    },
+    {
+        "name": "pub",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "pub"
+            },
+            "terms": []
+        },
+        "icon": "beer",
         "form": [
             "building_area",
             "address"
@@ -504,7 +540,7 @@
             },
             "terms": []
         },
-        "icon": "police",
+        "icon": "pharmacy",
         "form": [
             "dispensing",
             "operator",
@@ -572,7 +608,7 @@
                 "amenity": "police"
             }
         },
-        "icon": "pharmacy",
+        "icon": "police",
         "form": [
             "operator",
             "building_area",
@@ -588,7 +624,8 @@
             ],
             "tags": {
                 "amenity": "library"
-            }
+            },
+            "terms": []
         },
         "icon": "library",
         "form": [
