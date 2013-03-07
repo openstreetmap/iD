@@ -1,9 +1,9 @@
 # See the README for installation instructions.
 
 NODE_PATH ?= ./node_modules
-# JS_COMPILER = $(NODE_PATH)/uglify-js/bin/uglifyjs
-JS_BEAUTIFIER = uglifyjs -b -i 2 -nm -ns
-JS_COMPILER = uglifyjs
+UGLIFY = $(NODE_PATH)/uglify-js/bin/uglifyjs
+JS_BEAUTIFIER = $(UGLIFY) -b -i 2 -nm -ns
+JS_COMPILER = $(UGLIFY)
 LOCALE ?= en_US
 
 all: \
