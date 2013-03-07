@@ -34,6 +34,7 @@ iD.ui.Background = function(context) {
         function toggle() {
             tooltip.hide(button);
             setVisible(content.classed('hide'));
+            content.selectAll('.toggle-list li:first-child a').node().focus();
         }
 
         function setVisible(show) {
@@ -223,6 +224,13 @@ iD.ui.Background = function(context) {
                 context.background().offset([0, 0]);
                 context.redraw();
             });
+
+        var keybinding = d3.keybinding('background');
+
+        keybinding.on('b', toggle);
+
+        d3.select(document)
+            .call(keybinding);
     }
 
     return d3.rebind(background, event, 'on');

@@ -226,6 +226,7 @@ ul.toggle-list li a {
     text-overflow:ellipsis;
     overflow:hidden;
 }
+ul.toggle-list li a:focus,
 ul.toggle-list li a:hover { background-color: #ececec;}
 
 ul.toggle-list .icon {
