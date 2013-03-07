@@ -104,7 +104,7 @@ iD.svg.Lines = function(projection) {
         lines.sort(waystack);
 
         var lineString = iD.svg.LineString(projection, graph, dimensions);
-        var lineStringResampled = iD.svg.LineString(projection, graph, dimensions, 20);
+        var lineStringResampled = iD.svg.LineString(projection, graph, dimensions, 35);
 
         var shadow = surface.select('.layer-shadow'),
             casing = surface.select('.layer-casing'),
