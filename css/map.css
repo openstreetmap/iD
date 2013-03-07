@@ -320,6 +320,16 @@ path.fill.tag-natural-wetland {
     fill: url(#) #b6e199;
 }
 
+path.fill.tag-natural-beach {
+    /* Use the meadow pattern here as well */
+    fill: url(#) #ffff7e;
+}
+
+path.fill.tag-natural-scrub {
+    /* Use the meadow pattern here as well */
+    fill: url(#) #dbf08b;
+}
+
 path.fill.tag-landuse-cemetery { 
     fill: url(#) #8cd05f;
 }

@@ -20,6 +20,16 @@
      id="defs4">
     <pattern
        inkscape:collect="always"
+       xlink:href="#pattern17261"
+       id="pattern17267"
+       patternTransform="translate(-35,352.375)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#pattern13564-4"
+       id="pattern17261"
+       patternTransform="translate(-35,472.375)" />
+    <pattern
+       inkscape:collect="always"
        xlink:href="#pattern14308"
        id="pattern14356"
        patternTransform="translate(35,1312.3622)" />
@@ -675,9 +685,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="-304.35719"
-     inkscape:cy="-544.25886"
+     inkscape:zoom="1"
+     inkscape:cx="-182.85719"
+     inkscape:cy="-789.25886"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1695,5 +1705,57 @@
          style="opacity:0.25;color:#000000;fill:#e06e5f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          transform="matrix(-0.70710678,0.70710678,-0.70710678,-0.70710678,0,0)" />
     </g>
+    <rect
+       style="color:#000000;fill:#dbf08b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375000000006;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect17253"
+       width="180.00002"
+       height="100.00002"
+       x="-260"
+       y="472.36218" />
+    <text
+       sodipodi:linespacing="167%"
+       id="text17255"
+       y="527.2522"
+       x="-170.47754"
+       style="font-size:15px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.5;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Bold"
+       xml:space="preserve"><tspan
+         style="font-size:15px;font-weight:bold;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;-inkscape-font-specification:Source Sans Pro Bold"
+         y="527.2522"
+         x="-170.47754"
+         id="tspan17257"
+         sodipodi:role="line">NATURAL=SCRUB</tspan></text>
+    <rect
+       y="472.36218"
+       x="-260"
+       height="100.00002"
+       width="180.00002"
+       id="rect17259"
+       style="opacity:0.25;color:#000000;fill:url(#pattern17261);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       y="352.36218"
+       x="-260"
+       height="100.00002"
+       width="180.00002"
+       id="rect17263"
+       style="color:#000000;fill:#ffff7e;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375000000006;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="opacity:0.25;color:#000000;fill:url(#pattern17267);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect17265"
+       width="180.00002"
+       height="100.00002"
+       x="-260"
+       y="352.36218" />
+    <text
+       xml:space="preserve"
+       style="font-size:15px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:166.99999571%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.5;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Bold"
+       x="-170.47754"
+       y="407.2522"
+       id="text17269"
+       sodipodi:linespacing="167%"><tspan
+         sodipodi:role="line"
+         id="tspan17271"
+         x="-170.47754"
+         y="407.2522"
+         style="font-size:15px;font-weight:bold;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;-inkscape-font-specification:Source Sans Pro Bold">NATURAL=BEACH</tspan></text>
   </g>
 </svg>
