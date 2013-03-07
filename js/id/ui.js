@@ -48,6 +48,10 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap col1')
             .call(iD.ui.Save(context));
 
+        bar.append('div')
+            .attr('class', 'spinner')
+            .call(iD.ui.Spinner(context));
+
         container.append('div')
             .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));

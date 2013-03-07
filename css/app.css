@@ -24,6 +24,25 @@ body {
     max-width: 1200px;
 }
 
+.spinner {
+    opacity: .5;
+}
+
+.spinner img {
+    position: fixed;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    border-radius: 5px;
+    background: black;
+    pointer-events:none;
+}
+
 div, textarea, input, form, span, ul, li, ol, a, button {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;

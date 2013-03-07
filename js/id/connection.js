@@ -1,6 +1,6 @@
 iD.Connection = function(context) {
 
-    var event = d3.dispatch('auth', 'load'),
+    var event = d3.dispatch('auth', 'loading', 'load', 'loaded'),
         url = 'http://www.openstreetmap.org',
         connection = {},
         user = {},
@@ -18,19 +18,6 @@ iD.Connection = function(context) {
     connection.changesetUrl = function(changesetId) {
         return url + '/browse/changeset/' + changesetId;
     };
-
-    function bboxUrl(b) {
-        return url + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
-    }
-
-    function bboxFromAPI(box, tile, callback) {
-        function done(err, parsed) {
-             loadedTiles[tile.toString()] = true;
-             delete inflight[tile.toString()];
-             callback(err, parsed);
-         }
-         inflight[tile.toString()] = connection.loadFromURL(bboxUrl(box), done);
-    }
 
     connection.loadFromURL = function(url, callback) {
         function done(dom) {
@@ -237,16 +224,7 @@ iD.Connection = function(context) {
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     };
 
-    function tileAlreadyLoaded(c) { return !loadedTiles[c.toString()] && !inflight[c.toString()]; }
-
     function abortRequest(i) { i.abort(); }
-
-    function loadTile(e) {
-        function done(err, g) {
-            event.load(err, g);
-        }
-        bboxFromAPI(e.box, e.tile, done);
-    }
 
     connection.loadTiles = function(projection, dimensions) {
         var scaleExtent = [16, 16],
@@ -263,15 +241,14 @@ iD.Connection = function(context) {
                 s / 2 - projection.translate()[0],
                 s / 2 - projection.translate()[1]];
 
-        function apiExtentBox(c) {
-            var x = (c[0] * ts) - tile_origin[0];
-            var y = (c[1] * ts) - tile_origin[1];
-            return {
-                box: [
-                    projection.invert([x, y]),
-                    projection.invert([x + ts, y + ts])],
-                tile: c
-            };
+        function bboxUrl(tile) {
+            var x = (tile[0] * ts) - tile_origin[0];
+            var y = (tile[1] * ts) - tile_origin[1];
+            var b = [
+                projection.invert([x, y]),
+                projection.invert([x + ts, y + ts])];
+
+            return url + '/api/0.6/map?bbox=' + [b[0][0], b[1][1], b[1][0], b[0][1]];
         }
 
         _.filter(inflight, function(v, i) {
@@ -282,10 +259,26 @@ iD.Connection = function(context) {
             return !wanted;
         }).map(abortRequest);
 
-        tiles
-            .filter(tileAlreadyLoaded)
-            .map(apiExtentBox)
-            .forEach(loadTile);
+        tiles.forEach(function(tile) {
+            var id = tile.toString();
+
+            if (loadedTiles[id] || inflight[id]) return;
+
+            if (_.isEmpty(inflight)) {
+                event.loading();
+            }
+
+            inflight[id] = connection.loadFromURL(bboxUrl(tile), function(err, parsed) {
+                loadedTiles[id] = true;
+                delete inflight[id];
+
+                event.load(err, parsed);
+
+                if (_.isEmpty(inflight)) {
+                    event.loaded();
+                }
+            });
+        });
     };
 
     connection.userUrl = function(username) {
