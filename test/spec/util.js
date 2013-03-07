@@ -1,9 +1,4 @@
 describe('iD.Util', function() {
-    it('#trueObj', function() {
-        expect(iD.util.trueObj(['a', 'b', 'c'])).to.eql({ a: true, b: true, c: true });
-        expect(iD.util.trueObj([])).to.eql({});
-    });
-
     it('#tagText', function() {
         expect(iD.util.tagText({})).to.eql('');
         expect(iD.util.tagText({tags:{foo:'bar'}})).to.eql('foo=bar');

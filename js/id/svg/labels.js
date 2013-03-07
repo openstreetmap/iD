@@ -212,7 +212,7 @@ iD.svg.Labels = function(projection) {
             pad = 50,
             rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
             labels = _.pluck(rtree.search(rect, this), 'leaf'),
-            containsLabel = iD.util.trueObj(labels),
+            containsLabel = d3.set(labels),
             selection = d3.select(this);
 
         // ensures that simply resetting opacity
@@ -230,7 +230,7 @@ iD.svg.Labels = function(projection) {
         if (!labels.length) return;
         selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
             .filter(function(d) {
-                return containsLabel[d.id];
+                return containsLabel.has(d.id);
             })
             .style('opacity', 0)
             .property('_opacity', 0);

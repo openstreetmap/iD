@@ -157,7 +157,7 @@ iD.Way.areaKeys = {
     historic: {},
     landuse: {},
     military: {},
-    natural: iD.util.trueObj(['coastline']),
+    natural: { coastline: true },
     amenity: {},
     shop: {},
     man_made: {},
