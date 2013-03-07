@@ -798,6 +798,17 @@ text.point {
     cursor: url(../img/cursor-select-split.png), pointer;
 }
 
+.mode-select .behavior-multiselect .point,
+.mode-select .behavior-multiselect .vertex,
+.mode-select .behavior-multiselect .line,
+.mode-select .behavior-multiselect .area {
+    cursor: url(../img/cursor-select-add.png), pointer;
+}
+
+.mode-select .behavior-multiselect .selected {
+    cursor: url(../img/cursor-select-remove.png), pointer;
+}
+
 .point:active,
 .vertex:active,
 .line:active,
