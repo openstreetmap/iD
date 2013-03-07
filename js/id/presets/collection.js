@@ -39,32 +39,44 @@ iD.presets.Collection = function(collection) {
 
             value = value.toLowerCase();
 
-            var substring_name = _.filter(collection, function(a) {
-                return a.name.indexOf(value) !== -1;
-            }),
-            substring_terms = _.filter(collection, function(a) {
-                return _.any(a.match.terms || [], function(b) {
-                    return iD.util.editDistance(value, b) - b.length + value.length < 3;
+            var leading_name = _.filter(collection, function(a) {
+                    return leading(a.name);
+                }),
+                leading_terms = _.filter(collection, function(a) {
+                    return _.any(a.match.terms || [], leading);
                 });
-            }),
-            levenstein_name = collection.map(function(a) {
-                return { preset: a, dist: iD.util.editDistance(value, a.name) };
-            }).filter(function(a) {
-                return a.dist - a.preset.name.length + value.length < 3;
-            }).sort(function(a, b) {
-                return a.dist - b.dist;
-            }).map(function(a) {
-                return a.preset;
-            }),
-            other = _.find(collection, function(a) {
-                return a.name === 'other';
-            });
+
+            function leading(a) {
+                var index = a.indexOf(value);
+                return index === 0 || a[index - 1] === ' ';
+            }
+
+            var levenstein_name = collection.map(function(a) {
+                    return {
+                        preset: a,
+                        dist: iD.util.editDistance(value, a.name)
+                    };
+                }).filter(function(a) {
+                    return a.dist - a.preset.name.length + value.length < 2;
+                }).sort(function(a, b) {
+                    return a.dist - b.dist;
+                }).map(function(a) {
+                    return a.preset;
+                }),
+                leventstein_terms = _.filter(collection, function(a) {
+                    return _.any(a.match.terms || [], function(b) {
+                        return iD.util.editDistance(value, b) - b.length + value.length < 2;
+                    });
+                });
+
+            var other = presets.item('other');
 
             return iD.presets.Collection(
                 _.unique(
-                    substring_name.concat(
-                        substring_terms,
+                    leading_name.concat(
+                        leading_terms,
                         levenstein_name,
+                        leventstein_terms,
                         other)));
         }
     };
