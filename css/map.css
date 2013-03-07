@@ -305,7 +305,7 @@ path.fill.tag-landuse-quarry {
 }
 
 path.fill.tag-landuse-residential { 
-    /*fill: #e06e5f;*/
+    fill: #e06e5f;
 }
 
 path.fill.tag-landuse-farmland { 
@@ -313,6 +313,7 @@ path.fill.tag-landuse-farmland {
 }
 
 path.fill.tag-landuse-meadow { 
+    /* Use the dots pattern here */
     fill: url(#) #b6e199;
 }
 
@@ -321,12 +322,12 @@ path.fill.tag-natural-wetland {
 }
 
 path.fill.tag-natural-beach {
-    /* Use the meadow pattern here as well */
+    /* Use the dots pattern here */
     fill: url(#) #ffff7e;
 }
 
 path.fill.tag-natural-scrub {
-    /* Use the meadow pattern here as well */
+    /* Use the dots pattern here */
     fill: url(#) #dbf08b;
 }
 
