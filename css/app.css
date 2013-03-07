@@ -1560,21 +1560,23 @@ a.success-action {
 
 .tooltip-inner {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 10px;
     font-size: 11px;
     font-weight: bold;
     background-color: white;
-    -webkit-border-radius: 4px;
+/*    -webkit-border-radius: 4px;
        -moz-border-radius: 4px;
-            border-radius: 4px;
+            border-radius: 4px;*/
 }
 
 .tail {
     width: 200px;
+    height: 400px;
     pointer-events: none;
     opacity: .8;
-    margin-top: -15px;
+    margin-top: -200px;
     position: absolute;
+    background: transparent;
 }
 
 .tail::after {
@@ -1589,6 +1591,16 @@ a.success-action {
     margin-top: -5px;
     border-left-color: white;
     border-width: 5px 0 5px 5px;
+}
+
+.tail div {
+    padding: 10px;
+    background: white;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .left.tail::after {
