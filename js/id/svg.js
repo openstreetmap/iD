@@ -24,6 +24,7 @@ iD.svg = {
 
             var segments = [],
                 last,
+                next,
                 segment = [],
                 started = false,
                 d = '';
