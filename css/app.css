@@ -26,19 +26,18 @@ body {
 
 .spinner {
     opacity: .5;
+    z-index: 10;
+    position: relative;
 }
 
 .spinner img {
     position: fixed;
-    padding: 5px;
     height: 40px;
     width: 40px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+    right: 10px;
+    top: 10px;
     margin: auto;
-    border-radius: 5px;
+    border-radius: 4px;
     background: black;
     pointer-events:none;
 }
