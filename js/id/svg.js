@@ -64,7 +64,7 @@ iD.svg = {
                     return 'M' + points.map(function(p) {
                         return p[0] + ',' + p[1];
                     }).join('L');
-                }.bind(this)).join('');
+                }).join('');
 
             return cache[entity.id];
         };
