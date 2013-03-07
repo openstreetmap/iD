@@ -443,23 +443,6 @@
         ]
     },
     {
-        "name": "bus stop",
-        "match": {
-            "type": [
-                "point"
-            ],
-            "tags": {
-                "highway": "bus_stop"
-            },
-            "terms": []
-        },
-        "icon": "bus",
-        "form": [
-            "operator",
-            "shelter"
-        ]
-    },
-    {
         "name": "cinema",
         "match": {
             "type": [
@@ -1040,24 +1023,6 @@
         ]
     },
     {
-        "name": "basketball court",
-        "match": {
-            "type": [
-                "point",
-                "area"
-            ],
-            "tags": {
-                "leisure": "pitch",
-                "sport": "basketball"
-            },
-            "terms": []
-        },
-        "icon": "basketball",
-        "form": [
-            "surface"
-        ]
-    },
-    {
         "name": "baseball diamond",
         "match": {
             "type": [
@@ -1112,6 +1077,24 @@
         ]
     },
     {
+        "name": "basketball court",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "pitch",
+                "sport": "basketball"
+            },
+            "terms": []
+        },
+        "icon": "basketball",
+        "form": [
+            "surface"
+        ]
+    },
+    {
         "name": "building",
         "match": {
             "type": [
@@ -1126,6 +1109,23 @@
         "form": [
             "building_yes",
             "address"
+        ]
+    },
+    {
+        "name": "bus stop",
+        "match": {
+            "type": [
+                "point"
+            ],
+            "tags": {
+                "highway": "bus_stop"
+            },
+            "terms": []
+        },
+        "icon": "bus",
+        "form": [
+            "operator",
+            "shelter"
         ]
     },
     {

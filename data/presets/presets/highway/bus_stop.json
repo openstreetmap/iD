@@ -1,0 +1,17 @@
+{
+    "name": "bus stop",
+    "match": {
+        "type": [
+            "point"
+        ],
+        "tags": {
+            "highway": "bus_stop"
+        },
+        "terms": []
+    },
+    "icon": "bus",
+    "form": [
+        "operator",
+        "shelter"
+    ]
+}

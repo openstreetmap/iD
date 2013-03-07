@@ -1,0 +1,33 @@
+{
+    "name": "hospital",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "clinic",
+            "emergency room",
+            "health service",
+            "hospice",
+            "infirmary",
+            "institution",
+            "nursing home",
+            "rest home",
+            "sanatorium",
+            "sanitarium",
+            "sick bay",
+            "surgery",
+            "ward"
+        ],
+        "tags": {
+            "amenity": "hospital"
+        }
+    },
+    "icon": "hospital",
+    "form": [
+        "emergency",
+        "building_area",
+        "address"
+    ]
+}

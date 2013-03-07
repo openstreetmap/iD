@@ -1,0 +1,14 @@
+{
+    "name": "water",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "natural": "water"
+        },
+        "terms": []
+    },
+    "icon": ""
+}
