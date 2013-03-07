@@ -80,8 +80,8 @@ iD.Connection = function(context) {
                 loc: [parseFloat(attrs.lon.nodeValue), parseFloat(attrs.lat.nodeValue)],
                 version: attrs.version.nodeValue,
                 changeset: attrs.changeset.nodeValue,
-                user: attrs.user.nodeValue,
-                uid: attrs.uid.nodeValue,
+                user: attrs.user && attrs.user.nodeValue,
+                uid: attrs.uid && attrs.uid.nodeValue,
                 visible: attrs.visible.nodeValue,
                 timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj)
