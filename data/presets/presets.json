@@ -62,7 +62,6 @@
         "name": "water",
         "match": {
             "type": [
-                "point",
                 "area"
             ],
             "tags": {
@@ -70,6 +69,70 @@
             },
             "terms": []
         },
+        "form": [
+            "water"
+        ],
+        "icon": ""
+    },
+    {
+        "name": "lake",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "natural": "water",
+                "water": "lake"
+            },
+            "terms": [
+                "lakelet",
+                "loch",
+                "mere"
+            ]
+        },
+        "form": [
+            "water"
+        ],
+        "icon": ""
+    },
+    {
+        "name": "pond",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "natural": "water",
+                "water": "pond"
+            },
+            "terms": [
+                "lakelet",
+                "millpond",
+                "tarn",
+                "pool",
+                "mere"
+            ]
+        },
+        "form": [
+            "water"
+        ],
+        "icon": ""
+    },
+    {
+        "name": "reservoir",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "natural": "water",
+                "water": "reservoir"
+            },
+            "terms": []
+        },
+        "form": [
+            "water"
+        ],
         "icon": ""
     },
     {

@@ -2,7 +2,6 @@
     "name": "water",
     "match": {
         "type": [
-            "point",
             "area"
         ],
         "tags": {
@@ -10,5 +9,8 @@
         },
         "terms": []
     },
+    "form": [
+        "water"
+    ],
     "icon": ""
 }

@@ -1,0 +1,20 @@
+{
+    "name": "pond",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "natural": "water",
+            "water": "pond"
+        },
+        "terms": [
+            "lakelet",
+            "millpond",
+            "tarn",
+            "pool",
+            "mere"
+        ]
+    },
+    "icon": ""
+}
