@@ -116,6 +116,29 @@
         "icon": ""
     },
     {
+        "name": "island",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "archipelago",
+                "atoll",
+                "bar",
+                "cay",
+                "isle",
+                "islet",
+                "key",
+                "reef"
+            ],
+            "tags": {
+                "place": "island"
+            }
+        },
+        "icon": ""
+    },
+    {
         "name": "supermarket",
         "match": {
             "type": [
