@@ -59,6 +59,41 @@
         "icon": "park"
     },
     {
+        "name": "coastline",
+        "match": {
+            "type": [
+                "line"
+            ],
+            "terms": [
+                "shore"
+            ],
+            "tags": {
+                "natural": "coastline"
+            }
+        },
+        "icon": ""
+    },
+    {
+        "name": "truee",
+        "match": {
+            "type": [
+                "point",
+                "vertex"
+            ],
+            "terms": [],
+            "tags": {
+                "natural": "tree"
+            }
+        },
+        "form": [
+            {
+                "key": "denotation",
+                "type": "combo"
+            }
+        ],
+        "icon": "park"
+    },
+    {
         "name": "water",
         "match": {
             "type": [
@@ -153,21 +188,6 @@
             "terms": []
         },
         "icon": "park2"
-    },
-    {
-        "name": "coastline",
-        "match": {
-            "type": [
-                "line"
-            ],
-            "terms": [
-                "shore"
-            ],
-            "tags": {
-                "natural": "coastline"
-            }
-        },
-        "icon": ""
     },
     {
         "name": "island",
