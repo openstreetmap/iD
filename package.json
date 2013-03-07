@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha-phantomjs test/index.html"
+    "test": "mocha-phantomjs test/index.html && make && mocha-phantomjs test/index_packaged.html"
   },
   "repository": {
     "type": "git",
