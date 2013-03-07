@@ -1,0 +1,24 @@
+{
+    "name": "cafe",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "coffee",
+            "tea",
+            "coffee shop"
+        ],
+        "tags": {
+            "amenity": "cafe"
+        }
+    },
+    "icon": "cafe",
+    "form": [
+        "cuisine",
+        "internet_access",
+        "building_area",
+        "address"
+    ]
+}

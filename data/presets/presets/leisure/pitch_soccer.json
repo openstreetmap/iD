@@ -1,0 +1,18 @@
+{
+    "name": "soccer field",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "soccer"
+        },
+        "terms": []
+    },
+    "icon": "soccer",
+    "form": [
+        "surface"
+    ]
+}

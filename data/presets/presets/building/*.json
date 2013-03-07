@@ -1,0 +1,17 @@
+{
+    "name": "building",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "building": "*"
+        },
+        "terms": []
+    },
+    "icon": "warehouse",
+    "form": [
+        "building_yes",
+        "address"
+    ]
+}

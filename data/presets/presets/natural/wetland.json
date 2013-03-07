@@ -1,0 +1,14 @@
+{
+    "name": "wetland",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "natural": "wetland"
+        },
+        "terms": []
+    },
+    "icon": ""
+}

@@ -243,7 +243,7 @@ iD.svg.Labels = function(projection) {
     var rtree = new RTree(),
         rectangles = {},
         lang = 'name:' + iD.detect().locale.toLowerCase().split('-')[0],
-        mousePosition, cacheDimensions;
+        supersurface, mousePosition, cacheDimensions;
 
     return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
 
@@ -252,8 +252,16 @@ iD.svg.Labels = function(projection) {
             cacheDimensions = dimensions.join(',');
         }
 
-        d3.select(surface.node().parentNode)
-            .on('mousemove.hidelabels', hideOnMouseover);
+        if (!supersurface) {
+            supersurface = d3.select(surface.node().parentNode)
+                .on('mousemove.hidelabels', hideOnMouseover)
+                .on('mousedown.hidelabels', function() {
+                    supersurface.on('mousemove.hidelabels', null);
+                })
+                .on('mouseup.hidelabels', function() {
+                    supersurface.on('mousemove.hidelabels', hideOnMouseover);
+                });
+        }
 
         var hidePoints = !surface.select('.node.point').node();
 

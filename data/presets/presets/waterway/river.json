@@ -1,0 +1,27 @@
+{
+    "name": "river",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "terms": [
+            "beck",
+            "branch",
+            "brook",
+            "course",
+            "creek",
+            "estuary",
+            "rill",
+            "rivulet",
+            "run",
+            "runnel",
+            "stream",
+            "tributary",
+            "watercourse"
+        ],
+        "tags": {
+            "waterway": "river"
+        }
+    },
+    "icon": "waterway-river"
+}

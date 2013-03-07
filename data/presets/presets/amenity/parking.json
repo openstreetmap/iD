@@ -1,0 +1,19 @@
+{
+    "name": "parking",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "parking"
+        },
+        "terms": []
+    },
+    "icon": "parking",
+    "form": [
+        "fee",
+        "access",
+        "address"
+    ]
+}
