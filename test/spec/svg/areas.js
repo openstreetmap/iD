@@ -14,8 +14,8 @@ describe("iD.svg.Areas", function () {
 
         surface.call(iD.svg.Areas(projection), graph, [area], filter);
 
-        expect(surface.select('path')).to.be.classed('way');
-        expect(surface.select('path')).to.be.classed('area');
+        expect(surface.select('path.way')).to.be.classed('way');
+        expect(surface.select('path.area')).to.be.classed('area');
     });
 
     it("adds tag classes", function () {
