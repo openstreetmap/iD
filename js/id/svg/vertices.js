@@ -22,7 +22,7 @@ iD.svg.Vertices = function(projection) {
             .attr('class', 'node vertex');
 
         group.append('circle')
-            .attr('r', 10)
+            .attr('r', 9)
             .attr('class', 'node vertex shadow');
 
         group.append('circle')
