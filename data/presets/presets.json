@@ -631,6 +631,30 @@
         ]
     },
     {
+        "name": "town hall",
+        "match": {
+            "type": [
+                "point",
+                "areea"
+            ],
+            "terms": [
+                "village hall",
+                "city government",
+                "courthouse",
+                "municipal building",
+                "municipal center"
+            ],
+            "tags": {
+                "amenity": "townhall"
+            }
+        },
+        "icon": "town-hall",
+        "form": [
+            "building_area",
+            "address"
+        ]
+    },
+    {
         "name": "golf course",
         "match": {
             "type": [
