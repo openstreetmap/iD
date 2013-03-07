@@ -107,7 +107,7 @@ iD.ui.Geocoder = function(context) {
             return d3.event.stopPropagation();
         });
 
-        context.container().on('click.geocoder-outside', hide);
+        context.container().on('mousedown.geocoder-outside', hide, true);
 
         var keybinding = d3.keybinding('geocoder');
 

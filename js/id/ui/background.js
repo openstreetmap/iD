@@ -49,9 +49,9 @@ iD.ui.Background = function(context) {
             return d3.event.stopPropagation();
         });
 
-        context.container().on('click.background-outside', function() {
+        context.container().on('mousedown.background-outside', function() {
             setVisible(false);
-        });
+        }, true);
 
         var opa = content
             .append('div')
