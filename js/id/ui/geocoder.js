@@ -46,7 +46,7 @@ iD.ui.Geocoder = function(context) {
                                 if (d3.event.keyCode == 13) clickResult(d);
                             });
                         spans.exit().remove();
-                        resultsList.classed('hide', false);
+                        resultsList.call(iD.ui.Toggle(true));
                     } else {
                         applyBounds(resultExtent(resp[0].boundingbox));
                     }
@@ -75,7 +75,7 @@ iD.ui.Geocoder = function(context) {
             if (show !== shown) {
                 button.classed('active', show);
                 gcForm.call(iD.ui.Toggle(show));
-                if (!show) resultsList.classed('hide', !show);
+                if (!show) resultsList.call(iD.ui.Toggle(show));
                 if (show) inputNode.node().focus();
                 else inputNode.node().blur();
                 shown = show;
