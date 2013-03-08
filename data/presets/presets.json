@@ -957,6 +957,27 @@
         ]
     },
     {
+        "name": "post box",
+        "match": {
+            "type": [
+                "point"
+            ],
+            "tags": {
+                "amenity": "post_box"
+            },
+            "terms": [
+                "letter drop",
+                "letterbox",
+                "mail drop",
+                "mailbox",
+                "pillar box",
+                "postbox"
+            ]
+        },
+        "icon": "post",
+        "form": []
+    },
+    {
         "name": "library",
         "match": {
             "type": [
@@ -1560,6 +1581,19 @@
             "terms": []
         },
         "icon": "railway-rail"
+    },
+    {
+        "name": "subway entrance",
+        "match": {
+            "type": [
+                "point"
+            ],
+            "tags": {
+                "railway": "subway_entrance"
+            },
+            "terms": []
+        },
+        "icon": "rail-underground"
     },
     {
         "name": "trunk highway",
