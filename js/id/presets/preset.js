@@ -13,12 +13,18 @@ iD.presets.Preset = function(preset, forms) {
     };
 
     preset.matchTags = function(entity) {
-        var tags = preset.match.tags;
+        var tags = preset.match.tags,
+            score = 0;
         for (var t in tags) {
-            if (entity.tags[t] !== tags[t] &&
-                !(tags[t] === '*' && t in entity.tags)) return -1;
+            if (entity.tags[t] === tags[t]) {
+                score ++;
+            } else if (tags[t] === '*' && t in entity.tags) {
+                score += 0.5;
+            } else {
+                return -1;
+            }
         }
-        return Object.keys(preset.match.tags).length;
+        return score;
     };
 
     preset.removeTags = function(tags, geometry) {

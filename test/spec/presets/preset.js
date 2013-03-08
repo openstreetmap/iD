@@ -103,7 +103,7 @@ describe('iD.presets.Preset', function() {
         });
 
         it("counts * as a match for any value", function() {
-            expect(p.building.matchTags(w4)).to.equal(1);
+            expect(p.building.matchTags(w4)).to.equal(0.5);
             expect(p.building.matchTags(w5)).to.equal(-1);
         });
 
