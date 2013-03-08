@@ -88,6 +88,22 @@ describe('iD.Entity', function () {
                 b = a.mergeTags({a: 'b'});
             expect(b.tags).to.eql({a: 'a;b'});
         });
+
+        it("combines combined tags", function () {
+            var a = iD.Entity({tags: {a: 'a;b'}}),
+                b = iD.Entity({tags: {a: 'b'}});
+
+            expect(a.mergeTags(b.tags).tags).to.eql({a: 'a;b'});
+            expect(b.mergeTags(a.tags).tags).to.eql({a: 'b;a'});
+        });
+
+        it("combines combined tags with whitespace", function () {
+            var a = iD.Entity({tags: {a: 'a; b'}}),
+                b = iD.Entity({tags: {a: 'b'}});
+
+            expect(a.mergeTags(b.tags).tags).to.eql({a: 'a;b'});
+            expect(b.mergeTags(a.tags).tags).to.eql({a: 'b;a'});
+        });
     });
 
     describe("#osmId", function () {
