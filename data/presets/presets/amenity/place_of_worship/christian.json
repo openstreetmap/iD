@@ -1,11 +1,12 @@
 {
-    "name": "place of worship",
+    "name": "church",
     "match": {
         "type": [
             "point",
             "area"
         ],
         "terms": [
+            "christian",
             "abbey",
             "basilica",
             "bethel",
@@ -20,23 +21,21 @@
             "house of worship",
             "minster",
             "mission",
-            "mosque",
             "oratory",
             "parish",
             "sacellum",
             "sanctuary",
             "shrine",
-            "synagogue",
             "tabernacle",
             "temple"
         ],
         "tags": {
-            "amenity": "place_of_worship"
+            "amenity": "place_of_worship",
+            "religion": "christian"
         }
     },
-    "icon": "place-of-worship",
+    "icon": "religious-christian",
     "form": [
-        "religion",
         "denomination",
         "building",
         "address"
