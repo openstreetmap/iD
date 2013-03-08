@@ -1,0 +1,20 @@
+{
+    "name": "toilets",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+        ],
+        "tags": {
+            "amenity": "toilets"
+        }
+    },
+    "icon": "",
+    "form": [
+        "operator",
+        "building",
+        "address"
+    ]
+}
