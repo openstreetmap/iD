@@ -1289,6 +1289,17 @@
         },
         "icon": "highway-service",
         "form": [
+            {
+                "key": "service",
+                "type": "select",
+                "options": [
+                    "parking_aisle",
+                    "driveway",
+                    "alley",
+                    "drive-through",
+                    "emergency_access"
+                ]
+            },
             "oneway",
             "bridge",
             "tunnel",
