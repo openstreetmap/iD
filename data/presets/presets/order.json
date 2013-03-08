@@ -51,6 +51,7 @@
     "highway/secondary",
     "highway/tertiary",
     "highway/service",
+    "highway/path",
     "highway/track",
     "landuse/allotments",
     "landuse/cemetery",

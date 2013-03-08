@@ -1240,6 +1240,26 @@
         ]
     },
     {
+        "name": "path",
+        "match": {
+            "type": [
+                "line"
+            ],
+            "tags": {
+                "highway": "path"
+            },
+            "terms": []
+        },
+        "icon": "highway-path",
+        "form": [
+            "oneway",
+            "bridge",
+            "tunnel",
+            "access",
+            "maxspeed"
+        ]
+    },
+    {
         "name": "track",
         "match": {
             "type": [
