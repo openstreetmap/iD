@@ -205,6 +205,7 @@ locale.vi = {
     save: {
         title: "Lưu",
         help: "Lưu các thay đổi vào OpenStreetMap để cho mọi người xem.",
+        no_changes: "Không có thay đổi nào để lưu.",
         error: "Đã xuất hiện lỗi khi lưu",
         uploading: "Đang tải các thay đổi lên OpenStreetMap.",
         unsaved_changes: "Bạn có Thay đổi Chưa lưu"
