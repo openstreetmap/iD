@@ -25,6 +25,25 @@ iD.svg.Areas = function(projection) {
         return parent;
     }
 
+    // Patterns only work in Firefox when set directly on element
+    var patterns = d3.set([
+        'wetland', 'beach', 'scrub', 'construction', 'cemetery', 'meadow',
+        'farmland', 'orchard'
+    ]);
+
+    function setPattern(selection) {
+        selection.each(function(d) {
+            if (d.tags.landuse && patterns.has(d.tags.landuse)) {
+                this.style.fill = 'url("#pattern-' + d.tags.landuse + '")';
+                return;
+            }
+            if (d.tags.natural && patterns.has(d.tags.natural)) {
+                this.style.fill = 'url("#pattern-' + d.tags.natural + '")';
+                return;
+            }
+        });
+    }
+
     return function drawAreas(surface, graph, entities, filter) {
         var path = d3.geo.path().projection(projection),
             areas = {},
@@ -70,6 +89,8 @@ iD.svg.Areas = function(projection) {
                 .attr('d', function(entity) { return path(entity.asGeoJSON(graph, closeWay)); })
                 .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
+
+            if (klass === 'fill') paths.call(setPattern);
 
             paths.exit()
                 .remove();
