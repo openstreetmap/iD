@@ -1,5 +1,43 @@
 [
     {
+        "name": "airport",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "airplane",
+                "airport",
+                "aerodrome"
+            ],
+            "tags": {
+                "aeroway": "aerodrome"
+            }
+        },
+        "icon": "airport",
+        "form": []
+    },
+    {
+        "name": "helipad",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "helicopter",
+                "helipad",
+                "heliport"
+            ],
+            "tags": {
+                "aeroway": "helipad"
+            }
+        },
+        "icon": "heliport",
+        "form": []
+    },
+    {
         "name": "cafe",
         "match": {
             "type": [
@@ -1247,7 +1285,7 @@
             "terms": []
         },
         "form": [],
-        "icon": ""
+        "icon": "cemetery"
     },
     {
         "name": "commercial",
