@@ -86,7 +86,7 @@ describe('iD.Entity', function () {
         it("combines conflicting tags with semicolons", function () {
             var a = iD.Entity({tags: {a: 'a'}}),
                 b = a.mergeTags({a: 'b'});
-            expect(b.tags).to.eql({a: 'a; b'});
+            expect(b.tags).to.eql({a: 'a;b'});
         });
     });
 
