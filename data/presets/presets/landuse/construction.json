@@ -1,0 +1,21 @@
+{
+    "name": "construction",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "construction"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+        {
+            "key": "construction",
+            "type": "combo"
+        },
+        "operator"
+    ],
+    "icon": ""
+}

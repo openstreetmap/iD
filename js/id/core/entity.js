@@ -73,7 +73,7 @@ iD.Entity.prototype = {
             var t1 = merged[k],
                 t2 = tags[k];
             if (t1 && t1 !== t2) {
-                merged[k] = t1 + ';' + t2;
+                merged[k] = _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
             } else {
                 merged[k] = t2;
             }
