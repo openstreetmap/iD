@@ -976,6 +976,25 @@
         ]
     },
     {
+        "name": "hotel",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "tourism": "hotel"
+            }
+        },
+        "icon": "lodging",
+        "form": [
+            "operator",
+            "building_area",
+            "address"
+        ]
+    },
+    {
         "name": "museum",
         "match": {
             "type": [
