@@ -34,5 +34,9 @@
             "highway": "footway"
         }
     },
-    "icon": "highway-footway"
+    "icon": "highway-footway",
+    "form": [
+        "access",
+        "surface"
+    ]
 }

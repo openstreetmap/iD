@@ -15,6 +15,7 @@
         "bridge",
         "tunnel",
         "access",
-        "maxspeed"
+        "maxspeed",
+        "surface"
     ]
 }
