@@ -21,6 +21,7 @@
   "license": "WTFPL",
   "devDependencies": {
     "uglify-js": "~2.2.2",
-    "mocha-phantomjs": "~1.1.1"
+    "mocha-phantomjs": "~1.1.1",
+    "glob": "~3.1.21"
   }
 }
