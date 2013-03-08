@@ -83,5 +83,6 @@
     "leisure/pitch/basketball",
     "building/*",
     "highway/bus_stop",
-    "highway/turning_circle"
+    "highway/turning_circle",
+    "highway/crossing"
 ]
