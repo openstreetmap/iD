@@ -21,26 +21,7 @@ data/data.js: \
 	data/discarded.json \
 	data/imagery.json \
 	data/keys.json
-	echo 'iD.data = {' > $@
-	echo 'deprecated: ' >> $@
-	cat data/deprecated.json >> $@
-	echo ', discarded: ' >> $@
-	cat data/discarded.json >> $@
-	echo ', imagery: ' >> $@
-	cat data/imagery.json >> $@
-	echo ', keys: ' >> $@
-	cat data/keys.json >> $@
-	echo ', presets: {' >> $@
-	echo 'presets: ' >> $@
-	cat data/presets/presets.json >> $@
-	echo ', defaults: ' >> $@
-	cat data/presets/defaults.json >> $@
-	echo ', categories: ' >> $@
-	cat data/presets/categories.json >> $@
-	echo ', forms: ' >> $@
-	cat data/presets/forms.json >> $@
-	echo '}' >> $@
-	echo '};' >> $@
+	node data/make.js
 
 .INTERMEDIATE iD.js: \
 	js/lib/bootstrap-tooltip.js \
