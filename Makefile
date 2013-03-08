@@ -17,11 +17,12 @@ data/presets/presets.json: $(PRESET_FILES)
 
 # TODO: write a nice node script for this
 data/data.js: \
+	data \
 	data/deprecated.json \
 	data/discarded.json \
 	data/imagery.json \
 	data/keys.json
-	node data/make.js
+	node build.js
 
 .INTERMEDIATE iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -77,7 +78,7 @@ iD.js: Makefile
 
 %.min.js: %.js Makefile
 	@rm -f $@
-	$(JS_COMPILER) $< -c -m -o $@
+	$(JS_COMPILER) $< -m -o $@
 
 clean:
 	rm -f iD*.js

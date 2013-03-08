@@ -12,6 +12,7 @@
     "icon": "warehouse",
     "form": [
         "building_yes",
+        "levels",
         "address"
     ]
 }

@@ -41,6 +41,11 @@
         "type": "combo",
         "default": { "area": "yes" }
     },
+    "levels": {
+        "key": "building:levels",
+        "type": "number",
+        "title": "Levels"
+    },
     "fee": {
         "key": "fee",
         "type": "check"

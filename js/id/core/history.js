@@ -31,6 +31,7 @@ iD.History = function(context) {
         return difference;
     }
 
+    // iD uses namespaced keys so multiple installations do not conflict
     function getKey(n) {
         return 'iD_' + window.location.origin + '_' + n;
     }
@@ -41,7 +42,6 @@ iD.History = function(context) {
         },
 
         merge: function(entities) {
-
 
             var base = stack[0].graph.base(),
                 newentities = Object.keys(entities).filter(function(i) {
@@ -192,11 +192,10 @@ iD.History = function(context) {
             if (stack.length <= 1) return;
 
             var json = JSON.stringify(stack.map(function(i) {
-                return {
-                    annotation: i.annotation,
-                    imagery_used: i.imagery_used,
-                    entities: i.graph.entities
-                };
+                var x = { entities: i.graph.entities };
+                if (i.imagery_used) x.imagery_used = i.imagery_used;
+                if (i.annotation) x.annotation = i.annotation;
+                return x;
             }), function includeUndefined(key, value) {
                 if (typeof value === 'undefined') return 'undefined';
                 return value;
@@ -221,10 +220,13 @@ iD.History = function(context) {
             return lock;
         },
 
+        // is iD not open in another window and it detects that
+        // there's a history stored in localStorage that's recoverable?
         restorableChanges: function() {
             return lock && !!context.storage(getKey('history'));
         },
 
+        // load history from a version stored in localStorage
         load: function() {
             if (!lock) return;
 
@@ -246,7 +248,6 @@ iD.History = function(context) {
             });
             stack[0].graph.inherited = false;
             dispatch.change();
-
         },
 
         _getKey: getKey

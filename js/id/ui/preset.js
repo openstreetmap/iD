@@ -80,6 +80,13 @@ iD.ui.preset = function(context) {
                     .attr('placeholder', 'http://example.com/')
                     .call(iD.behavior.accept().on('accept', event.close));
                 break;
+            case 'number':
+                i = this.append('input')
+                    .attr('type', 'number')
+                    .attr('id', 'input-' + d.key)
+                    .attr('placeholder', '0')
+                    .call(iD.behavior.accept().on('accept', event.close));
+                break;
             case 'check':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
                 i = wrap.append('input').attr('type', 'text');
@@ -87,7 +94,6 @@ iD.ui.preset = function(context) {
                 wrap.call(check);
                 event.on('setTags.' + d.key, check.update);
                 break;
-
             case 'select':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
                 i = wrap.append('input').attr('type', 'text');
@@ -122,6 +128,8 @@ iD.ui.preset = function(context) {
                     }));
                 });
                 break;
+            default:
+                throw 'Unknown input type ' + d.type;
         }
         if (i) {
             i.on('change', key);
