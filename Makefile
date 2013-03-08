@@ -10,18 +10,8 @@ all: \
 	iD.js \
 	iD.min.js
 
-PRESET_FILES = $(shell find data/presets/presets -type f -name '*.json')
-
-data/presets/presets.json: $(PRESET_FILES)
-	./data/presets/build.sh
-
-# TODO: write a nice node script for this
-data/data.js: \
-	data \
-	data/deprecated.json \
-	data/discarded.json \
-	data/imagery.json \
-	data/keys.json
+DATA_FILES = $(shell find data -type f -name '*.json')
+data/data.js: $(DATA_FILES)
 	node build.js
 
 .INTERMEDIATE iD.js: \
@@ -81,6 +71,3 @@ iD.js: Makefile
 
 clean:
 	rm -f iD*.js
-
-presets:
-	./data/presets/build.sh

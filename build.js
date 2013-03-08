@@ -23,6 +23,7 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
     discarded: r('discarded.json'),
     imagery: r('imagery.json'),
     keys: r('keys.json'),
+    imagery: r('imagery.json'),
     presets: {
         presets: rp('presets.json'),
         defaults: rp('defaults.json'),
