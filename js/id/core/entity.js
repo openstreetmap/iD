@@ -3,7 +3,9 @@ iD.Entity = function(attrs) {
     if (this instanceof iD.Entity) return;
 
     // Create the appropriate subtype.
-    if (attrs && attrs.type) return iD.Entity[attrs.type].apply(this, arguments);
+    if (attrs && attrs.type) {
+        return iD.Entity[attrs.type].apply(this, arguments);
+    }
 
     // Initialize a generic Entity (used only in tests).
     return (new iD.Entity()).initialize(arguments);
@@ -71,7 +73,7 @@ iD.Entity.prototype = {
             var t1 = merged[k],
                 t2 = tags[k];
             if (t1 && t1 !== t2) {
-                merged[k] = t1 + "; " + t2;
+                merged[k] = t1 + ';' + t2;
             } else {
                 merged[k] = t2;
             }
@@ -85,9 +87,9 @@ iD.Entity.prototype = {
 
     hasInterestingTags: function() {
         return _.keys(this.tags).some(function(key) {
-            return key != "attribution" &&
-                key != "created_by" &&
-                key != "source" &&
+            return key != 'attribution' &&
+                key != 'created_by' &&
+                key != 'source' &&
                 key != 'odbl' &&
                 key.indexOf('tiger:') !== 0;
         });
@@ -114,7 +116,7 @@ iD.Entity.prototype = {
         // Generate a string such as 'river' or 'Fred's House' for an entity.
         if (!this.tags || !Object.keys(this.tags).length) { return ''; }
 
-        var mainkeys = ['highway','amenity','railway','waterway','natural'],
+        var mainkeys = ['highway', 'amenity', 'railway', 'waterway', 'natural'],
             n = [];
 
         if (this.tags.name) n.push(this.tags.name);
