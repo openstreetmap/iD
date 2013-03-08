@@ -17,7 +17,7 @@ iD.presets.Preset = function(preset, forms) {
             score = 0;
         for (var t in tags) {
             if (entity.tags[t] === tags[t]) {
-                score ++;
+                score++;
             } else if (tags[t] === '*' && t in entity.tags) {
                 score += 0.5;
             } else {

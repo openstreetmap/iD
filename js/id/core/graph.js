@@ -9,7 +9,7 @@ iD.Graph = function(other, mutable) {
         this.inherited = true;
 
     } else {
-        if (_.isArray(other)) {
+        if (Array.isArray(other)) {
             var entities = {};
             for (var i = 0; i < other.length; i++) {
                 entities[other[i].id] = other[i];
@@ -273,5 +273,4 @@ iD.Graph.prototype = {
         }
         return this;
     }
-
 };
