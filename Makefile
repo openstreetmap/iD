@@ -32,7 +32,6 @@ data/data.js: \
 	js/lib/d3.geo.tile.js \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
-	js/lib/d3.rowselect.js \
 	js/lib/d3.size.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
@@ -78,7 +77,7 @@ iD.js: Makefile
 
 %.min.js: %.js Makefile
 	@rm -f $@
-	$(JS_COMPILER) $< -m -o $@
+	$(JS_COMPILER) $< -c -m -o $@
 
 clean:
 	rm -f iD*.js

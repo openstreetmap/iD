@@ -96,23 +96,17 @@ iD.ui.preset = function(context) {
                 break;
             case 'select':
                 wrap = this.append('span').attr('class', 'input-wrap-position'),
-                i = wrap.append('input').attr('type', 'text');
-
-                if (d.options.length <= 5) {
-                    var select = d3.rowselect()
-                        .data(d.options)
-                        .on('change', key);
-                    i.datum(d);
-                    wrap.call(select);
-                    event.on('setTags.' + d.key, select.update);
-
-                } else {
-                    wrap.call(d3.combobox().data(d.options.map(function(d) {
-                        var o = {};
-                        o.title = o.value = d.replace('_', ' ');
-                        return o;
-                    })));
-                }
+                i = wrap.append('input')
+                    .attr('type', 'text')
+                    .attr('placeholder', function() {
+                        if (d.options.length < 3) return '';
+                        return d.options.slice(0, 3).join(', ') + '...';
+                    });
+                wrap.call(d3.combobox().data(d.options.map(function(d) {
+                    var o = {};
+                    o.title = o.value = d.replace('_', ' ');
+                    return o;
+                })));
                 break;
             case 'combo':
                 var combobox = d3.combobox();

@@ -21,6 +21,7 @@ fs.writeFileSync('data/presets/presets.json', JSON.stringify(
 fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
     deprecated: r('deprecated.json'),
     discarded: r('discarded.json'),
+    imagery: r('imagery.json'),
     keys: r('keys.json'),
     presets: {
         presets: rp('presets.json'),
@@ -28,4 +29,4 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
         categories: rp('categories.json'),
         forms: rp('forms.json')
     }
-}) + ';');
+}, null, 4) + ';');
