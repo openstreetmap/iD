@@ -1,4 +1,6 @@
 [
+    "aeroway/aerodrome",
+    "aeroway/helipad",
     "amenity/cafe",
     "leisure/park",
     "natural/bay",
