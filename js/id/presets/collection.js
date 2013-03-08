@@ -57,7 +57,7 @@ iD.presets.Collection = function(collection) {
                         dist: iD.util.editDistance(value, a.name)
                     };
                 }).filter(function(a) {
-                    return a.dist - a.preset.name.length + value.length < 2;
+                    return a.dist + Math.min(value.length - a.preset.name.length, 0) < 3;
                 }).sort(function(a, b) {
                     return a.dist - b.dist;
                 }).map(function(a) {
@@ -65,7 +65,7 @@ iD.presets.Collection = function(collection) {
                 }),
                 leventstein_terms = _.filter(collection, function(a) {
                     return _.any(a.match.terms || [], function(b) {
-                        return iD.util.editDistance(value, b) - b.length + value.length < 2;
+                        return iD.util.editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });
 
