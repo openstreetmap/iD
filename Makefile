@@ -13,7 +13,7 @@ all: \
 PRESET_FILES = $(shell find data/presets/presets -type f -name '*.json')
 
 data/presets/presets.json: $(PRESET_FILES)
-	cd data/presets && node build
+	./data/presets/build.sh
 
 # TODO: write a nice node script for this
 data/data.js: \
@@ -81,3 +81,6 @@ iD.js: Makefile
 
 clean:
 	rm -f iD*.js
+
+presets:
+	./data/presets/build.sh
