@@ -1,0 +1,16 @@
+{
+    "name": "allotments",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "allotments"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ],
+    "icon": ""
+}

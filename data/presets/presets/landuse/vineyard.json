@@ -1,0 +1,16 @@
+{
+    "name": "vineyard",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "vineyard"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ],
+    "icon": ""
+}

@@ -1,0 +1,16 @@
+{
+    "name": "cemetery",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "cemetery"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ],
+    "icon": ""
+}

@@ -1,0 +1,16 @@
+{
+    "name": "farmyard",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "farmyard"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ],
+    "icon": ""
+}

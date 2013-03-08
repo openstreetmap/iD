@@ -1,0 +1,16 @@
+{
+    "name": "orchard",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "orchard"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ],
+    "icon": ""
+}

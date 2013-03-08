@@ -1133,6 +1133,194 @@
         ]
     },
     {
+        "name": "allotments",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "allotments"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "cemetery",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "cemetery"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "commercial",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "commercial"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "farm",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "farm"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "farmyard",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "farmyard"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "forest",
+        "match": {
+            "type": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "landuse": "forest"
+            },
+            "terms": []
+        },
+        "form": [
+            {
+                "key": "wood",
+                "type": "combo"
+            }
+        ],
+        "icon": "park2"
+    },
+    {
+        "name": "grass",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "grass"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "industrial",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "industrial"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "meadow",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "meadow"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "orchard",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "orchard"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "quarry",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "quarry"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "residential",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "residential"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
+        "name": "vineyard",
+        "match": {
+            "type": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "vineyard"
+            },
+            "terms": []
+        },
+        "form": [],
+        "icon": ""
+    },
+    {
         "name": "rail",
         "match": {
             "type": [

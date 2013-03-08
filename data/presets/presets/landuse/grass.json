@@ -1,0 +1,16 @@
+{
+    "name": "grass",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "grass"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ],
+    "icon": ""
+}

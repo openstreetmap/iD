@@ -1,0 +1,16 @@
+{
+    "name": "quarry",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "quarry"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ],
+    "icon": ""
+}
