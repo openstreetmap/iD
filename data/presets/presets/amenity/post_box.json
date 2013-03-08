@@ -18,5 +18,11 @@
     },
     "icon": "post",
     "form": [
+        "address",
+        "operator",
+        {
+            "key": "collection_times",
+            "type": "text"
+        }
     ]
 }

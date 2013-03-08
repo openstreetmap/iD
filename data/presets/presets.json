@@ -975,7 +975,14 @@
             ]
         },
         "icon": "post",
-        "form": []
+        "form": [
+            "address",
+            "operator",
+            {
+                "key": "collection_times",
+                "type": "text"
+            }
+        ]
     },
     {
         "name": "library",
