@@ -57,6 +57,7 @@
     "highway/service",
     "highway/path",
     "highway/track",
+    "highway/steps",
     "landuse/allotments",
     "landuse/cemetery",
     "landuse/commercial",
