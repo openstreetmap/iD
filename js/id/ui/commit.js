@@ -72,7 +72,6 @@ iD.ui.Commit = function(context) {
             .attr('class', 'save action col6 button')
             .on('click.save', function() {
                 var comment = commentField.node().value;
-                localStorage.comment = comment;
                 event.save({
                     comment: comment
                 });

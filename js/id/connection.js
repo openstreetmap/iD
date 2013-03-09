@@ -178,7 +178,77 @@ iD.Connection = function(context) {
     };
 
     connection.putChangeset = function(changes, comment, imagery_used, callback) {
-        oauth.xhr({
+        var changeset_id = context.storage('changeset_id'),
+            changeset_mtime = context.storage('changeset_mtime'),
+            regex, now;
+
+        if( changeset_id && changeset_mtime ) {
+            regex = /^\d+$/;
+            if(regex.test(changeset_id)) {
+                now = new Date().getTime();
+                // Changeset can be stale for upto 60min before auto-close
+                // Ref: http://wiki.openstreetmap.org/wiki/Changeset
+                if( (now - 3550000) < changeset_mtime ) {
+                    if( comment == context.storage('comment') ) {
+                        upload(changeset_id, function(err) { 
+                            if (err) {
+                                return checkClosed(err, changeset_id);
+                            } else {
+                                return callback(err, changeset_id);
+                            }
+                        });
+                        return;
+                    }
+                }
+            }
+        }
+
+        //Default action is a new changeset
+        newChangeset(function(err, new_changeset_id) {
+            if (err) return callback(err);
+            upload(new_changeset_id, function(err) {
+                if (err) return callback(err);
+                updateStorage(new_changeset_id);
+                callback(err, changeset_id);
+            });
+        });
+        return;
+
+        function upload(changeset_id, cb) {
+            oauth.xhr({
+                method: 'POST',
+                path: '/api/0.6/changeset/' + changeset_id + '/upload',
+                options: { header: { 'Content-Type': 'text/xml' } },
+                content: JXON.stringify(connection.osmChangeJXON(user.id, changeset_id, changes))
+            }, cb);
+        }
+
+        function checkClosed(err, changeset_id) {
+            // Ref: http://wiki.openstreetmap.org/wiki/API_v0.6#Error_codes_9
+            if(err.indexOf(' closed ') > -1) {
+                newChangeset(function(err, new_changeset_id) {
+                    if (err) return callback(err);
+                    upload(new_changeset_id, function(err) {
+                        if (err) return callback(err);
+                        updateStorage(new_changeset_id);
+                        callback(err, changeset_id);
+                    });
+                });
+            } else {
+                return callback(err);         
+            }
+        }
+
+        function updateStorage(changeset_id) {
+            now = new Date().getTime();
+            context.storage('changeset_id', changeset_id);
+            context.storage('changeset_mtime', now);
+            context.storage('comment',comment);
+        }
+
+
+        function newChangeset(cb) {
+            oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
@@ -187,23 +257,8 @@ iD.Connection = function(context) {
                     comment: comment,
                     created_by: 'iD ' + iD.version
                 }))
-            }, function(err, changeset_id) {
-                if (err) return callback(err);
-                oauth.xhr({
-                    method: 'POST',
-                    path: '/api/0.6/changeset/' + changeset_id + '/upload',
-                    options: { header: { 'Content-Type': 'text/xml' } },
-                    content: JXON.stringify(connection.osmChangeJXON(user.id, changeset_id, changes))
-                }, function(err) {
-                    if (err) return callback(err);
-                    oauth.xhr({
-                        method: 'PUT',
-                        path: '/api/0.6/changeset/' + changeset_id + '/close'
-                    }, function(err) {
-                        callback(err, changeset_id);
-                    });
-                });
-            });
+            },cb);
+        }
     };
 
     connection.userDetails = function(callback) {
