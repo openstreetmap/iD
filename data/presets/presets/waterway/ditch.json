@@ -1,0 +1,12 @@
+{
+    "name": "ditch",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "tags": {
+            "waterway": "ditch"
+        }
+    },
+    "icon": "waterway-river"
+}
