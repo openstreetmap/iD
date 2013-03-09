@@ -1,0 +1,20 @@
+{
+    "name": "highway",
+    "match": {
+        "type": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "highway": "*"
+        }
+    },
+    "form": [
+        {
+            "key": "highway",
+            "type": "combo"
+        }
+    ]
+}
