@@ -668,6 +668,15 @@ svg[data-zoom="16"] path.casing.tag-highway-construction {
     stroke: #222;
 }
 
+.line.stroke.tag-railway-platform {
+    stroke: #999;
+    stroke-width: 4;
+    stroke-dasharray: none;
+}
+.line.casing.tag-railway {
+    stroke: none;
+}
+
 /* waterways */
 
 path.fill.tag-waterway {
