@@ -2,6 +2,7 @@
     "name": "building",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {
