@@ -673,7 +673,7 @@ svg[data-zoom="16"] path.casing.tag-highway-construction {
     stroke-width: 4;
     stroke-dasharray: none;
 }
-.line.casing.tag-railway {
+.line.casing.tag-railway-platform {
     stroke: none;
 }
 
