@@ -1,6 +1,10 @@
 iD.ui.preset.address = function(context) {
 
     var event = d3.dispatch('change', 'close'),
+        housename,
+        housenumber,
+        street,
+        city,
         entity;
 
     function getStreets() {
@@ -35,44 +39,38 @@ iD.ui.preset.address = function(context) {
 
     function address(selection) {
 
-        function change() { event.change(); }
-
         function close() { return iD.behavior.accept().on('accept', event.close); }
 
-        selection.append('input')
+        housename = selection.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Housename')
             .attr('class', 'addr-housename')
-            .datum({ 'key': 'addr:housename' })
             .on('blur', change)
             .on('change', change)
             .call(close());
 
-        selection.append('input')
+        housenumber = selection.append('input')
             .property('type', 'text')
             .attr('placeholder', '123')
             .attr('class', 'addr-number')
-            .datum({ 'key': 'addr:housenumber' })
             .on('blur', change)
             .on('change', change)
             .call(close());
 
         var streetwrap = selection.append('span')
-            .attr('class', 'input-wrap-position')
-            .datum({ 'key': 'addr:street' });
+            .attr('class', 'input-wrap-position');
 
-        streetwrap.append('input')
+        street = streetwrap.append('input')
             .property('type', 'text')
             .attr('placeholder', 'Street')
             .attr('class', 'addr-street')
             .on('blur', change)
             .on('change', change);
 
-        selection.append('input')
+        city = selection.append('input')
             .property('type', 'text')
             .attr('placeholder', 'City')
             .attr('class', 'addr-city')
-            .datum({ 'key': 'addr:city' })
             .on('blur', change)
             .on('change', change)
             .call(close());
@@ -80,9 +78,26 @@ iD.ui.preset.address = function(context) {
         streetwrap.call(d3.combobox().data(getStreets()));
     }
 
+    function change() {
+        event.change({
+            'addr:housename': housename.property('value'),
+            'addr:housenumber': housenumber.property('value'),
+            'addr:street': street.property('value'),
+            'addr:city': city.property('value')
+        });
+    }
+
     address.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
+        return address;
+    };
+
+    address.value = function(tags) {
+        housename.property('value', tags['addr:housename'] || '');
+        housenumber.property('value', tags['addr:housenumber'] || '');
+        street.property('value', tags['addr:street'] || '');
+        city.property('value', tags['addr:city'] || '');
         return address;
     };
 
