@@ -23,6 +23,10 @@ path {
     fill: none;
 }
 
+use {
+    pointer-events: none;
+}
+
 /* points */
 
 g.point circle {

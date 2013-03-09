@@ -26,7 +26,7 @@ iD.ui.TagEditor = function(context) {
 
         // find a preset that best fits
         } else if (!preset) {
-            preset = presets.matchType(entity, context.graph()).matchTags(entity);
+            preset = presets.match(entity, context.graph());
         }
 
         selection.html('');

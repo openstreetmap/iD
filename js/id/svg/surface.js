@@ -1,6 +1,7 @@
 iD.svg.Surface = function() {
     return function drawSurface(selection) {
         var defs = selection.append('defs');
+
         defs.append('marker')
             .attr({
                 id: 'oneway-marker',
@@ -51,6 +52,38 @@ iD.svg.Surface = function() {
             })
             .attr('xlink:href', function(d) { return 'img/pattern/' + d[1] + '.png'; });
 
+        defs.append('clipPath')
+            .attr('id', 'clip-square-12')
+            .append('rect')
+            .attr({
+                x: 0,
+                y: 0,
+                width: 12,
+                height: 12
+            });
+
+        defs.append('image')
+            .attr({
+                id: 'maki-sprite',
+                width: 306,
+                height: 294,
+                'xlink:href': 'img/maki.png'
+            });
+
+        _.forEach(_.find(document.styleSheets, function(stylesheet) {
+            return stylesheet.href.indexOf("maki.css") > 0;
+        }).cssRules, function(rule) {
+            var klass = rule.selectorText,
+                match = klass.match(/^\.(maki-[a-z0-9-]+-12)$/);
+            if (match) {
+                var id = match[1];
+                match = rule.style.backgroundPosition.match(/(-?\d+)px (-?\d+)px/);
+                defs.append('use')
+                    .attr('id', id)
+                    .attr('transform', "translate(" + match[1] + "," + match[2] + ")")
+                    .attr('xlink:href', '#maki-sprite');
+            }
+        });
 
         var layers = selection.selectAll('.layer')
             .data(['fill', 'shadow', 'casing', 'stroke', 'text', 'hit', 'halo', 'label']);
