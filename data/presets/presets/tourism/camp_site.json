@@ -1,0 +1,19 @@
+{
+    "name": "camp site",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+        ],
+        "tags": {
+            "tourism": "camp_site"
+        }
+    },
+    "icon": "campsite",
+    "form": [
+        "operator",
+        "address"
+    ]
+}
