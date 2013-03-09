@@ -1,0 +1,13 @@
+{
+    "key": "religion",
+    "type": "select",
+    "options": [
+        "christian",
+        "muslim",
+        "buddhist",
+        "jewish",
+        "hindu",
+        "shinto",
+        "taoist"
+    ]
+}
