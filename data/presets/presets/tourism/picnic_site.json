@@ -11,7 +11,6 @@
             "tourism": "picnic_site"
         }
     },
-    "icon": "",
     "form": [
         "operator",
         "building_area",
