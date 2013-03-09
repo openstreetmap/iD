@@ -89,5 +89,9 @@
     "layer": {
         "key": "layer",
         "type": "combo"
+    },
+    "elevation": {
+        "key": "ele",
+        "type": "number"
     }
 }

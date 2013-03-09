@@ -24,5 +24,8 @@
             "top"
         ]
     },
-    "icon": ""
+    "icon": "triangle",
+    "form": [
+        "elevation"
+    ]
 }

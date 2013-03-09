@@ -12,6 +12,10 @@
     },
     "icon": "pitch",
     "form": [
+        {
+            "key": "sport",
+            "type": "combo"
+        },
         "surface"
     ]
 }
