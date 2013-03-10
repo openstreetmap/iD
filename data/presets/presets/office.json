@@ -1,19 +1,19 @@
 {
-    "name": "shop",
+    "name": "office",
     "match": {
         "type": [
             "point",
             "area"
         ],
         "tags": {
-            "shop": "*"
+            "office": "*"
         },
         "terms": []
     },
-    "icon": "shop",
+    "icon": "commercial",
     "form": [
         {
-            "key": "shop",
+            "key": "office",
             "type": "combo"
         },
         "address",
