@@ -12,8 +12,7 @@
     "icon": "highway-secondary",
     "form": [
         "oneway",
-        "bridge",
-        "tunnel",
+        "roadtype",
         "access",
         "maxspeed",
         "surface"

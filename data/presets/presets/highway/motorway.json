@@ -12,8 +12,7 @@
     "icon": "highway-motorway",
     "form": [
         "oneway",
-        "bridge",
-        "tunnel",
+        "roadtype",
         "access",
         "maxspeed",
         "surface"
