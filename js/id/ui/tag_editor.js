@@ -76,15 +76,11 @@ iD.ui.TagEditor = function(context) {
 
         presetUI = iD.ui.preset(context)
             .entity(entity)
-            .on('change', function() {
-                event.changeTags();
-            })
+            .on('change', changeTags)
             .on('close', event.close);
 
         tagList = iD.ui.Taglist(context)
-            .on('change', function() {
-                event.changeTags();
-            });
+            .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')
             .attr('class', 'inspector-preset');
@@ -104,8 +100,20 @@ iD.ui.TagEditor = function(context) {
             .call(drawButtons);
 
         tageditor.tags(tags);
+        event.changeTags(tags);
+    }
 
-        event.changeTags();
+    function clean(o) {
+        var out = {};
+        for (var k in o) {
+            if (o[k] && o[k] !== '') out[k] = o[k];
+        }
+        return out;
+    }
+
+    function changeTags(changed) {
+        tags = clean(_.extend(tags, changed));
+        event.changeTags(_.clone(tags));
     }
 
     function apply() {
@@ -136,26 +144,25 @@ iD.ui.TagEditor = function(context) {
     }
 
     tageditor.tags = function(newtags) {
-        if (!arguments.length) {
-            tags = _.extend(presetUI.tags(), tagList.tags());
-            if (name.property('value')) tags.name = name.property('value');
-            return tags;
-        } else {
-            tags = _.clone(newtags);
-            if (presetUI && tagList) {
+        tags = _.clone(newtags);
+        if (presetUI && tagList) {
 
-                // change preset if necessary (undos/redos)
-                var newmatch = presets.matchType(entity, context.graph()).matchTags(entity.update({ tags: tags }));
-                if (newmatch !== preset) {
-                    return tageditor(selection_, newmatch);
-                }
-
-                name.property('value', tags.name || '');
-                presetUI.change(tags);
-                tagList.tags(_.omit(tags, _.keys(presetUI.tags() || {}).concat(['name'])));
+            // change preset if necessary (undos/redos)
+            var newmatch = presets
+                .matchType(entity, context.graph())
+                .matchTags(entity.update({ tags: tags }));
+            if (newmatch !== preset) {
+                return tageditor(selection_, newmatch);
             }
-            return tageditor;
+
+            name.property('value', tags.name || '');
+            presetUI.change(tags);
+            var rendered = ['name']
+                .concat(Object.keys(preset.match.tags))
+                .concat(presetUI.rendered());
+            tagList.tags(_.omit(tags, rendered));
         }
+        return tageditor;
     };
 
     return d3.rebind(tageditor, event, 'on');
