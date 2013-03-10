@@ -1,8 +1,6 @@
-iD.ui.preset.combo = function() {
+iD.ui.preset.combo = function(form) {
 
     var event = d3.dispatch('change', 'close'),
-        combobox,
-        options,
         wrap,
         input;
 
@@ -15,34 +13,42 @@ iD.ui.preset.combo = function() {
             .on('change', change)
             .on('blur', change);
 
-        combobox = d3.combobox();
+        var combobox = d3.combobox();
         wrap.call(combobox);
 
-        if (options) combo.options(options);
-    }
+        if (form.options) {
+            options(form.options);
+        } else {
+            iD.taginfo().values({
+                key: form.key
+            }, function(err, data) {
+                if (!err) options(_.pluck(data, 'value'));
+            });
+        }
 
-    function change() {
-        event.change(input.property('value').replace(' ', '_'));
-    }
-
-    combo.options = function(o) {
-        options = o;
-        if (combobox) {
-            combobox.data(options.map(function(d) {
+        function options(opts) {
+            combobox.data(opts.map(function(d) {
                 var o = {};
                 o.title = o.value = d.replace('_', ' ');
                 return o;
             }));
 
             input.attr('placeholder', function() {
-                if (!options || options.length < 3) return '';
-                return options.slice(0, 3).join(', ') + '...';
+                if (opts.length < 3) return '';
+                return opts.slice(0, 3).join(', ') + '...';
             });
         }
-    };
+    }
 
-    combo.value = function(v) {
-        input.property('value', v || '');
+
+    function change() {
+        var t = {};
+        t[form.key] = input.property('value').replace(' ', '_');
+        event.change(t);
+    }
+
+    combo.tags = function(tags) {
+        input.property('value', tags[form.key] || '');
     };
 
     return d3.rebind(combo, event, 'on');

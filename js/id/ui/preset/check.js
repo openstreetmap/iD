@@ -1,4 +1,4 @@
-iD.ui.preset.check = function() {
+iD.ui.preset.check = function(form) {
 
     var event = d3.dispatch('change', 'close'),
         values = ['', 'yes', 'no'],
@@ -20,16 +20,16 @@ iD.ui.preset.check = function() {
             .attr('class', 'value');
 
         box.on('click', function() {
-            check.value(values[(values.indexOf(value) + 1) % 3]);
-            event.change(value);
+            var t = {};
+            t[form.key] = values[(values.indexOf(value) + 1) % 3];
+            check.tags(t);
+            event.change(t);
             d3.event.stopPropagation();
         });
-
-        check.value();
     };
 
-    check.value = function(v) {
-        value = v || '';
+    check.tags = function(tags) {
+        value = tags[form.key] || '';
         box.property('indeterminate', !value);
         box.property('checked', value === 'yes');
         text.text(value || 'unknown');

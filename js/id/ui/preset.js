@@ -1,6 +1,5 @@
 iD.ui.preset = function(context) {
     var event = d3.dispatch('change', 'setTags', 'close'),
-        taginfo = iD.taginfo(),
         entity,
         type,
         hidden,
@@ -11,77 +10,19 @@ iD.ui.preset = function(context) {
 
     // generate form fields for a given field.
     function input(d) {
-        var i, wrap;
-        switch (d.type) {
-            case 'text':
-                i = iD.ui.preset.input()
-                    .type('text');
-                break;
-            case 'number':
-                i = iD.ui.preset.input()
-                    .type('number');
-                break;
-            case 'tel':
-                i = iD.ui.preset.input()
-                    .placeholder('1-555-555-5555')
-                    .type('tel');
-                break;
-            case 'email':
-                i = iD.ui.preset.input()
-                    .placeholder('email@example.com')
-                    .type('email');
-                break;
-            case 'url':
-                i = iD.ui.preset.input()
-                    .placeholder('http://example.com')
-                    .type('url');
-                break;
-            case 'check':
-                i = iD.ui.preset.check();
-                break;
-            case 'combo':
-                i = iD.ui.preset.combo();
-                if (d.options) {
-                    i.options(d.options);
-                } else {
-                    taginfo.values({
-                        key: d.key
-                    }, function(err, data) {
-                        if (!err) i.options(_.pluck(data, 'value'));
-                    });
-                }
-                break;
-            case 'address':
-                i = iD.ui.preset.address(context)
-                    .entity(entity);
-                break;
-        }
-        if (i) {
-            this.call(i);
+        var i = iD.ui.preset[d.type](d, context)
+            .on('close', event.close)
+            .on('change', event.change);
 
-            if (d.key) keys.push(d.key);
-            else if (d.keys) keys = keys.concat(d.keys);
+        event.on('setTags.' + d.key || d.type, function(tags) {
+            i.tags(_.clone(tags));
+        });
 
-            i.on('change', function(value) {
-                var tags = {};
-                if (d.key) {
-                    tags[d.key] = value;
-                } else {
-                    tags = value;
-                }
-                event.change(tags);
-            });
+        if (d.type === 'address') i.entity(entity);
 
-            i.on('close', event.close);
+        keys = keys.concat(d.key ? [d.key] : d.keys);
 
-            event.on('setTags.' + d.key || d.type, function(tags) {
-                if (d.key) {
-                    i.value(tags[d.key]);
-                } else {
-                    i.value(_.clone(tags));
-                }
-            });
-        }
+        this.call(i);
     }
 
     function presets(selection) {

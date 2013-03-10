@@ -1,4 +1,4 @@
-iD.ui.preset.address = function(context) {
+iD.ui.preset.address = function(form, context) {
 
     var event = d3.dispatch('change', 'close'),
         housename,
@@ -93,7 +93,7 @@ iD.ui.preset.address = function(context) {
         return address;
     };
 
-    address.value = function(tags) {
+    address.tags = function(tags) {
         housename.property('value', tags['addr:housename'] || '');
         housenumber.property('value', tags['addr:housenumber'] || '');
         street.property('value', tags['addr:street'] || '');
