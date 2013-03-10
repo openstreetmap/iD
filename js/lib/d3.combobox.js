@@ -13,7 +13,7 @@ d3.combobox = function() {
 
     var typeahead = function(selection) {
         var idx = -1;
-        input = selection.select('input');
+        input = selection.select('input').classed('combobox-input', true);
 
         selection.append('a', selection.select('input'))
             .attr('class', 'combobox-carat')
