@@ -1,5 +1,6 @@
 d3.combobox = function() {
     var event = d3.dispatch('accept'),
+        id = d3.combobox.id ++,
         container, input, shown = false, data = [];
 
     var fetcher = function(val, data, cb) {
@@ -270,6 +271,10 @@ d3.combobox = function() {
             .on('keydown.typeahead', keydown)
             .on('keyup.typeahead', keyup)
             .on('mousedown.typeahead', mousedown);
+
+        d3.select(document.body).on('scroll.combo' + id, function() {
+            if (shown) updateSize();
+        }, true);
     };
 
     typeahead.fetcher = function(_) {
@@ -286,3 +291,5 @@ d3.combobox = function() {
 
     return d3.rebind(typeahead, event, 'on');
 };
+
+d3.combobox.id = 0;
