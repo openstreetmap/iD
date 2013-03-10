@@ -71,7 +71,7 @@ iD.ui.TagEditor = function(context) {
             .attr('type', 'text')
             .property('value', entity.tags.name || '')
             .on('blur', function() {
-                event.changeTags();
+                changeTags({ name: name.property('value') });
             });
 
         presetUI = iD.ui.preset(context)
