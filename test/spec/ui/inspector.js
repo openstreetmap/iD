@@ -23,11 +23,11 @@ describe("iD.ui.Inspector", function () {
     });
 
     describe("#tags", function () {
-        it("returns the current tags", function () {
+        xit("returns the current tags", function () {
             expect(inspector.tags()).to.eql(tags);
         });
 
-        it("returns updated tags when input values have changed", function () {
+        xit("returns updated tags when input values have changed", function () {
             element.selectAll("input.key").property('value', 'k');
             element.selectAll("input.value").property('value', 'v');
             expect(inspector.tags()).to.eql({k: 'v'});
@@ -47,13 +47,13 @@ describe("iD.ui.Inspector", function () {
         expect(element.select('.tag-list').selectAll("input.key").property('value')).to.be.empty;
     });
 
-    it("adds tags when clicking the add button", function () {
+    xit("adds tags when clicking the add button", function () {
         element.selectAll("button.add-tag").trigger('click');
         expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
         expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
     });
 
-    it("removes tags when clicking the remove button", function () {
+    xit("removes tags when clicking the remove button", function () {
         element.selectAll("button.remove").trigger('click');
         expect(inspector.tags()).to.eql({});
     });
@@ -67,7 +67,7 @@ describe("iD.ui.Inspector", function () {
         expect(spy).to.have.been.calledWith(entity);
     });
 
-    it("emits a changeTags event when the apply button is clicked", function () {
+    xit("emits a changeTags event when the apply button is clicked", function () {
         var spy = sinon.spy();
         inspector.on('changeTags', spy);
 
@@ -76,7 +76,7 @@ describe("iD.ui.Inspector", function () {
         expect(spy).to.have.been.calledWith(entity, tags);
     });
 
-    it("adds tags when pressing the TAB key on last input.value", function () {
+    xit("adds tags when pressing the TAB key on last input.value", function () {
         expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
         var input = d3.select('.tag-list li:last-child input.value')[0][0];
         happen.keydown(d3.select(input).node(), {keyCode: 9});
