@@ -1,6 +1,6 @@
 {
     "key": "religion",
-    "type": "select",
+    "type": "combo",
     "options": [
         "christian",
         "muslim",
