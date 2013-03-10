@@ -70,7 +70,10 @@ iD.ui.Taglist = function(context) {
             .attr('class', 'key')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.key; })
-            .on('change', function(d) { d.key = this.value; event.change(); });
+            .on('blur', function(d) {
+                d.key = this.value;
+                event.change(taglist.tags());
+            });
 
         inputs.append('span')
             .attr('class', 'input-wrap-position')
@@ -79,7 +82,10 @@ iD.ui.Taglist = function(context) {
             .attr('class', 'value')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.value; })
-            .on('change', function(d) { d.value = this.value; event.change(); })
+            .on('blur', function(d) {
+                d.value = this.value;
+                event.change(taglist.tags());
+            })
             .on('keydown.push-more', pushMore);
 
         inputs.each(bindTypeahead);
@@ -251,6 +257,8 @@ iD.ui.Taglist = function(context) {
 
     function removeTag(d) {
         var tags = taglist.tags();
+        tags[d.key] = '';
+        event.change(tags);
         delete tags[d.key];
         drawTags(tags);
     }

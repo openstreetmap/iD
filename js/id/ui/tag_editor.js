@@ -117,7 +117,6 @@ iD.ui.TagEditor = function(context) {
     }
 
     function apply() {
-        event.changeTags();
         event.close();
     }
 
