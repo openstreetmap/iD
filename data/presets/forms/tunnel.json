@@ -1,4 +1,4 @@
 {
     "key": "tunnel",
-    "type": "check"
+    "type": "defaultcheck"
 }

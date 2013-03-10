@@ -1,14 +1,10 @@
 iD.ui.preset = function(context) {
     var event = d3.dispatch('change', 'setTags', 'close'),
         entity,
-        type,
-        hidden,
-        sections,
         tags,
         keys,
         preset;
 
-    // generate form fields for a given field.
     function input(d) {
         var i = iD.ui.preset[d.type](d, context)
             .on('close', event.close)
@@ -30,7 +26,7 @@ iD.ui.preset = function(context) {
         selection.html('');
         keys = [];
 
-        sections = selection.selectAll('div.preset-section')
+        var sections = selection.selectAll('div.preset-section')
             .data(preset.form)
             .enter()
             .append('div')
@@ -72,7 +68,6 @@ iD.ui.preset = function(context) {
     presets.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
-        type = entity.type === 'node' ? entity.type : entity.geometry();
         return presets;
     };
 
