@@ -629,6 +629,14 @@ path.casing.tag-bridge-yes {
     stroke: #333;
 }
 
+path.stroke.tag-highway.tag-tunnel-yes {
+    stroke-opacity: 0.3;
+}
+
+path.casing.tag-highway.tag-tunnel-yes {
+    stroke-opacity: 0.5;
+}
+
 path.stroke.tag-highway-construction,
 path.casing.tag-highway-construction {
     stroke-linecap: butt;
