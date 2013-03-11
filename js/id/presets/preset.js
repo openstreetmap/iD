@@ -1,4 +1,7 @@
 iD.presets.Preset = function(preset, forms) {
+    preset = _.clone(preset);
+
+    preset.icon = preset.icon || 'marker-stroked';
 
     preset.form = preset.form ? preset.form.map(function(f) {
         if (typeof f === 'string') {

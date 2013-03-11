@@ -670,6 +670,10 @@ div.combobox {
     border-top: 0;
 }
 
+.combobox-input {
+    cursor: pointer;
+}
+
 .combobox-carat {
     margin-left: -15px;
     margin-right: 5px;
@@ -727,6 +731,12 @@ div.combobox {
 }
 .checkselect .set input[type="checkbox"] {
     opacity: 1;
+}
+
+.preset-radio button {
+    font-weight: normal;
+    padding: 2px 10px;
+    height: 30px;
 }
 
 /* Address input */

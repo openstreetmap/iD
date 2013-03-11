@@ -1,0 +1,12 @@
+{
+    "key": "internet_access",
+    "title": "Internet Access",
+    "type": "combo",
+    "options": [
+        "yes",
+        "no",
+        "wlan",
+        "wired",
+        "terminal"
+    ]
+}

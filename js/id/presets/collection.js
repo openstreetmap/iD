@@ -10,12 +10,14 @@ iD.presets.Collection = function(collection) {
             });
         },
 
-        matchType: function(entity, resolver) {
-            var newcollection = collection.filter(function(d) {
-                return d.matchType(entity, resolver);
-            });
+        match: function(entity, resolver) {
+            return presets.matchType(entity, resolver).matchTags(entity);
+        },
 
-            return iD.presets.Collection(newcollection);
+        matchType: function(entity, resolver) {
+            return iD.presets.Collection(collection.filter(function(d) {
+                return d.matchType(entity, resolver);
+            }));
         },
 
         matchTags: function(entity) {

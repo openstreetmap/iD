@@ -12,8 +12,7 @@
     "icon": "highway-residential",
     "form": [
         "oneway",
-        "bridge",
-        "tunnel",
+        "roadtype",
         "access",
         "maxspeed",
         "surface"

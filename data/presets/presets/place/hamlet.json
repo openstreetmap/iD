@@ -1,0 +1,13 @@
+{
+    "name": "hamlet",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "place": "hamlet"
+        }
+    },
+    "icon": "triangle-stroked"
+}

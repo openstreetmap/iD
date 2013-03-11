@@ -14,7 +14,7 @@ iD.Map = function(context) {
         background = iD.Background()
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
-        points = iD.svg.Points(roundedProjection),
+        points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(roundedProjection),

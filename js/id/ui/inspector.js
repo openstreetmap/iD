@@ -20,8 +20,8 @@ iD.ui.Inspector = function(context) {
 
         tagEditor = iD.ui.TagEditor(context)
             .tags(entity.tags)
-            .on('changeTags', function() {
-                event.changeTags(entity, inspector.tags());
+            .on('changeTags', function(tags) {
+                event.changeTags(entity, tags);
             })
             .on('close', function() {
                 event.close(entity);
@@ -30,22 +30,14 @@ iD.ui.Inspector = function(context) {
                 inspectorbody.call(presetGrid, true);
             });
 
-        if (initial) {
-            inspectorbody.call(presetGrid);
-        } else {
-            inspectorbody.call(tagEditor);
-        }
+        inspectorbody.call(initial ? presetGrid : tagEditor);
 
         selection.call(iD.ui.Toggle(true));
     }
 
     inspector.tags = function() {
-        if (!arguments.length) {
-            return tagEditor.tags();
-        } else {
-            tagEditor.tags.apply(this, arguments);
-            return inspector;
-        }
+        tagEditor.tags.apply(this, arguments);
+        return inspector;
     };
 
     inspector.initial = function(_) {

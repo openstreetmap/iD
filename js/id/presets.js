@@ -3,7 +3,7 @@ iD.presets = function(context) {
     // an iD.presets.Collection with methods for
     // loading new data and returning defaults
 
-    var other = {
+    var other = iD.presets.Preset({
             name: 'other',
             icon: 'marker-stroked',
             match: {
@@ -11,7 +11,7 @@ iD.presets = function(context) {
                 type: ['point', 'vertex', 'line', 'area']
             },
             form: []
-        },
+        }),
         all = iD.presets.Collection([iD.presets.Preset(other)]),
         defaults = { area: all, line: all, point: all, vertex: all },
         forms = {},

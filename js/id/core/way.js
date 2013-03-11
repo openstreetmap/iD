@@ -162,5 +162,7 @@ iD.Way.areaKeys = {
     shop: {},
     man_made: {},
     public_transport: {},
-    place: {}
+    place: {},
+    aeroway: {},
+    waterway: {}
 };

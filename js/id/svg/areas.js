@@ -26,20 +26,27 @@ iD.svg.Areas = function(projection) {
     }
 
     // Patterns only work in Firefox when set directly on element
-    var patterns = d3.set([
-        'wetland', 'beach', 'scrub', 'construction', 'cemetery', 'meadow',
-        'farmland', 'orchard'
-    ]);
+    var patterns = {
+        wetland: 'wetland',
+        beach: 'beach',
+        scrub: 'scrub',
+        construction: 'construction',
+        cemetery: 'cemetery',
+        grave_yard: 'cemetery',
+        meadow: 'meadow',
+        famrland: 'farmland',
+        orchard: 'orchard'
+    };
+
+    var patternKeys = ['landuse', 'natural', 'amenity'];
 
     function setPattern(selection) {
         selection.each(function(d) {
-            if (d.tags.landuse && patterns.has(d.tags.landuse)) {
-                this.style.fill = 'url("#pattern-' + d.tags.landuse + '")';
-                return;
-            }
-            if (d.tags.natural && patterns.has(d.tags.natural)) {
-                this.style.fill = 'url("#pattern-' + d.tags.natural + '")';
-                return;
+            for (var i = 0; i < patternKeys.length; i++) {
+                if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
+                    this.style.fill = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+                    return;
+                }
             }
         });
     }

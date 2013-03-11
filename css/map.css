@@ -23,6 +23,10 @@ path {
     fill: none;
 }
 
+use {
+    pointer-events: none;
+}
+
 /* points */
 
 g.point circle {
@@ -625,6 +629,14 @@ path.casing.tag-bridge-yes {
     stroke: #333;
 }
 
+path.stroke.tag-highway.tag-tunnel-yes {
+    stroke-opacity: 0.3;
+}
+
+path.casing.tag-highway.tag-tunnel-yes {
+    stroke-opacity: 0.5;
+}
+
 path.stroke.tag-highway-construction,
 path.casing.tag-highway-construction {
     stroke-linecap: butt;
@@ -662,6 +674,15 @@ svg[data-zoom="16"] path.casing.tag-highway-construction {
 }
 .line.casing.tag-railway-subway {
     stroke: #222;
+}
+
+.line.stroke.tag-railway-platform {
+    stroke: #999;
+    stroke-width: 4;
+    stroke-dasharray: none;
+}
+.line.casing.tag-railway-platform {
+    stroke: none;
 }
 
 /* waterways */

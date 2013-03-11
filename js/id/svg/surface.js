@@ -1,6 +1,29 @@
 iD.svg.Surface = function() {
+    function findStylesheet(name) {
+        return _.find(document.styleSheets, function(stylesheet) {
+            return stylesheet.href.indexOf(name) > 0;
+        });
+    }
+
+    function sprites(stylesheetName, selectorRegexp) {
+        var sprites = [];
+
+        _.forEach(findStylesheet(stylesheetName).cssRules, function(rule) {
+            var klass = rule.selectorText,
+                match = klass && klass.match(selectorRegexp);
+            if (match) {
+                var id = match[1];
+                match = rule.style.backgroundPosition.match(/(-?\d+)px (-?\d+)px/);
+                sprites.push({id: id, x: match[1], y: match[2]});
+            }
+        });
+
+        return sprites;
+    }
+
     return function drawSurface(selection) {
         var defs = selection.append('defs');
+
         defs.append('marker')
             .attr({
                 id: 'oneway-marker',
@@ -51,6 +74,45 @@ iD.svg.Surface = function() {
             })
             .attr('xlink:href', function(d) { return 'img/pattern/' + d[1] + '.png'; });
 
+        defs.selectAll()
+            .data([12, 20])
+            .enter().append('clipPath')
+            .attr('id', function(d) { return 'clip-square-' + d; })
+            .append('rect')
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('width', function(d) { return d; })
+            .attr('height', function(d) { return d; });
+
+        defs.append('image')
+            .attr({
+                id: 'sprite',
+                width: 420,
+                height: 200,
+                'xlink:href': 'img/sprite.png'
+            });
+
+        defs.selectAll()
+            .data(sprites("app.css", /^\.(icon-operation-[a-z0-9-]+)$/))
+            .enter().append('use')
+            .attr('id', function(d) { return d.id; })
+            .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+            .attr('xlink:href', '#sprite');
+
+        defs.append('image')
+            .attr({
+                id: 'maki-sprite',
+                width: 306,
+                height: 294,
+                'xlink:href': 'img/maki.png'
+            });
+
+        defs.selectAll()
+            .data(sprites("maki.css", /^\.(maki-[a-z0-9-]+-12)$/))
+            .enter().append('use')
+            .attr('id', function(d) { return d.id; })
+            .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+            .attr('xlink:href', '#maki-sprite');
 
         var layers = selection.selectAll('.layer')
             .data(['fill', 'shadow', 'casing', 'stroke', 'text', 'hit', 'halo', 'label']);

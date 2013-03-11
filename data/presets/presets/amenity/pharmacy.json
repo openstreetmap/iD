@@ -12,7 +12,6 @@
     },
     "icon": "pharmacy",
     "form": [
-        "dispensing",
         "operator",
         "building_area",
         "address"

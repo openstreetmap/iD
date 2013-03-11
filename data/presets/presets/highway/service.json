@@ -13,7 +13,7 @@
     "form": [
         {
             "key": "service",
-            "type": "select",
+            "type": "combo",
             "options": ["parking_aisle", "driveway", "alley", "drive-through", "emergency_access"]
         },
         "oneway",

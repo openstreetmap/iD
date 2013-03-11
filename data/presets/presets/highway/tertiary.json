@@ -12,8 +12,7 @@
     "icon": "highway-tertiary",
     "form": [
         "oneway",
-        "bridge",
-        "tunnel",
+        "roadtype",
         "access",
         "maxspeed",
         "surface"

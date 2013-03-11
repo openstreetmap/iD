@@ -69,7 +69,7 @@ iD.modes.Select = function(context, selection, initial) {
 
         keybinding.on('⎋', function() {
             context.enter(iD.modes.Browse(context));
-        });
+        }, true);
 
         operations.forEach(function(operation) {
             operation.keys.forEach(function(key) {

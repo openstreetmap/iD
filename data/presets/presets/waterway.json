@@ -1,0 +1,20 @@
+{
+    "name": "waterway",
+    "match": {
+        "type": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "waterway": "*"
+        }
+    },
+    "form": [
+        {
+            "key": "waterway",
+            "type": "combo"
+        }
+    ]
+}

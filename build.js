@@ -1,4 +1,5 @@
 var fs = require('fs'),
+    path = require('path'),
     glob = require('glob');
 
 function read(f) {
@@ -12,6 +13,12 @@ function r(f) {
 function rp(f) {
     return r('presets/' + f);
 }
+
+var forms = {};
+glob.sync(__dirname + '/data/presets/forms/*.json').forEach(function(file) {
+    forms[path.basename(file, '.json')] = read(file);
+});
+fs.writeFileSync('data/presets/forms.json', JSON.stringify(forms));
 
 fs.writeFileSync('data/presets/presets.json', JSON.stringify(
     glob.sync(__dirname + '/data/presets/presets/**/*.json').map(function(file) {

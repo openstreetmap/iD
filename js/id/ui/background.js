@@ -45,13 +45,13 @@ iD.ui.Background = function(context) {
             }
         }
 
-        selection.on('click.background-inside', function() {
+        selection.on('mousedown.background-inside', function() {
             return d3.event.stopPropagation();
         });
 
-        context.container().on('mousedown.background-outside', function() {
+        context.surface().on('mousedown.background-outside', function() {
             setVisible(false);
-        }, true);
+        });
 
         var opa = content
             .append('div')
