@@ -19,7 +19,7 @@ d3.combobox = function() {
         selection.append('a', selection.select('input'))
             .attr('class', 'combobox-carat')
             .on('mousedown', stop)
-            .on('click', click);
+            .on('mousedown', mousedown);
 
         function updateSize() {
             var rect = selection.select('input')
@@ -37,16 +37,6 @@ d3.combobox = function() {
             // on mousedown
             d3.event.stopPropagation();
             d3.event.preventDefault();
-        }
-
-        function click() {
-            d3.event.preventDefault();
-            d3.event.stopPropagation();
-            update();
-            show();
-            // focus the node so that a click outside of the
-            // combo box will hide it
-            input.node().focus();
         }
 
         function blur() {
