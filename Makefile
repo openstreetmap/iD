@@ -1,7 +1,6 @@
 # See the README for installation instructions.
 
-NODE_PATH ?= ./node_modules
-UGLIFY = $(NODE_PATH)/uglify-js/bin/uglifyjs
+UGLIFY = ./node_modules/uglify-js/bin/uglifyjs
 JS_BEAUTIFIER = $(UGLIFY) -b -i 2 -nm -ns
 JS_COMPILER = $(UGLIFY)
 LOCALE ?= en_US
