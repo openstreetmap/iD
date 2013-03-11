@@ -103,13 +103,26 @@ iD.behavior.DragNode = function(context) {
         if (cancelled) return;
         off();
 
+        function adjacent(d) {
+            return _.any(context.graph().parentWays(entity).map(function(w) {
+                return w.areAdjacent(d.id, entity.id);
+            }));
+        }
+
         var d = datum();
+
         if (d.type === 'way') {
             var choice = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context);
             context.replace(
                 iD.actions.MoveNode(entity.id, choice.loc),
                 iD.actions.AddVertex(d.id, entity.id, choice.index),
                 connectAnnotation(d));
+
+        } else if (d.type === 'node' && adjacent(d)) {
+            context.replace(
+                    iD.actions.DeleteNode(entity.id),
+                    t('operations.delete.annotation.vertex'));
+
         } else if (d.type === 'node' && d.id !== entity.id) {
             context.replace(
                 iD.actions.Connect([entity.id, d.id]),

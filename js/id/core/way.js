@@ -57,6 +57,16 @@ _.extend(iD.Way.prototype, {
         return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
     },
 
+    areAdjacent: function(n1, n2) {
+        for (var i = 0; i < this.nodes.length; i++) {
+            if (this.nodes[i]  === n1) {
+                if (this.nodes[i - 1] === n2) return true;
+                if (this.nodes[i + 1] === n2) return true;
+            }
+        }
+        return false;
+    },
+
     geometry: function() {
         return this.isArea() ? 'area' : 'line';
     },

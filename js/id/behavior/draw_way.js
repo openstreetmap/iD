@@ -139,6 +139,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     // Connect the way to an existing node and continue drawing.
     drawWay.addNode = function(node) {
+
+        // Avoid creating duplicate segments
+        if (way.areAdjacent(node.id, way.nodes[way.nodes.length - 1])) return;
+
         context.perform(
             ReplaceTemporaryNode(node),
             annotation);
