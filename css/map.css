@@ -273,6 +273,7 @@ path.stroke.tag-landuse-residential {
     stroke: #e06e5f;
 }
 
+path.stroke.tag-landuse-retail,
 path.stroke.tag-landuse-commercial {
     stroke: #eab056;
 }
@@ -318,6 +319,7 @@ path.fill.tag-leisure-park {
     fill-opacity: 0.2;
 }
 
+path.stroke.tag-landuse-retail,
 path.fill.tag-landuse-residential,
 path.fill.tag-landuse-commercial,
 path.fill.tag-landuse-industrial {
@@ -417,6 +419,7 @@ path.fill.tag-landuse-construction {
     fill: #e06e5f;
 }
 
+path.stroke.tag-landuse-retail,
 path.fill.tag-landuse-commercial {
     fill: #eab056;
 }
