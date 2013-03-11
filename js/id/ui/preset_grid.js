@@ -29,7 +29,7 @@ iD.ui.PresetGrid = function(context) {
             .attr('class', 'preset-grid-search major')
             .attr('placeholder','Search')
             .attr('type', 'search')
-            .one('keydown', function() {
+            .on('keydown', function() {
                 // hack to let delete shortcut work when search is autofocused
                 if (search.property('value').length === 0 &&
                     (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
@@ -37,6 +37,14 @@ iD.ui.PresetGrid = function(context) {
                     d3.event.preventDefault();
                     d3.event.stopPropagation();
                     iD.operations.Delete([entity.id], context)();
+                } else if (search.property('value').length === 0 &&
+                    (d3.event.ctrlKey || d3.event.metaKey) &&
+                    d3.event.keyCode === d3.keybinding.keyCodes['z']) {
+                    d3.event.preventDefault();
+                    d3.event.stopPropagation();
+                    context.undo();
+                } else if (!d3.event.ctrlKey && !d3.event.metaKey) {
+                    d3.select(this).on('keydown', null);
                 }
             })
             .on('keyup', function() {
