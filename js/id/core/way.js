@@ -163,5 +163,6 @@ iD.Way.areaKeys = {
     man_made: {},
     public_transport: {},
     place: {},
-    aeroway: {}
+    aeroway: {},
+    waterway: {}
 };
