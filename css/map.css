@@ -916,7 +916,8 @@ text.point {
 .mode-draw-line #map:hover,
 .mode-draw-area #map:hover,
 .mode-add-line  #map:hover,
-.mode-add-area  #map:hover {
+.mode-add-area  #map:hover,
+#map:hover .behavior-drag-node {
     cursor: crosshair;
     cursor: url(../img/cursor-draw.png) 9 9, crosshair;
 }
