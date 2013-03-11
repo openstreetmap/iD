@@ -155,7 +155,7 @@ g.vertex.selected .shadow {
 .mode-add-area g.midpoint,
 .mode-add-line g.midpoint,
 .mode-add-point g.midpoint,
-.behavior-drag-node g.midpoint {
+.mode-drag-node g.midpoint {
   display: none;
 }
 
@@ -917,7 +917,7 @@ text.point {
 .mode-draw-area #map:hover,
 .mode-add-line  #map:hover,
 .mode-add-area  #map:hover,
-#map:hover .behavior-drag-node {
+.mode-drag-node #map:hover {
     cursor: crosshair;
     cursor: url(../img/cursor-draw.png) 9 9, crosshair;
 }
@@ -926,7 +926,7 @@ text.point {
 .mode-draw-area .behavior-hover .way,
 .mode-add-line  .behavior-hover .way,
 .mode-add-area  .behavior-hover .way,
-.behavior-drag-node.behavior-hover .way {
+.mode-drag-node .behavior-hover .way {
     cursor: crosshair;
     cursor: url(../img/cursor-draw-connect-line.png) 9 9, crosshair;
 }
@@ -935,7 +935,7 @@ text.point {
 .mode-draw-area .behavior-hover .vertex,
 .mode-add-line  .behavior-hover .vertex,
 .mode-add-area  .behavior-hover .vertex,
-.behavior-drag-node.behavior-hover .vertex {
+.mode-drag-node .behavior-hover .vertex {
     cursor: crosshair;
     cursor: url(../img/cursor-draw-connect-vertex.png) 9 9, crosshair;
 }
@@ -960,13 +960,13 @@ text.point {
 
 .mode-draw-line .vertex.active,
 .mode-draw-area .vertex.active,
-.behavior-drag-node .vertex.active {
+.mode-drag-node .vertex.active {
     display: none;
 }
 
 .mode-draw-line .way.active,
 .mode-draw-area .way.active,
-.behavior-drag-node .active {
+.mode-drag-node .active {
     pointer-events: none;
 }
 
@@ -976,6 +976,6 @@ text.point {
 .mode-draw-area .area.fill,
 .mode-add-line .area.fill,
 .mode-add-area .area.fill,
-.behavior-drag-node .area.fill {
+.mode-drag-node .area.fill {
     pointer-events: none;
 }

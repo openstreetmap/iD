@@ -13,7 +13,7 @@ iD.modes.Select = function(context, selection, initial) {
             iD.behavior.Hover(),
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
-            iD.behavior.DragNode(context)],
+            iD.modes.DragNode(context).behavior],
         radialMenu;
 
     function changeTags(d, tags) {

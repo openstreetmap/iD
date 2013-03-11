@@ -1,7 +1,14 @@
-iD.behavior.DragNode = function(context) {
+iD.modes.DragNode = function(context) {
+    var mode = {
+        id: 'drag-node',
+        button: 'browse'
+    };
+
     var nudgeInterval,
+        activeIDs,
         wasMidpoint,
-        cancelled;
+        cancelled,
+        hover = iD.behavior.Hover().altDisables(true);
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -40,9 +47,6 @@ iD.behavior.DragNode = function(context) {
         cancelled = d3.event.sourceEvent.shiftKey;
         if (cancelled) return behavior.cancel();
 
-        context.history()
-            .on('undone.drag-node', cancel);
-
         wasMidpoint = entity.type === 'midpoint';
         if (wasMidpoint) {
             var midpoint = entity;
@@ -59,14 +63,10 @@ iD.behavior.DragNode = function(context) {
                 iD.actions.Noop());
         }
 
-        var activeIDs = _.pluck(context.graph().parentWays(entity), 'id');
+        activeIDs = _.pluck(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
 
-        context.surface()
-            .classed('behavior-drag-node', true)
-            .selectAll('.node, .way')
-            .filter(function(d) { return activeIDs.indexOf(d.id) >= 0; })
-            .classed('active', true);
+        context.enter(mode);
     }
 
     function datum() {
@@ -101,7 +101,6 @@ iD.behavior.DragNode = function(context) {
 
     function end(entity) {
         if (cancelled) return;
-        off();
 
         function adjacent(d) {
             return _.any(context.graph().parentWays(entity).map(function(w) {
@@ -138,23 +137,13 @@ iD.behavior.DragNode = function(context) {
                 iD.actions.Noop(),
                 moveAnnotation(entity));
         }
-    }
 
-    function off() {
-        context.history()
-            .on('undone.drag_node', null);
-
-        context.surface()
-            .classed('behavior-drag-node', false)
-            .selectAll('.active')
-            .classed('active', false);
-
-        stopNudge();
+        context.enter(iD.modes.Browse(context));
     }
 
     function cancel() {
-        off();
         behavior.cancel();
+        context.enter(iD.modes.Browse(context));
     }
 
     var behavior = iD.behavior.drag()
@@ -165,5 +154,32 @@ iD.behavior.DragNode = function(context) {
         .on('move', move)
         .on('end', end);
 
-    return behavior;
+    mode.enter = function() {
+        context.install(hover);
+
+        context.history()
+            .on('undone.drag-node', cancel);
+
+        context.surface()
+            .selectAll('.node, .way')
+            .filter(function(d) { return activeIDs.indexOf(d.id) >= 0; })
+            .classed('active', true);
+    };
+
+    mode.exit = function() {
+        context.uninstall(hover);
+
+        context.history()
+            .on('undone.drag_node', null);
+
+        context.surface()
+            .selectAll('.active')
+            .classed('active', false);
+
+        stopNudge();
+    };
+
+    mode.behavior = behavior;
+
+    return mode;
 };

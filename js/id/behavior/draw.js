@@ -2,7 +2,7 @@ iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
         'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
-        hover = iD.behavior.Hover(),
+        hover = iD.behavior.Hover().altDisables(true),
         closeTolerance = 4,
         tolerance = 12;
 
@@ -62,18 +62,6 @@ iD.behavior.Draw = function(context) {
         }
     }
 
-    function keydown() {
-        if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            context.uninstall(hover);
-        }
-    }
-
-    function keyup() {
-        if (d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            context.install(hover);
-        }
-    }
-
     function backspace() {
         d3.event.preventDefault();
         event.undo();
@@ -90,9 +78,7 @@ iD.behavior.Draw = function(context) {
     }
 
     function draw(selection) {
-        if (!d3.event || !d3.event.altKey) {
-            context.install(hover);
-        }
+        context.install(hover);
 
         keybinding
             .on('⌫', backspace)
@@ -105,9 +91,7 @@ iD.behavior.Draw = function(context) {
             .on('mousemove.draw', mousemove);
 
         d3.select(document)
-            .call(keybinding)
-            .on('keydown.draw', keydown)
-            .on('keyup.draw', keyup);
+            .call(keybinding);
 
         return draw;
     }
@@ -119,12 +103,11 @@ iD.behavior.Draw = function(context) {
             .on('mousedown.draw', null)
             .on('mousemove.draw', null);
 
-        d3.select(window).on('mouseup.draw', null);
+        d3.select(window)
+            .on('mouseup.draw', null);
 
         d3.select(document)
-            .call(keybinding.off)
-            .on('keydown.draw', null)
-            .on('keyup.draw', null);
+            .call(keybinding.off);
     };
 
     return d3.rebind(draw, event, 'on');
