@@ -940,10 +940,11 @@ text.point {
 }
 
 /* Ensure drawing doesn't interact with area fills. */
-.mode-add-point .area,
-.mode-draw-line .area,
-.mode-draw-area .area,
-.mode-add-line .area,
-.mode-add-area .area {
-    pointer-events: visibleStroke;
+.mode-add-point .area.fill,
+.mode-draw-line .area.fill,
+.mode-draw-area .area.fill,
+.mode-add-line .area.fill,
+.mode-add-area .area.fill,
+.behavior-drag-node .area.fill {
+    pointer-events: none;
 }

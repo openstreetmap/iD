@@ -74,14 +74,7 @@ iD.behavior.DragNode = function(context) {
             return {};
         }
 
-        var datum = d3.event.sourceEvent.target.__data__,
-            target = d3.select(d3.event.sourceEvent.target);
-
-        if (datum && !target.classed('fill')) {
-            return datum;
-        }
-
-        return {};
+        return d3.event.sourceEvent.target.__data__ || {};
     }
 
     function move(entity) {
