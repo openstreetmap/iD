@@ -926,8 +926,7 @@ text.point {
 .mode-draw-area .behavior-hover .way,
 .mode-add-line  .behavior-hover .way,
 .mode-add-area  .behavior-hover .way,
-.behavior-drag-node.behavior-hover .way.stroke,
-.behavior-drag-node.behavior-hover .way.shadow  {
+.behavior-drag-node.behavior-hover .way {
     cursor: crosshair;
     cursor: url(../img/cursor-draw-connect-line.png) 9 9, crosshair;
 }
