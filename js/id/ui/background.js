@@ -1,5 +1,6 @@
 iD.ui.Background = function(context) {
     var event = d3.dispatch('cancel', 'save'),
+        key = 'b',
         opacities = [1, 0.5, 0];
 
     var layers = context.backgroundSources();
@@ -19,12 +20,13 @@ iD.ui.Background = function(context) {
             shown = false;
 
         var tooltip = bootstrap.tooltip()
-            .placement('right');
+            .placement('right')
+            .html(true)
+            .title(iD.ui.tooltipHtml(t('background.description'), key));
 
         var button = selection.append('button')
             .attr('tabindex', -1)
             .attr('class', 'fillD')
-            .attr('title', t('background.description'))
             .on('click.background-toggle', toggle)
             .call(tooltip);
 
@@ -227,7 +229,7 @@ iD.ui.Background = function(context) {
 
         var keybinding = d3.keybinding('background');
 
-        keybinding.on('b', toggle);
+        keybinding.on(key, toggle);
 
         d3.select(document)
             .call(keybinding);

@@ -1,4 +1,7 @@
 iD.ui.Geocoder = function(context) {
+
+    var key = 'f';
+
     function resultExtent(bounds) {
         return new iD.geo.Extent(
             [parseFloat(bounds[3]), parseFloat(bounds[0])],
@@ -81,11 +84,13 @@ iD.ui.Geocoder = function(context) {
                 shown = show;
             }
         }
-        var tooltip = bootstrap.tooltip().placement('right');
+        var tooltip = bootstrap.tooltip()
+            .placement('right')
+            .html(true)
+            .title(iD.ui.tooltipHtml(t('geocoder.title'), key));
 
         var button = selection.append('button')
             .attr('tabindex', -1)
-            .attr('title', t('geocoder.title'))
             .on('click', toggle)
             .call(tooltip);
 
@@ -111,7 +116,7 @@ iD.ui.Geocoder = function(context) {
 
         var keybinding = d3.keybinding('geocoder');
 
-        keybinding.on('f', toggle);
+        keybinding.on(key, toggle);
 
         d3.select(document)
             .call(keybinding);
