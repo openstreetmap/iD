@@ -103,11 +103,11 @@ iD.ui.Geocoder = function(context) {
         var resultsList = selection.append('div')
             .attr('class', 'content fillD map-overlay hide');
 
-        selection.on('click.geocoder-inside', function() {
+        selection.on('mousedown.geocoder-inside', function() {
             return d3.event.stopPropagation();
         });
 
-        context.container().on('mousedown.geocoder-outside', hide, true);
+        context.surface().on('mousedown.geocoder-outside', hide);
 
         var keybinding = d3.keybinding('geocoder');
 
