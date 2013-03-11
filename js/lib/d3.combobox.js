@@ -19,7 +19,10 @@ d3.combobox = function() {
         selection.append('a', selection.select('input'))
             .attr('class', 'combobox-carat')
             .on('mousedown', stop)
-            .on('mousedown', mousedown);
+            .on('mousedown', function() {
+                d3.event.preventDefault();
+                mousedown();
+            });
 
         function updateSize() {
             var rect = selection.select('input')
