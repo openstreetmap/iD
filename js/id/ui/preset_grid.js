@@ -23,8 +23,11 @@ iD.ui.PresetGrid = function(context) {
             .attr('class', 'preset-grid fillD inspector-body inspector-body-' + entity.geometry(context.graph()))
             .call(drawGrid, context.presets().defaults(entity, 12));
 
+        searchwrap.append('span').attr('class', 'icon search');
+
         var search = searchwrap.append('input')
-            .attr('class', 'preset-grid-search')
+            .attr('class', 'preset-grid-search major')
+            .attr('placeholder','Search')
             .attr('type', 'search')
             .one('keydown', function() {
                 // hack to let delete shortcut work when search is autofocused

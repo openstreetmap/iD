@@ -130,6 +130,10 @@ a:hover {
     border:1px solid rgba(255, 255, 255, .5);
 }
 
+textarea  {
+    resize: vertical;
+}
+
 textarea,
 input[type=text],
 input[type=search],
@@ -139,30 +143,31 @@ input[type=tel],
 input[type=email] {
     background-color: white;
     border:1px solid #ccc;
-    padding:10px;
-    resize: vertical;
+    padding:5px 10px;
+    width: 100%;
+    border-radius:4px;
+    -webkit-transition: all 100ms;
+       -moz-transition: all 100ms;
+            transition: all 100ms;
 }
 
 textarea:focus,
-input[type=text]:focus {
-    background-color: #ececec;
+input:focus {
+    background-color: #F1F1F1;
 }
 
 input[type=text] {
     padding:5px 10px;
     height:30px;
-    resize: none;
 }
 
-input[type=text].major {
+input.major {
     width: 100%;
     padding:5px 10px;
     font-size: 18px;
     font-weight: bold;
     height:40px;
-    resize: none;
 }
-
 
 /* tables */
 
@@ -478,12 +483,15 @@ button[disabled] .label {
 .icon.zoom-in    { background-position: -240px 0px;}
 .icon.zoom-out   { background-position: -260px 0px;}
 .icon.plus       { background-position: -240px 0px;}
-.icon.geocode    { background-position: -280px 0px;}
+
+.icon.geocode    { background-position: -280px -20px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
 .icon.geolocate  { background-position: -360px 0px;}
 .icon.warning    { background-position: -380px 0px;}
+
+.icon.search  { background-position: -280px 0px;}
 
 .icon.close-modal { background-position: -200px 0px;}
 
@@ -565,6 +573,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-inner {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    position: relative;
 }
 
 .inspector-inner.message {
@@ -584,7 +593,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 /* preset form */
-
 
 .inspector-body .name-help,
 .inspector-body .type-help {
@@ -606,13 +614,30 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .preset-input { padding-left: 10px;}
 
-.preset-search-input {
-    width:100%;
+.preset-grid-search-wrap {
+    height: 60px;
 }
 
-.preset-search-input input {
-    width: 100%;
-    padding: 5px;
+.preset-grid-search-wrap .icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.preset-grid-search-wrap input {
+    left: 0px;
+    right: 0px;
+    top: 0;
+    bottom: 0;
+    border-radius: 0;
+    border: 0;
+    text-indent: 30px;
+    width: auto; height: auto;
+    position: absolute;
+    z-index: 1;
 }
 
 .preset-search-result {
@@ -630,10 +655,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     height: 30px;
     margin: 5px;
     padding: 0 10px;
-}
-
-.preset-input input {
-    width: 100%;
 }
 
 div.combobox {
@@ -743,22 +764,24 @@ div.combobox {
 
 .preset-input .addr-housename {
     border-bottom: none;
-    width:100%;
+    border-radius: 4px 4px 0 0;
 }
 
 .preset-input .addr-number {
     width: 20%;
     border-right: none;
     border-bottom: none;
+    border-radius: 0;
 }
 
 .preset-input .addr-street {
     width: 80%;
+    border-radius: 0;
     border-bottom: none;
 }
 
 .preset-input .addr-city {
-    width:100%;
+    border-radius: 0 0 4px 4px;
 }
 
 /* tag editor */
@@ -924,12 +947,6 @@ div.combobox {
 .inspector-body-line .grid-entry .label {
   top: 80%;
 }
-
-.preset-grid-search {
-  width: 100%;
-  height: 20px;
-}
-
 
 /* Preset icon colors */
 
