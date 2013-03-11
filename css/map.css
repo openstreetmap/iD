@@ -269,16 +269,43 @@ path.stroke.tag-leisure-park {
     stroke-width: 1;
 }
 
-path.stroke.tag-landuse-residential { 
+path.stroke.tag-landuse-residential {
     stroke: #e06e5f;
 }
 
-path.stroke.tag-landuse-commercial { 
+path.stroke.tag-landuse-commercial {
     stroke: #eab056;
 }
 
 path.stroke.tag-landuse-industrial {
     stroke: #e4a4f5;
+}
+
+path.stroke.tag-landuse-basin,
+path.stroke.tag-landuse-reservoir {
+    stroke: #77d3de;
+}
+
+path.stroke.tag-landuse-quarry {
+    stroke: #a6957b;
+}
+
+path.stroke.tag-landuse-residential,
+path.stroke.tag-landuse-construction {
+    stroke: #e06e5f;
+}
+
+path.stroke.tag-landuse-meadow,
+path.stroke.tag-natural-wetland {
+    stroke: #b6e199;
+}
+
+path.stroke.tag-natural-beach {
+    stroke: #ffff7e;
+}
+
+path.stroke.tag-natural-scrub {
+    stroke: #dbf08b;
 }
 
 path.fill.tag-landuse,
@@ -321,33 +348,34 @@ path.fill.tag-landuse-orchard {
 }
 
 path.fill.tag-landuse-basin,
-path.fill.tag-landuse-reservoir { 
+path.fill.tag-landuse-reservoir {
     fill: #77d3de;
 }
 
-path.fill.tag-landuse-quarry { 
+path.fill.tag-landuse-quarry {
     fill: #a6957b;
 }
 
-path.fill.tag-landuse-residential { 
+path.fill.tag-landuse-residential {
     fill: #e06e5f;
 }
 
-path.fill.tag-landuse-farmland { 
+path.fill.tag-landuse-farmland {
     fill: url(#pattern-farmland) #8cd05f;
 }
+
 .pattern-color-farmland {
     fill: url(#pattern-farmland) #8cd05f;
 }
 
-path.fill.tag-landuse-meadow { 
+path.fill.tag-landuse-meadow {
     fill: url(#pattern-meadow) #b6e199;
 }
 .pattern-color-meadow {
     fill: #b6e199;
 }
 
-path.fill.tag-natural-wetland { 
+path.fill.tag-natural-wetland {
     fill: url(#pattern-wetland) #b6e199;
 }
 .pattern-color-wetland {
@@ -368,32 +396,32 @@ path.fill.tag-natural-scrub {
     fill: #dbf08b;
 }
 
-path.fill.tag-landuse-cemetery { 
+path.fill.tag-landuse-cemetery {
     fill: url(#pattern-cemetery) #8cd05f;
 }
 .pattern-color-cemetery {
     fill: #8cd05f
 }
 
-path.fill.tag-landuse-orchard { 
+path.fill.tag-landuse-orchard {
     fill: url(#pattern-orchard) #8cd05f;
 }
 .pattern-color-orchard {
     fill: #8cd05f
 }
 
-path.fill.tag-landuse-construction { 
+path.fill.tag-landuse-construction {
     fill: url(#pattern-construction) #e06e5f;
 }
 .pattern-color-construction {
     fill: #e06e5f;
 }
 
-path.fill.tag-landuse-commercial { 
+path.fill.tag-landuse-commercial {
     fill: #eab056;
 }
 
-path.fill.tag-landuse-industrial { 
+path.fill.tag-landuse-industrial {
     fill: #e4a4f5;
 }
 
