@@ -231,6 +231,8 @@ d3.combobox = function() {
 
         function mousedown() {
 
+            if (shown) return hide();
+
             input.node().focus();
             update('');
 
