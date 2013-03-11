@@ -140,6 +140,15 @@ _.extend(iD.Relation.prototype, {
         return this.tags.type === 'multipolygon';
     },
 
+    isComplete: function(resolver) {
+        for (var i = 0; i < this.members.length; i++) {
+            if (!resolver.entity(this.members[i].id)) {
+                return false;
+            }
+        }
+        return true;
+    },
+
     isRestriction: function() {
         return !!(this.tags.type && this.tags.type.match(/^restriction:?/));
     },

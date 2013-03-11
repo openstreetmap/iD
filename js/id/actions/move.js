@@ -14,7 +14,7 @@ iD.actions.Move = function(ids, delta, projection) {
         });
     }
 
-    return function(graph) {
+    var action = function(graph) {
         var nodes = [];
 
         addNodes(ids, nodes, graph);
@@ -28,4 +28,13 @@ iD.actions.Move = function(ids, delta, projection) {
 
         return graph;
     };
+
+    action.enabled = function(graph) {
+        return _.every(ids, function(id) {
+            var entity = graph.entity(id);
+            return entity.type !== 'relation' || entity.isComplete(graph);
+        });
+    };
+
+    return action;
 };

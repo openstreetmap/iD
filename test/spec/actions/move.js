@@ -1,4 +1,28 @@
 describe("iD.actions.Move", function() {
+    describe("#enabled", function() {
+        it("returns true by default", function() {
+            var node  = iD.Node({loc: [0, 0]}),
+                action = iD.actions.Move([node.id], [0, 0], d3.geo.mercator()),
+                graph = iD.Graph([node]);
+            expect(action.enabled(graph)).to.be.true;
+        });
+
+        it("returns false for an incomplete relation", function() {
+            var relation = iD.Relation({members: [{id: 1}]}),
+                action = iD.actions.Move([relation.id], [0, 0], d3.geo.mercator()),
+                graph = iD.Graph([relation]);
+            expect(action.enabled(graph)).to.be.false;
+        });
+
+        it("returns true for a complete relation", function() {
+            var node  = iD.Node({loc: [0, 0]}),
+                relation = iD.Relation({members: [{id: node.id}]}),
+                action = iD.actions.Move([relation.id], [0, 0], d3.geo.mercator()),
+                graph = iD.Graph([node, relation]);
+            expect(action.enabled(graph)).to.be.true;
+        });
+    });
+
     it("moves all nodes in a way by the given amount", function() {
         var node1  = iD.Node({loc: [0, 0]}),
             node2  = iD.Node({loc: [5, 10]}),

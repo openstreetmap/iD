@@ -1,5 +1,4 @@
 iD.operations.Move = function(selection, context) {
-
     var operation = function() {
         context.enter(iD.modes.Move(context, selection));
     };
@@ -10,7 +9,8 @@ iD.operations.Move = function(selection, context) {
     };
 
     operation.enabled = function() {
-        return true;
+        return iD.actions.Move(selection)
+            .enabled(context.graph());
     };
 
     operation.id = "move";
