@@ -327,11 +327,8 @@ button.active:not([disabled]):not(.disabled) {
 }
 
 button.minor {
-    border-radius:4px;
     height: 20px;
     width: 20px;
-    border: 0;
-    box-shadow: none;
     background: rgba(0,0,0,.5);
 }
 
@@ -792,7 +789,6 @@ div.combobox {
 
 .tag-row {
     width: 80%;
-    padding-right: 0px;
     position: relative;
     height: 30px;
 }
@@ -809,6 +805,7 @@ div.combobox {
 .tag-row input {
     width: 50%;
     border-left: 0;
+    border-radius: 0;
 }
 
 .tag-row input.key {
@@ -819,6 +816,19 @@ div.combobox {
     border-top: 1px solid #ccc;
 }
 
+.tag-row:first-child input.key {
+    border-top-left-radius: 4px;
+}
+
+.tag-row:first-child input.value {
+    border-top-right-radius: 4px;
+}
+
+.tag-row:last-child input.value {
+    border-bottom-right-radius: 4px;
+}
+
+
 .tag-row input.key {
     border-left: 1px solid #ccc;
 }
@@ -826,11 +836,11 @@ div.combobox {
 .tag-row button {
     position: absolute;
     top: 5px;
-    right: -60px;
+    right: -25%;
 }
 
 .tag-row button.tag-help {
-    right: -30px;
+    right: -12.5%;
 }
 
 .inspector-actions {
@@ -867,11 +877,10 @@ div.combobox {
 /* Preset grid */
 
 .grid-entry {
-    padding-bottom: 16.6666%;
-    min-height: 60px;
-    height: auto;
+    height: 80px;
     position: relative;
-    border-right: 1px solid #ccc; border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     border-radius: 0;
 }
 
@@ -889,6 +898,7 @@ div.combobox {
 
 .grid-entry:hover .preset-help {
     display: block;
+    border-radius: 4px 0 0 0;
 }
 
 .grid-entry .preset-help {
@@ -896,13 +906,6 @@ div.combobox {
     position: absolute;
     bottom: 0px;
     right: 0px;
-    width: 20px;
-    height: 20px;
-    background: #aaa;
-}
-
-.grid-entry .preset-help:hover {
-  background: #888;
 }
 
 .preset-inspect {
@@ -921,7 +924,7 @@ div.combobox {
     height: 40px;
 }
 
-.grid-entry .icon {
+.grid-entry > .icon {
     position: absolute;
     top: 20%;left: 0; right: 0;
     margin: auto;

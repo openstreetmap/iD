@@ -118,9 +118,9 @@ iD.ui.PresetGrid = function(context) {
 
             entered.append('span').attr('class','label').text(name);
 
-            entered.append('div')
+            entered.append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'preset-help')
+                .attr('class', 'preset-help minor')
                 .on('click', function(d) {
 
                     // Display description box inline
