@@ -1,14 +1,19 @@
 iD.svg.Surface = function() {
     function findStylesheet(name) {
         return _.find(document.styleSheets, function(stylesheet) {
-            return stylesheet.href.indexOf(name) > 0;
+            return stylesheet.href && stylesheet.href.indexOf(name) > 0;
         });
     }
 
     function sprites(stylesheetName, selectorRegexp) {
         var sprites = [];
 
-        _.forEach(findStylesheet(stylesheetName).cssRules, function(rule) {
+        var stylesheet = findStylesheet(stylesheetName);
+        if (!stylesheet) {
+            return sprites;
+        }
+
+        _.forEach(stylesheet.cssRules, function(rule) {
             var klass = rule.selectorText,
                 match = klass && klass.match(selectorRegexp);
             if (match) {
