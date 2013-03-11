@@ -60,9 +60,12 @@ data/data.js: $(DATA_FILES)
 	js/lib/locale.js \
 	locale/*.js
 
-iD.js: Makefile
+iD.js: node_modules Makefile
 	@rm -f $@
 	cat $(filter %.js,$^) > $@
+
+node_modules:
+	npm install
 
 %.min.js: %.js Makefile
 	@rm -f $@
