@@ -1755,6 +1755,9 @@ a.success-action {
 
 .radial-menu-tooltip {
     background-color: rgba(255, 255, 255, 0.8);
+    display: none;
+    position: absolute;
+    width: 200px;
 }
 
 .radial-menu-background {
