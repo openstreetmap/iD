@@ -52,15 +52,10 @@ iD.ui.RadialMenu = function(operations) {
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
-        var image = button.append('foreignObject')
-            .style('pointer-events', 'none')
-            .attr('width', 20)
-            .attr('height', 20)
-            .attr('x', -10)
-            .attr('y', -10);
-
-        image.append('xhtml:span')
-            .attr('class', function(d) { return 'icon icon-operation icon-operation-' + d.id; });
+        button.append('use')
+            .attr('transform', 'translate(-10, -10)')
+            .attr('clip-path', 'url(#clip-square-20)')
+            .attr('xlink:href', function(d) { return '#icon-operation-' + d.id; });
 
         var tooltip = menu.append('foreignObject')
             .style('display', 'none')
