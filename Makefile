@@ -1,23 +1,26 @@
 # See the README for installation instructions.
 
-NODE_PATH ?= ./node_modules
-# JS_COMPILER = $(NODE_PATH)/uglify-js/bin/uglifyjs
-JS_BEAUTIFIER = uglifyjs -b -i 2 -nm -ns
-JS_COMPILER = uglifyjs
+UGLIFY = ./node_modules/uglify-js/bin/uglifyjs
+JS_BEAUTIFIER = $(UGLIFY) -b -i 2 -nm -ns
+JS_COMPILER = $(UGLIFY)
 LOCALE ?= en_US
 
 all: \
 	iD.js \
 	iD.min.js
 
+DATA_FILES = $(shell find data -type f -name '*.json')
+data/data.js: $(DATA_FILES)
+	node build.js
+
 .INTERMEDIATE iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
+	js/lib/d3.combobox.js \
 	js/lib/d3.geo.tile.js \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
 	js/lib/d3.size.js \
-	js/lib/d3.tail.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
 	js/lib/jxon.js \
@@ -31,8 +34,6 @@ all: \
 	js/id/oauth.js \
 	js/id/services/*.js \
 	data/data.js \
-	data/imagery.js \
-	data/deprecated.js \
 	js/id/util.js \
 	js/id/geo.js \
 	js/id/geo/*.js \
@@ -50,18 +51,32 @@ all: \
 	js/id/svg/*.js \
 	js/id/ui.js \
 	js/id/ui/*.js \
+	js/id/ui/preset/*.js \
+	js/id/presets.js \
+	js/id/presets/*.js \
 	js/id/validate.js \
 	js/id/end.js \
 	js/lib/locale.js \
 	locale/*.js
 
-iD.js: Makefile
+iD.js: node_modules Makefile
 	@rm -f $@
 	cat $(filter %.js,$^) > $@
 
+node_modules:
+	npm install
+
 %.min.js: %.js Makefile
 	@rm -f $@
-	$(JS_COMPILER) $< -o $@
+	$(JS_COMPILER) $< -c -m -o $@
+
+install_root ?= build
+install: all
+	mkdir -p $(install_root)
+	cp iD.js iD.min.js land.html $(install_root)
+	cp index_packaged.html $(install_root)/index.html
+	cp -R css/ $(install_root)/css
+	cp -R img/ $(install_root)/img
 
 clean:
 	rm -f iD*.js

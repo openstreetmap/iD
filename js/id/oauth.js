@@ -2,9 +2,8 @@ iD.OAuth = function(context) {
     var baseurl = 'http://www.openstreetmap.org',
         o = {},
         keys,
-        oauth = {};
-
-    function keyclean(x) { return x.replace(/\W/g, ''); }
+        oauth = {},
+        oauth_secret;
 
     function timenonce(o) {
         o.oauth_timestamp = ohauth.timestamp();
@@ -55,7 +54,9 @@ iD.OAuth = function(context) {
 
         oauth.logout();
 
+        setAuth();
         o = timenonce(o);
+
         var url = baseurl + '/oauth/request_token';
         o.oauth_signature = ohauth.signature(oauth_secret, '',
             ohauth.baseString('POST', url, o));
@@ -73,17 +74,13 @@ iD.OAuth = function(context) {
                 ['top', screen.height / 2 - h / 2]].map(function(x) {
                     return x.join('=');
                 }).join(','),
-            popup = window.open("about:blank", 'oauth_window', settings),
-            locationCheck = window.setInterval(function() {
-                if (popup.closed) return window.clearInterval(locationCheck);
-                if (popup.location.search) {
-                    var search = popup.location.search,
-                        oauth_token = ohauth.stringQs(search.slice(1));
-                    popup.close();
-                    get_access_token(oauth_token);
-                    window.clearInterval(locationCheck);
-                }
-            }, 100);
+            popup = window.open("about:blank", 'oauth_window', settings);
+
+        window.authComplete = function(token) {
+            var oauth_token = ohauth.stringQs(token);
+            get_access_token(oauth_token);
+            delete window.authComplete;
+        };
 
         function reqTokenDone(err, xhr) {
             if (err) callback(err);
@@ -127,7 +124,7 @@ iD.OAuth = function(context) {
 
     function setAuth() {
         if (baseurl && keys && keys[baseurl]) {
-            o = _.assign(o, _.omit(keys[baseurl], 'oauth_secret'));
+            o = _.assign({}, _.omit(keys[baseurl], 'oauth_secret'));
             oauth_secret = keys[baseurl].oauth_secret;
         }
     }

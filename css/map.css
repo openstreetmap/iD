@@ -6,9 +6,6 @@ img.tile {
     -webkit-transform-origin:0 0;
     -moz-transform-origin:0 0;
     -o-transform-origin:0 0;
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
-    -moz-user-drag: none;
 
     opacity: 0;
 
@@ -24,6 +21,10 @@ img.tile-loaded {
 /* base styles */
 path {
     fill: none;
+}
+
+use {
+    pointer-events: none;
 }
 
 /* points */
@@ -134,7 +135,6 @@ g.vertex.shared .fill {
 g.vertex .shadow {
     fill: none;
     pointer-events: all;
-    stroke-width: 20;
     -webkit-transition: -webkit-transform 100ms linear;
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
@@ -155,7 +155,7 @@ g.vertex.selected .shadow {
 .mode-add-area g.midpoint,
 .mode-add-line g.midpoint,
 .mode-add-point g.midpoint,
-.behavior-drag-node g.midpoint {
+.mode-drag-node g.midpoint {
   display: none;
 }
 
@@ -229,6 +229,11 @@ path.area.fill {
     fill-rule: evenodd;
 }
 
+path.line.stroke {
+    stroke: white;
+    stroke-width: 2;
+}
+
 path.stroke.tag-natural {
     stroke: #b6e199;
     stroke-width:1;
@@ -252,6 +257,9 @@ path.fill.tag-building {
     fill: #e06e5f;
 }
 
+/* Landuse */
+
+
 path.stroke.tag-landuse,
 path.stroke.tag-natural-wood,
 path.stroke.tag-natural-tree,
@@ -260,13 +268,164 @@ path.stroke.tag-leisure-park {
     stroke: #8cd05f;
     stroke-width: 1;
 }
+
+path.stroke.tag-landuse-residential {
+    stroke: #e06e5f;
+}
+
+path.stroke.tag-landuse-retail,
+path.stroke.tag-landuse-commercial {
+    stroke: #eab056;
+}
+
+path.stroke.tag-landuse-industrial {
+    stroke: #e4a4f5;
+}
+
+path.stroke.tag-landuse-basin,
+path.stroke.tag-landuse-reservoir {
+    stroke: #77d3de;
+}
+
+path.stroke.tag-landuse-quarry {
+    stroke: #a6957b;
+}
+
+path.stroke.tag-landuse-residential,
+path.stroke.tag-landuse-construction {
+    stroke: #e06e5f;
+}
+
+path.stroke.tag-landuse-meadow,
+path.stroke.tag-natural-wetland {
+    stroke: #b6e199;
+}
+
+path.stroke.tag-natural-beach {
+    stroke: #ffff7e;
+}
+
+path.stroke.tag-natural-scrub {
+    stroke: #dbf08b;
+}
+
 path.fill.tag-landuse,
 path.fill.tag-natural-wood,
 path.fill.tag-natural-tree,
 path.fill.tag-natural-grassland,
+path.fill.tag-natural-grass,
 path.fill.tag-leisure-park {
     fill: #8cd05f;
     fill-opacity: 0.2;
+}
+
+path.stroke.tag-landuse-retail,
+path.fill.tag-landuse-residential,
+path.fill.tag-landuse-commercial,
+path.fill.tag-landuse-industrial {
+    fill-opacity: 0.1;
+}
+
+path.fill.tag-natural-wetland,
+path.fill.tag-natural-beach,
+path.fill.tag-natural-scrub,
+path.fill.tag-landuse-cemetery,
+path.fill.tag-landuse-meadow,
+path.fill.tag-landuse-farmland,
+path.fill.tag-landuse-construction,
+path.fill.tag-landuse-orchard {
+    /* background color is applied a further opacity later */
+    fill-opacity: 0.8;
+}
+
+.pattern-color-beach,
+.pattern-color-scrub,
+.pattern-color-meadow,
+.pattern-color-wetland,
+.pattern-color-cemetery,
+.pattern-color-farmland,
+.pattern-color-construction,
+.pattern-color-orchard {
+    fill-opacity: 0.2;
+}
+
+path.fill.tag-landuse-basin,
+path.fill.tag-landuse-reservoir {
+    fill: #77d3de;
+}
+
+path.fill.tag-landuse-quarry {
+    fill: #a6957b;
+}
+
+path.fill.tag-landuse-residential {
+    fill: #e06e5f;
+}
+
+path.fill.tag-landuse-farmland {
+    fill: url(#pattern-farmland) #8cd05f;
+}
+
+.pattern-color-farmland {
+    fill: url(#pattern-farmland) #8cd05f;
+}
+
+path.fill.tag-landuse-meadow {
+    fill: url(#pattern-meadow) #b6e199;
+}
+.pattern-color-meadow {
+    fill: #b6e199;
+}
+
+path.fill.tag-natural-wetland {
+    fill: url(#pattern-wetland) #b6e199;
+}
+.pattern-color-wetland {
+    fill: #B6E199;
+}
+
+path.fill.tag-natural-beach {
+    fill: url(#pattern-beach) #ffff7e;
+}
+.pattern-color-beach {
+    fill: #ffff7e;
+}
+
+path.fill.tag-natural-scrub {
+    fill: url(#pattern-scrub) #dbf08b;
+}
+.pattern-color-scrub {
+    fill: #dbf08b;
+}
+
+path.fill.tag-landuse-cemetery {
+    fill: url(#pattern-cemetery) #8cd05f;
+}
+.pattern-color-cemetery {
+    fill: #8cd05f
+}
+
+path.fill.tag-landuse-orchard {
+    fill: url(#pattern-orchard) #8cd05f;
+}
+.pattern-color-orchard {
+    fill: #8cd05f
+}
+
+path.fill.tag-landuse-construction {
+    fill: url(#pattern-construction) #e06e5f;
+}
+.pattern-color-construction {
+    fill: #e06e5f;
+}
+
+path.stroke.tag-landuse-retail,
+path.fill.tag-landuse-commercial {
+    fill: #eab056;
+}
+
+path.fill.tag-landuse-industrial {
+    fill: #e4a4f5;
 }
 
 path.stroke.tag-amenity-parking {
@@ -277,6 +436,7 @@ path.fill.tag-amenity-parking {
     fill: #aaa;
 }
 
+path.fill.tag-place,
 path.fill.tag-boundary {
     fill: none;
 }
@@ -388,15 +548,22 @@ path.casing.tag-highway-living_street {
     stroke-width:6;
 }
 
-path.stroke.tag-highway-pedestrian {
+path.stroke.line.tag-highway-pedestrian {
     stroke:#fff;
     stroke-dasharray: 2, 8;
     stroke-width:4 !important;
     shapeRendering: auto;
 }
-path.casing.tag-highway-pedestrian {
+path.casing.line.tag-highway-pedestrian {
     stroke:#8cd05f;
     stroke-width:6 !important;
+}
+path.stroke.area.tag-highway-pedestrian {
+    stroke:#fff;
+    stroke-width: 2;
+}
+path.fill.area.tag-highway-pedestrian {
+    fill:#ccc;
 }
 
 path.stroke.tag-highway-service {
@@ -493,6 +660,14 @@ path.casing.tag-bridge-yes {
     stroke: #333;
 }
 
+path.stroke.tag-highway.tag-tunnel-yes {
+    stroke-opacity: 0.3;
+}
+
+path.casing.tag-highway.tag-tunnel-yes {
+    stroke-opacity: 0.5;
+}
+
 path.stroke.tag-highway-construction,
 path.casing.tag-highway-construction {
     stroke-linecap: butt;
@@ -507,29 +682,38 @@ svg[data-zoom="16"] path.casing.tag-highway-construction {
 
 /* railways */
 
-path.stroke.tag-railway {
+.line.stroke.tag-railway {
     stroke: #eee;
     stroke-width: 2;
     stroke-linecap: butt;
     stroke-dasharray: 12,12;
 }
-path.casing.tag-railway {
+.line.casing.tag-railway {
     stroke: #555;
     stroke-width: 4;
 }
 
-path.stroke.tag-railway-abandoned {
+.line.stroke.tag-railway-abandoned {
     stroke: #eee;
 }
-path.casing.tag-railway-abandoned {
+.line.casing.tag-railway-abandoned {
     stroke: #999;
 }
 
-path.stroke.tag-railway-subway {
+.line.stroke.tag-railway-subway {
     stroke: #666;
 }
-path.casing.tag-railway-subway {
+.line.casing.tag-railway-subway {
     stroke: #222;
+}
+
+.line.stroke.tag-railway-platform {
+    stroke: #999;
+    stroke-width: 4;
+    stroke-dasharray: none;
+}
+.line.casing.tag-railway-platform {
+    stroke: none;
 }
 
 /* waterways */
@@ -606,11 +790,12 @@ text {
     opacity: 1;
 }
 
-.oneway .textpath {
-    pointer-events: none;
-    font-size: 7px;
-    baseline-shift: 2px;
-    opacity: .7;
+.oneway .textpath.tag-waterway {
+    fill: #002F35;
+}
+
+marker#oneway-marker path {
+    fill:#000;
 }
 
 text.tag-oneway {
@@ -671,17 +856,16 @@ text.pointlabel {
 
 text.point {
   font-size: 10px;
-  baseline-shift: 2px;
 }
 
 /* Cursors */
 
 #map:hover {
-    cursor:url(../img/cursor-grab.png) 9 9, auto;
+    cursor: url(../img/cursor-grab.png) 9 9, auto;
 }
 
 #map:active {
-    cursor:url(../img/cursor-grabbing.png) 9 9, auto;
+    cursor: url(../img/cursor-grabbing.png) 9 9, auto;
 }
 
 .mode-browse .point,
@@ -709,6 +893,17 @@ text.point {
     cursor: url(../img/cursor-select-split.png), pointer;
 }
 
+.mode-select .behavior-multiselect .point,
+.mode-select .behavior-multiselect .vertex,
+.mode-select .behavior-multiselect .line,
+.mode-select .behavior-multiselect .area {
+    cursor: url(../img/cursor-select-add.png), pointer;
+}
+
+.mode-select .behavior-multiselect .selected {
+    cursor: url(../img/cursor-select-remove.png), pointer;
+}
+
 .point:active,
 .vertex:active,
 .line:active,
@@ -721,49 +916,66 @@ text.point {
 .mode-draw-line #map:hover,
 .mode-draw-area #map:hover,
 .mode-add-line  #map:hover,
-.mode-add-area  #map:hover {
-    cursor:url(../img/cursor-draw.png) 9 9, auto;
+.mode-add-area  #map:hover,
+.mode-drag-node #map:hover {
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw.png) 9 9, crosshair;
 }
 
 .mode-draw-line .behavior-hover .way,
 .mode-draw-area .behavior-hover .way,
 .mode-add-line  .behavior-hover .way,
 .mode-add-area  .behavior-hover .way,
-.behavior-drag-node.behavior-hover .way {
-    cursor:url(../img/cursor-draw-connect-line.png) 9 9, auto;
+.mode-drag-node .behavior-hover .way {
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw-connect-line.png) 9 9, crosshair;
 }
 
 .mode-draw-line .behavior-hover .vertex,
 .mode-draw-area .behavior-hover .vertex,
 .mode-add-line  .behavior-hover .vertex,
 .mode-add-area  .behavior-hover .vertex,
-.behavior-drag-node.behavior-hover .vertex {
-    cursor:url(../img/cursor-draw-connect-vertex.png) 9 9, auto;
+.mode-drag-node .behavior-hover .vertex {
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw-connect-vertex.png) 9 9, crosshair;
 }
 
 .mode-add-point #map:hover {
-    cursor:url(../img/cursor-draw-point.png) 18 18, auto;
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw-point.png) 18 18, crosshair;
+}
+
+.lasso #map:hover,
+.lasso .way,
+.lasso .vertex {
+    cursor: crosshair;
+    cursor: url(../img/cursor-draw.png) 9 9, crosshair;
+}
+
+.lasso #map {
+    pointer-events: visibleStroke;
 }
 
 /* Modes */
 
 .mode-draw-line .vertex.active,
 .mode-draw-area .vertex.active,
-.behavior-drag-node .vertex.active {
+.mode-drag-node .vertex.active {
     display: none;
 }
 
 .mode-draw-line .way.active,
 .mode-draw-area .way.active,
-.behavior-drag-node .active {
+.mode-drag-node .active {
     pointer-events: none;
 }
 
 /* Ensure drawing doesn't interact with area fills. */
-.mode-add-point .area,
-.mode-draw-line .area,
-.mode-draw-area .area,
-.mode-add-line .area,
-.mode-add-area .area {
-    pointer-events: visibleStroke;
+.mode-add-point .area.fill,
+.mode-draw-line .area.fill,
+.mode-draw-area .area.fill,
+.mode-add-line .area.fill,
+.mode-add-area .area.fill,
+.mode-drag-node .area.fill {
+    pointer-events: none;
 }

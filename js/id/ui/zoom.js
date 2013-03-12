@@ -36,5 +36,5 @@ iD.ui.Zoom = function(context) {
 
         d3.select(document)
             .call(keybinding);
-    }
+    };
 };

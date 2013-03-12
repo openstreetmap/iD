@@ -1,0 +1,25 @@
+{
+    "name": "service road",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "tags": {
+            "highway": "service"
+        },
+        "terms": []
+    },
+    "icon": "highway-service",
+    "form": [
+        {
+            "key": "service",
+            "type": "combo",
+            "options": ["parking_aisle", "driveway", "alley", "drive-through", "emergency_access"]
+        },
+        "oneway",
+        "roadtype",
+        "access",
+        "maxspeed",
+        "surface"
+    ]
+}

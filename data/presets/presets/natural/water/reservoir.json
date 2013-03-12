@@ -1,0 +1,14 @@
+{
+    "name": "reservoir",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "natural": "water",
+            "water": "reservoir"
+        },
+        "terms": [
+        ]
+    }
+}

@@ -41,7 +41,7 @@ iD.svg.Labels = function(projection) {
     });
 
     var pointOffsets = [
-        [15, 3, 'start'], // right
+        [15, 2, 'start'], // right
         [10, 0, 'start'], // unused right now
         [-15, 0, 'end']
     ];
@@ -58,7 +58,10 @@ iD.svg.Labels = function(projection) {
         var c = textWidthCache[size];
         if (!c) c = textWidthCache[size] = {};
         if (c[text]) return c[text];
-        else if (elem) return c[text] = elem.getComputedTextLength();
+        else if (elem) {
+            c[text] = elem.getComputedTextLength();
+            return c[text];
+        }
         else return size / 3 * 2 * text.length;
     }
 
@@ -80,9 +83,9 @@ iD.svg.Labels = function(projection) {
             .data(entities, iD.Entity.key)
             .attr({
                 'startOffset': '50%',
-                'xlink:href': function(d, i) { return '#halo-' + d.id; }
+                'xlink:href': function(d) { return '#halo-' + d.id; }
             })
-            .text(function(d, i) { return name(d); });
+            .text(function(d) { return name(d); });
 
         texts.exit().remove();
 
@@ -97,7 +100,7 @@ iD.svg.Labels = function(projection) {
         halos.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d, i) { return 'halo-' + d.id; })
+            .attr('id', function(d) { return 'halo-' + d.id; })
             .attr('class', classes);
 
         halos.attr('d', get(labels, 'lineString'));
@@ -123,11 +126,11 @@ iD.svg.Labels = function(projection) {
                 }
                 return x;
             },
-            'y': function(d, i) { return labels[i].y - labels[i].height + 1 - 2; },
+            'y': function(d, i) { return labels[i].y - labels[i].height + 1; },
             'rx': 3,
             'ry': 3,
             'width': function(d, i) { return textWidth(name(d), labels[i].height) + 4; },
-            'height': function(d, i) { return labels[i].height + 4; },
+            'height': function(d, i) { return labels[i].height + 2; },
             'fill': 'white'
         });
 
@@ -209,7 +212,7 @@ iD.svg.Labels = function(projection) {
             pad = 50,
             rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
             labels = _.pluck(rtree.search(rect, this), 'leaf'),
-            containsLabel = iD.util.trueObj(labels),
+            containsLabel = d3.set(labels),
             selection = d3.select(this);
 
         // ensures that simply resetting opacity
@@ -227,7 +230,7 @@ iD.svg.Labels = function(projection) {
         if (!labels.length) return;
         selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
             .filter(function(d) {
-                return containsLabel[d.id];
+                return containsLabel.has(d.id);
             })
             .style('opacity', 0)
             .property('_opacity', 0);
@@ -240,7 +243,7 @@ iD.svg.Labels = function(projection) {
     var rtree = new RTree(),
         rectangles = {},
         lang = 'name:' + iD.detect().locale.toLowerCase().split('-')[0],
-        mousePosition, cacheDimensions;
+        supersurface, mousePosition, cacheDimensions;
 
     return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
 
@@ -249,8 +252,16 @@ iD.svg.Labels = function(projection) {
             cacheDimensions = dimensions.join(',');
         }
 
-        d3.select(surface.node().parentNode)
-            .on('mousemove.hidelabels', hideOnMouseover);
+        if (!supersurface) {
+            supersurface = d3.select(surface.node().parentNode)
+                .on('mousemove.hidelabels', hideOnMouseover)
+                .on('mousedown.hidelabels', function() {
+                    supersurface.on('mousemove.hidelabels', null);
+                })
+                .on('mouseup.hidelabels', function() {
+                    supersurface.on('mousemove.hidelabels', hideOnMouseover);
+                });
+        }
 
         var hidePoints = !surface.select('.node.point').node();
 
@@ -359,7 +370,7 @@ iD.svg.Labels = function(projection) {
 
         function getAreaLabel(entity, width, height) {
             var path = d3.geo.path().projection(projection),
-                centroid = path.centroid(entity.asGeoJSON(graph)),
+                centroid = path.centroid(entity.asGeoJSON(graph, true)),
                 extent = entity.extent(graph),
                 entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
 

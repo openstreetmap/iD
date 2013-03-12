@@ -15,16 +15,6 @@ In order to unify the construction interface for these two styles, classical cla
 [instanceof trick](http://ejohn.org/blog/simple-class-instantiation/). This allows instantiation
 of both module pattern classes and classical classes to be done without using `new`.
 
-Function names
---------------
-Anything that creates and calls an Action should be prefixed with do:
-	doSetLatLon(lat,lon)
-
-Anything that is called by an Action, to do the actual work, should be prefixed with an underscore:
-	_setLatLon(lat,lon)
-
-and commented as such. Underscores are also used to prefix private methods.
-
 File naming
 -----------
 The filename should be the name of the base class. You can add subclasses within

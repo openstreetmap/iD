@@ -1,21 +1,82 @@
 iD.svg.Areas = function(projection) {
+    // For fixing up rendering of multipolygons with tags on the outer member.
+    // https://github.com/systemed/iD/issues/613
+    function isSimpleMultipolygonOuterMember(entity, graph) {
+        if (entity.type !== 'way')
+            return false;
+
+        var parents = graph.parentRelations(entity);
+        if (parents.length !== 1)
+            return false;
+
+        var parent = parents[0];
+        if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
+            return false;
+
+        var members = parent.members, member;
+        for (var i = 0; i < members.length; i++) {
+            member = members[i];
+            if (member.id === entity.id && member.role && member.role !== 'outer')
+                return false; // Not outer member
+            if (member.id !== entity.id && (!member.role || member.role === 'outer'))
+                return false; // Not a simple multipolygon
+        }
+
+        return parent;
+    }
+
+    // Patterns only work in Firefox when set directly on element
+    var patterns = {
+        wetland: 'wetland',
+        beach: 'beach',
+        scrub: 'scrub',
+        construction: 'construction',
+        cemetery: 'cemetery',
+        grave_yard: 'cemetery',
+        meadow: 'meadow',
+        famrland: 'farmland',
+        orchard: 'orchard'
+    };
+
+    var patternKeys = ['landuse', 'natural', 'amenity'];
+
+    function setPattern(selection) {
+        selection.each(function(d) {
+            for (var i = 0; i < patternKeys.length; i++) {
+                if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
+                    this.style.fill = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+                    return;
+                }
+            }
+        });
+    }
+
     return function drawAreas(surface, graph, entities, filter) {
         var path = d3.geo.path().projection(projection),
-            areas = [];
+            areas = {},
+            multipolygon;
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry(graph) === 'area') {
-                areas.push({
+            if (entity.geometry(graph) !== 'area') continue;
+
+            if (multipolygon = isSimpleMultipolygonOuterMember(entity, graph)) {
+                areas[multipolygon.id] = {
+                    entity: multipolygon.mergeTags(entity.tags),
+                    area: Math.abs(path.area(entity.asGeoJSON(graph, true)))
+                };
+            } else if (!areas[entity.id]) {
+                areas[entity.id] = {
                     entity: entity,
-                    area: Math.abs(path.area(entity.asGeoJSON(graph)))
-                });
+                    area: Math.abs(path.area(entity.asGeoJSON(graph, true)))
+                };
             }
         }
 
+        areas = d3.values(areas);
         areas.sort(function(a, b) { return b.area - a.area; });
 
-        function drawPaths(group, areas, filter, klass) {
+        function drawPaths(group, areas, filter, klass, closeWay) {
             var tagClasses = iD.svg.TagClasses();
 
             if (klass === 'stroke') {
@@ -32,9 +93,11 @@ iD.svg.Areas = function(projection) {
 
             paths
                 .order()
-                .attr('d', function(entity) { return path(entity.asGeoJSON(graph)); })
+                .attr('d', function(entity) { return path(entity.asGeoJSON(graph, closeWay)); })
                 .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
+
+            if (klass === 'fill') paths.call(setPattern);
 
             paths.exit()
                 .remove();
@@ -48,10 +111,12 @@ iD.svg.Areas = function(projection) {
             return area.type === 'way';
         });
 
-        var fill = surface.select('.layer-fill'),
+        var shadow = surface.select('.layer-shadow'),
+            fill   = surface.select('.layer-fill'),
             stroke = surface.select('.layer-stroke');
 
-        drawPaths(fill, areas, filter, 'fill');
+        drawPaths(shadow, strokes, filter, 'shadow');
+        drawPaths(fill, areas, filter, 'fill', true);
         drawPaths(stroke, strokes, filter, 'stroke');
     };
 };

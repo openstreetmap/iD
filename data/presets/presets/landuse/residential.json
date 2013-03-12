@@ -1,0 +1,15 @@
+{
+    "name": "residential",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "residential"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "name": "man made",
+    "match": {
+        "type": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "man_made": "*"
+        }
+    },
+    "form": [
+        {
+            "key": "man_made",
+            "type": "combo"
+        }
+    ]
+}

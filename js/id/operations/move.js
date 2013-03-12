@@ -1,21 +1,20 @@
 iD.operations.Move = function(selection, context) {
-    var entityId = selection[0];
-
     var operation = function() {
-        context.enter(iD.modes.MoveWay(context, entityId));
+        context.enter(iD.modes.Move(context, selection));
     };
 
     operation.available = function() {
-        return selection.length === 1 &&
-            context.entity(entityId).type === 'way';
+        return selection.length > 1 ||
+            context.entity(selection[0]).type !== 'node';
     };
 
     operation.enabled = function() {
-        return true;
+        return iD.actions.Move(selection)
+            .enabled(context.graph());
     };
 
     operation.id = "move";
-    operation.key = t('operations.move.key');
+    operation.keys = [t('operations.move.key')];
     operation.title = t('operations.move.title');
     operation.description = t('operations.move.description');
 

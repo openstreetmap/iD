@@ -1,6 +1,15 @@
 window.iD = function () {
+    locale
+        .current('en')
+        .current(iD.detect().locale);
+
     var context = {},
-        storage = localStorage || {};
+        storage;
+
+    // https://github.com/systemed/iD/issues/772
+    // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
+    try { storage = localStorage; } catch (e) {}
+    storage = storage || {};
 
     context.storage = function(k, v) {
         if (arguments.length === 1) return storage[k];
@@ -16,7 +25,8 @@ window.iD = function () {
         map = iD.Map(context);
 
     // the connection requires .storage() to be available on calling.
-    var connection = iD.Connection(context);
+    var connection = iD.Connection(context)
+        .keys(iD.data.keys);
 
     connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
@@ -36,6 +46,7 @@ window.iD = function () {
     context.undo = history.undo;
     context.redo = history.redo;
     context.changes = history.changes;
+    context.intersects = history.intersects;
 
     /* Graph */
     context.entity = function(id) {
@@ -89,6 +100,22 @@ window.iD = function () {
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
 
+    /* Background */
+    var backgroundSources = iD.data.imagery.map(iD.BackgroundSource.template);
+    backgroundSources.push(iD.BackgroundSource.Custom);
+
+    context.backgroundSources = function() {
+        return backgroundSources;
+    };
+
+    /* Presets */
+    var presets = iD.presets(context)
+        .load(iD.data.presets);
+
+    context.presets = function() {
+        return presets;
+    };
+
     context.container = function(_) {
         if (!arguments.length) return container;
         container = _;
@@ -98,16 +125,17 @@ window.iD = function () {
     var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
     if (q.layer) {
         context.background()
-           .source(_.find(iD.layers, function(l) {
+           .source(_.find(backgroundSources, function(l) {
                if (l.data.sourcetag === q.layer) {
-                   return (detected = true);
+                   detected = true;
+                   return true;
                }
            }));
     }
 
     if (!detected) {
         context.background()
-            .source(_.find(iD.layers, function(l) {
+            .source(_.find(backgroundSources, function(l) {
                 return l.data.name === 'Bing aerial imagery';
             }));
     }
@@ -115,7 +143,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '0.0.0-alpha2';
+iD.version = '0.0.0-alpha3';
 
 iD.detect = function() {
     var browser = {};

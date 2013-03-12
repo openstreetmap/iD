@@ -20,11 +20,6 @@ describe('iD.Background', function() {
             expect(c.size([100, 100])).to.equal(c);
             expect(c.size()).to.eql([100,100]);
         });
-
-        it('#source', function() {
-            expect(c.source(iD.layers[0])).to.equal(c);
-            expect(c.source()).to.equal(iD.layers[0]);
-        });
     });
 
     describe('iD.BackgroundSource.Template', function() {

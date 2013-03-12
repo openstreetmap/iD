@@ -1,0 +1,20 @@
+{
+    "name": "unclassified",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "tags": {
+            "highway": "unclassified"
+        },
+        "terms": []
+    },
+    "icon": "highway",
+    "form": [
+        "oneway",
+        "roadtype",
+        "access",
+        "maxspeed",
+        "surface"
+    ]
+}

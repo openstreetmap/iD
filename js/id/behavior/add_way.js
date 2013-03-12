@@ -10,7 +10,6 @@ iD.behavior.AddWay = function(context) {
             .on('finish', addWay.cancel);
 
         context.map()
-            .fastEnable(false)
             .minzoom(16)
             .dblclickEnable(false);
 
@@ -19,18 +18,18 @@ iD.behavior.AddWay = function(context) {
 
     addWay.off = function(surface) {
         context.map()
-            .fastEnable(true)
             .minzoom(0)
             .tail(false);
-
-        window.setTimeout(function() {
-            context.map().dblclickEnable(true);
-        }, 1000);
 
         surface.call(draw.off);
     };
 
     addWay.cancel = function() {
+
+        window.setTimeout(function() {
+            context.map().dblclickEnable(true);
+        }, 1000);
+
         context.enter(iD.modes.Browse(context));
     };
 

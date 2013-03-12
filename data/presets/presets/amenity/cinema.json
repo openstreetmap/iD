@@ -1,0 +1,36 @@
+{
+    "name": "cinema",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "big screen",
+            "bijou",
+            "cine",
+            "drive-in",
+            "film",
+            "flicks",
+            "motion pictures",
+            "movie house",
+            "movie theater",
+            "moving pictures",
+            "nabes",
+            "photoplay",
+            "picture show",
+            "pictures",
+            "playhouse",
+            "show",
+            "silver screen"
+        ],
+        "tags": {
+            "amenity": "cinema"
+        }
+    },
+    "icon": "cinema",
+    "form": [
+        "building_area",
+        "address"
+    ]
+}

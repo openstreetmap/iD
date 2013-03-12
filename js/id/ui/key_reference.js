@@ -27,7 +27,7 @@ iD.ui.keyReference = function(selection) {
             .append('tr');
 
         var cols = rows.selectAll('td')
-            .data(function(d, i) {
+            .data(function(d) {
                 return [d.value, d.description || "", d.count];
             })
             .enter()

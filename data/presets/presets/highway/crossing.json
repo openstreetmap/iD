@@ -1,0 +1,21 @@
+{
+    "name": "crossing",
+    "match": {
+        "type": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "crossing"
+        },
+        "terms": [
+            "crosswalk",
+            "zebra crossing"
+        ]
+    },
+    "form": [
+        {
+            "key": "crossing",
+            "type": "combo"
+        }
+    ]
+}

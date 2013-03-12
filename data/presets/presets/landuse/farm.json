@@ -1,0 +1,15 @@
+{
+    "name": "farm",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "farm"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ]
+}

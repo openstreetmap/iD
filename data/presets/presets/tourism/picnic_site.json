@@ -1,0 +1,19 @@
+{
+    "name": "picnic site",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+        ],
+        "tags": {
+            "tourism": "picnic_site"
+        }
+    },
+    "form": [
+        "operator",
+        "building_area",
+        "address"
+    ]
+}

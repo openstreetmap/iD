@@ -1,0 +1,20 @@
+[
+{
+    "match": {
+        "type": "line"
+    },
+    "icon": "highway",
+    "name": "roads",
+    "members": [
+        "residential road",
+        "primary road",
+        "secondary road",
+        "tertiary road",
+        "motorway",
+        "trunk highway",
+        "service road",
+        "other"
+    ]
+}
+]
+

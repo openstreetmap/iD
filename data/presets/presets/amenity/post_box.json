@@ -1,0 +1,28 @@
+{
+    "name": "post box",
+    "match": {
+        "type": [
+            "point"
+        ],
+        "tags": {
+            "amenity": "post_box"
+        },
+        "terms": [
+            "letter drop",
+            "letterbox",
+            "mail drop",
+            "mailbox",
+            "pillar box",
+            "postbox"
+        ]
+    },
+    "icon": "post",
+    "form": [
+        "address",
+        "operator",
+        {
+            "key": "collection_times",
+            "type": "text"
+        }
+    ]
+}

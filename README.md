@@ -30,6 +30,9 @@ Come on in, the water's lovely. More help? Ping RichardF, tmcw, or jfire on IRC
 (`irc.oftc.net`, in `#osm-dev` or `#osm`), on the OSM mailing lists or at
 richard@systemeD.net.
 
+For guidance on building a packaged version, running tests, and contributing to
+development, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
 iD is available under the [WTFPL](http://sam.zoy.org/wtfpl/), though obviously, if you want to dual-license

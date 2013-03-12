@@ -1,0 +1,20 @@
+{
+    "name": "wood",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "natural": "wood"
+        },
+        "terms": []
+    },
+    "form": [
+        {
+            "key": "wood",
+            "type": "combo"
+        }
+    ],
+    "icon": "park2"
+}

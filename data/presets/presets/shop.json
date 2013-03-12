@@ -1,0 +1,22 @@
+{
+    "name": "shop",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "*"
+        },
+        "terms": []
+    },
+    "icon": "shop",
+    "form": [
+        {
+            "key": "shop",
+            "type": "combo"
+        },
+        "address",
+        "opening_hours"
+    ]
+}

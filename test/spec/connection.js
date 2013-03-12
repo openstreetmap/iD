@@ -1,5 +1,5 @@
 describe('iD.Connection', function () {
-    var c;
+    var c, context;
 
     beforeEach(function () {
         context = iD();
@@ -20,6 +20,24 @@ describe('iD.Connection', function () {
         var user = { name: 'tom' };
         expect(c.user(user)).to.equal(c);
         expect(c.user()).to.equal(user);
+    });
+
+    describe('#changesetUrl', function() {
+        it('provides a changeset url', function() {
+            expect(c.changesetUrl(2)).to.eql('http://www.openstreetmap.org/browse/changeset/2');
+        });
+    });
+
+    describe('#userUrl', function() {
+        it('provides a user url', function() {
+            expect(c.userUrl('bob')).to.eql('http://www.openstreetmap.org/user/bob');
+        });
+    });
+
+    describe('#flush', function() {
+        it('flushes the connection', function() {
+            expect(c.flush()).to.eql(c);
+        });
     });
 
     describe('#loadFromURL', function () {

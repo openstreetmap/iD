@@ -15,6 +15,12 @@ iD.validate = function(changes, graph) {
         if (tags.building && tags.building === 'yes') return 'building=yes';
     }
 
+    if (changes.deleted.length > 100) {
+        warnings.push({
+            message: t('validations.many_deletions', { n: changes.deleted.length })
+        });
+    }
+
     for (var i = 0; i < changes.created.length; i++) {
         change = changes.created[i];
 

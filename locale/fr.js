@@ -53,7 +53,7 @@ locale.fr = {
             annotation: "Modifier les tags."
         },
         circularize: {
-            title: "Circularize",
+            title: "Arrondir",
             description: "Créer un cercle.",
             key: "O",
             annotation: {
@@ -73,7 +73,6 @@ locale.fr = {
         'delete': {
             title: "Supprimer",
             description: "Supprime l'élément de la carte.",
-            key: "⌫",
             annotation: {
                 point: "Supprime un point.",
                 vertex: "Supprime le noeud d'une ligne.",
@@ -111,7 +110,17 @@ locale.fr = {
                 point: "Déplace un point.",
                 vertex: "Déplace le noeud d'une ligne.",
                 line: "Déplace une ligne.",
-                area: "Déplace un polygone."
+                area: "Déplace un polygone.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -139,20 +148,20 @@ locale.fr = {
     report_a_bug: "Signaler un bug",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Sauvegarder vos modifications",
+        description_placeholder: "Description succinte de vos contributions",
+        upload_explanation: "{user} : les modifications apportées seront visibles par l'ensemble des services utilisant les données d'OpenStreetMap.",
+        save: "Sauvegarder",
+        cancel: "Annuler",
+        warnings: "Attention",
+        modified: "Modifié",
+        deleted: "Supprimé",
+        created: "Créé"
     },
 
     contributors: {
-        list: "Consulter les contributions de {users}",
-        truncated_list: "Consulter les contributions de {users} et {count} les autres"
+        list: "Contributions réalisées par {users}",
+        truncated_list: "Contributions réalisées par {users} et {count} autres personnes"
     },
 
     geocoder: {
@@ -162,7 +171,7 @@ locale.fr = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Me localiser"
     },
 
     inspector: {
@@ -171,21 +180,26 @@ locale.fr = {
         new_tag: "Nouveau tag",
         edit_tags: "Editer les tags",
         okay: "Okay",
-        view_on_osm: "View on OSM"
+        view_on_osm: "Visualiser sur OSM",
+        name: "Nom",
+        editing: "Edité {type}",
+        additional: "Tags complémentaires",
+        choose: "Que souhaitez vous ajouter?",
+        results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Fond de carte",
         description: "Paramètres du fond de carte",
-        percent_brightness: "{opacity}% brightness",
-        fix_misalignment: "Fix misalignment",
-        reset: "reset"
+        percent_brightness: "{opacity}% luminosité",
+        fix_misalignment: "Corriger le décalage",
+        reset: "réinitialiser"
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements?",
+        restore: "Restaurer",
+        reset: "Annuler"
     },
 
     save: {
@@ -197,8 +211,8 @@ locale.fr = {
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "Bienvenue sur ID l'editeur en ligne d'OpenStreetMap",
+        text: "Cette version {version}, est une version de développement. Si vous souhaitez plus d'informations, veuillez consulter {website} ou pour signaler un bug   {github}."
     },
 
     source_switch: {
@@ -207,21 +221,22 @@ locale.fr = {
     },
 
     tag_reference: {
-        description: "Déscription",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        description: "Description",
+        on_wiki: "{tag} sur le wiki.osm.org",
+        used_with: "Utilisé avec {type}"
     },
 
     validations: {
         untagged_point: "Point sans aucun tag ne faisant partie ni d'une ligne, ni d'un polygone",
         untagged_line: "Ligne sans aucun tag",
         untagged_area: "Polygone sans aucun tag",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Ce tag {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
         deprecated_tags: "Tags obsolètes : {tags}"
     },
 
     zoom: {
-        in: "Zoomer",
+        'in': "Zoomer",
         out: "Dézoomer"
     }
 };

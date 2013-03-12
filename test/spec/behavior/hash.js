@@ -40,10 +40,11 @@ describe("iD.behavior.Hash", function () {
     it("centerZooms map at requested coordinates on hash change", function (done) {
         hash();
 
-        d3.select(window).one('hashchange', function () {
+        d3.select(window).on('hashchange', function () {
             expect(context.map().center()[0]).to.be.closeTo(-77.02405, 0.1);
             expect(context.map().center()[1]).to.be.closeTo(38.87952, 0.1);
             expect(context.map().zoom()).to.equal(20.0);
+            d3.select(window).on('hashchange', null);
             done();
         });
 

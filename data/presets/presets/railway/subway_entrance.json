@@ -1,0 +1,13 @@
+{
+    "name": "subway entrance",
+    "match": {
+        "type": [
+            "point"
+        ],
+        "tags": {
+            "railway": "subway_entrance"
+        },
+        "terms": []
+    },
+    "icon": "rail-underground"
+}

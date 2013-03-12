@@ -22,7 +22,7 @@ iD.svg.Vertices = function(projection) {
             .attr('class', 'node vertex');
 
         group.append('circle')
-            .attr('r', 10)
+            .attr('r', 9)
             .attr('class', 'node vertex shadow');
 
         group.append('circle')
@@ -39,8 +39,10 @@ iD.svg.Vertices = function(projection) {
             .classed('shared', function(entity) { return graph.isShared(entity); });
 
         // Selecting the following implicitly
-        // sets the data (vertix entity) on the elements
-        groups.select('circle.fill, circle.stroke, circle.shadow');
+        // sets the data (vertex entity) on the elements
+        groups.select('circle.fill');
+        groups.select('circle.stroke');
+        groups.select('circle.shadow');
 
         groups.exit()
             .remove();

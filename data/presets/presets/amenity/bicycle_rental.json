@@ -1,0 +1,18 @@
+{
+    "name": "bicycle rental",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "bicycle_rental"
+        }
+    },
+    "icon": "bicycle",
+    "form": [
+        "capacity",
+        "network",
+        "operator"
+    ]
+}

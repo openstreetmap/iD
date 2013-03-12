@@ -1,0 +1,15 @@
+{
+    "name": "meadow",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "meadow"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ]
+}

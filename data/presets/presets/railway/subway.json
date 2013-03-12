@@ -1,0 +1,13 @@
+{
+    "name": "subway",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "tags": {
+            "railway": "subway"
+        },
+        "terms": []
+    },
+    "icon": "railway-rail"
+}

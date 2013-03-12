@@ -17,6 +17,14 @@ iD.ui = function(context) {
 
         if (iD.detect().opera) container.classed('opera', true);
 
+        var hash = iD.behavior.Hash(context);
+
+        hash();
+
+        if (!hash.hadHash) {
+            map.centerZoom([-77.02271, 38.90085], 20);
+        }
+
         var m = container.append('div')
             .attr('id', 'map')
             .call(map);
@@ -40,6 +48,10 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap col1')
             .call(iD.ui.Save(context));
 
+        bar.append('div')
+            .attr('class', 'spinner')
+            .call(iD.ui.Spinner(context));
+
         container.append('div')
             .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));
@@ -49,8 +61,8 @@ iD.ui = function(context) {
             .call(iD.ui.Geocoder(context));
 
         container.append('div')
-            .attr('class', 'map-control layerswitcher-control')
-            .call(iD.ui.LayerSwitcher(context));
+            .attr('class', 'map-control background-control')
+            .call(iD.ui.Background(context));
 
         container.append('div')
             .attr('class', 'map-control geolocate-control')
@@ -58,10 +70,10 @@ iD.ui = function(context) {
 
         container.append('div')
             .style('display', 'none')
-            .attr('class', 'inspector-wrap fr col5');
+            .attr('class', 'inspector-wrap fr content col5');
 
         var about = container.append('div')
-            .attr('class','col12 about-block fillD pad1');
+            .attr('class','col12 about-block fillD');
 
         about.append('div')
             .attr('class', 'account')
@@ -69,22 +81,25 @@ iD.ui = function(context) {
 
         var linkList = about.append('ul')
             .attr('id', 'about')
-            .attr('class', 'pad1 fillD about-block link-list');
+            .attr('class', 'link-list');
 
         linkList.append('li')
             .append('a')
             .attr('target', '_blank')
+            .attr('tabindex', -1)
             .attr('href', 'http://github.com/systemed/iD')
             .text(iD.version);
 
         linkList.append('li')
             .append('a')
             .attr('target', '_blank')
+            .attr('tabindex', -1)
             .attr('href', 'http://github.com/systemed/iD/issues')
             .text(t('report_a_bug'));
 
         linkList.append('li')
             .attr('class', 'attribution')
+            .attr('tabindex', -1)
             .call(iD.ui.Attribution(context));
 
         linkList.append('li')
@@ -93,6 +108,7 @@ iD.ui = function(context) {
 
         linkList.append('li')
             .attr('class', 'user-list')
+            .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {
@@ -122,14 +138,6 @@ iD.ui = function(context) {
 
         d3.select(document)
             .call(keybinding);
-
-        var hash = iD.behavior.Hash(context);
-
-        hash();
-
-        if (!hash.hadHash) {
-            map.centerZoom([-77.02271, 38.90085], 20);
-        }
 
         context.enter(iD.modes.Browse(context));
 
