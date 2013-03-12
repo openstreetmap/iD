@@ -10,5 +10,11 @@
         "tags": {
             "man_made": "*"
         }
-    }
+    },
+    "form": [
+        {
+            "key": "man_made",
+            "type": "combo"
+        }
+    ]
 }
