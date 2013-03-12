@@ -115,12 +115,12 @@ locale.lv = {
             }
         },
         rotate: {
-            title: "Rotate",
-            description: "Rotate this object around its centre point.",
+            title: "Pagriezt",
+            description: "Pagriezt šo objektu ap tā centru.",
             key: "R",
             annotation: {
-                line: "Rotated a line.",
-                area: "Rotated an area."
+                line: "Līnija pagriezta.",
+                area: "Apgabals pagriezts."
             }
         },
         reverse: {
@@ -182,10 +182,10 @@ locale.lv = {
         okay: "Labi",
         view_on_osm: "Apskatīt OSM",
         name: "Name",
-        editing: "Editing {type}",
-        additional: "Additional tags",
-        choose: "What are you adding?",
-        results: "{n} results for {search}"
+        editing: "Rediģē {type}",
+        additional: "Papildus apzīmējumi",
+        choose: "Ko vēlaties pievienot?",
+        results: "Atrasti {n} rezultāti meklējot {search}"
     },
 
     background: {
@@ -222,15 +222,15 @@ locale.lv = {
 
     tag_reference: {
         description: "Apraksts",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        on_wiki: "{tag} wiki.osm.org",
+        used_with: "izmantots kopā ar {type}"
     },
 
     validations: {
         untagged_point: "Neapzīmēts punkts",
         untagged_line: "Neapzīmēta līnija",
         untagged_area: "Neapzīmēts apgabals",
-        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+        many_deletions: "Jūs dzēšat {n} objektus. Vai tiešām vēlaties to darīt? Tie tiks izdzēsti no kartes, ko visi var aplūkt openstreetmap.org.",
         tag_suggests_area: "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
         deprecated_tags: "Novecojuši apzīmējumi: {tags}"
     },
