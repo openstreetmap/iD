@@ -248,7 +248,13 @@ locale.en = {
                 "label": "Access"
             },
             "address": {
-                "label": "Address"
+                "label": "Address",
+                "placeholders": {
+                    "housename": "Housename",
+                    "number": "123",
+                    "street": "Street",
+                    "city": "City"
+                }
             },
             "atm": {
                 "label": "ATM"

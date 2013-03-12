@@ -43,7 +43,7 @@ iD.ui.preset.address = function(form, context) {
 
         housename = selection.append('input')
             .property('type', 'text')
-            .attr('placeholder', 'Housename')
+            .attr('placeholder', form.t('placeholders.housename'))
             .attr('class', 'addr-housename')
             .on('blur', change)
             .on('change', change)
@@ -51,7 +51,7 @@ iD.ui.preset.address = function(form, context) {
 
         housenumber = selection.append('input')
             .property('type', 'text')
-            .attr('placeholder', '123')
+            .attr('placeholder', form.t('placeholders.number'))
             .attr('class', 'addr-number')
             .on('blur', change)
             .on('change', change)
@@ -62,14 +62,14 @@ iD.ui.preset.address = function(form, context) {
 
         street = streetwrap.append('input')
             .property('type', 'text')
-            .attr('placeholder', 'Street')
+            .attr('placeholder', form.t('placeholders.street'))
             .attr('class', 'addr-street')
             .on('blur', change)
             .on('change', change);
 
         city = selection.append('input')
             .property('type', 'text')
-            .attr('placeholder', 'City')
+            .attr('placeholder', form.t('placeholders.city'))
             .attr('class', 'addr-city')
             .on('blur', change)
             .on('change', change)
