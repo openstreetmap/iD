@@ -75,8 +75,8 @@ install: all
 	mkdir -p $(install_root)
 	cp iD.js iD.min.js land.html $(install_root)
 	cp index_packaged.html $(install_root)/index.html
-	cp -R css/ $(install_root)/css
-	cp -R img/ $(install_root)/img
+	cp -R css/. $(install_root)/css
+	cp -R img/. $(install_root)/img
 
 clean:
 	rm -f iD*.js
