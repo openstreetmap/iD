@@ -2,6 +2,7 @@
     "name": "orchard",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

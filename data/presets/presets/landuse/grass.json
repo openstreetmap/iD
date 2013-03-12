@@ -2,6 +2,7 @@
     "name": "grass",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

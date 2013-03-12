@@ -2,6 +2,7 @@
     "name": "cemetery",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

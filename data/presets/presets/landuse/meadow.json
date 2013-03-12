@@ -2,6 +2,7 @@
     "name": "meadow",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

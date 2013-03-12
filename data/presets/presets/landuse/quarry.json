@@ -2,6 +2,7 @@
     "name": "quarry",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

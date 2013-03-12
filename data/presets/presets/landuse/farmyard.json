@@ -2,6 +2,7 @@
     "name": "farmyard",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

@@ -2,6 +2,7 @@
     "name": "industrial",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

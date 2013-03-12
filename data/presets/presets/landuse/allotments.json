@@ -2,6 +2,7 @@
     "name": "allotments",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

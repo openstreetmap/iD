@@ -2,6 +2,7 @@
     "name": "vineyard",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

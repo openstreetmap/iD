@@ -2,6 +2,7 @@
     "name": "commercial",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {

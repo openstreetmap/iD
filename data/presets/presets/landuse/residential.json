@@ -2,6 +2,7 @@
     "name": "residential",
     "match": {
         "type": [
+            "point",
             "area"
         ],
         "tags": {
