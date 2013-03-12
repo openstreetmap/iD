@@ -9,7 +9,7 @@
         },
         "terms": []
     },
-    "icon": "highway-path",
+    "icon": "highway-footway",
     "form": [
         "oneway",
         "roadtype",
