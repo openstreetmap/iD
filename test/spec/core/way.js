@@ -141,6 +141,30 @@ describe('iD.Way', function() {
         });
     });
 
+    describe("#areAdjacent", function() {
+        it("returns false for nodes not in the way", function() {
+            expect(iD.Way().areAdjacent('a', 'b')).to.equal(false);
+        });
+
+        it("returns false for non-adjacent nodes in the way", function() {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).areAdjacent('a', 'c')).to.equal(false);
+        });
+
+        it("returns true for adjacent nodes in the way (forward)", function() {
+            var way = iD.Way({nodes: ['a', 'b', 'c', 'd']});
+            expect(way.areAdjacent('a', 'b')).to.equal(true);
+            expect(way.areAdjacent('b', 'c')).to.equal(true);
+            expect(way.areAdjacent('c', 'd')).to.equal(true);
+        });
+
+        it("returns true for adjacent nodes in the way (reverse)", function() {
+            var way = iD.Way({nodes: ['a', 'b', 'c', 'd']});
+            expect(way.areAdjacent('b', 'a')).to.equal(true);
+            expect(way.areAdjacent('c', 'b')).to.equal(true);
+            expect(way.areAdjacent('d', 'c')).to.equal(true);
+        });
+    });
+
     describe("#geometry", function() {
         it("returns 'line' when the way is not an area", function () {
             expect(iD.Way().geometry()).to.equal('line');
