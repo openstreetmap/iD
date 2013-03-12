@@ -17,8 +17,7 @@
             "options": ["parking_aisle", "driveway", "alley", "drive-through", "emergency_access"]
         },
         "oneway",
-        "bridge",
-        "tunnel",
+        "roadtype",
         "access",
         "maxspeed",
         "surface"
