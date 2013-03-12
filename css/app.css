@@ -576,11 +576,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-body {
     overflow: auto;
     max-height: 480px;
-    min-height: 360px;
+    min-height: 330px;
 }
 
 .inspector-inner {
-    padding: 20px 20px 0px 20px;
+    padding: 20px;
     position: relative;
     border-left: 1px solid #ccc;
 }
@@ -643,16 +643,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* preset form */
 
-.inspector-body { 
-
-}
-
 .inspector-preset {
     border-bottom: 1px solid #ccc;
 }
 
-.preset-section.inspector-inner:first-child { 
-    padding-top: 0;
+.preset-section.inspector-inner { 
+    padding-bottom: 0;
 }
 
 .preset-section.inspector-inner:last-child { 
@@ -660,7 +656,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body .name {
-    height: 120px;
+    height: 110px;
+    border-bottom: 1px solid #ccc;
 }
 
 .inspector-body .name h4,
@@ -800,6 +797,7 @@ div.combobox {
 }
 
 .preset-radio button {
+    margin-top: 40px;
     font-weight: normal;
     padding: 2px 10px;
     height: 30px;
@@ -925,7 +923,7 @@ div.combobox {
 /* Preset grid */
 
 .grid-entry {
-    height: 120px;
+    height: 110px;
     position: relative;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
