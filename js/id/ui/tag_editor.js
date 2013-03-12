@@ -38,7 +38,7 @@ iD.ui.TagEditor = function(context) {
             .text(t('inspector.choose'));
 
         var editorwrap = selection.append('div')
-            .attr('class', 'tag-wrap inspector-body inspector-body-' + entity.geometry(context.graph()));
+            .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()));
 
         var headerwrap = editorwrap.append('div').attr('class','col12 head');
 
@@ -57,10 +57,10 @@ iD.ui.TagEditor = function(context) {
         typebutton.node().focus();
 
          var namewrap = headerwrap.append('div')
-             .attr('class', 'name preset-section inspector-inner col9');
+             .attr('class', 'name preset-section fillL inspector-inner col9');
 
         typebutton.append('span')
-            .attr('class','h4')
+            .attr('class','label')
             .text(preset.name);
 
         namewrap.append('h4').text(t('inspector.name'));

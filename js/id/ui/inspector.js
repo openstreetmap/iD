@@ -6,16 +6,13 @@ iD.ui.Inspector = function(context) {
     function inspector(selection) {
         var entity = selection.datum();
 
-        var inspectorbody = selection.append('div')
-            .attr('class', 'fillL');
-
         var presetGrid = iD.ui.PresetGrid(context)
             .entity(entity)
             .on('close', function() {
                 event.close();
             })
             .on('choose', function(preset) {
-                inspectorbody.call(tagEditor, preset);
+                selection.call(tagEditor, preset);
             });
 
         tagEditor = iD.ui.TagEditor(context)
@@ -27,10 +24,10 @@ iD.ui.Inspector = function(context) {
                 event.close(entity);
             })
             .on('choose', function() {
-                inspectorbody.call(presetGrid, true);
+                selection.call(presetGrid, true);
             });
 
-        inspectorbody.call(initial ? presetGrid : tagEditor);
+        selection.call(initial ? presetGrid : tagEditor);
 
         selection.call(iD.ui.Toggle(true));
     }

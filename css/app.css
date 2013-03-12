@@ -290,6 +290,7 @@ form.hide {
 .content {
     border-radius: 4px;
     box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
 }
 
 .pad1    {padding: 10px;}
@@ -567,22 +568,25 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     display:none;
     max-width: 500px;
     position: relative;
+    border-radius: 0 0 0 4px;
+    overflow: hidden;
 }
 
 .inspector-body {
     overflow: auto;
     max-height: 480px;
+    min-height: 360px;
 }
 
 .inspector-inner {
     padding: 20px;
-    border-bottom: 1px solid #ccc;
     position: relative;
 }
 
 .inspector-inner.message {
     height: 60px;
     padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 .inspector-inner.message h3 {
@@ -599,22 +603,23 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* preset form */
 
+.preset-section.inspector-inner:last-child { 
+    border-bottom: 1px solid #ccc;
+}
+
 .inspector-body .name-help,
 .inspector-body .type-help {
   position: absolute;
   right: -10px;
 }
 
-.inspector-body .type button {
-    height: 125px;
-}
-
 .inspector-body .name {
-    height: 125px;
+    height: 120px;
 }
 
 .preset-grid-search-wrap {
     height: 60px;
+    border-bottom: 1px solid #ccc;
 }
 
 .preset-grid-search-wrap .icon {
@@ -892,6 +897,7 @@ div.combobox {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
+    overflow: hidden;
 }
 
 .grid-inner {
@@ -904,19 +910,27 @@ div.combobox {
 
 .grid-entry:hover .preset-help {
     display: block;
-    border-radius: 4px 0 0 0;
+    border-radius: 0;
 }
 
 .grid-entry .preset-help {
     display: none;
     position: absolute;
-    bottom: 0px;
-    right: 0px;
+    bottom: 0;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    background: rgba(0,0,0,.5);
+}
+
+.grid-entry .preset-help:hover {
+    background: rgba(0,0,0,.9);
 }
 
 .preset-inspect {
   position: relative;
-  background: #fff;
+  background: white;
+  border-bottom: 1px solid #ccc;
 }
 
 .grid-entry .preset-icon-fill.area {
@@ -940,17 +954,14 @@ div.combobox {
     text-align: center;
     display: block;
     position: absolute;
-    top: 60%;
-    width: 80%;
+    padding: 5px;
+    bottom: 0;
     left: 0; right: 0;
     margin: auto;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-}
-
-.inspector-body-line .grid-entry .label {
-  top: 80%;
+    border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
 /* Preset icon colors */

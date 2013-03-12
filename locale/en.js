@@ -185,7 +185,8 @@ locale.en = {
         editing: "Editing {type}",
         additional: "Additional tags",
         choose: "What are you adding?",
-        results: "{n} results for {search}"
+        results: "{n} results for {search}",
+        reference: "View on OpenStreetMap Wiki →"
     },
 
     background: {

@@ -20,7 +20,7 @@ iD.ui.PresetGrid = function(context) {
             .attr('class', 'preset-grid-search-wrap inspector-inner');
 
         var grid = selection.append('div')
-            .attr('class', 'preset-grid fillD inspector-body inspector-body-' + entity.geometry(context.graph()))
+            .attr('class', 'preset-grid inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()))
             .call(drawGrid, context.presets().defaults(entity, 12));
 
         searchwrap.append('span').attr('class', 'icon search');
@@ -120,7 +120,7 @@ iD.ui.PresetGrid = function(context) {
 
             entered.append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'preset-help minor')
+                .attr('class', 'preset-help')
                 .on('click', function(d) {
 
                     // Display description box inline
@@ -165,7 +165,7 @@ iD.ui.PresetGrid = function(context) {
                             _.find(data, function(d) { return d.lang === 'en'; });
                         description.text(doc.description);
                         link.attr('href', 'http://wiki.openstreetmap.org/wiki/' + encodeURIComponent(doc.title));
-                        link.text(doc.title);
+                        link.text(t('inspector.reference'));
                     });
                 })
                 .append('span')
