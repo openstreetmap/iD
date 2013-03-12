@@ -17,10 +17,12 @@ iD.actions.Connect = function(nodeIds) {
         var survivor = graph.entity(_.last(nodeIds));
 
         for (var i = 0; i < nodeIds.length - 1; i++) {
-            var node = graph.entity(nodeIds[i]), index;
+            var node = graph.entity(nodeIds[i]);
 
             graph.parentWays(node).forEach(function(parent) {
-                graph = graph.replace(parent.replaceNode(node.id, survivor.id));
+                if (!parent.areAdjacent(node.id, survivor.id)) {
+                    graph = graph.replace(parent.replaceNode(node.id, survivor.id));
+                }
             });
 
             graph.parentRelations(node).forEach(function(parent) {
