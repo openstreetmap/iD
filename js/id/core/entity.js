@@ -68,17 +68,19 @@ iD.Entity.prototype = {
     },
 
     mergeTags: function(tags) {
-        var merged = _.clone(this.tags);
+        var merged = _.clone(this.tags), changed = false;
         for (var k in tags) {
             var t1 = merged[k],
                 t2 = tags[k];
-            if (t1 && t1 !== t2) {
-                merged[k] = _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
-            } else {
+            if (!t1) {
+                changed = true;
                 merged[k] = t2;
+            } else if (t1 !== t2) {
+                changed = true;
+                merged[k] = _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
             }
         }
-        return this.update({tags: merged});
+        return changed ? this.update({tags: merged}) : this;
     },
 
     intersects: function(extent, resolver) {
