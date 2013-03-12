@@ -706,7 +706,8 @@ div.combobox {
     margin-top: -1px;
     background: white;
     max-height: 180px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid #ccc;
 }
 
@@ -718,7 +719,9 @@ div.combobox {
     border-top:1px solid #ccc;
     background-color: #fff;
     padding:1px 4px;
+    text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
     height: 30px;
 }
 
@@ -973,7 +976,7 @@ div.combobox {
 
 .grid-entry > .icon {
     position: absolute;
-    top: 40px;left: 0; right: 0;
+    top: 30px;left: 0; right: 0;
     margin: auto;
 }
 
