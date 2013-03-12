@@ -348,6 +348,9 @@ locale.en = {
             "shelter": {
                 "label": "Shelter"
             },
+            "source": {
+                "label": "Source"
+            },
             "surface": {
                 "label": "Surface"
             }
