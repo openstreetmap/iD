@@ -1,0 +1,12 @@
+{
+    "name": "playground",
+    "match": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "playground"
+        }
+    }
+}
