@@ -1,6 +1,5 @@
 {
     "key": "internet_access",
-    "title": "Internet Access",
     "type": "combo",
     "options": [
         "yes",

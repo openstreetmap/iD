@@ -239,5 +239,105 @@ locale.en = {
     zoom: {
         'in': "Zoom In",
         out: "Zoom Out"
+    },
+
+    // We expect these to be extracted at some point.
+    "presets": {
+        "forms": {
+            "access": {
+                "label": "Access"
+            },
+            "address": {
+                "label": "Address"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "building": {
+                "label": "Building"
+            },
+            "building_area": {
+                "label": "Building"
+            },
+            "building_yes": {
+                "label": "Building"
+            },
+            "capacity": {
+                "label": "Capacity"
+            },
+            "cuisine": {
+                "label": "Cuisine"
+            },
+            "denomination": {
+                "label": "Denomination"
+            },
+            "elevation": {
+                "label": "Elevation"
+            },
+            "emergency": {
+                "label": "Emergency"
+            },
+            "fee": {
+                "label": "Fee"
+            },
+            "internet_access": {
+                "label": "Internet Access",
+                "options": {
+                    "yes": "Yes",
+                    "no": "No",
+                    "wlan": "Wifi",
+                    "wired": "Wired",
+                    "terminal": "Terminal"
+                }
+            },
+            "layer": {
+                "label": "Layer"
+            },
+            "levels": {
+                "label": "Levels"
+            },
+            "maxspeed": {
+                "label": "Speed Limit"
+            },
+            "network": {
+                "label": "Network"
+            },
+            "oneway": {
+                "label": "One Way"
+            },
+            "opening_hours": {
+                "label": "Hours"
+            },
+            "operator": {
+                "label": "Operator"
+            },
+            "religion": {
+                "label": "Religion",
+                "options": {
+                    "christian": "Christian",
+                    "muslim": "Muslim",
+                    "buddhist": "Buddhist",
+                    "jewish": "Jewish",
+                    "hindu": "Hindu",
+                    "shinto": "Shinto",
+                    "taoist": "Taoist"
+                }
+            },
+            "roadtype": {
+                "label": "Road Type",
+                "options": {
+                    "bridge": "Bridge",
+                    "tunnel": "Tunnel",
+                    "embankment": "Embankment",
+                    "cutting": "Cutting"
+                }
+            },
+            "shelter": {
+                "label": "Shelter"
+            },
+            "surface": {
+                "label": "Surface"
+            }
+        }
     }
 };

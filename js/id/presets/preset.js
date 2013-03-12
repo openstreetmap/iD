@@ -7,7 +7,7 @@ iD.presets.Preset = function(preset, forms) {
         if (typeof f === 'string') {
             return forms[f];
         } else {
-            return f;
+            return iD.presets.Form(f, f.key);
         }
     }) : [];
 

@@ -1,6 +1,5 @@
 {
     "type": "address",
-    "title": "Address",
     "keys": [
         "addr:housename",
         "addr:housenumber",

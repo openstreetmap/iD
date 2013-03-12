@@ -20,7 +20,9 @@ iD.presets = function(context) {
     all.load = function(d) {
 
         if (d.forms) {
-            forms = d.forms;
+            _.forEach(d.forms, function(d, id) {
+                forms[id] = iD.presets.Form(d, id);
+            });
         }
 
         if (d.presets) {

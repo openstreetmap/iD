@@ -41,7 +41,7 @@ iD.ui.preset = function(context) {
                 .attr('class', 'col3 preset-label')
                 .append('h4')
                 .attr('for', 'input-' + d.key)
-                .text(d.title || d.key);
+                .text(function(d) { return d.label(); });
 
             input.call(wrap.append('div')
                 .attr('class', 'col9 preset-input'), d);
