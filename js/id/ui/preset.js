@@ -46,7 +46,7 @@ iD.ui.preset = function(context) {
             .enter()
             .append('button')
                 .attr('class', 'preset-add-form')
-                .attr('title', function(d) { return d.title || d.key; })
+                .attr('title', function(d) { return d.label(); })
                 .on('click', addForm)
                 .append('span')
                     .attr('class', function(d) { return 'icon ' + d.icon; });
@@ -102,6 +102,12 @@ iD.ui.preset = function(context) {
             if (haveKey(p.key) || _.any(p.keys, haveKey)) {
                 draw(formwrap, [p]);
                 d3.select(this).remove();
+            }
+        });
+
+        context.presets().universal().forEach(function(p) {
+            if (haveKey(p.key) || _.any(p.keys, haveKey)) {
+                draw(formwrap, [p]);
             }
         });
 

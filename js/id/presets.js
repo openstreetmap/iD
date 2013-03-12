@@ -15,6 +15,7 @@ iD.presets = function(context) {
         all = iD.presets.Collection([iD.presets.Preset(other)]),
         defaults = { area: all, line: all, point: all, vertex: all },
         forms = {},
+        universal = [],
         recent = iD.presets.Collection([]);
 
     all.load = function(d) {
@@ -22,6 +23,7 @@ iD.presets = function(context) {
         if (d.forms) {
             _.forEach(d.forms, function(d, id) {
                 forms[id] = iD.presets.Form(d, id);
+                if (d.universal) universal.push(forms[id]);
             });
         }
 
@@ -30,6 +32,7 @@ iD.presets = function(context) {
                 all.collection.push(iD.presets.Preset(d, forms));
             });
         }
+
 
         if (d.categories) {
             d.categories.forEach(function(d) {
@@ -48,6 +51,10 @@ iD.presets = function(context) {
         }
 
         return all;
+    };
+
+    all.universal = function() {
+        return universal;
     };
 
     all.defaults = function(entity, n) {

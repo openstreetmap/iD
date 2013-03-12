@@ -1,4 +1,5 @@
 {
     "key": "ele",
-    "type": "number"
+    "type": "number",
+    "universal": true
 }
