@@ -34,7 +34,8 @@ iD.svg.Areas = function(projection) {
         cemetery: 'cemetery',
         grave_yard: 'cemetery',
         meadow: 'meadow',
-        famrland: 'farmland',
+        farm: 'farmland',
+        farmland: 'farmland',
         orchard: 'orchard'
     };
 

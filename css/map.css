@@ -331,6 +331,7 @@ path.fill.tag-natural-beach,
 path.fill.tag-natural-scrub,
 path.fill.tag-landuse-cemetery,
 path.fill.tag-landuse-meadow,
+path.fill.tag-landuse-farm,
 path.fill.tag-landuse-farmland,
 path.fill.tag-landuse-construction,
 path.fill.tag-landuse-orchard {
@@ -343,6 +344,7 @@ path.fill.tag-landuse-orchard {
 .pattern-color-meadow,
 .pattern-color-wetland,
 .pattern-color-cemetery,
+.pattern-color-farm,
 .pattern-color-farmland,
 .pattern-color-construction,
 .pattern-color-orchard {
@@ -362,10 +364,12 @@ path.fill.tag-landuse-residential {
     fill: #e06e5f;
 }
 
+path.fill.tag-landuse-farm,
 path.fill.tag-landuse-farmland {
     fill: url(#pattern-farmland) #8cd05f;
 }
 
+.pattern-color-farm,
 .pattern-color-farmland {
     fill: url(#pattern-farmland) #8cd05f;
 }
