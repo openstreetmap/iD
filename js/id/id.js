@@ -143,7 +143,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '0.0.0-alpha2';
+iD.version = '0.0.0-alpha3';
 
 iD.detect = function() {
     var browser = {};
