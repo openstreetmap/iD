@@ -18,7 +18,7 @@ function t(s, o, loc) {
     if (rep !== undefined) {
         if (o) for (var k in o) rep = rep.replace('{' + k + '}', o[k]);
         return rep;
-    } else if (o.default) {
+    } else if (o && o.default) {
         return o.default;
     } else {
         var missing = 'Missing translation: ' + s;
