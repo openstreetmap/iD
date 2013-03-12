@@ -283,6 +283,9 @@ locale.en = {
             "emergency": {
                 "label": "Emergency"
             },
+            "fax": {
+                "label": "Fax"
+            },
             "fee": {
                 "label": "Fee"
             },
@@ -316,6 +319,9 @@ locale.en = {
             },
             "operator": {
                 "label": "Operator"
+            },
+            "phone": {
+                "label": "Phone"
             },
             "religion": {
                 "label": "Religion",
