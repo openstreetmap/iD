@@ -18,6 +18,10 @@ describe("locale", function() {
             expect(t('test')).to.equal('test');
         });
 
+        it("supports a default option", function() {
+            expect(t('nonesuch', {default: 'default'})).to.equal('default');
+        });
+
         it("falls back to en", function() {
             locale._current = '__';
             expect(t('test')).to.equal('test');
