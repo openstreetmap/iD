@@ -166,7 +166,7 @@ locale.en = {
 
     geocoder: {
         title: "Find A Place",
-        placeholder: "find a place",
+        placeholder: "Find a place",
         no_results: "Couldn't locate a place named '{name}'"
     },
 

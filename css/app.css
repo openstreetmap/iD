@@ -169,6 +169,13 @@ input.major {
     height:40px;
 }
 
+/* weird selector that hides bottom border radius when combox is open */
+.combobox + div textarea:focus,
+.combobox + div input:focus {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 /* tables */
 
 table {
@@ -564,17 +571,18 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-body {
     overflow: auto;
-    max-height: 440px;
+    max-height: 480px;
 }
 
 .inspector-inner {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
     position: relative;
 }
 
 .inspector-inner.message {
     height: 60px;
+    padding: 10px;
 }
 
 .inspector-inner.message h3 {
@@ -598,18 +606,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body .type button {
-    height: 70px;
+    height: 125px;
 }
 
-.inspector-body-line .type button {
-    height: 100px;
+.inspector-body .name {
+    height: 125px;
 }
-
-.inspector-body .head .name {
-    padding-left: 10px;
-}
-
-.preset-input { padding-left: 10px;}
 
 .preset-grid-search-wrap {
     height: 60px;
@@ -644,10 +646,19 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .preset-label {
-    padding: 5px;
+    padding: 25px 20px 20px 20px;
+    position: absolute;
+    height: 100%;
+    left: 0px;
+    top: 0;
+    border-right: 1px solid #CCC;
     text-align: right;
 }
 
+.preset-input {
+    margin-left: 25%;
+    padding-left: 10px;
+}
 .preset-fav button.fav {
     height: 30px;
     margin: 5px;
@@ -722,7 +733,6 @@ div.combobox {
 .rowselect .item div {
     text-align: center;
 }
-
 
 .checkselect label {
     display: block;
@@ -877,15 +887,11 @@ div.combobox {
 /* Preset grid */
 
 .grid-entry {
-    height: 80px;
+    height: 120px;
     position: relative;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
-}
-
-.inspector-body-line .grid-entry {
-    min-height: 120px;
 }
 
 .grid-inner {
@@ -916,17 +922,13 @@ div.combobox {
 .grid-entry .preset-icon-fill.area {
     position: absolute;
     opacity: 0.4;
-    left: 0; right: 0; top: 20%;
-    border-radius: 4px;
-    margin: auto;
-    margin-top: -8px;
-    width: 40px;
-    height: 40px;
+    left: 0; right: 0; top: 0; bottom: 0;
+    pointer-events: none;
 }
 
 .grid-entry > .icon {
     position: absolute;
-    top: 20%;left: 0; right: 0;
+    top: 40px;left: 0; right: 0;
     margin: auto;
 }
 
@@ -1132,7 +1134,7 @@ div.combobox {
     position: absolute;
     right: 10px;
     top: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
 }
 
 .opacity-options li {
@@ -1183,7 +1185,7 @@ div.combobox {
 
 .geocode-control div.content {
     z-index: 100;
-    top: 190px;
+    top: 200px;
     max-height: 300px;
     overflow-y: auto;
 }

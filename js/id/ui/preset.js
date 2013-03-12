@@ -39,7 +39,7 @@ iD.ui.preset = function(context) {
 
            wrap.append('div')
                 .attr('class', 'col3 preset-label')
-                .append('label')
+                .append('h4')
                 .attr('for', 'input-' + d.key)
                 .text(d.title || d.key);
 

@@ -1,5 +1,5 @@
 {
-    "title": " ",
+    "key": "type",
     "type": "radio",
     "options": [
         "bridge",
