@@ -187,9 +187,9 @@ iD.ui.Background = function(context) {
             .attr('class', 'adjustments pad1');
 
         var directions = [
-            ['left', [-1, 0]],
+            ['left', [1, 0]],
             ['top', [0, -1]],
-            ['right', [1, 0]],
+            ['right', [-1, 0]],
             ['bottom', [0, 1]]];
 
         adjustments.append('a')
