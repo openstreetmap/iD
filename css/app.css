@@ -549,6 +549,7 @@ a:hover .toggle.icon           { background-position: -20px -180px;}
 .selected .toggle.icon,
 a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
+
 /* ToolBar / Persistent UI Elements
 ------------------------------------------------------- */
 
@@ -579,8 +580,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner {
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     position: relative;
+    border-left: 1px solid #ccc;
 }
 
 .inspector-inner.message {
@@ -601,21 +603,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border: 0;
 }
 
-/* preset form */
+/* Presets
+------------------------------------------------------- */
 
-.preset-section.inspector-inner:last-child { 
-    border-bottom: 1px solid #ccc;
-}
-
-.inspector-body .name-help,
-.inspector-body .type-help {
-  position: absolute;
-  right: -10px;
-}
-
-.inspector-body .name {
-    height: 120px;
-}
+/* Preset grid  */
 
 .preset-grid-search-wrap {
     height: 60px;
@@ -650,20 +641,60 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: 5px;
 }
 
-.preset-label {
-    padding: 25px 20px 20px 20px;
-    position: absolute;
-    height: 100%;
-    left: 0px;
-    top: 0;
-    border-right: 1px solid #CCC;
-    text-align: right;
+/* preset form */
+
+.inspector-body { 
+
 }
 
-.preset-input {
-    margin-left: 25%;
-    padding-left: 10px;
+.inspector-preset {
+    border-bottom: 1px solid #ccc;
 }
+
+.preset-section.inspector-inner:first-child { 
+    padding-top: 0;
+}
+
+.preset-section.inspector-inner:last-child { 
+    padding-bottom: 20px;
+}
+
+.inspector-body .name {
+    height: 120px;
+}
+
+.inspector-body .name h4,
+.preset-section h4[for*="input-"] {
+    border: 1px solid #cfcfcf;
+    padding: 5px 10px;
+    background: #f6f6f6;
+    position: absolute;
+    left: 20px;
+    border-radius: 4px 4px 0 0;
+    right: 20px;
+    pointer-events: none;
+}
+
+.preset-section h4 + input,
+h4 + .input-wrap-position input {
+    padding-top: 35px;
+    height: 60px;
+}
+
+.name input.major {
+    padding-top: 35px;
+    height: 70px;
+}
+
+input[type=number] {
+    width: 50%;
+}
+
+.preset-section h4[for="input-building:levels"],
+.preset-section.checkselect h4 {
+    right: 50%;
+}
+
 .preset-fav button.fav {
     height: 30px;
     margin: 5px;
@@ -685,7 +716,7 @@ div.combobox {
 .combobox a {
     height: 25px;
     line-height: 25px;
-    cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     display: block;
     border-top:1px solid #ccc;
     background-color: #fff;
@@ -705,7 +736,7 @@ div.combobox {
 }
 
 .combobox-input {
-    cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
 .combobox-carat {
@@ -741,15 +772,17 @@ div.combobox {
 
 .checkselect label {
     display: block;
-    padding: 5px;
-    width: 100%;
+    padding: 35px 5px 5px 5px;
+    border-radius: 4px;
+    width: 50%;
     box-sizing: border-box;
     color: #999;
+    border: 1px solid #CCC;
 }
 
 .checkselect label:hover {
     cursor: pointer;
-    background: #eee;
+    background: #f1f1f1;
 }
 
 .checkselect .set {
@@ -774,29 +807,33 @@ div.combobox {
 
 /* Address input */
 
-.preset-input .addr-housename {
+.preset-section .addr-housename {
     border-bottom: none;
     border-radius: 4px 4px 0 0;
 }
 
-.preset-input .addr-number {
+.preset-section .addr-number {
     width: 20%;
     border-right: none;
     border-bottom: none;
     border-radius: 0;
 }
 
-.preset-input .addr-street {
+.preset-section .addr-street {
     width: 80%;
     border-radius: 0;
     border-bottom: none;
 }
 
-.preset-input .addr-city {
+.preset-section .addr-city {
     border-radius: 0 0 4px 4px;
 }
 
 /* tag editor */
+
+.tag-wrap .grid-entry { 
+    border-right: 0;
+}
 
 .tag-list {
     margin-top: 10px;
@@ -812,10 +849,6 @@ div.combobox {
     position: relative;
     margin-top: -1px;
     }
-
-.input-wrap-position {
-    position: relative;
-}
 
 .tag-row input {
     width: 50%;

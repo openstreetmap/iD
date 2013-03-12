@@ -30,21 +30,16 @@ iD.ui.preset = function(context) {
             .data(preset.form)
             .enter()
             .append('div')
-            .attr('class', 'preset-section fillL inspector-inner col12');
+            .attr('class', 'fr preset-section fillL inspector-inner col9');
 
         sections.each(function(d) {
             var s = d3.select(this);
-            var wrap = s.append('div')
-                .attr('class', 'preset-section-input');
 
-           wrap.append('div')
-                .attr('class', 'col3 preset-label')
-                .append('h4')
+           s.append('h4')
                 .attr('for', 'input-' + d.key)
                 .text(function(d) { return d.label(); });
 
-            input.call(wrap.append('div')
-                .attr('class', 'col9 preset-input'), d);
+            input.call(s, d);
         });
         if (tags) event.setTags(tags);
     }

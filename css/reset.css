@@ -73,6 +73,12 @@ input {
     line-height: normal;
 }
 
+/* Hide default number spinner controls in Chrome */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { 
+display: none;
+}
+
 /*
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
  *    and `video` controls.

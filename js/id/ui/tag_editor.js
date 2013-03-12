@@ -57,13 +57,14 @@ iD.ui.TagEditor = function(context) {
         typebutton.node().focus();
 
          var namewrap = headerwrap.append('div')
-             .attr('class', 'name preset-section fillL inspector-inner col9');
+             .attr('class', 'name fillL inspector-inner col9');
 
         typebutton.append('span')
             .attr('class','label')
             .text(preset.name);
 
-        namewrap.append('h4').text(t('inspector.name'));
+        namewrap.append('h4')
+            .text(t('inspector.name'));
 
         name = namewrap.append('input')
             .attr('placeholder', 'unknown')
@@ -83,7 +84,7 @@ iD.ui.TagEditor = function(context) {
             .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset');
+            .attr('class', 'inspector-preset cf fillL');
 
         if (preset) {
             tageditorpreset.call(presetUI
