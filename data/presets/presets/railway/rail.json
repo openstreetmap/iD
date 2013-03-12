@@ -1,7 +1,7 @@
 {
     "name": "rail",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

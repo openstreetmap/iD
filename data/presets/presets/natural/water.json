@@ -1,7 +1,7 @@
 {
     "name": "water",
     "match": {
-        "type": [
+        "geometry": [
             "area"
         ],
         "tags": {

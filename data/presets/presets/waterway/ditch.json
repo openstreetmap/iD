@@ -1,7 +1,7 @@
 {
     "name": "ditch",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

@@ -1,7 +1,7 @@
 {
     "name": "pharmacy",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

@@ -1,7 +1,7 @@
 {
     "name": "post box",
     "match": {
-        "type": [
+        "geometry": [
             "point"
         ],
         "tags": {

@@ -1,7 +1,7 @@
 {
     "name": "locality",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

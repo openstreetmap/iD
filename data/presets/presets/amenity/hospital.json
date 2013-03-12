@@ -1,7 +1,7 @@
 {
     "name": "hospital",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

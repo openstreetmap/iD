@@ -1,7 +1,7 @@
 {
     "name": "river",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "terms": [

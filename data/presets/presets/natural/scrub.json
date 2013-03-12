@@ -1,7 +1,7 @@
 {
     "name": "scrub",
     "match": {
-        "type": [
+        "geometry": [
             "area"
         ],
         "tags": {

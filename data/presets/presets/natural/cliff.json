@@ -1,7 +1,7 @@
 {
     "name": "cliff",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "vertex",
             "line",

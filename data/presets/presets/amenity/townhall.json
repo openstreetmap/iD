@@ -1,7 +1,7 @@
 {
     "name": "town hall",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "areea"
         ],

@@ -1,7 +1,7 @@
 {
     "name": "construction",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

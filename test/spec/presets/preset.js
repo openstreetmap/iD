@@ -13,7 +13,7 @@ describe('iD.presets.Preset', function() {
             name: 'other',
             match: {
                 tags: {},
-                type: ['point', 'vertex', 'line', 'area']
+                geometry: ['point', 'vertex', 'line', 'area']
             }
         }),
         residential: iD.presets.Preset({
@@ -22,7 +22,7 @@ describe('iD.presets.Preset', function() {
                 tags: {
                     highway: 'residential'
                 },
-                type: ['line']
+                geometry: ['line']
             }
         }),
         tennis: iD.presets.Preset({
@@ -32,7 +32,7 @@ describe('iD.presets.Preset', function() {
                     leisure: 'pitch',
                     sport: 'tennis'
                 },
-                type: ['area']
+                geometry: ['area']
             }
         }),
         building: iD.presets.Preset({
@@ -41,7 +41,7 @@ describe('iD.presets.Preset', function() {
                 tags: {
                     building: '*'
                 },
-                type: ['area']
+                geometry: ['area']
             }
         }),
         cafe: iD.presets.Preset({
@@ -50,7 +50,7 @@ describe('iD.presets.Preset', function() {
                 tags: {
                     amenity: 'cafe'
                 },
-                type: ['point', 'area']
+                geometry: ['point', 'area']
             },
             form: ['building_area']
         }, forms)
@@ -76,15 +76,15 @@ describe('iD.presets.Preset', function() {
         expect(p.other.form).to.eql([]);
     });
 
-    describe('#matchType', function() {
+    describe('#matchGeometry', function() {
         var n = iD.Node();
         var g = iD.Graph().replace(p);
         it("returns false if it doesn't match the entity type", function() {
-            expect(p.residential.matchType(n, g)).to.equal(false);
+            expect(p.residential.matchGeometry(n, g)).to.equal(false);
         });
 
         it("returns true if it does match the entity type", function() {
-            expect(p.other.matchType(n, g)).to.equal(true);
+            expect(p.other.matchGeometry(n, g)).to.equal(true);
         });
     });
 

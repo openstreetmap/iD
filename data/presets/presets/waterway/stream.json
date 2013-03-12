@@ -1,7 +1,7 @@
 {
     "name": "stream",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "terms": [

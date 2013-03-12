@@ -11,8 +11,8 @@ iD.presets.Preset = function(preset, forms) {
         }
     }) : [];
 
-    preset.matchType = function(entity, resolver) {
-        return preset.match.type.indexOf(entity.geometry(resolver)) >= 0;
+    preset.matchGeometry = function(entity, resolver) {
+        return preset.match.geometry.indexOf(entity.geometry(resolver)) >= 0;
     };
 
     preset.matchTags = function(entity) {

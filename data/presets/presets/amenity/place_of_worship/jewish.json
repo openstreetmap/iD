@@ -1,7 +1,7 @@
 {
     "name": "synagogue",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

@@ -1,7 +1,7 @@
 {
     "name": "police",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

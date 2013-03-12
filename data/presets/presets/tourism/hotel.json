@@ -1,7 +1,7 @@
 {
     "name": "hotel",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

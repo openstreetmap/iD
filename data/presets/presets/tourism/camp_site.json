@@ -1,7 +1,7 @@
 {
     "name": "camp site",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

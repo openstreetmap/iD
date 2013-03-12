@@ -1,7 +1,7 @@
 {
     "name": "service road",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

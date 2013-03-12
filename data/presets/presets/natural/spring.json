@@ -1,7 +1,7 @@
 {
     "name": "spring",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "vertex"
         ],

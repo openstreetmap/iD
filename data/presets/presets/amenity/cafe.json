@@ -1,7 +1,7 @@
 {
     "name": "cafe",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

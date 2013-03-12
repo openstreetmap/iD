@@ -1,7 +1,7 @@
 {
     "name": "helipad",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

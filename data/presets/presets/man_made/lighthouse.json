@@ -1,7 +1,7 @@
 {
     "name": "lighthouse",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

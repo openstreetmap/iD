@@ -1,7 +1,7 @@
 {
     "name": "turning circle",
     "match": {
-        "type": [
+        "geometry": [
             "vertex"
         ],
         "tags": {

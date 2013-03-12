@@ -1,7 +1,7 @@
 {
     "name": "pond",
     "match": {
-        "type": [
+        "geometry": [
             "area"
         ],
         "tags": {

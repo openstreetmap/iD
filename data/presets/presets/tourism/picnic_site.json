@@ -1,7 +1,7 @@
 {
     "name": "picnic site",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

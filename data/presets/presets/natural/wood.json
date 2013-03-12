@@ -1,7 +1,7 @@
 {
     "name": "wood",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

@@ -1,7 +1,7 @@
 {
     "name": "baseball diamond",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

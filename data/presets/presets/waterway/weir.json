@@ -1,7 +1,7 @@
 {
     "name": "weir",
     "match": {
-        "type": [
+        "geometry": [
             "vertex",
             "line"
         ],

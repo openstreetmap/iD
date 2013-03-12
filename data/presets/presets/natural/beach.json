@@ -1,7 +1,7 @@
 {
     "name": "beach",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

@@ -1,7 +1,7 @@
 {
     "name": "park",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

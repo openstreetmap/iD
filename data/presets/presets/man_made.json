@@ -1,7 +1,7 @@
 {
     "name": "man made",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "vertex",
             "line",

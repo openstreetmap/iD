@@ -1,7 +1,7 @@
 {
     "name": "tourism",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

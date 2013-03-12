@@ -1,7 +1,7 @@
 {
     "name": "bus stop",
     "match": {
-        "type": [
+        "geometry": [
             "point"
         ],
         "tags": {

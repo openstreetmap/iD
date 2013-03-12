@@ -1,7 +1,7 @@
 {
     "name": "hamlet",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

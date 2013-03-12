@@ -1,7 +1,7 @@
 {
     "name": "golf course",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

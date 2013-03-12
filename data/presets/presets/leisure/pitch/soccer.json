@@ -1,7 +1,7 @@
 {
     "name": "soccer field",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],
