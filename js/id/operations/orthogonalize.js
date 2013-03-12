@@ -17,7 +17,7 @@ iD.operations.Orthogonalize = function(selection, context) {
     };
 
     operation.id = "orthogonalize";
-    operation.key = t('operations.orthogonalize.key');
+    operation.keys = [t('operations.orthogonalize.key')];
     operation.title = t('operations.orthogonalize.title');
     operation.description = t('operations.orthogonalize.description');
 

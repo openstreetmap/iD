@@ -1,0 +1,12 @@
+{
+    "name": "riverbank",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "waterway": "riverbank"
+        }
+    },
+    "icon": "water"
+}

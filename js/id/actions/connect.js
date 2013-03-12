@@ -36,7 +36,7 @@ iD.actions.Connect = function(nodeIds) {
         return graph;
     };
 
-    action.enabled = function(graph) {
+    action.enabled = function() {
         return nodeIds.length > 1;
     };
 

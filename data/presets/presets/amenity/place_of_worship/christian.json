@@ -1,0 +1,43 @@
+{
+    "name": "church",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "christian",
+            "abbey",
+            "basilica",
+            "bethel",
+            "cathedral",
+            "chancel",
+            "chantry",
+            "chapel",
+            "church",
+            "fold",
+            "house of God",
+            "house of prayer",
+            "house of worship",
+            "minster",
+            "mission",
+            "oratory",
+            "parish",
+            "sacellum",
+            "sanctuary",
+            "shrine",
+            "tabernacle",
+            "temple"
+        ],
+        "tags": {
+            "amenity": "place_of_worship",
+            "religion": "christian"
+        }
+    },
+    "icon": "religious-christian",
+    "form": [
+        "denomination",
+        "building",
+        "address"
+    ]
+}

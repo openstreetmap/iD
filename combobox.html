@@ -23,7 +23,6 @@
         <script src='js/lib/d3.size.js'></script>
         <script src='js/lib/d3.trigger.js'></script>
         <script src='js/lib/d3.keybinding.js'></script>
-        <script src='js/lib/d3.tail.js'></script>
         <script src='js/lib/d3-compat.js'></script>
         <script src='js/lib/bootstrap-tooltip.js'></script>
         <script src='js/lib/rtree.js'></script>
@@ -62,7 +61,7 @@
         <script src='js/id/ui/success.js'></script>
         <script src='js/id/ui/loading.js'></script>
         <script src='js/id/ui/account.js'></script>
-        <script src='js/id/ui/layerswitcher.js'></script>
+        <script src='js/id/ui/background.js'></script>
         <script src='js/id/ui/contributors.js'></script>
         <script src='js/id/ui/geocoder.js'></script>
         <script src='js/id/ui/geolocate.js'></script>
@@ -70,6 +69,7 @@
         <script src='js/id/ui/flash.js'></script>
         <script src='js/id/ui/save.js'></script>
         <script src='js/id/ui/tag_reference.js'></script>
+        <script src='js/id/ui/tail.js'></script>
         <script src='js/id/ui/key_reference.js'></script>
 
         <script src='js/id/actions.js'></script>
@@ -81,7 +81,7 @@
         <script src="js/id/actions/delete_way.js"></script>
         <script src='js/id/actions/disconnect.js'></script>
         <script src='js/id/actions/move_node.js'></script>
-        <script src='js/id/actions/move_way.js'></script>
+        <script src='js/id/actions/move.js'></script>
         <script src='js/id/actions/circularize.js'></script>
         <script src='js/id/actions/noop.js'></script>
         <script src='js/id/actions/reverse.js'></script>
@@ -103,7 +103,7 @@
         <script src='js/id/modes/browse.js'></script>
         <script src='js/id/modes/draw_area.js'></script>
         <script src='js/id/modes/draw_line.js'></script>
-        <script src='js/id/modes/move_way.js'></script>
+        <script src='js/id/modes/move.js'></script>
         <script src='js/id/modes/select.js'></script>
 
         <script src='js/id/operations.js'></script>
@@ -139,21 +139,19 @@
     <body>
         <div id='foo'><input /></div>
         <div id='bar'><input /></div>
-        <div id="iD"></div><script>
+        <input />
+        <div id="iD"><script>
             var options = d3.range(0, 50).map(function(i) {
                 return {
-                    value: i * 10,
-                    title: i * 10
+                    value: '' + (i * 10),
+                    title: '' + (i * 10)
                 };
             });
+
             d3.select('#foo').call(d3.combobox()
-                .data(function(selection, cb) {
-                    cb(options);
-                }));
+                .data(options));
             d3.select('#bar').call(d3.combobox()
-                .data(function(selection, cb) {
-                    cb(options);
-                }));
+                .data(options));
         </script></body>
 
 <script type="text/javascript">

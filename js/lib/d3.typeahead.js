@@ -1,8 +1,12 @@
 d3.typeahead = function() {
-    var data;
+    var event = d3.dispatch('accept'),
+        autohighlight = false,
+        data;
 
     var typeahead = function(selection) {
-        var container, hidden, idx = -1;
+        var container,
+            hidden,
+            idx = autohighlight ? 0 : -1;
 
         function setup() {
             var rect = selection.node().getBoundingClientRect();
@@ -20,11 +24,17 @@ d3.typeahead = function() {
 
         function hide() {
             container.remove();
-            idx = -1;
+            idx = autohighlight ? 0 : -1;
             hidden = true;
         }
 
         function slowHide() {
+            if (autohighlight) {
+                if (container.select('a.selected').node()) {
+                    select(container.select('a.selected').datum());
+                    event.accept();
+                }
+            }
             window.setTimeout(hide, 150);
         }
 
@@ -44,6 +54,7 @@ d3.typeahead = function() {
                if (container.select('a.selected').node()) {
                    select(container.select('a.selected').datum());
                }
+               event.accept();
                hide();
            } else {
                update();
@@ -95,5 +106,11 @@ d3.typeahead = function() {
         return typeahead;
     };
 
-    return typeahead;
+    typeahead.autohighlight = function(_) {
+        if (!arguments.length) return autohighlight;
+        autohighlight = _;
+        return typeahead;
+    };
+
+    return d3.rebind(typeahead, event, 'on');
 };

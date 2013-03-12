@@ -23,7 +23,7 @@ locale.de = {
             tail: "Klicke, um Punkte zur Fläche hinzuzufügen. Klicke auf den ersten Punkt, um die Fläche abzuschließen."
         },
         draw_line: {
-            tail: "Klicke, um mehr Punkte zur Linie hizuzufügen. Klicke auf eine andere Linie um die Linien zu verbinden und klicke doppelt, um die Linie zu beenden."
+            tail: "Klicke, um mehr Punkte zur Linie hizuzufügen. Klicke auf eine andere Linie, um die Linien zu verbinden und klicke doppelt, um die Linie zu beenden."
         }
     },
 
@@ -73,7 +73,6 @@ locale.de = {
         'delete': {
             title: "Löschen",
             description: "Lösche dies aus der Karte.",
-            key: "⌫",
             annotation: {
                 point: "Punkt gelöscht.",
                 vertex: "Stützpunkt aus einem Weg gelöscht.",
@@ -111,7 +110,17 @@ locale.de = {
                 point: "Punkt verschoben.",
                 vertex: "Stützpunkt in einen Weg veschoben.",
                 line: "Linie verschoben.",
-                area: "Fläche verschoben."
+                area: "Fläche verschoben.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -132,8 +141,8 @@ locale.de = {
     nothing_to_redo: "Nichts zum Wiederherstellen.",
 
     just_edited: "Sie haben gerade OpenStreetMap editiert!",
-    browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstzützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
-    view_on_osm: "Auf OSM anschauen",
+    browser_notice: "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
+    view_on_osm: "Auf OpenStreetMap anschauen",
     zoom_in_edit: "Hineinzoomen, um die Karte zu bearbeiten",
     logout: "Abmelden",
     report_a_bug: "Programmfehler melden",
@@ -152,7 +161,7 @@ locale.de = {
 
     contributors: {
         list: "Diese Kartenansicht enthält Beiträge von:",
-        truncated_list: "Diese Kartenansicht enthält Beiträge von: {users} und {count} Anderen"
+        truncated_list: "Diese Kartenansicht enthält Beiträge von: {users} und {count} anderen"
     },
 
     geocoder: {
@@ -171,10 +180,15 @@ locale.de = {
         new_tag: "Neues Attribut",
         edit_tags: "Attribute bearbeiten",
         okay: "OK",
-        view_on_osm: "auf OSM ansehen"
+        view_on_osm: "auf OpenStreetMap ansehen",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Hintergrund",
         description: "Hintergrundeinstellungen",
         percent_brightness: "{opacity}% Helligkeit",
@@ -190,14 +204,14 @@ locale.de = {
 
     save: {
         title: "Speichern",
-        help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen",
+        help: "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen.",
         error: "Beim Speichern ist ein Fehler aufgetreten",
         uploading: "Änderungen werden zu OpenStreetMap hochgeladen.",
-        unsaved_changes: "Ungespeicherte Änderugen vorhanden",
+        unsaved_changes: "Ungespeicherte Änderungen vorhanden"
     },
 
     splash: {
-        welcome: "Willkommen beim iD OpenStreetMap editor",
+        welcome: "Willkommen beim iD OpenStreetMap-Editor",
         text: "Dies ist eine Entwicklungsversion {version}. Für weitere Informationen besuche {website} und melde Fehler unter {github}."
     },
 
@@ -216,12 +230,13 @@ locale.de = {
         untagged_point: "Punkt ohne Attribute, der kein Teil einer Linie oder Fläche ist",
         untagged_line: "Linie ohne Attribute",
         untagged_area: "Fläche ohne Attribute",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Das Attribut {tag} suggeriert eine Fläche, ist aber keine Fläche",
-        deprecated_tags: "Veralterte Attribute: {tags}"
+        deprecated_tags: "Veraltete Attribute: {tags}"
     },
 
     zoom: {
-        in: "Hineinzoomen",
+        'in': "Hineinzoomen",
         out: "Herauszoomen"
     }
 };

@@ -1,5 +1,5 @@
 iD.History = function(context) {
-    var stack, index,
+    var stack, index, tree,
         imagery_used = 'Bing',
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = false;
@@ -31,6 +31,7 @@ iD.History = function(context) {
         return difference;
     }
 
+    // iD uses namespaced keys so multiple installations do not conflict
     function getKey(n) {
         return 'iD_' + window.location.origin + '_' + n;
     }
@@ -41,9 +42,17 @@ iD.History = function(context) {
         },
 
         merge: function(entities) {
+
+            var base = stack[0].graph.base(),
+                newentities = Object.keys(entities).filter(function(i) {
+                    return !base.entities[i];
+                });
+
             for (var i = 0; i < stack.length; i++) {
                 stack[i].graph.rebase(entities);
             }
+
+            tree.rebase(newentities);
 
             dispatch.change();
         },
@@ -124,6 +133,10 @@ iD.History = function(context) {
             }
         },
 
+        intersects: function(extent) {
+            return tree.intersects(extent, stack[index].graph);
+        },
+
         difference: function() {
             var base = stack[0].graph,
                 head = stack[index].graph;
@@ -168,6 +181,7 @@ iD.History = function(context) {
         reset: function() {
             stack = [{graph: iD.Graph()}];
             index = 0;
+            tree = iD.Tree(stack[0].graph);
             dispatch.change();
         },
 
@@ -178,11 +192,10 @@ iD.History = function(context) {
             if (stack.length <= 1) return;
 
             var json = JSON.stringify(stack.map(function(i) {
-                return {
-                    annotation: i.annotation,
-                    imagery_used: i.imagery_used,
-                    entities: i.graph.entities
-                };
+                var x = { entities: i.graph.entities };
+                if (i.imagery_used) x.imagery_used = i.imagery_used;
+                if (i.annotation) x.annotation = i.annotation;
+                return x;
             }), function includeUndefined(key, value) {
                 if (typeof value === 'undefined') return 'undefined';
                 return value;
@@ -207,10 +220,13 @@ iD.History = function(context) {
             return lock;
         },
 
+        // is iD not open in another window and it detects that
+        // there's a history stored in localStorage that's recoverable?
         restorableChanges: function() {
             return lock && !!context.storage(getKey('history'));
         },
 
+        // load history from a version stored in localStorage
         load: function() {
             if (!lock) return;
 
@@ -226,13 +242,12 @@ iD.History = function(context) {
             context.storage(getKey('nextIDs', null));
             context.storage(getKey('index', null));
 
-            stack = JSON.parse(json).map(function(d, i) {
+            stack = JSON.parse(json).map(function(d) {
                 d.graph = iD.Graph(stack[0].graph).load(d.entities);
                 return d;
             });
             stack[0].graph.inherited = false;
             dispatch.change();
-
         },
 
         _getKey: getKey

@@ -1,0 +1,41 @@
+{
+    "name": "bank",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "coffer",
+            "countinghouse",
+            "credit union",
+            "depository",
+            "exchequer",
+            "fund",
+            "hoard",
+            "investment firm",
+            "repository",
+            "reserve",
+            "reservoir",
+            "safe",
+            "savings",
+            "stock",
+            "stockpile",
+            "store",
+            "storehouse",
+            "thrift",
+            "treasury",
+            "trust company",
+            "vault"
+        ],
+        "tags": {
+            "amenity": "bank"
+        }
+    },
+    "icon": "bank",
+    "form": [
+        "atm",
+        "building_area",
+        "address"
+    ]
+}

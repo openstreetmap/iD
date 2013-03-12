@@ -73,7 +73,6 @@ locale.lv = {
         'delete': {
             title: "Dzēst",
             description: "Izdzēst no kartes.",
-            key: "⌫",
             annotation: {
                 point: "Punkts dzēsts.",
                 vertex: "Mezgls dzests.",
@@ -111,7 +110,17 @@ locale.lv = {
                 point: "Punkts pārvietots.",
                 vertex: "Mezgls pārvietots.",
                 line: "Līnija pārvietota.",
-                area: "Apgabals pārvietots."
+                area: "Apgabals pārvietots.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -171,10 +180,15 @@ locale.lv = {
         new_tag: "Jauns apzīmējums",
         edit_tags: "Labot apzīmējumus",
         okay: "Labi",
-        view_on_osm: "Apskatīt OSM"
+        view_on_osm: "Apskatīt OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Fons",
         description: "Fona iestatījumi",
         percent_brightness: "{opacity}% caurspīdīgums",
@@ -190,7 +204,7 @@ locale.lv = {
 
     save: {
         title: "Saglabāt",
-        help: "Saglabā izmaiņas, padarot tās redzamas citiem",
+        help: "Saglabā izmaiņas, padarot tās redzamas citiem.",
         error: "Kļūda. Nevarēja saglabāt izmaiņas",
         uploading: "Augšupielādē",
         unsaved_changes: "Jums ir nesaglabātas izmaiņas"
@@ -216,12 +230,13 @@ locale.lv = {
         untagged_point: "Neapzīmēts punkts",
         untagged_line: "Neapzīmēta līnija",
         untagged_area: "Neapzīmēts apgabals",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
         deprecated_tags: "Novecojuši apzīmējumi: {tags}"
     },
 
     zoom: {
-        in: "Pietuvināt",
+        'in': "Pietuvināt",
         out: "Attālināt"
     }
 };

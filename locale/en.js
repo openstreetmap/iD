@@ -8,7 +8,7 @@ locale.en = {
         add_line: {
             title: "Line",
             description: "Lines can be highways, streets, pedestrian paths, or even canals.",
-            tail: "Click on the map to start drawing an road, path, or route."
+            tail: "Click on the map to start drawing a road, path, or route."
         },
         add_point: {
             title: "Point",
@@ -73,7 +73,6 @@ locale.en = {
         'delete': {
             title: "Delete",
             description: "Remove this from the map.",
-            key: "⌫",
             annotation: {
                 point: "Deleted a point.",
                 vertex: "Deleted a node from a way.",
@@ -111,7 +110,17 @@ locale.en = {
                 point: "Moved a point.",
                 vertex: "Moved a node in a way.",
                 line: "Moved a line.",
-                area: "Moved an area."
+                area: "Moved an area.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -157,7 +166,7 @@ locale.en = {
 
     geocoder: {
         title: "Find A Place",
-        placeholder: "find a place",
+        placeholder: "Find a place",
         no_results: "Couldn't locate a place named '{name}'"
     },
 
@@ -171,10 +180,15 @@ locale.en = {
         new_tag: "New Tag",
         edit_tags: "Edit tags",
         okay: "Okay",
-        view_on_osm: "View on OSM"
+        view_on_osm: "View on OSM",
+        name: "Name",
+        editing: "Editing {type}",
+        additional: "Additional tags",
+        choose: "What are you adding?",
+        results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Background",
         description: "Background Settings",
         percent_brightness: "{opacity}% brightness",
@@ -190,7 +204,8 @@ locale.en = {
 
     save: {
         title: "Save",
-        help: "Save changes to OpenStreetMap, making them visible to other users",
+        help: "Save changes to OpenStreetMap, making them visible to other users.",
+        no_changes: "No changes to save.",
         error: "An error occurred while trying to save",
         uploading: "Uploading changes to OpenStreetMap.",
         unsaved_changes: "You have unsaved changes"
@@ -216,12 +231,13 @@ locale.en = {
         untagged_point: "Untagged point which is not part of a line or area",
         untagged_line: "Untagged line",
         untagged_area: "Untagged area",
+        many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area",
         deprecated_tags: "Deprecated tags: {tags}"
     },
 
     zoom: {
-        in: "Zoom In",
+        'in': "Zoom In",
         out: "Zoom Out"
     }
 };

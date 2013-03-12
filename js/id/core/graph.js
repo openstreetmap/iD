@@ -9,7 +9,7 @@ iD.Graph = function(other, mutable) {
         this.inherited = true;
 
     } else {
-        if (_.isArray(other)) {
+        if (Array.isArray(other)) {
             var entities = {};
             for (var i = 0; i < other.length; i++) {
                 entities[other[i].id] = other[i];
@@ -45,7 +45,9 @@ iD.Graph.prototype = {
             return transients[key];
         }
 
-        return transients[key] = fn.call(entity);
+        transients[key] = fn.call(entity);
+
+        return transients[key];
     },
 
     parentWays: function(entity) {
@@ -75,7 +77,8 @@ iD.Graph.prototype = {
             nodes[i] = this.entity(entity.nodes[i]);
         }
 
-        return (this._childNodes[entity.id] = nodes);
+        this._childNodes[entity.id] = nodes;
+        return this._childNodes[entity.id];
     },
 
     base: function() {
@@ -226,21 +229,10 @@ iD.Graph.prototype = {
         return this;
     },
 
-    // get all objects that intersect an extent.
-    intersects: function(extent) {
-        var items = [];
-        for (var i in this.entities) {
-            var entity = this.entities[i];
-            if (entity && this.hasAllChildren(entity) && entity.intersects(extent, this)) {
-                items.push(entity);
-            }
-        }
-        return items;
-    },
-
     hasAllChildren: function(entity) {
         // we're only checking changed entities, since we assume fetched data
         // must have all children present
+        var i;
         if (this.entities.hasOwnProperty(entity.id)) {
             if (entity.type === 'way') {
                 for (i = 0; i < entity.nodes.length; i++) {
@@ -281,5 +273,4 @@ iD.Graph.prototype = {
         }
         return this;
     }
-
 };

@@ -22,7 +22,7 @@ iD.ui.Restore = function(context) {
             .append('div')
             .attr('class', 'button-wrap joined col6');
 
-        buttons.append('button')
+        var restore = buttons.append('button')
             .attr('class', 'save action button col6')
             .text(t('restore.restore'))
             .on('click', function() {
@@ -37,5 +37,7 @@ iD.ui.Restore = function(context) {
                 context.history().clearSaved();
                 modal.remove();
             });
+
+        restore.node().focus();
     };
 };

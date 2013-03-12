@@ -6,6 +6,8 @@ iD.ui.RadialMenu = function(operations) {
         if (!operations.length)
             return;
 
+        selection.node().parentNode.focus();
+
         function click(operation) {
             d3.event.stopPropagation();
             operation();
@@ -17,7 +19,7 @@ iD.ui.RadialMenu = function(operations) {
             .attr('opacity', 0);
 
         menu.transition()
-            .attr('opacity', 0.8);
+            .attr('opacity', 1);
 
         var r = 50,
             a = Math.PI / 4,
@@ -45,29 +47,19 @@ iD.ui.RadialMenu = function(operations) {
         button.append('circle')
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('r', 15)
-            .attr('title', function(d) { return d.title; })
             .classed('disabled', function(d) { return !d.enabled(); })
             .on('click', click)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
-        var image = button.append('foreignObject')
-            .style('pointer-events', 'none')
-            .attr('width', 20)
-            .attr('height', 20)
-            .attr('x', -10)
-            .attr('y', -10);
+        button.append('use')
+            .attr('transform', 'translate(-10, -10)')
+            .attr('clip-path', 'url(#clip-square-20)')
+            .attr('xlink:href', function(d) { return '#icon-operation-' + d.id; });
 
-        image.append('xhtml:span')
-            .attr('class', function(d) { return 'icon icon-operation icon-operation-' + d.id; });
-
-        var tooltip = menu.append('foreignObject')
-            .style('display', 'none')
-            .attr('width', 200)
-            .attr('height', 400);
-
-        tooltip.append('xhtml:div')
-            .attr('class', 'radial-menu-tooltip');
+        var tooltip = d3.select(document.body)
+            .append('div')
+            .attr('class', 'tooltip-inner radial-menu-tooltip');
 
         function mouseover(d, i) {
             var angle = a0 + i * a,
@@ -75,11 +67,10 @@ iD.ui.RadialMenu = function(operations) {
                 dy = 0;
 
             tooltip
-                .attr('x', (r + 30) * Math.sin(angle) + dx)
-                .attr('y', (r + 30) * Math.cos(angle) + dy)
+                .style('left', (r + 25) * Math.sin(angle) + dx + center[0] + 'px')
+                .style('top', (r + 25) * Math.cos(angle) + dy + center[1]+ 'px')
                 .style('display', 'block')
-                .select('div')
-                .text(d.description);
+                .html(iD.ui.tooltipHtml(d.description, d.keys[0]));
         }
 
         function mouseout() {
@@ -87,7 +78,7 @@ iD.ui.RadialMenu = function(operations) {
         }
     };
 
-    radialMenu.close = function(selection) {
+    radialMenu.close = function() {
         if (menu) {
             menu.transition()
                 .attr('opacity', 0)

@@ -1,0 +1,20 @@
+{
+    "name": "aeroway",
+    "match": {
+        "type": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "aeroway": "*"
+        }
+    },
+    "form": [
+        {
+            "key": "aeroway",
+            "type": "combo"
+        }
+    ]
+}

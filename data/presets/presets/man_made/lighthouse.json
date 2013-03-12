@@ -1,0 +1,12 @@
+{
+    "name": "lighthouse",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "man_made": "lighthouse"
+        }
+    }
+}

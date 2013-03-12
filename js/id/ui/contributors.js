@@ -1,15 +1,15 @@
 iD.ui.Contributors = function(context) {
     function update(selection) {
         var users = {},
-            limit = 3,
-            entities = context.graph().intersects(context.map().extent());
+            limit = 4,
+            entities = context.intersects(context.map().extent());
 
-        for (var i in entities) {
-            if (entities[i].user) users[entities[i].user] = true;
-        }
+        entities.forEach(function(entity) {
+            if (entity && entity.user) users[entity.user] = true;
+        });
 
         var u = Object.keys(users),
-            subset = u.slice(0, limit);
+            subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
         selection.html('')
             .append('span')
@@ -24,6 +24,7 @@ iD.ui.Contributors = function(context) {
             .attr('class', 'user-link')
             .attr('href', function(d) { return context.connection().userUrl(d); })
             .attr('target', '_blank')
+            .attr('tabindex', -1)
             .text(String);
 
         if (u.length > limit) {
@@ -31,13 +32,14 @@ iD.ui.Contributors = function(context) {
 
             count.append('a')
                 .attr('target', '_blank')
+                .attr('tabindex', -1)
                 .attr('href', function() {
                     var ext = context.map().extent();
                     return 'http://www.openstreetmap.org/browse/changesets?bbox=' + [
                         ext[0][0], ext[0][1],
                         ext[1][0], ext[1][1]];
                 })
-                .text(u.length - limit);
+                .text(u.length - limit + 1);
 
             selection.append('span')
                 .html(t('contributors.truncated_list', {users: userList.html(), count: count.html()}));

@@ -1,0 +1,23 @@
+{
+    "name": "mosque",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "muslim",
+            "mosque"
+        ],
+        "tags": {
+            "amenity": "place_of_worship",
+            "religion": "muslim"
+        }
+    },
+    "icon": "religious-muslim",
+    "form": [
+        "denomination",
+        "building",
+        "address"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "name": "synagogue",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "jewish",
+            "synagogue"
+        ],
+        "tags": {
+            "amenity": "place_of_worship",
+            "religion": "jewish"
+        }
+    },
+    "icon": "religious-jewish",
+    "form": [
+        "denomination",
+        "building",
+        "address"
+    ]
+}

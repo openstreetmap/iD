@@ -57,6 +57,8 @@
     </table>
 
     <script>
+        var infiniteExtent = iD.geo.Extent([0, 0], [Infinity, Infinity]);
+
         var zooms = [16, 17],
             modes = ['base', 'hover', 'selected'],
             tags = [
@@ -132,7 +134,7 @@
                     .attr('class', 'behavior-hover')
                     .call(vertices, graph, [a, b], filter)
                     .call(lines, graph, [highway], filter)
-                    .call(midpoints, graph, [highway], filter)
+                    .call(midpoints, graph, [highway], filter, infiniteExtent)
                     .selectAll('.line')
                     .classed(d.mode, d.mode !== 'base');
             });
@@ -193,7 +195,7 @@
                     .attr('class', datum.mode === 'selected' ? 'mode-select' : 'mode-browse')
                     .call(vertices, graph, [a, b, c, d], filter)
                     .call(areas, graph, [area], filter)
-                    .call(midpoints, graph, [area], filter)
+                    .call(midpoints, graph, [area], filter, infiniteExtent)
                     .selectAll('.area')
                     .classed(datum.mode, datum.mode !== 'base');
             });

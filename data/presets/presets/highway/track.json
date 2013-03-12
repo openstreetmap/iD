@@ -1,0 +1,20 @@
+{
+    "name": "track",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "tags": {
+            "highway": "track"
+        },
+        "terms": []
+    },
+    "icon": "highway-track",
+    "form": [
+        "oneway",
+        "roadtype",
+        "access",
+        "maxspeed",
+        "surface"
+    ]
+}

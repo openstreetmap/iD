@@ -1,4 +1,7 @@
 iD.ui.Geocoder = function(context) {
+
+    var key = 'f';
+
     function resultExtent(bounds) {
         return new iD.geo.Extent(
             [parseFloat(bounds[3]), parseFloat(bounds[0])],
@@ -31,6 +34,7 @@ iD.ui.Geocoder = function(context) {
                                 return d.type.charAt(0).toUpperCase() + d.type.slice(1) + ': ';
                             })
                             .append('a')
+                            .attr('tabindex', 1)
                             .text(function(d) {
                                 if (d.display_name.length > 80) {
                                     return d.display_name.substr(0, 80) + '…';
@@ -38,9 +42,14 @@ iD.ui.Geocoder = function(context) {
                                     return d.display_name;
                                 }
                             })
-                            .on('click', clickResult);
+                            .on('click', clickResult)
+                            .on('keydown', function(d) {
+                                // support tabbing to and accepting this
+                                // entry
+                                if (d3.event.keyCode == 13) clickResult(d);
+                            });
                         spans.exit().remove();
-                        resultsList.classed('hide', false);
+                        resultsList.call(iD.ui.Toggle(true));
                     } else {
                         applyBounds(resultExtent(resp[0].boundingbox));
                     }
@@ -59,44 +68,58 @@ iD.ui.Geocoder = function(context) {
         }
 
         function hide() { setVisible(false); }
-        function toggle() { setVisible(gcForm.classed('hide')); }
+        function toggle() {
+            if (d3.event) d3.event.preventDefault();
+            tooltip.hide(button);
+            setVisible(gcForm.classed('hide'));
+        }
 
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
                 gcForm.call(iD.ui.Toggle(show));
-                if (!show) resultsList.classed('hide', !show);
+                if (!show) resultsList.call(iD.ui.Toggle(show));
                 if (show) inputNode.node().focus();
                 else inputNode.node().blur();
                 shown = show;
             }
         }
+        var tooltip = bootstrap.tooltip()
+            .placement('right')
+            .html(true)
+            .title(iD.ui.tooltipHtml(t('geocoder.title'), key));
 
         var button = selection.append('button')
             .attr('tabindex', -1)
-            .attr('title', t('geocoder.title'))
             .on('click', toggle)
-            .call(bootstrap.tooltip()
-                .placement('right'));
+            .call(tooltip);
 
         button.append('span')
             .attr('class', 'icon geocode');
 
         var gcForm = selection.append('form');
 
-        var inputNode = gcForm.attr('class', 'content fillD map-overlay hide')
+        var inputNode = gcForm.attr('class', 'content fillL map-overlay hide')
             .append('input')
             .attr({ type: 'text', placeholder: t('geocoder.placeholder') })
+            .attr('tabindex', 1)
             .on('keydown', keydown);
 
         var resultsList = selection.append('div')
             .attr('class', 'content fillD map-overlay hide');
 
-        selection.on('click.geocoder-inside', function() {
+        selection.on('mousedown.geocoder-inside', function() {
             return d3.event.stopPropagation();
         });
 
-        context.container().on('click.geocoder-outside', hide);
+        context.surface().on('mousedown.geocoder-outside', hide);
+
+        var keybinding = d3.keybinding('geocoder');
+
+        keybinding.on(key, toggle);
+
+        d3.select(document)
+            .call(keybinding);
     }
 
     return geocoder;

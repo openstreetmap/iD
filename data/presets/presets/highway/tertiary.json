@@ -1,0 +1,20 @@
+{
+    "name": "tertiary road",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "tags": {
+            "highway": "tertiary"
+        },
+        "terms": []
+    },
+    "icon": "highway-tertiary",
+    "form": [
+        "oneway",
+        "roadtype",
+        "access",
+        "maxspeed",
+        "surface"
+    ]
+}

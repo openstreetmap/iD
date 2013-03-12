@@ -16,7 +16,7 @@ locale.tr = {
             tail: "Nokta eklemek için haritaya tıklayın."
         },
         browse: {
-            title: "Tara",
+            title: "Dolaş",
             description: "Harita üzerinde dolan ve yaklaş."
         },
         draw_area: {
@@ -73,7 +73,6 @@ locale.tr = {
         'delete': {
             title: "Sil",
             description: "Haritan bunu sil.",
-            key: "⌫",
             annotation: {
                 point: "Bir nokta silindi.",
                 vertex: "Yoldan bir nod silindi.",
@@ -111,7 +110,17 @@ locale.tr = {
                 point: "Bir nokta taşındı.",
                 vertex: "Yoldan bir nokta taşındı.",
                 line: "Bir çizgi taşındı.",
-                area: "Bir alan taşındı."
+                area: "Bir alan taşındı.",
+                multiple: "Moved multiple objects."
+            }
+        },
+        rotate: {
+            title: "Rotate",
+            description: "Rotate this object around its centre point.",
+            key: "R",
+            annotation: {
+                line: "Rotated a line.",
+                area: "Rotated an area."
             }
         },
         reverse: {
@@ -139,15 +148,15 @@ locale.tr = {
     report_a_bug: "Hata rapor et",
 
     commit: {
-        title: "Save Changes",
-        description_placeholder: "Brief description of your contributions",
-        upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        save: "Save",
-        cancel: "Cancel",
-        warnings: "Warnings",
-        modified: "Modified",
-        deleted: "Deleted",
-        created: "Created"
+        title: "Değişiklikleri kaydet",
+        description_placeholder: "Katkı sağlayanlar hakkında kısa açıklama",
+        upload_explanation: "{user} kullanıcısı olarak yaptığınız değişiklikler tüm OpenStreetMap kullanan haritalarda görünür olacaktır.",
+        save: "Kaydet",
+        cancel: "İptal",
+        warnings: "Uyarılar",
+        modified: "Değiştirildi",
+        deleted: "Silindi",
+        created: "Oluşturuldu"
     },
 
     contributors: {
@@ -162,7 +171,7 @@ locale.tr = {
     },
 
     geolocate: {
-        title: "Show My Location"
+        title: "Konumumu göster"
     },
 
     inspector: {
@@ -171,10 +180,15 @@ locale.tr = {
         new_tag: "Yeni Etiket",
         edit_tags: "Etiketleri güncelle",
         okay: "Tamam",
-        view_on_osm: "View on OSM"
+        view_on_osm: "OSM üzerinde gör",
+        name: "İsim",
+        editing: "{type} düzenleniyor",
+        additional: "Ekstra etiketler",
+        choose: "Neyi ekliyorsunuz?",
+        results: "{n} results for {search}"
     },
 
-    layerswitcher: {
+    background: {
         title: "Arkaplan",
         description: "Arkaplan Ayarları",
         percent_brightness: "{opacity}% parlaklık",
@@ -183,22 +197,22 @@ locale.tr = {
     },
 
     restore: {
-        description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        restore: "Restore",
-        reset: "Reset"
+        description: "Daha önceki oturumunuzdan kaydedilmemiş değişiklikler var. Bu değişiklikleri geri getirmek ister misiniz?",
+        restore: "Geri Getir",
+        reset: "Sıfırla"
     },
 
     save: {
         title: "Kaydet",
-        help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz",
+        help: "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz.",
         error: "Kaydederken bir hata oluştu",
         uploading: "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
         unsaved_changes: "Kaydedilmemiş değişiklikleriniz var"
     },
 
     splash: {
-        welcome: "Welcome to the iD OpenStreetMap editor",
-        text: "This is development version {version}. For more information see {website} and report bugs at {github}."
+        welcome: "OpenStreetMap Editörü iD'ye hoşgeldiniz",
+        text: "Bu {version} versiyonu geliştirme versiyonudur. Daha fazla bilgi için {website} sitesine bakabilirsiniz ve hataları {github} sitesine raporlayabilirsiniz."
     },
 
     source_switch: {
@@ -208,20 +222,21 @@ locale.tr = {
 
     tag_reference: {
         description: "Açıklama",
-        on_wiki: "{tag} on wiki.osm.org",
-        used_with: "used with {type}"
+        on_wiki: "wiki.osm.org sitesindeki {tag} ",
+        used_with: "{type} ile birlikte"
     },
 
     validations: {
         untagged_point: "Herhangi bir çizgi ya da alana bağlantısı olmayan ve etiketlenmemiş bir nokta.",
         untagged_line: "Etiketlenmemiş çizgi",
         untagged_area: "Etiketlenmemiş alan",
+        many_deletions: "Şu an {n} adet objeyi siliyorsunuz. Bunu yapmak istediğinize emin misiniz? Bu işlem ile ilgili objelerin tamamı herkesin ziyaret ettiği openstreetmap.org üzerinden de silinmiş olacaktır.",
         tag_suggests_area: "{tag} etiketi buranın alan olmasını tavsiye ediyor ama alan değil.",
         deprecated_tags: "Kullanımdan kaldırılmış etiket : {tags}"
     },
 
     zoom: {
-        in: "Yaklaş",
+        'in': "Yaklaş",
         out: "Uzaklaş"
     }
 };

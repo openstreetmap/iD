@@ -1,0 +1,13 @@
+{
+    "name": "heath",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "terms": [
+        ],
+        "tags": {
+            "natural": "heath"
+        }
+    }
+}

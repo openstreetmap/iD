@@ -1,0 +1,19 @@
+{
+    "name": "building",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "building": "*"
+        },
+        "terms": []
+    },
+    "icon": "warehouse",
+    "form": [
+        "building_yes",
+        "levels",
+        "address"
+    ]
+}

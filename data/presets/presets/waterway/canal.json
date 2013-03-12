@@ -1,0 +1,12 @@
+{
+    "name": "canal",
+    "match": {
+        "type": [
+            "line"
+        ],
+        "tags": {
+            "waterway": "canal"
+        }
+    },
+    "icon": "waterway-river"
+}

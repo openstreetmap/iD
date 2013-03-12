@@ -2,7 +2,7 @@ iD.svg.MemberClasses = function(graph) {
     var tagClassRe = /^member-?/;
 
     return function memberClassesSelection(selection) {
-        selection.each(function memberClassesEach(d, i) {
+        selection.each(function memberClassesEach(d) {
             var classes, value = this.className;
 
             if (value.baseVal !== undefined) value = value.baseVal;

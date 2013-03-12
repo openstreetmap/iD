@@ -1,0 +1,21 @@
+{
+    "name": "tree",
+    "match": {
+        "type": [
+            "point",
+            "vertex"
+        ],
+        "terms": [
+        ],
+        "tags": {
+            "natural": "tree"
+        }
+    },
+    "form": [
+        {
+            "key": "denotation",
+            "type": "combo"
+        }
+    ],
+    "icon": "park"
+}

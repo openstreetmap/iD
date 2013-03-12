@@ -1,0 +1,44 @@
+{
+    "area": [
+        "building",
+        "park",
+        "water",
+        "parking",
+        "hospital",
+        "place of worship",
+        "cafe",
+        "restaurant",
+        "bar",
+        "fast food",
+        "bank",
+        "other"
+    ],
+    "line": [
+        "roads",
+        "foot path",
+        "cycle path",
+        "rail",
+        "river",
+        "stream",
+        "other"
+    ],
+    "point": [
+        "bus stop",
+        "park",
+        "hospital",
+        "place of worship",
+        "cafe",
+        "restaurant",
+        "bar",
+        "fast food",
+        "bank",
+        "cinema",
+        "supermarket",
+        "other"
+    ],
+    "vertex": [
+        "crossing",
+        "turning circle",
+        "other"
+    ]
+}

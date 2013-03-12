@@ -74,6 +74,14 @@ and a few modules:
 3. Run `npm install`
 4. Run `npm test` to see whether your tests pass or fail.
 
+## Building / Installing
+
+You can build and install a concatenated and minified version of iD with the command `make install`.
+Node.js is required for this.
+
+By default iD will be built to the `build` directory, but you can move it elsewhere or specify the
+build location with `make install install_root=/path/to/install`.
+
 ## Licensing
 
 iD is under the [WTFPL](http://www.wtfpl.net/). Some of the libraries it uses

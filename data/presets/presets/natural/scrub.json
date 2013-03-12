@@ -1,0 +1,12 @@
+{
+    "name": "scrub",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "natural": "scrub"
+        },
+        "terms": []
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "spring",
+    "match": {
+        "type": [
+            "point",
+            "vertex"
+        ],
+        "terms": [
+        ],
+        "tags": {
+            "natural": "spring"
+        }
+    }
+}

@@ -152,7 +152,7 @@ describe("iD.actions.Join", function () {
 
         graph = iD.actions.Join(['-', '='])(graph);
 
-        expect(graph.entity('-').tags).to.eql({a: 'a', b: '-; =', c: 'c', d: 'd'});
+        expect(graph.entity('-').tags).to.eql({a: 'a', b: '-;=', c: 'c', d: 'd'});
     });
 
     it("merges relations", function () {

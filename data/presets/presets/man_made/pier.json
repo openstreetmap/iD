@@ -1,0 +1,12 @@
+{
+    "name": "pier",
+    "match": {
+        "type": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "man_made": "pier"
+        }
+    }
+}

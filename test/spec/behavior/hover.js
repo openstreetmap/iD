@@ -22,6 +22,12 @@ describe("iD.behavior.Hover", function() {
             container.call(iD.behavior.Hover().off);
             expect(container).not.to.be.classed('behavior-hover')
         });
+
+        it("removes the .hover class from all elements", function () {
+            container.append('span').attr('class', 'hover');
+            container.call(iD.behavior.Hover().off);
+            expect(container.select('span')).not.to.be.classed('hover')
+        });
     });
 
     describe("mouseover", function () {

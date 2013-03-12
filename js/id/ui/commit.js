@@ -46,17 +46,17 @@ iD.ui.Commit = function(context) {
 
         var userLink = d3.select(document.createElement('div'));
 
-        userLink.append('a')
-            .attr('class','user-info')
-            .text(user.display_name)
-            .attr('href', connection.url() + '/user/' + user.display_name)
-            .attr('target', '_blank');
-
         if (user.image_url) {
             userLink.append('img')
                 .attr('src', user.image_url)
                 .attr('class', 'icon icon-pre-text user-icon');
         }
+
+        userLink.append('a')
+            .attr('class','user-info')
+            .text(user.display_name)
+            .attr('href', connection.url() + '/user/' + user.display_name)
+            .attr('target', '_blank');
 
         commentSection.append('p')
             .attr('class', 'commit-info')
@@ -108,7 +108,9 @@ iD.ui.Commit = function(context) {
             .enter()
             .append('li');
 
-        warningLi.append('button')
+        // only show the fix icon when an entity is given
+        warningLi.filter(function(d) { return d.entity; })
+            .append('button')
             .attr('class', 'minor')
             .on('click', event.fix)
             .append('span')

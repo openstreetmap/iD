@@ -1,0 +1,19 @@
+{
+    "name": "pharmacy",
+    "match": {
+        "type": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "pharmacy"
+        },
+        "terms": []
+    },
+    "icon": "pharmacy",
+    "form": [
+        "operator",
+        "building_area",
+        "address"
+    ]
+}

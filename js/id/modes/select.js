@@ -4,14 +4,16 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    var inspector = iD.ui.Inspector().initial(!!initial),
+    var showgrid = singular() && !_.without(Object.keys(singular().tags), 'area').length;
+
+    var inspector = iD.ui.Inspector(context).initial(showgrid),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
-            iD.behavior.DragNode(context)],
+            iD.modes.DragNode(context).behavior],
         radialMenu;
 
     function changeTags(d, tags) {
@@ -67,13 +69,15 @@ iD.modes.Select = function(context, selection, initial) {
 
         keybinding.on('⎋', function() {
             context.enter(iD.modes.Browse(context));
-        });
+        }, true);
 
         operations.forEach(function(operation) {
-            keybinding.on(operation.key, function() {
-                if (operation.enabled()) {
-                    operation();
-                }
+            operation.keys.forEach(function(key) {
+                keybinding.on(key, function() {
+                    if (operation.enabled()) {
+                        operation();
+                    }
+                });
             });
         });
 
@@ -83,11 +87,10 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            inspector.context(context);
+            var wrap = context.container()
+                .select('.inspector-wrap');
 
-            context.container()
-                .select('.inspector-wrap')
-                .style('display', 'block')
+            wrap.style('display', 'block')
                 .style('opacity', 1)
                 .datum(entity)
                 .call(inspector);
@@ -95,14 +98,14 @@ iD.modes.Select = function(context, selection, initial) {
             if (d3.event) {
                 // Pan the map if the clicked feature intersects with the position
                 // of the inspector
-                var inspector_size = context.container().select('.inspector-wrap').size(),
-                    map_size = context.map().size(),
+                var inspectorSize = wrap.size(),
+                    mapSize = context.map().size(),
                     offset = 50,
-                    shift_left = d3.event.clientX - map_size[0] + inspector_size[0] + offset,
-                    center = (map_size[0] / 2) + shift_left + offset;
+                    shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
+                    center = (mapSize[0] / 2) + shiftLeft + offset;
 
-                if (shift_left > 0 && inspector_size[1] > d3.event.clientY) {
-                    context.map().centerEase(context.projection.invert([center, map_size[1]/2]));
+                if (shiftLeft > 0 && inspectorSize[1] > d3.event.clientY) {
+                    context.map().centerEase(context.projection.invert([center, mapSize[1]/2]));
                 }
             }
 
@@ -111,20 +114,21 @@ iD.modes.Select = function(context, selection, initial) {
                 .on('close', function() { context.enter(iD.modes.Browse(context)); });
         }
 
-        context.history().on('change.select', function() {
+        context.history()
+            .on('undone.select', updateInspector)
+            .on('redone.select', updateInspector);
+
+        function updateInspector() {
             context.surface().call(radialMenu.close);
 
             if (_.any(selection, function(id) { return !context.entity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
 
-            } else if (entity) {
-                var newEntity = context.entity(selection[0]);
-                if (!_.isEqual(entity.tags, newEntity.tags)) {
-                    inspector.tags(newEntity.tags);
-                }
+            } else if (singular()) {
+                inspector.tags(context.entity(selection[0]).tags);
             }
-        });
+        }
 
         context.map().on('move.select', function() {
             context.surface().call(radialMenu.close);
@@ -137,31 +141,13 @@ iD.modes.Select = function(context, selection, initial) {
             if (datum instanceof iD.Way && !target.classed('fill')) {
                 var choice = iD.geo.chooseIndex(datum,
                         d3.mouse(context.surface().node()), context),
-                    node = iD.Node({ loc: choice.loc });
+                    node = iD.Node();
 
                 var prev = datum.nodes[choice.index - 1],
-                    next = datum.nodes[choice.index],
-                    prevParents = context.graph().parentWays({ id: prev }),
-                    ways = [];
+                    next = datum.nodes[choice.index];
 
-
-                for (var i = 0; i < prevParents.length; i++) {
-                    var p = prevParents[i];
-                    for (var k = 0; k < p.nodes.length; k++) {
-                        if (p.nodes[k] === prev) {
-                            if (p.nodes[k-1] === next) {
-                                ways.push({ id: p.id, index: k});
-                                break;
-                            } else if (p.nodes[k+1] === next) {
-                                ways.push({ id: p.id, index: k+1});
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                context.perform(iD.actions.AddEntity(node),
-                    iD.actions.AddMidpoint({ ways: ways, loc: node.loc }, node),
+                context.perform(
+                    iD.actions.AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();
@@ -204,10 +190,6 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.exit = function() {
-        if (singular()) {
-            changeTags(singular(), inspector.tags());
-        }
-
         if (timeout) window.clearTimeout(timeout);
 
         context.container()
@@ -229,7 +211,8 @@ iD.modes.Select = function(context, selection, initial) {
         keybinding.off();
 
         context.history()
-            .on('change.select', null);
+            .on('undone.select', null)
+            .on('redone.select', null);
 
         context.surface()
             .call(radialMenu.close)

@@ -11,6 +11,8 @@ iD.operations.Delete = function(selection, context) {
         context.perform(
             iD.actions.DeleteMultiple(selection),
             annotation);
+
+        context.enter(iD.modes.Browse(context));
     };
 
     operation.available = function() {
@@ -22,7 +24,7 @@ iD.operations.Delete = function(selection, context) {
     };
 
     operation.id = "delete";
-    operation.key = t('operations.delete.key');
+    operation.keys = [iD.ui.cmd('⌫'), iD.ui.cmd('⌦')];
     operation.title = t('operations.delete.title');
     operation.description = t('operations.delete.description');
 

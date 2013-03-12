@@ -2,7 +2,14 @@ iD.debug = true;
 
 mocha.setup({
     ui: 'bdd',
-    globals: ['__onresize.tail-size', '__onmousemove.zoom', '__onmouseup.zoom', '__onclick.draw']
+    globals: [
+        '__onresize.tail-size',
+        '__onmousemove.zoom',
+        '__onmouseup.zoom',
+        '__onkeydown.select',
+        '__onkeyup.select',
+        '__onclick.draw'
+    ]
 });
 
 var expect = chai.expect;

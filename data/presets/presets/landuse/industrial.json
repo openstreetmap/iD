@@ -1,0 +1,15 @@
+{
+    "name": "industrial",
+    "match": {
+        "type": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "industrial"
+        },
+        "terms": [
+        ]
+    },
+    "form": [
+    ]
+}
