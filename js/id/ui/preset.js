@@ -3,7 +3,9 @@ iD.ui.preset = function(context) {
         entity,
         tags,
         keys,
-        preset;
+        preset,
+        formwrap,
+        formbuttonwrap;
 
     function input(d) {
         var i = iD.ui.preset[d.type](d, context)
@@ -18,7 +20,7 @@ iD.ui.preset = function(context) {
 
         keys = keys.concat(d.key ? [d.key] : d.keys);
 
-        this.call(i);
+        d3.select(this).call(i);
     }
 
     function presets(selection) {
@@ -26,27 +28,59 @@ iD.ui.preset = function(context) {
         selection.html('');
         keys = [];
 
+        formwrap = selection.append('div');
+        draw(formwrap, preset.form);
+
+        var wrap = selection.append('div')
+            .attr('class', 'col12 inspector-inner');
+
+        wrap.append('div')
+            .attr('class', 'col3 preset-label')
+            .text('Add field');
+
+        formbuttonwrap = wrap.append('div')
+            .attr('class', 'col9 preset-input');
+
+        formbuttonwrap.selectAll('button')
+            .data(preset.additional)
+            .enter()
+            .append('button')
+                .attr('class', 'preset-add-form')
+                .attr('title', function(d) { return d.title || d.key; })
+                .on('click', addForm)
+                .append('span')
+                    .attr('class', function(d) { return 'icon ' + d.icon; });
+
+        function addForm(d) {
+            draw(formwrap, [d]);
+            d3.select(this).remove();
+            if (!wrap.selectAll('button').node()) wrap.remove();
+        }
+    }
+
+    function formKey(d) {
+        return d.key || String(d.keys);
+    }
+
+    function draw(selection, form) {
+
         var sections = selection.selectAll('div.preset-section')
-            .data(preset.form)
+            .data(form, formKey)
             .enter()
             .append('div')
-            .attr('class', 'preset-section fillL inspector-inner col12');
-
-        sections.each(function(d) {
-            var s = d3.select(this);
-            var wrap = s.append('div')
+            .attr('class', 'preset-section fillL inspector-inner col12')
+            .append('div')
                 .attr('class', 'preset-section-input');
 
-           wrap.append('div')
+           sections.append('div')
                 .attr('class', 'col3 preset-label')
                 .append('h4')
-                .attr('for', 'input-' + d.key)
+                .attr('for', function(d) { return 'input-' + d.key; })
                 .text(function(d) { return d.label(); });
 
-            input.call(wrap.append('div')
-                .attr('class', 'col9 preset-input'), d);
-        });
-        if (tags) event.setTags(tags);
+           sections.append('div')
+                .attr('class', 'col9 preset-input')
+                .each(input);
     }
 
     presets.rendered = function() {
@@ -59,9 +93,19 @@ iD.ui.preset = function(context) {
         return presets;
     };
 
-    presets.change = function(_) {
-        tags = _;
-        event.setTags(_);
+    presets.change = function(t) {
+        tags = t;
+
+        function haveKey(k) { return k && !!tags[k]; }
+
+        formbuttonwrap.selectAll('button').each(function(p) {
+            if (haveKey(p.key) || _.any(p.keys, haveKey)) {
+                draw(formwrap, [p]);
+                d3.select(this).remove();
+            }
+        });
+
+        event.setTags(tags);
         return presets;
     };
 

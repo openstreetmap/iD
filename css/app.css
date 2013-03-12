@@ -664,6 +664,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin-left: 25%;
     padding-left: 10px;
 }
+
+button.preset-add-form {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
 .preset-fav button.fav {
     height: 30px;
     margin: 5px;
