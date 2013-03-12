@@ -118,9 +118,13 @@ iD.modes.DragNode = function(context) {
                 connectAnnotation(d));
 
         } else if (d.type === 'node' && adjacent(d)) {
-            context.replace(
+            if (wasMidpoint) {
+                context.history().pop();
+            } else {
+                context.replace(
                     iD.actions.DeleteNode(entity.id),
                     t('operations.delete.annotation.vertex'));
+            }
 
         } else if (d.type === 'node' && d.id !== entity.id) {
             context.replace(
