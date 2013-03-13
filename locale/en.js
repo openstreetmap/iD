@@ -186,7 +186,8 @@ locale.en = {
         additional: "Additional tags",
         choose: "Select feature type",
         results: "{n} results for {search}",
-        reference: "View on OpenStreetMap Wiki →"
+        reference: "View on OpenStreetMap Wiki →",
+        back_tooltip: "Change feature type"
     },
 
     background: {

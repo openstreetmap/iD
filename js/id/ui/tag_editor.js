@@ -32,10 +32,21 @@ iD.ui.TagEditor = function(context) {
         selection.html('');
 
         var messagewrap = selection.append('div')
-            .attr('class', 'message inspector-inner fillL');
+            .attr('class', 'message fillL');
 
-        var message = messagewrap.append('h3')
-            .text(t('inspector.choose'));
+        messagewrap.append('button')
+            .attr('class', 'tooltip-bottom preset-reset fl')
+            .call(bootstrap.tooltip()
+                .title(t('inspector.back_tooltip'))
+                .placement('left'))
+            .on('click', function() {
+                event.choose();
+            })
+            .append('span').attr('class','icon back');
+
+        messagewrap.append('h3')
+            .attr('class', 'inspector-inner fl')
+            .text(t('inspector.editing'));
 
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()));
@@ -45,11 +56,8 @@ iD.ui.TagEditor = function(context) {
         var typewrap = headerwrap.append('div')
             .attr('class','col3 type');
 
-        var typebutton = typewrap.append('button')
-            .attr('class','col12 grid-entry')
-            .on('click', function() {
-                event.choose();
-            });
+        var typebutton = typewrap.append('div')
+            .attr('class','col12 grid-entry fillL');
 
         typebutton.append('div')
             .attr('class', 'icon icon-pre-text' + (preset ?  ' preset-' + preset.icon : ''));
@@ -90,8 +98,6 @@ iD.ui.TagEditor = function(context) {
             tageditorpreset.call(presetUI
                 .preset(preset));
         }
-
-        message.text(t('inspector.editing', { type: preset.name }));
 
         editorwrap.append('div')
             .attr('class','inspector-inner col12 fillL2').call(tagList, preset.name === 'other');

@@ -290,7 +290,6 @@ form.hide {
 .content {
     border-radius: 4px;
     box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.7);
-    overflow: hidden;
 }
 
 .pad1    {padding: 10px;}
@@ -500,6 +499,7 @@ button[disabled] .label {
 .icon.nearby     { background-position: -340px 0px;}
 .icon.geolocate  { background-position: -360px 0px;}
 .icon.warning    { background-position: -380px 0px;}
+.icon.back       { background-position: -420px 0px;}
 
 .icon.search  { background-position: -280px 0px;}
 
@@ -575,7 +575,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     max-width: 500px;
     position: relative;
     border-radius: 0 0 0 4px;
-    overflow: hidden;
 }
 
 .inspector-body {
@@ -589,14 +588,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
 }
 
-.inspector-inner.message {
+.inspector-wrap .message button.preset-reset {
+    height: 100%;
+    border-radius: 0;
+    border-right: 1px solid #CCC;
+    width: 12.5%;
+}
+
+.inspector-wrap .message {
     height: 60px;
-    padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 
-.inspector-inner.message h3 {
-    line-height: 40px;
+.inspector-wrap .message h3 {
+    display: block;
+    line-height: 20px;
 }
 
 .inspector-toggle {
@@ -1065,6 +1071,7 @@ div.combobox {
 }
 
 .grid-entry .label {
+    font-weight: bold;
     text-align: center;
     display: block;
     position: absolute;
@@ -1825,7 +1832,7 @@ a.success-action {
 
 .tooltip.left .tooltip-arrow {
     top: 50%;
-    right: 5px;
+    right: -5px;
     margin-top: -5px;
     border-left-color: white;
     border-width: 5px 0 5px 5px;
