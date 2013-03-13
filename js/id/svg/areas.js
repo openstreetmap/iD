@@ -49,6 +49,7 @@ iD.svg.Areas = function(projection) {
                     return;
                 }
             }
+            this.style.fill = '';
         });
     }
 
