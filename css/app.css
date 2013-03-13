@@ -298,6 +298,11 @@ form.hide {
 .margin1 {margin: 10px;}
 .margin2 {margin: 20px;}
 
+.loading {
+    background: url(../img/loader_bg.gif);
+    background-size:5px 5px;
+}
+
 /* Buttons */
 
 button {
