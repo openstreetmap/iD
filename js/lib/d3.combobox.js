@@ -16,7 +16,7 @@ d3.combobox = function() {
         var idx = -1;
         input = selection.select('input').classed('combobox-input', true);
 
-        selection.append('a', selection.select('input'))
+        selection.append('div', selection.select('input'))
             .attr('class', 'combobox-carat')
             .on('mousedown', stop)
             .on('mousedown', function() {

@@ -645,23 +645,28 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: 5px;
 }
 
-/* preset form */
+/* preset form basics */
 
 .inspector-preset {
     border-bottom: 1px solid #ccc;
 }
 
-.preset-section.inspector-inner { 
+.preset-section.inspector-inner {
     padding-bottom: 0;
 }
 
-.preset-section.inspector-inner:last-child { 
+.preset-section.inspector-inner:last-of-type {
     padding-bottom: 20px;
 }
 
 .inspector-body .name {
     height: 110px;
     border-bottom: 1px solid #ccc;
+}
+
+.name input.major {
+    padding-top: 35px;
+    height: 70px;
 }
 
 .inspector-body .name h4,
@@ -688,15 +693,6 @@ h4 + .preset-input input:first-child {
     height: 100px;
 }
 
-.name input.major {
-    padding-top: 35px;
-    height: 70px;
-}
-
-input[type=number] {
-    width: 50%;
-}
-
 .preset-section h4[for="input-building:levels"],
 .preset-section.checkselect h4 {
     right: 50%;
@@ -713,6 +709,139 @@ button.preset-add-field {
     margin: 5px;
     padding: 0 10px;
 }
+
+/* preset form numbers */
+
+input[type=number] {
+    width: 50%;
+}
+
+.spin-control {
+    width: 60px;
+    border-left: 1px solid #CCC;
+    height: 30px;
+    display: inline-block;
+    margin-left: -60px;
+    margin-bottom: -11px;
+    position: relative;
+}
+
+.spin-control button {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 50%;
+    border: 1px solid #CCC;
+    border-radius: 0;
+    border-left: 0;
+}
+
+.spin-control button.descend {
+    border-bottom-right-radius: 4px;
+}
+
+.spin-control button.descend::after,
+.spin-control button.ascend::after {
+    content:"";
+    height: 0; width: 0;
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    margin: auto;
+}
+
+.spin-control button.descend::after {
+    border-top: 5px solid #CCC;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.spin-control button.ascend::after {
+    border-bottom: 5px solid #CCC;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+/* preset form checkbox */
+
+.checkselect label {
+    display: block;
+    padding: 35px 5px 5px 5px;
+    border-radius: 4px;
+    width: 50%;
+    box-sizing: border-box;
+    color: #999;
+    border: 1px solid #CCC;
+}
+
+.checkselect label:hover {
+    cursor: pointer;
+    background: #f1f1f1;
+}
+
+.checkselect .set {
+    color: inherit;
+}
+
+.checkselect input[type="checkbox"] {
+    margin-right: 5px;
+    width: 20px;
+    vertical-align: middle;
+    opacity: 0.5;
+}
+.checkselect .set input[type="checkbox"] {
+    opacity: 1;
+}
+
+/* Preset form radio button */
+
+.radio-wrap {
+    display: block;
+    padding: 30px 0 0 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #999;
+    border: 1px solid #CCC;
+    overflow: hidden;
+}
+
+.radio-wrap button {
+    font-weight: normal;
+    padding: 2px 10px;
+    height: 30px;
+    border-radius: 0;
+    border-right: 1px solid #CCC;
+    width: 20%;
+}
+
+.radio-wrap button:last-child {
+    border-right: 0;
+}
+
+/* Preset form address */
+
+.preset-section .addr-housename {
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+
+.preset-section .addr-number {
+    width: 20%;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 0;
+}
+
+.preset-section .addr-street {
+    width: 80%;
+    border-radius: 0;
+    border-bottom: none;
+}
+
+.preset-section .addr-city {
+    border-radius: 0 0 4px 4px;
+}
+
+/* combobox dropdown styles */
 
 div.combobox {
     width:155px;
@@ -759,7 +888,6 @@ div.combobox {
     margin-left: -15px;
     margin-right: 5px;
     display:inline-block;
-    cursor: pointer;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
@@ -767,7 +895,7 @@ div.combobox {
 }
 
 .rowselect .item {
-    cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
 .rowselect .item label:hover{
@@ -784,84 +912,6 @@ div.combobox {
 
 .rowselect .item div {
     text-align: center;
-}
-
-.checkselect label {
-    display: block;
-    padding: 35px 5px 5px 5px;
-    border-radius: 4px;
-    width: 50%;
-    box-sizing: border-box;
-    color: #999;
-    border: 1px solid #CCC;
-}
-
-.checkselect label:hover {
-    cursor: pointer;
-    background: #f1f1f1;
-}
-
-.checkselect .set {
-    color: inherit;
-}
-
-.checkselect input[type="checkbox"] {
-    margin-right: 5px;
-    width: 20px;
-    vertical-align: middle;
-    opacity: 0.5;
-}
-.checkselect .set input[type="checkbox"] {
-    opacity: 1;
-}
-
-/* Radio buttons */
-
-.radio-wrap { 
-    display: block;
-    padding: 30px 0 0 0;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: #999;
-    border: 1px solid #CCC;
-    overflow: hidden;
-}
-
-.radio-wrap button {
-    font-weight: normal;
-    padding: 2px 10px;
-    height: 30px;
-    border-radius: 0;
-    border-right: 1px solid #CCC;
-    width: 20%;
-}
-
-.radio-wrap button:last-child { 
-    border-right: 0;
-}
-
-/* Address input */
-
-.preset-section .addr-housename {
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
-}
-
-.preset-section .addr-number {
-    width: 20%;
-    border-right: none;
-    border-bottom: none;
-    border-radius: 0;
-}
-
-.preset-section .addr-street {
-    width: 80%;
-    border-radius: 0;
-    border-bottom: none;
-}
-
-.preset-section .addr-city {
-    border-radius: 0 0 4px 4px;
 }
 
 /* tag editor */
