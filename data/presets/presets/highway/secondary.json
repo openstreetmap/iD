@@ -1,14 +1,5 @@
 {
     "name": "secondary road",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "secondary"
-        },
-        "terms": []
-    },
     "icon": "highway-secondary",
     "fields": [
         "oneway",
@@ -16,5 +7,12 @@
         "access",
         "maxspeed",
         "surface"
-    ]
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "secondary"
+    },
+    "terms": []
 }

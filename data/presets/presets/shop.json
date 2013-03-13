@@ -1,19 +1,17 @@
 {
     "name": "shop",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "shop": "*"
-        },
-        "terms": []
-    },
     "icon": "shop",
     "fields": [
         "shop",
         "address",
         "opening_hours"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "*"
+    },
+    "terms": []
 }

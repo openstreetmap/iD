@@ -1,17 +1,15 @@
 {
     "name": "aeroway",
-    "match": {
-        "geometry": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "tags": {
-            "aeroway": "*"
-        }
-    },
     "fields": [
         "aeroway"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "aeroway": "*"
+    }
 }

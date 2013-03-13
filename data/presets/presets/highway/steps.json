@@ -1,19 +1,17 @@
 {
     "name": "steps",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "steps"
-        },
-        "terms": [
-            "stairs",
-            "staircase"
-        ]
-    },
     "fields": [
         "access",
         "surface"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "steps"
+    },
+    "terms": [
+        "stairs",
+        "staircase"
     ]
 }

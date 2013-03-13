@@ -164,7 +164,7 @@ iD.ui.TagEditor = function(context) {
             name.property('value', tags.name || '');
             presetUI.change(tags);
             var rendered = ['name']
-                .concat(Object.keys(preset.match.tags))
+                .concat(Object.keys(preset.tags))
                 .concat(presetUI.rendered());
             tagList.tags(_.omit(tags, rendered));
         }

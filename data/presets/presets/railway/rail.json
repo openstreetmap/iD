@@ -1,13 +1,11 @@
 {
     "name": "rail",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "railway": "rail"
-        },
-        "terms": []
+    "icon": "railway-rail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "rail"
     },
-    "icon": "railway-rail"
+    "terms": []
 }

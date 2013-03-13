@@ -1,15 +1,13 @@
 {
     "name": "place",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "place": "*"
-        }
-    },
     "fields": [
         "place"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "*"
+    }
 }

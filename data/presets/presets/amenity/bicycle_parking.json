@@ -1,18 +1,16 @@
 {
     "name": "bicycle parking",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "bicycle_parking"
-        }
-    },
     "icon": "bicycle",
     "fields": [
         "bicycle_parking",
         "capacity",
         "operator"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "bicycle_parking"
+    }
 }

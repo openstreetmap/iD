@@ -1,7 +1,5 @@
 [{
-    "match": {
-        "geometry": "line"
-    },
+    "geometry": "line",
     "icon": "highway",
     "name": "roads",
     "members": [

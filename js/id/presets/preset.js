@@ -11,11 +11,11 @@ iD.presets.Preset = function(preset, fields) {
     }
 
     preset.matchGeometry = function(entity, resolver) {
-        return preset.match.geometry.indexOf(entity.geometry(resolver)) >= 0;
+        return preset.geometry.indexOf(entity.geometry(resolver)) >= 0;
     };
 
     preset.matchTags = function(entity) {
-        var tags = preset.match.tags,
+        var tags = preset.tags,
             score = 0;
         for (var t in tags) {
             if (entity.tags[t] === tags[t]) {
@@ -30,7 +30,7 @@ iD.presets.Preset = function(preset, fields) {
     };
 
     preset.removeTags = function(tags, geometry) {
-        tags = _.omit(tags, _.keys(preset.match.tags));
+        tags = _.omit(tags, _.keys(preset.tags));
 
         for (var i in preset.fields) {
             var field = preset.fields[i];
@@ -43,8 +43,8 @@ iD.presets.Preset = function(preset, fields) {
     };
 
     preset.applyTags = function(tags, geometry) {
-        for (var k in preset.match.tags) {
-            if (preset.match.tags[k] !== '*') tags[k] = preset.match.tags[k];
+        for (var k in preset.tags) {
+            if (preset.tags[k] !== '*') tags[k] = preset.tags[k];
         }
 
         for (var f in preset.fields) {

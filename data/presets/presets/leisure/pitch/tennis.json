@@ -1,18 +1,16 @@
 {
     "name": "tennis court",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "leisure": "pitch",
-            "sport": "tennis"
-        },
-        "terms": []
-    },
     "icon": "tennis",
     "fields": [
         "surface"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "tennis"
+    },
+    "terms": []
 }

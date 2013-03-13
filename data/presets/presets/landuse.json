@@ -1,15 +1,13 @@
 {
     "name": "landuse",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "landuse": "*"
-        }
-    },
     "fields": [
         "landuse"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "*"
+    }
 }

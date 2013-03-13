@@ -1,15 +1,13 @@
 {
     "name": "water",
-    "match": {
-        "geometry": [
-            "area"
-        ],
-        "tags": {
-            "natural": "water"
-        },
-        "terms": []
-    },
     "fields": [
         "water"
-    ]
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water"
+    },
+    "terms": []
 }

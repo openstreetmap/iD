@@ -3,28 +3,22 @@ describe("iD.presets.Collection", function() {
     var p = {
         other: iD.presets.Preset({
             name: 'other',
-            match: {
-                tags: {},
-                geometry: ['point', 'vertex', 'line', 'area']
-            }
+            tags: {},
+            geometry: ['point', 'vertex', 'line', 'area']
         }),
         residential: iD.presets.Preset({
             name: 'residential',
-            match: {
-                tags: {
-                    highway: 'residential'
-                },
-                geometry: ['line']
-            }
+            tags: {
+                highway: 'residential'
+            },
+            geometry: ['line']
         }),
         park: iD.presets.Preset({
             name: 'park',
-            match: {
-                tags: {
-                    leisure: 'park'
-                },
-                geometry: ['point', 'area']
-            }
+            tags: {
+                leisure: 'park'
+            },
+            geometry: ['point', 'area']
         })
     };
 

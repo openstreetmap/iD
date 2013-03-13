@@ -1,15 +1,13 @@
 {
     "name": "natural",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "natural": "*"
-        }
-    },
     "fields": [
         "natural"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "natural": "*"
+    }
 }

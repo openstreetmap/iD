@@ -1,14 +1,5 @@
 {
     "name": "path",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "path"
-        },
-        "terms": []
-    },
     "icon": "highway-footway",
     "fields": [
         "oneway",
@@ -16,5 +7,12 @@
         "access",
         "maxspeed",
         "surface"
-    ]
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "path"
+    },
+    "terms": []
 }

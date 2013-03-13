@@ -1,16 +1,14 @@
 {
     "name": "grave yard",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "grave_yard"
-        }
-    },
     "icon": "cemetery",
     "fields": [
         "religion"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "grave_yard"
+    }
 }

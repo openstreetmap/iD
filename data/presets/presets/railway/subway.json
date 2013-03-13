@@ -1,13 +1,11 @@
 {
     "name": "subway",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "railway": "subway"
-        },
-        "terms": []
+    "icon": "railway-rail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "subway"
     },
-    "icon": "railway-rail"
+    "terms": []
 }

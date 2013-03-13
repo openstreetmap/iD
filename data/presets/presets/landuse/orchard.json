@@ -1,16 +1,11 @@
 {
     "name": "orchard",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "landuse": "orchard"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "orchard"
     },
-    "fields": [
-    ]
+    "terms": []
 }

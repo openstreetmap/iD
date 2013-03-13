@@ -1,14 +1,5 @@
 {
     "name": "residential road",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "residential"
-        },
-        "terms": []
-    },
     "icon": "highway-residential",
     "fields": [
         "oneway",
@@ -16,5 +7,12 @@
         "access",
         "maxspeed",
         "surface"
-    ]
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "residential"
+    },
+    "terms": []
 }

@@ -1,19 +1,17 @@
 {
     "name": "library",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "library"
-        },
-        "terms": []
-    },
     "icon": "library",
     "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "library"
+    },
+    "terms": []
 }

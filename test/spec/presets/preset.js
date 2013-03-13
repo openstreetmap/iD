@@ -11,47 +11,37 @@ describe('iD.presets.Preset', function() {
     var p = {
         other: iD.presets.Preset({
             name: 'other',
-            match: {
-                tags: {},
-                geometry: ['point', 'vertex', 'line', 'area']
-            }
+            tags: {},
+            geometry: ['point', 'vertex', 'line', 'area']
         }),
         residential: iD.presets.Preset({
             name: 'residential',
-            match: {
-                tags: {
-                    highway: 'residential'
-                },
-                geometry: ['line']
-            }
+            tags: {
+                highway: 'residential'
+            },
+            geometry: ['line']
         }),
         tennis: iD.presets.Preset({
             name: 'tennis',
-            match: {
-                tags: {
-                    leisure: 'pitch',
-                    sport: 'tennis'
-                },
-                geometry: ['area']
-            }
+            tags: {
+                leisure: 'pitch',
+                sport: 'tennis'
+            },
+            geometry: ['area']
         }),
         building: iD.presets.Preset({
             name: 'building',
-            match: {
-                tags: {
-                    building: '*'
-                },
-                geometry: ['area']
-            }
+            tags: {
+                building: '*'
+            },
+            geometry: ['area']
         }),
         cafe: iD.presets.Preset({
             name: 'cafe',
-            match: {
-                tags: {
-                    amenity: 'cafe'
-                },
-                geometry: ['point', 'area']
+            tags: {
+                amenity: 'cafe'
             },
+            geometry: ['point', 'area'],
             fields: ['building_area']
         }, fields)
     };

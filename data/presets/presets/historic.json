@@ -1,15 +1,13 @@
 {
     "name": "historic",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "historic": "*"
-        }
-    },
     "fields": [
         "historic"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "historic": "*"
+    }
 }

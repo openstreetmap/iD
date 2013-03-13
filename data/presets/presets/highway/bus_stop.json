@@ -1,17 +1,15 @@
 {
     "name": "bus stop",
-    "match": {
-        "geometry": [
-            "point"
-        ],
-        "tags": {
-            "highway": "bus_stop"
-        },
-        "terms": []
-    },
     "icon": "bus",
     "fields": [
         "operator",
         "shelter"
-    ]
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "highway": "bus_stop"
+    },
+    "terms": []
 }

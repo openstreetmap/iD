@@ -1,13 +1,11 @@
 {
     "name": "monument",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "historic": "monument"
-        }
-    },
-    "icon": "monument"
+    "icon": "monument",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "historic": "monument"
+    }
 }

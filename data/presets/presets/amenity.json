@@ -1,15 +1,13 @@
 {
     "name": "amenity",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "*"
-        }
-    },
     "fields": [
         "amenity"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "*"
+    }
 }

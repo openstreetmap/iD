@@ -1,42 +1,40 @@
 {
     "name": "stream",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "terms": [
-            "beck",
-            "branch",
-            "brook",
-            "burn",
-            "course",
-            "creek",
-            "current",
-            "drift",
-            "flood",
-            "flow",
-            "freshet",
-            "race",
-            "rill",
-            "rindle",
-            "rivulet",
-            "run",
-            "runnel",
-            "rush",
-            "spate",
-            "spritz",
-            "surge",
-            "tide",
-            "torrent",
-            "tributary",
-            "watercourse"
-        ],
-        "tags": {
-            "waterway": "stream"
-        }
-    },
     "icon": "waterway-river",
     "fields": [
         "layer"
-    ]
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "beck",
+        "branch",
+        "brook",
+        "burn",
+        "course",
+        "creek",
+        "current",
+        "drift",
+        "flood",
+        "flow",
+        "freshet",
+        "race",
+        "rill",
+        "rindle",
+        "rivulet",
+        "run",
+        "runnel",
+        "rush",
+        "spate",
+        "spritz",
+        "surge",
+        "tide",
+        "torrent",
+        "tributary",
+        "watercourse"
+    ],
+    "tags": {
+        "waterway": "stream"
+    }
 }

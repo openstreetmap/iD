@@ -1,17 +1,14 @@
 {
     "name": "beach",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "natural": "beach"
-        }
-    },
     "fields": [
         "surface"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "beach"
+    }
 }

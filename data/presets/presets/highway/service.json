@@ -1,14 +1,5 @@
 {
     "name": "service road",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "service"
-        },
-        "terms": []
-    },
     "icon": "highway-service",
     "fields": [
         "service",
@@ -17,5 +8,12 @@
         "access",
         "maxspeed",
         "surface"
-    ]
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "service"
+    },
+    "terms": []
 }

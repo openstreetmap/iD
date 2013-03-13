@@ -1,14 +1,11 @@
 {
     "name": "spring",
-    "match": {
-        "geometry": [
-            "point",
-            "vertex"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "natural": "spring"
-        }
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "spring"
     }
 }

@@ -1,13 +1,11 @@
 {
     "name": "weir",
-    "match": {
-        "geometry": [
-            "vertex",
-            "line"
-        ],
-        "tags": {
-            "waterway": "weir"
-        }
-    },
-    "icon": "dam"
+    "icon": "dam",
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "waterway": "weir"
+    }
 }

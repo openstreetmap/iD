@@ -1,18 +1,15 @@
 {
     "name": "toilets",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "amenity": "toilets"
-        }
-    },
     "fields": [
         "operator",
         "building"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "toilets"
+    }
 }

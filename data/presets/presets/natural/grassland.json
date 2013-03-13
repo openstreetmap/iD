@@ -1,14 +1,11 @@
 {
     "name": "grassland",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "natural": "grassland"
-        }
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "grassland"
     }
 }

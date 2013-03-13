@@ -1,19 +1,17 @@
 {
     "name": "office",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "office": "*"
-        },
-        "terms": []
-    },
     "icon": "commercial",
     "fields": [
         "office",
         "address",
         "opening_hours"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "*"
+    },
+    "terms": []
 }

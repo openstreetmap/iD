@@ -1,41 +1,39 @@
 {
     "name": "bank",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "coffer",
-            "countinghouse",
-            "credit union",
-            "depository",
-            "exchequer",
-            "fund",
-            "hoard",
-            "investment firm",
-            "repository",
-            "reserve",
-            "reservoir",
-            "safe",
-            "savings",
-            "stock",
-            "stockpile",
-            "store",
-            "storehouse",
-            "thrift",
-            "treasury",
-            "trust company",
-            "vault"
-        ],
-        "tags": {
-            "amenity": "bank"
-        }
-    },
     "icon": "bank",
     "fields": [
         "atm",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "coffer",
+        "countinghouse",
+        "credit union",
+        "depository",
+        "exchequer",
+        "fund",
+        "hoard",
+        "investment firm",
+        "repository",
+        "reserve",
+        "reservoir",
+        "safe",
+        "savings",
+        "stock",
+        "stockpile",
+        "store",
+        "storehouse",
+        "thrift",
+        "treasury",
+        "trust company",
+        "vault"
+    ],
+    "tags": {
+        "amenity": "bank"
+    }
 }

@@ -1,15 +1,13 @@
 {
     "name": "tourism",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "tourism": "*"
-        }
-    },
     "fields": [
         "tourism"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "tourism": "*"
+    }
 }

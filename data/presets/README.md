@@ -16,27 +16,25 @@ A basic preset is of the form:
 ```javascript
 {
     "name": "park",
-    "match": {
-        // the geometry types for which this preset is valid.
-        // options are point, area, line, and vertex.
-        // vertexes are points that are parts of lines, like the nodes
-        // in a road
-        // lines are unclosed ways, and areas are closed ways
-        "geometry": [
-            "point", "area"
-        ],
-        // terms are synonyms for the preset - these are added to fuel
-        // the search functionality. searching for 'woodland' will bring
-        // up this 'park' preset
-        "terms": [
-            "esplanade",
-            "village green",
-            "woodland"
-        ],
-        // tags that automatically added to the feature when it's selected
-        "tags": {
-            "leisure": "park"
-        }
+    // the geometry types for which this preset is valid.
+    // options are point, area, line, and vertex.
+    // vertexes are points that are parts of lines, like the nodes
+    // in a road
+    // lines are unclosed ways, and areas are closed ways
+    "geometry": [
+        "point", "area"
+    ],
+    // terms are synonyms for the preset - these are added to fuel
+    // the search functionality. searching for 'woodland' will bring
+    // up this 'park' preset
+    "terms": [
+        "esplanade",
+        "village green",
+        "woodland"
+    ],
+    // tags that automatically added to the feature when it's selected
+    "tags": {
+        "leisure": "park"
     },
     // the icon in iD which represents this feature
     "icon": "park",

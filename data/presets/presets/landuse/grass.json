@@ -1,16 +1,11 @@
 {
     "name": "grass",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "landuse": "grass"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "grass"
     },
-    "fields": [
-    ]
+    "terms": []
 }

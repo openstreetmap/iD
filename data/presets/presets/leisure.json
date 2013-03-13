@@ -1,15 +1,13 @@
 {
     "name": "leisure",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "leisure": "*"
-        }
-    },
     "fields": [
         "leisure"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "*"
+    }
 }

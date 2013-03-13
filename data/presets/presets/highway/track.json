@@ -1,14 +1,5 @@
 {
     "name": "track",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "track"
-        },
-        "terms": []
-    },
     "icon": "highway-track",
     "fields": [
         "oneway",
@@ -16,5 +7,12 @@
         "access",
         "maxspeed",
         "surface"
-    ]
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "track"
+    },
+    "terms": []
 }

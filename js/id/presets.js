@@ -6,10 +6,8 @@ iD.presets = function(context) {
     var other = iD.presets.Preset({
             name: 'other',
             icon: 'marker-stroked',
-            match: {
-                tags: {},
-                geometry: ['point', 'vertex', 'line', 'area']
-            }
+            tags: {},
+            geometry: ['point', 'vertex', 'line', 'area']
         }),
         all = iD.presets.Collection([iD.presets.Preset(other)]),
         defaults = { area: all, line: all, point: all, vertex: all },

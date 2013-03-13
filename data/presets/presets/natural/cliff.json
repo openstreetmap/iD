@@ -1,16 +1,13 @@
 {
     "name": "cliff",
-    "match": {
-        "geometry": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "natural": "cliff"
-        }
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "cliff"
     }
 }

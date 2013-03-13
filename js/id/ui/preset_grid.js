@@ -104,8 +104,8 @@ iD.ui.PresetGrid = function(context) {
                     if (d.members) {
                         s += 'category';
                     } else {
-                        for (var i in d.match.tags) {
-                            s += ' tag-' + i + ' tag-' + i + '-' + d.match.tags[i];
+                        for (var i in d.tags) {
+                            s += ' tag-' + i + ' tag-' + i + '-' + d.tags[i];
                         }
                     }
                     return s;
@@ -154,9 +154,9 @@ iD.ui.PresetGrid = function(context) {
                     var params = {},
                         locale = iD.detect().locale.split('-')[0] || 'en';
 
-                    params.key = Object.keys(d.match.tags)[0];
-                    if (d.match.tags[params.key] !== '*') {
-                        params.value = d.match.tags[params.key];
+                    params.key = Object.keys(d.tags)[0];
+                    if (d.tags[params.key] !== '*') {
+                        params.value = d.tags[params.key];
                     }
 
                     taginfo.docs(params, function(err, data) {

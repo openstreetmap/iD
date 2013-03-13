@@ -1,17 +1,15 @@
 {
     "name": "wood",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "natural": "wood"
-        },
-        "terms": []
-    },
     "fields": [
         "wood"
     ],
-    "icon": "park2"
+    "icon": "park2",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "natural": "wood"
+    },
+    "terms": []
 }

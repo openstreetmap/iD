@@ -1,18 +1,16 @@
 {
     "name": "golf course",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "leisure": "golf_course"
-        },
-        "terms": []
-    },
     "icon": "golf",
     "fields": [
         "operator",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "golf_course"
+    },
+    "terms": []
 }

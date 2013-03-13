@@ -1,40 +1,38 @@
 {
     "name": "supermarket",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "bazaar",
-            "boutique",
-            "chain",
-            "co-op",
-            "cut-rate store",
-            "discount store",
-            "five-and-dime",
-            "flea market",
-            "galleria",
-            "mall",
-            "mart",
-            "outlet",
-            "outlet store",
-            "shop",
-            "shopping center",
-            "shopping plaza",
-            "stand",
-            "store",
-            "supermarket",
-            "thrift shop"
-        ],
-        "tags": {
-            "shop": "supermarket"
-        }
-    },
     "icon": "grocery",
     "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bazaar",
+        "boutique",
+        "chain",
+        "co-op",
+        "cut-rate store",
+        "discount store",
+        "five-and-dime",
+        "flea market",
+        "galleria",
+        "mall",
+        "mart",
+        "outlet",
+        "outlet store",
+        "shop",
+        "shopping center",
+        "shopping plaza",
+        "stand",
+        "store",
+        "supermarket",
+        "thrift shop"
+    ],
+    "tags": {
+        "shop": "supermarket"
+    }
 }

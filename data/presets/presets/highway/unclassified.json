@@ -1,14 +1,5 @@
 {
     "name": "unclassified",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "unclassified"
-        },
-        "terms": []
-    },
     "icon": "highway",
     "fields": [
         "oneway",
@@ -16,5 +7,12 @@
         "access",
         "maxspeed",
         "surface"
-    ]
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "unclassified"
+    },
+    "terms": []
 }

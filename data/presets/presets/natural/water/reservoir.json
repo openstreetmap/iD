@@ -1,14 +1,11 @@
 {
     "name": "reservoir",
-    "match": {
-        "geometry": [
-            "area"
-        ],
-        "tags": {
-            "natural": "water",
-            "water": "reservoir"
-        },
-        "terms": [
-        ]
-    }
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "reservoir"
+    },
+    "terms": []
 }

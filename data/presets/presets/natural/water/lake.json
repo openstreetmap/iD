@@ -1,17 +1,15 @@
 {
     "name": "lake",
-    "match": {
-        "geometry": [
-            "area"
-        ],
-        "tags": {
-            "natural": "water",
-            "water": "lake"
-        },
-        "terms": [
-            "lakelet",
-            "loch",
-            "mere"
-        ]
-    }
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "lake"
+    },
+    "terms": [
+        "lakelet",
+        "loch",
+        "mere"
+    ]
 }

@@ -1,13 +1,11 @@
 {
     "name": "village",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "place": "village"
-        }
-    },
-    "icon": "square-stroked"
+    "icon": "square-stroked",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "village"
+    }
 }

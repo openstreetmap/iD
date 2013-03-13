@@ -1,13 +1,11 @@
 {
     "name": "hamlet",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "place": "hamlet"
-        }
-    },
-    "icon": "triangle-stroked"
+    "icon": "triangle-stroked",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "hamlet"
+    }
 }

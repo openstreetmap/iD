@@ -1,19 +1,17 @@
 {
     "name": "parking",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "parking"
-        },
-        "terms": []
-    },
     "icon": "parking",
     "fields": [
         "fee",
         "access",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "parking"
+    },
+    "terms": []
 }

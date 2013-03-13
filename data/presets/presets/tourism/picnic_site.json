@@ -1,19 +1,16 @@
 {
     "name": "picnic site",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "tourism": "picnic_site"
-        }
-    },
     "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "tourism": "picnic_site"
+    }
 }

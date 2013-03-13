@@ -1,19 +1,17 @@
 {
     "name": "pond",
-    "match": {
-        "geometry": [
-            "area"
-        ],
-        "tags": {
-            "natural": "water",
-            "water": "pond"
-        },
-        "terms": [
-            "lakelet",
-            "millpond",
-            "tarn",
-            "pool",
-            "mere"
-        ]
-    }
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "pond"
+    },
+    "terms": [
+        "lakelet",
+        "millpond",
+        "tarn",
+        "pool",
+        "mere"
+    ]
 }

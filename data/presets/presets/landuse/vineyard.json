@@ -1,16 +1,11 @@
 {
     "name": "vineyard",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "landuse": "vineyard"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "vineyard"
     },
-    "fields": [
-    ]
+    "terms": []
 }

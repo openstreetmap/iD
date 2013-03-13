@@ -1,51 +1,49 @@
 {
     "name": "restaurant",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "bar",
-            "cafeteria",
-            "café",
-            "canteen",
-            "chophouse",
-            "coffee shop",
-            "diner",
-            "dining room",
-            "dive*",
-            "doughtnut shop",
-            "drive-in",
-            "eatery",
-            "eating house",
-            "eating place",
-            "fast-food place",
-            "greasy spoon",
-            "grill",
-            "hamburger stand",
-            "hashery",
-            "hideaway",
-            "hotdog stand",
-            "inn",
-            "joint*",
-            "luncheonette",
-            "lunchroom",
-            "night club",
-            "outlet*",
-            "pizzeria",
-            "saloon",
-            "soda fountain",
-            "watering hole"
-        ],
-        "tags": {
-            "amenity": "restaurant"
-        }
-    },
     "icon": "restaurant",
     "fields": [
         "cuisine",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "cafeteria",
+        "café",
+        "canteen",
+        "chophouse",
+        "coffee shop",
+        "diner",
+        "dining room",
+        "dive*",
+        "doughtnut shop",
+        "drive-in",
+        "eatery",
+        "eating house",
+        "eating place",
+        "fast-food place",
+        "greasy spoon",
+        "grill",
+        "hamburger stand",
+        "hashery",
+        "hideaway",
+        "hotdog stand",
+        "inn",
+        "joint*",
+        "luncheonette",
+        "lunchroom",
+        "night club",
+        "outlet*",
+        "pizzeria",
+        "saloon",
+        "soda fountain",
+        "watering hole"
+    ],
+    "tags": {
+        "amenity": "restaurant"
+    }
 }

@@ -1,20 +1,16 @@
 {
     "name": "airport",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "airplane",
-            "airport",
-            "aerodrome"
-        ],
-        "tags": {
-            "aeroway": "aerodrome"
-        }
-    },
     "icon": "airport",
-    "fields": [
-    ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "airplane",
+        "airport",
+        "aerodrome"
+    ],
+    "tags": {
+        "aeroway": "aerodrome"
+    }
 }

@@ -3,9 +3,7 @@ describe("iD.presets.Category", function() {
 
     beforeEach(function() {
         category = {
-            "match": {
-                "geometry": "line"
-            },
+            "geometry": "line",
             "icon": "highway",
             "name": "roads",
             "members": [
@@ -14,12 +12,10 @@ describe("iD.presets.Category", function() {
         };
         residential = iD.presets.Preset({
             name: 'residential',
-            match: {
-                tags: {
-                    highway: 'residential'
-                },
-                geometry: ['line']
-            }
+            tags: {
+                highway: 'residential'
+            },
+            geometry: ['line']
         });
     });
 

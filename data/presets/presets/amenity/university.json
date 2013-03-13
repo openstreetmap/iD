@@ -1,18 +1,16 @@
 {
     "name": "university",
-    "match": {
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "university"
-        },
-        "terms": []
-    },
     "icon": "college",
     "fields": [
         "operator",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "university"
+    },
+    "terms": []
 }

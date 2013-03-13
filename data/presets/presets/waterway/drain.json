@@ -1,12 +1,10 @@
 {
     "name": "drain",
-    "match": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "waterway": "drain"
-        }
-    },
-    "icon": "waterway-river"
+    "icon": "waterway-river",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "waterway": "drain"
+    }
 }
