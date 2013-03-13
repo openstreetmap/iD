@@ -3,7 +3,7 @@ var request = require('request'),
     fs = require('fs'),
     _ = require('../js/lib/lodash.js');
 
-var resources = ['core'];
+var resources = ['core', 'presets'];
 var outfile = './data/locales.js';
 var api = 'http://www.transifex.com/api/2/';
 var project = api + 'project/id-editor/';
@@ -22,11 +22,15 @@ var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
+    var out = '';
     var locale = {};
     locales.forEach(function(l) {
-        locale = _.extend(l);
+        locale = _.merge(locale, l);
     });
-    fs.writeFileSync(outfile, 'locale.locales = ' + JSON.stringify(locale));
+    for (var i in locale) {
+        out += 'locale.' + i + ' = ' + JSON.stringify(locale[i]) + ';';
+    }
+    fs.writeFileSync(outfile, out);
 });
 
 function getResource(resource, callback) {
