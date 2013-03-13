@@ -8,7 +8,9 @@ iD.ui.preset.radio = function(form) {
 
         selection.classed('preset-radio', true);
 
-        buttons = selection.selectAll('button')
+        var buttonwrap = selection.append('div').attr('class','radio-wrap');
+
+        buttons = buttonwrap.selectAll('button')
             .data(form.options)
             .enter()
             .append('button')
@@ -18,7 +20,7 @@ iD.ui.preset.radio = function(form) {
                     d3.select(this).classed('active', true);
                     change();
                 });
-        selection.append('button')
+        buttonwrap.append('button')
             .on('click', function() {
                 buttons.classed('active', false);
                 change();

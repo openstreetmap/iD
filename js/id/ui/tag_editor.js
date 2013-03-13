@@ -84,7 +84,7 @@ iD.ui.TagEditor = function(context) {
             .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset cf fillL');
+            .attr('class', 'inspector-preset cf fillL col12');
 
         if (preset) {
             tageditorpreset.call(presetUI

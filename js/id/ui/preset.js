@@ -30,7 +30,7 @@ iD.ui.preset = function(context) {
             .data(preset.form)
             .enter()
             .append('div')
-            .attr('class', 'fr preset-section fillL inspector-inner col9');
+            .attr('class', 'preset-section fillL inspector-inner col12');
 
         sections.each(function(d) {
             var s = d3.select(this);

@@ -582,7 +582,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-inner {
     padding: 20px;
     position: relative;
-    border-left: 1px solid #ccc;
 }
 
 .inspector-inner.message {
@@ -799,11 +798,29 @@ div.combobox {
     opacity: 1;
 }
 
-.preset-radio button {
-    margin-top: 40px;
+/* Radio buttons */
+
+.radio-wrap { 
+    display: block;
+    padding: 30px 0 0 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #999;
+    border: 1px solid #CCC;
+    overflow: hidden;
+}
+
+.radio-wrap button {
     font-weight: normal;
     padding: 2px 10px;
     height: 30px;
+    border-radius: 0;
+    border-right: 1px solid #CCC;
+    width: 20%;
+}
+
+.radio-wrap button:last-child { 
+    border-right: 0;
 }
 
 /* Address input */
@@ -831,10 +848,6 @@ div.combobox {
 }
 
 /* tag editor */
-
-.tag-wrap .grid-entry { 
-    border-right: 0;
-}
 
 .tag-list {
     margin-top: 10px;

@@ -75,7 +75,9 @@ iD.ui.Taglist = function(context) {
                 event.change(taglist.tags());
             });
 
-        inputs.append('input')
+        inputs.append('span')
+            .attr('class', 'input-wrap-position')
+            .append('input')
             .property('type', 'text')
             .attr('class', 'value')
             .attr('maxlength', 255)
