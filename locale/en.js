@@ -70,6 +70,15 @@ locale.en = {
                 area: "Squared the corners of an area."
             }
         },
+        simplify: {
+            title: "Simplify",
+            description: "Simplify this shape",
+            key: "A",
+            annotation: {
+                line: "Simplified a line",
+                area: "Simplified an area"
+            }
+        },
         'delete': {
             title: "Delete",
             description: "Remove this from the map.",
