@@ -8,7 +8,7 @@ locale.da = {
         add_line: {
             title: "Linje",
             description: "Linjer kan være veje, gader eller stier selv kanaler kan være linjer.",
-            tail: "Klik på koret for at indtegne en vej, sti eller rute."
+            tail: "Klik på kortet for at indtegne en vej, sti eller rute."
         },
         add_point: {
             title: "Punkt",
@@ -16,7 +16,7 @@ locale.da = {
             tail: "Klik på kortet for at tilføje et punkt."
         },
         browse: {
-            title: "Browse",
+            title: "Gennemse",
             description: "Træk rundt og zoom på kortet."
         },
         draw_area: {
