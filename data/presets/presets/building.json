@@ -13,7 +13,14 @@
     "icon": "warehouse",
     "form": [
         "building_yes",
-        "levels",
-        "address"
+        "levels"
+    ],
+    "additional": [
+        "address",
+        "telephone",
+        "website",
+        "wikipedia",
+        "elevation",
+        "source"
     ]
 }

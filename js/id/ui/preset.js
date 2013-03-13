@@ -34,9 +34,11 @@ iD.ui.preset = function(context) {
         var wrap = selection.append('div')
             .attr('class', 'col12 inspector-inner');
 
+        /*
         wrap.append('div')
             .attr('class', 'col3 preset-label')
             .text('Add field');
+            */
 
         formbuttonwrap = wrap.append('div')
             .attr('class', 'col9 preset-input');
