@@ -567,7 +567,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-radius: 0;
 }
 
-/* Inspector */
+/* Inspector
+------------------------------------------------------- */
 
 .inspector-wrap {
     opacity:0;
