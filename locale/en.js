@@ -266,6 +266,9 @@ locale.en = {
             "atm": {
                 "label": "ATM"
             },
+            "bicycle_parking": {
+                "label": "Type"
+            },
             "building": {
                 "label": "Building"
             },
