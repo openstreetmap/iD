@@ -149,7 +149,7 @@ iD.ui.TagEditor = function(context) {
 
             // change preset if necessary (undos/redos)
             var newmatch = presets
-                .matchType(entity, context.graph())
+                .matchGeometry(entity, context.graph())
                 .matchTags(entity.update({ tags: tags }));
             if (newmatch !== preset) {
                 return tageditor(selection_, newmatch);

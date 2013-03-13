@@ -1,7 +1,7 @@
 {
     "name": "motorway",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

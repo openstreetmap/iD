@@ -1,7 +1,7 @@
 {
     "name": "trunk highway",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

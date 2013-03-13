@@ -1,7 +1,7 @@
 {
     "name": "fast food",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

@@ -1,12 +1,12 @@
 {
-    "name": "lighthouse",
+    "name": "playground",
     "match": {
         "geometry": [
             "point",
             "area"
         ],
         "tags": {
-            "man_made": "lighthouse"
+            "leisure": "playground"
         }
     }
 }

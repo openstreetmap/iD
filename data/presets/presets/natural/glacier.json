@@ -1,7 +1,7 @@
 {
     "name": "glacier",
     "match": {
-        "type": [
+        "geometry": [
             "area"
         ],
         "terms": [

@@ -3,16 +3,19 @@ iD.presets.Preset = function(preset, forms) {
 
     preset.icon = preset.icon || 'marker-stroked';
 
-    preset.form = preset.form ? preset.form.map(function(f) {
+    preset.form = preset.form ? preset.form.map(getForms) : [];
+    preset.additional = preset.additional ? preset.additional.map(getForms) : [];
+
+    function getForms(f) {
         if (typeof f === 'string') {
             return forms[f];
         } else {
             return iD.presets.Form(f, f.key);
         }
-    }) : [];
+    }
 
-    preset.matchType = function(entity, resolver) {
-        return preset.match.type.indexOf(entity.geometry(resolver)) >= 0;
+    preset.matchGeometry = function(entity, resolver) {
+        return preset.match.geometry.indexOf(entity.geometry(resolver)) >= 0;
     };
 
     preset.matchTags = function(entity) {

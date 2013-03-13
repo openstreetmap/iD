@@ -1,7 +1,7 @@
 {
     "name": "unclassified",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

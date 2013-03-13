@@ -672,7 +672,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .preset-section h4 + input,
-h4 + .input-wrap-position input {
+h4 + .input-wrap-position input,
+h4 + .preset-input input:first-child {
     padding-top: 35px;
     height: 60px;
 }
@@ -689,6 +690,12 @@ input[type=number] {
 .preset-section h4[for="input-building:levels"],
 .preset-section.checkselect h4 {
     right: 50%;
+}
+
+button.preset-add-form {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }
 
 .preset-fav button.fav {

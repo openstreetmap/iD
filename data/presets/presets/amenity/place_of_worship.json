@@ -1,7 +1,7 @@
 {
     "name": "place of worship",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

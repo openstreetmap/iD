@@ -1,7 +1,7 @@
 {
     "name": "tennis court",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

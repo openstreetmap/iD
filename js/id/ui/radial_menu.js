@@ -1,6 +1,7 @@
 iD.ui.RadialMenu = function(operations) {
     var menu,
-        center = [0, 0];
+        center = [0, 0],
+        tooltip;
 
     var radialMenu = function(selection) {
         if (!operations.length)
@@ -57,7 +58,7 @@ iD.ui.RadialMenu = function(operations) {
             .attr('clip-path', 'url(#clip-square-20)')
             .attr('xlink:href', function(d) { return '#icon-operation-' + d.id; });
 
-        var tooltip = d3.select(document.body)
+        tooltip = d3.select(document.body)
             .append('div')
             .attr('class', 'tooltip-inner radial-menu-tooltip');
 
@@ -83,6 +84,10 @@ iD.ui.RadialMenu = function(operations) {
             menu.transition()
                 .attr('opacity', 0)
                 .remove();
+        }
+
+        if (tooltip) {
+            tooltip.remove();
         }
     };
 

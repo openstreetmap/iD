@@ -11,12 +11,12 @@ iD.presets.Collection = function(collection) {
         },
 
         match: function(entity, resolver) {
-            return presets.matchType(entity, resolver).matchTags(entity);
+            return presets.matchGeometry(entity, resolver).matchTags(entity);
         },
 
-        matchType: function(entity, resolver) {
+        matchGeometry: function(entity, resolver) {
             return iD.presets.Collection(collection.filter(function(d) {
-                return d.matchType(entity, resolver);
+                return d.matchGeometry(entity, resolver);
             }));
         },
 

@@ -1,7 +1,7 @@
 {
     "name": "cycle path",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

@@ -1,7 +1,7 @@
 {
     "name": "grass",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

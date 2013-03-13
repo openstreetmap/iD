@@ -1,7 +1,7 @@
 {
     "name": "steps",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

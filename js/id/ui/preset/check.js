@@ -2,7 +2,7 @@ iD.ui.preset.check = function(form) {
 
     var event = d3.dispatch('change', 'close'),
         values = ['', 'yes', 'no'],
-        value,
+        value = '',
         box,
         text,
         label;
@@ -14,9 +14,11 @@ iD.ui.preset.check = function(form) {
         label = selection.append('label');
 
         box = label.append('input')
+            .property('indeterminate', true)
             .attr('type', 'checkbox');
 
         text = label.append('span')
+            .text('unknown')
             .attr('class', 'value');
 
         box.on('click', function() {

@@ -1,7 +1,7 @@
 {
     "name": "waterway",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "vertex",
             "line",

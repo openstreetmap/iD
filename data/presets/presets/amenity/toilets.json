@@ -1,7 +1,7 @@
 {
     "name": "toilets",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

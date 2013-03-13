@@ -1,7 +1,7 @@
 {
     "name": "school",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

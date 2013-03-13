@@ -8,13 +8,14 @@ iD.presets = function(context) {
             icon: 'marker-stroked',
             match: {
                 tags: {},
-                type: ['point', 'vertex', 'line', 'area']
+                geometry: ['point', 'vertex', 'line', 'area']
             },
             form: []
         }),
         all = iD.presets.Collection([iD.presets.Preset(other)]),
         defaults = { area: all, line: all, point: all, vertex: all },
         forms = {},
+        universal = [],
         recent = iD.presets.Collection([]);
 
     all.load = function(d) {
@@ -22,6 +23,7 @@ iD.presets = function(context) {
         if (d.forms) {
             _.forEach(d.forms, function(d, id) {
                 forms[id] = iD.presets.Form(d, id);
+                if (d.universal) universal.push(forms[id]);
             });
         }
 
@@ -30,6 +32,7 @@ iD.presets = function(context) {
                 all.collection.push(iD.presets.Preset(d, forms));
             });
         }
+
 
         if (d.categories) {
             d.categories.forEach(function(d) {
@@ -50,8 +53,12 @@ iD.presets = function(context) {
         return all;
     };
 
+    all.universal = function() {
+        return universal;
+    };
+
     all.defaults = function(entity, n) {
-        var rec = recent.matchType(entity, context.graph()).collection.slice(0, 4),
+        var rec = recent.matchGeometry(entity, context.graph()).collection.slice(0, 4),
             def = _.uniq(rec.concat(defaults[entity.geometry(context.graph())].collection)).slice(0, n - 1);
         return iD.presets.Collection(_.unique(rec.concat(def).concat(other)));
     };

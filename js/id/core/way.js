@@ -59,7 +59,7 @@ _.extend(iD.Way.prototype, {
 
     areAdjacent: function(n1, n2) {
         for (var i = 0; i < this.nodes.length; i++) {
-            if (this.nodes[i]  === n1) {
+            if (this.nodes[i] === n1) {
                 if (this.nodes[i - 1] === n2) return true;
                 if (this.nodes[i + 1] === n2) return true;
             }

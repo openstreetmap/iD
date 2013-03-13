@@ -1,7 +1,7 @@
 {
     "name": "forest",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

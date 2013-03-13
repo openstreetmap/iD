@@ -1,7 +1,7 @@
 {
     "name": "peak",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "vertex"
         ],

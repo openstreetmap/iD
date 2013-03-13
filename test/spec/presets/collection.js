@@ -1,11 +1,11 @@
-describe("iD.prests.Collection", function() {
+describe("iD.presets.Collection", function() {
 
     var p = {
         other: iD.presets.Preset({
             name: 'other',
             match: {
                 tags: {},
-                type: ['point', 'vertex', 'line', 'area']
+                geometry: ['point', 'vertex', 'line', 'area']
             }
         }),
         residential: iD.presets.Preset({
@@ -14,7 +14,7 @@ describe("iD.prests.Collection", function() {
                 tags: {
                     highway: 'residential'
                 },
-                type: ['line']
+                geometry: ['line']
             }
         }),
         park: iD.presets.Preset({
@@ -23,7 +23,7 @@ describe("iD.prests.Collection", function() {
                 tags: {
                     leisure: 'park'
                 },
-                type: ['point', 'area']
+                geometry: ['point', 'area']
             }
         })
     };
@@ -39,9 +39,9 @@ describe("iD.prests.Collection", function() {
         });
     });
 
-    describe("#matchType", function() {
+    describe("#matchGeometry", function() {
         it("returns a new collection only containing presets matching an entity's type", function() {
-            expect(c.matchType(w, g).collection).to.eql([p.other, p.residential]);
+            expect(c.matchGeometry(w, g).collection).to.eql([p.other, p.residential]);
         });
     });
 

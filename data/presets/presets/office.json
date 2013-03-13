@@ -1,7 +1,7 @@
 {
     "name": "office",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

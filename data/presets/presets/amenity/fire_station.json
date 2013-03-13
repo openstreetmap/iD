@@ -1,7 +1,7 @@
 {
     "name": "fire station",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

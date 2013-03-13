@@ -1,7 +1,7 @@
 {
     "name": "subway",
     "match": {
-        "type": [
+        "geometry": [
             "line"
         ],
         "tags": {

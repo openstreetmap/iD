@@ -1,7 +1,7 @@
 {
     "name": "orchard",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

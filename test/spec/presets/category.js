@@ -4,7 +4,7 @@ describe("iD.presets.Category", function() {
     beforeEach(function() {
         category = {
             "match": {
-                "type": "line"
+                "geometry": "line"
             },
             "icon": "highway",
             "name": "roads",
@@ -18,7 +18,7 @@ describe("iD.presets.Category", function() {
                 tags: {
                     highway: 'residential'
                 },
-                type: ['line']
+                geometry: ['line']
             }
         });
     });
@@ -28,14 +28,14 @@ describe("iD.presets.Category", function() {
         expect(c.members.collection[0]).to.eql(residential);
     });
 
-    describe("#matchType", function() {
+    describe("#matchGeometry", function() {
         it("matches the type of an entity", function() {
             var c = iD.presets.Category(category, iD.presets.Collection([residential])),
                 w = iD.Way(),
                 n = iD.Node(),
                 g = iD.Graph().replace(w);
-            expect(c.matchType(w, g)).to.eql(true);
-            expect(c.matchType(n, g)).to.eql(false);
+            expect(c.matchGeometry(w, g)).to.eql(true);
+            expect(c.matchGeometry(n, g)).to.eql(false);
         });
     });
 });

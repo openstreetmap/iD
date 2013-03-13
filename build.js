@@ -28,7 +28,6 @@ fs.writeFileSync('data/presets/presets.json', JSON.stringify(
 fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
     deprecated: r('deprecated.json'),
     discarded: r('discarded.json'),
-    imagery: r('imagery.json'),
     keys: r('keys.json'),
     imagery: r('imagery.json'),
     presets: {

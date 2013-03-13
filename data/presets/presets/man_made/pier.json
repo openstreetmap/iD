@@ -1,7 +1,7 @@
 {
     "name": "pier",
     "match": {
-        "type": [
+        "geometry": [
             "line",
             "area"
         ],

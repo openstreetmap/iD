@@ -1,7 +1,7 @@
 {
     "name": "building",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

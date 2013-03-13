@@ -1,7 +1,7 @@
 {
     "name": "bicycle rental",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

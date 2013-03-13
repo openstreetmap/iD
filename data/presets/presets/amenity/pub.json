@@ -1,7 +1,7 @@
 {
     "name": "pub",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

@@ -1,7 +1,7 @@
 {
     "name": "commercial",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

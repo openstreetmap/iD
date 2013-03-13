@@ -1,7 +1,7 @@
 {
     "name": "reservoir",
     "match": {
-        "type": [
+        "geometry": [
             "area"
         ],
         "tags": {

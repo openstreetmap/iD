@@ -1,7 +1,7 @@
 {
     "name": "island",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

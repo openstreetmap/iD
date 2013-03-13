@@ -8,7 +8,7 @@ iD.ui.PresetGrid = function(context) {
 
         selection.html('');
 
-        presets = presets.matchType(entity, context.graph());
+        presets = presets.matchGeometry(entity, context.graph());
 
         var messagewrap = selection.append('div')
             .attr('class', 'message inspector-inner fillL');

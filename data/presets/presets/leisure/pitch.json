@@ -1,7 +1,7 @@
 {
     "name": "sport pitch",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

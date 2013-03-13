@@ -1,7 +1,7 @@
 {
     "name": "supermarket",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],

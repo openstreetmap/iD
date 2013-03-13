@@ -1,7 +1,7 @@
 {
     "name": "allotments",
     "match": {
-        "type": [
+        "geometry": [
             "point",
             "area"
         ],
