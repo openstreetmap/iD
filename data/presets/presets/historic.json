@@ -9,7 +9,7 @@
             "historic": "*"
         }
     },
-    "form": [
+    "fields": [
         "historic"
     ]
 }

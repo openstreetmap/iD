@@ -12,7 +12,7 @@
             "staircase"
         ]
     },
-    "form": [
+    "fields": [
         "access",
         "surface"
     ]

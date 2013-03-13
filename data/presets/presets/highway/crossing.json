@@ -12,7 +12,7 @@
             "zebra crossing"
         ]
     },
-    "form": [
+    "fields": [
         "crossing"
     ]
 }

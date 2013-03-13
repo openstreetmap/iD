@@ -1,4 +1,4 @@
-iD.ui.preset.combo = function(form) {
+iD.ui.preset.combo = function(field) {
 
     var event = d3.dispatch('change', 'close'),
         wrap,
@@ -16,11 +16,11 @@ iD.ui.preset.combo = function(form) {
         var combobox = d3.combobox();
         wrap.call(combobox);
 
-        if (form.options) {
-            options(form.options);
+        if (field.options) {
+            options(field.options);
         } else {
             iD.taginfo().values({
-                key: form.key
+                key: field.key
             }, function(err, data) {
                 if (!err) options(_.pluck(data, 'value'));
             });
@@ -43,12 +43,12 @@ iD.ui.preset.combo = function(form) {
 
     function change() {
         var t = {};
-        t[form.key] = input.property('value').replace(' ', '_');
+        t[field.key] = input.property('value').replace(' ', '_');
         event.change(t);
     }
 
     combo.tags = function(tags) {
-        input.property('value', tags[form.key] || '');
+        input.property('value', tags[field.key] || '');
     };
 
     return d3.rebind(combo, event, 'on');

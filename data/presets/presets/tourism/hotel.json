@@ -12,7 +12,7 @@
         }
     },
     "icon": "lodging",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"

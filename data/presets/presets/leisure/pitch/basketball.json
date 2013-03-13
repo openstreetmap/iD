@@ -12,7 +12,7 @@
         "terms": []
     },
     "icon": "basketball",
-    "form": [
+    "fields": [
         "surface"
     ]
 }

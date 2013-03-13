@@ -1,13 +1,13 @@
-iD.presets.Preset = function(preset, forms) {
+iD.presets.Preset = function(preset, fields) {
     preset = _.clone(preset);
 
     preset.icon = preset.icon || 'marker-stroked';
 
-    preset.form = preset.form ? preset.form.map(getForms) : [];
-    preset.additional = preset.additional ? preset.additional.map(getForms) : [];
+    preset.fields = (preset.fields || []).map(getFields);
+    preset.additional = (preset.additional || []).map(getFields);
 
-    function getForms(f) {
-        return forms[f];
+    function getFields(f) {
+        return fields[f];
     }
 
     preset.matchGeometry = function(entity, resolver) {
@@ -32,8 +32,8 @@ iD.presets.Preset = function(preset, forms) {
     preset.removeTags = function(tags, geometry) {
         tags = _.omit(tags, _.keys(preset.match.tags));
 
-        for (var i in preset.form) {
-            var field = preset.form[i];
+        for (var i in preset.fields) {
+            var field = preset.fields[i];
             if (field['default'] && field['default'][geometry] == tags[field.key]) {
                 delete tags[field.key];
             }
@@ -47,8 +47,8 @@ iD.presets.Preset = function(preset, forms) {
             if (preset.match.tags[k] !== '*') tags[k] = preset.match.tags[k];
         }
 
-        for (var f in preset.form) {
-            f = preset.form[f];
+        for (var f in preset.fields) {
+            f = preset.fields[f];
             if (f.key && !tags[f.key] && f['default'] && f['default'][geometry]) {
                 tags[f.key] = f['default'][geometry];
             }

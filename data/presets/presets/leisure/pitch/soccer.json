@@ -12,7 +12,7 @@
         "terms": []
     },
     "icon": "soccer",
-    "form": [
+    "fields": [
         "surface"
     ]
 }

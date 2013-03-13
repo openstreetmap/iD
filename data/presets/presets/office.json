@@ -11,7 +11,7 @@
         "terms": []
     },
     "icon": "commercial",
-    "form": [
+    "fields": [
         "office",
         "address",
         "opening_hours"

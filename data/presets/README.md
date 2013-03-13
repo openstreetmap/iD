@@ -40,17 +40,16 @@ A basic preset is of the form:
     },
     // the icon in iD which represents this feature
     "icon": "park",
-    // A form. See the forms documentation for details of what's valid here.
-    // Forms are arrays of form field types
-    "form": [
+    // An array of field names. See the fields documentation for details of what's valid here.
+    "fields": [
         "address"
     ]
 }
 ```
 
-## Forms
+## Fields
 
-Forms are, like presets, defined in JSON structures. A typical form is
+Fields are, like presets, defined in JSON structures. A typical field is
 
 ```js
 {
@@ -59,7 +58,7 @@ Forms are, like presets, defined in JSON structures. A typical form is
 }
 ```
 
-In which `type` is the form's type. Valid form types are
+In which `type` is the fields's type. Valid field types are
 
 * textarea
 * radio

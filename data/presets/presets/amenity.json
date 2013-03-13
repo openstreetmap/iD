@@ -9,7 +9,7 @@
             "amenity": "*"
         }
     },
-    "form": [
+    "fields": [
         "amenity"
     ]
 }

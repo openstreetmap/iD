@@ -11,7 +11,7 @@
             "waterway": "*"
         }
     },
-    "form": [
+    "fields": [
         "waterway"
     ]
 }

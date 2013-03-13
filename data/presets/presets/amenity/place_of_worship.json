@@ -35,7 +35,7 @@
         }
     },
     "icon": "place-of-worship",
-    "form": [
+    "fields": [
         "religion",
         "denomination",
         "building",

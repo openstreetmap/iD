@@ -9,7 +9,7 @@
             "natural": "*"
         }
     },
-    "form": [
+    "fields": [
         "natural"
     ]
 }

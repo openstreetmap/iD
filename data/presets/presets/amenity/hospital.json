@@ -25,7 +25,7 @@
         }
     },
     "icon": "hospital",
-    "form": [
+    "fields": [
         "emergency",
         "building_area",
         "address"

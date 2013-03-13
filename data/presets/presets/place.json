@@ -9,7 +9,7 @@
             "place": "*"
         }
     },
-    "form": [
+    "fields": [
         "place"
     ]
 }

@@ -11,7 +11,7 @@
             "amenity": "toilets"
         }
     },
-    "form": [
+    "fields": [
         "operator",
         "building"
     ]

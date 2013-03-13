@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "warehouse",
-    "form": [
+    "fields": [
         "building_yes",
         "levels"
     ],

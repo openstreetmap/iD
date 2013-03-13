@@ -14,11 +14,11 @@ function rp(f) {
     return r('presets/' + f);
 }
 
-var forms = {};
-glob.sync(__dirname + '/data/presets/forms/*.json').forEach(function(file) {
-    forms[path.basename(file, '.json')] = read(file);
+var fields = {};
+glob.sync(__dirname + '/data/presets/fields/*.json').forEach(function(file) {
+    fields[path.basename(file, '.json')] = read(file);
 });
-fs.writeFileSync('data/presets/forms.json', JSON.stringify(forms));
+fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields));
 
 fs.writeFileSync('data/presets/presets.json', JSON.stringify(
     glob.sync(__dirname + '/data/presets/presets/**/*.json').map(function(file) {
@@ -34,6 +34,6 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
         presets: rp('presets.json'),
         defaults: rp('defaults.json'),
         categories: rp('categories.json'),
-        forms: rp('forms.json')
+        fields: rp('fields.json')
     }
 }, null, 4) + ';');

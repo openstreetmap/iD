@@ -244,7 +244,7 @@ locale.vi = {
 
     // We expect these to be extracted at some point.
     "presets": {
-        "forms": {
+        "fields": {
             "access": {
                 "label": "Quyền Truy cập"
             },

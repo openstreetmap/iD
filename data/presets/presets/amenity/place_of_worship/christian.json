@@ -35,7 +35,7 @@
         }
     },
     "icon": "religious-christian",
-    "form": [
+    "fields": [
         "denomination",
         "building",
         "address"

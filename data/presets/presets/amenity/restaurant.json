@@ -43,7 +43,7 @@
         }
     },
     "icon": "restaurant",
-    "form": [
+    "fields": [
         "cuisine",
         "building_area",
         "address"

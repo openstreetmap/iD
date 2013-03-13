@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "highway-motorway",
-    "form": [
+    "fields": [
         "oneway",
         "roadtype",
         "access",

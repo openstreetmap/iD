@@ -32,7 +32,7 @@
         }
     },
     "icon": "grocery",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"

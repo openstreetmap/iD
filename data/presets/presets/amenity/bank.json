@@ -33,7 +33,7 @@
         }
     },
     "icon": "bank",
-    "form": [
+    "fields": [
         "atm",
         "building_area",
         "address"

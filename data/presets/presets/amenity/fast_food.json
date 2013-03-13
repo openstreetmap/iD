@@ -11,7 +11,7 @@
         "terms": []
     },
     "icon": "fast-food",
-    "form": [
+    "fields": [
         "cuisine",
         "building_area",
         "address"

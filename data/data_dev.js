@@ -12,7 +12,7 @@ iD.data = {
             path + 'data/presets/presets.json',
             path + 'data/presets/defaults.json',
             path + 'data/presets/categories.json',
-            path + 'data/presets/forms.json'], d3.json, function (err, data) {
+            path + 'data/presets/fields.json'], d3.json, function (err, data) {
 
             iD.data = {
                 deprecated: data[0],
@@ -23,7 +23,7 @@ iD.data = {
                     presets: data[4],
                     defaults: data[5],
                     categories: data[6],
-                    forms: data[7]
+                    fields: data[7]
                 }
             };
 

@@ -17,7 +17,7 @@
         ]
     },
     "icon": "post",
-    "form": [
+    "fields": [
         "operator",
         "collection_times"
     ]

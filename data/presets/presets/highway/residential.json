@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "highway-residential",
-    "form": [
+    "fields": [
         "oneway",
         "roadtype",
         "access",

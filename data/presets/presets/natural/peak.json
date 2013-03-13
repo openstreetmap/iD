@@ -25,7 +25,7 @@
         ]
     },
     "icon": "triangle",
-    "form": [
+    "fields": [
         "elevation"
     ]
 }

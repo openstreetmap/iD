@@ -29,7 +29,7 @@ iD.ui.preset = function(context) {
         keys = [];
 
         formwrap = selection.append('div');
-        draw(formwrap, preset.form);
+        draw(formwrap, preset.fields);
 
         var wrap = selection.append('div')
             .attr('class', 'col12 inspector-inner');
@@ -41,7 +41,7 @@ iD.ui.preset = function(context) {
             .data(preset.additional)
             .enter()
             .append('button')
-                .attr('class', 'preset-add-form')
+                .attr('class', 'preset-add-field')
                 .attr('title', function(d) { return d.label(); })
                 .on('click', addForm)
                 .append('span')
@@ -58,19 +58,18 @@ iD.ui.preset = function(context) {
         return d.key || String(d.keys);
     }
 
-    function draw(selection, form) {
-
+    function draw(selection, fields) {
         var sections = selection.selectAll('div.preset-section')
-            .data(form, formKey)
+            .data(fields, formKey)
             .enter()
             .append('div')
-            .attr('class', 'preset-section fillL inspector-inner col12')
+            .attr('class', 'preset-section fillL inspector-inner col12');
 
-           sections.append('h4')
-                .attr('for', function(d) { return 'input-' + d.key; })
-                .text(function(d) { return d.label(); });
+        sections.append('h4')
+            .attr('for', function(d) { return 'input-' + d.key; })
+            .text(function(d) { return d.label(); });
 
-           sections.each(input);
+        sections.each(input);
     }
 
     presets.rendered = function() {

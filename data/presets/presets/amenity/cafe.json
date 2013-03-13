@@ -15,7 +15,7 @@
         }
     },
     "icon": "cafe",
-    "form": [
+    "fields": [
         "cuisine",
         "internet_access",
         "building_area",

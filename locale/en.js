@@ -244,7 +244,7 @@ locale.en = {
 
     // We expect these to be extracted at some point.
     "presets": {
-        "forms": {
+        "fields": {
             "access": {
                 "label": "Access"
             },

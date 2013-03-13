@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "highway-service",
-    "form": [
+    "fields": [
         "service",
         "oneway",
         "roadtype",

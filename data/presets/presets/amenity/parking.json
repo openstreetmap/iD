@@ -11,7 +11,7 @@
         "terms": []
     },
     "icon": "parking",
-    "form": [
+    "fields": [
         "fee",
         "access",
         "address"

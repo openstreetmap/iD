@@ -11,7 +11,7 @@
             "highway": "*"
         }
     },
-    "form": [
+    "fields": [
         "highway"
     ]
 }

@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "highway",
-    "form": [
+    "fields": [
         "oneway",
         "roadtype",
         "access",

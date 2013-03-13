@@ -9,7 +9,7 @@
             "tourism": "*"
         }
     },
-    "form": [
+    "fields": [
         "tourism"
     ]
 }

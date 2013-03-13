@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "highway-trunk",
-    "form": [
+    "fields": [
         "oneway",
         "roadtype",
         "access",

@@ -12,7 +12,7 @@
         }
     },
     "icon": "campsite",
-    "form": [
+    "fields": [
         "operator",
         "address"
     ]

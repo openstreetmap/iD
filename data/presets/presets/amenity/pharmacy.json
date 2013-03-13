@@ -11,7 +11,7 @@
         "terms": []
     },
     "icon": "pharmacy",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"

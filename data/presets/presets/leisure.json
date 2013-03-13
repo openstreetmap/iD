@@ -9,7 +9,7 @@
             "leisure": "*"
         }
     },
-    "form": [
+    "fields": [
         "leisure"
     ]
 }

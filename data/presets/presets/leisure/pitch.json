@@ -11,7 +11,7 @@
         "terms": []
     },
     "icon": "pitch",
-    "form": [
+    "fields": [
         "sport",
         "surface"
     ]

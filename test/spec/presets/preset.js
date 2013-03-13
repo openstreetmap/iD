@@ -1,6 +1,6 @@
 describe('iD.presets.Preset', function() {
 
-    var forms = {
+    var fields = {
         "building_area": {
             "key": "building",
             "type": "check",
@@ -52,8 +52,8 @@ describe('iD.presets.Preset', function() {
                 },
                 geometry: ['point', 'area']
             },
-            form: ['building_area']
-        }, forms)
+            fields: ['building_area']
+        }, fields)
     };
      var w1 = iD.Way({ tags: {
             highway: 'motorway'
@@ -72,8 +72,8 @@ describe('iD.presets.Preset', function() {
         g = iD.Graph().replace(w1).replace(w2);
 
 
-    it("has an optional form field", function() {
-        expect(p.other.form).to.eql([]);
+    it("has optional fields", function() {
+        expect(p.other.fields).to.eql([]);
     });
 
     describe('#matchGeometry', function() {

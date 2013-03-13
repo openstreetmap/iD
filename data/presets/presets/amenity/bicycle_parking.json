@@ -10,7 +10,7 @@
         }
     },
     "icon": "bicycle",
-    "form": [
+    "fields": [
         "bicycle_parking",
         "capacity",
         "operator"

@@ -702,7 +702,7 @@ input[type=number] {
     right: 50%;
 }
 
-button.preset-add-form {
+button.preset-add-field {
     width: 40px;
     height: 40px;
     margin-right: 10px;

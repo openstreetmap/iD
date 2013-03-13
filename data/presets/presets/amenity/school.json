@@ -28,7 +28,7 @@
         }
     },
     "icon": "school",
-    "form": [
+    "fields": [
         "operator",
         "building",
         "address"

@@ -11,7 +11,7 @@
             "man_made": "*"
         }
     },
-    "form": [
+    "fields": [
         "man_made"
     ]
 }

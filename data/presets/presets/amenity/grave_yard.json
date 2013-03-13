@@ -10,7 +10,7 @@
         }
     },
     "icon": "cemetery",
-    "form": [
+    "fields": [
         "religion"
     ]
 }

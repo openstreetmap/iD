@@ -15,7 +15,7 @@
         }
     },
     "icon": "religious-jewish",
-    "form": [
+    "fields": [
         "denomination",
         "building",
         "address"

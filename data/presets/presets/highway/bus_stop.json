@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "bus",
-    "form": [
+    "fields": [
         "operator",
         "shelter"
     ]

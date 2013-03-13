@@ -17,7 +17,7 @@
         }
     },
     "icon": "town-hall",
-    "form": [
+    "fields": [
         "building_area",
         "address"
     ]

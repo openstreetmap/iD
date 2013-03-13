@@ -10,7 +10,7 @@
         }
     },
     "icon": "bicycle",
-    "form": [
+    "fields": [
         "capacity",
         "network",
         "operator"

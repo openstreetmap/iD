@@ -15,7 +15,7 @@
         }
     },
     "icon": "religious-muslim",
-    "form": [
+    "fields": [
         "denomination",
         "building",
         "address"

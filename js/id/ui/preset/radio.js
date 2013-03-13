@@ -1,4 +1,4 @@
-iD.ui.preset.radio = function(form) {
+iD.ui.preset.radio = function(field) {
 
     var event = d3.dispatch('change', 'close'),
         buttons;
@@ -9,10 +9,10 @@ iD.ui.preset.radio = function(form) {
         var buttonwrap = selection.append('div').attr('class','radio-wrap');
 
         buttons = buttonwrap.selectAll('button')
-            .data(form.options)
+            .data(field.options)
             .enter()
             .append('button')
-                .text(function(d) { return form.t('options.' + d, {default: d}); })
+                .text(function(d) { return field.t('options.' + d, {default: d}); })
                 .on('click', function() {
                     buttons.classed('active', false);
                     d3.select(this).classed('active', true);

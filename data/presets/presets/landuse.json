@@ -9,7 +9,7 @@
             "landuse": "*"
         }
     },
-    "form": [
+    "fields": [
         "landuse"
     ]
 }

@@ -11,7 +11,7 @@
             "aeroway": "*"
         }
     },
-    "form": [
+    "fields": [
         "aeroway"
     ]
 }

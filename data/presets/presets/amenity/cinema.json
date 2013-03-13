@@ -29,7 +29,7 @@
         }
     },
     "icon": "cinema",
-    "form": [
+    "fields": [
         "building_area",
         "address"
     ]

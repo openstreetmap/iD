@@ -11,7 +11,7 @@
         "terms": []
     },
     "icon": "college",
-    "form": [
+    "fields": [
         "operator",
         "address"
     ]

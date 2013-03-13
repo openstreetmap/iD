@@ -25,7 +25,7 @@
         }
     },
     "icon": "museum",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"

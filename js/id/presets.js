@@ -9,27 +9,26 @@ iD.presets = function(context) {
             match: {
                 tags: {},
                 geometry: ['point', 'vertex', 'line', 'area']
-            },
-            form: []
+            }
         }),
         all = iD.presets.Collection([iD.presets.Preset(other)]),
         defaults = { area: all, line: all, point: all, vertex: all },
-        forms = {},
+        fields = {},
         universal = [],
         recent = iD.presets.Collection([]);
 
     all.load = function(d) {
 
-        if (d.forms) {
-            _.forEach(d.forms, function(d, id) {
-                forms[id] = iD.presets.Form(d, id);
-                if (d.universal) universal.push(forms[id]);
+        if (d.fields) {
+            _.forEach(d.fields, function(d, id) {
+                fields[id] = iD.presets.Field(d, id);
+                if (d.universal) universal.push(fields[id]);
             });
         }
 
         if (d.presets) {
             d.presets.forEach(function(d) {
-                all.collection.push(iD.presets.Preset(d, forms));
+                all.collection.push(iD.presets.Preset(d, fields));
             });
         }
 

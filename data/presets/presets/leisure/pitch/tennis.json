@@ -12,7 +12,7 @@
         "terms": []
     },
     "icon": "tennis",
-    "form": [
+    "fields": [
         "surface"
     ]
 }

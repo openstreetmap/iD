@@ -10,7 +10,7 @@
         "terms": []
     },
     "icon": "highway-tertiary",
-    "form": [
+    "fields": [
         "oneway",
         "roadtype",
         "access",
