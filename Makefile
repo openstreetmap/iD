@@ -80,3 +80,6 @@ install: all
 
 clean:
 	rm -f iD*.js
+
+translations:
+	node data/update_locales
