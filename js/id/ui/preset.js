@@ -69,18 +69,12 @@ iD.ui.preset = function(context) {
             .enter()
             .append('div')
             .attr('class', 'preset-section fillL inspector-inner col12')
-            .append('div')
-                .attr('class', 'preset-section-input');
 
-           sections.append('div')
-                .attr('class', 'col3 preset-label')
-                .append('h4')
+           sections.append('h4')
                 .attr('for', function(d) { return 'input-' + d.key; })
                 .text(function(d) { return d.label(); });
 
-           sections.append('div')
-                .attr('class', 'col9 preset-input')
-                .each(input);
+           sections.each(input);
     }
 
     presets.rendered = function() {
