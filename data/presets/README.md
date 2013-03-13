@@ -32,7 +32,9 @@ A basic preset is of the form:
         "village green",
         "woodland"
     ],
-    // tags that automatically added to the feature when it's selected
+    // tags that are added to the feature when selecting the preset,
+    // and also used to match the preset against existing features.
+    // You can use the value "*" to match any value.
     "tags": {
         "leisure": "park"
     },
