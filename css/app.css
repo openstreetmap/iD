@@ -552,6 +552,15 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
 .icon.add-form       { background-position: -85px -180px;}
 
+/* Universal preset icons */
+
+.icon.source     { background-position:   0px -200px;}
+.icon.elevation  { background-position: -20px -200px;}
+.icon.address    { background-position: -40px -200px;}
+.icon.telephone  { background-position: -60px -200px;}
+.icon.website    { background-position: -80px -200px;}
+.icon.wikipedia  { background-position: -100px -200px;}
+
 /* Toggle icon is special */
 
 .toggle.icon                   { background-position: 0px -180px;}
