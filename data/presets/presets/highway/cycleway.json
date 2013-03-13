@@ -14,7 +14,6 @@
         "oneway",
         "roadtype",
         "access",
-        "maxspeed",
         "surface"
     ]
 }
