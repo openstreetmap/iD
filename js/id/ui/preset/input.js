@@ -15,14 +15,13 @@ iD.ui.preset.url = function(field) {
             .on('change', change)
             .call(iD.behavior.accept().on('accept', event.close));
 
-            if (form.type == 'number') {
-                var numbercontrols = selection.append('div')
-                    .attr('class','spin-control');
+        if (field.type == 'number') {
+            var numbercontrols = selection.append('div')
+                .attr('class', 'spin-control');
 
-                numbercontrols.append('button').attr('class','ascend');
-                numbercontrols.append('button').attr('class','descend');
-
-            };
+            numbercontrols.append('button').attr('class', 'ascend');
+            numbercontrols.append('button').attr('class', 'descend');
+        }
     }
 
     function change() {
