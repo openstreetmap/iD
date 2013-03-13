@@ -101,7 +101,7 @@
         row.append('th')
             .html(function (d) { return _.map(d, function (value, key) { return key + "=" + value;}).join("<br>"); });
 
-        var projection = Object,
+        var projection = function(p) { return p; },
             filter = d3.functor(true),
             a = iD.Node({loc: [15, 15]}),
             b = iD.Node({loc: [185, 15]}),
@@ -109,6 +109,10 @@
             vertices = iD.svg.Vertices(projection),
             lines = iD.svg.Lines(projection),
             midpoints = iD.svg.Midpoints(projection);
+
+        projection.stream = function(listener) {
+            return listener;
+        };
 
         row.selectAll('td')
             .data(function (d) {
