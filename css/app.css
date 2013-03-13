@@ -678,6 +678,11 @@ h4 + .preset-input input:first-child {
     height: 60px;
 }
 
+.preset-section h4 + textarea {
+    padding-top: 35px;
+    height: 100px;
+}
+
 .name input.major {
     padding-top: 35px;
     height: 70px;
