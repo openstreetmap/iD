@@ -111,16 +111,16 @@ locale.fr = {
                 vertex: "Déplace le noeud d'une ligne.",
                 line: "Déplace une ligne.",
                 area: "Déplace un polygone.",
-                multiple: "Moved multiple objects."
+                multiple: "Déplace un groupe d'objets."
             }
         },
         rotate: {
-            title: "Rotate",
-            description: "Rotate this object around its centre point.",
+            title: "Rotation",
+            description: "Fait pivoter cet objet en fonction de son centroïde.",
             key: "R",
             annotation: {
-                line: "Rotated a line.",
-                area: "Rotated an area."
+                line: "Pivoter la ligne.",
+                area: "Pivoter un polyone."
             }
         },
         reverse: {
@@ -185,7 +185,7 @@ locale.fr = {
         editing: "Edité {type}",
         additional: "Tags complémentaires",
         choose: "Que souhaitez vous ajouter?",
-        results: "{n} results for {search}"
+        results: "{n} résultats pour {search}"
     },
 
     background: {
