@@ -125,7 +125,7 @@ locale.vi = {
         },
         reverse: {
             title: "Đảo ngược",
-            description: "Làm cho đường kẻ này hướng về phía ngược.",
+            description: "Đảo nguợc chiều đường kẻ này.",
             key: "V",
             annotation: "Đảo ngược đường kẻ."
         },
@@ -166,7 +166,7 @@ locale.vi = {
 
     geocoder: {
         title: "Tìm kiếm Địa phương",
-        placeholder: "tìm kiếm địa phương",
+        placeholder: "Tìm kiếm địa phương",
         no_results: "Không tìm thấy địa phương với tên “{name}”"
     },
 
@@ -185,7 +185,8 @@ locale.vi = {
         editing: "Đang sửa đổi {type}",
         additional: "Các thẻ nâng cao",
         choose: "Bạn muốn bổ sung cái gì?",
-        results: "{n} kết quả cho {search}"
+        results: "{n} kết quả cho {search}",
+        reference: "Tra cứu OpenStreetMap Wiki →"
     },
 
     background: {
@@ -239,5 +240,192 @@ locale.vi = {
     zoom: {
         'in': "Phóng to",
         out: "Thu nhỏ"
+    },
+
+    // We expect these to be extracted at some point.
+    "presets": {
+        "forms": {
+            "access": {
+                "label": "Quyền Truy cập"
+            },
+            "address": {
+                "label": "Địa chỉ",
+                "placeholders": {
+                    "housename": "Tên nhà",
+                    "number": "123",
+                    "street": "Tên đường",
+                    "city": "Thành phố"
+                }
+            },
+            "aeroway": {
+                "label": "Loại"
+            },
+            "amenity": {
+                "label": "Loại"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "bicycle_parking": {
+                "label": "Kiểu"
+            },
+            "building": {
+                "label": "Tòa nhà"
+            },
+            "building_area": {
+                "label": "Tòa nhà"
+            },
+            "building_yes": {
+                "label": "Tòa nhà"
+            },
+            "capacity": {
+                "label": "Số Chỗ đỗ"
+            },
+            "collection_times": {
+                "label": "Giờ Lấy thư"
+            },
+            "construction": {
+                "label": "Kiểu"
+            },
+            "crossing": {
+                "label": "Kiểu"
+            },
+            "cuisine": {
+                "label": "Ẩm thực"
+            },
+            "denomination": {
+                "label": "Giáo phái"
+            },
+            "denotation": {
+                "label": "Tầm Quan trọng"
+            },
+            "elevation": {
+                "label": "Cao độ"
+            },
+            "emergency": {
+                "label": "Khẩn cấp"
+            },
+            "fax": {
+                "label": "Số Fax"
+            },
+            "fee": {
+                "label": "Phí"
+            },
+            "highway": {
+                "label": "Kiểu"
+            },
+            "internet_access": {
+                "label": "Truy cập Internet",
+                "options": {
+                    "yes": "Có",
+                    "no": "Không có",
+                    "wlan": "Wi-Fi",
+                    "wired": "Qua dây điện",
+                    "terminal": "Máy tính công cộng"
+                }
+            },
+            "landuse": {
+                "label": "Mục đích"
+            },
+            "layer": {
+                "label": "Lớp"
+            },
+            "leisure": {
+                "label": "Loại"
+            },
+            "levels": {
+                "label": "Số Tầng"
+            },
+            "man_made": {
+                "label": "Loại"
+            },
+            "maxspeed": {
+                "label": "Tốc độ Tối đa"
+            },
+            "natural": {
+                "label": "Thiên nhiên"
+            },
+            "network": {
+                "label": "Hệ thống"
+            },
+            "office": {
+                "label": "Kiểu"
+            },
+            "oneway": {
+                "label": "Một chiều"
+            },
+            "opening_hours": {
+                "label": "Giờ Mở cửa"
+            },
+            "operator": {
+                "label": "Cơ quan Chủ quản"
+            },
+            "phone": {
+                "label": "Số Điện thoại"
+            },
+            "place": {
+                "label": "Kiểu"
+            },
+            "railway": {
+                "label": "Kiểu"
+            },
+            "religion": {
+                "label": "Tôn giáo",
+                "options": {
+                    "christian": "Kitô giáo",
+                    "muslim": "Hồi giáo",
+                    "buddhist": "Phật giáo",
+                    "jewish": "Do Thái giáo",
+                    "hindu": "Ấn Độ giáo",
+                    "shinto": "Thần đạo",
+                    "taoist": "Đạo giáo"
+                }
+            },
+            "roadtype": {
+                "label": "Cấu trúc",
+                "options": {
+                    "bridge": "Cầu",
+                    "tunnel": "Đường hầm",
+                    "embankment": "Đường đắp cao",
+                    "cutting": "Đường xẻ"
+                }
+            },
+            "service": {
+                "label": "Kiểu"
+            },
+            "shelter": {
+                "label": "Chỗ che"
+            },
+            "shop": {
+                "label": "Kiểu"
+            },
+            "source": {
+                "label": "Nguồn"
+            },
+            "sport": {
+                "label": "Môn Thể thao"
+            },
+            "surface": {
+                "label": "Mặt"
+            },
+            "tourism": {
+                "label": "Loại"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "water": {
+                "label": "Loại"
+            },
+            "waterway": {
+                "label": "Loại"
+            },
+            "wetland": {
+                "label": "Loại"
+            },
+            "wood": {
+                "label": "Loại"
+            }
+        }
     }
 };
