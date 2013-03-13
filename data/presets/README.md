@@ -5,9 +5,9 @@ preset definitions and simple structure.
 
 ## Individual Presets
 
-Specific presets are located under `data/presets/presets`. For convenience,
-they're stored in sub-directories like `data/presets/presets/leisure/park.json`,
-but these have no effect on their final functionality.
+Specific presets are located under `data/presets/presets`. They're organized in a
+directory hierarchy based on OSM key/value pairs. For example, the preset that matches
+the tag `leisure=park` is in the file `data/presets/presets/leisure/park.json`.
 
 ## Preset Format
 
@@ -67,8 +67,18 @@ In which `type` is the fields's type. Valid field types are
 * address
 * defaultcheck - a checkbox that can be yes, no, or null - not filled
 
+The `key` property names the OSM key that the field will edit. Alternatively, for
+compound fields like `address`, you can specify an array of keys in the `keys`
+property.
+
+Each field definition lives in a separate file in `data/presets/fields`. The field
+name (used in the preset `fields` property) is the name of the file (minus the `.json`
+extension).
+
 ## Building
 
-Presets are built with the `build.js` script in iD's root. `build.js` combines
-all presets together with imagery data, deprecated and discarded tags into
-one file, `data/data.js`.
+To build presets, all you need to to is run `make`.
+
+This command will take care of running the build script, which packages all presets
+together with imagery data, and deprecated or discarded tags into one file, `data/data.js`,
+which is included in the packaged iD.js file.
