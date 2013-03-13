@@ -634,14 +634,14 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .preset-grid-search-wrap input {
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     top: 0;
     bottom: 0;
     border-radius: 0;
     border: 0;
     text-indent: 30px;
-    width: auto; height: auto;
+    height: 100%;
     position: absolute;
     z-index: 1;
 }
