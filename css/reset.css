@@ -73,9 +73,13 @@ input {
     line-height: normal;
 }
 
-/* Hide default number spinner controls in Chrome */
+/* Hide default number spinner controls */
 input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button { 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-o-inner-spin-button,
+input[type="number"]::-o-outer-spin-button,
+input[type="number"]::inner-spin-button,
+input[type="number"]::outer-spin-button  {
 display: none;
 }
 

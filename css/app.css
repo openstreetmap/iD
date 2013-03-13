@@ -892,8 +892,7 @@ div.combobox {
 }
 
 .combobox-carat {
-    margin-left: -15px;
-    margin-right: 5px;
+    margin-left: -20px;
     display:inline-block;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     border-top: 5px solid #ccc;
