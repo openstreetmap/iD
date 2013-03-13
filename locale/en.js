@@ -382,7 +382,7 @@ locale.en = {
                 }
             },
             "roadtype": {
-                "label": "Road Type",
+                "label": "Features",
                 "options": {
                     "bridge": "Bridge",
                     "tunnel": "Tunnel",
