@@ -93,7 +93,7 @@ iD.svg.Surface = function() {
             .attr({
                 id: 'sprite',
                 width: 440,
-                height: 200,
+                height: 220,
                 'xlink:href': 'img/sprite.png'
             });
 

@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="440"
-   height="200"
+   height="220"
    id="svg12393"
    version="1.1"
    inkscape:version="0.48.2 r9819"
@@ -39,21 +39,21 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="318.18348"
-     inkscape:cy="95.476233"
+     inkscape:cx="269.07592"
+     inkscape:cy="14.857461"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="700"
-     inkscape:window-x="48"
-     inkscape:window-y="0"
+     inkscape:window-x="361"
+     inkscape:window-y="86"
      inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="true">
@@ -66,120 +66,128 @@
        snapvisiblegridlinesonly="true" />
     <sodipodi:guide
        orientation="1,0"
-       position="0,200"
+       position="0,220"
        id="guide12508" />
     <sodipodi:guide
        orientation="1,0"
-       position="20,200"
+       position="20,220"
        id="guide12512" />
     <sodipodi:guide
        orientation="1,0"
-       position="40,200"
+       position="40,220"
        id="guide12514" />
     <sodipodi:guide
        orientation="1,0"
-       position="60,200"
+       position="60,220"
        id="guide12516" />
     <sodipodi:guide
        orientation="1,0"
-       position="80,200"
+       position="80,220"
        id="guide12518" />
     <sodipodi:guide
        orientation="0,1"
-       position="0,180"
+       position="0,200"
        id="guide12520" />
     <sodipodi:guide
        orientation="1,0"
-       position="100,200"
+       position="100,220"
        id="guide12522" />
     <sodipodi:guide
        orientation="1,0"
-       position="120,200"
+       position="120,220"
        id="guide12590" />
     <sodipodi:guide
        orientation="1,0"
-       position="140,290"
+       position="140,310"
        id="guide12592" />
     <sodipodi:guide
        orientation="1,0"
-       position="160,200"
+       position="160,220"
        id="guide12647" />
     <sodipodi:guide
        orientation="1,0"
-       position="180,200"
+       position="180,220"
        id="guide12649" />
     <sodipodi:guide
        orientation="1,0"
-       position="200,200"
+       position="200,220"
        id="guide12672" />
     <sodipodi:guide
        orientation="1,0"
-       position="220,200"
+       position="220,220"
        id="guide14109" />
     <sodipodi:guide
        orientation="0,1"
-       position="195,160"
+       position="195,180"
        id="guide14199" />
     <sodipodi:guide
        orientation="0,1"
-       position="15,200"
+       position="15,220"
        id="guide14589" />
     <sodipodi:guide
        orientation="0,1"
-       position="145,140"
+       position="145,160"
        id="guide15519" />
     <sodipodi:guide
        orientation="0,1"
-       position="90,120"
+       position="90,140"
        id="guide15521" />
     <sodipodi:guide
        orientation="0,1"
-       position="15,20"
+       position="15,40"
        id="guide32247" />
     <sodipodi:guide
        orientation="0,1"
-       position="55,100"
+       position="55,120"
        id="guide47490" />
     <sodipodi:guide
        orientation="0,1"
-       position="90,80"
+       position="90,100"
        id="guide47492" />
     <sodipodi:guide
        orientation="0,1"
-       position="110,40"
+       position="110,60"
        id="guide47494" />
     <sodipodi:guide
        orientation="0,1"
-       position="145,60"
+       position="145,80"
        id="guide47496" />
     <sodipodi:guide
        orientation="1,0"
-       position="320,191"
+       position="320,211"
        id="guide14115" />
     <sodipodi:guide
        orientation="1,0"
-       position="360,190"
+       position="360,210"
        id="guide3406" />
     <sodipodi:guide
        orientation="1,0"
-       position="380,185"
+       position="380,205"
        id="guide3408" />
     <sodipodi:guide
        orientation="1,0"
-       position="240,196"
+       position="240,216"
        id="guide15954" />
     <sodipodi:guide
        orientation="1,0"
-       position="400,210"
+       position="400,230"
        id="guide15997" />
     <sodipodi:guide
        orientation="1,0"
-       position="420,191"
+       position="420,211"
        id="guide10219" />
     <sodipodi:guide
        orientation="1,0"
-       position="440,215"
+       position="440,235"
        id="guide26209" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="20,20"
+       id="guide6774" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="15,0"
+       id="guide6776" />
   </sodipodi:namedview>
   <metadata
      id="metadata12398">
@@ -1289,5 +1297,131 @@
        id="path25361-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccc" />
+    <g
+       id="g6764">
+      <rect
+         ry="1.9999965"
+         rx="1.9999967"
+         style="color:#000000;fill:#f6f6f6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect6716"
+         width="25.103449"
+         height="8.0000134"
+         x="128.94829"
+         y="182" />
+      <rect
+         y="187"
+         x="128.94829"
+         height="3.0000033"
+         width="25.103449"
+         id="rect5926"
+         style="color:#000000;fill:#f6f6f6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9584-2-9"
+         d="m 116,183 -1,1 0,4 -4,0 -1,1 0,1 1,1 4,0 0,4 1,1 1,0 1,-1 0,-4 4,0 1,-1 0,-1 -1,-1 -4,0 0,-4 -1,-1 -1,0 z"
+         style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         ry="1.9999998"
+         rx="2"
+         style="color:#000000;fill:none;stroke:#a9a9a9;stroke-width:0.99999994;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect5946"
+         width="26"
+         height="14.00002"
+         x="128.5"
+         y="182.49998" />
+      <rect
+         style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect6772"
+         width="25.103449"
+         height="1"
+         x="128.94829"
+         y="189" />
+    </g>
+    <path
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 49,205 -1,1 0,9 1,1 12,0 1,-1 0,-9 -1,-1 z m 1,3 5,2.8125 4.614121,-2.59544 L 60,208 l 0,1.5 -5,3 -5,-3 z"
+       id="rect6778"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccccccccc" />
+    <path
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 71,203 -1,1 0,12 1,1 8,0 1,-1 0,-12 -1,-1 -8,0 z m 1,2 6,0 0,5 -6,0 0,-5 z m 0,7 6,0 0,1 -6,0 0,-1 z m 0,2 6,0 0,1 -6,0 0,-1 z"
+       id="rect6788"
+       inkscape:connector-curvature="0" />
+    <path
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 89,205 1,-1 10,0 1,1 0,8 -12,0 z"
+       id="rect6808"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 89,213 12,0 2,2 -1,1 -14,0 -1,-1 z"
+       id="rect6810"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path6814"
+       d="m 91,206 8,0 0,5 -8,0 z"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 90,202 -5,4 1,1 2,0 0,2 4,0 0,-2 2,0 1,-1 z m -2,9 0,2 -2,0 -1,1 5,4 5,-4 -1,-1 -2,0 0,-2 z"
+       transform="translate(25,-3.4453126e-6)"
+       id="path16625-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccccccccc" />
+    <rect
+       style="color:#000000;fill:none;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6897"
+       width="440"
+       height="220"
+       x="25"
+       y="-3.4453126e-06" />
+    <path
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 127.5,205 -1,1 5,10 1.21875,0 2.28125,-3.9375 2.28125,3.9375 1.21875,0 5,-10 -1,-1 -1,0 -3.5,7.5 -1.5,-2.5 2,-4 -0.5,-1 -1.5,0 -1.5,3.5 -1.5,-3.5 -1.5,0 -0.5,1 2,4 -1.5,2.5 -3.5,-7.5 z"
+       id="path6899"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccccccccccccccc" />
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6918"
+       sodipodi:cx="10"
+       sodipodi:cy="209"
+       sodipodi:rx="8"
+       sodipodi:ry="8"
+       d="m 18,209 a 8,8 0 1 1 -16,0 8,8 0 1 1 16,0 z"
+       transform="translate(25,0.99999655)" />
+    <path
+       transform="matrix(0.75,0,0,0.75,27.5,53.249997)"
+       d="m 18,209 a 8,8 0 1 1 -16,0 8,8 0 1 1 16,0 z"
+       sodipodi:ry="8"
+       sodipodi:rx="8"
+       sodipodi:cy="209"
+       sodipodi:cx="10"
+       id="path6920"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc" />
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6922"
+       sodipodi:cx="10"
+       sodipodi:cy="207"
+       sodipodi:rx="1"
+       sodipodi:ry="1"
+       d="m 11,207 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+       transform="matrix(2,0,0,2,15,-207)" />
+    <path
+       transform="translate(25,-3.4453126e-6)"
+       style="color:#000000;fill:#a9a9a9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 8,211 1,-1 2,0 1,1 0,3 -4,0 z"
+       id="rect6926"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
   </g>
 </svg>

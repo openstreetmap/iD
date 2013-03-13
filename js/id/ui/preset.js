@@ -32,9 +32,16 @@ iD.ui.preset = function(context) {
         draw(formwrap, preset.fields);
 
         var wrap = selection.append('div')
-            .attr('class', 'col12 inspector-inner');
+            .attr('class', 'col12 more-buttons inspector-inner');
 
-        formbuttonwrap = wrap.append('div')
+        wraplabel = wrap.append('h4');
+
+        wraplabel.append('div').attr('class','icon add-form');
+        wraplabel.append('span')
+        .attr('class','deemphasize')
+        .text('Add additional forms');
+
+       formbuttonwrap = wrap.append('div')
             .attr('class', 'col9 preset-input');
 
         formbuttonwrap.selectAll('button')
