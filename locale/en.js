@@ -165,7 +165,7 @@ locale.en = {
     },
 
     geocoder: {
-        title: "Find A Place",
+        title: "Find a place",
         placeholder: "Find a place",
         no_results: "Couldn't locate a place named '{name}'"
     },
@@ -177,21 +177,21 @@ locale.en = {
     inspector: {
         no_documentation_combination: "There is no documentation available for this tag combination",
         no_documentation_key: "There is no documentation available for this key",
-        new_tag: "New Tag",
+        new_tag: "New tag",
         edit_tags: "Edit tags",
         okay: "Okay",
         view_on_osm: "View on OSM",
         name: "Name",
-        editing: "Editing {type}",
+        editing: "Edit details",
         additional: "Additional tags",
-        choose: "What are you adding?",
+        choose: "Select feature type",
         results: "{n} results for {search}",
         reference: "View on OpenStreetMap Wiki →"
     },
 
     background: {
         title: "Background",
-        description: "Background Settings",
+        description: "Background settings",
         percent_brightness: "{opacity}% brightness",
         fix_misalignment: "Fix misalignment",
         reset: "reset"
