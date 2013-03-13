@@ -10,9 +10,6 @@
         }
     },
     "form": [
-        {
-            "key": "natural",
-            "type": "combo"
-        }
+        "natural"
     ]
 }

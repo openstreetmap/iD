@@ -12,10 +12,7 @@
         ]
     },
     "form": [
-        {
-            "key": "construction",
-            "type": "combo"
-        },
+        "construction",
         "operator"
     ]
 }

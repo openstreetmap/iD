@@ -10,9 +10,6 @@
         }
     },
     "form": [
-        {
-            "key": "leisure",
-            "type": "combo"
-        }
+        "leisure"
     ]
 }

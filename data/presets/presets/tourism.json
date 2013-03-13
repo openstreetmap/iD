@@ -10,9 +10,6 @@
         }
     },
     "form": [
-        {
-            "key": "tourism",
-            "type": "combo"
-        }
+        "tourism"
     ]
 }

@@ -12,9 +12,6 @@
         }
     },
     "form": [
-        {
-            "key": "aeroway",
-            "type": "combo"
-        }
+        "aeroway"
     ]
 }

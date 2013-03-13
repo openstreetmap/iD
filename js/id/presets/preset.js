@@ -7,11 +7,7 @@ iD.presets.Preset = function(preset, forms) {
     preset.additional = preset.additional ? preset.additional.map(getForms) : [];
 
     function getForms(f) {
-        if (typeof f === 'string') {
-            return forms[f];
-        } else {
-            return iD.presets.Form(f, f.key);
-        }
+        return forms[f];
     }
 
     preset.matchGeometry = function(entity, resolver) {

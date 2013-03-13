@@ -12,9 +12,6 @@
         }
     },
     "form": [
-        {
-            "key": "man_made",
-            "type": "combo"
-        }
+        "man_made"
     ]
 }

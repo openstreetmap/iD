@@ -11,9 +11,6 @@
         "terms": []
     },
     "form": [
-        {
-            "key": "wetland",
-            "type": "combo"
-        }
+        "wetland"
     ]
 }

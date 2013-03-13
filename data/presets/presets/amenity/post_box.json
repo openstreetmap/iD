@@ -19,9 +19,6 @@
     "icon": "post",
     "form": [
         "operator",
-        {
-            "key": "collection_times",
-            "type": "text"
-        }
+        "collection_times"
     ]
 }

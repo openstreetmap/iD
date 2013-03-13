@@ -12,9 +12,6 @@
         }
     },
     "form": [
-        {
-            "key": "highway",
-            "type": "combo"
-        }
+        "highway"
     ]
 }

@@ -10,9 +10,6 @@
         }
     },
     "form": [
-        {
-            "key": "landuse",
-            "type": "combo"
-        }
+        "landuse"
     ]
 }
