@@ -2,17 +2,17 @@ locale.en = {
     modes: {
         add_area: {
             title: "Area",
-            description: "Add parks, buildings, lakes, or other areas to the map.",
+            description: "Add parks, buildings, lakes or other areas to the map.",
             tail: "Click on the map to start drawing an area, like a park, lake, or building."
         },
         add_line: {
             title: "Line",
-            description: "Lines can be highways, streets, pedestrian paths, or even canals.",
+            description: "Add highways, streets, pedestrian paths, canals or other lines to the map.",
             tail: "Click on the map to start drawing a road, path, or route."
         },
         add_point: {
             title: "Point",
-            description: "Restaurants, monuments, and postal boxes are points.",
+            description: "Add restaurants, monuments, postal boxes or other points to the map.",
             tail: "Click on the map to add a point."
         },
         browse: {
