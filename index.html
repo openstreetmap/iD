@@ -6,8 +6,12 @@ layout: default
 <div class='pad4 center header col12'>
   <h1>{{page.title}}</h1>
   <h2>A Javascript OpenStreetMap Editor</h2>
-  <p><strong>Current status: <a href="https://github.com/systemed/iD/">0.0.0-alpha3</a></strong></p>
-  <div class='screenshot'></div>
+  <p><strong>Current status: <a href="https://github.com/systemed/iD/">0.0.0-beta1</a></strong></p>
+  <div class='clearfix actions'>
+    <div class='pad4'>
+      <a href='#' id='start-mapping' class='button big'>Start Mapping</a>
+    </div>
+  </div>
 </div>
 
 <div class='shadow'>
@@ -20,11 +24,6 @@ layout: default
           {{item.content | markdownify}}
         </div>
       {% endfor %}
-    <div class='video clearfix col12 pad4'>
-      <div class='force-aspect-ratio'>
-        <iframe id='player' src="http://player.vimeo.com/video/57155953" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-      </div>
-    </div>
 
     <div class='clearfix actions'>
       <div class='col6 pad4 trynow'>
@@ -48,3 +47,23 @@ layout: default
   </div>
 
 </div>
+
+<script>
+var instance = 'http://openstreetmap.us/iD/release/';
+function geoSuccess(position) {
+    window.location = instance + '#' +
+        'map=19.00/' + position.coords.longitude + '/' + position.coords.latitude;
+}
+function geoError(position) {
+    window.location = instance;
+}
+document.getElementById('start-mapping').onclick = function() {
+    if (navigator.geolocation) {
+        this.className += ' loading';
+        navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+    } else {
+        geoError();
+    }
+    return false;
+};
+</script>

@@ -17,14 +17,14 @@ h1 {
   color: #f8f8f8;
   position: fixed;
   z-index: 1;
-  height: 800px;
+  height: 400px;
   top: 0;
 }
 
 .header h2 { margin-bottom: 0;}
 
 .shadow {
-  margin-top: 590px;
+  margin-top: 420px;
   position: relative;
   background: white;
   z-index: 2;
@@ -36,6 +36,10 @@ h1 {
 }
 
 .section { padding-top: 0;}
+
+a.button.big.loading {
+  background: url({{site.baseurl}}/img/loading.gif);
+}
 
 .screenshot {
   opacity: 0;
@@ -105,6 +109,13 @@ a.button {
   padding: 8px;
 }
 a.button:hover { background: #54af29; }
+
+a.button.big {
+  font-size:30px;
+  height:55px;
+  line-height:1.25em;
+  padding:8px 15px;
+}
 
 .footer {
   color: white;
