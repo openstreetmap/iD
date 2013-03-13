@@ -166,7 +166,7 @@ locale.lv = {
 
     geocoder: {
         title: "Atrast vietu",
-        placeholder: "meklē vietu",
+        placeholder: "meklēt vietu",
         no_results: "Nevar atrast vietu '{name}'"
     },
 
