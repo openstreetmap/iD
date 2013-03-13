@@ -12,10 +12,7 @@
     },
     "icon": "shop",
     "form": [
-        {
-            "key": "shop",
-            "type": "combo"
-        },
+        "shop",
         "address",
         "opening_hours"
     ]

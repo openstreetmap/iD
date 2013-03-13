@@ -12,9 +12,6 @@
         }
     },
     "form": [
-        {
-            "key": "railway",
-            "type": "combo"
-        }
+        "railway"
     ]
 }

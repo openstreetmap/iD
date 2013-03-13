@@ -13,7 +13,6 @@
     },
     "form": [
         "operator",
-        "building",
-        "address"
+        "building"
     ]
 }

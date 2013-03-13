@@ -13,9 +13,6 @@
         ]
     },
     "form": [
-        {
-            "key": "crossing",
-            "type": "combo"
-        }
+        "crossing"
     ]
 }

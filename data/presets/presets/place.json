@@ -10,9 +10,6 @@
         }
     },
     "form": [
-        {
-            "key": "place",
-            "type": "combo"
-        }
+        "place"
     ]
 }

@@ -12,10 +12,7 @@
         }
     },
     "form": [
-        {
-            "key": "denotation",
-            "type": "combo"
-        }
+        "denotation"
     ],
     "icon": "park"
 }

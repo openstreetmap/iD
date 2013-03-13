@@ -12,9 +12,6 @@
         }
     },
     "form": [
-        {
-            "key": "waterway",
-            "type": "combo"
-        }
+        "waterway"
     ]
 }

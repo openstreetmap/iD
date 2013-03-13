@@ -11,11 +11,7 @@
     },
     "icon": "highway-service",
     "form": [
-        {
-            "key": "service",
-            "type": "combo",
-            "options": ["parking_aisle", "driveway", "alley", "drive-through", "emergency_access"]
-        },
+        "service",
         "oneway",
         "roadtype",
         "access",

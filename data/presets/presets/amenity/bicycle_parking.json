@@ -1,18 +1,18 @@
 {
-    "name": "construction",
+    "name": "bicycle parking",
     "match": {
         "geometry": [
             "point",
             "area"
         ],
         "tags": {
-            "landuse": "construction"
-        },
-        "terms": [
-        ]
+            "amenity": "bicycle_parking"
+        }
     },
+    "icon": "bicycle",
     "form": [
-        "construction",
+        "bicycle_parking",
+        "capacity",
         "operator"
     ]
 }

@@ -10,9 +10,6 @@
         "terms": []
     },
     "form": [
-        {
-            "key": "water",
-            "type": "combo"
-        }
+        "water"
     ]
 }

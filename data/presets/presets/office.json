@@ -12,10 +12,7 @@
     },
     "icon": "commercial",
     "form": [
-        {
-            "key": "office",
-            "type": "combo"
-        },
+        "office",
         "address",
         "opening_hours"
     ]

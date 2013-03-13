@@ -257,8 +257,17 @@ locale.en = {
                     "city": "City"
                 }
             },
+            "aeroway": {
+                "label": "Type"
+            },
+            "amenity": {
+                "label": "Type"
+            },
             "atm": {
                 "label": "ATM"
+            },
+            "bicycle_parking": {
+                "label": "Type"
             },
             "building": {
                 "label": "Building"
@@ -272,11 +281,23 @@ locale.en = {
             "capacity": {
                 "label": "Capacity"
             },
+            "collection_times": {
+                "label": "Collection Times"
+            },
+            "construction": {
+                "label": "Type"
+            },
+            "crossing": {
+                "label": "Type"
+            },
             "cuisine": {
                 "label": "Cuisine"
             },
             "denomination": {
                 "label": "Denomination"
+            },
+            "denotation": {
+                "label": "Denotation"
             },
             "elevation": {
                 "label": "Elevation"
@@ -290,6 +311,9 @@ locale.en = {
             "fee": {
                 "label": "Fee"
             },
+            "highway": {
+                "label": "Type"
+            },
             "internet_access": {
                 "label": "Internet Access",
                 "options": {
@@ -300,17 +324,32 @@ locale.en = {
                     "terminal": "Terminal"
                 }
             },
+            "landuse": {
+                "label": "Type"
+            },
             "layer": {
                 "label": "Layer"
+            },
+            "leisure": {
+                "label": "Type"
             },
             "levels": {
                 "label": "Levels"
             },
+            "man_made": {
+                "label": "Type"
+            },
             "maxspeed": {
                 "label": "Speed Limit"
             },
+            "natural": {
+                "label": "Natural"
+            },
             "network": {
                 "label": "Network"
+            },
+            "office": {
+                "label": "Type"
             },
             "oneway": {
                 "label": "One Way"
@@ -323,6 +362,12 @@ locale.en = {
             },
             "phone": {
                 "label": "Phone"
+            },
+            "place": {
+                "label": "Type"
+            },
+            "railway": {
+                "label": "Type"
             },
             "religion": {
                 "label": "Religion",
@@ -337,7 +382,7 @@ locale.en = {
                 }
             },
             "roadtype": {
-                "label": "Road Type",
+                "label": "Features",
                 "options": {
                     "bridge": "Bridge",
                     "tunnel": "Tunnel",
@@ -345,11 +390,41 @@ locale.en = {
                     "cutting": "Cutting"
                 }
             },
+            "service": {
+                "label": "Type"
+            },
             "shelter": {
                 "label": "Shelter"
             },
+            "shop": {
+                "label": "Type"
+            },
+            "source": {
+                "label": "Source"
+            },
+            "sport": {
+                "label": "Sport"
+            },
             "surface": {
                 "label": "Surface"
+            },
+            "tourism": {
+                "label": "Type"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "water": {
+                "label": "Type"
+            },
+            "waterway": {
+                "label": "Type"
+            },
+            "wetland": {
+                "label": "Type"
+            },
+            "wood": {
+                "label": "Type"
             }
         }
     }
