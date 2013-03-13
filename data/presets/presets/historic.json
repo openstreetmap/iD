@@ -1,0 +1,15 @@
+{
+    "name": "historic",
+    "match": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "historic": "*"
+        }
+    },
+    "form": [
+        "historic"
+    ]
+}

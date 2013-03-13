@@ -314,6 +314,9 @@ locale.en = {
             "highway": {
                 "label": "Type"
             },
+            "historic": {
+                "label": "Type"
+            },
             "internet_access": {
                 "label": "Internet Access",
                 "options": {
