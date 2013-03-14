@@ -1,1 +1,268 @@
-{"access":{"key":"access","type":"combo"},"address":{"type":"address","keys":["addr:housename","addr:housenumber","addr:street","addr:city"],"icon":"address","universal":true},"aeroway":{"key":"aeroway","type":"combo"},"amenity":{"key":"amenity","type":"combo"},"atm":{"key":"atm","type":"check"},"bicycle_parking":{"key":"bicycle_parking","type":"combo"},"building":{"key":"building","type":"combo"},"building_area":{"key":"building","type":"check","default":"yes","geometry":"area"},"building_yes":{"key":"building","type":"combo","default":"yes"},"capacity":{"key":"capacity","type":"text"},"collection_times":{"key":"collection_times","type":"text"},"construction":{"key":"construction","type":"combo"},"crossing":{"key":"crossing","type":"combo"},"cuisine":{"key":"cuisine","type":"combo","indexed":true},"denomination":{"key":"denomination","type":"combo"},"denotation":{"key":"denotation","type":"combo"},"elevation":{"key":"ele","type":"number","icon":"elevation","universal":true},"emergency":{"key":"emergency","type":"check"},"fax":{"key":"fax","type":"tel"},"fee":{"key":"fee","type":"check"},"highway":{"key":"highway","type":"combo"},"historic":{"key":"historic","type":"combo"},"internet_access":{"key":"internet_access","type":"combo","options":["yes","no","wlan","wired","terminal"]},"landuse":{"key":"landuse","type":"combo"},"layer":{"key":"layer","type":"combo"},"leisure":{"key":"leisure","type":"combo"},"levels":{"key":"building:levels","type":"number"},"man_made":{"key":"man_made","type":"combo"},"maxspeed":{"key":"maxspeed","type":"combo"},"natural":{"key":"natural","type":"combo"},"network":{"key":"network","type":"text"},"note":{"key":"note","type":"textarea","universal":true},"office":{"key":"office","type":"combo"},"oneway":{"key":"oneway","type":"check"},"opening_hours":{"key":"opening_hours","type":"text"},"operator":{"key":"operator","type":"text"},"phone":{"key":"phone","type":"tel","icon":"telephone","universal":true},"place":{"key":"place","type":"combo"},"railway":{"key":"railway","type":"combo"},"religion":{"key":"religion","type":"combo","options":["christian","muslim","buddhist","jewish","hindu","shinto","taoist"]},"roadtype":{"type":"radio","options":["bridge","tunnel","embankment","cutting"]},"service":{"key":"service","type":"combo","options":["parking_aisle","driveway","alley","drive-through","emergency_access"]},"shelter":{"key":"shelter","type":"check"},"shop":{"key":"shop","type":"combo"},"source":{"key":"source","type":"text","icon":"source","universal":true},"sport":{"key":"sport","type":"combo"},"surface":{"key":"surface","type":"combo"},"tourism":{"key":"tourism","type":"combo"},"water":{"key":"water","type":"combo"},"waterway":{"key":"waterway","type":"combo"},"website":{"key":"website","type":"url","icon":"website","universal":true},"wetland":{"key":"wetland","type":"combo"},"wikipedia":{"key":"wikipedia","type":"text","icon":"wikipedia","universal":true},"wood":{"key":"wood","type":"combo"}}
+{
+    "access": {
+        "key": "access",
+        "type": "combo"
+    },
+    "address": {
+        "type": "address",
+        "keys": [
+            "addr:housename",
+            "addr:housenumber",
+            "addr:street",
+            "addr:city"
+        ],
+        "icon": "address",
+        "universal": true
+    },
+    "aeroway": {
+        "key": "aeroway",
+        "type": "combo"
+    },
+    "amenity": {
+        "key": "amenity",
+        "type": "combo"
+    },
+    "atm": {
+        "key": "atm",
+        "type": "check"
+    },
+    "bicycle_parking": {
+        "key": "bicycle_parking",
+        "type": "combo"
+    },
+    "building": {
+        "key": "building",
+        "type": "combo"
+    },
+    "building_area": {
+        "key": "building",
+        "type": "check",
+        "default": "yes",
+        "geometry": "area"
+    },
+    "building_yes": {
+        "key": "building",
+        "type": "combo",
+        "default": "yes"
+    },
+    "capacity": {
+        "key": "capacity",
+        "type": "text"
+    },
+    "collection_times": {
+        "key": "collection_times",
+        "type": "text"
+    },
+    "construction": {
+        "key": "construction",
+        "type": "combo"
+    },
+    "crossing": {
+        "key": "crossing",
+        "type": "combo"
+    },
+    "cuisine": {
+        "key": "cuisine",
+        "type": "combo",
+        "indexed": true
+    },
+    "denomination": {
+        "key": "denomination",
+        "type": "combo"
+    },
+    "denotation": {
+        "key": "denotation",
+        "type": "combo"
+    },
+    "elevation": {
+        "key": "ele",
+        "type": "number",
+        "icon": "elevation",
+        "universal": true
+    },
+    "emergency": {
+        "key": "emergency",
+        "type": "check"
+    },
+    "fax": {
+        "key": "fax",
+        "type": "tel"
+    },
+    "fee": {
+        "key": "fee",
+        "type": "check"
+    },
+    "highway": {
+        "key": "highway",
+        "type": "combo"
+    },
+    "historic": {
+        "key": "historic",
+        "type": "combo"
+    },
+    "internet_access": {
+        "key": "internet_access",
+        "type": "combo",
+        "options": [
+            "yes",
+            "no",
+            "wlan",
+            "wired",
+            "terminal"
+        ]
+    },
+    "landuse": {
+        "key": "landuse",
+        "type": "combo"
+    },
+    "layer": {
+        "key": "layer",
+        "type": "combo"
+    },
+    "leisure": {
+        "key": "leisure",
+        "type": "combo"
+    },
+    "levels": {
+        "key": "building:levels",
+        "type": "number"
+    },
+    "man_made": {
+        "key": "man_made",
+        "type": "combo"
+    },
+    "maxspeed": {
+        "key": "maxspeed",
+        "type": "combo"
+    },
+    "natural": {
+        "key": "natural",
+        "type": "combo"
+    },
+    "network": {
+        "key": "network",
+        "type": "text"
+    },
+    "note": {
+        "key": "note",
+        "type": "textarea",
+        "universal": true
+    },
+    "office": {
+        "key": "office",
+        "type": "combo"
+    },
+    "oneway": {
+        "key": "oneway",
+        "type": "check"
+    },
+    "opening_hours": {
+        "key": "opening_hours",
+        "type": "text"
+    },
+    "operator": {
+        "key": "operator",
+        "type": "text"
+    },
+    "phone": {
+        "key": "phone",
+        "type": "tel",
+        "icon": "telephone",
+        "universal": true
+    },
+    "place": {
+        "key": "place",
+        "type": "combo"
+    },
+    "railway": {
+        "key": "railway",
+        "type": "combo"
+    },
+    "religion": {
+        "key": "religion",
+        "type": "combo",
+        "options": [
+            "christian",
+            "muslim",
+            "buddhist",
+            "jewish",
+            "hindu",
+            "shinto",
+            "taoist"
+        ]
+    },
+    "roadtype": {
+        "type": "radio",
+        "options": [
+            "bridge",
+            "tunnel",
+            "embankment",
+            "cutting"
+        ]
+    },
+    "service": {
+        "key": "service",
+        "type": "combo",
+        "options": [
+            "parking_aisle",
+            "driveway",
+            "alley",
+            "drive-through",
+            "emergency_access"
+        ]
+    },
+    "shelter": {
+        "key": "shelter",
+        "type": "check"
+    },
+    "shop": {
+        "key": "shop",
+        "type": "combo"
+    },
+    "source": {
+        "key": "source",
+        "type": "text",
+        "icon": "source",
+        "universal": true
+    },
+    "sport": {
+        "key": "sport",
+        "type": "combo"
+    },
+    "surface": {
+        "key": "surface",
+        "type": "combo"
+    },
+    "tourism": {
+        "key": "tourism",
+        "type": "combo"
+    },
+    "water": {
+        "key": "water",
+        "type": "combo"
+    },
+    "waterway": {
+        "key": "waterway",
+        "type": "combo"
+    },
+    "website": {
+        "key": "website",
+        "type": "url",
+        "icon": "website",
+        "universal": true
+    },
+    "wetland": {
+        "key": "wetland",
+        "type": "combo"
+    },
+    "wikipedia": {
+        "key": "wikipedia",
+        "type": "text",
+        "icon": "wikipedia",
+        "universal": true
+    },
+    "wood": {
+        "key": "wood",
+        "type": "combo"
+    }
+}

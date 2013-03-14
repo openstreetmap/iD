@@ -18,12 +18,12 @@ var fields = {};
 glob.sync(__dirname + '/data/presets/fields/*.json').forEach(function(file) {
     fields[path.basename(file, '.json')] = read(file);
 });
-fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields));
+fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields, null, 4));
 
 fs.writeFileSync('data/presets/presets.json', JSON.stringify(
     glob.sync(__dirname + '/data/presets/presets/**/*.json').map(function(file) {
         return read(file);
-    })));
+    }), null, 4));
 
 fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
     deprecated: r('deprecated.json'),
