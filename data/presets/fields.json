@@ -84,6 +84,10 @@
         "key": "emergency",
         "type": "check"
     },
+    "entrance": {
+        "key": "entrance",
+        "type": "combo"
+    },
     "fax": {
         "key": "fax",
         "type": "tel"

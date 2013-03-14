@@ -42,6 +42,8 @@ en:
         label: Elevation
       emergency: 
         label: Emergency
+      entrance:
+        label: Type
       fax: 
         label: Fax
       fee: 

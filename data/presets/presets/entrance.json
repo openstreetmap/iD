@@ -1,0 +1,12 @@
+{
+    "name": "entrance",
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "entrance": "*"
+    },
+    "fields": [
+        "entrance"
+    ]
+}

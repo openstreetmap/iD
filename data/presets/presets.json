@@ -927,6 +927,18 @@
         "terms": []
     },
     {
+        "name": "entrance",
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "entrance": "*"
+        },
+        "fields": [
+            "entrance"
+        ]
+    },
+    {
         "name": "highway",
         "fields": [
             "highway"
