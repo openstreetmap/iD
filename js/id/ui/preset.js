@@ -61,6 +61,8 @@ iD.ui.preset = function(context) {
             d3.select(this).remove();
             if (!wrap.selectAll('button').node()) wrap.remove();
         }
+
+        if (!preset.additional || !preset.additional.length) wrap.remove();
     }
 
     function formKey(d) {

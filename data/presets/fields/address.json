@@ -6,5 +6,6 @@
         "addr:street",
         "addr:city"
     ],
+    "icon": "address",
     "universal": true
 }

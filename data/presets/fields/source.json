@@ -1,5 +1,6 @@
 {
     "key": "source",
     "type": "text",
+    "icon": "source",
     "universal": true
 }
