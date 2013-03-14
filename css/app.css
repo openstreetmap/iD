@@ -743,6 +743,15 @@ button.preset-add-field {
     margin-right: 10px;
 }
 
+.preset-add-field .tooltip.top .tooltip-arrow {
+    border-top-color: #000;
+}
+
+.preset-add-field .tooltip-inner {
+    background: #000;
+    color: #DDD;
+}
+
 .preset-fav button.fav {
     height: 30px;
     margin: 5px;

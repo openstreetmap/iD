@@ -51,10 +51,16 @@ iD.ui.preset = function(context) {
             .enter()
             .append('button')
                 .attr('class', 'preset-add-field')
-                .attr('title', function(d) { return d.label(); })
                 .on('click', addForm)
+                .each(tooltip)
                 .append('span')
                     .attr('class', function(d) { return 'icon ' + d.icon; });
+
+        function tooltip(d) {
+            d3.select(this).call(bootstrap.tooltip()
+                .placement('top')
+                .title(d.label()));
+        }
 
         function addForm(d) {
             draw(formwrap, [d]);
