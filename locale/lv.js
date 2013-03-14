@@ -7,12 +7,12 @@ locale.lv = {
         },
         add_line: {
             title: "Līnija",
-            description: "Līnijas var būt ceļi, ielas, takas vai pat kanāli.",
+            description: "Pievieno ceļus, ielas, takas kanālus un citas līnijas.",
             tail: "Klikšķiniet uz kartes, lai sāktu zīmēt līniju, piemēram, ceļu vai taku."
         },
         add_point: {
             title: "Punkts",
-            description: "Kafejnīcas, pieminekļi, un veikali var būt punkti.",
+            description: "Pievieno restorānus, pieminekļus, veikalus un citus punktus.",
             tail: "Klikšķiniet uz kartes, lai pievienotu interešu punktu."
         },
         browse: {
@@ -20,7 +20,7 @@ locale.lv = {
             description: "Pārlūko karti."
         },
         draw_area: {
-            tail: "Klikšķiniet, lai pievinotu mezglus apgabalam. Lai beigtu zīmēt apgabalu, klikšķiniet uz sākuma mezgla."
+            tail: "Klikšķiniet, lai pievienotu mezglus apgabalam. Lai beigtu zīmēt apgabalu, klikšķiniet uz sākuma mezgla."
         },
         draw_line: {
             tail: "Klikšķiniet, lai pievienotu mezglus līnijai. Lai savienotu ar citām linijām, klikšķiniet uz tām. Dubultklikšķis nobeidz līniju."
@@ -111,7 +111,7 @@ locale.lv = {
                 vertex: "Mezgls pārvietots.",
                 line: "Līnija pārvietota.",
                 area: "Apgabals pārvietots.",
-                multiple: "Moved multiple objects."
+                multiple: "Vairāki objekti pārvietoti."
             }
         },
         rotate: {
@@ -142,7 +142,7 @@ locale.lv = {
 
     just_edited: "Jūs nupat rediģējāt OpenStreetMap",
     browser_notice: "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 kartes rediģēšanai",
-    view_on_osm: "Apskatīt OSM lapu",
+    view_on_osm: "Aplūkot OSM kartē",
     zoom_in_edit: "pietuviniet, lai labotu karti",
     logout: "atslēgties",
     report_a_bug: "ziņot par kļūdu",
@@ -182,10 +182,12 @@ locale.lv = {
         okay: "Labi",
         view_on_osm: "Apskatīt OSM",
         name: "Name",
-        editing: "Rediģē {type}",
+        editing: "Mainīt detaļas",
         additional: "Papildus apzīmējumi",
-        choose: "Ko vēlaties pievienot?",
-        results: "Atrasti {n} rezultāti meklējot {search}"
+        choose: "Izvēlieties objekta tipu",
+        results: "Atrasti {n} rezultāti meklējot {search}",
+        reference: "Skatīt OpenStreetMap wiki →",
+        back_tooltip: "Mainīt objekta tipu"
     },
 
     background: {
@@ -205,8 +207,9 @@ locale.lv = {
     save: {
         title: "Saglabāt",
         help: "Saglabā izmaiņas, padarot tās redzamas citiem.",
+	no_changes: "Nav izmaiņu, ko saglabāt.",
         error: "Kļūda. Nevarēja saglabāt izmaiņas",
-        uploading: "Augšupielādē",
+        uploading: "Augšupielādē izmaiņas",
         unsaved_changes: "Jums ir nesaglabātas izmaiņas"
     },
 
