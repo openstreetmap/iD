@@ -57,7 +57,6 @@ data/data.js: $(DATA_FILES)
 	js/id/validate.js \
 	js/id/end.js \
 	js/lib/locale.js \
-	locale/*.js
 
 iD.js: node_modules Makefile
 	@rm -f $@
