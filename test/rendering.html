@@ -63,6 +63,12 @@
         context.presets = function() {
             return iD.presets().load({
                 presets: [{
+                    geometry: ['point'],
+                    tags: {
+                        amenity: 'restaurant'
+                    },
+                    icon: 'restaurant'
+                }, {
                     geometry: ['vertex'],
                     tags: {
                         highway: 'turning_circle'
@@ -77,6 +83,57 @@
                 }]
             });
         };
+
+        function tagHTML(d) {
+            return _.map(d, function (value, key) { return key + "=" + value;}).join("<br>");
+        }
+    </script>
+
+    <table>
+        <thead>
+            <tr><th></th><th>Base</th><th>Hover</th><th>Selected</th></tr>
+        </thead>
+        <tbody class="points">
+        </tbody>
+    </table>
+
+    <script>
+        var data = [{}, {amenity: 'restaurant'}],
+            modes = ['base', 'hover', 'selected'],
+            node = iD.Node({loc: [15, 30]}),
+            points = iD.svg.Points(projection, context);
+
+        var row = d3.select('.points').selectAll('tr')
+            .data(data)
+          .enter().append('tr');
+
+        row.append('th')
+            .html(tagHTML);
+
+        row.selectAll('td')
+            .data(function (d) {
+                return modes.map(function (m) {
+                    return _.extend({ mode: m }, d);
+                });
+            })
+          .enter()
+            .append('td')
+            .attr('class', function (d) { return d.mode === 'selected' ? 'mode-select' : 'mode-browse'; })
+            .append('svg')
+            .attr('width', 30)
+            .attr('height', 40)
+            .attr('data-zoom', function (d) { return d.zoom; })
+            .call(iD.svg.Surface())
+            .each(function (d) {
+                var n = node.update({tags: d}),
+                    graph = iD.Graph([n]);
+
+                d3.select(this)
+                    .attr('class', 'behavior-hover')
+                    .call(points, graph, [n], filter)
+                    .selectAll('.point')
+                    .classed(d.mode, d.mode !== 'base');
+            });
     </script>
 
     <table>
@@ -84,7 +141,7 @@
             <tr><th></th><th colspan="3">z16</th><th colspan="3">z17</th><th colspan="3">z18</th></tr>
             <tr><th></th><th>Base</th><th>Hover</th><th>Selected</th><th>Base</th><th>Hover</th><th>Selected</th><th>Base</th><th>Hover</th><th>Selected</th></tr>
         </thead>
-        <tbody class="points">
+        <tbody class="vertices">
         </tbody>
     </table>
 
@@ -109,7 +166,7 @@
             way = iD.Way({nodes: [node.id]}),
             vertices = iD.svg.Vertices(projection, context);
 
-        var row = d3.select('.points').selectAll('tr')
+        var row = d3.select('.vertices').selectAll('tr')
             .data(data)
           .enter().append('tr');
 
@@ -143,7 +200,6 @@
                     .classed(d.mode, d.mode !== 'base')
                     .classed('shared', d.shared);
             });
-
     </script>
 
     <table>
@@ -196,7 +252,7 @@
           .enter().append('tr');
 
         row.append('th')
-            .html(function (d) { return _.map(d, function (value, key) { return key + "=" + value;}).join("<br>"); });
+            .html(tagHTML);
 
         var a = iD.Node({loc: [15, 15]}),
             b = iD.Node({loc: [185, 15]}),

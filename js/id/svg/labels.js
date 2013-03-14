@@ -41,9 +41,9 @@ iD.svg.Labels = function(projection) {
     });
 
     var pointOffsets = [
-        [15, 2, 'start'], // right
-        [10, 0, 'start'], // unused right now
-        [-15, 0, 'end']
+        [15, -11, 'start'], // right
+        [10, -11, 'start'], // unused right now
+        [-15, -11, 'end']
     ];
 
     var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,

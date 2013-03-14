@@ -29,12 +29,10 @@ use {
 
 /* points */
 
-g.point circle {
-    fill:#fff;
-}
-
-g.point image {
-  pointer-events: none;
+g.point .stroke {
+    stroke: #444;
+    stroke-width: 1;
+    fill: #fff;
 }
 
 g.point .shadow {
@@ -44,13 +42,17 @@ g.point .shadow {
     transition: transform 100ms linear;
     -moz-transition: fill 100ms linear;
 }
+
 .behavior-hover g.point.hover:not(.selected) .shadow {
-    fill: #f6634f;
-    fill-opacity: 0.5;
+    stroke-width: 8;
+    stroke: #f6634f;
+    stroke-opacity: 0.5;
 }
+
 g.point.selected .shadow {
-    fill: #f6634f;
-    fill-opacity: 0.7;
+    stroke-width: 8;
+    stroke: #f6634f;
+    stroke-opacity: 0.7;
 }
 
 g.point.active, g.point.active * {
