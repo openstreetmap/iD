@@ -74,6 +74,8 @@ en:
         label: Natural
       network: 
         label: Network
+      note:
+        label: Note
       office: 
         label: Type
       oneway: 
@@ -119,13 +121,15 @@ en:
         label: Surface
       tourism: 
         label: Type
-      wikipedia: 
-        label: Wikipedia
-      water: 
+      water:
         label: Type
       waterway: 
         label: Type
+      website:
+        label: Website
       wetland: 
         label: Type
-      wood: 
+      wikipedia:
+        label: Wikipedia
+      wood:
         label: Type
