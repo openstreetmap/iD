@@ -1,5 +1,12 @@
-iD.svg.Vertices = function(projection) {
-    return function drawVertices(surface, graph, entities, filter) {
+iD.svg.Vertices = function(projection, context) {
+    var radiuses = {
+        //       z16-, z17, z18+, tagged
+        shadow: [6,    7.5,   7.5,  11.5],
+        stroke: [2.5,  3.5,   3.5,  7],
+        fill:   [1,    3,     3,    4.5]
+    };
+
+    return function drawVertices(surface, graph, entities, filter, zoom) {
         var vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -21,28 +28,75 @@ iD.svg.Vertices = function(projection) {
             .insert('g', ':first-child')
             .attr('class', 'node vertex');
 
+        if (zoom < 17) {
+            zoom = 0;
+        } else if (zoom < 18) {
+            zoom = 1;
+        } else {
+            zoom = 2;
+        }
+
         group.append('circle')
-            .attr('r', 9)
             .attr('class', 'node vertex shadow');
 
         group.append('circle')
-            .attr('r', 4)
             .attr('class', 'node vertex stroke');
 
         group.append('circle')
-            .attr('r', 3)
             .attr('class', 'node vertex fill');
 
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
             .call(iD.svg.MemberClasses(graph))
+            .classed('tagged', function(entity) { return entity.hasInterestingTags(); })
             .classed('shared', function(entity) { return graph.isShared(entity); });
 
-        // Selecting the following implicitly
-        // sets the data (vertex entity) on the elements
-        groups.select('circle.fill');
-        groups.select('circle.stroke');
-        groups.select('circle.shadow');
+        function center(entity) {
+            if (zoom !== 0 && entity.hasInterestingTags()) {
+                d3.select(this)
+                    .attr('cx', 0.5)
+                    .attr('cy', -0.5);
+            } else {
+                d3.select(this)
+                    .attr('cy', 0)
+                    .attr('cx', 0);
+            }
+        }
+
+        groups.select('circle.shadow')
+            .each(center)
+            .attr('r', function(entity) {
+                return radiuses.shadow[zoom !== 0 && entity.hasInterestingTags() ? 3 : zoom]
+            });
+
+        groups.select('circle.stroke')
+            .each(center)
+            .attr('r', function(entity) {
+                return radiuses.stroke[zoom !== 0 && entity.hasInterestingTags() ? 3 : zoom]
+            });
+
+        groups.select('circle.fill')
+            .each(center)
+            .attr('r', function(entity) {
+                return radiuses.fill[zoom !== 0 && entity.hasInterestingTags() ? 3 : zoom];
+            });
+
+        var use = groups.selectAll('use')
+            .data(function(entity) {
+                return zoom !== 0 && entity.hasInterestingTags() ? [entity] : [];
+            }, function(entity) {
+                return entity.id + '-' + zoom;
+            });
+
+        use.enter().append('use')
+            .attr('transform', 'translate(-6, -6)')
+            .attr('clip-path', 'url(#clip-square-12)')
+            .attr('xlink:href', function(entity) {
+                return '#maki-' + context.presets().match(entity, graph).icon + '-12';
+            });
+
+        use.exit()
+            .remove();
 
         groups.exit()
             .remove();

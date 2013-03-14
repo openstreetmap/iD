@@ -15,7 +15,7 @@ iD.Map = function(context) {
             .projection(projection),
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
-        vertices = iD.svg.Vertices(roundedProjection),
+        vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
@@ -87,7 +87,7 @@ iD.Map = function(context) {
         } else {
             surface
                 .call(points, graph, all, filter)
-                .call(vertices, graph, all, filter)
+                .call(vertices, graph, all, filter, map.zoom())
                 .call(lines, graph, all, filter, dimensions)
                 .call(areas, graph, all, filter)
                 .call(midpoints, graph, all, filter, extent)

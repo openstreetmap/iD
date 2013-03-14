@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <title>Rendering Tests</title>
     <link rel="stylesheet" href="../css/map.css">
+    <link rel="stylesheet" href="../css/maki.css">
 </head>
 <body>
     <!-- include source files here... -->
@@ -33,6 +34,10 @@
     <script src='../js/id/core/relation.js'></script>
     <script src='../js/id/core/way.js'></script>
 
+    <script src='../js/id/presets.js'></script>
+    <script src='../js/id/presets/collection.js'></script>
+    <script src='../js/id/presets/preset.js'></script>
+
     <form style="position: fixed; right: 10px; bottom: 10px">
         <input id="background-color" type="range" min="0" max="255" value="255">
         <label for="background-color">Background Color</label>
@@ -45,6 +50,100 @@
                 d3.select("body")
                     .style("background-color", d3.rgb(v,v,v));
             });
+
+        var infiniteExtent = iD.geo.Extent([0, 0], [Infinity, Infinity]),
+            projection = function(p) { return p; },
+            filter = d3.functor(true),
+            context = {};
+
+        projection.stream = function(listener) {
+            return listener;
+        };
+
+        context.presets = function() {
+            return iD.presets().load({
+                presets: [{
+                    geometry: ['vertex'],
+                    tags: {
+                        highway: 'turning_circle'
+                    },
+                    icon: 'circle'
+                }, {
+                    geometry: ['vertex'],
+                    tags: {
+                        railway: 'level_crossing'
+                    },
+                    icon: 'cross'
+                }]
+            });
+        };
+    </script>
+
+    <table>
+        <thead>
+            <tr><th></th><th colspan="3">z16</th><th colspan="3">z17</th><th colspan="3">z18</th></tr>
+            <tr><th></th><th>Base</th><th>Hover</th><th>Selected</th><th>Base</th><th>Hover</th><th>Selected</th><th>Base</th><th>Hover</th><th>Selected</th></tr>
+        </thead>
+        <tbody class="points">
+        </tbody>
+    </table>
+
+    <script>
+        var data = [{
+                type: 'normal',
+                tags: {}
+            }, {
+                type: 'shared',
+                shared: true,
+                tags: {}
+            }, {
+                type: 'highway=turning_circle',
+                tags: {highway: 'turning_circle'}
+            }, {
+                type: 'railway=level_crossing',
+                tags: {railway: 'level_crossing'}
+            }],
+            zooms = [16, 17, 18],
+            modes = ['base', 'hover', 'selected'],
+            node = iD.Node({loc: [15, 15]}),
+            way = iD.Way({nodes: [node.id]}),
+            vertices = iD.svg.Vertices(projection, context);
+
+        var row = d3.select('.points').selectAll('tr')
+            .data(data)
+          .enter().append('tr');
+
+        row.append('th')
+            .text(function (d) { return d.type; });
+
+        row.selectAll('td')
+            .data(function (d) {
+                return _.flatten(zooms.map(function (z) {
+                    return modes.map(function (m) {
+                        return _.extend({ zoom: z, mode: m }, d);
+                    });
+                }));
+            })
+          .enter()
+            .append('td')
+            .attr('class', function (d) { return d.mode === 'selected' ? 'mode-select' : 'mode-browse'; })
+            .append('svg')
+            .attr('width', 30)
+            .attr('height', 30)
+            .attr('data-zoom', function (d) { return d.zoom; })
+            .call(iD.svg.Surface())
+            .each(function (d) {
+                var n = node.update({tags: d.tags}),
+                    graph = iD.Graph([n, way]);
+
+                d3.select(this)
+                    .attr('class', 'behavior-hover')
+                    .call(vertices, graph, [n, way], filter, d.zoom)
+                    .selectAll('.vertex')
+                    .classed(d.mode, d.mode !== 'base')
+                    .classed('shared', d.shared);
+            });
+
     </script>
 
     <table>
@@ -57,8 +156,6 @@
     </table>
 
     <script>
-        var infiniteExtent = iD.geo.Extent([0, 0], [Infinity, Infinity]);
-
         var zooms = [16, 17],
             modes = ['base', 'hover', 'selected'],
             tags = [
@@ -101,18 +198,12 @@
         row.append('th')
             .html(function (d) { return _.map(d, function (value, key) { return key + "=" + value;}).join("<br>"); });
 
-        var projection = function(p) { return p; },
-            filter = d3.functor(true),
-            a = iD.Node({loc: [15, 15]}),
+        var a = iD.Node({loc: [15, 15]}),
             b = iD.Node({loc: [185, 15]}),
             way = iD.Way({nodes: [a.id, b.id]}),
             vertices = iD.svg.Vertices(projection),
             lines = iD.svg.Lines(projection),
             midpoints = iD.svg.Midpoints(projection);
-
-        projection.stream = function(listener) {
-            return listener;
-        };
 
         row.selectAll('td')
             .data(function (d) {
@@ -136,7 +227,7 @@
 
                 d3.select(this)
                     .attr('class', 'behavior-hover')
-                    .call(vertices, graph, [a, b], filter)
+                    .call(vertices, graph, [a, b], filter, d.zoom)
                     .call(lines, graph, [highway], filter)
                     .call(midpoints, graph, [highway], filter, infiniteExtent)
                     .selectAll('.line')
