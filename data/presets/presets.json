@@ -546,6 +546,22 @@
         ]
     },
     {
+        "name": "post office",
+        "icon": "post",
+        "fields": [
+            "operator",
+            "collection_times"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "post_office"
+        }
+    },
+    {
         "name": "pub",
         "icon": "beer",
         "fields": [
@@ -1117,6 +1133,17 @@
         "terms": []
     },
     {
+        "name": "basin",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "landuse": "basin"
+        },
+        "terms": []
+    },
+    {
         "name": "cemetery",
         "icon": "cemetery",
         "geometry": [
@@ -1348,6 +1375,22 @@
         "terms": []
     },
     {
+        "name": "american football field",
+        "icon": "america-football",
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "american_football"
+        },
+        "terms": []
+    },
+    {
         "name": "baseball diamond",
         "icon": "baseball",
         "geometry": [
@@ -1451,6 +1494,17 @@
         ],
         "tags": {
             "man_made": "pier"
+        }
+    },
+    {
+        "name": "water tower",
+        "icon": "water",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "man_made": "water_tower"
         }
     },
     {
@@ -1784,6 +1838,19 @@
         }
     },
     {
+        "name": "substation",
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "power": "substation"
+        }
+    },
+    {
         "name": "railway",
         "fields": [
             "railway"
@@ -1866,6 +1933,23 @@
             "shop": "*"
         },
         "terms": []
+    },
+    {
+        "name": "butcher",
+        "icon": "slaughterhouse",
+        "fields": [
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "shop": "butcher"
+        }
     },
     {
         "name": "supermarket",
