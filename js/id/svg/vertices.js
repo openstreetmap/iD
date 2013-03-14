@@ -55,7 +55,7 @@ iD.svg.Vertices = function(projection, context) {
         }
 
         function center(entity) {
-            if (zoom !== 0 && entity.hasInterestingTags()) {
+            if (icon(entity)) {
                 d3.select(this)
                     .attr('cx', 0.5)
                     .attr('cy', -0.5);
