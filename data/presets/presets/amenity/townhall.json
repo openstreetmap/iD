@@ -15,7 +15,8 @@
     ],
     "geometry": [
         "point",
-        "areea"
+        "vertex",
+        "area"
     ],
     "terms": [
         "village hall",

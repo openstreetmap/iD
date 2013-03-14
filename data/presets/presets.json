@@ -61,6 +61,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -85,6 +86,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -131,6 +133,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -156,6 +159,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -180,6 +184,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -205,6 +210,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -233,6 +239,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -276,6 +283,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -301,6 +309,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -324,6 +333,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -348,6 +358,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -387,6 +398,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -412,6 +424,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -437,6 +450,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -463,6 +477,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -512,6 +527,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -561,6 +577,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -590,6 +607,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -619,6 +637,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -671,7 +690,8 @@
             "source"
         ],
         "geometry": [
-            "point"
+            "point",
+            "vertex"
         ],
         "tags": {
             "amenity": "post_box"
@@ -702,6 +722,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -727,6 +748,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -784,6 +806,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -824,6 +847,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [],
@@ -848,7 +872,8 @@
         ],
         "geometry": [
             "point",
-            "areea"
+            "vertex",
+            "area"
         ],
         "terms": [
             "village hall",
@@ -878,6 +903,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -936,7 +962,8 @@
             "source"
         ],
         "geometry": [
-            "point"
+            "point",
+            "vertex"
         ],
         "tags": {
             "highway": "bus_stop"
@@ -1307,6 +1334,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -1323,6 +1351,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -1336,6 +1365,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -1512,6 +1542,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -1706,6 +1737,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -2023,6 +2055,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -2037,6 +2070,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -2212,6 +2246,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -2237,6 +2272,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -2272,6 +2308,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "tags": {
@@ -2295,6 +2332,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [],
@@ -2320,6 +2358,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [],
@@ -2345,6 +2384,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [
@@ -2383,6 +2423,7 @@
         ],
         "geometry": [
             "point",
+            "vertex",
             "area"
         ],
         "terms": [],

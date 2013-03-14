@@ -14,7 +14,8 @@
         "source"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "amenity": "post_box"
