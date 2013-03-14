@@ -27,6 +27,16 @@ To request a feature:
 * Understand that iD is meant to be a simple editor and doesn't aim to be
   as complete or complicated as JOSM or similar.
 
+## Translating
+
+Translations are managed using the [Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After signing up, you can go to [iD's project page](https://www.transifex.com/projects/p/id-editor/), select a language and click *Translate now* to start translating. Translations are divided into two sections, *core*, which contains text for the main interface of iD, and *presets*, which has the text for labelling feature presets.
+
+The words in brackets, for example `{name}`, should not be translated into a new language: it's replaced with a place name when iD presents the text. So a French translation of `Couldn't locate a place named '{name}'` would look like `Impossible de localiser l'endroit nommé '{name}'`.
+
+[iD translation project on Transifex](https://www.transifex.com/projects/p/id-editor/)
+
+Translations are licensed under [WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license as iD.
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with
