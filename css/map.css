@@ -75,7 +75,7 @@ g.vertex.shared .stroke {
     fill: #aaa;
 }
 
-svg[data-zoom="16"] g.vertex.tagged .fill {
+g.vertex.tagged .fill {
     fill: #000;
 }
 

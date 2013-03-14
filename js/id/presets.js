@@ -5,7 +5,6 @@ iD.presets = function(context) {
 
     var other = iD.presets.Preset({
             name: 'other',
-            icon: 'marker-stroked',
             tags: {},
             geometry: ['point', 'vertex', 'line', 'area']
         }),

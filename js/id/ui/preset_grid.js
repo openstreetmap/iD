@@ -112,7 +112,7 @@ iD.ui.PresetGrid = function(context) {
                 });
 
             entered.append('div')
-                .attr('class', function(d) { return 'preset-' + d.icon + ' icon'; });
+                .attr('class', function(d) { return 'preset-' + (d.icon || 'marker-stroked') + ' icon'; });
 
             var presetinspect;
 

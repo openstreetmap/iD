@@ -60,7 +60,7 @@ iD.ui.TagEditor = function(context) {
             .attr('class','col12 grid-entry fillL');
 
         typebutton.append('div')
-            .attr('class', 'icon icon-pre-text' + (preset ?  ' preset-' + preset.icon : ''));
+            .attr('class', 'icon icon-pre-text' + (preset ?  ' preset-' + (preset.icon || 'marker-stroked') : ''));
 
         typebutton.node().focus();
 

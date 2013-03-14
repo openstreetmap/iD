@@ -1,8 +1,6 @@
 iD.presets.Preset = function(preset, fields) {
     preset = _.clone(preset);
 
-    preset.icon = preset.icon || 'marker-stroked';
-
     preset.fields = (preset.fields || []).map(getFields);
     preset.additional = (preset.additional || []).map(getFields);
 

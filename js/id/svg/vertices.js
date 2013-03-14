@@ -3,7 +3,7 @@ iD.svg.Vertices = function(projection, context) {
         //       z16-, z17, z18+, tagged
         shadow: [6,    7.5,   7.5,  11.5],
         stroke: [2.5,  3.5,   3.5,  7],
-        fill:   [1,    3,     3,    4.5]
+        fill:   [1,    1.5,   1.5,  1.5]
     };
 
     return function drawVertices(surface, graph, entities, filter, zoom) {
@@ -42,14 +42,17 @@ iD.svg.Vertices = function(projection, context) {
         group.append('circle')
             .attr('class', 'node vertex stroke');
 
-        group.append('circle')
-            .attr('class', 'node vertex fill');
-
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
             .call(iD.svg.MemberClasses(graph))
             .classed('tagged', function(entity) { return entity.hasInterestingTags(); })
             .classed('shared', function(entity) { return graph.isShared(entity); });
+
+        function icon(entity) {
+            return zoom !== 0 &&
+                entity.hasInterestingTags() &&
+                context.presets().match(entity, graph).icon;
+        }
 
         function center(entity) {
             if (zoom !== 0 && entity.hasInterestingTags()) {
@@ -66,34 +69,43 @@ iD.svg.Vertices = function(projection, context) {
         groups.select('circle.shadow')
             .each(center)
             .attr('r', function(entity) {
-                return radiuses.shadow[zoom !== 0 && entity.hasInterestingTags() ? 3 : zoom]
+                return radiuses.shadow[icon(entity) ? 3 : zoom]
             });
 
         groups.select('circle.stroke')
             .each(center)
             .attr('r', function(entity) {
-                return radiuses.stroke[zoom !== 0 && entity.hasInterestingTags() ? 3 : zoom]
+                return radiuses.stroke[icon(entity) ? 3 : zoom]
             });
 
-        groups.select('circle.fill')
+        // Each vertex gets either a circle or a use, depending
+        // on if it has a icon or not.
+
+        var fill = groups.selectAll('circle.fill')
+            .data(function(entity) {
+                return icon(entity) ? [] : [entity];
+            }, iD.Entity.key);
+
+        fill.enter().append('circle')
+            .attr('class', 'node vertex fill')
             .each(center)
-            .attr('r', function(entity) {
-                return radiuses.fill[zoom !== 0 && entity.hasInterestingTags() ? 3 : zoom];
-            });
+            .attr('r', radiuses.fill[zoom]);
+
+        fill.exit()
+            .remove();
 
         var use = groups.selectAll('use')
             .data(function(entity) {
-                return zoom !== 0 && entity.hasInterestingTags() ? [entity] : [];
-            }, function(entity) {
-                return entity.id + '-' + zoom;
+                var i = icon(entity);
+                return i ? [i] : [];
+            }, function(d) {
+                return d;
             });
 
         use.enter().append('use')
             .attr('transform', 'translate(-6, -6)')
             .attr('clip-path', 'url(#clip-square-12)')
-            .attr('xlink:href', function(entity) {
-                return '#maki-' + context.presets().match(entity, graph).icon + '-12';
-            });
+            .attr('xlink:href', function(icon) { return '#maki-' + icon + '-12'; });
 
         use.exit()
             .remove();
