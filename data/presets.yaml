@@ -1,0 +1,131 @@
+en: 
+  presets: 
+    fields: 
+      access: 
+        label: Access
+      address: 
+        label: Address
+        placeholders: 
+          housename: Housename
+          number: "123"
+          street: Street
+          city: City
+      aeroway: 
+        label: Type
+      amenity: 
+        label: Type
+      atm: 
+        label: ATM
+      bicycle_parking: 
+        label: Type
+      building: 
+        label: Building
+      building_area: 
+        label: Building
+      building_yes: 
+        label: Building
+      capacity: 
+        label: Capacity
+      collection_times: 
+        label: Collection Times
+      construction: 
+        label: Type
+      crossing: 
+        label: Type
+      cuisine: 
+        label: Cuisine
+      denomination: 
+        label: Denomination
+      denotation: 
+        label: Denotation
+      elevation: 
+        label: Elevation
+      emergency: 
+        label: Emergency
+      fax: 
+        label: Fax
+      fee: 
+        label: Fee
+      highway: 
+        label: Type
+      historic: 
+        label: Type
+      internet_access: 
+        label: Internet Access
+        options: 
+          yes: Yes
+          no: No
+          wlan: Wifi
+          wired: Wired
+          terminal: Terminal
+      landuse: 
+        label: Type
+      layer: 
+        label: Layer
+      leisure: 
+        label: Type
+      levels: 
+        label: Levels
+      man_made: 
+        label: Type
+      maxspeed: 
+        label: Speed Limit
+      natural: 
+        label: Natural
+      network: 
+        label: Network
+      office: 
+        label: Type
+      oneway: 
+        label: One Way
+      opening_hours: 
+        label: Hours
+      operator: 
+        label: Operator
+      phone: 
+        label: Phone
+      place: 
+        label: Type
+      railway: 
+        label: Type
+      religion: 
+        label: Religion
+        options: 
+          christian: Christian
+          muslim: Muslim
+          buddhist: Buddhist
+          jewish: Jewish
+          hindu: Hindu
+          shinto: Shinto
+          taoist: Taoist
+      roadtype: 
+        label: Features
+        options: 
+          bridge: Bridge
+          tunnel: Tunnel
+          embankment: Embankment
+          cutting: Cutting
+      service: 
+        label: Type
+      shelter: 
+        label: Shelter
+      shop: 
+        label: Type
+      source: 
+        label: Source
+      sport: 
+        label: Sport
+      surface: 
+        label: Surface
+      tourism: 
+        label: Type
+      wikipedia: 
+        label: Wikipedia
+      water: 
+        label: Type
+      waterway: 
+        label: Type
+      wetland: 
+        label: Type
+      wood: 
+        label: Type
