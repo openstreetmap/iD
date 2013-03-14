@@ -4,11 +4,6 @@
         "denotation"
     ],
     "icon": "park",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "point",
         "vertex"

@@ -1,10 +1,5 @@
 {
     "name": "glacier",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "area"
     ],

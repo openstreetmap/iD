@@ -17,14 +17,6 @@
     {
         "name": "airport",
         "icon": "airport",
-        "additional": [
-            "address",
-            "telephone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -956,11 +948,6 @@
             "operator",
             "shelter"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex"
@@ -974,11 +961,6 @@
         "name": "crossing",
         "fields": [
             "crossing"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "vertex"
@@ -1000,11 +982,6 @@
             "access",
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1019,11 +996,6 @@
         "fields": [
             "access",
             "surface"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "line"
@@ -1068,11 +1040,6 @@
             "maxspeed",
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1090,11 +1057,6 @@
             "access",
             "maxspeed",
             "surface"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "line"
@@ -1114,11 +1076,6 @@
             "maxspeed",
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1137,11 +1094,6 @@
             "maxspeed",
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1159,11 +1111,6 @@
             "access",
             "maxspeed",
             "surface"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "line"
@@ -1184,11 +1131,6 @@
             "maxspeed",
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1202,11 +1144,6 @@
         "fields": [
             "access",
             "surface"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "line"
@@ -1229,11 +1166,6 @@
             "maxspeed",
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1251,11 +1183,6 @@
             "access",
             "maxspeed",
             "surface"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "line"
@@ -1275,11 +1202,6 @@
             "maxspeed",
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1291,11 +1213,6 @@
     {
         "name": "turning circle",
         "icon": "circle",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "vertex"
         ],
@@ -1313,11 +1230,6 @@
             "access",
             "maxspeed",
             "surface"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "line"
@@ -1344,11 +1256,6 @@
     {
         "name": "monument",
         "icon": "monument",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -1702,11 +1609,6 @@
     },
     {
         "name": "lighthouse",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -1717,11 +1619,6 @@
     },
     {
         "name": "pier",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line",
             "area"
@@ -1746,11 +1643,6 @@
     },
     {
         "name": "bay",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -1765,11 +1657,6 @@
         "fields": [
             "surface"
         ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -1781,11 +1668,6 @@
     },
     {
         "name": "cliff",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -1799,11 +1681,6 @@
     },
     {
         "name": "coastline",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -1816,11 +1693,6 @@
     },
     {
         "name": "glacier",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -1831,11 +1703,6 @@
     },
     {
         "name": "grassland",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -1847,11 +1714,6 @@
     },
     {
         "name": "heath",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -1865,11 +1727,6 @@
         "icon": "triangle",
         "fields": [
             "elevation"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -1896,11 +1753,6 @@
     },
     {
         "name": "scrub",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -1911,11 +1763,6 @@
     },
     {
         "name": "spring",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex"
@@ -1931,11 +1778,6 @@
             "denotation"
         ],
         "icon": "park",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex"
@@ -1960,11 +1802,6 @@
     },
     {
         "name": "lake",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -1980,11 +1817,6 @@
     },
     {
         "name": "pond",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -2002,11 +1834,6 @@
     },
     {
         "name": "reservoir",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -2080,11 +1907,6 @@
     {
         "name": "hamlet",
         "icon": "triangle-stroked",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -2095,11 +1917,6 @@
     },
     {
         "name": "island",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -2121,11 +1938,6 @@
     {
         "name": "locality",
         "icon": "marker",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -2137,11 +1949,6 @@
     {
         "name": "village",
         "icon": "square-stroked",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "area"
@@ -2168,11 +1975,6 @@
     {
         "name": "level crossing",
         "icon": "cross",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "vertex"
         ],
@@ -2191,11 +1993,6 @@
     {
         "name": "rail",
         "icon": "railway-rail",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -2207,11 +2004,6 @@
     {
         "name": "subway",
         "icon": "railway-rail",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -2223,11 +2015,6 @@
     {
         "name": "subway entrance",
         "icon": "rail-underground",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point"
         ],
@@ -2322,14 +2109,6 @@
             "operator",
             "address"
         ],
-        "additional": [
-            "address",
-            "telephone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -2348,14 +2127,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "telephone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -2373,14 +2144,6 @@
             "operator",
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "telephone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -2413,14 +2176,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "telephone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -2449,11 +2204,6 @@
     {
         "name": "canal",
         "icon": "waterway-river",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -2464,11 +2214,6 @@
     {
         "name": "dam",
         "icon": "dam",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -2482,11 +2227,6 @@
     {
         "name": "ditch",
         "icon": "waterway-river",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -2497,11 +2237,6 @@
     {
         "name": "drain",
         "icon": "waterway-river",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -2512,11 +2247,6 @@
     {
         "name": "river",
         "icon": "waterway-river",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "line"
         ],
@@ -2542,11 +2272,6 @@
     {
         "name": "riverbank",
         "icon": "water",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -2559,11 +2284,6 @@
         "icon": "waterway-river",
         "fields": [
             "layer"
-        ],
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "line"
@@ -2602,11 +2322,6 @@
     {
         "name": "weir",
         "icon": "dam",
-        "additional": [
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "vertex",
             "line"

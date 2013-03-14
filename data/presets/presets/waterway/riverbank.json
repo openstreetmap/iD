@@ -1,11 +1,6 @@
 {
     "name": "riverbank",
     "icon": "water",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "area"
     ],

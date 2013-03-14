@@ -1,11 +1,6 @@
 {
     "name": "rail",
     "icon": "railway-rail",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "line"
     ],

@@ -1,11 +1,6 @@
 {
     "name": "hamlet",
     "icon": "triangle-stroked",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "point",
         "area"

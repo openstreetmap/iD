@@ -4,11 +4,6 @@
     "fields": [
         "elevation"
     ],
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "point",
         "vertex"

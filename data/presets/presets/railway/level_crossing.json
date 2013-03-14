@@ -1,11 +1,6 @@
 {
     "name": "level crossing",
     "icon": "cross",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "vertex"
     ],

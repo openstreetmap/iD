@@ -1,10 +1,5 @@
 {
     "name": "bay",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "point",
         "area"

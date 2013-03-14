@@ -1,10 +1,5 @@
 {
     "name": "lake",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "area"
     ],

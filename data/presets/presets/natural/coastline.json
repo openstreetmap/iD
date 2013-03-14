@@ -1,10 +1,5 @@
 {
     "name": "coastline",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "line"
     ],

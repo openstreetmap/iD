@@ -1,10 +1,5 @@
 {
     "name": "grassland",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "point",
         "area"

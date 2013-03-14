@@ -1,10 +1,5 @@
 {
     "name": "pier",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "line",
         "area"

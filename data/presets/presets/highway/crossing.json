@@ -3,11 +3,6 @@
     "fields": [
         "crossing"
     ],
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "vertex"
     ],

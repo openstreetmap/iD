@@ -8,11 +8,6 @@
         "maxspeed",
         "surface"
     ],
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "line"
     ],

@@ -1,10 +1,5 @@
 {
     "name": "cliff",
-    "additional": [
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "point",
         "vertex",
