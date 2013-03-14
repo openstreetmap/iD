@@ -63,6 +63,10 @@ iD.Entity.prototype = {
         return iD.Entity.id.toOSM(this.id);
     },
 
+    isNew: function() {
+        return this.osmId() < 0;
+    },
+
     update: function(attrs) {
         return iD.Entity(this, attrs);
     },
