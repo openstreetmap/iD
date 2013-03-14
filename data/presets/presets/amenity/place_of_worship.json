@@ -7,14 +7,6 @@
         "building",
         "address"
     ],
-    "additional": [
-        "address",
-        "phone",
-        "website",
-        "wikipedia",
-        "elevation",
-        "source"
-    ],
     "geometry": [
         "point",
         "vertex",

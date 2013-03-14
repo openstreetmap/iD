@@ -68,14 +68,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -115,14 +107,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -141,14 +125,6 @@
             "capacity",
             "operator"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -165,14 +141,6 @@
             "capacity",
             "network",
             "operator"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -191,14 +159,6 @@
             "internet_access",
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -220,14 +180,6 @@
         "fields": [
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -265,14 +217,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -291,14 +235,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -314,14 +250,6 @@
         "icon": "cemetery",
         "fields": [
             "religion"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -339,14 +267,6 @@
             "emergency",
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -380,14 +300,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -405,14 +317,6 @@
             "fee",
             "access",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -432,14 +336,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -458,14 +354,6 @@
             "denomination",
             "building",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -509,14 +397,6 @@
             "building",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -559,14 +439,6 @@
             "building",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -589,14 +461,6 @@
             "building",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -618,14 +482,6 @@
             "operator",
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -673,14 +529,6 @@
             "operator",
             "collection_times"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex"
@@ -704,14 +552,6 @@
             "building_area",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -729,14 +569,6 @@
             "cuisine",
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -788,14 +620,6 @@
             "building",
             "address"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -829,14 +653,6 @@
             "operator",
             "building"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "point",
             "vertex",
@@ -853,14 +669,6 @@
         "fields": [
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -884,14 +692,6 @@
         "fields": [
             "operator",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
@@ -2060,14 +1860,6 @@
             "operator",
             "building_area",
             "address"
-        ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
         ],
         "geometry": [
             "point",
