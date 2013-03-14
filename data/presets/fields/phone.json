@@ -1,4 +1,6 @@
 {
     "key": "phone",
-    "type": "tel"
+    "type": "tel",
+    "icon": "telephone",
+    "universal": true
 }

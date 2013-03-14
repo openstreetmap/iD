@@ -9,7 +9,7 @@
     ],
     "additional": [
         "address",
-        "telephone",
+        "phone",
         "website",
         "wikipedia",
         "elevation",
