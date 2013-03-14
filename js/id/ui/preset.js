@@ -29,7 +29,11 @@ iD.ui.preset = function(context) {
         keys = [];
 
         formwrap = selection.append('div');
-        draw(formwrap, preset.fields);
+
+        var geometry = entity.geometry(context.graph());
+        draw(formwrap, preset.fields.filter(function(f) {
+            return f.matchGeometry(geometry);
+        }));
 
         var wrap = selection.append('div')
             .attr('class', 'col12 more-buttons inspector-inner');

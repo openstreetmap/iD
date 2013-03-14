@@ -1,11 +1,12 @@
 describe('iD.presets.Preset', function() {
 
     var fields = {
-        "building_area": {
+        "building_area": iD.presets.Field({
             "key": "building",
             "type": "check",
-            "default": { "area": "yes" }
-        }
+            "geometry": ["area"],
+            "default": "yes"
+        })
     };
 
     var p = {
