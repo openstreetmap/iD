@@ -1005,6 +1005,20 @@
         "terms": []
     },
     {
+        "name": "traffic signals",
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "traffic_signals"
+        },
+        "terms": [
+            "light",
+            "stoplight",
+            "traffic light"
+        ]
+    },
+    {
         "name": "trunk highway",
         "icon": "highway-trunk",
         "fields": [
