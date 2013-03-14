@@ -683,6 +683,15 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     padding-bottom: 0;
 }
 
+.tag-wrap .grid-button-wrap {
+    padding: 0;
+    height: 110px;
+}
+
+.tag-wrap .grid-button-wrap .grid-entry {
+    border-top: 0;
+}
+
 .preset-section.inspector-inner:last-of-type {
     padding-bottom: 20px;
 }
@@ -1005,7 +1014,6 @@ div.combobox {
     border-bottom-right-radius: 4px;
 }
 
-
 .tag-row input.key {
     border-left: 1px solid #ccc;
 }
@@ -1053,12 +1061,19 @@ div.combobox {
 
 /* Preset grid */
 
+.preset-grid  {
+    padding: 20px 10px 20px 20px;
+}
+.grid-button-wrap {
+    padding: 0 10px 10px 0;
+    height: 120px;
+}
+
 .grid-entry {
-    height: 110px;
+    width: 100%;
+    height: 100%;
     position: relative;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
+    border: 1px solid #ccc;
     overflow: hidden;
 }
 
@@ -1066,7 +1081,7 @@ div.combobox {
     margin-bottom: 20px;
 }
 
-.preset-grid.filtered .grid-entry:first-child {
+.preset-grid.filtered .grid-button-wrap:first-child .grid-entry {
     background: #ececec;
 }
 
@@ -1092,7 +1107,7 @@ div.combobox {
 .preset-inspect {
   position: relative;
   background: white;
-  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
 }
 
 .grid-entry .preset-icon-fill.area {
@@ -1114,6 +1129,7 @@ div.combobox {
 
 .grid-entry .label {
     font-weight: bold;
+    background: #f6f6f6;
     text-align: center;
     display: block;
     position: absolute;

@@ -20,7 +20,7 @@ iD.ui.PresetGrid = function(context) {
             .attr('class', 'preset-grid-search-wrap inspector-inner');
 
         var grid = selection.append('div')
-            .attr('class', 'preset-grid inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()))
+            .attr('class', 'preset-grid inspector-body fillL inspector-body-' + entity.geometry(context.graph()))
             .call(drawGrid, context.presets().defaults(entity, 12));
 
         searchwrap.append('span').attr('class', 'icon search');
@@ -94,9 +94,11 @@ iD.ui.PresetGrid = function(context) {
                 .data(presets.collection.slice(0, 12), name);
 
             var entered = entries.enter()
-                .append('button')
-                .attr('class', 'grid-entry col3')
-                .on('click', choose);
+                .append('div')
+                .attr('class','grid-button-wrap col3')
+                    .append('button')
+                    .attr('class', 'grid-entry')
+                    .on('click', choose);
 
             entered.append('div')
                 .attr('class', function(d) {
@@ -140,10 +142,10 @@ iD.ui.PresetGrid = function(context) {
                         if (this === entry) index = i;
                     });
 
-                    var selector = '.grid-entry:nth-child(' + (Math.floor(index/4) * 4 + 5 ) + ')';
+                    var selector = '.grid-button-wrap:nth-child(' + (Math.floor(index/4) * 4 + 5 ) + ')';
 
                     presetinspect = selection.insert('div', selector)
-                        .attr('class', 'inspector-inner preset-inspect col12')
+                        .attr('class', 'preset-inspect col12')
                         .datum(d);
 
                     presetinspect.append('h2').text(d.title || d.name);

@@ -53,14 +53,13 @@ iD.ui.TagEditor = function(context) {
 
         var headerwrap = editorwrap.append('div').attr('class','col12 head');
 
-        var typewrap = headerwrap.append('div')
-            .attr('class','col3 type');
-
-        var typebutton = typewrap.append('div')
-            .attr('class','col12 grid-entry fillL');
+        var typebutton = headerwrap.append('div')
+            .attr('class','grid-button-wrap col3')
+                .append('div')
+                .attr('class','col12 grid-entry fillL');
 
         typebutton.append('div')
-            .attr('class', 'icon icon-pre-text' + (preset ?  ' preset-' + (preset.icon || 'marker-stroked') : ''));
+            .attr('class', 'icon' + (preset ?  ' preset-' + (preset.icon || 'marker-stroked') : ''));
 
         typebutton.node().focus();
 
