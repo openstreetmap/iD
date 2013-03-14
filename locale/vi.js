@@ -165,7 +165,7 @@ locale.vi = {
     },
 
     geocoder: {
-        title: "Tìm kiếm Địa phương",
+        title: "Tìm kiếm địa phương",
         placeholder: "Tìm kiếm địa phương",
         no_results: "Không tìm thấy địa phương với tên “{name}”"
     },
@@ -177,21 +177,22 @@ locale.vi = {
     inspector: {
         no_documentation_combination: "Không có tài liệu về tổ hợp thẻ này",
         no_documentation_key: "Không có tài liệu về khóa này",
-        new_tag: "Thẻ Mới",
+        new_tag: "Thẻ mới",
         edit_tags: "Sửa đổi các thẻ",
         okay: "OK",
         view_on_osm: "Xem tại OSM",
         name: "Tên",
-        editing: "Đang sửa đổi {type}",
+        editing: "Sửa các chi tiết",
         additional: "Các thẻ nâng cao",
-        choose: "Bạn muốn bổ sung cái gì?",
+        choose: "Chọn loại đối tượng",
         results: "{n} kết quả cho {search}",
-        reference: "Tra cứu OpenStreetMap Wiki →"
+        reference: "Tra cứu OpenStreetMap Wiki →",
+        back_tooltip: "Thay đổi loại đối tượng"
     },
 
     background: {
         title: "Hình nền",
-        description: "Tùy chọn Hình nền",
+        description: "Tùy chọn hình nền",
         percent_brightness: "Sáng {opacity}%",
         fix_misalignment: "Chỉnh lại hình nền bị chệch",
         reset: "đặt lại"
@@ -313,6 +314,9 @@ locale.vi = {
             },
             "highway": {
                 "label": "Kiểu"
+            },
+            "historic": {
+                "label": "Loại"
             },
             "internet_access": {
                 "label": "Truy cập Internet",
