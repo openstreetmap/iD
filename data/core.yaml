@@ -144,7 +144,7 @@ en:
     results: "{n} results for {search}"
     reference: View on OpenStreetMap Wiki →
     back_tooltip: Change feature type
-    show_additional: Show additional forms
+    show_additional: Show additional fields
   background: 
     title: Background
     description: Background settings
