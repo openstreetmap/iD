@@ -5,6 +5,14 @@
         "operator",
         "collection_times"
     ],
+    "additional": [
+        "address",
+        "telephone",
+        "website",
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point"
     ],

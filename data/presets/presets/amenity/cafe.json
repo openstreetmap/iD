@@ -7,6 +7,14 @@
         "building_area",
         "address"
     ],
+    "additional": [
+        "address",
+        "telephone",
+        "website",
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point",
         "area"

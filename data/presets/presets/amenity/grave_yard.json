@@ -4,6 +4,14 @@
     "fields": [
         "religion"
     ],
+    "additional": [
+        "address",
+        "telephone",
+        "website",
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point",
         "area"
