@@ -1,6 +1,11 @@
 {
     "name": "weir",
     "icon": "dam",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "vertex",
         "line"

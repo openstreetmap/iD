@@ -1,6 +1,11 @@
 {
     "name": "drain",
     "icon": "waterway-river",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "line"
     ],

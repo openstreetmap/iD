@@ -1,6 +1,11 @@
 {
     "name": "canal",
     "icon": "waterway-river",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "line"
     ],

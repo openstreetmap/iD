@@ -4,6 +4,11 @@
     "fields": [
         "layer"
     ],
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "line"
     ],

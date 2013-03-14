@@ -1,6 +1,11 @@
 {
     "name": "dam",
     "icon": "dam",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point",
         "vertex",

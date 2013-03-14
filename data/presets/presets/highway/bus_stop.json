@@ -5,6 +5,11 @@
         "operator",
         "shelter"
     ],
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point"
     ],

@@ -1,6 +1,11 @@
 {
     "name": "turning circle",
     "icon": "circle",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "vertex"
     ],

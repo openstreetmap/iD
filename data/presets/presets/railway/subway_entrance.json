@@ -1,6 +1,11 @@
 {
     "name": "subway entrance",
     "icon": "rail-underground",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point"
     ],

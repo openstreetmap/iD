@@ -1,6 +1,11 @@
 {
     "name": "locality",
     "icon": "marker",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point",
         "area"

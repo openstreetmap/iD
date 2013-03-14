@@ -1,6 +1,11 @@
 {
     "name": "monument",
     "icon": "monument",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point",
         "area"

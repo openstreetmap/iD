@@ -3,6 +3,11 @@
     "fields": [
         "surface"
     ],
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point",
         "area"

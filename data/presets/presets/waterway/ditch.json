@@ -1,6 +1,11 @@
 {
     "name": "ditch",
     "icon": "waterway-river",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "line"
     ],

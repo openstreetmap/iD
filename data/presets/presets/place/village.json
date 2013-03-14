@@ -1,6 +1,11 @@
 {
     "name": "village",
     "icon": "square-stroked",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "point",
         "area"

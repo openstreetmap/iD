@@ -1,5 +1,10 @@
 {
     "name": "reservoir",
+    "additional": [
+        "wikipedia",
+        "elevation",
+        "source"
+    ],
     "geometry": [
         "area"
     ],
