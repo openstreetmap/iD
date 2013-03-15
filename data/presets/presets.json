@@ -1583,7 +1583,7 @@
         "tags": {
             "natural": "water"
         },
-        "terms": []
+        "icon": "water"
     },
     "natural/water/lake": {
         "geometry": [
@@ -1597,7 +1597,8 @@
             "lakelet",
             "loch",
             "mere"
-        ]
+        ],
+        "icon": "water"
     },
     "natural/water/pond": {
         "geometry": [
@@ -1613,7 +1614,8 @@
             "tarn",
             "pool",
             "mere"
-        ]
+        ],
+        "icon": "water"
     },
     "natural/water/reservoir": {
         "geometry": [
@@ -1623,7 +1625,7 @@
             "natural": "water",
             "water": "reservoir"
         },
-        "terms": []
+        "icon": "water"
     },
     "natural/wetland": {
         "icon": "wetland",
