@@ -1,19 +1,15 @@
-iD.svg.Midpoints = function(projection) {
+iD.svg.Midpoints = function(projection, context) {
     return function drawMidpoints(surface, graph, entities, filter, extent) {
         var midpoints = {};
 
-        var vertices = 0;
-
         for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
 
-            if (entities[i].geometry(graph) === 'vertex' && vertices++ > 2000) {
-                return surface.selectAll('.layer-hit g.midpoint').remove();
-            }
+            if (entity.type !== 'way') continue;
+            if (context.selection().indexOf(entity.id) < 0) continue;
 
-            if (entities[i].type !== 'way') continue;
 
-            var entity = entities[i],
-                nodes = graph.childNodes(entity);
+            var nodes = graph.childNodes(entity);
 
             // skip the last node because it is always repeated
             for (var j = 0; j < nodes.length - 1; j++) {

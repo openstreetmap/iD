@@ -6,22 +6,58 @@ iD.svg.Vertices = function(projection, context) {
         fill:   [1,    1.5,   1.5,  1.5]
     };
 
-    return function drawVertices(surface, graph, entities, filter, zoom) {
-        var vertices = [];
+    return function drawVertices(surface, graph, zoom) {
+        var extent = context.map().extent(),
+            visible = {};
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
-            if (entity.geometry(graph) === 'vertex') {
-                vertices.push(entity);
+        function addVisible(entity) {
+            var i;
+            if (entity.type === 'way') {
+                for (i = 0; i < entity.nodes.length; i++) {
+                    visible[entity.nodes[i]] = true;
+                }
+            } else if (entity.type === 'relation') {
+                for (i = 0; i < entity.members.length; i++) {
+                    var member = context.entity(entity.members[i].id);
+                    if (member) {
+                        addVisible(member);
+                    }
+                }
+            } else {
+                visible[entity.id] = true;
             }
         }
 
-        if (vertices.length > 2000) {
-            return surface.select('.layer-hit').selectAll('g.vertex').remove();
+        context.selection().forEach(function(id) {
+            var entity = graph.entity(id);
+            if (entity.type === 'vertex') {
+                visible[id] = true;
+                context.parentWays(entity).forEach(addVisible);
+            } else {
+                addVisible(entity);
+            }
+        });
+
+        function rendered(entity) {
+            if (entity.geometry(graph) !== 'vertex')
+                return false;
+            if (entity.id in visible)
+                return true;
+            if (entity.hasInterestingTags())
+                return true;
+        }
+
+        var entities = context.intersects(extent),
+            vertices = [];
+
+        for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+            if (rendered(entity)) {
+                vertices.push(entity)
+            }
         }
 
         var groups = surface.select('.layer-hit').selectAll('g.vertex')
-            .filter(filter)
             .data(vertices, iD.Entity.key);
 
         var group = groups.enter()
