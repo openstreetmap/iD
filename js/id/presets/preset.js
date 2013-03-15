@@ -29,7 +29,7 @@ iD.presets.Preset = function(id, preset, fields) {
     };
 
     preset.t = function(scope, options) {
-        return t('presets.preset.' + id + '.' + scope, options);
+        return t('presets.presets.' + id + '.' + scope, options);
     };
 
     preset.name = function() {

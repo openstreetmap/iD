@@ -28,7 +28,7 @@ asyncMap(resources, getResource, function(err, locales) {
         locale = _.merge(locale, l);
     });
     for (var i in locale) {
-        out += 'locale.' + i + ' = ' + JSON.stringify(locale[i]) + ';';
+        out += 'locale.' + i + ' = ' + JSON.stringify(locale[i], null, 4) + ';';
     }
     fs.writeFileSync(outfile, out);
 });
