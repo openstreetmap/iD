@@ -20,13 +20,17 @@ var project = api + 'project/id-editor/';
 
 var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 
+var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
+    sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
+
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
     var out = '';
-    var locale = {};
+    var locale = _.merge(sourceCore, sourcePresets);
     locales.forEach(function(l) {
         locale = _.merge(locale, l);
     });
+
     for (var i in locale) {
         out += 'locale.' + i + ' = ' + JSON.stringify(locale[i], null, 4) + ';';
     }
@@ -68,6 +72,8 @@ function getLanguages(resource, callback) {
         if (err) return callback(err);
         callback(null, JSON.parse(body).available_languages.map(function(d) {
             return d.code;
+        }).filter(function(d) {
+            return d !== 'en';
         }));
     });
 }
