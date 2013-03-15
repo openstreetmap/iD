@@ -86,6 +86,14 @@ iD.ui.Geocoder = function(context) {
                 if (show) inputNode.node().focus();
                 else inputNode.node().blur();
                 shown = show;
+
+                if (show) {
+                    selection.on('mousedown.geocoder-inside', function() {
+                        return d3.event.stopPropagation();
+                    });
+                } else {
+                    selection.on('mousedown.geocoder-inside', null);
+                }
             }
         }
         var tooltip = bootstrap.tooltip()
@@ -112,11 +120,8 @@ iD.ui.Geocoder = function(context) {
         var resultsList = selection.append('div')
             .attr('class', 'content fillD map-overlay hide');
 
-        selection.on('mousedown.geocoder-inside', function() {
-            return d3.event.stopPropagation();
-        });
-
         context.surface().on('mousedown.geocoder-outside', hide);
+        context.container().on('mousedown.b.geocoder-outside', hide);
 
         var keybinding = d3.keybinding('geocoder');
 

@@ -44,14 +44,22 @@ iD.ui.Background = function(context) {
                 button.classed('active', show);
                 content.call(iD.ui.Toggle(show));
                 shown = show;
+
+                if (show) {
+                    selection.on('mousedown.background-inside', function() {
+                        return d3.event.stopPropagation();
+                    });
+                } else {
+                    selection.on('mousedown.background-inside', null);
+                }
             }
         }
 
-        selection.on('mousedown.background-inside', function() {
-            return d3.event.stopPropagation();
+        context.surface().on('mousedown.background-outside', function() {
+            setVisible(false);
         });
 
-        context.surface().on('mousedown.background-outside', function() {
+        context.container().on('mousedown.background-outside', function() {
             setVisible(false);
         });
 
