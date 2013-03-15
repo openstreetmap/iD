@@ -893,7 +893,7 @@ text.point {
 
 .mode-add-point #map:hover {
     cursor: crosshair;
-    cursor: url(../img/cursor-draw-point.png) 18 18, crosshair;
+    cursor: url(../img/cursor-draw.png) 9 9, crosshair;
 }
 
 .lasso #map:hover,
