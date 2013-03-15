@@ -15,12 +15,28 @@ iD.ui.preset.url = function(field) {
             .on('change', change)
             .call(iD.behavior.accept().on('accept', event.close));
 
+        function pm(elem, x) {
+            var num = elem.value ?
+                parseInt(elem.value, 10) : 0;
+            if (!isNaN(num)) elem.value = num + x;
+        }
+
         if (field.type == 'number') {
             var numbercontrols = selection.append('div')
                 .attr('class', 'spin-control');
 
-            numbercontrols.append('button').attr('class', 'ascend');
-            numbercontrols.append('button').attr('class', 'descend');
+            numbercontrols
+                .append('button')
+                .attr('class', 'increment')
+                .on('click', function() {
+                    pm(input.node(), 1);
+                });
+            numbercontrols
+                .append('button')
+                .attr('class', 'decrement')
+                .on('click', function() {
+                    pm(input.node(), -1);
+                });
         }
     }
 

@@ -938,8 +938,8 @@ input[type=number] {
     border-bottom-right-radius: 4px;
 }
 
-.spin-control button.descend::after,
-.spin-control button.ascend::after {
+.spin-control button.decrement::after,
+.spin-control button.increment::after {
     content:"";
     height: 0; width: 0;
     position: absolute;
@@ -947,13 +947,13 @@ input[type=number] {
     margin: auto;
 }
 
-.spin-control button.descend::after {
+.spin-control button.decrement::after {
     border-top: 5px solid #CCC;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
 
-.spin-control button.ascend::after {
+.spin-control button.increment::after {
     border-bottom: 5px solid #CCC;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
