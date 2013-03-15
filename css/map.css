@@ -743,50 +743,40 @@ text.tag-oneway {
  * Labels
  */
 
-.layer-halo path {
-  pointer-events: none;
-  stroke-linecap: round;
-  stroke-linejoin: bevel;
-  stroke-width: 20px;
-  opacity: 0.8;
-  stroke: white;
-}
-
+text.arealabel-halo,
+text.linelabel-halo,
+text.pointlabel-halo,
 text.arealabel,
-text.pathlabel,
+text.linelabel,
 text.pointlabel {
-  font-size: 12px;
-  font-weight: bold;
-  fill: #333;
-  text-anchor: middle;
-  pointer-events: none;
-}
-
-.layer-halo rect,
-.layer-halo path,
-.layer-label text {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #333;
+    text-anchor: middle;
+    pointer-events: none;
     -webkit-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
     -moz-transition: opacity 100ms linear;
 }
 
-.pathlabel .textpath {
+.linelabel-halo .textpath,
+.linelabel .textpath {
   dominant-baseline: middle;
 }
 
 /* Opera doesn't support dominant-baseline. See #715 */
-.opera .pathlabel .textpath {
+.opera .linelabel-halo,
+.opera .linelabel .textpath {
   baseline-shift: -33%;
   dominant-baseline: auto;
 }
 
-.pointlabel-halo,
-.linelabel-halo,
-.arealabel-halo {
-  opacity: 0.7;
-  pointer-events: none;
+.layer-halo text {
+    opacity: 0.7;
+    stroke: #fff;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
 }
-
 
 text.point {
   font-size: 10px;
