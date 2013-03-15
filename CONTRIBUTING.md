@@ -35,6 +35,8 @@ The words in brackets, for example `{name}`, should not be translated into a new
 
 [iD translation project on Transifex](https://www.transifex.com/projects/p/id-editor/)
 
+To get notifications when translation source files change, click **Watch project** button near the bottom of the project page. You can edit your [notification settings](https://www.transifex.com/settings/notices/) if you're getting too many notifications.
+
 Translations are licensed under [WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license as iD.
 
 ## Adding New Strings for Translation
