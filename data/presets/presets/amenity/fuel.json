@@ -1,4 +1,5 @@
 {
+    "icon": "fuel",
     "fields": [
         "operator",
         "address"

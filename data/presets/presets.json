@@ -244,6 +244,7 @@
         "terms": []
     },
     "amenity/fuel": {
+        "icon": "fuel",
         "fields": [
             "operator",
             "address"
