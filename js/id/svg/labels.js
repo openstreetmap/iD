@@ -205,13 +205,14 @@ iD.svg.Labels = function(projection, context) {
 
         icons.enter()
             .append('use')
-            .attr('xlink:href', function(d) {
-                return '#maki-' + context.presets().match(d, context.graph()).icon + '-18';
-            })
             .attr('clip-path', 'url(#clip-square-18)')
             .attr('class', 'icon');
 
-        icons.attr('transform', get(labels, 'transform'));
+        icons.attr('transform', get(labels, 'transform'))
+            .attr('xlink:href', function(d) {
+                return '#maki-' + context.presets().match(d, context.graph()).icon + '-18';
+            });
+
 
         icons.exit().remove();
     }
