@@ -22,7 +22,7 @@ iD.ui.PresetGrid = function(context) {
             .attr('class', 'fillL inspector-body inspector-body-' + entity.geometry(context.graph()));
 
         var grid = gridwrap.append('div')
-            .attr('class', 'preset-grid fillL clearfix')
+            .attr('class', 'preset-grid fillL cf')
             .data([context.presets().defaults(entity, 36).collection]);
 
         var show_more = gridwrap.append('div')
