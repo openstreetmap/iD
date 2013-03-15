@@ -102,7 +102,7 @@ iD.svg.Labels = function(projection, context) {
             .data(entities, iD.Entity.key)
             .attr({
                 'startOffset': '50%',
-                'xlink:href': function(d) { return '#halo-' + d.id; }
+                'xlink:href': function(d) { return '#labelpath-' + d.id; }
             })
             .text(function(d) { return name(d); });
 
@@ -110,7 +110,7 @@ iD.svg.Labels = function(projection, context) {
 
     }
 
-    function drawLineHalos(group, entities, filter, classes, labels) {
+    function drawLinePaths(group, entities, filter, classes, labels) {
 
         var halos = group.selectAll('path')
             .filter(filter)
@@ -119,43 +119,13 @@ iD.svg.Labels = function(projection, context) {
         halos.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d) { return 'halo-' + d.id; })
+            .attr('id', function(d) { return 'labelpath-' + d.id; })
             .attr('class', classes);
 
         halos.attr('d', get(labels, 'lineString'));
 
         halos.exit().remove();
     }
-
-    function drawPointHalos(group, entities, filter, classes, labels) {
-
-        var halos = group.selectAll('rect.' + classes)
-            .filter(filter)
-            .data(entities, iD.Entity.key);
-
-        halos.enter()
-            .append('rect')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes;});
-
-        halos.attr({
-            'x': function(d, i) {
-                var x = labels[i].x - 2;
-                if (labels[i].textAnchor === 'middle') {
-                    x -= textWidth(name(d), labels[i].height) / 2;
-                }
-                return x;
-            },
-            'y': function(d, i) { return labels[i].y - labels[i].height + 1; },
-            'rx': 3,
-            'ry': 3,
-            'width': function(d, i) { return textWidth(name(d), labels[i].height) + 4; },
-            'height': function(d, i) { return labels[i].height + 2; },
-            'fill': 'white'
-        });
-
-        halos.exit().remove();
-    }
-
 
     function drawPointLabels(group, entities, filter, classes, labels) {
 
@@ -282,11 +252,11 @@ iD.svg.Labels = function(projection, context) {
             }
         }
 
-        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
+        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo text')
             .each(resetOpacity);
 
         if (!labels.length) return;
-        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo rect')
+        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo text')
             .filter(function(d) {
                 return containsLabel.has(d.id);
             })
@@ -476,12 +446,16 @@ iD.svg.Labels = function(projection, context) {
 
         var label = surface.select('.layer-label'),
             halo = surface.select('.layer-halo'),
+            // points
             points = drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point),
-            pointHalos = drawPointHalos(halo, labelled.point, filter, 'pointlabel-halo', positions.point),
-            linesHalos = drawLineHalos(halo, labelled.line, filter, 'linelabel-halo', positions.line),
-            lines = drawLineLabels(label, labelled.line, filter, 'pathlabel', positions.line),
+            pointHalos = drawPointLabels(halo, labelled.point, filter, 'pointlabel-halo', positions.point),
+            // lines
+            linesPaths = drawLinePaths(halo, labelled.line, filter, '', positions.line),
+            lines = drawLineLabels(label, labelled.line, filter, 'linelabel', positions.line),
+            linesHalos = drawLineLabels(halo, labelled.line, filter, 'linelabel-halo', positions.line),
+            // areas
             areas = drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area),
-            areaHalos = drawAreaHalos(halo, labelled.area, filter, 'arealabel-halo', positions.area),
+            areaHalos = drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area),
             areaIcons = drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
     };
 
