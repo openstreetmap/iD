@@ -200,7 +200,8 @@ iD.ui.Background = function(context) {
             .on('click', function() {
                 var exp = d3.select(this).classed('expanded');
                 nudge_container.style('display', exp ? 'none' : 'block');
-                d3.select(this).classed('expanded', !exp);
+                d3.select(this)
+                    .classed('expanded', !exp);
                 d3.event.preventDefault();
             });
 

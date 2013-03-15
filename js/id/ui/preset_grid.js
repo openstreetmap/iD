@@ -23,8 +23,6 @@ iD.ui.PresetGrid = function(context) {
             .attr('class', 'preset-grid inspector-body fillL inspector-body-' + entity.geometry(context.graph()))
             .call(drawGrid, context.presets().defaults(entity, 12));
 
-        searchwrap.append('span').attr('class', 'icon search');
-
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
@@ -53,7 +51,10 @@ iD.ui.PresetGrid = function(context) {
                 grid.classed('filtered', value.length);
                 if (value.length) {
                     var results = presets.search(value);
-                    message.text(t('inspector.results', {n: results.collection.length, search: value}));
+                    message.text(t('inspector.results', {
+                        n: results.collection.length,
+                        search: value
+                    }));
                     grid.call(drawGrid, results);
                 } else {
                     grid.call(drawGrid, context.presets().defaults(entity, 12));
@@ -67,6 +68,10 @@ iD.ui.PresetGrid = function(context) {
             .attr('type', 'search')
             .on('keydown', keydown)
             .on('keyup', keyup);
+
+        searchwrap.append('span')
+            .attr('class', 'icon search');
+
         search.node().focus();
 
         if (preset) {

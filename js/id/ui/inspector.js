@@ -6,13 +6,28 @@ iD.ui.Inspector = function(context) {
     function inspector(selection) {
         var entity = selection.datum();
 
+        var presetLayer = selection
+            .append('div')
+            .style('right', '0px')
+            .classed('pane', true);
+
+        var tagLayer = selection
+            .append('div')
+            .style('right', '0px')
+            .classed('pane', true);
+
         var presetGrid = iD.ui.PresetGrid(context)
             .entity(entity)
             .on('close', function() {
                 event.close();
             })
             .on('choose', function(preset) {
-                selection.call(tagEditor, preset);
+                tagLayer
+                    .style('right', '-500px')
+                    .style('display', 'block')
+                    .call(tagEditor, preset)
+                    .transition()
+                    .style('right', '0px');
             });
 
         tagEditor = iD.ui.TagEditor(context)
@@ -24,12 +39,18 @@ iD.ui.Inspector = function(context) {
                 event.close(entity);
             })
             .on('choose', function() {
-                selection.call(presetGrid, true);
+                tagLayer
+                    .transition()
+                    .style('right', '-500px')
+                    .each('end', function() {
+                        d3.select(this).style('display', 'none');
+                    });
+                presetLayer.call(presetGrid, true);
             });
 
-        selection.call(initial ? presetGrid : tagEditor);
+        if (initial) presetLayer.call(presetGrid);
+        else tagLayer.call(tagEditor);
 
-        selection.call(iD.ui.Toggle(true));
     }
 
     inspector.tags = function() {
