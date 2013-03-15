@@ -91,9 +91,13 @@ iD.modes.Select = function(context, selection, initial) {
                 .select('.inspector-wrap');
 
             wrap.style('display', 'block')
-                .style('opacity', 1)
                 .datum(entity)
-                .call(inspector);
+                .call(inspector)
+                .style('right', '-500px')
+                .style('opacity', 1)
+                .transition()
+                .duration(200)
+                .style('right', '0px');
 
             if (d3.event) {
                 // Pan the map if the clicked feature intersects with the position
@@ -194,8 +198,12 @@ iD.modes.Select = function(context, selection, initial) {
 
         context.container()
             .select('.inspector-wrap')
-            .style('display', 'none')
-            .html('');
+            .transition()
+            .style('right', '-500px')
+            .each('end', function() {
+                d3.select(this).style('display', 'none')
+                    .html('');
+            });
 
         // Firefox incorrectly implements blur, so typeahead elements
         // are not correctly removed. Remove any stragglers manually.

@@ -25,44 +25,48 @@ iD.ui.PresetGrid = function(context) {
 
         searchwrap.append('span').attr('class', 'icon search');
 
+        function keydown() {
+            // hack to let delete shortcut work when search is autofocused
+            if (search.property('value').length === 0 &&
+                (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
+                 d3.event.keyCode === d3.keybinding.keyCodes['⌦'])) {
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+                iD.operations.Delete([entity.id], context)();
+            } else if (search.property('value').length === 0 &&
+                (d3.event.ctrlKey || d3.event.metaKey) &&
+                d3.event.keyCode === d3.keybinding.keyCodes.z) {
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+                context.undo();
+            } else if (!d3.event.ctrlKey && !d3.event.metaKey) {
+                d3.select(this).on('keydown', null);
+            }
+        }
+
+        function keyup() {
+            // enter
+            var value = search.property('value');
+            if (d3.event.keyCode === 13 && value.length) {
+                choose(grid.selectAll('.grid-entry:first-child').datum());
+            } else {
+                grid.classed('filtered', value.length);
+                if (value.length) {
+                    var results = presets.search(value);
+                    message.text(t('inspector.results', {n: results.collection.length, search: value}));
+                    grid.call(drawGrid, results);
+                } else {
+                    grid.call(drawGrid, context.presets().defaults(entity, 12));
+                }
+            }
+        }
+
         var search = searchwrap.append('input')
             .attr('class', 'preset-grid-search major')
             .attr('placeholder','Search')
             .attr('type', 'search')
-            .on('keydown', function() {
-                // hack to let delete shortcut work when search is autofocused
-                if (search.property('value').length === 0 &&
-                    (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
-                     d3.event.keyCode === d3.keybinding.keyCodes['⌦'])) {
-                    d3.event.preventDefault();
-                    d3.event.stopPropagation();
-                    iD.operations.Delete([entity.id], context)();
-                } else if (search.property('value').length === 0 &&
-                    (d3.event.ctrlKey || d3.event.metaKey) &&
-                    d3.event.keyCode === d3.keybinding.keyCodes['z']) {
-                    d3.event.preventDefault();
-                    d3.event.stopPropagation();
-                    context.undo();
-                } else if (!d3.event.ctrlKey && !d3.event.metaKey) {
-                    d3.select(this).on('keydown', null);
-                }
-            })
-            .on('keyup', function() {
-                // enter
-                var value = search.property('value');
-                if (d3.event.keyCode === 13 && value.length) {
-                    choose(grid.selectAll('.grid-entry:first-child').datum());
-                } else {
-                    grid.classed('filtered', value.length);
-                    if (value.length) {
-                        var results = presets.search(value);
-                        message.text(t('inspector.results', {n: results.collection.length, search: value}));
-                        grid.call(drawGrid, results);
-                    } else {
-                        grid.call(drawGrid, context.presets().defaults(entity, 12));
-                    }
-                }
-            });
+            .on('keydown', keydown)
+            .on('keyup', keyup);
         search.node().focus();
 
         if (preset) {
@@ -87,93 +91,110 @@ iD.ui.PresetGrid = function(context) {
 
         function name(d) { return d.name(); }
 
+        function presetClass(d) {
+            var s = 'preset-icon-fill ' + entity.geometry(context.graph());
+            if (d.members) {
+                s += 'category';
+            } else {
+                for (var i in d.tags) {
+                    s += ' tag-' + i + ' tag-' + i + '-' + d.tags[i];
+                }
+            }
+            return s;
+        }
+
+        var presetinspect;
+
         function drawGrid(selection, presets) {
 
-            var entries = selection.html('')
-                .selectAll('button.grid-entry')
+            function helpClick(d) {
+                // Display description box inline
+                d3.event.stopPropagation();
+
+                var entry = this.parentNode,
+                    index,
+                    entries = selection.selectAll('button.grid-entry');
+
+                if (presetinspect && presetinspect.remove().datum() === d) {
+                    presetinspect = null;
+                    return;
+                }
+
+                entries.each(function(d, i) {
+                    if (this === entry) index = i;
+                });
+
+                var selector = '.grid-button-wrap:nth-child(' + (Math.floor(index/3) * 3 + 4 ) + ')';
+
+                presetinspect = selection.insert('div', selector)
+                    .attr('class', 'preset-inspect col12')
+                    .datum(d);
+
+                presetinspect.append('h2').text(d.name());
+
+                var description = presetinspect.append('p');
+                var link = presetinspect.append('a');
+
+                var params = {},
+                    locale = iD.detect().locale.split('-')[0] || 'en';
+
+                params.key = Object.keys(d.tags)[0];
+                if (d.tags[params.key] !== '*') {
+                    params.value = d.tags[params.key];
+                }
+
+                taginfo.docs(params, function(err, data) {
+                    if (err) return description.text(t('inspector.no_documentation_combination'));
+                    var doc = _.find(data, function(d) { return d.lang === locale; }) ||
+                        _.find(data, function(d) { return d.lang === 'en'; });
+                    if (doc) {
+                        description.text(doc.description);
+                        link
+                            .attr('href', 'http://wiki.openstreetmap.org/wiki/' +
+                                  encodeURIComponent(doc.title))
+                            .text(t('inspector.reference'));
+                    }
+                });
+            }
+
+            var entries = selection
+                .selectAll('div.grid-entry-wrap')
                 .data(presets.collection.slice(0, 12), name);
+
+            entries.exit()
+                .style('opacity', 1)
+                .transition()
+                .style('opacity', 0)
+                .each('end', function() {
+                    d3.select(this).remove();
+                });
 
             var entered = entries.enter()
                 .append('div')
-                .attr('class','grid-button-wrap col4')
+                .attr('class','grid-button-wrap col4 grid-entry-wrap')
                     .append('button')
                     .attr('class', 'grid-entry')
                     .on('click', choose);
 
             entered.append('div')
-                .attr('class', function(d) {
-                    var s = 'preset-icon-fill ' + entity.geometry(context.graph());
-                    if (d.members) {
-                        s += 'category';
-                    } else {
-                        for (var i in d.tags) {
-                            s += ' tag-' + i + ' tag-' + i + '-' + d.tags[i];
-                        }
-                    }
-                    return s;
-                });
+                .attr('class', presetClass);
 
             entered.append('div')
-                .attr('class', function(d) { return 'feature-' + (d.icon || 'marker-stroked') + ' icon'; });
+                .attr('class', function(d) {
+                    return 'feature-' + (d.icon || 'marker-stroked') + ' icon';
+                });
 
-            var presetinspect;
-
-            entered.append('span').attr('class','label').text(name);
+            entered.append('span')
+                .attr('class','label')
+                .text(name);
 
             entered.append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'preset-help')
-                .on('click', function(d) {
-
-                    // Display description box inline
-
-                    d3.event.stopPropagation();
-
-                    var entry = this.parentNode,
-                        index,
-                        entries = selection.selectAll('button.grid-entry');
-
-                    if (presetinspect && presetinspect.remove().datum() === d) {
-                        presetinspect = null;
-                        return;
-                    }
-
-                    entries.each(function(d, i) {
-                        if (this === entry) index = i;
-                    });
-
-                    var selector = '.grid-button-wrap:nth-child(' + (Math.floor(index/3) * 3 + 4 ) + ')';
-
-                    presetinspect = selection.insert('div', selector)
-                        .attr('class', 'preset-inspect col12')
-                        .datum(d);
-
-                    presetinspect.append('h2').text(d.name());
-
-                    var description = presetinspect.append('p');
-                    var link = presetinspect.append('a');
-
-                    var params = {},
-                        locale = iD.detect().locale.split('-')[0] || 'en';
-
-                    params.key = Object.keys(d.tags)[0];
-                    if (d.tags[params.key] !== '*') {
-                        params.value = d.tags[params.key];
-                    }
-
-                    taginfo.docs(params, function(err, data) {
-                        if (err) return description.text(t('inspector.no_documentation_combination'));
-                        var doc = _.find(data, function(d) { return d.lang === locale; }) ||
-                            _.find(data, function(d) { return d.lang === 'en'; });
-                        description.text(doc.description);
-                        link.attr('href', 'http://wiki.openstreetmap.org/wiki/' + encodeURIComponent(doc.title));
-                        link.text(t('inspector.reference'));
-                    });
-                })
+                .on('click', helpClick, selection)
                 .append('span')
                     .attr('class', 'icon inspect');
 
-            entries.exit().remove();
             entries.order();
         }
     }
