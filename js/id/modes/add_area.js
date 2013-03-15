@@ -11,7 +11,7 @@ iD.modes.AddArea = function(context) {
             .on('start', start)
             .on('startFromWay', startFromWay)
             .on('startFromNode', startFromNode),
-        defaultTags = {area: 'yes'};
+        defaultTags = {__area__: 'yes'};
 
     function start(loc) {
         var graph = context.graph(),
