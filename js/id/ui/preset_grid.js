@@ -95,7 +95,7 @@ iD.ui.PresetGrid = function(context) {
 
             var entered = entries.enter()
                 .append('div')
-                .attr('class','grid-button-wrap col3')
+                .attr('class','grid-button-wrap col4')
                     .append('button')
                     .attr('class', 'grid-entry')
                     .on('click', choose);
@@ -142,7 +142,7 @@ iD.ui.PresetGrid = function(context) {
                         if (this === entry) index = i;
                     });
 
-                    var selector = '.grid-button-wrap:nth-child(' + (Math.floor(index/4) * 4 + 5 ) + ')';
+                    var selector = '.grid-button-wrap:nth-child(' + (Math.floor(index/3) * 3 + 4 ) + ')';
 
                     presetinspect = selection.insert('div', selector)
                         .attr('class', 'preset-inspect col12')

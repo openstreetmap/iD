@@ -54,7 +54,7 @@ iD.ui.TagEditor = function(context) {
         var headerwrap = editorwrap.append('div').attr('class','col12 head');
 
         var typebutton = headerwrap.append('div')
-            .attr('class','grid-button-wrap col3')
+            .attr('class','grid-button-wrap col4')
                 .append('div')
                 .attr('class','col12 grid-entry fillL');
 
@@ -64,7 +64,7 @@ iD.ui.TagEditor = function(context) {
         typebutton.node().focus();
 
          var namewrap = headerwrap.append('div')
-             .attr('class', 'name fillL inspector-inner col9');
+             .attr('class', 'name fillL inspector-inner col8');
 
         typebutton.append('span')
             .attr('class','label')

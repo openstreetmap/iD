@@ -585,18 +585,34 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 ------------------------------------------------------- */
 
 .inspector-wrap {
-    opacity:0;
-    display:none;
     max-width: 500px;
-    position: relative;
     border-radius: 0 0 0 4px;
+    background:rgba(0,0,0,.8);
+    position: absolute;
+    height: 100%;
+    right: 0;
 }
 
 .inspector-body {
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 480px;
     min-height: 330px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 90px;
+    top: 60px;
+}
+
+.inspector-actions {
+    position: absolute;
+    height: 60px;
+    bottom: 30px;
+}
+
+.inspector-actions button {
+    width: 20%;
+    float: left;
 }
 
 .inspector-inner {
@@ -627,6 +643,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     line-height: 20px;
 }
 
+.inspector-actions .minor-buttons {
+    padding-left: 10px;
+    line-height: 40px;
+    width: 60%;
+}
+
 .inspector-toggle {
     color:#fff;
     width: 100%;
@@ -639,6 +661,90 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 ------------------------------------------------------- */
 
 /* Preset grid  */
+
+.preset-grid  {
+    margin-top: 60px;
+    padding: 20px 10px 20px 20px;
+}
+.grid-button-wrap {
+    padding: 0 10px 10px 0;
+    height: 120px;
+}
+
+.grid-entry {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.grid-inner {
+    margin-bottom: 20px;
+}
+
+.preset-grid.filtered .grid-button-wrap:first-child .grid-entry {
+    background: #ececec;
+}
+
+.grid-entry:hover .preset-help {
+    display: block;
+    border-radius: 0;
+}
+
+.grid-entry .preset-help {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    background: rgba(0,0,0,.5);
+}
+
+.grid-entry .preset-help:hover {
+    background: rgba(0,0,0,.9);
+}
+
+.preset-inspect {
+  position: relative;
+  background: white;
+  padding-bottom: 20px;
+}
+
+.grid-entry .preset-icon-fill.area {
+    position: absolute;
+    opacity: 0.4;
+    left: 0; right: 0; top: 0; bottom: 0;
+    pointer-events: none;
+}
+
+.grid-entry > .icon {
+    position: absolute;
+    top: 30px;left: 0; right: 0;
+    margin: auto;
+}
+
+.inspector-body-line .grid-entry .icon {
+    top: 10%;
+}
+
+.grid-entry .label {
+    font-weight: bold;
+    background: #f6f6f6;
+    text-align: center;
+    display: block;
+    position: absolute;
+    padding: 5px;
+    bottom: 0;
+    left: 0; right: 0;
+    margin: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
 
 .preset-grid-search-wrap {
     height: 60px;
@@ -671,6 +777,29 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     padding: 0px 10px;
     height:30px;
     margin: 5px;
+}
+
+/* Preset icon colors */
+
+.preset-icon-fill.tag-shop,
+.preset-icon-fill.tag-building {
+    background-color: #e06e5f;
+}
+
+.preset-icon-fill.tag-natural-water {
+    background-color: #77d3de;
+}
+
+.preset-icon-fill.tag-landuse,
+.preset-icon-fill.tag-natural-wood,
+.preset-icon-fill.tag-natural-tree,
+.preset-icon-fill.tag-natural-grassland,
+.preset-icon-fill.tag-leisure-park {
+    background-color: #8cd05f;
+}
+
+.preset-icon-fill.tag-amenity-parking {
+    background-color: #aaa;
 }
 
 /* preset form basics */
@@ -1028,21 +1157,6 @@ div.combobox {
     right: -12.5%;
 }
 
-.inspector-actions {
-    height: 60px;
-}
-
-.inspector-actions button {
-    width: 20%;
-    float: left;
-}
-
-.inspector-actions .minor-buttons {
-    padding-left: 10px;
-    line-height: 40px;
-    width: 60%;
-}
-
 .inspector-inner .add-tag {
     width: 20%;
     height: 30px;
@@ -1057,113 +1171,6 @@ div.combobox {
 
 .inspector-inner .add-tag .label {
     display: none;
-}
-
-/* Preset grid */
-
-.preset-grid  {
-    padding: 20px 10px 20px 20px;
-}
-.grid-button-wrap {
-    padding: 0 10px 10px 0;
-    height: 120px;
-}
-
-.grid-entry {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border: 1px solid #ccc;
-    overflow: hidden;
-}
-
-.grid-inner {
-    margin-bottom: 20px;
-}
-
-.preset-grid.filtered .grid-button-wrap:first-child .grid-entry {
-    background: #ececec;
-}
-
-.grid-entry:hover .preset-help {
-    display: block;
-    border-radius: 0;
-}
-
-.grid-entry .preset-help {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 30px;
-    width: 30px;
-    background: rgba(0,0,0,.5);
-}
-
-.grid-entry .preset-help:hover {
-    background: rgba(0,0,0,.9);
-}
-
-.preset-inspect {
-  position: relative;
-  background: white;
-  padding-bottom: 20px;
-}
-
-.grid-entry .preset-icon-fill.area {
-    position: absolute;
-    opacity: 0.4;
-    left: 0; right: 0; top: 0; bottom: 0;
-    pointer-events: none;
-}
-
-.grid-entry > .icon {
-    position: absolute;
-    top: 30px;left: 0; right: 0;
-    margin: auto;
-}
-
-.inspector-body-line .grid-entry .icon {
-    top: 10%;
-}
-
-.grid-entry .label {
-    font-weight: bold;
-    background: #f6f6f6;
-    text-align: center;
-    display: block;
-    position: absolute;
-    padding: 5px;
-    bottom: 0;
-    left: 0; right: 0;
-    margin: auto;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    border-top: 1px solid rgba(0, 0, 0, .1);
-}
-
-/* Preset icon colors */
-
-.preset-icon-fill.tag-shop,
-.preset-icon-fill.tag-building {
-    background-color: #e06e5f;
-}
-
-.preset-icon-fill.tag-natural-water {
-    background-color: #77d3de;
-}
-
-.preset-icon-fill.tag-landuse,
-.preset-icon-fill.tag-natural-wood,
-.preset-icon-fill.tag-natural-tree,
-.preset-icon-fill.tag-natural-grassland,
-.preset-icon-fill.tag-leisure-park {
-    background-color: #8cd05f;
-}
-
-.preset-icon-fill.tag-amenity-parking {
-    background-color: #aaa;
 }
 
 /* Map Controls */

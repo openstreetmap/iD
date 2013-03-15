@@ -70,7 +70,7 @@ iD.ui = function(context) {
 
         container.append('div')
             .style('display', 'none')
-            .attr('class', 'inspector-wrap fr content col5');
+            .attr('class', 'inspector-wrap fr content col4');
 
         var about = container.append('div')
             .attr('class','col12 about-block fillD');
