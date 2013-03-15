@@ -161,7 +161,7 @@ en:
       amenity/fire_station: 
         name: Fire Station
       amenity/grave_yard: 
-        name: Grave Yard
+        name: Graveyard
       amenity/hospital: 
         name: Hospital
       amenity/library: 
@@ -171,7 +171,7 @@ en:
       amenity/pharmacy: 
         name: Pharmacy
       amenity/place_of_worship: 
-        name: Place Of Worship
+        name: Place of Worship
       amenity/place_of_worship/christian: 
         name: Church
       amenity/place_of_worship/jewish: 
@@ -181,7 +181,7 @@ en:
       amenity/police: 
         name: Police
       amenity/post_box: 
-        name: Post Box
+        name: Mailbox
       amenity/post_office: 
         name: Post Office
       amenity/pub: 
@@ -231,13 +231,13 @@ en:
       highway/traffic_signals: 
         name: Traffic Signals
       highway/trunk: 
-        name: Trunk Highway
+        name: Trunk Road
       highway/turning_circle: 
         name: Turning Circle
       highway/unclassified: 
-        name: Unclassified
+        name: Unclassified Road
       historic: 
-        name: Historic
+        name: Historic Site
       historic/monument: 
         name: Monument
       landuse: 
