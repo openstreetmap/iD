@@ -38,11 +38,11 @@ iD.ui.preset = function(context) {
         var wrap = selection.append('div')
             .attr('class', 'col12 more-buttons inspector-inner');
 
-       formbuttonwrap = wrap.append('div')
+        formbuttonwrap = wrap.append('div')
             .attr('class', 'col12 preset-input');
 
         formbuttonwrap.selectAll('button')
-            .data(context.presets().universal())
+            .data(context.presets().universal().filter(notInForm))
             .enter()
             .append('button')
                 .attr('class', 'preset-add-field')
@@ -50,6 +50,10 @@ iD.ui.preset = function(context) {
                 .each(tooltip)
                 .append('span')
                     .attr('class', function(d) { return 'icon ' + d.icon; });
+
+        function notInForm(p) {
+            return preset.fields.indexOf(p) < 0;
+        }
 
         function tooltip(d) {
             d3.select(this).call(bootstrap.tooltip()
@@ -63,7 +67,6 @@ iD.ui.preset = function(context) {
             if (!wrap.selectAll('button').node()) wrap.remove();
         }
 
-        if (!preset.additional || !preset.additional.length) wrap.remove();
     }
 
     function formKey(d) {
