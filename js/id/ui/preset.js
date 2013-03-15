@@ -63,7 +63,11 @@ iD.ui.preset = function(context) {
 
         function addForm(d) {
             draw(formwrap, [d]);
-            d3.select(this).remove();
+            d3.select(this)
+                .style('opacity', 1)
+                .transition().style('opacity', 0).each('end', function() {
+                    d3.select(this).remove();
+                });
             if (!wrap.selectAll('button').node()) wrap.remove();
         }
 
@@ -78,11 +82,14 @@ iD.ui.preset = function(context) {
             .data(fields, formKey)
             .enter()
             .append('div')
+            .style('opacity', 0)
             .attr('class', 'preset-section fillL inspector-inner col12');
 
         sections.append('h4')
             .attr('for', function(d) { return 'input-' + d.key; })
             .text(function(d) { return d.label(); });
+
+        sections.transition().style('opacity', 1);
 
         sections.each(input);
     }
