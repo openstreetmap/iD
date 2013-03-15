@@ -831,8 +831,7 @@ locale.zh = {
         "choose": "Select feature type",
         "results": "{n} results for {search}",
         "reference": "View on OpenStreetMap Wiki →",
-        "back_tooltip": "Change feature type",
-        "show_additional": "Show additional fields"
+        "back_tooltip": "Change feature type"
     },
     "background": {
         "title": "Background",

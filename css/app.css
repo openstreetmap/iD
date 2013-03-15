@@ -278,7 +278,6 @@ ul.link-list li:last-child {
     color: #6C6C6C;
 }
 
-
 .fl { float: left;}
 .fr { float: right;}
 
@@ -550,8 +549,6 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon-operation-rotate        { background-position: -180px -140px;}
 .icon-operation-simplify      { background-position: -200px -140px;}
 
-.icon.add-form       { background-position: -85px -180px;}
-
 /* Universal preset icons */
 
 .icon.source     { background-position:   0px -200px;}
@@ -560,6 +557,8 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.website    { background-position: -60px -200px;}
 .icon.elevation  { background-position: -80px -200px;}
 .icon.wikipedia  { background-position: -100px -200px;}
+.icon.note       { background-position: -120px -200px;}
+
 
 /* Toggle icon is special */
 
@@ -867,18 +866,13 @@ h4 + .preset-input input:first-child {
 
 /* adding additional preset fields */
 
-.icon.add-form {
-    width: 55px;
-}
-
 .more-buttons {
     border-top: 1px solid #ccc;
 }
 
 button.preset-add-field {
-    width: 40px;
+    width: 20%;
     height: 40px;
-    margin-right: 10px;
 }
 
 .preset-add-field .tooltip.top .tooltip-arrow {

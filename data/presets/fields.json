@@ -150,6 +150,7 @@
     "note": {
         "key": "note",
         "type": "textarea",
+        "icon": "note",
         "universal": true
     },
     "office": {
