@@ -27,6 +27,16 @@ use {
     pointer-events: none;
 }
 
+g.point .shadow,
+g.vertex .shadow,
+g.midpoint .shadow,
+path.shadow {
+    pointer-events: all;
+    -webkit-transition: 200ms;
+       -moz-transition: 200ms;
+            transition: 200ms;
+}
+
 /* points */
 
 g.point .stroke {
@@ -37,21 +47,16 @@ g.point .stroke {
 
 g.point .shadow {
     fill: none;
-    pointer-events: all;
-    -webkit-transition: -webkit-transform 100ms linear;
-    transition: transform 100ms linear;
-    -moz-transition: fill 100ms linear;
+    stroke: #f6634f;
+    stroke-width: 8;
+    stroke-opacity: 0;
 }
 
 .behavior-hover g.point.hover:not(.selected) .shadow {
-    stroke-width: 8;
-    stroke: #f6634f;
     stroke-opacity: 0.5;
 }
 
 g.point.selected .shadow {
-    stroke-width: 8;
-    stroke: #f6634f;
     stroke-opacity: 0.7;
 }
 
@@ -59,7 +64,7 @@ g.point.active, g.point.active * {
     pointer-events: none;
 }
 
-/* vertices */
+/* vertices and midpoints */
 
 g.vertex .fill {
     fill: none;
@@ -79,23 +84,27 @@ g.vertex.tagged .fill {
     fill: #000;
 }
 
-g.vertex .shadow {
-    fill: none;
-    pointer-events: all;
-    -webkit-transition: -webkit-transform 100ms linear;
-    transition: transform 100ms linear;
-    -moz-transition: fill 100ms linear;
-}
-.behavior-hover g.vertex.hover:not(.selected) .shadow {
-    fill: #f6634f;
-    fill-opacity: 0.3;
-}
-g.vertex.selected .shadow {
-    fill: #f6634f;
-    fill-opacity: 0.5;
+g.midpoint .fill {
+    fill: #ddd;
+    stroke: black;
+    stroke-opacity: .5;
+    opacity: .5;
 }
 
-/* midpoints */
+g.vertex .shadow,
+g.midpoint .shadow {
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+
+.behavior-hover g.vertex.hover:not(.selected) .shadow,
+.behavior-hover g.midpoint.hover:not(.selected) .shadow {
+    fill-opacity: 0.3;
+}
+
+g.vertex.selected .shadow {
+    fill-opacity: 0.5;
+}
 
 .mode-draw-area g.midpoint,
 .mode-draw-line g.midpoint,
@@ -104,30 +113,6 @@ g.vertex.selected .shadow {
 .mode-add-point g.midpoint,
 .mode-drag-node g.midpoint {
   display: none;
-}
-
-g.midpoint .fill {
-    fill:#ddd;
-    stroke:black;
-    stroke-opacity: .5;
-    opacity: .5;
-}
-.behavior-hover g.midpoint .fill.hover:not(.selected) {
-    fill:white;
-    opacity: .75;
-}
-
-g.midpoint .shadow {
-    fill: none;
-    pointer-events: all;
-    stroke-width: 10;
-    -webkit-transition: -webkit-transform 100ms linear;
-    transition: transform 100ms linear;
-    -moz-transition: fill 100ms linear;
-}
-.behavior-hover g.midpoint .shadow.hover:not(.selected) {
-    fill:#f6634f;
-    fill-opacity: 0.3;
 }
 
 /* lines */
@@ -143,18 +128,16 @@ path.stroke {
 }
 
 path.shadow {
-    pointer-events: stroke;
+    stroke: #f6634f;
     stroke-width: 10;
-    -webkit-transition: stroke 100ms linear;
+    stroke-opacity: 0;
 }
 
 .behavior-hover path.shadow.hover:not(.selected) {
-    stroke: #f6634f;
     stroke-opacity: 0.3;
 }
 
 path.shadow.selected {
-    stroke: #f6634f;
     stroke-opacity: 0.7;
 }
 
