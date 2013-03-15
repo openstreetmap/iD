@@ -19,18 +19,17 @@ img="$dir/.."
 css="$dir/../../css"
 
 cd $dir
-mkdir preset-icons
+mkdir feature-icons
 
-cp $MAKIPATH/renders/* preset-icons
-rm preset-icons/*-18.png
-rm preset-icons/*-12.png
-for x in preset-icons/*.png; do
+cp $MAKIPATH/renders/*-24.png feature-icons 
+for x in feature-icons/*.png; do
     mv $x `echo $x | sed "s/-24//"`
 done
-cp renders/line-presets/* preset-icons
+cp $MAKIPATH/renders/*-{12,18}.png feature-icons 
+cp renders/line-presets/* feature-icons
 
 
-glue --namespace=preset --sprite-namespace= preset-icons --css=$css --img=$img
+glue --namespace=feature --sprite-namespace= feature-icons --css=$css --img=$img
 
-rm preset-icons/*
-rmdir preset-icons
+rm feature-icons/*
+rmdir feature-icons

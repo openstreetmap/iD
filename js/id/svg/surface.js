@@ -17,7 +17,7 @@ iD.svg.Surface = function() {
             var klass = rule.selectorText,
                 match = klass && klass.match(selectorRegexp);
             if (match) {
-                var id = match[1];
+                var id = match[1].replace('feature', 'maki');
                 match = rule.style.backgroundPosition.match(/(-?\d+)px (-?\d+)px/);
                 sprites.push({id: id, x: match[1], y: match[2]});
             }
@@ -107,13 +107,13 @@ iD.svg.Surface = function() {
         defs.append('image')
             .attr({
                 id: 'maki-sprite',
-                width: 306,
-                height: 294,
-                'xlink:href': 'img/maki.png'
+                width: 472,
+                height: 462,
+                'xlink:href': 'img/feature-icons.png'
             });
 
         defs.selectAll()
-            .data(sprites("maki.css", /^\.(maki-[a-z0-9-]+-12)$/))
+            .data(sprites("feature-icons.css", /^\.(feature-[a-z0-9-]+-12)$/))
             .enter().append('use')
             .attr('id', function(d) { return d.id; })
             .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })

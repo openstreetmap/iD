@@ -1725,6 +1725,7 @@
     },
     {
         "name": "wetland",
+        "icon": "wetland",
         "fields": [
             "wetland"
         ],
