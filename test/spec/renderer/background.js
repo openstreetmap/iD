@@ -39,6 +39,9 @@ describe('iD.Background', function() {
             var source = iD.BackgroundSource.template({ template: '{t}/{z}/{x}/{y}', subdomains: ['apples', 'oranges'] });
             expect(source([0,1,1])).to.equal('oranges/1/0/1');
         });
+        it('supports josm style templates', function() {
+            var source = iD.BackgroundSource.template({ template: '{switch:foo,bar}/{zoom}/{x}/{y}' });
+            expect(source([0,1,1])).to.equal('bar/1/0/1');
+        });
     });
-
 });

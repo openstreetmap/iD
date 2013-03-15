@@ -18,7 +18,13 @@ iD.BackgroundSource.template = function(data) {
             .replace('{u}', u)
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
-            .replace('{z}', coord[2]);
+            .replace('{z}', coord[2])
+            // JOSM style
+            .replace('{zoom}', coord[2])
+            .replace(/\{(switch\:[^\}]*)\}/, function(s, r) {
+                var subdomains = r.split(':')[1].split(',');
+                return subdomains[coord[2] % subdomains.length];
+            });
     };
 
     generator.data = data;
