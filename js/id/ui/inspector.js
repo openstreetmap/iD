@@ -22,6 +22,9 @@ iD.ui.Inspector = function(context) {
                 event.close();
             })
             .on('choose', function(preset) {
+                presetLayer
+                    .style('display', 'block');
+
                 tagLayer
                     .style('right', '-500px')
                     .style('display', 'block')
@@ -45,11 +48,18 @@ iD.ui.Inspector = function(context) {
                     .each('end', function() {
                         d3.select(this).style('display', 'none');
                     });
-                presetLayer.call(presetGrid, true);
+                presetLayer
+                    .style('display', 'block')
+                    .call(presetGrid, true);
             });
 
-        if (initial) presetLayer.call(presetGrid);
-        else tagLayer.call(tagEditor);
+        if (initial) {
+            tagLayer.style('display', 'none');
+            presetLayer.call(presetGrid);
+        } else {
+            presetLayer.style('display', 'none');
+            tagLayer.call(tagEditor);
+        }
 
     }
 
