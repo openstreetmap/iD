@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fuel"
+    }
+}

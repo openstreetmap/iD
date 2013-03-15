@@ -1,0 +1,9 @@
+{
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "telephone"
+    }
+}

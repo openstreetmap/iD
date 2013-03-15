@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "amenity": "bench"
+    }
+}

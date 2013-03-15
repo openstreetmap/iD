@@ -148,6 +148,8 @@ en:
         name: Bank
       amenity/bar: 
         name: Bar
+      amenity/bench:
+        name: Bench
       amenity/bicycle_parking: 
         name: Bicycle Parking
       amenity/bicycle_rental: 
@@ -160,7 +162,9 @@ en:
         name: Fast Food
       amenity/fire_station: 
         name: Fire Station
-      amenity/grave_yard: 
+      amenity/fuel:
+        name: Gas Station
+      amenity/grave_yard:
         name: Graveyard
       amenity/hospital: 
         name: Hospital
@@ -190,7 +194,9 @@ en:
         name: Restaurant
       amenity/school: 
         name: School
-      amenity/toilets: 
+      amenity/telephone:
+        name: Telephone
+      amenity/toilets:
         name: Toilets
       amenity/townhall: 
         name: Town Hall
@@ -368,15 +374,39 @@ en:
         name: Supermarket
       tourism: 
         name: Tourism
-      tourism/camp_site: 
+      tourism/alpine_hut:
+        name: Alpine Hut
+      tourism/artwork:
+        name: Artwork
+      tourism/attraction:
+        name: Tourist Attraction
+      tourism/camp_site:
         name: Camp Site
-      tourism/hotel: 
+      tourism/caravan_site:
+        name: RV Park
+      tourism/chalet:
+        name: Chalet
+      tourism/guest_house:
+        name: Guest House
+      tourism/hostel:
+        name: Hostel
+      tourism/hotel:
         name: Hotel
-      tourism/museum: 
+      tourism/information:
+        name: Information
+      tourism/motel:
+        name: Motel
+      tourism/museum:
         name: Museum
       tourism/picnic_site: 
         name: Picnic Site
-      waterway: 
+      tourism/theme_park:
+        name: Theme Park
+      tourism/viewpoint:
+        name: Viewpoint
+      tourism/zoo:
+        name: Zoo
+      waterway:
         name: Waterway
       waterway/canal: 
         name: Canal

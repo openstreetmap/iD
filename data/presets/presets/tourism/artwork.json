@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "tourism": "artwork"
+    }
+}

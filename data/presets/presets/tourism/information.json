@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "information"
+    }
+}

@@ -111,6 +111,16 @@
         },
         "terms": []
     },
+    "amenity/bench": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line"
+        ],
+        "tags": {
+            "amenity": "bench"
+        }
+    },
     "amenity/bicycle_parking": {
         "icon": "bicycle",
         "fields": [
@@ -232,6 +242,20 @@
             "amenity": "fire_station"
         },
         "terms": []
+    },
+    "amenity/fuel": {
+        "fields": [
+            "operator",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "fuel"
+        }
     },
     "amenity/grave_yard": {
         "icon": "cemetery",
@@ -634,6 +658,15 @@
         ],
         "tags": {
             "amenity": "school"
+        }
+    },
+    "amenity/telephone": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "amenity": "telephone"
         }
     },
     "amenity/toilets": {
@@ -1891,6 +1924,46 @@
             "tourism": "*"
         }
     },
+    "tourism/alpine_hut": {
+        "icon": "lodging",
+        "fields": [
+            "operator",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "alpine_hut"
+        }
+    },
+    "tourism/artwork": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "tourism": "artwork"
+        }
+    },
+    "tourism/attraction": {
+        "fields": [
+            "operator",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "attraction"
+        }
+    },
     "tourism/camp_site": {
         "icon": "campsite",
         "fields": [
@@ -1905,6 +1978,72 @@
         "terms": [],
         "tags": {
             "tourism": "camp_site"
+        }
+    },
+    "tourism/caravan_site": {
+        "fields": [
+            "operator",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "caravan_site"
+        }
+    },
+    "tourism/chalet": {
+        "icon": "lodging",
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "chalet"
+        }
+    },
+    "tourism/guest_house": {
+        "icon": "lodging",
+        "fields": [
+            "operator",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "guest_house"
+        },
+        "terms": [
+            "B&B",
+            "Bed & Breakfast",
+            "Bed and Breakfast"
+        ]
+    },
+    "tourism/hostel": {
+        "icon": "lodging",
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "hostel"
         }
     },
     "tourism/hotel": {
@@ -1922,6 +2061,36 @@
         "terms": [],
         "tags": {
             "tourism": "hotel"
+        }
+    },
+    "tourism/information": {
+        "fields": [
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "information"
+        }
+    },
+    "tourism/motel": {
+        "icon": "lodging",
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "motel"
         }
     },
     "tourism/museum": {
@@ -1969,6 +2138,45 @@
         "terms": [],
         "tags": {
             "tourism": "picnic_site"
+        }
+    },
+    "tourism/theme_park": {
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "theme_park"
+        }
+    },
+    "tourism/viewpoint": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "tourism": "viewpoint"
+        }
+    },
+    "tourism/zoo": {
+        "icon": "zoo",
+        "fields": [
+            "operator",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "tourism": "zoo"
         }
     },
     "waterway": {

@@ -1,0 +1,16 @@
+{
+    "icon": "lodging",
+    "fields": [
+        "operator",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "hostel"
+    }
+}
