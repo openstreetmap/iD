@@ -106,7 +106,7 @@ iD.ui.TagEditor = function(context) {
             .call(drawButtons);
 
         tageditor.tags(tags);
-        event.changeTags(tags);
+        changeTags();
     }
 
     function clean(o) {
