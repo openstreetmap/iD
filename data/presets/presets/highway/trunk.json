@@ -1,5 +1,4 @@
 {
-    "name": "trunk highway",
     "icon": "highway-trunk",
     "fields": [
         "oneway",

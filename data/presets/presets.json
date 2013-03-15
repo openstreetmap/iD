@@ -1,6 +1,5 @@
-[
-    {
-        "name": "aeroway",
+{
+    "aeroway": {
         "fields": [
             "aeroway"
         ],
@@ -14,8 +13,7 @@
             "aeroway": "*"
         }
     },
-    {
-        "name": "airport",
+    "aeroway/aerodrome": {
         "icon": "airport",
         "geometry": [
             "point",
@@ -30,8 +28,7 @@
             "aeroway": "aerodrome"
         }
     },
-    {
-        "name": "helipad",
+    "aeroway/helipad": {
         "icon": "heliport",
         "geometry": [
             "point",
@@ -46,8 +43,7 @@
             "aeroway": "helipad"
         }
     },
-    {
-        "name": "amenity",
+    "amenity": {
         "fields": [
             "amenity"
         ],
@@ -60,8 +56,7 @@
             "amenity": "*"
         }
     },
-    {
-        "name": "bank",
+    "amenity/bank": {
         "icon": "bank",
         "fields": [
             "atm",
@@ -100,8 +95,7 @@
             "amenity": "bank"
         }
     },
-    {
-        "name": "bar",
+    "amenity/bar": {
         "icon": "bar",
         "fields": [
             "building_area",
@@ -117,8 +111,7 @@
         },
         "terms": []
     },
-    {
-        "name": "bicycle parking",
+    "amenity/bicycle_parking": {
         "icon": "bicycle",
         "fields": [
             "bicycle_parking",
@@ -134,8 +127,7 @@
             "amenity": "bicycle_parking"
         }
     },
-    {
-        "name": "bicycle rental",
+    "amenity/bicycle_rental": {
         "icon": "bicycle",
         "fields": [
             "capacity",
@@ -151,8 +143,7 @@
             "amenity": "bicycle_rental"
         }
     },
-    {
-        "name": "cafe",
+    "amenity/cafe": {
         "icon": "cafe",
         "fields": [
             "cuisine",
@@ -174,8 +165,7 @@
             "amenity": "cafe"
         }
     },
-    {
-        "name": "cinema",
+    "amenity/cinema": {
         "icon": "cinema",
         "fields": [
             "building_area",
@@ -209,8 +199,7 @@
             "amenity": "cinema"
         }
     },
-    {
-        "name": "fast food",
+    "amenity/fast_food": {
         "icon": "fast-food",
         "fields": [
             "cuisine",
@@ -227,8 +216,7 @@
         },
         "terms": []
     },
-    {
-        "name": "fire station",
+    "amenity/fire_station": {
         "icon": "fire-station",
         "fields": [
             "operator",
@@ -245,8 +233,7 @@
         },
         "terms": []
     },
-    {
-        "name": "grave yard",
+    "amenity/grave_yard": {
         "icon": "cemetery",
         "fields": [
             "religion"
@@ -260,8 +247,7 @@
             "amenity": "grave_yard"
         }
     },
-    {
-        "name": "hospital",
+    "amenity/hospital": {
         "icon": "hospital",
         "fields": [
             "emergency",
@@ -292,8 +278,7 @@
             "amenity": "hospital"
         }
     },
-    {
-        "name": "library",
+    "amenity/library": {
         "icon": "library",
         "fields": [
             "operator",
@@ -310,8 +295,7 @@
         },
         "terms": []
     },
-    {
-        "name": "parking",
+    "amenity/parking": {
         "icon": "parking",
         "fields": [
             "fee",
@@ -328,8 +312,7 @@
         },
         "terms": []
     },
-    {
-        "name": "pharmacy",
+    "amenity/pharmacy": {
         "icon": "pharmacy",
         "fields": [
             "operator",
@@ -346,8 +329,7 @@
         },
         "terms": []
     },
-    {
-        "name": "place of worship",
+    "amenity/place_of_worship": {
         "icon": "place-of-worship",
         "fields": [
             "religion",
@@ -389,8 +371,7 @@
             "amenity": "place_of_worship"
         }
     },
-    {
-        "name": "church",
+    "amenity/place_of_worship/christian": {
         "icon": "religious-christian",
         "fields": [
             "denomination",
@@ -431,8 +412,7 @@
             "religion": "christian"
         }
     },
-    {
-        "name": "synagogue",
+    "amenity/place_of_worship/jewish": {
         "icon": "religious-jewish",
         "fields": [
             "denomination",
@@ -453,8 +433,7 @@
             "religion": "jewish"
         }
     },
-    {
-        "name": "mosque",
+    "amenity/place_of_worship/muslim": {
         "icon": "religious-muslim",
         "fields": [
             "denomination",
@@ -475,8 +454,7 @@
             "religion": "muslim"
         }
     },
-    {
-        "name": "police",
+    "amenity/police": {
         "icon": "police",
         "fields": [
             "operator",
@@ -522,8 +500,7 @@
             "amenity": "police"
         }
     },
-    {
-        "name": "post box",
+    "amenity/post_box": {
         "icon": "post",
         "fields": [
             "operator",
@@ -545,8 +522,7 @@
             "postbox"
         ]
     },
-    {
-        "name": "post office",
+    "amenity/post_office": {
         "icon": "post",
         "fields": [
             "operator",
@@ -561,8 +537,7 @@
             "amenity": "post_office"
         }
     },
-    {
-        "name": "pub",
+    "amenity/pub": {
         "icon": "beer",
         "fields": [
             "building_area",
@@ -578,8 +553,7 @@
         },
         "terms": []
     },
-    {
-        "name": "restaurant",
+    "amenity/restaurant": {
         "icon": "restaurant",
         "fields": [
             "cuisine",
@@ -628,8 +602,7 @@
             "amenity": "restaurant"
         }
     },
-    {
-        "name": "school",
+    "amenity/school": {
         "icon": "school",
         "fields": [
             "operator",
@@ -663,8 +636,7 @@
             "amenity": "school"
         }
     },
-    {
-        "name": "toilets",
+    "amenity/toilets": {
         "fields": [
             "operator",
             "building"
@@ -679,8 +651,7 @@
             "amenity": "toilets"
         }
     },
-    {
-        "name": "town hall",
+    "amenity/townhall": {
         "icon": "town-hall",
         "fields": [
             "building_area",
@@ -702,8 +673,7 @@
             "amenity": "townhall"
         }
     },
-    {
-        "name": "university",
+    "amenity/university": {
         "icon": "college",
         "fields": [
             "operator",
@@ -719,8 +689,7 @@
         },
         "terms": []
     },
-    {
-        "name": "building",
+    "building": {
         "icon": "warehouse",
         "fields": [
             "building_yes",
@@ -742,8 +711,7 @@
         },
         "terms": []
     },
-    {
-        "name": "entrance",
+    "entrance": {
         "geometry": [
             "vertex"
         ],
@@ -754,8 +722,7 @@
             "entrance"
         ]
     },
-    {
-        "name": "highway",
+    "highway": {
         "fields": [
             "highway"
         ],
@@ -769,8 +736,7 @@
             "highway": "*"
         }
     },
-    {
-        "name": "bus stop",
+    "highway/bus_stop": {
         "icon": "bus",
         "fields": [
             "operator",
@@ -785,8 +751,7 @@
         },
         "terms": []
     },
-    {
-        "name": "crossing",
+    "highway/crossing": {
         "fields": [
             "crossing"
         ],
@@ -801,8 +766,7 @@
             "zebra crossing"
         ]
     },
-    {
-        "name": "cycle path",
+    "highway/cycleway": {
         "icon": "highway-cycleway",
         "fields": [
             "oneway",
@@ -818,8 +782,7 @@
         },
         "terms": []
     },
-    {
-        "name": "foot path",
+    "highway/footway": {
         "icon": "highway-footway",
         "fields": [
             "access",
@@ -858,8 +821,7 @@
             "highway": "footway"
         }
     },
-    {
-        "name": "motorway",
+    "highway/motorway": {
         "icon": "highway-motorway",
         "fields": [
             "oneway",
@@ -876,8 +838,7 @@
         },
         "terms": []
     },
-    {
-        "name": "path",
+    "highway/path": {
         "icon": "highway-footway",
         "fields": [
             "oneway",
@@ -894,8 +855,7 @@
         },
         "terms": []
     },
-    {
-        "name": "primary road",
+    "highway/primary": {
         "icon": "highway-primary",
         "fields": [
             "oneway",
@@ -912,8 +872,7 @@
         },
         "terms": []
     },
-    {
-        "name": "residential road",
+    "highway/residential": {
         "icon": "highway-residential",
         "fields": [
             "oneway",
@@ -930,8 +889,7 @@
         },
         "terms": []
     },
-    {
-        "name": "secondary road",
+    "highway/secondary": {
         "icon": "highway-secondary",
         "fields": [
             "oneway",
@@ -948,8 +906,7 @@
         },
         "terms": []
     },
-    {
-        "name": "service road",
+    "highway/service": {
         "icon": "highway-service",
         "fields": [
             "service",
@@ -967,8 +924,7 @@
         },
         "terms": []
     },
-    {
-        "name": "steps",
+    "highway/steps": {
         "fields": [
             "access",
             "surface"
@@ -984,8 +940,7 @@
             "staircase"
         ]
     },
-    {
-        "name": "tertiary road",
+    "highway/tertiary": {
         "icon": "highway-tertiary",
         "fields": [
             "oneway",
@@ -1002,8 +957,7 @@
         },
         "terms": []
     },
-    {
-        "name": "track",
+    "highway/track": {
         "icon": "highway-track",
         "fields": [
             "oneway",
@@ -1020,8 +974,7 @@
         },
         "terms": []
     },
-    {
-        "name": "traffic signals",
+    "highway/traffic_signals": {
         "geometry": [
             "vertex"
         ],
@@ -1034,8 +987,7 @@
             "traffic light"
         ]
     },
-    {
-        "name": "trunk highway",
+    "highway/trunk": {
         "icon": "highway-trunk",
         "fields": [
             "oneway",
@@ -1052,8 +1004,7 @@
         },
         "terms": []
     },
-    {
-        "name": "turning circle",
+    "highway/turning_circle": {
         "icon": "circle",
         "geometry": [
             "vertex"
@@ -1063,8 +1014,7 @@
         },
         "terms": []
     },
-    {
-        "name": "unclassified",
+    "highway/unclassified": {
         "icon": "highway",
         "fields": [
             "oneway",
@@ -1081,8 +1031,7 @@
         },
         "terms": []
     },
-    {
-        "name": "historic",
+    "historic": {
         "fields": [
             "historic"
         ],
@@ -1095,8 +1044,7 @@
             "historic": "*"
         }
     },
-    {
-        "name": "monument",
+    "historic/monument": {
         "icon": "monument",
         "geometry": [
             "point",
@@ -1107,8 +1055,7 @@
             "historic": "monument"
         }
     },
-    {
-        "name": "landuse",
+    "landuse": {
         "fields": [
             "landuse"
         ],
@@ -1121,8 +1068,7 @@
             "landuse": "*"
         }
     },
-    {
-        "name": "allotments",
+    "landuse/allotments": {
         "geometry": [
             "point",
             "area"
@@ -1132,8 +1078,7 @@
         },
         "terms": []
     },
-    {
-        "name": "basin",
+    "landuse/basin": {
         "geometry": [
             "point",
             "area"
@@ -1143,8 +1088,7 @@
         },
         "terms": []
     },
-    {
-        "name": "cemetery",
+    "landuse/cemetery": {
         "icon": "cemetery",
         "geometry": [
             "point",
@@ -1155,8 +1099,7 @@
         },
         "terms": []
     },
-    {
-        "name": "commercial",
+    "landuse/commercial": {
         "geometry": [
             "point",
             "area"
@@ -1166,8 +1109,7 @@
         },
         "terms": []
     },
-    {
-        "name": "construction",
+    "landuse/construction": {
         "fields": [
             "construction",
             "operator"
@@ -1181,8 +1123,7 @@
         },
         "terms": []
     },
-    {
-        "name": "farm",
+    "landuse/farm": {
         "geometry": [
             "point",
             "area"
@@ -1192,8 +1133,7 @@
         },
         "terms": []
     },
-    {
-        "name": "farmyard",
+    "landuse/farmyard": {
         "geometry": [
             "point",
             "area"
@@ -1203,8 +1143,7 @@
         },
         "terms": []
     },
-    {
-        "name": "forest",
+    "landuse/forest": {
         "fields": [
             "wood"
         ],
@@ -1218,8 +1157,7 @@
         },
         "terms": []
     },
-    {
-        "name": "grass",
+    "landuse/grass": {
         "geometry": [
             "point",
             "area"
@@ -1229,8 +1167,7 @@
         },
         "terms": []
     },
-    {
-        "name": "industrial",
+    "landuse/industrial": {
         "geometry": [
             "point",
             "area"
@@ -1240,8 +1177,7 @@
         },
         "terms": []
     },
-    {
-        "name": "meadow",
+    "landuse/meadow": {
         "geometry": [
             "point",
             "area"
@@ -1251,8 +1187,7 @@
         },
         "terms": []
     },
-    {
-        "name": "orchard",
+    "landuse/orchard": {
         "geometry": [
             "point",
             "area"
@@ -1262,8 +1197,7 @@
         },
         "terms": []
     },
-    {
-        "name": "quarry",
+    "landuse/quarry": {
         "geometry": [
             "point",
             "area"
@@ -1273,8 +1207,7 @@
         },
         "terms": []
     },
-    {
-        "name": "residential",
+    "landuse/residential": {
         "geometry": [
             "point",
             "area"
@@ -1284,8 +1217,7 @@
         },
         "terms": []
     },
-    {
-        "name": "vineyard",
+    "landuse/vineyard": {
         "geometry": [
             "point",
             "area"
@@ -1295,8 +1227,7 @@
         },
         "terms": []
     },
-    {
-        "name": "leisure",
+    "leisure": {
         "fields": [
             "leisure"
         ],
@@ -1309,8 +1240,7 @@
             "leisure": "*"
         }
     },
-    {
-        "name": "golf course",
+    "leisure/golf_course": {
         "icon": "golf",
         "fields": [
             "operator",
@@ -1325,8 +1255,7 @@
         },
         "terms": []
     },
-    {
-        "name": "park",
+    "leisure/park": {
         "icon": "park",
         "geometry": [
             "point",
@@ -1358,8 +1287,7 @@
             "leisure": "park"
         }
     },
-    {
-        "name": "sport pitch",
+    "leisure/pitch": {
         "icon": "pitch",
         "fields": [
             "sport",
@@ -1374,8 +1302,7 @@
         },
         "terms": []
     },
-    {
-        "name": "american football field",
+    "leisure/pitch/american_football": {
         "icon": "america-football",
         "fields": [
             "surface"
@@ -1390,8 +1317,7 @@
         },
         "terms": []
     },
-    {
-        "name": "baseball diamond",
+    "leisure/pitch/baseball": {
         "icon": "baseball",
         "geometry": [
             "point",
@@ -1403,8 +1329,7 @@
         },
         "terms": []
     },
-    {
-        "name": "basketball court",
+    "leisure/pitch/basketball": {
         "icon": "basketball",
         "fields": [
             "surface"
@@ -1419,8 +1344,7 @@
         },
         "terms": []
     },
-    {
-        "name": "soccer field",
+    "leisure/pitch/soccer": {
         "icon": "soccer",
         "fields": [
             "surface"
@@ -1435,8 +1359,7 @@
         },
         "terms": []
     },
-    {
-        "name": "tennis court",
+    "leisure/pitch/tennis": {
         "icon": "tennis",
         "fields": [
             "surface"
@@ -1451,8 +1374,7 @@
         },
         "terms": []
     },
-    {
-        "name": "playground",
+    "leisure/playground": {
         "geometry": [
             "point",
             "area"
@@ -1461,8 +1383,7 @@
             "leisure": "playground"
         }
     },
-    {
-        "name": "man made",
+    "man_made": {
         "fields": [
             "man_made"
         ],
@@ -1476,8 +1397,7 @@
             "man_made": "*"
         }
     },
-    {
-        "name": "lighthouse",
+    "man_made/lighthouse": {
         "geometry": [
             "point",
             "area"
@@ -1486,8 +1406,7 @@
             "man_made": "lighthouse"
         }
     },
-    {
-        "name": "pier",
+    "man_made/pier": {
         "geometry": [
             "line",
             "area"
@@ -1496,8 +1415,7 @@
             "man_made": "pier"
         }
     },
-    {
-        "name": "water tower",
+    "man_made/water_tower": {
         "icon": "water",
         "geometry": [
             "point",
@@ -1507,8 +1425,7 @@
             "man_made": "water_tower"
         }
     },
-    {
-        "name": "natural",
+    "natural": {
         "fields": [
             "natural"
         ],
@@ -1521,8 +1438,7 @@
             "natural": "*"
         }
     },
-    {
-        "name": "bay",
+    "natural/bay": {
         "geometry": [
             "point",
             "area"
@@ -1532,8 +1448,7 @@
             "natural": "bay"
         }
     },
-    {
-        "name": "beach",
+    "natural/beach": {
         "fields": [
             "surface"
         ],
@@ -1546,8 +1461,7 @@
             "natural": "beach"
         }
     },
-    {
-        "name": "cliff",
+    "natural/cliff": {
         "geometry": [
             "point",
             "vertex",
@@ -1559,8 +1473,7 @@
             "natural": "cliff"
         }
     },
-    {
-        "name": "coastline",
+    "natural/coastline": {
         "geometry": [
             "line"
         ],
@@ -1571,8 +1484,7 @@
             "natural": "coastline"
         }
     },
-    {
-        "name": "glacier",
+    "natural/glacier": {
         "geometry": [
             "area"
         ],
@@ -1581,8 +1493,7 @@
             "natural": "glacier"
         }
     },
-    {
-        "name": "grassland",
+    "natural/grassland": {
         "geometry": [
             "point",
             "area"
@@ -1592,8 +1503,7 @@
             "natural": "grassland"
         }
     },
-    {
-        "name": "heath",
+    "natural/heath": {
         "geometry": [
             "area"
         ],
@@ -1602,8 +1512,7 @@
             "natural": "heath"
         }
     },
-    {
-        "name": "peak",
+    "natural/peak": {
         "icon": "triangle",
         "fields": [
             "elevation"
@@ -1631,8 +1540,7 @@
             "top"
         ]
     },
-    {
-        "name": "scrub",
+    "natural/scrub": {
         "geometry": [
             "area"
         ],
@@ -1641,8 +1549,7 @@
         },
         "terms": []
     },
-    {
-        "name": "spring",
+    "natural/spring": {
         "geometry": [
             "point",
             "vertex"
@@ -1652,8 +1559,7 @@
             "natural": "spring"
         }
     },
-    {
-        "name": "tree",
+    "natural/tree": {
         "fields": [
             "denotation"
         ],
@@ -1667,8 +1573,7 @@
             "natural": "tree"
         }
     },
-    {
-        "name": "water",
+    "natural/water": {
         "fields": [
             "water"
         ],
@@ -1680,8 +1585,7 @@
         },
         "terms": []
     },
-    {
-        "name": "lake",
+    "natural/water/lake": {
         "geometry": [
             "area"
         ],
@@ -1695,8 +1599,7 @@
             "mere"
         ]
     },
-    {
-        "name": "pond",
+    "natural/water/pond": {
         "geometry": [
             "area"
         ],
@@ -1712,8 +1615,7 @@
             "mere"
         ]
     },
-    {
-        "name": "reservoir",
+    "natural/water/reservoir": {
         "geometry": [
             "area"
         ],
@@ -1723,8 +1625,7 @@
         },
         "terms": []
     },
-    {
-        "name": "wetland",
+    "natural/wetland": {
         "icon": "wetland",
         "fields": [
             "wetland"
@@ -1738,8 +1639,7 @@
         },
         "terms": []
     },
-    {
-        "name": "wood",
+    "natural/wood": {
         "fields": [
             "wood"
         ],
@@ -1753,8 +1653,7 @@
         },
         "terms": []
     },
-    {
-        "name": "office",
+    "office": {
         "icon": "commercial",
         "fields": [
             "office",
@@ -1771,8 +1670,7 @@
         },
         "terms": []
     },
-    {
-        "name": "place",
+    "place": {
         "fields": [
             "place"
         ],
@@ -1785,8 +1683,7 @@
             "place": "*"
         }
     },
-    {
-        "name": "hamlet",
+    "place/hamlet": {
         "icon": "triangle-stroked",
         "geometry": [
             "point",
@@ -1796,8 +1693,7 @@
             "place": "hamlet"
         }
     },
-    {
-        "name": "island",
+    "place/island": {
         "geometry": [
             "point",
             "area"
@@ -1816,8 +1712,7 @@
             "place": "island"
         }
     },
-    {
-        "name": "locality",
+    "place/locality": {
         "icon": "marker",
         "geometry": [
             "point",
@@ -1827,8 +1722,7 @@
             "place": "locality"
         }
     },
-    {
-        "name": "village",
+    "place/village": {
         "icon": "square-stroked",
         "geometry": [
             "point",
@@ -1838,8 +1732,7 @@
             "place": "village"
         }
     },
-    {
-        "name": "substation",
+    "power/sub_station": {
         "fields": [
             "operator"
         ],
@@ -1851,8 +1744,7 @@
             "power": "substation"
         }
     },
-    {
-        "name": "railway",
+    "railway": {
         "fields": [
             "railway"
         ],
@@ -1866,8 +1758,7 @@
             "railway": "*"
         }
     },
-    {
-        "name": "level crossing",
+    "railway/level_crossing": {
         "icon": "cross",
         "geometry": [
             "vertex"
@@ -1884,8 +1775,7 @@
             "train crossing"
         ]
     },
-    {
-        "name": "rail",
+    "railway/rail": {
         "icon": "railway-rail",
         "geometry": [
             "line"
@@ -1895,8 +1785,7 @@
         },
         "terms": []
     },
-    {
-        "name": "subway",
+    "railway/subway": {
         "icon": "railway-rail",
         "geometry": [
             "line"
@@ -1906,8 +1795,7 @@
         },
         "terms": []
     },
-    {
-        "name": "subway entrance",
+    "railway/subway_entrance": {
         "icon": "rail-underground",
         "geometry": [
             "point"
@@ -1917,8 +1805,7 @@
         },
         "terms": []
     },
-    {
-        "name": "shop",
+    "shop": {
         "icon": "shop",
         "fields": [
             "shop",
@@ -1935,8 +1822,7 @@
         },
         "terms": []
     },
-    {
-        "name": "butcher",
+    "shop/butcher": {
         "icon": "slaughterhouse",
         "fields": [
             "building_area",
@@ -1952,8 +1838,7 @@
             "shop": "butcher"
         }
     },
-    {
-        "name": "supermarket",
+    "shop/supermarket": {
         "icon": "grocery",
         "fields": [
             "operator",
@@ -1991,8 +1876,7 @@
             "shop": "supermarket"
         }
     },
-    {
-        "name": "tourism",
+    "tourism": {
         "fields": [
             "tourism"
         ],
@@ -2005,8 +1889,7 @@
             "tourism": "*"
         }
     },
-    {
-        "name": "camp site",
+    "tourism/camp_site": {
         "icon": "campsite",
         "fields": [
             "operator",
@@ -2022,8 +1905,7 @@
             "tourism": "camp_site"
         }
     },
-    {
-        "name": "hotel",
+    "tourism/hotel": {
         "icon": "lodging",
         "fields": [
             "operator",
@@ -2040,8 +1922,7 @@
             "tourism": "hotel"
         }
     },
-    {
-        "name": "museum",
+    "tourism/museum": {
         "icon": "museum",
         "fields": [
             "operator",
@@ -2072,8 +1953,7 @@
             "tourism": "museum"
         }
     },
-    {
-        "name": "picnic site",
+    "tourism/picnic_site": {
         "fields": [
             "operator",
             "building_area",
@@ -2089,8 +1969,7 @@
             "tourism": "picnic_site"
         }
     },
-    {
-        "name": "waterway",
+    "waterway": {
         "fields": [
             "waterway"
         ],
@@ -2104,8 +1983,7 @@
             "waterway": "*"
         }
     },
-    {
-        "name": "canal",
+    "waterway/canal": {
         "icon": "waterway-river",
         "geometry": [
             "line"
@@ -2114,8 +1992,7 @@
             "waterway": "canal"
         }
     },
-    {
-        "name": "dam",
+    "waterway/dam": {
         "icon": "dam",
         "geometry": [
             "point",
@@ -2127,8 +2004,7 @@
             "waterway": "dam"
         }
     },
-    {
-        "name": "ditch",
+    "waterway/ditch": {
         "icon": "waterway-river",
         "geometry": [
             "line"
@@ -2137,8 +2013,7 @@
             "waterway": "ditch"
         }
     },
-    {
-        "name": "drain",
+    "waterway/drain": {
         "icon": "waterway-river",
         "geometry": [
             "line"
@@ -2147,8 +2022,7 @@
             "waterway": "drain"
         }
     },
-    {
-        "name": "river",
+    "waterway/river": {
         "icon": "waterway-river",
         "geometry": [
             "line"
@@ -2172,8 +2046,7 @@
             "waterway": "river"
         }
     },
-    {
-        "name": "riverbank",
+    "waterway/riverbank": {
         "icon": "water",
         "geometry": [
             "area"
@@ -2182,8 +2055,7 @@
             "waterway": "riverbank"
         }
     },
-    {
-        "name": "stream",
+    "waterway/stream": {
         "icon": "waterway-river",
         "fields": [
             "layer"
@@ -2222,8 +2094,7 @@
             "waterway": "stream"
         }
     },
-    {
-        "name": "weir",
+    "waterway/weir": {
         "icon": "dam",
         "geometry": [
             "vertex",
@@ -2233,4 +2104,4 @@
             "waterway": "weir"
         }
     }
-]
+}

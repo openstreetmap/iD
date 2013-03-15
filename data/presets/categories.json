@@ -1,15 +1,15 @@
 [{
     "geometry": "line",
     "icon": "highway",
-    "name": "roads",
+    "id": "roads",
     "members": [
-        "residential road",
-        "primary road",
-        "secondary road",
-        "tertiary road",
-        "motorway",
-        "trunk highway",
-        "service road",
-        "other"
+        "highway/motorway",
+        "highway/trunk",
+        "highway/primary",
+        "highway/secondary",
+        "highway/tertiary",
+        "highway/residential",
+        "highway/service",
+        "highway"
     ]
 }]

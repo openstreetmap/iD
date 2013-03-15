@@ -1,5 +1,4 @@
 {
-    "name": "peak",
     "icon": "triangle",
     "fields": [
         "elevation"

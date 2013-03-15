@@ -42,7 +42,7 @@ en:
         label: Elevation
       emergency: 
         label: Emergency
-      entrance:
+      entrance: 
         label: Type
       fax: 
         label: Fax
@@ -76,7 +76,7 @@ en:
         label: Natural
       network: 
         label: Network
-      note:
+      note: 
         label: Note
       office: 
         label: Type
@@ -123,15 +123,274 @@ en:
         label: Surface
       tourism: 
         label: Type
-      water:
+      water: 
         label: Type
       waterway: 
         label: Type
-      website:
+      website: 
         label: Website
       wetland: 
         label: Type
-      wikipedia:
+      wikipedia: 
         label: Wikipedia
-      wood:
+      wood: 
         label: Type
+    presets: 
+      aeroway: 
+        name: Aeroway
+      aeroway/aerodrome: 
+        name: Airport
+      aeroway/helipad: 
+        name: Helipad
+      amenity: 
+        name: Amenity
+      amenity/bank: 
+        name: Bank
+      amenity/bar: 
+        name: Bar
+      amenity/bicycle_parking: 
+        name: Bicycle Parking
+      amenity/bicycle_rental: 
+        name: Bicycle Rental
+      amenity/cafe: 
+        name: Cafe
+      amenity/cinema: 
+        name: Cinema
+      amenity/fast_food: 
+        name: Fast Food
+      amenity/fire_station: 
+        name: Fire Station
+      amenity/grave_yard: 
+        name: Grave Yard
+      amenity/hospital: 
+        name: Hospital
+      amenity/library: 
+        name: Library
+      amenity/parking: 
+        name: Parking
+      amenity/pharmacy: 
+        name: Pharmacy
+      amenity/place_of_worship: 
+        name: Place Of Worship
+      amenity/place_of_worship/christian: 
+        name: Church
+      amenity/place_of_worship/jewish: 
+        name: Synagogue
+      amenity/place_of_worship/muslim: 
+        name: Mosque
+      amenity/police: 
+        name: Police
+      amenity/post_box: 
+        name: Post Box
+      amenity/post_office: 
+        name: Post Office
+      amenity/pub: 
+        name: Pub
+      amenity/restaurant: 
+        name: Restaurant
+      amenity/school: 
+        name: School
+      amenity/toilets: 
+        name: Toilets
+      amenity/townhall: 
+        name: Town Hall
+      amenity/university: 
+        name: University
+      building: 
+        name: Building
+      entrance: 
+        name: Entrance
+      highway: 
+        name: Highway
+      highway/bus_stop: 
+        name: Bus Stop
+      highway/crossing: 
+        name: Crossing
+      highway/cycleway: 
+        name: Cycle Path
+      highway/footway: 
+        name: Foot Path
+      highway/motorway: 
+        name: Motorway
+      highway/path: 
+        name: Path
+      highway/primary: 
+        name: Primary Road
+      highway/residential: 
+        name: Residential Road
+      highway/secondary: 
+        name: Secondary Road
+      highway/service: 
+        name: Service Road
+      highway/steps: 
+        name: Steps
+      highway/tertiary: 
+        name: Tertiary Road
+      highway/track: 
+        name: Track
+      highway/traffic_signals: 
+        name: Traffic Signals
+      highway/trunk: 
+        name: Trunk Highway
+      highway/turning_circle: 
+        name: Turning Circle
+      highway/unclassified: 
+        name: Unclassified
+      historic: 
+        name: Historic
+      historic/monument: 
+        name: Monument
+      landuse: 
+        name: Landuse
+      landuse/allotments: 
+        name: Allotments
+      landuse/basin: 
+        name: Basin
+      landuse/cemetery: 
+        name: Cemetery
+      landuse/commercial: 
+        name: Commercial
+      landuse/construction: 
+        name: Construction
+      landuse/farm: 
+        name: Farm
+      landuse/farmyard: 
+        name: Farmyard
+      landuse/forest: 
+        name: Forest
+      landuse/grass: 
+        name: Grass
+      landuse/industrial: 
+        name: Industrial
+      landuse/meadow: 
+        name: Meadow
+      landuse/orchard: 
+        name: Orchard
+      landuse/quarry: 
+        name: Quarry
+      landuse/residential: 
+        name: Residential
+      landuse/vineyard: 
+        name: Vineyard
+      leisure: 
+        name: Leisure
+      leisure/golf_course: 
+        name: Golf Course
+      leisure/park: 
+        name: Park
+      leisure/pitch: 
+        name: Sport Pitch
+      leisure/pitch/american_football: 
+        name: American Football Field
+      leisure/pitch/baseball: 
+        name: Baseball Diamond
+      leisure/pitch/basketball: 
+        name: Basketball Court
+      leisure/pitch/soccer: 
+        name: Soccer Field
+      leisure/pitch/tennis: 
+        name: Tennis Court
+      leisure/playground: 
+        name: Playground
+      man_made: 
+        name: Man Made
+      man_made/lighthouse: 
+        name: Lighthouse
+      man_made/pier: 
+        name: Pier
+      man_made/water_tower: 
+        name: Water Tower
+      natural: 
+        name: Natural
+      natural/bay: 
+        name: Bay
+      natural/beach: 
+        name: Beach
+      natural/cliff: 
+        name: Cliff
+      natural/coastline: 
+        name: Coastline
+      natural/glacier: 
+        name: Glacier
+      natural/grassland: 
+        name: Grassland
+      natural/heath: 
+        name: Heath
+      natural/peak: 
+        name: Peak
+      natural/scrub: 
+        name: Scrub
+      natural/spring: 
+        name: Spring
+      natural/tree: 
+        name: Tree
+      natural/water: 
+        name: Water
+      natural/water/lake: 
+        name: Lake
+      natural/water/pond: 
+        name: Pond
+      natural/water/reservoir: 
+        name: Reservoir
+      natural/wetland: 
+        name: Wetland
+      natural/wood: 
+        name: Wood
+      office: 
+        name: Office
+      place: 
+        name: Place
+      place/hamlet: 
+        name: Hamlet
+      place/island: 
+        name: Island
+      place/locality: 
+        name: Locality
+      place/village: 
+        name: Village
+      power/sub_station: 
+        name: Substation
+      railway: 
+        name: Railway
+      railway/level_crossing: 
+        name: Level Crossing
+      railway/rail: 
+        name: Rail
+      railway/subway: 
+        name: Subway
+      railway/subway_entrance: 
+        name: Subway Entrance
+      shop: 
+        name: Shop
+      shop/butcher: 
+        name: Butcher
+      shop/supermarket: 
+        name: Supermarket
+      tourism: 
+        name: Tourism
+      tourism/camp_site: 
+        name: Camp Site
+      tourism/hotel: 
+        name: Hotel
+      tourism/museum: 
+        name: Museum
+      tourism/picnic_site: 
+        name: Picnic Site
+      waterway: 
+        name: Waterway
+      waterway/canal: 
+        name: Canal
+      waterway/dam: 
+        name: Dam
+      waterway/ditch: 
+        name: Ditch
+      waterway/drain: 
+        name: Drain
+      waterway/river: 
+        name: River
+      waterway/riverbank: 
+        name: Riverbank
+      waterway/stream: 
+        name: Stream
+      waterway/weir: 
+        name: Weir

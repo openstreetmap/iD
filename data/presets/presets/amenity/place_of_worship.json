@@ -1,5 +1,4 @@
 {
-    "name": "place of worship",
     "icon": "place-of-worship",
     "fields": [
         "religion",

@@ -1,5 +1,4 @@
 {
-    "name": "motorway",
     "icon": "highway-motorway",
     "fields": [
         "oneway",

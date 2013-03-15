@@ -7,11 +7,10 @@ describe("iD.presets.Category", function() {
             "icon": "highway",
             "name": "roads",
             "members": [
-                "residential"
+                "highway/residential"
             ]
         };
-        residential = iD.presets.Preset({
-            name: 'residential',
+        residential = iD.presets.Preset('highway/residential', {
             tags: {
                 highway: 'residential'
             },

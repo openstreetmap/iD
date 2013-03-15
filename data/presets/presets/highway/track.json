@@ -1,5 +1,4 @@
 {
-    "name": "track",
     "icon": "highway-track",
     "fields": [
         "oneway",

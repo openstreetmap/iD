@@ -1,5 +1,7 @@
-iD.presets.Field = function(field, id) {
+iD.presets.Field = function(id, field) {
     field = _.clone(field);
+
+    field.id = id;
 
     field.matchGeometry = function(geometry) {
         return !field.geometry || field.geometry.indexOf(geometry) >= 0;
@@ -10,7 +12,7 @@ iD.presets.Field = function(field, id) {
     };
 
     field.label = function() {
-        return field.t('label', { 'default': field.key});
+        return field.t('label', {'default': id});
     };
 
     return field;

@@ -1,5 +1,4 @@
 {
-    "name": "town hall",
     "icon": "town-hall",
     "fields": [
         "building_area",

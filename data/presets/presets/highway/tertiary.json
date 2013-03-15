@@ -1,5 +1,4 @@
 {
-    "name": "tertiary road",
     "icon": "highway-tertiary",
     "fields": [
         "oneway",

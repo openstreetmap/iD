@@ -1,5 +1,4 @@
 {
-    "name": "bicycle rental",
     "icon": "bicycle",
     "fields": [
         "capacity",

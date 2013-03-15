@@ -1,5 +1,4 @@
 {
-    "name": "primary road",
     "icon": "highway-primary",
     "fields": [
         "oneway",

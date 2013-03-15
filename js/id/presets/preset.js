@@ -1,6 +1,7 @@
-iD.presets.Preset = function(preset, fields) {
+iD.presets.Preset = function(id, preset, fields) {
     preset = _.clone(preset);
 
+    preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
     preset.additional = (preset.additional || []).map(getFields);
 
@@ -25,6 +26,14 @@ iD.presets.Preset = function(preset, fields) {
             }
         }
         return score;
+    };
+
+    preset.t = function(scope, options) {
+        return t('presets.preset.' + id + '.' + scope, options);
+    };
+
+    preset.name = function() {
+        return preset.t('name', {'default': id});
     };
 
     preset.removeTags = function(tags, geometry) {

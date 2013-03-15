@@ -1,5 +1,4 @@
 {
-    "name": "secondary road",
     "icon": "highway-secondary",
     "fields": [
         "oneway",

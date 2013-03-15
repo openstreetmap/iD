@@ -1,5 +1,4 @@
 {
-    "name": "toilets",
     "fields": [
         "operator",
         "building"

@@ -85,7 +85,7 @@ iD.ui.PresetGrid = function(context) {
             }
         }
 
-        function name(d) { return d.name; }
+        function name(d) { return d.name(); }
 
         function drawGrid(selection, presets) {
 
@@ -148,7 +148,7 @@ iD.ui.PresetGrid = function(context) {
                         .attr('class', 'preset-inspect col12')
                         .datum(d);
 
-                    presetinspect.append('h2').text(d.title || d.name);
+                    presetinspect.append('h2').text(d.name());
 
                     var description = presetinspect.append('p');
                     var link = presetinspect.append('a');

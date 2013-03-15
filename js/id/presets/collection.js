@@ -6,7 +6,7 @@ iD.presets.Collection = function(collection) {
 
         item: function(id) {
             return _.find(collection, function(d) {
-                return d.name === id;
+                return d.id === id;
             });
         },
 
@@ -42,7 +42,7 @@ iD.presets.Collection = function(collection) {
             value = value.toLowerCase();
 
             var leading_name = _.filter(collection, function(a) {
-                    return leading(a.name);
+                    return leading(a.name());
                 }),
                 leading_terms = _.filter(collection, function(a) {
                     return _.any(a.terms || [], leading);
@@ -56,10 +56,10 @@ iD.presets.Collection = function(collection) {
             var levenstein_name = collection.map(function(a) {
                     return {
                         preset: a,
-                        dist: iD.util.editDistance(value, a.name)
+                        dist: iD.util.editDistance(value, a.name())
                     };
                 }).filter(function(a) {
-                    return a.dist + Math.min(value.length - a.preset.name.length, 0) < 3;
+                    return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
                 }).sort(function(a, b) {
                     return a.dist - b.dist;
                 }).map(function(a) {

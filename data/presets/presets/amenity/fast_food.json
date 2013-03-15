@@ -1,5 +1,4 @@
 {
-    "name": "fast food",
     "icon": "fast-food",
     "fields": [
         "cuisine",

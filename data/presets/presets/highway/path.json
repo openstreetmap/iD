@@ -1,5 +1,4 @@
 {
-    "name": "path",
     "icon": "highway-footway",
     "fields": [
         "oneway",

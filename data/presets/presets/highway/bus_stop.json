@@ -1,5 +1,4 @@
 {
-    "name": "bus stop",
     "icon": "bus",
     "fields": [
         "operator",

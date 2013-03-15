@@ -1,5 +1,4 @@
 {
-    "name": "supermarket",
     "icon": "grocery",
     "fields": [
         "operator",

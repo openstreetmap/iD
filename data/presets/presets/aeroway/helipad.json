@@ -1,5 +1,4 @@
 {
-    "name": "helipad",
     "icon": "heliport",
     "geometry": [
         "point",

@@ -1,5 +1,4 @@
 {
-    "name": "cycle path",
     "icon": "highway-cycleway",
     "fields": [
         "oneway",

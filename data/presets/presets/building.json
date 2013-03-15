@@ -1,5 +1,4 @@
 {
-    "name": "building",
     "icon": "warehouse",
     "fields": [
         "building_yes",

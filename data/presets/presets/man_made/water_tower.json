@@ -1,5 +1,4 @@
 {
-    "name": "water tower",
     "icon": "water",
     "geometry": [
         "point",

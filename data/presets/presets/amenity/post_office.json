@@ -1,5 +1,4 @@
 {
-    "name": "post office",
     "icon": "post",
     "fields": [
         "operator",

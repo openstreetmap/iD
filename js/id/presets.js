@@ -3,12 +3,11 @@ iD.presets = function(context) {
     // an iD.presets.Collection with methods for
     // loading new data and returning defaults
 
-    var other = iD.presets.Preset({
-            name: 'other',
+    var other = iD.presets.Preset('other', {
             tags: {},
             geometry: ['point', 'vertex', 'line', 'area']
         }),
-        all = iD.presets.Collection([iD.presets.Preset(other)]),
+        all = iD.presets.Collection([other]),
         defaults = { area: all, line: all, point: all, vertex: all },
         fields = {},
         universal = [],
@@ -18,14 +17,14 @@ iD.presets = function(context) {
 
         if (d.fields) {
             _.forEach(d.fields, function(d, id) {
-                fields[id] = iD.presets.Field(d, id);
+                fields[id] = iD.presets.Field(id, d);
                 if (d.universal) universal.push(fields[id]);
             });
         }
 
         if (d.presets) {
-            d.presets.forEach(function(d) {
-                all.collection.push(iD.presets.Preset(d, fields));
+            _.forEach(d.presets, function(d, id) {
+                all.collection.push(iD.presets.Preset(id, d, fields));
             });
         }
 

@@ -1,5 +1,4 @@
 {
-    "name": "residential road",
     "icon": "highway-residential",
     "fields": [
         "oneway",

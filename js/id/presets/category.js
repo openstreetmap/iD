@@ -1,8 +1,8 @@
 iD.presets.Category = function(category, all) {
     category = _.clone(category);
 
-    category.members = iD.presets.Collection(category.members.map(function(name) {
-        return all.item(name);
+    category.members = iD.presets.Collection(category.members.map(function(id) {
+        return all.item(id);
     }));
 
     category.matchGeometry = function(entity, resolver) {
@@ -10,6 +10,10 @@ iD.presets.Category = function(category, all) {
     };
 
     category.matchTags = function() { return false; };
+
+    category.name = function() {
+        return category.id;
+    };
 
     return category;
 };

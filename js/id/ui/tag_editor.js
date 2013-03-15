@@ -68,7 +68,7 @@ iD.ui.TagEditor = function(context) {
 
         typebutton.append('span')
             .attr('class','label')
-            .text(preset.name);
+            .text(preset.name());
 
         namewrap.append('h4')
             .text(t('inspector.name'));
@@ -99,7 +99,7 @@ iD.ui.TagEditor = function(context) {
         }
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2').call(tagList, preset.name === 'other');
+            .attr('class','inspector-inner col12 fillL2').call(tagList, preset.id === 'other');
 
         selection.append('div')
             .attr('class', 'inspector-actions pad1 fillD col12')

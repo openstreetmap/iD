@@ -1,5 +1,4 @@
 {
-    "name": "fire station",
     "icon": "fire-station",
     "fields": [
         "operator",

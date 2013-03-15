@@ -1,5 +1,4 @@
 {
-    "name": "subway entrance",
     "icon": "rail-underground",
     "geometry": [
         "point"

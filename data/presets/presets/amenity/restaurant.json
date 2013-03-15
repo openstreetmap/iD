@@ -1,5 +1,4 @@
 {
-    "name": "restaurant",
     "icon": "restaurant",
     "fields": [
         "cuisine",

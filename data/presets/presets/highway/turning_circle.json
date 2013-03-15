@@ -1,5 +1,4 @@
 {
-    "name": "turning circle",
     "icon": "circle",
     "geometry": [
         "vertex"

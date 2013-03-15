@@ -1,5 +1,4 @@
 {
-    "name": "rail",
     "icon": "railway-rail",
     "geometry": [
         "line"

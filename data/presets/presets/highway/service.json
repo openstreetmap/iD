@@ -1,5 +1,4 @@
 {
-    "name": "service road",
     "icon": "highway-service",
     "fields": [
         "service",

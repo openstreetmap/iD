@@ -1,5 +1,4 @@
 {
-    "name": "butcher",
     "icon": "slaughterhouse",
     "fields": [
         "building_area",
@@ -10,8 +9,7 @@
         "vertex",
         "area"
     ],
-    "terms": [
-    ],
+    "terms": [],
     "tags": {
         "shop": "butcher"
     }
