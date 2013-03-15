@@ -80,7 +80,7 @@ iD.svg.Surface = function() {
             .attr('xlink:href', function(d) { return 'img/pattern/' + d[1] + '.png'; });
 
         defs.selectAll()
-            .data([12, 20])
+            .data([12, 18, 20])
             .enter().append('clipPath')
             .attr('id', function(d) { return 'clip-square-' + d; })
             .append('rect')
@@ -113,7 +113,7 @@ iD.svg.Surface = function() {
             });
 
         defs.selectAll()
-            .data(sprites("feature-icons.css", /^\.(feature-[a-z0-9-]+-12)$/))
+            .data(sprites("feature-icons.css", /^\.(feature-[a-z0-9-]+-(12|18))$/))
             .enter().append('use')
             .attr('id', function(d) { return d.id; })
             .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })

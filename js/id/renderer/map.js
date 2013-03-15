@@ -19,7 +19,7 @@ iD.Map = function(context) {
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
-        labels = iD.svg.Labels(roundedProjection),
+        labels = iD.svg.Labels(roundedProjection, context),
         tail = iD.ui.Tail(),
         surface, tilegroup;
 
