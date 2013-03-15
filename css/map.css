@@ -29,9 +29,18 @@ use {
 
 g.point .shadow,
 g.vertex .shadow,
+g.midpoint .shadow {
+    pointer-events: all;
+}
+
+path.shadow {
+    pointer-events: stroke;
+}
+
+g.point .shadow,
+g.vertex .shadow,
 g.midpoint .shadow,
 path.shadow {
-    pointer-events: all;
     -webkit-transition: 200ms;
        -moz-transition: 200ms;
             transition: 200ms;
