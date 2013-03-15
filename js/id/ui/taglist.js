@@ -5,21 +5,22 @@ iD.ui.Taglist = function(context) {
         collapsebutton,
         list;
 
-    function taglist(selection, expanded) {
+    function taglist(selection, other) {
 
         collapsebutton = selection.append('a')
             .attr('href','#')
             .attr('class','hide-toggle')
             .text(t('inspector.additional'))
             .on('click', function() {
-                collapsebutton.classed('expanded', wrap.classed('hide'));
-                wrap.call(iD.ui.Toggle(wrap.classed('hide')));
+                iD.ui.Taglist.expanded = wrap.classed('hide');
+                collapsebutton.classed('expanded', iD.ui.Taglist.expanded);
+                wrap.call(iD.ui.Toggle(iD.ui.Taglist.expanded));
                 selection.node().parentNode.scrollTop += 200;
             })
-            .classed('expanded', expanded);
+            .classed('expanded', iD.ui.Taglist.expanded || other);
 
         var wrap = selection.append('div')
-            .classed('hide', !expanded);
+            .classed('hide', !iD.ui.Taglist.expanded && !other);
 
         list = wrap.append('ul')
             .attr('class', 'tag-list');
