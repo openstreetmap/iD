@@ -1,16 +1,14 @@
-iD.svg.Midpoints = function(projection) {
+iD.svg.Midpoints = function(projection, context) {
     return function drawMidpoints(surface, graph, entities, filter, extent) {
         var midpoints = {};
 
-        if (!surface.select('.layer-hit g.vertex').node()) {
-            return surface.selectAll('.layer-hit g.midpoint').remove();
-        }
-
         for (var i = 0; i < entities.length; i++) {
-            if (entities[i].type !== 'way') continue;
+            var entity = entities[i];
 
-            var entity = entities[i],
-                nodes = graph.childNodes(entity);
+            if (entity.type !== 'way') continue;
+            if (context.selection().indexOf(entity.id) < 0) continue;
+
+            var nodes = graph.childNodes(entity);
 
             // skip the last node because it is always repeated
             for (var j = 0; j < nodes.length - 1; j++) {

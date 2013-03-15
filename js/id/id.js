@@ -18,7 +18,7 @@ window.iD = function () {
     };
 
     var history = iD.History(context),
-        dispatch = d3.dispatch('enter', 'exit'),
+        dispatch = d3.dispatch('enter', 'exit', 'select'),
         mode,
         container,
         ui = iD.ui(context),
@@ -59,6 +59,8 @@ window.iD = function () {
 
     /* Modes */
     context.enter = function(newMode) {
+        var s0 = context.selection();
+
         if (mode) {
             mode.exit();
             dispatch.exit(mode);
@@ -67,6 +69,9 @@ window.iD = function () {
         mode = newMode;
         mode.enter();
         dispatch.enter(mode);
+
+        var s1 = context.selection();
+        dispatch.select(s1, s0);
     };
 
     context.mode = function() {
@@ -74,7 +79,7 @@ window.iD = function () {
     };
 
     context.selection = function() {
-        if (mode.id === 'select') {
+        if (mode && mode.id === 'select') {
             return mode.selection();
         } else {
             return [];
