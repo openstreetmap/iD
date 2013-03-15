@@ -48,13 +48,9 @@ iD.svg.Points = function(projection, context) {
         groups.select('.shadow');
         groups.select('.stroke');
         groups.select('.icon')
-            .attr('xlink:href', function imageHref(entity) {
+            .attr('xlink:href', function(entity) {
                 var preset = context.presets().match(entity, graph);
-                if (preset.icon === 'marker-stroked') {
-                    return '';
-                } else {
-                    return '#maki-' + preset.icon + '-12';
-                }
+                return preset.icon ? '#maki-' + preset.icon + '-12' : '';
             });
 
         groups.exit()
