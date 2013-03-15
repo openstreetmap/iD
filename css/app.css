@@ -668,6 +668,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 /* Preset grid  */
 
 .preset-grid  {
+    width:100%;
     margin-top: 60px;
     padding: 20px 10px 20px 20px;
 }
@@ -781,6 +782,17 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     padding: 0px 10px;
     height:30px;
     margin: 5px;
+}
+
+.show-more {
+    text-align: center;
+    padding: 5px;
+    margin-top:4px;
+    border-top: 1px solid #ccc;
+}
+
+.show-more a {
+    color: #222;
 }
 
 /* Preset icon colors */
@@ -2077,4 +2089,23 @@ a.success-action {
 }
 ::-webkit-scrollbar-corner {
     background: transparent
+}
+
+/* clearfix */
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+.clearfix {
+	display: inline-block;
+}
+html[xmlns] .clearfix {
+	display: block;
+}
+* html .clearfix {
+	height: 1%;
 }

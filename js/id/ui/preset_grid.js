@@ -1,6 +1,8 @@
 iD.ui.PresetGrid = function(context) {
     var event = d3.dispatch('choose', 'close'),
         entity,
+        default_limit = 9,
+        currently_drawn = 9,
         presets = context.presets(),
         taginfo = iD.taginfo();
 
@@ -16,12 +18,26 @@ iD.ui.PresetGrid = function(context) {
         var message = messagewrap.append('h3')
             .text(t('inspector.choose'));
 
+        var gridwrap = selection.append('div')
+            .attr('class', 'fillL inspector-body inspector-body-' + entity.geometry(context.graph()));
+
+        var grid = gridwrap.append('div')
+            .attr('class', 'preset-grid fillL clearfix')
+            .data([context.presets().defaults(entity, 36).collection]);
+
+        var show_more = gridwrap.append('div')
+            .attr('class', 'fillL show-more');
+
+        show_more.append('a')
+            .text(t('inspector.show_more'))
+            .on('click', function() {
+                grid.call(drawGrid, (currently_drawn += default_limit));
+            });
+
+        grid.call(drawGrid, default_limit);
+
         var searchwrap = selection.append('div')
             .attr('class', 'preset-grid-search-wrap inspector-inner');
-
-        var grid = selection.append('div')
-            .attr('class', 'preset-grid inspector-body fillL inspector-body-' + entity.geometry(context.graph()))
-            .call(drawGrid, context.presets().defaults(entity, 12));
 
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
@@ -48,6 +64,7 @@ iD.ui.PresetGrid = function(context) {
             if (d3.event.keyCode === 13 && value.length) {
                 choose(grid.selectAll('.grid-entry:first-child').datum());
             } else {
+                currently_drawn = default_limit;
                 grid.classed('filtered', value.length);
                 if (value.length) {
                     var results = presets.search(value);
@@ -55,9 +72,11 @@ iD.ui.PresetGrid = function(context) {
                         n: results.collection.length,
                         search: value
                     }));
-                    grid.call(drawGrid, results);
+                    grid.data([results.collection])
+                        .call(drawGrid, default_limit);
                 } else {
-                    grid.call(drawGrid, context.presets().defaults(entity, 12));
+                    grid.data([context.presets().defaults(entity, 36).collection])
+                        .call(drawGrid, default_limit);
                 }
             }
         }
@@ -81,11 +100,12 @@ iD.ui.PresetGrid = function(context) {
         }
 
         function choose(d) {
+            currently_drawn = default_limit;
             // Category
             if (d.members) {
                 search.property('value', '');
                 presets = d.members;
-                drawGrid(grid, presets);
+                grid.data([presets]).call(drawGrid, preset_limit);
 
             // Preset
             } else {
@@ -110,7 +130,7 @@ iD.ui.PresetGrid = function(context) {
 
         var presetinspect;
 
-        function drawGrid(selection, presets) {
+        function drawGrid(selection, limit) {
 
             function helpClick(d) {
                 // Display description box inline
@@ -162,9 +182,12 @@ iD.ui.PresetGrid = function(context) {
                 });
             }
 
+            show_more
+                .style('display', (selection.data()[0].length > limit) ? 'block' : 'none');
+
             var entries = selection
                 .selectAll('div.grid-entry-wrap')
-                .data(presets.collection.slice(0, 12), name);
+                .data(function(d) { return d.slice(0, limit); }, name);
 
             entries.exit()
                 .style('opacity', 1)

@@ -133,6 +133,7 @@ en:
   inspector: 
     no_documentation_combination: There is no documentation available for this tag combination
     no_documentation_key: There is no documentation available for this key
+    show_more: Show More
     new_tag: New tag
     edit_tags: Edit tags
     okay: Okay

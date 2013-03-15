@@ -37,6 +37,16 @@ The words in brackets, for example `{name}`, should not be translated into a new
 
 Translations are licensed under [WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license as iD.
 
+## Adding New Strings for Translation
+
+iD translates strings with a `t` function - `t('foo.bar')` translate the key
+`foo.bar` into the current language. If you introduce new translatable strings
+to iD, only display them in the interface through the `t()` function.
+
+Then, add the new string to `data/core.yaml` or `data/presets.yaml` (depending
+on whether it pertains to core code or presets). The translation system,
+Transiflex, will automatically detect the change.
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with
