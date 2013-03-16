@@ -309,7 +309,7 @@ form.hide {
     position:absolute;
     width:200%;
     height:100%;
-    right: 0%;
+    right: -100%;
 }
 
 .pane {
