@@ -201,7 +201,7 @@ table.tags, table.tags td, table.tags th {
 .col1    { float:left; width:08.3333%; }
 .col2    { float:left; width:16.6666%; }
 .col3    { float:left; width:25.0000%; }
-.col4    { float:left; width:33.3333%; }
+.col4    { float:left; width:33.3333%; max-width: 400px;}
 .col5    { float:left; width:41.6666%; }
 .col6    { float:left; width:50.0000%; max-width: 600px; }
 .col7    { float:left; width:58.3333%; }
@@ -305,11 +305,28 @@ form.hide {
     background-size:5px 5px;
 }
 
+.panewrap { 
+    position:absolute;
+    width:200%;
+    height:100%;
+    right: -100%;
+}
+
 .pane {
     position:absolute;
-    width:100%;
+    width:50%;
     height:100%;
 }
+
+.pane:first-child {
+    border-right: 1px solid #ccc;
+    left: 0;
+}
+
+.pane:last-child {
+    right: 0;
+}
+
 
 /* Buttons */
 
@@ -590,16 +607,16 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 ------------------------------------------------------- */
 
 .inspector-wrap {
-    max-width: 500px;
     border-radius: 0 0 0 4px;
     background:rgba(0,0,0,.8);
     position: absolute;
     height: 100%;
     right: 0;
+    overflow: hidden;
 }
 
 .inspector-body {
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     min-height: 330px;
     position: absolute;
@@ -621,7 +638,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner {
-    padding: 20px;
+    padding: 20px 10px 20px 20px;
     position: relative;
 }
 
@@ -670,7 +687,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .preset-grid  {
     width:100%;
     margin-top: 60px;
-    padding: 20px 10px 20px 20px;
+    padding: 20px 0px 20px 20px;
 }
 .grid-button-wrap {
     padding: 0 10px 10px 0;
@@ -715,8 +732,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .preset-inspect {
   position: relative;
   background: white;
+  padding-top: 10px;
   padding-bottom: 20px;
-  -webkit-animation:fadeInInspect 500ms ease 0ms both;
 }
 
 .grid-entry .preset-icon-fill.area {
@@ -820,10 +837,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* preset form basics */
 
-.inspector-preset {
-    border-bottom: 1px solid #ccc;
-}
-
 .preset-section.inspector-inner {
     padding-bottom: 0;
 }
@@ -837,13 +850,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-top: 0;
 }
 
-.preset-section.inspector-inner:last-of-type {
-    padding-bottom: 20px;
-}
-
 .inspector-body .name {
     height: 110px;
-    border-bottom: 1px solid #ccc;
 }
 
 .name input.major {
@@ -858,9 +866,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #f6f6f6;
     position: absolute;
     left: 20px;
+    right: 10px;
     border-radius: 4px 4px 0 0;
-    right: 20px;
     pointer-events: none;
+    z-index: 2;
 }
 
 .preset-section h4 + input,
@@ -878,14 +887,13 @@ h4 + .preset-input input:first-child {
 .preset-section h4[for="input-building:levels"],
 .preset-section h4[for="input-ele"],
 .preset-section.checkselect h4 {
-    right: 50%;
+    right: -moz-calc(50% - 5px);
+    right: -webkit-calc(50% - 5px);
+    right: -o-calc(50% - 5px);
+    right: -webkit-calc(50% - 5px);
 }
 
 /* adding additional preset fields */
-
-.more-buttons {
-    border-top: 1px solid #ccc;
-}
 
 button.preset-add-field {
     width: 16.6666%;
@@ -898,7 +906,7 @@ button.preset-add-field {
 
 .preset-add-field .tooltip-inner {
     background: #000;
-    color: #DDD;
+    color: #ccc;
 }
 
 .preset-fav button.fav {
@@ -910,6 +918,7 @@ button.preset-add-field {
 /* preset form numbers */
 
 input[type=number] {
+    position: relative;
     width: 50%;
     padding-right: 65px;
 }
@@ -2020,24 +2029,12 @@ a.success-action {
 @media only screen and (max-height: 840px) {
 }
 
-/* Keyframes
- * --------------------------------------------------- */
-@-webkit-keyframes fadeIn {
-  0%    { opacity:0;}
-  100%  { opacity:1;}
-  }
-
-@-webkit-keyframes fadeInInspect {
-  0%    { opacity:0; max-height: 0; padding-top: 0; padding-bottom: 0;}
-  100%  { opacity:1; max-height: 160px; top-bottom: 20px; padding-bottom: 20px;}
-  }
-
 /* Scrollbars
  ----------------------------------------------------- */
 ::-webkit-scrollbar {
-    height: 16px;
+    height: 20px;
     overflow: visible;
-    width: 16px;
+    width: 10px;
 }
 ::-webkit-scrollbar-button {
     height: 0;
@@ -2060,32 +2057,25 @@ a.success-action {
 }
 ::-webkit-scrollbar-track:active {
     background-color: rgba(0,0,0,.05);
-    box-shadow: inset 1px 0 0 rgba(0,0,0,.14),inset -1px 0 0 rgba(0,0,0,.07);
 }
 ::-webkit-scrollbar-track:horizontal:active {
-    box-shadow: inset 0 1px 0 rgba(0,0,0,.14),inset 0 -1px 0 rgba(0,0,0,.07)
 }
 ::-webkit-scrollbar-thumb {
     background-color: rgba(0,0,0,.2);
     background-clip: padding-box;
     border: solid transparent;
-    border-width: 1px 1px 1px 6px;
-    min-height: 28px;
-    padding: 100px 0 0;
-    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+    border-width: 3px 3px 3px 3px;
+    min-height: 25px;
+    border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:horizontal {
-    border-width: 6px 1px 1px;
-    padding: 0 0 0 100px;
-    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.07);
+    border-width: 3px 3px 3px 3px;;
 }
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0,0,0,.4);
-    box-shadow: inset 1px 1px 1px rgba(0,0,0,.25);
 }
 ::-webkit-scrollbar-thumb:active {
     background-color: rgba(0,0,0,0.5);
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.35);
 }
 ::-webkit-scrollbar-corner {
     background: transparent
