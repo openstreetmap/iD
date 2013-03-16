@@ -209,6 +209,34 @@
             "amenity": "cinema"
         }
     },
+    "amenity/courthouse": {
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "courthouse"
+        }
+    },
+    "amenity/embassy": {
+        "geometry": [
+            "area",
+            "point"
+        ],
+        "tags": {
+            "amenity": "embassy"
+        },
+        "fields": [
+            "country"
+        ],
+        "icon": "embassy"
+    },
     "amenity/fast_food": {
         "icon": "fast-food",
         "fields": [
@@ -668,6 +696,27 @@
         ],
         "tags": {
             "amenity": "telephone"
+        }
+    },
+    "amenity/theatre": {
+        "icon": "theatre",
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [
+            "performance",
+            "play",
+            "musical"
+        ],
+        "tags": {
+            "amenity": "theatre"
         }
     },
     "amenity/toilets": {
@@ -1416,6 +1465,18 @@
         "tags": {
             "leisure": "playground"
         }
+    },
+    "leisure/stadium": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "stadium"
+        },
+        "fields": [
+            "sport"
+        ]
     },
     "man_made": {
         "fields": [

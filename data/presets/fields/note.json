@@ -1,5 +1,6 @@
 {
     "key": "note",
     "type": "textarea",
-    "universal": true
+    "universal": true,
+    "icon": "note"
 }

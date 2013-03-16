@@ -57,6 +57,10 @@
         "key": "construction",
         "type": "combo"
     },
+    "country": {
+        "key": "country",
+        "type": "combo"
+    },
     "crossing": {
         "key": "crossing",
         "type": "combo"
@@ -150,8 +154,8 @@
     "note": {
         "key": "note",
         "type": "textarea",
-        "icon": "note",
-        "universal": true
+        "universal": true,
+        "icon": "note"
     },
     "office": {
         "key": "office",
@@ -259,6 +263,17 @@
     "wetland": {
         "key": "wetland",
         "type": "combo"
+    },
+    "wheelchair": {
+        "key": "wheelchair",
+        "type": "radio",
+        "options": [
+            "yes",
+            "limited",
+            "no"
+        ],
+        "icon": "wheelchair",
+        "universal": "true"
     },
     "wikipedia": {
         "key": "wikipedia",
