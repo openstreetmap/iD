@@ -12,7 +12,7 @@ iD.ui.preset.radio = function(field) {
             .data(field.options)
             .enter()
             .append('button')
-                .text(function(d) { return field.t('options.' + d, {default: d}); })
+                .text(function(d) { return field.t('options.' + d, { 'default': d }); })
                 .on('click', function() {
                     buttons.classed('active', false);
                     d3.select(this).classed('active', true);
@@ -30,15 +30,25 @@ iD.ui.preset.radio = function(field) {
 
     function change() {
         var t = {};
+        if (field.key) t[field.key] = null;
         buttons.each(function(d) {
-            t[d] = d3.select(this).classed('active') ? 'yes' : '';
+            var active = d3.select(this).classed('active');
+            if (field.key) {
+                if (active) t[field.key] = d;
+            } else {
+                t[d] = active ? 'yes' : '';
+            }
         });
         event.change(t);
     }
 
     radio.tags = function(tags) {
         buttons.classed('active', function(d) {
-            return tags[d] && tags[d] !== 'no';
+            if (field.key) {
+                return tags[field.key] === d;
+            } else {
+                return tags[d] && tags[d] !== 'no';
+            }
         });
     };
 
