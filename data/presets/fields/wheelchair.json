@@ -1,0 +1,11 @@
+{
+    "key": "wheelchair",
+    "type": "radio",
+    "options": [
+        "yes",
+        "limited",
+        "no"
+    ],
+    "icon": "wheelchair",
+    "universal": "true"
+}
