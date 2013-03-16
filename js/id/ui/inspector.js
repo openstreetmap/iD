@@ -52,8 +52,10 @@ iD.ui.Inspector = function(context) {
             });
 
         if (initial) {
+            panewrap.style('right','-100%')
             presetLayer.call(presetGrid);
         } else {
+            panewrap.style('right','-0%');
             tagLayer.call(tagEditor);
         }
     }

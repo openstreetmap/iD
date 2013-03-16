@@ -319,7 +319,6 @@ form.hide {
 }
 
 .pane:first-child {
-    border-right: 1px solid #ccc;
     left: 0;
 }
 
@@ -616,7 +615,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     min-height: 330px;
     position: absolute;
@@ -638,7 +637,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-inner {
-    padding: 20px 10px 20px 20px;
+    padding: 20px;
     position: relative;
 }
 
@@ -852,6 +851,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-body .name {
     height: 110px;
+    border-bottom: 1px solid #ccc;
 }
 
 .name input.major {
@@ -866,7 +866,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #f6f6f6;
     position: absolute;
     left: 20px;
-    right: 10px;
+    right: 20px;
     border-radius: 4px 4px 0 0;
     pointer-events: none;
     z-index: 2;
@@ -887,11 +887,7 @@ h4 + .preset-input input:first-child {
 .preset-section h4[for="input-building:levels"],
 .preset-section h4[for="input-ele"],
 .preset-section.checkselect h4 {
-    right: -moz-calc(50% - 5px);
-    right: -webkit-calc(50% - 5px);
-    right: -o-calc(50% - 5px);
-    right: -webkit-calc(50% - 5px);
-}
+    right: 50%;}
 
 /* adding additional preset fields */
 
@@ -2035,6 +2031,7 @@ a.success-action {
     height: 20px;
     overflow: visible;
     width: 10px;
+    background: #EBEBEB;
 }
 ::-webkit-scrollbar-button {
     height: 0;
