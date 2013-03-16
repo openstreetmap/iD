@@ -6,14 +6,16 @@ iD.ui.Inspector = function(context) {
     function inspector(selection) {
         var entity = selection.datum();
 
-        var presetLayer = selection
+        var panewrap = selection
             .append('div')
-            .style('right', '0px')
+            .classed('panewrap', true);
+
+        var presetLayer = panewrap
+            .append('div')
             .classed('pane', true);
 
-        var tagLayer = selection
+        var tagLayer = panewrap
             .append('div')
-            .style('right', '0px')
             .classed('pane', true);
 
         var presetGrid = iD.ui.PresetGrid(context)
@@ -22,15 +24,13 @@ iD.ui.Inspector = function(context) {
                 event.close();
             })
             .on('choose', function(preset) {
-                presetLayer
-                    .style('display', 'block');
 
-                tagLayer
-                    .style('right', '-500px')
-                    .style('display', 'block')
-                    .call(tagEditor, preset)
+                panewrap
                     .transition()
-                    .style('right', '0px');
+                    .style('right', '0%');
+
+                tagLayer.call(tagEditor, preset);
+
             });
 
         tagEditor = iD.ui.TagEditor(context)
@@ -42,25 +42,20 @@ iD.ui.Inspector = function(context) {
                 event.close(entity);
             })
             .on('choose', function() {
-                tagLayer
+
+                panewrap
                     .transition()
-                    .style('right', '-500px')
-                    .each('end', function() {
-                        d3.select(this).style('display', 'none');
-                    });
-                presetLayer
-                    .style('display', 'block')
-                    .call(presetGrid, true);
+                    .style('right', '-100%');
+
+                presetLayer.call(presetGrid, true);
+
             });
 
         if (initial) {
-            tagLayer.style('display', 'none');
             presetLayer.call(presetGrid);
         } else {
-            presetLayer.style('display', 'none');
             tagLayer.call(tagEditor);
         }
-
     }
 
     inspector.tags = function() {
