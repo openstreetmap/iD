@@ -580,6 +580,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.elevation  { background-position: -80px -200px;}
 .icon.wikipedia  { background-position: -100px -200px;}
 .icon.note       { background-position: -120px -200px;}
+.icon.wheelchair { background-position: -140px -200px;}
 
 
 /* Toggle icon is special */
