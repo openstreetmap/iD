@@ -13,18 +13,15 @@ iD.ui.TagEditor = function(context, entity) {
         selection_ = selection;
         var geometry = entity.geometry(context.graph());
 
+        if (!preset) preset = presets.match(entity, context.graph());
+
         // preset was explicitly chosen
         if (newpreset) {
-            if (preset) {
-                tags = preset.removeTags(tags, geometry);
-            }
+
+            tags = preset.removeTags(tags, geometry);
 
             newpreset.applyTags(tags, geometry);
             preset = newpreset;
-
-        // find a preset that best fits
-        } else if (!preset) {
-            preset = presets.match(entity, context.graph());
         }
 
         selection.html('');

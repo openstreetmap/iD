@@ -43,7 +43,7 @@ _.extend(iD.Way.prototype, {
     },
 
     isArea: function() {
-        if (this.tags.area === 'yes' || this.tags.__area__ === 'yes')
+        if (this.tags.area === 'yes')
             return true;
         if (!this.isClosed() || this.tags.area === 'no')
             return false;
