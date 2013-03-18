@@ -41,10 +41,14 @@ iD.presets.Collection = function(collection) {
 
             value = value.toLowerCase();
 
-            var leading_name = _.filter(collection, function(a) {
+            var searchable = _.filter(collection, function(a) {
+                return a.searchable !== false;
+            });
+
+            var leading_name = _.filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
                 }),
-                leading_terms = _.filter(collection, function(a) {
+                leading_terms = _.filter(searchable, function(a) {
                     return _.any(a.terms || [], leading);
                 });
 
@@ -53,7 +57,7 @@ iD.presets.Collection = function(collection) {
                 return index === 0 || a[index - 1] === ' ';
             }
 
-            var levenstein_name = collection.map(function(a) {
+            var levenstein_name = searchable.map(function(a) {
                     return {
                         preset: a,
                         dist: iD.util.editDistance(value, a.name().toLowerCase())
@@ -65,7 +69,7 @@ iD.presets.Collection = function(collection) {
                 }).map(function(a) {
                     return a.preset;
                 }),
-                leventstein_terms = _.filter(collection, function(a) {
+                leventstein_terms = _.filter(searchable, function(a) {
                     return _.any(a.terms || [], function(b) {
                         return iD.util.editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });

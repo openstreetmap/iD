@@ -54,6 +54,15 @@ describe("iD.presets.Collection", function() {
         it("always includes other", function() {
             expect(c.search("blade of grass").collection.indexOf(p.other) >= 0).to.eql(true);
         });
-    });
 
+        it("excludes presets with searchable: false", function() {
+            var excluded = iD.presets.Preset('excluded', {
+                    tags: {},
+                    geometry: [],
+                    searchable: false
+                }),
+                collection = iD.presets.Collection([excluded, p.other]);
+            expect(collection.search("excluded").collection).not.to.include(excluded);
+        });
+    });
 });
