@@ -2,14 +2,14 @@ iD.ui.PresetGrid = function(context, entity) {
     var event = d3.dispatch('choose', 'close'),
         default_limit = 9,
         currently_drawn = 9,
-        presets = context.presets(),
+        presets,
         taginfo = iD.taginfo();
 
     function presetgrid(selection, preset) {
 
         selection.html('');
 
-        presets = presets.matchGeometry(entity, context.graph());
+        presets = context.presets().matchGeometry(entity, context.graph());
 
         var messagewrap = selection.append('div')
             .attr('class', 'message inspector-inner fillL');
@@ -97,12 +97,12 @@ iD.ui.PresetGrid = function(context, entity) {
         }
 
         function choose(d) {
-            currently_drawn = default_limit;
             // Category
             if (d.members) {
                 search.property('value', '');
-                presets = d.members;
-                grid.data([presets]).call(drawGrid, preset_limit);
+                presets = d.members.collection;
+                currently_drawn = presets.length;
+                grid.data([presets]).call(drawGrid, currently_drawn);
 
             // Preset
             } else {
