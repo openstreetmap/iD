@@ -24,10 +24,8 @@ iD.ui.PresetGrid = function(context, entity) {
             .attr('class', 'preset-grid fillL cf')
             .data([context.presets().defaults(entity, 36).collection]);
 
-        var show_more = gridwrap.append('div')
-            .attr('class', 'fillL show-more');
-
-        show_more.append('a')
+        var show_more = gridwrap.append('button')
+            .attr('class', 'fillL show-more')
             .text(t('inspector.show_more'))
             .on('click', function() {
                 grid.call(drawGrid, (currently_drawn += default_limit));

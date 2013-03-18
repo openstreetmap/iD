@@ -305,7 +305,7 @@ form.hide {
     background-size:5px 5px;
 }
 
-.panewrap { 
+.panewrap {
     position:absolute;
     width:200%;
     height:100%;
@@ -687,7 +687,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .preset-grid  {
     width:100%;
     margin-top: 60px;
-    padding: 20px 0px 20px 20px;
+    padding: 20px 10px 10px 20px;
 }
 .grid-button-wrap {
     padding: 0 10px 10px 0;
@@ -736,13 +736,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
   padding-bottom: 20px;
 }
 
-.grid-entry .preset-icon-fill.area {
-    position: absolute;
-    opacity: 0.4;
-    left: 0; right: 0; top: 0; bottom: 0;
-    pointer-events: none;
-}
-
 .grid-entry > .icon {
     position: absolute;
     top: 30px;left: 0; right: 0;
@@ -768,7 +761,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     overflow: hidden;
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
-
 
 .preset-grid-search-wrap {
     height: 60px;
@@ -803,9 +795,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .show-more {
     text-align: center;
-    padding: 5px;
-    margin-top:4px;
+    width: 100%;
     border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
 }
 
 .show-more a {
@@ -814,13 +807,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* Preset icon colors */
 
+.preset-icon-fill.area {
+    height: 45px;
+    width: 45px;
+    margin: auto;
+    position: absolute;
+    left: 0; right: 0; top: 19px;
+}
+
 .preset-icon-fill.tag-shop,
 .preset-icon-fill.tag-building {
-    background-color: #e06e5f;
+    background:transparent url(../img/sprite.png) no-repeat 0 -80px;
 }
 
 .preset-icon-fill.tag-natural-water {
-    background-color: #77d3de;
+    background:transparent url(../img/sprite.png) no-repeat -60px -80px;
 }
 
 .preset-icon-fill.tag-landuse,
@@ -828,11 +829,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .preset-icon-fill.tag-natural-tree,
 .preset-icon-fill.tag-natural-grassland,
 .preset-icon-fill.tag-leisure-park {
-    background-color: #8cd05f;
+    background:transparent url(../img/sprite.png) no-repeat -120px -80px;
 }
 
 .preset-icon-fill.tag-amenity-parking {
-    background-color: #aaa;
+    background:transparent url(../img/sprite.png) no-repeat -180px -80px;
 }
 
 /* preset form basics */

@@ -152,12 +152,12 @@ input::-moz-focus-inner {
 ** Markup free clearing
 ** Details: http://www.positioniseverything.net/easyclearing.html
 */
+.cf:before,
 .cf:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-  }
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
 
-.cf { display: inline-block; }
+.cf:after {
+    clear: both;
+}
