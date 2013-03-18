@@ -1086,10 +1086,6 @@ div.combobox {
     border-top: 0;
 }
 
-.combobox-input {
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
-}
-
 .combobox-carat {
     margin-left: -20px;
     display:inline-block;
