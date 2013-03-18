@@ -6,37 +6,54 @@ iD.svg.Vertices = function(projection, context) {
         fill:   [1,    1.5,   1.5,  1.5]
     };
 
-    return function drawVertices(surface, graph, zoom) {
-        var extent = context.map().extent(),
-            visible = {};
+    var hover;
 
-        function addVisible(entity) {
+    function visibleVertices() {
+        var visible = {};
+
+        function addChildVertices(entity, klass) {
             var i;
             if (entity.type === 'way') {
                 for (i = 0; i < entity.nodes.length; i++) {
-                    visible[entity.nodes[i]] = true;
+                    visible[entity.nodes[i]] = klass;
                 }
             } else if (entity.type === 'relation') {
                 for (i = 0; i < entity.members.length; i++) {
                     var member = context.entity(entity.members[i].id);
                     if (member) {
-                        addVisible(member);
+                        addChildVertices(member, klass);
                     }
                 }
             } else {
-                visible[entity.id] = true;
+                visible[entity.id] = klass;
             }
         }
 
-        context.selection().forEach(function(id) {
-            var entity = graph.entity(id);
-            if (entity.type === 'vertex') {
-                visible[id] = true;
-                context.parentWays(entity).forEach(addVisible);
-            } else {
-                addVisible(entity);
+        function addSiblingAndChildVertices(id, klass) {
+            var entity = context.entity(id);
+            if (entity && entity.type === 'vertex') {
+                visible[hover.id] = klass;
+                context.parentWays(entity).forEach(function(entity) {
+                    addChildVertices(entity, klass);
+                });
+            } else if (entity) {
+                addChildVertices(entity, klass);
             }
+        }
+
+        if (hover) {
+            addSiblingAndChildVertices(hover.id, 'vertex-hover');
+        }
+
+        context.selection().forEach(function(id) {
+            addSiblingAndChildVertices(id, 'vertex-selected');
         });
+
+        return visible;
+    }
+
+    function drawVertices(surface, graph, zoom) {
+        var visible = visibleVertices();
 
         function rendered(entity) {
             if (entity.geometry(graph) !== 'vertex')
@@ -47,7 +64,7 @@ iD.svg.Vertices = function(projection, context) {
                 return true;
         }
 
-        var entities = context.intersects(extent),
+        var entities = context.intersects(context.map().extent()),
             vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -81,6 +98,8 @@ iD.svg.Vertices = function(projection, context) {
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
             .call(iD.svg.MemberClasses(graph))
+            .classed('vertex-hover', function(entity) { return visible[entity.id] === 'vertex-hover'; })
+            .classed('vertex-selected', function(entity) { return visible[entity.id] === 'vertex-selected'; })
             .classed('tagged', function(entity) { return entity.hasInterestingTags(); })
             .classed('shared', function(entity) { return graph.isShared(entity); });
 
@@ -148,5 +167,13 @@ iD.svg.Vertices = function(projection, context) {
 
         groups.exit()
             .remove();
+    }
+
+    drawVertices.hover = function(_) {
+        if (!arguments.length) return hover;
+        hover = _;
+        return drawVertices;
     };
+
+    return drawVertices;
 };
