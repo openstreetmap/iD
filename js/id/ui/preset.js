@@ -73,13 +73,9 @@ iD.ui.preset = function(context) {
 
     }
 
-    function formKey(d) {
-        return d.key || String(d.keys);
-    }
-
     function draw(selection, fields) {
         var sections = selection.selectAll('div.preset-field')
-            .data(fields, formKey)
+            .data(fields, function(field) { return field.id; })
             .enter()
             .append('div')
             .style('opacity', 0)
