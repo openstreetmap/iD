@@ -47,6 +47,10 @@ iD.presets.Collection = function(collection) {
 
             var leading_name = _.filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
+                }).sort(function(a, b) {
+                    var i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
+                    if (i === 0) return a.name().length - b.name().length;
+                    else return i;
                 }),
                 leading_terms = _.filter(searchable, function(a) {
                     return _.any(a.terms || [], leading);
