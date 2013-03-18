@@ -110,14 +110,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         };
     }
 
-    function RemoveTemporaryTag(way) {
-        return function(graph) {
-            var area = graph.entity(wayId);
-            return graph
-                .replace(area.update({tags:_.omit(area.tags, '__area__')}));
-        };
-    }
-
     // Accept the current position of the temporary node and continue drawing.
     drawWay.add = function(loc) {
         var newNode = iD.Node({loc: loc});
@@ -171,8 +163,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         var way = context.entity(wayId);
         if (way) {
-            context.perform(
-                RemoveTemporaryTag(way));
             context.enter(iD.modes.Select(context, [way.id], true));
         } else {
             context.enter(iD.modes.Browse(context));
