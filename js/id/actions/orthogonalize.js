@@ -27,7 +27,8 @@ iD.actions.Orthogonalize = function(wayId, projection) {
         points = best;
 
         for (i = 0; i < points.length - 1; i++) {
-            graph = graph.replace(graph.entity(nodes[i].id).move(projection.invert(points[i])));
+            graph = graph.replace(graph.entity(nodes[i].id)
+                .move(projection.invert(points[i])));
         }
 
         return graph;
@@ -42,7 +43,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
             p = normalizePoint(p, 1.0);
             q = normalizePoint(q, 1.0);
 
-            var dotp = p[0] *q[0] + p[1] *q[1];
+            var dotp = p[0] * q[0] + p[1] * q[1];
             // nasty hack to deal with almost-straight segments (angle is closer to 180 than to 90/270).
             if (dotp < -0.707106781186547) {
                 dotp += 1.0;
@@ -87,7 +88,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
 
         function normalizePoint(point, thickness) {
             var vector = [0, 0];
-            var length = Math.sqrt(point[0] * point[0] + point[1] * point[1]); 
+            var length = Math.sqrt(point[0] * point[0] + point[1] * point[1]);
             if (length !== 0) {
                 vector[0] = point[0] / length;
                 vector[1] = point[1] / length;

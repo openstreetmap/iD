@@ -9,7 +9,8 @@ iD.operations.Orthogonalize = function(selection, context) {
 
     operation.available = function() {
         return selection.length === 1 &&
-            context.entity(entityId).type === 'way';
+            context.entity(entityId).type === 'way' &&
+            _.uniq(context.entity(entityId).nodes).length > 3;
     };
 
     operation.enabled = function() {
