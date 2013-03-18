@@ -186,13 +186,7 @@ iD.ui.PresetGrid = function(context, entity) {
                 .selectAll('div.grid-entry-wrap')
                 .data(function(d) { return d.slice(0, limit); }, name);
 
-            entries.exit()
-                .style('opacity', 1)
-                .transition()
-                .style('opacity', 0)
-                .each('end', function() {
-                    d3.select(this).remove();
-                });
+            entries.exit().remove();
 
             var entered = entries.enter()
                 .append('div')
@@ -200,6 +194,10 @@ iD.ui.PresetGrid = function(context, entity) {
                     .append('button')
                     .attr('class', 'grid-entry')
                     .on('click', choose);
+
+            entered.style('opacity', 0)
+                    .transition()
+                    .style('opacity', 1);
 
             entered.append('div')
                 .attr('class', presetClass);
