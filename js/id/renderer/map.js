@@ -51,6 +51,15 @@ iD.Map = function(context) {
             .attr('id', 'surface')
             .call(iD.svg.Surface());
 
+        surface.on('mouseover.vertices', function() {
+            vertices.hover(d3.event.target.__data__);
+            surface.call(vertices, context.graph(), map.zoom())
+        });
+
+        surface.on('mouseout.vertices', function() {
+            vertices.hover(null);
+            surface.call(vertices, context.graph(), map.zoom())
+        });
 
         map.size(selection.size());
         map.surface = surface;
