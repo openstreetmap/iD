@@ -57,10 +57,6 @@
         "key": "construction",
         "type": "combo"
     },
-    "country": {
-        "key": "country",
-        "type": "combo"
-    },
     "crossing": {
         "key": "crossing",
         "type": "combo"

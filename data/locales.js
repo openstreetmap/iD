@@ -514,6 +514,9 @@ locale.en = {
             "amenity/school": {
                 "name": "School"
             },
+            "amenity/swimming_pool": {
+                "name": "Swimming Pool"
+            },
             "amenity/telephone": {
                 "name": "Telephone"
             },
@@ -643,6 +646,9 @@ locale.en = {
             "leisure": {
                 "name": "Leisure"
             },
+            "leisure/garden": {
+                "name": "Garden"
+            },
             "leisure/golf_course": {
                 "name": "Golf Course"
             },
@@ -669,6 +675,9 @@ locale.en = {
             },
             "leisure/playground": {
                 "name": "Playground"
+            },
+            "leisure/swimming_pool": {
+                "name": "Swimming Pool"
             },
             "man_made": {
                 "name": "Man Made"

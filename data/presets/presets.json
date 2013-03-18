@@ -689,6 +689,18 @@
             "amenity": "school"
         }
     },
+    "amenity/swimming_pool": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "swimming_pool"
+        },
+        "icon": "swimming",
+        "searchable": false
+    },
     "amenity/telephone": {
         "geometry": [
             "point",
@@ -1323,6 +1335,17 @@
             "leisure": "*"
         }
     },
+    "leisure/garden": {
+        "icon": "garden",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "leisure": "garden"
+        }
+    },
     "leisure/golf_course": {
         "icon": "golf",
         "fields": [
@@ -1477,6 +1500,17 @@
         "fields": [
             "sport"
         ]
+    },
+    "leisure/swimming_pool": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "leisure": "swimming_pool"
+        },
+        "icon": "swimming"
     },
     "man_made": {
         "fields": [

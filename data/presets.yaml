@@ -196,6 +196,8 @@ en:
         name: Restaurant
       amenity/school: 
         name: School
+      amenity/swimming_pool:
+        name: Swimming Pool
       amenity/telephone:
         name: Telephone
       amenity/toilets:
@@ -282,6 +284,8 @@ en:
         name: Vineyard
       leisure: 
         name: Leisure
+      leisure/garden:
+        name: Garden
       leisure/golf_course: 
         name: Golf Course
       leisure/park: 
@@ -300,7 +304,9 @@ en:
         name: Tennis Court
       leisure/playground: 
         name: Playground
-      man_made: 
+      leisure/swimming_pool:
+        name: Swimming Pool
+      man_made:
         name: Man Made
       man_made/lighthouse: 
         name: Lighthouse
