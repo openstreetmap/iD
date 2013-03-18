@@ -35,7 +35,7 @@ iD.ui.TagEditor = function(context, entity) {
                 .title(t('inspector.back_tooltip'))
                 .placement('left'))
             .on('click', function() {
-                event.choose();
+                event.choose(preset);
             })
             .append('span').attr('class','icon back');
 

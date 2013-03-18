@@ -56,12 +56,12 @@ iD.ui.Inspector = function(context, entity) {
             .tags(entity.tags)
             .on('changeTags', changeTags)
             .on('close', browse)
-            .on('choose', function() {
+            .on('choose', function(preset) {
                 panewrap
                     .transition()
                     .style('right', '-100%');
 
-                presetLayer.call(presetGrid, true);
+                presetLayer.call(presetGrid, preset);
             });
 
         var initial = entity.isNew() && _.without(Object.keys(entity.tags), 'area').length === 0;
