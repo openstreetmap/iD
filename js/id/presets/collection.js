@@ -53,7 +53,7 @@ iD.presets.Collection = function(collection) {
                     else return i;
                 }),
                 leading_terms = _.filter(searchable, function(a) {
-                    return _.any(a.terms || [], leading);
+                    return _.any(a.terms() || [], leading);
                 });
 
             function leading(a) {
@@ -74,7 +74,7 @@ iD.presets.Collection = function(collection) {
                     return a.preset;
                 }),
                 leventstein_terms = _.filter(searchable, function(a) {
-                    return _.any(a.terms || [], function(b) {
+                    return _.any(a.terms() || [], function(b) {
                         return iD.util.editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });

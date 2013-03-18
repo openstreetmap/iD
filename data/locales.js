@@ -434,460 +434,612 @@ locale.en = {
         },
         "presets": {
             "aeroway": {
-                "name": "Aeroway"
+                "name": "Aeroway",
+                "terms": ""
             },
             "aeroway/aerodrome": {
-                "name": "Airport"
+                "name": "Airport",
+                "terms": "airplane,airport,aerodrome"
             },
             "aeroway/helipad": {
-                "name": "Helipad"
+                "name": "Helipad",
+                "terms": "helicopter,helipad,heliport"
             },
             "amenity": {
-                "name": "Amenity"
+                "name": "Amenity",
+                "terms": ""
             },
             "amenity/bank": {
-                "name": "Bank"
+                "name": "Bank",
+                "terms": "coffer,countinghouse,credit union,depository,exchequer,fund,hoard,investment firm,repository,reserve,reservoir,safe,savings,stock,stockpile,store,storehouse,thrift,treasury,trust company,vault"
             },
             "amenity/bar": {
-                "name": "Bar"
+                "name": "Bar",
+                "terms": ""
             },
             "amenity/bench": {
-                "name": "Bench"
+                "name": "Bench",
+                "terms": ""
             },
             "amenity/bicycle_parking": {
-                "name": "Bicycle Parking"
+                "name": "Bicycle Parking",
+                "terms": ""
             },
             "amenity/bicycle_rental": {
-                "name": "Bicycle Rental"
+                "name": "Bicycle Rental",
+                "terms": ""
             },
             "amenity/cafe": {
-                "name": "Cafe"
+                "name": "Cafe",
+                "terms": "coffee,tea,coffee shop"
             },
             "amenity/cinema": {
-                "name": "Cinema"
+                "name": "Cinema",
+                "terms": "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
             },
             "amenity/courthouse": {
-                "name": "Courthouse"
+                "name": "Courthouse",
+                "terms": ""
             },
             "amenity/embassy": {
-                "name": "Embassy"
+                "name": "Embassy",
+                "terms": ""
             },
             "amenity/fast_food": {
-                "name": "Fast Food"
+                "name": "Fast Food",
+                "terms": ""
             },
             "amenity/fire_station": {
-                "name": "Fire Station"
+                "name": "Fire Station",
+                "terms": ""
             },
             "amenity/fuel": {
-                "name": "Gas Station"
+                "name": "Gas Station",
+                "terms": ""
             },
             "amenity/grave_yard": {
-                "name": "Graveyard"
+                "name": "Graveyard",
+                "terms": ""
             },
             "amenity/hospital": {
-                "name": "Hospital"
+                "name": "Hospital",
+                "terms": "clinic,emergency room,health service,hospice,infirmary,institution,nursing home,rest home,sanatorium,sanitarium,sick bay,surgery,ward"
             },
             "amenity/library": {
-                "name": "Library"
+                "name": "Library",
+                "terms": ""
             },
             "amenity/parking": {
-                "name": "Parking"
+                "name": "Parking",
+                "terms": ""
             },
             "amenity/pharmacy": {
-                "name": "Pharmacy"
+                "name": "Pharmacy",
+                "terms": ""
             },
             "amenity/place_of_worship": {
-                "name": "Place of Worship"
+                "name": "Place of Worship",
+                "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Church"
+                "name": "Church",
+                "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Synagogue"
+                "name": "Synagogue",
+                "terms": "jewish,synagogue"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mosque"
+                "name": "Mosque",
+                "terms": "muslim,mosque"
             },
             "amenity/police": {
-                "name": "Police"
+                "name": "Police",
+                "terms": "badge,bear,blue,bluecoat,bobby,boy scout,bull,constable,constabulary,cop,copper,corps,county mounty,detective,fed,flatfoot,force,fuzz,gendarme,gumshoe,heat,law,law enforcement,man,narc,officers,patrolman,police"
             },
             "amenity/post_box": {
-                "name": "Mailbox"
+                "name": "Mailbox",
+                "terms": "letter drop,letterbox,mail drop,mailbox,pillar box,postbox"
             },
             "amenity/post_office": {
-                "name": "Post Office"
+                "name": "Post Office",
+                "terms": ""
             },
             "amenity/pub": {
-                "name": "Pub"
+                "name": "Pub",
+                "terms": ""
             },
             "amenity/restaurant": {
-                "name": "Restaurant"
+                "name": "Restaurant",
+                "terms": "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"
             },
             "amenity/school": {
-                "name": "School"
+                "name": "School",
+                "terms": "academy,alma mater,blackboard,college,department,discipline,establishment,faculty,hall,halls of ivy,institute,institution,jail*,schoolhouse,seminary,university"
             },
             "amenity/swimming_pool": {
-                "name": "Swimming Pool"
+                "name": "Swimming Pool",
+                "terms": ""
             },
             "amenity/telephone": {
-                "name": "Telephone"
+                "name": "Telephone",
+                "terms": ""
             },
             "amenity/theatre": {
-                "name": "Theater"
+                "name": "Theater",
+                "terms": "theatre,performance,play,musical"
             },
             "amenity/toilets": {
-                "name": "Toilets"
+                "name": "Toilets",
+                "terms": ""
             },
             "amenity/townhall": {
-                "name": "Town Hall"
+                "name": "Town Hall",
+                "terms": "village hall,city government,courthouse,municipal building,municipal center"
             },
             "amenity/university": {
-                "name": "University"
+                "name": "University",
+                "terms": ""
             },
             "building": {
-                "name": "Building"
+                "name": "Building",
+                "terms": ""
             },
             "entrance": {
-                "name": "Entrance"
+                "name": "Entrance",
+                "terms": ""
             },
             "highway": {
-                "name": "Highway"
+                "name": "Highway",
+                "terms": ""
             },
             "highway/bus_stop": {
-                "name": "Bus Stop"
+                "name": "Bus Stop",
+                "terms": ""
             },
             "highway/crossing": {
-                "name": "Crossing"
+                "name": "Crossing",
+                "terms": "crosswalk,zebra crossing"
             },
             "highway/cycleway": {
-                "name": "Cycle Path"
+                "name": "Cycle Path",
+                "terms": ""
             },
             "highway/footway": {
-                "name": "Foot Path"
+                "name": "Foot Path",
+                "terms": "beaten path,boulevard,clearing,course,cut*,drag*,footpath,highway,lane,line,orbit,passage,pathway,rail,rails,road,roadway,route,street,thoroughfare,trackway,trail,trajectory,walk"
             },
             "highway/motorway": {
-                "name": "Motorway"
+                "name": "Motorway",
+                "terms": ""
             },
             "highway/path": {
-                "name": "Path"
+                "name": "Path",
+                "terms": ""
             },
             "highway/primary": {
-                "name": "Primary Road"
+                "name": "Primary Road",
+                "terms": ""
             },
             "highway/residential": {
-                "name": "Residential Road"
+                "name": "Residential Road",
+                "terms": ""
             },
             "highway/secondary": {
-                "name": "Secondary Road"
+                "name": "Secondary Road",
+                "terms": ""
             },
             "highway/service": {
-                "name": "Service Road"
+                "name": "Service Road",
+                "terms": ""
             },
             "highway/steps": {
-                "name": "Steps"
+                "name": "Steps",
+                "terms": "stairs,staircase"
             },
             "highway/tertiary": {
-                "name": "Tertiary Road"
+                "name": "Tertiary Road",
+                "terms": ""
             },
             "highway/track": {
-                "name": "Track"
+                "name": "Track",
+                "terms": ""
             },
             "highway/traffic_signals": {
-                "name": "Traffic Signals"
+                "name": "Traffic Signals",
+                "terms": "light,stoplight,traffic light"
             },
             "highway/trunk": {
-                "name": "Trunk Road"
+                "name": "Trunk Road",
+                "terms": ""
             },
             "highway/turning_circle": {
-                "name": "Turning Circle"
+                "name": "Turning Circle",
+                "terms": ""
             },
             "highway/unclassified": {
-                "name": "Unclassified Road"
+                "name": "Unclassified Road",
+                "terms": ""
             },
             "historic": {
-                "name": "Historic Site"
+                "name": "Historic Site",
+                "terms": ""
             },
             "historic/monument": {
-                "name": "Monument"
+                "name": "Monument",
+                "terms": ""
             },
             "landuse": {
-                "name": "Landuse"
+                "name": "Landuse",
+                "terms": ""
             },
             "landuse/allotments": {
-                "name": "Allotments"
+                "name": "Allotments",
+                "terms": ""
             },
             "landuse/basin": {
-                "name": "Basin"
+                "name": "Basin",
+                "terms": ""
             },
             "landuse/cemetery": {
-                "name": "Cemetery"
+                "name": "Cemetery",
+                "terms": ""
             },
             "landuse/commercial": {
-                "name": "Commercial"
+                "name": "Commercial",
+                "terms": ""
             },
             "landuse/construction": {
-                "name": "Construction"
+                "name": "Construction",
+                "terms": ""
             },
             "landuse/farm": {
-                "name": "Farm"
+                "name": "Farm",
+                "terms": ""
             },
             "landuse/farmyard": {
-                "name": "Farmyard"
+                "name": "Farmyard",
+                "terms": ""
             },
             "landuse/forest": {
-                "name": "Forest"
+                "name": "Forest",
+                "terms": ""
             },
             "landuse/grass": {
-                "name": "Grass"
+                "name": "Grass",
+                "terms": ""
             },
             "landuse/industrial": {
-                "name": "Industrial"
+                "name": "Industrial",
+                "terms": ""
             },
             "landuse/meadow": {
-                "name": "Meadow"
+                "name": "Meadow",
+                "terms": ""
             },
             "landuse/orchard": {
-                "name": "Orchard"
+                "name": "Orchard",
+                "terms": ""
             },
             "landuse/quarry": {
-                "name": "Quarry"
+                "name": "Quarry",
+                "terms": ""
             },
             "landuse/residential": {
-                "name": "Residential"
+                "name": "Residential",
+                "terms": ""
             },
             "landuse/vineyard": {
-                "name": "Vineyard"
+                "name": "Vineyard",
+                "terms": ""
             },
             "leisure": {
-                "name": "Leisure"
+                "name": "Leisure",
+                "terms": ""
             },
             "leisure/garden": {
-                "name": "Garden"
+                "name": "Garden",
+                "terms": ""
             },
             "leisure/golf_course": {
-                "name": "Golf Course"
+                "name": "Golf Course",
+                "terms": ""
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "esplanade,estate,forest,garden,grass,green,grounds,lawn,lot,meadow,parkland,place,playground,plaza,pleasure garden,recreation area,square,tract,village green,woodland"
             },
             "leisure/pitch": {
-                "name": "Sport Pitch"
+                "name": "Sport Pitch",
+                "terms": ""
             },
             "leisure/pitch/american_football": {
-                "name": "American Football Field"
+                "name": "American Football Field",
+                "terms": ""
             },
             "leisure/pitch/baseball": {
-                "name": "Baseball Diamond"
+                "name": "Baseball Diamond",
+                "terms": ""
             },
             "leisure/pitch/basketball": {
-                "name": "Basketball Court"
+                "name": "Basketball Court",
+                "terms": ""
             },
             "leisure/pitch/soccer": {
-                "name": "Soccer Field"
+                "name": "Soccer Field",
+                "terms": ""
             },
             "leisure/pitch/tennis": {
-                "name": "Tennis Court"
+                "name": "Tennis Court",
+                "terms": ""
             },
             "leisure/playground": {
-                "name": "Playground"
+                "name": "Playground",
+                "terms": ""
             },
             "leisure/stadium": {
-                "name": "Stadium"
+                "name": "Stadium",
+                "terms": ""
             },
             "leisure/swimming_pool": {
-                "name": "Swimming Pool"
+                "name": "Swimming Pool",
+                "terms": ""
             },
             "man_made": {
-                "name": "Man Made"
+                "name": "Man Made",
+                "terms": ""
             },
             "man_made/lighthouse": {
-                "name": "Lighthouse"
+                "name": "Lighthouse",
+                "terms": ""
             },
             "man_made/pier": {
-                "name": "Pier"
+                "name": "Pier",
+                "terms": ""
             },
             "man_made/survey_point": {
-                "name": "Survey Point"
+                "name": "Survey Point",
+                "terms": ""
             },
             "man_made/water_tower": {
-                "name": "Water Tower"
+                "name": "Water Tower",
+                "terms": ""
             },
             "natural": {
-                "name": "Natural"
+                "name": "Natural",
+                "terms": ""
             },
             "natural/bay": {
-                "name": "Bay"
+                "name": "Bay",
+                "terms": ""
             },
             "natural/beach": {
-                "name": "Beach"
+                "name": "Beach",
+                "terms": ""
             },
             "natural/cliff": {
-                "name": "Cliff"
+                "name": "Cliff",
+                "terms": ""
             },
             "natural/coastline": {
-                "name": "Coastline"
+                "name": "Coastline",
+                "terms": "shore"
             },
             "natural/glacier": {
-                "name": "Glacier"
+                "name": "Glacier",
+                "terms": ""
             },
             "natural/grassland": {
-                "name": "Grassland"
+                "name": "Grassland",
+                "terms": ""
             },
             "natural/heath": {
-                "name": "Heath"
+                "name": "Heath",
+                "terms": ""
             },
             "natural/peak": {
-                "name": "Peak"
+                "name": "Peak",
+                "terms": "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
             },
             "natural/scrub": {
-                "name": "Scrub"
+                "name": "Scrub",
+                "terms": ""
             },
             "natural/spring": {
-                "name": "Spring"
+                "name": "Spring",
+                "terms": ""
             },
             "natural/tree": {
-                "name": "Tree"
+                "name": "Tree",
+                "terms": ""
             },
             "natural/water": {
-                "name": "Water"
+                "name": "Water",
+                "terms": ""
             },
             "natural/water/lake": {
-                "name": "Lake"
+                "name": "Lake",
+                "terms": "lakelet,loch,mere"
             },
             "natural/water/pond": {
-                "name": "Pond"
+                "name": "Pond",
+                "terms": "lakelet,millpond,tarn,pool,mere"
             },
             "natural/water/reservoir": {
-                "name": "Reservoir"
+                "name": "Reservoir",
+                "terms": ""
             },
             "natural/wetland": {
-                "name": "Wetland"
+                "name": "Wetland",
+                "terms": ""
             },
             "natural/wood": {
-                "name": "Wood"
+                "name": "Wood",
+                "terms": ""
             },
             "office": {
-                "name": "Office"
+                "name": "Office",
+                "terms": ""
             },
             "place": {
-                "name": "Place"
+                "name": "Place",
+                "terms": ""
             },
             "place/hamlet": {
-                "name": "Hamlet"
+                "name": "Hamlet",
+                "terms": ""
             },
             "place/island": {
-                "name": "Island"
+                "name": "Island",
+                "terms": "archipelago,atoll,bar,cay,isle,islet,key,reef"
             },
             "place/locality": {
-                "name": "Locality"
+                "name": "Locality",
+                "terms": ""
             },
             "place/village": {
-                "name": "Village"
+                "name": "Village",
+                "terms": ""
             },
             "power/sub_station": {
-                "name": "Substation"
+                "name": "Substation",
+                "terms": ""
             },
             "railway": {
-                "name": "Railway"
+                "name": "Railway",
+                "terms": ""
             },
             "railway/level_crossing": {
-                "name": "Level Crossing"
+                "name": "Level Crossing",
+                "terms": "crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing"
             },
             "railway/rail": {
-                "name": "Rail"
+                "name": "Rail",
+                "terms": ""
             },
             "railway/subway": {
-                "name": "Subway"
+                "name": "Subway",
+                "terms": ""
             },
             "railway/subway_entrance": {
-                "name": "Subway Entrance"
+                "name": "Subway Entrance",
+                "terms": ""
             },
             "shop": {
-                "name": "Shop"
+                "name": "Shop",
+                "terms": ""
             },
             "shop/butcher": {
-                "name": "Butcher"
+                "name": "Butcher",
+                "terms": ""
             },
             "shop/supermarket": {
-                "name": "Supermarket"
+                "name": "Supermarket",
+                "terms": "bazaar,boutique,chain,co-op,cut-rate store,discount store,five-and-dime,flea market,galleria,mall,mart,outlet,outlet store,shop,shopping center,shopping plaza,stand,store,supermarket,thrift shop"
             },
             "tourism": {
-                "name": "Tourism"
+                "name": "Tourism",
+                "terms": ""
             },
             "tourism/alpine_hut": {
-                "name": "Alpine Hut"
+                "name": "Alpine Hut",
+                "terms": ""
             },
             "tourism/artwork": {
-                "name": "Artwork"
+                "name": "Artwork",
+                "terms": ""
             },
             "tourism/attraction": {
-                "name": "Tourist Attraction"
+                "name": "Tourist Attraction",
+                "terms": ""
             },
             "tourism/camp_site": {
-                "name": "Camp Site"
+                "name": "Camp Site",
+                "terms": ""
             },
             "tourism/caravan_site": {
-                "name": "RV Park"
+                "name": "RV Park",
+                "terms": ""
             },
             "tourism/chalet": {
-                "name": "Chalet"
+                "name": "Chalet",
+                "terms": ""
             },
             "tourism/guest_house": {
-                "name": "Guest House"
+                "name": "Guest House",
+                "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
             },
             "tourism/hostel": {
-                "name": "Hostel"
+                "name": "Hostel",
+                "terms": ""
             },
             "tourism/hotel": {
-                "name": "Hotel"
+                "name": "Hotel",
+                "terms": ""
             },
             "tourism/information": {
-                "name": "Information"
+                "name": "Information",
+                "terms": ""
             },
             "tourism/motel": {
-                "name": "Motel"
+                "name": "Motel",
+                "terms": ""
             },
             "tourism/museum": {
-                "name": "Museum"
+                "name": "Museum",
+                "terms": "exhibition,exhibits archive,foundation,gallery,hall,institution,library,menagerie,repository,salon,storehouse,treasury,vault"
             },
             "tourism/picnic_site": {
-                "name": "Picnic Site"
+                "name": "Picnic Site",
+                "terms": ""
             },
             "tourism/theme_park": {
-                "name": "Theme Park"
+                "name": "Theme Park",
+                "terms": ""
             },
             "tourism/viewpoint": {
-                "name": "Viewpoint"
+                "name": "Viewpoint",
+                "terms": ""
             },
             "tourism/zoo": {
-                "name": "Zoo"
+                "name": "Zoo",
+                "terms": ""
             },
             "waterway": {
-                "name": "Waterway"
+                "name": "Waterway",
+                "terms": ""
             },
             "waterway/canal": {
-                "name": "Canal"
+                "name": "Canal",
+                "terms": ""
             },
             "waterway/dam": {
-                "name": "Dam"
+                "name": "Dam",
+                "terms": ""
             },
             "waterway/ditch": {
-                "name": "Ditch"
+                "name": "Ditch",
+                "terms": ""
             },
             "waterway/drain": {
-                "name": "Drain"
+                "name": "Drain",
+                "terms": ""
             },
             "waterway/river": {
-                "name": "River"
+                "name": "River",
+                "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
             },
             "waterway/riverbank": {
-                "name": "Riverbank"
+                "name": "Riverbank",
+                "terms": ""
             },
             "waterway/stream": {
-                "name": "Stream"
+                "name": "Stream",
+                "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
             },
             "waterway/weir": {
-                "name": "Weir"
+                "name": "Weir",
+                "terms": ""
             }
         }
     }
@@ -3821,7 +3973,7 @@ locale.en = {
         },
         "add_line": {
             "title": "Linea",
-            "description": "Linee possono essere strade, vie, percorsi pedonali, o perfino canali.",
+            "description": "Aggiungi strade, vie, percorsi pedonali, canali od altre linee alla mappa.",
             "tail": "Clicca sulla mappa per iniziare a disegnare una strada, un percorso, o un itinerario."
         },
         "add_point": {
@@ -3876,11 +4028,11 @@ locale.en = {
         },
         "orthogonalize": {
             "title": "Ortogonalizza",
-            "description": "Fai diventare gli angoli quadrati.",
+            "description": "Ortogonalizza questi angoli.",
             "key": "Q",
             "annotation": {
-                "line": "Gli angoli della linea sono stati resi rotondi.",
-                "area": "Gli angoli dell'area sono stati resi rotondi."
+                "line": "Gli angoli della linea sono stati resi ortogonali.",
+                "area": "Gli angoli dell'area sono stati resi ortogonali."
             }
         },
         "delete": {
@@ -3898,9 +4050,9 @@ locale.en = {
         "connect": {
             "annotation": {
                 "point": "Connessa una linea ad un punto.",
-                "vertex": "Connessa una strada ad un'altra.",
+                "vertex": "Connessa una linea ad un'altra.",
                 "line": "Connessa una strada ad una linea.",
-                "area": "Connessa una strada ad un'area."
+                "area": "Connessa una linea ad un'area."
             }
         },
         "disconnect": {
@@ -3921,7 +4073,7 @@ locale.en = {
             "key": "M",
             "annotation": {
                 "point": "Mosso un punto.",
-                "vertex": "Mosso un nodo su una strada.",
+                "vertex": "Mosso un nodo su una linea.",
                 "line": "Mossa una linea.",
                 "area": "Mossa un'area.",
                 "multiple": "Spostati diversi oggetti."
@@ -3944,9 +4096,9 @@ locale.en = {
         },
         "split": {
             "title": "Dividi",
-            "description": "Dividi in questo punto le due strade.",
+            "description": "Dividi in questo punto le due linee.",
             "key": "X",
-            "annotation": "Divisa una via."
+            "annotation": "Divisa una linea."
         }
     },
     "nothing_to_undo": "Niente da ripristinare.",
@@ -3962,7 +4114,7 @@ locale.en = {
         "description_placeholder": "Una breve descrizione delle tue modifiche",
         "upload_explanation": "I cambiamenti che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "save": "Salva",
-        "cancel": "Cancella",
+        "cancel": "Annulla",
         "warnings": "Avvertimenti",
         "modified": "Modificati",
         "deleted": "Cancellati",
@@ -3974,7 +4126,7 @@ locale.en = {
     },
     "geocoder": {
         "title": "Trova un luogo",
-        "placeholder": "trova un luogo",
+        "placeholder": "Trova un luogo",
         "no_results": "Non trovo un luogo chiamato '{name}'"
     },
     "geolocate": {
@@ -3999,7 +4151,7 @@ locale.en = {
     "background": {
         "title": "Sfondo",
         "description": "Impostazioni dello sfondo",
-        "percent_brightness": "{opacity}% opacità",
+        "percent_brightness": "{opacity}% luminosità",
         "fix_misalignment": "Allinea",
         "reset": "reset"
     },
@@ -4013,7 +4165,7 @@ locale.en = {
         "help": "Salva i cambiamenti su OpenStreetMap, rendendoli visibili ad altri utenti.",
         "no_changes": "Nessuna modifica da salvare.",
         "error": "E' accaduto un errore mentre veniva tentato il salvataggio",
-        "uploading": "Caricando le modifiche su OpenStreetMap.",
+        "uploading": "Caricamento delle modifiche su OpenStreetMap.",
         "unsaved_changes": "Hai modifiche non salvate"
     },
     "splash": {
@@ -4038,8 +4190,8 @@ locale.en = {
         "deprecated_tags": "Tag deprecati: {tags}"
     },
     "zoom": {
-        "in": "Zoom Maggiore",
-        "out": "Zoom Minore"
+        "in": "Ingrandisci",
+        "out": "Riduci"
     },
     "presets": {
         "fields": {
@@ -4062,7 +4214,7 @@ locale.en = {
                 "label": "Tipo"
             },
             "atm": {
-                "label": "ATM"
+                "label": "Bancomat"
             },
             "bicycle_parking": {
                 "label": "Tipo"
@@ -4136,7 +4288,7 @@ locale.en = {
                 "label": "Tipo"
             },
             "levels": {
-                "label": "Livelli"
+                "label": "Piani"
             },
             "man_made": {
                 "label": "Tipo"
@@ -4173,6 +4325,9 @@ locale.en = {
             },
             "railway": {
                 "label": "Tipo"
+            },
+            "ref": {
+                "label": "Riferimento"
             },
             "religion": {
                 "label": "Religione",
@@ -4306,7 +4461,7 @@ locale.en = {
                 "name": "Moschea"
             },
             "amenity/police": {
-                "name": "Polizia"
+                "name": "Forze di polizia"
             },
             "amenity/post_box": {
                 "name": "Buca delle lettere"
@@ -4322,6 +4477,9 @@ locale.en = {
             },
             "amenity/school": {
                 "name": "Scuola"
+            },
+            "amenity/swimming_pool": {
+                "name": "Piscina"
             },
             "amenity/telephone": {
                 "name": "Telefono"
@@ -4390,7 +4548,7 @@ locale.en = {
                 "name": "Superstrada"
             },
             "highway/turning_circle": {
-                "name": "Rotatoria"
+                "name": "Slargo per inversione"
             },
             "highway/unclassified": {
                 "name": "Viabilità ordinaria"
@@ -4452,6 +4610,9 @@ locale.en = {
             "leisure": {
                 "name": "Svago"
             },
+            "leisure/garden": {
+                "name": "Giardino"
+            },
             "leisure/golf_course": {
                 "name": "Campo da Golf"
             },
@@ -4479,6 +4640,9 @@ locale.en = {
             "leisure/playground": {
                 "name": "Campetto"
             },
+            "leisure/swimming_pool": {
+                "name": "Piscina"
+            },
             "man_made": {
                 "name": "Costruzioni civili"
             },
@@ -4487,6 +4651,9 @@ locale.en = {
             },
             "man_made/pier": {
                 "name": "Molo"
+            },
+            "man_made/survey_point": {
+                "name": "Punto geodetico"
             },
             "man_made/water_tower": {
                 "name": "Torre Idrica"

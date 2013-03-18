@@ -42,6 +42,10 @@ iD.presets.Preset = function(id, preset, fields) {
         return preset.t('name', {'default': id});
     };
 
+    preset.terms = function() {
+        return preset.t('terms', {'default': ''}).split(',');
+    };
+
     preset.removeTags = function(tags, geometry) {
         tags = _.omit(tags, _.keys(preset.tags));
 

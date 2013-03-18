@@ -29,15 +29,35 @@ To request a feature:
 
 ## Translating
 
-Translations are managed using the [Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After signing up, you can go to [iD's project page](https://www.transifex.com/projects/p/id-editor/), select a language and click *Translate now* to start translating. Translations are divided into two sections, *core*, which contains text for the main interface of iD, and *presets*, which has the text for labelling feature presets.
+Translations are managed using the
+[Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After
+signing up, you can go to [iD's project
+page](https://www.transifex.com/projects/p/id-editor/), select a language and
+click *Translate now* to start translating. Translations are divided into two
+sections, *core*, which contains text for the main interface of iD, and
+*presets*, which has the text for labeling feature presets.
 
-The words in brackets, for example `{name}`, should not be translated into a new language: it's replaced with a place name when iD presents the text. So a French translation of `Couldn't locate a place named '{name}'` would look like `Impossible de localiser l'endroit nommé '{name}'`.
+The words in brackets, for example `{name}`, should not be translated into a
+new language: it's replaced with a place name when iD presents the text. So a
+French translation of `Couldn't locate a place named '{name}'` would look like
+`Impossible de localiser l'endroit nommé '{name}'`.
 
-[iD translation project on Transifex](https://www.transifex.com/projects/p/id-editor/)
+The translations for presets consist of the names of presets, labels for
+preset fields, and lists of search terms. You do _not_ need to translate the
+search terms literally -- use a set of synonyms and related terms appropriate
+to the target language, separated by commas.
 
-To get notifications when translation source files change, click **Watch project** button near the bottom of the project page. You can edit your [notification settings](https://www.transifex.com/settings/notices/) if you're getting too many notifications.
+[iD translation project on
+Transifex](https://www.transifex.com/projects/p/id-editor/)
 
-Translations are licensed under [WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license as iD.
+To get notifications when translation source files change, click **Watch
+project** button near the bottom of the project page. You can edit your
+[notification settings](https://www.transifex.com/settings/notices/) if you're
+getting too many notifications.
+
+Translations are licensed under
+[WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license
+as iD.
 
 ## Adding New Strings for Translation
 

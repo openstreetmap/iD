@@ -38,7 +38,10 @@ var presets = {};
 glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
     var preset = read(file),
         id = file.match(/presets\/presets\/([^.]*)\.json/)[1];
-    translations.presets[id] = {name: preset.name};
+    translations.presets[id] = {
+        name: preset.name,
+        terms: (preset.terms || []).join(',')
+    };
     presets[id] = preset;
 });
 fs.writeFileSync('data/presets/presets.json', JSON.stringify(presets, null, 4));
