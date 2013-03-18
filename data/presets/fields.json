@@ -57,6 +57,10 @@
         "key": "construction",
         "type": "combo"
     },
+    "country": {
+        "key": "country",
+        "type": "combo"
+    },
     "crossing": {
         "key": "crossing",
         "type": "combo"
@@ -200,15 +204,6 @@
             "taoist"
         ]
     },
-    "roadtype": {
-        "type": "radio",
-        "options": [
-            "bridge",
-            "tunnel",
-            "embankment",
-            "cutting"
-        ]
-    },
     "service": {
         "key": "service",
         "type": "combo",
@@ -237,6 +232,15 @@
     "sport": {
         "key": "sport",
         "type": "combo"
+    },
+    "structure": {
+        "type": "radio",
+        "options": [
+            "bridge",
+            "tunnel",
+            "embankment",
+            "cutting"
+        ]
     },
     "surface": {
         "key": "surface",

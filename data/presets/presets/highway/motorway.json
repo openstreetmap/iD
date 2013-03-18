@@ -2,7 +2,7 @@
     "icon": "highway-motorway",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"

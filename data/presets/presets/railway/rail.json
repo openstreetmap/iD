@@ -6,5 +6,8 @@
     "tags": {
         "railway": "rail"
     },
+    "fields": [
+        "structure"
+    ],
     "terms": []
 }

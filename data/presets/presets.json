@@ -865,7 +865,7 @@
         "icon": "highway-cycleway",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "surface"
         ],
@@ -880,6 +880,7 @@
     "highway/footway": {
         "icon": "highway-footway",
         "fields": [
+            "structure",
             "access",
             "surface"
         ],
@@ -920,7 +921,7 @@
         "icon": "highway-motorway",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -937,7 +938,7 @@
         "icon": "highway-footway",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -954,7 +955,7 @@
         "icon": "highway-primary",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -971,7 +972,7 @@
         "icon": "highway-residential",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -988,7 +989,7 @@
         "icon": "highway-secondary",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -1006,7 +1007,7 @@
         "fields": [
             "service",
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -1039,7 +1040,7 @@
         "icon": "highway-tertiary",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -1056,7 +1057,7 @@
         "icon": "highway-track",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -1086,7 +1087,7 @@
         "icon": "highway-trunk",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -1113,7 +1114,7 @@
         "icon": "highway",
         "fields": [
             "oneway",
-            "roadtype",
+            "structure",
             "access",
             "maxspeed",
             "surface"
@@ -1927,10 +1928,16 @@
         "tags": {
             "railway": "rail"
         },
+        "fields": [
+            "structure"
+        ],
         "terms": []
     },
     "railway/subway": {
         "icon": "railway-rail",
+        "fields": [
+            "structure"
+        ],
         "geometry": [
             "line"
         ],

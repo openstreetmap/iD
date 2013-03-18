@@ -2,7 +2,7 @@
     "icon": "highway-residential",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"

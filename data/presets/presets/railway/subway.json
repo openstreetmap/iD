@@ -1,5 +1,8 @@
 {
     "icon": "railway-rail",
+    "fields": [
+        "structure"
+    ],
     "geometry": [
         "line"
     ],

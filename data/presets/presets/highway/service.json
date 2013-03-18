@@ -3,7 +3,7 @@
     "fields": [
         "service",
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"

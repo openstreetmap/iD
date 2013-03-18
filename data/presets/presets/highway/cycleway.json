@@ -2,7 +2,7 @@
     "icon": "highway-cycleway",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "surface"
     ],

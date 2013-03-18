@@ -2,7 +2,7 @@
     "icon": "highway-trunk",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"

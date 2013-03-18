@@ -2,7 +2,7 @@
     "icon": "highway-tertiary",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"

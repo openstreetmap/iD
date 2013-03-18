@@ -2,7 +2,7 @@
     "icon": "highway-primary",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"

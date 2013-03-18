@@ -2,7 +2,7 @@
     "icon": "highway-footway",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"
