@@ -31,9 +31,9 @@ iD.svg.Vertices = function(projection, context) {
 
         function addSiblingAndChildVertices(id, klass) {
             var entity = context.entity(id);
-            if (entity && entity.type === 'vertex') {
-                visible[hover.id] = klass;
-                context.parentWays(entity).forEach(function(entity) {
+            if (entity && entity.type === 'node') {
+                visible[entity.id] = klass;
+                context.graph().parentWays(entity).forEach(function(entity) {
                     addChildVertices(entity, klass);
                 });
             } else if (entity) {
