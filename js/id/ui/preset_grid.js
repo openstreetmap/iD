@@ -191,6 +191,7 @@ iD.ui.PresetGrid = function(context, entity) {
             var entered = entries.enter()
                 .append('div')
                 .attr('class','grid-button-wrap col4 grid-entry-wrap')
+                .classed('category', function(d) { return !!d.members; })
                 .classed('current', function(d) { return d === preset; })
                     .append('button')
                     .attr('class', 'grid-entry')
