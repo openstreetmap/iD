@@ -14,6 +14,9 @@ iD.modes.Select = function(context, selection, initial) {
             iD.modes.DragNode(context).behavior],
         radialMenu;
 
+    var wrap = context.container()
+        .select('.inspector-wrap');
+
     function changeTags(d, tags) {
         if (!_.isEqual(singular().tags, tags)) {
             context.perform(
@@ -85,16 +88,7 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (entity) {
-            var wrap = context.container()
-                .select('.inspector-wrap');
-
-            wrap.style('display', 'block')
-                .call(inspector)
-                .style('right', '-500px')
-                .style('opacity', 1)
-                .transition()
-                .duration(200)
-                .style('right', '0px');
+            wrap.call(inspector);
 
             if (d3.event) {
                 // Pan the map if the clicked feature intersects with the position
@@ -193,18 +187,7 @@ iD.modes.Select = function(context, selection, initial) {
     mode.exit = function() {
         if (timeout) window.clearTimeout(timeout);
 
-        context.container()
-            .select('.inspector-wrap')
-            .transition()
-            .style('right', '-500px')
-            .each('end', function() {
-                d3.select(this).style('display', 'none')
-                    .html('');
-            });
-
-        // Firefox incorrectly implements blur, so typeahead elements
-        // are not correctly removed. Remove any stragglers manually.
-        d3.selectAll('div.typeahead').remove();
+        wrap.call(inspector.close);
 
         behaviors.forEach(function(behavior) {
             context.uninstall(behavior);

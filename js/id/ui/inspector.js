@@ -3,6 +3,14 @@ iD.ui.Inspector = function(context, entity) {
         tagEditor;
 
     function inspector(selection) {
+        selection
+            .style('display', 'block')
+            .style('right', '-500px')
+            .style('opacity', 1)
+            .transition()
+            .duration(200)
+            .style('right', '0px');
+
         var panewrap = selection
             .append('div')
             .classed('panewrap', true);
@@ -53,6 +61,20 @@ iD.ui.Inspector = function(context, entity) {
             tagLayer.call(tagEditor);
         }
     }
+
+    inspector.close = function(selection) {
+        selection.transition()
+            .style('right', '-500px')
+            .each('end', function() {
+                d3.select(this)
+                    .style('display', 'none')
+                    .html('');
+            });
+
+        // Firefox incorrectly implements blur, so typeahead elements
+        // are not correctly removed. Remove any stragglers manually.
+        d3.selectAll('div.typeahead').remove();
+    };
 
     inspector.tags = function() {
         tagEditor.tags.apply(this, arguments);
