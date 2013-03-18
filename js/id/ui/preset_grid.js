@@ -1,6 +1,5 @@
-iD.ui.PresetGrid = function(context) {
+iD.ui.PresetGrid = function(context, entity) {
     var event = d3.dispatch('choose', 'close'),
-        entity,
         default_limit = 9,
         currently_drawn = 9,
         presets = context.presets(),
@@ -241,12 +240,6 @@ iD.ui.PresetGrid = function(context) {
             .attr('class','label')
             .text(t('commit.cancel'));
     }
-
-    presetgrid.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
-        return presetgrid;
-    };
 
     return d3.rebind(presetgrid, event, 'on');
 };

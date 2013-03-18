@@ -1,7 +1,6 @@
-iD.ui.TagEditor = function(context) {
+iD.ui.TagEditor = function(context, entity) {
     var event = d3.dispatch('changeTags', 'choose', 'close'),
         presets = context.presets(),
-        entity,
         tags,
         name,
         preset,
@@ -11,7 +10,6 @@ iD.ui.TagEditor = function(context) {
 
     function tageditor(selection, newpreset) {
 
-        entity = selection.datum();
         selection_ = selection;
         var geometry = entity.geometry(context.graph());
 
@@ -87,7 +85,7 @@ iD.ui.TagEditor = function(context) {
             .on('change', changeTags)
             .on('close', event.close);
 
-        tagList = iD.ui.Taglist(context)
+        tagList = iD.ui.Taglist(context, entity)
             .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')

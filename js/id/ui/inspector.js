@@ -1,11 +1,8 @@
-iD.ui.Inspector = function(context) {
+iD.ui.Inspector = function(context, entity) {
     var event = d3.dispatch('changeTags', 'close', 'change'),
-        initial = false,
         tagEditor;
 
     function inspector(selection) {
-        var entity = selection.datum();
-
         var panewrap = selection
             .append('div')
             .classed('panewrap', true);
@@ -18,22 +15,19 @@ iD.ui.Inspector = function(context) {
             .append('div')
             .classed('pane', true);
 
-        var presetGrid = iD.ui.PresetGrid(context)
-            .entity(entity)
+        var presetGrid = iD.ui.PresetGrid(context, entity)
             .on('close', function() {
                 event.close();
             })
             .on('choose', function(preset) {
-
                 panewrap
                     .transition()
                     .style('right', '0%');
 
                 tagLayer.call(tagEditor, preset);
-
             });
 
-        tagEditor = iD.ui.TagEditor(context)
+        tagEditor = iD.ui.TagEditor(context, entity)
             .tags(entity.tags)
             .on('changeTags', function(tags) {
                 event.changeTags(entity, tags);
@@ -42,31 +36,26 @@ iD.ui.Inspector = function(context) {
                 event.close(entity);
             })
             .on('choose', function() {
-
                 panewrap
                     .transition()
                     .style('right', '-100%');
 
                 presetLayer.call(presetGrid, true);
-
             });
 
+        var initial = entity.isNew() && _.without(Object.keys(entity.tags), 'area').length === 0;
+
         if (initial) {
-            panewrap.style('right','-100%')
+            panewrap.style('right', '-100%');
             presetLayer.call(presetGrid);
         } else {
-            panewrap.style('right','-0%');
+            panewrap.style('right', '-0%');
             tagLayer.call(tagEditor);
         }
     }
 
     inspector.tags = function() {
         tagEditor.tags.apply(this, arguments);
-        return inspector;
-    };
-
-    inspector.initial = function(_) {
-        initial = _;
         return inspector;
     };
 

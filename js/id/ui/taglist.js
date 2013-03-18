@@ -1,4 +1,4 @@
-iD.ui.Taglist = function(context) {
+iD.ui.Taglist = function(context, entity) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         initial = false,
@@ -42,8 +42,6 @@ iD.ui.Taglist = function(context) {
     }
 
     function drawTags(tags) {
-        var entity = list.datum();
-
         collapsebutton.text(t('inspector.additional') + ' (' + Object.keys(tags).length + ')');
 
         tags = d3.entries(tags);
@@ -201,8 +199,7 @@ iD.ui.Taglist = function(context) {
     }
 
     function bindTypeahead() {
-        var entity = list.datum(),
-            geometry = entity.geometry(context.graph()),
+        var geometry = entity.geometry(context.graph()),
             row = d3.select(this),
             key = row.selectAll('.key-wrap'),
             value = row.selectAll('.input-wrap-position');

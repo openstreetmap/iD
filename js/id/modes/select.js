@@ -4,9 +4,7 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    var showgrid = singular() && singular().isNew() && _.without(Object.keys(singular().tags), 'area').length === 0;
-
-    var inspector = iD.ui.Inspector(context).initial(showgrid),
+    var inspector = iD.ui.Inspector(context, singular()),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
@@ -91,7 +89,6 @@ iD.modes.Select = function(context, selection, initial) {
                 .select('.inspector-wrap');
 
             wrap.style('display', 'block')
-                .datum(entity)
                 .call(inspector)
                 .style('right', '-500px')
                 .style('opacity', 1)
