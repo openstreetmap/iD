@@ -223,9 +223,19 @@ iD.ui.Background = function(context) {
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .text(function(d) { return d[0]; })
-            .on('click', function(d) {
-                context.background().nudge(d[1], context.map().zoom());
-                context.redraw();
+            .on('mousedown', function(d) {
+
+                var interval = window.setInterval(nudge, 100);
+
+                d3.select(this).on('mouseup', function() {
+                    window.clearInterval(interval);
+                    nudge();
+                });
+
+                function nudge() {
+                    context.background().nudge(d[1], context.map().zoom());
+                    context.redraw();
+                }
             });
 
         nudge_container.append('button')
