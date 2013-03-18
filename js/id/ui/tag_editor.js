@@ -58,7 +58,7 @@ iD.ui.TagEditor = function(context, entity) {
         var typebutton = headerwrap.append('div')
             .attr('class','grid-button-wrap col4')
                 .append('div')
-                .attr('class','col12 grid-entry fillL');
+                .attr('class','col12 grid-entry');
 
         typebutton.append('div')
             .attr('class', 'icon' + (preset ?  ' feature-' + (preset.icon || 'marker-stroked') : ''));

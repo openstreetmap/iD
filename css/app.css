@@ -857,6 +857,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .tag-wrap .grid-button-wrap .grid-entry {
     border-top: 0;
+    background: #f6f6f6;
 }
 
 .inspector-body .name {
