@@ -1,4 +1,870 @@
-locale.zh = {
+locale.en = {
+    "modes": {
+        "add_area": {
+            "title": "Area",
+            "description": "Add parks, buildings, lakes or other areas to the map.",
+            "tail": "Click on the map to start drawing an area, like a park, lake, or building."
+        },
+        "add_line": {
+            "title": "Line",
+            "description": "Add highways, streets, pedestrian paths, canals or other lines to the map.",
+            "tail": "Click on the map to start drawing a road, path, or route."
+        },
+        "add_point": {
+            "title": "Point",
+            "description": "Add restaurants, monuments, postal boxes or other points to the map.",
+            "tail": "Click on the map to add a point."
+        },
+        "browse": {
+            "title": "Browse",
+            "description": "Pan and zoom the map."
+        },
+        "draw_area": {
+            "tail": "Click to add points to your area. Click the first point to finish the area."
+        },
+        "draw_line": {
+            "tail": "Click to add more points to the line. Click on other lines to connect to them, and double-click to end the line."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Added a point.",
+                "vertex": "Added a node to a way."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Started a line.",
+                "area": "Started an area."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Continued a line.",
+                "area": "Continued an area."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Canceled drawing."
+        },
+        "change_tags": {
+            "annotation": "Changed tags."
+        },
+        "circularize": {
+            "title": "Circularize",
+            "description": "Make this round.",
+            "key": "O",
+            "annotation": {
+                "line": "Made a line circular.",
+                "area": "Made an area circular."
+            }
+        },
+        "orthogonalize": {
+            "title": "Orthogonalize",
+            "description": "Square these corners.",
+            "key": "Q",
+            "annotation": {
+                "line": "Squared the corners of a line.",
+                "area": "Squared the corners of an area."
+            }
+        },
+        "delete": {
+            "title": "Delete",
+            "description": "Remove this from the map.",
+            "annotation": {
+                "point": "Deleted a point.",
+                "vertex": "Deleted a node from a way.",
+                "line": "Deleted a line.",
+                "area": "Deleted an area.",
+                "relation": "Deleted a relation.",
+                "multiple": "Deleted {n} objects."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Connected a way to a point.",
+                "vertex": "Connected a way to another.",
+                "line": "Connected a way to a line.",
+                "area": "Connected a way to an area."
+            }
+        },
+        "disconnect": {
+            "title": "Disconnect",
+            "description": "Disconnect these ways from each other.",
+            "key": "D",
+            "annotation": "Disconnected ways."
+        },
+        "merge": {
+            "title": "Merge",
+            "description": "Merge these lines.",
+            "key": "C",
+            "annotation": "Merged {n} lines."
+        },
+        "move": {
+            "title": "Move",
+            "description": "Move this to a different location.",
+            "key": "M",
+            "annotation": {
+                "point": "Moved a point.",
+                "vertex": "Moved a node in a way.",
+                "line": "Moved a line.",
+                "area": "Moved an area.",
+                "multiple": "Moved multiple objects."
+            }
+        },
+        "rotate": {
+            "title": "Rotate",
+            "description": "Rotate this object around its centre point.",
+            "key": "R",
+            "annotation": {
+                "line": "Rotated a line.",
+                "area": "Rotated an area."
+            }
+        },
+        "reverse": {
+            "title": "Reverse",
+            "description": "Make this line go in the opposite direction.",
+            "key": "V",
+            "annotation": "Reversed a line."
+        },
+        "split": {
+            "title": "Split",
+            "description": "Split this into two ways at this point.",
+            "key": "X",
+            "annotation": "Split a way."
+        }
+    },
+    "nothing_to_undo": "Nothing to undo.",
+    "nothing_to_redo": "Nothing to redo.",
+    "just_edited": "You Just Edited OpenStreetMap!",
+    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    "view_on_osm": "View on OSM",
+    "zoom_in_edit": "zoom in to edit the map",
+    "logout": "logout",
+    "report_a_bug": "report a bug",
+    "commit": {
+        "title": "Save Changes",
+        "description_placeholder": "Brief description of your contributions",
+        "upload_explanation": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "warnings": "Warnings",
+        "modified": "Modified",
+        "deleted": "Deleted",
+        "created": "Created"
+    },
+    "contributors": {
+        "list": "Viewing contributions by {users}",
+        "truncated_list": "Viewing contributions by {users} and {count} others"
+    },
+    "geocoder": {
+        "title": "Find a place",
+        "placeholder": "Find a place",
+        "no_results": "Couldn't locate a place named '{name}'"
+    },
+    "geolocate": {
+        "title": "Show My Location"
+    },
+    "inspector": {
+        "no_documentation_combination": "There is no documentation available for this tag combination",
+        "no_documentation_key": "There is no documentation available for this key",
+        "show_more": "Show More",
+        "new_tag": "New tag",
+        "edit_tags": "Edit tags",
+        "okay": "Okay",
+        "view_on_osm": "View on OSM",
+        "name": "Name",
+        "editing": "Edit details",
+        "additional": "Additional tags",
+        "choose": "Select feature type",
+        "results": "{n} results for {search}",
+        "reference": "View on OpenStreetMap Wiki →",
+        "back_tooltip": "Change feature type"
+    },
+    "background": {
+        "title": "Background",
+        "description": "Background settings",
+        "percent_brightness": "{opacity}% brightness",
+        "fix_misalignment": "Fix misalignment",
+        "reset": "reset"
+    },
+    "restore": {
+        "description": "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        "restore": "Restore",
+        "reset": "Reset"
+    },
+    "save": {
+        "title": "Save",
+        "help": "Save changes to OpenStreetMap, making them visible to other users.",
+        "no_changes": "No changes to save.",
+        "error": "An error occurred while trying to save",
+        "uploading": "Uploading changes to OpenStreetMap.",
+        "unsaved_changes": "You have unsaved changes"
+    },
+    "splash": {
+        "welcome": "Welcome to the iD OpenStreetMap editor",
+        "text": "This is development version {version}. For more information see {website} and report bugs at {github}."
+    },
+    "source_switch": {
+        "live": "live",
+        "dev": "dev"
+    },
+    "tag_reference": {
+        "description": "Description",
+        "on_wiki": "{tag} on wiki.osm.org",
+        "used_with": "used with {type}"
+    },
+    "validations": {
+        "untagged_point": "Untagged point which is not part of a line or area",
+        "untagged_line": "Untagged line",
+        "untagged_area": "Untagged area",
+        "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+        "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
+        "deprecated_tags": "Deprecated tags: {tags}"
+    },
+    "zoom": {
+        "in": "Zoom In",
+        "out": "Zoom Out"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Access"
+            },
+            "address": {
+                "label": "Address",
+                "placeholders": {
+                    "housename": "Housename",
+                    "number": "123",
+                    "street": "Street",
+                    "city": "City"
+                }
+            },
+            "aeroway": {
+                "label": "Type"
+            },
+            "amenity": {
+                "label": "Type"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "bicycle_parking": {
+                "label": "Type"
+            },
+            "building": {
+                "label": "Building"
+            },
+            "building_area": {
+                "label": "Building"
+            },
+            "building_yes": {
+                "label": "Building"
+            },
+            "capacity": {
+                "label": "Capacity"
+            },
+            "collection_times": {
+                "label": "Collection Times"
+            },
+            "construction": {
+                "label": "Type"
+            },
+            "crossing": {
+                "label": "Type"
+            },
+            "cuisine": {
+                "label": "Cuisine"
+            },
+            "denomination": {
+                "label": "Denomination"
+            },
+            "denotation": {
+                "label": "Denotation"
+            },
+            "elevation": {
+                "label": "Elevation"
+            },
+            "emergency": {
+                "label": "Emergency"
+            },
+            "entrance": {
+                "label": "Type"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "fee": {
+                "label": "Fee"
+            },
+            "highway": {
+                "label": "Type"
+            },
+            "historic": {
+                "label": "Type"
+            },
+            "internet_access": {
+                "label": "Internet Access",
+                "options": {
+                    "yes": "Yes",
+                    "no": "No",
+                    "wlan": "Wifi",
+                    "wired": "Wired",
+                    "terminal": "Terminal"
+                }
+            },
+            "landuse": {
+                "label": "Type"
+            },
+            "layer": {
+                "label": "Layer"
+            },
+            "leisure": {
+                "label": "Type"
+            },
+            "levels": {
+                "label": "Levels"
+            },
+            "man_made": {
+                "label": "Type"
+            },
+            "maxspeed": {
+                "label": "Speed Limit"
+            },
+            "natural": {
+                "label": "Natural"
+            },
+            "network": {
+                "label": "Network"
+            },
+            "note": {
+                "label": "Note"
+            },
+            "office": {
+                "label": "Type"
+            },
+            "oneway": {
+                "label": "One Way"
+            },
+            "opening_hours": {
+                "label": "Hours"
+            },
+            "operator": {
+                "label": "Operator"
+            },
+            "phone": {
+                "label": "Phone"
+            },
+            "place": {
+                "label": "Type"
+            },
+            "railway": {
+                "label": "Type"
+            },
+            "ref": {
+                "label": "Reference"
+            },
+            "religion": {
+                "label": "Religion",
+                "options": {
+                    "christian": "Christian",
+                    "muslim": "Muslim",
+                    "buddhist": "Buddhist",
+                    "jewish": "Jewish",
+                    "hindu": "Hindu",
+                    "shinto": "Shinto",
+                    "taoist": "Taoist"
+                }
+            },
+            "roadtype": {
+                "label": "Features",
+                "options": {
+                    "bridge": "Bridge",
+                    "tunnel": "Tunnel",
+                    "embankment": "Embankment",
+                    "cutting": "Cutting"
+                }
+            },
+            "service": {
+                "label": "Type"
+            },
+            "shelter": {
+                "label": "Shelter"
+            },
+            "shop": {
+                "label": "Type"
+            },
+            "source": {
+                "label": "Source"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "surface": {
+                "label": "Surface"
+            },
+            "tourism": {
+                "label": "Type"
+            },
+            "water": {
+                "label": "Type"
+            },
+            "waterway": {
+                "label": "Type"
+            },
+            "website": {
+                "label": "Website"
+            },
+            "wetland": {
+                "label": "Type"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Type"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Aeroway"
+            },
+            "aeroway/aerodrome": {
+                "name": "Airport"
+            },
+            "aeroway/helipad": {
+                "name": "Helipad"
+            },
+            "amenity": {
+                "name": "Amenity"
+            },
+            "amenity/bank": {
+                "name": "Bank"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Bench"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Bicycle Parking"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Bicycle Rental"
+            },
+            "amenity/cafe": {
+                "name": "Cafe"
+            },
+            "amenity/cinema": {
+                "name": "Cinema"
+            },
+            "amenity/fast_food": {
+                "name": "Fast Food"
+            },
+            "amenity/fire_station": {
+                "name": "Fire Station"
+            },
+            "amenity/fuel": {
+                "name": "Gas Station"
+            },
+            "amenity/grave_yard": {
+                "name": "Graveyard"
+            },
+            "amenity/hospital": {
+                "name": "Hospital"
+            },
+            "amenity/library": {
+                "name": "Library"
+            },
+            "amenity/parking": {
+                "name": "Parking"
+            },
+            "amenity/pharmacy": {
+                "name": "Pharmacy"
+            },
+            "amenity/place_of_worship": {
+                "name": "Place of Worship"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Church"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Synagogue"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mosque"
+            },
+            "amenity/police": {
+                "name": "Police"
+            },
+            "amenity/post_box": {
+                "name": "Mailbox"
+            },
+            "amenity/post_office": {
+                "name": "Post Office"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "School"
+            },
+            "amenity/telephone": {
+                "name": "Telephone"
+            },
+            "amenity/toilets": {
+                "name": "Toilets"
+            },
+            "amenity/townhall": {
+                "name": "Town Hall"
+            },
+            "amenity/university": {
+                "name": "University"
+            },
+            "building": {
+                "name": "Building"
+            },
+            "entrance": {
+                "name": "Entrance"
+            },
+            "highway": {
+                "name": "Highway"
+            },
+            "highway/bus_stop": {
+                "name": "Bus Stop"
+            },
+            "highway/crossing": {
+                "name": "Crossing"
+            },
+            "highway/cycleway": {
+                "name": "Cycle Path"
+            },
+            "highway/footway": {
+                "name": "Foot Path"
+            },
+            "highway/motorway": {
+                "name": "Motorway"
+            },
+            "highway/path": {
+                "name": "Path"
+            },
+            "highway/primary": {
+                "name": "Primary Road"
+            },
+            "highway/residential": {
+                "name": "Residential Road"
+            },
+            "highway/secondary": {
+                "name": "Secondary Road"
+            },
+            "highway/service": {
+                "name": "Service Road"
+            },
+            "highway/steps": {
+                "name": "Steps"
+            },
+            "highway/tertiary": {
+                "name": "Tertiary Road"
+            },
+            "highway/track": {
+                "name": "Track"
+            },
+            "highway/traffic_signals": {
+                "name": "Traffic Signals"
+            },
+            "highway/trunk": {
+                "name": "Trunk Road"
+            },
+            "highway/turning_circle": {
+                "name": "Turning Circle"
+            },
+            "highway/unclassified": {
+                "name": "Unclassified Road"
+            },
+            "historic": {
+                "name": "Historic Site"
+            },
+            "historic/monument": {
+                "name": "Monument"
+            },
+            "landuse": {
+                "name": "Landuse"
+            },
+            "landuse/allotments": {
+                "name": "Allotments"
+            },
+            "landuse/basin": {
+                "name": "Basin"
+            },
+            "landuse/cemetery": {
+                "name": "Cemetery"
+            },
+            "landuse/commercial": {
+                "name": "Commercial"
+            },
+            "landuse/construction": {
+                "name": "Construction"
+            },
+            "landuse/farm": {
+                "name": "Farm"
+            },
+            "landuse/farmyard": {
+                "name": "Farmyard"
+            },
+            "landuse/forest": {
+                "name": "Forest"
+            },
+            "landuse/grass": {
+                "name": "Grass"
+            },
+            "landuse/industrial": {
+                "name": "Industrial"
+            },
+            "landuse/meadow": {
+                "name": "Meadow"
+            },
+            "landuse/orchard": {
+                "name": "Orchard"
+            },
+            "landuse/quarry": {
+                "name": "Quarry"
+            },
+            "landuse/residential": {
+                "name": "Residential"
+            },
+            "landuse/vineyard": {
+                "name": "Vineyard"
+            },
+            "leisure": {
+                "name": "Leisure"
+            },
+            "leisure/golf_course": {
+                "name": "Golf Course"
+            },
+            "leisure/park": {
+                "name": "Park"
+            },
+            "leisure/pitch": {
+                "name": "Sport Pitch"
+            },
+            "leisure/pitch/american_football": {
+                "name": "American Football Field"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Baseball Diamond"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Basketball Court"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Soccer Field"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Tennis Court"
+            },
+            "leisure/playground": {
+                "name": "Playground"
+            },
+            "man_made": {
+                "name": "Man Made"
+            },
+            "man_made/lighthouse": {
+                "name": "Lighthouse"
+            },
+            "man_made/pier": {
+                "name": "Pier"
+            },
+            "man_made/survey_point": {
+                "name": "Survey Point"
+            },
+            "man_made/water_tower": {
+                "name": "Water Tower"
+            },
+            "natural": {
+                "name": "Natural"
+            },
+            "natural/bay": {
+                "name": "Bay"
+            },
+            "natural/beach": {
+                "name": "Beach"
+            },
+            "natural/cliff": {
+                "name": "Cliff"
+            },
+            "natural/coastline": {
+                "name": "Coastline"
+            },
+            "natural/glacier": {
+                "name": "Glacier"
+            },
+            "natural/grassland": {
+                "name": "Grassland"
+            },
+            "natural/heath": {
+                "name": "Heath"
+            },
+            "natural/peak": {
+                "name": "Peak"
+            },
+            "natural/scrub": {
+                "name": "Scrub"
+            },
+            "natural/spring": {
+                "name": "Spring"
+            },
+            "natural/tree": {
+                "name": "Tree"
+            },
+            "natural/water": {
+                "name": "Water"
+            },
+            "natural/water/lake": {
+                "name": "Lake"
+            },
+            "natural/water/pond": {
+                "name": "Pond"
+            },
+            "natural/water/reservoir": {
+                "name": "Reservoir"
+            },
+            "natural/wetland": {
+                "name": "Wetland"
+            },
+            "natural/wood": {
+                "name": "Wood"
+            },
+            "office": {
+                "name": "Office"
+            },
+            "place": {
+                "name": "Place"
+            },
+            "place/hamlet": {
+                "name": "Hamlet"
+            },
+            "place/island": {
+                "name": "Island"
+            },
+            "place/locality": {
+                "name": "Locality"
+            },
+            "place/village": {
+                "name": "Village"
+            },
+            "power/sub_station": {
+                "name": "Substation"
+            },
+            "railway": {
+                "name": "Railway"
+            },
+            "railway/level_crossing": {
+                "name": "Level Crossing"
+            },
+            "railway/rail": {
+                "name": "Rail"
+            },
+            "railway/subway": {
+                "name": "Subway"
+            },
+            "railway/subway_entrance": {
+                "name": "Subway Entrance"
+            },
+            "shop": {
+                "name": "Shop"
+            },
+            "shop/butcher": {
+                "name": "Butcher"
+            },
+            "shop/supermarket": {
+                "name": "Supermarket"
+            },
+            "tourism": {
+                "name": "Tourism"
+            },
+            "tourism/alpine_hut": {
+                "name": "Alpine Hut"
+            },
+            "tourism/artwork": {
+                "name": "Artwork"
+            },
+            "tourism/attraction": {
+                "name": "Tourist Attraction"
+            },
+            "tourism/camp_site": {
+                "name": "Camp Site"
+            },
+            "tourism/caravan_site": {
+                "name": "RV Park"
+            },
+            "tourism/chalet": {
+                "name": "Chalet"
+            },
+            "tourism/guest_house": {
+                "name": "Guest House"
+            },
+            "tourism/hostel": {
+                "name": "Hostel"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Information"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Museum"
+            },
+            "tourism/picnic_site": {
+                "name": "Picnic Site"
+            },
+            "tourism/theme_park": {
+                "name": "Theme Park"
+            },
+            "tourism/viewpoint": {
+                "name": "Viewpoint"
+            },
+            "tourism/zoo": {
+                "name": "Zoo"
+            },
+            "waterway": {
+                "name": "Waterway"
+            },
+            "waterway/canal": {
+                "name": "Canal"
+            },
+            "waterway/dam": {
+                "name": "Dam"
+            },
+            "waterway/ditch": {
+                "name": "Ditch"
+            },
+            "waterway/drain": {
+                "name": "Drain"
+            },
+            "waterway/river": {
+                "name": "River"
+            },
+            "waterway/riverbank": {
+                "name": "Riverbank"
+            },
+            "waterway/stream": {
+                "name": "Stream"
+            },
+            "waterway/weir": {
+                "name": "Weir"
+            }
+        }
+    }
+};locale.zh = {
     "modes": {
         "add_area": {
             "title": "面",
@@ -156,7 +1022,7 @@ locale.zh = {
     },
     "contributors": {
         "list": "查看{users}的贡献",
-        "truncated_list": "查看{count}个其他成员{users}的贡献"
+        "truncated_list": "查看{users}和其他{count}个成员的贡献"
     },
     "geocoder": {
         "title": "查找位置",
@@ -169,6 +1035,7 @@ locale.zh = {
     "inspector": {
         "no_documentation_combination": "没有关于此标签组合的文档",
         "no_documentation_key": "没有关于此键的文档",
+        "show_more": "显示更多",
         "new_tag": "新建标签",
         "edit_tags": "编辑标签",
         "okay": "确定",
@@ -176,9 +1043,10 @@ locale.zh = {
         "name": "名称",
         "editing": "编辑 {type}",
         "additional": "附加标签",
-        "choose": "你添加的是什么？",
+        "choose": "选择对象的类型",
         "results": "{search}共有{n}个结果",
-        "reference": "查看 OpenStreetMap Wiki →"
+        "reference": "查看 OpenStreetMap Wiki →",
+        "back_tooltip": "修改对象的类型"
     },
     "background": {
         "title": "背景",
@@ -217,13 +1085,1500 @@ locale.zh = {
         "untagged_point": "未标记点，他并不是线或面的一部分",
         "untagged_line": "未标记的线",
         "untagged_area": "未标记的面",
-        "many_deletions": "您正在删除{n}个对象。你确定你想这样做吗？所有的其他openstreetmap.org用户都将在地图上看不到这些数据。You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+        "many_deletions": "您正在删除{n}个对象。你确定你想这样做吗？所有的其他openstreetmap.org用户都将在地图上看不到这些数据。",
         "tag_suggests_area": "{tag}这个标签建议使用在面上，但是他不是一个面",
         "deprecated_tags": "已过时标签：{tags}"
     },
     "zoom": {
         "in": "放大",
         "out": "缩小"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "通道"
+            },
+            "address": {
+                "label": "地址",
+                "placeholders": {
+                    "housename": "房屋名称",
+                    "number": "123",
+                    "street": "街道",
+                    "city": "城市"
+                }
+            },
+            "aeroway": {
+                "label": "类型"
+            },
+            "amenity": {
+                "label": "类型"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "bicycle_parking": {
+                "label": "类型"
+            },
+            "building": {
+                "label": "建筑物"
+            },
+            "building_area": {
+                "label": "建筑物"
+            },
+            "building_yes": {
+                "label": "建筑物"
+            },
+            "capacity": {
+                "label": "容量"
+            },
+            "collection_times": {
+                "label": "收集时间"
+            },
+            "construction": {
+                "label": "类型"
+            },
+            "crossing": {
+                "label": "类型"
+            },
+            "cuisine": {
+                "label": "美食"
+            },
+            "denomination": {
+                "label": "面值"
+            },
+            "denotation": {
+                "label": "意思"
+            },
+            "elevation": {
+                "label": "海拔"
+            },
+            "emergency": {
+                "label": "紧急事件"
+            },
+            "entrance": {
+                "label": "类型"
+            },
+            "fax": {
+                "label": "传真"
+            },
+            "fee": {
+                "label": "费用"
+            },
+            "highway": {
+                "label": "类型"
+            },
+            "historic": {
+                "label": "类型"
+            },
+            "internet_access": {
+                "label": "互联网接入",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "有线网络",
+                    "terminal": "终端"
+                }
+            },
+            "landuse": {
+                "label": "类型"
+            },
+            "layer": {
+                "label": "层"
+            },
+            "leisure": {
+                "label": "类型"
+            },
+            "levels": {
+                "label": "级别"
+            },
+            "man_made": {
+                "label": "类型"
+            },
+            "maxspeed": {
+                "label": "限速"
+            },
+            "natural": {
+                "label": "自然"
+            },
+            "network": {
+                "label": "网络"
+            },
+            "note": {
+                "label": "备注"
+            },
+            "office": {
+                "label": "类型"
+            },
+            "oneway": {
+                "label": "单行"
+            },
+            "opening_hours": {
+                "label": "小时"
+            },
+            "operator": {
+                "label": "运营商"
+            },
+            "phone": {
+                "label": "手机"
+            },
+            "place": {
+                "label": "类型"
+            },
+            "railway": {
+                "label": "类型"
+            },
+            "religion": {
+                "label": "宗教",
+                "options": {
+                    "christian": "基督教徒",
+                    "muslim": "穆斯林",
+                    "buddhist": "佛教",
+                    "jewish": "犹太教",
+                    "hindu": "印度教",
+                    "shinto": "神道教",
+                    "taoist": "道教"
+                }
+            },
+            "roadtype": {
+                "label": "特征",
+                "options": {
+                    "bridge": "桥",
+                    "tunnel": "隧道",
+                    "embankment": "堤岸",
+                    "cutting": "开凿"
+                }
+            },
+            "service": {
+                "label": "类型"
+            },
+            "shelter": {
+                "label": "避难所"
+            },
+            "shop": {
+                "label": "类型"
+            },
+            "source": {
+                "label": "来源"
+            },
+            "sport": {
+                "label": "运动"
+            },
+            "surface": {
+                "label": "表面"
+            },
+            "tourism": {
+                "label": "类型"
+            },
+            "water": {
+                "label": "类型"
+            },
+            "waterway": {
+                "label": "类型"
+            },
+            "website": {
+                "label": "网站"
+            },
+            "wetland": {
+                "label": "类型"
+            },
+            "wikipedia": {
+                "label": "维基百科"
+            },
+            "wood": {
+                "label": "类型"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "机场相关道路"
+            },
+            "aeroway/aerodrome": {
+                "name": "机场"
+            },
+            "aeroway/helipad": {
+                "name": "直升机场"
+            },
+            "amenity": {
+                "name": "便利设施"
+            },
+            "amenity/bank": {
+                "name": "银行"
+            },
+            "amenity/bar": {
+                "name": "酒吧"
+            },
+            "amenity/bench": {
+                "name": "长凳"
+            },
+            "amenity/bicycle_parking": {
+                "name": "自行车停放处"
+            },
+            "amenity/bicycle_rental": {
+                "name": "自行车租赁处"
+            },
+            "amenity/cafe": {
+                "name": "咖啡"
+            },
+            "amenity/cinema": {
+                "name": "电影院"
+            },
+            "amenity/fast_food": {
+                "name": "快餐"
+            },
+            "amenity/fire_station": {
+                "name": "消防站"
+            },
+            "amenity/fuel": {
+                "name": "加油站"
+            },
+            "amenity/grave_yard": {
+                "name": "墓地"
+            },
+            "amenity/hospital": {
+                "name": "医院"
+            },
+            "amenity/library": {
+                "name": "图书馆"
+            },
+            "amenity/parking": {
+                "name": "停车场"
+            },
+            "amenity/pharmacy": {
+                "name": "药房"
+            },
+            "amenity/place_of_worship": {
+                "name": "礼拜场所"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "教堂"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "犹太教堂"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "清真寺"
+            },
+            "amenity/police": {
+                "name": "警察局"
+            },
+            "amenity/post_box": {
+                "name": "邮箱"
+            },
+            "amenity/post_office": {
+                "name": "邮局"
+            },
+            "amenity/pub": {
+                "name": "酒馆"
+            },
+            "amenity/restaurant": {
+                "name": "餐馆"
+            },
+            "amenity/school": {
+                "name": "学校"
+            },
+            "amenity/telephone": {
+                "name": "电话"
+            },
+            "amenity/toilets": {
+                "name": "厕所"
+            },
+            "amenity/townhall": {
+                "name": "市政府"
+            },
+            "amenity/university": {
+                "name": "大学"
+            },
+            "building": {
+                "name": "建筑物"
+            },
+            "entrance": {
+                "name": "入口"
+            },
+            "highway": {
+                "name": "公路"
+            },
+            "highway/bus_stop": {
+                "name": "公交车站"
+            },
+            "highway/crossing": {
+                "name": "路口"
+            },
+            "highway/cycleway": {
+                "name": "自行车道"
+            },
+            "highway/footway": {
+                "name": "人行道"
+            },
+            "highway/motorway": {
+                "name": "高速公路"
+            },
+            "highway/path": {
+                "name": "路"
+            },
+            "highway/primary": {
+                "name": "主要道路"
+            },
+            "highway/residential": {
+                "name": "住宅区道路"
+            },
+            "highway/secondary": {
+                "name": "次要道路"
+            },
+            "highway/service": {
+                "name": "辅助道路"
+            },
+            "highway/steps": {
+                "name": "台阶"
+            },
+            "highway/tertiary": {
+                "name": "三级道路"
+            },
+            "highway/track": {
+                "name": "轨迹"
+            },
+            "highway/traffic_signals": {
+                "name": "红绿灯"
+            },
+            "highway/trunk": {
+                "name": "干线道路"
+            },
+            "highway/turning_circle": {
+                "name": "环岛"
+            },
+            "highway/unclassified": {
+                "name": "未分级的道路"
+            },
+            "historic": {
+                "name": "历史遗迹"
+            },
+            "historic/monument": {
+                "name": "纪念碑"
+            },
+            "landuse": {
+                "name": "土地用途"
+            },
+            "landuse/allotments": {
+                "name": "社区花园"
+            },
+            "landuse/basin": {
+                "name": "水池"
+            },
+            "landuse/cemetery": {
+                "name": "墓地"
+            },
+            "landuse/commercial": {
+                "name": "商业区"
+            },
+            "landuse/construction": {
+                "name": "建筑物"
+            },
+            "landuse/farm": {
+                "name": "农场"
+            },
+            "landuse/farmyard": {
+                "name": "农场"
+            },
+            "landuse/forest": {
+                "name": "森林"
+            },
+            "landuse/grass": {
+                "name": "草坪"
+            },
+            "landuse/industrial": {
+                "name": "工业区"
+            },
+            "landuse/meadow": {
+                "name": "牧场"
+            },
+            "landuse/orchard": {
+                "name": "果园"
+            },
+            "landuse/quarry": {
+                "name": "采石场"
+            },
+            "landuse/residential": {
+                "name": "住宅区"
+            },
+            "landuse/vineyard": {
+                "name": "葡萄园"
+            },
+            "leisure": {
+                "name": "休闲场所"
+            },
+            "leisure/golf_course": {
+                "name": "高尔夫球场"
+            },
+            "leisure/park": {
+                "name": "公园"
+            },
+            "leisure/pitch": {
+                "name": "运动场所"
+            },
+            "leisure/pitch/american_football": {
+                "name": "美式足球场"
+            },
+            "leisure/pitch/baseball": {
+                "name": "棒球场"
+            },
+            "leisure/pitch/basketball": {
+                "name": "篮球场"
+            },
+            "leisure/pitch/soccer": {
+                "name": "足球场"
+            },
+            "leisure/pitch/tennis": {
+                "name": "网球场"
+            },
+            "leisure/playground": {
+                "name": "运动场"
+            },
+            "man_made": {
+                "name": "人造的"
+            },
+            "man_made/lighthouse": {
+                "name": "灯塔"
+            },
+            "man_made/pier": {
+                "name": "码头"
+            },
+            "man_made/water_tower": {
+                "name": "水塔"
+            },
+            "natural": {
+                "name": "自然"
+            },
+            "natural/bay": {
+                "name": "海湾"
+            },
+            "natural/beach": {
+                "name": "海滩"
+            },
+            "natural/cliff": {
+                "name": "悬崖"
+            },
+            "natural/coastline": {
+                "name": "海岸线"
+            },
+            "natural/glacier": {
+                "name": "冰川"
+            },
+            "natural/grassland": {
+                "name": "草原"
+            },
+            "natural/heath": {
+                "name": "荒野"
+            },
+            "natural/peak": {
+                "name": "山峰"
+            },
+            "natural/scrub": {
+                "name": "灌木丛"
+            },
+            "natural/spring": {
+                "name": "泉水"
+            },
+            "natural/tree": {
+                "name": "树"
+            },
+            "natural/water": {
+                "name": "水"
+            },
+            "natural/water/lake": {
+                "name": "湖泊"
+            },
+            "natural/water/pond": {
+                "name": "池塘"
+            },
+            "natural/water/reservoir": {
+                "name": "水库"
+            },
+            "natural/wetland": {
+                "name": "湿地"
+            },
+            "natural/wood": {
+                "name": "树林"
+            },
+            "office": {
+                "name": "办公室"
+            },
+            "place": {
+                "name": "地点"
+            },
+            "place/hamlet": {
+                "name": "小村庄"
+            },
+            "place/island": {
+                "name": "岛屿"
+            },
+            "place/locality": {
+                "name": "位置"
+            },
+            "place/village": {
+                "name": "村庄"
+            },
+            "power/sub_station": {
+                "name": "变电站"
+            },
+            "railway": {
+                "name": "铁路"
+            },
+            "railway/level_crossing": {
+                "name": "平交路口"
+            },
+            "railway/rail": {
+                "name": "铁轨"
+            },
+            "railway/subway": {
+                "name": "地铁"
+            },
+            "railway/subway_entrance": {
+                "name": "地铁口"
+            },
+            "shop": {
+                "name": "商店"
+            },
+            "shop/butcher": {
+                "name": "肉贩"
+            },
+            "shop/supermarket": {
+                "name": "超级市场"
+            },
+            "tourism": {
+                "name": "旅游业"
+            },
+            "tourism/alpine_hut": {
+                "name": "高山小屋"
+            },
+            "tourism/artwork": {
+                "name": "艺术品"
+            },
+            "tourism/attraction": {
+                "name": "旅游景点"
+            },
+            "tourism/camp_site": {
+                "name": "露营区"
+            },
+            "tourism/caravan_site": {
+                "name": "房车营地"
+            },
+            "tourism/chalet": {
+                "name": "木屋"
+            },
+            "tourism/guest_house": {
+                "name": "宾馆"
+            },
+            "tourism/hostel": {
+                "name": "招待所"
+            },
+            "tourism/hotel": {
+                "name": "旅馆"
+            },
+            "tourism/information": {
+                "name": "信息"
+            },
+            "tourism/motel": {
+                "name": "汽车旅馆"
+            },
+            "tourism/museum": {
+                "name": "博物馆"
+            },
+            "tourism/picnic_site": {
+                "name": "郊游地点"
+            },
+            "tourism/theme_park": {
+                "name": "主题公园"
+            },
+            "tourism/viewpoint": {
+                "name": "景点"
+            },
+            "tourism/zoo": {
+                "name": "动物园"
+            },
+            "waterway": {
+                "name": "航道"
+            },
+            "waterway/canal": {
+                "name": "运河"
+            },
+            "waterway/dam": {
+                "name": "水坝"
+            },
+            "waterway/ditch": {
+                "name": "沟渠"
+            },
+            "waterway/drain": {
+                "name": "下水道"
+            },
+            "waterway/river": {
+                "name": "河流"
+            },
+            "waterway/riverbank": {
+                "name": "河堤"
+            },
+            "waterway/stream": {
+                "name": "溪流"
+            },
+            "waterway/weir": {
+                "name": "堤坝"
+            }
+        }
+    }
+};locale.zh_TW = {
+    "modes": {
+        "add_area": {
+            "title": "區域",
+            "description": "在地圖上添加公園、建築物、湖泊或其他區域。",
+            "tail": "按一下地圖來開始繪製一個區域，如公園、湖泊或建築物。"
+        },
+        "add_line": {
+            "title": "線",
+            "description": "在地圖上添加公路、街道、行人徑、運河或其他線段。",
+            "tail": "按一下地圖來開始繪製道路、小徑或路徑。"
+        },
+        "add_point": {
+            "title": "點",
+            "description": "在地圖上添加餐廳、古蹪、郵箱或其他地點。",
+            "tail": "按一下地圖來添加一個點。"
+        },
+        "browse": {
+            "title": "瀏覽",
+            "description": "平移及縮放地圖。"
+        },
+        "draw_area": {
+            "tail": "按一下你的區域來為它添加點。按第一點來完成繪製這個區域。"
+        },
+        "draw_line": {
+            "tail": "點擊線段以便添加更多點。按一下其他線段去連接它們，按兩下去完成繒製。"
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "添加了一點。",
+                "vertex": "給路徑添加了一節點。"
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "開始繪製一線段。",
+                "area": "開始繪製一區域。"
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "繼續繪製一線段。",
+                "area": "繼續繪製一區域。"
+            }
+        },
+        "cancel_draw": {
+            "annotation": "取消了繪圖。"
+        },
+        "change_tags": {
+            "annotation": "修改了標籤。"
+        },
+        "circularize": {
+            "title": "環形化",
+            "description": "把這個物件製成圓形。",
+            "key": "O",
+            "annotation": {
+                "line": "把一線段製成圓形。",
+                "area": "把一區域製成圓形。"
+            }
+        },
+        "orthogonalize": {
+            "title": "直角化",
+            "description": "把角落轉換成轉角。",
+            "key": "Q",
+            "annotation": {
+                "line": "把線段上的角落換成轉角。",
+                "area": "把區域的角落換成轉角"
+            }
+        },
+        "delete": {
+            "title": "刪除",
+            "description": "從地圖上移除這個物件。",
+            "annotation": {
+                "point": "刪除了一點。",
+                "vertex": "刪除了路徑上的一個節點。",
+                "line": "刪除了一線段。",
+                "area": "刪除了一區域。",
+                "relation": "刪除了一關係",
+                "multiple": "刪除了 {n} 個物件。"
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "已連接路徑到一點。",
+                "vertex": "已連接路徑到另一路徑。",
+                "line": "已連接路徑到一線段。",
+                "area": "已連接路徑到一區域。"
+            }
+        },
+        "disconnect": {
+            "title": "斷開",
+            "description": "斷開這些路徑。",
+            "key": "D",
+            "annotation": "斷開了路徑。"
+        },
+        "merge": {
+            "title": "合併",
+            "description": "合併這些線段。",
+            "key": "C",
+            "annotation": "合併了 {n} 條線段。"
+        },
+        "move": {
+            "title": "移動",
+            "description": "移動這物件到另一處。",
+            "key": "M",
+            "annotation": {
+                "point": "移動了一點。",
+                "vertex": "移動了路徑上的一節點。",
+                "line": "移動了一線段。",
+                "area": "移動了一區域。",
+                "multiple": "移動了數個物件。"
+            }
+        },
+        "rotate": {
+            "title": "旋轉",
+            "description": "讓這物件圍繞其中心點旋轉。",
+            "key": "R",
+            "annotation": {
+                "line": "旋轉了一線段。",
+                "area": "旋轉了一區域。"
+            }
+        },
+        "reverse": {
+            "title": "反轉",
+            "description": "讓這線段循相反方向走。",
+            "key": "V",
+            "annotation": "反轉一線段。"
+        },
+        "split": {
+            "title": "分割",
+            "description": "在這一點分割成兩條線段。",
+            "key": "X",
+            "annotation": "分割一路徑。"
+        }
+    },
+    "nothing_to_undo": "沒有動作可以撤銷。",
+    "nothing_to_redo": "沒有動作可以重做。",
+    "just_edited": "你剛剛編輯了OpenStreetMap！",
+    "browser_notice": "這編輯器支援Firefox、Chrome、Safari、Opera及Internet Explorer 9或以上。請先把你的瀏覽器升級或使用Potlatch 2來編輯地圖。",
+    "view_on_osm": "於OSM上顯示",
+    "zoom_in_edit": "放大地圖以開始編輯",
+    "logout": "登出",
+    "report_a_bug": "報導錯誤",
+    "commit": {
+        "title": "儲存修改",
+        "description_placeholder": "簡要描述你的貢獻",
+        "upload_explanation": "你以 {user} 具名的修改將會在所有使用OpenStreetMap數據的地圖上看得見。",
+        "save": "儲存",
+        "cancel": "取消",
+        "warnings": "警告",
+        "modified": "已修改",
+        "deleted": "已刪除",
+        "created": "已創建"
+    },
+    "contributors": {
+        "list": "正在觀看 {users} 的貢獻",
+        "truncated_list": "正在觀看 {users} 和另外 {count} 個用戶的貢獻"
+    },
+    "geocoder": {
+        "title": "尋找一地方",
+        "placeholder": "尋找一地方",
+        "no_results": "找不到名為 '{name}' 的地方"
+    },
+    "geolocate": {
+        "title": "顯示我的位置"
+    },
+    "inspector": {
+        "no_documentation_combination": "這個標籤組合沒有可用的文檔",
+        "no_documentation_key": "這個鍵值沒有可用的文檔",
+        "show_more": "顯示更多",
+        "new_tag": "新的標籤",
+        "edit_tags": "編輯標籤",
+        "okay": "確定",
+        "view_on_osm": "在OSM上顯示",
+        "name": "名稱",
+        "editing": "編輯詳細資料",
+        "additional": "附加的標籤",
+        "choose": "選擇功能種類",
+        "results": "{search} 的 {n} 個結果",
+        "reference": "查看OpenStreetMap Wiki →",
+        "back_tooltip": "修改功能種類"
+    },
+    "background": {
+        "title": "背景",
+        "description": "背景設定",
+        "percent_brightness": "{opacity}%的光度",
+        "fix_misalignment": "校準",
+        "reset": "重設"
+    },
+    "restore": {
+        "description": "上一次你仍有未儲存的修改，你想恢復這些修改嗎﹖",
+        "restore": "恢復",
+        "reset": "重設"
+    },
+    "save": {
+        "title": "儲存",
+        "help": "儲存修改至OpenStreetMap，使其他用戶均可觀看你的修改。",
+        "no_changes": "沒有修改需要儲存。",
+        "error": "儲存時發生錯誤",
+        "uploading": "正在上傳修改至OpenStreetMap。",
+        "unsaved_changes": "你有未儲存的修改"
+    },
+    "splash": {
+        "welcome": "歡迎使用iD OpenStreetMap編輯器",
+        "text": "這是開發版本 {version}。欲知詳情請瀏覽 {website} 及於 {github} 報告錯誤。"
+    },
+    "source_switch": {
+        "live": "實況模式",
+        "dev": "開發模式"
+    },
+    "tag_reference": {
+        "description": "描述",
+        "on_wiki": "於wiki.osm.org上的 {tag}",
+        "used_with": "可與 {type} 使用"
+    },
+    "validations": {
+        "untagged_point": "未標記的點—不在任何線段或區域內",
+        "untagged_line": "未標記的線段",
+        "untagged_area": "未標記的區域",
+        "many_deletions": "你正在刪除 {n} 個物件。這樣會從openstreetmap.org的地圖上刪除，你是否確定需要這樣做？",
+        "tag_suggests_area": "{tag} 標籤所建議的線段應為區域，但這個不是一區域",
+        "deprecated_tags": "已棄用的標籤︰{tags}"
+    },
+    "zoom": {
+        "in": "放大",
+        "out": "縮小"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "通道"
+            },
+            "address": {
+                "label": "地址",
+                "placeholders": {
+                    "housename": "屋宇名稱",
+                    "number": "123",
+                    "street": "街道",
+                    "city": "城市"
+                }
+            },
+            "aeroway": {
+                "label": "種類"
+            },
+            "amenity": {
+                "label": "種類"
+            },
+            "atm": {
+                "label": "自動取款機"
+            },
+            "bicycle_parking": {
+                "label": "種類"
+            },
+            "building": {
+                "label": "建築物"
+            },
+            "building_area": {
+                "label": "建築物"
+            },
+            "building_yes": {
+                "label": "建築物"
+            },
+            "capacity": {
+                "label": "容量"
+            },
+            "collection_times": {
+                "label": "收集時間"
+            },
+            "construction": {
+                "label": "種類"
+            },
+            "crossing": {
+                "label": "種類"
+            },
+            "cuisine": {
+                "label": "美饌"
+            },
+            "denomination": {
+                "label": "面值"
+            },
+            "denotation": {
+                "label": "表示"
+            },
+            "elevation": {
+                "label": "高度"
+            },
+            "emergency": {
+                "label": "緊急"
+            },
+            "entrance": {
+                "label": "種類"
+            },
+            "fax": {
+                "label": "傳真"
+            },
+            "fee": {
+                "label": "費用"
+            },
+            "highway": {
+                "label": "種類"
+            },
+            "historic": {
+                "label": "種類"
+            },
+            "internet_access": {
+                "label": "網際網絡連接",
+                "options": {
+                    "wlan": "無線網絡",
+                    "wired": "有線網絡",
+                    "terminal": "終端"
+                }
+            },
+            "landuse": {
+                "label": "種類"
+            },
+            "layer": {
+                "label": "層"
+            },
+            "leisure": {
+                "label": "種類"
+            },
+            "levels": {
+                "label": "級別"
+            },
+            "man_made": {
+                "label": "種類"
+            },
+            "maxspeed": {
+                "label": "速度限制"
+            },
+            "natural": {
+                "label": "自然"
+            },
+            "network": {
+                "label": "網絡"
+            },
+            "note": {
+                "label": "備註"
+            },
+            "office": {
+                "label": "種類"
+            },
+            "oneway": {
+                "label": "單程"
+            },
+            "opening_hours": {
+                "label": "小時"
+            },
+            "operator": {
+                "label": "營運商"
+            },
+            "phone": {
+                "label": "電話"
+            },
+            "place": {
+                "label": "種類"
+            },
+            "railway": {
+                "label": "種類"
+            },
+            "religion": {
+                "label": "宗教",
+                "options": {
+                    "christian": "基督教徒",
+                    "muslim": "穆斯林",
+                    "buddhist": "佛教徒",
+                    "jewish": "猶太教徒",
+                    "hindu": "印度教徒",
+                    "shinto": "神道教徒",
+                    "taoist": "道教徒"
+                }
+            },
+            "roadtype": {
+                "label": "特徵",
+                "options": {
+                    "bridge": "橋樑",
+                    "tunnel": "隧道",
+                    "embankment": "堤岸",
+                    "cutting": "切土"
+                }
+            },
+            "service": {
+                "label": "種類"
+            },
+            "shelter": {
+                "label": "遮雨棚／涼亭"
+            },
+            "shop": {
+                "label": "種類"
+            },
+            "source": {
+                "label": "來源"
+            },
+            "sport": {
+                "label": "運動"
+            },
+            "surface": {
+                "label": "表面"
+            },
+            "tourism": {
+                "label": "種類"
+            },
+            "water": {
+                "label": "種類"
+            },
+            "waterway": {
+                "label": "種類"
+            },
+            "website": {
+                "label": "網站"
+            },
+            "wetland": {
+                "label": "種類"
+            },
+            "wikipedia": {
+                "label": "維基百科"
+            },
+            "wood": {
+                "label": "種類"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "機場相關設施"
+            },
+            "aeroway/aerodrome": {
+                "name": "機場"
+            },
+            "aeroway/helipad": {
+                "name": "直昇機場"
+            },
+            "amenity": {
+                "name": "便利設施"
+            },
+            "amenity/bank": {
+                "name": "銀行"
+            },
+            "amenity/bar": {
+                "name": "酒吧"
+            },
+            "amenity/bench": {
+                "name": "長凳"
+            },
+            "amenity/bicycle_parking": {
+                "name": "腳踏車停泊處"
+            },
+            "amenity/bicycle_rental": {
+                "name": "腳踏車租賃"
+            },
+            "amenity/cafe": {
+                "name": "咖啡廳"
+            },
+            "amenity/cinema": {
+                "name": "戲院"
+            },
+            "amenity/fast_food": {
+                "name": "快餐店"
+            },
+            "amenity/fire_station": {
+                "name": "消防局"
+            },
+            "amenity/fuel": {
+                "name": "加油站"
+            },
+            "amenity/grave_yard": {
+                "name": "墓地"
+            },
+            "amenity/hospital": {
+                "name": "醫院"
+            },
+            "amenity/library": {
+                "name": "圖書館"
+            },
+            "amenity/parking": {
+                "name": "停車場"
+            },
+            "amenity/pharmacy": {
+                "name": "藥房"
+            },
+            "amenity/place_of_worship": {
+                "name": "禮拜地方"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "教堂"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "猶太教堂"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "清真寺"
+            },
+            "amenity/police": {
+                "name": "警察局"
+            },
+            "amenity/post_box": {
+                "name": "郵箱"
+            },
+            "amenity/post_office": {
+                "name": "郵政局"
+            },
+            "amenity/pub": {
+                "name": "酒館"
+            },
+            "amenity/restaurant": {
+                "name": "餐廳"
+            },
+            "amenity/school": {
+                "name": "學校"
+            },
+            "amenity/telephone": {
+                "name": "電話"
+            },
+            "amenity/toilets": {
+                "name": "廁所"
+            },
+            "amenity/townhall": {
+                "name": "市政廳"
+            },
+            "amenity/university": {
+                "name": "大學"
+            },
+            "building": {
+                "name": "建築物"
+            },
+            "entrance": {
+                "name": "入口"
+            },
+            "highway": {
+                "name": "公路"
+            },
+            "highway/bus_stop": {
+                "name": "公共汽車站"
+            },
+            "highway/crossing": {
+                "name": "路口"
+            },
+            "highway/cycleway": {
+                "name": "自行車道"
+            },
+            "highway/footway": {
+                "name": "小徑"
+            },
+            "highway/motorway": {
+                "name": "高速公路"
+            },
+            "highway/path": {
+                "name": "路徑"
+            },
+            "highway/primary": {
+                "name": "主要道路"
+            },
+            "highway/residential": {
+                "name": "住宅區道路"
+            },
+            "highway/secondary": {
+                "name": "次要道路"
+            },
+            "highway/service": {
+                "name": "輔助道路"
+            },
+            "highway/steps": {
+                "name": "樓梯"
+            },
+            "highway/tertiary": {
+                "name": "三級道路"
+            },
+            "highway/track": {
+                "name": "軌道"
+            },
+            "highway/traffic_signals": {
+                "name": "交通訊號"
+            },
+            "highway/trunk": {
+                "name": "幹道"
+            },
+            "highway/turning_circle": {
+                "name": "回轉圈"
+            },
+            "highway/unclassified": {
+                "name": "未分類的道路"
+            },
+            "historic": {
+                "name": "歷史遺址"
+            },
+            "historic/monument": {
+                "name": "古蹟"
+            },
+            "landuse": {
+                "name": "土地用途"
+            },
+            "landuse/allotments": {
+                "name": "社區花園"
+            },
+            "landuse/basin": {
+                "name": "水池"
+            },
+            "landuse/cemetery": {
+                "name": "墳場"
+            },
+            "landuse/commercial": {
+                "name": "商業區"
+            },
+            "landuse/construction": {
+                "name": "施工"
+            },
+            "landuse/farm": {
+                "name": "農場"
+            },
+            "landuse/farmyard": {
+                "name": "農莊"
+            },
+            "landuse/forest": {
+                "name": "森林"
+            },
+            "landuse/grass": {
+                "name": "草地"
+            },
+            "landuse/industrial": {
+                "name": "工業區"
+            },
+            "landuse/meadow": {
+                "name": "牧場"
+            },
+            "landuse/orchard": {
+                "name": "果園"
+            },
+            "landuse/quarry": {
+                "name": "礦場"
+            },
+            "landuse/residential": {
+                "name": "住宅區"
+            },
+            "landuse/vineyard": {
+                "name": "酒莊"
+            },
+            "leisure": {
+                "name": "優閒設施"
+            },
+            "leisure/golf_course": {
+                "name": "高爾夫球場"
+            },
+            "leisure/park": {
+                "name": "公園"
+            },
+            "leisure/pitch": {
+                "name": "運動場所"
+            },
+            "leisure/pitch/american_football": {
+                "name": "美式足球場"
+            },
+            "leisure/pitch/baseball": {
+                "name": "棒球場"
+            },
+            "leisure/pitch/basketball": {
+                "name": "籃球場"
+            },
+            "leisure/pitch/soccer": {
+                "name": "足球場"
+            },
+            "leisure/pitch/tennis": {
+                "name": "網球場"
+            },
+            "leisure/playground": {
+                "name": "遊樂場"
+            },
+            "man_made": {
+                "name": "人造"
+            },
+            "man_made/lighthouse": {
+                "name": "燈塔"
+            },
+            "man_made/pier": {
+                "name": "碼頭"
+            },
+            "man_made/water_tower": {
+                "name": "水塔"
+            },
+            "natural": {
+                "name": "自然"
+            },
+            "natural/bay": {
+                "name": "海灣"
+            },
+            "natural/beach": {
+                "name": "沙灘"
+            },
+            "natural/cliff": {
+                "name": "懸崖"
+            },
+            "natural/coastline": {
+                "name": "海岸線"
+            },
+            "natural/glacier": {
+                "name": "冰川"
+            },
+            "natural/grassland": {
+                "name": "草原"
+            },
+            "natural/heath": {
+                "name": "荒地"
+            },
+            "natural/peak": {
+                "name": "山頂"
+            },
+            "natural/scrub": {
+                "name": "灌木叢"
+            },
+            "natural/spring": {
+                "name": "溫泉"
+            },
+            "natural/tree": {
+                "name": "樹"
+            },
+            "natural/water": {
+                "name": "水"
+            },
+            "natural/water/lake": {
+                "name": "湖泊"
+            },
+            "natural/water/pond": {
+                "name": "池塘"
+            },
+            "natural/water/reservoir": {
+                "name": "水塘"
+            },
+            "natural/wetland": {
+                "name": "濕地"
+            },
+            "natural/wood": {
+                "name": "樹林"
+            },
+            "office": {
+                "name": "辦公室"
+            },
+            "place": {
+                "name": "可歸類的地方"
+            },
+            "place/hamlet": {
+                "name": "村莊"
+            },
+            "place/island": {
+                "name": "島嶼"
+            },
+            "place/locality": {
+                "name": "未能歸類的地方"
+            },
+            "place/village": {
+                "name": "村鎮"
+            },
+            "power/sub_station": {
+                "name": "變電站"
+            },
+            "railway": {
+                "name": "火車站"
+            },
+            "railway/level_crossing": {
+                "name": "平交道"
+            },
+            "railway/rail": {
+                "name": "鐵路"
+            },
+            "railway/subway": {
+                "name": "地鐵"
+            },
+            "railway/subway_entrance": {
+                "name": "地鐵入口"
+            },
+            "shop": {
+                "name": "商店"
+            },
+            "shop/butcher": {
+                "name": "肉販"
+            },
+            "shop/supermarket": {
+                "name": "超級市場"
+            },
+            "tourism": {
+                "name": "旅遊業"
+            },
+            "tourism/alpine_hut": {
+                "name": "高山小屋"
+            },
+            "tourism/artwork": {
+                "name": "藝術品"
+            },
+            "tourism/attraction": {
+                "name": "觀光點"
+            },
+            "tourism/camp_site": {
+                "name": "營地"
+            },
+            "tourism/caravan_site": {
+                "name": "露營車停車場"
+            },
+            "tourism/chalet": {
+                "name": "木屋"
+            },
+            "tourism/guest_house": {
+                "name": "賓館"
+            },
+            "tourism/hostel": {
+                "name": "旅舍"
+            },
+            "tourism/hotel": {
+                "name": "酒店"
+            },
+            "tourism/information": {
+                "name": "資訊"
+            },
+            "tourism/motel": {
+                "name": "汽車旅館"
+            },
+            "tourism/museum": {
+                "name": "博物館"
+            },
+            "tourism/picnic_site": {
+                "name": "野餐地點"
+            },
+            "tourism/theme_park": {
+                "name": "主題公園"
+            },
+            "tourism/viewpoint": {
+                "name": "觀景點"
+            },
+            "tourism/zoo": {
+                "name": "動物園"
+            },
+            "waterway": {
+                "name": "水道"
+            },
+            "waterway/canal": {
+                "name": "運河"
+            },
+            "waterway/dam": {
+                "name": "堤壩"
+            },
+            "waterway/ditch": {
+                "name": "溝"
+            },
+            "waterway/drain": {
+                "name": "渠"
+            },
+            "waterway/river": {
+                "name": "河流"
+            },
+            "waterway/riverbank": {
+                "name": "河床"
+            },
+            "waterway/stream": {
+                "name": "溪流"
+            },
+            "waterway/weir": {
+                "name": "堤堰"
+            }
+        }
     }
 };locale.da = {
     "modes": {
@@ -650,820 +3005,6 @@ locale.zh = {
         "in": "Inzoomen",
         "out": "Uitzoomen"
     }
-};locale.en = {
-    "modes": {
-        "add_area": {
-            "title": "Area",
-            "description": "Add parks, buildings, lakes or other areas to the map.",
-            "tail": "Click on the map to start drawing an area, like a park, lake, or building."
-        },
-        "add_line": {
-            "title": "Line",
-            "description": "Add highways, streets, pedestrian paths, canals or other lines to the map.",
-            "tail": "Click on the map to start drawing a road, path, or route."
-        },
-        "add_point": {
-            "title": "Point",
-            "description": "Add restaurants, monuments, postal boxes or other points to the map.",
-            "tail": "Click on the map to add a point."
-        },
-        "browse": {
-            "title": "Browse",
-            "description": "Pan and zoom the map."
-        },
-        "draw_area": {
-            "tail": "Click to add points to your area. Click the first point to finish the area."
-        },
-        "draw_line": {
-            "tail": "Click to add more points to the line. Click on other lines to connect to them, and double-click to end the line."
-        }
-    },
-    "operations": {
-        "add": {
-            "annotation": {
-                "point": "Added a point.",
-                "vertex": "Added a node to a way."
-            }
-        },
-        "start": {
-            "annotation": {
-                "line": "Started a line.",
-                "area": "Started an area."
-            }
-        },
-        "continue": {
-            "annotation": {
-                "line": "Continued a line.",
-                "area": "Continued an area."
-            }
-        },
-        "cancel_draw": {
-            "annotation": "Canceled drawing."
-        },
-        "change_tags": {
-            "annotation": "Changed tags."
-        },
-        "circularize": {
-            "title": "Circularize",
-            "description": "Make this round.",
-            "key": "O",
-            "annotation": {
-                "line": "Made a line circular.",
-                "area": "Made an area circular."
-            }
-        },
-        "orthogonalize": {
-            "title": "Orthogonalize",
-            "description": "Square these corners.",
-            "key": "Q",
-            "annotation": {
-                "line": "Squared the corners of a line.",
-                "area": "Squared the corners of an area."
-            }
-        },
-        "delete": {
-            "title": "Delete",
-            "description": "Remove this from the map.",
-            "annotation": {
-                "point": "Deleted a point.",
-                "vertex": "Deleted a node from a way.",
-                "line": "Deleted a line.",
-                "area": "Deleted an area.",
-                "relation": "Deleted a relation.",
-                "multiple": "Deleted {n} objects."
-            }
-        },
-        "connect": {
-            "annotation": {
-                "point": "Connected a way to a point.",
-                "vertex": "Connected a way to another.",
-                "line": "Connected a way to a line.",
-                "area": "Connected a way to an area."
-            }
-        },
-        "disconnect": {
-            "title": "Disconnect",
-            "description": "Disconnect these ways from each other.",
-            "key": "D",
-            "annotation": "Disconnected ways."
-        },
-        "merge": {
-            "title": "Merge",
-            "description": "Merge these lines.",
-            "key": "C",
-            "annotation": "Merged {n} lines."
-        },
-        "move": {
-            "title": "Move",
-            "description": "Move this to a different location.",
-            "key": "M",
-            "annotation": {
-                "point": "Moved a point.",
-                "vertex": "Moved a node in a way.",
-                "line": "Moved a line.",
-                "area": "Moved an area.",
-                "multiple": "Moved multiple objects."
-            }
-        },
-        "rotate": {
-            "title": "Rotate",
-            "description": "Rotate this object around its centre point.",
-            "key": "R",
-            "annotation": {
-                "line": "Rotated a line.",
-                "area": "Rotated an area."
-            }
-        },
-        "reverse": {
-            "title": "Reverse",
-            "description": "Make this line go in the opposite direction.",
-            "key": "V",
-            "annotation": "Reversed a line."
-        },
-        "split": {
-            "title": "Split",
-            "description": "Split this into two ways at this point.",
-            "key": "X",
-            "annotation": "Split a way."
-        }
-    },
-    "nothing_to_undo": "Nothing to undo.",
-    "nothing_to_redo": "Nothing to redo.",
-    "just_edited": "You Just Edited OpenStreetMap!",
-    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
-    "view_on_osm": "View on OSM",
-    "zoom_in_edit": "zoom in to edit the map",
-    "logout": "logout",
-    "report_a_bug": "report a bug",
-    "commit": {
-        "title": "Save Changes",
-        "description_placeholder": "Brief description of your contributions",
-        "upload_explanation": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-        "save": "Save",
-        "cancel": "Cancel",
-        "warnings": "Warnings",
-        "modified": "Modified",
-        "deleted": "Deleted",
-        "created": "Created"
-    },
-    "contributors": {
-        "list": "Viewing contributions by {users}",
-        "truncated_list": "Viewing contributions by {users} and {count} others"
-    },
-    "geocoder": {
-        "title": "Find a place",
-        "placeholder": "Find a place",
-        "no_results": "Couldn't locate a place named '{name}'"
-    },
-    "geolocate": {
-        "title": "Show My Location"
-    },
-    "inspector": {
-        "no_documentation_combination": "There is no documentation available for this tag combination",
-        "no_documentation_key": "There is no documentation available for this key",
-        "new_tag": "New tag",
-        "edit_tags": "Edit tags",
-        "okay": "Okay",
-        "view_on_osm": "View on OSM",
-        "name": "Name",
-        "editing": "Edit details",
-        "additional": "Additional tags",
-        "choose": "Select feature type",
-        "results": "{n} results for {search}",
-        "reference": "View on OpenStreetMap Wiki →",
-        "back_tooltip": "Change feature type"
-    },
-    "background": {
-        "title": "Background",
-        "description": "Background settings",
-        "percent_brightness": "{opacity}% brightness",
-        "fix_misalignment": "Fix misalignment",
-        "reset": "reset"
-    },
-    "restore": {
-        "description": "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
-        "restore": "Restore",
-        "reset": "Reset"
-    },
-    "save": {
-        "title": "Save",
-        "help": "Save changes to OpenStreetMap, making them visible to other users.",
-        "no_changes": "No changes to save.",
-        "error": "An error occurred while trying to save",
-        "uploading": "Uploading changes to OpenStreetMap.",
-        "unsaved_changes": "You have unsaved changes"
-    },
-    "splash": {
-        "welcome": "Welcome to the iD OpenStreetMap editor",
-        "text": "This is development version {version}. For more information see {website} and report bugs at {github}."
-    },
-    "source_switch": {
-        "live": "live",
-        "dev": "dev"
-    },
-    "tag_reference": {
-        "description": "Description",
-        "on_wiki": "{tag} on wiki.osm.org",
-        "used_with": "used with {type}"
-    },
-    "validations": {
-        "untagged_point": "Untagged point which is not part of a line or area",
-        "untagged_line": "Untagged line",
-        "untagged_area": "Untagged area",
-        "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
-        "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
-        "deprecated_tags": "Deprecated tags: {tags}"
-    },
-    "zoom": {
-        "in": "Zoom In",
-        "out": "Zoom Out"
-    },
-    "presets": {
-        "fields": {
-            "access": {
-                "label": "Access"
-            },
-            "address": {
-                "label": "Address",
-                "placeholders": {
-                    "housename": "Housename",
-                    "number": "123",
-                    "street": "Street",
-                    "city": "City"
-                }
-            },
-            "aeroway": {
-                "label": "Type"
-            },
-            "amenity": {
-                "label": "Type"
-            },
-            "atm": {
-                "label": "ATM"
-            },
-            "bicycle_parking": {
-                "label": "Type"
-            },
-            "building": {
-                "label": "Building"
-            },
-            "building_area": {
-                "label": "Building"
-            },
-            "building_yes": {
-                "label": "Building"
-            },
-            "capacity": {
-                "label": "Capacity"
-            },
-            "collection_times": {
-                "label": "Collection Times"
-            },
-            "construction": {
-                "label": "Type"
-            },
-            "crossing": {
-                "label": "Type"
-            },
-            "cuisine": {
-                "label": "Cuisine"
-            },
-            "denomination": {
-                "label": "Denomination"
-            },
-            "denotation": {
-                "label": "Denotation"
-            },
-            "elevation": {
-                "label": "Elevation"
-            },
-            "emergency": {
-                "label": "Emergency"
-            },
-            "entrance": {
-                "label": "Type"
-            },
-            "fax": {
-                "label": "Fax"
-            },
-            "fee": {
-                "label": "Fee"
-            },
-            "highway": {
-                "label": "Type"
-            },
-            "historic": {
-                "label": "Type"
-            },
-            "internet_access": {
-                "label": "Internet Access",
-                "options": {
-                    "yes": "Yes",
-                    "no": "No",
-                    "wlan": "Wifi",
-                    "wired": "Wired",
-                    "terminal": "Terminal"
-                }
-            },
-            "landuse": {
-                "label": "Type"
-            },
-            "layer": {
-                "label": "Layer"
-            },
-            "leisure": {
-                "label": "Type"
-            },
-            "levels": {
-                "label": "Levels"
-            },
-            "man_made": {
-                "label": "Type"
-            },
-            "maxspeed": {
-                "label": "Speed Limit"
-            },
-            "natural": {
-                "label": "Natural"
-            },
-            "network": {
-                "label": "Network"
-            },
-            "note": {
-                "label": "Note"
-            },
-            "office": {
-                "label": "Type"
-            },
-            "oneway": {
-                "label": "One Way"
-            },
-            "opening_hours": {
-                "label": "Hours"
-            },
-            "operator": {
-                "label": "Operator"
-            },
-            "phone": {
-                "label": "Phone"
-            },
-            "place": {
-                "label": "Type"
-            },
-            "railway": {
-                "label": "Type"
-            },
-            "religion": {
-                "label": "Religion",
-                "options": {
-                    "christian": "Christian",
-                    "muslim": "Muslim",
-                    "buddhist": "Buddhist",
-                    "jewish": "Jewish",
-                    "hindu": "Hindu",
-                    "shinto": "Shinto",
-                    "taoist": "Taoist"
-                }
-            },
-            "roadtype": {
-                "label": "Features",
-                "options": {
-                    "bridge": "Bridge",
-                    "tunnel": "Tunnel",
-                    "embankment": "Embankment",
-                    "cutting": "Cutting"
-                }
-            },
-            "service": {
-                "label": "Type"
-            },
-            "shelter": {
-                "label": "Shelter"
-            },
-            "shop": {
-                "label": "Type"
-            },
-            "source": {
-                "label": "Source"
-            },
-            "sport": {
-                "label": "Sport"
-            },
-            "surface": {
-                "label": "Surface"
-            },
-            "tourism": {
-                "label": "Type"
-            },
-            "water": {
-                "label": "Type"
-            },
-            "waterway": {
-                "label": "Type"
-            },
-            "website": {
-                "label": "Website"
-            },
-            "wetland": {
-                "label": "Type"
-            },
-            "wikipedia": {
-                "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Type"
-            }
-        },
-        "presets": {
-            "aeroway": {
-                "name": "Aeroway"
-            },
-            "aeroway/aerodrome": {
-                "name": "Airport"
-            },
-            "aeroway/helipad": {
-                "name": "Helipad"
-            },
-            "amenity": {
-                "name": "Amenity"
-            },
-            "amenity/bank": {
-                "name": "Bank"
-            },
-            "amenity/bar": {
-                "name": "Bar"
-            },
-            "amenity/bicycle_parking": {
-                "name": "Bicycle Parking"
-            },
-            "amenity/bicycle_rental": {
-                "name": "Bicycle Rental"
-            },
-            "amenity/cafe": {
-                "name": "Cafe"
-            },
-            "amenity/cinema": {
-                "name": "Cinema"
-            },
-            "amenity/fast_food": {
-                "name": "Fast Food"
-            },
-            "amenity/fire_station": {
-                "name": "Fire Station"
-            },
-            "amenity/grave_yard": {
-                "name": "Graveyard"
-            },
-            "amenity/hospital": {
-                "name": "Hospital"
-            },
-            "amenity/library": {
-                "name": "Library"
-            },
-            "amenity/parking": {
-                "name": "Parking"
-            },
-            "amenity/pharmacy": {
-                "name": "Pharmacy"
-            },
-            "amenity/place_of_worship": {
-                "name": "Place of Worship"
-            },
-            "amenity/place_of_worship/christian": {
-                "name": "Church"
-            },
-            "amenity/place_of_worship/jewish": {
-                "name": "Synagogue"
-            },
-            "amenity/place_of_worship/muslim": {
-                "name": "Mosque"
-            },
-            "amenity/police": {
-                "name": "Police"
-            },
-            "amenity/post_box": {
-                "name": "Mailbox"
-            },
-            "amenity/post_office": {
-                "name": "Post Office"
-            },
-            "amenity/pub": {
-                "name": "Pub"
-            },
-            "amenity/restaurant": {
-                "name": "Restaurant"
-            },
-            "amenity/school": {
-                "name": "School"
-            },
-            "amenity/toilets": {
-                "name": "Toilets"
-            },
-            "amenity/townhall": {
-                "name": "Town Hall"
-            },
-            "amenity/university": {
-                "name": "University"
-            },
-            "building": {
-                "name": "Building"
-            },
-            "entrance": {
-                "name": "Entrance"
-            },
-            "highway": {
-                "name": "Highway"
-            },
-            "highway/bus_stop": {
-                "name": "Bus Stop"
-            },
-            "highway/crossing": {
-                "name": "Crossing"
-            },
-            "highway/cycleway": {
-                "name": "Cycle Path"
-            },
-            "highway/footway": {
-                "name": "Foot Path"
-            },
-            "highway/motorway": {
-                "name": "Motorway"
-            },
-            "highway/path": {
-                "name": "Path"
-            },
-            "highway/primary": {
-                "name": "Primary Road"
-            },
-            "highway/residential": {
-                "name": "Residential Road"
-            },
-            "highway/secondary": {
-                "name": "Secondary Road"
-            },
-            "highway/service": {
-                "name": "Service Road"
-            },
-            "highway/steps": {
-                "name": "Steps"
-            },
-            "highway/tertiary": {
-                "name": "Tertiary Road"
-            },
-            "highway/track": {
-                "name": "Track"
-            },
-            "highway/traffic_signals": {
-                "name": "Traffic Signals"
-            },
-            "highway/trunk": {
-                "name": "Trunk Road"
-            },
-            "highway/turning_circle": {
-                "name": "Turning Circle"
-            },
-            "highway/unclassified": {
-                "name": "Unclassified Road"
-            },
-            "historic": {
-                "name": "Historic Site"
-            },
-            "historic/monument": {
-                "name": "Monument"
-            },
-            "landuse": {
-                "name": "Landuse"
-            },
-            "landuse/allotments": {
-                "name": "Allotments"
-            },
-            "landuse/basin": {
-                "name": "Basin"
-            },
-            "landuse/cemetery": {
-                "name": "Cemetery"
-            },
-            "landuse/commercial": {
-                "name": "Commercial"
-            },
-            "landuse/construction": {
-                "name": "Construction"
-            },
-            "landuse/farm": {
-                "name": "Farm"
-            },
-            "landuse/farmyard": {
-                "name": "Farmyard"
-            },
-            "landuse/forest": {
-                "name": "Forest"
-            },
-            "landuse/grass": {
-                "name": "Grass"
-            },
-            "landuse/industrial": {
-                "name": "Industrial"
-            },
-            "landuse/meadow": {
-                "name": "Meadow"
-            },
-            "landuse/orchard": {
-                "name": "Orchard"
-            },
-            "landuse/quarry": {
-                "name": "Quarry"
-            },
-            "landuse/residential": {
-                "name": "Residential"
-            },
-            "landuse/vineyard": {
-                "name": "Vineyard"
-            },
-            "leisure": {
-                "name": "Leisure"
-            },
-            "leisure/golf_course": {
-                "name": "Golf Course"
-            },
-            "leisure/park": {
-                "name": "Park"
-            },
-            "leisure/pitch": {
-                "name": "Sport Pitch"
-            },
-            "leisure/pitch/american_football": {
-                "name": "American Football Field"
-            },
-            "leisure/pitch/baseball": {
-                "name": "Baseball Diamond"
-            },
-            "leisure/pitch/basketball": {
-                "name": "Basketball Court"
-            },
-            "leisure/pitch/soccer": {
-                "name": "Soccer Field"
-            },
-            "leisure/pitch/tennis": {
-                "name": "Tennis Court"
-            },
-            "leisure/playground": {
-                "name": "Playground"
-            },
-            "man_made": {
-                "name": "Man Made"
-            },
-            "man_made/lighthouse": {
-                "name": "Lighthouse"
-            },
-            "man_made/pier": {
-                "name": "Pier"
-            },
-            "man_made/water_tower": {
-                "name": "Water Tower"
-            },
-            "natural": {
-                "name": "Natural"
-            },
-            "natural/bay": {
-                "name": "Bay"
-            },
-            "natural/beach": {
-                "name": "Beach"
-            },
-            "natural/cliff": {
-                "name": "Cliff"
-            },
-            "natural/coastline": {
-                "name": "Coastline"
-            },
-            "natural/glacier": {
-                "name": "Glacier"
-            },
-            "natural/grassland": {
-                "name": "Grassland"
-            },
-            "natural/heath": {
-                "name": "Heath"
-            },
-            "natural/peak": {
-                "name": "Peak"
-            },
-            "natural/scrub": {
-                "name": "Scrub"
-            },
-            "natural/spring": {
-                "name": "Spring"
-            },
-            "natural/tree": {
-                "name": "Tree"
-            },
-            "natural/water": {
-                "name": "Water"
-            },
-            "natural/water/lake": {
-                "name": "Lake"
-            },
-            "natural/water/pond": {
-                "name": "Pond"
-            },
-            "natural/water/reservoir": {
-                "name": "Reservoir"
-            },
-            "natural/wetland": {
-                "name": "Wetland"
-            },
-            "natural/wood": {
-                "name": "Wood"
-            },
-            "office": {
-                "name": "Office"
-            },
-            "place": {
-                "name": "Place"
-            },
-            "place/hamlet": {
-                "name": "Hamlet"
-            },
-            "place/island": {
-                "name": "Island"
-            },
-            "place/locality": {
-                "name": "Locality"
-            },
-            "place/village": {
-                "name": "Village"
-            },
-            "power/sub_station": {
-                "name": "Substation"
-            },
-            "railway": {
-                "name": "Railway"
-            },
-            "railway/level_crossing": {
-                "name": "Level Crossing"
-            },
-            "railway/rail": {
-                "name": "Rail"
-            },
-            "railway/subway": {
-                "name": "Subway"
-            },
-            "railway/subway_entrance": {
-                "name": "Subway Entrance"
-            },
-            "shop": {
-                "name": "Shop"
-            },
-            "shop/butcher": {
-                "name": "Butcher"
-            },
-            "shop/supermarket": {
-                "name": "Supermarket"
-            },
-            "tourism": {
-                "name": "Tourism"
-            },
-            "tourism/camp_site": {
-                "name": "Camp Site"
-            },
-            "tourism/hotel": {
-                "name": "Hotel"
-            },
-            "tourism/museum": {
-                "name": "Museum"
-            },
-            "tourism/picnic_site": {
-                "name": "Picnic Site"
-            },
-            "waterway": {
-                "name": "Waterway"
-            },
-            "waterway/canal": {
-                "name": "Canal"
-            },
-            "waterway/dam": {
-                "name": "Dam"
-            },
-            "waterway/ditch": {
-                "name": "Ditch"
-            },
-            "waterway/drain": {
-                "name": "Drain"
-            },
-            "waterway/river": {
-                "name": "River"
-            },
-            "waterway/riverbank": {
-                "name": "Riverbank"
-            },
-            "waterway/stream": {
-                "name": "Stream"
-            },
-            "waterway/weir": {
-                "name": "Weir"
-            }
-        }
-    }
 };locale.fr = {
     "modes": {
         "add_area": {
@@ -1800,7 +3341,16 @@ locale.zh = {
                 "point": "Punkt verschoben.",
                 "vertex": "Stützpunkt in einen Weg veschoben.",
                 "line": "Linie verschoben.",
-                "area": "Fläche verschoben."
+                "area": "Fläche verschoben.",
+                "multiple": "Mehrere Objekte verschoben."
+            }
+        },
+        "rotate": {
+            "title": "Drehen",
+            "description": "Dieses Objekt um seinen Mittelpunkt drehen.",
+            "annotation": {
+                "line": "Linie gedreht.",
+                "area": "Fläche gedreht."
             }
         },
         "reverse": {
@@ -1850,10 +3400,16 @@ locale.zh = {
     "inspector": {
         "no_documentation_combination": "Für dieses Attribut ist keine Dokumentation verfügbar.",
         "no_documentation_key": "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
+        "show_more": "Zeige mehr",
         "new_tag": "Neues Attribut",
         "edit_tags": "Attribute bearbeiten",
         "okay": "OK",
-        "view_on_osm": "auf OpenStreetMap ansehen"
+        "view_on_osm": "auf OpenStreetMap ansehen",
+        "name": "Name",
+        "editing": "Details verändern",
+        "additional": "Weitere Merkmale",
+        "results": "{n} Resultate für {search}",
+        "reference": "In der OpenSteetMap Wiki anschauen →"
     },
     "background": {
         "title": "Hintergrund",
@@ -1898,6 +3454,321 @@ locale.zh = {
     "zoom": {
         "in": "Hineinzoomen",
         "out": "Herauszoomen"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Zugang"
+            },
+            "address": {
+                "label": "Adresse",
+                "placeholders": {
+                    "housename": "Hausname",
+                    "number": "123",
+                    "street": "Straße",
+                    "city": "Stadt"
+                }
+            },
+            "aeroway": {
+                "label": "Typ"
+            },
+            "atm": {
+                "label": "Geldautomat"
+            },
+            "building": {
+                "label": "Gebäude"
+            },
+            "capacity": {
+                "label": "Kapazität"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "internet_access": {
+                "label": "Internetzugang",
+                "options": {
+                    "wlan": "Wifi"
+                }
+            },
+            "levels": {
+                "label": "Etagen"
+            },
+            "maxspeed": {
+                "label": "Höchstgeschwindigkeit"
+            },
+            "note": {
+                "label": "Notiz"
+            },
+            "oneway": {
+                "label": "Einbahnstraße"
+            },
+            "phone": {
+                "label": "Telefon"
+            },
+            "religion": {
+                "label": "Religion"
+            },
+            "roadtype": {
+                "options": {
+                    "bridge": "Brücke",
+                    "tunnel": "Tunnel"
+                }
+            },
+            "source": {
+                "label": "Quelle"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "surface": {
+                "label": "Oberfläche"
+            },
+            "website": {
+                "label": "Webseite"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "Flughafen"
+            },
+            "aeroway/helipad": {
+                "name": "Hubschrauberlandeplatz"
+            },
+            "amenity/bank": {
+                "name": "Bank"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Bank"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Fahrradparkplatz"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Fahrradverleih"
+            },
+            "amenity/cinema": {
+                "name": "Kino"
+            },
+            "amenity/fuel": {
+                "name": "Tankstelle"
+            },
+            "amenity/grave_yard": {
+                "name": "Friedhof"
+            },
+            "amenity/hospital": {
+                "name": "Krankenhaus"
+            },
+            "amenity/library": {
+                "name": "Bibliothek"
+            },
+            "amenity/parking": {
+                "name": "Parkplatz"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Kirche"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Moschee"
+            },
+            "amenity/police": {
+                "name": "Polizei"
+            },
+            "amenity/post_box": {
+                "name": "Briefkasten"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "Schule"
+            },
+            "amenity/telephone": {
+                "name": "Telefon"
+            },
+            "amenity/toilets": {
+                "name": "Toilette"
+            },
+            "amenity/townhall": {
+                "name": "Rathaus"
+            },
+            "amenity/university": {
+                "name": "Universität"
+            },
+            "entrance": {
+                "name": "Eingang"
+            },
+            "highway/bus_stop": {
+                "name": "Bushaltestelle"
+            },
+            "highway/cycleway": {
+                "name": "Radweg"
+            },
+            "highway/footway": {
+                "name": "Fußweg"
+            },
+            "highway/path": {
+                "name": "Pfad"
+            },
+            "highway/steps": {
+                "name": "Treppen"
+            },
+            "highway/track": {
+                "name": "Feld-/Waldweg"
+            },
+            "highway/traffic_signals": {
+                "name": "Ampeln"
+            },
+            "highway/turning_circle": {
+                "name": "Wendestelle"
+            },
+            "historic/monument": {
+                "name": "Monument"
+            },
+            "landuse/forest": {
+                "name": "Wald"
+            },
+            "landuse/grass": {
+                "name": "Gras"
+            },
+            "landuse/industrial": {
+                "name": "Industrie"
+            },
+            "landuse/meadow": {
+                "name": "Weide"
+            },
+            "landuse/residential": {
+                "name": "Wohngebiet"
+            },
+            "leisure/golf_course": {
+                "name": "Golfplatz"
+            },
+            "leisure/park": {
+                "name": "Park"
+            },
+            "leisure/pitch/american_football": {
+                "name": "American Football Feld"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Basketballfeld"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Fußballplatz"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Tennisplatz"
+            },
+            "leisure/playground": {
+                "name": "Spieplatz"
+            },
+            "natural/beach": {
+                "name": "Strand"
+            },
+            "natural/cliff": {
+                "name": "Klippe"
+            },
+            "natural/coastline": {
+                "name": "Küstenlinie"
+            },
+            "natural/glacier": {
+                "name": "Gletscher"
+            },
+            "natural/scrub": {
+                "name": "Gestrübb"
+            },
+            "natural/spring": {
+                "name": "Quelle"
+            },
+            "natural/tree": {
+                "name": "Baum"
+            },
+            "natural/water": {
+                "name": "Wasser"
+            },
+            "natural/water/lake": {
+                "name": "See"
+            },
+            "natural/water/pond": {
+                "name": "Teich"
+            },
+            "natural/wood": {
+                "name": "Wald"
+            },
+            "office": {
+                "name": "Büro"
+            },
+            "place/island": {
+                "name": "Insel"
+            },
+            "place/village": {
+                "name": "Dorf"
+            },
+            "railway": {
+                "name": "Eisenbahn"
+            },
+            "railway/subway": {
+                "name": "U-Bahn"
+            },
+            "shop/butcher": {
+                "name": "Fleischer"
+            },
+            "shop/supermarket": {
+                "name": "Supermarkt"
+            },
+            "tourism": {
+                "name": "Tourismus"
+            },
+            "tourism/artwork": {
+                "name": "Kunst"
+            },
+            "tourism/attraction": {
+                "name": "Touristenattracktion"
+            },
+            "tourism/camp_site": {
+                "name": "Campingplatz"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Information"
+            },
+            "tourism/museum": {
+                "name": "Museum"
+            },
+            "tourism/picnic_site": {
+                "name": "Picknickplatz"
+            },
+            "tourism/theme_park": {
+                "name": "Themenpark"
+            },
+            "tourism/zoo": {
+                "name": "Zoo"
+            },
+            "waterway/canal": {
+                "name": "Kanal"
+            },
+            "waterway/dam": {
+                "name": "Damm"
+            },
+            "waterway/river": {
+                "name": "Fluss"
+            },
+            "waterway/stream": {
+                "name": "Bach"
+            },
+            "waterway/weir": {
+                "name": "Wehr"
+            }
+        }
     }
 };locale.it = {
     "modes": {
@@ -2010,7 +3881,17 @@ locale.zh = {
                 "point": "Mosso un punto.",
                 "vertex": "Mosso un nodo su una strada.",
                 "line": "Mossa una linea.",
-                "area": "Mossa un'area."
+                "area": "Mossa un'area.",
+                "multiple": "Spostati diversi oggetti."
+            }
+        },
+        "rotate": {
+            "title": "Ruota",
+            "description": "Ruota questo oggetto intorno al suo centro.",
+            "key": "R",
+            "annotation": {
+                "line": "Ruotata una linea.",
+                "area": "Ruotata un'area."
             }
         },
         "reverse": {
@@ -2060,10 +3941,18 @@ locale.zh = {
     "inspector": {
         "no_documentation_combination": "Non c'è documentazione per questa combinazione di tag",
         "no_documentation_key": "Non c'è documentazione per questa chiave",
+        "show_more": "Mostra di più",
         "new_tag": "Nuovo Tag",
         "edit_tags": "Modifica i tag",
         "okay": "Ok",
-        "view_on_osm": "Mostra su OSM"
+        "view_on_osm": "Mostra su OSM",
+        "name": "Nome",
+        "editing": "Modifica dettagli",
+        "additional": "Tag aggiuntivi",
+        "choose": "Seleziona il tipo di caratteristica",
+        "results": "{n} risultati per {search}",
+        "reference": "Vedi sulla Wiki di OpenStreetMap →",
+        "back_tooltip": "Cambia il tipo di caratteristica"
     },
     "background": {
         "title": "Sfondo",
@@ -2080,6 +3969,7 @@ locale.zh = {
     "save": {
         "title": "Salva",
         "help": "Salva i cambiamenti su OpenStreetMap, rendendoli visibili ad altri utenti.",
+        "no_changes": "Nessuna modifica da salvare.",
         "error": "E' accaduto un errore mentre veniva tentato il salvataggio",
         "uploading": "Caricando le modifiche su OpenStreetMap.",
         "unsaved_changes": "Hai modifiche non salvate"
@@ -2108,6 +3998,635 @@ locale.zh = {
     "zoom": {
         "in": "Zoom Maggiore",
         "out": "Zoom Minore"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Accesso"
+            },
+            "address": {
+                "label": "Indirizzo",
+                "placeholders": {
+                    "housename": "Nome della casa",
+                    "number": "123",
+                    "street": "Strada",
+                    "city": "Città"
+                }
+            },
+            "aeroway": {
+                "label": "Tipo"
+            },
+            "amenity": {
+                "label": "Tipo"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "bicycle_parking": {
+                "label": "Tipo"
+            },
+            "building": {
+                "label": "Edificio"
+            },
+            "building_area": {
+                "label": "Edificio"
+            },
+            "building_yes": {
+                "label": "Edificio"
+            },
+            "capacity": {
+                "label": "Capienza"
+            },
+            "collection_times": {
+                "label": "Orari di raccolta"
+            },
+            "construction": {
+                "label": "Tipo"
+            },
+            "crossing": {
+                "label": "Tipo"
+            },
+            "cuisine": {
+                "label": "Cucina"
+            },
+            "denomination": {
+                "label": "Confessione"
+            },
+            "denotation": {
+                "label": "Denotazione"
+            },
+            "elevation": {
+                "label": "Altitudine"
+            },
+            "emergency": {
+                "label": "Emergenza"
+            },
+            "entrance": {
+                "label": "Tipo"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "fee": {
+                "label": "Tariffa"
+            },
+            "highway": {
+                "label": "Tipo"
+            },
+            "historic": {
+                "label": "Tipo"
+            },
+            "internet_access": {
+                "label": "Accesso ad Internet",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "Via cavo",
+                    "terminal": "Terminale"
+                }
+            },
+            "landuse": {
+                "label": "Tipo"
+            },
+            "layer": {
+                "label": "Livello"
+            },
+            "leisure": {
+                "label": "Tipo"
+            },
+            "levels": {
+                "label": "Livelli"
+            },
+            "man_made": {
+                "label": "Tipo"
+            },
+            "maxspeed": {
+                "label": "Limite di velocità"
+            },
+            "natural": {
+                "label": "Naturale"
+            },
+            "network": {
+                "label": "Rete"
+            },
+            "note": {
+                "label": "Nota"
+            },
+            "office": {
+                "label": "Tipo"
+            },
+            "oneway": {
+                "label": "Senso unico"
+            },
+            "opening_hours": {
+                "label": "Ore"
+            },
+            "operator": {
+                "label": "Operatore"
+            },
+            "phone": {
+                "label": "Telefono"
+            },
+            "place": {
+                "label": "Tipo"
+            },
+            "railway": {
+                "label": "Tipo"
+            },
+            "religion": {
+                "label": "Religione",
+                "options": {
+                    "christian": "Cristiana",
+                    "muslim": "Musulmana",
+                    "buddhist": "Buddista",
+                    "jewish": "Ebraica",
+                    "hindu": "Indù",
+                    "shinto": "Shintoista",
+                    "taoist": "Taoista"
+                }
+            },
+            "roadtype": {
+                "label": "Caratteristiche",
+                "options": {
+                    "bridge": "Ponte",
+                    "tunnel": "Tunnel",
+                    "embankment": "Terrapieno",
+                    "cutting": "Scavato"
+                }
+            },
+            "service": {
+                "label": "Tipo"
+            },
+            "shelter": {
+                "label": "Riparo"
+            },
+            "shop": {
+                "label": "Tipo"
+            },
+            "source": {
+                "label": "Fonte"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "surface": {
+                "label": "Superficie"
+            },
+            "tourism": {
+                "label": "Tipo"
+            },
+            "water": {
+                "label": "Tipo"
+            },
+            "waterway": {
+                "label": "Tipo"
+            },
+            "website": {
+                "label": "Sito web"
+            },
+            "wetland": {
+                "label": "Tipo"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Tipo"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Pista aeroportuale"
+            },
+            "aeroway/aerodrome": {
+                "name": "Aeroporto"
+            },
+            "aeroway/helipad": {
+                "name": "Elisuperficie"
+            },
+            "amenity": {
+                "name": "Servizi"
+            },
+            "amenity/bank": {
+                "name": "Banca"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Panchina"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Parcheggio biciclette"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Noleggio biciclette"
+            },
+            "amenity/cafe": {
+                "name": "Caffè"
+            },
+            "amenity/cinema": {
+                "name": "Cinema"
+            },
+            "amenity/fast_food": {
+                "name": "Fast Food"
+            },
+            "amenity/fire_station": {
+                "name": "Caserma dei pompieri"
+            },
+            "amenity/fuel": {
+                "name": "Stazione di servizio"
+            },
+            "amenity/grave_yard": {
+                "name": "Cimitero"
+            },
+            "amenity/hospital": {
+                "name": "Ospedale"
+            },
+            "amenity/library": {
+                "name": "Biblioteca"
+            },
+            "amenity/parking": {
+                "name": "Parcheggio"
+            },
+            "amenity/pharmacy": {
+                "name": "Farmacia"
+            },
+            "amenity/place_of_worship": {
+                "name": "Luogo di culto"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Chiesa"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Moschea"
+            },
+            "amenity/police": {
+                "name": "Polizia"
+            },
+            "amenity/post_box": {
+                "name": "Buca delle lettere"
+            },
+            "amenity/post_office": {
+                "name": "Ufficio Postale"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Ristorante"
+            },
+            "amenity/school": {
+                "name": "Scuola"
+            },
+            "amenity/telephone": {
+                "name": "Telefono"
+            },
+            "amenity/toilets": {
+                "name": "Bagni"
+            },
+            "amenity/townhall": {
+                "name": "Municipio"
+            },
+            "amenity/university": {
+                "name": "Università"
+            },
+            "building": {
+                "name": "Edificio"
+            },
+            "entrance": {
+                "name": "Entrata"
+            },
+            "highway": {
+                "name": "Strada"
+            },
+            "highway/bus_stop": {
+                "name": "Fermata dell'autobus"
+            },
+            "highway/crossing": {
+                "name": "Attraversamento"
+            },
+            "highway/cycleway": {
+                "name": "Percorso ciclabile"
+            },
+            "highway/footway": {
+                "name": "Percorso pedonale"
+            },
+            "highway/motorway": {
+                "name": "Autostrada"
+            },
+            "highway/path": {
+                "name": "Sentiero"
+            },
+            "highway/primary": {
+                "name": "Strada di importanza nazionale"
+            },
+            "highway/residential": {
+                "name": "Strada residenziale"
+            },
+            "highway/secondary": {
+                "name": "Strada di importanza regionale"
+            },
+            "highway/service": {
+                "name": "Strada di servizio"
+            },
+            "highway/steps": {
+                "name": "Scale"
+            },
+            "highway/tertiary": {
+                "name": "Strada di importanza locale"
+            },
+            "highway/track": {
+                "name": "Strada ad uso agricolo / forestale"
+            },
+            "highway/traffic_signals": {
+                "name": "Semaforo"
+            },
+            "highway/trunk": {
+                "name": "Superstrada"
+            },
+            "highway/turning_circle": {
+                "name": "Rotatoria"
+            },
+            "highway/unclassified": {
+                "name": "Viabilità ordinaria"
+            },
+            "historic": {
+                "name": "Sito storico"
+            },
+            "historic/monument": {
+                "name": "Monumento"
+            },
+            "landuse": {
+                "name": "Uso del suolo"
+            },
+            "landuse/allotments": {
+                "name": "Orti in concessione"
+            },
+            "landuse/basin": {
+                "name": "Bacino"
+            },
+            "landuse/cemetery": {
+                "name": "Cimitero"
+            },
+            "landuse/commercial": {
+                "name": "Commerciale"
+            },
+            "landuse/construction": {
+                "name": "Costruzione"
+            },
+            "landuse/farm": {
+                "name": "Agricolo"
+            },
+            "landuse/farmyard": {
+                "name": "Fattoria"
+            },
+            "landuse/forest": {
+                "name": "Foresta"
+            },
+            "landuse/grass": {
+                "name": "Erba"
+            },
+            "landuse/industrial": {
+                "name": "Industriale"
+            },
+            "landuse/meadow": {
+                "name": "Coltivazione erbacea"
+            },
+            "landuse/orchard": {
+                "name": "Frutteto"
+            },
+            "landuse/quarry": {
+                "name": "Cava"
+            },
+            "landuse/residential": {
+                "name": "Residenziale"
+            },
+            "landuse/vineyard": {
+                "name": "Vigneto"
+            },
+            "leisure": {
+                "name": "Svago"
+            },
+            "leisure/golf_course": {
+                "name": "Campo da Golf"
+            },
+            "leisure/park": {
+                "name": "Parco"
+            },
+            "leisure/pitch": {
+                "name": "Campo da gioco"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Campo da Football Americano"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Diamante da Baseball"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Campo da basket"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Campo di calcio"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Campo da tennis"
+            },
+            "leisure/playground": {
+                "name": "Campetto"
+            },
+            "man_made": {
+                "name": "Costruzioni civili"
+            },
+            "man_made/lighthouse": {
+                "name": "Faro"
+            },
+            "man_made/pier": {
+                "name": "Molo"
+            },
+            "man_made/water_tower": {
+                "name": "Torre Idrica"
+            },
+            "natural": {
+                "name": "Naturale"
+            },
+            "natural/bay": {
+                "name": "Baia"
+            },
+            "natural/beach": {
+                "name": "Spiaggia"
+            },
+            "natural/cliff": {
+                "name": "Scogliera"
+            },
+            "natural/coastline": {
+                "name": "Linea di costa"
+            },
+            "natural/glacier": {
+                "name": "Ghiacciaio"
+            },
+            "natural/grassland": {
+                "name": "Prateria"
+            },
+            "natural/heath": {
+                "name": "Brughiera"
+            },
+            "natural/peak": {
+                "name": "Picco"
+            },
+            "natural/scrub": {
+                "name": "Macchia mediterranea"
+            },
+            "natural/spring": {
+                "name": "Sorgente"
+            },
+            "natural/tree": {
+                "name": "Albero"
+            },
+            "natural/water": {
+                "name": "Specchio d'acqua"
+            },
+            "natural/water/lake": {
+                "name": "Lago"
+            },
+            "natural/water/pond": {
+                "name": "Stagno"
+            },
+            "natural/water/reservoir": {
+                "name": "Bacino idrico"
+            },
+            "natural/wetland": {
+                "name": "Zona umida"
+            },
+            "natural/wood": {
+                "name": "Foresta"
+            },
+            "office": {
+                "name": "Uffici"
+            },
+            "place": {
+                "name": "Luogo"
+            },
+            "place/hamlet": {
+                "name": "Paese"
+            },
+            "place/island": {
+                "name": "Isola"
+            },
+            "place/locality": {
+                "name": "Località"
+            },
+            "place/village": {
+                "name": "Villaggio"
+            },
+            "power/sub_station": {
+                "name": "Sottostazione"
+            },
+            "railway": {
+                "name": "Ferrovia"
+            },
+            "railway/level_crossing": {
+                "name": "Passaggio a livello"
+            },
+            "railway/rail": {
+                "name": "Binario"
+            },
+            "railway/subway": {
+                "name": "Metropolitana"
+            },
+            "railway/subway_entrance": {
+                "name": "Entrata di metropolitana"
+            },
+            "shop": {
+                "name": "Negozio"
+            },
+            "shop/butcher": {
+                "name": "Macellaio"
+            },
+            "shop/supermarket": {
+                "name": "Supermercato"
+            },
+            "tourism": {
+                "name": "Turismo"
+            },
+            "tourism/alpine_hut": {
+                "name": "Rifugio"
+            },
+            "tourism/artwork": {
+                "name": "Opera d'arte"
+            },
+            "tourism/attraction": {
+                "name": "Attrazione turistica"
+            },
+            "tourism/camp_site": {
+                "name": "Campeggio"
+            },
+            "tourism/caravan_site": {
+                "name": "Sosta per camper"
+            },
+            "tourism/chalet": {
+                "name": "Chalet"
+            },
+            "tourism/guest_house": {
+                "name": "Affittacamere"
+            },
+            "tourism/hostel": {
+                "name": "Ostello"
+            },
+            "tourism/hotel": {
+                "name": "Albergo"
+            },
+            "tourism/information": {
+                "name": "Informazioni"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Museo"
+            },
+            "tourism/picnic_site": {
+                "name": "Area picnic"
+            },
+            "tourism/theme_park": {
+                "name": "Parco a tema"
+            },
+            "tourism/viewpoint": {
+                "name": "Punto panoramico"
+            },
+            "tourism/zoo": {
+                "name": "Zoo"
+            },
+            "waterway": {
+                "name": "Corso d'acqua"
+            },
+            "waterway/canal": {
+                "name": "Canale"
+            },
+            "waterway/dam": {
+                "name": "Diga"
+            },
+            "waterway/ditch": {
+                "name": "Fossato"
+            },
+            "waterway/drain": {
+                "name": "Canale di scolo"
+            },
+            "waterway/river": {
+                "name": "Fiume"
+            },
+            "waterway/riverbank": {
+                "name": "Argine"
+            },
+            "waterway/stream": {
+                "name": "Torrente"
+            },
+            "waterway/weir": {
+                "name": "Sbarramento"
+            }
+        }
     }
 };locale.ja = {
     "modes": {
@@ -4333,12 +6852,12 @@ locale.zh = {
             }
         },
         "rotate": {
-            "title": "Rotate",
-            "description": "Rotate this object around its centre point.",
-            "key": "R",
+            "title": "Xoay",
+            "description": "Xoay đối tượng này quanh trung tâm.",
+            "key": "X",
             "annotation": {
-                "line": "Rotated a line.",
-                "area": "Rotated an area."
+                "line": "Xoay đường kẻ.",
+                "area": "Xoay vùng."
             }
         },
         "reverse": {
@@ -4350,7 +6869,7 @@ locale.zh = {
         "split": {
             "title": "Chia cắt",
             "description": "Cắt đôi lối này tại nốt được chọn.",
-            "key": "X",
+            "key": "C",
             "annotation": "Cắt đôi một lối."
         }
     },
@@ -4388,6 +6907,7 @@ locale.zh = {
     "inspector": {
         "no_documentation_combination": "Không có tài liệu về tổ hợp thẻ này",
         "no_documentation_key": "Không có tài liệu về khóa này",
+        "show_more": "Xem thêm",
         "new_tag": "Thẻ mới",
         "edit_tags": "Sửa đổi các thẻ",
         "okay": "OK",
@@ -4466,7 +6986,7 @@ locale.zh = {
                 "label": "Loại"
             },
             "atm": {
-                "label": "ATM"
+                "label": "Máy Rút tiền"
             },
             "bicycle_parking": {
                 "label": "Kiểu"
@@ -4481,7 +7001,7 @@ locale.zh = {
                 "label": "Tòa nhà"
             },
             "capacity": {
-                "label": "Số Chỗ đỗ"
+                "label": "Số Chỗ Đậu Xe"
             },
             "collection_times": {
                 "label": "Giờ Lấy thư"
@@ -4506,6 +7026,9 @@ locale.zh = {
             },
             "emergency": {
                 "label": "Khẩn cấp"
+            },
+            "entrance": {
+                "label": "Kiểu"
             },
             "fax": {
                 "label": "Số Fax"
@@ -4550,6 +7073,9 @@ locale.zh = {
             },
             "network": {
                 "label": "Hệ thống"
+            },
+            "note": {
+                "label": "Chú thích"
             },
             "office": {
                 "label": "Kiểu"
@@ -4620,6 +7146,9 @@ locale.zh = {
             "waterway": {
                 "label": "Loại"
             },
+            "website": {
+                "label": "Trang Web"
+            },
             "wetland": {
                 "label": "Loại"
             },
@@ -4628,6 +7157,440 @@ locale.zh = {
             },
             "wood": {
                 "label": "Loại"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Hàng không"
+            },
+            "aeroway/aerodrome": {
+                "name": "Sân bay"
+            },
+            "aeroway/helipad": {
+                "name": "Sân bay Trực thăng"
+            },
+            "amenity": {
+                "name": "Tiện nghi"
+            },
+            "amenity/bank": {
+                "name": "Ngân hàng"
+            },
+            "amenity/bar": {
+                "name": "Quán rượu"
+            },
+            "amenity/bench": {
+                "name": "Ghế"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Chỗ Đậu Xe đạp"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Chỗ Mướn Xe đạp"
+            },
+            "amenity/cafe": {
+                "name": "Quán Cà phê"
+            },
+            "amenity/cinema": {
+                "name": "Rạp phim"
+            },
+            "amenity/fast_food": {
+                "name": "Nhà hàng Ăn nhanh"
+            },
+            "amenity/fire_station": {
+                "name": "Trạm Cứu hỏa"
+            },
+            "amenity/fuel": {
+                "name": "Cây xăng"
+            },
+            "amenity/grave_yard": {
+                "name": "Nghĩa địa"
+            },
+            "amenity/hospital": {
+                "name": "Bệnh viện"
+            },
+            "amenity/library": {
+                "name": "Thư viện"
+            },
+            "amenity/parking": {
+                "name": "Bãi Đậu xe"
+            },
+            "amenity/pharmacy": {
+                "name": "Nhà thuốc"
+            },
+            "amenity/place_of_worship": {
+                "name": "Nơi Thờ phụng"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Nhà thờ"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Nhà thờ Do Thái giáo"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Nhà thờ Hồi giáo"
+            },
+            "amenity/police": {
+                "name": "Đồn Cảnh sát"
+            },
+            "amenity/post_box": {
+                "name": "Hòm thư"
+            },
+            "amenity/post_office": {
+                "name": "Bưu điện"
+            },
+            "amenity/pub": {
+                "name": "Quán rượu Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Nhà hàng"
+            },
+            "amenity/school": {
+                "name": "Nhà trường"
+            },
+            "amenity/telephone": {
+                "name": "Điện thoại"
+            },
+            "amenity/toilets": {
+                "name": "Phòng Vệ sinh"
+            },
+            "amenity/townhall": {
+                "name": "Tòa thị chính Thị xã"
+            },
+            "amenity/university": {
+                "name": "Trường Đại học"
+            },
+            "building": {
+                "name": "Tòa nhà"
+            },
+            "entrance": {
+                "name": "Cửa vào"
+            },
+            "highway": {
+                "name": "Đường Giao thông"
+            },
+            "highway/bus_stop": {
+                "name": "Trạm Xe buýt"
+            },
+            "highway/crossing": {
+                "name": "Lối Băng qua Đường"
+            },
+            "highway/cycleway": {
+                "name": "Đường Xe đạp"
+            },
+            "highway/footway": {
+                "name": "Đường Đi bộ"
+            },
+            "highway/motorway": {
+                "name": "Đường Cao tốc"
+            },
+            "highway/path": {
+                "name": "Lối"
+            },
+            "highway/primary": {
+                "name": "Đường Chính"
+            },
+            "highway/residential": {
+                "name": "Ngõ Dân cư"
+            },
+            "highway/secondary": {
+                "name": "Đường Lớn"
+            },
+            "highway/service": {
+                "name": "Ngách"
+            },
+            "highway/steps": {
+                "name": "Cầu thang"
+            },
+            "highway/tertiary": {
+                "name": "Phố"
+            },
+            "highway/track": {
+                "name": "Đường mòn"
+            },
+            "highway/traffic_signals": {
+                "name": "Đèn Giao thông"
+            },
+            "highway/trunk": {
+                "name": "Xa lộ"
+            },
+            "highway/turning_circle": {
+                "name": "Cuối đường Vòng tròn"
+            },
+            "highway/unclassified": {
+                "name": "Phố"
+            },
+            "historic": {
+                "name": "Nơi Lịch sử"
+            },
+            "historic/monument": {
+                "name": "Đài tưởng niệm"
+            },
+            "landuse": {
+                "name": "Kiểu Sử dụng Đất"
+            },
+            "landuse/allotments": {
+                "name": "Khu Vườn Gia đình"
+            },
+            "landuse/basin": {
+                "name": "Lưu vực"
+            },
+            "landuse/cemetery": {
+                "name": "Nghĩa địa"
+            },
+            "landuse/commercial": {
+                "name": "Thương mại"
+            },
+            "landuse/construction": {
+                "name": "Công trường Xây dựng"
+            },
+            "landuse/farm": {
+                "name": "Trại"
+            },
+            "landuse/farmyard": {
+                "name": "Sân Trại"
+            },
+            "landuse/forest": {
+                "name": "Rừng Trồng cây"
+            },
+            "landuse/grass": {
+                "name": "Cỏ"
+            },
+            "landuse/industrial": {
+                "name": "Công nghiệp"
+            },
+            "landuse/meadow": {
+                "name": "Đồng cỏ"
+            },
+            "landuse/orchard": {
+                "name": "Vườn Cây"
+            },
+            "landuse/quarry": {
+                "name": "Mỏ Đá"
+            },
+            "landuse/residential": {
+                "name": "Dân cư"
+            },
+            "landuse/vineyard": {
+                "name": "Vườn Nho"
+            },
+            "leisure": {
+                "name": "Giải trí"
+            },
+            "leisure/golf_course": {
+                "name": "Sân Golf"
+            },
+            "leisure/park": {
+                "name": "Công viên"
+            },
+            "leisure/pitch": {
+                "name": "Sân cỏ"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Sân cỏ Bóng bầu dục Mỹ"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Sân cỏ Bóng chày"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Sân Bóng rổ"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Sân cỏ Bóng đá"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Sân Quần vợt"
+            },
+            "leisure/playground": {
+                "name": "Khu Vui chơi Trẻ em"
+            },
+            "man_made": {
+                "name": "Công trình"
+            },
+            "man_made/lighthouse": {
+                "name": "Hải đăng"
+            },
+            "man_made/pier": {
+                "name": "Cầu tàu"
+            },
+            "man_made/water_tower": {
+                "name": "Tháp nước"
+            },
+            "natural": {
+                "name": "Thiên nhiên"
+            },
+            "natural/bay": {
+                "name": "Vịnh"
+            },
+            "natural/beach": {
+                "name": "Bãi biển"
+            },
+            "natural/cliff": {
+                "name": "Vách đá"
+            },
+            "natural/coastline": {
+                "name": "Bờ biển"
+            },
+            "natural/glacier": {
+                "name": "Sông băng"
+            },
+            "natural/grassland": {
+                "name": "Đồng cỏ"
+            },
+            "natural/heath": {
+                "name": "Bãi hoang"
+            },
+            "natural/peak": {
+                "name": "Đỉnh núi"
+            },
+            "natural/scrub": {
+                "name": "Đất Bụi rậm"
+            },
+            "natural/spring": {
+                "name": "Suối"
+            },
+            "natural/tree": {
+                "name": "Cây"
+            },
+            "natural/water": {
+                "name": "Nước"
+            },
+            "natural/water/lake": {
+                "name": "Hồ"
+            },
+            "natural/water/pond": {
+                "name": "Ao nước"
+            },
+            "natural/water/reservoir": {
+                "name": "Bể nước"
+            },
+            "natural/wetland": {
+                "name": "Đầm lầy"
+            },
+            "natural/wood": {
+                "name": "Rừng"
+            },
+            "office": {
+                "name": "Văn phòng"
+            },
+            "place": {
+                "name": "Địa phương"
+            },
+            "place/hamlet": {
+                "name": "Xóm"
+            },
+            "place/island": {
+                "name": "Đảo"
+            },
+            "place/locality": {
+                "name": "Địa phương"
+            },
+            "place/village": {
+                "name": "Làng"
+            },
+            "power/sub_station": {
+                "name": "Trạm Điện Phụ"
+            },
+            "railway": {
+                "name": "Đường sắt"
+            },
+            "railway/level_crossing": {
+                "name": "Giao lộ Đường sắt"
+            },
+            "railway/rail": {
+                "name": "Đường sắt"
+            },
+            "railway/subway": {
+                "name": "Đường Tàu điện ngầm"
+            },
+            "railway/subway_entrance": {
+                "name": "Cửa vào Nhà ga Tàu điện ngầm"
+            },
+            "shop": {
+                "name": "Tiệm"
+            },
+            "shop/butcher": {
+                "name": "Tiệm Thịt"
+            },
+            "shop/supermarket": {
+                "name": "Siêu thị"
+            },
+            "tourism": {
+                "name": "Du lịch"
+            },
+            "tourism/alpine_hut": {
+                "name": "Túp lều trên Núi"
+            },
+            "tourism/artwork": {
+                "name": "Nghệ phẩm"
+            },
+            "tourism/attraction": {
+                "name": "Điểm Thu hút Du lịch"
+            },
+            "tourism/camp_site": {
+                "name": "Nơi Cắm trại"
+            },
+            "tourism/caravan_site": {
+                "name": "Bãi Đậu Nhà lưu động"
+            },
+            "tourism/chalet": {
+                "name": "Nhà nghỉ Riêng biệt"
+            },
+            "tourism/guest_house": {
+                "name": "Nhà khách"
+            },
+            "tourism/hostel": {
+                "name": "Nhà trọ"
+            },
+            "tourism/hotel": {
+                "name": "Khách sạn"
+            },
+            "tourism/information": {
+                "name": "Thông tin"
+            },
+            "tourism/motel": {
+                "name": "Khách sạn Dọc đường"
+            },
+            "tourism/museum": {
+                "name": "Bảo tàng"
+            },
+            "tourism/picnic_site": {
+                "name": "Nơi Ăn Ngoài trời"
+            },
+            "tourism/theme_park": {
+                "name": "Công viên Chủ đề"
+            },
+            "tourism/viewpoint": {
+                "name": "Điểm Ngắm cảnh"
+            },
+            "tourism/zoo": {
+                "name": "Vườn thú"
+            },
+            "waterway": {
+                "name": "Đường sông"
+            },
+            "waterway/canal": {
+                "name": "Kênh đào"
+            },
+            "waterway/dam": {
+                "name": "Đập nước"
+            },
+            "waterway/ditch": {
+                "name": "Mương"
+            },
+            "waterway/drain": {
+                "name": "Cống"
+            },
+            "waterway/river": {
+                "name": "Sông"
+            },
+            "waterway/riverbank": {
+                "name": "Bờ sông"
+            },
+            "waterway/stream": {
+                "name": "Dòng suối"
+            },
+            "waterway/weir": {
+                "name": "Đập Tràn"
             }
         }
     }
