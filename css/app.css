@@ -839,7 +839,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* preset form basics */
 
-.preset-section.inspector-inner {
+.preset-field.inspector-inner {
     padding-bottom: 0;
 }
 
@@ -863,7 +863,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body .name h4,
-.preset-section h4[for*="input-"] {
+.preset-field h4[for*="input-"] {
     border: 1px solid #cfcfcf;
     padding: 5px 10px;
     background: #f6f6f6;
@@ -875,21 +875,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     z-index: 2;
 }
 
-.preset-section h4 + input,
+.preset-field h4 + input,
 h4 + .input-wrap-position input,
 h4 + .preset-input input:first-child {
     padding-top: 35px;
     height: 60px;
 }
 
-.preset-section h4 + textarea {
+.preset-field h4 + textarea {
     padding-top: 35px;
     height: 100px;
 }
 
-.preset-section h4[for="input-building:levels"],
-.preset-section h4[for="input-ele"],
-.preset-section.checkselect h4 {
+.preset-field h4[for="input-building:levels"],
+.preset-field h4[for="input-ele"],
+.preset-field.checkselect h4 {
     right: 50%;}
 
 /* adding additional preset fields */
@@ -1025,25 +1025,25 @@ input[type=number] {
 
 /* Preset form address */
 
-.preset-section .addr-housename {
+.preset-field .addr-housename {
     border-bottom: none;
     border-radius: 4px 4px 0 0;
 }
 
-.preset-section .addr-number {
+.preset-field .addr-number {
     width: 20%;
     border-right: none;
     border-bottom: none;
     border-radius: 0;
 }
 
-.preset-section .addr-street {
+.preset-field .addr-street {
     width: 80%;
     border-radius: 0;
     border-bottom: none;
 }
 
-.preset-section .addr-city {
+.preset-field .addr-city {
     border-radius: 0 0 4px 4px;
 }
 

@@ -78,12 +78,14 @@ iD.ui.preset = function(context) {
     }
 
     function draw(selection, fields) {
-        var sections = selection.selectAll('div.preset-section')
+        var sections = selection.selectAll('div.preset-field')
             .data(fields, formKey)
             .enter()
             .append('div')
             .style('opacity', 0)
-            .attr('class', 'preset-section fillL inspector-inner col12');
+            .attr('class', function(field) {
+                return 'preset-field preset-field-' + field.id + ' fillL inspector-inner col12';
+            });
 
         sections.append('h4')
             .attr('for', function(d) { return 'input-' + d.key; })
