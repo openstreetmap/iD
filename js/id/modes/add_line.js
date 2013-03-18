@@ -4,7 +4,7 @@ iD.modes.AddLine = function(context) {
         button: 'line',
         title: t('modes.add_line.title'),
         description: t('modes.add_line.description'),
-        key: '3'
+        key: '2'
     };
 
     var behavior = iD.behavior.AddWay(context)
