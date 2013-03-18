@@ -1,6 +1,24 @@
 iD.ui.Inspector = function(context, entity) {
-    var event = d3.dispatch('changeTags', 'close', 'change'),
-        tagEditor;
+    var tagEditor;
+
+    function changeTags(tags) {
+        if (!_.isEqual(entity.tags, tags)) {
+            context.perform(
+                iD.actions.ChangeTags(entity.id, tags),
+                t('operations.change_tags.annotation'));
+        }
+    }
+
+    function browse() {
+        context.enter(iD.modes.Browse(context));
+    }
+
+    function update() {
+        entity = context.entity(entity.id);
+        if (entity) {
+            tagEditor.tags(entity.tags);
+        }
+    }
 
     function inspector(selection) {
         selection
@@ -24,9 +42,7 @@ iD.ui.Inspector = function(context, entity) {
             .classed('pane', true);
 
         var presetGrid = iD.ui.PresetGrid(context, entity)
-            .on('close', function() {
-                event.close();
-            })
+            .on('close', browse)
             .on('choose', function(preset) {
                 panewrap
                     .transition()
@@ -37,12 +53,8 @@ iD.ui.Inspector = function(context, entity) {
 
         tagEditor = iD.ui.TagEditor(context, entity)
             .tags(entity.tags)
-            .on('changeTags', function(tags) {
-                event.changeTags(entity, tags);
-            })
-            .on('close', function() {
-                event.close(entity);
-            })
+            .on('changeTags', changeTags)
+            .on('close', browse)
             .on('choose', function() {
                 panewrap
                     .transition()
@@ -60,6 +72,23 @@ iD.ui.Inspector = function(context, entity) {
             panewrap.style('right', '-0%');
             tagLayer.call(tagEditor);
         }
+
+        if (d3.event) {
+            // Pan the map if the clicked feature intersects with the position
+            // of the inspector
+            var inspectorSize = selection.size(),
+                mapSize = context.map().size(),
+                offset = 50,
+                shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
+                center = (mapSize[0] / 2) + shiftLeft + offset;
+
+            if (shiftLeft > 0 && inspectorSize[1] > d3.event.clientY) {
+                context.map().centerEase(context.projection.invert([center, mapSize[1]/2]));
+            }
+        }
+
+        context.history()
+            .on('change.inspector', update);
     }
 
     inspector.close = function(selection) {
@@ -74,12 +103,10 @@ iD.ui.Inspector = function(context, entity) {
         // Firefox incorrectly implements blur, so typeahead elements
         // are not correctly removed. Remove any stragglers manually.
         d3.selectAll('div.typeahead').remove();
+
+        context.history()
+            .on('change.inspector', null);
     };
 
-    inspector.tags = function() {
-        tagEditor.tags.apply(this, arguments);
-        return inspector;
-    };
-
-    return d3.rebind(inspector, event, 'on');
+    return inspector;
 };

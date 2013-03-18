@@ -17,14 +17,6 @@ iD.modes.Select = function(context, selection, initial) {
     var wrap = context.container()
         .select('.inspector-wrap');
 
-    function changeTags(d, tags) {
-        if (!_.isEqual(singular().tags, tags)) {
-            context.perform(
-                iD.actions.ChangeTags(d.id, tags),
-                t('operations.change_tags.annotation'));
-        }
-    }
-
     function singular() {
         if (selection.length === 1) {
             return context.entity(selection[0]);
@@ -57,8 +49,6 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.enter = function() {
-        var entity = singular();
-
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
@@ -87,41 +77,20 @@ iD.modes.Select = function(context, selection, initial) {
             id: selection.join(',')
         }), true));
 
-        if (entity) {
+        if (singular()) {
             wrap.call(inspector);
-
-            if (d3.event) {
-                // Pan the map if the clicked feature intersects with the position
-                // of the inspector
-                var inspectorSize = wrap.size(),
-                    mapSize = context.map().size(),
-                    offset = 50,
-                    shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
-                    center = (mapSize[0] / 2) + shiftLeft + offset;
-
-                if (shiftLeft > 0 && inspectorSize[1] > d3.event.clientY) {
-                    context.map().centerEase(context.projection.invert([center, mapSize[1]/2]));
-                }
-            }
-
-            inspector
-                .on('changeTags', changeTags)
-                .on('close', function() { context.enter(iD.modes.Browse(context)); });
         }
 
         context.history()
-            .on('undone.select', updateInspector)
-            .on('redone.select', updateInspector);
+            .on('undone.select', update)
+            .on('redone.select', update);
 
-        function updateInspector() {
+        function update() {
             context.surface().call(radialMenu.close);
 
             if (_.any(selection, function(id) { return !context.entity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
-
-            } else if (singular()) {
-                inspector.tags(context.entity(selection[0]).tags);
             }
         }
 
