@@ -808,6 +808,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 /* Preset icon colors */
 
 .preset-icon-fill.area {
+    cursor: inherit;
     height: 45px;
     width: 45px;
     margin: auto;
