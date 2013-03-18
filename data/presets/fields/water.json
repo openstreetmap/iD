@@ -1,4 +1,5 @@
 {
     "key": "water",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

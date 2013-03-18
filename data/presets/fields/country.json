@@ -1,4 +1,5 @@
 {
     "key": "country",
-    "type": "combo"
+    "type": "combo",
+    "label": "Country"
 }

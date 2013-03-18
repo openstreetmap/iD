@@ -11,5 +11,6 @@
     ],
     "tags": {
         "amenity": "post_office"
-    }
+    },
+    "name": "Post Office"
 }

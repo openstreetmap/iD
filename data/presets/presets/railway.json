@@ -10,5 +10,6 @@
     ],
     "tags": {
         "railway": "*"
-    }
+    },
+    "name": "Railway"
 }

@@ -35,5 +35,6 @@
     ],
     "tags": {
         "waterway": "stream"
-    }
+    },
+    "name": "Stream"
 }

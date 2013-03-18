@@ -2,5 +2,6 @@
     "key": "note",
     "type": "textarea",
     "universal": true,
-    "icon": "note"
+    "icon": "note",
+    "label": "Note"
 }

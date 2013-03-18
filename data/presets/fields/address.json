@@ -7,5 +7,14 @@
         "addr:city"
     ],
     "icon": "address",
-    "universal": true
+    "universal": true,
+    "label": "Address",
+    "strings": {
+        "placeholders": {
+          "housename": "Housename",
+          "number": "123",
+          "street": "Street",
+          "city": "City"
+        }
+    }
 }

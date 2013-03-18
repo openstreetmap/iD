@@ -1,4 +1,5 @@
 {
     "key": "access",
-    "type": "combo"
+    "type": "combo",
+    "label": "Access"
 }

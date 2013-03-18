@@ -1,4 +1,5 @@
 {
     "key": "wood",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

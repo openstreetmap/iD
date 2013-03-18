@@ -8,5 +8,6 @@
         "amenity": "swimming_pool"
     },
     "icon": "swimming",
-    "searchable": false
+    "searchable": false,
+    "name": "Swimming Pool"
 }

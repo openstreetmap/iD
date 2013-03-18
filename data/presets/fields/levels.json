@@ -1,4 +1,5 @@
 {
     "key": "building:levels",
-    "type": "number"
+    "type": "number",
+    "label": "Levels"
 }

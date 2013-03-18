@@ -13,5 +13,6 @@
     "tags": {
         "amenity": "fast_food"
     },
-    "terms": []
+    "terms": [],
+    "name": "Fast Food"
 }

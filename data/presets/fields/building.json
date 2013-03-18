@@ -1,4 +1,5 @@
 {
     "key": "building",
-    "type": "combo"
+    "type": "combo",
+    "label": "Building"
 }

@@ -1,4 +1,5 @@
 {
     "key": "natural",
-    "type": "combo"
+    "type": "combo",
+    "label": "Natural"
 }

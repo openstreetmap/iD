@@ -1,4 +1,5 @@
 {
     "key": "operator",
-    "type": "text"
+    "type": "text",
+    "label": "Operator"
 }

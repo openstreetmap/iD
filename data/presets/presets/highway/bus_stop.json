@@ -11,5 +11,6 @@
     "tags": {
         "highway": "bus_stop"
     },
-    "terms": []
+    "terms": [],
+    "name": "Bus Stop"
 }

@@ -6,5 +6,6 @@
     ],
     "tags": {
         "amenity": "bench"
-    }
+    },
+    "name": "Bench"
 }

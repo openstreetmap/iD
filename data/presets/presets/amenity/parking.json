@@ -13,5 +13,6 @@
     "tags": {
         "amenity": "parking"
     },
-    "terms": []
+    "terms": [],
+    "name": "Parking"
 }

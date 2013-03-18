@@ -2,5 +2,6 @@
     "key": "phone",
     "type": "tel",
     "icon": "telephone",
-    "universal": true
+    "universal": true,
+    "label": "Phone"
 }

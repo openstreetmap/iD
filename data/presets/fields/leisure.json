@@ -1,4 +1,5 @@
 {
     "key": "leisure",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

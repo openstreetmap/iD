@@ -1,4 +1,5 @@
 {
     "key": "shop",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

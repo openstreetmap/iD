@@ -1,4 +1,5 @@
 {
     "key": "historic",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

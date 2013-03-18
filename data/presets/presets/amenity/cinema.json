@@ -30,5 +30,6 @@
     ],
     "tags": {
         "amenity": "cinema"
-    }
+    },
+    "name": "Cinema"
 }

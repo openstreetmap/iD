@@ -1,4 +1,5 @@
 {
     "key": "denotation",
-    "type": "combo"
+    "type": "combo",
+    "label": "Denotation"
 }

@@ -12,5 +12,6 @@
     "tags": {
         "amenity": "bar"
     },
-    "terms": []
+    "terms": [],
+    "name": "Bar"
 }

@@ -18,5 +18,6 @@
     ],
     "tags": {
         "amenity": "townhall"
-    }
+    },
+    "name": "Town Hall"
 }

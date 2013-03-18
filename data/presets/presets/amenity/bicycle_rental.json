@@ -12,5 +12,6 @@
     ],
     "tags": {
         "amenity": "bicycle_rental"
-    }
+    },
+    "name": "Bicycle Rental"
 }

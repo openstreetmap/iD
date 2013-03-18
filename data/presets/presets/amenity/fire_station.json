@@ -13,5 +13,6 @@
     "tags": {
         "amenity": "fire_station"
     },
-    "terms": []
+    "terms": [],
+    "name": "Fire Station"
 }

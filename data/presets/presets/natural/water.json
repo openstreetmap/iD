@@ -8,5 +8,6 @@
     "tags": {
         "natural": "water"
     },
-    "icon": "water"
+    "icon": "water",
+    "name": "Water"
 }

@@ -9,5 +9,6 @@
         "light",
         "stoplight",
         "traffic light"
-    ]
+    ],
+    "name": "Traffic Signals"
 }

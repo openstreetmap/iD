@@ -11,5 +11,6 @@
     ],
     "tags": {
         "amenity": "fuel"
-    }
+    },
+    "name": "Gas Station"
 }

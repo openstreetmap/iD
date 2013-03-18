@@ -1,4 +1,5 @@
 {
     "key": "atm",
-    "type": "check"
+    "type": "check",
+    "label": "ATM"
 }

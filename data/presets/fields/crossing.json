@@ -1,4 +1,5 @@
 {
     "key": "crossing",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

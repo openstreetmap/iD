@@ -12,5 +12,6 @@
     ],
     "tags": {
         "amenity": "bicycle_parking"
-    }
+    },
+    "name": "Bicycle Parking"
 }

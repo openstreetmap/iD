@@ -1,4 +1,5 @@
 {
     "key": "layer",
-    "type": "combo"
+    "type": "combo",
+    "label": "Layer"
 }

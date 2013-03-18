@@ -1,4 +1,5 @@
 {
     "key": "office",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

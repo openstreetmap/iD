@@ -1,4 +1,5 @@
 {
     "key": "amenity",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

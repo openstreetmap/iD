@@ -2,5 +2,6 @@
     "key": "source",
     "type": "text",
     "icon": "source",
-    "universal": true
+    "universal": true,
+    "label": "Source"
 }

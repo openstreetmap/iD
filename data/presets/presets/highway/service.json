@@ -14,5 +14,6 @@
     "tags": {
         "highway": "service"
     },
-    "terms": []
+    "terms": [],
+    "name": "Service Road"
 }

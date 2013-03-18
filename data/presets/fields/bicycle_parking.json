@@ -1,4 +1,5 @@
 {
     "key": "bicycle_parking",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

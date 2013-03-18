@@ -10,5 +10,6 @@
     ],
     "tags": {
         "aeroway": "*"
-    }
+    },
+    "name": "Aeroway"
 }

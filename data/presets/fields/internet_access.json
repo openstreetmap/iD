@@ -7,5 +7,15 @@
         "wlan",
         "wired",
         "terminal"
-    ]
+    ],
+    "label": "Internet Access",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "no": "No",
+            "wlan": "Wifi",
+            "wired": "Wired",
+            "terminal": "Terminal"
+        }
+    }
 }

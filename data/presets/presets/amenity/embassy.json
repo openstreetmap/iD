@@ -9,5 +9,6 @@
     "fields": [
         "country"
     ],
-    "icon": "embassy"
+    "icon": "embassy",
+    "name": "Embassy"
 }

@@ -13,5 +13,6 @@
     "tags": {
         "highway": "path"
     },
-    "terms": []
+    "terms": [],
+    "name": "Path"
 }

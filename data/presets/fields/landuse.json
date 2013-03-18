@@ -1,4 +1,5 @@
 {
     "key": "landuse",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

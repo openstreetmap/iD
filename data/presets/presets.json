@@ -11,7 +11,8 @@
         ],
         "tags": {
             "aeroway": "*"
-        }
+        },
+        "name": "Aeroway"
     },
     "aeroway/aerodrome": {
         "icon": "airport",
@@ -26,7 +27,8 @@
         ],
         "tags": {
             "aeroway": "aerodrome"
-        }
+        },
+        "name": "Airport"
     },
     "aeroway/helipad": {
         "icon": "heliport",
@@ -41,7 +43,8 @@
         ],
         "tags": {
             "aeroway": "helipad"
-        }
+        },
+        "name": "Helipad"
     },
     "amenity": {
         "fields": [
@@ -54,7 +57,8 @@
         ],
         "tags": {
             "amenity": "*"
-        }
+        },
+        "name": "Amenity"
     },
     "amenity/bank": {
         "icon": "bank",
@@ -93,7 +97,8 @@
         ],
         "tags": {
             "amenity": "bank"
-        }
+        },
+        "name": "Bank"
     },
     "amenity/bar": {
         "icon": "bar",
@@ -109,7 +114,8 @@
         "tags": {
             "amenity": "bar"
         },
-        "terms": []
+        "terms": [],
+        "name": "Bar"
     },
     "amenity/bench": {
         "geometry": [
@@ -119,7 +125,8 @@
         ],
         "tags": {
             "amenity": "bench"
-        }
+        },
+        "name": "Bench"
     },
     "amenity/bicycle_parking": {
         "icon": "bicycle",
@@ -135,7 +142,8 @@
         ],
         "tags": {
             "amenity": "bicycle_parking"
-        }
+        },
+        "name": "Bicycle Parking"
     },
     "amenity/bicycle_rental": {
         "icon": "bicycle",
@@ -151,7 +159,8 @@
         ],
         "tags": {
             "amenity": "bicycle_rental"
-        }
+        },
+        "name": "Bicycle Rental"
     },
     "amenity/cafe": {
         "icon": "cafe",
@@ -173,7 +182,8 @@
         ],
         "tags": {
             "amenity": "cafe"
-        }
+        },
+        "name": "Cafe"
     },
     "amenity/cinema": {
         "icon": "cinema",
@@ -207,7 +217,8 @@
         ],
         "tags": {
             "amenity": "cinema"
-        }
+        },
+        "name": "Cinema"
     },
     "amenity/courthouse": {
         "fields": [
@@ -222,7 +233,8 @@
         ],
         "tags": {
             "amenity": "courthouse"
-        }
+        },
+        "name": "Courthouse"
     },
     "amenity/embassy": {
         "geometry": [
@@ -235,7 +247,8 @@
         "fields": [
             "country"
         ],
-        "icon": "embassy"
+        "icon": "embassy",
+        "name": "Embassy"
     },
     "amenity/fast_food": {
         "icon": "fast-food",
@@ -252,7 +265,8 @@
         "tags": {
             "amenity": "fast_food"
         },
-        "terms": []
+        "terms": [],
+        "name": "Fast Food"
     },
     "amenity/fire_station": {
         "icon": "fire-station",
@@ -269,7 +283,8 @@
         "tags": {
             "amenity": "fire_station"
         },
-        "terms": []
+        "terms": [],
+        "name": "Fire Station"
     },
     "amenity/fuel": {
         "icon": "fuel",
@@ -284,7 +299,8 @@
         ],
         "tags": {
             "amenity": "fuel"
-        }
+        },
+        "name": "Gas Station"
     },
     "amenity/grave_yard": {
         "icon": "cemetery",
@@ -298,7 +314,8 @@
         ],
         "tags": {
             "amenity": "grave_yard"
-        }
+        },
+        "name": "Graveyard"
     },
     "amenity/hospital": {
         "icon": "hospital",
@@ -329,7 +346,8 @@
         ],
         "tags": {
             "amenity": "hospital"
-        }
+        },
+        "name": "Hospital"
     },
     "amenity/library": {
         "icon": "library",
@@ -346,7 +364,8 @@
         "tags": {
             "amenity": "library"
         },
-        "terms": []
+        "terms": [],
+        "name": "Library"
     },
     "amenity/parking": {
         "icon": "parking",
@@ -363,7 +382,8 @@
         "tags": {
             "amenity": "parking"
         },
-        "terms": []
+        "terms": [],
+        "name": "Parking"
     },
     "amenity/pharmacy": {
         "icon": "pharmacy",
@@ -380,7 +400,8 @@
         "tags": {
             "amenity": "pharmacy"
         },
-        "terms": []
+        "terms": [],
+        "name": "Pharmacy"
     },
     "amenity/place_of_worship": {
         "icon": "place-of-worship",
@@ -422,7 +443,8 @@
         ],
         "tags": {
             "amenity": "place_of_worship"
-        }
+        },
+        "name": "Place of Worship"
     },
     "amenity/place_of_worship/christian": {
         "icon": "religious-christian",
@@ -463,7 +485,8 @@
         "tags": {
             "amenity": "place_of_worship",
             "religion": "christian"
-        }
+        },
+        "name": "Church"
     },
     "amenity/place_of_worship/jewish": {
         "icon": "religious-jewish",
@@ -484,7 +507,8 @@
         "tags": {
             "amenity": "place_of_worship",
             "religion": "jewish"
-        }
+        },
+        "name": "Synagogue"
     },
     "amenity/place_of_worship/muslim": {
         "icon": "religious-muslim",
@@ -505,7 +529,8 @@
         "tags": {
             "amenity": "place_of_worship",
             "religion": "muslim"
-        }
+        },
+        "name": "Mosque"
     },
     "amenity/police": {
         "icon": "police",
@@ -551,7 +576,8 @@
         ],
         "tags": {
             "amenity": "police"
-        }
+        },
+        "name": "Police"
     },
     "amenity/post_box": {
         "icon": "post",
@@ -573,7 +599,8 @@
             "mailbox",
             "pillar box",
             "postbox"
-        ]
+        ],
+        "name": "Mailbox"
     },
     "amenity/post_office": {
         "icon": "post",
@@ -588,7 +615,8 @@
         ],
         "tags": {
             "amenity": "post_office"
-        }
+        },
+        "name": "Post Office"
     },
     "amenity/pub": {
         "icon": "beer",
@@ -604,7 +632,8 @@
         "tags": {
             "amenity": "pub"
         },
-        "terms": []
+        "terms": [],
+        "name": "Pub"
     },
     "amenity/restaurant": {
         "icon": "restaurant",
@@ -653,7 +682,8 @@
         ],
         "tags": {
             "amenity": "restaurant"
-        }
+        },
+        "name": "Restaurant"
     },
     "amenity/school": {
         "icon": "school",
@@ -687,7 +717,8 @@
         ],
         "tags": {
             "amenity": "school"
-        }
+        },
+        "name": "School"
     },
     "amenity/swimming_pool": {
         "geometry": [
@@ -699,7 +730,8 @@
             "amenity": "swimming_pool"
         },
         "icon": "swimming",
-        "searchable": false
+        "searchable": false,
+        "name": "Swimming Pool"
     },
     "amenity/telephone": {
         "geometry": [
@@ -708,7 +740,8 @@
         ],
         "tags": {
             "amenity": "telephone"
-        }
+        },
+        "name": "Telephone"
     },
     "amenity/theatre": {
         "icon": "theatre",
@@ -723,13 +756,15 @@
             "area"
         ],
         "terms": [
+            "theatre",
             "performance",
             "play",
             "musical"
         ],
         "tags": {
             "amenity": "theatre"
-        }
+        },
+        "name": "Theater"
     },
     "amenity/toilets": {
         "fields": [
@@ -744,7 +779,8 @@
         "terms": [],
         "tags": {
             "amenity": "toilets"
-        }
+        },
+        "name": "Toilets"
     },
     "amenity/townhall": {
         "icon": "town-hall",
@@ -766,7 +802,8 @@
         ],
         "tags": {
             "amenity": "townhall"
-        }
+        },
+        "name": "Town Hall"
     },
     "amenity/university": {
         "icon": "college",
@@ -782,7 +819,8 @@
         "tags": {
             "amenity": "university"
         },
-        "terms": []
+        "terms": [],
+        "name": "University"
     },
     "building": {
         "icon": "warehouse",
@@ -804,7 +842,8 @@
         "tags": {
             "building": "*"
         },
-        "terms": []
+        "terms": [],
+        "name": "Building"
     },
     "entrance": {
         "geometry": [
@@ -815,7 +854,8 @@
         },
         "fields": [
             "entrance"
-        ]
+        ],
+        "name": "Entrance"
     },
     "highway": {
         "fields": [
@@ -829,7 +869,8 @@
         ],
         "tags": {
             "highway": "*"
-        }
+        },
+        "name": "Highway"
     },
     "highway/bus_stop": {
         "icon": "bus",
@@ -844,7 +885,8 @@
         "tags": {
             "highway": "bus_stop"
         },
-        "terms": []
+        "terms": [],
+        "name": "Bus Stop"
     },
     "highway/crossing": {
         "fields": [
@@ -859,7 +901,8 @@
         "terms": [
             "crosswalk",
             "zebra crossing"
-        ]
+        ],
+        "name": "Crossing"
     },
     "highway/cycleway": {
         "icon": "highway-cycleway",
@@ -875,7 +918,8 @@
         "tags": {
             "highway": "cycleway"
         },
-        "terms": []
+        "terms": [],
+        "name": "Cycle Path"
     },
     "highway/footway": {
         "icon": "highway-footway",
@@ -915,7 +959,8 @@
         ],
         "tags": {
             "highway": "footway"
-        }
+        },
+        "name": "Foot Path"
     },
     "highway/motorway": {
         "icon": "highway-motorway",
@@ -932,7 +977,8 @@
         "tags": {
             "highway": "motorway"
         },
-        "terms": []
+        "terms": [],
+        "name": "Motorway"
     },
     "highway/path": {
         "icon": "highway-footway",
@@ -949,7 +995,8 @@
         "tags": {
             "highway": "path"
         },
-        "terms": []
+        "terms": [],
+        "name": "Path"
     },
     "highway/primary": {
         "icon": "highway-primary",
@@ -966,7 +1013,8 @@
         "tags": {
             "highway": "primary"
         },
-        "terms": []
+        "terms": [],
+        "name": "Primary Road"
     },
     "highway/residential": {
         "icon": "highway-residential",
@@ -983,7 +1031,8 @@
         "tags": {
             "highway": "residential"
         },
-        "terms": []
+        "terms": [],
+        "name": "Residential Road"
     },
     "highway/secondary": {
         "icon": "highway-secondary",
@@ -1000,7 +1049,8 @@
         "tags": {
             "highway": "secondary"
         },
-        "terms": []
+        "terms": [],
+        "name": "Secondary Road"
     },
     "highway/service": {
         "icon": "highway-service",
@@ -1018,7 +1068,8 @@
         "tags": {
             "highway": "service"
         },
-        "terms": []
+        "terms": [],
+        "name": "Service Road"
     },
     "highway/steps": {
         "fields": [
@@ -1034,7 +1085,8 @@
         "terms": [
             "stairs",
             "staircase"
-        ]
+        ],
+        "name": "Steps"
     },
     "highway/tertiary": {
         "icon": "highway-tertiary",
@@ -1051,7 +1103,8 @@
         "tags": {
             "highway": "tertiary"
         },
-        "terms": []
+        "terms": [],
+        "name": "Tertiary Road"
     },
     "highway/track": {
         "icon": "highway-track",
@@ -1068,7 +1121,8 @@
         "tags": {
             "highway": "track"
         },
-        "terms": []
+        "terms": [],
+        "name": "Track"
     },
     "highway/traffic_signals": {
         "geometry": [
@@ -1081,7 +1135,8 @@
             "light",
             "stoplight",
             "traffic light"
-        ]
+        ],
+        "name": "Traffic Signals"
     },
     "highway/trunk": {
         "icon": "highway-trunk",
@@ -1098,7 +1153,8 @@
         "tags": {
             "highway": "trunk"
         },
-        "terms": []
+        "terms": [],
+        "name": "Trunk Road"
     },
     "highway/turning_circle": {
         "icon": "circle",
@@ -1108,7 +1164,8 @@
         "tags": {
             "highway": "turning_circle"
         },
-        "terms": []
+        "terms": [],
+        "name": "Turning Circle"
     },
     "highway/unclassified": {
         "icon": "highway",
@@ -1125,7 +1182,8 @@
         "tags": {
             "highway": "unclassified"
         },
-        "terms": []
+        "terms": [],
+        "name": "Unclassified Road"
     },
     "historic": {
         "fields": [
@@ -1138,7 +1196,8 @@
         ],
         "tags": {
             "historic": "*"
-        }
+        },
+        "name": "Historic Site"
     },
     "historic/monument": {
         "icon": "monument",
@@ -1149,7 +1208,8 @@
         ],
         "tags": {
             "historic": "monument"
-        }
+        },
+        "name": "Monument"
     },
     "landuse": {
         "fields": [
@@ -1162,7 +1222,8 @@
         ],
         "tags": {
             "landuse": "*"
-        }
+        },
+        "name": "Landuse"
     },
     "landuse/allotments": {
         "geometry": [
@@ -1172,7 +1233,8 @@
         "tags": {
             "landuse": "allotments"
         },
-        "terms": []
+        "terms": [],
+        "name": "Allotments"
     },
     "landuse/basin": {
         "geometry": [
@@ -1182,7 +1244,8 @@
         "tags": {
             "landuse": "basin"
         },
-        "terms": []
+        "terms": [],
+        "name": "Basin"
     },
     "landuse/cemetery": {
         "icon": "cemetery",
@@ -1193,7 +1256,8 @@
         "tags": {
             "landuse": "cemetery"
         },
-        "terms": []
+        "terms": [],
+        "name": "Cemetery"
     },
     "landuse/commercial": {
         "geometry": [
@@ -1203,7 +1267,8 @@
         "tags": {
             "landuse": "commercial"
         },
-        "terms": []
+        "terms": [],
+        "name": "Commercial"
     },
     "landuse/construction": {
         "fields": [
@@ -1217,7 +1282,8 @@
         "tags": {
             "landuse": "construction"
         },
-        "terms": []
+        "terms": [],
+        "name": "Construction"
     },
     "landuse/farm": {
         "geometry": [
@@ -1227,7 +1293,8 @@
         "tags": {
             "landuse": "farm"
         },
-        "terms": []
+        "terms": [],
+        "name": "Farm"
     },
     "landuse/farmyard": {
         "geometry": [
@@ -1237,7 +1304,8 @@
         "tags": {
             "landuse": "farmyard"
         },
-        "terms": []
+        "terms": [],
+        "name": "Farmyard"
     },
     "landuse/forest": {
         "fields": [
@@ -1251,7 +1319,8 @@
         "tags": {
             "landuse": "forest"
         },
-        "terms": []
+        "terms": [],
+        "name": "Forest"
     },
     "landuse/grass": {
         "geometry": [
@@ -1261,7 +1330,8 @@
         "tags": {
             "landuse": "grass"
         },
-        "terms": []
+        "terms": [],
+        "name": "Grass"
     },
     "landuse/industrial": {
         "geometry": [
@@ -1271,7 +1341,8 @@
         "tags": {
             "landuse": "industrial"
         },
-        "terms": []
+        "terms": [],
+        "name": "Industrial"
     },
     "landuse/meadow": {
         "geometry": [
@@ -1281,7 +1352,8 @@
         "tags": {
             "landuse": "meadow"
         },
-        "terms": []
+        "terms": [],
+        "name": "Meadow"
     },
     "landuse/orchard": {
         "geometry": [
@@ -1291,7 +1363,8 @@
         "tags": {
             "landuse": "orchard"
         },
-        "terms": []
+        "terms": [],
+        "name": "Orchard"
     },
     "landuse/quarry": {
         "geometry": [
@@ -1301,7 +1374,8 @@
         "tags": {
             "landuse": "quarry"
         },
-        "terms": []
+        "terms": [],
+        "name": "Quarry"
     },
     "landuse/residential": {
         "geometry": [
@@ -1311,7 +1385,8 @@
         "tags": {
             "landuse": "residential"
         },
-        "terms": []
+        "terms": [],
+        "name": "Residential"
     },
     "landuse/vineyard": {
         "geometry": [
@@ -1321,7 +1396,8 @@
         "tags": {
             "landuse": "vineyard"
         },
-        "terms": []
+        "terms": [],
+        "name": "Vineyard"
     },
     "leisure": {
         "fields": [
@@ -1334,7 +1410,8 @@
         ],
         "tags": {
             "leisure": "*"
-        }
+        },
+        "name": "Leisure"
     },
     "leisure/garden": {
         "icon": "garden",
@@ -1345,7 +1422,8 @@
         ],
         "tags": {
             "leisure": "garden"
-        }
+        },
+        "name": "Garden"
     },
     "leisure/golf_course": {
         "icon": "golf",
@@ -1360,7 +1438,8 @@
         "tags": {
             "leisure": "golf_course"
         },
-        "terms": []
+        "terms": [],
+        "name": "Golf Course"
     },
     "leisure/park": {
         "icon": "park",
@@ -1392,7 +1471,8 @@
         ],
         "tags": {
             "leisure": "park"
-        }
+        },
+        "name": "Park"
     },
     "leisure/pitch": {
         "icon": "pitch",
@@ -1407,7 +1487,8 @@
         "tags": {
             "leisure": "pitch"
         },
-        "terms": []
+        "terms": [],
+        "name": "Sport Pitch"
     },
     "leisure/pitch/american_football": {
         "icon": "america-football",
@@ -1422,7 +1503,8 @@
             "leisure": "pitch",
             "sport": "american_football"
         },
-        "terms": []
+        "terms": [],
+        "name": "American Football Field"
     },
     "leisure/pitch/baseball": {
         "icon": "baseball",
@@ -1434,7 +1516,8 @@
             "leisure": "pitch",
             "sport": "baseball"
         },
-        "terms": []
+        "terms": [],
+        "name": "Baseball Diamond"
     },
     "leisure/pitch/basketball": {
         "icon": "basketball",
@@ -1449,7 +1532,8 @@
             "leisure": "pitch",
             "sport": "basketball"
         },
-        "terms": []
+        "terms": [],
+        "name": "Basketball Court"
     },
     "leisure/pitch/soccer": {
         "icon": "soccer",
@@ -1464,7 +1548,8 @@
             "leisure": "pitch",
             "sport": "soccer"
         },
-        "terms": []
+        "terms": [],
+        "name": "Soccer Field"
     },
     "leisure/pitch/tennis": {
         "icon": "tennis",
@@ -1479,7 +1564,8 @@
             "leisure": "pitch",
             "sport": "tennis"
         },
-        "terms": []
+        "terms": [],
+        "name": "Tennis Court"
     },
     "leisure/playground": {
         "geometry": [
@@ -1488,7 +1574,8 @@
         ],
         "tags": {
             "leisure": "playground"
-        }
+        },
+        "name": "Playground"
     },
     "leisure/stadium": {
         "geometry": [
@@ -1500,7 +1587,8 @@
         },
         "fields": [
             "sport"
-        ]
+        ],
+        "name": "Stadium"
     },
     "leisure/swimming_pool": {
         "geometry": [
@@ -1511,7 +1599,8 @@
         "tags": {
             "leisure": "swimming_pool"
         },
-        "icon": "swimming"
+        "icon": "swimming",
+        "name": "Swimming Pool"
     },
     "man_made": {
         "fields": [
@@ -1525,7 +1614,8 @@
         ],
         "tags": {
             "man_made": "*"
-        }
+        },
+        "name": "Man Made"
     },
     "man_made/lighthouse": {
         "geometry": [
@@ -1534,7 +1624,8 @@
         ],
         "tags": {
             "man_made": "lighthouse"
-        }
+        },
+        "name": "Lighthouse"
     },
     "man_made/pier": {
         "geometry": [
@@ -1543,7 +1634,8 @@
         ],
         "tags": {
             "man_made": "pier"
-        }
+        },
+        "name": "Pier"
     },
     "man_made/survey_point": {
         "icon": "monument",
@@ -1556,7 +1648,8 @@
         },
         "fields": [
             "ref"
-        ]
+        ],
+        "name": "Survey Point"
     },
     "man_made/water_tower": {
         "icon": "water",
@@ -1566,7 +1659,8 @@
         ],
         "tags": {
             "man_made": "water_tower"
-        }
+        },
+        "name": "Water Tower"
     },
     "natural": {
         "fields": [
@@ -1579,7 +1673,8 @@
         ],
         "tags": {
             "natural": "*"
-        }
+        },
+        "name": "Natural"
     },
     "natural/bay": {
         "geometry": [
@@ -1589,7 +1684,8 @@
         "terms": [],
         "tags": {
             "natural": "bay"
-        }
+        },
+        "name": "Bay"
     },
     "natural/beach": {
         "fields": [
@@ -1602,7 +1698,8 @@
         "terms": [],
         "tags": {
             "natural": "beach"
-        }
+        },
+        "name": "Beach"
     },
     "natural/cliff": {
         "geometry": [
@@ -1614,7 +1711,8 @@
         "terms": [],
         "tags": {
             "natural": "cliff"
-        }
+        },
+        "name": "Cliff"
     },
     "natural/coastline": {
         "geometry": [
@@ -1625,7 +1723,8 @@
         ],
         "tags": {
             "natural": "coastline"
-        }
+        },
+        "name": "Coastline"
     },
     "natural/glacier": {
         "geometry": [
@@ -1634,7 +1733,8 @@
         "terms": [],
         "tags": {
             "natural": "glacier"
-        }
+        },
+        "name": "Glacier"
     },
     "natural/grassland": {
         "geometry": [
@@ -1644,7 +1744,8 @@
         "terms": [],
         "tags": {
             "natural": "grassland"
-        }
+        },
+        "name": "Grassland"
     },
     "natural/heath": {
         "geometry": [
@@ -1653,7 +1754,8 @@
         "terms": [],
         "tags": {
             "natural": "heath"
-        }
+        },
+        "name": "Heath"
     },
     "natural/peak": {
         "icon": "triangle",
@@ -1681,7 +1783,8 @@
             "summit",
             "tip",
             "top"
-        ]
+        ],
+        "name": "Peak"
     },
     "natural/scrub": {
         "geometry": [
@@ -1690,7 +1793,8 @@
         "tags": {
             "natural": "scrub"
         },
-        "terms": []
+        "terms": [],
+        "name": "Scrub"
     },
     "natural/spring": {
         "geometry": [
@@ -1700,7 +1804,8 @@
         "terms": [],
         "tags": {
             "natural": "spring"
-        }
+        },
+        "name": "Spring"
     },
     "natural/tree": {
         "fields": [
@@ -1714,7 +1819,8 @@
         "terms": [],
         "tags": {
             "natural": "tree"
-        }
+        },
+        "name": "Tree"
     },
     "natural/water": {
         "fields": [
@@ -1726,7 +1832,8 @@
         "tags": {
             "natural": "water"
         },
-        "icon": "water"
+        "icon": "water",
+        "name": "Water"
     },
     "natural/water/lake": {
         "geometry": [
@@ -1741,7 +1848,8 @@
             "loch",
             "mere"
         ],
-        "icon": "water"
+        "icon": "water",
+        "name": "Lake"
     },
     "natural/water/pond": {
         "geometry": [
@@ -1758,7 +1866,8 @@
             "pool",
             "mere"
         ],
-        "icon": "water"
+        "icon": "water",
+        "name": "Pond"
     },
     "natural/water/reservoir": {
         "geometry": [
@@ -1768,7 +1877,8 @@
             "natural": "water",
             "water": "reservoir"
         },
-        "icon": "water"
+        "icon": "water",
+        "name": "Reservoir"
     },
     "natural/wetland": {
         "icon": "wetland",
@@ -1782,7 +1892,8 @@
         "tags": {
             "natural": "wetland"
         },
-        "terms": []
+        "terms": [],
+        "name": "Wetland"
     },
     "natural/wood": {
         "fields": [
@@ -1796,7 +1907,8 @@
         "tags": {
             "natural": "wood"
         },
-        "terms": []
+        "terms": [],
+        "name": "Wood"
     },
     "office": {
         "icon": "commercial",
@@ -1813,7 +1925,8 @@
         "tags": {
             "office": "*"
         },
-        "terms": []
+        "terms": [],
+        "name": "Office"
     },
     "place": {
         "fields": [
@@ -1826,7 +1939,8 @@
         ],
         "tags": {
             "place": "*"
-        }
+        },
+        "name": "Place"
     },
     "place/hamlet": {
         "icon": "triangle-stroked",
@@ -1836,7 +1950,8 @@
         ],
         "tags": {
             "place": "hamlet"
-        }
+        },
+        "name": "Hamlet"
     },
     "place/island": {
         "geometry": [
@@ -1855,7 +1970,8 @@
         ],
         "tags": {
             "place": "island"
-        }
+        },
+        "name": "Island"
     },
     "place/locality": {
         "icon": "marker",
@@ -1865,7 +1981,8 @@
         ],
         "tags": {
             "place": "locality"
-        }
+        },
+        "name": "Locality"
     },
     "place/village": {
         "icon": "square-stroked",
@@ -1875,7 +1992,8 @@
         ],
         "tags": {
             "place": "village"
-        }
+        },
+        "name": "Village"
     },
     "power/sub_station": {
         "fields": [
@@ -1887,7 +2005,8 @@
         ],
         "tags": {
             "power": "substation"
-        }
+        },
+        "name": "Substation"
     },
     "railway": {
         "fields": [
@@ -1901,7 +2020,8 @@
         ],
         "tags": {
             "railway": "*"
-        }
+        },
+        "name": "Railway"
     },
     "railway/level_crossing": {
         "icon": "cross",
@@ -1918,7 +2038,8 @@
             "grade crossing",
             "road through railroad",
             "train crossing"
-        ]
+        ],
+        "name": "Level Crossing"
     },
     "railway/rail": {
         "icon": "railway-rail",
@@ -1931,7 +2052,8 @@
         "fields": [
             "structure"
         ],
-        "terms": []
+        "terms": [],
+        "name": "Rail"
     },
     "railway/subway": {
         "icon": "railway-rail",
@@ -1944,7 +2066,8 @@
         "tags": {
             "railway": "subway"
         },
-        "terms": []
+        "terms": [],
+        "name": "Subway"
     },
     "railway/subway_entrance": {
         "icon": "rail-underground",
@@ -1954,7 +2077,8 @@
         "tags": {
             "railway": "subway_entrance"
         },
-        "terms": []
+        "terms": [],
+        "name": "Subway Entrance"
     },
     "shop": {
         "icon": "shop",
@@ -1971,7 +2095,8 @@
         "tags": {
             "shop": "*"
         },
-        "terms": []
+        "terms": [],
+        "name": "Shop"
     },
     "shop/butcher": {
         "icon": "slaughterhouse",
@@ -1987,7 +2112,8 @@
         "terms": [],
         "tags": {
             "shop": "butcher"
-        }
+        },
+        "name": "Butcher"
     },
     "shop/supermarket": {
         "icon": "grocery",
@@ -2025,7 +2151,8 @@
         ],
         "tags": {
             "shop": "supermarket"
-        }
+        },
+        "name": "Supermarket"
     },
     "tourism": {
         "fields": [
@@ -2038,7 +2165,8 @@
         ],
         "tags": {
             "tourism": "*"
-        }
+        },
+        "name": "Tourism"
     },
     "tourism/alpine_hut": {
         "icon": "lodging",
@@ -2053,7 +2181,8 @@
         ],
         "tags": {
             "tourism": "alpine_hut"
-        }
+        },
+        "name": "Alpine Hut"
     },
     "tourism/artwork": {
         "geometry": [
@@ -2064,7 +2193,8 @@
         ],
         "tags": {
             "tourism": "artwork"
-        }
+        },
+        "name": "Artwork"
     },
     "tourism/attraction": {
         "fields": [
@@ -2078,7 +2208,8 @@
         ],
         "tags": {
             "tourism": "attraction"
-        }
+        },
+        "name": "Tourist Attraction"
     },
     "tourism/camp_site": {
         "icon": "campsite",
@@ -2094,7 +2225,8 @@
         "terms": [],
         "tags": {
             "tourism": "camp_site"
-        }
+        },
+        "name": "Camp Site"
     },
     "tourism/caravan_site": {
         "fields": [
@@ -2108,7 +2240,8 @@
         ],
         "tags": {
             "tourism": "caravan_site"
-        }
+        },
+        "name": "RV Park"
     },
     "tourism/chalet": {
         "icon": "lodging",
@@ -2124,7 +2257,8 @@
         ],
         "tags": {
             "tourism": "chalet"
-        }
+        },
+        "name": "Chalet"
     },
     "tourism/guest_house": {
         "icon": "lodging",
@@ -2144,7 +2278,8 @@
             "B&B",
             "Bed & Breakfast",
             "Bed and Breakfast"
-        ]
+        ],
+        "name": "Guest House"
     },
     "tourism/hostel": {
         "icon": "lodging",
@@ -2160,7 +2295,8 @@
         ],
         "tags": {
             "tourism": "hostel"
-        }
+        },
+        "name": "Hostel"
     },
     "tourism/hotel": {
         "icon": "lodging",
@@ -2177,7 +2313,8 @@
         "terms": [],
         "tags": {
             "tourism": "hotel"
-        }
+        },
+        "name": "Hotel"
     },
     "tourism/information": {
         "fields": [
@@ -2191,7 +2328,8 @@
         ],
         "tags": {
             "tourism": "information"
-        }
+        },
+        "name": "Information"
     },
     "tourism/motel": {
         "icon": "lodging",
@@ -2207,7 +2345,8 @@
         ],
         "tags": {
             "tourism": "motel"
-        }
+        },
+        "name": "Motel"
     },
     "tourism/museum": {
         "icon": "museum",
@@ -2238,7 +2377,8 @@
         ],
         "tags": {
             "tourism": "museum"
-        }
+        },
+        "name": "Museum"
     },
     "tourism/picnic_site": {
         "fields": [
@@ -2254,7 +2394,8 @@
         "terms": [],
         "tags": {
             "tourism": "picnic_site"
-        }
+        },
+        "name": "Picnic Site"
     },
     "tourism/theme_park": {
         "fields": [
@@ -2269,7 +2410,8 @@
         ],
         "tags": {
             "tourism": "theme_park"
-        }
+        },
+        "name": "Theme Park"
     },
     "tourism/viewpoint": {
         "geometry": [
@@ -2278,7 +2420,8 @@
         ],
         "tags": {
             "tourism": "viewpoint"
-        }
+        },
+        "name": "Viewpoint"
     },
     "tourism/zoo": {
         "icon": "zoo",
@@ -2293,7 +2436,8 @@
         ],
         "tags": {
             "tourism": "zoo"
-        }
+        },
+        "name": "Zoo"
     },
     "waterway": {
         "fields": [
@@ -2307,7 +2451,8 @@
         ],
         "tags": {
             "waterway": "*"
-        }
+        },
+        "name": "Waterway"
     },
     "waterway/canal": {
         "icon": "waterway-river",
@@ -2316,7 +2461,8 @@
         ],
         "tags": {
             "waterway": "canal"
-        }
+        },
+        "name": "Canal"
     },
     "waterway/dam": {
         "icon": "dam",
@@ -2328,7 +2474,8 @@
         ],
         "tags": {
             "waterway": "dam"
-        }
+        },
+        "name": "Dam"
     },
     "waterway/ditch": {
         "icon": "waterway-river",
@@ -2337,7 +2484,8 @@
         ],
         "tags": {
             "waterway": "ditch"
-        }
+        },
+        "name": "Ditch"
     },
     "waterway/drain": {
         "icon": "waterway-river",
@@ -2346,7 +2494,8 @@
         ],
         "tags": {
             "waterway": "drain"
-        }
+        },
+        "name": "Drain"
     },
     "waterway/river": {
         "icon": "waterway-river",
@@ -2370,7 +2519,8 @@
         ],
         "tags": {
             "waterway": "river"
-        }
+        },
+        "name": "River"
     },
     "waterway/riverbank": {
         "icon": "water",
@@ -2379,7 +2529,8 @@
         ],
         "tags": {
             "waterway": "riverbank"
-        }
+        },
+        "name": "Riverbank"
     },
     "waterway/stream": {
         "icon": "waterway-river",
@@ -2418,7 +2569,8 @@
         ],
         "tags": {
             "waterway": "stream"
-        }
+        },
+        "name": "Stream"
     },
     "waterway/weir": {
         "icon": "dam",
@@ -2428,6 +2580,7 @@
         ],
         "tags": {
             "waterway": "weir"
-        }
+        },
+        "name": "Weir"
     }
 }

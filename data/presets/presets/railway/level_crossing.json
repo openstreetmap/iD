@@ -13,5 +13,6 @@
         "grade crossing",
         "road through railroad",
         "train crossing"
-    ]
+    ],
+    "name": "Level Crossing"
 }

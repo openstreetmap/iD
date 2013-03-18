@@ -8,5 +8,6 @@
     },
     "fields": [
         "sport"
-    ]
+    ],
+    "name": "Stadium"
 }

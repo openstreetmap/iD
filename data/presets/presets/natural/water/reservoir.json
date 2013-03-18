@@ -6,5 +6,6 @@
         "natural": "water",
         "water": "reservoir"
     },
-    "icon": "water"
+    "icon": "water",
+    "name": "Reservoir"
 }

@@ -11,5 +11,6 @@
         "leisure": "pitch",
         "sport": "tennis"
     },
-    "terms": []
+    "terms": [],
+    "name": "Tennis Court"
 }

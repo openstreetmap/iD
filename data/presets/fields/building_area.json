@@ -2,5 +2,6 @@
     "key": "building",
     "type": "check",
     "default": "yes",
-    "geometry": "area"
+    "geometry": "area",
+    "label": "Building"
 }

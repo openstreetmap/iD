@@ -1,4 +1,5 @@
 {
     "key": "fax",
-    "type": "tel"
+    "type": "tel",
+    "label": "Fax"
 }

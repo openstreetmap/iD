@@ -38,5 +38,6 @@
     ],
     "tags": {
         "amenity": "place_of_worship"
-    }
+    },
+    "name": "Place of Worship"
 }

@@ -8,5 +8,6 @@
     ],
     "tags": {
         "waterway": "dam"
-    }
+    },
+    "name": "Dam"
 }

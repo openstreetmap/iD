@@ -9,5 +9,17 @@
         "hindu",
         "shinto",
         "taoist"
-    ]
+    ],
+    "label": "Religion",
+    "strings": {
+        "options": {
+          "christian": "Christian",
+          "muslim": "Muslim",
+          "buddhist": "Buddhist",
+          "jewish": "Jewish",
+          "hindu": "Hindu",
+          "shinto": "Shinto",
+          "taoist": "Taoist"
+        }
+    }
 }

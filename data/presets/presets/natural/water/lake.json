@@ -11,5 +11,6 @@
         "loch",
         "mere"
     ],
-    "icon": "water"
+    "icon": "water",
+    "name": "Lake"
 }

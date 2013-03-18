@@ -1,4 +1,5 @@
 {
     "key": "collection_times",
-    "type": "text"
+    "type": "text",
+    "label": "Collection Times"
 }

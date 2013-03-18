@@ -1,4 +1,5 @@
 {
     "key": "highway",
-    "type": "combo"
+    "type": "combo",
+    "label": "Type"
 }

@@ -1,4 +1,5 @@
 {
     "key": "shelter",
-    "type": "check"
+    "type": "check",
+    "label": "Shelter"
 }

@@ -2,5 +2,6 @@
     "key": "ele",
     "type": "number",
     "icon": "elevation",
-    "universal": true
+    "universal": true,
+    "label": "Elevation"
 }

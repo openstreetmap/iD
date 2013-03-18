@@ -1,4 +1,5 @@
 {
     "key": "network",
-    "type": "text"
+    "type": "text",
+    "label": "Network"
 }

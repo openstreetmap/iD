@@ -11,11 +11,13 @@
         "area"
     ],
     "terms": [
+        "theatre",
         "performance",
         "play",
         "musical"
     ],
     "tags": {
         "amenity": "theatre"
-    }
+    },
+    "name": "Theater"
 }

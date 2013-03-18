@@ -1,4 +1,5 @@
 {
     "key": "surface",
-    "type": "combo"
+    "type": "combo",
+    "label": "Surface"
 }

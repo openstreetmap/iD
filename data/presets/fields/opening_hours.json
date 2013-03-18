@@ -1,4 +1,5 @@
 {
     "key": "opening_hours",
-    "type": "text"
+    "type": "text",
+    "label": "Hours"
 }

@@ -1,4 +1,5 @@
 {
     "key": "denomination",
-    "type": "combo"
+    "type": "combo",
+    "label": "Denomination"
 }

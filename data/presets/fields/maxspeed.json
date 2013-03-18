@@ -1,4 +1,5 @@
 {
     "key": "maxspeed",
-    "type": "combo"
+    "type": "combo",
+    "label": "Speed Limit"
 }

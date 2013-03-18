@@ -37,5 +37,6 @@
     "tags": {
         "amenity": "place_of_worship",
         "religion": "christian"
-    }
+    },
+    "name": "Church"
 }

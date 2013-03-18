@@ -1,4 +1,5 @@
 {
     "key": "fee",
-    "type": "check"
+    "type": "check",
+    "label": "Fee"
 }

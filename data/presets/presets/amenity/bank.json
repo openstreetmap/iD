@@ -35,5 +35,6 @@
     ],
     "tags": {
         "amenity": "bank"
-    }
+    },
+    "name": "Bank"
 }

@@ -1,7 +1,8 @@
 {
     "access": {
         "key": "access",
-        "type": "combo"
+        "type": "combo",
+        "label": "Access"
     },
     "address": {
         "type": "address",
@@ -12,101 +13,132 @@
             "addr:city"
         ],
         "icon": "address",
-        "universal": true
+        "universal": true,
+        "label": "Address",
+        "strings": {
+            "placeholders": {
+                "housename": "Housename",
+                "number": "123",
+                "street": "Street",
+                "city": "City"
+            }
+        }
     },
     "aeroway": {
         "key": "aeroway",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "amenity": {
         "key": "amenity",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "atm": {
         "key": "atm",
-        "type": "check"
+        "type": "check",
+        "label": "ATM"
     },
     "bicycle_parking": {
         "key": "bicycle_parking",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "building": {
         "key": "building",
-        "type": "combo"
+        "type": "combo",
+        "label": "Building"
     },
     "building_area": {
         "key": "building",
         "type": "check",
         "default": "yes",
-        "geometry": "area"
+        "geometry": "area",
+        "label": "Building"
     },
     "building_yes": {
         "key": "building",
         "type": "combo",
-        "default": "yes"
+        "default": "yes",
+        "label": "Building"
     },
     "capacity": {
         "key": "capacity",
-        "type": "text"
+        "type": "text",
+        "label": "Capacity"
     },
     "collection_times": {
         "key": "collection_times",
-        "type": "text"
+        "type": "text",
+        "label": "Collection Times"
     },
     "construction": {
         "key": "construction",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "country": {
         "key": "country",
-        "type": "combo"
+        "type": "combo",
+        "label": "Country"
     },
     "crossing": {
         "key": "crossing",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "cuisine": {
         "key": "cuisine",
         "type": "combo",
-        "indexed": true
+        "indexed": true,
+        "label": "Cuisine"
     },
     "denomination": {
         "key": "denomination",
-        "type": "combo"
+        "type": "combo",
+        "label": "Denomination"
     },
     "denotation": {
         "key": "denotation",
-        "type": "combo"
+        "type": "combo",
+        "label": "Denotation"
     },
     "elevation": {
         "key": "ele",
         "type": "number",
         "icon": "elevation",
-        "universal": true
+        "universal": true,
+        "label": "Elevation"
     },
     "emergency": {
         "key": "emergency",
-        "type": "check"
+        "type": "check",
+        "label": "Emergency"
     },
     "entrance": {
         "key": "entrance",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "fax": {
         "key": "fax",
-        "type": "tel"
+        "type": "tel",
+        "label": "Fax"
     },
     "fee": {
         "key": "fee",
-        "type": "check"
+        "type": "check",
+        "label": "Fee"
     },
     "highway": {
         "key": "highway",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "historic": {
         "key": "historic",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "internet_access": {
         "key": "internet_access",
@@ -117,79 +149,106 @@
             "wlan",
             "wired",
             "terminal"
-        ]
+        ],
+        "label": "Internet Access",
+        "strings": {
+            "options": {
+                "yes": "Yes",
+                "no": "No",
+                "wlan": "Wifi",
+                "wired": "Wired",
+                "terminal": "Terminal"
+            }
+        }
     },
     "landuse": {
         "key": "landuse",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "layer": {
         "key": "layer",
-        "type": "combo"
+        "type": "combo",
+        "label": "Layer"
     },
     "leisure": {
         "key": "leisure",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "levels": {
         "key": "building:levels",
-        "type": "number"
+        "type": "number",
+        "label": "Levels"
     },
     "man_made": {
         "key": "man_made",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "maxspeed": {
         "key": "maxspeed",
-        "type": "combo"
+        "type": "combo",
+        "label": "Speed Limit"
     },
     "natural": {
         "key": "natural",
-        "type": "combo"
+        "type": "combo",
+        "label": "Natural"
     },
     "network": {
         "key": "network",
-        "type": "text"
+        "type": "text",
+        "label": "Network"
     },
     "note": {
         "key": "note",
         "type": "textarea",
         "universal": true,
-        "icon": "note"
+        "icon": "note",
+        "label": "Note"
     },
     "office": {
         "key": "office",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "oneway": {
         "key": "oneway",
-        "type": "check"
+        "type": "check",
+        "label": "One Way"
     },
     "opening_hours": {
         "key": "opening_hours",
-        "type": "text"
+        "type": "text",
+        "label": "Hours"
     },
     "operator": {
         "key": "operator",
-        "type": "text"
+        "type": "text",
+        "label": "Operator"
     },
     "phone": {
         "key": "phone",
         "type": "tel",
         "icon": "telephone",
-        "universal": true
+        "universal": true,
+        "label": "Phone"
     },
     "place": {
         "key": "place",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "railway": {
         "key": "railway",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "ref": {
         "key": "ref",
-        "type": "text"
+        "type": "text",
+        "label": "Reference"
     },
     "religion": {
         "key": "religion",
@@ -202,7 +261,19 @@
             "hindu",
             "shinto",
             "taoist"
-        ]
+        ],
+        "label": "Religion",
+        "strings": {
+            "options": {
+                "christian": "Christian",
+                "muslim": "Muslim",
+                "buddhist": "Buddhist",
+                "jewish": "Jewish",
+                "hindu": "Hindu",
+                "shinto": "Shinto",
+                "taoist": "Taoist"
+            }
+        }
     },
     "service": {
         "key": "service",
@@ -213,25 +284,30 @@
             "alley",
             "drive-through",
             "emergency_access"
-        ]
+        ],
+        "label": "Type"
     },
     "shelter": {
         "key": "shelter",
-        "type": "check"
+        "type": "check",
+        "label": "Shelter"
     },
     "shop": {
         "key": "shop",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "source": {
         "key": "source",
         "type": "text",
         "icon": "source",
-        "universal": true
+        "universal": true,
+        "label": "Source"
     },
     "sport": {
         "key": "sport",
-        "type": "combo"
+        "type": "combo",
+        "label": "Sport"
     },
     "structure": {
         "type": "radio",
@@ -240,33 +316,48 @@
             "tunnel",
             "embankment",
             "cutting"
-        ]
+        ],
+        "label": "Structure",
+        "strings": {
+            "options": {
+                "bridge": "Bridge",
+                "tunnel": "Tunnel",
+                "embankment": "Embankment",
+                "cutting": "Cutting"
+            }
+        }
     },
     "surface": {
         "key": "surface",
-        "type": "combo"
+        "type": "combo",
+        "label": "Surface"
     },
     "tourism": {
         "key": "tourism",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "water": {
         "key": "water",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "waterway": {
         "key": "waterway",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "website": {
         "key": "website",
         "type": "url",
         "icon": "website",
-        "universal": true
+        "universal": true,
+        "label": "Website"
     },
     "wetland": {
         "key": "wetland",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     },
     "wheelchair": {
         "key": "wheelchair",
@@ -277,16 +368,19 @@
             "no"
         ],
         "icon": "wheelchair",
-        "universal": "true"
+        "universal": "true",
+        "label": "Wheelchair Access"
     },
     "wikipedia": {
         "key": "wikipedia",
         "type": "text",
         "icon": "wikipedia",
-        "universal": true
+        "universal": true,
+        "label": "Wikipedia"
     },
     "wood": {
         "key": "wood",
-        "type": "combo"
+        "type": "combo",
+        "label": "Type"
     }
 }

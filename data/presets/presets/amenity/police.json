@@ -42,5 +42,6 @@
     ],
     "tags": {
         "amenity": "police"
-    }
+    },
+    "name": "Police"
 }

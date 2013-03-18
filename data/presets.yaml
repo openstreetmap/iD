@@ -30,6 +30,8 @@ en:
         label: Collection Times
       construction: 
         label: Type
+      country: 
+        label: Country
       crossing: 
         label: Type
       cuisine: 
@@ -92,7 +94,7 @@ en:
         label: Type
       railway: 
         label: Type
-      ref:
+      ref: 
         label: Reference
       religion: 
         label: Religion
@@ -104,13 +106,6 @@ en:
           hindu: Hindu
           shinto: Shinto
           taoist: Taoist
-      roadtype: 
-        label: Features
-        options: 
-          bridge: Bridge
-          tunnel: Tunnel
-          embankment: Embankment
-          cutting: Cutting
       service: 
         label: Type
       shelter: 
@@ -121,6 +116,13 @@ en:
         label: Source
       sport: 
         label: Sport
+      structure: 
+        label: Structure
+        options: 
+          bridge: Bridge
+          tunnel: Tunnel
+          embankment: Embankment
+          cutting: Cutting
       surface: 
         label: Surface
       tourism: 
@@ -133,6 +135,8 @@ en:
         label: Website
       wetland: 
         label: Type
+      wheelchair: 
+        label: Wheelchair Access
       wikipedia: 
         label: Wikipedia
       wood: 
@@ -150,7 +154,7 @@ en:
         name: Bank
       amenity/bar: 
         name: Bar
-      amenity/bench:
+      amenity/bench: 
         name: Bench
       amenity/bicycle_parking: 
         name: Bicycle Parking
@@ -160,13 +164,17 @@ en:
         name: Cafe
       amenity/cinema: 
         name: Cinema
+      amenity/courthouse: 
+        name: Courthouse
+      amenity/embassy: 
+        name: Embassy
       amenity/fast_food: 
         name: Fast Food
       amenity/fire_station: 
         name: Fire Station
-      amenity/fuel:
+      amenity/fuel: 
         name: Gas Station
-      amenity/grave_yard:
+      amenity/grave_yard: 
         name: Graveyard
       amenity/hospital: 
         name: Hospital
@@ -196,11 +204,13 @@ en:
         name: Restaurant
       amenity/school: 
         name: School
-      amenity/swimming_pool:
+      amenity/swimming_pool: 
         name: Swimming Pool
-      amenity/telephone:
+      amenity/telephone: 
         name: Telephone
-      amenity/toilets:
+      amenity/theatre: 
+        name: Theater
+      amenity/toilets: 
         name: Toilets
       amenity/townhall: 
         name: Town Hall
@@ -284,7 +294,7 @@ en:
         name: Vineyard
       leisure: 
         name: Leisure
-      leisure/garden:
+      leisure/garden: 
         name: Garden
       leisure/golf_course: 
         name: Golf Course
@@ -304,15 +314,17 @@ en:
         name: Tennis Court
       leisure/playground: 
         name: Playground
-      leisure/swimming_pool:
+      leisure/stadium: 
+        name: Stadium
+      leisure/swimming_pool: 
         name: Swimming Pool
-      man_made:
+      man_made: 
         name: Man Made
       man_made/lighthouse: 
         name: Lighthouse
       man_made/pier: 
         name: Pier
-      man_made/survey_point:
+      man_made/survey_point: 
         name: Survey Point
       man_made/water_tower: 
         name: Water Tower
@@ -384,39 +396,39 @@ en:
         name: Supermarket
       tourism: 
         name: Tourism
-      tourism/alpine_hut:
+      tourism/alpine_hut: 
         name: Alpine Hut
-      tourism/artwork:
+      tourism/artwork: 
         name: Artwork
-      tourism/attraction:
+      tourism/attraction: 
         name: Tourist Attraction
-      tourism/camp_site:
+      tourism/camp_site: 
         name: Camp Site
-      tourism/caravan_site:
+      tourism/caravan_site: 
         name: RV Park
-      tourism/chalet:
+      tourism/chalet: 
         name: Chalet
-      tourism/guest_house:
+      tourism/guest_house: 
         name: Guest House
-      tourism/hostel:
+      tourism/hostel: 
         name: Hostel
-      tourism/hotel:
+      tourism/hotel: 
         name: Hotel
-      tourism/information:
+      tourism/information: 
         name: Information
-      tourism/motel:
+      tourism/motel: 
         name: Motel
-      tourism/museum:
+      tourism/museum: 
         name: Museum
       tourism/picnic_site: 
         name: Picnic Site
-      tourism/theme_park:
+      tourism/theme_park: 
         name: Theme Park
-      tourism/viewpoint:
+      tourism/viewpoint: 
         name: Viewpoint
-      tourism/zoo:
+      tourism/zoo: 
         name: Zoo
-      waterway:
+      waterway: 
         name: Waterway
       waterway/canal: 
         name: Canal

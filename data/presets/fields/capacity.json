@@ -1,4 +1,5 @@
 {
     "key": "capacity",
-    "type": "text"
+    "type": "text",
+    "label": "Capacity"
 }

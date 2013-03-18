@@ -13,5 +13,6 @@
         "pool",
         "mere"
     ],
-    "icon": "water"
+    "icon": "water",
+    "name": "Pond"
 }

@@ -13,5 +13,6 @@
     "tags": {
         "amenity": "library"
     },
-    "terms": []
+    "terms": [],
+    "name": "Library"
 }
