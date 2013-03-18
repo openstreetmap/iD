@@ -271,6 +271,9 @@ locale.en = {
             "construction": {
                 "label": "Type"
             },
+            "country": {
+                "label": "Country"
+            },
             "crossing": {
                 "label": "Type"
             },
@@ -377,15 +380,6 @@ locale.en = {
                     "taoist": "Taoist"
                 }
             },
-            "roadtype": {
-                "label": "Features",
-                "options": {
-                    "bridge": "Bridge",
-                    "tunnel": "Tunnel",
-                    "embankment": "Embankment",
-                    "cutting": "Cutting"
-                }
-            },
             "service": {
                 "label": "Type"
             },
@@ -400,6 +394,15 @@ locale.en = {
             },
             "sport": {
                 "label": "Sport"
+            },
+            "structure": {
+                "label": "Structure",
+                "options": {
+                    "bridge": "Bridge",
+                    "tunnel": "Tunnel",
+                    "embankment": "Embankment",
+                    "cutting": "Cutting"
+                }
             },
             "surface": {
                 "label": "Surface"
@@ -418,6 +421,9 @@ locale.en = {
             },
             "wetland": {
                 "label": "Type"
+            },
+            "wheelchair": {
+                "label": "Wheelchair Access"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -459,6 +465,12 @@ locale.en = {
             },
             "amenity/cinema": {
                 "name": "Cinema"
+            },
+            "amenity/courthouse": {
+                "name": "Courthouse"
+            },
+            "amenity/embassy": {
+                "name": "Embassy"
             },
             "amenity/fast_food": {
                 "name": "Fast Food"
@@ -519,6 +531,9 @@ locale.en = {
             },
             "amenity/telephone": {
                 "name": "Telephone"
+            },
+            "amenity/theatre": {
+                "name": "Theater"
             },
             "amenity/toilets": {
                 "name": "Toilets"
@@ -675,6 +690,9 @@ locale.en = {
             },
             "leisure/playground": {
                 "name": "Playground"
+            },
+            "leisure/stadium": {
+                "name": "Stadium"
             },
             "leisure/swimming_pool": {
                 "name": "Swimming Pool"
@@ -1182,7 +1200,7 @@ locale.en = {
             "internet_access": {
                 "label": "互联网接入",
                 "options": {
-                    "wlan": "Wifi",
+                    "wlan": "无线网络",
                     "wired": "有线网络",
                     "terminal": "终端"
                 }
@@ -1235,10 +1253,13 @@ locale.en = {
             "railway": {
                 "label": "类型"
             },
+            "ref": {
+                "label": "参考"
+            },
             "religion": {
                 "label": "宗教",
                 "options": {
-                    "christian": "基督教徒",
+                    "christian": "基督教",
                     "muslim": "穆斯林",
                     "buddhist": "佛教",
                     "jewish": "犹太教",
@@ -1384,6 +1405,9 @@ locale.en = {
             "amenity/school": {
                 "name": "学校"
             },
+            "amenity/swimming_pool": {
+                "name": "游泳池"
+            },
             "amenity/telephone": {
                 "name": "电话"
             },
@@ -1513,6 +1537,9 @@ locale.en = {
             "leisure": {
                 "name": "休闲场所"
             },
+            "leisure/garden": {
+                "name": "花园"
+            },
             "leisure/golf_course": {
                 "name": "高尔夫球场"
             },
@@ -1540,6 +1567,9 @@ locale.en = {
             "leisure/playground": {
                 "name": "运动场"
             },
+            "leisure/swimming_pool": {
+                "name": "游泳池"
+            },
             "man_made": {
                 "name": "人造的"
             },
@@ -1548,6 +1578,9 @@ locale.en = {
             },
             "man_made/pier": {
                 "name": "码头"
+            },
+            "man_made/survey_point": {
+                "name": "测量点"
             },
             "man_made/water_tower": {
                 "name": "水塔"
@@ -7107,6 +7140,9 @@ locale.en = {
             "railway": {
                 "label": "Kiểu"
             },
+            "ref": {
+                "label": "Số"
+            },
             "religion": {
                 "label": "Tôn giáo",
                 "options": {
@@ -7256,6 +7292,9 @@ locale.en = {
             "amenity/school": {
                 "name": "Nhà trường"
             },
+            "amenity/swimming_pool": {
+                "name": "Hồ Bơi"
+            },
             "amenity/telephone": {
                 "name": "Điện thoại"
             },
@@ -7385,6 +7424,9 @@ locale.en = {
             "leisure": {
                 "name": "Giải trí"
             },
+            "leisure/garden": {
+                "name": "Vườn"
+            },
             "leisure/golf_course": {
                 "name": "Sân Golf"
             },
@@ -7412,6 +7454,9 @@ locale.en = {
             "leisure/playground": {
                 "name": "Khu Vui chơi Trẻ em"
             },
+            "leisure/swimming_pool": {
+                "name": "Hồ Bơi"
+            },
             "man_made": {
                 "name": "Công trình"
             },
@@ -7420,6 +7465,9 @@ locale.en = {
             },
             "man_made/pier": {
                 "name": "Cầu tàu"
+            },
+            "man_made/survey_point": {
+                "name": "Điểm Khảo sát"
             },
             "man_made/water_tower": {
                 "name": "Tháp nước"
