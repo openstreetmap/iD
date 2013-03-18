@@ -187,6 +187,10 @@
         "key": "railway",
         "type": "combo"
     },
+    "ref": {
+        "key": "ref",
+        "type": "text"
+    },
     "religion": {
         "key": "religion",
         "type": "combo",

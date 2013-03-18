@@ -1510,6 +1510,19 @@
             "man_made": "pier"
         }
     },
+    "man_made/survey_point": {
+        "icon": "monument",
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "man_made": "survey_point"
+        },
+        "fields": [
+            "ref"
+        ]
+    },
     "man_made/water_tower": {
         "icon": "water",
         "geometry": [

@@ -92,6 +92,8 @@ en:
         label: Type
       railway: 
         label: Type
+      ref:
+        label: Reference
       religion: 
         label: Religion
         options: 
@@ -304,6 +306,8 @@ en:
         name: Lighthouse
       man_made/pier: 
         name: Pier
+      man_made/survey_point:
+        name: Survey Point
       man_made/water_tower: 
         name: Water Tower
       natural: 
