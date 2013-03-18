@@ -22,6 +22,7 @@ iD.ui.Inspector = function(context, entity) {
 
     function inspector(selection) {
         selection
+            .html('')
             .style('display', 'block')
             .style('right', '-500px')
             .style('opacity', 1)
