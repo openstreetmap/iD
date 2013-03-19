@@ -11,8 +11,9 @@ iD.Map = function(context) {
         dblclickEnabled = true,
         transformStart,
         minzoom = 0,
-        background = iD.Background()
-            .projection(projection),
+        layers = [
+            iD.Background().projection(projection),
+            iD.LocalGpx().projection(projection)],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
@@ -21,7 +22,7 @@ iD.Map = function(context) {
         midpoints = iD.svg.Midpoints(roundedProjection),
         labels = iD.svg.Labels(roundedProjection, context),
         tail = iD.ui.Tail(),
-        surface, tilegroup;
+        surface, layergroup;
 
     function map(selection) {
         context.history()
@@ -29,8 +30,8 @@ iD.Map = function(context) {
 
         selection.call(zoom);
 
-        tilegroup = selection.append('div')
-            .attr('id', 'tile-g');
+        layergroup = selection.append('div')
+            .attr('id', 'layers-g');
 
         var supersurface = selection.append('div')
             .style('position', 'absolute');
@@ -47,10 +48,9 @@ iD.Map = function(context) {
             .attr('id', 'surface')
             .call(iD.svg.Surface());
 
-
         map.size(selection.size());
         map.surface = surface;
-        map.tilesurface = tilegroup;
+        map.layersurface = layergroup;
 
         supersurface
             .call(tail);
@@ -131,7 +131,7 @@ iD.Map = function(context) {
             'scale(' + scale + ')' +
             'translate(' + tX + 'px,' + tY + 'px) ';
 
-        tilegroup.style(transformProp, transform);
+        layergroup.style(transformProp, transform);
         surface.style(transformProp, transform);
         queueRedraw();
 
@@ -142,7 +142,7 @@ iD.Map = function(context) {
         var prop = surface.node().style[transformProp];
         if (!prop || prop === 'none') return false;
         surface.node().style[transformProp] = '';
-        tilegroup.node().style[transformProp] = '';
+        layergroup.node().style[transformProp] = '';
         return true;
     }
 
@@ -165,7 +165,18 @@ iD.Map = function(context) {
         }
 
         if (!difference) {
-            tilegroup.call(background);
+            var sel = layergroup
+                .selectAll('.tile-layer-group')
+                .data(layers);
+
+            sel.exit().remove();
+
+            sel.enter().append('div')
+                .attr('class', 'tile-layer-group');
+
+            sel.each(function(layer) {
+                    d3.select(this).call(layer);
+                });
         }
 
         if (map.editable()) {
@@ -260,7 +271,9 @@ iD.Map = function(context) {
         var center = map.center();
         dimensions = _;
         surface.size(dimensions);
-        background.size(dimensions);
+        layers.map(function(l) {
+            l.size(dimensions);
+        });
         projection.clipExtent([[0, 0], dimensions]);
         setCenter(center);
         return redraw();
@@ -371,7 +384,7 @@ iD.Map = function(context) {
         return map;
     };
 
-    map.background = background;
+    map.layers = layers;
     map.projection = projection;
     map.redraw = redraw;
 

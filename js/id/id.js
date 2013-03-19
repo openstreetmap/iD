@@ -91,7 +91,8 @@ window.iD = function () {
     };
 
     /* Map */
-    context.background = function() { return map.background; };
+    context.layers = function() { return map.layers; };
+    context.background = function() { return map.layers[0]; };
     context.surface = function() { return map.surface; };
     context.projection = map.projection;
     context.tail = map.tail;
@@ -124,7 +125,7 @@ window.iD = function () {
 
     var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
     if (q.layer) {
-        context.background()
+        context.layers()[0]
            .source(_.find(backgroundSources, function(l) {
                if (l.data.sourcetag === q.layer) {
                    detected = true;

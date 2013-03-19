@@ -2,7 +2,8 @@ iD.BackgroundSource = {};
 
 // derive the url of a 'quadkey' style tile from a coordinate object
 iD.BackgroundSource.template = function(data) {
-    var generator = function(coord) {
+
+    function generator(coord) {
         var u = '';
         for (var zoom = coord[2]; zoom > 0; zoom--) {
             var b = 0;
@@ -25,7 +26,7 @@ iD.BackgroundSource.template = function(data) {
                 var subdomains = r.split(':')[1].split(',');
                 return subdomains[coord[2] % subdomains.length];
             });
-    };
+    }
 
     generator.data = data;
 
