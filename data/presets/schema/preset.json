@@ -1,0 +1,55 @@
+{
+    "title": "Preset",
+    "description": "Associates an icon, form fields, and other UI with a set of OSM tags",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "The English name for the feature",
+            "type": "string",
+            "required": true
+        },
+        "geometry": {
+            "description": "Valid geometry types for the feature",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "enum": ["point", "vertex", "line", "area"]
+            },
+            "required": true
+        },
+        "tags": {
+            "description": "Tags that must be present for the preset to match",
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "required": true
+        },
+        "fields": {
+            "description": "Form fields that are displayed for the preset",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "icon": {
+            "description": "Name of preset icon which represents this preset",
+            "type": "string"
+        },
+        "terms": {
+            "description": "English synonyms or related terms",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "searchable": {
+            "description": "Whether or not the preset will be suggested via search",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "additionalProperties": false
+}

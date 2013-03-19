@@ -2,7 +2,10 @@ var fs = require('fs'),
     path = require('path'),
     glob = require('glob'),
     YAML = require('js-yaml'),
-    _ = require('./js/lib/lodash');
+    _ = require('./js/lib/lodash'),
+    jsonschema = require('jsonschema'),
+    fieldSchema = require('./data/presets/schema/field.json'),
+    presetSchema = require('./data/presets/schema/preset.json');
 
 function read(f) {
     return JSON.parse(fs.readFileSync(f));
@@ -16,6 +19,21 @@ function rp(f) {
     return r('presets/' + f);
 }
 
+function validate(file, instance, schema) {
+    var result = jsonschema.validate(instance, schema);
+    if (result.length) {
+        console.error(file + ": ");
+        result.forEach(function(error) {
+            if (error.property) {
+                console.error(error.property + ' ' + error.message);
+            } else {
+                console.error(error);
+            }
+        });
+        process.exit(1);
+    }
+}
+
 var translations = {
     fields: {},
     presets: {}
@@ -25,12 +43,16 @@ var fields = {};
 glob.sync(__dirname + '/data/presets/fields/*.json').forEach(function(file) {
     var field = read(file),
         id = path.basename(file, '.json');
+
+    validate(file, field, fieldSchema);
+
     translations.fields[id] = {label: field.label};
     if (field.strings) {
         for (var i in field.strings) {
             translations.fields[id][i] = field.strings[i];
         }
     }
+
     fields[id] = field;
 });
 fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields, null, 4));
@@ -39,10 +61,14 @@ var presets = {};
 glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
     var preset = read(file),
         id = file.match(/presets\/presets\/([^.]*)\.json/)[1];
+
+    validate(file, preset, presetSchema);
+
     translations.presets[id] = {
         name: preset.name,
         terms: (preset.terms || []).join(',')
     };
+
     presets[id] = preset;
 });
 fs.writeFileSync('data/presets/presets.json', JSON.stringify(presets, null, 4));
