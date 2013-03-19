@@ -42,7 +42,8 @@ iD.actions.Circularize = function(wayId, projection, count) {
         }
 
         ids.push(ids[0]);
-        graph = graph.replace(way.update({nodes: ids}));
+        way = way.update({nodes: ids});
+        graph = graph.replace(way);
 
         for (i = 0; i < nodes.length; i++) {
             graph.parentWays(nodes[i]).forEach(function(parent) {

@@ -49,7 +49,8 @@ describe("iD.actions.Circularize", function () {
                 'b': iD.Node({id: 'b', loc: [2, 0]}),
                 'c': iD.Node({id: 'c', loc: [2, 2]}),
                 'd': iD.Node({id: 'd', loc: [0, 2]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']}),
+                'e': iD.Node({id: 'e', loc: [1, 1]}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']}),
                 '=': iD.Way({id: '=', nodes: ['d']})
             });
 
