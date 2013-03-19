@@ -8,8 +8,10 @@
         "highway/primary",
         "highway/secondary",
         "highway/tertiary",
+        "highway/unclassified",
         "highway/residential",
         "highway/service",
+        "highway/track",
         "highway"
     ]
 }]
