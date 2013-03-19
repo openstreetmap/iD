@@ -332,7 +332,6 @@ form.hide {
 button {
     line-height:20px;
     border:0;
-    color:#222;
     background: white;
     font-weight:bold;
     font-size:12px;
@@ -743,12 +742,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .grid-entry > .icon {
     position: absolute;
-    top: 30px;left: 0; right: 0;
+    top: 30px;left: -30px; right: -30px;
     margin: auto;
 }
 
 .inspector-body-line .grid-entry .icon {
-    top: 10%;
+    top: -10px;
 }
 
 .grid-entry .label {
@@ -765,6 +764,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.current .grid-entry,
+.current .grid-entry .label { 
+    border-color: #7092ff;
 }
 
 .preset-grid-search-wrap {
@@ -810,6 +814,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 /* Preset icon colors */
+
+.inspector-body-line .icon.feature-marker-stroked {
+    top: 30px;
+}
 
 .preset-icon-fill.area {
     cursor: inherit;
