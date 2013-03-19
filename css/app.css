@@ -525,6 +525,7 @@ button[disabled] .label {
 .icon.geolocate  { background-position: -360px 0px;}
 .icon.warning    { background-position: -380px 0px;}
 .icon.back       { background-position: -420px 0px;}
+.icon.forward    { background-position: -440px 0px;}
 
 .icon.search  { background-position: -280px 0px;}
 
