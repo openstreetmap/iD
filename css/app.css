@@ -771,6 +771,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-color: #7092ff;
 }
 
+.category .grid-entry:after,
+.category .grid-entry:before { 
+    content: "";
+    position: absolute;
+    top: 7px;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-radius: 6px;
+    height: 6px;
+}
+
+.category .grid-entry:before { 
+    top: 3px;
+}
+
 .preset-grid-search-wrap {
     height: 60px;
     border-bottom: 1px solid #ccc;
