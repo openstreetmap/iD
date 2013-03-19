@@ -156,7 +156,7 @@ iD.Background = function() {
         return background;
     };
 
-    function setPermalink(source) {
+    function setHash(source) {
         var tag = source.data.sourcetag;
         var q = iD.util.stringQs(location.hash.substring(1));
         if (tag) {
@@ -173,7 +173,7 @@ iD.Background = function() {
         source = _;
         cache = {};
         tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 20]);
-        setPermalink(source);
+        setHash(source);
         return background;
     };
 

@@ -182,3 +182,5 @@ en:
   zoom: 
     in: Zoom In
     out: Zoom Out
+  imagery:
+    provided_by: "Imagery provided by {source}"

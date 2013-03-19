@@ -110,21 +110,10 @@ iD.ui.Background = function(context) {
                     return d.data.name === context.background().source().data.name;
                 });
 
-            var provided_by = context.container()
-                .select('.attribution .provided-by')
-                .html('');
-
-            if (d.data.terms_url) {
-                provided_by.append('a')
-                    .attr('href', (d.data.terms_url || ''))
-                    .attr('target', '_blank')
-                    .classed('disabled', !d.data.terms_url)
-                    .text(' provided by ' + (d.data.sourcetag || d.data.name));
-            } else {
-                provided_by
-                    .text(' provided by ' + (d.data.sourcetag || d.data.name));
-            }
-
+            context.container()
+                .select('.attribution')
+                .data([d])
+                .call(iD.ui.Attribution(context));
         }
 
         function clickSetSource(d) {
