@@ -134,7 +134,7 @@ iD.ui.PresetGrid = function(context, entity) {
             return s;
         }
 
-        var presetinspect;
+        var presetinspect, inspectindex = null;
 
         function drawGrid(selection, limit) {
 
@@ -146,16 +146,35 @@ iD.ui.PresetGrid = function(context, entity) {
                     index,
                     entries = selection.selectAll('button.grid-entry');
 
-                if (presetinspect && presetinspect.remove().datum() === d) {
-                    presetinspect = null;
-                    return;
+                if (presetinspect) {
+
+                    var old = presetinspect;
+                    old.style('max-height', '400px')
+                        .transition()
+                        .style('max-height', '0px')
+                        .each('end', function() {
+                            old.remove();
+                        });
+
+                    if (presetinspect.datum() === d) {
+                        presetinspect = null;
+                        inspectindex = null;
+                        return;
+                    }
                 }
 
                 entries.each(function(d, i) {
                     if (this === entry) index = i;
                 });
 
-                var selector = '.grid-button-wrap:nth-child(' + (Math.floor(index/3) * 3 + 4 ) + ')';
+
+                index = Math.floor(index/3) * 3 + 4;
+
+                // account for already display inspect box
+                var adjust = (inspectindex !== null && index > inspectindex) ? 1 : 0;
+
+                var selector = 'div:nth-child(' + (index + adjust) + ')';
+                inspectindex = index;
 
                 presetinspect = selection.insert('div', selector)
                     .attr('class', 'preset-inspect col12')
