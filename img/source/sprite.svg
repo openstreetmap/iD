@@ -13,7 +13,7 @@
    height="220"
    id="svg12393"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="sprite.svg"
    inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite.png"
    inkscape:export-xdpi="90"
@@ -38,12 +38,12 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="-49.735643"
-     inkscape:cy="134.55123"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="2.3449562"
+     inkscape:cy="33.776287"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
-     showgrid="true"
+     showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="700"
      inkscape:window-x="361"
@@ -53,7 +53,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="false">
@@ -201,7 +201,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
