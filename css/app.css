@@ -734,10 +734,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .preset-inspect {
-  position: relative;
   background: white;
-  padding-top: 10px;
-  padding-bottom: 20px;
 }
 
 .grid-entry > .icon {
@@ -767,12 +764,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .current .grid-entry,
-.current .grid-entry .label { 
+.current .grid-entry .label {
     background-color: #eef0ff;
 }
 
 .category .grid-entry:after,
-.category .grid-entry:before { 
+.category .grid-entry:before {
     content: "";
     position: absolute;
     top: 7px;
@@ -782,7 +779,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     height: 6px;
 }
 
-.category .grid-entry:before { 
+.category .grid-entry:before {
     top: 3px;
 }
 
@@ -882,7 +879,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .tag-wrap .grid-button-wrap .grid-entry .label {
     background: #eef0ff;
-   } 
+   }
 
 .inspector-body .name {
     height: 110px;

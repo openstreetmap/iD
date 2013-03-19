@@ -182,9 +182,13 @@ iD.ui.PresetGrid = function(context, entity) {
 
                 presetinspect
                     .style('max-height', '0px')
+                    .style('padding-top', '0px')
+                    .style('padding-bottom', '0px')
                     .transition()
-                    .duration(200)
-                    .style('max-height', '400px');
+                    .duration(400)
+                    .style('padding-top', '10px')
+                    .style('padding-bottom', '20px')
+                    .style('max-height', '200px');
 
                 presetinspect.append('h2')
                     .text(d.name());
@@ -217,7 +221,8 @@ iD.ui.PresetGrid = function(context, entity) {
                 presetinspect.selectAll('*')
                     .style('opacity','0')
                     .transition()
-                    .duration(400)
+                    .delay(200)
+                    .duration(200)
                     .style('opacity','1');
             }
 
