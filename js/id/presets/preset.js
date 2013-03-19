@@ -3,7 +3,6 @@ iD.presets.Preset = function(id, preset, fields) {
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
-    preset.additional = (preset.additional || []).map(getFields);
 
     function getFields(f) {
         return fields[f];
