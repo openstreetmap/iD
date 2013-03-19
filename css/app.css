@@ -646,12 +646,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-wrap .message {
     height: 60px;
     border-bottom: 1px solid #ccc;
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, .05);
     z-index: 100;
     position: relative;
-    -webkit-transition: box-shadow 100ms;
-    -moz-transition: box-shadow 100ms;
-    transition: box-shadow 100ms;
 }
 
 .inspector-wrap .message button.fl {
