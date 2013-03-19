@@ -69,6 +69,9 @@ Then, add the new string to `data/core.yaml` or `data/presets.yaml` (depending
 on whether it pertains to core code or presets). The translation system,
 Transiflex, will automatically detect the change.
 
+Use `make` to build the translations with the local changes.
+`make translate` can be used to pull the latest translations from Transifex.
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with

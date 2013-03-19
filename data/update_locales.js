@@ -1,3 +1,5 @@
+/* Downloads the latest translations from Transifex */
+
 var request = require('request'),
     yaml = require('js-yaml'),
     fs = require('fs'),
@@ -32,7 +34,7 @@ asyncMap(resources, getResource, function(err, locales) {
     });
 
     for (var i in locale) {
-        out += 'locale.' + i + ' = ' + JSON.stringify(locale[i], null, 4) + ';';
+        out += 'locale.' + i + ' = ' + JSON.stringify(locale[i], null, 4) + ';\n';
     }
     fs.writeFileSync(outfile, out);
 });

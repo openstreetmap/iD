@@ -1,7 +1,8 @@
 var fs = require('fs'),
     path = require('path'),
     glob = require('glob'),
-    YAML = require('js-yaml');
+    YAML = require('js-yaml'),
+    _ = require('./js/lib/lodash');
 
 function read(f) {
     return JSON.parse(fs.readFileSync(f));
@@ -60,3 +61,10 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
         fields: rp('fields.json')
     }
 }, null, 4) + ';');
+
+// Push changes from data/core.yaml into data/locales.js
+var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
+var presets = YAML.load(fs.readFileSync('data/presets.yaml', 'utf8'));
+var en = _.merge(core, presets);
+var out = 'locale.en = ' + JSON.stringify(en.en, null, 4) + ';\n';
+fs.writeFileSync('data/locales.js', fs.readFileSync('data/locales.js', 'utf8').replace(/locale.en =[^;]*;/, out));
