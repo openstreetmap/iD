@@ -149,9 +149,13 @@ iD.ui.PresetGrid = function(context, entity) {
                 if (presetinspect) {
 
                     var old = presetinspect;
-                    old.style('max-height', '400px')
+                    old
                         .transition()
+                        .duration(400)
+                        .style('opacity','0')
                         .style('max-height', '0px')
+                        .style('padding-top', '0px')
+                        .style('padding-bottom', '0px')
                         .each('end', function() {
                             old.remove();
                         });
