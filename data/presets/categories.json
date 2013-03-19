@@ -1,7 +1,7 @@
 [{
     "geometry": "line",
     "icon": "highway",
-    "id": "roads",
+    "id": "Road",
     "members": [
         "highway/motorway",
         "highway/trunk",
