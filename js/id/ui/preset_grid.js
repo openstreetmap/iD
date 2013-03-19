@@ -151,7 +151,7 @@ iD.ui.PresetGrid = function(context, entity) {
                     var old = presetinspect;
                     old
                         .transition()
-                        .duration(400)
+                        .duration(200)
                         .style('opacity','0')
                         .style('max-height', '0px')
                         .style('padding-top', '0px')
@@ -189,7 +189,7 @@ iD.ui.PresetGrid = function(context, entity) {
                     .style('padding-top', '0px')
                     .style('padding-bottom', '0px')
                     .transition()
-                    .duration(400)
+                    .duration(200)
                     .style('padding-top', '10px')
                     .style('padding-bottom', '20px')
                     .style('max-height', '200px');
