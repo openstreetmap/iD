@@ -227,6 +227,9 @@ locale.en = {
         "in": "Zoom In",
         "out": "Zoom Out"
     },
+    "imagery": {
+        "provided_by": "Imagery provided by {source}"
+    },
     "presets": {
         "fields": {
             "access": {
@@ -1043,7 +1046,8 @@ locale.en = {
             }
         }
     }
-};locale.zh = {
+};
+locale.zh = {
     "modes": {
         "add_area": {
             "title": "面",
@@ -1418,15 +1422,6 @@ locale.en = {
                     "hindu": "印度教",
                     "shinto": "神道教",
                     "taoist": "道教"
-                }
-            },
-            "roadtype": {
-                "label": "特征",
-                "options": {
-                    "bridge": "桥",
-                    "tunnel": "隧道",
-                    "embankment": "堤岸",
-                    "cutting": "开凿"
                 }
             },
             "service": {
@@ -1916,7 +1911,8 @@ locale.en = {
             }
         }
     }
-};locale.zh_TW = {
+};
+locale.zh_TW = {
     "modes": {
         "add_area": {
             "title": "區域",
@@ -2278,6 +2274,9 @@ locale.en = {
             "railway": {
                 "label": "種類"
             },
+            "ref": {
+                "label": "參考"
+            },
             "religion": {
                 "label": "宗教",
                 "options": {
@@ -2288,15 +2287,6 @@ locale.en = {
                     "hindu": "印度教徒",
                     "shinto": "神道教徒",
                     "taoist": "道教徒"
-                }
-            },
-            "roadtype": {
-                "label": "特徵",
-                "options": {
-                    "bridge": "橋樑",
-                    "tunnel": "隧道",
-                    "embankment": "堤岸",
-                    "cutting": "切土"
                 }
             },
             "service": {
@@ -2427,6 +2417,9 @@ locale.en = {
             "amenity/school": {
                 "name": "學校"
             },
+            "amenity/swimming_pool": {
+                "name": "游泳池"
+            },
             "amenity/telephone": {
                 "name": "電話"
             },
@@ -2556,6 +2549,9 @@ locale.en = {
             "leisure": {
                 "name": "優閒設施"
             },
+            "leisure/garden": {
+                "name": "花園"
+            },
             "leisure/golf_course": {
                 "name": "高爾夫球場"
             },
@@ -2583,6 +2579,9 @@ locale.en = {
             "leisure/playground": {
                 "name": "遊樂場"
             },
+            "leisure/swimming_pool": {
+                "name": "游泳池"
+            },
             "man_made": {
                 "name": "人造"
             },
@@ -2591,6 +2590,9 @@ locale.en = {
             },
             "man_made/pier": {
                 "name": "碼頭"
+            },
+            "man_made/survey_point": {
+                "name": "測量點"
             },
             "man_made/water_tower": {
                 "name": "水塔"
@@ -2774,7 +2776,8 @@ locale.en = {
             }
         }
     }
-};locale.da = {
+};
+locale.da = {
     "modes": {
         "add_area": {
             "title": "Område",
@@ -2984,7 +2987,8 @@ locale.en = {
         "in": "Zoom ind",
         "out": "Zoom ud"
     }
-};locale.nl = {
+};
+locale.nl = {
     "modes": {
         "add_area": {
             "title": "Vlak",
@@ -3199,7 +3203,8 @@ locale.en = {
         "in": "Inzoomen",
         "out": "Uitzoomen"
     }
-};locale.fr = {
+};
+locale.fr = {
     "modes": {
         "add_area": {
             "title": "Polygone",
@@ -3424,7 +3429,8 @@ locale.en = {
         "in": "Zoomer",
         "out": "Dézoomer"
     }
-};locale.de = {
+};
+locale.de = {
     "modes": {
         "add_area": {
             "title": "Fläche",
@@ -3702,12 +3708,6 @@ locale.en = {
             "religion": {
                 "label": "Religion"
             },
-            "roadtype": {
-                "options": {
-                    "bridge": "Brücke",
-                    "tunnel": "Tunnel"
-                }
-            },
             "source": {
                 "label": "Quelle"
             },
@@ -3764,6 +3764,9 @@ locale.en = {
             "amenity/parking": {
                 "name": "Parkplatz"
             },
+            "amenity/pharmacy": {
+                "name": "Apotheke"
+            },
             "amenity/place_of_worship/christian": {
                 "name": "Kirche"
             },
@@ -3800,8 +3803,14 @@ locale.en = {
             "entrance": {
                 "name": "Eingang"
             },
+            "highway": {
+                "name": "Straße/Weg"
+            },
             "highway/bus_stop": {
                 "name": "Bushaltestelle"
+            },
+            "highway/crossing": {
+                "name": "Fußgängerüberweg"
             },
             "highway/cycleway": {
                 "name": "Radweg"
@@ -3824,8 +3833,14 @@ locale.en = {
             "highway/turning_circle": {
                 "name": "Wendestelle"
             },
+            "historic": {
+                "name": "Historische Stätte"
+            },
             "historic/monument": {
                 "name": "Monument"
+            },
+            "landuse/allotments": {
+                "name": "Kleigartenanlage"
             },
             "landuse/forest": {
                 "name": "Wald"
@@ -3964,7 +3979,8 @@ locale.en = {
             }
         }
     }
-};locale.it = {
+};
+locale.it = {
     "modes": {
         "add_area": {
             "title": "Area",
@@ -4339,15 +4355,6 @@ locale.en = {
                     "hindu": "Indù",
                     "shinto": "Shintoista",
                     "taoist": "Taoista"
-                }
-            },
-            "roadtype": {
-                "label": "Caratteristiche",
-                "options": {
-                    "bridge": "Ponte",
-                    "tunnel": "Tunnel",
-                    "embankment": "Terrapieno",
-                    "cutting": "Scavato"
                 }
             },
             "service": {
@@ -4837,7 +4844,8 @@ locale.en = {
             }
         }
     }
-};locale.ja = {
+};
+locale.ja = {
     "modes": {
         "add_area": {
             "title": "エリア",
@@ -5051,7 +5059,8 @@ locale.en = {
         "in": "ズームイン",
         "out": "ズームアウト"
     }
-};locale.lv = {
+};
+locale.lv = {
     "modes": {
         "add_area": {
             "title": "Apgabals",
@@ -5379,12 +5388,6 @@ locale.en = {
                     "taoist": "Taoistu"
                 }
             },
-            "roadtype": {
-                "options": {
-                    "bridge": "Tilts",
-                    "tunnel": "Tunelis"
-                }
-            },
             "service": {
                 "label": "Tips"
             },
@@ -5420,7 +5423,8 @@ locale.en = {
             }
         }
     }
-};locale.pl = {
+};
+locale.pl = {
     "modes": {
         "add_area": {
             "title": "Obszar",
@@ -5630,7 +5634,8 @@ locale.en = {
         "in": "Powiększ",
         "out": "Zmniejsz"
     }
-};locale.pt = {
+};
+locale.pt = {
     "modes": {
         "add_area": {
             "title": "Área",
@@ -5855,7 +5860,8 @@ locale.en = {
         "in": "Aproximar",
         "out": "Afastar"
     }
-};locale.ru = {
+};
+locale.ru = {
     "modes": {
         "add_area": {
             "title": "Контур",
@@ -6082,7 +6088,8 @@ locale.en = {
         "in": "Приблизить",
         "out": "Отдалить"
     }
-};locale.es = {
+};
+locale.es = {
     "modes": {
         "add_area": {
             "title": "Área",
@@ -6292,7 +6299,8 @@ locale.en = {
         "in": "Acercar",
         "out": "Alejar"
     }
-};locale.sv = {
+};
+locale.sv = {
     "modes": {
         "add_area": {
             "title": "Område",
@@ -6519,7 +6527,8 @@ locale.en = {
         "in": "Zooma in",
         "out": "Zooma ut"
     }
-};locale.tr = {
+};
+locale.tr = {
     "modes": {
         "add_area": {
             "title": "Alan",
@@ -6734,7 +6743,8 @@ locale.en = {
         "in": "Yaklaş",
         "out": "Uzaklaş"
     }
-};locale.uk = {
+};
+locale.uk = {
     "modes": {
         "add_area": {
             "title": "Полігон",
@@ -6945,7 +6955,8 @@ locale.en = {
         "in": "Наблизитись",
         "out": "Віддалитись"
     }
-};locale.vi = {
+};
+locale.vi = {
     "modes": {
         "add_area": {
             "title": "Vùng",
@@ -7218,6 +7229,9 @@ locale.en = {
             "construction": {
                 "label": "Kiểu"
             },
+            "country": {
+                "label": "Quốc gia"
+            },
             "crossing": {
                 "label": "Kiểu"
             },
@@ -7322,15 +7336,6 @@ locale.en = {
                     "taoist": "Đạo giáo"
                 }
             },
-            "roadtype": {
-                "label": "Cấu trúc",
-                "options": {
-                    "bridge": "Cầu",
-                    "tunnel": "Đường hầm",
-                    "embankment": "Đường đắp cao",
-                    "cutting": "Đường xẻ"
-                }
-            },
             "service": {
                 "label": "Kiểu"
             },
@@ -7345,6 +7350,15 @@ locale.en = {
             },
             "sport": {
                 "label": "Môn Thể thao"
+            },
+            "structure": {
+                "label": "Cấu trúc",
+                "options": {
+                    "bridge": "Cầu",
+                    "tunnel": "Đường hầm",
+                    "embankment": "Đường đắp cao",
+                    "cutting": "Đường xẻ"
+                }
             },
             "surface": {
                 "label": "Mặt"
@@ -7364,6 +7378,9 @@ locale.en = {
             "wetland": {
                 "label": "Loại"
             },
+            "wheelchair": {
+                "label": "Đi Xe lăn Được"
+            },
             "wikipedia": {
                 "label": "Wikipedia"
             },
@@ -7376,16 +7393,19 @@ locale.en = {
                 "name": "Hàng không"
             },
             "aeroway/aerodrome": {
-                "name": "Sân bay"
+                "name": "Sân bay",
+                "terms": "máy bay,phi cơ,tàu bay,sân bay,phi trường"
             },
             "aeroway/helipad": {
-                "name": "Sân bay Trực thăng"
+                "name": "Sân bay Trực thăng",
+                "terms": "máy bay trực thăng,máy bay lên thẳng,sân bay trực thăng,sân bay lên thẳng,phi trường trực thăng,sàn đỗ trực thăng,sàn đáp trực thăng"
             },
             "amenity": {
                 "name": "Tiện nghi"
             },
             "amenity/bank": {
-                "name": "Ngân hàng"
+                "name": "Ngân hàng",
+                "terms": "ngân hàng,nhà băng,ngân hàng công đoàn,nhà băng công đoàn,công đoàn tín dụng"
             },
             "amenity/bar": {
                 "name": "Quán rượu"
@@ -7400,10 +7420,18 @@ locale.en = {
                 "name": "Chỗ Mướn Xe đạp"
             },
             "amenity/cafe": {
-                "name": "Quán Cà phê"
+                "name": "Quán Cà phê",
+                "terms": "cà phê,quán cà phê,trà,quán trà"
             },
             "amenity/cinema": {
-                "name": "Rạp phim"
+                "name": "Rạp phim",
+                "terms": "rạp phim,rạp điện ảnh,xi nê, xi-nê,xinê,phim,điện ảnh"
+            },
+            "amenity/courthouse": {
+                "name": "Tòa"
+            },
+            "amenity/embassy": {
+                "name": "Tòa đại sứ"
             },
             "amenity/fast_food": {
                 "name": "Nhà hàng Ăn nhanh"
@@ -7418,7 +7446,8 @@ locale.en = {
                 "name": "Nghĩa địa"
             },
             "amenity/hospital": {
-                "name": "Bệnh viện"
+                "name": "Bệnh viện",
+                "terms": "bệnh viện,nhà thương,phòng khám khẩn cấp,phòng khẩn cấp"
             },
             "amenity/library": {
                 "name": "Thư viện"
@@ -7430,22 +7459,28 @@ locale.en = {
                 "name": "Nhà thuốc"
             },
             "amenity/place_of_worship": {
-                "name": "Nơi Thờ phụng"
+                "name": "Nơi Thờ phụng",
+                "terms": "nơi thờ phụng,nhà thờ,giáo xứ,thánh đường,hội đường"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Nhà thờ"
+                "name": "Nhà thờ",
+                "terms": "nhà thờ,Kitô giáo,Kitô giáo,Thiên Chúa giáo,đạo Thiên Chúa,giáo xứ,thánh đường"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Nhà thờ Do Thái giáo"
+                "name": "Nhà thờ Do Thái giáo",
+                "terms": "Do Thái giáo,đạo Do Thái,hội đường"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Nhà thờ Hồi giáo"
+                "name": "Nhà thờ Hồi giáo",
+                "terms": "Hồi giáo,nhà thờ"
             },
             "amenity/police": {
-                "name": "Đồn Cảnh sát"
+                "name": "Đồn Cảnh sát",
+                "terms": "cảnh sát,sở cảnh sát,đồn cảnh sát,trạm cảnh sát,sen đầm,sở sen đầm,đội sen đầm,hiến binh,sở hiến binh,đồn hiến binh,công an,sở công an,đồn công an,trạm công an"
             },
             "amenity/post_box": {
-                "name": "Hòm thư"
+                "name": "Hòm thư",
+                "terms": "hòm thư,hộp thư,thùng thư"
             },
             "amenity/post_office": {
                 "name": "Bưu điện"
@@ -7454,10 +7489,12 @@ locale.en = {
                 "name": "Quán rượu Pub"
             },
             "amenity/restaurant": {
-                "name": "Nhà hàng"
+                "name": "Nhà hàng",
+                "terms": "quán ăn,nhà hàng,tiệm ăn,nhà ăn,phòng ăn,quán ăn nhanh,nhà hàng ăn nhanh,quán ăn qua loa,căng tin,căng-tin,xe đẩy,quán rượu,quán bia,tiệm rượu,hiệu chả cá,quán chả nướng,quán phở,tiệm phở,quán cơm,quán bánh cuốn,tiệm bánh cuốn,quán bánh mì,tiệm bánh mì,quán bánh xèo,tiệm bánh xèo,quán chè,tiệm chè,quán gỏi cuốn,quán bún,quán hải sản,quán gà,quán cà ri,quán cà-ri,tiệm cà ri, tiệm cà-ri"
             },
             "amenity/school": {
-                "name": "Nhà trường"
+                "name": "Nhà trường",
+                "terms": "trường,trường học,nhà trường,học viện,trường tư,trường tư thực,trường công,trường công lập,tiểu học,trường tiểu học,trung học,trường trung học,trung học cơ sở,trường trung học cơ sở,THCS,TTHCS,trung học phổ thông,trường trung học phổ thông,THPT,TTHPT,trung học chuyên nghiệp,trường trung học chuyên nghiệp,THCN,TTHCN,cao đẳng,trường cao đẳng,CĐ,đại học,trường đại học,ĐH,trường dòng,khoa,học"
             },
             "amenity/swimming_pool": {
                 "name": "Hồ Bơi"
@@ -7465,11 +7502,16 @@ locale.en = {
             "amenity/telephone": {
                 "name": "Điện thoại"
             },
+            "amenity/theatre": {
+                "name": "Nhà hát",
+                "terms": "nhà hát,rạp hát,sân khấu,kịch"
+            },
             "amenity/toilets": {
                 "name": "Phòng Vệ sinh"
             },
             "amenity/townhall": {
-                "name": "Tòa thị chính Thị xã"
+                "name": "Tòa thị chính Thị xã",
+                "terms": "tòa thị chính,tòa thị chánh,toà thị chính,toà thị chánh,trụ sở thành phố,trụ sở thị xã,trụ sở làng"
             },
             "amenity/university": {
                 "name": "Trường Đại học"
@@ -7487,13 +7529,15 @@ locale.en = {
                 "name": "Trạm Xe buýt"
             },
             "highway/crossing": {
-                "name": "Lối Băng qua Đường"
+                "name": "Lối Băng qua Đường",
+                "terms": "lối băng qua đường,lối qua đường"
             },
             "highway/cycleway": {
                 "name": "Đường Xe đạp"
             },
             "highway/footway": {
-                "name": "Đường Đi bộ"
+                "name": "Đường Đi bộ",
+                "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo"
             },
             "highway/motorway": {
                 "name": "Đường Cao tốc"
@@ -7514,7 +7558,8 @@ locale.en = {
                 "name": "Ngách"
             },
             "highway/steps": {
-                "name": "Cầu thang"
+                "name": "Cầu thang",
+                "terms": "cầu thang"
             },
             "highway/tertiary": {
                 "name": "Phố"
@@ -7523,7 +7568,8 @@ locale.en = {
                 "name": "Đường mòn"
             },
             "highway/traffic_signals": {
-                "name": "Đèn Giao thông"
+                "name": "Đèn Giao thông",
+                "terms": "đèn giao thông,đèn tín hiệu giao thông,đèn tín hiệu,đèn điều khiển giao thông,đèn điều khiển,đèn xanh đèn đỏ,đèn xanh đỏ,đèn ngã tư,đèn ngã ba"
             },
             "highway/trunk": {
                 "name": "Xa lộ"
@@ -7598,7 +7644,8 @@ locale.en = {
                 "name": "Sân Golf"
             },
             "leisure/park": {
-                "name": "Công viên"
+                "name": "Công viên",
+                "terms": "công viên,vườn,vườn hoa,vườn cây,bãi cỏ,bãi cỏ xanh,thảm cỏ xanh,vành đai xanh,sân chơi,khu vui chơi,khu vui chơi trẻ em,khu chơi trẻ em,quảng trường,rừng"
             },
             "leisure/pitch": {
                 "name": "Sân cỏ"
@@ -7620,6 +7667,9 @@ locale.en = {
             },
             "leisure/playground": {
                 "name": "Khu Vui chơi Trẻ em"
+            },
+            "leisure/stadium": {
+                "name": "Sân vận động"
             },
             "leisure/swimming_pool": {
                 "name": "Hồ Bơi"
@@ -7652,7 +7702,8 @@ locale.en = {
                 "name": "Vách đá"
             },
             "natural/coastline": {
-                "name": "Bờ biển"
+                "name": "Bờ biển",
+                "terms": "bờ biển,bờ sông,bờ"
             },
             "natural/glacier": {
                 "name": "Sông băng"
@@ -7664,7 +7715,8 @@ locale.en = {
                 "name": "Bãi hoang"
             },
             "natural/peak": {
-                "name": "Đỉnh núi"
+                "name": "Đỉnh núi",
+                "terms": "đồi,núi,đỉnh núi,đỉnh,chỏm núi,chỏm,chóp núi,chóp,chỏm chóp"
             },
             "natural/scrub": {
                 "name": "Đất Bụi rậm"
@@ -7679,10 +7731,12 @@ locale.en = {
                 "name": "Nước"
             },
             "natural/water/lake": {
-                "name": "Hồ"
+                "name": "Hồ",
+                "terms": "hồ,hồ nước"
             },
             "natural/water/pond": {
-                "name": "Ao nước"
+                "name": "Ao nước",
+                "terms": "hồ nhỏ,ao,ao cá,hồ cá,hồ đánh cá"
             },
             "natural/water/reservoir": {
                 "name": "Bể nước"
@@ -7703,7 +7757,8 @@ locale.en = {
                 "name": "Xóm"
             },
             "place/island": {
-                "name": "Đảo"
+                "name": "Đảo",
+                "terms": "đảo,hòn đảo,quần đảo,đảo san hô,san hô,cồn cát,cồn,đá ngầm,chỗ nông,chỗ cạn"
             },
             "place/locality": {
                 "name": "Địa phương"
@@ -7718,7 +7773,8 @@ locale.en = {
                 "name": "Đường sắt"
             },
             "railway/level_crossing": {
-                "name": "Giao lộ Đường sắt"
+                "name": "Giao lộ Đường sắt",
+                "terms": "giao lộ đường sắt,giao lộ đường ray,nút giao đường sắt"
             },
             "railway/rail": {
                 "name": "Đường sắt"
@@ -7736,7 +7792,8 @@ locale.en = {
                 "name": "Tiệm Thịt"
             },
             "shop/supermarket": {
-                "name": "Siêu thị"
+                "name": "Siêu thị",
+                "terms": "siêu thị,chợ,tiệm,cửa hàng,khu buôn bán,trung tâm buôn bán,chợ trời,chợ phiên,chợ xổm"
             },
             "tourism": {
                 "name": "Du lịch"
@@ -7760,7 +7817,8 @@ locale.en = {
                 "name": "Nhà nghỉ Riêng biệt"
             },
             "tourism/guest_house": {
-                "name": "Nhà khách"
+                "name": "Nhà khách",
+                "terms": "nhà khách,nhà trọ"
             },
             "tourism/hostel": {
                 "name": "Nhà trọ"
@@ -7775,7 +7833,8 @@ locale.en = {
                 "name": "Khách sạn Dọc đường"
             },
             "tourism/museum": {
-                "name": "Bảo tàng"
+                "name": "Bảo tàng",
+                "terms": "viện bảo tàng,bảo tàng,thư viện,văn thư lưu trữ,lưu trữ,kho"
             },
             "tourism/picnic_site": {
                 "name": "Nơi Ăn Ngoài trời"
@@ -7805,13 +7864,15 @@ locale.en = {
                 "name": "Cống"
             },
             "waterway/river": {
-                "name": "Sông"
+                "name": "Sông",
+                "terms": "sông,con sông,dòng sông,nhánh sông,sông nhánh,sông con,suối,suối nước,dòng suối,châu thổ"
             },
             "waterway/riverbank": {
                 "name": "Bờ sông"
             },
             "waterway/stream": {
-                "name": "Dòng suối"
+                "name": "Dòng suối",
+                "terms": "nhánh sông,sông nhánh,sông con,suối,suối nước,dòng suối"
             },
             "waterway/weir": {
                 "name": "Đập Tràn"
