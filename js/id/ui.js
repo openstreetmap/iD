@@ -94,7 +94,7 @@ iD.ui = function(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'http://github.com/systemed/iD/issues')
+            .attr('href', 'https://help.openstreetmap.org/questions/ask/')
             .text(t('report_a_bug'));
 
         linkList.append('li')
