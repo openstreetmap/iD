@@ -161,7 +161,14 @@ iD.ui.PresetGrid = function(context, entity) {
                     .attr('class', 'preset-inspect col12')
                     .datum(d);
 
-                presetinspect.append('h2').text(d.name());
+                presetinspect
+                    .style('max-height', '0px')
+                    .transition()
+                    .duration(200)
+                    .style('max-height', '400px');
+
+                presetinspect.append('h2')
+                    .text(d.name());
 
                 var description = presetinspect.append('p');
                 var link = presetinspect.append('a');
@@ -179,13 +186,20 @@ iD.ui.PresetGrid = function(context, entity) {
                     var doc = _.find(data, function(d) { return d.lang === locale; }) ||
                         _.find(data, function(d) { return d.lang === 'en'; });
                     if (doc) {
-                        description.text(doc.description);
+                        description
+                            .text(doc.description);
                         link
                             .attr('href', 'http://wiki.openstreetmap.org/wiki/' +
                                   encodeURIComponent(doc.title))
                             .text(t('inspector.reference'));
                     }
                 });
+
+                presetinspect.selectAll('*')
+                    .style('opacity','0')
+                    .transition()
+                    .duration(400)
+                    .style('opacity','1');
             }
 
             show_more
