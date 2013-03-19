@@ -26,7 +26,7 @@ iD.ui.Taglist = function(context, entity) {
             .attr('class', 'tag-list');
 
         var newTag = wrap.append('button')
-            .attr('class', 'add-tag');
+            .attr('class', 'add-tag col6');
 
         newTag.on('click', function() {
             addTag();
@@ -34,7 +34,7 @@ iD.ui.Taglist = function(context, entity) {
         });
 
         newTag.append('span')
-            .attr('class', 'icon icon-pre-text plus');
+            .attr('class', 'icon plus');
 
         newTag.append('span')
             .attr('class', 'label')
@@ -59,11 +59,8 @@ iD.ui.Taglist = function(context, entity) {
         var row = li.enter().append('li')
             .attr('class', 'tag-row');
 
-        var inputs = row.append('div')
-            .attr('class', 'input-wrap');
-
-        inputs.append('span')
-            .attr('class', 'key-wrap')
+        row.append('div')
+            .attr('class', 'key-wrap col6')
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
@@ -74,8 +71,8 @@ iD.ui.Taglist = function(context, entity) {
                 event.change(taglist.tags());
             });
 
-        inputs.append('span')
-            .attr('class', 'input-wrap-position')
+        row.append('div')
+            .attr('class', 'input-wrap-position col6')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
@@ -87,15 +84,7 @@ iD.ui.Taglist = function(context, entity) {
             })
             .on('keydown.push-more', pushMore);
 
-        inputs.each(bindTypeahead);
-
-        var removeBtn = row.append('button')
-            .attr('tabindex', -1)
-            .attr('class','remove minor')
-            .on('click', removeTag);
-
-        removeBtn.append('span')
-            .attr('class', 'icon delete');
+        row.each(bindTypeahead);
 
         function findLocal(docs) {
             var locale = iD.detect().locale.toLowerCase(),

@@ -225,7 +225,7 @@ iD.ui.PresetGrid = function(context, entity) {
                 presetinspect.selectAll('*')
                     .style('opacity','0')
                     .transition()
-                    .delay(200)
+                    .delay(100)
                     .duration(200)
                     .style('opacity','1');
             }

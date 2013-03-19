@@ -1156,35 +1156,35 @@ div.combobox {
 }
 
 .tag-row {
-    width: 80%;
+    width: 100%;
     position: relative;
     height: 30px;
 }
 
-.input-wrap {
-    position: relative;
-    margin-top: -1px;
-    }
-
 .tag-row input {
-    width: 50%;
-    border-left: 0;
+    border: 0;
     border-radius: 0;
+    border-bottom: 1px solid #CCC;
+    border-left: 1px solid #CCC;
 }
 
 .tag-row input.key {
+    background-color: #f6f6f6;
     font-weight: bold;
 }
 
-.tag-row:first-child input {
-    border-top: 1px solid #ccc;
+.tag-row input.value {
+    border-right: 1px solid #CCC;
 }
 
+
 .tag-row:first-child input.key {
+    border-top: 1px solid #CCC;
     border-top-left-radius: 4px;
 }
 
 .tag-row:first-child input.value {
+    border-top: 1px solid #CCC;
     border-top-right-radius: 4px;
 }
 
@@ -1192,22 +1192,23 @@ div.combobox {
     border-bottom-right-radius: 4px;
 }
 
-.tag-row input.key {
-    border-left: 1px solid #ccc;
-}
-
 .tag-row button {
     position: absolute;
-    top: 5px;
-    right: -25%;
+    height: 30px;
+    right: -20px;
+    opacity: 0;
+    border-radius: 0;
 }
 
-.tag-row button.tag-help {
-    right: -12.5%;
+.tag-row:hover input.value {
+    border-radius: 0;
+}
+
+.tag-row:hover button {
+    opacity: 1;
 }
 
 .inspector-inner .add-tag {
-    width: 20%;
     height: 30px;
     border-top: 0;
     background: rgba(0,0,0,.5);
