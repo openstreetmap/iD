@@ -696,6 +696,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     width:100%;
     margin-top: 60px;
     padding: 20px 10px 10px 20px;
+    border-bottom: 1px solid #ccc;
 }
 .grid-button-wrap {
     padding: 0 10px 10px 0;
@@ -804,7 +805,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .show-more {
     text-align: center;
     width: 100%;
-    border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
 }
@@ -1125,6 +1125,11 @@ div.combobox {
 }
 
 /* tag editor */
+
+.inspector-inner.additional-tags {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
 
 .tag-list {
     margin-top: 10px;

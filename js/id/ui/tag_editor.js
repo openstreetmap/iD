@@ -30,10 +30,7 @@ iD.ui.TagEditor = function(context, entity) {
             .attr('class', 'message fillL');
 
         messagewrap.append('button')
-            .attr('class', 'tooltip-bottom preset-reset fl')
-            .call(bootstrap.tooltip()
-                .title(t('inspector.back_tooltip'))
-                .placement('left'))
+            .attr('class', 'preset-reset fl')
             .on('click', function() {
                 event.choose(preset);
             })
@@ -45,13 +42,13 @@ iD.ui.TagEditor = function(context, entity) {
             .text(t('inspector.editing'));
 
         messagewrap.append('button')
-            .attr('class', 'tooltip-bottom preset-close fr')
+            .attr('class', 'preset-close fr')
             .on('click', event.close)
             .append('span')
             .attr('class', 'icon close');
 
         var editorwrap = selection.append('div')
-            .attr('class', 'tag-wrap inspector-body fillL inspector-body-' + entity.geometry(context.graph()));
+            .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()));
 
         var headerwrap = editorwrap.append('div').attr('class','col12 head');
 
@@ -101,7 +98,7 @@ iD.ui.TagEditor = function(context, entity) {
         }
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2')
+            .attr('class','inspector-inner col12 fillL additional-tags')
             .call(tagList, preset.id === 'other');
 
         // Don't add for created entities

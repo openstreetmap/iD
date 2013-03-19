@@ -33,7 +33,7 @@ iD.ui.PresetGrid = function(context, entity) {
         }
 
         var gridwrap = selection.append('div')
-            .attr('class', 'fillL inspector-body inspector-body-' + entity.geometry(context.graph()));
+            .attr('class', 'fillL2 inspector-body inspector-body-' + entity.geometry(context.graph()));
 
         var grid = gridwrap.append('div')
             .attr('class', 'preset-grid fillL cf')
