@@ -837,6 +837,16 @@
         "terms": [],
         "name": "Building"
     },
+    "building/entrance": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "building": "entrance"
+        },
+        "name": "Entrance",
+        "searchable": false
+    },
     "entrance": {
         "geometry": [
             "vertex"

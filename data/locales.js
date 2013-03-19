@@ -588,6 +588,10 @@ locale.en = {
                 "name": "Building",
                 "terms": ""
             },
+            "building/entrance": {
+                "name": "Entrance",
+                "terms": ""
+            },
             "entrance": {
                 "name": "Entrance",
                 "terms": ""
