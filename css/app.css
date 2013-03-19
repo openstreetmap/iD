@@ -622,7 +622,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: absolute;
     right: 0;
     left: 0;
-    bottom: 90px;
+    bottom: 30px;
     top: 60px;
 }
 
@@ -653,10 +653,17 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     transition: box-shadow 100ms;
 }
 
-.inspector-wrap .message button.preset-reset {
+.inspector-wrap .message button.fl {
     height: 100%;
     border-radius: 0;
     border-right: 1px solid #CCC;
+    width: 12.5%;
+}
+
+.inspector-wrap .message button.fr {
+    height: 100%;
+    border-radius: 0;
+    border-left: 1px solid #CCC;
     width: 12.5%;
 }
 

@@ -12,10 +12,25 @@ iD.ui.PresetGrid = function(context, entity) {
         presets = context.presets().matchGeometry(entity, context.graph());
 
         var messagewrap = selection.append('div')
-            .attr('class', 'message inspector-inner fillL');
+            .attr('class', 'message fillL');
 
         var message = messagewrap.append('h3')
+            .attr('class', 'inspector-inner fl')
             .text(t('inspector.choose'));
+
+        if (preset) {
+            messagewrap.append('button')
+                .attr('class', 'tooltip-bottom preset-choose fr')
+                .on('click', event.choose)
+                .append('span')
+                .attr('class', 'icon forward');
+        } else {
+            messagewrap.append('button')
+                .attr('class', 'tooltip-bottom preset-close fr')
+                .on('click', event.close)
+                .append('span')
+                .attr('class', 'icon close');
+        }
 
         var gridwrap = selection.append('div')
             .attr('class', 'fillL inspector-body inspector-body-' + entity.geometry(context.graph()));
@@ -89,12 +104,6 @@ iD.ui.PresetGrid = function(context, entity) {
             .attr('class', 'icon search');
 
         search.node().focus();
-
-        if (preset) {
-            selection.append('div')
-                .attr('class', 'inspector-actions pad1 fillD col12')
-                .call(drawButtons);
-        }
 
         function choose(d) {
             // Category
@@ -222,21 +231,6 @@ iD.ui.PresetGrid = function(context, entity) {
 
             entries.order();
         }
-    }
-
-    function cancel() {
-        event.choose();
-    }
-
-    function drawButtons(selection) {
-
-        var inspectorButton = selection.append('button')
-            .attr('class', 'apply action')
-            .on('click', cancel);
-
-        inspectorButton.append('span')
-            .attr('class','label')
-            .text(t('commit.cancel'));
     }
 
     return d3.rebind(presetgrid, event, 'on');

@@ -37,11 +37,18 @@ iD.ui.TagEditor = function(context, entity) {
             .on('click', function() {
                 event.choose(preset);
             })
-            .append('span').attr('class','icon back');
+            .append('span')
+            .attr('class', 'icon back');
 
         messagewrap.append('h3')
             .attr('class', 'inspector-inner fl')
             .text(t('inspector.editing'));
+
+        messagewrap.append('button')
+            .attr('class', 'tooltip-bottom preset-close fr')
+            .on('click', event.close)
+            .append('span')
+            .attr('class', 'icon close');
 
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body fillL inspector-body-' + entity.geometry(context.graph()));
@@ -94,11 +101,16 @@ iD.ui.TagEditor = function(context, entity) {
         }
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2').call(tagList, preset.id === 'other');
+            .attr('class','inspector-inner col12 fillL2')
+            .call(tagList, preset.id === 'other');
 
-        selection.append('div')
-            .attr('class', 'inspector-actions pad1 fillD col12')
-            .call(drawButtons);
+        // Don't add for created entities
+        if (entity.osmId() > 0) {
+            editorwrap.append('a')
+                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                .attr('target', '_blank')
+                .text(t('inspector.view_on_osm'));
+        }
 
         tageditor.tags(tags);
         changeTags();
@@ -115,32 +127,6 @@ iD.ui.TagEditor = function(context, entity) {
     function changeTags(changed) {
         tags = clean(_.extend(tags, changed));
         event.changeTags(_.clone(tags));
-    }
-
-    function apply() {
-        event.close();
-    }
-
-    function drawButtons(selection) {
-
-        var inspectorButton = selection.append('button')
-            .attr('class', 'apply action')
-            .on('click', apply);
-
-        inspectorButton.append('span')
-            .attr('class','label')
-            .text(t('inspector.okay'));
-
-        var minorButtons = selection.append('div')
-            .attr('class','minor-buttons fl');
-
-        // Don't add for created entities
-        if (entity.osmId() > 0) {
-            minorButtons.append('a')
-                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-                .attr('target', '_blank')
-                .text(t('inspector.view_on_osm'));
-        }
     }
 
     tageditor.tags = function(newtags) {
