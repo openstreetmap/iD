@@ -1047,6 +1047,7 @@ locale.en = {
         }
     }
 };
+
 locale.zh = {
     "modes": {
         "add_area": {
