@@ -21,13 +21,14 @@ iD.actions.Circularize = function(wayId, projection, count) {
             radius = d3.median(points, function(p) {
                 return iD.geo.dist(centroid, p);
             }),
-            ids = [];
+            ids = [],
+            sign = d3.geom.polygon(points).area() > 0 ? -1 : 1;
 
         for (var i = 0; i < count; i++) {
             var node,
                 loc = projection.invert([
-                    centroid[0] + Math.cos((i / 12) * Math.PI * 2) * radius,
-                    centroid[1] + Math.sin((i / 12) * Math.PI * 2) * radius]);
+                    centroid[0] + Math.cos(sign * (i / 12) * Math.PI * 2) * radius,
+                    centroid[1] + Math.sin(sign * (i / 12) * Math.PI * 2) * radius]);
 
             if (nodes.length) {
                 var idx = closestIndex(nodes, loc);
