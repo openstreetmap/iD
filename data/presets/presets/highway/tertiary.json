@@ -5,7 +5,8 @@
         "structure",
         "access",
         "maxspeed",
-        "surface"
+        "surface",
+        "ref"
     ],
     "geometry": [
         "line"
