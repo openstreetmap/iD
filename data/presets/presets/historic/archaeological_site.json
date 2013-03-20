@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "historic": "archaeological_site"
+    },
+    "name": "Archaeological Site"
+}
