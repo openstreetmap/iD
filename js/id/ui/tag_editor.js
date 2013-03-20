@@ -98,7 +98,7 @@ iD.ui.TagEditor = function(context, entity) {
         }
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL additional-tags')
+            .attr('class','inspector-inner col12 fillL2 additional-tags')
             .call(tagList, preset.id === 'other');
 
         // Don't add for created entities

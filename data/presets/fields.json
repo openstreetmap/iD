@@ -368,7 +368,7 @@
             "no"
         ],
         "icon": "wheelchair",
-        "universal": "true",
+        "universal": true,
         "label": "Wheelchair Access"
     },
     "wikipedia": {

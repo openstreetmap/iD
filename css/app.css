@@ -283,7 +283,7 @@ ul.link-list li:last-child {
 
 div.hide,
 form.hide {
-    display:none;
+    display: none;
 }
 
 .deemphasize {
@@ -1147,12 +1147,11 @@ div.combobox {
 /* tag editor */
 
 .inspector-inner.additional-tags {
-    border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
 }
 
 .tag-list {
-    margin-top: 10px;
+    padding-top: 20px;
 }
 
 .tag-row {

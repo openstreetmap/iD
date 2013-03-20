@@ -588,6 +588,10 @@ locale.en = {
                 "name": "Building",
                 "terms": ""
             },
+            "building/entrance": {
+                "name": "Entrance",
+                "terms": ""
+            },
             "entrance": {
                 "name": "Entrance",
                 "terms": ""
@@ -1047,6 +1051,7 @@ locale.en = {
         }
     }
 };
+
 locale.zh = {
     "modes": {
         "add_area": {

@@ -24,7 +24,8 @@
     "mocha-phantomjs": "~1.1.1",
     "glob": "~3.1.21",
     "js-yaml": "~2.0.3",
-    "request": "~2.16.2"
+    "request": "~2.16.2",
+    "jsonschema": "~0.3.2"
   },
   "engines": {
     "node": "~0.8.20"

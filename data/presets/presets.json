@@ -828,14 +828,6 @@
             "building_yes",
             "levels"
         ],
-        "additional": [
-            "address",
-            "phone",
-            "website",
-            "wikipedia",
-            "elevation",
-            "source"
-        ],
         "geometry": [
             "area"
         ],
@@ -844,6 +836,16 @@
         },
         "terms": [],
         "name": "Building"
+    },
+    "building/entrance": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "building": "entrance"
+        },
+        "name": "Entrance",
+        "searchable": false
     },
     "entrance": {
         "geometry": [
