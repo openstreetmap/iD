@@ -1,0 +1,14 @@
+{
+    "icon": "railway-monorail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "monorail"
+    },
+    "fields": [
+        "structure"
+    ],
+    "terms": [],
+    "name": "Monorail"
+}

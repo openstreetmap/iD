@@ -1,9 +1,10 @@
 {
     "fields": [
         "access",
-        "surface"
+        "surface",
+        "structure"
     ],
-    "icon": "highway-steps",
+    "icon": "highway-bridleway",
     "geometry": [
         "line"
     ],

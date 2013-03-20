@@ -5,5 +5,6 @@
     "tags": {
         "power": "line"
     },
-    "name": "Power Line"
+    "name": "Power Line",
+    "icon": "power-line"
 }
