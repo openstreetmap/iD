@@ -175,7 +175,7 @@ locale.en = {
         "okay": "Okay",
         "view_on_osm": "View on OSM",
         "name": "Name",
-        "editing": "Edit details",
+        "editing_feature": "Editing {feature}",
         "additional": "Additional tags",
         "choose": "Select feature type",
         "results": "{n} results for {search}",

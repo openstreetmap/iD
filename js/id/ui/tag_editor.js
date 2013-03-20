@@ -37,9 +37,14 @@ iD.ui.TagEditor = function(context, entity) {
             .append('span')
             .attr('class', 'icon back');
 
+        messagewrap.append('div')
+            .attr('class', 'preset-reset fl ' + geometry)
+            .append('span')
+            .attr('class', 'icon' + (preset ?  ' feature-' + (preset.icon || 'marker-stroked') : ''));
+
         messagewrap.append('h3')
             .attr('class', 'inspector-inner fl')
-            .text(t('inspector.editing'));
+            .text(t('inspector.editing_feature', { feature: preset.name() }));
 
         messagewrap.append('button')
             .attr('class', 'preset-close fr')
@@ -50,24 +55,8 @@ iD.ui.TagEditor = function(context, entity) {
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()));
 
-        var headerwrap = editorwrap.append('div').attr('class','col12 head');
-
-        var typebutton = headerwrap.append('div')
-            .attr('class','grid-button-wrap col4')
-                .append('div')
-                .attr('class','col12 grid-entry');
-
-        typebutton.append('div')
-            .attr('class', 'icon' + (preset ?  ' feature-' + (preset.icon || 'marker-stroked') : ''));
-
-        typebutton.node().focus();
-
-         var namewrap = headerwrap.append('div')
-             .attr('class', 'name fillL inspector-inner col8');
-
-        typebutton.append('span')
-            .attr('class','label')
-            .text(preset.name());
+        var namewrap = editorwrap.append('div')
+             .attr('class', 'name fillL inspector-inner col12');
 
         namewrap.append('h4')
             .text(t('inspector.name'));

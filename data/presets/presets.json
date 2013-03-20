@@ -971,7 +971,8 @@
             "structure",
             "access",
             "maxspeed",
-            "surface"
+            "surface",
+            "ref"
         ],
         "geometry": [
             "line"
@@ -1007,7 +1008,8 @@
             "structure",
             "access",
             "maxspeed",
-            "surface"
+            "surface",
+            "ref"
         ],
         "geometry": [
             "line"
@@ -1043,7 +1045,8 @@
             "structure",
             "access",
             "maxspeed",
-            "surface"
+            "surface",
+            "ref"
         ],
         "geometry": [
             "line"
@@ -1097,7 +1100,8 @@
             "structure",
             "access",
             "maxspeed",
-            "surface"
+            "surface",
+            "ref"
         ],
         "geometry": [
             "line"
@@ -1147,7 +1151,8 @@
             "structure",
             "access",
             "maxspeed",
-            "surface"
+            "surface",
+            "ref"
         ],
         "geometry": [
             "line"

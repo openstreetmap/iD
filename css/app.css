@@ -649,11 +649,22 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
 }
 
+.inspector-wrap .message div.fl,
 .inspector-wrap .message button.fl {
     height: 100%;
     border-radius: 0;
     border-right: 1px solid #CCC;
     width: 12.5%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.inspector-wrap .message div.fl .icon{
+    margin-top: 18px;
+}
+.inspector-wrap .message div.fl.line .icon{
+    margin-left: -25px;
+    margin-top: -23px;
 }
 
 .inspector-wrap .message button.fr {
@@ -882,8 +893,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
    }
 
 .inspector-body .name {
-    height: 110px;
-    border-bottom: 1px solid #ccc;
+    padding-bottom: 0;
 }
 
 .name input.major {
@@ -1199,13 +1209,21 @@ div.combobox {
     border-radius: 0;
 }
 
-.tag-row:hover input.value {
+.tag-row button.tag-help {
+    left: -20px
+}
+
+.tag-row:hover input.value,
+.tag-row:hover input.key {
     border-radius: 0;
 }
 
 .tag-row:hover button {
     opacity: 1;
 }
+
+/* Adding form fields to tag editor */
+
 
 .inspector-inner .add-tag {
     height: 30px;
