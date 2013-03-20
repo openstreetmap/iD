@@ -3,15 +3,14 @@
     "icon": "highway",
     "id": "Road",
     "members": [
+        "highway/residential",
         "highway/motorway",
         "highway/trunk",
         "highway/primary",
         "highway/secondary",
         "highway/tertiary",
         "highway/unclassified",
-        "highway/residential",
         "highway/service",
-        "highway/track",
-        "highway"
+        "highway/track"
     ]
 }]
