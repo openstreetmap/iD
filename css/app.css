@@ -759,7 +759,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .grid-entry > .icon {
     position: absolute;
-    top: 30px;left: -30px; right: -30px;
+    top: 30px;left: 0px; right: 0px;
     margin: auto;
 }
 

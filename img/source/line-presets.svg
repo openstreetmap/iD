@@ -127,16 +127,6 @@
          style="stop-color:#b5b5b5;stop-opacity:1" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5138-2"
-       id="linearGradient7078-0"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-250,-110)"
-       x1="200"
-       y1="162.36218"
-       x2="200"
-       y2="147.36218" />
-    <linearGradient
        id="linearGradient5138-2"
        inkscape:collect="always">
       <stop
@@ -158,16 +148,6 @@
        id="linearGradient6374"
        xlink:href="#linearGradient5138-2"
        inkscape:collect="always" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5150-7"
-       id="linearGradient7337-9"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-410,-97.637817)"
-       x1="610"
-       y1="147"
-       x2="610"
-       y2="135" />
     <linearGradient
        id="linearGradient5150-7"
        inkscape:collect="always">
@@ -248,8 +228,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="636.34449"
-     inkscape:cy="12.095372"
+     inkscape:cx="286.0879"
+     inkscape:cy="78.076074"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -343,6 +323,10 @@
        orientation="0,1"
        position="76,-84"
        id="guide6110" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="665,71"
+       id="guide5181" />
   </sodipodi:namedview>
   <metadata
      id="metadata7018">
@@ -700,7 +684,7 @@
          inkscape:label="#path24321"
          sodipodi:nodetypes="cscscscsccscscscscc"
          inkscape:connector-curvature="0"
-         id="waterway-riverdsads"
+         id="245"
          d="m 406.76193,73.362183 c 0,0 -0.53638,-1.846128 -0.34524,-2.75 0.22134,-1.046677 1.65476,-2.75 1.65476,-2.75 0,0 1.43342,-1.703323 1.65476,-2.75 0.19114,-0.903872 -0.34524,-2.75 -0.34524,-2.75 0,0 -0.53639,-1.846127 -0.34525,-2.75 0.22134,-1.046678 1.65476,-2.75 1.65476,-2.75 0,0 1.43342,-1.703323 1.65476,-2.75 0.19114,-0.903872 -0.34524,-2.75 -0.34524,-2.75 l 16.5,0 c 0,0 1.43342,1.703323 1.65476,2.75 0.19115,0.903872 -0.34523,2.75 -0.34523,2.75 0,0 -0.53638,1.846128 -0.34524,2.75 0.22134,1.046679 1.65477,2.75 1.65477,2.75 0,0 1.43342,1.703323 1.65476,2.75 0.19115,0.903872 -0.34523,2.75 -0.34523,2.75 0,0 -0.53638,1.846128 -0.34524,2.75 0.22134,1.046679 1.65477,2.75 1.65477,2.75 z"
          style="color:#000000;fill:#60d4de;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <path
@@ -2940,7 +2924,7 @@
            sodipodi:nodetypes="cccccccccssccccccssccccccccccccccccccccccccccccccccccccccccccccccc" />
         <path
            style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b5b5b5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-           d="m 212,46.36218 4,1.50001 0,20.87499 7,2.625 0,-12.375 -3,-1.125 0,-7 1,0.375 2,0.75 0,-1.125 0,-9.5 z"
+           d="m 212,49.36218 4,1.50001 0,17.87499 7,2.625 0,-12.375 -3,-1.125 0,-4 1,0.375 2,0.75 0,-1.125 0,-9.5 z"
            id="path23978"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="cccccccccccc" />
@@ -2960,7 +2944,7 @@
            sodipodi:nodetypes="cccccccccccc"
            inkscape:connector-curvature="0"
            id="path23989"
-           d="m 188,46.36218 -4,1.50001 0,20.87499 -7,2.625 0,-12.375 3,-1.125 0,-7 -1,0.375 -2,0.75 0,-1.125 0,-9.5 z"
+           d="m 188,49.36218 -4,1.50001 0,17.87499 -7,2.625 0,-12.375 3,-1.125 0,-4 -1,0.375 -2,0.75 0,-1.125 0,-9.5 z"
            style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b5b5b5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
         <rect
            y="78.362183"
@@ -3007,11 +2991,6 @@
              transform="translate(-362,12.362183)" />
         </g>
       </g>
-      <path
-         id="rect23474-8"
-         d="m -72.125,37.362183 -0.875,2 13,6 0,2 -4,2 0,3 7,-3 0,-12 -15.125,0 z m 29.125,0 0,12 7,3 0,-3 -4,-2 0,-2 13,-6 -0.875,-2 -15.125,0 z"
-         style="opacity:0.5;color:#000000;fill:url(#linearGradient7078-0);fill-opacity:1;fill-rule:nonzero;stroke:#b5b5b5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         inkscape:connector-curvature="0" />
     </g>
     <g
        id="g7457"
@@ -3040,8 +3019,8 @@
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
-           style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#989898;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-           d="m 628,43.36218 -4,1.50001 0,23.87499 -7,2.625 0,-12.375 3,-1.125 0,-7 -1,0.375 -2,0.75 0,-1.125 0,-12.5 z"
+           style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#b5b5b5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+           d="m 628,49.36218 -4,1.50001 0,17.87499 -7,2.625 0,-12.375 3,-1.125 0,-4 -1,0.375 -2,0.75 0,-1.125 0,-9.5 z"
            id="path25569"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="cccccccccccc" />
@@ -3049,7 +3028,7 @@
            sodipodi:nodetypes="ccccccccccccccccccccccccccccccsssss"
            inkscape:connector-curvature="0"
            id="rect24381-9"
-           d="m 661,47.362183 -1,1 0,2 1,1 2,0 1,-1 0,-2 -1,-1 z m -1,5 -1,1 -5,5 2.5,0 2.5,-2.5 0,4.5 0,7 1,0 1,-1 0,-6 2.1875,0 0.8125,4 2,0 2,0 1,-1 0,-1 -3.4062,0 -0.5938,-3 0,-6 -1,-1 z m -4.5,10 c -0.8284,0 -1.5,0.671573 -1.5,1.5 0,0.828427 0.6716,1.5 1.5,1.5 0.8284,0 1.5,-0.671573 1.5,-1.5 0,-0.828427 -0.6716,-1.5 -1.5,-1.5 z"
+           d="m 661,47.362183 -1,1 0,2 1,1 2,0 1,-1 0,-2 -1,-1 z m -1,5 -1,1 -5,5 2.5,0 2.5,-2.5 0,4.5 0,7 1,0 1,-1 0,-6 2.1875,0 0.8125,4 2,0 2,0 1,-1 0,-1 -3.4062,0 -0.5938,-3 0,-6 -1,-1 z m -4.5,11 c -0.8284,0 -1.5,0.671573 -1.5,1.5 0,0.828427 0.6716,1.5 1.5,1.5 0.8284,0 1.5,-0.671573 1.5,-1.5 0,-0.828427 -0.6716,-1.5 -1.5,-1.5 z"
            style="color:#000000;fill:#989898;fill-opacity:1;fill-rule:nonzero;stroke:#b5b5b5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
         <path
            sodipodi:nodetypes="ccccc"
@@ -3121,11 +3100,6 @@
            style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            sodipodi:type="arc" />
       </g>
-      <path
-         id="rect16839-4"
-         d="m 169.1562,37.362183 10.8438,5 0,2 -4,2 0,6 7,-3 0,-12 -13.8438,0 z"
-         style="opacity:0.5;color:#000000;fill:url(#linearGradient7337-9);fill-opacity:1;fill-rule:nonzero;stroke:#b5b5b5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         inkscape:connector-curvature="0" />
     </g>
     <g
        id="waterway-canal"
@@ -3195,8 +3169,9 @@
              style="color:#000000;fill:#60d4de;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
              d="m 1722,39 c 0,0 0.5349,1.84613 0.3438,2.75 -0.2214,1.04668 -1.6563,2.75 -1.6563,2.75 0,0 -1.4349,1.70333 -1.6563,2.75 -0.1911,0.90388 0.3438,2.75 0.3438,2.75 0,0 0.5349,1.84613 0.3438,2.75 -0.2214,1.04668 -1.6563,2.75 -1.6563,2.75 0,0 -1.4349,1.70333 -1.6563,2.75 -0.1911,0.90388 0.3438,2.75 0.3438,2.75 l 27,0 c 0,0 -1.4349,-1.70332 -1.6562,-2.75 -0.1912,-0.90387 0.3437,-2.75 0.3437,-2.75 0,0 0.5349,-1.84612 0.3437,-2.75 -0.2213,-1.04667 -1.6562,-2.75 -1.6562,-2.75 0,0 -1.4349,-1.70332 -1.6562,-2.75 -0.1912,-0.90387 0.3437,-2.75 0.3437,-2.75 0,0 0.5349,-1.84612 0.3437,-2.75 C 1739.9349,40.70333 1738.5,39 1738.5,39 l -16.5,0 z m 6,2 4,0 2,2 0,12 -2,2 -4,0 -2,-2 0,-12 2,-2 z"
              transform="translate(-1310,12.362183)"
-             id="waterway-riverdsads-8"
-             inkscape:connector-curvature="0" />
+             id="333"
+             inkscape:connector-curvature="0"
+             inkscape:label="#waterway-riverdsads-8" />
         </g>
         <path
            style="color:#000000;fill:#60d4de;fill-opacity:1;fill-rule:nonzero;stroke:#b5b5b5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
