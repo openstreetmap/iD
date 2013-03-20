@@ -15,5 +15,9 @@ iD.presets.Category = function(category, all) {
         return category.id;
     };
 
+    category.terms = function() {
+        return [];
+    };
+
     return category;
 };
