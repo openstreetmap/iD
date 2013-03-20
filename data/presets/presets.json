@@ -1057,6 +1057,25 @@
         },
         "name": "Highway"
     },
+    "highway/bridleway": {
+        "fields": [
+            "access",
+            "surface",
+            "structure"
+        ],
+        "icon": "highway-bridleway",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "steps"
+        },
+        "terms": [
+            "stairs",
+            "staircase"
+        ],
+        "name": "Steps"
+    },
     "highway/bus_stop": {
         "icon": "bus",
         "fields": [
@@ -1264,6 +1283,7 @@
             "access",
             "surface"
         ],
+        "icon": "highway-steps",
         "geometry": [
             "line"
         ],
@@ -2318,7 +2338,8 @@
         "tags": {
             "power": "line"
         },
-        "name": "Power Line"
+        "name": "Power Line",
+        "icon": "power-line"
     },
     "power/pole": {
         "geometry": [
@@ -2377,6 +2398,34 @@
         },
         "name": "Railway"
     },
+    "railway/abandoned": {
+        "icon": "railway-abandoned",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "abandoned"
+        },
+        "fields": [
+            "structure"
+        ],
+        "terms": [],
+        "name": "Abandoned railway"
+    },
+    "railway/disused": {
+        "icon": "railway-disused",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "disused"
+        },
+        "fields": [
+            "structure"
+        ],
+        "terms": [],
+        "name": "Disused railway"
+    },
     "railway/level_crossing": {
         "icon": "cross",
         "geometry": [
@@ -2394,6 +2443,20 @@
             "train crossing"
         ],
         "name": "Level Crossing"
+    },
+    "railway/monorail": {
+        "icon": "railway-monorail",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "monorail"
+        },
+        "fields": [
+            "structure"
+        ],
+        "terms": [],
+        "name": "Monorail"
     },
     "railway/rail": {
         "icon": "railway-rail",
@@ -2433,6 +2496,22 @@
         },
         "terms": [],
         "name": "Subway Entrance"
+    },
+    "railway/tram": {
+        "icon": "railway-light_rail",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "tram"
+        },
+        "fields": [
+            "structure"
+        ],
+        "terms": [
+            "streetcar"
+        ],
+        "name": "Tram"
     },
     "shop": {
         "icon": "shop",
@@ -3593,7 +3672,7 @@
         "name": "Waterway"
     },
     "waterway/canal": {
-        "icon": "waterway-river",
+        "icon": "waterway-canal",
         "geometry": [
             "line"
         ],
@@ -3616,7 +3695,7 @@
         "name": "Dam"
     },
     "waterway/ditch": {
-        "icon": "waterway-river",
+        "icon": "waterway-ditch",
         "geometry": [
             "line"
         ],
@@ -3671,7 +3750,7 @@
         "name": "Riverbank"
     },
     "waterway/stream": {
-        "icon": "waterway-river",
+        "icon": "waterway-stream",
         "fields": [
             "layer"
         ],
