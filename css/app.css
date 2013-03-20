@@ -1203,7 +1203,8 @@ div.combobox {
     left: -20px
 }
 
-.tag-row:hover input.value {
+.tag-row:hover input.value,
+.tag-row:hover input.key {
     border-radius: 0;
 }
 
