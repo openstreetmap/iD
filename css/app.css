@@ -1199,6 +1199,10 @@ div.combobox {
     border-radius: 0;
 }
 
+.tag-row button.tag-help {
+    left: -20px
+}
+
 .tag-row:hover input.value {
     border-radius: 0;
 }
@@ -1206,6 +1210,9 @@ div.combobox {
 .tag-row:hover button {
     opacity: 1;
 }
+
+/* Adding form fields to tag editor */
+
 
 .inspector-inner .add-tag {
     height: 30px;

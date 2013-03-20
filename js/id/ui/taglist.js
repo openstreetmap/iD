@@ -86,6 +86,14 @@ iD.ui.Taglist = function(context, entity) {
 
         row.each(bindTypeahead);
 
+        var removeBtn = row.append('button')
+            .attr('tabindex', -1)
+            .attr('class','remove minor')
+            .on('click', removeTag);
+
+        removeBtn.append('span')
+            .attr('class', 'icon delete');
+
         function findLocal(docs) {
             var locale = iD.detect().locale.toLowerCase(),
                 localized;
