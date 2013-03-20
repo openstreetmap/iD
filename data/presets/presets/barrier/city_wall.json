@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "barrier": "city_wall"
+    },
+    "name": "City Wall"
+}

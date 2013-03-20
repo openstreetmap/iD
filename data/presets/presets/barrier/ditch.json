@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "barrier": "ditch"
+    },
+    "name": "Ditch"
+}

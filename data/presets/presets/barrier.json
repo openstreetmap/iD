@@ -1,0 +1,15 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "barrier": "*"
+    },
+    "fields": [
+        "barrier"
+    ],
+    "name": "Barrier"
+}

@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "barrier": "retaining_wall"
+    },
+    "name": "Retaining Wall"
+}

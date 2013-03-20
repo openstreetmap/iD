@@ -1,0 +1,9 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "entrance"
+    },
+    "name": "Entrance"
+}
