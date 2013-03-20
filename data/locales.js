@@ -682,6 +682,10 @@ locale.en = {
                 "name": "Highway",
                 "terms": ""
             },
+            "highway/bridleway": {
+                "name": "Steps",
+                "terms": "stairs,staircase"
+            },
             "highway/bus_stop": {
                 "name": "Bus Stop",
                 "terms": ""
@@ -1058,9 +1062,21 @@ locale.en = {
                 "name": "Railway",
                 "terms": ""
             },
+            "railway/abandoned": {
+                "name": "Abandoned railway",
+                "terms": ""
+            },
+            "railway/disused": {
+                "name": "Disused railway",
+                "terms": ""
+            },
             "railway/level_crossing": {
                 "name": "Level Crossing",
                 "terms": "crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing"
+            },
+            "railway/monorail": {
+                "name": "Monorail",
+                "terms": ""
             },
             "railway/rail": {
                 "name": "Rail",
@@ -1073,6 +1089,10 @@ locale.en = {
             "railway/subway_entrance": {
                 "name": "Subway Entrance",
                 "terms": ""
+            },
+            "railway/tram": {
+                "name": "Tram",
+                "terms": "streetcar"
             },
             "shop": {
                 "name": "Shop",
@@ -1389,7 +1409,6 @@ locale.en = {
         }
     }
 };
-
 locale.zh = {
     "modes": {
         "add_area": {
@@ -1588,7 +1607,7 @@ locale.zh = {
     },
     "save": {
         "title": "保存",
-        "help": "保存更改到OpenStreetMap上，使其他用户可已看见。",
+        "help": "保存更改到OpenStreetMap上，使其他用户可以看见。",
         "no_changes": "没有可以保存的更改。",
         "error": "保存发生错误",
         "uploading": "正在向OpenStreetMap上传更改。",
@@ -1663,6 +1682,9 @@ locale.zh = {
             "construction": {
                 "label": "类型"
             },
+            "country": {
+                "label": "国家"
+            },
             "crossing": {
                 "label": "类型"
             },
@@ -1670,7 +1692,7 @@ locale.zh = {
                 "label": "美食"
             },
             "denomination": {
-                "label": "面值"
+                "label": "教派"
             },
             "denotation": {
                 "label": "意思"
@@ -1679,7 +1701,7 @@ locale.zh = {
                 "label": "海拔"
             },
             "emergency": {
-                "label": "紧急事件"
+                "label": "急诊"
             },
             "entrance": {
                 "label": "类型"
@@ -1741,7 +1763,7 @@ locale.zh = {
                 "label": "小时"
             },
             "operator": {
-                "label": "运营商"
+                "label": "经营者"
             },
             "phone": {
                 "label": "手机"
@@ -1782,6 +1804,15 @@ locale.zh = {
             "sport": {
                 "label": "运动"
             },
+            "structure": {
+                "label": "结构",
+                "options": {
+                    "bridge": "桥",
+                    "tunnel": "隧道",
+                    "embankment": "堤岸",
+                    "cutting": "开凿"
+                }
+            },
             "surface": {
                 "label": "表面"
             },
@@ -1800,6 +1831,9 @@ locale.zh = {
             "wetland": {
                 "label": "类型"
             },
+            "wheelchair": {
+                "label": "轮椅通道"
+            },
             "wikipedia": {
                 "label": "维基百科"
             },
@@ -1812,10 +1846,12 @@ locale.zh = {
                 "name": "机场相关道路"
             },
             "aeroway/aerodrome": {
-                "name": "机场"
+                "name": "机场",
+                "terms": "飞机,机场,机场"
             },
             "aeroway/helipad": {
-                "name": "直升机场"
+                "name": "直升机场",
+                "terms": "直升机,直升机停机坪,直升机场"
             },
             "amenity": {
                 "name": "便利设施"
@@ -1836,10 +1872,17 @@ locale.zh = {
                 "name": "自行车租赁处"
             },
             "amenity/cafe": {
-                "name": "咖啡"
+                "name": "咖啡",
+                "terms": "咖啡,茶,咖啡馆"
             },
             "amenity/cinema": {
                 "name": "电影院"
+            },
+            "amenity/courthouse": {
+                "name": "法院"
+            },
+            "amenity/embassy": {
+                "name": "使馆"
             },
             "amenity/fast_food": {
                 "name": "快餐"
@@ -1872,16 +1915,19 @@ locale.zh = {
                 "name": "教堂"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "犹太教堂"
+                "name": "犹太教堂",
+                "terms": "犹太人,犹太教堂"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "清真寺"
+                "name": "清真寺",
+                "terms": "穆斯林,清真寺"
             },
             "amenity/police": {
                 "name": "警察局"
             },
             "amenity/post_box": {
-                "name": "邮箱"
+                "name": "邮箱",
+                "terms": "邮件投递,信箱,邮筒,邮箱"
             },
             "amenity/post_office": {
                 "name": "邮局"
@@ -1900,6 +1946,9 @@ locale.zh = {
             },
             "amenity/telephone": {
                 "name": "电话"
+            },
+            "amenity/theatre": {
+                "name": "剧院"
             },
             "amenity/toilets": {
                 "name": "厕所"
@@ -1923,7 +1972,8 @@ locale.zh = {
                 "name": "公交车站"
             },
             "highway/crossing": {
-                "name": "路口"
+                "name": "路口",
+                "terms": "人行横道,斑马线"
             },
             "highway/cycleway": {
                 "name": "自行车道"
@@ -1950,7 +2000,8 @@ locale.zh = {
                 "name": "辅助道路"
             },
             "highway/steps": {
-                "name": "台阶"
+                "name": "台阶",
+                "terms": "楼梯"
             },
             "highway/tertiary": {
                 "name": "三级道路"
@@ -1959,7 +2010,8 @@ locale.zh = {
                 "name": "轨迹"
             },
             "highway/traffic_signals": {
-                "name": "红绿灯"
+                "name": "红绿灯",
+                "terms": "灯,刹车灯,交通灯"
             },
             "highway/trunk": {
                 "name": "干线道路"
@@ -2057,6 +2109,9 @@ locale.zh = {
             "leisure/playground": {
                 "name": "运动场"
             },
+            "leisure/stadium": {
+                "name": "体育场"
+            },
             "leisure/swimming_pool": {
                 "name": "游泳池"
             },
@@ -2088,7 +2143,8 @@ locale.zh = {
                 "name": "悬崖"
             },
             "natural/coastline": {
-                "name": "海岸线"
+                "name": "海岸线",
+                "terms": "岸"
             },
             "natural/glacier": {
                 "name": "冰川"
@@ -2115,7 +2171,8 @@ locale.zh = {
                 "name": "水"
             },
             "natural/water/lake": {
-                "name": "湖泊"
+                "name": "湖泊",
+                "terms": "小湖,湖"
             },
             "natural/water/pond": {
                 "name": "池塘"
@@ -2484,6 +2541,9 @@ locale.zh_TW = {
         "in": "放大",
         "out": "縮小"
     },
+    "imagery": {
+        "provided_by": "影像由 {source} 提供"
+    },
     "presets": {
         "fields": {
             "access": {
@@ -2528,6 +2588,9 @@ locale.zh_TW = {
             "construction": {
                 "label": "種類"
             },
+            "country": {
+                "label": "國家"
+            },
             "crossing": {
                 "label": "種類"
             },
@@ -2535,7 +2598,7 @@ locale.zh_TW = {
                 "label": "美饌"
             },
             "denomination": {
-                "label": "面值"
+                "label": "教派"
             },
             "denotation": {
                 "label": "表示"
@@ -2647,6 +2710,15 @@ locale.zh_TW = {
             "sport": {
                 "label": "運動"
             },
+            "structure": {
+                "label": "結構",
+                "options": {
+                    "bridge": "橋樑",
+                    "tunnel": "隧道",
+                    "embankment": "堤岸",
+                    "cutting": "切割"
+                }
+            },
             "surface": {
                 "label": "表面"
             },
@@ -2665,6 +2737,9 @@ locale.zh_TW = {
             "wetland": {
                 "label": "種類"
             },
+            "wheelchair": {
+                "label": "輪椅通道"
+            },
             "wikipedia": {
                 "label": "維基百科"
             },
@@ -2677,16 +2752,19 @@ locale.zh_TW = {
                 "name": "機場相關設施"
             },
             "aeroway/aerodrome": {
-                "name": "機場"
+                "name": "機場",
+                "terms": "飛機，飛機場，飛行場"
             },
             "aeroway/helipad": {
-                "name": "直昇機場"
+                "name": "直昇機場",
+                "terms": "直升機，直升機坪，直升機場"
             },
             "amenity": {
                 "name": "便利設施"
             },
             "amenity/bank": {
-                "name": "銀行"
+                "name": "銀行",
+                "terms": "保險箱，帳房，信用合作社，受托人，國庫，基金，窖藏，投資機構，儲存庫，儲備，儲備，保險箱，存款，庫存，庫存，倉庫，倉庫，儲蓄及貸款協會，國庫，信託公司，窖"
             },
             "amenity/bar": {
                 "name": "酒吧"
@@ -2701,10 +2779,18 @@ locale.zh_TW = {
                 "name": "腳踏車租賃"
             },
             "amenity/cafe": {
-                "name": "咖啡廳"
+                "name": "咖啡廳",
+                "terms": "咖啡，茶，咖啡店"
             },
             "amenity/cinema": {
-                "name": "戲院"
+                "name": "戲院",
+                "terms": "大銀幕，電影院，電影，得來速影院，電影，電影，電影，電影院，電影院，電影，電影院，電影院，電影，電影，劇場，表演，銀幕"
+            },
+            "amenity/courthouse": {
+                "name": "法院"
+            },
+            "amenity/embassy": {
+                "name": "使館"
             },
             "amenity/fast_food": {
                 "name": "快餐店"
@@ -2719,7 +2805,8 @@ locale.zh_TW = {
                 "name": "墓地"
             },
             "amenity/hospital": {
-                "name": "醫院"
+                "name": "醫院",
+                "terms": "診所，急診室，衛生服務，安養院，醫院，醫院，療養院，療養院，療養院，療養院，醫務室，手術室，病房"
             },
             "amenity/library": {
                 "name": "圖書館"
@@ -2731,16 +2818,20 @@ locale.zh_TW = {
                 "name": "藥房"
             },
             "amenity/place_of_worship": {
-                "name": "禮拜地方"
+                "name": "禮拜地方",
+                "terms": "隱修院，宗座聖殿，伯特利，座堂，聖壇，附屬小教堂，小聖堂，教堂，信徒，神殿，祈禱場所，宗教場所，修道院附屬的教堂，傳道部，清真寺，小教堂，教區，小聖堂，聖所，聖地，猶太教堂，禮拜堂，寺廟"
             },
             "amenity/place_of_worship/christian": {
-                "name": "教堂"
+                "name": "教堂",
+                "terms": "基督教，隱修院，宗座聖殿，伯特利，座堂，聖壇，附屬小教堂，小聖堂，教堂，信徒，神殿，祈禱場所，宗教場所，修道院附屬的教堂，傳道部，清真寺，小教堂，教區，小聖堂，聖所，聖地，猶太教堂，禮拜堂，寺廟"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "猶太教堂"
+                "name": "猶太教堂",
+                "terms": "猶太教，猶太教堂"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "清真寺"
+                "name": "清真寺",
+                "terms": "穆斯林，清真寺"
             },
             "amenity/police": {
                 "name": "警察局"
@@ -2766,6 +2857,9 @@ locale.zh_TW = {
             "amenity/telephone": {
                 "name": "電話"
             },
+            "amenity/theatre": {
+                "name": "劇院"
+            },
             "amenity/toilets": {
                 "name": "廁所"
             },
@@ -2777,6 +2871,9 @@ locale.zh_TW = {
             },
             "building": {
                 "name": "建築物"
+            },
+            "building/entrance": {
+                "name": "入口"
             },
             "entrance": {
                 "name": "入口"
@@ -2922,6 +3019,9 @@ locale.zh_TW = {
             "leisure/playground": {
                 "name": "遊樂場"
             },
+            "leisure/stadium": {
+                "name": "體育場"
+            },
             "leisure/swimming_pool": {
                 "name": "游泳池"
             },
@@ -2953,7 +3053,8 @@ locale.zh_TW = {
                 "name": "懸崖"
             },
             "natural/coastline": {
-                "name": "海岸線"
+                "name": "海岸線",
+                "terms": "岸"
             },
             "natural/glacier": {
                 "name": "冰川"
@@ -7469,7 +7570,7 @@ locale.vi = {
     },
     "inspector": {
         "no_documentation_combination": "Không có tài liệu về tổ hợp thẻ này",
-        "no_documentation_key": "Không có tài liệu về khóa này",
+        "no_documentation_key": "Không có tài liệu về chìa khóa này",
         "show_more": "Xem thêm",
         "new_tag": "Thẻ mới",
         "edit_tags": "Sửa đổi các thẻ",
@@ -7527,6 +7628,9 @@ locale.vi = {
     "zoom": {
         "in": "Phóng to",
         "out": "Thu nhỏ"
+    },
+    "imagery": {
+        "provided_by": "Hình ảnh do {source} cung cấp"
     },
     "presets": {
         "fields": {
@@ -7861,6 +7965,9 @@ locale.vi = {
             },
             "building": {
                 "name": "Tòa nhà"
+            },
+            "building/entrance": {
+                "name": "Cửa vào"
             },
             "entrance": {
                 "name": "Cửa vào"

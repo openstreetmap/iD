@@ -323,6 +323,9 @@ en:
       highway: 
         name: Highway
         terms: ""
+      highway/bridleway: 
+        name: Steps
+        terms: "stairs,staircase"
       highway/bus_stop: 
         name: Bus Stop
         terms: ""
@@ -605,9 +608,18 @@ en:
       railway: 
         name: Railway
         terms: ""
+      railway/abandoned: 
+        name: Abandoned railway
+        terms: ""
+      railway/disused: 
+        name: Disused railway
+        terms: ""
       railway/level_crossing: 
         name: Level Crossing
         terms: "crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing"
+      railway/monorail: 
+        name: Monorail
+        terms: ""
       railway/rail: 
         name: Rail
         terms: ""
@@ -617,6 +629,9 @@ en:
       railway/subway_entrance: 
         name: Subway Entrance
         terms: ""
+      railway/tram: 
+        name: Tram
+        terms: streetcar
       shop: 
         name: Shop
         terms: ""
