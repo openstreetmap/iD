@@ -5,7 +5,7 @@ iD.presets = function(context) {
 
     var other = iD.presets.Preset('other', {
             tags: {},
-            geometry: ['point', 'vertex', 'line']
+            geometry: ['point', 'vertex', 'line', 'area']
         }),
         otherarea = iD.presets.Preset('other/area', {
             tags: { area: 'yes' },
