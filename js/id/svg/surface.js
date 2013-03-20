@@ -104,13 +104,20 @@ iD.svg.Surface = function() {
             .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })
             .attr('xlink:href', '#sprite');
 
-        defs.append('image')
+        var image = defs.append('image')
             .attr({
                 id: 'maki-sprite',
-                width: 472,
-                height: 462,
                 'xlink:href': 'img/feature-icons.png'
             });
+
+        var img = document.createElement('img');
+        img.src = 'img/feature-icons.png';
+        img.onload = function() {
+            image.attr({
+                width: img.width,
+                height: img.height
+            });
+        };
 
         defs.selectAll()
             .data(sprites("feature-icons.css", /^\.(feature-[a-z0-9-]+-(12|18))$/))
