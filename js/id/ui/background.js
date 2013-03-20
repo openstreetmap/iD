@@ -214,6 +214,7 @@ iD.ui.Background = function(context) {
 
         var gpxLayerItem = content
             .append('ul')
+            .style('display', iD.detect().filedrop ? 'block' : 'none')
             .attr('class', 'toggle-list fillL')
             .append('li')
             .append('a')

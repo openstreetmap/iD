@@ -164,6 +164,8 @@ iD.detect = function() {
 
     browser.locale = navigator.language;
 
+    browser.filedrop = (window.FileReader && 'ondrop' in window);
+
     function nav(x) {
         return navigator.userAgent.indexOf(x) !== -1;
     }
