@@ -798,28 +798,28 @@ text.point {
     cursor: url(../img/cursor-grabbing.png) 9 9, auto;
 }
 
-.mode-browse .point,
-.mode-select .point {
+.mode-browse #surface .point,
+.mode-select #surface .point {
     cursor: url(../img/cursor-select-point.png), pointer;
 }
 
-.mode-select .vertex,
-.mode-browse .vertex {
+.mode-select #surface .vertex,
+.mode-browse #surface .vertex {
     cursor: url(../img/cursor-select-vertex.png), pointer;
 }
 
-.mode-browse .line,
-.mode-select .line {
+.mode-browse #surface .line,
+.mode-select #surface .line {
     cursor: url(../img/cursor-select-line.png), pointer;
 }
 
-.mode-select .area,
-.mode-browse .area {
+.mode-select #surface .area,
+.mode-browse #surface .area {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 
-.mode-select .midpoint,
-.mode-browse .midpoint {
+.mode-select #surface .midpoint,
+.mode-browse #surface .midpoint {
     cursor: url(../img/cursor-select-split.png), pointer;
 }
 
