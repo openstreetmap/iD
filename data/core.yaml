@@ -184,3 +184,6 @@ en:
     out: Zoom Out
   imagery:
     provided_by: "Imagery provided by {source}"
+  gpx:
+    local_layer: "Local GPX file"
+    drag_drop: "Drag and drop a .gpx file on the page"
