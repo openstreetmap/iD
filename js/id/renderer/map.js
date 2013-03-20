@@ -13,7 +13,7 @@ iD.Map = function(context) {
         minzoom = 0,
         layers = [
             iD.Background().projection(projection),
-            iD.LocalGpx().projection(projection)],
+            iD.LocalGpx(context).projection(projection)],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
@@ -31,7 +31,7 @@ iD.Map = function(context) {
         selection.call(zoom);
 
         layergroup = selection.append('div')
-            .attr('id', 'layers-g');
+            .attr('id', 'layer-g');
 
         var supersurface = selection.append('div')
             .style('position', 'absolute');
@@ -166,13 +166,13 @@ iD.Map = function(context) {
 
         if (!difference) {
             var sel = layergroup
-                .selectAll('.tile-layer-group')
+                .selectAll('.layer-layer')
                 .data(layers);
 
             sel.exit().remove();
 
             sel.enter().append('div')
-                .attr('class', 'tile-layer-group');
+                .attr('class', 'layer-layer');
 
             sel.each(function(layer) {
                     d3.select(this).call(layer);

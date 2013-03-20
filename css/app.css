@@ -1415,6 +1415,14 @@ div.combobox {
     height:18px;
 }
 
+.background-control .layer-toggle-gpx .layer-extent {
+    display:none;
+}
+
+.background-control .layer-toggle-gpx.selected .layer-extent {
+    display:inline-block;
+}
+
 /* Geocoder */
 
 .geocode-control, .geocode-control form {
@@ -1471,9 +1479,12 @@ div.combobox {
     background:#000;
 }
 
-#surface, #tile-g {
+#surface, #layer-g, .layer-layer {
     position:absolute;
     top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     transform-origin:0 0;
     -ms-transform-origin:0 0;
     -webkit-transform-origin:0 0;
@@ -1487,10 +1498,6 @@ div.combobox {
 
 #surface {
   position: static;
-}
-
-#tile-g {
-  opacity: 0.5;
 }
 
 /* About Section

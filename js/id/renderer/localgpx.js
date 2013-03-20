@@ -1,7 +1,8 @@
-iD.LocalGpx = function() {
+iD.LocalGpx = function(context) {
     var tileSize = 256,
         projection,
         gj = {},
+        enable = true,
         size = [0, 0],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         path = d3.geo.path().projection(projection),
@@ -12,7 +13,7 @@ iD.LocalGpx = function() {
         path.projection(projection);
 
         var surf = selection.selectAll('svg')
-            .data([gj]);
+            .data(enable ? [gj] : []);
 
         surf.exit().remove();
 
@@ -43,17 +44,30 @@ iD.LocalGpx = function() {
         return render;
     };
 
+    render.enable = function(_) {
+        if (!arguments.length) return enable;
+        enable = _;
+        return render;
+    };
+
+    render.geojson = function(_) {
+        if (!arguments.length) return gj;
+        gj = _;
+        return render;
+    };
+
     render.size = function(_) {
         if (!arguments.length) return size;
         size = _;
         return render;
     };
 
+    render.id = 'layer-gpx';
+
     function over() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
         d3.event.dataTransfer.dropEffect = 'copy';
-        console.log('here');
     }
 
     d3.select('body')
@@ -65,7 +79,9 @@ iD.LocalGpx = function() {
                 reader = new FileReader();
 
             reader.onload = function(e) {
-                gj = toGeoJSON.gpx(toDom(e.target.result));
+                render.geojson(toGeoJSON.gpx(toDom(e.target.result)));
+                context.redraw();
+                context.map().pan([0, 0]);
             };
 
             reader.readAsText(f);
