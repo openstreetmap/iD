@@ -886,6 +886,14 @@ text.point {
     pointer-events: visibleStroke;
 }
 
+/* GPX Paths */
+path.gpx {
+    stroke:#6AFF25;
+    stroke-width:2;
+    fill:transparent;
+    pointer-events: none;
+}
+
 /* Modes */
 
 .mode-draw-line .vertex.active,
