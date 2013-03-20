@@ -233,6 +233,8 @@ iD.ui.PresetGrid = function(context, entity) {
             show_more
                 .style('display', (selection.data()[0].length > limit) ? 'block' : 'none');
 
+            selection.selectAll('.preset-inspect').remove();
+
             var entries = selection
                 .selectAll('div.grid-entry-wrap')
                 .data(function(d) { return d.slice(0, limit); }, name);
