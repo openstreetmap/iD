@@ -29,18 +29,15 @@ iD.ui.TagEditor = function(context, entity) {
         var messagewrap = selection.append('div')
             .attr('class', 'message fillL');
 
-        messagewrap.append('button')
-            .attr('class', 'preset-reset fl')
+        var back = messagewrap.append('button')
+            .attr('class', 'preset-reset fl ' + geometry)
             .on('click', function() {
                 event.choose(preset);
-            })
-            .append('span')
+            });
+        back.append('span')
             .attr('class', 'icon back');
-
-        messagewrap.append('div')
-            .attr('class', 'preset-reset fl ' + geometry)
-            .append('span')
-            .attr('class', 'icon' + (preset ?  ' feature-' + (preset.icon || 'marker-stroked') : ''));
+        back.append('span')
+            .attr('class', 'preset-icon icon' + (preset ?  ' feature-' + (preset.icon || 'marker-stroked') : ''));
 
         messagewrap.append('h3')
             .attr('class', 'inspector-inner fl')

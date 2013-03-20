@@ -654,17 +654,25 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     height: 100%;
     border-radius: 0;
     border-right: 1px solid #CCC;
-    width: 12.5%;
+    width: 25%;
     text-align: center;
     overflow: hidden;
 }
 
-.inspector-wrap .message div.fl .icon{
-    margin-top: 18px;
+.inspector-wrap .message button.fl.line .icon.back {
+    margin-top: 20px;
 }
-.inspector-wrap .message div.fl.line .icon{
-    margin-left: -25px;
-    margin-top: -23px;
+
+.inspector-wrap .message button.fl.vertex .icon.back,
+.inspector-wrap .message button.fl.point .icon.back,
+.inspector-wrap .message button.fl.area .icon.back {
+    margin-top: 2px;
+}
+
+.inspector-wrap .message button.fl.vertex .preset-icon,
+.inspector-wrap .message button.fl.point .preset-icon,
+.inspector-wrap .message button.fl.area .preset-icon {
+    margin: 0 20px;
 }
 
 .inspector-wrap .message button.fr {
@@ -676,6 +684,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-wrap .message h3 {
     display: block;
+    font-size: 16px;
     line-height: 20px;
 }
 
@@ -754,8 +763,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: auto;
 }
 
-.inspector-body-line .grid-entry .icon {
-    top: -10px;
+.inspector-body-line .grid-entry > .icon {
+    top: 10px;
+    left: -10px;
+    right: -10px;
 }
 
 .grid-entry .label {
