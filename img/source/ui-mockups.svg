@@ -126,11 +126,11 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="-772.18361"
-     inkscape:cy="296.56744"
+     inkscape:cx="-555.31968"
+     inkscape:cy="837.80707"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="false"
+     showgrid="true"
      inkscape:window-width="1497"
      inkscape:window-height="866"
      inkscape:window-x="0"
@@ -172,13 +172,6 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="color:#000000;fill:#6592ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect8240"
-       width="394"
-       height="36"
-       x="-880"
-       y="931.36218" />
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3174-3"
@@ -447,26 +440,6 @@
        rx="2"
        ry="2" />
     <rect
-       style="color:#000000;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect7975"
-       width="395"
-       height="366.98959"
-       x="-880"
-       y="-179.63782"
-       inkscape:export-filename="/Users/saman/Desktop/collapsed.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect7975-3"
-       width="395"
-       height="548"
-       x="-881"
-       y="439.36218"
-       inkscape:export-filename="/Users/saman/Desktop/expanded.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
        y="761.36218"
        x="-880"
        height="1"
@@ -650,26 +623,6 @@
        height="15"
        x="-917"
        y="997.36218" />
-    <rect
-       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect8483"
-       width="405"
-       height="422"
-       x="-885"
-       y="-179.63782"
-       inkscape:export-filename="/Users/saman/Desktop/add-form-collapsed.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect8483-5"
-       width="405"
-       height="593"
-       x="-885"
-       y="439.36218"
-       inkscape:export-filename="/Users/saman/Desktop/add-form-expanded.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
     <image
        clip-path="url(#clipPath8553)"
        width="469"
@@ -760,5 +713,15 @@
            id="tspan8524-3"
            sodipodi:role="line">Add Form</tspan></text>
     </g>
+    <rect
+       style="color:#000000;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect8620"
+       width="396"
+       height="402"
+       x="-881"
+       y="-179.63782"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/source/add-form-1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>
