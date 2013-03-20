@@ -42,7 +42,7 @@ body {
     pointer-events:none;
 }
 
-div, textarea, input, form, span, ul, li, ol, a, button {
+div, textarea, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5 {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -74,6 +74,8 @@ h3 {
     line-height: 1.3333;
     font-weight: bold;
     margin-bottom: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }
 
 h4 {
@@ -626,17 +628,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top: 60px;
 }
 
-.inspector-actions {
-    position: absolute;
-    height: 60px;
-    bottom: 30px;
-}
-
-.inspector-actions button {
-    width: 20%;
-    float: left;
-}
-
 .inspector-inner {
     padding: 20px;
     position: relative;
@@ -649,49 +640,37 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
 }
 
-.inspector-wrap .message div.fl,
-.inspector-wrap .message button.fl {
+.inspector-wrap .message button {
     height: 100%;
     border-radius: 0;
     border-right: 1px solid #CCC;
-    width: 25%;
+    width: 12.5%;
+    min-width: 60px;
     text-align: center;
     overflow: hidden;
 }
 
-.inspector-wrap .message button.fl.line .icon.back {
-    margin-top: 20px;
+.inspector-wrap .message button > div {
+    height: 100%;
+    padding: 20px 0;
 }
 
-.inspector-wrap .message button.fl.vertex .icon.back,
-.inspector-wrap .message button.fl.point .icon.back,
-.inspector-wrap .message button.fl.area .icon.back {
-    margin-top: 2px;
-}
-
-.inspector-wrap .message button.fl.vertex .preset-icon,
-.inspector-wrap .message button.fl.point .preset-icon,
-.inspector-wrap .message button.fl.area .preset-icon {
-    margin: 0 20px;
+.inspector-wrap .message button.line > div {
+    padding: 0;
 }
 
 .inspector-wrap .message button.fr {
-    height: 100%;
-    border-radius: 0;
     border-left: 1px solid #CCC;
     width: 12.5%;
+    min-width: 0;
 }
 
 .inspector-wrap .message h3 {
     display: block;
     font-size: 16px;
     line-height: 20px;
-}
-
-.inspector-actions .minor-buttons {
-    padding-left: 10px;
-    line-height: 40px;
-    width: 60%;
+    width: 62.5%;
+    overflow: hidden;
 }
 
 .inspector-toggle {
