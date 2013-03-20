@@ -367,6 +367,17 @@
         "terms": [],
         "name": "Library"
     },
+    "amenity/marketplace": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "marketplace"
+        },
+        "name": "Marketplace"
+    },
     "amenity/parking": {
         "icon": "parking",
         "fields": [
@@ -822,6 +833,178 @@
         "terms": [],
         "name": "University"
     },
+    "barrier": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "barrier": "*"
+        },
+        "fields": [
+            "barrier"
+        ],
+        "name": "Barrier"
+    },
+    "barrier/block": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "block"
+        },
+        "name": "Block"
+    },
+    "barrier/bollard": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line"
+        ],
+        "tags": {
+            "barrier": "bollard"
+        },
+        "name": "Bollard"
+    },
+    "barrier/cattle_grid": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "cattle_grid"
+        },
+        "name": "Cattle Grid"
+    },
+    "barrier/city_wall": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "barrier": "city_wall"
+        },
+        "name": "City Wall"
+    },
+    "barrier/cycle_barrier": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "cycle_barrier"
+        },
+        "name": "Cycle Barrier"
+    },
+    "barrier/ditch": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "barrier": "ditch"
+        },
+        "name": "Ditch"
+    },
+    "barrier/entrance": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "entrance"
+        },
+        "name": "Entrance"
+    },
+    "barrier/fence": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "barrier": "fence"
+        },
+        "name": "Fence"
+    },
+    "barrier/gate": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line"
+        ],
+        "tags": {
+            "barrier": "gate"
+        },
+        "name": "Gate"
+    },
+    "barrier/hedge": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "barrier": "hedge"
+        },
+        "name": "Hedge"
+    },
+    "barrier/kissing_gate": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "kissing_gate"
+        },
+        "name": "Kissing Gate"
+    },
+    "barrier/lift_gate": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "lift_gate"
+        },
+        "name": "Lift Gate"
+    },
+    "barrier/retaining_wall": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "barrier": "retaining_wall"
+        },
+        "name": "Retaining Wall"
+    },
+    "barrier/stile": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "stile"
+        },
+        "name": "Stile"
+    },
+    "barrier/toll_booth": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "toll_booth"
+        },
+        "name": "Toll Booth"
+    },
+    "barrier/wall": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "barrier": "wall"
+        },
+        "name": "Wall"
+    },
     "building": {
         "icon": "warehouse",
         "fields": [
@@ -1206,6 +1389,50 @@
         },
         "name": "Historic Site"
     },
+    "historic/archaeological_site": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "historic": "archaeological_site"
+        },
+        "name": "Archaeological Site"
+    },
+    "historic/boundary_stone": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "historic": "boundary_stone"
+        },
+        "name": "Boundary Stone"
+    },
+    "historic/castle": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "historic": "castle"
+        },
+        "name": "Castle"
+    },
+    "historic/memorial": {
+        "icon": "monument",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "historic": "memorial"
+        },
+        "name": "Memorial"
+    },
     "historic/monument": {
         "icon": "monument",
         "geometry": [
@@ -1217,6 +1444,39 @@
             "historic": "monument"
         },
         "name": "Monument"
+    },
+    "historic/ruins": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "historic": "ruins"
+        },
+        "name": "Ruins"
+    },
+    "historic/wayside_cross": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "historic": "wayside_cross"
+        },
+        "name": "Wayside Cross"
+    },
+    "historic/wayside_shrine": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "historic": "wayside_shrine"
+        },
+        "name": "Wayside Shrine"
     },
     "landuse": {
         "fields": [
@@ -1448,6 +1708,19 @@
         "terms": [],
         "name": "Golf Course"
     },
+    "leisure/marina": {
+        "icon": "marina",
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "leisure": "marina"
+        },
+        "name": "Marina"
+    },
     "leisure/park": {
         "icon": "park",
         "geometry": [
@@ -1583,6 +1856,16 @@
             "leisure": "playground"
         },
         "name": "Playground"
+    },
+    "leisure/slipway": {
+        "geometry": [
+            "point",
+            "line"
+        ],
+        "tags": {
+            "leisure": "slipway"
+        },
+        "name": "Slipway"
     },
     "leisure/stadium": {
         "geometry": [
@@ -2002,6 +2285,50 @@
         },
         "name": "Village"
     },
+    "power": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "power": "*"
+        },
+        "fields": [
+            "power"
+        ],
+        "name": "Power"
+    },
+    "power/generator": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "power": "generator"
+        },
+        "name": "Power Plant"
+    },
+    "power/line": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "power": "line"
+        },
+        "name": "Power Line"
+    },
+    "power/pole": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "power": "pole"
+        },
+        "name": "Power Pole"
+    },
     "power/sub_station": {
         "fields": [
             "operator"
@@ -2014,6 +2341,26 @@
             "power": "substation"
         },
         "name": "Substation"
+    },
+    "power/tower": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "power": "tower"
+        },
+        "name": "High-Voltage Tower"
+    },
+    "power/transformer": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "power": "transformer"
+        },
+        "name": "Transformer"
     },
     "railway": {
         "fields": [
@@ -2105,6 +2452,118 @@
         "terms": [],
         "name": "Shop"
     },
+    "shop/alcohol": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "alcohol"
+        },
+        "name": "Liquor Store"
+    },
+    "shop/bakery": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "bakery"
+        },
+        "name": "Bakery"
+    },
+    "shop/beauty": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "beauty"
+        },
+        "name": "Beauty Shop"
+    },
+    "shop/beverages": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "beverages"
+        },
+        "name": "Beverage Store"
+    },
+    "shop/bicycle": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "bicycle"
+        },
+        "name": "Bicycle Shop"
+    },
+    "shop/books": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "books"
+        },
+        "name": "Bookstore"
+    },
+    "shop/boutique": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "boutique"
+        },
+        "name": "Boutique"
+    },
     "shop/butcher": {
         "icon": "slaughterhouse",
         "fields": [
@@ -2121,6 +2580,582 @@
             "shop": "butcher"
         },
         "name": "Butcher"
+    },
+    "shop/car": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "car"
+        },
+        "name": "Car Dealership"
+    },
+    "shop/car_parts": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "car_parts"
+        },
+        "name": "Car Parts Store"
+    },
+    "shop/car_repair": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "car_repair"
+        },
+        "name": "Car Repair Shop"
+    },
+    "shop/chemist": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "chemist"
+        },
+        "name": "Chemist"
+    },
+    "shop/clothes": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "clothes"
+        },
+        "name": "Clothing Store"
+    },
+    "shop/computer": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "computer"
+        },
+        "name": "Computer Store"
+    },
+    "shop/confectionery": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "confectionery"
+        },
+        "name": "Confectionery"
+    },
+    "shop/convenience": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "convenience"
+        },
+        "name": "Convenience Store"
+    },
+    "shop/deli": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "deli"
+        },
+        "name": "Deli"
+    },
+    "shop/department_store": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "department_store"
+        },
+        "name": "Department Store"
+    },
+    "shop/doityourself": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "doityourself"
+        },
+        "name": "DIY Store"
+    },
+    "shop/dry_cleaning": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "dry_cleaning"
+        },
+        "name": "Dry Cleaners"
+    },
+    "shop/electronics": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "electronics"
+        },
+        "name": "Electronics Store"
+    },
+    "shop/fishmonger": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "fishmonger"
+        },
+        "name": "Fishmonger"
+    },
+    "shop/florist": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "florist"
+        },
+        "name": "Florist"
+    },
+    "shop/furniture": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "furniture"
+        },
+        "name": "Furniture Store"
+    },
+    "shop/garden_centre": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "garden_centre"
+        },
+        "name": "Garden Center"
+    },
+    "shop/gift": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "gift"
+        },
+        "name": "Gift Shop"
+    },
+    "shop/greengrocer": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "greengrocer"
+        },
+        "name": "Greengrocer"
+    },
+    "shop/hairdresser": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "hairdresser"
+        },
+        "name": "Hairdresser"
+    },
+    "shop/hardware": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "hardware"
+        },
+        "name": "Hardware Store"
+    },
+    "shop/hifi": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "hifi"
+        },
+        "name": "Hifi Store"
+    },
+    "shop/jewelry": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "jewelry"
+        },
+        "name": "Jeweler"
+    },
+    "shop/kiosk": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "kiosk"
+        },
+        "name": "Kiosk"
+    },
+    "shop/laundry": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "laundry"
+        },
+        "name": "Laundry"
+    },
+    "shop/mall": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "mall"
+        },
+        "name": "Mall"
+    },
+    "shop/mobile_phone": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "mobile_phone"
+        },
+        "name": "Mobile Phone Store"
+    },
+    "shop/motorcycle": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "motorcycle"
+        },
+        "name": "Motorcycle Dealership"
+    },
+    "shop/music": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "music"
+        },
+        "name": "Music Store"
+    },
+    "shop/newsagent": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "newsagent"
+        },
+        "name": "Newsagent"
+    },
+    "shop/optician": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "optician"
+        },
+        "name": "Optician"
+    },
+    "shop/outdoor": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "outdoor"
+        },
+        "name": "Outdoor Store"
+    },
+    "shop/pet": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "pet"
+        },
+        "name": "Pet Store"
+    },
+    "shop/shoes": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "shoes"
+        },
+        "name": "Shoe Store"
+    },
+    "shop/sports": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "sports"
+        },
+        "name": "Sporting Goods Store"
+    },
+    "shop/stationery": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "stationery"
+        },
+        "name": "Stationery Store"
     },
     "shop/supermarket": {
         "icon": "grocery",
@@ -2160,6 +3195,102 @@
             "shop": "supermarket"
         },
         "name": "Supermarket"
+    },
+    "shop/toys": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "toys"
+        },
+        "name": "Toy Store"
+    },
+    "shop/travel_agency": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "travel_agency"
+        },
+        "name": "Travel Agency"
+    },
+    "shop/tyres": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "tyres"
+        },
+        "name": "Tire Store"
+    },
+    "shop/vacant": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "vacant"
+        },
+        "name": "Vacant Shop"
+    },
+    "shop/variety_store": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "variety_store"
+        },
+        "name": "Variety Store"
+    },
+    "shop/video": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "video"
+        },
+        "name": "Video Store"
     },
     "tourism": {
         "fields": [

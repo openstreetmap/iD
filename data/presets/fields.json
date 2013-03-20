@@ -39,6 +39,11 @@
         "type": "check",
         "label": "ATM"
     },
+    "barrier": {
+        "key": "barrier",
+        "type": "combo",
+        "label": "Type"
+    },
     "bicycle_parking": {
         "key": "bicycle_parking",
         "type": "combo",
@@ -237,6 +242,11 @@
     },
     "place": {
         "key": "place",
+        "type": "combo",
+        "label": "Type"
+    },
+    "power": {
+        "key": "power",
         "type": "combo",
         "label": "Type"
     },

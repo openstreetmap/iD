@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "point",
+        "line"
+    ],
+    "tags": {
+        "leisure": "slipway"
+    },
+    "name": "Slipway"
+}
