@@ -1,0 +1,9 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "power": "line"
+    },
+    "name": "Power Line"
+}

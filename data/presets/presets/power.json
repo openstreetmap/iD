@@ -1,0 +1,15 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "power": "*"
+    },
+    "fields": [
+        "power"
+    ],
+    "name": "Power"
+}
