@@ -656,6 +656,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-right: 1px solid #CCC;
     width: 12.5%;
     text-align: center;
+    overflow: hidden;
 }
 
 .inspector-wrap .message div.fl .icon{
@@ -892,8 +893,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
    }
 
 .inspector-body .name {
-    height: 110px;
-    border-bottom: 1px solid #ccc;
+    padding-bottom: 0;
 }
 
 .name input.major {

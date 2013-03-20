@@ -44,7 +44,7 @@ iD.ui.TagEditor = function(context, entity) {
 
         messagewrap.append('h3')
             .attr('class', 'inspector-inner fl')
-            .text('Editing ' + preset.name());
+            .text(t('inspector.editing_feature', { feature: preset.name() }));
 
         messagewrap.append('button')
             .attr('class', 'preset-close fr')
@@ -55,9 +55,7 @@ iD.ui.TagEditor = function(context, entity) {
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()));
 
-        var headerwrap = editorwrap.append('div').attr('class','col12 head');
-
-         var namewrap = headerwrap.append('div')
+        var namewrap = editorwrap.append('div')
              .attr('class', 'name fillL inspector-inner col12');
 
         namewrap.append('h4')
