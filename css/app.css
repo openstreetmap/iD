@@ -593,7 +593,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body {
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     min-height: 330px;
     position: absolute;
@@ -601,6 +601,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     left: 0;
     bottom: 30px;
     top: 60px;
+}
+
+.inspector-body::-webkit-scrollbar {
+    background: #fff;
 }
 
 .inspector-inner {
@@ -683,9 +687,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .preset-grid  {
     width:100%;
     margin-top: 60px;
-    padding: 20px 10px 10px 20px;
+    padding: 20px 0px 10px 20px;
     border-bottom: 1px solid #ccc;
 }
+
 .grid-button-wrap {
     padding: 0 10px 10px 0;
     height: 120px;
@@ -813,6 +818,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .subgrid .preset-grid {
     background: #eee;
+    padding: 10px 0px 0px 10px;
     margin-top: 0px;
     border: 0;
     border-radius: 4px;
