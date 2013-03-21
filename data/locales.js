@@ -1613,7 +1613,7 @@ locale.zh = {
         "okay": "确定",
         "view_on_osm": "在OSM上查看",
         "name": "名称",
-        "editing": "编辑 {type}",
+        "editing_feature": "编辑{feature}",
         "additional": "附加标签",
         "choose": "选择对象的类型",
         "results": "{search}共有{n}个结果",
@@ -1665,6 +1665,13 @@ locale.zh = {
         "in": "放大",
         "out": "缩小"
     },
+    "imagery": {
+        "provided_by": "影像由{source}提供"
+    },
+    "gpx": {
+        "local_layer": "本地GPX文件",
+        "drag_drop": "把GPX文件拖到页面上。"
+    },
     "presets": {
         "fields": {
             "access": {
@@ -1687,6 +1694,9 @@ locale.zh = {
             },
             "atm": {
                 "label": "ATM"
+            },
+            "barrier": {
+                "label": "类型"
             },
             "bicycle_parking": {
                 "label": "类型"
@@ -1796,6 +1806,9 @@ locale.zh = {
                 "label": "手机"
             },
             "place": {
+                "label": "类型"
+            },
+            "power": {
                 "label": "类型"
             },
             "railway": {
@@ -1929,6 +1942,9 @@ locale.zh = {
             "amenity/library": {
                 "name": "图书馆"
             },
+            "amenity/marketplace": {
+                "name": "市场"
+            },
             "amenity/parking": {
                 "name": "停车场"
             },
@@ -1986,14 +2002,57 @@ locale.zh = {
             "amenity/university": {
                 "name": "大学"
             },
+            "barrier": {
+                "name": "屏障"
+            },
+            "barrier/block": {
+                "name": "街区"
+            },
+            "barrier/bollard": {
+                "name": "短柱"
+            },
+            "barrier/city_wall": {
+                "name": "城墙"
+            },
+            "barrier/ditch": {
+                "name": "沟"
+            },
+            "barrier/entrance": {
+                "name": "入口"
+            },
+            "barrier/fence": {
+                "name": "篱笆"
+            },
+            "barrier/gate": {
+                "name": "门"
+            },
+            "barrier/lift_gate": {
+                "name": "电梯门"
+            },
+            "barrier/retaining_wall": {
+                "name": "挡土墙"
+            },
+            "barrier/toll_booth": {
+                "name": "收费站"
+            },
+            "barrier/wall": {
+                "name": "墙"
+            },
             "building": {
                 "name": "建筑物"
+            },
+            "building/entrance": {
+                "name": "入口"
             },
             "entrance": {
                 "name": "入口"
             },
             "highway": {
                 "name": "公路"
+            },
+            "highway/bridleway": {
+                "name": "台阶",
+                "terms": "楼梯"
             },
             "highway/bus_stop": {
                 "name": "公交车站"
@@ -2034,7 +2093,7 @@ locale.zh = {
                 "name": "三级道路"
             },
             "highway/track": {
-                "name": "轨迹"
+                "name": "小路"
             },
             "highway/traffic_signals": {
                 "name": "红绿灯",
@@ -2052,8 +2111,23 @@ locale.zh = {
             "historic": {
                 "name": "历史遗迹"
             },
+            "historic/archaeological_site": {
+                "name": "考古遗址"
+            },
+            "historic/castle": {
+                "name": "城堡"
+            },
+            "historic/memorial": {
+                "name": "纪念馆"
+            },
             "historic/monument": {
                 "name": "纪念碑"
+            },
+            "historic/ruins": {
+                "name": "废墟"
+            },
+            "historic/wayside_shrine": {
+                "name": "路边的神社"
             },
             "landuse": {
                 "name": "土地用途"
@@ -2112,6 +2186,9 @@ locale.zh = {
             "leisure/golf_course": {
                 "name": "高尔夫球场"
             },
+            "leisure/marina": {
+                "name": "码头"
+            },
             "leisure/park": {
                 "name": "公园"
             },
@@ -2135,6 +2212,9 @@ locale.zh = {
             },
             "leisure/playground": {
                 "name": "运动场"
+            },
+            "leisure/slipway": {
+                "name": "下水滑道"
             },
             "leisure/stadium": {
                 "name": "体育场"
@@ -2231,14 +2311,41 @@ locale.zh = {
             "place/village": {
                 "name": "村庄"
             },
+            "power": {
+                "name": "动力"
+            },
+            "power/generator": {
+                "name": "发电厂"
+            },
+            "power/line": {
+                "name": "电路线"
+            },
+            "power/pole": {
+                "name": "电线杆"
+            },
             "power/sub_station": {
                 "name": "变电站"
+            },
+            "power/tower": {
+                "name": "高压电塔"
+            },
+            "power/transformer": {
+                "name": "变压器"
             },
             "railway": {
                 "name": "铁路"
             },
+            "railway/abandoned": {
+                "name": "废弃的铁路"
+            },
+            "railway/disused": {
+                "name": "废弃的铁路"
+            },
             "railway/level_crossing": {
                 "name": "平交路口"
+            },
+            "railway/monorail": {
+                "name": "单轨铁路"
             },
             "railway/rail": {
                 "name": "铁轨"
@@ -2249,14 +2356,159 @@ locale.zh = {
             "railway/subway_entrance": {
                 "name": "地铁口"
             },
+            "railway/tram": {
+                "name": "电车",
+                "terms": "电车"
+            },
             "shop": {
                 "name": "商店"
+            },
+            "shop/alcohol": {
+                "name": "酒品店"
+            },
+            "shop/bakery": {
+                "name": "面包店"
+            },
+            "shop/beauty": {
+                "name": "美容店"
+            },
+            "shop/beverages": {
+                "name": "饮料店"
+            },
+            "shop/books": {
+                "name": "书店"
+            },
+            "shop/boutique": {
+                "name": "精品"
             },
             "shop/butcher": {
                 "name": "肉贩"
             },
+            "shop/car": {
+                "name": "汽车经销商"
+            },
+            "shop/car_parts": {
+                "name": "汽车配件店"
+            },
+            "shop/car_repair": {
+                "name": "汽车修理店"
+            },
+            "shop/chemist": {
+                "name": "化学家"
+            },
+            "shop/clothes": {
+                "name": "服装店"
+            },
+            "shop/computer": {
+                "name": "电脑店"
+            },
+            "shop/confectionery": {
+                "name": "糕饼"
+            },
+            "shop/convenience": {
+                "name": "便利店"
+            },
+            "shop/deli": {
+                "name": "熟食店"
+            },
+            "shop/department_store": {
+                "name": "百货店"
+            },
+            "shop/doityourself": {
+                "name": "DIY商店"
+            },
+            "shop/dry_cleaning": {
+                "name": "干洗店"
+            },
+            "shop/electronics": {
+                "name": "鱼贩子"
+            },
+            "shop/florist": {
+                "name": "花店"
+            },
+            "shop/furniture": {
+                "name": "家具店"
+            },
+            "shop/garden_centre": {
+                "name": "花园中心"
+            },
+            "shop/gift": {
+                "name": "礼品店"
+            },
+            "shop/greengrocer": {
+                "name": "蔬菜水果店"
+            },
+            "shop/hairdresser": {
+                "name": "理发师"
+            },
+            "shop/hardware": {
+                "name": "五金商店"
+            },
+            "shop/hifi": {
+                "name": "音响店"
+            },
+            "shop/jewelry": {
+                "name": "珠宝商"
+            },
+            "shop/kiosk": {
+                "name": "亭"
+            },
+            "shop/laundry": {
+                "name": "洗衣店"
+            },
+            "shop/mall": {
+                "name": "购物中心"
+            },
+            "shop/mobile_phone": {
+                "name": "手机店"
+            },
+            "shop/motorcycle": {
+                "name": "摩托车经销商"
+            },
+            "shop/music": {
+                "name": "音乐店"
+            },
+            "shop/newsagent": {
+                "name": "书报"
+            },
+            "shop/optician": {
+                "name": "配镜师"
+            },
+            "shop/outdoor": {
+                "name": "户外店"
+            },
+            "shop/pet": {
+                "name": "宠物店"
+            },
+            "shop/shoes": {
+                "name": "鞋店"
+            },
+            "shop/sports": {
+                "name": "体育用品店"
+            },
+            "shop/stationery": {
+                "name": "文化用品店"
+            },
             "shop/supermarket": {
                 "name": "超级市场"
+            },
+            "shop/toys": {
+                "name": "玩具店"
+            },
+            "shop/travel_agency": {
+                "name": "旅行社"
+            },
+            "shop/tyres": {
+                "name": "轮胎店"
+            },
+            "shop/vacant": {
+                "name": "空置铺位"
+            },
+            "shop/variety_store": {
+                "name": "杂货店"
+            },
+            "shop/video": {
+                "name": "影像店"
             },
             "tourism": {
                 "name": "旅游业"
@@ -2516,7 +2768,6 @@ locale.zh_TW = {
         "okay": "確定",
         "view_on_osm": "在OSM上顯示",
         "name": "名稱",
-        "editing": "編輯詳細資料",
         "additional": "附加的標籤",
         "choose": "選擇功能種類",
         "results": "{search} 的 {n} 個結果",
@@ -3625,7 +3876,6 @@ locale.nl = {
         "okay": "OK",
         "view_on_osm": "Bekijk op OSM",
         "name": "Name",
-        "editing": "Editing {type}",
         "additional": "Additional tags",
         "choose": "What are you adding?",
         "results": "{n} results for {search}"
@@ -3846,15 +4096,18 @@ locale.fr = {
     "inspector": {
         "no_documentation_combination": "Aucune documentation n'est disponible pour cette combinaison de tag",
         "no_documentation_key": "Aucune documentation n'est disponible pour cette clé",
+        "show_more": "Plus d'infornations",
         "new_tag": "Nouveau tag",
         "edit_tags": "Editer les tags",
         "okay": "Okay",
         "view_on_osm": "Visualiser sur OSM",
         "name": "Nom",
-        "editing": "Edité {type}",
+        "editing_feature": "Édition de {feature}",
         "additional": "Tags complémentaires",
         "choose": "Que souhaitez vous ajouter?",
-        "results": "{n} résultats pour {search}"
+        "results": "{n} résultats pour {search}",
+        "reference": "Consulter sur le Wiki d'OpenStreetMap",
+        "back_tooltip": "Changer le type de l'objet "
     },
     "background": {
         "title": "Fond de carte",
@@ -3871,6 +4124,7 @@ locale.fr = {
     "save": {
         "title": "Sauvegarder",
         "help": "Envoie des modifications au serveyr OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
+        "no_changes": "Aucune modification à sauvegarder",
         "error": "Une erreur est survenue lors de l'enregistrement des données",
         "uploading": "Envoie des modifications vers OpenStreetMap.",
         "unsaved_changes": "Vous avez des modifications non enregistrées"
@@ -3899,6 +4153,353 @@ locale.fr = {
     "zoom": {
         "in": "Zoomer",
         "out": "Dézoomer"
+    },
+    "imagery": {
+        "provided_by": "Image provenant de {source}"
+    },
+    "gpx": {
+        "local_layer": "Fichier GPX personnel",
+        "drag_drop": "Glisser et déposer un fichier .gpx sur la page"
+    },
+    "presets": {
+        "fields": {
+            "address": {
+                "label": "Adresse",
+                "placeholders": {
+                    "number": "123",
+                    "street": "Rue",
+                    "city": "Ville"
+                }
+            },
+            "aeroway": {
+                "label": "Type"
+            },
+            "amenity": {
+                "label": "Type"
+            },
+            "bicycle_parking": {
+                "label": "Type"
+            },
+            "building": {
+                "label": "Bâtiment "
+            },
+            "building_area": {
+                "label": "Bâtiment"
+            },
+            "building_yes": {
+                "label": "Bâtiment"
+            },
+            "capacity": {
+                "label": "Capacité"
+            },
+            "construction": {
+                "label": "Type"
+            },
+            "crossing": {
+                "label": "Type"
+            },
+            "cuisine": {
+                "label": "Cuisine"
+            },
+            "denomination": {
+                "label": "Denomination "
+            },
+            "elevation": {
+                "label": "Elevation "
+            },
+            "entrance": {
+                "label": "Type"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "highway": {
+                "label": "Type"
+            },
+            "historic": {
+                "label": "Type"
+            },
+            "internet_access": {
+                "label": "Accès Internet",
+                "options": {
+                    "wlan": "Wifi"
+                }
+            },
+            "landuse": {
+                "label": "Type"
+            },
+            "layer": {
+                "label": "Couche"
+            },
+            "leisure": {
+                "label": "Type"
+            },
+            "levels": {
+                "label": "Niveaux"
+            },
+            "man_made": {
+                "label": "Type"
+            },
+            "maxspeed": {
+                "label": "Limite de vitesse"
+            },
+            "note": {
+                "label": "Note"
+            },
+            "office": {
+                "label": "Type"
+            },
+            "oneway": {
+                "label": "Sens unique"
+            },
+            "opening_hours": {
+                "label": "Heures"
+            },
+            "operator": {
+                "label": "Operateur "
+            },
+            "phone": {
+                "label": "Telephone "
+            },
+            "place": {
+                "label": "Type"
+            },
+            "railway": {
+                "label": "Type"
+            },
+            "religion": {
+                "label": "Religion",
+                "options": {
+                    "christian": "Christianisme",
+                    "muslim": "Musulmane",
+                    "buddhist": "Budhiste ",
+                    "jewish": "Juive",
+                    "hindu": "Indouiste ",
+                    "taoist": "Taoiste "
+                }
+            },
+            "service": {
+                "label": "Type"
+            },
+            "shop": {
+                "label": "Type"
+            },
+            "source": {
+                "label": "Source"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "surface": {
+                "label": "Surface"
+            },
+            "tourism": {
+                "label": "Type"
+            },
+            "water": {
+                "label": "Type"
+            },
+            "waterway": {
+                "label": "Type"
+            },
+            "website": {
+                "label": "Site Internet"
+            },
+            "wetland": {
+                "label": "Type"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Type"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "Aeroport "
+            },
+            "amenity/bank": {
+                "name": "Banque"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Parc à velos "
+            },
+            "amenity/bicycle_rental": {
+                "name": "Location de velos "
+            },
+            "amenity/cafe": {
+                "name": "Cafe "
+            },
+            "amenity/cinema": {
+                "name": "Cinema "
+            },
+            "amenity/fast_food": {
+                "name": "Fast Food"
+            },
+            "amenity/fire_station": {
+                "name": "Caserne de pompier"
+            },
+            "amenity/grave_yard": {
+                "name": "Cimetière"
+            },
+            "amenity/hospital": {
+                "name": "Hopital "
+            },
+            "amenity/library": {
+                "name": "Bibliotheque "
+            },
+            "amenity/parking": {
+                "name": "Parking "
+            },
+            "amenity/pharmacy": {
+                "name": "Pharmacie"
+            },
+            "amenity/place_of_worship": {
+                "name": "Lieu de culte"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Eglise "
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Cynagogue "
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mosque "
+            },
+            "amenity/police": {
+                "name": "Poste de police"
+            },
+            "amenity/post_box": {
+                "name": "Boite aux lettres"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "Ecole "
+            },
+            "amenity/toilets": {
+                "name": "Toiletes "
+            },
+            "amenity/university": {
+                "name": "Universite "
+            },
+            "building": {
+                "name": "Batiment "
+            },
+            "entrance": {
+                "name": "Entree "
+            },
+            "highway/bus_stop": {
+                "name": "Arret de bus "
+            },
+            "highway/crossing": {
+                "name": "Passage pieton "
+            },
+            "highway/primary": {
+                "name": "Route principale"
+            },
+            "highway/residential": {
+                "name": "Route residentielle "
+            },
+            "highway/secondary": {
+                "name": "Route secondaire"
+            },
+            "highway/steps": {
+                "name": "Escaliers"
+            },
+            "highway/tertiary": {
+                "name": "Route tertiaire"
+            },
+            "highway/traffic_signals": {
+                "name": "Feux tricolores"
+            },
+            "highway/turning_circle": {
+                "name": "Rond point"
+            },
+            "historic": {
+                "name": "Site historique"
+            },
+            "historic/monument": {
+                "name": "Monument"
+            },
+            "landuse/cemetery": {
+                "name": "Cimetiere "
+            },
+            "landuse/commercial": {
+                "name": "Commerciale"
+            },
+            "landuse/construction": {
+                "name": "Construction"
+            },
+            "landuse/farm": {
+                "name": "Ferme"
+            },
+            "landuse/forest": {
+                "name": "Forêt"
+            },
+            "landuse/grass": {
+                "name": "Herbe"
+            },
+            "landuse/industrial": {
+                "name": "Industrielle"
+            },
+            "landuse/residential": {
+                "name": "Residentielle "
+            },
+            "leisure/golf_course": {
+                "name": "Parcours de golf"
+            },
+            "leisure/park": {
+                "name": "Parc"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Court de tennis"
+            },
+            "man_made/lighthouse": {
+                "name": "Phare"
+            },
+            "natural/bay": {
+                "name": "Baie"
+            },
+            "natural/beach": {
+                "name": "Plage"
+            },
+            "natural/tree": {
+                "name": "Arbre"
+            },
+            "natural/water/lake": {
+                "name": "Lac"
+            },
+            "place/island": {
+                "name": "Ile "
+            },
+            "place/village": {
+                "name": "Village"
+            },
+            "shop": {
+                "name": "Magasin"
+            },
+            "shop/butcher": {
+                "name": "Boucher "
+            },
+            "shop/supermarket": {
+                "name": "Supermarche "
+            },
+            "tourism": {
+                "name": "Tourisme"
+            },
+            "tourism/museum": {
+                "name": "Musee "
+            }
+        }
     }
 };
 locale.de = {
@@ -4077,7 +4678,6 @@ locale.de = {
         "okay": "OK",
         "view_on_osm": "auf OpenStreetMap ansehen",
         "name": "Name",
-        "editing": "Details verändern",
         "additional": "Weitere Merkmale",
         "results": "{n} Resultate für {search}",
         "reference": "In der OpenSteetMap Wiki anschauen →"
@@ -4125,6 +4725,9 @@ locale.de = {
     "zoom": {
         "in": "Hineinzoomen",
         "out": "Herauszoomen"
+    },
+    "imagery": {
+        "provided_by": "Bilddaten von {source}"
     },
     "presets": {
         "fields": {
@@ -4628,7 +5231,6 @@ locale.it = {
         "okay": "Ok",
         "view_on_osm": "Mostra su OSM",
         "name": "Nome",
-        "editing": "Modifica dettagli",
         "additional": "Tag aggiuntivi",
         "choose": "Seleziona il tipo di caratteristica",
         "results": "{n} risultati per {search}",
@@ -5707,7 +6309,6 @@ locale.lv = {
         "okay": "Labi",
         "view_on_osm": "Apskatīt OSM",
         "name": "Name",
-        "editing": "Mainīt detaļas",
         "additional": "Papildus apzīmējumi",
         "choose": "Izvēlieties objekta tipu",
         "results": "Atrasti {n} rezultāti meklējot {search}",
@@ -6282,7 +6883,6 @@ locale.pt = {
         "okay": "OK",
         "view_on_osm": "Ver em OSM",
         "name": "Nome",
-        "editing": "A editar {type}",
         "additional": "Tags adicionais",
         "choose": "O que está a adicionar?",
         "results": "{n} resultados para {search}"
@@ -6507,7 +7107,6 @@ locale.ru = {
         "okay": "Готово",
         "view_on_osm": "Посмотреть в OSM",
         "name": "Name",
-        "editing": "Editing {type}",
         "additional": "Additional tags",
         "choose": "What are you adding?",
         "results": "{n} results for {search}",
@@ -6947,7 +7546,6 @@ locale.sv = {
         "okay": "Ok",
         "view_on_osm": "Visa på OSM",
         "name": "Namn",
-        "editing": "Redigerar {type}",
         "additional": "Fler taggar",
         "choose": "Vad lägger du till?",
         "results": "{n} sökresult för {search}",
@@ -7165,7 +7763,6 @@ locale.tr = {
         "okay": "Tamam",
         "view_on_osm": "OSM üzerinde gör",
         "name": "İsim",
-        "editing": "{type} düzenleniyor",
         "additional": "Ekstra etiketler",
         "choose": "Neyi ekliyorsunuz?",
         "results": "{n} results for {search}"
@@ -7326,7 +7923,17 @@ locale.uk = {
                 "point": "Точку посунуто.",
                 "vertex": "Точку лінії посунуто.",
                 "line": "Лінію посунуто.",
-                "area": "Полігон посунуто."
+                "area": "Полігон посунуто.",
+                "multiple": "Посунуто кілька об’єктів."
+            }
+        },
+        "rotate": {
+            "title": "Обернути",
+            "description": "Обернути об’єкт навколо його центру.",
+            "key": "R",
+            "annotation": {
+                "line": "Напрямок лінії змінено.",
+                "area": "Полігон обернуто."
             }
         },
         "reverse": {
@@ -7376,11 +7983,18 @@ locale.uk = {
     "inspector": {
         "no_documentation_combination": "Для цієї комбінації теґів немає документації",
         "no_documentation_key": "Для цього теґа немає документації",
+        "show_more": "Ще",
         "new_tag": "Новий теґ",
         "edit_tags": "Редагувати теґи",
         "okay": "Готово",
         "view_on_osm": "Подивтись в ОСМ",
-        "name": "Name"
+        "name": "Name",
+        "editing_feature": "Властивості {feature}",
+        "additional": "Додаткові теґи",
+        "choose": "Виберіть тип об’єкту",
+        "results": "знайдено {n} об’єктів на запит {search}",
+        "reference": "Подивитись на OpenStreetMap Wiki →",
+        "back_tooltip": "Змінити тип об’єкта"
     },
     "background": {
         "title": "Фон",
@@ -7397,6 +8011,7 @@ locale.uk = {
     "save": {
         "title": "Зберегти",
         "help": "Зберегти зміни надіславши їх на OpenStreetMap, та зробивши їх доступними всім іншим.",
+        "no_changes": "Зміни для збереження відсутні.",
         "error": "Під час збереження виникла помилка",
         "uploading": "Надсилання змін до OpenStreetMap.",
         "unsaved_changes": "Ви маєте незбережені правки"
@@ -7418,13 +8033,932 @@ locale.uk = {
         "untagged_point": "Точка без теґів, що не є частиною лінію чи полігону",
         "untagged_line": "Лінія без теґів",
         "untagged_area": "Полігон без  теґів",
-        "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         "tag_suggests_area": "Теґ {tag} зазвичай ставться на полігони, але об’єкт ним не є",
         "deprecated_tags": "Застарілі теґи: {tags}"
     },
     "zoom": {
         "in": "Наблизитись",
         "out": "Віддалитись"
+    },
+    "imagery": {
+        "provided_by": "Фон наданий {source}"
+    },
+    "gpx": {
+        "local_layer": "Локальний файл GPX",
+        "drag_drop": "Перетягніть файл .gpx на сторінку"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Доступ"
+            },
+            "address": {
+                "label": "Адреса",
+                "placeholders": {
+                    "housename": "Назвабудинку",
+                    "number": "123",
+                    "street": "Вулиця",
+                    "city": "Місто"
+                }
+            },
+            "aeroway": {
+                "label": "Тип"
+            },
+            "amenity": {
+                "label": "Тип"
+            },
+            "atm": {
+                "label": "Банкомат"
+            },
+            "barrier": {
+                "label": "Тип"
+            },
+            "bicycle_parking": {
+                "label": "Тип"
+            },
+            "building": {
+                "label": "Будинок"
+            },
+            "building_area": {
+                "label": "Будинок"
+            },
+            "building_yes": {
+                "label": "Будинок"
+            },
+            "capacity": {
+                "label": "Міськість"
+            },
+            "construction": {
+                "label": "Тип"
+            },
+            "country": {
+                "label": "Країна"
+            },
+            "crossing": {
+                "label": "Тип"
+            },
+            "cuisine": {
+                "label": "Кухня"
+            },
+            "denomination": {
+                "label": "Віросповідання"
+            },
+            "denotation": {
+                "label": "Позначення"
+            },
+            "elevation": {
+                "label": "Висота"
+            },
+            "emergency": {
+                "label": "Аварійні служби"
+            },
+            "entrance": {
+                "label": "Тип"
+            },
+            "fax": {
+                "label": "Факс"
+            },
+            "fee": {
+                "label": "Плата"
+            },
+            "highway": {
+                "label": "Тип"
+            },
+            "historic": {
+                "label": "Тип"
+            },
+            "internet_access": {
+                "label": "Доступ до Інтеренету",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "Дротовий",
+                    "terminal": "Термінал"
+                }
+            },
+            "landuse": {
+                "label": "Тип"
+            },
+            "layer": {
+                "label": "Шар"
+            },
+            "leisure": {
+                "label": "Тип"
+            },
+            "levels": {
+                "label": "Поверхи"
+            },
+            "man_made": {
+                "label": "Тип"
+            },
+            "maxspeed": {
+                "label": "Обмеження швидкості"
+            },
+            "natural": {
+                "label": "Природа"
+            },
+            "network": {
+                "label": "Мережа"
+            },
+            "note": {
+                "label": "Примітка"
+            },
+            "office": {
+                "label": "Тип"
+            },
+            "opening_hours": {
+                "label": "Години"
+            },
+            "operator": {
+                "label": "Оператор"
+            },
+            "phone": {
+                "label": "Телефон"
+            },
+            "place": {
+                "label": "Тип"
+            },
+            "power": {
+                "label": "Тип"
+            },
+            "railway": {
+                "label": "Тип"
+            },
+            "ref": {
+                "label": "Посилання"
+            },
+            "religion": {
+                "label": "Релігія",
+                "options": {
+                    "christian": "Християнство",
+                    "muslim": "Мусульманство",
+                    "buddhist": "Будизм",
+                    "jewish": "Іудейство",
+                    "hindu": "Хінду",
+                    "shinto": "Сінто",
+                    "taoist": "Даосизм"
+                }
+            },
+            "service": {
+                "label": "Тип"
+            },
+            "shelter": {
+                "label": "Притулок"
+            },
+            "shop": {
+                "label": "Тип"
+            },
+            "source": {
+                "label": "Джерело"
+            },
+            "sport": {
+                "label": "Спорт"
+            },
+            "structure": {
+                "label": "Споруда",
+                "options": {
+                    "bridge": "Міст",
+                    "tunnel": "Тунель",
+                    "embankment": "Насип",
+                    "cutting": "Виїмка"
+                }
+            },
+            "surface": {
+                "label": "Поверхня"
+            },
+            "tourism": {
+                "label": "Тип"
+            },
+            "water": {
+                "label": "Тип"
+            },
+            "waterway": {
+                "label": "Тип"
+            },
+            "website": {
+                "label": "Вебсайт"
+            },
+            "wetland": {
+                "label": "Тип"
+            },
+            "wheelchair": {
+                "label": "Для інвалідних візків"
+            },
+            "wikipedia": {
+                "label": "Вікіпедія"
+            },
+            "wood": {
+                "label": "Тип"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Аеропорт"
+            },
+            "aeroway/aerodrome": {
+                "name": "Аеропорт",
+                "terms": "літак,аеропорт,аеродром"
+            },
+            "aeroway/helipad": {
+                "name": "Вертолітний майданчик",
+                "terms": "вертоліт,вертолітний майданчик,вертодром"
+            },
+            "amenity": {
+                "name": "Зручності"
+            },
+            "amenity/bank": {
+                "name": "Банк",
+                "terms": "депозитний сейф,бухгалтерія,кредитна спілка,казна,фонди,накопичення,інвестиційна компанія,сховище,резерв,скарбниця,сейф,заощадження,біржа,запаси,запас,скарбниця,багатство,казначейство,трастова компанія,сховище"
+            },
+            "amenity/bar": {
+                "name": "Бар"
+            },
+            "amenity/bench": {
+                "name": "Лавка"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Вело-парковка"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Прокат велосипедів"
+            },
+            "amenity/cafe": {
+                "name": "Кафе",
+                "terms": "кава,чай,кав’ярня"
+            },
+            "amenity/cinema": {
+                "name": "Кінотеатр"
+            },
+            "amenity/courthouse": {
+                "name": "Суд"
+            },
+            "amenity/embassy": {
+                "name": "Амбасада"
+            },
+            "amenity/fast_food": {
+                "name": "Фаст-Фуд"
+            },
+            "amenity/fire_station": {
+                "name": "Пожежна станція"
+            },
+            "amenity/grave_yard": {
+                "name": "Цвинтар"
+            },
+            "amenity/hospital": {
+                "name": "Лікарня"
+            },
+            "amenity/library": {
+                "name": "Бібліотека"
+            },
+            "amenity/marketplace": {
+                "name": "Ринок"
+            },
+            "amenity/parking": {
+                "name": "Стоянка"
+            },
+            "amenity/pharmacy": {
+                "name": "Аптека"
+            },
+            "amenity/place_of_worship": {
+                "name": "Культове місце"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Церква"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Синагога",
+                "terms": "іудейство,синагога"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Мечеть",
+                "terms": "мусульманство,мечеть"
+            },
+            "amenity/police": {
+                "name": "Міліція/Поліція"
+            },
+            "amenity/post_box": {
+                "name": "Поштова скриня"
+            },
+            "amenity/post_office": {
+                "name": "Пошта"
+            },
+            "amenity/pub": {
+                "name": "Паб"
+            },
+            "amenity/restaurant": {
+                "name": "Ресторан"
+            },
+            "amenity/school": {
+                "name": "Школа"
+            },
+            "amenity/swimming_pool": {
+                "name": "Басейн"
+            },
+            "amenity/telephone": {
+                "name": "Телефон"
+            },
+            "amenity/theatre": {
+                "name": "Театр",
+                "terms": "театр,вистава,гра,музичний"
+            },
+            "amenity/toilets": {
+                "name": "Туалет"
+            },
+            "amenity/townhall": {
+                "name": "Міська державна адміністрація"
+            },
+            "amenity/university": {
+                "name": "Університет"
+            },
+            "barrier": {
+                "name": "Перепони"
+            },
+            "barrier/block": {
+                "name": "Блок"
+            },
+            "barrier/bollard": {
+                "name": "Стовпчик"
+            },
+            "barrier/cattle_grid": {
+                "name": "Перешкода для худоби"
+            },
+            "barrier/city_wall": {
+                "name": "Міська стіна"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Перешкода для велосипедистів"
+            },
+            "barrier/ditch": {
+                "name": "Канава"
+            },
+            "barrier/entrance": {
+                "name": "Вхід"
+            },
+            "barrier/fence": {
+                "name": "Огорожа"
+            },
+            "barrier/gate": {
+                "name": "Ворота"
+            },
+            "barrier/hedge": {
+                "name": "Жива огорожа"
+            },
+            "barrier/kissing_gate": {
+                "name": "Вузька хвіртка"
+            },
+            "barrier/lift_gate": {
+                "name": "Шлагбаум"
+            },
+            "barrier/retaining_wall": {
+                "name": "Підпірна стіна"
+            },
+            "barrier/stile": {
+                "name": "Перелаз/Турнікет"
+            },
+            "barrier/toll_booth": {
+                "name": "Пункт сплати за проїзд"
+            },
+            "barrier/wall": {
+                "name": "Стіна"
+            },
+            "building": {
+                "name": "Будинок"
+            },
+            "building/entrance": {
+                "name": "Вхід"
+            },
+            "entrance": {
+                "name": "Вхід"
+            },
+            "highway": {
+                "name": "Дорога"
+            },
+            "highway/bridleway": {
+                "name": "Сходи"
+            },
+            "highway/bus_stop": {
+                "name": "Автобусна зупинка"
+            },
+            "highway/crossing": {
+                "name": "Прехресття"
+            },
+            "highway/cycleway": {
+                "name": "Вело-доріжка"
+            },
+            "highway/footway": {
+                "name": "Тротуар"
+            },
+            "highway/motorway": {
+                "name": "Автомагістраль"
+            },
+            "highway/path": {
+                "name": "Тропа"
+            },
+            "highway/primary": {
+                "name": "Головна дорога"
+            },
+            "highway/residential": {
+                "name": "Дорога місцевого значення"
+            },
+            "highway/secondary": {
+                "name": "Другорядна дорога"
+            },
+            "highway/service": {
+                "name": "Третинна дорога"
+            },
+            "highway/steps": {
+                "name": "Сходи"
+            },
+            "highway/tertiary": {
+                "name": "Третинна дорога"
+            },
+            "highway/track": {
+                "name": "Грунтовка"
+            },
+            "highway/traffic_signals": {
+                "name": "Світлофор"
+            },
+            "highway/trunk": {
+                "name": "Шосе"
+            },
+            "highway/turning_circle": {
+                "name": "Місце для розвороту"
+            },
+            "highway/unclassified": {
+                "name": "Не має класифікації"
+            },
+            "historic": {
+                "name": "Історичні місця"
+            },
+            "historic/archaeological_site": {
+                "name": "Археологічні пам’ятки"
+            },
+            "historic/boundary_stone": {
+                "name": "Прикордонний камінь"
+            },
+            "historic/castle": {
+                "name": "За́мок"
+            },
+            "historic/memorial": {
+                "name": "Пам’ятник"
+            },
+            "historic/monument": {
+                "name": "Пам’ятник"
+            },
+            "historic/ruins": {
+                "name": "Руїни"
+            },
+            "historic/wayside_cross": {
+                "name": "Придорожній хрест"
+            },
+            "historic/wayside_shrine": {
+                "name": "Придорожня рака"
+            },
+            "landuse": {
+                "name": "Землекористування"
+            },
+            "landuse/allotments": {
+                "name": "Дачі/горо́ди"
+            },
+            "landuse/basin": {
+                "name": "Водойма"
+            },
+            "landuse/cemetery": {
+                "name": "Кладовище"
+            },
+            "landuse/commercial": {
+                "name": "Діловий район"
+            },
+            "landuse/construction": {
+                "name": "Будівництво"
+            },
+            "landuse/farm": {
+                "name": "Ферма"
+            },
+            "landuse/farmyard": {
+                "name": "Двір ферми"
+            },
+            "landuse/forest": {
+                "name": "Лісовий масив"
+            },
+            "landuse/grass": {
+                "name": "Трава"
+            },
+            "landuse/industrial": {
+                "name": "Промзона"
+            },
+            "landuse/meadow": {
+                "name": "Левада"
+            },
+            "landuse/orchard": {
+                "name": "Сад"
+            },
+            "landuse/quarry": {
+                "name": "Кар’єр"
+            },
+            "landuse/residential": {
+                "name": "Житлова зона"
+            },
+            "landuse/vineyard": {
+                "name": "Виноградник"
+            },
+            "leisure": {
+                "name": "Дозвілля"
+            },
+            "leisure/garden": {
+                "name": "Сад"
+            },
+            "leisure/golf_course": {
+                "name": "Поле для гольфу"
+            },
+            "leisure/marina": {
+                "name": "Пристань для яхт"
+            },
+            "leisure/park": {
+                "name": "Парк"
+            },
+            "leisure/pitch": {
+                "name": "Спортивний майданчик"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Поле для американського футболу"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Бейсбольний майданчик"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Баскетбольний майданчик"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Футбольне поле"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Тенісний майданчик"
+            },
+            "leisure/playground": {
+                "name": "Ігровий майданчик"
+            },
+            "leisure/slipway": {
+                "name": "Сліп"
+            },
+            "leisure/stadium": {
+                "name": "Стадіон"
+            },
+            "leisure/swimming_pool": {
+                "name": "Басейн"
+            },
+            "man_made": {
+                "name": "Штучні споруди"
+            },
+            "man_made/lighthouse": {
+                "name": "Маяк"
+            },
+            "man_made/pier": {
+                "name": "Пірс"
+            },
+            "man_made/survey_point": {
+                "name": "Геодезичний пункт"
+            },
+            "man_made/water_tower": {
+                "name": "Водонапірна вежа"
+            },
+            "natural": {
+                "name": "Природа"
+            },
+            "natural/bay": {
+                "name": "Затока"
+            },
+            "natural/beach": {
+                "name": "Пляж"
+            },
+            "natural/cliff": {
+                "name": "Скеля/Яр"
+            },
+            "natural/coastline": {
+                "name": "Берегова лінія",
+                "terms": "прибійна смуга"
+            },
+            "natural/glacier": {
+                "name": "Льодовик"
+            },
+            "natural/grassland": {
+                "name": "Трави"
+            },
+            "natural/heath": {
+                "name": "Пустир/Вереск"
+            },
+            "natural/peak": {
+                "name": "Пік"
+            },
+            "natural/scrub": {
+                "name": "Чагарник"
+            },
+            "natural/spring": {
+                "name": "Джерело"
+            },
+            "natural/tree": {
+                "name": "Дерево"
+            },
+            "natural/water": {
+                "name": "Вода"
+            },
+            "natural/water/lake": {
+                "name": "Озеро"
+            },
+            "natural/water/pond": {
+                "name": "Ставок"
+            },
+            "natural/water/reservoir": {
+                "name": "Резервуар"
+            },
+            "natural/wetland": {
+                "name": "Заболочені землі"
+            },
+            "natural/wood": {
+                "name": "Дерева"
+            },
+            "office": {
+                "name": "Офіс"
+            },
+            "place": {
+                "name": "Місцевість"
+            },
+            "place/hamlet": {
+                "name": "Хутір"
+            },
+            "place/island": {
+                "name": "Острів"
+            },
+            "place/locality": {
+                "name": "Місцевість"
+            },
+            "place/village": {
+                "name": "Село"
+            },
+            "power": {
+                "name": "Енергетика"
+            },
+            "power/generator": {
+                "name": "Електростанція"
+            },
+            "power/line": {
+                "name": "Лінія електропередач"
+            },
+            "power/pole": {
+                "name": "Опора"
+            },
+            "power/sub_station": {
+                "name": "Підстанція"
+            },
+            "power/tower": {
+                "name": "Опора ЛЕП"
+            },
+            "power/transformer": {
+                "name": "Трансформатор"
+            },
+            "railway": {
+                "name": "Залізниця"
+            },
+            "railway/abandoned": {
+                "name": "Занедбані колії"
+            },
+            "railway/disused": {
+                "name": "Путі, що не використовуються"
+            },
+            "railway/level_crossing": {
+                "name": "Залізничний переїзд"
+            },
+            "railway/monorail": {
+                "name": "Монорейка"
+            },
+            "railway/rail": {
+                "name": "Рейки"
+            },
+            "railway/subway": {
+                "name": "Метрополітен"
+            },
+            "railway/subway_entrance": {
+                "name": "Вхід до метро"
+            },
+            "railway/tram": {
+                "name": "Трамвай"
+            },
+            "shop": {
+                "name": "Магазини/Майстерні"
+            },
+            "shop/bakery": {
+                "name": "Булочна"
+            },
+            "shop/beverages": {
+                "name": "Напої"
+            },
+            "shop/bicycle": {
+                "name": "Веломагазин"
+            },
+            "shop/books": {
+                "name": "Книгарня"
+            },
+            "shop/boutique": {
+                "name": "Бутік"
+            },
+            "shop/butcher": {
+                "name": "М’ясна лавка"
+            },
+            "shop/car_parts": {
+                "name": "Автозапчастини"
+            },
+            "shop/car_repair": {
+                "name": "Автомайстерня"
+            },
+            "shop/chemist": {
+                "name": "Побутова хімія"
+            },
+            "shop/clothes": {
+                "name": "Одяг"
+            },
+            "shop/computer": {
+                "name": "Комп’ютери"
+            },
+            "shop/confectionery": {
+                "name": "Кондитерська"
+            },
+            "shop/convenience": {
+                "name": "міні-маркет"
+            },
+            "shop/deli": {
+                "name": "Делікатеси/Вишукана їжа"
+            },
+            "shop/department_store": {
+                "name": "Універмаг"
+            },
+            "shop/doityourself": {
+                "name": "Зроби сам"
+            },
+            "shop/dry_cleaning": {
+                "name": "Хімчистка"
+            },
+            "shop/electronics": {
+                "name": "Електроніка"
+            },
+            "shop/fishmonger": {
+                "name": "Риба"
+            },
+            "shop/florist": {
+                "name": "Квіти"
+            },
+            "shop/furniture": {
+                "name": "Меблі"
+            },
+            "shop/garden_centre": {
+                "name": "Садово-парковий центр"
+            },
+            "shop/gift": {
+                "name": "Подарунки"
+            },
+            "shop/greengrocer": {
+                "name": "Овочевий"
+            },
+            "shop/hairdresser": {
+                "name": "Перукарня"
+            },
+            "shop/hardware": {
+                "name": "Господарські товари"
+            },
+            "shop/hifi": {
+                "name": "Аудіо апаратура"
+            },
+            "shop/jewelry": {
+                "name": "Ювелірні прикраси"
+            },
+            "shop/kiosk": {
+                "name": "Кіоск"
+            },
+            "shop/laundry": {
+                "name": "Пральня"
+            },
+            "shop/mall": {
+                "name": "Торгівельний центр"
+            },
+            "shop/mobile_phone": {
+                "name": "Мобільні телефони"
+            },
+            "shop/motorcycle": {
+                "name": "Мотомагазин"
+            },
+            "shop/music": {
+                "name": "Музичний магазин"
+            },
+            "shop/optician": {
+                "name": "Оптика"
+            },
+            "shop/outdoor": {
+                "name": "Товари для активного відпочинку"
+            },
+            "shop/pet": {
+                "name": "Товари для тварин"
+            },
+            "shop/shoes": {
+                "name": "Взуття"
+            },
+            "shop/sports": {
+                "name": "Спорттовари"
+            },
+            "shop/supermarket": {
+                "name": "Супермаркет"
+            },
+            "shop/toys": {
+                "name": "Іграшки"
+            },
+            "shop/travel_agency": {
+                "name": "Туристична агенція"
+            },
+            "shop/tyres": {
+                "name": "Колеса та шини"
+            },
+            "shop/variety_store": {
+                "name": "Універсам"
+            },
+            "shop/video": {
+                "name": "Відео"
+            },
+            "tourism": {
+                "name": "Туризм"
+            },
+            "tourism/alpine_hut": {
+                "name": "Гірський притулок"
+            },
+            "tourism/artwork": {
+                "name": "Витвори мистецтв"
+            },
+            "tourism/attraction": {
+                "name": "Визначне місце"
+            },
+            "tourism/camp_site": {
+                "name": "Кемпінг"
+            },
+            "tourism/caravan_site": {
+                "name": "Караван-парк"
+            },
+            "tourism/chalet": {
+                "name": "Шале"
+            },
+            "tourism/guest_house": {
+                "name": "Гостьовий будинок"
+            },
+            "tourism/hostel": {
+                "name": "Хостел"
+            },
+            "tourism/hotel": {
+                "name": "Готель"
+            },
+            "tourism/information": {
+                "name": "Інформація"
+            },
+            "tourism/motel": {
+                "name": "Мотель"
+            },
+            "tourism/museum": {
+                "name": "Музей"
+            },
+            "tourism/picnic_site": {
+                "name": "Місце для пікніка"
+            },
+            "tourism/theme_park": {
+                "name": "Тематичний парк"
+            },
+            "tourism/viewpoint": {
+                "name": "Оглядовий майданчик"
+            },
+            "tourism/zoo": {
+                "name": "Зоопарк"
+            },
+            "waterway": {
+                "name": "Водний шлях"
+            },
+            "waterway/canal": {
+                "name": "Канал"
+            },
+            "waterway/dam": {
+                "name": "Дамба"
+            },
+            "waterway/ditch": {
+                "name": "Канава"
+            },
+            "waterway/drain": {
+                "name": "Дренажний канал"
+            },
+            "waterway/river": {
+                "name": "Ріка"
+            },
+            "waterway/riverbank": {
+                "name": "Берег ріки"
+            },
+            "waterway/stream": {
+                "name": "Струмок"
+            },
+            "waterway/weir": {
+                "name": "Водозлив"
+            }
+        }
     }
 };
 locale.vi = {
@@ -7604,7 +9138,7 @@ locale.vi = {
         "okay": "OK",
         "view_on_osm": "Xem tại OSM",
         "name": "Tên",
-        "editing": "Sửa các chi tiết",
+        "editing_feature": "Đang sửa {feature}",
         "additional": "Các thẻ nâng cao",
         "choose": "Chọn loại đối tượng",
         "results": "{n} kết quả cho {search}",
@@ -7659,6 +9193,10 @@ locale.vi = {
     "imagery": {
         "provided_by": "Hình ảnh do {source} cung cấp"
     },
+    "gpx": {
+        "local_layer": "Tập tin GPX địa phương",
+        "drag_drop": "Kéo thả một tập tin .gpx vào trang"
+    },
     "presets": {
         "fields": {
             "access": {
@@ -7681,6 +9219,9 @@ locale.vi = {
             },
             "atm": {
                 "label": "Máy Rút tiền"
+            },
+            "barrier": {
+                "label": "Kiểu"
             },
             "bicycle_parking": {
                 "label": "Kiểu"
@@ -7790,6 +9331,9 @@ locale.vi = {
                 "label": "Số Điện thoại"
             },
             "place": {
+                "label": "Kiểu"
+            },
+            "power": {
                 "label": "Kiểu"
             },
             "railway": {
@@ -7926,6 +9470,9 @@ locale.vi = {
             "amenity/library": {
                 "name": "Thư viện"
             },
+            "amenity/marketplace": {
+                "name": "Chợ phiên"
+            },
             "amenity/parking": {
                 "name": "Bãi Đậu xe"
             },
@@ -7990,6 +9537,57 @@ locale.vi = {
             "amenity/university": {
                 "name": "Trường Đại học"
             },
+            "barrier": {
+                "name": "Chướng ngại"
+            },
+            "barrier/block": {
+                "name": "Tấm Bê tông"
+            },
+            "barrier/bollard": {
+                "name": "Cột Bê tông"
+            },
+            "barrier/cattle_grid": {
+                "name": "Bẫy Trâu bò Trên đường"
+            },
+            "barrier/city_wall": {
+                "name": "Tường thành"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Hàng rào Ngăn Xe đạp"
+            },
+            "barrier/ditch": {
+                "name": "Mương"
+            },
+            "barrier/entrance": {
+                "name": "Cửa vào"
+            },
+            "barrier/fence": {
+                "name": "Hàng rào"
+            },
+            "barrier/gate": {
+                "name": "Cổng"
+            },
+            "barrier/hedge": {
+                "name": "Hàng rào Cây"
+            },
+            "barrier/kissing_gate": {
+                "name": "Cửa Hàng rào Chắn Trâu bò"
+            },
+            "barrier/lift_gate": {
+                "name": "Rào chắn Đóng mở"
+            },
+            "barrier/retaining_wall": {
+                "name": "Tường Chắn Đất"
+            },
+            "barrier/stile": {
+                "name": "Bậc trèo"
+            },
+            "barrier/toll_booth": {
+                "name": "Nhà thu phí"
+            },
+            "barrier/wall": {
+                "name": "Tường"
+            },
             "building": {
                 "name": "Tòa nhà"
             },
@@ -8002,12 +9600,16 @@ locale.vi = {
             "highway": {
                 "name": "Đường Giao thông"
             },
+            "highway/bridleway": {
+                "name": "Đường mòn Ngựa",
+                "terms": "đường mòn ngựa,đường cưỡi ngựa,đường đi ngựa"
+            },
             "highway/bus_stop": {
                 "name": "Trạm Xe buýt"
             },
             "highway/crossing": {
                 "name": "Lối Băng qua Đường",
-                "terms": "lối băng qua đường,lối qua đường"
+                "terms": "lối băng qua đường,lối qua đường,đường ngựa vằn"
             },
             "highway/cycleway": {
                 "name": "Đường Xe đạp"
@@ -8060,8 +9662,29 @@ locale.vi = {
             "historic": {
                 "name": "Nơi Lịch sử"
             },
+            "historic/archaeological_site": {
+                "name": "Khu vực Khảo cổ"
+            },
+            "historic/boundary_stone": {
+                "name": "Mốc Biên giới"
+            },
+            "historic/castle": {
+                "name": "Lâu đài"
+            },
+            "historic/memorial": {
+                "name": "Đài Tưởng niệm"
+            },
             "historic/monument": {
                 "name": "Đài tưởng niệm"
+            },
+            "historic/ruins": {
+                "name": "Tàn tích"
+            },
+            "historic/wayside_cross": {
+                "name": "Thánh Giá Dọc đường"
+            },
+            "historic/wayside_shrine": {
+                "name": "Đền thánh Dọc đường"
             },
             "landuse": {
                 "name": "Kiểu Sử dụng Đất"
@@ -8120,6 +9743,9 @@ locale.vi = {
             "leisure/golf_course": {
                 "name": "Sân Golf"
             },
+            "leisure/marina": {
+                "name": "Bến tàu"
+            },
             "leisure/park": {
                 "name": "Công viên",
                 "terms": "công viên,vườn,vườn hoa,vườn cây,bãi cỏ,bãi cỏ xanh,thảm cỏ xanh,vành đai xanh,sân chơi,khu vui chơi,khu vui chơi trẻ em,khu chơi trẻ em,quảng trường,rừng"
@@ -8144,6 +9770,9 @@ locale.vi = {
             },
             "leisure/playground": {
                 "name": "Khu Vui chơi Trẻ em"
+            },
+            "leisure/slipway": {
+                "name": "Đường Trượt tàu"
             },
             "leisure/stadium": {
                 "name": "Sân vận động"
@@ -8243,15 +9872,42 @@ locale.vi = {
             "place/village": {
                 "name": "Làng"
             },
+            "power": {
+                "name": "Điện năng"
+            },
+            "power/generator": {
+                "name": "Nhà máy điện"
+            },
+            "power/line": {
+                "name": "Đường Dây điện"
+            },
+            "power/pole": {
+                "name": "Cột điện"
+            },
             "power/sub_station": {
                 "name": "Trạm Điện Phụ"
+            },
+            "power/tower": {
+                "name": "Cột điện Cao thế"
+            },
+            "power/transformer": {
+                "name": "Máy biến áp"
             },
             "railway": {
                 "name": "Đường sắt"
             },
+            "railway/abandoned": {
+                "name": "Đường sắt Bỏ hoang"
+            },
+            "railway/disused": {
+                "name": "Đường sắt Không hoạt động"
+            },
             "railway/level_crossing": {
                 "name": "Giao lộ Đường sắt",
                 "terms": "giao lộ đường sắt,giao lộ đường ray,nút giao đường sắt"
+            },
+            "railway/monorail": {
+                "name": "Đường sắt Một ray"
             },
             "railway/rail": {
                 "name": "Đường sắt"
@@ -8262,15 +9918,166 @@ locale.vi = {
             "railway/subway_entrance": {
                 "name": "Cửa vào Nhà ga Tàu điện ngầm"
             },
+            "railway/tram": {
+                "name": "Đường Tàu điện",
+                "terms": "đường tàu điện,tàu điện,đường xe điện,xe điện"
+            },
             "shop": {
                 "name": "Tiệm"
+            },
+            "shop/alcohol": {
+                "name": "Tiệm Rượu"
+            },
+            "shop/bakery": {
+                "name": "Tiệm Bánh"
+            },
+            "shop/beauty": {
+                "name": "Tiệm Mỹ phẩm"
+            },
+            "shop/beverages": {
+                "name": "Tiệm Đồ uống"
+            },
+            "shop/bicycle": {
+                "name": "Tiệm Xe đạp"
+            },
+            "shop/books": {
+                "name": "Hiệu Sách"
+            },
+            "shop/boutique": {
+                "name": "Tiệm Thời trang"
             },
             "shop/butcher": {
                 "name": "Tiệm Thịt"
             },
+            "shop/car": {
+                "name": "Tiệm Xe hơi"
+            },
+            "shop/car_parts": {
+                "name": "Tiệm Phụ tùng Xe hơi"
+            },
+            "shop/car_repair": {
+                "name": "Tiệm Sửa Xe"
+            },
+            "shop/chemist": {
+                "name": "Tiệm Dược phẩm"
+            },
+            "shop/clothes": {
+                "name": "Tiệm Quần áo"
+            },
+            "shop/computer": {
+                "name": "Tiệm Máy tính"
+            },
+            "shop/confectionery": {
+                "name": "Tiệm Kẹo"
+            },
+            "shop/convenience": {
+                "name": "Tiệm Tiện lợi"
+            },
+            "shop/deli": {
+                "name": "Tiệm Deli"
+            },
+            "shop/department_store": {
+                "name": "Tiệm Bách hóa"
+            },
+            "shop/doityourself": {
+                "name": "Tiệm Vật liệu Xây dựng"
+            },
+            "shop/dry_cleaning": {
+                "name": "Tiệm Giặt Hấp tẩy"
+            },
+            "shop/electronics": {
+                "name": "Tiệm Thiết bị Điện tử"
+            },
+            "shop/fishmonger": {
+                "name": "Tiệm Cá"
+            },
+            "shop/florist": {
+                "name": "Tiệm Hoa"
+            },
+            "shop/furniture": {
+                "name": "Tiệm Đồ đạc"
+            },
+            "shop/garden_centre": {
+                "name": "Trung tâm Làm vườn"
+            },
+            "shop/gift": {
+                "name": "Tiệm Quà tặng"
+            },
+            "shop/greengrocer": {
+                "name": "Tiệm Rau quả"
+            },
+            "shop/hairdresser": {
+                "name": "Tiệm Làm tóc"
+            },
+            "shop/hardware": {
+                "name": "Tiệm Ngũ kim"
+            },
+            "shop/hifi": {
+                "name": "Tiệm Thiết bị Âm thanh"
+            },
+            "shop/jewelry": {
+                "name": "Tiệm Kim hoàn"
+            },
+            "shop/kiosk": {
+                "name": "Gian hàng"
+            },
+            "shop/laundry": {
+                "name": "Tiệm Máy giặt"
+            },
+            "shop/mall": {
+                "name": "Trung tâm Thương mại"
+            },
+            "shop/mobile_phone": {
+                "name": "Tiệm Điện thoại Di động"
+            },
+            "shop/motorcycle": {
+                "name": "Tiệm Xe máy"
+            },
+            "shop/music": {
+                "name": "Tiệm Âm nhạc"
+            },
+            "shop/newsagent": {
+                "name": "Quầy báo"
+            },
+            "shop/optician": {
+                "name": "Tiệm Kính mắt"
+            },
+            "shop/outdoor": {
+                "name": "Tiệm Thể thao Ngoài trời"
+            },
+            "shop/pet": {
+                "name": "Tiệm Vật nuôi"
+            },
+            "shop/shoes": {
+                "name": "Tiệm Giày"
+            },
+            "shop/sports": {
+                "name": "Tiệm Thể thao"
+            },
+            "shop/stationery": {
+                "name": "Tiệm Văn phòng phẩm"
+            },
             "shop/supermarket": {
                 "name": "Siêu thị",
                 "terms": "siêu thị,chợ,tiệm,cửa hàng,khu buôn bán,trung tâm buôn bán,chợ trời,chợ phiên,chợ xổm"
+            },
+            "shop/toys": {
+                "name": "Tiệm Đồ chơ"
+            },
+            "shop/travel_agency": {
+                "name": "Văn phòng Du lịch"
+            },
+            "shop/tyres": {
+                "name": "Tiệm Lốp xe"
+            },
+            "shop/vacant": {
+                "name": "Tiệm Đóng cửa"
+            },
+            "shop/variety_store": {
+                "name": "Tiệm Tạp hóa"
+            },
+            "shop/video": {
+                "name": "Tiệm Phim"
             },
             "tourism": {
                 "name": "Du lịch"
