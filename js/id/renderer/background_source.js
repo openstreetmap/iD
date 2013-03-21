@@ -29,20 +29,22 @@ iD.BackgroundSource.template = function(data) {
     }
 
     generator.data = data;
+    generator.copyrightNotices = function() {};
 
     return generator;
 };
 
-iD.BackgroundSource.Bing = function(data) {
+iD.BackgroundSource.Bing = function(data, dispatch) {
     // http://msdn.microsoft.com/en-us/library/ff701716.aspx
     // http://msdn.microsoft.com/en-us/library/ff701701.aspx
 
     var bing = iD.BackgroundSource.template(data),
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
-        url = 'http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' + key + '&jsonp={callback}';
+        url = 'http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' + key + '&jsonp={callback}',
+        providers = [];
 
     d3.jsonp(url, function(json) {
-        bing.providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
+        providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
             return {
                 attribution: provider.attribution,
                 areas: provider.coverageAreas.map(function(area) {
@@ -53,10 +55,12 @@ iD.BackgroundSource.Bing = function(data) {
                 })
             };
         });
+        dispatch.change();
     });
 
     bing.copyrightNotices = function(zoom, extent) {
-        return bing.providers.filter(function(provider) {
+        zoom = Math.min(zoom, 21);
+        return providers.filter(function(provider) {
             return _.any(provider.areas, function(area) {
                 return extent.intersects(area.extent) &&
                     area.zoom[0] <= zoom &&
