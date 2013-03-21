@@ -603,6 +603,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top: 60px;
 }
 
+.pane:first-child .inspector-body {
+    top: 120px;
+}
+
 .inspector-body::-webkit-scrollbar {
     background: #fff;
 }
@@ -686,8 +690,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .preset-grid  {
     width:100%;
-    margin-top: 60px;
-    padding: 20px 0px 10px 20px;
+    padding: 20px 10px 10px 20px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -864,6 +867,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: auto;
     position: absolute;
     left: 0; right: 0; top: 19px;
+    background:transparent url(../img/sprite.png) no-repeat -240px -80px;
 }
 
 .preset-icon-fill.tag-shop,
@@ -2101,6 +2105,7 @@ a.success-action {
     overflow: visible;
     width: 10px;
     background: #EBEBEB;
+    border-left: 1px solid #DDD;
 }
 ::-webkit-scrollbar-button {
     height: 0;
