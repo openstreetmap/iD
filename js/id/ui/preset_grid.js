@@ -120,11 +120,9 @@ iD.ui.PresetGrid = function(context, entity) {
                         .call(drawGrid, 1000);
 
                     subgrid.style('max-height', '0px')
-                        .style('padding-top', '0px')
                         .style('padding-bottom', '0px')
                         .transition()
                         .duration(300)
-                        .style('padding-top', '10px')
                         .style('padding-bottom', '20px')
                         .style('max-height', (d.members.collection.length / 3 * 150) + 200 + 'px');
                 }
