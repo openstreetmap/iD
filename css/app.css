@@ -975,6 +975,10 @@ button.preset-add-field {
     padding: 0 10px;
 }
 
+.view-on-osm {
+    padding: 20px;
+}
+
 /* preset form numbers */
 
 input[type=number] {
