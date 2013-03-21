@@ -1069,13 +1069,16 @@
             "line"
         ],
         "tags": {
-            "highway": "steps"
+            "highway": "bridleway"
         },
         "terms": [
-            "stairs",
-            "staircase"
+            "bridleway",
+            "equestrian trail",
+            "horse riding path",
+            "bridle road",
+            "horse trail"
         ],
-        "name": "Steps"
+        "name": "Bridle Path"
     },
     "highway/bus_stop": {
         "icon": "bus",
@@ -2712,7 +2715,7 @@
         "name": "Beverage Store"
     },
     "shop/bicycle": {
-        "icon": "shop",
+        "icon": "bicycle",
         "fields": [
             "address",
             "opening_hours"
