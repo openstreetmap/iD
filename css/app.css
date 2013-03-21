@@ -272,7 +272,9 @@ ul.link-list li:last-child {
 .fr { float: right;}
 
 div.hide,
-form.hide {
+form.hide,
+button.hide,
+a.hide {
     display: none;
 }
 
@@ -1672,6 +1674,10 @@ div.typeahead a:first-child {
 .modal-section {
     padding: 20px;
     border-bottom: 1px solid #CCC;
+}
+
+.modal-section:last-child {
+    border-bottom: 0;
 }
 
 .modal-flash .content {
