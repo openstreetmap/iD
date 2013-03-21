@@ -34,10 +34,16 @@ iD.ui.TagEditor = function(context, entity) {
             .on('click', function() {
                 event.choose(preset);
             });
+
         back.append('div')
             .attr('class', 'col12')
             .append('span')
             .attr('class', 'preset-icon icon' + (preset ?  ' feature-' + (preset.icon || 'marker-stroked') : ''));
+
+        back.append('div')
+            .attr('class', 'col12')
+            .append('span')
+            .attr('class', 'icon back');
 
         messagewrap.append('h3')
             .attr('class', 'inspector-inner fl')

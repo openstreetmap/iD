@@ -24,7 +24,7 @@ iD.ui.modal = function(selection, blocking) {
         .attr('class', 'modal');
 
     modal.append('button')
-        .attr('class', 'icon close-modal')
+        .attr('class', 'icon remove')
         .on('click', function() {
             if (!blocking) shaded.remove();
         });
