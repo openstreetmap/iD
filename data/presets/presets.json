@@ -791,6 +791,7 @@
         "tags": {
             "amenity": "toilets"
         },
+        "icon": "toilets",
         "name": "Toilets"
     },
     "amenity/townhall": {
