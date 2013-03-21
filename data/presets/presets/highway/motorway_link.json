@@ -1,0 +1,19 @@
+{
+    "icon": "highway-motorway-link",
+    "fields": [
+        "oneway_yes",
+        "structure",
+        "access",
+        "maxspeed",
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "motorway_link"
+    },
+    "terms": ["ramp", "on ramp", "off ramp"],
+    "name": "Motorway Link"
+}

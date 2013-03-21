@@ -1185,6 +1185,29 @@
         "terms": [],
         "name": "Motorway"
     },
+    "highway/motorway_link": {
+        "icon": "highway-motorway-link",
+        "fields": [
+            "oneway_yes",
+            "structure",
+            "access",
+            "maxspeed",
+            "surface",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "motorway_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Motorway Link"
+    },
     "highway/path": {
         "icon": "highway-footway",
         "fields": [
@@ -1222,6 +1245,29 @@
         "terms": [],
         "name": "Primary Road"
     },
+    "highway/primary_link": {
+        "icon": "highway-primary-link",
+        "fields": [
+            "oneway",
+            "structure",
+            "access",
+            "maxspeed",
+            "surface",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "primary_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Primary Link"
+    },
     "highway/residential": {
         "icon": "highway-residential",
         "fields": [
@@ -1258,6 +1304,29 @@
         },
         "terms": [],
         "name": "Secondary Road"
+    },
+    "highway/secondary_link": {
+        "icon": "highway-secondary-link",
+        "fields": [
+            "oneway",
+            "structure",
+            "access",
+            "maxspeed",
+            "surface",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "secondary_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Secondary Link"
     },
     "highway/service": {
         "icon": "highway-service",
@@ -1315,6 +1384,29 @@
         "terms": [],
         "name": "Tertiary Road"
     },
+    "highway/tertiary_link": {
+        "icon": "highway-tertiary-link",
+        "fields": [
+            "oneway",
+            "structure",
+            "access",
+            "maxspeed",
+            "surface",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "tertiary_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Tertiary Link"
+    },
     "highway/track": {
         "icon": "highway-track",
         "fields": [
@@ -1365,6 +1457,29 @@
         },
         "terms": [],
         "name": "Trunk Road"
+    },
+    "highway/trunk_link": {
+        "icon": "highway-trunk-link",
+        "fields": [
+            "oneway",
+            "structure",
+            "access",
+            "maxspeed",
+            "surface",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "trunk_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Trunk Link"
     },
     "highway/turning_circle": {
         "icon": "circle",
@@ -2473,7 +2588,7 @@
         "name": "Rail"
     },
     "railway/subway": {
-        "icon": "railway-rail",
+        "icon": "railway-subway",
         "fields": [
             "structure"
         ],

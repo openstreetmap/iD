@@ -1,0 +1,19 @@
+{
+    "icon": "highway-trunk-link",
+    "fields": [
+        "oneway",
+        "structure",
+        "access",
+        "maxspeed",
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "trunk_link"
+    },
+    "terms": ["ramp", "on ramp", "off ramp"],
+    "name": "Trunk Link"
+}

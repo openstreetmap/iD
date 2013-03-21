@@ -1,4 +1,4 @@
-/* glue: 0.3 hash: a9f9bb5536 */
+/* glue: 0.3 hash: 302da125e7 */
 .feature-waterway-stream,
 .feature-waterway-river,
 .feature-waterway-ditch,
@@ -16,6 +16,7 @@
 .feature-highway-trunk-link,
 .feature-highway-track,
 .feature-highway-tertiary,
+.feature-highway-tertiary-link,
 .feature-highway-steps,
 .feature-highway-service,
 .feature-highway-secondary,
@@ -306,8 +307,8 @@
 .feature-highway-trunk{background-position:-60px -180px;width:60px;height:60px;}
 .feature-highway-trunk-link{background-position:-120px -180px;width:60px;height:60px;}
 .feature-highway-track{background-position:-180px -180px;width:60px;height:60px;}
-.feature-highway-tertiary:link{background-position:-240px 0px;width:60px;height:60px;}
-.feature-highway-tertiary{background-position:-240px -60px;width:60px;height:60px;}
+.feature-highway-tertiary{background-position:-240px 0px;width:60px;height:60px;}
+.feature-highway-tertiary-link{background-position:-240px -60px;width:60px;height:60px;}
 .feature-highway-steps{background-position:-240px -120px;width:60px;height:60px;}
 .feature-highway-service{background-position:-240px -180px;width:60px;height:60px;}
 .feature-highway-secondary{background-position:0px -240px;width:60px;height:60px;}

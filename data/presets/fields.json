@@ -223,6 +223,12 @@
         "type": "check",
         "label": "One Way"
     },
+    "oneway_yes": {
+        "key": "oneway",
+        "type": "check",
+        "default": "yes",
+        "label": "One Way"
+    },
     "opening_hours": {
         "key": "opening_hours",
         "type": "text",
