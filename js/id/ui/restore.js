@@ -11,12 +11,12 @@ iD.ui.Restore = function(context) {
         var introModal = modal.select('.content');
 
         introModal.append('div')
-            .attr('class', 'modal-section fillL')
+            .attr('class', 'modal-section header')
             .append('h3')
             .text(t('restore.description'));
 
         var buttonWrap = introModal.append('div')
-            .attr('class', 'modal-section fillD cf col12');
+            .attr('class', 'modal-section cf col12');
 
         var buttons = buttonWrap
             .append('div')

@@ -4,7 +4,7 @@ iD.ui.tagReference = function(selection) {
         var selection = d3.select(this);
         var header = selection.append('div')
             .attr('class','modal-section fillL header')
-            .append('h2');
+            .append('h3');
 
         header.selectAll('span.icon')
             .data(g('types'))
@@ -23,7 +23,7 @@ iD.ui.tagReference = function(selection) {
             .attr('class','modal-section fillL2');
 
         referenceBody
-            .append('h5')
+            .append('h4')
             .text(t('tag_reference.description'));
 
         if (selection.datum().image) {

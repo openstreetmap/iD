@@ -137,7 +137,7 @@ locale.en = {
     },
     "nothing_to_undo": "Nothing to undo.",
     "nothing_to_redo": "Nothing to redo.",
-    "just_edited": "You Just Edited OpenStreetMap!",
+    "just_edited": "You just edited OpenStreetMap!",
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
     "view_on_osm": "View on OSM",
     "zoom_in_edit": "zoom in to edit the map",
@@ -146,6 +146,7 @@ locale.en = {
     "commit": {
         "title": "Save Changes",
         "description_placeholder": "Brief description of your contributions",
+        "message_label": "Commit message",
         "upload_explanation": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
         "save": "Save",
         "cancel": "Cancel",
