@@ -726,10 +726,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: rgba(0,0,0,.9);
 }
 
-.preset-inspect {
-  background: white;
-}
-
 .grid-entry > .icon {
     position: absolute;
     top: 30px;left: 0px; right: 0px;
@@ -807,6 +803,32 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     padding: 0px 10px;
     height:30px;
     margin: 5px;
+}
+
+.subgrid {
+    overflow: hidden;
+}
+
+.subgrid .preset-grid {
+    background: #eee;
+    margin-top: 0px;
+    border-radius: 4px;
+}
+
+.subgrid .arrow {
+    border: solid rgba(0, 0, 0, 0);
+    border-width: 10px;
+    border-bottom-color: #eee;
+    width: 0;
+    height: 0;
+    margin-left: 50px;
+    margin-top: -10px;
+}
+.subgrid.arrow-1 .arrow {
+    margin-left: 165px;
+}
+.subgrid.arrow-2 .arrow {
+    margin-left: 280px;
 }
 
 .show-more {

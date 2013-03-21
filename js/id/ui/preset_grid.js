@@ -108,10 +108,26 @@ iD.ui.PresetGrid = function(context, entity) {
         function choose(d) {
             // Category
             if (d.members) {
-                search.property('value', '');
-                presets = d.members.collection;
-                currently_drawn = presets.length;
-                grid.data([presets]).call(drawGrid, currently_drawn);
+                var subgrid = insertBox(grid, d, 'subgrid');
+
+                if (subgrid) {
+                    subgrid.append('div')
+                        .attr('class', 'arrow');
+
+                    subgrid.append('div')
+                        .attr('class', 'preset-grid fillL cf fl')
+                        .data([d.members.collection])
+                        .call(drawGrid, 1000);
+
+                    subgrid.style('max-height', '0px')
+                        .style('padding-top', '0px')
+                        .style('padding-bottom', '0px')
+                        .transition()
+                        .duration(300)
+                        .style('padding-top', '10px')
+                        .style('padding-bottom', '20px')
+                        .style('max-height', (d.members.collection.length / 3 * 150) + 200 + 'px');
+                }
 
             // Preset
             } else {
@@ -134,55 +150,56 @@ iD.ui.PresetGrid = function(context, entity) {
             return s;
         }
 
-        var presetinspect, inspectindex = null;
+        // Inserts a div inline after the entry for the provided entity
+        // Used for preset descriptions, and for expanding categories
+        function insertBox(grid, entity, klass) {
+
+            var entries = grid.selectAll('button.grid-entry'),
+                shown = grid.selectAll('.box-insert'),
+                shownIndex = Infinity,
+                index;
+
+            if (shown.node()) {
+                shown.transition()
+                    .duration(200)
+                    .style('opacity','0')
+                    .style('max-height', '0px')
+                    .style('padding-top', '0px')
+                    .style('padding-bottom', '0px')
+                    .each('end', function() {
+                        shown.remove();
+                    });
+
+
+                if (shown.datum() === entity && shown.classed(klass)) return;
+                shownIndex = Array.prototype.indexOf.call(shown.node().parentNode.childNodes, shown.node());
+            }
+
+            entries.each(function(d, i) {
+                if (d === entity) index = i;
+            });
+
+            var insertIndex = index + 3 - index % 3;
+            if (insertIndex > shownIndex) insertIndex ++;
+
+            var elem = document.createElement('div');
+            grid.node().insertBefore(elem, grid.node().childNodes[insertIndex]);
+
+            var newbox = d3.select(elem)
+                .attr('class', 'col12 box-insert ' + klass + ' arrow-' + (index % 3))
+                .datum(entity);
+
+            return newbox;
+        }
 
         function drawGrid(selection, limit) {
 
             function helpClick(d) {
-                // Display description box inline
                 d3.event.stopPropagation();
 
-                var entry = this.parentNode,
-                    index,
-                    entries = selection.selectAll('button.grid-entry');
+                var presetinspect = insertBox(selection, d, 'preset-inspect');
 
-                if (presetinspect) {
-
-                    var old = presetinspect;
-                    old
-                        .transition()
-                        .duration(200)
-                        .style('opacity','0')
-                        .style('max-height', '0px')
-                        .style('padding-top', '0px')
-                        .style('padding-bottom', '0px')
-                        .each('end', function() {
-                            old.remove();
-                        });
-
-                    if (presetinspect.datum() === d) {
-                        presetinspect = null;
-                        inspectindex = null;
-                        return;
-                    }
-                }
-
-                entries.each(function(d, i) {
-                    if (this === entry) index = i;
-                });
-
-
-                index = Math.floor(index/3) * 3 + 4;
-
-                // account for already display inspect box
-                var adjust = (inspectindex !== null && index > inspectindex) ? 1 : 0;
-
-                var selector = 'div:nth-child(' + (index + adjust) + ')';
-                inspectindex = index;
-
-                presetinspect = selection.insert('div', selector)
-                    .attr('class', 'preset-inspect col12')
-                    .datum(d);
+                if (!presetinspect) return;
 
                 presetinspect
                     .style('max-height', '0px')
@@ -230,10 +247,12 @@ iD.ui.PresetGrid = function(context, entity) {
                     .style('opacity','1');
             }
 
-            show_more
-                .style('display', (selection.data()[0].length > limit) ? 'block' : 'none');
+            if (selection.node() === grid.node()) {
+                show_more
+                    .style('display', (selection.data()[0].length > limit) ? 'block' : 'none');
+            }
 
-            selection.selectAll('.preset-inspect').remove();
+            selection.selectAll('.preset-inspect, .subgrid').remove();
 
             var entries = selection
                 .selectAll('div.grid-entry-wrap')
