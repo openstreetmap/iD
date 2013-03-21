@@ -1,6 +1,5 @@
-iD.ui.preset = function(context) {
+iD.ui.preset = function(context, entity) {
     var event = d3.dispatch('change', 'setTags', 'close'),
-        entity,
         tags,
         keys,
         preset,
@@ -123,12 +122,6 @@ iD.ui.preset = function(context) {
             });
 
         event.setTags(tags);
-        return presets;
-    };
-
-    presets.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
         return presets;
     };
 

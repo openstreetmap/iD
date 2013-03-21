@@ -73,8 +73,7 @@ iD.ui.TagEditor = function(context, entity) {
                 changeTags({ name: name.property('value') });
             });
 
-        presetUI = iD.ui.preset(context)
-            .entity(entity)
+        presetUI = iD.ui.preset(context, entity)
             .preset(preset)
             .on('change', changeTags)
             .on('close', event.close);
