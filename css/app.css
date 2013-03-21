@@ -70,12 +70,12 @@ h2:last-child,
 h4:last-child { margin-bottom: 0;}
 
 h3 {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.3333;
     font-weight: bold;
     margin-bottom: 10px;
     text-overflow: ellipsis;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 h4 {
@@ -134,6 +134,7 @@ a:hover {
 
 textarea  {
     resize: vertical;
+    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
 }
 
 textarea,
@@ -285,9 +286,6 @@ form.hide {
 }
 
 .pad1    {padding: 10px;}
-.pad2    {padding: 20px;}
-.margin1 {margin: 10px;}
-.margin2 {margin: 20px;}
 
 .loading {
     background: url(../img/loader_bg.gif);
@@ -443,12 +441,6 @@ button.save.has-count .count::before {
     border-right:  6px solid rgba(255,255,255,.5);
 }
 
-button.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
 button[disabled] {
     cursor:auto;
     background: rgba(255,255,255,.5);
@@ -580,6 +572,37 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-radius: 0;
 }
 
+
+/* Header for modals / panes
+------------------------------------------------------- */
+
+.header {
+    border-bottom: 1px solid #ccc;
+    z-index: 2;
+    position: relative;
+}
+
+.header h3 {
+    margin-bottom: 0;
+}
+
+.modal > button,
+.header button {
+    height: 100%;
+    border-radius: 0;
+    border-left: 1px solid #CCC;
+    width: 40px;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+}
+
+.modal > button {
+    height: 61px;
+    z-index: 3;
+}
+
 /* Inspector
 ------------------------------------------------------- */
 
@@ -616,24 +639,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
 }
 
-.inspector-wrap .message {
-    height: 60px;
-    border-bottom: 1px solid #ccc;
-    z-index: 100;
-    position: relative;
-}
-
-.inspector-wrap .message button {
-    height: 100%;
-    border-radius: 0;
+.inspector-wrap .header button.preset-reset {
     border-right: 1px solid #CCC;
-    width: 60px;
-    text-align: center;
-    overflow: hidden;
     position: relative;
+    width: 60px;
 }
 
-.inspector-wrap .message button > div {
+.inspector-wrap .header button.preset-reset > div {
     height: 100%;
     padding: 20px 0;
     -webkit-transition: opacity 200ms;
@@ -641,38 +653,26 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
             transition: opacity 200ms;
 }
 
-.inspector-wrap .message button .col12:last-child {
+.inspector-wrap .header button.preset-reset .col12:last-child {
     position: absolute;
     width: 100%;
     padding: 20px 0;
     opacity: 0;
 }
 
-.inspector-wrap .message button:hover .col12:first-child {
+.inspector-wrap .header button:hover .col12:first-child {
     opacity: 0;
 }
 
-.inspector-wrap .message button:hover .col12:last-child {
+.inspector-wrap .header button:hover .col12:last-child {
     opacity: 1;
 }
 
-.inspector-wrap .message button.line > div {
+.inspector-wrap .header button.line > div {
     padding: 0;
 }
 
-.inspector-wrap .message button.fr {
-    border-left: 1px solid #CCC;
-    width: 40px;
-}
-
-.inspector-wrap .message h3 {
-    display: block;
-    font-size: 16px;
-    line-height: 20px;
-    overflow: hidden;
-}
-
-.pane:last-child .message h3 {
+.pane:last-child .header h3 {
     position: absolute;
     left: 60px;
     right: 40px;
@@ -1639,11 +1639,9 @@ div.typeahead a:first-child {
 .modal {
     display: inline-block;
     position:absolute;
-    width: 50%;
     left: 0;
     right: 0;
     margin: auto;
-    max-width: 600px;
     top: 80px;
     z-index: 3;
 }
@@ -1652,25 +1650,8 @@ div.typeahead a:first-child {
     margin-bottom: 10px;
 }
 
-.modal .content {
-    margin-bottom: 40px;
-}
-
 .modal .description {
     text-align: center;
-}
-
-.modal button.close-modal {
-    float:right;
-    position: absolute;
-    right:5px;
-    top:5px;
-    opacity: .5;
-}
-
-.modal button.close-modal:hover {
-    background-color: transparent;
-    opacity: 1;
 }
 
 .shaded {
@@ -1680,6 +1661,7 @@ div.typeahead a:first-child {
     width: 100%;
     overflow: auto;
 }
+
 .shaded:before {
     content:'';
     background:rgba(0,0,0,0.5);
@@ -1689,29 +1671,7 @@ div.typeahead a:first-child {
 
 .modal-section {
     padding: 20px;
-}
-
-.modal-section:first-child {
-    border-radius: 4px 4px 0 0;
-}
-
-.modal-section:last-child {
-    border-radius: 0 0 4px 4px;
-}
-
-.modal-section:only-of-type {
-    border-radius: 4px;
-}
-
-.modal-section .buttons {
-    padding-top: 10px;
-    width: 100%;
-}
-
-.modal-section img.wiki-image {
-    max-width: 100%;
-    max-height: 300px;
-    display: block;
+    border-bottom: 1px solid #CCC;
 }
 
 .modal-flash .content {
@@ -1752,6 +1712,7 @@ div.typeahead a:first-child {
 
 .commit-modal .commit-info {
     margin-top: 10px;
+    padding-bottom: 20px;
 }
 
 .commit-modal .user-info img {
@@ -1775,45 +1736,30 @@ div.typeahead a:first-child {
 .commit-modal .changeset-list {
     overflow: auto;
     border:1px solid #ccc;
+    border-radius: 4px;
     background:#fff;
     max-height: 160px;
 }
 
+.commit-modal .warning-section .changeset-list {
+    border-radius: 4px 0 0 4px;
+}
+
 .commit-modal .warning-section .changeset-list  button {
     float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0;
+    height: 100%;
+    width: 30px;
 }
-
-.commit-section.modal-section {
-    padding-bottom: 0;
-}
-
-.commit-section.modal-section:last-child { padding-bottom: 20px;}
 
 .commit-modal .changeset-list li {
     position: relative;
     border-top:1px solid #ccc;
     padding:5px 10px;
-}
-
-.modal-section {
-    padding: 20px;
-}
-
-.modal-section img.wiki-image {
-    max-width: 100%;
-    max-height: 300px;
-    display: block;
-}
-
-.modal-flash .content {
-    box-shadow: none;
-    border-radius: 4px;
-    background: #111;
-    color: #eee;
-}
-
-.modal-flash .close-modal {
-    display:none;
 }
 
 .changeset-list li span.count {
@@ -1822,19 +1768,14 @@ div.typeahead a:first-child {
 }
 
 .changeset-list li span.count:before { content: '('; }
+
 .changeset-list li span.count:after { content: ')'; }
 
 .changeset-list li:first-child { border-top: 0;}
 
-.commit-modal .changeset-comment {
-    height: 60px;
-    width:100%;
-    /* firefox uses monospace in textareas */
-    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
-}
-
 /* Success
 ------------------------------------------------------- */
+
 a.success-action {
   display:inline-block;
   padding:10px;
@@ -2098,10 +2039,10 @@ a.success-action {
 ------------------------------------------------------- */
 
 @media only screen and (max-width: 840px) {
-    span.label {display: none;}
+    #bar span.label {display: none;}
+    #bar .icon.icon-pre-text { margin-right: 0px;}
     /* override hide for save button */
-    .icon.icon-pre-text { margin-right: 0px;}
-    .save .label, .apply .label, .cancel .label { display: block;}
+    #bar .save .label { display: block;}
 }
 
 @media only screen and (max-height: 840px) {

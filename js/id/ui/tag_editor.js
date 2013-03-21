@@ -27,7 +27,7 @@ iD.ui.TagEditor = function(context, entity) {
         selection.html('');
 
         var messagewrap = selection.append('div')
-            .attr('class', 'message fillL');
+            .attr('class', 'header fillL cf');
 
         var back = messagewrap.append('button')
             .attr('class', 'preset-reset fl ' + geometry)
