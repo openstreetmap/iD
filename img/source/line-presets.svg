@@ -228,8 +228,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="1223.4762"
-     inkscape:cy="34.703981"
+     inkscape:cx="1791.8182"
+     inkscape:cy="52.162498"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -327,6 +327,14 @@
        orientation="0,1"
        position="665,71"
        id="guide5181" />
+    <sodipodi:guide
+       orientation="-0.98058068,0.19611614"
+       position="1787,47"
+       id="guide4773" />
+    <sodipodi:guide
+       orientation="-0.98058068,-0.19611614"
+       position="1793,47"
+       id="guide4775" />
   </sodipodi:namedview>
   <metadata
      id="metadata7018">
@@ -3152,25 +3160,28 @@
              sodipodi:type="arc" />
           <path
              style="color:#000000;fill:#60d4de;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-             d="m 1722,39 c 0,0 0.5349,1.84613 0.3438,2.75 -0.2214,1.04668 -1.6563,2.75 -1.6563,2.75 0,0 -1.4349,1.70333 -1.6563,2.75 -0.1911,0.90388 0.3438,2.75 0.3438,2.75 0,0 0.5349,1.84613 0.3438,2.75 -0.2214,1.04668 -1.6563,2.75 -1.6563,2.75 0,0 -1.4349,1.70333 -1.6563,2.75 -0.1911,0.90388 0.3438,2.75 0.3438,2.75 l 27,0 c 0,0 -1.4349,-1.70332 -1.6562,-2.75 -0.1912,-0.90387 0.3437,-2.75 0.3437,-2.75 0,0 0.5349,-1.84612 0.3437,-2.75 -0.2213,-1.04667 -1.6562,-2.75 -1.6562,-2.75 0,0 -1.4349,-1.70332 -1.6562,-2.75 -0.1912,-0.90387 0.3437,-2.75 0.3437,-2.75 0,0 0.5349,-1.84612 0.3437,-2.75 C 1739.9349,40.70333 1738.5,39 1738.5,39 l -16.5,0 z m 6,2 4,0 2,2 0,12 -2,2 -4,0 -2,-2 0,-12 2,-2 z"
+             d="m 1722,39 c 0,0 0.5349,1.84613 0.3438,2.75 -0.2214,1.04668 -1.6563,2.75 -1.6563,2.75 0,0 -1.4349,1.70333 -1.6563,2.75 -0.1911,0.90388 0.3438,2.75 0.3438,2.75 0,0 0.5349,1.84613 0.3438,2.75 -0.2214,1.04668 -1.6563,2.75 -1.6563,2.75 0,0 -1.4349,1.70333 -1.6563,2.75 -0.1911,0.90388 0.3438,2.75 0.3438,2.75 l 27,0 c 0,0 -1.4349,-1.70332 -1.6562,-2.75 -0.1912,-0.90387 0.3437,-2.75 0.3437,-2.75 0,0 0.5349,-1.84612 0.3437,-2.75 -0.2213,-1.04667 -1.6562,-2.75 -1.6562,-2.75 0,0 -1.4349,-1.70332 -1.6562,-2.75 -0.1912,-0.90387 0.3437,-2.75 0.3437,-2.75 0,0 0.5349,-1.84612 0.3437,-2.75 C 1739.9349,40.70333 1738.5,39 1738.5,39 z m 6,2 4,0 2,2 2,12 -4,2 -4,0 -4,-2 2,-12 z"
              transform="translate(-1310,12.362183)"
              id="333"
              inkscape:connector-curvature="0"
-             inkscape:label="#waterway-riverdsads-8" />
+             inkscape:label="#waterway-riverdsads-8"
+             sodipodi:nodetypes="cccccccccccccccccccccccccccc" />
         </g>
         <path
            style="color:#000000;fill:#60d4de;fill-opacity:1;fill-rule:nonzero;stroke:#b5b5b5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-           d="m 1728,43 0,2 4,0 0,-2 -4,0 z m 0,3 0,2 4,0 0,-2 -4,0 z m 0,3 0,4 4,0 0,-4 -4,0 z"
+           d="m 1729,43 -0.4,2 2.8,0 -0.4,-2 z m -0.6,3 -0.4,2 4,0 -0.4,-2 z m -0.6,3 -0.8,4 6,0 -0.8,-4 z"
            transform="translate(-1660,72.362183)"
            id="path6924"
-           inkscape:connector-curvature="0" />
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccccccccccccc" />
       </g>
       <path
          transform="translate(-400,12.362183)"
          inkscape:connector-curvature="0"
          id="path6949"
-         d="m 466,115 8,0 -2,2 -4,0 z"
-         style="color:#000000;fill:#afe9ee;fill-opacity:1;fill-rule:nonzero;stroke:#b5b5b5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         d="m 464,115 12,0 -4,2 -4,0 z"
+         style="color:#000000;fill:#afe9ee;fill-opacity:1;fill-rule:nonzero;stroke:#b5b5b5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:nodetypes="ccccc" />
     </g>
     <g
        id="waterway-ditch"
