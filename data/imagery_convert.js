@@ -19,7 +19,7 @@ var replace = {
 };
 
 var description = {
-    'MapBox Satellite': 'Satellite and aerial imagery',
+    'MapBox Satellite': 'Satellite and aerial imagery.',
     'OpenStreetMap': 'The default OpenStreetMap layer.',
     'OSM US TIGER 2012 Roads Overlay': 'Public domain road data from the US Government.',
     'Bing aerial imagery': 'Satellite imagery.',

@@ -22,7 +22,7 @@
     {
         "name": "MapBox Satellite",
         "template": "http://{t}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.png",
-        "description": "Satellite and aerial imagery",
+        "description": "Satellite and aerial imagery.",
         "scaleExtent": [
             0,
             16

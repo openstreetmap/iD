@@ -123,7 +123,7 @@ iD.ui.Background = function(context) {
                 );
 
             layerInner.insert('span')
-                .attr('class', 'icon toggle');
+                .attr('class', 'icon toggle icon-pre-text');
 
             layerInner.insert('span').text(function(d) {
                 return d.data.name;
@@ -226,7 +226,7 @@ iD.ui.Background = function(context) {
 
         gpxLayerItem
             .append('span')
-            .attr('class', 'icon toggle');
+            .attr('class', 'icon toggle icon-pre-text');
 
         gpxLayerItem.append('span')
             .text(t('gpx.local_layer'));

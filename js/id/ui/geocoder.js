@@ -107,7 +107,7 @@ iD.ui.Geocoder = function(context) {
             .call(tooltip);
 
         button.append('span')
-            .attr('class', 'icon geocode');
+            .attr('class', 'icon geocode light');
 
         var gcForm = selection.append('form');
 

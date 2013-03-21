@@ -232,11 +232,6 @@ ul.toggle-list li a {
 ul.toggle-list li a:focus,
 ul.toggle-list li a:hover { background-color: #ececec;}
 
-ul.toggle-list .icon {
-    float: left;
-    margin-right: 5px;
-}
-
 ul.link-list li {
     display: inline-block;
     float: right;
@@ -499,7 +494,7 @@ button[disabled] .label {
 .icon.zoom-out   { background-position: -260px 0px;}
 .icon.plus       { background-position: -240px 0px;}
 .icon.search     { background-position: -280px 0px;}
-.icon.geocode    { background-position: -280px -20px;}
+.icon.geocode    { background-position: -280px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
@@ -507,6 +502,8 @@ button[disabled] .label {
 .icon.warning    { background-position: -380px 0px;}
 .icon.back       { background-position: -420px 0px;}
 .icon.forward    { background-position: -440px 0px;}
+
+.icon.geocode.light    { background-position: -280px -20px;}
 
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
@@ -1460,9 +1457,12 @@ div.combobox {
     height:18px;
 }
 
+
 .background-control .layer-toggle-gpx .layer-extent {
-    display:none;
+    float: right;
+    border: 0;
 }
+
 
 .background-control .layer-toggle-gpx.selected .layer-extent {
     display:inline-block;
