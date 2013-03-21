@@ -17,7 +17,6 @@ iD.ui.TagEditor = function(context, entity) {
 
         // preset was explicitly chosen
         if (newpreset) {
-
             tags = preset.removeTags(tags, geometry);
 
             newpreset.applyTags(tags, geometry);
@@ -40,7 +39,7 @@ iD.ui.TagEditor = function(context, entity) {
         back.append('div')
             .attr('class', 'col12')
             .append('span')
-            .attr('class', 'preset-icon icon' + (preset ?  ' feature-' + (preset.icon || fallbackIcon) : ''));
+            .attr('class', 'preset-icon icon feature-' + (preset.icon || fallbackIcon));
 
         back.append('div')
             .attr('class', 'col12')
@@ -77,6 +76,7 @@ iD.ui.TagEditor = function(context, entity) {
 
         presetUI = iD.ui.preset(context)
             .entity(entity)
+            .preset(preset)
             .on('change', changeTags)
             .on('close', event.close);
 
@@ -84,12 +84,8 @@ iD.ui.TagEditor = function(context, entity) {
             .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset cf fillL col12');
-
-        if (preset) {
-            tageditorpreset.call(presetUI
-                .preset(preset));
-        }
+            .attr('class', 'inspector-preset cf fillL col12')
+            .call(presetUI);
 
         editorwrap.append('div')
             .attr('class','inspector-inner col12 fillL2 additional-tags')
