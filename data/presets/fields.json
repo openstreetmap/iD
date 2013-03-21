@@ -196,6 +196,11 @@
         "type": "combo",
         "label": "Speed Limit"
     },
+    "name": {
+        "key": "name",
+        "type": "text",
+        "label": "Name"
+    },
     "natural": {
         "key": "natural",
         "type": "combo",

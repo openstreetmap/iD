@@ -1,39 +1,25 @@
-iD.ui.preset = function(context) {
+iD.ui.preset = function(context, entity) {
     var event = d3.dispatch('change', 'setTags', 'close'),
-        entity,
         tags,
         keys,
         preset,
         formwrap,
         formbuttonwrap;
 
-    function input(d) {
-        var i = iD.ui.preset[d.type](d, context)
-            .on('close', event.close)
-            .on('change', event.change);
-
-        event.on('setTags.' + d.key || d.type, function(tags) {
-            i.tags(_.clone(tags));
-        });
-
-        if (d.type === 'address') i.entity(entity);
-
-        keys = keys.concat(d.key ? [d.key] : d.keys);
-
-        d3.select(this).call(i);
-    }
-
     function presets(selection) {
-
         selection.html('');
-        keys = [];
 
+        keys = [];
         formwrap = selection.append('div');
 
-        var geometry = entity.geometry(context.graph());
-        draw(formwrap, preset.fields.filter(function(f) {
-            return f.matchGeometry(geometry);
-        }));
+        var geometry = entity.geometry(context.graph()),
+            fields = preset.fields.filter(function(f) {
+                return f.matchGeometry(geometry);
+            });
+
+        fields.unshift(context.presets().field('name'));
+
+        draw(formwrap, fields);
 
         var wrap = selection.append('div')
             .attr('class', 'col12 more-buttons inspector-inner');
@@ -45,32 +31,31 @@ iD.ui.preset = function(context) {
             .data(context.presets().universal().filter(notInForm))
             .enter()
             .append('button')
-                .attr('class', 'preset-add-field')
-                .on('click', addForm)
-                .each(tooltip)
-                .append('span')
-                    .attr('class', function(d) { return 'icon ' + d.icon; });
+            .attr('class', 'preset-add-field')
+            .on('click', addForm)
+            .call(bootstrap.tooltip()
+                .placement('top')
+                .title(function(d) { return d.label(); }))
+            .append('span')
+            .attr('class', function(d) { return 'icon ' + d.icon; });
 
         function notInForm(p) {
             return preset.fields.indexOf(p) < 0;
         }
 
-        function tooltip(d) {
-            d3.select(this).call(bootstrap.tooltip()
-                .placement('top')
-                .title(d.label()));
-        }
-
         function addForm(d) {
             draw(formwrap, [d]);
+
             d3.select(this)
                 .style('opacity', 1)
-                .transition().style('opacity', 0).each('end', function() {
-                    d3.select(this).remove();
-                });
-            if (!wrap.selectAll('button').node()) wrap.remove();
-        }
+                .transition()
+                .style('opacity', 0)
+                .remove();
 
+            if (!wrap.selectAll('button').node()) {
+                wrap.remove();
+            }
+        }
     }
 
     function draw(selection, fields) {
@@ -87,9 +72,24 @@ iD.ui.preset = function(context) {
             .attr('for', function(d) { return 'input-' + d.key; })
             .text(function(d) { return d.label(); });
 
-        sections.transition().style('opacity', 1);
+        sections.transition()
+            .style('opacity', 1);
 
-        sections.each(input);
+        sections.each(function(field) {
+            var i = iD.ui.preset[field.type](field, context)
+                .on('close', event.close)
+                .on('change', event.change);
+
+            event.on('setTags.' + field.key || field.type, function (tags) {
+                i.tags(_.clone(tags));
+            });
+
+            if (field.type === 'address') i.entity(entity);
+
+            keys = keys.concat(field.key ? [field.key] : field.keys);
+
+            d3.select(this).call(i);
+        });
     }
 
     presets.rendered = function() {
@@ -123,12 +123,6 @@ iD.ui.preset = function(context) {
             });
 
         event.setTags(tags);
-        return presets;
-    };
-
-    presets.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
         return presets;
     };
 

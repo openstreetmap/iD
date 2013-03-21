@@ -2,14 +2,12 @@ iD.ui.TagEditor = function(context, entity) {
     var event = d3.dispatch('changeTags', 'choose', 'close'),
         presets = context.presets(),
         tags,
-        name,
         preset,
         selection_,
         presetUI,
         tagList;
 
     function tageditor(selection, newpreset) {
-
         selection_ = selection;
         var geometry = entity.geometry(context.graph());
 
@@ -17,7 +15,6 @@ iD.ui.TagEditor = function(context, entity) {
 
         // preset was explicitly chosen
         if (newpreset) {
-
             tags = preset.removeTags(tags, geometry);
 
             newpreset.applyTags(tags, geometry);
@@ -35,12 +32,12 @@ iD.ui.TagEditor = function(context, entity) {
                 event.choose(preset);
             });
 
-        var fallbackIcon = geometry === 'line' ? 'other-line' : 'marker-stroked';
+        var icon = preset.icon || (geometry === 'line' ? 'other-line' : 'marker-stroked');
 
         back.append('div')
             .attr('class', 'col12')
             .append('span')
-            .attr('class', 'preset-icon icon' + (preset ?  ' feature-' + (preset.icon || fallbackIcon) : ''));
+            .attr('class', 'preset-icon icon feature-' + icon);
 
         back.append('div')
             .attr('class', 'col12')
@@ -58,25 +55,10 @@ iD.ui.TagEditor = function(context, entity) {
             .attr('class', 'icon close');
 
         var editorwrap = selection.append('div')
-            .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()));
+            .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
 
-        var namewrap = editorwrap.append('div')
-             .attr('class', 'name fillL inspector-inner col12');
-
-        namewrap.append('h4')
-            .text(t('inspector.name'));
-
-        name = namewrap.append('input')
-            .attr('placeholder', 'unknown')
-            .attr('class', 'major')
-            .attr('type', 'text')
-            .property('value', entity.tags.name || '')
-            .on('blur', function() {
-                changeTags({ name: name.property('value') });
-            });
-
-        presetUI = iD.ui.preset(context)
-            .entity(entity)
+        presetUI = iD.ui.preset(context, entity)
+            .preset(preset)
             .on('change', changeTags)
             .on('close', event.close);
 
@@ -84,25 +66,20 @@ iD.ui.TagEditor = function(context, entity) {
             .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset cf fillL col12');
-
-        if (preset) {
-            tageditorpreset.call(presetUI
-                .preset(preset));
-        }
+            .attr('class', 'inspector-preset cf fillL col12')
+            .call(presetUI);
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2 additional-tags')
+            .attr('class', 'inspector-inner col12 fillL2 additional-tags')
             .call(tagList, preset.id === 'other');
 
-        // Don't add for created entities
-        if (entity.osmId() > 0) {
+        if (!entity.isNew()) {
             tageditorpreset.append('div')
-                .attr('class','inspector-inner')
+                .attr('class', 'view-on-osm')
                 .append('a')
-                    .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-                    .attr('target', '_blank')
-                    .text(t('inspector.view_on_osm'));
+                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                .attr('target', '_blank')
+                .text(t('inspector.view_on_osm'));
         }
 
         tageditor.tags(tags);
@@ -134,9 +111,8 @@ iD.ui.TagEditor = function(context, entity) {
                 return tageditor(selection_, newmatch);
             }
 
-            name.property('value', tags.name || '');
             presetUI.change(tags);
-            var rendered = ['name']
+            var rendered = []
                 .concat(Object.keys(preset.tags))
                 .concat(presetUI.rendered());
             tagList.tags(_.omit(tags, rendered));

@@ -76,6 +76,8 @@ en:
         label: Type
       maxspeed: 
         label: Speed Limit
+      name: 
+        label: Name
       natural: 
         label: Natural
       network: 
