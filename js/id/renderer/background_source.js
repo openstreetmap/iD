@@ -33,6 +33,43 @@ iD.BackgroundSource.template = function(data) {
     return generator;
 };
 
+iD.BackgroundSource.Bing = function(data) {
+    var bing = iD.BackgroundSource.template(data),
+        url = "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/0,0?zl=1&mapVersion=v1&key=Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU&include=ImageryProviders&output=xml";
+
+    var providers;
+
+    d3.json(url, function(err, json) {
+        if (json) {
+            providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
+                return {
+                    attribution: provider.attribution,
+                    areas: provider.areas.map(function(area) {
+                        return {
+                            zoom: [area.zoomMin, area.zoomMax],
+                            extent: iD.geo.Extent([area.bbox[1], area.bbox[0]], [area.bbox[3], area.bbox[2]])
+                        }
+                    })
+                };
+            });
+        }
+    });
+
+    bing.copyrightNotices = function(zoom, extent) {
+        return providers.filter(function(provider) {
+            return _.any(provider.areas, function(area) {
+                return extent.intersects(area.extent) &&
+                    area.zoom[0] <= zoom &&
+                    area.zoom[1] >= zoom;
+            })
+        }).map(function(provider) {
+            return provider.attribution;
+        }).join(', ');
+    };
+
+    return bing;
+};
+
 iD.BackgroundSource.Custom = function() {
     var template = window.prompt('Enter a tile template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.');
     if (!template) return null;
