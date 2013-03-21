@@ -595,10 +595,30 @@ path.casing.tag-highway-steps {
     stroke: #fff;
 }
 
+/* bridges */
+
 path.casing.tag-bridge-yes {
     stroke-width: 14;
-    stroke: #333;
+    stroke-opacity: 0.5;
+    stroke: #000;
 }
+
+path.casing.tag-highway-living_street.tag-bridge-yes,
+path.casing.tag-highway-path.tag-bridge-yes {
+    stroke-width: 6;
+}
+
+path.casing.line.tag-highway-pedestrian,
+path.casing.tag-highway-service.tag-bridge-yes,
+path.casing.tag-highway-track.tag-bridge-yes,
+path.casing.tag-highway-steps.tag-bridge-yes,
+path.casing.tag-highway-footway.tag-bridge-yes,
+path.casing.tag-highway-cycleway.tag-bridge-yes,
+path.casing.tag-highway-bridleway.tag-bridge-yes {
+    stroke-width: 8;
+}
+
+/* tunnels */
 
 path.stroke.tag-highway.tag-tunnel-yes {
     stroke-opacity: 0.3;
@@ -613,6 +633,8 @@ path.casing.tag-highway-construction {
     stroke-linecap: butt;
     stroke-dasharray: 7, 7;
 }
+
+/* construction */
 
 svg[data-zoom="16"] path.stroke.tag-highway-construction,
 svg[data-zoom="16"] path.casing.tag-highway-construction {
