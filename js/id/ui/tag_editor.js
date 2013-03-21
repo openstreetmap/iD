@@ -97,10 +97,12 @@ iD.ui.TagEditor = function(context, entity) {
 
         // Don't add for created entities
         if (entity.osmId() > 0) {
-            editorwrap.append('a')
-                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-                .attr('target', '_blank')
-                .text(t('inspector.view_on_osm'));
+            tageditorpreset.append('div')
+                .attr('class','inspector-inner')
+                .append('a')
+                    .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                    .attr('target', '_blank')
+                    .text(t('inspector.view_on_osm'));
         }
 
         tageditor.tags(tags);
