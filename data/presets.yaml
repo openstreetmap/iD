@@ -324,8 +324,8 @@ en:
         name: Highway
         terms: ""
       highway/bridleway: 
-        name: Steps
-        terms: "stairs,staircase"
+        name: Bridleway
+        terms: "bridle path,bridleway,equestrian trail,horse riding path,bridle road,horse trail"
       highway/bus_stop: 
         name: Bus Stop
         terms: ""
