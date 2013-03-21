@@ -28,7 +28,7 @@ done
 cp $MAKIPATH/renders/*-{12,18}.png feature-icons 
 
 ## Export pngs from line-preset svg
-grep --only-matching "id=\"\(highway\|waterway\|railway\|power\)[^\"]*" line-presets.svg | while read line; do
+grep --only-matching "id=\"\(highway\|waterway\|railway\|power\|other\|category\)[^\"]*" line-presets.svg | while read line; do
     id=`echo $line | sed 's/id="//'`
     inkscape --export-id=$id --export-png=feature-icons/$id.png line-presets.svg
 done

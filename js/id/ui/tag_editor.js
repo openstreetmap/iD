@@ -35,10 +35,12 @@ iD.ui.TagEditor = function(context, entity) {
                 event.choose(preset);
             });
 
+        var fallbackIcon = geometry === 'line' ? 'other-line' : 'marker-stroked';
+
         back.append('div')
             .attr('class', 'col12')
             .append('span')
-            .attr('class', 'preset-icon icon' + (preset ?  ' feature-' + (preset.icon || 'marker-stroked') : ''));
+            .attr('class', 'preset-icon icon' + (preset ?  ' feature-' + (preset.icon || fallbackIcon) : ''));
 
         back.append('div')
             .attr('class', 'col12')

@@ -276,9 +276,12 @@ iD.ui.PresetGrid = function(context, entity) {
             entered.append('div')
                 .attr('class', presetClass);
 
+            var geometry = entity.geometry(context.graph()),
+                fallbackIcon = geometry === 'line' ? 'other-line' : 'marker-stroked';
+
             entered.append('div')
                 .attr('class', function(d) {
-                    return 'feature-' + (d.icon || 'marker-stroked') + ' icon';
+                    return 'feature-' + (d.icon || fallbackIcon) + ' icon';
                 });
 
             entered.append('span')
