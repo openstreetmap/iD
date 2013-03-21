@@ -19,6 +19,7 @@ iD.ui.preset.url = function(field) {
             var num = elem.value ?
                 parseInt(elem.value, 10) : 0;
             if (!isNaN(num)) elem.value = num + x;
+            change();
         }
 
         if (field.type == 'number') {
