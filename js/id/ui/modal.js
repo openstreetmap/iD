@@ -21,13 +21,15 @@ iD.ui.modal = function(selection, blocking) {
         });
 
     var modal = shaded.append('div')
-        .attr('class', 'modal');
+        .attr('class', 'modal fillL col6');
 
     modal.append('button')
-        .attr('class', 'icon remove')
+        .attr('class', 'close')
         .on('click', function() {
             if (!blocking) shaded.remove();
-        });
+        })
+        .append('div')
+            .attr('class','icon close');
 
     modal.append('div')
         .attr('class', 'content');
