@@ -70,10 +70,9 @@ iD.ui.Commit = function(context) {
             .attr('class', 'commit-info')
             .html(t('commit.upload_explanation', {user: userLink.html()}));
 
-        // Confirm / Cancel Buttons
-
+        // Confirm Button
         var saveButton = saveSection.append('button')
-            .attr('class', 'action col3 button')
+            .attr('class', 'action col2 button')
             .on('click.save', function() {
                 var comment = commentField.node().value;
                 localStorage.comment = comment;

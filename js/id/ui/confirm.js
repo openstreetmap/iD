@@ -4,17 +4,19 @@ iD.ui.confirm = function(selection) {
     modal.select('.modal')
         .classed('modal-alert', true);
 
-    var section = modal.select('.content')
-        .attr('class', 'modal-section');
+    var section = modal.select('.content');
+
+    var modalHeader = section.append('div')
+        .attr('class', 'modal-section header');
 
     var description = section.append('div')
-        .attr('class', 'description');
+        .attr('class', 'modal-section message-text');
 
     var buttonwrap = section.append('div')
-        .attr('class', 'buttons cf');
+        .attr('class', 'modal-section buttons cf');
 
     var okbutton = buttonwrap.append('button')
-        .attr('class', 'col2 action centered')
+        .attr('class', 'col2 action')
         .on('click.confirm', function() {
             modal.remove();
         })

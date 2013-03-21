@@ -11,7 +11,7 @@ iD.ui.Restore = function(context) {
         var introModal = modal.select('.content');
 
         introModal.append('div')
-            .attr('class', 'modal-section fillL')
+            .attr('class', 'modal-section header')
             .append('h3')
             .text(t('restore.description'));
 

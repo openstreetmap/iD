@@ -39,11 +39,15 @@ iD.ui.Save = function(context) {
             function(err, changeset_id) {
                 loading.remove();
                 if (err) {
-                    var desc = iD.ui.confirm(context.container())
-                        .select('.description');
-                    desc.append('h2')
+                    var confirm = iD.ui.confirm(context.container());
+                    confirm
+                        .select('.modal-section.header')
+                        .append('h3')
                         .text(t('save.error'));
-                    desc.append('p').text(err.responseText);
+                    confirm
+                        .select('.modal-section.message-text')
+                        .append('p')
+                        .text(err.responseText);
                 } else {
                     history.reset();
                     map.flush().redraw();
