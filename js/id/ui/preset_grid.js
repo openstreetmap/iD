@@ -286,7 +286,10 @@ iD.ui.PresetGrid = function(context, entity) {
                 .attr('class','label')
                 .text(name);
 
-            entered.append('button')
+            entered.filter(function(d) {
+                    return !d.members;
+                })
+                .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'preset-help')
                 .on('click', helpClick, selection)

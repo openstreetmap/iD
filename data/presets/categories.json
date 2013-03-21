@@ -2,6 +2,7 @@
     "geometry": "line",
     "icon": "highway",
     "id": "Road",
+    "icon": "category-roads",
     "members": [
         "highway/residential",
         "highway/motorway",
