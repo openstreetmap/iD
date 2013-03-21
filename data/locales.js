@@ -345,6 +345,9 @@ locale.en = {
             "maxspeed": {
                 "label": "Speed Limit"
             },
+            "name": {
+                "label": "Name"
+            },
             "natural": {
                 "label": "Natural"
             },

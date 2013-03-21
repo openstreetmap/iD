@@ -2,7 +2,6 @@ iD.ui.TagEditor = function(context, entity) {
     var event = d3.dispatch('changeTags', 'choose', 'close'),
         presets = context.presets(),
         tags,
-        name,
         preset,
         selection_,
         presetUI,
@@ -58,21 +57,6 @@ iD.ui.TagEditor = function(context, entity) {
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
 
-        var namewrap = editorwrap.append('div')
-             .attr('class', 'name fillL inspector-inner col12');
-
-        namewrap.append('h4')
-            .text(t('inspector.name'));
-
-        name = namewrap.append('input')
-            .attr('placeholder', 'unknown')
-            .attr('class', 'major')
-            .attr('type', 'text')
-            .property('value', entity.tags.name || '')
-            .on('blur', function() {
-                changeTags({ name: name.property('value') });
-            });
-
         presetUI = iD.ui.preset(context, entity)
             .preset(preset)
             .on('change', changeTags)
@@ -127,9 +111,8 @@ iD.ui.TagEditor = function(context, entity) {
                 return tageditor(selection_, newmatch);
             }
 
-            name.property('value', tags.name || '');
             presetUI.change(tags);
-            var rendered = ['name']
+            var rendered = []
                 .concat(Object.keys(preset.tags))
                 .concat(presetUI.rendered());
             tagList.tags(_.omit(tags, rendered));

@@ -12,10 +12,14 @@ iD.ui.preset = function(context, entity) {
         keys = [];
         formwrap = selection.append('div');
 
-        var geometry = entity.geometry(context.graph());
-        draw(formwrap, preset.fields.filter(function(f) {
-            return f.matchGeometry(geometry);
-        }));
+        var geometry = entity.geometry(context.graph()),
+            fields = preset.fields.filter(function(f) {
+                return f.matchGeometry(geometry);
+            });
+
+        fields.unshift(context.presets().field('name'));
+
+        draw(formwrap, fields);
 
         var wrap = selection.append('div')
             .attr('class', 'col12 more-buttons inspector-inner');

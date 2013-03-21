@@ -52,6 +52,10 @@ iD.presets = function(context) {
         return all;
     };
 
+    all.field = function(id) {
+        return fields[id];
+    };
+
     all.universal = function() {
         return universal;
     };
@@ -68,7 +72,6 @@ iD.presets = function(context) {
         }
         return all;
     };
-
 
     return all;
 };

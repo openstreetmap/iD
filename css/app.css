@@ -912,18 +912,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .tag-wrap .grid-button-wrap .grid-entry .label {
     background: #eef0ff;
-   }
-
-.inspector-body .name {
-    padding-bottom: 0;
 }
 
-.name input.major {
-    padding-top: 35px;
-    height: 70px;
-}
-
-.inspector-body .name h4,
 .preset-field h4[for*="input-"] {
     border: 1px solid #cfcfcf;
     padding: 5px 10px;
@@ -951,7 +941,15 @@ h4 + .preset-input input:first-child {
 .preset-field h4[for="input-building:levels"],
 .preset-field h4[for="input-ele"],
 .preset-field.checkselect h4 {
-    right: 50%;}
+    right: 50%;
+}
+
+.preset-field-name h4 + input {
+    padding-top: 35px;
+    height: 70px;
+    font-size: 18px;
+    font-weight: bold;
+}
 
 /* adding additional preset fields */
 
