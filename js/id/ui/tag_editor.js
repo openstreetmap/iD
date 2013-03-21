@@ -9,7 +9,6 @@ iD.ui.TagEditor = function(context, entity) {
         tagList;
 
     function tageditor(selection, newpreset) {
-
         selection_ = selection;
         var geometry = entity.geometry(context.graph());
 
@@ -34,12 +33,12 @@ iD.ui.TagEditor = function(context, entity) {
                 event.choose(preset);
             });
 
-        var fallbackIcon = geometry === 'line' ? 'other-line' : 'marker-stroked';
+        var icon = preset.icon || (geometry === 'line' ? 'other-line' : 'marker-stroked');
 
         back.append('div')
             .attr('class', 'col12')
             .append('span')
-            .attr('class', 'preset-icon icon feature-' + (preset.icon || fallbackIcon));
+            .attr('class', 'preset-icon icon feature-' + icon);
 
         back.append('div')
             .attr('class', 'col12')
@@ -57,7 +56,7 @@ iD.ui.TagEditor = function(context, entity) {
             .attr('class', 'icon close');
 
         var editorwrap = selection.append('div')
-            .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + entity.geometry(context.graph()));
+            .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
 
         var namewrap = editorwrap.append('div')
              .attr('class', 'name fillL inspector-inner col12');
@@ -88,17 +87,16 @@ iD.ui.TagEditor = function(context, entity) {
             .call(presetUI);
 
         editorwrap.append('div')
-            .attr('class','inspector-inner col12 fillL2 additional-tags')
+            .attr('class', 'inspector-inner col12 fillL2 additional-tags')
             .call(tagList, preset.id === 'other');
 
-        // Don't add for created entities
-        if (entity.osmId() > 0) {
+        if (!entity.isNew()) {
             tageditorpreset.append('div')
-                .attr('class','view-on-osm')
+                .attr('class', 'view-on-osm')
                 .append('a')
-                    .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-                    .attr('target', '_blank')
-                    .text(t('inspector.view_on_osm'));
+                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                .attr('target', '_blank')
+                .text(t('inspector.view_on_osm'));
         }
 
         tageditor.tags(tags);
