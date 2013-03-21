@@ -16,23 +16,23 @@ iD.ui.Success = function(connection) {
         var message = (m || 'Edited OSM!') +
             connection.changesetUrl(changeset.id);
 
-        var links = body.append('div').attr('class','modal-section');
+        var links = body.append('div').attr('class','cf');
 
         links.append('a')
+            .attr('class','col6 success-action modal-section osm')
+            .attr('target', '_blank')
             .attr('href', function() {
                 return connection.changesetUrl(changeset.id);
             })
-            .attr('target', '_blank')
-            .attr('class', 'success-action')
             .text(t('view_on_osm'));
 
         links.append('a')
+            .attr('class','col6 success-action modal-section twitter')
             .attr('target', '_blank')
             .attr('href', function() {
                 return 'https://twitter.com/intent/tweet?source=webclient&text=' +
                     encodeURIComponent(message);
             })
-            .attr('class', 'success-action')
             .text('Tweet');
 
         var section = body.append('div').attr('class','modal-section cf');

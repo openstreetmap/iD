@@ -1782,10 +1782,35 @@ div.typeahead a:first-child {
 /* Success
 ------------------------------------------------------- */
 
-a.success-action {
-  display:inline-block;
-  padding:10px;
-  margin:10px;
+.modal a.success-action {
+    height: 180px;
+    border-bottom: 1px solid #CCC;
+    text-align: center;
+    -webkit-transition: all 200ms;
+       -moz-transition: all 200ms;
+            transition: all 200ms;
+}
+
+.modal a.success-action:hover {
+    background-color: #ececec;
+}
+
+a.success-action.osm {
+    border-right: 1px solid #CCC;
+}
+
+a.success-action:before {
+    display: block;
+    content: '';
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    margin-bottom: 20px;
+    background:transparent url(../img/sprite.png) no-repeat 0px -220px;
+}
+
+a.success-action.twitter:before {
+    background-position: -100px -220px;
 }
 
 /* Notices
