@@ -641,11 +641,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity: 0;
 }
 
-.inspector-wrap .message button:hover .col12:first-child {
+.inspector-wrap .message:hover button .col12:first-child {
     opacity: 0;
 }
 
-.inspector-wrap .message button:hover .col12:last-child {
+.inspector-wrap .message:hover button .col12:last-child {
     opacity: 1;
 }
 
