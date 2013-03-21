@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "crossing"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "crossing"
+    },
+    "terms": [
+        "crosswalk",
+        "zebra crossing"
+    ],
+    "name": "Crossing"
+}

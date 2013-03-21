@@ -1,0 +1,18 @@
+{
+    "icon": "pharmacy",
+    "fields": [
+        "operator",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "pharmacy"
+    },
+    "terms": [],
+    "name": "Pharmacy"
+}

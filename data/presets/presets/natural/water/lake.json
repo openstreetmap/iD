@@ -1,0 +1,16 @@
+{
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "lake"
+    },
+    "terms": [
+        "lakelet",
+        "loch",
+        "mere"
+    ],
+    "icon": "water",
+    "name": "Lake"
+}

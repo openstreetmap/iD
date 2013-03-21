@@ -1,0 +1,18 @@
+{
+    "icon": "fast-food",
+    "fields": [
+        "cuisine",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fast_food"
+    },
+    "terms": [],
+    "name": "Fast Food"
+}

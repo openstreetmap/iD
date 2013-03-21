@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "place"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "place": "*"
+    },
+    "name": "Place"
+}

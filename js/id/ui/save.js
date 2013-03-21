@@ -38,8 +38,6 @@ iD.ui.Save = function(context) {
             history.imagery_used(),
             function(err, changeset_id) {
                 loading.remove();
-                history.reset();
-                map.flush().redraw();
                 if (err) {
                     var desc = iD.ui.confirm(context.container())
                         .select('.description');
@@ -47,6 +45,8 @@ iD.ui.Save = function(context) {
                         .text(t('save.error'));
                     desc.append('p').text(err.responseText);
                 } else {
+                    history.reset();
+                    map.flush().redraw();
                     success(e, changeset_id);
                 }
             });
@@ -78,10 +78,11 @@ iD.ui.Save = function(context) {
             .attr('class', 'save col12 disabled')
             .attr('tabindex', -1)
             .on('click', save)
+            .attr('data-original-title',
+                iD.ui.tooltipHtml(t('save.no_changes'), key))
             .call(bootstrap.tooltip()
                 .placement('bottom')
-                .html(true)
-                .title(iD.ui.tooltipHtml(t('save.help'), key)));
+                .html(true));
 
         button.append('span')
             .attr('class', 'label')
@@ -98,6 +99,11 @@ iD.ui.Save = function(context) {
 
         context.history().on('change.save', function() {
             var hasChanges = history.hasChanges();
+
+            button
+                .attr('data-original-title',
+                    iD.ui.tooltipHtml(t(hasChanges ?
+                        'save.help' : 'save.no_changes'), key));
 
             button
                 .classed('disabled', !hasChanges)

@@ -1,0 +1,17 @@
+{
+    "icon": "bicycle",
+    "fields": [
+        "capacity",
+        "network",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "bicycle_rental"
+    },
+    "name": "Bicycle Rental"
+}

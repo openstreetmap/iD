@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "historic": "ruins"
+    },
+    "name": "Ruins"
+}

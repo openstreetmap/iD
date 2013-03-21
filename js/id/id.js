@@ -1,10 +1,14 @@
 window.iD = function () {
+    locale
+        .current('en')
+        .current(iD.detect().locale);
+
     var context = {},
         storage;
 
     // https://github.com/systemed/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
-    try { storage = localStorage } catch (e) {}
+    try { storage = localStorage; } catch (e) {}
     storage = storage || {};
 
     context.storage = function(k, v) {
@@ -21,7 +25,8 @@ window.iD = function () {
         map = iD.Map(context);
 
     // the connection requires .storage() to be available on calling.
-    var connection = iD.Connection(context);
+    var connection = iD.Connection(context)
+        .keys(iD.data.keys);
 
     connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
@@ -86,7 +91,8 @@ window.iD = function () {
     };
 
     /* Map */
-    context.background = function() { return map.background; };
+    context.layers = function() { return map.layers; };
+    context.background = function() { return map.layers[0]; };
     context.surface = function() { return map.surface; };
     context.projection = map.projection;
     context.tail = map.tail;
@@ -94,6 +100,22 @@ window.iD = function () {
     context.pan = map.pan;
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
+
+    /* Background */
+    var backgroundSources = iD.data.imagery.map(iD.BackgroundSource.template);
+    backgroundSources.push(iD.BackgroundSource.Custom);
+
+    context.backgroundSources = function() {
+        return backgroundSources;
+    };
+
+    /* Presets */
+    var presets = iD.presets(context)
+        .load(iD.data.presets);
+
+    context.presets = function() {
+        return presets;
+    };
 
     context.container = function(_) {
         if (!arguments.length) return container;
@@ -103,17 +125,18 @@ window.iD = function () {
 
     var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
     if (q.layer) {
-        context.background()
-           .source(_.find(iD.layers, function(l) {
+        context.layers()[0]
+           .source(_.find(backgroundSources, function(l) {
                if (l.data.sourcetag === q.layer) {
-                   return (detected = true);
+                   detected = true;
+                   return true;
                }
            }));
     }
 
     if (!detected) {
         context.background()
-            .source(_.find(iD.layers, function(l) {
+            .source(_.find(backgroundSources, function(l) {
                 return l.data.name === 'Bing aerial imagery';
             }));
     }
@@ -121,7 +144,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '0.0.0-alpha2';
+iD.version = '0.0.0-alpha3';
 
 iD.detect = function() {
     var browser = {};
@@ -140,6 +163,8 @@ iD.detect = function() {
     browser.opera = ua.indexOf('Opera') >= 0;
 
     browser.locale = navigator.language;
+
+    browser.filedrop = (window.FileReader && 'ondrop' in window);
 
     function nav(x) {
         return navigator.userAgent.indexOf(x) !== -1;

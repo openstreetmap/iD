@@ -14,8 +14,8 @@ describe("iD.svg.Areas", function () {
 
         surface.call(iD.svg.Areas(projection), graph, [area], filter);
 
-        expect(surface.select('path')).to.be.classed('way');
-        expect(surface.select('path')).to.be.classed('area');
+        expect(surface.select('path.way')).to.be.classed('way');
+        expect(surface.select('path.area')).to.be.classed('area');
     });
 
     it("adds tag classes", function () {
@@ -30,13 +30,13 @@ describe("iD.svg.Areas", function () {
 
     it("adds member classes", function () {
         var area = iD.Way({tags: {area: 'yes'}}),
-            relation = iD.Relation({members: [{id: area.id, role: 'outer'}], tags: {type: 'multipolygon'}}),
+            relation = iD.Relation({members: [{id: area.id, role: 'inner'}], tags: {type: 'multipolygon'}}),
             graph = iD.Graph([area, relation]);
 
         surface.call(iD.svg.Areas(projection), graph, [area], filter);
 
         expect(surface.select('.area')).to.be.classed('member');
-        expect(surface.select('.area')).to.be.classed('member-role-outer');
+        expect(surface.select('.area')).to.be.classed('member-role-inner');
         expect(surface.select('.area')).to.be.classed('member-type-multipolygon');
     });
 
@@ -110,5 +110,33 @@ describe("iD.svg.Areas", function () {
 
         expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
         expect(surface.select('.fill')).not.to.be.classed('tag-natural-wood');
+    });
+
+    it("renders fill for a multipolygon with tags on the outer way", function() {
+        var a = iD.Node({loc: [1, 1]}),
+            b = iD.Node({loc: [2, 2]}),
+            c = iD.Node({loc: [3, 3]}),
+            w = iD.Way({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]}),
+            r = iD.Relation({members: [{id: w.id}], tags: {type: 'multipolygon'}}),
+            graph = iD.Graph([a, b, c, w, r]);
+
+        surface.call(iD.svg.Areas(projection), graph, [w, r], filter);
+
+        expect(surface.selectAll('.way.fill')[0].length).to.equal(0);
+        expect(surface.selectAll('.relation.fill')[0].length).to.equal(1);
+        expect(surface.select('.relation.fill')).to.be.classed('tag-natural-wood');
+    });
+
+    it("renders no strokes for a multipolygon with tags on the outer way", function() {
+        var a = iD.Node({loc: [1, 1]}),
+            b = iD.Node({loc: [2, 2]}),
+            c = iD.Node({loc: [3, 3]}),
+            w = iD.Way({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]}),
+            r = iD.Relation({members: [{id: w.id}], tags: {type: 'multipolygon'}}),
+            graph = iD.Graph([a, b, c, w, r]);
+
+        surface.call(iD.svg.Areas(projection), graph, [w, r], filter);
+
+        expect(surface.selectAll('.stroke')[0].length).to.equal(0);
     });
 });

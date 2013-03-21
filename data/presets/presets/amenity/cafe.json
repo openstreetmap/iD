@@ -1,0 +1,23 @@
+{
+    "icon": "cafe",
+    "fields": [
+        "cuisine",
+        "internet_access",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "coffee",
+        "tea",
+        "coffee shop"
+    ],
+    "tags": {
+        "amenity": "cafe"
+    },
+    "name": "Cafe"
+}

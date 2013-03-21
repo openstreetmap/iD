@@ -1,0 +1,35 @@
+{
+    "icon": "school",
+    "fields": [
+        "operator",
+        "building",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "academy",
+        "alma mater",
+        "blackboard",
+        "college",
+        "department",
+        "discipline",
+        "establishment",
+        "faculty",
+        "hall",
+        "halls of ivy",
+        "institute",
+        "institution",
+        "jail*",
+        "schoolhouse",
+        "seminary",
+        "university"
+    ],
+    "tags": {
+        "amenity": "school"
+    },
+    "name": "School"
+}

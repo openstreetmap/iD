@@ -1,0 +1,17 @@
+{
+    "icon": "college",
+    "fields": [
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "university"
+    },
+    "terms": [],
+    "name": "University"
+}

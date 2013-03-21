@@ -4,15 +4,17 @@ iD.ui.cmd = function(code) {
     if (iD.detect().os === 'mac')
         return code;
 
-    var modifiers = {
+    var replacements = {
         '⌘': 'Ctrl',
         '⇧': 'Shift',
-        '⌥': 'Alt'
+        '⌥': 'Alt',
+        '⌫': 'Backspace',
+        '⌦': 'Delete'
     }, keys = [];
 
     for (var i = 0; i < code.length; i++) {
-        if (code[i] in modifiers) {
-            keys.push(modifiers[code[i]]);
+        if (code[i] in replacements) {
+            keys.push(replacements[code[i]]);
         } else {
             keys.push(code[i]);
         }

@@ -1,0 +1,19 @@
+{
+    "icon": "highway-secondary",
+    "fields": [
+        "oneway",
+        "structure",
+        "access",
+        "maxspeed",
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "secondary"
+    },
+    "terms": [],
+    "name": "Secondary Road"
+}

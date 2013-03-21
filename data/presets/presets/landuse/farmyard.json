@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "farmyard"
+    },
+    "terms": [],
+    "name": "Farmyard"
+}

@@ -1,0 +1,18 @@
+{
+    "icon": "fire-station",
+    "fields": [
+        "operator",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fire_station"
+    },
+    "terms": [],
+    "name": "Fire Station"
+}

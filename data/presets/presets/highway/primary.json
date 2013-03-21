@@ -1,0 +1,19 @@
+{
+    "icon": "highway-primary",
+    "fields": [
+        "oneway",
+        "structure",
+        "access",
+        "maxspeed",
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "primary"
+    },
+    "terms": [],
+    "name": "Primary Road"
+}

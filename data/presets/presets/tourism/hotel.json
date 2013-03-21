@@ -1,0 +1,18 @@
+{
+    "icon": "lodging",
+    "fields": [
+        "operator",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "tourism": "hotel"
+    },
+    "name": "Hotel"
+}

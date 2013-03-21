@@ -1,121 +1,113 @@
-iD.ui.Inspector = function() {
-    var event = d3.dispatch('changeTags', 'close', 'change'),
-        taginfo = iD.taginfo(),
-        presetData = iD.presetData(),
-        initial = false,
-        expert = false,
-        inspectorbody,
-        entity,
-        presetUI,
-        presetGrid,
-        tagList,
-        tagEditor,
-        context;
+iD.ui.Inspector = function(context, entity) {
+    var tagEditor;
+
+    function changeTags(tags) {
+        if (!_.isEqual(entity.tags, tags)) {
+            context.perform(
+                iD.actions.ChangeTags(entity.id, tags),
+                t('operations.change_tags.annotation'));
+        }
+    }
+
+    function browse() {
+        context.enter(iD.modes.Browse(context));
+    }
+
+    function update() {
+        entity = context.entity(entity.id);
+        if (entity) {
+            tagEditor.tags(entity.tags);
+        }
+    }
 
     function inspector(selection) {
+        selection
+            .html('')
+            .style('display', 'block')
+            .style('right', '-500px')
+            .style('opacity', 1)
+            .transition()
+            .duration(200)
+            .style('right', '0px');
 
-        entity = selection.datum();
+        var panewrap = selection
+            .append('div')
+            .classed('panewrap', true);
 
-        var iwrap = selection.append('div')
-                .attr('class','inspector content hide'),
-            messagewrap = iwrap.append('div')
-                .attr('class', 'message inspector-inner fillL2'),
-            message = messagewrap.append('h4');
+        var presetLayer = panewrap
+            .append('div')
+            .classed('pane', true);
 
-        inspectorbody = iwrap.append('div')
-            .attr('class', 'inspector-body'),
-        iwrap.append('div')
-            .attr('class', 'inspector-buttons pad1 fillD')
-            .call(drawButtons);
+        var tagLayer = panewrap
+            .append('div')
+            .classed('pane', true);
 
-        presetGrid = iD.ui.PresetGrid()
-            .presetData(presetData)
-            .entity(entity)
-            .context(context)
-            .on('message', changeMessage)
+        var presetGrid = iD.ui.PresetGrid(context, entity)
+            .on('close', browse)
             .on('choose', function(preset) {
-                inspectorbody.call(tagEditor, expert, preset);
+                panewrap
+                    .transition()
+                    .style('right', '0%');
+
+                tagLayer.call(tagEditor, preset);
             });
 
-        tagEditor = iD.ui.TagEditor()
-            .presetData(presetData)
+        tagEditor = iD.ui.TagEditor(context, entity)
             .tags(entity.tags)
-            .context(context)
-            .on('message', changeMessage)
-            .on('choose', function() {
-                inspectorbody.call(presetGrid);
+            .on('changeTags', changeTags)
+            .on('close', browse)
+            .on('choose', function(preset) {
+                panewrap
+                    .transition()
+                    .style('right', '-100%');
+
+                presetLayer.call(presetGrid, preset);
             });
 
-        function changeMessage(msg) { message.text(msg);}
-
+        var initial = entity.isNew() && _.without(Object.keys(entity.tags), 'area').length === 0;
 
         if (initial) {
-            inspectorbody.call(presetGrid);
+            panewrap.style('right', '-100%');
+            presetLayer.call(presetGrid);
         } else {
-            inspectorbody.call(tagEditor);
+            panewrap.style('right', '-0%');
+            tagLayer.call(tagEditor);
         }
 
-        iwrap.call(iD.ui.Toggle(true));
+        if (d3.event) {
+            // Pan the map if the clicked feature intersects with the position
+            // of the inspector
+            var inspectorSize = selection.size(),
+                mapSize = context.map().size(),
+                offset = 50,
+                shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
+                center = (mapSize[0] / 2) + shiftLeft + offset;
+
+            if (shiftLeft > 0 && inspectorSize[1] > d3.event.clientY) {
+                context.map().centerEase(context.projection.invert([center, mapSize[1]/2]));
+            }
+        }
+
+        context.history()
+            .on('change.inspector', update);
     }
 
-    function drawButtons(selection) {
-        var entity = selection.datum();
-
-        var inspectorButton = selection.append('button')
-            .attr('class', 'apply action')
-            .on('click', apply);
-
-        inspectorButton.append('span')
-            .attr('class','label')
-            .text(t('inspector.okay'));
-
-        var minorButtons = selection.append('div')
-            .attr('class','minor-buttons fl');
-
-        minorButtons.append('a')
-            .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-            .attr('target', '_blank')
-            .text(t('inspector.view_on_osm'));
-
-        var expertButton = selection.append('button')
-            .attr('class', 'apply')
-            .text('Tag view')
-            .on('click', function() {
-                expert = !expert;
-                expertButton.text(expert ? 'Preset view' : 'Tag view');
-                inspectorbody.call(tagEditor, expert);
+    inspector.close = function(selection) {
+        selection.transition()
+            .style('right', '-500px')
+            .each('end', function() {
+                d3.select(this)
+                    .style('display', 'none')
+                    .html('');
             });
 
-    }
+        // Firefox incorrectly implements blur, so typeahead elements
+        // are not correctly removed. Remove any stragglers manually.
+        d3.selectAll('div.typeahead').remove();
 
-    function apply(entity) {
-        event.changeTags(entity, inspector.tags());
-        event.close(entity);
-    }
-
-    inspector.tags = function(tags) {
-        if (!arguments.length) {
-            return tagEditor.tags();
-        } else {
-            tagEditor.tags.apply(this, arguments);
-            return inspector;
-        }
+        context.history()
+            .on('change.inspector', null);
     };
 
-    inspector.initial = function(_) {
-        initial = _;
-        return inspector;
-    };
-
-    inspector.presetData = function(_) {
-        presetData = _;
-        return inspector;
-    };
-
-    inspector.context = function(_) {
-        context = _;
-        return inspector;
-    };
-
-    return d3.rebind(inspector, event, 'on');
+    return inspector;
 };

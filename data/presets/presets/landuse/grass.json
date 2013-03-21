@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "grass"
+    },
+    "terms": [],
+    "name": "Grass"
+}

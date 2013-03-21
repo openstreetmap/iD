@@ -1,0 +1,40 @@
+{
+    "icon": "waterway-stream",
+    "fields": [
+        "layer"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "beck",
+        "branch",
+        "brook",
+        "burn",
+        "course",
+        "creek",
+        "current",
+        "drift",
+        "flood",
+        "flow",
+        "freshet",
+        "race",
+        "rill",
+        "rindle",
+        "rivulet",
+        "run",
+        "runnel",
+        "rush",
+        "spate",
+        "spritz",
+        "surge",
+        "tide",
+        "torrent",
+        "tributary",
+        "watercourse"
+    ],
+    "tags": {
+        "waterway": "stream"
+    },
+    "name": "Stream"
+}

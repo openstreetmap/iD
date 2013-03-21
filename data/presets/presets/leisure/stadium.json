@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "stadium"
+    },
+    "fields": [
+        "sport"
+    ],
+    "name": "Stadium"
+}

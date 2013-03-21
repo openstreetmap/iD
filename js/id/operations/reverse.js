@@ -17,7 +17,7 @@ iD.operations.Reverse = function(selection, context) {
     };
 
     operation.id = "reverse";
-    operation.key = t('operations.reverse.key');
+    operation.keys = [t('operations.reverse.key')];
     operation.title = t('operations.reverse.title');
     operation.description = t('operations.reverse.description');
 

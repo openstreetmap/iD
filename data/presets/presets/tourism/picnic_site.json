@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "operator",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "tourism": "picnic_site"
+    },
+    "name": "Picnic Site"
+}

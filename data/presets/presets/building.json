@@ -1,0 +1,15 @@
+{
+    "icon": "warehouse",
+    "fields": [
+        "building_yes",
+        "levels"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "*"
+    },
+    "terms": [],
+    "name": "Building"
+}

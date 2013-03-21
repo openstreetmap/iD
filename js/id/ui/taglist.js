@@ -1,20 +1,32 @@
-iD.ui.Taglist = function() {
+iD.ui.Taglist = function(context, entity) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         initial = false,
-        list,
-        context;
+        collapsebutton,
+        list;
 
-    function taglist(selection) {
+    function taglist(selection, other) {
 
-        //selection.append('h4')
-            //.text(t('inspector.edit_tags'));
+        collapsebutton = selection.append('a')
+            .attr('href','#')
+            .attr('class','hide-toggle')
+            .text(t('inspector.additional'))
+            .on('click', function() {
+                iD.ui.Taglist.expanded = wrap.classed('hide');
+                collapsebutton.classed('expanded', iD.ui.Taglist.expanded);
+                wrap.call(iD.ui.Toggle(iD.ui.Taglist.expanded));
+                selection.node().parentNode.scrollTop += 200;
+            })
+            .classed('expanded', iD.ui.Taglist.expanded || other);
 
-        list = selection.append('ul')
+        var wrap = selection.append('div')
+            .classed('hide', !iD.ui.Taglist.expanded && !other);
+
+        list = wrap.append('ul')
             .attr('class', 'tag-list');
 
-        var newTag = selection.append('button')
-            .attr('class', 'add-tag');
+        var newTag = wrap.append('button')
+            .attr('class', 'add-tag col6');
 
         newTag.on('click', function() {
             addTag();
@@ -22,16 +34,15 @@ iD.ui.Taglist = function() {
         });
 
         newTag.append('span')
-            .attr('class', 'icon icon-pre-text plus');
+            .attr('class', 'icon plus');
 
         newTag.append('span')
             .attr('class', 'label')
             .text(t('inspector.new_tag'));
-
     }
 
     function drawTags(tags) {
-        var entity = list.datum();
+        collapsebutton.text(t('inspector.additional') + ' (' + Object.keys(tags).length + ')');
 
         tags = d3.entries(tags);
 
@@ -48,29 +59,32 @@ iD.ui.Taglist = function() {
         var row = li.enter().append('li')
             .attr('class', 'tag-row');
 
-        var inputs = row.append('div')
-            .attr('class', 'input-wrap');
-
-        inputs.append('span')
-            .attr('class', 'key-wrap')
+        row.append('div')
+            .attr('class', 'key-wrap col6')
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.key; })
-            .on('change', function(d) { d.key = this.value; event.change(); });
+            .on('blur', function(d) {
+                d.key = this.value;
+                event.change(taglist.tags());
+            });
 
-        inputs.append('span')
-            .attr('class', 'input-wrap-position')
+        row.append('div')
+            .attr('class', 'input-wrap-position col6')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.value; })
-            .on('change', function(d) { d.value = this.value; event.change(); })
+            .on('blur', function(d) {
+                d.value = this.value;
+                event.change(taglist.tags());
+            })
             .on('keydown.push-more', pushMore);
 
-        inputs.each(bindTypeahead);
+        row.each(bindTypeahead);
 
         var removeBtn = row.append('button')
             .attr('tabindex', -1)
@@ -173,7 +187,8 @@ iD.ui.Taglist = function() {
 
     function pushMore() {
         if (d3.event.keyCode === 9 &&
-            list.selectAll('li:last-child input.value').node() === this) {
+            list.selectAll('li:last-child input.value').node() === this &&
+            !d3.event.shiftKey) {
             addTag();
             focusNewKey();
             d3.event.preventDefault();
@@ -181,10 +196,9 @@ iD.ui.Taglist = function() {
     }
 
     function bindTypeahead() {
-        var entity = list.datum(),
-            geometry = entity.geometry(context.graph()),
+        var geometry = entity.geometry(context.graph()),
             row = d3.select(this),
-            key = row.selectAll('.key'),
+            key = row.selectAll('.key-wrap'),
             value = row.selectAll('.input-wrap-position');
 
         function sort(value, data) {
@@ -200,27 +214,30 @@ iD.ui.Taglist = function() {
             return sameletter.concat(other);
         }
 
-        key.call(d3.typeahead()
-            .data(_.debounce(function(_, callback) {
+        var keyinput = key.select('input');
+        key.call(d3.combobox()
+            .fetcher(function(_, __, callback) {
                 taginfo.keys({
+                    debounce: true,
                     geometry: geometry,
-                    query: key.property('value')
+                    query: keyinput.property('value')
                 }, function(err, data) {
-                    if (!err) callback(sort(key.property('value'), data));
+                    if (!err) callback(sort(keyinput.property('value'), data));
                 });
-            }, 500)));
+            }));
 
         var valueinput = value.select('input');
         value.call(d3.combobox()
-            .fetcher(_.debounce(function(_, __, callback) {
+            .fetcher(function(_, __, callback) {
                 taginfo.values({
-                    key: key.property('value'),
+                    debounce: true,
+                    key: keyinput.property('value'),
                     geometry: geometry,
                     query: valueinput.property('value')
                 }, function(err, data) {
                     if (!err) callback(sort(valueinput.property('value'), data));
                 });
-            }, 500)));
+            }));
     }
 
     function focusNewKey() {
@@ -235,6 +252,8 @@ iD.ui.Taglist = function() {
 
     function removeTag(d) {
         var tags = taglist.tags();
+        tags[d.key] = '';
+        event.change(tags);
         delete tags[d.key];
         drawTags(tags);
     }
@@ -252,11 +271,6 @@ iD.ui.Taglist = function() {
         } else {
             drawTags(tags);
         }
-    };
-
-    taglist.context = function(_) {
-        context = _;
-        return taglist;
     };
 
     return d3.rebind(taglist, event, 'on');

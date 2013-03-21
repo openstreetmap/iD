@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "reservoir"
+    },
+    "icon": "water",
+    "name": "Reservoir"
+}

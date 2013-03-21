@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "quarry"
+    },
+    "terms": [],
+    "name": "Quarry"
+}

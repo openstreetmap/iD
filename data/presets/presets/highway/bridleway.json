@@ -1,0 +1,19 @@
+{
+    "fields": [
+        "access",
+        "surface",
+        "structure"
+    ],
+    "icon": "highway-bridleway",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "steps"
+    },
+    "terms": [
+        "stairs",
+        "staircase"
+    ],
+    "name": "Steps"
+}

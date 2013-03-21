@@ -1,0 +1,14 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "traffic_signals"
+    },
+    "terms": [
+        "light",
+        "stoplight",
+        "traffic light"
+    ],
+    "name": "Traffic Signals"
+}

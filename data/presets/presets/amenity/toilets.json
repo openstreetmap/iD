@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "operator",
+        "building"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "toilets"
+    },
+    "name": "Toilets"
+}

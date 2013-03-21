@@ -8,9 +8,8 @@ iD.behavior.Hash = function(context) {
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
         } else if (s !== formatter(map).slice(1)) {
-            map.centerZoom([args[2],
-                Math.min(lat, Math.max(-lat, args[1]))],
-                args[0]);
+            map.centerZoom([args[1],
+                Math.min(lat, Math.max(-lat, args[2]))], args[0]);
         }
     };
 
@@ -21,8 +20,8 @@ iD.behavior.Hash = function(context) {
         var q = iD.util.stringQs(location.hash.substring(1));
         return '#' + iD.util.qsString(_.assign(q, {
                 map: zoom.toFixed(2) +
-                    '/' + center[1].toFixed(precision) +
-                    '/' + center[0].toFixed(precision)
+                    '/' + center[0].toFixed(precision) +
+                    '/' + center[1].toFixed(precision)
             }), true);
     };
 

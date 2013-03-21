@@ -1,0 +1,7 @@
+{
+    "key": "website",
+    "type": "url",
+    "icon": "website",
+    "universal": true,
+    "label": "Website"
+}

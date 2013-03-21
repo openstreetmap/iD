@@ -6,27 +6,43 @@
         <link rel='stylesheet' href='css/reset.css'>
         <link rel='stylesheet' href='css/map.css'>
         <link rel='stylesheet' href='css/app.css'>
+        <link rel='stylesheet' href='css/feature-icons.css'>
 
         <!-- mobile devices -->
         <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name='apple-mobile-web-app-capable' content='yes' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 
-        <script src='iD.min.js'></script>
+        <script src='//d3nslu0hdya83q.cloudfront.net/dist/1.0/raven.min.js'></script>
+
+        <script>
+            Raven.config('https://af8ce79129b24fa28d91ede59302369c@app.getsentry.com/6009').install();
+        </script>
+
+        <script src='iD.js'></script>
     </head>
     <body>
-        <div id="iD"></div><script>
-            locale.current = 'en';
+        <div id='iD'></div>
+        <script>
+            // google analytics
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38039653-2']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+            // crazyegg
+            setTimeout(function(){var a=document.createElement("script");
+            var b=document.getElementsByTagName("script")[0];
+            a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
+            a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
             var id = iD();
-
-            d3.json('keys.json', function(err, keys) {
-                id.connection()
-                    .keys(keys)
-                    .url('http://api06.dev.openstreetmap.org');
-
-                d3.select("#iD")
-                    .call(id.ui())
-            });
-        </script></body>
+            d3.select('#iD')
+                .call(id.ui());
+        </script>
+    </body>
 </html>

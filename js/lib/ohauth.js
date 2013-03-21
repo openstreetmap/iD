@@ -30,6 +30,7 @@ ohauth.xhr = function(method, url, auth, data, options, callback) {
             }
         }
     };
+    xhr.onerror = function(e) { return callback(e, null); };
     var headers = (options && options.header) || { 'Content-Type': 'application/x-www-form-urlencoded' };
     xhr.open(method, url, true);
     xhr.setRequestHeader('Authorization', 'OAuth ' + ohauth.authHeader(auth));

@@ -110,6 +110,10 @@ describe('iD.Way', function() {
         it('returns false if the way is closed and has tag area=no', function() {
             expect(iD.Way({nodes: ['n1', 'n1'], tags: {area: 'no', building: 'yes'}}).isArea()).to.equal(false);
         });
+
+        it('returns false for coastline', function() {
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: {natural: 'coastline'}}).isArea()).to.equal(false);
+        });
     });
 
     describe("#isDegenerate", function() {
@@ -134,6 +138,30 @@ describe('iD.Way', function() {
 
         it("returns false for an area with three or more unique nodes", function () {
             expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}).isDegenerate()).to.equal(false);
+        });
+    });
+
+    describe("#areAdjacent", function() {
+        it("returns false for nodes not in the way", function() {
+            expect(iD.Way().areAdjacent('a', 'b')).to.equal(false);
+        });
+
+        it("returns false for non-adjacent nodes in the way", function() {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).areAdjacent('a', 'c')).to.equal(false);
+        });
+
+        it("returns true for adjacent nodes in the way (forward)", function() {
+            var way = iD.Way({nodes: ['a', 'b', 'c', 'd']});
+            expect(way.areAdjacent('a', 'b')).to.equal(true);
+            expect(way.areAdjacent('b', 'c')).to.equal(true);
+            expect(way.areAdjacent('c', 'd')).to.equal(true);
+        });
+
+        it("returns true for adjacent nodes in the way (reverse)", function() {
+            var way = iD.Way({nodes: ['a', 'b', 'c', 'd']});
+            expect(way.areAdjacent('b', 'a')).to.equal(true);
+            expect(way.areAdjacent('c', 'b')).to.equal(true);
+            expect(way.areAdjacent('d', 'c')).to.equal(true);
         });
     });
 

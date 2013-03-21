@@ -25,7 +25,7 @@ describe("iD.taginfo", function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {query: "amen", page: "1", rp: "6", sortname: "count_all", sortorder: "desc"});
+                {query: "ame", page: "1", rp: "10", sortname: "count_all", sortorder: "desc"});
             expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
         });
 
@@ -49,11 +49,11 @@ describe("iD.taginfo", function() {
 
             server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/keys/all"),
                 [200, { "Content-Type": "application/json" },
-                    '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},\
-                              {"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes_fraction":1.0}]}']);
+                    '{"data":[{"count_all":5190337,"count_nodes":500000,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},\
+                              {"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes":100}]}']);
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [{"value":"amenity"},{"value":"amenityother"}]);
+            expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
         });
     });
 

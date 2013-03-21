@@ -1,0 +1,9 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "kissing_gate"
+    },
+    "name": "Kissing Gate"
+}

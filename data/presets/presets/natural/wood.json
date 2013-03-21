@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "wood"
+    ],
+    "icon": "park2",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "natural": "wood"
+    },
+    "terms": [],
+    "name": "Wood"
+}

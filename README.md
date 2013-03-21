@@ -13,10 +13,12 @@
 
 ## Participate!
 
-* [Try out the latest stable release](http://geowiki.com/iD/)
+* [Try out the latest stable release](http://openstreetmap.us/iD/release)
 * [Read up on Contributing and the code style of iD](CONTRIBUTING.md)
 * See [open issues in the issue tracker](https://github.com/systemed/iD/issues?state=open) if you're looking for something to do
+* [Translate!](https://github.com/systemed/iD/blob/master/CONTRIBUTING.md#translating)
 
+[![translation chart](https://www.transifex.com/projects/p/id-editor/chart/image_png)](https://github.com/systemed/iD/blob/master/CONTRIBUTING.md#translating)
 ## Installation
 
 To run the current development version, fork this project and serve it locally.
@@ -29,6 +31,9 @@ Or, with a Mac, you can enable Web Sharing and clone iD into your website direct
 Come on in, the water's lovely. More help? Ping RichardF, tmcw, or jfire on IRC
 (`irc.oftc.net`, in `#osm-dev` or `#osm`), on the OSM mailing lists or at
 richard@systemeD.net.
+
+For guidance on building a packaged version, running tests, and contributing to
+development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

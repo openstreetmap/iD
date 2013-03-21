@@ -1,0 +1,22 @@
+{
+    "icon": "religious-jewish",
+    "fields": [
+        "denomination",
+        "building",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "jewish",
+        "synagogue"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "jewish"
+    },
+    "name": "Synagogue"
+}

@@ -1,0 +1,29 @@
+{
+    "icon": "triangle",
+    "fields": [
+        "elevation"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "natural": "peak"
+    },
+    "terms": [
+        "acme",
+        "aiguille",
+        "alp",
+        "climax",
+        "crest",
+        "crown",
+        "hill",
+        "mount",
+        "mountain",
+        "pinnacle",
+        "summit",
+        "tip",
+        "top"
+    ],
+    "name": "Peak"
+}

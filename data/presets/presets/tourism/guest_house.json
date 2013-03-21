@@ -1,0 +1,21 @@
+{
+    "icon": "lodging",
+    "fields": [
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "guest_house"
+    },
+    "terms": [
+        "B&B",
+        "Bed & Breakfast",
+        "Bed and Breakfast"
+    ],
+    "name": "Guest House"
+}

@@ -11,7 +11,7 @@ iD.modes.Browse = function(context) {
         iD.behavior.Hover(),
         iD.behavior.Select(context),
         iD.behavior.Lasso(context),
-        iD.behavior.DragNode(context)];
+        iD.modes.DragNode(context).behavior];
 
     mode.enter = function() {
         behaviors.forEach(function(behavior) {

@@ -1,0 +1,13 @@
+{
+    "icon": "dam",
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "waterway": "dam"
+    },
+    "name": "Dam"
+}

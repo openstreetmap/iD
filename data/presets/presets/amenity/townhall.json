@@ -1,0 +1,23 @@
+{
+    "icon": "town-hall",
+    "fields": [
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "village hall",
+        "city government",
+        "courthouse",
+        "municipal building",
+        "municipal center"
+    ],
+    "tags": {
+        "amenity": "townhall"
+    },
+    "name": "Town Hall"
+}

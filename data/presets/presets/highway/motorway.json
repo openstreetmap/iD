@@ -1,0 +1,19 @@
+{
+    "icon": "highway-motorway",
+    "fields": [
+        "oneway",
+        "structure",
+        "access",
+        "maxspeed",
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "motorway"
+    },
+    "terms": [],
+    "name": "Motorway"
+}

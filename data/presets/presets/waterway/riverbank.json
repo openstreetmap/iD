@@ -1,0 +1,10 @@
+{
+    "icon": "water",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "waterway": "riverbank"
+    },
+    "name": "Riverbank"
+}

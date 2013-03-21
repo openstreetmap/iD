@@ -1,0 +1,18 @@
+{
+    "icon": "commercial",
+    "fields": [
+        "office",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "office": "*"
+    },
+    "terms": [],
+    "name": "Office"
+}

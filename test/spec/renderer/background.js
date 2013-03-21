@@ -20,11 +20,6 @@ describe('iD.Background', function() {
             expect(c.size([100, 100])).to.equal(c);
             expect(c.size()).to.eql([100,100]);
         });
-
-        it('#source', function() {
-            expect(c.source(iD.layers[0])).to.equal(c);
-            expect(c.source()).to.equal(iD.layers[0]);
-        });
     });
 
     describe('iD.BackgroundSource.Template', function() {
@@ -44,6 +39,9 @@ describe('iD.Background', function() {
             var source = iD.BackgroundSource.template({ template: '{t}/{z}/{x}/{y}', subdomains: ['apples', 'oranges'] });
             expect(source([0,1,1])).to.equal('oranges/1/0/1');
         });
+        it('supports josm style templates', function() {
+            var source = iD.BackgroundSource.template({ template: '{switch:foo,bar}/{zoom}/{x}/{y}' });
+            expect(source([0,1,1])).to.equal('bar/1/0/1');
+        });
     });
-
 });

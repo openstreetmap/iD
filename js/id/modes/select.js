@@ -4,23 +4,18 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    var inspector = iD.ui.Inspector().initial(!!initial),
+    var inspector = iD.ui.Inspector(context, singular()),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
-            iD.behavior.DragNode(context)],
+            iD.modes.DragNode(context).behavior],
         radialMenu;
 
-    function changeTags(d, tags) {
-        if (!_.isEqual(singular().tags, tags)) {
-            context.perform(
-                iD.actions.ChangeTags(d.id, tags),
-                t('operations.change_tags.annotation'));
-        }
-    }
+    var wrap = context.container()
+        .select('.inspector-wrap');
 
     function singular() {
         if (selection.length === 1) {
@@ -54,8 +49,6 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.enter = function() {
-        var entity = singular();
-
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
@@ -67,13 +60,15 @@ iD.modes.Select = function(context, selection, initial) {
 
         keybinding.on('⎋', function() {
             context.enter(iD.modes.Browse(context));
-        });
+        }, true);
 
         operations.forEach(function(operation) {
-            keybinding.on(operation.key, function() {
-                if (operation.enabled()) {
-                    operation();
-                }
+            operation.keys.forEach(function(key) {
+                keybinding.on(key, function() {
+                    if (operation.enabled()) {
+                        operation();
+                    }
+                });
             });
         });
 
@@ -82,51 +77,22 @@ iD.modes.Select = function(context, selection, initial) {
             id: selection.join(',')
         }), true));
 
-        if (entity) {
-            inspector
-                .context(context)
-                .presetData(context.connection().presetData());
-
-            context.container()
-                .select('.inspector-wrap')
-                .style('display', 'block')
-                .style('opacity', 1)
-                .datum(entity)
-                .call(inspector);
-
-            if (d3.event) {
-                // Pan the map if the clicked feature intersects with the position
-                // of the inspector
-                var inspector_size = context.container().select('.inspector-wrap').size(),
-                    map_size = context.map().size(),
-                    offset = 50,
-                    shift_left = d3.event.clientX - map_size[0] + inspector_size[0] + offset,
-                    center = (map_size[0] / 2) + shift_left + offset;
-
-                if (shift_left > 0 && inspector_size[1] > d3.event.clientY) {
-                    context.map().centerEase(context.projection.invert([center, map_size[1]/2]));
-                }
-            }
-
-            inspector
-                .on('changeTags', changeTags)
-                .on('close', function() { context.enter(iD.modes.Browse(context)); });
+        if (singular()) {
+            wrap.call(inspector);
         }
 
-        context.history().on('change.select', function() {
+        context.history()
+            .on('undone.select', update)
+            .on('redone.select', update);
+
+        function update() {
             context.surface().call(radialMenu.close);
 
             if (_.any(selection, function(id) { return !context.entity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
-
-            } else if (entity) {
-                var newEntity = context.entity(selection[0]);
-                if (!_.isEqual(entity.tags, newEntity.tags)) {
-                    inspector.tags(newEntity.tags);
-                }
             }
-        });
+        }
 
         context.map().on('move.select', function() {
             context.surface().call(radialMenu.close);
@@ -139,31 +105,13 @@ iD.modes.Select = function(context, selection, initial) {
             if (datum instanceof iD.Way && !target.classed('fill')) {
                 var choice = iD.geo.chooseIndex(datum,
                         d3.mouse(context.surface().node()), context),
-                    node = iD.Node({ loc: choice.loc });
+                    node = iD.Node();
 
                 var prev = datum.nodes[choice.index - 1],
-                    next = datum.nodes[choice.index],
-                    prevParents = context.graph().parentWays({ id: prev }),
-                    ways = [];
+                    next = datum.nodes[choice.index];
 
-
-                for (var i = 0; i < prevParents.length; i++) {
-                    var p = prevParents[i];
-                    for (var k = 0; k < p.nodes.length; k++) {
-                        if (p.nodes[k] === prev) {
-                            if (p.nodes[k-1] === next) {
-                                ways.push({ id: p.id, index: k});
-                                break;
-                            } else if (p.nodes[k+1] === next) {
-                                ways.push({ id: p.id, index: k+1});
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                context.perform(iD.actions.AddEntity(node),
-                    iD.actions.AddMidpoint({ ways: ways, loc: node.loc }, node),
+                context.perform(
+                    iD.actions.AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();
@@ -206,22 +154,9 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.exit = function() {
-        /*
-        if (singular()) {
-            changeTags(singular(), inspector.tags());
-        }
-        */
-
         if (timeout) window.clearTimeout(timeout);
 
-        context.container()
-            .select('.inspector-wrap')
-            .style('display', 'none')
-            .html('');
-
-        // Firefox incorrectly implements blur, so typeahead elements
-        // are not correctly removed. Remove any stragglers manually.
-        d3.selectAll('div.typeahead').remove();
+        wrap.call(inspector.close);
 
         behaviors.forEach(function(behavior) {
             context.uninstall(behavior);
@@ -233,7 +168,8 @@ iD.modes.Select = function(context, selection, initial) {
         keybinding.off();
 
         context.history()
-            .on('change.select', null);
+            .on('undone.select', null)
+            .on('redone.select', null);
 
         context.surface()
             .call(radialMenu.close)

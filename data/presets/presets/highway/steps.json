@@ -1,0 +1,18 @@
+{
+    "fields": [
+        "access",
+        "surface"
+    ],
+    "icon": "highway-steps",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "steps"
+    },
+    "terms": [
+        "stairs",
+        "staircase"
+    ],
+    "name": "Steps"
+}

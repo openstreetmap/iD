@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "highway"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "highway": "*"
+    },
+    "name": "Highway"
+}

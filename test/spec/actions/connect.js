@@ -78,6 +78,75 @@ describe("iD.actions.Connect", function() {
         expect(graph.entity('-').nodes).to.eql(['d', 'b', 'c', 'd']);
     });
 
+    it("merges adjacent nodes", function() {
+        // a --- b --- c
+        //
+        // Connect [b, c]
+        //
+        // Expected result:
+        //
+        // a --- c
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']})
+            });
+
+        graph = iD.actions.Connect(['b', 'c'])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'c']);
+        expect(graph.entity('b')).to.be.undefined;
+    });
+
+    it("merges adjacent nodes with connections", function() {
+        // a --- b --- c
+        //       |
+        //       d
+        //
+        // Connect [b, c]
+        //
+        // Expected result:
+        //
+        // a --- c
+        //       |
+        //       d
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                '|': iD.Way({id: '|', nodes: ['b', 'd']})
+
+            });
+
+        graph = iD.actions.Connect(['b', 'c'])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'c']);
+        expect(graph.entity('|').nodes).to.eql(['c', 'd']);
+        expect(graph.entity('b')).to.be.undefined;
+    });
+
+    it("deletes a degenerate way", function() {
+        // a --- b
+        //
+        // Connect [a, b]
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b']})
+            });
+
+        graph = iD.actions.Connect(['a', 'b'])(graph);
+
+        expect(graph.entity('a')).to.be.undefined;
+        expect(graph.entity('-')).to.be.undefined;
+    });
+
     it("merges tags to the surviving node", function() {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a', tags: {a: 'a'}}),

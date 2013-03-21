@@ -1,0 +1,12 @@
+{
+    "icon": "garden",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "leisure": "garden"
+    },
+    "name": "Garden"
+}

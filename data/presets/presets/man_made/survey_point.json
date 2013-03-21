@@ -1,0 +1,14 @@
+{
+    "icon": "monument",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "man_made": "survey_point"
+    },
+    "fields": [
+        "ref"
+    ],
+    "name": "Survey Point"
+}

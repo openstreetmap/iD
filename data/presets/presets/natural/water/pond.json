@@ -1,0 +1,18 @@
+{
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "pond"
+    },
+    "terms": [
+        "lakelet",
+        "millpond",
+        "tarn",
+        "pool",
+        "mere"
+    ],
+    "icon": "water",
+    "name": "Pond"
+}

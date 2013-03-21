@@ -1,0 +1,20 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "archipelago",
+        "atoll",
+        "bar",
+        "cay",
+        "isle",
+        "islet",
+        "key",
+        "reef"
+    ],
+    "tags": {
+        "place": "island"
+    },
+    "name": "Island"
+}

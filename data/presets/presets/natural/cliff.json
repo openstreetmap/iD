@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "cliff"
+    },
+    "name": "Cliff"
+}

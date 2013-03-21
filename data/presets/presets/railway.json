@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "railway"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "railway": "*"
+    },
+    "name": "Railway"
+}

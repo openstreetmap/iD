@@ -1,0 +1,16 @@
+{
+    "icon": "golf",
+    "fields": [
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "golf_course"
+    },
+    "terms": [],
+    "name": "Golf Course"
+}

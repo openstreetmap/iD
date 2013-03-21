@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "aeroway"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "aeroway": "*"
+    },
+    "name": "Aeroway"
+}

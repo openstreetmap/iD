@@ -4,19 +4,18 @@ iD.modes.AddLine = function(context) {
         button: 'line',
         title: t('modes.add_line.title'),
         description: t('modes.add_line.description'),
-        key: '3'
+        key: '2'
     };
 
     var behavior = iD.behavior.AddWay(context)
             .on('start', start)
             .on('startFromWay', startFromWay)
-            .on('startFromNode', startFromNode),
-        defaultTags = {highway: 'residential'};
+            .on('startFromNode', startFromNode);
 
     function start(loc) {
         var graph = context.graph(),
             node = iD.Node({loc: loc}),
-            way = iD.Way({tags: defaultTags});
+            way = iD.Way();
 
         context.perform(
             iD.actions.AddEntity(node),
@@ -29,7 +28,7 @@ iD.modes.AddLine = function(context) {
     function startFromWay(other, loc, index) {
         var graph = context.graph(),
             node = iD.Node({loc: loc}),
-            way = iD.Way({tags: defaultTags});
+            way = iD.Way();
 
         context.perform(
             iD.actions.AddEntity(node),
@@ -52,7 +51,7 @@ iD.modes.AddLine = function(context) {
             context.enter(iD.modes.DrawLine(context, parent.id, 'forward', graph));
 
         } else {
-            var way = iD.Way({tags: defaultTags});
+            var way = iD.Way();
 
             context.perform(
                 iD.actions.AddEntity(way),

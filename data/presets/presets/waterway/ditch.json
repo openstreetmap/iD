@@ -1,0 +1,10 @@
+{
+    "icon": "waterway-ditch",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "waterway": "ditch"
+    },
+    "name": "Ditch"
+}

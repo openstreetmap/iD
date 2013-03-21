@@ -14,7 +14,7 @@ iD.ui.confirm = function(selection) {
         .attr('class', 'buttons cf');
 
     var okbutton = buttonwrap.append('button')
-        .attr('class', 'action centered')
+        .attr('class', 'col2 action centered')
         .on('click.confirm', function() {
             modal.remove();
         });

@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "waterway"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "waterway": "*"
+    },
+    "name": "Waterway"
+}

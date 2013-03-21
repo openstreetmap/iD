@@ -1,0 +1,16 @@
+{
+    "icon": "soccer",
+    "fields": [
+        "surface"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "soccer"
+    },
+    "terms": [],
+    "name": "Soccer Field"
+}

@@ -1,11 +1,5 @@
 iD.util = {};
 
-iD.util.trueObj = function(arr) {
-    var o = {};
-    for (var i = 0, l = arr.length; i < l; i++) o[arr[i]] = true;
-    return o;
-};
-
 iD.util.tagText = function(entity) {
     return d3.entries(entity.tags).map(function(e) {
         return e.key + '=' + e.value;
@@ -112,3 +106,18 @@ iD.util.fastMouse = function(container) {
 };
 
 iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+
+iD.util.asyncMap = function(inputs, func, callback) {
+    var remaining = inputs.length,
+        results = [],
+        errors = [];
+
+    inputs.forEach(function(d, i) {
+        func(d, function done(err, data) {
+            errors[i] = err;
+            results[i] = data;
+            remaining --;
+            if (!remaining) callback(errors, results);
+        });
+    });
+};

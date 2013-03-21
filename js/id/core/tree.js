@@ -1,5 +1,3 @@
-
-
 iD.Tree = function(graph) {
 
     var rtree = new RTree(),
@@ -12,8 +10,8 @@ iD.Tree = function(graph) {
     function extentRectangle(extent) {
             x = m * extent[0][0],
             y = m * extent[0][1],
-            dx = m * extent[1][0] - x || 1,
-            dy = m * extent[1][1] - y || 1;
+            dx = m * extent[1][0] - x || 2,
+            dy = m * extent[1][1] - y || 2;
         return new RTree.Rectangle(~~x, ~~y, ~~dx - 1, ~~dy - 1);
     }
 
@@ -58,7 +56,10 @@ iD.Tree = function(graph) {
                 });
 
                 var created = diff.created().concat(queuedCreated);
-                modified = d3.values(diff.addParents(modified)).concat(queuedModified);
+                modified = d3.values(diff.addParents(modified))
+                    // some parents might be created, not modified
+                    .filter(function(d) { return !!graph.entity(d.id); })
+                    .concat(queuedModified);
                 queuedCreated = [];
                 queuedModified = [];
 

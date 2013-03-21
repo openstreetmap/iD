@@ -1,0 +1,16 @@
+[{
+    "geometry": "line",
+    "icon": "highway",
+    "id": "Road",
+    "members": [
+        "highway/residential",
+        "highway/motorway",
+        "highway/trunk",
+        "highway/primary",
+        "highway/secondary",
+        "highway/tertiary",
+        "highway/unclassified",
+        "highway/service",
+        "highway/track"
+    ]
+}]

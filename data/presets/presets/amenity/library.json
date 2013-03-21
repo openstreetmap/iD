@@ -1,0 +1,18 @@
+{
+    "icon": "library",
+    "fields": [
+        "operator",
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "library"
+    },
+    "terms": [],
+    "name": "Library"
+}

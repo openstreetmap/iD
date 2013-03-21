@@ -1,0 +1,9 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "cycle_barrier"
+    },
+    "name": "Cycle Barrier"
+}

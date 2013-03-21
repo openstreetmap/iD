@@ -1,11 +1,9 @@
 iD.Connection = function(context) {
 
-    var event = d3.dispatch('auth', 'load'),
-        url = 'http://api06.dev.openstreetmap.org',
+    var event = d3.dispatch('auth', 'loading', 'load', 'loaded'),
+        url = 'http://www.openstreetmap.org',
         connection = {},
         user = {},
-        version,
-        presetData = iD.presetData(),
         keys,
         inflight = {},
         loadedTiles = {},
@@ -17,29 +15,16 @@ iD.Connection = function(context) {
         wayStr = 'way',
         relationStr = 'relation';
 
-    function changesetUrl(changesetId) {
+    connection.changesetUrl = function(changesetId) {
         return url + '/browse/changeset/' + changesetId;
-    }
+    };
 
-    function bboxUrl(b) {
-        return url + '/api/0.6/map?bbox=' + [b[0][0],b[1][1],b[1][0],b[0][1]];
-    }
-
-    function bboxFromAPI(box, tile, callback) {
-        function done(err, parsed) {
-             loadedTiles[tile.toString()] = true;
-             delete inflight[tile.toString()];
-             callback(err, parsed);
-         }
-         inflight[tile.toString()] = loadFromURL(bboxUrl(box), done);
-    }
-
-    function loadFromURL(url, callback) {
+    connection.loadFromURL = function(url, callback) {
         function done(dom) {
             return callback(null, parse(dom));
         }
         return d3.xml(url).get().on('load', done);
-    }
+    };
 
     function getNodes(obj) {
         var elems = obj.getElementsByTagName(ndStr),
@@ -82,8 +67,8 @@ iD.Connection = function(context) {
                 loc: [parseFloat(attrs.lon.nodeValue), parseFloat(attrs.lat.nodeValue)],
                 version: attrs.version.nodeValue,
                 changeset: attrs.changeset.nodeValue,
-                user: attrs.user.nodeValue,
-                uid: attrs.uid.nodeValue,
+                user: attrs.user && attrs.user.nodeValue,
+                uid: attrs.uid && attrs.uid.nodeValue,
                 visible: attrs.visible.nodeValue,
                 timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj)
@@ -96,8 +81,8 @@ iD.Connection = function(context) {
                 id: iD.Entity.id.fromOSM(wayStr, attrs.id.nodeValue),
                 version: attrs.version.nodeValue,
                 changeset: attrs.changeset.nodeValue,
-                user: attrs.user.nodeValue,
-                uid: attrs.uid.nodeValue,
+                user: attrs.user && attrs.user.nodeValue,
+                uid: attrs.uid && attrs.uid.nodeValue,
                 visible: attrs.visible.nodeValue,
                 timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj),
@@ -111,8 +96,8 @@ iD.Connection = function(context) {
                 id: iD.Entity.id.fromOSM(relationStr, attrs.id.nodeValue),
                 version: attrs.version.nodeValue,
                 changeset: attrs.changeset.nodeValue,
-                user: attrs.user.nodeValue,
-                uid: attrs.uid.nodeValue,
+                user: attrs.user && attrs.user.nodeValue,
+                uid: attrs.uid && attrs.uid.nodeValue,
                 visible: attrs.visible.nodeValue,
                 timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj),
@@ -141,9 +126,9 @@ iD.Connection = function(context) {
         return entities;
     }
 
-    function authenticated() {
+    connection.authenticated = function() {
         return oauth.authenticated();
-    }
+    };
 
     // Generate Changeset XML. Returns a string.
     connection.changesetJXON = function(tags) {
@@ -221,7 +206,7 @@ iD.Connection = function(context) {
             });
     };
 
-    function userDetails(callback) {
+    connection.userDetails = function(callback) {
         function done(err, user_details) {
             if (err) return callback(err);
             var u = user_details.getElementsByTagName('user')[0],
@@ -237,20 +222,11 @@ iD.Connection = function(context) {
             }).user());
         }
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
-    }
-
-    function tileAlreadyLoaded(c) { return !loadedTiles[c.toString()] && !inflight[c.toString()]; }
+    };
 
     function abortRequest(i) { i.abort(); }
 
-    function loadTile(e) {
-        function done(err, g) {
-            event.load(err, g);
-        }
-        bboxFromAPI(e.box, e.tile, done);
-    }
-
-    function loadTiles(projection, dimensions) {
+    connection.loadTiles = function(projection, dimensions) {
         var scaleExtent = [16, 16],
             s = projection.scale(),
             tiles = d3.geo.tile()
@@ -265,15 +241,14 @@ iD.Connection = function(context) {
                 s / 2 - projection.translate()[0],
                 s / 2 - projection.translate()[1]];
 
-        function apiExtentBox(c) {
-            var x = (c[0] * ts) - tile_origin[0];
-            var y = (c[1] * ts) - tile_origin[1];
-            return {
-                box: [
-                    projection.invert([x, y]),
-                    projection.invert([x + ts, y + ts])],
-                tile: c
-            };
+        function bboxUrl(tile) {
+            var x = (tile[0] * ts) - tile_origin[0];
+            var y = (tile[1] * ts) - tile_origin[1];
+            var b = [
+                projection.invert([x, y]),
+                projection.invert([x + ts, y + ts])];
+
+            return url + '/api/0.6/map?bbox=' + [b[0][0], b[1][1], b[1][0], b[0][1]];
         }
 
         _.filter(inflight, function(v, i) {
@@ -284,11 +259,27 @@ iD.Connection = function(context) {
             return !wanted;
         }).map(abortRequest);
 
-        tiles
-            .filter(tileAlreadyLoaded)
-            .map(apiExtentBox)
-            .forEach(loadTile);
-    }
+        tiles.forEach(function(tile) {
+            var id = tile.toString();
+
+            if (loadedTiles[id] || inflight[id]) return;
+
+            if (_.isEmpty(inflight)) {
+                event.loading();
+            }
+
+            inflight[id] = connection.loadFromURL(bboxUrl(tile), function(err, parsed) {
+                loadedTiles[id] = true;
+                delete inflight[id];
+
+                event.load(err, parsed);
+
+                if (_.isEmpty(inflight)) {
+                    event.loaded();
+                }
+            });
+        });
+    };
 
     connection.userUrl = function(username) {
         return url + "/user/" + username;
@@ -329,12 +320,6 @@ iD.Connection = function(context) {
         return connection;
     };
 
-    connection.presetData = function(_) {
-        if (!arguments.length) return presetData;
-        presetData = _;
-        return connection;
-    };
-
     connection.authenticate = function(callback) {
         function done(err, res) {
             event.auth();
@@ -342,13 +327,6 @@ iD.Connection = function(context) {
         }
         return oauth.authenticate(done);
     };
-
-    connection.bboxFromAPI = bboxFromAPI;
-    connection.changesetUrl = changesetUrl;
-    connection.loadFromURL = loadFromURL;
-    connection.loadTiles = _.debounce(loadTiles, 100);
-    connection.userDetails = userDetails;
-    connection.authenticated = authenticated;
 
     return d3.rebind(connection, event, 'on');
 };

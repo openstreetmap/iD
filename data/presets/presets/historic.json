@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "historic"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "historic": "*"
+    },
+    "name": "Historic Site"
+}

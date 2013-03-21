@@ -28,5 +28,5 @@ iD.ui.Splash = function(context) {
                 website: '<a href="http://ideditor.com/">ideditor.com</a>',
                 github: '<a href="https://github.com/systemed/iD">github.com</a>'
             }));
-    }
+    };
 };

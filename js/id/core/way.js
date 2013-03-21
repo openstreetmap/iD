@@ -33,32 +33,38 @@ _.extend(iD.Way.prototype, {
     },
 
     isOneWay: function() {
-        return this.tags.oneway === 'yes';
+        return this.tags.oneway === 'yes' ||
+            this.tags.waterway === 'river' ||
+            this.tags.waterway === 'stream';
     },
 
     isClosed: function() {
         return this.nodes.length > 0 && this.first() === this.last();
     },
 
-    // a way is an area if:
-    //
-    // - area=yes
-    // - closed and
-    //   - doesn't have area=no
-    //   - doesn't have highway tag
     isArea: function() {
         if (this.tags.area === 'yes')
             return true;
         if (!this.isClosed() || this.tags.area === 'no')
             return false;
         for (var key in this.tags)
-            if (key in iD.Way.areaKeys)
+            if (key in iD.Way.areaKeys && !(this.tags[key] in iD.Way.areaKeys[key]))
                 return true;
         return false;
     },
 
     isDegenerate: function() {
         return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
+    },
+
+    areAdjacent: function(n1, n2) {
+        for (var i = 0; i < this.nodes.length; i++) {
+            if (this.nodes[i] === n1) {
+                if (this.nodes[i - 1] === n2) return true;
+                if (this.nodes[i + 1] === n2) return true;
+            }
+        }
+        return false;
     },
 
     geometry: function() {
@@ -118,14 +124,22 @@ _.extend(iD.Way.prototype, {
         return r;
     },
 
-    asGeoJSON: function(resolver) {
-        if (this.isArea()) {
+    asGeoJSON: function(resolver, close) {
+
+        var childnodes = resolver.childNodes(this);
+
+        // Close unclosed way
+        if (close && !this.isClosed() && childnodes.length) {
+            childnodes = childnodes.concat([childnodes[0]]);
+        }
+
+        if (this.isArea() && (close || this.isClosed())) {
             return {
                 type: 'Feature',
                 properties: this.tags,
                 geometry: {
                     type: 'Polygon',
-                    coordinates: [_.pluck(resolver.childNodes(this), 'loc')]
+                    coordinates: [_.pluck(childnodes, 'loc')]
                 }
             };
         } else {
@@ -134,13 +148,31 @@ _.extend(iD.Way.prototype, {
                 properties: this.tags,
                 geometry: {
                     type: 'LineString',
-                    coordinates: _.pluck(resolver.childNodes(this), 'loc')
+                    coordinates: _.pluck(childnodes, 'loc')
                 }
             };
         }
     }
 });
 
-iD.Way.areaKeys = iD.util.trueObj(['area', 'building', 'leisure', 'tourism', 'ruins',
-    'historic', 'landuse', 'military', 'natural', 'amenity', 'shop', 'man_made',
-    'public_transport']);
+// A closed way is considered to be an area if it has a tag with one
+// of the following keys, and the value is _not_ one of the associated
+// values for the respective key.
+iD.Way.areaKeys = {
+    area: {},
+    building: {},
+    leisure: {},
+    tourism: {},
+    ruins: {},
+    historic: {},
+    landuse: {},
+    military: {},
+    natural: { coastline: true },
+    amenity: {},
+    shop: {},
+    man_made: {},
+    public_transport: {},
+    place: {},
+    aeroway: {},
+    waterway: {}
+};

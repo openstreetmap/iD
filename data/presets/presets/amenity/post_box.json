@@ -1,0 +1,23 @@
+{
+    "icon": "post",
+    "fields": [
+        "operator",
+        "collection_times"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "post_box"
+    },
+    "terms": [
+        "letter drop",
+        "letterbox",
+        "mail drop",
+        "mailbox",
+        "pillar box",
+        "postbox"
+    ],
+    "name": "Mailbox"
+}

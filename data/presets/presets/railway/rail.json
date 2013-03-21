@@ -1,0 +1,14 @@
+{
+    "icon": "railway-rail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "rail"
+    },
+    "fields": [
+        "structure"
+    ],
+    "terms": [],
+    "name": "Rail"
+}

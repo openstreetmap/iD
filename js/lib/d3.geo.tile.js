@@ -2,7 +2,8 @@ d3.geo.tile = function() {
   var size = [960, 500],
       scale = 256,
       scaleExtent = [0, 20],
-      translate = [size[0] / 2, size[1] / 2];
+      translate = [size[0] / 2, size[1] / 2],
+      zoomDelta = 0;
 
   function bound(_) {
       return Math.min(scaleExtent[1], Math.max(scaleExtent[0], _));
@@ -10,7 +11,7 @@ d3.geo.tile = function() {
 
   function tile() {
     var z = Math.max(Math.log(scale) / Math.LN2 - 8, 0),
-        z0 = bound(z | 0),
+        z0 = bound(Math.round(z + zoomDelta)),
         k = Math.pow(2, z - z0 + 8),
         origin = [(translate[0] - scale / 2) / k, (translate[1] - scale / 2) / k],
         tiles = [],
@@ -50,6 +51,12 @@ d3.geo.tile = function() {
   tile.translate = function(_) {
     if (!arguments.length) return translate;
     translate = _;
+    return tile;
+  };
+
+  tile.zoomDelta = function(_) {
+    if (!arguments.length) return zoomDelta;
+    zoomDelta = +_;
     return tile;
   };
 

@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "surface"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "beach"
+    },
+    "name": "Beach"
+}

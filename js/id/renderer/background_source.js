@@ -2,14 +2,15 @@ iD.BackgroundSource = {};
 
 // derive the url of a 'quadkey' style tile from a coordinate object
 iD.BackgroundSource.template = function(data) {
-    var generator = function(coord) {
+
+    function generator(coord) {
         var u = '';
         for (var zoom = coord[2]; zoom > 0; zoom--) {
-            var byte = 0;
+            var b = 0;
             var mask = 1 << (zoom - 1);
-            if ((coord[0] & mask) !== 0) byte++;
-            if ((coord[1] & mask) !== 0) byte += 2;
-            u += byte.toString();
+            if ((coord[0] & mask) !== 0) b++;
+            if ((coord[1] & mask) !== 0) b += 2;
+            u += b.toString();
         }
 
         return data.template
@@ -18,8 +19,14 @@ iD.BackgroundSource.template = function(data) {
             .replace('{u}', u)
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
-            .replace('{z}', coord[2]);
-    };
+            .replace('{z}', coord[2])
+            // JOSM style
+            .replace('{zoom}', coord[2])
+            .replace(/\{(switch\:[^\}]*)\}/, function(s, r) {
+                var subdomains = r.split(':')[1].split(',');
+                return subdomains[coord[2] % subdomains.length];
+            });
+    }
 
     generator.data = data;
 
@@ -31,7 +38,8 @@ iD.BackgroundSource.Custom = function() {
     if (!template) return null;
     return iD.BackgroundSource.template({
         template: template,
-        name: 'Custom (customized)'
+        name: 'Custom'
     });
 };
+
 iD.BackgroundSource.Custom.data = { 'name': 'Custom' };

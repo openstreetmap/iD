@@ -19,17 +19,14 @@ iD.svg.Midpoints = function(projection) {
                     b = nodes[j + 1],
                     id = [a.id, b.id].sort().join('-');
 
-                if (midpoints[id]) {
-                    midpoints[id].ways.push({id: entity.id, index: j + 1});
-
-                } else {
+                if (!midpoints[id]) {
                     var loc = iD.geo.interp(a.loc, b.loc, 0.5);
                     if (extent.intersects(loc) && iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
                         midpoints[id] = {
                             type: 'midpoint',
                             id: id,
                             loc: loc,
-                            ways: [{id: entity.id, index: j + 1}]
+                            edge: [a.id, b.id]
                         };
                     }
                 }
@@ -45,7 +42,7 @@ iD.svg.Midpoints = function(projection) {
             .attr('class', 'midpoint');
 
         group.append('circle')
-            .attr('r', 8)
+            .attr('r', 7)
             .attr('class', 'shadow');
 
         group.append('circle')

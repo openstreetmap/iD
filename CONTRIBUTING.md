@@ -27,6 +27,51 @@ To request a feature:
 * Understand that iD is meant to be a simple editor and doesn't aim to be
   as complete or complicated as JOSM or similar.
 
+## Translating
+
+Translations are managed using the
+[Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After
+signing up, you can go to [iD's project
+page](https://www.transifex.com/projects/p/id-editor/), select a language and
+click *Translate now* to start translating. Translations are divided into two
+sections, *core*, which contains text for the main interface of iD, and
+*presets*, which has the text for labeling feature presets.
+
+The words in brackets, for example `{name}`, should not be translated into a
+new language: it's replaced with a place name when iD presents the text. So a
+French translation of `Couldn't locate a place named '{name}'` would look like
+`Impossible de localiser l'endroit nommé '{name}'`.
+
+The translations for presets consist of the names of presets, labels for
+preset fields, and lists of search terms. You do _not_ need to translate the
+search terms literally -- use a set of synonyms and related terms appropriate
+to the target language, separated by commas.
+
+[iD translation project on
+Transifex](https://www.transifex.com/projects/p/id-editor/)
+
+To get notifications when translation source files change, click **Watch
+project** button near the bottom of the project page. You can edit your
+[notification settings](https://www.transifex.com/settings/notices/) if you're
+getting too many notifications.
+
+Translations are licensed under
+[WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license
+as iD.
+
+## Adding New Strings for Translation
+
+iD translates strings with a `t` function - `t('foo.bar')` translate the key
+`foo.bar` into the current language. If you introduce new translatable strings
+to iD, only display them in the interface through the `t()` function.
+
+Then, add the new string to `data/core.yaml` or `data/presets.yaml` (depending
+on whether it pertains to core code or presets). The translation system,
+Transiflex, will automatically detect the change.
+
+Use `make` to build the translations with the local changes.
+`make translate` can be used to pull the latest translations from Transifex.
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with
@@ -73,6 +118,14 @@ and a few modules:
 2. Go to the directory where you have checked out `iD`
 3. Run `npm install`
 4. Run `npm test` to see whether your tests pass or fail.
+
+## Building / Installing
+
+You can build and install a concatenated and minified version of iD with the command `make install`.
+Node.js is required for this.
+
+By default iD will be built to the `build` directory, but you can move it elsewhere or specify the
+build location with `make install install_root=/path/to/install`.
 
 ## Licensing
 

@@ -1,0 +1,10 @@
+{
+    "icon": "waterway-canal",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "waterway": "canal"
+    },
+    "name": "Canal"
+}

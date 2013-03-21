@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha-phantomjs test/index.html"
+    "test": "mocha-phantomjs test/index.html && make && mocha-phantomjs test/index_packaged.html"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,14 @@
   ],
   "license": "WTFPL",
   "devDependencies": {
-    "uglify-js": "~2.2.2",
-    "mocha-phantomjs": "~1.1.1"
+    "uglify-js": "~2.2.5",
+    "mocha-phantomjs": "~1.1.1",
+    "glob": "~3.1.21",
+    "js-yaml": "~2.0.3",
+    "request": "~2.16.2",
+    "jsonschema": "~0.3.2"
+  },
+  "engines": {
+    "node": "~0.8.20"
   }
 }

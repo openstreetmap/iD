@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [[ -z `which glue` ]] ; then
+    echo "You need to install glue."
+    echo "http://glue.readthedocs.org/en/latest/installation.html"
+    exit 1
+fi
+
+MAKIPATH=$1
+
+if [[ -z $MAKIPATH ]]; then
+    echo "Usage: makesprite PATHTOMAKI"
+    exit 1
+fi
+
+
+dir=$(dirname $0)
+img="$dir/.."
+css="$dir/../../css"
+
+cd $dir
+mkdir feature-icons
+
+cp $MAKIPATH/renders/*-24.png feature-icons 
+for x in feature-icons/*.png; do
+    mv $x `echo $x | sed "s/-24//"`
+done
+cp $MAKIPATH/renders/*-{12,18}.png feature-icons 
+
+## Export pngs from line-preset svg
+grep --only-matching "id=\"\(highway\|waterway\|railway\|power\)[^\"]*" line-presets.svg | while read line; do
+    id=`echo $line | sed 's/id="//'`
+    inkscape --export-id=$id --export-png=feature-icons/$id.png line-presets.svg
+done
+
+glue --namespace=feature --sprite-namespace= feature-icons --css=$css --img=$img
+
+rm feature-icons/*
+rmdir feature-icons

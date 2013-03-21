@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "basin"
+    },
+    "terms": [],
+    "name": "Basin"
+}

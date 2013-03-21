@@ -1,0 +1,10 @@
+{
+    "icon": "waterway-river",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "waterway": "drain"
+    },
+    "name": "Drain"
+}

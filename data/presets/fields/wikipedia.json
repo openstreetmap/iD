@@ -1,0 +1,7 @@
+{
+    "key": "wikipedia",
+    "type": "text",
+    "icon": "wikipedia",
+    "universal": true,
+    "label": "Wikipedia"
+}

@@ -1,0 +1,22 @@
+{
+    "icon": "religious-muslim",
+    "fields": [
+        "denomination",
+        "building",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "muslim",
+        "mosque"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "muslim"
+    },
+    "name": "Mosque"
+}

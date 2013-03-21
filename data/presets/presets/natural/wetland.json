@@ -1,0 +1,15 @@
+{
+    "icon": "wetland",
+    "fields": [
+        "wetland"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "natural": "wetland"
+    },
+    "terms": [],
+    "name": "Wetland"
+}

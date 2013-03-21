@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "lift_gate"
+    },
+    "name": "Lift Gate"
+}
