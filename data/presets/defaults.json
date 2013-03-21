@@ -15,11 +15,10 @@
     ],
     "line": [
         "Road",
-        "highway/footway",
-        "highway/cycleway",
-        "railway/rail",
-        "waterway/river",
-        "waterway/stream",
+        "Rail",
+        "Path",
+        "Water",
+        "power/line",
         "other"
     ],
     "point": [

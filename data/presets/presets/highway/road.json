@@ -1,5 +1,5 @@
 {
-    "icon": "highway-path",
+    "icon": "highway-road",
     "fields": [
         "oneway",
         "structure",
@@ -11,8 +11,8 @@
         "line"
     ],
     "tags": {
-        "highway": "path"
+        "highway": "road"
     },
     "terms": [],
-    "name": "Path"
+    "name": "Unknown Road"
 }

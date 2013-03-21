@@ -9,11 +9,14 @@
         "line"
     ],
     "tags": {
-        "highway": "steps"
+        "highway": "bridleway"
     },
     "terms": [
-        "stairs",
-        "staircase"
+        "bridleway",
+        "equestrian trail",
+        "horse riding path",
+        "bridle road",
+        "horse trail"
     ],
-    "name": "Steps"
+    "name": "Bridle Path"
 }

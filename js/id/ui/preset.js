@@ -114,6 +114,14 @@ iD.ui.preset = function(context) {
             }
         });
 
+        formwrap.selectAll('div.preset-field')
+            .classed('modified', function(d) {
+                var original = context.graph().base().entities[entity.id];
+                return _.any(d.keys || [d.key], function(key) {
+                    return original ? tags[key] !== original.tags[key] : tags[key];
+                });
+            });
+
         event.setTags(tags);
         return presets;
     };

@@ -1,5 +1,5 @@
 {
-    "icon": "highway",
+    "icon": "highway-unclassified",
     "fields": [
         "oneway",
         "structure",

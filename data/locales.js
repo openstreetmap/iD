@@ -361,6 +361,9 @@ locale.en = {
             "oneway": {
                 "label": "One Way"
             },
+            "oneway_yes": {
+                "label": "One Way"
+            },
             "opening_hours": {
                 "label": "Hours"
             },
@@ -684,8 +687,8 @@ locale.en = {
                 "terms": ""
             },
             "highway/bridleway": {
-                "name": "Steps",
-                "terms": "stairs,staircase"
+                "name": "Bridle Path",
+                "terms": "bridleway,equestrian trail,horse riding path,bridle road,horse trail"
             },
             "highway/bus_stop": {
                 "name": "Bus Stop",
@@ -707,6 +710,10 @@ locale.en = {
                 "name": "Motorway",
                 "terms": ""
             },
+            "highway/motorway_link": {
+                "name": "Motorway Link",
+                "terms": "ramp,on ramp,off ramp"
+            },
             "highway/path": {
                 "name": "Path",
                 "terms": ""
@@ -715,13 +722,25 @@ locale.en = {
                 "name": "Primary Road",
                 "terms": ""
             },
+            "highway/primary_link": {
+                "name": "Primary Link",
+                "terms": "ramp,on ramp,off ramp"
+            },
             "highway/residential": {
                 "name": "Residential Road",
+                "terms": ""
+            },
+            "highway/road": {
+                "name": "Unknown Road",
                 "terms": ""
             },
             "highway/secondary": {
                 "name": "Secondary Road",
                 "terms": ""
+            },
+            "highway/secondary_link": {
+                "name": "Secondary Link",
+                "terms": "ramp,on ramp,off ramp"
             },
             "highway/service": {
                 "name": "Service Road",
@@ -735,6 +754,10 @@ locale.en = {
                 "name": "Tertiary Road",
                 "terms": ""
             },
+            "highway/tertiary_link": {
+                "name": "Tertiary Link",
+                "terms": "ramp,on ramp,off ramp"
+            },
             "highway/track": {
                 "name": "Track",
                 "terms": ""
@@ -746,6 +769,10 @@ locale.en = {
             "highway/trunk": {
                 "name": "Trunk Road",
                 "terms": ""
+            },
+            "highway/trunk_link": {
+                "name": "Trunk Link",
+                "terms": "ramp,on ramp,off ramp"
             },
             "highway/turning_circle": {
                 "name": "Turning Circle",
@@ -1064,11 +1091,11 @@ locale.en = {
                 "terms": ""
             },
             "railway/abandoned": {
-                "name": "Abandoned railway",
+                "name": "Abandoned Railway",
                 "terms": ""
             },
             "railway/disused": {
-                "name": "Disused railway",
+                "name": "Disused Railway",
                 "terms": ""
             },
             "railway/level_crossing": {

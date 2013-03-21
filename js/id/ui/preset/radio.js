@@ -9,7 +9,7 @@ iD.ui.preset.radio = function(field) {
         var buttonwrap = selection.append('div').attr('class','radio-wrap');
 
         buttons = buttonwrap.selectAll('button')
-            .data(field.options)
+            .data(field.keys || field.options)
             .enter()
             .append('button')
                 .text(function(d) { return field.t('options.' + d, { 'default': d }); })
