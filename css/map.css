@@ -793,7 +793,7 @@ text.pointlabel {
 }
 
 /* Opera doesn't support dominant-baseline. See #715 */
-.opera .linelabel-halo,
+.opera .linelabel-halo .textpath,
 .opera .linelabel .textpath {
   baseline-shift: -33%;
   dominant-baseline: auto;
