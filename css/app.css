@@ -627,8 +627,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     height: 100%;
     border-radius: 0;
     border-right: 1px solid #CCC;
-    width: 12.5%;
-    min-width: 60px;
+    width: 60px;
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -649,11 +648,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity: 0;
 }
 
-.inspector-wrap .message:hover button .col12:first-child {
+.inspector-wrap .message button:hover .col12:first-child {
     opacity: 0;
 }
 
-.inspector-wrap .message:hover button .col12:last-child {
+.inspector-wrap .message button:hover .col12:last-child {
     opacity: 1;
 }
 
@@ -663,16 +662,20 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-wrap .message button.fr {
     border-left: 1px solid #CCC;
-    width: 12.5%;
-    min-width: 0;
+    width: 40px;
 }
 
 .inspector-wrap .message h3 {
     display: block;
     font-size: 16px;
     line-height: 20px;
-    width: 62.5%;
     overflow: hidden;
+}
+
+.pane:last-child .message h3 {
+    position: absolute;
+    left: 60px;
+    right: 40px;
 }
 
 .inspector-toggle {
