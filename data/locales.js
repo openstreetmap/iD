@@ -146,6 +146,7 @@ locale.en = {
     "commit": {
         "title": "Save Changes",
         "description_placeholder": "Brief description of your contributions",
+        "message_label": "Commit message",
         "upload_explanation": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
         "save": "Save",
         "cancel": "Cancel",
