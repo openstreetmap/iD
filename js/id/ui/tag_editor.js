@@ -98,7 +98,7 @@ iD.ui.TagEditor = function(context, entity) {
         // Don't add for created entities
         if (entity.osmId() > 0) {
             tageditorpreset.append('div')
-                .attr('class','inspector-inner')
+                .attr('class','view-on-osm')
                 .append('a')
                     .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
                     .attr('target', '_blank')
