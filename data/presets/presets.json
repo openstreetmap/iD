@@ -1213,7 +1213,7 @@
         "name": "Motorway Link"
     },
     "highway/path": {
-        "icon": "highway-footway",
+        "icon": "highway-path",
         "fields": [
             "oneway",
             "structure",
@@ -1289,6 +1289,24 @@
         },
         "terms": [],
         "name": "Residential Road"
+    },
+    "highway/road": {
+        "icon": "highway-road",
+        "fields": [
+            "oneway",
+            "structure",
+            "access",
+            "maxspeed",
+            "surface"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "road"
+        },
+        "terms": [],
+        "name": "Unknown Road"
     },
     "highway/secondary": {
         "icon": "highway-secondary",
@@ -1497,7 +1515,7 @@
         "name": "Turning Circle"
     },
     "highway/unclassified": {
-        "icon": "highway",
+        "icon": "highway-unclassified",
         "fields": [
             "oneway",
             "structure",
@@ -2529,7 +2547,7 @@
             "structure"
         ],
         "terms": [],
-        "name": "Abandoned railway"
+        "name": "Abandoned Railway"
     },
     "railway/disused": {
         "icon": "railway-disused",
@@ -2543,7 +2561,7 @@
             "structure"
         ],
         "terms": [],
-        "name": "Disused railway"
+        "name": "Disused Railway"
     },
     "railway/level_crossing": {
         "icon": "cross",

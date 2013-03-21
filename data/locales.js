@@ -729,6 +729,10 @@ locale.en = {
                 "name": "Residential Road",
                 "terms": ""
             },
+            "highway/road": {
+                "name": "Unknown Road",
+                "terms": ""
+            },
             "highway/secondary": {
                 "name": "Secondary Road",
                 "terms": ""
@@ -1086,11 +1090,11 @@ locale.en = {
                 "terms": ""
             },
             "railway/abandoned": {
-                "name": "Abandoned railway",
+                "name": "Abandoned Railway",
                 "terms": ""
             },
             "railway/disused": {
-                "name": "Disused railway",
+                "name": "Disused Railway",
                 "terms": ""
             },
             "railway/level_crossing": {

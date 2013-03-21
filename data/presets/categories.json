@@ -1,6 +1,5 @@
 [{
     "geometry": "line",
-    "icon": "highway",
     "id": "Road",
     "icon": "category-roads",
     "members": [
@@ -11,7 +10,46 @@
         "highway/secondary",
         "highway/tertiary",
         "highway/unclassified",
+        "highway/motorway_link",
+        "highway/trunk_link",
+        "highway/primary_link",
+        "highway/secondary_link",
+        "highway/tertiary_link",
         "highway/service",
-        "highway/track"
+        "highway/track",
+        "highway/road"
+    ]
+}, {
+    "geometry": "line",
+    "id": "Rail",
+    "icon": "railway-rail",
+    "members": [
+        "railway/rail",
+        "railway/subway",
+        "railway/tram",
+        "railway/monorail",
+        "railway/disused",
+        "railway/abandoned"
+    ]
+}, {
+    "geometry": "line",
+    "id": "Path",
+    "icon": "highway-path",
+    "members": [
+        "highway/footway",
+        "highway/cycleway",
+        "highway/bridleway",
+        "highway/path",
+        "highway/steps"
+    ]
+}, {
+    "geometry": "line",
+    "id": "Water",
+    "icon": "waterway-river",
+    "members": [
+        "waterway/river",
+        "waterway/stream",
+        "waterway/canal",
+        "waterway/ditch"
     ]
 }]
