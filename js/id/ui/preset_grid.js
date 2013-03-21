@@ -12,7 +12,7 @@ iD.ui.PresetGrid = function(context, entity) {
         presets = context.presets().matchGeometry(entity, context.graph());
 
         var messagewrap = selection.append('div')
-            .attr('class', 'message fillL');
+            .attr('class', 'header fillL cf');
 
         var message = messagewrap.append('h3')
             .attr('class', 'inspector-inner fl')
@@ -20,13 +20,13 @@ iD.ui.PresetGrid = function(context, entity) {
 
         if (preset) {
             messagewrap.append('button')
-                .attr('class', 'tooltip-bottom preset-choose fr')
+                .attr('class', 'preset-choose')
                 .on('click', event.choose)
                 .append('span')
                 .attr('class', 'icon forward');
         } else {
             messagewrap.append('button')
-                .attr('class', 'tooltip-bottom preset-close fr')
+                .attr('class', 'close')
                 .on('click', event.close)
                 .append('span')
                 .attr('class', 'icon close');

@@ -28,21 +28,29 @@ iD.ui.Commit = function(context) {
         var changes = selection.datum(),
             connection = changes.connection,
             user = connection.user(),
-            header = selection.append('div').attr('class', 'header modal-section fillL'),
+            header = selection.append('div').attr('class', 'header modal-section'),
             body = selection.append('div').attr('class', 'body');
 
-        header.append('h2')
+        header.append('h3')
             .text(t('commit.title'));
 
+        // Comment Section
         var commentSection = body.append('div')
-            .attr('class', 'modal-section fillD');
+            .attr('class', 'modal-section preset-field');
 
-        var commentField = commentSection.append('textarea')
-            .attr('class', 'changeset-comment')
-            .attr('placeholder', t('commit.description_placeholder'))
-            .property('value',  context.storage('comment') || '');
+            commentSection.append('h4')
+                .attr('for','input-commit-note')
+                .text(t('commit.message_label'));
+
+        var commentField = commentSection
+                .append('textarea')
+                .attr('placeholder', t('commit.description_placeholder'))
+                .property('value',  context.storage('comment') || '');
 
         commentField.node().select();
+
+        // Save Section
+        var saveSection = body.append('div').attr('class','modal-section cf');
 
         var userLink = d3.select(document.createElement('div'));
 
@@ -58,18 +66,14 @@ iD.ui.Commit = function(context) {
             .attr('href', connection.url() + '/user/' + user.display_name)
             .attr('target', '_blank');
 
-        commentSection.append('p')
+        saveSection.append('p')
             .attr('class', 'commit-info')
             .html(t('commit.upload_explanation', {user: userLink.html()}));
 
         // Confirm / Cancel Buttons
-        var buttonWrap = commentSection.append('div')
-            .attr('class', 'buttons cf')
-            .append('div')
-            .attr('class', 'button-wrap joined col4');
 
-        var saveButton = buttonWrap.append('button')
-            .attr('class', 'save action col6 button')
+        var saveButton = saveSection.append('button')
+            .attr('class', 'action col3 button')
             .on('click.save', function() {
                 var comment = commentField.node().value;
                 localStorage.comment = comment;
@@ -82,21 +86,11 @@ iD.ui.Commit = function(context) {
             .attr('class', 'label')
             .text(t('commit.save'));
 
-        var cancelButton = buttonWrap.append('button')
-            .attr('class', 'cancel col6 button')
-            .on('click.cancel', function() {
-                event.cancel();
-            });
-
-        cancelButton.append('span')
-            .attr('class', 'label')
-            .text(t('commit.cancel'));
-
         var warnings = body.selectAll('div.warning-section')
             .data(iD.validate(changes, context.graph()))
             .enter()
             .append('div')
-            .attr('class', 'modal-section warning-section fillL');
+            .attr('class', 'modal-section warning-section fillL2');
 
         warnings.append('h3')
             .text(t('commit.warnings'));
