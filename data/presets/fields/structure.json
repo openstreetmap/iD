@@ -1,6 +1,6 @@
 {
     "type": "radio",
-    "options": [
+    "keys": [
         "bridge",
         "tunnel",
         "embankment",
