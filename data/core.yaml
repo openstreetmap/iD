@@ -165,6 +165,7 @@ en:
     text: "This is development version {version}. For more information see {website} and report bugs at {github}."
   source_switch:
     live: live
+    lose_changes: "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?"
     dev: dev
   tag_reference:
     description: Description

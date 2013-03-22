@@ -4,7 +4,44 @@ iD.ui.Help = function(context) {
 
     function help(selection) {
 
-        var shown = false;
+        var shown = false, pane;
+
+        function setup() {
+            pane = context.container()
+                .select('.help-wrap')
+                .html('');
+
+            var toc = pane.append('div')
+                .attr('class', 'toc')
+                .append('ul');
+
+            function clickHelp(d) {
+                doctitle.text(d.title);
+                body.html(d.html);
+                body.selectAll('a')
+                    .attr('target', '_blank');
+                menuItems.classed('selected', function(m) {
+                    return m.title === d.title;
+                });
+            }
+
+            var menuItems = toc.selectAll('li')
+                .data(iD.data.doc)
+                .enter()
+                .append('li')
+                .append('a')
+                .text(function(d) { return d.title; })
+                .on('click', clickHelp);
+
+            var content = pane.append('div')
+                    .attr('class', 'left-content'),
+                doctitle = content.append('h2')
+                    .text(t('help.title')),
+                body = content.append('div')
+                    .attr('class', 'body');
+
+            clickHelp(iD.data.doc[0]);
+        }
 
         function hide() { setVisible(false); }
         function toggle() {
@@ -17,62 +54,22 @@ iD.ui.Help = function(context) {
             if (show !== shown) {
                 button.classed('active', show);
                 shown = show;
-
-                var pane = context.container()
-                    .select('.help-wrap');
-
                 if (show) {
-
+                    function blockClick() {
+                        pane.on('mousedown.help-inside', function() {
+                            return d3.event.stopPropagation();
+                        });
+                        selection.on('mousedown.help-inside', function() {
+                            return d3.event.stopPropagation();
+                        });
+                    }
                     pane.style('display', 'block')
                         .style('left', '-500px')
                         .transition()
                         .duration(200)
                         .style('left', '0px')
-                        .each('end', function() {
-
-                            pane.html('');
-
-                            var toc = pane.append('div')
-                                .attr('class', 'toc')
-                                .append('ul');
-
-                            function clickHelp(d) {
-                                doctitle.text(d.title);
-                                body.html(d.html);
-                                body.selectAll('a')
-                                    .attr('target', '_blank');
-                                menuItems.classed('selected', function(m) {
-                                    return m.title === d.title;
-                                });
-                            }
-
-                            var menuItems = toc.selectAll('li')
-                                .data(iD.data.doc)
-                                .enter()
-                                .append('li')
-                                .append('a')
-                                .text(function(d) { return d.title; })
-                                .on('click', clickHelp);
-
-                            var content = pane.append('div')
-                                    .attr('class', 'left-content'),
-                                doctitle = content.append('h2')
-                                    .text(t('help.title')),
-                                body = content.append('div')
-                                    .attr('class', 'body');
-
-                            clickHelp(iD.data.doc[0]);
-
-                            pane.on('mousedown.help-inside', function() {
-                                return d3.event.stopPropagation();
-                            });
-                            selection.on('mousedown.help-inside', function() {
-                                return d3.event.stopPropagation();
-                            });
-                        });
-
+                        .each('end', blockClick);
                 } else {
-
                     pane.style('left', '0px')
                         .transition()
                         .duration(200)
@@ -80,7 +77,6 @@ iD.ui.Help = function(context) {
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });
-
                     pane.on('mousedown.help-inside', null);
                 }
             }
@@ -101,6 +97,8 @@ iD.ui.Help = function(context) {
 
         context.surface().on('mousedown.help-outside', hide);
         context.container().on('mousedown.b.help-outside', hide);
+
+        setup();
 
         var keybinding = d3.keybinding('help');
         keybinding.on(key, toggle);

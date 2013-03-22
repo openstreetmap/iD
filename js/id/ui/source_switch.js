@@ -2,6 +2,9 @@ iD.ui.SourceSwitch = function(context) {
     function click() {
         d3.event.preventDefault();
 
+        if (context.history().hasChanges() &&
+            !window.confirm(t('source_switch.lose_changes'))) return;
+
         var live = d3.select(this).classed('live');
 
         context.connection()

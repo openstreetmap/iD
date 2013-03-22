@@ -2158,7 +2158,8 @@ a.success-action.twitter:before {
   only screen and (-o-min-device-pixel-ratio: 3/2),
   only screen and (min--moz-device-pixel-ratio: 1.5),
   only screen and (min-device-pixel-ratio: 1.5) {
-  .icon {
+  .map-control .icon,
+  .button-wrap .icon {
     background-image: url(../img/sprite2x.png);
     background-size: 500px 320px;
   }
