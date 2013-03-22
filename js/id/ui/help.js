@@ -36,22 +36,32 @@ iD.ui.Help = function(context) {
                                 .attr('class', 'toc')
                                 .append('ul');
 
-                            toc
-                                .selectAll('li')
+                            function clickHelp(d) {
+                                doctitle.text(d.title);
+                                body.html(d.html);
+                                body.selectAll('a')
+                                    .attr('target', '_blank');
+                                menuItems.classed('selected', function(m) {
+                                    return m.title === d.title;
+                                });
+                            }
+
+                            var menuItems = toc.selectAll('li')
                                 .data(iD.data.doc)
                                 .enter()
                                 .append('li')
                                 .append('a')
                                 .text(function(d) { return d.title; })
-                                .on('click', function(d) {
-                                    doctitle.text(d.title);
-                                    body.html(d.html);
-                                });
+                                .on('click', clickHelp);
 
-                            var doctitle = pane.append('h2')
+                            var content = pane.append('div')
+                                    .attr('class', 'left-content'),
+                                doctitle = content.append('h2')
                                     .text(t('help.title')),
-                                body = pane.append('div')
+                                body = content.append('div')
                                     .attr('class', 'body');
+
+                            clickHelp(iD.data.doc[0]);
 
                             pane.on('mousedown.help-inside', function() {
                                 return d3.event.stopPropagation();

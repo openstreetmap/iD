@@ -1,4 +1,4 @@
-# Mapping Buildings
+# Buildings
 
 OpenStreetMap is the world's largest database of buildings. You can create
 and improve this database.

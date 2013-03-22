@@ -1,4 +1,4 @@
-# Mapping Roads
+# Roads
 
 You can create, fix, and delete roads with this editor. Roads can be all
 kinds: paths, highways, trails, cycleways, and more - any often-crossed

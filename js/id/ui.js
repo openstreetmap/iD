@@ -54,7 +54,7 @@ iD.ui = function(context) {
 
         container.append('div')
             .style('display', 'none')
-            .attr('class', 'help-wrap col4');
+            .attr('class', 'help-wrap col6');
 
         container.append('div')
             .attr('class', 'map-control zoombuttons')

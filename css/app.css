@@ -1537,25 +1537,52 @@ div.combobox {
 }
 
 .help-wrap {
-    background:#fff;
+    background:#f1f1f1;
     position: absolute;
     height: 100%;
     top:60px;
-    padding-left:50px;
-    padding-top:20px;
+    padding-left:40px;
+    padding-top:10px;
     padding-right:20px;
     padding-bottom:150px;
     left: 0;
     overflow-y: scroll;
 }
 
-.help-wrap .body p {
+.help-wrap .left-content {
+    background: #fff;
+    margin-right:130px;
+    border-radius: 4px;
+    padding:10px;
+}
+
+.help-wrap .left-content .body p {
     padding: 0 0 5px 0;
 }
 
-.help-wrap .body p code {
+.help-wrap .left-content .body p code {
     padding:2px 4px;
     background:#eee;
+}
+
+.help-wrap .toc {
+    width:120px;
+    float:right;
+}
+
+.help-wrap .toc li {
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding:2px;
+}
+
+.help-wrap .toc a.selected {
+    color:#222;
+}
+
+.help-wrap .toc li:last-child {
+    font-weight: bold;
+    border: 0;
 }
 
 /* Map
