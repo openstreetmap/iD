@@ -6,7 +6,8 @@ iD.ui.preset.combo = function(field) {
 
     function combo(selection) {
 
-        wrap = this.append('span').attr('class', 'input-wrap-position');
+        wrap = selection.append('span')
+            .attr('class', 'input-wrap-position');
 
         input = wrap.append('input')
             .attr('type', 'text')
