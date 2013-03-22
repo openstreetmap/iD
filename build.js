@@ -55,7 +55,7 @@ function generateDocumentation() {
             title = text.split('\n')[0]
                 .replace('#', '').trim();
         docs.push({
-            text: marked(text),
+            html: marked(text),
             title: title
         });
     });

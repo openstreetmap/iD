@@ -1523,8 +1523,30 @@ div.combobox {
 }
 
 .geolocate-control button {
+}
+
+/* Help */
+
+.help-control {
+    top:270px;
+}
+
+.help-control button {
     border-radius: 0 0 4px 0;
     border-bottom: 0;
+}
+
+.help-wrap {
+    background:#fff;
+    position: absolute;
+    height: 100%;
+    top:60px;
+    padding-left:50px;
+    padding-top:20px;
+    padding-right:20px;
+    padding-bottom:60px;
+    left: 0;
+    overflow-y: scroll;
 }
 
 /* Map
