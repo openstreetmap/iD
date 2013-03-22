@@ -206,7 +206,7 @@ locale.en = {
     },
     "source_switch": {
         "live": "live",
-        "lose_changes": "You have unsaved changes. Switching the map server will discard them. Are you sure you want to swith servers?",
+        "lose_changes": "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?",
         "dev": "dev"
     },
     "tag_reference": {
