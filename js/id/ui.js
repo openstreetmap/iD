@@ -53,6 +53,10 @@ iD.ui = function(context) {
             .call(iD.ui.Spinner(context));
 
         container.append('div')
+            .style('display', 'none')
+            .attr('class', 'help-wrap col6');
+
+        container.append('div')
             .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));
 
@@ -67,6 +71,10 @@ iD.ui = function(context) {
         container.append('div')
             .attr('class', 'map-control geolocate-control')
             .call(iD.ui.Geolocate(map));
+
+        container.append('div')
+            .attr('class', 'map-control help-control')
+            .call(iD.ui.Help(context));
 
         container.append('div')
             .style('display', 'none')
