@@ -70,7 +70,17 @@ iD.ui.preset = function(context, entity) {
 
         sections.append('h4')
             .attr('for', function(d) { return 'input-' + d.key; })
-            .text(function(d) { return d.label(); });
+            .text(function(d) { return d.label(); })
+            .append('button')
+                .attr('class', 'fr icon undo modified-icon')
+                .on('click', function(d) {
+                    var original = context.graph().base().entities[entity.id];
+                    var t = {};
+                    (d.keys || [d.key]).forEach(function(key) {
+                        t[key] = original ? original.tags[key] : undefined;
+                    });
+                    event.change(t);
+                });
 
         sections.transition()
             .style('opacity', 1);

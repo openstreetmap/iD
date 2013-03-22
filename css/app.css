@@ -918,6 +918,18 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #eef0ff;
 }
 
+.preset-field h4 .modified-icon {
+    opacity: 0.2;
+    display: none;
+    pointer-events: all;
+}
+.preset-field h4 .modified-icon:hover {
+    opacity: 0.5;
+}
+.preset-field.modified h4 .modified-icon {
+    display: inline-block;
+}
+
 .preset-field h4[for*="input-"] {
     border: 1px solid #cfcfcf;
     padding: 5px 10px;
