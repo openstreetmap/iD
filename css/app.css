@@ -833,14 +833,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-bottom-color: #eee;
     width: 0;
     height: 0;
-    margin-left: 50px;
+    margin-left: 33.3333%;
+    margin-left: -webkit-calc(16.6666% - 10px);
+    margin-left: calc(16.6666% - 10px);
     margin-top: -10px;
 }
 .subgrid.arrow-1 .arrow {
-    margin-left: 165px;
+    margin-left: 50%;
+    margin-left: -webkit-calc(50% - 10px);
+    margin-left: calc(50% - 10px);
 }
+
 .subgrid.arrow-2 .arrow {
     margin-left: 280px;
+    margin-left: -webkit-calc(84.4444% - 10px);
+    margin-left: calc(84.4444% - 10px);
 }
 
 .show-more {
