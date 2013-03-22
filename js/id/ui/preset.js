@@ -69,7 +69,7 @@ iD.ui.preset = function(context, entity) {
             });
 
         sections.append('label')
-            .attr('class', 'preset-label')
+            .attr('class', 'form-label')
             .attr('for', function(field) { return 'preset-input-' + field.id; })
             .text(function(field) { return field.label(); })
             .append('button')

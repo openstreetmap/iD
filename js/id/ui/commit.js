@@ -38,8 +38,8 @@ iD.ui.Commit = function(context) {
         var commentSection = body.append('div')
             .attr('class', 'modal-section preset-field');
 
-            commentSection.append('h4')
-                .attr('for','input-commit-note')
+            commentSection.append('label')
+                .attr('class','form-label')
                 .text(t('commit.message_label'));
 
         var commentField = commentSection

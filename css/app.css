@@ -71,11 +71,9 @@ h4:last-child { margin-bottom: 0;}
 
 h3 {
     font-size: 16px;
-    line-height: 1.3333;
+    line-height: 1.25;
     font-weight: bold;
     margin-bottom: 10px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 h4 {
@@ -389,10 +387,10 @@ button.action:hover {
     background: #597BE7;
 }
 
-button.delete {
+button.cancel {
     background-color: #ff7070;
 }
-button.delete:hover {
+button.cancel:hover {
     background-color: #ef5454;
 }
 
@@ -573,11 +571,16 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .header {
     border-bottom: 1px solid #ccc;
     z-index: 2;
+    height: 60px;
     position: relative;
 }
 
 .header h3 {
+    margin-right: 40px;
     margin-bottom: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .modal > button,
@@ -593,7 +596,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .modal > button {
-    height: 61px;
+    height: 59px;
     z-index: 3;
 }
 
@@ -636,6 +639,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-wrap .header button.preset-reset {
     border-right: 1px solid #CCC;
     position: relative;
+}
+
+.inspector-wrap .header button.preset-reset {
     width: 60px;
 }
 
@@ -669,7 +675,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .pane:last-child .header h3 {
     position: absolute;
     left: 60px;
-    right: 40px;
+    right: 0px;
 }
 
 .inspector-toggle {
@@ -927,7 +933,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     display: inline-block;
 }
 
-.preset-field .preset-label {
+.form-label {
     font-weight: bold;
     border: 1px solid #cfcfcf;
     padding: 5px 10px;
@@ -1004,12 +1010,13 @@ input[type=number] {
     float: left;
     height: 100%;
     width: 50%;
-    border: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
     border-radius: 0;
     border-left: 0;
 }
 
-.spin-control button.descend {
+.spin-control button.decrement {
     border-bottom-right-radius: 4px;
 }
 
@@ -1846,7 +1853,7 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 .modal a.success-action {
-    height: 180px;
+    height: 170px;
     border-bottom: 1px solid #CCC;
     text-align: center;
     -webkit-transition: all 200ms;
@@ -1868,7 +1875,7 @@ a.success-action:before {
     height: 100px;
     width: 100px;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background:transparent url(../img/sprite.png) no-repeat 0px -220px;
 }
 

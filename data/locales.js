@@ -188,7 +188,8 @@ locale.en = {
         "reset": "reset"
     },
     "restore": {
-        "description": "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        "heading": "You have unsaved changes",
+        "description": "Do you wish to restore changes from a previous editing session?",
         "restore": "Restore",
         "reset": "Reset"
     },
