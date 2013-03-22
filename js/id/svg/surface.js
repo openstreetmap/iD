@@ -5,6 +5,17 @@ iD.svg.Surface = function() {
         });
     }
 
+    function autosize(image) {
+        var img = document.createElement('img');
+        img.src = image.attr('xlink:href');
+        img.onload = function() {
+            image.attr({
+                width: img.width,
+                height: img.height
+            });
+        };
+    }
+
     function sprites(stylesheetName, selectorRegexp) {
         var sprites = [];
 
@@ -90,12 +101,9 @@ iD.svg.Surface = function() {
             .attr('height', function(d) { return d; });
 
         defs.append('image')
-            .attr({
-                id: 'sprite',
-                width: 460,
-                height: 320,
-                'xlink:href': 'img/sprite.png'
-            });
+            .attr('id', 'sprite')
+            .attr('xlink:href', 'img/sprite.png')
+            .call(autosize);
 
         defs.selectAll()
             .data(sprites("app.css", /^\.(icon-operation-[a-z0-9-]+)$/))
@@ -104,20 +112,10 @@ iD.svg.Surface = function() {
             .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })
             .attr('xlink:href', '#sprite');
 
-        var image = defs.append('image')
-            .attr({
-                id: 'maki-sprite',
-                'xlink:href': 'img/feature-icons.png'
-            });
-
-        var img = document.createElement('img');
-        img.src = 'img/feature-icons.png';
-        img.onload = function() {
-            image.attr({
-                width: img.width,
-                height: img.height
-            });
-        };
+        defs.append('image')
+            .attr('id', 'maki-sprite')
+            .attr('xlink:href', 'img/feature-icons.png')
+            .call(autosize);
 
         defs.selectAll()
             .data(sprites("feature-icons.css", /^\.(feature-[a-z0-9-]+-(12|18))$/))
