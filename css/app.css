@@ -493,6 +493,7 @@ button[disabled] .label {
 .icon.plus       { background-position: -240px 0px;}
 .icon.search     { background-position: -280px 0px;}
 .icon.geocode    { background-position: -280px 0px;}
+.icon.help       { background-position: -460px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
@@ -1527,8 +1528,66 @@ div.combobox {
 }
 
 .geolocate-control button {
+}
+
+/* Help */
+
+.help-control {
+    top:270px;
+}
+
+.help-control button {
     border-radius: 0 0 4px 0;
     border-bottom: 0;
+}
+
+.help-wrap {
+    background:#f1f1f1;
+    position: absolute;
+    height: 100%;
+    top:60px;
+    padding-left:40px;
+    padding-top:10px;
+    padding-right:20px;
+    padding-bottom:150px;
+    left: 0;
+    overflow-y: scroll;
+}
+
+.help-wrap .left-content {
+    background: #fff;
+    margin-right:130px;
+    border-radius: 4px;
+    padding:10px;
+}
+
+.help-wrap .left-content .body p {
+    padding: 0 0 5px 0;
+}
+
+.help-wrap .left-content .body p code {
+    padding:2px 4px;
+    background:#eee;
+}
+
+.help-wrap .toc {
+    width:120px;
+    float:right;
+}
+
+.help-wrap .toc li {
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding:2px;
+}
+
+.help-wrap .toc a.selected {
+    color:#222;
+}
+
+.help-wrap .toc li:last-child {
+    font-weight: bold;
+    border: 0;
 }
 
 /* Map
@@ -2093,6 +2152,16 @@ a.success-action.twitter:before {
 }
 
 @media only screen and (max-height: 840px) {
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (-o-min-device-pixel-ratio: 3/2),
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) {
+  .icon {
+    background-image: url(../img/sprite2x.png);
+    background-size: 500px 320px;
+  }
 }
 
 /* Scrollbars
