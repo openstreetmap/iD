@@ -6,7 +6,7 @@ iD.ui.Restore = function(context) {
         var modal = iD.ui.modal(selection);
 
         modal.select('.modal')
-            .attr('class', 'modal-splash modal');
+            .attr('class', 'modal-splash modal fillL');
 
         var introModal = modal.select('.content');
 

@@ -94,88 +94,24 @@ iD.ui.Taglist = function(context, entity) {
         removeBtn.append('span')
             .attr('class', 'icon delete');
 
-        function findLocal(docs) {
-            var locale = iD.detect().locale.toLowerCase(),
-                localized;
-
-            localized = _.find(docs, function(d) {
-                return d.lang.toLowerCase() === locale;
-            });
-            if (localized) return localized;
-
-            // try the non-regional version of a language, like
-            // 'en' if the language is 'en-US'
-            if (locale.indexOf('-') !== -1) {
-                var first = locale.split('-')[0];
-                localized = _.find(docs, function(d) {
-                    return d.lang.toLowerCase() === first;
-                });
-                if (localized) return localized;
-            }
-
-            // finally fall back to english
-            return _.find(docs, function(d) {
-                return d.lang.toLowerCase() === 'en';
-            });
-        }
-
-        function keyValueReference(err, docs) {
-            var local;
-            if (!err && docs) {
-                local = findLocal(docs);
-            }
-            if (local) {
-                var types = [];
-                if (local.on_area) types.push('area');
-                if (local.on_node) types.push('point');
-                if (local.on_way) types.push('line');
-                local.types = types;
-                iD.ui.modal(context.container())
-                    .select('.content')
-                    .datum(local)
-                    .call(iD.ui.tagReference);
-            } else {
-                iD.ui.flash(context.container())
-                    .select('.content')
-                    .append('h3')
-                    .text(t('inspector.no_documentation_combination'));
-            }
-        }
-
-        function keyReference(err, values, params) {
-            if (!err && values.length) {
-                iD.ui.modal(context.container())
-                    .select('.content')
-                    .datum({
-                        data: values,
-                        title: 'Key:' + params.key,
-                        geometry: params.geometry
-                    })
-                    .call(iD.ui.keyReference);
-            } else {
-                iD.ui.flash(context.container())
-                    .select('.content')
-                    .append('h3')
-                    .text(t('inspector.no_documentation_key'));
-            }
-        }
-
         var helpBtn = row.append('button')
             .attr('tabindex', -1)
             .attr('class', 'tag-help minor')
-            .on('click', function(d) {
-                var params = _.extend({}, d, {
-                    geometry: entity.geometry(context.graph())
-                });
-                if (d.key && d.value) {
-                    taginfo.docs(params, keyValueReference);
-                } else if (d.key) {
-                    taginfo.values(params, keyReference);
-                }
+            .on('click', function(tag) {
+                row.selectAll('div.tag-help')
+                    .style('display', 'none');
+
+                d3.select(d3.select(this).node().parentNode)
+                    .select('div.tag-help')
+                    .style('display', 'block')
+                    .call(iD.ui.TagReference(entity, tag));
             });
 
         helpBtn.append('span')
             .attr('class', 'icon inspect');
+
+        row.append('div')
+            .attr('class', 'tag-help');
 
         if (initial && tags.length === 1 &&
             tags[0].key === '' && tags[0].value === '') {

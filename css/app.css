@@ -1209,7 +1209,7 @@ div.combobox {
 .tag-row {
     width: 100%;
     position: relative;
-    height: 30px;
+    clear: both;
 }
 
 .tag-row input {
@@ -1253,6 +1253,10 @@ div.combobox {
 
 .tag-row button.tag-help {
     left: -20px
+}
+
+.tag-row div.tag-help {
+    display: hidden;
 }
 
 .tag-row:hover input.value,

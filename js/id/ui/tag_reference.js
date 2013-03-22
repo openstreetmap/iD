@@ -1,50 +1,62 @@
-iD.ui.tagReference = function(selection) {
-    selection.each(function() {
-        function g(x) { return function(d) { return d[x]; }; }
-        var selection = d3.select(this);
-        var header = selection.append('div')
-            .attr('class','modal-section fillL header')
-            .append('h3');
+iD.ui.TagReference = function(entity, tag) {
+    var taginfo = iD.taginfo();
 
-        header.selectAll('span.icon')
-            .data(g('types'))
-            .enter()
-            .append('span')
-            .attr('title', function(d) {
-                return t('tag_reference.used_with', {type: d});
-            })
-            .attr('class', function(d) {
-                return 'icon big icon-pre-text big-' + d;
+    function findLocal(docs) {
+        var locale = iD.detect().locale.toLowerCase(),
+            localized;
+
+        localized = _.find(docs, function(d) {
+            return d.lang.toLowerCase() === locale;
+        });
+        if (localized) return localized;
+
+        // try the non-regional version of a language, like
+        // 'en' if the language is 'en-US'
+        if (locale.indexOf('-') !== -1) {
+            var first = locale.split('-')[0];
+            localized = _.find(docs, function(d) {
+                return d.lang.toLowerCase() === first;
             });
-            header.append('span')
-                .text(g('title'));
-
-        var referenceBody = selection.append('div')
-            .attr('class','modal-section fillL2');
-
-        referenceBody
-            .append('h4')
-            .text(t('tag_reference.description'));
-
-        if (selection.datum().image) {
-            referenceBody
-                .append('img')
-                .attr('class', 'wiki-image')
-                .attr('src', selection.datum().image.image_url);
+            if (localized) return localized;
         }
 
-        referenceBody
-            .append('p')
-            .text(g('description'));
+        // finally fall back to english
+        return _.find(docs, function(d) {
+            return d.lang.toLowerCase() === 'en';
+        });
+    }
 
-        referenceBody
-            .append('a')
-            .attr('target', '_blank')
-            .attr('href', function(d) {
-                return 'http://wiki.openstreetmap.org/wiki/' + d.title;
-            })
-            .text(function(d) {
-                return t('tag_reference.on_wiki', {tag: d.title});
-            });
-    });
+    return function(selection) {
+        selection.html('');
+
+        taginfo.docs({key: tag.key}, function(err, docs) {
+            if (!err && docs) {
+                docs = findLocal(docs);
+            }
+
+            if (!docs || !docs.description) {
+                return selection.text(t('inspector.no_documentation_key'));
+            }
+
+            var referenceBody = selection.append('div')
+                .attr('class','modal-section fillL2');
+
+            if (docs.image && docs.image.thumb_url_prefix) {
+                referenceBody
+                    .append('img')
+                    .attr('class', 'wiki-image')
+                    .attr('src', docs.image.thumb_url_prefix + "100" + docs.image.thumb_url_suffix);
+            }
+
+            referenceBody
+                .append('p')
+                .text(docs.description);
+
+            referenceBody
+                .append('a')
+                .attr('target', '_blank')
+                .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title)
+                .text(t('inspector.reference'));
+        });
+    }
 };
