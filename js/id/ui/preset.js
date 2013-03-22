@@ -68,20 +68,34 @@ iD.ui.preset = function(context, entity) {
                 return 'preset-field preset-field-' + field.id + ' fillL inspector-inner col12';
             });
 
-        sections.append('label')
+
+        var label = sections.append('label')
             .attr('class', 'form-label')
             .attr('for', function(field) { return 'preset-input-' + field.id; })
-            .text(function(field) { return field.label(); })
-            .append('button')
-                .attr('class', 'fr icon undo modified-icon')
-                .on('click', function(field) {
-                    var original = context.graph().base().entities[entity.id];
-                    var t = {};
-                    (field.keys || [field.key]).forEach(function(key) {
-                        t[key] = original ? original.tags[key] : undefined;
-                    });
-                    event.change(t);
+            .text(function(field) { return field.label(); });
+
+        label.append('button')
+            .attr('class', 'fr icon undo modified-icon')
+            .on('click', function(field) {
+                var original = context.graph().base().entities[entity.id];
+                var t = {};
+                (field.keys || [field.key]).forEach(function(key) {
+                    t[key] = original ? original.tags[key] : undefined;
                 });
+                event.change(t);
+            });
+
+        label.append('button')
+            .attr('class', 'fr icon inspect')
+            .on('click', function(field) {
+                selection.selectAll('div.tag-help')
+                    .style('display', 'none');
+
+                d3.select(d3.select(this).node().parentNode.parentNode)
+                    .select('div.tag-help')
+                    .style('display', 'block')
+                    .call(iD.ui.TagReference(entity, {key: field.key}));
+            });
 
         sections.transition()
             .style('opacity', 1);
@@ -101,6 +115,9 @@ iD.ui.preset = function(context, entity) {
 
             d3.select(this).call(i);
         });
+
+        sections.append('div')
+            .attr('class', 'tag-help');
     }
 
     presets.rendered = function() {
