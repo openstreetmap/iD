@@ -1,21 +1,19 @@
 iD.ui.preset.combo = function(field) {
 
     var event = d3.dispatch('change', 'close'),
-        wrap,
         input;
 
     function combo(selection) {
+        var combobox = d3.combobox();
 
-        wrap = selection.append('span')
-            .attr('class', 'input-wrap-position');
-
-        input = wrap.append('input')
+        input = selection.append('input')
             .attr('type', 'text')
+            .attr('id', 'preset-input-' + field.id)
             .on('change', change)
             .on('blur', change);
 
-        var combobox = d3.combobox();
-        wrap.call(combobox);
+         selection
+            .call(combobox);
 
         if (field.options) {
             options(field.options);

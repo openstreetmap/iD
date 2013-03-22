@@ -11,11 +11,13 @@ iD.ui.preset.check = function(field) {
 
         selection.classed('checkselect', 'true');
 
-        label = selection.append('label');
+        label = selection.append('label')
+            .attr('class', 'preset-input-wrap');
 
         box = label.append('input')
             .property('indeterminate', true)
-            .attr('type', 'checkbox');
+            .attr('type', 'checkbox')
+            .attr('id', 'preset-input-' + field.id);
 
         text = label.append('span')
             .text('unknown')

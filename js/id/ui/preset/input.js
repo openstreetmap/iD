@@ -10,6 +10,7 @@ iD.ui.preset.url = function(field) {
     function i(selection) {
         input = selection.append('input')
             .attr('type', field.type)
+            .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder || '')
             .on('blur', change)
             .on('change', change)

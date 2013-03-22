@@ -68,15 +68,16 @@ iD.ui.preset = function(context, entity) {
                 return 'preset-field preset-field-' + field.id + ' fillL inspector-inner col12';
             });
 
-        sections.append('h4')
-            .attr('for', function(d) { return 'input-' + d.key; })
-            .text(function(d) { return d.label(); })
+        sections.append('label')
+            .attr('class', 'preset-label')
+            .attr('for', function(field) { return 'preset-input-' + field.id; })
+            .text(function(field) { return field.label(); })
             .append('button')
                 .attr('class', 'fr icon undo modified-icon')
-                .on('click', function(d) {
+                .on('click', function(field) {
                     var original = context.graph().base().entities[entity.id];
                     var t = {};
-                    (d.keys || [d.key]).forEach(function(key) {
+                    (field.keys || [field.key]).forEach(function(key) {
                         t[key] = original ? original.tags[key] : undefined;
                     });
                     event.change(t);
@@ -90,7 +91,7 @@ iD.ui.preset = function(context, entity) {
                 .on('close', event.close)
                 .on('change', event.change);
 
-            event.on('setTags.' + field.key || field.type, function (tags) {
+            event.on('setTags.' + field.id, function(tags) {
                 i.tags(_.clone(tags));
             });
 

@@ -41,15 +41,19 @@ iD.ui.preset.address = function(field, context) {
 
         function close() { return iD.behavior.accept().on('accept', event.close); }
 
-        housename = selection.append('input')
+        var wrap = selection.append('div')
+            .attr('class', 'preset-input-wrap');
+
+        housename = wrap.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.housename'))
             .attr('class', 'addr-housename')
+            .attr('id', 'preset-input-' + field.id)
             .on('blur', change)
             .on('change', change)
             .call(close());
 
-        housenumber = selection.append('input')
+        housenumber = wrap.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.number'))
             .attr('class', 'addr-number')
@@ -57,7 +61,7 @@ iD.ui.preset.address = function(field, context) {
             .on('change', change)
             .call(close());
 
-        var streetwrap = selection.append('span')
+        var streetwrap = wrap.append('span')
             .attr('class', 'input-wrap-position');
 
         street = streetwrap.append('input')
@@ -67,7 +71,7 @@ iD.ui.preset.address = function(field, context) {
             .on('blur', change)
             .on('change', change);
 
-        city = selection.append('input')
+        city = wrap.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.city'))
             .attr('class', 'addr-city')
