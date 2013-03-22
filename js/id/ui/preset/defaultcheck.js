@@ -7,7 +7,7 @@ iD.ui.preset.defaultcheck = function(field) {
 
         input = selection.append('input')
             .attr('type', 'checkbox')
-            .attr('id', 'input-' + field.key)
+            .attr('id', 'preset-input-' + field.id)
             .on('change', function() {
                 var t = {};
                 t[field.key] = input.property('checked') ? field.value || 'yes' : undefined;

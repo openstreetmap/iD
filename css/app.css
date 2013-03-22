@@ -147,6 +147,7 @@ input[type=email] {
     background-color: white;
     border:1px solid #ccc;
     padding:5px 10px;
+    height:30px;
     width: 100%;
     border-radius:4px;
     -webkit-transition: all 100ms;
@@ -157,11 +158,6 @@ input[type=email] {
 textarea:focus,
 input:focus {
     background-color: #F1F1F1;
-}
-
-input[type=text] {
-    padding:5px 10px;
-    height:30px;
 }
 
 input.major {
@@ -919,51 +915,47 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #eef0ff;
 }
 
-.preset-field h4 .modified-icon {
+.preset-field .modified-icon {
     opacity: 0.2;
     display: none;
     pointer-events: all;
 }
-.preset-field h4 .modified-icon:hover {
+.preset-field .modified-icon:hover {
     opacity: 0.5;
 }
-.preset-field.modified h4 .modified-icon {
+.preset-field.modified .modified-icon {
     display: inline-block;
 }
 
-.preset-field h4[for*="input-"] {
+.preset-field .preset-label {
+    font-weight: bold;
     border: 1px solid #cfcfcf;
     padding: 5px 10px;
     background: #f6f6f6;
-    position: absolute;
-    left: 20px;
-    right: 20px;
+    display: block;
     border-radius: 4px 4px 0 0;
-    pointer-events: none;
-    z-index: 2;
 }
 
-.preset-field h4 + input,
-h4 + .input-wrap-position input,
-h4 + .preset-input input:first-child {
-    padding-top: 35px;
-    height: 60px;
+.preset-field > input,
+.preset-field > textarea,
+.preset-field .preset-input-wrap {
+    border: 1px solid #CCC;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
 }
 
-.preset-field h4 + textarea {
-    padding-top: 35px;
-    height: 100px;
+.preset-field textarea {
+    height: 65px;
 }
 
-.preset-field h4[for="input-building:levels"],
-.preset-field h4[for="input-ele"],
-.preset-field.checkselect h4 {
-    right: 50%;
+.preset-field-levels,
+.preset-field-elevation,
+.preset-field.checkselect {
+    width: 60%;
 }
 
-.preset-field-name h4 + input {
-    padding-top: 35px;
-    height: 70px;
+.preset-field-name input {
+    height: 35px;
     font-size: 18px;
     font-weight: bold;
 }
@@ -998,7 +990,6 @@ button.preset-add-field {
 
 input[type=number] {
     position: relative;
-    width: 50%;
     padding-right: 65px;
 }
 
@@ -1049,14 +1040,11 @@ input[type=number] {
 
 /* preset form checkbox */
 
-.checkselect label {
+.checkselect label:last-of-type {
     display: block;
-    padding: 35px 5px 5px 5px;
-    border-radius: 4px;
-    margin-right: 50%;
+    padding: 5px;
     box-sizing: border-box;
     color: #999;
-    border: 1px solid #CCC;
 }
 
 .checkselect label:hover {
@@ -1082,11 +1070,8 @@ input[type=number] {
 
 .radio-wrap {
     display: block;
-    padding: 30px 0 0 0;
-    border-radius: 4px;
     box-sizing: border-box;
     color: #999;
-    border: 1px solid #CCC;
     overflow: hidden;
 }
 
@@ -1108,12 +1093,12 @@ input[type=number] {
 /* Preset form address */
 
 .preset-field .addr-housename {
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
+    border: none;
 }
 
 .preset-field .addr-number {
     width: 20%;
+    border-left: none;
     border-right: none;
     border-bottom: none;
     border-radius: 0;
@@ -1121,11 +1106,15 @@ input[type=number] {
 
 .preset-field .addr-street {
     width: 80%;
-    border-radius: 0;
+    border-right: none;
     border-bottom: none;
+    border-radius: 0;
 }
 
 .preset-field .addr-city {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
     border-radius: 0 0 4px 4px;
 }
 
