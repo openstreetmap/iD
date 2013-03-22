@@ -493,6 +493,7 @@ button[disabled] .label {
 .icon.plus       { background-position: -240px 0px;}
 .icon.search     { background-position: -280px 0px;}
 .icon.geocode    { background-position: -280px 0px;}
+.icon.help       { background-position: -460px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
@@ -2151,6 +2152,16 @@ a.success-action.twitter:before {
 }
 
 @media only screen and (max-height: 840px) {
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (-o-min-device-pixel-ratio: 3/2),
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) {
+  .icon {
+    background-image: url(../img/sprite2x.png);
+    background-size: 500px 320px;
+  }
 }
 
 /* Scrollbars
