@@ -232,6 +232,9 @@ locale.en = {
         "local_layer": "Local GPX file",
         "drag_drop": "Drag and drop a .gpx file on the page"
     },
+    "help": {
+        "title": "Help"
+    },
     "presets": {
         "fields": {
             "access": {

@@ -16,51 +16,62 @@ iD.ui.Help = function(context) {
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
-                if (!show) return;
+                shown = show;
 
-                var pane = context.container().select('.help-wrap');
-
-                pane
-                    .html('');
-
-                pane.style('display', 'block')
-                    .style('left', '-500px')
-                    .style('opacity', 1)
-                    .transition()
-                    .duration(200)
-                    .style('left', '0px');
+                var pane = context.container()
+                    .select('.help-wrap');
 
                 if (show) {
 
-                    pane.append('h4').text(t('help.title'));
+                    pane.style('display', 'block')
+                        .style('left', '-500px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '0px')
+                        .each('end', function() {
 
-                    var toc = pane.append('div')
-                        .attr('class', 'toc')
-                        .append('ul');
+                            pane.html('');
 
-                    toc
-                        .selectAll('li')
-                        .data(iD.data.doc)
-                        .enter()
-                        .append('li')
-                        .append('a')
-                        .text(function(d) { return d.title; })
-                        .on('click', function(d) {
-                            doctitle.text(d.title);
-                            console.log(d);
-                            body.html(d.html);
+                            var toc = pane.append('div')
+                                .attr('class', 'toc')
+                                .append('ul');
+
+                            toc
+                                .selectAll('li')
+                                .data(iD.data.doc)
+                                .enter()
+                                .append('li')
+                                .append('a')
+                                .text(function(d) { return d.title; })
+                                .on('click', function(d) {
+                                    doctitle.text(d.title);
+                                    body.html(d.html);
+                                });
+
+                            var doctitle = pane.append('h2')
+                                    .text(t('help.title')),
+                                body = pane.append('div')
+                                    .attr('class', 'body');
+
+                            pane.on('mousedown.help-inside', function() {
+                                return d3.event.stopPropagation();
+                            });
+                            selection.on('mousedown.help-inside', function() {
+                                return d3.event.stopPropagation();
+                            });
                         });
 
-                    var doctitle = pane.append('h3').text(t('help.title'));
-
-                    var body = pane.append('div')
-                        .attr('class', 'body');
-
-                    selection.on('mousedown.help-inside', function() {
-                        return d3.event.stopPropagation();
-                    });
                 } else {
-                    selection.on('mousedown.help-inside', null);
+
+                    pane.style('left', '0px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '-500px')
+                        .each('end', function() {
+                            d3.select(this).style('display', 'none');
+                        });
+
+                    pane.on('mousedown.help-inside', null);
                 }
             }
         }

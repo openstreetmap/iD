@@ -1544,9 +1544,18 @@ div.combobox {
     padding-left:50px;
     padding-top:20px;
     padding-right:20px;
-    padding-bottom:60px;
+    padding-bottom:150px;
     left: 0;
     overflow-y: scroll;
+}
+
+.help-wrap .body p {
+    padding: 0 0 5px 0;
+}
+
+.help-wrap .body p code {
+    padding:2px 4px;
+    background:#eee;
 }
 
 /* Map

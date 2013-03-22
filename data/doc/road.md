@@ -4,7 +4,7 @@ You can create, fix, and delete roads with this editor. Roads can be all
 kinds: paths, highways, trails, cycleways, and more - any often-crossed
 segment should be mappable.
 
-## Selecting
+### Selecting
 
 Click on a road to select it. An outline should become visible, along
 with a small tools menu on the map and a sidebar showing more information
@@ -28,7 +28,7 @@ and essential for providing driving directions.
 You can also click the 'Move' tool or type `M` to move the entire road at
 one time, and then click again to save that movement.
 
-## Deleting
+### Deleting
 
 If a road is entirely incorrect - you can see that it doesn't exist in satellite
 imagery and ideally have confirmed locally that it's not present - you can delete
@@ -39,7 +39,7 @@ is often out of date, so the road could simply be newly built.
 You can delete a road by clicking on it to select it, then clicking the
 trash can icon or pressing the 'Delete' key.
 
-## Creating
+### Creating
 
 Found somewhere there should be a road but there isn't? Click the 'Line'
 icon in the top-left of the editor or press the key '2' to start drawing

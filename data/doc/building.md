@@ -3,13 +3,13 @@
 OpenStreetMap is the world's largest database of buildings. You can create
 and improve this database.
 
-## Selecting
+### Selecting
 
 You can select a building by clicking on its border. This will highlight the
 building and open a small tools menu and a sidebar showing more information
 about the building.
 
-## Modifying
+### Modifying
 
 Sometimes buildings are incorrectly placed or have incorrect tags.
 
@@ -19,7 +19,7 @@ mouse to shift the building, and click when it's correctly placed.
 To fix the specific shape of a building, click and drag the points that form
 its border into better places.
 
-## Creating
+### Creating
 
 One of the main questions around adding buildings to the map is that
 OpenStreetMap records buildings both as shapes and points. The rule of thumb
@@ -31,7 +31,7 @@ Start drawing a building as a shape by clicking the 'Area' button in the top
 left of the interface, and end it either by pressing 'Return' on your keyboard
 or clicking on the first point drawn to close the shape.
 
-## Deleting
+### Deleting
 
 If a building is entirely incorrect - you can see that it doesn't exist in satellite
 imagery and ideally have confirmed locally that it's not present - you can delete
