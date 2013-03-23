@@ -25,12 +25,8 @@ iD.ui.Taglist = function(context, entity) {
             .attr('class', 'tag-list');
 
         var newTag = wrap.append('button')
-            .attr('class', 'add-tag col6');
-
-        newTag.on('click', function() {
-            addTag();
-            focusNewKey();
-        });
+            .attr('class', 'add-tag col6')
+            .on('click', addTag);
 
         newTag.append('span')
             .attr('class', 'icon plus');
@@ -85,15 +81,14 @@ iD.ui.Taglist = function(context, entity) {
 
         row.each(bindTypeahead);
 
-        var removeBtn = row.append('button')
+        row.append('button')
             .attr('tabindex', -1)
             .attr('class','remove minor')
-            .on('click', removeTag);
-
-        removeBtn.append('span')
+            .on('click', removeTag)
+            .append('span')
             .attr('class', 'icon delete');
 
-        var helpBtn = row.append('button')
+        row.append('button')
             .attr('tabindex', -1)
             .attr('class', 'tag-help minor')
             .on('click', function(tag) {
@@ -104,9 +99,8 @@ iD.ui.Taglist = function(context, entity) {
                     .select('div.tag-help')
                     .style('display', 'block')
                     .call(iD.ui.TagReference(entity, tag));
-            });
-
-        helpBtn.append('span')
+            })
+            .append('span')
             .attr('class', 'icon inspect');
 
         row.append('div')
@@ -120,7 +114,6 @@ iD.ui.Taglist = function(context, entity) {
             list.selectAll('li:last-child input.value').node() === this &&
             !d3.event.shiftKey) {
             addTag();
-            focusNewKey();
             d3.event.preventDefault();
         }
     }
@@ -170,14 +163,11 @@ iD.ui.Taglist = function(context, entity) {
             }));
     }
 
-    function focusNewKey() {
-        list.selectAll('li:last-child input.key').node().focus();
-    }
-
     function addTag() {
         var tags = taglist.tags();
         tags[''] = '';
         drawTags(tags);
+        list.selectAll('li:last-child input.key').node().focus();
     }
 
     function removeTag(d) {
