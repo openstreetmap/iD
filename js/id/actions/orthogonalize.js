@@ -6,29 +6,46 @@ iD.actions.Orthogonalize = function(wayId, projection) {
     var action = function(graph) {
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
-            points = nodes.map(function(n) { return projection(n.loc); }),
-            best, i, j;
+            points, best, i, j, score, corner;
 
-        var score = squareness();
+        corner = {i: 0, dotp: 1}; //corner closest to 90
+
+        if(nodes.length == 4) {
+            points = _.uniq(nodes).map(function(n) { return projection(n.loc); });
+        } else {
+            points = nodes.map(function(n) { return projection(n.loc); });
+            score = squareness();
+        }
+
         for (i = 0; i < 1000; i++) {
             var motions = points.map(stepMap);
-            for (j = 0; j < motions.length; j++) {
-                points[j] = addPoints(points[j],motions[j]);
-            }
-            var newScore = squareness();
-            if (newScore < score) {
-                best = _.clone(points);
-                score = newScore;
+            if(nodes.length == 4) {
+                points[corner.i] = addPoints(points[corner.i],motions[corner.i]);
+                score = corner.dotp;
+            } else {
+                for (j = 0; j < motions.length; j++) {
+                    points[j] = addPoints(points[j],motions[j]);
+                }
+                var newScore = squareness();
+                if (newScore < score) {
+                    best = _.clone(points);
+                    score = newScore;
+                }
             }
             if (score < 1.0e-8) {
                 break;
             }
         }
-        points = best;
 
-        for (i = 0; i < points.length - 1; i++) {
-            graph = graph.replace(graph.entity(nodes[i].id)
+        if(nodes.length == 4) {
+                graph = graph.replace(graph.entity(nodes[corner.i].id)
+                .move(projection.invert(points[corner.i])));
+        } else {
+            points = best;
+            for (i = 0; i < points.length - 1; i++) {
+                graph = graph.replace(graph.entity(nodes[i].id)
                 .move(projection.invert(points[i])));
+            }
         }
 
         return graph;
@@ -44,9 +61,17 @@ iD.actions.Orthogonalize = function(wayId, projection) {
             q = normalizePoint(q, 1.0);
 
             var dotp = p[0] * q[0] + p[1] * q[1];
-            // nasty hack to deal with almost-straight segments (angle is closer to 180 than to 90/270).
-            if (dotp < -0.707106781186547) {
-                dotp += 1.0;
+
+            if(nodes.length == 4) { 
+                if( Math.abs(dotp) < corner.dotp){
+                    corner.i = i;
+                    corner.dotp = Math.abs(dotp);
+                }
+            } else {
+                // nasty hack to deal with almost-straight segments (angle is closer to 180 than to 90/270).
+                if (dotp < -0.707106781186547) {
+                    dotp += 1.0;
+                }
             }
 
             return normalizePoint(addPoints(p, q), 0.1 * dotp * scale);
