@@ -1,7 +1,6 @@
 iD.ui.Taglist = function(context, entity) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
-        initial = false,
         collapsebutton,
         list;
 
@@ -112,11 +111,6 @@ iD.ui.Taglist = function(context, entity) {
 
         row.append('div')
             .attr('class', 'tag-help');
-
-        if (initial && tags.length === 1 &&
-            tags[0].key === '' && tags[0].value === '') {
-            focusNewKey();
-        }
 
         return li;
     }
