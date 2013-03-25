@@ -44,7 +44,10 @@ iD.ui.preset = function(context, entity) {
         }
 
         function addForm(d) {
-            draw(formwrap, [d]);
+            var field = draw(formwrap, [d]);
+
+            var input = field.selectAll('input, textarea').node();
+            if (input) input.focus();
 
             d3.select(this)
                 .style('opacity', 1)
@@ -113,13 +116,12 @@ iD.ui.preset = function(context, entity) {
             keys = keys.concat(field.key ? [field.key] : field.keys);
 
             d3.select(this).call(i);
-
-            var input = d3.select(this).selectAll('input, textarea').node();
-            if (input) input.focus();
         });
 
         sections.append('div')
             .attr('class', 'tag-help');
+
+        return sections;
     }
 
     presets.rendered = function() {
