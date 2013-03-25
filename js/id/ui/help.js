@@ -49,19 +49,20 @@ iD.ui.Help = function(context) {
             setVisible(!button.classed('active'));
         }
 
+        function blockClick() {
+            pane.on('mousedown.help-inside', function() {
+                return d3.event.stopPropagation();
+            });
+            selection.on('mousedown.help-inside', function() {
+                return d3.event.stopPropagation();
+            });
+        }
+
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
                 shown = show;
                 if (show) {
-                    function blockClick() {
-                        pane.on('mousedown.help-inside', function() {
-                            return d3.event.stopPropagation();
-                        });
-                        selection.on('mousedown.help-inside', function() {
-                            return d3.event.stopPropagation();
-                        });
-                    }
                     pane.style('display', 'block')
                         .style('left', '-500px')
                         .transition()
