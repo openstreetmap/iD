@@ -40,5 +40,9 @@ iD.ui.preset.check = function(field) {
         label.classed('set', !!value);
     };
 
+    check.focus = function() {
+        box.node().focus();
+    };
+
     return d3.rebind(check, event, 'on');
 };

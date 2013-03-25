@@ -52,5 +52,9 @@ iD.ui.preset.url = function(field) {
         input.property('value', tags[field.key] || '');
     };
 
+    i.focus = function() {
+        input.node().focus();
+    };
+
     return d3.rebind(i, event, 'on');
 };

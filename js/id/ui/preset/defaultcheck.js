@@ -19,5 +19,9 @@ iD.ui.preset.defaultcheck = function(field) {
         input.property('checked', !!tags[field.key] && tags[field.key] !== 'no');
     };
 
+    check.focus = function() {
+        input.node().focus();
+    };
+
     return d3.rebind(check, event, 'on');
 };

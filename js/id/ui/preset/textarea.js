@@ -23,5 +23,9 @@ iD.ui.preset.textarea = function(field) {
         input.text(tags[field.key] || '');
     };
 
+    i.focus = function() {
+        input.node().focus();
+    };
+
     return d3.rebind(i, event, 'on');
 };

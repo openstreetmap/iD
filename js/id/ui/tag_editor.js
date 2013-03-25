@@ -56,8 +56,7 @@ iD.ui.TagEditor = function(context, entity) {
                 .append('span')
                     .attr('class', geometry + ' preset-icon icon feature-' + icon);
 
-        presetUI = iD.ui.preset(context, entity)
-            .preset(preset)
+        presetUI = iD.ui.preset(context, entity, preset)
             .on('change', changeTags)
             .on('close', event.close);
 

@@ -52,5 +52,9 @@ iD.ui.preset.radio = function(field) {
         });
     };
 
+    radio.focus = function() {
+        buttons.node().focus();
+    };
+
     return d3.rebind(radio, event, 'on');
 };

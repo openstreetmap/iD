@@ -48,5 +48,9 @@ iD.ui.preset.combo = function(field) {
         input.property('value', tags[field.key] || '');
     };
 
+    combo.focus = function() {
+        input.node().focus();
+    };
+
     return d3.rebind(combo, event, 'on');
 };

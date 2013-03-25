@@ -101,5 +101,9 @@ iD.ui.preset.address = function(field, context) {
         return address;
     };
 
+    address.focus = function() {
+        housename.node().focus();
+    };
+
     return d3.rebind(address, event, 'on');
 };
