@@ -26,26 +26,18 @@ iD.ui.TagEditor = function(context, entity) {
         var messagewrap = selection.append('div')
             .attr('class', 'header fillL cf');
 
-        var back = messagewrap.append('button')
-            .attr('class', 'preset-reset fl ' + geometry)
+        messagewrap.append('button')
+            .attr('class', 'preset-reset fl ')
             .on('click', function() {
                 event.choose(preset);
-            });
-
-        var icon = preset.icon || (geometry === 'line' ? 'other-line' : 'marker-stroked');
-
-        back.append('div')
-            .attr('class', 'col12')
-            .append('span')
-            .attr('class', 'preset-icon icon feature-' + icon);
-
-        back.append('div')
-            .attr('class', 'col12')
+            })
             .append('span')
             .attr('class', 'icon back');
 
+        var icon = preset.icon || (geometry === 'line' ? 'other-line' : 'marker-stroked');
+
         messagewrap.append('h3')
-            .attr('class', 'inspector-inner fl')
+            .attr('class', 'inspector-inner')
             .text(t('inspector.editing_feature', { feature: preset.name() }));
 
         messagewrap.append('button')
@@ -56,6 +48,13 @@ iD.ui.TagEditor = function(context, entity) {
 
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
+
+        editorwrap.append('div')
+            .attr('class', 'col12 inspector-inner fillL2 preset-icon-wrap')
+            .append('div')
+                .attr('class','fillL')
+                .append('span')
+                    .attr('class', geometry + ' preset-icon icon feature-' + icon);
 
         presetUI = iD.ui.preset(context, entity)
             .preset(preset)

@@ -593,6 +593,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     overflow: hidden;
     position: absolute;
     right: 0;
+    top: 0;
 }
 
 .modal > button {
@@ -641,16 +642,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
 }
 
-.inspector-wrap .header button.preset-reset {
-    width: 60px;
-}
-
 .inspector-wrap .header button.preset-reset > div {
     height: 100%;
     padding: 20px 0;
-    -webkit-transition: opacity 200ms;
-       -moz-transition: opacity 200ms;
-            transition: opacity 200ms;
 }
 
 .inspector-wrap .header button.preset-reset .col12:last-child {
@@ -670,12 +664,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-wrap .header button.line > div {
     padding: 0;
-}
-
-.pane:last-child .header h3 {
-    position: absolute;
-    left: 60px;
-    right: 0px;
 }
 
 .inspector-toggle {
@@ -817,23 +805,24 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .subgrid {
-    width: -webkit-calc(100% - 10px);
+    width: -webkit-calc(100% + 10px);
     width: calc(100% - 10px);
+    width: 100%;
+    margin-left: -10px;
     overflow: hidden;
 }
 
 .subgrid .preset-grid {
-    background: #eee;
     padding: 10px 0px 0px 10px;
+    border: 1px solid #CCC;
     margin-top: 0px;
-    border: 0;
     border-radius: 4px;
 }
 
 .subgrid .arrow {
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #eee;
+    border-bottom-color: #CCC;
     width: 0;
     height: 0;
     margin-left: 33.3333%;
@@ -903,22 +892,47 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* preset form basics */
 
-.preset-field.inspector-inner {
+.tag-wrap .preset-icon-wrap {
+    border-bottom: 1px solid #CCC;
+}
+
+.tag-wrap .preset-icon-wrap::after { 
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: solid rgba(0, 0, 0, 0);
+    border-width: 10px;
+    border-bottom-color: #CCC;
+}
+
+.tag-wrap .preset-icon-wrap div { 
+    height: 90px;
+    width: 33.3333%;
+    margin: auto;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+.tag-wrap .preset-icon-wrap .preset-icon { 
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+
+.tag-wrap .preset-icon-wrap .preset-icon.line { 
+    top: 15px;
+}
+
+.preset-field.inspector-inner { 
     padding-bottom: 0;
-}
-
-.tag-wrap .grid-button-wrap {
-    padding: 0;
-    height: 110px;
-}
-
-.tag-wrap .grid-button-wrap .grid-entry {
-    border-top: 0;
-    background: #eef0ff;
-}
-
-.tag-wrap .grid-button-wrap .grid-entry .label {
-    background: #eef0ff;
 }
 
 .preset-field .modified-icon {
@@ -997,7 +1011,7 @@ input[type=number] {
 
 .spin-control {
     width: 60px;
-    height: 30px;
+    height: 29px;
     border-left: 1px solid #CCC;
     display: inline-block;
     margin-left: -60px;

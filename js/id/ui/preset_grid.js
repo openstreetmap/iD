@@ -15,7 +15,7 @@ iD.ui.PresetGrid = function(context, entity) {
             .attr('class', 'header fillL cf');
 
         var message = messagewrap.append('h3')
-            .attr('class', 'inspector-inner fl')
+            .attr('class', 'inspector-inner')
             .text(t('inspector.choose'));
 
         if (preset) {
@@ -115,7 +115,7 @@ iD.ui.PresetGrid = function(context, entity) {
                         .attr('class', 'arrow');
 
                     subgrid.append('div')
-                        .attr('class', 'preset-grid fillL cf fl')
+                        .attr('class', 'preset-grid fillL2 cf fl')
                         .data([d.members.collection])
                         .call(drawGrid, 1000);
 
