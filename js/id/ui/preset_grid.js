@@ -211,7 +211,7 @@ iD.ui.PresetGrid = function(context, entity) {
                     .style('max-height', '200px')
                     .style('opacity', '1');
 
-                presetinspect.append('h2')
+                presetinspect.append('h3')
                     .text(d.name());
 
                 var tag = {key: Object.keys(d.tags)[0]};
