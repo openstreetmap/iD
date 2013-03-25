@@ -61,10 +61,7 @@ iD.ui.preset.address = function(field, context) {
             .on('change', change)
             .call(close());
 
-        var streetwrap = wrap.append('span')
-            .attr('class', 'input-wrap-position');
-
-        street = streetwrap.append('input')
+        street = wrap.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.street'))
             .attr('class', 'addr-street')
