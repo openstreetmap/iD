@@ -9,7 +9,7 @@ all: \
 	iD.js \
 	iD.min.js
 
-DATA_FILES = $(shell find data -type f -name '*.json')
+DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
 data/data.js: $(DATA_FILES)
 	node build.js
 
