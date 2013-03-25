@@ -11,9 +11,8 @@ iD.ui.Help = function(context) {
                 .select('.help-wrap')
                 .html('');
 
-            var toc = pane.append('div')
-                .attr('class', 'toc')
-                .append('ul');
+            var toc = pane.append('ul')
+                .attr('class', 'toc');
 
             function clickHelp(d) {
                 doctitle.text(d.title);
