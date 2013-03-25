@@ -29,7 +29,7 @@ iD.ui.TagReference = function(entity, tag) {
     return function(selection) {
         selection.html('');
 
-        selection.attr('class','cf');
+        selection.classed('cf', true);
 
         taginfo.docs(tag, function(err, docs) {
             if (!err && docs) {
