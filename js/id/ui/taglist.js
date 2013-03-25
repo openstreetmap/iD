@@ -98,7 +98,7 @@ iD.ui.Taglist = function(context, entity) {
                 d3.select(d3.select(this).node().parentNode)
                     .select('div.tag-help')
                     .style('display', 'block')
-                    .call(iD.ui.TagReference(entity, tag));
+                    .call(iD.ui.TagReference(entity, {key: tag.key}));
             })
             .append('span')
             .attr('class', 'icon inspect');

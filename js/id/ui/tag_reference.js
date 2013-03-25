@@ -29,7 +29,7 @@ iD.ui.TagReference = function(entity, tag) {
     return function(selection) {
         selection.html('');
 
-        taginfo.docs({key: tag.key}, function(err, docs) {
+        taginfo.docs(tag, function(err, docs) {
             if (!err && docs) {
                 docs = findLocal(docs);
             }
