@@ -4,6 +4,7 @@ iD.operations.Disconnect = function(selection, context) {
 
     var operation = function() {
         context.perform(action, t('operations.disconnect.annotation'));
+        context.enter(iD.modes.Browse(context));
     };
 
     operation.available = function() {
