@@ -108,7 +108,6 @@ iD.ui = function(context) {
         linkList.append('li')
             .attr('class', 'attribution')
             .attr('tabindex', -1)
-            .data([context.background().source()])
             .call(iD.ui.Attribution(context));
 
         linkList.append('li')
