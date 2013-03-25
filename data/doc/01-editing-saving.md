@@ -3,6 +3,18 @@
 This editor is designed to work primarily online, and you're accessing
 it through a website right now.
 
+## Selecting Features
+
+To select a map feature, like a road or point of interest, simply single-click
+on it on the map. This will highlight the selected feature, show a panel of
+details, and also show a menu of things you can do with the feature.
+
+Multiple features can be selected by holding the 'Shift' key, clicking,
+and dragging on the map. This will select all features within the box
+that's drawn, and you can do certain 'batch operations' on all features.
+
+## Saving Edits
+
 When you create changes, like editing roads, buildings, and places, these are
 stored locally until you save them to the server. Don't worry if you make
 a mistake - you can undo changes by clicking the undo button, and redo
