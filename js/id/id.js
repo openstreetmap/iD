@@ -102,7 +102,13 @@ window.iD = function () {
     context.zoomOut = map.zoomOut;
 
     /* Background */
-    var backgroundSources = iD.data.imagery.map(iD.BackgroundSource.template);
+    var backgroundSources = iD.data.imagery.map(function(source) {
+        if (source.sourcetag === 'Bing') {
+            return iD.BackgroundSource.Bing(source, context.background().dispatch);
+        } else {
+            return iD.BackgroundSource.template(source);
+        }
+    });
     backgroundSources.push(iD.BackgroundSource.Custom);
 
     context.backgroundSources = function() {
