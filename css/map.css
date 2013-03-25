@@ -856,11 +856,11 @@ text.point {
     cursor: url(../img/cursor-select-remove.png), pointer;
 }
 
-.point:active,
-.vertex:active,
-.line:active,
-.area:active,
-.midpoint:active,
+#map .point:active,
+#map .vertex:active,
+#map .line:active,
+#map .area:active,
+#map .midpoint:active,
 .mode-select .selected {
     cursor: url(../img/cursor-select-acting.png), pointer;
 }

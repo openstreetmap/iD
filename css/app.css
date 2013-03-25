@@ -1544,7 +1544,7 @@ div.combobox {
 /* Help */
 
 .help-control {
-    top:270px;
+    top: 270px;
 }
 
 .help-control button {
@@ -1560,7 +1560,6 @@ div.combobox {
     left: 0;
     overflow-y: scroll;
 }
-
 
 .help-wrap .left-content .body p code {
     padding:2px 4px;
