@@ -1564,6 +1564,11 @@ div.combobox {
     color:#fff;
 }
 
+.source-image {
+    height:20px;
+    vertical-align:top;
+}
+
 .user-list a:not(:last-child):after {
     content: ', ';
 }

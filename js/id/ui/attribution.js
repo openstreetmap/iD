@@ -13,7 +13,7 @@ iD.ui.Attribution = function(context) {
 
         var source = d.data.sourcetag || d.data.name;
         if (d.data.logo) {
-            source = '<img src="img/' + d.data.logo + '">'
+            source = '<img class="source-image" src="img/' + d.data.logo + '">';
         }
 
         var desc = t('imagery.provided_by', {source: source});

@@ -40,7 +40,8 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
 
     var bing = iD.BackgroundSource.template(data),
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
-        url = 'http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' + key + '&jsonp={callback}',
+        url = 'http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
+            key + '&jsonp={callback}',
         providers = [];
 
     d3.jsonp(url, function(json) {
@@ -51,7 +52,7 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
                     return {
                         zoom: [area.zoomMin, area.zoomMax],
                         extent: iD.geo.Extent([area.bbox[1], area.bbox[0]], [area.bbox[3], area.bbox[2]])
-                    }
+                    };
                 })
             };
         });
@@ -65,7 +66,7 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
                 return extent.intersects(area.extent) &&
                     area.zoom[0] <= zoom &&
                     area.zoom[1] >= zoom;
-            })
+            });
         }).map(function(provider) {
             return provider.attribution;
         }).join(', ');
@@ -75,7 +76,8 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
 };
 
 iD.BackgroundSource.Custom = function() {
-    var template = window.prompt('Enter a tile template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.');
+    var template = window.prompt('Enter a tile template. ' +
+        'Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.');
     if (!template) return null;
     return iD.BackgroundSource.template({
         template: template,
