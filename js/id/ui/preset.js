@@ -68,7 +68,6 @@ iD.ui.preset = function(context, entity) {
                 return 'preset-field preset-field-' + field.id + ' fillL inspector-inner col12';
             });
 
-
         var label = sections.append('label')
             .attr('class', 'form-label')
             .attr('for', function(field) { return 'preset-input-' + field.id; })
@@ -114,6 +113,9 @@ iD.ui.preset = function(context, entity) {
             keys = keys.concat(field.key ? [field.key] : field.keys);
 
             d3.select(this).call(i);
+
+            var input = d3.select(this).selectAll('input, textarea').node();
+            if (input) input.focus();
         });
 
         sections.append('div')
