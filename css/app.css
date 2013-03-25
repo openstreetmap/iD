@@ -1581,7 +1581,7 @@ div.combobox {
     font-weight: bold;
     border: 1px solid #CCC;
     border-bottom: 0px;
-    padding:2px 5px;
+    padding: 5px;
 }
 
 .help-wrap .toc li a.selected {
