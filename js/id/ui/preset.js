@@ -89,7 +89,7 @@ iD.ui.preset = function(context, entity) {
             });
 
         label.append('button')
-            .attr('class', 'fr icon inspect')
+            .attr('class', 'tag-reference-button')
             .attr('tabindex', -1)
             .on('click', function(field) {
                 selection.selectAll('div.tag-help')
@@ -99,7 +99,9 @@ iD.ui.preset = function(context, entity) {
                     .select('div.tag-help')
                     .style('display', 'block')
                     .call(iD.ui.TagReference(entity, {key: field.key}));
-            });
+            })
+            .append('span')
+            .attr('class', 'icon inspect');
 
         sections.transition()
             .style('max-height', '0px')

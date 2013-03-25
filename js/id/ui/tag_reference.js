@@ -29,6 +29,8 @@ iD.ui.TagReference = function(entity, tag) {
     return function(selection) {
         selection.html('');
 
+        selection.attr('class','cf');
+
         taginfo.docs(tag, function(err, docs) {
             if (!err && docs) {
                 docs = findLocal(docs);
@@ -57,6 +59,7 @@ iD.ui.TagReference = function(entity, tag) {
                 .attr('target', '_blank')
                 .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title)
                 .text(t('inspector.reference'));
+
         });
     }
 };
