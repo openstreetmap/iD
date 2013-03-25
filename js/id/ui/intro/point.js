@@ -53,12 +53,12 @@ iD.ui.intro.point = function(context, curtain) {
         function selectedPreset() {
             curtain.reveal('.grid-pane', t('intro.points.describe'));
             context.history().on('change.intro', closeEditor);
+            context.on('exit.intro', event.done);
         }
 
         function closeEditor() {
             context.history().on('change.intro', null);
             curtain.reveal('.tag-pane', t('intro.points.close'));
-            context.on('exit.intro', event.done);
         }
     };
 
@@ -67,6 +67,7 @@ iD.ui.intro.point = function(context, curtain) {
         context.on('exit.intro', null);
         context.on('enter.intro', null);
         context.map().on('move.intro', null);
+        context.history().on('change.intro', null);
     };
 
     return d3.rebind(step, event, 'on');

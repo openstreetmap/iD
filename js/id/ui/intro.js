@@ -67,7 +67,6 @@ iD.ui.intro.pointBox = function(point) {
 
 iD.ui.intro.pad = function(box, padding) {
     if (box instanceof Array) {
-        console.log("array");
         box = {
             left: box[0],
             top: box[1]

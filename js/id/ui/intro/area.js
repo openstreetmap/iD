@@ -1,7 +1,7 @@
 iD.ui.intro.area = function(context, curtain) {
 
     var event = d3.dispatch('done'),
-        timeouts = [];
+        timeout;
 
     var step = {
         name: 'Areas'
@@ -51,7 +51,7 @@ iD.ui.intro.area = function(context, curtain) {
             context.map().on('move.intro', null);
             context.on('enter.intro', null);
 
-            setTimeout(function() {
+            timeout = setTimeout(function() {
                 curtain.reveal('.preset-grid-search', t('intro.areas.search'));
                 d3.select('.preset-grid-search').on('keyup.intro', keySearch);
             }, 500);
@@ -75,8 +75,12 @@ iD.ui.intro.area = function(context, curtain) {
     };
 
     step.exit = function() {
+        window.clearTimeout(timeout);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
+        context.history().on('change.intro', null);
+        context.map().on('move.intro', null);
+        d3.select('.preset-grid-search').on('keyup.intro', null);
     };
 
     return d3.rebind(step, event, 'on');

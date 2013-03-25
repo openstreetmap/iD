@@ -1,6 +1,7 @@
 iD.ui.intro.line = function(context, curtain) {
 
-    var event = d3.dispatch('done');
+    var event = d3.dispatch('done'),
+        timeouts = [];
 
     var step = {
         name: 'Lines'
@@ -8,6 +9,10 @@ iD.ui.intro.line = function(context, curtain) {
 
     function one(target, e, f) {
         d3.selection.prototype.one.call(target, e, f);
+    }
+
+    function timeout(f, t) {
+        timeouts.push(window.setTimeout(f, t));
     }
 
     step.enter = function() {
@@ -77,7 +82,7 @@ iD.ui.intro.line = function(context, curtain) {
             context.map().on('move.intro', null);
             context.on('enter.intro', null);
 
-            setTimeout(function() {
+            timeout(function() {
                 var road = d3.select('.preset-grid .grid-entry').filter(function(d) {
                     return d.id === 'Road';
                 });
@@ -87,7 +92,7 @@ iD.ui.intro.line = function(context, curtain) {
         }
 
         function roadCategory() {
-            window.setTimeout(function() {
+            timeout(function() {
                 var grid = d3.select('.subgrid');
                 curtain.reveal(grid.node(),  t('intro.lines.residential'));
                 grid.selectAll('.grid-entry').filter(function(d) {
@@ -104,8 +109,11 @@ iD.ui.intro.line = function(context, curtain) {
     };
 
     step.exit = function() {
+        timeouts.forEach(window.clearTimeout);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
+        context.map().on('move.intro', null);
+        context.history().on('change.intro', null);
         curtain.hide();
     };
 
