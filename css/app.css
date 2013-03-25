@@ -805,9 +805,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .subgrid {
-    width: -webkit-calc(100% + 10px);
-    width: calc(100% - 10px);
     width: 100%;
+    width: -webkit-calc(100% + 10px);
+    width: calc(100% + 10px);
     margin-left: -10px;
     overflow: hidden;
 }
@@ -913,6 +913,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .tag-wrap .preset-icon-wrap div { 
     height: 90px;
     width: 33.3333%;
+    width: -webkit-calc(33.3333% - 10px);
+    width: calc(33.3333% - 10px);
     margin: auto;
     border-radius: 4px;
     border: 1px solid #CCC;
