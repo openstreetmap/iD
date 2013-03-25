@@ -26,6 +26,7 @@ window.iD = function () {
 
     // the connection requires .storage() to be available on calling.
     var connection = iD.Connection(context)
+        .toggle(false)
         .keys(iD.data.keys);
 
     connection.on('load.context', function loadContext(err, result) {

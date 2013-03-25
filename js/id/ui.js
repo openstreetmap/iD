@@ -145,6 +145,8 @@ iD.ui = function(context) {
         context.container()
             .call(iD.ui.Splash(context))
             .call(iD.ui.Restore(context));
+
+        d3.select(document.body).call(iD.ui.intro(context));
     };
 };
 
