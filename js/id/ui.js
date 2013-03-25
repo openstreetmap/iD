@@ -80,6 +80,11 @@ iD.ui = function(context) {
             .style('display', 'none')
             .attr('class', 'inspector-wrap fr content col4');
 
+        container.append('idv')
+            .attr('class', 'attribution')
+            .attr('tabindex', -1)
+            .call(iD.ui.Attribution(context));
+
         var about = container.append('div')
             .attr('class','col12 about-block fillD');
 
@@ -104,11 +109,6 @@ iD.ui = function(context) {
             .attr('tabindex', -1)
             .attr('href', 'https://help.openstreetmap.org/questions/ask/')
             .text(t('report_a_bug'));
-
-        linkList.append('li')
-            .attr('class', 'attribution')
-            .attr('tabindex', -1)
-            .call(iD.ui.Attribution(context));
 
         linkList.append('li')
             .attr('class', 'source-switch')

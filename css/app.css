@@ -1667,6 +1667,15 @@ div.combobox {
     color:#fff;
 }
 
+/* Attribution overlay */
+.attribution {
+    position: absolute;
+    bottom: 35px;
+    right:10px;
+    color:#888;
+    font-size:10px;
+}
+
 .source-image {
     height:20px;
     vertical-align:top;
