@@ -13,9 +13,11 @@ d3.curtain = function() {
                 'pointer-events': 'none',
                 'position': 'absolute',
                 'top': 0,
-                'left': 0,
-                'right': 0,
-                'bottom': 0
+                'left': 0
+            })
+            .attr({
+                width: window.innerWidth,
+                height: window.innerHeight
             });
 
         var darkness = surface.append('rect')
