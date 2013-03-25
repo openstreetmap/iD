@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="sprite.svg"
-   inkscape:export-filename="/Users/tmcw/src/iD/img/sprite.png"
+   inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -38,12 +38,12 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="473.6954"
-     inkscape:cy="307.27342"
+     inkscape:zoom="7.858048"
+     inkscape:cx="497.26876"
+     inkscape:cy="307.47415"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
-     showgrid="false"
+     showgrid="true"
      inkscape:window-width="1483"
      inkscape:window-height="804"
      inkscape:window-x="131"
@@ -53,7 +53,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="true"
@@ -214,7 +214,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -227,8 +227,8 @@
     <rect
        style="color:#000000;fill:#323232;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4478"
-       width="440"
-       height="200"
+       width="500"
+       height="310"
        x="25"
        y="62.362183" />
   </g>
@@ -2073,9 +2073,19 @@
          inkscape:export-ydpi="90" />
     </g>
     <path
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="M 465 4 L 462 6 L 462 16 L 463 17 L 468 17 L 469 18 L 471 18 L 472 17 L 477 17 L 478 16 L 478 6 L 475 4 L 473 4 L 470 6 L 467 4 L 465 4 z M 464 8 L 468 8 L 468 9 L 464 9 L 464 8 z M 472 8 L 476 8 L 476 9 L 472 9 L 472 8.40625 L 472 8 z M 464 10 L 468 10 L 468 11 L 464 11 L 464 10 z M 472 10 L 476 10 L 476 11 L 472 11 L 472 10 z M 464 12 L 468 12 L 468 13 L 464 13 L 464 12 z M 472 12 L 476 12 L 476 13 L 472 13 L 472 12 z "
-       transform="translate(25,-3.0624999e-6)"
-       id="path3363" />
+       style="color:#000000;fill:#1a1a1a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 489,-36.000003 0,2 -2,0 0,8 1,1 7,3 7,-3 1,-1 0,-8 -2,0 0,-2 -2,0 -4,3 -4,-3 z"
+       id="path3363"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccccccc" />
+    <g
+       id="g3815"
+       transform="translate(0,50)">
+      <path
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 464 2 L 463 3 L 463 16 L 464 17 L 475 17 L 476 16 L 476 6 L 472 6 L 472 12 L 469.5 10.5 L 467 12 L 467 6 L 465 6 L 465 5 L 465 4 L 476 4 L 476 3 L 476 2 L 464 2 z "
+         transform="translate(25,-50.000003)"
+         id="path3648" />
+    </g>
   </g>
 </svg>
