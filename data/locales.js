@@ -156,8 +156,8 @@ locale.en = {
         "created": "Created"
     },
     "contributors": {
-        "list": "Viewing contributions by {users}",
-        "truncated_list": "Viewing contributions by {users} and {count} others"
+        "list": "Contributed by {users}",
+        "truncated_list": "Contributed by {users} and {count} others"
     },
     "geocoder": {
         "title": "Find a place",
@@ -226,9 +226,6 @@ locale.en = {
     "zoom": {
         "in": "Zoom In",
         "out": "Zoom Out"
-    },
-    "imagery": {
-        "provided_by": "Imagery provided by {source}"
     },
     "gpx": {
         "local_layer": "Local GPX file",

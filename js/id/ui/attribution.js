@@ -16,14 +16,13 @@ iD.ui.Attribution = function(context) {
             source = '<img class="source-image" src="img/' + d.data.logo + '">';
         }
 
-        var desc = t('imagery.provided_by', {source: source});
         if (d.data.terms_url) {
             provided_by.append('a')
                 .attr('href', d.data.terms_url)
                 .attr('target', '_blank')
-                .html(desc);
+                .html(source);
         } else {
-            provided_by.text(desc);
+            provided_by.text(source);
         }
 
         var copyright = d.copyrightNotices(context.map().zoom(), context.map().extent());
