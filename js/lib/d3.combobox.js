@@ -20,8 +20,10 @@ d3.combobox = function() {
 
         selection.append('div', input)
             .attr('class', 'combobox-carat')
-            .on('mousedown', stop)
             .on('mousedown', function() {
+                // prevent the form element from blurring. it blurs
+                // on mousedown
+                d3.event.stopPropagation();
                 d3.event.preventDefault();
                 mousedown();
             });
@@ -33,13 +35,6 @@ d3.combobox = function() {
                 'width': rect.width + 'px',
                 'top': rect.height + rect.top + 'px'
             });
-        }
-
-        function stop() {
-            // prevent the form element from blurring. it blurs
-            // on mousedown
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
         }
 
         function blur() {
