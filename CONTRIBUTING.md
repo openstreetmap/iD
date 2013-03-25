@@ -72,6 +72,21 @@ Transiflex, will automatically detect the change.
 Use `make` to build the translations with the local changes.
 `make translate` can be used to pull the latest translations from Transifex.
 
+## Contributing Documentation
+
+Documentation is maintained as a series of [Markdown](http://daringfireball.net/projects/markdown/)
+documents in the `data/doc/` path. The first line of each page of documentation
+should be of the form
+
+    # GPS
+
+This will be used for navigation and as its title in iD. Documentation is
+shown in alphabetical order, so most documentation is prefixed with `02-` and
+so on in order to keep it in a certain order.
+
+To add a new page of documentation, simply create a new Markdown file in
+`data/doc` in the same format as the rest.
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with
