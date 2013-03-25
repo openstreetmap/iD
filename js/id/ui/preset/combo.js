@@ -10,9 +10,7 @@ iD.ui.preset.combo = function(field) {
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
             .on('change', change)
-            .on('blur', change);
-
-         selection
+            .on('blur', change)
             .call(combobox);
 
         if (field.options) {

@@ -1,7 +1,7 @@
 d3.combobox = function() {
     var event = d3.dispatch('accept'),
         id = d3.combobox.id ++,
-        container, input, shown = false, data = [];
+        data = [];
 
     var fetcher = function(val, data, cb) {
         cb(data.filter(function(d) {
@@ -12,20 +12,24 @@ d3.combobox = function() {
         }));
     };
 
-    var typeahead = function(selection) {
-        var idx = -1;
+    var typeahead = function(input) {
+        var idx = -1, container, shown = false;
 
-        input = selection.select('input')
-            .classed('combobox-input', true);
-
-        selection.append('div', input)
-            .attr('class', 'combobox-carat')
-            .on('mousedown', function() {
-                // prevent the form element from blurring. it blurs
-                // on mousedown
-                d3.event.stopPropagation();
-                d3.event.preventDefault();
-                mousedown();
+        input
+            .classed('combobox-input', true)
+            .each(function() {
+                var parent = this.parentNode,
+                    sibling = this.nextSibling;
+                d3.select(parent)
+                    .insert('div', function() { return sibling; })
+                    .attr('class', 'combobox-carat')
+                    .on('mousedown', function () {
+                        // prevent the form element from blurring. it blurs
+                        // on mousedown
+                        d3.event.stopPropagation();
+                        d3.event.preventDefault();
+                        mousedown();
+                    });
             });
 
         function updateSize() {
@@ -205,7 +209,7 @@ d3.combobox = function() {
                     .order();
             }
 
-            fetcher.apply(selection, [value, data, render]);
+            fetcher.apply(input, [value, data, render]);
         }
 
         // select the choice given as d

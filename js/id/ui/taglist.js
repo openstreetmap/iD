@@ -121,8 +121,8 @@ iD.ui.Taglist = function(context, entity) {
     function bindTypeahead() {
         var geometry = entity.geometry(context.graph()),
             row = d3.select(this),
-            key = row.selectAll('.key-wrap'),
-            value = row.selectAll('.input-wrap-position');
+            key = row.selectAll('input.key'),
+            value = row.selectAll('input.value');
 
         function sort(value, data) {
             var sameletter = [],
@@ -137,28 +137,26 @@ iD.ui.Taglist = function(context, entity) {
             return sameletter.concat(other);
         }
 
-        var keyinput = key.select('input');
         key.call(d3.combobox()
-            .fetcher(function(_, __, callback) {
+            .fetcher(function(value, __, callback) {
                 taginfo.keys({
                     debounce: true,
                     geometry: geometry,
-                    query: keyinput.property('value')
+                    query: value
                 }, function(err, data) {
-                    if (!err) callback(sort(keyinput.property('value'), data));
+                    if (!err) callback(sort(value, data));
                 });
             }));
 
-        var valueinput = value.select('input');
         value.call(d3.combobox()
-            .fetcher(function(_, __, callback) {
+            .fetcher(function(value, __, callback) {
                 taginfo.values({
                     debounce: true,
-                    key: keyinput.property('value'),
+                    key: key.property('value'),
                     geometry: geometry,
-                    query: valueinput.property('value')
+                    query: value
                 }, function(err, data) {
-                    if (!err) callback(sort(valueinput.property('value'), data));
+                    if (!err) callback(sort(value, data));
                 });
             }));
     }

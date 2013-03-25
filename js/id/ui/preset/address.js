@@ -69,7 +69,8 @@ iD.ui.preset.address = function(field, context) {
             .attr('placeholder', field.t('placeholders.street'))
             .attr('class', 'addr-street')
             .on('blur', change)
-            .on('change', change);
+            .on('change', change)
+            .call(d3.combobox().data(getStreets()));
 
         city = wrap.append('input')
             .property('type', 'text')
@@ -78,8 +79,6 @@ iD.ui.preset.address = function(field, context) {
             .on('blur', change)
             .on('change', change)
             .call(close());
-
-        streetwrap.call(d3.combobox().data(getStreets()));
     }
 
     function change() {
