@@ -203,46 +203,25 @@ iD.ui.PresetGrid = function(context, entity) {
                     .style('max-height', '0px')
                     .style('padding-top', '0px')
                     .style('padding-bottom', '0px')
+                    .style('opacity', '0')
                     .transition()
                     .duration(200)
                     .style('padding-top', '10px')
                     .style('padding-bottom', '20px')
-                    .style('max-height', '200px');
+                    .style('max-height', '200px')
+                    .style('opacity', '1');
 
                 presetinspect.append('h2')
                     .text(d.name());
 
-                var description = presetinspect.append('p');
-                var link = presetinspect.append('a');
+                var tag = {key: Object.keys(d.tags)[0]};
 
-                var params = {},
-                    locale = iD.detect().locale.split('-')[0] || 'en';
-
-                params.key = Object.keys(d.tags)[0];
-                if (d.tags[params.key] !== '*') {
-                    params.value = d.tags[params.key];
+                if (d.tags[tag.key] !== '*') {
+                    tag.value = d.tags[tag.key];
                 }
 
-                taginfo.docs(params, function(err, data) {
-                    if (err) return description.text(t('inspector.no_documentation_combination'));
-                    var doc = _.find(data, function(d) { return d.lang === locale; }) ||
-                        _.find(data, function(d) { return d.lang === 'en'; });
-                    if (doc) {
-                        description
-                            .text(doc.description);
-                        link
-                            .attr('href', 'http://wiki.openstreetmap.org/wiki/' +
-                                  encodeURIComponent(doc.title))
-                            .text(t('inspector.reference'));
-                    }
-                });
-
-                presetinspect.selectAll('*')
-                    .style('opacity','0')
-                    .transition()
-                    .delay(100)
-                    .duration(200)
-                    .style('opacity','1');
+                presetinspect.append('div')
+                    .call(iD.ui.TagReference(entity, tag));
             }
 
             if (selection.node() === grid.node()) {
