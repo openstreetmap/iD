@@ -52,25 +52,13 @@ iD.ui.intro.navigation = function(context, curtain) {
             });
         }
 
-        function primaryRoad() {
-            curtain.reveal('.tag-highway-primary', t('intro.navigation.selectstreet'));
-            context.on('enter.intro', inspectRoad);
-        }
-
         function inspectTownHall(mode) {
             if (mode.id !== 'select') return;
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
             set(function() { curtain.reveal('.header', t('intro.navigation.header')); }, 700);
             set(function() { curtain.reveal('.tag-wrap', t('intro.navigation.pane')); }, 4000);
-            set(primaryRoad, 7001);
-        }
-
-        function inspectRoad(mode) {
-            if (mode.id !== 'select') return;
-            context.on('enter.intro', null);
-            set(function() { curtain.reveal('.header', t('intro.navigation.headerstreet')); }, 700);
-            set(event.done, 4000);
+            set(event.done, 7000);
         }
 
     };

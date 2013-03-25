@@ -51,7 +51,13 @@ iD.ui.intro.point = function(context, curtain) {
         }
 
         function selectedPreset() {
-            curtain.reveal('.pane', 'Add a name and edit some details. Click x to exit');
+            curtain.reveal('.grid-pane', t('intro.points.describe'));
+            context.history().on('change.intro', closeEditor);
+        }
+
+        function closeEditor() {
+            context.history().on('change.intro', null);
+            curtain.reveal('.tag-pane', t('intro.points.close'));
             context.on('exit.intro', event.done);
         }
     };

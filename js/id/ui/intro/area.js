@@ -67,7 +67,7 @@ iD.ui.intro.area = function(context, curtain) {
         }
 
         function selectedPreset() {
-            curtain.reveal('.pane', 'Add a name and edit some details. Click x to exit');
+            curtain.reveal('.pane', t('intro.areas.describe'));
             context.on('exit.intro', event.done);
         }
 

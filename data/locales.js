@@ -1438,19 +1438,17 @@ locale.en = {
     },
     "intro": {
         "navigation": {
-            "drag": "The main map area shows OpenStreetMap data on top of background imagery, by default Bing. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
-            "select": "Features can be represented in different ways, using points, lines or areas. They can all be selected by clicking on them. **Click on the point to select it.**",
-            "header": "The header shows us that this point is a Town Hall.",
-            "pane": "The main pane shows the feature's attributes such as its name and address.",
-            "selectstreet": "**Select West Michigan Avenue!**",
-            "headerstreet": "It's a residential road, the most common type of road."
+            "drag": "The main map area shows OpenStreetMap data on top of background imagery. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
+            "select": "Map features can be represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
+            "header": "The header shows us the feature type.",
+            "pane": "The main pane shows the feature's attributes, such as its name and address."
         },
         "points": {
-            "add": "Points can be used to represent features like shops, restaurants and monuments. They mark a specific spot and tell us what is there. **Click the Point button to add a new point to the map.**",
-            "place": "Click to place the point on the map. The point we are adding is a Cafe. **Place the point at the corner of This Street and That Street**",
-            "search": "There many different features that can be represented by points. **Search for *Cafe* **",
-            "choose": "**Choose *Cafe* from the grid.**",
-            "describe": "The point is now marked as a cafe. Using the feature editor we can add more information about the feature. **Add a name and address**",
+            "add": "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**",
+            "place": "The point can be placed by clicking on the map. **Place the point on top of the building.**",
+            "search": "There many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **",
+            "choose": "**Choose Cafe from the grid.**",
+            "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name and address**",
             "close": "The feature editor can be closed by clicking on the close button, or anywhere on the map. **Close the feature editor**",
             "selectanother": "Often points will already exist, but have mistakes or be incomplete. We can edit exist points. **Select the point for *Someting**",
             "fixname": "Change the name to *Something Else* **",
@@ -1458,17 +1456,18 @@ locale.en = {
             "delete": "There menu that shows around the point contains various operations, including delete. **Delete the point.**"
         },
         "areas": {
-            "add": "Areas are a more detailed way to represent features. They give us information on the boundaries of a feature, which is especially useful for larger features. Areas can be used for most features points can be used for, and are often preferred. **Click the Area button to add a new area.**",
-            "corner": "To start drawing an area, click to place a node on one of the corners. **Place the starting node on one of the corners of the playground.**",
-            "place": "Click to mark the corners tracing the boundary of the area. Finish the area by clicking on the starting point. **Draw an area for the basketball field.**",
-            "search": "**Search for *Playground*.**",
-            "choose": "**Choose *Playground from the grid.**"
+            "add": "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most features types points can be used for, and are often preferred. **Click the Area button to add a new area.**",
+            "corner": "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**",
+            "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting point. **Draw an area for the playground.**",
+            "search": "**Search for Playground.**",
+            "choose": "**Choose Playground from the grid.**",
+            "describe": "**Add a name, and close the feature editor**"
         },
         "lines": {
             "add": "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**",
-            "start": "**Click on the end of the road to start drawing the line.**",
-            "intersect": "Rods, and many other lines, are part of a larger network. It is important for these lines to be connected properly so that routing applications can work. **Click on the other road, to create an intersection connecting the two lines.**",
-            "finish": "Just like with areas, click on the last point to end a line. **Finish drawing the road.**",
+            "start": "**Start the line by clicking on the end of the road.**",
+            "intersect": "Click to add more points to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**",
+            "finish": "Just like with areas, lines can be finished by clicking on the last point again. **Finish drawing the road.**",
             "road": "**Select *Road* from the grid**",
             "residential": "There are different types of roads, the most common of which is Residential. **Choose the *Residential* road type**",
             "describe": "**Name the road**"

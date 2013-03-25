@@ -70,14 +70,13 @@ iD.ui.intro.pad = function(box, padding) {
         console.log("array");
         box = {
             left: box[0],
-            top: box[1],
-            width: 0,
-            height: 0
+            top: box[1]
         };
     }
-    box.left -= padding;
-    box.top -= padding;
-    box.width += 2 * padding;
-    box.height += 2 * padding;
-    return box;
+    return {
+        left: box.left - padding,
+        top: box.top - padding,
+        width: (box.width || 0) + 2 * padding,
+        height: (box.width || 0) + 2 * padding
+    };
 };
