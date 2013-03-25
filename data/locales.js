@@ -1590,6 +1590,7 @@ locale.zh = {
     "commit": {
         "title": "保存更改",
         "description_placeholder": "简要说明你的贡献",
+        "message_label": "提交说明",
         "upload_explanation": "{user}你上传的更新将会显示在所有使用OpenStreetMap数据的地图上。",
         "save": "保存",
         "cancel": "取消",
@@ -1784,6 +1785,9 @@ locale.zh = {
             "maxspeed": {
                 "label": "限速"
             },
+            "name": {
+                "label": "名称"
+            },
             "natural": {
                 "label": "自然"
             },
@@ -1797,6 +1801,9 @@ locale.zh = {
                 "label": "类型"
             },
             "oneway": {
+                "label": "单行"
+            },
+            "oneway_yes": {
                 "label": "单行"
             },
             "opening_hours": {
@@ -2014,6 +2021,9 @@ locale.zh = {
             "barrier/bollard": {
                 "name": "短柱"
             },
+            "barrier/cattle_grid": {
+                "name": "家畜栅栏"
+            },
             "barrier/city_wall": {
                 "name": "城墙"
             },
@@ -2054,7 +2064,7 @@ locale.zh = {
                 "name": "公路"
             },
             "highway/bridleway": {
-                "name": "台阶",
+                "name": "马道",
                 "terms": "楼梯"
             },
             "highway/bus_stop": {
@@ -2073,17 +2083,29 @@ locale.zh = {
             "highway/motorway": {
                 "name": "高速公路"
             },
+            "highway/motorway_link": {
+                "name": "高速公路匝道"
+            },
             "highway/path": {
                 "name": "路"
             },
             "highway/primary": {
                 "name": "主要道路"
             },
+            "highway/primary_link": {
+                "name": "主要道路匝道"
+            },
             "highway/residential": {
                 "name": "住宅区道路"
             },
+            "highway/road": {
+                "name": "未知道路"
+            },
             "highway/secondary": {
                 "name": "次要道路"
+            },
+            "highway/secondary_link": {
+                "name": "次要道路匝道"
             },
             "highway/service": {
                 "name": "辅助道路"
@@ -2095,6 +2117,9 @@ locale.zh = {
             "highway/tertiary": {
                 "name": "三级道路"
             },
+            "highway/tertiary_link": {
+                "name": "三级道路匝道"
+            },
             "highway/track": {
                 "name": "小路"
             },
@@ -2104,6 +2129,9 @@ locale.zh = {
             },
             "highway/trunk": {
                 "name": "干线道路"
+            },
+            "highway/trunk_link": {
+                "name": "干线道路匝道"
             },
             "highway/turning_circle": {
                 "name": "环岛"
@@ -2117,6 +2145,9 @@ locale.zh = {
             "historic/archaeological_site": {
                 "name": "考古遗址"
             },
+            "historic/boundary_stone": {
+                "name": "界桩"
+            },
             "historic/castle": {
                 "name": "城堡"
             },
@@ -2128,6 +2159,9 @@ locale.zh = {
             },
             "historic/ruins": {
                 "name": "废墟"
+            },
+            "historic/wayside_cross": {
+                "name": "路边的十字架"
             },
             "historic/wayside_shrine": {
                 "name": "路边的神社"
@@ -2315,7 +2349,7 @@ locale.zh = {
                 "name": "村庄"
             },
             "power": {
-                "name": "动力"
+                "name": "电力设施"
             },
             "power/generator": {
                 "name": "发电厂"
@@ -2378,11 +2412,14 @@ locale.zh = {
             "shop/beverages": {
                 "name": "饮料店"
             },
+            "shop/bicycle": {
+                "name": "自行车店"
+            },
             "shop/books": {
                 "name": "书店"
             },
             "shop/boutique": {
-                "name": "精品"
+                "name": "精品店"
             },
             "shop/butcher": {
                 "name": "肉贩"
@@ -2397,7 +2434,7 @@ locale.zh = {
                 "name": "汽车修理店"
             },
             "shop/chemist": {
-                "name": "化学家"
+                "name": "药房"
             },
             "shop/clothes": {
                 "name": "服装店"
@@ -2424,7 +2461,10 @@ locale.zh = {
                 "name": "干洗店"
             },
             "shop/electronics": {
-                "name": "鱼贩子"
+                "name": "家电店"
+            },
+            "shop/fishmonger": {
+                "name": "鱼贩"
             },
             "shop/florist": {
                 "name": "花店"
@@ -2433,7 +2473,7 @@ locale.zh = {
                 "name": "家具店"
             },
             "shop/garden_centre": {
-                "name": "花园中心"
+                "name": "花店"
             },
             "shop/gift": {
                 "name": "礼品店"
@@ -2451,10 +2491,10 @@ locale.zh = {
                 "name": "音响店"
             },
             "shop/jewelry": {
-                "name": "珠宝商"
+                "name": "珠宝店"
             },
             "shop/kiosk": {
-                "name": "亭"
+                "name": "报刊亭"
             },
             "shop/laundry": {
                 "name": "洗衣店"
@@ -2475,7 +2515,7 @@ locale.zh = {
                 "name": "书报"
             },
             "shop/optician": {
-                "name": "配镜师"
+                "name": "眼镜店"
             },
             "shop/outdoor": {
                 "name": "户外店"
@@ -2544,7 +2584,7 @@ locale.zh = {
                 "name": "旅馆"
             },
             "tourism/information": {
-                "name": "信息"
+                "name": "信息板"
             },
             "tourism/motel": {
                 "name": "汽车旅馆"
@@ -6870,11 +6910,14 @@ locale.pt = {
     "inspector": {
         "no_documentation_combination": "Não há documentação disponível para esta combinação de tags",
         "no_documentation_key": "Não há documentação disponível para esta tecla",
+        "show_more": "Mostrar Mais",
         "new_tag": "Nova tag",
         "view_on_osm": "Ver em OSM",
+        "editing_feature": "Editando {feature}",
         "additional": "Tags adicionais",
         "choose": "O que está a adicionar?",
-        "results": "{n} resultados para {search}"
+        "results": "{n} resultados para {search}",
+        "reference": "Ver na Wiki do OpenStreetMap"
     },
     "background": {
         "title": "Fundo",
@@ -6884,6 +6927,7 @@ locale.pt = {
         "reset": "reiniciar"
     },
     "restore": {
+        "heading": "Tem alterações por guardar",
         "description": "Tem alterações por guardar de uma prévia sessão de edição. Deseja restaurar estas alterações?",
         "restore": "Restaurar",
         "reset": "Descartar"
@@ -6891,6 +6935,7 @@ locale.pt = {
     "save": {
         "title": "Guardar",
         "help": "Guardar alterações no OpenStreetMap, tornando-as visíveis a outros utilizadores.",
+        "no_changes": "Não há alterações para guardar.",
         "error": "Um erro ocorreu ao tentar guardar",
         "uploading": "Enviando alterações para OpenStreetMap.",
         "unsaved_changes": "Tem alterações por guardar"
@@ -6901,6 +6946,7 @@ locale.pt = {
     },
     "source_switch": {
         "live": "ao vivo",
+        "lose_changes": "Tem alterações por guardar. Mudando o servidor de mapas irá perdê-las. Tem a certeza que deseja mudar de servidores?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -6919,6 +6965,403 @@ locale.pt = {
     "zoom": {
         "in": "Aproximar",
         "out": "Afastar"
+    },
+    "imagery": {
+        "provided_by": "Imagens disponibilizadas por {source}"
+    },
+    "gpx": {
+        "local_layer": "Ficheiro GPX local",
+        "drag_drop": "Arraste um ficheiro .gpx para a página"
+    },
+    "help": {
+        "title": "Ajuda"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Acesso"
+            },
+            "address": {
+                "label": "Morada",
+                "placeholders": {
+                    "housename": "Nome de casa",
+                    "number": "123",
+                    "street": "Rua",
+                    "city": "Cidade"
+                }
+            },
+            "aeroway": {
+                "label": "Tipo"
+            },
+            "amenity": {
+                "label": "Tipo"
+            },
+            "atm": {
+                "label": "MB"
+            },
+            "bicycle_parking": {
+                "label": "Tipo"
+            },
+            "building": {
+                "label": "Edifício"
+            },
+            "building_area": {
+                "label": "Edifício"
+            },
+            "building_yes": {
+                "label": "Edifício"
+            },
+            "capacity": {
+                "label": "Capacidade"
+            },
+            "construction": {
+                "label": "Tipo"
+            },
+            "crossing": {
+                "label": "Tipo"
+            },
+            "cuisine": {
+                "label": "Cozinha"
+            },
+            "denomination": {
+                "label": "Denominação"
+            },
+            "denotation": {
+                "label": "Denotação"
+            },
+            "elevation": {
+                "label": "Elevação"
+            },
+            "emergency": {
+                "label": "Emergência"
+            },
+            "entrance": {
+                "label": "Tipo"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "fee": {
+                "label": "Tarifa"
+            },
+            "highway": {
+                "label": "Tipo"
+            },
+            "historic": {
+                "label": "Tipo"
+            },
+            "internet_access": {
+                "label": "Acesso à Internet",
+                "options": {
+                    "wlan": "Wifi"
+                }
+            },
+            "maxspeed": {
+                "label": "Limite de Velocidade"
+            },
+            "natural": {
+                "label": "Natural"
+            },
+            "network": {
+                "label": "Rede"
+            },
+            "note": {
+                "label": "Nota"
+            },
+            "office": {
+                "label": "Tipo"
+            },
+            "oneway": {
+                "label": "Sentido Único"
+            },
+            "opening_hours": {
+                "label": "Horas"
+            },
+            "operator": {
+                "label": "Operador"
+            },
+            "phone": {
+                "label": "Telefone"
+            },
+            "place": {
+                "label": "Tipo"
+            },
+            "railway": {
+                "label": "Tipo"
+            },
+            "religion": {
+                "label": "Religião",
+                "options": {
+                    "christian": "Cristão",
+                    "muslim": "Muçulmano",
+                    "buddhist": "Budista",
+                    "jewish": "Judeu"
+                }
+            },
+            "shelter": {
+                "label": "Abrigo"
+            },
+            "shop": {
+                "label": "Tipo"
+            },
+            "source": {
+                "label": "Fonte"
+            },
+            "sport": {
+                "label": "Desporto"
+            },
+            "surface": {
+                "label": "Superfície"
+            },
+            "tourism": {
+                "label": "Tipo"
+            },
+            "water": {
+                "label": "Tipo"
+            },
+            "waterway": {
+                "label": "Tipo"
+            },
+            "website": {
+                "label": "Website"
+            },
+            "wetland": {
+                "label": "Tipo"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Tipo"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "Aeroporto"
+            },
+            "amenity": {
+                "name": "Amenidade"
+            },
+            "amenity/bank": {
+                "name": "Banco"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Banco"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Parque de Bicicletas"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Aluguer de Bicicletas"
+            },
+            "amenity/cafe": {
+                "name": "Café"
+            },
+            "amenity/cinema": {
+                "name": "Cinema"
+            },
+            "amenity/fire_station": {
+                "name": "Quartel de Bombeiros"
+            },
+            "amenity/grave_yard": {
+                "name": "Cemitério"
+            },
+            "amenity/hospital": {
+                "name": "Hospital"
+            },
+            "amenity/library": {
+                "name": "Biblioteca"
+            },
+            "amenity/parking": {
+                "name": "Estacionamento"
+            },
+            "amenity/pharmacy": {
+                "name": "Farmácia"
+            },
+            "amenity/place_of_worship": {
+                "name": "Local de Oração"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Igreja"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mesquita"
+            },
+            "amenity/police": {
+                "name": "Polícia"
+            },
+            "amenity/post_box": {
+                "name": "Caixa de Correio"
+            },
+            "amenity/post_office": {
+                "name": "Estação de Correios"
+            },
+            "amenity/pub": {
+                "name": "Bar"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurante"
+            },
+            "amenity/school": {
+                "name": "Escola"
+            },
+            "amenity/telephone": {
+                "name": "Telefone"
+            },
+            "amenity/toilets": {
+                "name": "Casas de Banho"
+            },
+            "amenity/townhall": {
+                "name": "Câmara Municipal"
+            },
+            "amenity/university": {
+                "name": "Universidade"
+            },
+            "building": {
+                "name": "Edifício"
+            },
+            "entrance": {
+                "name": "Entrada"
+            },
+            "highway": {
+                "name": "Autoestrada"
+            },
+            "highway/bus_stop": {
+                "name": "Paragem de Autocarro"
+            },
+            "highway/crossing": {
+                "name": "Passadeira"
+            },
+            "highway/cycleway": {
+                "name": "Ciclovia"
+            },
+            "highway/primary": {
+                "name": "Estrada Principal"
+            },
+            "highway/residential": {
+                "name": "Estrada Residencial"
+            },
+            "highway/secondary": {
+                "name": "Estrada Secundária"
+            },
+            "highway/service": {
+                "name": "Estrada de Serviço"
+            },
+            "highway/steps": {
+                "name": "Passos"
+            },
+            "highway/track": {
+                "name": "Pista"
+            },
+            "landuse/cemetery": {
+                "name": "Cemitério"
+            },
+            "landuse/commercial": {
+                "name": "Comercial"
+            },
+            "landuse/construction": {
+                "name": "Construção"
+            },
+            "landuse/farm": {
+                "name": "Quinta"
+            },
+            "landuse/farmyard": {
+                "name": "Quintal"
+            },
+            "landuse/forest": {
+                "name": "Floresta"
+            },
+            "landuse/grass": {
+                "name": "Relva"
+            },
+            "landuse/industrial": {
+                "name": "Industrial"
+            },
+            "leisure/golf_course": {
+                "name": "Campo de Golf"
+            },
+            "leisure/park": {
+                "name": "Parque"
+            },
+            "leisure/pitch": {
+                "name": "Campo de Desporto"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Campo de Ténis"
+            },
+            "man_made/water_tower": {
+                "name": "Torre de Água"
+            },
+            "natural": {
+                "name": "Natural"
+            },
+            "natural/bay": {
+                "name": "Baía"
+            },
+            "natural/beach": {
+                "name": "Praia"
+            },
+            "natural/cliff": {
+                "name": "Penhasco"
+            },
+            "natural/coastline": {
+                "name": "Linha Costeira"
+            },
+            "natural/water": {
+                "name": "Água"
+            },
+            "natural/water/lake": {
+                "name": "Lago"
+            },
+            "place/island": {
+                "name": "Ilha"
+            },
+            "place/locality": {
+                "name": "Localidade"
+            },
+            "place/village": {
+                "name": "Aldeia"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Entrada de Metro"
+            },
+            "shop": {
+                "name": "Loja"
+            },
+            "shop/butcher": {
+                "name": "Talho"
+            },
+            "shop/supermarket": {
+                "name": "Supermercado"
+            },
+            "tourism": {
+                "name": "Turismo"
+            },
+            "tourism/camp_site": {
+                "name": "Parque de Campismo"
+            },
+            "tourism/hotel": {
+                "name": "Hotal"
+            },
+            "tourism/museum": {
+                "name": "Musei"
+            },
+            "waterway/canal": {
+                "name": "Canal"
+            },
+            "waterway/river": {
+                "name": "Rio"
+            }
+        }
     }
 };
 locale.ru = {
@@ -9144,6 +9587,7 @@ locale.vi = {
         "reset": "đặt lại"
     },
     "restore": {
+        "heading": "Bạn có thay đổi chưa lưu",
         "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?",
         "restore": "Khôi phục",
         "reset": "Đặt lại"
@@ -9162,6 +9606,7 @@ locale.vi = {
     },
     "source_switch": {
         "live": "thật",
+        "lose_changes": "Bạn có các thay đổi chưa lưu. Các thay đổi này sẽ bị mất khi bạn đổi máy chủ bản đồ. Bạn có chắc chắn muốn đổi máy chủ?",
         "dev": "thử"
     },
     "tag_reference": {
@@ -9187,6 +9632,9 @@ locale.vi = {
     "gpx": {
         "local_layer": "Tập tin GPX địa phương",
         "drag_drop": "Kéo thả một tập tin .gpx vào trang"
+    },
+    "help": {
+        "title": "Trợ giúp"
     },
     "presets": {
         "fields": {

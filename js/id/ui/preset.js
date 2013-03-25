@@ -78,6 +78,7 @@ iD.ui.preset = function(context, entity) {
 
         label.append('button')
             .attr('class', 'fr icon undo modified-icon')
+            .attr('tabindex', -1)
             .on('click', function(field) {
                 var original = context.graph().base().entities[entity.id];
                 var t = {};
@@ -89,6 +90,7 @@ iD.ui.preset = function(context, entity) {
 
         label.append('button')
             .attr('class', 'fr icon inspect')
+            .attr('tabindex', -1)
             .on('click', function(field) {
                 selection.selectAll('div.tag-help')
                     .style('display', 'none');
