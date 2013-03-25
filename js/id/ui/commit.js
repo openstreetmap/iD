@@ -36,7 +36,7 @@ iD.ui.Commit = function(context) {
 
         // Comment Section
         var commentSection = body.append('div')
-            .attr('class', 'modal-section preset-field');
+            .attr('class', 'modal-section form-field');
 
             commentSection.append('label')
                 .attr('class','form-label')

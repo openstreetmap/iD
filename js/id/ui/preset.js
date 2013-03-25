@@ -62,13 +62,13 @@ iD.ui.preset = function(context, entity) {
     }
 
     function draw(selection, fields) {
-        var sections = selection.selectAll('div.preset-field')
+        var sections = selection.selectAll('div.form-field')
             .data(fields, function(field) { return field.id; })
             .enter()
             .append('div')
             .style('opacity', 0)
             .attr('class', function(field) {
-                return 'preset-field preset-field-' + field.id + ' fillL inspector-inner col12';
+                return 'form-field form-field-' + field.id + ' fillL inspector-inner col12';
             });
 
         var label = sections.append('label')
@@ -146,7 +146,7 @@ iD.ui.preset = function(context, entity) {
             }
         });
 
-        formwrap.selectAll('div.preset-field')
+        formwrap.selectAll('div.form-field')
             .classed('modified', function(d) {
                 var original = context.graph().base().entities[entity.id];
                 return _.any(d.keys || [d.key], function(key) {

@@ -931,19 +931,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top: 15px;
 }
 
-.preset-field.inspector-inner { 
+.form-field.inspector-inner { 
     padding-bottom: 0;
 }
 
-.preset-field .modified-icon {
+.form-field .modified-icon {
     opacity: 0.2;
     display: none;
     pointer-events: all;
 }
-.preset-field .modified-icon:hover {
+
+.form-field .modified-icon:hover {
     opacity: 0.5;
 }
-.preset-field.modified .modified-icon {
+
+.form-field.modified .modified-icon {
     display: inline-block;
 }
 
@@ -956,25 +958,25 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-radius: 4px 4px 0 0;
 }
 
-.preset-field > input,
-.preset-field > textarea,
-.preset-field .preset-input-wrap {
+.form-field > input,
+.form-field > textarea,
+.form-field .preset-input-wrap {
     border: 1px solid #CCC;
     border-top: 0;
     border-radius: 0 0 4px 4px;
 }
 
-.preset-field textarea {
+.form-field textarea {
     height: 65px;
 }
 
-.preset-field-levels,
-.preset-field-elevation,
-.preset-field.checkselect {
+.form-field-levels,
+.form-field-elevation,
+.form-field.checkselect {
     width: 60%;
 }
 
-.preset-field-name input {
+.form-field-name input {
     height: 35px;
     font-size: 18px;
     font-weight: bold;
@@ -1109,11 +1111,11 @@ input[type=number] {
 
 /* Preset form address */
 
-.preset-field .addr-housename {
+.form-field .addr-housename {
     border: none;
 }
 
-.preset-field .addr-number {
+.form-field .addr-number {
     width: 20%;
     border-left: none;
     border-right: none;
@@ -1121,14 +1123,14 @@ input[type=number] {
     border-radius: 0;
 }
 
-.preset-field .addr-street {
+.form-field .addr-street {
     width: 80%;
     border-right: none;
     border-bottom: none;
     border-radius: 0;
 }
 
-.preset-field .addr-city {
+.form-field .addr-city {
     border-left: none;
     border-right: none;
     border-bottom: none;
