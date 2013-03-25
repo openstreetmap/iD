@@ -68,7 +68,7 @@ iD.ui.preset = function(context, entity) {
             .append('div')
             .style('opacity', 0)
             .attr('class', function(field) {
-                return 'form-field form-field-' + field.id + ' fillL inspector-inner col12';
+                return 'form-field form-field-' + field.id + ' fillL col12';
             });
 
         var label = sections.append('label')
@@ -102,7 +102,14 @@ iD.ui.preset = function(context, entity) {
             });
 
         sections.transition()
-            .style('opacity', 1);
+            .style('max-height', '0px')
+            .style('padding-top', '0px')
+            .style('opacity', '0')
+            .transition()
+            .duration(200)
+            .style('padding-top', '20px')
+            .style('max-height', '200px')
+            .style('opacity', '1');
 
         sections.each(function(field) {
             var i = iD.ui.preset[field.type](field, context)

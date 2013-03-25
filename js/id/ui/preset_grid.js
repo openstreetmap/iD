@@ -270,7 +270,7 @@ iD.ui.PresetGrid = function(context, entity) {
                 })
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'preset-help')
+                .attr('class', 'tag-reference-button')
                 .on('click', helpClick, selection)
                 .append('span')
                     .attr('class', 'icon inspect');

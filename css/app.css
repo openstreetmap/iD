@@ -94,9 +94,9 @@ h5 {
 }
 
 p {
-    font-size: 15px;
+    font-size: 12px;
     margin:0;
-    padding-bottom:20px;
+    padding:0;
 }
 
 p:last-child {
@@ -308,7 +308,6 @@ a.hide {
 .pane:last-child {
     right: 0;
 }
-
 
 /* Buttons */
 
@@ -569,7 +568,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-radius: 0;
 }
 
-
 /* Header for modals / panes
 ------------------------------------------------------- */
 
@@ -707,12 +705,12 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #ececec;
 }
 
-.grid-entry:hover .preset-help {
+.grid-entry:hover .tag-reference-button {
     display: block;
     border-radius: 0;
 }
 
-.grid-entry .preset-help {
+.grid-entry .tag-reference-button {
     display: none;
     position: absolute;
     bottom: 0;
@@ -722,7 +720,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: rgba(0,0,0,.5);
 }
 
-.grid-entry .preset-help:hover {
+.grid-entry .tag-reference-button:hover {
     background: rgba(0,0,0,.9);
 }
 
@@ -817,7 +815,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     padding: 10px 0px 0px 10px;
     border: 1px solid #CCC;
     margin-top: 0px;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .subgrid .arrow {
@@ -934,8 +932,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top: 15px;
 }
 
-.form-field.inspector-inner { 
-    padding-bottom: 0;
+.inspector-preset .form-field { 
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .form-field .modified-icon {
@@ -1298,6 +1297,16 @@ div.combobox {
     display: none;
 }
 
+/* Tag reference */
+
+img.wiki-image { 
+    float: left;
+    max-width: 33.3333%;
+    margin-right: 20px;
+    max-height: 200px;
+    border-radius: 4px;
+}
+
 /* Map Controls */
 
 .map-control {
@@ -1559,6 +1568,11 @@ div.combobox {
     padding: 20px 20px 20px 50px;
     left: 0;
     overflow-y: scroll;
+}
+
+.help-wrap p {
+    font-size: 15px;
+    margin-bottom: 20px;
 }
 
 .help-wrap .left-content .body p code {

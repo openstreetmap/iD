@@ -39,7 +39,7 @@ iD.ui.TagReference = function(entity, tag) {
             }
 
             var referenceBody = selection.append('div')
-                .attr('class','modal-section fillL2');
+                .attr('class','tag-reference-wrap');
 
             if (docs.image && docs.image.thumb_url_prefix) {
                 referenceBody
