@@ -18,6 +18,16 @@ d3.curtain = function() {
                 'bottom': 0
             });
 
+        var darkness = surface.append('rect')
+            .attr({
+                x: 0,
+                y: 0,
+                width: window.innerWidth,
+                height: window.innerHeight,
+                'class': 'curtain-darkness',
+                'mask': 'url(#mask)'
+            });
+
         tooltip = selection.append('div')
             .attr('class', 'tooltip')
             .style('z-index', 1002);
@@ -25,20 +35,16 @@ d3.curtain = function() {
         tooltip.append('div').attr('class', 'tooltip-arrow');
         tooltip.append('div').attr('class', 'tooltip-inner');
 
-        var defs = surface.append('defs');
-
-        mask = defs.append('mask')
-            .attr('id', 'mask');
+        mask = surface.append('defs')
+            .append('mask').attr('id', 'mask');
 
         mask.append('rect')
+            .style('fill', 'white')
             .attr({
                 x: 0,
                 y: 0,
                 width: window.innerWidth,
                 height: window.innerHeight
-            })
-            .style({
-                'fill': 'white'
             });
 
         d3.select(window).on('resize.curtain', function() {
@@ -48,54 +54,33 @@ d3.curtain = function() {
             };
             mask.attr(size);
             darkness.attr(size);
-
         });
 
-        var darkness = surface.append('rect')
-            .attr({
-                x: 0,
-                y: 0,
-                width: window.innerWidth,
-                height: window.innerHeight,
-                'mask': "url(#mask)"
-            })
-            .style({
-                'fill-opacity': 0.7,
-                'fill': '#222'
-            });
-
     }
-
-    function elementRect(elem) {
-        var ret = elem.getBoundingClientRect();
-        return ret;
-    }
-
-    curtain.getReveal = function(box, side, text) {
-        return function() {
-            curtain.reveal(box, side, text);
-        };
-    };
 
     curtain.hide = function() {
         curtain.cut();
         tooltip.classed('in', false);
     };
 
-    curtain.reveal = function(box, side, text, duration) {
-        if (typeof box === 'string') box = elementRect(d3.select(box).node());
-        if (box.getBoundingClientRect) box = elementRect(box);
-
-        var pos;
+    curtain.reveal = function(box, text, duration) {
+        if (typeof box === 'string') box = d3.select(box).node();
+        if (box.getBoundingClientRect) box = box.getBoundingClientRect();
 
         curtain.cut(box, duration);
 
-        if (box.top + box.height < Math.min(200, box.width + box.left)) {
+        var pos;
+
+        var w = window.innerWidth,
+            h = window.innerHeight,
+            twidth = 200;
+
+        if (box.top + box.height < Math.min(100, box.width + box.left)) {
             side = 'bottom';
-            pos = [box.left, box.top + box.height];
+            pos = [box.left + box.width / 2 - twidth / 2, box.top + box.height];
         } else if (box.left + box.width + 300 < window.innerWidth) {
             side = 'right';
-            pos = [box.left + box.width, Math.max(box.top, 10)];
+            pos = [box.left + box.width, box.top, 10];
         } else if (box.left > 300) {
             side = 'left';
             pos = [box.left - 200, Math.max(box.top, 10)];
@@ -103,6 +88,11 @@ d3.curtain = function() {
             side = 'bottom';
             pos = [box.left, box.top + box.height];
         }
+
+        pos = [
+            Math.min(Math.max(10, pos[0]), w - twidth - 10),
+            Math.min(Math.max(10, pos[1]), h - 100 - 10)
+        ];
 
         // pseudo markdown bold text hack
         var parts = text.split('**');

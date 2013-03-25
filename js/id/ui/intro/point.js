@@ -14,7 +14,7 @@ iD.ui.intro.point = function(context, curtain) {
     step.enter = function() {
 
         context.map().centerZoom([-85.63279, 41.94394], 19);
-        curtain.reveal('button.add-point', 'bottom', t('intro.points.add'));
+        curtain.reveal('button.add-point', t('intro.points.add'));
 
         var corner = [-85.632481,41.944094];
 
@@ -25,11 +25,11 @@ iD.ui.intro.point = function(context, curtain) {
             context.on('enter.intro', enterSelect);
 
             var pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-            curtain.reveal(pointBox, 'right', t('intro.points.place'));
+            curtain.reveal(pointBox, t('intro.points.place'));
 
             context.map().on('move.intro', function() {
                 pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-                curtain.reveal(pointBox, 'right', t('intro.points.place'), 0);
+                curtain.reveal(pointBox, t('intro.points.place'), 0);
             });
 
         }
@@ -40,18 +40,18 @@ iD.ui.intro.point = function(context, curtain) {
             context.on('enter.intro', null);
 
             setTimeout(function() {
-                curtain.reveal('.preset-grid-search', 'left', t('intro.points.search'));
+                curtain.reveal('.preset-grid-search', t('intro.points.search'));
                 d3.select('.preset-grid-search').one('keydown.intro', keySearch);
             }, 500);
         }
 
         function keySearch() {
-            curtain.reveal('button.grid-entry', 'left', t('intro.points.choose'));
+            curtain.reveal('button.grid-entry', t('intro.points.choose'));
             d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
         }
 
         function selectedPreset() {
-            curtain.reveal('.pane', 'left', 'Add a name and edit some details. Click x to exit');
+            curtain.reveal('.pane', 'Add a name and edit some details. Click x to exit');
             context.on('exit.intro', event.done);
         }
     };

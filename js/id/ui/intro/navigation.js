@@ -32,7 +32,7 @@ iD.ui.intro.navigation = function(context, curtain) {
 
         context.map().centerZoom([-85.63591, 41.94285], 19);
 
-        curtain.reveal(map, 'right', t('intro.navigation.drag'));
+        curtain.reveal(map, t('intro.navigation.drag'));
 
         context.map().on('move.intro', _.debounce(function() {
             context.map().on('move.intro', null);
@@ -43,17 +43,17 @@ iD.ui.intro.navigation = function(context, curtain) {
         function townhall() {
             var hall = d3.select('.node.tag-amenity-townhall');
             var box = iD.ui.intro.pointBox(context.projection(hall.datum().loc));
-            curtain.reveal(box, 'right', t('intro.navigation.select'));
+            curtain.reveal(box, t('intro.navigation.select'));
 
             context.map().on('move.intro', function() {
                 var hall = d3.select('.node.tag-amenity-townhall');
                 var box = iD.ui.intro.pointBox(context.projection(hall.datum().loc));
-                curtain.reveal(box, 'right', t('intro.navigation.select'), 0);
+                curtain.reveal(box, t('intro.navigation.select'), 0);
             });
         }
 
         function primaryRoad() {
-            curtain.reveal('.tag-highway-primary', 'right', t('intro.navigation.selectstreet'));
+            curtain.reveal('.tag-highway-primary', t('intro.navigation.selectstreet'));
             context.on('enter.intro', inspectRoad);
         }
 
@@ -61,15 +61,15 @@ iD.ui.intro.navigation = function(context, curtain) {
             if (mode.id !== 'select') return;
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
-            set(curtain.getReveal('.header', 'left', t('intro.navigation.header')), 700);
-            set(curtain.getReveal('.tag-wrap', 'left', t('intro.navigation.pane')), 4000);
+            set(function() { curtain.reveal('.header', t('intro.navigation.header')); }, 700);
+            set(function() { curtain.reveal('.tag-wrap', t('intro.navigation.pane')); }, 4000);
             set(primaryRoad, 7001);
         }
 
         function inspectRoad(mode) {
             if (mode.id !== 'select') return;
             context.on('enter.intro', null);
-            set(curtain.getReveal('.header', 'left', t('intro.navigation.headerstreet')), 700);
+            set(function() { curtain.reveal('.header', t('intro.navigation.headerstreet')); }, 700);
             set(event.done, 4000);
         }
 

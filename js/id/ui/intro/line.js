@@ -19,7 +19,7 @@ iD.ui.intro.line = function(context, curtain) {
 
         context.map().centerZoom(start, 19);
         console.log("here");
-        curtain.reveal('button.add-line', 'bottom', t('intro.lines.add'));
+        curtain.reveal('button.add-line', t('intro.lines.add'));
 
         context.on('enter.intro', addLine);
 
@@ -29,12 +29,12 @@ iD.ui.intro.line = function(context, curtain) {
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(start), padding);
-            curtain.reveal(pointBox, 'right', t('intro.lines.start'));
+            curtain.reveal(pointBox, t('intro.lines.start'));
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(start), padding);
-                curtain.reveal(pointBox, 'right', t('intro.lines.start'), 0);
+                curtain.reveal(pointBox, t('intro.lines.start'), 0);
             });
         }
         function drawLine (mode) {
@@ -44,12 +44,12 @@ iD.ui.intro.line = function(context, curtain) {
 
             var padding = 300 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
-            curtain.reveal(pointBox, 'right', t('intro.lines.intersect'));
+            curtain.reveal(pointBox, t('intro.lines.intersect'));
 
             context.map().on('move.intro', function() {
                 padding = 300 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
-                curtain.reveal(pointBox, 'right', t('intro.lines.intersect'), 0);
+                curtain.reveal(pointBox, t('intro.lines.intersect'), 0);
             });
         }
 
@@ -62,12 +62,12 @@ iD.ui.intro.line = function(context, curtain) {
 
                 var padding = 900 * Math.pow(2, context.map().zoom() - 19);
                 var pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
-                curtain.reveal(pointBox, 'right', t('intro.lines.finish'));
+                curtain.reveal(pointBox, t('intro.lines.finish'));
 
                 context.map().on('move.intro', function() {
                     padding = 900 * Math.pow(2, context.map().zoom() - 19);
                     pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
-                    curtain.reveal(pointBox, 'right', t('intro.lines.finish'), 0);
+                    curtain.reveal(pointBox, t('intro.lines.finish'), 0);
                 });
             }
         }
@@ -81,7 +81,7 @@ iD.ui.intro.line = function(context, curtain) {
                 var road = d3.select('.preset-grid .grid-entry').filter(function(d) {
                     return d.id === 'Road';
                 });
-                curtain.reveal(road.node(), 'left', t('intro.lines.road'));
+                curtain.reveal(road.node(), t('intro.lines.road'));
                 road.one('click.intro', roadCategory);
             }, 500);
         }
@@ -89,7 +89,7 @@ iD.ui.intro.line = function(context, curtain) {
         function roadCategory() {
             window.setTimeout(function() {
                 var grid = d3.select('.subgrid');
-                curtain.reveal(grid.node(), '', t('intro.lines.residential'));
+                curtain.reveal(grid.node(),  t('intro.lines.residential'));
                 grid.selectAll('.grid-entry').filter(function(d) {
                     return d.id === 'highway/residential';
                 }).one('click.intro', roadDetails);
@@ -97,7 +97,7 @@ iD.ui.intro.line = function(context, curtain) {
         }
 
         function roadDetails() {
-            curtain.reveal('.pane', '', t('intro.lines.describe'));
+            curtain.reveal('.pane', t('intro.lines.describe'));
             context.on('exit.intro', event.done);
         }
 
