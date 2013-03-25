@@ -14,9 +14,11 @@ d3.combobox = function() {
 
     var typeahead = function(selection) {
         var idx = -1;
-        input = selection.select('input').classed('combobox-input', true);
 
-        selection.append('div', selection.select('input'))
+        input = selection.select('input')
+            .classed('combobox-input', true);
+
+        selection.append('div', input)
             .attr('class', 'combobox-carat')
             .on('mousedown', stop)
             .on('mousedown', function() {
@@ -25,9 +27,7 @@ d3.combobox = function() {
             });
 
         function updateSize() {
-            var rect = selection.select('input')
-                .node()
-                .getBoundingClientRect();
+            var rect = input.node().getBoundingClientRect();
             container.style({
                 'left': rect.left + 'px',
                 'width': rect.width + 'px',
