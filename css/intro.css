@@ -19,11 +19,25 @@
 }
 
 .intro-nav-wrap button.step.finished {
-    background: #74C574;
+    background: #76FF70;
+}
+
+.intro-nav-wrap button.step.finished h3 {
+    color: #269C21;
 }
 
 .intro-nav-wrap button.step h3 {
     font-weight: normal;
+}
+
+.curtain-tooltip.left .tooltip-arrow,
+.curtain-tooltip.right .tooltip-arrow {
+    top: 0;
+}
+
+.curtain-tooltip.right .tooltip-inner,
+.curtain-tooltip.left .tooltip-inner {
+    margin-top: -50%;
 }
 .curtain-tooltip .tooltip-inner {
     font-size: 14px;

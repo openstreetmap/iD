@@ -82,10 +82,10 @@ d3.curtain = function() {
             pos = [box.left + box.width / 2 - twidth / 2, box.top + box.height];
         } else if (box.left + box.width + 300 < window.innerWidth) {
             side = 'right';
-            pos = [box.left + box.width, box.top, 10];
+            pos = [box.left + box.width, box.top + box.height / 2];
         } else if (box.left > 300) {
             side = 'left';
-            pos = [box.left - 200, Math.max(box.top, 10)];
+            pos = [box.left - 200, box.top + box.height / 2];
         } else {
             side = 'bottom';
             pos = [box.left, box.top + box.height];
@@ -102,11 +102,14 @@ d3.curtain = function() {
         if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
 
-        tooltip.attr('class', 'curtain-tooltip tooltip in ' + side)
+        tooltip
             .style('top', pos[1] + 'px')
             .style('left', pos[0] + 'px')
+            .attr('class', 'curtain-tooltip tooltip in ' + side)
             .select('.tooltip-inner')
                 .html(html);
+
+        if (duration !== 0) tooltip.call(iD.ui.Toggle(true));
     };
 
     curtain.cut = function(data, duration) {
