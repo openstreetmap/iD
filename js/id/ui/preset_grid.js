@@ -164,10 +164,7 @@ iD.ui.PresetGrid = function(context, entity) {
                     .style('max-height', '0px')
                     .style('padding-top', '0px')
                     .style('padding-bottom', '0px')
-                    .each('end', function() {
-                        shown.remove();
-                    });
-
+                    .remove();
 
                 if (shown.datum() === entity && shown.classed(klass)) return;
                 shownIndex = Array.prototype.indexOf.call(shown.node().parentNode.childNodes, shown.node());
