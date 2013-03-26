@@ -113,17 +113,21 @@ iD.ui.preset = function(context, entity, preset) {
             .attr('for', function(field) { return 'preset-input-' + field.id; })
             .text(function(field) { return field.label(); });
 
-        label.append('button')
-            .attr('class', 'fr icon undo modified-icon')
-            .attr('tabindex', -1)
-            .on('click', revert);
+
 
         label.append('button')
-            .attr('class', 'tag-reference-button')
+            .attr('class', 'tag-reference-button fr')
             .attr('tabindex', -1)
             .on('click', toggleReference)
             .append('span')
             .attr('class', 'icon inspect');
+
+        label.append('button')
+            .attr('class', 'fr modified-icon')
+            .attr('tabindex', -1)
+            .on('click', revert)
+            .append('div')
+            .attr('class','icon undo');
 
         enter.each(function(field) {
             d3.select(this).call(field.input);

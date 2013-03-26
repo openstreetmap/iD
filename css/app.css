@@ -491,7 +491,6 @@ button[disabled] .label {
 .icon.plus       { background-position: -240px 0px;}
 .icon.search     { background-position: -280px 0px;}
 .icon.geocode    { background-position: -280px 0px;}
-.icon.help       { background-position: -460px 0px;}
 .icon.layers     { background-position: -300px 0px;}
 .icon.avatar     { background-position: -320px 0px;}
 .icon.nearby     { background-position: -340px 0px;}
@@ -499,8 +498,11 @@ button[disabled] .label {
 .icon.warning    { background-position: -380px 0px;}
 .icon.back       { background-position: -420px 0px;}
 .icon.forward    { background-position: -440px 0px;}
+.icon.help       { background-position: -460px 0px;}
 
+.icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
+.icon.help.light       { background-position: -460px -20px;}
 
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
@@ -512,7 +514,6 @@ button[disabled] .icon.add-area   { background-position: -60px -40px;}
 button.disabled  .icon.undo       { background-position: -80px -40px;}
 button.disabled  .icon.redo       { background-position: -100px -40px;}
 button[disabled] .apply.icon      { background-position: -120px -40px;}
-button[disabled] .save.icon       { background-position: -140px -40px;}
 button[disabled] .close.icon      { background-position: -160px -40px;}
 button[disabled] .delete.icon     { background-position: -180px -40px;}
 button[disabled] .icon.remove     { background-position: -200px -40px;}
@@ -705,25 +706,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #ececec;
 }
 
-.grid-entry:hover .tag-reference-button {
-    display: block;
-    border-radius: 0;
-}
-
-.grid-entry .tag-reference-button {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 30px;
-    width: 30px;
-    background: rgba(0,0,0,.5);
-}
-
-.grid-entry .tag-reference-button:hover {
-    background: rgba(0,0,0,.9);
-}
-
 .grid-entry > .icon {
     position: absolute;
     top: 30px;left: 0px; right: 0px;
@@ -852,6 +834,25 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     color: #222;
 }
 
+.grid-entry:hover .tag-reference-button {
+    opacity: 1;
+    border-radius: 0;
+}
+
+.grid-entry .tag-reference-button {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 30px;
+    background: rgba(0,0,0,.5);
+}
+
+.grid-entry .tag-reference-button:hover {
+    background: rgba(0,0,0,.9);
+}
+
 /* Preset icon colors */
 
 .inspector-body-line .icon.feature-marker-stroked {
@@ -910,7 +911,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .tag-wrap .preset-icon-wrap div { 
-    height: 90px;
+    height: 80px;
     width: 33.3333%;
     width: -webkit-calc(33.3333% - 10px);
     width: calc(33.3333% - 10px);
@@ -937,27 +938,36 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     padding-right: 20px;
 }
 
-.form-field .modified-icon {
-    opacity: 0.2;
-    display: none;
-    pointer-events: all;
-}
-
-.form-field .modified-icon:hover {
-    opacity: 0.5;
-}
-
-.form-field.modified .modified-icon {
-    display: inline-block;
-}
-
 .form-label {
+    position: relative;
     font-weight: bold;
     border: 1px solid #cfcfcf;
-    padding: 5px 10px;
+    padding: 5px 0px 5px 10px;
     background: #f6f6f6;
     display: block;
     border-radius: 4px 4px 0 0;
+}
+
+.form-label button {
+    pointer-events: all;
+    height: 29px;
+    margin-top: -5px;
+    border-left: 1px solid #CCC;
+    border-radius: 0;
+    opacity: .5;
+}
+
+.form-label .modified-icon { 
+    border-right: 0;
+    opacity: 0;
+}
+
+.modified .form-label .modified-icon {
+    opacity: .5;
+}
+
+.form-label button.tag-reference-button { 
+    border-top-right-radius: 3px;
 }
 
 .form-field > input,
