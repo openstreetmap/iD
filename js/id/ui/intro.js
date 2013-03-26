@@ -40,10 +40,10 @@ iD.ui.intro = function(context) {
             }
         });
 
-        var navwrap = selection.append('div').attr('class', ' col12 intro-nav-wrap');
+        var navwrap = selection.append('div').attr('class', 'intro-nav-wrap');
 
         var buttonwrap = navwrap.append('div')
-            .attr('class', 'button-wrap joined')
+            .attr('class', 'joined')
             .selectAll('button.step');
 
         var entered = buttonwrap.data(steps)
@@ -53,7 +53,7 @@ iD.ui.intro = function(context) {
                     enter(d);
                 });
 
-        entered.append('h3').text(function(d) { return d.name; });
+        entered.append('label').text(function(d) { return d.name; });
         enter(steps[0]);
 
         function enter (newStep) {
