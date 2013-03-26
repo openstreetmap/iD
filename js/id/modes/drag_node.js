@@ -159,7 +159,7 @@ iD.modes.DragNode = function(context) {
         context.uninstall(hover);
 
         context.history()
-            .on('undone.drag_node', null);
+            .on('undone.drag-node', null);
 
         context.surface()
             .selectAll('.active')
