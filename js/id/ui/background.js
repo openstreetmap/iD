@@ -237,7 +237,7 @@ iD.ui.Background = function(context) {
 
         var adjustments = content
             .append('div')
-            .attr('class', 'adjustments pad1');
+            .attr('class', 'adjustments');
 
         adjustments.append('a')
             .text(t('background.fix_misalignment'))

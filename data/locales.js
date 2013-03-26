@@ -139,7 +139,7 @@ locale.en = {
     "nothing_to_redo": "Nothing to redo.",
     "just_edited": "You just edited OpenStreetMap!",
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
-    "view_on_osm": "View on OSM →",
+    "view_on_osm": "View on OSM",
     "zoom_in_edit": "zoom in to edit the map",
     "logout": "logout",
     "report_a_bug": "report a bug",
@@ -202,10 +202,10 @@ locale.en = {
         "unsaved_changes": "You have unsaved changes"
     },
     "splash": {
-        "welcome": "Welcome to the iD OpenStreetMap editor",
-        "text": "This is development version {version}. For more information see {website} and report bugs at {github}.",
-        "walkthrough": "Walkthrough",
-        "start": "Start Editing"
+        "welcome": "Welcome to the iD OpenStreetMap Editor",
+        "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is development version {version}. For more information see {website} and report bugs at {github}.",
+        "walkthrough": "Start the walkthrough",
+        "start": "Edit now"
     },
     "source_switch": {
         "live": "live",

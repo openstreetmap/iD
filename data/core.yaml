@@ -163,9 +163,9 @@ en:
     unsaved_changes: You have unsaved changes
   splash:
     welcome: Welcome to the iD OpenStreetMap editor
-    text: "This is development version {version}. For more information see {website} and report bugs at {github}."
-    walkthrough: Walkthrough
-    start: Start Editing
+    text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is development version {version}. For more information see {website} and report bugs at {github}."
+    walkthrough: "Start the walkthrough"
+    start: "Edit now"
   source_switch:
     live: live
     lose_changes: "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?"

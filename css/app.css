@@ -6,7 +6,7 @@ body {
     margin:0;
     padding:0;
     min-width: 768px;
-    color:#222;
+    color:#333;
     overflow: hidden;
     /* text-rendering: optimizeLegibility;  */
     -webkit-font-smoothing: subpixel-antialiased;
@@ -286,8 +286,6 @@ a.hide {
     box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.7);
 }
 
-.pad1    {padding: 10px;}
-
 .loading {
     background: url(../img/loader_bg.gif);
     background-size:5px 5px;
@@ -320,6 +318,7 @@ button {
     line-height:20px;
     border:0;
     background: white;
+    color:#333;
     font-weight:bold;
     font-size:12px;
     display: inline-block;
@@ -570,6 +569,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 #bar {
     position:absolute;
+    padding: 10px;
     left:0px;
     top:0px;
     right:0;
@@ -721,7 +721,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .inspector-body-line .grid-entry > .icon {
-    top: 10px;
+    top: 15px;
     left: -10px;
     right: -10px;
 }
@@ -748,7 +748,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .current .grid-entry,
 .current .grid-entry .label {
-    background-color: #eef0ff;
+    background-color: #E8EBFF;
 }
 
 .category .grid-entry:after,
@@ -1108,6 +1108,11 @@ input[type=number] {
     border-radius: 0;
     border-right: 1px solid #CCC;
     width: 22.5%;
+    color: #7092FF;
+}
+
+.radio-wrap button.active {
+    background-color: #E8EBFF !important;
 }
 
 .radio-wrap button:last-child {
@@ -1378,6 +1383,10 @@ img.wiki-image {
     margin-top: 10px;
 }
 
+.background-control .adjustments {
+    padding: 10px;
+}
+
 .background-control .adjustments button {
     height:30px;
     font-size:10px;
@@ -1613,7 +1622,7 @@ img.wiki-image {
 }
 
 .help-wrap .toc li a.selected {
-    background: #eef0ff;
+    background: #E8EBFF;
 }
 
 .help-wrap .toc li:first-child a {
@@ -1822,18 +1831,70 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
-/* Splash Modal
+.modal a.action, .modal button.action {
+    font-weight: normal;
+    color: #7092FF;
+    background-color: white;
+    border-bottom: 1px solid #CCC;
+    border-radius: 0;
+    height: 180px;
+    text-align: center;
+    -webkit-transition: all 200ms;
+       -moz-transition: all 200ms;
+            transition: all 200ms;
+}
+
+.modal a.action:hover, .modal button.action:hover {
+    background-color: #ececec;
+}
+
+a.action:before,
+.modal button.action:before {
+    display: block;
+    content: '';
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    margin-bottom: 10px;
+    background:transparent url(../img/sprite.png) no-repeat 0px -220px;
+}
+
+/* Success Modal
 ------------------------------------------------------- */
 
-.modal-splash {
-    width: 33.3333%;
+a.action.osm {
+    border-right: 1px solid #CCC;
 }
+
+a.action.twitter:before {
+    background-position: -100px -220px;
+}
+
+/* Splash Modal
+------------------------------------------------------- */
 
 .logo {
     height: 100px;
     width: 100px;
-    margin: 0 auto 20px auto;
     background: url(../img/logo.png) 0 0 repeat;
+    margin: auto;
+}
+
+.modal-splash h3 {
+    padding-top: 20px;
+    text-align: center;
+ }
+
+.modal-splash .action.start {
+    border-left: 1px solid #CCC;
+}
+
+.modal-splash .action.walkthrough:before {
+    background-position: -200px -220px;
+}
+
+.modal-splash .action.start:before {
+    background-position: -300px -220px;
 }
 
 /* Commit Modal
@@ -1899,40 +1960,6 @@ div.typeahead a:first-child {
 
 .changeset-list li:first-child { border-top: 0;}
 
-/* Success
-------------------------------------------------------- */
-
-.modal a.success-action {
-    height: 170px;
-    border-bottom: 1px solid #CCC;
-    text-align: center;
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-            transition: all 200ms;
-}
-
-.modal a.success-action:hover {
-    background-color: #ececec;
-}
-
-a.success-action.osm {
-    border-right: 1px solid #CCC;
-}
-
-a.success-action:before {
-    display: block;
-    content: '';
-    height: 100px;
-    width: 100px;
-    margin: auto;
-    margin-bottom: 10px;
-    background:transparent url(../img/sprite.png) no-repeat 0px -220px;
-}
-
-a.success-action.twitter:before {
-    background-position: -100px -220px;
-}
-
 /* Notices
 ------------------------------------------------------- */
 
@@ -1973,6 +2000,7 @@ a.success-action.twitter:before {
     width: 200px;
     position: absolute;
     display: none;
+    color:#333;
 }
 
 .tooltip.in {
@@ -2005,8 +2033,8 @@ a.success-action.twitter:before {
 .tooltip-inner {
     display: inline-block;
     padding: 10px;
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: normal;
     background-color: white;
 }
 
@@ -2268,9 +2296,9 @@ a.success-action.twitter:before {
 
 .intro-nav-wrap {
     position: absolute;
-    left: 30px;
-    right: 500px;
-    bottom: 30px;
+    left: 10px;
+    right: 10px;
+    bottom: 40px;
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.8);
     z-index: 1001;

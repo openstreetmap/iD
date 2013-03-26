@@ -31,7 +31,7 @@ iD.ui = function(context) {
 
         var bar = container.append('div')
             .attr('id', 'bar')
-            .attr('class','pad1 fillD');
+            .attr('class','fillD');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');

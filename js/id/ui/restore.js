@@ -22,7 +22,6 @@ iD.ui.Restore = function(context) {
             .append('p')
                 .text(t('restore.description'));
 
-
         var buttonWrap = introModal.append('div')
             .attr('class', 'modal-section col12');
 
