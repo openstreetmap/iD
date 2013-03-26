@@ -11,6 +11,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
 
         if (nodes.length === 4) {
             points = _.uniq(nodes).map(function(n) { return projection(n.loc); });
+
             for (i = 0; i < 1000; i++) {
                 motions = points.map(calcMotion);
                 points[corner.i] = addPoints(points[corner.i],motions[corner.i]);
@@ -19,12 +20,14 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                     break;
                 }
             }
+
             graph = graph.replace(graph.entity(nodes[corner.i].id)
                 .move(projection.invert(points[corner.i])));
         } else {
             var best;
             points = nodes.map(function(n) { return projection(n.loc); });
             score = squareness();
+
             for (i = 0; i < 1000; i++) {
                 motions = points.map(calcMotion);
                 for (j = 0; j < motions.length; j++) {
@@ -39,12 +42,15 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                     break;
                 }
             }
+
             points = best;
+
             for (i = 0; i < points.length - 1; i++) {
                 graph = graph.replace(graph.entity(nodes[i].id)
                     .move(projection.invert(points[i])));
             }
         }
+
         return graph;
 
         function calcMotion(b, i, array) {
@@ -64,11 +70,9 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                 if (dotp < -0.707106781186547) {
                     dotp += 1.0;
                 }
-            } else {
-                if( Math.abs(dotp) < corner.dotp){
-                    corner.i = i;
-                    corner.dotp = Math.abs(dotp);
-                }
+            } else if (Math.abs(dotp) < corner.dotp) {
+                corner.i = i;
+                corner.dotp = Math.abs(dotp);
             }
 
             return normalizePoint(addPoints(p, q), 0.1 * dotp * scale);
