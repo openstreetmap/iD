@@ -1249,7 +1249,6 @@ div.combobox {
     border-right: 1px solid #CCC;
 }
 
-
 .tag-row:first-child input.key {
     border-top: 1px solid #CCC;
     border-top-left-radius: 4px;
@@ -1308,6 +1307,10 @@ div.combobox {
 }
 
 /* Tag reference */
+
+.tag-help { 
+    overflow: hidden;
+}
 
 img.wiki-image { 
     float: left;
