@@ -69,13 +69,13 @@ iD.svg.Vertices = function(projection, context) {
         groups.select('circle.shadow')
             .each(center)
             .attr('r', function(entity) {
-                return radiuses.shadow[icon(entity) ? 3 : zoom]
+                return radiuses.shadow[icon(entity) ? 3 : zoom];
             });
 
         groups.select('circle.stroke')
             .each(center)
             .attr('r', function(entity) {
-                return radiuses.stroke[icon(entity) ? 3 : zoom]
+                return radiuses.stroke[icon(entity) ? 3 : zoom];
             });
 
         // Each vertex gets either a circle or a use, depending

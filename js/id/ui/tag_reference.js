@@ -60,5 +60,5 @@ iD.ui.TagReference = function(entity, tag) {
                 .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title)
                 .text(t('inspector.reference'));
         });
-    }
+    };
 };
