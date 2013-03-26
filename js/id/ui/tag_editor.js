@@ -50,7 +50,7 @@ iD.ui.TagEditor = function(context, entity) {
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
 
         editorwrap.append('div')
-            .attr('class', 'col12 inspector-inner preset-icon-wrap')
+            .attr('class', 'col12 inspector-inner preset-icon-wrap fillL3')
             .append('div')
                 .attr('class','fillL')
                 .append('span')

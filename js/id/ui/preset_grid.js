@@ -114,7 +114,7 @@ iD.ui.PresetGrid = function(context, entity) {
                         .attr('class', 'arrow');
 
                     subgrid.append('div')
-                        .attr('class', 'preset-grid fillL2 cf fl')
+                        .attr('class', 'preset-grid fillL3 cf fl')
                         .data([d.members.collection])
                         .call(drawGrid, 1000);
 
