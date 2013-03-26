@@ -23,7 +23,6 @@ iD.ui.intro.line = function(context, curtain) {
         var intersection = [-85.62974496187628, 41.95742515554585];
 
         context.map().centerZoom(start, 19);
-        console.log("here");
         curtain.reveal('button.add-line', t('intro.lines.add'));
 
         context.on('enter.intro', addLine);
