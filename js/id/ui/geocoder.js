@@ -82,6 +82,10 @@ iD.ui.Geocoder = function(context) {
                 gcForm.call(iD.ui.Toggle(show));
                 if (!show && !resultsList.classed('hide')) {
                     resultsList.call(iD.ui.Toggle(show));
+                    // remove results so that they lose focus. if the user has
+                    // tabbed into the list, then they will have focus still,
+                    // even if they're hidden.
+                    resultsList.selectAll('span').remove();
                 }
                 if (show) inputNode.node().focus();
                 else inputNode.node().blur();

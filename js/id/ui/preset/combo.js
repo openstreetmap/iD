@@ -1,20 +1,17 @@
 iD.ui.preset.combo = function(field) {
 
     var event = d3.dispatch('change', 'close'),
-        wrap,
         input;
 
     function combo(selection) {
-
-        wrap = this.append('span').attr('class', 'input-wrap-position');
-
-        input = wrap.append('input')
-            .attr('type', 'text')
-            .on('change', change)
-            .on('blur', change);
-
         var combobox = d3.combobox();
-        wrap.call(combobox);
+
+        input = selection.append('input')
+            .attr('type', 'text')
+            .attr('id', 'preset-input-' + field.id)
+            .on('change', change)
+            .on('blur', change)
+            .call(combobox);
 
         if (field.options) {
             options(field.options);
@@ -49,6 +46,10 @@ iD.ui.preset.combo = function(field) {
 
     combo.tags = function(tags) {
         input.property('value', tags[field.key] || '');
+    };
+
+    combo.focus = function() {
+        input.node().focus();
     };
 
     return d3.rebind(combo, event, 'on');

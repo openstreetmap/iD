@@ -139,7 +139,7 @@ locale.en = {
     "nothing_to_redo": "Nothing to redo.",
     "just_edited": "You just edited OpenStreetMap!",
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
-    "view_on_osm": "View on OSM",
+    "view_on_osm": "View on OSM →",
     "zoom_in_edit": "zoom in to edit the map",
     "logout": "logout",
     "report_a_bug": "report a bug",
@@ -156,8 +156,8 @@ locale.en = {
         "created": "Created"
     },
     "contributors": {
-        "list": "Viewing contributions by {users}",
-        "truncated_list": "Viewing contributions by {users} and {count} others"
+        "list": "Contributed by {users}",
+        "truncated_list": "Contributed by {users} and {count} others"
     },
     "geocoder": {
         "title": "Find a place",
@@ -172,7 +172,7 @@ locale.en = {
         "no_documentation_key": "There is no documentation available for this key",
         "show_more": "Show More",
         "new_tag": "New tag",
-        "view_on_osm": "View on OSM",
+        "view_on_osm": "View on OSM →",
         "editing_feature": "Editing {feature}",
         "additional": "Additional tags",
         "choose": "Select feature type",
@@ -188,7 +188,8 @@ locale.en = {
         "reset": "reset"
     },
     "restore": {
-        "description": "You have unsaved changes from a previous editing session. Do you wish to restore these changes?",
+        "heading": "You have unsaved changes",
+        "description": "Do you wish to restore changes from a previous editing session?",
         "restore": "Restore",
         "reset": "Reset"
     },
@@ -208,6 +209,7 @@ locale.en = {
     },
     "source_switch": {
         "live": "live",
+        "lose_changes": "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -227,12 +229,12 @@ locale.en = {
         "in": "Zoom In",
         "out": "Zoom Out"
     },
-    "imagery": {
-        "provided_by": "Imagery provided by {source}"
-    },
     "gpx": {
         "local_layer": "Local GPX file",
         "drag_drop": "Drag and drop a .gpx file on the page"
+    },
+    "help": {
+        "title": "Help"
     },
     "presets": {
         "fields": {
@@ -1624,6 +1626,7 @@ locale.zh = {
     "commit": {
         "title": "保存更改",
         "description_placeholder": "简要说明你的贡献",
+        "message_label": "提交说明",
         "upload_explanation": "{user}你上传的更新将会显示在所有使用OpenStreetMap数据的地图上。",
         "save": "保存",
         "cancel": "取消",
@@ -1649,10 +1652,7 @@ locale.zh = {
         "no_documentation_key": "没有关于此键的文档",
         "show_more": "显示更多",
         "new_tag": "新建标签",
-        "edit_tags": "编辑标签",
-        "okay": "确定",
         "view_on_osm": "在OSM上查看",
-        "name": "名称",
         "editing_feature": "编辑{feature}",
         "additional": "附加标签",
         "choose": "选择对象的类型",
@@ -1821,6 +1821,9 @@ locale.zh = {
             "maxspeed": {
                 "label": "限速"
             },
+            "name": {
+                "label": "名称"
+            },
             "natural": {
                 "label": "自然"
             },
@@ -1834,6 +1837,9 @@ locale.zh = {
                 "label": "类型"
             },
             "oneway": {
+                "label": "单行"
+            },
+            "oneway_yes": {
                 "label": "单行"
             },
             "opening_hours": {
@@ -2051,6 +2057,9 @@ locale.zh = {
             "barrier/bollard": {
                 "name": "短柱"
             },
+            "barrier/cattle_grid": {
+                "name": "家畜栅栏"
+            },
             "barrier/city_wall": {
                 "name": "城墙"
             },
@@ -2091,7 +2100,7 @@ locale.zh = {
                 "name": "公路"
             },
             "highway/bridleway": {
-                "name": "台阶",
+                "name": "马道",
                 "terms": "楼梯"
             },
             "highway/bus_stop": {
@@ -2110,17 +2119,29 @@ locale.zh = {
             "highway/motorway": {
                 "name": "高速公路"
             },
+            "highway/motorway_link": {
+                "name": "高速公路匝道"
+            },
             "highway/path": {
                 "name": "路"
             },
             "highway/primary": {
                 "name": "主要道路"
             },
+            "highway/primary_link": {
+                "name": "主要道路匝道"
+            },
             "highway/residential": {
                 "name": "住宅区道路"
             },
+            "highway/road": {
+                "name": "未知道路"
+            },
             "highway/secondary": {
                 "name": "次要道路"
+            },
+            "highway/secondary_link": {
+                "name": "次要道路匝道"
             },
             "highway/service": {
                 "name": "辅助道路"
@@ -2132,6 +2153,9 @@ locale.zh = {
             "highway/tertiary": {
                 "name": "三级道路"
             },
+            "highway/tertiary_link": {
+                "name": "三级道路匝道"
+            },
             "highway/track": {
                 "name": "小路"
             },
@@ -2141,6 +2165,9 @@ locale.zh = {
             },
             "highway/trunk": {
                 "name": "干线道路"
+            },
+            "highway/trunk_link": {
+                "name": "干线道路匝道"
             },
             "highway/turning_circle": {
                 "name": "环岛"
@@ -2154,6 +2181,9 @@ locale.zh = {
             "historic/archaeological_site": {
                 "name": "考古遗址"
             },
+            "historic/boundary_stone": {
+                "name": "界桩"
+            },
             "historic/castle": {
                 "name": "城堡"
             },
@@ -2165,6 +2195,9 @@ locale.zh = {
             },
             "historic/ruins": {
                 "name": "废墟"
+            },
+            "historic/wayside_cross": {
+                "name": "路边的十字架"
             },
             "historic/wayside_shrine": {
                 "name": "路边的神社"
@@ -2352,7 +2385,7 @@ locale.zh = {
                 "name": "村庄"
             },
             "power": {
-                "name": "动力"
+                "name": "电力设施"
             },
             "power/generator": {
                 "name": "发电厂"
@@ -2415,11 +2448,14 @@ locale.zh = {
             "shop/beverages": {
                 "name": "饮料店"
             },
+            "shop/bicycle": {
+                "name": "自行车店"
+            },
             "shop/books": {
                 "name": "书店"
             },
             "shop/boutique": {
-                "name": "精品"
+                "name": "精品店"
             },
             "shop/butcher": {
                 "name": "肉贩"
@@ -2434,7 +2470,7 @@ locale.zh = {
                 "name": "汽车修理店"
             },
             "shop/chemist": {
-                "name": "化学家"
+                "name": "药房"
             },
             "shop/clothes": {
                 "name": "服装店"
@@ -2461,7 +2497,10 @@ locale.zh = {
                 "name": "干洗店"
             },
             "shop/electronics": {
-                "name": "鱼贩子"
+                "name": "家电店"
+            },
+            "shop/fishmonger": {
+                "name": "鱼贩"
             },
             "shop/florist": {
                 "name": "花店"
@@ -2470,7 +2509,7 @@ locale.zh = {
                 "name": "家具店"
             },
             "shop/garden_centre": {
-                "name": "花园中心"
+                "name": "花店"
             },
             "shop/gift": {
                 "name": "礼品店"
@@ -2488,10 +2527,10 @@ locale.zh = {
                 "name": "音响店"
             },
             "shop/jewelry": {
-                "name": "珠宝商"
+                "name": "珠宝店"
             },
             "shop/kiosk": {
-                "name": "亭"
+                "name": "报刊亭"
             },
             "shop/laundry": {
                 "name": "洗衣店"
@@ -2512,7 +2551,7 @@ locale.zh = {
                 "name": "书报"
             },
             "shop/optician": {
-                "name": "配镜师"
+                "name": "眼镜店"
             },
             "shop/outdoor": {
                 "name": "户外店"
@@ -2581,7 +2620,7 @@ locale.zh = {
                 "name": "旅馆"
             },
             "tourism/information": {
-                "name": "信息"
+                "name": "信息板"
             },
             "tourism/motel": {
                 "name": "汽车旅馆"
@@ -2804,10 +2843,8 @@ locale.zh_TW = {
         "no_documentation_key": "這個鍵值沒有可用的文檔",
         "show_more": "顯示更多",
         "new_tag": "新的標籤",
-        "edit_tags": "編輯標籤",
-        "okay": "確定",
         "view_on_osm": "在OSM上顯示",
-        "name": "名稱",
+        "editing_feature": "正在編輯 {feature}",
         "additional": "附加的標籤",
         "choose": "選擇功能種類",
         "results": "{search} 的 {n} 個結果",
@@ -2861,6 +2898,10 @@ locale.zh_TW = {
     },
     "imagery": {
         "provided_by": "影像由 {source} 提供"
+    },
+    "gpx": {
+        "local_layer": "本機GPX檔案",
+        "drag_drop": "拖放一個.gpx格式的檔案到本頁"
     },
     "presets": {
         "fields": {
@@ -3152,10 +3193,12 @@ locale.zh_TW = {
                 "terms": "穆斯林，清真寺"
             },
             "amenity/police": {
-                "name": "警察局"
+                "name": "警察局",
+                "terms": "徽章，警官，警官，警官，警官，男童軍，警官，警官，警官，警官，警官，軍團，警車，偵探，警官，警官，部隊，警官，憲兵，刑警，警官， 法律，執法，警官，警官，警官，警官，警察"
             },
             "amenity/post_box": {
-                "name": "郵箱"
+                "name": "郵箱",
+                "terms": "信箱，信箱，郵箱，郵箱，郵筒，郵箱"
             },
             "amenity/post_office": {
                 "name": "郵政局"
@@ -3701,8 +3744,6 @@ locale.da = {
         "no_documentation_combination": "Der er ingen dokumentation for denne tag kombination",
         "no_documentation_key": "Der er ingen dokumentation tilgængelig for denne nøgle",
         "new_tag": "Nyt tag",
-        "edit_tags": "Ret tags",
-        "okay": "Ok",
         "view_on_osm": "Vis på OSM"
     },
     "background": {
@@ -3912,10 +3953,7 @@ locale.nl = {
         "no_documentation_combination": "Voor deze tag is geen documentatie beschikbaar.",
         "no_documentation_key": "Voor deze sleutel is geen documentatie beschikbaar",
         "new_tag": "Nieuwe tag",
-        "edit_tags": "Tags aanpassen",
-        "okay": "OK",
         "view_on_osm": "Bekijk op OSM",
-        "name": "Name",
         "additional": "Additional tags",
         "choose": "What are you adding?",
         "results": "{n} results for {search}"
@@ -4138,10 +4176,7 @@ locale.fr = {
         "no_documentation_key": "Aucune documentation n'est disponible pour cette clé",
         "show_more": "Plus d'infornations",
         "new_tag": "Nouveau tag",
-        "edit_tags": "Editer les tags",
-        "okay": "Okay",
         "view_on_osm": "Visualiser sur OSM",
-        "name": "Nom",
         "editing_feature": "Édition de {feature}",
         "additional": "Tags complémentaires",
         "choose": "Que souhaitez vous ajouter?",
@@ -4660,6 +4695,7 @@ locale.de = {
         "rotate": {
             "title": "Drehen",
             "description": "Dieses Objekt um seinen Mittelpunkt drehen.",
+            "key": "R",
             "annotation": {
                 "line": "Linie gedreht.",
                 "area": "Fläche gedreht."
@@ -4714,13 +4750,13 @@ locale.de = {
         "no_documentation_key": "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
         "show_more": "Zeige mehr",
         "new_tag": "Neues Attribut",
-        "edit_tags": "Attribute bearbeiten",
-        "okay": "OK",
         "view_on_osm": "auf OpenStreetMap ansehen",
-        "name": "Name",
+        "editing_feature": "In Bearbeitung {feature}",
         "additional": "Weitere Merkmale",
+        "choose": "Eigenschafts-Typ auswählen",
         "results": "{n} Resultate für {search}",
-        "reference": "In der OpenSteetMap Wiki anschauen →"
+        "reference": "In der OpenSteetMap Wiki anschauen →",
+        "back_tooltip": "Eigenschafts-Typ ändern"
     },
     "background": {
         "title": "Hintergrund",
@@ -4737,6 +4773,7 @@ locale.de = {
     "save": {
         "title": "Speichern",
         "help": "Speichere Änderungen auf OpenStreetMap, um diese für andere Nutzer sichtbar zu machen.",
+        "no_changes": "Keine zu speichernden Änderungen.",
         "error": "Beim Speichern ist ein Fehler aufgetreten",
         "uploading": "Änderungen werden zu OpenStreetMap hochgeladen.",
         "unsaved_changes": "Ungespeicherte Änderungen vorhanden"
@@ -5267,10 +5304,7 @@ locale.it = {
         "no_documentation_key": "Non c'è documentazione per questa chiave",
         "show_more": "Mostra di più",
         "new_tag": "Nuovo Tag",
-        "edit_tags": "Modifica i tag",
-        "okay": "Ok",
         "view_on_osm": "Mostra su OSM",
-        "name": "Nome",
         "additional": "Tag aggiuntivi",
         "choose": "Seleziona il tipo di caratteristica",
         "results": "{n} risultati per {search}",
@@ -6129,7 +6163,6 @@ locale.ja = {
         "no_documentation_combination": "このタグの組み合わせに関する説明文はありません",
         "no_documentation_key": "このキーに対する説明文はありません",
         "new_tag": "新規タグ",
-        "edit_tags": "タグ編集",
         "view_on_osm": "詳細情報確認"
     },
     "background": {
@@ -6345,10 +6378,7 @@ locale.lv = {
         "no_documentation_combination": "Šai apzīmējumu kombinācijai nav piejama dokumentācija",
         "no_documentation_key": "Šai vērtībai nav piejama dokumentācija",
         "new_tag": "Jauns apzīmējums",
-        "edit_tags": "Labot apzīmējumus",
-        "okay": "Labi",
         "view_on_osm": "Apskatīt OSM",
-        "name": "Name",
         "additional": "Papildus apzīmējumi",
         "choose": "Izvēlieties objekta tipu",
         "results": "Atrasti {n} rezultāti meklējot {search}",
@@ -6698,8 +6728,6 @@ locale.pl = {
         "no_documentation_combination": "Nie ma dokumentacji dla tej kombinacji tagu.",
         "no_documentation_key": "Nie ma dokumentacji dla tego klucza",
         "new_tag": "Nowy tag",
-        "edit_tags": "Edytuj tagi",
-        "okay": "Okej",
         "view_on_osm": "Zobacz w OSM"
     },
     "background": {
@@ -6918,14 +6946,14 @@ locale.pt = {
     "inspector": {
         "no_documentation_combination": "Não há documentação disponível para esta combinação de tags",
         "no_documentation_key": "Não há documentação disponível para esta tecla",
+        "show_more": "Mostrar Mais",
         "new_tag": "Nova tag",
-        "edit_tags": "Editar tags",
-        "okay": "OK",
         "view_on_osm": "Ver em OSM",
-        "name": "Nome",
+        "editing_feature": "Editando {feature}",
         "additional": "Tags adicionais",
         "choose": "O que está a adicionar?",
-        "results": "{n} resultados para {search}"
+        "results": "{n} resultados para {search}",
+        "reference": "Ver na Wiki do OpenStreetMap"
     },
     "background": {
         "title": "Fundo",
@@ -6935,6 +6963,7 @@ locale.pt = {
         "reset": "reiniciar"
     },
     "restore": {
+        "heading": "Tem alterações por guardar",
         "description": "Tem alterações por guardar de uma prévia sessão de edição. Deseja restaurar estas alterações?",
         "restore": "Restaurar",
         "reset": "Descartar"
@@ -6942,6 +6971,7 @@ locale.pt = {
     "save": {
         "title": "Guardar",
         "help": "Guardar alterações no OpenStreetMap, tornando-as visíveis a outros utilizadores.",
+        "no_changes": "Não há alterações para guardar.",
         "error": "Um erro ocorreu ao tentar guardar",
         "uploading": "Enviando alterações para OpenStreetMap.",
         "unsaved_changes": "Tem alterações por guardar"
@@ -6952,6 +6982,7 @@ locale.pt = {
     },
     "source_switch": {
         "live": "ao vivo",
+        "lose_changes": "Tem alterações por guardar. Mudando o servidor de mapas irá perdê-las. Tem a certeza que deseja mudar de servidores?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -6970,6 +7001,403 @@ locale.pt = {
     "zoom": {
         "in": "Aproximar",
         "out": "Afastar"
+    },
+    "imagery": {
+        "provided_by": "Imagens disponibilizadas por {source}"
+    },
+    "gpx": {
+        "local_layer": "Ficheiro GPX local",
+        "drag_drop": "Arraste um ficheiro .gpx para a página"
+    },
+    "help": {
+        "title": "Ajuda"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Acesso"
+            },
+            "address": {
+                "label": "Morada",
+                "placeholders": {
+                    "housename": "Nome de casa",
+                    "number": "123",
+                    "street": "Rua",
+                    "city": "Cidade"
+                }
+            },
+            "aeroway": {
+                "label": "Tipo"
+            },
+            "amenity": {
+                "label": "Tipo"
+            },
+            "atm": {
+                "label": "MB"
+            },
+            "bicycle_parking": {
+                "label": "Tipo"
+            },
+            "building": {
+                "label": "Edifício"
+            },
+            "building_area": {
+                "label": "Edifício"
+            },
+            "building_yes": {
+                "label": "Edifício"
+            },
+            "capacity": {
+                "label": "Capacidade"
+            },
+            "construction": {
+                "label": "Tipo"
+            },
+            "crossing": {
+                "label": "Tipo"
+            },
+            "cuisine": {
+                "label": "Cozinha"
+            },
+            "denomination": {
+                "label": "Denominação"
+            },
+            "denotation": {
+                "label": "Denotação"
+            },
+            "elevation": {
+                "label": "Elevação"
+            },
+            "emergency": {
+                "label": "Emergência"
+            },
+            "entrance": {
+                "label": "Tipo"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "fee": {
+                "label": "Tarifa"
+            },
+            "highway": {
+                "label": "Tipo"
+            },
+            "historic": {
+                "label": "Tipo"
+            },
+            "internet_access": {
+                "label": "Acesso à Internet",
+                "options": {
+                    "wlan": "Wifi"
+                }
+            },
+            "maxspeed": {
+                "label": "Limite de Velocidade"
+            },
+            "natural": {
+                "label": "Natural"
+            },
+            "network": {
+                "label": "Rede"
+            },
+            "note": {
+                "label": "Nota"
+            },
+            "office": {
+                "label": "Tipo"
+            },
+            "oneway": {
+                "label": "Sentido Único"
+            },
+            "opening_hours": {
+                "label": "Horas"
+            },
+            "operator": {
+                "label": "Operador"
+            },
+            "phone": {
+                "label": "Telefone"
+            },
+            "place": {
+                "label": "Tipo"
+            },
+            "railway": {
+                "label": "Tipo"
+            },
+            "religion": {
+                "label": "Religião",
+                "options": {
+                    "christian": "Cristão",
+                    "muslim": "Muçulmano",
+                    "buddhist": "Budista",
+                    "jewish": "Judeu"
+                }
+            },
+            "shelter": {
+                "label": "Abrigo"
+            },
+            "shop": {
+                "label": "Tipo"
+            },
+            "source": {
+                "label": "Fonte"
+            },
+            "sport": {
+                "label": "Desporto"
+            },
+            "surface": {
+                "label": "Superfície"
+            },
+            "tourism": {
+                "label": "Tipo"
+            },
+            "water": {
+                "label": "Tipo"
+            },
+            "waterway": {
+                "label": "Tipo"
+            },
+            "website": {
+                "label": "Website"
+            },
+            "wetland": {
+                "label": "Tipo"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Tipo"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "Aeroporto"
+            },
+            "amenity": {
+                "name": "Amenidade"
+            },
+            "amenity/bank": {
+                "name": "Banco"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Banco"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Parque de Bicicletas"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Aluguer de Bicicletas"
+            },
+            "amenity/cafe": {
+                "name": "Café"
+            },
+            "amenity/cinema": {
+                "name": "Cinema"
+            },
+            "amenity/fire_station": {
+                "name": "Quartel de Bombeiros"
+            },
+            "amenity/grave_yard": {
+                "name": "Cemitério"
+            },
+            "amenity/hospital": {
+                "name": "Hospital"
+            },
+            "amenity/library": {
+                "name": "Biblioteca"
+            },
+            "amenity/parking": {
+                "name": "Estacionamento"
+            },
+            "amenity/pharmacy": {
+                "name": "Farmácia"
+            },
+            "amenity/place_of_worship": {
+                "name": "Local de Oração"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Igreja"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mesquita"
+            },
+            "amenity/police": {
+                "name": "Polícia"
+            },
+            "amenity/post_box": {
+                "name": "Caixa de Correio"
+            },
+            "amenity/post_office": {
+                "name": "Estação de Correios"
+            },
+            "amenity/pub": {
+                "name": "Bar"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurante"
+            },
+            "amenity/school": {
+                "name": "Escola"
+            },
+            "amenity/telephone": {
+                "name": "Telefone"
+            },
+            "amenity/toilets": {
+                "name": "Casas de Banho"
+            },
+            "amenity/townhall": {
+                "name": "Câmara Municipal"
+            },
+            "amenity/university": {
+                "name": "Universidade"
+            },
+            "building": {
+                "name": "Edifício"
+            },
+            "entrance": {
+                "name": "Entrada"
+            },
+            "highway": {
+                "name": "Autoestrada"
+            },
+            "highway/bus_stop": {
+                "name": "Paragem de Autocarro"
+            },
+            "highway/crossing": {
+                "name": "Passadeira"
+            },
+            "highway/cycleway": {
+                "name": "Ciclovia"
+            },
+            "highway/primary": {
+                "name": "Estrada Principal"
+            },
+            "highway/residential": {
+                "name": "Estrada Residencial"
+            },
+            "highway/secondary": {
+                "name": "Estrada Secundária"
+            },
+            "highway/service": {
+                "name": "Estrada de Serviço"
+            },
+            "highway/steps": {
+                "name": "Passos"
+            },
+            "highway/track": {
+                "name": "Pista"
+            },
+            "landuse/cemetery": {
+                "name": "Cemitério"
+            },
+            "landuse/commercial": {
+                "name": "Comercial"
+            },
+            "landuse/construction": {
+                "name": "Construção"
+            },
+            "landuse/farm": {
+                "name": "Quinta"
+            },
+            "landuse/farmyard": {
+                "name": "Quintal"
+            },
+            "landuse/forest": {
+                "name": "Floresta"
+            },
+            "landuse/grass": {
+                "name": "Relva"
+            },
+            "landuse/industrial": {
+                "name": "Industrial"
+            },
+            "leisure/golf_course": {
+                "name": "Campo de Golf"
+            },
+            "leisure/park": {
+                "name": "Parque"
+            },
+            "leisure/pitch": {
+                "name": "Campo de Desporto"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Campo de Ténis"
+            },
+            "man_made/water_tower": {
+                "name": "Torre de Água"
+            },
+            "natural": {
+                "name": "Natural"
+            },
+            "natural/bay": {
+                "name": "Baía"
+            },
+            "natural/beach": {
+                "name": "Praia"
+            },
+            "natural/cliff": {
+                "name": "Penhasco"
+            },
+            "natural/coastline": {
+                "name": "Linha Costeira"
+            },
+            "natural/water": {
+                "name": "Água"
+            },
+            "natural/water/lake": {
+                "name": "Lago"
+            },
+            "place/island": {
+                "name": "Ilha"
+            },
+            "place/locality": {
+                "name": "Localidade"
+            },
+            "place/village": {
+                "name": "Aldeia"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Entrada de Metro"
+            },
+            "shop": {
+                "name": "Loja"
+            },
+            "shop/butcher": {
+                "name": "Talho"
+            },
+            "shop/supermarket": {
+                "name": "Supermercado"
+            },
+            "tourism": {
+                "name": "Turismo"
+            },
+            "tourism/camp_site": {
+                "name": "Parque de Campismo"
+            },
+            "tourism/hotel": {
+                "name": "Hotal"
+            },
+            "tourism/museum": {
+                "name": "Musei"
+            },
+            "waterway/canal": {
+                "name": "Canal"
+            },
+            "waterway/river": {
+                "name": "Rio"
+            }
+        }
     }
 };
 locale.ru = {
@@ -7143,10 +7571,7 @@ locale.ru = {
         "no_documentation_combination": "Для этой комбинации ключа и значения нет описания",
         "no_documentation_key": "Для этого ключа описания нет",
         "new_tag": "Новый тег",
-        "edit_tags": "Править теги",
-        "okay": "Готово",
         "view_on_osm": "Посмотреть в OSM",
-        "name": "Name",
         "additional": "Additional tags",
         "choose": "What are you adding?",
         "results": "{n} results for {search}",
@@ -7361,8 +7786,6 @@ locale.es = {
         "no_documentation_combination": "No hay documentación disponible para esta combinación de etiquetas",
         "no_documentation_key": "No hay documentación disponible para esta tecla",
         "new_tag": "Nueva etiqueta",
-        "edit_tags": "Editar etiquetas",
-        "okay": "OK",
         "view_on_osm": "Ver en OSM"
     },
     "background": {
@@ -7582,10 +8005,7 @@ locale.sv = {
         "no_documentation_combination": "Der er ingen dokumentation for denne tag kombination",
         "no_documentation_key": "Det finns inget dokumentation för denna nyckel.",
         "new_tag": "Ny tagg",
-        "edit_tags": "Redigera taggar",
-        "okay": "Ok",
         "view_on_osm": "Visa på OSM",
-        "name": "Namn",
         "additional": "Fler taggar",
         "choose": "Vad lägger du till?",
         "results": "{n} sökresult för {search}",
@@ -7799,10 +8219,7 @@ locale.tr = {
         "no_documentation_combination": "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
         "no_documentation_key": "Bu anahtar için dökümantasyon bulunmamaktadır.",
         "new_tag": "Yeni Etiket",
-        "edit_tags": "Etiketleri güncelle",
-        "okay": "Tamam",
         "view_on_osm": "OSM üzerinde gör",
-        "name": "İsim",
         "additional": "Ekstra etiketler",
         "choose": "Neyi ekliyorsunuz?",
         "results": "{n} results for {search}"
@@ -8025,10 +8442,7 @@ locale.uk = {
         "no_documentation_key": "Для цього теґа немає документації",
         "show_more": "Ще",
         "new_tag": "Новий теґ",
-        "edit_tags": "Редагувати теґи",
-        "okay": "Готово",
         "view_on_osm": "Подивтись в ОСМ",
-        "name": "Name",
         "editing_feature": "Властивості {feature}",
         "additional": "Додаткові теґи",
         "choose": "Виберіть тип об’єкту",
@@ -8096,7 +8510,7 @@ locale.uk = {
                 "label": "Адреса",
                 "placeholders": {
                     "housename": "Назвабудинку",
-                    "number": "123",
+                    "number": "Номер",
                     "street": "Вулиця",
                     "city": "Місто"
                 }
@@ -8127,6 +8541,9 @@ locale.uk = {
             },
             "capacity": {
                 "label": "Міськість"
+            },
+            "collection_times": {
+                "label": "Час виїмки пошти"
             },
             "construction": {
                 "label": "Тип"
@@ -8204,6 +8621,9 @@ locale.uk = {
             },
             "office": {
                 "label": "Тип"
+            },
+            "oneway": {
+                "label": "Односторонній рух"
             },
             "opening_hours": {
                 "label": "Години"
@@ -8339,6 +8759,9 @@ locale.uk = {
             },
             "amenity/fire_station": {
                 "name": "Пожежна станція"
+            },
+            "amenity/fuel": {
+                "name": "Заправка"
             },
             "amenity/grave_yard": {
                 "name": "Цвинтар"
@@ -8803,6 +9226,9 @@ locale.uk = {
             "shop/butcher": {
                 "name": "М’ясна лавка"
             },
+            "shop/car": {
+                "name": "Автосалон"
+            },
             "shop/car_parts": {
                 "name": "Автозапчастини"
             },
@@ -8902,6 +9328,9 @@ locale.uk = {
             "shop/sports": {
                 "name": "Спорттовари"
             },
+            "shop/stationery": {
+                "name": "Канцтовари"
+            },
             "shop/supermarket": {
                 "name": "Супермаркет"
             },
@@ -8913,6 +9342,9 @@ locale.uk = {
             },
             "shop/tyres": {
                 "name": "Колеса та шини"
+            },
+            "shop/vacant": {
+                "name": "Здається в оренду"
             },
             "shop/variety_store": {
                 "name": "Універсам"
@@ -9149,6 +9581,7 @@ locale.vi = {
     "commit": {
         "title": "Lưu các Thay đổi",
         "description_placeholder": "Tóm lược các đóng góp của bạn",
+        "message_label": "Tóm lược sửa đổi",
         "upload_explanation": "Các thay đổi bạn thực hiện dưới tên {user} sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
         "save": "Lưu",
         "cancel": "Hủy bỏ",
@@ -9174,10 +9607,7 @@ locale.vi = {
         "no_documentation_key": "Không có tài liệu về chìa khóa này",
         "show_more": "Xem thêm",
         "new_tag": "Thẻ mới",
-        "edit_tags": "Sửa đổi các thẻ",
-        "okay": "OK",
         "view_on_osm": "Xem tại OSM",
-        "name": "Tên",
         "editing_feature": "Đang sửa {feature}",
         "additional": "Các thẻ nâng cao",
         "choose": "Chọn loại đối tượng",
@@ -9193,6 +9623,7 @@ locale.vi = {
         "reset": "đặt lại"
     },
     "restore": {
+        "heading": "Bạn có thay đổi chưa lưu",
         "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?",
         "restore": "Khôi phục",
         "reset": "Đặt lại"
@@ -9211,6 +9642,7 @@ locale.vi = {
     },
     "source_switch": {
         "live": "thật",
+        "lose_changes": "Bạn có các thay đổi chưa lưu. Các thay đổi này sẽ bị mất khi bạn đổi máy chủ bản đồ. Bạn có chắc chắn muốn đổi máy chủ?",
         "dev": "thử"
     },
     "tag_reference": {
@@ -9236,6 +9668,9 @@ locale.vi = {
     "gpx": {
         "local_layer": "Tập tin GPX địa phương",
         "drag_drop": "Kéo thả một tập tin .gpx vào trang"
+    },
+    "help": {
+        "title": "Trợ giúp"
     },
     "presets": {
         "fields": {
@@ -9346,6 +9781,9 @@ locale.vi = {
             "maxspeed": {
                 "label": "Tốc độ Tối đa"
             },
+            "name": {
+                "label": "Tên"
+            },
             "natural": {
                 "label": "Thiên nhiên"
             },
@@ -9359,6 +9797,9 @@ locale.vi = {
                 "label": "Kiểu"
             },
             "oneway": {
+                "label": "Một chiều"
+            },
+            "oneway_yes": {
                 "label": "Một chiều"
             },
             "opening_hours": {
@@ -9661,17 +10102,32 @@ locale.vi = {
             "highway/motorway": {
                 "name": "Đường Cao tốc"
             },
+            "highway/motorway_link": {
+                "name": "Nhánh Ra vào Đường Cao tốc",
+                "terms": "đường nhánh,đoạn nhánh,đường nhánh rẽ,đoạn nhánh rẽ,đường nhánh chuyển đường,nhánh chuyển đường,lối ra vào,lối ra,lối vào,nhánh ra,nhánh vào,đường nối"
+            },
             "highway/path": {
                 "name": "Lối"
             },
             "highway/primary": {
                 "name": "Đường Chính"
             },
+            "highway/primary_link": {
+                "name": "Nhánh Ra vào Đường Chính",
+                "terms": "đường nhánh,đoạn nhánh,đường nhánh rẽ,đoạn nhánh rẽ,đường nhánh chuyển đường,nhánh chuyển đường,lối ra vào,lối ra,lối vào,nhánh ra,nhánh vào,đường nối"
+            },
             "highway/residential": {
                 "name": "Ngõ Dân cư"
             },
+            "highway/road": {
+                "name": "Đường Nói chung"
+            },
             "highway/secondary": {
                 "name": "Đường Lớn"
+            },
+            "highway/secondary_link": {
+                "name": "Nhánh Ra vào Đường Lớn",
+                "terms": "đường nhánh,đoạn nhánh,đường nhánh rẽ,đoạn nhánh rẽ,đường nhánh chuyển đường,nhánh chuyển đường,lối ra vào,lối ra,lối vào,nhánh ra,nhánh vào,đường nối"
             },
             "highway/service": {
                 "name": "Ngách"
@@ -9683,6 +10139,10 @@ locale.vi = {
             "highway/tertiary": {
                 "name": "Phố"
             },
+            "highway/tertiary_link": {
+                "name": "Nhánh Ra vào Phố",
+                "terms": "đường nhánh,đoạn nhánh,đường nhánh rẽ,đoạn nhánh rẽ,đường nhánh chuyển đường,nhánh chuyển đường,lối ra vào,lối ra,lối vào,nhánh ra,nhánh vào,đường nối"
+            },
             "highway/track": {
                 "name": "Đường mòn"
             },
@@ -9692,6 +10152,10 @@ locale.vi = {
             },
             "highway/trunk": {
                 "name": "Xa lộ"
+            },
+            "highway/trunk_link": {
+                "name": "Nhánh Ra vào Xa lộ",
+                "terms": "đường nhánh,đoạn nhánh,đường nhánh rẽ,đoạn nhánh rẽ,đường nhánh chuyển đường,nhánh chuyển đường,lối ra vào,lối ra,lối vào,nhánh ra,nhánh vào,đường nối"
             },
             "highway/turning_circle": {
                 "name": "Cuối đường Vòng tròn"

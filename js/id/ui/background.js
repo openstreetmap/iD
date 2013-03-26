@@ -1,6 +1,5 @@
 iD.ui.Background = function(context) {
-    var event = d3.dispatch('cancel', 'save'),
-        key = 'b',
+    var key = 'b',
         opacities = [1, 0.5, 0],
         directions = [
             ['left', [1, 0]],
@@ -57,16 +56,11 @@ iD.ui.Background = function(context) {
             }
         }
 
-        function selectLayer(d) {
+        function selectLayer() {
             content.selectAll('a.layer')
                 .classed('selected', function(d) {
                     return d.data.name === context.background().source().data.name;
                 });
-
-            context.container()
-                .select('.attribution')
-                .data([d])
-                .call(iD.ui.Attribution(context));
         }
 
         function clickSetSource(d) {
@@ -85,7 +79,7 @@ iD.ui.Background = function(context) {
                     .imagery_used(d.data.sourcetag || d.data.name);
             }
             context.redraw();
-            selectLayer(d);
+            selectLayer();
         }
 
         function clickGpx(d) {
@@ -139,7 +133,7 @@ iD.ui.Background = function(context) {
             layerLinks.exit()
                 .remove();
 
-            selectLayer(context.background().source());
+            selectLayer();
         }
 
         function clickNudge(d) {
@@ -289,5 +283,5 @@ iD.ui.Background = function(context) {
             .call(keybinding);
     }
 
-    return d3.rebind(background, event, 'on');
+    return background;
 };

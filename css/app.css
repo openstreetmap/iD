@@ -62,7 +62,7 @@ h2 {
     font-size: 25px;
     line-height: 1.25;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 h3:last-child,
@@ -71,11 +71,9 @@ h4:last-child { margin-bottom: 0;}
 
 h3 {
     font-size: 16px;
-    line-height: 1.3333;
+    line-height: 1.25;
     font-weight: bold;
     margin-bottom: 10px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 h4 {
@@ -96,8 +94,13 @@ h5 {
 }
 
 p {
+    font-size: 12px;
     margin:0;
     padding:0;
+}
+
+p:last-child {
+    padding-bottom: 0;
 }
 
 em {
@@ -147,6 +150,7 @@ input[type=email] {
     background-color: white;
     border:1px solid #ccc;
     padding:5px 10px;
+    height:30px;
     width: 100%;
     border-radius:4px;
     -webkit-transition: all 100ms;
@@ -157,11 +161,6 @@ input[type=email] {
 textarea:focus,
 input:focus {
     background-color: #F1F1F1;
-}
-
-input[type=text] {
-    padding:5px 10px;
-    height:30px;
 }
 
 input.major {
@@ -258,6 +257,11 @@ ul.link-list li:last-child {
     color: #333;
 }
 
+.fillL3 {
+    background: #f1f1f1;
+    color: #333;
+}
+
 .fillD {
     background:rgba(0,0,0,.8);
     color: #6C6C6C;
@@ -309,7 +313,6 @@ a.hide {
 .pane:last-child {
     right: 0;
 }
-
 
 /* Buttons */
 
@@ -393,10 +396,10 @@ button.action:hover {
     background: #597BE7;
 }
 
-button.delete {
+button.cancel {
     background-color: #ff7070;
 }
-button.delete:hover {
+button.cancel:hover {
     background-color: #ef5454;
 }
 
@@ -500,8 +503,11 @@ button[disabled] .label {
 .icon.warning    { background-position: -380px 0px;}
 .icon.back       { background-position: -420px 0px;}
 .icon.forward    { background-position: -440px 0px;}
+.icon.help       { background-position: -460px 0px;}
 
+.icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
+.icon.help.light       { background-position: -460px -20px;}
 
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
@@ -513,7 +519,6 @@ button[disabled] .icon.add-area   { background-position: -60px -40px;}
 button.disabled  .icon.undo       { background-position: -80px -40px;}
 button.disabled  .icon.redo       { background-position: -100px -40px;}
 button[disabled] .apply.icon      { background-position: -120px -40px;}
-button[disabled] .save.icon       { background-position: -140px -40px;}
 button[disabled] .close.icon      { background-position: -160px -40px;}
 button[disabled] .delete.icon     { background-position: -180px -40px;}
 button[disabled] .icon.remove     { background-position: -200px -40px;}
@@ -569,18 +574,22 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-radius: 0;
 }
 
-
 /* Header for modals / panes
 ------------------------------------------------------- */
 
 .header {
     border-bottom: 1px solid #ccc;
     z-index: 2;
+    height: 60px;
     position: relative;
 }
 
 .header h3 {
+    margin-right: 40px;
     margin-bottom: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .modal > button,
@@ -593,10 +602,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     overflow: hidden;
     position: absolute;
     right: 0;
+    top: 0;
 }
 
 .modal > button {
-    height: 61px;
+    height: 59px;
     z-index: 3;
 }
 
@@ -627,10 +637,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top: 120px;
 }
 
-.inspector-body::-webkit-scrollbar {
-    background: #fff;
-}
-
 .inspector-inner {
     padding: 20px;
     position: relative;
@@ -639,15 +645,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .inspector-wrap .header button.preset-reset {
     border-right: 1px solid #CCC;
     position: relative;
-    width: 60px;
 }
 
 .inspector-wrap .header button.preset-reset > div {
     height: 100%;
     padding: 20px 0;
-    -webkit-transition: opacity 200ms;
-       -moz-transition: opacity 200ms;
-            transition: opacity 200ms;
 }
 
 .inspector-wrap .header button.preset-reset .col12:last-child {
@@ -667,12 +669,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .inspector-wrap .header button.line > div {
     padding: 0;
-}
-
-.pane:last-child .header h3 {
-    position: absolute;
-    left: 60px;
-    right: 40px;
 }
 
 .inspector-toggle {
@@ -713,25 +709,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .preset-grid.filtered .grid-button-wrap:first-child .grid-entry {
     background: #ececec;
-}
-
-.grid-entry:hover .preset-help {
-    display: block;
-    border-radius: 0;
-}
-
-.grid-entry .preset-help {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 30px;
-    width: 30px;
-    background: rgba(0,0,0,.5);
-}
-
-.grid-entry .preset-help:hover {
-    background: rgba(0,0,0,.9);
 }
 
 .grid-entry > .icon {
@@ -814,23 +791,24 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .subgrid {
-    width: -webkit-calc(100% - 10px);
-    width: calc(100% - 10px);
+    width: 100%;
+    width: -webkit-calc(100% + 10px);
+    width: calc(100% + 10px);
+    margin-left: -10px;
     overflow: hidden;
 }
 
 .subgrid .preset-grid {
-    background: #eee;
     padding: 10px 0px 0px 10px;
+    border: 1px solid #CCC;
     margin-top: 0px;
-    border: 0;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .subgrid .arrow {
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #eee;
+    border-bottom-color: #CCC;
     width: 0;
     height: 0;
     margin-left: 33.3333%;
@@ -859,6 +837,25 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .show-more a {
     color: #222;
+}
+
+.grid-entry:hover .tag-reference-button {
+    opacity: 1;
+    border-radius: 0;
+}
+
+.grid-entry .tag-reference-button {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 30px;
+    background: rgba(0,0,0,.5);
+}
+
+.grid-entry .tag-reference-button:hover {
+    background: rgba(0,0,0,.9);
 }
 
 /* Preset icon colors */
@@ -900,69 +897,104 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* preset form basics */
 
-.preset-field.inspector-inner {
-    padding-bottom: 0;
+.tag-wrap .preset-icon-wrap {
+    border-bottom: 1px solid #CCC;
 }
 
-.tag-wrap .grid-button-wrap {
-    padding: 0;
-    height: 110px;
-}
-
-.tag-wrap .grid-button-wrap .grid-entry {
-    border-top: 0;
-    background: #eef0ff;
-}
-
-.tag-wrap .grid-button-wrap .grid-entry .label {
-    background: #eef0ff;
-}
-
-.preset-field h4 .modified-icon {
-    opacity: 0.2;
-    display: none;
-    pointer-events: all;
-}
-.preset-field h4 .modified-icon:hover {
-    opacity: 0.5;
-}
-.preset-field.modified h4 .modified-icon {
-    display: inline-block;
-}
-
-.preset-field h4[for*="input-"] {
-    border: 1px solid #cfcfcf;
-    padding: 5px 10px;
-    background: #f6f6f6;
+.tag-wrap .preset-icon-wrap::after {
+    content: "";
     position: absolute;
-    left: 20px;
-    right: 20px;
+    height: 0;
+    width: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: solid rgba(0, 0, 0, 0);
+    border-width: 10px;
+    border-bottom-color: #CCC;
+}
+
+.tag-wrap .preset-icon-wrap div {
+    height: 80px;
+    width: 33.3333%;
+    width: -webkit-calc(33.3333% - 10px);
+    width: calc(33.3333% - 10px);
+    margin: auto;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+    position: relative;
+}
+
+.tag-wrap .preset-icon-wrap .preset-icon {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+
+.tag-wrap .preset-icon-wrap .preset-icon.line {
+    top: 15px;
+}
+
+.inspector-preset .form-field {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.form-label {
+    position: relative;
+    font-weight: bold;
+    border: 1px solid #cfcfcf;
+    padding: 5px 0px 5px 10px;
+    background: #f6f6f6;
+    display: block;
     border-radius: 4px 4px 0 0;
-    pointer-events: none;
-    z-index: 2;
 }
 
-.preset-field h4 + input,
-h4 + .input-wrap-position input,
-h4 + .preset-input input:first-child {
-    padding-top: 35px;
-    height: 60px;
+.form-label button {
+    pointer-events: all;
+    height: 29px;
+    margin-top: -5px;
+    border-left: 1px solid #CCC;
+    border-radius: 0;
+    opacity: .5;
 }
 
-.preset-field h4 + textarea {
-    padding-top: 35px;
-    height: 100px;
+.form-label .modified-icon {
+    border-right: 0;
+    opacity: 0;
 }
 
-.preset-field h4[for="input-building:levels"],
-.preset-field h4[for="input-ele"],
-.preset-field.checkselect h4 {
-    right: 50%;
+.modified .form-label .modified-icon {
+    opacity: .5;
 }
 
-.preset-field-name h4 + input {
-    padding-top: 35px;
-    height: 70px;
+.form-label button.tag-reference-button {
+    border-top-right-radius: 3px;
+}
+
+.form-field > input,
+.form-field > textarea,
+.form-field .preset-input-wrap {
+    border: 1px solid #CCC;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+
+.form-field textarea {
+    height: 65px;
+}
+
+.form-field-levels,
+.form-field-elevation,
+.form-field.checkselect {
+    width: 60%;
+}
+
+.form-field-name input {
+    height: 35px;
     font-size: 18px;
     font-weight: bold;
 }
@@ -989,21 +1021,16 @@ button.preset-add-field {
     padding: 0 10px;
 }
 
-.view-on-osm {
-    padding: 20px;
-}
-
 /* preset form numbers */
 
 input[type=number] {
     position: relative;
-    width: 50%;
     padding-right: 65px;
 }
 
 .spin-control {
     width: 60px;
-    height: 30px;
+    height: 29px;
     border-left: 1px solid #CCC;
     display: inline-block;
     margin-left: -60px;
@@ -1016,13 +1043,14 @@ input[type=number] {
     float: left;
     height: 100%;
     width: 50%;
-    border: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
     border-radius: 0;
     border-left: 0;
 }
 
-.spin-control button.descend {
-    border-bottom-right-radius: 4px;
+.spin-control button.decrement {
+    border-bottom-right-radius: 3px;
 }
 
 .spin-control button.decrement::after,
@@ -1048,14 +1076,11 @@ input[type=number] {
 
 /* preset form checkbox */
 
-.checkselect label {
+.checkselect label:last-of-type {
     display: block;
-    padding: 35px 5px 5px 5px;
-    border-radius: 4px;
-    margin-right: 50%;
+    padding: 5px;
     box-sizing: border-box;
     color: #999;
-    border: 1px solid #CCC;
 }
 
 .checkselect label:hover {
@@ -1081,11 +1106,8 @@ input[type=number] {
 
 .radio-wrap {
     display: block;
-    padding: 30px 0 0 0;
-    border-radius: 4px;
     box-sizing: border-box;
     color: #999;
-    border: 1px solid #CCC;
     overflow: hidden;
 }
 
@@ -1106,25 +1128,29 @@ input[type=number] {
 
 /* Preset form address */
 
-.preset-field .addr-housename {
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
+.form-field .addr-housename {
+    border: none;
 }
 
-.preset-field .addr-number {
+.form-field .addr-number {
     width: 20%;
+    border-left: none;
     border-right: none;
     border-bottom: none;
     border-radius: 0;
 }
 
-.preset-field .addr-street {
+.form-field .addr-street {
     width: 80%;
-    border-radius: 0;
+    border-right: none;
     border-bottom: none;
+    border-radius: 0;
 }
 
-.preset-field .addr-city {
+.form-field .addr-city {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
     border-radius: 0 0 4px 4px;
 }
 
@@ -1209,7 +1235,7 @@ div.combobox {
 .tag-row {
     width: 100%;
     position: relative;
-    height: 30px;
+    clear: both;
 }
 
 .tag-row input {
@@ -1227,7 +1253,6 @@ div.combobox {
 .tag-row input.value {
     border-right: 1px solid #CCC;
 }
-
 
 .tag-row:first-child input.key {
     border-top: 1px solid #CCC;
@@ -1255,6 +1280,10 @@ div.combobox {
     left: -20px
 }
 
+.tag-row div.tag-help {
+    display: hidden;
+}
+
 .tag-row:hover input.value,
 .tag-row:hover input.key {
     border-radius: 0;
@@ -1280,6 +1309,20 @@ div.combobox {
 
 .inspector-inner .add-tag .label {
     display: none;
+}
+
+/* Tag reference */
+
+.tag-help {
+    overflow: hidden;
+}
+
+img.wiki-image {
+    float: left;
+    max-width: 33.3333%;
+    margin-right: 20px;
+    max-height: 200px;
+    border-radius: 4px;
 }
 
 /* Map Controls */
@@ -1523,8 +1566,66 @@ div.combobox {
 }
 
 .geolocate-control button {
+}
+
+/* Help */
+
+.help-control {
+    top: 270px;
+}
+
+.help-control button {
     border-radius: 0 0 4px 0;
     border-bottom: 0;
+}
+
+.help-wrap {
+    position: absolute;
+    top:60px;
+    bottom: 30px;
+    padding: 20px 20px 20px 50px;
+    left: 0;
+    overflow-y: scroll;
+}
+
+.help-wrap p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.help-wrap .left-content .body p code {
+    padding:2px 4px;
+    background:#eee;
+}
+
+.help-wrap .toc {
+    /* This is two columns, 41.66666 x .4 = 16.6666 */
+    width:40%;
+    float:right;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-left: 5px
+}
+
+.help-wrap .toc li a {
+    display: block;
+    font-weight: bold;
+    border: 1px solid #CCC;
+    border-bottom: 0px;
+    padding: 5px;
+}
+
+.help-wrap .toc li a.selected {
+    background: #eef0ff;
+}
+
+.help-wrap .toc li:first-child a {
+    border-radius: 4px 4px 0 0;
+}
+
+.help-wrap .toc li:last-child a {
+    border-bottom: 1px solid #CCC;
+    border-radius: 0 0 4px 4px
 }
 
 /* Map
@@ -1595,6 +1696,20 @@ div.combobox {
 .source-switch a.live {
     background: #d32232;
     color:#fff;
+}
+
+/* Attribution overlay */
+.attribution {
+    position: absolute;
+    bottom: 35px;
+    right:10px;
+    color:#888;
+    font-size:10px;
+}
+
+.source-image {
+    height:20px;
+    vertical-align:top;
 }
 
 .user-list a:not(:last-child):after {
@@ -1798,7 +1913,7 @@ div.typeahead a:first-child {
 ------------------------------------------------------- */
 
 .modal a.success-action {
-    height: 180px;
+    height: 170px;
     border-bottom: 1px solid #CCC;
     text-align: center;
     -webkit-transition: all 200ms;
@@ -1820,7 +1935,7 @@ a.success-action:before {
     height: 100px;
     width: 100px;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background:transparent url(../img/sprite.png) no-repeat 0px -220px;
 }
 
@@ -2091,13 +2206,24 @@ a.success-action.twitter:before {
 @media only screen and (max-height: 840px) {
 }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (-o-min-device-pixel-ratio: 3/2),
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) {
+  .map-control .icon,
+  .button-wrap .icon {
+    background-image: url(../img/sprite2x.png);
+    background-size: 500px 320px;
+  }
+}
+
 /* Scrollbars
  ----------------------------------------------------- */
 ::-webkit-scrollbar {
     height: 20px;
     overflow: visible;
     width: 10px;
-    background: #EBEBEB;
+    background: white;
     border-left: 1px solid #DDD;
 }
 ::-webkit-scrollbar-button {
@@ -2114,10 +2240,8 @@ a.success-action.twitter:before {
 }
 ::-webkit-scrollbar-track:hover {
     background-color: rgba(0,0,0,.05);
-    box-shadow: inset 1px 0 0 rgba(0,0,0,.1);
 }
 ::-webkit-scrollbar-track:horizontal:hover {
-    box-shadow: inset 0 1px 0 rgba(0,0,0,.1)
 }
 ::-webkit-scrollbar-track:active {
     background-color: rgba(0,0,0,.05);

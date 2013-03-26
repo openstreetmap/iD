@@ -1,109 +1,212 @@
-iD.ui.preset = function(context, entity) {
-    var event = d3.dispatch('change', 'setTags', 'close'),
-        tags,
-        keys,
-        preset,
+iD.ui.preset = function(context, entity, preset) {
+    var original = context.graph().base().entities[entity.id],
+        event = d3.dispatch('change', 'close'),
+        fields = [],
+        tags = {},
         formwrap,
         formbuttonwrap;
 
-    function presets(selection) {
-        selection.html('');
+    function UIField(field, show) {
+        field = _.clone(field);
 
-        keys = [];
-        formwrap = selection.append('div');
+        field.input = iD.ui.preset[field.type](field, context)
+            .on('close', event.close)
+            .on('change', event.change);
 
-        var geometry = entity.geometry(context.graph()),
-            fields = preset.fields.filter(function(f) {
-                return f.matchGeometry(geometry);
+        if (field.type === 'address') {
+            field.input.entity(entity);
+        }
+
+        field.keys = field.keys || [field.key];
+
+        field.show = show;
+
+        field.shown = function() {
+            return field.id === 'name' || field.show || _.any(field.keys, function(key) { return !!tags[key]; });
+        };
+
+        field.modified = function() {
+            return _.any(field.keys, function(key) {
+                return original ? tags[key] !== original.tags[key] : tags[key];
+            });
+        };
+
+        return field;
+    }
+
+    fields.push(UIField(context.presets().field('name')));
+
+    var geometry = entity.geometry(context.graph());
+    preset.fields.forEach(function(field) {
+        if (field.matchGeometry(geometry)) {
+            fields.push(UIField(field, true));
+        }
+    });
+
+    context.presets().universal().forEach(function(field) {
+        if (fields.indexOf(field) < 0) {
+            fields.push(UIField(field));
+        }
+    });
+
+    function fieldKey(field) {
+        return field.id;
+    }
+
+    function shown() {
+        return fields.filter(function(field) { return field.shown(); });
+    }
+
+    function notShown() {
+        return fields.filter(function(field) { return !field.shown(); });
+    }
+
+    function show(field) {
+        field.show = true;
+        render();
+        field.input.focus();
+    }
+
+    function revert(field) {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+        var t = {};
+        field.keys.forEach(function(key) {
+            t[key] = original ? original.tags[key] : undefined;
+        });
+        event.change(t);
+    }
+
+    function toggleReference(field) {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+        _.forEach(fields, function(other) {
+            if (other.id === field.id) {
+                other.showingReference = !other.showingReference;
+            } else {
+                other.showingReference = false;
+            }
+        });
+
+        render();
+    }
+
+    function render() {
+        var selection = formwrap.selectAll('.form-field')
+            .data(shown(), fieldKey);
+
+        var enter = selection.enter()
+            .insert('div', '.more-buttons')
+            .style('opacity', 0)
+            .attr('class', function(field) {
+                return 'form-field form-field-' + field.id + ' fillL col12';
             });
 
-        fields.unshift(context.presets().field('name'));
+        enter.transition()
+            .style('max-height', '0px')
+            .style('padding-top', '0px')
+            .style('opacity', '0')
+            .transition()
+            .duration(200)
+            .style('padding-top', '20px')
+            .style('max-height', '200px')
+            .style('opacity', '1');
 
-        draw(formwrap, fields);
+        var label = enter.append('label')
+            .attr('class', 'form-label')
+            .attr('for', function(field) { return 'preset-input-' + field.id; })
+            .text(function(field) { return field.label(); });
 
-        var wrap = selection.append('div')
-            .attr('class', 'col12 more-buttons inspector-inner');
+        label.append('button')
+            .attr('class', 'tag-reference-button fr')
+            .attr('tabindex', -1)
+            .on('click', toggleReference)
+            .append('span')
+            .attr('class', 'icon inspect');
 
-        formbuttonwrap = wrap.append('div')
-            .attr('class', 'col12 preset-input');
+        label.append('button')
+            .attr('class', 'fr modified-icon')
+            .attr('tabindex', -1)
+            .on('click', revert)
+            .append('div')
+            .attr('class','icon undo');
 
-        formbuttonwrap.selectAll('button')
-            .data(context.presets().universal().filter(notInForm))
-            .enter()
+        enter.each(function(field) {
+            d3.select(this).call(field.input);
+        });
+
+        enter.append('div')
+            .attr('class', 'tag-help');
+
+        selection
+            .classed('modified', function(field) {
+                return field.modified();
+            });
+
+        selection.selectAll('.tag-help')
+            .style('display', function(field) {
+                return field.showingReference ? 'block' : 'block';
+            })
+            .each(function(field) {
+                if (field.showingReference) {
+                    d3.select(this)
+                    .call(iD.ui.TagReference(entity, {key: field.key}))
+                    .style('max-height', '0px')
+                    .style('padding-top', '0px')
+                    .style('opacity', '0')
+                    .transition()
+                    .duration(200)
+                    .style('padding-top', '20px')
+                    .style('max-height', '200px')
+                    .style('opacity', '1');
+               } else {
+                 d3.select(this)
+                    .call(iD.ui.TagReference(entity, {key: field.key}))
+                    .transition()
+                    .duration(200)
+                    .style('max-height', '0px')
+                    .style('padding-top', '0px')
+                    .style('opacity', '0');
+               }
+            });
+
+        selection.exit()
+            .remove();
+
+        var addFields = formbuttonwrap.selectAll('.preset-add-field')
+            .data(notShown(), fieldKey);
+
+        addFields.enter()
             .append('button')
             .attr('class', 'preset-add-field')
-            .on('click', addForm)
+            .on('click', show)
             .call(bootstrap.tooltip()
                 .placement('top')
                 .title(function(d) { return d.label(); }))
             .append('span')
             .attr('class', function(d) { return 'icon ' + d.icon; });
 
-        function notInForm(p) {
-            return preset.fields.indexOf(p) < 0;
-        }
+        addFields.exit()
+            .transition()
+            .style('opacity', 0)
+            .remove();
 
-        function addForm(d) {
-            draw(formwrap, [d]);
-
-            d3.select(this)
-                .style('opacity', 1)
-                .transition()
-                .style('opacity', 0)
-                .remove();
-
-            if (!wrap.selectAll('button').node()) {
-                wrap.remove();
-            }
-        }
+        return selection;
     }
 
-    function draw(selection, fields) {
-        var sections = selection.selectAll('div.preset-field')
-            .data(fields, function(field) { return field.id; })
-            .enter()
-            .append('div')
-            .style('opacity', 0)
-            .attr('class', function(field) {
-                return 'preset-field preset-field-' + field.id + ' fillL inspector-inner col12';
-            });
+    function presets(selection) {
+        selection.html('');
 
-        sections.append('h4')
-            .attr('for', function(d) { return 'input-' + d.key; })
-            .text(function(d) { return d.label(); })
-            .append('button')
-                .attr('class', 'fr icon undo modified-icon')
-                .on('click', function(d) {
-                    var original = context.graph().base().entities[entity.id];
-                    var t = {};
-                    (d.keys || [d.key]).forEach(function(key) {
-                        t[key] = original ? original.tags[key] : undefined;
-                    });
-                    event.change(t);
-                });
+        formwrap = selection;
 
-        sections.transition()
-            .style('opacity', 1);
+        formbuttonwrap = selection.append('div')
+            .attr('class', 'col12 more-buttons inspector-inner');
 
-        sections.each(function(field) {
-            var i = iD.ui.preset[field.type](field, context)
-                .on('close', event.close)
-                .on('change', event.change);
-
-            event.on('setTags.' + field.key || field.type, function (tags) {
-                i.tags(_.clone(tags));
-            });
-
-            if (field.type === 'address') i.entity(entity);
-
-            keys = keys.concat(field.key ? [field.key] : field.keys);
-
-            d3.select(this).call(i);
-        });
+        render();
     }
 
     presets.rendered = function() {
-        return keys;
+        return _.flatten(shown().map(function(field) { return field.keys; }));
     };
 
     presets.preset = function(_) {
@@ -112,27 +215,17 @@ iD.ui.preset = function(context, entity) {
         return presets;
     };
 
-    presets.change = function(t) {
-        tags = t;
+    presets.change = function(_) {
+        tags = _;
 
-        function haveKey(k) { return k && !!tags[k]; }
-
-        formbuttonwrap.selectAll('button').each(function(p) {
-            if (haveKey(p.key) || _.any(p.keys, haveKey)) {
-                draw(formwrap, [p]);
-                d3.select(this).remove();
+        fields.forEach(function(field) {
+            if (field.shown()) {
+                field.input.tags(_);
             }
         });
 
-        formwrap.selectAll('div.preset-field')
-            .classed('modified', function(d) {
-                var original = context.graph().base().entities[entity.id];
-                return _.any(d.keys || [d.key], function(key) {
-                    return original ? tags[key] !== original.tags[key] : tags[key];
-                });
-            });
+        render();
 
-        event.setTags(tags);
         return presets;
     };
 

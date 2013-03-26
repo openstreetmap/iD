@@ -59,6 +59,9 @@
         "icon": {
             "type": "string"
         },
+        "placeholder": {
+            "type": "string"
+        },
         "strings": {
             "type": "object"
         }

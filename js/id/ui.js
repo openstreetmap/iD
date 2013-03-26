@@ -53,6 +53,10 @@ iD.ui = function(context) {
             .call(iD.ui.Spinner(context));
 
         container.append('div')
+            .style('display', 'none')
+            .attr('class', 'help-wrap fillL col5');
+
+        container.append('div')
             .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));
 
@@ -69,8 +73,17 @@ iD.ui = function(context) {
             .call(iD.ui.Geolocate(map));
 
         container.append('div')
+            .attr('class', 'map-control help-control')
+            .call(iD.ui.Help(context));
+
+        container.append('div')
             .style('display', 'none')
             .attr('class', 'inspector-wrap fr content col4');
+
+        container.append('idv')
+            .attr('class', 'attribution')
+            .attr('tabindex', -1)
+            .call(iD.ui.Attribution(context));
 
         var about = container.append('div')
             .attr('class','col12 about-block fillD');
@@ -96,12 +109,6 @@ iD.ui = function(context) {
             .attr('tabindex', -1)
             .attr('href', 'https://help.openstreetmap.org/questions/ask/')
             .text(t('report_a_bug'));
-
-        linkList.append('li')
-            .attr('class', 'attribution')
-            .attr('tabindex', -1)
-            .data([context.background().source()])
-            .call(iD.ui.Attribution(context));
 
         linkList.append('li')
             .attr('class', 'source-switch')

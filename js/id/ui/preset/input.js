@@ -10,6 +10,7 @@ iD.ui.preset.url = function(field) {
     function i(selection) {
         input = selection.append('input')
             .attr('type', field.type)
+            .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder || '')
             .on('blur', change)
             .on('change', change)
@@ -49,6 +50,10 @@ iD.ui.preset.url = function(field) {
 
     i.tags = function(tags) {
         input.property('value', tags[field.key] || '');
+    };
+
+    i.focus = function() {
+        input.node().focus();
     };
 
     return d3.rebind(i, event, 'on');

@@ -168,14 +168,17 @@ iD.Background = function() {
         }
     }
 
+    background.dispatch = d3.dispatch('change');
+
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
         cache = {};
         tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 20]);
         setHash(source);
+        background.dispatch.change();
         return background;
     };
 
-    return background;
+    return d3.rebind(background, background.dispatch, 'on');
 };

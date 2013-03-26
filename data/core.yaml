@@ -107,7 +107,7 @@ en:
   nothing_to_redo: Nothing to redo.
   just_edited: "You just edited OpenStreetMap!"
   browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
-  view_on_osm: View on OSM
+  view_on_osm: "View on OSM →"
   zoom_in_edit: zoom in to edit the map
   logout: logout
   report_a_bug: report a bug
@@ -123,8 +123,8 @@ en:
     deleted: Deleted
     created: Created
   contributors:
-    list: "Viewing contributions by {users}"
-    truncated_list: "Viewing contributions by {users} and {count} others"
+    list: "Contributed by {users}"
+    truncated_list: "Contributed by {users} and {count} others"
   geocoder:
     title: Find a place
     placeholder: Find a place
@@ -136,7 +136,7 @@ en:
     no_documentation_key: There is no documentation available for this key
     show_more: Show More
     new_tag: New tag
-    view_on_osm: View on OSM
+    view_on_osm: View on OSM →
     editing_feature: "Editing {feature}"
     additional: Additional tags
     choose: Select feature type
@@ -150,7 +150,8 @@ en:
     fix_misalignment: Fix misalignment
     reset: reset
   restore:
-    description: "You have unsaved changes from a previous editing session. Do you wish to restore these changes?"
+    heading: You have unsaved changes
+    description: "Do you wish to restore changes from a previous editing session?"
     restore: Restore
     reset: Reset
   save:
@@ -167,6 +168,7 @@ en:
     start: Start Editing
   source_switch:
     live: live
+    lose_changes: "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?"
     dev: dev
   tag_reference:
     description: Description
@@ -182,8 +184,8 @@ en:
   zoom:
     in: Zoom In
     out: Zoom Out
-  imagery:
-    provided_by: "Imagery provided by {source}"
   gpx:
     local_layer: "Local GPX file"
     drag_drop: "Drag and drop a .gpx file on the page"
+  help:
+    title: "Help"

@@ -1,7 +1,7 @@
 d3.combobox = function() {
     var event = d3.dispatch('accept'),
         id = d3.combobox.id ++,
-        container, input, shown = false, data = [];
+        data = [];
 
     var fetcher = function(val, data, cb) {
         cb(data.filter(function(d) {
@@ -12,34 +12,33 @@ d3.combobox = function() {
         }));
     };
 
-    var typeahead = function(selection) {
-        var idx = -1;
-        input = selection.select('input').classed('combobox-input', true);
+    var typeahead = function(input) {
+        var idx = -1, container, shown = false;
 
-        selection.append('div', selection.select('input'))
-            .attr('class', 'combobox-carat')
-            .on('mousedown', stop)
-            .on('mousedown', function() {
-                d3.event.preventDefault();
-                mousedown();
+        input
+            .classed('combobox-input', true)
+            .each(function() {
+                var parent = this.parentNode,
+                    sibling = this.nextSibling;
+                d3.select(parent)
+                    .insert('div', function() { return sibling; })
+                    .attr('class', 'combobox-carat')
+                    .on('mousedown', function () {
+                        // prevent the form element from blurring. it blurs
+                        // on mousedown
+                        d3.event.stopPropagation();
+                        d3.event.preventDefault();
+                        mousedown();
+                    });
             });
 
         function updateSize() {
-            var rect = selection.select('input')
-                .node()
-                .getBoundingClientRect();
+            var rect = input.node().getBoundingClientRect();
             container.style({
                 'left': rect.left + 'px',
                 'width': rect.width + 'px',
                 'top': rect.height + rect.top + 'px'
             });
-        }
-
-        function stop() {
-            // prevent the form element from blurring. it blurs
-            // on mousedown
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
         }
 
         function blur() {
@@ -210,7 +209,7 @@ d3.combobox = function() {
                     .order();
             }
 
-            fetcher.apply(selection, [value, data, render]);
+            fetcher.apply(input, [value, data, render]);
         }
 
         // select the choice given as d

@@ -26,26 +26,18 @@ iD.ui.TagEditor = function(context, entity) {
         var messagewrap = selection.append('div')
             .attr('class', 'header fillL cf');
 
-        var back = messagewrap.append('button')
-            .attr('class', 'preset-reset fl ' + geometry)
+        messagewrap.append('button')
+            .attr('class', 'preset-reset fl ')
             .on('click', function() {
                 event.choose(preset);
-            });
-
-        var icon = preset.icon || (geometry === 'line' ? 'other-line' : 'marker-stroked');
-
-        back.append('div')
-            .attr('class', 'col12')
-            .append('span')
-            .attr('class', 'preset-icon icon feature-' + icon);
-
-        back.append('div')
-            .attr('class', 'col12')
+            })
             .append('span')
             .attr('class', 'icon back');
 
+        var icon = preset.icon || (geometry === 'line' ? 'other-line' : 'marker-stroked');
+
         messagewrap.append('h3')
-            .attr('class', 'inspector-inner fl')
+            .attr('class', 'inspector-inner')
             .text(t('inspector.editing_feature', { feature: preset.name() }));
 
         messagewrap.append('button')
@@ -57,8 +49,14 @@ iD.ui.TagEditor = function(context, entity) {
         var editorwrap = selection.append('div')
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
 
-        presetUI = iD.ui.preset(context, entity)
-            .preset(preset)
+        editorwrap.append('div')
+            .attr('class', 'col12 inspector-inner preset-icon-wrap fillL3')
+            .append('div')
+                .attr('class','fillL')
+                .append('span')
+                    .attr('class', geometry + ' preset-icon icon feature-' + icon);
+
+        presetUI = iD.ui.preset(context, entity, preset)
             .on('change', changeTags)
             .on('close', event.close);
 
@@ -75,7 +73,7 @@ iD.ui.TagEditor = function(context, entity) {
 
         if (!entity.isNew()) {
             tageditorpreset.append('div')
-                .attr('class', 'view-on-osm')
+                .attr('class', 'col12 inspector-inner')
                 .append('a')
                 .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
                 .attr('target', '_blank')

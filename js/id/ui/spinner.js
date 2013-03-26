@@ -15,5 +15,5 @@ iD.ui.Spinner = function(context) {
             img.transition()
                 .style('opacity', 0);
         });
-    }
+    };
 };

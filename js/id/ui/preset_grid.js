@@ -1,9 +1,8 @@
 iD.ui.PresetGrid = function(context, entity) {
     var event = d3.dispatch('choose', 'close'),
-        default_limit = 9,
-        currently_drawn = 9,
-        presets,
-        taginfo = iD.taginfo();
+        defaultLimit = 9,
+        currentlyDrawn = 9,
+        presets;
 
     function presetgrid(selection, preset) {
 
@@ -15,7 +14,7 @@ iD.ui.PresetGrid = function(context, entity) {
             .attr('class', 'header fillL cf');
 
         var message = messagewrap.append('h3')
-            .attr('class', 'inspector-inner fl')
+            .attr('class', 'inspector-inner')
             .text(t('inspector.choose'));
 
         if (preset) {
@@ -39,14 +38,14 @@ iD.ui.PresetGrid = function(context, entity) {
             .attr('class', 'preset-grid fillL cf')
             .data([context.presets().defaults(entity, 36).collection]);
 
-        var show_more = gridwrap.append('button')
+        var showMore = gridwrap.append('button')
             .attr('class', 'fillL show-more')
             .text(t('inspector.show_more'))
             .on('click', function() {
-                grid.call(drawGrid, (currently_drawn += default_limit));
+                grid.call(drawGrid, (currentlyDrawn += defaultLimit));
             });
 
-        grid.call(drawGrid, default_limit);
+        grid.call(drawGrid, defaultLimit);
 
         var searchwrap = selection.append('div')
             .attr('class', 'preset-grid-search-wrap inspector-inner');
@@ -76,7 +75,7 @@ iD.ui.PresetGrid = function(context, entity) {
             if (d3.event.keyCode === 13 && value.length) {
                 choose(grid.selectAll('.grid-entry:first-child').datum());
             } else {
-                currently_drawn = default_limit;
+                currentlyDrawn = defaultLimit;
                 grid.classed('filtered', value.length);
                 if (value.length) {
                     var results = presets.search(value);
@@ -85,10 +84,10 @@ iD.ui.PresetGrid = function(context, entity) {
                         search: value
                     }));
                     grid.data([results.collection])
-                        .call(drawGrid, default_limit);
+                        .call(drawGrid, defaultLimit);
                 } else {
                     grid.data([context.presets().defaults(entity, 36).collection])
-                        .call(drawGrid, default_limit);
+                        .call(drawGrid, defaultLimit);
                 }
             }
         }
@@ -115,7 +114,7 @@ iD.ui.PresetGrid = function(context, entity) {
                         .attr('class', 'arrow');
 
                     subgrid.append('div')
-                        .attr('class', 'preset-grid fillL cf fl')
+                        .attr('class', 'preset-grid fillL3 cf fl')
                         .data([d.members.collection])
                         .call(drawGrid, 1000);
 
@@ -164,10 +163,7 @@ iD.ui.PresetGrid = function(context, entity) {
                     .style('max-height', '0px')
                     .style('padding-top', '0px')
                     .style('padding-bottom', '0px')
-                    .each('end', function() {
-                        shown.remove();
-                    });
-
+                    .remove();
 
                 if (shown.datum() === entity && shown.classed(klass)) return;
                 shownIndex = Array.prototype.indexOf.call(shown.node().parentNode.childNodes, shown.node());
@@ -203,50 +199,29 @@ iD.ui.PresetGrid = function(context, entity) {
                     .style('max-height', '0px')
                     .style('padding-top', '0px')
                     .style('padding-bottom', '0px')
+                    .style('opacity', '0')
                     .transition()
                     .duration(200)
                     .style('padding-top', '10px')
                     .style('padding-bottom', '20px')
-                    .style('max-height', '200px');
+                    .style('max-height', '200px')
+                    .style('opacity', '1');
 
-                presetinspect.append('h2')
+                presetinspect.append('h3')
                     .text(d.name());
 
-                var description = presetinspect.append('p');
-                var link = presetinspect.append('a');
+                var tag = {key: Object.keys(d.tags)[0]};
 
-                var params = {},
-                    locale = iD.detect().locale.split('-')[0] || 'en';
-
-                params.key = Object.keys(d.tags)[0];
-                if (d.tags[params.key] !== '*') {
-                    params.value = d.tags[params.key];
+                if (d.tags[tag.key] !== '*') {
+                    tag.value = d.tags[tag.key];
                 }
 
-                taginfo.docs(params, function(err, data) {
-                    if (err) return description.text(t('inspector.no_documentation_combination'));
-                    var doc = _.find(data, function(d) { return d.lang === locale; }) ||
-                        _.find(data, function(d) { return d.lang === 'en'; });
-                    if (doc) {
-                        description
-                            .text(doc.description);
-                        link
-                            .attr('href', 'http://wiki.openstreetmap.org/wiki/' +
-                                  encodeURIComponent(doc.title))
-                            .text(t('inspector.reference'));
-                    }
-                });
-
-                presetinspect.selectAll('*')
-                    .style('opacity','0')
-                    .transition()
-                    .delay(100)
-                    .duration(200)
-                    .style('opacity','1');
+                presetinspect.append('div')
+                    .call(iD.ui.TagReference(entity, tag));
             }
 
             if (selection.node() === grid.node()) {
-                show_more
+                showMore
                     .style('display', (selection.data()[0].length > limit) ? 'block' : 'none');
             }
 
@@ -256,20 +231,21 @@ iD.ui.PresetGrid = function(context, entity) {
                 .selectAll('div.grid-entry-wrap')
                 .data(function(d) { return d.slice(0, limit); }, name);
 
-            entries.exit().remove();
+            entries.exit()
+                .remove();
 
             var entered = entries.enter()
                 .append('div')
                 .attr('class','grid-button-wrap col4 grid-entry-wrap')
                 .classed('category', function(d) { return !!d.members; })
                 .classed('current', function(d) { return d === preset; })
-                    .append('button')
-                    .attr('class', 'grid-entry')
-                    .on('click', choose);
+                .append('button')
+                .attr('class', 'grid-entry')
+                .on('click', choose);
 
             entered.style('opacity', 0)
-                    .transition()
-                    .style('opacity', 1);
+                .transition()
+                .style('opacity', 1);
 
             entered.append('div')
                 .attr('class', presetClass);
@@ -286,15 +262,13 @@ iD.ui.PresetGrid = function(context, entity) {
                 .attr('class','label')
                 .text(name);
 
-            entered.filter(function(d) {
-                    return !d.members;
-                })
+            entered.filter(function(d) { return !d.members; })
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'preset-help')
+                .attr('class', 'tag-reference-button')
                 .on('click', helpClick, selection)
                 .append('span')
-                    .attr('class', 'icon inspect');
+                    .attr('class', 'icon inspect light');
 
             entries.order();
         }

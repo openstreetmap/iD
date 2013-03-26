@@ -7,7 +7,7 @@ iD.ui.preset.defaultcheck = function(field) {
 
         input = selection.append('input')
             .attr('type', 'checkbox')
-            .attr('id', 'input-' + field.key)
+            .attr('id', 'preset-input-' + field.id)
             .on('change', function() {
                 var t = {};
                 t[field.key] = input.property('checked') ? field.value || 'yes' : undefined;
@@ -17,6 +17,10 @@ iD.ui.preset.defaultcheck = function(field) {
 
     check.tags = function(tags) {
         input.property('checked', !!tags[field.key] && tags[field.key] !== 'no');
+    };
+
+    check.focus = function() {
+        input.node().focus();
     };
 
     return d3.rebind(check, event, 'on');

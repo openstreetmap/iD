@@ -5,6 +5,7 @@ iD.ui.preset.textarea = function(field) {
 
     function i(selection) {
         input = selection.append('textarea')
+            .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder || '')
             .attr('maxlength', 255)
             .on('blur', change)
@@ -20,6 +21,10 @@ iD.ui.preset.textarea = function(field) {
 
     i.tags = function(tags) {
         input.text(tags[field.key] || '');
+    };
+
+    i.focus = function() {
+        input.node().focus();
     };
 
     return d3.rebind(i, event, 'on');

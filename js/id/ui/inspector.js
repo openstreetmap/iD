@@ -2,7 +2,8 @@ iD.ui.Inspector = function(context, entity) {
     var tagEditor;
 
     function changeTags(tags) {
-        if (!_.isEqual(entity.tags, tags)) {
+        entity = context.entity(entity.id);
+        if (entity && !_.isEqual(entity.tags, tags)) {
             context.perform(
                 iD.actions.ChangeTags(entity.id, tags),
                 t('operations.change_tags.annotation'));

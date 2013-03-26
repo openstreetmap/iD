@@ -372,6 +372,7 @@
         "key": "website",
         "type": "url",
         "icon": "website",
+        "placeholder": "http://example.com/",
         "universal": true,
         "label": "Website"
     },
