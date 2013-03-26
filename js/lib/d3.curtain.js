@@ -2,12 +2,13 @@
 d3.curtain = function() {
 
     var event = d3.dispatch(),
+        surface,
         tooltip,
         mask;
 
     function curtain(selection) {
 
-        var surface = selection.append('svg')
+        surface = selection.append('svg')
             .style({
                 'z-index': 1000,
                 'pointer-events': 'none',
@@ -40,7 +41,7 @@ d3.curtain = function() {
         mask = surface.append('defs')
             .append('mask').attr('id', 'mask');
 
-        mask.append('rect')
+        var maskrect = mask.append('rect')
             .style('fill', 'white')
             .attr({
                 x: 0,
@@ -54,7 +55,8 @@ d3.curtain = function() {
                 width: window.innerWidth,
                 height: window.innerHeight
             };
-            mask.attr(size);
+            surface.attr(size);
+            maskrect.attr(size);
             darkness.attr(size);
         });
 
@@ -147,6 +149,11 @@ d3.curtain = function() {
             .attr('width', 0)
             .attr('height', 0)
             .remove();
+    };
+
+    curtain.remove = function() {
+        surface.remove();
+        tooltip.remove();
     };
 
     return d3.rebind(curtain, event, 'on');

@@ -146,7 +146,6 @@ iD.ui = function(context) {
             .call(iD.ui.Splash(context))
             .call(iD.ui.Restore(context));
 
-        d3.select(document.body).call(iD.ui.intro(context));
     };
 };
 

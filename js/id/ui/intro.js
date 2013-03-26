@@ -4,10 +4,15 @@ iD.ui.intro = function(context) {
 
     function intro(selection) {
 
+        var originalCenter = context.map().center(),
+            originalZoom = context.map().zoom();
+
         // Load semi-real data used in intro
+        context.connection().toggle(false).flush();
         context.history().reset();
         context.history().merge(iD.Graph().load(JSON.parse(iD.introGraph)).entities);
 
+        d3.select('.layer-layer:first-child').style('opacity', 1);
 
         curtain = d3.curtain();
         selection.call(curtain);
@@ -23,20 +28,32 @@ iD.ui.intro = function(context) {
             return s;
         });
 
+        steps.push({
+            name: 'Start Editing',
+            enter: function() {
+                curtain.remove();
+                navwrap.remove();
+                d3.select('.layer-layer:first-child').style('opacity', 0.5);
+                context.connection().toggle(true).flush();
+                context.history().reset();
+                context.map().centerZoom(originalCenter, originalZoom);
+            }
+        });
+
         var navwrap = selection.append('div').attr('class', 'intro-nav-wrap');
 
-        var entered = navwrap.append('div')
+        var buttonwrap = navwrap.append('div')
             .attr('class', 'col12 button-wrap joined')
-            .selectAll('button.step')
-            .data(steps)
+            .selectAll('button.step');
+
+        var entered = buttonwrap.data(steps)
             .enter().append('button')
-                .attr('class', 'step col2')
+                .attr('class', 'step')
                 .on('click', function(d) {
                     enter(d);
                 });
 
         entered.append('h3').text(function(d) { return d.name; });
-
         enter(steps[0]);
 
         function enter (newStep) {
@@ -45,6 +62,8 @@ iD.ui.intro = function(context) {
                 step.exit();
             }
 
+            context.enter(iD.modes.Browse(context));
+
             step = newStep;
             step.enter();
 
@@ -52,6 +71,7 @@ iD.ui.intro = function(context) {
                 return d.name === step.name;
             });
         }
+
     }
     return intro;
 };
