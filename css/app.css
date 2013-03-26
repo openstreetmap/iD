@@ -901,7 +901,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-bottom: 1px solid #CCC;
 }
 
-.tag-wrap .preset-icon-wrap::after { 
+.tag-wrap .preset-icon-wrap::after {
     content: "";
     position: absolute;
     height: 0;
@@ -915,7 +915,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-bottom-color: #CCC;
 }
 
-.tag-wrap .preset-icon-wrap div { 
+.tag-wrap .preset-icon-wrap div {
     height: 80px;
     width: 33.3333%;
     width: -webkit-calc(33.3333% - 10px);
@@ -926,7 +926,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
 }
 
-.tag-wrap .preset-icon-wrap .preset-icon { 
+.tag-wrap .preset-icon-wrap .preset-icon {
     position: absolute;
     top: 30px;
     left: 0px;
@@ -934,11 +934,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     margin: auto;
 }
 
-.tag-wrap .preset-icon-wrap .preset-icon.line { 
+.tag-wrap .preset-icon-wrap .preset-icon.line {
     top: 15px;
 }
 
-.inspector-preset .form-field { 
+.inspector-preset .form-field {
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -962,7 +962,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity: .5;
 }
 
-.form-label .modified-icon { 
+.form-label .modified-icon {
     border-right: 0;
     opacity: 0;
 }
@@ -971,7 +971,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     opacity: .5;
 }
 
-.form-label button.tag-reference-button { 
+.form-label button.tag-reference-button {
     border-top-right-radius: 3px;
 }
 
@@ -1313,11 +1313,11 @@ div.combobox {
 
 /* Tag reference */
 
-.tag-help { 
+.tag-help {
     overflow: hidden;
 }
 
-img.wiki-image { 
+img.wiki-image {
     float: left;
     max-width: 33.3333%;
     margin-right: 20px;
