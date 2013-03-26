@@ -12,6 +12,7 @@ iD.ui.RadialMenu = function(operations) {
         function click(operation) {
             d3.event.stopPropagation();
             operation();
+            radialMenu.close();
         }
 
         menu = selection.append('g')
