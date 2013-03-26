@@ -47,7 +47,8 @@ iD.ui.TagReference = function(entity, tag) {
                 referenceBody
                     .append('img')
                     .attr('class', 'wiki-image')
-                    .attr('src', docs.image.thumb_url_prefix + "100" + docs.image.thumb_url_suffix);
+                    .attr('src', docs.image.thumb_url_prefix + "100" + docs.image.thumb_url_suffix)
+                    .on('error', function() { d3.select(this).remove(); });
             }
 
             referenceBody

@@ -144,9 +144,6 @@ iD.ui.preset = function(context, entity, preset) {
             });
 
         selection.selectAll('.tag-help')
-            .style('display', function(field) {
-                return field.showingReference ? 'block' : 'block';
-            })
             .each(function(field) {
                 if (field.showingReference) {
                     d3.select(this)
