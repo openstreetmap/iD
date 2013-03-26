@@ -1,0 +1,8 @@
+{
+    "name": "Other",
+    "tags": {
+        "area": "yes"
+    },
+    "geometry": ["area"],
+    "fields": []
+}

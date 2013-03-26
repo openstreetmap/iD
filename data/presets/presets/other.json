@@ -1,0 +1,6 @@
+{
+    "name": "Other",
+    "tags": {},
+    "geometry": ["point", "vertex", "line", "area"],
+    "fields": []
+}
