@@ -2144,3 +2144,57 @@ a.success-action.twitter:before {
 ::-webkit-scrollbar-corner {
     background: transparent
 }
+
+/* Intro */
+
+.curtain-darkness {
+    fill-opacity: 0.7;
+    fill: #222;
+}
+
+.intro-nav-wrap {
+    position: absolute;
+    left: 30px;
+    right: 500px;
+    bottom: 30px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1001;
+}
+
+.intro-nav-wrap button.step {
+    width: 20%;
+    padding: 20px;
+    float: left;
+    padding-bottom: 40px;
+}
+
+.intro-nav-wrap button.step.finished {
+    background: #76FF70;
+}
+
+.intro-nav-wrap button.step.finished h3 {
+    color: #269C21;
+}
+
+.intro-nav-wrap button.step h3 {
+    font-weight: normal;
+}
+.curtain-tooltip.left .tooltip-arrow,
+.curtain-tooltip.right .tooltip-arrow {
+    top: 0;
+}
+
+.curtain-tooltip.right .tooltip-inner,
+.curtain-tooltip.left .tooltip-inner {
+    margin-top: -50%;
+}
+.curtain-tooltip .tooltip-inner {
+    font-size: 14px;
+    font-weight: normal;
+}
+.curtain-tooltip .tooltip-inner .bold {
+    font-weight: bold;
+    display: block;
+}
+
