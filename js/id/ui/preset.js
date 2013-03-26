@@ -139,6 +139,9 @@ iD.ui.preset = function(context, entity, preset) {
             .attr('class', 'tag-help');
 
         selection
+            .each(function(field) {
+                field.input.tags(tags);
+            })
             .classed('modified', function(field) {
                 return field.modified();
             });
@@ -213,15 +216,7 @@ iD.ui.preset = function(context, entity, preset) {
 
     presets.change = function(_) {
         tags = _;
-
-        fields.forEach(function(field) {
-            if (field.shown()) {
-                field.input.tags(_);
-            }
-        });
-
         render();
-
         return presets;
     };
 
