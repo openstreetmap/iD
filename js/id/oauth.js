@@ -109,7 +109,7 @@ iD.OAuth = function(context) {
             var l = iD.ui.loading(context.container(), 'contacting openstreetmap...');
 
             function accessTokenDone(err, xhr) {
-                if (err) callback(err);
+                if (err) return callback(err);
                 l.remove();
                 var access_token = ohauth.stringQs(xhr.response);
                 token('oauth_token', access_token.oauth_token);
