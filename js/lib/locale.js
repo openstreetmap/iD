@@ -18,12 +18,11 @@ function t(s, o, loc) {
     if (rep !== undefined) {
         if (o) for (var k in o) rep = rep.replace('{' + k + '}', o[k]);
         return rep;
-    } else if (o && 'default' in o) {
-        return o.default;
     } else {
         var missing = 'Missing translation: ' + s;
         if (console) console.error(missing);
         if (loc !== 'en') return t(s, o, 'en');
+        if (o && 'default' in o) return o['default'];
         return missing;
     }
 }
