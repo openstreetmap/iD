@@ -1836,7 +1836,7 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
-.modal a.action, .modal button.action {
+.modal a.action, .modal-splash button.action {
     font-weight: normal;
     color: #7092FF;
     background-color: white;
@@ -1849,12 +1849,12 @@ div.typeahead a:first-child {
             transition: all 200ms;
 }
 
-.modal a.action:hover, .modal button.action:hover {
+.modal a.action:hover, .modal-splash button.action:hover {
     background-color: #ececec;
 }
 
 a.action:before,
-.modal button.action:before {
+.modal-splash button.action:before {
     display: block;
     content: '';
     height: 100px;
