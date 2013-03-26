@@ -991,6 +991,11 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 /* adding additional preset fields */
 
+.more-buttons {
+    margin-top: 20px;
+    border-top: 1px solid #CCC;
+}
+
 button.preset-add-field {
     width: 16.6666%;
     height: 40px;
@@ -1873,15 +1878,7 @@ a.action.twitter:before {
 /* Splash Modal
 ------------------------------------------------------- */
 
-.logo {
-    height: 100px;
-    width: 100px;
-    background: url(../img/logo.png) 0 0 repeat;
-    margin: auto;
-}
-
 .modal-splash h3 {
-    padding-top: 20px;
     text-align: center;
  }
 

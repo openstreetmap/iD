@@ -14,12 +14,9 @@ iD.ui.Splash = function(context) {
             .append('div')
             .attr('class', 'fillL');
 
-        var header = introModal.append('div')
-            .attr('class','modal-section cf');
-
-            header.append('div').attr('class', 'logo');
-
-            header.append('h3').text(t('splash.welcome'));
+        introModal.append('div')
+            .attr('class','modal-section cf')
+            .append('h3').text(t('splash.welcome'));
 
         var buttons = introModal.append('div').attr('class', 'cf');
 
