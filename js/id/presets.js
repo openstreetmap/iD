@@ -3,19 +3,13 @@ iD.presets = function(context) {
     // an iD.presets.Collection with methods for
     // loading new data and returning defaults
 
-    var other = iD.presets.Preset('other', {
-            tags: {},
-            geometry: ['point', 'vertex', 'line', 'area']
-        }),
-        otherarea = iD.presets.Preset('other/area', {
-            tags: { area: 'yes' },
-            geometry: ['area']
-        }),
-        all = iD.presets.Collection([other, otherarea]),
+    var all = iD.presets.Collection([]),
         defaults = { area: all, line: all, point: all, vertex: all },
         fields = {},
         universal = [],
-        recent = iD.presets.Collection([]);
+        recent = iD.presets.Collection([]),
+        other,
+        other_area;
 
     all.load = function(d) {
 
@@ -49,6 +43,9 @@ iD.presets = function(context) {
             };
         }
 
+        other = all.item('other');
+        other_area = all.item('other_area');
+
         return all;
     };
 
@@ -62,12 +59,13 @@ iD.presets = function(context) {
 
     all.defaults = function(entity, n) {
         var rec = recent.matchGeometry(entity, context.graph()).collection.slice(0, 4),
-            def = _.uniq(rec.concat(defaults[entity.geometry(context.graph())].collection)).slice(0, n - 1);
-        return iD.presets.Collection(_.unique(rec.concat(def).concat(other)));
+            def = _.uniq(rec.concat(defaults[entity.geometry(context.graph())].collection)).slice(0, n - 1),
+            geometry = entity.geometry(context.graph());
+        return iD.presets.Collection(_.unique(rec.concat(def).concat(geometry === 'area' ? other_area : other)));
     };
 
     all.choose = function(preset) {
-        if (preset !== other) {
+        if (preset !== other && preset !== other_area) {
             recent = iD.presets.Collection(_.unique([preset].concat(recent.collection)));
         }
         return all;

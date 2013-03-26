@@ -65,7 +65,7 @@ iD.presets.Preset = function(id, preset, fields) {
 
         for (var f in preset.fields) {
             f = preset.fields[f];
-            if (f.matchGeometry(geometry) && f.key && !tags[f.key]) {
+            if (f.matchGeometry(geometry) && f.key && !tags[f.key] && f['default']) {
                 tags[f.key] = f['default'];
             }
         }

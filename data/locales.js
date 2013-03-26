@@ -1042,6 +1042,14 @@ locale.en = {
                 "name": "Office",
                 "terms": ""
             },
+            "other": {
+                "name": "Other",
+                "terms": ""
+            },
+            "other_area": {
+                "name": "Other",
+                "terms": ""
+            },
             "place": {
                 "name": "Place",
                 "terms": ""

@@ -2375,6 +2375,27 @@
         "terms": [],
         "name": "Office"
     },
+    "other": {
+        "name": "Other",
+        "tags": {},
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "fields": []
+    },
+    "other_area": {
+        "name": "Other",
+        "tags": {
+            "area": "yes"
+        },
+        "geometry": [
+            "area"
+        ],
+        "fields": []
+    },
     "place": {
         "fields": [
             "place"
