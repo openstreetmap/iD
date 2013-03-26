@@ -1450,10 +1450,10 @@ locale.en = {
             "choose": "**Choose Cafe from the grid.**",
             "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name and address**",
             "close": "The feature editor can be closed by clicking on the close button, or anywhere on the map. **Close the feature editor**",
-            "selectanother": "Often points will already exist, but have mistakes or be incomplete. We can edit exist points. **Select the point for *Someting**",
-            "fixname": "Change the name to *Something Else* **",
-            "selectthird": "We only want to have one representation of a feature. We can see that there are two points for *Some Place*. **Select one of the points.**",
-            "delete": "There menu that shows around the point contains various operations, including delete. **Delete the point.**"
+            "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**",
+            "fixname": "**Change the name and close the feature editor.**",
+            "reselect_delete": "All features on the map can be deleted. **Reselect the point you created.**",
+            "delete": "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
         },
         "areas": {
             "add": "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most features types points can be used for, and are often preferred. **Click the Area button to add a new area.**",
@@ -1467,10 +1467,10 @@ locale.en = {
             "add": "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**",
             "start": "**Start the line by clicking on the end of the road.**",
             "intersect": "Click to add more points to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**",
-            "finish": "Just like with areas, lines can be finished by clicking on the last point again. **Finish drawing the road.**",
-            "road": "**Select *Road* from the grid**",
-            "residential": "There are different types of roads, the most common of which is Residential. **Choose the *Residential* road type**",
-            "describe": "**Name the road**"
+            "finish": "Lines can be finished by clicking on the last point again. **Finish drawing the road.**",
+            "road": "**Select Road from the grid**",
+            "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
+            "describe": "**Name the road and close the feature editor.**"
         }
     }
 };

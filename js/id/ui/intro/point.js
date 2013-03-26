@@ -57,13 +57,71 @@ iD.ui.intro.point = function(context, curtain) {
         function selectedPreset() {
             curtain.reveal('.grid-pane', t('intro.points.describe'));
             context.history().on('change.intro', closeEditor);
-            context.on('exit.intro', event.done);
+            context.on('exit.intro', selectPoint);
         }
 
         function closeEditor() {
             context.history().on('change.intro', null);
             curtain.reveal('.tag-pane', t('intro.points.close'));
         }
+
+        function selectPoint() {
+            context.on('exit.intro', null);
+            context.history().on('change.intro', null);
+            context.on('enter.intro', enterReselect);
+
+            var pointBox = iD.ui.intro.pad(context.projection(corner), 150);
+            curtain.reveal(pointBox, t('intro.points.reselect'));
+
+            context.map().on('move.intro', function() {
+                pointBox = iD.ui.intro.pad(context.projection(corner), 150);
+                curtain.reveal(pointBox, t('intro.points.reselect'), 0);
+            });
+        }
+
+        function enterReselect(mode) {
+            if (mode.id !== 'select') return;
+            context.map().on('move.intro', null);
+            context.on('enter.intro', null);
+
+            setTimeout(function() {
+                curtain.reveal('.tag-pane', t('intro.points.fixname'));
+                context.on('exit.intro', deletePoint);
+            }, 500);
+        }
+
+        function deletePoint() {
+            context.on('exit.intro', null);
+            context.on('enter.intro', enterDelete);
+
+            var pointBox = iD.ui.intro.pad(context.projection(corner), 150);
+            curtain.reveal(pointBox, t('intro.points.reselect_delete'));
+
+            context.map().on('move.intro', function() {
+                pointBox = iD.ui.intro.pad(context.projection(corner), 150);
+                curtain.reveal(pointBox, t('intro.points.reselect_delete'), 0);
+            });
+        }
+
+        function enterDelete(mode) {
+            if (mode.id !== 'select') return;
+            context.map().on('move.intro', null);
+            context.on('enter.intro', null);
+            context.on('exit.intro', deletePoint);
+            context.map().on('move.intro', deletePoint);
+            context.history().on('change.intro', deleted);
+
+            setTimeout(function() {
+                var node = d3.select('.radial-menu-item-delete').node();
+                var pointBox = iD.ui.intro.pad(node.getBoundingClientRect(), 50);
+                curtain.reveal(pointBox, t('intro.points.delete'));
+            }, 300);
+        }
+
+        function deleted(changed) {
+            if (changed.deleted().length) event.done();
+        }
+
     };
 
     step.exit = function() {
