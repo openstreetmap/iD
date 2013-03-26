@@ -37,11 +37,11 @@ iD.ui.Inspector = function(context, entity) {
 
         var presetLayer = panewrap
             .append('div')
-            .classed('pane', true);
+            .classed('pane grid-pane', true);
 
         var tagLayer = panewrap
             .append('div')
-            .classed('pane', true);
+            .classed('pane tag-pane', true);
 
         var presetGrid = iD.ui.PresetGrid(context, entity)
             .on('close', browse)

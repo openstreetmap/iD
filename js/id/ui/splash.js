@@ -22,6 +22,23 @@ iD.ui.Splash = function(context) {
         div.append("h2")
             .text(t('splash.welcome'));
 
+        var buttons = div.append('div').attr('class', 'col12 button-wrap joined');
+
+        buttons.append('button')
+            .attr('class', 'col6')
+            .text(t('splash.walkthrough'))
+            .on('click', function() {
+                d3.select(document.body).call(iD.ui.intro(context));
+                modal.remove();
+            });
+
+        buttons.append('button')
+            .attr('class', 'col6')
+            .text(t('splash.start'))
+            .on('click', function() {
+                modal.remove();
+            });
+
         div.append("p")
             .html(t('splash.text', {
                 version: iD.version,
