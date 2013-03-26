@@ -101,7 +101,7 @@ iD.ui.Taglist = function(context, entity) {
                     .call(iD.ui.TagReference(entity, {key: tag.key}));
             })
             .append('span')
-            .attr('class', 'icon inspect light');
+            .attr('class', 'icon inspect');
 
         row.append('div')
             .attr('class', 'tag-help');

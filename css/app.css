@@ -350,13 +350,16 @@ button.active:not([disabled]):not(.disabled) {
 }
 
 button.minor {
-    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
     width: 20px;
-    background: rgba(0,0,0,.5);
+    opacity: .5;
+    border-radius: 0;
 }
 
 button.minor:hover {
-    background: #222;
 }
 
 button.centered {
@@ -728,6 +731,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     text-align: left;
     position: absolute;
     padding: 5px;
+    height: 30px;
     bottom: 0;
     left: 0; right: 0;
     white-space: nowrap;
@@ -738,12 +742,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     }
 
 .grid-entry .tag-reference-button {
-    opacity: .5;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 29px;
     border-left: 1px solid #CCC;
     border-radius: 0 0 3px 0;
 }
@@ -944,17 +942,13 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .form-label button {
-    pointer-events: all;
-    height: 29px;
-    margin-top: -5px;
     border-left: 1px solid #CCC;
-    border-radius: 0;
-    opacity: .5;
 }
 
 .form-label .modified-icon {
     border-right: 0;
     opacity: 0;
+    right: 20px;
 }
 
 .modified .form-label .modified-icon {
@@ -1220,6 +1214,7 @@ div.combobox {
 
 .tag-list {
     padding-top: 20px;
+    margin-right: 40px;
 }
 
 .tag-row {
@@ -1251,42 +1246,48 @@ div.combobox {
 
 .tag-row:first-child input.value {
     border-top: 1px solid #CCC;
-    border-top-right-radius: 4px;
-}
-
-.tag-row:last-child input.value {
-    border-bottom-right-radius: 4px;
 }
 
 .tag-row button {
     position: absolute;
     height: 30px;
     right: -20px;
-    opacity: 0;
+    border: 1px solid #CCC;
+    border-top-width: 0; border-left-width: 0;
     border-radius: 0;
+    opacity: 1;
+    background: #fafafa;
+}
+
+.tag-row button:hover {
+    background: #f1f1f1;
+}
+
+.tag-row button .icon {
+    opacity: .5;
+}
+
+.tag-row:first-child button {
+    border-top-width: 1px;
+}
+
+.tag-row:first-child button.tag-help {
+    border-top-right-radius: 4px;
+}
+
+.tag-row:last-child button.tag-help {
+    border-bottom-right-radius: 4px;
 }
 
 .tag-row button.tag-help {
-    left: -20px
-}
-
-.tag-row div.tag-help {
-    display: hidden;
-}
-
-.tag-row:hover input.value,
-.tag-row:hover input.key {
-    border-radius: 0;
-}
-
-.tag-row:hover button {
-    opacity: 1;
+    right: -40px;
 }
 
 /* Adding form fields to tag editor */
 
-
 .inspector-inner .add-tag {
+    width: -webkit-calc(50% - 20px);
+    width: calc(50% - 20px);
     height: 30px;
     border-top: 0;
     background: rgba(0,0,0,.5);
@@ -1867,19 +1868,12 @@ div.typeahead a:first-child {
     max-height: 160px;
 }
 
-.commit-modal .warning-section .changeset-list {
-    border-radius: 4px 0 0 4px;
-}
-
-.commit-modal .warning-section .changeset-list  button {
-    float: right;
+.commit-modal .warning-section .changeset-list button {
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
-    border-radius: 0;
-    height: 100%;
-    width: 30px;
+    border-left: 1px solid #CCC;
 }
 
 .commit-modal .changeset-list li {

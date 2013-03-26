@@ -118,14 +118,14 @@ iD.ui.preset = function(context, entity, preset) {
             .text(function(field) { return field.label(); });
 
         label.append('button')
-            .attr('class', 'tag-reference-button fr')
+            .attr('class', 'tag-reference-button minor')
             .attr('tabindex', -1)
             .on('click', toggleReference)
             .append('span')
             .attr('class', 'icon inspect');
 
         label.append('button')
-            .attr('class', 'fr modified-icon')
+            .attr('class', 'modified-icon minor')
             .attr('tabindex', -1)
             .on('click', revert)
             .append('div')
