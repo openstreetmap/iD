@@ -258,17 +258,17 @@ iD.ui.PresetGrid = function(context, entity) {
                     return 'feature-' + (d.icon || fallbackIcon) + ' icon';
                 });
 
-            entered.append('span')
+            var label = entered.append('div')
                 .attr('class','label')
                 .text(name);
 
-            entered.filter(function(d) { return !d.members; })
+            label.filter(function(d) { return !d.members; })
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'tag-reference-button')
+                .attr('class', 'tag-reference-button fr')
                 .on('click', helpClick, selection)
                 .append('span')
-                    .attr('class', 'icon inspect light');
+                    .attr('class', 'icon inspect');
 
             entries.order();
         }

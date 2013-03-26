@@ -724,19 +724,28 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .grid-entry .label {
-    font-weight: bold;
     background: #f6f6f6;
-    text-align: center;
-    display: block;
+    text-align: left;
     position: absolute;
     padding: 5px;
     bottom: 0;
     left: 0; right: 0;
-    margin: auto;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     border-top: 1px solid rgba(0, 0, 0, .1);
+    padding-right: 20px;
+    }
+
+.grid-entry .tag-reference-button {
+    opacity: .5;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 29px;
+    border-left: 1px solid #CCC;
+    border-radius: 0 0 3px 0;
 }
 
 .current .grid-entry,
@@ -837,25 +846,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 
 .show-more a {
     color: #222;
-}
-
-.grid-entry:hover .tag-reference-button {
-    opacity: 1;
-    border-radius: 0;
-}
-
-.grid-entry .tag-reference-button {
-    opacity: 0;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 30px;
-    background: rgba(0,0,0,.5);
-}
-
-.grid-entry .tag-reference-button:hover {
-    background: rgba(0,0,0,.9);
 }
 
 /* Preset icon colors */
