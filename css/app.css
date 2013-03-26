@@ -1699,7 +1699,7 @@ img.wiki-image {
 .attribution {
     position: absolute;
     bottom: 35px;
-    right:10px;
+    left:10px;
     color:#888;
     font-size:10px;
 }
