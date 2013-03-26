@@ -13,10 +13,11 @@ about the road.
 ### Modifying
 
 Often you'll see roads that aren't aligned to the imagery behind them
-or a GPS track.
+or to a GPS track. You can adjust these roads so they are in the correct
+place.
 
 First click on the road you want to change. This will highlight it and show
-'control points along it' that you can drag to better locations. If
+control points along it that you can drag to better locations. If
 you want to add new control points for more detail, double-click a part
 of the road without a point, and one will be added.
 
@@ -25,7 +26,7 @@ the map, you can drag one of its control points onto the other road in
 order to join them. Having roads connect is important for the map
 and essential for providing driving directions.
 
-You can also click the 'Move' tool or type `M` to move the entire road at
+You can also click the 'Move' tool or press the `M` shortcut key to move the entire road at
 one time, and then click again to save that movement.
 
 ### Deleting
@@ -42,12 +43,13 @@ trash can icon or pressing the 'Delete' key.
 ### Creating
 
 Found somewhere there should be a road but there isn't? Click the 'Line'
-icon in the top-left of the editor or press the key '2' to start drawing
+icon in the top-left of the editor or press the shortcut key `2` to start drawing
 a line.
 
 Click on the start of the road on the map to start drawing. If the road
-connects to another road, first, click on the place where they connect.
+branches off from an existing road, start by clicking on the place where they connect.
 
 Then click on points along the road so that it follows the right path, according
-to satellite imagery or GPS. When you're done drawing the road, double-click
+to satellite imagery or GPS. If the road you are drawing crosses another road, connect
+it by clicking on the intersection point. When you're done drawing, double-click
 or press 'Return' or 'Enter' on your keyboard.

@@ -8,7 +8,7 @@ personal GPS hardware.
 For information on how to perform a GPS survey, read
 [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).
 
-To use a GPX track for mapping, drag and drop the GPX file onto the map map
+To use a GPX track for mapping, drag and drop the GPX file onto the map
 editor. If it's recognized, it will be added to the map as a bright green
 line. Click on the 'Background Settings' menu on the left side to enable,
 disable, or zoom to this new GPX-powered layer.
