@@ -136,7 +136,7 @@ en:
     no_documentation_key: There is no documentation available for this key
     show_more: Show More
     new_tag: New tag
-    view_on_osm: View on OSM
+    view_on_osm: View on OSM →
     editing_feature: "Editing {feature}"
     additional: Additional tags
     choose: Select feature type
