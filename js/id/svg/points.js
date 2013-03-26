@@ -6,6 +6,10 @@ iD.svg.Points = function(projection, context) {
             .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }
 
+    function sortY(a, b) {
+        return b.loc[1] - a.loc[1];
+    }
+
     return function drawPoints(surface, graph, entities, filter) {
         var points = [];
 
@@ -20,13 +24,16 @@ iD.svg.Points = function(projection, context) {
             return surface.select('.layer-hit').selectAll('g.point').remove();
         }
 
+        points.sort(sortY);
+
         var groups = surface.select('.layer-hit').selectAll('g.point')
             .filter(filter)
             .data(points, iD.Entity.key);
 
         var group = groups.enter()
             .append('g')
-            .attr('class', 'node point');
+            .attr('class', 'node point')
+            .order();
 
         group.append('path')
             .call(markerPath, 'shadow');
