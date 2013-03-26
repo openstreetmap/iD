@@ -203,7 +203,9 @@ locale.en = {
     },
     "splash": {
         "welcome": "Welcome to the iD OpenStreetMap editor",
-        "text": "This is development version {version}. For more information see {website} and report bugs at {github}."
+        "text": "This is development version {version}. For more information see {website} and report bugs at {github}.",
+        "walkthrough": "Walkthrough",
+        "start": "Start Editing"
     },
     "source_switch": {
         "live": "live",
@@ -1436,6 +1438,43 @@ locale.en = {
                 "name": "Weir",
                 "terms": ""
             }
+        }
+    },
+    "intro": {
+        "navigation": {
+            "drag": "The main map area shows OpenStreetMap data on top of background imagery. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
+            "select": "Map features can be represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
+            "header": "The header shows us the feature type.",
+            "pane": "The main pane shows the feature's attributes, such as its name and address."
+        },
+        "points": {
+            "add": "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**",
+            "place": "The point can be placed by clicking on the map. **Place the point on top of the building.**",
+            "search": "There many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **",
+            "choose": "**Choose Cafe from the grid.**",
+            "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name and address**",
+            "close": "The feature editor can be closed by clicking on the close button, or anywhere on the map. **Close the feature editor**",
+            "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**",
+            "fixname": "**Change the name and close the feature editor.**",
+            "reselect_delete": "All features on the map can be deleted. **Reselect the point you created.**",
+            "delete": "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
+        },
+        "areas": {
+            "add": "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most features types points can be used for, and are often preferred. **Click the Area button to add a new area.**",
+            "corner": "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**",
+            "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting point. **Draw an area for the playground.**",
+            "search": "**Search for Playground.**",
+            "choose": "**Choose Playground from the grid.**",
+            "describe": "**Add a name, and close the feature editor**"
+        },
+        "lines": {
+            "add": "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**",
+            "start": "**Start the line by clicking on the end of the road.**",
+            "intersect": "Click to add more points to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**",
+            "finish": "Lines can be finished by clicking on the last point again. **Finish drawing the road.**",
+            "road": "**Select Road from the grid**",
+            "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
+            "describe": "**Name the road and close the feature editor.**"
         }
     }
 };

@@ -152,6 +152,7 @@ iD.ui = function(context) {
         context.container()
             .call(iD.ui.Splash(context))
             .call(iD.ui.Restore(context));
+
     };
 };
 
