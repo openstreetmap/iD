@@ -18,21 +18,34 @@ iD.actions.Disconnect = function(nodeId, newNodeId) {
         var node = graph.entity(nodeId);
 
         graph.parentWays(node).forEach(function(parent, i) {
-            if (i === 0)
-                return;
 
-            var index = parent.nodes.indexOf(nodeId),
-                newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
+            var keep = i === 0;
 
-            graph = graph.replace(newNode);
-            graph = graph.replace(parent.updateNode(newNode.id, index));
+            parent.nodes.forEach(function(waynode, index) {
+                if (waynode === nodeId) {
+
+                    if (!keep) {
+                        var newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
+
+                        graph = graph.replace(newNode);
+                        graph = graph.replace(parent.updateNode(newNode.id, index));
+                    }
+
+                    // Only keep the first occurrence in first way
+                    keep = false;
+                }
+            });
         });
 
         return graph;
     };
 
     action.enabled = function(graph) {
-        return graph.parentWays(graph.entity(nodeId)).length >= 2;
+        var parentWays = graph.parentWays(graph.entity(nodeId));
+        return parentWays.length >= 2 ||
+            (parentWays.length == 1 && parentWays[0].nodes.filter(function(d) {
+                return d === nodeId;
+            }).length >= 2);
     };
 
     return action;

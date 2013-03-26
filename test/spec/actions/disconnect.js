@@ -6,6 +6,20 @@ describe("iD.actions.Disconnect", function () {
             expect(iD.actions.Disconnect('a').enabled(graph)).to.equal(false);
         });
 
+        it("returns true for a node appearing twice in the same way", function () {
+            //    a ---- b
+            //    |      |
+            //    d ---- c
+            var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                'w': iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a']})
+            });
+            expect(iD.actions.Disconnect('a').enabled(graph)).to.equal(true);
+        });
+
         it("returns true for a node shared by two or more ways", function () {
             //    a ---- b ---- c
             //           |
@@ -50,6 +64,25 @@ describe("iD.actions.Disconnect", function () {
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('|').nodes).to.eql(['d', 'e']);
+    });
+
+    it("replaces later occurrences in a self-intersecting way", function() {
+        // Situtation:
+        //  a ---- b
+        //   \_    |
+        //     \__ c
+        //  Split at a
+        //
+        // Expected result:
+        //  a ---- b ---- c ---- d
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'w': iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'a']})
+        });
+        graph = iD.actions.Disconnect('a', 'd')(graph);
+        expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd']);
     });
 
     it("copies location and tags to the new nodes", function () {
