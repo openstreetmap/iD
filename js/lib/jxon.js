@@ -1,5 +1,5 @@
 const JXON = new (function () {
-  const
+  var
     sValueProp = "keyValue", sAttributesProp = "keyAttributes", sAttrPref = "@", /* you can customize these values */
     aCache = [], rIsNull = /^\s*$/, rIsBool = /^(?:true|false)$/i;
 
@@ -20,7 +20,7 @@ const JXON = new (function () {
   }
 
   function createObjTree (oParentNode, nVerb, bFreeze, bNesteAttr) {
-    const
+    var
       nLevelStart = aCache.length, bChildren = oParentNode.hasChildNodes(),
       bAttributes = oParentNode.hasAttributes(), bHighVerb = Boolean(nVerb & 2);
 
@@ -37,7 +37,7 @@ const JXON = new (function () {
       }
     }
 
-    const nLevelEnd = aCache.length, vBuiltVal = parseText(sCollectedTxt);
+    var nLevelEnd = aCache.length, vBuiltVal = parseText(sCollectedTxt);
 
     if (!bHighVerb && (bChildren || bAttributes)) { vResult = nVerb === 0 ? objectify(vBuiltVal) : {}; }
 
@@ -54,7 +54,7 @@ const JXON = new (function () {
     }
 
     if (bAttributes) {
-      const
+      var
         nAttrLen = oParentNode.attributes.length,
         sAPrefix = bNesteAttr ? "" : sAttrPref, oAttrParent = bNesteAttr ? {} : vResult;
 
@@ -120,12 +120,12 @@ const JXON = new (function () {
   }
 
   this.build = function (oXMLParent, nVerbosity /* optional */, bFreeze /* optional */, bNesteAttributes /* optional */) {
-    const _nVerb = arguments.length > 1 && typeof nVerbosity === "number" ? nVerbosity & 3 : /* put here the default verbosity level: */ 1;
+    var _nVerb = arguments.length > 1 && typeof nVerbosity === "number" ? nVerbosity & 3 : /* put here the default verbosity level: */ 1;
     return createObjTree(oXMLParent, _nVerb, bFreeze || false, arguments.length > 3 ? bNesteAttributes : _nVerb === 3);    
   };
 
   this.unbuild = function (oObjTree) {    
-    const oNewDoc = document.implementation.createDocument("", "", null);
+    var oNewDoc = document.implementation.createDocument("", "", null);
     loadObjTree(oNewDoc, oNewDoc, oObjTree);
     return oNewDoc;
   };
