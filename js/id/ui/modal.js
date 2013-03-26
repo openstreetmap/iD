@@ -10,23 +10,46 @@ iD.ui.modal = function(selection, blocking) {
     d3.select(document).call(keybinding);
 
     previous.transition()
-        .style('opacity', 0).remove();
+        .duration(200)
+        .style('opacity', 0)
+        .remove();
 
     var shaded = selection
         .append('div')
         .attr('class', 'shaded')
-        .style('opacity', 0)
-        .on('click.remove-modal', function() {
-            if (d3.event.target == this && !blocking) d3.select(this).remove();
-        });
+        .style('opacity', 0);
 
     var modal = shaded.append('div')
         .attr('class', 'modal fillL col6');
 
+        shaded.on('click.remove-modal', function() {
+            if (d3.event.target == this && !blocking) {
+                shaded
+                    .transition()
+                    .duration(200)
+                    .style('opacity',0)
+                    .remove();
+                modal
+                    .transition()
+                    .duration(200)
+                    .style('top','0px');
+            }
+        });
+
     modal.append('button')
         .attr('class', 'close')
         .on('click', function() {
-            if (!blocking) shaded.remove();
+            if (!blocking) {
+                shaded
+                    .transition()
+                    .duration(200)
+                    .style('opacity',0)
+                    .remove();
+                modal
+                    .transition()
+                    .duration(200)
+                    .style('top','0px');
+            }
         })
         .append('div')
             .attr('class','icon close');
@@ -37,16 +60,24 @@ iD.ui.modal = function(selection, blocking) {
     if (animate) {
         shaded.transition().style('opacity', 1);
         modal
-        .style('top','0px')
-        .transition()
-        .duration(200)
-        .style('top','40px')
+            .style('top','0px')
+            .transition()
+            .duration(200)
+            .style('top','40px');
     } else {
         shaded.style('opacity', 1);
     }
 
     function close() {
-        shaded.remove();
+        shaded
+            .transition()
+            .duration(200)
+            .style('opacity',0)
+            .remove();
+        modal
+            .transition()
+            .duration(200)
+            .style('top','0px');
         keybinding.off();
     }
 
