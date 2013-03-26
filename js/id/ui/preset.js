@@ -68,6 +68,8 @@ iD.ui.preset = function(context, entity, preset) {
     }
 
     function revert(field) {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
         var t = {};
         field.keys.forEach(function(key) {
             t[key] = original ? original.tags[key] : undefined;
@@ -76,6 +78,8 @@ iD.ui.preset = function(context, entity, preset) {
     }
 
     function toggleReference(field) {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
         _.forEach(fields, function(other) {
             if (other.id === field.id) {
                 other.showingReference = !other.showingReference;
@@ -112,8 +116,6 @@ iD.ui.preset = function(context, entity, preset) {
             .attr('class', 'form-label')
             .attr('for', function(field) { return 'preset-input-' + field.id; })
             .text(function(field) { return field.label(); });
-
-
 
         label.append('button')
             .attr('class', 'tag-reference-button fr')
@@ -157,14 +159,14 @@ iD.ui.preset = function(context, entity, preset) {
                     .style('padding-top', '20px')
                     .style('max-height', '200px')
                     .style('opacity', '1');
-               } else { 
+               } else {
                  d3.select(this)
                     .call(iD.ui.TagReference(entity, {key: field.key}))
                     .transition()
                     .duration(200)
                     .style('max-height', '0px')
                     .style('padding-top', '0px')
-                    .style('opacity', '0');                       
+                    .style('opacity', '0');
                }
             });
 
