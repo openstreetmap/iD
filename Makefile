@@ -24,6 +24,7 @@ data/data.js: $(DATA_FILES)
 	js/lib/d3.size.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
+	js/lib/d3.curtain.js \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/ohauth.js \
@@ -53,11 +54,13 @@ data/data.js: $(DATA_FILES)
 	js/id/ui.js \
 	js/id/ui/*.js \
 	js/id/ui/preset/*.js \
+	js/id/ui/intro/*.js \
 	js/id/presets.js \
 	js/id/presets/*.js \
 	js/id/validate.js \
 	js/id/end.js \
 	js/lib/locale.js \
+	data/introGraph.js \
 	data/locales.js
 
 iD.js: node_modules Makefile

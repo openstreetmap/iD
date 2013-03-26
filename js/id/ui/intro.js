@@ -14,7 +14,7 @@ iD.ui.intro = function(context) {
 
         d3.select('.layer-layer:first-child').style('opacity', 1);
 
-        curtain = d3.curtain();
+        var curtain = d3.curtain();
         selection.call(curtain);
 
         var steps = ['navigation', 'point', 'area', 'line'].map(function(step, i) {
