@@ -22,7 +22,7 @@
 }, {
     "geometry": "line",
     "id": "Rail",
-    "icon": "railway-rail",
+    "icon": "category-rail",
     "members": [
         "railway/rail",
         "railway/subway",
@@ -34,7 +34,7 @@
 }, {
     "geometry": "line",
     "id": "Path",
-    "icon": "highway-path",
+    "icon": "category-path",
     "members": [
         "highway/footway",
         "highway/cycleway",
@@ -45,7 +45,7 @@
 }, {
     "geometry": "line",
     "id": "Water",
-    "icon": "waterway-river",
+    "icon": "category-water",
     "members": [
         "waterway/river",
         "waterway/stream",

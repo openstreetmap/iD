@@ -1458,8 +1458,8 @@ locale.en = {
     },
     "intro": {
         "navigation": {
-            "drag": "The main map area shows OpenStreetMap data on top of background imagery. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
-            "select": "Map features can be represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
+            "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
+            "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
             "header": "The header shows us the feature type.",
             "pane": "The main pane shows the feature's attributes, such as its name and address."
         },
@@ -1472,7 +1472,7 @@ locale.en = {
             "close": "The feature editor can be closed by clicking on the close button. **Close the feature editor**",
             "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**",
             "fixname": "**Change the name and close the feature editor.**",
-            "reselect_delete": "All features on the map can be deleted. **Reselect the point you created.**",
+            "reselect_delete": "All features on the map can be deleted. **Click on the point you created.**",
             "delete": "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
         },
         "areas": {
