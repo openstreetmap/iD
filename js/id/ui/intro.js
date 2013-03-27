@@ -18,12 +18,17 @@ iD.ui.intro = function(context) {
         context.history().reset();
         context.history().merge(iD.Graph().load(JSON.parse(iD.introGraph)).entities);
 
+        // Block saving
+        var savebutton = d3.select('#bar button.save'),
+            save = savebutton.on('click');
+        savebutton.on('click', null);
+
         d3.select('.layer-layer:first-child').style('opacity', 1);
 
         var curtain = d3.curtain();
         selection.call(curtain);
 
-        var steps = ['navigation', 'point', 'area', 'line'].map(function(step, i) {
+        var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
             var s = iD.ui.intro[step](context, curtain)
                 .on('done', function() {
                     entered.filter(function(d) {
@@ -34,17 +39,15 @@ iD.ui.intro = function(context) {
             return s;
         });
 
-        steps.push({
-            name: 'Start Editing',
-            enter: function() {
-                curtain.remove();
-                navwrap.remove();
-                d3.select('.layer-layer:first-child').style('opacity', opacity);
-                context.connection().toggle(true).flush().loadedTiles(loadedTiles);
-                context.history().reset().merge(baseEntities);
-                if (history) context.history().fromJSON(history);
-                window.location.replace(hash);
-            }
+        steps[steps.length - 1].on('startEditing', function() {
+            curtain.remove();
+            navwrap.remove();
+            d3.select('.layer-layer:first-child').style('opacity', opacity);
+            context.connection().toggle(true).flush().loadedTiles(loadedTiles);
+            context.history().reset().merge(baseEntities);
+            if (history) context.history().fromJSON(history);
+            window.location.replace(hash);
+            d3.select('#bar button.save').on('click', save);
         });
 
         var navwrap = selection.append('div').attr('class', 'intro-nav-wrap');
@@ -56,9 +59,7 @@ iD.ui.intro = function(context) {
         var entered = buttonwrap.data(steps)
             .enter().append('button')
                 .attr('class', 'step')
-                .on('click', function(d) {
-                    enter(d);
-                });
+                .on('click', enter);
 
         entered.append('label').text(function(d) { return d.name; });
         enter(steps[0]);
