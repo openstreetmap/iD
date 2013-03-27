@@ -48,9 +48,14 @@ iD.ui.intro.point = function(context, reveal) {
         function keySearch() {
             var first = d3.select('.grid-button-wrap:first-child');
             if (first.datum().id === 'amenity/cafe') {
-                d3.select('.preset-grid-search').on('keyup.intro', null).node().blur();
                 reveal(first.select('.grid-entry').node(), 'intro.points.choose');
                 d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
+
+                d3.select('.preset-grid-search').on('keydown.intro', function() {
+                    // Prevent search from updating and changing the grid
+                    d3.event.stopPropagation();
+                    d3.event.preventDefault();
+                }, true).on('keyup.intro', null);
             }
         }
 
@@ -63,6 +68,7 @@ iD.ui.intro.point = function(context, reveal) {
         }
 
         function closeEditor() {
+            d3.select('.preset-grid-search').on('keydown.intro', null);
             context.history().on('change.intro', null);
             reveal('.tag-pane', 'intro.points.close');
         }
@@ -132,7 +138,7 @@ iD.ui.intro.point = function(context, reveal) {
         context.on('enter.intro', null);
         context.map().on('move.intro', null);
         context.history().on('change.intro', null);
-        d3.select('.preset-grid-search').on('keyup.intro', null);
+        d3.select('.preset-grid-search').on('keyup.intro', null).on('keydown.intro', null);
     };
 
     return d3.rebind(step, event, 'on');
