@@ -64,6 +64,8 @@ iD.ui.TagReference = function(entity, tag) {
                     .attr('src', docs.image.thumb_url_prefix + "100" + docs.image.thumb_url_suffix)
                     .on('load', function() { show(); })
                     .on('error', function() { d3.select(this).remove(); show(); });
+            } else {
+                show();
             }
 
             referenceBody
