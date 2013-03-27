@@ -132,13 +132,6 @@ describe("iD.History", function () {
             expect(history.undoAnnotation()).to.be.undefined;
         });
 
-        it("pops past unannotated states", function () {
-            history.perform(action, "annotation");
-            history.perform(action);
-            history.undo();
-            expect(history.undoAnnotation()).to.be.undefined;
-        });
-
         it("pushes the redo stack", function () {
             history.perform(action, "annotation");
             history.undo();

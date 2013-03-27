@@ -89,12 +89,6 @@ iD.History = function(context) {
         undo: function() {
             var previous = stack[index].graph;
 
-            // Pop to the first annotated state.
-            while (index > 0) {
-                if (stack[index].annotation) break;
-                index--;
-            }
-
             // Pop to the next annotated state.
             while (index > 0) {
                 index--;
