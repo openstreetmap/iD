@@ -2212,10 +2212,15 @@ div.typeahead a:first-child {
   only screen and (-o-min-device-pixel-ratio: 3/2),
   only screen and (min--moz-device-pixel-ratio: 1.5),
   only screen and (min-device-pixel-ratio: 1.5) {
+  .intro-points-add .tooltip-inner::before,
+  .intro-areas-add .tooltip-inner::before,
+  .intro-lines-add .tooltip-inner::before,
+  .preset-icon-fill.area,
+  .modal-actions button:before,
   .map-control .icon,
   .button-wrap .icon {
     background-image: url(../img/sprite2x.png);
-    background-size: 500px 320px;
+    background-size: 600px 560px;
   }
 }
 
