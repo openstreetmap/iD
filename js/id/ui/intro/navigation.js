@@ -1,4 +1,4 @@
-iD.ui.intro.navigation = function(context, curtain) {
+iD.ui.intro.navigation = function(context, reveal) {
 
     var event = d3.dispatch('done'),
         timeouts = [];
@@ -32,7 +32,7 @@ iD.ui.intro.navigation = function(context, curtain) {
 
         context.map().centerZoom([-85.63591, 41.94285], 19);
 
-        curtain.reveal(map, t('intro.navigation.drag'));
+        reveal(map, 'intro.navigation.drag');
 
         context.map().on('move.intro', _.debounce(function() {
             context.map().on('move.intro', null);
@@ -43,12 +43,12 @@ iD.ui.intro.navigation = function(context, curtain) {
         function townhall() {
             var hall = d3.select('.node.tag-amenity-townhall');
             var box = iD.ui.intro.pointBox(context.projection(hall.datum().loc));
-            curtain.reveal(box, t('intro.navigation.select'));
+            reveal(box, 'intro.navigation.select');
 
             context.map().on('move.intro', function() {
                 var hall = d3.select('.node.tag-amenity-townhall');
                 var box = iD.ui.intro.pointBox(context.projection(hall.datum().loc));
-                curtain.reveal(box, t('intro.navigation.select'), 0);
+                reveal(box, 'intro.navigation.select', 0);
             });
         }
 
@@ -56,8 +56,8 @@ iD.ui.intro.navigation = function(context, curtain) {
             if (mode.id !== 'select') return;
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
-            set(function() { curtain.reveal('.header', t('intro.navigation.header')); }, 700);
-            set(function() { curtain.reveal('.tag-wrap', t('intro.navigation.pane')); }, 4000);
+            set(function() { reveal('.header', 'intro.navigation.header'); }, 700);
+            set(function() { reveal('.tag-wrap', 'intro.navigation.pane'); }, 4000);
             set(event.done, 7000);
         }
 

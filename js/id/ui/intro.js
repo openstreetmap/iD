@@ -28,8 +28,12 @@ iD.ui.intro = function(context) {
         var curtain = d3.curtain();
         selection.call(curtain);
 
+        function reveal(box, textid, duration) {
+            curtain.reveal(box, t(textid), textid.replace(/\./g, '-'), duration);
+        }
+
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
-            var s = iD.ui.intro[step](context, curtain)
+            var s = iD.ui.intro[step](context, reveal)
                 .on('done', function() {
                     entered.filter(function(d) {
                         return d.name === s.name;

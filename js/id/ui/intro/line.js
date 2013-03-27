@@ -1,4 +1,4 @@
-iD.ui.intro.line = function(context, curtain) {
+iD.ui.intro.line = function(context, reveal) {
 
     var event = d3.dispatch('done'),
         timeouts = [];
@@ -22,8 +22,8 @@ iD.ui.intro.line = function(context, curtain) {
         var start = [-85.6297754121684, 41.9583158176903];
         var intersection = [-85.62974496187628, 41.95742515554585];
 
-        context.map().centerZoom(start, 19);
-        curtain.reveal('button.add-line', t('intro.lines.add'));
+        context.map().centerZoom(start, 18);
+        reveal('button.add-line', 'intro.lines.add');
 
         context.on('enter.intro', addLine);
 
@@ -31,14 +31,14 @@ iD.ui.intro.line = function(context, curtain) {
             if (mode.id !== 'add-line') return;
             context.on('enter.intro', drawLine);
 
-            var padding = 150 * Math.pow(2, context.map().zoom() - 19);
+            var padding = 150 * Math.pow(2, context.map().zoom() - 18);
             var pointBox = iD.ui.intro.pad(context.projection(start), padding);
-            curtain.reveal(pointBox, t('intro.lines.start'));
+            reveal(pointBox, 'intro.lines.start');
 
             context.map().on('move.intro', function() {
-                padding = 150 * Math.pow(2, context.map().zoom() - 19);
+                padding = 150 * Math.pow(2, context.map().zoom() - 18);
                 pointBox = iD.ui.intro.pad(context.projection(start), padding);
-                curtain.reveal(pointBox, t('intro.lines.start'), 0);
+                reveal(pointBox, 'intro.lines.start', 0);
             });
         }
         function drawLine (mode) {
@@ -48,12 +48,12 @@ iD.ui.intro.line = function(context, curtain) {
 
             var padding = 300 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
-            curtain.reveal(pointBox, t('intro.lines.intersect'));
+            reveal(pointBox, 'intro.lines.intersect');
 
             context.map().on('move.intro', function() {
                 padding = 300 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
-                curtain.reveal(pointBox, t('intro.lines.intersect'), 0);
+                reveal(pointBox, 'intro.lines.intersect', 0);
             });
         }
 
@@ -66,12 +66,12 @@ iD.ui.intro.line = function(context, curtain) {
 
                 var padding = 900 * Math.pow(2, context.map().zoom() - 19);
                 var pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
-                curtain.reveal(pointBox, t('intro.lines.finish'));
+                reveal(pointBox, 'intro.lines.finish');
 
                 context.map().on('move.intro', function() {
                     padding = 900 * Math.pow(2, context.map().zoom() - 19);
                     pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
-                    curtain.reveal(pointBox, t('intro.lines.finish'), 0);
+                    reveal(pointBox, 'intro.lines.finish', 0);
                 });
             }
         }
@@ -85,7 +85,7 @@ iD.ui.intro.line = function(context, curtain) {
                 var road = d3.select('.preset-grid .grid-entry').filter(function(d) {
                     return d.id === 'Road';
                 });
-                curtain.reveal(road.node(), t('intro.lines.road'));
+                reveal(road.node(), 'intro.lines.road');
                 road.one('click.intro', roadCategory);
             }, 500);
         }
@@ -93,7 +93,7 @@ iD.ui.intro.line = function(context, curtain) {
         function roadCategory() {
             timeout(function() {
                 var grid = d3.select('.subgrid');
-                curtain.reveal(grid.node(),  t('intro.lines.residential'));
+                reveal(grid.node(),  'intro.lines.residential');
                 grid.selectAll('.grid-entry').filter(function(d) {
                     return d.id === 'highway/residential';
                 }).one('click.intro', roadDetails);
@@ -101,7 +101,7 @@ iD.ui.intro.line = function(context, curtain) {
         }
 
         function roadDetails() {
-            curtain.reveal('.pane', t('intro.lines.describe'));
+            reveal('.pane', 'intro.lines.describe');
             context.on('exit.intro', event.done);
         }
 
@@ -113,7 +113,6 @@ iD.ui.intro.line = function(context, curtain) {
         context.on('exit.intro', null);
         context.map().on('move.intro', null);
         context.history().on('change.intro', null);
-        curtain.hide();
     };
 
     return d3.rebind(step, event, 'on');
