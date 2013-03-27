@@ -24,8 +24,26 @@ iD.ui.Help = function(context) {
                 });
             }
 
+            var docKeys = [
+                'help.help',
+                'help.editing_saving',
+                'help.roads',
+                'help.gps',
+                'help.imagery',
+                'help.addresses',
+                'help.inspector',
+                'help.buildings'];
+
+            function one(f) { return function(x) { return f(x); }; }
+            var docs = docKeys.map(one(t)).map(function(text) {
+                return {
+                    title: text.split('\n')[0].replace('#', '').trim(),
+                    html: marked(text.split('\n').slice(1).join('\n'))
+                };
+            });
+
             var menuItems = toc.selectAll('li')
-                .data(iD.data.doc)
+                .data(docs)
                 .enter()
                 .append('li')
                 .append('a')
@@ -47,7 +65,7 @@ iD.ui.Help = function(context) {
                 body = content.append('div')
                     .attr('class', 'body');
 
-            clickHelp(iD.data.doc[0]);
+            clickHelp(docs[0]);
         }
 
         function hide() { setVisible(false); }

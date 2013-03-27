@@ -29,8 +29,5 @@
   },
   "engines": {
     "node": "~0.8.20"
-  },
-  "dependencies": {
-    "marked": "~0.2.8"
   }
 }

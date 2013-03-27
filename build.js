@@ -2,7 +2,6 @@ var fs = require('fs'),
     path = require('path'),
     glob = require('glob'),
     YAML = require('js-yaml'),
-    marked = require('marked'),
     _ = require('./js/lib/lodash'),
     jsonschema = require('jsonschema'),
     fieldSchema = require('./data/presets/schema/field.json'),
@@ -48,20 +47,6 @@ var translations = {
     presets: {}
 };
 
-function generateDocumentation() {
-    var docs = [];
-    glob.sync(__dirname + '/data/doc/*.md').forEach(function(file) {
-        var text = readtxt(file),
-            title = text.split('\n')[0]
-                .replace('#', '').trim();
-        docs.push({
-            html: marked(text.split('\n').slice(1).join('\n')),
-            title: title
-        });
-    });
-    fs.writeFileSync('data/doc.json', stringify(docs));
-}
-
 function generateFields() {
     var fields = {};
     glob.sync(__dirname + '/data/presets/fields/*.json').forEach(function(file) {
@@ -101,7 +86,6 @@ function generatePresets() {
     fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: translations}}));
 }
 
-generateDocumentation();
 generateFields();
 generatePresets();
 
@@ -110,7 +94,6 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     discarded: r('discarded.json'),
     keys: r('keys.json'),
     imagery: r('imagery.json'),
-    doc: r('doc.json'),
     presets: {
         presets: rp('presets.json'),
         defaults: rp('defaults.json'),

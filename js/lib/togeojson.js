@@ -22,7 +22,7 @@ toGeoJSON = (function() {
         return o;
     }
     function fc() { return { type: 'FeatureCollection', features: [] }; }
-    t = {
+    var t = {
         kml: function(doc, o) {
             o = o || {};
             var gj = fc(), styleIndex = {},

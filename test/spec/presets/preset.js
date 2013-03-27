@@ -73,8 +73,6 @@ describe('iD.presets.Preset', function() {
     describe('#applyTags', function() {
 
         it("adds match tags", function() {
-            console.log(p['highway/residential']);
-            console.log(p['highway/residential'].applyTags({}, 'area'));
             expect(p['highway/residential'].applyTags({}, 'area')).to.eql({ highway: 'residential' });
         });
 
