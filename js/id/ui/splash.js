@@ -1,7 +1,7 @@
 iD.ui.Splash = function(context) {
     return function(selection) {
-        // if (context.storage('sawSplash'))
-        //     return;
+        if (context.storage('sawSplash'))
+             return;
 
         context.storage('sawSplash', true);
 
