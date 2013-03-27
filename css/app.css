@@ -2109,9 +2109,12 @@ div.typeahead a:first-child {
     border-width: 0 5px 5px;
 }
 
+
+/* Exceptions for tooltips that are up against the edge of the screen */
 .add-point .tooltip {
     left: -20px !important; }
 
+.curtain-tooltip.intro-points-add .tooltip-arrow,
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
@@ -2331,4 +2334,24 @@ div.typeahead a:first-child {
     border: 0;
     padding: 0;
     margin: 0;
+}
+
+/* Tooltip illustrations */
+
+.intro-points-add .tooltip-inner::before,
+.intro-areas-add .tooltip-inner::before,
+.intro-lines-add .tooltip-inner::before {
+    display: block;
+    content: "";
+    height: 80px;
+    width: 200px;
+    background:transparent url(../img/sprite.png) no-repeat 0px -320px;
+}
+
+.intro-areas-add .tooltip-inner::before {
+    background-position: 0px -400px;
+}
+
+.intro-lines-add .tooltip-inner::before {
+    background-position: 0px -480px;
 }
