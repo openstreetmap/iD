@@ -65,6 +65,7 @@ iD.ui.intro = function(context) {
                 .attr('class', 'step')
                 .on('click', enter);
 
+        entered.append('div').attr('class','icon icon-pre-text apply');
         entered.append('label').text(function(d) { return d.name; });
         enter(steps[0]);
 

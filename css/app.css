@@ -206,9 +206,7 @@ table.tags, table.tags td, table.tags th {
 ul li { list-style: none;}
 
 ul.toggle-list li a {
-    font-weight: bold;
     padding: 5px 10px;
-    color: #333;
     display:block;
     border-top: 1px solid #ccc;
     white-space:nowrap;
@@ -1592,7 +1590,6 @@ img.wiki-image {
 
 .help-wrap .toc li a {
     display: block;
-    font-weight: bold;
     border: 1px solid #CCC;
     border-bottom: 0px;
     padding: 5px;
@@ -2291,6 +2288,7 @@ div.typeahead a:first-child {
     right: 10px;
     bottom: 40px;
     z-index: 1001;
+    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.7);
 }
 
 .intro-nav-wrap button.step {
@@ -2298,8 +2296,17 @@ div.typeahead a:first-child {
 }
 
 .intro-nav-wrap button.step.finished {
-    background: #76FF70;
+    background: #8cd05f;
 }
+
+.intro-nav-wrap button.step .icon {
+    display: none;
+}
+
+.intro-nav-wrap button.step.finished .icon {
+    display: inline-block;
+}
+
 
 .curtain-tooltip .tooltip-inner {
     text-align: left;
@@ -2324,10 +2331,10 @@ div.typeahead a:first-child {
     font-weight: bold;
     display: block;
     border-top: 1px solid #CCC;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: -20px;
     margin-right: -20px;
-    padding: 10px 20px 0 20px;
+    padding: 20px 20px 0 20px;
 }
 
 .curtain-tooltip .tooltip-inner .bold:only-child {
