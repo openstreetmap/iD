@@ -165,8 +165,6 @@ iD.detect = function() {
         browser.support = true;
     }
 
-    browser.support = false;
-
     // Added due to incomplete svg style support. See #715
     browser.opera = ua.indexOf('Opera') >= 0;
 
