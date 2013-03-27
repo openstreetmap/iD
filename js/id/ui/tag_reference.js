@@ -35,6 +35,16 @@ iD.ui.TagReference = function(entity, tag) {
             .attr('class', 'tag-reference-spinner')
             .attr('src', 'img/loader-white.gif');
 
+        var referenceBody = selection.append('div')
+            .attr('class', 'tag-reference-wrap')
+            .style('opacity', 0);
+
+        function show() {
+            referenceBody
+                .transition()
+                .style('opacity', 1);
+        }
+
         taginfo.docs(tag, function(err, docs) {
             spinner
                 .style('position', 'absolute')
@@ -42,20 +52,14 @@ iD.ui.TagReference = function(entity, tag) {
                 .style('opacity', 0)
                 .remove();
 
-            var referenceBody = selection.append('div')
-                .attr('class', 'tag-reference-wrap')
-                .style('opacity', 0);
-
-            referenceBody
-                .transition()
-                .style('opacity', 1);
-
             if (!err && docs) {
                 docs = findLocal(docs);
             }
 
             if (!docs || !docs.description) {
-                return referenceBody.text(t('inspector.no_documentation_key'));
+                referenceBody.text(t('inspector.no_documentation_key'));
+                show();
+                return;
             }
 
             if (docs.image && docs.image.thumb_url_prefix) {
@@ -63,7 +67,8 @@ iD.ui.TagReference = function(entity, tag) {
                     .append('img')
                     .attr('class', 'wiki-image')
                     .attr('src', docs.image.thumb_url_prefix + "100" + docs.image.thumb_url_suffix)
-                    .on('error', function() { d3.select(this).remove(); });
+                    .on('load', function() { show(); })
+                    .on('error', function() { d3.select(this).remove(); show(); });
             }
 
             referenceBody
