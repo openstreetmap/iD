@@ -1320,7 +1320,7 @@ img.wiki-image {
 /* Zoomer */
 
 .zoombuttons {
-    top:70px;
+    top:80px;
     width: 30px;
 }
 
@@ -1335,7 +1335,7 @@ img.wiki-image {
 /* Background Settings */
 
 .background-control {
-    top:190px;
+    top:200px;
 }
 
 .nudge-container {
@@ -1482,12 +1482,10 @@ img.wiki-image {
     height:18px;
 }
 
-
 .background-control .layer-toggle-gpx .layer-extent {
     float: right;
     border: 0;
 }
-
 
 .background-control .layer-toggle-gpx.selected .layer-extent {
     display:inline-block;
@@ -1496,7 +1494,7 @@ img.wiki-image {
 /* Geocoder */
 
 .geocode-control, .geocode-control form {
-    top:150px;
+    top:160px;
 }
 
 .geocode-control form {
@@ -1527,16 +1525,13 @@ img.wiki-image {
 /* Geolocator */
 
 .geolocate-control {
-    top:230px;
-}
-
-.geolocate-control button {
+    top:240px;
 }
 
 /* Help */
 
 .help-control {
-    top: 270px;
+    top: 280px;
 }
 
 .help-control button {
