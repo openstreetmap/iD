@@ -1288,6 +1288,11 @@ img.wiki-image {
     border-radius: 4px;
 }
 
+.tag-reference-spinner {
+    display: block;
+    margin: auto;
+}
+
 /* Map Controls */
 
 .map-control {

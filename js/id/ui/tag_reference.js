@@ -31,17 +31,32 @@ iD.ui.TagReference = function(entity, tag) {
 
         selection.classed('cf', true);
 
+        var spinner = selection.append('img')
+            .attr('class', 'tag-reference-spinner')
+            .attr('src', 'img/loader-white.gif');
+
         taginfo.docs(tag, function(err, docs) {
+            spinner
+                .style('position', 'absolute')
+                .transition()
+                .style('opacity', 0)
+                .remove();
+
+            var referenceBody = selection.append('div')
+                .attr('class', 'tag-reference-wrap')
+                .style('opacity', 0);
+
+            referenceBody
+                .transition()
+                .style('opacity', 1);
+
             if (!err && docs) {
                 docs = findLocal(docs);
             }
 
             if (!docs || !docs.description) {
-                return selection.text(t('inspector.no_documentation_key'));
+                return referenceBody.text(t('inspector.no_documentation_key'));
             }
-
-            var referenceBody = selection.append('div')
-                .attr('class','tag-reference-wrap');
 
             if (docs.image && docs.image.thumb_url_prefix) {
                 referenceBody

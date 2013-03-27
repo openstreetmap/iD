@@ -3,12 +3,18 @@ iD.ui.loading = function(selection, message, blocking) {
 
     var loadertext = modal.select('.content')
         .classed('loading-modal', true)
-        .append('div').attr('class','modal-section fillL');
+        .append('div')
+        .attr('class', 'modal-section fillL');
 
-    loadertext.append('img').attr('class','loader').attr('src', 'img/loader.gif');
-    loadertext.append('h3').text(message || '');
+    loadertext.append('img')
+        .attr('class', 'loader')
+        .attr('src', 'img/loader-white.gif');
 
-    modal.select('button.close').attr('class','hide');
+    loadertext.append('h3')
+        .text(message || '');
+
+    modal.select('button.close')
+        .attr('class', 'hide');
 
     return modal;
 };
