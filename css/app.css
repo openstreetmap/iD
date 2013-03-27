@@ -1293,6 +1293,14 @@ div.combobox {
     overflow: hidden;
 }
 
+.grid-pane .tag-reference-wrap {
+    padding: 10px 0 20px 0;
+}
+
+.tag-pane .tag-reference-wrap {
+    padding-top: 20px;
+}
+
 .additional-tags div.tag-help {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;

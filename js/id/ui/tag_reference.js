@@ -36,7 +36,7 @@ iD.ui.TagReference = function(entity, tag) {
         var referenceBody = wrap.selectAll('.tag-reference-wrap')
             .data([this])
             .enter().append('div')
-            .attr('class', 'tag-reference-wrap')
+            .attr('class', 'tag-reference-wrap cf')
             .style('opacity', 0);
 
         function show() {
@@ -80,11 +80,9 @@ iD.ui.TagReference = function(entity, tag) {
         });
 
         wrap.style('max-height', '0px')
-            .style('padding-top', '0px')
             .style('opacity', '0')
             .transition()
             .duration(200)
-            .style('padding-top', '20px')
             .style('max-height', '200px')
             .style('opacity', '1');
 
@@ -95,7 +93,6 @@ iD.ui.TagReference = function(entity, tag) {
         wrap.transition()
             .duration(200)
             .style('max-height', '0px')
-            .style('padding-top', '0px')
             .style('opacity', '0');
 
         showing = false;
