@@ -32,4 +32,7 @@ en:
       road: "**Select Road from the grid**"
       residential: "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**"
       describe: "**Name the road and close the feature editor.**"
+    startediting:
+      help: "More documentation and this walkthrough are available here."
+      save: "Don't forget to regularly save your changes!"
 
