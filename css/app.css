@@ -685,7 +685,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #f6f6f6;
     text-align: left;
     position: absolute;
-    padding: 5px;
+    padding: 5px 10px;
     height: 30px;
     bottom: 0;
     left: 0; right: 0;
@@ -693,7 +693,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-top: 1px solid rgba(0, 0, 0, .1);
-    padding-right: 20px;
     }
 
 .grid-entry .tag-reference-button {
