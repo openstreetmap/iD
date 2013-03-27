@@ -61,16 +61,17 @@ function getResource(resource, callback) {
 
 function getLanguage(resource) {
     return function(code, callback) {
-        request.get(resource+ 'translation/' + code, { auth : auth }, function(err, resp, body) {
+        request.get(resource + 'translation/' + code, { auth : auth },
+            function(err, resp, body) {
             if (err) return callback(err);
             callback(null, JSON.parse(body).content);
         });
     };
 }
 
-
 function getLanguages(resource, callback) {
-    request.get(resource + '?details', { auth: auth }, function(err, resp, body) {
+    request.get(resource + '?details', { auth: auth },
+        function(err, resp, body) {
         if (err) return callback(err);
         callback(null, JSON.parse(body).available_languages.map(function(d) {
             return d.code;

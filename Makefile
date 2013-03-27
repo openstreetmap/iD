@@ -30,6 +30,8 @@ data/data.js: $(DATA_FILES)
 	js/lib/ohauth.js \
 	js/lib/rtree.js \
 	js/lib/sha.js \
+	js/lib/togeojson.js \
+	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
 	js/id/connection.js \
