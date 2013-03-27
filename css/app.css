@@ -1595,6 +1595,19 @@ img.wiki-image {
     border-radius: 0 0 4px 4px
 }
 
+.help-wrap .nav a {
+    width: 50%;
+    display: inline-block;
+}
+
+.help-wrap .nav a span {
+    padding: 10px;
+}
+
+.help-wrap .nav a.next {
+    text-align: right;
+}
+
 /* Map
 ------------------------------------------------------- */
 

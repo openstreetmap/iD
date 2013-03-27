@@ -14,7 +14,7 @@ iD.ui.Help = function(context) {
             var toc = pane.append('ul')
                 .attr('class', 'toc');
 
-            function clickHelp(d) {
+            function clickHelp(d, i) {
                 doctitle.text(d.title);
                 body.html(d.html);
                 body.selectAll('a')
@@ -22,6 +22,28 @@ iD.ui.Help = function(context) {
                 menuItems.classed('selected', function(m) {
                     return m.title === d.title;
                 });
+
+                nav.html('');
+
+                var prevLink = nav.append('a')
+                        .attr('class', 'previous')
+                        .on('click', function() {
+                            clickHelp(docs[i - 1], i - 1);
+                        }),
+                    nextLink = nav.append('a')
+                        .attr('class', 'next')
+                        .on('click', function() {
+                            clickHelp(docs[i + 1], i + 1);
+                        });
+
+                if (i > 0) {
+                    prevLink.append('span').attr('class', 'icon back');
+                    prevLink.append('span').text(docs[i - 1].title);
+                }
+                if (i < docs.length - 1) {
+                    nextLink.append('span').text(docs[i + 1].title);
+                    nextLink.append('span').attr('class', 'icon forward');
+                }
             }
 
             var docKeys = [
@@ -63,9 +85,11 @@ iD.ui.Help = function(context) {
                 doctitle = content.append('h2')
                     .text(t('help.title')),
                 body = content.append('div')
-                    .attr('class', 'body');
+                    .attr('class', 'body'),
+                nav = content.append('div')
+                    .attr('class', 'nav');
 
-            clickHelp(docs[0]);
+            clickHelp(docs[0], 0);
         }
 
         function hide() { setVisible(false); }
