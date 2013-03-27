@@ -23,22 +23,18 @@ iD.ui.Restore = function(context) {
                 .text(t('restore.description'));
 
         var buttonWrap = introModal.append('div')
-            .attr('class', 'modal-section col12');
+            .attr('class', 'modal-actions cf');
 
-        var buttons = buttonWrap
-            .append('div')
-            .attr('class', 'button-wrap joined col4');
-
-        var restore = buttons.append('button')
-            .attr('class', 'save action button col6')
+        var restore = buttonWrap.append('button')
+            .attr('class', 'restore col6')
             .text(t('restore.restore'))
             .on('click', function() {
                 context.history().load();
                 modal.remove();
             });
 
-        buttons.append('button')
-            .attr('class', 'cancel button col6')
+        buttonWrap.append('button')
+            .attr('class', 'reset col6')
             .text(t('restore.reset'))
             .on('click', function() {
                 context.history().clearSaved();
@@ -47,4 +43,6 @@ iD.ui.Restore = function(context) {
 
         restore.node().focus();
     };
+        modal.select('button.close').attr('class','hide');
+
 };

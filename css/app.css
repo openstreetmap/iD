@@ -122,19 +122,6 @@ a:hover {
 /* Forms
 ------------------------------------------------------- */
 
-.fillD textarea,
-.fillD input[type=text] {
-    background-color: black;
-    border:1px solid rgba(255, 255, 255, .25);
-    color: white;
-}
-
-.fillD textarea:focus,
-.fillD input[type=text]:focus {
-    background-color: black;
-    border:1px solid rgba(255, 255, 255, .5);
-}
-
 textarea  {
     resize: vertical;
     font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
@@ -263,8 +250,8 @@ ul.link-list li:last-child {
 }
 
 .fillD {
-    background:rgba(0,0,0,.8);
-    color: #6C6C6C;
+    background:rgba(0,0,0,.5);
+    color: white;
 }
 
 .fl { float: left;}
@@ -339,8 +326,10 @@ button.active {
     cursor: url(../img/cursor-pointing.png) 6 1, pointer;
 }
 
+button[disabled],
 button.disabled {
-    background: #6c6c6c;
+    background-color: rgba(255,255,255,.25);
+    color: rgba(0,0,0,.5);
     cursor: auto;
 }
 
@@ -358,16 +347,6 @@ button.minor {
     border-radius: 0;
 }
 
-button.minor:hover {
-}
-
-button.centered {
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
 .button-wrap {
     display: inline-block;
     padding-right:10px;
@@ -377,9 +356,9 @@ button.centered {
 .button-wrap button:only-child { width: 100%;}
 .button-wrap:last-of-type { padding-right: 0;}
 
-.joined button {
-    border-right: 1px solid rgba(0,0,0,.5);
+.joined button { 
     border-radius:0;
+    border-right: 1px solid rgba(0,0,0,.5);
 }
 
 .joined button:first-child {
@@ -394,15 +373,9 @@ button.centered {
 button.action {
     background: #7092ff;
 }
+
 button.action:hover {
     background: #597BE7;
-}
-
-button.cancel {
-    background-color: #ff7070;
-}
-button.cancel:hover {
-    background-color: #ef5454;
 }
 
 button.save.has-count {
@@ -441,16 +414,6 @@ button.save.has-count .count::before {
     border-right:  6px solid rgba(255,255,255,.5);
 }
 
-button[disabled] {
-    cursor:auto;
-    background: rgba(255,255,255,.5);
-    pointer-events:none;
-}
-
-button[disabled] .label {
-    color: rgba(0,0,0,.5);
-}
-
 /* Icons */
 
 .icon {
@@ -462,11 +425,6 @@ button[disabled] .label {
   text-indent:-9999px;
   overflow:hidden;
   }
-
-.icon.big {
-    width: 40px;
-    height: 40px;
-}
 
 .icon-pre-text {
     margin-right: 3px;
@@ -555,7 +513,6 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.note       { background-position: -120px -200px;}
 .icon.wheelchair { background-position: -140px -200px;}
 
-
 /* Toggle icon is special */
 
 .toggle.icon                   { background-position: 0px -180px;}
@@ -574,7 +531,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top:0px;
     right:0;
     height:60px;
-    border-radius: 0;
 }
 
 /* Header for modals / panes
@@ -617,8 +573,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 ------------------------------------------------------- */
 
 .inspector-wrap {
-    border-radius: 0 0 0 4px;
-    background:rgba(0,0,0,.8);
     position: absolute;
     height: 100%;
     right: 0;
@@ -1835,10 +1789,9 @@ div.typeahead a:first-child {
     text-align: center;
 }
 
-.modal a.action, .modal-splash button.action {
+.modal-actions button {
     font-weight: normal;
     color: #7092FF;
-    background-color: white;
     border-bottom: 1px solid #CCC;
     border-radius: 0;
     height: 180px;
@@ -1848,12 +1801,7 @@ div.typeahead a:first-child {
             transition: all 200ms;
 }
 
-.modal a.action:hover, .modal-splash button.action:hover {
-    background-color: #ececec;
-}
-
-a.action:before,
-.modal-splash button.action:before {
+.modal-actions button:before {
     display: block;
     content: '';
     height: 100px;
@@ -1863,14 +1811,26 @@ a.action:before,
     background:transparent url(../img/sprite.png) no-repeat 0px -220px;
 }
 
-/* Success Modal
-------------------------------------------------------- */
-
-a.action.osm {
+.modal-actions button:first-child {
     border-right: 1px solid #CCC;
 }
 
-a.action.twitter:before {
+/* Restore Modal
+------------------------------------------------------- */
+
+.modal-actions button.restore:before {
+    background-position: -400px -220px;
+}
+
+.modal-actions button.reset:before {
+    background-position: -500px -220px;
+}
+
+
+/* Success Modal
+------------------------------------------------------- */
+
+.modal-actions button.twitter:before {
     background-position: -100px -220px;
 }
 
@@ -1881,15 +1841,11 @@ a.action.twitter:before {
     text-align: center;
  }
 
-.modal-splash .action.start {
-    border-left: 1px solid #CCC;
-}
-
-.modal-splash .action.walkthrough:before {
+.modal-actions button.walkthrough:before {
     background-position: -200px -220px;
 }
 
-.modal-splash .action.start:before {
+.modal-actions button.start:before {
     background-position: -300px -220px;
 }
 

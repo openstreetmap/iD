@@ -1,7 +1,7 @@
 iD.ui.Splash = function(context) {
     return function(selection) {
-        if (context.storage('sawSplash'))
-            return;
+        // if (context.storage('sawSplash'))
+        //     return;
 
         context.storage('sawSplash', true);
 
@@ -18,10 +18,19 @@ iD.ui.Splash = function(context) {
             .attr('class','modal-section cf')
             .append('h3').text(t('splash.welcome'));
 
-        var buttons = introModal.append('div').attr('class', 'cf');
+        introModal.append('div')
+            .attr('class','modal-section')
+            .append('p')
+            .html(t('splash.text', {
+                version: iD.version,
+                website: '<a href="http://ideditor.com/">ideditor.com</a>',
+                github: '<a href="https://github.com/systemed/iD">github.com</a>'
+            }));
+            
+        var buttons = introModal.append('div').attr('class', 'modal-actions cf');
 
         buttons.append('button')
-            .attr('class', 'col6 action modal-section walkthrough')
+            .attr('class', 'col6 walkthrough')
             .text(t('splash.walkthrough'))
             .on('click', function() {
                 d3.select(document.body).call(iD.ui.intro(context));
@@ -39,7 +48,7 @@ iD.ui.Splash = function(context) {
             });
 
         buttons.append('button')
-            .attr('class', 'col6 action modal-section start')
+            .attr('class', 'col6 start')
             .text(t('splash.start'))
             .on('click', function() {
                 modal
@@ -54,15 +63,6 @@ iD.ui.Splash = function(context) {
                     .style('top','0px')
                     .remove();
             });
-
-        introModal.append('div')
-            .attr('class','modal-section')
-            .append('p')
-            .html(t('splash.text', {
-                version: iD.version,
-                website: '<a href="http://ideditor.com/">ideditor.com</a>',
-                github: '<a href="https://github.com/systemed/iD">github.com</a>'
-            }));
 
         modal.select('button.close').attr('class','hide');
 
