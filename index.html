@@ -190,9 +190,11 @@
     <body>
         <div id='iD'></div>
         <script>
+            var div = document.getElementById('iD');
+            if (!iD.detect().support) return iD.
             iD.data.load(function() {
                 id = iD();
-                d3.select('#iD')
+                d3.select(div)
                     .call(id.ui());
             })
         </script>
