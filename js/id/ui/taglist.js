@@ -45,6 +45,10 @@ iD.ui.Taglist = function(context, entity) {
             tags = [{key: '', value: ''}];
         }
 
+        tags.forEach(function(tag) {
+            tag.reference = iD.ui.TagReference(entity, {key: tag.key});
+        });
+
         var li = list.html('')
             .selectAll('li')
             .data(tags, function(d) { return d.key; });
@@ -92,25 +96,20 @@ iD.ui.Taglist = function(context, entity) {
             .attr('tabindex', -1)
             .attr('class', 'tag-help minor')
             .on('click', function(tag) {
-                var other = row.selectAll('div.tag-help'),
-                    mine = d3.select(this.parentNode)
-                        .select('div.tag-help');
-                if (mine.style('display') === 'none') {
-                    other.style('display', 'none');
-                    d3.select(this.parentNode)
-                        .select('div.tag-help')
-                        .style('display', 'block')
-                        .call(iD.ui.TagReference(entity, {key: tag.key}));
-                } else {
-                    mine.style('display', 'none');
-                }
+                tags.forEach(function(other) {
+                    if (other.key === tag.key) {
+                        other.reference.toggle();
+                    } else {
+                        other.reference.hide();
+                    }
+                });
             })
             .append('span')
             .attr('class', 'icon inspect');
 
-        row.append('div')
-            .attr('class', 'tag-help col12')
-            .style('display', 'none');
+        row.each(function(tag) {
+            d3.select(this).call(tag.reference);
+        });
 
         return li;
     }

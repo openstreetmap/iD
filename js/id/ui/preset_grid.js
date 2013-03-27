@@ -195,29 +195,15 @@ iD.ui.PresetGrid = function(context, entity) {
 
                 if (!presetinspect) return;
 
-                presetinspect
-                    .style('max-height', '0px')
-                    .style('padding-top', '0px')
-                    .style('padding-bottom', '0px')
-                    .style('opacity', '0')
-                    .transition()
-                    .duration(200)
-                    .style('padding-top', '10px')
-                    .style('padding-bottom', '20px')
-                    .style('max-height', '200px')
-                    .style('opacity', '1');
-
-                presetinspect.append('h3')
-                    .text(d.name());
-
                 var tag = {key: Object.keys(d.tags)[0]};
 
                 if (d.tags[tag.key] !== '*') {
                     tag.value = d.tags[tag.key];
                 }
 
-                presetinspect.append('div')
-                    .call(iD.ui.TagReference(entity, tag));
+                var tagReference = iD.ui.TagReference(entity, tag);
+                presetinspect.call(tagReference);
+                tagReference.show();
             }
 
             if (selection.node() === grid.node()) {

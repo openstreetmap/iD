@@ -1,5 +1,5 @@
 iD.ui.TagReference = function(entity, tag) {
-    var taginfo = iD.taginfo();
+    var taginfo = iD.taginfo(), wrap, showing = false;
 
     function findLocal(docs) {
         var locale = iD.detect().locale.toLowerCase(),
@@ -26,16 +26,19 @@ iD.ui.TagReference = function(entity, tag) {
         });
     }
 
-    return function(selection) {
-        selection.html('');
+    function tagReference(selection) {
+        wrap = selection.append('div')
+            .attr('class', 'tag-help cf');
+    }
 
-        selection.classed('cf', true);
-
-        var spinner = selection.append('img')
+    tagReference.show = function() {
+        var spinner = wrap.append('img')
             .attr('class', 'tag-reference-spinner')
             .attr('src', 'img/loader-white.gif');
 
-        var referenceBody = selection.append('div')
+        var referenceBody = wrap.selectAll('.tag-reference-wrap')
+            .data([this])
+            .enter().append('div')
             .attr('class', 'tag-reference-wrap')
             .style('opacity', 0);
 
@@ -81,5 +84,32 @@ iD.ui.TagReference = function(entity, tag) {
                 .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title)
                 .text(t('inspector.reference'));
         });
+
+        wrap.style('max-height', '0px')
+            .style('padding-top', '0px')
+            .style('opacity', '0')
+            .transition()
+            .duration(200)
+            .style('padding-top', '20px')
+            .style('max-height', '200px')
+            .style('opacity', '1');
+
+        showing = true;
     };
+
+    tagReference.hide = function() {
+        wrap.transition()
+            .duration(200)
+            .style('max-height', '0px')
+            .style('padding-top', '0px')
+            .style('opacity', '0');
+
+        showing = false;
+    };
+
+    tagReference.toggle = function() {
+        showing ? tagReference.hide() : tagReference.show();
+    };
+
+    return tagReference;
 };

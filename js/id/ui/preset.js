@@ -13,6 +13,8 @@ iD.ui.preset = function(context, entity, preset) {
             .on('close', event.close)
             .on('change', event.change);
 
+        field.reference = iD.ui.TagReference(entity, {key: field.key});
+
         if (field.type === 'address') {
             field.input.entity(entity);
         }
@@ -44,7 +46,7 @@ iD.ui.preset = function(context, entity, preset) {
     });
 
     context.presets().universal().forEach(function(field) {
-        if (fields.indexOf(field) < 0) {
+        if (preset.fields.indexOf(field) < 0) {
             fields.push(UIField(field));
         }
     });
@@ -80,11 +82,12 @@ iD.ui.preset = function(context, entity, preset) {
     function toggleReference(field) {
         d3.event.stopPropagation();
         d3.event.preventDefault();
-        _.forEach(fields, function(other) {
+
+        _.forEach(shown(), function(other) {
             if (other.id === field.id) {
-                other.showingReference = !other.showingReference;
+                other.reference.toggle();
             } else {
-                other.showingReference = false;
+                other.reference.hide();
             }
         });
 
@@ -132,11 +135,10 @@ iD.ui.preset = function(context, entity, preset) {
             .attr('class','icon undo');
 
         enter.each(function(field) {
-            d3.select(this).call(field.input);
+            d3.select(this)
+                .call(field.input)
+                .call(field.reference);
         });
-
-        enter.append('div')
-            .attr('class', 'tag-help');
 
         selection
             .each(function(field) {
@@ -144,29 +146,6 @@ iD.ui.preset = function(context, entity, preset) {
             })
             .classed('modified', function(field) {
                 return field.modified();
-            });
-
-        selection.selectAll('.tag-help')
-            .each(function(field) {
-                if (field.showingReference) {
-                    d3.select(this)
-                        .call(iD.ui.TagReference(entity, {key: field.key}))
-                        .style('max-height', '0px')
-                        .style('padding-top', '0px')
-                        .style('opacity', '0')
-                        .transition()
-                        .duration(200)
-                        .style('padding-top', '20px')
-                        .style('max-height', '200px')
-                        .style('opacity', '1');
-                } else {
-                    d3.select(this)
-                        .transition()
-                        .duration(200)
-                        .style('max-height', '0px')
-                        .style('padding-top', '0px')
-                        .style('opacity', '0');
-                }
             });
 
         selection.exit()
