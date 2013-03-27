@@ -238,27 +238,29 @@ iD.ui.PresetGrid = function(context, entity) {
                 .append('div')
                 .attr('class','grid-button-wrap col4 grid-entry-wrap')
                 .classed('category', function(d) { return !!d.members; })
-                .classed('current', function(d) { return d === preset; })
-                .append('button')
+                .classed('current', function(d) { return d === preset; });
+
+            var buttonInner = entered.append('button')
                 .attr('class', 'grid-entry')
                 .on('click', choose);
 
-            entered.style('opacity', 0)
+            buttonInner
+                .style('opacity', 0)
                 .transition()
                 .style('opacity', 1);
 
-            entered.append('div')
+            buttonInner.append('div')
                 .attr('class', presetClass);
 
             var geometry = entity.geometry(context.graph()),
                 fallbackIcon = geometry === 'line' ? 'other-line' : 'marker-stroked';
 
-            entered.append('div')
+            buttonInner.append('div')
                 .attr('class', function(d) {
                     return 'feature-' + (d.icon || fallbackIcon) + ' icon';
                 });
 
-            var label = entered.append('div')
+            var label = buttonInner.append('div')
                 .attr('class','label')
                 .text(name);
 

@@ -25,14 +25,34 @@ iD.ui.Splash = function(context) {
             .text(t('splash.walkthrough'))
             .on('click', function() {
                 d3.select(document.body).call(iD.ui.intro(context));
-                modal.remove();
+                modal
+                    .transition()
+                    .duration(200)
+                    .style('opacity','0')
+                    .remove();
+
+                modal.select('.modal')
+                    .transition()
+                    .duration(200)
+                    .style('top','0px')
+                    .remove();
             });
 
         buttons.append('button')
             .attr('class', 'col6 action modal-section start')
             .text(t('splash.start'))
             .on('click', function() {
-                modal.remove();
+                modal
+                    .transition()
+                    .duration(200)
+                    .style('opacity','0')
+                    .remove();
+
+                modal.select('.modal')
+                    .transition()
+                    .duration(200)
+                    .style('top','0px')
+                    .remove();
             });
 
         introModal.append('div')
