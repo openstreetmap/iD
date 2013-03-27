@@ -1285,6 +1285,10 @@ div.combobox {
 
 /* Tag reference */
 
+.preset-inspect {
+    position: relative;
+}
+
 .tag-help {
     overflow: hidden;
 }
@@ -1306,11 +1310,6 @@ img.wiki-image {
     margin-right: 20px;
     max-height: 200px;
     border-radius: 4px;
-}
-
-.tag-reference-spinner {
-    display: block;
-    margin: auto;
 }
 
 /* Map Controls */

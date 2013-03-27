@@ -32,9 +32,6 @@ iD.ui.TagReference = function(entity, tag) {
     }
 
     tagReference.show = function() {
-        var spinner = wrap.append('img')
-            .attr('class', 'tag-reference-spinner')
-            .attr('src', 'img/loader-white.gif');
 
         var referenceBody = wrap.selectAll('.tag-reference-wrap')
             .data([this])
@@ -49,11 +46,6 @@ iD.ui.TagReference = function(entity, tag) {
         }
 
         taginfo.docs(tag, function(err, docs) {
-            spinner
-                .style('position', 'absolute')
-                .transition()
-                .style('opacity', 0)
-                .remove();
 
             if (!err && docs) {
                 docs = findLocal(docs);
