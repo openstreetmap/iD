@@ -12,6 +12,10 @@ iD.ui.cmd = function(code) {
         '⌦': 'Delete'
     }, keys = [];
 
+    if (iD.detect().os === 'win') {
+        if (code === '⌘⇧Z') return 'Ctrl+Y';
+    }
+
     for (var i = 0; i < code.length; i++) {
         if (code[i] in replacements) {
             keys.push(replacements[code[i]]);
