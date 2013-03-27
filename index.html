@@ -3,7 +3,7 @@ title: "iD"
 layout: default
 ---
 
-<div class='pad4 center header col12'>
+<div class='pad8 center header clearfix'>
   <h1>{{page.title}}</h1>
   <h2>An easy to use OpenStreetMap editor</h2>
   <p><strong>Current status: <a href="https://github.com/systemed/iD/">0.0.0-beta1</a></strong></p>
@@ -11,18 +11,8 @@ layout: default
       <a href='http://openstreetmap.us/iD/release' id='start-mapping' class='button big'>Start Mapping Now</a>
     </div>
   </div>
-</div>
 
-<div class='shadow'>
-  <div class='limit pad4 cf'>
-
-      {% for item in site.posts reversed %}
-        <div class='col6 pad4 section {{item.title | downcase | remove: ' '}}'>
-          <h2>{{item.title}}</h2>
-          <div class='spot-illo'></div>
-          {{item.content | markdownify}}
-        </div>
-      {% endfor %}
+<div class='limit pad4'>
 
     <div class='video clearfix col12 pad4'>
       <div class='force-aspect-ratio'>
@@ -31,10 +21,10 @@ layout: default
     </div>
 
  <div class='clearfix actions'>
-      <div class='col6 pad4 trynow'>
-        <a class='button' href='http://openstreetmap.us/iD/release/'>Start mapping now</a>
-        <p class='deemphasize'><em>Edit OpenStreetMap with the the latest stable release.</em></p>
-      </div>
+
+    <div class='col6 pad4 basics'>
+      <p>iD is a new, friendly editor for <a href='http://www.openstreetmap.org/'>OpenStreetMap</a>. It's offers newcomers an easy way into editing OSM. It's intended to complement existing editing software, a simple editor to lead into Potlatch and JOSM <em>Why should Google Map Maker have all the fun?</em></p>
+    </div>
 
       <div class='col6 pad4 actions'>
         <a class='button' href='https://github.com/systemed/iD/issues?state=open'>iD on GitHub</a>
@@ -44,7 +34,7 @@ layout: default
 
   </div>
 
-  <div class='footer clearfix center pad4 col12'>
+  <div class='footer clearfix center pad8 col12'>
     <ul>
       <li>A project for <a href='http://www.openstreetmap.org/'>OpenStreetMap</a> funded by <a href='http://mapbox.com/blog/knight-invests-openstreetmap/'>The Knight Foundation</a></li>
       <li>Released under <a href='http://www.wtfpl.net/'>WTFPL</a></li>

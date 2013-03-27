@@ -16,51 +16,22 @@ h1 {
   background: #141516 url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
   background-size: cover;
   color: #f8f8f8;
-  position: fixed;
-  z-index: 1;
-  height: 100%;
-  top: 0;
+  width: 100%;
 }
 
 .header h2 { margin-bottom: 0;}
 
-.shadow {
-  margin-top: 420px;
-  position: relative;
-  z-index: 2;
-}
-
 .limit {
+  width: 100%;
   margin: auto;
   max-width: 1000px;
   background: white;
-  -webkit-animation:fadeIn .5s ease-out .5s both;
-     -moz-animation:fadeIn .5s ease-out .5s both;
-       -o-animation:fadeIn .5s ease-out .5s both;
-          animation:fadeIn .5s ease-out .5s both;
 }
-
-.section { padding-top: 0;}
 
 a.button.big.loading {
   background: url({{site.baseurl}}/img/loading.gif);
 }
 
-@-webkit-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-   @-moz-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-     @-o-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-        @keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-
-.technology { border-left: 1px solid #ddd; }
-
-.spot-illo {
-  background: url({{site.baseurl}}/img/sprite.png) 50% -90px no-repeat;
-  height: 150px;
-  width: 100%;
-}
-.basics .spot-illo {
-  background: url({{site.baseurl}}/img/sprite.png) 50% -225px no-repeat;
-}
 .video {
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -84,7 +55,7 @@ a.button.big.loading {
   margin: auto;
 }
 
-.actions .col6:last-child { border-left: 1px solid #ddd; }
+.actions .col6:first-child { border-right: 1px solid #ddd; }
 .actions .pad4 { padding-bottom: 0;}
 
 a.button {
@@ -98,6 +69,7 @@ a.button {
   text-align: center;
   padding: 8px;
 }
+
 a.button:hover { background: #54af29; }
 
 a.button.big {
@@ -108,6 +80,7 @@ padding: 16px;
 .footer {
   color: white;
   text-align: center;
+  background: #141516 url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
 }
 
 .footer li {
@@ -125,8 +98,7 @@ padding: 16px;
 }
 
 @media only screen and (max-width: 640px) {
-.actions .col6:last-child { border-left:0; }
-  .basics,
+.actions .col6:first-child { border-right:0; }
   .video {
     border: 0;
     border-radius: 0;
