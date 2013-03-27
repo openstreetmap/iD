@@ -1,4 +1,4 @@
-iD.ui.intro.area = function(context, curtain) {
+iD.ui.intro.area = function(context, reveal) {
 
     var event = d3.dispatch('done'),
         timeout;
@@ -12,7 +12,7 @@ iD.ui.intro.area = function(context, curtain) {
         var playground = [-85.63552, 41.94159],
             corner = [-85.63565411045074, 41.9417715536927];
         context.map().centerZoom(playground, 19);
-        curtain.reveal('button.add-area', t('intro.areas.add'));
+        reveal('button.add-area', 'intro.areas.add');
 
         context.on('enter.intro', addArea);
 
@@ -22,12 +22,12 @@ iD.ui.intro.area = function(context, curtain) {
 
             var padding = 120 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(corner), padding);
-            curtain.reveal(pointBox, t('intro.areas.corner'));
+            reveal(pointBox, 'intro.areas.corner');
 
             context.map().on('move.intro', function() {
                 padding = 120 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(corner), padding);
-                curtain.reveal(pointBox, t('intro.areas.corner'), 0);
+                reveal(pointBox, 'intro.areas.corner', 0);
             });
         }
 
@@ -37,12 +37,12 @@ iD.ui.intro.area = function(context, curtain) {
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(playground), padding);
-            curtain.reveal(pointBox, t('intro.areas.place'));
+            reveal(pointBox, 'intro.areas.place');
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(playground), padding);
-                curtain.reveal(pointBox, t('intro.areas.place'), 0);
+                reveal(pointBox, 'intro.areas.place', 0);
             });
         }
 
@@ -52,7 +52,7 @@ iD.ui.intro.area = function(context, curtain) {
             context.on('enter.intro', null);
 
             timeout = setTimeout(function() {
-                curtain.reveal('.preset-grid-search', t('intro.areas.search'));
+                reveal('.preset-grid-search', 'intro.areas.search');
                 d3.select('.preset-grid-search').on('keyup.intro', keySearch);
             }, 500);
         }
@@ -60,14 +60,14 @@ iD.ui.intro.area = function(context, curtain) {
         function keySearch() {
             var first = d3.select('.grid-button-wrap:first-child');
             if (first.datum().id === 'leisure/playground') {
-                curtain.reveal(first.select('.grid-entry').node(), t('intro.areas.choose'));
+                reveal(first.select('.grid-entry').node(), 'intro.areas.choose');
                 d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
                 d3.select('.preset-grid-search').on('keyup.intro', null);
             }
         }
 
         function selectedPreset() {
-            curtain.reveal('.pane', t('intro.areas.describe'));
+            reveal('.pane', 'intro.areas.describe');
             context.on('exit.intro', event.done);
         }
 

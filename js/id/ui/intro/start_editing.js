@@ -1,4 +1,4 @@
-iD.ui.intro.startEditing = function(context, curtain) {
+iD.ui.intro.startEditing = function(context, reveal) {
 
     var event = d3.dispatch('done', 'startEditing'),
         timeouts = [];
@@ -13,14 +13,14 @@ iD.ui.intro.startEditing = function(context, curtain) {
 
     step.enter = function() {
 
-        curtain.reveal('.map-control.help-control', t('intro.startediting.help'));
+        reveal('.map-control.help-control', 'intro.startediting.help');
 
         timeout(function() {
-            curtain.reveal('#bar button.save', t('intro.startediting.save'));
+            reveal('#bar button.save', 'intro.startediting.save');
         }, 3500);
 
         timeout(function() {
-            curtain.reveal('#surface', t('intro.startediting.save'));
+            reveal('#surface', 'intro.startediting.save');
         }, 7000);
 
         timeout(event.startEditing, 7500);

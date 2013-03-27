@@ -67,7 +67,7 @@ d3.curtain = function() {
         tooltip.classed('in', false);
     };
 
-    curtain.reveal = function(box, text, duration) {
+    curtain.reveal = function(box, text, tooltipclass, duration) {
         if (typeof box === 'string') box = d3.select(box).node();
         if (box.getBoundingClientRect) box = box.getBoundingClientRect();
 
@@ -100,14 +100,13 @@ d3.curtain = function() {
 
         // pseudo markdown bold text hack
         var parts = text.split('**');
-        var html = parts[0];
+        var html = '<span>' + parts[0] + '</span>';
         if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
-
 
         tooltip
             .style('top', pos[1] + 'px')
             .style('left', pos[0] + 'px')
-            .attr('class', 'curtain-tooltip tooltip in ' + side)
+            .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + tooltipclass)
             .select('.tooltip-inner')
                 .html(html);
 

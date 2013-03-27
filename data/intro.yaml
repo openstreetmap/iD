@@ -1,6 +1,6 @@
 en:
   intro:
-    navigation: 
+    navigation:
       drag: "The main map area shows OpenStreetMap data on top of background imagery. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**"
       select: "Map features can be represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**"
       header: "The header shows us the feature type."
@@ -11,9 +11,9 @@ en:
       place: "The point can be placed by clicking on the map. **Place the point on top of the building.**"
       search: "There many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **"
       choose: "**Choose Cafe from the grid.**"
-      describe: "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name and address**"
+      describe: "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**"
       close: "The feature editor can be closed by clicking on the close button, or anywhere on the map. **Close the feature editor**"
-      reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**" 
+      reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**"
       fixname: "**Change the name and close the feature editor.**"
       reselect_delete: "All features on the map can be deleted. **Reselect the point you created.**"
       delete: "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"

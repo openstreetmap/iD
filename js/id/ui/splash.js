@@ -1,7 +1,7 @@
 iD.ui.Splash = function(context) {
     return function(selection) {
-        if (context.storage('sawSplash'))
-            return;
+        // if (context.storage('sawSplash'))
+        //     return;
 
         context.storage('sawSplash', true);
 
@@ -26,7 +26,7 @@ iD.ui.Splash = function(context) {
                 website: '<a href="http://ideditor.com/">ideditor.com</a>',
                 github: '<a href="https://github.com/systemed/iD">github.com</a>'
             }));
-            
+
         var buttons = introModal.append('div').attr('class', 'modal-actions cf');
 
         buttons.append('button')
