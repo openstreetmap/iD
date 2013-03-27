@@ -1301,15 +1301,14 @@ div.combobox {
     padding-top: 20px;
 }
 
-.additional-tags div.tag-help {
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+.additional-tags .tag-reference-wrap {
     border-bottom: 1px solid #ccc;
-    background:#fff;
+    padding: 20px 0;
 }
 
-.additional-tags .tag-help .tag-reference-wrap {
-    padding: 10px;
+.additional-tags div.tag-help {
+    margin-right: -40px;
+    border-left: 1px solid transparent;
 }
 
 img.wiki-image {
