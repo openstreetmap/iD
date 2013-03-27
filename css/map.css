@@ -861,7 +861,7 @@ text.point {
 #map .line:active,
 #map .area:active,
 #map .midpoint:active,
-.mode-select .selected {
+#map .mode-select .selected {
     cursor: url(../img/cursor-select-acting.png), pointer;
 }
 

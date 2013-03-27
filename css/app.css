@@ -215,8 +215,10 @@ ul.toggle-list li a {
     text-overflow:ellipsis;
     overflow:hidden;
 }
-ul.toggle-list li a:focus,
+
 ul.toggle-list li a:hover { background-color: #ececec;}
+
+ul.toggle-list li a.selected { background-color: #e8ebff;}
 
 ul.link-list li {
     display: inline-block;
@@ -1037,6 +1039,7 @@ input[type=number] {
 
 .checkselect label:hover {
     cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     background: #f1f1f1;
 }
 
@@ -1170,6 +1173,7 @@ div.combobox {
     padding: 5px;
     width: 100%;
     cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     display: block;
     text-align: center;
 }
@@ -1462,6 +1466,7 @@ img.wiki-image {
     display: block;
     float: left;
     cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
 .opacity-options li .select-box{
@@ -1728,6 +1733,7 @@ div.typeahead a {
     height: 30px;
     line-height: 30px;
     cursor: pointer;
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     display: block;
     border-top:1px solid #ccc;
     background-color: #fff;
@@ -1968,6 +1974,8 @@ div.typeahead a:first-child {
     position: absolute;
     display: none;
     color:#333;
+    text-align: left;
+    font-size: 12px;
 }
 
 .tooltip.in {
@@ -1978,29 +1986,26 @@ div.typeahead a:first-child {
 }
 
 .tooltip.top {
-    margin-top: -10px;
+    margin-top: -20px;
     text-align: center;
 }
 
 .tooltip.right {
-    margin-left: 10px;
-    text-align: left;
+    margin-left: 20px;
 }
 
 .tooltip.bottom {
-    margin-top: 10px;
+    margin-top: 20px;
     text-align: center;
 }
 
 .tooltip.left {
-    margin-left: -10px;
-    text-align: right;
+    margin-left: -20px;
 }
 
 .tooltip-inner {
     display: inline-block;
     padding: 10px;
-    font-size: 12px;
     font-weight: normal;
     background-color: white;
 }
@@ -2095,6 +2100,7 @@ div.typeahead a:first-child {
 
 .add-point .tooltip {
     left: -20px !important; }
+
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
@@ -2204,6 +2210,7 @@ div.typeahead a:first-child {
 
 /* Scrollbars
  ----------------------------------------------------- */
+
 ::-webkit-scrollbar {
     height: 20px;
     overflow: visible;
@@ -2254,7 +2261,8 @@ div.typeahead a:first-child {
     background: transparent
 }
 
-/* Intro */
+/* Intro walkthrough
+ ----------------------------------------------------- */
 
 .curtain-darkness {
     fill-opacity: 0.7;
@@ -2277,28 +2285,37 @@ div.typeahead a:first-child {
     background: #76FF70;
 }
 
-.intro-nav-wrap button.step.finished h3 {
-    color: #269C21;
+.curtain-tooltip .tooltip-inner {
+    text-align: left;
+    padding: 20px;
 }
 
-.intro-nav-wrap button.step h3 {
-    font-weight: normal;
-}
 .curtain-tooltip.left .tooltip-arrow,
 .curtain-tooltip.right .tooltip-arrow {
-    top: 0;
+    top: -5px;
 }
 
 .curtain-tooltip.right .tooltip-inner,
 .curtain-tooltip.left .tooltip-inner {
-    margin-top: -50%;
+    margin-top: -30%;
 }
+
 .curtain-tooltip .tooltip-inner {
-    font-size: 14px;
-    font-weight: normal;
+    font-size: 15px;
 }
+
 .curtain-tooltip .tooltip-inner .bold {
     font-weight: bold;
     display: block;
+    border-top: 1px solid #CCC;
+    margin-top: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 10px 20px 0 20px;
 }
 
+.curtain-tooltip .tooltip-inner .bold:only-child {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}

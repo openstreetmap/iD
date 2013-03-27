@@ -13,7 +13,7 @@
    height="320"
    id="svg12393"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="sprite.svg"
    inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite.png"
    inkscape:export-xdpi="90"
@@ -39,11 +39,11 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="219.96873"
-     inkscape:cy="105.14154"
+     inkscape:cx="30.966568"
+     inkscape:cy="129.65104"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
-     showgrid="true"
+     showgrid="false"
      inkscape:window-width="1483"
      inkscape:window-height="804"
      inkscape:window-x="131"
@@ -417,19 +417,7 @@
          height="15.000003"
          width="15.000003"
          id="rect7407"
-         style="color:#000000;fill:#f7f7f7;fill-opacity:1;stroke:#b0b0b0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-         ry="9.5"
-         rx="9.5"
-         y="315.5"
-         x="85.5"
-         height="9.0000029"
-         width="9.0000029"
-         id="rect7542"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         style="color:#000000;fill:#e2e9ff;fill-opacity:1;stroke:#e2e9ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
        transform="translate(-35,-90.000001)"
@@ -446,21 +434,9 @@
          height="15"
          width="15"
          id="rect7320-0"
-         style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:#aaaaaa;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         style="color:#000000;fill:#e2e9ff;fill-opacity:1;fill-rule:nonzero;stroke:#e2e9ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-         style="color:#000000;fill:#f7f7f7;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect7439-7"
-         width="14"
-         height="14"
-         x="83"
-         y="273"
-         rx="9.5"
-         ry="9.5" />
-      <rect
-         style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="color:#000000;fill:#bbcaff;fill-opacity:1;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect32489"
          width="10.000001"
          height="10.000001"
@@ -482,14 +458,14 @@
          height="8"
          width="8"
          id="rect7681-6"
-         style="color:#000000;fill:#e7e7e7;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         style="color:#000000;fill:#bbcaff;fill-opacity:1;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
        id="g35608"
        style="display:inline"
        transform="translate(-15,-90.000001)">
       <rect
-         style="color:#000000;fill:#f7f7f7;fill-opacity:1;fill-rule:nonzero;stroke:#222222;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="color:#000000;fill:#e2e9ff;fill-opacity:1;fill-rule:nonzero;stroke:#e2e9ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect35610"
          width="15"
          height="15"
@@ -497,18 +473,6 @@
          y="272.5"
          rx="9.5"
          ry="9.5"
-         inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
-      <rect
-         ry="9.5"
-         rx="9.5"
-         y="273"
-         x="83"
-         height="14"
-         width="14"
-         id="rect35612"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          inkscape:export-filename="/Users/saman/work_repos/iD/img/source/layerswitcher-expanded.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
@@ -525,7 +489,7 @@
          id="rect35614"
          style="color:#000000;fill:#e2e9ff;fill-opacity:1;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <rect
-         style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect35616"
          width="10"
          height="10"
@@ -2343,21 +2307,10 @@
          style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#e06d5f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:12;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
     </g>
     <path
-       sodipodi:type="arc"
-       style="color:#000000;fill:none;stroke:#7092ff;stroke-width:11.66666508;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path4227"
-       sodipodi:cx="450"
-       sodipodi:cy="270"
-       sodipodi:rx="35"
-       sodipodi:ry="35"
-       d="m 485,270 c 0,19.32997 -15.67003,35 -35,35 -19.32997,0 -35,-15.67003 -35,-35 0,-19.32997 15.67003,-35 35,-35 19.32997,0 35,15.67003 35,35 z"
-       transform="matrix(0.85714295,0,0,0.85714295,89.285677,38.571404)" />
-    <path
-       sodipodi:nodetypes="cccccccc"
-       inkscape:connector-curvature="0"
-       id="path4233"
-       d="m 482,228 3,0 12,12 -12,12 -3,0 -2,-2 0,-20 z"
-       style="color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:10;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#7092ff;fill-opacity:1;stroke:none;stroke-width:11.66666508;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="M 450 235 C 430.72926 235 415 250.72926 415 270 C 415 289.27074 430.72926 305 450 305 C 469.27075 305 485 289.27074 485 270 C 485 258.33433 479.23332 247.9627 470.40625 241.59375 L 463.21875 248.78125 C 470.3012 253.17882 475 260.99881 475 270 C 475 283.86634 463.86635 295 450 295 C 436.13366 295 425 283.86634 425 270 C 425 256.13366 436.13366 245 450 245 C 451.71227 245 453.38712 245.17652 455 245.5 L 455 235.375 C 453.36389 235.13858 451.69943 235 450 235 z "
+       transform="translate(25,-3.0624999e-6)"
+       id="path4227" />
     <path
        style="color:#000000;fill:#7092ff;fill-opacity:1;stroke:none;stroke-width:10;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 475,228 3,0 12,12 -12,12 -3,0 -2,-2 0,-20 z"

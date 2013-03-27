@@ -100,9 +100,8 @@ d3.curtain = function() {
 
         // pseudo markdown bold text hack
         var parts = text.split('**');
-        var html = parts[0];
+        var html = '<span>' + parts[0] + '</span>';
         if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
-
 
         tooltip
             .style('top', pos[1] + 'px')
