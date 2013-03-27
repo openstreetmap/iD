@@ -356,7 +356,7 @@ button.minor {
 .button-wrap button:only-child { width: 100%;}
 .button-wrap:last-of-type { padding-right: 0;}
 
-.joined button { 
+.joined button {
     border-radius:0;
     border-right: 1px solid rgba(0,0,0,.5);
 }
@@ -709,7 +709,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     content: "";
     position: absolute;
     top: 7px;
-    width: 100%;
+    left: 0; right: 0;
     border-top: 1px solid #ccc;
     border-radius: 6px;
     height: 6px;
@@ -947,6 +947,10 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .more-buttons {
     margin-top: 20px;
     border-top: 1px solid #CCC;
+}
+
+.more-buttons:nth-last-child(2) {
+    border-bottom: 1px solid #CCC;
 }
 
 button.preset-add-field {
