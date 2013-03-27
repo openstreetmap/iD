@@ -1,4 +1,4 @@
-const JXON = new (function () {
+var JXON = new (function () {
   var
     sValueProp = "keyValue", sAttributesProp = "keyAttributes", sAttrPref = "@", /* you can customize these values */
     aCache = [], rIsNull = /^\s*$/, rIsBool = /^(?:true|false)$/i;
