@@ -1,6 +1,7 @@
 iD.ui.intro.startEditing = function(context, reveal) {
 
     var event = d3.dispatch('done', 'startEditing'),
+        modal,
         timeouts = [];
 
     var step = {
@@ -20,13 +21,35 @@ iD.ui.intro.startEditing = function(context, reveal) {
         }, 3500);
 
         timeout(function() {
-            reveal('#surface', 'intro.startediting.save');
+            reveal('#surface');
         }, 7000);
 
-        timeout(event.startEditing, 7500);
+        timeout(function() {
+            modal = iD.ui.modal(context.container());
+
+            modal.select('.modal')
+                .attr('class', 'modal-splash modal col6');
+
+            modal.selectAll('.close').remove();
+
+            modal.select('.content')
+                .append('div')
+                    .attr('class', 'fillL')
+                    .append('div')
+                        .attr('class','modal-section')
+                        .append('button')
+                            .attr('class', 'huge-modal-button')
+                            .on('click', function() {
+                                event.startEditing();
+                                modal.remove();
+                            })
+                            .append('h2')
+                                .text(t('intro.startediting.start'));
+        }, 7500);
     };
 
     step.exit = function() {
+        if (modal) modal.remove();
         timeouts.forEach(window.clearTimeout);
     };
 

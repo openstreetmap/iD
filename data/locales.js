@@ -1468,8 +1468,8 @@ locale.en = {
             "place": "The point can be placed by clicking on the map. **Place the point on top of the building.**",
             "search": "There many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **",
             "choose": "**Choose Cafe from the grid.**",
-            "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name and address**",
-            "close": "The feature editor can be closed by clicking on the close button, or anywhere on the map. **Close the feature editor**",
+            "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**",
+            "close": "The feature editor can be closed by clicking on the close button. **Close the feature editor**",
             "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**",
             "fixname": "**Change the name and close the feature editor.**",
             "reselect_delete": "All features on the map can be deleted. **Reselect the point you created.**",
@@ -1491,6 +1491,11 @@ locale.en = {
             "road": "**Select Road from the grid**",
             "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
             "describe": "**Name the road and close the feature editor.**"
+        },
+        "startediting": {
+            "help": "More documentation and this walkthrough are available here.",
+            "save": "Don't forget to regularly save your changes!",
+            "start": "Start mapping!"
         }
     }
 };

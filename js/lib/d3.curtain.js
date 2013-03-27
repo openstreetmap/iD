@@ -81,18 +81,22 @@ d3.curtain = function() {
         ];
 
         // pseudo markdown bold text hack
-        var parts = text.split('**');
-        var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
-        if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
+        if (text) {
+            var parts = text.split('**');
+            var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
+            if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
-        tooltip
-            .style('top', pos[1] + 'px')
-            .style('left', pos[0] + 'px')
-            .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + tooltipclass)
-            .select('.tooltip-inner')
-                .html(html);
+            tooltip
+                .style('top', pos[1] + 'px')
+                .style('left', pos[0] + 'px')
+                .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + tooltipclass)
+                .select('.tooltip-inner')
+                    .html(html);
 
-        if (duration !== 0) tooltip.call(iD.ui.Toggle(true));
+            if (duration !== 0) tooltip.call(iD.ui.Toggle(true));
+        } else {
+            tooltip.call(iD.ui.Toggle(false));
+        }
     };
 
     curtain.cut = function(datum, duration) {

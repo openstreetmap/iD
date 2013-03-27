@@ -29,7 +29,8 @@ iD.ui.intro = function(context) {
         selection.call(curtain);
 
         function reveal(box, textid, duration) {
-            curtain.reveal(box, t(textid), textid.replace(/\./g, '-'), duration);
+            if (textid) curtain.reveal(box, t(textid), textid.replace(/\./g, '-'), duration);
+            else curtain.reveal(box, '', '', duration);
         }
 
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {

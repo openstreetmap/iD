@@ -2374,3 +2374,8 @@ div.typeahead a:first-child {
 .intro-lines-add .tooltip-inner::before {
     background-position: 0px -480px;
 }
+
+.huge-modal-button {
+    height: 180px;
+    width: 100%;
+}
