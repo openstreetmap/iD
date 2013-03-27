@@ -1280,6 +1280,17 @@ div.combobox {
     overflow: hidden;
 }
 
+.additional-tags div.tag-help {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background:#fff;
+}
+
+.additional-tags .tag-help .tag-reference-wrap {
+    padding: 10px;
+}
+
 img.wiki-image {
     float: left;
     max-width: 33.3333%;

@@ -92,19 +92,25 @@ iD.ui.Taglist = function(context, entity) {
             .attr('tabindex', -1)
             .attr('class', 'tag-help minor')
             .on('click', function(tag) {
-                row.selectAll('div.tag-help')
-                    .style('display', 'none');
-
-                d3.select(d3.select(this).node().parentNode)
-                    .select('div.tag-help')
-                    .style('display', 'block')
-                    .call(iD.ui.TagReference(entity, {key: tag.key}));
+                var other = row.selectAll('div.tag-help'),
+                    mine = d3.select(this.parentNode)
+                        .select('div.tag-help');
+                if (mine.style('display') === 'none') {
+                    other.style('display', 'none');
+                    d3.select(this.parentNode)
+                        .select('div.tag-help')
+                        .style('display', 'block')
+                        .call(iD.ui.TagReference(entity, {key: tag.key}));
+                } else {
+                    mine.style('display', 'none');
+                }
             })
             .append('span')
             .attr('class', 'icon inspect');
 
         row.append('div')
-            .attr('class', 'tag-help');
+            .attr('class', 'tag-help col12')
+            .style('display', 'none');
 
         return li;
     }
