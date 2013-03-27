@@ -41,10 +41,11 @@ iD.ui.intro.line = function(context, reveal) {
                 reveal(pointBox, 'intro.lines.start', 0);
             });
         }
-        function drawLine (mode) {
+
+        function drawLine(mode) {
             if (mode.id !== 'draw-line') return;
-            context.on('enter.intro', null);
             context.history().on('change.intro', addIntersection);
+            context.on('enter.intro', retry);
 
             var padding = 300 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
@@ -55,6 +56,18 @@ iD.ui.intro.line = function(context, reveal) {
                 pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
                 reveal(pointBox, 'intro.lines.intersect', 0);
             });
+        }
+
+        // ended line before creating intersection
+        function retry(mode) {
+            if (mode.id !== 'select') return;
+            var pointBox = iD.ui.intro.pad(context.projection(intersection), 30);
+            reveal(pointBox, 'intro.lines.restart');
+            timeout(function() {
+                context.replace(iD.actions.DeleteMultiple(mode.selection()));
+                step.exit();
+                step.enter();
+            }, 3000);
         }
 
         function addIntersection(changes) {

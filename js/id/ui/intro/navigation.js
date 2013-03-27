@@ -41,13 +41,19 @@ iD.ui.intro.navigation = function(context, reveal) {
         }, 400));
 
         function townhall() {
-            var hall = d3.select('.node.tag-amenity-townhall');
-            var box = iD.ui.intro.pointBox(context.projection(hall.datum().loc));
+            var hall = [-85.63645945147184, 41.942986488012565];
+            var point = context.projection(hall);
+
+            if (point[0] < 0 || point[0] > window.innerWidth - 200 ||
+                point[1] < 0 || point[1] > window.innerHeight) {
+                context.map().center(hall);
+                point = context.projection(hall);
+            }
+            var box = iD.ui.intro.pointBox(point);
             reveal(box, 'intro.navigation.select');
 
             context.map().on('move.intro', function() {
-                var hall = d3.select('.node.tag-amenity-townhall');
-                var box = iD.ui.intro.pointBox(context.projection(hall.datum().loc));
+                var box = iD.ui.intro.pointBox(context.projection(hall));
                 reveal(box, 'intro.navigation.select', 0);
             });
         }
