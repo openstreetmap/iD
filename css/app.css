@@ -12,6 +12,13 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
+.unsupported {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 100px;
+    font-size: 16px;
+}
+
 #iD {
     height: 100%;
     width: 100%;

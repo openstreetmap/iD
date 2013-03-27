@@ -5,16 +5,6 @@ iD.ui = function(context) {
         var history = context.history(),
             map = context.map();
 
-        if (!iD.detect().support) {
-            container
-                .text(t('browser_notice'))
-                .style({
-                    'text-align': 'center',
-                    'font-style': 'italic'
-                });
-            return;
-        }
-
         if (iD.detect().opera) container.classed('opera', true);
 
         var hash = iD.behavior.Hash(context);
