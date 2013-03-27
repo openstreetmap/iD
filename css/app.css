@@ -2276,8 +2276,10 @@ div.typeahead a:first-child {
  ----------------------------------------------------- */
 
 .curtain-darkness {
+    pointer-events: all;
     fill-opacity: 0.7;
     fill: #222;
+    fill-rule: evenodd;
 }
 
 .intro-nav-wrap {

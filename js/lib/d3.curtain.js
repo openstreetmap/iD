@@ -4,7 +4,7 @@ d3.curtain = function() {
     var event = d3.dispatch(),
         surface,
         tooltip,
-        mask;
+        darkness;
 
     function curtain(selection) {
 
@@ -21,33 +21,13 @@ d3.curtain = function() {
                 height: window.innerHeight
             });
 
-        var darkness = surface.append('rect')
+        darkness = surface.append('path')
             .attr({
                 x: 0,
                 y: 0,
                 width: window.innerWidth,
                 height: window.innerHeight,
-                'class': 'curtain-darkness',
-                'mask': 'url(#mask)'
-            });
-
-        tooltip = selection.append('div')
-            .attr('class', 'tooltip')
-            .style('z-index', 1002);
-
-        tooltip.append('div').attr('class', 'tooltip-arrow');
-        tooltip.append('div').attr('class', 'tooltip-inner');
-
-        mask = surface.append('defs')
-            .append('mask').attr('id', 'mask');
-
-        var maskrect = mask.append('rect')
-            .style('fill', 'white')
-            .attr({
-                x: 0,
-                y: 0,
-                width: window.innerWidth,
-                height: window.innerHeight
+                'class': 'curtain-darkness'
             });
 
         d3.select(window).on('resize.curtain', function() {
@@ -56,16 +36,18 @@ d3.curtain = function() {
                 height: window.innerHeight
             };
             surface.attr(size);
-            maskrect.attr(size);
-            darkness.attr(size);
         });
 
-    }
+        tooltip = selection.append('div')
+            .attr('class', 'tooltip')
+            .style('z-index', 1002);
 
-    curtain.hide = function() {
+        tooltip.append('div').attr('class', 'tooltip-arrow');
+        tooltip.append('div').attr('class', 'tooltip-inner');
+
         curtain.cut();
-        tooltip.classed('in', false);
-    };
+
+    }
 
     curtain.reveal = function(box, text, tooltipclass, duration) {
         if (typeof box === 'string') box = d3.select(box).node();
@@ -113,41 +95,23 @@ d3.curtain = function() {
         if (duration !== 0) tooltip.call(iD.ui.Toggle(true));
     };
 
-    curtain.cut = function(data, duration) {
+    curtain.cut = function(datum, duration) {
+        darkness.datum(datum);
 
-        data = data ? [data] : [];
-        var cutouts = mask.selectAll('.cutout')
-            .data(data);
+        (duration === 0 ? darkness : darkness.transition().duration(duration || 600))
+            .attr('d', function(d) {
+                var string = "M 0,0 L 0," + window.innerHeight + " L " +
+                    window.innerWidth + "," + window.innerHeight + "L" +
+                    window.innerWidth + ",0 Z";
 
-        var entered = cutouts.enter()
-            .append('rect')
-            .attr({
-                left: function(d) { return d.left + d.width / 2; },
-                top: function(d) { return d.top + d.height/ 2; },
-                width: function(d) { return 0; },
-                height: function(d) { return 0; },
-                fill: 'black',
-                'class': 'cutout'
-            })
-            .style('fill-opacity', 0);
+                if (!d) return string;
+                return string + 'M' +
+                    d.left + ',' + d.top + 'L' +
+                    d.left + ',' + (d.top + d.height) + 'L' +
+                    (d.left + d.width) + ',' + (d.top + d.height) + 'L' +
+                    (d.left + d.width) + ',' + (d.top) + 'Z';
 
-        var all = mask.selectAll('.cutout');
-
-        (duration === 0 ? all : all.transition().duration(duration || 600))
-            .style('fill-opacity', 1)
-            .attr('x', function(d) { return d.left; })
-            .attr('y', function(d) { return d.top; })
-            .attr('width', function(d) { return d.width; })
-            .attr('height', function(d) { return d.height; });
-
-        cutouts.exit().transition()
-            .duration(500)
-            .style('fill-opacity', 0)
-            .attr('x', function(d) { return d.left + d.width / 2; })
-            .attr('y', function(d) { return d.top + d.height / 2; })
-            .attr('width', 0)
-            .attr('height', 0)
-            .remove();
+            });
     };
 
     curtain.remove = function() {
