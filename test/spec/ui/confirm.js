@@ -10,10 +10,13 @@ describe("iD.ui.confirm", function () {
         happen.keydown(document, {keyCode: 27}); // dismiss
     });
 
-    it('can be dismissed', function () {
+    it('can be dismissed', function (done) {
         var confirm = iD.ui.confirm(elem);
         happen.click(confirm.select('button').node());
-        expect(confirm.node().parentNode).to.be.null;
-        happen.keydown(document, {keyCode: 27}); // dismiss
+        window.setTimeout(function() {
+            expect(confirm.node().parentNode).to.be.null;
+            happen.keydown(document, {keyCode: 27}); // dismiss
+            done();
+        }, 300);
     });
 });
