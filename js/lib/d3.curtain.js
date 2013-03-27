@@ -31,11 +31,11 @@ d3.curtain = function() {
             });
 
         d3.select(window).on('resize.curtain', function() {
-            var size = {
+            surface.attr({
                 width: window.innerWidth,
                 height: window.innerHeight
-            };
-            surface.attr(size);
+            });
+            curtain.cut(darkness.datum());
         });
 
         tooltip = selection.append('div')
@@ -82,7 +82,7 @@ d3.curtain = function() {
 
         // pseudo markdown bold text hack
         var parts = text.split('**');
-        var html = '<span>' + parts[0] + '</span>';
+        var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
         if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
         tooltip

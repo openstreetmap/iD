@@ -48,16 +48,18 @@ iD.ui.intro.point = function(context, reveal) {
         function keySearch() {
             var first = d3.select('.grid-button-wrap:first-child');
             if (first.datum().id === 'amenity/cafe') {
-                d3.select('.preset-grid-search').on('keyup.intro', null);
+                d3.select('.preset-grid-search').on('keyup.intro', null).node().blur();
                 reveal(first.select('.grid-entry').node(), 'intro.points.choose');
                 d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
             }
         }
 
         function selectedPreset() {
-            reveal('.grid-pane', 'intro.points.describe');
-            context.history().on('change.intro', closeEditor);
-            context.on('exit.intro', selectPoint);
+            setTimeout(function() {
+                reveal('.tag-wrap', 'intro.points.describe');
+                context.history().on('change.intro', closeEditor);
+                context.on('exit.intro', selectPoint);
+            }, 400);
         }
 
         function closeEditor() {
