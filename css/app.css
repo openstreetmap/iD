@@ -302,11 +302,12 @@ a.hide {
 /* Buttons */
 
 button {
+    text-align: center;
+    font-weight:bold;
     line-height:20px;
     border:0;
     background: white;
     color:#333;
-    font-weight:bold;
     font-size:12px;
     display: inline-block;
     height:40px;
@@ -1053,31 +1054,30 @@ input[type=number] {
 
 /* Preset form radio button */
 
+
 .radio-wrap {
     display: block;
-    box-sizing: border-box;
-    color: #999;
     overflow: hidden;
+    border-radius: 0 0 4px 4px;
 }
 
 .radio-wrap button {
+    text-align: left;
     font-weight: normal;
     padding: 2px 5px;
     height: 30px;
     border-radius: 0;
-    border-right: 1px solid #CCC;
-    width: 22.5%;
+    border-bottom: 1px solid #CCC;
     color: #7092FF;
+    width: 100%;
+}
+
+.radio-wrap button:last-child {
+    border-bottom: 0;
 }
 
 .radio-wrap button.active {
     background-color: #E8EBFF !important;
-}
-
-.radio-wrap button:last-child {
-    border-right: 0;
-    width: 10%;
-    padding: 0;
 }
 
 /* Preset form address */

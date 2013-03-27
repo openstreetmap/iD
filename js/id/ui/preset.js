@@ -109,7 +109,7 @@ iD.ui.preset = function(context, entity, preset) {
             .transition()
             .duration(200)
             .style('padding-top', '20px')
-            .style('max-height', '200px')
+            .style('max-height', '240px')
             .style('opacity', '1');
 
         var label = enter.append('label')
