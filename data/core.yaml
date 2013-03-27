@@ -151,7 +151,7 @@ en:
     reset: reset
   restore:
     heading: You have unsaved changes
-    description: "Do you wish to restore changes from a previous editing session?"
+    description: "Do you wish to restore unsaved changes from a previous editing session?"
     restore: Restore
     reset: Reset
   save:

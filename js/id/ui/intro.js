@@ -4,8 +4,14 @@ iD.ui.intro = function(context) {
 
     function intro(selection) {
 
-        var originalCenter = context.map().center(),
-            originalZoom = context.map().zoom();
+        context.enter(iD.modes.Browse(context));
+
+        // Save current map state
+        var history = context.history().toJSON(),
+            hash = window.location.hash,
+            opacity = d3.select('.layer-layer:first-child').style('opacity'),
+            loadedTiles = context.connection().loadedTiles(),
+            baseEntities = context.history().graph().base().entities;
 
         // Load semi-real data used in intro
         context.connection().toggle(false).flush();
@@ -33,10 +39,11 @@ iD.ui.intro = function(context) {
             enter: function() {
                 curtain.remove();
                 navwrap.remove();
-                d3.select('.layer-layer:first-child').style('opacity', 0.5);
-                context.connection().toggle(true).flush();
-                context.history().reset();
-                context.map().centerZoom(originalCenter, originalZoom);
+                d3.select('.layer-layer:first-child').style('opacity', opacity);
+                context.connection().toggle(false).flush().loadedTiles(loadedTiles);
+                context.history().reset().merge(baseEntities);
+                if (history) context.history().fromJSON(history);
+                window.location.replace(hash);
             }
         });
 

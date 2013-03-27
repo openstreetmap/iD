@@ -260,7 +260,7 @@ describe("iD.History", function () {
     describe("#save", function() {
 
         it("doesn't do anything if it doesn't have the lock", function() {
-            var key = history._getKey('history');
+            var key = history._getKey('saved_history');
             context.storage(key, null);
             history.save();
             expect(context.storage(key)).to.be.undefined;
@@ -275,13 +275,13 @@ describe("iD.History", function () {
             history.lock();
             history.perform(iD.actions.AddEntity(node));
             history.save();
-            var saved = JSON.parse(context.storage(history._getKey('history')));
-            expect(saved[1].entities.n.id).to.eql('n');
+            var saved = JSON.parse(context.storage(history._getKey('saved_history')));
+            expect(saved.stack[1].entities.n.id).to.eql('n');
         });
     });
 
-    describe("#load", function() {
-        it("saves and loads a created and deleted entities", function() {
+    describe("#restore", function() {
+        it("saves and restores a created and deleted entities", function() {
             var node = iD.Node({ id: 'n' }),
                 node2 = iD.Node({ id: 'n2' });
             history.lock();
@@ -291,7 +291,7 @@ describe("iD.History", function () {
             history.save();
             history.reset();
             expect(history.graph().entity('n')).to.be.undefined
-            history.load();
+            history.restore();
             expect(history.graph().entity('n').id).to.equal('n');
             expect(history.graph().entity('n2')).to.be.undefined;
         });

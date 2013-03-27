@@ -29,7 +29,7 @@ iD.ui.Restore = function(context) {
             .attr('class', 'restore col6')
             .text(t('restore.restore'))
             .on('click', function() {
-                context.history().load();
+                context.history().restore();
                 modal.remove();
             });
 

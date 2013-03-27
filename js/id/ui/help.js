@@ -32,6 +32,14 @@ iD.ui.Help = function(context) {
                 .text(function(d) { return d.title; })
                 .on('click', clickHelp);
 
+            toc.append('li')
+                .append('a')
+                .text(t('splash.walkthrough'))
+                .on('click', function() {
+                    d3.select(document.body).call(iD.ui.intro(context));
+                    setVisible(false);
+                });
+
             var content = pane.append('div')
                     .attr('class', 'left-content'),
                 doctitle = content.append('h2')

@@ -316,6 +316,12 @@ iD.Connection = function(context) {
         return connection;
     };
 
+    connection.loadedTiles = function(_) {
+        if (!arguments.length) return loadedTiles;
+        loadedTiles = _;
+        return connection;
+    };
+
     connection.logout = function() {
         oauth.logout();
         event.auth();
