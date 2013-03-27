@@ -40,7 +40,7 @@ iD.ui.intro = function(context) {
                 curtain.remove();
                 navwrap.remove();
                 d3.select('.layer-layer:first-child').style('opacity', opacity);
-                context.connection().toggle(false).flush().loadedTiles(loadedTiles);
+                context.connection().toggle(true).flush().loadedTiles(loadedTiles);
                 context.history().reset().merge(baseEntities);
                 if (history) context.history().fromJSON(history);
                 window.location.replace(hash);
