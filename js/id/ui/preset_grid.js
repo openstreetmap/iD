@@ -190,7 +190,8 @@ iD.ui.PresetGrid = function(context, entity) {
                 }
 
                 var tagReference = iD.ui.TagReference(entity, tag);
-                presetinspect.call(tagReference);
+                presetinspect.style('max-height', '200px')
+                    .call(tagReference);
                 tagReference.show();
             }
 
