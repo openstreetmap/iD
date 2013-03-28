@@ -27,8 +27,7 @@ iD.ui.TagReference = function(entity, tag) {
     }
 
     function tagReference(selection) {
-        wrap = selection.append('div')
-            .attr('class', 'tag-help cf');
+        wrap = selection.classed('tag-help', true);
     }
 
     tagReference.show = function() {
