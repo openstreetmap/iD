@@ -1587,6 +1587,11 @@ img.wiki-image {
     margin-bottom: 20px;
 }
 
+.help-wrap p:last-child {
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 20px;
+}
+
 .help-wrap .left-content .body p code {
     padding:2px 4px;
     background:#eee;
@@ -1624,6 +1629,9 @@ img.wiki-image {
 .help-wrap .nav a {
     width: 50%;
     display: inline-block;
+}
+
+.help-wrap .nav a.previous {
 }
 
 .help-wrap .nav a span {
