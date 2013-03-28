@@ -19,7 +19,8 @@ iD.svg.Midpoints = function(projection) {
                     b = nodes[j + 1],
                     id = [a.id, b.id].sort().join('-');
 
-                if (!midpoints[id]) {
+                // If neither of the nodes changed, no need to redraw midpoint
+                if (!midpoints[id] && (filter(a) || filter(b))) {
                     var loc = iD.geo.interp(a.loc, b.loc, 0.5);
                     if (extent.intersects(loc) && iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
                         midpoints[id] = {
