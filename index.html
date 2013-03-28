@@ -191,16 +191,11 @@
     <body>
         <div id='iD'></div>
         <script>
-            var div = document.getElementById('iD');
-            if (!iD.detect().support) {
-                iD.unsupported(div);
-            } else {
-                iD.data.load(function() {
-                    id = iD();
-                    d3.select(div)
-                        .call(id.ui());
-                })
-            }
+            iD.data.load(function() {
+                id = iD();
+                d3.select("#iD")
+                    .call(id.ui());
+            });
         </script>
     </body>
 </html>

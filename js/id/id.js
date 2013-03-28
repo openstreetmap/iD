@@ -184,13 +184,3 @@ iD.detect = function() {
 
     return browser;
 };
-
-iD.unsupported = function(div) {
-    try {
-        div.innerHTML = t('browser_notice');
-    } catch(e) {
-        div.innerHTML = 'This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. ' +
-            'Please upgrade your browser or use Potlatch 2 to edit the map.';
-    }
-    div.className = 'unsupported';
-};
