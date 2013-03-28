@@ -1323,6 +1323,7 @@ img.wiki-image {
 /* Map Controls */
 
 .map-control {
+    z-index: 100;
     left:0px;
     position:absolute;
 }
@@ -1342,6 +1343,7 @@ img.wiki-image {
 }
 
 .map-overlay {
+    z-index: -1;
     right: 75%;
     max-width: 260px;
     min-width: 210px;
