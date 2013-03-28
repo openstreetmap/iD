@@ -94,15 +94,6 @@ iD.ui.Geocoder = function(context) {
             setVisible(!button.classed('active'));
         }
 
-        function blockClick() {
-            selection.on('mousedown.help-inside', function() {
-                return d3.event.stopPropagation();
-            });
-            selection.on('mousedown.help-inside', function() {
-                return d3.event.stopPropagation();
-            });
-        }
-
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
@@ -117,14 +108,17 @@ iD.ui.Geocoder = function(context) {
                 }
 
                 if (show) {
+                    selection.on('mousedown.geocoder-inside', function() {
+                        return d3.event.stopPropagation();
+                    });
                     gcForm.style('display', 'block')
                         .style('left', '-500px')
                         .transition()
                         .duration(200)
-                        .style('left', '30px')
-                        .each('end', blockClick);
+                        .style('left', '30px');
                         inputNode.node().focus();
                 } else {
+                    selection.on('mousedown.geocoder-inside', null);
                     gcForm.style('display', 'block')
                         .style('left', '30px')
                         .transition()
@@ -133,7 +127,6 @@ iD.ui.Geocoder = function(context) {
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });
-                    selection.on('mousedown.background-inside', null);
                     inputNode.node().blur();
                 }
             }

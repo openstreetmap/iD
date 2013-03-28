@@ -140,27 +140,20 @@ iD.ui.Background = function(context) {
             content.selectAll('.toggle-list li:first-child a').node().focus();
         }
 
-        function blockClick() {
-            selection.on('mousedown.help-inside', function() {
-                return d3.event.stopPropagation();
-            });
-            selection.on('mousedown.help-inside', function() {
-                return d3.event.stopPropagation();
-            });
-        }
-
         function setVisible(show) {
             if (show !== shown) {
                 button.classed('active', show);
                 shown = show;
 
                 if (show) {
+                    selection.on('mousedown.background-inside', function() {
+                        return d3.event.stopPropagation();
+                    });
                     content.style('display', 'block')
                         .style('left', '-500px')
                         .transition()
                         .duration(200)
-                        .style('left', '30px')
-                        .each('end', blockClick);
+                        .style('left', '30px');
                 } else {
                     content.style('display', 'block')
                         .style('left', '30px')
@@ -227,7 +220,7 @@ iD.ui.Background = function(context) {
 
         gpxLayerItem.call(bootstrap.tooltip()
             .title(t('gpx.drag_drop'))
-            .placement('right'))
+            .placement('right'));
 
         gpxLayerItem.append('span')
             .text(t('gpx.local_layer'));
