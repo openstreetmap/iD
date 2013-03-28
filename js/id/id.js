@@ -168,7 +168,7 @@ iD.detect = function() {
     // Added due to incomplete svg style support. See #715
     browser.opera = ua.indexOf('Opera') >= 0;
 
-    browser.locale = navigator.language;
+    browser.locale = navigator.language || navigator.userLanguage;
 
     browser.filedrop = (window.FileReader && 'ondrop' in window);
 
