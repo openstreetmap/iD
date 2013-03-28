@@ -32,19 +32,20 @@ iD.ui.intro.startEditing = function(context, reveal) {
 
             modal.selectAll('.close').remove();
 
-            modal.select('.content')
-                .append('div')
-                    .attr('class', 'fillL')
-                    .append('div')
-                        .attr('class','modal-section')
-                        .append('button')
-                            .attr('class', 'huge-modal-button')
-                            .on('click', function() {
+            var startbutton = modal.select('.content')
+                .attr('class', 'fillL')
+                    .append('button')
+                        .attr('class', 'modal-section huge-modal-button')
+                        .on('click', function() {
                                 event.startEditing();
                                 modal.remove();
-                            })
-                            .append('h2')
-                                .text(t('intro.startediting.start'));
+                        });
+
+                startbutton.append('div')
+                    .attr('class','illustration');
+                startbutton.append('h2')
+                    .text(t('intro.startediting.start'));
+
         }, 7500);
     };
 
