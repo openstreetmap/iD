@@ -15,13 +15,16 @@ iD.ui.intro = function(context) {
 
         // Load semi-real data used in intro
         context.connection().toggle(false).flush();
-        context.history().reset();
+        context.history().save().reset();
         context.history().merge(iD.Graph().load(JSON.parse(iD.introGraph)).entities);
 
         // Block saving
         var savebutton = d3.select('#bar button.save'),
             save = savebutton.on('click');
         savebutton.on('click', null);
+
+        var beforeunload = window.onbeforeunload;
+        window.onbeforeunload = null;
 
         d3.select('.layer-layer:first-child').style('opacity', 1);
 
@@ -52,6 +55,7 @@ iD.ui.intro = function(context) {
             context.history().reset().merge(baseEntities);
             if (history) context.history().fromJSON(history);
             window.location.replace(hash);
+            window.onbeforeunload = beforeunload;
             d3.select('#bar button.save').on('click', save);
         });
 
