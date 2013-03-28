@@ -69,49 +69,10 @@ iD.ui.Geocoder = function(context) {
             if (map.zoom() > 19) map.zoom(19);
         }
 
-        function hide() { setVisible(false); }
-        function toggle() {
-            if (d3.event) d3.event.preventDefault();
-            tooltip.hide(button);
-            setVisible(gcForm.classed('hide'));
-        }
-
-        function setVisible(show) {
-            if (show !== shown) {
-                button.classed('active', show);
-                gcForm.call(iD.ui.Toggle(show));
-                if (!show && !resultsList.classed('hide')) {
-                    resultsList.call(iD.ui.Toggle(show));
-                    // remove results so that they lose focus. if the user has
-                    // tabbed into the list, then they will have focus still,
-                    // even if they're hidden.
-                    resultsList.selectAll('span').remove();
-                }
-                if (show) inputNode.node().focus();
-                else inputNode.node().blur();
-                shown = show;
-
-                if (show) {
-                    selection.on('mousedown.geocoder-inside', function() {
-                        return d3.event.stopPropagation();
-                    });
-                } else {
-                    selection.on('mousedown.geocoder-inside', null);
-                }
-            }
-        }
         var tooltip = bootstrap.tooltip()
             .placement('right')
             .html(true)
             .title(iD.ui.tooltipHtml(t('geocoder.title'), key));
-
-        var button = selection.append('button')
-            .attr('tabindex', -1)
-            .on('click', toggle)
-            .call(tooltip);
-
-        button.append('span')
-            .attr('class', 'icon geocode light');
 
         var gcForm = selection.append('form');
 
@@ -124,16 +85,75 @@ iD.ui.Geocoder = function(context) {
         var resultsList = selection.append('div')
             .attr('class', 'fillL map-overlay hide');
 
-        context.surface().on('mousedown.geocoder-outside', hide);
-        context.container().on('mousedown.b.geocoder-outside', hide);
-
         var keybinding = d3.keybinding('geocoder');
+
+        function hide() { setVisible(false); }
+        function toggle() {
+            if (d3.event) d3.event.preventDefault();
+            tooltip.hide(button);
+            setVisible(!button.classed('active'));
+        }
+
+        function blockClick() {
+            selection.on('mousedown.help-inside', function() {
+                return d3.event.stopPropagation();
+            });
+            selection.on('mousedown.help-inside', function() {
+                return d3.event.stopPropagation();
+            });
+        }
+
+        function setVisible(show) {
+            if (show !== shown) {
+                button.classed('active', show);
+                shown = show;
+
+                if (!show && !resultsList.classed('hide')) {
+                    resultsList.call(iD.ui.Toggle(show));
+                    // remove results so that they lose focus. if the user has
+                    // tabbed into the list, then they will have focus still,
+                    // even if they're hidden.
+                    resultsList.selectAll('span').remove();
+                }
+
+                if (show) {
+                    gcForm.style('display', 'block')
+                        .style('left', '-500px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '30px')
+                        .each('end', blockClick);
+                        inputNode.node().focus();
+                } else {
+                    gcForm.style('display', 'block')
+                        .style('left', '30px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '-500px')
+                        .each('end', function() {
+                            d3.select(this).style('display', 'none');
+                        });
+                    selection.on('mousedown.background-inside', null);
+                    inputNode.node().blur();
+                }
+            }
+        }
+        var button = selection.append('button')
+            .attr('tabindex', -1)
+            .on('click', toggle)
+            .call(tooltip);
+
+        button.append('span')
+            .attr('class', 'icon geocode light');
 
         keybinding.on(key, toggle);
 
         d3.select(document)
             .call(keybinding);
-    }
 
+        context.surface().on('mousedown.geocoder-outside', hide);
+        context.container().on('mousedown.b.geocoder-outside', hide);
+
+    }
     return geocoder;
 };

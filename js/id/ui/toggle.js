@@ -4,7 +4,8 @@
 // value actually changes between calls.
 iD.ui.Toggle = function(show, callback) {
     return function(selection) {
-        selection.style('opacity', show ? 0 : 1)
+        selection
+            .style('opacity', show ? 0 : 1)
             .classed('hide', false)
             .transition()
             .style('opacity', show ? 1 : 0)

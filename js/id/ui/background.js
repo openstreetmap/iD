@@ -18,28 +18,6 @@ iD.ui.Background = function(context) {
 
     function background(selection) {
 
-        function toggle() {
-            tooltip.hide(button);
-            setVisible(content.classed('hide'));
-            content.selectAll('.toggle-list li:first-child a').node().focus();
-        }
-
-        function setVisible(show) {
-            if (show !== shown) {
-                button.classed('active', show);
-                content.call(iD.ui.Toggle(show));
-                shown = show;
-
-                if (show) {
-                    selection.on('mousedown.background-inside', function() {
-                        return d3.event.stopPropagation();
-                    });
-                } else {
-                    selection.on('mousedown.background-inside', null);
-                }
-            }
-        }
-
         function setOpacity(d) {
             context.map().layersurface.selectAll('.layer-layer')
                 .filter(function(d) { return d == context.map().layers[0]; })
@@ -152,10 +130,54 @@ iD.ui.Background = function(context) {
             tooltip = bootstrap.tooltip()
                 .placement('right')
                 .html(true)
-                .title(iD.ui.tooltipHtml(t('background.description'), key)),
-            button = selection.append('button')
+                .title(iD.ui.tooltipHtml(t('background.description'), key));
+
+        function hide() { setVisible(false); }
+        function toggle() {
+            if (d3.event) d3.event.preventDefault();
+            tooltip.hide(button);
+            setVisible(!button.classed('active'));
+            content.selectAll('.toggle-list li:first-child a').node().focus();
+        }
+
+        function blockClick() {
+            selection.on('mousedown.help-inside', function() {
+                return d3.event.stopPropagation();
+            });
+            selection.on('mousedown.help-inside', function() {
+                return d3.event.stopPropagation();
+            });
+        }
+
+        function setVisible(show) {
+            if (show !== shown) {
+                button.classed('active', show);
+                shown = show;
+
+                if (show) {
+                    content.style('display', 'block')
+                        .style('left', '-500px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '30px')
+                        .each('end', blockClick);
+                } else {
+                    content.style('display', 'block')
+                        .style('left', '30px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '-500px')
+                        .each('end', function() {
+                            d3.select(this).style('display', 'none');
+                        });
+                    selection.on('mousedown.background-inside', null);
+                }
+            }
+        }
+
+        var button = selection.append('button')
                 .attr('tabindex', -1)
-                .on('click.background-toggle', toggle)
+                .on('click', toggle)
                 .call(tooltip),
             opa = content
                 .append('div')
@@ -167,14 +189,6 @@ iD.ui.Background = function(context) {
 
         opa.append('h4')
             .text(t('background.title'));
-
-        context.surface().on('mousedown.background-outside', function() {
-            setVisible(false);
-        });
-
-        context.container().on('mousedown.background-outside', function() {
-            setVisible(false);
-        });
 
         var opacityList = opa.append('ul')
             .attr('class', 'opacity-options');
@@ -276,6 +290,10 @@ iD.ui.Background = function(context) {
 
         d3.select(document)
             .call(keybinding);
+
+        context.surface().on('mousedown.background-outside', hide);
+        context.container().on('mousedown.background-outside', hide);
+
     }
 
     return background;
