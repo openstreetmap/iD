@@ -7,7 +7,12 @@ iD.Connection = function(context) {
         keys,
         inflight = {},
         loadedTiles = {},
-        oauth = iD.OAuth(context).url(url),
+        loadingModal,
+        oauth = osmAuth({
+            url: url,
+            loading: authLoading,
+            done: authDone
+        }),
         ndStr = 'nd',
         tagStr = 'tag',
         memberStr = 'member',
@@ -26,6 +31,15 @@ iD.Connection = function(context) {
         }
         return d3.xml(url).get().on('load', done);
     };
+
+    function authLoading() {
+        loadingModal = iD.ui.loading(context.container(),
+            t('loading_auth'));
+    }
+
+    function authDone() {
+        if (loadingModal) loadingModal.remove();
+    }
 
     function getNodes(obj) {
         var elems = obj.getElementsByTagName(ndStr),
