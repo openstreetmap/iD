@@ -1834,6 +1834,12 @@ img.wiki-image {
     display: inline-block;
 }
 
+.modal-actions a {
+    /* `button` elements have box-algin: auto, need
+    compensate this for `a`*/
+    padding-top: 25px;
+}
+
 .modal-actions button:hover,
 .modal-actions a:hover {
     background-color: #ececec;
@@ -1848,7 +1854,6 @@ img.wiki-image {
     height: 100px;
     width: 100px;
     margin: auto;
-    margin-top: 30px;
     margin-bottom: 10px;
     background:transparent url(../img/sprite.png) no-repeat 0 -220px;
 }
