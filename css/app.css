@@ -214,7 +214,6 @@ ul li { list-style: none;}
 
 ul.toggle-list {
     border-radius: 4px;
-    overflow: hidden;
     border: 1px solid #CCC;
     margin-bottom: 10px;
 }
@@ -230,6 +229,15 @@ ul.toggle-list li a {
 
 ul.toggle-list li:first-child a {
     border-top: 0;
+    border-radius: 3px 3px 0 0;
+}
+
+ul.toggle-list li:last-child a {
+    border-radius: 0 0 3px 3px;
+}
+
+ul.toggle-list li:only-child a {
+    border-radius: 3px;
 }
 
 ul.toggle-list li a:hover { background-color: #ececec;}
