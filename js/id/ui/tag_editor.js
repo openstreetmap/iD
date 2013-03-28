@@ -21,7 +21,9 @@ iD.ui.TagEditor = function(context, entity) {
             preset = newpreset;
         }
 
-        selection.html('');
+        selection
+            .datum(preset)
+            .html('');
 
         var messagewrap = selection.append('div')
             .attr('class', 'header fillL cf');
@@ -52,9 +54,8 @@ iD.ui.TagEditor = function(context, entity) {
         editorwrap.append('div')
             .attr('class', 'col12 inspector-inner preset-icon-wrap fillL3')
             .append('div')
-                .attr('class','fillL')
-                .append('span')
-                    .attr('class', geometry + ' preset-icon icon feature-' + icon);
+            .attr('class','fillL')
+            .call(iD.ui.PresetIcon(context.geometry(entity.id)));
 
         presetUI = iD.ui.preset(context, entity, preset)
             .on('change', changeTags)

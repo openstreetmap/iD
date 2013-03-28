@@ -675,13 +675,15 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     background: #ececec;
 }
 
-.grid-entry > .icon {
+.preset-icon {
     position: absolute;
-    top: 30px;left: 0px; right: 0px;
+    top: 30px;
+    left: 0px;
+    right: 0px;
     margin: auto;
 }
 
-.inspector-body-line .grid-entry > .icon {
+.preset-icon-line {
     top: 15px;
     left: -10px;
     right: -10px;
@@ -863,7 +865,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-bottom-color: #CCC;
 }
 
-.tag-wrap .preset-icon-wrap div {
+.tag-wrap .preset-icon-wrap > div {
     height: 80px;
     width: 33.3333%;
     width: -webkit-calc(33.3333% - 10px);
@@ -872,18 +874,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     border-radius: 4px;
     border: 1px solid #CCC;
     position: relative;
-}
-
-.tag-wrap .preset-icon-wrap .preset-icon {
-    position: absolute;
-    top: 30px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-}
-
-.tag-wrap .preset-icon-wrap .preset-icon.line {
-    top: 15px;
 }
 
 .inspector-preset .form-field {
