@@ -94,7 +94,7 @@ iD.ui.Taglist = function(context, entity) {
 
         row.append('button')
             .attr('tabindex', -1)
-            .attr('class', 'tag-help minor')
+            .attr('class', 'tag-help-button minor')
             .on('click', function(tag) {
                 tags.forEach(function(other) {
                     if (other.key === tag.key) {
