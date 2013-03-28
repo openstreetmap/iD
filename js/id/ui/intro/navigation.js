@@ -62,9 +62,10 @@ iD.ui.intro.navigation = function(context, reveal) {
             if (mode.id !== 'select') return;
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
-            set(function() { reveal('.header', 'intro.navigation.header'); }, 700);
-            set(function() { reveal('.tag-wrap', 'intro.navigation.pane'); }, 4000);
-            set(event.done, 7000);
+            set(function() {
+                reveal('.tag-pane', 'intro.navigation.pane');
+                context.on('exit.intro', event.done);
+            }, 700);
         }
 
     };
@@ -72,6 +73,7 @@ iD.ui.intro.navigation = function(context, reveal) {
     step.exit = function() {
         context.map().on('move.intro', null);
         context.on('enter.intro', null);
+        context.on('exit.intro', null);
         timeouts.forEach(window.clearTimeout);
     };
 

@@ -1461,7 +1461,7 @@ locale.en = {
             "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
             "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
             "header": "The header shows us the feature type.",
-            "pane": "The main pane shows the feature's attributes, such as its name and address."
+            "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor with the close button in the top right.**"
         },
         "points": {
             "add": "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**",
@@ -1490,7 +1490,8 @@ locale.en = {
             "finish": "Lines can be finished by clicking on the last point again. **Finish drawing the road.**",
             "road": "**Select Road from the grid**",
             "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
-            "describe": "**Name the road and close the feature editor.**"
+            "describe": "**Name the road and close the feature editor.**",
+            "restart": "The road needs to intersect Flower Street."
         },
         "startediting": {
             "help": "More documentation and this walkthrough are available here.",
