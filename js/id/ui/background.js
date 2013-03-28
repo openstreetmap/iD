@@ -148,7 +148,7 @@ iD.ui.Background = function(context) {
         }
 
         var content = selection.append('div')
-                .attr('class', 'content fillD map-overlay hide'),
+                .attr('class', 'fillL map-overlay hide'),
             tooltip = bootstrap.tooltip()
                 .placement('right')
                 .html(true)
@@ -200,32 +200,35 @@ iD.ui.Background = function(context) {
 
         var layerList = content
             .append('ul')
-            .attr('class', 'toggle-list fillL');
+            .attr('class', 'toggle-list');
 
         var gpxLayerItem = content
             .append('ul')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
-            .attr('class', 'toggle-list fillL')
+            .attr('class', 'toggle-list')
             .append('li')
             .append('a')
             .classed('layer-toggle-gpx', true)
-            .call(bootstrap.tooltip()
-                .title(t('gpx.drag_drop'))
-                .placement('right'))
             .on('click.set-gpx', clickGpx);
+
+        gpxLayerItem.call(bootstrap.tooltip()
+            .title(t('gpx.drag_drop'))
+            .placement('right'))
 
         gpxLayerItem.append('span')
             .text(t('gpx.local_layer'));
 
         gpxLayerItem
-            .append('a')
-            .attr('class', 'icon geocode layer-extent')
+            .append('button')
+            .attr('class', 'minor layer-extent')
             .on('click', function() {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
                 context.map()
-                    .extent(d3.geo.bounds(context.map().layers[1].geojson()));
-            });
+                    .extent(d3.geo.bounds(context.map().layers[1].geojson()))
+            })
+            .append('span')
+                .attr('class', 'icon geocode' );
 
         var adjustments = content
             .append('div')

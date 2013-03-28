@@ -212,13 +212,24 @@ table.tags, table.tags td, table.tags th {
 
 ul li { list-style: none;}
 
+ul.toggle-list {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #CCC;
+    margin-bottom: 10px;
+}
+
 ul.toggle-list li a {
+    position: relative;
     padding: 5px 10px;
     display:block;
     border-top: 1px solid #ccc;
     white-space:nowrap;
     text-overflow:ellipsis;
-    overflow:hidden;
+}
+
+ul.toggle-list li:first-child a {
+    border-top: 0;
 }
 
 ul.toggle-list li a:hover { background-color: #ececec;}
@@ -1361,9 +1372,9 @@ img.wiki-image {
     max-width: 260px;
     min-width: 210px;
     position: fixed;
-    left: 40px;
+    left: 30px;
     display: block;
-    border-radius: 4px;
+    padding: 10px;
 }
 
 /* Zoomer */
@@ -1387,21 +1398,19 @@ img.wiki-image {
     border-radius:0 4px 0 0;
 }
 
-.nudge-container {
-    margin-top: 10px;
+.background-control button.active {
+    border-radius: 0;
 }
 
-.background-control .adjustments {
-    padding: 10px;
+.nudge-container {
+    border-top: 1px solid #CCC;
+    margin: 10px -10px -10px -10px;
 }
 
 .background-control .adjustments button {
-    height:30px;
-    font-size:10px;
-    padding:0 5px 3px 5px;
     background: white;
     text-transform: uppercase;
-    font-weight: bold;
+    border-color: #CCC;
 }
 
 .background-control .adjustments button:hover {
@@ -1485,10 +1494,6 @@ img.wiki-image {
     border-radius: 0 4px 4px 0;
 }
 
-.opacity-options-wrapper {
-    padding: 10px 10px 0 10px;
-}
-
 .opacity-options {
     background: url(../img/background-pattern-opacity.png) 0 0 repeat;
     height:20px;
@@ -1533,8 +1538,7 @@ img.wiki-image {
 }
 
 .background-control .layer-toggle-gpx .layer-extent {
-    float: right;
-    border: 0;
+    border-left: 1px solid #CCC;
 }
 
 .background-control .layer-toggle-gpx.selected .layer-extent {
@@ -1548,23 +1552,24 @@ img.wiki-image {
 }
 
 .geocode-control form {
-    padding: 4px;
+    padding: 5px;
 }
 
 .geocode-control input {
     width: 100%;
 }
 
-.geocode-control div.content {
+.geocode-control div.map-overlay {
+    border-top: 1px solid #CCC;
     z-index: 100;
-    top: 200px;
     max-height: 300px;
     overflow-y: auto;
+    padding: 0;
 }
 
-.geocode-control div.content span {
+.geocode-control div.map-overlay span {
     display: inline-block;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #CCC;
     padding: 5px 10px;
 }
 
@@ -1957,10 +1962,6 @@ div.typeahead a:first-child {
 }
 
 .commit-modal .warning-section .changeset-list button {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
     border-left: 1px solid #CCC;
 }
 

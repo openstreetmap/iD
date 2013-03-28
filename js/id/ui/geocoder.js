@@ -115,14 +115,14 @@ iD.ui.Geocoder = function(context) {
 
         var gcForm = selection.append('form');
 
-        var inputNode = gcForm.attr('class', 'content fillL map-overlay hide')
+        var inputNode = gcForm.attr('class', 'fillL map-overlay hide')
             .append('input')
             .attr({ type: 'text', placeholder: t('geocoder.placeholder') })
             .attr('tabindex', 1)
             .on('keydown', keydown);
 
         var resultsList = selection.append('div')
-            .attr('class', 'content fillD map-overlay hide');
+            .attr('class', 'fillL map-overlay hide');
 
         context.surface().on('mousedown.geocoder-outside', hide);
         context.container().on('mousedown.b.geocoder-outside', hide);
