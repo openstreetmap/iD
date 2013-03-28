@@ -1289,6 +1289,10 @@ div.combobox {
     position: relative;
 }
 
+.tag-help {
+    overflow: hidden;
+}
+
 .grid-pane .tag-reference-wrap {
     padding: 10px 0 20px 0;
 }
