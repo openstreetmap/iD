@@ -72,6 +72,7 @@ iD.ui.Help = function(context) {
                 .on('click', clickHelp);
 
             toc.append('li')
+                .attr('class','walkthrough')
                 .append('a')
                 .text(t('splash.walkthrough'))
                 .on('click', function() {

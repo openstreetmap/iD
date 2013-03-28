@@ -1618,9 +1618,16 @@ img.wiki-image {
     border-radius: 4px 4px 0 0;
 }
 
-.help-wrap .toc li:last-child a {
+.help-wrap .toc li:nth-last-child(2) a {
     border-bottom: 1px solid #CCC;
     border-radius: 0 0 4px 4px
+}
+
+.help-wrap .toc li.walkthrough a {
+    overflow: hidden;
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .help-wrap .nav {
@@ -1820,7 +1827,8 @@ img.wiki-image {
             transition: all 200ms;
 }
 
-.modal-actions button:before {
+.modal-actions button:before,
+.walkthrough a:before {
     display: block;
     content: '';
     height: 100px;
@@ -1855,7 +1863,8 @@ img.wiki-image {
 /* Splash Modal
 ------------------------------------------------------- */
 
-.modal-actions button.walkthrough:before {
+.modal-actions button.walkthrough:before,
+.walkthrough a:before {
     background-position: -200px -220px;
 }
 
@@ -2196,6 +2205,7 @@ img.wiki-image {
   .intro-points-add .tooltip-inner::before,
   .intro-areas-add .tooltip-inner::before,
   .intro-lines-add .tooltip-inner::before,
+  .walkthrough a:before,
   .preset-icon-fill.area,
   .modal-actions button:before,
   .map-control .icon,

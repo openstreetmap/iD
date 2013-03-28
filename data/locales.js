@@ -204,8 +204,8 @@ locale.en = {
     "splash": {
         "welcome": "Welcome to the iD OpenStreetMap editor",
         "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is development version {version}. For more information see {website} and report bugs at {github}.",
-        "walkthrough": "Start the walkthrough",
-        "start": "Edit now"
+        "walkthrough": "Start the Walkthrough",
+        "start": "Edit Now"
     },
     "source_switch": {
         "live": "live",
