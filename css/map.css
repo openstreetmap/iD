@@ -758,6 +758,7 @@ text {
 
 marker#oneway-marker path {
     fill:#000;
+    opacity: .5;
 }
 
 text.tag-oneway {

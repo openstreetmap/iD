@@ -866,7 +866,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .tag-wrap .preset-icon-wrap > div {
-    height: 80px;
+    height: 90px;
     width: 33.3333%;
     width: -webkit-calc(33.3333% - 10px);
     width: calc(33.3333% - 10px);
