@@ -951,8 +951,34 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 button.preset-add-field {
-    width: 16.6666%;
+    width: 25%;
     height: 40px;
+}
+
+/* set width based on # of buttons */
+button.preset-add-field:nth-last-child(4),
+button.preset-add-field:nth-last-child(4) ~ button.preset-add-field {
+    width: 25%;
+}
+
+button.preset-add-field:nth-last-child(5),
+button.preset-add-field:nth-last-child(5) ~ button.preset-add-field {
+    width: 20%;
+}
+
+button.preset-add-field:nth-last-child(6),
+button.preset-add-field:nth-last-child(6) ~ button.preset-add-field {
+    width: 16.6666%;
+}
+
+button.preset-add-field:nth-last-child(7),
+button.preset-add-field:nth-last-child(7) ~ button.preset-add-field {
+    width: 14.2857%;
+}
+
+button.preset-add-field:nth-last-child(8),
+button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
+    width: 12.5%;
 }
 
 .preset-add-field .tooltip.top .tooltip-arrow {
