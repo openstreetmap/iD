@@ -113,6 +113,10 @@ strong {
 
 a:visited, a {
     color: #7092ff;
+    -webkit-transition: all 100ms;
+       -moz-transition: all 100ms;
+         -o-transition: all 100ms;
+            transition: all 100ms;
 }
 
 a:hover {
@@ -1818,61 +1822,68 @@ img.wiki-image {
     text-align: center;
 }
 
-.modal-actions button {
+.modal-actions button,
+.modal-actions a {
+    background-size: white;
     font-weight: normal;
     color: #7092FF;
     border-bottom: 1px solid #CCC;
     border-radius: 0;
     height: 180px;
     text-align: center;
-    -webkit-transition: all 200ms;
-       -o-transition: all 200ms;
-       -moz-transition: all 200ms;
-            transition: all 200ms;
+    display: inline-block;
 }
 
+.modal-actions button:hover,
+.modal-actions a:hover {
+    background-color: #ececec;
+}
+
+.modal-actions a:before,
 .modal-actions button:before,
 .walkthrough a:before {
+    background-size: white;
     display: block;
     content: '';
     height: 100px;
     width: 100px;
     margin: auto;
+    margin-top: 30px;
     margin-bottom: 10px;
     background:transparent url(../img/sprite.png) no-repeat 0 -220px;
 }
 
-.modal-actions button:first-child {
+.modal-actions :first-child {
     border-right: 1px solid #CCC;
 }
 
 /* Restore Modal
 ------------------------------------------------------- */
 
-.modal-actions button.restore:before {
+.modal-actions .restore:before {
     background-position: -400px -220px;
 }
 
-.modal-actions button.reset:before {
+.modal-actions .reset:before {
     background-position: -500px -220px;
 }
 
 /* Success Modal
 ------------------------------------------------------- */
 
-.modal-actions button.twitter:before {
+.modal-actions .twitter:before {
     background-position: -100px -220px;
 }
 
 /* Splash Modal
 ------------------------------------------------------- */
 
-.modal-actions button.walkthrough:before,
+.modal-actions .walkthrough:before,
 .walkthrough a:before {
     background-position: -200px -220px;
 }
 
-.modal-actions button.start:before {
+.modal-actions .start:before {
     background-position: -300px -220px;
 }
 

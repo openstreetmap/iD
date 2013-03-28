@@ -18,7 +18,7 @@ iD.ui.Success = function(connection) {
 
         var links = body.append('div').attr('class','modal-actions cf');
 
-        links.append('button')
+        links.append('a')
             .attr('class','col6 osm')
             .attr('target', '_blank')
             .attr('href', function() {
@@ -26,7 +26,7 @@ iD.ui.Success = function(connection) {
             })
             .text(t('view_on_osm'));
 
-        links.append('button')
+        links.append('a')
             .attr('class','col6 twitter')
             .attr('target', '_blank')
             .attr('href', function() {
