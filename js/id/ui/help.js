@@ -15,6 +15,7 @@ iD.ui.Help = function(context) {
                 .attr('class', 'toc');
 
             function clickHelp(d, i) {
+                pane.property('scrollTop', 0);
                 doctitle.text(d.title);
                 body.html(d.html);
                 body.selectAll('a')
