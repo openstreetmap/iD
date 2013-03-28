@@ -115,7 +115,7 @@ iD.ui.Geocoder = function(context) {
 
         var gcForm = selection.append('form');
 
-        var inputNode = gcForm.attr('class', 'fillL map-overlay hide')
+        var inputNode = gcForm.attr('class', 'fillL map-overlay content hide')
             .append('input')
             .attr({ type: 'text', placeholder: t('geocoder.placeholder') })
             .attr('tabindex', 1)

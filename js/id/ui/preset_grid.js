@@ -47,9 +47,6 @@ iD.ui.PresetGrid = function(context, entity) {
 
         grid.call(drawGrid, defaultLimit);
 
-        var searchwrap = selection.append('div')
-            .attr('class', 'preset-grid-search-wrap inspector-inner');
-
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
@@ -92,8 +89,11 @@ iD.ui.PresetGrid = function(context, entity) {
             }
         }
 
+        var searchwrap = selection.append('div')
+            .attr('class', 'preset-grid-search-wrap');
+
         var search = searchwrap.append('input')
-            .attr('class', 'preset-grid-search major')
+            .attr('class', 'major')
             .attr('placeholder','Search')
             .attr('type', 'search')
             .on('keydown', keydown)

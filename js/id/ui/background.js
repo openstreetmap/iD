@@ -148,7 +148,7 @@ iD.ui.Background = function(context) {
         }
 
         var content = selection.append('div')
-                .attr('class', 'fillL map-overlay hide'),
+                .attr('class', 'fillL map-overlay content hide'),
             tooltip = bootstrap.tooltip()
                 .placement('right')
                 .html(true)

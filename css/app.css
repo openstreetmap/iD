@@ -742,28 +742,21 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     top: 3px;
 }
 
-.preset-grid-search-wrap {
-    border-bottom: 1px solid #ccc;
-}
-
 .preset-grid-search-wrap .icon {
     display: block;
     position: absolute;
     left: 10px;
-    top: 20px;
+    top: 80px;
     pointer-events: none;
 }
 
 .preset-grid-search-wrap input {
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: 0;
-    border: 0;
-    text-indent: 30px;
-    height: 100%;
     position: absolute;
+    top: 60px;
+    border-radius: 0;
+    border-width: 0;
+    border-bottom-width: 1px;
+    text-indent: 30px;
 }
 
 .preset-search-result {
