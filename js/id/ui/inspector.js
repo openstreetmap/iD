@@ -22,13 +22,16 @@ iD.ui.Inspector = function(context, entity) {
     }
 
     function inspector(selection) {
+
+        var reselect = selection.html();
+
         selection
             .html('')
             .style('display', 'block')
             .style('right', '-500px')
             .style('opacity', 1)
             .transition()
-            .duration(200)
+            .duration(reselect ? 0 : 200)
             .style('right', '0px');
 
         var panewrap = selection
