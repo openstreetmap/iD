@@ -9,13 +9,13 @@
         "highway/primary",
         "highway/secondary",
         "highway/tertiary",
-        "highway/unclassified",
+        "highway/service",
         "highway/motorway_link",
         "highway/trunk_link",
         "highway/primary_link",
         "highway/secondary_link",
         "highway/tertiary_link",
-        "highway/service",
+        "highway/unclassified",
         "highway/track",
         "highway/road"
     ]
