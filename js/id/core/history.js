@@ -217,9 +217,10 @@ iD.History = function(context) {
         },
 
         save: function() {
-            if (!lock) return;
+            if (!lock) return history;
             context.storage(getKey('lock'), null);
             context.storage(getKey('saved_history'), this.toJSON() || null);
+            return history;
         },
 
         clearSaved: function() {

@@ -2355,16 +2355,6 @@ div.typeahead a:first-child {
     padding: 20px;
 }
 
-.curtain-tooltip.left .tooltip-arrow,
-.curtain-tooltip.right .tooltip-arrow {
-    top: -5px;
-}
-
-.curtain-tooltip.right .tooltip-inner,
-.curtain-tooltip.left .tooltip-inner {
-    margin-top: -30%;
-}
-
 .curtain-tooltip .tooltip-inner {
     font-size: 15px;
 }
@@ -2383,6 +2373,10 @@ div.typeahead a:first-child {
     border: 0;
     padding: 0;
     margin: 0;
+}
+
+.curtain-tooltip.intro-points-describe {
+    top: 133px !important;
 }
 
 /* Tooltip illustrations */
