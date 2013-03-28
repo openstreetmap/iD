@@ -3,15 +3,12 @@
         "building",
         "leisure/park",
         "natural/water",
-        "amenity/parking",
         "amenity/hospital",
         "amenity/place_of_worship",
         "amenity/cafe",
         "amenity/restaurant",
         "amenity/bar",
-        "amenity/fast_food",
-        "amenity/bank",
-        "other"
+        "other_area"
     ],
     "line": [
         "Road",
@@ -22,16 +19,13 @@
         "other"
     ],
     "point": [
-        "highway/bus_stop",
         "leisure/park",
         "amenity/hospital",
         "amenity/place_of_worship",
         "amenity/cafe",
         "amenity/restaurant",
         "amenity/bar",
-        "amenity/fast_food",
         "amenity/bank",
-        "amenity/cinema",
         "shop/supermarket",
         "other"
     ],
