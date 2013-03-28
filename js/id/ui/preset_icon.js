@@ -3,12 +3,8 @@ iD.ui.PresetIcon = function(geometry) {
         selection.append('div')
             .attr('class', function(preset) {
                 var s = 'preset-icon-fill ' + geometry;
-                if (preset.members) {
-                    s += 'category';
-                } else {
-                    for (var i in preset.tags) {
-                        s += ' tag-' + i + ' tag-' + i + '-' + preset.tags[i];
-                    }
+                for (var i in preset.tags) {
+                    s += ' tag-' + i + ' tag-' + i + '-' + preset.tags[i];
                 }
                 return s;
             });
