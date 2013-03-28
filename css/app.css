@@ -927,18 +927,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     height: 65px;
 }
 
-.form-field-levels label,
-.form-field-elevation label,
-.form-field.checkselect label {
-    margin-right: 50%;
-}
-
-.form-field-levels input,
-.form-field-elevation input,
-.form-field.checkselect input {
-    width: 50%;
-}
-
 .form-field-name input {
     height: 35px;
     font-size: 18px;
