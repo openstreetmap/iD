@@ -33,7 +33,7 @@ body {
 
 .spinner {
     opacity: .5;
-    z-index: 10;
+    z-index: 2;
     position: relative;
 }
 
@@ -46,7 +46,6 @@ body {
     margin: auto;
     border-radius: 4px;
     background: black;
-    pointer-events:none;
 }
 
 div, textarea, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5 {
