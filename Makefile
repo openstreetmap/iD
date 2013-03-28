@@ -27,15 +27,13 @@ data/data.js: $(DATA_FILES)
 	js/lib/d3.curtain.js \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
-	js/lib/ohauth.js \
+	js/lib/osmauth.js \
 	js/lib/rtree.js \
-	js/lib/sha.js \
 	js/lib/togeojson.js \
 	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
 	js/id/connection.js \
-	js/id/oauth.js \
 	js/id/services/*.js \
 	data/data.js \
 	js/id/util.js \
