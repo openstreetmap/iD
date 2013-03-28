@@ -408,7 +408,7 @@ iD.svg.Labels = function(projection, context) {
                 entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
                 rect;
 
-            if (entitywidth < 20) return;
+            if (!centroid || entitywidth < 20) return;
 
             var iconX = centroid[0] - (iconSize/2),
                 iconY = centroid[1] - (iconSize/2),
