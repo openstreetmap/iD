@@ -849,6 +849,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
 .tag-wrap .preset-icon-wrap {
     border-bottom: 1px solid #CCC;
+    background-color: #e8ebff;
 }
 
 .tag-wrap .preset-icon-wrap::after {

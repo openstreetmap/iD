@@ -618,6 +618,22 @@ path.casing.tag-highway-bridleway.tag-bridge-yes {
     stroke-width: 8;
 }
 
+path.shadow.tag-highway-residential.tag-bridge {
+    stroke-width:22;
+}
+
+path.shadow.tag-highway-living_street.tag-bridge-yes,
+path.shadow.tag-highway-path.tag-bridge-yes,
+path.shadow.line.tag-highway-pedestrian,
+path.shadow.tag-highway-service.tag-bridge-yes,
+path.shadow.tag-highway-track.tag-bridge-yes,
+path.shadow.tag-highway-steps.tag-bridge-yes,
+path.shadow.tag-highway-footway.tag-bridge-yes,
+path.shadow.tag-highway-cycleway.tag-bridge-yes,
+path.shadow.tag-highway-bridleway.tag-bridge-yes {
+    stroke-width: 16;
+}
+
 /* tunnels */
 
 path.stroke.tag-highway.tag-tunnel-yes {

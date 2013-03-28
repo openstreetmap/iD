@@ -52,7 +52,7 @@ iD.ui.TagEditor = function(context, entity) {
             .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
 
         editorwrap.append('div')
-            .attr('class', 'col12 inspector-inner preset-icon-wrap fillL3')
+            .attr('class', 'col12 inspector-inner preset-icon-wrap')
             .append('div')
             .attr('class','fillL')
             .call(iD.ui.PresetIcon(context.geometry(entity.id)));
