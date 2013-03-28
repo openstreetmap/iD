@@ -191,9 +191,9 @@ table.tags, table.tags td, table.tags th {
 .col0    { float:left; width:04.1666%; }
 .col1    { float:left; width:08.3333%; }
 .col2    { float:left; width:16.6666%; }
-.col3    { float:left; width:25.0000%; }
-.col4    { float:left; width:33.3333%; max-width: 400px;}
-.col5    { float:left; width:41.6666%; }
+.col3    { float:left; width:25.0000%; max-width: 300px; }
+.col4    { float:left; width:33.3333%; max-width: 400px; }
+.col5    { float:left; width:41.6666%; max-width: 500px; }
 .col6    { float:left; width:50.0000%; max-width: 600px; }
 .col7    { float:left; width:58.3333%; }
 .col8    { float:left; width:66.6666%; }
