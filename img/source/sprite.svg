@@ -15,9 +15,9 @@
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="sprite.svg"
-   inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite2x.png"
-   inkscape:export-xdpi="180"
-   inkscape:export-ydpi="180">
+   inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs12395">
     <clipPath
@@ -39,8 +39,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="227.49172"
-     inkscape:cy="279.42802"
+     inkscape:cx="415.70951"
+     inkscape:cy="302.57793"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
      showgrid="false"
@@ -2565,5 +2565,17 @@
          d="M 32,66.5 C 32,67.328427 31.328427,68 30.5,68 29.671573,68 29,67.328427 29,66.5 29,65.671573 29.671573,65 30.5,65 c 0.828427,0 1.5,0.671573 1.5,1.5 z"
          transform="translate(370,12.362188)" />
     </g>
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path10391"
+       d="m 450,29.999997 8,7 1,-1 0,-12 -1,-1 z"
+       style="color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       style="color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 479,29.999997 -8,7 -1,-1 0,-12 1,-1 z"
+       id="path10393"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
   </g>
 </svg>

@@ -489,9 +489,11 @@ button.save.has-count .count::before {
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
 .icon.help.light       { background-position: -460px -20px;}
+.icon.avatar.light     { background-position: -320px -20px;}
+.icon.nearby.light     { background-position: -340px -20px;}
 
-.fillD .icon.avatar           { background-position: -320px -20px;}
-.fillD .icon.nearby           { background-position: -340px -20px;}
+.icon.back.blue        { background-position: -420px -20px;}
+.icon.forward.blue     { background-position: -440px -20px;}
 
 button[disabled] .icon.browse     { background-position:   0 -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
@@ -533,14 +535,6 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.wikipedia  { background-position: -100px -200px;}
 .icon.note       { background-position: -120px -200px;}
 .icon.wheelchair { background-position: -140px -200px;}
-
-/* Toggle icon is special */
-
-.toggle.icon                   { background-position: 0 -180px;}
-a:hover .toggle.icon           { background-position: -20px -180px;}
-.selected .toggle.icon,
-a.selected:hover .toggle.icon  { background-position: -40px -180px;}
-
 
 /* ToolBar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -1586,11 +1580,6 @@ img.wiki-image {
     margin-bottom: 20px;
 }
 
-.help-wrap p:last-child {
-    border-bottom: 1px solid #CCC;
-    padding-bottom: 20px;
-}
-
 .help-wrap .left-content .body p code {
     padding:2px 4px;
     background:#eee;
@@ -1605,11 +1594,20 @@ img.wiki-image {
     padding-left: 5px
 }
 
-.help-wrap .toc li a {
+.help-wrap .toc li a,
+.help-wrap .nav a {
     display: block;
     border: 1px solid #CCC;
+    padding: 5px 10px;
+}
+
+.help-wrap .toc li a {
     border-bottom: 0;
-    padding: 5px;
+}
+
+.help-wrap .toc li a:hover,
+.help-wrap .nav a:hover  {
+    background: #ececec;
 }
 
 .help-wrap .toc li a.selected {
@@ -1625,20 +1623,28 @@ img.wiki-image {
     border-radius: 0 0 4px 4px
 }
 
+.help-wrap .nav {
+    position: relative;
+}
+
 .help-wrap .nav a {
+    float: left;
     width: 50%;
-    display: inline-block;
+    text-align: center;
 }
 
-.help-wrap .nav a.previous {
+.help-wrap .nav a:first-child {
+    border-radius: 4px 0 0 4px;
 }
 
-.help-wrap .nav a span {
-    padding: 10px;
+.help-wrap .nav a:last-child:not(:only-child) {
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
 }
 
-.help-wrap .nav a.next {
-    text-align: right;
+.help-wrap .nav a:only-child {
+    width: 100%;
+    border-radius: 4px;
 }
 
 /* Map

@@ -27,7 +27,7 @@ iD.ui.Account = function(context) {
                     .attr('src', details.image_url);
             } else {
                 userLink.append('span')
-                    .attr('class', 'icon avatar icon-pre-text');
+                    .attr('class', 'icon avatar light icon-pre-text');
             }
 
             // Add user name

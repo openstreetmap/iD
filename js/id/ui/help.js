@@ -25,24 +25,23 @@ iD.ui.Help = function(context) {
 
                 nav.html('');
 
-                var prevLink = nav.append('a')
-                        .attr('class', 'previous')
-                        .on('click', function() {
-                            clickHelp(docs[i - 1], i - 1);
-                        }),
-                    nextLink = nav.append('a')
+                if (i > 0) {
+                    var prevLink = nav.append('a')
+                            .attr('class', 'previous')
+                            .on('click', function() {
+                                clickHelp(docs[i - 1], i - 1);
+                            });
+                    prevLink.append('span').attr('class', 'icon back blue');
+                    prevLink.append('span').text(docs[i - 1].title);
+                }
+                if (i < docs.length - 1) {
+                    var nextLink = nav.append('a')
                         .attr('class', 'next')
                         .on('click', function() {
                             clickHelp(docs[i + 1], i + 1);
                         });
-
-                if (i > 0) {
-                    prevLink.append('span').attr('class', 'icon back');
-                    prevLink.append('span').text(docs[i - 1].title);
-                }
-                if (i < docs.length - 1) {
                     nextLink.append('span').text(docs[i + 1].title);
-                    nextLink.append('span').attr('class', 'icon forward');
+                    nextLink.append('span').attr('class', 'icon forward blue');
                 }
             }
 
