@@ -155,7 +155,6 @@ iD.ui.Background = function(context) {
                 .title(iD.ui.tooltipHtml(t('background.description'), key)),
             button = selection.append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'fillD')
                 .on('click.background-toggle', toggle)
                 .call(tooltip),
             opa = content

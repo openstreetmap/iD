@@ -1377,14 +1377,14 @@ img.wiki-image {
     border-radius:0 4px 0 0;
 }
 
-.zoombuttons button.zoom-out {
-    border-top:0;
-}
-
 /* Background Settings */
 
 .background-control {
-    top:200px;
+    top:260px;
+}
+
+.background-control button {
+    border-radius:0 4px 0 0;
 }
 
 .nudge-container {
@@ -1575,18 +1575,21 @@ img.wiki-image {
 /* Geolocator */
 
 .geolocate-control {
-    top:240px;
+    top:200px;
+}
+
+.geolocate-control button {
+    border-radius: 0 0 4px 0;
 }
 
 /* Help */
 
 .help-control {
-    top: 280px;
+    top: 300px;
 }
 
 .help-control button {
     border-radius: 0 0 4px 0;
-    border-bottom: 0;
 }
 
 .help-wrap {
