@@ -2326,11 +2326,11 @@ div.typeahead a:first-child {
 
 .intro-nav-wrap {
     position: absolute;
-    left: 10px;
-    right: 10px;
-    bottom: 40px;
+    left: 0px;
+    right: 0px;
+    bottom: 30px;
+    padding: 10px;
     z-index: 1001;
-    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.7);
 }
 
 .intro-nav-wrap button.step {

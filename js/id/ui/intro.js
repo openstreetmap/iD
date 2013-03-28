@@ -59,7 +59,7 @@ iD.ui.intro = function(context) {
             d3.select('#bar button.save').on('click', save);
         });
 
-        var navwrap = selection.append('div').attr('class', 'intro-nav-wrap');
+        var navwrap = selection.append('div').attr('class', 'intro-nav-wrap fillD');
 
         var buttonwrap = navwrap.append('div')
             .attr('class', 'joined')
