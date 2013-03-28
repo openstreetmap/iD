@@ -16,7 +16,7 @@ body {
     text-align: center;
     vertical-align: middle;
     padding-top: 100px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 #iD {
@@ -83,13 +83,7 @@ h3 {
     margin-bottom: 10px;
 }
 
-h4 {
-    font-size: 12px;
-    font-weight: bold;
-    padding-bottom: 10px;
-}
-
-h5 {
+h4, h5 {
     font-size: 12px;
     font-weight: bold;
     padding-bottom: 10px;
@@ -149,6 +143,7 @@ input[type=email] {
     border-radius:4px;
     -webkit-transition: all 100ms;
        -moz-transition: all 100ms;
+       -o-transition: all 100ms;
             transition: all 100ms;
 }
 
@@ -162,10 +157,10 @@ input.major {
     padding:5px 10px;
     font-size: 18px;
     font-weight: bold;
-    height:40px;
+    height:60px;
 }
 
-/* weird selector that hides bottom border radius when combox is open */
+/* remove bottom border radius when combox is open */
 .combobox + div textarea:focus,
 .combobox + div input:focus {
     border-bottom-left-radius: 0;
@@ -245,10 +240,9 @@ ul.toggle-list li a:hover { background-color: #ececec;}
 ul.toggle-list li a.selected { background-color: #e8ebff;}
 
 ul.link-list li {
-    display: inline-block;
     float: right;
     border-left: 1px solid rgba(255,255,255,.5);
-    padding: 5px 0px 5px 5px;
+    padding: 5px 0 5px 5px;
     margin-left: 5px;
 }
 
@@ -295,7 +289,7 @@ a.hide {
 }
 
 .content {
-    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
 }
 
 .loading {
@@ -337,9 +331,10 @@ button {
     display: inline-block;
     height:40px;
     border-radius:4px;
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-            transition: all 200ms;
+    -webkit-transition: all 100ms;
+       -moz-transition: all 100ms;
+         -o-transition: all 100ms;
+            transition: all 100ms;
 }
 
 button:focus,
@@ -392,7 +387,7 @@ button.minor {
 }
 
 .joined button:last-child {
-    border-right-width: 0px;
+    border-right-width: 0;
     border-radius:0 4px 4px 0;
 }
 
@@ -447,7 +442,7 @@ button.save.has-count .count::before {
   vertical-align:top;
   width:20px;
   height:20px;
-  background:transparent url(../img/sprite.png) no-repeat 0px 0px;
+  background:transparent url(../img/sprite.png) no-repeat 0 0;
   text-indent:-9999px;
   overflow:hidden;
   }
@@ -465,31 +460,31 @@ button.save.has-count .count::before {
 }
 
 /* Definitions for every icon */
-.icon.browse     { background-position:   0px 0px;}
-.icon.add-point  { background-position: -20px 0px;}
-.icon.add-line   { background-position: -40px 0px;}
-.icon.add-area   { background-position: -60px 0px;}
-.icon.undo       { background-position: -80px 0px;}
-.icon.redo       { background-position: -100px 0px;}
-.icon.apply      { background-position: -120px 0px;}
-.icon.save       { background-position: -140px 0px;}
-.icon.close      { background-position: -160px 0px;}
-.icon.delete     { background-position: -180px 0px;}
-.icon.remove     { background-position: -200px 0px;}
-.icon.inspect    { background-position: -220px 0px;}
-.icon.zoom-in    { background-position: -240px 0px;}
-.icon.zoom-out   { background-position: -260px 0px;}
-.icon.plus       { background-position: -240px 0px;}
-.icon.search     { background-position: -280px 0px;}
-.icon.geocode    { background-position: -280px 0px;}
-.icon.layers     { background-position: -300px 0px;}
-.icon.avatar     { background-position: -320px 0px;}
-.icon.nearby     { background-position: -340px 0px;}
-.icon.geolocate  { background-position: -360px 0px;}
-.icon.warning    { background-position: -380px 0px;}
-.icon.back       { background-position: -420px 0px;}
-.icon.forward    { background-position: -440px 0px;}
-.icon.help       { background-position: -460px 0px;}
+.icon.browse     { background-position:   0 0;}
+.icon.add-point  { background-position: -20px 0;}
+.icon.add-line   { background-position: -40px 0;}
+.icon.add-area   { background-position: -60px 0;}
+.icon.undo       { background-position: -80px 0;}
+.icon.redo       { background-position: -100px 0;}
+.icon.apply      { background-position: -120px 0;}
+.icon.save       { background-position: -140px 0;}
+.icon.close      { background-position: -160px 0;}
+.icon.delete     { background-position: -180px 0;}
+.icon.remove     { background-position: -200px 0;}
+.icon.inspect    { background-position: -220px 0;}
+.icon.zoom-in    { background-position: -240px 0;}
+.icon.zoom-out   { background-position: -260px 0;}
+.icon.plus       { background-position: -240px 0;}
+.icon.search     { background-position: -280px 0;}
+.icon.geocode    { background-position: -280px 0;}
+.icon.layers     { background-position: -300px 0;}
+.icon.avatar     { background-position: -320px 0;}
+.icon.nearby     { background-position: -340px 0;}
+.icon.geolocate  { background-position: -360px 0;}
+.icon.warning    { background-position: -380px 0;}
+.icon.back       { background-position: -420px 0;}
+.icon.forward    { background-position: -440px 0;}
+.icon.help       { background-position: -460px 0;}
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
@@ -498,7 +493,7 @@ button.save.has-count .count::before {
 .fillD .icon.avatar           { background-position: -320px -20px;}
 .fillD .icon.nearby           { background-position: -340px -20px;}
 
-button[disabled] .icon.browse     { background-position:   0px -40px;}
+button[disabled] .icon.browse     { background-position:   0 -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
 button[disabled] .icon.add-line   { background-position: -40px -40px;}
 button[disabled] .icon.add-area   { background-position: -60px -40px;}
@@ -516,7 +511,7 @@ button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
-.icon-operation-delete        { background-position: 0px -140px;}
+.icon-operation-delete        { background-position: 0 -140px;}
 .icon-operation-circularize   { background-position: -20px -140px;}
 .icon-operation-straighten    { background-position: -40px -140px;}
 .icon-operation-split         { background-position: -60px -140px;}
@@ -530,7 +525,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
 /* Universal preset icons */
 
-.icon.source     { background-position:   0px -200px;}
+.icon.source     { background-position:   0 -200px;}
 .icon.address    { background-position: -20px -200px;}
 .icon.telephone  { background-position: -40px -200px;}
 .icon.website    { background-position: -60px -200px;}
@@ -541,7 +536,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
 /* Toggle icon is special */
 
-.toggle.icon                   { background-position: 0px -180px;}
+.toggle.icon                   { background-position: 0 -180px;}
 a:hover .toggle.icon           { background-position: -20px -180px;}
 .selected .toggle.icon,
 a.selected:hover .toggle.icon  { background-position: -40px -180px;}
@@ -553,8 +548,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 #bar {
     position:absolute;
     padding: 10px;
-    left:0px;
-    top:0px;
+    left:0;
+    top:0;
     right:0;
     height:60px;
 }
@@ -697,8 +692,8 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 .preset-icon {
     position: absolute;
     top: 30px;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     margin: auto;
 }
 
@@ -748,7 +743,6 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .preset-grid-search-wrap {
-    height: 60px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -773,7 +767,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .preset-search-result {
-    padding: 0px 10px;
+    padding: 0 10px;
     height:30px;
     margin: 5px;
 }
@@ -787,9 +781,9 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
 }
 
 .subgrid .preset-grid {
-    padding: 10px 0px 0px 10px;
+    padding: 10px 0 0 10px;
     border: 1px solid #CCC;
-    margin-top: 0px;
+    margin-top: 0;
     border-radius: 8px;
 }
 
@@ -904,7 +898,7 @@ a.selected:hover .toggle.icon  { background-position: -40px -180px;}
     position: relative;
     font-weight: bold;
     border: 1px solid #cfcfcf;
-    padding: 5px 0px 5px 10px;
+    padding: 5px 0 5px 10px;
     background: #f6f6f6;
     display: block;
     border-radius: 4px 4px 0 0;
@@ -975,6 +969,7 @@ button.preset-add-field {
 }
 
 /* set width based on # of buttons */
+
 button.preset-add-field:nth-last-child(4),
 button.preset-add-field:nth-last-child(4) ~ button.preset-add-field {
     width: 25%;
@@ -1093,6 +1088,7 @@ input[type=number] {
     vertical-align: middle;
     opacity: 0.5;
 }
+
 .checkselect .set input[type="checkbox"] {
     opacity: 1;
 }
@@ -1128,64 +1124,58 @@ input[type=number] {
 /* Preset form address */
 
 .form-field .addr-housename {
-    border: none;
+    border: 0;
 }
 
 .form-field .addr-number {
     width: 20%;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
     border-radius: 0;
 }
 
 .form-field .addr-street {
     width: 80%;
-    border-right: none;
-    border-bottom: none;
+    border-right: 0;
+    border-bottom: 0;
     border-radius: 0;
 }
 
 .form-field .addr-city {
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
     border-radius: 0 0 4px 4px;
 }
 
 /* combobox dropdown */
 
 div.combobox {
-    width:155px;
     z-index: 9999;
     display: none;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
     margin-top: -1px;
     background: white;
-    max-height: 180px;
+    max-height: 120px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
 }
 
 .combobox a {
-    height: 25px;
-    line-height: 25px;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     display: block;
+    padding: 5px 10px;
     border-top:1px solid #ccc;
-    background-color: #fff;
-    padding:1px 4px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    height: 30px;
 }
 
-.combobox a:hover,
-.combobox a.selected  {
-    background: #e1e8ff;
-    color: #154dff;
+.combobox a:hover {
+    background: #ececec;
 }
 
 .combobox a:first-child {
@@ -1641,7 +1631,7 @@ img.wiki-image {
 .help-wrap .toc li a {
     display: block;
     border: 1px solid #CCC;
-    border-bottom: 0px;
+    border-bottom: 0;
     padding: 5px;
 }
 
@@ -1775,43 +1765,6 @@ img.wiki-image {
     padding-left: 10px;
 }
 
-/* typeahead dropdowns
-------------------------------------------------------- */
-
-div.typeahead {
-    width:155px;
-    z-index: 9999;
-    display: none;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
-    margin-top: -1px;
-    background: white;
-    max-height: 180px;
-    overflow: hidden;
-    border: 1px solid #ccc;
-}
-
-div.typeahead a {
-    height: 30px;
-    line-height: 30px;
-    cursor: pointer;
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
-    display: block;
-    border-top:1px solid #ccc;
-    background-color: #fff;
-    padding:1px 4px;
-    white-space: nowrap;
-}
-
-div.typeahead a:hover,
-div.typeahead a.selected  {
-    background: #e1e8ff;
-    color: #154dff;
-}
-
-div.typeahead a:first-child {
-    border-top: 0;
-}
-
 /* Modals
 ------------------------------------------------------- */
 
@@ -1879,6 +1832,7 @@ div.typeahead a:first-child {
     height: 180px;
     text-align: center;
     -webkit-transition: all 200ms;
+       -o-transition: all 200ms;
        -moz-transition: all 200ms;
             transition: all 200ms;
 }
@@ -1890,7 +1844,7 @@ div.typeahead a:first-child {
     width: 100px;
     margin: auto;
     margin-bottom: 10px;
-    background:transparent url(../img/sprite.png) no-repeat 0px -220px;
+    background:transparent url(../img/sprite.png) no-repeat 0 -220px;
 }
 
 .modal-actions button:first-child {
@@ -1908,7 +1862,6 @@ div.typeahead a:first-child {
     background-position: -500px -220px;
 }
 
-
 /* Success Modal
 ------------------------------------------------------- */
 
@@ -1918,10 +1871,6 @@ div.typeahead a:first-child {
 
 /* Splash Modal
 ------------------------------------------------------- */
-
-.modal-splash h3 {
-    text-align: center;
- }
 
 .modal-actions button.walkthrough:before {
     background-position: -200px -220px;
@@ -2172,7 +2121,7 @@ div.typeahead a:first-child {
 .tooltip-inner .keyhint {
     color: #222;
     font-size: 10px;
-    padding: 0px 7px;
+    padding: 0 7px;
     font-weight: bold;
     display: inline-block;
     border-radius: 2px;
@@ -2249,7 +2198,7 @@ div.typeahead a:first-child {
 
 @media only screen and (max-width: 840px) {
     #bar .label {display: none;}
-    #bar .icon.icon-pre-text { margin-right: 0px;}
+    #bar .icon.icon-pre-text { margin-right: 0;}
     /* override hide for save button */
     #bar .save .label { display: block;}
 }
@@ -2283,47 +2232,23 @@ div.typeahead a:first-child {
     background: white;
     border-left: 1px solid #DDD;
 }
-::-webkit-scrollbar-button {
-    height: 0;
-    width: 0;
-}
+
 ::-webkit-scrollbar-track {
     background-clip: padding-box;
     border: solid transparent;
-    border-width: 0 0 0 4px;
+    border-width: 0;
 }
-::-webkit-scrollbar-track:horizontal {
-    border-width: 4px 0 0
-}
-::-webkit-scrollbar-track:hover {
-    background-color: rgba(0,0,0,.05);
-}
-::-webkit-scrollbar-track:horizontal:hover {
-}
-::-webkit-scrollbar-track:active {
-    background-color: rgba(0,0,0,.05);
-}
-::-webkit-scrollbar-track:horizontal:active {
-}
+
 ::-webkit-scrollbar-thumb {
     background-color: rgba(0,0,0,.2);
     background-clip: padding-box;
     border: solid transparent;
     border-width: 3px 3px 3px 4px;
-    min-height: 25px;
     border-radius: 6px;
 }
-::-webkit-scrollbar-thumb:horizontal {
-    border-width: 3px 3px 3px 3px;;
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0,0,0,.4);
-}
-::-webkit-scrollbar-thumb:active {
-    background-color: rgba(0,0,0,0.5);
-}
-::-webkit-scrollbar-corner {
-    background: transparent
+::-webkit-scrollbar-track:hover,
+::-webkit-scrollbar-track:active {
+    background-color: rgba(0,0,0,.05);
 }
 
 /* Intro walkthrough
@@ -2338,8 +2263,8 @@ div.typeahead a:first-child {
 
 .intro-nav-wrap {
     position: absolute;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     bottom: 30px;
     padding: 10px;
     z-index: 1001;
@@ -2400,15 +2325,15 @@ div.typeahead a:first-child {
     content: "";
     height: 80px;
     width: 200px;
-    background:transparent url(../img/sprite.png) no-repeat 0px -320px;
+    background:transparent url(../img/sprite.png) no-repeat 0 -320px;
 }
 
 .intro-areas-add .tooltip-inner::before {
-    background-position: 0px -400px;
+    background-position: 0 -400px;
 }
 
 .intro-lines-add .tooltip-inner::before {
-    background-position: 0px -480px;
+    background-position: 0 -480px;
 }
 
 .huge-modal-button {
