@@ -224,8 +224,13 @@ iD.ui.Background = function(context) {
             .on('click', function() {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
-                context.map()
-                    .extent(d3.geo.bounds(context.map().layers[1].geojson()))
+                if (context.map().layers[1].geojson().type) {
+                    context.map()
+                        .extent(d3.geo.bounds(context
+                            .map()
+                            .layers[1]
+                            .geojson()));
+                }
             })
             .append('span')
                 .attr('class', 'icon geocode' );
