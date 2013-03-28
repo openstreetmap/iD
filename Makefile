@@ -29,7 +29,6 @@ data/data.js: $(DATA_FILES)
 	js/lib/lodash.js \
 	js/lib/osmauth.js \
 	js/lib/rtree.js \
-	js/lib/sha.js \
 	js/lib/togeojson.js \
 	js/lib/marked.js \
 	js/id/start.js \
