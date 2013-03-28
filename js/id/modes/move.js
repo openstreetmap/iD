@@ -30,6 +30,11 @@ iD.modes.Move = function(context, entityIDs) {
             if (nudgeInterval) window.clearInterval(nudgeInterval);
             nudgeInterval = window.setInterval(function() {
                 context.pan(nudge);
+                context.replace(
+                    iD.actions.Move(entityIDs, [-nudge[0], -nudge[1]], context.projection),
+                    annotation);
+                var c = context.projection(origin);
+                origin = context.projection.invert([c[0] - nudge[0], c[1] - nudge[1]]);
             }, 50);
         }
 
@@ -64,11 +69,13 @@ iD.modes.Move = function(context, entityIDs) {
         function finish() {
             d3.event.stopPropagation();
             context.enter(iD.modes.Select(context, entityIDs));
+            stopNudge();
         }
 
         function cancel() {
             context.pop();
             context.enter(iD.modes.Select(context, entityIDs));
+            stopNudge();
         }
 
         function undone() {
