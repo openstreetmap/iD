@@ -1,14 +1,4 @@
 describe("iD.actions.Connect", function() {
-    describe("#enabled", function () {
-        it("returns true for two or more nodes", function () {
-            expect(iD.actions.Connect(['a', 'b']).enabled()).to.be.true;
-        });
-
-        it("returns false for less than two nodes", function () {
-            expect(iD.actions.Connect(['a']).enabled()).to.be.false;
-        });
-    });
-
     it("removes all but the final node", function() {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a'}),

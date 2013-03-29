@@ -13,14 +13,20 @@ iD.operations.Split = function(selection, context) {
             context.geometry(entityId) === 'vertex';
     };
 
-    operation.enabled = function() {
-        return action.enabled(context.graph());
+    operation.disabled = function() {
+        return action.disabled(context.graph());
+    };
+
+    operation.tooltip = function() {
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.split.' + disable) :
+            t('operations.split.description');
     };
 
     operation.id = "split";
     operation.keys = [t('operations.split.key')];
     operation.title = t('operations.split.title');
-    operation.description = t('operations.split.description');
 
     return operation;
 };

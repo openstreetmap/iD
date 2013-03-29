@@ -94,8 +94,12 @@ iD.actions.Split = function(nodeId, newWayId) {
         return graph;
     };
 
-    action.enabled = function(graph) {
-        return candidateWays(graph).length === 1;
+    action.disabled = function(graph) {
+        var candidates = candidateWays(graph);
+        if (candidates.length === 0)
+            return 'not_eligible';
+        if (candidates.length > 1)
+            return 'multiple_ways';
     };
 
     return action;

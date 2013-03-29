@@ -1,12 +1,12 @@
 describe("iD.actions.Disconnect", function () {
-    describe("#enabled", function () {
-        it("returns false for a node shared by less than two ways", function () {
+    describe("#disabled", function () {
+        it("returns 'not_connected' for a node shared by less than two ways", function () {
             var graph = iD.Graph({'a': iD.Node()});
 
-            expect(iD.actions.Disconnect('a').enabled(graph)).to.equal(false);
+            expect(iD.actions.Disconnect('a').disabled(graph)).to.equal('not_connected');
         });
 
-        it("returns true for a node appearing twice in the same way", function () {
+        it("returns falsy for a node appearing twice in the same way", function () {
             //    a ---- b
             //    |      |
             //    d ---- c
@@ -17,10 +17,10 @@ describe("iD.actions.Disconnect", function () {
                 'd': iD.Node({id: 'd'}),
                 'w': iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a']})
             });
-            expect(iD.actions.Disconnect('a').enabled(graph)).to.equal(true);
+            expect(iD.actions.Disconnect('a').disabled(graph)).not.to.be.ok;
         });
 
-        it("returns true for a node shared by two or more ways", function () {
+        it("returns falsy for a node shared by two or more ways", function () {
             //    a ---- b ---- c
             //           |
             //           d
@@ -33,7 +33,7 @@ describe("iD.actions.Disconnect", function () {
                     '|': iD.Way({id: '|', nodes: ['d', 'b']})
                 });
 
-            expect(iD.actions.Disconnect('b').enabled(graph)).to.equal(true);
+            expect(iD.actions.Disconnect('b').disabled(graph)).not.to.be.ok;
         });
     });
 

@@ -53,12 +53,16 @@ locale.en = {
         },
         "circularize": {
             "title": "Circularize",
-            "description": "Make this round.",
+            "description": {
+                "line": "Make this line circular.",
+                "area": "Make this area circular."
+            },
             "key": "O",
             "annotation": {
                 "line": "Made a line circular.",
                 "area": "Made an area circular."
-            }
+            },
+            "not_closed": "This can't be made circular because it's not a loop."
         },
         "orthogonalize": {
             "title": "Orthogonalize",
@@ -67,7 +71,8 @@ locale.en = {
             "annotation": {
                 "line": "Squared the corners of a line.",
                 "area": "Squared the corners of an area."
-            }
+            },
+            "not_closed": "This can't be made square because it's not a loop."
         },
         "delete": {
             "title": "Delete",
@@ -91,15 +96,18 @@ locale.en = {
         },
         "disconnect": {
             "title": "Disconnect",
-            "description": "Disconnect these ways from each other.",
+            "description": "Disconnect these lines/areas from each other.",
             "key": "D",
-            "annotation": "Disconnected ways."
+            "annotation": "Disconnected lines/areas.",
+            "not_connected": "There aren't enough lines/areas here to disconnect."
         },
         "merge": {
             "title": "Merge",
             "description": "Merge these lines.",
             "key": "C",
-            "annotation": "Merged {n} lines."
+            "annotation": "Merged {n} lines.",
+            "not_eligible": "These features can't be merged.",
+            "not_adjacent": "These lines can't be merged because they aren't connected."
         },
         "move": {
             "title": "Move",
@@ -111,7 +119,8 @@ locale.en = {
                 "line": "Moved a line.",
                 "area": "Moved an area.",
                 "multiple": "Moved multiple objects."
-            }
+            },
+            "incomplete_relation": "This feature can't be moved because it hasn't been fully downloaded."
         },
         "rotate": {
             "title": "Rotate",
@@ -132,7 +141,9 @@ locale.en = {
             "title": "Split",
             "description": "Split this into two ways at this point.",
             "key": "X",
-            "annotation": "Split a way."
+            "annotation": "Split a way.",
+            "not_eligible": "Lines can't be split at their beginning or end.",
+            "multiple_ways": "There are too many lines here to split."
         }
     },
     "nothing_to_undo": "Nothing to undo.",

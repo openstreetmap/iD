@@ -65,7 +65,7 @@ iD.modes.Select = function(context, selection, initial) {
         operations.forEach(function(operation) {
             operation.keys.forEach(function(key) {
                 keybinding.on(key, function() {
-                    if (operation.enabled()) {
+                    if (!operation.disabled()) {
                         operation();
                     }
                 });

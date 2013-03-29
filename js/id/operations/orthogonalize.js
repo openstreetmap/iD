@@ -13,8 +13,15 @@ iD.operations.Orthogonalize = function(selection, context) {
             _.uniq(context.entity(entityId).nodes).length > 2;
     };
 
-    operation.enabled = function() {
-        return action.enabled(context.graph());
+    operation.disabled = function() {
+        return action.disabled(context.graph());
+    };
+
+    operation.tooltip = function() {
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.orthogonalize.' + disable) :
+            t('operations.orthogonalize.description');
     };
 
     operation.id = "orthogonalize";

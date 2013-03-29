@@ -1,6 +1,6 @@
 describe("iD.actions.Split", function () {
-    describe("#enabled", function () {
-        it("returns true for a non-end node of a single way", function () {
+    describe("#disabled", function () {
+        it("returns falsy for a non-end node of a single way", function () {
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
                     'b': iD.Node({id: 'b'}),
@@ -8,27 +8,27 @@ describe("iD.actions.Split", function () {
                     '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']})
                 });
 
-            expect(iD.actions.Split('b').enabled(graph)).to.be.true;
+            expect(iD.actions.Split('b').disabled(graph)).not.to.be.ok;
         });
 
-        it("returns false for the first node of a single way", function () {
+        it("returns 'not_eligible' for the first node of a single way", function () {
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
                     'b': iD.Node({id: 'b'}),
                     '-': iD.Way({id: '-', nodes: ['a', 'b']})
                 });
 
-            expect(iD.actions.Split('a').enabled(graph)).to.be.false;
+            expect(iD.actions.Split('a').disabled(graph)).to.equal('not_eligible');
         });
 
-        it("returns false for the last node of a single way", function () {
+        it("returns 'not_eligible' for the last node of a single way", function () {
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
                     'b': iD.Node({id: 'b'}),
                     '-': iD.Way({id: '-', nodes: ['a', 'b']})
                 });
 
-            expect(iD.actions.Split('b').enabled(graph)).to.be.false;
+            expect(iD.actions.Split('b').disabled(graph)).to.equal('not_eligible');
         });
     });
 

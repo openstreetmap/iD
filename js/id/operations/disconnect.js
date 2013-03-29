@@ -11,14 +11,20 @@ iD.operations.Disconnect = function(selection, context) {
             context.geometry(entityId) === 'vertex';
     };
 
-    operation.enabled = function() {
-        return action.enabled(context.graph());
+    operation.disabled = function() {
+        return action.disabled(context.graph());
+    };
+
+    operation.tooltip = function() {
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.disconnect.' + disable) :
+            t('operations.disconnect.description');
     };
 
     operation.id = "disconnect";
     operation.keys = [t('operations.disconnect.key')];
     operation.title = t('operations.disconnect.title');
-    operation.description = t('operations.disconnect.description');
 
     return operation;
 };

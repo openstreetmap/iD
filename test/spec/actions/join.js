@@ -1,6 +1,6 @@
 describe("iD.actions.Join", function () {
-    describe("#enabled", function () {
-        it("returns true for ways that share an end/start node", function () {
+    describe("#disabled", function () {
+        it("returns falsy for ways that share an end/start node", function () {
             // a --> b ==> c
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
@@ -10,10 +10,10 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['b', 'c']})
                 });
 
-            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns true for ways that share a start/end node", function () {
+        it("returns falsy for ways that share a start/end node", function () {
             // a <-- b <== c
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
@@ -23,10 +23,10 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['c', 'b']})
                 });
 
-            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns true for ways that share a start/start node", function () {
+        it("returns falsy for ways that share a start/start node", function () {
             // a <-- b ==> c
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
@@ -36,10 +36,10 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['b', 'c']})
                 });
 
-            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns true for ways that share an end/end node", function () {
+        it("returns falsy for ways that share an end/end node", function () {
             // a --> b <== c
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
@@ -49,10 +49,18 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['c', 'b']})
                 });
 
-            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.true;
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns false for ways that don't share the necessary nodes", function () {
+        it("returns 'not_eligible' for non-line geometries", function () {
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'})
+                });
+
+            expect(iD.actions.Join(['a']).disabled(graph)).to.equal('not_eligible');
+        });
+
+        it("returns 'not_adjacent' for ways that don't share the necessary nodes", function () {
             // a -- b -- c
             //      |
             //      d
@@ -65,7 +73,7 @@ describe("iD.actions.Join", function () {
                     '=': iD.Way({id: '=', nodes: ['b', 'd']})
                 });
 
-            expect(iD.actions.Join(['-', '=']).enabled(graph)).to.be.false;
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('not_adjacent');
         });
     });
 

@@ -29,11 +29,14 @@ iD.actions.Move = function(ids, delta, projection) {
         return graph;
     };
 
-    action.enabled = function(graph) {
-        return _.every(ids, function(id) {
+    action.disabled = function(graph) {
+        function incompleteRelation(id) {
             var entity = graph.entity(id);
-            return entity.type !== 'relation' || entity.isComplete(graph);
-        });
+            return entity.type === 'relation' && !entity.isComplete(graph);
+        }
+
+        if (_.any(ids, incompleteRelation))
+            return 'incomplete_relation';
     };
 
     return action;

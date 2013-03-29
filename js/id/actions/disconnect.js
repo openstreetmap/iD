@@ -12,9 +12,6 @@
 //
 iD.actions.Disconnect = function(nodeId, newNodeId) {
     var action = function(graph) {
-        if (!action.enabled(graph))
-            return graph;
-
         var node = graph.entity(nodeId);
 
         graph.parentWays(node).forEach(function(parent, i) {
@@ -40,12 +37,14 @@ iD.actions.Disconnect = function(nodeId, newNodeId) {
         return graph;
     };
 
-    action.enabled = function(graph) {
+    action.disabled = function(graph) {
         var parentWays = graph.parentWays(graph.entity(nodeId));
-        return parentWays.length >= 2 ||
-            (parentWays.length == 1 && parentWays[0].nodes.filter(function(d) {
-                return d === nodeId;
-            }).length >= 2);
+        if (parentWays.length >= 2)
+            return;
+        if (parentWays.length === 0)
+            return 'not_connected';
+        if (parentWays[0].nodes.filter(function(d) { return d === nodeId; }).length < 2)
+            return 'not_connected';
     };
 
     return action;

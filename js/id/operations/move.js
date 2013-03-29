@@ -8,15 +8,21 @@ iD.operations.Move = function(selection, context) {
             context.entity(selection[0]).type !== 'node';
     };
 
-    operation.enabled = function() {
+    operation.disabled = function() {
         return iD.actions.Move(selection)
-            .enabled(context.graph());
+            .disabled(context.graph());
+    };
+
+    operation.tooltip = function() {
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.move.' + disable) :
+            t('operations.move.description');
     };
 
     operation.id = "move";
     operation.keys = [t('operations.move.key')];
     operation.title = t('operations.move.title');
-    operation.description = t('operations.move.description');
 
     return operation;
 };

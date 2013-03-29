@@ -8,7 +8,7 @@ describe("iD.actions.Merge", function () {
             }),
             action = iD.actions.Merge(['a', 'b', 'w']);
 
-        expect(action.enabled(graph)).to.be.true;
+        expect(action.disabled(graph)).not.to.be.ok;
 
         graph = action(graph);
 
@@ -27,7 +27,7 @@ describe("iD.actions.Merge", function () {
             }),
             action = iD.actions.Merge(['a', 'b', 'w']);
 
-        expect(action.enabled(graph)).to.be.true;
+        expect(action.disabled(graph)).not.to.be.ok;
 
         graph = action(graph);
 

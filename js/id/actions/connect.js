@@ -13,7 +13,7 @@
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/MergeNodesAction.java
 //
 iD.actions.Connect = function(nodeIds) {
-    var action = function(graph) {
+    return function(graph) {
         var survivor = graph.entity(_.last(nodeIds));
 
         for (var i = 0; i < nodeIds.length - 1; i++) {
@@ -37,10 +37,4 @@ iD.actions.Connect = function(nodeIds) {
 
         return graph;
     };
-
-    action.enabled = function() {
-        return nodeIds.length > 1;
-    };
-
-    return action;
 };

@@ -127,8 +127,9 @@ iD.actions.Orthogonalize = function(wayId, projection) {
         }
     };
 
-    action.enabled = function(graph) {
-        return graph.entity(wayId).isClosed();
+    action.disabled = function(graph) {
+        if (!graph.entity(wayId).isClosed())
+            return 'not_closed';
     };
 
     return action;

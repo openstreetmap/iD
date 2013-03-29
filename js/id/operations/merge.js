@@ -6,7 +6,7 @@ iD.operations.Merge = function(selection, context) {
         var annotation = t('operations.merge.annotation', {n: selection.length}),
             action;
 
-        if (join.enabled(context.graph())) {
+        if (!join.disabled(context.graph())) {
             action = join;
         } else {
             action = merge;
@@ -20,15 +20,24 @@ iD.operations.Merge = function(selection, context) {
         return selection.length >= 2;
     };
 
-    operation.enabled = function() {
-        return join.enabled(context.graph()) ||
-            merge.enabled(context.graph());
+    operation.disabled = function() {
+        return join.disabled(context.graph()) &&
+            merge.disabled(context.graph());
+    };
+
+    operation.tooltip = function() {
+        var j = join.disabled(context.graph()),
+            m = merge.disabled(context.graph());
+
+        if (j && m)
+            return t('operations.merge.' + j);
+
+        return t('operations.merge.description');
     };
 
     operation.id = "merge";
     operation.keys = [t('operations.merge.key')];
     operation.title = t('operations.merge.title');
-    operation.description = t('operations.merge.description');
 
     return operation;
 };
