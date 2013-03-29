@@ -51,6 +51,7 @@
     {
         "name": " TIGER 2012 Roads Overlay",
         "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
+        "overlay": true,
         "subdomains": [
             "a",
             "b",
