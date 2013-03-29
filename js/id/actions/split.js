@@ -1,5 +1,8 @@
 // Split a way at the given node.
 //
+// Optionally, split only the given ways, if multiple ways share
+// the given node.
+//
 // This is the inverse of `iD.actions.Join`.
 //
 // For testing convenience, accepts an ID to assign to the new way.
@@ -9,26 +12,7 @@
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-iD.actions.Split = function(nodeId, newWayIds) {
-    function candidateWays(graph) {
-        var node = graph.entity(nodeId),
-            parents = graph.parentWays(node);
-
-        return parents.filter(function(parent) {
-            if (parent.isClosed()) {
-                return true;
-            }
-
-            for (var i = 1; i < parent.nodes.length - 1; i++) {
-                if (parent.nodes[i] === nodeId) {
-                    return true;
-                }
-            }
-
-            return false;
-        });
-    }
-
+iD.actions.Split = function(nodeId, wayIds, newWayIds) {
     function split(graph, wayA, newWayId) {
         var wayB = iD.Way({id: newWayId, tags: wayA.tags}),
             nodesA,
@@ -102,16 +86,38 @@ iD.actions.Split = function(nodeId, newWayIds) {
     }
 
     var action = function(graph) {
-        var candidates = candidateWays(graph);
+        var candidates = action.ways(graph);
         for (var i = 0; i < candidates.length; i++) {
             graph = split(graph, candidates[i], newWayIds && newWayIds[i]);
         }
         return graph;
     };
 
+    action.ways = function(graph) {
+        var node = graph.entity(nodeId),
+            parents = graph.parentWays(node);
+
+        return parents.filter(function(parent) {
+            if (wayIds && wayIds.length && wayIds.indexOf(parent.id) === -1)
+                return false;
+
+            if (parent.isClosed()) {
+                return true;
+            }
+
+            for (var i = 1; i < parent.nodes.length - 1; i++) {
+                if (parent.nodes[i] === nodeId) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+    };
+
     action.disabled = function(graph) {
-        var candidates = candidateWays(graph);
-        if (candidates.length === 0)
+        var candidates = action.ways(graph);
+        if (candidates.length === 0 || (wayIds && wayIds.length && wayIds.length !== candidates.length))
             return 'not_eligible';
     };
 

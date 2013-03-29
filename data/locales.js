@@ -139,9 +139,17 @@ locale.en = {
         },
         "split": {
             "title": "Split",
-            "description": "Split this into two ways at this point.",
+            "description": {
+                "line": "Split this line into two at this point.",
+                "area": "Split the boundary of this area into two.",
+                "multiple": "Split the lines/area boundaries at this point into two."
+            },
             "key": "X",
-            "annotation": "Split a way.",
+            "annotation": {
+                "line": "Split a line.",
+                "area": "Split an area boundary.",
+                "multiple": "Split {n} lines/area boundaries."
+            },
             "not_eligible": "Lines can't be split at their beginning or end.",
             "multiple_ways": "There are too many lines here to split."
         }

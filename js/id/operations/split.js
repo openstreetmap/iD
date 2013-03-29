@@ -1,16 +1,27 @@
 iD.operations.Split = function(selection, context) {
-    var entityId = selection[0],
-        action = iD.actions.Split(entityId);
+    var vertices = _.filter(selection, function vertex(entityId) {
+        return context.geometry(entityId) === 'vertex'
+    });
+
+    var entityId = vertices[0],
+        action = iD.actions.Split(entityId, _.without(selection, entityId));
 
     var operation = function() {
-        var annotation = t('operations.split.annotation'),
-            difference = context.perform(action, annotation);
+        var annotation;
+
+        var ways = action.ways(context.graph());
+        if (ways.length === 1) {
+            annotation = t('operations.split.annotation.' + context.geometry(ways[0].id));
+        } else {
+            annotation = t('operations.split.annotation.multiple', {n: ways.length});
+        }
+
+        var difference = context.perform(action, annotation);
         context.enter(iD.modes.Select(context, difference.extantIDs()));
     };
 
     operation.available = function() {
-        return selection.length === 1 &&
-            context.geometry(entityId) === 'vertex';
+        return vertices.length === 1;
     };
 
     operation.disabled = function() {
@@ -19,9 +30,16 @@ iD.operations.Split = function(selection, context) {
 
     operation.tooltip = function() {
         var disable = operation.disabled();
-        return disable ?
-            t('operations.split.' + disable) :
-            t('operations.split.description');
+        if (disable) {
+            return t('operations.split.' + disable);
+        }
+
+        var ways = action.ways(context.graph());
+        if (ways.length === 1) {
+            return t('operations.split.description.' + context.geometry(ways[0].id));
+        } else {
+            return t('operations.split.description.multiple');
+        }
     };
 
     operation.id = "split";
