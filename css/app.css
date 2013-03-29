@@ -1556,6 +1556,10 @@ img.wiki-image {
     border-bottom: 1px solid #CCC;
     padding: 5px 10px;
 }
+.geocode-control div.map-overlay span.not-found {
+    line-height: 28px;
+    width: 100%;
+}
 
 .geocode-control a:focus {
     text-decoration: underline;

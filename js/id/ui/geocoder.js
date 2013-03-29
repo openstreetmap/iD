@@ -22,12 +22,13 @@ iD.ui.Geocoder = function(context) {
                     inputNode.classed('loading', false);
                     if (err) return hide();
                     if (!resp.length) {
-                        return iD.ui.flash(context.container())
-                            .select('.content')
-                            .append('h3')
-                            .text(t('geocoder.no_results', {name: searchVal}));
+                        resultsList.html('')
+                            .call(iD.ui.Toggle(true))
+                            .append('span')
+                                .attr('class', 'not-found')
+                                .text(t('geocoder.no_results', {name: searchVal}));
                     } else if (resp.length > 1) {
-                        var spans = resultsList.selectAll('span')
+                        var spans = resultsList.html('').selectAll('span')
                             .data(resp, function(d) { return d.place_id; });
 
                         spans.enter()
