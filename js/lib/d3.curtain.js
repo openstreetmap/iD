@@ -9,6 +9,7 @@ d3.curtain = function() {
     function curtain(selection) {
 
         surface = selection.append('svg')
+            .attr('id', 'curtain')
             .style({
                 'z-index': 1000,
                 'pointer-events': 'none',

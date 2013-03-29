@@ -93,8 +93,10 @@ iD.ui.intro.line = function(context, reveal) {
             if (mode.id !== 'select') return;
             context.map().on('move.intro', null);
             context.on('enter.intro', null);
+            d3.select('#curtain').style('pointer-events', 'all');
 
             timeout(function() {
+                d3.select('#curtain').style('pointer-events', 'none');
                 var road = d3.select('.preset-grid .grid-entry').filter(function(d) {
                     return d.id === 'Road';
                 });
@@ -121,6 +123,7 @@ iD.ui.intro.line = function(context, reveal) {
     };
 
     step.exit = function() {
+        d3.select('#curtain').style('pointer-events', 'none');
         timeouts.forEach(window.clearTimeout);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
