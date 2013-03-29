@@ -187,11 +187,11 @@
         <script src='data/introGraph.js'></script>
     </head>
     <body>
-        <div id='iD'></div>
+        <div id='id-container'></div>
         <script>
             iD.data.load(function() {
                 id = iD();
-                d3.select("#iD")
+                d3.select("#id-container")
                     .call(id.ui());
             });
         </script>

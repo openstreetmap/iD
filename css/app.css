@@ -19,7 +19,7 @@ body {
     font-size: 15px;
 }
 
-#iD {
+#id-container {
     height: 100%;
     width: 100%;
     position: fixed;
