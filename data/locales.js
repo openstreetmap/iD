@@ -749,6 +749,10 @@ locale.en = {
                 "name": "Building",
                 "terms": ""
             },
+            "building/apartments": {
+                "name": "Apartments",
+                "terms": ""
+            },
             "building/entrance": {
                 "name": "Entrance",
                 "terms": ""

@@ -1021,6 +1021,22 @@
         "terms": [],
         "name": "Building"
     },
+    "building/apartments": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "levels"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "building": "apartments"
+        },
+        "name": "Apartments"
+    },
     "building/entrance": {
         "geometry": [
             "vertex"
