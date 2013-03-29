@@ -676,6 +676,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
     position: relative;
     border: 1px solid #ccc;
     overflow: hidden;
+    float: left;
 }
 
 .grid-inner {
@@ -714,7 +715,12 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
     border-top: 1px solid rgba(0, 0, 0, .1);
     }
 
-.grid-entry .tag-reference-button {
+.grid-button-wrap button.tag-reference-button {
+    float: right;
+    position: static;
+    margin-top: -30px;
+    margin-right: 1px;
+    height: 29px;
     border-left: 1px solid #CCC;
     border-radius: 0 0 3px 0;
 }
