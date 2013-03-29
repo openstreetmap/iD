@@ -111,12 +111,30 @@ iD.behavior.drag = function() {
         }
     }
 
+    var lastPos = [[0, 0], [0, 0]],
+        lastTimes = [0, 0];
+
+    function move() {
+        lastPos.push([d3.event.clientX, d3.event.clientY]);
+        lastTimes.push((new Date()).getTime());
+        lastTimes.shift();
+        lastPos.shift();
+    }
+
     function drag(selection) {
         var matchesSelector = iD.util.prefixDOMProperty('matchesSelector'),
             delegate = mousedown;
 
         if (selector) {
             delegate = function() {
+
+                var velocity = Math.sqrt(
+                        Math.pow(lastPos[0][0] - d3.event.clientX, 2),
+                        Math.pow(lastPos[0][1] - d3.event.clientY, 2)) /
+                    ((new Date()).getTime() - lastTimes[0]);
+
+                if (velocity > 0.05) return;
+
                 var root = this,
                     target = d3.event.target;
                 for (; target && target !== root; target = target.parentNode) {
@@ -128,12 +146,16 @@ iD.behavior.drag = function() {
             };
         }
 
-        selection.on("mousedown.drag" + selector, delegate)
+        selection
+            .on("mousemove.drag" + selector, move)
+            .on("mousedown.drag" + selector, delegate)
             .on("touchstart.drag" + selector, delegate);
     }
 
     drag.off = function(selection) {
-        selection.on("mousedown.drag" + selector, null)
+        selection
+            .on("mousemove.drag" + selector, null)
+            .on("mousedown.drag" + selector, null)
             .on("touchstart.drag" + selector, null);
     };
 
