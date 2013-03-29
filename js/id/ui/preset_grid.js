@@ -231,7 +231,7 @@ iD.ui.PresetGrid = function(context, entity) {
                 .attr('class','label')
                 .text(name);
 
-            label.filter(function(d) { return !d.members; })
+            entered.filter(function(d) { return !d.members; })
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'tag-reference-button minor')
