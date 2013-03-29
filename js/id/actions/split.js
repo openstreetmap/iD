@@ -9,7 +9,7 @@
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-iD.actions.Split = function(nodeId, newWayId) {
+iD.actions.Split = function(nodeId, newWayIds) {
     function candidateWays(graph) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node);
@@ -21,9 +21,8 @@ iD.actions.Split = function(nodeId, newWayId) {
         });
     }
 
-    var action = function(graph) {
-        var wayA = candidateWays(graph)[0],
-            wayB = iD.Way({id: newWayId, tags: wayA.tags}),
+    function split(graph, wayA, newWayId) {
+        var wayB = iD.Way({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
             isArea = wayA.isArea();
@@ -92,14 +91,20 @@ iD.actions.Split = function(nodeId, newWayId) {
         }
 
         return graph;
+    }
+
+    var action = function(graph) {
+        var candidates = candidateWays(graph);
+        for (var i = 0; i < candidates.length; i++) {
+            graph = split(graph, candidates[i], newWayIds && newWayIds[i]);
+        }
+        return graph;
     };
 
     action.disabled = function(graph) {
         var candidates = candidateWays(graph);
         if (candidates.length === 0)
             return 'not_eligible';
-        if (candidates.length > 1)
-            return 'multiple_ways';
     };
 
     return action;
