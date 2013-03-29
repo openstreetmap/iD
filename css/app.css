@@ -528,6 +528,18 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon-operation-rotate        { background-position: -180px -140px;}
 .icon-operation-simplify      { background-position: -200px -140px;}
 
+.disabled.icon-operation-delete        { background-position: 0 -160px;}
+.disabled.icon-operation-circularize   { background-position: -20px -160px;}
+.disabled.icon-operation-straighten    { background-position: -40px -160px;}
+.disabled.icon-operation-split         { background-position: -60px -160px;}
+.disabled.icon-operation-disconnect    { background-position: -80px -160px;}
+.disabled.icon-operation-reverse       { background-position: -100px -160px;}
+.disabled.icon-operation-move          { background-position: -120px -160px;}
+.disabled.icon-operation-merge         { background-position: -140px -160px;}
+.disabled.icon-operation-orthogonalize { background-position: -160px -160px;}
+.disabled.icon-operation-rotate        { background-position: -180px -160px;}
+.disabled.icon-operation-simplify      { background-position: -200px -160px;}
+
 /* Universal preset icons */
 
 .icon.source     { background-position:   0 -200px;}
@@ -1003,11 +1015,11 @@ input[type=number] {
 }
 
 .spin-control {
-    width: 60px;
+    width: 41px;
     height: 29px;
     border-left: 1px solid #CCC;
     display: inline-block;
-    margin-left: -60px;
+    margin-left: -41px;
     margin-bottom: -11px;
     position: relative;
 }
