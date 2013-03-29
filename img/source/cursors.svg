@@ -52,19 +52,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.858048"
-     inkscape:cx="-403.08423"
-     inkscape:cy="1001.5088"
+     inkscape:zoom="3.9525416"
+     inkscape:cx="-459.31384"
+     inkscape:cy="976.40235"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="true"
+     showgrid="false"
      inkscape:window-width="1337"
      inkscape:window-height="840"
      inkscape:window-x="337"
      inkscape:window-y="105"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-nodes="true"
      inkscape:object-paths="true"
@@ -123,9 +123,9 @@
        transform="translate(-40,19)" />
     <g
        id="g58315"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-grab.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-grab2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"
        transform="translate(-577,20)">
       <rect
          style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
@@ -165,9 +165,9 @@
     </g>
     <g
        id="g58324"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-grabbing.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-grabbing2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"
        transform="translate(-577,20)">
       <rect
          ry="0"
@@ -206,37 +206,43 @@
          transform="translate(-42,-22)"
          id="g58465" />
     </g>
-    <rect
-       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
-       id="cursor-select-acting"
-       width="20"
-       height="20"
-       x="-611"
-       y="43.362183"
-       rx="0"
-       ry="0"
-       inkscape:label="#rect58802"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-acting.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <path
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       d="m -610,44.362183 0,2 3.5,8 1.5,0 1,-1 0,-3 3,0 1,-1 0,-1.5 -8,-3.5 z"
-       id="path58808"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccccc" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path58810"
-       d="m -609,45.362183 0,1 3,7 1,0 0,-3.987183 4,-0.01282 0,-1 -7,-3 z"
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
-       sodipodi:nodetypes="ccccccccc" />
+    <g
+       id="g4866"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-acting2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-acting.png"
+         inkscape:label="#rect58802"
+         ry="0"
+         rx="0"
+         y="43.362183"
+         x="-611"
+         height="20"
+         width="20"
+         id="cursor-select-acting"
+         style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate" />
+      <path
+         sodipodi:nodetypes="ccccccccccc"
+         inkscape:connector-curvature="0"
+         id="path58808"
+         d="m -610,44.362183 0,2 3.5,8 1.5,0 1,-1 0,-3 3,0 1,-1 0,-1.5 -8,-3.5 z"
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+      <path
+         sodipodi:nodetypes="ccccccccc"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+         d="m -609,45.362183 0,1 3,7 1,0 0,-3.987183 4,-0.01282 0,-1 -7,-3 z"
+         id="path58810"
+         inkscape:connector-curvature="0" />
+    </g>
     <g
        id="cursor-select-area"
        inkscape:label="cursor-select-area"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-area.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-area2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
       <rect
          y="52.34938"
          x="-562"
@@ -281,9 +287,9 @@
     <g
        id="cursor-select-way"
        inkscape:label="cursor-select-way"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-way.png">
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-way2x.png">
       <rect
          ry="0"
          rx="0"
@@ -363,63 +369,69 @@
          id="path4281"
          inkscape:connector-curvature="0" />
     </g>
-    <rect
-       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
-       id="rect57869"
-       width="20"
-       height="20"
-       x="-511"
-       y="43.362183"
-       rx="0"
-       ry="0" />
     <g
-       id="g58022"
-       transform="translate(-457,-20.012817)">
+       id="g4871"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-split2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
+      <rect
+         ry="0"
+         rx="0"
+         y="43.362183"
+         x="-511"
+         height="20"
+         width="20"
+         id="rect57869"
+         style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate" />
+      <g
+         transform="translate(-457,-20.012817)"
+         id="g58022">
+        <path
+           id="rect58018"
+           transform="translate(457,20)"
+           d="m -497,52.375 c -0.554,0 -1,0.446 -1,1 l 0,3 -3,0 c -0.554,0 -1,0.446 -1,1 0,0.554 0.446,1 1,1 l 3,0 0,3 c 0,0.554 0.446,1 1,1 0.554,0 1,-0.446 1,-1 l 0,-3 3,0 c 0.554,0 1,-0.446 1,-1 0,-0.554 -0.446,-1 -1,-1 l -3,0 0,-3 c 0,-0.554 -0.446,-1 -1,-1 z"
+           style="opacity:0.5;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+           inkscape:connector-curvature="0" />
+      </g>
+      <rect
+         y="56.349365"
+         x="-502"
+         height="2"
+         width="10"
+         id="rect57857"
+         style="color:#000000;fill:#6bc641;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+         rx="1"
+         ry="1" />
+      <rect
+         ry="1"
+         rx="1"
+         style="color:#000000;fill:#6bc641;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+         id="rect58016"
+         width="10"
+         height="2"
+         x="52.349373"
+         y="496"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <path
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+         d="m -510,44.362183 0,2 3.5,8 1.5,0 1,-1 0,-3 3,0 1,-1 0,-1.5 -8,-3.5 z"
+         id="path4283"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccccccc" />
       <path
          inkscape:connector-curvature="0"
-         style="opacity:0.5;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
-         d="m -497,52.375 c -0.554,0 -1,0.446 -1,1 l 0,3 -3,0 c -0.554,0 -1,0.446 -1,1 0,0.554 0.446,1 1,1 l 3,0 0,3 c 0,0.554 0.446,1 1,1 0.554,0 1,-0.446 1,-1 l 0,-3 3,0 c 0.554,0 1,-0.446 1,-1 0,-0.554 -0.446,-1 -1,-1 l -3,0 0,-3 c 0,-0.554 -0.446,-1 -1,-1 z"
-         transform="translate(457,20)"
-         id="rect58018" />
+         id="path4285"
+         d="m -509,45.362183 0,1 3,7 1,0 0,-3.987183 4,-0.01282 0,-1 -7,-3 z"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+         sodipodi:nodetypes="ccccccccc" />
     </g>
-    <rect
-       ry="1"
-       rx="1"
-       style="color:#000000;fill:#6bc641;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
-       id="rect57857"
-       width="10"
-       height="2"
-       x="-502"
-       y="56.349365" />
-    <rect
-       transform="matrix(0,1,-1,0,0,0)"
-       y="496"
-       x="52.349373"
-       height="2"
-       width="10"
-       id="rect58016"
-       style="color:#000000;fill:#6bc641;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
-       rx="1"
-       ry="1" />
-    <path
-       sodipodi:nodetypes="ccccccccccc"
-       inkscape:connector-curvature="0"
-       id="path4283"
-       d="m -510,44.362183 0,2 3.5,8 1.5,0 1,-1 0,-3 3,0 1,-1 0,-1.5 -8,-3.5 z"
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
-    <path
-       sodipodi:nodetypes="ccccccccc"
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
-       d="m -509,45.362183 0,1 3,7 1,0 0,-3.987183 4,-0.01282 0,-1 -7,-3 z"
-       id="path4285"
-       inkscape:connector-curvature="0" />
     <g
        id="g58022-1"
        transform="translate(-557,9.9871826)" />
     <g
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-pointer.png"
+       inkscape:export-ydpi="180"
+       inkscape:export-xdpi="180"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-pointer2x.png"
        id="g59522"
        transform="translate(-577,20)">
       <rect
@@ -485,9 +497,9 @@
     </g>
     <g
        id="g59550"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-pointing.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-pointing2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"
        transform="translate(-597,20)">
       <rect
          ry="0"
@@ -554,9 +566,9 @@
     <g
        id="cursor-draw-connect-vertex"
        inkscape:label="cursor-draw-connect-vertex"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect-vertex.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect-vertex2x.png"
+       inkscape:export-xdpi="179.9978"
+       inkscape:export-ydpi="179.9978">
       <g
          transform="translate(-387,-20)"
          inkscape:export-ydpi="90"
@@ -643,9 +655,9 @@
     <g
        id="cursor-draw-connect-line"
        inkscape:label="cursor-draw-connect-line"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect-line.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect-line2x.png"
+       inkscape:export-xdpi="179.88307"
+       inkscape:export-ydpi="179.88307">
       <g
          transform="translate(-387,-20)"
          inkscape:export-ydpi="90"
@@ -722,9 +734,9 @@
     <g
        id="cursor-select-point"
        inkscape:label="#g5371"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-point.png">
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-point2x.png">
       <rect
          style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
          id="rect58514"
@@ -777,9 +789,9 @@
     <g
        id="cursor-select-vertex"
        inkscape:label="cursor-select-vertex"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-vertex.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-vertex2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
       <rect
          style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
          id="rect56254"
@@ -836,9 +848,9 @@
     <g
        id="cursor-select-add"
        inkscape:label="#g3882"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-add.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-add2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
       <g
          id="g58516-6"
          transform="translate(-496,30.9872)">
@@ -912,9 +924,9 @@
     <g
        id="cursor-draw"
        inkscape:label="cursor-draw"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw2x.png"
+       inkscape:export-xdpi="179.9978"
+       inkscape:export-ydpi="179.9978">
       <g
          inkscape:label=""
          transform="translate(-387,-20)"
@@ -987,9 +999,9 @@
     <g
        id="cursor-select-remove"
        inkscape:label="#g3893"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-remove.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-remove2x.png"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
       <g
          transform="translate(-476,30.9872)"
          id="g3864">
@@ -1047,12 +1059,5 @@
          style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.5;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.99999988;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
          inkscape:connector-curvature="0" />
     </g>
-    <image
-       y="94.362183"
-       x="-398"
-       id="image5951"
-       xlink:href="file:///Users/saman/Desktop/Screen%20Shot%202013-03-15%20at%2012.37.02%20AM.png"
-       height="88"
-       width="85" />
   </g>
 </svg>
