@@ -612,7 +612,6 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .inspector-body {
     overflow-y: scroll;
     overflow-x: hidden;
-    min-height: 330px;
     position: absolute;
     right: 0;
     left: 0;
