@@ -1,4 +1,7 @@
-iD.Background = function() {
+iD.Background = function(backgroundType) {
+
+    backgroundType = backgroundType || 'layer';
+
     var tileSize = 256,
         tile = d3.geo.tile(),
         projection,
@@ -157,14 +160,13 @@ iD.Background = function() {
     };
 
     function setHash(source) {
-        var tag = source.data.sourcetag;
+        var tag = source.data && source.data.sourcetag;
         var q = iD.util.stringQs(location.hash.substring(1));
         if (tag) {
-            location.replace('#' + iD.util.qsString(_.assign(q, {
-                layer: tag
-            }), true));
+            q[backgroundType] = tag;
+            location.replace('#' + iD.util.qsString(q, true));
         } else {
-            location.replace('#' + iD.util.qsString(_.omit(q, 'layer'), true));
+            location.replace('#' + iD.util.qsString(_.omit(q, backgroundType), true));
         }
     }
 

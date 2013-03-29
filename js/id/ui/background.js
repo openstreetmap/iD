@@ -37,7 +37,9 @@ iD.ui.Background = function(context) {
         function selectLayer() {
             content.selectAll('a.layer')
                 .classed('selected', function(d) {
-                    return d.data.name === context.background().source().data.name;
+                    var overlay = context.map().layers[2].source();
+                    return d.data.name === context.background().source().data.name ||
+                        (overlay.data && overlay.data.name === d.data.name);
                 });
         }
 
@@ -60,6 +62,18 @@ iD.ui.Background = function(context) {
             selectLayer();
         }
 
+        function clickSetOverlay(d) {
+            d3.event.preventDefault();
+            var overlay = context.map().layers[2];
+            if (overlay.source() === d) {
+                overlay.source(d3.functor(''));
+            } else {
+                overlay.source(d);
+            }
+            context.redraw();
+            selectLayer();
+        }
+
         function clickGpx(d) {
             d3.event.preventDefault();
             if (!_.isEmpty(context.map().layers[1].geojson())) {
@@ -71,9 +85,10 @@ iD.ui.Background = function(context) {
             }
         }
 
-        function update() {
+        function drawList(layerList, click, filter) {
+
             var layerLinks = layerList.selectAll('a.layer')
-                .data(getSources(), function(d) {
+                .data(getSources().filter(filter), function(d) {
                     return d.data.name;
                 });
 
@@ -84,7 +99,7 @@ iD.ui.Background = function(context) {
             layerInner
                 .attr('href', '#')
                 .attr('class', 'layer')
-                .on('click.set-source', clickSetSource);
+                .on('click.set-source', click);
 
             // only set tooltips for layers with tooltips
             layerInner
@@ -98,15 +113,28 @@ iD.ui.Background = function(context) {
                 return d.data.name;
             });
 
+            layerLinks.exit()
+                .remove();
+
+            layerList.style('display', layerList.selectAll('a.layer').data().length > 0 ? 'block' : 'none');
+        }
+
+        function update() {
+
+            backgroundList.call(drawList, clickSetSource, function(d) {
+                return !d.data.overlay;
+            });
+
+            overlayList.call(drawList, clickSetOverlay, function(d) {
+                return d.data.overlay;
+            });
+
             gpxLayerItem
                 .classed('selected', function() {
                     var gpxLayer = context.map().layers[1];
                     return !_.isEmpty(gpxLayer.geojson()) &&
                         gpxLayer.enable();
                 });
-
-            layerLinks.exit()
-                .remove();
 
             selectLayer();
         }
@@ -205,7 +233,11 @@ iD.ui.Background = function(context) {
         opa.select('.opacity-options li:nth-child(2)')
             .classed('selected', true);
 
-        var layerList = content
+        var backgroundList = content
+            .append('ul')
+            .attr('class', 'toggle-list');
+
+        var overlayList = content
             .append('ul')
             .attr('class', 'toggle-list');
 
