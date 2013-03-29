@@ -1021,6 +1021,7 @@ input[type=number] {
     border-right: 1px solid #CCC;
     border-radius: 0;
     border-left: 0;
+    background: rgba(0, 0, 0, 0);
 }
 
 .spin-control button.decrement {
