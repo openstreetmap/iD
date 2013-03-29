@@ -25,6 +25,18 @@ describe("iD.actions.Split", function () {
             expect(iD.actions.Split('*').disabled(graph)).not.to.be.ok;
         });
 
+        it("returns falsy for a self-intersection", function () {
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'c'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'a', 'd']})
+            });
+
+            expect(iD.actions.Split('a').disabled(graph)).not.to.be.ok;
+        });
+
         it("returns 'not_eligible' for the first node of a single way", function () {
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'}),
@@ -146,6 +158,35 @@ describe("iD.actions.Split", function () {
         expect(graph.entity('=').nodes).to.eql(['*', 'b']);
         expect(graph.entity('|').nodes).to.eql(['c', '*']);
         expect(graph.entity('¦').nodes).to.eql(['*', 'd']);
+    });
+
+    it("splits self-intersecting ways", function () {
+        // Situation:
+        //            b
+        //           / |
+        //          /  |
+        //         c - a -- d
+        //
+        // Split at a.
+        //
+        // Expected result:
+        //            b
+        //           / |
+        //          /  |
+        //         c - a == d
+        //
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'c'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'a', 'd']})
+        });
+
+        graph = iD.actions.Split('a', ['='])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'a']);
+        expect(graph.entity('=').nodes).to.eql(['a', 'd']);
     });
 
     it("splits a closed way at the given point and its antipode", function () {

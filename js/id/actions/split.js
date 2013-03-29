@@ -15,9 +15,17 @@ iD.actions.Split = function(nodeId, newWayIds) {
             parents = graph.parentWays(node);
 
         return parents.filter(function(parent) {
-            return parent.isClosed() ||
-                (parent.first() !== nodeId &&
-                 parent.last()  !== nodeId);
+            if (parent.isClosed()) {
+                return true;
+            }
+
+            for (var i = 1; i < parent.nodes.length - 1; i++) {
+                if (parent.nodes[i] === nodeId) {
+                    return true;
+                }
+            }
+
+            return false;
         });
     }
 
@@ -41,7 +49,7 @@ iD.actions.Split = function(nodeId, newWayIds) {
                 nodesB = nodes.slice(idxB).concat(nodes.slice(0, idxA + 1));
             }
         } else {
-            var idx = _.indexOf(wayA.nodes, nodeId);
+            var idx = _.indexOf(wayA.nodes, nodeId, 1);
             nodesA = wayA.nodes.slice(0, idx + 1);
             nodesB = wayA.nodes.slice(idx);
         }
