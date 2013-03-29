@@ -2203,7 +2203,6 @@ img.wiki-image {
 
 .radial-menu-item.disabled {
     cursor: auto;
-    pointer-events: none;
     fill: rgba(255,255,255,.5);
 }
 

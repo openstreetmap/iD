@@ -52,7 +52,6 @@ iD.ui.RadialMenu = function(operations) {
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('r', 15)
             .classed('disabled', function(d) { return d.disabled(); })
-            .style('pointer-events', 'all')
             .on('click', click)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
