@@ -245,6 +245,49 @@ locale.en = {
         "inspector": "# Using the Inspector\n\nThe inspector is the user interface element on the right-hand side of the\npage that appears when a feature is selected and allows you to edit its details.\n\n### Selecting a Feature Type\n\nAfter you add a point, line, or area, you can choose what type of feature it\nis, like whether it's a highway or residential road, supermarket or cafe.\nThe inspector will display buttons for common feature types, and you can\nfind others by typing what you're looking for in the search box.\n\nClick the 'i' in the bottom-right-hand corner of a feature type button to\nlearn more about it. Click a button to choose that type.\n\n### Using Forms and Editing Tags\n\nAfter you choose a feature type, or when you select a feature that already\nhas a type assigned, the inspector will display fields with details about\nthe feature like its name and address.\n\nBelow the fields you see, you can click icons to add other details,\nlike [Wikipedia](http://www.wikipedia.org/) information, wheelchair\naccess, and more.\n\nAt the bottom of the inspector, click 'Additional tags' to add arbitrary\nother tags to the element. [Taginfo](http://taginfo.openstreetmap.org/) is a\ngreat resource for learn more about popular tag combinations.\n\nChanges you make in the inspector are automatically applied to the map.\nYou can undo them at any time by clicking the 'Undo' button.\n\n### Closing the Inspector\n\nYou can close the inspector by clicking the close button in the top-right,\npressing the 'Escape' key, or clicking on the map.\n",
         "buildings": "# Buildings\n\nOpenStreetMap is the world's largest database of buildings. You can create\nand improve this database.\n\n### Selecting\n\nYou can select a building by clicking on its border. This will highlight the\nbuilding and open a small tools menu and a sidebar showing more information\nabout the building.\n\n### Modifying\n\nSometimes buildings are incorrectly placed or have incorrect tags.\n\nTo move an entire building, select it, then click the 'Move' tool. Move your\nmouse to shift the building, and click when it's correctly placed.\n\nTo fix the specific shape of a building, click and drag the points that form\nits border into better places.\n\n### Creating\n\nOne of the main questions around adding buildings to the map is that\nOpenStreetMap records buildings both as shapes and points. The rule of thumb\nis to _map a building as a shape whenever possible_, and map companies, homes,\namenities, and other things that operate out of buildings as points placed\nwithin the building shape.\n\nStart drawing a building as a shape by clicking the 'Area' button in the top\nleft of the interface, and end it either by pressing 'Return' on your keyboard\nor clicking on the first point drawn to close the shape.\n\n### Deleting\n\nIf a building is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the road could simply be newly built.\n\nYou can delete a building by clicking on it to select it, then clicking the\ntrash can icon or pressing the 'Delete' key.\n"
     },
+    "intro": {
+        "navigation": {
+            "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
+            "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
+            "header": "The header shows us the feature type.",
+            "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor with the close button in the top right.**"
+        },
+        "points": {
+            "add": "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**",
+            "place": "The point can be placed by clicking on the map. **Place the point on top of the building.**",
+            "search": "There many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **",
+            "choose": "**Choose Cafe from the grid.**",
+            "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**",
+            "close": "The feature editor can be closed by clicking on the close button. **Close the feature editor**",
+            "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**",
+            "fixname": "**Change the name and close the feature editor.**",
+            "reselect_delete": "All features on the map can be deleted. **Click on the point you created.**",
+            "delete": "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
+        },
+        "areas": {
+            "add": "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most features types points can be used for, and are often preferred. **Click the Area button to add a new area.**",
+            "corner": "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**",
+            "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting point. **Draw an area for the playground.**",
+            "search": "**Search for Playground.**",
+            "choose": "**Choose Playground from the grid.**",
+            "describe": "**Add a name, and close the feature editor**"
+        },
+        "lines": {
+            "add": "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**",
+            "start": "**Start the line by clicking on the end of the road.**",
+            "intersect": "Click to add more points to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**",
+            "finish": "Lines can be finished by clicking on the last point again. **Finish drawing the road.**",
+            "road": "**Select Road from the grid**",
+            "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
+            "describe": "**Name the road and close the feature editor.**",
+            "restart": "The road needs to intersect Flower Street."
+        },
+        "startediting": {
+            "help": "More documentation and this walkthrough are available here.",
+            "save": "Don't forget to regularly save your changes!",
+            "start": "Start mapping!"
+        }
+    },
     "presets": {
         "fields": {
             "access": {
@@ -1455,49 +1498,6 @@ locale.en = {
                 "name": "Weir",
                 "terms": ""
             }
-        }
-    },
-    "intro": {
-        "navigation": {
-            "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
-            "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
-            "header": "The header shows us the feature type.",
-            "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor with the close button in the top right.**"
-        },
-        "points": {
-            "add": "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**",
-            "place": "The point can be placed by clicking on the map. **Place the point on top of the building.**",
-            "search": "There many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **",
-            "choose": "**Choose Cafe from the grid.**",
-            "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**",
-            "close": "The feature editor can be closed by clicking on the close button. **Close the feature editor**",
-            "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**",
-            "fixname": "**Change the name and close the feature editor.**",
-            "reselect_delete": "All features on the map can be deleted. **Click on the point you created.**",
-            "delete": "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
-        },
-        "areas": {
-            "add": "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most features types points can be used for, and are often preferred. **Click the Area button to add a new area.**",
-            "corner": "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**",
-            "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting point. **Draw an area for the playground.**",
-            "search": "**Search for Playground.**",
-            "choose": "**Choose Playground from the grid.**",
-            "describe": "**Add a name, and close the feature editor**"
-        },
-        "lines": {
-            "add": "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**",
-            "start": "**Start the line by clicking on the end of the road.**",
-            "intersect": "Click to add more points to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**",
-            "finish": "Lines can be finished by clicking on the last point again. **Finish drawing the road.**",
-            "road": "**Select Road from the grid**",
-            "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
-            "describe": "**Name the road and close the feature editor.**",
-            "restart": "The road needs to intersect Flower Street."
-        },
-        "startediting": {
-            "help": "More documentation and this walkthrough are available here.",
-            "save": "Don't forget to regularly save your changes!",
-            "start": "Start mapping!"
         }
     }
 };
