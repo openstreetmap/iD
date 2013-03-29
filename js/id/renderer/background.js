@@ -4,6 +4,7 @@ iD.Background = function() {
         projection,
         cache = {},
         offset = [0, 0],
+        offsets = {},
         tileOrigin,
         z,
         transformProp = iD.util.prefixCSSProperty('Transform'),
@@ -135,6 +136,7 @@ iD.Background = function() {
     background.offset = function(_) {
         if (!arguments.length) return offset;
         offset = _;
+        if (source.data) offsets[source.data.name] = offset;
         return background;
     };
 
@@ -173,6 +175,11 @@ iD.Background = function() {
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
+        if (source.data) {
+            offset = offsets[source.data.name] = offsets[source.data.name] || [0, 0];
+        } else {
+            offset = [0, 0];
+        }
         cache = {};
         tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 20]);
         setHash(source);
