@@ -24,6 +24,9 @@ iD.ui.preset.url = function(field) {
         }
 
         if (field.type == 'number') {
+
+            input.attr('type', 'text');
+
             var numbercontrols = selection.append('div')
                 .attr('class', 'spin-control');
 
