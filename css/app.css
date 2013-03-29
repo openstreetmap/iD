@@ -1333,6 +1333,7 @@ img.wiki-image {
 /* Map Controls */
 
 .map-control {
+    z-index: 100;
     left:0px;
     position:absolute;
 }
@@ -1352,6 +1353,7 @@ img.wiki-image {
 }
 
 .map-overlay {
+    z-index: -1;
     right: 75%;
     max-width: 260px;
     min-width: 210px;
@@ -1549,6 +1551,7 @@ img.wiki-image {
     max-height: 300px;
     overflow-y: auto;
     padding: 0;
+    margin-top: 40px;
 }
 
 .geocode-control div.map-overlay span {
