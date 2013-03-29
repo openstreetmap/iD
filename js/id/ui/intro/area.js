@@ -52,8 +52,8 @@ iD.ui.intro.area = function(context, reveal) {
             context.on('enter.intro', null);
 
             timeout = setTimeout(function() {
-                reveal('.preset-grid-search', 'intro.areas.search');
-                d3.select('.preset-grid-search').on('keyup.intro', keySearch);
+                reveal('.preset-grid-search-wrap input', 'intro.areas.search');
+                d3.select('.preset-grid-search-wrap input').on('keyup.intro', keySearch);
             }, 500);
         }
         
@@ -62,7 +62,7 @@ iD.ui.intro.area = function(context, reveal) {
             if (first.datum().id === 'leisure/playground') {
                 reveal(first.select('.grid-entry').node(), 'intro.areas.choose');
                 d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
-                d3.select('.preset-grid-search').on('keyup.intro', null);
+                d3.select('.preset-grid-search-wrap input').on('keyup.intro', null);
             }
         }
 
@@ -80,7 +80,7 @@ iD.ui.intro.area = function(context, reveal) {
         context.on('exit.intro', null);
         context.history().on('change.intro', null);
         context.map().on('move.intro', null);
-        d3.select('.preset-grid-search').on('keyup.intro', null);
+        d3.select('.preset-grid-search-wrap input').on('keyup.intro', null);
     };
 
     return d3.rebind(step, event, 'on');
