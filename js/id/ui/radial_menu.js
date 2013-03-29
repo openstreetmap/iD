@@ -59,7 +59,7 @@ iD.ui.RadialMenu = function(operations) {
         button.append('use')
             .attr('transform', 'translate(-10, -10)')
             .attr('clip-path', 'url(#clip-square-20)')
-            .attr('xlink:href', function(d) { return '#icon-operation-' + d.id; });
+            .attr('xlink:href', function(d) { return '#icon-operation-' + (d.disabled() ? 'disabled-' : '') + d.id; });
 
         tooltip = d3.select(document.body)
             .append('div')
