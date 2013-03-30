@@ -1,11 +1,12 @@
 iD.ui.Commit = function(context) {
-    var event = d3.dispatch('cancel', 'save', 'fix');
+    var event = d3.dispatch('cancel', 'save', 'fix'),
+        presets = context.presets();
 
     function zipSame(d) {
         var c = [], n = -1;
         for (var i = 0; i < d.length; i++) {
             var desc = {
-                name: d[i].friendlyName(),
+                name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
                 type: d[i].type,
                 count: 1,
                 tagText: iD.util.tagText(d[i])

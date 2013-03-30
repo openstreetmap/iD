@@ -163,18 +163,4 @@ describe('iD.Entity', function () {
             expect(iD.Entity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
         });
     });
-
-    describe("#friendlyName", function () {
-        it("returns the name", function () {
-            expect(iD.Entity({ tags: { name: 'hi' }}).friendlyName()).to.equal('hi');
-        });
-
-        it("returns a highway tag value", function () {
-            expect(iD.Entity({ tags: { highway: 'Route 5' }}).friendlyName()).to.equal('Route 5');
-        });
-
-        it("prefers the name to a highway tag value", function () {
-            expect(iD.Entity({ tags: { name: 'hi', highway: 'Route 5' }}).friendlyName()).to.equal('hi');
-        });
-    });
 });
