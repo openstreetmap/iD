@@ -1037,8 +1037,16 @@ locale.en = {
                 "name": "Survey Point",
                 "terms": ""
             },
+            "man_made/wastewater_plant": {
+                "name": "Wastewater Plant",
+                "terms": "sewage works,sewage treatment plant,water treatment plant,reclamation plant"
+            },
             "man_made/water_tower": {
                 "name": "Water Tower",
+                "terms": ""
+            },
+            "man_made/water_works": {
+                "name": "Water Works",
                 "terms": ""
             },
             "natural": {

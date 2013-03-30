@@ -2129,6 +2129,23 @@
         ],
         "name": "Survey Point"
     },
+    "man_made/wastewater_plant": {
+        "icon": "water",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "man_made": "wastewater_plant"
+        },
+        "name": "Wastewater Plant",
+        "terms": [
+            "sewage works",
+            "sewage treatment plant",
+            "water treatment plant",
+            "reclamation plant"
+        ]
+    },
     "man_made/water_tower": {
         "icon": "water",
         "geometry": [
@@ -2139,6 +2156,17 @@
             "man_made": "water_tower"
         },
         "name": "Water Tower"
+    },
+    "man_made/water_works": {
+        "icon": "water",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "man_made": "water_works"
+        },
+        "name": "Water Works"
     },
     "natural": {
         "fields": [
