@@ -2,7 +2,7 @@ iD.svg.TagClasses = function() {
     var keys = d3.set([
         'highway', 'railway', 'waterway', 'power', 'motorway', 'amenity',
         'natural', 'landuse', 'building', 'oneway', 'bridge', 'boundary',
-        'tunnel', 'leisure', 'construction', 'place'
+        'tunnel', 'leisure', 'construction', 'place', 'aeroway'
     ]), tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
 
