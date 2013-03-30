@@ -595,6 +595,36 @@ path.casing.tag-highway-steps {
     stroke: #fff;
 }
 
+/* aeroways */
+
+path.shadow.tag-aeroway-runway {
+    stroke-width: 20;
+}
+
+path.stroke.tag-aeroway-taxiway {
+    stroke: #805C80;
+    stroke-width: 4;
+}
+path.stroke.tag-aeroway-runway {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 24, 48;
+}
+path.casing.tag-aeroway-runway {
+    stroke-width: 10;
+    stroke: #000;
+    stroke-linecap: square;
+}
+path.stroke.tag-aeroway-apron {
+    stroke: #805C80;
+}
+path.fill.tag-aeroway-apron {
+    fill: #805C80;
+    fill-opacity: 0.2;
+}
+
+
 /* bridges */
 
 path.casing.tag-bridge-yes {
