@@ -14,59 +14,24 @@ h1 {
 
 .header {
   background: #141516 url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
+  background-size: cover;
   color: #f8f8f8;
-  position: fixed;
-  z-index: 1;
-  height: 800px;
-  top: 0;
-}
-
-.header h2 { margin-bottom: 0;}
-
-.shadow {
-  margin-top: 590px;
-  position: relative;
-  background: white;
-  z-index: 2;
-}
-
-.limit {
-  margin: auto;
-  max-width: 1000px;
-}
-
-.section { padding-top: 0;}
-
-.screenshot {
-  opacity: 0;
-  background: url({{site.baseurl}}/img/editor.png) 0 0 no-repeat;
-  position: relative;
-  height: 507px;
-  width: 905px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  -webkit-animation:fadeIn .5s ease-out .5s both;
-     -moz-animation:fadeIn .5s ease-out .5s both;
-       -o-animation:fadeIn .5s ease-out .5s both;
-          animation:fadeIn .5s ease-out .5s both;
-}
-
-@-webkit-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-   @-moz-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-     @-o-keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-        @keyframes fadeIn { from { opacity:0; margin-top: 40px; } to { opacity:1; margin-top: 0;} }
-
-.basics { border-right: 1px solid #ddd; }
-
-.spot-illo {
-  background: url({{site.baseurl}}/img/sprite.png) 50% -90px no-repeat;
-  height: 150px;
   width: 100%;
 }
-.basics .spot-illo {
-  background: url({{site.baseurl}}/img/sprite.png) 50% -225px no-repeat;
+
+.header h2 { margin-bottom: 10px;}
+
+.limit {
+  width: 100%;
+  margin: auto;
+  max-width: 1000px;
+  background: white;
 }
+
+a.button.big.loading {
+  background: url({{site.baseurl}}/img/loading.gif);
+}
+
 .video {
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -104,12 +69,18 @@ a.button {
   text-align: center;
   padding: 8px;
 }
+
 a.button:hover { background: #54af29; }
+
+a.button.big {
+height: 60px;
+padding: 16px;
+}
 
 .footer {
   color: white;
-  background: #141516;
   text-align: center;
+  background: #141516 url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
 }
 
 .footer li {
@@ -127,14 +98,13 @@ a.button:hover { background: #54af29; }
 }
 
 @media only screen and (max-width: 640px) {
-  .basics,
+.actions .col6:first-child { border-right:0; }
   .video {
     border: 0;
     border-radius: 0;
   }
   .video { border-top: 1px solid #ddd;}
   .actions .pad4 { padding-bottom: 20px; }
-  .actions .col6:first-child { border-right: 0;}
   .actions .col6 { border-top: 1px solid #ddd; }
   .footer li { display: block; border:0; margin: 20px 0; padding: 0;}
 }
