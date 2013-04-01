@@ -8,7 +8,6 @@ body {
     min-width: 768px;
     color:#333;
     overflow: hidden;
-    /* text-rendering: optimizeLegibility;  */
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -962,6 +961,10 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 button.preset-add-field {
     width: 25%;
     height: 40px;
+    -webkit-transition: width 200ms;
+    -moz-transition: width 200ms;
+    -o-transition: width 200ms;
+    transition: width 200ms;
 }
 
 /* set width based on # of buttons */
@@ -1377,7 +1380,7 @@ img.wiki-image {
 /* Zoomer */
 
 .zoombuttons {
-    top:80px;
+    top: 180px;
     width: 30px;
 }
 
@@ -1388,7 +1391,7 @@ img.wiki-image {
 /* Background Settings */
 
 .background-control {
-    top:260px;
+    top: 80px;
 }
 
 .background-control button {
@@ -1545,7 +1548,7 @@ img.wiki-image {
 /* Geocoder */
 
 .geocode-control, .geocode-control form {
-    top:160px;
+    top:260px;
 }
 
 .geocode-control form {
@@ -1559,7 +1562,7 @@ img.wiki-image {
 .geocode-control div.map-overlay {
     border-top: 1px solid #CCC;
     z-index: 100;
-    max-height: 300px;
+    max-height: 240px;
     overflow-y: auto;
     padding: 0;
     margin-top: 40px;
@@ -1582,7 +1585,7 @@ img.wiki-image {
 /* Geolocator */
 
 .geolocate-control {
-    top:200px;
+    top:300px;
 }
 
 .geolocate-control button {
@@ -1592,7 +1595,7 @@ img.wiki-image {
 /* Help */
 
 .help-control {
-    top: 300px;
+    top: 120px;
 }
 
 .help-control button {
