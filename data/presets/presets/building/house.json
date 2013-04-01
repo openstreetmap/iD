@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "building": "house"
+    },
+    "name": "House"
+}

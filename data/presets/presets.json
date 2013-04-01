@@ -1010,7 +1010,8 @@
         "icon": "warehouse",
         "fields": [
             "building_yes",
-            "levels"
+            "levels",
+            "address"
         ],
         "geometry": [
             "area"
@@ -1046,6 +1047,20 @@
         },
         "name": "Entrance",
         "searchable": false
+    },
+    "building/house": {
+        "fields": [
+            "address",
+            "levels"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "building": "house"
+        },
+        "name": "House"
     },
     "entrance": {
         "geometry": [

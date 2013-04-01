@@ -2,7 +2,8 @@
     "icon": "warehouse",
     "fields": [
         "building_yes",
-        "levels"
+        "levels",
+        "address"
     ],
     "geometry": [
         "area"
