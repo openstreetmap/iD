@@ -59,6 +59,20 @@ Translations are licensed under
 [WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license
 as iD.
 
+**Why are there so many duplicate "Type" translations?** There are multiple
+distinct preset fields with the label "Type". You can see some context on the
+"Details" tab in Transifex:
+
+![image](https://f.cloud.github.com/assets/98601/324275/1a5cfc8c-9ae0-11e2-9a38-36c0f14d532d.png)
+
+The "key" field indicates that this is the "Type" label for the
+"[aeroway](http://wiki.openstreetmap.org/wiki/Aeroway)" preset, i.e. you should
+translate it as you would translate "type" in "type of aeroway".
+
+These are separate translations for uniformity reasons and because some languages
+ may translate "type" differently in "type of aeroway" and "type of amenity", for
+ example.
+
 ## Adding New Strings for Translation
 
 iD translates strings with a `t` function - `t('foo.bar')` translate the key
