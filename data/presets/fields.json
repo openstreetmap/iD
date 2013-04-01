@@ -400,7 +400,7 @@
     },
     "wikipedia": {
         "key": "wikipedia",
-        "type": "text",
+        "type": "wikipedia",
         "icon": "wikipedia",
         "universal": true,
         "label": "Wikipedia"

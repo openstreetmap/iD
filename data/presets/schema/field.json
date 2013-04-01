@@ -28,7 +28,8 @@
                 "email",
                 "url",
                 "radio",
-                "textarea"
+                "textarea",
+                "wikipedia"
             ],
             "required": true
         },

@@ -139,7 +139,7 @@ d3.combobox = function() {
                 match;
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i].value.indexOf(value) === 0) {
+                if (data[i].value.toLowerCase().indexOf(value.toLowerCase()) === 0) {
                     match = data[i].value;
                     break;
                 }

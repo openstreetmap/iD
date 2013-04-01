@@ -1121,6 +1121,29 @@ input[type=number] {
     background-color: #E8EBFF !important;
 }
 
+.form-field .wiki-lang {
+    width: 30%;
+    border-right: none;
+    border-radius: 0 0 0 4px;
+}
+
+.form-field .wiki-title {
+    width: 60%;
+    border-right: none;
+    border-radius: 0;
+}
+
+.form-field .wiki-link {
+    border-radius: 0 0 4px 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 30px;
+    width: 10%;
+    float: right;
+    padding: 5px;
+    text-align: center;
+}
+
 /* Preset form address */
 
 .form-field .addr-housename {
@@ -1184,6 +1207,7 @@ div.combobox {
 
 .combobox-carat {
     margin-left: -20px;
+    margin-right: 10px;
     display:inline-block;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     border-top: 5px solid #ccc;

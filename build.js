@@ -94,6 +94,7 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     discarded: r('discarded.json'),
     keys: r('keys.json'),
     imagery: r('imagery.json'),
+    wikipedia: r('wikipedia.json'),
     presets: {
         presets: rp('presets.json'),
         defaults: rp('defaults.json'),
