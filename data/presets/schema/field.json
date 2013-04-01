@@ -23,6 +23,7 @@
                 "combo",
                 "defaultcheck",
                 "text",
+                "maxspeed",
                 "number",
                 "tel",
                 "email",

@@ -1144,6 +1144,24 @@ input[type=number] {
     text-align: center;
 }
 
+#preset-input-maxspeed {
+    border-right: none;
+    border-radius: 0;
+    width: 80%;
+}
+
+.form-field .maxspeed-unit {
+    border-radius: 0 0 4px 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 30px;
+    width: 20%;
+    float: right;
+    padding: 5px;
+    text-align: center;
+
+}
+
 /* Preset form address */
 
 .form-field .addr-housename {

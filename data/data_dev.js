@@ -13,7 +13,8 @@ iD.data = {
             path + 'data/presets/presets.json',
             path + 'data/presets/defaults.json',
             path + 'data/presets/categories.json',
-            path + 'data/presets/fields.json'
+            path + 'data/presets/fields.json',
+            path + 'data/imperial.json'
             ], d3.json, function (err, data) {
 
             iD.data = {
@@ -27,7 +28,8 @@ iD.data = {
                     defaults: data[6],
                     categories: data[7],
                     fields: data[8]
-                }
+                },
+                imperial: data[9]
             };
 
             callback();

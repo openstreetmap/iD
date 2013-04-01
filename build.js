@@ -100,7 +100,8 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
         defaults: rp('defaults.json'),
         categories: rp('categories.json'),
         fields: rp('fields.json')
-    }
+    },
+    imperial: r('imperial.json')
 }) + ';');
 
 // Push changes from data/core.yaml into data/locales.js
