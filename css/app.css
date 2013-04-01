@@ -47,7 +47,7 @@ body {
     background: black;
 }
 
-div, textarea, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5 {
+div, textarea, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -1338,10 +1338,12 @@ div.combobox {
 
 img.wiki-image {
     float: left;
-    max-width: 33.3333%;
+    width: 33.3333%;
+    width: calc(33.3333% - 10px);
+    width: -webkit-calc(33.3333% - 10px);
     margin-right: 20px;
-    max-height: 200px;
     border-radius: 4px;
+    max-height: 200px;
 }
 
 /* Map Controls */

@@ -83,6 +83,7 @@ iD.ui.TagReference = function(entity, tag) {
             .style('opacity', '0')
             .transition()
             .duration(200)
+            .delay(100)
             .style('max-height', '200px')
             .style('opacity', '1');
 
