@@ -24,7 +24,7 @@ iD.ui.intro.navigation = function(context, reveal) {
     step.enter = function() {
 
         var map = { 
-            left: 0,
+            left: 30,
             top: 60,
             width: window.innerWidth - 400,
             height: window.innerHeight - 200
