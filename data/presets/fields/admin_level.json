@@ -1,0 +1,5 @@
+{
+    "key": "admin_level",
+    "type": "number",
+    "label": "Admin Level"
+}

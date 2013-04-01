@@ -24,6 +24,11 @@
             }
         }
     },
+    "admin_level": {
+        "key": "admin_level",
+        "type": "number",
+        "label": "Admin Level"
+    },
     "aeroway": {
         "key": "aeroway",
         "type": "combo",

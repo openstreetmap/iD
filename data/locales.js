@@ -321,6 +321,9 @@ locale.en = {
                     "city": "City"
                 }
             },
+            "admin_level": {
+                "label": "Admin Level"
+            },
             "aeroway": {
                 "label": "Type"
             },
@@ -745,6 +748,10 @@ locale.en = {
                 "name": "Wall",
                 "terms": ""
             },
+            "boundary/administrative": {
+                "name": "Administrative Boundary",
+                "terms": ""
+            },
             "building": {
                 "name": "Building",
                 "terms": ""
@@ -755,6 +762,10 @@ locale.en = {
             },
             "building/entrance": {
                 "name": "Entrance",
+                "terms": ""
+            },
+            "building/house": {
+                "name": "House",
                 "terms": ""
             },
             "entrance": {

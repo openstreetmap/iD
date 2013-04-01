@@ -1006,6 +1006,19 @@
         },
         "name": "Wall"
     },
+    "boundary/administrative": {
+        "name": "Administrative Boundary",
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "boundary": "administrative"
+        },
+        "fields": [
+            "admin_level"
+        ]
+    },
     "building": {
         "icon": "warehouse",
         "fields": [

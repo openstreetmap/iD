@@ -10,6 +10,8 @@ en:
           number: "123"
           street: Street
           city: City
+      admin_level: 
+        label: Admin Level
       aeroway: 
         label: Type
       amenity: 
@@ -314,6 +316,9 @@ en:
         terms: ""
       barrier/wall: 
         name: Wall
+        terms: ""
+      boundary/administrative: 
+        name: Administrative Boundary
         terms: ""
       building: 
         name: Building
