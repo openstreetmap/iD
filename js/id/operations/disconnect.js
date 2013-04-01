@@ -4,7 +4,11 @@ iD.operations.Disconnect = function(selection, context) {
     });
 
     var entityId = vertices[0],
-        action = iD.actions.Disconnect(entityId, _.without(selection, entityId));
+        action = iD.actions.Disconnect(entityId);
+
+    if (selection.length > 1) {
+        action.limitWays(_.without(selection, entityId));
+    }
 
     var operation = function() {
         context.perform(action, t('operations.disconnect.annotation'));

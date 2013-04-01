@@ -4,7 +4,11 @@ iD.operations.Split = function(selection, context) {
     });
 
     var entityId = vertices[0],
-        action = iD.actions.Split(entityId, _.without(selection, entityId));
+        action = iD.actions.Split(entityId);
+
+    if (selection.length > 1) {
+        action.limitWays(_.without(selection, entityId));
+    }
 
     var operation = function() {
         var annotation;

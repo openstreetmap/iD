@@ -74,7 +74,7 @@ describe("iD.actions.Disconnect", function () {
                 '|': iD.Way({id: '|', nodes: ['d', 'b']})
             });
 
-        graph = iD.actions.Disconnect('b', undefined, 'e')(graph);
+        graph = iD.actions.Disconnect('b', 'e')(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('|').nodes).to.eql(['d', 'e']);
@@ -102,7 +102,7 @@ describe("iD.actions.Disconnect", function () {
                 '|': iD.Way({id: '|', nodes: ['d', 'b']})
             });
 
-        graph = iD.actions.Disconnect('b', ['-'], 'e')(graph);
+        graph = iD.actions.Disconnect('b', 'e').limitWays(['-'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'e']);
         expect(graph.entity('=').nodes).to.eql(['b', 'c']);
@@ -124,7 +124,7 @@ describe("iD.actions.Disconnect", function () {
                 'c': iD.Node({id: 'c'}),
                 'w': iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'a']})
         });
-        graph = iD.actions.Disconnect('a', undefined, 'd')(graph);
+        graph = iD.actions.Disconnect('a', 'd')(graph);
         expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd']);
     });
 
@@ -140,7 +140,7 @@ describe("iD.actions.Disconnect", function () {
                 '|': iD.Way({id: '|', nodes: ['d', 'b']})
             });
 
-        graph = iD.actions.Disconnect('b', undefined, 'e')(graph);
+        graph = iD.actions.Disconnect('b', 'e')(graph);
 
         // Immutable loc => should be shared by identity.
         expect(graph.entity('b').loc).to.equal(loc);

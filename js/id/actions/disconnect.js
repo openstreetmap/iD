@@ -12,7 +12,9 @@
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
-iD.actions.Disconnect = function(nodeId, wayIds, newNodeId) {
+iD.actions.Disconnect = function(nodeId, newNodeId) {
+    var wayIds;
+
     var action = function(graph) {
         var node = graph.entity(nodeId),
             replacements = action.replacements(graph);
@@ -32,7 +34,7 @@ iD.actions.Disconnect = function(nodeId, wayIds, newNodeId) {
             parents = graph.parentWays(graph.entity(nodeId));
 
         parents.forEach(function(parent) {
-            if (wayIds && wayIds.length && wayIds.indexOf(parent.id) === -1) {
+            if (wayIds && wayIds.indexOf(parent.id) === -1) {
                 keeping = true;
                 return;
             }
@@ -49,8 +51,14 @@ iD.actions.Disconnect = function(nodeId, wayIds, newNodeId) {
 
     action.disabled = function(graph) {
         var replacements = action.replacements(graph);
-        if (replacements.length === 0 || (wayIds && wayIds.length && wayIds.length !== replacements.length))
+        if (replacements.length === 0 || (wayIds && wayIds.length !== replacements.length))
             return 'not_connected';
+    };
+
+    action.limitWays = function(_) {
+        if (!arguments.length) return wayIds;
+        wayIds = _;
+        return action;
     };
 
     return action;

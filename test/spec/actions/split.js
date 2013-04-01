@@ -36,7 +36,7 @@ describe("iD.actions.Split", function () {
                     '|': iD.Way({id: '|', nodes: ['c', '*', 'd']})
             });
 
-            expect(iD.actions.Split('*', ['-']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Split('*').limitWays(['-']).disabled(graph)).not.to.be.ok;
         });
 
         it("returns falsy for a self-intersection", function () {
@@ -82,7 +82,7 @@ describe("iD.actions.Split", function () {
                     '|': iD.Way({id: '|', nodes: ['c', '*', 'd']})
             });
 
-            expect(iD.actions.Split('*', ['-', '=']).disabled(graph)).to.equal('not_eligible');
+            expect(iD.actions.Split('*').limitWays(['-', '=']).disabled(graph)).to.equal('not_eligible');
         });
     });
 
@@ -102,7 +102,7 @@ describe("iD.actions.Split", function () {
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']})
             });
 
-        graph = iD.actions.Split('b', undefined, ['='])(graph);
+        graph = iD.actions.Split('b', ['='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b']);
         expect(graph.entity('=').nodes).to.eql(['b', 'c']);
@@ -117,7 +117,7 @@ describe("iD.actions.Split", function () {
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c'], tags: tags})
             });
 
-        graph = iD.actions.Split('b', undefined, ['='])(graph);
+        graph = iD.actions.Split('b', ['='])(graph);
 
         // Immutable tags => should be shared by identity.
         expect(graph.entity('-').tags).to.equal(tags);
@@ -146,7 +146,7 @@ describe("iD.actions.Split", function () {
                 '|': iD.Way({id: '|', nodes: ['d', 'b']})
             });
 
-        graph = iD.actions.Split('b', undefined, ['='])(graph);
+        graph = iD.actions.Split('b', ['='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b']);
         expect(graph.entity('=').nodes).to.eql(['b', 'c']);
@@ -180,7 +180,7 @@ describe("iD.actions.Split", function () {
                 '|': iD.Way({id: '|', nodes: ['c', '*', 'd']})
         });
 
-        graph = iD.actions.Split('*', undefined, ['=', '¦'])(graph);
+        graph = iD.actions.Split('*', ['=', '¦'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', '*']);
         expect(graph.entity('=').nodes).to.eql(['*', 'b']);
@@ -199,17 +199,17 @@ describe("iD.actions.Split", function () {
                 '|': iD.Way({id: '|', nodes: ['c', '*', 'd']})
         });
 
-        var g1 = iD.actions.Split('*', ['-'], ['='])(graph);
+        var g1 = iD.actions.Split('*', ['=']).limitWays(['-'])(graph);
         expect(g1.entity('-').nodes).to.eql(['a', '*']);
         expect(g1.entity('=').nodes).to.eql(['*', 'b']);
         expect(g1.entity('|').nodes).to.eql(['c', '*', 'd']);
 
-        var g2 = iD.actions.Split('*', ['|'], ['¦'])(graph);
+        var g2 = iD.actions.Split('*', ['¦']).limitWays(['|'])(graph);
         expect(g2.entity('-').nodes).to.eql(['a', '*', 'b']);
         expect(g2.entity('|').nodes).to.eql(['c', '*']);
         expect(g2.entity('¦').nodes).to.eql(['*', 'd']);
 
-        var g3 = iD.actions.Split('*', ['-', '|'], ['=', '¦'])(graph);
+        var g3 = iD.actions.Split('*', ['=', '¦']).limitWays(['-', '|'])(graph);
         expect(g3.entity('-').nodes).to.eql(['a', '*']);
         expect(g3.entity('=').nodes).to.eql(['*', 'b']);
         expect(g3.entity('|').nodes).to.eql(['c', '*']);
@@ -239,7 +239,7 @@ describe("iD.actions.Split", function () {
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'a', 'd']})
         });
 
-        graph = iD.actions.Split('a', undefined, ['='])(graph);
+        graph = iD.actions.Split('a', ['='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'a']);
         expect(graph.entity('=').nodes).to.eql(['a', 'd']);
@@ -266,19 +266,19 @@ describe("iD.actions.Split", function () {
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             });
 
-        var g1 = iD.actions.Split('a', undefined, ['='])(graph);
+        var g1 = iD.actions.Split('a', ['='])(graph);
         expect(g1.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(g1.entity('=').nodes).to.eql(['c', 'd', 'a']);
 
-        var g2 = iD.actions.Split('b', undefined, ['='])(graph);
+        var g2 = iD.actions.Split('b', ['='])(graph);
         expect(g2.entity('-').nodes).to.eql(['b', 'c', 'd']);
         expect(g2.entity('=').nodes).to.eql(['d', 'a', 'b']);
 
-        var g3 = iD.actions.Split('c', undefined, ['='])(graph);
+        var g3 = iD.actions.Split('c', ['='])(graph);
         expect(g3.entity('-').nodes).to.eql(['c', 'd', 'a']);
         expect(g3.entity('=').nodes).to.eql(['a', 'b', 'c']);
 
-        var g4 = iD.actions.Split('d', undefined, ['='])(graph);
+        var g4 = iD.actions.Split('d', ['='])(graph);
         expect(g4.entity('-').nodes).to.eql(['d', 'a', 'b']);
         expect(g4.entity('=').nodes).to.eql(['b', 'c', 'd']);
     });
@@ -292,7 +292,7 @@ describe("iD.actions.Split", function () {
                 '-': iD.Way({id: '-', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
             });
 
-        graph = iD.actions.Split('a', undefined, ['='])(graph);
+        graph = iD.actions.Split('a', ['='])(graph);
         expect(graph.entity('-').tags).to.eql({});
         expect(graph.entity('=').tags).to.eql({});
         expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
@@ -324,7 +324,7 @@ describe("iD.actions.Split", function () {
                 'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way', role: 'forward'}]})
             });
 
-        graph = iD.actions.Split('b', undefined, ['='])(graph);
+        graph = iD.actions.Split('b', ['='])(graph);
 
         expect(graph.entity('r').members).to.eql([
             {id: '-', type: 'way', role: 'forward'},
@@ -353,7 +353,7 @@ describe("iD.actions.Split", function () {
                 'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
             });
 
-        graph = iD.actions.Split('b', undefined, ['='])(graph);
+        graph = iD.actions.Split('b', ['='])(graph);
 
         expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=', '~']);
     });
@@ -379,7 +379,7 @@ describe("iD.actions.Split", function () {
                 'r': iD.Relation({id: 'r', members: [{id: '~', type: 'way'}, {id: '-', type: 'way'}]})
             });
 
-        graph = iD.actions.Split('b', undefined, ['='])(graph);
+        graph = iD.actions.Split('b', ['='])(graph);
 
         expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
     });
@@ -393,7 +393,7 @@ describe("iD.actions.Split", function () {
                 'r': iD.Relation({id: 'r', members: [{id: '~', type: 'way'}, {id: '-', type: 'way'}]})
             });
 
-        graph = iD.actions.Split('b', undefined, ['='])(graph);
+        graph = iD.actions.Split('b', ['='])(graph);
 
         expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
     });
@@ -423,7 +423,7 @@ describe("iD.actions.Split", function () {
                         {id: 'c', role: 'via'}]})
                 });
 
-            graph = iD.actions.Split('b', undefined, ['='])(graph);
+            graph = iD.actions.Split('b', ['='])(graph);
 
             expect(graph.entity('r').members).to.eql([
                 {id: '=', role: 'from'},
@@ -455,7 +455,7 @@ describe("iD.actions.Split", function () {
                         {id: 'c', role: 'via'}]})
                 });
 
-            graph = iD.actions.Split('b', undefined, ['='])(graph);
+            graph = iD.actions.Split('b', ['='])(graph);
 
             expect(graph.entity('r').members).to.eql([
                 {id: '~', role: 'from'},
@@ -487,7 +487,7 @@ describe("iD.actions.Split", function () {
                         {id: 'c', role: 'via'}]})
                 });
 
-            graph = iD.actions.Split('b', undefined, ['='])(graph);
+            graph = iD.actions.Split('b', ['='])(graph);
 
             expect(graph.entity('r').members).to.eql([
                 {id: '-', role: 'from'},

@@ -12,7 +12,9 @@
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-iD.actions.Split = function(nodeId, wayIds, newWayIds) {
+iD.actions.Split = function(nodeId, newWayIds) {
+    var wayIds;
+
     function split(graph, wayA, newWayId) {
         var wayB = iD.Way({id: newWayId, tags: wayA.tags}),
             nodesA,
@@ -98,7 +100,7 @@ iD.actions.Split = function(nodeId, wayIds, newWayIds) {
             parents = graph.parentWays(node);
 
         return parents.filter(function(parent) {
-            if (wayIds && wayIds.length && wayIds.indexOf(parent.id) === -1)
+            if (wayIds && wayIds.indexOf(parent.id) === -1)
                 return false;
 
             if (parent.isClosed()) {
@@ -117,8 +119,14 @@ iD.actions.Split = function(nodeId, wayIds, newWayIds) {
 
     action.disabled = function(graph) {
         var candidates = action.ways(graph);
-        if (candidates.length === 0 || (wayIds && wayIds.length && wayIds.length !== candidates.length))
+        if (candidates.length === 0 || (wayIds && wayIds.length !== candidates.length))
             return 'not_eligible';
+    };
+
+    action.limitWays = function(_) {
+        if (!arguments.length) return wayIds;
+        wayIds = _;
+        return action;
     };
 
     return action;
