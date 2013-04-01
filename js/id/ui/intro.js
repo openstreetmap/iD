@@ -9,6 +9,7 @@ iD.ui.intro = function(context) {
         // Save current map state
         var history = context.history().toJSON(),
             hash = window.location.hash,
+            background = context.background().source(),
             opacity = d3.select('.layer-layer:first-child').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
             baseEntities = context.history().graph().base().entities;
@@ -17,6 +18,10 @@ iD.ui.intro = function(context) {
         context.connection().toggle(false).flush();
         context.history().save().reset();
         context.history().merge(iD.Graph().load(JSON.parse(iD.introGraph)).entities);
+
+        context.background().source(_.find(context.backgroundSources(), function(d) {
+            return d.data.sourcetag === "Bing";
+        }));
 
         // Block saving
         var savebutton = d3.select('#bar button.save'),
@@ -53,6 +58,7 @@ iD.ui.intro = function(context) {
             d3.select('.layer-layer:first-child').style('opacity', opacity);
             context.connection().toggle(true).flush().loadedTiles(loadedTiles);
             context.history().reset().merge(baseEntities);
+            context.background().source(background);
             if (history) context.history().fromJSON(history);
             window.location.replace(hash);
             window.onbeforeunload = beforeunload;
