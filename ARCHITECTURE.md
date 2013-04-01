@@ -171,7 +171,7 @@ With _modes_, we shift gears from abstract data types and algorithms to the
 parts of the architecture that implement the user interface for iD. Modes are
 manifested in the interface by the four buttons at the top left:
 
-![Mode buttons](img/modes.png)
+![Mode buttons](docs/img/modes.png)
 
 The modality of existing OSM editors runs the gamut from Potlatch 2, which is
 almost entirely modeless, to JOSM, which sports half a dozen modes out of the
@@ -233,7 +233,7 @@ internal state. After being constructed, an operation can be queried as to
 whether or not it should be made available (i.e., show up in the context menu)
 and if so, if it should be enabled.
 
-![Operations menu](img/operations.png)
+![Operations menu](docs/img/operations.png)
 
 We make a distinction between availability and enabled state for the sake of
 learnability: most operations are available so long as an entity of the
@@ -305,7 +305,7 @@ the page footer, the interface for saving changes, the splash screen you see
 the first time you use iD, the geocoding and background layer controls, and the
 tag/preset editor, for example.
 
-![Geocoder UI](img/geocoder.png)
+![Geocoder UI](docs/img/geocoder.png)
 
 The implementations for all non-map UI components live in the `iD.ui` namespace.
 Many of the modules in this namespace follow a pattern for reusable d3
