@@ -1197,6 +1197,7 @@ div.combobox {
     overflow: hidden;
 }
 
+.combobox a.selected,
 .combobox a:hover {
     background: #ececec;
 }
