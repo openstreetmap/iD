@@ -106,5 +106,9 @@ iD.ui.preset.wikipedia = function(field, context) {
         entity = _;
     };
 
+    i.focus = function() {
+        title.node().focus();
+    };
+
     return d3.rebind(i, event, 'on');
 };

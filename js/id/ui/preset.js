@@ -15,7 +15,7 @@ iD.ui.preset = function(context, entity, preset) {
 
         field.reference = iD.ui.TagReference(entity, {key: field.key});
 
-        if (field.type === 'address') {
+        if (field.type === 'address' || field.type === 'wikipedia') {
             field.input.entity(entity);
         }
 
