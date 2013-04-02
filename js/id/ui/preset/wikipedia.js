@@ -49,9 +49,10 @@ iD.ui.preset.wikipedia = function(field, context) {
             .call(titlecombo);
 
         link = selection.append('a')
-            .attr('class', 'wiki-link')
+            .attr('class', 'wiki-link minor')
             .attr('target', '_blank')
-            .text('→');
+            .append('span')
+                .attr('class','icon out-link');
     }
 
     function changeLang() {
