@@ -3,7 +3,7 @@ iD.ui.preset.wikipedia = function(field, context) {
     var event = d3.dispatch('change', 'close'),
         wikipedia = iD.wikipedia(),
         language = iD.data.wikipedia[0],
-        link, entity, lang, input;
+        link, entity, lang, title;
 
     function i(selection) {
 
@@ -49,9 +49,10 @@ iD.ui.preset.wikipedia = function(field, context) {
             .call(titlecombo);
 
         link = selection.append('a')
-            .attr('class', 'wiki-link')
+            .attr('class', 'wiki-link minor')
             .attr('target', '_blank')
-            .text('→');
+            .append('span')
+                .attr('class','icon out-link');
     }
 
     function changeLang() {

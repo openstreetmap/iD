@@ -487,6 +487,7 @@ button.save.has-count .count::before {
 .icon.back       { background-position: -420px 0;}
 .icon.forward    { background-position: -440px 0;}
 .icon.help       { background-position: -460px 0;}
+.icon.out-link   { background-position: -480px 0;}
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
@@ -1142,6 +1143,14 @@ input[type=number] {
     float: right;
     padding: 5px;
     text-align: center;
+    -webkit-transition: all 100ms;
+       -moz-transition: all 100ms;
+         -o-transition: all 100ms;
+            transition: all 100ms;
+}
+
+.form-field .wiki-link:hover {
+    background: #ececec;
 }
 
 #preset-input-maxspeed {
