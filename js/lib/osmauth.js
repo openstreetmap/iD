@@ -16,10 +16,8 @@ module.exports = function(keys, o) {
     //
     //     { "http://www.openstreetmap.org/": {
     //         oauth_secret: '9WfJnwQxDvvYagx1Ut0tZBsOZ0ZCzAvOje3u1TV0',
-    //         oauth_consumer_key: "WLwXbm6XFMG7WrVnE8enIF6GzyefYIN6oUJSxG65",
-    //         oauth_signature_method: "HMAC-SHA1"
+    //         oauth_consumer_key: "WLwXbm6XFMG7WrVnE8enIF6GzyefYIN6oUJSxG65"
     //     } }
-
     o = o || {};
     o.url = o.url || 'http://www.openstreetmap.org';
 
@@ -31,7 +29,7 @@ module.exports = function(keys, o) {
     // authenticated users will also have a request token secret, but it's
     // not used in transactions with the server
     oauth.authenticated = function() {
-        return token('oauth_token') && token('oauth_token_secret');
+        return !!(token('oauth_token') && token('oauth_token_secret'));
     };
 
     oauth.logout = function() {
@@ -127,7 +125,7 @@ module.exports = function(keys, o) {
     // A single XMLHttpRequest wrapper that does authenticated calls if the
     // user has logged in.
     oauth.xhr = function(options, callback) {
-        if (!token('oauth_token')) {
+        if (!oauth.authenticated()) {
             if (o.auto) return oauth.authenticate(run);
             else return callback('not authenticated', null);
         } else return run();
@@ -161,11 +159,21 @@ module.exports = function(keys, o) {
         return oauth;
     };
 
+    // pre-authorize this object, if we can just get a token and token_secret
+    // from the start
+    oauth.preauth = function(_) {
+        var c = _[o.url];
+        if (!c) return;
+        if (c.oauth_token) token('oauth_token', c.oauth_token);
+        if (c.oauth_token_secret) token('oauth_token_secret', c.oauth_token_secret);
+        return oauth;
+    };
+
     // Reset the base URL that this OAuth connection points to
     oauth.keys = function(_) {
         if (!arguments.length) return keys;
         keys = _;
-        return oauth;
+        return oauth.preauth(keys);
     };
 
     // 'stamp' an authentication object from `getAuth()`
@@ -194,6 +202,9 @@ module.exports = function(keys, o) {
             oauth_signature_method: "HMAC-SHA1"
         };
     }
+
+    // potentially pre-authorize
+    oauth.keys(keys);
 
     return oauth;
 };
