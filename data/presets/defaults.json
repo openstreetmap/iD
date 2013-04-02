@@ -1,44 +1,37 @@
 {
     "area": [
         "building",
-        "park",
-        "water",
-        "parking",
-        "hospital",
-        "place of worship",
-        "cafe",
-        "restaurant",
-        "bar",
-        "fast food",
-        "bank",
-        "other"
+        "leisure/park",
+        "natural/water",
+        "amenity/hospital",
+        "amenity/place_of_worship",
+        "amenity/cafe",
+        "amenity/restaurant",
+        "amenity/bar",
+        "other_area"
     ],
     "line": [
-        "roads",
-        "foot path",
-        "cycle path",
-        "rail",
-        "river",
-        "stream",
+        "Road",
+        "Rail",
+        "Path",
+        "Water",
+        "power/line",
         "other"
     ],
     "point": [
-        "bus stop",
-        "park",
-        "hospital",
-        "place of worship",
-        "cafe",
-        "restaurant",
-        "bar",
-        "fast food",
-        "bank",
-        "cinema",
-        "supermarket",
+        "leisure/park",
+        "amenity/hospital",
+        "amenity/place_of_worship",
+        "amenity/cafe",
+        "amenity/restaurant",
+        "amenity/bar",
+        "amenity/bank",
+        "shop/supermarket",
         "other"
     ],
     "vertex": [
-        "crossing",
-        "turning circle",
+        "highway/crossing",
+        "highway/turning_circle",
         "other"
     ]
 }

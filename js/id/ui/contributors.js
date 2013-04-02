@@ -13,7 +13,7 @@ iD.ui.Contributors = function(context) {
 
         selection.html('')
             .append('span')
-            .attr('class', 'icon nearby icon-pre-text');
+            .attr('class', 'icon nearby light icon-pre-text');
 
         var userList = d3.select(document.createElement('span'));
 

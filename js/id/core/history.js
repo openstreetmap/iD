@@ -89,12 +89,6 @@ iD.History = function(context) {
         undo: function() {
             var previous = stack[index].graph;
 
-            // Pop to the first annotated state.
-            while (index > 0) {
-                if (stack[index].annotation) break;
-                index--;
-            }
-
             // Pop to the next annotated state.
             while (index > 0) {
                 index--;
@@ -183,34 +177,55 @@ iD.History = function(context) {
             index = 0;
             tree = iD.Tree(stack[0].graph);
             dispatch.change();
+            return history;
         },
 
-        save: function() {
-            if (!lock) return;
-            context.storage(getKey('lock'), null);
-
+        toJSON: function() {
             if (stack.length <= 1) return;
 
-            var json = JSON.stringify(stack.map(function(i) {
+            var s = stack.map(function(i) {
                 var x = { entities: i.graph.entities };
                 if (i.imagery_used) x.imagery_used = i.imagery_used;
                 if (i.annotation) x.annotation = i.annotation;
                 return x;
-            }), function includeUndefined(key, value) {
+            });
+
+            return JSON.stringify({
+                stack: s,
+                nextIDs: iD.Entity.id.next,
+                index: index
+            }, function includeUndefined(key, value) {
                 if (typeof value === 'undefined') return 'undefined';
                 return value;
             });
+        },
 
-            context.storage(getKey('history'), json);
-            context.storage(getKey('nextIDs'), JSON.stringify(iD.Entity.id.next));
-            context.storage(getKey('index'), index);
+        fromJSON: function(json) {
+
+            var h = JSON.parse(json);
+
+            iD.Entity.id.next = h.nextIDs;
+            index = h.index;
+            stack = h.stack.map(function(d) {
+                d.graph = iD.Graph(stack[0].graph).load(d.entities);
+                return d;
+            });
+            stack[0].graph.inherited = false;
+            dispatch.change();
+
+            return history;
+        },
+
+        save: function() {
+            if (!lock) return history;
+            context.storage(getKey('lock'), null);
+            context.storage(getKey('saved_history'), this.toJSON() || null);
+            return history;
         },
 
         clearSaved: function() {
             if (!lock) return;
-            context.storage(getKey('history'), null);
-            context.storage(getKey('nextIDs'), null);
-            context.storage(getKey('index'), null);
+            context.storage(getKey('saved_history'), null);
         },
 
         lock: function() {
@@ -223,31 +238,18 @@ iD.History = function(context) {
         // is iD not open in another window and it detects that
         // there's a history stored in localStorage that's recoverable?
         restorableChanges: function() {
-            return lock && !!context.storage(getKey('history'));
+            return lock && !!context.storage(getKey('saved_history'));
         },
 
         // load history from a version stored in localStorage
-        load: function() {
+        restore: function() {
             if (!lock) return;
 
-            var json = context.storage(getKey('history')),
-                nextIDs = context.storage(getKey('nextIDs')),
-                index_ = context.storage(getKey('index'));
+            var json = context.storage(getKey('saved_history'));
+            if (json) this.fromJSON(json);
 
-            if (!json) return;
-            if (nextIDs) iD.Entity.id.next = JSON.parse(nextIDs);
-            if (index_ !== null) index = parseInt(index_, 10);
+            context.storage(getKey('saved_history', null));
 
-            context.storage(getKey('history', null));
-            context.storage(getKey('nextIDs', null));
-            context.storage(getKey('index', null));
-
-            stack = JSON.parse(json).map(function(d) {
-                d.graph = iD.Graph(stack[0].graph).load(d.entities);
-                return d;
-            });
-            stack[0].graph.inherited = false;
-            dispatch.change();
         },
 
         _getKey: getKey

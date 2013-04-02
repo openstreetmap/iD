@@ -1,56 +1,192 @@
-iD.ui.preset = function(context) {
-    var event = d3.dispatch('change', 'setTags', 'close'),
-        entity,
-        tags,
-        keys,
-        preset;
+iD.ui.preset = function(context, entity, preset) {
+    var original = context.graph().base().entities[entity.id],
+        event = d3.dispatch('change', 'close'),
+        fields = [],
+        tags = {},
+        formwrap,
+        formbuttonwrap;
 
-    function input(d) {
-        var i = iD.ui.preset[d.type](d, context)
+    function UIField(field, show) {
+        field = _.clone(field);
+
+        field.input = iD.ui.preset[field.type](field, context)
             .on('close', event.close)
             .on('change', event.change);
 
-        event.on('setTags.' + d.key || d.type, function(tags) {
-            i.tags(_.clone(tags));
+        field.reference = iD.ui.TagReference(entity, {key: field.key});
+
+        if (field.type === 'address' ||
+            field.type === 'wikipedia' ||
+            field.type === 'maxspeed') {
+            field.input.entity(entity);
+        }
+
+        field.keys = field.keys || [field.key];
+
+        field.show = show;
+
+        field.shown = function() {
+            return field.id === 'name' || field.show || _.any(field.keys, function(key) { return !!tags[key]; });
+        };
+
+        field.modified = function() {
+            return _.any(field.keys, function(key) {
+                return original ? tags[key] !== original.tags[key] : tags[key];
+            });
+        };
+
+        return field;
+    }
+
+    fields.push(UIField(context.presets().field('name')));
+
+    var geometry = entity.geometry(context.graph());
+    preset.fields.forEach(function(field) {
+        if (field.matchGeometry(geometry)) {
+            fields.push(UIField(field, true));
+        }
+    });
+
+    context.presets().universal().forEach(function(field) {
+        if (preset.fields.indexOf(field) < 0) {
+            fields.push(UIField(field));
+        }
+    });
+
+    function fieldKey(field) {
+        return field.id;
+    }
+
+    function shown() {
+        return fields.filter(function(field) { return field.shown(); });
+    }
+
+    function notShown() {
+        return fields.filter(function(field) { return !field.shown(); });
+    }
+
+    function show(field) {
+        field.show = true;
+        render();
+        field.input.focus();
+    }
+
+    function revert(field) {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+        var t = {};
+        field.keys.forEach(function(key) {
+            t[key] = original ? original.tags[key] : undefined;
+        });
+        event.change(t);
+    }
+
+    function toggleReference(field) {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+
+        _.forEach(shown(), function(other) {
+            if (other.id === field.id) {
+                other.reference.toggle();
+            } else {
+                other.reference.hide();
+            }
         });
 
-        if (d.type === 'address') i.entity(entity);
+        render();
+    }
 
-        keys = keys.concat(d.key ? [d.key] : d.keys);
+    function render() {
+        var selection = formwrap.selectAll('.form-field')
+            .data(shown(), fieldKey);
 
-        this.call(i);
+        var enter = selection.enter()
+            .insert('div', '.more-buttons')
+            .style('opacity', 0)
+            .attr('class', function(field) {
+                return 'form-field form-field-' + field.id + ' fillL col12';
+            });
+
+        enter.transition()
+            .style('max-height', '0px')
+            .style('padding-top', '0px')
+            .style('opacity', '0')
+            .transition()
+            .duration(200)
+            .style('padding-top', '20px')
+            .style('max-height', '240px')
+            .style('opacity', '1');
+
+        var label = enter.append('label')
+            .attr('class', 'form-label')
+            .attr('for', function(field) { return 'preset-input-' + field.id; })
+            .text(function(field) { return field.label(); });
+
+        label.append('button')
+            .attr('class', 'tag-reference-button minor')
+            .attr('tabindex', -1)
+            .on('click', toggleReference)
+            .append('span')
+            .attr('class', 'icon inspect');
+
+        label.append('button')
+            .attr('class', 'modified-icon minor')
+            .attr('tabindex', -1)
+            .on('click', revert)
+            .append('div')
+            .attr('class','icon undo');
+
+        enter.each(function(field) {
+            d3.select(this)
+                .call(field.input)
+                .call(field.reference);
+        });
+
+        selection
+            .each(function(field) {
+                field.input.tags(tags);
+            })
+            .classed('modified', function(field) {
+                return field.modified();
+            });
+
+        selection.exit()
+            .remove();
+
+        var addFields = formbuttonwrap.selectAll('.preset-add-field')
+            .data(notShown(), fieldKey);
+
+        addFields.enter()
+            .append('button')
+            .attr('class', 'preset-add-field')
+            .on('click', show)
+            .call(bootstrap.tooltip()
+                .placement('top')
+                .title(function(d) { return d.label(); }))
+            .append('span')
+            .attr('class', function(d) { return 'icon ' + d.icon; });
+
+        addFields.exit()
+            .transition()
+            .style('opacity', 0)
+            .remove();
+
+        return selection;
     }
 
     function presets(selection) {
-
         selection.html('');
-        keys = [];
 
-        var sections = selection.selectAll('div.preset-section')
-            .data(preset.form)
-            .enter()
-            .append('div')
-            .attr('class', 'preset-section inspector-inner col12');
+        formwrap = selection;
 
-        sections.each(function(d) {
-            var s = d3.select(this);
-            var wrap = s.append('div')
-                .attr('class', 'preset-section-input');
+        formbuttonwrap = selection.append('div')
+            .attr('class', 'col12 more-buttons inspector-inner');
 
-           wrap.append('div')
-                .attr('class', 'col3 preset-label')
-                .append('h4')
-                .attr('for', 'input-' + d.key)
-                .text(d.title || d.key);
-
-            input.call(wrap.append('div')
-                .attr('class', 'col9 preset-input'), d);
-        });
-        if (tags) event.setTags(tags);
+        render();
     }
 
     presets.rendered = function() {
-        return keys;
+        return _.flatten(shown().map(function(field) { return field.keys; }));
     };
 
     presets.preset = function(_) {
@@ -61,13 +197,7 @@ iD.ui.preset = function(context) {
 
     presets.change = function(_) {
         tags = _;
-        event.setTags(_);
-        return presets;
-    };
-
-    presets.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+        render();
         return presets;
     };
 

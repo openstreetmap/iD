@@ -1,4 +1,4 @@
-iD.ui.preset.address = function(form, context) {
+iD.ui.preset.address = function(field, context) {
 
     var event = d3.dispatch('change', 'close'),
         housename,
@@ -41,41 +41,41 @@ iD.ui.preset.address = function(form, context) {
 
         function close() { return iD.behavior.accept().on('accept', event.close); }
 
-        housename = selection.append('input')
+        var wrap = selection.append('div')
+            .attr('class', 'preset-input-wrap');
+
+        housename = wrap.append('input')
             .property('type', 'text')
-            .attr('placeholder', 'Housename')
+            .attr('placeholder', field.t('placeholders.housename'))
             .attr('class', 'addr-housename')
+            .attr('id', 'preset-input-' + field.id)
             .on('blur', change)
             .on('change', change)
             .call(close());
 
-        housenumber = selection.append('input')
+        housenumber = wrap.append('input')
             .property('type', 'text')
-            .attr('placeholder', '123')
+            .attr('placeholder', field.t('placeholders.number'))
             .attr('class', 'addr-number')
             .on('blur', change)
             .on('change', change)
             .call(close());
 
-        var streetwrap = selection.append('span')
-            .attr('class', 'input-wrap-position');
-
-        street = streetwrap.append('input')
+        street = wrap.append('input')
             .property('type', 'text')
-            .attr('placeholder', 'Street')
+            .attr('placeholder', field.t('placeholders.street'))
             .attr('class', 'addr-street')
             .on('blur', change)
-            .on('change', change);
+            .on('change', change)
+            .call(d3.combobox().data(getStreets()));
 
-        city = selection.append('input')
+        city = wrap.append('input')
             .property('type', 'text')
-            .attr('placeholder', 'City')
+            .attr('placeholder', field.t('placeholders.city'))
             .attr('class', 'addr-city')
             .on('blur', change)
             .on('change', change)
             .call(close());
-
-        streetwrap.call(d3.combobox().data(getStreets()));
     }
 
     function change() {
@@ -99,6 +99,10 @@ iD.ui.preset.address = function(form, context) {
         street.property('value', tags['addr:street'] || '');
         city.property('value', tags['addr:city'] || '');
         return address;
+    };
+
+    address.focus = function() {
+        housename.node().focus();
     };
 
     return d3.rebind(address, event, 'on');

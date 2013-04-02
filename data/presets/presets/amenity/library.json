@@ -1,19 +1,18 @@
 {
-    "name": "library",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "library"
-        },
-        "terms": []
-    },
     "icon": "library",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "library"
+    },
+    "terms": [],
+    "name": "Library"
 }

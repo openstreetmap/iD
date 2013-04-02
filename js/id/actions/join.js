@@ -57,19 +57,20 @@ iD.actions.Join = function(ids) {
         return graph;
     };
 
-    action.enabled = function(graph) {
+    action.disabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
 
         if (ids.length !== 2 || ids.length !== geometries.line.length)
-            return false;
+            return 'not_eligible';
 
         var a = graph.entity(idA),
             b = graph.entity(idB);
 
-        return a.first() === b.first() ||
-               a.first() === b.last()  ||
-               a.last()  === b.first() ||
-               a.last()  === b.last();
+        if (a.first() !== b.first() &&
+            a.first() !== b.last()  &&
+            a.last()  !== b.first() &&
+            a.last()  !== b.last())
+            return 'not_adjacent';
     };
 
     return action;

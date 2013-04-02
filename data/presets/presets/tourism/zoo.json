@@ -1,0 +1,16 @@
+{
+    "icon": "zoo",
+    "fields": [
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "zoo"
+    },
+    "name": "Zoo"
+}

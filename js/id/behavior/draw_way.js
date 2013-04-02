@@ -44,6 +44,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
     function undone() {
+        finished = true;
         context.enter(iD.modes.Browse(context));
     }
 

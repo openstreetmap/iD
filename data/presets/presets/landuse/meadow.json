@@ -1,15 +1,11 @@
 {
-    "name": "meadow",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "tags": {
-            "landuse": "meadow"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "meadow"
     },
-    "form": [
-    ]
+    "terms": [],
+    "name": "Meadow"
 }

@@ -1,18 +1,14 @@
 {
-    "name": "natural",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "natural": "*"
-        }
+    "fields": [
+        "natural"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "natural": "*"
     },
-    "form": [
-        {
-            "key": "natural",
-            "type": "combo"
-        }
-    ]
+    "name": "Natural"
 }

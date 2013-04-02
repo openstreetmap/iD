@@ -12,14 +12,17 @@ iD.operations.Reverse = function(selection, context) {
             context.geometry(entityId) === 'line';
     };
 
-    operation.enabled = function() {
-        return true;
+    operation.disabled = function() {
+        return false;
+    };
+
+    operation.tooltip = function() {
+        return t('operations.reverse.description');
     };
 
     operation.id = "reverse";
     operation.keys = [t('operations.reverse.key')];
     operation.title = t('operations.reverse.title');
-    operation.description = t('operations.reverse.description');
 
     return operation;
 };

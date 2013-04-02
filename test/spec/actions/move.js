@@ -1,25 +1,25 @@
 describe("iD.actions.Move", function() {
-    describe("#enabled", function() {
-        it("returns true by default", function() {
+    describe("#disabled", function() {
+        it("returns falsy by default", function() {
             var node  = iD.Node({loc: [0, 0]}),
                 action = iD.actions.Move([node.id], [0, 0], d3.geo.mercator()),
                 graph = iD.Graph([node]);
-            expect(action.enabled(graph)).to.be.true;
+            expect(action.disabled(graph)).not.to.be.ok;
         });
 
-        it("returns false for an incomplete relation", function() {
+        it("returns 'incomplete_relation' for an incomplete relation", function() {
             var relation = iD.Relation({members: [{id: 1}]}),
                 action = iD.actions.Move([relation.id], [0, 0], d3.geo.mercator()),
                 graph = iD.Graph([relation]);
-            expect(action.enabled(graph)).to.be.false;
+            expect(action.disabled(graph)).to.equal('incomplete_relation');
         });
 
-        it("returns true for a complete relation", function() {
+        it("returns falsy for a complete relation", function() {
             var node  = iD.Node({loc: [0, 0]}),
                 relation = iD.Relation({members: [{id: node.id}]}),
                 action = iD.actions.Move([relation.id], [0, 0], d3.geo.mercator()),
                 graph = iD.Graph([node, relation]);
-            expect(action.enabled(graph)).to.be.true;
+            expect(action.disabled(graph)).not.to.be.ok;
         });
     });
 

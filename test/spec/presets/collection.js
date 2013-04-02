@@ -1,30 +1,21 @@
-describe("iD.prests.Collection", function() {
+describe("iD.presets.Collection", function() {
 
     var p = {
-        other: iD.presets.Preset({
-            name: 'other',
-            match: {
-                tags: {},
-                type: ['point', 'vertex', 'line', 'area']
-            }
+        other: iD.presets.Preset('other', {
+            tags: {},
+            geometry: ['point', 'vertex', 'line', 'area']
         }),
-        residential: iD.presets.Preset({
-            name: 'residential',
-            match: {
-                tags: {
-                    highway: 'residential'
-                },
-                type: ['line']
-            }
+        residential: iD.presets.Preset('highway/residential', {
+            tags: {
+                highway: 'residential'
+            },
+            geometry: ['line']
         }),
-        park: iD.presets.Preset({
-            name: 'park',
-            match: {
-                tags: {
-                    leisure: 'park'
-                },
-                type: ['point', 'area']
-            }
+        park: iD.presets.Preset('leisure/park', {
+            tags: {
+                leisure: 'park'
+            },
+            geometry: ['point', 'area']
         })
     };
 
@@ -34,14 +25,14 @@ describe("iD.prests.Collection", function() {
         g = iD.Graph().replace(w);
 
     describe("#item", function() {
-        it("fetches a preset by name", function() {
-            expect(c.item('residential')).to.equal(p.residential);
+        it("fetches a preset by id", function() {
+            expect(c.item('highway/residential')).to.equal(p.residential);
         });
     });
 
-    describe("#matchType", function() {
+    describe("#matchGeometry", function() {
         it("returns a new collection only containing presets matching an entity's type", function() {
-            expect(c.matchType(w, g).collection).to.eql([p.other, p.residential]);
+            expect(c.matchGeometry(w, g).collection).to.eql([p.other, p.residential]);
         });
     });
 
@@ -63,6 +54,15 @@ describe("iD.prests.Collection", function() {
         it("always includes other", function() {
             expect(c.search("blade of grass").collection.indexOf(p.other) >= 0).to.eql(true);
         });
-    });
 
+        it("excludes presets with searchable: false", function() {
+            var excluded = iD.presets.Preset('excluded', {
+                    tags: {},
+                    geometry: [],
+                    searchable: false
+                }),
+                collection = iD.presets.Collection([excluded, p.other]);
+            expect(collection.search("excluded").collection).not.to.include(excluded);
+        });
+    });
 });

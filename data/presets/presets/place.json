@@ -1,18 +1,14 @@
 {
-    "name": "place",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "place": "*"
-        }
+    "fields": [
+        "place"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "place": "*"
     },
-    "form": [
-        {
-            "key": "place",
-            "type": "combo"
-        }
-    ]
+    "name": "Place"
 }

@@ -1,18 +1,14 @@
 {
-    "name": "tourism",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "tourism": "*"
-        }
+    "fields": [
+        "tourism"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "*"
     },
-    "form": [
-        {
-            "key": "tourism",
-            "type": "combo"
-        }
-    ]
+    "name": "Tourism"
 }

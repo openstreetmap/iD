@@ -1,0 +1,6 @@
+{
+    "key": "oneway",
+    "type": "check",
+    "default": "yes",
+    "label": "One Way"
+}

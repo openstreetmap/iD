@@ -1,0 +1,16 @@
+{
+    "icon": "shop",
+    "fields": [
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "shop": "car_parts"
+    },
+    "name": "Car Parts Store"
+}

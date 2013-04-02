@@ -5,16 +5,6 @@ iD.ui = function(context) {
         var history = context.history(),
             map = context.map();
 
-        if (!iD.detect().support) {
-            container
-                .text(t('browser_notice'))
-                .style({
-                    'text-align': 'center',
-                    'font-style': 'italic'
-                });
-            return;
-        }
-
         if (iD.detect().opera) container.classed('opera', true);
 
         var hash = iD.behavior.Hash(context);
@@ -31,13 +21,13 @@ iD.ui = function(context) {
 
         var bar = container.append('div')
             .attr('id', 'bar')
-            .attr('class','pad1 fillD');
+            .attr('class','fillD');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');
 
         limiter.append('div')
-            .attr('class', 'button-wrap joined col4')
+            .attr('class', 'button-wrap joined col3')
             .call(iD.ui.Modes(context), limiter);
 
         limiter.append('div')
@@ -51,6 +41,15 @@ iD.ui = function(context) {
         bar.append('div')
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
+
+        container.append('idv')
+            .attr('class', 'attribution')
+            .attr('tabindex', -1)
+            .call(iD.ui.Attribution(context));
+
+        container.append('div')
+            .style('display', 'none')
+            .attr('class', 'help-wrap fillL col5 content');
 
         container.append('div')
             .attr('class', 'map-control zoombuttons')
@@ -69,8 +68,12 @@ iD.ui = function(context) {
             .call(iD.ui.Geolocate(map));
 
         container.append('div')
+            .attr('class', 'map-control help-control')
+            .call(iD.ui.Help(context));
+
+        container.append('div')
             .style('display', 'none')
-            .attr('class', 'inspector-wrap fr content col5');
+            .attr('class', 'inspector-wrap fr content col4');
 
         var about = container.append('div')
             .attr('class','col12 about-block fillD');
@@ -94,13 +97,8 @@ iD.ui = function(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'http://github.com/systemed/iD/issues')
+            .attr('href', 'https://help.openstreetmap.org/questions/ask/')
             .text(t('report_a_bug'));
-
-        linkList.append('li')
-            .attr('class', 'attribution')
-            .attr('tabindex', -1)
-            .call(iD.ui.Attribution(context));
 
         linkList.append('li')
             .attr('class', 'source-switch')
@@ -144,6 +142,7 @@ iD.ui = function(context) {
         context.container()
             .call(iD.ui.Splash(context))
             .call(iD.ui.Restore(context));
+
     };
 };
 

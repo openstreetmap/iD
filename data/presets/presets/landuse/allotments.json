@@ -1,15 +1,11 @@
 {
-    "name": "allotments",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "tags": {
-            "landuse": "allotments"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "allotments"
     },
-    "form": [
-    ]
+    "terms": [],
+    "name": "Allotments"
 }

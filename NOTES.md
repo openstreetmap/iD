@@ -300,6 +300,8 @@ Firefox does not support [the focusout event](https://bugzilla.mozilla.org/show_
 
 Opera does not support `pointer-events` on HTML elements, only SVG elements.
 
+IE10 does not support `navigator.language`, only `navigator.userLanguage`
+
 ## Transients
 
 The graph supports `transient`, which is storage for non-versioned mutable

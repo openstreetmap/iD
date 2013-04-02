@@ -1,18 +1,16 @@
 {
-    "name": "basketball court",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "leisure": "pitch",
-            "sport": "basketball"
-        },
-        "terms": []
-    },
     "icon": "basketball",
-    "form": [
+    "fields": [
         "surface"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "basketball"
+    },
+    "terms": [],
+    "name": "Basketball Court"
 }

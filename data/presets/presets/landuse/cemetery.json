@@ -1,16 +1,12 @@
 {
-    "name": "cemetery",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "tags": {
-            "landuse": "cemetery"
-        },
-        "terms": [
-        ]
-    },
-    "form": [
+    "icon": "cemetery",
+    "geometry": [
+        "point",
+        "area"
     ],
-    "icon": "cemetery"
+    "tags": {
+        "landuse": "cemetery"
+    },
+    "terms": [],
+    "name": "Cemetery"
 }

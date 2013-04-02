@@ -1,19 +1,18 @@
 {
-    "name": "parking",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "parking"
-        },
-        "terms": []
-    },
     "icon": "parking",
-    "form": [
+    "fields": [
         "fee",
         "access",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "parking"
+    },
+    "terms": [],
+    "name": "Parking"
 }

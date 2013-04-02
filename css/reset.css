@@ -73,6 +73,12 @@ input {
     line-height: normal;
 }
 
+/* Hide default number spinner controls */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+display: none;
+}
+
 /*
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
  *    and `video` controls.
@@ -146,12 +152,12 @@ input::-moz-focus-inner {
 ** Markup free clearing
 ** Details: http://www.positioniseverything.net/easyclearing.html
 */
+.cf:before,
 .cf:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-  }
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
 
-.cf { display: inline-block; }
+.cf:after {
+    clear: both;
+}

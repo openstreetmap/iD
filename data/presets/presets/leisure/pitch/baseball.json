@@ -1,18 +1,13 @@
 {
-    "name": "baseball diamond",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "leisure": "pitch",
-            "sport": "baseball"
-        },
-        "terms": []
-    },
     "icon": "baseball",
-    "form": [
-        "surface"
-    ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "baseball"
+    },
+    "terms": [],
+    "name": "Baseball Diamond"
 }

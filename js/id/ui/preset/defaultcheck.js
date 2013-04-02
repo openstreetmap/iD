@@ -1,4 +1,4 @@
-iD.ui.preset.defaultcheck = function(form) {
+iD.ui.preset.defaultcheck = function(field) {
 
     var event = d3.dispatch('change', 'close'),
         input;
@@ -7,16 +7,20 @@ iD.ui.preset.defaultcheck = function(form) {
 
         input = selection.append('input')
             .attr('type', 'checkbox')
-            .attr('id', 'input-' + form.key)
+            .attr('id', 'preset-input-' + field.id)
             .on('change', function() {
                 var t = {};
-                t[form.key] = input.property('checked') ? form.value || 'yes' : undefined;
+                t[field.key] = input.property('checked') ? field.value || 'yes' : undefined;
                 event.change(t);
             });
     };
 
     check.tags = function(tags) {
-        input.property('checked', !!tags[form.key] && tags[form.key] !== 'no');
+        input.property('checked', !!tags[field.key] && tags[field.key] !== 'no');
+    };
+
+    check.focus = function() {
+        input.node().focus();
     };
 
     return d3.rebind(check, event, 'on');

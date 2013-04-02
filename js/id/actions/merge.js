@@ -25,11 +25,12 @@ iD.actions.Merge = function(ids) {
         return graph;
     };
 
-    action.enabled = function(graph) {
+    action.disabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
-        return geometries.point.length > 0 &&
-            (geometries.area.length + geometries.line.length) === 1 &&
-            geometries.relation.length === 0;
+        if (geometries.point.length === 0 ||
+            (geometries.area.length + geometries.line.length) !== 1 ||
+            geometries.relation.length !== 0)
+            return 'not_eligible';
     };
 
     return action;

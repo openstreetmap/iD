@@ -1,13 +1,11 @@
 {
-    "name": "turning circle",
-    "match": {
-        "type": [
-            "vertex"
-        ],
-        "tags": {
-            "highway": "turning_circle"
-        },
-        "terms": []
+    "icon": "circle",
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "turning_circle"
     },
-    "icon": "circle"
+    "terms": [],
+    "name": "Turning Circle"
 }

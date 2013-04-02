@@ -1,12 +1,10 @@
 {
-    "name": "lighthouse",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "man_made": "lighthouse"
-        }
-    }
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "man_made": "lighthouse"
+    },
+    "name": "Lighthouse"
 }

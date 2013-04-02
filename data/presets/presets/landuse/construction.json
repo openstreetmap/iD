@@ -1,20 +1,15 @@
 {
-    "name": "construction",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "tags": {
-            "landuse": "construction"
-        },
-        "terms": [
-        ]
-    },
-    "form": [
-        {
-            "key": "construction",
-            "type": "combo"
-        },
+    "fields": [
+        "construction",
         "operator"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "construction"
+    },
+    "terms": [],
+    "name": "Construction"
 }

@@ -1,18 +1,14 @@
 {
-    "name": "amenity",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "*"
-        }
+    "fields": [
+        "amenity"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "*"
     },
-    "form": [
-        {
-            "key": "amenity",
-            "type": "combo"
-        }
-    ]
+    "name": "Amenity"
 }

@@ -1,6 +1,5 @@
 iD.ui.Modes = function(context) {
     var modes = [
-        iD.modes.Browse(context),
         iD.modes.AddPoint(context),
         iD.modes.AddLine(context),
         iD.modes.AddArea(context)];
@@ -11,8 +10,14 @@ iD.ui.Modes = function(context) {
 
        buttons.enter().append('button')
            .attr('tabindex', -1)
-           .attr('class', function(mode) { return mode.id + ' add-button col3'; })
-           .on('click.mode-buttons', function(mode) { context.enter(mode); })
+           .attr('class', function(mode) { return mode.id + ' add-button col4'; })
+           .on('click.mode-buttons', function(mode) {
+               if (mode.id === context.mode().id) {
+                   context.enter(iD.modes.Browse(context));
+               } else {
+                   context.enter(mode);
+               }
+           })
            .call(bootstrap.tooltip()
                .placement('bottom')
                .html(true)

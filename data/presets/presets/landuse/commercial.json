@@ -1,15 +1,11 @@
 {
-    "name": "commercial",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "tags": {
-            "landuse": "commercial"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "commercial"
     },
-    "form": [
-    ]
+    "terms": [],
+    "name": "Commercial"
 }

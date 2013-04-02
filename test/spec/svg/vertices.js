@@ -1,9 +1,11 @@
 describe("iD.svg.Vertices", function () {
     var surface,
         projection = Object,
-        filter = d3.functor(true);
+        filter = d3.functor(true),
+        context;
 
     beforeEach(function () {
+        context = iD();
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
             .call(iD.svg.Surface());
     });
@@ -13,7 +15,7 @@ describe("iD.svg.Vertices", function () {
             way  = iD.Way({nodes: [node.id]}),
             graph = iD.Graph([node, way]);
 
-        surface.call(iD.svg.Vertices(projection), graph, [node], filter);
+        surface.call(iD.svg.Vertices(projection, context), graph, [node], filter);
 
         expect(surface.select('.vertex')).to.be.classed('tag-highway');
         expect(surface.select('.vertex')).to.be.classed('tag-highway-traffic_signals');
@@ -25,7 +27,7 @@ describe("iD.svg.Vertices", function () {
             way2 = iD.Way({nodes: [node.id]}),
             graph = iD.Graph([node, way1, way2]);
 
-        surface.call(iD.svg.Vertices(projection), graph, [node], filter);
+        surface.call(iD.svg.Vertices(projection, context), graph, [node], filter);
 
         expect(surface.select('.vertex')).to.be.classed('shared');
     });

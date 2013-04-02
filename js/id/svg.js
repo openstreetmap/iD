@@ -14,55 +14,50 @@ iD.svg = {
     },
 
     LineString: function(projection, graph, dimensions, dx) {
-        var cache = {},
-            resample = this.resample;
+        var cache = {};
 
         return function(entity) {
             if (cache[entity.id] !== undefined) {
                 return cache[entity.id];
             }
 
-            var segments = [],
-                last,
+            var last,
                 next,
-                segment = [],
                 started = false,
                 d = '';
 
-            projection.stream(
-                d3.geo.stream({
-                    type: 'LineString',
-                    coordinates: graph.childNodes(entity).map(function(n) {
-                        return n.loc;
-                    })
-                }, projection.stream({
-                    lineStart: function() { last = null; started = false; },
-                    lineEnd: function() { },
-                    point: function(x, y) {
-                        if (!started) d += 'M';
-                        next = [Math.floor(x), Math.floor(y)];
-                        if (dx && last && iD.geo.dist(last, next) > dx) {
-                            var span = iD.geo.dist(last, next),
-                                angle = Math.atan2(next[1] - last[1], next[0] - last[0]),
-                                to = last.slice();
+            d3.geo.stream({
+                type: 'LineString',
+                coordinates: graph.childNodes(entity).map(function(n) {
+                    return n.loc;
+                })
+            }, projection.stream({
+                lineStart: function() { last = null; started = false; },
+                lineEnd: function() { },
+                point: function(x, y) {
+                    if (!started) d += 'M';
+                    next = [Math.floor(x), Math.floor(y)];
+                    if (dx && last && iD.geo.dist(last, next) > dx) {
+                        var span = iD.geo.dist(last, next),
+                            angle = Math.atan2(next[1] - last[1], next[0] - last[0]),
+                            to = last.slice();
+                        to[0] += Math.cos(angle) * dx;
+                        to[1] += Math.sin(angle) * dx;
+                        while (iD.geo.dist(last, to) < (span)) {
+                            // a dx-length line segment in that angle
+                            if (started) d += 'L';
+                            d += Math.floor(to[0]) + ',' + Math.floor(to[1]);
+                            started = started || true;
                             to[0] += Math.cos(angle) * dx;
                             to[1] += Math.sin(angle) * dx;
-                            while (iD.geo.dist(last, to) < (span)) {
-                                // a dx-length line segment in that angle
-                                if (started) d += 'L';
-                                d += Math.floor(to[0]) + ',' + Math.floor(to[1]);
-                                started = started || true;
-                                to[0] += Math.cos(angle) * dx;
-                                to[1] += Math.sin(angle) * dx;
-                            }
                         }
-                        if (started) d += 'L';
-                        d += next[0] + ',' + next[1];
-                        started = started || true;
-                        last = next;
                     }
-                }))
-            );
+                    if (started) d += 'L';
+                    d += next[0] + ',' + next[1];
+                    started = started || true;
+                    last = next;
+                }
+            }));
 
             if (d === '') {
                 cache[entity.id] = null;

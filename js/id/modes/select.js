@@ -4,9 +4,7 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    var showgrid = singular() && !_.without(Object.keys(singular().tags), 'area').length;
-
-    var inspector = iD.ui.Inspector(context).initial(showgrid),
+    var inspector = iD.ui.Inspector(context, singular()),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
@@ -16,13 +14,8 @@ iD.modes.Select = function(context, selection, initial) {
             iD.modes.DragNode(context).behavior],
         radialMenu;
 
-    function changeTags(d, tags) {
-        if (!_.isEqual(singular().tags, tags)) {
-            context.perform(
-                iD.actions.ChangeTags(d.id, tags),
-                t('operations.change_tags.annotation'));
-        }
-    }
+    var wrap = context.container()
+        .select('.inspector-wrap');
 
     function singular() {
         if (selection.length === 1) {
@@ -56,8 +49,6 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.enter = function() {
-        var entity = singular();
-
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
@@ -74,7 +65,7 @@ iD.modes.Select = function(context, selection, initial) {
         operations.forEach(function(operation) {
             operation.keys.forEach(function(key) {
                 keybinding.on(key, function() {
-                    if (operation.enabled()) {
+                    if (!operation.disabled()) {
                         operation();
                     }
                 });
@@ -86,47 +77,20 @@ iD.modes.Select = function(context, selection, initial) {
             id: selection.join(',')
         }), true));
 
-        if (entity) {
-            var wrap = context.container()
-                .select('.inspector-wrap');
-
-            wrap.style('display', 'block')
-                .style('opacity', 1)
-                .datum(entity)
-                .call(inspector);
-
-            if (d3.event) {
-                // Pan the map if the clicked feature intersects with the position
-                // of the inspector
-                var inspectorSize = wrap.size(),
-                    mapSize = context.map().size(),
-                    offset = 50,
-                    shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
-                    center = (mapSize[0] / 2) + shiftLeft + offset;
-
-                if (shiftLeft > 0 && inspectorSize[1] > d3.event.clientY) {
-                    context.map().centerEase(context.projection.invert([center, mapSize[1]/2]));
-                }
-            }
-
-            inspector
-                .on('changeTags', changeTags)
-                .on('close', function() { context.enter(iD.modes.Browse(context)); });
+        if (singular()) {
+            wrap.call(inspector);
         }
 
         context.history()
-            .on('undone.select', updateInspector)
-            .on('redone.select', updateInspector);
+            .on('undone.select', update)
+            .on('redone.select', update);
 
-        function updateInspector() {
+        function update() {
             context.surface().call(radialMenu.close);
 
             if (_.any(selection, function(id) { return !context.entity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
-
-            } else if (singular()) {
-                inspector.tags(context.entity(selection[0]).tags);
             }
         }
 
@@ -192,14 +156,7 @@ iD.modes.Select = function(context, selection, initial) {
     mode.exit = function() {
         if (timeout) window.clearTimeout(timeout);
 
-        context.container()
-            .select('.inspector-wrap')
-            .style('display', 'none')
-            .html('');
-
-        // Firefox incorrectly implements blur, so typeahead elements
-        // are not correctly removed. Remove any stragglers manually.
-        d3.selectAll('div.typeahead').remove();
+        wrap.call(inspector.close);
 
         behaviors.forEach(function(behavior) {
             context.uninstall(behavior);

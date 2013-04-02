@@ -1,0 +1,7 @@
+{
+    "key": "building",
+    "type": "check",
+    "default": "yes",
+    "geometry": "area",
+    "label": "Building"
+}

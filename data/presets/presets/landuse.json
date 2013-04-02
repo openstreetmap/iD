@@ -1,18 +1,14 @@
 {
-    "name": "landuse",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "landuse": "*"
-        }
+    "fields": [
+        "landuse"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "landuse": "*"
     },
-    "form": [
-        {
-            "key": "landuse",
-            "type": "combo"
-        }
-    ]
+    "name": "Landuse"
 }

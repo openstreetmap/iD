@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "building": "entrance"
+    },
+    "name": "Entrance",
+    "searchable": false
+}

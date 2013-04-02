@@ -1,0 +1,591 @@
+/* glue: 0.3 hash: 5d99d90788 */
+.feature-waterway-stream,
+.feature-waterway-river,
+.feature-waterway-ditch,
+.feature-waterway-canal,
+.feature-railway-subway,
+.feature-railway-rail,
+.feature-railway-monorail,
+.feature-railway-light_rail,
+.feature-railway-disused,
+.feature-railway-abandoned,
+.feature-power-line,
+.feature-other-line,
+.feature-highway-unclassified,
+.feature-highway-trunk,
+.feature-highway-trunk-link,
+.feature-highway-track,
+.feature-highway-tertiary,
+.feature-highway-tertiary-link,
+.feature-highway-steps,
+.feature-highway-service,
+.feature-highway-secondary,
+.feature-highway-secondary-link,
+.feature-highway-road,
+.feature-highway-residential,
+.feature-highway-primary,
+.feature-highway-primary-link,
+.feature-highway-path,
+.feature-highway-motorway,
+.feature-highway-motorway-link,
+.feature-highway-living_street,
+.feature-highway-footway,
+.feature-highway-cycleway,
+.feature-highway-bridleway,
+.feature-category-water,
+.feature-category-roads,
+.feature-category-rail,
+.feature-category-path,
+.feature-zoo,
+.feature-x,
+.feature-wetland,
+.feature-water,
+.feature-waste-basket,
+.feature-warehouse,
+.feature-triangle,
+.feature-triangle-stroked,
+.feature-town-hall,
+.feature-toilets,
+.feature-theatre,
+.feature-tennis,
+.feature-swimming,
+.feature-star,
+.feature-star-stroked,
+.feature-square,
+.feature-square-stroked,
+.feature-soccer,
+.feature-slaughterhouse,
+.feature-skiing,
+.feature-shop,
+.feature-school,
+.feature-roadblock,
+.feature-restaurant,
+.feature-religious-muslim,
+.feature-religious-jewish,
+.feature-religious-christian,
+.feature-rail,
+.feature-rail-underground,
+.feature-rail-above,
+.feature-prison,
+.feature-post,
+.feature-police,
+.feature-place-of-worship,
+.feature-pitch,
+.feature-pharmacy,
+.feature-parking,
+.feature-parking-garage,
+.feature-park2,
+.feature-park,
+.feature-oil-well,
+.feature-museum,
+.feature-monument,
+.feature-minefield,
+.feature-marker,
+.feature-marker-stroked,
+.feature-london-underground,
+.feature-logging,
+.feature-lodging,
+.feature-library,
+.feature-industrial,
+.feature-hospital,
+.feature-heliport,
+.feature-harbor,
+.feature-grocery,
+.feature-golf,
+.feature-garden,
+.feature-fuel,
+.feature-fire-station,
+.feature-ferry,
+.feature-fast-food,
+.feature-embassy,
+.feature-danger,
+.feature-dam,
+.feature-cross,
+.feature-cricket,
+.feature-commercial,
+.feature-college,
+.feature-circle,
+.feature-circle-stroked,
+.feature-cinema,
+.feature-cemetery,
+.feature-campsite,
+.feature-cafe,
+.feature-bus,
+.feature-bicycle,
+.feature-beer,
+.feature-basketball,
+.feature-baseball,
+.feature-bar,
+.feature-bank,
+.feature-art-gallery,
+.feature-america-football,
+.feature-alcohol-shop,
+.feature-airport,
+.feature-airfield,
+.feature-zoo-18,
+.feature-x-18,
+.feature-wetland-18,
+.feature-water-18,
+.feature-waste-basket-18,
+.feature-warehouse-18,
+.feature-triangle-stroked-18,
+.feature-triangle-18,
+.feature-town-hall-18,
+.feature-toilets-18,
+.feature-theatre-18,
+.feature-tennis-18,
+.feature-swimming-18,
+.feature-star-stroked-18,
+.feature-star-18,
+.feature-square-stroked-18,
+.feature-square-18,
+.feature-soccer-18,
+.feature-slaughterhouse-18,
+.feature-skiing-18,
+.feature-shop-18,
+.feature-school-18,
+.feature-roadblock-18,
+.feature-restaurant-18,
+.feature-religious-muslim-18,
+.feature-religious-jewish-18,
+.feature-religious-christian-18,
+.feature-rail-underground-18,
+.feature-rail-above-18,
+.feature-rail-18,
+.feature-prison-18,
+.feature-post-18,
+.feature-police-18,
+.feature-place-of-worship-18,
+.feature-pitch-18,
+.feature-pharmacy-18,
+.feature-parking-garage-18,
+.feature-parking-18,
+.feature-park2-18,
+.feature-park-18,
+.feature-oil-well-18,
+.feature-museum-18,
+.feature-monument-18,
+.feature-minefield-18,
+.feature-marker-stroked-18,
+.feature-marker-18,
+.feature-london-underground-18,
+.feature-logging-18,
+.feature-lodging-18,
+.feature-library-18,
+.feature-industrial-18,
+.feature-hospital-18,
+.feature-heliport-18,
+.feature-harbor-18,
+.feature-grocery-18,
+.feature-golf-18,
+.feature-garden-18,
+.feature-fuel-18,
+.feature-fire-station-18,
+.feature-ferry-18,
+.feature-fast-food-18,
+.feature-embassy-18,
+.feature-danger-18,
+.feature-dam-18,
+.feature-cross-18,
+.feature-cricket-18,
+.feature-commercial-18,
+.feature-college-18,
+.feature-circle-stroked-18,
+.feature-circle-18,
+.feature-cinema-18,
+.feature-cemetery-18,
+.feature-campsite-18,
+.feature-cafe-18,
+.feature-bus-18,
+.feature-bicycle-18,
+.feature-beer-18,
+.feature-basketball-18,
+.feature-baseball-18,
+.feature-bar-18,
+.feature-bank-18,
+.feature-art-gallery-18,
+.feature-america-football-18,
+.feature-alcohol-shop-18,
+.feature-airport-18,
+.feature-airfield-18,
+.feature-zoo-12,
+.feature-x-12,
+.feature-wetland-12,
+.feature-water-12,
+.feature-waste-basket-12,
+.feature-warehouse-12,
+.feature-triangle-stroked-12,
+.feature-triangle-12,
+.feature-town-hall-12,
+.feature-toilets-12,
+.feature-theatre-12,
+.feature-tennis-12,
+.feature-swimming-12,
+.feature-star-stroked-12,
+.feature-star-12,
+.feature-square-stroked-12,
+.feature-square-12,
+.feature-soccer-12,
+.feature-slaughterhouse-12,
+.feature-skiing-12,
+.feature-shop-12,
+.feature-school-12,
+.feature-roadblock-12,
+.feature-restaurant-12,
+.feature-religious-muslim-12,
+.feature-religious-jewish-12,
+.feature-religious-christian-12,
+.feature-rail-underground-12,
+.feature-rail-above-12,
+.feature-rail-12,
+.feature-prison-12,
+.feature-post-12,
+.feature-police-12,
+.feature-place-of-worship-12,
+.feature-pitch-12,
+.feature-pharmacy-12,
+.feature-parking-garage-12,
+.feature-parking-12,
+.feature-park2-12,
+.feature-park-12,
+.feature-oil-well-12,
+.feature-museum-12,
+.feature-monument-12,
+.feature-minefield-12,
+.feature-marker-stroked-12,
+.feature-marker-12,
+.feature-london-underground-12,
+.feature-logging-12,
+.feature-lodging-12,
+.feature-library-12,
+.feature-industrial-12,
+.feature-hospital-12,
+.feature-heliport-12,
+.feature-harbor-12,
+.feature-grocery-12,
+.feature-golf-12,
+.feature-garden-12,
+.feature-fuel-12,
+.feature-fire-station-12,
+.feature-ferry-12,
+.feature-fast-food-12,
+.feature-embassy-12,
+.feature-danger-12,
+.feature-dam-12,
+.feature-cross-12,
+.feature-cricket-12,
+.feature-commercial-12,
+.feature-college-12,
+.feature-circle-stroked-12,
+.feature-circle-12,
+.feature-cinema-12,
+.feature-cemetery-12,
+.feature-campsite-12,
+.feature-cafe-12,
+.feature-bus-12,
+.feature-bicycle-12,
+.feature-beer-12,
+.feature-basketball-12,
+.feature-baseball-12,
+.feature-bar-12,
+.feature-bank-12,
+.feature-art-gallery-12,
+.feature-america-football-12,
+.feature-alcohol-shop-12,
+.feature-airport-12,
+.feature-airfield-12{background-image:url('../img/feature-icons.png');background-repeat:no-repeat}
+.feature-waterway-stream{background-position:0px 0px;width:60px;height:60px;}
+.feature-waterway-river{background-position:-60px 0px;width:60px;height:60px;}
+.feature-waterway-ditch{background-position:0px -60px;width:60px;height:60px;}
+.feature-waterway-canal{background-position:-60px -60px;width:60px;height:60px;}
+.feature-railway-subway{background-position:-120px 0px;width:60px;height:60px;}
+.feature-railway-rail{background-position:-120px -60px;width:60px;height:60px;}
+.feature-railway-monorail{background-position:0px -120px;width:60px;height:60px;}
+.feature-railway-light_rail{background-position:-60px -120px;width:60px;height:60px;}
+.feature-railway-disused{background-position:-120px -120px;width:60px;height:60px;}
+.feature-railway-abandoned{background-position:-180px 0px;width:60px;height:60px;}
+.feature-power-line{background-position:-180px -60px;width:60px;height:60px;}
+.feature-other-line{background-position:-180px -120px;width:60px;height:60px;}
+.feature-highway-unclassified{background-position:0px -180px;width:60px;height:60px;}
+.feature-highway-trunk{background-position:-60px -180px;width:60px;height:60px;}
+.feature-highway-trunk-link{background-position:-120px -180px;width:60px;height:60px;}
+.feature-highway-track{background-position:-180px -180px;width:60px;height:60px;}
+.feature-highway-tertiary{background-position:-240px 0px;width:60px;height:60px;}
+.feature-highway-tertiary-link{background-position:-240px -60px;width:60px;height:60px;}
+.feature-highway-steps{background-position:-240px -120px;width:60px;height:60px;}
+.feature-highway-service{background-position:-240px -180px;width:60px;height:60px;}
+.feature-highway-secondary{background-position:0px -240px;width:60px;height:60px;}
+.feature-highway-secondary-link{background-position:-60px -240px;width:60px;height:60px;}
+.feature-highway-road{background-position:-120px -240px;width:60px;height:60px;}
+.feature-highway-residential{background-position:-180px -240px;width:60px;height:60px;}
+.feature-highway-primary{background-position:-240px -240px;width:60px;height:60px;}
+.feature-highway-primary-link{background-position:-300px 0px;width:60px;height:60px;}
+.feature-highway-path{background-position:-300px -60px;width:60px;height:60px;}
+.feature-highway-motorway{background-position:-300px -120px;width:60px;height:60px;}
+.feature-highway-motorway-link{background-position:-300px -180px;width:60px;height:60px;}
+.feature-highway-living_street{background-position:-300px -240px;width:60px;height:60px;}
+.feature-highway-footway{background-position:0px -300px;width:60px;height:60px;}
+.feature-highway-cycleway{background-position:-60px -300px;width:60px;height:60px;}
+.feature-highway-bridleway{background-position:-120px -300px;width:60px;height:60px;}
+.feature-category-water{background-position:-180px -300px;width:60px;height:60px;}
+.feature-category-roads{background-position:-240px -300px;width:60px;height:60px;}
+.feature-category-rail{background-position:-300px -300px;width:60px;height:60px;}
+.feature-category-path{background-position:-360px 0px;width:60px;height:60px;}
+.feature-zoo{background-position:-360px -60px;width:24px;height:24px;}
+.feature-x{background-position:-384px -60px;width:24px;height:24px;}
+.feature-wetland{background-position:-360px -84px;width:24px;height:24px;}
+.feature-water{background-position:-384px -84px;width:24px;height:24px;}
+.feature-waste-basket{background-position:-360px -108px;width:24px;height:24px;}
+.feature-warehouse{background-position:-384px -108px;width:24px;height:24px;}
+.feature-triangle{background-position:-360px -132px;width:24px;height:24px;}
+.feature-triangle-stroked{background-position:-384px -132px;width:24px;height:24px;}
+.feature-town-hall{background-position:-360px -156px;width:24px;height:24px;}
+.feature-toilets{background-position:-384px -156px;width:24px;height:24px;}
+.feature-theatre{background-position:-360px -180px;width:24px;height:24px;}
+.feature-tennis{background-position:-384px -180px;width:24px;height:24px;}
+.feature-swimming{background-position:-360px -204px;width:24px;height:24px;}
+.feature-star{background-position:-384px -204px;width:24px;height:24px;}
+.feature-star-stroked{background-position:-360px -228px;width:24px;height:24px;}
+.feature-square{background-position:-384px -228px;width:24px;height:24px;}
+.feature-square-stroked{background-position:-360px -252px;width:24px;height:24px;}
+.feature-soccer{background-position:-384px -252px;width:24px;height:24px;}
+.feature-slaughterhouse{background-position:-360px -276px;width:24px;height:24px;}
+.feature-skiing{background-position:-384px -276px;width:24px;height:24px;}
+.feature-shop{background-position:-360px -300px;width:24px;height:24px;}
+.feature-school{background-position:-384px -300px;width:24px;height:24px;}
+.feature-roadblock{background-position:-360px -324px;width:24px;height:24px;}
+.feature-restaurant{background-position:-384px -324px;width:24px;height:24px;}
+.feature-religious-muslim{background-position:0px -360px;width:24px;height:24px;}
+.feature-religious-jewish{background-position:-24px -360px;width:24px;height:24px;}
+.feature-religious-christian{background-position:-48px -360px;width:24px;height:24px;}
+.feature-rail{background-position:-72px -360px;width:24px;height:24px;}
+.feature-rail-underground{background-position:-96px -360px;width:24px;height:24px;}
+.feature-rail-above{background-position:-120px -360px;width:24px;height:24px;}
+.feature-prison{background-position:-144px -360px;width:24px;height:24px;}
+.feature-post{background-position:-168px -360px;width:24px;height:24px;}
+.feature-police{background-position:-192px -360px;width:24px;height:24px;}
+.feature-place-of-worship{background-position:-216px -360px;width:24px;height:24px;}
+.feature-pitch{background-position:-240px -360px;width:24px;height:24px;}
+.feature-pharmacy{background-position:-264px -360px;width:24px;height:24px;}
+.feature-parking{background-position:-288px -360px;width:24px;height:24px;}
+.feature-parking-garage{background-position:-312px -360px;width:24px;height:24px;}
+.feature-park2{background-position:-336px -360px;width:24px;height:24px;}
+.feature-park{background-position:-360px -360px;width:24px;height:24px;}
+.feature-oil-well{background-position:-384px -360px;width:24px;height:24px;}
+.feature-museum{background-position:0px -384px;width:24px;height:24px;}
+.feature-monument{background-position:-24px -384px;width:24px;height:24px;}
+.feature-minefield{background-position:-48px -384px;width:24px;height:24px;}
+.feature-marker{background-position:-72px -384px;width:24px;height:24px;}
+.feature-marker-stroked{background-position:-96px -384px;width:24px;height:24px;}
+.feature-london-underground{background-position:-120px -384px;width:24px;height:24px;}
+.feature-logging{background-position:-144px -384px;width:24px;height:24px;}
+.feature-lodging{background-position:-168px -384px;width:24px;height:24px;}
+.feature-library{background-position:-192px -384px;width:24px;height:24px;}
+.feature-industrial{background-position:-216px -384px;width:24px;height:24px;}
+.feature-hospital{background-position:-240px -384px;width:24px;height:24px;}
+.feature-heliport{background-position:-264px -384px;width:24px;height:24px;}
+.feature-harbor{background-position:-288px -384px;width:24px;height:24px;}
+.feature-grocery{background-position:-312px -384px;width:24px;height:24px;}
+.feature-golf{background-position:-336px -384px;width:24px;height:24px;}
+.feature-garden{background-position:-360px -384px;width:24px;height:24px;}
+.feature-fuel{background-position:-384px -384px;width:24px;height:24px;}
+.feature-fire-station{background-position:-420px 0px;width:24px;height:24px;}
+.feature-ferry{background-position:-420px -24px;width:24px;height:24px;}
+.feature-fast-food{background-position:-420px -48px;width:24px;height:24px;}
+.feature-embassy{background-position:-420px -72px;width:24px;height:24px;}
+.feature-danger{background-position:-420px -96px;width:24px;height:24px;}
+.feature-dam{background-position:-420px -120px;width:24px;height:24px;}
+.feature-cross{background-position:-420px -144px;width:24px;height:24px;}
+.feature-cricket{background-position:-420px -168px;width:24px;height:24px;}
+.feature-commercial{background-position:-420px -192px;width:24px;height:24px;}
+.feature-college{background-position:-420px -216px;width:24px;height:24px;}
+.feature-circle{background-position:-420px -240px;width:24px;height:24px;}
+.feature-circle-stroked{background-position:-420px -264px;width:24px;height:24px;}
+.feature-cinema{background-position:-420px -288px;width:24px;height:24px;}
+.feature-cemetery{background-position:-420px -312px;width:24px;height:24px;}
+.feature-campsite{background-position:-420px -336px;width:24px;height:24px;}
+.feature-cafe{background-position:-420px -360px;width:24px;height:24px;}
+.feature-bus{background-position:-420px -384px;width:24px;height:24px;}
+.feature-bicycle{background-position:0px -408px;width:24px;height:24px;}
+.feature-beer{background-position:-24px -408px;width:24px;height:24px;}
+.feature-basketball{background-position:-48px -408px;width:24px;height:24px;}
+.feature-baseball{background-position:-72px -408px;width:24px;height:24px;}
+.feature-bar{background-position:-96px -408px;width:24px;height:24px;}
+.feature-bank{background-position:-120px -408px;width:24px;height:24px;}
+.feature-art-gallery{background-position:-144px -408px;width:24px;height:24px;}
+.feature-america-football{background-position:-168px -408px;width:24px;height:24px;}
+.feature-alcohol-shop{background-position:-192px -408px;width:24px;height:24px;}
+.feature-airport{background-position:-216px -408px;width:24px;height:24px;}
+.feature-airfield{background-position:-240px -408px;width:24px;height:24px;}
+.feature-zoo-18{background-position:-264px -408px;width:18px;height:18px;}
+.feature-x-18{background-position:-282px -408px;width:18px;height:18px;}
+.feature-wetland-18{background-position:-300px -408px;width:18px;height:18px;}
+.feature-water-18{background-position:-318px -408px;width:18px;height:18px;}
+.feature-waste-basket-18{background-position:-336px -408px;width:18px;height:18px;}
+.feature-warehouse-18{background-position:-354px -408px;width:18px;height:18px;}
+.feature-triangle-stroked-18{background-position:-372px -408px;width:18px;height:18px;}
+.feature-triangle-18{background-position:-390px -408px;width:18px;height:18px;}
+.feature-town-hall-18{background-position:-408px -408px;width:18px;height:18px;}
+.feature-toilets-18{background-position:-426px -408px;width:18px;height:18px;}
+.feature-theatre-18{background-position:-444px 0px;width:18px;height:18px;}
+.feature-tennis-18{background-position:-444px -18px;width:18px;height:18px;}
+.feature-swimming-18{background-position:-444px -36px;width:18px;height:18px;}
+.feature-star-stroked-18{background-position:-444px -54px;width:18px;height:18px;}
+.feature-star-18{background-position:-444px -72px;width:18px;height:18px;}
+.feature-square-stroked-18{background-position:-444px -90px;width:18px;height:18px;}
+.feature-square-18{background-position:-444px -108px;width:18px;height:18px;}
+.feature-soccer-18{background-position:-444px -126px;width:18px;height:18px;}
+.feature-slaughterhouse-18{background-position:-444px -144px;width:18px;height:18px;}
+.feature-skiing-18{background-position:-444px -162px;width:18px;height:18px;}
+.feature-shop-18{background-position:-444px -180px;width:18px;height:18px;}
+.feature-school-18{background-position:-444px -198px;width:18px;height:18px;}
+.feature-roadblock-18{background-position:-444px -216px;width:18px;height:18px;}
+.feature-restaurant-18{background-position:-444px -234px;width:18px;height:18px;}
+.feature-religious-muslim-18{background-position:-444px -252px;width:18px;height:18px;}
+.feature-religious-jewish-18{background-position:-444px -270px;width:18px;height:18px;}
+.feature-religious-christian-18{background-position:-444px -288px;width:18px;height:18px;}
+.feature-rail-underground-18{background-position:-444px -306px;width:18px;height:18px;}
+.feature-rail-above-18{background-position:-444px -324px;width:18px;height:18px;}
+.feature-rail-18{background-position:-444px -342px;width:18px;height:18px;}
+.feature-prison-18{background-position:-444px -360px;width:18px;height:18px;}
+.feature-post-18{background-position:-444px -378px;width:18px;height:18px;}
+.feature-police-18{background-position:-444px -396px;width:18px;height:18px;}
+.feature-place-of-worship-18{background-position:-444px -414px;width:18px;height:18px;}
+.feature-pitch-18{background-position:0px -432px;width:18px;height:18px;}
+.feature-pharmacy-18{background-position:-18px -432px;width:18px;height:18px;}
+.feature-parking-garage-18{background-position:-36px -432px;width:18px;height:18px;}
+.feature-parking-18{background-position:-54px -432px;width:18px;height:18px;}
+.feature-park2-18{background-position:-72px -432px;width:18px;height:18px;}
+.feature-park-18{background-position:-90px -432px;width:18px;height:18px;}
+.feature-oil-well-18{background-position:-108px -432px;width:18px;height:18px;}
+.feature-museum-18{background-position:-126px -432px;width:18px;height:18px;}
+.feature-monument-18{background-position:-144px -432px;width:18px;height:18px;}
+.feature-minefield-18{background-position:-162px -432px;width:18px;height:18px;}
+.feature-marker-stroked-18{background-position:-180px -432px;width:18px;height:18px;}
+.feature-marker-18{background-position:-198px -432px;width:18px;height:18px;}
+.feature-london-underground-18{background-position:-216px -432px;width:18px;height:18px;}
+.feature-logging-18{background-position:-234px -432px;width:18px;height:18px;}
+.feature-lodging-18{background-position:-252px -432px;width:18px;height:18px;}
+.feature-library-18{background-position:-270px -432px;width:18px;height:18px;}
+.feature-industrial-18{background-position:-288px -432px;width:18px;height:18px;}
+.feature-hospital-18{background-position:-306px -432px;width:18px;height:18px;}
+.feature-heliport-18{background-position:-324px -432px;width:18px;height:18px;}
+.feature-harbor-18{background-position:-342px -432px;width:18px;height:18px;}
+.feature-grocery-18{background-position:-360px -432px;width:18px;height:18px;}
+.feature-golf-18{background-position:-378px -432px;width:18px;height:18px;}
+.feature-garden-18{background-position:-396px -432px;width:18px;height:18px;}
+.feature-fuel-18{background-position:-414px -432px;width:18px;height:18px;}
+.feature-fire-station-18{background-position:-432px -432px;width:18px;height:18px;}
+.feature-ferry-18{background-position:-462px 0px;width:18px;height:18px;}
+.feature-fast-food-18{background-position:-462px -18px;width:18px;height:18px;}
+.feature-embassy-18{background-position:-462px -36px;width:18px;height:18px;}
+.feature-danger-18{background-position:-462px -54px;width:18px;height:18px;}
+.feature-dam-18{background-position:-462px -72px;width:18px;height:18px;}
+.feature-cross-18{background-position:-462px -90px;width:18px;height:18px;}
+.feature-cricket-18{background-position:-462px -108px;width:18px;height:18px;}
+.feature-commercial-18{background-position:-462px -126px;width:18px;height:18px;}
+.feature-college-18{background-position:-462px -144px;width:18px;height:18px;}
+.feature-circle-stroked-18{background-position:-462px -162px;width:18px;height:18px;}
+.feature-circle-18{background-position:-462px -180px;width:18px;height:18px;}
+.feature-cinema-18{background-position:-462px -198px;width:18px;height:18px;}
+.feature-cemetery-18{background-position:-462px -216px;width:18px;height:18px;}
+.feature-campsite-18{background-position:-462px -234px;width:18px;height:18px;}
+.feature-cafe-18{background-position:-462px -252px;width:18px;height:18px;}
+.feature-bus-18{background-position:-462px -270px;width:18px;height:18px;}
+.feature-bicycle-18{background-position:-462px -288px;width:18px;height:18px;}
+.feature-beer-18{background-position:-462px -306px;width:18px;height:18px;}
+.feature-basketball-18{background-position:-462px -324px;width:18px;height:18px;}
+.feature-baseball-18{background-position:-462px -342px;width:18px;height:18px;}
+.feature-bar-18{background-position:-462px -360px;width:18px;height:18px;}
+.feature-bank-18{background-position:-462px -378px;width:18px;height:18px;}
+.feature-art-gallery-18{background-position:-462px -396px;width:18px;height:18px;}
+.feature-america-football-18{background-position:-462px -414px;width:18px;height:18px;}
+.feature-alcohol-shop-18{background-position:-462px -432px;width:18px;height:18px;}
+.feature-airport-18{background-position:0px -450px;width:18px;height:18px;}
+.feature-airfield-18{background-position:-18px -450px;width:18px;height:18px;}
+.feature-zoo-12{background-position:-408px -60px;width:12px;height:12px;}
+.feature-x-12{background-position:-408px -72px;width:12px;height:12px;}
+.feature-wetland-12{background-position:-408px -84px;width:12px;height:12px;}
+.feature-water-12{background-position:-408px -96px;width:12px;height:12px;}
+.feature-waste-basket-12{background-position:-408px -108px;width:12px;height:12px;}
+.feature-warehouse-12{background-position:-408px -120px;width:12px;height:12px;}
+.feature-triangle-stroked-12{background-position:-408px -132px;width:12px;height:12px;}
+.feature-triangle-12{background-position:-408px -144px;width:12px;height:12px;}
+.feature-town-hall-12{background-position:-408px -156px;width:12px;height:12px;}
+.feature-toilets-12{background-position:-408px -168px;width:12px;height:12px;}
+.feature-theatre-12{background-position:-408px -180px;width:12px;height:12px;}
+.feature-tennis-12{background-position:-408px -192px;width:12px;height:12px;}
+.feature-swimming-12{background-position:-408px -204px;width:12px;height:12px;}
+.feature-star-stroked-12{background-position:-408px -216px;width:12px;height:12px;}
+.feature-star-12{background-position:-408px -228px;width:12px;height:12px;}
+.feature-square-stroked-12{background-position:-408px -240px;width:12px;height:12px;}
+.feature-square-12{background-position:-408px -252px;width:12px;height:12px;}
+.feature-soccer-12{background-position:-408px -264px;width:12px;height:12px;}
+.feature-slaughterhouse-12{background-position:-408px -276px;width:12px;height:12px;}
+.feature-skiing-12{background-position:-408px -288px;width:12px;height:12px;}
+.feature-shop-12{background-position:-408px -300px;width:12px;height:12px;}
+.feature-school-12{background-position:-408px -312px;width:12px;height:12px;}
+.feature-roadblock-12{background-position:-408px -324px;width:12px;height:12px;}
+.feature-restaurant-12{background-position:-408px -336px;width:12px;height:12px;}
+.feature-religious-muslim-12{background-position:-360px -348px;width:12px;height:12px;}
+.feature-religious-jewish-12{background-position:-372px -348px;width:12px;height:12px;}
+.feature-religious-christian-12{background-position:-384px -348px;width:12px;height:12px;}
+.feature-rail-underground-12{background-position:-396px -348px;width:12px;height:12px;}
+.feature-rail-above-12{background-position:-408px -348px;width:12px;height:12px;}
+.feature-rail-12{background-position:-408px -360px;width:12px;height:12px;}
+.feature-prison-12{background-position:-408px -372px;width:12px;height:12px;}
+.feature-post-12{background-position:-408px -384px;width:12px;height:12px;}
+.feature-police-12{background-position:-408px -396px;width:12px;height:12px;}
+.feature-place-of-worship-12{background-position:-450px -432px;width:12px;height:12px;}
+.feature-pitch-12{background-position:-36px -450px;width:12px;height:12px;}
+.feature-pharmacy-12{background-position:-48px -450px;width:12px;height:12px;}
+.feature-parking-garage-12{background-position:-60px -450px;width:12px;height:12px;}
+.feature-parking-12{background-position:-72px -450px;width:12px;height:12px;}
+.feature-park2-12{background-position:-84px -450px;width:12px;height:12px;}
+.feature-park-12{background-position:-96px -450px;width:12px;height:12px;}
+.feature-oil-well-12{background-position:-108px -450px;width:12px;height:12px;}
+.feature-museum-12{background-position:-120px -450px;width:12px;height:12px;}
+.feature-monument-12{background-position:-132px -450px;width:12px;height:12px;}
+.feature-minefield-12{background-position:-144px -450px;width:12px;height:12px;}
+.feature-marker-stroked-12{background-position:-156px -450px;width:12px;height:12px;}
+.feature-marker-12{background-position:-168px -450px;width:12px;height:12px;}
+.feature-london-underground-12{background-position:-180px -450px;width:12px;height:12px;}
+.feature-logging-12{background-position:-192px -450px;width:12px;height:12px;}
+.feature-lodging-12{background-position:-204px -450px;width:12px;height:12px;}
+.feature-library-12{background-position:-216px -450px;width:12px;height:12px;}
+.feature-industrial-12{background-position:-228px -450px;width:12px;height:12px;}
+.feature-hospital-12{background-position:-240px -450px;width:12px;height:12px;}
+.feature-heliport-12{background-position:-252px -450px;width:12px;height:12px;}
+.feature-harbor-12{background-position:-264px -450px;width:12px;height:12px;}
+.feature-grocery-12{background-position:-276px -450px;width:12px;height:12px;}
+.feature-golf-12{background-position:-288px -450px;width:12px;height:12px;}
+.feature-garden-12{background-position:-300px -450px;width:12px;height:12px;}
+.feature-fuel-12{background-position:-312px -450px;width:12px;height:12px;}
+.feature-fire-station-12{background-position:-324px -450px;width:12px;height:12px;}
+.feature-ferry-12{background-position:-336px -450px;width:12px;height:12px;}
+.feature-fast-food-12{background-position:-348px -450px;width:12px;height:12px;}
+.feature-embassy-12{background-position:-360px -450px;width:12px;height:12px;}
+.feature-danger-12{background-position:-372px -450px;width:12px;height:12px;}
+.feature-dam-12{background-position:-384px -450px;width:12px;height:12px;}
+.feature-cross-12{background-position:-396px -450px;width:12px;height:12px;}
+.feature-cricket-12{background-position:-408px -450px;width:12px;height:12px;}
+.feature-commercial-12{background-position:-420px -450px;width:12px;height:12px;}
+.feature-college-12{background-position:-432px -450px;width:12px;height:12px;}
+.feature-circle-stroked-12{background-position:-444px -450px;width:12px;height:12px;}
+.feature-circle-12{background-position:-456px -450px;width:12px;height:12px;}
+.feature-cinema-12{background-position:-468px -450px;width:12px;height:12px;}
+.feature-cemetery-12{background-position:0px -468px;width:12px;height:12px;}
+.feature-campsite-12{background-position:-12px -468px;width:12px;height:12px;}
+.feature-cafe-12{background-position:-24px -468px;width:12px;height:12px;}
+.feature-bus-12{background-position:-36px -468px;width:12px;height:12px;}
+.feature-bicycle-12{background-position:-48px -468px;width:12px;height:12px;}
+.feature-beer-12{background-position:-60px -468px;width:12px;height:12px;}
+.feature-basketball-12{background-position:-72px -468px;width:12px;height:12px;}
+.feature-baseball-12{background-position:-84px -468px;width:12px;height:12px;}
+.feature-bar-12{background-position:-96px -468px;width:12px;height:12px;}
+.feature-bank-12{background-position:-108px -468px;width:12px;height:12px;}
+.feature-art-gallery-12{background-position:-120px -468px;width:12px;height:12px;}
+.feature-america-football-12{background-position:-132px -468px;width:12px;height:12px;}
+.feature-alcohol-shop-12{background-position:-144px -468px;width:12px;height:12px;}
+.feature-airport-12{background-position:-156px -468px;width:12px;height:12px;}
+.feature-airfield-12{background-position:-168px -468px;width:12px;height:12px;}

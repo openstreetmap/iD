@@ -11,14 +11,17 @@ iD.operations.Rotate = function(selection, context) {
             context.entity(entityId).geometry() === 'area';
     };
 
-    operation.enabled = function() {
-        return true;
+    operation.disabled = function() {
+        return false;
+    };
+
+    operation.tooltip = function() {
+        return t('operations.rotate.description');
     };
 
     operation.id = "rotate";
     operation.keys = [t('operations.rotate.key')];
     operation.title = t('operations.rotate.title');
-    operation.description = t('operations.rotate.description');
 
     return operation;
 };

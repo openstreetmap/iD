@@ -1,18 +1,17 @@
 {
-    "name": "bar",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "bar"
-        },
-        "terms": []
-    },
     "icon": "bar",
-    "form": [
+    "fields": [
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "bar"
+    },
+    "terms": [],
+    "name": "Bar"
 }

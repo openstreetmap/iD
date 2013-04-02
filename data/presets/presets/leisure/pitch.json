@@ -1,21 +1,16 @@
 {
-    "name": "sport pitch",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "leisure": "pitch"
-        },
-        "terms": []
-    },
     "icon": "pitch",
-    "form": [
-        {
-            "key": "sport",
-            "type": "combo"
-        },
+    "fields": [
+        "sport",
         "surface"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch"
+    },
+    "terms": [],
+    "name": "Sport Pitch"
 }

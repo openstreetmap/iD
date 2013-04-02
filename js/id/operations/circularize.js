@@ -1,9 +1,10 @@
 iD.operations.Circularize = function(selection, context) {
     var entityId = selection[0],
+        geometry = context.geometry(entityId),
         action = iD.actions.Circularize(entityId, context.projection);
 
     var operation = function() {
-        var annotation = t('operations.circularize.annotation.' + context.geometry(entityId));
+        var annotation = t('operations.circularize.annotation.' + geometry);
         context.perform(action, annotation);
     };
 
@@ -12,14 +13,20 @@ iD.operations.Circularize = function(selection, context) {
             context.entity(entityId).type === 'way';
     };
 
-    operation.enabled = function() {
-        return action.enabled(context.graph());
+    operation.disabled = function() {
+        return action.disabled(context.graph());
+    };
+
+    operation.tooltip = function() {
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.circularize.' + disable) :
+            t('operations.circularize.description.' + geometry);
     };
 
     operation.id = "circularize";
     operation.keys = [t('operations.circularize.key')];
     operation.title = t('operations.circularize.title');
-    operation.description = t('operations.circularize.description');
 
     return operation;
 };

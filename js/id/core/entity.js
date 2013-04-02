@@ -63,22 +63,28 @@ iD.Entity.prototype = {
         return iD.Entity.id.toOSM(this.id);
     },
 
+    isNew: function() {
+        return this.osmId() < 0;
+    },
+
     update: function(attrs) {
         return iD.Entity(this, attrs);
     },
 
     mergeTags: function(tags) {
-        var merged = _.clone(this.tags);
+        var merged = _.clone(this.tags), changed = false;
         for (var k in tags) {
             var t1 = merged[k],
                 t2 = tags[k];
-            if (t1 && t1 !== t2) {
-                merged[k] = _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
-            } else {
+            if (!t1) {
+                changed = true;
                 merged[k] = t2;
+            } else if (t1 !== t2) {
+                changed = true;
+                merged[k] = _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
             }
         }
-        return this.update({tags: merged});
+        return changed ? this.update({tags: merged}) : this;
     },
 
     intersects: function(extent, resolver) {
@@ -110,27 +116,5 @@ iD.Entity.prototype = {
         });
 
         return deprecated;
-    },
-
-    friendlyName: function() {
-        // Generate a string such as 'river' or 'Fred's House' for an entity.
-        if (!this.tags || !Object.keys(this.tags).length) { return ''; }
-
-        var mainkeys = ['highway', 'amenity', 'railway', 'waterway', 'natural'],
-            n = [];
-
-        if (this.tags.name) n.push(this.tags.name);
-        if (this.tags.ref) n.push(this.tags.ref);
-
-        if (!n.length) {
-            for (var k in this.tags) {
-                if (mainkeys.indexOf(k) !== -1) {
-                    n.push(this.tags[k]);
-                    break;
-                }
-            }
-        }
-
-        return n.length === 0 ? 'unknown' : n.join('; ');
     }
 };

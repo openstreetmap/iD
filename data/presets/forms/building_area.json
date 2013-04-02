@@ -1,7 +1,0 @@
-{
-    "key": "building",
-    "type": "check",
-    "default": {
-        "area": "yes"
-    }
-}

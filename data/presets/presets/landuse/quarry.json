@@ -1,15 +1,11 @@
 {
-    "name": "quarry",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "tags": {
-            "landuse": "quarry"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "quarry"
     },
-    "form": [
-    ]
+    "terms": [],
+    "name": "Quarry"
 }

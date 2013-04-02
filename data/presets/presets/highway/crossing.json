@@ -1,21 +1,16 @@
 {
-    "name": "crossing",
-    "match": {
-        "type": [
-            "vertex"
-        ],
-        "tags": {
-            "highway": "crossing"
-        },
-        "terms": [
-            "crosswalk",
-            "zebra crossing"
-        ]
+    "fields": [
+        "crossing"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "crossing"
     },
-    "form": [
-        {
-            "key": "crossing",
-            "type": "combo"
-        }
-    ]
+    "terms": [
+        "crosswalk",
+        "zebra crossing"
+    ],
+    "name": "Crossing"
 }

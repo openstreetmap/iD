@@ -7,13 +7,19 @@ iD.Connection = function(context) {
         keys,
         inflight = {},
         loadedTiles = {},
-        oauth = iD.OAuth(context).url(url),
+        loadingModal,
+        oauth = osmAuth({
+            url: url,
+            loading: authLoading,
+            done: authDone
+        }),
         ndStr = 'nd',
         tagStr = 'tag',
         memberStr = 'member',
         nodeStr = 'node',
         wayStr = 'way',
-        relationStr = 'relation';
+        relationStr = 'relation',
+        off;
 
     connection.changesetUrl = function(changesetId) {
         return url + '/browse/changeset/' + changesetId;
@@ -25,6 +31,15 @@ iD.Connection = function(context) {
         }
         return d3.xml(url).get().on('load', done);
     };
+
+    function authLoading() {
+        loadingModal = iD.ui.loading(context.container(),
+            t('loading_auth'));
+    }
+
+    function authDone() {
+        if (loadingModal) loadingModal.remove();
+    }
 
     function getNodes(obj) {
         var elems = obj.getElementsByTagName(ndStr),
@@ -81,8 +96,8 @@ iD.Connection = function(context) {
                 id: iD.Entity.id.fromOSM(wayStr, attrs.id.nodeValue),
                 version: attrs.version.nodeValue,
                 changeset: attrs.changeset.nodeValue,
-                user: attrs.user.nodeValue,
-                uid: attrs.uid.nodeValue,
+                user: attrs.user && attrs.user.nodeValue,
+                uid: attrs.uid && attrs.uid.nodeValue,
                 visible: attrs.visible.nodeValue,
                 timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj),
@@ -96,8 +111,8 @@ iD.Connection = function(context) {
                 id: iD.Entity.id.fromOSM(relationStr, attrs.id.nodeValue),
                 version: attrs.version.nodeValue,
                 changeset: attrs.changeset.nodeValue,
-                user: attrs.user.nodeValue,
-                uid: attrs.uid.nodeValue,
+                user: attrs.user && attrs.user.nodeValue,
+                uid: attrs.uid && attrs.uid.nodeValue,
                 visible: attrs.visible.nodeValue,
                 timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj),
@@ -227,6 +242,9 @@ iD.Connection = function(context) {
     function abortRequest(i) { i.abort(); }
 
     connection.loadTiles = function(projection, dimensions) {
+
+        if (off) return;
+
         var scaleExtent = [16, 16],
             s = projection.scale(),
             tiles = d3.geo.tile()
@@ -294,6 +312,11 @@ iD.Connection = function(context) {
         return connection;
     };
 
+    connection.toggle = function(_) {
+        off = !_;
+        return connection;
+    };
+
     connection.user = function(_) {
         if (!arguments.length) return user;
         user = _;
@@ -304,6 +327,12 @@ iD.Connection = function(context) {
         _.forEach(inflight, abortRequest);
         loadedTiles = {};
         inflight = {};
+        return connection;
+    };
+
+    connection.loadedTiles = function(_) {
+        if (!arguments.length) return loadedTiles;
+        loadedTiles = _;
         return connection;
     };
 

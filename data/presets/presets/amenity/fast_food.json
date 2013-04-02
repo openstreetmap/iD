@@ -1,19 +1,18 @@
 {
-    "name": "fast food",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "fast_food"
-        },
-        "terms": []
-    },
     "icon": "fast-food",
-    "form": [
+    "fields": [
         "cuisine",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fast_food"
+    },
+    "terms": [],
+    "name": "Fast Food"
 }

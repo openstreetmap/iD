@@ -1,19 +1,18 @@
 {
-    "name": "pharmacy",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "pharmacy"
-        },
-        "terms": []
-    },
     "icon": "pharmacy",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "pharmacy"
+    },
+    "terms": [],
+    "name": "Pharmacy"
 }

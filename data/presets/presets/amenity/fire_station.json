@@ -1,19 +1,18 @@
 {
-    "name": "fire station",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "fire_station"
-        },
-        "terms": []
-    },
     "icon": "fire-station",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fire_station"
+    },
+    "terms": [],
+    "name": "Fire Station"
 }

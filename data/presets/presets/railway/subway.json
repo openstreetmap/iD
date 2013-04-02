@@ -1,13 +1,14 @@
 {
-    "name": "subway",
-    "match": {
-        "type": [
-            "line"
-        ],
-        "tags": {
-            "railway": "subway"
-        },
-        "terms": []
+    "icon": "railway-subway",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "subway"
     },
-    "icon": "railway-rail"
+    "terms": [],
+    "name": "Subway"
 }

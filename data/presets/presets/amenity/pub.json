@@ -1,18 +1,17 @@
 {
-    "name": "pub",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "amenity": "pub"
-        },
-        "terms": []
-    },
     "icon": "beer",
-    "form": [
+    "fields": [
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "pub"
+    },
+    "terms": [],
+    "name": "Pub"
 }

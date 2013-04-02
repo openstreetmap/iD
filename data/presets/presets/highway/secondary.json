@@ -1,20 +1,19 @@
 {
-    "name": "secondary road",
-    "match": {
-        "type": [
-            "line"
-        ],
-        "tags": {
-            "highway": "secondary"
-        },
-        "terms": []
-    },
     "icon": "highway-secondary",
-    "form": [
+    "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
-        "surface"
-    ]
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "secondary"
+    },
+    "terms": [],
+    "name": "Secondary Road"
 }

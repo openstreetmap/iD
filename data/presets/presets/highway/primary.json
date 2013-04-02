@@ -1,20 +1,19 @@
 {
-    "name": "primary road",
-    "match": {
-        "type": [
-            "line"
-        ],
-        "tags": {
-            "highway": "primary"
-        },
-        "terms": []
-    },
     "icon": "highway-primary",
-    "form": [
+    "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
-        "surface"
-    ]
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "primary"
+    },
+    "terms": [],
+    "name": "Primary Road"
 }

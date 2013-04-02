@@ -1,20 +1,18 @@
 {
-    "name": "hotel",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "tourism": "hotel"
-        }
-    },
     "icon": "lodging",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "tourism": "hotel"
+    },
+    "name": "Hotel"
 }

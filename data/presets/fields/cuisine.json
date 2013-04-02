@@ -1,0 +1,6 @@
+{
+    "key": "cuisine",
+    "type": "combo",
+    "indexed": true,
+    "label": "Cuisine"
+}

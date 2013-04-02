@@ -16,7 +16,7 @@ describe("iD.svg.Midpoints", function () {
             extent = iD.geo.Extent([0, 0], [100, 100]);
 
         // If no vertices are drawn, no midpoints are drawn. This dependence needs to be removed
-        surface.call(iD.svg.Vertices(projection), graph, [a], filter, extent);
+        surface.call(iD.svg.Vertices(projection), graph, [a], filter, 16);
         surface.call(iD.svg.Midpoints(projection), graph, [line], filter, extent);
 
         expect(surface.select('.midpoint').datum().loc).to.eql([25, 0]);

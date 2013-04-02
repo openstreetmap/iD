@@ -1,0 +1,72 @@
+{
+    "title": "Field",
+    "description": "A reusable form element for presets",
+    "type": "object",
+    "properties": {
+        "key": {
+            "description": "Tag key whose value is to be displayed",
+            "type": "string"
+        },
+        "keys": {
+            "description": "Tag keys whose value is to be displayed",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "type": {
+            "description": "Type of field",
+            "type": "string",
+            "enum": [
+                "address",
+                "check",
+                "combo",
+                "defaultcheck",
+                "text",
+                "maxspeed",
+                "number",
+                "tel",
+                "email",
+                "url",
+                "radio",
+                "textarea",
+                "wikipedia"
+            ],
+            "required": true
+        },
+        "label": {
+            "description": "English label for the form",
+            "type": "string",
+            "required": true
+        },
+        "geometry": {
+            "type": "string"
+        },
+        "default": {
+            "type": "string"
+        },
+        "indexed": {
+            "type": "boolean"
+        },
+        "options": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "universal": {
+            "type": "boolean",
+            "default": false
+        },
+        "icon": {
+            "type": "string"
+        },
+        "placeholder": {
+            "type": "string"
+        },
+        "strings": {
+            "type": "object"
+        }
+    },
+    "additionalProperties": false
+}

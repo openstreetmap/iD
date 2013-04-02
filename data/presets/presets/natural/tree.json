@@ -1,21 +1,15 @@
 {
-    "name": "tree",
-    "match": {
-        "type": [
-            "point",
-            "vertex"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "natural": "tree"
-        }
-    },
-    "form": [
-        {
-            "key": "denotation",
-            "type": "combo"
-        }
+    "fields": [
+        "denotation"
     ],
-    "icon": "park"
+    "icon": "park",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "tree"
+    },
+    "name": "Tree"
 }

@@ -1,14 +1,12 @@
 {
-    "name": "coastline",
-    "match": {
-        "type": [
-            "line"
-        ],
-        "terms": [
-            "shore"
-        ],
-        "tags": {
-            "natural": "coastline"
-        }
-    }
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "shore"
+    ],
+    "tags": {
+        "natural": "coastline"
+    },
+    "name": "Coastline"
 }

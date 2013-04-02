@@ -5,6 +5,17 @@ iD.svg.Surface = function() {
         });
     }
 
+    function autosize(image) {
+        var img = document.createElement('img');
+        img.src = image.attr('xlink:href');
+        img.onload = function() {
+            image.attr({
+                width: img.width,
+                height: img.height
+            });
+        };
+    }
+
     function sprites(stylesheetName, selectorRegexp) {
         var sprites = [];
 
@@ -17,7 +28,7 @@ iD.svg.Surface = function() {
             var klass = rule.selectorText,
                 match = klass && klass.match(selectorRegexp);
             if (match) {
-                var id = match[1];
+                var id = match[1].replace('feature', 'maki');
                 match = rule.style.backgroundPosition.match(/(-?\d+)px (-?\d+)px/);
                 sprites.push({id: id, x: match[1], y: match[2]});
             }
@@ -80,7 +91,7 @@ iD.svg.Surface = function() {
             .attr('xlink:href', function(d) { return 'img/pattern/' + d[1] + '.png'; });
 
         defs.selectAll()
-            .data([12, 20])
+            .data([12, 18, 20])
             .enter().append('clipPath')
             .attr('id', function(d) { return 'clip-square-' + d; })
             .append('rect')
@@ -90,12 +101,9 @@ iD.svg.Surface = function() {
             .attr('height', function(d) { return d; });
 
         defs.append('image')
-            .attr({
-                id: 'sprite',
-                width: 420,
-                height: 200,
-                'xlink:href': 'img/sprite.png'
-            });
+            .attr('id', 'sprite')
+            .attr('xlink:href', 'img/sprite.png')
+            .call(autosize);
 
         defs.selectAll()
             .data(sprites("app.css", /^\.(icon-operation-[a-z0-9-]+)$/))
@@ -105,15 +113,12 @@ iD.svg.Surface = function() {
             .attr('xlink:href', '#sprite');
 
         defs.append('image')
-            .attr({
-                id: 'maki-sprite',
-                width: 306,
-                height: 294,
-                'xlink:href': 'img/maki.png'
-            });
+            .attr('id', 'maki-sprite')
+            .attr('xlink:href', 'img/feature-icons.png')
+            .call(autosize);
 
         defs.selectAll()
-            .data(sprites("maki.css", /^\.(maki-[a-z0-9-]+-12)$/))
+            .data(sprites("feature-icons.css", /^\.(feature-[a-z0-9-]+-(12|18))$/))
             .enter().append('use')
             .attr('id', function(d) { return d.id; })
             .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })

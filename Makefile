@@ -9,7 +9,7 @@ all: \
 	iD.js \
 	iD.min.js
 
-DATA_FILES = $(shell find data -type f -name '*.json')
+DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
 data/data.js: $(DATA_FILES)
 	node build.js
 
@@ -18,20 +18,22 @@ data/data.js: $(DATA_FILES)
 	js/lib/d3.v3.js \
 	js/lib/d3.combobox.js \
 	js/lib/d3.geo.tile.js \
+	js/lib/d3.jsonp.js \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
 	js/lib/d3.size.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
+	js/lib/d3.curtain.js \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
-	js/lib/ohauth.js \
+	js/lib/osmauth.js \
 	js/lib/rtree.js \
-	js/lib/sha.js \
+	js/lib/togeojson.js \
+	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
 	js/id/connection.js \
-	js/id/oauth.js \
 	js/id/services/*.js \
 	data/data.js \
 	js/id/util.js \
@@ -52,12 +54,14 @@ data/data.js: $(DATA_FILES)
 	js/id/ui.js \
 	js/id/ui/*.js \
 	js/id/ui/preset/*.js \
+	js/id/ui/intro/*.js \
 	js/id/presets.js \
 	js/id/presets/*.js \
 	js/id/validate.js \
 	js/id/end.js \
 	js/lib/locale.js \
-	locale/*.js
+	data/introGraph.js \
+	data/locales.js
 
 iD.js: node_modules Makefile
 	@rm -f $@
@@ -75,8 +79,11 @@ install: all
 	mkdir -p $(install_root)
 	cp iD.js iD.min.js land.html $(install_root)
 	cp index_packaged.html $(install_root)/index.html
-	cp -R css/ $(install_root)/css
-	cp -R img/ $(install_root)/img
+	cp -R css/. $(install_root)/css
+	cp -R img/. $(install_root)/img
 
 clean:
 	rm -f iD*.js
+
+translations:
+	node data/update_locales

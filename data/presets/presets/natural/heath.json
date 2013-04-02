@@ -1,13 +1,10 @@
 {
-    "name": "heath",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "natural": "heath"
-        }
-    }
+    "geometry": [
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "heath"
+    },
+    "name": "Heath"
 }

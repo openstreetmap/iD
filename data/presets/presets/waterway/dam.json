@@ -1,15 +1,13 @@
 {
-    "name": "dam",
-    "match": {
-        "type": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "tags": {
-            "waterway": "dam"
-        }
+    "icon": "dam",
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "waterway": "dam"
     },
-    "icon": "dam"
+    "name": "Dam"
 }

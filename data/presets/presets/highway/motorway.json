@@ -1,20 +1,19 @@
 {
-    "name": "motorway",
-    "match": {
-        "type": [
-            "line"
-        ],
-        "tags": {
-            "highway": "motorway"
-        },
-        "terms": []
-    },
     "icon": "highway-motorway",
-    "form": [
+    "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
-        "surface"
-    ]
+        "surface",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "motorway"
+    },
+    "terms": [],
+    "name": "Motorway"
 }

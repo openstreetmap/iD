@@ -1,15 +1,11 @@
 {
-    "name": "farm",
-    "match": {
-        "type": [
-            "area"
-        ],
-        "tags": {
-            "landuse": "farm"
-        },
-        "terms": [
-        ]
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "farm"
     },
-    "form": [
-    ]
+    "terms": [],
+    "name": "Farm"
 }

@@ -6,8 +6,7 @@
         <link rel='stylesheet' href='css/reset.css'>
         <link rel='stylesheet' href='css/map.css'>
         <link rel='stylesheet' href='css/app.css'>
-        <link rel='stylesheet' href='css/preset-icons.css'>
-        <link rel='stylesheet' href='css/maki.css'>
+        <link rel='stylesheet' href='css/feature-icons.css'>
 
         <!-- mobile devices -->
         <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
@@ -20,10 +19,12 @@
             Raven.config('https://af8ce79129b24fa28d91ede59302369c@app.getsentry.com/6009').install();
         </script>
 
-        <script src='iD.js'></script>
+        <!--[if !IE || gte IE 9]><!-->
+            <script src='iD.js'></script>
+        <!-- <![endif]-->
     </head>
     <body>
-        <div id='iD'></div>
+        <div id='id-container'></div>
         <script>
             // google analytics
             var _gaq = _gaq || [];
@@ -41,9 +42,16 @@
             a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
             a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
-            var id = iD();
-            d3.select('#iD')
-                .call(id.ui());
+            if (typeof iD == 'undefined') {
+                document.getElementById('id-container').innerHTML = 'This editor is supported ' +
+                    'in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. ' +
+                    'Please upgrade your browser or use Potlatch 2 to edit the map.';
+                document.getElementById('id-container').className = 'unsupported';
+            } else {
+                var id = iD();
+                d3.select('#id-container')
+                    .call(id.ui());
+            }
         </script>
     </body>
 </html>

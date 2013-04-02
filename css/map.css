@@ -27,128 +27,90 @@ use {
     pointer-events: none;
 }
 
-/* points */
-
-g.point circle {
-    fill:#fff;
+g.point .shadow,
+g.vertex .shadow,
+g.midpoint .shadow {
+    pointer-events: all;
 }
 
-g.point image {
-  pointer-events: none;
+path.shadow {
+    pointer-events: stroke;
+}
+
+.shadow {
+    -webkit-transition: 200ms;
+       -moz-transition: 200ms;
+            transition: 200ms;
+}
+
+/* points */
+
+g.point .stroke {
+    stroke: #444;
+    stroke-width: 1;
+    fill: #fff;
 }
 
 g.point .shadow {
     fill: none;
-    pointer-events: all;
-    -webkit-transition: -webkit-transform 100ms linear;
-    transition: transform 100ms linear;
-    -moz-transition: fill 100ms linear;
+    stroke: #f6634f;
+    stroke-width: 8;
+    stroke-opacity: 0;
 }
+
 .behavior-hover g.point.hover:not(.selected) .shadow {
-    fill: #f6634f;
-    fill-opacity: 0.5;
+    stroke-opacity: 0.5;
 }
+
 g.point.selected .shadow {
-    fill: #f6634f;
-    fill-opacity: 0.7;
+    stroke-opacity: 0.7;
 }
 
 g.point.active, g.point.active * {
     pointer-events: none;
 }
 
-/* vertices */
+/* vertices and midpoints */
 
 g.vertex .fill {
-    fill:white;
+    fill: none;
 }
 
 g.vertex .stroke {
-    stroke:black;
-    stroke-opacity: .5;
-    stroke-width:2;
-    fill:white;
+    stroke: #666;
+    stroke-width: 1;
+    fill: white;
 }
 
-svg[data-zoom="16"] g.vertex .shadow {
-    -webkit-transform:scale(0.8, 0.8);
-    -moz-transform:scale(0.8, 0.8);
-    transform:scale(0.8, 0.8);
-}
-svg[data-zoom="16"] g.vertex .stroke,
-svg[data-zoom="16"] g.vertex .fill {
-    -webkit-transform:scale(0.6, 0.6);
-    -moz-transform:scale(0.6, 0.6);
-    transform:scale(0.6, 0.6);
-}
-
-svg[data-zoom="17"] g.vertex .shadow {
-    -webkit-transform:scale(0.9, 0.9);
-    -moz-transform:scale(0.9, 0.9);
-    transform:scale(0.9, 0.9);
-}
-svg[data-zoom="17"] g.vertex .stroke,
-svg[data-zoom="17"] g.vertex .fill {
-    -webkit-transform:scale(0.7, 0.7);
-    -moz-transform:scale(0.7, 0.7);
-    transform:scale(0.7, 0.7);
-}
-
-g.vertex.shared .shadow {
-    -webkit-transform:scale(1.2, 1.2);
-    -moz-transform:scale(1.2, 1.2);
-    transform:scale(1.2, 1.2);
-}
-g.vertex.shared .fill,
 g.vertex.shared .stroke {
-    -webkit-transform:scale(1.1, 1.1);
-    -moz-transform:scale(1.1, 1.1);
-    transform:scale(1.1, 1.1);
-}
-svg[data-zoom="16"] g.vertex.shared .shadow {
-    -webkit-transform:scale(0.9, 0.9);
-    -moz-transform:scale(0.9, 0.9);
-    transform:scale(0.9, 0.9);
-}
-svg[data-zoom="16"] g.vertex.shared .fill,
-svg[data-zoom="16"] g.vertex.shared .stroke {
-    -webkit-transform:scale(0.8, 0.8);
-    -moz-transform:scale(0.8, 0.8);
-    transform:scale(0.8, 0.8);
-}
-svg[data-zoom="17"] g.vertex.shared .shadow {
-    -webkit-transform:scale(1, 1);
-    -moz-transform:scale(1, 1);
-    transform:scale(1, 1);
-}
-svg[data-zoom="17"] g.vertex.shared .fill,
-svg[data-zoom="17"] g.vertex.shared .stroke {
-    -webkit-transform:scale(0.9, 0.9);
-    -moz-transform:scale(0.9, 0.9);
-    transform:scale(0.9, 0.9);
+    fill: #aaa;
 }
 
-g.vertex.shared .fill {
-    fill:#aaa;
+g.vertex.tagged .fill {
+    fill: #000;
 }
 
-g.vertex .shadow {
-    fill: none;
-    pointer-events: all;
-    -webkit-transition: -webkit-transform 100ms linear;
-    transition: transform 100ms linear;
-    -moz-transition: fill 100ms linear;
+g.midpoint .fill {
+    fill: #ddd;
+    stroke: black;
+    stroke-opacity: .5;
+    opacity: .5;
 }
-.behavior-hover g.vertex.hover:not(.selected) .shadow {
+
+g.vertex .shadow,
+g.midpoint .shadow {
     fill: #f6634f;
+    fill-opacity: 0;
+}
+
+.behavior-hover g.vertex.hover:not(.selected) .shadow,
+.behavior-hover g.midpoint.hover:not(.selected) .shadow {
     fill-opacity: 0.3;
 }
+
 g.vertex.selected .shadow {
-    fill: #f6634f;
     fill-opacity: 0.5;
 }
-
-/* midpoints */
 
 .mode-draw-area g.midpoint,
 .mode-draw-line g.midpoint,
@@ -157,30 +119,6 @@ g.vertex.selected .shadow {
 .mode-add-point g.midpoint,
 .mode-drag-node g.midpoint {
   display: none;
-}
-
-g.midpoint .fill {
-    fill:#ddd;
-    stroke:black;
-    stroke-opacity: .5;
-    opacity: .5;
-}
-.behavior-hover g.midpoint .fill.hover:not(.selected) {
-    fill:white;
-    opacity: .75;
-}
-
-g.midpoint .shadow {
-    fill: none;
-    pointer-events: all;
-    stroke-width: 10;
-    -webkit-transition: -webkit-transform 100ms linear;
-    transition: transform 100ms linear;
-    -moz-transition: fill 100ms linear;
-}
-.behavior-hover g.midpoint .shadow.hover:not(.selected) {
-    fill:#f6634f;
-    fill-opacity: 0.3;
 }
 
 /* lines */
@@ -196,18 +134,16 @@ path.stroke {
 }
 
 path.shadow {
-    pointer-events: stroke;
+    stroke: #f6634f;
     stroke-width: 10;
-    -webkit-transition: stroke 100ms linear;
+    stroke-opacity: 0;
 }
 
 .behavior-hover path.shadow.hover:not(.selected) {
-    stroke: #f6634f;
     stroke-opacity: 0.3;
 }
 
 path.shadow.selected {
-    stroke: #f6634f;
     stroke-opacity: 0.7;
 }
 
@@ -319,7 +255,7 @@ path.fill.tag-leisure-park {
     fill-opacity: 0.2;
 }
 
-path.stroke.tag-landuse-retail,
+path.fill.tag-landuse-retail,
 path.fill.tag-landuse-residential,
 path.fill.tag-landuse-commercial,
 path.fill.tag-landuse-industrial {
@@ -331,6 +267,7 @@ path.fill.tag-natural-beach,
 path.fill.tag-natural-scrub,
 path.fill.tag-landuse-cemetery,
 path.fill.tag-landuse-meadow,
+path.fill.tag-landuse-farm,
 path.fill.tag-landuse-farmland,
 path.fill.tag-landuse-construction,
 path.fill.tag-landuse-orchard {
@@ -343,6 +280,7 @@ path.fill.tag-landuse-orchard {
 .pattern-color-meadow,
 .pattern-color-wetland,
 .pattern-color-cemetery,
+.pattern-color-farm,
 .pattern-color-farmland,
 .pattern-color-construction,
 .pattern-color-orchard {
@@ -362,10 +300,12 @@ path.fill.tag-landuse-residential {
     fill: #e06e5f;
 }
 
+path.fill.tag-landuse-farm,
 path.fill.tag-landuse-farmland {
     fill: url(#pattern-farmland) #8cd05f;
 }
 
+.pattern-color-farm,
 .pattern-color-farmland {
     fill: url(#pattern-farmland) #8cd05f;
 }
@@ -419,7 +359,7 @@ path.fill.tag-landuse-construction {
     fill: #e06e5f;
 }
 
-path.stroke.tag-landuse-retail,
+path.fill.tag-landuse-retail,
 path.fill.tag-landuse-commercial {
     fill: #eab056;
 }
@@ -655,10 +595,76 @@ path.casing.tag-highway-steps {
     stroke: #fff;
 }
 
+/* aeroways */
+
+path.shadow.tag-aeroway-runway {
+    stroke-width: 20;
+}
+
+path.stroke.tag-aeroway-taxiway {
+    stroke: #805C80;
+    stroke-width: 4;
+}
+path.stroke.tag-aeroway-runway {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 24, 48;
+}
+path.casing.tag-aeroway-runway {
+    stroke-width: 10;
+    stroke: #000;
+    stroke-linecap: square;
+}
+path.stroke.tag-aeroway-apron {
+    stroke: #805C80;
+}
+path.fill.tag-aeroway-apron {
+    fill: #805C80;
+    fill-opacity: 0.2;
+}
+
+
+/* bridges */
+
 path.casing.tag-bridge-yes {
     stroke-width: 14;
-    stroke: #333;
+    stroke-opacity: 0.5;
+    stroke: #000;
 }
+
+path.casing.tag-highway-living_street.tag-bridge-yes,
+path.casing.tag-highway-path.tag-bridge-yes {
+    stroke-width: 6;
+}
+
+path.casing.line.tag-highway-pedestrian,
+path.casing.tag-highway-service.tag-bridge-yes,
+path.casing.tag-highway-track.tag-bridge-yes,
+path.casing.tag-highway-steps.tag-bridge-yes,
+path.casing.tag-highway-footway.tag-bridge-yes,
+path.casing.tag-highway-cycleway.tag-bridge-yes,
+path.casing.tag-highway-bridleway.tag-bridge-yes {
+    stroke-width: 8;
+}
+
+path.shadow.tag-highway-residential.tag-bridge {
+    stroke-width:22;
+}
+
+path.shadow.tag-highway-living_street.tag-bridge-yes,
+path.shadow.tag-highway-path.tag-bridge-yes,
+path.shadow.line.tag-highway-pedestrian,
+path.shadow.tag-highway-service.tag-bridge-yes,
+path.shadow.tag-highway-track.tag-bridge-yes,
+path.shadow.tag-highway-steps.tag-bridge-yes,
+path.shadow.tag-highway-footway.tag-bridge-yes,
+path.shadow.tag-highway-cycleway.tag-bridge-yes,
+path.shadow.tag-highway-bridleway.tag-bridge-yes {
+    stroke-width: 16;
+}
+
+/* tunnels */
 
 path.stroke.tag-highway.tag-tunnel-yes {
     stroke-opacity: 0.3;
@@ -673,6 +679,8 @@ path.casing.tag-highway-construction {
     stroke-linecap: butt;
     stroke-dasharray: 7, 7;
 }
+
+/* construction */
 
 svg[data-zoom="16"] path.stroke.tag-highway-construction,
 svg[data-zoom="16"] path.casing.tag-highway-construction {
@@ -796,6 +804,7 @@ text {
 
 marker#oneway-marker path {
     fill:#000;
+    opacity: .5;
 }
 
 text.tag-oneway {
@@ -809,50 +818,40 @@ text.tag-oneway {
  * Labels
  */
 
-.layer-halo path {
-  pointer-events: none;
-  stroke-linecap: round;
-  stroke-linejoin: bevel;
-  stroke-width: 20px;
-  opacity: 0.8;
-  stroke: white;
-}
-
+text.arealabel-halo,
+text.linelabel-halo,
+text.pointlabel-halo,
 text.arealabel,
-text.pathlabel,
+text.linelabel,
 text.pointlabel {
-  font-size: 12px;
-  font-weight: bold;
-  fill: #333;
-  text-anchor: middle;
-  pointer-events: none;
-}
-
-.layer-halo rect,
-.layer-halo path,
-.layer-label text {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #333;
+    text-anchor: middle;
+    pointer-events: none;
     -webkit-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
     -moz-transition: opacity 100ms linear;
 }
 
-.pathlabel .textpath {
+.linelabel-halo .textpath,
+.linelabel .textpath {
   dominant-baseline: middle;
 }
 
 /* Opera doesn't support dominant-baseline. See #715 */
-.opera .pathlabel .textpath {
+.opera .linelabel-halo .textpath,
+.opera .linelabel .textpath {
   baseline-shift: -33%;
   dominant-baseline: auto;
 }
 
-.pointlabel-halo,
-.linelabel-halo,
-.arealabel-halo {
-  opacity: 0.7;
-  pointer-events: none;
+.layer-halo text {
+    opacity: 0.7;
+    stroke: #fff;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
 }
-
 
 text.point {
   font-size: 10px;
@@ -868,28 +867,28 @@ text.point {
     cursor: url(../img/cursor-grabbing.png) 9 9, auto;
 }
 
-.mode-browse .point,
-.mode-select .point {
+.mode-browse #surface .point,
+.mode-select #surface .point {
     cursor: url(../img/cursor-select-point.png), pointer;
 }
 
-.mode-select .vertex,
-.mode-browse .vertex {
+.mode-select #surface .vertex,
+.mode-browse #surface .vertex {
     cursor: url(../img/cursor-select-vertex.png), pointer;
 }
 
-.mode-browse .line,
-.mode-select .line {
+.mode-browse #surface .line,
+.mode-select #surface .line {
     cursor: url(../img/cursor-select-line.png), pointer;
 }
 
-.mode-select .area,
-.mode-browse .area {
+.mode-select #surface .area,
+.mode-browse #surface .area {
     cursor: url(../img/cursor-select-area.png), pointer;
 }
 
-.mode-select .midpoint,
-.mode-browse .midpoint {
+.mode-select #surface .midpoint,
+.mode-browse #surface .midpoint {
     cursor: url(../img/cursor-select-split.png), pointer;
 }
 
@@ -904,12 +903,12 @@ text.point {
     cursor: url(../img/cursor-select-remove.png), pointer;
 }
 
-.point:active,
-.vertex:active,
-.line:active,
-.area:active,
-.midpoint:active,
-.mode-select .selected {
+#map .point:active,
+#map .vertex:active,
+#map .line:active,
+#map .area:active,
+#map .midpoint:active,
+#map .mode-select .selected {
     cursor: url(../img/cursor-select-acting.png), pointer;
 }
 
@@ -942,7 +941,7 @@ text.point {
 
 .mode-add-point #map:hover {
     cursor: crosshair;
-    cursor: url(../img/cursor-draw-point.png) 18 18, crosshair;
+    cursor: url(../img/cursor-draw.png) 9 9, crosshair;
 }
 
 .lasso #map:hover,
@@ -954,6 +953,14 @@ text.point {
 
 .lasso #map {
     pointer-events: visibleStroke;
+}
+
+/* GPX Paths */
+path.gpx {
+    stroke:#6AFF25;
+    stroke-width:2;
+    fill:transparent;
+    pointer-events: none;
 }
 
 /* Modes */

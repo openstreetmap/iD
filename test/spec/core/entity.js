@@ -64,9 +64,15 @@ describe('iD.Entity', function () {
     });
 
     describe("#mergeTags", function () {
-        it("returns a new Entity", function () {
-            var a = iD.Entity(),
-                b = a.mergeTags({});
+        it("returns self if unchanged", function () {
+            var a = iD.Entity({tags: {a: 'a'}}),
+                b = a.mergeTags({a: 'a'});
+            expect(a).to.equal(b);
+        });
+
+        it("returns a new Entity if changed", function () {
+            var a = iD.Entity({tags: {a: 'a'}}),
+                b = a.mergeTags({a: 'b'});
             expect(b instanceof iD.Entity).to.be.true;
             expect(a).not.to.equal(b);
         });
@@ -155,20 +161,6 @@ describe('iD.Entity', function () {
 
         it("return false if the entity has only tiger tags", function () {
             expect(iD.Entity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
-        });
-    });
-
-    describe("#friendlyName", function () {
-        it("returns the name", function () {
-            expect(iD.Entity({ tags: { name: 'hi' }}).friendlyName()).to.equal('hi');
-        });
-
-        it("returns a highway tag value", function () {
-            expect(iD.Entity({ tags: { highway: 'Route 5' }}).friendlyName()).to.equal('Route 5');
-        });
-
-        it("prefers the name to a highway tag value", function () {
-            expect(iD.Entity({ tags: { name: 'hi', highway: 'Route 5' }}).friendlyName()).to.equal('hi');
         });
     });
 });

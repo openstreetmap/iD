@@ -1,19 +1,16 @@
 {
-    "name": "building",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "building": "*"
-        },
-        "terms": []
-    },
     "icon": "warehouse",
-    "form": [
+    "fields": [
         "building_yes",
         "levels",
         "address"
-    ]
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "*"
+    },
+    "terms": [],
+    "name": "Building"
 }

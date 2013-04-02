@@ -1,20 +1,15 @@
 {
-    "name": "railway",
-    "match": {
-        "type": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "tags": {
-            "railway": "*"
-        }
+    "fields": [
+        "railway"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "railway": "*"
     },
-    "form": [
-        {
-            "key": "railway",
-            "type": "combo"
-        }
-    ]
+    "name": "Railway"
 }

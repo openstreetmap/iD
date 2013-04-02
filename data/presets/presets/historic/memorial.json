@@ -1,0 +1,12 @@
+{
+    "icon": "monument",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "historic": "memorial"
+    },
+    "name": "Memorial"
+}

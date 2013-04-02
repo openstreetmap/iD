@@ -1,0 +1,16 @@
+{
+    "icon": "post",
+    "fields": [
+        "operator",
+        "collection_times"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "post_office"
+    },
+    "name": "Post Office"
+}

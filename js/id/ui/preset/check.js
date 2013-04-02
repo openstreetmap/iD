@@ -1,8 +1,8 @@
-iD.ui.preset.check = function(form) {
+iD.ui.preset.check = function(field) {
 
     var event = d3.dispatch('change', 'close'),
         values = ['', 'yes', 'no'],
-        value,
+        value = '',
         box,
         text,
         label;
@@ -11,17 +11,21 @@ iD.ui.preset.check = function(form) {
 
         selection.classed('checkselect', 'true');
 
-        label = selection.append('label');
+        label = selection.append('label')
+            .attr('class', 'preset-input-wrap');
 
         box = label.append('input')
-            .attr('type', 'checkbox');
+            .property('indeterminate', true)
+            .attr('type', 'checkbox')
+            .attr('id', 'preset-input-' + field.id);
 
         text = label.append('span')
+            .text('unknown')
             .attr('class', 'value');
 
         box.on('click', function() {
             var t = {};
-            t[form.key] = values[(values.indexOf(value) + 1) % 3];
+            t[field.key] = values[(values.indexOf(value) + 1) % 3];
             check.tags(t);
             event.change(t);
             d3.event.stopPropagation();
@@ -29,11 +33,15 @@ iD.ui.preset.check = function(form) {
     };
 
     check.tags = function(tags) {
-        value = tags[form.key] || '';
+        value = tags[field.key] || '';
         box.property('indeterminate', !value);
         box.property('checked', value === 'yes');
         text.text(value || 'unknown');
         label.classed('set', !!value);
+    };
+
+    check.focus = function() {
+        box.node().focus();
     };
 
     return d3.rebind(check, event, 'on');

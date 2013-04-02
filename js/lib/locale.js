@@ -22,6 +22,7 @@ function t(s, o, loc) {
         var missing = 'Missing translation: ' + s;
         if (console) console.error(missing);
         if (loc !== 'en') return t(s, o, 'en');
+        if (o && 'default' in o) return o['default'];
         return missing;
     }
 }

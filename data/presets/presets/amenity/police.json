@@ -1,48 +1,47 @@
 {
-    "name": "police",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "badge",
-            "bear",
-            "blue",
-            "bluecoat",
-            "bobby",
-            "boy scout",
-            "bull",
-            "constable",
-            "constabulary",
-            "cop",
-            "copper",
-            "corps",
-            "county mounty",
-            "detective",
-            "fed",
-            "flatfoot",
-            "force",
-            "fuzz",
-            "gendarme",
-            "gumshoe",
-            "heat",
-            "law",
-            "law enforcement",
-            "man",
-            "narc",
-            "officers",
-            "patrolman",
-            "police"
-        ],
-        "tags": {
-            "amenity": "police"
-        }
-    },
     "icon": "police",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "badge",
+        "bear",
+        "blue",
+        "bluecoat",
+        "bobby",
+        "boy scout",
+        "bull",
+        "constable",
+        "constabulary",
+        "cop",
+        "copper",
+        "corps",
+        "county mounty",
+        "detective",
+        "fed",
+        "flatfoot",
+        "force",
+        "fuzz",
+        "gendarme",
+        "gumshoe",
+        "heat",
+        "law",
+        "law enforcement",
+        "man",
+        "narc",
+        "officers",
+        "patrolman",
+        "police"
+    ],
+    "tags": {
+        "amenity": "police"
+    },
+    "name": "Police"
 }

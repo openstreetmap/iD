@@ -6,33 +6,54 @@ iD.actions.Orthogonalize = function(wayId, projection) {
     var action = function(graph) {
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
-            points = nodes.map(function(n) { return projection(n.loc); }),
-            best, i, j;
+            corner = {i: 0, dotp: 1},
+            points, i, j, score, motions;
 
-        var score = squareness();
-        for (i = 0; i < 1000; i++) {
-            var motions = points.map(stepMap);
-            for (j = 0; j < motions.length; j++) {
-                points[j] = addPoints(points[j],motions[j]);
-            }
-            var newScore = squareness();
-            if (newScore < score) {
-                best = _.clone(points);
-                score = newScore;
-            }
-            if (score < 1.0e-8) {
-                break;
-            }
-        }
-        points = best;
+        if (nodes.length === 4) {
+            points = _.uniq(nodes).map(function(n) { return projection(n.loc); });
 
-        for (i = 0; i < points.length - 1; i++) {
-            graph = graph.replace(graph.entity(nodes[i].id).move(projection.invert(points[i])));
+            for (i = 0; i < 1000; i++) {
+                motions = points.map(calcMotion);
+                points[corner.i] = addPoints(points[corner.i],motions[corner.i]);
+                score = corner.dotp;
+                if (score < 1.0e-8) {
+                    break;
+                }
+            }
+
+            graph = graph.replace(graph.entity(nodes[corner.i].id)
+                .move(projection.invert(points[corner.i])));
+        } else {
+            var best;
+            points = nodes.map(function(n) { return projection(n.loc); });
+            score = squareness();
+
+            for (i = 0; i < 1000; i++) {
+                motions = points.map(calcMotion);
+                for (j = 0; j < motions.length; j++) {
+                    points[j] = addPoints(points[j],motions[j]);
+                }
+                var newScore = squareness();
+                if (newScore < score) {
+                    best = _.clone(points);
+                    score = newScore;
+                }
+                if (score < 1.0e-8) {
+                    break;
+                }
+            }
+
+            points = best;
+
+            for (i = 0; i < points.length - 1; i++) {
+                graph = graph.replace(graph.entity(nodes[i].id)
+                    .move(projection.invert(points[i])));
+            }
         }
 
         return graph;
 
-        function stepMap(b, i, array) {
+        function calcMotion(b, i, array) {
             var a = array[(i - 1 + array.length) % array.length],
                 c = array[(i + 1) % array.length],
                 p = subtractPoints(a, b),
@@ -42,10 +63,16 @@ iD.actions.Orthogonalize = function(wayId, projection) {
             p = normalizePoint(p, 1.0);
             q = normalizePoint(q, 1.0);
 
-            var dotp = p[0] *q[0] + p[1] *q[1];
+            var dotp = p[0] * q[0] + p[1] * q[1];
+
             // nasty hack to deal with almost-straight segments (angle is closer to 180 than to 90/270).
-            if (dotp < -0.707106781186547) {
-                dotp += 1.0;
+            if (array.length > 3) {
+                if (dotp < -0.707106781186547) {
+                    dotp += 1.0;
+                }
+            } else if (Math.abs(dotp) < corner.dotp) {
+                corner.i = i;
+                corner.dotp = Math.abs(dotp);
             }
 
             return normalizePoint(addPoints(p, q), 0.1 * dotp * scale);
@@ -85,23 +112,24 @@ iD.actions.Orthogonalize = function(wayId, projection) {
             return [a[0] + b[0], a[1] + b[1]];
         }
 
-        function normalizePoint(point, thickness) {
+        function normalizePoint(point, scale) {
             var vector = [0, 0];
-            var length = Math.sqrt(point[0] * point[0] + point[1] * point[1]); 
+            var length = Math.sqrt(point[0] * point[0] + point[1] * point[1]);
             if (length !== 0) {
                 vector[0] = point[0] / length;
                 vector[1] = point[1] / length;
             }
 
-            vector[0] *= thickness;
-            vector[1] *= thickness;
+            vector[0] *= scale;
+            vector[1] *= scale;
 
             return vector;
         }
     };
 
-    action.enabled = function(graph) {
-        return graph.entity(wayId).isClosed();
+    action.disabled = function(graph) {
+        if (!graph.entity(wayId).isClosed())
+            return 'not_closed';
     };
 
     return action;

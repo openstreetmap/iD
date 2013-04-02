@@ -19,14 +19,17 @@ iD.operations.Delete = function(selection, context) {
         return true;
     };
 
-    operation.enabled = function() {
-        return true;
+    operation.disabled = function() {
+        return false;
+    };
+
+    operation.tooltip = function() {
+        return t('operations.delete.description');
     };
 
     operation.id = "delete";
     operation.keys = [iD.ui.cmd('⌫'), iD.ui.cmd('⌦')];
     operation.title = t('operations.delete.title');
-    operation.description = t('operations.delete.description');
 
     return operation;
 };

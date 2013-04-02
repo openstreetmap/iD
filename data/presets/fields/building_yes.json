@@ -1,0 +1,6 @@
+{
+    "key": "building",
+    "type": "combo",
+    "default": "yes",
+    "label": "Building"
+}

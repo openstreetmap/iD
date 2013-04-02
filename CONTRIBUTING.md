@@ -27,6 +27,80 @@ To request a feature:
 * Understand that iD is meant to be a simple editor and doesn't aim to be
   as complete or complicated as JOSM or similar.
 
+## Translating
+
+Translations are managed using the
+[Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After
+signing up, you can go to [iD's project
+page](https://www.transifex.com/projects/p/id-editor/), select a language and
+click *Translate now* to start translating. Translations are divided into two
+sections, *core*, which contains text for the main interface of iD, and
+*presets*, which has the text for labeling feature presets.
+
+The words in brackets, for example `{name}`, should not be translated into a
+new language: it's replaced with a place name when iD presents the text. So a
+French translation of `Couldn't locate a place named '{name}'` would look like
+`Impossible de localiser l'endroit nommé '{name}'`.
+
+The translations for presets consist of the names of presets, labels for
+preset fields, and lists of search terms. You do _not_ need to translate the
+search terms literally -- use a set of synonyms and related terms appropriate
+to the target language, separated by commas.
+
+[iD translation project on
+Transifex](https://www.transifex.com/projects/p/id-editor/)
+
+To get notifications when translation source files change, click **Watch
+project** button near the bottom of the project page. You can edit your
+[notification settings](https://www.transifex.com/settings/notices/) if you're
+getting too many notifications.
+
+Translations are licensed under
+[WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license
+as iD.
+
+**Why are there so many duplicate "Type" translations?** There are multiple
+distinct preset fields with the label "Type". You can see some context on the
+"Details" tab in Transifex:
+
+![image](https://f.cloud.github.com/assets/98601/324275/1a5cfc8c-9ae0-11e2-9a38-36c0f14d532d.png)
+
+The "key" field indicates that this is the "Type" label for the
+"[aeroway](http://wiki.openstreetmap.org/wiki/Aeroway)" preset, i.e. you should
+translate it as you would translate "type" in "type of aeroway".
+
+These are separate translations for uniformity reasons and because some languages
+ may translate "type" differently in "type of aeroway" and "type of amenity", for
+ example.
+
+## Adding New Strings for Translation
+
+iD translates strings with a `t` function - `t('foo.bar')` translate the key
+`foo.bar` into the current language. If you introduce new translatable strings
+to iD, only display them in the interface through the `t()` function.
+
+Then, add the new string to `data/core.yaml` or `data/presets.yaml` (depending
+on whether it pertains to core code or presets). The translation system,
+Transiflex, will automatically detect the change.
+
+Use `make` to build the translations with the local changes.
+`make translate` can be used to pull the latest translations from Transifex.
+
+## Contributing Documentation
+
+Documentation is maintained as a series of [Markdown](http://daringfireball.net/projects/markdown/)
+documents in the `data/doc/` path. The first line of each page of documentation
+should be of the form
+
+    # GPS
+
+This will be used for navigation and as its title in iD. Documentation is
+shown in alphabetical order, so most documentation is prefixed with `02-` and
+so on in order to keep it in a certain order.
+
+To add a new page of documentation, simply create a new Markdown file in
+`data/doc` in the same format as the rest.
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with

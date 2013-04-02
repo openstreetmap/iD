@@ -1,33 +1,32 @@
 {
-    "name": "museum",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "exhibition",
-            "exhibits archive",
-            "foundation",
-            "gallery",
-            "hall",
-            "institution",
-            "library",
-            "menagerie",
-            "repository",
-            "salon",
-            "storehouse",
-            "treasury",
-            "vault"
-        ],
-        "tags": {
-            "tourism": "museum"
-        }
-    },
     "icon": "museum",
-    "form": [
+    "fields": [
         "operator",
         "building_area",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "exhibition",
+        "exhibits archive",
+        "foundation",
+        "gallery",
+        "hall",
+        "institution",
+        "library",
+        "menagerie",
+        "repository",
+        "salon",
+        "storehouse",
+        "treasury",
+        "vault"
+    ],
+    "tags": {
+        "tourism": "museum"
+    },
+    "name": "Museum"
 }

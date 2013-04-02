@@ -1,18 +1,14 @@
 {
-    "name": "leisure",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "leisure": "*"
-        }
+    "fields": [
+        "leisure"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "leisure": "*"
     },
-    "form": [
-        {
-            "key": "leisure",
-            "type": "combo"
-        }
-    ]
+    "name": "Leisure"
 }

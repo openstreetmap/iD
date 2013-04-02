@@ -1,13 +1,11 @@
 {
-    "name": "subway entrance",
-    "match": {
-        "type": [
-            "point"
-        ],
-        "tags": {
-            "railway": "subway_entrance"
-        },
-        "terms": []
+    "icon": "rail-underground",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "railway": "subway_entrance"
     },
-    "icon": "rail-underground"
+    "terms": [],
+    "name": "Subway Entrance"
 }

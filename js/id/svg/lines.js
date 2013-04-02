@@ -22,6 +22,8 @@ iD.svg.Lines = function(projection) {
         }
         if (a.tags.bridge) return 1;
         if (b.tags.bridge) return -1;
+        if (a.tags.tunnel) return -1;
+        if (b.tags.tunnel) return 1;
         var as = 0, bs = 0;
         if (a.tags.highway && b.tags.highway) {
             as -= highway_stack[a.tags.highway];

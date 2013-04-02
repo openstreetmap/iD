@@ -1,5 +1,7 @@
 // Disconect the ways at the given node.
 //
+// Optionally, disconnect only the given ways.
+//
 // For testing convenience, accepts an ID to assign to the (first) new node.
 // Normally, this will be undefined and the way will automatically
 // be assigned a new ID.
@@ -11,28 +13,52 @@
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
 iD.actions.Disconnect = function(nodeId, newNodeId) {
+    var wayIds;
+
     var action = function(graph) {
-        if (!action.enabled(graph))
-            return graph;
+        var node = graph.entity(nodeId),
+            replacements = action.replacements(graph);
 
-        var node = graph.entity(nodeId);
-
-        graph.parentWays(node).forEach(function(parent, i) {
-            if (i === 0)
-                return;
-
-            var index = parent.nodes.indexOf(nodeId),
-                newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
-
+        replacements.forEach(function(replacement) {
+            var newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
             graph = graph.replace(newNode);
-            graph = graph.replace(parent.updateNode(newNode.id, index));
+            graph = graph.replace(replacement.way.updateNode(newNode.id, replacement.index));
         });
 
         return graph;
     };
 
-    action.enabled = function(graph) {
-        return graph.parentWays(graph.entity(nodeId)).length >= 2;
+    action.replacements = function(graph) {
+        var candidates = [],
+            keeping = false,
+            parents = graph.parentWays(graph.entity(nodeId));
+
+        parents.forEach(function(parent) {
+            if (wayIds && wayIds.indexOf(parent.id) === -1) {
+                keeping = true;
+                return;
+            }
+
+            parent.nodes.forEach(function(waynode, index) {
+                if (waynode === nodeId) {
+                    candidates.push({way: parent, index: index});
+                }
+            });
+        });
+
+        return keeping ? candidates : candidates.slice(1);
+    };
+
+    action.disabled = function(graph) {
+        var replacements = action.replacements(graph);
+        if (replacements.length === 0 || (wayIds && wayIds.length !== replacements.length))
+            return 'not_connected';
+    };
+
+    action.limitWays = function(_) {
+        if (!arguments.length) return wayIds;
+        wayIds = _;
+        return action;
     };
 
     return action;

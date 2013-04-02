@@ -1,19 +1,17 @@
 {
-    "name": "camp site",
-    "match": {
-        "type": [
-            "point",
-            "area"
-        ],
-        "terms": [
-        ],
-        "tags": {
-            "tourism": "camp_site"
-        }
-    },
     "icon": "campsite",
-    "form": [
+    "fields": [
         "operator",
         "address"
-    ]
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "tourism": "camp_site"
+    },
+    "name": "Camp Site"
 }

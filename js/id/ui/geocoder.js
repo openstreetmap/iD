@@ -16,16 +16,19 @@ iD.ui.Geocoder = function(context) {
             if (d3.event.keyCode !== 13) return;
             d3.event.preventDefault();
             var searchVal = this.value;
+            inputNode.classed('loading', true);
             d3.json('http://nominatim.openstreetmap.org/search/' +
                 encodeURIComponent(searchVal) + '?limit=10&format=json', function(err, resp) {
+                    inputNode.classed('loading', false);
                     if (err) return hide();
                     if (!resp.length) {
-                        return iD.ui.flash(context.container())
-                            .select('.content')
-                            .append('h3')
-                            .text(t('geocoder.no_results', {name: searchVal}));
+                        resultsList.html('')
+                            .call(iD.ui.Toggle(true))
+                            .append('span')
+                                .attr('class', 'not-found')
+                                .text(t('geocoder.no_results', {name: searchVal}));
                     } else if (resp.length > 1) {
-                        var spans = resultsList.selectAll('span')
+                        var spans = resultsList.html('').selectAll('span')
                             .data(resp, function(d) { return d.place_id; });
 
                         spans.enter()
@@ -67,60 +70,84 @@ iD.ui.Geocoder = function(context) {
             if (map.zoom() > 19) map.zoom(19);
         }
 
-        function hide() { setVisible(false); }
-        function toggle() {
-            if (d3.event) d3.event.preventDefault();
-            tooltip.hide(button);
-            setVisible(gcForm.classed('hide'));
-        }
-
-        function setVisible(show) {
-            if (show !== shown) {
-                button.classed('active', show);
-                gcForm.call(iD.ui.Toggle(show));
-                if (!show) resultsList.call(iD.ui.Toggle(show));
-                if (show) inputNode.node().focus();
-                else inputNode.node().blur();
-                shown = show;
-            }
-        }
         var tooltip = bootstrap.tooltip()
             .placement('right')
             .html(true)
             .title(iD.ui.tooltipHtml(t('geocoder.title'), key));
 
-        var button = selection.append('button')
-            .attr('tabindex', -1)
-            .on('click', toggle)
-            .call(tooltip);
-
-        button.append('span')
-            .attr('class', 'icon geocode');
-
         var gcForm = selection.append('form');
 
-        var inputNode = gcForm.attr('class', 'content fillL map-overlay hide')
+        var inputNode = gcForm.attr('class', 'fillL map-overlay content hide')
             .append('input')
             .attr({ type: 'text', placeholder: t('geocoder.placeholder') })
             .attr('tabindex', 1)
             .on('keydown', keydown);
 
         var resultsList = selection.append('div')
-            .attr('class', 'content fillD map-overlay hide');
-
-        selection.on('mousedown.geocoder-inside', function() {
-            return d3.event.stopPropagation();
-        });
-
-        context.surface().on('mousedown.geocoder-outside', hide);
+            .attr('class', 'fillL map-overlay hide');
 
         var keybinding = d3.keybinding('geocoder');
+
+        function hide() { setVisible(false); }
+        function toggle() {
+            if (d3.event) d3.event.preventDefault();
+            tooltip.hide(button);
+            setVisible(!button.classed('active'));
+        }
+
+        function setVisible(show) {
+            if (show !== shown) {
+                button.classed('active', show);
+                shown = show;
+
+                if (!show && !resultsList.classed('hide')) {
+                    resultsList.call(iD.ui.Toggle(show));
+                    // remove results so that they lose focus. if the user has
+                    // tabbed into the list, then they will have focus still,
+                    // even if they're hidden.
+                    resultsList.selectAll('span').remove();
+                }
+
+                if (show) {
+                    selection.on('mousedown.geocoder-inside', function() {
+                        return d3.event.stopPropagation();
+                    });
+                    gcForm.style('display', 'block')
+                        .style('left', '-500px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '30px');
+                        inputNode.node().focus();
+                } else {
+                    selection.on('mousedown.geocoder-inside', null);
+                    gcForm.style('display', 'block')
+                        .style('left', '30px')
+                        .transition()
+                        .duration(200)
+                        .style('left', '-500px')
+                        .each('end', function() {
+                            d3.select(this).style('display', 'none');
+                        });
+                    inputNode.node().blur();
+                }
+            }
+        }
+        var button = selection.append('button')
+            .attr('tabindex', -1)
+            .on('click', toggle)
+            .call(tooltip);
+
+        button.append('span')
+            .attr('class', 'icon geocode light');
 
         keybinding.on(key, toggle);
 
         d3.select(document)
             .call(keybinding);
-    }
 
+        context.surface().on('mousedown.geocoder-outside', hide);
+        context.container().on('mousedown.b.geocoder-outside', hide);
+
+    }
     return geocoder;
 };

@@ -2,11 +2,14 @@ iD.svg.Midpoints = function(projection) {
     return function drawMidpoints(surface, graph, entities, filter, extent) {
         var midpoints = {};
 
-        if (!surface.select('.layer-hit g.vertex').node()) {
-            return surface.selectAll('.layer-hit g.midpoint').remove();
-        }
+        var vertices = 0;
 
         for (var i = 0; i < entities.length; i++) {
+
+            if (entities[i].geometry(graph) === 'vertex' && vertices++ > 2000) {
+                return surface.selectAll('.layer-hit g.midpoint').remove();
+            }
+
             if (entities[i].type !== 'way') continue;
 
             var entity = entities[i],
@@ -19,7 +22,8 @@ iD.svg.Midpoints = function(projection) {
                     b = nodes[j + 1],
                     id = [a.id, b.id].sort().join('-');
 
-                if (!midpoints[id]) {
+                // If neither of the nodes changed, no need to redraw midpoint
+                if (!midpoints[id] && (filter(a) || filter(b))) {
                     var loc = iD.geo.interp(a.loc, b.loc, 0.5);
                     if (extent.intersects(loc) && iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
                         midpoints[id] = {
@@ -42,7 +46,7 @@ iD.svg.Midpoints = function(projection) {
             .attr('class', 'midpoint');
 
         group.append('circle')
-            .attr('r', 8)
+            .attr('r', 7)
             .attr('class', 'shadow');
 
         group.append('circle')
