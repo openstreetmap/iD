@@ -55,11 +55,13 @@ iD.ui.Geocoder = function(context) {
                         resultsList.call(iD.ui.Toggle(true));
                     } else {
                         applyBounds(resultExtent(resp[0].boundingbox));
+                        selectId(resp[0].osm_type, resp[0].osm_id);
                     }
                 });
         }
 
         function clickResult(d) {
+            selectId(d.osm_type, d.osm_id);
             applyBounds(resultExtent(d.boundingbox));
         }
 
@@ -68,6 +70,28 @@ iD.ui.Geocoder = function(context) {
             var map = context.map();
             map.extent(extent);
             if (map.zoom() > 19) map.zoom(19);
+        }
+
+        function selectId(type, id) {
+            id = type[0] + id;
+
+            if (context.entity(id)) {
+                context.enter(iD.modes.Select(context, [id]));
+
+            } else {
+                context.map().on('drawn.geocoder', function() {
+                    if (!context.entity(id)) return;
+                    context.enter(iD.modes.Select(context, [id]));
+                });
+
+                context.on('enter.geocoder', function() {
+                    if (context.mode().id !== 'browse') {
+                        context.map()
+                            .on('drawn.geocoder', null)
+                            .on('enter.geocoder', null);
+                    }
+                });
+            }
         }
 
         var tooltip = bootstrap.tooltip()
