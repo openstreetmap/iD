@@ -4,6 +4,13 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
+    // Selecting non-multipolygon relations is not supported
+    selection = selection.filter(function(d) {
+        return context.entity(d).geometry(context.graph()) !== 'relation';
+    });
+
+    if (!selection.length) return iD.modes.Browse(context);
+
     var inspector = iD.ui.Inspector(context, singular()),
         keybinding = d3.keybinding('select'),
         timeout = null,
