@@ -131,10 +131,15 @@ iD.modes.Select = function(context, selection, initial) {
         d3.select(document)
             .call(keybinding);
 
-        context.surface()
-            .selectAll("*")
-            .filter(selected)
-            .classed('selected', true);
+        function selectElements() {
+            context.surface()
+                .selectAll("*")
+                .filter(selected)
+                .classed('selected', true);
+        }
+
+        context.map().on('drawn.select', selectElements);
+        selectElements();
 
         radialMenu = iD.ui.RadialMenu(operations);
         var show = d3.event && !initial;
@@ -176,6 +181,8 @@ iD.modes.Select = function(context, selection, initial) {
             .on('dblclick.select', null)
             .selectAll(".selected")
             .classed('selected', false);
+
+        context.map().on('drawn.select', null);
     };
 
     return mode;
