@@ -246,7 +246,7 @@ iD.Connection = function(context) {
         if (off) return;
 
         var scaleExtent = [16, 16],
-            s = projection.scale(),
+            s = projection.scale() * 2 * Math.PI,
             tiles = d3.geo.tile()
                 .scaleExtent(scaleExtent)
                 .scale(s)
