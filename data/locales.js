@@ -1217,6 +1217,10 @@ locale.en = {
                 "name": "Rail",
                 "terms": ""
             },
+            "railway/station": {
+                "name": "Railway Station",
+                "terms": ""
+            },
             "railway/subway": {
                 "name": "Subway",
                 "terms": ""
