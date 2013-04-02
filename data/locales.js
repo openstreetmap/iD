@@ -249,6 +249,7 @@ locale.en = {
         "in": "Zoom In",
         "out": "Zoom Out"
     },
+    "cannot_zoom": "Cannot zoom out further in current mode.",
     "gpx": {
         "local_layer": "Local GPX file",
         "drag_drop": "Drag and drop a .gpx file on the page"

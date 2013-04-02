@@ -1891,17 +1891,6 @@ img.wiki-image {
     border-bottom: 0;
 }
 
-.modal-flash .content {
-    box-shadow: none;
-    border-radius: 4px;
-    background: #111;
-    color: #eee;
-}
-
-.modal-flash .close-modal {
-    display:none;
-}
-
 .loading-modal {
     text-align: center;
 }
