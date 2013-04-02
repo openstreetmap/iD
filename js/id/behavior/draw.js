@@ -33,13 +33,20 @@ iD.behavior.Draw = function(context) {
             if (iD.geo.dist(pos, point()) < closeTolerance ||
                 (iD.geo.dist(pos, point()) < tolerance &&
                 (+new Date() - time) < 500)) {
-                click();
-            }
-            if (eventTarget === d3.event.target)  {
-                d3.select(window).on('click.draw', function() {
-                    d3.select(window).on('click.draw', null);
+
+                // Prevent a quick second click
+                d3.select(window).on('click.draw-block', function() {
                     d3.event.stopPropagation();
                 }, true);
+
+                context.map().dblclickEnable(false);
+
+                window.setTimeout(function() {
+                    context.map().dblclickEnable(true);
+                    d3.select(window).on('click.draw-block', null);
+                }, 500);
+
+                click();
             }
         });
     }
