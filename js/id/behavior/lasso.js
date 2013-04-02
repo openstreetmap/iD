@@ -23,7 +23,7 @@ iD.behavior.Lasso = function(context) {
 
         function mousemove() {
             if (!lasso) {
-                lasso = iD.ui.Lasso().a(mouse);
+                lasso = iD.ui.Lasso(context).a(mouse);
                 context.surface().call(lasso);
             }
 
