@@ -8,7 +8,8 @@ mocha.setup({
         '__onmouseup.zoom',
         '__onkeydown.select',
         '__onkeyup.select',
-        '__onclick.draw'
+        '__onclick.draw',
+        '__onclick.draw-block'
     ]
 });
 

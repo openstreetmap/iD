@@ -20,6 +20,7 @@ describe("iD.modes.AddPoint", function() {
             happen.mouseup(window, {});
             expect(context.changes().created).to.have.length(1);
             context.mode().exit();
+            d3.select('window').on('click.draw-block', null);
         });
 
         it("selects the node", function() {
