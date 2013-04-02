@@ -4,13 +4,6 @@ iD.modes.Select = function(context, selection, initial) {
         button: 'browse'
     };
 
-    // Selecting relations is not supported
-    selection = selection.filter(function(d) {
-        return d[0] !== 'r';
-    });
-
-    if (!selection.length) return iD.modes.Browse(context);
-
     var inspector = iD.ui.Inspector(context, singular()),
         keybinding = d3.keybinding('select'),
         timeout = null,
