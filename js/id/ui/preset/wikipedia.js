@@ -3,7 +3,7 @@ iD.ui.preset.wikipedia = function(field, context) {
     var event = d3.dispatch('change', 'close'),
         wikipedia = iD.wikipedia(),
         language = iD.data.wikipedia[0],
-        link, entity, lang, input;
+        link, entity, lang, title;
 
     function i(selection) {
 
