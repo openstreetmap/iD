@@ -1,4 +1,4 @@
-iD.ui.Lasso = function() {
+iD.ui.Lasso = function(context) {
 
     var box, group,
         a = [0, 0],
