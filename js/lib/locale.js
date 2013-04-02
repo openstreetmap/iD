@@ -20,7 +20,7 @@ function t(s, o, loc) {
         return rep;
     } else {
         var missing = 'Missing translation: ' + s;
-        if (console) console.error(missing);
+        if (typeof console !== "undefined") console.error(missing);
         if (loc !== 'en') return t(s, o, 'en');
         if (o && 'default' in o) return o['default'];
         return missing;
