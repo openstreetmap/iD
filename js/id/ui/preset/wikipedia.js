@@ -50,8 +50,8 @@ iD.ui.preset.wikipedia = function(field, context) {
 
         link = selection.append('a')
             .attr('class', 'wiki-link minor')
-            .attr('target', '_blank')
-            .append('span')
+            .attr('target', '_blank');
+        link.append('span')
                 .attr('class','icon out-link');
     }
 
