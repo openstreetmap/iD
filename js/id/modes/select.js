@@ -11,7 +11,7 @@ iD.modes.Select = function(context, selection, initial) {
 
     if (!selection.length) return iD.modes.Browse(context);
 
-    var inspector = iD.ui.Inspector(context, singular()),
+    var inspector = singular() && iD.ui.Inspector(context, singular()),
         keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
@@ -168,7 +168,7 @@ iD.modes.Select = function(context, selection, initial) {
     mode.exit = function() {
         if (timeout) window.clearTimeout(timeout);
 
-        wrap.call(inspector.close);
+        if (inspector) wrap.call(inspector.close);
 
         behaviors.forEach(function(behavior) {
             context.uninstall(behavior);
