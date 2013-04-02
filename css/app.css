@@ -1375,15 +1375,17 @@ div.combobox {
 }
 
 .additional-tags div.tag-help {
-    margin-right: -40px;
-    border-left: 1px solid transparent;
+    float: left;
+    width: 33.3333%;
+    width: -webkit-calc(100% - 40px);
+    width: calc(100% + 40px);
 }
 
 img.wiki-image {
     float: left;
     width: 33.3333%;
-    width: calc(33.3333% - 10px);
     width: -webkit-calc(33.3333% - 10px);
+    width: calc(33.3333% - 10px);
     margin-right: 20px;
     border-radius: 4px;
     max-height: 200px;
