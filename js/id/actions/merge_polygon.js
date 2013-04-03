@@ -26,15 +26,7 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
         //     ids - an array of ids of entities that are part of that polygon
         //     locs - an array of the locations forming the polygon
         var polygons = entities.multipolygon.reduce(function(polygons, m) {
-            m.multipolygon(graph).forEach(function(group) {
-                group.forEach(function(ring) {
-                    polygons.push({
-                        ids: ring.ids,
-                        locs: ring
-                    });
-                });
-            });
-            return polygons;
+            return polygons.concat(m.joinMemberWays(null, graph));
         }, []).concat(entities.closedWay.map(function(d) {
             return {
                 ids: [d.id],
