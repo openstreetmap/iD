@@ -1506,7 +1506,13 @@ d3.behavior.zoom = function() {
     function mouseup() {
       if (moved) d3_eventCancel();
       w.on("mousemove.zoom", null).on("mouseup.zoom", null);
-      if (moved && d3.event.target === eventTarget) w.on("click.zoom", click, true);
+      if (moved && d3.event.target === eventTarget) {
+          w.on("click.zoom", click, true);
+          window.setTimeout(function() {
+              // Remove click block if click didn't fire
+              w.on("click.zoom", null);
+          }, 0);
+      }
     }
 
     function click() {
