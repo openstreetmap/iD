@@ -1,4 +1,4 @@
-iD.actions.MergePolygon = function(ids) {
+iD.actions.MergePolygon = function(ids, newRelationId) {
 
     function groupEntities(graph) {
         var entities = ids.map(graph.getEntity);
@@ -53,7 +53,7 @@ iD.actions.MergePolygon = function(ids) {
         });
 
         // Sort all polygons as either outer or inner ways
-        var members = [];
+        var members = [],
             outer = true;
 
         while (polygons.length) {
@@ -87,7 +87,7 @@ iD.actions.MergePolygon = function(ids) {
 
         // Move all tags to one relation
         var relation = entities.multipolygon[0] ||
-            iD.Relation({ tags: { type: 'multipolygon' }});
+            iD.Relation({ id: newRelationId, tags: { type: 'multipolygon' }});
 
         entities.multipolygon.slice(1).forEach(function(m) {
             relation = relation.mergeTags(m.tags);
@@ -100,9 +100,10 @@ iD.actions.MergePolygon = function(ids) {
             graph = graph.replace(entity.update({ tags: {} }));
         });
 
-        delete relation.tags.area;
-
-        return graph.replace(relation.update({ members: members }));
+        return graph.replace(relation.update({
+            members: members,
+            tags: _.omit(relation.tags, 'area')
+        }));
     };
 
     action.disabled = function(graph) {
