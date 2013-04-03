@@ -20,10 +20,10 @@ locale.en = {
             "description": "Pan and zoom the map."
         },
         "draw_area": {
-            "tail": "Click to add points to your area. Click the first point to finish the area."
+            "tail": "Click to add noes to your area. Click the first noe to finish the area."
         },
         "draw_line": {
-            "tail": "Click to add more points to the line. Click on other lines to connect to them, and double-click to end the line."
+            "tail": "Click to add more noes to the line. Click on other lines to connect to them, and double-click to end the line."
         }
     },
     "operations": {
@@ -238,7 +238,7 @@ locale.en = {
         "used_with": "used with {type}"
     },
     "validations": {
-        "untagged_point": "Untagged point which is not part of a line or area",
+        "untagged_point": "Untagged point",
         "untagged_line": "Untagged line",
         "untagged_area": "Untagged area",
         "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
@@ -9619,7 +9619,7 @@ locale.it = {
                 "label": "Limite di velocità"
             },
             "name": {
-                "label": "Nome"
+    Questo editor è supportato in Firefox, Chrome, Safari, Opera, e Internet Explorer 9 e superiori. Aggiorna il tuo browser o usa Potlatch 2 per modificare la mappa.            "label": "Nome"
             },
             "natural": {
                 "label": "Naturale"
@@ -11837,7 +11837,7 @@ locale.lv = {
             "address": {
                 "label": "Adrese",
                 "placeholders": {
-                    "number": "123",
+           :          "number": "123",
                     "street": "Iela",
                     "city": "Pilsēta"
                 }
