@@ -1,6 +1,7 @@
 iD.operations.Merge = function(selection, context) {
     var join = iD.actions.Join(selection),
-        merge = iD.actions.Merge(selection);
+        merge = iD.actions.Merge(selection),
+        mergePolygon = iD.actions.MergePolygon(selection);
 
     var operation = function() {
         var annotation = t('operations.merge.annotation', {n: selection.length}),
@@ -8,8 +9,10 @@ iD.operations.Merge = function(selection, context) {
 
         if (!join.disabled(context.graph())) {
             action = join;
-        } else {
+        } else if (!merge.disabled(context.graph())) {
             action = merge;
+        } else {
+            action = mergePolygon;
         }
 
         var difference = context.perform(action, annotation);
@@ -22,7 +25,8 @@ iD.operations.Merge = function(selection, context) {
 
     operation.disabled = function() {
         return join.disabled(context.graph()) &&
-            merge.disabled(context.graph());
+            merge.disabled(context.graph()) &&
+            mergePolygon.disabled(context.graph());
     };
 
     operation.tooltip = function() {
