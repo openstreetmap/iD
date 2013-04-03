@@ -1227,6 +1227,7 @@ function d3_selection_on(type, listener, capture) {
 
   function onAdd() {
     var l = wrap(listener, d3_array(arguments));
+    if (typeof Raven !== 'undefined') l = Raven.wrap(l);
     onRemove.call(this);
     this.addEventListener(type, this[name] = l, l.$ = capture);
     l._ = listener;
