@@ -487,7 +487,6 @@ button.save.has-count .count::before {
 .icon.back       { background-position: -420px 0;}
 .icon.forward    { background-position: -440px 0;}
 .icon.help       { background-position: -460px 0;}
-.icon.out-link   { background-position: -480px 0;}
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
@@ -539,6 +538,11 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon-operation-disabled-orthogonalize { background-position: -160px -160px;}
 .icon-operation-disabled-rotate        { background-position: -180px -160px;}
 .icon-operation-disabled-simplify      { background-position: -200px -160px;}
+
+/* Out link is special */
+
+.icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
+a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Universal preset icons */
 
@@ -1368,6 +1372,11 @@ div.combobox {
 
 .tag-help {
     overflow: hidden;
+}
+
+.tag-help a {
+    margin-top: 5px;
+    display: block;
 }
 
 .grid-pane .tag-reference-wrap {

@@ -192,12 +192,12 @@ locale.en = {
         "no_documentation_key": "There is no documentation available for this key",
         "show_more": "Show More",
         "new_tag": "New tag",
-        "view_on_osm": "View on OSM →",
+        "view_on_osm": "View on openstreetmap.org",
         "editing_feature": "Editing {feature}",
         "additional": "Additional tags",
         "choose": "Select feature type",
         "results": "{n} results for {search}",
-        "reference": "View on OpenStreetMap Wiki →",
+        "reference": "View on OpenStreetMap Wiki",
         "back_tooltip": "Change feature type"
     },
     "background": {

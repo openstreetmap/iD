@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="sprite.svg"
-   inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite2x.png"
+   inkscape:export-filename="/Users/saman/work_repos/iD/img/sprite.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -38,22 +38,22 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="494.79901"
-     inkscape:cy="539.80312"
+     inkscape:zoom="16"
+     inkscape:cx="505.57911"
+     inkscape:cy="546.02445"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
-     showgrid="false"
+     showgrid="true"
      inkscape:window-width="1483"
      inkscape:window-height="804"
-     inkscape:window-x="287"
-     inkscape:window-y="65"
+     inkscape:window-x="293"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     showguides="false"
+     showguides="true"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="true"
@@ -215,6 +215,10 @@
        orientation="1,0"
        position="500,553"
        id="guide3440" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="520,550"
+       id="guide5526" />
   </sodipodi:namedview>
   <metadata
      id="metadata12398">
@@ -224,7 +228,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2607,8 +2611,15 @@
     </g>
     <path
        style="color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="M 490.5 4 L 490.5 5.5 L 491.5 6.5 L 487 11 L 487 12 L 488 13 L 489 13 L 493.5 8.5 L 494.5 9.5 L 496 9.5 L 496 6 L 496 4 L 494 4 L 490.5 4 z M 484 6 L 483 7 L 483 16 L 484 17 L 493 17 L 494 16 L 494 11 L 492 13 L 492 15 L 491 15 L 490 15 L 486 15 L 485 15 L 485 10 L 485 8 L 486 8 L 487 8 L 489 6 L 484 6 z "
-       transform="translate(25,-3.0624999e-6)"
-       id="path3404-8" />
+       d="m 532.5,1.9999969 0,1 1,1 -4.5,4.5000001 0,0.5 0,1 1.5,0 4.5,-4.5000001 1,1 1,0 0,-3.5 0,-1 -1,0 z m -6.5,1 -1,1 0,9.0000001 1,1 9,0 1,-1 0,-5 -2,2 0,2 -1,0 -1,0 -4,0 -1,0 0,-5.0000001 0,-2 1,0 1,0 2,-2 z"
+       id="path3404-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc" />
+    <path
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccc"
+       inkscape:connector-curvature="0"
+       id="path5520"
+       d="m 532.5,16.999997 0,1 1,1 -4.5,4.5 0,0.5 0,1 1.5,0 4.5,-4.5 1,1 1,0 0,-3.5 0,-1 -1,0 z m -6.5,1 -1,1 0,9 1,1 9,0 1,-1 0,-5 -2,2 0,2 -1,0 -1,0 -4,0 -1,0 0,-5 0,-2 1,0 1,0 2,-2 z"
+       style="color:#000000;fill:#597be7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
 </svg>

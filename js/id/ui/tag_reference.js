@@ -72,10 +72,15 @@ iD.ui.TagReference = function(entity, tag) {
                 .append('p')
                 .text(docs.description);
 
-            referenceBody
+            var wikiLink = referenceBody
                 .append('a')
                 .attr('target', '_blank')
-                .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title)
+                .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title);
+
+            wikiLink.append('span')
+                .attr('class','icon icon-pre-text out-link');
+
+            wikiLink.append('span')
                 .text(t('inspector.reference'));
         });
 
