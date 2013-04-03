@@ -20,14 +20,27 @@ iD.actions.MergePolygon = function(ids) {
     var action = function(graph) {
         var entities = groupEntities(graph);
 
-        // an array of all the polygons to be merged
-        var polygons = _.unique(entities.multipolygon.reduce(function(polygons, m) {
-            return polygons.concat(m.members.filter(function(d) {
-                return d.type === 'way';
-            }).map(function(d) {
-                return graph.entity(d.id);
-            }));
-        }, entities.closedWay));
+        // An array of objects representing all the polygons that are part of the multipolygon.
+        //
+        // Each object has two properties:
+        //     ids - an array of ids of entities that are part of that polygon
+        //     locs - an array of the locations forming the polygon
+        var polygons = entities.multipolygon.reduce(function(polygons, m) {
+            m.multipolygon(graph).forEach(function(group) {
+                group.forEach(function(ring) {
+                    polygons.push({
+                        ids: ring.ids,
+                        locs: ring
+                    });
+                });
+            });
+            return polygons;
+        }, []).concat(entities.closedWay.map(function(d) {
+            return {
+                ids: [d.id],
+                locs: graph.childNodes(d).map(function(n) { return n.loc; })
+            };
+        }));
 
         // contained is an array of arrays of boolean values,
         // where contained[j][k] is true iff the jth way is
@@ -35,14 +48,9 @@ iD.actions.MergePolygon = function(ids) {
         var contained = polygons.map(function(w, i) {
             return polygons.map(function(d, n) {
                 if (i === n) return null;
-                return iD.geo.polygonContainsPolygon(getLocs(d), getLocs(w));
+                return iD.geo.polygonContainsPolygon(d.locs, w.locs);
             });
         });
-
-        function getLocs(way) {
-            return graph.childNodes(way).map(function(d) { return d.loc; });
-        }
-
 
         // Sort all polygons as either outer or inner ways
         var members = [];
@@ -65,10 +73,12 @@ iD.actions.MergePolygon = function(ids) {
         function extractUncontained(polygons) {
             polygons.forEach(function(d, i) {
                 if (!isContained(d, i)) {
-                    members.push({
-                        type: 'way',
-                        id: d.id,
-                        role: outer ? 'outer' : 'inner'
+                    d.ids.forEach(function(id) {
+                        members.push({
+                            type: 'way',
+                            id: id,
+                            role: outer ? 'outer' : 'inner'
+                        });
                     });
                 }
             });

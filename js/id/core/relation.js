@@ -169,10 +169,12 @@ _.extend(iD.Relation.prototype, {
             .map(function(m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.childNodes(resolver.entity(m.id)) }; });
 
         function join(ways) {
-            var joined = [], current, first, last, i, how, what;
+            var joined = [], way, current, first, last, i, how, what;
 
             while (ways.length) {
-                current = ways.pop().nodes.slice();
+                way = ways.pop();
+                current = way.nodes.slice();
+                current.ids = [way.id];
                 joined.push(current);
 
                 while (ways.length && _.first(current) !== _.last(current)) {
@@ -206,12 +208,17 @@ _.extend(iD.Relation.prototype, {
                     if (!what)
                         break; // Invalid geometry (unclosed ring)
 
+                    current.ids.push(ways[i].id);
                     ways.splice(i, 1);
                     how.apply(current, what);
                 }
             }
 
-            return joined.map(function(nodes) { return _.pluck(nodes, 'loc'); });
+            return joined.map(function(nodes) {
+                var locs = _.pluck(nodes, 'loc');
+                locs.ids = nodes.ids;
+                return locs;
+            });
         }
 
         function findOuter(inner) {
