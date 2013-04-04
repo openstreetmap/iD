@@ -59,7 +59,6 @@ a, button, input, textarea {
 }
 
 a, button {
-    cursor: pointer;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
@@ -1074,7 +1073,6 @@ input[type=number] {
 }
 
 .checkselect label:hover {
-    cursor: pointer;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     background: #f1f1f1;
 }
@@ -1545,7 +1543,6 @@ img.wiki-image {
     height: 100%;
     display: block;
     float: left;
-    cursor: pointer;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
@@ -2229,7 +2226,6 @@ img.wiki-image {
 
 .radial-menu-item {
     fill: white;
-    cursor: pointer;
     cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
