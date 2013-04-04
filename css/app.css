@@ -2291,7 +2291,9 @@ img.wiki-image {
     .checkselect label:hover,
     .opacity-options li,
     .radial-menu-item {
-        cursor: url(../img/cursor-pointer2x.png) 6 1, pointer;
+        -webkit-image-set(
+            cursor: url(../img/cursor-pointer2x.png) 2x
+            ) 6 1, pointer;
     }
 }
 
