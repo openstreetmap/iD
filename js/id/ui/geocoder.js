@@ -86,9 +86,8 @@ iD.ui.Geocoder = function(context) {
 
                 context.on('enter.geocoder', function() {
                     if (context.mode().id !== 'browse') {
-                        context.map()
-                            .on('drawn.geocoder', null)
-                            .on('enter.geocoder', null);
+                        context.on('enter.geocoder', null)
+                            .map().on('drawn.geocoder', null);
                     }
                 });
             }
