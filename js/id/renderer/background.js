@@ -49,14 +49,14 @@ iD.Background = function(backgroundType) {
 
     // Update tiles based on current state of `projection`.
     function background(selection) {
-        tile.scale(projection.scale())
+        tile.scale(projection.scale() * 2 * Math.PI)
             .translate(projection.translate());
 
         tileOrigin = [
-            projection.scale() / 2 - projection.translate()[0],
-            projection.scale() / 2 - projection.translate()[1]];
+            projection.scale() * Math.PI - projection.translate()[0],
+            projection.scale() * Math.PI - projection.translate()[1]];
 
-        z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0);
+        z = Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.log(2) - 8, 0);
 
         render(selection);
     }

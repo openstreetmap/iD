@@ -1,5 +1,5 @@
 describe("iD.svg.LineString", function () {
-    var projection = d3.geo.mercator();
+    var projection = d3.geo.mercator().scale(250 / Math.PI);
 
     it("returns an SVG path description for the entity's nodes", function () {
         var a = iD.Node({loc: [0, 0]}),

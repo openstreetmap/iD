@@ -2702,6 +2702,18 @@
         "terms": [],
         "name": "Rail"
     },
+    "railway/station": {
+        "icon": "rail",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "railway": "station"
+        },
+        "name": "Railway Station"
+    },
     "railway/subway": {
         "icon": "railway-subway",
         "fields": [

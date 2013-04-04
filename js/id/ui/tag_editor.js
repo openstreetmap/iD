@@ -73,12 +73,16 @@ iD.ui.TagEditor = function(context, entity) {
             .call(tagList, preset.id === 'other');
 
         if (!entity.isNew()) {
-            tageditorpreset.append('div')
+            var osmLink = tageditorpreset.append('div')
                 .attr('class', 'col12 inspector-inner')
                 .append('a')
                 .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
-                .attr('target', '_blank')
-                .text(t('inspector.view_on_osm'));
+                .attr('target', '_blank');
+
+            osmLink.append('span')
+                .attr('class','icon icon-pre-text out-link');
+
+            osmLink.append('span').text(t('inspector.view_on_osm'));
         }
 
         tageditor.tags(tags);
