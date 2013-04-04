@@ -14,7 +14,7 @@
    height="1052.3622047"
    id="svg54747"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="cursors.svg">
   <defs
      id="defs54749">
@@ -52,9 +52,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.9525416"
-     inkscape:cx="-459.31384"
-     inkscape:cy="976.40235"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="-499.08138"
+     inkscape:cy="987.80023"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -289,7 +289,7 @@
        inkscape:label="cursor-select-way"
        inkscape:export-xdpi="180"
        inkscape:export-ydpi="180"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-way2x.png">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-line2x.png">
       <rect
          ry="0"
          rx="0"
