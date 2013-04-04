@@ -125,12 +125,11 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     };
 
     // Connect the way to an existing way.
-    drawWay.addWay = function(way, loc, wayIndex) {
-        var newNode = iD.Node({loc: loc});
+    drawWay.addWay = function(loc, edge) {
+        var newNode = iD.Node({ loc: loc });
 
         context.perform(
-            iD.actions.AddEntity(newNode),
-            iD.actions.AddVertex(way.id, newNode.id, wayIndex),
+            iD.actions.AddMidpoint({ loc: loc, edge: edge}, newNode),
             ReplaceTemporaryNode(newNode),
             annotation);
 

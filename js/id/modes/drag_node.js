@@ -107,8 +107,7 @@ iD.modes.DragNode = function(context) {
         if (d.type === 'way') {
             var choice = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context);
             context.replace(
-                iD.actions.MoveNode(entity.id, choice.loc),
-                iD.actions.AddVertex(d.id, entity.id, choice.index),
+                iD.actions.AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
                 connectAnnotation(d));
 
         } else if (d.type === 'node' && d.id !== entity.id) {

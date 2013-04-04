@@ -23,7 +23,7 @@ iD.modes.AddPoint = function(context) {
         context.enter(iD.modes.Select(context, [node.id], true));
     }
 
-    function addWay(way, loc, index) {
+    function addWay(loc, edge) {
         add(loc);
     }
 

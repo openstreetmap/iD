@@ -25,7 +25,7 @@ iD.modes.AddLine = function(context) {
         context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
     }
 
-    function startFromWay(other, loc, index) {
+    function startFromWay(loc, edge) {
         var graph = context.graph(),
             node = iD.Node({loc: loc}),
             way = iD.Way();
@@ -34,7 +34,7 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddEntity(node),
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddVertex(other.id, node.id, index));
+            iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
 
         context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
     }
