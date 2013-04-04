@@ -345,11 +345,6 @@ button:hover {
     background-color: #ececec;
 }
 
-button.active {
-    cursor: pointer;
-    cursor: url(../img/cursor-pointing.png) 6 1, pointer;
-}
-
 button[disabled],
 button.disabled {
     background-color: rgba(255,255,255,.25);
@@ -1101,7 +1096,6 @@ input[type=number] {
 
 /* Preset form radio button */
 
-
 .radio-wrap {
     display: block;
     overflow: hidden;
@@ -1220,7 +1214,6 @@ div.combobox {
 }
 
 .combobox a {
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     display: block;
     padding: 5px 10px;
     border-top:1px solid #ccc;
@@ -1242,31 +1235,9 @@ div.combobox {
     margin-left: -20px;
     margin-right: 10px;
     display:inline-block;
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-}
-
-.rowselect .item {
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
-}
-
-.rowselect .item label:hover{
-    background-color: #ececec;
-}
-
-.rowselect .item label {
-    padding: 5px;
-    width: 100%;
-    cursor: pointer;
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
-    display: block;
-    text-align: center;
-}
-
-.rowselect .item div {
-    text-align: center;
 }
 
 /* tag editor */
@@ -2315,7 +2286,15 @@ img.wiki-image {
     background-image: url(../img/sprite2x.png);
     background-size: 600px 560px;
   }
+    a,
+    button,
+    .checkselect label:hover,
+    .opacity-options li,
+    .radial-menu-item {
+        cursor: url(../img/cursor-pointer2x.png) 6 1, pointer;
+    }
 }
+
 
 /* Scrollbars
  ----------------------------------------------------- */

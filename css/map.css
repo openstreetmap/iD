@@ -925,25 +925,17 @@ text.point {
 .mode-draw-area .behavior-hover .way,
 .mode-add-line  .behavior-hover .way,
 .mode-add-area  .behavior-hover .way,
-.mode-drag-node .behavior-hover .way {
-    cursor: crosshair;
-    cursor: url(../img/cursor-draw-connect-line.png) 9 9, crosshair;
-}
-
+.mode-drag-node .behavior-hover .way,
 .mode-draw-line .behavior-hover .vertex,
 .mode-draw-area .behavior-hover .vertex,
 .mode-add-line  .behavior-hover .vertex,
 .mode-add-area  .behavior-hover .vertex,
-.mode-drag-node .behavior-hover .vertex {
+.mode-drag-node .behavior-hover .vertex, {
     cursor: crosshair;
     cursor: url(../img/cursor-draw-connect-vertex.png) 9 9, crosshair;
 }
 
-.mode-add-point #map:hover {
-    cursor: crosshair;
-    cursor: url(../img/cursor-draw.png) 9 9, crosshair;
-}
-
+.mode-add-point #map:hover,
 .lasso #map:hover,
 .lasso .way,
 .lasso .vertex {
@@ -985,4 +977,95 @@ path.gpx {
 .mode-add-area .area.fill,
 .mode-drag-node .area.fill {
     pointer-events: none;
+}
+
+/* Retina cursors. */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (-o-min-device-pixel-ratio: 3/2),
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) {
+
+    #map:hover {
+        cursor: url(../img/cursor-grab2x.png) 9 9, auto;
+    }
+
+    #map:active {
+        cursor: url(../img/cursor-grabbing2x.png) 9 9, auto;
+    }
+
+    .mode-browse #surface .point,
+    .mode-select #surface .point {
+        cursor: url(../img/cursor-select-point2x.png), pointer;
+    }
+
+    .mode-select #surface .vertex,
+    .mode-browse #surface .vertex {
+        cursor: url(../img/cursor-select-vertex2x.png), pointer;
+    }
+
+    .mode-browse #surface .line,
+    .mode-select #surface .line {
+        cursor: url(../img/cursor-select-line2x.png), pointer;
+    }
+
+    .mode-select #surface .area,
+    .mode-browse #surface .area {
+        cursor: url(../img/cursor-select-area2x.png), pointer;
+    }
+
+    .mode-select #surface .midpoint,
+    .mode-browse #surface .midpoint {
+        cursor: url(../img/cursor-select-split2x.png), pointer;
+    }
+
+    .mode-select .behavior-multiselect .point,
+    .mode-select .behavior-multiselect .vertex,
+    .mode-select .behavior-multiselect .line,
+    .mode-select .behavior-multiselect .area {
+        cursor: url(../img/cursor-select-add2x.png), pointer;
+    }
+
+    .mode-select .behavior-multiselect .selected {
+        cursor: url(../img/cursor-select-remove2x.png), pointer;
+    }
+
+    #map .point:active,
+    #map .vertex:active,
+    #map .line:active,
+    #map .area:active,
+    #map .midpoint:active,
+    #map .mode-select .selected {
+        cursor: url(../img/cursor-select-acting2x.png), pointer;
+    }
+
+    .mode-draw-line #map:hover,
+    .mode-draw-area #map:hover,
+    .mode-add-line  #map:hover,
+    .mode-add-area  #map:hover,
+    .mode-drag-node #map:hover {
+        cursor: crosshair;
+        cursor: url(../img/cursor-draw2x.png) 9 9, crosshair;
+    }
+
+    .mode-draw-line .behavior-hover .way,
+    .mode-draw-area .behavior-hover .way,
+    .mode-add-line  .behavior-hover .way,
+    .mode-add-area  .behavior-hover .way,
+    .mode-drag-node .behavior-hover .way,
+    .mode-draw-line .behavior-hover .vertex,
+    .mode-draw-area .behavior-hover .vertex,
+    .mode-add-line  .behavior-hover .vertex,
+    .mode-add-area  .behavior-hover .vertex,
+    .mode-drag-node .behavior-hover .vertex, {
+        cursor: crosshair;
+        cursor: url(../img/cursor-draw-connect-vertex2x.png) 9 9, crosshair;
+    }
+
+    .mode-add-point #map:hover,
+    .lasso #map:hover,
+    .lasso .way,
+    .lasso .vertex {
+        cursor: crosshair;
+        cursor: url(../img/cursor-draw2x.png) 9 9, crosshair;
+    }
 }
