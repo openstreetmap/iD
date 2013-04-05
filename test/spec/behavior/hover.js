@@ -33,14 +33,27 @@ describe("iD.behavior.Hover", function() {
     describe("mouseover", function () {
         it("adds the .hover class to all elements to which the same datum is bound", function () {
             container.selectAll('span')
-                .data(['a', 'b', 'a', 'b'])
-                .enter().append('span').attr('class', Object);
+                .data([{id: 'a'}, {id: 'b'}, {id: 'a'}, {id: 'b'}])
+                .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover());
             container.selectAll('.a').trigger('mouseover');
 
+
             expect(container.selectAll('.a.hover')[0]).to.have.length(2);
             expect(container.selectAll('.b.hover')[0]).to.have.length(0);
+        });
+
+        it("adds the .hover class to all members of a relation", function() {
+            container.selectAll('span')
+                .data([{id: 'a', type: 'relation', members: [{id: 'b'}]}, {id: 'b'}])
+                .enter().append('span').attr('class', function(d) { return d.id; });
+
+            container.call(iD.behavior.Hover());
+            container.selectAll('.a').trigger('mouseover');
+
+            expect(container.selectAll('.a.hover')[0]).to.have.length(1);
+            expect(container.selectAll('.b.hover')[0]).to.have.length(1);
         });
     });
 
