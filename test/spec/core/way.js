@@ -84,6 +84,15 @@ describe('iD.Way', function() {
         it('returns true when the way has tag oneway=yes', function() {
             expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay()).to.equal(true);
         });
+
+        it('returns true when the way has tag waterway=river or waterway=stream', function() {
+            expect(iD.Way({tags: { waterway: 'river' }}).isOneWay()).to.equal(true);
+            expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay()).to.equal(true);
+        });
+
+        it('returns true when the way has tag junction=roundabout', function() {
+            expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay()).to.equal(true);
+        });
     });
 
     describe('#isArea', function() {

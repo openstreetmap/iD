@@ -35,7 +35,8 @@ _.extend(iD.Way.prototype, {
     isOneWay: function() {
         return this.tags.oneway === 'yes' ||
             this.tags.waterway === 'river' ||
-            this.tags.waterway === 'stream';
+            this.tags.waterway === 'stream' ||
+            this.tags.junction === 'roundabout';
     },
 
     isClosed: function() {
