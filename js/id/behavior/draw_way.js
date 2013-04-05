@@ -113,6 +113,11 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     // Accept the current position of the temporary node and continue drawing.
     drawWay.add = function(loc) {
+
+        // prevent duplicate nodes
+        var last = context.entity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
+        if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
+
         var newNode = iD.Node({loc: loc});
 
         context.replace(
