@@ -597,13 +597,12 @@ path.casing.tag-highway-steps {
 
 /* aeroways */
 
-path.shadow.tag-aeroway-runway {
-    stroke-width: 20;
-}
-
 path.stroke.tag-aeroway-taxiway {
     stroke: #805C80;
     stroke-width: 4;
+}
+path.shadow.tag-aeroway-runway {
+    stroke-width: 20;
 }
 path.stroke.tag-aeroway-runway {
     stroke: #fff;
@@ -615,6 +614,10 @@ path.casing.tag-aeroway-runway {
     stroke-width: 10;
     stroke: #000;
     stroke-linecap: square;
+}
+path.fill.tag-aeroway-runway {
+    fill: #000;
+    fill-opacity: 0.6;
 }
 path.stroke.tag-aeroway-apron {
     stroke: #805C80;
