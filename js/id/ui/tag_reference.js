@@ -52,7 +52,7 @@ iD.ui.TagReference = function(entity, tag) {
             }
 
             if (!docs || !docs.description) {
-                referenceBody.text(t('inspector.no_documentation_key'));
+                referenceBody.append('p').text(t('inspector.no_documentation_key'));
                 show();
                 return;
             }
