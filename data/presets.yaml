@@ -137,6 +137,8 @@ en:
         label: Surface
       tourism: 
         label: Type
+      tracktype: 
+        label: Type
       water: 
         label: Type
       waterway: 

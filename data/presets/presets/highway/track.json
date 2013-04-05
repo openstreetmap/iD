@@ -1,6 +1,7 @@
 {
     "icon": "highway-track",
     "fields": [
+        "tracktype",
         "oneway",
         "structure",
         "access",

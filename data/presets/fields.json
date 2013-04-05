@@ -363,6 +363,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "tracktype": {
+        "key": "tracktype",
+        "type": "combo",
+        "label": "Type"
+    },
     "water": {
         "key": "water",
         "type": "combo",
