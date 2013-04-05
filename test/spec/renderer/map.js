@@ -120,4 +120,117 @@ describe('iD.Map', function() {
            expect(map.surface.node().tagName).to.equal("svg");
         });
     });
+
+    describe('cursors', function() {
+        var mode, behavior, point, vertex, line, area, midpoint;
+
+        beforeEach(function() {
+            mode = d3.select('body').append('div');
+            behavior = mode.append('div');
+
+            point    = behavior.append('div').attr('class', 'node point');
+            vertex   = behavior.append('div').attr('class', 'node vertex');
+            line     = behavior.append('div').attr('class', 'way line');
+            area     = behavior.append('div').attr('class', 'way area');
+            midpoint = behavior.append('div').attr('class', 'midpoint');
+        });
+
+        afterEach(function() {
+            mode.remove();
+        });
+
+        function cursor(selection) {
+            return window.getComputedStyle(selection.node()).cursor;
+        }
+
+        specify('points use select-point cursor in browse and select modes', function() {
+            mode.attr('class', 'mode-browse');
+            expect(cursor(point)).to.match(/cursor-select-point/);
+            mode.attr('class', 'mode-select');
+            expect(cursor(point)).to.match(/cursor-select-point/);
+        });
+
+        specify('vertices use select-vertex cursor in browse and select modes', function() {
+            mode.attr('class', 'mode-browse');
+            expect(cursor(vertex)).to.match(/cursor-select-vertex/);
+            mode.attr('class', 'mode-select');
+            expect(cursor(vertex)).to.match(/cursor-select-vertex/);
+        });
+
+        specify('lines use select-line cursor in browse and select modes', function() {
+            mode.attr('class', 'mode-browse');
+            expect(cursor(line)).to.match(/cursor-select-line/);
+            mode.attr('class', 'mode-select');
+            expect(cursor(line)).to.match(/cursor-select-line/);
+        });
+
+        specify('areas use select-area cursor in browse and select modes', function() {
+            mode.attr('class', 'mode-browse');
+            expect(cursor(area)).to.match(/cursor-select-area/);
+            mode.attr('class', 'mode-select');
+            expect(cursor(area)).to.match(/cursor-select-area/);
+        });
+
+        specify('midpoints use select-split cursor in browse and select modes', function() {
+            mode.attr('class', 'mode-browse');
+            expect(cursor(midpoint)).to.match(/cursor-select-split/);
+            mode.attr('class', 'mode-select');
+            expect(cursor(midpoint)).to.match(/cursor-select-split/);
+        });
+
+        specify('features use select-add cursor for adding to a selection', function() {
+            mode.attr('class', 'mode-select');
+            behavior.attr('class', 'behavior-multiselect');
+            expect(cursor(point)).to.match(/cursor-select-add/);
+            expect(cursor(vertex)).to.match(/cursor-select-add/);
+            expect(cursor(line)).to.match(/cursor-select-add/);
+            expect(cursor(area)).to.match(/cursor-select-add/);
+        });
+
+        specify('features use select-remove cursor for removing from a selection', function() {
+            mode.attr('class', 'mode-select');
+            behavior.attr('class', 'behavior-multiselect');
+            point.classed('selected', true);
+            vertex.classed('selected', true);
+            line.classed('selected', true);
+            area.classed('selected', true);
+            expect(cursor(point)).to.match(/cursor-select-remove/);
+            expect(cursor(vertex)).to.match(/cursor-select-remove/);
+            expect(cursor(line)).to.match(/cursor-select-remove/);
+            expect(cursor(area)).to.match(/cursor-select-remove/);
+        });
+
+        specify('hovered ways use draw-connect-line cursor in draw modes', function() {
+            behavior.attr('class', 'behavior-hover');
+            mode.attr('class', 'mode-draw-line');
+            expect(cursor(line)).to.match(/cursor-draw-connect-line/);
+            expect(cursor(area)).to.match(/cursor-draw-connect-line/);
+            mode.attr('class', 'mode-draw-area');
+            expect(cursor(line)).to.match(/cursor-draw-connect-line/);
+            expect(cursor(area)).to.match(/cursor-draw-connect-line/);
+            mode.attr('class', 'mode-add-line');
+            expect(cursor(line)).to.match(/cursor-draw-connect-line/);
+            expect(cursor(area)).to.match(/cursor-draw-connect-line/);
+            mode.attr('class', 'mode-add-area');
+            expect(cursor(line)).to.match(/cursor-draw-connect-line/);
+            expect(cursor(area)).to.match(/cursor-draw-connect-line/);
+            mode.attr('class', 'mode-drag-node');
+            expect(cursor(line)).to.match(/cursor-draw-connect-line/);
+            expect(cursor(area)).to.match(/cursor-draw-connect-line/);
+        });
+
+        specify('hovered vertices use draw-connect-vertex cursor in draw modes', function() {
+            behavior.attr('class', 'behavior-hover');
+            mode.attr('class', 'mode-draw-line');
+            expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
+            mode.attr('class', 'mode-draw-area');
+            expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
+            mode.attr('class', 'mode-add-line');
+            expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
+            mode.attr('class', 'mode-add-area');
+            expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
+            mode.attr('class', 'mode-drag-node');
+            expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
+        });
+    });
 });
