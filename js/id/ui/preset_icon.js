@@ -2,7 +2,7 @@ iD.ui.PresetIcon = function(geometry) {
     return function(selection) {
         selection.append('div')
             .attr('class', function(preset) {
-                var s = 'preset-icon-fill ' + geometry;
+                var s = 'preset-icon-fill icon-' + geometry;
                 for (var i in preset.tags) {
                     s += ' tag-' + i + ' tag-' + i + '-' + preset.tags[i];
                 }
@@ -15,5 +15,5 @@ iD.ui.PresetIcon = function(geometry) {
             .attr('class', function(preset) {
                 return 'feature-' + (preset.icon || fallbackIcon) + ' icon preset-icon preset-icon-' + geometry;
             });
-    }
+    };
 };

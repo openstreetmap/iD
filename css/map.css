@@ -873,40 +873,40 @@ text.point {
         ) 9 9, auto;
 }
 
-.mode-browse #surface .point,
-.mode-select #surface .point {
+.mode-browse .point,
+.mode-select .point {
     cursor: -webkit-image-set(
         url(../img/cursor-select-point.png) 1x,
         url(../img/cursor-select-point2x.png) 2x
         ), pointer;
 }
 
-.mode-select #surface .vertex,
-.mode-browse #surface .vertex {
+.mode-select .vertex,
+.mode-browse .vertex {
     cursor: -webkit-image-set(
         url(../img/cursor-select-vertex.png) 1x,
         url(../img/cursor-select-vertex2x.png) 2x
         ), pointer;
 }
 
-.mode-browse #surface .line,
-.mode-select #surface .line {
+.mode-browse .line,
+.mode-select .line {
     cursor: -webkit-image-set(
         url(../img/cursor-select-line.png) 1x,
         url(../img/cursor-select-line2x.png) 2x
         ), pointer;
 }
 
-.mode-select #surface .area,
-.mode-browse #surface .area {
+.mode-select .area,
+.mode-browse .area {
     cursor: -webkit-image-set(
         url(../img/cursor-select-area.png) 1x,
         url(../img/cursor-select-area2x.png) 2x
         ), pointer;
 }
 
-.mode-select #surface .midpoint,
-.mode-browse #surface .midpoint {
+.mode-select .midpoint,
+.mode-browse .midpoint {
     cursor: -webkit-image-set(
         url(../img/cursor-select-split.png) 1x,
         url(../img/cursor-select-split2x.png) 2x

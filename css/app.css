@@ -833,7 +833,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top: 30px;
 }
 
-.preset-icon-fill.area {
+.preset-icon-fill.icon-area {
     cursor: inherit;
     height: 45px;
     width: 45px;
@@ -2275,7 +2275,7 @@ img.wiki-image {
   .intro-areas-add .tooltip-inner::before,
   .intro-lines-add .tooltip-inner::before,
   .walkthrough a:before,
-  .preset-icon-fill.area,
+  .preset-icon-fill.icon-area,
   .modal-actions button:before,
   .map-control .icon,
   .button-wrap .icon {
