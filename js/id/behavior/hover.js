@@ -23,8 +23,8 @@ iD.behavior.Hover = function() {
         }
     }
 
-    var hover = function(_) {
-        selection = _;
+    var hover = function(__) {
+        selection = __;
 
         if (!altDisables || !d3.event || !d3.event.altKey) {
             selection.classed('behavior-hover', true);
@@ -32,9 +32,18 @@ iD.behavior.Hover = function() {
 
         function mouseover() {
             var datum = d3.event.target.__data__;
+
             if (datum) {
+                var hovered = [datum.id];
+
+                if (datum.type === 'relation') {
+                    hovered = hovered.concat(_.pluck(datum.members, 'id'));
+                }
+
+                hovered = d3.set(hovered);
+
                 selection.selectAll('*')
-                    .filter(function(d) { return d === datum; })
+                    .filter(function(d) { return d && hovered.has(d.id); })
                     .classed('hover', true);
             }
         }
