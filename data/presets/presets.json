@@ -2483,6 +2483,17 @@
         },
         "name": "Place"
     },
+    "place/city": {
+        "icon": "square",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "place": "city"
+        },
+        "name": "City"
+    },
     "place/hamlet": {
         "icon": "triangle-stroked",
         "geometry": [
@@ -2514,6 +2525,16 @@
         },
         "name": "Island"
     },
+    "place/isolated_dwelling": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "place": "isolated_dwelling"
+        },
+        "name": "Isolated Dwelling"
+    },
     "place/locality": {
         "icon": "marker",
         "geometry": [
@@ -2525,8 +2546,19 @@
         },
         "name": "Locality"
     },
-    "place/village": {
+    "place/town": {
         "icon": "square-stroked",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "place": "town"
+        },
+        "name": "Town"
+    },
+    "place/village": {
+        "icon": "triangle",
         "geometry": [
             "point",
             "area"

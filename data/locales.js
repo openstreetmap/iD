@@ -1162,6 +1162,10 @@ locale.en = {
                 "name": "Place",
                 "terms": ""
             },
+            "place/city": {
+                "name": "City",
+                "terms": ""
+            },
             "place/hamlet": {
                 "name": "Hamlet",
                 "terms": ""
@@ -1170,8 +1174,16 @@ locale.en = {
                 "name": "Island",
                 "terms": "archipelago,atoll,bar,cay,isle,islet,key,reef"
             },
+            "place/isolated_dwelling": {
+                "name": "Isolated Dwelling",
+                "terms": ""
+            },
             "place/locality": {
                 "name": "Locality",
+                "terms": ""
+            },
+            "place/town": {
+                "name": "Town",
                 "terms": ""
             },
             "place/village": {

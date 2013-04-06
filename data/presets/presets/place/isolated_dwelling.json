@@ -1,11 +1,10 @@
 {
-    "icon": "triangle",
     "geometry": [
         "point",
         "area"
     ],
     "tags": {
-        "place": "village"
+        "place": "isolated_dwelling"
     },
-    "name": "Village"
+    "name": "Isolated Dwelling"
 }

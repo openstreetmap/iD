@@ -1,11 +1,11 @@
 {
-    "icon": "triangle",
+    "icon": "square",
     "geometry": [
         "point",
         "area"
     ],
     "tags": {
-        "place": "village"
+        "place": "city"
     },
-    "name": "Village"
+    "name": "City"
 }
