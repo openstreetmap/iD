@@ -13,7 +13,7 @@ DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
 data/data.js: $(DATA_FILES)
 	node build.js
 
-.INTERMEDIATE iD.js: \
+iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
 	js/lib/d3.combobox.js \
@@ -35,7 +35,6 @@ data/data.js: $(DATA_FILES)
 	js/id/id.js \
 	js/id/connection.js \
 	js/id/services/*.js \
-	data/data.js \
 	js/id/util.js \
 	js/id/geo.js \
 	js/id/geo/*.js \
@@ -63,6 +62,8 @@ data/data.js: $(DATA_FILES)
 	data/introGraph.js \
 	data/locales.js
 
+.INTERMEDIATE iD.js: data/data.js
+
 iD.js: node_modules Makefile
 	@rm -f $@
 	cat $(filter %.js,$^) > $@
@@ -87,6 +88,9 @@ clean:
 
 translations:
 	node data/update_locales
+
+data/locales.js: data/locales/*.js
+	cat $^ > $@
 
 D3_FILES = \
 	node_modules/d3/src/start.js \

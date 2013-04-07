@@ -109,4 +109,4 @@ var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
 var presets = YAML.load(fs.readFileSync('data/presets.yaml', 'utf8'));
 var en = _.merge(core, presets);
 var out = 'locale.en = ' + stringify(en.en) + ';';
-fs.writeFileSync('data/locales.js', fs.readFileSync('data/locales.js', 'utf8').replace(/locale.en =[^;]*;/, out));
+fs.writeFileSync('data/locales/en.js', out);
