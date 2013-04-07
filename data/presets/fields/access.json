@@ -1,5 +1,40 @@
 {
-    "key": "access",
-    "type": "combo",
-    "label": "Access"
+    "keys": ["access", "foot", "motor_vehicle", "bicycle", "horse"],
+    "type": "access",
+    "label": "Access",
+    "strings": {
+        "types": {
+            "access": "General",
+            "foot": "Foot",
+            "motor_vehicle": "Motor Vehicles",
+            "bicycle": "Bicycles",
+            "horse": "Horses"
+        },
+        "options": {
+            "yes": {
+                "title": "Allowed",
+                "description": "Access permitted by law; a right of way"
+            },
+            "no": {
+                "title": "Prohibited",
+                "description": "Access not permitted to the general public"
+            },
+            "permissive": {
+                "title": "Permissive",
+                "description": "Access permitted until such time as the owner revokes the permission"
+            },
+            "private": {
+                "title": "Private",
+                "description": "Access permitted only with permission of the owner on an individual basis"
+            },
+            "designated": {
+                "title": "Designated",
+                "description": "Access permitted according to signs or specific local laws"
+            },
+            "destination": {
+                "title": "Destination",
+                "description": "Access permitted only to reach a destination"
+            }
+        }
+    }
 }

@@ -18,6 +18,7 @@
             "description": "Type of field",
             "type": "string",
             "enum": [
+                "access",
                 "address",
                 "check",
                 "combo",

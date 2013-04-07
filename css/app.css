@@ -948,6 +948,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     font-weight: bold;
 }
 
+.form-field-access .preset-input-wrap {
+    padding: 5px;
+}
+
 /* adding additional preset fields */
 
 .more-buttons {
