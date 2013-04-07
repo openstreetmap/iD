@@ -12,7 +12,7 @@ d3.combobox = function() {
         }));
     };
 
-    var typeahead = function(input) {
+    var combobox = function(input) {
         var idx = -1, container, shown = false;
 
         input
@@ -271,19 +271,19 @@ d3.combobox = function() {
         }, true);
     };
 
-    typeahead.fetcher = function(_) {
+    combobox.fetcher = function(_) {
         if (!arguments.length) return fetcher;
         fetcher = _;
-        return typeahead;
+        return combobox;
     };
 
-    typeahead.data = function(_) {
+    combobox.data = function(_) {
         if (!arguments.length) return data;
         data = _;
-        return typeahead;
+        return combobox;
     };
 
-    return d3.rebind(typeahead, event, 'on');
+    return d3.rebind(combobox, event, 'on');
 };
 
 d3.combobox.id = 0;
