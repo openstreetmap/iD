@@ -3,6 +3,10 @@
     "fields": [
         "fee",
         "access",
+        "parking",
+        "supervised",
+        "capacity",
+        "park_ride",
         "address"
     ],
     "geometry": [
