@@ -121,6 +121,10 @@ en:
         label: Hours
       operator: 
         label: Operator
+      park_ride: 
+        label: Park and Ride
+      parking: 
+        label: Type
       phone: 
         label: Phone
       place: 
@@ -158,6 +162,8 @@ en:
           tunnel: Tunnel
           embankment: Embankment
           cutting: Cutting
+      supervised: 
+        label: Supervised
       surface: 
         label: Surface
       tourism: 

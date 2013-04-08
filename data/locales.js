@@ -4210,6 +4210,12 @@ locale.en = {
             "operator": {
                 "label": "Operator"
             },
+            "park_ride": {
+                "label": "Park and Ride"
+            },
+            "parking": {
+                "label": "Type"
+            },
             "phone": {
                 "label": "Phone"
             },
@@ -4260,6 +4266,9 @@ locale.en = {
                     "embankment": "Embankment",
                     "cutting": "Cutting"
                 }
+            },
+            "supervised": {
+                "label": "Supervised"
             },
             "surface": {
                 "label": "Surface"

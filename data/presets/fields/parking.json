@@ -1,6 +1,6 @@
 {
     "key": "parking",
-    "type": "radio",
+    "type": "combo",
     "options": [
         "surface",
         "multi-storey",

@@ -290,6 +290,25 @@
         "type": "text",
         "label": "Operator"
     },
+    "park_ride": {
+        "key": "park_ride",
+        "type": "check",
+        "label": "Park and Ride"
+    },
+    "parking": {
+        "key": "parking",
+        "type": "combo",
+        "options": [
+            "surface",
+            "multi-storey",
+            "underground",
+            "sheds",
+            "carports",
+            "garage_boxes",
+            "lane"
+        ],
+        "label": "Type"
+    },
     "phone": {
         "key": "phone",
         "type": "tel",
@@ -393,6 +412,11 @@
                 "cutting": "Cutting"
             }
         }
+    },
+    "supervised": {
+        "key": "supervised",
+        "type": "check",
+        "label": "Supervised"
     },
     "surface": {
         "key": "surface",

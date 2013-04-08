@@ -1,11 +1,10 @@
 {
     "icon": "parking",
     "fields": [
-        "fee",
-        "access",
         "parking",
-        "supervised",
         "capacity",
+        "fee",
+        "supervised",
         "park_ride",
         "address"
     ],
