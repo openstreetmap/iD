@@ -1439,23 +1439,13 @@ img.wiki-image {
     border-radius:0 4px 0 0;
 }
 
-.background-control button.active {
-    border-radius: 0;
-}
-
 .nudge-container {
     border-top: 1px solid #CCC;
     margin: 10px -10px -10px -10px;
 }
 
-.background-control .adjustments button {
-    background: white;
-    text-transform: uppercase;
-    border-color: #CCC;
-}
-
-.background-control .adjustments button:hover {
-    background:#ececec;
+.background-control .adjustments button:last-child {
+    border: 0;
 }
 
 .hide-toggle {
@@ -1483,12 +1473,12 @@ img.wiki-image {
     border-left:  4px solid transparent;
 }
 
-.background-control .nudge {
-    text-indent: -9999px;
-    overflow: hidden;
-    width:16.6666%;
+.background-control .nudge-container button {
+    float: left;
+    display: block;
+    width:20%;
     border-radius: 0;
-    border-right: 1px solid rgba(0, 0, 0, .5);
+    border-right: 1px solid #CCC;
     position: relative;
 }
 
@@ -1526,15 +1516,6 @@ img.wiki-image {
     border-top:  5px solid #222;
 }
 
-.background-control .nudge:first-child {
-    border-radius: 4px 0 0 4px;
-}
-
-.background-control .reset {
-    width: 33.3333%;
-    border-radius: 0 4px 4px 0;
-}
-
 .opacity-options {
     background: url(../img/background-pattern-opacity.png) 0 0 repeat;
     height:20px;
@@ -1566,6 +1547,7 @@ img.wiki-image {
     background: rgba(89, 123, 231, .5);
     opacity: .5;
 }
+
 .background-control li.selected:hover .select-box,
 .background-control li.selected .select-box {
     opacity: 1;
