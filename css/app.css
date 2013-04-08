@@ -1415,7 +1415,7 @@ img.wiki-image {
     position: fixed;
     left: 30px;
     display: block;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
 }
 
 /* Zoomer */
@@ -1439,9 +1439,13 @@ img.wiki-image {
     border-radius:0 4px 0 0;
 }
 
+.background-control button.active {
+    border-radius: 0;
+}
+
 .nudge-container {
     border-top: 1px solid #CCC;
-    margin: 10px -10px -10px -10px;
+    margin: 0 -10px;
 }
 
 .background-control .adjustments button:last-child {
@@ -1449,7 +1453,8 @@ img.wiki-image {
 }
 
 .hide-toggle {
-    padding-left: 12px;
+    display: block;
+    padding: 0 0 10px 12px;
     position: relative;
 }
 
@@ -1460,7 +1465,7 @@ img.wiki-image {
     height: 0;
     width: 0;
     left: 0;
-    top: 4px;
+    top: 5px;
     border-top:  4px solid transparent;
     border-bottom:  4px solid transparent;
     border-left:  8px solid #7092ff;
