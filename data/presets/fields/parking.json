@@ -1,0 +1,14 @@
+{
+    "key": "parking",
+    "type": "radio",
+    "options": [
+        "surface",
+        "multi-storey",
+        "underground",
+        "sheds",
+        "carports",
+        "garage_boxes",
+        "lane"
+    ],
+    "label": "Type"
+}
