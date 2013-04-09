@@ -292,23 +292,29 @@ iD.ui.Background = function(context) {
 
         var nudge_container = adjustments
             .append('div')
-            .attr('class', 'nudge-container')
+            .attr('class', 'nudge-container cf')
             .style('display', 'none');
 
         nudge_container.selectAll('button')
             .data(directions).enter()
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
-            .text(function(d) { return d[0]; })
             .on('mousedown', clickNudge);
 
-        nudge_container.append('button')
-            .text(t('background.reset'))
+        resetButton = nudge_container.append('button')
             .attr('class', 'reset')
             .on('click', function() {
                 context.background().offset([0, 0]);
                 context.redraw();
-            });
+            })
+
+            resetButton.append('div')
+                .attr('class','icon undo');
+
+            resetButton.call(bootstrap.tooltip()
+            .title(t('background.reset'))
+            .placement('right'));
+
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));
