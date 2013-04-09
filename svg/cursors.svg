@@ -52,16 +52,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="-499.08138"
-     inkscape:cy="987.80023"
+     inkscape:zoom="1"
+     inkscape:cx="-405.07998"
+     inkscape:cy="990.65897"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="cursor-draw-connect-line"
      showgrid="false"
      inkscape:window-width="1337"
      inkscape:window-height="840"
-     inkscape:window-x="337"
-     inkscape:window-y="105"
+     inkscape:window-x="457"
+     inkscape:window-y="78"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
      showguides="false"
@@ -89,7 +89,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -97,6 +97,13 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="opacity:0.75;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6071"
+       width="640"
+       height="280"
+       x="-860"
+       y="-67.637817" />
     <g
        transform="translate(30,0)"
        id="g55825"
@@ -242,7 +249,8 @@
        inkscape:label="cursor-select-area"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-area2x.png"
        inkscape:export-xdpi="180"
-       inkscape:export-ydpi="180">
+       inkscape:export-ydpi="180"
+       transform="translate(20,0)">
       <rect
          y="52.34938"
          x="-562"
@@ -289,7 +297,8 @@
        inkscape:label="cursor-select-way"
        inkscape:export-xdpi="180"
        inkscape:export-ydpi="180"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-line2x.png">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-line2x.png"
+       transform="translate(-20,30)">
       <rect
          ry="0"
          rx="0"
@@ -325,11 +334,11 @@
          sodipodi:cy="54.862183"
          sodipodi:rx="2.5"
          sodipodi:ry="2.5"
-         d="m -80,54.862183 a 2.5,2.5 0 1 1 -5,0 2.5,2.5 0 1 1 5,0 z"
+         d="m -80,54.862183 c 0,1.380711 -1.119288,2.5 -2.5,2.5 -1.380712,0 -2.5,-1.119289 -2.5,-2.5 0,-1.380712 1.119288,-2.5 2.5,-2.5 1.380712,0 2.5,1.119288 2.5,2.5 z"
          transform="matrix(0.6,0,0,0.6,-470,26.932073)" />
       <path
          transform="matrix(0.5999999,0,0,0.5999999,-465.00001,21.932079)"
-         d="m -80,54.862183 a 2.5,2.5 0 1 1 -5,0 2.5,2.5 0 1 1 5,0 z"
+         d="m -80,54.862183 c 0,1.380711 -1.119288,2.5 -2.5,2.5 -1.380712,0 -2.5,-1.119289 -2.5,-2.5 0,-1.380712 1.119288,-2.5 2.5,-2.5 1.380712,0 2.5,1.119288 2.5,2.5 z"
          sodipodi:ry="2.5"
          sodipodi:rx="2.5"
          sodipodi:cy="54.862183"
@@ -373,7 +382,8 @@
        id="g4871"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-split2x.png"
        inkscape:export-xdpi="180"
-       inkscape:export-ydpi="180">
+       inkscape:export-ydpi="180"
+       transform="translate(-10,30)">
       <rect
          ry="0"
          rx="0"
@@ -657,7 +667,8 @@
        inkscape:label="cursor-draw-connect-line"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw-connect-line2x.png"
        inkscape:export-xdpi="179.88307"
-       inkscape:export-ydpi="179.88307">
+       inkscape:export-ydpi="179.88307"
+       transform="translate(10,0)">
       <g
          transform="translate(-387,-20)"
          inkscape:export-ydpi="90"
@@ -730,13 +741,20 @@
            style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.5;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
            inkscape:connector-curvature="0" />
       </g>
+      <path
+         style="opacity:0.5;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
+         d="m -430,55.362183 -2,0 0,6 c 10e-6,0.554007 0.44601,1.000005 1.00001,0.999995 0.554,1e-5 0.99999,-0.445995 0.99999,-1.000006 z"
+         id="path5729-0-9"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccscc" />
     </g>
     <g
        id="cursor-select-point"
        inkscape:label="#g5371"
        inkscape:export-xdpi="180"
        inkscape:export-ydpi="180"
-       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-point2x.png">
+       inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-point2x.png"
+       transform="translate(10,0)">
       <rect
          style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
          id="rect58514"
@@ -791,7 +809,8 @@
        inkscape:label="cursor-select-vertex"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-vertex2x.png"
        inkscape:export-xdpi="180"
-       inkscape:export-ydpi="180">
+       inkscape:export-ydpi="180"
+       transform="translate(30,0)">
       <rect
          style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter8013-4);enable-background:accumulate"
          id="rect56254"
@@ -850,7 +869,8 @@
        inkscape:label="#g3882"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-add2x.png"
        inkscape:export-xdpi="180"
-       inkscape:export-ydpi="180">
+       inkscape:export-ydpi="180"
+       transform="translate(-20,0)">
       <g
          id="g58516-6"
          transform="translate(-496,30.9872)">
@@ -926,7 +946,8 @@
        inkscape:label="cursor-draw"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-draw2x.png"
        inkscape:export-xdpi="179.9978"
-       inkscape:export-ydpi="179.9978">
+       inkscape:export-ydpi="179.9978"
+       transform="translate(-10,0)">
       <g
          inkscape:label=""
          transform="translate(-387,-20)"
@@ -1001,7 +1022,8 @@
        inkscape:label="#g3893"
        inkscape:export-filename="/Users/saman/work_repos/iD/img/cursor-select-remove2x.png"
        inkscape:export-xdpi="180"
-       inkscape:export-ydpi="180">
+       inkscape:export-ydpi="180"
+       transform="translate(-10,0)">
       <g
          transform="translate(-476,30.9872)"
          id="g3864">

@@ -102,7 +102,7 @@ iD.svg.Surface = function() {
 
         defs.append('image')
             .attr('id', 'sprite')
-            .attr('xlink:href', 'img/sprite.png')
+            .attr('xlink:href', 'img/sprite.svg')
             .call(autosize);
 
         defs.selectAll()

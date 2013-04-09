@@ -440,7 +440,7 @@ button.save.has-count .count::before {
   vertical-align:top;
   width:20px;
   height:20px;
-  background:transparent url(../img/sprite.png) no-repeat 0 0;
+  background:transparent url(../img/sprite.svg) no-repeat 0 0;
   text-indent:-9999px;
   overflow:hidden;
   }
@@ -841,16 +841,16 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: auto;
     position: absolute;
     left: 0; right: 0; top: 19px;
-    background:transparent url(../img/sprite.png) no-repeat -240px -80px;
+    background:transparent url(../img/sprite.svg) no-repeat -240px -80px;
 }
 
 .preset-icon-fill.tag-shop,
 .preset-icon-fill.tag-building {
-    background:transparent url(../img/sprite.png) no-repeat 0 -80px;
+    background:transparent url(../img/sprite.svg) no-repeat 0 -80px;
 }
 
 .preset-icon-fill.tag-natural-water {
-    background:transparent url(../img/sprite.png) no-repeat -60px -80px;
+    background:transparent url(../img/sprite.svg) no-repeat -60px -80px;
 }
 
 .preset-icon-fill.tag-landuse,
@@ -858,11 +858,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .preset-icon-fill.tag-natural-tree,
 .preset-icon-fill.tag-natural-grassland,
 .preset-icon-fill.tag-leisure-park {
-    background:transparent url(../img/sprite.png) no-repeat -120px -80px;
+    background:transparent url(../img/sprite.svg) no-repeat -120px -80px;
 }
 
 .preset-icon-fill.tag-amenity-parking {
-    background:transparent url(../img/sprite.png) no-repeat -180px -80px;
+    background:transparent url(../img/sprite.svg) no-repeat -180px -80px;
 }
 
 /* preset form basics */
@@ -1415,7 +1415,7 @@ img.wiki-image {
     position: fixed;
     left: 30px;
     display: block;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
 }
 
 /* Zoomer */
@@ -1445,21 +1445,16 @@ img.wiki-image {
 
 .nudge-container {
     border-top: 1px solid #CCC;
-    margin: 10px -10px -10px -10px;
+    margin: 0 -10px;
 }
 
-.background-control .adjustments button {
-    background: white;
-    text-transform: uppercase;
-    border-color: #CCC;
-}
-
-.background-control .adjustments button:hover {
-    background:#ececec;
+.background-control .adjustments button:last-child {
+    border: 0;
 }
 
 .hide-toggle {
-    padding-left: 12px;
+    display: block;
+    padding: 0 0 10px 12px;
     position: relative;
 }
 
@@ -1470,7 +1465,7 @@ img.wiki-image {
     height: 0;
     width: 0;
     left: 0;
-    top: 4px;
+    top: 5px;
     border-top:  4px solid transparent;
     border-bottom:  4px solid transparent;
     border-left:  8px solid #7092ff;
@@ -1483,12 +1478,12 @@ img.wiki-image {
     border-left:  4px solid transparent;
 }
 
-.background-control .nudge {
-    text-indent: -9999px;
-    overflow: hidden;
-    width:16.6666%;
+.background-control .nudge-container button {
+    float: left;
+    display: block;
+    width:20%;
     border-radius: 0;
-    border-right: 1px solid rgba(0, 0, 0, .5);
+    border-right: 1px solid #CCC;
     position: relative;
 }
 
@@ -1526,15 +1521,6 @@ img.wiki-image {
     border-top:  5px solid #222;
 }
 
-.background-control .nudge:first-child {
-    border-radius: 4px 0 0 4px;
-}
-
-.background-control .reset {
-    width: 33.3333%;
-    border-radius: 0 4px 4px 0;
-}
-
 .opacity-options {
     background: url(../img/background-pattern-opacity.png) 0 0 repeat;
     height:20px;
@@ -1566,6 +1552,7 @@ img.wiki-image {
     background: rgba(89, 123, 231, .5);
     opacity: .5;
 }
+
 .background-control li.selected:hover .select-box,
 .background-control li.selected .select-box {
     opacity: 1;
@@ -1913,7 +1900,7 @@ img.wiki-image {
     width: 100px;
     margin: auto;
     margin-bottom: 10px;
-    background:transparent url(../img/sprite.png) no-repeat 0 -220px;
+    background:transparent url(../img/sprite.svg) no-repeat 0 -220px;
 }
 
 .modal-actions :first-child {
@@ -2279,17 +2266,6 @@ img.wiki-image {
   only screen and (-o-min-device-pixel-ratio: 3/2),
   only screen and (min--moz-device-pixel-ratio: 1.5),
   only screen and (min-device-pixel-ratio: 1.5) {
-  .intro-points-add .tooltip-inner::before,
-  .intro-areas-add .tooltip-inner::before,
-  .intro-lines-add .tooltip-inner::before,
-  .walkthrough a:before,
-  .preset-icon-fill.icon-area,
-  .modal-actions button:before,
-  .map-control .icon,
-  .button-wrap .icon {
-    background-image: url(../img/sprite2x.png);
-    background-size: 600px 560px;
-  }
     a,
     button,
     .checkselect label:hover,
@@ -2300,7 +2276,6 @@ img.wiki-image {
             ) 6 1, pointer;
     }
 }
-
 
 /* Scrollbars
  ----------------------------------------------------- */
@@ -2405,7 +2380,7 @@ img.wiki-image {
     content: "";
     height: 80px;
     width: 200px;
-    background:transparent url(../img/sprite.png) no-repeat 0 -320px;
+    background:transparent url(../img/sprite.svg) no-repeat 0 -320px;
 }
 
 .intro-areas-add .tooltip-inner::before {
@@ -2425,6 +2400,6 @@ img.wiki-image {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    background: rgba(0, 0, 0, 0) url(../img/sprite.png) no-repeat -301px -220px;
+    background: rgba(0, 0, 0, 0) url(../img/sprite.svg) no-repeat -301px -220px;
     margin: auto;
 }
