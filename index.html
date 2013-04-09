@@ -55,6 +55,9 @@ function geoError(position) {
 document.getElementById('start-mapping').onclick = function() {
     if (navigator.geolocation) {
         this.className += ' loading';
+        // handle firefox's weird implementation
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=675533
+        window.setTimeout(geoError, 4000);
         navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
     } else {
         geoError();
