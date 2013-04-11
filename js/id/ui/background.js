@@ -301,17 +301,17 @@ iD.ui.Background = function(context) {
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('mousedown', clickNudge);
 
-        resetButton = nudge_container.append('button')
+        var resetButton = nudge_container.append('button')
             .attr('class', 'reset')
-            .on('click', function() {
+            .on('click', function () {
                 context.background().offset([0, 0]);
                 context.redraw();
-            })
+            });
 
-            resetButton.append('div')
-                .attr('class','icon undo');
+        resetButton.append('div')
+            .attr('class', 'icon undo');
 
-            resetButton.call(bootstrap.tooltip()
+        resetButton.call(bootstrap.tooltip()
             .title(t('background.reset'))
             .placement('right'));
 
