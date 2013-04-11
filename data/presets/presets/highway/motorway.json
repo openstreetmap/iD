@@ -4,6 +4,7 @@
         "oneway",
         "structure",
         "access",
+        "lanes",
         "maxspeed",
         "surface",
         "ref"

@@ -217,6 +217,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "lanes": {
+        "key": "lanes",
+        "type": "number",
+        "label": "Lanes"
+    },
     "layer": {
         "key": "layer",
         "type": "combo",

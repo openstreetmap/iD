@@ -440,6 +440,9 @@ locale.en = {
             "landuse": {
                 "label": "Type"
             },
+            "lanes": {
+                "label": "Lanes"
+            },
             "layer": {
                 "label": "Layer"
             },

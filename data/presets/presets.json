@@ -1223,6 +1223,7 @@
             "oneway",
             "structure",
             "access",
+            "lanes",
             "maxspeed",
             "surface",
             "ref"
@@ -1283,6 +1284,7 @@
             "oneway",
             "structure",
             "access",
+            "lanes",
             "maxspeed",
             "surface",
             "ref"
@@ -1361,6 +1363,7 @@
             "oneway",
             "structure",
             "access",
+            "lanes",
             "maxspeed",
             "surface",
             "ref"
@@ -1440,6 +1443,7 @@
             "oneway",
             "structure",
             "access",
+            "lanes",
             "maxspeed",
             "surface",
             "ref"
@@ -1515,6 +1519,7 @@
             "oneway",
             "structure",
             "access",
+            "lanes",
             "maxspeed",
             "surface",
             "ref"
