@@ -75,9 +75,9 @@ iD.ui.Inspector = function(context, entity) {
                 presetLayer.call(presetGrid, preset);
             });
 
-        var initial = entity.isNew() && _.without(Object.keys(entity.tags), 'area').length === 0;
+        var tagless = _.without(Object.keys(entity.tags), 'area').length === 0;
 
-        if (initial) {
+        if (tagless) {
             panewrap.style('right', '-100%');
             presetLayer.call(presetGrid);
         } else {
