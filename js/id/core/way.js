@@ -98,10 +98,17 @@ _.extend(iD.Way.prototype, {
     },
 
     removeNode: function(id) {
-        var nodes = _.without(this.nodes, id);
+        var nodes = [];
+
+        for (var i = 0; i < this.nodes.length; i++) {
+            var node = this.nodes[i];
+            if (node != id && nodes[nodes.length - 1] != node) {
+                nodes.push(node);
+            }
+        }
 
         // Preserve circularity
-        if (this.nodes.length > 1 && this.first() === id && this.last() === id) {
+        if (this.nodes.length > 1 && this.first() === id && this.last() === id && nodes[nodes.length - 1] != nodes[0]) {
             nodes.push(nodes[0]);
         }
 

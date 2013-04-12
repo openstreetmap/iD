@@ -221,12 +221,31 @@ describe('iD.Way', function() {
             expect(w.removeNode('a').nodes).to.eql([]);
         });
 
+        it("prevents duplicate consecutive nodes", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w = iD.Way({nodes: ['a', 'b', 'c', 'b']});
+
+            expect(w.removeNode('c').nodes).to.eql(['a', 'b']);
+        });
+
         it("preserves circularity", function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),
                 d = iD.Node({id: 'd'}),
                 w = iD.Way({nodes: ['a', 'b', 'c', 'd', 'a']});
+
+            expect(w.removeNode('a').nodes).to.eql(['b', 'c', 'd', 'b']);
+        });
+
+        it("prevents duplicate consecutive nodes when preserving circularity", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                d = iD.Node({id: 'd'}),
+                w = iD.Way({nodes: ['a', 'b', 'c', 'd', 'b', 'a']});
 
             expect(w.removeNode('a').nodes).to.eql(['b', 'c', 'd', 'b']);
         });
