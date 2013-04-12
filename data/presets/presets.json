@@ -2753,6 +2753,18 @@
         "terms": [],
         "name": "Monorail"
     },
+    "railway/platform": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "railway": "platform"
+        },
+        "name": "Railway Platform"
+    },
     "railway/rail": {
         "icon": "railway-rail",
         "geometry": [

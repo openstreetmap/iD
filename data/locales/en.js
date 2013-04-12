@@ -1291,6 +1291,10 @@ locale.en = {
                 "name": "Monorail",
                 "terms": ""
             },
+            "railway/platform": {
+                "name": "Railway Platform",
+                "terms": ""
+            },
             "railway/rail": {
                 "name": "Rail",
                 "terms": ""
