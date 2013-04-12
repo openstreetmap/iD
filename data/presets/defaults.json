@@ -31,7 +31,11 @@
     ],
     "vertex": [
         "highway/crossing",
+        "railway/level_crossing",
+        "highway/traffic_signals",
         "highway/turning_circle",
+        "highway/mini_roundabout",
+        "highway/motorway_junction",
         "other"
     ]
 }

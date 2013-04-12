@@ -321,7 +321,40 @@ locale.fr = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Accès"
+                "label": "Accès",
+                "types": {
+                    "access": "Général",
+                    "foot": "A pied",
+                    "motor_vehicle": "Véhicules motorisés",
+                    "bicycle": "Vélos",
+                    "horse": "Cavaliers"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Autorisé",
+                        "description": "Accès autorisé par servitude de passage"
+                    },
+                    "no": {
+                        "title": "Interdit",
+                        "description": "Accès interdit au public"
+                    },
+                    "permissive": {
+                        "title": "Accès permis",
+                        "description": "Accès laissé libre par le propriétaire, révocable à tout moment"
+                    },
+                    "private": {
+                        "title": "Privé",
+                        "description": "Accès autorisé sur demande au propriétaire"
+                    },
+                    "designated": {
+                        "title": "Restreint à certains types de véhicules",
+                        "description": "Accès autorisé par des panneaux ou par une réglementation locale"
+                    },
+                    "destination": {
+                        "title": "Interdit sauf riverains",
+                        "description": "Circulation interdite, sauf pour accéder aux zones désservies"
+                    }
+                }
             },
             "address": {
                 "label": "Adresse",
@@ -457,6 +490,12 @@ locale.fr = {
             "operator": {
                 "label": "Opérateur"
             },
+            "park_ride": {
+                "label": "Parking-relais"
+            },
+            "parking": {
+                "label": "Type"
+            },
             "phone": {
                 "label": "Téléphone "
             },
@@ -507,6 +546,9 @@ locale.fr = {
                     "embankment": "Remblai",
                     "cutting": "Tranchée"
                 }
+            },
+            "supervised": {
+                "label": "Supervisé"
             },
             "surface": {
                 "label": "Surface"
@@ -805,7 +847,7 @@ locale.fr = {
                 "terms": "rampe"
             },
             "highway/track": {
-                "name": "Chemin carrossable"
+                "name": "Piste carrossable"
             },
             "highway/traffic_signals": {
                 "name": "Feux tricolores",
@@ -1037,6 +1079,9 @@ locale.fr = {
             "place": {
                 "name": "Toponymie"
             },
+            "place/city": {
+                "name": "Grande ville (>100.000 habitants)"
+            },
             "place/hamlet": {
                 "name": "Hameau"
             },
@@ -1044,8 +1089,14 @@ locale.fr = {
                 "name": "Île",
                 "terms": "archipel,atoll,récif,presqu'île,haut fond,barre,îlot"
             },
+            "place/isolated_dwelling": {
+                "name": "Lieu-dit habité"
+            },
             "place/locality": {
                 "name": "Lieu-dit"
+            },
+            "place/town": {
+                "name": "Ville (10.000-100.000 habitants)"
             },
             "place/village": {
                 "name": "Village"

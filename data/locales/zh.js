@@ -234,10 +234,36 @@ locale.zh = {
     "help": {
         "title": "帮助"
     },
+    "intro": {
+        "startediting": {
+            "start": "开始制图！"
+        }
+    },
     "presets": {
         "fields": {
             "access": {
-                "label": "通道"
+                "label": "通道",
+                "types": {
+                    "access": "普通",
+                    "foot": "步行",
+                    "motor_vehicle": "汽车",
+                    "bicycle": "自行车",
+                    "horse": "马匹"
+                },
+                "options": {
+                    "yes": {
+                        "title": "允许的"
+                    },
+                    "private": {
+                        "title": "私人"
+                    },
+                    "designated": {
+                        "title": "特定的"
+                    },
+                    "destination": {
+                        "title": "目的地"
+                    }
+                }
             },
             "address": {
                 "label": "地址",
@@ -370,6 +396,9 @@ locale.zh = {
             "operator": {
                 "label": "经营者"
             },
+            "parking": {
+                "label": "类型"
+            },
             "phone": {
                 "label": "手机"
             },
@@ -421,10 +450,16 @@ locale.zh = {
                     "cutting": "开凿"
                 }
             },
+            "supervised": {
+                "label": "监督"
+            },
             "surface": {
                 "label": "表面"
             },
             "tourism": {
+                "label": "类型"
+            },
+            "tracktype": {
                 "label": "类型"
             },
             "water": {
@@ -903,6 +938,9 @@ locale.zh = {
             "place": {
                 "name": "地点"
             },
+            "place/city": {
+                "name": "城市"
+            },
             "place/hamlet": {
                 "name": "小村庄"
             },
@@ -911,6 +949,9 @@ locale.zh = {
             },
             "place/locality": {
                 "name": "位置"
+            },
+            "place/town": {
+                "name": "城镇"
             },
             "place/village": {
                 "name": "村庄"

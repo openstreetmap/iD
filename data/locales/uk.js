@@ -321,12 +321,45 @@ locale.uk = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Доступ"
+                "label": "Доступ",
+                "types": {
+                    "access": "Загальний",
+                    "foot": "Пішки",
+                    "motor_vehicle": "Автівкам",
+                    "bicycle": "Велосипедам",
+                    "horse": "Коням"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Дозволений",
+                        "description": "Доступ дозволений законодавчо; право проїзду"
+                    },
+                    "no": {
+                        "title": "Заборонений",
+                        "description": "Доступ не дозволений для широкого загалу"
+                    },
+                    "permissive": {
+                        "title": "З дозволу",
+                        "description": "Доступ дозволений, доки власник не вирішить інакше"
+                    },
+                    "private": {
+                        "title": "Приватний",
+                        "description": "Доступ дозволений лише за персональним дозволом власника"
+                    },
+                    "designated": {
+                        "title": "Зазначений",
+                        "description": "Доступ дозволений відповідними знаками чи на законодавчому рівні"
+                    },
+                    "destination": {
+                        "title": "До місця призначення",
+                        "description": "Доступ дозволений тільки для того, щоб дістатись місця призначення"
+                    }
+                }
             },
             "address": {
                 "label": "Адреса",
                 "placeholders": {
-                    "housename": "Назвабудинку",
+                    "housename": "Назва будинку",
                     "number": "Номер",
                     "street": "Вулиця",
                     "city": "Місто"
@@ -415,6 +448,9 @@ locale.uk = {
             "landuse": {
                 "label": "Тип"
             },
+            "lanes": {
+                "label": "Смуги"
+            },
             "layer": {
                 "label": "Шар"
             },
@@ -456,6 +492,12 @@ locale.uk = {
             },
             "operator": {
                 "label": "Оператор"
+            },
+            "park_ride": {
+                "label": "Перехоплююча стоянка"
+            },
+            "parking": {
+                "label": "Тип"
             },
             "phone": {
                 "label": "Телефон"
@@ -508,10 +550,16 @@ locale.uk = {
                     "cutting": "Виїмка"
                 }
             },
+            "supervised": {
+                "label": "Під наглядом"
+            },
             "surface": {
                 "label": "Поверхня"
             },
             "tourism": {
+                "label": "Тип"
+            },
+            "tracktype": {
                 "label": "Тип"
             },
             "water": {
@@ -1010,14 +1058,23 @@ locale.uk = {
             "place": {
                 "name": "Місцевість"
             },
+            "place/city": {
+                "name": "Місто"
+            },
             "place/hamlet": {
                 "name": "Хутір"
             },
             "place/island": {
                 "name": "Острів"
             },
+            "place/isolated_dwelling": {
+                "name": "Відокремлене житло"
+            },
             "place/locality": {
                 "name": "Місцевість"
+            },
+            "place/town": {
+                "name": "Місто"
             },
             "place/village": {
                 "name": "Село"

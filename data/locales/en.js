@@ -385,6 +385,16 @@ locale.en = {
             "capacity": {
                 "label": "Capacity"
             },
+            "cardinal_direction": {
+                "label": "Direction"
+            },
+            "clock_direction": {
+                "label": "Direction",
+                "options": {
+                    "clockwise": "Clockwise",
+                    "anticlockwise": "Counterclockwise"
+                }
+            },
             "collection_times": {
                 "label": "Collection Times"
             },
@@ -845,8 +855,16 @@ locale.en = {
                 "name": "Foot Path",
                 "terms": "beaten path,boulevard,clearing,course,cut*,drag*,footpath,highway,lane,line,orbit,passage,pathway,rail,rails,road,roadway,route,street,thoroughfare,trackway,trail,trajectory,walk"
             },
+            "highway/mini_roundabout": {
+                "name": "Mini-Roundabout",
+                "terms": ""
+            },
             "highway/motorway": {
                 "name": "Motorway",
+                "terms": ""
+            },
+            "highway/motorway_junction": {
+                "name": "Motorway Junction",
                 "terms": ""
             },
             "highway/motorway_link": {

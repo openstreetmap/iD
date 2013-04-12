@@ -1,0 +1,22 @@
+{
+    "key": "direction",
+    "type": "combo",
+    "options": [
+        "N",
+        "E",
+        "S",
+        "W",
+        "NE",
+        "SE",
+        "SW",
+        "NNE",
+        "ENE",
+        "ESE",
+        "SSE",
+        "SSW",
+        "WSW",
+        "WNW",
+        "NNW"
+    ],
+    "label": "Direction"
+}

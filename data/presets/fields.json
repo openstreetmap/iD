@@ -118,6 +118,43 @@
         "type": "text",
         "label": "Capacity"
     },
+    "cardinal_direction": {
+        "key": "direction",
+        "type": "combo",
+        "options": [
+            "N",
+            "E",
+            "S",
+            "W",
+            "NE",
+            "SE",
+            "SW",
+            "NNE",
+            "ENE",
+            "ESE",
+            "SSE",
+            "SSW",
+            "WSW",
+            "WNW",
+            "NNW"
+        ],
+        "label": "Direction"
+    },
+    "clock_direction": {
+        "key": "direction",
+        "type": "combo",
+        "options": [
+            "clockwise",
+            "anticlockwise"
+        ],
+        "label": "Direction",
+        "strings": {
+            "options": {
+                "clockwise": "Clockwise",
+                "anticlockwise": "Counterclockwise"
+            }
+        }
+    },
     "collection_times": {
         "key": "collection_times",
         "type": "text",

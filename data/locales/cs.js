@@ -234,6 +234,7 @@ locale.cs = {
     "splash": {
         "welcome": "Vítá vás iD, program pro editaci OpenStreetMap",
         "text": "iD je uživatelsky přátelský, ale silný nástroj pro editaci nejrozsáhlejší svobodné mapy světa. Toto je vývojová verze {version}. Více informací na {website}, chybová hlášení na {github}.",
+        "walkthrough": "Prohlídka editoru",
         "start": "Začít s editací"
     },
     "source_switch": {
@@ -268,7 +269,8 @@ locale.cs = {
         "help": "# Pomoc\n\nToto je editor [OpenStreetMap](http://www.openstreetmap.org/), svobodné a otevřené mapy světa, vytvářené jako open-source a open-data. S pomocí editoru můžete přidávat a upravovat data v mapě třeba ve svém okolí, a zlepšovat tak celou mapu pro každého.\n\nVaše úpravy mapy budou viditelné každým, kdo používá OpenStreetMap. Je ovšem třeba mít uživatelský účet na OpenStreetMap, který si můžete [snadno a zdarma zřídit](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je projekt vytvářený spoluprácí více lidí, se [zdrojovým kódem na GitHubu](https://github.com/systemed/iD).\n",
         "editing_saving": "# Editace a publikace\n\nTento editor pracuje primárně online - právě teď k němu přistupujete prostřednictvím webové stránky.\n\n### Výběr objektů\n\nChcete-li vybrat objekt, jako třeba silnici nebo obchod, klikněte na něj v mapě. Objekt se takto označí, otevře se boční panel s vlastnostmi objektu a zobrazí se nabídka akcemi, které lze s objektem provést.\n\nMůžete označit a pracovat s několika objekty najednou: podržte klávesu 'Shift', klikněte na mapu a táhněte myší či prstem. Takto se označí všechny objekty uvnitř příslušného obdélníku - a můžete pracovat se všemi najednou.\n\n### Publikace změn\n\nKdyž provedete nějaké úpravy objektů v mapě, úpravy jsou uloženy lokálně ve vašem prohlížeči. Nebojte se, když uděláte chybu - úpravy lze vrátit zpět tlačítkem Zpět, a naopak je znovu provést tlačítkem Znovu.\n\nPo dokončení bloku úprav klikněte na 'Uložit' - například když jste upravili jednu část města, a chcete začít úpravy někde jinde. Zobrazí se přehled úprav, které jste provedli, editor tyto úpravy zkontroluje, a když se mu něco nebude zdát, zobrazí varování a návrhy.\n\nKdyž bude všechno v pořádku, můžete přidat krátký komentář s vysvětlením vašich úprav a kliknout znovu 'Uložit'. Úpravy se tímto publikují na [OpenStreetMap.org](http://www.openstreetmap.org/), kde za chvíli budou viditelné pro všechny uživatele a bude na nich možné provádět další úpravy.\n\nPokud nechcete nebo nemůžete pravy dokončit teď, stačí prostě odejít ze stránky pryč. Až příště navštívíte stránku (na stejném počítači, ve stejném prohlížeči), editor vám nabídne možnost znovu načíst neuložené úpravy.\n",
         "gps": "# GPS\n\nData z GPS jsou nejdůvěryhodnějším zdrojem informací pro OpenStreetMap. Tento editor podporuje zobrazení tras ve formátu `.gpx` nahrané z vašeho počítače. Takovou trasu můžete nasbírat s pomocí nejrůznějších aplikací pro mobily nebo s pomocí specializované navigace.\n\nPro více informací, jak provést takový sběr dat z GPS, viz např. návod anglicky:\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPokud už máte záznam ve formátu GPX, přetáhněte soubor myší či prstem nad editor. Rozpozná-li editor formát souboru, zobrazí se trasa v mapě jako světle zelená čára. Pokud chcete tuto novou vrstvu zapnout, vypnout nebo zvětšit na velikost pracovní plochy, klikněte na menu 'Nastavení pozadí' na levé straně.\n\nTrasa GPX nebude přímo nahrána na OpenStreetMap - pouze slouží jako vodítko, podle kterého se můžete orientovat, a podle kterého můžete kreslit nové objekty do mapy.\n",
-        "imagery": "# Podkladové snímky\n\nSatelitní a letecké snímky jsou důležitým zdrojem mapových dat. V menu 'Nastavení pozadí' na levé straně editoru je k dispozici kombinace leteckých snímků, satelitních snímků a dalších volně dostupných podkladů.\n\nImplicitní vrstvou jsou satelitní snímky [Bing](http://www.bing.com/maps/), ale jakmile se přesunete do konkrétní geografické oblasti a nastavíte dostatečné zvětšení, nabídnou se vám nové mapové podklady. V některých státech, jako jsou Spojené státy, Francie či Dánskou, jsou k dispozici snímky ve vysoké kvalitě. Pro velkou část České republiky jsou také dostupné velmi detailní satelitní snímky (data z katastru nemovitostí zatím editor nepodporuje).\n\nPodklady jsou někdy posunuté vůči mapě, kvůli chybám na straně poskytovatele snímů. Pokud uvidíte, že je mnoho cest v mapě posunuto vůči pozadí, nesnažte se je přesunout - posun obvykle znamená chybu v podkladu a ne chybu v mapě. V menu 'Nastavení pozadí' klikněte na 'Zarovnat pozadí' - to vám dovolí posunout podklad, aby lícoval s mapou.\n"
+        "imagery": "# Podkladové snímky\n\nSatelitní a letecké snímky jsou důležitým zdrojem mapových dat. V menu 'Nastavení pozadí' na levé straně editoru je k dispozici kombinace leteckých snímků, satelitních snímků a dalších volně dostupných podkladů.\n\nImplicitní vrstvou jsou satelitní snímky [Bing](http://www.bing.com/maps/), ale jakmile se přesunete do konkrétní geografické oblasti a nastavíte dostatečné zvětšení, nabídnou se vám nové mapové podklady. V některých státech, jako jsou Spojené státy, Francie či Dánskou, jsou k dispozici snímky ve vysoké kvalitě. Pro velkou část České republiky jsou také dostupné velmi detailní satelitní snímky (data z katastru nemovitostí zatím editor nepodporuje).\n\nPodklady jsou někdy posunuté vůči mapě, kvůli chybám na straně poskytovatele snímů. Pokud uvidíte, že je mnoho cest v mapě posunuto vůči pozadí, nesnažte se je přesunout - posun obvykle znamená chybu v podkladu a ne chybu v mapě. V menu 'Nastavení pozadí' klikněte na 'Zarovnat pozadí' - to vám dovolí posunout podklad, aby lícoval s mapou.\n",
+        "addresses": "# Adresy\n\nJednou z nejužitečnějších součástí mapy jsou adresy.\n\nAdresy jsou sice někdy chápány jako označení kousku ulice, ale v OpenStreetMap jsou uloženy v budovách či objektech podél ulice. V České republice jsou adresy většinou samostatným uzlem uvnitř budovy.\n\nMůžete tedy data o adrese vkládat jak k samostatnému bodu, tak k ploše označující budovu.\nNejlepším zdrojem informací o adresách je průzkum přímo v terénu či jeho dobrá znalost - stejně jako u celého projektu OpenStreetMap je přebírání dat z komerčních zdrojů typu Google Maps přísně zakázáno.\n"
     },
     "intro": {
         "startediting": {
@@ -279,7 +281,40 @@ locale.cs = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Přístup"
+                "label": "Přístup",
+                "types": {
+                    "access": "Všem",
+                    "foot": "Pěší",
+                    "motor_vehicle": "Motorová vozidla",
+                    "bicycle": "Jízdní kola",
+                    "horse": "Koně"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Povolen",
+                        "description": "Přístup oficiálně, ze zákona povolen"
+                    },
+                    "no": {
+                        "title": "Zakázán",
+                        "description": "Přístup širší veřejnosti zakázán"
+                    },
+                    "permissive": {
+                        "title": "Do odvolání",
+                        "description": "Vstup je povolen do té doby, než majitel povolení zruší"
+                    },
+                    "private": {
+                        "title": "Soukromé",
+                        "description": "Přístup je povolen jen s individuálním svolením majitele"
+                    },
+                    "designated": {
+                        "title": "Explicitně povolen",
+                        "description": "Přístup je povolen podle značení či místních předpisů"
+                    },
+                    "destination": {
+                        "title": "Jen do místa",
+                        "description": "Průjezd zakázán, průchod zakázán apod."
+                    }
+                }
             },
             "address": {
                 "label": "Adresa",
@@ -366,11 +401,15 @@ locale.cs = {
                 "label": "Přístup k internetu",
                 "options": {
                     "wlan": "Wifi",
+                    "wired": "Přes kabel",
                     "terminal": "Terminál"
                 }
             },
             "landuse": {
                 "label": "Typ"
+            },
+            "lanes": {
+                "label": "Pruhů"
             },
             "layer": {
                 "label": "Vrstva"
@@ -413,6 +452,12 @@ locale.cs = {
             },
             "operator": {
                 "label": "Provozovatel"
+            },
+            "park_ride": {
+                "label": "Parkoviště P+R"
+            },
+            "parking": {
+                "label": "Typ"
             },
             "phone": {
                 "label": "Telefon"
@@ -461,8 +506,12 @@ locale.cs = {
                 "options": {
                     "bridge": "Most",
                     "tunnel": "Tunel",
-                    "embankment": "Násep"
+                    "embankment": "Násep",
+                    "cutting": "Zářez"
                 }
+            },
+            "supervised": {
+                "label": "Hlídané"
             },
             "surface": {
                 "label": "Povrch"
@@ -500,10 +549,12 @@ locale.cs = {
                 "name": "Přistávací dráha"
             },
             "aeroway/aerodrome": {
-                "name": "Letiště"
+                "name": "Letiště",
+                "terms": "letadlo,letiště,přistávací dráha"
             },
             "aeroway/helipad": {
-                "name": "Helipor"
+                "name": "Helipor",
+                "terms": "vrtulník,helikoptéra,heliport"
             },
             "amenity": {
                 "name": "Zařízení"
@@ -524,10 +575,12 @@ locale.cs = {
                 "name": "Půjčovna kol"
             },
             "amenity/cafe": {
-                "name": "Kavárna"
+                "name": "Kavárna",
+                "terms": "káva,kafe,kavárna,čaj,čajovna"
             },
             "amenity/cinema": {
-                "name": "Kino"
+                "name": "Kino",
+                "terms": "kino,film,cinema,multikino,bio,biograf,kinematograf"
             },
             "amenity/courthouse": {
                 "name": "Soud"
@@ -548,7 +601,8 @@ locale.cs = {
                 "name": "Pohřebiště"
             },
             "amenity/hospital": {
-                "name": "Nemocnice"
+                "name": "Nemocnice",
+                "terms": "nemocnice,klinika,špitál,středisko,hospic,LDN,sanatorium,nemocniční,lazaret,ambulance,poliklinika,pohotovost"
             },
             "amenity/library": {
                 "name": "Knihovna"
@@ -563,22 +617,28 @@ locale.cs = {
                 "name": "Lékárna"
             },
             "amenity/place_of_worship": {
-                "name": "Chrám"
+                "name": "Chrám",
+                "terms": "křesťanský,křesťanství,kostel,kostelík,chrám,bazilika,katedrála,kaple,kaplička,chrám páně,rotunda,farnost,diecéze,mešita,minaret,synagoga,pagoda,stúpa,oratorium,motlitebna,náboženský,náboženská,náboženské,sakrální,svatyně"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kostel"
+                "name": "Kostel",
+                "terms": "křesťanský,křesťanství,kostel,kostelík,chrám,bazilika,katedrála,kaple,kaplička,chrám páně,rotunda,farnost,diecéze"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Synagoga"
+                "name": "Synagoga",
+                "terms": "synagoga,židovský,židovská,židovské"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mešita"
+                "name": "Mešita",
+                "terms": "mešita,islám,muslim,muslimský,muslimská,muslimské"
             },
             "amenity/police": {
-                "name": "Policie"
+                "name": "Policie",
+                "terms": "policie,strážníci,stráž,hlídka,městská policie,státní policie,vojenská policie,esenbé,esenbáci,SNB,veřejná bezpečnost,šerif,policista,interpol"
             },
             "amenity/post_box": {
-                "name": "Poštovní schránka"
+                "name": "Poštovní schránka",
+                "terms": "schránka,poštovní schránka,schránka na dopisy"
             },
             "amenity/post_office": {
                 "name": "Pošta"
@@ -587,10 +647,12 @@ locale.cs = {
                 "name": "Hospoda"
             },
             "amenity/restaurant": {
-                "name": "Restaurace"
+                "name": "Restaurace",
+                "terms": "bar,jídelna,kantýna,bistro,bufet,rychlé občerstvení,fast food,hamburger,restaurace,restaurant,hostinec,pohostinství,gastronomie,občerstvení,stánek,jídlo,obědy,gril,pizzeria,čína,kebab"
             },
             "amenity/school": {
-                "name": "Škola"
+                "name": "Škola",
+                "terms": "univerzita,universita,fakulta,vysoká škola,univerzitní,universitní,katedra,ústav,college"
             },
             "amenity/swimming_pool": {
                 "name": "Plavecký bazén"
@@ -599,13 +661,15 @@ locale.cs = {
                 "name": "Telefon"
             },
             "amenity/theatre": {
-                "name": "Divadlo"
+                "name": "Divadlo",
+                "terms": "divadlo,divadelní,představení,muzikál"
             },
             "amenity/toilets": {
                 "name": "Záchodky"
             },
             "amenity/townhall": {
-                "name": "Radnice"
+                "name": "Radnice",
+                "terms": "radnice,místní správa,obecní správa,obecní úřad"
             },
             "amenity/university": {
                 "name": "Univerzita"
@@ -683,19 +747,22 @@ locale.cs = {
                 "name": "Silnice"
             },
             "highway/bridleway": {
-                "name": "Stezka pro koně"
+                "name": "Jezdecká stezka",
+                "terms": "jezdecká stezka,jezdecká trasa,stezka pro jezdce,stezka pro koně,koňská stezka"
             },
             "highway/bus_stop": {
                 "name": "Autobusová zastávka"
             },
             "highway/crossing": {
-                "name": "Přechod"
+                "name": "Přechod",
+                "terms": "přechod,zebra"
             },
             "highway/cycleway": {
                 "name": "Cyklostezka"
             },
             "highway/footway": {
-                "name": "Pěšina"
+                "name": "Pěšina",
+                "terms": "cesta,silnice,ulice,ulička,chodník,třída,bulvár,avenue,pasáž,stezka,trasa,trať,magistrála,radiála,pěšina"
             },
             "highway/motorway": {
                 "name": "Dálnice"
@@ -728,7 +795,8 @@ locale.cs = {
                 "name": "Účelová komunikace, příjezd"
             },
             "highway/steps": {
-                "name": "Schody"
+                "name": "Schody",
+                "terms": "schody,schodiště"
             },
             "highway/tertiary": {
                 "name": "Silnice 3. třídy"
@@ -740,7 +808,8 @@ locale.cs = {
                 "name": "Polní, lesní cesta"
             },
             "highway/traffic_signals": {
-                "name": "Semafory"
+                "name": "Semafory",
+                "terms": "světla,semafor,dopravní signalizace"
             },
             "highway/trunk": {
                 "name": "Víceproudá silnice"
@@ -842,7 +911,8 @@ locale.cs = {
                 "name": "Přístaviště"
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "les,prales,louka,trávník,park,hřiště,parčík,zeleň,lesní,strom,křoví"
             },
             "leisure/pitch": {
                 "name": "Hřiště"
@@ -887,7 +957,8 @@ locale.cs = {
                 "name": "Triangulační bod"
             },
             "man_made/wastewater_plant": {
-                "name": "Čistička odpadních vod"
+                "name": "Čistička odpadních vod",
+                "terms": "čistírna,čistička,čistírna odpadních vod,ČOV,čovka"
             },
             "man_made/water_tower": {
                 "name": "Vodárenská věž"
@@ -908,7 +979,8 @@ locale.cs = {
                 "name": "Útes"
             },
             "natural/coastline": {
-                "name": "Pobřeží"
+                "name": "Pobřeží",
+                "terms": "pobřeží,břeh,nábřeží"
             },
             "natural/glacier": {
                 "name": "Ledove"
@@ -920,7 +992,8 @@ locale.cs = {
                 "name": "Vřesoviště"
             },
             "natural/peak": {
-                "name": "Vrchol"
+                "name": "Vrchol",
+                "terms": "hora,vrch,vrchol,vrcholek,kopec,kopeček,kóta,mont,mount,pik"
             },
             "natural/scrub": {
                 "name": "Křoví"
@@ -938,7 +1011,8 @@ locale.cs = {
                 "name": "Jezero"
             },
             "natural/water/pond": {
-                "name": "Rybník"
+                "name": "Rybník",
+                "terms": "jezero,jezírko,pleso,oko,tůň"
             },
             "natural/water/reservoir": {
                 "name": "Přehrada"
@@ -961,14 +1035,24 @@ locale.cs = {
             "place": {
                 "name": "Místo"
             },
+            "place/city": {
+                "name": "Velkoměsto"
+            },
             "place/hamlet": {
-                "name": "Chata"
+                "name": "Vesnička"
             },
             "place/island": {
-                "name": "Ostro"
+                "name": "Ostro",
+                "terms": "ostrov,ostrůvek,souostroví,archipel,atol,útes"
+            },
+            "place/isolated_dwelling": {
+                "name": "Samota"
             },
             "place/locality": {
-                "name": "Jiné místo"
+                "name": "Neobydlené místo"
+            },
+            "place/town": {
+                "name": "Město"
             },
             "place/village": {
                 "name": "Vesnice"
@@ -1004,7 +1088,8 @@ locale.cs = {
                 "name": "Nepoužívaná železnice"
             },
             "railway/level_crossing": {
-                "name": "Úrovňové křížení"
+                "name": "Úrovňové křížení",
+                "terms": "přejezd,železniční přejezd,přejezd přes koleje,přejezd přes železnici,přejezd přes vlak,vlakový přejezd"
             },
             "railway/monorail": {
                 "name": "Jednokolejka"
@@ -1022,7 +1107,8 @@ locale.cs = {
                 "name": "Vstup do metra"
             },
             "railway/tram": {
-                "name": "Tramvaj"
+                "name": "Tramvaj",
+                "terms": "tramvaj,tranvaj,šalina,šmirgl,tramvajka,elektrika,električka,tram"
             },
             "shop": {
                 "name": "Obchod"
@@ -1102,6 +1188,9 @@ locale.cs = {
             "shop/garden_centre": {
                 "name": "Zahradnictví"
             },
+            "shop/gift": {
+                "name": "Dárky, suvenýry"
+            },
             "shop/greengrocer": {
                 "name": "Ovoce a zelenina"
             },
@@ -1157,7 +1246,8 @@ locale.cs = {
                 "name": "Kancelářské potřeby"
             },
             "shop/supermarket": {
-                "name": "Supermarket"
+                "name": "Supermarket",
+                "terms": "obchod,market,supermarket,butik,bazar,řetězec,hypermarket,diskont,diskontní,bleší trh,trh,tržiště,outlet,obchodní,centrum,nákupní,obchodní dům,večerka,prodejní"
             },
             "shop/toys": {
                 "name": "Hračkářství"
@@ -1170,6 +1260,9 @@ locale.cs = {
             },
             "shop/vacant": {
                 "name": "Neobsazený obchod"
+            },
+            "shop/variety_store": {
+                "name": "Laciné zboží"
             },
             "shop/video": {
                 "name": "Video obchod"
@@ -1196,7 +1289,8 @@ locale.cs = {
                 "name": "Horská bouda"
             },
             "tourism/guest_house": {
-                "name": "Penzion"
+                "name": "Penzion",
+                "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
             },
             "tourism/hostel": {
                 "name": "Hostel"
@@ -1211,7 +1305,8 @@ locale.cs = {
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Muzeum"
+                "name": "Muzeum",
+                "terms": "knihovna,galerie,výstavní,muzeum,repozitář,depozitář,archiv,sklad,lapidárium"
             },
             "tourism/picnic_site": {
                 "name": "Místo pro piknik"
@@ -1241,13 +1336,15 @@ locale.cs = {
                 "name": "Odvodňovací strouha"
             },
             "waterway/river": {
-                "name": "Řeka"
+                "name": "Řeka",
+                "terms": "potok,potůček,strouha,říčka,přítok,koryto"
             },
             "waterway/riverbank": {
                 "name": "Břeh řeky"
             },
             "waterway/stream": {
-                "name": "Potok"
+                "name": "Potok",
+                "terms": "potok,potůček,strouha,tok,říčka,přítok,koryto,řeka,proud,vír,odtok,příliv,odliv"
             },
             "waterway/weir": {
                 "name": "Jez"

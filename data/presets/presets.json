@@ -1217,6 +1217,18 @@
         },
         "name": "Foot Path"
     },
+    "highway/mini_roundabout": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "mini_roundabout"
+        },
+        "fields": [
+            "clock_direction"
+        ],
+        "name": "Mini-Roundabout"
+    },
     "highway/motorway": {
         "icon": "highway-motorway",
         "fields": [
@@ -1236,6 +1248,18 @@
         },
         "terms": [],
         "name": "Motorway"
+    },
+    "highway/motorway_junction": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "motorway_junction"
+        },
+        "fields": [
+            "ref"
+        ],
+        "name": "Motorway Junction"
     },
     "highway/motorway_link": {
         "icon": "highway-motorway-link",

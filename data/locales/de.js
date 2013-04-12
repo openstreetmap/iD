@@ -28,6 +28,12 @@ locale.de = {
         "browse": {
             "title": "Navigation",
             "description": "Verschieben und Vergrößern/Verkleinern des Kartenausschnitts."
+        },
+        "draw_area": {
+            "tail": "Klicke, um Punkte zur Fläche hinzuzufügen. Klicke auf den ersten Punkt, um die Fläche abzuschließen."
+        },
+        "draw_line": {
+            "tail": "Klicke, um mehr Punkte zur Linie hizuzufügen. Klicke auf eine andere Linie, um die Linien zu verbinden und klicke doppelt, um die Linie zu beenden."
         }
     },
     "operations": {
@@ -144,7 +150,9 @@ locale.de = {
         "split": {
             "title": "Teilen",
             "description": {
-                "area": "Die Gebietsgrenze teilen."
+                "line": "Die Linie an diesem Punkt teilen.",
+                "area": "Die Gebietsgrenze teilen.",
+                "multiple": "Die Linie/Gebietsgrenze an diesem Punkt teilen."
             },
             "key": "X",
             "annotation": {
@@ -168,6 +176,7 @@ locale.de = {
     "commit": {
         "title": "Änderungen speichern",
         "description_placeholder": "Eine kurze Beschreibung deiner Beiträge",
+        "message_label": "Änderungskommentar",
         "upload_explanation": "Änderungen, die du als {user} hochlädst werden sichtbar auf allen Karte, die OpenStreetMap nutzen.",
         "save": "Speichern",
         "cancel": "Abbrechen",
@@ -193,10 +202,12 @@ locale.de = {
         "no_documentation_key": "Für dises Schlüsselwort ist keine Dokumentation verfügbar",
         "show_more": "Zeige mehr",
         "new_tag": "Neues Attribut",
+        "view_on_osm": "Auf openstreetmap.org ansehen",
         "editing_feature": "In Bearbeitung {feature}",
         "additional": "Weitere Merkmale",
         "choose": "Eigenschafts-Typ auswählen",
         "results": "{n} Resultate für {search}",
+        "reference": "In der OpenSteetMap Wiki anschauen",
         "back_tooltip": "Eigenschafts-Typ ändern"
     },
     "background": {
@@ -237,6 +248,7 @@ locale.de = {
         "used_with": "benutzt mit {type}"
     },
     "validations": {
+        "untagged_point": "Punkt ohne Attribute",
         "untagged_line": "Linie ohne Attribute",
         "untagged_area": "Fläche ohne Attribute",
         "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
@@ -247,12 +259,18 @@ locale.de = {
         "in": "Hineinzoomen",
         "out": "Herauszoomen"
     },
+    "cannot_zoom": "Es kann im aktuellen Modus nicht weiter herausgezoomt werden.",
     "gpx": {
         "local_layer": "Lokale GPX-Datei",
         "drag_drop": "Eine GPX-Datei per Drag & Drop auf die Seite ziehen"
     },
     "help": {
-        "title": "Hilfe"
+        "title": "Hilfe",
+        "help": "#Hilfe\n\nDies ist ein Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und editierbaren Weltkarte. Du kannst ihn verwenden um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so die Karte für jeden verbessern.\n\nVeränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du einen [kostenloses OpenStreetMap Profil](https://www.openstreetmap.org/user/new) anlegen.\n\nDer [iD editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt dessem [Quellcode\nauf GitHub verfügbar ist](https://github.com/systemed/iD).\n\n",
+        "editing_saving": "# Editieren & Speichern\n\nDieser Editor wurde entworfen um online zu arbeiten und du erreichst ihn über diese Webseite.\n\n###Objekte auswählen\n\nUm ein Kartenobjekt, wie eine Straße oder ein Sonderziel (POI) auszuwählen, klicke auf der Karte darauf. Dadurch wird das Objekt hervorgehoben und ein Bedienfeld mit Details und Möglichkeiten zur Veränderung aufgerufen. \n\nMehrere Objekte kannst du auswählen indem du die Shift-taste (Umschaltaste) drückst und die Objekte einzeln anklickst oder klickst und einen Rahmen drumherum ziehst.\nDas erlaubt die Veränderungen für mehrere Objekte gleichzeitig zu machen.\n\n### Speichern der Änderungen\n\nWenn du Veränderungen an einer Straße, eines Gebäudes oder einem Platz vorgenommen hast, sind diese lokal gespeichert, bis du sie auf dem Server speicherst, Keine Sorge falls du einen Fehler machen solltest. Du kannst Änderungen jederzeit über den Rückgängig-Knopf\nrückgängig machen, oder über den Wiederherstellen-Knopf noch einmal ausführen.\n\nKlicke auf \"Speichern\" um eine Gruppe von Veränderungen zu speichern. Zum Beispiel, wenn\ndu wenn du in einem Stadtteil fertig bist und in einer neuen Gegend etwas verändern willst.\nDu bekommst dann die Möglichkeiten noch einmal nachvollziehen zu können, was du gerade getan hast und der Editor zeigt dir nützliche Hinweise oder mögliche Fehler, wenn etwas nicht in Ordnung zu sein scheint.\n\nWenn alles gut aussieht kannst du einen kurzen Kommentar schreiben, der erklärt, was du gemacht hast. Drücke nun \"Speicher\" um die Änderungen auf dem Server zu speichern.\nNun können es alle auf [OpenStreetMap.org](http://www.openstreetmap.org/) sehen und darauf aufbauen.\n\nWenn du es zeitlich nicht schaffst, kannst du das Editor Fenster einfach schließen und wenn du  die Seite wieder aufrufst, (gleicher Browser und Computer) wird die angeboten die letzte Sitzung wieder herzustellen. \n",
+        "gps": "# GPS\n\nGPS Daten sind die vertrauenswürdigste Quelle für OpenStreetMap.\nDieser Editor unterstützt Lokale GPS-Spuren - \".gpx\" Datein auf deinem Computer. \nDu kannst diese GPS-Spuren mit Hilfe diverser Smartphone Apps oder anderen GPS Geräten aufnehmen.\n\nFür Informationen über das sammeln von GPS Daten kannst du dir folgende Anleitung durchlesen: [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/) (bis jetzt nur auf Englisch)\n\nUm GPX Tracks zu verwenden, ziehe sie einfach in den Karteneditor.\nWenn er erkannt wurde, wird dieser Track als leuchtend grüne Linie auf der Karte dargestellt.\nKlicke auf \"Hintergrundeinstellungen\", um sie zu deaktivieren und zu aktivieren, oder zum Gebiet des Tracks zu gelangen (Lupe).\n\nDer GPX Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen. Am besten verwendest du ihn um neue Wege hinzuzufügen. \nMöchtest du den GPX Track jedem zugänglich machen, kannst du ihn über [Track-Upload-Seite](http://www.openstreetmap.org/trace/create) hochladen.\n",
+        "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das \"Hintergrundeinstellungen\"- Menü auf der Linken Seite verfügbar. \n\nAls Standard ist der [Bing Maps](http://www.bing.com/maps/) Satelliten-Layer ausgewählt. Je nach Gegenden werden dir verschiedene andere Quellen angezeigt.\nEinige Länder wie den USA, Frankreich, Deutschland und Dänemark stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. \nWenn du feststellst, dass viele  Straßen gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen, sondern das Luftbild, bis sie übereinstimmen. Um das Luftbid zu korrigieren klickte auf \"Fehlerhafte Ausrichtung korrigieren\" in den Hintergrundeinstellungen.\n\n",
+        "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen auf einer Karte.\n\nObwohl Adressen oft als Teil einer Straße repräsentiert werden, werden sie in OpenStreetMap  als Attribute von Gebäuden oder Objekten neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. Adressen musst du über eine Stadtbegehung oder dein eigenes Wissen herausfinden, da die Nutzung kommerzieller Quellen wie Google Maps strikt verboten ist.\n"
     },
     "intro": {
         "navigation": {
@@ -276,6 +294,7 @@ locale.de = {
         "areas": {
             "add": "Gebiete sind eine Möglichkeit, Objekte detailliert wiederzugeben. Diese bieten Information über die Grenzen des Objektes. Gebiete können fast immer da verwendet werden, wo auch Knoten Verwendung finden, werden aber oft bevorzugt. **Benutze den Gebiets-Button, um ein neues Gebiet hinzuzufügen.**",
             "corner": "Flächen werden gezeichnet, indem man Punkte platziert, die den Umriss der Fläche repräsentieren. **Setze den Startpunkt auf eine Ecke des Spielplatzes**",
+            "place": "Zeichne eine Fläche indem du mehr Punkte hinzufügst. Beende die Fläche, indem du auf den Startpunkt klickst. **Zeichne eine Fläche für den Spielplatz.**",
             "search": "**Suche nach Spieplatz**",
             "choose": "**Wähle \"Spielplatz\" aus der Liste aus.**",
             "describe": "**Füge einen Namen hinzu und schließe den Eigenschaftseditor**"
@@ -283,6 +302,8 @@ locale.de = {
         "lines": {
             "add": "Linien werden verwendet um Sachen wie Straßen, Bahngleise und Flüsse zu erzeugen. **Klicke auf den Linien-Knopf um eine neue Linie zu zeichnen**",
             "start": "**Beginne die Linie, indem du auf das Ende der Straße klickst.**",
+            "intersect": "Klicke um mehr Punkte zu einer Linie hinzuzufügen. Du kannst während des Zeichnens die Karte verschieben. Straßen und andere Wege sind teil eines großen Netzwerk und müssen ordnungsgemäß mit einander verbunden sein, um sie für Routenführung nutzen zu können. **Klicke auf die Flower Street um eine Kreuzung zu erzeugen und beide Linien zu verbinden.**",
+            "finish": "Linien können vollendet werden, indem man den letzten Punkt erneut anklickt **Zeichnen der Straße beenden**",
             "road": "**Wähle eine Straße aus dem Raster**",
             "residential": "Es gibt verschiedene Straßenarten. Die Häufigste davon ist die Wohngebietsstraße. **Wähle die Wohngebietsstraße**",
             "describe": "**Benenne die Straße und schließe den Eigenschaftseditor**",
@@ -297,7 +318,21 @@ locale.de = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Zugang"
+                "label": "Zugang",
+                "types": {
+                    "foot": "zu Fuß",
+                    "motor_vehicle": "Motorfahrzeuge",
+                    "bicycle": "Fahrräder",
+                    "horse": "Pferde"
+                },
+                "options": {
+                    "permissive": {
+                        "description": "Zugang solange gewährt, bis der Besitzer seine Erlaubnis zurück nimmt."
+                    },
+                    "private": {
+                        "title": "Privat"
+                    }
+                }
             },
             "address": {
                 "label": "Adresse",
@@ -381,7 +416,8 @@ locale.de = {
                 "label": "Internetzugang",
                 "options": {
                     "wlan": "Wifi",
-                    "wired": "Kabelgebunden"
+                    "wired": "Kabelgebunden",
+                    "terminal": "Terminal"
                 }
             },
             "landuse": {
@@ -428,6 +464,12 @@ locale.de = {
             },
             "operator": {
                 "label": "Betreiber"
+            },
+            "park_ride": {
+                "label": "Park and Ride"
+            },
+            "parking": {
+                "label": "Typ"
             },
             "phone": {
                 "label": "Telefon"
@@ -480,11 +522,17 @@ locale.de = {
                     "cutting": "Senke"
                 }
             },
+            "supervised": {
+                "label": "überwacht"
+            },
             "surface": {
                 "label": "Oberfläche"
             },
             "tourism": {
                 "label": "Art"
+            },
+            "tracktype": {
+                "label": "Typ"
             },
             "water": {
                 "label": "Art"
@@ -680,6 +728,9 @@ locale.de = {
             "barrier/wall": {
                 "name": "Mauer"
             },
+            "boundary/administrative": {
+                "name": "Administrative Grenze"
+            },
             "building": {
                 "name": "Gebäude"
             },
@@ -688,6 +739,9 @@ locale.de = {
             },
             "building/entrance": {
                 "name": "Eingang"
+            },
+            "building/house": {
+                "name": "Haus"
             },
             "entrance": {
                 "name": "Eingang"
@@ -772,6 +826,9 @@ locale.de = {
             },
             "highway/turning_circle": {
                 "name": "Wendestelle"
+            },
+            "highway/unclassified": {
+                "name": "Nebenstraße"
             },
             "historic": {
                 "name": "Historische Stätte"
@@ -905,6 +962,9 @@ locale.de = {
             "man_made/survey_point": {
                 "name": "Vermessungspunkt"
             },
+            "man_made/wastewater_plant": {
+                "name": "Kläranlage"
+            },
             "man_made/water_tower": {
                 "name": "Wasserturm"
             },
@@ -975,14 +1035,23 @@ locale.de = {
             "place": {
                 "name": "Ort"
             },
+            "place/city": {
+                "name": "Großstadt"
+            },
             "place/hamlet": {
                 "name": "Siedlung"
             },
             "place/island": {
                 "name": "Insel"
             },
+            "place/isolated_dwelling": {
+                "name": "abgelegene Siedlung"
+            },
             "place/locality": {
                 "name": "Ortschaft"
+            },
+            "place/town": {
+                "name": "Kleinstadt"
             },
             "place/village": {
                 "name": "Dorf"
@@ -1026,6 +1095,9 @@ locale.de = {
             },
             "railway/rail": {
                 "name": "Eisenbahn"
+            },
+            "railway/station": {
+                "name": "Bahnhof"
             },
             "railway/subway": {
                 "name": "U-Bahn"

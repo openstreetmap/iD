@@ -28,6 +28,12 @@ locale.da = {
         "browse": {
             "title": "Gennemse",
             "description": "Træk rundt og zoom på kortet."
+        },
+        "draw_area": {
+            "tail": "Klik for at tilføje punkter til dit område. Klik på det første punkt for at færdiggøre området."
+        },
+        "draw_line": {
+            "tail": "Klik her for at tilføje flere punkter til linjen. Klik på andre linjer for at forbinde dem og dobbeltklik for at afslutte linjen."
         }
     },
     "operations": {
@@ -58,6 +64,7 @@ locale.da = {
         "circularize": {
             "title": "Cirkularisere",
             "description": {
+                "line": "Lav denne linje cirkulær.",
                 "area": "Lav dette område rundt."
             },
             "key": "O",
@@ -101,13 +108,16 @@ locale.da = {
             "title": "Afbryd",
             "description": "Afbryd disse veje fra hinanden.",
             "key": "D",
-            "annotation": "Afbryd vejene."
+            "annotation": "Afbryd linjer/områder.",
+            "not_connected": "Der er ikke nok linjer/områder her til at fraklippe."
         },
         "merge": {
             "title": "Flet",
             "description": "Flet disse linjer.",
             "key": "C",
-            "annotation": "Flettede {n} linjer."
+            "annotation": "Flettede {n} linjer.",
+            "not_eligible": "Disse funktioner kan ikke fusioneres.",
+            "not_adjacent": "Disse linjer kan ikke fusioneres da de ikke er forbundet."
         },
         "move": {
             "title": "Flyt",
@@ -119,7 +129,8 @@ locale.da = {
                 "line": "Flyttede en linje.",
                 "area": "Flyttede et område.",
                 "multiple": "Flyttede flere objekter."
-            }
+            },
+            "incomplete_relation": "Disse kortegenskaber kan ikke flyttes, da de ikke er blevet downloadet fuldstændigt."
         },
         "rotate": {
             "title": "Roter",
@@ -138,10 +149,19 @@ locale.da = {
         },
         "split": {
             "title": "Del op",
+            "description": {
+                "line": "Split denne linje i to dele ved dette her punkt.",
+                "area": "Klip grænsen af dette område i to dele.",
+                "multiple": "Split linjerne/områdernes grænser ved dette punkt i to dele."
+            },
             "key": "X",
             "annotation": {
-                "line": "Klip en linje op."
-            }
+                "line": "Klip en linje op.",
+                "area": "Spilt et områdes grænse op.",
+                "multiple": "Split {n} linjer/områder for grænserne."
+            },
+            "not_eligible": "Linje kan ikke splittes op ved deres begyndelse eller ende.",
+            "multiple_ways": "Der er for mange linjer her der kan blive splittet."
         }
     },
     "nothing_to_undo": "Ingenting at fortryde.",
@@ -151,6 +171,7 @@ locale.da = {
     "view_on_osm": "Vis på OSM",
     "zoom_in_edit": "zoom ind for at rette på kortet",
     "logout": "log ud",
+    "loading_auth": "Forbinder til OpenStreetMap...",
     "report_a_bug": "rapportere en fejl",
     "commit": {
         "title": "Gem ændringer",
@@ -181,10 +202,12 @@ locale.da = {
         "no_documentation_key": "Der er ingen dokumentation tilgængelig for denne nøgle",
         "show_more": "Vis mere",
         "new_tag": "Nyt tag",
+        "view_on_osm": "Se på openstreetmap.org",
         "editing_feature": "Redigerer {feature}",
         "additional": "Flere tags",
         "choose": "Vælg funktionstype",
         "results": "{n} resultater for {search}",
+        "reference": "Se på OpenStreetMap Wiki",
         "back_tooltip": "Gem funktionstype"
     },
     "background": {
@@ -216,6 +239,7 @@ locale.da = {
     },
     "source_switch": {
         "live": "live",
+        "lose_changes": "Du har ændringer som ikke er blevet gemt endnu. Ved at skifte kort server vil du miste disse ændringer. Er du sikker på at du vil skifte server?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -224,6 +248,7 @@ locale.da = {
         "used_with": "brugt med {type}"
     },
     "validations": {
+        "untagged_point": "Ej tagget punkt",
         "untagged_line": "Mangler tag på linje",
         "untagged_area": "Mangler tag på område",
         "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
@@ -234,6 +259,7 @@ locale.da = {
         "in": "Zoom ind",
         "out": "Zoom ud"
     },
+    "cannot_zoom": "Kan ikke zoome ud mere.",
     "gpx": {
         "local_layer": "Lokal GPX fil",
         "drag_drop": "Træk og slip en .gpx fil på denne her side"
@@ -242,19 +268,82 @@ locale.da = {
         "title": "Hjælp"
     },
     "intro": {
+        "navigation": {
+            "select": "Kortets objekter kun beskrives på tre måder: ved brug af punkter, linjer eller områder. Alle kortets objekter kan vælges ved at klikke på dem.**Klik på et punkt for at vælge dette.**",
+            "header": "Overskriften viser os kortfunktionstyperne."
+        },
+        "points": {
+            "add": "Punkter kan bruges til at beskrive ting som fx butikker, restauranter og mindesmærker. De markerer en bestemt lokalitet og beskriver hvad der er lige der.**Klik på punktknappen for at tilføje et nyt punkt.**",
+            "place": "Et punkt kan placeres ved at klikke på kortet.**Placerer punktet på toppen af bygningen.**",
+            "search": "Punkter kan repræsenteres på mange måder. Punktet du lige tilføjede var en cafe.**Søg efter 'cafe'**",
+            "choose": "**Vælg cafe fra gitteret.**",
+            "describe": "Punktet er nu markeret som en cafe. Ved at bruge funktionsredigeringsværktøjet kan vi tilføje mere information.**Tilføj et navn**",
+            "close": "Funktionsredigeringsværktøjet  kan lukkes med luk knappen.\n**Luk funktionsredigeringsværktøjet**",
+            "reselect": "Ofte vil punkter allerede findes, men har fejl eller mangler. Vi kan rette i allerede indsatte punkter.**Vælg punktet du lige lavede.**",
+            "fixname": "**Omdøb navnet og luk funktionsredigeringsværktøjet.**",
+            "reselect_delete": "Alle geografiske objekter på kortet kan slettes.**Klik på punktet du har lavet.**",
+            "delete": "Menuen omkring punkter har værktøjer der kan bruges til forskellige operationer inkl. sletning.**Slet punktet.**"
+        },
         "areas": {
-            "search": "**Søg efter baggrund.**",
+            "add": "Områder er en mere detaljeret måde at beskrive kortet. Områder giver information om grænserne til det geografiske område. Områder kan bruges for de fleste typer af punkter og er ofte den bedste måde.**Klik på områdeknappen for at tilføje et nyt område.**",
+            "corner": "Områder indtegnes ved at placere punkter der afgrænser ydre området.**Placerer startpunktet i et af hjørnerne for legepladsen.**",
+            "place": "Indtegn området ved at placere flere punkter. Afslut området ved at klikke på det først indtegnet punkt.**Indtegn legepladsens område.**",
+            "search": "**Søg efter legeplads.**",
             "choose": "**Vælg baggrund fra gitteret.**",
             "describe": "**Tilføj et navn og luk så funktionsværktøjet**"
         },
+        "lines": {
+            "add": "Linjer bruges til at beskrive ting som fx veje, jernbanespor og floder.**Klik på linjeknappen for at tilføje en ny linje.**",
+            "start": "**Start linjen ved at klikke ved enden af en vej**",
+            "finish": "Linjer kan afsluttes ved at klikke på det sidste punkt igen.**Afslut indtegning af vejen.**",
+            "road": "**Vælg vej fra gitteret**",
+            "residential": "Der er mange typer af veje, den mest brugte er villaveje.**Vælg villaveje**",
+            "describe": "**Navngiv vejen og luk funktionsredigeringsværktøjet.**",
+            "restart": "Vejen skal berøre Flower Street."
+        },
         "startediting": {
-            "start": "Start kortlægning"
+            "help": "Mere dokumentation samt denne gennemgang kan ses her.",
+            "save": "Glem ikke regelmæssigt at gemme dine ændringer!",
+            "start": "Start kortlægning!"
         }
     },
     "presets": {
         "fields": {
             "access": {
-                "label": "Adgang"
+                "label": "Adgang",
+                "types": {
+                    "access": "Generelt",
+                    "foot": "Fod",
+                    "motor_vehicle": "Motorkøretøjer",
+                    "bicycle": "Cykler",
+                    "horse": "Heste"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Tilladt",
+                        "description": "Adgang tilladt i følge loven"
+                    },
+                    "no": {
+                        "title": "Forbudt",
+                        "description": "Adgang ikke tilladt for offentligheden"
+                    },
+                    "permissive": {
+                        "title": "Adgang efter tilladelse",
+                        "description": "Adgang tilladt indtil ejer tilbagekalder tilladelsen"
+                    },
+                    "private": {
+                        "title": "Privat",
+                        "description": "Adgang tilladt ved udstedelse af  individuelle  tilladelser fra ejer"
+                    },
+                    "designated": {
+                        "title": "Udpeget til netop dette formål",
+                        "description": "Adgang tilladt iflg. trafikskilte eller lokale bestemmelser"
+                    },
+                    "destination": {
+                        "title": "Destination",
+                        "description": "Ærindekørsel tilladt"
+                    }
+                }
             },
             "address": {
                 "label": "Adresse",
@@ -264,6 +353,9 @@ locale.da = {
                     "street": "Gade",
                     "city": "By"
                 }
+            },
+            "admin_level": {
+                "label": "Administrativt niveau"
             },
             "aeroway": {
                 "label": "Type"
@@ -363,6 +455,9 @@ locale.da = {
             "name": {
                 "label": "Navn"
             },
+            "natural": {
+                "label": "Naturlig"
+            },
             "network": {
                 "label": "Netværk"
             },
@@ -383,6 +478,12 @@ locale.da = {
             },
             "operator": {
                 "label": "Operatør"
+            },
+            "park_ride": {
+                "label": "Park and ride-anlæg"
+            },
+            "parking": {
+                "label": "Type"
             },
             "phone": {
                 "label": "Telefon"
@@ -435,10 +536,16 @@ locale.da = {
                     "cutting": "Udskæring"
                 }
             },
+            "supervised": {
+                "label": "Supervision"
+            },
             "surface": {
                 "label": "Overflade"
             },
             "tourism": {
+                "label": "Type"
+            },
+            "tracktype": {
                 "label": "Type"
             },
             "water": {
@@ -464,6 +571,9 @@ locale.da = {
             }
         },
         "presets": {
+            "aeroway": {
+                "name": "Lufthavnsveje"
+            },
             "aeroway/aerodrome": {
                 "name": "Lufthavn",
                 "terms": "fly,lufthavn,lufthavnsområde"
@@ -472,8 +582,12 @@ locale.da = {
                 "name": "Helikopterlandningsplads",
                 "terms": "helikopter,helipad,helikopterlandsplads"
             },
+            "amenity": {
+                "name": "Faciliteter"
+            },
             "amenity/bank": {
-                "name": "Bank"
+                "name": "Bank",
+                "terms": "kreditfirma,investeringsfirma,investeringsforening,kreditrådgivning"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -492,7 +606,8 @@ locale.da = {
                 "terms": "kaffe,te, kaffebutik"
             },
             "amenity/cinema": {
-                "name": "Biograf"
+                "name": "Biograf",
+                "terms": "storskærm,drive-in-bio,film,bio,biograf,biografteater,film"
             },
             "amenity/courthouse": {
                 "name": "Domstolsbygning"
@@ -513,7 +628,8 @@ locale.da = {
                 "name": "Gravsted"
             },
             "amenity/hospital": {
-                "name": "Hospital"
+                "name": "Hospital",
+                "terms": "klinik, skadestue, sundhedsvæsen, hospice, ambulatorium, institution, plejehjem,ældrebolig,sanatorium,kirurgi"
             },
             "amenity/library": {
                 "name": "Bibliotek"
@@ -528,10 +644,12 @@ locale.da = {
                 "name": "Apotek"
             },
             "amenity/place_of_worship": {
-                "name": "Religiøst tilbedelsessted"
+                "name": "Religiøst tilbedelsessted",
+                "terms": "katedral,kapel, kirke,Guds hus, bedehus,missionshus, moske, sogn,fristed,synagoge,tempel"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kirke"
+                "name": "Kirke",
+                "terms": "katedral,kapel, kirke,Guds hus, bedehus,missionshus, moske, sogn,fristed,synagoge,tempel"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagoge",
@@ -542,7 +660,8 @@ locale.da = {
                 "terms": "muslimsk,moské"
             },
             "amenity/police": {
-                "name": "Politi"
+                "name": "Politi",
+                "terms": "spejder,betjent, politikorps, strisser,detektiv, retshåndhævelse,politi"
             },
             "amenity/post_box": {
                 "name": "Postkasse",
@@ -555,10 +674,12 @@ locale.da = {
                 "name": "Værtshus"
             },
             "amenity/restaurant": {
-                "name": "Restaurant"
+                "name": "Restaurant",
+                "terms": "bar, cafeteria, cafe, kantine,kaffebar,spisestue,drive-in, spisested, spisehus,fastfood sted,grill, hamburgerbar,pølsevogn, kro, madpakkerum,natklub,pizzeria, salon,vandingshul"
             },
             "amenity/school": {
-                "name": "Skole"
+                "name": "Skole",
+                "terms": "akademi,kollegium, afdeling, disciplin,fakultet,institut, institution, fængsel*, skole, seminarium, universitet"
             },
             "amenity/swimming_pool": {
                 "name": "Svømmebassin"
@@ -574,7 +695,8 @@ locale.da = {
                 "name": "Toiletter"
             },
             "amenity/townhall": {
-                "name": "Rådhus"
+                "name": "Rådhus",
+                "terms": "medborgerhus,forsamlingshus,rådhus,medborgercenter"
             },
             "amenity/university": {
                 "name": "Universitet"
@@ -612,6 +734,12 @@ locale.da = {
             "barrier/hedge": {
                 "name": "Læhegn"
             },
+            "barrier/lift_gate": {
+                "name": "Løftebom"
+            },
+            "barrier/retaining_wall": {
+                "name": "Stengærde"
+            },
             "barrier/stile": {
                 "name": "Stente"
             },
@@ -620,6 +748,9 @@ locale.da = {
             },
             "barrier/wall": {
                 "name": "Mur"
+            },
+            "boundary/administrative": {
+                "name": "Administrativt grænse"
             },
             "building": {
                 "name": "Bygning"
@@ -630,6 +761,9 @@ locale.da = {
             "building/entrance": {
                 "name": "Indgang"
             },
+            "building/house": {
+                "name": "Hus"
+            },
             "entrance": {
                 "name": "Indgang"
             },
@@ -637,13 +771,15 @@ locale.da = {
                 "name": "Veje"
             },
             "highway/bridleway": {
-                "name": "Hestesti"
+                "name": "Hestesti",
+                "terms": "ridesti, ridning sti,hestesti"
             },
             "highway/bus_stop": {
                 "name": "Busstoppested"
             },
             "highway/crossing": {
-                "name": "Kryds"
+                "name": "Kryds",
+                "terms": "fodgængerovergang"
             },
             "highway/cycleway": {
                 "name": "Cykelsti"
@@ -654,6 +790,10 @@ locale.da = {
             "highway/motorway": {
                 "name": "Motorvej"
             },
+            "highway/motorway_link": {
+                "name": "Motorvejsafkørsel",
+                "terms": "rampe, tilkørelsesrampe, afkørelsesrampe"
+            },
             "highway/path": {
                 "name": "Sti"
             },
@@ -661,6 +801,7 @@ locale.da = {
                 "name": "Primærvej"
             },
             "highway/primary_link": {
+                "name": "Primærvej",
                 "terms": "rampe, påkørelsesrampe, afkørelsesrampe"
             },
             "highway/residential": {
@@ -680,12 +821,14 @@ locale.da = {
                 "name": "Servicevej"
             },
             "highway/steps": {
-                "name": "Trappe"
+                "name": "Trappe",
+                "terms": "trapper,trappe"
             },
             "highway/tertiary": {
                 "name": " Tertiær vej"
             },
             "highway/tertiary_link": {
+                "name": "Afkørsel motortrafikvej",
                 "terms": "ramp,on ramp,off ramp"
             },
             "highway/track": {
@@ -695,7 +838,11 @@ locale.da = {
                 "name": "Trafiksignal",
                 "terms": "lys,stoplys,traffiklys"
             },
+            "highway/trunk": {
+                "name": "Motortrafikvej "
+            },
             "highway/trunk_link": {
+                "name": "Afkørsel motortrafikvej",
                 "terms": "rampe, påkørelsesrampe, afkørelsesrampe"
             },
             "highway/turning_circle": {
@@ -792,7 +939,8 @@ locale.da = {
                 "name": "Lystbådehavn"
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "have,græsplæne,eng,park,rekreativt område,legeplads"
             },
             "leisure/pitch": {
                 "name": "Sportsbane"
@@ -836,8 +984,15 @@ locale.da = {
             "man_made/survey_point": {
                 "name": "Geografisk fixpunkt"
             },
+            "man_made/wastewater_plant": {
+                "name": "Rensningsanlæg ",
+                "terms": "rensningsanlæg, genvindingsanlæg"
+            },
             "man_made/water_tower": {
                 "name": "Vandtårn"
+            },
+            "man_made/water_works": {
+                "name": "Vandforsyning"
             },
             "natural": {
                 "name": "Naturlig"
@@ -882,7 +1037,8 @@ locale.da = {
                 "name": "Sø"
             },
             "natural/water/pond": {
-                "name": "Dam"
+                "name": "Dam",
+                "terms": "mølledam,pool"
             },
             "natural/water/reservoir": {
                 "name": "Reservoir"
@@ -905,14 +1061,24 @@ locale.da = {
             "place": {
                 "name": "Lokalitet"
             },
+            "place/city": {
+                "name": "Storby"
+            },
             "place/hamlet": {
                 "name": "Mindre beboet område"
             },
             "place/island": {
-                "name": "Ø"
+                "name": "Ø",
+                "terms": "skærgård, atol,holm,rev,"
+            },
+            "place/isolated_dwelling": {
+                "name": "Lille beboet område (1-2 hustande)"
             },
             "place/locality": {
                 "name": "Lokalitet"
+            },
+            "place/town": {
+                "name": "By"
             },
             "place/village": {
                 "name": "Landsby"
@@ -941,17 +1107,24 @@ locale.da = {
             "railway": {
                 "name": "Jernbane"
             },
+            "railway/abandoned": {
+                "name": "Ej brugt jernbanespor"
+            },
             "railway/disused": {
                 "name": "Ej brugt jernbanespor"
             },
             "railway/level_crossing": {
-                "name": "Jernbaneoverskæring"
+                "name": "Jernbaneoverskæring",
+                "terms": "passage,jernbaneoverskæring, jernbaneoverskæring, vej gennem jernbane"
             },
             "railway/monorail": {
                 "name": "Monorail"
             },
             "railway/rail": {
                 "name": "Jernbanespor"
+            },
+            "railway/station": {
+                "name": "Togstation"
             },
             "railway/subway": {
                 "name": "S-togspor"
@@ -1099,7 +1272,8 @@ locale.da = {
                 "name": "Papirforhandler"
             },
             "shop/supermarket": {
-                "name": "Supermarked"
+                "name": "Supermarked",
+                "terms": "basar, butik, butikskæde,discountbutik,loppemarked, galleri,outlet-butik, shop, shoppingcenter, shopping,butik, supermarked"
             },
             "shop/toys": {
                 "name": "Legetøjsbutik"
@@ -1108,10 +1282,13 @@ locale.da = {
                 "name": "Rejsebureau"
             },
             "shop/tyres": {
-                "name": "Dækbutik"
+                "name": "Dækforhandler"
             },
             "shop/vacant": {
                 "name": "Lukket butik (ingen salg pt)"
+            },
+            "shop/variety_store": {
+                "name": "Spøg og skæmtbutik "
             },
             "shop/video": {
                 "name": "Videobutik"
@@ -1154,7 +1331,8 @@ locale.da = {
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Museum"
+                "name": "Museum",
+                "terms": "udstilling, udstillinger,arkiver,galleri,bibliotek,salon"
             },
             "tourism/picnic_site": {
                 "name": "Picnic"

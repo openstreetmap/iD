@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "motorway_junction"
+    },
+    "fields": [
+        "ref"
+    ],
+    "name": "Motorway Junction"
+}

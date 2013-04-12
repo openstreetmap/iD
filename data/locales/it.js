@@ -28,6 +28,12 @@ locale.it = {
         "browse": {
             "title": "Naviga",
             "description": "Muovi ed ingrandisci la mappa."
+        },
+        "draw_area": {
+            "tail": "Clicca per aggiungere nodi all'area. Clicca sul primo nodo per completarla."
+        },
+        "draw_line": {
+            "tail": "Clicca per aggiungere più nodi alla linea. Clicca su altre linee per connetterle, e clicca due volte per terminare la linea."
         }
     },
     "operations": {
@@ -144,12 +150,15 @@ locale.it = {
         "split": {
             "title": "Dividi",
             "description": {
-                "area": "Dividi il bordo di quest'area in due."
+                "line": "Dividi questa linea in due in questo nodo.",
+                "area": "Dividi il bordo di quest'area in due.",
+                "multiple": "Dividi le linee/bordi di area a questo nodo in due."
             },
             "key": "X",
             "annotation": {
                 "line": "Dividi una linea.",
-                "area": "Dividi il bordo di un area."
+                "area": "Dividi il bordo di un area.",
+                "multiple": "Dividi {n} linee/bordi di aree."
             },
             "not_eligible": "Le linee non possono essere divise al loro inizio o alla loro fine.",
             "multiple_ways": "Ci sono troppe linee da dividere."
@@ -193,10 +202,12 @@ locale.it = {
         "no_documentation_key": "Non c'è documentazione per questa chiave",
         "show_more": "Mostra di più",
         "new_tag": "Nuovo Tag",
+        "view_on_osm": "Vedi su openstreetmap.org",
         "editing_feature": "Modificando {feature}",
         "additional": "Tag aggiuntivi",
         "choose": "Seleziona il tipo di caratteristica",
         "results": "{n} risultati per {search}",
+        "reference": "Vedi sulla Wiki di OpenStreetMap →",
         "back_tooltip": "Cambia il tipo di caratteristica"
     },
     "background": {
@@ -237,6 +248,7 @@ locale.it = {
         "used_with": "usato con {type}"
     },
     "validations": {
+        "untagged_point": "Punto senta tag",
         "untagged_line": "Linea senza tag",
         "untagged_area": "Area senza tag",
         "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
@@ -252,7 +264,8 @@ locale.it = {
         "drag_drop": "Trascina e rilascia un file gpx sulla pagina"
     },
     "help": {
-        "title": "Aiuto"
+        "title": "Aiuto",
+        "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, rendendo una mappa del mondo open-source e open-data\nmeglio per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di un\n[account gratuito OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/systemed/iD).\n"
     },
     "intro": {
         "navigation": {
@@ -268,15 +281,19 @@ locale.it = {
             "choose": "**Scegli Caffè dalla griglia.**",
             "describe": "Ora il punto è marcato come Caffè. Usando l'editor dell'elemento possiamo aggiungere più informazioni sull'elemento stesso. **Aggiungi un nome**",
             "close": "L'editor dell'elemento può essere chiuso cliccando sul pulsante chiudi. **Chiudi l'editor dell'elemento**",
-            "reselect": "Spesso esistono già dei punti, ma contengono errori o sono incompleti. I punti esistenti si pososno modificare. **Seleziona il punto che hai appena creato.**",
+            "reselect": "Spesso esistono già dei punti, ma contengono errori o sono incompleti. I punti esistenti si possono modificare. **Seleziona il punto che hai appena creato.**",
             "fixname": "**Cambia il nome e chiudi l'editor dell'elemento.**",
             "reselect_delete": "Tutti gli elementi sulla mappa possono essere cancellati. **Clicca sul punto che hai creato.**",
             "delete": "Il menu attorno al punto contiene le operazioni che possono essere fatte su di esso, inclusa la cancellazione. **Cancella il punto.**"
         },
         "areas": {
-            "add": "Le aree sono un modo più dettagliato per rappresentare degli elementi. Forniscono informazioni sui confini dell'elemento. Molto spesso è preferibile usare le aree al posto dei punti. **Clicca il pulsante Area per aggiungere una nuova area.**"
+            "add": "Le aree sono un modo più dettagliato per rappresentare degli elementi. Forniscono informazioni sui confini dell'elemento. Molto spesso è preferibile usare le aree al posto dei punti. **Clicca il pulsante Area per aggiungere una nuova area.**",
+            "describe": "**Aggiungi un nome e chiudi l'editor dell'elemento**"
         },
         "lines": {
+            "add": "Le linee sono usate per rappresentare elementi come strade, ferrovie e fiumi. **Clicca il bottone Linea per aggiungere una nuova linea.**",
+            "start": "**Inizia la linea cliccando sulla fine della strada.**",
+            "intersect": "Clicca per aggiungere altri nodi alla linea. Puoi trascinare la mappa mentre disegni, se necessario. Le strade, e molti altri tipi di linea, fanno parte di una rete più larga. È importante che queste linee siano connesse correttamente perché le applicazioni che creano itinerari funzionino. **Clicca su Flower Street per creare un'intersezione che collega le due linee.**",
             "road": "**Seleziona Strada dalla griglia**",
             "residential": "Ci sono diversi tipi di strade, il più comune dei quali è Residenziale. **Scegli il tipo di strada Residenziale**",
             "describe": "**Dai un nome alla strada e chiudi l'editor dell'elemento.**",
@@ -291,7 +308,10 @@ locale.it = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Accesso"
+                "label": "Accesso",
+                "types": {
+                    "horse": "Cavalli"
+                }
             },
             "address": {
                 "label": "Indirizzo",
@@ -648,6 +668,9 @@ locale.it = {
             "barrier/stile": {
                 "name": "Scaletta"
             },
+            "barrier/toll_booth": {
+                "name": "Casello"
+            },
             "barrier/wall": {
                 "name": "Muro"
             },
@@ -826,7 +849,7 @@ locale.it = {
                 "name": "Campo da tennis"
             },
             "leisure/playground": {
-                "name": "Campetto"
+                "name": "Parco giochi"
             },
             "leisure/slipway": {
                 "name": "Scivolo per barche"
@@ -918,6 +941,9 @@ locale.it = {
             },
             "place": {
                 "name": "Luogo"
+            },
+            "place/city": {
+                "name": "Città"
             },
             "place/hamlet": {
                 "name": "Paese"
@@ -1044,6 +1070,9 @@ locale.it = {
             },
             "shop/florist": {
                 "name": "Fioraio"
+            },
+            "shop/garden_centre": {
+                "name": "Vivaio"
             },
             "shop/greengrocer": {
                 "name": "Fruttivendolo"

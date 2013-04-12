@@ -298,7 +298,24 @@ locale.tr = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Ulaşım"
+                "label": "Ulaşım",
+                "types": {
+                    "foot": "Yürüyerek"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Serbest"
+                    },
+                    "no": {
+                        "title": "Yasak"
+                    },
+                    "private": {
+                        "title": "Özel"
+                    },
+                    "destination": {
+                        "title": "Hedef"
+                    }
+                }
             },
             "address": {
                 "label": "Adres",
@@ -341,6 +358,9 @@ locale.tr = {
             },
             "construction": {
                 "label": "Tip"
+            },
+            "country": {
+                "label": "Ülke"
             },
             "crossing": {
                 "label": "Tip"
@@ -386,6 +406,9 @@ locale.tr = {
             "landuse": {
                 "label": "Tip"
             },
+            "lanes": {
+                "label": "Şerit"
+            },
             "layer": {
                 "label": "Katman"
             },
@@ -425,6 +448,9 @@ locale.tr = {
             "operator": {
                 "label": "Operatör"
             },
+            "parking": {
+                "label": "Tür"
+            },
             "phone": {
                 "label": "Telefon"
             },
@@ -436,6 +462,9 @@ locale.tr = {
             },
             "railway": {
                 "label": "Tip"
+            },
+            "ref": {
+                "label": "Referans"
             },
             "religion": {
                 "label": "Dini",
@@ -488,6 +517,9 @@ locale.tr = {
             },
             "wetland": {
                 "label": "Tip"
+            },
+            "wheelchair": {
+                "label": "Tekerlekli Sandalye Erişimi"
             },
             "wikipedia": {
                 "label": "Vikipedi"
@@ -611,8 +643,14 @@ locale.tr = {
             "barrier/block": {
                 "name": "Blok"
             },
+            "barrier/city_wall": {
+                "name": "Şehir Duvarı"
+            },
             "barrier/entrance": {
                 "name": "Giriş"
+            },
+            "barrier/fence": {
+                "name": "Çit"
             },
             "barrier/gate": {
                 "name": "Kapı"
@@ -628,6 +666,9 @@ locale.tr = {
             },
             "building/entrance": {
                 "name": "Giriş"
+            },
+            "building/house": {
+                "name": "Ev"
             },
             "entrance": {
                 "name": "Giriş"
@@ -653,11 +694,17 @@ locale.tr = {
             "highway/road": {
                 "name": "Bilinmeyen Yol"
             },
+            "highway/steps": {
+                "name": "Adım"
+            },
             "highway/traffic_signals": {
                 "name": "Trafik Sinyali"
             },
             "historic": {
                 "name": "Tarihi Site"
+            },
+            "historic/archaeological_site": {
+                "name": "Arkeolojik Alan"
             },
             "historic/castle": {
                 "name": "Kale"
@@ -667,6 +714,9 @@ locale.tr = {
             },
             "historic/monument": {
                 "name": "Anıt"
+            },
+            "historic/ruins": {
+                "name": "Harabeler"
             },
             "landuse/basin": {
                 "name": "Havza"
@@ -697,6 +747,9 @@ locale.tr = {
             },
             "landuse/residential": {
                 "name": "Yerleşim"
+            },
+            "leisure": {
+                "name": "Keyif"
             },
             "leisure/garden": {
                 "name": "Bahçe"
@@ -731,14 +784,32 @@ locale.tr = {
             "leisure/swimming_pool": {
                 "name": "Yüzme Havuzu"
             },
+            "man_made": {
+                "name": "İnsan Yapımı"
+            },
             "man_made/pier": {
                 "name": "Rıhtım"
+            },
+            "man_made/wastewater_plant": {
+                "name": "Atıksu Santrali"
+            },
+            "man_made/water_tower": {
+                "name": "Su Kulesi"
             },
             "natural": {
                 "name": "Doğal"
             },
             "natural/beach": {
                 "name": "Plaj"
+            },
+            "natural/coastline": {
+                "terms": "kıyı"
+            },
+            "natural/grassland": {
+                "name": "Otlak"
+            },
+            "natural/heath": {
+                "name": "Sağlık"
             },
             "natural/spring": {
                 "name": "Kaynak"
@@ -770,17 +841,44 @@ locale.tr = {
             "place": {
                 "name": "Yer"
             },
+            "place/city": {
+                "name": "Şehir"
+            },
             "place/island": {
                 "name": "Ada"
             },
+            "place/town": {
+                "name": "Kasaba"
+            },
             "place/village": {
                 "name": "Köy"
+            },
+            "power": {
+                "name": "Güç"
+            },
+            "power/generator": {
+                "name": "Elektrik Santrali"
+            },
+            "power/line": {
+                "name": "Güç Hattı"
+            },
+            "power/sub_station": {
+                "name": "Ara istasyon"
+            },
+            "railway": {
+                "name": "Demiryolu"
+            },
+            "railway/station": {
+                "name": "Tren İstasyonu"
             },
             "railway/subway": {
                 "name": "Metro"
             },
             "railway/subway_entrance": {
                 "name": "Metro Girişi"
+            },
+            "railway/tram": {
+                "name": "Tramvay"
             },
             "shop": {
                 "name": "Dükkan"
@@ -791,6 +889,9 @@ locale.tr = {
             "shop/beauty": {
                 "name": "Güzellik Salonu"
             },
+            "shop/bicycle": {
+                "name": "Bisikletçi"
+            },
             "shop/books": {
                 "name": "Kitapçı"
             },
@@ -800,17 +901,56 @@ locale.tr = {
             "shop/butcher": {
                 "name": "Kasap"
             },
+            "shop/car": {
+                "name": "Oto Galeri"
+            },
+            "shop/car_parts": {
+                "name": "Araba Parça Mağazası"
+            },
             "shop/car_repair": {
                 "name": "Tamirci"
             },
+            "shop/convenience": {
+                "name": "Bakkal"
+            },
+            "shop/dry_cleaning": {
+                "name": "Kuru Temizleme"
+            },
+            "shop/electronics": {
+                "name": "Elektronik Mağazası"
+            },
+            "shop/florist": {
+                "name": "Çiçekçi"
+            },
+            "shop/furniture": {
+                "name": "Mobilya Mağazası"
+            },
+            "shop/gift": {
+                "name": "Hediye Mağazası"
+            },
+            "shop/greengrocer": {
+                "name": "Manav"
+            },
+            "shop/hairdresser": {
+                "name": "Kuaför"
+            },
+            "shop/hardware": {
+                "name": "Donanım Mağazası"
+            },
             "shop/jewelry": {
                 "name": "Kuyumcu"
+            },
+            "shop/laundry": {
+                "name": "Çamaşır Yıkama"
             },
             "shop/mall": {
                 "name": "Alışveriş Merkezi"
             },
             "shop/optician": {
                 "name": "Optik"
+            },
+            "shop/shoes": {
+                "name": "Ayakkabı Mağazası"
             },
             "shop/supermarket": {
                 "name": "Süpermarket"
@@ -823,6 +963,9 @@ locale.tr = {
             },
             "tourism": {
                 "name": "Turizm"
+            },
+            "tourism/artwork": {
+                "name": "Sanat eseri"
             },
             "tourism/camp_site": {
                 "name": "Kamp Alanı"
@@ -844,6 +987,12 @@ locale.tr = {
             },
             "tourism/picnic_site": {
                 "name": "Piknik Alanı"
+            },
+            "tourism/theme_park": {
+                "name": "Tema Parkı"
+            },
+            "tourism/viewpoint": {
+                "name": "Bakış Açısı"
             },
             "tourism/zoo": {
                 "name": "Hayvanat Bahçesi"

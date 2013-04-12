@@ -321,7 +321,40 @@ locale.vi = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Quyền Truy cập"
+                "label": "Quyền Truy cập",
+                "types": {
+                    "access": "Tổng quát",
+                    "foot": "Người Đi bộ",
+                    "motor_vehicle": "Xe cộ",
+                    "bicycle": "Xe đạp",
+                    "horse": "Ngựa"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Cho phép",
+                        "description": "Mọi người được phép truy cập theo luật pháp"
+                    },
+                    "no": {
+                        "title": "Cấm",
+                        "description": "Công chúng không được phép truy cập"
+                    },
+                    "permissive": {
+                        "title": "Chủ cho phép",
+                        "description": "Chủ cho phép rộng rãi nhưng có thể cấm sau"
+                    },
+                    "private": {
+                        "title": "Tư nhân",
+                        "description": "Chỉ có những người được chủ cho phép truy cập"
+                    },
+                    "designated": {
+                        "title": "Theo mục đích",
+                        "description": "Được xây với mục đích cho phép vận chuyển bằng phương thức này, theo bảng hay luật pháp địa phương"
+                    },
+                    "destination": {
+                        "title": "Để tới nơi",
+                        "description": "Chỉ cho phép truy cập để tới nơi"
+                    }
+                }
             },
             "address": {
                 "label": "Địa chỉ",
@@ -457,6 +490,12 @@ locale.vi = {
             "operator": {
                 "label": "Cơ quan Chủ quản"
             },
+            "park_ride": {
+                "label": "Trung chuyển"
+            },
+            "parking": {
+                "label": "Kiểu"
+            },
             "phone": {
                 "label": "Số Điện thoại"
             },
@@ -507,6 +546,9 @@ locale.vi = {
                     "embankment": "Đường đắp cao",
                     "cutting": "Đường xẻ"
                 }
+            },
+            "supervised": {
+                "label": "Canh gác"
             },
             "surface": {
                 "label": "Mặt"
@@ -1037,6 +1079,9 @@ locale.vi = {
             "place": {
                 "name": "Địa phương"
             },
+            "place/city": {
+                "name": "Thành phố"
+            },
             "place/hamlet": {
                 "name": "Xóm"
             },
@@ -1044,8 +1089,14 @@ locale.vi = {
                 "name": "Đảo",
                 "terms": "đảo,hòn đảo,quần đảo,đảo san hô,san hô,cồn cát,cồn,đá ngầm,chỗ nông,chỗ cạn"
             },
+            "place/isolated_dwelling": {
+                "name": "Chỗ ở Hẻo lánh"
+            },
             "place/locality": {
                 "name": "Địa phương"
+            },
+            "place/town": {
+                "name": "Thị xã"
             },
             "place/village": {
                 "name": "Làng"

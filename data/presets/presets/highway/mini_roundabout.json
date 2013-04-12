@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "mini_roundabout"
+    },
+    "fields": [
+        "clock_direction"
+    ],
+    "name": "Mini-Roundabout"
+}
