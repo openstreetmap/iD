@@ -52,7 +52,11 @@ iD.modes.Select = function(context, selection) {
     };
 
     mode.reselect = function() {
-        context.surface().node().focus();
+        var surfaceNode = context.surface().node();
+        if (surfaceNode.focus) { // FF doesn't support it
+            surfaceNode.focus();
+        }
+
         positionMenu();
         showMenu();
     };
