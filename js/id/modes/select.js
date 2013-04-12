@@ -1,4 +1,4 @@
-iD.modes.Select = function(context, selection, initial) {
+iD.modes.Select = function(context, selection) {
     var mode = {
         id: 'select',
         button: 'browse'
@@ -11,15 +11,16 @@ iD.modes.Select = function(context, selection, initial) {
 
     if (!selection.length) return iD.modes.Browse(context);
 
-    var inspector = singular() && iD.ui.Inspector(context, singular()),
-        keybinding = d3.keybinding('select'),
+    var keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
             iD.behavior.Hover(),
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
             iD.modes.DragNode(context).behavior],
-        radialMenu;
+        inspector,
+        radialMenu,
+        newFeature = false;
 
     var wrap = context.container()
         .select('.inspector-wrap');
@@ -51,8 +52,15 @@ iD.modes.Select = function(context, selection, initial) {
     };
 
     mode.reselect = function() {
+        context.surface().node().focus();
         positionMenu();
         showMenu();
+    };
+
+    mode.newFeature = function(_) {
+        if (!arguments.length) return newFeature;
+        newFeature = _;
+        return mode;
     };
 
     mode.enter = function() {
@@ -85,6 +93,9 @@ iD.modes.Select = function(context, selection, initial) {
         }), true));
 
         if (singular()) {
+            inspector = iD.ui.Inspector(context, singular())
+                .newFeature(newFeature);
+
             wrap.call(inspector);
         }
 
@@ -148,7 +159,7 @@ iD.modes.Select = function(context, selection, initial) {
         selectElements();
 
         radialMenu = iD.ui.RadialMenu(operations);
-        var show = d3.event && !initial;
+        var show = d3.event && !newFeature;
 
         if (show) {
             positionMenu();

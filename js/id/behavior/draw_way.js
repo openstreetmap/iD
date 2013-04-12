@@ -168,7 +168,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         var way = context.entity(wayId);
         if (way) {
-            context.enter(iD.modes.Select(context, [way.id], true));
+            context.enter(iD.modes.Select(context, [way.id]).newFeature(true));
         } else {
             context.enter(iD.modes.Browse(context));
         }

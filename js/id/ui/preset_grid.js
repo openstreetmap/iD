@@ -2,7 +2,8 @@ iD.ui.PresetGrid = function(context, entity) {
     var event = d3.dispatch('choose', 'close'),
         defaultLimit = 9,
         currentlyDrawn = 9,
-        presets;
+        presets,
+        newFeature = false;
 
     function presetgrid(selection, preset) {
 
@@ -102,7 +103,9 @@ iD.ui.PresetGrid = function(context, entity) {
         searchwrap.append('span')
             .attr('class', 'icon search');
 
-        search.node().focus();
+        if (newFeature) {
+            search.node().focus();
+        }
 
         function choose(d) {
             // Category
@@ -242,6 +245,12 @@ iD.ui.PresetGrid = function(context, entity) {
             entries.order();
         }
     }
+
+    presetgrid.newFeature = function(_) {
+        if (!arguments.length) return newFeature;
+        newFeature = _;
+        return presetgrid;
+    };
 
     return d3.rebind(presetgrid, event, 'on');
 };

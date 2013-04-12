@@ -1,6 +1,7 @@
 iD.ui.Inspector = function(context, entity) {
     var tagEditor,
-        id = entity.id;
+        id = entity.id,
+        newFeature = false;
 
     function changeTags(tags) {
         var entity = context.entity(id);
@@ -48,6 +49,7 @@ iD.ui.Inspector = function(context, entity) {
             .classed('pane tag-pane', true);
 
         var presetGrid = iD.ui.PresetGrid(context, entity)
+            .newFeature(newFeature)
             .on('close', browse)
             .on('choose', function(preset) {
                 var right = panewrap.style('right').indexOf('%') > 0 ? '0%' : '0px';
@@ -116,6 +118,12 @@ iD.ui.Inspector = function(context, entity) {
 
         context.history()
             .on('change.inspector', null);
+    };
+
+    inspector.newFeature = function(_) {
+        if (!arguments.length) return newFeature;
+        newFeature = _;
+        return inspector;
     };
 
     return inspector;
