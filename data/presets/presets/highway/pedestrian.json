@@ -1,5 +1,5 @@
 {
-    "icon": "highway-path",
+    "icon": "highway-pedestrian",
     "fields": [
         "access",
         "oneway",
@@ -12,5 +12,5 @@
         "highway": "pedestrian"
     },
     "terms": [],
-    "name": "Pedestrianized road"
+    "name": "Pedestrian"
 }
