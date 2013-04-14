@@ -395,6 +395,16 @@ locale.ja = {
             "capacity": {
                 "label": "収容可能な数量"
             },
+            "cardinal_direction": {
+                "label": "方向"
+            },
+            "clock_direction": {
+                "label": "方向",
+                "options": {
+                    "clockwise": "右回り",
+                    "anticlockwise": "左回り"
+                }
+            },
             "collection_times": {
                 "label": "情報取得日時"
             },
@@ -447,6 +457,9 @@ locale.ja = {
             },
             "landuse": {
                 "label": "土地区分"
+            },
+            "lanes": {
+                "label": "車線数"
             },
             "layer": {
                 "label": "レイヤ"
@@ -802,8 +815,14 @@ locale.ja = {
                 "name": "歩道",
                 "terms": "けもの道、山道、コース、歩道、自動車道、路地、航路、軌道、抜け道、通路、小路、線路、道路、経路、街道、農道、大通り"
             },
+            "highway/mini_roundabout": {
+                "name": "ラウンドアバウト(小)"
+            },
             "highway/motorway": {
                 "name": "高速道路"
+            },
+            "highway/motorway_junction": {
+                "name": "高速道ジャンクション"
             },
             "highway/motorway_link": {
                 "name": "高速道路 - 接続道",
@@ -1137,6 +1156,9 @@ locale.ja = {
             },
             "railway/monorail": {
                 "name": "モノレール"
+            },
+            "railway/platform": {
+                "name": "プラットフォーム"
             },
             "railway/rail": {
                 "name": "線路"

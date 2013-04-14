@@ -1184,7 +1184,8 @@
             "surface"
         ],
         "geometry": [
-            "line"
+            "line",
+            "area"
         ],
         "terms": [
             "beaten path",
@@ -1301,6 +1302,22 @@
         },
         "terms": [],
         "name": "Path"
+    },
+    "highway/pedestrian": {
+        "fields": [
+            "access",
+            "oneway",
+            "surface"
+        ],
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "highway": "pedestrian"
+        },
+        "terms": [],
+        "name": "Pedestrian"
     },
     "highway/primary": {
         "icon": "highway-primary",

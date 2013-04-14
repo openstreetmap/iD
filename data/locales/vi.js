@@ -395,6 +395,16 @@ locale.vi = {
             "capacity": {
                 "label": "Số Chỗ Đậu Xe"
             },
+            "cardinal_direction": {
+                "label": "Chiều"
+            },
+            "clock_direction": {
+                "label": "Chiều",
+                "options": {
+                    "clockwise": "Theo Chiều kim Đồng hồ",
+                    "anticlockwise": "Ngược Chiều kim Đồng hồ"
+                }
+            },
             "collection_times": {
                 "label": "Giờ Lấy thư"
             },
@@ -447,6 +457,9 @@ locale.vi = {
             },
             "landuse": {
                 "label": "Mục đích"
+            },
+            "lanes": {
+                "label": "Số Làn"
             },
             "layer": {
                 "label": "Lớp"
@@ -802,8 +815,14 @@ locale.vi = {
                 "name": "Đường Đi bộ",
                 "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo"
             },
+            "highway/mini_roundabout": {
+                "name": "Đường vòng Nhỏ"
+            },
             "highway/motorway": {
                 "name": "Đường Cao tốc"
+            },
+            "highway/motorway_junction": {
+                "name": "Giao lộ Đường Cao tốc"
             },
             "highway/motorway_link": {
                 "name": "Nhánh Ra vào Đường Cao tốc",
@@ -1137,6 +1156,9 @@ locale.vi = {
             },
             "railway/monorail": {
                 "name": "Đường sắt Một ray"
+            },
+            "railway/platform": {
+                "name": "Ke ga"
             },
             "railway/rail": {
                 "name": "Đường sắt"

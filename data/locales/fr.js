@@ -324,7 +324,7 @@ locale.fr = {
                 "label": "Accès",
                 "types": {
                     "access": "Général",
-                    "foot": "A pied",
+                    "foot": "À pied",
                     "motor_vehicle": "Véhicules motorisés",
                     "bicycle": "Vélos",
                     "horse": "Cavaliers"
@@ -448,6 +448,9 @@ locale.fr = {
             "landuse": {
                 "label": "Type"
             },
+            "lanes": {
+                "label": "Lignes"
+            },
             "layer": {
                 "label": "Couche"
             },
@@ -461,13 +464,13 @@ locale.fr = {
                 "label": "Type"
             },
             "maxspeed": {
-                "label": "Limite de vitesse"
+                "label": "Vitesse maximale autorisée"
             },
             "name": {
                 "label": "Nom"
             },
             "natural": {
-                "label": "Naturel"
+                "label": "Nature"
             },
             "network": {
                 "label": "Réseau"
@@ -587,18 +590,18 @@ locale.fr = {
             },
             "aeroway/aerodrome": {
                 "name": "Aéroport",
-                "terms": "avion,aéroport,aérodrome,aeroclub"
+                "terms": "avion, aéroport, aérodrome, aeroclub"
             },
             "aeroway/helipad": {
                 "name": "Héliport",
-                "terms": "hélicoptère,helipad,héliport"
+                "terms": "hélicoptère, hélisurface, héliport"
             },
             "amenity": {
                 "name": "Équipements"
             },
             "amenity/bank": {
                 "name": "Banque",
-                "terms": "coffre,dépôt,économies,compte,épargne,trésorerie,caisse,banque"
+                "terms": "coffre, dépôt, économies, compte, épargne, trésorerie, caisse, banque"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -614,11 +617,11 @@ locale.fr = {
             },
             "amenity/cafe": {
                 "name": "Café",
-                "terms": "café,salon de thé"
+                "terms": "café, salon de thé"
             },
             "amenity/cinema": {
                 "name": "Cinéma",
-                "terms": "cinéma,film,ciné,cinématographe,salle obscure,projection"
+                "terms": "cinéma, film, ciné, cinématographe, salle obscure, projection "
             },
             "amenity/courthouse": {
                 "name": "Tribunal"
@@ -639,11 +642,11 @@ locale.fr = {
                 "name": "Cimetière"
             },
             "amenity/hospital": {
-                "name": "Hopital",
-                "terms": "clinique,CHU,centre hospitalier,hôpital,infirmerie,hospice,cabinet,maison de repos,urgences,soins"
+                "name": "Hôpital",
+                "terms": "clinique, CHU, centre hospitalier, hôpital, infirmerie, hospice, cabinet, maison de repos, urgences, soins"
             },
             "amenity/library": {
-                "name": "Bibliotheque"
+                "name": "Bibliothèque"
             },
             "amenity/marketplace": {
                 "name": "Place de marché"
@@ -656,27 +659,27 @@ locale.fr = {
             },
             "amenity/place_of_worship": {
                 "name": "Lieu de culte",
-                "terms": "église,chapelle,mosquée,synagogue,espace prière,cathédrale,sanctuaire,temple"
+                "terms": "église, chapelle, mosquée, synagogue, espace prière, cathédrale, sanctuaire, temple"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Église",
-                "terms": "église,chapelle,mosquée,synagogue,espace prière,cathédrale,sanctuaire,temple"
+                "terms": "église, chapelle, mosquée, synagogue, espace prière, cathédrale, sanctuaire, temple"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Cynagogue",
-                "terms": "juif,synagogue"
+                "terms": "juif, synagogue"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mosquée",
-                "terms": "musulman,mosquée"
+                "terms": "musulman, mosquée"
             },
             "amenity/police": {
                 "name": "Poste de police",
-                "terms": "police,gendarmerie,forces de l'ordre,flics,poulets,bleus"
+                "terms": "police, gendarmerie, forces de l'ordre, flics, poulets, bleus"
             },
             "amenity/post_box": {
                 "name": "Boîte aux lettres",
-                "terms": "boîte aux lettres,poste,la poste"
+                "terms": "boîte aux lettres, poste, la poste"
             },
             "amenity/post_office": {
                 "name": "Bureau de poste"
@@ -686,11 +689,11 @@ locale.fr = {
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
-                "terms": "bar,cafétéria,café,restaurant,restauration,snack,fast food,brasserie,distributeur,sandwiches"
+                "terms": "bar, cafétéria, café, restaurant, restauration, snack, fast-food, brasserie, distributeur, sandwiches"
             },
             "amenity/school": {
                 "name": "École",
-                "terms": "école,maternelle,collège,université,faculté,fac,institut,apprentissage,formation,cours"
+                "terms": "école, maternelle, collège, université, faculté, fac, institut, apprentissage, formation, cours"
             },
             "amenity/swimming_pool": {
                 "name": "Piscine"
@@ -700,14 +703,14 @@ locale.fr = {
             },
             "amenity/theatre": {
                 "name": "Théatre",
-                "terms": "théâtre,pièce,représentation,séance"
+                "terms": "théâtre, pièce, représentation, séance"
             },
             "amenity/toilets": {
-                "name": "Toiletes"
+                "name": "Toilettes"
             },
             "amenity/townhall": {
                 "name": "Mairie",
-                "terms": "mairie,administration"
+                "terms": "mairie, administration"
             },
             "amenity/university": {
                 "name": "Université"
@@ -786,21 +789,21 @@ locale.fr = {
             },
             "highway/bridleway": {
                 "name": "Sentier équestre",
-                "terms": "piste cavalière,sentier équestre,sentier pour cheveaux"
+                "terms": "piste cavalière, sentier équestre, sentier pour chevaux"
             },
             "highway/bus_stop": {
-                "name": "Arret de bus"
+                "name": "Arrêt de bus"
             },
             "highway/crossing": {
                 "name": "Passage piéton",
-                "terms": "passage piéton,zebra"
+                "terms": "passage piéton, zebra"
             },
             "highway/cycleway": {
                 "name": "Voie cyclable"
             },
             "highway/footway": {
                 "name": "Voie piétonne",
-                "terms": "passage,chemin,route,rue,autoroute,avenue,boulevard,chaussée,chemin de fer,rails,piste,allée,sentier,voie"
+                "terms": "passage, chemin, route, rue, autoroute, avenue, boulevard, chaussée, chemin de fer, rails, piste, allée, sentier, voie"
             },
             "highway/motorway": {
                 "name": "Autoroute"
@@ -837,7 +840,7 @@ locale.fr = {
             },
             "highway/steps": {
                 "name": "Escalier",
-                "terms": "marches,escalier"
+                "terms": "marches, escalier"
             },
             "highway/tertiary": {
                 "name": "Route tertiaire"
@@ -851,7 +854,7 @@ locale.fr = {
             },
             "highway/traffic_signals": {
                 "name": "Feux tricolores",
-                "terms": "feux,feu rouge,feu tricolore"
+                "terms": "feux, feu rouge, feu tricolore"
             },
             "highway/trunk": {
                 "name": "Voie rapide"
@@ -903,7 +906,7 @@ locale.fr = {
                 "name": "Bassin"
             },
             "landuse/cemetery": {
-                "name": "Cimetiere"
+                "name": "Cimetière"
             },
             "landuse/commercial": {
                 "name": "Commerciale"
@@ -936,7 +939,7 @@ locale.fr = {
                 "name": "Carrière"
             },
             "landuse/residential": {
-                "name": "Residentielle"
+                "name": "Résidentielle"
             },
             "landuse/vineyard": {
                 "name": "Vigne"
@@ -955,7 +958,7 @@ locale.fr = {
             },
             "leisure/park": {
                 "name": "Parc",
-                "terms": "esplanade,forêt,jardin,gazon,pelouse,prairie,place,terrain de jeux,aire de jeux,square,bois,parc"
+                "terms": "esplanade, forêt, jardin, gazon, pelouse, prairie, place, terrain de jeux, aire de jeux, square, bois, parc"
             },
             "leisure/pitch": {
                 "name": "Terrain de sport"
@@ -1001,7 +1004,7 @@ locale.fr = {
             },
             "man_made/wastewater_plant": {
                 "name": "Station d'épuration",
-                "terms": "épuration,eaux usées"
+                "terms": "épuration, eaux usées"
             },
             "man_made/water_tower": {
                 "name": "Château d'eau"
@@ -1023,20 +1026,20 @@ locale.fr = {
             },
             "natural/coastline": {
                 "name": "Ligne de côte",
-                "terms": "ligne de côte,littoral,trait de côte"
+                "terms": "ligne de côte, littoral, trait de côte"
             },
             "natural/glacier": {
                 "name": "Glacier"
             },
             "natural/grassland": {
-                "name": "Graminées"
+                "name": "Prairie"
             },
             "natural/heath": {
                 "name": "Lande"
             },
             "natural/peak": {
                 "name": "Sommet",
-                "terms": "mont,sommet,pic,aiguille,crête,colline,dent"
+                "terms": "mont, sommet, pic, aiguille, crête, colline, dent"
             },
             "natural/scrub": {
                 "name": "Friche, garrigue, maquis"
@@ -1052,11 +1055,11 @@ locale.fr = {
             },
             "natural/water/lake": {
                 "name": "Lac",
-                "terms": "lac,étang,mare,marais"
+                "terms": "lac, étang, mare, marais"
             },
             "natural/water/pond": {
                 "name": "Étang",
-                "terms": "bassin,retenue,étang,lac"
+                "terms": "bassin, retenue, étang, lac"
             },
             "natural/water/reservoir": {
                 "name": "Bassin de retenue"
@@ -1087,7 +1090,7 @@ locale.fr = {
             },
             "place/island": {
                 "name": "Île",
-                "terms": "archipel,atoll,récif,presqu'île,haut fond,barre,îlot"
+                "terms": "archipel, atoll, récif, presqu'île, haut fond, barre, îlot"
             },
             "place/isolated_dwelling": {
                 "name": "Lieu-dit habité"
@@ -1133,7 +1136,7 @@ locale.fr = {
             },
             "railway/level_crossing": {
                 "name": "Passage à niveau",
-                "terms": "passage à niveau,garde-barrière"
+                "terms": "passage à niveau, garde-barrière"
             },
             "railway/monorail": {
                 "name": "Monorail"
@@ -1290,8 +1293,8 @@ locale.fr = {
                 "name": "Papeterie"
             },
             "shop/supermarket": {
-                "name": "Supermarche",
-                "terms": "boutique,magasin,supermarché,puces,marché,hypermarché,centre commercial,ZAC,zone d'activité commerciale,kiosque,supérette"
+                "name": "Supermarché",
+                "terms": "boutique, magasin, supermarché, puces, marché, hypermarché, centre commercial, ZAC, zone d'activité commerciale, kiosque, supérette"
             },
             "shop/toys": {
                 "name": "Magasin de jouets"
@@ -1334,7 +1337,7 @@ locale.fr = {
             },
             "tourism/guest_house": {
                 "name": "Chambre d'hôtes",
-                "terms": "B&B,Bed & Breakfast,Bed and Breakfast,maison d'hôtes,chambre d'hôtes"
+                "terms": "B&B, Bed & Breakfast, Bed and Breakfast, maison d'hôtes, chambre d'hôtes"
             },
             "tourism/hostel": {
                 "name": "Auberge de jeunesse"
@@ -1350,7 +1353,7 @@ locale.fr = {
             },
             "tourism/museum": {
                 "name": "Musée",
-                "terms": "exhibition,vernissage,galerie d'art,fondation,musée,exposition"
+                "terms": "exhibition, vernissage, galerie d'art, fondation, musée, exposition"
             },
             "tourism/picnic_site": {
                 "name": "Aire de pique-nique"
@@ -1380,15 +1383,15 @@ locale.fr = {
                 "name": "Canal d'évacuation d'eau pluviale"
             },
             "waterway/river": {
-                "name": "Rvière",
-                "terms": "ruisseau,cours d'eau,caniveau,ru,étier,ruisselet,ravine,rivière,fleuve,eau"
+                "name": "Rivière",
+                "terms": "ruisseau, cours d'eau, caniveau, ru, étier, ruisselet, ravine, rivière, fleuve, eau"
             },
             "waterway/riverbank": {
                 "name": "Berge"
             },
             "waterway/stream": {
                 "name": "Cours d'eau étroit",
-                "terms": "ruisseau,cours d'eau,caniveau,ru,étier,ruisselet,ravine,rivière,fleuve,eau"
+                "terms": "ruisseau, cours d'eau, caniveau, ru, étier, ruisselet, ravine, rivière, fleuve, eau"
             },
             "waterway/weir": {
                 "name": "Seuil"

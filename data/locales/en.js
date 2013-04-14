@@ -875,6 +875,10 @@ locale.en = {
                 "name": "Path",
                 "terms": ""
             },
+            "highway/pedestrian": {
+                "name": "Pedestrian",
+                "terms": ""
+            },
             "highway/primary": {
                 "name": "Primary Road",
                 "terms": ""
