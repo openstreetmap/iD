@@ -1,0 +1,16 @@
+{
+    "icon": "highway-path",
+    "fields": [
+        "access",
+        "oneway",
+        "surface"
+    ],
+    "geometry": [
+        "line", "area"
+    ],
+    "tags": {
+        "highway": "pedestrian"
+    },
+    "terms": [],
+    "name": "Pedestrianized road"
+}
