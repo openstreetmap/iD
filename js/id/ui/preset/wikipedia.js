@@ -57,7 +57,6 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     function changeLang() {
         var value = lang.property('value').toLowerCase();
-        console.log(value);
         language = _.find(iD.data.wikipedia, function(d) {
             return d[0].toLowerCase() === value ||
                 d[1].toLowerCase() === value ||
@@ -73,7 +72,22 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     function change() {
         var t = {};
+
         var value = title.property('value');
+
+        var m = value.match('http://([a-z]+)\\.wikipedia.org/wiki/(.*)'),
+            newlanguage = m && m[1] && m[2] && _.find(iD.data.wikipedia, function(d) {
+                return m[1] === d[2];
+            });
+
+        if (newlanguage) {
+            // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
+            value = m[2].replace(/_/g, ' ');
+            value = value.slice(0, 1).toUpperCase() + value.slice(1);
+            language = newlanguage;
+            lang.property('value', language[0]);
+        }
+
         t[field.key] = value ? language[2] + ':' + value : '';
         event.change(t);
         link.attr('href', 'http://' + language[2] + '.wikipedia.org/wiki/' + (value || ''));
@@ -82,15 +96,13 @@ iD.ui.preset.wikipedia = function(field, context) {
     i.tags = function(tags) {
         var m = tags[field.key] ? tags[field.key].match(/([^:]+):(.+)/) : null;
 
+        var language = m && m[1] && m[2] && _.find(iD.data.wikipedia, function(d) {
+            return m[1] === d[2];
+        });
+
         // value in correct format
-        if (m && m[1] && m[2]) {
-            language = _.find(iD.data.wikipedia, function(d) {
-                return m[1] === d[2];
-            });
-
-            if (language) lang.property('value', language[1]);
-            else lang.property('value', m[1]);
-
+        if (language) {
+            lang.property('value', language[1]);
             title.property('value', m[2]);
             link.attr('href', 'http://' + m[1] + '.wikipedia.org/wiki/' + m[2]);
 
