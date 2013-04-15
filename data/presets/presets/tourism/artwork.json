@@ -1,8 +1,8 @@
 {
+    "icon": "art-gallery",
     "geometry": [
         "point",
         "vertex",
-        "line",
         "area"
     ],
     "tags": {

@@ -1,5 +1,5 @@
 {
-    "icon": "shop",
+    "icon": "restaurant",
     "fields": [
         "address",
         "opening_hours"
