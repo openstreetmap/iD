@@ -64,12 +64,12 @@ iD.js: \
 
 .INTERMEDIATE iD.js: data/data.js
 
-iD.js: node_modules Makefile
+iD.js: node_modules/.install Makefile
 	@rm -f $@
 	cat $(filter %.js,$^) > $@
 
-node_modules:
-	npm install
+node_modules/.install: package.json
+	npm install && touch node_modules/.install
 
 %.min.js: %.js Makefile
 	@rm -f $@
