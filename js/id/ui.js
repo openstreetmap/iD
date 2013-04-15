@@ -78,9 +78,11 @@ iD.ui = function(context) {
         var about = container.append('div')
             .attr('class','col12 about-block fillD');
 
-        about.append('div')
-            .attr('class', 'account')
-            .call(iD.ui.Account(context));
+        if (!context.embed()) {
+            about.append('div')
+                .attr('class', 'account')
+                .call(iD.ui.Account(context));
+        }
 
         var linkList = about.append('ul')
             .attr('id', 'about')

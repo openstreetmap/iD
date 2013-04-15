@@ -148,6 +148,13 @@ window.iD = function () {
             }));
     }
 
+    var embed = false;
+    context.embed = function(_) {
+        if (!arguments.length) return embed;
+        embed = _;
+        return context;
+    };
+
     return d3.rebind(context, dispatch, 'on');
 };
 
