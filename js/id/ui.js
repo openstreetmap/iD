@@ -103,10 +103,6 @@ iD.ui = function(context) {
             .text(t('report_a_bug'));
 
         linkList.append('li')
-            .attr('class', 'source-switch')
-            .call(iD.ui.SourceSwitch(context));
-
-        linkList.append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
