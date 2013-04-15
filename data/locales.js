@@ -4951,6 +4951,10 @@ locale.en = {
                 "name": "Path",
                 "terms": ""
             },
+            "highway/pedestrian": {
+                "name": "Pedestrian",
+                "terms": ""
+            },
             "highway/primary": {
                 "name": "Primary Road",
                 "terms": ""
@@ -5365,6 +5369,10 @@ locale.en = {
             },
             "railway/monorail": {
                 "name": "Monorail",
+                "terms": ""
+            },
+            "railway/platform": {
+                "name": "Railway Platform",
                 "terms": ""
             },
             "railway/rail": {
@@ -7428,7 +7436,7 @@ locale.fr = {
                 "label": "Accès",
                 "types": {
                     "access": "Général",
-                    "foot": "A pied",
+                    "foot": "À pied",
                     "motor_vehicle": "Véhicules motorisés",
                     "bicycle": "Vélos",
                     "horse": "Cavaliers"
@@ -7552,6 +7560,9 @@ locale.fr = {
             "landuse": {
                 "label": "Type"
             },
+            "lanes": {
+                "label": "Lignes"
+            },
             "layer": {
                 "label": "Couche"
             },
@@ -7565,13 +7576,13 @@ locale.fr = {
                 "label": "Type"
             },
             "maxspeed": {
-                "label": "Limite de vitesse"
+                "label": "Vitesse maximale autorisée"
             },
             "name": {
                 "label": "Nom"
             },
             "natural": {
-                "label": "Naturel"
+                "label": "Nature"
             },
             "network": {
                 "label": "Réseau"
@@ -7691,18 +7702,18 @@ locale.fr = {
             },
             "aeroway/aerodrome": {
                 "name": "Aéroport",
-                "terms": "avion,aéroport,aérodrome,aeroclub"
+                "terms": "avion, aéroport, aérodrome, aeroclub"
             },
             "aeroway/helipad": {
                 "name": "Héliport",
-                "terms": "hélicoptère,helipad,héliport"
+                "terms": "hélicoptère, hélisurface, héliport"
             },
             "amenity": {
                 "name": "Équipements"
             },
             "amenity/bank": {
                 "name": "Banque",
-                "terms": "coffre,dépôt,économies,compte,épargne,trésorerie,caisse,banque"
+                "terms": "coffre, dépôt, économies, compte, épargne, trésorerie, caisse, banque"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -7718,11 +7729,11 @@ locale.fr = {
             },
             "amenity/cafe": {
                 "name": "Café",
-                "terms": "café,salon de thé"
+                "terms": "café, salon de thé"
             },
             "amenity/cinema": {
                 "name": "Cinéma",
-                "terms": "cinéma,film,ciné,cinématographe,salle obscure,projection"
+                "terms": "cinéma, film, ciné, cinématographe, salle obscure, projection "
             },
             "amenity/courthouse": {
                 "name": "Tribunal"
@@ -7743,11 +7754,11 @@ locale.fr = {
                 "name": "Cimetière"
             },
             "amenity/hospital": {
-                "name": "Hopital",
-                "terms": "clinique,CHU,centre hospitalier,hôpital,infirmerie,hospice,cabinet,maison de repos,urgences,soins"
+                "name": "Hôpital",
+                "terms": "clinique, CHU, centre hospitalier, hôpital, infirmerie, hospice, cabinet, maison de repos, urgences, soins"
             },
             "amenity/library": {
-                "name": "Bibliotheque"
+                "name": "Bibliothèque"
             },
             "amenity/marketplace": {
                 "name": "Place de marché"
@@ -7760,27 +7771,27 @@ locale.fr = {
             },
             "amenity/place_of_worship": {
                 "name": "Lieu de culte",
-                "terms": "église,chapelle,mosquée,synagogue,espace prière,cathédrale,sanctuaire,temple"
+                "terms": "église, chapelle, mosquée, synagogue, espace prière, cathédrale, sanctuaire, temple"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Église",
-                "terms": "église,chapelle,mosquée,synagogue,espace prière,cathédrale,sanctuaire,temple"
+                "terms": "église, chapelle, mosquée, synagogue, espace prière, cathédrale, sanctuaire, temple"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Cynagogue",
-                "terms": "juif,synagogue"
+                "terms": "juif, synagogue"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mosquée",
-                "terms": "musulman,mosquée"
+                "terms": "musulman, mosquée"
             },
             "amenity/police": {
                 "name": "Poste de police",
-                "terms": "police,gendarmerie,forces de l'ordre,flics,poulets,bleus"
+                "terms": "police, gendarmerie, forces de l'ordre, flics, poulets, bleus"
             },
             "amenity/post_box": {
                 "name": "Boîte aux lettres",
-                "terms": "boîte aux lettres,poste,la poste"
+                "terms": "boîte aux lettres, poste, la poste"
             },
             "amenity/post_office": {
                 "name": "Bureau de poste"
@@ -7790,11 +7801,11 @@ locale.fr = {
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
-                "terms": "bar,cafétéria,café,restaurant,restauration,snack,fast food,brasserie,distributeur,sandwiches"
+                "terms": "bar, cafétéria, café, restaurant, restauration, snack, fast-food, brasserie, distributeur, sandwiches"
             },
             "amenity/school": {
                 "name": "École",
-                "terms": "école,maternelle,collège,université,faculté,fac,institut,apprentissage,formation,cours"
+                "terms": "école, maternelle, collège, université, faculté, fac, institut, apprentissage, formation, cours"
             },
             "amenity/swimming_pool": {
                 "name": "Piscine"
@@ -7804,14 +7815,14 @@ locale.fr = {
             },
             "amenity/theatre": {
                 "name": "Théatre",
-                "terms": "théâtre,pièce,représentation,séance"
+                "terms": "théâtre, pièce, représentation, séance"
             },
             "amenity/toilets": {
-                "name": "Toiletes"
+                "name": "Toilettes"
             },
             "amenity/townhall": {
                 "name": "Mairie",
-                "terms": "mairie,administration"
+                "terms": "mairie, administration"
             },
             "amenity/university": {
                 "name": "Université"
@@ -7890,21 +7901,21 @@ locale.fr = {
             },
             "highway/bridleway": {
                 "name": "Sentier équestre",
-                "terms": "piste cavalière,sentier équestre,sentier pour cheveaux"
+                "terms": "piste cavalière, sentier équestre, sentier pour chevaux"
             },
             "highway/bus_stop": {
-                "name": "Arret de bus"
+                "name": "Arrêt de bus"
             },
             "highway/crossing": {
                 "name": "Passage piéton",
-                "terms": "passage piéton,zebra"
+                "terms": "passage piéton, zebra"
             },
             "highway/cycleway": {
                 "name": "Voie cyclable"
             },
             "highway/footway": {
                 "name": "Voie piétonne",
-                "terms": "passage,chemin,route,rue,autoroute,avenue,boulevard,chaussée,chemin de fer,rails,piste,allée,sentier,voie"
+                "terms": "passage, chemin, route, rue, autoroute, avenue, boulevard, chaussée, chemin de fer, rails, piste, allée, sentier, voie"
             },
             "highway/motorway": {
                 "name": "Autoroute"
@@ -7941,7 +7952,7 @@ locale.fr = {
             },
             "highway/steps": {
                 "name": "Escalier",
-                "terms": "marches,escalier"
+                "terms": "marches, escalier"
             },
             "highway/tertiary": {
                 "name": "Route tertiaire"
@@ -7955,7 +7966,7 @@ locale.fr = {
             },
             "highway/traffic_signals": {
                 "name": "Feux tricolores",
-                "terms": "feux,feu rouge,feu tricolore"
+                "terms": "feux, feu rouge, feu tricolore"
             },
             "highway/trunk": {
                 "name": "Voie rapide"
@@ -8007,7 +8018,7 @@ locale.fr = {
                 "name": "Bassin"
             },
             "landuse/cemetery": {
-                "name": "Cimetiere"
+                "name": "Cimetière"
             },
             "landuse/commercial": {
                 "name": "Commerciale"
@@ -8040,7 +8051,7 @@ locale.fr = {
                 "name": "Carrière"
             },
             "landuse/residential": {
-                "name": "Residentielle"
+                "name": "Résidentielle"
             },
             "landuse/vineyard": {
                 "name": "Vigne"
@@ -8059,7 +8070,7 @@ locale.fr = {
             },
             "leisure/park": {
                 "name": "Parc",
-                "terms": "esplanade,forêt,jardin,gazon,pelouse,prairie,place,terrain de jeux,aire de jeux,square,bois,parc"
+                "terms": "esplanade, forêt, jardin, gazon, pelouse, prairie, place, terrain de jeux, aire de jeux, square, bois, parc"
             },
             "leisure/pitch": {
                 "name": "Terrain de sport"
@@ -8105,7 +8116,7 @@ locale.fr = {
             },
             "man_made/wastewater_plant": {
                 "name": "Station d'épuration",
-                "terms": "épuration,eaux usées"
+                "terms": "épuration, eaux usées"
             },
             "man_made/water_tower": {
                 "name": "Château d'eau"
@@ -8127,20 +8138,20 @@ locale.fr = {
             },
             "natural/coastline": {
                 "name": "Ligne de côte",
-                "terms": "ligne de côte,littoral,trait de côte"
+                "terms": "ligne de côte, littoral, trait de côte"
             },
             "natural/glacier": {
                 "name": "Glacier"
             },
             "natural/grassland": {
-                "name": "Graminées"
+                "name": "Prairie"
             },
             "natural/heath": {
                 "name": "Lande"
             },
             "natural/peak": {
                 "name": "Sommet",
-                "terms": "mont,sommet,pic,aiguille,crête,colline,dent"
+                "terms": "mont, sommet, pic, aiguille, crête, colline, dent"
             },
             "natural/scrub": {
                 "name": "Friche, garrigue, maquis"
@@ -8156,11 +8167,11 @@ locale.fr = {
             },
             "natural/water/lake": {
                 "name": "Lac",
-                "terms": "lac,étang,mare,marais"
+                "terms": "lac, étang, mare, marais"
             },
             "natural/water/pond": {
                 "name": "Étang",
-                "terms": "bassin,retenue,étang,lac"
+                "terms": "bassin, retenue, étang, lac"
             },
             "natural/water/reservoir": {
                 "name": "Bassin de retenue"
@@ -8191,7 +8202,7 @@ locale.fr = {
             },
             "place/island": {
                 "name": "Île",
-                "terms": "archipel,atoll,récif,presqu'île,haut fond,barre,îlot"
+                "terms": "archipel, atoll, récif, presqu'île, haut fond, barre, îlot"
             },
             "place/isolated_dwelling": {
                 "name": "Lieu-dit habité"
@@ -8237,7 +8248,7 @@ locale.fr = {
             },
             "railway/level_crossing": {
                 "name": "Passage à niveau",
-                "terms": "passage à niveau,garde-barrière"
+                "terms": "passage à niveau, garde-barrière"
             },
             "railway/monorail": {
                 "name": "Monorail"
@@ -8394,8 +8405,8 @@ locale.fr = {
                 "name": "Papeterie"
             },
             "shop/supermarket": {
-                "name": "Supermarche",
-                "terms": "boutique,magasin,supermarché,puces,marché,hypermarché,centre commercial,ZAC,zone d'activité commerciale,kiosque,supérette"
+                "name": "Supermarché",
+                "terms": "boutique, magasin, supermarché, puces, marché, hypermarché, centre commercial, ZAC, zone d'activité commerciale, kiosque, supérette"
             },
             "shop/toys": {
                 "name": "Magasin de jouets"
@@ -8438,7 +8449,7 @@ locale.fr = {
             },
             "tourism/guest_house": {
                 "name": "Chambre d'hôtes",
-                "terms": "B&B,Bed & Breakfast,Bed and Breakfast,maison d'hôtes,chambre d'hôtes"
+                "terms": "B&B, Bed & Breakfast, Bed and Breakfast, maison d'hôtes, chambre d'hôtes"
             },
             "tourism/hostel": {
                 "name": "Auberge de jeunesse"
@@ -8454,7 +8465,7 @@ locale.fr = {
             },
             "tourism/museum": {
                 "name": "Musée",
-                "terms": "exhibition,vernissage,galerie d'art,fondation,musée,exposition"
+                "terms": "exhibition, vernissage, galerie d'art, fondation, musée, exposition"
             },
             "tourism/picnic_site": {
                 "name": "Aire de pique-nique"
@@ -8484,15 +8495,15 @@ locale.fr = {
                 "name": "Canal d'évacuation d'eau pluviale"
             },
             "waterway/river": {
-                "name": "Rvière",
-                "terms": "ruisseau,cours d'eau,caniveau,ru,étier,ruisselet,ravine,rivière,fleuve,eau"
+                "name": "Rivière",
+                "terms": "ruisseau, cours d'eau, caniveau, ru, étier, ruisselet, ravine, rivière, fleuve, eau"
             },
             "waterway/riverbank": {
                 "name": "Berge"
             },
             "waterway/stream": {
                 "name": "Cours d'eau étroit",
-                "terms": "ruisseau,cours d'eau,caniveau,ru,étier,ruisselet,ravine,rivière,fleuve,eau"
+                "terms": "ruisseau, cours d'eau, caniveau, ru, étier, ruisselet, ravine, rivière, fleuve, eau"
             },
             "waterway/weir": {
                 "name": "Seuil"
@@ -10787,6 +10798,16 @@ locale.ja = {
             "capacity": {
                 "label": "収容可能な数量"
             },
+            "cardinal_direction": {
+                "label": "方向"
+            },
+            "clock_direction": {
+                "label": "方向",
+                "options": {
+                    "clockwise": "右回り",
+                    "anticlockwise": "左回り"
+                }
+            },
             "collection_times": {
                 "label": "情報取得日時"
             },
@@ -10839,6 +10860,9 @@ locale.ja = {
             },
             "landuse": {
                 "label": "土地区分"
+            },
+            "lanes": {
+                "label": "車線数"
             },
             "layer": {
                 "label": "レイヤ"
@@ -11194,8 +11218,14 @@ locale.ja = {
                 "name": "歩道",
                 "terms": "けもの道、山道、コース、歩道、自動車道、路地、航路、軌道、抜け道、通路、小路、線路、道路、経路、街道、農道、大通り"
             },
+            "highway/mini_roundabout": {
+                "name": "ラウンドアバウト(小)"
+            },
             "highway/motorway": {
                 "name": "高速道路"
+            },
+            "highway/motorway_junction": {
+                "name": "高速道ジャンクション"
             },
             "highway/motorway_link": {
                 "name": "高速道路 - 接続道",
@@ -11529,6 +11559,9 @@ locale.ja = {
             },
             "railway/monorail": {
                 "name": "モノレール"
+            },
+            "railway/platform": {
+                "name": "プラットフォーム"
             },
             "railway/rail": {
                 "name": "線路"
@@ -12036,10 +12069,12 @@ locale.lv = {
         "out": "Attālināt"
     },
     "gpx": {
-        "local_layer": "Vietējais GPX fails"
+        "local_layer": "Vietējais GPX fails",
+        "drag_drop": "Uzvelc uz atlaid .gpx failu uz šīs lapas"
     },
     "help": {
-        "title": "Palīdzība"
+        "title": "Palīdzība",
+        "help": "# Palīdzība\n\nŠis ir redaktors, kas domāts [OpenStreetMap](http://www.openstreetmap.org/)  -\n tā ir visiem pieejama un brīvi labojama pasaules karte. Tu vari lietot šo redaktoru, lai labotu un papildinātu datus tev labi zināmā apgabalā, tādejādi radot atvērtās piekļuvess pasaules karti labāku priekš ikviena, kas to lieto.\n\nLabojumi, ko tu veiksi kartē, būs redzami ikvienam, kas lieto OpenStreeMap.\nLai veiktu labojumus, tev vajag atvērt \n[brīvu OpenStreetMap kontu](https://www.openstreetmap.org/user/new).\n[iD editor](http://ideditor.com/) ir uz sadarbību orientēts projekts ar pilnu pieeju  [izejas kodam, kas pieejams GitHub](https://github.com/systemed/iD).\n"
     },
     "intro": {
         "lines": {
@@ -12053,7 +12088,38 @@ locale.lv = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Piekļuve"
+                "label": "Piekļuve",
+                "types": {
+                    "access": "Vispārīgs",
+                    "foot": "Kājām",
+                    "motor_vehicle": "Automašīnas",
+                    "bicycle": "Velosipēdi",
+                    "horse": "Zirgi"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Atļauts",
+                        "description": "Piekļuve atļauta ar likumu"
+                    },
+                    "no": {
+                        "title": "Aizliegts",
+                        "description": "Piekļuve nav atļauta bez speciālā atļaujām "
+                    },
+                    "permissive": {
+                        "description": "Piekļuve atļauta līdz īpašnieks atsauc atļauju"
+                    },
+                    "private": {
+                        "title": "Privāts",
+                        "description": "Piekļuve atļauta tikai ar īpašnieka atļauju"
+                    },
+                    "designated": {
+                        "title": "Nozīmēts",
+                        "description": "Piekļuve atļauta atbilstoši zīmēm vai speciāliem vietējiem likumiem"
+                    },
+                    "destination": {
+                        "title": "Galamērķis"
+                    }
+                }
             },
             "address": {
                 "label": "Adrese",
@@ -12093,7 +12159,25 @@ locale.lv = {
             "construction": {
                 "label": "Tips"
             },
+            "country": {
+                "label": "Valsts"
+            },
             "crossing": {
+                "label": "Tips"
+            },
+            "cuisine": {
+                "label": "Ēdiens"
+            },
+            "denomination": {
+                "label": "Denominācija"
+            },
+            "elevation": {
+                "label": "Augstums"
+            },
+            "emergency": {
+                "label": "Ārkārtas"
+            },
+            "entrance": {
                 "label": "Tips"
             },
             "fax": {
@@ -12112,7 +12196,8 @@ locale.lv = {
                 "label": "Interneta piekļuve",
                 "options": {
                     "wlan": "Bezvadu internets",
-                    "wired": "Kabeļinternets"
+                    "wired": "Kabeļinternets",
+                    "terminal": "Termināls"
                 }
             },
             "landuse": {
@@ -12133,14 +12218,41 @@ locale.lv = {
             "maxspeed": {
                 "label": "Ātruma ierobežojums"
             },
+            "name": {
+                "label": "Vārds"
+            },
+            "natural": {
+                "label": "Dabisks"
+            },
+            "network": {
+                "label": "Tīlks"
+            },
             "note": {
                 "label": "Piezīme"
+            },
+            "office": {
+                "label": "Tips"
             },
             "oneway": {
                 "label": "Vienvirziena"
             },
+            "oneway_yes": {
+                "label": "Vienvirziena"
+            },
             "opening_hours": {
                 "label": "Darba laiks"
+            },
+            "operator": {
+                "label": "Operators"
+            },
+            "park_ride": {
+                "label": "Novieto un brauc"
+            },
+            "parking": {
+                "label": "Tips"
+            },
+            "phone": {
+                "label": "Telefons"
             },
             "place": {
                 "label": "Tips"
@@ -12151,12 +12263,16 @@ locale.lv = {
             "railway": {
                 "label": "Tips"
             },
+            "ref": {
+                "label": "Atskaites punkts"
+            },
             "religion": {
                 "label": "Reliģija",
                 "options": {
                     "christian": "Kristietiešu",
                     "muslim": "Musulmaņu",
                     "buddhist": "Budistu",
+                    "jewish": "Ebreju",
                     "hindu": "Hinduistu",
                     "shinto": "Sintoistu",
                     "taoist": "Taoistu"
@@ -12178,8 +12294,12 @@ locale.lv = {
                 "label": "Sports"
             },
             "structure": {
+                "label": "Objekts",
                 "options": {
-                    "tunnel": "Tunelis"
+                    "bridge": "Tilts",
+                    "tunnel": "Tunelis",
+                    "embankment": "Krastmala",
+                    "cutting": "Izgriezums"
                 }
             },
             "surface": {
@@ -12188,14 +12308,23 @@ locale.lv = {
             "tourism": {
                 "label": "Tips"
             },
+            "tracktype": {
+                "label": "Tips"
+            },
             "water": {
                 "label": "Tips"
             },
             "waterway": {
                 "label": "Tips"
             },
+            "website": {
+                "label": "Interneta lapa"
+            },
             "wetland": {
                 "label": "Tips"
+            },
+            "wheelchair": {
+                "label": "Ratiņkrēslam pieejams"
             },
             "wikipedia": {
                 "label": "Vikipēdija"
@@ -12205,8 +12334,25 @@ locale.lv = {
             }
         },
         "presets": {
+            "aeroway": {
+                "name": "Skrejceļš"
+            },
             "aeroway/aerodrome": {
-                "name": "Lidosta"
+                "name": "Lidosta",
+                "terms": "lidmašīna, lidosta"
+            },
+            "aeroway/helipad": {
+                "name": "Helikopteru nosēšanās laukums",
+                "terms": "helikopters, helikoteru nosēšanās laukums"
+            },
+            "amenity/bank": {
+                "name": "Banka"
+            },
+            "amenity/bar": {
+                "name": "Bārs"
+            },
+            "amenity/bench": {
+                "name": "Sols"
             },
             "amenity/bicycle_parking": {
                 "name": "Velo stāvvieta"
@@ -12215,13 +12361,33 @@ locale.lv = {
                 "name": "Velonoma"
             },
             "amenity/cafe": {
-                "name": "Kafejnīca"
+                "name": "Kafejnīca",
+                "terms": "kafija, tēja, kafejnīca"
+            },
+            "amenity/cinema": {
+                "name": "Kino"
+            },
+            "amenity/courthouse": {
+                "name": "Tiesas nams"
             },
             "amenity/embassy": {
                 "name": "Vēstniecība"
             },
+            "amenity/fast_food": {
+                "name": "Ātrās ēdināšanas iestāde"
+            },
+            "amenity/fire_station": {
+                "name": "Ugunsdzēsēju stacija"
+            },
+            "amenity/fuel": {
+                "name": "Degvielas uzpildes stacija"
+            },
+            "amenity/grave_yard": {
+                "name": "Kapi"
+            },
             "amenity/hospital": {
-                "name": "Slimnīca"
+                "name": "Slimnīca",
+                "terms": "Slimnīca, Ātrās palīdzības punkts, veselības dienests, sanatorija"
             },
             "amenity/library": {
                 "name": "Bibliotēka"
@@ -12229,14 +12395,32 @@ locale.lv = {
             "amenity/marketplace": {
                 "name": "Tirgus"
             },
+            "amenity/parking": {
+                "name": "Stāvvieta"
+            },
+            "amenity/pharmacy": {
+                "name": "Aptieka"
+            },
+            "amenity/place_of_worship": {
+                "name": "Dievnams",
+                "terms": "bazilika, katedrāle, kapellam baznīca, Dieva nams, Lūgšanu nams, mošeja"
+            },
             "amenity/place_of_worship/christian": {
                 "name": "Baznīca"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Sinagoga"
+                "name": "Sinagoga",
+                "terms": "jūdu, sinagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mošeja"
+                "name": "Mošeja",
+                "terms": "musulmaņu, mošeja"
+            },
+            "amenity/police": {
+                "name": "Policija"
+            },
+            "amenity/post_box": {
+                "name": "Pasta kastīte"
             },
             "amenity/post_office": {
                 "name": "Pasta nodaļa"
@@ -12253,23 +12437,131 @@ locale.lv = {
             "amenity/swimming_pool": {
                 "name": "Peldbaseins"
             },
+            "amenity/telephone": {
+                "name": "Telefons"
+            },
             "amenity/theatre": {
                 "name": "Teātris"
+            },
+            "amenity/toilets": {
+                "name": "Tualete"
+            },
+            "amenity/townhall": {
+                "name": "Pilsētas dome"
             },
             "amenity/university": {
                 "name": "Universitāte"
             },
+            "barrier": {
+                "name": "Barjera"
+            },
+            "barrier/block": {
+                "name": "Ēkas daļa"
+            },
+            "barrier/city_wall": {
+                "name": "Pilsētas mūri"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Veloceliņa barjera"
+            },
+            "barrier/ditch": {
+                "name": "Grāvis"
+            },
+            "barrier/entrance": {
+                "name": "Ieeja"
+            },
+            "barrier/fence": {
+                "name": "Žogs"
+            },
+            "barrier/gate": {
+                "name": "Vārti"
+            },
+            "barrier/kissing_gate": {
+                "name": "Dubultveramie vārti"
+            },
+            "barrier/lift_gate": {
+                "name": "Lifta ieeja"
+            },
+            "barrier/toll_booth": {
+                "name": "Muitas punkts"
+            },
+            "barrier/wall": {
+                "name": "Siena"
+            },
+            "boundary/administrative": {
+                "name": "Administratīvā robeža"
+            },
             "building": {
                 "name": "Ēka"
+            },
+            "building/apartments": {
+                "name": "Dzīvokļi"
             },
             "building/entrance": {
                 "name": "Ieeja"
             },
+            "building/house": {
+                "name": "Māja"
+            },
             "entrance": {
                 "name": "Ieeja"
             },
+            "highway": {
+                "name": "Šoseja"
+            },
+            "highway/bus_stop": {
+                "name": "Autobusa pietura"
+            },
+            "highway/cycleway": {
+                "name": "Veloceliņš"
+            },
+            "highway/footway": {
+                "name": "Taka"
+            },
+            "highway/motorway": {
+                "name": "Ātrgaitas šoseja"
+            },
+            "highway/path": {
+                "name": "Taka"
+            },
+            "highway/primary": {
+                "name": "Galvenais ceļš"
+            },
+            "highway/road": {
+                "name": "Nezināms ceļš"
+            },
+            "highway/secondary": {
+                "name": "Otrās škiras ceļš"
+            },
+            "highway/service": {
+                "name": "Apkalpošanas ceļš"
+            },
             "highway/steps": {
                 "name": "Kāpnes"
+            },
+            "highway/track": {
+                "name": "Meža ceļš"
+            },
+            "highway/traffic_signals": {
+                "name": "Luksofors"
+            },
+            "highway/turning_circle": {
+                "name": "Apgriešanās riņķis"
+            },
+            "highway/unclassified": {
+                "name": "Neklasificēts ceļš"
+            },
+            "historic": {
+                "name": "Vēsturiska vieta"
+            },
+            "historic/archaeological_site": {
+                "name": "Arheoloģisko izrakumu vieta"
+            },
+            "historic/boundary_stone": {
+                "name": "Robežakmens"
+            },
+            "historic/castle": {
+                "name": "Pils"
             },
             "historic/memorial": {
                 "name": "Memoriāls"
@@ -12277,11 +12569,59 @@ locale.lv = {
             "historic/monument": {
                 "name": "Piemineklis"
             },
+            "historic/ruins": {
+                "name": "Pilsdrupas"
+            },
+            "landuse": {
+                "name": "Zemes pielietojums"
+            },
+            "landuse/basin": {
+                "name": "Baseins"
+            },
             "landuse/cemetery": {
                 "name": "Kapsēta"
             },
+            "landuse/commercial": {
+                "name": "Komercplatība"
+            },
+            "landuse/construction": {
+                "name": "Būvlaukums"
+            },
+            "landuse/farm": {
+                "name": "Zemnieku saimniecība"
+            },
+            "landuse/farmyard": {
+                "name": "Lauku sēta"
+            },
+            "landuse/forest": {
+                "name": "Mežs"
+            },
+            "landuse/grass": {
+                "name": "Zāle"
+            },
+            "landuse/industrial": {
+                "name": "Industriāls rajons"
+            },
+            "landuse/meadow": {
+                "name": "Pļava"
+            },
+            "landuse/quarry": {
+                "name": "Karjers"
+            },
+            "landuse/residential": {
+                "name": "Dzīvojamā zona"
+            },
+            "landuse/vineyard": {
+                "name": "Vīnogu lauks"
+            },
+            "leisure": {
+                "name": "Brīvā laika"
+            },
             "leisure/garden": {
                 "name": "Dārzs"
+            },
+            "leisure/golf_course": {
+                "name": "Golfa laukums"
             },
             "leisure/park": {
                 "name": "Parks"
@@ -12304,14 +12644,33 @@ locale.lv = {
             "leisure/pitch/tennis": {
                 "name": "Tenisa korti"
             },
+            "leisure/playground": {
+                "name": "Spēļlaukums"
+            },
             "leisure/stadium": {
                 "name": "Stadions"
+            },
+            "leisure/swimming_pool": {
+                "name": "Peldbaseins"
+            },
+            "man_made": {
+                "name": "Cilvēka radīts"
             },
             "man_made/lighthouse": {
                 "name": "Bāka"
             },
+            "man_made/survey_point": {
+                "name": "Novērošanas punkts"
+            },
+            "man_made/wastewater_plant": {
+                "name": "Notekūdeņu stacija",
+                "terms": "kanalizācija, notekūdeņu attīrīšanas stacija, ūdens attīrīšanas stacija"
+            },
             "man_made/water_tower": {
                 "name": "Ūdenstornis"
+            },
+            "natural": {
+                "name": "Dabisks"
             },
             "natural/bay": {
                 "name": "Līcis"
@@ -12325,11 +12684,122 @@ locale.lv = {
             "natural/coastline": {
                 "name": "Krasta līnija"
             },
+            "natural/glacier": {
+                "name": "Ledājs"
+            },
+            "natural/grassland": {
+                "name": "Neapstrādāta zeme"
+            },
+            "natural/heath": {
+                "name": "Siltums"
+            },
+            "natural/peak": {
+                "name": "Virsotne"
+            },
+            "natural/spring": {
+                "name": "Avots"
+            },
+            "natural/tree": {
+                "name": "Koks"
+            },
             "natural/water": {
                 "name": "Ūdens"
             },
+            "natural/water/lake": {
+                "name": "Ezers"
+            },
             "natural/water/pond": {
                 "name": "Dīķis"
+            },
+            "natural/water/reservoir": {
+                "name": "Ūdenstilpne"
+            },
+            "natural/wetland": {
+                "name": "Purvs"
+            },
+            "natural/wood": {
+                "name": "Koks"
+            },
+            "office": {
+                "name": "Biroju ēka"
+            },
+            "other": {
+                "name": "Cits"
+            },
+            "other_area": {
+                "name": "Cits"
+            },
+            "place": {
+                "name": "Vieta"
+            },
+            "place/city": {
+                "name": "Lielpilsēta"
+            },
+            "place/island": {
+                "name": "Sala"
+            },
+            "place/town": {
+                "name": "Pilsēta"
+            },
+            "place/village": {
+                "name": "Ciems"
+            },
+            "power": {
+                "name": "Enerģija"
+            },
+            "power/generator": {
+                "name": "Elektrostacija"
+            },
+            "power/line": {
+                "name": "Elektrolīnija"
+            },
+            "power/sub_station": {
+                "name": "Metro stacija"
+            },
+            "power/tower": {
+                "name": "Augstsprieguma tornis"
+            },
+            "power/transformer": {
+                "name": "Transformators"
+            },
+            "railway": {
+                "name": "Vilciens"
+            },
+            "railway/abandoned": {
+                "name": "Pamests dzelzceļš"
+            },
+            "railway/disused": {
+                "name": "Nelietots dzelzceļš"
+            },
+            "railway/monorail": {
+                "name": "Viensliežu vilciens"
+            },
+            "railway/rail": {
+                "name": "Sliedes"
+            },
+            "railway/station": {
+                "name": "Dzelzceļa stacija"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Metro ieeja"
+            },
+            "railway/tram": {
+                "name": "Tramvajs"
+            },
+            "shop": {
+                "name": "Veikals"
+            },
+            "shop/alcohol": {
+                "name": "Alkoholisko dzērienu veikals"
+            },
+            "shop/beauty": {
+                "name": "Skaistumveikals"
+            },
+            "shop/beverages": {
+                "name": "Dzērienu veikals"
             },
             "shop/bicycle": {
                 "name": "Velo veikals"
@@ -12340,14 +12810,56 @@ locale.lv = {
             "shop/butcher": {
                 "name": "Miesnieks"
             },
+            "shop/car": {
+                "name": "Auto dīleris"
+            },
+            "shop/car_parts": {
+                "name": "Auto rezerves daļu veikals"
+            },
+            "shop/car_repair": {
+                "name": "Auto remontdarbnīca"
+            },
+            "shop/chemist": {
+                "name": "Aptiekārs"
+            },
             "shop/clothes": {
                 "name": "Apģērba veikals"
+            },
+            "shop/computer": {
+                "name": "Datorveikals"
+            },
+            "shop/confectionery": {
+                "name": "Saldumu veikals"
+            },
+            "shop/convenience": {
+                "name": "Veikals"
+            },
+            "shop/department_store": {
+                "name": "Lielveikals"
             },
             "shop/dry_cleaning": {
                 "name": "Ķīmiskā tīrītava"
             },
+            "shop/electronics": {
+                "name": "Elektronikas veikals"
+            },
+            "shop/florist": {
+                "name": "Florists"
+            },
+            "shop/furniture": {
+                "name": "Mēbeļu veikals"
+            },
+            "shop/garden_centre": {
+                "name": "Dārzkopības veikals"
+            },
             "shop/gift": {
                 "name": "Dāvanu veikals"
+            },
+            "shop/hairdresser": {
+                "name": "Frizieris"
+            },
+            "shop/hardware": {
+                "name": "Celtniecības veikals"
             },
             "shop/jewelry": {
                 "name": "Juvelieris"
@@ -12358,14 +12870,62 @@ locale.lv = {
             "shop/laundry": {
                 "name": "Veļas mazgātuve"
             },
+            "shop/mall": {
+                "name": "Iepirkšanās centrs"
+            },
+            "shop/mobile_phone": {
+                "name": "Mobilo telefonu veikals"
+            },
+            "shop/motorcycle": {
+                "name": "Motociklu veikals"
+            },
             "shop/music": {
                 "name": "Mūzikas veikals"
+            },
+            "shop/optician": {
+                "name": "Optometrists"
+            },
+            "shop/outdoor": {
+                "name": "Aktīvās atpūtas veikals"
+            },
+            "shop/pet": {
+                "name": "Dzīvnieku veikals"
+            },
+            "shop/shoes": {
+                "name": "Apavu veikals"
+            },
+            "shop/sports": {
+                "name": "Sporta veikals"
+            },
+            "shop/stationery": {
+                "name": "Rakstāmlietu veikals"
+            },
+            "shop/supermarket": {
+                "name": "Lielveikals"
             },
             "shop/toys": {
                 "name": "Rotaļlietu veikals"
             },
             "shop/travel_agency": {
                 "name": "Ceļojumu aģentūra"
+            },
+            "shop/tyres": {
+                "name": "Riepu veikals"
+            },
+            "shop/video": {
+                "name": "Video veikals"
+            },
+            "tourism": {
+                "name": "Tūrisms"
+            },
+            "tourism/artwork": {
+                "name": "Mākslas darbs"
+            },
+            "tourism/attraction": {
+                "name": "Tūrisma objekts"
+            },
+            "tourism/camp_site": {
+                "name": "Telšu vieta"
             },
             "tourism/guest_house": {
                 "name": "Viesu nams"
@@ -12376,14 +12936,50 @@ locale.lv = {
             "tourism/hotel": {
                 "name": "Viesnīca"
             },
+            "tourism/information": {
+                "name": "Informācija"
+            },
             "tourism/motel": {
                 "name": "Motelis"
             },
             "tourism/museum": {
                 "name": "Muzejs"
             },
+            "tourism/picnic_site": {
+                "name": "Piknika vieta"
+            },
+            "tourism/theme_park": {
+                "name": "Tematiskais parks"
+            },
+            "tourism/viewpoint": {
+                "name": "Skatu punkts"
+            },
+            "tourism/zoo": {
+                "name": "Zooloģiskais dārzs"
+            },
+            "waterway": {
+                "name": "Ūdensceļš"
+            },
             "waterway/canal": {
                 "name": "Kanāls"
+            },
+            "waterway/dam": {
+                "name": "Dambis"
+            },
+            "waterway/ditch": {
+                "name": "Grāvis"
+            },
+            "waterway/drain": {
+                "name": "Notekgrāvis"
+            },
+            "waterway/river": {
+                "name": "Upe"
+            },
+            "waterway/riverbank": {
+                "name": "Upes krasts"
+            },
+            "waterway/stream": {
+                "name": "Strauts"
             }
         }
     }
@@ -16821,6 +17417,397 @@ locale.ru = {
 
     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
+locale.sk = {
+    "modes": {
+        "add_area": {
+            "title": "Plocha",
+            "description": "Pridaj do mapy parky, budovy, jazerá alebo dalšie plochy.",
+            "tail": "Kliknite na mapu a začnite kresliť plochu ako park, jazero alebo budovu."
+        },
+        "add_line": {
+            "title": "Čiara",
+            "description": "Pridaj do mapy cesty, ulice, chodníky pre chodcov, kanály alebo iné čiary.",
+            "tail": "Kliknite na mapu a začnite kresliť cestu, chodník alebo trať."
+        },
+        "add_point": {
+            "title": "Bod",
+            "description": "Pridaj do mapy reštaurácie, pamätihodnosťi, poštové schránky alebo iné body.",
+            "tail": "Kliknite na mapu a pridajte bod."
+        },
+        "browse": {
+            "title": "Prehľadať",
+            "description": "Posunúť a priblížiť mapu."
+        },
+        "draw_area": {
+            "tail": "Kliknite pre pridanie uzlov ku ploche. Pre dokončenie plochy, kliknite na prvý uzol."
+        },
+        "draw_line": {
+            "tail": "Kliknite pre pridanie ďalších uzlov ku čiare. Kliknite na iné čiary aby ste ich spojili a potom dva krát kliknite pre ukončenie čiary."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Pridanie bodu.",
+                "vertex": "Pridanie bodu k čiare."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Začatie čiary.",
+                "area": "Začatie plochy."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Pokračovanie čiary.",
+                "area": "Pokračovanie plochy."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Zrušenie kreslenia."
+        },
+        "change_tags": {
+            "annotation": "Zmenenie označenia."
+        },
+        "circularize": {
+            "title": "Usporiadaj do kruhu",
+            "key": "O",
+            "annotation": {
+                "line": "Usporiadanie čiary do kruhu.",
+                "area": "Usporiadanie plochy do kruhu."
+            }
+        },
+        "orthogonalize": {
+            "title": "Usporiadaj do pravého uhla.",
+            "description": "Sprav rohy pravouhlé.",
+            "key": "Q",
+            "annotation": {
+                "line": "Usporiadanie rohov čiary do pravého uhla.",
+                "area": "Usporiadanie rohov plochy do pravého uhla."
+            }
+        },
+        "delete": {
+            "title": "Vymaž",
+            "description": "Odstráň z mapy.",
+            "annotation": {
+                "point": "Odstránenie bodu.",
+                "vertex": "Odstránenie uzla z cesty.",
+                "line": "Odstránenie čiary.",
+                "area": "Odstránenie plochy.",
+                "relation": "Odstránenie relácie.",
+                "multiple": "Odstránenie {n} objektov."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Pripojenie cesty k bodu.",
+                "vertex": "Pripojenie cesty k inej ceste.",
+                "line": "Pripojenie cesty k čiare.",
+                "area": "Pripojenie cesty k ploche."
+            }
+        },
+        "disconnect": {
+            "title": "Rozpoj",
+            "description": "Oddeľ od seba tieto čiary/plochy.",
+            "key": "D",
+            "annotation": "Oddelenie čiar/plôch."
+        },
+        "merge": {
+            "title": "Spoj",
+            "description": "Spoj tieto čiary.",
+            "key": "C",
+            "annotation": "Spojenie {n} čiar."
+        },
+        "move": {
+            "title": "Posuň",
+            "description": "Presuň na iné miesto.",
+            "key": "M",
+            "annotation": {
+                "point": "Posunutie bodu.",
+                "vertex": "Posunutie uzlu cesty.",
+                "line": "Posunutie čiary.",
+                "area": "Posunutie čiary.",
+                "multiple": "Posunutie viacerých objektov."
+            }
+        },
+        "rotate": {
+            "title": "Otoč",
+            "description": "Otoč objekt okolo jeho stredového bodu.",
+            "key": "R",
+            "annotation": {
+                "line": "Otočenie čiary.",
+                "area": "Otočenie plochy."
+            }
+        },
+        "reverse": {
+            "title": "Obráť",
+            "description": "Obráť smer čiary na opačnú stranu.",
+            "key": "V",
+            "annotation": "Obrátenie čiary."
+        },
+        "split": {
+            "title": "Rozdeľ",
+            "description": {
+                "line": "Rozdeľ čiaru v tomto uzle na dve.",
+                "multiple": "Rozdeľ čiary/hranice plôch v tomto uzle na dve."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "Rozdeľ čiaru.",
+                "area": "Rozdeľ ohraničenie plochy.",
+                "multiple": "Rozdelenie {n} čiar/hraníc plôch. "
+            },
+            "not_eligible": "Čiary nemôžu byť rozdelené na ich začiatku alebo konci.",
+            "multiple_ways": "Príliš veľa čiar na rozdelenie."
+        }
+    },
+    "nothing_to_undo": "Nič na vrátenie.",
+    "nothing_to_redo": "Nič na zopakovanie.",
+    "just_edited": "Práve ste upravili OpenStreetMap!",
+    "browser_notice": "Tento editor je podporovaný v prehliadačoch Firefox, Chrome, Safari, Opera, a Internet Explorer 9 a vyšší. Prosím aktualizujte svoj prehliadač alebo použite  Potlatch 2 na editovanie mapy.",
+    "view_on_osm": "Zobraz na OSM",
+    "zoom_in_edit": "Priblíž pre editovanie mapy",
+    "logout": "odhlásiť",
+    "loading_auth": "Pripájam na OpenStreetMap...",
+    "report_a_bug": "nahlásiť chybu",
+    "commit": {
+        "title": "Ulož zmeny",
+        "description_placeholder": "Stručný popis tvojho prispievania",
+        "message_label": "Pripojiť správu",
+        "upload_explanation": "Zmeny, ktoré nahráš ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
+        "save": "Ulož",
+        "cancel": "Zruš",
+        "warnings": "Varovania",
+        "modified": "Upravené",
+        "deleted": "Odstránené",
+        "created": "Vytvorené"
+    },
+    "contributors": {
+        "list": "S prispením {users}",
+        "truncated_list": "S prispením {users} a {count} dalších "
+    },
+    "geocoder": {
+        "title": "Nájdi miesto",
+        "placeholder": "Nájdi miesto",
+        "no_results": "Nebolo možné nájsť miesto s menom \"{name}\""
+    },
+    "geolocate": {
+        "title": "Ukáž moju polohu"
+    },
+    "inspector": {
+        "no_documentation_combination": "Pre túto kombináciu označenia nie je dostupná dokumentácia",
+        "no_documentation_key": "Pre tento kľúč nie je dostupná dokumentácia",
+        "show_more": "Ukáž viac",
+        "new_tag": "Nové označenie",
+        "view_on_osm": "Zobraz na openstreetmap.org",
+        "editing_feature": "Upravovanie {feature}",
+        "additional": "Dodatočné označenia",
+        "choose": "Zvoľ typ vlastnosti",
+        "results": "{n} výsledkov pre {search}",
+        "reference": "Zobraz na OpenStreetMap Wiki",
+        "back_tooltip": "Zmeň typ vlastnosti"
+    },
+    "background": {
+        "title": "Pozadie",
+        "description": "Nastavenia pozadia",
+        "percent_brightness": "{opacity}% jas",
+        "fix_misalignment": "Oprav prekryv",
+        "reset": "vynulovať"
+    },
+    "restore": {
+        "heading": "Máte neuložené zmeny",
+        "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej relácie?",
+        "restore": "Obnov",
+        "reset": "Vynuluj"
+    },
+    "save": {
+        "title": "Ulož",
+        "help": "Ulož zmeny do OpenStreetMap a sprístupni ich ďalším užívateľom.",
+        "no_changes": "Žiadne zmeny na uloženie.",
+        "error": "Počas ukladania sa vyskytla chyba",
+        "uploading": "Nahrávam zmeny do OpenStreetMap.",
+        "unsaved_changes": "Máte neuložené zmeny"
+    },
+    "splash": {
+        "welcome": "Vitajte v iD editore pre OpenStreetMap",
+        "text": "iD je prívetivý ale silný nástroj pre prispievanie do najlepšej slobodnej mapy sveta. Toto je vývojová verzia {version}. Pre viac informácií navštívte {website} a nahlasujte chyby na {github}.",
+        "walkthrough": "Začni prehliadku",
+        "start": "Upravuj"
+    },
+    "source_switch": {
+        "live": "pripojený",
+        "lose_changes": "Máte neuložené zmeny. Zmenou mapového servera ich zrušíte. Ste si istý, že chcete prepnúť na iný server?",
+        "dev": "dev"
+    },
+    "tag_reference": {
+        "description": "Popis",
+        "on_wiki": "{tag} na wiki.osm.org",
+        "used_with": "použité s {type}"
+    },
+    "validations": {
+        "untagged_point": "Neoznačený bod",
+        "untagged_line": "Neoznačená čiara",
+        "untagged_area": "Neoznačená plocha",
+        "many_deletions": "Vymazávate {n} objektov. Ste si naozaj istý? Týmto ich vymažete z mapy na openstreetmap.org, ktorú používajú ďalší používatelia.",
+        "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
+        "deprecated_tags": "Neschválené označenie: {tags}"
+    },
+    "zoom": {
+        "in": "Priblížiť",
+        "out": "Oddialiť"
+    },
+    "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
+    "gpx": {
+        "local_layer": "Lokálny GPX súbor",
+        "drag_drop": "Pretiahnite a pustite .gpx súbor na stránku"
+    },
+    "help": {
+        "title": "Pomoc",
+        "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, budete potrebovať [OpenStreetMap účet](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/systemed/iD).\n"
+    },
+    "intro": {
+        "navigation": {
+            "drag": "Hlavná plocha s mapou zobrazuje nad pozadím údaje z OpenStreetMap. Posúvať sa môžete ťahaním za mapu a koliečkom myši rovnako ako u iných webových máp. **Potiahnite za mapu!**",
+            "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Všetky objekty môžu byť vybrané kliknutím na ne. **Kliknite na bod aby ste ho vybrali.**",
+            "header": "Hlavička nám ukazuje typ objektu.",
+            "pane": "Keď je objekt vybraný, zobrazí sa editor objektu. Hlavička nám ukazuje typ objektu a hlavný panel zobrazuje atribúty objektu, ako sú jeho meno a adresa. **Zatvorte editor objektu pomocou tlačítka vpravo hore.**"
+        },
+        "points": {
+            "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo tam je. **Kliknite na tlačidlo Bod a pridajte nový bod.**",
+            "place": "Bod môžete umiestniť kliknutím na mapu. **Umiestnite bod na vrch budovy.**",
+            "search": "Bod môže znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"Kaviareň\"**",
+            "choose": "**Vyberte Kaviareň z ponuky.**"
+        },
+        "startediting": {
+            "start": "Začnite mapovať!"
+        }
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Prístup"
+            },
+            "address": {
+                "label": "Adresa",
+                "placeholders": {
+                    "housename": "Názov domu",
+                    "number": "123",
+                    "street": "Ulica",
+                    "city": "Mesto"
+                }
+            },
+            "aeroway": {
+                "label": "Typ"
+            },
+            "amenity": {
+                "label": "Typ"
+            },
+            "atm": {
+                "label": "Bankomat"
+            },
+            "bicycle_parking": {
+                "label": "Typ"
+            },
+            "building": {
+                "label": "Budova"
+            },
+            "building_area": {
+                "label": "Budova"
+            },
+            "building_yes": {
+                "label": "Budova"
+            },
+            "capacity": {
+                "label": "Kapacita"
+            },
+            "collection_times": {
+                "label": "Časy výberov"
+            },
+            "construction": {
+                "label": "Typ"
+            },
+            "crossing": {
+                "label": "Typ"
+            },
+            "cuisine": {
+                "label": "Druh jedla"
+            },
+            "denomination": {
+                "label": "Vierovyznanie"
+            },
+            "elevation": {
+                "label": "Nadmorská výška"
+            },
+            "emergency": {
+                "label": "Záchranná služba"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "fee": {
+                "label": "Poplatok"
+            },
+            "highway": {
+                "label": "Typ"
+            },
+            "historic": {
+                "label": "Typ"
+            },
+            "internet_access": {
+                "label": "Prístup k Internetu",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "Káblom",
+                    "terminal": "Terminál"
+                }
+            },
+            "landuse": {
+                "label": "Typ"
+            },
+            "layer": {
+                "label": "Vrstva"
+            },
+            "leisure": {
+                "label": "Typ"
+            },
+            "levels": {
+                "label": "Poschodia"
+            },
+            "man_made": {
+                "label": "Typ"
+            },
+            "maxspeed": {
+                "label": "Povolená rýchlosť"
+            },
+            "operator": {
+                "label": "Operátor"
+            },
+            "phone": {
+                "label": "Telefón"
+            },
+            "place": {
+                "label": "Typ"
+            },
+            "railway": {
+                "label": "Typ"
+            },
+            "religion": {
+                "label": "Náboženstvo"
+            }
+        }
+    }
+};
+/*
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    THIS FILE IS GENERATED BY `make translations`. Don't make changes to it.
+
+    Instead, edit the English strings in data/core.yaml, or contribute
+    translations on https://www.transifex.com/projects/p/id-editor/.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 locale.sv = {
     "modes": {
         "add_area": {
@@ -20571,6 +21558,16 @@ locale.vi = {
             "capacity": {
                 "label": "Số Chỗ Đậu Xe"
             },
+            "cardinal_direction": {
+                "label": "Chiều"
+            },
+            "clock_direction": {
+                "label": "Chiều",
+                "options": {
+                    "clockwise": "Theo Chiều kim Đồng hồ",
+                    "anticlockwise": "Ngược Chiều kim Đồng hồ"
+                }
+            },
             "collection_times": {
                 "label": "Giờ Lấy thư"
             },
@@ -20623,6 +21620,9 @@ locale.vi = {
             },
             "landuse": {
                 "label": "Mục đích"
+            },
+            "lanes": {
+                "label": "Số Làn"
             },
             "layer": {
                 "label": "Lớp"
@@ -20978,8 +21978,14 @@ locale.vi = {
                 "name": "Đường Đi bộ",
                 "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo"
             },
+            "highway/mini_roundabout": {
+                "name": "Đường vòng Nhỏ"
+            },
             "highway/motorway": {
                 "name": "Đường Cao tốc"
+            },
+            "highway/motorway_junction": {
+                "name": "Giao lộ Đường Cao tốc"
             },
             "highway/motorway_link": {
                 "name": "Nhánh Ra vào Đường Cao tốc",
@@ -21313,6 +22319,9 @@ locale.vi = {
             },
             "railway/monorail": {
                 "name": "Đường sắt Một ray"
+            },
+            "railway/platform": {
+                "name": "Ke ga"
             },
             "railway/rail": {
                 "name": "Đường sắt"
