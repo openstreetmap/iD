@@ -1,4 +1,20 @@
 {
+    "category-landuse": {
+        "geometry": "area",
+        "name": "Land Use",
+        "icon": "category-landuse",
+        "members": [
+            "landuse/residential",
+            "landuse/industrial",
+            "landuse/commercial",
+            "landuse/retail",
+            "landuse/farm",
+            "landuse/farmyard",
+            "landuse/forest",
+            "landuse/meadow",
+            "landuse/cemetery"
+        ]
+    },
     "category-path": {
         "geometry": "line",
         "name": "Path",

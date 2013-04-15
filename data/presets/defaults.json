@@ -1,5 +1,6 @@
 {
     "area": [
+        "category-landuse",
         "building",
         "leisure/park",
         "natural/water",
@@ -7,7 +8,6 @@
         "amenity/place_of_worship",
         "amenity/cafe",
         "amenity/restaurant",
-        "amenity/bar",
         "other_area"
     ],
     "line": [

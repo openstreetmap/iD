@@ -310,6 +310,9 @@ locale.en = {
     },
     "presets": {
         "categories": {
+            "category-landuse": {
+                "name": "Land Use"
+            },
             "category-path": {
                 "name": "Path"
             },
