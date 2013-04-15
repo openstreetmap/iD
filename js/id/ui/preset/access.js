@@ -14,13 +14,13 @@ iD.ui.preset.access = function(field, context) {
             .append('li')
             .attr('class', function(d) { return 'cf preset-access-' + d; });
 
-        enter.append('label')
-            .attr('class', 'col3 preset-label-access')
+        enter.append('span')
+            .attr('class', 'col6 label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
             .text(function(d) { return field.t('types.' + d); });
 
         enter.append('div')
-            .attr('class', 'col9 preset-input-access-wrap')
+            .attr('class', 'col6 preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
             .attr('class', 'preset-input-access')

@@ -47,7 +47,7 @@ body {
     background: black;
 }
 
-div, textarea, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
+div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -252,7 +252,7 @@ ul.link-list li:last-child {
     padding-left: 0;
 }
 
-.toggle-list a::before { 
+.toggle-list a::before {
     content: "";
     display: inline-block;
     border-radius: 50%;
@@ -265,11 +265,11 @@ ul.link-list li:last-child {
     top: 8px;
 }
 
-.toggle-list a:hover::before { 
+.toggle-list a:hover::before {
     box-shadow: inset 0 0 0 2px white;
 }
 
-.toggle-list a.selected::before { 
+.toggle-list a.selected::before {
     background: #7092ff;
     box-shadow: inset 0 0 0 2px white;
 }
@@ -968,10 +968,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     font-weight: bold;
 }
 
-.form-field-access .preset-input-wrap {
-    padding: 5px;
-}
-
 /* adding additional preset fields */
 
 .more-buttons {
@@ -1032,6 +1028,30 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
     height: 30px;
     margin: 5px;
     padding: 0 10px;
+}
+
+/* preset form access */
+
+.preset-input-wrap li {
+    border-bottom: 1px solid #CCC;
+}
+.preset-input-wrap li:last-child {
+    border-bottom: 0;
+}
+
+.preset-input-wrap .label {
+    background: #F6F6F6;
+    padding: 5px;
+}
+
+.preset-input-access-wrap input {
+    border-radius: 0;
+    border-width: 0;
+    border-left-width: 1px;
+}
+
+.preset-input-wrap li:last-child input {
+    border-bottom-right-radius: 4px;
 }
 
 /* preset form numbers */
@@ -1132,7 +1152,7 @@ input[type=number] {
     padding-left: 25px;
 }
 
-.radio-wrap button::before { 
+.radio-wrap button::before {
     content: "";
     display: inline-block;
     border-radius: 50%;
@@ -1145,11 +1165,11 @@ input[type=number] {
     top: 8px;
 }
 
-.radio-wrap button:hover::before { 
+.radio-wrap button:hover::before {
     box-shadow: inset 0 0 0 2px white;
 }
 
-.radio-wrap button.active::before { 
+.radio-wrap button.active::before {
     background: #7092ff;
     box-shadow: inset 0 0 0 2px white;
 }
@@ -1162,15 +1182,15 @@ input[type=number] {
     background-color: #E8EBFF !important;
 }
 
-.radio-wrap button.remove { 
+.radio-wrap button.remove {
     border-radius: 0 0 3px 3px;
 }
-.radio-wrap button.remove .icon { 
+.radio-wrap button.remove .icon {
     position: absolute;
     left: 2px;
 }
 
-.radio-wrap button.remove::before { 
+.radio-wrap button.remove::before {
     content: none;
 }
 
@@ -1301,7 +1321,6 @@ div.combobox {
 }
 
 .tag-list {
-    padding-top: 20px;
     margin-right: 40px;
 }
 
@@ -1320,7 +1339,6 @@ div.combobox {
 
 .tag-row input.key {
     background-color: #f6f6f6;
-    font-weight: bold;
 }
 
 .tag-row input.value {
