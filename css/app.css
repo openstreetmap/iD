@@ -1220,7 +1220,8 @@ input[type=number] {
     float: right;
     padding: 5px;
     text-align: center;
-
+    color: #A9A9A9;
+    font-weight: bold;
 }
 
 /* Preset form address */
