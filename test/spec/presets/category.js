@@ -19,13 +19,13 @@ describe("iD.presets.Category", function() {
     });
 
     it("maps members names to preset instances", function() {
-        var c = iD.presets.Category(category, iD.presets.Collection([residential]));
+        var c = iD.presets.Category('road', category, iD.presets.Collection([residential]));
         expect(c.members.collection[0]).to.eql(residential);
     });
 
     describe("#matchGeometry", function() {
         it("matches the type of an entity", function() {
-            var c = iD.presets.Category(category, iD.presets.Collection([residential])),
+            var c = iD.presets.Category('road', category, iD.presets.Collection([residential])),
                 w = iD.Way(),
                 n = iD.Node(),
                 g = iD.Graph().replace(w);
