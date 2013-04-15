@@ -1219,6 +1219,23 @@
         },
         "name": "Foot Path"
     },
+    "highway/living_street": {
+        "icon": "highway-residential",
+        "fields": [
+            "oneway",
+            "structure",
+            "access",
+            "maxspeed",
+            "surface"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "living_street"
+        },
+        "name": "Living Street"
+    },
     "highway/mini_roundabout": {
         "geometry": [
             "vertex"

@@ -873,6 +873,10 @@ locale.en = {
                 "name": "Foot Path",
                 "terms": "beaten path,boulevard,clearing,course,cut*,drag*,footpath,highway,lane,line,orbit,passage,pathway,rail,rails,road,roadway,route,street,thoroughfare,trackway,trail,trajectory,walk"
             },
+            "highway/living_street": {
+                "name": "Living Street",
+                "terms": ""
+            },
             "highway/mini_roundabout": {
                 "name": "Mini-Roundabout",
                 "terms": ""
