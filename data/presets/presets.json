@@ -1853,6 +1853,7 @@
         "name": "Grass"
     },
     "landuse/industrial": {
+        "icon": "industrial",
         "geometry": [
             "point",
             "area"
@@ -1907,6 +1908,17 @@
         },
         "terms": [],
         "name": "Residential"
+    },
+    "landuse/retail": {
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "landuse": "retail"
+        },
+        "name": "Retail"
     },
     "landuse/vineyard": {
         "geometry": [

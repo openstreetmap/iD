@@ -1040,6 +1040,10 @@ locale.en = {
                 "name": "Residential",
                 "terms": ""
             },
+            "landuse/retail": {
+                "name": "Retail",
+                "terms": ""
+            },
             "landuse/vineyard": {
                 "name": "Vineyard",
                 "terms": ""
