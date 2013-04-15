@@ -1962,11 +1962,10 @@
         "name": "Golf Course"
     },
     "leisure/marina": {
-        "icon": "marina",
+        "icon": "harbor",
         "geometry": [
             "point",
             "vertex",
-            "line",
             "area"
         ],
         "tags": {
