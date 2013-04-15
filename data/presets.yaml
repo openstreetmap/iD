@@ -171,6 +171,7 @@ en:
           tunnel: Tunnel
           embankment: Embankment
           cutting: Cutting
+          remove: Remove
       supervised: 
         label: Supervised
       surface: 

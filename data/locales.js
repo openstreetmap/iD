@@ -4624,7 +4624,8 @@ locale.en = {
                     "bridge": "Bridge",
                     "tunnel": "Tunnel",
                     "embankment": "Embankment",
-                    "cutting": "Cutting"
+                    "cutting": "Cutting",
+                    "remove": "Remove"
                 }
             },
             "supervised": {

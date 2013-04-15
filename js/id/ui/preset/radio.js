@@ -7,7 +7,7 @@ iD.ui.preset.radio = function(field) {
         selection.classed('preset-radio', true);
 
         var buttonwrap = selection.append('div')
-            .attr('class', 'preset-input-wrap radio-wrap');
+            .attr('class', 'preset-input-wrap toggle-list radio-wrap');
 
         buttons = buttonwrap.selectAll('button')
             .data(field.options || field.keys)
@@ -20,10 +20,12 @@ iD.ui.preset.radio = function(field) {
             });
 
         buttonwrap.append('button')
+            .attr('class','remove')
             .on('click', function() {
                 buttons.classed('active', false);
                 change();
             })
+            .text( field.t('options.remove'))
             .append('span')
                 .attr('class', 'icon remove');
     }
