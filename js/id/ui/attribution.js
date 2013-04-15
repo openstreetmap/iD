@@ -4,7 +4,7 @@ iD.ui.Attribution = function(context) {
     function update() {
         if (!context.background().source()) {
             selection.html('');
-            return
+            return;
         }
 
         var attribution = selection.selectAll('.provided-by')

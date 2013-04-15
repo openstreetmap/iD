@@ -51,7 +51,7 @@ iD.ui.preset.access = function(field, context) {
             return {
                 title: field.t('options.' + option + '.description'),
                 value: option
-            }
+            };
         });
     };
 

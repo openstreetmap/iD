@@ -1,6 +1,6 @@
 iD.operations.Split = function(selection, context) {
     var vertices = _.filter(selection, function vertex(entityId) {
-        return context.geometry(entityId) === 'vertex'
+        return context.geometry(entityId) === 'vertex';
     });
 
     var entityId = vertices[0],
