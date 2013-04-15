@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "access"
+    ],
     "geometry": [
         "vertex"
     ],

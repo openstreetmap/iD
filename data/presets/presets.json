@@ -854,6 +854,9 @@
         "name": "Barrier"
     },
     "barrier/block": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "point",
             "vertex"
@@ -864,6 +867,9 @@
         "name": "Block"
     },
     "barrier/bollard": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "point",
             "vertex",
@@ -894,6 +900,9 @@
         "name": "City Wall"
     },
     "barrier/cycle_barrier": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "vertex"
         ],
@@ -932,6 +941,9 @@
         "name": "Fence"
     },
     "barrier/gate": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "point",
             "vertex",
@@ -953,6 +965,9 @@
         "name": "Hedge"
     },
     "barrier/kissing_gate": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "vertex"
         ],
@@ -962,6 +977,9 @@
         "name": "Kissing Gate"
     },
     "barrier/lift_gate": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "point",
             "vertex"
@@ -982,6 +1000,9 @@
         "name": "Retaining Wall"
     },
     "barrier/stile": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "point",
             "vertex"
@@ -992,6 +1013,9 @@
         "name": "Stile"
     },
     "barrier/toll_booth": {
+        "fields": [
+            "access"
+        ],
         "geometry": [
             "vertex"
         ],
