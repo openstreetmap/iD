@@ -43,9 +43,23 @@ function validate(file, instance, schema) {
 }
 
 var translations = {
+    categories: {},
     fields: {},
     presets: {}
 };
+
+function generateCategories() {
+    var categories = {};
+    glob.sync(__dirname + '/data/presets/categories/*.json').forEach(function(file) {
+        var field = read(file),
+            id = 'category-' + path.basename(file, '.json');
+
+        translations.categories[id] = {name: field.name};
+
+        categories[id] = field;
+    });
+    fs.writeFileSync('data/presets/categories.json', stringify(categories));
+}
 
 function generateFields() {
     var fields = {};
@@ -86,6 +100,7 @@ function generatePresets() {
     fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: translations}}));
 }
 
+generateCategories();
 generateFields();
 generatePresets();
 

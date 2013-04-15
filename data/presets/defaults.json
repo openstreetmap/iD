@@ -11,10 +11,10 @@
         "other_area"
     ],
     "line": [
-        "Road",
-        "Rail",
-        "Path",
-        "Water",
+        "category-road",
+        "category-rail",
+        "category-path",
+        "category-water",
         "power/line",
         "other"
     ],

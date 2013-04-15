@@ -4384,6 +4384,20 @@ locale.en = {
         }
     },
     "presets": {
+        "categories": {
+            "category-path": {
+                "name": "Path"
+            },
+            "category-rail": {
+                "name": "Rail"
+            },
+            "category-road": {
+                "name": "Road"
+            },
+            "category-water": {
+                "name": "Water"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Access",

@@ -26,10 +26,9 @@ iD.presets = function(context) {
             });
         }
 
-
         if (d.categories) {
-            d.categories.forEach(function(d) {
-                all.collection.push(iD.presets.Category(d, all));
+            _.forEach(d.categories, function(d, id) {
+                all.collection.push(iD.presets.Category(id, d, all));
             });
         }
 

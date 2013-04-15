@@ -1,5 +1,7 @@
-iD.presets.Category = function(category, all) {
+iD.presets.Category = function(id, category, all) {
     category = _.clone(category);
+
+    category.id = id;
 
     category.members = iD.presets.Collection(category.members.map(function(id) {
         return all.item(id);
@@ -12,7 +14,7 @@ iD.presets.Category = function(category, all) {
     category.matchTags = function() { return false; };
 
     category.name = function() {
-        return category.id;
+        return t('presets.categories.' + id + '.name', {'default': id});
     };
 
     category.terms = function() {

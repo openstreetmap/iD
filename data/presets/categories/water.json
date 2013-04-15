@@ -1,0 +1,11 @@
+{
+    "geometry": "line",
+    "name": "Water",
+    "icon": "category-water",
+    "members": [
+        "waterway/river",
+        "waterway/stream",
+        "waterway/canal",
+        "waterway/ditch"
+    ]
+}

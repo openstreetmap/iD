@@ -1,0 +1,13 @@
+{
+    "geometry": "line",
+    "name": "Rail",
+    "icon": "category-rail",
+    "members": [
+        "railway/rail",
+        "railway/subway",
+        "railway/tram",
+        "railway/monorail",
+        "railway/disused",
+        "railway/abandoned"
+    ]
+}

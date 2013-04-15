@@ -1,55 +1,60 @@
-[{
-    "geometry": "line",
-    "id": "Road",
-    "icon": "category-roads",
-    "members": [
-        "highway/residential",
-        "highway/motorway",
-        "highway/trunk",
-        "highway/primary",
-        "highway/secondary",
-        "highway/tertiary",
-        "highway/service",
-        "highway/motorway_link",
-        "highway/trunk_link",
-        "highway/primary_link",
-        "highway/secondary_link",
-        "highway/tertiary_link",
-        "highway/unclassified",
-        "highway/track",
-        "highway/road"
-    ]
-}, {
-    "geometry": "line",
-    "id": "Rail",
-    "icon": "category-rail",
-    "members": [
-        "railway/rail",
-        "railway/subway",
-        "railway/tram",
-        "railway/monorail",
-        "railway/disused",
-        "railway/abandoned"
-    ]
-}, {
-    "geometry": "line",
-    "id": "Path",
-    "icon": "category-path",
-    "members": [
-        "highway/footway",
-        "highway/cycleway",
-        "highway/bridleway",
-        "highway/path",
-        "highway/steps"
-    ]
-}, {
-    "geometry": "line",
-    "id": "Water",
-    "icon": "category-water",
-    "members": [
-        "waterway/river",
-        "waterway/stream",
-        "waterway/canal",
-        "waterway/ditch"
-    ]
-}]
+{
+    "category-path": {
+        "geometry": "line",
+        "name": "Path",
+        "icon": "category-path",
+        "members": [
+            "highway/footway",
+            "highway/cycleway",
+            "highway/bridleway",
+            "highway/path",
+            "highway/steps"
+        ]
+    },
+    "category-rail": {
+        "geometry": "line",
+        "name": "Rail",
+        "icon": "category-rail",
+        "members": [
+            "railway/rail",
+            "railway/subway",
+            "railway/tram",
+            "railway/monorail",
+            "railway/disused",
+            "railway/abandoned"
+        ]
+    },
+    "category-road": {
+        "geometry": "line",
+        "name": "Road",
+        "icon": "category-roads",
+        "members": [
+            "highway/residential",
+            "highway/motorway",
+            "highway/trunk",
+            "highway/primary",
+            "highway/secondary",
+            "highway/tertiary",
+            "highway/service",
+            "highway/motorway_link",
+            "highway/trunk_link",
+            "highway/primary_link",
+            "highway/secondary_link",
+            "highway/tertiary_link",
+            "highway/unclassified",
+            "highway/track",
+            "highway/road"
+        ]
+    },
+    "category-water": {
+        "geometry": "line",
+        "name": "Water",
+        "icon": "category-water",
+        "members": [
+            "waterway/river",
+            "waterway/stream",
+            "waterway/canal",
+            "waterway/ditch"
+        ]
+    }
+}
