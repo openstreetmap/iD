@@ -35,6 +35,7 @@
     "jsonschema": "~0.3.2"
   },
   "engines": {
-    "node": "~0.8.20"
-  }
+    "node": ">=0.10.0"
+  },
+  "engineStrict": true
 }
