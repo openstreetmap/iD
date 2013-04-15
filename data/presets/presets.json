@@ -1,5 +1,6 @@
 {
     "aeroway": {
+        "icon": "airport",
         "fields": [
             "aeroway"
         ],
@@ -1874,6 +1875,7 @@
         "name": "Meadow"
     },
     "landuse/orchard": {
+        "icon": "park2",
         "geometry": [
             "point",
             "area"
@@ -2868,7 +2870,7 @@
         "name": "Shop"
     },
     "shop/alcohol": {
-        "icon": "shop",
+        "icon": "alcohol-shop",
         "fields": [
             "address",
             "opening_hours"
@@ -3125,7 +3127,7 @@
         "name": "Convenience Store"
     },
     "shop/deli": {
-        "icon": "shop",
+        "icon": "restaurant",
         "fields": [
             "address",
             "opening_hours"
@@ -3445,7 +3447,7 @@
         "name": "Motorcycle Dealership"
     },
     "shop/music": {
-        "icon": "shop",
+        "icon": "music",
         "fields": [
             "address",
             "opening_hours"
@@ -3738,6 +3740,7 @@
         "name": "Alpine Hut"
     },
     "tourism/artwork": {
+        "icon": "art-gallery",
         "geometry": [
             "point",
             "vertex",
@@ -3750,6 +3753,7 @@
         "name": "Artwork"
     },
     "tourism/attraction": {
+        "icon": "monument",
         "fields": [
             "operator",
             "address"
@@ -4041,7 +4045,7 @@
         "name": "Ditch"
     },
     "waterway/drain": {
-        "icon": "waterway-river",
+        "icon": "waterway-stream",
         "geometry": [
             "line"
         ],
