@@ -13,7 +13,7 @@ locale.de = {
         "add_area": {
             "title": "Fläche.",
             "description": "Füge Parks, Gebäude, Seen oder andere Flächen zur Karte hinzu.",
-            "tail": "Klicke in die Karte, um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten."
+            "tail": "Klicke auf die Karte, um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten."
         },
         "add_line": {
             "title": "Linie",
@@ -22,11 +22,11 @@ locale.de = {
         },
         "add_point": {
             "title": "Punkt",
-            "description": "Restaurants, Denkmäler und Briefkästen sind Punkte",
+            "description": "Füge Restaurants, Denkmäler, Briefkästen oder andere Punkte hinzu.",
             "tail": "Klicke in die Karte, um einen Punkt hinzuzufügen."
         },
         "browse": {
-            "title": "Navigation",
+            "title": "Durchsuchen.",
             "description": "Verschieben und Vergrößern/Verkleinern des Kartenausschnitts."
         },
         "draw_area": {
@@ -274,7 +274,7 @@ locale.de = {
     },
     "intro": {
         "navigation": {
-            "drag": "Die Karte zeigt OpenStreetMap Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch zeihen bewegen. **Verschiebe die Karte**",
+            "drag": "Die Karte zeigt OpenStreetMap Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch ziehen bewegen. **Verschiebe die Karte**",
             "select": "Kartenobjekte werden in drei verschiedenen Weisen dargestellt: als Punkte, als Linie oder als Flächen. Alle Objekte können durch Klicken ausgewählt werden. **Klicke auf einen Punkt, um ihn auszuwählen**",
             "header": "Die Kopfzeile zeigt den Typ des Objektes.",
             "pane": "Wird ein Objekt ausgewählt, wird der Eigenschaftseditor angezeigt. Die Kopfzeile zeigt den Typ des Objektes an. Im Hauptfenster werden die Eigenschaften des Objektes angezeigt, wie etwa sein Name und seine Adresse.\n**Schließe den Eigenschaftseditor mit dem Schließen-Button rechts oben.**"

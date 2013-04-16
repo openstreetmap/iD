@@ -395,6 +395,16 @@ locale.es = {
             "capacity": {
                 "label": "Capacidad"
             },
+            "cardinal_direction": {
+                "label": "Dirección"
+            },
+            "clock_direction": {
+                "label": "Dirección",
+                "options": {
+                    "clockwise": "En sentido horario",
+                    "anticlockwise": "En sentido antihorario"
+                }
+            },
             "collection_times": {
                 "label": "Horario de recogida"
             },
@@ -805,8 +815,14 @@ locale.es = {
                 "name": "Senda peatonal",
                 "terms": "camino,boulevard,senda,sendero,carretera,vía,vial,riel,paso,pista,vereda,pasaje,calzada,travesía,avenida,bulevar,ronda,paseo,alameda,arboleda,derrotero,ramal,trocha,rastro,huella,costanilla,rúa,pasaje,callejón,pasadizo,arteria,corredera,gran vía"
             },
+            "highway/mini_roundabout": {
+                "name": "Minirotonda"
+            },
             "highway/motorway": {
                 "name": "Autopista"
+            },
+            "highway/motorway_junction": {
+                "name": "Cruce de autopista"
             },
             "highway/motorway_link": {
                 "name": "Enlace de autopista",
@@ -814,6 +830,9 @@ locale.es = {
             },
             "highway/path": {
                 "name": "Camino"
+            },
+            "highway/pedestrian": {
+                "name": "Peatonal"
             },
             "highway/primary": {
                 "name": "Carretera primaria"
@@ -1140,6 +1159,9 @@ locale.es = {
             },
             "railway/monorail": {
                 "name": "Monorraíl "
+            },
+            "railway/platform": {
+                "name": "Andén"
             },
             "railway/rail": {
                 "name": "Raíl"

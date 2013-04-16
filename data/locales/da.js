@@ -208,7 +208,8 @@ locale.da = {
         "choose": "Vælg funktionstype",
         "results": "{n} resultater for {search}",
         "reference": "Se på OpenStreetMap Wiki",
-        "back_tooltip": "Gem funktionstype"
+        "back_tooltip": "Gem funktionstype",
+        "remove": "Fjern"
     },
     "background": {
         "title": "Baggrund",
@@ -265,10 +266,12 @@ locale.da = {
         "drag_drop": "Træk og slip en .gpx fil på denne her side"
     },
     "help": {
-        "title": "Hjælp"
+        "title": "Hjælp",
+        "addresses": "#Adresser⏎\n⏎\nAdresser er noget af det mest brugbare til kortet.⏎\n⏎\nSelvom adresser ofte er repræsenteret som dele af veje i OpenStreetMap⏎\nDisse er lagret som attributter for bygninger og steder langs veje.⏎\n⏎\nDu kan også tilføje adresseinformation til steder som er kortlagt som bygningspolygoner⏎\nligesom bygninger der er markeret som enkeltpunkter. Den optimale kilde til⏎\nadresser⏎\ner indsamling på selve stedet eller personlig kendkskab - som med ethvert andet⏎\ngeografisk objekt, så er kopiering fra kommercielle kilder som fx Google Maps\nstrengt⏎\nforbudt.⏎\n\n\n"
     },
     "intro": {
         "navigation": {
+            "drag": "Grundkortet viser OpenStreetMap data oven på et baggrundkort. Du kan navigere ved at trække og scrolle lige som ethvert andet webkort.**Træk i kortet!**",
             "select": "Kortets objekter kun beskrives på tre måder: ved brug af punkter, linjer eller områder. Alle kortets objekter kan vælges ved at klikke på dem.**Klik på et punkt for at vælge dette.**",
             "header": "Overskriften viser os kortfunktionstyperne."
         },
@@ -295,6 +298,7 @@ locale.da = {
         "lines": {
             "add": "Linjer bruges til at beskrive ting som fx veje, jernbanespor og floder.**Klik på linjeknappen for at tilføje en ny linje.**",
             "start": "**Start linjen ved at klikke ved enden af en vej**",
+            "intersect": "Klik for at tilføje punkter til linjen. Du kan trække i kortet hvis det er nødvendigt mens du tegner. Veje og mange andre type af linjer er dele af et større netværk. Det er meget vigtigt at disse linjer er forbundet korrekt for at få rutenavigationsværktøjer til at virke.**Klik på Flower Street for at lave en sammenkædning af de to linjer.**",
             "finish": "Linjer kan afsluttes ved at klikke på det sidste punkt igen.**Afslut indtegning af vejen.**",
             "road": "**Vælg vej fra gitteret**",
             "residential": "Der er mange typer af veje, den mest brugte er villaveje.**Vælg villaveje**",
@@ -308,6 +312,23 @@ locale.da = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Områdebrug"
+            },
+            "category-path": {
+                "name": "Sti"
+            },
+            "category-rail": {
+                "name": "Jernbane"
+            },
+            "category-road": {
+                "name": "Vej"
+            },
+            "category-water": {
+                "name": "Vand"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Adgang",
@@ -384,6 +405,16 @@ locale.da = {
             "capacity": {
                 "label": "Kapacitet"
             },
+            "cardinal_direction": {
+                "label": "Retning"
+            },
+            "clock_direction": {
+                "label": "Retning",
+                "options": {
+                    "clockwise": "Retning med uret",
+                    "anticlockwise": "Retning mod uret"
+                }
+            },
             "collection_times": {
                 "label": "Indsamlingstid"
             },
@@ -436,6 +467,9 @@ locale.da = {
             },
             "landuse": {
                 "label": "Type"
+            },
+            "lanes": {
+                "label": "Vejbaner"
             },
             "layer": {
                 "label": "Lag"
@@ -734,6 +768,9 @@ locale.da = {
             "barrier/hedge": {
                 "name": "Læhegn"
             },
+            "barrier/kissing_gate": {
+                "name": "Dyrefoldsport"
+            },
             "barrier/lift_gate": {
                 "name": "Løftebom"
             },
@@ -785,10 +822,20 @@ locale.da = {
                 "name": "Cykelsti"
             },
             "highway/footway": {
-                "name": "Gangsti"
+                "name": "Gangsti",
+                "terms": "sti,boulevard,gangsti,vej,bane,linje,passage,sti,jernbane,jernbanespor,vej,gade,rute,gennemkørsel,spor,gå"
+            },
+            "highway/living_street": {
+                "name": "Stillevej"
+            },
+            "highway/mini_roundabout": {
+                "name": "Vendeplads"
             },
             "highway/motorway": {
                 "name": "Motorvej"
+            },
+            "highway/motorway_junction": {
+                "name": "Motorvejsfletningsvej"
             },
             "highway/motorway_link": {
                 "name": "Motorvejsafkørsel",
@@ -796,6 +843,9 @@ locale.da = {
             },
             "highway/path": {
                 "name": "Sti"
+            },
+            "highway/pedestrian": {
+                "name": "Fodgænger"
             },
             "highway/primary": {
                 "name": "Primærvej"
@@ -923,6 +973,9 @@ locale.da = {
             "landuse/residential": {
                 "name": "Beboelsesområde"
             },
+            "landuse/retail": {
+                "name": "Handelsområde"
+            },
             "landuse/vineyard": {
                 "name": "Vingård"
             },
@@ -1007,7 +1060,8 @@ locale.da = {
                 "name": "Klint"
             },
             "natural/coastline": {
-                "name": "Kystlinje"
+                "name": "Kystlinje",
+                "terms": "Kysten"
             },
             "natural/glacier": {
                 "name": "Gletsjer"
@@ -1019,7 +1073,8 @@ locale.da = {
                 "name": "Hede"
             },
             "natural/peak": {
-                "name": "Højdedrag"
+                "name": "Højdedrag",
+                "terms": "alpetop,bjergtop,bakke,bjerg,top,bakketop"
             },
             "natural/scrub": {
                 "name": "Buskområde"
@@ -1034,7 +1089,8 @@ locale.da = {
                 "name": "Vand"
             },
             "natural/water/lake": {
-                "name": "Sø"
+                "name": "Sø",
+                "terms": "sø, dam, mose"
             },
             "natural/water/pond": {
                 "name": "Dam",
@@ -1119,6 +1175,9 @@ locale.da = {
             },
             "railway/monorail": {
                 "name": "Monorail"
+            },
+            "railway/platform": {
+                "name": "Stationsplatform"
             },
             "railway/rail": {
                 "name": "Jernbanespor"
@@ -1362,13 +1421,15 @@ locale.da = {
                 "name": "Drænløb"
             },
             "waterway/river": {
-                "name": "Flod"
+                "name": "Flod",
+                "terms": "bæk,kurs,å,vandvej"
             },
             "waterway/riverbank": {
                 "name": "Flodbred"
             },
             "waterway/stream": {
-                "name": "Å"
+                "name": "Å",
+                "terms": "vandløb, kanal,flod, vand,å"
             },
             "waterway/weir": {
                 "name": "Stemmeværk"

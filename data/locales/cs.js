@@ -279,6 +279,23 @@ locale.cs = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Využití krajiny"
+            },
+            "category-path": {
+                "name": "Pěšina"
+            },
+            "category-rail": {
+                "name": "Železnice"
+            },
+            "category-road": {
+                "name": "Silnice"
+            },
+            "category-water": {
+                "name": "Vodní tok"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Přístup",
@@ -354,6 +371,16 @@ locale.cs = {
             },
             "capacity": {
                 "label": "Kapacita"
+            },
+            "cardinal_direction": {
+                "label": "Směr"
+            },
+            "clock_direction": {
+                "label": "Směr",
+                "options": {
+                    "clockwise": "Po směru hod. ručiček",
+                    "anticlockwise": "Proti směru hod. ručiček"
+                }
             },
             "collection_times": {
                 "label": "Čas výběru"
@@ -764,14 +791,26 @@ locale.cs = {
                 "name": "Pěšina",
                 "terms": "cesta,silnice,ulice,ulička,chodník,třída,bulvár,avenue,pasáž,stezka,trasa,trať,magistrála,radiála,pěšina"
             },
+            "highway/living_street": {
+                "name": "Obytná zóna"
+            },
+            "highway/mini_roundabout": {
+                "name": "Malý kruhový objezd"
+            },
             "highway/motorway": {
                 "name": "Dálnice"
+            },
+            "highway/motorway_junction": {
+                "name": "Dálniční sjezd"
             },
             "highway/motorway_link": {
                 "name": "Dálnice - nájezd"
             },
             "highway/path": {
                 "name": "Cesta"
+            },
+            "highway/pedestrian": {
+                "name": "Pěší zóna"
             },
             "highway/primary": {
                 "name": "Silnice 1. třídy"
@@ -894,6 +933,9 @@ locale.cs = {
             },
             "landuse/residential": {
                 "name": "Rezidenční oblast"
+            },
+            "landuse/retail": {
+                "name": "Obchody"
             },
             "landuse/vineyard": {
                 "name": "Vinice"
@@ -1093,6 +1135,9 @@ locale.cs = {
             },
             "railway/monorail": {
                 "name": "Jednokolejka"
+            },
+            "railway/platform": {
+                "name": "Nástupiště"
             },
             "railway/rail": {
                 "name": "Kolej"

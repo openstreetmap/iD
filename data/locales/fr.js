@@ -395,6 +395,16 @@ locale.fr = {
             "capacity": {
                 "label": "Capacité"
             },
+            "cardinal_direction": {
+                "label": "Sens"
+            },
+            "clock_direction": {
+                "label": "Sens",
+                "options": {
+                    "clockwise": "Sens horaire",
+                    "anticlockwise": "Sens anti-horaire"
+                }
+            },
             "collection_times": {
                 "label": "Horaires de collecte"
             },
@@ -805,8 +815,14 @@ locale.fr = {
                 "name": "Voie piétonne",
                 "terms": "passage, chemin, route, rue, autoroute, avenue, boulevard, chaussée, chemin de fer, rails, piste, allée, sentier, voie"
             },
+            "highway/mini_roundabout": {
+                "name": "Mini rond-point"
+            },
             "highway/motorway": {
                 "name": "Autoroute"
+            },
+            "highway/motorway_junction": {
+                "name": "Bretelle d'autoroute"
             },
             "highway/motorway_link": {
                 "name": "Bretelle d'autoroute",
@@ -814,6 +830,9 @@ locale.fr = {
             },
             "highway/path": {
                 "name": "Chemin non carrossable"
+            },
+            "highway/pedestrian": {
+                "name": "Piétonnier"
             },
             "highway/primary": {
                 "name": "Route principale"
@@ -1140,6 +1159,9 @@ locale.fr = {
             },
             "railway/monorail": {
                 "name": "Monorail"
+            },
+            "railway/platform": {
+                "name": "Quai de gare"
             },
             "railway/rail": {
                 "name": "Voie ferrée"

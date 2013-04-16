@@ -812,8 +812,8 @@ locale.vi = {
                 "name": "Đường Xe đạp"
             },
             "highway/footway": {
-                "name": "Đường Đi bộ",
-                "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo"
+                "name": "Đường Dạo",
+                "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo,đường dạo"
             },
             "highway/mini_roundabout": {
                 "name": "Đường vòng Nhỏ"
@@ -830,6 +830,9 @@ locale.vi = {
             },
             "highway/path": {
                 "name": "Lối"
+            },
+            "highway/pedestrian": {
+                "name": "Đường Đi bộ"
             },
             "highway/primary": {
                 "name": "Đường Chính"

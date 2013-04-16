@@ -395,6 +395,16 @@ locale.uk = {
             "capacity": {
                 "label": "Міськість"
             },
+            "cardinal_direction": {
+                "label": "Напрямок"
+            },
+            "clock_direction": {
+                "label": "Напрямок",
+                "options": {
+                    "clockwise": "За годинниковою стрілкою",
+                    "anticlockwise": "Проти годинникової стрілки"
+                }
+            },
             "collection_times": {
                 "label": "Час виїмки пошти"
             },
@@ -793,14 +803,23 @@ locale.uk = {
             "highway/footway": {
                 "name": "Тротуар"
             },
+            "highway/mini_roundabout": {
+                "name": "Малий круговий рух "
+            },
             "highway/motorway": {
                 "name": "Автомагістраль"
+            },
+            "highway/motorway_junction": {
+                "name": "З’єднання з автомагістраллю"
             },
             "highway/motorway_link": {
                 "name": "З’їзд з/на автомагістраль"
             },
             "highway/path": {
                 "name": "Тропа"
+            },
+            "highway/pedestrian": {
+                "name": "Пішохідна доріжка"
             },
             "highway/primary": {
                 "name": "Головна дорога"
@@ -1114,6 +1133,9 @@ locale.uk = {
             },
             "railway/monorail": {
                 "name": "Монорейка"
+            },
+            "railway/platform": {
+                "name": "Залізнична платформа"
             },
             "railway/rail": {
                 "name": "Рейки"
