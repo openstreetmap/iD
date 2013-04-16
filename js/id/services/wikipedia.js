@@ -14,7 +14,7 @@ iD.wikipedia  = function() {
                 callback: '{callback}',
                 srsearch: query
             }), function(data) {
-                if (!data.query) return console.log("resp", data);
+                if (!data.query) return
                 callback(query, data.query.search.map(function(d) {
                     return d.title;
                 }));
@@ -35,5 +35,27 @@ iD.wikipedia  = function() {
                 callback(d[0], d[1]);
             });
     };
+
+    wiki.translations = function(lang, title, callback) {
+        d3.jsonp(endpoint.replace('en', lang) +
+            iD.util.qsString({
+                action: 'query',
+                prop: 'langlinks',
+                format: 'json',
+                callback: '{callback}',
+                lllimit: 500,
+                titles: title
+            }), function(d) {
+                var list = d.query.pages[Object.keys(d.query.pages)[0]],
+                    translations = {};
+                if (list) {
+                    list.langlinks.forEach(function(d) {
+                        translations[d.lang] = d['*'];
+                    });
+                    callback(translations);
+                }
+            });
+    };
+
     return wiki;
 };

@@ -1,7 +1,8 @@
 iD.ui.preset.localized = function(field, context) {
 
     var event = d3.dispatch('change', 'close'),
-        input, localizedInputs;
+        wikipedia = iD.wikipedia(),
+        input, localizedInputs, wikiTitles;
 
     function i(selection) {
 
@@ -22,6 +23,7 @@ iD.ui.preset.localized = function(field, context) {
 
         localizedInputs = selection.append('div')
             .attr('class', 'localized-wrap');
+
     }
 
     function addBlank() {
@@ -49,7 +51,13 @@ iD.ui.preset.localized = function(field, context) {
         if (language) value = language[2];
 
         t[key(d.lang)] = '';
-        if (d.value) t[key(value)] = d.value;
+
+        if (d.value) {
+            t[key(value)] = d.value;
+        } else if (wikiTitles && wikiTitles[d.lang]) {
+            t[key(value)] = wikiTitles[d.lang];
+        }
+
         event.change(t);
 
         d.lang = value;
@@ -126,6 +134,18 @@ iD.ui.preset.localized = function(field, context) {
     }
 
     i.tags = function(tags) {
+
+        // Fetch translations from wikipedia
+        if (tags.wikipedia && !wikiTitles) {
+            wikiTitles = {};
+            var wm = tags.wikipedia.match(/([^:]+):(.+)/);
+            if (wm && wm[0] && wm[1]) {
+                wikipedia.translations(wm[1], wm[2], function(d) {
+                    wikiTitles = d;
+                });
+            }
+        }
+
         input.property('value', tags[field.key] || '');
 
         var postfixed = [];
