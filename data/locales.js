@@ -4273,7 +4273,8 @@ locale.en = {
         "choose": "Select feature type",
         "results": "{n} results for {search}",
         "reference": "View on OpenStreetMap Wiki",
-        "back_tooltip": "Change feature type"
+        "back_tooltip": "Change feature type",
+        "remove": "Remove"
     },
     "background": {
         "title": "Background",

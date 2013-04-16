@@ -451,8 +451,7 @@
                 "bridge": "Bridge",
                 "tunnel": "Tunnel",
                 "embankment": "Embankment",
-                "cutting": "Cutting",
-                "remove": "Remove"
+                "cutting": "Cutting"
             }
         }
     },

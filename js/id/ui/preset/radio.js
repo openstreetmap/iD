@@ -25,9 +25,9 @@ iD.ui.preset.radio = function(field) {
                 buttons.classed('active', false);
                 change();
             })
-            .text( field.t('options.remove'))
+            .text(t('inspector.remove'))
             .append('span')
-                .attr('class', 'icon remove');
+            .attr('class', 'icon remove');
     }
 
     function change() {

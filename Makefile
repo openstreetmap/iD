@@ -13,6 +13,9 @@ DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
 data/data.js: $(DATA_FILES)
 	node build.js
 
+data/locales/en.js: data/core.yaml data/presets.yaml
+	node build.js
+
 iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
