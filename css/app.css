@@ -962,7 +962,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 65px;
 }
 
-.form-field-name input {
+.form-field-name input.localized-main {
     height: 35px;
     font-size: 18px;
     font-weight: bold;
@@ -1192,6 +1192,50 @@ input[type=number] {
 
 .radio-wrap button.remove::before {
     content: none;
+}
+
+.form-field .localized-main {
+    width: 90%;
+    border-radius: 0 0 0 4px;
+}
+
+.form-field .localized-add {
+    width: 10%;
+    height: 35px;
+    border-radius: 0 0 4px 0;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    vertical-align: top;
+}
+
+.form-field .localized-wrap .entry .localized-lang {
+    border-top: none;
+    border-right: none;
+    border-radius: 0;
+    width: 30%;
+}
+
+.form-field .localized-wrap .entry .localized-value {
+    border-top: none;
+    border-radius: 0;
+    width: 60%;
+}
+
+.form-field .localized-wrap .entry .localized-remove {
+    height: 30px;
+    border-radius: 0;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    vertical-align: top;
+    width: 10%;
+}
+
+.form-field .localized-wrap .entry:last-child .localized-lang {
+    border-radius: 0 0 0 4px;
+}
+
+.form-field .localized-wrap .entry:last-child .localized-remove {
+    border-radius: 0 0 4px 0;
 }
 
 .form-field .wiki-lang {

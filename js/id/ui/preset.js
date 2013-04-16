@@ -115,7 +115,10 @@ iD.ui.preset = function(context, entity, preset) {
             .duration(200)
             .style('padding-top', '20px')
             .style('max-height', '240px')
-            .style('opacity', '1');
+            .style('opacity', '1')
+            .each('end', function(d) {
+                d3.select(this).style('max-height', '');
+            });
 
         var label = enter.append('label')
             .attr('class', 'form-label')

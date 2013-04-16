@@ -286,7 +286,7 @@
     },
     "name": {
         "key": "name",
-        "type": "text",
+        "type": "localized",
         "label": "Name"
     },
     "natural": {

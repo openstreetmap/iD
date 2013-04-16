@@ -31,6 +31,7 @@
                 "url",
                 "radio",
                 "textarea",
+                "localized",
                 "wikipedia"
             ],
             "required": true
