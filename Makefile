@@ -7,7 +7,8 @@ LOCALE ?= en_US
 
 all: \
 	iD.js \
-	iD.min.js
+	iD.min.js \
+	iD.css
 
 DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
 data/data.js: $(DATA_FILES)
@@ -70,6 +71,9 @@ iD.js: \
 iD.js: node_modules/.install Makefile
 	@rm -f $@
 	cat $(filter %.js,$^) > $@
+
+iD.css: css/*.css
+	cat css/reset.css css/map.css css/app.css css/feature-icons.css > $@
 
 node_modules/.install: package.json
 	npm install && touch node_modules/.install
