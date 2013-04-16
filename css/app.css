@@ -1874,6 +1874,18 @@ img.wiki-image {
     content: ', ';
 }
 
+/* API Status */
+
+.api-status {
+    float: left;
+}
+
+.api-status.offline,
+.api-status.readonly {
+    background: red;
+    padding: 5px 10px;
+}
+
 /* Account Information */
 
 .account {

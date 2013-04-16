@@ -129,6 +129,10 @@ en:
   logout: logout
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: report a bug
+  status:
+    error: Unable to connect to API.
+    offline: The API is offline. Please try editing later.
+    readonly: The API is read-only. You will need to wait to save your changes.
   commit:
     title: Save Changes
     description_placeholder: Brief description of your contributions

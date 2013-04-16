@@ -239,6 +239,15 @@ iD.Connection = function(context) {
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     };
 
+    connection.status = function(callback) {
+        function done(err, capabilities) {
+            if (err) return callback(err);
+            var apiStatus = capabilities.getElementsByTagName('status');
+            callback(undefined, apiStatus[0].getAttribute('api'));
+        }
+        oauth.xhr({ method: 'GET', path: '/api/capabilities' }, done);
+    };
+
     function abortRequest(i) { i.abort(); }
 
     connection.loadTiles = function(projection, dimensions) {
