@@ -42,6 +42,20 @@
             a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
             a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
+            // Adding a canary for https://app.getsentry.com/id/id/group/5138888/
+            if (Object.defineProperty) {
+                var windowFocus = window.focus;
+                Object.defineProperty(window, 'focus', {
+                    get: function() {
+                        return windowFocus;
+                    },
+
+                    set: function() {
+                        throw new Error("tried to overwrite window.focus");
+                    }
+                });
+            }
+
             if (typeof iD == 'undefined') {
                 document.getElementById('id-container').innerHTML = 'This editor is supported ' +
                     'in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. ' +

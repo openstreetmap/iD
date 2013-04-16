@@ -194,6 +194,20 @@
     <body>
         <div id='id-container'></div>
         <script>
+            // Adding a canary for https://app.getsentry.com/id/id/group/5138888/
+            if (Object.defineProperty) {
+                var windowFocus = window.focus;
+                Object.defineProperty(window, 'focus', {
+                    get: function() {
+                        return windowFocus;
+                    },
+
+                    set: function() {
+                        throw new Error("tried to overwrite window.focus");
+                    }
+                });
+            }
+
             iD.data.load(function() {
                 id = iD();
                 d3.select("#id-container")
