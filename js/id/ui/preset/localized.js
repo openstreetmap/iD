@@ -78,7 +78,7 @@ iD.ui.preset.localized = function(field, context) {
         var wraps = selection.selectAll('div.entry').
             data(data, function(d) { return d.lang; });
 
-        wraps.enter().append('div')
+        wraps.enter().insert('div', ':first-child')
             .attr('class', 'entry')
             .each(function(d) {
                 var wrap = d3.select(this);
@@ -136,7 +136,7 @@ iD.ui.preset.localized = function(field, context) {
             }
         }
 
-        localizedInputs.call(render, postfixed);
+        localizedInputs.call(render, postfixed.reverse());
     };
 
     i.focus = function() {
