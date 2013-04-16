@@ -58,9 +58,17 @@ a, button, input, textarea {
     -webkit-touch-callout:none;
 }
 
-a, button {
-    cursor: pointer; /* Opera compatibility */
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
+a,
+button,
+.checkselect label:hover,
+.opacity-options li,
+.radial-menu-item {
+    cursor: pointer; /* Opera */
+    cursor: url(../img/cursor-pointer.png) 6 1, pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(../img/cursor-pointer.png) 1x,
+        url(../img/cursor-pointer2x.png) 2x
+        ) 6 1, pointer;
 }
 
 h2 {
@@ -1118,8 +1126,6 @@ input[type=number] {
 }
 
 .checkselect label:hover {
-    cursor: pointer; /* Opera compatibility */
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
     background: #f1f1f1;
 }
 
@@ -1647,8 +1653,6 @@ img.wiki-image {
     height: 100%;
     display: block;
     float: left;
-    cursor: pointer; /* Opera compatibility */
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
 .opacity-options li .select-box{
@@ -2344,8 +2348,6 @@ img.wiki-image {
 
 .radial-menu-item {
     fill: white;
-    cursor: pointer; /* Opera compatibility */
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer;
 }
 
 .radial-menu-item:hover {
@@ -2381,24 +2383,6 @@ img.wiki-image {
     #bar .icon.icon-pre-text { margin-right: 0;}
     /* override hide for save button */
     #bar .save .label { display: block;}
-}
-
-@media only screen and (max-height: 840px) {
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-  only screen and (-o-min-device-pixel-ratio: 3/2),
-  only screen and (min--moz-device-pixel-ratio: 1.5),
-  only screen and (min-device-pixel-ratio: 1.5) {
-    a,
-    button,
-    .checkselect label:hover,
-    .opacity-options li,
-    .radial-menu-item {
-        -webkit-image-set(
-            cursor: url(../img/cursor-pointer2x.png) 2x
-            ) 6 1, pointer;
-    }
 }
 
 /* Scrollbars
