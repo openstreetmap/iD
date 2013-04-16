@@ -92,7 +92,8 @@ iD.ui.TagEditor = function(context, entity) {
     function clean(o) {
         var out = {};
         for (var k in o) {
-            if (o[k] && o[k] !== '') out[k] = o[k];
+            var v = o[k].trim();
+            if (v) out[k] = v;
         }
         return out;
     }
