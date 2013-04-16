@@ -19,11 +19,11 @@ iD.ui.preset.maxspeed = function(field, context) {
             .call(combobox);
 
         var childNodes = context.graph().childNodes(context.entity(entity.id)),
-            centroid = d3.geom.polygon(_.pluck(childNodes, 'loc')).centroid();
+            loc = childNodes[~~(childNodes.length/2)].loc;
 
         imperial = _.any(iD.data.imperial.features, function(f) {
             return _.any(f.geometry.coordinates, function(d) {
-                return iD.geo.pointInPolygon(centroid, d[0]);
+                return iD.geo.pointInPolygon(loc, d[0]);
             });
         });
 
