@@ -1,10 +1,4 @@
 iD.svg.Surface = function(context) {
-    function findStylesheet(name) {
-        return _.find(document.styleSheets, function(stylesheet) {
-            return stylesheet.href && stylesheet.href.indexOf(name) > 0;
-        });
-    }
-
     function autosize(image) {
         var img = document.createElement('img');
         img.src = image.attr('xlink:href');
@@ -16,22 +10,19 @@ iD.svg.Surface = function(context) {
         };
     }
 
-    function sprites(stylesheetName, selectorRegexp) {
+    function sprites(selectorRegexp) {
         var sprites = [];
 
-        var stylesheet = findStylesheet(stylesheetName);
-        if (!stylesheet) {
-            return sprites;
-        }
-
-        _.forEach(stylesheet.cssRules, function(rule) {
-            var klass = rule.selectorText,
-                match = klass && klass.match(selectorRegexp);
-            if (match) {
-                var id = match[1].replace('feature', 'maki');
-                match = rule.style.backgroundPosition.match(/(-?\d+)px (-?\d+)px/);
-                sprites.push({id: id, x: match[1], y: match[2]});
-            }
+        _.forEach(document.styleSheets, function(stylesheet) {
+            _.forEach(stylesheet.cssRules, function(rule) {
+                var klass = rule.selectorText,
+                    match = klass && klass.match(selectorRegexp);
+                if (match) {
+                    var id = match[1].replace('feature', 'maki');
+                    match = rule.style.backgroundPosition.match(/(-?\d+)px (-?\d+)px/);
+                    sprites.push({id: id, x: match[1], y: match[2]});
+                }
+            });
         });
 
         return sprites;
@@ -106,7 +97,7 @@ iD.svg.Surface = function(context) {
             .call(autosize);
 
         defs.selectAll()
-            .data(sprites("app.css", /^\.(icon-operation-[a-z0-9-]+)$/))
+            .data(sprites(/^\.(icon-operation-[a-z0-9-]+)$/))
             .enter().append('use')
             .attr('id', function(d) { return d.id; })
             .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })
@@ -118,7 +109,7 @@ iD.svg.Surface = function(context) {
             .call(autosize);
 
         defs.selectAll()
-            .data(sprites("feature-icons.css", /^\.(feature-[a-z0-9-]+-(12|18))$/))
+            .data(sprites(/^\.(feature-[a-z0-9-]+-(12|18))$/))
             .enter().append('use')
             .attr('id', function(d) { return d.id; })
             .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })
