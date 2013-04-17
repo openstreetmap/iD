@@ -98,7 +98,7 @@ iD.ui.intro.line = function(context, reveal) {
             timeout(function() {
                 d3.select('#curtain').style('pointer-events', 'none');
                 var road = d3.select('.preset-grid .grid-entry').filter(function(d) {
-                    return d.id === 'Road';
+                    return d.id === 'category-road';
                 });
                 reveal(road.node(), 'intro.lines.road');
                 road.one('click.intro', roadCategory);
