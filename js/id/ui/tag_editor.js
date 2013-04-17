@@ -76,7 +76,7 @@ iD.ui.TagEditor = function(context, entity) {
             var osmLink = tageditorpreset.append('div')
                 .attr('class', 'col12 inspector-inner')
                 .append('a')
-                .attr('href', 'http://www.openstreetmap.org/browse/' + entity.type + '/' + entity.osmId())
+                .attr('href', context.connection().entityURL(entity))
                 .attr('target', '_blank');
 
             osmLink.append('span')

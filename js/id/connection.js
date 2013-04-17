@@ -25,6 +25,10 @@ iD.Connection = function(context) {
         return url + '/browse/changeset/' + changesetId;
     };
 
+    connection.entityURL = function(entity) {
+        return url + '/browse/' + entity.type + '/' + entity.osmId();
+    };
+
     connection.loadFromURL = function(url, callback) {
         function done(dom) {
             return callback(null, parse(dom));
