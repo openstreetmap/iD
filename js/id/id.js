@@ -29,6 +29,11 @@ window.iD = function () {
         history.merge(result);
     });
 
+    context.preauth = function(options) {
+        connection.switch(options);
+        return context;
+    };
+
     /* Straight accessors. Avoid using these if you can. */
     context.ui = function() { return ui; };
     context.connection = function() { return connection; };
