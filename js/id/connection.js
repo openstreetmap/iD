@@ -27,6 +27,10 @@ iD.Connection = function(context, options) {
         return url + '/browse/' + entity.type + '/' + entity.osmId();
     };
 
+    connection.userUrl = function(username) {
+        return url + "/user/" + username;
+    };
+
     connection.loadFromURL = function(url, callback) {
         function done(dom) {
             return callback(null, parse(dom));
@@ -312,10 +316,6 @@ iD.Connection = function(context, options) {
                 }
             });
         });
-    };
-
-    connection.userUrl = function(username) {
-        return url + "/user/" + username;
     };
 
     connection.switch = function(options) {

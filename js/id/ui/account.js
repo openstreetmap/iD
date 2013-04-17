@@ -17,7 +17,7 @@ iD.ui.Account = function(context) {
 
             // Link
             var userLink = selection.append('a')
-                .attr('href', connection.url() + '/user/' + details.display_name)
+                .attr('href', connection.userUrl(details.display_name))
                 .attr('target', '_blank');
 
             // Add thumbnail or dont
