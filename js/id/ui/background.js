@@ -140,15 +140,22 @@ iD.ui.Background = function(context) {
         }
 
         function clickNudge(d) {
-            var interval = window.setInterval(nudge, 100);
+
+            var timeout = window.setTimeout(function() {
+                    interval = window.setInterval(nudge, 100);
+                }, 500),
+                interval;
 
             d3.select(this).on('mouseup', function() {
                 window.clearInterval(interval);
+                window.clearTimeout(timeout);
                 nudge();
             });
 
             function nudge() {
                 context.background().nudge(d[1], context.map().zoom());
+                var offset = context.background().offset();
+                resetButton.classed('disabled', offset[0] === 0 && offset[1] === 0);
                 context.redraw();
             }
         }
@@ -302,9 +309,10 @@ iD.ui.Background = function(context) {
             .on('mousedown', clickNudge);
 
         var resetButton = nudgeContainer.append('button')
-            .attr('class', 'reset')
+            .attr('class', 'reset disabled')
             .on('click', function () {
                 context.background().offset([0, 0]);
+                resetButton.classed('disabled', true);
                 context.redraw();
             });
 
