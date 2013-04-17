@@ -5,10 +5,11 @@ iD.ui.SourceSwitch = function(context) {
         if (context.history().hasChanges() &&
             !window.confirm(t('source_switch.lose_changes'))) return;
 
-        var live = d3.select(this).classed('live');
+        var live = d3.select(this)
+            .classed('live');
 
         context.connection()
-            .url(live ? 'http://api06.dev.openstreetmap.org' : 'http://www.openstreetmap.org');
+            .switch(live ? iD.data.keys[1] : iD.data.keys[0]);
 
         context.map()
             .flush();
