@@ -1,4 +1,4 @@
-iD.svg.Surface = function() {
+iD.svg.Surface = function(context) {
     function findStylesheet(name) {
         return _.find(document.styleSheets, function(stylesheet) {
             return stylesheet.href && stylesheet.href.indexOf(name) > 0;
@@ -88,7 +88,7 @@ iD.svg.Surface = function() {
                 width: 32,
                 height: 32
             })
-            .attr('xlink:href', function(d) { return 'img/pattern/' + d[1] + '.png'; });
+            .attr('xlink:href', function(d) { return context.imagePath('pattern/' + d[1] + '.png'); });
 
         defs.selectAll()
             .data([12, 18, 20])
@@ -102,7 +102,7 @@ iD.svg.Surface = function() {
 
         defs.append('image')
             .attr('id', 'sprite')
-            .attr('xlink:href', 'img/sprite.svg')
+            .attr('xlink:href', context.imagePath('sprite.svg'))
             .call(autosize);
 
         defs.selectAll()
@@ -114,7 +114,7 @@ iD.svg.Surface = function() {
 
         defs.append('image')
             .attr('id', 'maki-sprite')
-            .attr('xlink:href', 'img/feature-icons.png')
+            .attr('xlink:href', context.imagePath('feature-icons.png'))
             .call(autosize);
 
         defs.selectAll()

@@ -123,7 +123,7 @@
             .attr('width', 30)
             .attr('height', 40)
             .attr('data-zoom', function (d) { return d.zoom; })
-            .call(iD.svg.Surface())
+            .call(iD.svg.Surface(context))
             .each(function (d) {
                 var n = node.update({tags: d}),
                     graph = iD.Graph([n]);
@@ -191,7 +191,7 @@
             .attr('width', 30)
             .attr('height', 30)
             .attr('data-zoom', function (d) { return d.zoom; })
-            .call(iD.svg.Surface())
+            .call(iD.svg.Surface(context))
             .each(function (d) {
                 var n = node.update({tags: d.tags}),
                     graph = iD.Graph([n, way]);
@@ -279,7 +279,7 @@
             .attr('width', 200)
             .attr('height', 30)
             .attr('data-zoom', function (d) { return d.zoom; })
-            .call(iD.svg.Surface())
+            .call(iD.svg.Surface(context))
             .each(function (d) {
                 var highway = way.update({tags: d.tags}),
                     graph = iD.Graph([a, b, highway]);
@@ -340,7 +340,7 @@
             .append('svg')
             .attr('width', 100)
             .attr('height', 100)
-            .call(iD.svg.Surface())
+            .call(iD.svg.Surface(context))
             .each(function (datum) {
                 var area = way.update({tags: datum.tags}),
                     graph = iD.Graph([a, b, c, d, area]);

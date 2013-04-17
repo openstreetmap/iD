@@ -17,7 +17,7 @@ iD.ui.Attribution = function(context) {
                 var source = d.data.sourcetag || d.data.name;
 
                 if (d.data.logo) {
-                    source = '<img class="source-image" src="img/' + d.data.logo + '">';
+                    source = '<img class="source-image" src="' + context.imagePath(d.data.logo) + '">';
                 }
 
                 if (d.data.terms_url) {

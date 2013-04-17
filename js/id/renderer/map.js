@@ -48,7 +48,7 @@ iD.Map = function(context) {
                 if (resetTransform()) redraw();
             })
             .attr('id', 'surface')
-            .call(iD.svg.Surface());
+            .call(iD.svg.Surface(context));
 
         map.size(selection.size());
         map.surface = surface;

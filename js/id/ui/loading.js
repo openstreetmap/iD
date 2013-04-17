@@ -8,7 +8,7 @@ iD.ui.loading = function(selection, message, blocking) {
 
     loadertext.append('img')
         .attr('class', 'loader')
-        .attr('src', 'img/loader-white.gif');
+        .attr('src', context.imagePath('loader-white.gif'));
 
     loadertext.append('h3')
         .text(message || '');

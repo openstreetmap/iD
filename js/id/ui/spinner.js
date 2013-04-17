@@ -3,7 +3,7 @@ iD.ui.Spinner = function(context) {
 
     return function(selection) {
         var img = selection.append('img')
-            .attr('src', 'img/loader-black.gif')
+            .attr('src', context.imagePath('loader-black.gif'))
             .style('opacity', 0);
 
         connection.on('loading.spinner', function() {

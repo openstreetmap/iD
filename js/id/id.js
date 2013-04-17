@@ -155,6 +155,14 @@ window.iD = function () {
         return context;
     };
 
+    var imagePath = 'img/';
+    context.imagePath = function(_) {
+        if (!arguments.length) return imagePath;
+        if (/\.(png|gif|svg)$/.test(_)) return imagePath + _;
+        imagePath = _;
+        return context;
+    };
+
     return d3.rebind(context, dispatch, 'on');
 };
 
