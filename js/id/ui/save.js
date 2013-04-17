@@ -30,14 +30,19 @@ iD.ui.Save = function(context) {
         context.container().select('.shaded')
             .remove();
 
-        var loading = iD.ui.loading(context.container(), t('save.uploading'), true);
+        var loading = iD.ui.Loading(context)
+            .message(t('save.uploading'))
+            .blocking(true);
+
+        context.container()
+            .call(loading);
 
         connection.putChangeset(
             history.changes(),
             e.comment,
             history.imagery_used(),
             function(err, changeset_id) {
-                loading.remove();
+                loading.close();
                 if (err) {
                     var confirm = iD.ui.confirm(context.container());
                     confirm

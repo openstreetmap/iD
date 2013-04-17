@@ -1,20 +1,44 @@
-iD.ui.loading = function(selection, message, blocking) {
-    var modal = iD.ui.modal(selection, blocking);
+iD.ui.Loading = function(context) {
+    var message = '',
+        blocking = false,
+        modal;
 
-    var loadertext = modal.select('.content')
-        .classed('loading-modal', true)
-        .append('div')
-        .attr('class', 'modal-section fillL');
+    var loading = function(selection) {
+        modal = iD.ui.modal(selection, blocking);
 
-    loadertext.append('img')
-        .attr('class', 'loader')
-        .attr('src', context.imagePath('loader-white.gif'));
+        var loadertext = modal.select('.content')
+            .classed('loading-modal', true)
+            .append('div')
+            .attr('class', 'modal-section fillL');
 
-    loadertext.append('h3')
-        .text(message || '');
+        loadertext.append('img')
+            .attr('class', 'loader')
+            .attr('src', context.imagePath('loader-white.gif'));
 
-    modal.select('button.close')
-        .attr('class', 'hide');
+        loadertext.append('h3')
+            .text(message);
 
-    return modal;
+        modal.select('button.close')
+            .attr('class', 'hide');
+
+        return loading;
+    };
+
+    loading.message = function(_) {
+        if (!arguments.length) return message;
+        message = _;
+        return loading;
+    };
+
+    loading.blocking = function(_) {
+        if (!arguments.length) return blocking;
+        blocking = _;
+        return loading;
+    };
+
+    loading.close = function() {
+        modal.remove();
+    };
+
+    return loading;
 };

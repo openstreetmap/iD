@@ -33,12 +33,15 @@ iD.Connection = function(context) {
     };
 
     function authLoading() {
-        loadingModal = iD.ui.loading(context.container(),
-            t('loading_auth'));
+        loadingModal = iD.ui.Loading(context)
+            .message(t('loading_auth'));
+
+        context.container()
+            .call(loadingModal);
     }
 
     function authDone() {
-        if (loadingModal) loadingModal.remove();
+        if (loadingModal) loadingModal.close();
     }
 
     function getNodes(obj) {
