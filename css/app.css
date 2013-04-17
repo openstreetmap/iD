@@ -421,6 +421,7 @@ button.action {
     background: #7092ff;
 }
 
+button.action:focus,
 button.action:hover {
     background: #597BE7;
 }

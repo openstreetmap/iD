@@ -65,6 +65,7 @@ iD.ui.Commit = function(context) {
             .attr('class','user-info')
             .text(user.display_name)
             .attr('href', connection.url() + '/user/' + user.display_name)
+            .attr('tabindex', -1)
             .attr('target', '_blank');
 
         saveSection.append('p')

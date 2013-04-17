@@ -42,7 +42,8 @@ iD.ui.Success = function(connection) {
             .on('click.save', function() {
                 event.cancel();
             })
-            .append('span').attr('class','label').text('Okay');
+            .text('Okay')
+            .node().focus();
     }
 
     return d3.rebind(success, event, 'on');
