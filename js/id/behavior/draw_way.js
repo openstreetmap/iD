@@ -98,7 +98,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         return function(graph) {
             if (isArea) {
                 return graph
-                    .replace(way.removeNode(end.id).addNode(newNode.id, index))
+                    .replace(way.addNode(newNode.id, index))
                     .remove(end);
 
             } else {
