@@ -243,12 +243,13 @@ iD.Connection = function(context) {
     };
 
     connection.status = function(callback) {
-        function done(err, capabilities) {
-            if (err) return callback(err);
+        function done(capabilities) {
             var apiStatus = capabilities.getElementsByTagName('status');
             callback(undefined, apiStatus[0].getAttribute('api'));
         }
-        oauth.xhr({ method: 'GET', path: '/api/capabilities' }, done);
+        d3.xml(url + '/api/capabilities').get()
+            .on('load', done)
+            .on('error', callback);
     };
 
     function abortRequest(i) { i.abort(); }
