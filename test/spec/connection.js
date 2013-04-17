@@ -3,17 +3,11 @@ describe('iD.Connection', function () {
 
     beforeEach(function () {
         context = iD();
-        c = new iD.Connection(context);
+        c = new iD.Connection(context, {});
     });
 
     it('is instantiated', function () {
         expect(c).to.be.ok;
-    });
-
-    it('gets/sets url', function () {
-        var new_url = 'http://api06.openstreetmap.org';
-        expect(c.url(new_url)).to.equal(c);
-        expect(c.url()).to.equal(new_url);
     });
 
     it('gets/sets user', function () {
@@ -37,6 +31,24 @@ describe('iD.Connection', function () {
     describe('#flush', function() {
         it('flushes the connection', function() {
             expect(c.flush()).to.eql(c);
+        });
+    });
+
+    describe("#switch", function() {
+        it("changes the URL", function() {
+            c.switch({
+                url: "http://example.com"
+            });
+            expect(c.changesetUrl(1)).to.equal("http://example.com/browse/changeset/1")
+        });
+
+        it("emits an auth event", function(done) {
+            c.on('auth', function() {
+                done();
+            });
+            c.switch({
+                url: "http://example.com"
+            });
         });
     });
 
