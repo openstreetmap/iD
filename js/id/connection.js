@@ -1,18 +1,16 @@
-iD.Connection = function(context) {
+iD.Connection = function(context, options) {
 
     var event = d3.dispatch('auth', 'loading', 'load', 'loaded'),
-        url = 'http://www.openstreetmap.org',
+        url = options.url || 'http://www.openstreetmap.org',
         connection = {},
         user = {},
-        keys,
         inflight = {},
         loadedTiles = {},
         loadingModal,
-        oauth = osmAuth({
-            url: url,
+        oauth = osmAuth(_.extend({
             loading: authLoading,
             done: authDone
-        }),
+        }, options)),
         ndStr = 'nd',
         tagStr = 'tag',
         memberStr = 'member',
@@ -320,10 +318,12 @@ iD.Connection = function(context) {
         return url + "/user/" + username;
     };
 
-    connection.url = function(_) {
-        if (!arguments.length) return url;
-        url = _;
-        oauth.url(_);
+    connection.switch = function(options) {
+        url = options.url;
+        oauth.options(_.extend({
+            loading: authLoading,
+            done: authDone
+        }, options));
         event.auth();
         connection.flush();
         return connection;
@@ -356,13 +356,6 @@ iD.Connection = function(context) {
     connection.logout = function() {
         oauth.logout();
         event.auth();
-        return connection;
-    };
-
-    connection.keys = function(_) {
-        if (!arguments.length) return keys;
-        keys = _;
-        oauth.keys(keys);
         return connection;
     };
 

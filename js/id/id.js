@@ -22,11 +22,8 @@ window.iD = function () {
         mode,
         container,
         ui = iD.ui(context),
-        map = iD.Map(context);
-
-    // the connection requires .storage() to be available on calling.
-    var connection = iD.Connection(context)
-        .keys(iD.data.keys);
+        map = iD.Map(context),
+        connection = iD.Connection(context, iD.data.keys[0]);
 
     connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
