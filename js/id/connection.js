@@ -1,15 +1,14 @@
-iD.Connection = function(context, options) {
+iD.Connection = function(options) {
 
-    var event = d3.dispatch('auth', 'loading', 'load', 'loaded'),
+    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'load', 'loaded'),
         url = options.url || 'http://www.openstreetmap.org',
         connection = {},
         user = {},
         inflight = {},
         loadedTiles = {},
-        loadingModal,
         oauth = osmAuth(_.extend({
-            loading: authLoading,
-            done: authDone
+            loading: authenticating,
+            done: authenticated
         }, options)),
         ndStr = 'nd',
         tagStr = 'tag',
@@ -38,16 +37,12 @@ iD.Connection = function(context, options) {
         return d3.xml(url).get().on('load', done);
     };
 
-    function authLoading() {
-        loadingModal = iD.ui.Loading(context)
-            .message(t('loading_auth'));
-
-        context.container()
-            .call(loadingModal);
+    function authenticating() {
+        event.authenticating();
     }
 
-    function authDone() {
-        if (loadingModal) loadingModal.close();
+    function authenticated() {
+        event.authenticated();
     }
 
     function getNodes(obj) {
@@ -321,8 +316,8 @@ iD.Connection = function(context, options) {
     connection.switch = function(options) {
         url = options.url;
         oauth.options(_.extend({
-            loading: authLoading,
-            done: authDone
+            loading: authenticating,
+            done: authenticated
         }, options));
         event.auth();
         connection.flush();

@@ -145,6 +145,17 @@ iD.ui = function(context) {
             .call(iD.ui.Splash(context))
             .call(iD.ui.Restore(context));
 
+        var authenticating = iD.ui.Loading(context)
+            .message(t('loading_auth'));
+
+        context.connection()
+            .on('authenticating.ui', function() {
+                context.container()
+                    .call(authenticating);
+            })
+            .on('authenticated.ui', function() {
+                authenticating.close();
+            });
     };
 };
 

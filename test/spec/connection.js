@@ -1,9 +1,8 @@
 describe('iD.Connection', function () {
-    var c, context;
+    var c;
 
     beforeEach(function () {
-        context = iD();
-        c = new iD.Connection(context, {});
+        c = new iD.Connection({});
     });
 
     it('is instantiated', function () {
