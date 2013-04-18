@@ -217,7 +217,8 @@
 
                 d3.select("#about").insert('li', '.user-list')
                     .attr('class', 'source-switch')
-                    .call(iD.ui.SourceSwitch(id));
+                    .call(iD.ui.SourceSwitch(id)
+                        .keys(iD.data.keys));
             });
         </script>
     </body>

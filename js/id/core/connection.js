@@ -1,15 +1,18 @@
-iD.Connection = function(options) {
+iD.Connection = function() {
 
     var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'load', 'loaded'),
-        url = options.url || 'http://www.openstreetmap.org',
+        url = 'http://www.openstreetmap.org',
         connection = {},
         user = {},
         inflight = {},
         loadedTiles = {},
-        oauth = osmAuth(_.extend({
+        oauth = osmAuth({
+            url: 'http://www.openstreetmap.org',
+            oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
+            oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
             loading: authenticating,
             done: authenticated
-        }, options)),
+        }),
         ndStr = 'nd',
         tagStr = 'tag',
         memberStr = 'member',
