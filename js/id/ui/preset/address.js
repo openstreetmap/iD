@@ -5,6 +5,7 @@ iD.ui.preset.address = function(field, context) {
         housenumber,
         street,
         city,
+        postcode,
         entity;
 
     function getStreets() {
@@ -76,6 +77,14 @@ iD.ui.preset.address = function(field, context) {
             .on('blur', change)
             .on('change', change)
             .call(close());
+
+        postcode = wrap.append('input')
+            .property('type', 'text')
+            .attr('placeholder', field.t('placeholders.postcode'))
+            .attr('class', 'addr-postcode')
+            .on('blur', change)
+            .on('change', change)
+            .call(close());
     }
 
     function change() {
@@ -83,7 +92,8 @@ iD.ui.preset.address = function(field, context) {
             'addr:housename': housename.property('value'),
             'addr:housenumber': housenumber.property('value'),
             'addr:street': street.property('value'),
-            'addr:city': city.property('value')
+            'addr:city': city.property('value'),
+            'addr:postcode': postcode.property('value')
         });
     }
 
@@ -98,6 +108,7 @@ iD.ui.preset.address = function(field, context) {
         housenumber.property('value', tags['addr:housenumber'] || '');
         street.property('value', tags['addr:street'] || '');
         city.property('value', tags['addr:city'] || '');
+        postcode.property('value', tags['addr:postcode'] || '');
         return address;
     };
 

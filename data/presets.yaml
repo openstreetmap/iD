@@ -46,6 +46,7 @@ en:
           number: "123"
           street: Street
           city: City
+          postcode: Postal code
       admin_level: 
         label: Admin Level
       aeroway: 

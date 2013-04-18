@@ -4,7 +4,8 @@
         "addr:housename",
         "addr:housenumber",
         "addr:street",
-        "addr:city"
+        "addr:city",
+        "addr:postcode"
     ],
     "icon": "address",
     "universal": true,
@@ -14,7 +15,8 @@
           "housename": "Housename",
           "number": "123",
           "street": "Street",
-          "city": "City"
+          "city": "City",
+          "postcode": "Postal code"
         }
     }
 }

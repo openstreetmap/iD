@@ -1302,7 +1302,7 @@ input[type=number] {
 }
 
 .form-field .addr-number {
-    width: 20%;
+    width: 33%;
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
@@ -1310,19 +1310,26 @@ input[type=number] {
 }
 
 .form-field .addr-street {
-    width: 80%;
+    width: 66%;
     border-right: 0;
     border-bottom: 0;
     border-radius: 0;
 }
 
 .form-field .addr-city {
+    width: 66%;
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 0 4px;
 }
 
+.form-field .addr-postcode {
+    width: 33%;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0 0 4px 0;
+}
 /* combobox dropdown */
 
 div.combobox {

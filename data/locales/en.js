@@ -375,7 +375,8 @@ locale.en = {
                     "housename": "Housename",
                     "number": "123",
                     "street": "Street",
-                    "city": "City"
+                    "city": "City",
+                    "postcode": "Postal code"
                 }
             },
             "admin_level": {
