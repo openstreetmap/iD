@@ -18,7 +18,7 @@ describe("iD.Difference", function () {
 
         it("includes modified entities", function () {
             var n1 = iD.Node({id: 'n'}),
-                n2 = n1.update(),
+                n2 = n1.update({ tags: { yes: 'no' } }),
                 base = iD.Graph([n1]),
                 head = base.replace(n2),
                 diff = iD.Difference(base, head);
@@ -27,11 +27,20 @@ describe("iD.Difference", function () {
 
         it("includes undone modified entities", function () {
             var n1 = iD.Node({id: 'n'}),
-                n2 = n1.update(),
+                n2 = n1.update({ tags: { yes: 'no' } }),
                 base = iD.Graph([n1]),
                 head = base.replace(n2),
                 diff = iD.Difference(head, base);
             expect(diff.changes()).to.eql({n: {base: n2, head: n1}});
+        });
+
+        it("doesn't include updated but identical entities", function () {
+            var n1 = iD.Node({id: 'n'}),
+                n2 = n1.update(),
+                base = iD.Graph([n1]),
+                head = base.replace(n2),
+                diff = iD.Difference(base, head);
+            expect(diff.changes()).to.eql({});
         });
 
         it("includes deleted entities", function () {

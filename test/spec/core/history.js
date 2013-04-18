@@ -184,7 +184,7 @@ describe("iD.History", function () {
 
         it("includes modified entities", function () {
             var node1 = iD.Node({id: "n1"}),
-                node2 = node1.update({});
+                node2 = node1.update({ tags: { yes: "no" } });
             history.merge({ n1: node1});
             history.perform(function (graph) { return graph.replace(node2); });
             expect(history.changes().modified).to.eql([node2]);
