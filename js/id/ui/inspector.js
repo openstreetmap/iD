@@ -104,6 +104,11 @@ iD.ui.Inspector = function(context, entity) {
     }
 
     inspector.close = function(selection) {
+
+        // Blur focused element so that tag changes are dispatched
+        // See #1295
+        document.activeElement.blur();
+
         selection.transition()
             .style('right', '-500px')
             .each('end', function() {
