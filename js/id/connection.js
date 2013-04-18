@@ -19,7 +19,7 @@ iD.Connection = function(context, options) {
         relationStr = 'relation',
         off;
 
-    connection.changesetUrl = function(changesetId) {
+    connection.changesetURL = function(changesetId) {
         return url + '/browse/changeset/' + changesetId;
     };
 
@@ -27,7 +27,7 @@ iD.Connection = function(context, options) {
         return url + '/browse/' + entity.type + '/' + entity.osmId();
     };
 
-    connection.userUrl = function(username) {
+    connection.userURL = function(username) {
         return url + "/user/" + username;
     };
 

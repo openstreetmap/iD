@@ -22,7 +22,7 @@ iD.ui.Contributors = function(context) {
             .enter()
             .append('a')
             .attr('class', 'user-link')
-            .attr('href', function(d) { return context.connection().userUrl(d); })
+            .attr('href', function(d) { return context.connection().userURL(d); })
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text(String);

@@ -18,13 +18,13 @@ describe('iD.Connection', function () {
 
     describe('#changesetUrl', function() {
         it('provides a changeset url', function() {
-            expect(c.changesetUrl(2)).to.eql('http://www.openstreetmap.org/browse/changeset/2');
+            expect(c.changesetURL(2)).to.eql('http://www.openstreetmap.org/browse/changeset/2');
         });
     });
 
-    describe('#userUrl', function() {
+    describe('#userURL', function() {
         it('provides a user url', function() {
-            expect(c.userUrl('bob')).to.eql('http://www.openstreetmap.org/user/bob');
+            expect(c.userURL('bob')).to.eql('http://www.openstreetmap.org/user/bob');
         });
     });
 
@@ -39,7 +39,7 @@ describe('iD.Connection', function () {
             c.switch({
                 url: "http://example.com"
             });
-            expect(c.changesetUrl(1)).to.equal("http://example.com/browse/changeset/1")
+            expect(c.changesetURL(1)).to.equal("http://example.com/browse/changeset/1")
         });
 
         it("emits an auth event", function(done) {

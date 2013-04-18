@@ -64,7 +64,7 @@ iD.ui.Commit = function(context) {
         userLink.append('a')
             .attr('class','user-info')
             .text(user.display_name)
-            .attr('href', connection.userUrl(user.display_name))
+            .attr('href', connection.userURL(user.display_name))
             .attr('tabindex', -1)
             .attr('target', '_blank');
 

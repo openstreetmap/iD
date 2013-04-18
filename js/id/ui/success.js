@@ -14,7 +14,7 @@ iD.ui.Success = function(connection) {
         }
 
         var message = (m || 'Edited OSM!') +
-            connection.changesetUrl(changeset.id);
+            connection.changesetURL(changeset.id);
 
         var links = body.append('div').attr('class','modal-actions cf');
 
@@ -22,7 +22,7 @@ iD.ui.Success = function(connection) {
             .attr('class','col6 osm')
             .attr('target', '_blank')
             .attr('href', function() {
-                return connection.changesetUrl(changeset.id);
+                return connection.changesetURL(changeset.id);
             })
             .text(t('view_on_osm'));
 
