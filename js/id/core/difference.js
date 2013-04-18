@@ -11,7 +11,7 @@ iD.Difference = function(base, head) {
 
     _.each(head.entities, function(h, id) {
         var b = base.entities[id];
-        if (h !== b) {
+        if (!_.isEqual(h, b)) {
             changes[id] = {base: b, head: h};
             length++;
         }
@@ -19,7 +19,7 @@ iD.Difference = function(base, head) {
 
     _.each(base.entities, function(b, id) {
         var h = head.entities[id];
-        if (!changes[id] && h !== b) {
+        if (!changes[id] && !_.isEqual(h, b)) {
             changes[id] = {base: b, head: h};
             length++;
         }
