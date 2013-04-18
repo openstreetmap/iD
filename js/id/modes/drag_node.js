@@ -77,11 +77,21 @@ iD.modes.DragNode = function(context) {
         return d3.event.sourceEvent.target.__data__ || {};
     }
 
+    // via https://gist.github.com/shawnbot/4166283
+    function childOf(p, c) {
+        if (p === c) return false;
+        while (c && c !== p) c = c.parentNode;
+        return c === p;
+    }
+
     function move(entity) {
         if (cancelled) return;
         d3.event.sourceEvent.stopPropagation();
 
-        var nudge = edge(d3.event.point, context.map().size());
+        var nudge = childOf(context.container().node(),
+            d3.event.sourceEvent.toElement) &&
+            edge(d3.event.point, context.map().size());
+
         if (nudge) startNudge(nudge);
         else stopNudge();
 
