@@ -25,6 +25,10 @@ iD.Entity.id.toOSM = function(id) {
     return id.slice(1);
 };
 
+iD.Entity.id.type = function(id) {
+    return {'n': 'node', 'w': 'way', 'r': 'relation'}[id[0]];
+};
+
 // A function suitable for use as the second argument to d3.selection#data().
 iD.Entity.key = function(entity) {
     return entity.id;

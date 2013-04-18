@@ -41,6 +41,12 @@ iD.behavior.Hash = function(context) {
     // do so before any features are loaded. thus wait for the feature to
     // be loaded and then select
     function willselect(id) {
+        context.connection().loadEntity(id, function(error, entity) {
+            if (entity) {
+                context.map().zoomTo(entity);
+            }
+        });
+
         context.map().on('drawn.hash', function() {
             if (!context.entity(id)) return;
             selectoff();

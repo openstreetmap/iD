@@ -40,6 +40,18 @@ iD.Connection = function() {
         return d3.xml(url).get().on('load', done);
     };
 
+    connection.loadEntity = function(id, callback) {
+        var type = iD.Entity.id.type(id),
+            osmID = iD.Entity.id.toOSM(id);
+
+        connection.loadFromURL(
+            url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
+            function(err, entities) {
+                event.load(err, entities);
+                if (callback) callback(err, entities && entities[id]);
+            });
+    };
+
     function authenticating() {
         event.authenticating();
     }
