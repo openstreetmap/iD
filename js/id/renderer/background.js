@@ -163,6 +163,9 @@ iD.Background = function(backgroundType) {
 
     function setHash(source) {
         var tag = source.data && source.data.sourcetag;
+        if (!tag && source.data.name === 'Custom') {
+            tag = 'custom:' + source.data.template;
+        }
         var q = iD.util.stringQs(location.hash.substring(1));
         if (tag) {
             q[backgroundType] = tag;

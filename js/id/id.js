@@ -133,7 +133,14 @@ window.iD = function () {
     };
 
     var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
-    if (q.layer) {
+    if (q.layer && q.layer.indexOf('custom:') === 0) {
+        context.layers()[0]
+           .source(iD.BackgroundSource.template({
+                template: q.layer.replace(/^custom:/, ''),
+                name: 'Custom'
+            }));
+        detected = true;
+    } else if (q.layer) {
         context.layers()[0]
            .source(_.find(backgroundSources, function(l) {
                if (l.data.sourcetag === q.layer) {
