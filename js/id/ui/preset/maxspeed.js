@@ -3,13 +3,16 @@ iD.ui.preset.maxspeed = function(field, context) {
     var event = d3.dispatch('change', 'close'),
         entity,
         imperial,
+        unitInput,
+        combobox,
         input;
 
     var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
         imperialValues = [20, 25, 30, 40, 45, 50, 55, 65, 70];
 
     function maxspeed(selection) {
-        var combobox = d3.combobox();
+        combobox = d3.combobox();
+        var unitCombobox = d3.combobox().data(['km/h', 'mph'].map(comboValues));
 
         input = selection.append('input')
             .attr('type', 'text')
@@ -27,18 +30,33 @@ iD.ui.preset.maxspeed = function(field, context) {
             });
         });
 
-        selection.append('span')
+        unitInput = selection.append('input')
+            .attr('type', 'text')
             .attr('class', 'maxspeed-unit')
-            .text(imperial ? 'mph' : 'km/h');
+            .on('blur', changeUnits)
+            .on('change', changeUnits)
+            .call(unitCombobox);
 
-        combobox.data((imperial ? imperialValues : metricValues).map(function(d) {
-            return {
-                value: d.toString(),
-                title: d.toString()
-            };
-        }));
+        function changeUnits() {
+            imperial = unitInput.property('value') === 'mph';
+            unitInput.property('value', imperial ? 'mph' : 'km/h');
+            setSuggestions();
+            change();
+        }
+
     }
 
+    function setSuggestions() {
+        combobox.data((imperial ? imperialValues : metricValues).map(comboValues));
+        unitInput.property('value', imperial ? 'mph' : 'km/h');
+    }
+
+    function comboValues(d) {
+        return {
+            value: d.toString(),
+            title: d.toString()
+        };
+    }
 
     function change() {
         var value = input.property('value');
@@ -57,7 +75,16 @@ iD.ui.preset.maxspeed = function(field, context) {
 
     maxspeed.tags = function(tags) {
         var value = tags[field.key];
-        if (value && isNaN(value) && value.indexOf('mph') >= 0) value = parseInt(value, 10);
+
+        if (value && value.indexOf('mph') >= 0) {
+            value = parseInt(value, 10);
+            imperial = true;
+        } else if (value) {
+            imperial = false;
+        }
+
+        setSuggestions();
+
         input.property('value', value || '');
     };
 
