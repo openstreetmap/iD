@@ -37,7 +37,6 @@ iD.js: \
 	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
-	js/id/connection.js \
 	js/id/services/*.js \
 	js/id/util.js \
 	js/id/geo.js \
