@@ -76,7 +76,7 @@ iD.ui.preset = function(context, entity, preset) {
         d3.event.preventDefault();
         var t = {};
         field.keys.forEach(function(key) {
-            t[key] = original ? original.tags[key] : undefined;
+            t[key] = original ? original.tags[key] || '' : '';
         });
         event.change(t);
     }
