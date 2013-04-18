@@ -17,9 +17,10 @@ iD.util.stringQs = function(str) {
 };
 
 iD.util.qsString = function(obj, noencode) {
+    function softEncode(s) { return s.replace('&', '%26'); }
     return Object.keys(obj).sort().map(function(key) {
         return encodeURIComponent(key) + '=' + (
-            noencode ? obj[key] : encodeURIComponent(obj[key]));
+            noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
     }).join('&');
 };
 
