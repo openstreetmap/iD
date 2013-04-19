@@ -55,9 +55,11 @@ iD.ui = function(context) {
             .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));
 
-        container.append('div')
-            .attr('class', 'map-control geocode-control')
-            .call(iD.ui.Geocoder(context));
+        if (!context.embed()) {
+            container.append('div')
+                .attr('class', 'map-control geocode-control')
+                .call(iD.ui.Geocoder(context));
+        }
 
         container.append('div')
             .attr('class', 'map-control background-control')
