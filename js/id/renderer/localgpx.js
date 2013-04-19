@@ -75,6 +75,7 @@ iD.LocalGpx = function(context) {
         .on('drop.localgpx', function() {
             d3.event.stopPropagation();
             d3.event.preventDefault();
+            if (!iD.detect().filedrop) return;
             var f = d3.event.dataTransfer.files[0],
                 reader = new FileReader();
 
