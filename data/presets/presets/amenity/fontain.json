@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fontain"
+    },
+    "name": "Fontain"
+}
