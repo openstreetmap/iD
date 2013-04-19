@@ -1,0 +1,17 @@
+{
+    "icon": "waste-basket",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "waste_basket"
+    },
+    "terms": [
+        "rubbish bin",
+        "litter bin",
+        "trash can",
+        "garbage can"
+    ],
+    "name": "Waste Basket"
+}

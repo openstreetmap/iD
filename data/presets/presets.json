@@ -769,6 +769,7 @@
         "name": "Swimming Pool"
     },
     "amenity/telephone": {
+        "icon": "telephone",
         "geometry": [
             "point",
             "vertex"
@@ -857,6 +858,23 @@
         },
         "terms": [],
         "name": "University"
+    },
+    "amenity/waste_basket": {
+        "icon": "waste-basket",
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "amenity": "waste_basket"
+        },
+        "terms": [
+            "rubbish bin",
+            "litter bin",
+            "trash can",
+            "garbage can"
+        ],
+        "name": "Waste Basket"
     },
     "barrier": {
         "geometry": [
@@ -1122,6 +1140,20 @@
             "building": "house"
         },
         "name": "House"
+    },
+    "emergency/phone": {
+        "icon": "emergency-telephone",
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "emergency": "phone"
+        },
+        "name": "Emergency Phone"
     },
     "entrance": {
         "geometry": [
