@@ -173,6 +173,11 @@ locale.da = {
     "logout": "log ud",
     "loading_auth": "Forbinder til OpenStreetMap...",
     "report_a_bug": "rapportere en fejl",
+    "status": {
+        "error": "Er ikke i stand til at forbinde til API'et.",
+        "offline": "API'et er off-line. Prøv igen senere.",
+        "readonly": "API'et er i læs-kun status. Du er nødt til at vente med at gemme dine ændringer."
+    },
     "commit": {
         "title": "Gem ændringer",
         "description_placeholder": "Kort beskrivelse af dine bidrag",
@@ -372,7 +377,8 @@ locale.da = {
                     "housename": "Husnavn",
                     "number": "123",
                     "street": "Gade",
-                    "city": "By"
+                    "city": "By",
+                    "postcode": "Postnummer"
                 }
             },
             "admin_level": {

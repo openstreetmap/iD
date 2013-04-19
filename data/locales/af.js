@@ -8,4 +8,1211 @@
 
     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
-locale.af = {};
+locale.af = {
+    "modes": {
+        "add_area": {
+            "title": "Area",
+            "description": "Sit 'n park, gebou, meer of iets ander by die kaart.",
+            "tail": "Klick op die kaart om 'n area te begin teken soos 'n park, meer of gebou."
+        },
+        "add_line": {
+            "title": "Lyn",
+            "description": "Sit snelwee, strate, voetslaanpaaidjies, kanaale of ander lyne by die kaart.",
+            "tail": "Klick op die kaart om 'n pad, paaidjie of roete te teken."
+        },
+        "add_point": {
+            "title": "Punt",
+            "description": "Sit 'n restaurant, monument, posbus of ander punte by die kaart.",
+            "tail": "Klick op die kaart om 'n punt by te sit."
+        },
+        "browse": {
+            "title": "Blaai rond",
+            "description": "Kyk rond en zoom die kaart."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Punt is bygesit.",
+                "vertex": "'n Punt is bygesit by 'n weg."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Begin 'n lyn.",
+                "area": "Begin 'n area."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Gaan voort met 'n lyn.",
+                "area": "Gaan voort met 'n area."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Kanseleer teken."
+        },
+        "change_tags": {
+            "annotation": "Veranderde kenmerke."
+        },
+        "circularize": {
+            "title": "Maak rond",
+            "description": {
+                "line": "Maak hierdie lyn rond.",
+                "area": "Maak die area rond."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Maak 'n lyn rond.",
+                "area": "Maak 'n area rond."
+            }
+        },
+        "orthogonalize": {
+            "title": "Maak Vierkantig",
+            "description": "Maak hoeke reghoekig.",
+            "key": "Q",
+            "annotation": {
+                "line": "Maak die hoeke van 'n lyn reghoekig.",
+                "area": "Maak die hoeke van 'n area reghoekig."
+            }
+        },
+        "delete": {
+            "title": "Verwyder",
+            "description": "Verwyder van die kaart.",
+            "annotation": {
+                "point": "Verwyder 'n punt.",
+                "vertex": "Verwyder 'n punt van 'n weg.",
+                "line": "'n Lyn is verwyder.",
+                "area": "'n Area is verwyder.",
+                "relation": "'n Verhouding is verwyder.",
+                "multiple": "{n} stukke is verwyder."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "'n Weg is gekoppel aan 'n punt.",
+                "vertex": "Een weg is aan 'n ander gekoppel.",
+                "line": "'n Weg is aan 'n lyn gekoppel.",
+                "area": "'n Weg is aan 'n area gekoppel."
+            }
+        },
+        "disconnect": {
+            "title": "Ontkoppel.",
+            "description": "Ontkoppel hierdie lyne/areas van mekkaar.",
+            "key": "D",
+            "annotation": "Lyne/areas geontkoppel.",
+            "not_connected": "Daar is nie genoeg lyne/areas hier om te ontkoppel nie."
+        },
+        "merge": {
+            "title": "Smelt saam",
+            "description": "Smelt die lyne saam.",
+            "key": "C",
+            "annotation": "{n} lyne saamgesmelt.",
+            "not_eligible": "Hierdie items kan nie saamgesmelt word nie.",
+            "not_adjacent": "Hierdie lyne kan nie saamgesmelt word nie, want hulle is nie verbind nie."
+        },
+        "move": {
+            "title": "Skuif",
+            "description": "Skuif na 'n ander plek.",
+            "key": "M",
+            "annotation": {
+                "point": "'n Punt is geskuif.",
+                "vertex": "'n Punt in weg is geskuif.",
+                "line": "'n Lyn is geskuif.",
+                "area": "'n Area is geskuif.",
+                "multiple": "Verskeie stukke is geskuif."
+            },
+            "incomplete_relation": "Hierdie item kan nie geskuif word nie want dit is nie volledig afgelaai nie."
+        },
+        "rotate": {
+            "title": "Draai",
+            "description": "Draai die stuk rondom sy middelpunt.",
+            "key": "R",
+            "annotation": {
+                "line": "'n Lyn is gedraai.",
+                "area": "'n Area is gedraai."
+            }
+        },
+        "reverse": {
+            "title": "Draai om",
+            "description": "Maak die lyn ander kant toe gaan.",
+            "key": "V",
+            "annotation": "'n Lyn is omgedraai."
+        },
+        "split": {
+            "title": "Split",
+            "description": {
+                "line": "Split die lyn in twee by hierdie punt.",
+                "area": "Split die grens van hierdie area in twee.",
+                "multiple": "Split die lyn/area grens by hierdie punt in twee."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "Split 'n lyn.",
+                "area": "Split 'n area grens.",
+                "multiple": "Split {n} lyn/area grense."
+            },
+            "not_eligible": "Lyne kan nie gesplit word by hulle begin of eind punte nie.",
+            "multiple_ways": "Daar is te veel lyne hier om te split."
+        }
+    },
+    "nothing_to_undo": "Niks om ongedaan te maak.",
+    "nothing_to_redo": "Niks om weer te doen nie.",
+    "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!",
+    "browser_notice": "Hierdie program is bruikbaar in Firefox, Chrome, Safair, Opera en Internet Explorer 9 en later weergawes. Gradeer asseblief jou webbrowser op of gebruik Potlatch 2 om die kaart te verander.",
+    "view_on_osm": "Besigtig op OSM",
+    "zoom_in_edit": "zoom in om die kaart te verander",
+    "logout": "voetsek",
+    "loading_auth": "Maak kontak met OpenStreetMap...",
+    "report_a_bug": "Raporteer 'n probleem",
+    "status": {
+        "error": "Kan nie aan die API koppel nie.",
+        "offline": "Die API is aflyn, probeer asseblief later weer.",
+        "readonly": "Die API is lees alleenliks. Jy sal so bietjie moet wag voordat jy verandering kan bêre."
+    },
+    "commit": {
+        "title": "Bêre veranderinge",
+        "description_placeholder": "Kortlikse beskrywing van jou bydraes",
+        "message_label": "Bêre boodskap",
+        "upload_explanation": "Die verandering wat jy oplaai as {user} gaan sigbaar wees op alle kaarte wat OpenStreetMap data gebruik.",
+        "save": "Bȇre",
+        "cancel": "Kanseleer",
+        "warnings": "Waarskuwings",
+        "modified": "Verander",
+        "deleted": "Verwyder",
+        "created": "Gemaak"
+    },
+    "contributors": {
+        "list": "Kaartdata bygedra deur {users} ",
+        "truncated_list": "Kaartdata bygedrae deur {users} en {count} ander"
+    },
+    "geocoder": {
+        "title": "Soek 'n plek",
+        "placeholder": "Soek 'n plek",
+        "no_results": "Kon nie die pleknaam '{name}' kry nie"
+    },
+    "geolocate": {
+        "title": "Wys waar ek is"
+    },
+    "inspector": {
+        "no_documentation_combination": "Daar is geen dokumentasie beskikbaar vir hierdie kenmerk kombinasie nie",
+        "no_documentation_key": "Daar is geen dokumentasie beskikbaar vir hierdie sleutel nie",
+        "show_more": "Wys meer",
+        "new_tag": "Nuwe kenteken",
+        "view_on_osm": "Kyk daarna op openstreetmap.org",
+        "editing_feature": "Verander {feature}",
+        "additional": "Addisioneele kentekens",
+        "choose": "Kies funksie tipe",
+        "results": "{n} resultate vir {search}",
+        "reference": "Kyk daarna op OpenStreetMap Wiki",
+        "back_tooltip": "Verander funksie tipe",
+        "remove": "Verwyder"
+    },
+    "background": {
+        "title": "Agtergrond",
+        "description": "Agtergrond stellings",
+        "percent_brightness": "{opacity}% helderheid",
+        "fix_misalignment": "Lyn op",
+        "reset": "begin van voor"
+    },
+    "restore": {
+        "heading": "Jy het verandering wat nog gebêre moet word",
+        "restore": "Herstel",
+        "reset": "Begin van voor"
+    },
+    "save": {
+        "title": "Stoor",
+        "help": "Stoor veranderinge na OpenStreetMap, en maak dit sigbaar vir ander gebruikers.",
+        "no_changes": "Geen verandering om te stoor.",
+        "error": "'n Fout het ingekruip toe jy probeer stoor het",
+        "uploading": "Laai verandering op na OpenStreetMap.",
+        "unsaved_changes": "Jy het ongestoorde veranderinge"
+    },
+    "splash": {
+        "welcome": "Welkom by die iD OpenStreetMap program",
+        "text": "iD is 'n vriendelike and kragtige gereedskapstuk om die wêreld se beste gratis kaart mee te help teken. Hierdie is ontwikkelingsweergawe {version}. Vir meer inligting sien {website} en raporteeer probleme by {github}.",
+        "walkthrough": "Begin die Deurloop",
+        "start": "Verander Nou"
+    },
+    "source_switch": {
+        "live": "lewendig",
+        "lose_changes": "Jy het ongebêrede verandering, as jy die van kaart server verander gaan jy die veranderings weggooi. Is jy seker jy wil van kaart server verander?",
+        "dev": "dev"
+    },
+    "tag_reference": {
+        "description": "Beskrywing",
+        "on_wiki": "{tag} op wiki.osm.org",
+        "used_with": "gebruik met {type}"
+    },
+    "validations": {
+        "untagged_point": "Punt sonder eienskappe",
+        "untagged_line": "Lyn het geen kenmerk",
+        "untagged_area": "Area het geen kenmerk",
+        "many_deletions": "Jy verwyder items van die kaart. Dit affekteer die kaart wat almal sien op openstreetmap.org. Maak asseblief seker dit is wat jy wil doen.",
+        "tag_suggests_area": "Die kenmerk {tag} is geoormerk vir 'n area nie vir 'n lyn nie.",
+        "deprecated_tags": "Vervalde kenmerke: {tags}"
+    },
+    "zoom": {
+        "in": "Zoom in",
+        "out": "Zoom uit"
+    },
+    "cannot_zoom": "Kan nie verder uitzoom in die huidige mode nie.",
+    "gpx": {
+        "local_layer": "Plaaslike GPX leer",
+        "drag_drop": "Sleep en laat val 'n .gpx leer op die bladsy"
+    },
+    "help": {
+        "title": "Help",
+        "help": "# Help\n\nHierdie is 'n probram vir  [OpenStreetMap](http://www.openstreetmap.org/), die gratis en veranderbarie kaart van die wêreld. Jy kan dit gebruik om nuwe data by te voeg of op te dateer waar jy bly en die \"open-source\" en \"open-data\" kaart beter te maak vir almal wat dit gebruik.\n\nVerandering wat jy aanbring op die kaart sal sigbaar wees vir almal at OpenStreetMap gebruik. Jy het nodig om 'n [nuwe gebruikersnaam](https://www.openstreetmap.org/user/new) vir jou self te skep voor jy data kan toevoeg by die kaart. \n\nDie [iD editor](http://ideditor.com/) is 'n gemeenskapsprojek met die [kode beskikbaar op GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Verander en Bêre\n\nDie program is ontwerp om primêr aanlyn te werk en gebruik dit via 'n webwerf op die oomblik.\n\n### Uitkies van eienskappe\nOm 'n kaart item soos 'n pad, of gebou uit te kies, klick daarop. Dit sal die item uitlig en 'n paneel oopmaak met met meer detail oor die item. Dit sal ook 'n lys van dinge wys wat jy met die item kan doen.\n\nVerskeie items can gelyktydig gekies word deur die 'Shift' sleutel in te hou en dan 'n boksie met die muis te teken deur te klick en te sleep. Jy kan dan ooreenstemmende eienskappe tegelyktydig verander vir al die uitgekiesde items.\n\n### Bêre van veranderinge\nEnige verandering wat gemaak word, word lokaal gestoor totdat jy die bêre op die server. As jy 'n fout maak kan jy onklaar maak deur op die \n"
+    },
+    "intro": {
+        "navigation": {
+            "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**"
+        },
+        "points": {
+            "place": "Die punt kan op die kaart geplaas word deur daarop te klick. **Sit die punt bo-op die gebou.**",
+            "search": "Daar is verskeie eienskappe wat verteenwoordig kan word deur punte. Die punt wat jy nou net bygesit het is 'n Kafee. **Soek vir 'Kafee' **",
+            "choose": "**Kies Kafee van die rooster.**",
+            "describe": "Die punt is nou gemerk as 'n kafee. Gebruik die eienskapslys om meer inligting by te sit. **Sit 'n naam by**",
+            "close": "Die eienskapslys kan toegemaak word deur op die toemaak knoppie te klick. **Maak die eienskapslys toe**",
+            "reselect": "Baie kere gaan 'n punt klaar bestaan, maar met foute of onvolledig. Jy kan bestaande punte verander. **Kies die punt wat jy nou net gemaak het.**",
+            "fixname": "**Verander die naam en maak die eienskapslys toe.**",
+            "reselect_delete": "Alle eienskappe op die kaart kan verwyder word. **Klick op die punt wat jy nou net gemaak het. **"
+        },
+        "areas": {
+            "search": "**Soek vir 'n Speelgrond.**",
+            "choose": "**Kies Speelgrond van die rooster.**",
+            "describe": "**Sit 'n naam by en maak die eienskappe lys toe**"
+        },
+        "lines": {
+            "add": "Lyne word gebruik om items soos paaie, spoorwee en riviere te verteenwoordig. **Klick die Lyn knoppie om 'n nuwe lyn by te sit.**",
+            "start": "** Begin die lyn deur op die einde van die pad te klick.**",
+            "road": "**Kies Pad van die rooster**",
+            "residential": "Daar is verskillende tipes paaie, die mees algemeenste is 'n residensieel pad. ** Kies die Residentieele Pad tipe**",
+            "describe": "**Gee die pad 'n naam en maak die eienskappe lys toe.**",
+            "restart": "Die pad moet Flower Straat Kruis."
+        },
+        "startediting": {
+            "help": "Meer dokumentasie en hierdie deurloop is beskikbaar hier.",
+            "save": "Moenie vergeet om gereeld verandering te bêre nie!",
+            "start": "Begin die kaart teken!"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-rail": {
+                "name": "Spoor"
+            },
+            "category-road": {
+                "name": "Pad"
+            },
+            "category-water": {
+                "name": "Water"
+            }
+        },
+        "fields": {
+            "access": {
+                "label": "Toegang",
+                "types": {
+                    "access": "Algemene",
+                    "foot": "Voet",
+                    "motor_vehicle": "Motorvoertuie",
+                    "bicycle": "Fietse",
+                    "horse": "Perde"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Toegelaat"
+                    },
+                    "no": {
+                        "description": "Geen toegang vir algemene publiek"
+                    },
+                    "private": {
+                        "title": "Privaat"
+                    },
+                    "destination": {
+                        "title": "Eindbestemming"
+                    }
+                }
+            },
+            "address": {
+                "label": "Adres",
+                "placeholders": {
+                    "housename": "Huisnaam",
+                    "number": "123",
+                    "street": "Straat",
+                    "city": "Tipe"
+                }
+            },
+            "admin_level": {
+                "label": "Administratiewe vlak"
+            },
+            "aeroway": {
+                "label": "Tipe"
+            },
+            "amenity": {
+                "label": "Tipe"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "barrier": {
+                "label": "Tipe"
+            },
+            "bicycle_parking": {
+                "label": "Tipe"
+            },
+            "building": {
+                "label": "Gebou"
+            },
+            "building_area": {
+                "label": "Gebou"
+            },
+            "building_yes": {
+                "label": "Gebou"
+            },
+            "capacity": {
+                "label": "Kapasiteit"
+            },
+            "cardinal_direction": {
+                "label": "Rigting"
+            },
+            "clock_direction": {
+                "label": "Rigting",
+                "options": {
+                    "clockwise": "Kloksgewys",
+                    "anticlockwise": "Antikloksgewys"
+                }
+            },
+            "construction": {
+                "label": "Tipe"
+            },
+            "country": {
+                "label": "Land"
+            },
+            "crossing": {
+                "label": "Tipe"
+            },
+            "cuisine": {
+                "label": "Kos"
+            },
+            "denomination": {
+                "label": "Denominasie"
+            },
+            "denotation": {
+                "label": "Aanduiding"
+            },
+            "elevation": {
+                "label": "Hoogte bo seespiëel"
+            },
+            "emergency": {
+                "label": "Noodgeval"
+            },
+            "entrance": {
+                "label": "Tipe"
+            },
+            "fax": {
+                "label": "Faks"
+            },
+            "fee": {
+                "label": "Fooi"
+            },
+            "highway": {
+                "label": "Tipe"
+            },
+            "historic": {
+                "label": "Tipe"
+            },
+            "internet_access": {
+                "label": "Internet Toegang",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "Bedraad",
+                    "terminal": "Terminaal"
+                }
+            },
+            "landuse": {
+                "label": "Tipe"
+            },
+            "leisure": {
+                "label": "Tipe"
+            },
+            "levels": {
+                "label": "Vlakke"
+            },
+            "man_made": {
+                "label": "Tipe"
+            },
+            "maxspeed": {
+                "label": "Spoedlimiet"
+            },
+            "name": {
+                "label": "Naam"
+            },
+            "natural": {
+                "label": "Natuurlike"
+            },
+            "network": {
+                "label": "Netwerk"
+            },
+            "note": {
+                "label": "Nota"
+            },
+            "office": {
+                "label": "Tipe"
+            },
+            "oneway": {
+                "label": "Eenrigting"
+            },
+            "oneway_yes": {
+                "label": "Eenrigting"
+            },
+            "opening_hours": {
+                "label": "Ure"
+            },
+            "operator": {
+                "label": "Operateur"
+            },
+            "park_ride": {
+                "label": "Parkeer en ry"
+            },
+            "parking": {
+                "label": "Tipe"
+            },
+            "phone": {
+                "label": "Telefoon"
+            },
+            "place": {
+                "label": "Tipe"
+            },
+            "power": {
+                "label": "Tipe"
+            },
+            "railway": {
+                "label": "Tipe"
+            },
+            "ref": {
+                "label": "Verwyssing"
+            },
+            "religion": {
+                "label": "Geloof",
+                "options": {
+                    "christian": "Christen",
+                    "muslim": "Moslem",
+                    "buddhist": "Boeddhis",
+                    "jewish": "Joods",
+                    "hindu": "Hindoe",
+                    "shinto": "Sjinto",
+                    "taoist": "Taoist"
+                }
+            },
+            "service": {
+                "label": "Tipe"
+            },
+            "shelter": {
+                "label": "Skuiling"
+            },
+            "shop": {
+                "label": "Tipe"
+            },
+            "source": {
+                "label": "Bro"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "structure": {
+                "label": "Struktuur",
+                "options": {
+                    "bridge": "Brug",
+                    "tunnel": "Tonnel",
+                    "embankment": "Dyk",
+                    "cutting": "Uitgrawing"
+                }
+            },
+            "surface": {
+                "label": "Oppervlakte"
+            },
+            "tourism": {
+                "label": "Tipe"
+            },
+            "tracktype": {
+                "label": "Tipe"
+            },
+            "water": {
+                "label": "Tipe"
+            },
+            "waterway": {
+                "label": "Tipe"
+            },
+            "website": {
+                "label": "Webwerf"
+            },
+            "wetland": {
+                "label": "Tipe"
+            },
+            "wheelchair": {
+                "label": "Rolstoeltoegang"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Tipe"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Aanloopbaan"
+            },
+            "aeroway/aerodrome": {
+                "name": "Lughawe",
+                "terms": "vliegtuig,lughawe,lughawe"
+            },
+            "aeroway/helipad": {
+                "name": "Helipad",
+                "terms": "helikopter,helipad,heliport"
+            },
+            "amenity": {
+                "name": "Geriewe"
+            },
+            "amenity/bank": {
+                "name": "Bank"
+            },
+            "amenity/bar": {
+                "name": "Kroeg"
+            },
+            "amenity/bench": {
+                "name": "Bankie"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Fietsparkering"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Fietshuur"
+            },
+            "amenity/cafe": {
+                "name": "Kafee",
+                "terms": "koffie,tee,koffiewinkel"
+            },
+            "amenity/cinema": {
+                "name": "Fliek"
+            },
+            "amenity/courthouse": {
+                "name": "Hof"
+            },
+            "amenity/embassy": {
+                "name": "Ambassade"
+            },
+            "amenity/fast_food": {
+                "name": "Kitskos"
+            },
+            "amenity/fire_station": {
+                "name": "Brandweerstasie"
+            },
+            "amenity/fuel": {
+                "name": "Petrolstasie"
+            },
+            "amenity/grave_yard": {
+                "name": "Begrafplaas"
+            },
+            "amenity/hospital": {
+                "name": "Hospitaal"
+            },
+            "amenity/library": {
+                "name": "Biblioteek"
+            },
+            "amenity/parking": {
+                "name": "Parkering"
+            },
+            "amenity/pharmacy": {
+                "name": "Apteek"
+            },
+            "amenity/place_of_worship": {
+                "name": "Plek van aanbidding"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Kerk"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoge",
+                "terms": "joods,sinagoge"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Moskee",
+                "terms": "moslem,moskee"
+            },
+            "amenity/police": {
+                "name": "Polisie"
+            },
+            "amenity/post_box": {
+                "name": "Posbus"
+            },
+            "amenity/post_office": {
+                "name": "Poskantoor"
+            },
+            "amenity/pub": {
+                "name": "Kroeg"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "Skool"
+            },
+            "amenity/swimming_pool": {
+                "name": "Swembad"
+            },
+            "amenity/telephone": {
+                "name": "Telefoon"
+            },
+            "amenity/theatre": {
+                "name": "Teater"
+            },
+            "amenity/toilets": {
+                "name": "Toilette"
+            },
+            "amenity/townhall": {
+                "name": "Stadsaal"
+            },
+            "amenity/university": {
+                "name": "Universiteit"
+            },
+            "barrier/block": {
+                "name": "Blok"
+            },
+            "barrier/city_wall": {
+                "name": "Stadsmuur"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Fietshinderpaal"
+            },
+            "barrier/ditch": {
+                "name": "Sloot"
+            },
+            "barrier/entrance": {
+                "name": "Ingang"
+            },
+            "barrier/fence": {
+                "name": "Heining"
+            },
+            "barrier/gate": {
+                "name": "Hek"
+            },
+            "barrier/hedge": {
+                "name": "Laning"
+            },
+            "barrier/toll_booth": {
+                "name": "Tolhek"
+            },
+            "barrier/wall": {
+                "name": "Muur"
+            },
+            "boundary/administrative": {
+                "name": "Administratiewe Grens"
+            },
+            "building": {
+                "name": "Gebou"
+            },
+            "building/apartments": {
+                "name": "Woonstelle"
+            },
+            "building/entrance": {
+                "name": "Ingang"
+            },
+            "building/house": {
+                "name": "Huis"
+            },
+            "entrance": {
+                "name": "Ingang"
+            },
+            "highway": {
+                "name": "Snelweg"
+            },
+            "highway/bridleway": {
+                "name": "Perdepaaidjie"
+            },
+            "highway/bus_stop": {
+                "name": "Busstop"
+            },
+            "highway/crossing": {
+                "name": "Oorgang"
+            },
+            "highway/cycleway": {
+                "name": "Fietsrypad"
+            },
+            "highway/footway": {
+                "name": "Voetslaanpad"
+            },
+            "highway/mini_roundabout": {
+                "name": "Mini-sirkel"
+            },
+            "highway/motorway": {
+                "name": "Snelweg"
+            },
+            "highway/path": {
+                "name": "Paadjie"
+            },
+            "highway/pedestrian": {
+                "name": "Voetganger"
+            },
+            "highway/primary": {
+                "name": "Primere Pad"
+            },
+            "highway/residential": {
+                "name": "Residensieele pad"
+            },
+            "highway/secondary": {
+                "name": "Sekondere Pad"
+            },
+            "highway/service": {
+                "name": "Dienspad"
+            },
+            "highway/steps": {
+                "name": "Trappe",
+                "terms": "trappe,trappe"
+            },
+            "highway/tertiary": {
+                "name": "Tertiere Pad"
+            },
+            "highway/track": {
+                "name": "Spoor"
+            },
+            "highway/traffic_signals": {
+                "name": "Robot"
+            },
+            "highway/turning_circle": {
+                "name": "Draai Sirkel"
+            },
+            "highway/unclassified": {
+                "name": "Ongeklassifiseerde Pad"
+            },
+            "historic": {
+                "name": "Historiese Plek"
+            },
+            "historic/archaeological_site": {
+                "name": "Argeologiese Plek"
+            },
+            "historic/castle": {
+                "name": "Kasteel"
+            },
+            "historic/monument": {
+                "name": "Monument"
+            },
+            "historic/ruins": {
+                "name": "Reune"
+            },
+            "landuse/cemetery": {
+                "name": "Begrafplaas"
+            },
+            "landuse/commercial": {
+                "name": "Kommersieel"
+            },
+            "landuse/construction": {
+                "name": "Konstruksie"
+            },
+            "landuse/farm": {
+                "name": "Plaas"
+            },
+            "landuse/farmyard": {
+                "name": "Plaaswerf"
+            },
+            "landuse/forest": {
+                "name": "Woud"
+            },
+            "landuse/grass": {
+                "name": "Gras"
+            },
+            "landuse/industrial": {
+                "name": "Industrieel"
+            },
+            "landuse/orchard": {
+                "name": "Boord"
+            },
+            "landuse/quarry": {
+                "name": "Kwarrie"
+            },
+            "landuse/residential": {
+                "name": "Residensieel"
+            },
+            "landuse/vineyard": {
+                "name": "Druiweprieel"
+            },
+            "leisure": {
+                "name": "Gemak"
+            },
+            "leisure/garden": {
+                "name": "Tuin"
+            },
+            "leisure/golf_course": {
+                "name": "Golfbaan"
+            },
+            "leisure/park": {
+                "name": "Park"
+            },
+            "leisure/pitch": {
+                "name": "Sport Veld"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Amerikaanse Voetbal Veld"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Bofpalveld"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Basketbalbaan"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Sokkerveld"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Tennisbaan"
+            },
+            "leisure/playground": {
+                "name": "Speelpark"
+            },
+            "leisure/stadium": {
+                "name": "Stadium"
+            },
+            "leisure/swimming_pool": {
+                "name": "Swembad"
+            },
+            "man_made": {
+                "name": "Mens gemaak"
+            },
+            "man_made/lighthouse": {
+                "name": "Ligtoring"
+            },
+            "man_made/pier": {
+                "name": "Landingsplek"
+            },
+            "man_made/survey_point": {
+                "name": "Landmeterspunt"
+            },
+            "man_made/wastewater_plant": {
+                "name": "Rioolplaas",
+                "terms": "riool werke, rioolplaas, watersuiweringsplaas,herverwinnnigs fabriek"
+            },
+            "man_made/water_tower": {
+                "name": "Watertoring"
+            },
+            "man_made/water_works": {
+                "name": "Waterwerke"
+            },
+            "natural": {
+                "name": "Natuur"
+            },
+            "natural/bay": {
+                "name": "Baai"
+            },
+            "natural/beach": {
+                "name": "Strand"
+            },
+            "natural/cliff": {
+                "name": "Krans"
+            },
+            "natural/coastline": {
+                "name": "Kuslyn",
+                "terms": "kuslyn"
+            },
+            "natural/glacier": {
+                "name": "Gletser"
+            },
+            "natural/grassland": {
+                "name": "Grasvlakte"
+            },
+            "natural/heath": {
+                "name": "Heide"
+            },
+            "natural/peak": {
+                "name": "Piek"
+            },
+            "natural/scrub": {
+                "name": "Bossies"
+            },
+            "natural/spring": {
+                "name": "Fontein"
+            },
+            "natural/tree": {
+                "name": "Boom"
+            },
+            "natural/water": {
+                "name": "Water"
+            },
+            "natural/water/lake": {
+                "name": "Meer"
+            },
+            "natural/water/pond": {
+                "name": "Dammetjie"
+            },
+            "natural/water/reservoir": {
+                "name": "Reservoir"
+            },
+            "natural/wetland": {
+                "name": "Vleiland"
+            },
+            "natural/wood": {
+                "name": "Woud"
+            },
+            "office": {
+                "name": "Kantoor"
+            },
+            "other": {
+                "name": "Ander"
+            },
+            "other_area": {
+                "name": "Ander"
+            },
+            "place": {
+                "name": "Plek"
+            },
+            "place/city": {
+                "name": "Stad"
+            },
+            "place/hamlet": {
+                "name": "Dorpie"
+            },
+            "place/island": {
+                "name": "Eiland"
+            },
+            "place/locality": {
+                "name": "Ligging"
+            },
+            "place/town": {
+                "name": "Dorp"
+            },
+            "place/village": {
+                "name": "Dorpie"
+            },
+            "power": {
+                "name": "Krag"
+            },
+            "power/generator": {
+                "name": "Kragstasie"
+            },
+            "power/line": {
+                "name": "Kraglyn"
+            },
+            "power/pole": {
+                "name": "Kragpaal"
+            },
+            "power/sub_station": {
+                "name": "Substasie"
+            },
+            "power/tower": {
+                "name": "Hoogspanningstoring"
+            },
+            "railway": {
+                "name": "Spoorlyn"
+            },
+            "railway/abandoned": {
+                "name": "Verlate spoorlyn"
+            },
+            "railway/disused": {
+                "name": "Ongebruikte spoorweg"
+            },
+            "railway/level_crossing": {
+                "name": "Spooroorgang"
+            },
+            "railway/rail": {
+                "name": "Treinspoor"
+            },
+            "railway/station": {
+                "name": "Treinstasie"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Metro Ingang"
+            },
+            "railway/tram": {
+                "name": "Trem"
+            },
+            "shop": {
+                "name": "Winkel"
+            },
+            "shop/alcohol": {
+                "name": "Drankwinkel"
+            },
+            "shop/bakery": {
+                "name": "Bakkery"
+            },
+            "shop/beauty": {
+                "name": "Skoonheidswinkel"
+            },
+            "shop/beverages": {
+                "name": "Koeldrankwinkel"
+            },
+            "shop/bicycle": {
+                "name": "Fietswinkel"
+            },
+            "shop/books": {
+                "name": "Boekwinkel"
+            },
+            "shop/butcher": {
+                "name": "Slagter"
+            },
+            "shop/car": {
+                "name": "Voertuighandelaar"
+            },
+            "shop/chemist": {
+                "name": "Apteek"
+            },
+            "shop/clothes": {
+                "name": "Klere Winkel"
+            },
+            "shop/computer": {
+                "name": "Rekenaarwinkel"
+            },
+            "shop/deli": {
+                "name": "Deli"
+            },
+            "shop/dry_cleaning": {
+                "name": "Droogskoonmakers"
+            },
+            "shop/electronics": {
+                "name": "Elektronikawinkel"
+            },
+            "shop/fishmonger": {
+                "name": "Viswinkel"
+            },
+            "shop/florist": {
+                "name": "Bloemiste"
+            },
+            "shop/furniture": {
+                "name": "Meubelwinkel"
+            },
+            "shop/gift": {
+                "name": "Geskenkwinkel"
+            },
+            "shop/hairdresser": {
+                "name": "Haarkapper"
+            },
+            "shop/hardware": {
+                "name": "Hardewarewinkel"
+            },
+            "shop/jewelry": {
+                "name": "Juwelier"
+            },
+            "shop/mobile_phone": {
+                "name": "Selfoonwinkel"
+            },
+            "shop/motorcycle": {
+                "name": "Motorfietshandelaar"
+            },
+            "shop/music": {
+                "name": "Musiekwinkel"
+            },
+            "shop/optician": {
+                "name": "Oogarts"
+            },
+            "shop/pet": {
+                "name": "Troeteldierwinkel"
+            },
+            "shop/shoes": {
+                "name": "Skoenwinkel"
+            },
+            "shop/stationery": {
+                "name": "Skryfbehoeftewinkel"
+            },
+            "shop/supermarket": {
+                "name": "Supermark"
+            },
+            "shop/toys": {
+                "name": "Speelgoedwinkel"
+            },
+            "shop/travel_agency": {
+                "name": "Reisagentskap"
+            },
+            "shop/tyres": {
+                "name": "Bandewinkel"
+            },
+            "shop/vacant": {
+                "name": "Leë winkel"
+            },
+            "shop/video": {
+                "name": "Videowinkel"
+            },
+            "tourism": {
+                "name": "Toerisme"
+            },
+            "tourism/alpine_hut": {
+                "name": "Berghuisie"
+            },
+            "tourism/artwork": {
+                "name": "Kunswerk"
+            },
+            "tourism/attraction": {
+                "name": "Toerismeaantreklikheid"
+            },
+            "tourism/camp_site": {
+                "name": "Kamppeer Plek"
+            },
+            "tourism/caravan_site": {
+                "name": "RV Park"
+            },
+            "tourism/chalet": {
+                "name": "Chalet"
+            },
+            "tourism/guest_house": {
+                "name": "Gastehuis"
+            },
+            "tourism/hostel": {
+                "name": "Hostel"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Inligting"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Musuem"
+            },
+            "tourism/picnic_site": {
+                "name": "Piekniek Plek"
+            },
+            "tourism/theme_park": {
+                "name": "Temapark"
+            },
+            "tourism/viewpoint": {
+                "name": "Uitkykpunt"
+            },
+            "tourism/zoo": {
+                "name": "Dieretuin"
+            },
+            "waterway": {
+                "name": "Waterweg"
+            },
+            "waterway/canal": {
+                "name": "Kanaal"
+            },
+            "waterway/dam": {
+                "name": "Dam"
+            },
+            "waterway/ditch": {
+                "name": "Sloot"
+            },
+            "waterway/drain": {
+                "name": "Drein"
+            },
+            "waterway/river": {
+                "name": "Rivier"
+            },
+            "waterway/riverbank": {
+                "name": "Rivierbank"
+            },
+            "waterway/stream": {
+                "name": "Stroom"
+            },
+            "waterway/weir": {
+                "name": "Studam"
+            }
+        }
+    }
+};

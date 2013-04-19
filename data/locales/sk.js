@@ -173,6 +173,11 @@ locale.sk = {
     "logout": "odhlásiť",
     "loading_auth": "Pripájam na OpenStreetMap...",
     "report_a_bug": "nahlásiť chybu",
+    "status": {
+        "error": "Nepodarilo sa spojiť s API.",
+        "offline": "API je offline. Skúste upravovať neskôr.",
+        "readonly": "API je iba na čítanie. Budete musieť počkať, aby ste mohli uložiť vaše zmeny."
+    },
     "commit": {
         "title": "Ulož zmeny",
         "description_placeholder": "Stručný popis tvojho prispievania",
@@ -199,7 +204,7 @@ locale.sk = {
     },
     "inspector": {
         "no_documentation_combination": "Pre túto kombináciu označenia nie je dostupná dokumentácia",
-        "no_documentation_key": "Pre tento kľúč nie je dostupná dokumentácia",
+        "no_documentation_key": "Pre toto označenie nie je dostupná dokumentácia",
         "show_more": "Ukáž viac",
         "new_tag": "Nové označenie",
         "view_on_osm": "Zobraz na openstreetmap.org",
@@ -273,7 +278,8 @@ locale.sk = {
         "gps": "# GPS\nGPS údaje sú najviac dôveryhodný zdroj dát pre OpenStreetMap. Tento editor podporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp môžete zachytiť pomocou rôznych aplikácií pre múdre telefóny ako aj GPS prístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby ste použili GPX trasu pre mapovanie, pretiahnite a pustite GPX súbor na mapový editor. Ak je rozpoznaný, bude pridaný na mapu ako jasná zelená čiara. Kliknite na ponuku \"Nastavenia pozadia\" na ľavej strane pre zapnutie, vypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX trasa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako ju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov.\n",
         "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vľavo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
         "addresses": "# Adresy\n\nAdresy sú niekedy tou najužitočnejšou informáciou na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam na mape ako obrysy budov ale tiež ku tým, ktoré boli zmapované ako samostatný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
-        "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na pravej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho políčka.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n\n### Zatvorenie inšpektora\n\nInšpektora môžete zatvoriť kliknutím na tlačitko pre zatvorenie vpravo hore, stlačením klávesu \"Escape\" alebo kliknutím na mapu.\n"
+        "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na pravej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho políčka.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n\n### Zatvorenie inšpektora\n\nInšpektora môžete zatvoriť kliknutím na tlačitko pre zatvorenie vpravo hore, stlačením klávesu \"Escape\" alebo kliknutím na mapu.\n",
+        "buildings": "# Budovy\n\nOpenStreetMap je najväčšia databáza budov na svete. Práve vy ju môžete tvoriť a vylepšovať.\n\n### Výber\n\nBudovu môžete vybrať kliknutím na jej hranicu. Týmto sa budova zvýrazní a otvorí sa malá ponuka nástrojov a postranný panel, ukazujúcim dodatočné informácie o budove.\n\n### Úprava\n\nNiekedy môžu byť budovy chybne umiestnené alebo mať nesprávne označenia.\n\nPre presun celej budovy ju vyberte, a potom kliknite na nástroj \"Presunúť\". Posuňte vašu myš, aby ste posunuli budovu a kliknite, keď je umiestnená správne.\n\nPre opravu tvaru budovy, kliknite a ťahajte za uzly, ktoré tvoria jej ohraničenie, na lepšie miesto.\n\n### Vytváranie\n\nJeden z hlavných problémov okolo pridávania budov je, že OpenStreetMap zaznamenáva budovy ako útvary aj ako body. Nepísaným pravidlom je mapovať budovy vo forme útvaru vždy, keď je to možné a mapovať firmy, domovy, služby občianskej vybavenosti a ďalšie subjekty, ktoré v budove pôsobia ako body umiestnené vo vnútri útvaru budovy.\n\nZačnite kresliť budovu ako útvar, klinutím na tlačítko \"Plocha\" vľavo hore a ukončite ju buď stlačením \"Enter\" na vašej klávesnici alebo kliknutím na prvý uzol, ktorý ste zakreslili, čím uzavriete útvar.\n\n### Vymazávanie\n\nAk je budova úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže budova môže byť jednoducho novopostavená.\n"
     },
     "intro": {
         "navigation": {
@@ -319,6 +325,23 @@ locale.sk = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Využitie krajiny"
+            },
+            "category-path": {
+                "name": "Chodník"
+            },
+            "category-rail": {
+                "name": "Železnica"
+            },
+            "category-road": {
+                "name": "Cesta"
+            },
+            "category-water": {
+                "name": "Vodná plocha"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Prístup",
@@ -422,6 +445,9 @@ locale.sk = {
             },
             "denomination": {
                 "label": "Vierovyznanie"
+            },
+            "denotation": {
+                "label": "Označenie"
             },
             "elevation": {
                 "label": "Nadmorská výška"
@@ -549,10 +575,12 @@ locale.sk = {
                 "label": "Šport"
             },
             "structure": {
+                "label": "Štruktúra",
                 "options": {
                     "bridge": "Most",
                     "tunnel": "Tunel",
-                    "embankment": "Násyp"
+                    "embankment": "Násyp",
+                    "cutting": "Výkop"
                 }
             },
             "supervised": {
@@ -594,16 +622,19 @@ locale.sk = {
                 "name": "Letectvo"
             },
             "aeroway/aerodrome": {
-                "name": "Letisko"
+                "name": "Letisko",
+                "terms": "lietadlo,letisko,letisková plocha"
             },
             "aeroway/helipad": {
-                "name": "Heliport"
+                "name": "Heliport",
+                "terms": "vrtuľník,helikoptéra,pristávacia plocha pre helikoptéry,heliport"
             },
             "amenity": {
                 "name": "Občianska vybavenosť"
             },
             "amenity/bank": {
-                "name": "Banka"
+                "name": "Banka",
+                "terms": "pokladne,pobočka,kreditná únia,depozitár,pokladnica,fondy,investícia,firma,rezerva,zásoba,akcie,trezor"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -618,10 +649,18 @@ locale.sk = {
                 "name": "Prenájom bicyklov"
             },
             "amenity/cafe": {
-                "name": "Kaviareň"
+                "name": "Kaviareň",
+                "terms": "káva,čaj,pražiareň kávy"
             },
             "amenity/cinema": {
-                "name": "Kino"
+                "name": "Kino",
+                "terms": "veľké plátno,film,pohyblivé obrázky,filmový dom,filmové divadlo,najbližšie kino,premietanie,multiplex"
+            },
+            "amenity/courthouse": {
+                "name": "Súd"
+            },
+            "amenity/embassy": {
+                "name": "Ambasáda/Veľvyslanectvo"
             },
             "amenity/fast_food": {
                 "name": "Rýchle občerstvenie"
@@ -636,10 +675,14 @@ locale.sk = {
                 "name": "Pohrebisko"
             },
             "amenity/hospital": {
-                "name": "Nemocnica"
+                "name": "Nemocnica",
+                "terms": "klinika,poliklinika,nemocnica s poliklinikou,záchranná služba,záchranka,prvá pomoc,pohotovosť,sanatórium,doliečovacie centrum,operácia,krídlo,oddelenie"
             },
             "amenity/library": {
                 "name": "Knižnica"
+            },
+            "amenity/marketplace": {
+                "name": "Tržnica/Trhovisko"
             },
             "amenity/parking": {
                 "name": "Parkovisko"
@@ -648,22 +691,28 @@ locale.sk = {
                 "name": "Lekáreň"
             },
             "amenity/place_of_worship": {
-                "name": "Náboženské miesto"
+                "name": "Náboženské miesto",
+                "terms": "kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,mešita,minaret,synagóga,dóm,svätostánok, oratórium,fara,diecéza,stupa"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kostol"
+                "name": "Kostol",
+                "terms": "kresťanský,kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,dóm,svätostánok, oratórium,fara,diecéza"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Synagóga"
+                "name": "Synagóga",
+                "terms": "Židovský,synagóga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mešita"
+                "name": "Mešita",
+                "terms": "moslimský,mešita"
             },
             "amenity/police": {
-                "name": "Polícia"
+                "name": "Polícia",
+                "terms": "polícia,mestská polícia,verejná bezpečnosť,fízli,poliši,zákon"
             },
             "amenity/post_box": {
-                "name": "Poštová schránka"
+                "name": "Poštová schránka",
+                "terms": "schránka,list,zásielka,výber zásielok"
             },
             "amenity/post_office": {
                 "name": "Pošta"
@@ -672,10 +721,12 @@ locale.sk = {
                 "name": "Krčma"
             },
             "amenity/restaurant": {
-                "name": "Reštaurácia"
+                "name": "Reštaurácia",
+                "terms": "bar,kafetéria,kantýna,jedáleň,pizzeria,jedlo,rýchloobčerstvenie,fastfood,večera,reštaurácia,reštika,jedenie"
             },
             "amenity/school": {
-                "name": "Škola"
+                "name": "Škola",
+                "terms": "akadémia,alma mater,vysoká škola,oddelenie,fakulta,katedra,prednáška,prednášková sála"
             },
             "amenity/swimming_pool": {
                 "name": "Plaváreň/Kúpalisko"
@@ -683,14 +734,43 @@ locale.sk = {
             "amenity/telephone": {
                 "name": "Telefón"
             },
+            "amenity/theatre": {
+                "name": "Divadlo",
+                "terms": "divadlo,predstavenie,muzikál,hra,scéna"
+            },
             "amenity/toilets": {
                 "name": "Toalety"
             },
             "amenity/townhall": {
-                "name": "Mestský úrad/Radnica"
+                "name": "Mestský úrad/Radnica",
+                "terms": "radnica,obecný úrad,mestský úrad,správa"
             },
             "amenity/university": {
                 "name": "Univerzita"
+            },
+            "barrier": {
+                "name": "Bariera"
+            },
+            "barrier/block": {
+                "name": "Betónový blok"
+            },
+            "barrier/bollard": {
+                "name": "Stĺpik"
+            },
+            "barrier/cattle_grid": {
+                "name": "Mreža proti pohybu dobytka"
+            },
+            "barrier/city_wall": {
+                "name": "Mestské opevnenie"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Zábrana pre cyklistov"
+            },
+            "barrier/ditch": {
+                "name": "Priekopa"
+            },
+            "barrier/entrance": {
+                "name": "Vstup"
             },
             "barrier/fence": {
                 "name": "Plot"
@@ -710,6 +790,9 @@ locale.sk = {
             "barrier/retaining_wall": {
                 "name": "Rampa"
             },
+            "barrier/stile": {
+                "name": "Prielez"
+            },
             "barrier/toll_booth": {
                 "name": "Búdka pre výber mýta"
             },
@@ -725,6 +808,9 @@ locale.sk = {
             "building/apartments": {
                 "name": "Bytovka/Obytná budova"
             },
+            "building/entrance": {
+                "name": "Vstup"
+            },
             "building/house": {
                 "name": "Dom"
             },
@@ -734,17 +820,26 @@ locale.sk = {
             "highway": {
                 "name": "Cesta"
             },
+            "highway/bridleway": {
+                "name": "Jazdecká trať",
+                "terms": "jazdecká cesta, chodník pre kone,jazdecká trasa"
+            },
             "highway/bus_stop": {
                 "name": "Autobusová zastávka"
             },
             "highway/crossing": {
-                "name": "Prechod pre chodcov"
+                "name": "Prechod pre chodcov",
+                "terms": "Prechod pre chodcov,zebra"
             },
             "highway/cycleway": {
                 "name": "Cestička pre cyklistov"
             },
             "highway/footway": {
-                "name": "Cestička pre chodcov"
+                "name": "Cestička pre chodcov",
+                "terms": "cesta,cestička,chodník,turistický chodník,horská cesta,chodníček,cesta pre peších"
+            },
+            "highway/living_street": {
+                "name": "Obytná zóna"
             },
             "highway/mini_roundabout": {
                 "name": "Malý kruhový objazd"
@@ -756,7 +851,8 @@ locale.sk = {
                 "name": "Diaľničná križovatka"
             },
             "highway/motorway_link": {
-                "name": "Diaľničný privádzač"
+                "name": "Diaľničný privádzač",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
             },
             "highway/path": {
                 "name": "Cestička"
@@ -768,7 +864,8 @@ locale.sk = {
                 "name": "Cesta 1. triedy"
             },
             "highway/primary_link": {
-                "name": "Privádzač na cestu 1. triedy"
+                "name": "Privádzač na cestu 1. triedy",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
             },
             "highway/residential": {
                 "name": "Obytná ulica"
@@ -780,28 +877,36 @@ locale.sk = {
                 "name": "Cesta 2. triedy"
             },
             "highway/secondary_link": {
-                "name": "Privádzač na cestu 2. triedy"
+                "name": "Privádzač na cestu 2. triedy",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
             },
             "highway/service": {
                 "name": "Servisná cesta"
             },
             "highway/steps": {
-                "name": "Schody"
+                "name": "Schody",
+                "terms": "schody,schodisko"
             },
             "highway/tertiary": {
                 "name": "Cesta 3. triedy"
             },
             "highway/tertiary_link": {
-                "name": "Privádzač na cestu 3. triedy"
+                "name": "Privádzač na cestu 3. triedy",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
             },
             "highway/track": {
                 "name": "Lesná cesta"
             },
             "highway/traffic_signals": {
-                "name": "Semafory"
+                "name": "Semafory",
+                "terms": "semafor,svetelná križovatka,svetelné dopravné značenie"
             },
             "highway/trunk": {
                 "name": "Rýchlostná cesta"
+            },
+            "highway/trunk_link": {
+                "name": "Privádzač rýchlostnej cesty",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
             },
             "highway/turning_circle": {
                 "name": "Otáčací kruh"
@@ -811,6 +916,12 @@ locale.sk = {
             },
             "historic": {
                 "name": "Historické miesto"
+            },
+            "historic/archaeological_site": {
+                "name": "Archeologické nálezisko"
+            },
+            "historic/boundary_stone": {
+                "name": "Hraničný kameň"
             },
             "historic/castle": {
                 "name": "Hrad"
@@ -826,6 +937,9 @@ locale.sk = {
             },
             "historic/wayside_cross": {
                 "name": "Kresťanský kríž pri ceste"
+            },
+            "historic/wayside_shrine": {
+                "name": "Prícestný svätostánok"
             },
             "landuse": {
                 "name": "Využitie územia"
@@ -872,6 +986,9 @@ locale.sk = {
             "landuse/residential": {
                 "name": "Obytné"
             },
+            "landuse/retail": {
+                "name": "Maloobchod"
+            },
             "landuse/vineyard": {
                 "name": "Vinica"
             },
@@ -888,7 +1005,8 @@ locale.sk = {
                 "name": "Lodenica"
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "park,záhrada,trávnik,tráva,les,lesopark,lúka,ihrisko,hora,les,oddych,oddychová zóna"
             },
             "leisure/pitch": {
                 "name": "Športový kurt"
@@ -911,6 +1029,12 @@ locale.sk = {
             "leisure/playground": {
                 "name": "Ihrisko pre deti"
             },
+            "leisure/slipway": {
+                "name": "Spúšťanie lodí"
+            },
+            "leisure/stadium": {
+                "name": "Štadión"
+            },
             "leisure/swimming_pool": {
                 "name": "Plaváreň/Kúpalisko"
             },
@@ -927,10 +1051,14 @@ locale.sk = {
                 "name": "Triangulačný bod"
             },
             "man_made/wastewater_plant": {
-                "name": "Čistička odpadových vôd"
+                "name": "Čistička odpadových vôd",
+                "terms": "čistička,čistička odpadových vôd,úprava vody"
             },
             "man_made/water_tower": {
                 "name": "Veža s vodojemom"
+            },
+            "man_made/water_works": {
+                "name": "Vodojem"
             },
             "natural": {
                 "name": "Prírodné"
@@ -945,7 +1073,8 @@ locale.sk = {
                 "name": "Útes"
             },
             "natural/coastline": {
-                "name": "Pobrežie"
+                "name": "Pobrežie",
+                "terms": "pobrežie"
             },
             "natural/glacier": {
                 "name": "Ľadovec"
@@ -957,7 +1086,8 @@ locale.sk = {
                 "name": "Vresovisko"
             },
             "natural/peak": {
-                "name": "Vrchol"
+                "name": "Vrchol",
+                "terms": "vrch,vrchol,štít,kopec,hora,horský chrbát,summit"
             },
             "natural/scrub": {
                 "name": "kosodrevina"
@@ -972,10 +1102,12 @@ locale.sk = {
                 "name": "Voda"
             },
             "natural/water/lake": {
-                "name": "Jazero"
+                "name": "Jazero",
+                "terms": "jazero,loch,pleso"
             },
             "natural/water/pond": {
-                "name": "Rybník"
+                "name": "Rybník",
+                "terms": "rybník,kúpalisko"
             },
             "natural/water/reservoir": {
                 "name": "Nádrž"
@@ -1005,7 +1137,8 @@ locale.sk = {
                 "name": "Osada"
             },
             "place/island": {
-                "name": "Ostrov"
+                "name": "Ostrov",
+                "terms": "ostrov,atol,útes,ostrovček,archipelágo"
             },
             "place/isolated_dwelling": {
                 "name": "Samota"
@@ -1019,20 +1152,42 @@ locale.sk = {
             "place/village": {
                 "name": "Dedina"
             },
+            "power": {
+                "name": "Elektrická energia"
+            },
             "power/generator": {
                 "name": "Elektráreň"
+            },
+            "power/line": {
+                "name": "Elektrické vedenie"
+            },
+            "power/pole": {
+                "name": "Stĺp elektrického vedenia"
             },
             "power/sub_station": {
                 "name": "Rozvodná stanica"
             },
+            "power/tower": {
+                "name": "Veža vysokého napätia"
+            },
+            "power/transformer": {
+                "name": "Transformátor"
+            },
             "railway": {
                 "name": "Železnica"
+            },
+            "railway/abandoned": {
+                "name": "Nepoužívaná trať"
             },
             "railway/disused": {
                 "name": "Železnica mimo prevádzky"
             },
             "railway/level_crossing": {
-                "name": "Železničné priecestie"
+                "name": "Železničné priecestie",
+                "terms": "priecestie,železničné priecestie,cesta cez železnicu,závory,cesta cez trať,kríženie"
+            },
+            "railway/monorail": {
+                "name": "Jednokoľajnicová dráha"
             },
             "railway/platform": {
                 "name": "Železničné nástupište"
@@ -1050,7 +1205,8 @@ locale.sk = {
                 "name": "Vstup do metra"
             },
             "railway/tram": {
-                "name": "Električka"
+                "name": "Električka",
+                "terms": "električka"
             },
             "shop": {
                 "name": "Obchod"
@@ -1060,6 +1216,9 @@ locale.sk = {
             },
             "shop/bakery": {
                 "name": "Pekáreň"
+            },
+            "shop/beauty": {
+                "name": "Bižutéria"
             },
             "shop/beverages": {
                 "name": "Obchod s nápojmi"
@@ -1094,8 +1253,23 @@ locale.sk = {
             "shop/computer": {
                 "name": "Obchod s výpočtovou technikou"
             },
+            "shop/confectionery": {
+                "name": "Cukráreň"
+            },
+            "shop/convenience": {
+                "name": "Samoobsluha"
+            },
+            "shop/deli": {
+                "name": "Delikatesy"
+            },
             "shop/department_store": {
                 "name": "Obchodný dom"
+            },
+            "shop/doityourself": {
+                "name": "Obchod pre kutilov"
+            },
+            "shop/dry_cleaning": {
+                "name": "Čistenie odevov za sucha"
             },
             "shop/electronics": {
                 "name": "Elektro obchod"
@@ -1124,17 +1298,32 @@ locale.sk = {
             "shop/hardware": {
                 "name": "Železiarstvo"
             },
+            "shop/hifi": {
+                "name": "Obchod so zvukovými systémami"
+            },
             "shop/jewelry": {
                 "name": "Zlatníctvo"
             },
             "shop/kiosk": {
                 "name": "Stánok"
             },
+            "shop/laundry": {
+                "name": "Čistiareň odevov/Práčovňa"
+            },
+            "shop/mall": {
+                "name": "Nákupné centrum"
+            },
             "shop/mobile_phone": {
                 "name": "Obchod s mobilnými telefónmi"
             },
+            "shop/motorcycle": {
+                "name": "Predajňa motocyklov"
+            },
             "shop/music": {
                 "name": "Obchod s hudbou"
+            },
+            "shop/newsagent": {
+                "name": "Trafika"
             },
             "shop/optician": {
                 "name": "Optika"
@@ -1155,7 +1344,8 @@ locale.sk = {
                 "name": "Papierníctvo"
             },
             "shop/supermarket": {
-                "name": "Supermarket"
+                "name": "Supermarket",
+                "terms": "nákup,samoška,supermarket,potraviny,tesco,jednota,"
             },
             "shop/toys": {
                 "name": "Hračkárstvo"
@@ -1165,6 +1355,12 @@ locale.sk = {
             },
             "shop/tyres": {
                 "name": "Predajňa pneumatík"
+            },
+            "shop/vacant": {
+                "name": "Prázdny obchod"
+            },
+            "shop/variety_store": {
+                "name": "Obchod so zmiešaným tovarom"
             },
             "shop/video": {
                 "name": "Videopožičovňa"
@@ -1184,11 +1380,15 @@ locale.sk = {
             "tourism/camp_site": {
                 "name": "Kemping/Táborisko"
             },
+            "tourism/caravan_site": {
+                "name": "Parkovisko pre karavany"
+            },
             "tourism/chalet": {
                 "name": "Chata"
             },
             "tourism/guest_house": {
-                "name": "Penzión"
+                "name": "Penzión",
+                "terms": "ubytovňa,penzión,hotel,ubytovanie,nocľah"
             },
             "tourism/hostel": {
                 "name": "Hostel"
@@ -1203,7 +1403,8 @@ locale.sk = {
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Múzeum"
+                "name": "Múzeum",
+                "terms": "výstava,výstavisko,galéria,zbierka,archív"
             },
             "tourism/picnic_site": {
                 "name": "Miesto pre piknik"
@@ -1233,13 +1434,15 @@ locale.sk = {
                 "name": "Odvodňovací kanál"
             },
             "waterway/river": {
-                "name": "Rieka"
+                "name": "Rieka",
+                "terms": "rieka,tok,voda,potok,rameno,sútok,riečka,delta,koryto"
             },
             "waterway/riverbank": {
                 "name": "Breh rieky"
             },
             "waterway/stream": {
-                "name": "Potok"
+                "name": "Potok",
+                "terms": "potok,potôčik,bystrina,riečka,kanál"
             },
             "waterway/weir": {
                 "name": "Hrádza/Hať"

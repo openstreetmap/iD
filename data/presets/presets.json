@@ -186,6 +186,16 @@
         },
         "name": "Cafe"
     },
+    "amenity/car_wash": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "car_wash"
+        },
+        "name": "Car Wash"
+    },
     "amenity/cinema": {
         "icon": "cinema",
         "fields": [

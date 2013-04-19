@@ -651,6 +651,10 @@ locale.en = {
                 "name": "Cafe",
                 "terms": "coffee,tea,coffee shop"
             },
+            "amenity/car_wash": {
+                "name": "Car Wash",
+                "terms": ""
+            },
             "amenity/cinema": {
                 "name": "Cinema",
                 "terms": "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
@@ -669,6 +673,10 @@ locale.en = {
             },
             "amenity/fire_station": {
                 "name": "Fire Station",
+                "terms": ""
+            },
+            "amenity/fountain": {
+                "name": "Fountain",
                 "terms": ""
             },
             "amenity/fuel": {

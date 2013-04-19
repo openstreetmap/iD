@@ -8,6 +8,2256 @@
 
     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
+locale.af = {
+    "modes": {
+        "add_area": {
+            "title": "Area",
+            "description": "Sit 'n park, gebou, meer of iets ander by die kaart.",
+            "tail": "Klick op die kaart om 'n area te begin teken soos 'n park, meer of gebou."
+        },
+        "add_line": {
+            "title": "Lyn",
+            "description": "Sit snelwee, strate, voetslaanpaaidjies, kanaale of ander lyne by die kaart.",
+            "tail": "Klick op die kaart om 'n pad, paaidjie of roete te teken."
+        },
+        "add_point": {
+            "title": "Punt",
+            "description": "Sit 'n restaurant, monument, posbus of ander punte by die kaart.",
+            "tail": "Klick op die kaart om 'n punt by te sit."
+        },
+        "browse": {
+            "title": "Blaai rond",
+            "description": "Kyk rond en zoom die kaart."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Punt is bygesit.",
+                "vertex": "'n Punt is bygesit by 'n weg."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Begin 'n lyn.",
+                "area": "Begin 'n area."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Gaan voort met 'n lyn.",
+                "area": "Gaan voort met 'n area."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Kanseleer teken."
+        },
+        "change_tags": {
+            "annotation": "Veranderde kenmerke."
+        },
+        "circularize": {
+            "title": "Maak rond",
+            "description": {
+                "line": "Maak hierdie lyn rond.",
+                "area": "Maak die area rond."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Maak 'n lyn rond.",
+                "area": "Maak 'n area rond."
+            }
+        },
+        "orthogonalize": {
+            "title": "Maak Vierkantig",
+            "description": "Maak hoeke reghoekig.",
+            "key": "Q",
+            "annotation": {
+                "line": "Maak die hoeke van 'n lyn reghoekig.",
+                "area": "Maak die hoeke van 'n area reghoekig."
+            }
+        },
+        "delete": {
+            "title": "Verwyder",
+            "description": "Verwyder van die kaart.",
+            "annotation": {
+                "point": "Verwyder 'n punt.",
+                "vertex": "Verwyder 'n punt van 'n weg.",
+                "line": "'n Lyn is verwyder.",
+                "area": "'n Area is verwyder.",
+                "relation": "'n Verhouding is verwyder.",
+                "multiple": "{n} stukke is verwyder."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "'n Weg is gekoppel aan 'n punt.",
+                "vertex": "Een weg is aan 'n ander gekoppel.",
+                "line": "'n Weg is aan 'n lyn gekoppel.",
+                "area": "'n Weg is aan 'n area gekoppel."
+            }
+        },
+        "disconnect": {
+            "title": "Ontkoppel.",
+            "description": "Ontkoppel hierdie lyne/areas van mekkaar.",
+            "key": "D",
+            "annotation": "Lyne/areas geontkoppel.",
+            "not_connected": "Daar is nie genoeg lyne/areas hier om te ontkoppel nie."
+        },
+        "merge": {
+            "title": "Smelt saam",
+            "description": "Smelt die lyne saam.",
+            "key": "C",
+            "annotation": "{n} lyne saamgesmelt.",
+            "not_eligible": "Hierdie items kan nie saamgesmelt word nie.",
+            "not_adjacent": "Hierdie lyne kan nie saamgesmelt word nie, want hulle is nie verbind nie."
+        },
+        "move": {
+            "title": "Skuif",
+            "description": "Skuif na 'n ander plek.",
+            "key": "M",
+            "annotation": {
+                "point": "'n Punt is geskuif.",
+                "vertex": "'n Punt in weg is geskuif.",
+                "line": "'n Lyn is geskuif.",
+                "area": "'n Area is geskuif.",
+                "multiple": "Verskeie stukke is geskuif."
+            },
+            "incomplete_relation": "Hierdie item kan nie geskuif word nie want dit is nie volledig afgelaai nie."
+        },
+        "rotate": {
+            "title": "Draai",
+            "description": "Draai die stuk rondom sy middelpunt.",
+            "key": "R",
+            "annotation": {
+                "line": "'n Lyn is gedraai.",
+                "area": "'n Area is gedraai."
+            }
+        },
+        "reverse": {
+            "title": "Draai om",
+            "description": "Maak die lyn ander kant toe gaan.",
+            "key": "V",
+            "annotation": "'n Lyn is omgedraai."
+        },
+        "split": {
+            "title": "Split",
+            "description": {
+                "line": "Split die lyn in twee by hierdie punt.",
+                "area": "Split die grens van hierdie area in twee.",
+                "multiple": "Split die lyn/area grens by hierdie punt in twee."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "Split 'n lyn.",
+                "area": "Split 'n area grens.",
+                "multiple": "Split {n} lyn/area grense."
+            },
+            "not_eligible": "Lyne kan nie gesplit word by hulle begin of eind punte nie.",
+            "multiple_ways": "Daar is te veel lyne hier om te split."
+        }
+    },
+    "nothing_to_undo": "Niks om ongedaan te maak.",
+    "nothing_to_redo": "Niks om weer te doen nie.",
+    "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!",
+    "browser_notice": "Hierdie program is bruikbaar in Firefox, Chrome, Safair, Opera en Internet Explorer 9 en later weergawes. Gradeer asseblief jou webbrowser op of gebruik Potlatch 2 om die kaart te verander.",
+    "view_on_osm": "Besigtig op OSM",
+    "zoom_in_edit": "zoom in om die kaart te verander",
+    "logout": "voetsek",
+    "loading_auth": "Maak kontak met OpenStreetMap...",
+    "report_a_bug": "Raporteer 'n probleem",
+    "status": {
+        "error": "Kan nie aan die API koppel nie.",
+        "offline": "Die API is aflyn, probeer asseblief later weer.",
+        "readonly": "Die API is lees alleenliks. Jy sal so bietjie moet wag voordat jy verandering kan bêre."
+    },
+    "commit": {
+        "title": "Bêre veranderinge",
+        "description_placeholder": "Kortlikse beskrywing van jou bydraes",
+        "message_label": "Bêre boodskap",
+        "upload_explanation": "Die verandering wat jy oplaai as {user} gaan sigbaar wees op alle kaarte wat OpenStreetMap data gebruik.",
+        "save": "Bȇre",
+        "cancel": "Kanseleer",
+        "warnings": "Waarskuwings",
+        "modified": "Verander",
+        "deleted": "Verwyder",
+        "created": "Gemaak"
+    },
+    "contributors": {
+        "list": "Kaartdata bygedra deur {users} ",
+        "truncated_list": "Kaartdata bygedrae deur {users} en {count} ander"
+    },
+    "geocoder": {
+        "title": "Soek 'n plek",
+        "placeholder": "Soek 'n plek",
+        "no_results": "Kon nie die pleknaam '{name}' kry nie"
+    },
+    "geolocate": {
+        "title": "Wys waar ek is"
+    },
+    "inspector": {
+        "no_documentation_combination": "Daar is geen dokumentasie beskikbaar vir hierdie kenmerk kombinasie nie",
+        "no_documentation_key": "Daar is geen dokumentasie beskikbaar vir hierdie sleutel nie",
+        "show_more": "Wys meer",
+        "new_tag": "Nuwe kenteken",
+        "view_on_osm": "Kyk daarna op openstreetmap.org",
+        "editing_feature": "Verander {feature}",
+        "additional": "Addisioneele kentekens",
+        "choose": "Kies funksie tipe",
+        "results": "{n} resultate vir {search}",
+        "reference": "Kyk daarna op OpenStreetMap Wiki",
+        "back_tooltip": "Verander funksie tipe",
+        "remove": "Verwyder"
+    },
+    "background": {
+        "title": "Agtergrond",
+        "description": "Agtergrond stellings",
+        "percent_brightness": "{opacity}% helderheid",
+        "fix_misalignment": "Lyn op",
+        "reset": "begin van voor"
+    },
+    "restore": {
+        "heading": "Jy het verandering wat nog gebêre moet word",
+        "restore": "Herstel",
+        "reset": "Begin van voor"
+    },
+    "save": {
+        "title": "Stoor",
+        "help": "Stoor veranderinge na OpenStreetMap, en maak dit sigbaar vir ander gebruikers.",
+        "no_changes": "Geen verandering om te stoor.",
+        "error": "'n Fout het ingekruip toe jy probeer stoor het",
+        "uploading": "Laai verandering op na OpenStreetMap.",
+        "unsaved_changes": "Jy het ongestoorde veranderinge"
+    },
+    "splash": {
+        "welcome": "Welkom by die iD OpenStreetMap program",
+        "text": "iD is 'n vriendelike and kragtige gereedskapstuk om die wêreld se beste gratis kaart mee te help teken. Hierdie is ontwikkelingsweergawe {version}. Vir meer inligting sien {website} en raporteeer probleme by {github}.",
+        "walkthrough": "Begin die Deurloop",
+        "start": "Verander Nou"
+    },
+    "source_switch": {
+        "live": "lewendig",
+        "lose_changes": "Jy het ongebêrede verandering, as jy die van kaart server verander gaan jy die veranderings weggooi. Is jy seker jy wil van kaart server verander?",
+        "dev": "dev"
+    },
+    "tag_reference": {
+        "description": "Beskrywing",
+        "on_wiki": "{tag} op wiki.osm.org",
+        "used_with": "gebruik met {type}"
+    },
+    "validations": {
+        "untagged_point": "Punt sonder eienskappe",
+        "untagged_line": "Lyn het geen kenmerk",
+        "untagged_area": "Area het geen kenmerk",
+        "many_deletions": "Jy verwyder items van die kaart. Dit affekteer die kaart wat almal sien op openstreetmap.org. Maak asseblief seker dit is wat jy wil doen.",
+        "tag_suggests_area": "Die kenmerk {tag} is geoormerk vir 'n area nie vir 'n lyn nie.",
+        "deprecated_tags": "Vervalde kenmerke: {tags}"
+    },
+    "zoom": {
+        "in": "Zoom in",
+        "out": "Zoom uit"
+    },
+    "cannot_zoom": "Kan nie verder uitzoom in die huidige mode nie.",
+    "gpx": {
+        "local_layer": "Plaaslike GPX leer",
+        "drag_drop": "Sleep en laat val 'n .gpx leer op die bladsy"
+    },
+    "help": {
+        "title": "Help",
+        "help": "# Help\n\nHierdie is 'n probram vir  [OpenStreetMap](http://www.openstreetmap.org/), die gratis en veranderbarie kaart van die wêreld. Jy kan dit gebruik om nuwe data by te voeg of op te dateer waar jy bly en die \"open-source\" en \"open-data\" kaart beter te maak vir almal wat dit gebruik.\n\nVerandering wat jy aanbring op die kaart sal sigbaar wees vir almal at OpenStreetMap gebruik. Jy het nodig om 'n [nuwe gebruikersnaam](https://www.openstreetmap.org/user/new) vir jou self te skep voor jy data kan toevoeg by die kaart. \n\nDie [iD editor](http://ideditor.com/) is 'n gemeenskapsprojek met die [kode beskikbaar op GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Verander en Bêre\n\nDie program is ontwerp om primêr aanlyn te werk en gebruik dit via 'n webwerf op die oomblik.\n\n### Uitkies van eienskappe\nOm 'n kaart item soos 'n pad, of gebou uit te kies, klick daarop. Dit sal die item uitlig en 'n paneel oopmaak met met meer detail oor die item. Dit sal ook 'n lys van dinge wys wat jy met die item kan doen.\n\nVerskeie items can gelyktydig gekies word deur die 'Shift' sleutel in te hou en dan 'n boksie met die muis te teken deur te klick en te sleep. Jy kan dan ooreenstemmende eienskappe tegelyktydig verander vir al die uitgekiesde items.\n\n### Bêre van veranderinge\nEnige verandering wat gemaak word, word lokaal gestoor totdat jy die bêre op die server. As jy 'n fout maak kan jy onklaar maak deur op die \n"
+    },
+    "intro": {
+        "navigation": {
+            "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**"
+        },
+        "points": {
+            "place": "Die punt kan op die kaart geplaas word deur daarop te klick. **Sit die punt bo-op die gebou.**",
+            "search": "Daar is verskeie eienskappe wat verteenwoordig kan word deur punte. Die punt wat jy nou net bygesit het is 'n Kafee. **Soek vir 'Kafee' **",
+            "choose": "**Kies Kafee van die rooster.**",
+            "describe": "Die punt is nou gemerk as 'n kafee. Gebruik die eienskapslys om meer inligting by te sit. **Sit 'n naam by**",
+            "close": "Die eienskapslys kan toegemaak word deur op die toemaak knoppie te klick. **Maak die eienskapslys toe**",
+            "reselect": "Baie kere gaan 'n punt klaar bestaan, maar met foute of onvolledig. Jy kan bestaande punte verander. **Kies die punt wat jy nou net gemaak het.**",
+            "fixname": "**Verander die naam en maak die eienskapslys toe.**",
+            "reselect_delete": "Alle eienskappe op die kaart kan verwyder word. **Klick op die punt wat jy nou net gemaak het. **"
+        },
+        "areas": {
+            "search": "**Soek vir 'n Speelgrond.**",
+            "choose": "**Kies Speelgrond van die rooster.**",
+            "describe": "**Sit 'n naam by en maak die eienskappe lys toe**"
+        },
+        "lines": {
+            "add": "Lyne word gebruik om items soos paaie, spoorwee en riviere te verteenwoordig. **Klick die Lyn knoppie om 'n nuwe lyn by te sit.**",
+            "start": "** Begin die lyn deur op die einde van die pad te klick.**",
+            "road": "**Kies Pad van die rooster**",
+            "residential": "Daar is verskillende tipes paaie, die mees algemeenste is 'n residensieel pad. ** Kies die Residentieele Pad tipe**",
+            "describe": "**Gee die pad 'n naam en maak die eienskappe lys toe.**",
+            "restart": "Die pad moet Flower Straat Kruis."
+        },
+        "startediting": {
+            "help": "Meer dokumentasie en hierdie deurloop is beskikbaar hier.",
+            "save": "Moenie vergeet om gereeld verandering te bêre nie!",
+            "start": "Begin die kaart teken!"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-rail": {
+                "name": "Spoor"
+            },
+            "category-road": {
+                "name": "Pad"
+            },
+            "category-water": {
+                "name": "Water"
+            }
+        },
+        "fields": {
+            "access": {
+                "label": "Toegang",
+                "types": {
+                    "access": "Algemene",
+                    "foot": "Voet",
+                    "motor_vehicle": "Motorvoertuie",
+                    "bicycle": "Fietse",
+                    "horse": "Perde"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Toegelaat"
+                    },
+                    "no": {
+                        "description": "Geen toegang vir algemene publiek"
+                    },
+                    "private": {
+                        "title": "Privaat"
+                    },
+                    "destination": {
+                        "title": "Eindbestemming"
+                    }
+                }
+            },
+            "address": {
+                "label": "Adres",
+                "placeholders": {
+                    "housename": "Huisnaam",
+                    "number": "123",
+                    "street": "Straat",
+                    "city": "Tipe"
+                }
+            },
+            "admin_level": {
+                "label": "Administratiewe vlak"
+            },
+            "aeroway": {
+                "label": "Tipe"
+            },
+            "amenity": {
+                "label": "Tipe"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "barrier": {
+                "label": "Tipe"
+            },
+            "bicycle_parking": {
+                "label": "Tipe"
+            },
+            "building": {
+                "label": "Gebou"
+            },
+            "building_area": {
+                "label": "Gebou"
+            },
+            "building_yes": {
+                "label": "Gebou"
+            },
+            "capacity": {
+                "label": "Kapasiteit"
+            },
+            "cardinal_direction": {
+                "label": "Rigting"
+            },
+            "clock_direction": {
+                "label": "Rigting",
+                "options": {
+                    "clockwise": "Kloksgewys",
+                    "anticlockwise": "Antikloksgewys"
+                }
+            },
+            "construction": {
+                "label": "Tipe"
+            },
+            "country": {
+                "label": "Land"
+            },
+            "crossing": {
+                "label": "Tipe"
+            },
+            "cuisine": {
+                "label": "Kos"
+            },
+            "denomination": {
+                "label": "Denominasie"
+            },
+            "denotation": {
+                "label": "Aanduiding"
+            },
+            "elevation": {
+                "label": "Hoogte bo seespiëel"
+            },
+            "emergency": {
+                "label": "Noodgeval"
+            },
+            "entrance": {
+                "label": "Tipe"
+            },
+            "fax": {
+                "label": "Faks"
+            },
+            "fee": {
+                "label": "Fooi"
+            },
+            "highway": {
+                "label": "Tipe"
+            },
+            "historic": {
+                "label": "Tipe"
+            },
+            "internet_access": {
+                "label": "Internet Toegang",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "Bedraad",
+                    "terminal": "Terminaal"
+                }
+            },
+            "landuse": {
+                "label": "Tipe"
+            },
+            "leisure": {
+                "label": "Tipe"
+            },
+            "levels": {
+                "label": "Vlakke"
+            },
+            "man_made": {
+                "label": "Tipe"
+            },
+            "maxspeed": {
+                "label": "Spoedlimiet"
+            },
+            "name": {
+                "label": "Naam"
+            },
+            "natural": {
+                "label": "Natuurlike"
+            },
+            "network": {
+                "label": "Netwerk"
+            },
+            "note": {
+                "label": "Nota"
+            },
+            "office": {
+                "label": "Tipe"
+            },
+            "oneway": {
+                "label": "Eenrigting"
+            },
+            "oneway_yes": {
+                "label": "Eenrigting"
+            },
+            "opening_hours": {
+                "label": "Ure"
+            },
+            "operator": {
+                "label": "Operateur"
+            },
+            "park_ride": {
+                "label": "Parkeer en ry"
+            },
+            "parking": {
+                "label": "Tipe"
+            },
+            "phone": {
+                "label": "Telefoon"
+            },
+            "place": {
+                "label": "Tipe"
+            },
+            "power": {
+                "label": "Tipe"
+            },
+            "railway": {
+                "label": "Tipe"
+            },
+            "ref": {
+                "label": "Verwyssing"
+            },
+            "religion": {
+                "label": "Geloof",
+                "options": {
+                    "christian": "Christen",
+                    "muslim": "Moslem",
+                    "buddhist": "Boeddhis",
+                    "jewish": "Joods",
+                    "hindu": "Hindoe",
+                    "shinto": "Sjinto",
+                    "taoist": "Taoist"
+                }
+            },
+            "service": {
+                "label": "Tipe"
+            },
+            "shelter": {
+                "label": "Skuiling"
+            },
+            "shop": {
+                "label": "Tipe"
+            },
+            "source": {
+                "label": "Bro"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "structure": {
+                "label": "Struktuur",
+                "options": {
+                    "bridge": "Brug",
+                    "tunnel": "Tonnel",
+                    "embankment": "Dyk",
+                    "cutting": "Uitgrawing"
+                }
+            },
+            "surface": {
+                "label": "Oppervlakte"
+            },
+            "tourism": {
+                "label": "Tipe"
+            },
+            "tracktype": {
+                "label": "Tipe"
+            },
+            "water": {
+                "label": "Tipe"
+            },
+            "waterway": {
+                "label": "Tipe"
+            },
+            "website": {
+                "label": "Webwerf"
+            },
+            "wetland": {
+                "label": "Tipe"
+            },
+            "wheelchair": {
+                "label": "Rolstoeltoegang"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Tipe"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Aanloopbaan"
+            },
+            "aeroway/aerodrome": {
+                "name": "Lughawe",
+                "terms": "vliegtuig,lughawe,lughawe"
+            },
+            "aeroway/helipad": {
+                "name": "Helipad",
+                "terms": "helikopter,helipad,heliport"
+            },
+            "amenity": {
+                "name": "Geriewe"
+            },
+            "amenity/bank": {
+                "name": "Bank"
+            },
+            "amenity/bar": {
+                "name": "Kroeg"
+            },
+            "amenity/bench": {
+                "name": "Bankie"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Fietsparkering"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Fietshuur"
+            },
+            "amenity/cafe": {
+                "name": "Kafee",
+                "terms": "koffie,tee,koffiewinkel"
+            },
+            "amenity/cinema": {
+                "name": "Fliek"
+            },
+            "amenity/courthouse": {
+                "name": "Hof"
+            },
+            "amenity/embassy": {
+                "name": "Ambassade"
+            },
+            "amenity/fast_food": {
+                "name": "Kitskos"
+            },
+            "amenity/fire_station": {
+                "name": "Brandweerstasie"
+            },
+            "amenity/fuel": {
+                "name": "Petrolstasie"
+            },
+            "amenity/grave_yard": {
+                "name": "Begrafplaas"
+            },
+            "amenity/hospital": {
+                "name": "Hospitaal"
+            },
+            "amenity/library": {
+                "name": "Biblioteek"
+            },
+            "amenity/parking": {
+                "name": "Parkering"
+            },
+            "amenity/pharmacy": {
+                "name": "Apteek"
+            },
+            "amenity/place_of_worship": {
+                "name": "Plek van aanbidding"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Kerk"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoge",
+                "terms": "joods,sinagoge"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Moskee",
+                "terms": "moslem,moskee"
+            },
+            "amenity/police": {
+                "name": "Polisie"
+            },
+            "amenity/post_box": {
+                "name": "Posbus"
+            },
+            "amenity/post_office": {
+                "name": "Poskantoor"
+            },
+            "amenity/pub": {
+                "name": "Kroeg"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "Skool"
+            },
+            "amenity/swimming_pool": {
+                "name": "Swembad"
+            },
+            "amenity/telephone": {
+                "name": "Telefoon"
+            },
+            "amenity/theatre": {
+                "name": "Teater"
+            },
+            "amenity/toilets": {
+                "name": "Toilette"
+            },
+            "amenity/townhall": {
+                "name": "Stadsaal"
+            },
+            "amenity/university": {
+                "name": "Universiteit"
+            },
+            "barrier/block": {
+                "name": "Blok"
+            },
+            "barrier/city_wall": {
+                "name": "Stadsmuur"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Fietshinderpaal"
+            },
+            "barrier/ditch": {
+                "name": "Sloot"
+            },
+            "barrier/entrance": {
+                "name": "Ingang"
+            },
+            "barrier/fence": {
+                "name": "Heining"
+            },
+            "barrier/gate": {
+                "name": "Hek"
+            },
+            "barrier/hedge": {
+                "name": "Laning"
+            },
+            "barrier/toll_booth": {
+                "name": "Tolhek"
+            },
+            "barrier/wall": {
+                "name": "Muur"
+            },
+            "boundary/administrative": {
+                "name": "Administratiewe Grens"
+            },
+            "building": {
+                "name": "Gebou"
+            },
+            "building/apartments": {
+                "name": "Woonstelle"
+            },
+            "building/entrance": {
+                "name": "Ingang"
+            },
+            "building/house": {
+                "name": "Huis"
+            },
+            "entrance": {
+                "name": "Ingang"
+            },
+            "highway": {
+                "name": "Snelweg"
+            },
+            "highway/bridleway": {
+                "name": "Perdepaaidjie"
+            },
+            "highway/bus_stop": {
+                "name": "Busstop"
+            },
+            "highway/crossing": {
+                "name": "Oorgang"
+            },
+            "highway/cycleway": {
+                "name": "Fietsrypad"
+            },
+            "highway/footway": {
+                "name": "Voetslaanpad"
+            },
+            "highway/mini_roundabout": {
+                "name": "Mini-sirkel"
+            },
+            "highway/motorway": {
+                "name": "Snelweg"
+            },
+            "highway/path": {
+                "name": "Paadjie"
+            },
+            "highway/pedestrian": {
+                "name": "Voetganger"
+            },
+            "highway/primary": {
+                "name": "Primere Pad"
+            },
+            "highway/residential": {
+                "name": "Residensieele pad"
+            },
+            "highway/secondary": {
+                "name": "Sekondere Pad"
+            },
+            "highway/service": {
+                "name": "Dienspad"
+            },
+            "highway/steps": {
+                "name": "Trappe",
+                "terms": "trappe,trappe"
+            },
+            "highway/tertiary": {
+                "name": "Tertiere Pad"
+            },
+            "highway/track": {
+                "name": "Spoor"
+            },
+            "highway/traffic_signals": {
+                "name": "Robot"
+            },
+            "highway/turning_circle": {
+                "name": "Draai Sirkel"
+            },
+            "highway/unclassified": {
+                "name": "Ongeklassifiseerde Pad"
+            },
+            "historic": {
+                "name": "Historiese Plek"
+            },
+            "historic/archaeological_site": {
+                "name": "Argeologiese Plek"
+            },
+            "historic/castle": {
+                "name": "Kasteel"
+            },
+            "historic/monument": {
+                "name": "Monument"
+            },
+            "historic/ruins": {
+                "name": "Reune"
+            },
+            "landuse/cemetery": {
+                "name": "Begrafplaas"
+            },
+            "landuse/commercial": {
+                "name": "Kommersieel"
+            },
+            "landuse/construction": {
+                "name": "Konstruksie"
+            },
+            "landuse/farm": {
+                "name": "Plaas"
+            },
+            "landuse/farmyard": {
+                "name": "Plaaswerf"
+            },
+            "landuse/forest": {
+                "name": "Woud"
+            },
+            "landuse/grass": {
+                "name": "Gras"
+            },
+            "landuse/industrial": {
+                "name": "Industrieel"
+            },
+            "landuse/orchard": {
+                "name": "Boord"
+            },
+            "landuse/quarry": {
+                "name": "Kwarrie"
+            },
+            "landuse/residential": {
+                "name": "Residensieel"
+            },
+            "landuse/vineyard": {
+                "name": "Druiweprieel"
+            },
+            "leisure": {
+                "name": "Gemak"
+            },
+            "leisure/garden": {
+                "name": "Tuin"
+            },
+            "leisure/golf_course": {
+                "name": "Golfbaan"
+            },
+            "leisure/park": {
+                "name": "Park"
+            },
+            "leisure/pitch": {
+                "name": "Sport Veld"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Amerikaanse Voetbal Veld"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Bofpalveld"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Basketbalbaan"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Sokkerveld"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Tennisbaan"
+            },
+            "leisure/playground": {
+                "name": "Speelpark"
+            },
+            "leisure/stadium": {
+                "name": "Stadium"
+            },
+            "leisure/swimming_pool": {
+                "name": "Swembad"
+            },
+            "man_made": {
+                "name": "Mens gemaak"
+            },
+            "man_made/lighthouse": {
+                "name": "Ligtoring"
+            },
+            "man_made/pier": {
+                "name": "Landingsplek"
+            },
+            "man_made/survey_point": {
+                "name": "Landmeterspunt"
+            },
+            "man_made/wastewater_plant": {
+                "name": "Rioolplaas",
+                "terms": "riool werke, rioolplaas, watersuiweringsplaas,herverwinnnigs fabriek"
+            },
+            "man_made/water_tower": {
+                "name": "Watertoring"
+            },
+            "man_made/water_works": {
+                "name": "Waterwerke"
+            },
+            "natural": {
+                "name": "Natuur"
+            },
+            "natural/bay": {
+                "name": "Baai"
+            },
+            "natural/beach": {
+                "name": "Strand"
+            },
+            "natural/cliff": {
+                "name": "Krans"
+            },
+            "natural/coastline": {
+                "name": "Kuslyn",
+                "terms": "kuslyn"
+            },
+            "natural/glacier": {
+                "name": "Gletser"
+            },
+            "natural/grassland": {
+                "name": "Grasvlakte"
+            },
+            "natural/heath": {
+                "name": "Heide"
+            },
+            "natural/peak": {
+                "name": "Piek"
+            },
+            "natural/scrub": {
+                "name": "Bossies"
+            },
+            "natural/spring": {
+                "name": "Fontein"
+            },
+            "natural/tree": {
+                "name": "Boom"
+            },
+            "natural/water": {
+                "name": "Water"
+            },
+            "natural/water/lake": {
+                "name": "Meer"
+            },
+            "natural/water/pond": {
+                "name": "Dammetjie"
+            },
+            "natural/water/reservoir": {
+                "name": "Reservoir"
+            },
+            "natural/wetland": {
+                "name": "Vleiland"
+            },
+            "natural/wood": {
+                "name": "Woud"
+            },
+            "office": {
+                "name": "Kantoor"
+            },
+            "other": {
+                "name": "Ander"
+            },
+            "other_area": {
+                "name": "Ander"
+            },
+            "place": {
+                "name": "Plek"
+            },
+            "place/city": {
+                "name": "Stad"
+            },
+            "place/hamlet": {
+                "name": "Dorpie"
+            },
+            "place/island": {
+                "name": "Eiland"
+            },
+            "place/locality": {
+                "name": "Ligging"
+            },
+            "place/town": {
+                "name": "Dorp"
+            },
+            "place/village": {
+                "name": "Dorpie"
+            },
+            "power": {
+                "name": "Krag"
+            },
+            "power/generator": {
+                "name": "Kragstasie"
+            },
+            "power/line": {
+                "name": "Kraglyn"
+            },
+            "power/pole": {
+                "name": "Kragpaal"
+            },
+            "power/sub_station": {
+                "name": "Substasie"
+            },
+            "power/tower": {
+                "name": "Hoogspanningstoring"
+            },
+            "railway": {
+                "name": "Spoorlyn"
+            },
+            "railway/abandoned": {
+                "name": "Verlate spoorlyn"
+            },
+            "railway/disused": {
+                "name": "Ongebruikte spoorweg"
+            },
+            "railway/level_crossing": {
+                "name": "Spooroorgang"
+            },
+            "railway/rail": {
+                "name": "Treinspoor"
+            },
+            "railway/station": {
+                "name": "Treinstasie"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Metro Ingang"
+            },
+            "railway/tram": {
+                "name": "Trem"
+            },
+            "shop": {
+                "name": "Winkel"
+            },
+            "shop/alcohol": {
+                "name": "Drankwinkel"
+            },
+            "shop/bakery": {
+                "name": "Bakkery"
+            },
+            "shop/beauty": {
+                "name": "Skoonheidswinkel"
+            },
+            "shop/beverages": {
+                "name": "Koeldrankwinkel"
+            },
+            "shop/bicycle": {
+                "name": "Fietswinkel"
+            },
+            "shop/books": {
+                "name": "Boekwinkel"
+            },
+            "shop/butcher": {
+                "name": "Slagter"
+            },
+            "shop/car": {
+                "name": "Voertuighandelaar"
+            },
+            "shop/chemist": {
+                "name": "Apteek"
+            },
+            "shop/clothes": {
+                "name": "Klere Winkel"
+            },
+            "shop/computer": {
+                "name": "Rekenaarwinkel"
+            },
+            "shop/deli": {
+                "name": "Deli"
+            },
+            "shop/dry_cleaning": {
+                "name": "Droogskoonmakers"
+            },
+            "shop/electronics": {
+                "name": "Elektronikawinkel"
+            },
+            "shop/fishmonger": {
+                "name": "Viswinkel"
+            },
+            "shop/florist": {
+                "name": "Bloemiste"
+            },
+            "shop/furniture": {
+                "name": "Meubelwinkel"
+            },
+            "shop/gift": {
+                "name": "Geskenkwinkel"
+            },
+            "shop/hairdresser": {
+                "name": "Haarkapper"
+            },
+            "shop/hardware": {
+                "name": "Hardewarewinkel"
+            },
+            "shop/jewelry": {
+                "name": "Juwelier"
+            },
+            "shop/mobile_phone": {
+                "name": "Selfoonwinkel"
+            },
+            "shop/motorcycle": {
+                "name": "Motorfietshandelaar"
+            },
+            "shop/music": {
+                "name": "Musiekwinkel"
+            },
+            "shop/optician": {
+                "name": "Oogarts"
+            },
+            "shop/pet": {
+                "name": "Troeteldierwinkel"
+            },
+            "shop/shoes": {
+                "name": "Skoenwinkel"
+            },
+            "shop/stationery": {
+                "name": "Skryfbehoeftewinkel"
+            },
+            "shop/supermarket": {
+                "name": "Supermark"
+            },
+            "shop/toys": {
+                "name": "Speelgoedwinkel"
+            },
+            "shop/travel_agency": {
+                "name": "Reisagentskap"
+            },
+            "shop/tyres": {
+                "name": "Bandewinkel"
+            },
+            "shop/vacant": {
+                "name": "Leë winkel"
+            },
+            "shop/video": {
+                "name": "Videowinkel"
+            },
+            "tourism": {
+                "name": "Toerisme"
+            },
+            "tourism/alpine_hut": {
+                "name": "Berghuisie"
+            },
+            "tourism/artwork": {
+                "name": "Kunswerk"
+            },
+            "tourism/attraction": {
+                "name": "Toerismeaantreklikheid"
+            },
+            "tourism/camp_site": {
+                "name": "Kamppeer Plek"
+            },
+            "tourism/caravan_site": {
+                "name": "RV Park"
+            },
+            "tourism/chalet": {
+                "name": "Chalet"
+            },
+            "tourism/guest_house": {
+                "name": "Gastehuis"
+            },
+            "tourism/hostel": {
+                "name": "Hostel"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Inligting"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Musuem"
+            },
+            "tourism/picnic_site": {
+                "name": "Piekniek Plek"
+            },
+            "tourism/theme_park": {
+                "name": "Temapark"
+            },
+            "tourism/viewpoint": {
+                "name": "Uitkykpunt"
+            },
+            "tourism/zoo": {
+                "name": "Dieretuin"
+            },
+            "waterway": {
+                "name": "Waterweg"
+            },
+            "waterway/canal": {
+                "name": "Kanaal"
+            },
+            "waterway/dam": {
+                "name": "Dam"
+            },
+            "waterway/ditch": {
+                "name": "Sloot"
+            },
+            "waterway/drain": {
+                "name": "Drein"
+            },
+            "waterway/river": {
+                "name": "Rivier"
+            },
+            "waterway/riverbank": {
+                "name": "Rivierbank"
+            },
+            "waterway/stream": {
+                "name": "Stroom"
+            },
+            "waterway/weir": {
+                "name": "Studam"
+            }
+        }
+    }
+};
+/*
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    THIS FILE IS GENERATED BY `make translations`. Don't make changes to it.
+
+    Instead, edit the English strings in data/core.yaml, or contribute
+    translations on https://www.transifex.com/projects/p/id-editor/.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+locale.bs = {
+    "modes": {
+        "add_area": {
+            "title": "Područje",
+            "description": "Dodajte karti parkove, zgrade, jezera ili druga područja.",
+            "tail": "Kliknite na kartu da bi ste počeli crtati područje, kao što je park, jezero ili zgrada."
+        },
+        "add_line": {
+            "title": "Linija",
+            "description": "Dodajte puteve, ulice, pješačke staze, kanale ili druge linije na kartu.",
+            "tail": "Kliknite na kartu da počnete crtati cestu, stazu ili rutu."
+        },
+        "add_point": {
+            "title": "Tačka",
+            "description": "Dodajte restorane, spomenike, poštanske urede ili druge tačke na kartu.",
+            "tail": "Kliknite na kartu da dodate tačku."
+        },
+        "browse": {
+            "title": "Pretražite",
+            "description": "Pomičite i uvećavajte kartu."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Dodana tačka.",
+                "vertex": "Dodan čvor putanji."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Započeta linija.",
+                "area": "Započeto područje."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Nastavljena linija.",
+                "area": "Nastavljeno područje."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Otkazano crtanje."
+        },
+        "change_tags": {
+            "annotation": "Izmijenjene oznake."
+        },
+        "circularize": {
+            "title": "Zaokružite",
+            "description": {
+                "line": "Napravite ovu liniju kružnom.",
+                "area": "Napravite ovo područje kružnim."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Napravite liniju kružnom.",
+                "area": "Napravite područje kružnim."
+            },
+            "not_closed": "Ovo se ne može napraviti kružnim jer to nije petlja."
+        },
+        "orthogonalize": {
+            "title": "Normaliziraj.",
+            "description": "Ispravite ove uglove.",
+            "key": "Q",
+            "annotation": {
+                "line": "Ispravljeni uglovi linije.",
+                "area": "Ispravljeni uglovi područja."
+            },
+            "not_closed": "Ovo se ne može napraviti kvadratom jer to nije petlja."
+        },
+        "delete": {
+            "title": "Izbrišite",
+            "description": "Uklonite ovo sa karte.",
+            "annotation": {
+                "point": "Izbrisana tačka.",
+                "vertex": "Izbrisan čvor sa putanje.",
+                "line": "Izbrisana linija.",
+                "area": "Izbrisano područje.",
+                "relation": "Izbrisana relacija.",
+                "multiple": "Izbrisano objekata: {n}."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Povezana putanja na tačku.",
+                "vertex": "Povezana putanja na drugo.",
+                "line": "Povezana putanja na liniju.",
+                "area": "Povezana putanja na područje."
+            }
+        },
+        "disconnect": {
+            "title": "Prekinite vezu.",
+            "description": "Razdvojite ove linije/ područja jedne od drugih.",
+            "key": "D",
+            "annotation": "Razdvojene linije/ područja."
+        },
+        "merge": {
+            "title": "Spojite",
+            "description": "Stopiti ove linije.",
+            "key": "C",
+            "annotation": "Spojeno linija: {n}."
+        },
+        "move": {
+            "title": "Pomaknite",
+            "description": "Pomaknite ovo na drugu lokaciju.",
+            "key": "M",
+            "annotation": {
+                "point": "Pomaknuta tačka.",
+                "vertex": "Pomaknut čvor u putanji.",
+                "line": "Pomaknuta linija.",
+                "area": "Pomaknuto područje.",
+                "multiple": "Pomaknuto više objekata."
+            }
+        },
+        "rotate": {
+            "title": "Rotirajte",
+            "description": "Rotirajte ovaj objekat oko njegove centralne tačke.",
+            "key": "R",
+            "annotation": {
+                "line": "Rotirana linija.",
+                "area": "Rotirano područje."
+            }
+        },
+        "reverse": {
+            "title": "Obrnuto",
+            "description": "Promijeniti smjer ove linije.",
+            "key": "V",
+            "annotation": "Obrnuta linija."
+        },
+        "split": {
+            "title": "Razdvojite",
+            "key": "X",
+            "annotation": {
+                "line": "Razdvojite liniju.",
+                "area": "Razdvojite granicu područja.",
+                "multiple": "Razdvojite {n} linija/granica područja."
+            },
+            "not_eligible": "Linije ne mogu biti razdvojene na njihovom početku i kraju.",
+            "multiple_ways": "Ovdje postoji previše linija za razdvajanje."
+        }
+    },
+    "nothing_to_undo": "Ništa za poništiti.",
+    "nothing_to_redo": "Ništa za vratiti.",
+    "just_edited": "Upravo ste uredili OpenStreetMap kartu!",
+    "browser_notice": "Ovaj uređivač je podržan u preglednicima interneta: Firefox, Chrome, Safari, Opera, i Internet Explorer 9 i iznad. Molimo nadogradite Vaš browser ili koristite Potlach 2 da uređujete kartu.",
+    "view_on_osm": "Pogledajte na OSM-u",
+    "zoom_in_edit": "Uvećajte da bi ste uređivali kartu.",
+    "logout": "Odjavite se",
+    "loading_auth": "Povezivanje na OpenStreetMap...",
+    "report_a_bug": "Prijavite grešku",
+    "status": {
+        "error": "Nemoguće povezati na API.",
+        "offline": "API nije na mreži. Molimo pokušajte uređivati kasnije.",
+        "readonly": "API je samo za čitanje. Moraćete sačekati da sačuvate Vaše promjene."
+    },
+    "commit": {
+        "title": "Sačuvajte izmjene",
+        "description_placeholder": "Kratak opis Vaših doprinosa",
+        "message_label": "Predaja poruke",
+        "upload_explanation": "Promjene koje postavite kao {user} će biti vidljive na svim kartama koje koriste OpenStreetMap podatke.",
+        "save": "Sačuvajte",
+        "cancel": "Otkažite",
+        "warnings": "Upozorenja",
+        "modified": "Izmijenjeno",
+        "deleted": "Izbrisano",
+        "created": "Napravljeno"
+    },
+    "contributors": {
+        "list": "Doprinos korisnika {users}",
+        "truncated_list": "Doprinos korisnika {users} i {count} drugih"
+    },
+    "geocoder": {
+        "title": "Pronađite mjesto",
+        "placeholder": "Pronađite mjesto",
+        "no_results": "Nismo mogli pronaći mjesto pod imenom '{name}'"
+    },
+    "geolocate": {
+        "title": "Pokazati moju lokaciju"
+    },
+    "inspector": {
+        "no_documentation_combination": "Nema dostupne dokumentacije za ovu kombinaciju oznaka",
+        "no_documentation_key": "Nema dostupne dokumentacije za ovaj ključ",
+        "show_more": "Prikazati više",
+        "new_tag": "Nova oznaka",
+        "view_on_osm": "Pogledajte na stranici openstreetmap.org",
+        "editing_feature": "Uređivanje značajke {feature}",
+        "additional": "Dodatne oznake",
+        "choose": "Odaberite tip svojstva",
+        "results": "{search} dala {n} rezultata",
+        "reference": "Pogledajte na stranici OpenStreetMap Wiki",
+        "back_tooltip": "Promijeniti vrstu značajke",
+        "remove": "Uklonite"
+    },
+    "background": {
+        "title": "Pozadina",
+        "description": "Podešavanja pozadine",
+        "percent_brightness": "prozirnost {opacity}% ",
+        "fix_misalignment": "Popravite poravnanje",
+        "reset": "ponovo postavite"
+    },
+    "restore": {
+        "heading": "Imate nespremljenih promjena",
+        "description": "Želite li vratiti nespremljene promjene od prethodnog uređivanja?",
+        "restore": "Vratite prethodno",
+        "reset": "Ponovo postavite"
+    },
+    "save": {
+        "title": "Sačuvajte",
+        "help": "Sačuvajte promjene na OpenStreetMap karti, čineći ih vidljivim drugim korisnicima.",
+        "no_changes": "Nema promjena za sačuvati.",
+        "error": "Dogodila se greška prilikom pokušaja spašavanja.",
+        "unsaved_changes": "Imate promjene koje nisu spašene"
+    },
+    "splash": {
+        "welcome": "Dobrodošli u ID - OpenStreetMap uređivač",
+        "text": "ID je prijateljski ali moćan alat za doprinos najvećoj svjetskoj besplatnoj karti svijeta. Ovo je razvojna verzija {version}. Za više informacija pogledajte stranicu  {website} i prijavite greške na stranici {github}.",
+        "walkthrough": "Počnite sa upoznavanjem",
+        "start": "Uređujte sada"
+    },
+    "source_switch": {
+        "live": "uživo",
+        "lose_changes": "Imate nespremljenih promjena. Mijenjanje servera karte će ih odbaciti. Sigurni ste da želite promijeniti servere?",
+        "dev": "razvojno"
+    },
+    "tag_reference": {
+        "description": "Opis",
+        "on_wiki": "{tag} na wiki.osm.org",
+        "used_with": "Korišteno sa {type}"
+    },
+    "validations": {
+        "untagged_point": "Neoznačena tačka",
+        "untagged_line": "Neoznačena linija",
+        "untagged_area": "Neoznačeno područje",
+        "many_deletions": "Broj objekata koje brišete: {n}. Sigurni ste da to želite uraditi? Ovo će iste izbrisati sa karte koju svako drugi vidi na adresi openstreetmap.org.",
+        "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
+        "deprecated_tags": "Zastarjele oznake: {tags}"
+    },
+    "zoom": {
+        "in": "Uvećati",
+        "out": "Umanjiti"
+    },
+    "cannot_zoom": "Ne može se umanjiti više u trenutnom načinu.",
+    "gpx": {
+        "local_layer": "Lokalna GPX datoteka",
+        "drag_drop": "Povući i spustiti .gpx datoteku na stranicu"
+    },
+    "help": {
+        "title": "Pomoć",
+        "help": "# Pomoć\n\nOvo je editor za [OpenStreetMap](http://www.openstreetmap.org/), besplatnu kartu svijeta koja se može uređivati. Možete ga koristiti da dodate i osvježite podatke u Vašem području, praveći boljom kartu svijeta koja ima open-source i open-data karakter.\n\nUređivanja koje obavite na ovoj karti će biti vidliva svakome ko koristi OpenStreetMap. Da bi uredili nešto, trebate \n[besplatni OpenStreetMap račun](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je kolaborativni projekat sa [kodom dostupnim na stranici GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Uređivanje i spašavanje\n\nOvaj editor je dizajniran da prvenstveno radi na internet mreži, i upravo sada mu pristupate kroz web stranicu.\n\n### Odabir značajki\n\nTo select a map feature, like a road or point of interest, click\non it on the map. This will highlight the selected feature, open a panel with\ndetails about it, and show a menu of things you can do with the feature.\n\nMultiple features can be selected by holding the 'Shift' key, clicking,\nand dragging on the map. This will select all features within the box\nthat's drawn, allowing you to do things with several features at once.\n\n### Saving Edits\n\nWhen you make changes like editing roads, buildings, and places, these are\nstored locally until you save them to the server. Don't worry if you make\na mistake - you can undo changes by clicking the undo button, and redo\nchanges by clicking the redo button.\n\nClick 'Save' to finish a group of edits - for instance, if you've completed\nan area of town and would like to start on a new area. You'll have a chance\nto review what you've done, and the editor supplies helpful suggestions\nand warnings if something doesn't seem right about the changes.\n\nIf everything looks good, you can enter a short comment explaining the change\nyou made, and click 'Save' again to post the changes\nto [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible\nto all other users and available for others to build and improve upon.\n\nIf you can't finish your edits in one sitting, you can leave the editor\nwindow and come back (on the same browser and computer), and the\neditor application will offer to restore your work.\n"
+    },
+    "intro": {
+        "lines": {
+            "intersect": "Kliknite da dodate više čvorova liniji. Možete povlačiti kartu dok crtate ukoliko je potrebno. Putevi, i mnogo drugih vrsta linija su dio veće mreže. Važno je da se ove linije povežu pravilno da bi aplikacije za routing radile.  **Kliknite na neku ulicu da napravite presjek koji povezuje dvije linije.**",
+            "finish": "Linije mogu biti završene ponovnim klikom na posljednji čvor. **Završite crtanje ceste.**"
+        },
+        "startediting": {
+            "start": "Počnite uređivati kartu!"
+        }
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Pristup"
+            },
+            "address": {
+                "label": "Adresa",
+                "placeholders": {
+                    "housename": "Broj objekta",
+                    "number": "123",
+                    "street": "Ulica",
+                    "city": "Grad"
+                }
+            },
+            "aeroway": {
+                "label": "Vrsta"
+            },
+            "amenity": {
+                "label": "Vrsta"
+            },
+            "atm": {
+                "label": "Bankomat"
+            },
+            "barrier": {
+                "label": "Vrsta"
+            },
+            "bicycle_parking": {
+                "label": "Vrsta"
+            },
+            "building": {
+                "label": "Građevina"
+            },
+            "building_area": {
+                "label": "Građevina"
+            },
+            "building_yes": {
+                "label": "Građevina"
+            },
+            "capacity": {
+                "label": "Kapacitet"
+            },
+            "collection_times": {
+                "label": "Vremena skupljanja"
+            },
+            "construction": {
+                "label": "Vrsta"
+            },
+            "country": {
+                "label": "Zemlja"
+            },
+            "crossing": {
+                "label": "Vrsta"
+            },
+            "cuisine": {
+                "label": "Kuhinja"
+            },
+            "denomination": {
+                "label": "Vjeroispovjest"
+            },
+            "denotation": {
+                "label": "Označavanje"
+            },
+            "elevation": {
+                "label": "Nadmorska visina"
+            },
+            "emergency": {
+                "label": "Hitna"
+            },
+            "entrance": {
+                "label": "Vrsta"
+            },
+            "fax": {
+                "label": "Faks"
+            },
+            "fee": {
+                "label": "Provizija"
+            },
+            "highway": {
+                "label": "Vrsta"
+            },
+            "historic": {
+                "label": "Vrsta"
+            },
+            "internet_access": {
+                "label": "Internet pristup",
+                "options": {
+                    "wlan": "WiFi",
+                    "wired": "Kablovski",
+                    "terminal": "Terminal"
+                }
+            },
+            "landuse": {
+                "label": "Vrsta"
+            },
+            "layer": {
+                "label": "Sloj"
+            },
+            "leisure": {
+                "label": "Vrsta"
+            },
+            "levels": {
+                "label": "Nivoi"
+            },
+            "man_made": {
+                "label": "Vrsta"
+            },
+            "maxspeed": {
+                "label": "Ograničenje brzine"
+            },
+            "natural": {
+                "label": "Prirodno"
+            },
+            "network": {
+                "label": "Mreža"
+            },
+            "note": {
+                "label": "Bilješka"
+            },
+            "office": {
+                "label": "Vrsta"
+            },
+            "oneway": {
+                "label": "Jednosmjerno"
+            },
+            "opening_hours": {
+                "label": "Sati"
+            },
+            "operator": {
+                "label": "Operator"
+            },
+            "phone": {
+                "label": "Telefon"
+            },
+            "place": {
+                "label": "Vrsta"
+            },
+            "power": {
+                "label": "Vrsta"
+            },
+            "railway": {
+                "label": "Vrsta"
+            },
+            "ref": {
+                "label": "Referenca"
+            },
+            "religion": {
+                "label": "Religija",
+                "options": {
+                    "christian": "Kršćanstvo",
+                    "muslim": "Islam",
+                    "jewish": "Judaizam",
+                    "hindu": "Hinduizam",
+                    "shinto": "Šintoizam",
+                    "taoist": "Taoizam"
+                }
+            },
+            "service": {
+                "label": "Vrsta"
+            },
+            "shelter": {
+                "label": "Sklonište"
+            },
+            "shop": {
+                "label": "Vrsta"
+            },
+            "source": {
+                "label": "Izvor"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "structure": {
+                "label": "Struktura",
+                "options": {
+                    "bridge": "Most",
+                    "tunnel": "Tunel",
+                    "embankment": "Nasip",
+                    "cutting": "Usjek"
+                }
+            },
+            "surface": {
+                "label": "Površina"
+            },
+            "tourism": {
+                "label": "Vrsta"
+            },
+            "water": {
+                "label": "Vrsta"
+            },
+            "waterway": {
+                "label": "Vrsta"
+            },
+            "website": {
+                "label": "Web stranica"
+            },
+            "wetland": {
+                "label": "Vrsta"
+            },
+            "wheelchair": {
+                "label": "Prilaz za invalidska kolica"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Vrsta"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Avio-put"
+            },
+            "aeroway/aerodrome": {
+                "name": "Aerodrom",
+                "terms": "avion,zračna luka,aerodrom"
+            },
+            "aeroway/helipad": {
+                "name": "Heliodrom",
+                "terms": "helikopter,heliodrom,heliport"
+            },
+            "amenity": {
+                "name": "Interesantna lokacija"
+            },
+            "amenity/bank": {
+                "name": "Banka"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Klupa"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Parking bicikala"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Iznajmljivanje bicikala"
+            },
+            "amenity/cafe": {
+                "name": "Kafe",
+                "terms": "kafa,čaj,coffee shop"
+            },
+            "amenity/cinema": {
+                "name": "Kino"
+            },
+            "amenity/courthouse": {
+                "name": "Sudnica"
+            },
+            "amenity/embassy": {
+                "name": "Ambasada"
+            },
+            "amenity/fast_food": {
+                "name": "Fast Food"
+            },
+            "amenity/fire_station": {
+                "name": "Vatrogasna stanica"
+            },
+            "amenity/fuel": {
+                "name": "Benzinska pumpa"
+            },
+            "amenity/grave_yard": {
+                "name": "Groblje"
+            },
+            "amenity/hospital": {
+                "name": "Bolnica"
+            },
+            "amenity/library": {
+                "name": "Biblioteka"
+            },
+            "amenity/marketplace": {
+                "name": "Tržnica"
+            },
+            "amenity/parking": {
+                "name": "Parking"
+            },
+            "amenity/pharmacy": {
+                "name": "Apoteka"
+            },
+            "amenity/place_of_worship": {
+                "name": "Bogomolja"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Crkva"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoga",
+                "terms": "Judaizam,sinagoga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Džamija",
+                "terms": "Islam,džamija"
+            },
+            "amenity/police": {
+                "name": "Policija"
+            },
+            "amenity/post_box": {
+                "name": "Poštansko sanduče"
+            },
+            "amenity/post_office": {
+                "name": "Poštanski ured"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Restoran"
+            },
+            "amenity/school": {
+                "name": "Škola"
+            },
+            "amenity/swimming_pool": {
+                "name": "Bazen"
+            },
+            "amenity/telephone": {
+                "name": "Telefon"
+            },
+            "amenity/theatre": {
+                "name": "Pozorište",
+                "terms": "pozorište,predstava,izvedba,muzikl"
+            },
+            "amenity/toilets": {
+                "name": "Toaleti"
+            },
+            "amenity/townhall": {
+                "name": "Gradska vijećnica"
+            },
+            "amenity/university": {
+                "name": "Univerzitet"
+            },
+            "barrier": {
+                "name": "Barijera"
+            },
+            "barrier/block": {
+                "name": "Blok"
+            },
+            "barrier/cattle_grid": {
+                "name": "Rešetke za stoku"
+            },
+            "barrier/city_wall": {
+                "name": "Gradski zid"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Biciklistička prepreka"
+            },
+            "barrier/ditch": {
+                "name": "Jarak"
+            },
+            "barrier/entrance": {
+                "name": "Ulaz"
+            },
+            "barrier/fence": {
+                "name": "Ograda"
+            },
+            "barrier/gate": {
+                "name": "Kapija"
+            },
+            "barrier/hedge": {
+                "name": "Živa ograda"
+            },
+            "barrier/kissing_gate": {
+                "name": "Kapija (sa dvoje vrata)"
+            },
+            "barrier/lift_gate": {
+                "name": "Kapija (koja se podiže)"
+            },
+            "barrier/retaining_wall": {
+                "name": "Potporni zid"
+            },
+            "barrier/stile": {
+                "name": "Prelaz preko ograde"
+            },
+            "barrier/toll_booth": {
+                "name": "Naplatna rampa"
+            },
+            "barrier/wall": {
+                "name": "Zid"
+            },
+            "building": {
+                "name": "Građevina"
+            },
+            "building/entrance": {
+                "name": "Ulaz"
+            },
+            "entrance": {
+                "name": "Ulaz"
+            },
+            "highway": {
+                "name": "Put"
+            },
+            "highway/bus_stop": {
+                "name": "Bus stanica"
+            },
+            "highway/crossing": {
+                "name": "Prelaz",
+                "terms": "pješački prelaz,zebra"
+            },
+            "highway/cycleway": {
+                "name": "Biciklistička staza"
+            },
+            "highway/footway": {
+                "name": "Pješačka staza"
+            },
+            "highway/motorway": {
+                "name": "Autoput"
+            },
+            "highway/path": {
+                "name": "Staza"
+            },
+            "highway/primary": {
+                "name": "Primarna cesta"
+            },
+            "highway/residential": {
+                "name": "Rezidencijalna cesta"
+            },
+            "highway/secondary": {
+                "name": "Sekundarna cesta"
+            },
+            "highway/service": {
+                "name": "Servisna cesta"
+            },
+            "highway/steps": {
+                "name": "Stepenice",
+                "terms": "stepenice,stube"
+            },
+            "highway/tertiary": {
+                "name": "Tercijarna cesta"
+            },
+            "highway/track": {
+                "name": "Makadam"
+            },
+            "highway/traffic_signals": {
+                "name": "Saobraćajni signali",
+                "terms": "svjetlo,stop svjetlo,saobraćajno svjetlo"
+            },
+            "highway/turning_circle": {
+                "name": "Krug za okretanje"
+            },
+            "highway/unclassified": {
+                "name": "Neklasificirana cesta"
+            },
+            "historic": {
+                "name": "Historijsko mjesto"
+            },
+            "historic/archaeological_site": {
+                "name": "Arheološko područje"
+            },
+            "historic/boundary_stone": {
+                "name": "Granični kamen"
+            },
+            "historic/castle": {
+                "name": "Dvorac"
+            },
+            "historic/memorial": {
+                "name": "Memorijal"
+            },
+            "historic/monument": {
+                "name": "Spomenik"
+            },
+            "historic/ruins": {
+                "name": "Ruševine"
+            },
+            "historic/wayside_cross": {
+                "name": "Krajputaš ili stećak"
+            },
+            "historic/wayside_shrine": {
+                "name": "Hram pored puta"
+            },
+            "landuse": {
+                "name": "Upotreba zemljišta"
+            },
+            "landuse/allotments": {
+                "name": "Parcele"
+            },
+            "landuse/basin": {
+                "name": "Sliv"
+            },
+            "landuse/cemetery": {
+                "name": "Groblje"
+            },
+            "landuse/commercial": {
+                "name": "Poslovno područje"
+            },
+            "landuse/construction": {
+                "name": "Građevinsko područje"
+            },
+            "landuse/farm": {
+                "name": "Farma"
+            },
+            "landuse/farmyard": {
+                "name": "Seosko dvorište"
+            },
+            "landuse/forest": {
+                "name": "Šuma"
+            },
+            "landuse/grass": {
+                "name": "Travnjak"
+            },
+            "landuse/industrial": {
+                "name": "Industrijsko područje"
+            },
+            "landuse/meadow": {
+                "name": "Livada"
+            },
+            "landuse/orchard": {
+                "name": "Voćnjak"
+            },
+            "landuse/quarry": {
+                "name": "Rudnik"
+            },
+            "landuse/residential": {
+                "name": "Stambeno područje"
+            },
+            "landuse/vineyard": {
+                "name": "Vinograd"
+            },
+            "leisure": {
+                "name": "Rekreacija"
+            },
+            "leisure/garden": {
+                "name": "Vrt"
+            },
+            "leisure/golf_course": {
+                "name": "Golf teren"
+            },
+            "leisure/marina": {
+                "name": "Marina"
+            },
+            "leisure/park": {
+                "name": "Park"
+            },
+            "leisure/pitch": {
+                "name": "Sportsko igralište"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Polje za američki fudbal"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Bejzbol teren"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Košarkaški teren"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Fudbalski teren"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Teniski teren"
+            },
+            "leisure/playground": {
+                "name": "Igralište"
+            },
+            "leisure/stadium": {
+                "name": "Stadion"
+            },
+            "leisure/swimming_pool": {
+                "name": "Bazen"
+            },
+            "man_made": {
+                "name": "Napravljeno ljudskom rukom"
+            },
+            "man_made/lighthouse": {
+                "name": "Svjetionik"
+            },
+            "man_made/pier": {
+                "name": "Pristanište"
+            },
+            "man_made/survey_point": {
+                "name": "Izviđačnica"
+            },
+            "man_made/water_tower": {
+                "name": "Vodo-toranj"
+            },
+            "natural": {
+                "name": "Prirodno područje"
+            },
+            "natural/bay": {
+                "name": "Zaliv"
+            },
+            "natural/beach": {
+                "name": "Plaža"
+            },
+            "natural/cliff": {
+                "name": "Litica"
+            },
+            "natural/coastline": {
+                "name": "Obala",
+                "terms": "obala"
+            },
+            "natural/glacier": {
+                "name": "Glečer"
+            },
+            "natural/grassland": {
+                "name": "Pašnjak"
+            },
+            "natural/heath": {
+                "name": "Vrijes"
+            },
+            "natural/peak": {
+                "name": "Vrh"
+            },
+            "natural/scrub": {
+                "name": "Gustiš"
+            },
+            "natural/spring": {
+                "name": "Izvor"
+            },
+            "natural/tree": {
+                "name": "Drvo"
+            },
+            "natural/water": {
+                "name": "Voda"
+            },
+            "natural/water/lake": {
+                "name": "Jezero"
+            },
+            "natural/water/pond": {
+                "name": "Ribnjak"
+            },
+            "natural/water/reservoir": {
+                "name": "Rezervoar"
+            },
+            "natural/wetland": {
+                "name": "Močvara"
+            },
+            "natural/wood": {
+                "name": "Šuma"
+            },
+            "office": {
+                "name": "Ured"
+            },
+            "place": {
+                "name": "Mjesto"
+            },
+            "place/hamlet": {
+                "name": "Zaselak"
+            },
+            "place/island": {
+                "name": "Ostrvo"
+            },
+            "place/locality": {
+                "name": "Lokalitet"
+            },
+            "place/village": {
+                "name": "Selo"
+            },
+            "power/pole": {
+                "name": "Naponski stub"
+            },
+            "power/sub_station": {
+                "name": "Trafo stanica"
+            },
+            "railway": {
+                "name": "Željeznička pruga"
+            },
+            "railway/level_crossing": {
+                "name": "Prelaz u nivou"
+            },
+            "railway/monorail": {
+                "name": "Pruga sa jednim kolosijekom"
+            },
+            "railway/rail": {
+                "name": "Šina"
+            },
+            "railway/subway": {
+                "name": "Podzemna željeznica"
+            },
+            "railway/subway_entrance": {
+                "name": "Ulaz u podzemnu željeznicu"
+            },
+            "shop": {
+                "name": "Prodavnica"
+            },
+            "shop/alcohol": {
+                "name": "Prodavnica alkoholnih pića"
+            },
+            "shop/butcher": {
+                "name": "Mesar"
+            },
+            "shop/supermarket": {
+                "name": "Supermarket"
+            },
+            "tourism": {
+                "name": "Turizam"
+            },
+            "tourism/alpine_hut": {
+                "name": "Planinski dom"
+            },
+            "tourism/artwork": {
+                "name": "Umjetničko djelo"
+            },
+            "tourism/attraction": {
+                "name": "Turistička atrakcija"
+            },
+            "tourism/camp_site": {
+                "name": "Kamp"
+            },
+            "tourism/caravan_site": {
+                "name": "Kamp park"
+            },
+            "tourism/chalet": {
+                "name": "Šale"
+            },
+            "tourism/guest_house": {
+                "name": "Gostinjska kuća"
+            },
+            "tourism/hostel": {
+                "name": "Hostel"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Informacije"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Muzej"
+            },
+            "tourism/picnic_site": {
+                "name": "Izletište"
+            },
+            "tourism/theme_park": {
+                "name": "Tematski park"
+            },
+            "tourism/viewpoint": {
+                "name": "Vidikovac"
+            },
+            "tourism/zoo": {
+                "name": "Zoološki vrt"
+            },
+            "waterway": {
+                "name": "Vodotok"
+            },
+            "waterway/canal": {
+                "name": "Kanal"
+            },
+            "waterway/dam": {
+                "name": "Brana"
+            },
+            "waterway/ditch": {
+                "name": "Jarak"
+            },
+            "waterway/drain": {
+                "name": "Odvod"
+            },
+            "waterway/river": {
+                "name": "Rijeka"
+            },
+            "waterway/riverbank": {
+                "name": "Riječno korito"
+            },
+            "waterway/stream": {
+                "name": "Potok"
+            },
+            "waterway/weir": {
+                "name": "Ustava"
+            }
+        }
+    }
+};
+/*
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    THIS FILE IS GENERATED BY `make translations`. Don't make changes to it.
+
+    Instead, edit the English strings in data/core.yaml, or contribute
+    translations on https://www.transifex.com/projects/p/id-editor/.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 locale.cs = {
     "modes": {
         "add_area": {
@@ -279,6 +2529,23 @@ locale.cs = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Využití krajiny"
+            },
+            "category-path": {
+                "name": "Pěšina"
+            },
+            "category-rail": {
+                "name": "Železnice"
+            },
+            "category-road": {
+                "name": "Silnice"
+            },
+            "category-water": {
+                "name": "Vodní tok"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Přístup",
@@ -354,6 +2621,16 @@ locale.cs = {
             },
             "capacity": {
                 "label": "Kapacita"
+            },
+            "cardinal_direction": {
+                "label": "Směr"
+            },
+            "clock_direction": {
+                "label": "Směr",
+                "options": {
+                    "clockwise": "Po směru hod. ručiček",
+                    "anticlockwise": "Proti směru hod. ručiček"
+                }
             },
             "collection_times": {
                 "label": "Čas výběru"
@@ -764,14 +3041,26 @@ locale.cs = {
                 "name": "Pěšina",
                 "terms": "cesta,silnice,ulice,ulička,chodník,třída,bulvár,avenue,pasáž,stezka,trasa,trať,magistrála,radiála,pěšina"
             },
+            "highway/living_street": {
+                "name": "Obytná zóna"
+            },
+            "highway/mini_roundabout": {
+                "name": "Malý kruhový objezd"
+            },
             "highway/motorway": {
                 "name": "Dálnice"
+            },
+            "highway/motorway_junction": {
+                "name": "Dálniční sjezd"
             },
             "highway/motorway_link": {
                 "name": "Dálnice - nájezd"
             },
             "highway/path": {
                 "name": "Cesta"
+            },
+            "highway/pedestrian": {
+                "name": "Pěší zóna"
             },
             "highway/primary": {
                 "name": "Silnice 1. třídy"
@@ -894,6 +3183,9 @@ locale.cs = {
             },
             "landuse/residential": {
                 "name": "Rezidenční oblast"
+            },
+            "landuse/retail": {
+                "name": "Obchody"
             },
             "landuse/vineyard": {
                 "name": "Vinice"
@@ -1093,6 +3385,9 @@ locale.cs = {
             },
             "railway/monorail": {
                 "name": "Jednokolejka"
+            },
+            "railway/platform": {
+                "name": "Nástupiště"
             },
             "railway/rail": {
                 "name": "Kolej"
@@ -1527,6 +3822,11 @@ locale.da = {
     "logout": "log ud",
     "loading_auth": "Forbinder til OpenStreetMap...",
     "report_a_bug": "rapportere en fejl",
+    "status": {
+        "error": "Er ikke i stand til at forbinde til API'et.",
+        "offline": "API'et er off-line. Prøv igen senere.",
+        "readonly": "API'et er i læs-kun status. Du er nødt til at vente med at gemme dine ændringer."
+    },
     "commit": {
         "title": "Gem ændringer",
         "description_placeholder": "Kort beskrivelse af dine bidrag",
@@ -1562,7 +3862,8 @@ locale.da = {
         "choose": "Vælg funktionstype",
         "results": "{n} resultater for {search}",
         "reference": "Se på OpenStreetMap Wiki",
-        "back_tooltip": "Gem funktionstype"
+        "back_tooltip": "Gem funktionstype",
+        "remove": "Fjern"
     },
     "background": {
         "title": "Baggrund",
@@ -1619,10 +3920,12 @@ locale.da = {
         "drag_drop": "Træk og slip en .gpx fil på denne her side"
     },
     "help": {
-        "title": "Hjælp"
+        "title": "Hjælp",
+        "addresses": "#Adresser⏎\n⏎\nAdresser er noget af det mest brugbare til kortet.⏎\n⏎\nSelvom adresser ofte er repræsenteret som dele af veje i OpenStreetMap⏎\nDisse er lagret som attributter for bygninger og steder langs veje.⏎\n⏎\nDu kan også tilføje adresseinformation til steder som er kortlagt som bygningspolygoner⏎\nligesom bygninger der er markeret som enkeltpunkter. Den optimale kilde til⏎\nadresser⏎\ner indsamling på selve stedet eller personlig kendkskab - som med ethvert andet⏎\ngeografisk objekt, så er kopiering fra kommercielle kilder som fx Google Maps\nstrengt⏎\nforbudt.⏎\n\n\n"
     },
     "intro": {
         "navigation": {
+            "drag": "Grundkortet viser OpenStreetMap data oven på et baggrundkort. Du kan navigere ved at trække og scrolle lige som ethvert andet webkort.**Træk i kortet!**",
             "select": "Kortets objekter kun beskrives på tre måder: ved brug af punkter, linjer eller områder. Alle kortets objekter kan vælges ved at klikke på dem.**Klik på et punkt for at vælge dette.**",
             "header": "Overskriften viser os kortfunktionstyperne."
         },
@@ -1649,6 +3952,7 @@ locale.da = {
         "lines": {
             "add": "Linjer bruges til at beskrive ting som fx veje, jernbanespor og floder.**Klik på linjeknappen for at tilføje en ny linje.**",
             "start": "**Start linjen ved at klikke ved enden af en vej**",
+            "intersect": "Klik for at tilføje punkter til linjen. Du kan trække i kortet hvis det er nødvendigt mens du tegner. Veje og mange andre type af linjer er dele af et større netværk. Det er meget vigtigt at disse linjer er forbundet korrekt for at få rutenavigationsværktøjer til at virke.**Klik på Flower Street for at lave en sammenkædning af de to linjer.**",
             "finish": "Linjer kan afsluttes ved at klikke på det sidste punkt igen.**Afslut indtegning af vejen.**",
             "road": "**Vælg vej fra gitteret**",
             "residential": "Der er mange typer af veje, den mest brugte er villaveje.**Vælg villaveje**",
@@ -1662,6 +3966,23 @@ locale.da = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Områdebrug"
+            },
+            "category-path": {
+                "name": "Sti"
+            },
+            "category-rail": {
+                "name": "Jernbane"
+            },
+            "category-road": {
+                "name": "Vej"
+            },
+            "category-water": {
+                "name": "Vand"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Adgang",
@@ -1705,7 +4026,8 @@ locale.da = {
                     "housename": "Husnavn",
                     "number": "123",
                     "street": "Gade",
-                    "city": "By"
+                    "city": "By",
+                    "postcode": "Postnummer"
                 }
             },
             "admin_level": {
@@ -1737,6 +4059,16 @@ locale.da = {
             },
             "capacity": {
                 "label": "Kapacitet"
+            },
+            "cardinal_direction": {
+                "label": "Retning"
+            },
+            "clock_direction": {
+                "label": "Retning",
+                "options": {
+                    "clockwise": "Retning med uret",
+                    "anticlockwise": "Retning mod uret"
+                }
             },
             "collection_times": {
                 "label": "Indsamlingstid"
@@ -1790,6 +4122,9 @@ locale.da = {
             },
             "landuse": {
                 "label": "Type"
+            },
+            "lanes": {
+                "label": "Vejbaner"
             },
             "layer": {
                 "label": "Lag"
@@ -2088,6 +4423,9 @@ locale.da = {
             "barrier/hedge": {
                 "name": "Læhegn"
             },
+            "barrier/kissing_gate": {
+                "name": "Dyrefoldsport"
+            },
             "barrier/lift_gate": {
                 "name": "Løftebom"
             },
@@ -2139,10 +4477,20 @@ locale.da = {
                 "name": "Cykelsti"
             },
             "highway/footway": {
-                "name": "Gangsti"
+                "name": "Gangsti",
+                "terms": "sti,boulevard,gangsti,vej,bane,linje,passage,sti,jernbane,jernbanespor,vej,gade,rute,gennemkørsel,spor,gå"
+            },
+            "highway/living_street": {
+                "name": "Stillevej"
+            },
+            "highway/mini_roundabout": {
+                "name": "Vendeplads"
             },
             "highway/motorway": {
                 "name": "Motorvej"
+            },
+            "highway/motorway_junction": {
+                "name": "Motorvejsfletningsvej"
             },
             "highway/motorway_link": {
                 "name": "Motorvejsafkørsel",
@@ -2150,6 +4498,9 @@ locale.da = {
             },
             "highway/path": {
                 "name": "Sti"
+            },
+            "highway/pedestrian": {
+                "name": "Fodgænger"
             },
             "highway/primary": {
                 "name": "Primærvej"
@@ -2277,6 +4628,9 @@ locale.da = {
             "landuse/residential": {
                 "name": "Beboelsesområde"
             },
+            "landuse/retail": {
+                "name": "Handelsområde"
+            },
             "landuse/vineyard": {
                 "name": "Vingård"
             },
@@ -2361,7 +4715,8 @@ locale.da = {
                 "name": "Klint"
             },
             "natural/coastline": {
-                "name": "Kystlinje"
+                "name": "Kystlinje",
+                "terms": "Kysten"
             },
             "natural/glacier": {
                 "name": "Gletsjer"
@@ -2373,7 +4728,8 @@ locale.da = {
                 "name": "Hede"
             },
             "natural/peak": {
-                "name": "Højdedrag"
+                "name": "Højdedrag",
+                "terms": "alpetop,bjergtop,bakke,bjerg,top,bakketop"
             },
             "natural/scrub": {
                 "name": "Buskområde"
@@ -2388,7 +4744,8 @@ locale.da = {
                 "name": "Vand"
             },
             "natural/water/lake": {
-                "name": "Sø"
+                "name": "Sø",
+                "terms": "sø, dam, mose"
             },
             "natural/water/pond": {
                 "name": "Dam",
@@ -2473,6 +4830,9 @@ locale.da = {
             },
             "railway/monorail": {
                 "name": "Monorail"
+            },
+            "railway/platform": {
+                "name": "Stationsplatform"
             },
             "railway/rail": {
                 "name": "Jernbanespor"
@@ -2716,13 +5076,15 @@ locale.da = {
                 "name": "Drænløb"
             },
             "waterway/river": {
-                "name": "Flod"
+                "name": "Flod",
+                "terms": "bæk,kurs,å,vandvej"
             },
             "waterway/riverbank": {
                 "name": "Flodbred"
             },
             "waterway/stream": {
-                "name": "Å"
+                "name": "Å",
+                "terms": "vandløb, kanal,flod, vand,å"
             },
             "waterway/weir": {
                 "name": "Stemmeværk"
@@ -2745,7 +5107,7 @@ locale.de = {
         "add_area": {
             "title": "Fläche.",
             "description": "Füge Parks, Gebäude, Seen oder andere Flächen zur Karte hinzu.",
-            "tail": "Klicke in die Karte, um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten."
+            "tail": "Klicke auf die Karte, um das Zeichnen einer Fläche wie einen Park, einen See oder Gebäude zu starten."
         },
         "add_line": {
             "title": "Linie",
@@ -2754,11 +5116,11 @@ locale.de = {
         },
         "add_point": {
             "title": "Punkt",
-            "description": "Restaurants, Denkmäler und Briefkästen sind Punkte",
+            "description": "Füge Restaurants, Denkmäler, Briefkästen oder andere Punkte hinzu.",
             "tail": "Klicke in die Karte, um einen Punkt hinzuzufügen."
         },
         "browse": {
-            "title": "Navigation",
+            "title": "Durchsuchen.",
             "description": "Verschieben und Vergrößern/Verkleinern des Kartenausschnitts."
         },
         "draw_area": {
@@ -2905,6 +5267,11 @@ locale.de = {
     "logout": "Abmelden",
     "loading_auth": "Verbinde mit OpenStreetMap....",
     "report_a_bug": "Programmfehler melden",
+    "status": {
+        "error": "Verbindungsaufbau zur API nicht möglich.",
+        "offline": "Die API ist offline. Bitte versuch es später noch einmal.",
+        "readonly": "Die API ist im \"nur lese\" Modus. Änderungen können zur Zeit nicht gespeichert werden."
+    },
     "commit": {
         "title": "Änderungen speichern",
         "description_placeholder": "Eine kurze Beschreibung deiner Beiträge",
@@ -2940,7 +5307,8 @@ locale.de = {
         "choose": "Eigenschafts-Typ auswählen",
         "results": "{n} Resultate für {search}",
         "reference": "In der OpenSteetMap Wiki anschauen",
-        "back_tooltip": "Eigenschafts-Typ ändern"
+        "back_tooltip": "Eigenschafts-Typ ändern",
+        "remove": "Entfernen"
     },
     "background": {
         "title": "Hintergrund",
@@ -3000,13 +5368,15 @@ locale.de = {
         "title": "Hilfe",
         "help": "#Hilfe\n\nDies ist ein Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und editierbaren Weltkarte. Du kannst ihn verwenden um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so die Karte für jeden verbessern.\n\nVeränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du einen [kostenloses OpenStreetMap Profil](https://www.openstreetmap.org/user/new) anlegen.\n\nDer [iD editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt dessem [Quellcode\nauf GitHub verfügbar ist](https://github.com/systemed/iD).\n\n",
         "editing_saving": "# Editieren & Speichern\n\nDieser Editor wurde entworfen um online zu arbeiten und du erreichst ihn über diese Webseite.\n\n###Objekte auswählen\n\nUm ein Kartenobjekt, wie eine Straße oder ein Sonderziel (POI) auszuwählen, klicke auf der Karte darauf. Dadurch wird das Objekt hervorgehoben und ein Bedienfeld mit Details und Möglichkeiten zur Veränderung aufgerufen. \n\nMehrere Objekte kannst du auswählen indem du die Shift-taste (Umschaltaste) drückst und die Objekte einzeln anklickst oder klickst und einen Rahmen drumherum ziehst.\nDas erlaubt die Veränderungen für mehrere Objekte gleichzeitig zu machen.\n\n### Speichern der Änderungen\n\nWenn du Veränderungen an einer Straße, eines Gebäudes oder einem Platz vorgenommen hast, sind diese lokal gespeichert, bis du sie auf dem Server speicherst, Keine Sorge falls du einen Fehler machen solltest. Du kannst Änderungen jederzeit über den Rückgängig-Knopf\nrückgängig machen, oder über den Wiederherstellen-Knopf noch einmal ausführen.\n\nKlicke auf \"Speichern\" um eine Gruppe von Veränderungen zu speichern. Zum Beispiel, wenn\ndu wenn du in einem Stadtteil fertig bist und in einer neuen Gegend etwas verändern willst.\nDu bekommst dann die Möglichkeiten noch einmal nachvollziehen zu können, was du gerade getan hast und der Editor zeigt dir nützliche Hinweise oder mögliche Fehler, wenn etwas nicht in Ordnung zu sein scheint.\n\nWenn alles gut aussieht kannst du einen kurzen Kommentar schreiben, der erklärt, was du gemacht hast. Drücke nun \"Speicher\" um die Änderungen auf dem Server zu speichern.\nNun können es alle auf [OpenStreetMap.org](http://www.openstreetmap.org/) sehen und darauf aufbauen.\n\nWenn du es zeitlich nicht schaffst, kannst du das Editor Fenster einfach schließen und wenn du  die Seite wieder aufrufst, (gleicher Browser und Computer) wird die angeboten die letzte Sitzung wieder herzustellen. \n",
+        "roads": "# Straßen\n\nMit dem Editor kannst du Wege erstellen, verändern und löschen. Wege können alles möglich sein, zum Beispiel Pfade, Straßen, Schienen, Fahrradwege und anderes.\n\n### Auswählen\n\nKlicke auf einem Weg, um ihn auszuwählen. Er sollte nun hervorgehoben werden. Außerdem erscheint ein kleines Werkzeugmenü und eine Seitenleiste mit den Eigenschaften des Weges.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg aber so anpassen, das er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nAls Erstes wählst du einen Weg aus. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neu Konten hinzufügen möchtest, klickt doppelt zwischen den Knoten auf die Linie und es wird ein neuer Punkt erzeugt.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Das Wege verbunden sind, ist wichtig für die Karte und essentiell für die Nutzung von Routenführung.\n\nDu kannst auch das \"Bewegen\" Werkzeug nutzen oder \"M\" drücken um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten besonders vorsichtig, da diese Änderungen von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zusehen ist, vielleicht einfach neu gebaut wurde.\n\nDu kannst Wege löschen, indem du sie anklickst und das Mülltonnensymbol auswählst oder die \"Entfernen\"-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg der nicht eingezeichnet ist? Dann klicke auf das \"Linien\"-Symbol oben links im Editor oder drücke Taste \"2\" und beginne mit dem Zeichnen einer Linie.\n\nKlick dort hin, wo die Straße anfängt. Sollte sie von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichnen nun den Weg, indem du Punkte anhand der Luftaufnahme oder der GPS Spur entlang des Weges setzt. Sollte der Weg einen Anderen kreuzen, klicke auf den  Kreuzungspunkt um sie zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke \"Enter\" auf der Tastatur um den Weg abzuschließen.\n",
         "gps": "# GPS\n\nGPS Daten sind die vertrauenswürdigste Quelle für OpenStreetMap.\nDieser Editor unterstützt Lokale GPS-Spuren - \".gpx\" Datein auf deinem Computer. \nDu kannst diese GPS-Spuren mit Hilfe diverser Smartphone Apps oder anderen GPS Geräten aufnehmen.\n\nFür Informationen über das sammeln von GPS Daten kannst du dir folgende Anleitung durchlesen: [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/) (bis jetzt nur auf Englisch)\n\nUm GPX Tracks zu verwenden, ziehe sie einfach in den Karteneditor.\nWenn er erkannt wurde, wird dieser Track als leuchtend grüne Linie auf der Karte dargestellt.\nKlicke auf \"Hintergrundeinstellungen\", um sie zu deaktivieren und zu aktivieren, oder zum Gebiet des Tracks zu gelangen (Lupe).\n\nDer GPX Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen. Am besten verwendest du ihn um neue Wege hinzuzufügen. \nMöchtest du den GPX Track jedem zugänglich machen, kannst du ihn über [Track-Upload-Seite](http://www.openstreetmap.org/trace/create) hochladen.\n",
         "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das \"Hintergrundeinstellungen\"- Menü auf der Linken Seite verfügbar. \n\nAls Standard ist der [Bing Maps](http://www.bing.com/maps/) Satelliten-Layer ausgewählt. Je nach Gegenden werden dir verschiedene andere Quellen angezeigt.\nEinige Länder wie den USA, Frankreich, Deutschland und Dänemark stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. \nWenn du feststellst, dass viele  Straßen gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen, sondern das Luftbild, bis sie übereinstimmen. Um das Luftbid zu korrigieren klickte auf \"Fehlerhafte Ausrichtung korrigieren\" in den Hintergrundeinstellungen.\n\n",
-        "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen auf einer Karte.\n\nObwohl Adressen oft als Teil einer Straße repräsentiert werden, werden sie in OpenStreetMap  als Attribute von Gebäuden oder Objekten neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. Adressen musst du über eine Stadtbegehung oder dein eigenes Wissen herausfinden, da die Nutzung kommerzieller Quellen wie Google Maps strikt verboten ist.\n"
+        "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen auf einer Karte.\n\nObwohl Adressen oft als Teil einer Straße repräsentiert werden, werden sie in OpenStreetMap  als Attribute von Gebäuden oder Objekten neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. Adressen musst du über eine Stadtbegehung oder dein eigenes Wissen herausfinden, da die Nutzung kommerzieller Quellen wie Google Maps strikt verboten ist.\n",
+        "buildings": "# Gebäude\n\nOpenStreetMap ist unter anderem auf die weltgrößte Datenbank für Gebäude und du kannst helfen sie weiter zu verbessern.\n\n### Auswählen\n\nDu kannst Gebäude auswählen, indem du auf die Umrisslinie klickst. Der Umriss wird nun hervorgehoben. Außerdem wird ein Werkzeugmenü und eine Seitenleiste, welche Informationen zum Gebäude zeigt, eingeblendet.\n\n### Modifizieren\n\nManchmal sind Gebäude falsch platziert oder haben falsche Eigenschaften.\n\nUm ein Gebäude zu bewegen, klicke auf das \"Bewegen\" Tool. Verschiebe nun das Gebäude bis es an der richtigen Stelle ist und beende die Aktion mit einem Klick.\n\nUm den Gebäudeumriss zu korrigieren, klicke und ziehe die Knoten, bis sie an der richtigen Stelle sind.\n\n### Erstellen\n\nEine oft gestellte Frage in Bezug auf des Erstellen von Gebäuden in OpenStreetMap ist, ob man eine Gebäude als Punkt oder Fläche einträgt. Hier gilt, wann immer es möglich ist, sollte das Gebäude als Fläche eingetragen werden. Firmen, Geschäfte und ähnliches werden als Punkte innerhalb des Gebäudes gelegt.\n\nUm ein Gebäude als Fläche zu zeichnen, klicke auf den \"Fläche\"-Knopf oben links und vollende das Gebäude, indem du entweder die \"Enter\"-taste drückst, oder auf den ersten Knoten klickst.\n\n### Löschen\n\nWenn du siehst und weißt, dass eine Gebäude nicht existiert -zum Beispiel, weil du vor Ort warst- kannst du es einfach löschen und es wird von der Karte verschwinden. \nSei vorsichtige mit der Löschenfunktion! Das Ergebnis kann, wie bei jeder anderen Veränderung, von allen gesehen werden. Außerdem sind Satellitenbilder oft nicht sehr aktuell und eine Gebäude könnte schlicht und einfach neu gebaut sein.\n\nDu kannst ein Gebäude löschen, indem du es auswählst und auf das Mülltonnensymbol klickst oder die \"Entfernen\"-Taste betätigst.\n"
     },
     "intro": {
         "navigation": {
-            "drag": "Die Karte zeigt OpenStreetMap Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch zeihen bewegen. **Verschiebe die Karte**",
+            "drag": "Die Karte zeigt OpenStreetMap Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch ziehen bewegen. **Verschiebe die Karte**",
             "select": "Kartenobjekte werden in drei verschiedenen Weisen dargestellt: als Punkte, als Linie oder als Flächen. Alle Objekte können durch Klicken ausgewählt werden. **Klicke auf einen Punkt, um ihn auszuwählen**",
             "header": "Die Kopfzeile zeigt den Typ des Objektes.",
             "pane": "Wird ein Objekt ausgewählt, wird der Eigenschaftseditor angezeigt. Die Kopfzeile zeigt den Typ des Objektes an. Im Hauptfenster werden die Eigenschaften des Objektes angezeigt, wie etwa sein Name und seine Adresse.\n**Schließe den Eigenschaftseditor mit dem Schließen-Button rechts oben.**"
@@ -3048,21 +5418,55 @@ locale.de = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Landnutzung"
+            },
+            "category-path": {
+                "name": "Pfad"
+            },
+            "category-rail": {
+                "name": "Schiene"
+            },
+            "category-road": {
+                "name": "Straße"
+            },
+            "category-water": {
+                "name": "Wasser"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Zugang",
                 "types": {
+                    "access": "Allgemein",
                     "foot": "zu Fuß",
                     "motor_vehicle": "Motorfahrzeuge",
                     "bicycle": "Fahrräder",
                     "horse": "Pferde"
                 },
                 "options": {
+                    "yes": {
+                        "title": "Erlaubt",
+                        "description": "Zugang gesetzlich erlaubt; Wegerecht"
+                    },
+                    "no": {
+                        "title": "Verboten",
+                        "description": "Zugang der Allgemeinheit nicht erlaubt"
+                    },
                     "permissive": {
                         "description": "Zugang solange gewährt, bis der Besitzer seine Erlaubnis zurück nimmt."
                     },
                     "private": {
-                        "title": "Privat"
+                        "title": "Privat",
+                        "description": "Zugang nur mit individueller Erlaubnis des Eigentümers"
+                    },
+                    "designated": {
+                        "description": "Zugang durch Schilder oder bestimmte lokale Gesetze erlaubt"
+                    },
+                    "destination": {
+                        "title": "Ziel",
+                        "description": "Zugang nur erlaubt, um ein Ziel zu erreichen"
                     }
                 }
             },
@@ -3074,6 +5478,9 @@ locale.de = {
                     "street": "Straße",
                     "city": "Stadt"
                 }
+            },
+            "admin_level": {
+                "label": "Verwaltungsebene"
             },
             "aeroway": {
                 "label": "Typ"
@@ -3101,6 +5508,16 @@ locale.de = {
             },
             "capacity": {
                 "label": "Kapazität"
+            },
+            "cardinal_direction": {
+                "label": "Richtung"
+            },
+            "clock_direction": {
+                "label": "Richtung",
+                "options": {
+                    "clockwise": "im Uhrzeigersinn",
+                    "anticlockwise": "gegen den Uhrzeigersinn"
+                }
             },
             "collection_times": {
                 "label": "Leerungszeiten"
@@ -3154,6 +5571,9 @@ locale.de = {
             },
             "landuse": {
                 "label": "Art"
+            },
+            "lanes": {
+                "label": "Fahrspuren"
             },
             "layer": {
                 "label": "Ebene"
@@ -3304,7 +5724,8 @@ locale.de = {
                 "name": "Einrichtungen"
             },
             "amenity/bank": {
-                "name": "Bank"
+                "name": "Bank",
+                "terms": "Kasse,Kontor,Kreditgenossenschaft,Lagerstelle,Fiskus,Fonds,Vermögen,Investmentfirma,Register,Rücklage,Vorrat,Tresor,Rücklagen,Grundkapital,Vorrat,Lager,Lagerhaus,Sparkasse,Schatz,Treuhandgesellschaft,Tresorraum"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -3323,7 +5744,8 @@ locale.de = {
                 "terms": "Kaffee,Tee,Kaffeehandlung"
             },
             "amenity/cinema": {
-                "name": "Kino"
+                "name": "Kino",
+                "terms": "Großbildleinwand, Kino, Autokino, Filmtheater, Filmpalast"
             },
             "amenity/courthouse": {
                 "name": "Gericht"
@@ -3344,7 +5766,8 @@ locale.de = {
                 "name": "Friedhof"
             },
             "amenity/hospital": {
-                "name": "Krankenhaus"
+                "name": "Krankenhaus",
+                "terms": "Klinik, Notaufnahme, Gesundheitswesen, Hospiz, Krankenhaus, Pflegeheim, Altersheim, Nervenheilanstalt, Sanatorium, Lazarett, Chirurgie, Krankenstation"
             },
             "amenity/library": {
                 "name": "Bibliothek"
@@ -3359,7 +5782,8 @@ locale.de = {
                 "name": "Apotheke"
             },
             "amenity/place_of_worship": {
-                "name": "Gebetsort"
+                "name": "Gebetsort",
+                "terms": "Abtei, Basilika, geweihter Ort, Kathedrale, Altarraum, Kantorei, Kapelle, Kirche, Kirchgemeinde, Gotteshaus, Gebetshaus, Dom, Moschee, Oratorium, Heiligtum, Sacellum, Schrein, Synagoge, Tabernakel, Tempel"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kirche"
@@ -3404,7 +5828,8 @@ locale.de = {
                 "name": "Toilette"
             },
             "amenity/townhall": {
-                "name": "Rathaus"
+                "name": "Rathaus",
+                "terms": "Gemeindezentrum, Stadtverwaltung, Landratsamt, Rathaus, Verwaltungszentrum"
             },
             "amenity/university": {
                 "name": "Universität"
@@ -3498,8 +5923,17 @@ locale.de = {
             "highway/footway": {
                 "name": "Fußweg"
             },
+            "highway/living_street": {
+                "name": "Verkehrsberuhigter Bereich (\"Spielstraße\")"
+            },
+            "highway/mini_roundabout": {
+                "name": "Mini-Kreisverkehr"
+            },
             "highway/motorway": {
                 "name": "Autobahn"
+            },
+            "highway/motorway_junction": {
+                "name": "Autobahnausfahrt"
             },
             "highway/motorway_link": {
                 "name": "Autobahnanschluss",
@@ -3507,6 +5941,9 @@ locale.de = {
             },
             "highway/path": {
                 "name": "Pfad"
+            },
+            "highway/pedestrian": {
+                "name": "Fußgängerzone"
             },
             "highway/primary": {
                 "name": "Hauptverbindungsstraße"
@@ -3634,6 +6071,9 @@ locale.de = {
             "landuse/residential": {
                 "name": "Wohngebiet"
             },
+            "landuse/retail": {
+                "name": "Einzelhandel"
+            },
             "landuse/vineyard": {
                 "name": "Weinberg"
             },
@@ -3695,10 +6135,14 @@ locale.de = {
                 "name": "Vermessungspunkt"
             },
             "man_made/wastewater_plant": {
-                "name": "Kläranlage"
+                "name": "Kläranlage",
+                "terms": "Kläranlage, Abwasseranlage, Abwasserreinigungsanlage, Wasseraufbereitungsanlage"
             },
             "man_made/water_tower": {
                 "name": "Wasserturm"
+            },
+            "man_made/water_works": {
+                "name": "Wasserkraftwerk"
             },
             "natural": {
                 "name": "Natur"
@@ -3726,7 +6170,8 @@ locale.de = {
                 "name": "Heide"
             },
             "natural/peak": {
-                "name": "Gipfel"
+                "name": "Gipfel",
+                "terms": "Gipfel, Felsnadel, Alpe, Höhepunkt, Kamm, Scheitelpunkt, Hügel, Berg, , Bergspitze, Bergkuppe, Zipfel"
             },
             "natural/scrub": {
                 "name": "Gestrübb"
@@ -3741,10 +6186,12 @@ locale.de = {
                 "name": "Wasser"
             },
             "natural/water/lake": {
-                "name": "See"
+                "name": "See",
+                "terms": "See, Loch"
             },
             "natural/water/pond": {
-                "name": "Teich"
+                "name": "Teich",
+                "terms": "See, Mühlteich, Bergsee, Tümpel, Teich"
             },
             "natural/water/reservoir": {
                 "name": "Speicherbecken"
@@ -3774,7 +6221,8 @@ locale.de = {
                 "name": "Siedlung"
             },
             "place/island": {
-                "name": "Insel"
+                "name": "Insel",
+                "terms": "Inselgruppe, Archipel, Atoll, Inselchen, Insel, Koralleninsel, Riff"
             },
             "place/isolated_dwelling": {
                 "name": "abgelegene Siedlung"
@@ -3824,6 +6272,9 @@ locale.de = {
             },
             "railway/monorail": {
                 "name": "Einschienenbahn"
+            },
+            "railway/platform": {
+                "name": "Bahnsteig"
             },
             "railway/rail": {
                 "name": "Eisenbahn"
@@ -3987,6 +6438,12 @@ locale.de = {
             },
             "shop/tyres": {
                 "name": "Reifenhandel"
+            },
+            "shop/vacant": {
+                "name": "Freistehendes Geschäft"
+            },
+            "shop/variety_store": {
+                "name": "Gemischtwarenhandel"
             },
             "shop/video": {
                 "name": "Videothek"
@@ -4238,6 +6695,11 @@ locale.en = {
     "logout": "logout",
     "loading_auth": "Connecting to OpenStreetMap...",
     "report_a_bug": "report a bug",
+    "status": {
+        "error": "Unable to connect to API.",
+        "offline": "The API is offline. Please try editing later.",
+        "readonly": "The API is read-only. You will need to wait to save your changes."
+    },
     "commit": {
         "title": "Save Changes",
         "description_placeholder": "Brief description of your contributions",
@@ -4445,7 +6907,8 @@ locale.en = {
                     "housename": "Housename",
                     "number": "123",
                     "street": "Street",
-                    "city": "City"
+                    "city": "City",
+                    "postcode": "Postal code"
                 }
             },
             "admin_level": {
@@ -4642,8 +7105,7 @@ locale.en = {
                     "bridge": "Bridge",
                     "tunnel": "Tunnel",
                     "embankment": "Embankment",
-                    "cutting": "Cutting",
-                    "remove": "Remove"
+                    "cutting": "Cutting"
                 }
             },
             "supervised": {
@@ -4721,6 +7183,10 @@ locale.en = {
                 "name": "Cafe",
                 "terms": "coffee,tea,coffee shop"
             },
+            "amenity/car_wash": {
+                "name": "Car Wash",
+                "terms": ""
+            },
             "amenity/cinema": {
                 "name": "Cinema",
                 "terms": "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
@@ -4739,6 +7205,10 @@ locale.en = {
             },
             "amenity/fire_station": {
                 "name": "Fire Station",
+                "terms": ""
+            },
+            "amenity/fountain": {
+                "name": "Fountain",
                 "terms": ""
             },
             "amenity/fuel": {
@@ -6132,6 +8602,16 @@ locale.es = {
             "capacity": {
                 "label": "Capacidad"
             },
+            "cardinal_direction": {
+                "label": "Dirección"
+            },
+            "clock_direction": {
+                "label": "Dirección",
+                "options": {
+                    "clockwise": "En sentido horario",
+                    "anticlockwise": "En sentido antihorario"
+                }
+            },
             "collection_times": {
                 "label": "Horario de recogida"
             },
@@ -6542,8 +9022,14 @@ locale.es = {
                 "name": "Senda peatonal",
                 "terms": "camino,boulevard,senda,sendero,carretera,vía,vial,riel,paso,pista,vereda,pasaje,calzada,travesía,avenida,bulevar,ronda,paseo,alameda,arboleda,derrotero,ramal,trocha,rastro,huella,costanilla,rúa,pasaje,callejón,pasadizo,arteria,corredera,gran vía"
             },
+            "highway/mini_roundabout": {
+                "name": "Minirotonda"
+            },
             "highway/motorway": {
                 "name": "Autopista"
+            },
+            "highway/motorway_junction": {
+                "name": "Cruce de autopista"
             },
             "highway/motorway_link": {
                 "name": "Enlace de autopista",
@@ -6551,6 +9037,9 @@ locale.es = {
             },
             "highway/path": {
                 "name": "Camino"
+            },
+            "highway/pedestrian": {
+                "name": "Peatonal"
             },
             "highway/primary": {
                 "name": "Carretera primaria"
@@ -6877,6 +9366,9 @@ locale.es = {
             },
             "railway/monorail": {
                 "name": "Monorraíl "
+            },
+            "railway/platform": {
+                "name": "Andén"
             },
             "railway/rail": {
                 "name": "Raíl"
@@ -7533,6 +10025,16 @@ locale.fr = {
             "capacity": {
                 "label": "Capacité"
             },
+            "cardinal_direction": {
+                "label": "Sens"
+            },
+            "clock_direction": {
+                "label": "Sens",
+                "options": {
+                    "clockwise": "Sens horaire",
+                    "anticlockwise": "Sens anti-horaire"
+                }
+            },
             "collection_times": {
                 "label": "Horaires de collecte"
             },
@@ -7943,8 +10445,14 @@ locale.fr = {
                 "name": "Voie piétonne",
                 "terms": "passage, chemin, route, rue, autoroute, avenue, boulevard, chaussée, chemin de fer, rails, piste, allée, sentier, voie"
             },
+            "highway/mini_roundabout": {
+                "name": "Mini rond-point"
+            },
             "highway/motorway": {
                 "name": "Autoroute"
+            },
+            "highway/motorway_junction": {
+                "name": "Bretelle d'autoroute"
             },
             "highway/motorway_link": {
                 "name": "Bretelle d'autoroute",
@@ -7952,6 +10460,9 @@ locale.fr = {
             },
             "highway/path": {
                 "name": "Chemin non carrossable"
+            },
+            "highway/pedestrian": {
+                "name": "Piétonnier"
             },
             "highway/primary": {
                 "name": "Route principale"
@@ -8278,6 +10789,9 @@ locale.fr = {
             },
             "railway/monorail": {
                 "name": "Monorail"
+            },
+            "railway/platform": {
+                "name": "Quai de gare"
             },
             "railway/rail": {
                 "name": "Voie ferrée"
@@ -9473,6 +11987,7 @@ locale.it = {
         "in": "Ingrandisci",
         "out": "Riduci"
     },
+    "cannot_zoom": "Impossibile fare zooCannot zoom out further in current mode.",
     "gpx": {
         "local_layer": "File GPX locale",
         "drag_drop": "Trascina e rilascia un file gpx sulla pagina"
@@ -10602,6 +13117,11 @@ locale.ja = {
     "logout": "ログアウト",
     "loading_auth": "OpenStreetMapへ接続中...",
     "report_a_bug": "バグ報告",
+    "status": {
+        "error": "APIサーバへの接続が失敗しました",
+        "offline": "APIがオフラインです。しばらくしてからもう一度お試しください。",
+        "readonly": "APIは読み込み専用モードです。変更内容の保存はしばらく時間を置いてから行なってください。"
+    },
     "commit": {
         "title": "編集結果を保存",
         "description_placeholder": "貢献のための簡単な解説",
@@ -10637,7 +13157,8 @@ locale.ja = {
         "choose": "地物の種類を選択",
         "results": "検索結果{n}件: {search}",
         "reference": "OpenStreetMap WIkiで確認",
-        "back_tooltip": "地物の種別を変更"
+        "back_tooltip": "地物の種別を変更",
+        "remove": "削除"
     },
     "background": {
         "title": "背景画像",
@@ -10748,6 +13269,23 @@ locale.ja = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "土地利用"
+            },
+            "category-path": {
+                "name": "小路"
+            },
+            "category-rail": {
+                "name": "線路"
+            },
+            "category-road": {
+                "name": "道路"
+            },
+            "category-water": {
+                "name": "水面"
+            }
+        },
         "fields": {
             "access": {
                 "label": "通行制限",
@@ -10791,7 +13329,8 @@ locale.ja = {
                     "housename": "地番",
                     "number": "123",
                     "street": "所属する街路名",
-                    "city": "市町村名"
+                    "city": "市町村名",
+                    "postcode": "郵便番号"
                 }
             },
             "admin_level": {
@@ -11244,6 +13783,9 @@ locale.ja = {
                 "name": "歩道",
                 "terms": "けもの道、山道、コース、歩道、自動車道、路地、航路、軌道、抜け道、通路、小路、線路、道路、経路、街道、農道、大通り"
             },
+            "highway/living_street": {
+                "name": "路地"
+            },
             "highway/mini_roundabout": {
                 "name": "ラウンドアバウト(小)"
             },
@@ -11259,6 +13801,9 @@ locale.ja = {
             },
             "highway/path": {
                 "name": "小道"
+            },
+            "highway/pedestrian": {
+                "name": "歩行者道"
             },
             "highway/primary": {
                 "name": "主要地方道"
@@ -11385,6 +13930,9 @@ locale.ja = {
             },
             "landuse/residential": {
                 "name": "住宅区"
+            },
+            "landuse/retail": {
+                "name": "商業区域"
             },
             "landuse/vineyard": {
                 "name": "ワイン畑"
@@ -14364,13 +16912,19 @@ locale.pl = {
         "browse": {
             "title": "Przeglądaj",
             "description": "Przesuwaj i zmieniaj skalę mapy."
+        },
+        "draw_area": {
+            "tail": "Kliknij, aby dodać punkty do obszaru. Kliknij na pierwszy punkt, aby zamknąć obszar."
+        },
+        "draw_line": {
+            "tail": "Kliknij, aby dodać więcej punktów do linii. Kliknij na inne linie, aby je połączyć lub użyj dwukliku, aby zakończyć rysowanie."
         }
     },
     "operations": {
         "add": {
             "annotation": {
                 "point": "Dodano punkt.",
-                "vertex": "Dodano węzeł do drogi."
+                "vertex": "Dodano punkt do drogi."
             }
         },
         "start": {
@@ -14419,7 +16973,7 @@ locale.pl = {
             "description": "Usuń to z mapy.",
             "annotation": {
                 "point": "Usunięto punkt.",
-                "vertex": "Usunięto węzeł z drogi.",
+                "vertex": "Usunięto punkt z drogi.",
                 "line": "Usunięto linię.",
                 "area": "Usunięto obszar.",
                 "relation": "Usunięto relację.",
@@ -14455,7 +17009,7 @@ locale.pl = {
             "key": "M",
             "annotation": {
                 "point": "Przesunięto punkt.",
-                "vertex": "Przesunięto węzeł drogi.",
+                "vertex": "Przesunięto punkt drogi.",
                 "line": "Przesunięto linię.",
                 "area": "Przesunięto obszar.",
                 "multiple": "Przesunięto wiele obiektów."
@@ -14480,7 +17034,9 @@ locale.pl = {
         "split": {
             "title": "Rozdziel",
             "description": {
-                "area": "Rozdziel granicę tego obszary na pół."
+                "line": "Rozdziel tę linię na dwie części w tym węźle.",
+                "area": "Rozdziel granicę tego obszary na pół.",
+                "multiple": "Rozdziel linie/granice obszaru w tym węźle na dwie części."
             },
             "key": "X",
             "annotation": {
@@ -14530,10 +17086,12 @@ locale.pl = {
         "no_documentation_key": "Nie ma dokumentacji dla tego klucza",
         "show_more": "Pokaż więcej",
         "new_tag": "Nowy tag",
+        "view_on_osm": "Zobacz na openstreetmap.org",
         "editing_feature": "Edytujesz {feature}",
         "additional": "Dodatkowe tagi",
         "choose": "Wybierz rodzaj obiektu",
         "results": "{n} wyników dla {search}",
+        "reference": "Zobacz na OpenStreetMap Wiki",
         "back_tooltip": "Zmień rodzaj cechy"
     },
     "background": {
@@ -14574,6 +17132,7 @@ locale.pl = {
         "used_with": "używany z {type}"
     },
     "validations": {
+        "untagged_point": "Nieopisany punkt",
         "untagged_line": "Nieopisana linia.",
         "untagged_area": "Nieopisany obszar.",
         "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
@@ -14593,10 +17152,12 @@ locale.pl = {
         "title": "Pomoc",
         "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz  go używać do dodawania i\nakutalizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nużywających OpenStreetMap. Aby wprowadzić modyfikacje, potrzebujesz\n[darmowe konto OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/systemed/iD).\n",
         "editing_saving": "# Edycja i zapis\n\nTen edytor został zaprojektowany do pracy w trybie online i już go używasz poprzez stronę\ninternetową.\n\n### Wybieranie obiektów\n\nAby wybrać obiekt na mapie, taki jak na przykład droga, czy jakiś POI, kliknij na niego na mapie.\nSpowodouje to podświetlenie wybranego obiektu, otworzenie panelu zawierającego szczegóły\no nim i wyświetlenie menu z poleceniami, które możesz wykonać na obiekcie.\n\nWiele obiektów może zostać wybranych przez trzymania wciśniętego klawisza 'Shift', klikanie na\ni przeciąganie mapy. Spowoduje to wybór wszystkich obiektów zawartych w narysowanym\nprostokącie, umożliwiając Tobie wykonywanie działań na kilku obiektach naraz.\n\n### Zapisywanie modyfikacji\n\nGdy wprowadzisz zmiany, na przykład przez modyfikacje dróg, budynków i miejsc, są one\nprzechowywane lokalnie aż zapiszesz je na serwerze. Nie martw się, gdy popełnisz błąd - możesz\ncofnąć zmiany przez kliknięcie na przycisk cofnij, i powtórzyć je poprzez kliknięcie na przycisk powtórz.\n\nKliknij 'Zapisz' aby skończyć grupę modyfikacji - na przykład, gdy skończyłeś pewien obszar miasta i\nchcesz zacząć następny. Będziesz miał wtedy szansę przejrzeć, co zrobiłeś, a edytor dostarczy pomocne\nsugestie i ostrzeżenia w razie, gdyby coś było nie tak z twoimi zmianami.\n\nJeśli wszystko dobrze wygląda, możesz podać krótki komentarz opisujący zmianę, którą wprowadziłeś\ni kliknąć 'Zapisz' ponownie, aby wysłać zmiany do [OpenStreetMap.org](http://www.openstreetmap.org/),\ngdzie będą one widoczne dla wszystkich użytkowników i dostępne dla innych do bazowania na nich i\ndalszego ulepszania.\n\nJeżeli nie możesz skończyć swoich modyfikacji w czasie jednej sesji, możesz opuścić okno edytora i\nwrócić później (na tym samym komputerze i tą samą przeglądarką), a edytor zaoferuje Ci przywrócenie\ntwojej pracy.\n",
+        "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
         "gps": "# GPS\n\nDane GPS są najbardziej zaufanym źródłem dla OpenStreetMap. Ten edytor obsługuje lokalne ślady -\npliki `.gpx` na twoim komputerze. Możesz zbierać tego rodzaju ślady GPS używając aplikacji na\nsmartfony lub sprzętu GPS.\n\nInformacje jak używać GPS do zbierania informacji o okolicy możesz znaleźć pod\n[Zbieranie informacji z GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby użyć śladu GPX do rysowania mapy, przeciągnij i upuść plik GPX na edytor. Jeżeli zostanie\nrozpoznany, zostanie dodany na mapę w postaci jasnozielonej linii. Kliknij na menu 'Ustawienia tła'\npo lewej stronie aby włączyć, wyłączyć lub powiększyć do nowej warstwy GPX.\n\nŚlad GPX nie jest bezpośrednio wysyłany do OpenStreetMap - najlepiej użyć go do rysowania mapy,\nużywając go jako wzoru dla nowych obiektów, które dodasz.\n\n",
         "imagery": "# Zdjęcia\n\nZdjęcia lotnicze/satelitarne są ważnym zasobem w rysowaniu map. Kolekcja zdjęć lotniczych,\nsatelitarnych i innych wolnodostępnych źródeł jest dostępna w edytorze w menu 'Ustawienia tła' po\nlewej stronie.\n\nDomyślnie wyświetlana jest warstwa zdjęć satelitarnych z [Bing Maps](http://www.bing.com/maps/),\nale w miarę przybliżania i pojawiają się nowe źródła. Niektóre kraje, takie jak Stany Zjednoczone, Francja\nczy Dania mają w pewnych miejscach dostępne zdjęcia bardzo wysokiej jakości.\n\nZdjęca są czasem przesunięte względem danych na mapie z powodu błędu dostawcy zdjęć. Jeżeli\nwidzisz dużo dróg przesuniętych względem tła, zastanów się zanim jest wszystkie wyrównasz względem\ntła. Zamiast tego może dostosować przesunięcie zdjęć tak, aby zgadzały się z istniejącymi danymi przez\nnaciśnięcie przycisku 'Wyrównaj podkład' na dole Ustawień tła.\n",
         "addresses": "# Adresy\n\nAdresy są jedną z najbardziej użytecznych informacji na mapie.\n\nMimo, że adresy są często reprezentowane jako części ulic, w OpenStreetMap są one zapisywane jako\natrybuty budynków i miejsc wzdłuż ulicy.\n\nMożesz dodać nową informację adresową do miejsc narysowanych w postaci obwiedni budynków jak\nrównież do tych narysowanych w postaci pojedynczych punkt. Najlepszym źródłem danych adresowych\njest jak zwykle zwiedzanie okolicy  lub własna wiedza - tak jak z każdym innym obiektem, kopiowanie\ndanych z komercyjnych źródeł takich jak Google Maps jest zabronione.\n",
-        "inspector": "# Używanie Inspektora\n\nInspektor jest elementem interfejsu po prawej stronie strony, który pojawia się po zaznaczeniu obiektu\ni który pozwala tobie modyfikować jego szczegóły.\n\n### Zaznaczanie typu obiektu\n\nPo dodaniu punktu, linii lub obszaru, możesz wybrać jakiego rodzaju to jest obiekt, na przykład czy jest\nto autostrada czy droga lokalna, kawiarnia czy supermarket. Inspektor wyświetli przyciski dla\npopularnych typów obiektów, a ty możesz znaleźć inne przez wpisanie tego, czego szukasz do pola\nszukania.\n\nKliknij na 'i' w prawym dolnym rogu przycisku typu obiektu, aby dowiedzieć się o nim więcej.\nKliknij na przycisku, aby wybrać ten typ.\n\n### Używanie Formularzy i Edycja tagów\n\nPo wybraniu typu obiektu lub gdy wybierzesz obiekt, który ma już nadany typ, inspektor wyświetli pola\nzawierające szczegóły na temat obiektu, takie jak nazwa i adres.\n\nPoniżej pól, które widzisz, możesz kliknąć na ikony w celu dodania innych szczegółów, jak na przykład\ninformacja z [Wikipedii](http://www.wikipedia.org/), dostęp dla wózków inwalidzkich i innych.\n\nNa dole inspektora kliknij na 'Dodatkowe tagi', aby dodać dowolne inne tagi do elementu.\n[Taginfo](http://taginfo.openstreetmap.org/) jest świetnym źródłem informacji o popularnych\nkombinacjach tagów.\n\nZmiany, które wprowadzisz w inspektorze są automatycznie nanoszone na mapę. Możesz je cofnąć w\nkażdym momencie przez wciśnięcie przycisku 'Cofnij'.\n\n### Zamykanie Inspektora\n\nMożesz zamknąć inspektora przez kliknięcie na przycisk zamknij w górnym prawym rogu, wciśnięcie\nklawisza 'Escape' lub kliknięcie na mapie.\n"
+        "inspector": "# Używanie Inspektora\n\nInspektor jest elementem interfejsu po prawej stronie strony, który pojawia się po zaznaczeniu obiektu\ni który pozwala tobie modyfikować jego szczegóły.\n\n### Zaznaczanie typu obiektu\n\nPo dodaniu punktu, linii lub obszaru, możesz wybrać jakiego rodzaju to jest obiekt, na przykład czy jest\nto autostrada czy droga lokalna, kawiarnia czy supermarket. Inspektor wyświetli przyciski dla\npopularnych typów obiektów, a ty możesz znaleźć inne przez wpisanie tego, czego szukasz do pola\nszukania.\n\nKliknij na 'i' w prawym dolnym rogu przycisku typu obiektu, aby dowiedzieć się o nim więcej.\nKliknij na przycisku, aby wybrać ten typ.\n\n### Używanie Formularzy i Edycja tagów\n\nPo wybraniu typu obiektu lub gdy wybierzesz obiekt, który ma już nadany typ, inspektor wyświetli pola\nzawierające szczegóły na temat obiektu, takie jak nazwa i adres.\n\nPoniżej pól, które widzisz, możesz kliknąć na ikony w celu dodania innych szczegółów, jak na przykład\ninformacja z [Wikipedii](http://www.wikipedia.org/), dostęp dla wózków inwalidzkich i innych.\n\nNa dole inspektora kliknij na 'Dodatkowe tagi', aby dodać dowolne inne tagi do elementu.\n[Taginfo](http://taginfo.openstreetmap.org/) jest świetnym źródłem informacji o popularnych\nkombinacjach tagów.\n\nZmiany, które wprowadzisz w inspektorze są automatycznie nanoszone na mapę. Możesz je cofnąć w\nkażdym momencie przez wciśnięcie przycisku 'Cofnij'.\n\n### Zamykanie Inspektora\n\nMożesz zamknąć inspektora przez kliknięcie na przycisk zamknij w górnym prawym rogu, wciśnięcie\nklawisza 'Escape' lub kliknięcie na mapie.\n",
+        "buildings": "# Budynki\n\nOpenStreetMap jest największą na świecie bazą danych budynków. Możesz tworzyć i poprawiać tę\nbazę danych.\n\n### Zaznaczanie\n\nMożesz zaznaczyć budynek przez kliknięcie na jego obwódce. Podświetli to budynek i otworzy małe\nmenu narzędziowe oraz boczny panel pokazujący więcej informacji o budynku.\n\n### Modyfikowanie\n\nCzasami budynki są błędnie umieszczone lub mają błędne tagi.\n\nAby przesunąć cały budynek, zaznacz go, a potem kliknij narzędzie 'Przesuń'. Rusz myszą, aby\nprzesunąć budynek i kliknij, gdy będzie we właściwym miejscu.\n\nAby poprawić kształt budynku, kliknij i przeciągnij punkty formujące obwódkę w lepsze miejsce.\n\n### Tworzenie\n\nJednym z głównych problemów podczas tworzenia budynków jest to, że OpenStreetMap  przechowuje\nbudynki zarówno w postaci punktów i obszarów. Przyjęło się rysowanie budynków w postaci obszarów,\na rysowanie firm, domów czy innej infrastruktury w postaci punktów w obszarze budynku.\n\nZacznij rysować budynek w postaci obszaru przez kliknięcie na przycisku 'Obszar' w górnym lewym\nrogu edytora i zakończ go przez naciśnięcie klawisza 'Enter' na klawiaturze lub przez kliknięcie na\npierwszym rysowanym punkcie w celu zamknięcia obszaru.\n\n### Usuwanie\n\nJeżeli budynek jest całkiem błędny - widzisz, że nie ma go na zdjęciach satelitarnych (a najlepiej\nsprawdziłeś w terenie, że go nie ma) - możesz go usunąć. Bądź ostrożny usuwając obiekty - tak jak po\nkażdej innej modyfikacji, rezultaty są widoczne dla wszystkich, a zdjęcia satelitarne często nie są\naktualne, więc budynek może być po prostu nowo wybudowany.\n\nMożesz usunąć budynek przez kliknięcie na nim, a następnie na ikonie śmietnika lub wciśnięcie\nklawisza 'Delete'.\n"
     },
     "intro": {
         "navigation": {
@@ -14619,7 +17180,8 @@ locale.pl = {
         },
         "areas": {
             "add": "Obszary pozwalają na bardziej szczegółowe przedstawienie obiektu. Dostarczają one informacji o granicach boektu. Obszary mogą być używane do przedstawienia większości obiektów, które mogą być przedstawione w postaci punktów i często są one preferowane. **Kliknij na przycisk Obszar aby dodać nowy obszar.**",
-            "corner": "Obszary są rysowane przez stawianie węzłów oznaczających granicę obszaru. **Umieść węzeł początkowy w jednym z rogów placu zabaw.**",
+            "corner": "Obszary są rysowane przez stawianie punktów oznaczających granicę obszaru. **Umieść punkt początkowy w jednym z rogów placu zabaw.**",
+            "place": "Narysuj obszar, umieszczając kolejne punkty. Zakończ go, klikając na początkowy punkt. **Narysuj obszar placu zabaw.**",
             "search": "**Szukaj placu zabaw.**",
             "choose": "**Wybierz Plac zabaw z siatki.**",
             "describe": "**Dodaj nazwę i zamknij edytor obietków**"
@@ -14627,6 +17189,8 @@ locale.pl = {
         "lines": {
             "add": "Linie są używane do reprezentowania obiektów takich jak drogi, tory czy rzeki. **Naciśnij na przycisk Linia aby dodać nową linię.**",
             "start": "**Zacznij linię klikając na koniec drogi.**",
+            "intersect": "Kliknij, aby dodać więcej punktów do linii. W razie potrzeby możesz przeciągać mapę podczas rysowania. Drogi i wiele innych typów linii są częścią większej sieci. Ważne jest ich prawidłowe połączenie, aby programy do wyznaczania tras poprawnie działały. **Kliknij na Flower Street, aby dodać skrzyżowanie łączące dwie linie.**",
+            "finish": "Linie można zakończyć przez ponowne kliknięcie ostatniego punktu. **Zakończ rysowanie drogi.**",
             "road": "**Wybierz drogę z siatki.**",
             "residential": "Jest wiele rodzajów dróg, z których najpopularniejsze są drogi lokalne. **Wybierz typ drogi Lokalna**",
             "describe": "**Nazwij drogę i zamknij edytor obiektów.**",
@@ -14641,7 +17205,22 @@ locale.pl = {
     "presets": {
         "fields": {
             "access": {
-                "label": "Dostęp"
+                "label": "Dostęp",
+                "types": {
+                    "access": "Ogólny",
+                    "foot": "Piesi",
+                    "motor_vehicle": "Pojazdy silnikowe",
+                    "bicycle": "Rowery",
+                    "horse": "Konie"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Dozwolony"
+                    },
+                    "no": {
+                        "title": "Zabroniony"
+                    }
+                }
             },
             "address": {
                 "label": "Adres",
@@ -14681,6 +17260,16 @@ locale.pl = {
             },
             "capacity": {
                 "label": "Pojemność"
+            },
+            "cardinal_direction": {
+                "label": "Kierunek"
+            },
+            "clock_direction": {
+                "label": "Kierunek",
+                "options": {
+                    "clockwise": "Zgodnie ze wskazówkami zegara",
+                    "anticlockwise": "Przeciwnie do wskazówek zegara"
+                }
             },
             "collection_times": {
                 "label": "Czas zbierania"
@@ -14832,6 +17421,9 @@ locale.pl = {
                 "label": "Nawierzchnia"
             },
             "tourism": {
+                "label": "Typ"
+            },
+            "tracktype": {
                 "label": "Typ"
             },
             "water": {
@@ -15057,6 +17649,9 @@ locale.pl = {
             },
             "highway/footway": {
                 "name": "Ścieżka dla pieszych"
+            },
+            "highway/mini_roundabout": {
+                "name": "Mini-rondo"
             },
             "highway/motorway": {
                 "name": "Autostrada"
@@ -15351,6 +17946,9 @@ locale.pl = {
             "railway/level_crossing": {
                 "name": "Rogatka"
             },
+            "railway/platform": {
+                "name": "Peron kolejowy"
+            },
             "railway/rail": {
                 "name": "Tor"
             },
@@ -15441,6 +18039,9 @@ locale.pl = {
             "shop/garden_centre": {
                 "name": "Centrum ogrodnicze"
             },
+            "shop/gift": {
+                "name": "Sklep z pamiątkami"
+            },
             "shop/greengrocer": {
                 "name": "Warzywniak"
             },
@@ -15488,6 +18089,9 @@ locale.pl = {
             },
             "shop/shoes": {
                 "name": "Sklep obuwniczy"
+            },
+            "shop/sports": {
+                "name": "Sklep sportowy"
             },
             "shop/supermarket": {
                 "name": "Supermarket"
@@ -16215,23 +18819,26 @@ locale.pt = {
 locale.ru = {
     "modes": {
         "add_area": {
-            "title": "Контур",
-            "description": "Добавить парки, здания, озёра или иные объекты на карту.",
-            "tail": "Щёлкните на карту, чтобы начать рисование области — например, парка, озера или здания."
+            "title": "Область",
+            "description": "Нанести на карту парки, здания, озёра или другие объекты.",
+            "tail": "Щёлкните на карту, чтобы начать рисование области: парка, озера или здания."
         },
         "add_line": {
             "title": "Линия",
-            "description": "Линиями можно обозначить дороги, тропинки, заборы или, к примеру, ручьи.",
+            "description": "Нанести на карту дороги, улицы, тропинки, каналы или другие линии.",
             "tail": "Щёлкните на карту, чтобы начать рисование дороги, тропинки или ручья."
         },
         "add_point": {
             "title": "Точка",
-            "description": "Точки — это рестораны, памятники, почтовые ящики.",
-            "tail": "Щёлкните на карту, чтобы поставить точку."
+            "description": "Нанести на карту рестораны, памятники, почтовые ящики или другие точки.",
+            "tail": "Щёлкните на карту, чтобы обозначить точку."
         },
         "browse": {
             "title": "Просмотр",
             "description": "Двигать и масштабировать карту."
+        },
+        "draw_area": {
+            "tail": "Кликните, чтобы добавить точки в ваш контур. Кликните на начальную точку, чтобы завершить контур."
         }
     },
     "operations": {
@@ -16311,7 +18918,7 @@ locale.ru = {
         },
         "merge": {
             "title": "Объединить",
-            "description": "Объединить две линии.",
+            "description": "Объединить эти линии.",
             "key": "C",
             "annotation": "Объединены {n} линий.",
             "not_eligible": "Эти объекты нельзя склеить.",
@@ -16348,7 +18955,9 @@ locale.ru = {
         "split": {
             "title": "Разрезать",
             "description": {
-                "area": "Разбить этот контур надвое."
+                "line": "Разделить линию в этой точке.",
+                "area": "Разбить этот контур надвое.",
+                "multiple": "Разделить линейные/контурные границы в этой точке. "
             },
             "key": "X",
             "annotation": {
@@ -16398,10 +19007,12 @@ locale.ru = {
         "no_documentation_key": "Для этого ключа описания нет",
         "show_more": "Ещё",
         "new_tag": "Новый тег",
+        "view_on_osm": "Посмотреть на openstreetmap.org",
         "editing_feature": "Правка {feature}",
         "additional": "Дополнительные теги",
         "choose": "Что это за объект?",
         "results": "{n} результатов для {search}",
+        "reference": "Посмотреть на OpenStreetMap Wiki",
         "back_tooltip": "Изменить тип объекта"
     },
     "background": {
@@ -16413,7 +19024,7 @@ locale.ru = {
     },
     "restore": {
         "heading": "У вас есть несохранённые правки",
-        "description": "У вас обнаружились несохранённые правки с прошлого раза. Восстановить их?",
+        "description": "У вас обнаружились несохранённые правки с прошлого сеанса. Восстановить их?",
         "restore": "Восстановить",
         "reset": "Забыть"
     },
@@ -16442,6 +19053,7 @@ locale.ru = {
         "used_with": "ставится на {type}"
     },
     "validations": {
+        "untagged_point": "Неотмеченная точка",
         "untagged_line": "Линия без тегов",
         "untagged_area": "Контур без тегов",
         "many_deletions": "Вы удаляете {n} объектов. Уверены в своём решении? В результате они пропадут с карты, которую весь мир может видеть на openstreetmap.org.",
@@ -16452,19 +19064,44 @@ locale.ru = {
         "in": "Приблизить",
         "out": "Отдалить"
     },
+    "cannot_zoom": "Невозможно отдалиться в текущем виде.",
     "gpx": {
         "local_layer": "Свой файл GPX",
         "drag_drop": "Перетащите файл .gpx на страницу"
     },
     "help": {
         "title": "Справка",
-        "help": "# Справка\n\nЭто редактор [OpenStreetMap](http://www.openstreetmap.org/): бесплатной,\nсвободно редактируемой карты мира. Пользуйтесь им для добавления\nи изменения данных в вашем районе, делая общую карту с открытыми\nданными лучше для каждого.\n\nВаши правки увидит каждый пользователь карты OpenStreetMap. Для\nредактирования вам потребуется [зарегистрироваться в OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[Редактор iD](http://ideditor.com/) — открытый совместный проект\nс [исходным кодом на GitHub](https://github.com/systemed/iD).\n"
+        "help": "# Справка\n\nЭто редактор [OpenStreetMap](http://www.openstreetmap.org/): общедоступной,\nсвободно редактируемой карты мира. Вы можете использовать этот редактор для добавления\nи обновления карты вашей местности, помогая всем,\nулучшая открытую и свободную карту мира\n\nВаши правки увидит каждый пользователь карты OpenStreetMap. Для\nредактирования вам потребуется [зарегистрироваться в OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[Редактор iD](http://ideditor.com/) — открытый совместный проект\nс [исходным кодом на GitHub](https://github.com/systemed/iD).\n"
     },
     "intro": {
         "navigation": {
-            "header": "Заголовок показывает тип объекта"
+            "drag": "Сейчас отображается подложка с данными OpenStreetMap. Вы можете управлять и перемещать карту, как на большинстве веб-картографических сервисах. **Двигайте карту!**",
+            "select": "Данные карты представлены тремя видами: точками, линиями и контурами. Вы можете выбрать любой объект нажав на него. **Кликните на точку, чтобы выбрать её.**",
+            "header": "Заголовок показывает тип объекта",
+            "pane": "Когда объект выбран открываются свойства объекта. Заголовок показывает нам тип объекта, а основная панель показывает атрибуты объекта, например, его имя или адрес. **Закройте свойства объекта нажатием на крестик в правом верхнем углу.**"
+        },
+        "points": {
+            "add": "Точки используются для того, чтобы отмечать такие объекты, как магазины, рестораны и памятники. Они помечают определенное место и описывают его. **Нажмите на кнопку Точка, чтобы добавить новую точку.**",
+            "place": "Точка создаётся путём нажатия на карту. **Отметьте точку в верхней части здания.**",
+            "search": "Существует много объектов, которые можно отметить точками. Точка, которую вы добавили — кафе. **Найдите 'Кафе' **",
+            "describe": "Вы пометили точку, как кафе. Используя свойства объекта, вы можете добавить больше информации. **Добавьте название** ",
+            "fixname": "**Поменяйте название и закройте свойства объекта.**",
+            "reselect_delete": "Все объекты на карте могут быть удалены. **Нажмите на точку, которую вы создали.**",
+            "delete": "Меню около точки позволяет совершить различные операции с ней, в том числе удаление. **Удалите точку.**  "
+        },
+        "areas": {
+            "place": "Нарисуйте контур путём размещения множества точек. Завершите контур нажатием на начальную точку. **Нарисуйте контур детской площадки.**",
+            "search": "**Найдите детскую площадку** ",
+            "describe": "**Добавьте название и закройте свойства объекта**"
+        },
+        "lines": {
+            "add": "Линейные объекты нужны для таких категорий, как автомобильные дороги, железные дороги, реки. **Нажмите на кнопку Линия, чтобы добавить новый линейный объект.**",
+            "intersect": "Кликните, чтобы добавить больше точек в линию. Вы можете двигать карту во время рисования, если это понадобится. Дороги и множество других типов линий — часть большей системы. Важно, чтобы эти линии были соединены с другими правильно для нормальной работы приложений создающим маршруты.  **Нажмите на Flower Street, чтобы создать пересечение, соединяющее две линии.**",
+            "residential": "Существует много различных типов дорог, наиболее распространенной является Residental. **Выберите тип дороги Residential**",
+            "describe": "**Именуйте дорогу и закройте свойства объекта**"
         },
         "startediting": {
+            "help": "Больше документации и справки доступно здесь.",
             "save": "Не забывайте регулярно сохранять свои изменения!",
             "start": "Рисовать карту"
         }
@@ -16509,6 +19146,12 @@ locale.ru = {
             },
             "capacity": {
                 "label": "Вместимость"
+            },
+            "cardinal_direction": {
+                "label": "Направление"
+            },
+            "clock_direction": {
+                "label": "Направление"
             },
             "collection_times": {
                 "label": "Расписание проверки"
@@ -16605,6 +19248,9 @@ locale.ru = {
             "operator": {
                 "label": "Владелец"
             },
+            "parking": {
+                "label": "Тип"
+            },
             "phone": {
                 "label": "Телефон"
             },
@@ -16662,6 +19308,9 @@ locale.ru = {
             "tourism": {
                 "label": "Тип"
             },
+            "tracktype": {
+                "label": "Тип"
+            },
             "water": {
                 "label": "Тип"
             },
@@ -16689,7 +19338,8 @@ locale.ru = {
                 "name": "Взлётная полоса"
             },
             "aeroway/aerodrome": {
-                "name": "Аэропорт"
+                "name": "Аэропорт",
+                "terms": "самолёт,аэропорт,аэродром"
             },
             "aeroway/helipad": {
                 "name": "Вертолётная площадка"
@@ -17142,6 +19792,9 @@ locale.ru = {
             "place": {
                 "name": "Населённый пункт"
             },
+            "place/city": {
+                "name": "Большой город"
+            },
             "place/hamlet": {
                 "name": "Малое село"
             },
@@ -17150,6 +19803,9 @@ locale.ru = {
             },
             "place/locality": {
                 "name": "Местность"
+            },
+            "place/town": {
+                "name": "Город"
             },
             "place/village": {
                 "name": "Деревня"
@@ -17190,8 +19846,14 @@ locale.ru = {
             "railway/monorail": {
                 "name": "Монорельс"
             },
+            "railway/platform": {
+                "name": "Железнодорожная платформа"
+            },
             "railway/rail": {
                 "name": "Рельсовый путь"
+            },
+            "railway/station": {
+                "name": "Железнодорожная станция"
             },
             "railway/subway": {
                 "name": "Метро"
@@ -17498,11 +20160,16 @@ locale.sk = {
         },
         "circularize": {
             "title": "Usporiadaj do kruhu",
+            "description": {
+                "line": "Usporiadaj čiaru do kruhu.",
+                "area": "Usporiadaj plochu do kruhu."
+            },
             "key": "O",
             "annotation": {
                 "line": "Usporiadanie čiary do kruhu.",
                 "area": "Usporiadanie plochy do kruhu."
-            }
+            },
+            "not_closed": "Tento objekt nemožno usporiadať do kruhu, pretože nie je uzavretý do slučky."
         },
         "orthogonalize": {
             "title": "Usporiadaj do pravého uhla.",
@@ -17511,7 +20178,8 @@ locale.sk = {
             "annotation": {
                 "line": "Usporiadanie rohov čiary do pravého uhla.",
                 "area": "Usporiadanie rohov plochy do pravého uhla."
-            }
+            },
+            "not_closed": "Tento objekt nemožno usporiadať do pravého uhla, pretože nie je uzavretý do slučky."
         },
         "delete": {
             "title": "Vymaž",
@@ -17534,28 +20202,32 @@ locale.sk = {
             }
         },
         "disconnect": {
-            "title": "Rozpoj",
+            "title": "Oddeľ",
             "description": "Oddeľ od seba tieto čiary/plochy.",
             "key": "D",
-            "annotation": "Oddelenie čiar/plôch."
+            "annotation": "Oddelenie čiar/plôch.",
+            "not_connected": "Nie je dostatočný počet čiar/plôch na oddelenie."
         },
         "merge": {
-            "title": "Spoj",
-            "description": "Spoj tieto čiary.",
+            "title": "Zlúč",
+            "description": "Zlúč tieto čiary.",
             "key": "C",
-            "annotation": "Spojenie {n} čiar."
+            "annotation": "Zlúčenie {n} čiar.",
+            "not_eligible": "Tieto objekty nemôžu byť zlúčené.",
+            "not_adjacent": "Tieto čiary nemožno zlúčiť, pretože nie sú prepojené."
         },
         "move": {
-            "title": "Posuň",
+            "title": "Presuň",
             "description": "Presuň na iné miesto.",
             "key": "M",
             "annotation": {
-                "point": "Posunutie bodu.",
-                "vertex": "Posunutie uzlu cesty.",
-                "line": "Posunutie čiary.",
-                "area": "Posunutie čiary.",
-                "multiple": "Posunutie viacerých objektov."
-            }
+                "point": "Presunutie bodu.",
+                "vertex": "Presunutie uzlu cesty.",
+                "line": "Presunutie čiary.",
+                "area": "Presunutie plochy.",
+                "multiple": "Presunutie viacerých objektov."
+            },
+            "incomplete_relation": "Tento objekt nemožno presunúť, pretože nebol úplne stiahnutý."
         },
         "rotate": {
             "title": "Otoč",
@@ -17576,6 +20248,7 @@ locale.sk = {
             "title": "Rozdeľ",
             "description": {
                 "line": "Rozdeľ čiaru v tomto uzle na dve.",
+                "area": "Rozdeľ ohraničenie tejto plochy na dve.",
                 "multiple": "Rozdeľ čiary/hranice plôch v tomto uzle na dve."
             },
             "key": "X",
@@ -17597,6 +20270,11 @@ locale.sk = {
     "logout": "odhlásiť",
     "loading_auth": "Pripájam na OpenStreetMap...",
     "report_a_bug": "nahlásiť chybu",
+    "status": {
+        "error": "Nepodarilo sa spojiť s API.",
+        "offline": "API je offline. Skúste upravovať neskôr.",
+        "readonly": "API je iba na čítanie. Budete musieť počkať, aby ste mohli uložiť vaše zmeny."
+    },
     "commit": {
         "title": "Ulož zmeny",
         "description_placeholder": "Stručný popis tvojho prispievania",
@@ -17623,7 +20301,7 @@ locale.sk = {
     },
     "inspector": {
         "no_documentation_combination": "Pre túto kombináciu označenia nie je dostupná dokumentácia",
-        "no_documentation_key": "Pre tento kľúč nie je dostupná dokumentácia",
+        "no_documentation_key": "Pre toto označenie nie je dostupná dokumentácia",
         "show_more": "Ukáž viac",
         "new_tag": "Nové označenie",
         "view_on_osm": "Zobraz na openstreetmap.org",
@@ -17632,13 +20310,14 @@ locale.sk = {
         "choose": "Zvoľ typ vlastnosti",
         "results": "{n} výsledkov pre {search}",
         "reference": "Zobraz na OpenStreetMap Wiki",
-        "back_tooltip": "Zmeň typ vlastnosti"
+        "back_tooltip": "Zmeň typ vlastnosti",
+        "remove": "Odstráň"
     },
     "background": {
         "title": "Pozadie",
         "description": "Nastavenia pozadia",
         "percent_brightness": "{opacity}% jas",
-        "fix_misalignment": "Oprav prekryv",
+        "fix_misalignment": "Oprav zarovnanie",
         "reset": "vynulovať"
     },
     "restore": {
@@ -17690,7 +20369,14 @@ locale.sk = {
     },
     "help": {
         "title": "Pomoc",
-        "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, budete potrebovať [OpenStreetMap účet](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/systemed/iD).\n"
+        "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, budete potrebovať [OpenStreetMap účet](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Upravovanie a ukladanie\n\nTento editor je navrhnutý na prácu primárne online, a práve teraz ho používate cez internetovú stránku.\n\n### Výber objektov\n\nPre výber objektu, ako napríklad cesta alebo bod záujmu, naň kliknite na mape. Týmto sa zvýrazní vybraný objekt, otvorí sa panel s jeho detailmi a zobrazí sa ponuka s vecami, ktoré môžete s objektom urobiť.\n\nViacero objektov je možné vybrať podržaním klávesu \"Shift\", kliknutím a potiahnutím na mape. Týmto budú vybrané všetky objekty vo vnútri nakresleného rámu, čo vám umožní robiť operácie s viacerými objektami naraz. \n\n### Ukladanie úprav\n\nKed urobíte zmeny ako úpravy ciest, budov a miest, tieto budú lokálne uložené, až pokiaľ ich neuložíte na server. Netrápte sa ak urobíte chybu. Zmeny môžete vrátit späť kliknutím na tlačítko späť a zopakovať kliknutím na tlačitko zopakovať.\n\nKeď chcete ukončit sériu úprav, kliknite na \"Uložiť\". Napríklad  ak ste dokončili časť mesta a chcete začať s inou časťou. Budete mať možnosť si prehliadnuť, čo ste urobili a editor poskytne užitočné návrhy a varovania ak niečo nie je so zmenami vporiadku.\n\nAk všetko vyzerá vporiadku, môžete vyplniť krátky komentár vysvetľujúci, čo ste urobili a kliknite znovu na \"Uložiť\" pre odoslanie zmien na [OpenStreetMap.org](http://www.openstreetmap.org/), kde sú viditeľné pre ostatných používateľov a dostupné pre vylepšenia od iných.\n\nAk nemôžete dokončiť úpravy počas jedného sedenia, môžete zatvoriť okno prehliadača, vrátiť sa späť (na rovnakom prehliadači a počítači) a editor vám ponúkne obnoviť vašu prácu.\n\n",
+        "roads": "# Cesty\n\nS týmto editorom môžete cesty vytvoriť, opraviť alebo vymazať. Cesty môžu byť rôzneho druhu: chodníky, diaľnice, lesné cestičky, cyklochodníky a iné. Akýkoľvek často prechádzaný úsek by malo byť možné zmapovať.\n\n### Výber\n\nKliknite na cestu pre jej výber. Viditeľným by sa mal stať jej obrys spolu s malou ponukou nástrojov na mape a postranným panelom, ukazujúcim dodatočné informácie o ceste.\n\n### Úprava\n\nČasto krát uvidíte cesty, ktoré nie sú zarovnané so snímkami pod nimi alebo s GPS stopu. Tieto cesty môžete upraviť tak, aby boli na správnom mieste.\n\nNajskôr kliknite na cestu, ktorú chcete zmeniť. Týmto sa zvýrazní a po jej dĺžke sa ukážu kontrolné body, ktoré môžete pretiahnuť na lepšiu pozíciu. Ak chcete pridať nový kontrolný bod pre viac detailov, dva krát kliknite na časť cesty bez uzla a jeden bude pridaný.\n\nAk sa cesta spája s inou cestou, ale nie je správne spojená na mape, môžete pretiahnuť jeden z jej kontrolných bodov na druhú cestu, aby ste ich spojili. Spojenie ciest je dôležité pre mapu a nevyhnutné pre poskytovanie navigácie na cestách.\n\nMôžete tiež kliknúť na nástroj \"Presuň\" alebo stlačiť kláves \"M\" pre posunutie celej cesty naraz a potom kliknite znovu, aby ste uložili presun.\n\n### Vymazávanie\n\nAk je cesta úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam cesta nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže cesta môže byť jednoducho novopostavená.\n\nCestu môžete vymazať, tak že na ňu kliknete čim ju vyberiete  a potom kliknete na ikonu smetného koša alebo stlačením klávesu \"Delete\".\n\n### Vytváranie\n\nZistili ste, že niekde by mala byť cesta ale ona tam nie je? Kliknite naľavo hore na ikonu \"Čiara\" alebo stlačte kláves \"2\" pre kreslenie čiary.\n\nAby ste začali kresliť, kliknite na začiatok cesty na mape. Ak cesta odbočuje z inej existujúcej cesty, začnite kliknútím na miesto, kde sa spájajú.\n\nPotom kliknite na body pozdĺž cesty tak, aby nasledovali správny smer podľa satelitných snímkov alebo GPS. Ak cesta, ktorú kreslíte, pretína ďalšiu cestu, spojte ich kliknutím v mieste križovatky. Keď ste hotový s skreslením, dva krát kliknite alebo stlačte kláves \"Enter\" na vašej klávesnici.\n",
+        "gps": "# GPS\nGPS údaje sú najviac dôveryhodný zdroj dát pre OpenStreetMap. Tento editor podporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp môžete zachytiť pomocou rôznych aplikácií pre múdre telefóny ako aj GPS prístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby ste použili GPX trasu pre mapovanie, pretiahnite a pustite GPX súbor na mapový editor. Ak je rozpoznaný, bude pridaný na mapu ako jasná zelená čiara. Kliknite na ponuku \"Nastavenia pozadia\" na ľavej strane pre zapnutie, vypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX trasa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako ju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov.\n",
+        "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vľavo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
+        "addresses": "# Adresy\n\nAdresy sú niekedy tou najužitočnejšou informáciou na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam na mape ako obrysy budov ale tiež ku tým, ktoré boli zmapované ako samostatný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
+        "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na pravej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho políčka.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n\n### Zatvorenie inšpektora\n\nInšpektora môžete zatvoriť kliknutím na tlačitko pre zatvorenie vpravo hore, stlačením klávesu \"Escape\" alebo kliknutím na mapu.\n",
+        "buildings": "# Budovy\n\nOpenStreetMap je najväčšia databáza budov na svete. Práve vy ju môžete tvoriť a vylepšovať.\n\n### Výber\n\nBudovu môžete vybrať kliknutím na jej hranicu. Týmto sa budova zvýrazní a otvorí sa malá ponuka nástrojov a postranný panel, ukazujúcim dodatočné informácie o budove.\n\n### Úprava\n\nNiekedy môžu byť budovy chybne umiestnené alebo mať nesprávne označenia.\n\nPre presun celej budovy ju vyberte, a potom kliknite na nástroj \"Presunúť\". Posuňte vašu myš, aby ste posunuli budovu a kliknite, keď je umiestnená správne.\n\nPre opravu tvaru budovy, kliknite a ťahajte za uzly, ktoré tvoria jej ohraničenie, na lepšie miesto.\n\n### Vytváranie\n\nJeden z hlavných problémov okolo pridávania budov je, že OpenStreetMap zaznamenáva budovy ako útvary aj ako body. Nepísaným pravidlom je mapovať budovy vo forme útvaru vždy, keď je to možné a mapovať firmy, domovy, služby občianskej vybavenosti a ďalšie subjekty, ktoré v budove pôsobia ako body umiestnené vo vnútri útvaru budovy.\n\nZačnite kresliť budovu ako útvar, klinutím na tlačítko \"Plocha\" vľavo hore a ukončite ju buď stlačením \"Enter\" na vašej klávesnici alebo kliknutím na prvý uzol, ktorý ste zakreslili, čím uzavriete útvar.\n\n### Vymazávanie\n\nAk je budova úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže budova môže byť jednoducho novopostavená.\n"
     },
     "intro": {
         "navigation": {
@@ -17703,16 +20389,92 @@ locale.sk = {
             "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo tam je. **Kliknite na tlačidlo Bod a pridajte nový bod.**",
             "place": "Bod môžete umiestniť kliknutím na mapu. **Umiestnite bod na vrch budovy.**",
             "search": "Bod môže znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"Kaviareň\"**",
-            "choose": "**Vyberte Kaviareň z ponuky.**"
+            "choose": "**Vyberte Kaviareň z ponuky.**",
+            "describe": "Bod je teraz označený ako kaviareň. S použitím editora objektu môžeme pridať viac informácií o objekte. **Pridajte meno**",
+            "close": "Editor objektu sa zatvára pomocou zatváracieho tlačítka. **Zatvorte editor objektu**",
+            "reselect": "Často krát už body existujú, ale obsahujú chyby alebo nekompletné informácie. Existujúce body môžeme upravovať. **Zvoľte bod, ktorý ste práve vytvorili.**",
+            "fixname": "**Zmeňte meno a zavrite editor objektu.**",
+            "reselect_delete": "Všetky objekty na mape môžu byť vymazané. **Kliknite na bod, ktorý ste vytvorili.**",
+            "delete": "Ponuka okolo bodu obsahuje operácie, ktoré s ním môžete uskutočniť, vrátane vymazania. **Vymažte bod.**"
+        },
+        "areas": {
+            "add": "Plochy sú detailnejší spôsob ako znázorniť objekty. Poskytujú informácie o hraniciach objektu. Plochy môžu byť použité pre väčšinu typov objektu, pre ktoré používame body a sú často krát uprednostňované. **Kliknite na tlačítko Plocha a pridajte novú plochu.**",
+            "corner": "Plochy sú zakreslované umiestňovaním uzlov, ktoré označujú hranicu plochy. **Umiestnite počiatočný uzol na jeden z rohov ihriska.**",
+            "place": "Nakreslite plochu umiestnením ďalších uzlov. Dokončite plochu kliknutím na počiatočný uzol. **Nakreslite plochu pre ihrisko.**",
+            "search": "**Vyhľadajte Ihrisko.**",
+            "choose": "**Vyberte Ihrisko z ponuky.**",
+            "describe": "**Vyplňte meno a zatvorte editor objektu**"
+        },
+        "lines": {
+            "add": "Čiary sú používané na znázorňovanie objektov ako cesty, železnice a rieky. **Kliknite na tlačítko Čiara a pridajte novú čiaru.**",
+            "start": "**Začnite kresliť čiaru kliknutím na koniec cesty.**",
+            "intersect": "Kliknite pre pridanie ďalších uzlov ku čiare. Ak je to nutné, potiahnite za mapu pre posun. Cesty a mnoho ďalších typov čiar sú súčasťou veľkej siete. Aby aplikácie pre navigáciu pracovali správne, je dôležité, aby boli tieto čiary správne prepojené. **Kliknite na ulicu Flower Street a vytvorte tak križovatku spájajúcu obe čiary.**",
+            "finish": "Čiary sa dajú ukončiť opätovným kliknutím na posledný uzol. **Dokončite kreslenie cesty.**",
+            "road": "**Vyberte Cestu z ponuky**",
+            "residential": "Poznáme cesty rôznych typov. Najviac častý z nich je Obytná cesta. **Vyberte typ: Obytná cesta**",
+            "describe": "**Pomenujte cestu a zatvorte editor objektu.**",
+            "restart": "Cesta musí pretínať ulicu Flower Street."
         },
         "startediting": {
+            "help": "Ďalšia dokumentácia a táto prehliadka sú dostupné tu.",
+            "save": "Nezabudnite pravidelne ukladať vaše zmeny!",
             "start": "Začnite mapovať!"
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Využitie krajiny"
+            },
+            "category-path": {
+                "name": "Chodník"
+            },
+            "category-rail": {
+                "name": "Železnica"
+            },
+            "category-road": {
+                "name": "Cesta"
+            },
+            "category-water": {
+                "name": "Vodná plocha"
+            }
+        },
         "fields": {
             "access": {
-                "label": "Prístup"
+                "label": "Prístup",
+                "types": {
+                    "access": "Všeobecné",
+                    "foot": "Chodci",
+                    "motor_vehicle": "Motorové vozidlá",
+                    "bicycle": "Bicykle",
+                    "horse": "Kone"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Povolené",
+                        "description": "Vstup povolený zo zákona"
+                    },
+                    "no": {
+                        "title": "Zakázané",
+                        "description": "Verejnosti vstup zakázaný"
+                    },
+                    "permissive": {
+                        "title": "Povolený",
+                        "description": "Vstup povolený pokiaľ majiteľ povolenie neodvolá"
+                    },
+                    "private": {
+                        "title": "Súkromné",
+                        "description": "Vstup možný iba s povolením vlastníka na individuálnom základe"
+                    },
+                    "designated": {
+                        "title": "Vyznačené",
+                        "description": "Povolenie vstupu je riadené dopravnými značkami alebo miestnymi zákonmi"
+                    },
+                    "destination": {
+                        "title": "Prejazd zakázaný",
+                        "description": "Vstup povolený iba dosiahnutie cieľa"
+                    }
+                }
             },
             "address": {
                 "label": "Adresa",
@@ -17723,6 +20485,9 @@ locale.sk = {
                     "city": "Mesto"
                 }
             },
+            "admin_level": {
+                "label": "Administratívna úroveň"
+            },
             "aeroway": {
                 "label": "Typ"
             },
@@ -17731,6 +20496,9 @@ locale.sk = {
             },
             "atm": {
                 "label": "Bankomat"
+            },
+            "barrier": {
+                "label": "Typ"
             },
             "bicycle_parking": {
                 "label": "Typ"
@@ -17747,11 +20515,24 @@ locale.sk = {
             "capacity": {
                 "label": "Kapacita"
             },
+            "cardinal_direction": {
+                "label": "Smer"
+            },
+            "clock_direction": {
+                "label": "Smer",
+                "options": {
+                    "clockwise": "V smere hodinových ručičiek",
+                    "anticlockwise": "Proti smeru hodinových ručičiek"
+                }
+            },
             "collection_times": {
                 "label": "Časy výberov"
             },
             "construction": {
                 "label": "Typ"
+            },
+            "country": {
+                "label": "štát"
             },
             "crossing": {
                 "label": "Typ"
@@ -17762,11 +20543,17 @@ locale.sk = {
             "denomination": {
                 "label": "Vierovyznanie"
             },
+            "denotation": {
+                "label": "Označenie"
+            },
             "elevation": {
                 "label": "Nadmorská výška"
             },
             "emergency": {
                 "label": "Záchranná služba"
+            },
+            "entrance": {
+                "label": "Typ"
             },
             "fax": {
                 "label": "Fax"
@@ -17791,6 +20578,9 @@ locale.sk = {
             "landuse": {
                 "label": "Typ"
             },
+            "lanes": {
+                "label": "Pruhov"
+            },
             "layer": {
                 "label": "Vrstva"
             },
@@ -17806,8 +20596,38 @@ locale.sk = {
             "maxspeed": {
                 "label": "Povolená rýchlosť"
             },
+            "name": {
+                "label": "Názov"
+            },
+            "natural": {
+                "label": "Prírodný"
+            },
+            "network": {
+                "label": "Sieť"
+            },
+            "note": {
+                "label": "Poznámka"
+            },
+            "office": {
+                "label": "Typ"
+            },
+            "oneway": {
+                "label": "Jednosmerná"
+            },
+            "oneway_yes": {
+                "label": "Jednosmerná"
+            },
+            "opening_hours": {
+                "label": "Hodiny"
+            },
             "operator": {
                 "label": "Operátor"
+            },
+            "park_ride": {
+                "label": "Odstavné parkovisko"
+            },
+            "parking": {
+                "label": "Typ"
             },
             "phone": {
                 "label": "Telefón"
@@ -17815,11 +20635,2194 @@ locale.sk = {
             "place": {
                 "label": "Typ"
             },
+            "power": {
+                "label": "Typ"
+            },
             "railway": {
                 "label": "Typ"
             },
+            "ref": {
+                "label": "Referenčné čislo"
+            },
             "religion": {
-                "label": "Náboženstvo"
+                "label": "Náboženstvo",
+                "options": {
+                    "christian": "Kresťanstvo",
+                    "muslim": "Islam",
+                    "buddhist": "Budhizmus",
+                    "jewish": "Židovské",
+                    "hindu": "Hinduistické",
+                    "shinto": "Šintuizmus",
+                    "taoist": "Taoizmus"
+                }
+            },
+            "service": {
+                "label": "Typ"
+            },
+            "shelter": {
+                "label": "Prístrešok"
+            },
+            "shop": {
+                "label": "Typ"
+            },
+            "source": {
+                "label": "Zroj"
+            },
+            "sport": {
+                "label": "Šport"
+            },
+            "structure": {
+                "label": "Štruktúra",
+                "options": {
+                    "bridge": "Most",
+                    "tunnel": "Tunel",
+                    "embankment": "Násyp",
+                    "cutting": "Výkop"
+                }
+            },
+            "supervised": {
+                "label": "Pod dohľadom"
+            },
+            "surface": {
+                "label": "Povrch"
+            },
+            "tourism": {
+                "label": "Typ"
+            },
+            "tracktype": {
+                "label": "Typ"
+            },
+            "water": {
+                "label": "Typ"
+            },
+            "waterway": {
+                "label": "Typ"
+            },
+            "website": {
+                "label": "Internetová stránka"
+            },
+            "wetland": {
+                "label": "Typ"
+            },
+            "wheelchair": {
+                "label": "Prístup pre vozičkárov"
+            },
+            "wikipedia": {
+                "label": "Wikipédia"
+            },
+            "wood": {
+                "label": "Typ"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Letectvo"
+            },
+            "aeroway/aerodrome": {
+                "name": "Letisko",
+                "terms": "lietadlo,letisko,letisková plocha"
+            },
+            "aeroway/helipad": {
+                "name": "Heliport",
+                "terms": "vrtuľník,helikoptéra,pristávacia plocha pre helikoptéry,heliport"
+            },
+            "amenity": {
+                "name": "Občianska vybavenosť"
+            },
+            "amenity/bank": {
+                "name": "Banka",
+                "terms": "pokladne,pobočka,kreditná únia,depozitár,pokladnica,fondy,investícia,firma,rezerva,zásoba,akcie,trezor"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Lavička"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Stojan pre bicykle"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Prenájom bicyklov"
+            },
+            "amenity/cafe": {
+                "name": "Kaviareň",
+                "terms": "káva,čaj,pražiareň kávy"
+            },
+            "amenity/cinema": {
+                "name": "Kino",
+                "terms": "veľké plátno,film,pohyblivé obrázky,filmový dom,filmové divadlo,najbližšie kino,premietanie,multiplex"
+            },
+            "amenity/courthouse": {
+                "name": "Súd"
+            },
+            "amenity/embassy": {
+                "name": "Ambasáda/Veľvyslanectvo"
+            },
+            "amenity/fast_food": {
+                "name": "Rýchle občerstvenie"
+            },
+            "amenity/fire_station": {
+                "name": "Požiarna stanica"
+            },
+            "amenity/fuel": {
+                "name": "Čerpacia stanica"
+            },
+            "amenity/grave_yard": {
+                "name": "Pohrebisko"
+            },
+            "amenity/hospital": {
+                "name": "Nemocnica",
+                "terms": "klinika,poliklinika,nemocnica s poliklinikou,záchranná služba,záchranka,prvá pomoc,pohotovosť,sanatórium,doliečovacie centrum,operácia,krídlo,oddelenie"
+            },
+            "amenity/library": {
+                "name": "Knižnica"
+            },
+            "amenity/marketplace": {
+                "name": "Tržnica/Trhovisko"
+            },
+            "amenity/parking": {
+                "name": "Parkovisko"
+            },
+            "amenity/pharmacy": {
+                "name": "Lekáreň"
+            },
+            "amenity/place_of_worship": {
+                "name": "Náboženské miesto",
+                "terms": "kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,mešita,minaret,synagóga,dóm,svätostánok, oratórium,fara,diecéza,stupa"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Kostol",
+                "terms": "kresťanský,kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,dóm,svätostánok, oratórium,fara,diecéza"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Synagóga",
+                "terms": "Židovský,synagóga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mešita",
+                "terms": "moslimský,mešita"
+            },
+            "amenity/police": {
+                "name": "Polícia",
+                "terms": "polícia,mestská polícia,verejná bezpečnosť,fízli,poliši,zákon"
+            },
+            "amenity/post_box": {
+                "name": "Poštová schránka",
+                "terms": "schránka,list,zásielka,výber zásielok"
+            },
+            "amenity/post_office": {
+                "name": "Pošta"
+            },
+            "amenity/pub": {
+                "name": "Krčma"
+            },
+            "amenity/restaurant": {
+                "name": "Reštaurácia",
+                "terms": "bar,kafetéria,kantýna,jedáleň,pizzeria,jedlo,rýchloobčerstvenie,fastfood,večera,reštaurácia,reštika,jedenie"
+            },
+            "amenity/school": {
+                "name": "Škola",
+                "terms": "akadémia,alma mater,vysoká škola,oddelenie,fakulta,katedra,prednáška,prednášková sála"
+            },
+            "amenity/swimming_pool": {
+                "name": "Plaváreň/Kúpalisko"
+            },
+            "amenity/telephone": {
+                "name": "Telefón"
+            },
+            "amenity/theatre": {
+                "name": "Divadlo",
+                "terms": "divadlo,predstavenie,muzikál,hra,scéna"
+            },
+            "amenity/toilets": {
+                "name": "Toalety"
+            },
+            "amenity/townhall": {
+                "name": "Mestský úrad/Radnica",
+                "terms": "radnica,obecný úrad,mestský úrad,správa"
+            },
+            "amenity/university": {
+                "name": "Univerzita"
+            },
+            "barrier": {
+                "name": "Bariera"
+            },
+            "barrier/block": {
+                "name": "Betónový blok"
+            },
+            "barrier/bollard": {
+                "name": "Stĺpik"
+            },
+            "barrier/cattle_grid": {
+                "name": "Mreža proti pohybu dobytka"
+            },
+            "barrier/city_wall": {
+                "name": "Mestské opevnenie"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Zábrana pre cyklistov"
+            },
+            "barrier/ditch": {
+                "name": "Priekopa"
+            },
+            "barrier/entrance": {
+                "name": "Vstup"
+            },
+            "barrier/fence": {
+                "name": "Plot"
+            },
+            "barrier/gate": {
+                "name": "Brána"
+            },
+            "barrier/hedge": {
+                "name": "Živý plot"
+            },
+            "barrier/kissing_gate": {
+                "name": "Zábrana pre dobytok"
+            },
+            "barrier/lift_gate": {
+                "name": "Rampa"
+            },
+            "barrier/retaining_wall": {
+                "name": "Rampa"
+            },
+            "barrier/stile": {
+                "name": "Prielez"
+            },
+            "barrier/toll_booth": {
+                "name": "Búdka pre výber mýta"
+            },
+            "barrier/wall": {
+                "name": "Múr"
+            },
+            "boundary/administrative": {
+                "name": "Hranica administratívneho územia"
+            },
+            "building": {
+                "name": "Budova"
+            },
+            "building/apartments": {
+                "name": "Bytovka/Obytná budova"
+            },
+            "building/entrance": {
+                "name": "Vstup"
+            },
+            "building/house": {
+                "name": "Dom"
+            },
+            "entrance": {
+                "name": "Vstup"
+            },
+            "highway": {
+                "name": "Cesta"
+            },
+            "highway/bridleway": {
+                "name": "Jazdecká trať",
+                "terms": "jazdecká cesta, chodník pre kone,jazdecká trasa"
+            },
+            "highway/bus_stop": {
+                "name": "Autobusová zastávka"
+            },
+            "highway/crossing": {
+                "name": "Prechod pre chodcov",
+                "terms": "Prechod pre chodcov,zebra"
+            },
+            "highway/cycleway": {
+                "name": "Cestička pre cyklistov"
+            },
+            "highway/footway": {
+                "name": "Cestička pre chodcov",
+                "terms": "cesta,cestička,chodník,turistický chodník,horská cesta,chodníček,cesta pre peších"
+            },
+            "highway/living_street": {
+                "name": "Obytná zóna"
+            },
+            "highway/mini_roundabout": {
+                "name": "Malý kruhový objazd"
+            },
+            "highway/motorway": {
+                "name": "Diaľnica"
+            },
+            "highway/motorway_junction": {
+                "name": "Diaľničná križovatka"
+            },
+            "highway/motorway_link": {
+                "name": "Diaľničný privádzač",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
+            },
+            "highway/path": {
+                "name": "Cestička"
+            },
+            "highway/pedestrian": {
+                "name": "Pešia zóna"
+            },
+            "highway/primary": {
+                "name": "Cesta 1. triedy"
+            },
+            "highway/primary_link": {
+                "name": "Privádzač na cestu 1. triedy",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
+            },
+            "highway/residential": {
+                "name": "Obytná ulica"
+            },
+            "highway/road": {
+                "name": "Cesta bez označenia"
+            },
+            "highway/secondary": {
+                "name": "Cesta 2. triedy"
+            },
+            "highway/secondary_link": {
+                "name": "Privádzač na cestu 2. triedy",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
+            },
+            "highway/service": {
+                "name": "Servisná cesta"
+            },
+            "highway/steps": {
+                "name": "Schody",
+                "terms": "schody,schodisko"
+            },
+            "highway/tertiary": {
+                "name": "Cesta 3. triedy"
+            },
+            "highway/tertiary_link": {
+                "name": "Privádzač na cestu 3. triedy",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
+            },
+            "highway/track": {
+                "name": "Lesná cesta"
+            },
+            "highway/traffic_signals": {
+                "name": "Semafory",
+                "terms": "semafor,svetelná križovatka,svetelné dopravné značenie"
+            },
+            "highway/trunk": {
+                "name": "Rýchlostná cesta"
+            },
+            "highway/trunk_link": {
+                "name": "Privádzač rýchlostnej cesty",
+                "terms": "zjazd,výjazd,nájazd,pripojovací pruh"
+            },
+            "highway/turning_circle": {
+                "name": "Otáčací kruh"
+            },
+            "highway/unclassified": {
+                "name": "Neklasifikovaná cesta"
+            },
+            "historic": {
+                "name": "Historické miesto"
+            },
+            "historic/archaeological_site": {
+                "name": "Archeologické nálezisko"
+            },
+            "historic/boundary_stone": {
+                "name": "Hraničný kameň"
+            },
+            "historic/castle": {
+                "name": "Hrad"
+            },
+            "historic/memorial": {
+                "name": "Pamätihodnosť"
+            },
+            "historic/monument": {
+                "name": "Pamätihodnosť"
+            },
+            "historic/ruins": {
+                "name": "Ruiny"
+            },
+            "historic/wayside_cross": {
+                "name": "Kresťanský kríž pri ceste"
+            },
+            "historic/wayside_shrine": {
+                "name": "Prícestný svätostánok"
+            },
+            "landuse": {
+                "name": "Využitie územia"
+            },
+            "landuse/allotments": {
+                "name": "Záhradkárska osada"
+            },
+            "landuse/basin": {
+                "name": "Zadržiavacia nádrž"
+            },
+            "landuse/cemetery": {
+                "name": "Cintorín"
+            },
+            "landuse/commercial": {
+                "name": "Obchodné"
+            },
+            "landuse/construction": {
+                "name": "Stavenisko"
+            },
+            "landuse/farm": {
+                "name": "Pestovateľská plocha"
+            },
+            "landuse/farmyard": {
+                "name": "Farma"
+            },
+            "landuse/forest": {
+                "name": "Les"
+            },
+            "landuse/grass": {
+                "name": "Tráva"
+            },
+            "landuse/industrial": {
+                "name": "Priemyselné"
+            },
+            "landuse/meadow": {
+                "name": "Lúka"
+            },
+            "landuse/orchard": {
+                "name": "Sad"
+            },
+            "landuse/quarry": {
+                "name": "Kameňolom"
+            },
+            "landuse/residential": {
+                "name": "Obytné"
+            },
+            "landuse/retail": {
+                "name": "Maloobchod"
+            },
+            "landuse/vineyard": {
+                "name": "Vinica"
+            },
+            "leisure": {
+                "name": "Oddych"
+            },
+            "leisure/garden": {
+                "name": "Záhrada"
+            },
+            "leisure/golf_course": {
+                "name": "Golfové ihrisko"
+            },
+            "leisure/marina": {
+                "name": "Lodenica"
+            },
+            "leisure/park": {
+                "name": "Park",
+                "terms": "park,záhrada,trávnik,tráva,les,lesopark,lúka,ihrisko,hora,les,oddych,oddychová zóna"
+            },
+            "leisure/pitch": {
+                "name": "Športový kurt"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Ihrisko pre americký futbal"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Basebalové ihrisko"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Basketbalové ihrisko"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Futbalové ihrisko"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Tenisový kurt"
+            },
+            "leisure/playground": {
+                "name": "Ihrisko pre deti"
+            },
+            "leisure/slipway": {
+                "name": "Spúšťanie lodí"
+            },
+            "leisure/stadium": {
+                "name": "Štadión"
+            },
+            "leisure/swimming_pool": {
+                "name": "Plaváreň/Kúpalisko"
+            },
+            "man_made": {
+                "name": "Výtvor ľudskej činnosti"
+            },
+            "man_made/lighthouse": {
+                "name": "Maják"
+            },
+            "man_made/pier": {
+                "name": "Mólo"
+            },
+            "man_made/survey_point": {
+                "name": "Triangulačný bod"
+            },
+            "man_made/wastewater_plant": {
+                "name": "Čistička odpadových vôd",
+                "terms": "čistička,čistička odpadových vôd,úprava vody"
+            },
+            "man_made/water_tower": {
+                "name": "Veža s vodojemom"
+            },
+            "man_made/water_works": {
+                "name": "Vodojem"
+            },
+            "natural": {
+                "name": "Prírodné"
+            },
+            "natural/bay": {
+                "name": "Zátoka"
+            },
+            "natural/beach": {
+                "name": "Pláž"
+            },
+            "natural/cliff": {
+                "name": "Útes"
+            },
+            "natural/coastline": {
+                "name": "Pobrežie",
+                "terms": "pobrežie"
+            },
+            "natural/glacier": {
+                "name": "Ľadovec"
+            },
+            "natural/grassland": {
+                "name": "Trávnaté porasty"
+            },
+            "natural/heath": {
+                "name": "Vresovisko"
+            },
+            "natural/peak": {
+                "name": "Vrchol",
+                "terms": "vrch,vrchol,štít,kopec,hora,horský chrbát,summit"
+            },
+            "natural/scrub": {
+                "name": "kosodrevina"
+            },
+            "natural/spring": {
+                "name": "Prameň"
+            },
+            "natural/tree": {
+                "name": "Strom"
+            },
+            "natural/water": {
+                "name": "Voda"
+            },
+            "natural/water/lake": {
+                "name": "Jazero",
+                "terms": "jazero,loch,pleso"
+            },
+            "natural/water/pond": {
+                "name": "Rybník",
+                "terms": "rybník,kúpalisko"
+            },
+            "natural/water/reservoir": {
+                "name": "Nádrž"
+            },
+            "natural/wetland": {
+                "name": "Mokrina"
+            },
+            "natural/wood": {
+                "name": "Prales/Prirodzený les"
+            },
+            "office": {
+                "name": "Úrad"
+            },
+            "other": {
+                "name": "Iné"
+            },
+            "other_area": {
+                "name": "Iné"
+            },
+            "place": {
+                "name": "Obec"
+            },
+            "place/city": {
+                "name": "Veľkomesto"
+            },
+            "place/hamlet": {
+                "name": "Osada"
+            },
+            "place/island": {
+                "name": "Ostrov",
+                "terms": "ostrov,atol,útes,ostrovček,archipelágo"
+            },
+            "place/isolated_dwelling": {
+                "name": "Samota"
+            },
+            "place/locality": {
+                "name": "Lokalita"
+            },
+            "place/town": {
+                "name": "Mesto"
+            },
+            "place/village": {
+                "name": "Dedina"
+            },
+            "power": {
+                "name": "Elektrická energia"
+            },
+            "power/generator": {
+                "name": "Elektráreň"
+            },
+            "power/line": {
+                "name": "Elektrické vedenie"
+            },
+            "power/pole": {
+                "name": "Stĺp elektrického vedenia"
+            },
+            "power/sub_station": {
+                "name": "Rozvodná stanica"
+            },
+            "power/tower": {
+                "name": "Veža vysokého napätia"
+            },
+            "power/transformer": {
+                "name": "Transformátor"
+            },
+            "railway": {
+                "name": "Železnica"
+            },
+            "railway/abandoned": {
+                "name": "Nepoužívaná trať"
+            },
+            "railway/disused": {
+                "name": "Železnica mimo prevádzky"
+            },
+            "railway/level_crossing": {
+                "name": "Železničné priecestie",
+                "terms": "priecestie,železničné priecestie,cesta cez železnicu,závory,cesta cez trať,kríženie"
+            },
+            "railway/monorail": {
+                "name": "Jednokoľajnicová dráha"
+            },
+            "railway/platform": {
+                "name": "Železničné nástupište"
+            },
+            "railway/rail": {
+                "name": "Železničná trať"
+            },
+            "railway/station": {
+                "name": "Železničná stanica"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Vstup do metra"
+            },
+            "railway/tram": {
+                "name": "Električka",
+                "terms": "električka"
+            },
+            "shop": {
+                "name": "Obchod"
+            },
+            "shop/alcohol": {
+                "name": "Obchod s alkoholom"
+            },
+            "shop/bakery": {
+                "name": "Pekáreň"
+            },
+            "shop/beauty": {
+                "name": "Bižutéria"
+            },
+            "shop/beverages": {
+                "name": "Obchod s nápojmi"
+            },
+            "shop/bicycle": {
+                "name": "Cykloobchod"
+            },
+            "shop/books": {
+                "name": "Knihkupectvo"
+            },
+            "shop/boutique": {
+                "name": "Butik"
+            },
+            "shop/butcher": {
+                "name": "Mäsiarstvo"
+            },
+            "shop/car": {
+                "name": "Predajňa áut"
+            },
+            "shop/car_parts": {
+                "name": "Predajňa autodielov"
+            },
+            "shop/car_repair": {
+                "name": "Autoservis"
+            },
+            "shop/chemist": {
+                "name": "Drogéria"
+            },
+            "shop/clothes": {
+                "name": "Obchod s odevami"
+            },
+            "shop/computer": {
+                "name": "Obchod s výpočtovou technikou"
+            },
+            "shop/confectionery": {
+                "name": "Cukráreň"
+            },
+            "shop/convenience": {
+                "name": "Samoobsluha"
+            },
+            "shop/deli": {
+                "name": "Delikatesy"
+            },
+            "shop/department_store": {
+                "name": "Obchodný dom"
+            },
+            "shop/doityourself": {
+                "name": "Obchod pre kutilov"
+            },
+            "shop/dry_cleaning": {
+                "name": "Čistenie odevov za sucha"
+            },
+            "shop/electronics": {
+                "name": "Elektro obchod"
+            },
+            "shop/fishmonger": {
+                "name": "Predaj rýb"
+            },
+            "shop/florist": {
+                "name": "Kvetinárstvo"
+            },
+            "shop/furniture": {
+                "name": "Obchod s nábytkom"
+            },
+            "shop/garden_centre": {
+                "name": "Záhradné centrum"
+            },
+            "shop/gift": {
+                "name": "Darčekový obchod"
+            },
+            "shop/greengrocer": {
+                "name": "Predajňa zeleniny"
+            },
+            "shop/hairdresser": {
+                "name": "Kaderník"
+            },
+            "shop/hardware": {
+                "name": "Železiarstvo"
+            },
+            "shop/hifi": {
+                "name": "Obchod so zvukovými systémami"
+            },
+            "shop/jewelry": {
+                "name": "Zlatníctvo"
+            },
+            "shop/kiosk": {
+                "name": "Stánok"
+            },
+            "shop/laundry": {
+                "name": "Čistiareň odevov/Práčovňa"
+            },
+            "shop/mall": {
+                "name": "Nákupné centrum"
+            },
+            "shop/mobile_phone": {
+                "name": "Obchod s mobilnými telefónmi"
+            },
+            "shop/motorcycle": {
+                "name": "Predajňa motocyklov"
+            },
+            "shop/music": {
+                "name": "Obchod s hudbou"
+            },
+            "shop/newsagent": {
+                "name": "Trafika"
+            },
+            "shop/optician": {
+                "name": "Optika"
+            },
+            "shop/outdoor": {
+                "name": "Outdoorový obchod"
+            },
+            "shop/pet": {
+                "name": "Chovprodukt"
+            },
+            "shop/shoes": {
+                "name": "Obchod s obuvov"
+            },
+            "shop/sports": {
+                "name": "Obchod so športovými potrebami"
+            },
+            "shop/stationery": {
+                "name": "Papierníctvo"
+            },
+            "shop/supermarket": {
+                "name": "Supermarket",
+                "terms": "nákup,samoška,supermarket,potraviny,tesco,jednota,"
+            },
+            "shop/toys": {
+                "name": "Hračkárstvo"
+            },
+            "shop/travel_agency": {
+                "name": "Cestovná agentúra"
+            },
+            "shop/tyres": {
+                "name": "Predajňa pneumatík"
+            },
+            "shop/vacant": {
+                "name": "Prázdny obchod"
+            },
+            "shop/variety_store": {
+                "name": "Obchod so zmiešaným tovarom"
+            },
+            "shop/video": {
+                "name": "Videopožičovňa"
+            },
+            "tourism": {
+                "name": "Turizmus"
+            },
+            "tourism/alpine_hut": {
+                "name": "Vysokohorská chata"
+            },
+            "tourism/artwork": {
+                "name": "Umelecké dielo"
+            },
+            "tourism/attraction": {
+                "name": "Turistická atrakcia"
+            },
+            "tourism/camp_site": {
+                "name": "Kemping/Táborisko"
+            },
+            "tourism/caravan_site": {
+                "name": "Parkovisko pre karavany"
+            },
+            "tourism/chalet": {
+                "name": "Chata"
+            },
+            "tourism/guest_house": {
+                "name": "Penzión",
+                "terms": "ubytovňa,penzión,hotel,ubytovanie,nocľah"
+            },
+            "tourism/hostel": {
+                "name": "Hostel"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Informácie"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Múzeum",
+                "terms": "výstava,výstavisko,galéria,zbierka,archív"
+            },
+            "tourism/picnic_site": {
+                "name": "Miesto pre piknik"
+            },
+            "tourism/theme_park": {
+                "name": "Zábavný park"
+            },
+            "tourism/viewpoint": {
+                "name": "Vyhliadka"
+            },
+            "tourism/zoo": {
+                "name": "Zoo"
+            },
+            "waterway": {
+                "name": "Vodná cesta"
+            },
+            "waterway/canal": {
+                "name": "Kanál"
+            },
+            "waterway/dam": {
+                "name": "Priehrada"
+            },
+            "waterway/ditch": {
+                "name": "Priekopa"
+            },
+            "waterway/drain": {
+                "name": "Odvodňovací kanál"
+            },
+            "waterway/river": {
+                "name": "Rieka",
+                "terms": "rieka,tok,voda,potok,rameno,sútok,riečka,delta,koryto"
+            },
+            "waterway/riverbank": {
+                "name": "Breh rieky"
+            },
+            "waterway/stream": {
+                "name": "Potok",
+                "terms": "potok,potôčik,bystrina,riečka,kanál"
+            },
+            "waterway/weir": {
+                "name": "Hrádza/Hať"
+            }
+        }
+    }
+};
+/*
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    THIS FILE IS GENERATED BY `make translations`. Don't make changes to it.
+
+    Instead, edit the English strings in data/core.yaml, or contribute
+    translations on https://www.transifex.com/projects/p/id-editor/.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+locale.sr = {
+    "modes": {
+        "add_area": {
+            "title": "Област",
+            "description": "Додајте паркове, зграде, језера или друге области на карту.",
+            "tail": "Кликните на карту како бисте почели да исцртавате област као што су парк, језеро или зграда."
+        },
+        "add_line": {
+            "title": "Путања",
+            "description": "Додајте ауто-путеве, улице, пешачке стазе, канале или друге путање на карту.",
+            "tail": "Кликните на карту како бисте почели да исцртавате пут, стазу или путању."
+        },
+        "add_point": {
+            "title": "Чвор",
+            "description": "Додајте ресторане, споменике, поштанске сандучиће или друге чворове на карту.",
+            "tail": "Кликните на карту како бисте додали чвор."
+        },
+        "browse": {
+            "title": "Преглед",
+            "description": "Померајте и увећајте карту."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Додат чвор.",
+                "vertex": "Додат чвор на путању."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Започета путања.",
+                "area": "Започета област."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Настављена путања.",
+                "area": "Настављена област."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Отказано цртање."
+        },
+        "change_tags": {
+            "annotation": "Измењене ознаке."
+        },
+        "circularize": {
+            "title": "Заокружи",
+            "description": {
+                "line": "Учините путању кружном.",
+                "area": "Учините област кружном."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Учините путању кружном.",
+                "area": "Учините област кружном."
+            },
+            "not_closed": "Ово се не може заокружити, јер то није петља."
+        },
+        "orthogonalize": {
+            "title": "Нормализуј",
+            "description": "Исправите ове углове.",
+            "key": "Q",
+            "annotation": {
+                "line": "Исправљени углови путање.",
+                "area": "Исправљени углови области."
+            }
+        },
+        "delete": {
+            "title": "Обриши",
+            "description": "Уклони ово са карте.",
+            "annotation": {
+                "point": "Обрисан чвор.",
+                "vertex": "Обрисан чвор са путање.",
+                "line": "Обрисана путања.",
+                "area": "Обрисана област.",
+                "relation": "Обрисан однос.",
+                "multiple": "Обрисано {n} објеката."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Повезана путања са чвором.",
+                "vertex": "Повезана путања са другом путањом.",
+                "line": "Повезана путања са путањом.",
+                "area": "Повезана путања са облашћу."
+            }
+        },
+        "disconnect": {
+            "title": "Прекини везу",
+            "key": "D"
+        },
+        "merge": {
+            "title": "Споји",
+            "description": "Спојите ове путање.",
+            "key": "C",
+            "annotation": "Спојено {n} путања."
+        },
+        "move": {
+            "title": "Премести",
+            "description": "Преместите ово на другу локацију.",
+            "key": "M",
+            "annotation": {
+                "point": "Премештен чвор.",
+                "vertex": "Премештен чвор на путањи.",
+                "line": "Премештена путања.",
+                "area": "Премештена област.",
+                "multiple": "Премештено више објеката."
+            }
+        },
+        "rotate": {
+            "title": "Ротирај",
+            "description": "Заокрените овај објекат око своје централне тачке.",
+            "key": "R",
+            "annotation": {
+                "line": "Заокренута путања.",
+                "area": "Заокренута површина."
+            }
+        },
+        "reverse": {
+            "title": "Преусмери",
+            "description": "Промените да ова линија иде у супротном смеру.",
+            "key": "V",
+            "annotation": "Преусмерена путања."
+        },
+        "split": {
+            "title": "Раздвој",
+            "key": "X",
+            "annotation": {
+                "line": "Раздвој линију.",
+                "area": "Раздвој границе области."
+            }
+        }
+    },
+    "nothing_to_undo": "Ништа за поништити.",
+    "nothing_to_redo": "Ништа за поновити.",
+    "just_edited": "Управо сте уређивали Опенстреетмап!",
+    "browser_notice": "Овај уређивач је подржан у Фирефоксу, Хрому, Сафарију, Опери и Интернет екплореру 9 и новијим. Надоградите прегледач или користите Потлач 2 како бисте уређивали мапу.",
+    "view_on_osm": "Прикажи на ОСМ",
+    "zoom_in_edit": "увећајте да бисте уређивали мапу",
+    "logout": "одјава",
+    "loading_auth": "Повезивање са Опенстритмап...",
+    "report_a_bug": "пријави грешку",
+    "commit": {
+        "title": "Сачувај измене",
+        "description_placeholder": "Кратак опис ваших доприноса",
+        "message_label": "Предавање поруке",
+        "upload_explanation": "Промене које учитате као {user} ће бити видљиве на свим мапама које користе Опенстреетмап податке.",
+        "save": "Сачувај",
+        "cancel": "Откажи",
+        "warnings": "Упозорења",
+        "modified": "Измењено",
+        "deleted": "Обрисано",
+        "created": "Направљено"
+    },
+    "contributors": {
+        "list": "Допринели {users}",
+        "truncated_list": "Допринели {users} и још {count} других"
+    },
+    "geocoder": {
+        "title": "Пронађите место",
+        "placeholder": "Пронађите место",
+        "no_results": "Нисмо могли да пронађемо место под именом '{name}'"
+    },
+    "geolocate": {
+        "title": "Прикажи моју локацију"
+    },
+    "inspector": {
+        "no_documentation_combination": "Не постоји доступна документација за ову комбинацију ознака",
+        "no_documentation_key": "Не постоји доступна документација за овај кључ",
+        "show_more": "Прикажи још",
+        "new_tag": "Нова ознака",
+        "editing_feature": "Уређивање {feature}",
+        "additional": "Додатне ознаке",
+        "choose": "Изаберите тип обележја",
+        "results": "{n} резултата за {search}",
+        "back_tooltip": "Промените тип обележја",
+        "remove": "Уклони"
+    },
+    "background": {
+        "title": "Позадина",
+        "description": "Подешавања позадине",
+        "percent_brightness": "{opacity}% прозирност",
+        "fix_misalignment": "Поправи поравнање",
+        "reset": "ресетовање"
+    },
+    "restore": {
+        "heading": "Имате несачуване измене",
+        "description": "Да ли желите да се повратити несачуване измене од претходног уређивања?",
+        "restore": "Врати претходно",
+        "reset": "Ресетуј"
+    },
+    "save": {
+        "title": "Сачувај",
+        "help": "Сачувајте измене на Опенстреетмапу, што их чини видљивим за друге кориснике.",
+        "no_changes": "Нема измена које треба сачувати.",
+        "error": "Дошло је до грешке приликом чувања",
+        "uploading": "Учитавања измена на Опенстреетмап.",
+        "unsaved_changes": "Имате несачуваних измена"
+    },
+    "splash": {
+        "welcome": "Добродошли на iD, уређивач Опенстреетмапа ",
+        "walkthrough": "Покрени упознавање",
+        "start": "Уређуј одмах"
+    },
+    "source_switch": {
+        "lose_changes": "Имате несачуване измене. Пребацивање на други сервер ће их одбацити. Да ли сте сигурни да желите да промените сервер?"
+    },
+    "tag_reference": {
+        "description": "Опис",
+        "on_wiki": "{tag} на wiki.osm.org",
+        "used_with": "користи се са {type}"
+    },
+    "validations": {
+        "untagged_point": "Неозначени чвор",
+        "untagged_line": "Неозначена путања",
+        "untagged_area": "Неозначена област",
+        "many_deletions": "Бришете {n} објеката. Да ли сте сигурни да желите то да урадите? Ово ће их избрисати са мапе коју сви виде на openstreetmap.org.",
+        "tag_suggests_area": "Ознака {ознака} указује да би линија требало да буде област, али није област",
+        "deprecated_tags": "Застареле ознаке: {tags}"
+    },
+    "zoom": {
+        "in": "Увећај",
+        "out": "Умањи"
+    },
+    "gpx": {
+        "local_layer": "Локална GPX датотека",
+        "drag_drop": "Превуците и отпустите .gpx датотеку на страницу"
+    },
+    "help": {
+        "title": "Помоћ"
+    },
+    "intro": {
+        "startediting": {
+            "start": "Почни мапирање!"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Коришћење земљишта"
+            },
+            "category-path": {
+                "name": "Путања"
+            },
+            "category-rail": {
+                "name": "Шина"
+            },
+            "category-road": {
+                "name": "Пут"
+            },
+            "category-water": {
+                "name": "Вода"
+            }
+        },
+        "fields": {
+            "access": {
+                "label": "Приступ",
+                "types": {
+                    "access": "Општи",
+                    "foot": "Пешке",
+                    "motor_vehicle": "За моторна возила",
+                    "bicycle": "За бицикле",
+                    "horse": "За коње"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Дозвољен",
+                        "description": "Приступе дозвољен законом, правом проласка"
+                    },
+                    "no": {
+                        "title": "Забрањен",
+                        "description": "Приступ није дозвољен за ширу јавност"
+                    },
+                    "permissive": {
+                        "title": "Пропустљив",
+                        "description": "Приступе дозвољен све док власник опозове дозволу"
+                    },
+                    "private": {
+                        "title": "Приватан",
+                        "description": "Приступ дозвољен само уз одобрење власника на индивидуалној основи"
+                    },
+                    "designated": {
+                        "title": "Наменски",
+                        "description": "Приступ дозвољен само према знацима или одређеним локалним законима"
+                    },
+                    "destination": {
+                        "title": "Одредиште",
+                        "description": "Приступ дозвољен само за пролазак до одредишта"
+                    }
+                }
+            },
+            "address": {
+                "label": "Адреса",
+                "placeholders": {
+                    "housename": "Назив зграде",
+                    "number": "123",
+                    "street": "Улица",
+                    "city": "Град",
+                    "postcode": "Поштански број"
+                }
+            },
+            "admin_level": {
+                "label": "Административни ниво"
+            },
+            "aeroway": {
+                "label": "Врста"
+            },
+            "amenity": {
+                "label": "Врста"
+            },
+            "atm": {
+                "label": "Банкомат"
+            },
+            "barrier": {
+                "label": "Врста"
+            },
+            "bicycle_parking": {
+                "label": "Врста"
+            },
+            "building": {
+                "label": "Зграда"
+            },
+            "building_area": {
+                "label": "Зграда"
+            },
+            "building_yes": {
+                "label": "Зграда"
+            },
+            "capacity": {
+                "label": "Капацитет"
+            },
+            "cardinal_direction": {
+                "label": "Правац"
+            },
+            "clock_direction": {
+                "label": "Правац",
+                "options": {
+                    "clockwise": "У смеру казаљке на сату",
+                    "anticlockwise": "Супротно смеру казаљке на сату"
+                }
+            },
+            "construction": {
+                "label": "Врста"
+            },
+            "country": {
+                "label": "Земља"
+            },
+            "crossing": {
+                "label": "Врста"
+            },
+            "cuisine": {
+                "label": "Кухиња"
+            },
+            "denomination": {
+                "label": "Вероисповест"
+            },
+            "denotation": {
+                "label": "Означавање"
+            },
+            "elevation": {
+                "label": "Надморска висина"
+            },
+            "emergency": {
+                "label": "Хитан случај"
+            },
+            "entrance": {
+                "label": "Врста"
+            },
+            "fax": {
+                "label": "Факс"
+            },
+            "fee": {
+                "label": "Провизија"
+            },
+            "highway": {
+                "label": "Врста"
+            },
+            "historic": {
+                "label": "Врста"
+            },
+            "internet_access": {
+                "label": "Приступ Интернету",
+                "options": {
+                    "wlan": "Бежични Интернет",
+                    "wired": "Кабловски",
+                    "terminal": "Терминал"
+                }
+            },
+            "landuse": {
+                "label": "Врста"
+            },
+            "lanes": {
+                "label": "Саобраћајне траке"
+            },
+            "layer": {
+                "label": "Слој"
+            },
+            "leisure": {
+                "label": "Врста"
+            },
+            "levels": {
+                "label": "Нивои"
+            },
+            "man_made": {
+                "label": "Врста"
+            },
+            "maxspeed": {
+                "label": "Ограничење брзине"
+            },
+            "name": {
+                "label": "Име"
+            },
+            "network": {
+                "label": "Мрежа"
+            },
+            "note": {
+                "label": "Напомена"
+            },
+            "office": {
+                "label": "Врста"
+            },
+            "oneway": {
+                "label": "Једносмерни"
+            },
+            "oneway_yes": {
+                "label": "Једносмерна"
+            },
+            "opening_hours": {
+                "label": "Радно време"
+            },
+            "operator": {
+                "label": "Руковалац"
+            },
+            "park_ride": {
+                "label": "Подстицај паркирања"
+            },
+            "parking": {
+                "label": "Врста"
+            },
+            "phone": {
+                "label": "Телефон"
+            },
+            "place": {
+                "label": "Врста"
+            },
+            "power": {
+                "label": "Врста"
+            },
+            "railway": {
+                "label": "Врста"
+            },
+            "ref": {
+                "label": "Референца"
+            },
+            "religion": {
+                "label": "Религија",
+                "options": {
+                    "christian": "Хришћанство",
+                    "muslim": "Ислам",
+                    "buddhist": "Будизам",
+                    "jewish": "Јудаизам",
+                    "hindu": "Хинду",
+                    "shinto": "Шинто",
+                    "taoist": "Таоизам"
+                }
+            },
+            "service": {
+                "label": "Врста"
+            },
+            "shelter": {
+                "label": "Склониште"
+            },
+            "shop": {
+                "label": "Врста"
+            },
+            "source": {
+                "label": "Извор"
+            },
+            "sport": {
+                "label": "Спорт"
+            },
+            "structure": {
+                "label": "Грађевина",
+                "options": {
+                    "bridge": "Мост",
+                    "tunnel": "Тунел",
+                    "embankment": "Насип",
+                    "cutting": "Усек"
+                }
+            },
+            "supervised": {
+                "label": "Под надзором"
+            },
+            "surface": {
+                "label": "Површина"
+            },
+            "tourism": {
+                "label": "Врста"
+            },
+            "tracktype": {
+                "label": "Врста"
+            },
+            "water": {
+                "label": "Врста"
+            },
+            "waterway": {
+                "label": "Врста"
+            },
+            "website": {
+                "label": "Сајт"
+            },
+            "wetland": {
+                "label": "Врста"
+            },
+            "wheelchair": {
+                "label": "Прилаз за инвалидска колица"
+            },
+            "wikipedia": {
+                "label": "Википедија"
+            },
+            "wood": {
+                "label": "Врста"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Авио-пут"
+            },
+            "aeroway/aerodrome": {
+                "name": "Аеродром"
+            },
+            "aeroway/helipad": {
+                "name": "Хелиодром"
+            },
+            "amenity": {
+                "name": "Погодност"
+            },
+            "amenity/bank": {
+                "name": "Банка"
+            },
+            "amenity/bar": {
+                "name": "Бар"
+            },
+            "amenity/bench": {
+                "name": "Клупа"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Бициклистички паркинг"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Изнајмљивање бицикла"
+            },
+            "amenity/cafe": {
+                "name": "Кафе"
+            },
+            "amenity/cinema": {
+                "name": "Биоскоп"
+            },
+            "amenity/courthouse": {
+                "name": "Судница"
+            },
+            "amenity/embassy": {
+                "name": "Амбасада"
+            },
+            "amenity/fast_food": {
+                "name": "Брза храна"
+            },
+            "amenity/fire_station": {
+                "name": "Ватрогасна станица"
+            },
+            "amenity/fuel": {
+                "name": "Бензинска пумпа"
+            },
+            "amenity/grave_yard": {
+                "name": "Костурница"
+            },
+            "amenity/hospital": {
+                "name": "Болница"
+            },
+            "amenity/library": {
+                "name": "Библиотека"
+            },
+            "amenity/marketplace": {
+                "name": "Тржница"
+            },
+            "amenity/parking": {
+                "name": "Паркинг"
+            },
+            "amenity/pharmacy": {
+                "name": "Апотека"
+            },
+            "amenity/place_of_worship": {
+                "name": "Место богослужења"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Црква"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Синагога",
+                "terms": "јеврејска, синагога"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Џамија",
+                "terms": "муслиманска, џамија"
+            },
+            "amenity/police": {
+                "name": "Полиција"
+            },
+            "amenity/post_box": {
+                "name": "Поштанско сандуче"
+            },
+            "amenity/post_office": {
+                "name": "Пошта"
+            },
+            "amenity/pub": {
+                "name": "Паб"
+            },
+            "amenity/restaurant": {
+                "name": "Ресторан"
+            },
+            "amenity/school": {
+                "name": "Школа"
+            },
+            "amenity/swimming_pool": {
+                "name": "Базен"
+            },
+            "amenity/telephone": {
+                "name": "Телефонска говорница"
+            },
+            "amenity/theatre": {
+                "name": "Позориште",
+                "terms": "позориште, представа, драма, мјузикл"
+            },
+            "amenity/toilets": {
+                "name": "Тоалети"
+            },
+            "amenity/townhall": {
+                "name": "Градска кућа"
+            },
+            "amenity/university": {
+                "name": "Универзитет"
+            },
+            "barrier": {
+                "name": "Препрека"
+            },
+            "barrier/cattle_grid": {
+                "name": "Тор"
+            },
+            "barrier/city_wall": {
+                "name": "Зидине града"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Бициклистичка препрека"
+            },
+            "barrier/ditch": {
+                "name": "Јарак"
+            },
+            "barrier/entrance": {
+                "name": "Улаз"
+            },
+            "barrier/fence": {
+                "name": "Ограда"
+            },
+            "barrier/gate": {
+                "name": "Капија"
+            },
+            "barrier/hedge": {
+                "name": "Живица"
+            },
+            "barrier/retaining_wall": {
+                "name": "Потпорни зид"
+            },
+            "barrier/stile": {
+                "name": "Прелаз преко ограде"
+            },
+            "barrier/toll_booth": {
+                "name": "Наплатна рампа"
+            },
+            "barrier/wall": {
+                "name": "Зид"
+            },
+            "boundary/administrative": {
+                "name": "Административна граница"
+            },
+            "building": {
+                "name": "Зграда"
+            },
+            "building/apartments": {
+                "name": "Апартмани"
+            },
+            "building/entrance": {
+                "name": "Улаз"
+            },
+            "building/house": {
+                "name": "Кућа"
+            },
+            "entrance": {
+                "name": "Улаз"
+            },
+            "highway": {
+                "name": "Ауто-пут"
+            },
+            "highway/bridleway": {
+                "name": "Коњска стаза",
+                "terms": "Апартмани"
+            },
+            "highway/bus_stop": {
+                "name": "Аутобуско стајалиште"
+            },
+            "highway/crossing": {
+                "name": "Прелаз",
+                "terms": "прелаз, пешачки"
+            },
+            "highway/cycleway": {
+                "name": "Бициклистичка стаза"
+            },
+            "highway/footway": {
+                "name": "Пешачка стаза"
+            },
+            "highway/living_street": {
+                "name": "Стамбена улица"
+            },
+            "highway/mini_roundabout": {
+                "name": "Мини кружни ток"
+            },
+            "highway/motorway": {
+                "name": "Магистрални пут"
+            },
+            "highway/motorway_junction": {
+                "name": "Магистрално чвориште"
+            },
+            "highway/path": {
+                "name": "Стаза"
+            },
+            "highway/pedestrian": {
+                "name": "Пешачки"
+            },
+            "highway/residential": {
+                "name": "Стамбени пут"
+            },
+            "highway/road": {
+                "name": "Непознат пут"
+            },
+            "highway/service": {
+                "name": "Сервисни пут"
+            },
+            "highway/steps": {
+                "name": "Степенице"
+            },
+            "highway/track": {
+                "name": "Макадам"
+            },
+            "highway/traffic_signals": {
+                "name": "Саобраћајна сигнализација"
+            },
+            "highway/turning_circle": {
+                "name": "Окретница"
+            },
+            "historic": {
+                "name": "Историјско место"
+            },
+            "historic/archaeological_site": {
+                "name": "Археолошко налазиште"
+            },
+            "historic/boundary_stone": {
+                "name": "Гранични камен"
+            },
+            "historic/castle": {
+                "name": "Замак"
+            },
+            "historic/memorial": {
+                "name": "Спомен-комплекс"
+            },
+            "historic/monument": {
+                "name": "Споменик"
+            },
+            "historic/ruins": {
+                "name": "Рушевине"
+            },
+            "historic/wayside_cross": {
+                "name": "Крајпуташ"
+            },
+            "landuse": {
+                "name": "Намена земљишта"
+            },
+            "landuse/allotments": {
+                "name": "Парцеле"
+            },
+            "landuse/basin": {
+                "name": "Слив"
+            },
+            "landuse/cemetery": {
+                "name": "Гробље"
+            },
+            "landuse/commercial": {
+                "name": "Пословна област"
+            },
+            "landuse/construction": {
+                "name": "Област у изградњи"
+            },
+            "landuse/farm": {
+                "name": "Фарма"
+            },
+            "landuse/farmyard": {
+                "name": "Сеоско двориште"
+            },
+            "landuse/forest": {
+                "name": "Шума"
+            },
+            "landuse/grass": {
+                "name": "Трава"
+            },
+            "landuse/industrial": {
+                "name": "Индустријска област"
+            },
+            "landuse/meadow": {
+                "name": "Ливада"
+            },
+            "landuse/orchard": {
+                "name": "Воћњак"
+            },
+            "landuse/quarry": {
+                "name": "Каменолом"
+            },
+            "landuse/residential": {
+                "name": "Стамбена област"
+            },
+            "landuse/retail": {
+                "name": "Малопродаја"
+            },
+            "landuse/vineyard": {
+                "name": "Виноград"
+            },
+            "leisure": {
+                "name": "Рекреација"
+            },
+            "leisure/garden": {
+                "name": "Башта"
+            },
+            "leisure/golf_course": {
+                "name": "Голф терен"
+            },
+            "leisure/marina": {
+                "name": "Марина"
+            },
+            "leisure/park": {
+                "name": "Парк"
+            },
+            "leisure/pitch": {
+                "name": "Спортско игралиште"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Терен за амерички фудбал"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Бејзбол терен"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Кошаркашки терен"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Фудбалски терен"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Тениски терен"
+            },
+            "leisure/playground": {
+                "name": "Игралиште"
+            },
+            "leisure/slipway": {
+                "name": "Навоз"
+            },
+            "leisure/stadium": {
+                "name": "Стадион"
+            },
+            "leisure/swimming_pool": {
+                "name": "Базен"
+            },
+            "man_made/lighthouse": {
+                "name": "Светионик"
+            },
+            "man_made/pier": {
+                "name": "Пристаниште"
+            },
+            "man_made/survey_point": {
+                "name": "Извиђачница"
+            },
+            "man_made/wastewater_plant": {
+                "name": "Постројење за обраду отпадних вода",
+                "terms": "канализација, постројења за прераду отпадних вода, постројења за третман вода, рекултивација биљка"
+            },
+            "man_made/water_tower": {
+                "name": "Водо-торањ"
+            },
+            "natural/bay": {
+                "name": "Залив"
+            },
+            "natural/beach": {
+                "name": "Плажа"
+            },
+            "natural/cliff": {
+                "name": "Литица"
+            },
+            "natural/coastline": {
+                "name": "Обала",
+                "terms": "обалски"
+            },
+            "natural/glacier": {
+                "name": "Глечер"
+            },
+            "natural/grassland": {
+                "name": "Пашњак"
+            },
+            "natural/heath": {
+                "name": "Врес"
+            },
+            "natural/peak": {
+                "name": "Врх"
+            },
+            "natural/scrub": {
+                "name": "Гуштара"
+            },
+            "natural/spring": {
+                "name": "Извор"
+            },
+            "natural/tree": {
+                "name": "Дрво"
+            },
+            "natural/water": {
+                "name": "Извор"
+            },
+            "natural/water/lake": {
+                "name": "Језеро"
+            },
+            "natural/water/pond": {
+                "name": "Рибњак"
+            },
+            "natural/water/reservoir": {
+                "name": "Резервоар"
+            },
+            "natural/wetland": {
+                "name": "Мочвара"
+            },
+            "natural/wood": {
+                "name": "Шума"
+            },
+            "office": {
+                "name": "Канцеларија"
+            },
+            "other": {
+                "name": "Остало"
+            },
+            "other_area": {
+                "name": "Остало"
+            },
+            "place": {
+                "name": "Место"
+            },
+            "place/city": {
+                "name": "Град"
+            },
+            "place/hamlet": {
+                "name": "Засеок"
+            },
+            "place/island": {
+                "name": "Острво"
+            },
+            "place/isolated_dwelling": {
+                "name": "Изоловано пребивалиште"
+            },
+            "place/locality": {
+                "name": "Локалитет"
+            },
+            "place/town": {
+                "name": "Варош"
+            },
+            "place/village": {
+                "name": "Село"
+            },
+            "power": {
+                "name": "Енергија"
+            },
+            "power/generator": {
+                "name": "Електрана"
+            },
+            "power/line": {
+                "name": "Енергетски вод"
+            },
+            "power/pole": {
+                "name": "Напонски стуб"
+            },
+            "power/sub_station": {
+                "name": "Трафо станица"
+            },
+            "power/tower": {
+                "name": "Високонапонски далековод"
+            },
+            "power/transformer": {
+                "name": "Трансформатор"
+            },
+            "railway": {
+                "name": "Железничка пруга"
+            },
+            "railway/abandoned": {
+                "name": "Напуштена железница"
+            },
+            "railway/disused": {
+                "name": "Некоришћена железница"
+            },
+            "railway/level_crossing": {
+                "name": "Прелаз у нивоу"
+            },
+            "railway/monorail": {
+                "name": "Пруга са једним колосеком"
+            },
+            "railway/platform": {
+                "name": "Железничка платформа"
+            },
+            "railway/rail": {
+                "name": "Шина"
+            },
+            "railway/station": {
+                "name": "Железничка станица"
+            },
+            "railway/subway": {
+                "name": "Подземна железница"
+            },
+            "railway/subway_entrance": {
+                "name": "Улаз у подземну железницу"
+            },
+            "railway/tram": {
+                "name": "Трамвај",
+                "terms": "Трамвај"
+            },
+            "shop": {
+                "name": "Продавница"
+            },
+            "shop/alcohol": {
+                "name": "Продавница алкохолних пића"
+            },
+            "shop/bakery": {
+                "name": "Пекара"
+            },
+            "shop/beauty": {
+                "name": "Салон лепоте"
+            },
+            "shop/beverages": {
+                "name": "Продавница пића"
+            },
+            "shop/bicycle": {
+                "name": "Продавница бицикла"
+            },
+            "shop/books": {
+                "name": "Књижара"
+            },
+            "shop/boutique": {
+                "name": "Бутик"
+            },
+            "shop/butcher": {
+                "name": "Месар"
+            },
+            "shop/car": {
+                "name": "Салон аутомобила"
+            },
+            "shop/car_parts": {
+                "name": "Продавница ауто делова"
+            },
+            "shop/car_repair": {
+                "name": "Ауто сервис"
+            },
+            "shop/chemist": {
+                "name": "Апотекар"
+            },
+            "shop/clothes": {
+                "name": "Продавница одеће"
+            },
+            "shop/computer": {
+                "name": "Продавница рачунара"
+            },
+            "shop/confectionery": {
+                "name": "Посластичарница"
+            },
+            "shop/convenience": {
+                "name": "Бакалница"
+            },
+            "shop/deli": {
+                "name": "Деликатеси"
+            },
+            "shop/department_store": {
+                "name": "Робна кућа"
+            },
+            "shop/doityourself": {
+                "name": "Све за кућу"
+            },
+            "shop/dry_cleaning": {
+                "name": "Хемијско чишћење"
+            },
+            "shop/electronics": {
+                "name": "Електроника"
+            },
+            "shop/fishmonger": {
+                "name": "Рибарница"
+            },
+            "shop/florist": {
+                "name": "Цвећар"
+            },
+            "shop/furniture": {
+                "name": "Продавница намештаја"
+            },
+            "shop/garden_centre": {
+                "name": "Баштенски центар"
+            },
+            "shop/gift": {
+                "name": "Продавница сувенира"
+            },
+            "shop/greengrocer": {
+                "name": "Пиљар"
+            },
+            "shop/hairdresser": {
+                "name": "Фризер"
+            },
+            "shop/hardware": {
+                "name": "Гвожђара"
+            },
+            "shop/hifi": {
+                "name": "Музичка опрема"
+            },
+            "shop/jewelry": {
+                "name": "Златар"
+            },
+            "shop/kiosk": {
+                "name": "Трафика"
+            },
+            "shop/laundry": {
+                "name": "Перионица"
+            },
+            "shop/mall": {
+                "name": "Тржни центар"
+            },
+            "shop/mobile_phone": {
+                "name": "Продавница мобилних телефона"
+            },
+            "shop/motorcycle": {
+                "name": "Продавница мотоцикала"
+            },
+            "shop/music": {
+                "name": "Музичка продавница"
+            },
+            "shop/newsagent": {
+                "name": "Киоск"
+            },
+            "shop/optician": {
+                "name": "Оптичар"
+            },
+            "shop/outdoor": {
+                "name": "Улична продавница"
+            },
+            "shop/pet": {
+                "name": "Продавница кућних љубимаца"
+            },
+            "shop/shoes": {
+                "name": "Продавница обуће"
+            },
+            "shop/sports": {
+                "name": "Продавница спортске опреме"
+            },
+            "shop/stationery": {
+                "name": "Продавница канцеларијске опреме"
+            },
+            "shop/supermarket": {
+                "name": "Самопослуга"
+            },
+            "shop/toys": {
+                "name": "Продавница играчака"
+            },
+            "shop/travel_agency": {
+                "name": "Туристичка агенција"
+            },
+            "shop/tyres": {
+                "name": "Продавница гума"
+            },
+            "shop/vacant": {
+                "name": "Упражњена продавница"
+            },
+            "shop/variety_store": {
+                "name": "Продавница мешовите робе"
+            },
+            "shop/video": {
+                "name": "Видео клуб"
+            },
+            "tourism/alpine_hut": {
+                "name": "Планинарски дом"
+            },
+            "tourism/artwork": {
+                "name": "Уметничко дело"
+            },
+            "tourism/attraction": {
+                "name": "Туристичка атракција"
+            },
+            "tourism/camp_site": {
+                "name": "Камповалиште"
+            },
+            "tourism/caravan_site": {
+                "name": "Камп-парк"
+            },
+            "tourism/chalet": {
+                "name": "Шале"
+            },
+            "tourism/guest_house": {
+                "name": "Гостинска кућа"
+            },
+            "tourism/hostel": {
+                "name": "Хостел"
+            },
+            "tourism/hotel": {
+                "name": "Хотел"
+            },
+            "tourism/information": {
+                "name": "Информације"
+            },
+            "tourism/motel": {
+                "name": "Мотел"
+            },
+            "tourism/museum": {
+                "name": "Музеј"
+            },
+            "tourism/picnic_site": {
+                "name": "Излетиште"
+            },
+            "tourism/theme_park": {
+                "name": "Тематски парк"
+            },
+            "tourism/viewpoint": {
+                "name": "Видиковац"
+            },
+            "tourism/zoo": {
+                "name": "Зоолошки врт"
+            },
+            "waterway": {
+                "name": "Водоток"
+            },
+            "waterway/canal": {
+                "name": "Канал"
+            },
+            "waterway/dam": {
+                "name": "Брана"
+            },
+            "waterway/ditch": {
+                "name": "Јарак"
+            },
+            "waterway/drain": {
+                "name": "Одвод"
+            },
+            "waterway/river": {
+                "name": "Река"
+            },
+            "waterway/riverbank": {
+                "name": "Речно корито"
+            },
+            "waterway/stream": {
+                "name": "Поток"
+            },
+            "waterway/weir": {
+                "name": "Устава"
             }
         }
     }
@@ -20138,6 +25141,23 @@ locale.uk = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Землекористування"
+            },
+            "category-path": {
+                "name": "Тропа"
+            },
+            "category-rail": {
+                "name": "Рейки"
+            },
+            "category-road": {
+                "name": "Дорога"
+            },
+            "category-water": {
+                "name": "Вода"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Доступ",
@@ -20181,7 +25201,8 @@ locale.uk = {
                     "housename": "Назва будинку",
                     "number": "Номер",
                     "street": "Вулиця",
-                    "city": "Місто"
+                    "city": "Місто",
+                    "postcode": "Поштовий індекс"
                 }
             },
             "admin_level": {
@@ -20213,6 +25234,16 @@ locale.uk = {
             },
             "capacity": {
                 "label": "Міськість"
+            },
+            "cardinal_direction": {
+                "label": "Напрямок"
+            },
+            "clock_direction": {
+                "label": "Напрямок",
+                "options": {
+                    "clockwise": "За годинниковою стрілкою",
+                    "anticlockwise": "Проти годинникової стрілки"
+                }
             },
             "collection_times": {
                 "label": "Час виїмки пошти"
@@ -20612,14 +25643,26 @@ locale.uk = {
             "highway/footway": {
                 "name": "Тротуар"
             },
+            "highway/living_street": {
+                "name": "Житлова зона"
+            },
+            "highway/mini_roundabout": {
+                "name": "Малий круговий рух "
+            },
             "highway/motorway": {
                 "name": "Автомагістраль"
+            },
+            "highway/motorway_junction": {
+                "name": "З’єднання з автомагістраллю"
             },
             "highway/motorway_link": {
                 "name": "З’їзд з/на автомагістраль"
             },
             "highway/path": {
                 "name": "Тропа"
+            },
+            "highway/pedestrian": {
+                "name": "Пішохідна доріжка"
             },
             "highway/primary": {
                 "name": "Головна дорога"
@@ -20740,6 +25783,9 @@ locale.uk = {
             },
             "landuse/residential": {
                 "name": "Житлова зона"
+            },
+            "landuse/retail": {
+                "name": "Роздрібна торгівля"
             },
             "landuse/vineyard": {
                 "name": "Виноградник"
@@ -20933,6 +25979,9 @@ locale.uk = {
             },
             "railway/monorail": {
                 "name": "Монорейка"
+            },
+            "railway/platform": {
+                "name": "Залізнична платформа"
             },
             "railway/rail": {
                 "name": "Рейки"
@@ -22001,8 +27050,8 @@ locale.vi = {
                 "name": "Đường Xe đạp"
             },
             "highway/footway": {
-                "name": "Đường Đi bộ",
-                "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo"
+                "name": "Đường Dạo",
+                "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo,đường dạo"
             },
             "highway/mini_roundabout": {
                 "name": "Đường vòng Nhỏ"
@@ -22019,6 +27068,9 @@ locale.vi = {
             },
             "highway/path": {
                 "name": "Lối"
+            },
+            "highway/pedestrian": {
+                "name": "Đường Đi bộ"
             },
             "highway/primary": {
                 "name": "Đường Chính"
@@ -22711,7 +27763,8 @@ locale.zh = {
             "title": "合并",
             "description": "合并这些线。",
             "key": "C",
-            "annotation": "合并{n}条线。"
+            "annotation": "合并{n}条线。",
+            "not_eligible": "这些要素不能被合并。"
         },
         "move": {
             "title": "移动",
@@ -22742,7 +27795,11 @@ locale.zh = {
         },
         "split": {
             "title": "分割",
-            "key": "X"
+            "key": "X",
+            "annotation": {
+                "line": "分割一条线。",
+                "area": "分割一个面区域。"
+            }
         }
     },
     "nothing_to_undo": "没有可撤消的。",
@@ -22752,7 +27809,13 @@ locale.zh = {
     "view_on_osm": "在OSM上查看",
     "zoom_in_edit": "放大编辑地图",
     "logout": "退出",
+    "loading_auth": "连接OpenStreetMap...",
     "report_a_bug": "报告bug",
+    "status": {
+        "error": "无法连接到API。",
+        "offline": "API是离线的。请稍后尝试编辑。",
+        "readonly": "API是只读。您需要等待以便保存更改。"
+    },
     "commit": {
         "title": "保存更改",
         "description_placeholder": "简要说明你的贡献",
@@ -22782,11 +27845,14 @@ locale.zh = {
         "no_documentation_key": "没有关于此键的文档",
         "show_more": "显示更多",
         "new_tag": "新建标签",
+        "view_on_osm": "在on openstreetmap.org上查看",
         "editing_feature": "编辑{feature}",
         "additional": "附加标签",
         "choose": "选择对象的类型",
         "results": "{search}共有{n}个结果",
-        "back_tooltip": "修改对象的类型"
+        "reference": "在OpenStreetMap Wiki上查看",
+        "back_tooltip": "修改对象的类型",
+        "remove": "删除"
     },
     "background": {
         "title": "背景",
@@ -22826,6 +27892,7 @@ locale.zh = {
         "used_with": "使用{type}"
     },
     "validations": {
+        "untagged_point": "未标记的点",
         "untagged_line": "未标记的线",
         "untagged_area": "未标记的面",
         "many_deletions": "您正在删除{n}个对象。你确定你想这样做吗？所有的其他openstreetmap.org用户都将在地图上看不到这些数据。",
@@ -22836,6 +27903,7 @@ locale.zh = {
         "in": "放大",
         "out": "缩小"
     },
+    "cannot_zoom": "在当前模式下无法进一步缩小。",
     "gpx": {
         "local_layer": "本地GPX文件",
         "drag_drop": "把GPX文件拖到页面上。"
@@ -22845,10 +27913,28 @@ locale.zh = {
     },
     "intro": {
         "startediting": {
+            "save": "不要忘了定期保存你的修改！",
             "start": "开始制图！"
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "土地使用"
+            },
+            "category-path": {
+                "name": "路"
+            },
+            "category-rail": {
+                "name": "铁轨"
+            },
+            "category-road": {
+                "name": "道路"
+            },
+            "category-water": {
+                "name": "水"
+            }
+        },
         "fields": {
             "access": {
                 "label": "通道",
@@ -22862,6 +27948,12 @@ locale.zh = {
                 "options": {
                     "yes": {
                         "title": "允许的"
+                    },
+                    "no": {
+                        "title": "禁止的"
+                    },
+                    "permissive": {
+                        "title": "容许的"
                     },
                     "private": {
                         "title": "私人"
@@ -22882,6 +27974,9 @@ locale.zh = {
                     "street": "街道",
                     "city": "城市"
                 }
+            },
+            "admin_level": {
+                "label": "管理级别"
             },
             "aeroway": {
                 "label": "类型"
@@ -22909,6 +28004,16 @@ locale.zh = {
             },
             "capacity": {
                 "label": "容量"
+            },
+            "cardinal_direction": {
+                "label": "方向"
+            },
+            "clock_direction": {
+                "label": "方向",
+                "options": {
+                    "clockwise": "顺时针",
+                    "anticlockwise": "逆时针"
+                }
             },
             "collection_times": {
                 "label": "收集时间"
@@ -22963,6 +28068,9 @@ locale.zh = {
             "landuse": {
                 "label": "类型"
             },
+            "lanes": {
+                "label": "车道"
+            },
             "layer": {
                 "label": "层"
             },
@@ -23004,6 +28112,9 @@ locale.zh = {
             },
             "operator": {
                 "label": "经营者"
+            },
+            "park_ride": {
+                "label": "停车换乘"
             },
             "parking": {
                 "label": "类型"
@@ -23109,7 +28220,8 @@ locale.zh = {
                 "name": "便利设施"
             },
             "amenity/bank": {
-                "name": "银行"
+                "name": "银行",
+                "terms": "保险箱,信用社,存款,基金,囤积,投资公司,金库"
             },
             "amenity/bar": {
                 "name": "酒吧"
@@ -23128,7 +28240,8 @@ locale.zh = {
                 "terms": "咖啡,茶,咖啡馆"
             },
             "amenity/cinema": {
-                "name": "电影院"
+                "name": "电影院",
+                "terms": "大屏幕,电影,电影院,图片展示,图片,剧场,表演,银幕"
             },
             "amenity/courthouse": {
                 "name": "法院"
@@ -23203,13 +28316,15 @@ locale.zh = {
                 "name": "电话"
             },
             "amenity/theatre": {
-                "name": "剧院"
+                "name": "剧院",
+                "terms": "戏剧,表演,播放,音乐"
             },
             "amenity/toilets": {
                 "name": "厕所"
             },
             "amenity/townhall": {
-                "name": "市政府"
+                "name": "市政府",
+                "terms": "村政厅,市政府,法院,市政建设,市政中心"
             },
             "amenity/university": {
                 "name": "大学"
@@ -23253,6 +28368,9 @@ locale.zh = {
             "barrier/wall": {
                 "name": "墙"
             },
+            "boundary/administrative": {
+                "name": "行政区域界线"
+            },
             "building": {
                 "name": "建筑物"
             },
@@ -23261,6 +28379,9 @@ locale.zh = {
             },
             "building/entrance": {
                 "name": "入口"
+            },
+            "building/house": {
+                "name": "房屋"
             },
             "entrance": {
                 "name": "入口"
@@ -23285,20 +28406,34 @@ locale.zh = {
             "highway/footway": {
                 "name": "人行道"
             },
+            "highway/living_street": {
+                "name": "生活街道"
+            },
+            "highway/mini_roundabout": {
+                "name": "迷你环岛"
+            },
             "highway/motorway": {
                 "name": "高速公路"
             },
+            "highway/motorway_junction": {
+                "name": "高速公路连接点"
+            },
             "highway/motorway_link": {
-                "name": "高速公路匝道"
+                "name": "高速公路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/path": {
                 "name": "路"
+            },
+            "highway/pedestrian": {
+                "name": "行人"
             },
             "highway/primary": {
                 "name": "主要道路"
             },
             "highway/primary_link": {
-                "name": "主要道路匝道"
+                "name": "主要道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/residential": {
                 "name": "住宅区道路"
@@ -23310,7 +28445,8 @@ locale.zh = {
                 "name": "次要道路"
             },
             "highway/secondary_link": {
-                "name": "次要道路匝道"
+                "name": "次要道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/service": {
                 "name": "辅助道路"
@@ -23323,7 +28459,8 @@ locale.zh = {
                 "name": "三级道路"
             },
             "highway/tertiary_link": {
-                "name": "三级道路匝道"
+                "name": "三级道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/track": {
                 "name": "小路"
@@ -23336,7 +28473,8 @@ locale.zh = {
                 "name": "干线道路"
             },
             "highway/trunk_link": {
-                "name": "干线道路匝道"
+                "name": "干线道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/turning_circle": {
                 "name": "环岛"
@@ -23416,6 +28554,9 @@ locale.zh = {
             "landuse/residential": {
                 "name": "住宅区"
             },
+            "landuse/retail": {
+                "name": "零售"
+            },
             "landuse/vineyard": {
                 "name": "葡萄园"
             },
@@ -23476,8 +28617,15 @@ locale.zh = {
             "man_made/survey_point": {
                 "name": "测量点"
             },
+            "man_made/wastewater_plant": {
+                "name": "废水处理厂",
+                "terms": "污水处理厂,回收厂"
+            },
             "man_made/water_tower": {
                 "name": "水塔"
+            },
+            "man_made/water_works": {
+                "name": "自来水公司"
             },
             "natural": {
                 "name": "自然"
@@ -23524,7 +28672,8 @@ locale.zh = {
                 "terms": "小湖,湖"
             },
             "natural/water/pond": {
-                "name": "池塘"
+                "name": "池塘",
+                "terms": "小湖,贮水池,游泳池"
             },
             "natural/water/reservoir": {
                 "name": "水库"
@@ -23555,6 +28704,9 @@ locale.zh = {
             },
             "place/island": {
                 "name": "岛屿"
+            },
+            "place/isolated_dwelling": {
+                "name": "孤立的民房"
             },
             "place/locality": {
                 "name": "位置"
@@ -23601,8 +28753,14 @@ locale.zh = {
             "railway/monorail": {
                 "name": "单轨铁路"
             },
+            "railway/platform": {
+                "name": "站台"
+            },
             "railway/rail": {
                 "name": "铁轨"
+            },
+            "railway/station": {
+                "name": "火车站"
             },
             "railway/subway": {
                 "name": "地铁"
@@ -23792,7 +28950,8 @@ locale.zh = {
                 "name": "木屋"
             },
             "tourism/guest_house": {
-                "name": "宾馆"
+                "name": "宾馆",
+                "terms": "床和早餐,民宿"
             },
             "tourism/hostel": {
                 "name": "招待所"

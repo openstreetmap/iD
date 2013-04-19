@@ -259,6 +259,7 @@ locale.it = {
         "in": "Ingrandisci",
         "out": "Riduci"
     },
+    "cannot_zoom": "Impossibile fare zooCannot zoom out further in current mode.",
     "gpx": {
         "local_layer": "File GPX locale",
         "drag_drop": "Trascina e rilascia un file gpx sulla pagina"

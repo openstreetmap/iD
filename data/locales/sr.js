@@ -16,8 +16,8 @@ locale.sr = {
             "tail": "Кликните на карту како бисте почели да исцртавате област као што су парк, језеро или зграда."
         },
         "add_line": {
-            "title": "Линија",
-            "description": "Додајте ауто-путеве, улице, пешачке стазе, канале или друге линије на карту.",
+            "title": "Путања",
+            "description": "Додајте ауто-путеве, улице, пешачке стазе, канале или друге путање на карту.",
             "tail": "Кликните на карту како бисте почели да исцртавате пут, стазу или путању."
         },
         "add_point": {
@@ -26,6 +26,7 @@ locale.sr = {
             "tail": "Кликните на карту како бисте додали чвор."
         },
         "browse": {
+            "title": "Преглед",
             "description": "Померајте и увећајте карту."
         }
     },
@@ -38,13 +39,13 @@ locale.sr = {
         },
         "start": {
             "annotation": {
-                "line": "Започета линија.",
+                "line": "Започета путања.",
                 "area": "Започета област."
             }
         },
         "continue": {
             "annotation": {
-                "line": "Настављена линија.",
+                "line": "Настављена путања.",
                 "area": "Настављена област."
             }
         },
@@ -56,18 +57,23 @@ locale.sr = {
         },
         "circularize": {
             "title": "Заокружи",
+            "description": {
+                "line": "Учините путању кружном.",
+                "area": "Учините област кружном."
+            },
             "key": "O",
             "annotation": {
-                "line": "Учините линију кружном.",
+                "line": "Учините путању кружном.",
                 "area": "Учините област кружном."
-            }
+            },
+            "not_closed": "Ово се не може заокружити, јер то није петља."
         },
         "orthogonalize": {
             "title": "Нормализуј",
             "description": "Исправите ове углове.",
             "key": "Q",
             "annotation": {
-                "line": "Исправљени углови линије.",
+                "line": "Исправљени углови путање.",
                 "area": "Исправљени углови области."
             }
         },
@@ -77,7 +83,7 @@ locale.sr = {
             "annotation": {
                 "point": "Обрисан чвор.",
                 "vertex": "Обрисан чвор са путање.",
-                "line": "Обрисана линија.",
+                "line": "Обрисана путања.",
                 "area": "Обрисана област.",
                 "relation": "Обрисан однос.",
                 "multiple": "Обрисано {n} објеката."
@@ -87,7 +93,7 @@ locale.sr = {
             "annotation": {
                 "point": "Повезана путања са чвором.",
                 "vertex": "Повезана путања са другом путањом.",
-                "line": "Повезана путања са линијом.",
+                "line": "Повезана путања са путањом.",
                 "area": "Повезана путања са облашћу."
             }
         },
@@ -97,21 +103,36 @@ locale.sr = {
         },
         "merge": {
             "title": "Споји",
-            "description": "Спојите ове линије.",
+            "description": "Спојите ове путање.",
             "key": "C",
-            "annotation": "Спојено {n} линија."
+            "annotation": "Спојено {n} путања."
         },
         "move": {
             "title": "Премести",
             "description": "Преместите ово на другу локацију.",
-            "key": "M"
+            "key": "M",
+            "annotation": {
+                "point": "Премештен чвор.",
+                "vertex": "Премештен чвор на путањи.",
+                "line": "Премештена путања.",
+                "area": "Премештена област.",
+                "multiple": "Премештено више објеката."
+            }
         },
         "rotate": {
             "title": "Ротирај",
-            "key": "R"
+            "description": "Заокрените овај објекат око своје централне тачке.",
+            "key": "R",
+            "annotation": {
+                "line": "Заокренута путања.",
+                "area": "Заокренута површина."
+            }
         },
         "reverse": {
-            "key": "V"
+            "title": "Преусмери",
+            "description": "Промените да ова линија иде у супротном смеру.",
+            "key": "V",
+            "annotation": "Преусмерена путања."
         },
         "split": {
             "title": "Раздвој",
@@ -122,11 +143,20 @@ locale.sr = {
             }
         }
     },
+    "nothing_to_undo": "Ништа за поништити.",
+    "nothing_to_redo": "Ништа за поновити.",
+    "just_edited": "Управо сте уређивали Опенстреетмап!",
+    "browser_notice": "Овај уређивач је подржан у Фирефоксу, Хрому, Сафарију, Опери и Интернет екплореру 9 и новијим. Надоградите прегледач или користите Потлач 2 како бисте уређивали мапу.",
     "view_on_osm": "Прикажи на ОСМ",
+    "zoom_in_edit": "увећајте да бисте уређивали мапу",
+    "logout": "одјава",
     "loading_auth": "Повезивање са Опенстритмап...",
     "report_a_bug": "пријави грешку",
     "commit": {
         "title": "Сачувај измене",
+        "description_placeholder": "Кратак опис ваших доприноса",
+        "message_label": "Предавање поруке",
+        "upload_explanation": "Промене које учитате као {user} ће бити видљиве на свим мапама које користе Опенстреетмап податке.",
         "save": "Сачувај",
         "cancel": "Откажи",
         "warnings": "Упозорења",
@@ -135,48 +165,141 @@ locale.sr = {
         "created": "Направљено"
     },
     "contributors": {
-        "list": "Допринели {users}"
+        "list": "Допринели {users}",
+        "truncated_list": "Допринели {users} и још {count} других"
     },
     "geocoder": {
         "title": "Пронађите место",
-        "placeholder": "Пронађите место"
+        "placeholder": "Пронађите место",
+        "no_results": "Нисмо могли да пронађемо место под именом '{name}'"
     },
     "geolocate": {
         "title": "Прикажи моју локацију"
     },
     "inspector": {
+        "no_documentation_combination": "Не постоји доступна документација за ову комбинацију ознака",
+        "no_documentation_key": "Не постоји доступна документација за овај кључ",
         "show_more": "Прикажи још",
         "new_tag": "Нова ознака",
+        "editing_feature": "Уређивање {feature}",
         "additional": "Додатне ознаке",
+        "choose": "Изаберите тип обележја",
         "results": "{n} резултата за {search}",
+        "back_tooltip": "Промените тип обележја",
         "remove": "Уклони"
     },
     "background": {
         "title": "Позадина",
         "description": "Подешавања позадине",
-        "percent_brightness": "{opacity}% прозирност"
+        "percent_brightness": "{opacity}% прозирност",
+        "fix_misalignment": "Поправи поравнање",
+        "reset": "ресетовање"
+    },
+    "restore": {
+        "heading": "Имате несачуване измене",
+        "description": "Да ли желите да се повратити несачуване измене од претходног уређивања?",
+        "restore": "Врати претходно",
+        "reset": "Ресетуј"
+    },
+    "save": {
+        "title": "Сачувај",
+        "help": "Сачувајте измене на Опенстреетмапу, што их чини видљивим за друге кориснике.",
+        "no_changes": "Нема измена које треба сачувати.",
+        "error": "Дошло је до грешке приликом чувања",
+        "uploading": "Учитавања измена на Опенстреетмап.",
+        "unsaved_changes": "Имате несачуваних измена"
     },
     "splash": {
+        "welcome": "Добродошли на iD, уређивач Опенстреетмапа ",
         "walkthrough": "Покрени упознавање",
         "start": "Уређуј одмах"
     },
+    "source_switch": {
+        "lose_changes": "Имате несачуване измене. Пребацивање на други сервер ће их одбацити. Да ли сте сигурни да желите да промените сервер?"
+    },
     "tag_reference": {
-        "description": "Опис"
+        "description": "Опис",
+        "on_wiki": "{tag} на wiki.osm.org",
+        "used_with": "користи се са {type}"
     },
     "validations": {
-        "untagged_point": "Неозначени чвор"
+        "untagged_point": "Неозначени чвор",
+        "untagged_line": "Неозначена путања",
+        "untagged_area": "Неозначена област",
+        "many_deletions": "Бришете {n} објеката. Да ли сте сигурни да желите то да урадите? Ово ће их избрисати са мапе коју сви виде на openstreetmap.org.",
+        "tag_suggests_area": "Ознака {ознака} указује да би линија требало да буде област, али није област",
+        "deprecated_tags": "Застареле ознаке: {tags}"
     },
     "zoom": {
         "in": "Увећај",
         "out": "Умањи"
     },
+    "gpx": {
+        "local_layer": "Локална GPX датотека",
+        "drag_drop": "Превуците и отпустите .gpx датотеку на страницу"
+    },
     "help": {
         "title": "Помоћ"
     },
+    "intro": {
+        "startediting": {
+            "start": "Почни мапирање!"
+        }
+    },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Коришћење земљишта"
+            },
+            "category-path": {
+                "name": "Путања"
+            },
+            "category-rail": {
+                "name": "Шина"
+            },
+            "category-road": {
+                "name": "Пут"
+            },
+            "category-water": {
+                "name": "Вода"
+            }
+        },
         "fields": {
             "access": {
-                "label": "Приступ"
+                "label": "Приступ",
+                "types": {
+                    "access": "Општи",
+                    "foot": "Пешке",
+                    "motor_vehicle": "За моторна возила",
+                    "bicycle": "За бицикле",
+                    "horse": "За коње"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Дозвољен",
+                        "description": "Приступе дозвољен законом, правом проласка"
+                    },
+                    "no": {
+                        "title": "Забрањен",
+                        "description": "Приступ није дозвољен за ширу јавност"
+                    },
+                    "permissive": {
+                        "title": "Пропустљив",
+                        "description": "Приступе дозвољен све док власник опозове дозволу"
+                    },
+                    "private": {
+                        "title": "Приватан",
+                        "description": "Приступ дозвољен само уз одобрење власника на индивидуалној основи"
+                    },
+                    "designated": {
+                        "title": "Наменски",
+                        "description": "Приступ дозвољен само према знацима или одређеним локалним законима"
+                    },
+                    "destination": {
+                        "title": "Одредиште",
+                        "description": "Приступ дозвољен само за пролазак до одредишта"
+                    }
+                }
             },
             "address": {
                 "label": "Адреса",
@@ -184,8 +307,12 @@ locale.sr = {
                     "housename": "Назив зграде",
                     "number": "123",
                     "street": "Улица",
-                    "city": "Град"
+                    "city": "Град",
+                    "postcode": "Поштански број"
                 }
+            },
+            "admin_level": {
+                "label": "Административни ниво"
             },
             "aeroway": {
                 "label": "Врста"
@@ -208,6 +335,9 @@ locale.sr = {
             "building_area": {
                 "label": "Зграда"
             },
+            "building_yes": {
+                "label": "Зграда"
+            },
             "capacity": {
                 "label": "Капацитет"
             },
@@ -224,6 +354,9 @@ locale.sr = {
             "construction": {
                 "label": "Врста"
             },
+            "country": {
+                "label": "Земља"
+            },
             "crossing": {
                 "label": "Врста"
             },
@@ -233,8 +366,14 @@ locale.sr = {
             "denomination": {
                 "label": "Вероисповест"
             },
+            "denotation": {
+                "label": "Означавање"
+            },
             "elevation": {
                 "label": "Надморска висина"
+            },
+            "emergency": {
+                "label": "Хитан случај"
             },
             "entrance": {
                 "label": "Врста"
@@ -262,6 +401,9 @@ locale.sr = {
             "landuse": {
                 "label": "Врста"
             },
+            "lanes": {
+                "label": "Саобраћајне траке"
+            },
             "layer": {
                 "label": "Слој"
             },
@@ -277,6 +419,9 @@ locale.sr = {
             "maxspeed": {
                 "label": "Ограничење брзине"
             },
+            "name": {
+                "label": "Име"
+            },
             "network": {
                 "label": "Мрежа"
             },
@@ -289,11 +434,17 @@ locale.sr = {
             "oneway": {
                 "label": "Једносмерни"
             },
+            "oneway_yes": {
+                "label": "Једносмерна"
+            },
             "opening_hours": {
                 "label": "Радно време"
             },
             "operator": {
                 "label": "Руковалац"
+            },
+            "park_ride": {
+                "label": "Подстицај паркирања"
             },
             "parking": {
                 "label": "Врста"
@@ -309,6 +460,9 @@ locale.sr = {
             },
             "railway": {
                 "label": "Врста"
+            },
+            "ref": {
+                "label": "Референца"
             },
             "religion": {
                 "label": "Религија",
@@ -342,8 +496,12 @@ locale.sr = {
                 "options": {
                     "bridge": "Мост",
                     "tunnel": "Тунел",
-                    "embankment": "Насип"
+                    "embankment": "Насип",
+                    "cutting": "Усек"
                 }
+            },
+            "supervised": {
+                "label": "Под надзором"
             },
             "surface": {
                 "label": "Површина"
@@ -434,6 +592,9 @@ locale.sr = {
             "amenity/library": {
                 "name": "Библиотека"
             },
+            "amenity/marketplace": {
+                "name": "Тржница"
+            },
             "amenity/parking": {
                 "name": "Паркинг"
             },
@@ -479,7 +640,8 @@ locale.sr = {
                 "name": "Телефонска говорница"
             },
             "amenity/theatre": {
-                "name": "Позориште"
+                "name": "Позориште",
+                "terms": "позориште, представа, драма, мјузикл"
             },
             "amenity/toilets": {
                 "name": "Тоалети"
@@ -520,14 +682,26 @@ locale.sr = {
             "barrier/retaining_wall": {
                 "name": "Потпорни зид"
             },
+            "barrier/stile": {
+                "name": "Прелаз преко ограде"
+            },
             "barrier/toll_booth": {
                 "name": "Наплатна рампа"
             },
             "barrier/wall": {
                 "name": "Зид"
             },
+            "boundary/administrative": {
+                "name": "Административна граница"
+            },
             "building": {
                 "name": "Зграда"
+            },
+            "building/apartments": {
+                "name": "Апартмани"
+            },
+            "building/entrance": {
+                "name": "Улаз"
             },
             "building/house": {
                 "name": "Кућа"
@@ -537,6 +711,10 @@ locale.sr = {
             },
             "highway": {
                 "name": "Ауто-пут"
+            },
+            "highway/bridleway": {
+                "name": "Коњска стаза",
+                "terms": "Апартмани"
             },
             "highway/bus_stop": {
                 "name": "Аутобуско стајалиште"
@@ -550,6 +728,9 @@ locale.sr = {
             },
             "highway/footway": {
                 "name": "Пешачка стаза"
+            },
+            "highway/living_street": {
+                "name": "Стамбена улица"
             },
             "highway/mini_roundabout": {
                 "name": "Мини кружни ток"
@@ -566,8 +747,26 @@ locale.sr = {
             "highway/pedestrian": {
                 "name": "Пешачки"
             },
+            "highway/residential": {
+                "name": "Стамбени пут"
+            },
+            "highway/road": {
+                "name": "Непознат пут"
+            },
+            "highway/service": {
+                "name": "Сервисни пут"
+            },
             "highway/steps": {
                 "name": "Степенице"
+            },
+            "highway/track": {
+                "name": "Макадам"
+            },
+            "highway/traffic_signals": {
+                "name": "Саобраћајна сигнализација"
+            },
+            "highway/turning_circle": {
+                "name": "Окретница"
             },
             "historic": {
                 "name": "Историјско место"
@@ -638,6 +837,9 @@ locale.sr = {
             "landuse/residential": {
                 "name": "Стамбена област"
             },
+            "landuse/retail": {
+                "name": "Малопродаја"
+            },
             "landuse/vineyard": {
                 "name": "Виноград"
             },
@@ -659,6 +861,9 @@ locale.sr = {
             "leisure/pitch": {
                 "name": "Спортско игралиште"
             },
+            "leisure/pitch/american_football": {
+                "name": "Терен за амерички фудбал"
+            },
             "leisure/pitch/baseball": {
                 "name": "Бејзбол терен"
             },
@@ -674,6 +879,12 @@ locale.sr = {
             "leisure/playground": {
                 "name": "Игралиште"
             },
+            "leisure/slipway": {
+                "name": "Навоз"
+            },
+            "leisure/stadium": {
+                "name": "Стадион"
+            },
             "leisure/swimming_pool": {
                 "name": "Базен"
             },
@@ -686,8 +897,15 @@ locale.sr = {
             "man_made/survey_point": {
                 "name": "Извиђачница"
             },
+            "man_made/wastewater_plant": {
+                "name": "Постројење за обраду отпадних вода",
+                "terms": "канализација, постројења за прераду отпадних вода, постројења за третман вода, рекултивација биљка"
+            },
             "man_made/water_tower": {
                 "name": "Водо-торањ"
+            },
+            "natural/bay": {
+                "name": "Залив"
             },
             "natural/beach": {
                 "name": "Плажа"
@@ -696,7 +914,8 @@ locale.sr = {
                 "name": "Литица"
             },
             "natural/coastline": {
-                "name": "Обала"
+                "name": "Обала",
+                "terms": "обалски"
             },
             "natural/glacier": {
                 "name": "Глечер"
@@ -709,6 +928,12 @@ locale.sr = {
             },
             "natural/peak": {
                 "name": "Врх"
+            },
+            "natural/scrub": {
+                "name": "Гуштара"
+            },
+            "natural/spring": {
+                "name": "Извор"
             },
             "natural/tree": {
                 "name": "Дрво"
@@ -725,8 +950,20 @@ locale.sr = {
             "natural/water/reservoir": {
                 "name": "Резервоар"
             },
+            "natural/wetland": {
+                "name": "Мочвара"
+            },
+            "natural/wood": {
+                "name": "Шума"
+            },
             "office": {
                 "name": "Канцеларија"
+            },
+            "other": {
+                "name": "Остало"
+            },
+            "other_area": {
+                "name": "Остало"
             },
             "place": {
                 "name": "Место"
@@ -740,8 +977,14 @@ locale.sr = {
             "place/island": {
                 "name": "Острво"
             },
+            "place/isolated_dwelling": {
+                "name": "Изоловано пребивалиште"
+            },
             "place/locality": {
                 "name": "Локалитет"
+            },
+            "place/town": {
+                "name": "Варош"
             },
             "place/village": {
                 "name": "Село"
@@ -755,8 +998,14 @@ locale.sr = {
             "power/line": {
                 "name": "Енергетски вод"
             },
+            "power/pole": {
+                "name": "Напонски стуб"
+            },
             "power/sub_station": {
                 "name": "Трафо станица"
+            },
+            "power/tower": {
+                "name": "Високонапонски далековод"
             },
             "power/transformer": {
                 "name": "Трансформатор"
@@ -764,14 +1013,26 @@ locale.sr = {
             "railway": {
                 "name": "Железничка пруга"
             },
+            "railway/abandoned": {
+                "name": "Напуштена железница"
+            },
+            "railway/disused": {
+                "name": "Некоришћена железница"
+            },
             "railway/level_crossing": {
                 "name": "Прелаз у нивоу"
+            },
+            "railway/monorail": {
+                "name": "Пруга са једним колосеком"
             },
             "railway/platform": {
                 "name": "Железничка платформа"
             },
             "railway/rail": {
                 "name": "Шина"
+            },
+            "railway/station": {
+                "name": "Железничка станица"
             },
             "railway/subway": {
                 "name": "Подземна железница"
@@ -780,7 +1041,8 @@ locale.sr = {
                 "name": "Улаз у подземну железницу"
             },
             "railway/tram": {
-                "name": "Трамвај"
+                "name": "Трамвај",
+                "terms": "Трамвај"
             },
             "shop": {
                 "name": "Продавница"
@@ -890,8 +1152,53 @@ locale.sr = {
             "shop/mobile_phone": {
                 "name": "Продавница мобилних телефона"
             },
+            "shop/motorcycle": {
+                "name": "Продавница мотоцикала"
+            },
+            "shop/music": {
+                "name": "Музичка продавница"
+            },
+            "shop/newsagent": {
+                "name": "Киоск"
+            },
+            "shop/optician": {
+                "name": "Оптичар"
+            },
+            "shop/outdoor": {
+                "name": "Улична продавница"
+            },
+            "shop/pet": {
+                "name": "Продавница кућних љубимаца"
+            },
+            "shop/shoes": {
+                "name": "Продавница обуће"
+            },
+            "shop/sports": {
+                "name": "Продавница спортске опреме"
+            },
+            "shop/stationery": {
+                "name": "Продавница канцеларијске опреме"
+            },
             "shop/supermarket": {
                 "name": "Самопослуга"
+            },
+            "shop/toys": {
+                "name": "Продавница играчака"
+            },
+            "shop/travel_agency": {
+                "name": "Туристичка агенција"
+            },
+            "shop/tyres": {
+                "name": "Продавница гума"
+            },
+            "shop/vacant": {
+                "name": "Упражњена продавница"
+            },
+            "shop/variety_store": {
+                "name": "Продавница мешовите робе"
+            },
+            "shop/video": {
+                "name": "Видео клуб"
             },
             "tourism/alpine_hut": {
                 "name": "Планинарски дом"
@@ -920,6 +1227,9 @@ locale.sr = {
             "tourism/hotel": {
                 "name": "Хотел"
             },
+            "tourism/information": {
+                "name": "Информације"
+            },
             "tourism/motel": {
                 "name": "Мотел"
             },
@@ -937,6 +1247,9 @@ locale.sr = {
             },
             "tourism/zoo": {
                 "name": "Зоолошки врт"
+            },
+            "waterway": {
+                "name": "Водоток"
             },
             "waterway/canal": {
                 "name": "Канал"

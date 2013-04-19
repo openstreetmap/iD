@@ -102,7 +102,8 @@ locale.zh = {
             "title": "合并",
             "description": "合并这些线。",
             "key": "C",
-            "annotation": "合并{n}条线。"
+            "annotation": "合并{n}条线。",
+            "not_eligible": "这些要素不能被合并。"
         },
         "move": {
             "title": "移动",
@@ -133,7 +134,11 @@ locale.zh = {
         },
         "split": {
             "title": "分割",
-            "key": "X"
+            "key": "X",
+            "annotation": {
+                "line": "分割一条线。",
+                "area": "分割一个面区域。"
+            }
         }
     },
     "nothing_to_undo": "没有可撤消的。",
@@ -143,7 +148,13 @@ locale.zh = {
     "view_on_osm": "在OSM上查看",
     "zoom_in_edit": "放大编辑地图",
     "logout": "退出",
+    "loading_auth": "连接OpenStreetMap...",
     "report_a_bug": "报告bug",
+    "status": {
+        "error": "无法连接到API。",
+        "offline": "API是离线的。请稍后尝试编辑。",
+        "readonly": "API是只读。您需要等待以便保存更改。"
+    },
     "commit": {
         "title": "保存更改",
         "description_placeholder": "简要说明你的贡献",
@@ -173,11 +184,14 @@ locale.zh = {
         "no_documentation_key": "没有关于此键的文档",
         "show_more": "显示更多",
         "new_tag": "新建标签",
+        "view_on_osm": "在on openstreetmap.org上查看",
         "editing_feature": "编辑{feature}",
         "additional": "附加标签",
         "choose": "选择对象的类型",
         "results": "{search}共有{n}个结果",
-        "back_tooltip": "修改对象的类型"
+        "reference": "在OpenStreetMap Wiki上查看",
+        "back_tooltip": "修改对象的类型",
+        "remove": "删除"
     },
     "background": {
         "title": "背景",
@@ -217,6 +231,7 @@ locale.zh = {
         "used_with": "使用{type}"
     },
     "validations": {
+        "untagged_point": "未标记的点",
         "untagged_line": "未标记的线",
         "untagged_area": "未标记的面",
         "many_deletions": "您正在删除{n}个对象。你确定你想这样做吗？所有的其他openstreetmap.org用户都将在地图上看不到这些数据。",
@@ -227,6 +242,7 @@ locale.zh = {
         "in": "放大",
         "out": "缩小"
     },
+    "cannot_zoom": "在当前模式下无法进一步缩小。",
     "gpx": {
         "local_layer": "本地GPX文件",
         "drag_drop": "把GPX文件拖到页面上。"
@@ -236,10 +252,28 @@ locale.zh = {
     },
     "intro": {
         "startediting": {
+            "save": "不要忘了定期保存你的修改！",
             "start": "开始制图！"
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "土地使用"
+            },
+            "category-path": {
+                "name": "路"
+            },
+            "category-rail": {
+                "name": "铁轨"
+            },
+            "category-road": {
+                "name": "道路"
+            },
+            "category-water": {
+                "name": "水"
+            }
+        },
         "fields": {
             "access": {
                 "label": "通道",
@@ -253,6 +287,12 @@ locale.zh = {
                 "options": {
                     "yes": {
                         "title": "允许的"
+                    },
+                    "no": {
+                        "title": "禁止的"
+                    },
+                    "permissive": {
+                        "title": "容许的"
                     },
                     "private": {
                         "title": "私人"
@@ -273,6 +313,9 @@ locale.zh = {
                     "street": "街道",
                     "city": "城市"
                 }
+            },
+            "admin_level": {
+                "label": "管理级别"
             },
             "aeroway": {
                 "label": "类型"
@@ -300,6 +343,16 @@ locale.zh = {
             },
             "capacity": {
                 "label": "容量"
+            },
+            "cardinal_direction": {
+                "label": "方向"
+            },
+            "clock_direction": {
+                "label": "方向",
+                "options": {
+                    "clockwise": "顺时针",
+                    "anticlockwise": "逆时针"
+                }
             },
             "collection_times": {
                 "label": "收集时间"
@@ -354,6 +407,9 @@ locale.zh = {
             "landuse": {
                 "label": "类型"
             },
+            "lanes": {
+                "label": "车道"
+            },
             "layer": {
                 "label": "层"
             },
@@ -395,6 +451,9 @@ locale.zh = {
             },
             "operator": {
                 "label": "经营者"
+            },
+            "park_ride": {
+                "label": "停车换乘"
             },
             "parking": {
                 "label": "类型"
@@ -500,7 +559,8 @@ locale.zh = {
                 "name": "便利设施"
             },
             "amenity/bank": {
-                "name": "银行"
+                "name": "银行",
+                "terms": "保险箱,信用社,存款,基金,囤积,投资公司,金库"
             },
             "amenity/bar": {
                 "name": "酒吧"
@@ -519,7 +579,8 @@ locale.zh = {
                 "terms": "咖啡,茶,咖啡馆"
             },
             "amenity/cinema": {
-                "name": "电影院"
+                "name": "电影院",
+                "terms": "大屏幕,电影,电影院,图片展示,图片,剧场,表演,银幕"
             },
             "amenity/courthouse": {
                 "name": "法院"
@@ -594,13 +655,15 @@ locale.zh = {
                 "name": "电话"
             },
             "amenity/theatre": {
-                "name": "剧院"
+                "name": "剧院",
+                "terms": "戏剧,表演,播放,音乐"
             },
             "amenity/toilets": {
                 "name": "厕所"
             },
             "amenity/townhall": {
-                "name": "市政府"
+                "name": "市政府",
+                "terms": "村政厅,市政府,法院,市政建设,市政中心"
             },
             "amenity/university": {
                 "name": "大学"
@@ -644,6 +707,9 @@ locale.zh = {
             "barrier/wall": {
                 "name": "墙"
             },
+            "boundary/administrative": {
+                "name": "行政区域界线"
+            },
             "building": {
                 "name": "建筑物"
             },
@@ -652,6 +718,9 @@ locale.zh = {
             },
             "building/entrance": {
                 "name": "入口"
+            },
+            "building/house": {
+                "name": "房屋"
             },
             "entrance": {
                 "name": "入口"
@@ -676,20 +745,34 @@ locale.zh = {
             "highway/footway": {
                 "name": "人行道"
             },
+            "highway/living_street": {
+                "name": "生活街道"
+            },
+            "highway/mini_roundabout": {
+                "name": "迷你环岛"
+            },
             "highway/motorway": {
                 "name": "高速公路"
             },
+            "highway/motorway_junction": {
+                "name": "高速公路连接点"
+            },
             "highway/motorway_link": {
-                "name": "高速公路匝道"
+                "name": "高速公路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/path": {
                 "name": "路"
+            },
+            "highway/pedestrian": {
+                "name": "行人"
             },
             "highway/primary": {
                 "name": "主要道路"
             },
             "highway/primary_link": {
-                "name": "主要道路匝道"
+                "name": "主要道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/residential": {
                 "name": "住宅区道路"
@@ -701,7 +784,8 @@ locale.zh = {
                 "name": "次要道路"
             },
             "highway/secondary_link": {
-                "name": "次要道路匝道"
+                "name": "次要道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/service": {
                 "name": "辅助道路"
@@ -714,7 +798,8 @@ locale.zh = {
                 "name": "三级道路"
             },
             "highway/tertiary_link": {
-                "name": "三级道路匝道"
+                "name": "三级道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/track": {
                 "name": "小路"
@@ -727,7 +812,8 @@ locale.zh = {
                 "name": "干线道路"
             },
             "highway/trunk_link": {
-                "name": "干线道路匝道"
+                "name": "干线道路匝道",
+                "terms": "坡道,匝道,出口匝道"
             },
             "highway/turning_circle": {
                 "name": "环岛"
@@ -807,6 +893,9 @@ locale.zh = {
             "landuse/residential": {
                 "name": "住宅区"
             },
+            "landuse/retail": {
+                "name": "零售"
+            },
             "landuse/vineyard": {
                 "name": "葡萄园"
             },
@@ -867,8 +956,15 @@ locale.zh = {
             "man_made/survey_point": {
                 "name": "测量点"
             },
+            "man_made/wastewater_plant": {
+                "name": "废水处理厂",
+                "terms": "污水处理厂,回收厂"
+            },
             "man_made/water_tower": {
                 "name": "水塔"
+            },
+            "man_made/water_works": {
+                "name": "自来水公司"
             },
             "natural": {
                 "name": "自然"
@@ -915,7 +1011,8 @@ locale.zh = {
                 "terms": "小湖,湖"
             },
             "natural/water/pond": {
-                "name": "池塘"
+                "name": "池塘",
+                "terms": "小湖,贮水池,游泳池"
             },
             "natural/water/reservoir": {
                 "name": "水库"
@@ -946,6 +1043,9 @@ locale.zh = {
             },
             "place/island": {
                 "name": "岛屿"
+            },
+            "place/isolated_dwelling": {
+                "name": "孤立的民房"
             },
             "place/locality": {
                 "name": "位置"
@@ -992,8 +1092,14 @@ locale.zh = {
             "railway/monorail": {
                 "name": "单轨铁路"
             },
+            "railway/platform": {
+                "name": "站台"
+            },
             "railway/rail": {
                 "name": "铁轨"
+            },
+            "railway/station": {
+                "name": "火车站"
             },
             "railway/subway": {
                 "name": "地铁"
@@ -1183,7 +1289,8 @@ locale.zh = {
                 "name": "木屋"
             },
             "tourism/guest_house": {
-                "name": "宾馆"
+                "name": "宾馆",
+                "terms": "床和早餐,民宿"
             },
             "tourism/hostel": {
                 "name": "招待所"

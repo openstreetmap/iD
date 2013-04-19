@@ -319,6 +319,23 @@ locale.uk = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Землекористування"
+            },
+            "category-path": {
+                "name": "Тропа"
+            },
+            "category-rail": {
+                "name": "Рейки"
+            },
+            "category-road": {
+                "name": "Дорога"
+            },
+            "category-water": {
+                "name": "Вода"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Доступ",
@@ -362,7 +379,8 @@ locale.uk = {
                     "housename": "Назва будинку",
                     "number": "Номер",
                     "street": "Вулиця",
-                    "city": "Місто"
+                    "city": "Місто",
+                    "postcode": "Поштовий індекс"
                 }
             },
             "admin_level": {
@@ -803,6 +821,9 @@ locale.uk = {
             "highway/footway": {
                 "name": "Тротуар"
             },
+            "highway/living_street": {
+                "name": "Житлова зона"
+            },
             "highway/mini_roundabout": {
                 "name": "Малий круговий рух "
             },
@@ -940,6 +961,9 @@ locale.uk = {
             },
             "landuse/residential": {
                 "name": "Житлова зона"
+            },
+            "landuse/retail": {
+                "name": "Роздрібна торгівля"
             },
             "landuse/vineyard": {
                 "name": "Виноградник"

@@ -173,6 +173,11 @@ locale.ja = {
     "logout": "ログアウト",
     "loading_auth": "OpenStreetMapへ接続中...",
     "report_a_bug": "バグ報告",
+    "status": {
+        "error": "APIサーバへの接続が失敗しました",
+        "offline": "APIがオフラインです。しばらくしてからもう一度お試しください。",
+        "readonly": "APIは読み込み専用モードです。変更内容の保存はしばらく時間を置いてから行なってください。"
+    },
     "commit": {
         "title": "編集結果を保存",
         "description_placeholder": "貢献のための簡単な解説",
@@ -208,7 +213,8 @@ locale.ja = {
         "choose": "地物の種類を選択",
         "results": "検索結果{n}件: {search}",
         "reference": "OpenStreetMap WIkiで確認",
-        "back_tooltip": "地物の種別を変更"
+        "back_tooltip": "地物の種別を変更",
+        "remove": "削除"
     },
     "background": {
         "title": "背景画像",
@@ -319,6 +325,23 @@ locale.ja = {
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "土地利用"
+            },
+            "category-path": {
+                "name": "小路"
+            },
+            "category-rail": {
+                "name": "線路"
+            },
+            "category-road": {
+                "name": "道路"
+            },
+            "category-water": {
+                "name": "水面"
+            }
+        },
         "fields": {
             "access": {
                 "label": "通行制限",
@@ -362,7 +385,8 @@ locale.ja = {
                     "housename": "地番",
                     "number": "123",
                     "street": "所属する街路名",
-                    "city": "市町村名"
+                    "city": "市町村名",
+                    "postcode": "郵便番号"
                 }
             },
             "admin_level": {
@@ -815,6 +839,9 @@ locale.ja = {
                 "name": "歩道",
                 "terms": "けもの道、山道、コース、歩道、自動車道、路地、航路、軌道、抜け道、通路、小路、線路、道路、経路、街道、農道、大通り"
             },
+            "highway/living_street": {
+                "name": "路地"
+            },
             "highway/mini_roundabout": {
                 "name": "ラウンドアバウト(小)"
             },
@@ -830,6 +857,9 @@ locale.ja = {
             },
             "highway/path": {
                 "name": "小道"
+            },
+            "highway/pedestrian": {
+                "name": "歩行者道"
             },
             "highway/primary": {
                 "name": "主要地方道"
@@ -956,6 +986,9 @@ locale.ja = {
             },
             "landuse/residential": {
                 "name": "住宅区"
+            },
+            "landuse/retail": {
+                "name": "商業区域"
             },
             "landuse/vineyard": {
                 "name": "ワイン畑"
