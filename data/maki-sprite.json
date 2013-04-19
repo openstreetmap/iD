@@ -1,0 +1,2383 @@
+{
+  "name": "renders",
+  "checksum": "1ba92d46455191d31d281d6a71fbe6cc",
+  "shortsum": "1ba92",
+  "images": [
+    {
+      "name": "airfield-12",
+      "filename": "airfield-12.png",
+      "checksum": "b9526e0618cee956aafd479cb9423b27",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 0
+    },
+    {
+      "name": "airfield-18",
+      "filename": "airfield-18.png",
+      "checksum": "98e5b3547f41d42c6ee0efaa01af6d03",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 14
+    },
+    {
+      "name": "airfield-24",
+      "filename": "airfield-24.png",
+      "checksum": "763a773c11d087c8b119195f94c5aa39",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 34
+    },
+    {
+      "name": "airport-12",
+      "filename": "airport-12.png",
+      "checksum": "6b53f08e4d2810069bca5dafb20e4185",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 60
+    },
+    {
+      "name": "airport-18",
+      "filename": "airport-18.png",
+      "checksum": "a943e5665d682954e22863e15d87f4a7",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 74
+    },
+    {
+      "name": "airport-24",
+      "filename": "airport-24.png",
+      "checksum": "5342e8f61b8c5e42a366d751672b8437",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 94
+    },
+    {
+      "name": "alcohol-shop-12",
+      "filename": "alcohol-shop-12.png",
+      "checksum": "67d2c5f8925f0b819f8dea4a6c154bca",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 120
+    },
+    {
+      "name": "alcohol-shop-18",
+      "filename": "alcohol-shop-18.png",
+      "checksum": "aade287e77c34883e069b3d33f4d2238",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 134
+    },
+    {
+      "name": "alcohol-shop-24",
+      "filename": "alcohol-shop-24.png",
+      "checksum": "8d7a1d85a0fce1440360be89688b75fc",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 154
+    },
+    {
+      "name": "america-football-12",
+      "filename": "america-football-12.png",
+      "checksum": "920194ecb314b412b8c70a3df8012a0a",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 180
+    },
+    {
+      "name": "america-football-18",
+      "filename": "america-football-18.png",
+      "checksum": "9b49fa8eb6d67bc84fd50eb66118631f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 194
+    },
+    {
+      "name": "america-football-24",
+      "filename": "america-football-24.png",
+      "checksum": "8f529eb484f79fffe21ecf8b8e742f2a",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 214
+    },
+    {
+      "name": "art-gallery-12",
+      "filename": "art-gallery-12.png",
+      "checksum": "de4e7e0be29702b1eaafdeac8343a09c",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 240
+    },
+    {
+      "name": "art-gallery-18",
+      "filename": "art-gallery-18.png",
+      "checksum": "6a629d6f74806752efd8f6c6ff07d71c",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 254
+    },
+    {
+      "name": "art-gallery-24",
+      "filename": "art-gallery-24.png",
+      "checksum": "d9a54f6358143e8a285ecb815c3292fa",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 274
+    },
+    {
+      "name": "bank-12",
+      "filename": "bank-12.png",
+      "checksum": "c1e0f677103e46dddafb90b13a012f72",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 300
+    },
+    {
+      "name": "bank-18",
+      "filename": "bank-18.png",
+      "checksum": "ead4eb0a01a7d70cab1823be406b23ef",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 314
+    },
+    {
+      "name": "bank-24",
+      "filename": "bank-24.png",
+      "checksum": "caea2d00de5eb96b754c3ae500b65182",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 334
+    },
+    {
+      "name": "bar-12",
+      "filename": "bar-12.png",
+      "checksum": "d1e68eb6d8249bead27317f06a0632b3",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 360
+    },
+    {
+      "name": "bar-18",
+      "filename": "bar-18.png",
+      "checksum": "928d673c73a2c45dd56d0243ea6ca4f2",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 374
+    },
+    {
+      "name": "bar-24",
+      "filename": "bar-24.png",
+      "checksum": "8b96231bc323507b54784bd420aaa4ef",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 394
+    },
+    {
+      "name": "baseball-12",
+      "filename": "baseball-12.png",
+      "checksum": "e23dc85fdf736ae5f2a69fb89430d2ed",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 420
+    },
+    {
+      "name": "baseball-18",
+      "filename": "baseball-18.png",
+      "checksum": "1539a173af0229f57851fd2424d74b30",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 434
+    },
+    {
+      "name": "baseball-24",
+      "filename": "baseball-24.png",
+      "checksum": "c7c7ab68cfd60ad49551466e1b87ef4a",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 454
+    },
+    {
+      "name": "basketball-12",
+      "filename": "basketball-12.png",
+      "checksum": "e6c50b83a33eeae60aa32816e275b3d0",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 480
+    },
+    {
+      "name": "basketball-18",
+      "filename": "basketball-18.png",
+      "checksum": "db23d3fbae34cbb2a1c2be5a5755f314",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 494
+    },
+    {
+      "name": "basketball-24",
+      "filename": "basketball-24.png",
+      "checksum": "b5c2bcbc7269e3093f68ac4e72213847",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 514
+    },
+    {
+      "name": "beer-12",
+      "filename": "beer-12.png",
+      "checksum": "973bfe542d84832345370462076e59c0",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 540
+    },
+    {
+      "name": "beer-18",
+      "filename": "beer-18.png",
+      "checksum": "c9df6a78e6bf534f65936c14fec4d01b",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 554
+    },
+    {
+      "name": "beer-24",
+      "filename": "beer-24.png",
+      "checksum": "370b53c9da390edbc1025b576d36c002",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 574
+    },
+    {
+      "name": "bicycle-12",
+      "filename": "bicycle-12.png",
+      "checksum": "66a34d8dcc1a5091c41b5db1bec2f877",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 600
+    },
+    {
+      "name": "bicycle-18",
+      "filename": "bicycle-18.png",
+      "checksum": "68f600bb03bfe5bfa284fe2957ae544c",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 614
+    },
+    {
+      "name": "bicycle-24",
+      "filename": "bicycle-24.png",
+      "checksum": "9c1faf87dd7adf769f0ca59b461f7aae",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 634
+    },
+    {
+      "name": "building-12",
+      "filename": "building-12.png",
+      "checksum": "a322ef82fffffa2db4b29cd2aae2ae62",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 660
+    },
+    {
+      "name": "building-18",
+      "filename": "building-18.png",
+      "checksum": "ae0f7508ad04045437a06eb31ed0bd14",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 674
+    },
+    {
+      "name": "building-24",
+      "filename": "building-24.png",
+      "checksum": "0593ffa289b24a411bf675e5ab8fe31c",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 694
+    },
+    {
+      "name": "bus-12",
+      "filename": "bus-12.png",
+      "checksum": "fc824ba737231cc3f6cabf0412415c19",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 720
+    },
+    {
+      "name": "bus-18",
+      "filename": "bus-18.png",
+      "checksum": "2d7ac208e2ef8523b8ee4985013142fc",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 734
+    },
+    {
+      "name": "bus-24",
+      "filename": "bus-24.png",
+      "checksum": "49165470a3855d20aa43dde55eb6e327",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 754
+    },
+    {
+      "name": "cafe-12",
+      "filename": "cafe-12.png",
+      "checksum": "2af7021c0c6b3c0b3c23739dcefe0209",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 780
+    },
+    {
+      "name": "cafe-18",
+      "filename": "cafe-18.png",
+      "checksum": "f0c84af96c4af6692e679a6e24d7a3c9",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 794
+    },
+    {
+      "name": "cafe-24",
+      "filename": "cafe-24.png",
+      "checksum": "f60081f1ec9b7be6a5147fdf87394fc3",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 814
+    },
+    {
+      "name": "campsite-12",
+      "filename": "campsite-12.png",
+      "checksum": "abe87e19aad645f339a6a02e8737ce32",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 840
+    },
+    {
+      "name": "campsite-18",
+      "filename": "campsite-18.png",
+      "checksum": "5ce715f2a18ac2f91d38e09fc77abd01",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 854
+    },
+    {
+      "name": "campsite-24",
+      "filename": "campsite-24.png",
+      "checksum": "9d5f5223178f30fe161ba6b43dd4d93f",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 874
+    },
+    {
+      "name": "cemetery-12",
+      "filename": "cemetery-12.png",
+      "checksum": "15241e3098ef491f05d66110aed4a9ce",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 900
+    },
+    {
+      "name": "cemetery-18",
+      "filename": "cemetery-18.png",
+      "checksum": "fc0824f8a084f1bb5cef9e6958b7847a",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 914
+    },
+    {
+      "name": "cemetery-24",
+      "filename": "cemetery-24.png",
+      "checksum": "cdab61785f9dbc77d9340aca35a0978c",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 934
+    },
+    {
+      "name": "cinema-12",
+      "filename": "cinema-12.png",
+      "checksum": "795537dc6fab0637429369f3e420b3a4",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 960
+    },
+    {
+      "name": "cinema-18",
+      "filename": "cinema-18.png",
+      "checksum": "3b70723471afff474035a323ea71b420",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 974
+    },
+    {
+      "name": "cinema-24",
+      "filename": "cinema-24.png",
+      "checksum": "b6abbdc204d840ab1f3e0ada7989a15f",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 994
+    },
+    {
+      "name": "circle-12",
+      "filename": "circle-12.png",
+      "checksum": "d6e61a62723aa87294f038d23eb308b2",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1020
+    },
+    {
+      "name": "circle-18",
+      "filename": "circle-18.png",
+      "checksum": "ca596cfcdf1def0deace30be7630e5b1",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1034
+    },
+    {
+      "name": "circle-24",
+      "filename": "circle-24.png",
+      "checksum": "f8c2026cb7e6bd8bf299bb13d11907fb",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1054
+    },
+    {
+      "name": "circle-stroked-12",
+      "filename": "circle-stroked-12.png",
+      "checksum": "75389f6b5a16c558d7d663dc22af8f51",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1080
+    },
+    {
+      "name": "circle-stroked-18",
+      "filename": "circle-stroked-18.png",
+      "checksum": "b9e16171d038d60e39aae4fd89b7eb7b",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1094
+    },
+    {
+      "name": "circle-stroked-24",
+      "filename": "circle-stroked-24.png",
+      "checksum": "35cedb9ae037b55abd7bb734da673186",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1114
+    },
+    {
+      "name": "college-12",
+      "filename": "college-12.png",
+      "checksum": "8025adf97f9955d8ada60654174b7d48",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1140
+    },
+    {
+      "name": "college-18",
+      "filename": "college-18.png",
+      "checksum": "aa0a1ab647d3346dd63b9a9e93fb248a",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1154
+    },
+    {
+      "name": "college-24",
+      "filename": "college-24.png",
+      "checksum": "453e26e52aba46ccbea9eeddba69f782",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1174
+    },
+    {
+      "name": "commercial-12",
+      "filename": "commercial-12.png",
+      "checksum": "aec7ec7cb92fa2a641e9be3dca0a13c0",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1200
+    },
+    {
+      "name": "commercial-18",
+      "filename": "commercial-18.png",
+      "checksum": "e2c0b23068f01e8f75f1f5553c94008b",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1214
+    },
+    {
+      "name": "commercial-24",
+      "filename": "commercial-24.png",
+      "checksum": "854eab960317a2c3fe7831ec132c271a",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1234
+    },
+    {
+      "name": "cricket-12",
+      "filename": "cricket-12.png",
+      "checksum": "37182d4dda36165c144cc4893d3c295e",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1260
+    },
+    {
+      "name": "cricket-18",
+      "filename": "cricket-18.png",
+      "checksum": "d52ed599e08b4e1f79581a73beb9368f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1274
+    },
+    {
+      "name": "cricket-24",
+      "filename": "cricket-24.png",
+      "checksum": "65614ef65b087e8dbe05d1bf899985af",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1294
+    },
+    {
+      "name": "cross-12",
+      "filename": "cross-12.png",
+      "checksum": "9f231de1f55e7f77df06631461d083f3",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1320
+    },
+    {
+      "name": "cross-18",
+      "filename": "cross-18.png",
+      "checksum": "97dbaf80bf11526c9f9d1937da7ee6e7",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1334
+    },
+    {
+      "name": "cross-24",
+      "filename": "cross-24.png",
+      "checksum": "04999d43ce02e2cc2ebe0df4df13cd66",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1354
+    },
+    {
+      "name": "dam-12",
+      "filename": "dam-12.png",
+      "checksum": "6b8325e29a1471edfad4b3e1467e31f6",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1380
+    },
+    {
+      "name": "dam-18",
+      "filename": "dam-18.png",
+      "checksum": "fa8a9e51f35eaee6a5ec2545a04cce82",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1394
+    },
+    {
+      "name": "dam-24",
+      "filename": "dam-24.png",
+      "checksum": "8f16a097f295c3f282e3b36dd4fd6972",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1414
+    },
+    {
+      "name": "danger-12",
+      "filename": "danger-12.png",
+      "checksum": "5b30043a4b1bccddc2da86803bde6b9b",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1440
+    },
+    {
+      "name": "danger-18",
+      "filename": "danger-18.png",
+      "checksum": "5042985be19f3fda7813b7ff27069a65",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1454
+    },
+    {
+      "name": "danger-24",
+      "filename": "danger-24.png",
+      "checksum": "4f8643b147013bc1a4ede328bea495ab",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1474
+    },
+    {
+      "name": "disability-12",
+      "filename": "disability-12.png",
+      "checksum": "22256838b6e00de97a2d4c70cf83c4ee",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1500
+    },
+    {
+      "name": "disability-18",
+      "filename": "disability-18.png",
+      "checksum": "f646e8ef99ed82f20d7996990c8efe47",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1514
+    },
+    {
+      "name": "disability-24",
+      "filename": "disability-24.png",
+      "checksum": "c96d67c4bd0ee0946e619c1566046b0a",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1534
+    },
+    {
+      "name": "embassy-12",
+      "filename": "embassy-12.png",
+      "checksum": "6df9d23e8fed60975668954888d909b6",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1560
+    },
+    {
+      "name": "embassy-18",
+      "filename": "embassy-18.png",
+      "checksum": "c7b1a94399bd94348b5f4afde12dc84d",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1574
+    },
+    {
+      "name": "embassy-24",
+      "filename": "embassy-24.png",
+      "checksum": "aa806eae9206940912b38bd0e94df8bb",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1594
+    },
+    {
+      "name": "emergency-telephone-12",
+      "filename": "emergency-telephone-12.png",
+      "checksum": "85f80cbc209b367daf67896b70c8053d",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1620
+    },
+    {
+      "name": "emergency-telephone-18",
+      "filename": "emergency-telephone-18.png",
+      "checksum": "94e97a8d5b3c39907ee0955ed2fa6ae7",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1634
+    },
+    {
+      "name": "emergency-telephone-24",
+      "filename": "emergency-telephone-24.png",
+      "checksum": "4b5c464358bf0b732cf8cc7646536943",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1654
+    },
+    {
+      "name": "fast-food-12",
+      "filename": "fast-food-12.png",
+      "checksum": "3cb77f642e7e46e22679c1e5d6d652d4",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1680
+    },
+    {
+      "name": "fast-food-18",
+      "filename": "fast-food-18.png",
+      "checksum": "8b0dc00ff1006f4fec632dabc1ca9b8f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1694
+    },
+    {
+      "name": "fast-food-24",
+      "filename": "fast-food-24.png",
+      "checksum": "508131d31a1818fac96b90567fe9b8c7",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1714
+    },
+    {
+      "name": "ferry-12",
+      "filename": "ferry-12.png",
+      "checksum": "36054f176d6bd01b12d40f0d372fbe2d",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1740
+    },
+    {
+      "name": "ferry-18",
+      "filename": "ferry-18.png",
+      "checksum": "e354a39aa69c5c101f61ffc8b05860e6",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1754
+    },
+    {
+      "name": "ferry-24",
+      "filename": "ferry-24.png",
+      "checksum": "7c391e6a939cfa1e728fcafe4c176941",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1774
+    },
+    {
+      "name": "fire-station-12",
+      "filename": "fire-station-12.png",
+      "checksum": "6eb99415645a3e2ef878034095c55846",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1800
+    },
+    {
+      "name": "fire-station-18",
+      "filename": "fire-station-18.png",
+      "checksum": "a207cd434fd3e4825ac988b7ddcf19df",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1814
+    },
+    {
+      "name": "fire-station-24",
+      "filename": "fire-station-24.png",
+      "checksum": "ac47ea4ce176d8d6d307cd25d67023ea",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1834
+    },
+    {
+      "name": "fuel-12",
+      "filename": "fuel-12.png",
+      "checksum": "b4787a2f5c482e92edd88fa1d01f6281",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1860
+    },
+    {
+      "name": "fuel-18",
+      "filename": "fuel-18.png",
+      "checksum": "a8774bb166bb8d4f020f488353b344d3",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1874
+    },
+    {
+      "name": "fuel-24",
+      "filename": "fuel-24.png",
+      "checksum": "5df1227bf1586223e2b1ac02a6f2dfdb",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1894
+    },
+    {
+      "name": "garden-12",
+      "filename": "garden-12.png",
+      "checksum": "112c65d16bfb36687546c96aebc258b2",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1920
+    },
+    {
+      "name": "garden-18",
+      "filename": "garden-18.png",
+      "checksum": "facf5d2221637925a4e2ea1588c31648",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1934
+    },
+    {
+      "name": "garden-24",
+      "filename": "garden-24.png",
+      "checksum": "2d5e55ac365d449b79302446ad00b277",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 1954
+    },
+    {
+      "name": "golf-12",
+      "filename": "golf-12.png",
+      "checksum": "c7efb576ba39158031cc1394badf1487",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 1980
+    },
+    {
+      "name": "golf-18",
+      "filename": "golf-18.png",
+      "checksum": "2b487dfe7d45368c92db12de3fb2a9c6",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 1994
+    },
+    {
+      "name": "golf-24",
+      "filename": "golf-24.png",
+      "checksum": "8884f1fca8c8bf8320cd8c4b1b6a186d",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2014
+    },
+    {
+      "name": "grocery-12",
+      "filename": "grocery-12.png",
+      "checksum": "7472a9a4a7207dadce2ee1af84d848b8",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2040
+    },
+    {
+      "name": "grocery-18",
+      "filename": "grocery-18.png",
+      "checksum": "9f8f07570939a76b591d3100f5c3e39f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2054
+    },
+    {
+      "name": "grocery-24",
+      "filename": "grocery-24.png",
+      "checksum": "c95aba7551806c7c375cccff7b6e9000",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2074
+    },
+    {
+      "name": "harbor-12",
+      "filename": "harbor-12.png",
+      "checksum": "564c8df375ba7b26ea484fa6d2ff9438",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2100
+    },
+    {
+      "name": "harbor-18",
+      "filename": "harbor-18.png",
+      "checksum": "bb5b2bdc2e3c4596cce3f026b01b69ad",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2114
+    },
+    {
+      "name": "harbor-24",
+      "filename": "harbor-24.png",
+      "checksum": "265135684e1d2834ca91bcb31c141d83",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2134
+    },
+    {
+      "name": "heliport-12",
+      "filename": "heliport-12.png",
+      "checksum": "5326c85911f16569b214ad1e3719ca41",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2160
+    },
+    {
+      "name": "heliport-18",
+      "filename": "heliport-18.png",
+      "checksum": "b314de3f8a74d99af6f765102b52c0f3",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2174
+    },
+    {
+      "name": "heliport-24",
+      "filename": "heliport-24.png",
+      "checksum": "ac7f4b7df7d205a4aa39b62ea9b80a8a",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2194
+    },
+    {
+      "name": "hospital-12",
+      "filename": "hospital-12.png",
+      "checksum": "b907a969d2b0d7ce59e8a10674c14734",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2220
+    },
+    {
+      "name": "hospital-18",
+      "filename": "hospital-18.png",
+      "checksum": "58a5e6c93f3e11ef4b8d41fc0fc5ad9f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2234
+    },
+    {
+      "name": "hospital-24",
+      "filename": "hospital-24.png",
+      "checksum": "0d880c4b1be539b9427d8ba9a08aa3ce",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2254
+    },
+    {
+      "name": "industrial-12",
+      "filename": "industrial-12.png",
+      "checksum": "e467de1caacf788fa7cbcd509e2635f0",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2280
+    },
+    {
+      "name": "industrial-18",
+      "filename": "industrial-18.png",
+      "checksum": "2229c38d3832a20b325caafd19199efc",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2294
+    },
+    {
+      "name": "industrial-24",
+      "filename": "industrial-24.png",
+      "checksum": "e61b78e505d82bcdb610d7e2b385f086",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2314
+    },
+    {
+      "name": "library-12",
+      "filename": "library-12.png",
+      "checksum": "438c8f9d3ff839978475caf9fa2c4f82",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2340
+    },
+    {
+      "name": "library-18",
+      "filename": "library-18.png",
+      "checksum": "431ab17078ab6d55f6ea137c401218a7",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2354
+    },
+    {
+      "name": "library-24",
+      "filename": "library-24.png",
+      "checksum": "6c7ef25a896878b1b511b387e8dec84d",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2374
+    },
+    {
+      "name": "lodging-12",
+      "filename": "lodging-12.png",
+      "checksum": "bba85674b230105e1d2f7169e89e82ac",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2400
+    },
+    {
+      "name": "lodging-18",
+      "filename": "lodging-18.png",
+      "checksum": "32de3d8f0894dd28be680e1e00de766d",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2414
+    },
+    {
+      "name": "lodging-24",
+      "filename": "lodging-24.png",
+      "checksum": "dd5f3e4761bc6c6827bf099467c18ab9",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2434
+    },
+    {
+      "name": "logging-12",
+      "filename": "logging-12.png",
+      "checksum": "a3f41b547179072b54b44c304aaf8eb3",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2460
+    },
+    {
+      "name": "logging-18",
+      "filename": "logging-18.png",
+      "checksum": "179042407769523ca2496d2021eb742e",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2474
+    },
+    {
+      "name": "logging-24",
+      "filename": "logging-24.png",
+      "checksum": "5b7fda32ea755d82b2969b23dabb575b",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2494
+    },
+    {
+      "name": "marker-12",
+      "filename": "marker-12.png",
+      "checksum": "903686025e1bd7306527b5b6c0204802",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2520
+    },
+    {
+      "name": "marker-18",
+      "filename": "marker-18.png",
+      "checksum": "0e5b0219f39bfa37d3c7b2a26c6d77ca",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2534
+    },
+    {
+      "name": "marker-24",
+      "filename": "marker-24.png",
+      "checksum": "4a36edf3d457dffbb8df35e369365ec2",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2554
+    },
+    {
+      "name": "marker-stroked-12",
+      "filename": "marker-stroked-12.png",
+      "checksum": "a2eadcdcf789100c4b784198bfdfd954",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2580
+    },
+    {
+      "name": "marker-stroked-18",
+      "filename": "marker-stroked-18.png",
+      "checksum": "c3a870f14178ea78e3aba5821a0e710a",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2594
+    },
+    {
+      "name": "marker-stroked-24",
+      "filename": "marker-stroked-24.png",
+      "checksum": "7dfd99593fa72d336b92ef625552f18c",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2614
+    },
+    {
+      "name": "monument-12",
+      "filename": "monument-12.png",
+      "checksum": "66bc47f1ff765822a1a470cfc5103fb9",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2640
+    },
+    {
+      "name": "monument-18",
+      "filename": "monument-18.png",
+      "checksum": "20d1967b3be574ad77c6941853f8dd27",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2654
+    },
+    {
+      "name": "monument-24",
+      "filename": "monument-24.png",
+      "checksum": "0e93f0b0863e7f7406ad4c5211ddb600",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2674
+    },
+    {
+      "name": "museum-12",
+      "filename": "museum-12.png",
+      "checksum": "6347393a95831f37e1dcdc117195b6d8",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2700
+    },
+    {
+      "name": "museum-18",
+      "filename": "museum-18.png",
+      "checksum": "836afb856bdb0432bacacc2631f5896a",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2714
+    },
+    {
+      "name": "museum-24",
+      "filename": "museum-24.png",
+      "checksum": "0d14b557f06f843f9580b3b94d3d4926",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2734
+    },
+    {
+      "name": "music-12",
+      "filename": "music-12.png",
+      "checksum": "dd2690b5c633f55bab0f6010c129c0f2",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2760
+    },
+    {
+      "name": "music-18",
+      "filename": "music-18.png",
+      "checksum": "c5267632d95684bac6d212c614568c25",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2774
+    },
+    {
+      "name": "music-24",
+      "filename": "music-24.png",
+      "checksum": "16c4ab9a13ff321bf29aa7bbc9bea481",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2794
+    },
+    {
+      "name": "oil-well-12",
+      "filename": "oil-well-12.png",
+      "checksum": "9f5e94b67834a2171ed981acacf92f25",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2820
+    },
+    {
+      "name": "oil-well-18",
+      "filename": "oil-well-18.png",
+      "checksum": "ca53f34314c51fce4ad53a4e8616c878",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2834
+    },
+    {
+      "name": "oil-well-24",
+      "filename": "oil-well-24.png",
+      "checksum": "8862f8303fcaa1edf6c3f194645034b9",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2854
+    },
+    {
+      "name": "park-12",
+      "filename": "park-12.png",
+      "checksum": "e8b59c30fc5e78b9ac2b833c1a3f14d0",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2880
+    },
+    {
+      "name": "park-18",
+      "filename": "park-18.png",
+      "checksum": "e58f6bab4c825124d25d8655f8b954aa",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2894
+    },
+    {
+      "name": "park-24",
+      "filename": "park-24.png",
+      "checksum": "57137a8eec94a52207bc2c1b42b3016e",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2914
+    },
+    {
+      "name": "park2-12",
+      "filename": "park2-12.png",
+      "checksum": "029bdd64be65c75958e0f9d47d56e391",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 2940
+    },
+    {
+      "name": "park2-18",
+      "filename": "park2-18.png",
+      "checksum": "e406aa182ca3a0d29129e77b06a8d7ce",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 2954
+    },
+    {
+      "name": "park2-24",
+      "filename": "park2-24.png",
+      "checksum": "4098a66a9368b07fcf2aa171567ea9b1",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 2974
+    },
+    {
+      "name": "parking-12",
+      "filename": "parking-12.png",
+      "checksum": "79c8fd2b9f6ddcf777f0110c8e62f5ba",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3000
+    },
+    {
+      "name": "parking-18",
+      "filename": "parking-18.png",
+      "checksum": "558e74fa7580cccc7c93cc55d75f31e6",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3014
+    },
+    {
+      "name": "parking-24",
+      "filename": "parking-24.png",
+      "checksum": "f132f1a6254c72c83e6f1852bcffd941",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3034
+    },
+    {
+      "name": "parking-garage-12",
+      "filename": "parking-garage-12.png",
+      "checksum": "70b26353cfe0340a252ad512c35b9fa5",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3060
+    },
+    {
+      "name": "parking-garage-18",
+      "filename": "parking-garage-18.png",
+      "checksum": "c37761c102d31a24beb8eb791fded465",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3074
+    },
+    {
+      "name": "parking-garage-24",
+      "filename": "parking-garage-24.png",
+      "checksum": "9d249813ac1983e717e55ea1f5ee85ba",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3094
+    },
+    {
+      "name": "pharmacy-12",
+      "filename": "pharmacy-12.png",
+      "checksum": "894ac914eff89aca1a96ade95db4bf20",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3120
+    },
+    {
+      "name": "pharmacy-18",
+      "filename": "pharmacy-18.png",
+      "checksum": "c8665038a09f8d97ef3b85c5f0ee0cee",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3134
+    },
+    {
+      "name": "pharmacy-24",
+      "filename": "pharmacy-24.png",
+      "checksum": "3f02a547ba468fa1eb1a7123c0a01e09",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3154
+    },
+    {
+      "name": "pitch-12",
+      "filename": "pitch-12.png",
+      "checksum": "b4eab729f8ec51d7a73d040c3cd48141",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3180
+    },
+    {
+      "name": "pitch-18",
+      "filename": "pitch-18.png",
+      "checksum": "82c293d8c790dcaaccb39fb49fe5b454",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3194
+    },
+    {
+      "name": "pitch-24",
+      "filename": "pitch-24.png",
+      "checksum": "4b58a16d132c20016d7ec0758c0264b2",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3214
+    },
+    {
+      "name": "place-of-worship-12",
+      "filename": "place-of-worship-12.png",
+      "checksum": "181ee019ffecee5bbc5111c87cae2bb2",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3240
+    },
+    {
+      "name": "place-of-worship-18",
+      "filename": "place-of-worship-18.png",
+      "checksum": "532cce8366230f33e305a6d30ede4b12",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3254
+    },
+    {
+      "name": "place-of-worship-24",
+      "filename": "place-of-worship-24.png",
+      "checksum": "43402e98374c9d55a8da88dea604837b",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3274
+    },
+    {
+      "name": "police-12",
+      "filename": "police-12.png",
+      "checksum": "1952b3f66e67701d9f4471b98d494da1",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3300
+    },
+    {
+      "name": "police-18",
+      "filename": "police-18.png",
+      "checksum": "28142d8f0ee3d487bc31bf5929d76f12",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3314
+    },
+    {
+      "name": "police-24",
+      "filename": "police-24.png",
+      "checksum": "5b40ce1e5854f4da44c9922822bdebb8",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3334
+    },
+    {
+      "name": "post-12",
+      "filename": "post-12.png",
+      "checksum": "2b1bf001b79b9c344e9cfb682ee77fd6",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3360
+    },
+    {
+      "name": "post-18",
+      "filename": "post-18.png",
+      "checksum": "8f6f2d995405b1ea9790bf334519a351",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3374
+    },
+    {
+      "name": "post-24",
+      "filename": "post-24.png",
+      "checksum": "99188b10781eef3151c620af3adc3247",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3394
+    },
+    {
+      "name": "prison-12",
+      "filename": "prison-12.png",
+      "checksum": "919453b26df37b40c082080ee0df79a4",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3420
+    },
+    {
+      "name": "prison-18",
+      "filename": "prison-18.png",
+      "checksum": "d7d8c0e3e24859246443b99314eaf983",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3434
+    },
+    {
+      "name": "prison-24",
+      "filename": "prison-24.png",
+      "checksum": "acb42120ee6f62c98c8836d1916f0399",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3454
+    },
+    {
+      "name": "rail-12",
+      "filename": "rail-12.png",
+      "checksum": "8298c2b78faae3c5dc32e9230c04f30a",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3480
+    },
+    {
+      "name": "rail-18",
+      "filename": "rail-18.png",
+      "checksum": "a43a9e5077d2c6745442a32ba708adfb",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3494
+    },
+    {
+      "name": "rail-24",
+      "filename": "rail-24.png",
+      "checksum": "c5854dbdc1dcbefd2f10849680803409",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3514
+    },
+    {
+      "name": "rail-above-12",
+      "filename": "rail-above-12.png",
+      "checksum": "e29347e33be100099f5bfd4a95909889",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3540
+    },
+    {
+      "name": "rail-above-18",
+      "filename": "rail-above-18.png",
+      "checksum": "19fe3670545d4eda0339ac5b38f0dc6d",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3554
+    },
+    {
+      "name": "rail-above-24",
+      "filename": "rail-above-24.png",
+      "checksum": "94fe96ae466f096c99f5a4b3b8f5b2fd",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3574
+    },
+    {
+      "name": "rail-underground-12",
+      "filename": "rail-underground-12.png",
+      "checksum": "398e9d097b04f75d4ecc3dcf753d5782",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3600
+    },
+    {
+      "name": "rail-underground-18",
+      "filename": "rail-underground-18.png",
+      "checksum": "b7006a568612a36f67410d4f6f686387",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3614
+    },
+    {
+      "name": "rail-underground-24",
+      "filename": "rail-underground-24.png",
+      "checksum": "6d4ecd807370b6298c7bfa76a4625866",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3634
+    },
+    {
+      "name": "religious-christian-12",
+      "filename": "religious-christian-12.png",
+      "checksum": "2de6fa00b93d27cb2a7be5388bba050d",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3660
+    },
+    {
+      "name": "religious-christian-18",
+      "filename": "religious-christian-18.png",
+      "checksum": "2617815103e5d0ad2cab0eed812066c2",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3674
+    },
+    {
+      "name": "religious-christian-24",
+      "filename": "religious-christian-24.png",
+      "checksum": "c3fec10fc44faf59ef9e45c260014cfa",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3694
+    },
+    {
+      "name": "religious-jewish-12",
+      "filename": "religious-jewish-12.png",
+      "checksum": "60d788b157621e6d90390a101b0effd8",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3720
+    },
+    {
+      "name": "religious-jewish-18",
+      "filename": "religious-jewish-18.png",
+      "checksum": "c2f83d2b4dc3b71c355414301989b19c",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3734
+    },
+    {
+      "name": "religious-jewish-24",
+      "filename": "religious-jewish-24.png",
+      "checksum": "27c6b6b3a81db68df08db89140253ae2",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3754
+    },
+    {
+      "name": "religious-muslim-12",
+      "filename": "religious-muslim-12.png",
+      "checksum": "3e7de13148063725396fea944ba93139",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3780
+    },
+    {
+      "name": "religious-muslim-18",
+      "filename": "religious-muslim-18.png",
+      "checksum": "67a3ec9dd1d8dd2fca9f173fcc43c6b1",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3794
+    },
+    {
+      "name": "religious-muslim-24",
+      "filename": "religious-muslim-24.png",
+      "checksum": "a7977e9e11a952d339a2fda9319d605d",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3814
+    },
+    {
+      "name": "restaurant-12",
+      "filename": "restaurant-12.png",
+      "checksum": "72f9065af4c18eb4a73ddf892a65d868",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3840
+    },
+    {
+      "name": "restaurant-18",
+      "filename": "restaurant-18.png",
+      "checksum": "7b1832d7c8a935565288ee0b7d8ce65f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3854
+    },
+    {
+      "name": "restaurant-24",
+      "filename": "restaurant-24.png",
+      "checksum": "0b96a827e6f06f8c95d07ddb598d8d30",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3874
+    },
+    {
+      "name": "roadblock-12",
+      "filename": "roadblock-12.png",
+      "checksum": "9e597c63ca6b453ec25f5101bb33ce29",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3900
+    },
+    {
+      "name": "roadblock-18",
+      "filename": "roadblock-18.png",
+      "checksum": "d2bda87d207cf51182beadc266d01068",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3914
+    },
+    {
+      "name": "roadblock-24",
+      "filename": "roadblock-24.png",
+      "checksum": "c672482adfb006de3f9c1647abc1e12a",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3934
+    },
+    {
+      "name": "school-12",
+      "filename": "school-12.png",
+      "checksum": "d6bea5385787709dc6a3a7301c355fc9",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 3960
+    },
+    {
+      "name": "school-18",
+      "filename": "school-18.png",
+      "checksum": "6689ef5fbb44f0465773b634345a0116",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 3974
+    },
+    {
+      "name": "school-24",
+      "filename": "school-24.png",
+      "checksum": "d6e835e3c83f09d7e47d57d100eed7e4",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 3994
+    },
+    {
+      "name": "shop-12",
+      "filename": "shop-12.png",
+      "checksum": "c17f77924bf149d3ef2bc10b5a281a28",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4020
+    },
+    {
+      "name": "shop-18",
+      "filename": "shop-18.png",
+      "checksum": "c99fc383ff21ca6298f076caec5948b2",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4034
+    },
+    {
+      "name": "shop-24",
+      "filename": "shop-24.png",
+      "checksum": "7b89032606aa3b83aa15c7955319cabf",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4054
+    },
+    {
+      "name": "skiing-12",
+      "filename": "skiing-12.png",
+      "checksum": "8240128a55ddaeae331ae7294f325e24",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4080
+    },
+    {
+      "name": "skiing-18",
+      "filename": "skiing-18.png",
+      "checksum": "3b57c02c72f43d07cc8231c59e1036b5",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4094
+    },
+    {
+      "name": "skiing-24",
+      "filename": "skiing-24.png",
+      "checksum": "dc872aa40499db88b621a38bd0b0adb2",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4114
+    },
+    {
+      "name": "slaughterhouse-12",
+      "filename": "slaughterhouse-12.png",
+      "checksum": "c0ebdbcfdfda12de243c7a3fc6092303",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4140
+    },
+    {
+      "name": "slaughterhouse-18",
+      "filename": "slaughterhouse-18.png",
+      "checksum": "ae9764f501e78d238c06ff972b5cea1f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4154
+    },
+    {
+      "name": "slaughterhouse-24",
+      "filename": "slaughterhouse-24.png",
+      "checksum": "42351758ca6294d20a99583142cafd2b",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4174
+    },
+    {
+      "name": "soccer-12",
+      "filename": "soccer-12.png",
+      "checksum": "a3a211f2620c4720914d4079e494f3a2",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4200
+    },
+    {
+      "name": "soccer-18",
+      "filename": "soccer-18.png",
+      "checksum": "15ba0ea74ff7f5f8e73c1a676813cd90",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4214
+    },
+    {
+      "name": "soccer-24",
+      "filename": "soccer-24.png",
+      "checksum": "dc69e221a4c5ac33544049631bd54c62",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4234
+    },
+    {
+      "name": "square-12",
+      "filename": "square-12.png",
+      "checksum": "655aa08149f320bdc64f7a1dd54c0e5b",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4260
+    },
+    {
+      "name": "square-18",
+      "filename": "square-18.png",
+      "checksum": "4789df5e6e6a2f318b1f6244a64fb56c",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4274
+    },
+    {
+      "name": "square-24",
+      "filename": "square-24.png",
+      "checksum": "0f955fca59d910c63c468af68ae5361e",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4294
+    },
+    {
+      "name": "square-stroked-12",
+      "filename": "square-stroked-12.png",
+      "checksum": "75771163677c2ab9aaa014042591b038",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4320
+    },
+    {
+      "name": "square-stroked-18",
+      "filename": "square-stroked-18.png",
+      "checksum": "0817df9dfe5e8b1cf2066c30a7b0dc8f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4334
+    },
+    {
+      "name": "square-stroked-24",
+      "filename": "square-stroked-24.png",
+      "checksum": "6073e925cb9caba38948495399e7d306",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4354
+    },
+    {
+      "name": "star-12",
+      "filename": "star-12.png",
+      "checksum": "57b7043d7d66654f6310678f6e74f44b",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4380
+    },
+    {
+      "name": "star-18",
+      "filename": "star-18.png",
+      "checksum": "b78bdb73d48ad8803267a0c5f9f2716d",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4394
+    },
+    {
+      "name": "star-24",
+      "filename": "star-24.png",
+      "checksum": "6d91661c924eddd2061964a579db4ab5",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4414
+    },
+    {
+      "name": "star-stroked-12",
+      "filename": "star-stroked-12.png",
+      "checksum": "af6241dd83df1c96519d7ded6ed5e019",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4440
+    },
+    {
+      "name": "star-stroked-18",
+      "filename": "star-stroked-18.png",
+      "checksum": "671b5c15eb78eff82e708b62fd2ac9a5",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4454
+    },
+    {
+      "name": "star-stroked-24",
+      "filename": "star-stroked-24.png",
+      "checksum": "465fc10a4c4cf5807381568ce6613189",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4474
+    },
+    {
+      "name": "swimming-12",
+      "filename": "swimming-12.png",
+      "checksum": "13703b4e5984291615e2fb3ffb7f5f5d",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4500
+    },
+    {
+      "name": "swimming-18",
+      "filename": "swimming-18.png",
+      "checksum": "2f8ffad173cdd3ccd130ef0b5868c54b",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4514
+    },
+    {
+      "name": "swimming-24",
+      "filename": "swimming-24.png",
+      "checksum": "276d747cf13aeaf4cda6a4f7b35e5c6e",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4534
+    },
+    {
+      "name": "telephone-12",
+      "filename": "telephone-12.png",
+      "checksum": "3643ba061c4303ae6f33e577a9edea1c",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4560
+    },
+    {
+      "name": "telephone-18",
+      "filename": "telephone-18.png",
+      "checksum": "d0eca4e8a1dfb6d71a02c48fe7f21254",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4574
+    },
+    {
+      "name": "telephone-24",
+      "filename": "telephone-24.png",
+      "checksum": "c4a048e32c3ba7011a5a03035dfe02c2",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4594
+    },
+    {
+      "name": "tennis-12",
+      "filename": "tennis-12.png",
+      "checksum": "7ce8cd9286caad988e30e3769bb6cb30",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4620
+    },
+    {
+      "name": "tennis-18",
+      "filename": "tennis-18.png",
+      "checksum": "1c929dc13578f8cdca55f379007fe157",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4634
+    },
+    {
+      "name": "tennis-24",
+      "filename": "tennis-24.png",
+      "checksum": "819994f21550c7f5899410125f164b51",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4654
+    },
+    {
+      "name": "theatre-12",
+      "filename": "theatre-12.png",
+      "checksum": "37ca3c7429cdcd7d726e0f7f10d24765",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4680
+    },
+    {
+      "name": "theatre-18",
+      "filename": "theatre-18.png",
+      "checksum": "43c2ae87df2a9bb61d36823357e0c274",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4694
+    },
+    {
+      "name": "theatre-24",
+      "filename": "theatre-24.png",
+      "checksum": "c0b9f60488837a03df200fa6290edfe3",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4714
+    },
+    {
+      "name": "toilets-12",
+      "filename": "toilets-12.png",
+      "checksum": "6c689a544a1bcd44fc0be7bb01f5b279",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4740
+    },
+    {
+      "name": "toilets-18",
+      "filename": "toilets-18.png",
+      "checksum": "ad1afef6fe5913f1a8da6aabf2029270",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4754
+    },
+    {
+      "name": "toilets-24",
+      "filename": "toilets-24.png",
+      "checksum": "2139dc42b76e7f6b781d4c83d228623b",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4774
+    },
+    {
+      "name": "town-hall-12",
+      "filename": "town-hall-12.png",
+      "checksum": "26e7e5a891a390475b604bf8c120b3aa",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4800
+    },
+    {
+      "name": "town-hall-18",
+      "filename": "town-hall-18.png",
+      "checksum": "ad0574861f060e71d6f2b7dd060da874",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4814
+    },
+    {
+      "name": "town-hall-24",
+      "filename": "town-hall-24.png",
+      "checksum": "1479723db33b96fb009ea4ea4224c635",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4834
+    },
+    {
+      "name": "triangle-12",
+      "filename": "triangle-12.png",
+      "checksum": "8c0edd109dd584c2dc9095ecf3d5a28b",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4860
+    },
+    {
+      "name": "triangle-18",
+      "filename": "triangle-18.png",
+      "checksum": "953a4af67dd5a2a1ab63b287adcb81d9",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4874
+    },
+    {
+      "name": "triangle-24",
+      "filename": "triangle-24.png",
+      "checksum": "4972a3afea7224471102ab603994f525",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4894
+    },
+    {
+      "name": "triangle-stroked-12",
+      "filename": "triangle-stroked-12.png",
+      "checksum": "7553f05088a765f2ea563e9908b7d787",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4920
+    },
+    {
+      "name": "triangle-stroked-18",
+      "filename": "triangle-stroked-18.png",
+      "checksum": "b99fb558d91757682f9e9b73c9dcb4d3",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4934
+    },
+    {
+      "name": "triangle-stroked-24",
+      "filename": "triangle-stroked-24.png",
+      "checksum": "9fe52afe9ef33f3c6d60e7ca843144ff",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 4954
+    },
+    {
+      "name": "warehouse-12",
+      "filename": "warehouse-12.png",
+      "checksum": "eb12d547deb27b68c8e5f25d30a88706",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 4980
+    },
+    {
+      "name": "warehouse-18",
+      "filename": "warehouse-18.png",
+      "checksum": "3c32c732a2a654ce11c112f37ad590e9",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 4994
+    },
+    {
+      "name": "warehouse-24",
+      "filename": "warehouse-24.png",
+      "checksum": "87006b760fba8a5b365a9d6321780edf",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 5014
+    },
+    {
+      "name": "waste-basket-12",
+      "filename": "waste-basket-12.png",
+      "checksum": "1f13162f388e6e8d173cb4d858d740fd",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 5040
+    },
+    {
+      "name": "waste-basket-18",
+      "filename": "waste-basket-18.png",
+      "checksum": "69da4d11799d03b9f4c39946fa730b25",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 5054
+    },
+    {
+      "name": "waste-basket-24",
+      "filename": "waste-basket-24.png",
+      "checksum": "a9a9c352d9a547d99f231d0f8ebb8017",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 5074
+    },
+    {
+      "name": "water-12",
+      "filename": "water-12.png",
+      "checksum": "0b1b361d7faedea3353ca674ad534ac3",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 5100
+    },
+    {
+      "name": "water-18",
+      "filename": "water-18.png",
+      "checksum": "e3c484896dba20183b8d60b3cf8a4b5e",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 5114
+    },
+    {
+      "name": "water-24",
+      "filename": "water-24.png",
+      "checksum": "e56683fd6717a2fbaeda853376be8cea",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 5134
+    },
+    {
+      "name": "wetland-12",
+      "filename": "wetland-12.png",
+      "checksum": "093ecac8607493a0dda913a5b3f03572",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 5160
+    },
+    {
+      "name": "wetland-18",
+      "filename": "wetland-18.png",
+      "checksum": "d110dde0c64d1fac067437ba5e87655f",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 5174
+    },
+    {
+      "name": "wetland-24",
+      "filename": "wetland-24.png",
+      "checksum": "afe2874a20fe8b5b813375abfa43a419",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 5194
+    },
+    {
+      "name": "zoo-12",
+      "filename": "zoo-12.png",
+      "checksum": "0d5d086acdcaf60f405c7a8d764815e3",
+      "width": 12,
+      "height": 12,
+      "positionX": 0,
+      "positionY": 5220
+    },
+    {
+      "name": "zoo-18",
+      "filename": "zoo-18.png",
+      "checksum": "73cd25ed60007e8ed02dfb9b4df4b92d",
+      "width": 18,
+      "height": 18,
+      "positionX": 0,
+      "positionY": 5234
+    },
+    {
+      "name": "zoo-24",
+      "filename": "zoo-24.png",
+      "checksum": "46227cc4fea1ff55220a906fe9e2e26e",
+      "width": 24,
+      "height": 24,
+      "positionX": 0,
+      "positionY": 5254
+    }
+  ]
+}

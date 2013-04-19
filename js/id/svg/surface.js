@@ -18,7 +18,7 @@ iD.svg.Surface = function(context) {
                 var klass = rule.selectorText,
                     match = klass && klass.match(selectorRegexp);
                 if (match) {
-                    var id = match[1].replace('feature', 'maki');
+                    var id = match[1];
                     match = rule.style.backgroundPosition.match(/(-?\d+)px (-?\d+)px/);
                     sprites.push({id: id, x: match[1], y: match[2]});
                 }
@@ -105,14 +105,14 @@ iD.svg.Surface = function(context) {
 
         defs.append('image')
             .attr('id', 'maki-sprite')
-            .attr('xlink:href', context.imagePath('feature-icons.png'))
+            .attr('xlink:href', context.imagePath('maki-sprite.png'))
             .call(autosize);
 
         defs.selectAll()
-            .data(sprites(/^\.(feature-[a-z0-9-]+-(12|18))$/))
+            .data(iD.data.maki.images)
             .enter().append('use')
-            .attr('id', function(d) { return d.id; })
-            .attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+            .attr('id', function(d) { return 'maki-' + d.name; })
+            .attr('transform', function(d) { return "translate(-" + d.positionX + ",-" + d.positionY + ")"; })
             .attr('xlink:href', '#maki-sprite');
 
         var layers = selection.selectAll('.layer')

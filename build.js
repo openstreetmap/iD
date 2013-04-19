@@ -116,7 +116,8 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
         categories: rp('categories.json'),
         fields: rp('fields.json')
     },
-    imperial: r('imperial.json')
+    imperial: r('imperial.json'),
+    maki: r('maki-sprite.json')
 }) + ';');
 
 // Push changes from data/core.yaml into data/locales.js

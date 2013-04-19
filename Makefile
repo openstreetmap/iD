@@ -8,10 +8,11 @@ LOCALE ?= en_US
 all: \
 	iD.js \
 	iD.min.js \
+	img/line-presets.png \
 	iD.css
 
 DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
-data/data.js: $(DATA_FILES)
+data/data.js: $(DATA_FILES) maki-sprite
 	node build.js
 
 data/locales/en.js: data/core.yaml data/presets.yaml
@@ -72,7 +73,7 @@ iD.js: node_modules/.install Makefile
 	cat $(filter %.js,$^) > $@
 
 iD.css: css/*.css
-	cat css/reset.css css/map.css css/app.css css/feature-icons.css > $@
+	cat css/reset.css css/map.css css/app.css css/line-presets.css css/maki-sprite.css > $@
 
 node_modules/.install: package.json
 	npm install && touch node_modules/.install
@@ -100,6 +101,9 @@ data/locales.js: data/locales/*.js
 
 img/line-presets.png: svg/line-presets.svg
 	inkscape --export-area-page --export-png=img/line-presets.png svg/line-presets.svg
+
+maki-sprite: node_modules/maki/renders/*.png
+	node data/maki_sprite
 
 D3_FILES = \
 	node_modules/d3/src/start.js \
