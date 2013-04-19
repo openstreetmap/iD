@@ -18,7 +18,7 @@ window.iD = function () {
     };
 
     var history = iD.History(context),
-        dispatch = d3.dispatch('enter', 'exit'),
+        dispatch = d3.dispatch('enter', 'exit', 'toggleFullscreen'),
         mode,
         container,
         ui = iD.ui(context),
@@ -170,6 +170,10 @@ window.iD = function () {
         if (/\.(png|gif|svg)$/.test(_)) return imagePath + _;
         imagePath = _;
         return context;
+    };
+
+    context.toggleFullscreen = function() {
+        dispatch.toggleFullscreen();
     };
 
     return d3.rebind(context, dispatch, 'on');
