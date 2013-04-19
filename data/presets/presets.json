@@ -287,6 +287,16 @@
         "terms": [],
         "name": "Fire Station"
     },
+    "amenity/fountain": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "fountain"
+        },
+        "name": "Fountain"
+    },
     "amenity/fuel": {
         "icon": "fuel",
         "fields": [
@@ -1048,7 +1058,7 @@
         ]
     },
     "building": {
-        "icon": "warehouse",
+        "icon": "building",
         "fields": [
             "building_yes",
             "levels",
