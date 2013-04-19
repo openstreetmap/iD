@@ -37,7 +37,9 @@ iD.ui.Taglist = function(context, entity) {
     }
 
     function drawTags(tags) {
-        collapsebutton.text(t('inspector.additional') + ' (' + Object.keys(tags).length + ')');
+
+        var count = Object.keys(tags).filter(function(d) { return d; }).length;
+        collapsebutton.text(t('inspector.additional') + ' (' + count + ')');
 
         tags = d3.entries(tags);
 
