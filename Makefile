@@ -12,7 +12,7 @@ all: \
 	iD.css
 
 DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
-data/data.js: $(DATA_FILES) maki-sprite
+data/data.js: $(DATA_FILES) img/maki-sprite.png
 	node build.js
 
 data/locales/en.js: data/core.yaml data/presets.yaml
@@ -104,7 +104,7 @@ SPRITE = inkscape --export-area-page --export-png=img/line-presets.png svg/line-
 img/line-presets.png: svg/line-presets.svg
 	if [ `which inkscape` ]; then $(SPRITE); else echo "Inkscape is not installed"; fi;
 
-maki-sprite: node_modules/maki/renders/*.png
+img/maki-sprite.png: $(wildcard node_modules/maki/renders/*.png)
 	node data/maki_sprite
 
 D3_FILES = \
