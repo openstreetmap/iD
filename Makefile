@@ -99,8 +99,10 @@ translations:
 data/locales.js: data/locales/*.js
 	cat $^ > $@
 
+SPRITE = inkscape --export-area-page --export-png=img/line-presets.png svg/line-presets.svg
+
 img/line-presets.png: svg/line-presets.svg
-	inkscape --export-area-page --export-png=img/line-presets.png svg/line-presets.svg
+	if [ `which inkscape` ]; then $(SPRITE); else echo "Inkscape is not installed"; fi;
 
 maki-sprite: node_modules/maki/renders/*.png
 	node data/maki_sprite
