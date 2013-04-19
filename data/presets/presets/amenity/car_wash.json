@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "car_wash"
+    },
+    "name": "Car wash"
+}
