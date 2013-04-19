@@ -98,6 +98,9 @@ translations:
 data/locales.js: data/locales/*.js
 	cat $^ > $@
 
+img/line-presets.png: svg/line-presets.svg
+	inkscape --export-area-page --export-png=img/line-presets.png svg/line-presets.svg
+
 D3_FILES = \
 	node_modules/d3/src/start.js \
 	node_modules/d3/src/arrays/index.js \

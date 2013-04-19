@@ -36,8 +36,6 @@ iD.ui.TagEditor = function(context, entity) {
             .append('span')
             .attr('class', 'icon back');
 
-        var icon = preset.icon || (geometry === 'line' ? 'other-line' : 'marker-stroked');
-
         messagewrap.append('h3')
             .attr('class', 'inspector-inner')
             .text(t('inspector.editing_feature', { feature: preset.name() }));

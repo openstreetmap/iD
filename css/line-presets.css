@@ -1,0 +1,54 @@
+.preset-line-icon {
+    background-image: url(../img/line-presets.png);
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    text-indent: -9999px;
+}
+
+/* Roads */
+.preset-line-icon.highway-motorway          { background-position: -20px -20px;}
+.preset-line-icon.highway-trunk             { background-position: -80px -20px;}
+.preset-line-icon.highway-primary           { background-position: -140px -20px;}
+.preset-line-icon.highway-secondary         { background-position: -200px -20px;}
+.preset-line-icon.highway-tertiary          { background-position: -260px -20px;}
+.preset-line-icon.highway-motorway-link     { background-position: -320px -20px;}
+.preset-line-icon.highway-trunk-link        { background-position: -380px -20px;}
+.preset-line-icon.highway-primary-link      { background-position: -440px -20px;}
+.preset-line-icon.highway-secondary-link    { background-position: -500px -20px;}
+.preset-line-icon.highway-tertiary-link     { background-position: -560px -20px;}
+.preset-line-icon.highway-residential       { background-position: -620px -20px;}
+.preset-line-icon.highway-unclassified      { background-position: -680px -20px;}
+.preset-line-icon.highway-service           { background-position: -740px -20px;}
+.preset-line-icon.highway-road              { background-position: -800px -20px;}
+.preset-line-icon.highway-track             { background-position: -860px -20px;}
+.preset-line-icon.highway-living-street     { background-position: -920px -20px;}
+.preset-line-icon.highway-path              { background-position: -980px -20px;}
+.preset-line-icon.highway-cycleway          { background-position: -1040px -20px;}
+.preset-line-icon.highway-footway           { background-position: -1100px -20px;}
+.preset-line-icon.highway-bridleway         { background-position: -1160px -20px;}
+.preset-line-icon.highway-steps             { background-position: -1220px -20px;}
+
+/* Railway */
+.preset-line-icon.railway-rail              { background-position: -1280px -20px;}
+.preset-line-icon.railway-disused           { background-position: -1340px -20px;}
+.preset-line-icon.railway-abandoned         { background-position: -1400px -20px;}
+.preset-line-icon.railway-subway            { background-position: -1460px -20px;}
+.preset-line-icon.railway-light-rail        { background-position: -1520px -20px;}
+.preset-line-icon.railway-monorail          { background-position: -1580px -20px;}
+
+/* Waterway */
+.preset-line-icon.waterway-river            { background-position: -1640px -20px;}
+.preset-line-icon.waterway-stream           { background-position: -1700px -20px;}
+.preset-line-icon.waterway-canal            { background-position: -1760px -20px;}
+.preset-line-icon.waterway-ditch            { background-position: -1820px -20px;}
+
+.preset-line-icon.power-line                { background-position: -1880px -20px;}
+
+.preset-line-icon.other-line                { background-position: -1940px -20px;}
+
+.preset-line-icon.category-roads            { background-position: -2000px -20px;}
+.preset-line-icon.category-rail             { background-position: -2060px -20px;}
+.preset-line-icon.category-path             { background-position: -2120px -20px;}
+.preset-line-icon.category-water            { background-position: -2180px -20px;}
+

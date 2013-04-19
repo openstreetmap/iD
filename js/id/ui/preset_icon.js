@@ -13,7 +13,9 @@ iD.ui.PresetIcon = function(geometry) {
 
         selection.append('div')
             .attr('class', function(preset) {
-                return 'feature-' + (preset.icon || fallbackIcon) + ' icon preset-icon preset-icon-' + geometry;
+                return (geometry === 'line' ? 'preset-line-icon ' : 'feature-') +
+                    (preset.icon || fallbackIcon) +
+                    ' preset-icon preset-icon-' + geometry;
             });
     };
 };
