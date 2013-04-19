@@ -8,6 +8,14 @@ iD.ui.Geocoder = function(context) {
             [parseFloat(bounds[2]), parseFloat(bounds[1])]);
     }
 
+    function truncate(d) {
+        if (d.display_name.length > 80) {
+            return d.display_name.substr(0, 80) + '…';
+        } else {
+            return d.display_name;
+        }
+    }
+
     function geocoder(selection) {
 
         var shown = false;
@@ -26,7 +34,7 @@ iD.ui.Geocoder = function(context) {
                             .call(iD.ui.Toggle(true))
                             .append('span')
                                 .attr('class', 'not-found')
-                                .text(t('geocoder.no_results', {name: searchVal}));
+                                .text(t('geocoder.no_results', { name: searchVal }));
                     } else if (resp.length > 1) {
                         var spans = resultsList.html('').selectAll('span')
                             .data(resp, function(d) { return d.place_id; });
@@ -38,13 +46,7 @@ iD.ui.Geocoder = function(context) {
                             })
                             .append('a')
                             .attr('tabindex', 1)
-                            .text(function(d) {
-                                if (d.display_name.length > 80) {
-                                    return d.display_name.substr(0, 80) + '…';
-                                } else {
-                                    return d.display_name;
-                                }
-                            })
+                            .text(truncate)
                             .on('click', clickResult)
                             .on('keydown', function(d) {
                                 // support tabbing to and accepting this
@@ -54,6 +56,7 @@ iD.ui.Geocoder = function(context) {
                         spans.exit().remove();
                         resultsList.call(iD.ui.Toggle(true));
                     } else {
+                        hide();
                         applyBounds(resultExtent(resp[0].boundingbox));
                         selectId(resp[0].osm_type, resp[0].osm_id);
                     }
@@ -66,7 +69,6 @@ iD.ui.Geocoder = function(context) {
         }
 
         function applyBounds(extent) {
-            hide();
             var map = context.map();
             map.extent(extent);
             if (map.zoom() > 19) map.zoom(19);
@@ -77,7 +79,6 @@ iD.ui.Geocoder = function(context) {
 
             if (context.entity(id)) {
                 context.enter(iD.modes.Select(context, [id]));
-
             } else {
                 context.map().on('drawn.geocoder', function() {
                     if (!context.entity(id)) return;
