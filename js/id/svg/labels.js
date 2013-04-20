@@ -271,24 +271,13 @@ iD.svg.Labels = function(projection, context) {
     var rtree = new RTree(),
         rectangles = {},
         lang = 'name:' + iD.detect().locale.toLowerCase().split('-')[0],
-        supersurface, mousePosition, cacheDimensions;
+        mousePosition, cacheDimensions;
 
-    return function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
+    function labels(surface, graph, entities, filter, dimensions, fullRedraw) {
 
         if (!mousePosition || dimensions.join(',') !== cacheDimensions) {
             mousePosition = iD.util.fastMouse(surface.node().parentNode);
             cacheDimensions = dimensions.join(',');
-        }
-
-        if (!supersurface) {
-            supersurface = d3.select(surface.node().parentNode)
-                .on('mousemove.hidelabels', hideOnMouseover)
-                .on('mousedown.hidelabels', function() {
-                    supersurface.on('mousemove.hidelabels', null);
-                })
-                .on('mouseup.hidelabels', function() {
-                    supersurface.on('mousemove.hidelabels', hideOnMouseover);
-                });
         }
 
         var hidePoints = !surface.select('.node.point').node();
@@ -457,6 +446,18 @@ iD.svg.Labels = function(projection, context) {
             areas = drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area),
             areaHalos = drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area),
             areaIcons = drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
+    }
+
+    labels.supersurface = function(supersurface) {
+        supersurface
+            .on('mousemove.hidelabels', hideOnMouseover)
+            .on('mousedown.hidelabels', function () {
+                supersurface.on('mousemove.hidelabels', null);
+            })
+            .on('mouseup.hidelabels', function () {
+                supersurface.on('mousemove.hidelabels', hideOnMouseover);
+            });
     };
 
+    return labels;
 };

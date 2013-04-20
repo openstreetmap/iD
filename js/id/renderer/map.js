@@ -54,6 +54,8 @@ iD.Map = function(context) {
         map.surface = surface;
         map.layersurface = layergroup;
 
+        labels.supersurface(supersurface);
+
         supersurface
             .call(tail);
     }
