@@ -2786,7 +2786,8 @@
     },
     "power/sub_station": {
         "fields": [
-            "operator"
+            "operator",
+            "building"
         ],
         "geometry": [
             "point",
