@@ -2205,7 +2205,7 @@
         "name": "Tennis Court"
     },
     "leisure/pitch/volleyball": {
-        "icon": "volleyball",
+        "icon": "pitch",
         "fields": [
             "surface"
         ],

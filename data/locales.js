@@ -7303,6 +7303,10 @@ locale.en = {
                 "name": "University",
                 "terms": ""
             },
+            "amenity/waste_basket": {
+                "name": "Waste Basket",
+                "terms": "rubbish bin,litter bin,trash can,garbage can"
+            },
             "barrier": {
                 "name": "Barrier",
                 "terms": ""
@@ -7389,6 +7393,10 @@ locale.en = {
             },
             "building/house": {
                 "name": "House",
+                "terms": ""
+            },
+            "emergency/phone": {
+                "name": "Emergency Phone",
                 "terms": ""
             },
             "entrance": {
