@@ -7,7 +7,6 @@
         "area"
     ],
     "tags": {
-        "building": "*",
         "power": "sub_station"
     },
     "name": "Substation"
