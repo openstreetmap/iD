@@ -2204,6 +2204,22 @@
         "terms": [],
         "name": "Tennis Court"
     },
+    "leisure/pitch/volleyball": {
+        "icon": "volleyball",
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "volleyball"
+        },
+        "terms": [],
+        "name": "Volleyball Court"
+    },
     "leisure/playground": {
         "geometry": [
             "point",
@@ -2777,7 +2793,8 @@
             "area"
         ],
         "tags": {
-            "power": "substation"
+            "power": "sub_station",
+            "building": "yes"
         },
         "name": "Substation"
     },
