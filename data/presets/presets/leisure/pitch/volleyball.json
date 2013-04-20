@@ -1,0 +1,16 @@
+{
+    "icon": "volleyball",
+    "fields": [
+        "surface"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "volleyball"
+    },
+    "terms": [],
+    "name": "Volleyball Court"
+}

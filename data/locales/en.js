@@ -1127,6 +1127,10 @@ locale.en = {
                 "name": "Tennis Court",
                 "terms": ""
             },
+            "leisure/pitch/volleyball": {
+                "name": "Volleyball Court",
+                "terms": ""
+            },
             "leisure/playground": {
                 "name": "Playground",
                 "terms": ""
