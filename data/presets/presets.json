@@ -2777,7 +2777,7 @@
             "area"
         ],
         "tags": {
-            "power": "substation"
+            "power": "sub_station"
         },
         "name": "Substation"
     },
