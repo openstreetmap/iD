@@ -1,6 +1,5 @@
 d3.combobox = function() {
     var event = d3.dispatch('accept'),
-        id = d3.combobox.id ++,
         data = [];
 
     var fetcher = function(val, data, cb) {
@@ -58,6 +57,9 @@ d3.combobox = function() {
                         left: '0px'
                     });
 
+                d3.select(document.body)
+                    .on('scroll.combobox', updateSize, true);
+
                 shown = true;
             }
         }
@@ -66,6 +68,10 @@ d3.combobox = function() {
             if (shown) {
                 idx = -1;
                 container.remove();
+
+                d3.select(document.body)
+                    .on('scroll.combobox', null);
+
                 shown = false;
             }
         }
@@ -265,10 +271,6 @@ d3.combobox = function() {
             .on('keydown.typeahead', keydown)
             .on('keyup.typeahead', keyup)
             .on('mousedown.typeahead', mousedown);
-
-        d3.select(document.body).on('scroll.combo' + id, function() {
-            if (shown) updateSize();
-        }, true);
     };
 
     combobox.fetcher = function(_) {
