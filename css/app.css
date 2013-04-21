@@ -1496,7 +1496,7 @@ div.combobox {
 
 .additional-tags div.tag-help {
     float: left;
-    width: 33.3333%;
+    width: 100%;
     width: -webkit-calc(100% + 40px);
     width: calc(100% + 40px);
 }
