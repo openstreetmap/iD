@@ -1382,11 +1382,13 @@
     "highway/path": {
         "icon": "highway-path",
         "fields": [
-            "oneway",
             "structure",
             "access",
-            "maxspeed",
-            "surface"
+            "sac_scale",
+            "surface",
+            "incline",
+            "trail_visibility",
+            "ref"
         ],
         "geometry": [
             "line"

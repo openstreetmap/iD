@@ -230,6 +230,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "incline": {
+        "key": "incline",
+        "type": "combo",
+        "label": "Incline"
+    },
     "internet_access": {
         "key": "internet_access",
         "type": "combo",
@@ -405,6 +410,11 @@
             }
         }
     },
+    "sac_scale": {
+        "key": "sac_scale",
+        "type": "combo",
+        "label": "Path Difficulty"
+    },
     "service": {
         "key": "service",
         "type": "combo",
@@ -476,6 +486,11 @@
         "key": "tracktype",
         "type": "combo",
         "label": "Type"
+    },
+    "trail_visibility": {
+        "key": "trail_visibility",
+        "type": "combo",
+        "label": "Trail Visibility"
     },
     "water": {
         "key": "water",

@@ -102,6 +102,8 @@ en:
         label: Type
       historic: 
         label: Type
+      incline: 
+        label: Incline
       internet_access: 
         label: Internet Access
         options: 
@@ -166,6 +168,8 @@ en:
           hindu: Hindu
           shinto: Shinto
           taoist: Taoist
+      sac_scale: 
+        label: Path Difficulty
       service: 
         label: Type
       shelter: 
@@ -191,6 +195,8 @@ en:
         label: Type
       tracktype: 
         label: Type
+      trail_visibility: 
+        label: Trail Visibility
       water: 
         label: Type
       waterway: 

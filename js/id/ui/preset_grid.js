@@ -95,7 +95,7 @@ iD.ui.PresetGrid = function(context, entity) {
 
         var search = searchwrap.append('input')
             .attr('class', 'major')
-            .attr('placeholder','Search')
+            .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .on('keydown', keydown)
             .on('keyup', keyup);

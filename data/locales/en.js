@@ -204,7 +204,8 @@ locale.en = {
         "results": "{n} results for {search}",
         "reference": "View on OpenStreetMap Wiki",
         "back_tooltip": "Change feature type",
-        "remove": "Remove"
+        "remove": "Remove",
+        "search": "Search"
     },
     "background": {
         "title": "Background",
@@ -461,6 +462,9 @@ locale.en = {
             "historic": {
                 "label": "Type"
             },
+            "incline": {
+                "label": "Incline"
+            },
             "internet_access": {
                 "label": "Internet Access",
                 "options": {
@@ -552,6 +556,9 @@ locale.en = {
                     "taoist": "Taoist"
                 }
             },
+            "sac_scale": {
+                "label": "Path Difficulty"
+            },
             "service": {
                 "label": "Type"
             },
@@ -587,6 +594,9 @@ locale.en = {
             },
             "tracktype": {
                 "label": "Type"
+            },
+            "trail_visibility": {
+                "label": "Trail Visibility"
             },
             "water": {
                 "label": "Type"
