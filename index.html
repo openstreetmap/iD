@@ -211,7 +211,7 @@
             }
 
             iD.data.load(function() {
-                id = iD();
+                id = iD().imagePath('css/img/');
 
                 d3.select("#id-container")
                     .call(id.ui());
