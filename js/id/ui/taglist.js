@@ -67,10 +67,13 @@ iD.ui.Taglist = function(context, entity) {
             .attr('class', 'key')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.key; })
-            .on('blur', function(d) {
-                d.key = this.value;
-                event.change(taglist.tags());
-            });
+            .on('blur', keyChange)
+            .on('change', keyChange);
+
+        function keyChange(d) {
+            d.key = this.value;
+            event.change(taglist.tags());
+        }
 
         row.append('div')
             .attr('class', 'input-wrap-position col6')
@@ -79,11 +82,14 @@ iD.ui.Taglist = function(context, entity) {
             .attr('class', 'value')
             .attr('maxlength', 255)
             .property('value', function(d) { return d.value; })
-            .on('blur', function(d) {
-                d.value = this.value;
-                event.change(taglist.tags());
-            })
+            .on('blur', valueChange)
+            .on('change', valueChange)
             .on('keydown.push-more', pushMore);
+
+        function valueChange(d) {
+            d.value = this.value;
+            event.change(taglist.tags());
+        }
 
         row.each(bindTypeahead);
 
