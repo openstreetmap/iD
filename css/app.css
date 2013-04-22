@@ -64,10 +64,10 @@ button,
 .opacity-options li,
 .radial-menu-item {
     cursor: pointer; /* Opera */
-    cursor: url(../img/cursor-pointer.png) 6 1, pointer; /* FF */
+    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
     cursor: -webkit-image-set(
-        url(../img/cursor-pointer.png) 1x,
-        url(../img/cursor-pointer2x.png) 2x
+        url(img/cursor-pointer.png) 1x,
+        url(img/cursor-pointer2x.png) 2x
         ) 6 1, pointer;
 }
 
@@ -290,7 +290,7 @@ ul.link-list li:last-child {
 }
 
 .fillL2 {
-    background: #f7f7f7 url(../img/background-pattern-1.png) repeat;
+    background: #f7f7f7 url(img/background-pattern-1.png) repeat;
     color: #333;
 }
 
@@ -323,7 +323,7 @@ a.hide {
 }
 
 .loading {
-    background: url(../img/loader_bg.gif);
+    background: url(img/loader_bg.gif);
     background-size:5px 5px;
 }
 
@@ -469,7 +469,7 @@ button.save.has-count .count::before {
   vertical-align:top;
   width:20px;
   height:20px;
-  background:transparent url(../img/sprite.svg) no-repeat 0 0;
+  background:transparent url(img/sprite.svg) no-repeat 0 0;
   text-indent:-9999px;
   overflow:hidden;
   }
@@ -870,16 +870,16 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: auto;
     position: absolute;
     left: 0; right: 0; top: 19px;
-    background:transparent url(../img/sprite.svg) no-repeat -240px -80px;
+    background:transparent url(img/sprite.svg) no-repeat -240px -80px;
 }
 
 .preset-icon-fill.tag-shop,
 .preset-icon-fill.tag-building {
-    background:transparent url(../img/sprite.svg) no-repeat 0 -80px;
+    background:transparent url(img/sprite.svg) no-repeat 0 -80px;
 }
 
 .preset-icon-fill.tag-natural-water {
-    background:transparent url(../img/sprite.svg) no-repeat -60px -80px;
+    background:transparent url(img/sprite.svg) no-repeat -60px -80px;
 }
 
 .preset-icon-fill.tag-landuse,
@@ -887,11 +887,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .preset-icon-fill.tag-natural-tree,
 .preset-icon-fill.tag-natural-grassland,
 .preset-icon-fill.tag-leisure-park {
-    background:transparent url(../img/sprite.svg) no-repeat -120px -80px;
+    background:transparent url(img/sprite.svg) no-repeat -120px -80px;
 }
 
 .preset-icon-fill.tag-amenity-parking {
-    background:transparent url(../img/sprite.svg) no-repeat -180px -80px;
+    background:transparent url(img/sprite.svg) no-repeat -180px -80px;
 }
 
 /* preset form basics */
@@ -1648,7 +1648,7 @@ img.wiki-image {
 }
 
 .opacity-options {
-    background: url(../img/background-pattern-opacity.png) 0 0 repeat;
+    background: url(img/background-pattern-opacity.png) 0 0 repeat;
     height:20px;
     width:62px;
     position: absolute;
@@ -2036,7 +2036,7 @@ img.wiki-image {
     width: 100px;
     margin: auto;
     margin-bottom: 10px;
-    background:transparent url(../img/sprite.svg) no-repeat 0 -220px;
+    background:transparent url(img/sprite.svg) no-repeat 0 -220px;
 }
 
 .modal-actions :first-child {
@@ -2496,7 +2496,7 @@ img.wiki-image {
     content: "";
     height: 80px;
     width: 200px;
-    background:transparent url(../img/sprite.svg) no-repeat 0 -320px;
+    background:transparent url(img/sprite.svg) no-repeat 0 -320px;
 }
 
 .intro-areas-add .tooltip-inner::before {
@@ -2516,6 +2516,6 @@ img.wiki-image {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    background: rgba(0, 0, 0, 0) url(../img/sprite.svg) no-repeat -301px -220px;
+    background: rgba(0, 0, 0, 0) url(img/sprite.svg) no-repeat -301px -220px;
     margin: auto;
 }
