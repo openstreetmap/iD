@@ -14,7 +14,7 @@ iD.wikipedia  = function() {
                 callback: '{callback}',
                 srsearch: query
             }), function(data) {
-                if (!data.query) return
+                if (!data.query) return;
                 callback(query, data.query.search.map(function(d) {
                     return d.title;
                 }));
