@@ -5,7 +5,6 @@ iD.ui.Commit = function(context) {
     function zipSame(d) {
         var c = [], n = -1;
         for (var i = 0; i < d.length; i++) {
-            console.log(d[i].geometry(context.graph()));
             var desc = {
                 name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
                 geometry: d[i].geometry(context.graph()),
