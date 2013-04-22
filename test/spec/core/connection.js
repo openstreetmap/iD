@@ -190,4 +190,10 @@ describe('iD.Connection', function () {
             ]);
         });
     });
+
+    describe('#changesetTags', function() {
+        it('omits comment when empty', function() {
+            expect(c.changesetTags('', [])).not.to.have.property('comment');
+        })
+    })
 });

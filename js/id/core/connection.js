@@ -211,16 +211,25 @@ iD.Connection = function() {
         };
     };
 
+    connection.changesetTags = function(comment, imagery_used) {
+        var tags = {
+            imagery_used: imagery_used.join(';'),
+            created_by: 'iD ' + iD.version
+        };
+
+        if (comment) {
+            tags.comment = comment;
+        }
+
+        return tags;
+    };
+
     connection.putChangeset = function(changes, comment, imagery_used, callback) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(connection.changesetJXON({
-                    imagery_used: imagery_used.join(';'),
-                    comment: comment,
-                    created_by: 'iD ' + iD.version
-                }))
+                content: JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imagery_used)))
             }, function(err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({

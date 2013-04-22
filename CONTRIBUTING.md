@@ -150,11 +150,11 @@ and a few modules:
 
 ## Building / Installing
 
-You can build and install a concatenated and minified version of iD with the command `make install`.
-Node.js is required for this.
+You can build a concatenated and minified version of iD with the command `make`. Node.js is
+required for this.
 
-By default iD will be built to the `build` directory, but you can move it elsewhere or specify the
-build location with `make install install_root=/path/to/install`.
+iD will be built to the `dist` directory. This directory is self-contained; you can copy it
+into the public directory of your webserver to deploy iD.
 
 ## Licensing
 
