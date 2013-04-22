@@ -2959,7 +2959,7 @@
         "name": "Subway Entrance"
     },
     "railway/tram": {
-        "icon": "railway-light_rail",
+        "icon": "railway-light-rail",
         "geometry": [
             "line"
         ],
