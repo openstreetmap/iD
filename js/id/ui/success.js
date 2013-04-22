@@ -10,10 +10,10 @@ iD.ui.Success = function(connection) {
 
         var m = '';
         if (changeset.comment) {
-            m = '"' + changeset.comment.substring(0, 20) + '" ';
+            m = changeset.comment.substring(0, 130);
         }
 
-        var message = (m || 'Edited OSM!') +
+        var message = (m || 'Edited OSM!') + ' ' +
             connection.changesetURL(changeset.id);
 
         var links = body.append('div').attr('class','modal-actions cf');
