@@ -5,9 +5,10 @@ iD.ui.Commit = function(context) {
     function zipSame(d) {
         var c = [], n = -1;
         for (var i = 0; i < d.length; i++) {
+            console.log(d[i].geometry(context.graph()));
             var desc = {
                 name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
-                geometry: context.geometry(d[i].id),
+                geometry: d[i].geometry(context.graph()),
                 count: 1,
                 tagText: iD.util.tagText(d[i])
             };
@@ -136,7 +137,7 @@ iD.ui.Commit = function(context) {
 
         li.append('strong')
             .text(function(d) {
-                return (d.count > 1) ? d.geometry + 's ' : d.geometry + ' ';
+                return d.geometry + ' ';
             });
 
         li.append('span')
