@@ -7,7 +7,7 @@ iD.ui.Commit = function(context) {
         for (var i = 0; i < d.length; i++) {
             var desc = {
                 name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
-                type: d[i].type,
+                geometry: context.geometry(d[i].id),
                 count: 1,
                 tagText: iD.util.tagText(d[i])
             };
@@ -136,7 +136,7 @@ iD.ui.Commit = function(context) {
 
         li.append('strong')
             .text(function(d) {
-                return (d.count > 1) ? d.type + 's ' : d.type + ' ';
+                return (d.count > 1) ? d.geometry + 's ' : d.geometry + ' ';
             });
 
         li.append('span')
