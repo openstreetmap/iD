@@ -9,7 +9,6 @@ iD.data = {
             path + 'data/discarded.json',
             path + 'data/imagery.json',
             path + 'data/wikipedia.json',
-            path + 'data/keys.json',
             path + 'data/presets/presets.json',
             path + 'data/presets/defaults.json',
             path + 'data/presets/categories.json',
@@ -24,16 +23,15 @@ iD.data = {
                 discarded: data[1],
                 imagery: data[2],
                 wikipedia: data[3],
-                keys: data[4],
                 presets: {
-                    presets: data[5],
-                    defaults: data[6],
-                    categories: data[7],
-                    fields: data[8]
+                    presets: data[4],
+                    defaults: data[5],
+                    categories: data[6],
+                    fields: data[7]
                 },
-                imperial: data[9],
-                maki: data[10],
-                en: data[11]
+                imperial: data[8],
+                maki: data[9],
+                en: data[10]
             };
 
             callback();

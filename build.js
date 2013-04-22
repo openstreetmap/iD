@@ -113,7 +113,6 @@ fs.writeFileSync('dist/locales/en.json', stringify(en.en));
 fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     deprecated: r('deprecated.json'),
     discarded: r('discarded.json'),
-    keys: r('keys.json'),
     imagery: r('imagery.json'),
     wikipedia: r('wikipedia.json'),
     presets: {
