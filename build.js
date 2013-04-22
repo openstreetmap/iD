@@ -104,6 +104,12 @@ generateCategories();
 generateFields();
 generatePresets();
 
+// Push changes from data/core.yaml into en.json
+var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
+var presets = YAML.load(fs.readFileSync('data/presets.yaml', 'utf8'));
+var en = _.merge(core, presets);
+fs.writeFileSync('dist/locales/en.json', stringify(en.en));
+
 fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     deprecated: r('deprecated.json'),
     discarded: r('discarded.json'),
@@ -117,12 +123,6 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
         fields: rp('fields.json')
     },
     imperial: r('imperial.json'),
-    maki: r('maki-sprite.json')
+    maki: r('maki-sprite.json'),
+    en: read('dist/locales/en.json')
 }) + ';');
-
-// Push changes from data/core.yaml into data/locales.js
-var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
-var presets = YAML.load(fs.readFileSync('data/presets.yaml', 'utf8'));
-var en = _.merge(core, presets);
-var out = 'locale.en = ' + stringify(en.en) + ';';
-fs.writeFileSync('data/locales/en.js', out);

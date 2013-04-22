@@ -1,7 +1,5 @@
 iD.ui = function(context) {
     return function(container) {
-        context.container(container);
-
         var history = context.history(),
             map = context.map();
 

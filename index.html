@@ -190,7 +190,6 @@
         <script src='js/id/validate.js'></script>
 
         <script src='js/lib/locale.js'></script>
-        <script src='data/locales.js'></script>
         <script src='data/introGraph.js'></script>
     </head>
     <body>
@@ -211,12 +210,12 @@
             }
 
             iD.data.load(function() {
-                id = iD().imagePath('css/img/');
+                id = iD().assetPath('dist/');
 
-                d3.select("#id-container")
+                d3.select('#id-container')
                     .call(id.ui());
 
-                d3.select("#about").insert('li', '.user-list')
+                d3.select('#about').insert('li', '.user-list')
                     .attr('class', 'source-switch')
                     .call(iD.ui.SourceSwitch(id)
                         .keys(iD.data.keys));

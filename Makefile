@@ -7,10 +7,10 @@ all: \
 	dist/img/line-presets.png
 
 DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
-data/data.js: $(DATA_FILES) dist/img/maki-sprite.png
+data/data.js: $(DATA_FILES) dist/locales/en.json dist/img/maki-sprite.png
 	node build.js
 
-data/locales/en.js: data/core.yaml data/presets.yaml
+dist/locales/en.json: data/core.yaml data/presets.yaml
 	node build.js
 
 dist/iD.js: \
@@ -58,8 +58,7 @@ dist/iD.js: \
 	js/id/validate.js \
 	js/id/end.js \
 	js/lib/locale.js \
-	data/introGraph.js \
-	data/locales.js
+	data/introGraph.js
 
 .INTERMEDIATE dist/iD.js: data/data.js
 
@@ -82,9 +81,6 @@ clean:
 
 translations:
 	node data/update_locales
-
-data/locales.js: data/locales/*.js
-	cat $^ > $@
 
 SPRITE = inkscape --export-area-page --export-png=dist/img/line-presets.png svg/line-presets.svg
 

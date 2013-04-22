@@ -15,7 +15,8 @@ iD.data = {
             path + 'data/presets/categories.json',
             path + 'data/presets/fields.json',
             path + 'data/imperial.json',
-            path + 'data/maki-sprite.json'
+            path + 'data/maki-sprite.json',
+            path + 'dist/locales/en.json'
             ], d3.json, function (err, data) {
 
             iD.data = {
@@ -31,7 +32,8 @@ iD.data = {
                     fields: data[8]
                 },
                 imperial: data[9],
-                maki: data[10]
+                maki: data[10],
+                en: data[11]
             };
 
             callback();
