@@ -1513,10 +1513,12 @@ img.wiki-image {
 
 /* Map Controls */
 
-.map-control {
+.map-controls {
+    left: 0;
+    top: 80px;
+    width: 30px;
+    position: absolute;
     z-index: 100;
-    left:0px;
-    position:absolute;
 }
 
 .map-control > button {
@@ -1546,20 +1548,11 @@ img.wiki-image {
 
 /* Zoomer */
 
-.zoombuttons {
-    top: 180px;
-    width: 30px;
-}
-
 .zoombuttons button.zoom-in {
     border-radius:0 4px 0 0;
 }
 
 /* Background Settings */
-
-.background-control {
-    top: 80px;
-}
 
 .background-control button {
     border-radius:0 4px 0 0;
@@ -1699,7 +1692,7 @@ img.wiki-image {
 
 /* Geocoder */
 
-.geocode-control, .geocode-control form {
+.geocode-control form {
     top:260px;
 }
 
@@ -1736,10 +1729,6 @@ img.wiki-image {
 
 /* Geolocator */
 
-.geolocate-control {
-    top:300px;
-}
-
 .geolocate-control button {
     border-radius: 0 0 4px 0;
 }
@@ -1747,7 +1736,7 @@ img.wiki-image {
 /* Help */
 
 .help-control {
-    top: 120px;
+    margin-bottom: 20px;
 }
 
 .help-control button {
