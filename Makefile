@@ -1,15 +1,10 @@
 # See the README for installation instructions.
 
-UGLIFY = ./node_modules/uglify-js/bin/uglifyjs
-JS_BEAUTIFIER = $(UGLIFY) -b -i 2 -nm -ns
-JS_COMPILER = $(UGLIFY)
-LOCALE ?= en_US
-
 all: \
+	dist/iD.css \
 	dist/iD.js \
 	dist/iD.min.js \
-	dist/img/line-presets.png \
-	dist/iD.css
+	dist/img/line-presets.png
 
 DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
 data/data.js: $(DATA_FILES) dist/img/maki-sprite.png
@@ -74,7 +69,7 @@ dist/iD.js: node_modules/.install Makefile
 
 dist/iD.min.js: dist/iD.js Makefile
 	@rm -f $@
-	$(JS_COMPILER) $< -c -m -o $@
+	node_modules/.bin/uglifyjs $< -c -m -o $@
 
 dist/iD.css: css/*.css
 	cat css/reset.css css/map.css css/app.css css/line-presets.css css/maki-sprite.css > $@
@@ -83,7 +78,7 @@ node_modules/.install: package.json
 	npm install && touch node_modules/.install
 
 clean:
-	rm -f iD*.js
+	rm -f dist/iD*.js dist/iD.css
 
 translations:
 	node data/update_locales
