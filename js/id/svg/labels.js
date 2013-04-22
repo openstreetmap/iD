@@ -236,6 +236,9 @@ iD.svg.Labels = function(projection, context) {
 
 
     function hideOnMouseover() {
+
+        if (!mousePosition) return;
+
         var mouse = mousePosition(d3.event),
             pad = 50,
             rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
