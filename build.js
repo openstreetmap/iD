@@ -123,5 +123,6 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     },
     imperial: r('imperial.json'),
     maki: r('maki-sprite.json'),
+    locales: r('locales.json'),
     en: read('dist/locales/en.json')
 }) + ';');

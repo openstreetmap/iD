@@ -56,6 +56,7 @@ function getResource(resource, callback) {
 
         });
 
+        fs.writeFileSync('data/locales.json', JSON.stringify(codes, null, 4));
     });
 }
 
