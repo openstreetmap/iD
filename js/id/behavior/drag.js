@@ -40,7 +40,7 @@ iD.behavior.drag = function() {
     };
 
     function mousedown() {
-        target = this,
+        target = this;
         event_ = event.of(target, arguments);
         var eventTarget = d3.event.target,
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,

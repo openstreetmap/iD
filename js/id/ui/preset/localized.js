@@ -34,7 +34,7 @@ iD.ui.preset.localized = function(field, context) {
 
     function change() {
         var t = {};
-        t[field.key] = d3.select(this).property('value'),
+        t[field.key] = d3.select(this).property('value');
         event.change(t);
     }
 
