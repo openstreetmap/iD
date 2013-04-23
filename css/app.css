@@ -545,6 +545,8 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
 a:hover .icon.out-link   { background-position: -500px -14px;}
 
+.icon.plus-dark    { background-position: -240px -40px;}
+
 /* Universal preset icons */
 
 .icon.source     { background-position:   0 -200px;}
