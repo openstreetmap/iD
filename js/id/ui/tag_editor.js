@@ -114,10 +114,7 @@ iD.ui.TagEditor = function(context, entity) {
             }
 
             presetUI.change(tags);
-            var rendered = []
-                .concat(Object.keys(preset.tags))
-                .concat(presetUI.rendered());
-            tagList.tags(_.omit(tags, rendered));
+            tagList.tags(tags);
         }
         return tageditor;
     };

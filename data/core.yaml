@@ -160,7 +160,7 @@ en:
     new_tag: New tag
     view_on_osm: View on openstreetmap.org
     editing_feature: "Editing {feature}"
-    additional: Additional tags
+    all_tags: All tags
     choose: Select feature type
     results: "{n} results for {search}"
     reference: View on OpenStreetMap Wiki

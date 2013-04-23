@@ -787,7 +787,7 @@ en:
         terms: ""
       shop/alcohol: 
         name: Liquor Store
-        terms: ""
+        terms: alcohol
       shop/bakery: 
         name: Bakery
         terms: ""

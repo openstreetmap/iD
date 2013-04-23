@@ -9,7 +9,7 @@ iD.ui.Taglist = function(context, entity) {
         collapsebutton = selection.append('a')
             .attr('href','#')
             .attr('class','hide-toggle')
-            .text(t('inspector.additional'))
+            .text(t('inspector.all_tags'))
             .on('click', function() {
                 iD.ui.Taglist.expanded = wrap.classed('hide');
                 collapsebutton.classed('expanded', iD.ui.Taglist.expanded);
@@ -39,7 +39,7 @@ iD.ui.Taglist = function(context, entity) {
     function drawTags(tags) {
 
         var count = Object.keys(tags).filter(function(d) { return d; }).length;
-        collapsebutton.text(t('inspector.additional') + ' (' + count + ')');
+        collapsebutton.text(t('inspector.all_tags') + ' (' + count + ')');
 
         tags = d3.entries(tags);
 
