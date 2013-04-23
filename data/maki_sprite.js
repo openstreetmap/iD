@@ -7,9 +7,8 @@ var makipath = './node_modules/maki';
 sprite.sprite('renders', { path: makipath }, function(err, makiSprite) {
     if (err) process.exit(1);
 
-    // Move image and json files
+    // Move image files
     fs.renameSync(path.join(makipath, makiSprite.filename()), './dist/img/maki-sprite.png');
-    fs.renameSync(path.join(makipath, 'renders.json'), './data/maki-sprite.json');
 
     // Generate CSS
     var template = '.maki-{name}{background-position:{x} {y};width:{w};height:{h};}\n';
@@ -24,6 +23,18 @@ sprite.sprite('renders', { path: makipath }, function(err, makiSprite) {
             .replace('{w}', image.width + 'px')
             .replace('{h}', image.height + 'px');
     });
-    
+
     fs.writeFileSync('./css/maki-sprite.css', css);
+
+    // Generate JSON
+    var images = {};
+    makiSprite.images.forEach(function(image) {
+        var match = image.name.match(/(.*)-(12|18|24)/),
+            name = match[1],
+            size = match[2],
+            group = images[name] = images[name] || {};
+        group[size] = [image.positionX, image.positionY];
+    });
+
+    fs.writeFileSync('./data/maki-sprite.json', JSON.stringify(images));
 });

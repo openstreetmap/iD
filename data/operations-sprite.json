@@ -1,0 +1,25 @@
+{
+    "icon-operation-delete": [0, 140],
+    "icon-operation-circularize": [20, 140],
+    "icon-operation-straighten": [40, 140],
+    "icon-operation-split": [60, 140],
+    "icon-operation-disconnect": [80, 140],
+    "icon-operation-reverse": [100, 140],
+    "icon-operation-move": [120, 140],
+    "icon-operation-merge": [140, 140],
+    "icon-operation-orthogonalize": [160, 140],
+    "icon-operation-rotate": [180, 140],
+    "icon-operation-simplify": [200, 140],
+
+    "icon-operation-disabled-delete": [0, 160],
+    "icon-operation-disabled-circularize": [20, 160],
+    "icon-operation-disabled-straighten": [40, 160],
+    "icon-operation-disabled-split": [60, 160],
+    "icon-operation-disabled-disconnect": [80, 160],
+    "icon-operation-disabled-reverse": [100, 160],
+    "icon-operation-disabled-move": [120, 160],
+    "icon-operation-disabled-merge": [140, 160],
+    "icon-operation-disabled-orthogonalize": [160, 160],
+    "icon-operation-disabled-rotate": [180, 160],
+    "icon-operation-disabled-simplify": [200, 160]
+}
