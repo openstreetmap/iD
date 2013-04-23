@@ -1,5 +1,5 @@
 d3 = (function(){
-  var d3 = {version: "3.1.4"}; // semver
+  var d3 = {version: "3.1.5"}; // semver
 d3.ascending = function(a, b) {
   return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
 };
@@ -495,6 +495,15 @@ function d3_eventSource() {
   var e = d3.event, s;
   while (s = e.sourceEvent) e = s;
   return e;
+}
+
+// Registers an event listener for the specified target that cancels the next
+// event for the specified type, but only if it occurs immediately. This is
+// useful to disambiguate dragging from clicking.
+function d3_eventSuppress(target, type) {
+  function off() { target.on(type, null); }
+  target.on(type, function() { d3_eventCancel(); off(); }, true);
+  setTimeout(off, 0); // clear the handler if it doesn't fire
 }
 
 // Like d3.dispatch, but for custom events abstracting native UI events. These
@@ -1511,18 +1520,7 @@ d3.behavior.zoom = function() {
     function mouseup() {
       if (moved) d3_eventCancel();
       w.on("mousemove.zoom", null).on("mouseup.zoom", null);
-      if (moved && d3.event.target === eventTarget) {
-          w.on("click.zoom", click, true);
-          window.setTimeout(function() {
-              // Remove click block if click didn't fire
-              w.on("click.zoom", null);
-          }, 0);
-      }
-    }
-
-    function click() {
-      d3_eventCancel();
-      w.on("click.zoom", null);
+      if (moved && d3.event.target === eventTarget) d3_eventSuppress(w, "click.zoom");
     }
   }
 
@@ -2703,7 +2701,7 @@ function d3_geo_compose(a, b) {
 }
 
 d3.geo.stream = function(object, listener) {
-  if (d3_geo_streamObjectType.hasOwnProperty(object.type)) {
+  if (object && d3_geo_streamObjectType.hasOwnProperty(object.type)) {
     d3_geo_streamObjectType[object.type](object, listener);
   } else {
     d3_geo_streamGeometry(object, listener);
@@ -2711,7 +2709,7 @@ d3.geo.stream = function(object, listener) {
 };
 
 function d3_geo_streamGeometry(geometry, listener) {
-  if (d3_geo_streamGeometryType.hasOwnProperty(geometry.type)) {
+  if (geometry && d3_geo_streamGeometryType.hasOwnProperty(geometry.type)) {
     d3_geo_streamGeometryType[geometry.type](geometry, listener);
   }
 }
@@ -4519,7 +4517,7 @@ var d3_transformIdentity = {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0};
 d3.interpolateNumber = d3_interpolateNumber;
 
 function d3_interpolateNumber(a, b) {
-  b -= a;
+  b -= a = +a;
   return function(t) { return a + b * t; };
 }
 
@@ -4632,6 +4630,9 @@ function d3_interpolateString(a, b) {
       n, // q.length
       o;
 
+  // Coerce inputs to strings.
+  a = a + "", b = b + "";
+
   // Reset our regular expression!
   d3_interpolate_number.lastIndex = 0;
 
@@ -4716,11 +4717,13 @@ function d3_interpolateByName(name) {
 }
 
 d3.interpolators = [
-  d3_interpolateObject,
-  function(a, b) { return Array.isArray(b) && d3_interpolateArray(a, b); },
-  function(a, b) { return (typeof a === "string" || typeof b === "string") && d3_interpolateString(a + "", b + ""); },
-  function(a, b) { return (typeof b === "string" ? d3_rgb_names.has(b) || /^(#|rgb\(|hsl\()/.test(b) : b instanceof d3_Color) && d3_interpolateRgb(a, b); },
-  function(a, b) { return !isNaN(a = +a) && !isNaN(b = +b) && d3_interpolateNumber(a, b); }
+  function(a, b) {
+    var t = typeof b;
+    return (t === "string" || t !== typeof a ? (d3_rgb_names.has(b) || /^(#|rgb\(|hsl\()/.test(b) ? d3_interpolateRgb : d3_interpolateString)
+        : b instanceof d3_Color ? d3_interpolateRgb
+        : t === "object" ? (Array.isArray(b) ? d3_interpolateArray : d3_interpolateObject)
+        : d3_interpolateNumber)(a, b);
+  }
 ];
 
 d3_transitionPrototype.tween = function(name, tween) {
