@@ -6,5 +6,8 @@
     "tags": {
         "amenity": "car_wash"
     },
+    "fields": [
+        "building_area"
+    ],
     "name": "Car Wash"
 }

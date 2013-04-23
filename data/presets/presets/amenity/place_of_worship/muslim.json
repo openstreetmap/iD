@@ -2,7 +2,7 @@
     "icon": "religious-muslim",
     "fields": [
         "denomination",
-        "building",
+        "building_yes",
         "address"
     ],
     "geometry": [

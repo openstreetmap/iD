@@ -2,7 +2,8 @@
     "icon": "fuel",
     "fields": [
         "operator",
-        "address"
+        "address",
+        "building_yes"
     ],
     "geometry": [
         "point",

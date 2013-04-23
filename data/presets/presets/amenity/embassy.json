@@ -7,7 +7,8 @@
         "amenity": "embassy"
     },
     "fields": [
-        "country"
+        "country",
+        "building_area"
     ],
     "icon": "embassy",
     "name": "Embassy"

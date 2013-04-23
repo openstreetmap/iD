@@ -2,7 +2,7 @@
     "icon": "religious-christian",
     "fields": [
         "denomination",
-        "building",
+        "building_yes",
         "address"
     ],
     "geometry": [
