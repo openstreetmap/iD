@@ -1,11 +1,29 @@
 iD.ui.TagEditor = function(context, entity) {
     var event = d3.dispatch('changeTags', 'choose', 'close'),
         presets = context.presets(),
-        tags,
+        id = entity.id,
+        tags = entity.tags,
         preset,
         selection_,
         presetUI,
         tagList;
+
+    function update() {
+        var entity = context.entity(id);
+        if (!entity) return;
+
+        tags = entity.tags;
+
+        // change preset if necessary (undos/redos)
+        var newmatch = presets.match(entity, context.graph());
+        if (newmatch !== preset) {
+            tageditor(selection_, newmatch);
+            return;
+        }
+
+        presetUI.change(tags);
+        tagList.tags(tags);
+    }
 
     function tageditor(selection, newpreset) {
         selection_ = selection;
@@ -83,8 +101,13 @@ iD.ui.TagEditor = function(context, entity) {
             osmLink.append('span').text(t('inspector.view_on_osm'));
         }
 
-        tageditor.tags(tags);
+        presetUI.change(tags);
+        tagList.tags(tags);
+
         changeTags();
+
+        context.history()
+            .on('change.tag-editor', update);
     }
 
     function clean(o) {
@@ -101,22 +124,17 @@ iD.ui.TagEditor = function(context, entity) {
         event.changeTags(_.clone(tags));
     }
 
-    tageditor.tags = function(newtags) {
-        tags = _.clone(newtags);
-        if (presetUI && tagList) {
+    tageditor.close = function() {
+        // Blur focused element so that tag changes are dispatched
+        // See #1295
+        document.activeElement.blur();
 
-            // change preset if necessary (undos/redos)
-            var newmatch = presets
-                .matchGeometry(entity, context.graph())
-                .matchTags(entity.update({ tags: tags }));
-            if (newmatch !== preset) {
-                return tageditor(selection_, newmatch);
-            }
+        // Firefox incorrectly implements blur, so typeahead elements
+        // are not correctly removed. Remove any stragglers manually.
+        d3.selectAll('div.typeahead').remove();
 
-            presetUI.change(tags);
-            tagList.tags(tags);
-        }
-        return tageditor;
+        context.history()
+            .on('change.tag-editor', null);
     };
 
     return d3.rebind(tageditor, event, 'on');
