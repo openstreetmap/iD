@@ -1499,6 +1499,10 @@ d3.behavior.zoom = function() {
     d3_eventCancel();
 
     function mousemove() {
+      if (d3.event.which === 0) {
+        mouseup();
+        return;
+      }
       moved = 1;
       translateTo(d3.mouse(target), l);
       dispatch(event_);
