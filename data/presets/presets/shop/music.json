@@ -2,6 +2,7 @@
     "icon": "music",
     "fields": [
         "address",
+        "building_area",
         "opening_hours"
     ],
     "geometry": [
