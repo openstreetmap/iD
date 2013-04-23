@@ -48,7 +48,11 @@
                     },
 
                     set: function() {
-                        throw new Error("tried to overwrite window.focus");
+                        try {
+                            throw new Error("tried to overwrite window.focus");
+                        } catch(e) {
+                            Raven.captureException(e);
+                        }
                     }
                 });
             }
