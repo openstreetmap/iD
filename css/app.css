@@ -1502,11 +1502,11 @@ div.combobox {
 }
 
 img.wiki-image {
-    float: left;
+    float: right;
     width: 33.3333%;
     width: -webkit-calc(33.3333% - 10px);
     width: calc(33.3333% - 10px);
-    margin-right: 20px;
+    margin-left: 20px;
     border-radius: 4px;
     max-height: 200px;
 }
