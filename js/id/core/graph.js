@@ -31,8 +31,12 @@ iD.Graph = function(other, mutable) {
 };
 
 iD.Graph.prototype = {
-    entity: function(id) {
-        return this.entities[id];
+    entity: function(id, log) {
+        var entity = this.entities[id];
+        if (!entity && log && typeof Raven !== 'undefined') {
+            Raven.captureMessage('entity not found', {tags: {id: id, entity: entity, base: this.base().entities[id]}});
+        }
+        return entity;
     },
 
     transient: function(entity, key, fn) {

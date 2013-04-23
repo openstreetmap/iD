@@ -78,7 +78,7 @@ window.iD = function () {
     };
 
     context.geometry = function(id) {
-        return context.entity(id).geometry(history.graph());
+        return context.entity(id, true).geometry(history.graph());
     };
 
     /* Modes */
