@@ -136,7 +136,9 @@ iD.modes.DragNode = function(context) {
                 moveAnnotation(entity));
         }
 
-        context.enter(iD.modes.Browse(context));
+        var parentWays = _.pluck(context.graph().parentWays(entity), 'id');
+
+        context.enter(iD.modes.Select(context, parentWays));
     }
 
     function cancel() {
