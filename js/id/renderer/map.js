@@ -21,7 +21,7 @@ iD.Map = function(context) {
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(roundedProjection),
-        midpoints = iD.svg.Midpoints(roundedProjection),
+        midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(roundedProjection, context),
         tail = iD.ui.Tail(),
         surface, layergroup;
@@ -29,6 +29,10 @@ iD.Map = function(context) {
     function map(selection) {
         context.history()
             .on('change.map', redraw);
+
+        context.on('select.map', function() {
+            redraw();
+        });
 
         selection.call(zoom);
 
@@ -49,6 +53,16 @@ iD.Map = function(context) {
             })
             .attr('id', 'surface')
             .call(iD.svg.Surface(context));
+
+        surface.on('mouseover.vertices', function() {
+            vertices.hover(d3.event.target.__data__);
+            if (!isTransformed()) surface.call(vertices, context.graph(), map.zoom());
+        });
+
+        surface.on('mouseout.vertices', function() {
+            vertices.hover(d3.event.relatedTarget && d3.event.relatedTarget.__data__);
+            if (!isTransformed()) surface.call(vertices, context.graph(), map.zoom());
+        });
 
         map.size(selection.size());
         map.surface = surface;
@@ -104,7 +118,7 @@ iD.Map = function(context) {
         } else {
             surface
                 .call(points, graph, all, filter)
-                .call(vertices, graph, all, filter, map.zoom())
+                .call(vertices, graph, map.zoom())
                 .call(lines, graph, all, filter, dimensions)
                 .call(areas, graph, all, filter)
                 .call(midpoints, graph, all, filter, extent)
@@ -155,9 +169,13 @@ iD.Map = function(context) {
         dispatch.move(map);
     }
 
-    function resetTransform() {
+    function isTransformed() {
         var prop = surface.node().style[transformProp];
-        if (!prop || prop === 'none') return false;
+        return prop && prop !== 'none';
+    }
+
+    function resetTransform() {
+        if (!isTransformed()) return false;
         surface.node().style[transformProp] = '';
         layergroup.node().style[transformProp] = '';
         return true;

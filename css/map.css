@@ -103,6 +103,19 @@ g.midpoint .shadow {
     fill-opacity: 0;
 }
 
+g.vertex.vertex-hover {
+    display: none;
+}
+
+.mode-draw-area .behavior-hover g.vertex.vertex-hover,
+.mode-draw-line .behavior-hover g.vertex.vertex-hover,
+.mode-add-area  .behavior-hover g.vertex.vertex-hover,
+.mode-add-line  .behavior-hover g.vertex.vertex-hover,
+.mode-add-point .behavior-hover g.vertex.vertex-hover,
+.mode-drag-node .behavior-hover g.vertex.vertex-hover {
+    display: block;
+}
+
 .behavior-hover g.vertex.hover:not(.selected) .shadow,
 .behavior-hover g.midpoint.hover:not(.selected) .shadow {
     fill-opacity: 0.3;

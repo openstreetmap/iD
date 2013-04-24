@@ -6,22 +6,82 @@ iD.svg.Vertices = function(projection, context) {
         fill:   [1,    1.5,   1.5,  1.5]
     };
 
-    return function drawVertices(surface, graph, entities, filter, zoom) {
-        var vertices = [];
+    var hover;
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
-            if (entity.geometry(graph) === 'vertex') {
-                vertices.push(entity);
+    function visibleVertices() {
+        var visible = {};
+
+        function addChildVertices(entity, klass) {
+            var i;
+            if (entity.type === 'way') {
+                for (i = 0; i < entity.nodes.length; i++) {
+                    visible[entity.nodes[i]] = klass;
+                }
+            } else if (entity.type === 'relation') {
+                for (i = 0; i < entity.members.length; i++) {
+                    var member = context.entity(entity.members[i].id);
+                    if (member) {
+                        addChildVertices(member, klass);
+                    }
+                }
+            } else {
+                visible[entity.id] = klass;
             }
         }
 
-        if (vertices.length > 2000) {
-            return surface.select('.layer-hit').selectAll('g.vertex').remove();
+        function addSiblingAndChildVertices(id, klass) {
+            var entity = context.entity(id);
+            if (entity && entity.type === 'node') {
+                visible[entity.id] = klass;
+                context.graph().parentWays(entity).forEach(function(entity) {
+                    addChildVertices(entity, klass);
+                });
+            } else if (entity) {
+                addChildVertices(entity, klass);
+            }
+        }
+
+        if (hover) {
+            addSiblingAndChildVertices(hover.id, 'vertex-hover');
+        }
+
+        context.selection().forEach(function(id) {
+            addSiblingAndChildVertices(id, 'vertex-selected');
+        });
+
+        return visible;
+    }
+
+    function isIntersection(entity, graph) {
+        return graph.parentWays(entity).filter(function (parent) {
+            return parent.geometry(graph) === 'line';
+        }).length > 1;
+    }
+
+    function drawVertices(surface, graph, zoom) {
+        var visible = visibleVertices(),
+            entities = context.intersects(context.map().extent()),
+            vertices = [];
+
+        for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+
+            if (entity.geometry(graph) !== 'vertex')
+                continue;
+
+            // Vertices that have interesting tags or are intersections are
+            // always visible. We don't want them to get classed vertex-hover.
+            if (entity.hasInterestingTags())
+                visible[entity.id] = 'tagged';
+            if (isIntersection(entity, graph))
+                visible[entity.id] = 'intersection';
+
+            if (entity.id in visible) {
+                vertices.push(entity)
+            }
         }
 
         var groups = surface.select('.layer-hit').selectAll('g.vertex')
-            .filter(filter)
             .data(vertices, iD.Entity.key);
 
         var group = groups.enter()
@@ -45,6 +105,8 @@ iD.svg.Vertices = function(projection, context) {
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
             .call(iD.svg.MemberClasses(graph))
+            .classed('vertex-hover', function(entity) { return visible[entity.id] === 'vertex-hover'; })
+            .classed('vertex-selected', function(entity) { return visible[entity.id] === 'vertex-selected'; })
             .classed('tagged', function(entity) { return entity.hasInterestingTags(); })
             .classed('shared', function(entity) { return graph.isShared(entity); });
 
@@ -112,5 +174,13 @@ iD.svg.Vertices = function(projection, context) {
 
         groups.exit()
             .remove();
+    }
+
+    drawVertices.hover = function(_) {
+        if (!arguments.length) return hover;
+        hover = _;
+        return drawVertices;
     };
+
+    return drawVertices;
 };
