@@ -40,6 +40,30 @@ describe('iD.Graph', function() {
         });
     });
 
+    describe("#hasEntity", function () {
+        it("returns the entity when present", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(graph.hasEntity(node.id)).to.equal(node);
+        });
+
+        it("returns undefined when the entity is not present", function () {
+            expect(iD.Graph().hasEntity('1')).to.be.undefined;
+        });
+    });
+
+    describe("#entity", function () {
+        it("returns the entity when present", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(graph.entity(node.id)).to.equal(node);
+        });
+
+        it("throws when the entity is not present", function () {
+            expect(function() { iD.Graph().entity('1'); }).to.throw;
+        });
+    });
+
     describe("#freeze", function () {
         it("sets the frozen flag", function () {
             expect(iD.Graph([], true).freeze().frozen).to.be.true;
@@ -209,7 +233,7 @@ describe('iD.Graph', function() {
         it("removes the entity from the result", function () {
             var node = iD.Node(),
                 graph = iD.Graph([node]);
-            expect(graph.remove(node).entity(node.id)).to.be.undefined;
+            expect(graph.remove(node).hasEntity(node.id)).to.be.undefined;
         });
 
         it("removes the entity as a parentWay", function () {
@@ -323,7 +347,7 @@ describe('iD.Graph', function() {
 
             graph.update(function (graph) { graph.remove(node); });
 
-            expect(graph.entity(node.id)).to.be.undefined;
+            expect(graph.hasEntity(node.id)).to.be.undefined;
         });
 
         it("executes all of the given functions", function () {
@@ -336,7 +360,7 @@ describe('iD.Graph', function() {
                 function (graph) { graph.replace(b); }
             );
 
-            expect(graph.entity(a.id)).to.be.undefined;
+            expect(graph.hasEntity(a.id)).to.be.undefined;
             expect(graph.entity(b.id)).to.equal(b);
         });
     });

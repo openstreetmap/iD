@@ -3,7 +3,7 @@ describe("iD.actions.DeleteNode", function () {
         var node   = iD.Node(),
             action = iD.actions.DeleteNode(node.id),
             graph  = action(iD.Graph([node]));
-        expect(graph.entity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).to.be.undefined;
     });
 
     it("removes the node from parent ways", function () {
@@ -31,7 +31,7 @@ describe("iD.actions.DeleteNode", function () {
             way    = iD.Way({nodes: [node1.id, node2.id]}),
             action = iD.actions.DeleteNode(node1.id),
             graph  = action(iD.Graph([node1, node2, way]));
-        expect(graph.entity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).to.be.undefined;
     });
 
     it("deletes degenerate circular ways", function () {
@@ -40,6 +40,6 @@ describe("iD.actions.DeleteNode", function () {
             way    = iD.Way({nodes: [node1.id, node2.id, node1.id]}),
             action = iD.actions.DeleteNode(node2.id),
             graph  = action(iD.Graph([node1, node2, way]));
-        expect(graph.entity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).to.be.undefined;
     });
 });

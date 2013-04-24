@@ -12,8 +12,8 @@ describe("iD.actions.Merge", function () {
 
         graph = action(graph);
 
-        expect(graph.entity('a')).to.be.undefined;
-        expect(graph.entity('b')).to.be.undefined;
+        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('b')).to.be.undefined;
         expect(graph.entity('w').tags).to.eql({a: 'a', b: 'b'});
         expect(graph.entity('r').members).to.eql([{id: 'w', role: 'r', type: 'way'}]);
     });
@@ -31,8 +31,8 @@ describe("iD.actions.Merge", function () {
 
         graph = action(graph);
 
-        expect(graph.entity('a')).to.be.undefined;
-        expect(graph.entity('b')).to.be.undefined;
+        expect(graph.hasEntity('a')).to.be.undefined;
+        expect(graph.hasEntity('b')).to.be.undefined;
         expect(graph.entity('w').tags).to.eql({a: 'a', b: 'b', area: 'yes'});
         expect(graph.entity('r').members).to.eql([{id: 'w', role: 'r', type: 'way'}]);
     });

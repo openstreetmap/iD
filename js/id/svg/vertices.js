@@ -19,7 +19,7 @@ iD.svg.Vertices = function(projection, context) {
                 }
             } else if (entity.type === 'relation') {
                 for (i = 0; i < entity.members.length; i++) {
-                    var member = context.entity(entity.members[i].id);
+                    var member = context.hasEntity(entity.members[i].id);
                     if (member) {
                         addChildVertices(member, klass);
                     }
@@ -30,7 +30,7 @@ iD.svg.Vertices = function(projection, context) {
         }
 
         function addSiblingAndChildVertices(id, klass) {
-            var entity = context.entity(id);
+            var entity = context.hasEntity(id);
             if (entity && entity.type === 'node') {
                 visible[entity.id] = klass;
                 context.graph().parentWays(entity).forEach(function(entity) {

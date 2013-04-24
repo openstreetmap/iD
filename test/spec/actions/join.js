@@ -91,7 +91,7 @@ describe("iD.actions.Join", function () {
         graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).to.be.undefined;
     });
 
     it("joins a <-- b <== c", function () {
@@ -108,7 +108,7 @@ describe("iD.actions.Join", function () {
         graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.entity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).to.be.undefined;
     });
 
     it("joins a <-- b ==> c", function () {
@@ -126,7 +126,7 @@ describe("iD.actions.Join", function () {
         graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.entity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).to.be.undefined;
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
@@ -145,7 +145,7 @@ describe("iD.actions.Join", function () {
         graph = iD.actions.Join(['-', '='])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('=')).to.be.undefined;
+        expect(graph.hasEntity('=')).to.be.undefined;
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 

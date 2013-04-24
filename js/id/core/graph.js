@@ -31,10 +31,14 @@ iD.Graph = function(other, mutable) {
 };
 
 iD.Graph.prototype = {
-    entity: function(id, log) {
+    hasEntity: function(id) {
+        return this.entities[id];
+    },
+
+    entity: function(id) {
         var entity = this.entities[id];
-        if (!entity && log && typeof Raven !== 'undefined') {
-            Raven.captureMessage('entity not found', {tags: {id: id, entity: entity, base: this.base().entities[id]}});
+        if (!entity) {
+            throw new Error('entity ' + id + ' not found');
         }
         return entity;
     },

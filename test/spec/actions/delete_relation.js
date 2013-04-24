@@ -3,7 +3,7 @@ describe("iD.actions.DeleteRelation", function () {
         var relation = iD.Relation(),
             action   = iD.actions.DeleteRelation(relation.id),
             graph    = action(iD.Graph([relation]));
-        expect(graph.entity(relation.id)).to.be.undefined;
+        expect(graph.hasEntity(relation.id)).to.be.undefined;
     });
 
     it("removes the relation from parent relations", function () {
@@ -20,7 +20,7 @@ describe("iD.actions.DeleteRelation", function () {
             relation = iD.Relation({members: [{id: node.id}]}),
             action   = iD.actions.DeleteRelation(relation.id),
             graph    = action(iD.Graph([node, relation]));
-        expect(graph.entity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).to.be.undefined;
     });
 
     it("does not delete member nodes referenced by another parent", function() {
@@ -29,7 +29,7 @@ describe("iD.actions.DeleteRelation", function () {
             relation = iD.Relation({members: [{id: node.id}]}),
             action   = iD.actions.DeleteRelation(relation.id),
             graph    = action(iD.Graph([node, way, relation]));
-        expect(graph.entity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).not.to.be.undefined;
     });
 
     it("does not delete member nodes with interesting tags", function() {
@@ -37,7 +37,7 @@ describe("iD.actions.DeleteRelation", function () {
             relation = iD.Relation({members: [{id: node.id}]}),
             action   = iD.actions.DeleteRelation(relation.id),
             graph    = action(iD.Graph([node, relation]));
-        expect(graph.entity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).not.to.be.undefined;
     });
 
     it("deletes member ways not referenced by another parent", function() {
@@ -45,7 +45,7 @@ describe("iD.actions.DeleteRelation", function () {
             relation = iD.Relation({members: [{id: way.id}]}),
             action   = iD.actions.DeleteRelation(relation.id),
             graph    = action(iD.Graph([way, relation]));
-        expect(graph.entity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).to.be.undefined;
     });
 
     it("does not delete member ways referenced by another parent", function() {
@@ -54,7 +54,7 @@ describe("iD.actions.DeleteRelation", function () {
             relation2 = iD.Relation({members: [{id: way.id}]}),
             action    = iD.actions.DeleteRelation(relation1.id),
             graph     = action(iD.Graph([way, relation1, relation2]));
-        expect(graph.entity(way.id)).not.to.be.undefined;
+        expect(graph.hasEntity(way.id)).not.to.be.undefined;
     });
 
     it("does not delete member ways with interesting tags", function() {
@@ -62,7 +62,7 @@ describe("iD.actions.DeleteRelation", function () {
             relation = iD.Relation({members: [{id: way.id}]}),
             action   = iD.actions.DeleteRelation(relation.id),
             graph    = action(iD.Graph([way, relation]));
-        expect(graph.entity(way.id)).not.to.be.undefined;
+        expect(graph.hasEntity(way.id)).not.to.be.undefined;
     });
 
     it("deletes nodes of deleted member ways", function() {
@@ -71,6 +71,6 @@ describe("iD.actions.DeleteRelation", function () {
             relation = iD.Relation({members: [{id: way.id}]}),
             action   = iD.actions.DeleteRelation(relation.id),
             graph    = action(iD.Graph([node, way, relation]));
-        expect(graph.entity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).to.be.undefined;
     });
 });

@@ -73,12 +73,16 @@ window.iD = function () {
     context.intersects = history.intersects;
 
     /* Graph */
+    context.hasEntity = function(id) {
+        return history.graph().hasEntity(id);
+    };
+
     context.entity = function(id) {
         return history.graph().entity(id);
     };
 
     context.geometry = function(id) {
-        return context.entity(id, true).geometry(history.graph());
+        return context.entity(id).geometry(history.graph());
     };
 
     /* Modes */

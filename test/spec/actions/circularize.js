@@ -40,7 +40,7 @@ describe("iD.actions.Circularize", function () {
 
         graph = iD.actions.Circularize('-', projection, 3)(graph);
 
-        expect(graph.entity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).to.be.undefined;
     });
 
     it("reconnects unused nodes that are members of other ways", function () {
@@ -56,7 +56,7 @@ describe("iD.actions.Circularize", function () {
 
         graph = iD.actions.Circularize('-', projection, 3)(graph);
 
-        expect(graph.entity('a')).to.be.undefined;
+        expect(graph.hasEntity('a')).to.be.undefined;
         expect(graph.entity('=').nodes).to.eql(['c']);
     });
 

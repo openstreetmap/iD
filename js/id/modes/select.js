@@ -110,7 +110,7 @@ iD.modes.Select = function(context, selection) {
         function update() {
             context.surface().call(radialMenu.close);
 
-            if (_.any(selection, function(id) { return !context.entity(id); })) {
+            if (_.any(selection, function(id) { return !context.hasEntity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
             }

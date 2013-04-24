@@ -7,9 +7,8 @@ iD.actions.DeleteMultiple = function(ids) {
         };
 
         ids.forEach(function(id) {
-            var entity = graph.entity(id);
-            if (entity) { // It may have been deleted aready.
-                graph = actions[entity.type](id)(graph);
+            if (graph.hasEntity(id)) { // It may have been deleted aready.
+                graph = actions[graph.entity(id).type](id)(graph);
             }
         });
 

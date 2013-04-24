@@ -283,10 +283,10 @@ describe("iD.History", function () {
             history.perform(iD.actions.DeleteNode('n2'));
             history.save();
             history.reset();
-            expect(history.graph().entity('n')).to.be.undefined
+            expect(history.graph().hasEntity('n')).to.be.undefined
             history.restore();
             expect(history.graph().entity('n').id).to.equal('n');
-            expect(history.graph().entity('n2')).to.be.undefined;
+            expect(history.graph().hasEntity('n2')).to.be.undefined;
         });
     });
 });

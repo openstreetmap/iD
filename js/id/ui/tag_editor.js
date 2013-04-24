@@ -9,7 +9,7 @@ iD.ui.TagEditor = function(context, entity) {
         tagList;
 
     function update() {
-        var entity = context.entity(id);
+        var entity = context.hasEntity(id);
         if (!entity) return;
 
         tags = entity.tags;

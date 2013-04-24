@@ -77,11 +77,11 @@ iD.ui.Geocoder = function(context) {
         function selectId(type, id) {
             id = type[0] + id;
 
-            if (context.entity(id)) {
+            if (context.hasEntity(id)) {
                 context.enter(iD.modes.Select(context, [id]));
             } else {
                 context.map().on('drawn.geocoder', function() {
-                    if (!context.entity(id)) return;
+                    if (!context.hasEntity(id)) return;
                     context.enter(iD.modes.Select(context, [id]));
                 });
 

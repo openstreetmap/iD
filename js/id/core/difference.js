@@ -112,12 +112,12 @@ iD.Difference = function(base, head) {
 
                 diff = _.difference(nh, nb);
                 for (i = 0; i < diff.length; i++) {
-                    result[diff[i]] = head.entity(diff[i]);
+                    result[diff[i]] = head.hasEntity(diff[i]);
                 }
 
                 diff = _.difference(nb, nh);
                 for (i = 0; i < diff.length; i++) {
-                    result[diff[i]] = head.entity(diff[i]);
+                    result[diff[i]] = head.hasEntity(diff[i]);
                 }
             }
 

@@ -4,7 +4,7 @@ iD.ui.Inspector = function(context, entity) {
         newFeature = false;
 
     function changeTags(tags) {
-        var entity = context.entity(id);
+        var entity = context.hasEntity(id);
         if (entity && !_.isEqual(entity.tags, tags)) {
             context.perform(
                 iD.actions.ChangeTags(entity.id, tags),

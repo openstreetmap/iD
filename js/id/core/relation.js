@@ -15,7 +15,7 @@ _.extend(iD.Relation.prototype, {
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
             return this.members.reduce(function(extent, member) {
-                member = resolver.entity(member.id);
+                member = resolver.hasEntity(member.id);
                 if (member) {
                     return extent.extend(member.extent(resolver));
                 } else {
@@ -142,7 +142,7 @@ _.extend(iD.Relation.prototype, {
 
     isComplete: function(resolver) {
         for (var i = 0; i < this.members.length; i++) {
-            if (!resolver.entity(this.members[i].id)) {
+            if (!resolver.hasEntity(this.members[i].id)) {
                 return false;
             }
         }
@@ -165,7 +165,7 @@ _.extend(iD.Relation.prototype, {
     //
     multipolygon: function(resolver) {
         var members = this.members
-            .filter(function(m) { return m.type === 'way' && resolver.entity(m.id); })
+            .filter(function(m) { return m.type === 'way' && resolver.hasEntity(m.id); })
             .map(function(m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.childNodes(resolver.entity(m.id)) }; });
 
         function join(ways) {

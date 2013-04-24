@@ -115,7 +115,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     drawWay.add = function(loc) {
 
         // prevent duplicate nodes
-        var last = context.entity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
+        var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
 
         var newNode = iD.Node({loc: loc});
@@ -166,9 +166,8 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             context.map().dblclickEnable(true);
         }, 1000);
 
-        var way = context.entity(wayId);
-        if (way) {
-            context.enter(iD.modes.Select(context, [way.id]).newFeature(true));
+        if (context.hasEntity(wayId)) {
+            context.enter(iD.modes.Select(context, [wayId]).newFeature(true));
         } else {
             context.enter(iD.modes.Browse(context));
         }
