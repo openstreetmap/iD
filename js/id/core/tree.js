@@ -10,9 +10,9 @@ iD.Tree = function(graph) {
     function extentRectangle(extent) {
             x = m * extent[0][0],
             y = m * extent[0][1],
-            dx = m * extent[1][0] - x || 2,
-            dy = m * extent[1][1] - y || 2;
-        return new RTree.Rectangle(~~x, ~~y, ~~dx - 1, ~~dy - 1);
+            dx = Math.max(m * extent[1][0] - x, 1),
+            dy = Math.max(m * extent[1][1] - y, 1);
+        return new RTree.Rectangle(~~x, ~~y, ~~dx, ~~dy);
     }
 
     function insert(entity) {
