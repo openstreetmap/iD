@@ -60,5 +60,15 @@ describe("iD.Tree", function() {
             g = g.remove(n1);
             expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
         });
+
+        it("works with extents with dimensions that are very small", function() {
+            var m = 1000 * 1000 * 100;
+            var n1 = iD.Node({ id: 'n1', loc: [1, 1]});
+            var n2 = iD.Node({ id: 'n2', loc: [1 + 0.1/m, 2]});
+            var way = iD.Way({id: 'w1', nodes: ['n1', 'n2']});
+            var g = tree.graph().replace(n1).replace(n2).replace(way);
+            g = g.remove(way).remove(n1).remove(n2);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [3, 3]), g)).to.eql([]);
+        });
     });
 });
