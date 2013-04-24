@@ -1,11 +1,13 @@
 describe("iD.svg.Midpoints", function () {
     var surface,
         projection = Object,
-        filter = d3.functor(true);
+        filter = d3.functor(true),
+        context;
 
     beforeEach(function () {
+        context = iD();
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-            .call(iD.svg.Surface(iD()));
+            .call(iD.svg.Surface(context));
     });
 
     it("finds the location of the midpoints", function () {
@@ -15,9 +17,8 @@ describe("iD.svg.Midpoints", function () {
             graph = iD.Graph([a, b, line]),
             extent = iD.geo.Extent([0, 0], [100, 100]);
 
-        // If no vertices are drawn, no midpoints are drawn. This dependence needs to be removed
-        surface.call(iD.svg.Vertices(projection), graph, [a], filter, 16);
-        surface.call(iD.svg.Midpoints(projection), graph, [line], filter, extent);
+        context.selection = function() { return [line.id]; };
+        surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.select('.midpoint').datum().loc).to.eql([25, 0]);
     });
@@ -29,7 +30,8 @@ describe("iD.svg.Midpoints", function () {
             graph = iD.Graph([a, b, line]),
             extent = iD.geo.Extent([0, 0], [100, 100]);
 
-        surface.call(iD.svg.Midpoints(projection), graph, [line], filter, extent);
+        context.selection = function() { return [line.id]; };
+        surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.selectAll('.midpoint')[0]).to.have.length(0);
     });

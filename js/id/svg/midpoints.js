@@ -8,7 +8,6 @@ iD.svg.Midpoints = function(projection, context) {
             if (entity.type !== 'way') continue;
             if (context.selection().indexOf(entity.id) < 0) continue;
 
-
             var nodes = graph.childNodes(entity);
 
             // skip the last node because it is always repeated

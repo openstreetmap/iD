@@ -58,9 +58,8 @@ iD.svg.Vertices = function(projection, context) {
         }).length > 1;
     }
 
-    function drawVertices(surface, graph, zoom) {
+    function drawVertices(surface, graph, entities, zoom) {
         var visible = visibleVertices(),
-            entities = context.intersects(context.map().extent()),
             vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
