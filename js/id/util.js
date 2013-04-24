@@ -60,7 +60,7 @@ iD.util.prefixCSSProperty = function(property) {
 
 iD.util.getStyle = function(selector) {
     for (var i = 0; i < document.styleSheets.length; i++) {
-        var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules;
+        var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules || [];
         for (var k = 0; k < rules.length; k++) {
             var selectorText = rules[k].selectorText && rules[k].selectorText.split(', ');
             if (_.contains(selectorText, selector)) {
