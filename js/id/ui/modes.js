@@ -43,6 +43,8 @@ iD.ui.Modes = function(context) {
         context.map()
             .on('move.mode-buttons', _.debounce(disableTooHigh, 500));
 
+        disableTooHigh();
+
         buttons.append('span')
             .attr('class', function(mode) { return mode.id + ' icon icon-pre-text'; });
 
