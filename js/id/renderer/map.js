@@ -56,12 +56,12 @@ iD.Map = function(context) {
 
         surface.on('mouseover.vertices', function() {
             vertices.hover(d3.event.target.__data__);
-            surface.call(vertices, context.graph(), map.zoom());
+            if (!isTransformed()) surface.call(vertices, context.graph(), map.zoom());
         });
 
         surface.on('mouseout.vertices', function() {
             vertices.hover(d3.event.relatedTarget && d3.event.relatedTarget.__data__);
-            surface.call(vertices, context.graph(), map.zoom());
+            if (!isTransformed()) surface.call(vertices, context.graph(), map.zoom());
         });
 
         map.size(selection.size());
@@ -169,9 +169,13 @@ iD.Map = function(context) {
         dispatch.move(map);
     }
 
-    function resetTransform() {
+    function isTransformed() {
         var prop = surface.node().style[transformProp];
-        if (!prop || prop === 'none') return false;
+        return prop && prop !== 'none';
+    }
+
+    function resetTransform() {
+        if (!isTransformed()) return false;
         surface.node().style[transformProp] = '';
         layergroup.node().style[transformProp] = '';
         return true;
