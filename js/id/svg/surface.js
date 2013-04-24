@@ -90,10 +90,12 @@ iD.svg.Surface = function(context) {
             .attr('height', function(d) { return d; });
 
         var maki = [];
-        _.forEach(iD.data.maki, function(dimensions, name) {
-            maki.push({key: 'maki-' + name + '-12', value: dimensions['12']});
-            maki.push({key: 'maki-' + name + '-18', value: dimensions['18']});
-            maki.push({key: 'maki-' + name + '-24', value: dimensions['24']});
+        _.forEach(iD.data.featureIcons, function(dimensions, name) {
+            if (dimensions['12'] && dimensions['18'] && dimensions['24']) {
+                maki.push({key: 'maki-' + name + '-12', value: dimensions['12']});
+                maki.push({key: 'maki-' + name + '-18', value: dimensions['18']});
+                maki.push({key: 'maki-' + name + '-24', value: dimensions['24']});
+            }
         });
 
         defs.call(SpriteDefinition(

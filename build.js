@@ -122,7 +122,7 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
         fields: rp('fields.json')
     },
     imperial: r('imperial.json'),
-    maki: r('maki-sprite.json'),
+    featureIcons: r('feature-icons.json'),
     operations: r('operations-sprite.json'),
     locales: r('locales.json'),
     en: read('dist/locales/en.json')

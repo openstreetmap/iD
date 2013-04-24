@@ -13,9 +13,15 @@ iD.ui.PresetIcon = function(geometry) {
 
         selection.append('div')
             .attr('class', function(preset) {
-                return (geometry === 'line' ? 'preset-line-icon ' : 'maki-icon maki-') +
-                    (preset.icon || fallbackIcon) +
-                    ' preset-icon preset-icon-' + geometry;
+                var icon = preset.icon || fallbackIcon,
+                    klass = 'feature-' + icon + ' preset-icon';
+
+                icon = iD.data.featureIcons[icon];
+                if (geometry === 'line' && icon && icon.line) {
+                    klass += ' preset-icon-line';
+                }
+
+                return klass;
             });
     };
 };
