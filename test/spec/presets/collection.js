@@ -31,8 +31,8 @@ describe("iD.presets.Collection", function() {
     });
 
     describe("#matchGeometry", function() {
-        it("returns a new collection only containing presets matching an entity's type", function() {
-            expect(c.matchGeometry(w, g).collection).to.eql([p.other, p.residential]);
+        it("returns a new collection only containing presets matching a geometry", function() {
+            expect(c.matchGeometry('line').collection).to.eql([p.other, p.residential]);
         });
     });
 

@@ -9,7 +9,7 @@ iD.ui.PresetGrid = function(context, entity) {
 
         selection.html('');
 
-        presets = context.presets().matchGeometry(entity, context.graph());
+        presets = context.presets().matchGeometry(entity.geometry(context.graph()));
 
         var messagewrap = selection.append('div')
             .attr('class', 'header fillL cf');

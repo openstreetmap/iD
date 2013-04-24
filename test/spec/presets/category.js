@@ -29,8 +29,8 @@ describe("iD.presets.Category", function() {
                 w = iD.Way(),
                 n = iD.Node(),
                 g = iD.Graph().replace(w);
-            expect(c.matchGeometry(w, g)).to.eql(true);
-            expect(c.matchGeometry(n, g)).to.eql(false);
+            expect(c.matchGeometry('line')).to.eql(true);
+            expect(c.matchGeometry('point')).to.eql(false);
         });
     });
 });

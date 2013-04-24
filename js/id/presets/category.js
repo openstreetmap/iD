@@ -7,8 +7,8 @@ iD.presets.Category = function(id, category, all) {
         return all.item(id);
     }));
 
-    category.matchGeometry = function(entity, resolver) {
-        return category.geometry.indexOf(entity.geometry(resolver)) >= 0;
+    category.matchGeometry = function(geometry) {
+        return category.geometry.indexOf(geometry) >= 0;
     };
 
     category.matchTags = function() { return false; };

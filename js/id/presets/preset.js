@@ -8,8 +8,8 @@ iD.presets.Preset = function(id, preset, fields) {
         return fields[f];
     }
 
-    preset.matchGeometry = function(entity, resolver) {
-        return preset.geometry.indexOf(entity.geometry(resolver)) >= 0;
+    preset.matchGeometry = function(geometry) {
+        return preset.geometry.indexOf(geometry) >= 0;
     };
 
     preset.matchTags = function(entity) {

@@ -40,12 +40,13 @@ describe('iD.presets.Preset', function() {
     describe('#matchGeometry', function() {
         var n = iD.Node();
         var g = iD.Graph().replace(n);
-        it("returns false if it doesn't match the entity type", function() {
-            expect(p['highway/residential'].matchGeometry(n, g)).to.equal(false);
+
+        it("returns false if it doesn't match", function() {
+            expect(p['highway/residential'].matchGeometry('point')).to.equal(false);
         });
 
-        it("returns true if it does match the entity type", function() {
-            expect(p.other.matchGeometry(n, g)).to.equal(true);
+        it("returns true if it does match", function() {
+            expect(p.other.matchGeometry('point')).to.equal(true);
         });
     });
 
