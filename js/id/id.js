@@ -107,7 +107,7 @@ window.iD = function () {
     };
 
     context.selection = function() {
-        if (mode && mode.id === 'select') {
+        if (mode && mode.selection) {
             return mode.selection();
         } else {
             return [];
