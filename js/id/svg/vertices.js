@@ -52,24 +52,31 @@ iD.svg.Vertices = function(projection, context) {
         return visible;
     }
 
+    function isIntersection(entity, graph) {
+        return graph.parentWays(entity).filter(function (parent) {
+            return parent.geometry(graph) === 'line';
+        }).length > 1;
+    }
+
     function drawVertices(surface, graph, zoom) {
-        var visible = visibleVertices();
-
-        function rendered(entity) {
-            if (entity.geometry(graph) !== 'vertex')
-                return false;
-            if (entity.id in visible)
-                return true;
-            if (entity.hasInterestingTags())
-                return true;
-        }
-
-        var entities = context.intersects(context.map().extent()),
+        var visible = visibleVertices(),
+            entities = context.intersects(context.map().extent()),
             vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (rendered(entity)) {
+
+            if (entity.geometry(graph) !== 'vertex')
+                continue;
+
+            // Vertices that have interesting tags or are intersections are
+            // always visible. We don't want them to get classed vertex-hover.
+            if (entity.hasInterestingTags())
+                visible[entity.id] = 'tagged';
+            if (isIntersection(entity, graph))
+                visible[entity.id] = 'intersection';
+
+            if (entity.id in visible) {
                 vertices.push(entity)
             }
         }
