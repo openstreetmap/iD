@@ -56,12 +56,16 @@ iD.Map = function(context) {
 
         surface.on('mouseover.vertices', function() {
             vertices.hover(d3.event.target.__data__);
-            if (!isTransformed()) surface.call(vertices, context.graph(), map.zoom());
+            if (map.editable() && !isTransformed()) {
+                surface.call(vertices, context.graph(), map.zoom());
+            }
         });
 
         surface.on('mouseout.vertices', function() {
             vertices.hover(d3.event.relatedTarget && d3.event.relatedTarget.__data__);
-            if (!isTransformed()) surface.call(vertices, context.graph(), map.zoom());
+            if (map.editable() && !isTransformed()) {
+                surface.call(vertices, context.graph(), map.zoom());
+            }
         });
 
         map.size(selection.size());
