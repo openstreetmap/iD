@@ -164,7 +164,7 @@ iD.Map = function(context) {
 
         var transform =
             'scale(' + scale + ')' +
-            'translate(' + tX + 'px,' + tY + 'px) ';
+            'translate3d(' + tX + 'px,' + tY + 'px, 0) ';
 
         supersurface.style(transformProp, transform);
         queueRedraw();
