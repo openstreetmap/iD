@@ -26,10 +26,6 @@ iD.Map = function(context) {
         tail = iD.ui.Tail(),
         surface, layergroup;
 
-    function visibleEntities() {
-        return context.intersects(map.extent());
-    }
-
     function map(selection) {
         context.history()
             .on('change.map', redraw);
@@ -59,16 +55,16 @@ iD.Map = function(context) {
             .call(iD.svg.Surface(context));
 
         surface.on('mouseover.vertices', function() {
-            vertices.hover(d3.event.target.__data__);
             if (map.editable() && !isTransformed()) {
-                surface.call(vertices, context.graph(), visibleEntities(), map.zoom());
+                var hover = d3.event.target.__data__;
+                surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
             }
         });
 
         surface.on('mouseout.vertices', function() {
-            vertices.hover(d3.event.relatedTarget && d3.event.relatedTarget.__data__);
             if (map.editable() && !isTransformed()) {
-                surface.call(vertices, context.graph(), visibleEntities(), map.zoom());
+                var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
+                surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
             }
         });
 
@@ -126,7 +122,7 @@ iD.Map = function(context) {
         } else {
             surface
                 .call(points, graph, all, filter)
-                .call(vertices, graph, visibleEntities(), map.zoom())
+                .call(vertices, graph, all, map.zoom())
                 .call(lines, graph, all, filter, dimensions)
                 .call(areas, graph, all, filter)
                 .call(midpoints, graph, all, filter, extent)

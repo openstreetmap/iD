@@ -8,48 +8,44 @@ iD.svg.Vertices = function(projection, context) {
 
     var hover;
 
-    function visibleVertices() {
-        var visible = {};
+    function siblingAndChildVertices(ids, graph) {
+        var vertices = {};
 
-        function addChildVertices(entity, klass) {
+        function addChildVertices(entity) {
             var i;
             if (entity.type === 'way') {
                 for (i = 0; i < entity.nodes.length; i++) {
-                    visible[entity.nodes[i]] = klass;
+                    vertices[entity.nodes[i]] = graph.entity(entity.nodes[i]);
                 }
             } else if (entity.type === 'relation') {
                 for (i = 0; i < entity.members.length; i++) {
                     var member = context.hasEntity(entity.members[i].id);
                     if (member) {
-                        addChildVertices(member, klass);
+                        addChildVertices(member);
                     }
                 }
             } else {
-                visible[entity.id] = klass;
+                vertices[entity.id] = entity;
             }
         }
 
-        function addSiblingAndChildVertices(id, klass) {
+        function addSiblingAndChildVertices(id) {
             var entity = context.hasEntity(id);
             if (entity && entity.type === 'node') {
-                visible[entity.id] = klass;
+                vertices[entity.id] = entity;
                 context.graph().parentWays(entity).forEach(function(entity) {
-                    addChildVertices(entity, klass);
+                    addChildVertices(entity);
                 });
             } else if (entity) {
-                addChildVertices(entity, klass);
+                addChildVertices(entity);
             }
         }
 
-        if (hover) {
-            addSiblingAndChildVertices(hover.id, 'vertex-hover');
-        }
-
-        context.selection().forEach(function(id) {
+        ids.forEach(function(id) {
             addSiblingAndChildVertices(id, 'vertex-selected');
         });
 
-        return visible;
+        return vertices;
     }
 
     function isIntersection(entity, graph) {
@@ -58,31 +54,7 @@ iD.svg.Vertices = function(projection, context) {
         }).length > 1;
     }
 
-    function drawVertices(surface, graph, entities, zoom) {
-        var visible = visibleVertices(),
-            vertices = [];
-
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
-
-            if (entity.geometry(graph) !== 'vertex')
-                continue;
-
-            // Vertices that have interesting tags or are intersections are
-            // always visible. We don't want them to get classed vertex-hover.
-            if (entity.hasInterestingTags())
-                visible[entity.id] = 'tagged';
-            if (isIntersection(entity, graph))
-                visible[entity.id] = 'intersection';
-
-            if (entity.id in visible) {
-                vertices.push(entity)
-            }
-        }
-
-        var groups = surface.select('.layer-hit').selectAll('g.vertex')
-            .data(vertices, iD.Entity.key);
-
+    function draw(groups, graph, zoom) {
         var group = groups.enter()
             .insert('g', ':first-child')
             .attr('class', 'node vertex');
@@ -104,8 +76,6 @@ iD.svg.Vertices = function(projection, context) {
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
             .call(iD.svg.MemberClasses(graph))
-            .classed('vertex-hover', function(entity) { return visible[entity.id] === 'vertex-hover'; })
-            .classed('vertex-selected', function(entity) { return visible[entity.id] === 'vertex-selected'; })
             .classed('tagged', function(entity) { return entity.hasInterestingTags(); })
             .classed('shared', function(entity) { return graph.isShared(entity); });
 
@@ -175,10 +145,45 @@ iD.svg.Vertices = function(projection, context) {
             .remove();
     }
 
-    drawVertices.hover = function(_) {
-        if (!arguments.length) return hover;
-        hover = _;
-        return drawVertices;
+    function drawVertices(surface, graph, entities, zoom) {
+        var selected = siblingAndChildVertices(context.selection(), graph),
+            vertices = [];
+
+        for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+
+            if (entity.geometry(graph) !== 'vertex')
+                continue;
+
+            if (entity.id in selected ||
+                entity.hasInterestingTags() ||
+                isIntersection(entity, graph)) {
+                vertices.push(entity)
+            }
+        }
+
+        surface.select('.layer-hit').selectAll('g.vertex.vertex-persistent')
+            .data(vertices, iD.Entity.key)
+            .call(draw, graph, zoom)
+            .classed('vertex-persistent', true);
+
+        drawHover(surface, graph, zoom);
+    }
+
+    function drawHover(surface, graph, zoom) {
+        var hovered = hover ? siblingAndChildVertices([hover.id], graph) : {};
+
+        surface.select('.layer-hit').selectAll('g.vertex.vertex-hover')
+            .data(d3.values(hovered), iD.Entity.key)
+            .call(draw, graph, zoom)
+            .classed('vertex-hover', true);
+    }
+
+    drawVertices.drawHover = function(surface, graph, _, zoom) {
+        if (hover !== _) {
+            hover = _;
+            drawHover(surface, graph, zoom);
+        }
     };
 
     return drawVertices;
