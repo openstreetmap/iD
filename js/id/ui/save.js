@@ -98,7 +98,8 @@ iD.ui.Save = function(context) {
             .text(t('save.title'));
 
         button.append('span')
-            .attr('class', 'count');
+            .attr('class', 'count')
+            .text('0');
 
         var keybinding = d3.keybinding('undo-redo')
             .on(key, save);
@@ -106,20 +107,25 @@ iD.ui.Save = function(context) {
         d3.select(document)
             .call(keybinding);
 
+        var numChanges = 0;
+
         context.history().on('change.save', function() {
-            var hasChanges = history.hasChanges();
+            var _ = history.numChanges();
+            if (_ === numChanges)
+                return;
+            numChanges = _;
 
             button
                 .attr('data-original-title',
-                    iD.ui.tooltipHtml(t(hasChanges ?
+                    iD.ui.tooltipHtml(t(numChanges > 0 ?
                         'save.help' : 'save.no_changes'), key));
 
             button
-                .classed('disabled', !hasChanges)
-                .classed('has-count', hasChanges);
+                .classed('disabled', numChanges === 0)
+                .classed('has-count', numChanges > 0);
 
             button.select('span.count')
-                .text(history.numChanges());
+                .text(numChanges);
         });
     };
 };
