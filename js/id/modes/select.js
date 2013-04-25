@@ -91,10 +91,16 @@ iD.modes.Select = function(context, selection) {
             });
         });
 
-        var q = iD.util.stringQs(location.hash.substring(1));
-        location.replace('#' + iD.util.qsString(_.assign(q, {
-            id: selection.join(',')
-        }), true));
+        var notNew = selection.filter(function(id) {
+            return !context.entity(id).isNew();
+        });
+
+        if (notNew.length) {
+            var q = iD.util.stringQs(location.hash.substring(1));
+            location.replace('#' + iD.util.qsString(_.assign(q, {
+                id: notNew.join(',')
+            }), true));
+        }
 
         if (singular()) {
             inspector = iD.ui.Inspector(context, singular())
