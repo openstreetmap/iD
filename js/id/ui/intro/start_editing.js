@@ -37,7 +37,6 @@ iD.ui.intro.startEditing = function(context, reveal) {
                     .append('button')
                         .attr('class', 'modal-section huge-modal-button')
                         .on('click', function() {
-                                event.startEditing();
                                 modal.remove();
                         });
 
@@ -45,6 +44,8 @@ iD.ui.intro.startEditing = function(context, reveal) {
                     .attr('class','illustration');
                 startbutton.append('h2')
                     .text(t('intro.startediting.start'));
+
+            event.startEditing();
 
         }, 7500);
     };
