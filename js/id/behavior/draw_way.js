@@ -131,6 +131,11 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge) {
+
+        // Avoid creating duplicate segments
+        if (edge[0] === way.nodes[way.nodes.length - 1] ||
+            edge[1] === way.nodes[way.nodes.length - 1]) return;
+
         var newNode = iD.Node({ loc: loc });
 
         context.perform(
