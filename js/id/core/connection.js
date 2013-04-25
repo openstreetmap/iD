@@ -255,7 +255,7 @@ iD.Connection = function() {
             var u = user_details.getElementsByTagName('user')[0],
                 img = u.getElementsByTagName('img'),
                 image_url = '';
-            if (img && img[0].getAttribute('href')) {
+            if (img && img[0] && img[0].getAttribute('href')) {
                 image_url = img[0].getAttribute('href');
             }
             callback(undefined, connection.user({
