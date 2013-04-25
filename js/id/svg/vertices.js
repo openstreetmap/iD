@@ -145,7 +145,7 @@ iD.svg.Vertices = function(projection, context) {
             .remove();
     }
 
-    function drawVertices(surface, graph, entities, zoom) {
+    function drawVertices(surface, graph, entities, filter, zoom) {
         var selected = siblingAndChildVertices(context.selection(), graph),
             vertices = [];
 
@@ -163,6 +163,7 @@ iD.svg.Vertices = function(projection, context) {
         }
 
         surface.select('.layer-hit').selectAll('g.vertex.vertex-persistent')
+            .filter(filter)
             .data(vertices, iD.Entity.key)
             .call(draw, graph, zoom)
             .classed('vertex-persistent', true);
