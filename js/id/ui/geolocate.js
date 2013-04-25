@@ -5,7 +5,10 @@ iD.ui.Geolocate = function(map) {
     }
 
     function success(position) {
-        map.center([position.coords.longitude, position.coords.latitude]);
+        var extent = iD.geo.Extent([position.coords.longitude, position.coords.latitude])
+            .padByMeters(position.coords.accuracy);
+
+        map.centerZoom(extent.center(), Math.min(20, map.extentZoom(extent)));
     }
 
     function error() { }
