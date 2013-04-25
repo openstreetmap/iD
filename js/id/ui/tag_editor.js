@@ -2,7 +2,7 @@ iD.ui.TagEditor = function(context, entity) {
     var event = d3.dispatch('changeTags', 'choose', 'close'),
         presets = context.presets(),
         id = entity.id,
-        tags = entity.tags,
+        tags = _.clone(entity.tags),
         preset,
         selection_,
         presetUI,
@@ -12,7 +12,7 @@ iD.ui.TagEditor = function(context, entity) {
         var entity = context.hasEntity(id);
         if (!entity) return;
 
-        tags = entity.tags;
+        tags = _.clone(entity.tags);
 
         // change preset if necessary (undos/redos)
         var newmatch = presets.match(entity, context.graph());
