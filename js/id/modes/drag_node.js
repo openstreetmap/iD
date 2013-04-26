@@ -138,7 +138,9 @@ iD.modes.DragNode = function(context) {
 
         var parentWays = _.pluck(context.graph().parentWays(entity), 'id');
 
-        context.enter(iD.modes.Select(context, parentWays));
+        context.enter(
+            iD.modes.Select(context, parentWays)
+                .suppressMenu(true));
     }
 
     function cancel() {

@@ -13,7 +13,8 @@ iD.modes.Select = function(context, selection) {
             iD.modes.DragNode(context).behavior],
         inspector,
         radialMenu,
-        newFeature = false;
+        newFeature = false,
+        suppressMenu = false;
 
     var wrap = context.container()
         .select('.inspector-wrap');
@@ -57,6 +58,12 @@ iD.modes.Select = function(context, selection) {
     mode.newFeature = function(_) {
         if (!arguments.length) return newFeature;
         newFeature = _;
+        return mode;
+    };
+
+    mode.suppressMenu = function(_) {
+        if (!arguments.length) return suppressMenu;
+        suppressMenu = _;
         return mode;
     };
 
@@ -162,7 +169,7 @@ iD.modes.Select = function(context, selection) {
         selectElements();
 
         radialMenu = iD.ui.RadialMenu(operations);
-        var show = d3.event && !newFeature;
+        var show = d3.event && !suppressMenu;
 
         if (show) {
             positionMenu();

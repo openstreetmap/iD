@@ -174,7 +174,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         }, 1000);
 
         if (context.hasEntity(wayId)) {
-            context.enter(iD.modes.Select(context, [wayId]).newFeature(true));
+            context.enter(
+                iD.modes.Select(context, [wayId])
+                    .suppressMenu(true)
+                    .newFeature(true));
         } else {
             context.enter(iD.modes.Browse(context));
         }
