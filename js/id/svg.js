@@ -24,6 +24,7 @@ iD.svg = {
             var last,
                 next,
                 started = false,
+                offset = 0,
                 d = '';
 
             d3.geo.stream({
@@ -32,29 +33,45 @@ iD.svg = {
                     return n.loc;
                 })
             }, projection.stream({
-                lineStart: function() { last = null; started = false; },
+                lineStart: function() { last = null; started = false; offset = 0; },
                 lineEnd: function() { },
                 point: function(x, y) {
-                    if (!started) d += 'M';
+
                     next = [Math.floor(x), Math.floor(y)];
-                    if (dx && last && iD.geo.dist(last, next) > dx) {
+
+                    if (!started) {
+                        d += 'M';
+                        d += next[0] + ',' + next[1];
+                        offset = dx;
+
+                    } else if (!dx) {
+                        d += 'L';
+                        d += next[0] + ',' + next[1];
+                    }
+
+
+                    // Resample
+                    if (dx && last) {
+
                         var span = iD.geo.dist(last, next),
                             angle = Math.atan2(next[1] - last[1], next[0] - last[0]),
                             to = last.slice();
-                        to[0] += Math.cos(angle) * dx;
-                        to[1] += Math.sin(angle) * dx;
-                        while (iD.geo.dist(last, to) < (span)) {
+
+                        to[0] += Math.cos(angle) * offset;
+                        to[1] += Math.sin(angle) * offset;
+
+                        while (iD.geo.dist(last, to) < span) {
+
                             // a dx-length line segment in that angle
-                            if (started) d += 'L';
-                            d += Math.floor(to[0]) + ',' + Math.floor(to[1]);
-                            started = started || true;
+                            d += 'L' + Math.floor(to[0]) + ',' + Math.floor(to[1]);
                             to[0] += Math.cos(angle) * dx;
                             to[1] += Math.sin(angle) * dx;
                         }
+
+                        offset = iD.geo.dist(last, to) - span;
                     }
-                    if (started) d += 'L';
-                    d += next[0] + ',' + next[1];
-                    started = started || true;
+
+                    started = true;
                     last = next;
                 }
             }));

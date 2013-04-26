@@ -112,14 +112,16 @@ iD.svg.Lines = function(projection) {
             casing = surface.select('.layer-casing'),
             stroke = surface.select('.layer-stroke'),
             defs   = surface.select('defs'),
-            text   = surface.select('.layer-text'),
+            oneway = surface.select('.layer-oneway'),
             shadows = drawPaths(shadow, lines, filter, 'shadow', lineString),
             casings = drawPaths(casing, lines, filter, 'casing', lineString),
-            strokes = drawPaths(stroke, lines, filter, 'stroke', lineString);
+            strokes = drawPaths(stroke, lines, filter, 'stroke', lineString),
+            oneways = drawPaths(oneway, lines, filter, 'oneway', lineStringOneway);
 
-            strokes
-                .filter(function(d) { return d.isOneWay(); })
-                .attr('marker-mid', 'url(#oneway-marker)')
-                .attr('d', lineStringResampled);
+        oneways.attr('marker-mid', 'url(#oneway-marker)');
+
+        function lineStringOneway(d) {
+            return d.isOneWay() && lineStringResampled(d);
+        }
     };
 };

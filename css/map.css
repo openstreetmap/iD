@@ -823,11 +823,8 @@ marker#oneway-marker path {
     opacity: .5;
 }
 
-text.tag-oneway {
-    fill:#91CFFF;
-    stroke:#2C6B9B;
-    stroke-width:1;
-    pointer-events:none;
+path.oneway {
+    stroke-width: 6px;
 }
 
 /*
