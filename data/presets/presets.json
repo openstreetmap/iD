@@ -2637,7 +2637,8 @@
             "point",
             "vertex",
             "line",
-            "area"
+            "area",
+            "relation"
         ],
         "fields": []
     },

@@ -15,7 +15,7 @@
             "uniqueItems": true,
             "items": {
                 "type": "string",
-                "enum": ["point", "vertex", "line", "area"]
+                "enum": ["point", "vertex", "line", "area", "relation"]
             },
             "required": true
         },
