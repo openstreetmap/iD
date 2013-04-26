@@ -164,14 +164,13 @@ iD.ui.PresetGrid = function(context, entity) {
                 if (d === entity) index = i;
             });
 
-            var insertIndex = index + 3 - index % 3;
-            if (insertIndex > shownIndex) insertIndex ++;
+            if (index > shownIndex) index++;
 
             var elem = document.createElement('div');
-            grid.node().insertBefore(elem, grid.node().childNodes[insertIndex]);
+            grid.node().insertBefore(elem, grid.node().childNodes[index + 1]);
 
             var newbox = d3.select(elem)
-                .attr('class', 'col12 box-insert ' + klass + ' arrow-' + (index % 3))
+                .attr('class', 'col12 box-insert ' + klass + ' arrow')
                 .datum(entity);
 
             return newbox;
@@ -214,7 +213,7 @@ iD.ui.PresetGrid = function(context, entity) {
 
             var entered = entries.enter()
                 .append('div')
-                .attr('class','grid-button-wrap col4 grid-entry-wrap')
+                .attr('class','grid-button-wrap col12 grid-entry-wrap')
                 .classed('category', function(d) { return !!d.members; })
                 .classed('current', function(d) { return d === preset; });
 
