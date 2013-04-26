@@ -133,8 +133,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     drawWay.addWay = function(loc, edge) {
 
         // Avoid creating duplicate segments
-        if (edge[0] === way.nodes[way.nodes.length - (isArea ? 2 : 1)] ||
-            edge[1] === way.nodes[way.nodes.length - (isArea ? 2 : 1)]) return;
+        if (!isArea) {
+            if (edge[0] === way.nodes[way.nodes.length - 1] ||
+                edge[1] === way.nodes[way.nodes.length - 1]) return;
+        }
 
         var newNode = iD.Node({ loc: loc });
 
