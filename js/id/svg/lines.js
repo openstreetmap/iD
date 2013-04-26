@@ -59,7 +59,7 @@ iD.svg.Lines = function(projection) {
         return outer;
     }
 
-    return function drawLines(surface, graph, entities, filter, dimensions) {
+    return function drawLines(surface, graph, entities, filter) {
         function drawPaths(group, lines, filter, klass, lineString) {
             lines = lines.filter(function(line) {
                 return lineString(line);
@@ -105,23 +105,35 @@ iD.svg.Lines = function(projection) {
 
         lines.sort(waystack);
 
-        var lineString = iD.svg.LineString(projection, graph, dimensions);
-        var lineStringResampled = iD.svg.LineString(projection, graph, dimensions, 35);
+        var lineString = iD.svg.LineString(projection, graph);
 
         var shadow = surface.select('.layer-shadow'),
             casing = surface.select('.layer-casing'),
             stroke = surface.select('.layer-stroke'),
             defs   = surface.select('defs'),
-            oneway = surface.select('.layer-oneway'),
-            shadows = drawPaths(shadow, lines, filter, 'shadow', lineString),
-            casings = drawPaths(casing, lines, filter, 'casing', lineString),
-            strokes = drawPaths(stroke, lines, filter, 'stroke', lineString),
-            oneways = drawPaths(oneway, lines, filter, 'oneway', lineStringOneway);
+            oneway = surface.select('.layer-oneway');
 
-        oneways.attr('marker-mid', 'url(#oneway-marker)');
+        drawPaths(shadow, lines, filter, 'shadow', lineString);
+        drawPaths(casing, lines, filter, 'casing', lineString);
+        drawPaths(stroke, lines, filter, 'stroke', lineString);
 
-        function lineStringOneway(d) {
-            return d.isOneWay() && lineStringResampled(d);
-        }
+        var segments = _.flatten(lines
+            .filter(function(d) { return d.isOneWay(); })
+            .map(iD.svg.OneWaySegments(projection, graph, 35)));
+
+        var oneways = oneway.selectAll('path.oneway')
+            .data(segments, function(d) { return [d.id, d.index]; });
+
+        oneways.enter()
+            .append('path')
+            .attr('class', 'oneway')
+            .attr('marker-mid', 'url(#oneway-marker)');
+
+        oneways
+            .order()
+            .attr('d', function(d) { return d.d; });
+
+        oneways.exit()
+            .remove();
     };
 };
