@@ -121,8 +121,9 @@ iD.modes.DragNode = function(context) {
                 connectAnnotation(d));
 
         } else if (d.type === 'node' && d.id !== entity.id) {
+            // `entity` is last so it will survive and it's parent ways can be selected below.
             context.replace(
-                iD.actions.Connect([entity.id, d.id]),
+                iD.actions.Connect([d.id, entity.id]),
                 connectAnnotation(d));
 
         } else if (wasMidpoint) {
