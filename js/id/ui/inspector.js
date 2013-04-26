@@ -42,7 +42,7 @@ iD.ui.Inspector = function(context, entity) {
             .classed('pane tag-pane', true);
 
         var presetGrid = iD.ui.PresetGrid(context, entity)
-            .newFeature(newFeature)
+            .autofocus(newFeature)
             .on('close', browse)
             .on('choose', function(preset) {
                 var right = panewrap.style('right').indexOf('%') > 0 ? '0%' : '0px';
@@ -64,6 +64,7 @@ iD.ui.Inspector = function(context, entity) {
                     .transition()
                     .style('right', right);
 
+                presetGrid.autofocus(true);
                 presetLayer.call(presetGrid, preset);
             });
 
