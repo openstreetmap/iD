@@ -1475,6 +1475,7 @@ img.wiki-image {
     width: -webkit-calc(33.3333% - 10px);
     width: calc(33.3333% - 10px);
     margin-left: 20px;
+    margin-right: 10px;
     border-radius: 4px;
     max-height: 200px;
 }

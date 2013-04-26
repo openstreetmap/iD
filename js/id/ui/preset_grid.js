@@ -126,7 +126,7 @@ iD.ui.PresetGrid = function(context, entity) {
                         .transition()
                         .duration(300)
                         .style('padding-bottom', '20px')
-                        .style('max-height', (d.members.collection.length / 3 * 150) + 200 + 'px');
+                        .style('max-height', (d.members.collection.length * 80) + 200 + 'px');
                 }
 
             // Preset
@@ -170,7 +170,7 @@ iD.ui.PresetGrid = function(context, entity) {
             grid.node().insertBefore(elem, grid.node().childNodes[index + 1]);
 
             var newbox = d3.select(elem)
-                .attr('class', 'col12 box-insert ' + klass + ' arrow')
+                .attr('class', 'col12 box-insert ' + klass)
                 .datum(entity);
 
             return newbox;
