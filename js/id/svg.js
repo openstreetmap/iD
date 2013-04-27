@@ -13,18 +13,23 @@ iD.svg = {
         };
     },
 
-    LineString: function(projection, graph, dimensions, dx) {
-        var cache = {};
+    LineString: function(projection, graph) {
+        var cache = {},
+            path = d3.geo.path().projection(projection);
 
         return function(entity) {
-            if (cache[entity.id] !== undefined) {
-                return cache[entity.id];
-            }
+            if (entity.id in cache) return cache[entity.id];
+            return cache[entity.id] = path(entity.asGeoJSON(graph));
+        };
+    },
 
-            var last,
-                next,
-                started = false,
-                d = '';
+    OneWaySegments: function(projection, graph, dt) {
+        return function(entity) {
+            var a,
+                b,
+                i = 0,
+                offset = dt,
+                segments = [];
 
             d3.geo.stream({
                 type: 'LineString',
@@ -32,40 +37,46 @@ iD.svg = {
                     return n.loc;
                 })
             }, projection.stream({
-                lineStart: function() { last = null; started = false; },
-                lineEnd: function() { },
+                lineStart: function() {},
+                lineEnd: function() {},
                 point: function(x, y) {
-                    if (!started) d += 'M';
-                    next = [Math.floor(x), Math.floor(y)];
-                    if (dx && last && iD.geo.dist(last, next) > dx) {
-                        var span = iD.geo.dist(last, next),
-                            angle = Math.atan2(next[1] - last[1], next[0] - last[0]),
-                            to = last.slice();
-                        to[0] += Math.cos(angle) * dx;
-                        to[1] += Math.sin(angle) * dx;
-                        while (iD.geo.dist(last, to) < (span)) {
-                            // a dx-length line segment in that angle
-                            if (started) d += 'L';
-                            d += Math.floor(to[0]) + ',' + Math.floor(to[1]);
-                            started = started || true;
-                            to[0] += Math.cos(angle) * dx;
-                            to[1] += Math.sin(angle) * dx;
+                    b = [x, y];
+
+                    if (a) {
+                        var segment = 'M' + a[0] + ',' + a[1];
+
+                        var span = iD.geo.dist(a, b),
+                            angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
+                            dx = dt * Math.cos(angle),
+                            dy = dt * Math.sin(angle),
+                            p;
+
+                        if (offset < span) {
+                            p = [a[0] + offset * Math.cos(angle),
+                                 a[1] + offset * Math.sin(angle)];
+
+                            segment += 'L' + p[0] + ',' + p[1];
                         }
+
+                        while ((offset + dt) < span) {
+                            offset += dt;
+                            p[0] += dx;
+                            p[1] += dy;
+                            segment += 'L' + p[0] + ',' + p[1];
+                        }
+
+                        offset = dt - (span - offset);
+
+                        segment += 'L' + b[0] + ',' + b[1];
+                        segments.push({id: entity.id, index: i, d: segment});
+                        i++;
                     }
-                    if (started) d += 'L';
-                    d += next[0] + ',' + next[1];
-                    started = started || true;
-                    last = next;
+
+                    a = b;
                 }
             }));
 
-            if (d === '') {
-                cache[entity.id] = null;
-                return cache[entity.id];
-            } else {
-                cache[entity.id] = d;
-                return cache[entity.id];
-            }
+            return segments;
         };
     },
 

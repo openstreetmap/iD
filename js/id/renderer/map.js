@@ -123,7 +123,7 @@ iD.Map = function(context) {
             surface
                 .call(points, graph, all, filter)
                 .call(vertices, graph, all, filter, map.zoom())
-                .call(lines, graph, all, filter, dimensions)
+                .call(lines, graph, all, filter)
                 .call(areas, graph, all, filter)
                 .call(midpoints, graph, all, filter, extent)
                 .call(labels, graph, all, filter, dimensions, !difference);
