@@ -37,7 +37,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         } else if (datum.type === 'node') {
             loc = datum.loc;
         } else if (datum.type === 'way') {
-            loc = iD.geo.chooseIndex(datum, d3.mouse(context.surface().node()), context).loc;
+            loc = iD.geo.chooseEdge(context.childNodes(datum), d3.mouse(context.surface().node()), context.projection).loc;
         }
 
         context.replace(iD.actions.MoveNode(end.id, loc));

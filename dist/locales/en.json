@@ -131,6 +131,18 @@
                 "area": "Rotated an area."
             }
         },
+        "improve": {
+            "title": "Improve",
+            "description": {
+                "line": "Improve the accuracy of this line.",
+                "area": "Improve the accuracy of this area."
+            },
+            "key": "I",
+            "annotation": {
+                "line": "Improved a line.",
+                "area": "Improved an area."
+            }
+        },
         "reverse": {
             "title": "Reverse",
             "description": "Make this line go in the opposite direction.",

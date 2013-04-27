@@ -81,6 +81,10 @@ window.iD = function () {
         return history.graph().entity(id);
     };
 
+    context.childNodes = function(way) {
+        return history.graph().childNodes(way);
+    };
+
     context.geometry = function(id) {
         return context.entity(id).geometry(history.graph());
     };

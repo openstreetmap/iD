@@ -57,7 +57,7 @@ describe("iD.actions.Circularize", function () {
         graph = iD.actions.Circularize('-', projection, 3)(graph);
 
         expect(graph.hasEntity('a')).to.be.undefined;
-        expect(graph.entity('=').nodes).to.eql(['c']);
+        expect(graph.entity('=').nodes).to.eql(['b']);
     });
 
     function area(id, graph) {

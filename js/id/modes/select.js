@@ -131,8 +131,8 @@ iD.modes.Select = function(context, selection) {
                 datum = target.datum();
 
             if (datum instanceof iD.Way && !target.classed('fill')) {
-                var choice = iD.geo.chooseIndex(datum,
-                        d3.mouse(context.surface().node()), context),
+                var choice = iD.geo.chooseEdge(context.childNodes(datum),
+                        d3.mouse(context.surface().node()), context.projection),
                     node = iD.Node();
 
                 var prev = datum.nodes[choice.index - 1],
