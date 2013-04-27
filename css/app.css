@@ -2009,11 +2009,11 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .modal-actions .restore:before {
-    background-position: -400px -220px;
+    background-position: -500px -220px;
 }
 
 .modal-actions .reset:before {
-    background-position: -500px -220px;
+    background-position: -600px -220px;
 }
 
 /* Success Modal
@@ -2023,16 +2023,24 @@ img.wiki-image {
     background-position: -100px -220px;
 }
 
+.modal-actions .facebook {
+    border-left: 1px solid #ccc;
+}
+
+.modal-actions .facebook:before {
+    background-position: -200px -220px;
+}
+
 /* Splash Modal
 ------------------------------------------------------- */
 
 .modal-actions .walkthrough:before,
 .walkthrough a:before {
-    background-position: -200px -220px;
+    background-position: -300px -220px;
 }
 
 .modal-actions .start:before {
-    background-position: -300px -220px;
+    background-position: -400px -220px;
 }
 
 /* Commit Modal

@@ -8,10 +8,8 @@ iD.ui.Success = function(connection) {
 
         header.append('h3').text(t('just_edited'));
 
-        var m = '';
-        if (changeset.comment) {
-            m = changeset.comment.substring(0, 130);
-        }
+        var m = changeset.comment ?
+            changeset.comment.substring(0, 130) : '';
 
         var message = (m || 'Edited OSM!') + ' ' +
             connection.changesetURL(changeset.id);
@@ -19,7 +17,7 @@ iD.ui.Success = function(connection) {
         var links = body.append('div').attr('class','modal-actions cf');
 
         links.append('a')
-            .attr('class','col6 osm')
+            .attr('class','col4 osm')
             .attr('target', '_blank')
             .attr('href', function() {
                 return connection.changesetURL(changeset.id);
@@ -27,13 +25,21 @@ iD.ui.Success = function(connection) {
             .text(t('view_on_osm'));
 
         links.append('a')
-            .attr('class','col6 twitter')
+            .attr('class','col4 twitter')
             .attr('target', '_blank')
             .attr('href', function() {
                 return 'https://twitter.com/intent/tweet?source=webclient&text=' +
                     encodeURIComponent(message);
             })
             .text('Tweet');
+
+        links.append('a')
+            .attr('class','col4 facebook')
+            .attr('target', '_blank')
+            .attr('href', function() {
+                return 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(message);
+            })
+            .text('Share on Facebook');
 
         var section = body.append('div').attr('class','modal-section cf');
 
