@@ -961,6 +961,26 @@
                 "name": "Service Road",
                 "terms": ""
             },
+            "highway/service/alley": {
+                "name": "Alley",
+                "terms": ""
+            },
+            "highway/service/drive-through": {
+                "name": "Drive-Through",
+                "terms": ""
+            },
+            "highway/service/driveway": {
+                "name": "Driveway",
+                "terms": ""
+            },
+            "highway/service/emergency_access": {
+                "name": "Emergency Access",
+                "terms": ""
+            },
+            "highway/service/parking_aisle": {
+                "name": "Parking Aisle",
+                "terms": ""
+            },
             "highway/steps": {
                 "name": "Steps",
                 "terms": "stairs,staircase"

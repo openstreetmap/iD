@@ -1,0 +1,16 @@
+{
+    "icon": "highway-service",
+    "fields": [
+        "oneway",
+        "access",
+        "surface"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "service",
+        "service": "drive-through"
+    },
+    "name": "Drive-Through"
+}
