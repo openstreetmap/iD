@@ -62,26 +62,50 @@
 
         context.presets = function() {
             return iD.presets().load({
-                presets: [{
-                    geometry: ['point'],
-                    tags: {
-                        amenity: 'restaurant'
+                presets: {
+                    "amenity/restaurant": {
+                        geometry: ['point'],
+                        tags: {
+                            amenity: 'restaurant'
+                        },
+                        icon: 'restaurant'
                     },
-                    icon: 'restaurant'
-                }, {
-                    geometry: ['vertex'],
-                    tags: {
-                        highway: 'turning_circle'
+                    "highway/turning_circle": {
+                        geometry: ['vertex'],
+                        tags: {
+                            highway: 'turning_circle'
+                        },
+                        icon: 'circle'
                     },
-                    icon: 'circle'
-                }, {
-                    geometry: ['vertex'],
-                    tags: {
-                        railway: 'level_crossing'
+                    "railway/level_crossing": {
+                        geometry: ['vertex'],
+                        tags: {
+                            railway: 'level_crossing'
+                        },
+                        icon: 'cross'
                     },
-                    icon: 'cross'
-                }]
+                    "other": {
+                        geometry: ['point', 'vertex', 'line', 'area', 'relation'],
+                        tags: {}
+                    }
+                }
             });
+        };
+
+        iD.data = {
+            featureIcons: {
+                "restaurant": {"12":[0,3840],"18":[0,3854],"24":[0,3874]},
+                "cross":{"12":[0,1320],"18":[0,1334],"24":[0,1354]},
+                "circle":{"12":[0,1020],"18":[0,1034],"24":[0,1054]}
+            }
+        };
+
+        context.imagePath = function(_) {
+            return 'img/' + _;
+        };
+
+        context.selection = function() {
+            return [];
         };
 
         function tagHTML(d) {
@@ -260,9 +284,9 @@
         var a = iD.Node({loc: [15, 15]}),
             b = iD.Node({loc: [185, 15]}),
             way = iD.Way({nodes: [a.id, b.id]}),
-            vertices = iD.svg.Vertices(projection),
-            lines = iD.svg.Lines(projection),
-            midpoints = iD.svg.Midpoints(projection);
+            vertices = iD.svg.Vertices(projection, context),
+            lines = iD.svg.Lines(projection, context),
+            midpoints = iD.svg.Midpoints(projection, context);
 
         row.selectAll('td')
             .data(function (d) {
@@ -325,9 +349,9 @@
             c = iD.Node({loc: [85, 85]}),
             d = iD.Node({loc: [15, 85]}),
             way = iD.Way({nodes: [a.id, b.id, c.id, d.id, a.id]}),
-            vertices = iD.svg.Vertices(projection),
-            areas = iD.svg.Areas(projection),
-            midpoints = iD.svg.Midpoints(projection);
+            vertices = iD.svg.Vertices(projection, context),
+            areas = iD.svg.Areas(projection, context),
+            midpoints = iD.svg.Midpoints(projection, context);
 
         row.selectAll('td')
             .data(function (d) {
