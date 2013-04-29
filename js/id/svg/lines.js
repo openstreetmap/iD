@@ -122,6 +122,7 @@ iD.svg.Lines = function(projection) {
             .map(iD.svg.OneWaySegments(projection, graph, 35)));
 
         var oneways = oneway.selectAll('path.oneway')
+            .filter(filter)
             .data(segments, function(d) { return [d.id, d.index]; });
 
         oneways.enter()
