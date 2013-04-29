@@ -706,13 +706,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .preset-icon {
     position: absolute;
-    top: 18px;
-    left: 18px;
+    top: 17px;
+    left: 17px;
     margin: auto;
 }
 
 .preset-icon-line {
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
 }
 
 .grid-entry .label {
@@ -829,7 +830,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 45px;
     margin: auto;
     position: absolute;
-    left: 8px; top: 7px;
+    left: 7px; top: 7px;
     background:transparent url(img/sprite.svg) no-repeat -240px -80px;
 }
 
@@ -876,10 +877,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .tag-wrap .preset-icon-wrap > div {
-    height: 90px;
-    width: 33.3333%;
-    width: -webkit-calc(33.3333% - 10px);
-    width: calc(33.3333% - 10px);
+    height: 60px;
+    width: 60px;
     margin: auto;
     border-radius: 4px;
     border: 1px solid #CCC;
