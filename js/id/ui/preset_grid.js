@@ -1,7 +1,5 @@
 iD.ui.PresetGrid = function(context, entity) {
     var event = d3.dispatch('choose', 'close'),
-        defaultLimit = 9,
-        currentlyDrawn = 9,
         presets,
         autofocus = false;
 
@@ -37,16 +35,7 @@ iD.ui.PresetGrid = function(context, entity) {
 
         var grid = gridwrap.append('div')
             .attr('class', 'preset-grid fillL cf')
-            .data([context.presets().defaults(entity, 36).collection]);
-
-        var showMore = gridwrap.append('button')
-            .attr('class', 'fillL show-more')
-            .text(t('inspector.show_more'))
-            .on('click', function() {
-                grid.call(drawGrid, (currentlyDrawn += defaultLimit));
-            });
-
-        grid.call(drawGrid, defaultLimit);
+            .call(drawGrid, context.presets().defaults(entity, 36));
 
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
@@ -73,7 +62,6 @@ iD.ui.PresetGrid = function(context, entity) {
             if (d3.event.keyCode === 13 && value.length) {
                 choose(grid.selectAll('.grid-entry:first-child').datum());
             } else {
-                currentlyDrawn = defaultLimit;
                 grid.classed('filtered', value.length);
                 if (value.length) {
                     var results = presets.search(value);
@@ -81,11 +69,9 @@ iD.ui.PresetGrid = function(context, entity) {
                         n: results.collection.length,
                         search: value
                     }));
-                    grid.data([results.collection])
-                        .call(drawGrid, defaultLimit);
+                    grid.call(drawGrid, results);
                 } else {
-                    grid.data([context.presets().defaults(entity, 36).collection])
-                        .call(drawGrid, defaultLimit);
+                    grid.call(drawGrid, context.presets().defaults(entity, 36));
                 }
             }
         }
@@ -118,15 +104,14 @@ iD.ui.PresetGrid = function(context, entity) {
 
                     subgrid.append('div')
                         .attr('class', 'preset-grid fillL3 cf fl')
-                        .data([d.members.collection])
-                        .call(drawGrid, 1000);
+                        .call(drawGrid, d.members);
 
                     subgrid.style('max-height', '0px')
                         .style('padding-bottom', '0px')
                         .transition()
                         .duration(300)
                         .style('padding-bottom', '20px')
-                        .style('max-height', (d.members.collection.length / 3 * 150) + 200 + 'px');
+                        .style('max-height', (d.members.collection.length * 80) + 200 + 'px');
                 }
 
             // Preset
@@ -135,8 +120,6 @@ iD.ui.PresetGrid = function(context, entity) {
                 event.choose(d);
             }
         }
-
-        function name(d) { return d.name(); }
 
         // Inserts a div inline after the entry for the provided entity
         // Used for preset descriptions, and for expanding categories
@@ -164,25 +147,24 @@ iD.ui.PresetGrid = function(context, entity) {
                 if (d === entity) index = i;
             });
 
-            var insertIndex = index + 3 - index % 3;
-            if (insertIndex > shownIndex) insertIndex ++;
+            if (index >= shownIndex) index++;
 
             var elem = document.createElement('div');
-            grid.node().insertBefore(elem, grid.node().childNodes[insertIndex]);
+            grid.node().insertBefore(elem, grid.node().childNodes[index + 1]);
 
             var newbox = d3.select(elem)
-                .attr('class', 'col12 box-insert ' + klass + ' arrow-' + (index % 3))
+                .attr('class', 'col12 box-insert ' + klass)
                 .datum(entity);
 
             return newbox;
         }
 
-        function drawGrid(selection, limit) {
+        function drawGrid(grid, presets) {
 
             function helpClick(d) {
                 d3.event.stopPropagation();
 
-                var presetinspect = insertBox(selection, d, 'preset-inspect');
+                var presetinspect = insertBox(grid, d, 'preset-inspect');
 
                 if (!presetinspect) return;
 
@@ -198,23 +180,18 @@ iD.ui.PresetGrid = function(context, entity) {
                 tagReference.show();
             }
 
-            if (selection.node() === grid.node()) {
-                showMore
-                    .style('display', (selection.data()[0].length > limit) ? 'block' : 'none');
-            }
+            grid.selectAll('.preset-inspect, .subgrid').remove();
 
-            selection.selectAll('.preset-inspect, .subgrid').remove();
-
-            var entries = selection
-                .selectAll('div.grid-entry-wrap')
-                .data(function(d) { return d.slice(0, limit); }, name);
+            var entries = grid
+                .selectAll('.grid-entry-wrap')
+                .data(presets.collection, function(d) { return d.id; });
 
             entries.exit()
                 .remove();
 
             var entered = entries.enter()
                 .append('div')
-                .attr('class','grid-button-wrap col4 grid-entry-wrap')
+                .attr('class','grid-button-wrap col12 grid-entry-wrap')
                 .classed('category', function(d) { return !!d.members; })
                 .classed('current', function(d) { return d === preset; });
 
@@ -232,15 +209,15 @@ iD.ui.PresetGrid = function(context, entity) {
 
             var label = buttonInner.append('div')
                 .attr('class','label')
-                .text(name);
+                .text(function(d) { return d.name(); });
 
             entered.filter(function(d) { return !d.members; })
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'tag-reference-button minor')
-                .on('click', helpClick, selection)
+                .on('click', helpClick)
                 .append('span')
-                    .attr('class', 'icon inspect');
+                .attr('class', 'icon inspect');
 
             entries.order();
         }

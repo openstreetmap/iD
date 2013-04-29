@@ -679,13 +679,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .preset-grid  {
     width:100%;
-    padding: 20px 10px 10px 20px;
+    padding: 20px 20px 10px 20px;
     border-bottom: 1px solid #ccc;
 }
 
 .grid-button-wrap {
-    padding: 0 10px 10px 0;
-    height: 120px;
+    padding-bottom: 10px;
+    height: 70px;
 }
 
 .grid-entry {
@@ -693,7 +693,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 100%;
     position: relative;
     border: 1px solid #ccc;
-    overflow: hidden;
     float: left;
 }
 
@@ -707,16 +706,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .preset-icon {
     position: absolute;
-    top: 30px;
-    left: 0;
-    right: 0;
+    top: 18px;
+    left: 18px;
     margin: auto;
 }
 
 .preset-icon-line {
-    top: 15px;
-    left: -10px;
-    right: -10px;
+    top: 0; left: 0;
 }
 
 .grid-entry .label {
@@ -724,23 +720,28 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-align: left;
     position: absolute;
     padding: 5px 10px;
-    height: 30px;
+    height: 100%;
     bottom: 0;
-    left: 0; right: 0;
+    left: 60px;
+    right: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    line-height: 50px;
     }
+
+.grid-entry:hover .label {
+    background: none;
+}
 
 .grid-button-wrap button.tag-reference-button {
     float: right;
     position: static;
-    margin-top: -30px;
-    margin-right: 1px;
-    height: 29px;
-    border-left: 1px solid #CCC;
-    border-radius: 0 0 3px 0;
+    margin-top: -60px;
+    height: 100%;
+    border: 1px solid #CCC;
+    border-radius: 0 3px 3px 0;
 }
 
 .current .grid-entry,
@@ -752,15 +753,16 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .category .grid-entry:before {
     content: "";
     position: absolute;
-    top: 7px;
-    left: 0; right: 0;
-    border-top: 1px solid #ccc;
-    border-radius: 6px;
+    top: -5px;
+    left: -1px; right: -1px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
     height: 6px;
 }
 
 .category .grid-entry:before {
-    top: 3px;
+    top: -3px;
 }
 
 .preset-grid-search-wrap .icon {
@@ -786,16 +788,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: 5px;
 }
 
-.subgrid {
-    width: 100%;
-    width: -webkit-calc(100% + 10px);
-    width: calc(100% + 10px);
-    margin-left: -10px;
-    overflow: hidden;
-}
-
 .subgrid .preset-grid {
-    padding: 10px 0 0 10px;
+    padding: 10px 10px 0 10px;
     border: 1px solid #CCC;
     margin-top: 0;
     border-radius: 8px;
@@ -807,21 +801,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-bottom-color: #CCC;
     width: 0;
     height: 0;
-    margin-left: 33.3333%;
-    margin-left: -webkit-calc(16.6666% - 10px);
-    margin-left: calc(16.6666% - 10px);
-    margin-top: -10px;
-}
-.subgrid.arrow-1 .arrow {
     margin-left: 50%;
     margin-left: -webkit-calc(50% - 10px);
-    margin-left: calc(50% - 10px);
-}
-
-.subgrid.arrow-2 .arrow {
-    margin-left: 280px;
-    margin-left: -webkit-calc(84.4444% - 10px);
-    margin-left: calc(84.4444% - 10px);
+    margin-top: -10px;
 }
 
 .show-more {
@@ -847,7 +829,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 45px;
     margin: auto;
     position: absolute;
-    left: 0; right: 0; top: 19px;
+    left: 8px; top: 7px;
     background:transparent url(img/sprite.svg) no-repeat -240px -80px;
 }
 
@@ -1485,6 +1467,7 @@ img.wiki-image {
     width: -webkit-calc(33.3333% - 10px);
     width: calc(33.3333% - 10px);
     margin-left: 20px;
+    margin-right: 10px;
     border-radius: 4px;
     max-height: 200px;
 }
