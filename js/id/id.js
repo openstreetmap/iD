@@ -39,11 +39,11 @@ window.iD = function () {
 
             var detectedLocale = iD.detect().locale;
 
-            if (iD.data.locales.indexOf(detectedLocale) === -1) {
+            if (detectedLocale && iD.data.locales.indexOf(detectedLocale) === -1) {
                 detectedLocale = detectedLocale.split('-')[0];
             }
 
-            if (detectedLocale !== 'en' && iD.data.locales.indexOf(detectedLocale) !== -1) {
+            if (detectedLocale && detectedLocale !== 'en' && iD.data.locales.indexOf(detectedLocale) !== -1) {
                 d3.json(context.assetPath() + 'locales/' + detectedLocale + '.json', function(err, result) {
                     locale[detectedLocale] = result;
                     locale.current(detectedLocale);
