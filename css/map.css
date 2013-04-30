@@ -198,6 +198,23 @@ path.fill.tag-natural-water {
     fill: #77d3de;
 }
 
+path.stroke.tag-amenity-school {
+    stroke: #ffff94;
+    stroke-width: 1;
+}
+path.fill.tag-amenity-school {
+    fill: #ffff94;
+    fill-opacity: 0.2;
+}
+
+path.stroke.tag-amenity-university {
+    stroke: #ffff94;
+}
+path.fill.tag-amenity-university {
+    fill: #ffff94;
+    fill-opacity: 0.1;
+}
+
 path.stroke.tag-building {
     stroke: #e06e5f;
     stroke-width: 1;
@@ -213,6 +230,7 @@ path.stroke.tag-landuse,
 path.stroke.tag-natural-wood,
 path.stroke.tag-natural-tree,
 path.stroke.tag-natural-grassland,
+path.stroke.tag-leisure-pitch,
 path.stroke.tag-leisure-park {
     stroke: #8cd05f;
     stroke-width: 1;
@@ -263,6 +281,7 @@ path.fill.tag-natural-wood,
 path.fill.tag-natural-tree,
 path.fill.tag-natural-grassland,
 path.fill.tag-natural-grass,
+path.fill.tag-leisure-pitch,
 path.fill.tag-leisure-park {
     fill: #8cd05f;
     fill-opacity: 0.2;
