@@ -10,6 +10,7 @@ iD.Map = function(context) {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         transformStart,
+        transformed = false,
         minzoom = 0,
         layers = [
             iD.Background().projection(projection),
@@ -55,14 +56,14 @@ iD.Map = function(context) {
             .call(iD.svg.Surface(context));
 
         surface.on('mouseover.vertices', function() {
-            if (map.editable() && !isTransformed()) {
+            if (map.editable() && !transformed) {
                 var hover = d3.event.target.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
             }
         });
 
         surface.on('mouseout.vertices', function() {
-            if (map.editable() && !isTransformed()) {
+            if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
             }
@@ -168,20 +169,17 @@ iD.Map = function(context) {
                 'translate(' + tX + 'px,' + tY + 'px)' :
                 'translate3d(' + tX + 'px,' + tY + 'px, 0)');
 
+        transformed = true;
         supersurface.style(transformProp, transform);
         queueRedraw();
 
         dispatch.move(map);
     }
 
-    function isTransformed() {
-        var prop = supersurface.style(transformProp);
-        return prop && prop !== 'none';
-    }
-
     function resetTransform() {
-        if (!isTransformed()) return false;
+        if (!transformed) return false;
         supersurface.style(transformProp, '');
+        transformed = false;
         return true;
     }
 
