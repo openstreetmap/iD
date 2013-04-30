@@ -312,7 +312,7 @@ iD.Connection = function() {
             });
 
         function bboxUrl(tile) {
-            return url + '/api/0.6/map?bbox=' + tile.extent.toParam();
+            return 'http://tile.osm.osuosl.org/tiles/tiled_osm/' + z + "/" + tile[0] + "/" + tile[1] + ".osm";
         }
 
         _.filter(inflight, function(v, i) {
