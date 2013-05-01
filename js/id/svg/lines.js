@@ -32,33 +32,6 @@ iD.svg.Lines = function(projection) {
         return as - bs;
     }
 
-    // For fixing up rendering of multipolygons with tags on the outer member.
-    // https://github.com/systemed/iD/issues/613
-    function simpleMultipolygonOuterMember(entity, graph) {
-        if (entity.type !== 'way')
-            return false;
-
-        var parents = graph.parentRelations(entity);
-        if (parents.length !== 1)
-            return false;
-
-        var parent = parents[0];
-        if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
-            return false;
-
-        var members = parent.members, member, outer;
-        for (var i = 0; i < members.length; i++) {
-            member = members[i];
-            if (!member.role || member.role === 'outer') {
-                if (outer)
-                    return false; // Not a simple multipolygon
-                outer = graph.entity(member.id);
-            }
-        }
-
-        return outer;
-    }
-
     return function drawLines(surface, graph, entities, filter) {
         function drawPaths(group, lines, filter, klass, lineString) {
             lines = lines.filter(function(line) {
@@ -95,7 +68,7 @@ iD.svg.Lines = function(projection) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
-                outer = simpleMultipolygonOuterMember(entity, graph);
+                outer = iD.geo.simpleMultipolygonOuterMember(entity, graph);
             if (outer) {
                 lines.push(entity.mergeTags(outer.tags));
             } else if (entity.geometry(graph) === 'line') {
