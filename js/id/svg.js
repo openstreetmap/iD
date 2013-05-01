@@ -29,13 +29,16 @@ iD.svg = {
                 b,
                 i = 0,
                 offset = dt,
-                segments = [];
+                segments = [],
+                coordinates = graph.childNodes(entity).map(function(n) {
+                    return n.loc;
+                });
+
+            if (entity.tags.oneway === '-1') coordinates.reverse();
 
             d3.geo.stream({
                 type: 'LineString',
-                coordinates: graph.childNodes(entity).map(function(n) {
-                    return n.loc;
-                })
+                coordinates: coordinates
             }, projection.stream({
                 lineStart: function() {},
                 lineEnd: function() {},

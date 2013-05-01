@@ -34,6 +34,8 @@ _.extend(iD.Way.prototype, {
 
     isOneWay: function() {
         return this.tags.oneway === 'yes' ||
+            this.tags.oneway === '1' ||
+            this.tags.oneway === '-1' ||
             this.tags.waterway === 'river' ||
             this.tags.waterway === 'stream' ||
             this.tags.junction === 'roundabout';
