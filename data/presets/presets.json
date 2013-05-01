@@ -26,10 +26,58 @@
             "airport",
             "aerodrome"
         ],
+        "fields": [
+            "ref",
+            "iata",
+            "icao",
+            "operator"
+        ],
         "tags": {
             "aeroway": "aerodrome"
         },
         "name": "Airport"
+    },
+    "aeroway/apron": {
+        "icon": "airport",
+        "geometry": [
+            "area"
+        ],
+        "terms": [
+            "ramp"
+        ],
+        "fields": [
+            "ref",
+            "surface"
+        ],
+        "tags": {
+            "aeroway": "apron"
+        },
+        "name": "Apron"
+    },
+    "aeroway/gate": {
+        "icon": "airport",
+        "geometry": [
+            "point"
+        ],
+        "fields": [
+            "ref"
+        ],
+        "tags": {
+            "aeroway": "gate"
+        },
+        "name": "Airport gate"
+    },
+    "aeroway/hangar": {
+        "geometry": [
+            "area"
+        ],
+        "fields": [
+            "building_area"
+        ],
+        "tags": {
+            "aeroway": "hangar"
+        },
+        "name": "Hangar"
     },
     "aeroway/helipad": {
         "icon": "heliport",
@@ -46,6 +94,54 @@
             "aeroway": "helipad"
         },
         "name": "Helipad"
+    },
+    "aeroway/runway": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "terms": [
+            "landing strip"
+        ],
+        "fields": [
+            "ref",
+            "surface"
+        ],
+        "tags": {
+            "aeroway": "runway"
+        },
+        "name": "Runway"
+    },
+    "aeroway/taxiway": {
+        "geometry": [
+            "line"
+        ],
+        "fields": [
+            "ref",
+            "surface"
+        ],
+        "tags": {
+            "aeroway": "taxiway"
+        },
+        "name": "Taxiway"
+    },
+    "aeroway/terminal": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "airport",
+            "aerodrome"
+        ],
+        "fields": [
+            "operator",
+            "building_area"
+        ],
+        "tags": {
+            "aeroway": "terminal"
+        },
+        "name": "Airport terminal"
     },
     "amenity": {
         "fields": [

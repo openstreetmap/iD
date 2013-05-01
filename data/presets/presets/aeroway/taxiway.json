@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "ref",
+        "surface"
+    ],
+    "tags": {
+        "aeroway": "taxiway"
+    },
+    "name": "Taxiway"
+}

@@ -462,6 +462,12 @@
             "historic": {
                 "label": "Type"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Incline"
             },
@@ -629,9 +635,33 @@
                 "name": "Airport",
                 "terms": "airplane,airport,aerodrome"
             },
+            "aeroway/apron": {
+                "name": "Apron",
+                "terms": "ramp"
+            },
+            "aeroway/gate": {
+                "name": "Airport gate",
+                "terms": ""
+            },
+            "aeroway/hangar": {
+                "name": "Hangar",
+                "terms": ""
+            },
             "aeroway/helipad": {
                 "name": "Helipad",
                 "terms": "helicopter,helipad,heliport"
+            },
+            "aeroway/runway": {
+                "name": "Runway",
+                "terms": "landing strip"
+            },
+            "aeroway/taxiway": {
+                "name": "Taxiway",
+                "terms": ""
+            },
+            "aeroway/terminal": {
+                "name": "Airport terminal",
+                "terms": "airport,aerodrome"
             },
             "amenity": {
                 "name": "Amenity",

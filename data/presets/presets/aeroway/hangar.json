@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "area"
+    ],
+    "fields": [
+        "building_area"
+    ],
+    "tags": {
+        "aeroway": "hangar"
+    },
+    "name": "Hangar"
+}

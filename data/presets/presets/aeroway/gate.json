@@ -1,0 +1,11 @@
+{
+    "icon": "airport",
+    "geometry": [
+        "point"
+    ],
+    "fields": ["ref"],
+    "tags": {
+        "aeroway": "gate"
+    },
+    "name": "Airport gate"
+}

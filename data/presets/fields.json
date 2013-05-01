@@ -230,6 +230,16 @@
         "type": "combo",
         "label": "Type"
     },
+    "iata": {
+        "key": "iata",
+        "type": "text",
+        "label": "IATA"
+    },
+    "icao": {
+        "key": "icao",
+        "type": "text",
+        "label": "ICAO"
+    },
     "incline": {
         "key": "incline",
         "type": "combo",
