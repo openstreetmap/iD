@@ -114,6 +114,16 @@ iD.ui = function(context) {
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
 
+        // save changes to localstorage
+        history.on('change.localstorage', function() {
+            context.on('enter.localstorage', function(mode) {
+                if (mode.id === 'browse' || mode.id === 'select') {
+                    context.on('enter.localstorage', null);
+                    history.save();
+                }
+            });
+        });
+
         window.onbeforeunload = function() {
             history.save();
             if (history.hasChanges()) return t('save.unsaved_changes');
