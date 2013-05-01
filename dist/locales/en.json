@@ -496,6 +496,9 @@
             "levels": {
                 "label": "Levels"
             },
+            "location": {
+                "label": "Location"
+            },
             "man_made": {
                 "label": "Type"
             },
@@ -597,6 +600,9 @@
             },
             "tourism": {
                 "label": "Type"
+            },
+            "towertype": {
+                "label": "Tower type"
             },
             "tracktype": {
                 "label": "Type"
@@ -1219,6 +1225,14 @@
                 "name": "Man Made",
                 "terms": ""
             },
+            "man_made/breakwater": {
+                "name": "Breakwater",
+                "terms": ""
+            },
+            "man_made/cutline": {
+                "name": "Cut line",
+                "terms": ""
+            },
             "man_made/lighthouse": {
                 "name": "Lighthouse",
                 "terms": ""
@@ -1227,8 +1241,16 @@
                 "name": "Pier",
                 "terms": ""
             },
+            "man_made/pipeline": {
+                "name": "Pipeline",
+                "terms": ""
+            },
             "man_made/survey_point": {
                 "name": "Survey Point",
+                "terms": ""
+            },
+            "man_made/tower": {
+                "name": "Tower",
                 "terms": ""
             },
             "man_made/wastewater_plant": {
@@ -1237,6 +1259,10 @@
             },
             "man_made/water_tower": {
                 "name": "Water Tower",
+                "terms": ""
+            },
+            "man_made/water_well": {
+                "name": "Water well",
                 "terms": ""
             },
             "man_made/water_works": {

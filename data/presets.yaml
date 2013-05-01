@@ -126,6 +126,8 @@ en:
         label: Type
       levels: 
         label: Levels
+      location: 
+        label: Location
       man_made: 
         label: Type
       maxspeed: 
@@ -197,6 +199,8 @@ en:
         label: Surface
       tourism: 
         label: Type
+      towertype: 
+        label: Tower type
       tracktype: 
         label: Type
       trail_visibility: 
@@ -660,20 +664,35 @@ en:
       man_made: 
         name: Man Made
         terms: ""
+      man_made/breakwater: 
+        name: Breakwater
+        terms: ""
+      man_made/cutline: 
+        name: Cut line
+        terms: ""
       man_made/lighthouse: 
         name: Lighthouse
         terms: ""
       man_made/pier: 
         name: Pier
         terms: ""
+      man_made/pipeline: 
+        name: Pipeline
+        terms: ""
       man_made/survey_point: 
         name: Survey Point
+        terms: ""
+      man_made/tower: 
+        name: Tower
         terms: ""
       man_made/wastewater_plant: 
         name: Wastewater Plant
         terms: "sewage works,sewage treatment plant,water treatment plant,reclamation plant"
       man_made/water_tower: 
         name: Water Tower
+        terms: ""
+      man_made/water_well: 
+        name: Water well
         terms: ""
       man_made/water_works: 
         name: Water Works

@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "man_made": "pipeline"
+    },
+    "fields": [
+        "location",
+        "operator"
+    ],
+    "name": "Pipeline"
+}

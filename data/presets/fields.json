@@ -291,6 +291,11 @@
         "type": "number",
         "label": "Levels"
     },
+    "location": {
+        "key": "location",
+        "type": "combo",
+        "label": "Location"
+    },
     "man_made": {
         "key": "man_made",
         "type": "combo",
@@ -491,6 +496,11 @@
         "key": "tourism",
         "type": "combo",
         "label": "Type"
+    },
+    "towertype": {
+        "key": "tower:type",
+        "type": "combo",
+        "label": "Tower type"
     },
     "tracktype": {
         "key": "tracktype",

@@ -2467,6 +2467,25 @@
         },
         "name": "Man Made"
     },
+    "man_made/breakwater": {
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "man_made": "breakwater"
+        },
+        "name": "Breakwater"
+    },
+    "man_made/cutline": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "man_made": "cutline"
+        },
+        "name": "Cut line"
+    },
     "man_made/lighthouse": {
         "geometry": [
             "point",
@@ -2487,6 +2506,19 @@
         },
         "name": "Pier"
     },
+    "man_made/pipeline": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "man_made": "pipeline"
+        },
+        "fields": [
+            "location",
+            "operator"
+        ],
+        "name": "Pipeline"
+    },
     "man_made/survey_point": {
         "icon": "monument",
         "geometry": [
@@ -2500,6 +2532,19 @@
             "ref"
         ],
         "name": "Survey Point"
+    },
+    "man_made/tower": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "man_made": "tower"
+        },
+        "fields": [
+            "towertype"
+        ],
+        "name": "Tower"
     },
     "man_made/wastewater_plant": {
         "icon": "water",
@@ -2528,6 +2573,16 @@
             "man_made": "water_tower"
         },
         "name": "Water Tower"
+    },
+    "man_made/water_well": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "man_made": "water_well"
+        },
+        "name": "Water well"
     },
     "man_made/water_works": {
         "icon": "water",
