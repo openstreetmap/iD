@@ -274,6 +274,9 @@ en:
       amenity/cinema: 
         name: Cinema
         terms: "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
+      amenity/college: 
+        name: College
+        terms: ""
       amenity/courthouse: 
         name: Courthouse
         terms: ""
@@ -298,6 +301,9 @@ en:
       amenity/hospital: 
         name: Hospital
         terms: "clinic,emergency room,health service,hospice,infirmary,institution,nursing home,rest home,sanatorium,sanitarium,sick bay,surgery,ward"
+      amenity/kindergarten: 
+        name: Kindergarten
+        terms: "preschool,nursery,childcare,playgroup"
       amenity/library: 
         name: Library
         terms: ""
@@ -357,7 +363,7 @@ en:
         terms: "village hall,city government,courthouse,municipal building,municipal center"
       amenity/university: 
         name: University
-        terms: ""
+        terms: college
       amenity/waste_basket: 
         name: Waste Basket
         terms: "rubbish bin,litter bin,trash can,garbage can"

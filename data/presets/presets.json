@@ -330,6 +330,22 @@
         },
         "name": "Cinema"
     },
+    "amenity/college": {
+        "icon": "college",
+        "fields": [
+            "operator",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "college"
+        },
+        "terms": [],
+        "name": "College"
+    },
     "amenity/courthouse": {
         "fields": [
             "operator",
@@ -470,6 +486,28 @@
             "amenity": "hospital"
         },
         "name": "Hospital"
+    },
+    "amenity/kindergarten": {
+        "icon": "school",
+        "fields": [
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [
+            "preschool",
+            "nursery",
+            "childcare",
+            "playgroup"
+        ],
+        "tags": {
+            "amenity": "kindergarten"
+        },
+        "name": "Kindergarten"
     },
     "amenity/library": {
         "icon": "library",
@@ -961,7 +999,9 @@
         "tags": {
             "amenity": "university"
         },
-        "terms": [],
+        "terms": [
+            "college"
+        ],
         "name": "University"
     },
     "amenity/waste_basket": {

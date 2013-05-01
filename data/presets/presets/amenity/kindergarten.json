@@ -1,0 +1,22 @@
+{
+    "icon": "school",
+    "fields": [
+        "building_area",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "preschool",
+        "nursery",
+        "childcare",
+        "playgroup"
+    ],
+    "tags": {
+        "amenity": "kindergarten"
+    },
+    "name": "Kindergarten"
+}
