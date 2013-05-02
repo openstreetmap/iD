@@ -139,9 +139,13 @@ iD.modes.DragNode = function(context) {
 
         var parentWays = _.pluck(context.graph().parentWays(entity), 'id');
 
-        context.enter(
-            iD.modes.Select(context, parentWays)
-                .suppressMenu(true));
+        if (parentWays.length) {
+            context.enter(
+                iD.modes.Select(context, parentWays)
+                    .suppressMenu(true));
+        } else {
+            context.enter(iD.modes.Browse(context));
+        }
     }
 
     function cancel() {
