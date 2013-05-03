@@ -163,6 +163,11 @@
     "logout": "Cerrar sesión",
     "loading_auth": "Conectando a OpenStreetMap...",
     "report_a_bug": "Informar de un error",
+    "status": {
+        "error": "No se puede conectar con la API.",
+        "offline": "La API está desconectada. Por favor, intente editar más atarde.",
+        "readonly": "El API está en modo de sólo lectura. Tendrá que esperar para guardar los cambios."
+    },
     "commit": {
         "title": "Guardar cambios",
         "description_placeholder": "Breve descripción de tus contribuciones",
@@ -189,16 +194,18 @@
     },
     "inspector": {
         "no_documentation_combination": "No hay documentación disponible para esta combinación de etiquetas",
-        "no_documentation_key": "No hay documentación disponible para esta tecla",
+        "no_documentation_key": "No hay documentación disponible para esta combinación de etiquetas",
         "show_more": "Ver más",
         "new_tag": "Nueva etiqueta",
         "view_on_osm": "Ver en openstreetmap.org",
         "editing_feature": "Editando {feature}",
-        "additional": "Etiquetas adicionales",
+        "all_tags": "Todas las etiquetas",
         "choose": "Selecciona tipo de elemento",
         "results": "{n} resultados para {search}",
         "reference": "Ver en la wiki de OpenStreetMap",
-        "back_tooltip": "Cambiar tipo de elemento"
+        "back_tooltip": "Cambiar tipo de elemento",
+        "remove": "Eliminar",
+        "search": "Buscar"
     },
     "background": {
         "title": "Fondo",
@@ -309,6 +316,23 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Uso del suelo"
+            },
+            "category-path": {
+                "name": "Sendero"
+            },
+            "category-rail": {
+                "name": "Vía de ferrocarril"
+            },
+            "category-road": {
+                "name": "Carretera de tipología desconocida"
+            },
+            "category-water": {
+                "name": "Lámina de agua"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Acceso",
@@ -352,7 +376,8 @@
                     "housename": "Nombre de edificio",
                     "number": "123",
                     "street": "Calle",
-                    "city": "Ciudad"
+                    "city": "Ciudad",
+                    "postcode": "Código postal"
                 }
             },
             "admin_level": {
@@ -436,6 +461,9 @@
             },
             "historic": {
                 "label": "Tipo"
+            },
+            "incline": {
+                "label": "Pendiente"
             },
             "internet_access": {
                 "label": "Acceso a Internet",
@@ -526,6 +554,9 @@
                     "taoist": "Taoísta"
                 }
             },
+            "sac_scale": {
+                "label": "Dificultad del sendero"
+            },
             "service": {
                 "label": "Tipo"
             },
@@ -561,6 +592,9 @@
             },
             "tracktype": {
                 "label": "Tipo"
+            },
+            "trail_visibility": {
+                "label": "Visibilidad de la senda"
             },
             "water": {
                 "label": "Tipo"
@@ -619,6 +653,9 @@
                 "name": "Cafetería",
                 "terms": "café,cafetería,tetería,té"
             },
+            "amenity/car_wash": {
+                "name": "Lavado de coches"
+            },
             "amenity/cinema": {
                 "name": "Cine",
                 "terms": "pantalla,cine,película,film,filmografía,gran pantalla, séptimo arte,cinematrografía"
@@ -634,6 +671,9 @@
             },
             "amenity/fire_station": {
                 "name": "Parque de bomberos"
+            },
+            "amenity/fountain": {
+                "name": "Fuente ornamental"
             },
             "amenity/fuel": {
                 "name": "Gasolinera"
@@ -715,6 +755,10 @@
             "amenity/university": {
                 "name": "Universidad"
             },
+            "amenity/waste_basket": {
+                "name": "Papelera",
+                "terms": "papelera,cubo de basura,contenedor de basura"
+            },
             "barrier": {
                 "name": "Barrera"
             },
@@ -781,6 +825,9 @@
             "building/house": {
                 "name": "Casa"
             },
+            "emergency/phone": {
+                "name": "Teléfono de emergencias"
+            },
             "entrance": {
                 "name": "Entrada"
             },
@@ -804,6 +851,9 @@
             "highway/footway": {
                 "name": "Senda peatonal",
                 "terms": "camino,boulevard,senda,sendero,carretera,vía,vial,riel,paso,pista,vereda,pasaje,calzada,travesía,avenida,bulevar,ronda,paseo,alameda,arboleda,derrotero,ramal,trocha,rastro,huella,costanilla,rúa,pasaje,callejón,pasadizo,arteria,corredera,gran vía"
+            },
+            "highway/living_street": {
+                "name": "Calle residencial"
             },
             "highway/mini_roundabout": {
                 "name": "Minirotonda"
@@ -846,6 +896,21 @@
             },
             "highway/service": {
                 "name": "Vía de servicio"
+            },
+            "highway/service/alley": {
+                "name": "Callejón"
+            },
+            "highway/service/drive-through": {
+                "name": "Ventanilla de autoservicio"
+            },
+            "highway/service/driveway": {
+                "name": "Vía privada de acceso"
+            },
+            "highway/service/emergency_access": {
+                "name": "Acceso de emergencia"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Pasillo de aparcamiento"
             },
             "highway/steps": {
                 "name": "Escaleras",
@@ -950,6 +1015,9 @@
             "landuse/residential": {
                 "name": "Urbano"
             },
+            "landuse/retail": {
+                "name": "Zona comercial"
+            },
             "landuse/vineyard": {
                 "name": "Viñedo"
             },
@@ -986,6 +1054,9 @@
             },
             "leisure/pitch/tennis": {
                 "name": "Cancha de tenis"
+            },
+            "leisure/pitch/volleyball": {
+                "name": "Cancha de voleibol"
             },
             "leisure/playground": {
                 "name": "Parque infantil"
@@ -1173,7 +1244,8 @@
                 "name": "Tienda"
             },
             "shop/alcohol": {
-                "name": "Licorería"
+                "name": "Licorería",
+                "terms": "alcohol"
             },
             "shop/bakery": {
                 "name": "Panadería"

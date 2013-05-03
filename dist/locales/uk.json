@@ -163,6 +163,11 @@
     "logout": "вийти",
     "loading_auth": "З’єднання з OpenStreetMap…",
     "report_a_bug": "повідомити про помилку",
+    "status": {
+        "error": "Неможливо з’єднатись з API.",
+        "offline": "API оффлайн. Будь ласка, спробуйте внести зміни пізніше.",
+        "readonly": "API доступний тільки для читання. Вам потрібно зачекати, щоб зберегти зміни."
+    },
     "commit": {
         "title": "Зберегти зміни",
         "description_placeholder": "Короткий опис ваших правок",
@@ -194,11 +199,13 @@
         "new_tag": "Новий теґ",
         "view_on_osm": "Подивитись на openstreetmap.org",
         "editing_feature": "{feature}",
-        "additional": "Додаткові теґи",
+        "all_tags": "Всі теґи",
         "choose": "Виберіть тип об’єкту",
         "results": "знайдено {n} об’єктів на запит {search}",
         "reference": "Подивитись на OpenStreetMap Wiki",
-        "back_tooltip": "Змінити тип об’єкта"
+        "back_tooltip": "Змінити тип об’єкта",
+        "remove": "Вилучити",
+        "search": "Пошук"
     },
     "background": {
         "title": "Фон",
@@ -455,6 +462,12 @@
             "historic": {
                 "label": "Тип"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Нахил"
             },
@@ -480,6 +493,9 @@
             },
             "levels": {
                 "label": "Поверхи"
+            },
+            "location": {
+                "label": "Місцезнаходження"
             },
             "man_made": {
                 "label": "Тип"
@@ -583,6 +599,9 @@
             "tourism": {
                 "label": "Тип"
             },
+            "towertype": {
+                "label": "Тип опори"
+            },
             "tracktype": {
                 "label": "Тип"
             },
@@ -619,9 +638,30 @@
                 "name": "Аеропорт",
                 "terms": "літак,аеропорт,аеродром"
             },
+            "aeroway/apron": {
+                "name": "Перон",
+                "terms": "трап"
+            },
+            "aeroway/gate": {
+                "name": "Вихід на посадку"
+            },
+            "aeroway/hangar": {
+                "name": "Ангар"
+            },
             "aeroway/helipad": {
                 "name": "Вертолітний майданчик",
                 "terms": "вертоліт,вертолітний майданчик,вертодром"
+            },
+            "aeroway/runway": {
+                "name": "Злітно-посадкова смуга",
+                "terms": "посадкова смуга"
+            },
+            "aeroway/taxiway": {
+                "name": "Руліжна доріжка"
+            },
+            "aeroway/terminal": {
+                "name": "Термінал",
+                "terms": "аеропорт,аеродром"
             },
             "amenity": {
                 "name": "Зручності"
@@ -652,6 +692,9 @@
             "amenity/cinema": {
                 "name": "Кінотеатр"
             },
+            "amenity/college": {
+                "name": "Коледж"
+            },
             "amenity/courthouse": {
                 "name": "Суд"
             },
@@ -675,6 +718,9 @@
             },
             "amenity/hospital": {
                 "name": "Лікарня"
+            },
+            "amenity/kindergarten": {
+                "name": "Дитячий садок"
             },
             "amenity/library": {
                 "name": "Бібліотека"
@@ -737,7 +783,8 @@
                 "name": "Міська державна адміністрація"
             },
             "amenity/university": {
-                "name": "Університет"
+                "name": "Університет",
+                "terms": "коледж"
             },
             "amenity/waste_basket": {
                 "name": "Бак для сміття"
@@ -872,7 +919,22 @@
                 "name": "З’їзд з/на другорядну дорогу"
             },
             "highway/service": {
-                "name": "Третинна дорога"
+                "name": "Службовий проїзд"
+            },
+            "highway/service/alley": {
+                "name": "Провулок"
+            },
+            "highway/service/drive-through": {
+                "name": "Проїзд біля пункту обслуговування"
+            },
+            "highway/service/driveway": {
+                "name": "Проїзд"
+            },
+            "highway/service/emergency_access": {
+                "name": "Невідкладна допомога"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Проїзд по стоянці"
             },
             "highway/steps": {
                 "name": "Сходи"
@@ -1030,20 +1092,35 @@
             "man_made": {
                 "name": "Штучні споруди"
             },
+            "man_made/breakwater": {
+                "name": "Хвилеріз"
+            },
+            "man_made/cutline": {
+                "name": "Просіка"
+            },
             "man_made/lighthouse": {
                 "name": "Маяк"
             },
             "man_made/pier": {
                 "name": "Пірс"
             },
+            "man_made/pipeline": {
+                "name": "Трубопровід"
+            },
             "man_made/survey_point": {
                 "name": "Геодезичний пункт"
+            },
+            "man_made/tower": {
+                "name": "Вежа"
             },
             "man_made/wastewater_plant": {
                 "name": "Очисні споруди"
             },
             "man_made/water_tower": {
                 "name": "Водонапірна вежа"
+            },
+            "man_made/water_well": {
+                "name": "Колодязь"
             },
             "man_made/water_works": {
                 "name": "Водозабір"
@@ -1195,7 +1272,8 @@
                 "name": "Магазини/Майстерні"
             },
             "shop/alcohol": {
-                "name": "Алкогольні напої"
+                "name": "Алкогольні напої",
+                "terms": "алкоголь"
             },
             "shop/bakery": {
                 "name": "Булочна"

@@ -191,7 +191,6 @@
         "new_tag": "Новый тег",
         "view_on_osm": "Посмотреть на openstreetmap.org",
         "editing_feature": "Правка {feature}",
-        "additional": "Дополнительные теги",
         "choose": "Что это за объект?",
         "results": "{n} результатов для {search}",
         "reference": "Посмотреть на OpenStreetMap Wiki",

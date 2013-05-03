@@ -199,7 +199,6 @@
         "new_tag": "Nuovo Tag",
         "view_on_osm": "Vedi su openstreetmap.org",
         "editing_feature": "Modificando {feature}",
-        "additional": "Tag aggiuntivi",
         "choose": "Seleziona il tipo di caratteristica",
         "results": "{n} risultati per {search}",
         "reference": "Vedi sulla Wiki di OpenStreetMap →",
@@ -332,6 +331,9 @@
                 "options": {
                     "yes": {
                         "title": "Permesso"
+                    },
+                    "no": {
+                        "title": "Vietato"
                     },
                     "private": {
                         "title": "Privato"
@@ -470,6 +472,9 @@
             "operator": {
                 "label": "Operatore"
             },
+            "parking": {
+                "label": "Tipo"
+            },
             "phone": {
                 "label": "Telefono"
             },
@@ -579,7 +584,7 @@
                 "name": "Parcheggio biciclette"
             },
             "amenity/bicycle_rental": {
-                "name": "Noleggio biciclette"
+                "name": "Stazione del Bike Sharing"
             },
             "amenity/cafe": {
                 "name": "Caffè"
@@ -693,6 +698,9 @@
             },
             "barrier/hedge": {
                 "name": "Siepe"
+            },
+            "barrier/lift_gate": {
+                "name": "sbarra"
             },
             "barrier/stile": {
                 "name": "Scaletta"

@@ -199,12 +199,13 @@
         "new_tag": "Nové označenie",
         "view_on_osm": "Zobraz na openstreetmap.org",
         "editing_feature": "Upravovanie {feature}",
-        "additional": "Dodatočné označenia",
+        "all_tags": "Všetky označenia",
         "choose": "Zvoľ typ vlastnosti",
         "results": "{n} výsledkov pre {search}",
         "reference": "Zobraz na OpenStreetMap Wiki",
         "back_tooltip": "Zmeň typ vlastnosti",
-        "remove": "Odstráň"
+        "remove": "Odstráň",
+        "search": "Hľadaj"
     },
     "background": {
         "title": "Pozadie",
@@ -375,7 +376,8 @@
                     "housename": "Názov domu",
                     "number": "123",
                     "street": "Ulica",
-                    "city": "Mesto"
+                    "city": "Mesto",
+                    "postcode": "PSČ"
                 }
             },
             "admin_level": {
@@ -460,6 +462,15 @@
             "historic": {
                 "label": "Typ"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
+            "incline": {
+                "label": "Sklon"
+            },
             "internet_access": {
                 "label": "Prístup k Internetu",
                 "options": {
@@ -482,6 +493,9 @@
             },
             "levels": {
                 "label": "Poschodia"
+            },
+            "location": {
+                "label": "Poloha"
             },
             "man_made": {
                 "label": "Typ"
@@ -549,6 +563,9 @@
                     "taoist": "Taoizmus"
                 }
             },
+            "sac_scale": {
+                "label": "Obtiažnosť chodníka"
+            },
             "service": {
                 "label": "Typ"
             },
@@ -582,8 +599,14 @@
             "tourism": {
                 "label": "Typ"
             },
+            "towertype": {
+                "label": "Typ veže"
+            },
             "tracktype": {
                 "label": "Typ"
+            },
+            "trail_visibility": {
+                "label": "Viditeľnosť trasy"
             },
             "water": {
                 "label": "Typ"
@@ -615,9 +638,30 @@
                 "name": "Letisko",
                 "terms": "lietadlo,letisko,letisková plocha"
             },
+            "aeroway/apron": {
+                "name": "Odbavovacia plocha",
+                "terms": "rampa"
+            },
+            "aeroway/gate": {
+                "name": "Letiskový východ"
+            },
+            "aeroway/hangar": {
+                "name": "Hangár"
+            },
             "aeroway/helipad": {
                 "name": "Heliport",
                 "terms": "vrtuľník,helikoptéra,pristávacia plocha pre helikoptéry,heliport"
+            },
+            "aeroway/runway": {
+                "name": "Vzletová dráha",
+                "terms": "pristávacia dráha, rozjazdová dráha, pristávací pruh"
+            },
+            "aeroway/taxiway": {
+                "name": "Rolovacia dráha"
+            },
+            "aeroway/terminal": {
+                "name": "Letiskový terminál",
+                "terms": "letisko"
             },
             "amenity": {
                 "name": "Občianska vybavenosť"
@@ -642,9 +686,15 @@
                 "name": "Kaviareň",
                 "terms": "káva,čaj,pražiareň kávy"
             },
+            "amenity/car_wash": {
+                "name": "Autoumyváreň"
+            },
             "amenity/cinema": {
                 "name": "Kino",
                 "terms": "veľké plátno,film,pohyblivé obrázky,filmový dom,filmové divadlo,najbližšie kino,premietanie,multiplex"
+            },
+            "amenity/college": {
+                "name": "Fakulta"
             },
             "amenity/courthouse": {
                 "name": "Súd"
@@ -658,6 +708,9 @@
             "amenity/fire_station": {
                 "name": "Požiarna stanica"
             },
+            "amenity/fountain": {
+                "name": "Fontána"
+            },
             "amenity/fuel": {
                 "name": "Čerpacia stanica"
             },
@@ -667,6 +720,10 @@
             "amenity/hospital": {
                 "name": "Nemocnica",
                 "terms": "klinika,poliklinika,nemocnica s poliklinikou,záchranná služba,záchranka,prvá pomoc,pohotovosť,sanatórium,doliečovacie centrum,operácia,krídlo,oddelenie"
+            },
+            "amenity/kindergarten": {
+                "name": "Materská škôlka",
+                "terms": "škôlka, jasle, opatrovanie detí"
             },
             "amenity/library": {
                 "name": "Knižnica"
@@ -736,7 +793,12 @@
                 "terms": "radnica,obecný úrad,mestský úrad,správa"
             },
             "amenity/university": {
-                "name": "Univerzita"
+                "name": "Univerzita",
+                "terms": "fakulta"
+            },
+            "amenity/waste_basket": {
+                "name": "Odpadový kôš",
+                "terms": "kontajner,kôš,smeti"
             },
             "barrier": {
                 "name": "Bariera"
@@ -803,6 +865,9 @@
             },
             "building/house": {
                 "name": "Dom"
+            },
+            "emergency/phone": {
+                "name": "Núdzový telefón"
             },
             "entrance": {
                 "name": "Vstup"
@@ -872,6 +937,21 @@
             },
             "highway/service": {
                 "name": "Servisná cesta"
+            },
+            "highway/service/alley": {
+                "name": "Ulička medzi domami"
+            },
+            "highway/service/drive-through": {
+                "name": "Obslúženie z auta"
+            },
+            "highway/service/driveway": {
+                "name": "Príjazdová cesta"
+            },
+            "highway/service/emergency_access": {
+                "name": "Núdzový prístup"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Parkovacia ulička"
             },
             "highway/steps": {
                 "name": "Schody",
@@ -1016,6 +1096,9 @@
             "leisure/pitch/tennis": {
                 "name": "Tenisový kurt"
             },
+            "leisure/pitch/volleyball": {
+                "name": "Volejbalový kurt"
+            },
             "leisure/playground": {
                 "name": "Ihrisko pre deti"
             },
@@ -1031,14 +1114,26 @@
             "man_made": {
                 "name": "Výtvor ľudskej činnosti"
             },
+            "man_made/breakwater": {
+                "name": "Mólo"
+            },
+            "man_made/cutline": {
+                "name": "Lesný priesek"
+            },
             "man_made/lighthouse": {
                 "name": "Maják"
             },
             "man_made/pier": {
                 "name": "Mólo"
             },
+            "man_made/pipeline": {
+                "name": "Potrubie"
+            },
             "man_made/survey_point": {
                 "name": "Triangulačný bod"
+            },
+            "man_made/tower": {
+                "name": "Veža"
             },
             "man_made/wastewater_plant": {
                 "name": "Čistička odpadových vôd",
@@ -1046,6 +1141,9 @@
             },
             "man_made/water_tower": {
                 "name": "Veža s vodojemom"
+            },
+            "man_made/water_well": {
+                "name": "Studňa"
             },
             "man_made/water_works": {
                 "name": "Vodojem"
@@ -1202,7 +1300,8 @@
                 "name": "Obchod"
             },
             "shop/alcohol": {
-                "name": "Obchod s alkoholom"
+                "name": "Obchod s alkoholom",
+                "terms": "alkohol"
             },
             "shop/bakery": {
                 "name": "Pekáreň"
@@ -1335,7 +1434,7 @@
             },
             "shop/supermarket": {
                 "name": "Supermarket",
-                "terms": "nákup,samoška,supermarket,potraviny,tesco,jednota,"
+                "terms": "nákup,samoška,supermarket,potraviny,tesco,jednota"
             },
             "shop/toys": {
                 "name": "Hračkárstvo"

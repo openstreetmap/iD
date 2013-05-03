@@ -199,7 +199,7 @@
         "new_tag": "Nova oznaka",
         "view_on_osm": "Pogledajte na stranici openstreetmap.org",
         "editing_feature": "Uređivanje značajke {feature}",
-        "additional": "Dodatne oznake",
+        "all_tags": "Sve oznake",
         "choose": "Odaberite tip svojstva",
         "results": "{search} dala {n} rezultata",
         "reference": "Pogledajte na stranici OpenStreetMap Wiki",
@@ -462,6 +462,12 @@
             "historic": {
                 "label": "Vrsta"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Nagib"
             },
@@ -487,6 +493,9 @@
             },
             "levels": {
                 "label": "Nivoi"
+            },
+            "location": {
+                "label": "Lokacija"
             },
             "man_made": {
                 "label": "Vrsta"
@@ -590,6 +599,9 @@
             "tourism": {
                 "label": "Vrsta"
             },
+            "towertype": {
+                "label": "Tip tornja"
+            },
             "tracktype": {
                 "label": "vrsta"
             },
@@ -626,9 +638,30 @@
                 "name": "Aerodrom",
                 "terms": "avion,zračna luka,aerodrom"
             },
+            "aeroway/apron": {
+                "name": "Stajanka",
+                "terms": "rampa"
+            },
+            "aeroway/gate": {
+                "name": "Aerodromski ulaz"
+            },
+            "aeroway/hangar": {
+                "name": "Hangar"
+            },
             "aeroway/helipad": {
                 "name": "Heliodrom",
                 "terms": "helikopter,heliodrom,heliport"
+            },
+            "aeroway/runway": {
+                "name": "Pista",
+                "terms": "traka za slijetanje"
+            },
+            "aeroway/taxiway": {
+                "name": "Staza za vožnju"
+            },
+            "aeroway/terminal": {
+                "name": "Aerodromski terminal",
+                "terms": "zračna luka, aerodrom"
             },
             "amenity": {
                 "name": "Pogodnost"
@@ -660,6 +693,9 @@
                 "name": "Kino",
                 "terms": "veliki ekran,sjaj,kino,drive-in,film,filmovi,kino,pokretne slike,scenario,kinopredstava,slike,teatar,šou,srebrni ekran"
             },
+            "amenity/college": {
+                "name": "Koledž"
+            },
             "amenity/courthouse": {
                 "name": "Sudnica"
             },
@@ -684,6 +720,10 @@
             "amenity/hospital": {
                 "name": "Bolnica",
                 "terms": "klinika,soba za hitne slučajeve,zdravstvena usluga,dom za nemoćne,ambulanta,starački dom,odmaralište,sanatorij,bolnica,hirurgija,odjeljenje bolnice"
+            },
+            "amenity/kindergarten": {
+                "name": "Vrtić",
+                "terms": "vrtić, predškolska ustanova, briga o djeci, grupa za igru"
             },
             "amenity/library": {
                 "name": "Biblioteka"
@@ -753,7 +793,8 @@
                 "terms": "seoska dvorana,gradska vlada,sudnica,općinska zgrada,općinski centar"
             },
             "amenity/university": {
-                "name": "Univerzitet"
+                "name": "Univerzitet",
+                "terms": "koledž"
             },
             "amenity/waste_basket": {
                 "name": "Kanta za otpatke",
@@ -896,6 +937,21 @@
             },
             "highway/service": {
                 "name": "Servisna cesta"
+            },
+            "highway/service/alley": {
+                "name": "Uska ulica"
+            },
+            "highway/service/drive-through": {
+                "name": "Drive-in"
+            },
+            "highway/service/driveway": {
+                "name": "Prilaz"
+            },
+            "highway/service/emergency_access": {
+                "name": "Pristup za hitne slučajeve"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Prolaz kroz parking"
             },
             "highway/steps": {
                 "name": "Stepenice",
@@ -1058,14 +1114,26 @@
             "man_made": {
                 "name": "Napravljeno ljudskom rukom"
             },
+            "man_made/breakwater": {
+                "name": "Lukobran"
+            },
+            "man_made/cutline": {
+                "name": "Sječa"
+            },
             "man_made/lighthouse": {
                 "name": "Svjetionik"
             },
             "man_made/pier": {
                 "name": "Pristanište"
             },
+            "man_made/pipeline": {
+                "name": "Cjevovod"
+            },
             "man_made/survey_point": {
                 "name": "Izviđačnica"
+            },
+            "man_made/tower": {
+                "name": "Toranj"
             },
             "man_made/wastewater_plant": {
                 "name": "Postrojenje za obradu otpadnih voda",
@@ -1073,6 +1141,9 @@
             },
             "man_made/water_tower": {
                 "name": "Vodo-toranj"
+            },
+            "man_made/water_well": {
+                "name": "Bunar"
             },
             "man_made/water_works": {
                 "name": "Vodosnadbjevanje"
@@ -1229,7 +1300,8 @@
                 "name": "Prodavnica"
             },
             "shop/alcohol": {
-                "name": "Prodavnica alkoholnih pića"
+                "name": "Prodavnica alkoholnih pića",
+                "terms": "alkohol"
             },
             "shop/bakery": {
                 "name": "Pekara"

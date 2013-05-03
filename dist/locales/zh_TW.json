@@ -163,7 +163,6 @@
         "show_more": "顯示更多",
         "new_tag": "新的標籤",
         "editing_feature": "正在編輯 {feature}",
-        "additional": "附加的標籤",
         "choose": "選擇功能種類",
         "results": "{search} 的 {n} 個結果",
         "back_tooltip": "修改功能種類"

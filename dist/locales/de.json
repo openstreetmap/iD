@@ -199,12 +199,13 @@
         "new_tag": "Neues Attribut",
         "view_on_osm": "Auf openstreetmap.org ansehen",
         "editing_feature": "In Bearbeitung {feature}",
-        "additional": "Weitere Merkmale",
+        "all_tags": "Alle Tags",
         "choose": "Eigenschafts-Typ auswählen",
         "results": "{n} Resultate für {search}",
         "reference": "Im OpenStreetMap-Wiki anschauen",
         "back_tooltip": "Eigenschafts-Typ ändern",
-        "remove": "Entfernen"
+        "remove": "Entfernen",
+        "search": "Suchen"
     },
     "background": {
         "title": "Hintergrund",

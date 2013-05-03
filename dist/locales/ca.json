@@ -1,0 +1,425 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Àrea",
+            "description": "Afegeix parcs, edificis, llacs o altres tipus d'àrea sobre el mapa.",
+            "tail": "Feu clic sobre el mapa per començar a un tipus d'àrea com per exemple un parc, un llac o un edifici."
+        },
+        "add_line": {
+            "title": "Línia",
+            "description": "Afegeix vies, carrers, camins per a vianants o d'altres tipus de línies sobre el mapa.",
+            "tail": "Feu clic sobre el mapa per a començar a dibuixar una carretera, un camí o una ruta."
+        },
+        "add_point": {
+            "title": "Punt"
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "vertex": "Afegit un node a una via"
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "S'ha iniciat una línia.",
+                "area": "S'ha iniciat una àrea."
+            }
+        },
+        "delete": {
+            "title": "Suprimeix",
+            "description": "Elimina aquest del mapa."
+        },
+        "disconnect": {
+            "title": "Desconnecta"
+        },
+        "merge": {
+            "title": "Combina",
+            "description": "Combina aquestes línies.",
+            "annotation": "{n} línies combinades."
+        },
+        "move": {
+            "title": "Mou"
+        },
+        "reverse": {
+            "title": "Reverteix"
+        },
+        "split": {
+            "title": "Divideix"
+        }
+    },
+    "commit": {
+        "title": "Desa els canvis",
+        "save": "Desa",
+        "cancel": "Anul·la",
+        "warnings": "Avisos",
+        "modified": "Modificat",
+        "deleted": "Suprimit",
+        "created": "Creat"
+    },
+    "inspector": {
+        "new_tag": "Nova etiqueta",
+        "choose": "Seleccioneu un tipus de característica",
+        "results": "{n} resultats per {search}"
+    },
+    "background": {
+        "title": "Fons",
+        "description": "Paràmetres de configuració del fons",
+        "percent_brightness": "{opacity}% brillantor",
+        "fix_misalignment": "Corregeix la desalineació"
+    },
+    "save": {
+        "title": "Desa",
+        "no_changes": "No hi ha canvis a desar.",
+        "error": "Ha hagut un error en intentar desar",
+        "uploading": "Pujant els canvis vers l'OpenStreetMap.",
+        "unsaved_changes": "Teniu canvis sense desar."
+    },
+    "splash": {
+        "welcome": "Benvinguts a l'editor iD per a l'OpenStreetMap"
+    },
+    "tag_reference": {
+        "description": "Descripció"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Accés"
+            },
+            "address": {
+                "label": "Adreça",
+                "placeholders": {
+                    "housename": "Número de carrer",
+                    "number": "123",
+                    "street": "Carrer",
+                    "city": "Ciutat"
+                }
+            },
+            "aeroway": {
+                "label": "Tipus"
+            },
+            "amenity": {
+                "label": "Tipus"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "bicycle_parking": {
+                "label": "Tipus"
+            },
+            "building": {
+                "label": "Edifici"
+            },
+            "building_area": {
+                "label": "Edifici"
+            },
+            "building_yes": {
+                "label": "Edifici"
+            },
+            "capacity": {
+                "label": "Capacitat"
+            },
+            "construction": {
+                "label": "Tipus"
+            },
+            "crossing": {
+                "label": "Tipus"
+            },
+            "cuisine": {
+                "label": "Cuina"
+            },
+            "denomination": {
+                "label": "Denominació"
+            },
+            "denotation": {
+                "label": "Denotació"
+            },
+            "elevation": {
+                "label": "Elevació"
+            },
+            "emergency": {
+                "label": "Emergència"
+            },
+            "entrance": {
+                "label": "Tipus"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "fee": {
+                "label": "Lliure"
+            },
+            "highway": {
+                "label": "Tipus"
+            },
+            "historic": {
+                "label": "Tipus"
+            },
+            "internet_access": {
+                "label": "Accés a Internet",
+                "options": {
+                    "wlan": "WiFi",
+                    "wired": "Per cable",
+                    "terminal": "Terminal"
+                }
+            },
+            "landuse": {
+                "label": "Tipus"
+            },
+            "layer": {
+                "label": "Capa"
+            },
+            "leisure": {
+                "label": "Tipus"
+            },
+            "levels": {
+                "label": "Nivells"
+            },
+            "man_made": {
+                "label": "Tipus"
+            },
+            "maxspeed": {
+                "label": "Límit de velocitat"
+            },
+            "natural": {
+                "label": "Natural"
+            },
+            "network": {
+                "label": "Xarxa"
+            },
+            "note": {
+                "label": "Nota"
+            },
+            "office": {
+                "label": "Tipus"
+            },
+            "oneway": {
+                "label": "Sentit únic"
+            },
+            "opening_hours": {
+                "label": "Horari"
+            },
+            "operator": {
+                "label": "Operador"
+            },
+            "phone": {
+                "label": "Telèfon"
+            },
+            "place": {
+                "label": "Tipus"
+            },
+            "railway": {
+                "label": "Tipus"
+            },
+            "religion": {
+                "label": "Religió",
+                "options": {
+                    "christian": "Cristià",
+                    "muslim": "Musulmà",
+                    "buddhist": "Budista",
+                    "jewish": "Jueu",
+                    "hindu": "Hindú",
+                    "shinto": "Sintoista",
+                    "taoist": "Taoista"
+                }
+            },
+            "service": {
+                "label": "Tipus"
+            },
+            "shelter": {
+                "label": "Refugi"
+            },
+            "shop": {
+                "label": "Tipus"
+            },
+            "source": {
+                "label": "Font"
+            },
+            "sport": {
+                "label": "Esport"
+            },
+            "surface": {
+                "label": "Superfície"
+            },
+            "tourism": {
+                "label": "Tipus"
+            },
+            "water": {
+                "label": "Tipus"
+            },
+            "waterway": {
+                "label": "Tipus"
+            },
+            "website": {
+                "label": "Lloc web"
+            },
+            "wetland": {
+                "label": "Tipus"
+            },
+            "wikipedia": {
+                "label": "Viquipèdia"
+            },
+            "wood": {
+                "label": "Tipus"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Ruta aèria"
+            },
+            "aeroway/aerodrome": {
+                "name": "Aeroport"
+            },
+            "aeroway/helipad": {
+                "name": "Heliport"
+            },
+            "amenity": {
+                "name": "Instal·lació"
+            },
+            "amenity/bank": {
+                "name": "Banc"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Aparcament de bicicletes"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Lloguer de bicicletes"
+            },
+            "amenity/cafe": {
+                "name": "Cafè"
+            },
+            "amenity/cinema": {
+                "name": "Cinema"
+            },
+            "amenity/fast_food": {
+                "name": "Menjar ràpid"
+            },
+            "amenity/fire_station": {
+                "name": "Parc de bombers"
+            },
+            "amenity/grave_yard": {
+                "name": "Cementiri"
+            },
+            "amenity/hospital": {
+                "name": "Hospital"
+            },
+            "amenity/library": {
+                "name": "Biblioteca"
+            },
+            "amenity/parking": {
+                "name": "Aparcament"
+            },
+            "amenity/pharmacy": {
+                "name": "Farmàcia"
+            },
+            "amenity/place_of_worship": {
+                "name": "Lloc de culte"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Església"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mesquita"
+            },
+            "amenity/police": {
+                "name": "Policia"
+            },
+            "amenity/post_box": {
+                "name": "Bústia de correus"
+            },
+            "amenity/post_office": {
+                "name": "Oficina de correus"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "Escola"
+            },
+            "amenity/toilets": {
+                "name": "Vàters"
+            },
+            "amenity/townhall": {
+                "name": "Ajuntament"
+            },
+            "amenity/university": {
+                "name": "Universitat"
+            },
+            "building": {
+                "name": "Edifici"
+            },
+            "entrance": {
+                "name": "Entrada"
+            },
+            "highway": {
+                "name": "Via"
+            },
+            "highway/bus_stop": {
+                "name": "Parada d'autobús"
+            },
+            "highway/crossing": {
+                "name": "Cruïlla"
+            },
+            "highway/cycleway": {
+                "name": "Carril bici"
+            },
+            "highway/footway": {
+                "name": "Camí per a vianants"
+            },
+            "highway/motorway": {
+                "name": "Autopista"
+            },
+            "highway/path": {
+                "name": "Camí"
+            },
+            "highway/primary": {
+                "name": "Carretera primària"
+            },
+            "highway/secondary": {
+                "name": "Carretera secundària"
+            },
+            "highway/service": {
+                "name": "Via de servei"
+            },
+            "highway/steps": {
+                "name": "Escales"
+            },
+            "highway/tertiary": {
+                "name": "Carretera terciària"
+            },
+            "highway/track": {
+                "name": "Pista"
+            },
+            "highway/traffic_signals": {
+                "name": "Senyals de trànsit"
+            },
+            "highway/trunk": {
+                "name": "Carretera principal"
+            },
+            "highway/turning_circle": {
+                "name": "Canvi de sentit"
+            },
+            "highway/unclassified": {
+                "name": "Altres carreteres"
+            },
+            "historic": {
+                "name": "Lloc històric"
+            },
+            "historic/monument": {
+                "name": "Monument"
+            },
+            "landuse": {
+                "name": "Ús de la terra"
+            }
+        }
+    }
+}

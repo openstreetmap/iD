@@ -163,6 +163,11 @@
     "logout": "Déconnexion",
     "loading_auth": "Connexion à OpenStreetMap...",
     "report_a_bug": "Signaler un bug",
+    "status": {
+        "error": "Impossible de se connecter à l'API.",
+        "offline": "L'API est hors ligne. Veuillez essayer d'éditer plus tard.",
+        "readonly": "L'API est en lecture seule. Vous devez attendre pour enregistrer vos changements."
+    },
     "commit": {
         "title": "Sauvegarder vos modifications",
         "description_placeholder": "Description succinte de vos contributions",
@@ -194,11 +199,13 @@
         "new_tag": "Nouvel attribut",
         "view_on_osm": "Visualiser sur openstreetmap.org",
         "editing_feature": "Édition de {feature}",
-        "additional": "Attributs complémentaires",
+        "all_tags": "Tous les tags",
         "choose": "Que souhaitez vous ajouter?",
         "results": "{n} résultats pour {search}",
         "reference": "Consulter sur le Wiki d'OpenStreetMap",
-        "back_tooltip": "Changer le type de l'objet "
+        "back_tooltip": "Changer le type de l'objet ",
+        "remove": "Supprimer",
+        "search": "Rechercher"
     },
     "background": {
         "title": "Fond de carte",
@@ -309,6 +316,23 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Usage du terrain"
+            },
+            "category-path": {
+                "name": "Chemin"
+            },
+            "category-rail": {
+                "name": "Voie ferrée"
+            },
+            "category-road": {
+                "name": "Route"
+            },
+            "category-water": {
+                "name": "Eau"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Accès",
@@ -352,7 +376,8 @@
                     "housename": "Nom du bâtiment",
                     "number": "123",
                     "street": "Rue",
-                    "city": "Ville"
+                    "city": "Ville",
+                    "postcode": "Code postal"
                 }
             },
             "admin_level": {
@@ -436,6 +461,9 @@
             },
             "historic": {
                 "label": "Type"
+            },
+            "incline": {
+                "label": "Pente"
             },
             "internet_access": {
                 "label": "Accès Internet",
@@ -526,6 +554,9 @@
                     "taoist": "Taoïste"
                 }
             },
+            "sac_scale": {
+                "label": "Difficulté du chemin"
+            },
             "service": {
                 "label": "Type"
             },
@@ -561,6 +592,9 @@
             },
             "tracktype": {
                 "label": "Type"
+            },
+            "trail_visibility": {
+                "label": "Visibilité du sentier"
             },
             "water": {
                 "label": "Type"
@@ -619,6 +653,9 @@
                 "name": "Café",
                 "terms": "café, salon de thé"
             },
+            "amenity/car_wash": {
+                "name": "Lavage de voiture"
+            },
             "amenity/cinema": {
                 "name": "Cinéma",
                 "terms": "cinéma, film, ciné, cinématographe, salle obscure, projection "
@@ -634,6 +671,9 @@
             },
             "amenity/fire_station": {
                 "name": "Caserne de pompiers"
+            },
+            "amenity/fountain": {
+                "name": "Fontaine"
             },
             "amenity/fuel": {
                 "name": "Station service"
@@ -715,6 +755,10 @@
             "amenity/university": {
                 "name": "Université"
             },
+            "amenity/waste_basket": {
+                "name": "Corbeille",
+                "terms": "poubelle"
+            },
             "barrier": {
                 "name": "Barrière"
             },
@@ -781,6 +825,9 @@
             "building/house": {
                 "name": "Maison"
             },
+            "emergency/phone": {
+                "name": "Téléphone d'urgence"
+            },
             "entrance": {
                 "name": "Entrée"
             },
@@ -804,6 +851,9 @@
             "highway/footway": {
                 "name": "Voie piétonne",
                 "terms": "passage, chemin, route, rue, autoroute, avenue, boulevard, chaussée, chemin de fer, rails, piste, allée, sentier, voie"
+            },
+            "highway/living_street": {
+                "name": "Zone de rencontre"
             },
             "highway/mini_roundabout": {
                 "name": "Mini rond-point"
@@ -846,6 +896,21 @@
             },
             "highway/service": {
                 "name": "Route d'accès"
+            },
+            "highway/service/alley": {
+                "name": "Ruelle"
+            },
+            "highway/service/drive-through": {
+                "name": "Drive In"
+            },
+            "highway/service/driveway": {
+                "name": "Allée"
+            },
+            "highway/service/emergency_access": {
+                "name": "Accès d'urgence"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Allée de parking"
             },
             "highway/steps": {
                 "name": "Escalier",
@@ -950,6 +1015,9 @@
             "landuse/residential": {
                 "name": "Résidentielle"
             },
+            "landuse/retail": {
+                "name": "Commerce"
+            },
             "landuse/vineyard": {
                 "name": "Vigne"
             },
@@ -986,6 +1054,9 @@
             },
             "leisure/pitch/tennis": {
                 "name": "Court de tennis"
+            },
+            "leisure/pitch/volleyball": {
+                "name": "Terrain de volleyball"
             },
             "leisure/playground": {
                 "name": "Jeux pour enfants"
@@ -1173,7 +1244,8 @@
                 "name": "Magasin"
             },
             "shop/alcohol": {
-                "name": "Magasin de vente d'alcool"
+                "name": "Magasin de vente d'alcool",
+                "terms": "alcool"
             },
             "shop/bakery": {
                 "name": "Boulangerie"

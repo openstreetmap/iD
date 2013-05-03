@@ -199,12 +199,13 @@
         "new_tag": "Thẻ mới",
         "view_on_osm": "Xem tại openstreetmap.org",
         "editing_feature": "Đang sửa {feature}",
-        "additional": "Các thẻ mở rộng",
+        "all_tags": "Tất cả các thẻ",
         "choose": "Chọn thể loại đối tượng",
         "results": "{n} kết quả cho {search}",
         "reference": "Tra cứu OpenStreetMap Wiki",
         "back_tooltip": "Thay đổi thể loại đối tượng",
-        "remove": "Xóa"
+        "remove": "Xóa",
+        "search": "Tìm kiếm"
     },
     "background": {
         "title": "Hình nền",
@@ -461,6 +462,12 @@
             "historic": {
                 "label": "Loại"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Nghiêng"
             },
@@ -486,6 +493,9 @@
             },
             "levels": {
                 "label": "Số Tầng"
+            },
+            "location": {
+                "label": "Vị trí"
             },
             "man_made": {
                 "label": "Loại"
@@ -554,7 +564,7 @@
                 }
             },
             "sac_scale": {
-                "label": "Độ hiểm trở đường mòn"
+                "label": "Độ Hiểm trở Đường mòn"
             },
             "service": {
                 "label": "Kiểu"
@@ -589,8 +599,14 @@
             "tourism": {
                 "label": "Loại"
             },
+            "towertype": {
+                "label": "Kiểu Tháp"
+            },
             "tracktype": {
                 "label": "Kiểu"
+            },
+            "trail_visibility": {
+                "label": "Tầm nhìn trên Đường mòn"
             },
             "water": {
                 "label": "Loại"
@@ -620,11 +636,32 @@
             },
             "aeroway/aerodrome": {
                 "name": "Sân bay",
-                "terms": "máy bay,phi cơ,tàu bay,sân bay,phi trường"
+                "terms": "máy bay,phi cơ,tàu bay,sân bay,phi trường,cảng hàng không,không cảng"
+            },
+            "aeroway/apron": {
+                "name": "Sân bãi",
+                "terms": "thềm,sân đậu"
+            },
+            "aeroway/gate": {
+                "name": "Cổng Sân bay"
+            },
+            "aeroway/hangar": {
+                "name": "Nhà Máy bay"
             },
             "aeroway/helipad": {
                 "name": "Sân bay Trực thăng",
                 "terms": "máy bay trực thăng,máy bay lên thẳng,sân bay trực thăng,sân bay lên thẳng,phi trường trực thăng,sàn đỗ trực thăng,sàn đáp trực thăng"
+            },
+            "aeroway/runway": {
+                "name": "Đường băng",
+                "terms": "phi đạo,đường cất hạ cánh,đường cất cánh,đường hạ cánh"
+            },
+            "aeroway/taxiway": {
+                "name": "Đường lăn"
+            },
+            "aeroway/terminal": {
+                "name": "Ga Sân bay",
+                "terms": "sân bay,phi trường,cảng hàng không,không cảng,nhà ga"
             },
             "amenity": {
                 "name": "Tiện nghi"
@@ -656,6 +693,9 @@
                 "name": "Rạp phim",
                 "terms": "rạp phim,rạp điện ảnh,xi nê, xi-nê,xinê,phim,điện ảnh"
             },
+            "amenity/college": {
+                "name": "Trường Cao đẳng"
+            },
             "amenity/courthouse": {
                 "name": "Tòa"
             },
@@ -680,6 +720,10 @@
             "amenity/hospital": {
                 "name": "Bệnh viện",
                 "terms": "bệnh viện,nhà thương,phòng khám khẩn cấp,phòng khẩn cấp"
+            },
+            "amenity/kindergarten": {
+                "name": "Nhà trẻ",
+                "terms": "nhà giữ trẻ,mẫu giáo,trường mẫu giáo,mầm non,trường mầm non"
             },
             "amenity/library": {
                 "name": "Thư viện"
@@ -749,11 +793,12 @@
                 "terms": "tòa thị chính,tòa thị chánh,toà thị chính,toà thị chánh,trụ sở thành phố,trụ sở thị xã,trụ sở làng"
             },
             "amenity/university": {
-                "name": "Trường Đại học"
+                "name": "Trường Đại học",
+                "terms": "cao đẳng,trường cao đẳng,đại học"
             },
             "amenity/waste_basket": {
                 "name": "Thùng rác",
-                "terms": "thùng rác"
+                "terms": "thùng rác,sọt rác"
             },
             "barrier": {
                 "name": "Chướng ngại"
@@ -822,7 +867,7 @@
                 "name": "Nhà ở"
             },
             "emergency/phone": {
-                "name": "Điện thoại khẩn cấp"
+                "name": "Điện thoại Khẩn cấp"
             },
             "entrance": {
                 "name": "Cửa vào"
@@ -849,7 +894,7 @@
                 "terms": "đường đi bộ,hè,vỉa hè,đường mòn,phố,đường đi dạo,đường dạo"
             },
             "highway/living_street": {
-                "name": "Đường dân sinh"
+                "name": "Đường Dân sinh"
             },
             "highway/mini_roundabout": {
                 "name": "Đường vòng Nhỏ"
@@ -892,6 +937,21 @@
             },
             "highway/service": {
                 "name": "Ngách"
+            },
+            "highway/service/alley": {
+                "name": "Ngõ hẻm"
+            },
+            "highway/service/drive-through": {
+                "name": "Khu vực Mua hàng trên Xe"
+            },
+            "highway/service/driveway": {
+                "name": "Lối đi vào Nhà"
+            },
+            "highway/service/emergency_access": {
+                "name": "Dành cho Dịch vụ Khẩn cấp"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Lối trong Bãi đậu xe"
             },
             "highway/steps": {
                 "name": "Cầu thang",
@@ -996,6 +1056,9 @@
             "landuse/residential": {
                 "name": "Dân cư"
             },
+            "landuse/retail": {
+                "name": "Bán lẻ"
+            },
             "landuse/vineyard": {
                 "name": "Vườn Nho"
             },
@@ -1034,7 +1097,7 @@
                 "name": "Sân Quần vợt"
             },
             "leisure/pitch/volleyball": {
-                "name": "Sân bóng chuyền"
+                "name": "Sân Bóng chuyền"
             },
             "leisure/playground": {
                 "name": "Khu Vui chơi Trẻ em"
@@ -1051,14 +1114,26 @@
             "man_made": {
                 "name": "Công trình"
             },
+            "man_made/breakwater": {
+                "name": "Đê Chắn Sóng"
+            },
+            "man_made/cutline": {
+                "name": "Vành đai Chặt cây"
+            },
             "man_made/lighthouse": {
                 "name": "Hải đăng"
             },
             "man_made/pier": {
                 "name": "Cầu tàu"
             },
+            "man_made/pipeline": {
+                "name": "Đường ống"
+            },
             "man_made/survey_point": {
                 "name": "Điểm Khảo sát"
+            },
+            "man_made/tower": {
+                "name": "Tháp"
             },
             "man_made/wastewater_plant": {
                 "name": "Nhà máy Nước thải",
@@ -1066,6 +1141,9 @@
             },
             "man_made/water_tower": {
                 "name": "Tháp nước"
+            },
+            "man_made/water_well": {
+                "name": "Giếng nước"
             },
             "man_made/water_works": {
                 "name": "Nhà máy Nước"
@@ -1222,7 +1300,8 @@
                 "name": "Tiệm"
             },
             "shop/alcohol": {
-                "name": "Tiệm Rượu"
+                "name": "Tiệm Rượu",
+                "terms": "rượu"
             },
             "shop/bakery": {
                 "name": "Tiệm Bánh"

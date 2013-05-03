@@ -2,22 +2,22 @@
     "modes": {
         "add_area": {
             "title": "Område",
-            "description": "Lägg till parker, byggnader, sjöar, eller andra områden till kartan.",
-            "tail": "Klicka på kartan för att börja rita ett område, typ en park, sjö eller byggnad."
+            "description": "Lägg till parker, byggnader, sjöar, eller andra områden på kartan.",
+            "tail": "Klicka på kartan för att börja rita ett område, exempelvis en park, sjö eller byggnad."
         },
         "add_line": {
             "title": "Linje",
-            "description": "Linjer kan vara vägar, gator, stigar, kanaler etc.",
-            "tail": "Klicka på kartan för att rita en väg, stig eller vattendrag."
+            "description": "Lägg till vägar, stigar, kanaler och andra linjer på kartan.",
+            "tail": "Klicka på kartan för att rita en väg, stig eller ett vattendrag."
         },
         "add_point": {
             "title": "Punkt",
-            "description": "Restauranter, minnesmärken och postkontor kan vara punkter.",
+            "description": "Lägg till restauranger, butiker, postlådor och andra punkter på kartan.",
             "tail": "Klicka på kartan för att lägga till en punkt."
         },
         "browse": {
             "title": "Bläddra",
-            "description": "Panera runt och zooma kartan."
+            "description": "Panorera och zooma kartan."
         }
     },
     "operations": {
@@ -43,10 +43,10 @@
             "annotation": "Avbröt ritning."
         },
         "change_tags": {
-            "annotation": "Ändrat tagg."
+            "annotation": "Ändrade tagg."
         },
         "circularize": {
-            "title": "Cirkularisera",
+            "title": "Gör till cirkel",
             "description": {
                 "line": "Gör denna linje rund.",
                 "area": "Gör detta område runt."
@@ -60,7 +60,7 @@
         },
         "orthogonalize": {
             "title": "Ortogonalisering",
-            "description": "Gör kvadrat-hörn.",
+            "description": "Gör hörnen kvadratiska (90 grader).",
             "key": "Q",
             "annotation": {
                 "line": "Gjort hörnen på en linje fyrkantiga.",
@@ -82,10 +82,10 @@
         },
         "connect": {
             "annotation": {
-                "point": "Forbandt en vej til et punkt.",
-                "vertex": "Forbandt en vej til en anden vej.",
-                "line": "Forbandt en vej til en linje.",
-                "area": "Forbandt en vej til et område."
+                "point": "Förbundit en väg till en punkt.",
+                "vertex": "Förbundit en väg till en annan väg.",
+                "line": "Förbundit en väg till en linje.",
+                "area": "Förbundit en väg till ett område."
             }
         },
         "disconnect": {
@@ -100,11 +100,12 @@
             "description": "Sammanfoga dessa linjer.",
             "key": "C",
             "annotation": "Sammanfogade {n} linjer.",
+            "not_eligible": "Dessa objekt kan inte slås samman.",
             "not_adjacent": "Dessa linjer kan inte slås ihop då dem inte är ihopsatta."
         },
         "move": {
             "title": "Flytta",
-            "description": "Flytta detta till ett annan ställe.",
+            "description": "Flytta detta till en annan plats.",
             "key": "M",
             "annotation": {
                 "point": "Flyttade en punkt.",
@@ -112,11 +113,12 @@
                 "line": "Flyttade en linje.",
                 "area": "Flyttade ett område.",
                 "multiple": "Flyttade flera objekt."
-            }
+            },
+            "incomplete_relation": "Detta objekt kan inte flyttas då det inte är nedladdat i sin helhet."
         },
         "rotate": {
             "title": "Rotera",
-            "description": "Rotera detta objekt runt dess centerpunkt.",
+            "description": "Rotera detta objekt runt dess center.",
             "key": "R",
             "annotation": {
                 "line": "Roterade en linje.",
@@ -132,6 +134,7 @@
         "split": {
             "title": "Dela upp",
             "description": {
+                "line": "Dela linjen i två delar vid denna punkt.",
                 "area": "Dela gränserna för detta område i två delar."
             },
             "key": "X",
@@ -149,15 +152,15 @@
     "just_edited": "Du har nu redigerat OpenStreetMap!",
     "browser_notice": "Denna redigerare funkar i Firefox, Chrome, Safari, Opera och Internet Explorer 9 och högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera på kartan.",
     "view_on_osm": "Visa på OSM",
-    "zoom_in_edit": "Zooma in för att fixa på kartan",
+    "zoom_in_edit": "Zooma in för att rita på kartan",
     "logout": "logga ut",
-    "loading_auth": "Kopplar till OpenStreetMap...",
+    "loading_auth": "Ansluter till OpenStreetMap...",
     "report_a_bug": "rapportera ett fel",
     "commit": {
         "title": "Spara ändringar",
         "description_placeholder": "Kort beskrivning av dina ändringar",
         "message_label": "Skicka meddelande",
-        "upload_explanation": "Ändringar du uppladdar som {user} kommer att kunna ses på alla kartor som användar OpenStreetMap data.",
+        "upload_explanation": "Ändringar du laddar upp som {user} kommer att kunna ses på alla kartor som användar OpenStreetMaps data.",
         "save": "Spara",
         "cancel": "Avbryt",
         "warnings": "Varningar",
@@ -170,25 +173,27 @@
         "truncated_list": "Visa bidrag från {users} och {count} andra"
     },
     "geocoder": {
-        "title": "Hitta ett ställe",
-        "placeholder": "Hitta ett ställe",
+        "title": "Hitta en plats",
+        "placeholder": "Hitta en plats",
         "no_results": "Kunde inte hitta '{name}'"
     },
     "geolocate": {
         "title": "Visa var jag är"
     },
     "inspector": {
-        "no_documentation_combination": "Der er ingen dokumentation for denne tag kombination",
-        "no_documentation_key": "Det finns inget dokumentation för denna nyckel.",
+        "no_documentation_combination": "Det finns ingen dokumentation för denna tagg-kombination",
+        "no_documentation_key": "Det finns ingen dokumentation för denna nyckel.",
         "show_more": "Visa mer",
         "new_tag": "Ny tagg",
         "view_on_osm": "Visa på openstreetmap.org",
         "editing_feature": "Ändrar {feature}",
-        "additional": "Fler taggar",
-        "choose": "Vad lägger du till?",
+        "all_tags": "Alla taggar",
+        "choose": "Välj typ av objekt",
         "results": "{n} sökresult för {search}",
-        "reference": "Visa på OpenStreetmap Wiki",
-        "back_tooltip": "Ändra funktionstyp"
+        "reference": "Visa på OpenStreetmaps wiki",
+        "back_tooltip": "Ändra typ av objekt",
+        "remove": "Ta bort",
+        "search": "Sök"
     },
     "background": {
         "title": "Bakgrund",
@@ -198,28 +203,28 @@
         "reset": "återställ"
     },
     "restore": {
-        "heading": "Du har osparade ändringar.",
-        "description": "Du har ändringar från förra sessiones som inte har sparats. Vill du spara dessa ändringar?",
+        "heading": "Du har icke-sparade ändringar.",
+        "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
         "restore": "Återställ",
         "reset": "Återställ"
     },
     "save": {
         "title": "Spara",
-        "help": "Spara ändringer till OpenStreetMap så att andra användare kan se dem.",
-        "no_changes": "Inget att spara.",
+        "help": "Spara ändringar till OpenStreetMap så att andra användare kan se dem.",
+        "no_changes": "Inga ändringar att spara.",
         "error": "Något gick fel vid sparandet",
-        "uploading": "Dina ändringer sparas nu till OpenStreetMap.",
-        "unsaved_changes": "Du har icke-sparade ändringer."
+        "uploading": "Dina ändringar sparas nu till OpenStreetMap.",
+        "unsaved_changes": "Du har icke-sparade ändringar."
     },
     "splash": {
-        "welcome": "Välkommen till iD OpenStreetMap redigerare",
-        "text": "Detta är utvecklingsversion {version}. Mer information besök {website} och rapportera fel på {github}.",
+        "welcome": "Välkommen till iD OpenStreetMap-redigeraren",
+        "text": "iD är ett användarvänligt men kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är utvecklingsversion {version}. För mer information besök {website} och rapportera fel på {github}.",
         "walkthrough": "Starta genomgången",
         "start": "Ändra nu"
     },
     "source_switch": {
         "live": "live",
-        "lose_changes": "Du har osparade ändringar som kommer gå förlorade vid byte av kartserver. Är du säker att du vill byta server?",
+        "lose_changes": "Du har icke-sparade ändringar som kommer gå förlorade vid byte av kartserver. Är du säker att du vill byta server?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -228,11 +233,12 @@
         "used_with": "används med {type}"
     },
     "validations": {
+        "untagged_point": "Otaggad punkt",
         "untagged_line": "Otaggad linje",
         "untagged_area": "Otaggat område",
         "many_deletions": "Du håller på att ta bort {n} objekt. Är du helt säker? Detta tar bort dem för alla som använder openstreetmap.org.",
-        "tag_suggests_area": "Denna tagg {tag} indikerar att denna linje borde vara ett område, men detta är inte ett område",
-        "deprecated_tags": "Uönskade taggar: {tags}"
+        "tag_suggests_area": "Taggen {tag} indikerar att detta borde vara ett område istället för en linje",
+        "deprecated_tags": "Borttagna taggar: {tags}"
     },
     "zoom": {
         "in": "Zooma in",
@@ -249,20 +255,36 @@
     },
     "intro": {
         "navigation": {
-            "drag": "Huvudkartområdet visar OpenStreetMap data ovanpå en bakgrund. Du kan navigera genom att dra och skrolla, precis som i vanliga nätkartor. **Dra kartan!**"
+            "drag": "Huvudkartområdet visar OpenStreetMap-data ovanpå en bakgrund. Du kan navigera genom att dra och rulla, precis som i vanliga nätkartor. **Dra kartan!**",
+            "select": "Kartobjekt representeras på tre olika sätt: med punkter, linjer eller områden. Alla objekt kan markeras genom att klicka på dem.**Klicka på punkten för att markera den.**",
+            "header": "Titeln visar oss typ av objekt."
         },
         "points": {
             "place": "Punkten kan placeras genom att klicka på kartan. **Placera punkten ovanpå byggnaden.**",
+            "search": "En punkt kan vara många olika saker. Den punkt du just lade till är ett cafe. **Sök efter texten 'cafe'**",
+            "choose": "**Välj cafe från listan.**",
+            "describe": "Punkten är nu taggad som cafe. Via objektredigeraren kan vi lägga till mer information om punkten. **Lägg till ett namn**",
+            "close": "Objektredigeraren kan stängas med knappen upp i högra hörnet. **Stäng taggredigeraren nu**",
             "reselect": "Ofta existerar redan punkter, men innehåller misstag eller är ofullständiga. Vi kan ändra redan existerande punkter. **Välj punkten du just skapade.**",
+            "fixname": "**Ändra namnet och stäng objektredigeraren.**",
+            "reselect_delete": "Alla objekt på kartan kan raderas. **Klicka på punkten du skapade.**",
             "delete": "Menyn runt punkten innehåller operationer som kan utföras på den, inklusive ta bort. **Ta bort punkten.**"
         },
         "areas": {
+            "add": "Områden är ett mer detaljerat sätt att representera objekt. De ger information om objektets gränser. Områden kan användas för nästa samma typer av objekt som punkter och är ofta att föredra.**Klicka på Område-knappen för att lägga till ett nytt område.**",
             "corner": "Områden ritas genom att placera punkter som representerar gränsen av området. **Placera startpunkten på ett av hörnen på lekplatsen.**",
-            "search": "**Sök efter lekpark.**"
+            "search": "**Sök efter lekpark.**",
+            "choose": "**Välj lekpark från listan.**",
+            "describe": "**Lägg till ett namn och stäng sedan objektredigeraren**"
         },
         "lines": {
-            "start": "**Påbörja linjen genom att klicka på änden av vägen.**",
+            "add": "Linjer används för att representera exempelvis vägar, järnvägar och älvar. **Klicka på Linje-knappen för att lägga till en ny linje.**",
+            "start": "**Påbörja linjen genom att klicka på slutet av vägen.**",
+            "intersect": "Klicka för att lägga till fler punkter på linjen (vägen). Du kan flytta kartan under tiden du ritar. Vägar och många andra typer av linjer är en del av ett större nät med linjer. Det är därför viktigt att linjer blir korrekt anslutna till varandra för att exempelvis körinstruktioner ska fungera.**Klicka på Flower Street för att skapa en anslutning mellan de två linjerna (vägarna).**",
+            "finish": "Linjer avslutas genom att klicka på slutpunkten en gång till.**Avsluta linjen.**",
+            "road": "**Välj Väg från listan**",
             "residential": "Det finns olika typer av vägar. Den vanligaste är \"Residential\". **Välj vägtypen \"Residential\"**",
+            "describe": "**Ge vägen ett namn och stäng objektredigeraren.**",
             "restart": "Vägen behöver ha en korsning med Flower Street."
         },
         "startediting": {
@@ -274,7 +296,20 @@
     "presets": {
         "fields": {
             "access": {
-                "label": "Tillgång"
+                "label": "Tillgång",
+                "types": {
+                    "motor_vehicle": "Motorfordon",
+                    "bicycle": "Cyklar",
+                    "horse": "Hästar"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Tillåtna"
+                    },
+                    "permissive": {
+                        "title": "Påbjuden"
+                    }
+                }
             },
             "address": {
                 "label": "Adress",
@@ -282,7 +317,8 @@
                     "housename": "Husnamn",
                     "number": "123",
                     "street": "Gata",
-                    "city": "Stad"
+                    "city": "Stad",
+                    "postcode": "Postnummer"
                 }
             },
             "admin_level": {
@@ -315,14 +351,26 @@
             "capacity": {
                 "label": "Kapacitet"
             },
+            "clock_direction": {
+                "options": {
+                    "clockwise": "Medsols",
+                    "anticlockwise": "Motsols"
+                }
+            },
             "collection_times": {
                 "label": "Hämtningstider"
             },
             "construction": {
                 "label": "Typ"
             },
+            "country": {
+                "label": "Land"
+            },
             "crossing": {
                 "label": "Typ"
+            },
+            "emergency": {
+                "label": "Akut"
             },
             "entrance": {
                 "label": "Typ"
@@ -340,8 +388,10 @@
                 "label": "Typ"
             },
             "internet_access": {
+                "label": "Internetaccess",
                 "options": {
-                    "wlan": "Wifi"
+                    "wlan": "Wifi",
+                    "terminal": "Terminal"
                 }
             },
             "landuse": {
@@ -426,9 +476,11 @@
                 "label": "Sport"
             },
             "structure": {
+                "label": "Struktur",
                 "options": {
                     "bridge": "Bro",
-                    "tunnel": "Tunnel"
+                    "tunnel": "Tunnel",
+                    "embankment": "Vägbank"
                 }
             },
             "surface": {
@@ -460,6 +512,15 @@
             }
         },
         "presets": {
+            "aeroway": {
+                "name": "Flygbana"
+            },
+            "aeroway/aerodrome": {
+                "name": "Flygplats"
+            },
+            "aeroway/helipad": {
+                "name": "Helikopterplatta"
+            },
             "amenity/bank": {
                 "name": "Bank"
             },
@@ -493,6 +554,15 @@
             "amenity/fire_station": {
                 "name": "Brandstation"
             },
+            "amenity/fountain": {
+                "name": "Fontän"
+            },
+            "amenity/fuel": {
+                "name": "Bensinstation"
+            },
+            "amenity/grave_yard": {
+                "name": "Gravplats"
+            },
             "amenity/hospital": {
                 "name": "Sjukhus"
             },
@@ -505,6 +575,9 @@
             "amenity/parking": {
                 "name": "Parkering"
             },
+            "amenity/pharmacy": {
+                "name": "Läkemedel"
+            },
             "amenity/place_of_worship": {
                 "name": "Plats för tillbedjan"
             },
@@ -512,7 +585,8 @@
                 "name": "Kyrka"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Synagoga"
+                "name": "Synagoga",
+                "terms": "judisk,synagoga"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Moské",
@@ -560,6 +634,12 @@
             "barrier/block": {
                 "name": "Block"
             },
+            "barrier/bollard": {
+                "name": "Pollare"
+            },
+            "barrier/cattle_grid": {
+                "name": "Färist"
+            },
             "barrier/city_wall": {
                 "name": "Stadsmur"
             },
@@ -602,8 +682,20 @@
             "building/house": {
                 "name": "Hus"
             },
+            "emergency/phone": {
+                "name": "Nödtelefon"
+            },
             "entrance": {
                 "name": "Entré"
+            },
+            "highway/bridleway": {
+                "name": "Ridväg"
+            },
+            "highway/bus_stop": {
+                "name": "Busshållsplats"
+            },
+            "highway/crossing": {
+                "name": "Korsning"
             },
             "highway/cycleway": {
                 "name": "Cykelväg"
@@ -611,14 +703,23 @@
             "highway/footway": {
                 "name": "Gångväg"
             },
+            "highway/mini_roundabout": {
+                "name": "Minirondell"
+            },
             "highway/motorway": {
                 "name": "Motorväg"
             },
             "highway/path": {
                 "name": "Stig"
             },
+            "highway/residential": {
+                "name": "Bostadsgata"
+            },
             "highway/road": {
                 "name": "Okänd väg"
+            },
+            "highway/service": {
+                "name": "Serviceväg"
             },
             "highway/steps": {
                 "name": "Steg"
@@ -644,6 +745,9 @@
             "historic/castle": {
                 "name": "Slott"
             },
+            "historic/memorial": {
+                "name": "Monument"
+            },
             "historic/monument": {
                 "name": "Monument"
             },
@@ -652,6 +756,12 @@
             },
             "landuse": {
                 "name": "Markanvändning"
+            },
+            "landuse/allotments": {
+                "name": "Kolonilotter"
+            },
+            "landuse/cemetery": {
+                "name": "Kyrkogård"
             },
             "landuse/commercial": {
                 "name": "Kommersiell"
@@ -674,11 +784,20 @@
             "landuse/industrial": {
                 "name": "Industriell"
             },
+            "landuse/meadow": {
+                "name": "Äng"
+            },
             "landuse/orchard": {
                 "name": "Fruktträdgård"
             },
             "landuse/quarry": {
                 "name": "Täkt"
+            },
+            "landuse/residential": {
+                "name": "Bostadsområde"
+            },
+            "landuse/vineyard": {
+                "name": "Vingård"
             },
             "leisure": {
                 "name": "Nöje"
@@ -694,6 +813,9 @@
             },
             "leisure/park": {
                 "name": "Park"
+            },
+            "leisure/pitch": {
+                "name": "Idrottsplats"
             },
             "leisure/pitch/american_football": {
                 "name": "Amerikansk fotbollsplan"
@@ -758,6 +880,12 @@
             },
             "natural/glacier": {
                 "name": "Glassiär"
+            },
+            "natural/grassland": {
+                "name": "Grässlätt"
+            },
+            "natural/heath": {
+                "name": "Hed"
             },
             "natural/peak": {
                 "name": "Topp"
@@ -837,14 +965,24 @@
             "railway/level_crossing": {
                 "name": "Plankorsning"
             },
+            "railway/platform": {
+                "name": "Perrong"
+            },
             "railway/station": {
                 "name": "Järnvägsstation"
             },
             "railway/subway": {
                 "name": "Tunnelbana"
             },
+            "railway/tram": {
+                "name": "Spårvagn",
+                "terms": "spårvagn"
+            },
             "shop": {
                 "name": "Affär"
+            },
+            "shop/alcohol": {
+                "terms": "alkohol"
             },
             "shop/bakery": {
                 "name": "Bageri"
@@ -852,8 +990,17 @@
             "shop/bicycle": {
                 "name": "Cykelaffär"
             },
+            "shop/books": {
+                "name": "Bokhandel"
+            },
             "shop/butcher": {
                 "name": "Slaktare"
+            },
+            "shop/car": {
+                "name": "Bilhandlare"
+            },
+            "shop/car_parts": {
+                "name": "Bildelar"
             },
             "shop/car_repair": {
                 "name": "Bilverkstad"
@@ -870,6 +1017,9 @@
             "shop/electronics": {
                 "name": "Elektronikbutik"
             },
+            "shop/fishmonger": {
+                "name": "Fiskhandlare"
+            },
             "shop/florist": {
                 "name": "Florist"
             },
@@ -879,14 +1029,23 @@
             "shop/gift": {
                 "name": "Presentbutik"
             },
+            "shop/greengrocer": {
+                "name": "Grönsakshandlare"
+            },
             "shop/hairdresser": {
                 "name": "Hårfrissör"
+            },
+            "shop/hardware": {
+                "name": "Järnaffär"
             },
             "shop/jewelry": {
                 "name": "Juvelerare"
             },
             "shop/kiosk": {
                 "name": "Kiosk"
+            },
+            "shop/mall": {
+                "name": "Galleria"
             },
             "shop/mobile_phone": {
                 "name": "Mobiltelefonbutik"
@@ -909,6 +1068,9 @@
             "shop/travel_agency": {
                 "name": "Resebyrå"
             },
+            "shop/tyres": {
+                "name": "Däckfirma"
+            },
             "shop/video": {
                 "name": "Videobutik"
             },
@@ -920,6 +1082,12 @@
             },
             "tourism/camp_site": {
                 "name": "Kampingplats"
+            },
+            "tourism/guest_house": {
+                "name": "Gästhus"
+            },
+            "tourism/hostel": {
+                "name": "Vandrarhem"
             },
             "tourism/hotel": {
                 "name": "Hotell"
@@ -935,6 +1103,9 @@
             },
             "tourism/picnic_site": {
                 "name": "Picknickplats"
+            },
+            "tourism/theme_park": {
+                "name": "Temapark"
             },
             "tourism/viewpoint": {
                 "name": "Utsiktspunkt"
@@ -962,6 +1133,9 @@
             },
             "waterway/stream": {
                 "name": "Bäck"
+            },
+            "waterway/weir": {
+                "name": "Dam"
             }
         }
     }

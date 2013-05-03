@@ -191,7 +191,6 @@
         "new_tag": "Nuwe kenteken",
         "view_on_osm": "Kyk daarna op openstreetmap.org",
         "editing_feature": "Verander {feature}",
-        "additional": "Addisioneele kentekens",
         "choose": "Kies funksie tipe",
         "results": "{n} resultate vir {search}",
         "reference": "Kyk daarna op OpenStreetMap Wiki",
@@ -337,7 +336,8 @@
                     "housename": "Huisnaam",
                     "number": "123",
                     "street": "Straat",
-                    "city": "Tipe"
+                    "city": "Tipe",
+                    "postcode": "Pos Kode"
                 }
             },
             "admin_level": {
@@ -502,6 +502,9 @@
                     "taoist": "Taoist"
                 }
             },
+            "sac_scale": {
+                "label": "Moeilikheidsgraad van voetslaanpad"
+            },
             "service": {
                 "label": "Tipe"
             },
@@ -534,6 +537,9 @@
             },
             "tracktype": {
                 "label": "Tipe"
+            },
+            "trail_visibility": {
+                "label": "Sigbaarheid van voetslaanpad"
             },
             "water": {
                 "label": "Tipe"
@@ -591,6 +597,9 @@
                 "name": "Kafee",
                 "terms": "koffie,tee,koffiewinkel"
             },
+            "amenity/car_wash": {
+                "name": "Karwas"
+            },
             "amenity/cinema": {
                 "name": "Fliek"
             },
@@ -605,6 +614,9 @@
             },
             "amenity/fire_station": {
                 "name": "Brandweerstasie"
+            },
+            "amenity/fountain": {
+                "name": "Fontein"
             },
             "amenity/fuel": {
                 "name": "Petrolstasie"
@@ -674,6 +686,10 @@
             "amenity/university": {
                 "name": "Universiteit"
             },
+            "amenity/waste_basket": {
+                "name": "Asblik",
+                "terms": "asblik,asblik,asblik,asblik"
+            },
             "barrier/block": {
                 "name": "Blok"
             },
@@ -718,6 +734,9 @@
             },
             "building/house": {
                 "name": "Huis"
+            },
+            "emergency/phone": {
+                "name": "Noodtelefoon"
             },
             "entrance": {
                 "name": "Ingang"
@@ -1031,7 +1050,8 @@
                 "name": "Winkel"
             },
             "shop/alcohol": {
-                "name": "Drankwinkel"
+                "name": "Drankwinkel",
+                "terms": "alkohol"
             },
             "shop/bakery": {
                 "name": "Bakkery"

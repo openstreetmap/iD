@@ -199,7 +199,7 @@
         "new_tag": "Nyt tag",
         "view_on_osm": "Se på openstreetmap.org",
         "editing_feature": "Redigerer {feature}",
-        "additional": "Flere tags",
+        "all_tags": "Alle tags",
         "choose": "Vælg funktionstype",
         "results": "{n} resultater for {search}",
         "reference": "Se på OpenStreetMap Wiki",
@@ -263,13 +263,19 @@
     },
     "help": {
         "title": "Hjælp",
-        "addresses": "#Adresser⏎\n⏎\nAdresser er noget af det mest brugbare til kortet.⏎\n⏎\nSelvom adresser ofte er repræsenteret som dele af veje i OpenStreetMap⏎\nDisse er lagret som attributter for bygninger og steder langs veje.⏎\n⏎\nDu kan også tilføje adresseinformation til steder som er kortlagt som bygningspolygoner⏎\nligesom bygninger der er markeret som enkeltpunkter. Den optimale kilde til⏎\nadresser⏎\ner indsamling på selve stedet eller personlig kendkskab - som med ethvert andet⏎\ngeografisk objekt, så er kopiering fra kommercielle kilder som fx Google Maps\nstrengt⏎\nforbudt.⏎\n\n\n"
+        "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigeringsbare verdenskort. Du kan bruge dette værktøj til at opdatere\ngeodata i dit lokalområde. Derved skaber du et bedre verdenskort med open source og frie geodata\ntil gavn for alle.\n\nDine ændringer på kortet vil blive synligt for alle og enhver der benytter\nOpenStreetMap. For at lave redigeringer skal du oprette\n[en gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\nDette [iD redigeringsværktøj](http://ideditor.com/) er et kollaborativ projekt og [kildekoden\ner tilgængelig på GitHub](https://github.com/systemed/iD). \n",
+        "editing_saving": "# Redigering & Gem\n\nDette redigeringsværktøj er lavet primært til at arbejde online, og du\narbejder gennem et website lige nu.\n\n### Vælg Objekter\n\nFor at vælge et kortobjekt, som fx en vej eller et interessepunkt, klik\npå dette på kortet. Dette vil highlighte det valgte objekt, åbne et panel med\nyderligere detajler om det og samtidigt vise en menu med forskellige ting du kan gøre\nmed dette objekt.\n\nFlere objekter på en gang kan vælges ved at holde \"Shift\" knappen ned, klik og udvælg\npå kortet. Dette vil vælge alle indtegnede objekter indenfor en firkant. Dette tillader\ndig at gøre flere ting med flere objekter på en gang.\n\n### Gem Redigeringer\n\nNår du laver ændringer fx tilføjer veje, bygninger og steder, så er disse\ngemt lokalt på din computer lige ind til du har gemt dem på OpenStreetMaps server.\nDu skal ikke bekymre dig om, hvis du laver en fejl - du kan fortryde ændringer ved at klikke på \"Fortryd\" knappen.\n\nKlik på \"Gem\" for at afslutte dine ændringer - fx du har lavet et komplet område af en by og du ønsker at gå i gang med et nyt område. Du har mulighed for at gennemse hvad du har lavet og redigeringsværktøjet giver nogle hjælpsomme forslag og advarsler, hvis der er noget som ikke ser helt korrekt ud.\n\nHvis alting ser fint nok ud, så kan du skrive en lille kort kommentar om de ændringer du lige har lavet og klik så \"Gem\" igen for at sende ændringerne til [OpenStreetMap.org](http://www.openstreetmap.org/). Dine ændringer vil nu være synlige og tilgængelige for alle. Der igen kan bygge videre og forbedre data.\n\nHvis du ikke kan afslutte dine ændringer lige med det samme, så kan du forlade redigeringsværktøjet og komme igen senere (NB kræver du bruger samme browser og computer igen). Redigeringsværktøjet vil nu gendanne alt dit arbejde igen.\n",
+        "gps": "# GPS\n\nGPS data er den mest pålidelige kilde for OpenStreetMap projektet. Dette \nredigeringsværktøj understøtter `.gpx` filer som er gemt på din egen computer. Du\nkan indsamle GPS filer med smartphone applikationer eller med GPS hardware.\n\nMere information om indsamling af GPS data læs\n[guiden . indsamling med GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFor at bruge en GPX fil - så træk og slip GPX filen ind på redigeringsværktøjet.\n Hvis filen bliver indlæst, så vil du se den som en lys grøn linje på kortet.\nKlik på 'Baggrundsindstillinger' menuen i venstre side for at aktivere, deaktivere eller \nfor at zoome ind til dette GPX lag.\n\nGPx-filen er ikke direkte oploadet til OpenStreetMap. Den bedste måde at bruge GPX-filen på er,\nat indtegne ovenpå denne.\n",
+        "imagery": "# Billedelag\n\nBilledelag er en vigtig resource ved kortlægning. En kombination af \nluftfotos, satellitfoto og frie-indsamlet kilder er tilgængelig i \nværktøjet under \"Baggrundsindstillinger\" menuen i venstre side.\n\nSom standard bruges [Bing Maps](http://www.bing.com/maps/) satellitlaget, men \nzoomer du hen til nye geografiske områder vil andre billedlag være tilgængelige.\nNogle lande som fx USA, Frankrig og Danmark vil have andre billedlag i høj kvalitet for\nnogle områder.\n\nBilledlag kan nogle gange være skævt forskudt pga fejl fra leverandørens side.\nHvis du ser en masse veje er forskudt i forhold til billedlaget nedenunder, så skal du\nikke begynde at justere disse veje for at tilpasse dem til billedlaget. I stedet for skal\ndu justere billedlaget, det gør du ved at klikke på \"Justerer\" knappen nede i \"Baggrundsindstillinger\".\n",
+        "addresses": "#Adresser⏎\n⏎\nAdresser er noget af det mest brugbare til kortet.⏎\n⏎\nSelvom adresser ofte er repræsenteret som dele af veje i OpenStreetMap⏎\nDisse er lagret som attributter for bygninger og steder langs veje.⏎\n⏎\nDu kan også tilføje adresseinformation til steder som er kortlagt som bygningspolygoner⏎\nligesom bygninger der er markeret som enkeltpunkter. Den optimale kilde til⏎\nadresser⏎\ner indsamling på selve stedet eller personlig kendkskab - som med ethvert andet⏎\ngeografisk objekt, så er kopiering fra kommercielle kilder som fx Google Maps\nstrengt⏎\nforbudt.⏎\n\n\n",
+        "buildings": "# Bygninger\n\nOpenStreetMap er verdens største database af bygninger. Du kan skabe\nendnu flere selv og gøre databasen endnu bedre.\n\n### Vælg\n\nDu udvælger en bygning ved at klikke et af dens hjørner. Dette vil highlighte\nbygningen og vil samtidigt åbne en lille værktøjsmenu og en sidemenu der viser\nendnu mere information om bygningen.\n\n### Ændring\n\nNogle gange er bygninger placeret forkert eller har forkerte tags.\n\nFor at flytte en bygning, udvælg den og klik så på \"flyt\" værktøjet. Flyt med\ndin mus bygningen og klik så når bygningen er blevet placeret korrekt.\n\nHvis en bygnings form ser forkert ud, så klik og træk i punkterne i omridset\naf bygningen så det passer bedre.\n\n### Ny\n\nDa OpenStreetMap både kan registre bygninger som et enkelt punkt eller som en polygon, så\nkan følgende tommelfingerregel gives. Kortlæg såvidt muligt alle bygninger som polygoner og kortlæg\nså fx butikker, firmaer og andet som opererer fra denne bygning som enkeltpunkter.\n\nStart kortlægning af bygninger ved at klikke på \"Område\" knappen øverst oppe til venstre. Når du\ner færdig med at indtegne bygningen, så klik på \"Retur\" knappen på dit keyboard eller klik på det \nførste punkt i din indtegnede bygning for at lukke.\n\n### Sletning\n\nHvis en bygningen er helt forkert, du kan ikke se den på fx et luftfoto eller satellitfoto eller ideelt selv\nhave set lokalt, at bygningen ikke findes. Så kan du slette bygningen. Men pas meget på med at slette hvad andre\nhar lavet. Luftfoto eller satellitfoto kan fx være meget gamle og der kan være blevet bygget i mellemtiden i området.\n\nDu kan slette en bygning ved at udvælge den - dernæst klik på skraldespands-ikonet\n- alternativt brug \"slet\" tasten på dit keyboard\n"
     },
     "intro": {
         "navigation": {
             "drag": "Grundkortet viser OpenStreetMap data oven på et baggrundkort. Du kan navigere ved at trække og scrolle lige som ethvert andet webkort.**Træk i kortet!**",
             "select": "Kortets objekter kun beskrives på tre måder: ved brug af punkter, linjer eller områder. Alle kortets objekter kan vælges ved at klikke på dem.**Klik på et punkt for at vælge dette.**",
-            "header": "Overskriften viser os kortfunktionstyperne."
+            "header": "Overskriften viser os kortfunktionstyperne.",
+            "pane": "Når et geografisk objekt er valgt, så vil objektredigeringsværktøjet blive vist.  Øverst vil vise objekttypen og det centrale panel i midten vil vise objektets attributter som fx navn og adresse.**Luk objektredigeringsværktøjet med luk-knappen oppe i højre hjørne.** "
         },
         "points": {
             "add": "Punkter kan bruges til at beskrive ting som fx butikker, restauranter og mindesmærker. De markerer en bestemt lokalitet og beskriver hvad der er lige der.**Klik på punktknappen for at tilføje et nyt punkt.**",
@@ -454,6 +460,12 @@
             "historic": {
                 "label": "Type"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Stigning"
             },
@@ -479,6 +491,9 @@
             },
             "levels": {
                 "label": "Niveauer"
+            },
+            "location": {
+                "label": "Lokalitet"
             },
             "man_made": {
                 "label": "Type"
@@ -582,6 +597,9 @@
             "tourism": {
                 "label": "Type"
             },
+            "towertype": {
+                "label": "Tårn type"
+            },
             "tracktype": {
                 "label": "Type"
             },
@@ -618,9 +636,30 @@
                 "name": "Lufthavn",
                 "terms": "fly,lufthavn,lufthavnsområde"
             },
+            "aeroway/apron": {
+                "name": "Apron",
+                "terms": "rampe"
+            },
+            "aeroway/gate": {
+                "name": "Lufthavns gate"
+            },
+            "aeroway/hangar": {
+                "name": "Hangar"
+            },
             "aeroway/helipad": {
                 "name": "Helikopterlandningsplads",
                 "terms": "helikopter,helipad,helikopterlandsplads"
+            },
+            "aeroway/runway": {
+                "name": "Runway",
+                "terms": "Landingsstribe"
+            },
+            "aeroway/taxiway": {
+                "name": "Taxiway"
+            },
+            "aeroway/terminal": {
+                "name": "Lufthavnsterminal",
+                "terms": "lufthavn,lufthavnlandingsbaner"
             },
             "amenity": {
                 "name": "Faciliteter"
@@ -652,6 +691,9 @@
                 "name": "Biograf",
                 "terms": "storskærm,drive-in-bio,film,bio,biograf,biografteater,film"
             },
+            "amenity/college": {
+                "name": "Gymnasie"
+            },
             "amenity/courthouse": {
                 "name": "Domstolsbygning"
             },
@@ -676,6 +718,10 @@
             "amenity/hospital": {
                 "name": "Hospital",
                 "terms": "klinik, skadestue, sundhedsvæsen, hospice, ambulatorium, institution, plejehjem,ældrebolig,sanatorium,kirurgi"
+            },
+            "amenity/kindergarten": {
+                "name": "Børnehave",
+                "terms": "vuggestue,dagpleje,småbørnslegegruppe"
             },
             "amenity/library": {
                 "name": "Bibliotek"
@@ -745,7 +791,8 @@
                 "terms": "medborgerhus,forsamlingshus,rådhus,medborgercenter"
             },
             "amenity/university": {
-                "name": "Universitet"
+                "name": "Universitet",
+                "terms": "gymnasie"
             },
             "amenity/waste_basket": {
                 "name": "Skraldespand",
@@ -888,6 +935,21 @@
             },
             "highway/service": {
                 "name": "Servicevej"
+            },
+            "highway/service/alley": {
+                "name": "Stræde (gade)"
+            },
+            "highway/service/drive-through": {
+                "name": "Gennemkørsel (uden stop)"
+            },
+            "highway/service/driveway": {
+                "name": "Indkørsel"
+            },
+            "highway/service/emergency_access": {
+                "name": "Ambulancevej"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Parkeringsservicevej"
             },
             "highway/steps": {
                 "name": "Trappe",
@@ -1050,14 +1112,26 @@
             "man_made": {
                 "name": "Menneskeskabt"
             },
+            "man_made/breakwater": {
+                "name": "Bølgebryder"
+            },
+            "man_made/cutline": {
+                "name": "Udskæringslinje"
+            },
             "man_made/lighthouse": {
                 "name": "Fyr (navigation)"
             },
             "man_made/pier": {
                 "name": "Bade-gang bro (ved vandet)"
             },
+            "man_made/pipeline": {
+                "name": "Rørledningsnet"
+            },
             "man_made/survey_point": {
                 "name": "Geografisk fixpunkt"
+            },
+            "man_made/tower": {
+                "name": "Tårn"
             },
             "man_made/wastewater_plant": {
                 "name": "Rensningsanlæg ",
@@ -1065,6 +1139,9 @@
             },
             "man_made/water_tower": {
                 "name": "Vandtårn"
+            },
+            "man_made/water_well": {
+                "name": "Brønd"
             },
             "man_made/water_works": {
                 "name": "Vandforsyning"
@@ -1221,7 +1298,8 @@
                 "name": "Butik"
             },
             "shop/alcohol": {
-                "name": "Vinforhandler"
+                "name": "Vinforhandler",
+                "terms": "alkohol "
             },
             "shop/bakery": {
                 "name": "Bager"

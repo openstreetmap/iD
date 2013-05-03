@@ -180,7 +180,6 @@
         "new_tag": "新建标签",
         "view_on_osm": "在on openstreetmap.org上查看",
         "editing_feature": "编辑{feature}",
-        "additional": "附加标签",
         "choose": "选择对象的类型",
         "results": "{search}共有{n}个结果",
         "reference": "在OpenStreetMap Wiki上查看",

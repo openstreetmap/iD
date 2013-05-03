@@ -8,7 +8,7 @@
         "add_line": {
             "title": "Linia",
             "description": "Dodaj autostrady, ulice, ścieżki dla pieszych, kanały i inne linie do mapy.",
-            "tail": "Kliknij mapę, aby zacząć rysować linię, np. drogę, ścieżkę lub trasę."
+            "tail": "Kliknij mapę, aby zacząć rysować drogę, ścieżkę lub trasę."
         },
         "add_point": {
             "title": "Punkt",
@@ -66,7 +66,7 @@
         },
         "orthogonalize": {
             "title": "Ortogonalizuj",
-            "description": "Spraw, aby te kąty były proste.",
+            "description": "Wyprostuj ramiona tych kątów.",
             "key": "Q",
             "annotation": {
                 "line": "Zortogonalizowano kąty linii.",
@@ -157,9 +157,9 @@
     "nothing_to_undo": "Nie ma nic do cofnięcia.",
     "nothing_to_redo": "Nie ma nic do powtórzenia.",
     "just_edited": "Właśnie wprowadziłeś zmiany w OpenStreetMap!",
-    "browser_notice": "Ten edytor działa w Firefox, Chrome, Safari, Opera, and Internet Explorer 9 i wyższych. Zaktualizuj swoją przeglądarkę lub użyj Potlatch 2, aby edytować mapę.",
+    "browser_notice": "Ten edytor działa w Firefox, Chrome, Safari, Opera oraz Internet Explorer 9 i wyżej. Zaktualizuj swoją przeglądarkę lub użyj Potlatch 2, aby edytować mapę.",
     "view_on_osm": "Pokaż na OSM",
-    "zoom_in_edit": "zwiększ skalę, aby edytować mapę",
+    "zoom_in_edit": "powiększ, aby edytować mapę",
     "logout": "wyloguj",
     "loading_auth": "Łączenie z OpenStreetMap...",
     "report_a_bug": "zgłoś błąd",
@@ -199,7 +199,7 @@
         "new_tag": "Nowy tag",
         "view_on_osm": "Zobacz na openstreetmap.org",
         "editing_feature": "Edytowanie {feature}",
-        "additional": "Dodatkowe tagi",
+        "all_tags": "Wszystkie tagi",
         "choose": "Wybierz rodzaj obiektu",
         "results": "{n} wyników dla {search}",
         "reference": "Zobacz na OpenStreetMap Wiki",
@@ -462,6 +462,12 @@
             "historic": {
                 "label": "Typ"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Nachylenie"
             },
@@ -487,6 +493,9 @@
             },
             "levels": {
                 "label": "Poziomy"
+            },
+            "location": {
+                "label": "Lokalizacja"
             },
             "man_made": {
                 "label": "Typ"
@@ -590,6 +599,9 @@
             "tourism": {
                 "label": "Typ"
             },
+            "towertype": {
+                "label": "Typ wieży"
+            },
             "tracktype": {
                 "label": "Typ"
             },
@@ -626,9 +638,30 @@
                 "name": "Lotnisko",
                 "terms": "samolot,port lotniczy,lotnisko"
             },
+            "aeroway/apron": {
+                "name": "Płyta postojowa",
+                "terms": "rampa"
+            },
+            "aeroway/gate": {
+                "name": "Brama lotniska"
+            },
+            "aeroway/hangar": {
+                "name": "Hangar"
+            },
             "aeroway/helipad": {
                 "name": "Lądowisko dla helikopterów",
                 "terms": "helikopter,lądowisko,śmigłowiec"
+            },
+            "aeroway/runway": {
+                "name": "Droga startowa",
+                "terms": "pas lądowania"
+            },
+            "aeroway/taxiway": {
+                "name": "Droga kołowania"
+            },
+            "aeroway/terminal": {
+                "name": "Terminal pasażerski",
+                "terms": "samolot,port lotniczy"
             },
             "amenity": {
                 "name": "Udogodnienie"
@@ -657,7 +690,11 @@
                 "name": "Myjnia samochodowa"
             },
             "amenity/cinema": {
-                "name": "Kino"
+                "name": "Kino",
+                "terms": "duży ekran,drive-in,film,ruchomy obraz,pokaz zdjęć,zdjęcia,pokaz,silver screen"
+            },
+            "amenity/college": {
+                "name": "College"
             },
             "amenity/courthouse": {
                 "name": "Sąd"
@@ -681,7 +718,12 @@
                 "name": "Cmentarz"
             },
             "amenity/hospital": {
-                "name": "Szpital"
+                "name": "Szpital",
+                "terms": "przychodnia,klinika,pomoc,służba zdrowia,hospicjum,ambulatorium,instytucja,dom opieki,sanatorium,chirurgia,oddział"
+            },
+            "amenity/kindergarten": {
+                "name": "Przedszkole",
+                "terms": "zerówka,żłobek,opieka nad dzieckiem"
             },
             "amenity/library": {
                 "name": "Biblioteka"
@@ -700,7 +742,8 @@
                 "terms": "opactwo,bazylika,katedra,prezbiterium,kaplica,kościół,owczarnia,dom Boży,dom modlitwy,tum,misja,meczet,parafia,sanktuarium,świątynia,synagoga,tabernakulum"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kościół"
+                "name": "Kościół",
+                "terms": "chrześcijaństwo,opactwo,bazylika,katedra,prezbiterium,kaplica,dom Boży,dom modlitwy,misja,oratorium,parafia,sanktuarium,świątynia,tabernakulum"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagoga",
@@ -711,7 +754,8 @@
                 "terms": "Meczet"
             },
             "amenity/police": {
-                "name": "Policja"
+                "name": "Policja",
+                "terms": "odznaka,niebiescy,gliniarz,detektyw,glina,żandarm,smerfy,psy,prawo,egzekucja prawa,funkcjonariusze"
             },
             "amenity/post_box": {
                 "name": "Skrzynka pocztowa",
@@ -724,7 +768,8 @@
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Restauracja"
+                "name": "Restauracja",
+                "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria"
             },
             "amenity/school": {
                 "name": "Szkoła",
@@ -744,10 +789,12 @@
                 "name": "Toalety"
             },
             "amenity/townhall": {
-                "name": "Ratusz"
+                "name": "Ratusz",
+                "terms": "władze miasta,ratusz,urząd miasta,urząd gminy,starostwo"
             },
             "amenity/university": {
-                "name": "Uniwersytet"
+                "name": "Uniwersytet",
+                "terms": "college,uniwersytet"
             },
             "amenity/waste_basket": {
                 "name": "Kosz na śmieci",
@@ -785,6 +832,9 @@
             },
             "barrier/hedge": {
                 "name": "Żywopłot"
+            },
+            "barrier/kissing_gate": {
+                "name": "Kissing Gate"
             },
             "barrier/lift_gate": {
                 "name": "Szlaban"
@@ -826,7 +876,8 @@
                 "name": "Droga"
             },
             "highway/bridleway": {
-                "name": "Ścieżka do jazdy konnej"
+                "name": "Ścieżka do jazdy konnej",
+                "terms": "jazda konna,szlak jeździecki,szlak konny"
             },
             "highway/bus_stop": {
                 "name": "Przystanek autobusowy"
@@ -839,7 +890,8 @@
                 "name": "Ścieżka rowerowa"
             },
             "highway/footway": {
-                "name": "Ścieżka dla pieszych"
+                "name": "Ścieżka dla pieszych",
+                "terms": "pobocze,bulwar,ścieżka,deptak,szosa,spacer"
             },
             "highway/living_street": {
                 "name": "Strefa zamieszkania"
@@ -854,7 +906,8 @@
                 "name": "Węzeł autostradowy"
             },
             "highway/motorway_link": {
-                "name": "Autostrada - wjazd/zjazd"
+                "name": "Autostrada - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/path": {
                 "name": "Ścieżka"
@@ -866,7 +919,8 @@
                 "name": "Droga krajowa"
             },
             "highway/primary_link": {
-                "name": "Droga krajowa - wjazd/zjazd"
+                "name": "Droga krajowa - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/residential": {
                 "name": "Droga lokalna"
@@ -878,10 +932,26 @@
                 "name": "Droga wojewódzka"
             },
             "highway/secondary_link": {
-                "name": "Droga wojewódzka - wjazd/zjazd"
+                "name": "Droga wojewódzka - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/service": {
                 "name": "Droga serwisowa"
+            },
+            "highway/service/alley": {
+                "name": "Alejka"
+            },
+            "highway/service/drive-through": {
+                "name": "Drive-through"
+            },
+            "highway/service/driveway": {
+                "name": "Podjazd"
+            },
+            "highway/service/emergency_access": {
+                "name": "Dojazd dla służb ratowniczych"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Uliczka parkingowa"
             },
             "highway/steps": {
                 "name": "Schody",
@@ -891,19 +961,22 @@
                 "name": "Droga powiatowa"
             },
             "highway/tertiary_link": {
-                "name": "Droga powiatowa - wjazd/zjazd"
+                "name": "Droga powiatowa - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/track": {
                 "name": "Droga gruntowa"
             },
             "highway/traffic_signals": {
-                "name": "Sygnalizacja świetlna"
+                "name": "Sygnalizacja świetlna",
+                "terms": "światła,sygnalizacja świetlna,sygnalizator"
             },
             "highway/trunk": {
                 "name": "Droga ekspresowa"
             },
             "highway/trunk_link": {
-                "name": "Droga ekspresowa - zjazd/wjazd"
+                "name": "Droga ekspresowa - zjazd/wjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/turning_circle": {
                 "name": "Miejsce do zawracania"
@@ -1002,7 +1075,8 @@
                 "name": "Przystań"
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "las,ogród,trawa,zieleń,trawnik,łąka,miejsce,plac,teren rekreacyjny"
             },
             "leisure/pitch": {
                 "name": "Boisko"
@@ -1040,20 +1114,36 @@
             "man_made": {
                 "name": "Obiekty sztuczne"
             },
+            "man_made/breakwater": {
+                "name": "Falochron"
+            },
+            "man_made/cutline": {
+                "name": "Wycinka"
+            },
             "man_made/lighthouse": {
                 "name": "Latarnia morska"
             },
             "man_made/pier": {
                 "name": "Molo"
             },
+            "man_made/pipeline": {
+                "name": "Rurociąg"
+            },
             "man_made/survey_point": {
                 "name": "Punkt geodezyjny"
             },
+            "man_made/tower": {
+                "name": "Wieża"
+            },
             "man_made/wastewater_plant": {
-                "name": "Oczyszczalnia ścieków"
+                "name": "Oczyszczalnia ścieków",
+                "terms": "oczyszczalnia ścieków,stacja uzdatniania wody,rekultywacja gleb"
             },
             "man_made/water_tower": {
                 "name": "Wieża ciśnień"
+            },
+            "man_made/water_well": {
+                "name": "Studnia"
             },
             "man_made/water_works": {
                 "name": "Filtracja wody"
@@ -1084,7 +1174,8 @@
                 "name": "Wrzosowisko"
             },
             "natural/peak": {
-                "name": "Szczyt"
+                "name": "Szczyt",
+                "terms": "iglica,alpy,herb,korona,wzgórze,góry,szczyt,wierzchołek"
             },
             "natural/scrub": {
                 "name": "Zarośla"
@@ -1134,7 +1225,8 @@
                 "name": "Wioska"
             },
             "place/island": {
-                "name": "Wyspa"
+                "name": "Wyspa",
+                "terms": "archipelag,atol,wyspa,wysepka,rafa"
             },
             "place/isolated_dwelling": {
                 "name": "Pojedyncze zabudowania"
@@ -1179,7 +1271,8 @@
                 "name": "Nieużywany tor"
             },
             "railway/level_crossing": {
-                "name": "Rogatka"
+                "name": "Rogatka",
+                "terms": "przejście,przejście kolejowe,przejazd kolejowy,droga przez tory,rozjazd"
             },
             "railway/monorail": {
                 "name": "Kolej jednoszynowa"
@@ -1207,7 +1300,8 @@
                 "name": "Sklep"
             },
             "shop/alcohol": {
-                "name": "Sklep monopolowy"
+                "name": "Sklep monopolowy",
+                "terms": "alkohol"
             },
             "shop/bakery": {
                 "name": "Piekarnia"
@@ -1339,7 +1433,8 @@
                 "name": "Sklep papierniczy"
             },
             "shop/supermarket": {
-                "name": "Supermarket"
+                "name": "Supermarket",
+                "terms": "bazar,butik,dyskont,hipermarket,galeria handlowa,pchli targ,centrum handlowe,targowisko,outlet,sklep,stoisko,biedronka"
             },
             "shop/toys": {
                 "name": "Sklep z zabawkami"
@@ -1381,7 +1476,8 @@
                 "name": "Drewniana chata"
             },
             "tourism/guest_house": {
-                "name": "Domek gościnny"
+                "name": "Domek gościnny",
+                "terms": "gospoda,zajazd,hotel"
             },
             "tourism/hostel": {
                 "name": "Schronisko"
@@ -1396,7 +1492,8 @@
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Muzeum"
+                "name": "Muzeum",
+                "terms": "wystawa,galeria,hall,instytucja,biblioteka,menażeria"
             },
             "tourism/picnic_site": {
                 "name": "Miejsce na piknik"
@@ -1426,13 +1523,15 @@
                 "name": "Odpływ"
             },
             "waterway/river": {
-                "name": "Rzeka"
+                "name": "Rzeka",
+                "terms": "odpływ,potok,ujście,strumyk,dopływ,ciek wodny"
             },
             "waterway/riverbank": {
                 "name": "Brzeg rzeki"
             },
             "waterway/stream": {
-                "name": "Strumień"
+                "name": "Strumień",
+                "terms": "potok,odpływ,strumień,prąd,dryf,zalew,wezbranie,strumyk,fala,ciek wodny"
             },
             "waterway/weir": {
                 "name": "Jaz"
