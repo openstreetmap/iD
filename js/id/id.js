@@ -1,6 +1,6 @@
 window.iD = function () {
-    locale.en = iD.data.en;
-    locale.current('en');
+    window.locale.en = iD.data.en;
+    window.locale.current('en');
 
     var context = {},
         storage;
@@ -22,7 +22,13 @@ window.iD = function () {
         container,
         ui = iD.ui(context),
         map = iD.Map(context),
-        connection = iD.Connection();
+        connection = iD.Connection(),
+        locale = iD.detect().locale,
+        localePath;
+
+    if (locale && iD.data.locales.indexOf(locale) === -1) {
+        locale = locale.split('-')[0];
+    }
 
     connection.on('load.context', function loadContext(err, result) {
         history.merge(result);
@@ -33,20 +39,21 @@ window.iD = function () {
         return context;
     };
 
+    context.locale = function(_, path) {
+        locale = _;
+        localePath = path;
+        return context;
+    };
+
     context.ui = function() {
         return function(container) {
             context.container(container);
 
-            var detectedLocale = iD.detect().locale;
-
-            if (detectedLocale && iD.data.locales.indexOf(detectedLocale) === -1) {
-                detectedLocale = detectedLocale.split('-')[0];
-            }
-
-            if (detectedLocale && detectedLocale !== 'en' && iD.data.locales.indexOf(detectedLocale) !== -1) {
-                d3.json(context.assetPath() + 'locales/' + detectedLocale + '.json', function(err, result) {
-                    locale[detectedLocale] = result;
-                    locale.current(detectedLocale);
+            if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
+                localePath = localePath || context.assetPath() + 'locales/' + locale + '.json';
+                d3.json(localePath, function(err, result) {
+                    window.locale[locale] = result;
+                    window.locale.current(locale);
                     container.call(ui);
                 });
             } else {
