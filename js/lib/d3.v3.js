@@ -2613,7 +2613,7 @@ function d3_geo_clipView(x0, y0, x1, y1) {
             }
             listener.point(b[0], b[1]);
             if (!v) listener.lineEnd();
-          } else {
+          } else if (v) {
             listener.lineStart();
             listener.point(x, y);
           }
