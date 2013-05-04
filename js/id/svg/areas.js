@@ -51,15 +51,21 @@ iD.svg.Areas = function(projection) {
 
         areas = d3.values(areas);
         areas.sort(function(a, b) { return b.area - a.area; });
+        areas = _.pluck(areas, 'entity');
 
-        function drawPaths(group, areas, filter, klass, closeWay) {
+        var strokes = areas.filter(function(area) {
+            return area.type === 'way';
+        });
+
+        function drawPaths(areas, klass, closeWay) {
             var tagClasses = iD.svg.TagClasses();
 
             if (klass === 'stroke') {
                 tagClasses.tags(iD.svg.MultipolygonMemberTags(graph));
             }
 
-            var paths = group.selectAll('path.area')
+            var paths = surface.select('.layer-' + klass)
+                .selectAll('path.area')
                 .filter(filter)
                 .data(areas, iD.Entity.key);
 
@@ -81,18 +87,9 @@ iD.svg.Areas = function(projection) {
             return paths;
         }
 
-        areas = _.pluck(areas, 'entity');
+        drawPaths(strokes, 'shadow');
+        drawPaths(strokes, 'stroke');
 
-        var strokes = areas.filter(function(area) {
-            return area.type === 'way';
-        });
-
-        var shadow = surface.select('.layer-shadow'),
-            fill   = surface.select('.layer-fill'),
-            stroke = surface.select('.layer-stroke');
-
-        drawPaths(shadow, strokes, filter, 'shadow');
-        drawPaths(fill, areas, filter, 'fill', true);
-        drawPaths(stroke, strokes, filter, 'stroke');
+        drawPaths(areas, 'fill', true);
     };
 };
