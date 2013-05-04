@@ -25,7 +25,8 @@ iD.Map = function(context) {
         midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(roundedProjection, context),
         tail = iD.ui.Tail(),
-        supersurface, surface;
+        supersurface, surface,
+        mouse;
 
     function map(selection) {
         context.history()
@@ -79,6 +80,7 @@ iD.Map = function(context) {
         map.surface = surface;
 
         labels.supersurface(supersurface);
+        mouse = iD.util.fastMouse(supersurface.node());
 
         supersurface
             .call(tail);
@@ -244,13 +246,14 @@ iD.Map = function(context) {
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
+    map.mousePosition = function() {
+        var e = d3.event, s;
+        while (s = e.sourceEvent) e = s;
+        return mouse(e);
+    };
+
     map.mouseCoordinates = function() {
-        try {
-            return projection.invert(d3.mouse(surface.node()));
-        } catch(e) {
-            // when called with hidden elements, d3.mouse() will throw
-            return [NaN, NaN];
-        }
+        return projection.invert(map.mousePosition());
     };
 
     map.dblclickEnable = function(_) {

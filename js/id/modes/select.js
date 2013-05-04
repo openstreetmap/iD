@@ -31,7 +31,7 @@ iD.modes.Select = function(context, selection) {
         if (entity && entity.type === 'node') {
             radialMenu.center(context.projection(entity.loc));
         } else {
-            radialMenu.center(d3.mouse(context.surface().node()));
+            radialMenu.center(context.map().mousePosition());
         }
     }
 
