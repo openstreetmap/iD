@@ -33,38 +33,8 @@ iD.svg.Lines = function(projection) {
     }
 
     return function drawLines(surface, graph, entities, filter) {
-        function drawPaths(group, lines, filter, klass, lineString) {
-            lines = lines.filter(function(line) {
-                return lineString(line);
-            });
-
-            var tagClasses = iD.svg.TagClasses();
-
-            if (klass === 'stroke') {
-                tagClasses.tags(iD.svg.MultipolygonMemberTags(graph));
-            }
-
-            var paths = group.selectAll('path.line')
-                .filter(filter)
-                .data(lines, iD.Entity.key);
-
-            paths.enter()
-                .append('path')
-                .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; });
-
-            paths
-                .order()
-                .attr('d', lineString)
-                .call(tagClasses)
-                .call(iD.svg.MemberClasses(graph));
-
-            paths.exit()
-                .remove();
-
-            return paths;
-        }
-
-        var lines = [];
+        var lines = [],
+            path = iD.svg.Path(projection, graph);
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
@@ -76,25 +46,47 @@ iD.svg.Lines = function(projection) {
             }
         }
 
+        lines = lines.filter(path);
         lines.sort(waystack);
 
-        var lineString = iD.svg.LineString(projection, graph);
+        function drawPaths(klass) {
+            var tagClasses = iD.svg.TagClasses();
 
-        var shadow = surface.select('.layer-shadow'),
-            casing = surface.select('.layer-casing'),
-            stroke = surface.select('.layer-stroke'),
-            defs   = surface.select('defs'),
-            oneway = surface.select('.layer-oneway');
+            if (klass === 'stroke') {
+                tagClasses.tags(iD.svg.MultipolygonMemberTags(graph));
+            }
 
-        drawPaths(shadow, lines, filter, 'shadow', lineString);
-        drawPaths(casing, lines, filter, 'casing', lineString);
-        drawPaths(stroke, lines, filter, 'stroke', lineString);
+            var paths = surface.select('.layer-' + klass)
+                .selectAll('path.line')
+                .filter(filter)
+                .data(lines, iD.Entity.key);
 
-        var segments = _.flatten(lines
+            paths.enter()
+                .append('path')
+                .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; });
+
+            paths
+                .order()
+                .attr('d', path)
+                .call(tagClasses)
+                .call(iD.svg.MemberClasses(graph));
+
+            paths.exit()
+                .remove();
+        }
+
+        drawPaths('shadow');
+        drawPaths('casing');
+        drawPaths('stroke');
+
+        var segments = _(lines)
             .filter(function(d) { return d.isOneWay(); })
-            .map(iD.svg.OneWaySegments(projection, graph, 35)));
+            .map(iD.svg.OneWaySegments(projection, graph, 35))
+            .flatten()
+            .valueOf();
 
-        var oneways = oneway.selectAll('path.oneway')
+        var oneways = surface.select('.layer-oneway')
+            .selectAll('path.oneway')
             .filter(filter)
             .data(segments, function(d) { return [d.id, d.index]; });
 

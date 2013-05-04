@@ -13,7 +13,7 @@ iD.svg = {
         };
     },
 
-    LineString: function(projection, graph) {
+    Path: function(projection, graph) {
         var cache = {},
             path = d3.geo.path().projection(projection);
 
