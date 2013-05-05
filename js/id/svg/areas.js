@@ -28,7 +28,7 @@ iD.svg.Areas = function(projection) {
     }
 
     return function drawAreas(surface, graph, entities, filter) {
-        var path = d3.geo.path().projection(projection),
+        var path = iD.svg.Path(projection, graph),
             areas = {},
             multipolygon;
 
@@ -39,25 +39,25 @@ iD.svg.Areas = function(projection) {
             if (multipolygon = iD.geo.isSimpleMultipolygonOuterMember(entity, graph)) {
                 areas[multipolygon.id] = {
                     entity: multipolygon.mergeTags(entity.tags),
-                    area: Math.abs(path.area(entity.asGeoJSON(graph, true)))
+                    area: Math.abs(path.area(entity))
                 };
             } else if (!areas[entity.id]) {
                 areas[entity.id] = {
                     entity: entity,
-                    area: Math.abs(path.area(entity.asGeoJSON(graph, true)))
+                    area: Math.abs(path.area(entity))
                 };
             }
         }
 
-        areas = d3.values(areas);
-        areas.sort(function(a, b) { return b.area - a.area; });
+        areas = d3.values(areas).filter(function hasPath(a) { return path(a.entity); });
+        areas.sort(function areaSort(a, b) { return b.area - a.area; });
         areas = _.pluck(areas, 'entity');
 
-        var strokes = areas.filter(function(area) {
+        var strokes = areas.filter(function isWay(area) {
             return area.type === 'way';
         });
 
-        function drawPaths(areas, klass, closeWay) {
+        function drawPaths(areas, klass, path) {
             var paths = surface.select('.layer-' + klass)
                 .selectAll('path.area')
                 .filter(filter)
@@ -78,7 +78,7 @@ iD.svg.Areas = function(projection) {
 
             paths
                 .order()
-                .attr('d', function(entity) { return path(entity.asGeoJSON(graph, closeWay)); });
+                .attr('d', path);
 
             if (klass === 'fill') paths.call(setPattern);
 
@@ -88,9 +88,8 @@ iD.svg.Areas = function(projection) {
             return paths;
         }
 
-        drawPaths(strokes, 'shadow');
-        drawPaths(strokes, 'stroke');
-
-        drawPaths(areas, 'fill', true);
+        drawPaths(strokes, 'shadow', path);
+        drawPaths(strokes, 'stroke', path);
+        drawPaths(areas, 'fill', path);
     };
 };

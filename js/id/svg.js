@@ -17,10 +17,29 @@ iD.svg = {
         var cache = {},
             path = d3.geo.path().projection(projection);
 
-        return function(entity) {
+        function result(entity) {
             if (entity.id in cache) return cache[entity.id];
-            return cache[entity.id] = path(entity.asGeoJSON(graph));
+
+            var buffer = '';
+
+            path.context({
+                beginPath: function() {},
+                moveTo: function(x, y) { buffer += 'M' + Math.floor(x) + ',' + Math.floor(y); },
+                lineTo: function(x, y) { buffer += 'L' + Math.floor(x) + ',' + Math.floor(y); },
+                arc: function() {},
+                closePath: function() { buffer += 'Z'; }
+            });
+
+            path(entity.asGeoJSON(graph));
+
+            return cache[entity.id] = buffer;
+        }
+
+        result.area = function(entity) {
+            return path.area(entity.asGeoJSON(graph, true));
         };
+
+        return result;
     },
 
     OneWaySegments: function(projection, graph, dt) {

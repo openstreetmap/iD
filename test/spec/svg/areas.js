@@ -9,20 +9,30 @@ describe("iD.svg.Areas", function () {
     });
 
     it("adds way and area classes", function () {
-        var area = iD.Way({tags: {area: 'yes'}}),
-            graph = iD.Graph([area]);
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [0, 0]}),
+                'b': iD.Node({id: 'b', loc: [1, 0]}),
+                'c': iD.Node({id: 'c', loc: [1, 1]}),
+                'd': iD.Node({id: 'd', loc: [0, 1]}),
+                'w': iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
+            });
 
-        surface.call(iD.svg.Areas(projection), graph, [area], filter);
+        surface.call(iD.svg.Areas(projection), graph, [graph.entity('w')], filter);
 
         expect(surface.select('path.way')).to.be.classed('way');
         expect(surface.select('path.area')).to.be.classed('area');
     });
 
     it("adds tag classes", function () {
-        var area = iD.Way({tags: {area: 'yes', building: 'yes'}}),
-            graph = iD.Graph([area]);
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [0, 0]}),
+                'b': iD.Node({id: 'b', loc: [1, 0]}),
+                'c': iD.Node({id: 'c', loc: [1, 1]}),
+                'd': iD.Node({id: 'd', loc: [0, 1]}),
+                'w': iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
+            });
 
-        surface.call(iD.svg.Areas(projection), graph, [area], filter);
+        surface.call(iD.svg.Areas(projection), graph, [graph.entity('w')], filter);
 
         expect(surface.select('.area')).to.be.classed('tag-building');
         expect(surface.select('.area')).to.be.classed('tag-building-yes');
@@ -47,8 +57,8 @@ describe("iD.svg.Areas", function () {
                 'b': iD.Node({id: 'b', loc: [1, 0]}),
                 'c': iD.Node({id: 'c', loc: [1, 1]}),
                 'd': iD.Node({id: 'd', loc: [0, 1]}),
-                's': iD.Way({area: true, tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
-                'l': iD.Way({area: true, tags: {landuse: 'park'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+                's': iD.Way({id: 's', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
+                'l': iD.Way({id: 'l', tags: {landuse: 'park'}, nodes: ['a', 'b', 'c', 'd', 'a']})
             }),
             areas = [graph.entity('s'), graph.entity('l')];
 
@@ -91,7 +101,7 @@ describe("iD.svg.Areas", function () {
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
             w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
-            r = iD.Relation({members: [{id: w.id}], tags: {type: 'multipolygon', natural: 'wood'}}),
+            r = iD.Relation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon', natural: 'wood'}}),
             graph = iD.Graph([a, b, c, w, r]);
 
         surface.call(iD.svg.Areas(projection), graph, [w], filter);
@@ -105,7 +115,7 @@ describe("iD.svg.Areas", function () {
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
             w = iD.Way({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]}),
-            r = iD.Relation({members: [{id: w.id}], tags: {type: 'multipolygon'}}),
+            r = iD.Relation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}}),
             graph = iD.Graph([a, b, c, w, r]);
 
         surface.call(iD.svg.Areas(projection), graph, [w, r], filter);
@@ -120,7 +130,7 @@ describe("iD.svg.Areas", function () {
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
             w = iD.Way({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]}),
-            r = iD.Relation({members: [{id: w.id}], tags: {type: 'multipolygon'}}),
+            r = iD.Relation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}}),
             graph = iD.Graph([a, b, c, w, r]);
 
         surface.call(iD.svg.Areas(projection), graph, [w, r], filter);
