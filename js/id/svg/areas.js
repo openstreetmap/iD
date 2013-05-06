@@ -58,25 +58,27 @@ iD.svg.Areas = function(projection) {
         });
 
         function drawPaths(areas, klass, closeWay) {
-            var tagClasses = iD.svg.TagClasses();
-
-            if (klass === 'stroke') {
-                tagClasses.tags(iD.svg.MultipolygonMemberTags(graph));
-            }
-
             var paths = surface.select('.layer-' + klass)
                 .selectAll('path.area')
                 .filter(filter)
                 .data(areas, iD.Entity.key);
 
-            paths.enter()
+            var enter = paths.enter()
                 .append('path')
                 .attr('class', function(d) { return d.type + ' area ' + klass + ' ' + d.id; });
+
+            // Optimization: call simple TagClasses only on enter selection. This
+            // works because iD.Entity.key is defined to include the entity v attribute.
+            if (klass !== 'stroke') {
+                enter.call(iD.svg.TagClasses());
+            } else {
+                paths.call(iD.svg.TagClasses()
+                    .tags(iD.svg.MultipolygonMemberTags(graph)));
+            }
 
             paths
                 .order()
                 .attr('d', function(entity) { return path(entity.asGeoJSON(graph, closeWay)); })
-                .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
 
             if (klass === 'fill') paths.call(setPattern);

@@ -50,25 +50,27 @@ iD.svg.Lines = function(projection) {
         lines.sort(waystack);
 
         function drawPaths(klass) {
-            var tagClasses = iD.svg.TagClasses();
-
-            if (klass === 'stroke') {
-                tagClasses.tags(iD.svg.MultipolygonMemberTags(graph));
-            }
-
             var paths = surface.select('.layer-' + klass)
                 .selectAll('path.line')
                 .filter(filter)
                 .data(lines, iD.Entity.key);
 
-            paths.enter()
+            var enter = paths.enter()
                 .append('path')
                 .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; });
+
+            // Optimization: call simple TagClasses only on enter selection. This
+            // works because iD.Entity.key is defined to include the entity v attribute.
+            if (klass !== 'stroke') {
+                enter.call(iD.svg.TagClasses());
+            } else {
+                paths.call(iD.svg.TagClasses()
+                    .tags(iD.svg.MultipolygonMemberTags(graph)));
+            }
 
             paths
                 .order()
                 .attr('d', path)
-                .call(tagClasses)
                 .call(iD.svg.MemberClasses(graph));
 
             paths.exit()

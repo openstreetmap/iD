@@ -9,9 +9,13 @@
 iD.Difference = function(base, head) {
     var changes = {}, length = 0;
 
+    function changed(h, b) {
+        return !_.isEqual(_.omit(h, 'v'), _.omit(b, 'v'));
+    }
+
     _.each(head.entities, function(h, id) {
         var b = base.entities[id];
-        if (!_.isEqual(h, b)) {
+        if (changed(h, b)) {
             changes[id] = {base: b, head: h};
             length++;
         }
@@ -19,7 +23,7 @@ iD.Difference = function(base, head) {
 
     _.each(base.entities, function(b, id) {
         var h = head.entities[id];
-        if (!changes[id] && !_.isEqual(h, b)) {
+        if (!changes[id] && changed(h, b)) {
             changes[id] = {base: b, head: h};
             length++;
         }

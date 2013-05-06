@@ -31,7 +31,7 @@ iD.Entity.id.type = function(id) {
 
 // A function suitable for use as the second argument to d3.selection#data().
 iD.Entity.key = function(entity) {
-    return entity.id;
+    return entity.id + ',' + entity.v;
 };
 
 iD.Entity.prototype = {
@@ -72,7 +72,7 @@ iD.Entity.prototype = {
     },
 
     update: function(attrs) {
-        return iD.Entity(this, attrs);
+        return iD.Entity(this, attrs, {v: 1 + (this.v || 0)});
     },
 
     mergeTags: function(tags) {

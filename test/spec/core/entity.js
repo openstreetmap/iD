@@ -61,6 +61,14 @@ describe('iD.Entity', function () {
         it("doesn't copy prototype properties", function () {
             expect(iD.Entity().update({})).not.to.have.ownProperty('update');
         });
+
+        it("sets v to 1 if previously undefined", function() {
+            expect(iD.Entity().update({}).v).to.equal(1);
+        });
+
+        it("increments v", function() {
+            expect(iD.Entity({v: 1}).update({}).v).to.equal(2);
+        });
     });
 
     describe("#mergeTags", function () {
