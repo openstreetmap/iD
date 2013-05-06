@@ -2,6 +2,7 @@
     "icon": "bank",
     "fields": [
         "building",
+        "operator"
     ],
     "geometry": [
         "point",
