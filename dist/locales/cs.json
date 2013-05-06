@@ -462,6 +462,12 @@
             "historic": {
                 "label": "Typ"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Sklon"
             },
@@ -487,6 +493,9 @@
             },
             "levels": {
                 "label": "Počet pater"
+            },
+            "location": {
+                "label": "Umístění"
             },
             "man_made": {
                 "label": "Typ"
@@ -590,6 +599,9 @@
             "tourism": {
                 "label": "Typ"
             },
+            "towertype": {
+                "label": "Typ věže"
+            },
             "tracktype": {
                 "label": "Typ"
             },
@@ -626,9 +638,30 @@
                 "name": "Letiště",
                 "terms": "letadlo,letiště,přistávací dráha"
             },
+            "aeroway/apron": {
+                "name": "Parkovací plocha",
+                "terms": "apron"
+            },
+            "aeroway/gate": {
+                "name": "Letištní gate"
+            },
+            "aeroway/hangar": {
+                "name": "Hangár"
+            },
             "aeroway/helipad": {
                 "name": "Heliport",
                 "terms": "vrtulník,helikoptéra,heliport"
+            },
+            "aeroway/runway": {
+                "name": "Vzletová a přistávací dráha",
+                "terms": "runway,přistávací dráha,vzletová dráha,přistávací plocha"
+            },
+            "aeroway/taxiway": {
+                "name": "Pojezdová dráha"
+            },
+            "aeroway/terminal": {
+                "name": "Letištní terminál",
+                "terms": "letiště,terminál"
             },
             "amenity": {
                 "name": "Zařízení"
@@ -660,6 +693,9 @@
                 "name": "Kino",
                 "terms": "kino,film,cinema,multikino,bio,biograf,kinematograf"
             },
+            "amenity/college": {
+                "name": "College"
+            },
             "amenity/courthouse": {
                 "name": "Soud"
             },
@@ -684,6 +720,10 @@
             "amenity/hospital": {
                 "name": "Nemocnice",
                 "terms": "nemocnice,klinika,špitál,středisko,hospic,LDN,sanatorium,nemocniční,lazaret,ambulance,poliklinika,pohotovost"
+            },
+            "amenity/kindergarten": {
+                "name": "Mateřská školka",
+                "terms": "jesle,školka,kindergarten,předškolní"
             },
             "amenity/library": {
                 "name": "Knihovna"
@@ -753,7 +793,8 @@
                 "terms": "radnice,místní správa,obecní správa,obecní úřad"
             },
             "amenity/university": {
-                "name": "Vysoká škola"
+                "name": "Vysoká škola",
+                "terms": "vysoká škola,univerzita,universita,vyšší odborná škola,VOŠ,college"
             },
             "amenity/waste_basket": {
                 "name": "Odpadkový koš",
@@ -1073,14 +1114,26 @@
             "man_made": {
                 "name": "Umělý objekt"
             },
+            "man_made/breakwater": {
+                "name": "Vlnolam"
+            },
+            "man_made/cutline": {
+                "name": "Průsek"
+            },
             "man_made/lighthouse": {
                 "name": "Maják"
             },
             "man_made/pier": {
                 "name": "Molo"
             },
+            "man_made/pipeline": {
+                "name": "Dálkové potrubí"
+            },
             "man_made/survey_point": {
                 "name": "Triangulační bod"
+            },
+            "man_made/tower": {
+                "name": "Věž"
             },
             "man_made/wastewater_plant": {
                 "name": "Čistička odpadních vod",
@@ -1088,6 +1141,9 @@
             },
             "man_made/water_tower": {
                 "name": "Vodárenská věž"
+            },
+            "man_made/water_well": {
+                "name": "Studna"
             },
             "man_made/water_works": {
                 "name": "Vodárna"

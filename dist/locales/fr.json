@@ -462,6 +462,12 @@
             "historic": {
                 "label": "Type"
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "OACI"
+            },
             "incline": {
                 "label": "Pente"
             },
@@ -487,6 +493,9 @@
             },
             "levels": {
                 "label": "Niveaux"
+            },
+            "location": {
+                "label": "Lieu"
             },
             "man_made": {
                 "label": "Type"
@@ -590,6 +599,9 @@
             "tourism": {
                 "label": "Type"
             },
+            "towertype": {
+                "label": "Type de tour"
+            },
             "tracktype": {
                 "label": "Type"
             },
@@ -626,9 +638,30 @@
                 "name": "Aéroport",
                 "terms": "avion, aéroport, aérodrome, aeroclub"
             },
+            "aeroway/apron": {
+                "name": "Aire de stationnement",
+                "terms": "Aire de stationnement"
+            },
+            "aeroway/gate": {
+                "name": "Porte d'embarquement"
+            },
+            "aeroway/hangar": {
+                "name": "Hangar"
+            },
             "aeroway/helipad": {
                 "name": "Héliport",
                 "terms": "hélicoptère, hélisurface, héliport"
+            },
+            "aeroway/runway": {
+                "name": "Piste d'atterissage",
+                "terms": "Bande d'atterissage"
+            },
+            "aeroway/taxiway": {
+                "name": "Taxiway"
+            },
+            "aeroway/terminal": {
+                "name": "Terminal aéroportuaire",
+                "terms": "aéroport,aérodrome"
             },
             "amenity": {
                 "name": "Équipements"
@@ -684,6 +717,10 @@
             "amenity/hospital": {
                 "name": "Hôpital",
                 "terms": "clinique, CHU, centre hospitalier, hôpital, infirmerie, hospice, cabinet, maison de repos, urgences, soins"
+            },
+            "amenity/kindergarten": {
+                "name": "Ecole maternelle",
+                "terms": "crêche"
             },
             "amenity/library": {
                 "name": "Bibliothèque"
@@ -1073,14 +1110,26 @@
             "man_made": {
                 "name": "Édifices"
             },
+            "man_made/breakwater": {
+                "name": "Brise-lames"
+            },
+            "man_made/cutline": {
+                "name": "Ligne de coupe"
+            },
             "man_made/lighthouse": {
                 "name": "Phare"
             },
             "man_made/pier": {
                 "name": "Jetée"
             },
+            "man_made/pipeline": {
+                "name": "Pipeline"
+            },
             "man_made/survey_point": {
                 "name": "Poteau de triangulation"
+            },
+            "man_made/tower": {
+                "name": "Tour"
             },
             "man_made/wastewater_plant": {
                 "name": "Station d'épuration",
@@ -1088,6 +1137,9 @@
             },
             "man_made/water_tower": {
                 "name": "Château d'eau"
+            },
+            "man_made/water_well": {
+                "name": "Puits"
             },
             "man_made/water_works": {
                 "name": "Station de pompage d'eau potable"

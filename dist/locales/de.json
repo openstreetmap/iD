@@ -615,9 +615,21 @@
                 "name": "Flughafen",
                 "terms": "Flughafen"
             },
+            "aeroway/apron": {
+                "name": "Vorfeld"
+            },
+            "aeroway/hangar": {
+                "name": "Hangar"
+            },
             "aeroway/helipad": {
                 "name": "Hubschrauberlandeplatz",
                 "terms": "Heliport"
+            },
+            "aeroway/runway": {
+                "name": "Piste"
+            },
+            "aeroway/taxiway": {
+                "name": "Rollweg"
             },
             "amenity": {
                 "name": "Einrichtungen"
@@ -673,6 +685,9 @@
             "amenity/hospital": {
                 "name": "Krankenhaus",
                 "terms": "Klinik, Notaufnahme, Gesundheitswesen, Hospiz, Krankenhaus, Pflegeheim, Altersheim, Nervenheilanstalt, Sanatorium, Lazarett, Chirurgie, Krankenstation"
+            },
+            "amenity/kindergarten": {
+                "name": "Kindergaten"
             },
             "amenity/library": {
                 "name": "Bibliothek"
@@ -1045,8 +1060,14 @@
             "man_made/pier": {
                 "name": "Steg"
             },
+            "man_made/pipeline": {
+                "name": "Pipeline"
+            },
             "man_made/survey_point": {
                 "name": "Vermessungspunkt"
+            },
+            "man_made/tower": {
+                "name": "Turm"
             },
             "man_made/wastewater_plant": {
                 "name": "Kläranlage",

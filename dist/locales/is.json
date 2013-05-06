@@ -1,0 +1,229 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Svæði",
+            "description": "Bættu landsvæðum, byggingum, vötnum eða öðrum svæðum á kortið.",
+            "tail": "Smelltu á kortið til að teikna svæði, til dæmis garð, vatn eða byggingu."
+        },
+        "add_line": {
+            "title": "Lína",
+            "description": "Bætu þjóðvegum, götum, göngustígum, síkjum eða öðrum línum við kortið.",
+            "tail": "Smelltu á kortið til að byrja á að teikna línu, svo sem veg, slóða eða leið."
+        },
+        "add_point": {
+            "title": "Punktur",
+            "description": "Bættu veitingastöðum, minnismerkjum, póstkössum eða öðrum punktum við kortið.",
+            "tail": "Smelltu á kortið til að bæta við punkti."
+        },
+        "browse": {
+            "title": "Fletta",
+            "description": "Færðu og þysjaðu kortið."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Bætti punkti við.",
+                "vertex": "Bætti hnút við leið."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Byrjaði á línu.",
+                "area": "Byrjaði á svæði."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Hélt áfram með línu.",
+                "area": "Hélt áfram með svæði."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Hætti við að teikna."
+        },
+        "change_tags": {
+            "annotation": "Breytti merkingum."
+        },
+        "circularize": {
+            "title": "Hringlaga",
+            "key": "O",
+            "annotation": {
+                "line": "Gerði línu að hring.",
+                "area": "Gerði svæði að hring."
+            }
+        },
+        "orthogonalize": {
+            "title": "Rétta horn af",
+            "description": "Rétta þessi horn.",
+            "key": "Q",
+            "annotation": {
+                "line": "Réttaði horn á línu.",
+                "area": "Réttaði horn svæðis."
+            }
+        },
+        "delete": {
+            "title": "Eyða",
+            "description": "Fjarlægja af korti.",
+            "annotation": {
+                "point": "Eyddi punkti.",
+                "vertex": "Eyddi hnút af leið.",
+                "line": "Eyddi línu.",
+                "area": "Eyddi svæði.",
+                "relation": "Eyddi tengslum.",
+                "multiple": "Eyddi {n} hlutum."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Tengdi leið við punkt.",
+                "vertex": "Tengdi leið við aðra leið.",
+                "line": "Tengdi leið við línu.",
+                "area": "Tengdi leið við svæði."
+            }
+        },
+        "disconnect": {
+            "title": "Aftengja",
+            "key": "D"
+        },
+        "merge": {
+            "title": "Sameina",
+            "description": "Sameina þessar línur.",
+            "key": "C",
+            "annotation": "Sameinaði {n} línur."
+        },
+        "move": {
+            "title": "Færa",
+            "description": "Færa þetta á annan stað.",
+            "key": "M",
+            "annotation": {
+                "point": "Færði punkt.",
+                "vertex": "Færði hnút á leið.",
+                "line": "Færði línu.",
+                "area": "Færði svæði.",
+                "multiple": "Færði marga hluti."
+            }
+        },
+        "rotate": {
+            "title": "Snúa",
+            "description": "Snúa þessum hlut um miðjupunkt hans.",
+            "key": "R",
+            "annotation": {
+                "line": "Snéri línu.",
+                "area": "Snéri svæði."
+            }
+        },
+        "reverse": {
+            "title": "Öfugt",
+            "description": "Láta þessa línu fara í öfuga átt.",
+            "key": "V",
+            "annotation": "Snéri línu."
+        },
+        "split": {
+            "title": "Aðskilja",
+            "key": "X"
+        }
+    },
+    "nothing_to_undo": "Ekkert til að hætta við.",
+    "nothing_to_redo": "Ekkert til að endurtaka.",
+    "just_edited": "Þú hefur breytt OpenStreetMap!",
+    "browser_notice": "Þessi ritill er studdur af Firefox, Chrome, Safari, Opera og Internet Explorer 9 og betri. Vinsamlegast uppfærðu vafrann þinn eða notaðu Potlatch 2 til að breyta kortinu.",
+    "zoom_in_edit": "þysja inn til að breyta kortinu",
+    "logout": "útskrá",
+    "report_a_bug": "tilkynna villu",
+    "status": {
+        "error": "Get ekki tengst við API.",
+        "offline": "API er ekki tiltækur. Vinsamlegast reyndu að breyta aftur síðar.",
+        "readonly": "API er í lesham. Þú þarft að bíða með að vista breytingar."
+    },
+    "commit": {
+        "title": "Vista breytingar",
+        "description_placeholder": "Stutt lýsing á breytingum þínum",
+        "message_label": "Staðfesta boð",
+        "upload_explanation": "Breytingarnar sem þú gerir sem {user} verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
+        "save": "Vista",
+        "cancel": "Hætta við",
+        "warnings": "Aðvaranir",
+        "modified": "Breytt",
+        "deleted": "Eytt",
+        "created": "Búið til"
+    },
+    "contributors": {
+        "list": "Innsent af {users}",
+        "truncated_list": "Innsent af {users} og {count} öðrum"
+    },
+    "geocoder": {
+        "title": "Finna stað",
+        "placeholder": "Finna stað",
+        "no_results": "Fann ekki stað með nafninu '{name}'"
+    },
+    "geolocate": {
+        "title": "Sýna mína staðsetningu"
+    },
+    "inspector": {
+        "no_documentation_combination": "Það er ekki til skjölun fyrir þessar samsettu merkingar",
+        "no_documentation_key": "Það er ekki til skjölun fyrir þennan efnislykil",
+        "show_more": "Sýna meira",
+        "new_tag": "Ný merking",
+        "editing_feature": "Breyti {feature}",
+        "all_tags": "Öll merki",
+        "choose": "Veldu tegund",
+        "results": "{n} niðurstöður fyrir {leit}",
+        "back_tooltip": "Breyta tegund",
+        "remove": "Fjarlægja",
+        "search": "Leita"
+    },
+    "background": {
+        "title": "Bakgrunnur",
+        "description": "Bakgrunnsstillingar",
+        "percent_brightness": "{opacity}% birta",
+        "fix_misalignment": "Laga hliðrun",
+        "reset": "endurstilla"
+    },
+    "restore": {
+        "heading": "Þú átt óvistaðar breytingar",
+        "restore": "Endurvekja",
+        "reset": "Endurstilla"
+    },
+    "save": {
+        "title": "Vista",
+        "help": "Vista breytingar á OpenStreetMap, þær verða sýnilegar öðrum notendum.",
+        "no_changes": "Engar breytingar til að vista.",
+        "error": "Villa kom upp þegar reynt var að vista",
+        "uploading": "Hleð breytingum inn á OpenStreetMap.",
+        "unsaved_changes": "Þú átt óvistaðar breytingar"
+    },
+    "splash": {
+        "welcome": "Velkomin/n í iD ritil OpenStreetMap",
+        "text": "iD er notandavænt tæki til að bæta við besta fría kortagrunn heimsins. Þetta er þróunarútgáfa {version}. Þú getur fengið meiri upplýsingar á vefnum {website} og tilkynnt villur {github}."
+    },
+    "source_switch": {
+        "live": "raun",
+        "lose_changes": "Þú átt óvistaðar breytingar. Að skipta um kortaþjón mun henda þeim. Ertu viss um að þú viljir skipta um kortaþjón?",
+        "dev": "þróun"
+    },
+    "tag_reference": {
+        "description": "Lýsing",
+        "on_wiki": "{tag} á wiki.osm.org",
+        "used_with": "notað með {type}"
+    },
+    "validations": {
+        "untagged_line": "Ómerkt lína",
+        "untagged_area": "Ómerkt svæði",
+        "many_deletions": "Þú ert að eyða {n} hlutum. Viltu gera þetta? Þetta mun eyða þeim af kortinu sem allir nota á openstreetmap.org.",
+        "tag_suggests_area": "Merkingin {tag} þýðir að línan ætti að vera svæði, en hún er ekki svæði",
+        "deprecated_tags": "Úrelt merki: {tags}"
+    },
+    "zoom": {
+        "in": "Þysja inn",
+        "out": "Þysja út"
+    },
+    "gpx": {
+        "local_layer": "Staðvær GPX-skrá",
+        "drag_drop": "Dragðu og slepptu .gpx skrá á síðuna"
+    },
+    "help": {
+        "title": "Hjálp",
+        "help": "# Hjálp\n\nÞetta er ritill fyrir [OpenStreetMap](http://www.openstreetmap.org/), \nfrítt og breytanlegt kort af heiminum. Þú getur notað ritilinn til að \nbæta við og breyta gögnum á þínu svæði. Þannig geturðu bætt þetta\nopen-source og open-data verkefni fyrir alla.\n\nBreytingar sem þú gerir á þessu korti verða sýnilegar öllum sem nota\nOpenStreetMap. Til að geta gert breytingar þarftu \n[ókeypis OpenStreetMap notandanafn](https://www.openstreetmap.org/user/new).\n\n[iD ritillinn](http://ideditor.com/) er samstarfsverkefni hvers [frumkóði er \naðgengilegur á GitHub](https://github.com/systemed/iD).\n"
+    }
+}

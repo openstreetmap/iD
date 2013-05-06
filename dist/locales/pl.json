@@ -65,7 +65,7 @@
             "not_closed": "Z tego nie można zrobić okręgu, bo nie jest pętlą."
         },
         "orthogonalize": {
-            "title": "Ortogonalizuj",
+            "title": "Koryguj prostopadłość",
             "description": "Wyprostuj ramiona tych kątów.",
             "key": "Q",
             "annotation": {

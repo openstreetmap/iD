@@ -419,6 +419,144 @@
             },
             "landuse": {
                 "name": "Ús de la terra"
+            },
+            "landuse/cemetery": {
+                "name": "Cementiri"
+            },
+            "landuse/construction": {
+                "name": "Construcció"
+            },
+            "landuse/forest": {
+                "name": "Bosc"
+            },
+            "landuse/grass": {
+                "name": "Herba"
+            },
+            "landuse/industrial": {
+                "name": "Industrial"
+            },
+            "landuse/meadow": {
+                "name": "Prat"
+            },
+            "landuse/orchard": {
+                "name": "Verger"
+            },
+            "landuse/quarry": {
+                "name": "Pedrera"
+            },
+            "landuse/residential": {
+                "name": "Residencial"
+            },
+            "landuse/vineyard": {
+                "name": "Vinya"
+            },
+            "leisure/golf_course": {
+                "name": "Camp de golf"
+            },
+            "leisure/park": {
+                "name": "Parc"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Camp de futbol americà"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Camp de beibol"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Pista de bàsquet"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Camp de futbol"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Pista de tennis"
+            },
+            "leisure/playground": {
+                "name": "Zona de jocs infantils"
+            },
+            "man_made/lighthouse": {
+                "name": "Far"
+            },
+            "man_made/water_tower": {
+                "name": "Torre d'aigua"
+            },
+            "natural": {
+                "name": "Natural"
+            },
+            "natural/bay": {
+                "name": "Badia"
+            },
+            "natural/beach": {
+                "name": "Platja"
+            },
+            "natural/cliff": {
+                "name": "Penya-segat"
+            },
+            "natural/coastline": {
+                "name": "Línia costanera"
+            },
+            "natural/glacier": {
+                "name": "Glacera"
+            },
+            "natural/grassland": {
+                "name": "Prada"
+            },
+            "natural/heath": {
+                "name": "Landa"
+            },
+            "natural/peak": {
+                "name": "Pic"
+            },
+            "natural/scrub": {
+                "name": "Matollar"
+            },
+            "natural/spring": {
+                "name": "Font"
+            },
+            "natural/tree": {
+                "name": "Arbre"
+            },
+            "natural/water": {
+                "name": "Aigua"
+            },
+            "natural/water/lake": {
+                "name": "Llac"
+            },
+            "natural/water/pond": {
+                "name": "Bassa"
+            },
+            "natural/water/reservoir": {
+                "name": "Embassament"
+            },
+            "natural/wetland": {
+                "name": "Zona humida"
+            },
+            "natural/wood": {
+                "name": "Bosc"
+            },
+            "place/hamlet": {
+                "name": "Llogaret"
+            },
+            "place/island": {
+                "name": "Illa"
+            },
+            "place/locality": {
+                "name": "Indret"
+            },
+            "place/village": {
+                "name": "Poble"
+            },
+            "power/sub_station": {
+                "name": "Subestació"
+            },
+            "shop": {
+                "name": "Botiga"
+            },
+            "shop/butcher": {
+                "name": "Carnisseria"
+            },
+            "shop/supermarket": {
+                "name": "Supermercat"
             }
         }
     }
