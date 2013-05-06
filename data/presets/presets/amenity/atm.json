@@ -1,0 +1,14 @@
+{
+    "icon": "bank",
+    "fields": [
+        "building",
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "atm"
+    },
+    "name": "ATM"
+}
