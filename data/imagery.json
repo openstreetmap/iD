@@ -610,5 +610,24 @@
             ]
         ],
         "sourcetag": "ngi-aerial"
+    },
+    {
+        "name": "Lithuania - ORT10LT",
+        "template": "http://mapproxy.openmap.lt/ort10lt/g/{z}/{x}/{y}.jpeg",
+        "extent": [
+            [
+                21,
+                53.88
+            ],
+            [
+                26.85,
+                56.45
+            ]
+        ],
+        "scaleExtent": [
+            4,
+            18
+        ],
+        "sourcetag": "NŽT ORT10LT"
     }
 ]
