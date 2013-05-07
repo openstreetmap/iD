@@ -20,7 +20,7 @@ iD.ui.confirm = function(selection) {
         .on('click.confirm', function() {
             modal.remove();
         })
-        .text('Okay');
+        .text(t('confirm.okay'));
 
     return modal;
 };

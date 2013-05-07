@@ -234,6 +234,9 @@
         "tweet": "Tweet",
         "okay": "Okay"
     },
+    "confirm": {
+        "okay": "Okay"
+    },
     "splash": {
         "welcome": "Welcome to the iD OpenStreetMap editor",
         "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}.",
