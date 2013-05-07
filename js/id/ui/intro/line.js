@@ -4,7 +4,7 @@ iD.ui.intro.line = function(context, reveal) {
         timeouts = [];
 
     var step = {
-        name: 'Lines'
+        title: 'intro.lines.title'
     };
 
     function one(target, e, f) {

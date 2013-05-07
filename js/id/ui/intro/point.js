@@ -4,7 +4,7 @@ iD.ui.intro.point = function(context, reveal) {
         timeouts = [];
 
     var step = {
-        name: 'Points'
+        title: 'intro.points.title'
     };
 
     function setTimeout(f, t) {

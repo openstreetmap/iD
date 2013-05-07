@@ -4,7 +4,7 @@ iD.ui.intro.area = function(context, reveal) {
         timeout;
 
     var step = {
-        name: 'Areas'
+        title: 'intro.areas.title'
     };
 
     step.enter = function() {
@@ -56,7 +56,7 @@ iD.ui.intro.area = function(context, reveal) {
                 d3.select('.preset-grid-search-wrap input').on('keyup.intro', keySearch);
             }, 500);
         }
-        
+
         function keySearch() {
             var first = d3.select('.grid-button-wrap:first-child');
             if (first.datum().id === 'leisure/playground') {
@@ -70,8 +70,6 @@ iD.ui.intro.area = function(context, reveal) {
             reveal('.pane', 'intro.areas.describe');
             context.on('exit.intro', event.done);
         }
-
-
     };
 
     step.exit = function() {

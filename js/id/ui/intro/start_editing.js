@@ -5,7 +5,7 @@ iD.ui.intro.startEditing = function(context, reveal) {
         timeouts = [];
 
     var step = {
-        name: 'Start Editing'
+        title: 'intro.startediting.title'
     };
 
     function timeout(f, t) {

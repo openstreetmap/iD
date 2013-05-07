@@ -45,7 +45,7 @@ iD.ui.intro = function(context) {
             var s = iD.ui.intro[step](context, reveal)
                 .on('done', function() {
                     entered.filter(function(d) {
-                        return d.name === s.name;
+                        return d.title === s.title;
                     }).classed('finished', true);
                     enter(steps[i + 1]);
                 });
@@ -77,7 +77,7 @@ iD.ui.intro = function(context) {
                 .on('click', enter);
 
         entered.append('div').attr('class','icon icon-pre-text apply');
-        entered.append('label').text(function(d) { return d.name; });
+        entered.append('label').text(function(d) { return t(d.title); });
         enter(steps[0]);
 
         function enter (newStep) {
@@ -92,7 +92,7 @@ iD.ui.intro = function(context) {
             step.enter();
 
             entered.classed('active', function(d) {
-                return d.name === step.name;
+                return d.title === step.title;
             });
         }
 

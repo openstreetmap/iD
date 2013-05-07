@@ -4,7 +4,7 @@ iD.ui.intro.navigation = function(context, reveal) {
         timeouts = [];
 
     var step = {
-        name: 'Navigation'
+        title: 'intro.navigation.title'
     };
 
     function set(f, t) {
