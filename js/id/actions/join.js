@@ -20,6 +20,15 @@ iD.actions.Join = function(ids) {
             b = graph.entity(idB),
             nodes;
 
+        // Prefer to keep an existing way.
+        if (a.isNew() && !b.isNew()) {
+            var tmp = a;
+            a = b;
+            b = tmp;
+            idA = a.id;
+            idB = b.id;
+        }
+
         if (a.first() === b.first()) {
             // a <-- b ==> c
             // Expected result:

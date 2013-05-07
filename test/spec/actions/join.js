@@ -149,6 +149,25 @@ describe("iD.actions.Join", function () {
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
+    it("prefers to keep existing ways", function () {
+        // a --> b ==> c
+        // --- is new, === is existing
+        // Expected result:
+        // a ==> b ==> c
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'w-1': iD.Way({id: 'w-1', nodes: ['a', 'b']}),
+                'w1': iD.Way({id: 'w1', nodes: ['b', 'c']})
+            });
+
+        graph = iD.actions.Join(['w-1', 'w1'])(graph);
+
+        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.hasEntity('w-1')).to.be.undefined;
+    });
+
     it("merges tags", function () {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a'}),
