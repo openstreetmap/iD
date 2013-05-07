@@ -187,7 +187,7 @@ en:
     unsaved_changes: You have unsaved changes
   splash:
     welcome: Welcome to the iD OpenStreetMap editor
-    text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is development version {version}. For more information see {website} and report bugs at {github}."
+    text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
     walkthrough: "Start the Walkthrough"
     start: "Edit Now"
   source_switch:
