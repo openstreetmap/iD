@@ -157,6 +157,20 @@
         },
         "name": "Amenity"
     },
+    "amenity/atm": {
+        "icon": "bank",
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "amenity": "atm"
+        },
+        "name": "ATM"
+    },
     "amenity/bank": {
         "icon": "bank",
         "fields": [

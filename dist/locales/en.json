@@ -230,7 +230,7 @@
     },
     "splash": {
         "welcome": "Welcome to the iD OpenStreetMap editor",
-        "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is development version {version}. For more information see {website} and report bugs at {github}.",
+        "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}.",
         "walkthrough": "Start the Walkthrough",
         "start": "Edit Now"
     },
@@ -282,7 +282,7 @@
         "points": {
             "add": "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**",
             "place": "The point can be placed by clicking on the map. **Place the point on top of the building.**",
-            "search": "There many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **",
+            "search": "There are many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **",
             "choose": "**Choose Cafe from the list.**",
             "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**",
             "close": "The feature editor can be closed by clicking on the close button. **Close the feature editor**",
@@ -292,7 +292,7 @@
             "delete": "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
         },
         "areas": {
-            "add": "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most features types points can be used for, and are often preferred. **Click the Area button to add a new area.**",
+            "add": "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most feature types points can be used for, and are often preferred. **Click the Area button to add a new area.**",
             "corner": "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**",
             "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**",
             "search": "**Search for Playground.**",
@@ -671,6 +671,10 @@
             },
             "amenity": {
                 "name": "Amenity",
+                "terms": ""
+            },
+            "amenity/atm": {
+                "name": "ATM",
                 "terms": ""
             },
             "amenity/bank": {

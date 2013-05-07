@@ -250,6 +250,9 @@ en:
       amenity: 
         name: Amenity
         terms: ""
+      amenity/atm: 
+        name: ATM
+        terms: ""
       amenity/bank: 
         name: Bank
         terms: "coffer,countinghouse,credit union,depository,exchequer,fund,hoard,investment firm,repository,reserve,reservoir,safe,savings,stock,stockpile,store,storehouse,thrift,treasury,trust company,vault"
