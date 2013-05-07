@@ -11,7 +11,7 @@ iD.ui.Success = function(connection) {
         var m = changeset.comment ?
             changeset.comment.substring(0, 130) : '';
 
-        var message = (m || 'Edited OSM!') + ' ' +
+        var message = (m || t('success.edited_osm')) + ' ' +
             connection.changesetURL(changeset.id);
 
         var links = body.append('div').attr('class','modal-actions cf');
@@ -31,7 +31,7 @@ iD.ui.Success = function(connection) {
                 return 'https://twitter.com/intent/tweet?source=webclient&text=' +
                     encodeURIComponent(message);
             })
-            .text('Tweet');
+            .text(t('success.tweet'));
 
         links.append('a')
             .attr('class','col4 facebook')
@@ -39,7 +39,7 @@ iD.ui.Success = function(connection) {
             .attr('href', function() {
                 return 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(message);
             })
-            .text('Share on Facebook');
+            .text(t('success.facebook'));
 
         var section = body.append('div').attr('class','modal-section cf');
 
@@ -48,7 +48,7 @@ iD.ui.Success = function(connection) {
             .on('click.save', function() {
                 event.cancel();
             })
-            .text('Okay')
+            .text(t('success.okay'))
             .node().focus();
     }
 
