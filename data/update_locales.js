@@ -75,7 +75,7 @@ function getLanguages(resource, callback) {
         function(err, resp, body) {
         if (err) return callback(err);
         callback(null, JSON.parse(body).available_languages.map(function(d) {
-            return d.code;
+            return d.code.replace(/_/g, '-');
         }).filter(function(d) {
             return d !== 'en';
         }));
