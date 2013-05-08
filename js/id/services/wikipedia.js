@@ -48,7 +48,7 @@ iD.wikipedia  = function() {
             }), function(d) {
                 var list = d.query.pages[Object.keys(d.query.pages)[0]],
                     translations = {};
-                if (list) {
+                if (list && list.langlinks) {
                     list.langlinks.forEach(function(d) {
                         translations[d.lang] = d['*'];
                     });
