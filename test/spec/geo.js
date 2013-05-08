@@ -163,5 +163,15 @@ describe('iD.geo', function() {
             var path = [[0, 0], [0, 1], [3, 5]];
             expect(iD.geo.pathLength(path)).to.eql(6);
         });
+
+        it('does not fail on single-point path', function() {
+            var path = [[0, 0]];
+            expect(iD.geo.pathLength(path)).to.eql(0);
+        });
+
+        it('estimates zero-length edges', function() {
+            var path = [[0, 0], [0, 0]];
+            expect(iD.geo.pathLength(path)).to.eql(0);
+        });
     });
 });
