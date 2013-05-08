@@ -1051,9 +1051,9 @@ text.point {
 
 /* GPX Paths */
 path.gpx {
-    stroke:#6AFF25;
-    stroke-width:2;
-    fill:transparent;
+    stroke: #6AFF25;
+    stroke-width: 2;
+    fill: none;
     pointer-events: none;
 }
 
