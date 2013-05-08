@@ -1,6 +1,6 @@
 iD.Background = function(backgroundType) {
 
-    backgroundType = backgroundType || 'layer';
+    backgroundType = backgroundType || 'background';
 
     var tileSize = 256,
         tile = d3.geo.tile(),
@@ -49,6 +49,12 @@ iD.Background = function(backgroundType) {
 
     // Update tiles based on current state of `projection`.
     function background(selection) {
+        var layer = selection.selectAll('.' + backgroundType + '-layer')
+            .data([background]);
+
+        layer.enter().append('div')
+            .attr('class', 'layer-layer ' + backgroundType + '-layer', true);
+
         tile.scale(projection.scale() * 2 * Math.PI)
             .translate(projection.translate());
 
@@ -58,7 +64,7 @@ iD.Background = function(backgroundType) {
 
         z = Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.log(2) - 8, 0);
 
-        render(selection);
+        render(layer);
     }
 
     // Derive the tiles onscreen, remove those offscreen and position them.

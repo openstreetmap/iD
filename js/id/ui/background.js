@@ -21,8 +21,7 @@ iD.ui.Background = function(context) {
     function background(selection) {
 
         function setOpacity(d) {
-            context.map().layersurface.selectAll('.layer-layer')
-                .filter(function(d) { return d == context.map().layers[0]; })
+            context.container().selectAll('.background-layer')
                 .transition()
                 .style('opacity', d)
                 .attr('data-opacity', d);

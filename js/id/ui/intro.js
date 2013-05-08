@@ -10,7 +10,7 @@ iD.ui.intro = function(context) {
         var history = context.history().toJSON(),
             hash = window.location.hash,
             background = context.background().source(),
-            opacity = d3.select('.layer-layer:first-child').style('opacity'),
+            opacity = d3.select('.background-layer').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
             baseEntities = context.history().graph().base().entities;
 
@@ -31,7 +31,7 @@ iD.ui.intro = function(context) {
         var beforeunload = window.onbeforeunload;
         window.onbeforeunload = null;
 
-        d3.select('.layer-layer:first-child').style('opacity', 1);
+        d3.select('.background-layer').style('opacity', 1);
 
         var curtain = d3.curtain();
         selection.call(curtain);
@@ -55,7 +55,7 @@ iD.ui.intro = function(context) {
         steps[steps.length - 1].on('startEditing', function() {
             curtain.remove();
             navwrap.remove();
-            d3.select('.layer-layer:first-child').style('opacity', opacity);
+            d3.select('.background-layer').style('opacity', opacity);
             context.connection().toggle(true).flush().loadedTiles(loadedTiles);
             context.history().reset().merge(baseEntities);
             context.background().source(background);

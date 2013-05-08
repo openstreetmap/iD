@@ -1818,7 +1818,7 @@ img.wiki-image {
     user-select: none;
 }
 
-#surface, #layer-g, .layer-layer {
+#supersurface, #surface, .layer-layer {
     position: absolute;
     top: 0;
     left: 0;

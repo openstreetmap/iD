@@ -1,29 +1,23 @@
 iD.LocalGpx = function(context) {
-    var tileSize = 256,
-        projection,
+    var projection,
         gj = {},
         enable = true,
         size = [0, 0],
-        transformProp = iD.util.prefixCSSProperty('Transform'),
-        path = d3.geo.path().projection(projection),
-        source = d3.functor('');
+        svg;
 
     function render(selection) {
+        svg = selection.selectAll('svg')
+            .data([render]);
 
-        path.projection(projection);
-
-        var surf = selection.selectAll('svg')
-            .data(enable ? [gj] : []);
-
-        surf.exit().remove();
-
-        surf.enter()
+        svg.enter()
             .append('svg')
-            .style('position', 'absolute');
+            .attr('class', 'layer-layer gpx-layer');
 
-        var paths = surf
+        svg.style('display', enable ? 'block' : 'none');
+
+        var paths = svg
             .selectAll('path')
-            .data(function(d) { return [d]; });
+            .data([gj]);
 
         paths
             .enter()
@@ -31,7 +25,7 @@ iD.LocalGpx = function(context) {
             .attr('class', 'gpx');
 
         paths
-            .attr('d', path);
+            .attr('d', d3.geo.path().projection(projection));
     }
 
     function toDom(x) {
@@ -57,8 +51,8 @@ iD.LocalGpx = function(context) {
     };
 
     render.size = function(_) {
-        if (!arguments.length) return size;
-        size = _;
+        if (!arguments.length) return svg.size();
+        svg.size(_);
         return render;
     };
 

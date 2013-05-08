@@ -16,7 +16,7 @@ iD.Map = function(context) {
             iD.Background().projection(projection),
             iD.LocalGpx(context).projection(projection),
             iD.Background('overlay').projection(projection)
-            ],
+        ],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
@@ -25,7 +25,7 @@ iD.Map = function(context) {
         midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(roundedProjection, context),
         tail = iD.ui.Tail(),
-        supersurface, surface, layergroup;
+        supersurface, surface;
 
     function map(selection) {
         context.history()
@@ -40,8 +40,9 @@ iD.Map = function(context) {
         supersurface = selection.append('div')
             .attr('id', 'supersurface');
 
-        layergroup = supersurface.append('div')
-            .attr('id', 'layer-g');
+        layers.forEach(function(layer) {
+            supersurface.call(layer);
+        });
 
         surface = supersurface.append('svg')
             .on('mousedown.zoom', function() {
@@ -71,7 +72,6 @@ iD.Map = function(context) {
 
         map.size(selection.size());
         map.surface = surface;
-        map.layersurface = layergroup;
 
         labels.supersurface(supersurface);
 
@@ -202,18 +202,9 @@ iD.Map = function(context) {
         }
 
         if (!difference) {
-            var sel = layergroup
-                .selectAll('.layer-layer')
-                .data(layers);
-
-            sel.exit().remove();
-
-            sel.enter().append('div')
-                .attr('class', 'layer-layer');
-
-            sel.each(function(layer) {
-                    d3.select(this).call(layer);
-                });
+            layers.forEach(function(layer) {
+                supersurface.call(layer);
+            });
         }
 
         if (map.editable()) {
@@ -309,8 +300,8 @@ iD.Map = function(context) {
         var center = map.center();
         dimensions = _;
         surface.size(dimensions);
-        layers.map(function(l) {
-            l.size(dimensions);
+        layers.forEach(function(layer) {
+            layer.size(dimensions);
         });
         projection.clipExtent([[0, 0], dimensions]);
         setCenter(center);
