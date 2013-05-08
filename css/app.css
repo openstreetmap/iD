@@ -1799,7 +1799,7 @@ img.wiki-image {
     display:block;
     position:absolute;
     overflow:hidden;
-    top:0px;
+    top:0;
     left:0;
     right:0;
     bottom:0;
@@ -1820,6 +1820,10 @@ img.wiki-image {
 
 #surface, #layer-g, .layer-layer {
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 /* About Section
