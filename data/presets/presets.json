@@ -1455,7 +1455,7 @@
         "name": "Foot Path"
     },
     "highway/living_street": {
-        "icon": "highway-residential",
+        "icon": "highway-living-street",
         "fields": [
             "oneway",
             "structure",
