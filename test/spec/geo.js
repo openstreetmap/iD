@@ -36,6 +36,77 @@ describe('iD.geo', function() {
         });
     });
 
+    describe('.chooseEdge', function() {
+        var projection = function (l) { return l; };
+        projection.invert = projection;
+
+        it('returns undefined properties for a degenerate way (no nodes)', function() {
+            expect(iD.geo.chooseEdge([], [0, 0], projection)).to.eql({
+                index: undefined,
+                distance: Infinity,
+                loc: undefined
+            })
+        });
+
+        it('returns undefined properties for a degenerate way (single node)', function() {
+            expect(iD.geo.chooseEdge([iD.Node({loc: [0, 0]})], [0, 0], projection)).to.eql({
+                index: undefined,
+                distance: Infinity,
+                loc: undefined
+            })
+        });
+
+        it('calculates the orthogonal projection of a point onto a segment', function() {
+            // a --*--- b
+            //     |
+            //     c
+            //
+            // * = [2, 0]
+            var a = [0, 0],
+                b = [5, 0],
+                c = [2, 1],
+                nodes = [
+                    iD.Node({loc: a}),
+                    iD.Node({loc: b})
+                ];
+
+            var choice = iD.geo.chooseEdge(nodes, c, projection);
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(1);
+            expect(choice.loc).to.eql([2, 0]);
+        });
+
+        it('returns the starting vertex when the orthogonal projection is < 0', function() {
+            var a = [0, 0],
+                b = [5, 0],
+                c = [-3, 4],
+                nodes = [
+                    iD.Node({loc: a}),
+                    iD.Node({loc: b})
+                ];
+
+            var choice = iD.geo.chooseEdge(nodes, c, projection);
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(5);
+            expect(choice.loc).to.eql([0, 0]);
+        });
+
+        it('returns the ending vertex when the orthogonal projection is > 1', function() {
+            var a = [0, 0],
+                b = [5, 0],
+                c = [8, 4],
+                nodes = [
+                    iD.Node({loc: a}),
+                    iD.Node({loc: b})
+                ];
+
+            var choice = iD.geo.chooseEdge(nodes, c, projection);
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(5);
+            expect(choice.loc).to.eql([5, 0]);
+        });
+    });
+
     describe('.pointInPolygon', function() {
         it('says a point in a polygon is on a polygon', function() {
             var poly = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]];

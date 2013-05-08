@@ -101,7 +101,7 @@ iD.modes.DragNode = function(context) {
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way') {
-            loc = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context).loc;
+            loc = iD.geo.chooseEdge(context.childNodes(d), d3.mouse(context.surface().node()), context.projection).loc;
         }
 
         context.replace(
@@ -115,7 +115,7 @@ iD.modes.DragNode = function(context) {
         var d = datum();
 
         if (d.type === 'way') {
-            var choice = iD.geo.chooseIndex(d, d3.mouse(context.surface().node()), context);
+            var choice = iD.geo.chooseEdge(context.childNodes(d), d3.mouse(context.surface().node()), context.projection);
             context.replace(
                 iD.actions.AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
                 connectAnnotation(d));

@@ -20,11 +20,11 @@ iD.ui.preset.address = function(field, context) {
                 var loc = context.projection([
                     (extent[0][0] + extent[1][0]) / 2,
                     (extent[0][1] + extent[1][1]) / 2]),
-                    closest = context.projection(iD.geo.chooseIndex(d, loc, context).loc);
+                    choice = iD.geo.chooseEdge(context.childNodes(d), loc, context.projection);
                 return {
                     title: d.tags.name,
                     value: d.tags.name,
-                    dist: iD.geo.dist(closest, loc)
+                    dist: choice.distance
                 };
             }).sort(function(a, b) {
                 return a.dist - b.dist;
