@@ -15,12 +15,12 @@ iD.ui.preset.textarea = function(field) {
 
     function change() {
         var t = {};
-        t[field.key] = input.text();
+        t[field.key] = input.property('value');
         event.change(t);
     }
 
     i.tags = function(tags) {
-        input.text(tags[field.key] || '');
+        input.property('value', tags[field.key] || '');
     };
 
     i.focus = function() {
