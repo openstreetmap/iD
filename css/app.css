@@ -1677,6 +1677,7 @@ img.wiki-image {
     display: inline-block;
     border-bottom: 1px solid #CCC;
     padding: 5px 10px;
+    width: 100%;
 }
 .geocode-control div.map-overlay span.not-found {
     line-height: 28px;
