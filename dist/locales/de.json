@@ -353,7 +353,7 @@
                         "description": "Zugang der Allgemeinheit nicht erlaubt"
                     },
                     "permissive": {
-                        "description": "Zugang solange gewährt, bis der Besitzer seine Erlaubnis zurück nimmt."
+                        "description": "Zugang so lange gewährt, bis der Besitzer seine Erlaubnis zurück nimmt."
                     },
                     "private": {
                         "title": "Privat",
@@ -671,7 +671,7 @@
                 "name": "Fast Food"
             },
             "amenity/fire_station": {
-                "name": "Feuerwehrhaus"
+                "name": "Feuerwehr"
             },
             "amenity/fountain": {
                 "name": "Brunnen"
@@ -794,7 +794,8 @@
                 "name": "Schwinggatter"
             },
             "barrier/lift_gate": {
-                "name": "Schlagbaum"
+                "name": "Schlagbaum",
+                "terms": "Schranke"
             },
             "barrier/retaining_wall": {
                 "name": "Stützmauer"
@@ -1040,7 +1041,7 @@
                 "name": "Volleyballplatz"
             },
             "leisure/playground": {
-                "name": "Spieplatz"
+                "name": "Spielplatz"
             },
             "leisure/slipway": {
                 "name": "Gleitbahn"
@@ -1109,7 +1110,7 @@
                 "terms": "Gipfel, Felsnadel, Alpe, Höhepunkt, Kamm, Scheitelpunkt, Hügel, Berg, , Bergspitze, Bergkuppe, Zipfel"
             },
             "natural/scrub": {
-                "name": "Gestrübb"
+                "name": "Gestrüpp"
             },
             "natural/spring": {
                 "name": "Quelle"
@@ -1252,13 +1253,15 @@
                 "name": "Boutique"
             },
             "shop/butcher": {
-                "name": "Fleischer"
+                "name": "Fleischer",
+                "terms": "Metzger"
             },
             "shop/car": {
                 "name": "Autohändler"
             },
             "shop/car_parts": {
-                "name": "Autoteilehandel"
+                "name": "Autoteilehandel",
+                "terms": "Ersatzteilhandel"
             },
             "shop/car_repair": {
                 "name": "Autowerkstatt"
@@ -1327,13 +1330,13 @@
                 "name": "Kiosk"
             },
             "shop/laundry": {
-                "name": "Wächerei"
+                "name": "Wäscherei"
             },
             "shop/mall": {
                 "name": "Einkaufzentrum"
             },
             "shop/mobile_phone": {
-                "name": "Handy- Laden"
+                "name": "Handy-Laden"
             },
             "shop/motorcycle": {
                 "name": "Motorradhändler"
