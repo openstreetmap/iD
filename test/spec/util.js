@@ -24,6 +24,24 @@ describe('iD.Util', function() {
         expect(iD.util.getPrototypeOf(new a())).to.eql({ foo: 'foo' });
     });
 
+    describe('#editDistance', function() {
+        it('returns zero for same strings', function() {
+            expect(iD.util.editDistance('foo', 'foo')).to.eql(0);
+        });
+
+        it('reports an insertion of 1', function() {
+            expect(iD.util.editDistance('foo', 'fooa')).to.eql(1);
+        });
+
+        it('reports a replacement of 1', function() {
+            expect(iD.util.editDistance('foob', 'fooa')).to.eql(1);
+        });
+
+        it('does not fail on empty input', function() {
+            expect(iD.util.editDistance('', '')).to.eql(0);
+        });
+    });
+
     describe('#asyncMap', function() {
         it('handles correct replies', function() {
             iD.util.asyncMap([1, 2, 3],
