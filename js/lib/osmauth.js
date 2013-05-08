@@ -196,7 +196,7 @@ module.exports = function(o) {
     return oauth;
 };
 
-},{"store":2,"ohauth":3}],2:[function(require,module,exports){
+},{"ohauth":2,"store":3}],3:[function(require,module,exports){
 /* Copyright (c) 2010-2012 Marcus Westin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -373,25 +373,26 @@ module.exports = function(o) {
 	else { this.store = store }
 })();
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 'use strict';
 
 var hashes = require('jshashes'),
+    xtend = require('xtend'),
     sha1 = new hashes.SHA1();
 
 var ohauth = {};
 
 ohauth.qsString = function(obj) {
     return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '=' +
-            encodeURIComponent(obj[key]);
+        return ohauth.percentEncode(key) + '=' +
+            ohauth.percentEncode(obj[key]);
     }).join('&');
 };
 
 ohauth.stringQs = function(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
-        obj[parts[0]] = (null === parts[1]) ?
+        obj[decodeURIComponent(parts[0])] = (null === parts[1]) ?
             '' : decodeURIComponent(parts[1]);
         return obj;
     }, {});
@@ -456,9 +457,62 @@ ohauth.signature = function(oauth_secret, token_secret, baseString) {
         baseString);
 };
 
+/**
+ * Takes an options object for configuration (consumer_key,
+ * consumer_secret, version, signature_method, token) and returns a
+ * function that generates the Authorization header for given data.
+ *
+ * The returned function takes these parameters:
+ * - method: GET/POST/...
+ * - uri: full URI with protocol, port, path and query string
+ * - extra_params: any extra parameters (that are passed in the POST data),
+ *   can be an object or a from-urlencoded string.
+ *
+ * Returned function returns full OAuth header with "OAuth" string in it.
+ */
+
+ohauth.headerGenerator = function(options) {
+    options = options || {};
+    var consumer_key = options.consumer_key || '',
+        consumer_secret = options.consumer_secret || '',
+        signature_method = options.signature_method || 'HMAC-SHA1',
+        version = options.version || '1.0',
+        token = options.token || '';
+
+    return function(method, uri, extra_params) {
+        method = method.toUpperCase();
+        if (typeof extra_params === 'string' && extra_params.length > 0) {
+            extra_params = ohauth.stringQs(extra_params);
+        }
+
+        var uri_parts = uri.split('?', 2),
+        base_uri = uri_parts[0];
+
+        var query_params = uri_parts.length === 2 ?
+            ohauth.stringQs(uri_parts[1]) : {};
+
+        var oauth_params = {
+            oauth_consumer_key: consumer_key,
+            oauth_signature_method: signature_method,
+            oauth_version: version,
+            oauth_timestamp: ohauth.timestamp(),
+            oauth_nonce: ohauth.nonce()
+        };
+
+        if (token) oauth_params.oauth_token = token;
+
+        var all_params = xtend({}, oauth_params, query_params, extra_params),
+            base_str = ohauth.baseString(method, base_uri, all_params);
+
+        oauth_params.oauth_signature = ohauth.signature(consumer_secret, token, base_str);
+
+        return 'OAuth ' + ohauth.authHeader(oauth_params);
+    };
+};
+
 module.exports = ohauth;
 
-},{"jshashes":4}],4:[function(require,module,exports){
+},{"jshashes":4,"xtend":5}],4:[function(require,module,exports){
 (function(global){/**
  * jsHashes - A fast and independent hashing library pure JavaScript implemented (ES5 compliant) for both server and client side
  * 
@@ -2080,6 +2134,45 @@ module.exports = ohauth;
   }( this ));
 }()); // IIFE
 })(window)
+},{}],5:[function(require,module,exports){
+var Keys = Object.keys || objectKeys
+
+module.exports = extend
+
+function extend() {
+    var target = {}
+
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        if (!isObject(source)) {
+            continue
+        }
+
+        var keys = Keys(source)
+
+        for (var j = 0; j < keys.length; j++) {
+            var name = keys[j]
+            target[name] = source[name]
+        }
+    }
+
+    return target
+}
+
+function objectKeys(obj) {
+    var keys = []
+    for (var k in obj) {
+        keys.push(k)
+    }
+    return keys
+}
+
+function isObject(obj) {
+    return obj !== null && typeof obj === "object"
+}
+
 },{}]},{},[1])(1)
 });
 ;
+
