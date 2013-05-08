@@ -6,7 +6,9 @@ iD.ui.Background = function(context) {
             ['top', [0, -1]],
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
-        layers = context.backgroundSources();
+        layers = context.backgroundSources(),
+        opacityDefault = (context.storage('background-opacity') !== undefined) ?
+            (+context.storage('background-opacity')) : 0.5;
 
     function getSources() {
         var ext = context.map().extent();
@@ -26,12 +28,9 @@ iD.ui.Background = function(context) {
                 .attr('data-opacity', d);
 
             opacityList.selectAll('li')
-                .classed('selected', false);
+                .classed('selected', function(_) { return _ === d; });
 
-            if (d3.event) {
-                d3.select(this)
-                    .classed('selected', true);
-            }
+            context.storage('background-opacity', d);
         }
 
         function selectLayer() {
@@ -236,10 +235,6 @@ iD.ui.Background = function(context) {
             .attr('class', 'opacity')
             .style('opacity', String);
 
-        // Make sure there is an active selection by default
-        opa.select('.opacity-options li:nth-child(2)')
-            .classed('selected', true);
-
         var backgroundList = content
             .append('ul')
             .attr('class', 'toggle-list');
@@ -326,7 +321,7 @@ iD.ui.Background = function(context) {
         context.map()
             .on('move.background-update', _.debounce(update, 1000));
         update();
-        setOpacity(0.5);
+        setOpacity(opacityDefault);
 
         var keybinding = d3.keybinding('background');
         keybinding.on(key, toggle);
