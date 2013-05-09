@@ -51,6 +51,18 @@ describe("iD.geo.Extent", function () {
         });
     });
 
+    describe("#padByMeters", function () {
+        it("does not change centerpoint of an extent", function () {
+           var min = [0, 0], max = [5, 10];
+           expect(iD.geo.Extent(min, max).padByMeters(100).center()).to.eql([2.5, 5]);
+        });
+
+        it("does not affect the extent with a pad of zero", function () {
+           var min = [0, 0], max = [5, 10];
+           expect(iD.geo.Extent(min, max).padByMeters(0)[0]).to.eql([0, 0]);
+        });
+    });
+
     describe("#extend", function () {
         it("does not modify self", function () {
             var extent = iD.geo.Extent([0, 0], [0, 0]);
