@@ -13,10 +13,12 @@ h1 {
 }
 
 .header {
+  position: fixed;
   background: #141516 url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
   background-size: cover;
   color: #f8f8f8;
   width: 100%;
+  height: 100%;
 }
 
 .header h2 { margin-bottom: 10px;}
@@ -32,55 +34,12 @@ a.button.big.loading {
   background: url({{site.baseurl}}/img/loading.gif);
 }
 
-.video {
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.force-aspect-ratio {
-  margin: auto;
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  width: 100%;
-  overflow: hidden;
-}
-
-#player {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  margin: auto;
-}
-
-.actions .col6:first-child { border-right: 1px solid #ddd; }
-.actions .pad4 { padding-bottom: 0;}
-
-a.button {
-  margin-bottom: 20px;
-  display: block;
-  background:#77c453;
-  color: white;
-  font-weight: bold;
-  height: 40px;
-  border-radius: 4px;
-  text-align: center;
-  padding: 8px;
-}
-
-a.button:hover { background: #54af29; }
-
-a.button.big {
-height: 60px;
-padding: 16px;
-}
-
 .footer {
+  background: transparent;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
   color: white;
   text-align: center;
-  background: #141516 url({{site.baseurl}}/img/background.jpg) 50% 0 no-repeat;
 }
 
 .footer li {
@@ -98,13 +57,5 @@ padding: 16px;
 }
 
 @media only screen and (max-width: 640px) {
-.actions .col6:first-child { border-right:0; }
-  .video {
-    border: 0;
-    border-radius: 0;
-  }
-  .video { border-top: 1px solid #ddd;}
-  .actions .pad4 { padding-bottom: 20px; }
-  .actions .col6 { border-top: 1px solid #ddd; }
-  .footer li { display: block; border:0; margin: 20px 0; padding: 0;}
+  .footer li { display: block; border:0; margin:0; padding: 0;}
 }
