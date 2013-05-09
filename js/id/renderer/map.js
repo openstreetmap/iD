@@ -44,7 +44,12 @@ iD.Map = function(context) {
             supersurface.call(layer);
         });
 
-        surface = supersurface.append('svg')
+        // Need a wrapper div because Opera can't cope with an absolutely positioned
+        // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
+        var dataLayer = supersurface.append('div')
+            .attr('class', 'layer-layer layer-data');
+
+        surface = dataLayer.append('svg')
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
