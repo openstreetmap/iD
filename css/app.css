@@ -1,6 +1,15 @@
 /* Basics
 ------------------------------------------------------- */
 
+/*
+  Opera misbehaves when the window is resized vertically unless 100% width + height are
+  applied to both html and body. https://gist.github.com/jfirebaugh/bd225bcfdd3a633850c4
+*/
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
     font:normal 12px/1.6666 'Helvetica Neue', Arial, sans-serif;
     margin:0;
