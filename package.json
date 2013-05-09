@@ -34,7 +34,8 @@
     "js-yaml": "~2.0.3",
     "request": "~2.16.2",
     "jsonschema": "~0.3.2",
-    "node-sprite": "~0.1.2"
+    "node-sprite": "~0.1.2",
+    "delve": "0.2"
   },
   "engines": {
     "node": ">=0.10.0"
