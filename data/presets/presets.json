@@ -2147,7 +2147,8 @@
             "landuse": "farm"
         },
         "terms": [],
-        "name": "Farm"
+        "name": "Farm",
+        "icon": "farm"
     },
     "landuse/farmyard": {
         "geometry": [
@@ -2952,7 +2953,7 @@
         "name": "Place"
     },
     "place/city": {
-        "icon": "square",
+        "icon": "city",
         "geometry": [
             "point",
             "area"
@@ -3015,7 +3016,7 @@
         "name": "Locality"
     },
     "place/town": {
-        "icon": "square-stroked",
+        "icon": "town",
         "geometry": [
             "point",
             "area"
@@ -3026,7 +3027,7 @@
         "name": "Town"
     },
     "place/village": {
-        "icon": "triangle",
+        "icon": "village",
         "geometry": [
             "point",
             "area"

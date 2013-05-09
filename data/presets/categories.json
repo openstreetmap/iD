@@ -2,7 +2,7 @@
     "category-landuse": {
         "geometry": "area",
         "name": "Land Use",
-        "icon": "category-landuse",
+        "icon": "land-use",
         "members": [
             "landuse/residential",
             "landuse/industrial",

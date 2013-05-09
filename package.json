@@ -23,7 +23,7 @@
     "d3": "3",
     "smash": "0.0",
     "uglify-js": "~2.2.5",
-    "maki": "git://github.com/mapbox/maki.git#0001ab8a8a03e2517fab0f76f44422dd08f6faa3",
+    "maki": "0.1",
     "mocha": "~1.9",
     "mocha-phantomjs": "~1.1.1",
     "chai": "~1.4",
