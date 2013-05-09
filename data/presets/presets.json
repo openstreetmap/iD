@@ -2470,7 +2470,11 @@
         "tags": {
             "leisure": "playground"
         },
-        "name": "Playground"
+        "name": "Playground",
+        "terms": [
+            "jungle gym",
+            "play area"
+        ]
     },
     "leisure/slipway": {
         "geometry": [
