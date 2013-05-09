@@ -228,9 +228,18 @@
         "uploading": "Wysyłanie zmian do OpenStreetMap.",
         "unsaved_changes": "Masz niezapisane zmiany."
     },
+    "success": {
+        "edited_osm": "Zmiany zostały wprowadzone do OSM!",
+        "facebook": "Podziel się na Facebooku",
+        "tweet": "Tweetnij",
+        "okay": "Okej"
+    },
+    "confirm": {
+        "okay": "Okej"
+    },
     "splash": {
         "welcome": "Witaj w edytorze iD map OpenStreetMap",
-        "text": "iD jest przyjaznym, ale i jednocześnie potężnym narzędziem, dzięki któremu możesz przyczynić się do rozwoju najlepszej wolnej mapy całego świata. To jest wersja rozwojowa {version}. Więcej informacji znajdziesz na {website}, a błędy zgłosisz na {github}.",
+        "text": "iD jest przyjaznym, ale i jednocześnie potężnym narzędziem, dzięki któremu możesz przyczynić się do rozwoju najlepszej wolnej mapy świata. To jest wersja {version}. Więcej informacji znajdziesz na {website}, a błędy zgłosisz na {github}.",
         "walkthrough": "Rozpocznij samouczek",
         "start": "Edytuj teraz"
     },
@@ -270,20 +279,22 @@
         "imagery": "# Zdjęcia\n\nZdjęcia lotnicze/satelitarne są ważnym zasobem w rysowaniu map. Kolekcja zdjęć lotniczych,\nsatelitarnych i innych wolnodostępnych źródeł jest dostępna w edytorze w menu 'Ustawienia tła' po\nlewej stronie.\n\nDomyślnie wyświetlana jest warstwa zdjęć satelitarnych z [Bing Maps](http://www.bing.com/maps/),\nale w miarę przybliżania i pojawiają się nowe źródła. Niektóre kraje, takie jak Stany Zjednoczone, Francja\nczy Dania mają w pewnych miejscach dostępne zdjęcia bardzo wysokiej jakości.\n\nZdjęcia są czasem przesunięte względem danych na mapie z powodu błędu dostawcy zdjęć. Jeżeli\nwidzisz dużo dróg przesuniętych względem tła, zastanów się, zanim je wszystkie wyrównasz względem\ntła. Zamiast tego może dostosować przesunięcie zdjęć tak, aby zgadzały się z istniejącymi danymi przez\nnaciśnięcie przycisku 'Wyrównaj podkład' na dole Ustawień tła.\n",
         "addresses": "# Adresy\n\nAdresy są jedną z najbardziej użytecznych informacji na mapie.\n\nMimo że adresy są często reprezentowane jako części ulic, w OpenStreetMap są one zapisywane jako\natrybuty budynków i miejsc wzdłuż ulicy.\n\nMożesz dodać nową informację adresową do miejsc narysowanych w postaci obwiedni budynków jak\nrównież do tych narysowanych w postaci pojedynczych punkt. Najlepszym źródłem danych adresowych\njest jak zwykle zwiedzanie okolicy  lub własna wiedza - tak jak z każdym innym obiektem, kopiowanie\ndanych z komercyjnych źródeł takich jak Google Maps jest zabronione.\n",
         "inspector": "# Używanie Inspektora\n\nInspektor jest elementem interfejsu po prawej stronie strony, który pojawia się po zaznaczeniu obiektu\ni który pozwala ci modyfikować jego szczegóły.\n\n### Zaznaczanie typu obiektu\n\nPo dodaniu punktu, linii lub obszaru, możesz wybrać, jakiego rodzaju to jest obiekt, na przykład czy jest\nto autostrada czy droga lokalna, kawiarnia czy supermarket. Inspektor wyświetli przyciski dla\npopularnych typów obiektów, a ty możesz znaleźć inne przez wpisanie tego, czego szukasz do pola\nszukania.\n\nKliknij 'i' w prawym dolnym rogu przycisku typu obiektu, aby dowiedzieć się o nim więcej.\nKliknij przycisk, aby wybrać ten typ.\n\n### Używanie formularzy i edycja tagów\n\nPo wybraniu typu obiektu lub gdy wybierzesz obiekt, który ma już nadany typ, inspektor wyświetli pola\nzawierające szczegóły na temat obiektu, takie jak nazwa i adres.\n\nPoniżej pól, które widzisz, możesz kliknąć ikony w celu dodania innych szczegółów, jak na przykład\ninformacja z [Wikipedii](http://www.wikipedia.org/), dostęp dla wózków inwalidzkich i innych.\n\nNa dole inspektora kliknij 'Dodatkowe tagi', aby dodać dowolne inne tagi do elementu.\n[Taginfo](http://taginfo.openstreetmap.org/) jest świetnym źródłem informacji o popularnych\nkombinacjach tagów.\n\nZmiany, które wprowadzisz w inspektorze, są automatycznie nanoszone na mapę. Możesz je cofnąć w\nkażdym momencie przez wciśnięcie przycisku 'Cofnij'.\n\n### Zamykanie Inspektora\n\nMożesz zamknąć inspektora przez kliknięcie na przycisk zamknij w górnym prawym rogu, wciśnięcie\nklawisza 'Escape' lub kliknięcie mapy.\n",
-        "buildings": "# Budynki\n\nOpenStreetMap jest największą na świecie bazą danych budynków. Możesz tworzyć i poprawiać tę\nbazę danych.\n\n### Zaznaczanie\n\nMożesz zaznaczyć budynek przez kliknięcie na jego obwódce. Podświetli to budynek i otworzy małe\nmenu narzędziowe oraz boczny panel pokazujący więcej informacji o budynku.\n\n### Modyfikowanie\n\nCzasami budynki są błędnie umieszczone lub mają błędne tagi.\n\nAby przesunąć cały budynek, zaznacz go, a potem kliknij narzędzie 'Przesuń'. Rusz myszą, aby\nprzesunąć budynek i kliknij, gdy będzie we właściwym miejscu.\n\nAby poprawić kształt budynku, kliknij i przeciągnij punkty formujące obwódkę w lepsze miejsce.\n\n### Tworzenie\n\nJednym z głównych problemów podczas tworzenia budynków jest to, że OpenStreetMap  przechowuje\nbudynki zarówno w postaci punktów i obszarów. Przyjęło się rysowanie budynków w postaci obszarów,\na rysowanie firm, domów czy innej infrastruktury w postaci punktów w obszarze budynku.\n\nZacznij rysować budynek w postaci obszaru przez kliknięcie na przycisku 'Obszar' w górnym lewym\nrogu edytora i zakończ go przez naciśnięcie klawisza 'Enter' na klawiaturze lub przez kliknięcie na\npierwszym rysowanym punkcie w celu zamknięcia obszaru.\n\n### Usuwanie\n\nJeżeli budynek jest całkiem błędny - widzisz, że nie ma go na zdjęciach satelitarnych (a najlepiej\nsprawdziłeś w terenie, że go nie ma) - możesz go usunąć. Bądź ostrożny usuwając obiekty - tak jak po\nkażdej innej modyfikacji, rezultaty są widoczne dla wszystkich, a zdjęcia satelitarne często nie są\naktualne, więc budynek może być po prostu nowo wybudowany.\n\nMożesz usunąć budynek przez kliknięcie na nim, a następnie na ikonie śmietnika lub wciśnięcie\nklawisza 'Delete'.\n"
+        "buildings": "# Budynki\n\nOpenStreetMap jest największą na świecie bazą budynków. Możesz\nprzyczynić się do rozwoju owej bazy.\n\n### Zaznaczanie\n\nMożesz zaznaczyć budynek przez kliknięcie jego obwodu. Podświetli\nto obiekt i otworzy małe menu narzędziowe oraz pasek boczny zawierający\ninformacje o budynku.\n\n### Modyfikowanie\n\nZdarza się, że budynki są umieszczone w nieprawidłowych miejscach\nlub mają nieodpowiednie tagi.\n\nAby przesunąć cały budynek, zaznacz go, a następnie wybierz narzędzie\nprzesuwania. Przesuń kursor myszy, aby zmienić pozycję obiektu, a następnie\nkliknij, gdy już będzie w odpowiednim miejscu.\n\nAby poprawić kształt budynku, kliknij i przeciągnij węzły, które tworzą obwód\nobiektu, w lepiej usytuowane miejsce.\n\n### Tworzenie\n\nJednym z głównych problemów podczas tworzenia budynków jest to,\nże OpenStreetMap przechowuje budynki zarówno w postaci punktów\njak i obszarów. Przyjęło się rysowanie budynków w postaci obszarów, a rysowanie\nfirm, domów czy innej infrastruktury w postaci punktów w obszarze budynku.\n\nZacznij rysować budynek w postaci obszaru przez kliknięcie przycisku 'Obszar'\nw górnym lewym rogu edytora i zakończ go przez naciśnięcie klawisza 'Enter'\nna klawiaturze lub przez kliknięcie na pierwszym rysowanym punkcie w celu\nzamknięcia obszaru.\n\n### Usuwanie\n\nJeżeli budynek jest całkiem błędny - widzisz, że nie ma go na zdjęciach satelitarnych,\na najlepiej sprawdziłeś w terenie, że nie istnieje - możesz go usunąć. Bądź ostrożny\nusuwając obiekty - tak jak po każdej innej modyfikacji, rezultaty są widoczne dla wszystkich,\na zdjęcia satelitarne często nie są aktualne, więc budynek może być po prostu nowo\nwybudowany.\n\nMożesz usunąć budynek przez kliknięcie na nim, a następnie na ikonie\nśmietnika lub wciśnięcie klawisza 'Delete'. \n"
     },
     "intro": {
         "navigation": {
+            "title": "Nawigacja",
             "drag": "Główny obszar mapy pokazuje dane OpenStreetMap na tle podkładu. Możesz poruszać się po niej przeciągając i przewijając tak jak po każdej mapie internetowej. **Przeciągnij mapę!**",
             "select": "Obiekty na mapie są reprezentowane na trzy sposoby: używają punktów, linii i obszarów. Wszystkie obiekty mogą zostać zaznaczone przez kliknięcie na nich. **Kliknij na punkcie, żeby go zaznaczyć.**",
             "header": "Nagłówek pokazuje nam rodzaj obiektu.",
             "pane": "Gdy wybierze się obiekt, zostaje wyświetlony edytor obiektów. Nagłówek pokazuje nam typ obiektu, a główna część pokazuje atrybuty obiektu takie jak nazwa czy adres. **Zamknij edytor obiektów używając przycisku zamknij w prawym górnym rogu.**"
         },
         "points": {
+            "title": "Punkty",
             "add": "Punkty mogą być używane do reprezentowania obiektów takich jak sklepy, restauracje czy pomniki.\nZaznaczają one konkretną lokalizację i opisują co się tam znajduje. **Kliknij na przycisk Punkt, aby dodać nowy punkt.**",
             "place": "Punkt może zostać umieszczony przez kliknięcie na mapę. **Umieść punkt na budynku.**",
-            "search": "Wiele różnych obiektów może być reprezentowanych przez punkty. Punkt, który właśnie dodałeś jest kawiarnią. **Szukaj 'kawiarnia' **",
-            "choose": "**Wybierz kawiarnię z siatki.**",
+            "search": "Wiele różnych obiektów może być reprezentowanych przez punkty. Punkt, który właśnie dodałeś, jest kawiarnią. **Szukaj 'kawiarnia' **",
+            "choose": "**Wybierz kawiarnię z listy.**",
             "describe": "Punkt jest teraz oznaczony jako kawiarnia. Używając edytora obiektów, możemy dodać więcej informacji o obiekcie, **Dodaj nazwę**",
             "close": "Edytor obiektów może zostać zamknięty przez kliknięcie na przycisk zamknij. **Zamknij edytor obiektów**",
             "reselect": "Często punkty już istnieją, ale zawierają błędy lub są niekompletne. Możemy modyfikować istniejące punkty. **Wybierz punkt, który właśnie utworzyłeś.**",
@@ -292,24 +303,27 @@
             "delete": "Menu wokół punktu zawiera operacje, które można na nim wykonać, włącznie z usunięciem go. **Usuń punkt.**"
         },
         "areas": {
+            "title": "Obszary",
             "add": "Obszary pozwalają na bardziej szczegółowe przedstawienie obiektu. Dostarczają one informacji o granicach obiektu. Obszary mogą być używane do przedstawienia większości obiektów, które mogą być przedstawione w postaci punktów i często są one preferowane. **Kliknij na przycisk Obszar, aby dodać nowy obszar.**",
             "corner": "Obszary są rysowane przez stawianie punktów oznaczających granicę obszaru. **Umieść punkt początkowy w jednym z rogów placu zabaw.**",
             "place": "Narysuj obszar, umieszczając kolejne punkty. Zakończ go, klikając na początkowy punkt. **Narysuj obszar placu zabaw.**",
             "search": "**Szukaj placu zabaw.**",
-            "choose": "**Wybierz Plac zabaw z siatki.**",
+            "choose": "**Wybierz plac zabaw z listy.**",
             "describe": "**Dodaj nazwę i zamknij edytor obiektów**"
         },
         "lines": {
+            "title": "Linie",
             "add": "Linie są używane do reprezentowania obiektów takich jak drogi, tory czy rzeki. **Naciśnij na przycisk Linia, aby dodać nową linię.**",
             "start": "**Zacznij linię klikając na koniec drogi.**",
             "intersect": "Kliknij, aby dodać więcej punktów do linii. W razie potrzeby możesz przeciągać mapę podczas rysowania. Drogi i wiele innych typów linii są częścią większej sieci. Ważne jest ich prawidłowe połączenie, aby programy do wyznaczania tras poprawnie działały. **Kliknij na Flower Street, aby dodać skrzyżowanie łączące dwie linie.**",
             "finish": "Linie można zakończyć przez ponowne kliknięcie ostatniego punktu. **Zakończ rysowanie drogi.**",
-            "road": "**Wybierz drogę z siatki.**",
+            "road": "**Wybierz drogę z listy**",
             "residential": "Jest wiele rodzajów dróg, z których najpopularniejsze są drogi lokalne. **Wybierz typ drogi Lokalna**",
             "describe": "**Nazwij drogę i zamknij edytor obiektów.**",
             "restart": "Droga musi się skrzyżować z Flower Street."
         },
         "startediting": {
+            "title": "Rozpocznij edytowanie",
             "help": "Więcej dokumentacji oraz ten samouczek są dostępne tutaj.",
             "save": "Nie zapomnij o regularnym zapisywaniu swoich zmian!",
             "start": "Zacznij mapować!"
@@ -665,6 +679,9 @@
             },
             "amenity": {
                 "name": "Udogodnienie"
+            },
+            "amenity/atm": {
+                "name": "Bankomat"
             },
             "amenity/bank": {
                 "name": "Bank",

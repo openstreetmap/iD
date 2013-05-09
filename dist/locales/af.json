@@ -220,7 +220,6 @@
     },
     "splash": {
         "welcome": "Welkom by die iD OpenStreetMap program",
-        "text": "iD is 'n vriendelike and kragtige gereedskapstuk om die wêreld se beste gratis kaart mee te help teken. Hierdie is ontwikkelingsweergawe {version}. Vir meer inligting sien {website} en raporteeer probleme by {github}.",
         "walkthrough": "Begin die Deurloop",
         "start": "Verander Nou"
     },
@@ -262,12 +261,11 @@
     },
     "intro": {
         "navigation": {
-            "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**"
+            "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**",
+            "header": "Die opskrif wys ons die eienskap tipe."
         },
         "points": {
             "place": "Die punt kan op die kaart geplaas word deur daarop te klick. **Sit die punt bo-op die gebou.**",
-            "search": "Daar is verskeie eienskappe wat verteenwoordig kan word deur punte. Die punt wat jy nou net bygesit het is 'n Kafee. **Soek vir 'Kafee' **",
-            "choose": "**Kies Kafee van die rooster.**",
             "describe": "Die punt is nou gemerk as 'n kafee. Gebruik die eienskapslys om meer inligting by te sit. **Sit 'n naam by**",
             "close": "Die eienskapslys kan toegemaak word deur op die toemaak knoppie te klick. **Maak die eienskapslys toe**",
             "reselect": "Baie kere gaan 'n punt klaar bestaan, maar met foute of onvolledig. Jy kan bestaande punte verander. **Kies die punt wat jy nou net gemaak het.**",
@@ -275,14 +273,12 @@
             "reselect_delete": "Alle eienskappe op die kaart kan verwyder word. **Klick op die punt wat jy nou net gemaak het. **"
         },
         "areas": {
-            "search": "**Soek vir 'n Speelgrond.**",
-            "choose": "**Kies Speelgrond van die rooster.**",
+            "search": "**Soek vir 'n Speelpark.**",
             "describe": "**Sit 'n naam by en maak die eienskappe lys toe**"
         },
         "lines": {
             "add": "Lyne word gebruik om items soos paaie, spoorwee en riviere te verteenwoordig. **Klick die Lyn knoppie om 'n nuwe lyn by te sit.**",
             "start": "** Begin die lyn deur op die einde van die pad te klick.**",
-            "road": "**Kies Pad van die rooster**",
             "residential": "Daar is verskillende tipes paaie, die mees algemeenste is 'n residensieel pad. ** Kies die Residentieele Pad tipe**",
             "describe": "**Gee die pad 'n naam en maak die eienskappe lys toe.**",
             "restart": "Die pad moet Flower Straat Kruis."

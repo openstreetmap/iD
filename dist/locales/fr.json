@@ -228,9 +228,16 @@
         "uploading": "Envoi des modifications vers OpenStreetMap.",
         "unsaved_changes": "Vous avez des modifications non enregistrées"
     },
+    "success": {
+        "facebook": "Partager sur Facebook",
+        "tweet": "Tweeter",
+        "okay": "OK"
+    },
+    "confirm": {
+        "okay": "OK"
+    },
     "splash": {
         "welcome": "Bienvenue sur ID, l'éditeur en ligne d'OpenStreetMap",
-        "text": "Cette version {version} est une version de développement. Si vous souhaitez plus d'informations, veuillez consulter {website} ou {github} pour signaler un bug.",
         "walkthrough": "Commencer le tutorial",
         "start": "Editer"
     },
@@ -269,8 +276,7 @@
         "gps": "# GPS\n\nLes traces GPS sont les données les plus sûres pour OpenStreetMap. Cet\néditeur supporte les traces au format `.gpx`. Vous pouvez enregistrer ce\ntype de traces avec un grand nombre d'applications pour smartphones\nainsi qu'avec certains GPS de randonnées.\n\nPour plus d'informations sur la manière de relever des traces GPS, vous\npouvez consulter le guide [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPour utiliser un relevé GPX, il vous suffit de glisser-déposer le fichier GPX\ndirectement sur la carte. S'il est reconnu, il sera ajouté sur la carte sous\nla forme d'une ligne vert clair. Cliquez sur le menu \"Configuration du fond\nde carte\" à gauche pour activer et désactiver l'affichage de la trace, ou\nencore pour centrer le zoom sur la trace.\n\nLes traces GPX ne sont pas directement enregistrée dans OpenStreetMap.\nUne fois visible, il vous incombe de décalquer les routes empruntées à\npartir de ces traces.\n",
         "imagery": "# Fond de carte\n\nLes photos aériennes sont une source importantes pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibre d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.\n\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources\nsont parfois disponibles dans certaines zones. Certains pays tels que la France, les\nEtats-Unis ou le Danemark disposent d'image de très haute qualité sur certaines\nzones.\n\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés\npar rapport au fond de carte, ne déplacez pas immédiatement ces éléments. A la\nplace, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en\ncliquant sur \"Corriger l'alignement\" en bas de l'interface de configuration du fond\nde carte.\n",
         "addresses": "# Adresses\n\nLes adresses sont des informations très utiles.\n\nDans OpenStreetMap, les adresses sont enregistrées comme attributs des\nbâtiments le long des routes.\n\nVous pouvez ajouter une adresse sur les éléments modélisés avec un polygone\net sur ceux modélisés avec des points. La meilleure source de données afin\nde cartographier les adresses reste le relevé sur le terrain, car la copie de\ndonnées à partir de contenu non libre de droits est interdite.\n",
-        "inspector": "# Utilisation de l'inspecteur\n\nL'inspecteur est l'élément de l'interface utilisateur qui apparaît à droite de la page quand un élément est sélectionné. Il permet de mettre à jour les détails le concernant.\n\n### Sélectionner un type d'élément\n\nAprès ajout d'un point, d'une ligne ou d'un polygone, vous pouvez indiquer de quel type d'élément il s'agit : une route principale ou résidentielle, un supermarché, un café... L'inspecteur affiche des boutons pour les éléments les plus communs, et vous pouvez trouver les autres à l'aide du formulaire de recherche.\n\nCliquez sur 'i' dans le coin en bas à droite des boutons pour en savoir plus sur l'élément dont il s'agit. Cliquez sur le bouton pour choisir cet élément.\n\n### Utiliser les formulaires et les tags\n\nAprès avoir choisi le type d'élément, ou lorsque vous sélectionnez un élément dont la nature est déjà indiquée, l'inspecteur affiche des champs comprenant des détails sur l'élément concerné - adresse, nom, etc.\n\nEn-dessous des champs, vous pouvez cliquer sur les icônes pour ajouter des détails supplémentaires, comme des informations issues de [Wikipedia](http://www.wikipedia.org/), des renseignements sur l'accès handicapé, ou plus encore.\n\nEn bas de l'inspecteur, cliquez sur 'attributs supplémentaires' pour ajouter des attributs arbitraires à l'élément. [Taginfo](http://taginfo.openstreetmap.org/) est une excellente ressource pour en savoir plus sur les combinaisons d'attributs les plus fréquentes.\n\nLes changements que vous effectuez dans l'inspecteur sont immédiatement visibles sur la carte. Vous pouvez les annulez dès que vous le souhaitez en cliquant sur 'annuler'. \n\n### Fermer l'inspecteur\n\nPour fermer l'inspecteur, vous pouvez cliquer sur le bouton 'fermer' en haut à droite, appuyer sur Échap ou encore cliquer sur la carte.\n",
-        "buildings": "# Bâtiments\n\nOpenStreetMap est la plus grande base de données au monde sur le bâti.\nVous pouvez améliorer cette base de données.\n\n### Sélection\n\nVous pouvez sélectionner un bâtiment en cliquant sur son contour. Le bâtiment\nsera ainsi surligné, une boîte à outils apparaîtra, ainsi qu'un panneau contenant\nles informations sur le bâtiment.\n\n### Correction\n\nParfois, un bâtiment est mal placé ou possède des informations incorrectes.\n\nPour déplacer un bâtiment dans son intégralité, sélectionnez-le, puis cliquez\nsur l'outil \"Déplacer\". Déplacez ensuite la souris, puis cliquez lorsque le\nbâtiment est placé correctement.\n\nPour corriger la forme d'un bâtiment, glissez-déposez les points du contour\ndu bâtiment.\n\n### Création\n\nL'une des problématiques concernant les bâtiments est qu'ils peuvent être\nreprésentés à la fois par un point ou par un polygone. La règle d'or est de\n_dessiner les bâtiments avec des polygone dès que c'est possible_, et de\ncartographier les entreprises, équipements, adresses, et tout ce qui ne\ndépend pas directement de la construction comme des points placés\nau sein de la forme du bâtiment.\n\nDessinez un bâtiment en cliquant sur le bouton \"Polygone\" en haut à gauche\nde l'interface, ajoutez des points en cliquant sur la carte et terminez la forme\nen cliquant sur le premier point, ou en appuyant sur la touche \"Entrée\" de\nvotre clavier.\n\n### Suppression\n\nSi un bâtiment dessiné est inexistant (par exemple s'il n'existe pas sur l'image\nsatellite et que vous avez vérifié sur place que ce n'était pas une construction\nrécente), vous pouvez le supprimer. Attention avant de supprimer un élément ;\ntout le monde peut constater que vous l'avez supprimé, et il peut s'agir d'un\nélément plus récent que l'image satellite.\n\nVous pouvez supprimer un bâtiment en le sélectionnant, puis en cliquant sur\nl'icône représentant une poubelle, ou en appuyant sur la touche \"Suppr\" de\nvotre clavier.\n"
+        "inspector": "# Utilisation de l'inspecteur\n\nL'inspecteur est l'élément de l'interface utilisateur qui apparaît à droite de la page quand un élément est sélectionné. Il permet de mettre à jour les détails le concernant.\n\n### Sélectionner un type d'élément\n\nAprès ajout d'un point, d'une ligne ou d'un polygone, vous pouvez indiquer de quel type d'élément il s'agit : une route principale ou résidentielle, un supermarché, un café... L'inspecteur affiche des boutons pour les éléments les plus communs, et vous pouvez trouver les autres à l'aide du formulaire de recherche.\n\nCliquez sur 'i' dans le coin en bas à droite des boutons pour en savoir plus sur l'élément dont il s'agit. Cliquez sur le bouton pour choisir cet élément.\n\n### Utiliser les formulaires et les tags\n\nAprès avoir choisi le type d'élément, ou lorsque vous sélectionnez un élément dont la nature est déjà indiquée, l'inspecteur affiche des champs comprenant des détails sur l'élément concerné - adresse, nom, etc.\n\nEn-dessous des champs, vous pouvez cliquer sur les icônes pour ajouter des détails supplémentaires, comme des informations issues de [Wikipedia](http://www.wikipedia.org/), des renseignements sur l'accès handicapé, ou plus encore.\n\nEn bas de l'inspecteur, cliquez sur 'attributs supplémentaires' pour ajouter des attributs arbitraires à l'élément. [Taginfo](http://taginfo.openstreetmap.org/) est une excellente ressource pour en savoir plus sur les combinaisons d'attributs les plus fréquentes.\n\nLes changements que vous effectuez dans l'inspecteur sont immédiatement visibles sur la carte. Vous pouvez les annulez dès que vous le souhaitez en cliquant sur 'annuler'. \n\n### Fermer l'inspecteur\n\nPour fermer l'inspecteur, vous pouvez cliquer sur le bouton 'fermer' en haut à droite, appuyer sur Échap ou encore cliquer sur la carte.\n"
     },
     "intro": {
         "navigation": {
@@ -280,10 +286,10 @@
             "pane": "Lorsqu'un élément est sélectionné, l'éditeur d'éléments est affiché. L'entête nous indique le type d'élément et le panneau principal nous montre les attributs de l'élément, tels que son nom et son adresse. **Fermez l'éditeur d'éléments en cliquant sur le bouton de fermeture en haut à droite.**"
         },
         "points": {
+            "title": "Points",
             "add": "Des points peuvent être utilisés pour représenter des éléments comme des magasins, restaurants ou monuments. Ils indiquent une position précise et décrivent ce qu'il y a à cet endroit. **Cliquez sur le bouton \"Point\" pour ajouter un point.**",
             "place": "Le point peut être placé en cliquant sur la carte. **Placer le point sur le dessus du bâtiment.**",
-            "search": "De nombreux éléments peuvent être représentés par des points. Le point que vous venez d'ajouter est un café (Cafe). **Cherchez \"Cafe\".**",
-            "choose": "**Sélectionnez \"Cafe\" dans le tableau.**",
+            "choose": "**Choisi Café dans la liste.**",
             "describe": "Le point est désormais marqué comme étant un café. Nous pouvons ajouter davantage d'informations grâce à l'éditeur d'élément. **Ajoutez un nom au café.**",
             "close": "L'éditeur d'éléments peut être fermé en cliquant sur le bouton de fermeture. **Fermez l'éditeur d'éléments.**",
             "reselect": "Souvent, des points existent déjà, mais contiennent des erreurs ou sont incomplets. Vous pouvez éditer des points déjà existants. **Sélectionnez le point que vous venez de créer.*",
@@ -292,19 +298,19 @@
             "delete": "Le menu autour du point contient des opérations que vous pouvez lui appliquer, notamment sa suppression. **Supprimez le point.**"
         },
         "areas": {
-            "add": "Les polygones permettent de détailler plus précisément des éléments cartographiques. Ils permettent de renseigner les limites géographiques d'un élément. Les polygones peuvent être utiliser pour décrire les mêmes éléments que les points, et sont souvent à privilégier. **Cliquez sur le bouton \"Polygone\" pour ajouter un nouveau polygone.**",
             "corner": "Les polygones sont dessinés en plaçant des nœuds l'un après l'autre. **Ajoutez un premier nœud sur un coin de l'aire de jeu.**",
             "place": "Dessinez le polygone en ajoutant des nœuds. Terminez le polygone en cliquant sur le nœud de départ. **Dessinez un polygone pour l'aire de jeu.**",
-            "search": "**Recherchez \"Aire de jeu\" (Playground).**",
-            "choose": "**Sélectionnez \"Aire de jeu\" (Playground) dans le tableau.**",
+            "search": "**Recherchez \"Jeux pour enfants\".**",
+            "choose": "**Choisi Terrain de jeu dans la liste.**",
             "describe": "**Ajouter un nom, et fermez l'éditeur d'éléments.**"
         },
         "lines": {
+            "title": "Lignes",
             "add": "Les lignes sont utilisées pour représenter des éléments tels que des routes, des chemins de fer ou des rivières. **Cliquez sur le bouton \"Ligne\" pour ajouter une nouvelle ligne.**",
             "start": "**Commencez la ligne en cliquant sur l'extrémité de la route.**",
             "intersect": "Cliquez pour ajouter des nœuds à la ligne.Si nécessaire, Vous pouvez déplacer la carte pendant le dessin. Les routes, comme d'autres types de lignes, font partie d'un réseau plus large : il est important que ces lignes soient correctement connectées afin que les applications de \"routing\" fonctionnent. **Cliquez sur Flower Street pour créer une intersection qui connecte les deux lignes.**",
             "finish": "Les lignes peuvent être terminées en cliquant une seconde fois sur le dernier nœud. **Terminez le dessin de la route**",
-            "road": "**Sélectionnez \"Route\" dans le tableau.**",
+            "road": "**Choisi Rue dans la liste**",
             "residential": "Il y a différent types de routes, le plus commun est \"Résidentielle\" (Residential). **Sélectionnez le type \"Résidentielle\".**",
             "describe": "**Donnez un nom à la rue et fermez l'éditeur d'éléments.**",
             "restart": "La route nécessite d'être interconnectée avec Flower Street."
@@ -594,7 +600,7 @@
                 "label": "Supervisé"
             },
             "surface": {
-                "label": "Surface"
+                "label": "Revêtement"
             },
             "tourism": {
                 "label": "Type"
@@ -666,6 +672,9 @@
             "amenity": {
                 "name": "Équipements"
             },
+            "amenity/atm": {
+                "name": "Distributeur de billets"
+            },
             "amenity/bank": {
                 "name": "Banque",
                 "terms": "coffre, dépôt, économies, compte, épargne, trésorerie, caisse, banque"
@@ -692,6 +701,9 @@
             "amenity/cinema": {
                 "name": "Cinéma",
                 "terms": "cinéma, film, ciné, cinématographe, salle obscure, projection "
+            },
+            "amenity/college": {
+                "name": "Enseignement Supérieur"
             },
             "amenity/courthouse": {
                 "name": "Tribunal"
@@ -790,7 +802,8 @@
                 "terms": "mairie, administration"
             },
             "amenity/university": {
-                "name": "Université"
+                "name": "Université",
+                "terms": "enseignement supérieur"
             },
             "amenity/waste_basket": {
                 "name": "Corbeille",
@@ -1026,7 +1039,7 @@
                 "name": "Construction"
             },
             "landuse/farm": {
-                "name": "Ferme"
+                "name": "Cultures"
             },
             "landuse/farmyard": {
                 "name": "Bâtiments de ferme"

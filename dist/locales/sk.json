@@ -3,17 +3,17 @@
         "add_area": {
             "title": "Plocha",
             "description": "Pridaj do mapy parky, budovy, jazerá alebo dalšie plochy.",
-            "tail": "Kliknite na mapu a začnite kresliť plochu ako park, jazero alebo budovu."
+            "tail": "Kliknutím na mapu začnite kresliť plochu ako park, jazero alebo budovu."
         },
         "add_line": {
             "title": "Čiara",
             "description": "Pridaj do mapy cesty, ulice, chodníky pre chodcov, kanály alebo iné čiary.",
-            "tail": "Kliknite na mapu a začnite kresliť cestu, chodník alebo trať."
+            "tail": "Kliknutím na mapu začnite kresliť cestu, chodník alebo trať."
         },
         "add_point": {
             "title": "Bod",
             "description": "Pridaj do mapy reštaurácie, pamätihodnosťi, poštové schránky alebo iné body.",
-            "tail": "Kliknite na mapu a pridajte bod."
+            "tail": "Kliknutím na mapu pridajte bod."
         },
         "browse": {
             "title": "Prehľadať",
@@ -146,8 +146,8 @@
             },
             "key": "X",
             "annotation": {
-                "line": "Rozdeľ čiaru.",
-                "area": "Rozdeľ ohraničenie plochy.",
+                "line": "Rozdelenie čiary.",
+                "area": "Rozdelenie ohraničenia plochy.",
                 "multiple": "Rozdelenie {n} čiar/hraníc plôch. "
             },
             "not_eligible": "Čiary nemôžu byť rozdelené na ich začiatku alebo konci.",
@@ -218,7 +218,7 @@
         "heading": "Máte neuložené zmeny",
         "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej relácie?",
         "restore": "Obnov",
-        "reset": "Vynuluj"
+        "reset": "Vymaž"
     },
     "save": {
         "title": "Ulož",
@@ -228,9 +228,18 @@
         "uploading": "Nahrávam zmeny do OpenStreetMap.",
         "unsaved_changes": "Máte neuložené zmeny"
     },
+    "success": {
+        "edited_osm": "OSM bol upravený!",
+        "facebook": "Zdieľaj na Facebooku",
+        "tweet": "Tweetuj",
+        "okay": "OK"
+    },
+    "confirm": {
+        "okay": "OK"
+    },
     "splash": {
         "welcome": "Vitajte v iD editore pre OpenStreetMap",
-        "text": "iD je prívetivý ale silný nástroj pre prispievanie do najlepšej slobodnej mapy sveta. Toto je vývojová verzia {version}. Pre viac informácií navštívte {website} a nahlasujte chyby na {github}.",
+        "text": "iD je prívetivý ale silný nástroj pre prispievanie do najlepšej slobodnej mapy sveta. Toto je verzia {version}. Pre viac informácií navštívte {website} a nahlasujte chyby na {github}.",
         "walkthrough": "Začni prehliadku",
         "start": "Upravuj"
     },
@@ -270,46 +279,51 @@
         "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vľavo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
         "addresses": "# Adresy\n\nAdresy sú niekedy tou najužitočnejšou informáciou na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam na mape ako obrysy budov ale tiež ku tým, ktoré boli zmapované ako samostatný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
         "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na pravej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho políčka.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n\n### Zatvorenie inšpektora\n\nInšpektora môžete zatvoriť kliknutím na tlačitko pre zatvorenie vpravo hore, stlačením klávesu \"Escape\" alebo kliknutím na mapu.\n",
-        "buildings": "# Budovy\n\nOpenStreetMap je najväčšia databáza budov na svete. Práve vy ju môžete tvoriť a vylepšovať.\n\n### Výber\n\nBudovu môžete vybrať kliknutím na jej hranicu. Týmto sa budova zvýrazní a otvorí sa malá ponuka nástrojov a postranný panel, ukazujúcim dodatočné informácie o budove.\n\n### Úprava\n\nNiekedy môžu byť budovy chybne umiestnené alebo mať nesprávne označenia.\n\nPre presun celej budovy ju vyberte, a potom kliknite na nástroj \"Presunúť\". Posuňte vašu myš, aby ste posunuli budovu a kliknite, keď je umiestnená správne.\n\nPre opravu tvaru budovy, kliknite a ťahajte za uzly, ktoré tvoria jej ohraničenie, na lepšie miesto.\n\n### Vytváranie\n\nJeden z hlavných problémov okolo pridávania budov je, že OpenStreetMap zaznamenáva budovy ako útvary aj ako body. Nepísaným pravidlom je mapovať budovy vo forme útvaru vždy, keď je to možné a mapovať firmy, domovy, služby občianskej vybavenosti a ďalšie subjekty, ktoré v budove pôsobia ako body umiestnené vo vnútri útvaru budovy.\n\nZačnite kresliť budovu ako útvar, klinutím na tlačítko \"Plocha\" vľavo hore a ukončite ju buď stlačením \"Enter\" na vašej klávesnici alebo kliknutím na prvý uzol, ktorý ste zakreslili, čím uzavriete útvar.\n\n### Vymazávanie\n\nAk je budova úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže budova môže byť jednoducho novopostavená.\n"
+        "buildings": "# Budovy\n\nOpenStreetMap je najväčšia databáza budov na svete. Práve vy ju môžete tvoriť a vylepšovať.\n\n### Výber\n\nBudovu môžete vybrať kliknutím na jej hranicu. Týmto sa budova zvýrazní a otvorí sa malá ponuka nástrojov a postranný panel, ukazujúcim dodatočné informácie o budove.\n\n### Úprava\n\nNiekedy môžu byť budovy chybne umiestnené alebo mať nesprávne označenia.\n\nPre presun celej budovy ju vyberte, a potom kliknite na nástroj \"Presunúť\". Posuňte vašu myš, aby ste posunuli budovu a kliknite, keď je umiestnená správne.\n\nPre opravu tvaru budovy, kliknite a ťahajte za uzly, ktoré tvoria jej ohraničenie, na lepšie miesto.\n\n### Vytváranie\n\nJeden z hlavných problémov okolo pridávania budov je, že OpenStreetMap zaznamenáva budovy ako útvary aj ako body. Nepísaným pravidlom je mapovať budovy vo forme útvaru vždy, keď je to možné a mapovať firmy, domovy, služby občianskej vybavenosti a ďalšie subjekty, ktoré v budove pôsobia ako body umiestnené vo vnútri útvaru budovy.\n\nZačnite kresliť budovu ako útvar, klinutím na tlačítko \"Plocha\" vľavo hore a ukončite ju buď stlačením \"Enter\" na vašej klávesnici alebo kliknutím na prvý uzol, ktorý ste zakreslili, čím uzavriete útvar.\n\n### Vymazávanie\n\nAk je budova úplne nesprávna - vidíte, že neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný. Rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže budova môže byť jednoducho novopostavená.\n\nBudovu môžete vymazať tak, že na ňu kliknete, čím ju vyberiete, a potom kliknete na ikonu koša alebo stlačením klávesu \"Delete\".\n"
     },
     "intro": {
         "navigation": {
-            "drag": "Hlavná plocha s mapou zobrazuje nad pozadím údaje z OpenStreetMap. Posúvať sa môžete ťahaním za mapu a koliečkom myši rovnako ako u iných webových máp. **Potiahnite za mapu!**",
-            "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Všetky objekty môžu byť vybrané kliknutím na ne. **Kliknite na bod aby ste ho vybrali.**",
+            "title": "Navigácia",
+            "drag": "Hlavná plocha s mapou zobrazuje nad pozadím údaje z OpenStreetMap. Presúvať sa môžete ťahaním za mapu alebo koliečkom myši rovnako, ako u iných webových máp. **Potiahnite za mapu!**",
+            "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Všetky objekty môžu byť vybraté tým, že na ne kliknete. **Kliknite na bod, aby ste ho vybrali.**",
             "header": "Hlavička nám ukazuje typ objektu.",
             "pane": "Keď je objekt vybraný, zobrazí sa editor objektu. Hlavička nám ukazuje typ objektu a hlavný panel zobrazuje atribúty objektu, ako sú jeho meno a adresa. **Zatvorte editor objektu pomocou tlačítka vpravo hore.**"
         },
         "points": {
-            "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo tam je. **Kliknite na tlačidlo Bod a pridajte nový bod.**",
+            "title": "Body",
+            "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo sa tam nachádza. **Kliknite na tlačidlo Bod a pridajte nový bod.**",
             "place": "Bod môžete umiestniť kliknutím na mapu. **Umiestnite bod na vrch budovy.**",
-            "search": "Bod môže znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"Kaviareň\"**",
-            "choose": "**Vyberte Kaviareň z ponuky.**",
+            "search": "Je veľa objektov, ktoré môžu byť znázornené pomocou bodov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"Kaviareň\"**",
+            "choose": "**Vyberte Kaviareň zo zoznamu.**",
             "describe": "Bod je teraz označený ako kaviareň. S použitím editora objektu môžeme pridať viac informácií o objekte. **Pridajte meno**",
             "close": "Editor objektu sa zatvára pomocou zatváracieho tlačítka. **Zatvorte editor objektu**",
-            "reselect": "Často krát už body existujú, ale obsahujú chyby alebo nekompletné informácie. Existujúce body môžeme upravovať. **Zvoľte bod, ktorý ste práve vytvorili.**",
+            "reselect": "Body už často krát existujú, ale obsahujú chyby alebo nekompletné informácie. Existujúce body môžeme upravovať. **Zvoľte bod, ktorý ste práve vytvorili.**",
             "fixname": "**Zmeňte meno a zavrite editor objektu.**",
             "reselect_delete": "Všetky objekty na mape môžu byť vymazané. **Kliknite na bod, ktorý ste vytvorili.**",
             "delete": "Ponuka okolo bodu obsahuje operácie, ktoré s ním môžete uskutočniť, vrátane vymazania. **Vymažte bod.**"
         },
         "areas": {
-            "add": "Plochy sú detailnejší spôsob ako znázorniť objekty. Poskytujú informácie o hraniciach objektu. Plochy môžu byť použité pre väčšinu typov objektu, pre ktoré používame body a sú často krát uprednostňované. **Kliknite na tlačítko Plocha a pridajte novú plochu.**",
+            "title": "Plochy",
+            "add": "Plochy sú detailnejší spôsob ako znázorniť objekty. Poskytujú informácie o hraniciach objektu. Plochy môžu byť použité pre väčšinu typov objektov, pre ktoré používame body a sú aj často krát uprednostňované. **Kliknite na tlačítko Plocha a pridajte novú plochu.**",
             "corner": "Plochy sú zakreslované umiestňovaním uzlov, ktoré označujú hranicu plochy. **Umiestnite počiatočný uzol na jeden z rohov ihriska.**",
             "place": "Nakreslite plochu umiestnením ďalších uzlov. Dokončite plochu kliknutím na počiatočný uzol. **Nakreslite plochu pre ihrisko.**",
             "search": "**Vyhľadajte Ihrisko.**",
-            "choose": "**Vyberte Ihrisko z ponuky.**",
+            "choose": "**Vyberte Ihrisko zo zoznamu.**",
             "describe": "**Vyplňte meno a zatvorte editor objektu**"
         },
         "lines": {
+            "title": "Čiary",
             "add": "Čiary sú používané na znázorňovanie objektov ako cesty, železnice a rieky. **Kliknite na tlačítko Čiara a pridajte novú čiaru.**",
             "start": "**Začnite kresliť čiaru kliknutím na koniec cesty.**",
             "intersect": "Kliknite pre pridanie ďalších uzlov ku čiare. Ak je to nutné, potiahnite za mapu pre posun. Cesty a mnoho ďalších typov čiar sú súčasťou veľkej siete. Aby aplikácie pre navigáciu pracovali správne, je dôležité, aby boli tieto čiary správne prepojené. **Kliknite na ulicu Flower Street a vytvorte tak križovatku spájajúcu obe čiary.**",
             "finish": "Čiary sa dajú ukončiť opätovným kliknutím na posledný uzol. **Dokončite kreslenie cesty.**",
-            "road": "**Vyberte Cestu z ponuky**",
-            "residential": "Poznáme cesty rôznych typov. Najviac častý z nich je Obytná cesta. **Vyberte typ: Obytná cesta**",
+            "road": "**Vyberte Cestu zo zoznamu**",
+            "residential": "Poznáme cesty rôznych typov. Najviac častý z nich je Obytná ulica. **Vyberte typ: Obytná ulica**",
             "describe": "**Pomenujte cestu a zatvorte editor objektu.**",
             "restart": "Cesta musí pretínať ulicu Flower Street."
         },
         "startediting": {
+            "title": "Začnite upravovať",
             "help": "Ďalšia dokumentácia a táto prehliadka sú dostupné tu.",
             "save": "Nezabudnite pravidelne ukladať vaše zmeny!",
             "start": "Začnite mapovať!"
@@ -666,6 +680,9 @@
             "amenity": {
                 "name": "Občianska vybavenosť"
             },
+            "amenity/atm": {
+                "name": "Bankomat"
+            },
             "amenity/bank": {
                 "name": "Banka",
                 "terms": "pokladne,pobočka,kreditná únia,depozitár,pokladnica,fondy,investícia,firma,rezerva,zásoba,akcie,trezor"
@@ -789,7 +806,7 @@
                 "name": "Toalety"
             },
             "amenity/townhall": {
-                "name": "Mestský úrad/Radnica",
+                "name": "Mestský úrad",
                 "terms": "radnica,obecný úrad,mestský úrad,správa"
             },
             "amenity/university": {

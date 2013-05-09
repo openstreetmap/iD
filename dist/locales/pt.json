@@ -47,6 +47,10 @@
         },
         "circularize": {
             "title": "Circularizar",
+            "description": {
+                "line": "Faça um círculo com essa linha.",
+                "area": "Faça um círculo com essa área."
+            },
             "key": "O",
             "annotation": {
                 "line": "Fazer uma linha circular.",
@@ -86,7 +90,8 @@
             "title": "Desligar",
             "description": "Desligar rotas umas das outras.",
             "key": "D",
-            "annotation": "Rotas desligadas."
+            "annotation": "Rotas desligadas.",
+            "not_connected": "Não existe linhas/áreas suficientes aqui para desconectar."
         },
         "merge": {
             "title": "Combinar",
@@ -133,6 +138,7 @@
     "view_on_osm": "Ver em OSM",
     "zoom_in_edit": "Aproxime-se para editar o mapa",
     "logout": "Encerrar sessão",
+    "loading_auth": "Conectando-se ao OpenStreetMap...",
     "report_a_bug": "Reportar un erro",
     "commit": {
         "title": "Guardar Alterações",
@@ -189,7 +195,8 @@
     },
     "splash": {
         "welcome": "Bemvindo ao editor OpenStreetMap iD",
-        "text": "Esta é a versão de desenvolvimento {version}. Para mais informação visite {website} e reporte erros em {github}."
+        "walkthrough": "Comece o passo a passo",
+        "start": "Editar agora"
     },
     "source_switch": {
         "live": "ao vivo",
@@ -218,6 +225,11 @@
     },
     "help": {
         "title": "Ajuda"
+    },
+    "intro": {
+        "startediting": {
+            "start": "Começe o mapeamento!"
+        }
     },
     "presets": {
         "fields": {
@@ -296,8 +308,24 @@
             "internet_access": {
                 "label": "Acesso à Internet",
                 "options": {
-                    "wlan": "Wifi"
+                    "wlan": "Wifi",
+                    "wired": "Com fio"
                 }
+            },
+            "landuse": {
+                "label": "Tipo"
+            },
+            "layer": {
+                "label": "Camada"
+            },
+            "leisure": {
+                "label": "Tipo"
+            },
+            "levels": {
+                "label": "Níveis"
+            },
+            "man_made": {
+                "label": "Tipo"
             },
             "maxspeed": {
                 "label": "Limite de Velocidade"
@@ -379,8 +407,14 @@
             }
         },
         "presets": {
+            "aeroway": {
+                "name": "Via área"
+            },
             "aeroway/aerodrome": {
                 "name": "Aeroporto"
+            },
+            "aeroway/helipad": {
+                "name": "Heliponto"
             },
             "amenity": {
                 "name": "Amenidade"
@@ -502,6 +536,15 @@
             "highway/track": {
                 "name": "Pista"
             },
+            "highway/traffic_signals": {
+                "name": "Semáforo"
+            },
+            "historic/monument": {
+                "name": "Monumento"
+            },
+            "landuse": {
+                "name": "Uso do solo"
+            },
             "landuse/cemetery": {
                 "name": "Cemitério"
             },
@@ -525,6 +568,12 @@
             },
             "landuse/industrial": {
                 "name": "Industrial"
+            },
+            "landuse/residential": {
+                "name": "Residencial"
+            },
+            "leisure": {
+                "name": "Lazer"
             },
             "leisure/golf_course": {
                 "name": "Campo de Golf"
@@ -555,6 +604,9 @@
             },
             "natural/coastline": {
                 "name": "Linha Costeira"
+            },
+            "natural/tree": {
+                "name": "Árvore"
             },
             "natural/water": {
                 "name": "Água"

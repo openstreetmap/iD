@@ -178,13 +178,15 @@
         "no_documentation_key": "没有关于此键的文档",
         "show_more": "显示更多",
         "new_tag": "新建标签",
-        "view_on_osm": "在on openstreetmap.org上查看",
+        "view_on_osm": "在openstreetmap.org上查看",
         "editing_feature": "编辑{feature}",
+        "all_tags": "所有标签",
         "choose": "选择对象的类型",
         "results": "{search}共有{n}个结果",
         "reference": "在OpenStreetMap Wiki上查看",
         "back_tooltip": "修改对象的类型",
-        "remove": "删除"
+        "remove": "删除",
+        "search": "搜索"
     },
     "background": {
         "title": "背景",
@@ -209,7 +211,6 @@
     },
     "splash": {
         "welcome": "欢迎使用OpenStreetMap编辑器iD",
-        "text": "这是开发版本{version}。欲了解更多信息，请参阅{website}，在{github}报告bug。",
         "walkthrough": "开始练习",
         "start": "现在编辑"
     },
@@ -244,6 +245,17 @@
         "title": "帮助"
     },
     "intro": {
+        "points": {
+            "choose": "**从列表中选择咖啡厅。**"
+        },
+        "areas": {
+            "search": "**搜索游乐场。**",
+            "choose": "**从列表中选择游乐场。**",
+            "describe": "**添加一个名字，并关闭该要素编辑器**"
+        },
+        "lines": {
+            "road": "**从列表中选择道路**"
+        },
         "startediting": {
             "save": "不要忘了定期保存你的修改！",
             "start": "开始制图！"
@@ -304,7 +316,8 @@
                     "housename": "房屋名称",
                     "number": "123",
                     "street": "街道",
-                    "city": "城市"
+                    "city": "城市",
+                    "postcode": "邮政编码"
                 }
             },
             "admin_level": {
@@ -389,6 +402,12 @@
             "historic": {
                 "label": "类型"
             },
+            "iata": {
+                "label": "国际航空运输协会IATA"
+            },
+            "icao": {
+                "label": "国际民航组织ICAO"
+            },
             "internet_access": {
                 "label": "互联网接入",
                 "options": {
@@ -411,6 +430,9 @@
             },
             "levels": {
                 "label": "级别"
+            },
+            "location": {
+                "label": "位置"
             },
             "man_made": {
                 "label": "类型"
@@ -511,6 +533,9 @@
             "tourism": {
                 "label": "类型"
             },
+            "towertype": {
+                "label": "塔型"
+            },
             "tracktype": {
                 "label": "类型"
             },
@@ -544,9 +569,30 @@
                 "name": "机场",
                 "terms": "飞机,机场,机场"
             },
+            "aeroway/apron": {
+                "name": "停机坪",
+                "terms": "匝道"
+            },
+            "aeroway/gate": {
+                "name": "机场门"
+            },
+            "aeroway/hangar": {
+                "name": "机库"
+            },
             "aeroway/helipad": {
                 "name": "直升机场",
                 "terms": "直升机,直升机停机坪,直升机场"
+            },
+            "aeroway/runway": {
+                "name": "跑道",
+                "terms": "着陆跑道"
+            },
+            "aeroway/taxiway": {
+                "name": "滑行道"
+            },
+            "aeroway/terminal": {
+                "name": "机场航站楼",
+                "terms": "机场"
             },
             "amenity": {
                 "name": "便利设施"
@@ -571,9 +617,15 @@
                 "name": "咖啡",
                 "terms": "咖啡,茶,咖啡馆"
             },
+            "amenity/car_wash": {
+                "name": "洗车"
+            },
             "amenity/cinema": {
                 "name": "电影院",
                 "terms": "大屏幕,电影,电影院,图片展示,图片,剧场,表演,银幕"
+            },
+            "amenity/college": {
+                "name": "学院"
             },
             "amenity/courthouse": {
                 "name": "法院"
@@ -587,6 +639,9 @@
             "amenity/fire_station": {
                 "name": "消防站"
             },
+            "amenity/fountain": {
+                "name": "喷泉"
+            },
             "amenity/fuel": {
                 "name": "加油站"
             },
@@ -595,6 +650,10 @@
             },
             "amenity/hospital": {
                 "name": "医院"
+            },
+            "amenity/kindergarten": {
+                "name": "幼儿园",
+                "terms": "幼儿园,托儿所"
             },
             "amenity/library": {
                 "name": "图书馆"
@@ -659,7 +718,12 @@
                 "terms": "村政厅,市政府,法院,市政建设,市政中心"
             },
             "amenity/university": {
-                "name": "大学"
+                "name": "大学",
+                "terms": "学院"
+            },
+            "amenity/waste_basket": {
+                "name": "垃圾箱",
+                "terms": "垃圾桶,垃圾箱"
             },
             "barrier": {
                 "name": "屏障"
@@ -714,6 +778,9 @@
             },
             "building/house": {
                 "name": "房屋"
+            },
+            "emergency/phone": {
+                "name": "紧急电话"
             },
             "entrance": {
                 "name": "入口"
@@ -782,6 +849,18 @@
             },
             "highway/service": {
                 "name": "辅助道路"
+            },
+            "highway/service/alley": {
+                "name": "胡同"
+            },
+            "highway/service/driveway": {
+                "name": "车道"
+            },
+            "highway/service/emergency_access": {
+                "name": "紧急通道"
+            },
+            "highway/service/parking_aisle": {
+                "name": "停车过道"
             },
             "highway/steps": {
                 "name": "台阶",
@@ -925,6 +1004,9 @@
             "leisure/pitch/tennis": {
                 "name": "网球场"
             },
+            "leisure/pitch/volleyball": {
+                "name": "排球场"
+            },
             "leisure/playground": {
                 "name": "运动场"
             },
@@ -940,14 +1022,23 @@
             "man_made": {
                 "name": "人造的"
             },
+            "man_made/breakwater": {
+                "name": "矶"
+            },
             "man_made/lighthouse": {
                 "name": "灯塔"
             },
             "man_made/pier": {
                 "name": "码头"
             },
+            "man_made/pipeline": {
+                "name": "管道"
+            },
             "man_made/survey_point": {
                 "name": "测量点"
+            },
+            "man_made/tower": {
+                "name": "塔"
             },
             "man_made/wastewater_plant": {
                 "name": "废水处理厂",
@@ -955,6 +1046,9 @@
             },
             "man_made/water_tower": {
                 "name": "水塔"
+            },
+            "man_made/water_well": {
+                "name": "水井"
             },
             "man_made/water_works": {
                 "name": "自来水公司"
@@ -1108,7 +1202,8 @@
                 "name": "商店"
             },
             "shop/alcohol": {
-                "name": "酒品店"
+                "name": "酒品店",
+                "terms": "酒精"
             },
             "shop/bakery": {
                 "name": "面包店"

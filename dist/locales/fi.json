@@ -1,0 +1,238 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Alue",
+            "description": "Lisää puistoja, rakennuksia, järviä tai muita alueita kartalle.",
+            "tail": "Aloita alueen, kuten puiston, järven tai rakennuksen piirtäminen napsauttamalla karttaa."
+        },
+        "add_line": {
+            "title": "Viiva",
+            "description": "Lisää katuja, jalkakäytäviä, polkuja, jokia ja muita viivoja kartalle.",
+            "tail": "Aloita kadun tai polun piirtäminen napsauttamalla karttaa."
+        },
+        "add_point": {
+            "title": "Paikkapiste",
+            "description": "Lisää ravintoloita, turistinähtävyyksiä, postilaatikoita ja muita paikkapisteitä kartalle.",
+            "tail": "Lisää paikkapiste napsauttamalla karttaa."
+        },
+        "browse": {
+            "title": "Selaa",
+            "description": "Loitonna ja lähennä karttaa."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Paikkapiste lisätty.",
+                "vertex": "Piste lisätty viivaan."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Viivan piirtäminen aloitettu.",
+                "area": "Alueen piirtäminen aloitettu."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Viivan muokkaaminen aloitettu.",
+                "area": "Alueen muokkaaminen aloitettu."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Piirtäminen keskeytetty."
+        },
+        "change_tags": {
+            "annotation": "Tagit vaihdettu."
+        },
+        "circularize": {
+            "title": "Pyöristä",
+            "description": {
+                "line": "Pyöristä tämä viiva.",
+                "area": "Pyöristä tämä alue."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Viiva pyöristettiin.",
+                "area": "Alue pyöristettiin."
+            }
+        },
+        "orthogonalize": {
+            "title": "Muuta suorakulmaiseksi",
+            "description": "Muuta viiva tai alue suorakulmaiseksi.",
+            "key": "Q",
+            "annotation": {
+                "line": "Viiva muutettu suorakulmaiseksi.",
+                "area": "Alue muutettu suorakulmaiseksi."
+            }
+        },
+        "delete": {
+            "title": "Poista",
+            "description": "Poista tämä kohde kartalta.",
+            "annotation": {
+                "point": "Paikkapiste poistettu.",
+                "vertex": "Piste poistettu viivalta.",
+                "line": "Viiva poistettu.",
+                "area": "Alue poistettu.",
+                "relation": "Relaatio poistettu.",
+                "multiple": "{n] kohdetta poistettu."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Viiva yhdistetty pisteeseen.",
+                "vertex": "Kaksi viivaa yhdistetty.",
+                "line": "Kaksi viivaa yhdistetty.",
+                "area": "Viiva ja alue yhdistetty."
+            }
+        },
+        "disconnect": {
+            "title": "Katkaise",
+            "key": "D"
+        },
+        "merge": {
+            "title": "Yhdistä",
+            "description": "Yhdistä nämä viivat.",
+            "key": "C",
+            "annotation": "{n} viivaa yhdistetty."
+        },
+        "move": {
+            "title": "Siirrä",
+            "description": "Siirrä tämä kohde toiseen paikkaan.",
+            "key": "M",
+            "annotation": {
+                "point": "Paikkapiste siirretty.",
+                "vertex": "Viivapiste siirretty.",
+                "line": "Viiva siirretty.",
+                "area": "Alue siirretty.",
+                "multiple": "Monta kohdetta siirretty."
+            }
+        },
+        "rotate": {
+            "title": "Käännä",
+            "description": "Käännä tätä kohdetta sen keskipisteen ympäri.",
+            "key": "R",
+            "annotation": {
+                "line": "Viiva käännetty.",
+                "area": "Alue käännetty."
+            }
+        },
+        "reverse": {
+            "title": "Vaihda suuntaa",
+            "description": "Muuta viivan kulkusuunta päinvastaiseksi.",
+            "key": "V",
+            "annotation": "Viivan kulkusuunta käännetty."
+        },
+        "split": {
+            "title": "Jaa",
+            "key": "X"
+        }
+    },
+    "nothing_to_undo": "Ei muokkaushistoriaa.",
+    "nothing_to_redo": "Ei muokkaushistoriaa.",
+    "just_edited": "Onnistuit juuri muokkaamaan OpenStreetMapia!",
+    "browser_notice": "Tämä kartanmuokkausohjelma toimii Firefox-, Chrome-, Safari- ja Opera-selaimissa sekä Internet Explorer 9 tai uudemmalla selaimella. Nykyinen verkkoselain ei ole tuettu, joten päivitä verkkoselain tai muokkaa karttaa Potlatch 2 -ohjelmalla.",
+    "view_on_osm": "Näytä OSM-kartalla",
+    "zoom_in_edit": "aloita muokkaaminen lähentämällä karttaa",
+    "logout": "kirjaudu ulos",
+    "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
+    "report_a_bug": "ilmoita ongelmasta",
+    "commit": {
+        "title": "Tallenna muutokset",
+        "description_placeholder": "Kuvaile lyhyesti karttaan tehtyjä muutoksia",
+        "message_label": "Yhteenveto",
+        "upload_explanation": "Karttaan tehdyt muutokset nimimerkillä {user} tulevat kaikkien OpenStreetMap-pohjaisten karttapalvelujen käytettäväksi.",
+        "save": "Tallenna",
+        "cancel": "Peru",
+        "warnings": "Varoitukset",
+        "modified": "Muokattu",
+        "deleted": "Poistettu",
+        "created": "Luotu"
+    },
+    "contributors": {
+        "list": "Karttaa ovat muokanneet {users}",
+        "truncated_list": "Karttaa ovat muokanneet {users} ja {count} muuta"
+    },
+    "geocoder": {
+        "title": "Etsi paikka",
+        "placeholder": "Etsi paikka",
+        "no_results": "Paikkaa hakusanalla \"{name}\" ei löytynyt"
+    },
+    "geolocate": {
+        "title": "Näytä oma sijaintini"
+    },
+    "inspector": {
+        "no_documentation_combination": "Tälle tagille ei löydy käyttöohjeita tai -suosituksia",
+        "no_documentation_key": "Tälle avaimelle ei löydy käyttöohjeita tai -suosituksia",
+        "show_more": "Näytä lisää",
+        "new_tag": "Uusi tagi",
+        "editing_feature": "Muokataan kohdetta {feature}",
+        "choose": "Valitse ominaisuustyyppi",
+        "results": "{n} hakutulosta haulle {search}",
+        "back_tooltip": "Muuta ominaisuustyyppiä"
+    },
+    "background": {
+        "title": "Tausta",
+        "description": "Taustan asetukset",
+        "percent_brightness": "{opacity}% kirkkaus",
+        "fix_misalignment": "Korjaa ilmakuvavirhe",
+        "reset": "palauta"
+    },
+    "restore": {
+        "heading": "Kaikkia muutoksia ei ole tallennettu",
+        "description": "Haluatko palauttaa tallentamattomat muutokset edelliseltä muokkauskerralta?",
+        "restore": "Palauta",
+        "reset": "Palauta"
+    },
+    "save": {
+        "title": "Tallenna",
+        "help": "Tallenna muutokset OpenStreetMapiin kaikkien nähtäville.",
+        "no_changes": "Ei tallennettavia muutoksia.",
+        "error": "Tallennettaessa tapahtui virhe",
+        "uploading": "Tallennetaan muutoksia OpenStreetMapiin.",
+        "unsaved_changes": "Kaikkia muutoksia ei ole tallennettu"
+    },
+    "success": {
+        "facebook": "Jaa Facebookissa",
+        "tweet": "Twiittaa",
+        "okay": "OK"
+    },
+    "confirm": {
+        "okay": "OK"
+    },
+    "splash": {
+        "welcome": "Tervetuloa iD- OpenStreetMapin kartanmuokkausohjelmaan",
+        "walkthrough": "Aloitusopas",
+        "start": "Muokkaa heti"
+    },
+    "source_switch": {
+        "lose_changes": "Kaikkia muutoksia ei ole tallennettu. Karttapalvelimen vaihtaminen hylkää nämä muutokset. Haluatko varmasti vaihtaa palvelinta?"
+    },
+    "tag_reference": {
+        "description": "Kuvaus",
+        "on_wiki": "{tag} palvelussa wiki.osm.org"
+    },
+    "validations": {
+        "untagged_line": "Viiva ilman tageja",
+        "untagged_area": "Alue, jolla ei ole tageja",
+        "many_deletions": "Haluatko varmasti poistaa {n} kohdetta? Kohteet poistetaan kaikkien näkyviltä OpenStreetMap-palvelussa."
+    },
+    "zoom": {
+        "in": "Lähennä",
+        "out": "Loitonna"
+    },
+    "gpx": {
+        "local_layer": "Oma GPX-tiedosto",
+        "drag_drop": "Vedä ja pudota GPX-tiedosto tälle sivulle"
+    },
+    "help": {
+        "title": "Ohje",
+        "help": "# Ohje⏎\n⏎\nTämä ohjelma on [OpenStreetMapin](http://www.openstreetmap.org/)⏎\n muokkaamiseen tarkoitettu ohjelma. OpenStreetMap on ilmainen ja⏎\nvapaasti muokattava maailmankartta. Voit lisätä ja muokata vapaasti⏎\nkotiseutusi ympäristön kohteita, jolloin kaikki voivat hyödyntää tietojasi.⏎\n⏎\nKaikki tällä ohjelmalla karttaan tehdyt muutokset tulevat julkisesti näkyviin⏎\nOpenStreetMap-karttapalvelussa. Kartan muokkaamiseen vaaditaan⏎\n[ilmainen OpenStreetMap-käyttäjätunnus](https://www.openstreetmap.org/user/new).⏎\n⏎\n[iD-kartanmuokkausohjelma](http://ideditor.com/) on avoin yhteistyöprojekti, jonka⏎\n[lähdekoodi on saatavilla GitHubista](https://github.com/systemed/iD).⏎\n"
+    },
+    "intro": {
+        "startediting": {
+            "save": "Muista tallentaa muutokset säännöllisesti!",
+            "start": "Aloita kartanmuokkaus!"
+        }
+    }
+}

@@ -228,9 +228,18 @@
         "uploading": "Đang tải các thay đổi lên OpenStreetMap.",
         "unsaved_changes": "Bạn có Thay đổi Chưa lưu"
     },
+    "success": {
+        "edited_osm": "Bạn đã sửa đổi OSM!",
+        "facebook": "Chia sẻ trên Facebook",
+        "tweet": "Tweet",
+        "okay": "OK"
+    },
+    "confirm": {
+        "okay": "OK"
+    },
     "splash": {
         "welcome": "Chào mừng bạn đến với iD, chương trình vẽ bản đồ OpenStreetMap",
-        "text": "Đây là phiên bản đang phát triển {version}. Xem thêm thông tin tại {website} và báo cáo lỗi tại {github}.",
+        "text": "iD là một công cụ hiệu quả và dễ sử dụng để đóng góp vào bản đồ mở lớn nhất trên thế giới. Đây là phiên bản {version}. Xem thêm thông tin tại {website} và báo cáo lỗi trên {github}.",
         "walkthrough": "Mở trình hướng dẫn",
         "start": "Tiến hành sửa đổi"
     },
@@ -270,20 +279,22 @@
         "imagery": "# Hình ảnh\n\nẢnh hàng không (chụp từ máy bay, vệ tinh) là tài nguyên quan trọng trong việc vẽ bản đồ. Có sẵn một số nguồn hình ảnh từ máy bay, vệ tinh, và dịch vụ mở trong trình vẽ này, dưới trình đơn “Tùy chọn Hình nền” ở bên trái.\n\nTheo mặc định, trình vẽ hiển thị lớp trên không của [Bản đồ Bing](http://www.bing.com/maps/), nhưng có sẵn nguồn khác tùy theo vị trí đang xem trong trình duyệt. Ngoài ra có hình ảnh rất rõ tại nhiều vùng ở một số quốc gia như Hoa Kỳ, Pháp, và Đan Mạch.\n\nHình ảnh đôi khi bị chệch đối với dữ liệu bản đồ vì dịch vụ hình ảnh có lỗi. Nếu bạn nhận thấy nhiều con đường bị chệch đối với hình nền, xin đừng di chuyển các đường này để trùng hợp với hình ảnh. Thay vì di chuyển các con đường, hãy chỉnh lại hình ảnh để phù hợp với dữ liệu tồn tại bằng cách nhấn “Chỉnh lại hình nền bị chệch” ở cuối hộp Tùy chọn Hình nền.\n",
         "addresses": "# Địa chỉ\n\nĐịa chỉ là những thông tin rất cần thiết trên bản đồ.\n\nTuy bản đồ thường trình bày các địa chỉ như một thuộc tính của đường sá, nhưng OpenStreetMap liên kết các địa chỉ với các tòa nhà hoặc miếng đất dọc đường.\n\nBạn có thể thêm thông tin địa chỉ vào các hình dạng tòa nhà hoặc các địa điểm quan tâm. Tốt nhất là lấy thông tin địa chỉ từ kinh nghiệm cá nhân, thí dụ đi dạo trên phố và ghi chép các địa chỉ hoặc nhớ lại những chi tiết từ hoạt động hàng ngày của bạn. Cũng như bất cứ chi tiết nào, dự án này hoàn toàn cấm sao chép từ các nguồn thương mại như Bản đồ Google.\n",
         "inspector": "# Biểu mẫu\n\nBiểu mẫu là hộp xuất hiện ở bên phải của trang khi nào một đối tượng được chọn. Biểu mẫu này cho phép sửa đổi các chi tiết của các đối tượng được chọn.\n\n### Chọn Thể loại\n\nSau khi thêm địa điểm, đường kẻ, hoặc vùng vào bản đồ, bạn có thể cho biết đối tượng này tượng trưng cho gì, chẳng hạn con đường, siêu thị, hoặc quán cà phê. Biểu mẫu trình bày các nút tiện để chọn các thể loại đối tượng thường gặp, hoặc bạn có thể gõ một vài chữ mô tả vào hộp tìm kiếm để tìm ra các thể loại khác.\n\nNhấn vào hình dấu trang ở phía dưới bên phải của một nút thể loại để tìm hiểu thêm về thể loại đó. Nhấn vào nút để chọn thể loại đó.\n\n### Điền đơn và Gắn thẻ\n\nSau khi bạn chọn thể loại, hoặc nếu chọn một đối tượng đã có thể loại, biểu mẫu trình bày các trường văn bản và điều khiển để xem và sửa các thuộc tính của đối tượng như tên và địa chỉ.\n\nỞ dưới các điều khiển có một số hình tượng có thể nhấn để thêm chi tiết, chẳng hạn tên bài [Wikipedia](http://www.wikipedia.org/) và mức hỗ trợ xe lăn.\n\nNhấn vào “Các thẻ năng cao” ở cuối biểu mẫu để gắn bất cứ thẻ nào vào đối tượng. [Taginfo](http://taginfo.openstreetmap.org/) là một công cụ rất hữu ích để tìm ra những phối hợp thẻ phổ biến.\n\nCác thay đổi trong biểu mẫu được tự động áp dụng vào bản đồ. Bạn có thể nhấn vào nút “Hoàn tác” vào bất cứ lúc nào để hoàn tác các thay đổi.\n\n### Đóng Biểu mẫu\n\nĐể đóng biểu mẫu, nhấn vào nút Đóng ở phía trên bên phải, nhấn phím Esc, hoặc nhấn vào một khoảng trống trên bản đồ.\n",
-        "buildings": "# Tòa nhà\n\nOpenStreetMap là cơ sở dữ liệu tòa nhà lớn nhất trên thế giới. Mời bạn cùng xây dựng và cải tiến cơ sở dữ liệu này.\n\n### Lựa chọn\n\nNhấn vào một vùng tòa nhà để lựa chọn nó. Đường biên của vùng sẽ được tô sáng, một trình đơn giống bảng màu của họa sĩ sẽ xuất hiện gần con trỏ, và thanh bên sẽ trình bày các chi tiết về con đường.\n\n### Sửa đổi\n\nĐôi khi vị trí hoặc các thẻ của một tòa nhà không chính xác.\n\nĐể di chuyển toàn bộ tòa nhà cùng lúc, lựa chọn vùng, rồi nhấn vào công cụ “Di chuyển”. Chuyển con trỏ sang vị trí mới và nhấn chuột để hoàn thành việc di chuyển.\n\nĐể sửa hình dạng của một tòa nhà, kéo các nốt của đường biên sang các vị trí chính xác.\n\n### Vẽ mới\n\nMột trong những điều gây nhầm lẫn là một tòa nhà có thể là vùng hoặc có thể là địa điểm. Nói chung, khuyên bạn _vẽ tòa nhà là vùng nếu có thể_. Nếu tòa nhà chứa hơn một công ty, chỗ ở, hoặc gì đó có địa chỉ, hãy đặt một địa điểm riêng cho mỗi địa chỉ đó và đưa mỗi địa điểm vào trong vùng của tòa nhà.\n\nĐể bắt đầu vẽ tòa nhà, nhấn vào nút “Vùng” ở phía trên bên trái của trình vẽ. Nhấn chuột tại các góc tường, rồi “đóng” vùng bằng cách nhấn phím Return hay Enter hoặc nhấn vào nốt đầu tiên.\n\n### Xóa\n\nHãy tưởng tượng bạn gặp một tòa nhà hoàn toàn sai: bạn không thấy được tòa nhà trong hình ảnh trên không và, theo lý tưởng, cũng đã ghé vào chỗ đó để xác nhận rằng nó không tồn tại. Nếu trường hợp này, bạn có thể xóa tòa nhà hoàn toàn khỏi bản đồ. Xin cẩn thận khi xóa đối tượng: giống như mọi sửa đổi khác, mọi người sẽ thấy được kết quả. Ngoài ra, hình ảnh trên không nhiều khi lỗi thời – có thể mới xây tòa nhà – thành thử tốt nhất là ghé vào chỗ đó để quan sát chắc chắn, nếu có thể.\n\nĐể xóa một tòa nhà, lựa chọn nó bằng cách nhấn vào nó, rồi nhấn vào hình thùng rác hoặc nhấn phím Delete.\n"
+        "buildings": "# Tòa nhà\n\nOpenStreetMap là cơ sở dữ liệu tòa nhà lớn nhất trên thế giới. Mời bạn cùng xây dựng và cải tiến cơ sở dữ liệu này.\n\n### Lựa chọn\n\nNhấn vào một vùng tòa nhà để lựa chọn nó. Đường biên của vùng sẽ được tô sáng, một trình đơn giống bảng màu của họa sĩ sẽ xuất hiện gần con trỏ, và thanh bên sẽ trình bày các chi tiết về tòa nhà.\n\n### Sửa đổi\n\nĐôi khi vị trí hoặc các thẻ của một tòa nhà không chính xác.\n\nĐể di chuyển toàn bộ tòa nhà cùng lúc, lựa chọn vùng, rồi nhấn vào công cụ “Di chuyển”. Chuyển con trỏ sang vị trí mới và nhấn chuột để hoàn thành việc di chuyển.\n\nĐể sửa hình dạng của một tòa nhà, kéo các nốt của đường biên sang các vị trí chính xác.\n\n### Vẽ mới\n\nMột trong những điều gây nhầm lẫn là một tòa nhà có thể là vùng hoặc có thể là địa điểm. Nói chung, khuyên bạn _vẽ tòa nhà là vùng nếu có thể_. Nếu tòa nhà chứa hơn một công ty, chỗ ở, hoặc gì đó có địa chỉ, hãy đặt một địa điểm riêng cho mỗi địa chỉ đó và đưa mỗi địa điểm vào trong vùng của tòa nhà.\n\nĐể bắt đầu vẽ tòa nhà, nhấn vào nút “Vùng” ở phía trên bên trái của trình vẽ. Nhấn chuột tại các góc tường, rồi “đóng” vùng bằng cách nhấn phím Return hay Enter hoặc nhấn vào nốt đầu tiên.\n\n### Xóa\n\nHãy tưởng tượng bạn gặp một tòa nhà hoàn toàn sai: bạn không thấy được tòa nhà trong hình ảnh trên không và, theo lý tưởng, cũng đã ghé vào chỗ đó để xác nhận rằng nó không tồn tại. Nếu trường hợp này, bạn có thể xóa tòa nhà hoàn toàn khỏi bản đồ. Xin cẩn thận khi xóa đối tượng: giống như mọi sửa đổi khác, mọi người sẽ thấy được kết quả. Ngoài ra, hình ảnh trên không nhiều khi lỗi thời – có thể mới xây tòa nhà – thành thử tốt nhất là ghé vào chỗ đó để quan sát chắc chắn, nếu có thể.\n\nĐể xóa một tòa nhà, lựa chọn nó bằng cách nhấn vào nó, rồi nhấn vào hình thùng rác hoặc nhấn phím Delete.\n"
     },
     "intro": {
         "navigation": {
+            "title": "Điều hướng",
             "drag": "Bản đồ ở giữa cho xem dữ liệu OpenStreetMap ở trên một hình nền. Bạn có thể kéo thả và cuộn nó để đi tới đi lui, giống như một bản đồ trực tuyến bình thường. **Kéo bản đồ này!**",
             "select": "Có ba hình thức đối tượng tượng trưng cho tất cả các chi tiết trên bản đồ: địa điểm, đường kẻ, vùng. Nhấn vào một đối tượng để lựa chọn nó. **Nhấn vào địa điểm để lựa chọn nó.**",
             "header": "Đầu đề cho biết thể loại đối tượng.",
             "pane": "Khi lựa chọn một đối tượng, bạn sẽ thấy biểu mẫu để sửa đối tượng. Đầu đề của biểu mẫu cho biết thể loại đối tượng, và dưới đó có các thuộc tính của đối tượng, chẳng hạn tên và địa chỉ. **Bấm nút Đóng ở phía trên bên phải để đóng biểu mẫu.**"
         },
         "points": {
+            "title": "Địa điểm",
             "add": "Một địa điểm chỉ ra và mô tả một vị trí, chẳng hạn tiệm quán, nhà hàng, đài tưởng niệm. **Nhấn nút Điểm để thêm một địa điểm mới.**",
             "place": "Nhấn vào bản đồ để đặt địa điểm. **Đặt địa điểm trên tòa nhà.**",
             "search": "Có đủ thứ địa điểm. Bạn vừa đặt một địa điểm quán cà phê. **Tìm cho “cà phê”.**",
-            "choose": "***Chọn Quán Cà phê từ lưới.***",
+            "choose": "***Chọn Quán Cà phê từ danh sách.***",
             "describe": "Địa điểm hiện là một quán cà phê. Bây giờ bạn có thể cung cấp thêm chi tiết về địa điểm này trong biểu mẫu. **Nhập tên của địa điểm.**",
             "close": "Nhấn vào nút Đóng để đóng biểu mẫu. **Đóng biểu mẫu.**",
             "reselect": "Nhiều khi một địa điểm đã tồn tại nhưng không chính xác hoặc không đầy đủ. Chúng ta có thể sửa đổi địa điểm đã tồn tại. **Lựa chọn địa điểm mà bạn vừa tạo ra.**",
@@ -292,24 +303,27 @@
             "delete": "Một trình đơn nhìn giống bảng màu của họa sĩ bọc quanh địa điểm. Nó chứa các tác vụ có thể thực hiện với địa điểm, thí dụ xóa. **Xóa địa điểm này.**"
         },
         "areas": {
+            "title": "Vùng",
             "add": "Bạn có thể vẽ kỹ hơn bằng cách vẽ vùng thay vì địa điểm. Phần nhiều thể loại địa điểm có thể được vẽ như vùng. Khuyên bạn cố gắng vẽ vùng thay vì địa điểm để cho biết đường biên của đối tượng. **Nhấn vào nút Vùng để bắt đầu vẽ vùng mới.**",
             "corner": "Để vẽ vùng, đặt các nốt theo đường biên của vùng. **Đặt nốt đầu tiên vào một góc của khu vui chơi trẻ em.**",
             "place": "Đặt thêm nốt để tiếp tục vẽ vùng, rồi nhấn vào nốt đầu tiên để “đóng” vùng này. **Vẽ một vùng cho khu vui chơi trẻ em.**",
             "search": "**Tìm Khu Vui chơi Trẻ em.**",
-            "choose": "**Chọn Khu Vui chơi Trẻ em từ lưới.**",
+            "choose": "**Chọn Khu Vui chơi Trẻ em từ danh sách.**",
             "describe": "**Đặt tên và đóng biểu mẫu.**"
         },
         "lines": {
+            "title": "Đường kẻ",
             "add": "Các đường kẻ tượng trưng cho đường sá, đường sắt, dòng sông chẳng hạn. **Nhấn vào nút Đường để bắt đầu vẽ đường mới.**",
             "start": "**Nhấn vào cuối đường để bắt đầu vẽ con đường.**",
             "intersect": "Nhấn chuột để thêm nốt và kéo dài đường kẻ. Bạn có thể kéo bản đồ vào lúc vẽ đường để xem vùng chung quanh. Tương tự với nhiều loại đường kẻ, các đường bộ kết hợp nhau thành một mạng lớn hơn. Để cho các ứng dụng chỉ đường có thể hoạt động chính xác, xin chú ý nối liền các đường ở những giao lộ trên thực tế. **Nhấn vào đường Flower Street để nối hai đường kẻ tại một giao lộ.**",
             "finish": "Để kết thúc đường kẻ, nhấn vào nốt cuối cùng lần nữa. **Kết thúc đường.**",
-            "road": "**Chọn Đường Giao thông từ lưới.**",
+            "road": "**Chọn Đường Giao thông từ danh sách.**",
             "residential": "Có nhiều kiểu con đường; kiểu phổ biến nhất là Ngõ Dân cư. **Chọn kiểu con đường là Ngõ Dân cư.**",
             "describe": "**Đặt tên cho con đường và đóng biểu mẫu.**",
             "restart": "Con đường phải giao với đường Flower Street."
         },
         "startediting": {
+            "title": "Bắt đầu Sửa đổi",
             "help": "Có sẵn trình hướng dẫn này và thêm tài liệu tại đây.",
             "save": "Hãy nhớ lưu các thay đổi của bạn thường xuyên!",
             "start": "Hãy bắt đầu vẽ bản đồ!"
@@ -665,6 +679,9 @@
             },
             "amenity": {
                 "name": "Tiện nghi"
+            },
+            "amenity/atm": {
+                "name": "Máy Rút tiền"
             },
             "amenity/bank": {
                 "name": "Ngân hàng",

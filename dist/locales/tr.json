@@ -212,7 +212,6 @@
     },
     "splash": {
         "welcome": "OpenStreetMap Editörü iD'ye hoşgeldiniz",
-        "text": "Bu {version} versiyonu geliştirme versiyonudur. Daha fazla bilgi için {website} sitesine bakabilirsiniz ve hataları {github} sitesine raporlayabilirsiniz.",
         "walkthrough": "Örnek çalışmaya başla",
         "start": "Şimdi Düzenle"
     },
@@ -254,8 +253,6 @@
         "points": {
             "add": "Noktalar dükkanları, restoranları ya da anıtları göstermek için kullanılabilir. Bunlar bir lokasyonu işaretler ve orada ne olduğunu tarif eder. **Nokta butonuna tıklayarak yeni bir nokta ekleyiniz.**",
             "place": "Bir noktayı haritaya tıklayarak yerleştirebilirsiniz. **Bir binanın üstüne noktayı yerleştiriniz.**",
-            "search": "Birçok farklı nesne nokta ile gösterilebilir. Az önce eklediğiniz nokta bir kafe olarak işaretlendi. **'Cafe' için arama yapınız**",
-            "choose": "**Sistemden kafe seçimi yapınız.**",
             "describe": "Nokta artık kafe olarak işaretlendi. Nesne editörü ile nesneye daha fazla bilgi ekleyebiliriz. **Bir ad ekleyiniz**",
             "close": "Nesne editörü kapat butonuna tıklayarak kapanabilir. **Nesne editörünü kapatınız**",
             "reselect": "Bazen noktalar bulunmaktadır fakat hataları ya da eksiklikleri bulunmaktadır. Bunları düzenleyebiliriz. **Oluşturduğunuz noktayı seçiniz.**",
@@ -264,16 +261,13 @@
             "delete": "Nokta çevresindeki menü ile farklı operasyonlar gerçekleştirilebilir, silme de bunlardan birisidir. **Noktayı siliniz.**"
         },
         "areas": {
-            "add": "Alanlar nesnelerin detaylı gösterimi olarak nitelendirilebilir. Bunlar nesnenin sınırları hakkında bilgi verirler. Alanlar birçok yerde noktaların gösterimi yerine kullanılabilir, hatta onların tercih edilirler. ** Alan butonuna tıklayarak yeni alan ekleyiniz.**",
             "corner": "Alanlar alan sınırlarını belirleyen noktaların konulması ile çizilirler. **Test alanında bir alanın köşe noktasına tıklayarak çizime başlayın.**",
             "search": "**Bir test alanı arayınız.**",
-            "choose": "**Sistem üzerinden bir test alanı seçiniz.**",
             "describe": "**Bir ad ekleyerek editörü kapatınız**"
         },
         "lines": {
             "add": "Çizgiler yollar, tren yolları ve akarsu gibi nesneleri göstermek amacıyla kullanılır. **Çizgi butonuna tıklyarak yeni bir çizgi ekleyiniz.**",
             "start": "**Çizimi başlatmak için yolun sonuna tıklayınız.**",
-            "road": "**Sistemden bir yol seçiniz**",
             "residential": "Çok farklı tiplerde yollar bulunmaktadır, en yaygın olanı Şehir İçi olanlardır. **Şehir için yol tipini şeçiniz**",
             "describe": "**Yola adını verin ve editörü kapatın.**",
             "restart": "Bu yolun \"Flower Street\" -sokağı- ile kesişmesi gerekiyor."

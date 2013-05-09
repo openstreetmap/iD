@@ -1,0 +1,701 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Área",
+            "description": "Amiesta parques, edificios, llagos o otres árees al mapa.",
+            "tail": "Calque nel mapa pa empezar a dibuxar un área, como un parque, llagu o edificiu."
+        },
+        "add_line": {
+            "title": "Llinia",
+            "description": "Amiesta al mapa carreteres, cais, caminos, canales y otres llinies.",
+            "tail": "Calque nel mapa pa empezar a dibuxar una carretera, camín o ruta."
+        },
+        "add_point": {
+            "title": "Puntu",
+            "description": "Amieste al mapa restaurantes, monumentos, buzones o otros puntos.",
+            "tail": "Calque nel mapa p'amestar un puntu."
+        },
+        "browse": {
+            "title": "Navegar",
+            "description": "Mover y ampliar el mapa."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Amestáu un puntu.",
+                "vertex": "Amestáu un noyu a una vía"
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Aniciada una llinia.",
+                "area": "Aniciáu un área."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Continuada una llinia.",
+                "area": "Continuáu un área."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Dibuxu encaboxáu."
+        },
+        "change_tags": {
+            "annotation": "Etiquetes camudaes."
+        },
+        "circularize": {
+            "title": "Poner en círculu",
+            "key": "O",
+            "annotation": {
+                "line": "Facer una llinia circular.",
+                "area": "Facer un área circular."
+            }
+        },
+        "orthogonalize": {
+            "title": "Ortogonalizar",
+            "description": "Escuadrar eses esquines.",
+            "key": "Q",
+            "annotation": {
+                "line": "Escuadraes les esquines d'una llinia.",
+                "area": "Escuadraes les esquines d'un área."
+            }
+        },
+        "delete": {
+            "title": "Desaniciar",
+            "description": "Desaniciar esto del mapa.",
+            "annotation": {
+                "point": "Desaniciáu un puntu.",
+                "vertex": "Desaniciáu un nuedu d'una vía.",
+                "line": "Desaniciada una llinia.",
+                "area": "Dresaniciáu un área.",
+                "relation": "Desaniciada una rellación.",
+                "multiple": "Desaniciaos {n} oxetos."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Coneutada una vía con un puntu.",
+                "vertex": "Coneutada una vía con otra.",
+                "line": "Coneutada una vía con una llinia.",
+                "area": "Coneutada una vía con un área."
+            }
+        },
+        "disconnect": {
+            "title": "Desconeutar",
+            "key": "D"
+        },
+        "merge": {
+            "title": "Entemecer",
+            "description": "Entemecer eses llinies.",
+            "key": "C",
+            "annotation": "Entemecies {n} llinies."
+        },
+        "move": {
+            "title": "Mover",
+            "description": "Mover esto a un llugar distintu.",
+            "key": "M",
+            "annotation": {
+                "point": "Movíu un puntu.",
+                "vertex": "Movíu un nuedu d'una vía.",
+                "line": "Movida una llinia.",
+                "area": "Movíu un área.",
+                "multiple": "Movíos múltiples oxetos."
+            }
+        },
+        "rotate": {
+            "title": "Xirar",
+            "description": "Xirar esti oxetu alredor del puntu central.",
+            "key": "R",
+            "annotation": {
+                "line": "Xirada una llinia.",
+                "area": "Xiráu un área."
+            }
+        },
+        "reverse": {
+            "title": "Invertir",
+            "description": "Facer qu'esta llinia vaiga en direición opuesta.",
+            "key": "V",
+            "annotation": "Invertída una llinia."
+        },
+        "split": {
+            "title": "Dixebrar",
+            "key": "X"
+        }
+    },
+    "nothing_to_undo": "Ren que desfacer.",
+    "nothing_to_redo": "Ren pa refacer.",
+    "just_edited": "¡Acaba d'editar OpenStreetMap!",
+    "browser_notice": "Esti editor tien sofitu en Firefox, Chrome, Safari, Opera, ya Internet Explorer 9 y superior. Anueve'l so navegador o use Potlatch 2 pa editar el mapa.",
+    "zoom_in_edit": "amplíe pa editar el mapa",
+    "logout": "zarrar sesión",
+    "report_a_bug": "informar d'un fallu",
+    "commit": {
+        "title": "Guardar cambios",
+        "description_placeholder": "Descripción curtia de les collaboraciones",
+        "message_label": "Mensaxe d'unviu",
+        "upload_explanation": "Los cambios que xuba como {user} tarán visibles en tolos mapes qu'usen los datos d'OpenStreetMap.",
+        "save": "Guardar",
+        "cancel": "Encaboxar",
+        "warnings": "Avisos",
+        "modified": "Camudáu",
+        "deleted": "Desaniciáu",
+        "created": "Creáu"
+    },
+    "contributors": {
+        "list": "Unviao por {users}",
+        "truncated_list": "Unviao por {users} y otros {count}"
+    },
+    "geocoder": {
+        "title": "Alcontrar un llugar",
+        "placeholder": "Alcontrar un llugar",
+        "no_results": "Nun pudo alcontrase dengún llugar llamáu «{name}»"
+    },
+    "geolocate": {
+        "title": "Amosar el mio allugamientu"
+    },
+    "inspector": {
+        "no_documentation_combination": "Nun hai documentación disponible pa esta combinación d'etiquetes",
+        "no_documentation_key": "Nun hai documentación disponible pa esta clave",
+        "show_more": "Ver más",
+        "new_tag": "Etiqueta nueva",
+        "editing_feature": "Editando {feature}",
+        "choose": "Seleicione un tipu de carauterística",
+        "results": "{n} resultaos pa {search}",
+        "back_tooltip": "Camudar tipu de carauterística"
+    },
+    "background": {
+        "title": "Fondu",
+        "description": "Configuración del fondu",
+        "percent_brightness": "{opacity}% brillu",
+        "fix_misalignment": "Iguar mal alliniamientu",
+        "reset": "reaniciar"
+    },
+    "restore": {
+        "heading": "Tien cambios ensin guardar",
+        "restore": "Restaurar",
+        "reset": "Restaurar"
+    },
+    "save": {
+        "title": "Guardar",
+        "help": "Guardar cambios a OpenStreetMap, faciendolos visibles a otros usuarios.",
+        "no_changes": "Nun hai cambios que guardar.",
+        "error": "Hebo un error al intentar guardar",
+        "uploading": "Xubiendo cambios a OpenStreetMap.",
+        "unsaved_changes": "Tien cambios ensin guardar"
+    },
+    "splash": {
+        "welcome": "Bienllegáu al editor d'OpenStreetMap iD"
+    },
+    "source_switch": {
+        "live": "en vivo",
+        "lose_changes": "Tien cambios ensin guardar. Camudar el sirvidor de mapes descartarálos. ¿Ta seguru de que quier intercambiar de sirvidores?"
+    },
+    "tag_reference": {
+        "description": "Descripción",
+        "on_wiki": "{tag} en wiki.osm.org",
+        "used_with": "usada con {type}"
+    },
+    "validations": {
+        "untagged_line": "Llinia ensin etiquetar",
+        "untagged_area": "Área ensin etiquetar",
+        "many_deletions": "Va desaniciar {n} oxetos. ¿Ta seguru de que ye esto lo que quier facer? Esto desaniciarálos del mapa que ve tol mundu en openstreetmap.org.",
+        "tag_suggests_area": "La etiqueta {tag} suxer que la llinia tendría de ser un área, pero nun ye un area",
+        "deprecated_tags": "Etiquetes anticuaes: {tags}"
+    },
+    "zoom": {
+        "in": "Averar",
+        "out": "Alloñar"
+    },
+    "gpx": {
+        "local_layer": "Ficheru GPX llocal",
+        "drag_drop": "Arrastrar y soltar un ficheru .gpx na páxina"
+    },
+    "help": {
+        "title": "Ayuda",
+        "help": "# Ayuda\n\nEsti ye un editor pa [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundu llibre y editable. Pue usalu p'amestar y anovar los\ndatos nel to área, faciendo un mapa del mundu de códigu y datos\nabiertos meyor pa tol mundu.\n\nLes ediciones que faiga nesti mapa sedrán visibles pa cualquiera qu'use\nOpenStreetMap. Pa poder editar, necesitará una\n[cuenta de baldre n'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) ye un proyeutu collaborativu col [códigu\nfonte disponible en GitHub](https://github.com/systemed/iD).\n"
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Accesu"
+            },
+            "address": {
+                "label": "Direición",
+                "placeholders": {
+                    "housename": "Nome de casa",
+                    "number": "123",
+                    "street": "Cai",
+                    "city": "Ciudá"
+                }
+            },
+            "aeroway": {
+                "label": "Tipu"
+            },
+            "amenity": {
+                "label": "Tipu"
+            },
+            "atm": {
+                "label": "Caxeru automáticu"
+            },
+            "bicycle_parking": {
+                "label": "Tipu"
+            },
+            "building": {
+                "label": "Edificiu"
+            },
+            "building_area": {
+                "label": "Edificiu"
+            },
+            "building_yes": {
+                "label": "Edificiu"
+            },
+            "capacity": {
+                "label": "Capacidá"
+            },
+            "collection_times": {
+                "label": "Hores de recoyida"
+            },
+            "construction": {
+                "label": "Tipu"
+            },
+            "crossing": {
+                "label": "Tipu"
+            },
+            "cuisine": {
+                "label": "Cocina"
+            },
+            "denomination": {
+                "label": "Denominación"
+            },
+            "denotation": {
+                "label": "Notabilidá"
+            },
+            "elevation": {
+                "label": "Altor"
+            },
+            "emergency": {
+                "label": "Emerxencia"
+            },
+            "entrance": {
+                "label": "Tipu"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "fee": {
+                "label": "Pagu"
+            },
+            "highway": {
+                "label": "Tipu"
+            },
+            "historic": {
+                "label": "Tipu"
+            },
+            "internet_access": {
+                "label": "Accesu a Internet",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "Per cable",
+                    "terminal": "Terminal"
+                }
+            },
+            "landuse": {
+                "label": "Tipu"
+            },
+            "layer": {
+                "label": "Capa"
+            },
+            "leisure": {
+                "label": "Tipu"
+            },
+            "levels": {
+                "label": "Niveles"
+            },
+            "man_made": {
+                "label": "Tipu"
+            },
+            "maxspeed": {
+                "label": "Velocidá máxima"
+            },
+            "natural": {
+                "label": "Natural"
+            },
+            "network": {
+                "label": "Rede"
+            },
+            "note": {
+                "label": "Nota"
+            },
+            "office": {
+                "label": "Tipu"
+            },
+            "oneway": {
+                "label": "Sentíu únicu"
+            },
+            "opening_hours": {
+                "label": "Horariu"
+            },
+            "operator": {
+                "label": "Operador"
+            },
+            "phone": {
+                "label": "Teléfonu"
+            },
+            "place": {
+                "label": "Tipu"
+            },
+            "railway": {
+                "label": "Tipu"
+            },
+            "religion": {
+                "label": "Relixon",
+                "options": {
+                    "christian": "Christianu",
+                    "muslim": "Musulmán",
+                    "buddhist": "Budista",
+                    "jewish": "Xudíu",
+                    "hindu": "Hindu",
+                    "shinto": "Sintoista",
+                    "taoist": "Taoista"
+                }
+            },
+            "service": {
+                "label": "Tipu"
+            },
+            "shelter": {
+                "label": "Refuxu"
+            },
+            "shop": {
+                "label": "Tipu"
+            },
+            "source": {
+                "label": "Fonte"
+            },
+            "sport": {
+                "label": "Deporte"
+            },
+            "surface": {
+                "label": "Superficie"
+            },
+            "tourism": {
+                "label": "Tipu"
+            },
+            "water": {
+                "label": "Tipu"
+            },
+            "waterway": {
+                "label": "Tipu"
+            },
+            "website": {
+                "label": "Sitiu web"
+            },
+            "wetland": {
+                "label": "Tipu"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Tipu"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "Via d'aviación"
+            },
+            "aeroway/aerodrome": {
+                "name": "Aeropuertu"
+            },
+            "aeroway/helipad": {
+                "name": "Helipuertu"
+            },
+            "amenity": {
+                "name": "Infraestructures"
+            },
+            "amenity/bank": {
+                "name": "Bancu"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Aparcaderu de bicicletes"
+            },
+            "amenity/bicycle_rental": {
+                "name": " Alquiler de bicicletes"
+            },
+            "amenity/cafe": {
+                "name": "Café"
+            },
+            "amenity/cinema": {
+                "name": "Cine"
+            },
+            "amenity/fast_food": {
+                "name": "Comida rápida"
+            },
+            "amenity/fire_station": {
+                "name": "Parque de bomberos"
+            },
+            "amenity/grave_yard": {
+                "name": "Enterramientos"
+            },
+            "amenity/hospital": {
+                "name": "Hospital"
+            },
+            "amenity/library": {
+                "name": "Biblioteca"
+            },
+            "amenity/parking": {
+                "name": "Aparcaderu"
+            },
+            "amenity/pharmacy": {
+                "name": "Farmacia"
+            },
+            "amenity/place_of_worship": {
+                "name": "Llugar de cultu"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Ilesia"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Synagoga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mezquita"
+            },
+            "amenity/police": {
+                "name": "Policía"
+            },
+            "amenity/post_box": {
+                "name": "Buzón"
+            },
+            "amenity/post_office": {
+                "name": "Oficina de correos"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Restaurante"
+            },
+            "amenity/school": {
+                "name": "Escuela"
+            },
+            "amenity/toilets": {
+                "name": "Aseos"
+            },
+            "amenity/townhall": {
+                "name": "Edificiu municipal"
+            },
+            "amenity/university": {
+                "name": "Universidá"
+            },
+            "building": {
+                "name": "Edificiu"
+            },
+            "entrance": {
+                "name": "Entrada"
+            },
+            "highway": {
+                "name": "Carretera"
+            },
+            "highway/bus_stop": {
+                "name": "Parada d'autobús"
+            },
+            "highway/crossing": {
+                "name": "Pasu de peatones"
+            },
+            "highway/cycleway": {
+                "name": "Camín ciclista"
+            },
+            "highway/footway": {
+                "name": "Camín peatonal"
+            },
+            "highway/motorway": {
+                "name": "Autopista"
+            },
+            "highway/path": {
+                "name": "Camín"
+            },
+            "highway/primary": {
+                "name": "Carretera autonómica"
+            },
+            "highway/residential": {
+                "name": "Cai urbana"
+            },
+            "highway/secondary": {
+                "name": "Carretera secundaria"
+            },
+            "highway/service": {
+                "name": "Vía de serviciu"
+            },
+            "highway/steps": {
+                "name": "Escaleres"
+            },
+            "highway/tertiary": {
+                "name": "Carretera terciaria"
+            },
+            "highway/track": {
+                "name": "Caleya"
+            },
+            "highway/traffic_signals": {
+                "name": "Semáforu"
+            },
+            "highway/trunk": {
+                "name": "Carretera nacional"
+            },
+            "highway/turning_circle": {
+                "name": "Vuelta en cai ensin salida"
+            },
+            "highway/unclassified": {
+                "name": "Carretera fuera de clasificación"
+            },
+            "historic": {
+                "name": "Sitiu históricu"
+            },
+            "historic/monument": {
+                "name": "Monumentu"
+            },
+            "landuse": {
+                "name": "Usu del suelu"
+            },
+            "landuse/allotments": {
+                "name": "Güertes recreatives"
+            },
+            "landuse/basin": {
+                "name": "Acumulación d'agües"
+            },
+            "landuse/cemetery": {
+                "name": "Cementeriu"
+            },
+            "landuse/commercial": {
+                "name": "Comercial"
+            },
+            "landuse/construction": {
+                "name": "Construccion"
+            },
+            "landuse/farm": {
+                "name": "Tierra de llabor"
+            },
+            "landuse/farmyard": {
+                "name": "Quintana"
+            },
+            "landuse/forest": {
+                "name": "Forestal"
+            },
+            "landuse/grass": {
+                "name": "Pación"
+            },
+            "landuse/industrial": {
+                "name": "Industrial"
+            },
+            "landuse/orchard": {
+                "name": "Plantación"
+            },
+            "landuse/quarry": {
+                "name": "Cantera"
+            },
+            "landuse/residential": {
+                "name": "Residencial"
+            },
+            "landuse/vineyard": {
+                "name": "Viñéu"
+            },
+            "leisure": {
+                "name": "Recréu"
+            },
+            "leisure/golf_course": {
+                "name": "Campu de golf"
+            },
+            "leisure/park": {
+                "name": "Parque"
+            },
+            "leisure/pitch": {
+                "name": "Campu deportivu"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Campu de fútbol americanu"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Campu de beisbol"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Pista de baloncestu"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Campu de fútbol"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Pista de tenis"
+            },
+            "leisure/playground": {
+                "name": "Xuegos infantiles"
+            },
+            "man_made": {
+                "name": "Construcciones"
+            },
+            "man_made/lighthouse": {
+                "name": "Faru"
+            },
+            "man_made/pier": {
+                "name": "Embarcaderu"
+            },
+            "man_made/water_tower": {
+                "name": "Torre de depósitu"
+            },
+            "natural": {
+                "name": "Natural"
+            },
+            "natural/bay": {
+                "name": "Bahía"
+            },
+            "natural/beach": {
+                "name": "Playa"
+            },
+            "natural/cliff": {
+                "name": "Cantil"
+            },
+            "natural/coastline": {
+                "name": "Llinia costera"
+            },
+            "natural/glacier": {
+                "name": "Glacier"
+            },
+            "natural/grassland": {
+                "name": "Pradera"
+            },
+            "natural/peak": {
+                "name": "Picu"
+            },
+            "natural/spring": {
+                "name": "Fonte natural"
+            },
+            "natural/tree": {
+                "name": "Árbol"
+            },
+            "natural/water": {
+                "name": "Agua"
+            },
+            "natural/water/lake": {
+                "name": "Llagu"
+            },
+            "natural/water/pond": {
+                "name": "Estanque"
+            },
+            "natural/water/reservoir": {
+                "name": "Embalse"
+            },
+            "natural/wood": {
+                "name": "Viesca"
+            },
+            "office": {
+                "name": "Oficina"
+            },
+            "place": {
+                "name": "Llugar"
+            }
+        }
+    }
+}

@@ -218,7 +218,6 @@
     },
     "splash": {
         "welcome": "Välkommen till iD OpenStreetMap-redigeraren",
-        "text": "iD är ett användarvänligt men kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är utvecklingsversion {version}. För mer information besök {website} och rapportera fel på {github}.",
         "walkthrough": "Starta genomgången",
         "start": "Ändra nu"
     },
@@ -261,8 +260,6 @@
         },
         "points": {
             "place": "Punkten kan placeras genom att klicka på kartan. **Placera punkten ovanpå byggnaden.**",
-            "search": "En punkt kan vara många olika saker. Den punkt du just lade till är ett cafe. **Sök efter texten 'cafe'**",
-            "choose": "**Välj cafe från listan.**",
             "describe": "Punkten är nu taggad som cafe. Via objektredigeraren kan vi lägga till mer information om punkten. **Lägg till ett namn**",
             "close": "Objektredigeraren kan stängas med knappen upp i högra hörnet. **Stäng taggredigeraren nu**",
             "reselect": "Ofta existerar redan punkter, men innehåller misstag eller är ofullständiga. Vi kan ändra redan existerande punkter. **Välj punkten du just skapade.**",
@@ -271,10 +268,8 @@
             "delete": "Menyn runt punkten innehåller operationer som kan utföras på den, inklusive ta bort. **Ta bort punkten.**"
         },
         "areas": {
-            "add": "Områden är ett mer detaljerat sätt att representera objekt. De ger information om objektets gränser. Områden kan användas för nästa samma typer av objekt som punkter och är ofta att föredra.**Klicka på Område-knappen för att lägga till ett nytt område.**",
             "corner": "Områden ritas genom att placera punkter som representerar gränsen av området. **Placera startpunkten på ett av hörnen på lekplatsen.**",
-            "search": "**Sök efter lekpark.**",
-            "choose": "**Välj lekpark från listan.**",
+            "search": "**Sök efter lekplats.**",
             "describe": "**Lägg till ett namn och stäng sedan objektredigeraren**"
         },
         "lines": {
@@ -282,7 +277,6 @@
             "start": "**Påbörja linjen genom att klicka på slutet av vägen.**",
             "intersect": "Klicka för att lägga till fler punkter på linjen (vägen). Du kan flytta kartan under tiden du ritar. Vägar och många andra typer av linjer är en del av ett större nät med linjer. Det är därför viktigt att linjer blir korrekt anslutna till varandra för att exempelvis körinstruktioner ska fungera.**Klicka på Flower Street för att skapa en anslutning mellan de två linjerna (vägarna).**",
             "finish": "Linjer avslutas genom att klicka på slutpunkten en gång till.**Avsluta linjen.**",
-            "road": "**Välj Väg från listan**",
             "residential": "Det finns olika typer av vägar. Den vanligaste är \"Residential\". **Välj vägtypen \"Residential\"**",
             "describe": "**Ge vägen ett namn och stäng objektredigeraren.**",
             "restart": "Vägen behöver ha en korsning med Flower Street."

@@ -1,0 +1,21 @@
+{
+    "presets": {
+        "fields": {
+            "address": {
+                "label": "Alamat",
+                "placeholders": {
+                    "street": "Jalan",
+                    "city": "Kota"
+                }
+            }
+        },
+        "presets": {
+            "amenity/embassy": {
+                "name": "Kedutaan besar"
+            },
+            "building/entrance": {
+                "name": "Masuk"
+            }
+        }
+    }
+}

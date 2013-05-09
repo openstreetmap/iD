@@ -2,18 +2,18 @@
     "modes": {
         "add_area": {
             "title": "Área",
-            "description": "Agregar parques, edificios, lagos u otras áreas al mapa.",
+            "description": "Añadir parques, edificios, lagos u otras áreas al mapa.",
             "tail": "Haga clic en el mapa para empezar a dibujar un área, como un parque, lago o edificio."
         },
         "add_line": {
             "title": "Línea",
-            "description": "Agregar autopistas, calles, pasos peatonales o canales en el mapa.",
+            "description": "Añadir autopistas, calles, pasos peatonales o canales en el mapa.",
             "tail": "Haga clic para empezar a dibujar en el mapa, una calle, camino o ruta."
         },
         "add_point": {
             "title": "Punto",
-            "description": "Agregar restaurantes, monumentos, buzones u otros puntos en el mapa.",
-            "tail": "Haga clic para agregar un punto en el mapa."
+            "description": "Añadir restaurantes, monumentos, buzones u otros puntos en el mapa.",
+            "tail": "Haga clic para añadir un punto en el mapa."
         },
         "browse": {
             "title": "Navegar",
@@ -159,7 +159,7 @@
     "just_edited": "¡Acaba de editar OpenStreetMap!",
     "browser_notice": "Este editor soporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 o superior. Por favor actualice su navegador o utilice Potlatch 2 para editar el mapa.",
     "view_on_osm": "Ver en OSM",
-    "zoom_in_edit": "Acerca para editar el mapa",
+    "zoom_in_edit": "Haga zoom para editar el mapa",
     "logout": "Cerrar sesión",
     "loading_auth": "Conectando a OpenStreetMap...",
     "report_a_bug": "Informar de un error",
@@ -190,7 +190,7 @@
         "no_results": "No se pudo encontrar el lugar llamado '{name}'"
     },
     "geolocate": {
-        "title": "Mostrar mi Localización"
+        "title": "Mostrar mi localización"
     },
     "inspector": {
         "no_documentation_combination": "No hay documentación disponible para esta combinación de etiquetas",
@@ -209,7 +209,7 @@
     },
     "background": {
         "title": "Fondo",
-        "description": "Configuración de fondo",
+        "description": "Configuración del fondo",
         "percent_brightness": "{opacity}% brillo",
         "fix_misalignment": "Corregir alineación",
         "reset": "reiniciar"
@@ -228,9 +228,18 @@
         "uploading": "Subiendo cambios a OpenStreetMap.",
         "unsaved_changes": "Tiene cambios sin guardar"
     },
+    "success": {
+        "edited_osm": "¡OSM editado!",
+        "facebook": "Compartir en Facebook",
+        "tweet": "Tweet",
+        "okay": "De acuerdo"
+    },
+    "confirm": {
+        "okay": "De acuerdo"
+    },
     "splash": {
         "welcome": "Bienvenido al editor de OpenStreetMap iD",
-        "text": "iD es una herramienta fácil de utilizar y potente para contribuir al mejor mapa del libre. Esto es una versión {version} de desarrollo. Para más información visite {website} e informe cualquier error en {github}.",
+        "text": "iD es una herramienta amigable pero poderosa para contribuir al mejor mapa libre del mundo. Esta es la versión {}. Para más información vea {Web} e informe de errores en {github}.",
         "walkthrough": "Iniciar el tutorial",
         "start": "Editar"
     },
@@ -264,8 +273,8 @@
     "help": {
         "title": "Ayuda",
         "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el mapa libre y editable del mundo. Puede utilizarlo para agregar y actualizar datos en tu área, haciendo este mapa, de fuente abierta y datos abiertos, mejor para todos.\n\nLas ediciones que haces en este mapa seran visibles para todo el que use OpenStreetMap. Para poder hacer una edición, necesitaras una [cuenta gratuita en OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código fuente disponible en GitHub](https://github.com/systemed/iD).\n",
-        "editing_saving": "# Editar & Guardar\n\nEste editor está diseñado para trabajar en línea principalmente, ya que tu en estos momentos estas accediendo a través de un sitio web.\n\n### Seleccionar elementos gráficos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de interés, simplemente haz clic sobre él. Esto resaltará el elemento seleccionado, abriendo un panel con sus características, y  mostrará un menú de cosas que puedes hacer con ese elemento.\n\nMultiple features can be selected by holding the 'Shift' key, clicking,\nand dragging on the map. This will select all features within the box\nthat's drawn, allowing you to do things with several features at once.\n\nSe pueden seleccionar múltiples elementos de una vez pulsando la tecla 'Mayús' y haciendo clic y arrastrando el ratón sobre el mapa. Esto seleccionará todas los elementos que están dentro del recuadro que se dibuja, lo que le permite realizar cosas con todos ellos al mismo tiempo.\n\n### Guardar ediciones\n\nCuando hagas cambios como editar carreteras, edificios o lugares, estos se  almacenan localmente en tu ordenador hasta que decidas guardarlos en el servidor. No te preocupes si cometes un error - puede deshacer los cambios haciendo clic en el botón Deshacer, y rehacerlos de nuevo haciendo clic en el botón Rehacer.\n\nHaz clic en 'Guardar' para finalizar un grupo de ediciones (por ejemplo, si has completado una zona de la ciudad y quisiera empezar en una nueva área).  Antes de subir los cambios al servidor tendrás oportunidad de revisar lo que has hecho, y el editor proporciona avisos y sugerencias útiles si algo parece que no es correcto en los cambios.\n\nSi todo ves que todo es correcto escribir un breve comentario explicando el cambio que has hecho y haz clic en 'Guardar' otra vez para registrar los cambios en [OpenStreetMap.org](http:\\/\\/www.openstreetmap.org\\/), donde serán visibles para todos los demás usuarios y disponible para que otros puedan construir y mejorar el mapa.\n\nSi aún no has terminado tus ediciones en una sesión, puede dejar la ventana del editor abierta y volver más tarde (en el mismo navegador y ordenador), y el editor te permitirá retomar tu trabajo.\n",
-        "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formando nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar un de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para navegadores GPS.\n\n### Eliminar\n\nSi un camino totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa, como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado como acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
+        "editing_saving": "# Editar & Guardar\n\nEste editor está diseñado para trabajar en línea principalmente, ya que tu en estos momentos estas accediendo a través de un sitio web.\n\n### Seleccionar elementos gráficos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de interés, simplemente haz clic sobre él. Esto resaltará el elemento seleccionado, abriendo un panel con sus características, y  mostrará un menú de cosas que puedes hacer con ese elemento.\n\nSe pueden seleccionar múltiples elementos de una vez pulsando la tecla 'Mayús' y haciendo clic y arrastrando el ratón sobre el mapa. Esto seleccionará todas los elementos que están dentro del recuadro que se dibuja, lo que le permite realizar cosas con todos ellos al mismo tiempo.\n\n### Guardar ediciones\n\nCuando hagas cambios como editar carreteras, edificios o lugares, estos se  almacenan localmente en tu ordenador hasta que decidas guardarlos en el servidor. No te preocupes si cometes un error - puede deshacer los cambios haciendo clic en el botón Deshacer, y rehacerlos de nuevo haciendo clic en el botón Rehacer.\n\nHaz clic en 'Guardar' para finalizar un grupo de ediciones (por ejemplo, si has completado una zona de la ciudad y quisiera empezar en una nueva área).  Antes de subir los cambios al servidor tendrás oportunidad de revisar lo que has hecho, y el editor proporciona avisos y sugerencias útiles si algo parece que no es correcto en los cambios.\n\nSi todo ves que todo es correcto escribir un breve comentario explicando el cambio que has hecho y haz clic en 'Guardar' otra vez para registrar los cambios en [OpenStreetMap.org](http:\\/\\/www.openstreetmap.org\\/), donde serán visibles para todos los demás usuarios y disponible para que otros puedan construir y mejorar el mapa.\n\nSi aún no has terminado tus ediciones en una sesión, puede dejar la ventana del editor abierta y volver más tarde (en el mismo navegador y ordenador), y el editor te permitirá retomar tu trabajo.\n",
+        "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formando nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar un de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa, como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado como acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
         "gps": "# GPS\n\nLos datos procedentes de un GPS son la fuente más fiable para OpenStreetMap. Este editor soporta archivo gpx con trazas guardadas en su equipo local.  Este tipo de trazas GPS se pueden obtener con un gran número de aplicaciones para teléfonos inteligentes, así como con receptores GPS normales.\n\nPara más información acerca de como obtener datos en campo mediante GPS lea [Capturando información mediante GPS] (http://learnosm.org/en/beginner/using-gps/)\n\nPara utilizar una traza GPX para cartografiar simplemente arrastre y suelte el archivo GPX sobre el editor de mapas. Si es reconocido, se añadirá al mapa como una línea verde brillante. Haga clic en el menú 'Configuración de fondo' de la izquierda para activar, desactivar o hacer zoom sobre esta nueva capa de con la traza GPX.\n\nTenga en cuenta que la traza GPX no es subida directamente a OpenStreetMap, sino que se utiliza para dibujar sobre ella en el mapa, ayudándole como guía para los nuevos elementos que desea añadir.\n",
         "imagery": "# Imágenes\n\nLas imágenes aéreas son un importante recurso para para cartografiar. Una combinación de vuelos aéreos, fotografías de satélite  y otros tipos de fuentes libres se encuentran disponibles en el editor bajo el menú de la izquierda llamado 'Configuración de fondo'.\n\nPor defecto el editor muestra la capa imágenes de satélite de [Bing Maps](http://www.bing.com/maps/) , pero una vez se vaya desplazando por el mapa y haciendo zoom sobre diferentes zonas, nuevas fuentes de imágenes podrán estar disponibles.\n\nLas imágenes aéreas a veces se encuentran desplazadas del mapa debido a errores por parte de los proveedores de los datos que las suministran. Si observa que existen numerosas carreteras que no coinciden con el fondo de imagen no las muevas para ajustarlas. En vez de ello puede ajustar la fotografía aérea para que esta coincida con los datos existentes haciendo clic en 'Corregir alineación' en la parte superior de la interfaz 'Configuración de fondo'.\n",
         "addresses": "# Addresses\n\n# Direcciones\n\nLas direcciones son parte de la información más útil que se puede añadir al mapa. \n\nAunque las direcciones se representan a menudo como parte de las calles, en OpenStreetMap esta información es guardada como atributos de los edificios y lugares presentes a lo largo de los viales.\n\nPuede agregar información sobre direcciones a lugares dibujados en el mapa  como contornos de edificios, así como aquellos localizados únicamente con un punto. La fuente óptima para obtener datos de direcciones es la consulta sobre el terreno o el conocimiento personal. El uso de fuentes comerciales, como Google Maps, para obtener estos datos está estrictamente prohibido.\n",
@@ -274,43 +283,48 @@
     },
     "intro": {
         "navigation": {
+            "title": "Navegación",
             "drag": "El área de mapa principal muestra datos de OpenStreetMap sobre un fondo. Puede navegar arrastrando y desplazándose como en cualquier mapa web. **¡Arrastre el mapa!** ",
             "select": "Los elementos del mapa son representados de tres formas: usando puntos, líneas o áreas. Todos los elementos pueden ser seleccionados haciendo clic en ellos. **Haga clic en el punto para seleccionarlo.**",
             "header": "El encabezado nos muestra el tipo de característica.",
-            "pane": "Cuando un elemento es seleccionado se muestra el editor de elementos. El encabezado nos indica el tipo de elemento y el panel principal enseña los atributos del elemento, como su nombre y dirección. **Cierre el editor de elementos con el botón cerrar arriba a la derecha.**"
+            "pane": "Cuando un elemento es seleccionado se muestra el editor de elementos. El encabezado nos indica el tipo de elemento y el panel principal enseña los atributos del elemento, como su nombre y dirección. **Cierre el editor de elementos con el botón 'X' arriba a la derecha.**"
         },
         "points": {
+            "title": "Puntos",
             "add": "Los puntos pueden ser utilizados para representar elementos como tiendas, restaurantes y monumentos. Ellos marcan una ubicación especifica, y describen que hay ahí. **Haga clic en el botón Punto para agregar uno nuevo**",
-            "place": "El punto puede ser ubicado haciendo clic en el mapa. **Ubicar el punto sobre el edificio.**",
-            "search": "Hay muchos elementos diferentes que pueden ser representados por puntos. El punto que acabas de agregar es un café. **Buscar 'Café'**",
-            "choose": "**Elegir Café en la cuadrícula.**",
-            "describe": "El punto ahora está marcado como café. Utilizando el editor de elementos, podemos agregar más información sobre este. **Agregar un nombre**",
-            "close": "El editor de elementos puede ser cerrado haciendo clic en el botón cerrar. **Cerrar el editor de elementos**",
-            "reselect": "A menudo los puntos ya existirán, pero tendrán errores o estarán incompletos. Podemos editar puntos existentes. **Seleccione el punto que acaba de crear.**",
-            "fixname": "**Cambiar nombre y cerrar el editor.**",
+            "place": "El punto puede ser ubicado haciendo clic en el mapa. **Sitúe el punto sobre el edificio.**",
+            "search": "Hay muchos elementos diferentes que pueden ser representados por puntos. El punto que acabas de añadir es una cafetería. **Busque 'Cafetería'**",
+            "choose": "**Elije Cafetería de la lista.**",
+            "describe": "El punto ahora está marcado como cafetería. Utilizando el editor de elementos, podemos agregar más información sobre este. **Añada un nombre**",
+            "close": "El editor de elementos se puede cerrar haciendo clic en el botón 'X' de la esquina superior derecha. **Cierre el editor de elementos**",
+            "reselect": "A menudo los puntos ya existirán, pero tendrán errores o estarán incompletos. Podemos editar puntos ya presentes en el mapa. **Seleccione el punto que acaba de crear.**",
+            "fixname": "**Cambie el nombre y cierre el editor de elementos.**",
             "reselect_delete": "Todos los elementos en el mapa pueden ser eliminados. **Haga clic en el punto que creó.**",
-            "delete": "El menú alrededor del punto contiene operaciones que se puede ejecutar respecto de aquel, incluyendo eliminar. **Eliminar el punto.**"
+            "delete": "El menú que aparece alrededor del punto contiene operaciones que se pueden aplicar al elemento seleccionado, incluyendo la opción de eliminar. **Elimine el punto.**"
         },
         "areas": {
-            "add": "Las áreas son una forma más detallada de representar elementos. Proveen información sobre los limites del elemento. Las áreas pueden ser utilizadas para la mayoría de los elementos representados con puntos y normalmente se prefieren. **Haga clic en el botón Área para agregar una nueva área.** ",
-            "corner": "Las áreas son dibujadas ubicando nodos que marcan los límites del área. **Ubique el nodo inicial en una de las esquinas de la zona de juegos.**",
+            "title": "Áreas",
+            "add": "Las áreas son unas formas más detalladas de representar elementos. Proveen información sobre los limites del elemento. Las áreas pueden ser utilizadas para la mayoría de los elementos representados como puntos y normalmente es una forma más detallada de dibujarlos, por lo que se prefieren. **Haga clic en el botón 'Área' para agregar una nueva área.** ",
+            "corner": "Las áreas son dibujadas ubicando nodos que marcan los límites del área. **Sitúe el nodo inicial en una de las esquinas de la zona de juegos.**",
             "place": "Dibuje el área ubicando más nodos. Termine el área haciendo clic en el punto inicial. **Dibuje un área para la zona de juegos.**",
-            "search": "**Buscar zona de juegos.**",
-            "choose": "**Elija Zona de Juegos en la cuadrícula.**",
+            "search": "**Busque 'Parque infantil'.**",
+            "choose": "**Elija 'Parque infantil' de la lista.**",
             "describe": "**Agregue un nombre y cierre el editor de elementos**"
         },
         "lines": {
-            "add": "Las líneas son utilizadas para representar elementos como caminos, líneas férreas y ríos. **Haga clic en el botón Línea para agregar una nueva línea.**",
+            "title": "Líneas",
+            "add": "Las líneas son utilizadas para representar elementos lineales como caminos, líneas férreas o ríos. **Haga clic en el botón Línea para agregar una nueva línea.**",
             "start": "**Inicie la línea haciendo clic al final de la vía.**",
-            "intersect": "Haga clic para agregar más puntos a la línea. Si es necesario, puedes arrastrar el mapa mientras dibujas. Los caminos, y muchos otros tipos de líneas, son parte de una red más grande. Es importante que estas líneas estén conectadas apropiadamente para que las aplicaciones de enrutamiento puedan funcionar. **Haga clic en nodo de la calle para crear una intersección conectando las dos líneas.**   ",
-            "finish": "Las líneas pueden finalizarse haciendo clic nuevamente en el ultimo punto. **Terminar de dibujar la vía.** ",
-            "road": "**Seleccionar Vía en la cuadrícula**",
-            "residential": "Hay distintos tipos de vías, el más común de los cuales es Urbana. **Elija el tipo de vía urbana**",
-            "describe": "**Nombrar la vía y cerrar el editor de elementos.**",
+            "intersect": "Haga clic para añadir más puntos a la línea. Si es necesario, puede arrastrar el mapa mientras dibujas. Los caminos, y muchos otros tipos de líneas, son parte de una red más grande. Es importante que estas líneas estén conectadas apropiadamente para que las aplicaciones de enrutamiento, como los navegadores de automóvil, puedan funcionar correctamente. **Haga clic en nodo de la calle para crear una intersección conectando las dos líneas.**   ",
+            "finish": "Las líneas pueden finalizarse haciendo clic nuevamente en el ultimo punto. **Termine de dibujar la vía.** ",
+            "road": "**Seleccione 'Carretera de tipología desconocida' de la lista**",
+            "residential": "Existen diferentes tipos de vías, el más común de las cuales es el de calle urbana. **Elija el tipo 'Calle urbana'**",
+            "describe": "**Asigne un nombre a la vía y cierre el editor de elementos.**",
             "restart": "El vía debe intersectar con la calle Flores."
         },
         "startediting": {
-            "help": "Más documentación y este tutorial están disponible aquí.",
+            "title": "Empezar a editar",
+            "help": "Para ver más documentación y este tutorial pulse aquí.",
             "save": "¡No olvides guardar tus cambios regularmente!",
             "start": "Empezar"
         }
@@ -665,6 +679,9 @@
             },
             "amenity": {
                 "name": "Servicios"
+            },
+            "amenity/atm": {
+                "name": "Cajero automático"
             },
             "amenity/bank": {
                 "name": "Banco",

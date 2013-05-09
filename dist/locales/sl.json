@@ -1,0 +1,524 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Področje",
+            "description": "Dodaj parke, zgradbe, jezera ali druga področja na zemljevid."
+        },
+        "add_line": {
+            "title": "Črta",
+            "description": "Dodaj ceste, ulice, peš poti, kanale ali druge črte na zemljevid."
+        },
+        "add_point": {
+            "title": "Točka",
+            "description": "Dodaj restavracije, spomenike, poštne nabiralnike ali druge točke na zemljevid.",
+            "tail": "Za dodajanje točke kliknite na zemljevid."
+        },
+        "browse": {
+            "title": "Brskaj",
+            "description": "Premikanje in povečava zemljevida."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Točka dodana.",
+                "vertex": "Dodano vozlišče v pot."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Črta začeta.",
+                "area": "Področje začeto."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Nadaljevanje črte.",
+                "area": "Nadaljevanje področja."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Preklic risanja."
+        },
+        "change_tags": {
+            "annotation": "Oznake spremenjene."
+        },
+        "circularize": {
+            "title": "Zaokroži",
+            "annotation": {
+                "line": "Črta spremenjena v krog.",
+                "area": "Področke spremejeno v krog."
+            }
+        },
+        "delete": {
+            "title": "Izbriši",
+            "description": "Odstrani to iz zemljevida.",
+            "annotation": {
+                "point": "Točka izbrisana.",
+                "vertex": "Izbrisano vozlišče iz poti.",
+                "line": "Črta izbrisana.",
+                "area": "Področje izbrisano.",
+                "relation": "Relacija izbrisana.",
+                "multiple": "Izbrisano {n} predmetov."
+            }
+        },
+        "merge": {
+            "title": "Združi",
+            "description": "Združi te črte."
+        },
+        "move": {
+            "title": "Premakni",
+            "description": "Premakni to drugam.",
+            "annotation": {
+                "point": "Točka premaknjena.",
+                "vertex": "Premaknjena točka v poti",
+                "line": "Črta premaknjena.",
+                "area": "Področje premaknjeno.",
+                "multiple": "Premaknjenih več predmetov."
+            }
+        },
+        "rotate": {
+            "title": "Zasuči",
+            "description": "Zasuči ta predmed okrog njegovega središča."
+        }
+    },
+    "zoom_in_edit": "za urejanje povečajte zemljevid",
+    "logout": "odjava",
+    "commit": {
+        "title": "Shrani spremembe",
+        "save": "Shrani",
+        "cancel": "Prekliči",
+        "warnings": "Opozorila",
+        "modified": "Spremenjeno",
+        "deleted": "Izbrisano",
+        "created": "Ustvarjeno"
+    },
+    "geocoder": {
+        "title": "Najdi kraj",
+        "placeholder": "Najdi kraj"
+    },
+    "inspector": {
+        "no_documentation_combination": "Za to kombinacijo oznak ni na voljo dokumentacije",
+        "new_tag": "Nova oznaka",
+        "results": "{n} zadetkov iskanja {search}"
+    },
+    "background": {
+        "title": "Ozadje",
+        "description": "Nastavitve ozadja",
+        "percent_brightness": "{opacity}% svetlost",
+        "reset": "ponastavi"
+    },
+    "restore": {
+        "reset": "Ponastavi"
+    },
+    "save": {
+        "title": "Shrani"
+    },
+    "tag_reference": {
+        "on_wiki": "{tag} na wiki.osm.org"
+    },
+    "validations": {
+        "untagged_point": "Neoznačena točka",
+        "untagged_line": "Neoznačena črta",
+        "untagged_area": "Neoznačeno področje",
+        "tag_suggests_area": "Oznaka {tag} nakazuje, da bi črta morala opisovati področje, vendar področje ni zaprto",
+        "deprecated_tags": "Zastarele oznake: {tags}"
+    },
+    "zoom": {
+        "in": "Povečaj",
+        "out": "Pomanjšaj"
+    },
+    "cannot_zoom": "V trenutnem načinu pomanjšava ni več mogoča.",
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "Dostop"
+            },
+            "address": {
+                "label": "Naslov",
+                "placeholders": {
+                    "number": "123",
+                    "city": "Mesto"
+                }
+            },
+            "aeroway": {
+                "label": "Vrsta"
+            },
+            "amenity": {
+                "label": "Vrsta"
+            },
+            "atm": {
+                "label": "Bankomat"
+            },
+            "barrier": {
+                "label": "Vrsta"
+            },
+            "bicycle_parking": {
+                "label": "Vrsta"
+            },
+            "building": {
+                "label": "Zgradba"
+            },
+            "building_area": {
+                "label": "Zgradba"
+            },
+            "building_yes": {
+                "label": "Zgradba"
+            },
+            "construction": {
+                "label": "Vrsta"
+            },
+            "country": {
+                "label": "Država"
+            },
+            "crossing": {
+                "label": "Vrsta"
+            },
+            "entrance": {
+                "label": "Vrsta"
+            },
+            "highway": {
+                "label": "Vrsta"
+            },
+            "historic": {
+                "label": "Vrsta"
+            },
+            "internet_access": {
+                "label": "Dostop do interneta",
+                "options": {
+                    "wlan": "Wifi - brezžično",
+                    "wired": "Žično"
+                }
+            },
+            "landuse": {
+                "label": "Vrsta"
+            },
+            "leisure": {
+                "label": "Vrsta"
+            },
+            "man_made": {
+                "label": "Vrsta"
+            },
+            "maxspeed": {
+                "label": "Omejitev hitrosti"
+            },
+            "name": {
+                "label": "Ime"
+            },
+            "note": {
+                "label": "Opomba"
+            },
+            "office": {
+                "label": "Vrsta"
+            },
+            "oneway": {
+                "label": "Enosmerna"
+            },
+            "parking": {
+                "label": "Vrsta"
+            },
+            "phone": {
+                "label": "Telefon"
+            },
+            "place": {
+                "label": "Vrsta"
+            },
+            "power": {
+                "label": "Vrsta"
+            },
+            "railway": {
+                "label": "Vrsta"
+            },
+            "religion": {
+                "label": "Veroizpoved"
+            },
+            "service": {
+                "label": "Vrsta"
+            },
+            "shop": {
+                "label": "Vrsta"
+            },
+            "source": {
+                "label": "Vir"
+            },
+            "sport": {
+                "label": "Šport"
+            },
+            "structure": {
+                "options": {
+                    "bridge": "Most",
+                    "tunnel": "Tunel"
+                }
+            },
+            "tourism": {
+                "label": "Vrsta"
+            },
+            "towertype": {
+                "label": "Vrsta stolpa"
+            },
+            "tracktype": {
+                "label": "Vrsta"
+            },
+            "water": {
+                "label": "Vrsta"
+            },
+            "waterway": {
+                "label": "Vrsta"
+            },
+            "website": {
+                "label": "Spletno mesto"
+            },
+            "wetland": {
+                "label": "Vrsta"
+            },
+            "wood": {
+                "label": "Vrsta"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "Letališče"
+            },
+            "amenity/bank": {
+                "name": "Banka"
+            },
+            "amenity/bench": {
+                "name": "Klop"
+            },
+            "amenity/cafe": {
+                "name": "Kavarna"
+            },
+            "amenity/courthouse": {
+                "name": "Sodišče"
+            },
+            "amenity/embassy": {
+                "name": "Veleposlaništvo"
+            },
+            "amenity/fast_food": {
+                "name": "Hitra prehrana"
+            },
+            "amenity/fuel": {
+                "name": "Bencinska črpalka"
+            },
+            "amenity/hospital": {
+                "name": "Bolnišnica"
+            },
+            "amenity/library": {
+                "name": "Knjižnica"
+            },
+            "amenity/parking": {
+                "name": "Parkirišče"
+            },
+            "amenity/pharmacy": {
+                "name": "Lekarna"
+            },
+            "amenity/place_of_worship": {
+                "name": "Kraj čaščenja"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Cerkev"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoga"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mošeja"
+            },
+            "amenity/police": {
+                "name": "Policija"
+            },
+            "amenity/post_box": {
+                "name": "Poštni nabiralnik"
+            },
+            "amenity/post_office": {
+                "name": "Pošta"
+            },
+            "amenity/school": {
+                "name": "Šola"
+            },
+            "amenity/telephone": {
+                "name": "Telefon"
+            },
+            "amenity/theatre": {
+                "name": "Gledališče"
+            },
+            "amenity/toilets": {
+                "name": "Stranišča"
+            },
+            "amenity/townhall": {
+                "name": "Mestna hiša"
+            },
+            "amenity/university": {
+                "name": "Univerza"
+            },
+            "barrier/city_wall": {
+                "name": "Mestno obzidje"
+            },
+            "building": {
+                "name": "Zgradba"
+            },
+            "building/entrance": {
+                "name": "Vhod"
+            },
+            "entrance": {
+                "name": "Vhod"
+            },
+            "highway/crossing": {
+                "name": "Križišče"
+            },
+            "highway/steps": {
+                "name": "Stopnice"
+            },
+            "highway/turning_circle": {
+                "name": "Obračališče"
+            },
+            "historic/monument": {
+                "name": "Spomenik"
+            },
+            "landuse": {
+                "name": "Raba tal"
+            },
+            "landuse/farm": {
+                "name": "Kmetija"
+            },
+            "landuse/forest": {
+                "name": "Gozd"
+            },
+            "landuse/grass": {
+                "name": "Trava"
+            },
+            "landuse/orchard": {
+                "name": "Sadovnjak"
+            },
+            "landuse/quarry": {
+                "name": "Kamnolom"
+            },
+            "landuse/vineyard": {
+                "name": "Vinograd"
+            },
+            "leisure": {
+                "name": "Prosti čas"
+            },
+            "leisure/golf_course": {
+                "name": "Igrišče za golf"
+            },
+            "leisure/park": {
+                "name": "Park"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Košarkaško igrišče"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Nogometno igrišče"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Teniško igrišče"
+            },
+            "leisure/playground": {
+                "name": "Otroško igrišče"
+            },
+            "leisure/stadium": {
+                "name": "Stadion"
+            },
+            "man_made/lighthouse": {
+                "name": "Svetilnik"
+            },
+            "man_made/pier": {
+                "name": "Pomol"
+            },
+            "natural/bay": {
+                "name": "Zaliv"
+            },
+            "natural/beach": {
+                "name": "Plaža"
+            },
+            "natural/coastline": {
+                "name": "Obala"
+            },
+            "natural/glacier": {
+                "name": "Ledenik"
+            },
+            "natural/peak": {
+                "name": "Vrh"
+            },
+            "natural/spring": {
+                "name": "Izvir"
+            },
+            "natural/tree": {
+                "name": "Drevo"
+            },
+            "natural/water": {
+                "name": "Voda"
+            },
+            "natural/water/lake": {
+                "name": "Jezero"
+            },
+            "natural/water/reservoir": {
+                "name": "Zbiralnik"
+            },
+            "natural/wetland": {
+                "name": "Mokrišče"
+            },
+            "other": {
+                "name": "Ostalo"
+            },
+            "other_area": {
+                "name": "Ostalo"
+            },
+            "place/city": {
+                "name": "Velemesto"
+            },
+            "place/hamlet": {
+                "name": "Zaselek"
+            },
+            "place/island": {
+                "name": "Otok"
+            },
+            "place/town": {
+                "name": "Mesto"
+            },
+            "place/village": {
+                "name": "Vas"
+            },
+            "shop/butcher": {
+                "name": "Mesar"
+            },
+            "shop/florist": {
+                "name": "Cvetličarna"
+            },
+            "shop/hairdresser": {
+                "name": "Frizer"
+            },
+            "tourism": {
+                "name": "Turizem"
+            },
+            "tourism/hostel": {
+                "name": "Hostel"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Muzej"
+            },
+            "waterway/canal": {
+                "name": "Kanal"
+            },
+            "waterway/dam": {
+                "name": "Jez"
+            },
+            "waterway/ditch": {
+                "name": "Jarek"
+            },
+            "waterway/river": {
+                "name": "Reka"
+            },
+            "waterway/stream": {
+                "name": "Potok"
+            }
+        }
+    }
+}

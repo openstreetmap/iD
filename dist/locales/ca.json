@@ -104,6 +104,9 @@
             "atm": {
                 "label": "ATM"
             },
+            "barrier": {
+                "label": "Tipus"
+            },
             "bicycle_parking": {
                 "label": "Tipus"
             },
@@ -208,6 +211,9 @@
             "place": {
                 "label": "Tipus"
             },
+            "power": {
+                "label": "Tipus"
+            },
             "railway": {
                 "label": "Tipus"
             },
@@ -238,6 +244,15 @@
             "sport": {
                 "label": "Esport"
             },
+            "structure": {
+                "label": "Estructura",
+                "options": {
+                    "bridge": "Pont",
+                    "tunnel": "Túnel",
+                    "embankment": "Terraplè ",
+                    "cutting": "Trinxerea"
+                }
+            },
             "surface": {
                 "label": "Superfície"
             },
@@ -256,6 +271,9 @@
             "wetland": {
                 "label": "Tipus"
             },
+            "wheelchair": {
+                "label": "Accés per cadires de rodes"
+            },
             "wikipedia": {
                 "label": "Viquipèdia"
             },
@@ -268,10 +286,12 @@
                 "name": "Ruta aèria"
             },
             "aeroway/aerodrome": {
-                "name": "Aeroport"
+                "name": "Aeroport",
+                "terms": "avió,aeroport,aeròdrom"
             },
             "aeroway/helipad": {
-                "name": "Heliport"
+                "name": "Heliport",
+                "terms": "helicòpter,helisuperfície,heliport"
             },
             "amenity": {
                 "name": "Instal·lació"
@@ -294,11 +314,17 @@
             "amenity/cinema": {
                 "name": "Cinema"
             },
+            "amenity/embassy": {
+                "name": "Ambaixada"
+            },
             "amenity/fast_food": {
                 "name": "Menjar ràpid"
             },
             "amenity/fire_station": {
                 "name": "Parc de bombers"
+            },
+            "amenity/fuel": {
+                "name": "Benzinera"
             },
             "amenity/grave_yard": {
                 "name": "Cementiri"
@@ -308,6 +334,9 @@
             },
             "amenity/library": {
                 "name": "Biblioteca"
+            },
+            "amenity/marketplace": {
+                "name": "Mercat"
             },
             "amenity/parking": {
                 "name": "Aparcament"
@@ -322,10 +351,12 @@
                 "name": "Església"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Sinagoga"
+                "name": "Sinagoga",
+                "terms": "judaisme,sinagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mesquita"
+                "name": "Mesquita",
+                "terms": "islam,mesquita"
             },
             "amenity/police": {
                 "name": "Policia"
@@ -345,6 +376,15 @@
             "amenity/school": {
                 "name": "Escola"
             },
+            "amenity/swimming_pool": {
+                "name": "Piscina"
+            },
+            "amenity/telephone": {
+                "name": "Telèfon"
+            },
+            "amenity/theatre": {
+                "name": "Teatre"
+            },
             "amenity/toilets": {
                 "name": "Vàters"
             },
@@ -354,8 +394,35 @@
             "amenity/university": {
                 "name": "Universitat"
             },
+            "barrier": {
+                "name": "Barrera"
+            },
+            "barrier/city_wall": {
+                "name": "Muralla"
+            },
+            "barrier/ditch": {
+                "name": "Sèquia"
+            },
+            "barrier/entrance": {
+                "name": "Entrada"
+            },
+            "barrier/fence": {
+                "name": "Tanca"
+            },
+            "barrier/gate": {
+                "name": "Porta"
+            },
+            "barrier/hedge": {
+                "name": "Tanca de bardissa"
+            },
+            "barrier/wall": {
+                "name": "Mur"
+            },
             "building": {
                 "name": "Edifici"
+            },
+            "building/entrance": {
+                "name": "Entrada"
             },
             "entrance": {
                 "name": "Entrada"
@@ -383,6 +450,9 @@
             },
             "highway/primary": {
                 "name": "Carretera primària"
+            },
+            "highway/residential": {
+                "name": "Carrer"
             },
             "highway/secondary": {
                 "name": "Carretera secundària"
@@ -414,8 +484,17 @@
             "historic": {
                 "name": "Lloc històric"
             },
+            "historic/archaeological_site": {
+                "name": "Jaciment arqueològic"
+            },
+            "historic/castle": {
+                "name": "Castell"
+            },
             "historic/monument": {
                 "name": "Monument"
+            },
+            "historic/ruins": {
+                "name": "Ruïnes"
             },
             "landuse": {
                 "name": "Ús de la terra"
@@ -450,6 +529,9 @@
             "landuse/vineyard": {
                 "name": "Vinya"
             },
+            "leisure/garden": {
+                "name": "Jardí"
+            },
             "leisure/golf_course": {
                 "name": "Camp de golf"
             },
@@ -474,6 +556,12 @@
             "leisure/playground": {
                 "name": "Zona de jocs infantils"
             },
+            "leisure/stadium": {
+                "name": "Estadi"
+            },
+            "leisure/swimming_pool": {
+                "name": "Piscina"
+            },
             "man_made/lighthouse": {
                 "name": "Far"
             },
@@ -493,7 +581,8 @@
                 "name": "Penya-segat"
             },
             "natural/coastline": {
-                "name": "Línia costanera"
+                "name": "Línia costanera",
+                "terms": "ribera"
             },
             "natural/glacier": {
                 "name": "Glacera"
@@ -546,17 +635,183 @@
             "place/village": {
                 "name": "Poble"
             },
+            "power/line": {
+                "name": "Línia elèctrica"
+            },
+            "power/pole": {
+                "name": "Pal elèctric"
+            },
             "power/sub_station": {
                 "name": "Subestació"
+            },
+            "power/tower": {
+                "name": "Torre elèctrica"
+            },
+            "power/transformer": {
+                "name": "Transformador"
+            },
+            "railway": {
+                "name": "Ferrocarril"
+            },
+            "railway/level_crossing": {
+                "name": "Pas a nivell"
+            },
+            "railway/monorail": {
+                "name": "Monocarril"
+            },
+            "railway/rail": {
+                "name": "Via fèrria"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Entrada de Metro"
+            },
+            "railway/tram": {
+                "name": "Tramvia ",
+                "terms": "tramvia"
             },
             "shop": {
                 "name": "Botiga"
             },
+            "shop/bakery": {
+                "name": "Fleca"
+            },
+            "shop/books": {
+                "name": "Llibreria"
+            },
             "shop/butcher": {
                 "name": "Carnisseria"
             },
+            "shop/car_repair": {
+                "name": "Taller d'automòbils"
+            },
+            "shop/florist": {
+                "name": "Floristeria"
+            },
+            "shop/hairdresser": {
+                "name": "Perruqueria"
+            },
+            "shop/jewelry": {
+                "name": "Joieria"
+            },
+            "shop/kiosk": {
+                "name": "Quiosc"
+            },
+            "shop/laundry": {
+                "name": "Bugaderia"
+            },
+            "shop/mall": {
+                "name": "Centre comercial"
+            },
+            "shop/mobile_phone": {
+                "name": "Botiga de telefonia mòbil"
+            },
+            "shop/newsagent": {
+                "name": "Agència de premsa"
+            },
+            "shop/optician": {
+                "name": "Òptica"
+            },
+            "shop/pet": {
+                "name": "Botiga d'animals"
+            },
+            "shop/shoes": {
+                "name": "Sabateria"
+            },
+            "shop/sports": {
+                "name": "Botiga d'esports"
+            },
+            "shop/stationery": {
+                "name": "Papereria"
+            },
             "shop/supermarket": {
                 "name": "Supermercat"
+            },
+            "shop/toys": {
+                "name": "Botiga de joguines"
+            },
+            "shop/travel_agency": {
+                "name": "Agència de viatges"
+            },
+            "shop/tyres": {
+                "name": "Botiga de pneumàtics"
+            },
+            "tourism": {
+                "name": "Turisme"
+            },
+            "tourism/alpine_hut": {
+                "name": "Refugi de muntanya"
+            },
+            "tourism/artwork": {
+                "name": "Obra d'art"
+            },
+            "tourism/attraction": {
+                "name": "Atracció turística"
+            },
+            "tourism/camp_site": {
+                "name": "Càmping "
+            },
+            "tourism/caravan_site": {
+                "name": "Càmping per caravanes"
+            },
+            "tourism/chalet": {
+                "name": "Xalet"
+            },
+            "tourism/hostel": {
+                "name": "Alberg"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Informació"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Museu"
+            },
+            "tourism/picnic_site": {
+                "name": "Àrea de pícnic"
+            },
+            "tourism/theme_park": {
+                "name": "Parc temàtic"
+            },
+            "tourism/viewpoint": {
+                "name": "Mirador"
+            },
+            "tourism/zoo": {
+                "name": "Zoo"
+            },
+            "waterway": {
+                "name": "Curs d'aigua"
+            },
+            "waterway/canal": {
+                "name": "Canal"
+            },
+            "waterway/dam": {
+                "name": "Presa"
+            },
+            "waterway/ditch": {
+                "name": "Sèquia"
+            },
+            "waterway/drain": {
+                "name": "Desguàs "
+            },
+            "waterway/river": {
+                "name": "Riu"
+            },
+            "waterway/riverbank": {
+                "name": "Banc fluvial"
+            },
+            "waterway/stream": {
+                "name": "Rierol"
+            },
+            "waterway/weir": {
+                "name": "Assut"
             }
         }
     }

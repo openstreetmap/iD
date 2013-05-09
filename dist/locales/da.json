@@ -3,16 +3,16 @@
         "add_area": {
             "title": "Område",
             "description": "Tilføj parker, bygninger, søer, eller andre områder til kortet.",
-            "tail": "Klik på kortet for at indtegne et område fx en park, sø eller bygning."
+            "tail": "Klik på kortet for at begynde et område som fx en park, sø eller bygning."
         },
         "add_line": {
             "title": "Linje",
-            "description": "Linjer kan være veje, gader eller stier selv kanaler kan være linjer.",
-            "tail": "Klik på kortet for at indtegne en vej, sti eller rute."
+            "description": "Tilføj veje, gader, stier, kanaler eller andre linjer til kortet",
+            "tail": "Klik på kortet for at begynde at indtegne en vej, sti eller rute."
         },
         "add_point": {
             "title": "Punkt",
-            "description": "Restauranter, mindesmærker og postkasser er punkter.",
+            "description": "Tilføj restauranter, monumenter, postkasser eller andre punkter til kortet.",
             "tail": "Klik på kortet for at tilføje et punkt."
         },
         "browse": {
@@ -23,20 +23,20 @@
             "tail": "Klik for at tilføje punkter til dit område. Klik på det første punkt for at færdiggøre området."
         },
         "draw_line": {
-            "tail": "Klik her for at tilføje flere punkter til linjen. Klik på andre linjer for at forbinde dem og dobbeltklik for at afslutte linjen."
+            "tail": "Klik her for at tilføje flere punkter til linjen. Klik på andre linjer for at forbinde til dem og dobbeltklik for at afslutte linjen."
         }
     },
     "operations": {
         "add": {
             "annotation": {
                 "point": "Tilføjede et punkt.",
-                "vertex": "Tilføjede en node til en vej."
+                "vertex": "Tilføjede et punkt til en vej."
             }
         },
         "start": {
             "annotation": {
-                "line": "Startede en linje.",
-                "area": "Startede et område."
+                "line": "Påbegyndte en linje.",
+                "area": "Påbegyndte et område."
             }
         },
         "continue": {
@@ -52,34 +52,34 @@
             "annotation": "Ændret tags."
         },
         "circularize": {
-            "title": "Cirkularisere",
+            "title": "Cirkulariser",
             "description": {
-                "line": "Lav denne linje cirkulær.",
-                "area": "Lav dette område rundt."
+                "line": "Gør denne linje cirkulær.",
+                "area": "Gør dette område cirkulært."
             },
             "key": "O",
             "annotation": {
-                "line": "Lavede en linje rund.",
-                "area": "Lave et område rundt."
+                "line": "Gjorde en linje cirkulær.",
+                "area": "Gjorde et område cirkulært."
             },
-            "not_closed": "Dette kan ikke laves rundt da det ikke er område."
+            "not_closed": "Dette kan ikke gøres cirkulært fordi det ikke er en løkke."
         },
         "orthogonalize": {
-            "title": "Ortogonalisering",
-            "description": "Gør disse hjørner firkantet.",
+            "title": "Ortogonaliser",
+            "description": "Gør disse hjørner retvinklede.",
             "key": "Q",
             "annotation": {
-                "line": "Lavede hjørner på en linje firkantet.",
-                "area": "Lavede hjørner på et område firkantet."
+                "line": "Gjorde hjørner på en linje retvinklede.",
+                "area": "Gjorde hjørner på et område retvinklede."
             },
-            "not_closed": "Dette kan ikke laves firkantet da det ikke er et område."
+            "not_closed": "Dette kan ikke gøres retvinklet da det ikke er en løkke."
         },
         "delete": {
             "title": "Slet",
             "description": "Fjern dette fra kortet.",
             "annotation": {
                 "point": "Slettede et punkt.",
-                "vertex": "Slettede en node fra en vej.",
+                "vertex": "Slettede et punkt fra en vej.",
                 "line": "Slettede en linje.",
                 "area": "Slettede et område.",
                 "relation": "Sletede en relation.",
@@ -89,42 +89,42 @@
         "connect": {
             "annotation": {
                 "point": "Forbandt en vej til et punkt.",
-                "vertex": "Forbandt en vej til en anden vej.",
+                "vertex": "Forbandt en vej til en anden.",
                 "line": "Forbandt en vej til en linje.",
                 "area": "Forbandt en vej til et område."
             }
         },
         "disconnect": {
-            "title": "Afbryd",
-            "description": "Afbryd disse veje fra hinanden.",
+            "title": "Frakobl",
+            "description": "Frakobl disse veje/områder fra hinanden.",
             "key": "D",
-            "annotation": "Afbryd linjer/områder.",
+            "annotation": "Frakoblede linjer/områder.",
             "not_connected": "Der er ikke nok linjer/områder her til at fraklippe."
         },
         "merge": {
-            "title": "Flet",
-            "description": "Flet disse linjer.",
+            "title": "Fusioner",
+            "description": "Fusioner disse linjer.",
             "key": "C",
-            "annotation": "Flettede {n} linjer.",
-            "not_eligible": "Disse funktioner kan ikke fusioneres.",
+            "annotation": "Fusionerede {n} linjer.",
+            "not_eligible": "Disse elementer kan ikke fusioneres.",
             "not_adjacent": "Disse linjer kan ikke fusioneres da de ikke er forbundet."
         },
         "move": {
             "title": "Flyt",
-            "description": "Flyt dette til en anden lokation.",
+            "description": "Flyt dette til et andet sted.",
             "key": "M",
             "annotation": {
                 "point": "Flyttede et punkt.",
-                "vertex": "Flyttede en node i en vej.",
+                "vertex": "Flyttede et punkt i en vej.",
                 "line": "Flyttede en linje.",
                 "area": "Flyttede et område.",
                 "multiple": "Flyttede flere objekter."
             },
-            "incomplete_relation": "Disse kortegenskaber kan ikke flyttes, da de ikke er blevet downloadet fuldstændigt."
+            "incomplete_relation": "Dette element kan ikke flyttes, da det ikke er fuldstændigt downloadet."
         },
         "rotate": {
             "title": "Roter",
-            "description": "Roter dette objekt omkring centerpunktet.",
+            "description": "Roter dette objekt omkring dets centerpunkt.",
             "key": "R",
             "annotation": {
                 "line": "Roterede en linje.",
@@ -132,37 +132,37 @@
             }
         },
         "reverse": {
-            "title": "Omvendt",
-            "description": "Lad denne linje gå i modsat retning.",
+            "title": "Reverser",
+            "description": "Lad denne linje gå i den modsatte retning.",
             "key": "V",
-            "annotation": "Omvendte en linje."
+            "annotation": "Reverserede en linje."
         },
         "split": {
-            "title": "Del op",
+            "title": "Split",
             "description": {
-                "line": "Split denne linje i to dele ved dette her punkt.",
-                "area": "Klip grænsen af dette område i to dele.",
-                "multiple": "Split linjerne/områdernes grænser ved dette punkt i to dele."
+                "line": "Split linjen i to dele ved dette punkt.",
+                "area": "Klip dette områdes afgrænsning i to dele.",
+                "multiple": "Split linjerne/områdets grænser i to dele ved dette punkt."
             },
             "key": "X",
             "annotation": {
                 "line": "Klip en linje op.",
-                "area": "Spilt et områdes grænse op.",
-                "multiple": "Split {n} linjer/områder for grænserne."
+                "area": "Split et områdes afgrænsning op.",
+                "multiple": "Split {n} afgrænsninger for linjer/områder ."
             },
             "not_eligible": "Linje kan ikke splittes op ved deres begyndelse eller ende.",
-            "multiple_ways": "Der er for mange linjer her der kan blive splittet."
+            "multiple_ways": "Der er for mange linjer her til at splitte."
         }
     },
-    "nothing_to_undo": "Ingenting at fortryde.",
-    "nothing_to_redo": "Ingenting at gendanne.",
-    "just_edited": "Du har lige rettet i OpenStreetMap!",
+    "nothing_to_undo": "Intet at fortryde.",
+    "nothing_to_redo": "Intet at gendanne.",
+    "just_edited": "Du redigerede lige OpenStreetMap!",
     "browser_notice": "Dette værktøj er understøttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og højere. Vær venlig at opgradere din browser eller benyt Potlatch 2 for at rette i kortet.",
     "view_on_osm": "Vis på OSM",
-    "zoom_in_edit": "zoom ind for at rette på kortet",
+    "zoom_in_edit": "zoom ind for at redigere kortet",
     "logout": "log ud",
     "loading_auth": "Forbinder til OpenStreetMap...",
-    "report_a_bug": "rapportere en fejl",
+    "report_a_bug": "rapporter en fejl",
     "status": {
         "error": "Er ikke i stand til at forbinde til API'et.",
         "offline": "API'et er off-line. Prøv igen senere.",
@@ -172,38 +172,38 @@
         "title": "Gem ændringer",
         "description_placeholder": "Kort beskrivelse af dine bidrag",
         "message_label": "Tilføj en besked",
-        "upload_explanation": "Dine ændringer vil som brugernavn {user} blive synligt på alle kort der bruger OpenStreetMap data.",
+        "upload_explanation": "Ændringer du som brugernavn {user} uploader, vil blive synlige på alle kort der bruger OpenStreetMap data.",
         "save": "Gem",
-        "cancel": "Fortryd",
+        "cancel": "Annuller",
         "warnings": "Advarsler",
         "modified": "Modificeret",
-        "deleted": "Slettede",
-        "created": "Lavede"
+        "deleted": "Slettet",
+        "created": "Skabte"
     },
     "contributors": {
-        "list": "Vis bidrag fra {users}",
-        "truncated_list": "Vis bidrag fra {users} og {count} andre"
+        "list": "Bidraget af {users}",
+        "truncated_list": "Bidraget af {users} og {count} andre"
     },
     "geocoder": {
         "title": "Find et sted",
         "placeholder": "Find et sted",
-        "no_results": "Kunne ikke finde '{name}'"
+        "no_results": "Kunne ikke finde et sted kaldet '{name}'"
     },
     "geolocate": {
         "title": "Vis min lokalitet"
     },
     "inspector": {
-        "no_documentation_combination": "Der er ingen dokumentation for denne tag kombination",
-        "no_documentation_key": "Der er ingen dokumentation tilgængelig for denne nøgle",
+        "no_documentation_combination": "Der er ingen tilgængelig dokumentation for denne tag kombination",
+        "no_documentation_key": "Der er ingen tilgængelig dokumentation for denne nøgle",
         "show_more": "Vis mere",
         "new_tag": "Nyt tag",
         "view_on_osm": "Se på openstreetmap.org",
         "editing_feature": "Redigerer {feature}",
         "all_tags": "Alle tags",
-        "choose": "Vælg funktionstype",
+        "choose": "Vælg elementtype",
         "results": "{n} resultater for {search}",
         "reference": "Se på OpenStreetMap Wiki",
-        "back_tooltip": "Gem funktionstype",
+        "back_tooltip": "Ændre elementtype",
         "remove": "Fjern",
         "search": "Søg"
     },
@@ -211,32 +211,41 @@
         "title": "Baggrund",
         "description": "Baggrundsindstillinger",
         "percent_brightness": "{opacity}% lysstyrke",
-        "fix_misalignment": "Lav fejljustering",
+        "fix_misalignment": "Ret fejljustering",
         "reset": "nulstil"
     },
     "restore": {
         "heading": "Du har ændringer der ikke er gemt endnu",
-        "description": "Du har ændringer fra forrige session som ikke er gemt. Ønsker du at gendanne disse ændringer?",
+        "description": "Ønsker du at gendanne ikke gemte ændringer fra en foregående session?",
         "restore": "Gendan",
         "reset": "Nulstil"
     },
     "save": {
         "title": "Gem",
-        "help": "Gem ændringer til OpenStreetMap vil gøre dem synlige for andre brugere.",
+        "help": "Gem ændringer til OpenStreetMap og gør dem synlige for andre brugere.",
         "no_changes": "Ingen ændringer at gemme.",
-        "error": "Der skete en fejl da du prøvede at gemme",
-        "uploading": "Gemmer nu ændringer til OpenStreetMap.",
-        "unsaved_changes": "Du har ændringer der ikke er gemt endnu"
+        "error": "Der skete en fejl under forsøget på at gemme",
+        "uploading": "Gemmer ændringer til OpenStreetMap.",
+        "unsaved_changes": "Du har endnu ikke gemte ændringer"
+    },
+    "success": {
+        "edited_osm": "Redigerede i OSM!",
+        "facebook": "Del på Facebook",
+        "tweet": "Tweet",
+        "okay": "Okay"
+    },
+    "confirm": {
+        "okay": "Okay"
     },
     "splash": {
         "welcome": "Velkommen til iD OpenStreetMap værktøjet",
-        "text": "Dette er udviklingsversion {version}. Mere information se {website} og rapportere fejl på {github}.",
+        "text": "iD er et brugervenligt, men yderst kraftfuldt værktøj til at deltage i verdens bedste frie verdenskort. Dette er version {version}. Mere information se  {website} og indrapportere fejl hos {github}.",
         "walkthrough": "Start gennemgangen",
-        "start": "Redigerer nu"
+        "start": "Rediger nu"
     },
     "source_switch": {
         "live": "live",
-        "lose_changes": "Du har ændringer som ikke er blevet gemt endnu. Ved at skifte kort server vil du miste disse ændringer. Er du sikker på at du vil skifte server?",
+        "lose_changes": "Du har ændringer som ikke er gemt endnu. At skifte kort server vil kassere ændringerne. Er du sikker på at du vil skifte server?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -245,69 +254,76 @@
         "used_with": "brugt med {type}"
     },
     "validations": {
-        "untagged_point": "Ej tagget punkt",
-        "untagged_line": "Mangler tag på linje",
-        "untagged_area": "Mangler tag på område",
-        "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
-        "tag_suggests_area": "Dette tag {tag} mener denne linje skule være et område, men dette er ikke et område",
-        "deprecated_tags": "Uønskede tags: {tags}"
+        "untagged_point": "Punkt uden tags",
+        "untagged_line": "Linje uden tags",
+        "untagged_area": "Område uden tags",
+        "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du ønsker at gøre dette? Det vil slette dem fra det kort som alle andre ser på openstreetmap.org.",
+        "tag_suggests_area": "Tagget {tag} antyder at linjen er et område,  selvom det ikke er et område",
+        "deprecated_tags": "Forældede tags: {tags}"
     },
     "zoom": {
         "in": "Zoom ind",
         "out": "Zoom ud"
     },
-    "cannot_zoom": "Kan ikke zoome ud mere.",
+    "cannot_zoom": "Kan ikke zoome længere ud.",
     "gpx": {
         "local_layer": "Lokal GPX fil",
-        "drag_drop": "Træk og slip en .gpx fil på denne her side"
+        "drag_drop": "Træk og slip en .gpx fil på siden"
     },
     "help": {
         "title": "Hjælp",
-        "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigeringsbare verdenskort. Du kan bruge dette værktøj til at opdatere\ngeodata i dit lokalområde. Derved skaber du et bedre verdenskort med open source og frie geodata\ntil gavn for alle.\n\nDine ændringer på kortet vil blive synligt for alle og enhver der benytter\nOpenStreetMap. For at lave redigeringer skal du oprette\n[en gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\nDette [iD redigeringsværktøj](http://ideditor.com/) er et kollaborativ projekt og [kildekoden\ner tilgængelig på GitHub](https://github.com/systemed/iD). \n",
-        "editing_saving": "# Redigering & Gem\n\nDette redigeringsværktøj er lavet primært til at arbejde online, og du\narbejder gennem et website lige nu.\n\n### Vælg Objekter\n\nFor at vælge et kortobjekt, som fx en vej eller et interessepunkt, klik\npå dette på kortet. Dette vil highlighte det valgte objekt, åbne et panel med\nyderligere detajler om det og samtidigt vise en menu med forskellige ting du kan gøre\nmed dette objekt.\n\nFlere objekter på en gang kan vælges ved at holde \"Shift\" knappen ned, klik og udvælg\npå kortet. Dette vil vælge alle indtegnede objekter indenfor en firkant. Dette tillader\ndig at gøre flere ting med flere objekter på en gang.\n\n### Gem Redigeringer\n\nNår du laver ændringer fx tilføjer veje, bygninger og steder, så er disse\ngemt lokalt på din computer lige ind til du har gemt dem på OpenStreetMaps server.\nDu skal ikke bekymre dig om, hvis du laver en fejl - du kan fortryde ændringer ved at klikke på \"Fortryd\" knappen.\n\nKlik på \"Gem\" for at afslutte dine ændringer - fx du har lavet et komplet område af en by og du ønsker at gå i gang med et nyt område. Du har mulighed for at gennemse hvad du har lavet og redigeringsværktøjet giver nogle hjælpsomme forslag og advarsler, hvis der er noget som ikke ser helt korrekt ud.\n\nHvis alting ser fint nok ud, så kan du skrive en lille kort kommentar om de ændringer du lige har lavet og klik så \"Gem\" igen for at sende ændringerne til [OpenStreetMap.org](http://www.openstreetmap.org/). Dine ændringer vil nu være synlige og tilgængelige for alle. Der igen kan bygge videre og forbedre data.\n\nHvis du ikke kan afslutte dine ændringer lige med det samme, så kan du forlade redigeringsværktøjet og komme igen senere (NB kræver du bruger samme browser og computer igen). Redigeringsværktøjet vil nu gendanne alt dit arbejde igen.\n",
-        "gps": "# GPS\n\nGPS data er den mest pålidelige kilde for OpenStreetMap projektet. Dette \nredigeringsværktøj understøtter `.gpx` filer som er gemt på din egen computer. Du\nkan indsamle GPS filer med smartphone applikationer eller med GPS hardware.\n\nMere information om indsamling af GPS data læs\n[guiden . indsamling med GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFor at bruge en GPX fil - så træk og slip GPX filen ind på redigeringsværktøjet.\n Hvis filen bliver indlæst, så vil du se den som en lys grøn linje på kortet.\nKlik på 'Baggrundsindstillinger' menuen i venstre side for at aktivere, deaktivere eller \nfor at zoome ind til dette GPX lag.\n\nGPx-filen er ikke direkte oploadet til OpenStreetMap. Den bedste måde at bruge GPX-filen på er,\nat indtegne ovenpå denne.\n",
-        "imagery": "# Billedelag\n\nBilledelag er en vigtig resource ved kortlægning. En kombination af \nluftfotos, satellitfoto og frie-indsamlet kilder er tilgængelig i \nværktøjet under \"Baggrundsindstillinger\" menuen i venstre side.\n\nSom standard bruges [Bing Maps](http://www.bing.com/maps/) satellitlaget, men \nzoomer du hen til nye geografiske områder vil andre billedlag være tilgængelige.\nNogle lande som fx USA, Frankrig og Danmark vil have andre billedlag i høj kvalitet for\nnogle områder.\n\nBilledlag kan nogle gange være skævt forskudt pga fejl fra leverandørens side.\nHvis du ser en masse veje er forskudt i forhold til billedlaget nedenunder, så skal du\nikke begynde at justere disse veje for at tilpasse dem til billedlaget. I stedet for skal\ndu justere billedlaget, det gør du ved at klikke på \"Justerer\" knappen nede i \"Baggrundsindstillinger\".\n",
-        "addresses": "#Adresser⏎\n⏎\nAdresser er noget af det mest brugbare til kortet.⏎\n⏎\nSelvom adresser ofte er repræsenteret som dele af veje i OpenStreetMap⏎\nDisse er lagret som attributter for bygninger og steder langs veje.⏎\n⏎\nDu kan også tilføje adresseinformation til steder som er kortlagt som bygningspolygoner⏎\nligesom bygninger der er markeret som enkeltpunkter. Den optimale kilde til⏎\nadresser⏎\ner indsamling på selve stedet eller personlig kendkskab - som med ethvert andet⏎\ngeografisk objekt, så er kopiering fra kommercielle kilder som fx Google Maps\nstrengt⏎\nforbudt.⏎\n\n\n",
-        "buildings": "# Bygninger\n\nOpenStreetMap er verdens største database af bygninger. Du kan skabe\nendnu flere selv og gøre databasen endnu bedre.\n\n### Vælg\n\nDu udvælger en bygning ved at klikke et af dens hjørner. Dette vil highlighte\nbygningen og vil samtidigt åbne en lille værktøjsmenu og en sidemenu der viser\nendnu mere information om bygningen.\n\n### Ændring\n\nNogle gange er bygninger placeret forkert eller har forkerte tags.\n\nFor at flytte en bygning, udvælg den og klik så på \"flyt\" værktøjet. Flyt med\ndin mus bygningen og klik så når bygningen er blevet placeret korrekt.\n\nHvis en bygnings form ser forkert ud, så klik og træk i punkterne i omridset\naf bygningen så det passer bedre.\n\n### Ny\n\nDa OpenStreetMap både kan registre bygninger som et enkelt punkt eller som en polygon, så\nkan følgende tommelfingerregel gives. Kortlæg såvidt muligt alle bygninger som polygoner og kortlæg\nså fx butikker, firmaer og andet som opererer fra denne bygning som enkeltpunkter.\n\nStart kortlægning af bygninger ved at klikke på \"Område\" knappen øverst oppe til venstre. Når du\ner færdig med at indtegne bygningen, så klik på \"Retur\" knappen på dit keyboard eller klik på det \nførste punkt i din indtegnede bygning for at lukke.\n\n### Sletning\n\nHvis en bygningen er helt forkert, du kan ikke se den på fx et luftfoto eller satellitfoto eller ideelt selv\nhave set lokalt, at bygningen ikke findes. Så kan du slette bygningen. Men pas meget på med at slette hvad andre\nhar lavet. Luftfoto eller satellitfoto kan fx være meget gamle og der kan være blevet bygget i mellemtiden i området.\n\nDu kan slette en bygning ved at udvælge den - dernæst klik på skraldespands-ikonet\n- alternativt brug \"slet\" tasten på dit keyboard\n"
+        "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigerbare verdenskort. Du kan bruge det til at tilføje og opdatere\ngeodata i dit område og derved bidrage til et verdenskort med opensource og frie geodata\ntil gavn for alle.\n\nÆndringer du laver på dette kort vil blive synlige for alle der benytter\nOpenStreetMap. For at lave en rettelse skal du oprette en\n[gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\n[iD redigeringsværktøjet](http://ideditor.com/) er et kollaborativt projekt med [kildekode\n tilgængelig på GitHub](https://github.com/systemed/iD). \n",
+        "editing_saving": "# Redigering & Gem\n\nDette redigeringsværktøj er primært lavet til at arbejde online, og du\narbejder gennem et website lige nu.\n\n### At vælge Objekter\n\nFor at vælge et kortobjekt, som fx en vej eller et interessepunkt, klik\npå det på kortet. Dette vil highlighte det valgte objekt, åbne et panel med detajler om det og vise en menu med forskellige ting du kan gøre\nmed objektet.\n\nFlere objekter kan samtidigt vælges ved at holde \"Shift\" knappen nede, klikke og trække\npå kortet. Dette vil vælge alle indtegnede objekter indenfor kassen og tillade\ndig at gøre ting med flere objekter på en gang.\n\n### At gemme rettelser\n\nNår du laver ændringer som fx at tilføje veje, bygninger og steder, så er disse\ngemt lokalt på din computer indtil du har gemt dem på OpenStreetMaps server.\nDu skal ikke bekymre dig om du laver en fejl - du kan fortryde ændringer ved at klikke på \"Fortryd\" knappen.\n\nKlik på \"Gem\" for at afslutte en gruppe ændringer - fx hvis du har fuldført et område i byen og ønsker at begynde på et nyt område. Du har mulighed for at gennemse hvad du har lavet og redigeringsværktøjet giver hjælpsomme forslag og advarsler, hvis noget ved ændringerne ikke ser helt korrekt ud.\n\nHvis alting ser fint ud, kan du skrive en kort kommentar om de ændringer du har lavet og så klikke \"Gem\" igen for at uploade ændringerne til [OpenStreetMap.org](http://www.openstreetmap.org/), hvor de er synlige for alle andre brugere og tilgængelige for andre at bygge og forbedre på.\n\nHvis du ikke kan afslutte dine ændringer i en omgang, kan du forlade redigeringsværktøjet og komme tilbage senere (NB kræver du bruger samme browser og computer igen). Redigeringsværktøjet vil nu tilbyde at gendanne dit arbejde.\n",
+        "roads": "# Veje\n\nDu kan oprette, tilrette og slette veje med dette tegneværktøj. Veje kan være af mange forskellige typer: stier, landeveje, spor, cykelstier mv. Enhver ofte benyttet rute kan kortlægges.\n\n### Vælg\n\nKlik på en vej for at vælge den. Et omrids dukker op sammen med en lille værktøjsmenu og et sidepanel der viser flere oplysninger om vejen.\n\n### Ændring\n\nOfte ses veje der ikke er justeret i forhold til luftfotoet bag dem eller i forhold til et GPS-spor. Du kan justere disse veje så de er placeret rigtigt.\n\nKlik først på vejen du vil ændre. Dette fremhæver den og viser kontrolpunkter langs med den som kan trækkes det rigtige sted hen. Hvis du har brug for flere kontrolpunkter for at gøre vejen mere detaljeret, kan du dobbeltklikke på en del af vejen, så dukker et punkt op.\n\nHvis vejen er forbundet til andre veje, men ikke er korrekt forbundet på kortet, så træk et af kontrolpunkterne hen på den anden vej for at koble dem sammen. Det er vigtigt for kortet, faktisk vitalt for rutevejledninger, at veje er forbundet.\n\nDu kan også klikke på flytteværktøjet eller trykke på tastegenvejen \"M\" for at flytte hele vejen på en gang, og så klikke igen for at gemme flytningen.\n\n### Sletning\n\nHvis en vej er helt forkert - du kan ikke se den på et luftfoto og du har ideelt set fået bekræftet at vejen ikke findes lokalt - så kan du slette vejen. Men pas på med at slette hvad andre har lavet - som med andre ændringer er resultatet synligt for alle og luftfoto kan være forældede så vejen kunne være bygget i mellemtiden.\n\nDu kan slette en bygning ved at vælge den og klikke på skraldespands-ikonet - alternativt kan du bruge slet-tasten på dit tastatur.\n\n### Oprettelse\n\nHar du fundet et sted hvor der skulle være en vej, men den er ikke på kortet? Klik på linje-ikonet i øverste venstre del af tegneværktøjet eller klik på tastegenvejen \"2\" for at tegne en linje.\n\nKlik på begyndelsen af vejen for at påbegynde den. Hvis vejen forgrener sig fra en eksisterende vej, så begynd vejen der hvor de er forbundet.\n\nKlik derefter på punkter på vejens forløb så det passer med luftfoto eller GPS-spor. Hvis vejen du tegner krydser en anden vej, så kobl dem sammen ved at klikke på punktet hvor de skærer hinanden. Når du er færdig med at tegne, så dobbeltklik eller tryk på enter-tasten på tastaturet.\n",
+        "gps": "# GPS\n\nGPS data er den mest pålidelige kilde til data OpenStreetMap. Dette \nredigeringsværktøj understøtter lokale spor -`.gpx` filer på din egen computer. Du\nkan indsamle denne form for GPS spor med diverse smartphone applikationer såvel som med personligt GPS udstyr.\n\nFor mere information om udførelse af GPS opmålinger læs\n[guiden . opmåling med GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFor at bruge et GPX spor til kortlægning - så træk og slip GPX filen ind på redigeringsværktøjet.\n Hvis filen bliver indlæst, så vil du se den som en lys grøn linje på kortet.\nKlik på 'Baggrundsindstillinger' menuen i venstre side for at aktivere, deaktivere eller zoome til dette GPX lag.\n\nGPx-sporet uploades ikke direkte til OpenStreetMap. Den bedste måde at bruge den på er ved at tegne ovenpå den og bruge den som en guide for de nye objekter du tilføjer.\n",
+        "imagery": "# Billedlag\n\nLuftfotos er en vigtig resource ved kortlægning. En kombination af \nflyfotos, satellitfoto og frit udarbejdede kilder er tilgængelige i \nværktøjet under \"Baggrundsindstillinger\" menuen i venstre side.\n\nSom standard bruges et [Bing Maps](http://www.bing.com/maps/) satellitlag, men \nzoomer du hen til nye geografiske områder vil andre billedlag være tilgængelige.\nNogle lande som fx USA, Frankrig og Danmark har billedlag i meget høj kvalitet for\nnogle områder.\n\nBilledlag kan nogle gange være forskudte i forhold til kortdata pga fejltagelser fra leverandørens side.\nHvis du ser en masse veje der er forskudt i forhold til billedlaget, skal du\nikke umiddelbart begynde at justere dem alle for at matche dem med billedlaget. I stedet for kan\ndu justere billedlaget, så det matcher de eksisterende date ved at klikke på \"Juster\" nederst i \"Baggrundsindstillinger\".\n",
+        "addresses": "#Adresser⏎\n⏎\nAdresser er nogle af de mest brugbare informationer for kortet.⏎\n⏎\nSelvom adresser ofte repræsenteres som dele af veje, er de i OpenStreetMap⏎\nlagret som attributter for bygninger og steder langs veje.⏎\n⏎\nDu kan tilføje adresseinformation til steder som er kortlagt som bygningspolygoner⏎\nsåvel som de der er kortlagt som enkeltpunkter. Den optimale kilde til⏎\nadressedata⏎\ner indsamling på selve stedet eller personlig kendkskab - som med ethvert andet⏎\ngeografisk objekt, så er kopiering fra kommercielle kilder som fx Google Maps\nstrengt⏎\nforbudt.⏎\n\n\n",
+        "inspector": "# Inspiceringspanelet\n\nInspiceringspanelet er det element i højre side der dukker op når et objekt er markeret. Det lader dig rette i objektets værdier.\n\n### Valg af type\n\nNår du har tilføjet et punkt, eller en linje eller et areal, kan du vælge hvilken type det er, som f.eks. motorvej eller skovvej, supermarked eller café. Panelet har knapper til at vælge almindelige typer, og du kan finde andre ved at indtaste hvad du leder efter i søgefeltet.\n\nKlik på 'i' i nederste højre hjørne på et typeknap for at få flere oplysninger om typen. Klik på knappen for at vælge typen.\n\n### Formularer og rettelse af tags\n\nNår du har valgt en type, eller hvis du har valg et objekt der allerede har en type, viser panelet nogle felter med oplysningerne for typen, f.eks. navn og adresse.\n\nUnder felterne er der ikoner til at tilføje andre oplysninger, som  [Wikipedia](http://www.wikipedia.org/)-information, adgang for rullestol, med flere.\n\nI bunden af panelet kan du klikke på \"Flere tags\" for at tilføje vilkårlige tags til objektet. [Taginfo](http://taginfo.openstreetmap.org/) kan bruges til at lære mere om populære tag-kombinationer.\n\nÆndringer du laver i panelet bliver automatisk anvendt på kortet. Du kan fortryde dem på et vilkårligt tidspunkt ved at klikke på knappen \"Fortryd\".\n\n### Luk inspiceringspanelet\n\nDu kan lukke panelet ved at klikke på lukkeknappen i øverste højre hjørne, ved at trykke på \"Esc\"-knappen på tastaturet eller ved at klikke på kortet.\n",
+        "buildings": "# Bygninger\n\nOpenStreetMap udgør verdens største database af bygninger. Du kan opretteendnu flere selv og gøre databasen endnu bedre.\n\n### Vælg\n\nDu vælger en bygning ved at klikke på en af dens sider. Dette vil fremhæve bygningen og vil samtidig åbne en lille værktøjsmenu og et sidepanel der viser flere oplysninger om bygningen.\n\n### Ændring\n\nNogle gange er bygninger placeret forkert eller har forkerte tags.\n\nDu kan flytte en bygning ved vælge den og klikke på flytteværktøjet. Bevæg din mus for at flytte bygningen, og klik så når bygningen er blevet placeret korrekt.\n\nHvis en bygnings form ser forkert ud, så klik og træk i punkterne i omridset af bygningen til den er rigtig.\n\n### Opret\n\nDa OpenStreetMap både kan registre bygninger som et enkelt punkt eller som en polygon, så kan følgende tommelfingerregel gives. Kortlæg så vidt muligt alle bygninger som polygoner og kortlæg så fx butikker, firmaer og andet som opererer fra en bygning som enkeltpunkter.\n\nStart kortlægning af en bygning ved at klikke på \"Område\"-knappen øverst oppe til venstre. Når du er færdig med at indtegne bygningen, så klik på entertasten på dit tastatur eller klik på det første punkt i din indtegnede bygning for at lukke.\n\n### Sletning\n\nHvis en bygning er helt forkert - du kan ikke se den på et luftfoto og du har ideelt set fået bekræftet at bygningen ikke findes lokalt - så kan du slette bygningen. Men pas meget på med at slette hvad andre har lavet. Luftfoto kan fx være forældede og der kan være blevet bygget i mellemtiden i området.\n\nDu kan slette en bygning ved at vælge den og klikke på skraldespands-ikonet - alternativt kan du bruge slet-tasten på dit tastatur.\n"
     },
     "intro": {
         "navigation": {
+            "title": "Navigation",
             "drag": "Grundkortet viser OpenStreetMap data oven på et baggrundkort. Du kan navigere ved at trække og scrolle lige som ethvert andet webkort.**Træk i kortet!**",
-            "select": "Kortets objekter kun beskrives på tre måder: ved brug af punkter, linjer eller områder. Alle kortets objekter kan vælges ved at klikke på dem.**Klik på et punkt for at vælge dette.**",
-            "header": "Overskriften viser os kortfunktionstyperne.",
-            "pane": "Når et geografisk objekt er valgt, så vil objektredigeringsværktøjet blive vist.  Øverst vil vise objekttypen og det centrale panel i midten vil vise objektets attributter som fx navn og adresse.**Luk objektredigeringsværktøjet med luk-knappen oppe i højre hjørne.** "
+            "select": "Kortets elementer repræsenteres på tre måder: Ved brug af punkter, linjer eller områder. Alle elementer kan vælges ved at klikke på dem.**Klik på punktet for at vælge dette.**",
+            "header": "Overskriften viser os elementtypen.",
+            "pane": "Når et geografisk element er valgt, så vil redigeringsværktøjet blive vist. Overskriften viser os elementtypen og det centrale panel viser elementets attributter som fx dets navn og adresse.**Luk redigeringsværktøjet med luk-knappen i øverste højre hjørne.** "
         },
         "points": {
+            "title": "Punkter",
             "add": "Punkter kan bruges til at beskrive ting som fx butikker, restauranter og mindesmærker. De markerer en bestemt lokalitet og beskriver hvad der er lige der.**Klik på punktknappen for at tilføje et nyt punkt.**",
-            "place": "Et punkt kan placeres ved at klikke på kortet.**Placerer punktet på toppen af bygningen.**",
-            "search": "Punkter kan repræsenteres på mange måder. Punktet du lige tilføjede var en cafe.**Søg efter 'cafe'**",
-            "choose": "**Vælg cafe fra gitteret.**",
-            "describe": "Punktet er nu markeret som en cafe. Ved at bruge funktionsredigeringsværktøjet kan vi tilføje mere information.**Tilføj et navn**",
-            "close": "Funktionsredigeringsværktøjet  kan lukkes med luk knappen.\n**Luk funktionsredigeringsværktøjet**",
-            "reselect": "Ofte vil punkter allerede findes, men har fejl eller mangler. Vi kan rette i allerede indsatte punkter.**Vælg punktet du lige lavede.**",
+            "place": "Punktet kan placeres ved at klikke på kortet.**Placerer punktet ovenpå bygningen.**",
+            "search": "Der er mange forskellige kortelementer der kan repræsenteres af punkter. Punktet du lige tilføjede var en café. **Søg efter 'cafe'**",
+            "choose": "**Vælg cafe fra listen.**",
+            "describe": "Punktet er nu mærket som en cafe. Ved at bruge redigeringsværktøjet kan vi tilføje mere information om elementet.**Tilføj et navn**",
+            "close": "Funktionsredigeringsværktøjet  kan lukkes med luk knappen.\n**Luk redigeringsværktøjet**",
+            "reselect": "Ofte vil punkter allerede findes, men have fejl eller mangler. Vi kan rette i allerede eksisterende punkter.**Vælg punktet du lige lavede.**",
             "fixname": "**Omdøb navnet og luk funktionsredigeringsværktøjet.**",
             "reselect_delete": "Alle geografiske objekter på kortet kan slettes.**Klik på punktet du har lavet.**",
-            "delete": "Menuen omkring punkter har værktøjer der kan bruges til forskellige operationer inkl. sletning.**Slet punktet.**"
+            "delete": "Menuen omkring punktet har værktøjer der kan bruges til forskellige operationer på det, inkl. sletning.**Slet punktet.**"
         },
         "areas": {
-            "add": "Områder er en mere detaljeret måde at beskrive kortet. Områder giver information om grænserne til det geografiske område. Områder kan bruges for de fleste typer af punkter og er ofte den bedste måde.**Klik på områdeknappen for at tilføje et nyt område.**",
-            "corner": "Områder indtegnes ved at placere punkter der afgrænser ydre området.**Placerer startpunktet i et af hjørnerne for legepladsen.**",
+            "title": "Områder",
+            "add": "Områder er en mere detaljeret måde at beskrive kortet på. Områder giver information om grænserne til det geografiske område. Områder kan bruges for de fleste typer af punkter og er ofte den bedste måde.**Klik på område knappen for at tilføje et nyt område.**",
+            "corner": "Områder indtegnes ved at placere punkter der markerer områdets afgrænsning. **Placerer startpunktet på et af legepladsens hjørner.**",
             "place": "Indtegn området ved at placere flere punkter. Afslut området ved at klikke på det først indtegnet punkt.**Indtegn legepladsens område.**",
             "search": "**Søg efter legeplads.**",
-            "choose": "**Vælg baggrund fra gitteret.**",
-            "describe": "**Tilføj et navn og luk så funktionsværktøjet**"
+            "choose": "**Vælg legeplads fra listen.**",
+            "describe": "**Tilføj et navn og luk så redigeringsværktøjet**"
         },
         "lines": {
+            "title": "Linjer",
             "add": "Linjer bruges til at beskrive ting som fx veje, jernbanespor og floder.**Klik på linjeknappen for at tilføje en ny linje.**",
             "start": "**Start linjen ved at klikke ved enden af en vej**",
             "intersect": "Klik for at tilføje punkter til linjen. Du kan trække i kortet hvis det er nødvendigt mens du tegner. Veje og mange andre type af linjer er dele af et større netværk. Det er meget vigtigt at disse linjer er forbundet korrekt for at få rutenavigationsværktøjer til at virke.**Klik på Flower Street for at lave en sammenkædning af de to linjer.**",
-            "finish": "Linjer kan afsluttes ved at klikke på det sidste punkt igen.**Afslut indtegning af vejen.**",
-            "road": "**Vælg vej fra gitteret**",
-            "residential": "Der er mange typer af veje, den mest brugte er villaveje.**Vælg villaveje**",
-            "describe": "**Navngiv vejen og luk funktionsredigeringsværktøjet.**",
-            "restart": "Vejen skal berøre Flower Street."
+            "finish": "Linjer kan afsluttes ved at klikke på det sidste punkt igen. **Afslut indtegning af vejen.**",
+            "road": "**Vælg vej fra listen**",
+            "residential": "Der er forskellige typer veje, af hvilke den mest brugte er villavej.**Vælg villavej**",
+            "describe": "**Navngiv vejen og luk redigeringsværktøjet.**",
+            "restart": "Vejen skal skære Flower Street."
         },
         "startediting": {
+            "title": "Start redigering",
             "help": "Mere dokumentation samt denne gennemgang kan ses her.",
             "save": "Glem ikke regelmæssigt at gemme dine ændringer!",
             "start": "Start kortlægning!"
@@ -419,7 +435,7 @@
                 }
             },
             "collection_times": {
-                "label": "Indsamlingstid"
+                "label": "Indsamlingstidspunkt"
             },
             "construction": {
                 "label": "Type"
@@ -443,7 +459,7 @@
                 "label": "Højde over havet"
             },
             "emergency": {
-                "label": "Nødkald"
+                "label": "Skadestue"
             },
             "entrance": {
                 "label": "Type"
@@ -523,7 +539,7 @@
                 "label": "Ensrettet vej"
             },
             "opening_hours": {
-                "label": "Timer"
+                "label": "Åbningstider"
             },
             "operator": {
                 "label": "Operatør"
@@ -663,6 +679,9 @@
             },
             "amenity": {
                 "name": "Faciliteter"
+            },
+            "amenity/atm": {
+                "name": "Pengeautomat"
             },
             "amenity/bank": {
                 "name": "Bank",
@@ -1092,7 +1111,7 @@
                 "name": "Fodboldbane"
             },
             "leisure/pitch/tennis": {
-                "name": "Tenninsbane"
+                "name": "Tennisbane"
             },
             "leisure/pitch/volleyball": {
                 "name": "Volleyballbane"

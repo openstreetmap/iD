@@ -210,7 +210,6 @@
     },
     "splash": {
         "welcome": "Laipni lūgti iD OpenStreetMap redaktorā",
-        "text": "Šī ir izstrādes versija {version}. Papildus informācijai skatīt {website} un ziņot par kļūdām {github}.",
         "start": "Labot tagad"
     },
     "source_switch": {
