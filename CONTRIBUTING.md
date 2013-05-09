@@ -27,6 +27,14 @@ To request a feature:
 * Understand that iD is meant to be a simple editor and doesn't aim to be
   as complete or complicated as JOSM or similar.
 
+## Verifying Bug Fixes
+
+To verify a bug fix (or test a new feature), use the [master deployment](http://www.openstreetmap.us/iD/master/)
+(http://www.openstreetmap.us/iD/master/), which is updated every 10 minutes with the latest code.
+
+The deployments on openstreetmap.org and http://www.openstreetmap.us/iD/release/ are updated only
+with stable releases. Issues that are marked fixed in the tracker may still be present.
+
 ## Translating
 
 Translations are managed using the
