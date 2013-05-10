@@ -35,8 +35,8 @@ iD.ui.RadialMenu = function(operations) {
             .attr('d', 'M' + r * Math.sin(a0) + ',' +
                              r * Math.cos(a0) +
                       ' A' + r + ',' + r + ' 0 0,0 ' +
-                             r * Math.sin(a1) + ',' +
-                             r * Math.cos(a1))
+                             (r * Math.sin(a1) + 1e-3) + ',' +
+                             (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
             .attr('stroke-width', 50)
             .attr('stroke-linecap', 'round');
 
