@@ -64,32 +64,11 @@ iD.ui.Inspector = function(context) {
             panewrap.style('right', '-0%');
             tagLayer.call(entityEditor);
         }
-
-        if (d3.event) {
-            // Pan the map if the clicked feature intersects with the position
-            // of the inspector
-            var inspectorSize = selection.size(),
-                mapSize = context.map().size(),
-                offset = 50,
-                shiftLeft = d3.event.clientX - mapSize[0] + inspectorSize[0] + offset,
-                center = (mapSize[0] / 2) + shiftLeft + offset;
-
-            if (shiftLeft > 0 && inspectorSize[1] > d3.event.clientY) {
-                context.map().centerEase(context.projection.invert([center, mapSize[1]/2]));
-            }
-        }
     }
 
     inspector.close = function(selection) {
         entityEditor.close();
-
-        selection.transition()
-            .style('right', '-500px')
-            .each('end', function() {
-                d3.select(this)
-                    .style('display', 'none')
-                    .html('');
-            });
+        selection.html('');
     };
 
     inspector.entityID = function(_) {

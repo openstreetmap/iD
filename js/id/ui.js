@@ -13,11 +13,19 @@ iD.ui = function(context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
+        var sidebar = container.append('div')
+            .attr('id', 'sidebar')
+            .attr('class', 'col4 fillL2');
+
+        sidebar.append('div')
+            .style('display', 'none')
+            .attr('class', 'inspector-wrap fr content');
+
         var m = container.append('div')
             .attr('id', 'map')
             .call(map);
 
-        var bar = container.append('div')
+        var bar = m.append('div')
             .attr('id', 'bar')
             .attr('class','fillD');
 
@@ -40,12 +48,12 @@ iD.ui = function(context) {
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 
-        container.append('idv')
+        m.append('div')
             .attr('class', 'attribution')
             .attr('tabindex', -1)
             .call(iD.ui.Attribution(context));
 
-        container.append('div')
+        m.append('div')
             .style('display', 'none')
             .attr('class', 'help-wrap fillL col5 content');
 
@@ -74,11 +82,7 @@ iD.ui = function(context) {
             .attr('class', 'map-control geolocate-control')
             .call(iD.ui.Geolocate(map));
 
-        container.append('div')
-            .style('display', 'none')
-            .attr('class', 'inspector-wrap fr content col4');
-
-        var about = container.append('div')
+        var about = m.append('div')
             .attr('class','col12 about-block fillD');
 
         about.append('div')
