@@ -246,14 +246,14 @@ iD.Map = function(context) {
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
-    map.mousePosition = function() {
+    map.mouse = function() {
         var e = d3.event, s;
         while (s = e.sourceEvent) e = s;
         return mouse(e);
     };
 
     map.mouseCoordinates = function() {
-        return projection.invert(map.mousePosition());
+        return projection.invert(map.mouse());
     };
 
     map.dblclickEnable = function(_) {

@@ -236,10 +236,7 @@ iD.svg.Labels = function(projection, context) {
 
 
     function hideOnMouseover() {
-
-        if (!mousePosition) return;
-
-        var mouse = mousePosition(d3.event),
+        var mouse = context.mouse(),
             pad = 50,
             rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
             labels = _.pluck(rtree.search(rect, this), 'leaf'),
@@ -273,15 +270,9 @@ iD.svg.Labels = function(projection, context) {
 
     var rtree = new RTree(),
         rectangles = {},
-        lang = 'name:' + iD.detect().locale.toLowerCase().split('-')[0],
-        mousePosition, cacheDimensions;
+        lang = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
 
     function labels(surface, graph, entities, filter, dimensions, fullRedraw) {
-
-        if (!mousePosition || dimensions.join(',') !== cacheDimensions) {
-            mousePosition = iD.util.fastMouse(surface.node().parentNode);
-            cacheDimensions = dimensions.join(',');
-        }
 
         var hidePoints = !surface.select('.node.point').node();
 

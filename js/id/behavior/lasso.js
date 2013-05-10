@@ -8,7 +8,7 @@ iD.behavior.Lasso = function(context) {
         function mousedown() {
             if (d3.event.shiftKey === true) {
 
-                mouse = d3.mouse(context.surface().node());
+                mouse = context.mouse();
                 lasso = null;
 
                 selection
@@ -27,7 +27,7 @@ iD.behavior.Lasso = function(context) {
                 context.surface().call(lasso);
             }
 
-            lasso.b(d3.mouse(context.surface().node()));
+            lasso.b(context.mouse());
         }
 
         function normalize(a, b) {

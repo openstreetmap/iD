@@ -43,12 +43,8 @@ iD.modes.Move = function(context, entityIDs) {
             nudgeInterval = null;
         }
 
-        function point() {
-            return d3.mouse(context.map().surface.node());
-        }
-
         function move() {
-            var p = point();
+            var p = context.mouse();
 
             var delta = origin ?
                 [p[0] - context.projection(origin)[0],

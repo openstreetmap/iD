@@ -31,7 +31,7 @@ iD.modes.Select = function(context, selection) {
         if (entity && entity.type === 'node') {
             radialMenu.center(context.projection(entity.loc));
         } else {
-            radialMenu.center(context.map().mousePosition());
+            radialMenu.center(context.mouse());
         }
     }
 
@@ -131,8 +131,7 @@ iD.modes.Select = function(context, selection) {
                 datum = target.datum();
 
             if (datum instanceof iD.Way && !target.classed('fill')) {
-                var choice = iD.geo.chooseEdge(context.childNodes(datum),
-                        d3.mouse(context.surface().node()), context.projection),
+                var choice = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection),
                     node = iD.Node();
 
                 var prev = datum.nodes[choice.index - 1],

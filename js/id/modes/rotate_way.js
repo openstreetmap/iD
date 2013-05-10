@@ -19,13 +19,9 @@ iD.modes.RotateWay = function(context, wayId) {
             iD.actions.Noop(),
             annotation);
 
-        function point() {
-            return d3.mouse(context.map().surface.node());
-        }
-
         function rotate() {
 
-            var mousePoint = point(),
+            var mousePoint = context.mouse(),
                 newAngle = Math.atan2(mousePoint[1] - pivot[1], mousePoint[0] - pivot[0]);
 
             if (typeof angle === 'undefined') angle = newAngle;

@@ -138,6 +138,7 @@ window.iD = function () {
     context.layers = function() { return map.layers; };
     context.background = function() { return map.layers[0]; };
     context.surface = function() { return map.surface; };
+    context.mouse = map.mouse;
     context.projection = map.projection;
     context.tail = map.tail;
     context.redraw = map.redraw;
