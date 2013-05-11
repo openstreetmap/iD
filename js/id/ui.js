@@ -1,5 +1,5 @@
 iD.ui = function(context) {
-    return function(container) {
+    function render(container) {
         var history = context.history(),
             map = context.map();
 
@@ -16,7 +16,7 @@ iD.ui = function(context) {
         container.append('div')
             .attr('id', 'sidebar')
             .attr('class', 'col4')
-            .call(iD.ui.Sidebar(context));
+            .call(ui.sidebar);
 
         var content = container.append('div')
             .attr('id', 'content');
@@ -171,7 +171,18 @@ iD.ui = function(context) {
             .on('authenticated.ui', function() {
                 authenticating.close();
             });
-    };
+    }
+
+    function ui(container) {
+        context.container(container);
+        context.loadLocale(function() {
+            render(container);
+        });
+    }
+
+    ui.sidebar = iD.ui.Sidebar(context);
+
+    return ui;
 };
 
 iD.ui.tooltipHtml = function(text, key) {

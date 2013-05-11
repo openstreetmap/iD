@@ -1,84 +1,11 @@
 iD.ui.Save = function(context) {
-    var map = context.map(),
-        history = context.history(),
-        connection = context.connection(),
-        key = iD.ui.cmd('⌘S'),
-        modal;
+    var history = context.history(),
+        key = iD.ui.cmd('⌘S');
 
     function save() {
         d3.event.preventDefault();
-
         if (!history.hasChanges()) return;
-
-        connection.authenticate(function(err) {
-            modal = iD.ui.modal(context.container());
-            var changes = history.changes();
-            changes.connection = connection;
-            modal.select('.content')
-                .classed('commit-modal', true)
-                .datum(changes)
-                .call(iD.ui.Commit(context)
-                    .on('cancel', function() {
-                        modal.remove();
-                    })
-                    .on('fix', clickFix)
-                    .on('save', commit));
-        });
-    }
-
-    function commit(e) {
-        context.container().select('.shaded')
-            .remove();
-
-        var loading = iD.ui.Loading(context)
-            .message(t('save.uploading'))
-            .blocking(true);
-
-        context.container()
-            .call(loading);
-
-        connection.putChangeset(
-            history.changes(iD.actions.DiscardTags(history.difference())),
-            e.comment,
-            history.imagery_used(),
-            function(err, changeset_id) {
-                loading.close();
-                if (err) {
-                    var confirm = iD.ui.confirm(context.container());
-                    confirm
-                        .select('.modal-section.header')
-                        .append('h3')
-                        .text(t('save.error'));
-                    confirm
-                        .select('.modal-section.message-text')
-                        .append('p')
-                        .text(err.responseText);
-                } else {
-                    context.flush();
-                    success(e, changeset_id);
-                }
-            });
-    }
-
-    function success(e, changeset_id) {
-        modal = iD.ui.modal(context.container());
-        modal.select('.content')
-            .classed('success-modal', true)
-            .datum({
-                id: changeset_id,
-                comment: e.comment
-            })
-            .call(iD.ui.Success(context)
-                .on('cancel', function() {
-                    modal.remove();
-                }));
-    }
-
-    function clickFix(d) {
-        var extent = d.entity.extent(context.graph());
-        map.centerZoom(extent.center(), Math.min(19, map.extentZoom(extent)));
-        context.enter(iD.modes.Select(context, [d.entity.id]));
-        modal.remove();
+        context.enter(iD.modes.Save(context));
     }
 
     return function(selection) {

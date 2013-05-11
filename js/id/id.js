@@ -45,26 +45,21 @@ window.iD = function () {
         return context;
     };
 
-    context.ui = function() {
-        return function(container) {
-            context.container(container);
-
-            if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
-                localePath = localePath || context.assetPath() + 'locales/' + locale + '.json';
-                d3.json(localePath, function(err, result) {
-                    window.locale[locale] = result;
-                    window.locale.current(locale);
-                    container.call(ui);
-                });
-            } else {
-                container.call(ui);
-            }
-
-            return ui;
+    context.loadLocale = function(cb) {
+        if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
+            localePath = localePath || context.assetPath() + 'locales/' + locale + '.json';
+            d3.json(localePath, function(err, result) {
+                window.locale[locale] = result;
+                window.locale.current(locale);
+                cb();
+            });
+        } else {
+            cb();
         }
     };
 
     /* Straight accessors. Avoid using these if you can. */
+    context.ui = function() { return ui; };
     context.connection = function() { return connection; };
     context.history = function() { return history; };
     context.map = function() { return map; };

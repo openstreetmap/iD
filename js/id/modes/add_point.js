@@ -1,6 +1,7 @@
 iD.modes.AddPoint = function(context) {
     var mode = {
         id: 'add-point',
+        button: 'point',
         title: t('modes.add_point.title'),
         description: t('modes.add_point.description'),
         key: '1'

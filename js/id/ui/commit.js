@@ -23,35 +23,39 @@ iD.ui.Commit = function(context) {
     }
 
     function commit(selection) {
+        var changes = context.history().changes(),
+            user = context.connection().user();
+
+        selection.classed('commit-modal', true);
 
         function changesLength(d) { return changes[d].length; }
 
-        var changes = selection.datum(),
-            connection = changes.connection,
-            user = connection.user(),
-            header = selection.append('div').attr('class', 'header modal-section'),
-            body = selection.append('div').attr('class', 'body');
+        var header = selection.append('div')
+            .attr('class', 'header');
 
         header.append('h3')
             .text(t('commit.title'));
+
+        var body = selection.append('div')
+            .attr('class', 'body');
 
         // Comment Section
         var commentSection = body.append('div')
             .attr('class', 'modal-section form-field');
 
-            commentSection.append('label')
-                .attr('class','form-label')
-                .text(t('commit.message_label'));
+        commentSection.append('label')
+            .attr('class', 'form-label')
+            .text(t('commit.message_label'));
 
-        var commentField = commentSection
-                .append('textarea')
-                .attr('placeholder', t('commit.description_placeholder'))
-                .property('value',  context.storage('comment') || '');
+        var commentField = commentSection.append('textarea')
+            .attr('placeholder', t('commit.description_placeholder'))
+            .property('value', context.storage('comment') || '');
 
         commentField.node().select();
 
         // Save Section
-        var saveSection = body.append('div').attr('class','modal-section cf');
+        var saveSection = body.append('div')
+            .attr('class','modal-section cf');
 
         var userLink = d3.select(document.createElement('div'));
 
@@ -64,7 +68,7 @@ iD.ui.Commit = function(context) {
         userLink.append('a')
             .attr('class','user-info')
             .text(user.display_name)
-            .attr('href', connection.userURL(user.display_name))
+            .attr('href', context.connection().userURL(user.display_name))
             .attr('tabindex', -1)
             .attr('target', '_blank');
 

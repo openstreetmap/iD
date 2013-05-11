@@ -2287,6 +2287,11 @@ img.wiki-image {
 /* Commit Modal
 ------------------------------------------------------- */
 
+.commit-modal {
+    width: 100%;
+    height: 100%;
+}
+
 .commit-modal a.user-info {
     display: inline-block;
 }
