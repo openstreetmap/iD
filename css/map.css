@@ -73,7 +73,7 @@ g.point.active, g.point.active * {
 /* vertices and midpoints */
 
 g.vertex .fill {
-    fill: none;
+    fill: #000;
 }
 
 g.vertex .stroke {
@@ -84,10 +84,6 @@ g.vertex .stroke {
 
 g.vertex.shared .stroke {
     fill: #aaa;
-}
-
-g.vertex.tagged .fill {
-    fill: #000;
 }
 
 g.midpoint .fill {

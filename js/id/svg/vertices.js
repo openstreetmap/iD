@@ -54,10 +54,10 @@ iD.svg.Vertices = function(projection, context) {
         }).length > 1;
     }
 
-    function draw(groups, graph, zoom) {
-        var group = groups.enter()
-            .insert('g', ':first-child')
-            .attr('class', function(d) { return 'node vertex ' + d.id; });
+    function draw(groups, vertices, klass, graph, zoom) {
+        groups = groups.data(vertices, function(entity) {
+            return iD.Entity.key(entity) + ',' + zoom;
+        });
 
         if (zoom < 17) {
             zoom = 0;
@@ -67,79 +67,51 @@ iD.svg.Vertices = function(projection, context) {
             zoom = 2;
         }
 
-        group.append('circle')
-            .attr('class', function(d) { return 'node vertex shadow ' + d.id; });
-
-        group.append('circle')
-            .attr('class', function(d) { return 'node vertex stroke ' + d.id; });
-
-        groups.attr('transform', iD.svg.PointTransform(projection))
-            .call(iD.svg.TagClasses())
-            .call(iD.svg.MemberClasses(graph))
-            .classed('tagged', function(entity) { return entity.hasInterestingTags(); })
-            .classed('shared', function(entity) { return graph.isShared(entity); });
-
+        var icons = {};
         function icon(entity) {
-            return zoom !== 0 &&
+            if (entity.id in icons) return icons[entity.id];
+            return icons[entity.id] = (zoom !== 0 &&
                 entity.hasInterestingTags() &&
-                context.presets().match(entity, graph).icon;
+                context.presets().match(entity, graph).icon);
         }
 
-        function center(entity) {
-            if (icon(entity)) {
-                d3.select(this)
-                    .attr('cx', 0.5)
-                    .attr('cy', -0.5);
-            } else {
-                d3.select(this)
-                    .attr('cy', 0)
-                    .attr('cx', 0);
+        function circle(klass) {
+            var rads = radiuses[klass];
+            return function(entity) {
+                var i = icon(entity),
+                    c = i ? 0.5 : 0,
+                    r = rads[i ? 3 : zoom];
+                this.setAttribute('class', 'node vertex ' + klass + ' ' + entity.id);
+                this.setAttribute('cx', c);
+                this.setAttribute('cy', -c);
+                this.setAttribute('r', r);
             }
         }
 
-        groups.select('circle.shadow')
-            .each(center)
-            .attr('r', function(entity) {
-                return radiuses.shadow[icon(entity) ? 3 : zoom];
-            });
+        var enter = groups.enter().append('g')
+            .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
 
-        groups.select('circle.stroke')
-            .each(center)
-            .attr('r', function(entity) {
-                return radiuses.stroke[icon(entity) ? 3 : zoom];
-            });
+        enter.append('circle')
+            .each(circle('shadow'));
 
-        // Each vertex gets either a circle or a use, depending
-        // on if it has a icon or not.
+        enter.append('circle')
+            .each(circle('stroke'));
 
-        var fill = groups.selectAll('circle.fill')
-            .data(function(entity) {
-                return icon(entity) ? [] : [entity];
-            }, iD.Entity.key);
-
-        fill.enter().append('circle')
-            .attr('class', function(d) { return 'node vertex fill ' + d.id; })
-            .each(center)
-            .attr('r', radiuses.fill[zoom]);
-
-        fill.exit()
-            .remove();
-
-        var use = groups.selectAll('use')
-            .data(function(entity) {
-                var i = icon(entity);
-                return i ? [i] : [];
-            }, function(d) {
-                return d;
-            });
-
-        use.enter().append('use')
+        // Vertices with icons get a `use`.
+        enter.filter(function(d) { return icon(d); })
+            .append('use')
             .attr('transform', 'translate(-6, -6)')
             .attr('clip-path', 'url(#clip-square-12)')
-            .attr('xlink:href', function(icon) { return '#maki-' + icon + '-12'; });
+            .attr('xlink:href', function(d) { return '#maki-' + icon(d) + '-12'; });
 
-        use.exit()
-            .remove();
+        // Vertices with tags get a `circle`.
+        enter.filter(function(d) { return !icon(d) && d.hasInterestingTags(); })
+            .append('circle')
+            .each(circle('fill'));
+
+        groups
+            .attr('transform', iD.svg.PointTransform(projection))
+            .classed('shared', function(entity) { return graph.isShared(entity); });
 
         groups.exit()
             .remove();
@@ -164,9 +136,7 @@ iD.svg.Vertices = function(projection, context) {
 
         surface.select('.layer-hit').selectAll('g.vertex.vertex-persistent')
             .filter(filter)
-            .data(vertices, iD.Entity.key)
-            .call(draw, graph, zoom)
-            .classed('vertex-persistent', true);
+            .call(draw, vertices, 'vertex-persistent', graph, zoom);
 
         drawHover(surface, graph, zoom);
     }
@@ -175,9 +145,7 @@ iD.svg.Vertices = function(projection, context) {
         var hovered = hover ? siblingAndChildVertices([hover.id], graph) : {};
 
         surface.select('.layer-hit').selectAll('g.vertex.vertex-hover')
-            .data(d3.values(hovered), iD.Entity.key)
-            .call(draw, graph, zoom)
-            .classed('vertex-hover', true);
+            .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
     }
 
     drawVertices.drawHover = function(surface, graph, _, zoom) {
