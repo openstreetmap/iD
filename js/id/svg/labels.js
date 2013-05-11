@@ -104,7 +104,7 @@ iD.svg.Labels = function(projection, context) {
                 'startOffset': '50%',
                 'xlink:href': function(d) { return '#labelpath-' + d.id; }
             })
-            .text(function(d) { return name(d); });
+            .text(iD.util.localeName);
 
         texts.exit().remove();
 
@@ -140,8 +140,8 @@ iD.svg.Labels = function(projection, context) {
         texts.attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
             .style('text-anchor', get(labels, 'textAnchor'))
-            .text(function(d) { return name(d); })
-            .each(function(d, i) { textWidth(name(d), labels[i].height, this); });
+            .text(iD.util.localeName)
+            .each(function(d, i) { textWidth(iD.util.localeName(d), labels[i].height, this); });
 
         texts.exit().remove();
         return texts;
@@ -241,13 +241,8 @@ iD.svg.Labels = function(projection, context) {
             .classed('proximate', true);
     }
 
-    function name(d) {
-        return d.tags[lang] || d.tags.name;
-    }
-
     var rtree = new RTree(),
-        rectangles = {},
-        lang = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
+        rectangles = {};
 
     function labels(surface, graph, entities, filter, dimensions, fullRedraw) {
 
@@ -272,7 +267,7 @@ iD.svg.Labels = function(projection, context) {
                 preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon;
 
-            if ((name(entity) || icon) && !(hidePoints && geometry === 'point')) {
+            if ((iD.util.localeName(entity) || icon) && !(hidePoints && geometry === 'point')) {
 
                 for (k = 0; k < label_stack.length; k ++) {
                     if (entity.geometry(graph) === label_stack[k][0] &&
@@ -301,7 +296,8 @@ iD.svg.Labels = function(projection, context) {
             var font_size = font_sizes[k];
             for (i = 0; i < labelable[k].length; i ++) {
                 entity = labelable[k][i];
-                var width = name(entity) && textWidth(name(entity), font_size),
+                var name = iD.util.localeName(entity),
+                    width = name && textWidth(name, font_size),
                     p;
                 if (entity.geometry(graph) === 'point') {
                     p = getPointLabel(entity, width, font_size);
