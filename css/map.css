@@ -891,7 +891,7 @@ text.point {
 
 /* Cursors */
 
-#map:hover {
+#map {
     cursor: auto; /* Opera */
     cursor: url(img/cursor-grab.png) 9 9, auto; /* FF */
     cursor: -webkit-image-set(
@@ -994,11 +994,11 @@ text.point {
         ), pointer;
 }
 
-.mode-draw-line #map:hover,
-.mode-draw-area #map:hover,
-.mode-add-line  #map:hover,
-.mode-add-area  #map:hover,
-.mode-drag-node #map:hover {
+.mode-draw-line #map,
+.mode-draw-area #map,
+.mode-add-line  #map,
+.mode-add-area  #map,
+.mode-drag-node #map {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
     cursor: -webkit-image-set(
@@ -1033,8 +1033,8 @@ text.point {
         ) 9 9, crosshair;
 }
 
-.mode-add-point #map:hover,
-.lasso #map:hover,
+.mode-add-point #map,
+.lasso #map,
 .lasso .way,
 .lasso .vertex {
     cursor: crosshair; /* Opera */
