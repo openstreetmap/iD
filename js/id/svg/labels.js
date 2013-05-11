@@ -428,18 +428,21 @@ iD.svg.Labels = function(projection, context) {
         }
 
         var label = surface.select('.layer-label'),
-            halo = surface.select('.layer-halo'),
-            // points
-            points = drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point),
-            pointHalos = drawPointLabels(halo, labelled.point, filter, 'pointlabel-halo', positions.point),
-            // lines
-            linesPaths = drawLinePaths(halo, labelled.line, filter, '', positions.line),
-            lines = drawLineLabels(label, labelled.line, filter, 'linelabel', positions.line),
-            linesHalos = drawLineLabels(halo, labelled.line, filter, 'linelabel-halo', positions.line),
-            // areas
-            areas = drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area),
-            areaHalos = drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area),
-            areaIcons = drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
+            halo = surface.select('.layer-halo');
+
+        // points
+        drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);
+        drawPointLabels(halo, labelled.point, filter, 'pointlabel-halo', positions.point);
+
+        // lines
+        drawLinePaths(halo, labelled.line, filter, '', positions.line);
+        drawLineLabels(label, labelled.line, filter, 'linelabel', positions.line);
+        drawLineLabels(halo, labelled.line, filter, 'linelabel-halo', positions.line);
+
+        // areas
+        drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area);
+        drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area);
+        drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
     }
 
     labels.supersurface = function(supersurface) {
