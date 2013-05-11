@@ -1,4 +1,4 @@
-iD.ui.Success = function(connection) {
+iD.ui.Success = function(context) {
     var event = d3.dispatch('cancel', 'save');
 
     function success(selection) {
@@ -12,7 +12,7 @@ iD.ui.Success = function(connection) {
             changeset.comment.substring(0, 130) : '';
 
         var message = (m || t('success.edited_osm')) + ' ' +
-            connection.changesetURL(changeset.id);
+            context.connection().changesetURL(changeset.id);
 
         var links = body.append('div').attr('class','modal-actions cf');
 
@@ -20,7 +20,7 @@ iD.ui.Success = function(connection) {
             .attr('class','col4 osm')
             .attr('target', '_blank')
             .attr('href', function() {
-                return connection.changesetURL(changeset.id);
+                return context.connection().changesetURL(changeset.id);
             })
             .text(t('view_on_osm'));
 
