@@ -13,13 +13,10 @@ iD.ui = function(context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
-        var sidebar = container.append('div')
+        container.append('div')
             .attr('id', 'sidebar')
-            .attr('class', 'col4 fillL2');
-
-        sidebar.append('div')
-            .style('display', 'none')
-            .attr('class', 'inspector-wrap fr content');
+            .attr('class', 'col4 fillL2')
+            .call(iD.ui.Sidebar(context));
 
         var m = container.append('div')
             .attr('id', 'map')

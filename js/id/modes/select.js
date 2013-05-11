@@ -7,7 +7,7 @@ iD.modes.Select = function(context, selection) {
     var keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
-            iD.behavior.Hover(),
+            iD.behavior.Hover(context),
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
             iD.modes.DragNode(context).behavior],
@@ -100,14 +100,6 @@ iD.modes.Select = function(context, selection) {
             location.replace('#' + iD.util.qsString(_.assign(q, {
                 id: notNew.join(',')
             }), true));
-        }
-
-        if (singular()) {
-            inspector = iD.ui.Inspector(context)
-                .entityID(singular().id)
-                .newFeature(newFeature);
-
-            wrap.call(inspector);
         }
 
         context.history()

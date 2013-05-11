@@ -8,7 +8,7 @@ iD.modes.DragNode = function(context) {
         activeIDs,
         wasMidpoint,
         cancelled,
-        hover = iD.behavior.Hover().altDisables(true);
+        hover = iD.behavior.Hover(context).altDisables(true);
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];

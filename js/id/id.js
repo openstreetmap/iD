@@ -17,7 +17,7 @@ window.iD = function () {
     };
 
     var history = iD.History(context),
-        dispatch = d3.dispatch('enter', 'exit', 'select', 'toggleFullscreen'),
+        dispatch = d3.dispatch('enter', 'exit', 'hover', 'select', 'toggleFullscreen'),
         mode,
         container,
         ui = iD.ui(context),
@@ -131,6 +131,8 @@ window.iD = function () {
             return [];
         }
     };
+
+    context.hover = dispatch.hover;
 
     /* Behaviors */
     context.install = function(behavior) {

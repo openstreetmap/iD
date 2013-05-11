@@ -673,6 +673,24 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     position: relative;
 }
 
+.inspector-hover .header button.preset-reset,
+.inspector-hover .header button.preset-close,
+.inspector-hover .more-buttons,
+.inspector-hover .inspector-external-links {
+    display: none;
+}
+
+.inspector-hidden {
+    display: none;
+}
+
+.inspector-hover .header button.preset-reset,
+.inspector-hover .header button.preset-close,
+.inspector-hover .more-buttons,
+.inspector-hover .inspector-external-links {
+    display: none;
+}
+
 .inspector-wrap .header button.preset-reset > div {
     height: 100%;
     padding: 20px 0;
@@ -895,6 +913,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 4px;
     border: 1px solid #CCC;
     position: relative;
+}
+
+.inspector-hover .inspector-preset {
+    background-color: #F6F6F6;
 }
 
 .inspector-preset .form-field {

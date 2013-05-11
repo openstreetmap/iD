@@ -8,7 +8,7 @@ iD.modes.Browse = function(context) {
     };
 
     var behaviors = [
-        iD.behavior.Hover(),
+        iD.behavior.Hover(context),
         iD.behavior.Select(context),
         iD.behavior.Lasso(context),
         iD.modes.DragNode(context).behavior];

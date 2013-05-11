@@ -1,8 +1,11 @@
 describe("iD.behavior.Hover", function() {
-    var container;
+    var container, context;
 
     beforeEach(function() {
         container = d3.select('body').append('div');
+        context = {
+            hover: function() {}
+        };
     });
 
     afterEach(function() {
@@ -12,7 +15,7 @@ describe("iD.behavior.Hover", function() {
     describe("#off", function () {
         it("removes the .hover class from all elements", function () {
             container.append('span').attr('class', 'hover');
-            container.call(iD.behavior.Hover().off);
+            container.call(iD.behavior.Hover(context).off);
             expect(container.select('span')).not.to.be.classed('hover')
         });
     });
@@ -26,7 +29,7 @@ describe("iD.behavior.Hover", function() {
                 .data([a, b, a, b])
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
-            container.call(iD.behavior.Hover());
+            container.call(iD.behavior.Hover(context));
             container.selectAll('.a').trigger('mouseover');
 
             expect(container.selectAll('.a.hover')[0]).to.have.length(2);
@@ -38,7 +41,7 @@ describe("iD.behavior.Hover", function() {
                 .data([{id: 'a', type: 'relation', members: [{id: 'b'}]}, {id: 'b'}])
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
-            container.call(iD.behavior.Hover());
+            container.call(iD.behavior.Hover(context));
             container.selectAll('.a').trigger('mouseover');
 
             expect(container.selectAll('.a.hover')[0]).to.have.length(1);
@@ -50,7 +53,7 @@ describe("iD.behavior.Hover", function() {
         it("removes the .hover class from all elements", function () {
             container.append('span').attr('class', 'hover');
 
-            container.call(iD.behavior.Hover());
+            container.call(iD.behavior.Hover(context));
             container.selectAll('.hover').trigger('mouseout');
 
             expect(container.selectAll('.hover')[0]).to.have.length(0);

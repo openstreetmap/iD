@@ -7,12 +7,14 @@
    Only one of these elements can have the :hover pseudo-class, but all of them will
    have the .hover class.
  */
-iD.behavior.Hover = function() {
+iD.behavior.Hover = function(context) {
     var selection,
-        altDisables;
+        altDisables,
+        target;
 
     function keydown() {
         if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+            context.hover(null);
             selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
                 .classed('hover', false);
@@ -21,6 +23,7 @@ iD.behavior.Hover = function() {
 
     function keyup() {
         if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+            context.hover(target);
             selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
                 .classed('hover', true);
@@ -31,13 +34,13 @@ iD.behavior.Hover = function() {
         selection = __;
 
         function mouseover() {
-            var datum = d3.event.target.__data__;
+            target = d3.event.target.__data__;
 
-            if (datum && datum.type) {
-                var selector = '.' + datum.id;
+            if (target && target.type) {
+                var selector = '.' + target.id;
 
-                if (datum.type === 'relation') {
-                    datum.members.forEach(function(member) {
+                if (target.type === 'relation') {
+                    target.members.forEach(function(member) {
                         selector += ', .' + member.id;
                     });
                 }
@@ -46,10 +49,15 @@ iD.behavior.Hover = function() {
 
                 selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
+
+                context.hover(target);
             }
         }
 
         function mouseout() {
+            context.hover(null);
+            target = null;
+
             selection.selectAll('.hover')
                 .classed('hover', false);
             selection.selectAll('.hover-suppressed')

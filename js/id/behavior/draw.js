@@ -2,7 +2,7 @@ iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
         'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
-        hover = iD.behavior.Hover().altDisables(true),
+        hover = iD.behavior.Hover(context).altDisables(true),
         tail = iD.behavior.Tail(),
         closeTolerance = 4,
         tolerance = 12;

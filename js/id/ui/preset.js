@@ -81,7 +81,7 @@ iD.ui.preset = function(context) {
         var $enter = $fields.enter()
             .insert('div', '.more-buttons')
             .attr('class', function(field) {
-                return 'form-field form-field-' + field.id + ' fillL col12';
+                return 'form-field form-field-' + field.id + ' col12';
             });
 
         var $label = $enter.append('label')
