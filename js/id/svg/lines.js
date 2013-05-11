@@ -50,7 +50,7 @@ iD.svg.Lines = function(projection) {
 
             paths.enter()
                 .append('path')
-                .attr('class', 'way line ' + klass);
+                .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; });
 
             paths
                 .order()

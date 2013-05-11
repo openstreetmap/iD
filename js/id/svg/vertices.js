@@ -57,7 +57,7 @@ iD.svg.Vertices = function(projection, context) {
     function draw(groups, graph, zoom) {
         var group = groups.enter()
             .insert('g', ':first-child')
-            .attr('class', 'node vertex');
+            .attr('class', function(d) { return 'node vertex ' + d.id; });
 
         if (zoom < 17) {
             zoom = 0;
@@ -68,10 +68,10 @@ iD.svg.Vertices = function(projection, context) {
         }
 
         group.append('circle')
-            .attr('class', 'node vertex shadow');
+            .attr('class', function(d) { return 'node vertex shadow ' + d.id; });
 
         group.append('circle')
-            .attr('class', 'node vertex stroke');
+            .attr('class', function(d) { return 'node vertex stroke ' + d.id; });
 
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses())
@@ -118,7 +118,7 @@ iD.svg.Vertices = function(projection, context) {
             }, iD.Entity.key);
 
         fill.enter().append('circle')
-            .attr('class', 'node vertex fill')
+            .attr('class', function(d) { return 'node vertex fill ' + d.id; })
             .each(center)
             .attr('r', radiuses.fill[zoom]);
 

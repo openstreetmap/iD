@@ -33,17 +33,16 @@ iD.behavior.Hover = function() {
         function mouseover() {
             var datum = d3.event.target.__data__;
 
-            if (datum) {
-                var hovered = [datum.id];
+            if (datum && datum.type) {
+                var selector = '.' + datum.id;
 
                 if (datum.type === 'relation') {
-                    hovered = hovered.concat(_.pluck(datum.members, 'id'));
+                    datum.members.forEach(function(member) {
+                        selector += ', .' + member.id;
+                    });
                 }
 
-                hovered = d3.set(hovered);
-
-                selection.selectAll('*')
-                    .filter(function(d) { return d && hovered.has(d.id); })
+                selection.selectAll(selector)
                     .classed('hover', true);
             }
         }

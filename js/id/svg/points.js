@@ -32,7 +32,7 @@ iD.svg.Points = function(projection, context) {
 
         var group = groups.enter()
             .append('g')
-            .attr('class', 'node point')
+            .attr('class', function(d) { return 'node point ' + d.id; })
             .order();
 
         group.append('path')

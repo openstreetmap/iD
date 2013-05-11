@@ -65,7 +65,7 @@ iD.svg.Areas = function(projection) {
 
             paths.enter()
                 .append('path')
-                .attr('class', function(d) { return d.type + ' area ' + klass; });
+                .attr('class', function(d) { return d.type + ' area ' + klass + ' ' + d.id; });
 
             paths
                 .order()
