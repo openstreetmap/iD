@@ -92,7 +92,7 @@ iD.svg.Labels = function(projection, context) {
 
         var tp = texts.enter()
             .append('text')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes;})
+            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
             .append('textPath')
             .attr('class', 'textpath');
 
@@ -135,7 +135,7 @@ iD.svg.Labels = function(projection, context) {
 
         texts.enter()
             .append('text')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes; });
+            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; });
 
         texts.attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
@@ -224,34 +224,21 @@ iD.svg.Labels = function(projection, context) {
 
     }
 
-
     function hideOnMouseover() {
+        var layers = d3.select(this)
+            .selectAll('.layer-label, .layer-halo');
+
+        layers.selectAll('.proximate')
+            .classed('proximate', false);
+
         var mouse = context.mouse(),
             pad = 50,
             rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
-            labels = _.pluck(rtree.search(rect, this), 'leaf'),
-            containsLabel = d3.set(labels),
-            selection = d3.select(this);
+            ids = _.pluck(rtree.search(rect, this), 'leaf');
 
-        // ensures that simply resetting opacity
-        // does not force style recalculation
-        function resetOpacity() {
-            if (this._opacity !== '') {
-                this.style.opacity = '';
-                this._opacity = '';
-            }
-        }
-
-        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo text')
-            .each(resetOpacity);
-
-        if (!labels.length) return;
-        selection.selectAll('.layer-label text, .layer-halo path, .layer-halo text')
-            .filter(function(d) {
-                return containsLabel.has(d.id);
-            })
-            .style('opacity', 0)
-            .property('_opacity', 0);
+        if (!ids.length) return;
+        layers.selectAll('.' + ids.join(', .'))
+            .classed('proximate', true);
     }
 
     function name(d) {

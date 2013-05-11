@@ -32,13 +32,15 @@ describe("iD.behavior.Hover", function() {
 
     describe("mouseover", function () {
         it("adds the .hover class to all elements to which the same datum is bound", function () {
+            var a = {id: 'a', type: 'node'},
+                b = {id: 'b', type: 'node'};
+
             container.selectAll('span')
-                .data([{id: 'a'}, {id: 'b'}, {id: 'a'}, {id: 'b'}])
+                .data([a, b, a, b])
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover());
             container.selectAll('.a').trigger('mouseover');
-
 
             expect(container.selectAll('.a.hover')[0]).to.have.length(2);
             expect(container.selectAll('.b.hover')[0]).to.have.length(0);

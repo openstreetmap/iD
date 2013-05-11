@@ -885,6 +885,10 @@ text.pointlabel {
     stroke-miterlimit: 1;
 }
 
+text.proximate {
+    opacity: 0;
+}
+
 text.point {
   font-size: 10px;
 }
