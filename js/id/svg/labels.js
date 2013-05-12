@@ -147,16 +147,6 @@ iD.svg.Labels = function(projection, context) {
         return texts;
     }
 
-    function drawAreaHalos(group, entities, filter, classes, labels) {
-        entities = entities.filter(hasText);
-        labels = labels.filter(hasText);
-        return drawPointHalos(group, entities, filter, classes, labels);
-
-        function hasText(d, i) {
-            return labels[i].hasOwnProperty('x') && labels[i].hasOwnProperty('y');
-        }
-    }
-
     function drawAreaLabels(group, entities, filter, classes, labels) {
         entities = entities.filter(hasText);
         labels = labels.filter(hasText);
