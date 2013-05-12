@@ -146,12 +146,19 @@ iD.modes.Select = function(context, selection) {
             }
         }
 
-        function selected(entity) {
-            if (!entity) return false;
-            if (selection.indexOf(entity.id) >= 0) return true;
-            return _.any(context.graph().parentRelations(entity), function(parent) {
-                    return selection.indexOf(parent.id) >= 0;
-                });
+        function selected() {
+            var s = iD.util.entitySelector(selection);
+
+            selection.forEach(function(id) {
+                var entity = context.entity(id);
+                if (entity.type === 'relation') {
+                    entity.members.forEach(function(member) {
+                        s += ',.' + member.id
+                    });
+                }
+            });
+
+            return s;
         }
 
         d3.select(document)
@@ -159,8 +166,7 @@ iD.modes.Select = function(context, selection) {
 
         function selectElements() {
             context.surface()
-                .selectAll("*")
-                .filter(selected)
+                .selectAll(selected())
                 .classed('selected', true);
         }
 

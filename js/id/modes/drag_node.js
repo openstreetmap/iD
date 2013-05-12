@@ -54,8 +54,7 @@ iD.modes.DragNode = function(context) {
             context.perform(iD.actions.AddMidpoint(midpoint, entity));
 
              var vertex = context.surface()
-                .selectAll('.vertex')
-                .filter(function(d) { return d.id === entity.id; });
+                .selectAll('.' + entity.id);
              behavior.target(vertex.node(), entity);
 
         } else {
