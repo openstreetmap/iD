@@ -137,22 +137,19 @@ iD.History = function(context) {
             return iD.Difference(base, head);
         },
 
-        changes: function() {
-            var difference = history.difference();
+        changes: function(action) {
+            var base = stack[0].graph,
+                head = stack[index].graph;
 
-            function discardTags(entity) {
-                if (_.isEmpty(entity.tags)) {
-                    return entity;
-                } else {
-                    return entity.update({
-                        tags: _.omit(entity.tags, iD.data.discarded)
-                    });
-                }
+            if (action) {
+                head = action(head);
             }
 
+            var difference = iD.Difference(base, head);
+
             return {
-                modified: difference.modified().map(discardTags),
-                created: difference.created().map(discardTags),
+                modified: difference.modified(),
+                created: difference.created(),
                 deleted: difference.deleted()
             };
         },

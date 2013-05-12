@@ -38,7 +38,7 @@ iD.ui.Save = function(context) {
             .call(loading);
 
         connection.putChangeset(
-            history.changes(),
+            history.changes(iD.actions.DiscardTags(history.difference())),
             e.comment,
             history.imagery_used(),
             function(err, changeset_id) {
