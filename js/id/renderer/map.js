@@ -32,10 +32,6 @@ iD.Map = function(context) {
         context.history()
             .on('change.map', redraw);
 
-        context.on('select.map', function() {
-            redraw();
-        });
-
         selection.call(zoom);
 
         supersurface = selection.append('div')
@@ -74,6 +70,18 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
+                dispatch.drawn(map);
+            }
+        });
+
+        context.on('select.map', function() {
+            if (map.editable() && !transformed) {
+                var all = context.intersects(map.extent()),
+                    filter = d3.functor(true),
+                    extent = map.extent(),
+                    graph = context.graph();
+                surface.call(vertices, graph, all, filter, map.zoom());
+                surface.call(midpoints, graph, all, filter, extent);
                 dispatch.drawn(map);
             }
         });
