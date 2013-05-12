@@ -13,22 +13,22 @@ iD.behavior.Hover = function() {
 
     function keydown() {
         if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            selection.classed('behavior-hover', false);
+            selection.selectAll('.hover')
+                .classed('hover-suppressed', true)
+                .classed('hover', false);
         }
     }
 
     function keyup() {
         if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            selection.classed('behavior-hover', true);
+            selection.selectAll('.hover-suppressed')
+                .classed('hover-suppressed', false)
+                .classed('hover', true);
         }
     }
 
     var hover = function(__) {
         selection = __;
-
-        if (!altDisables || !d3.event || !d3.event.altKey) {
-            selection.classed('behavior-hover', true);
-        }
 
         function mouseover() {
             var datum = d3.event.target.__data__;
@@ -42,17 +42,23 @@ iD.behavior.Hover = function() {
                     });
                 }
 
+                var suppressed = altDisables && d3.event && d3.event.altKey;
+
                 selection.selectAll(selector)
-                    .classed('hover', true);
+                    .classed(suppressed ? 'hover-suppressed' : 'hover', true);
             }
         }
 
-        selection.on('mouseover.hover', mouseover);
-
-        selection.on('mouseout.hover', function() {
+        function mouseout() {
             selection.selectAll('.hover')
                 .classed('hover', false);
-        });
+            selection.selectAll('.hover-suppressed')
+                .classed('hover-suppressed', false);
+        }
+
+        selection
+            .on('mouseover.hover', mouseover)
+            .on('mouseout.hover', mouseout);
 
         d3.select(document)
             .on('keydown.hover', keydown)
@@ -60,12 +66,14 @@ iD.behavior.Hover = function() {
     };
 
     hover.off = function(selection) {
-        selection.classed('behavior-hover', false)
-            .on('mouseover.hover', null)
-            .on('mouseout.hover', null);
-
         selection.selectAll('.hover')
             .classed('hover', false);
+        selection.selectAll('.hover-suppressed')
+            .classed('hover-suppressed', false);
+
+        selection
+            .on('mouseover.hover', null)
+            .on('mouseout.hover', null);
 
         d3.select(document)
             .on('keydown.hover', null)

@@ -58,7 +58,7 @@ g.point .shadow {
     stroke-opacity: 0;
 }
 
-.behavior-hover g.point.hover:not(.selected) .shadow {
+g.point.hover:not(.selected) .shadow {
     stroke-opacity: 0.5;
 }
 
@@ -103,17 +103,17 @@ g.vertex.vertex-hover {
     display: none;
 }
 
-.mode-draw-area .behavior-hover g.vertex.vertex-hover,
-.mode-draw-line .behavior-hover g.vertex.vertex-hover,
-.mode-add-area  .behavior-hover g.vertex.vertex-hover,
-.mode-add-line  .behavior-hover g.vertex.vertex-hover,
-.mode-add-point .behavior-hover g.vertex.vertex-hover,
-.mode-drag-node .behavior-hover g.vertex.vertex-hover {
+.mode-draw-area g.vertex.vertex-hover,
+.mode-draw-line g.vertex.vertex-hover,
+.mode-add-area  g.vertex.vertex-hover,
+.mode-add-line  g.vertex.vertex-hover,
+.mode-add-point g.vertex.vertex-hover,
+.mode-drag-node g.vertex.vertex-hover {
     display: block;
 }
 
-.behavior-hover g.vertex.hover:not(.selected) .shadow,
-.behavior-hover g.midpoint.hover:not(.selected) .shadow {
+g.vertex.hover:not(.selected) .shadow,
+g.midpoint.hover:not(.selected) .shadow {
     fill-opacity: 0.3;
 }
 
@@ -148,7 +148,7 @@ path.shadow {
     stroke-opacity: 0;
 }
 
-.behavior-hover path.shadow.hover:not(.selected) {
+path.shadow.hover:not(.selected) {
     stroke-opacity: 0.3;
 }
 
@@ -995,11 +995,11 @@ text.point {
         ) 9 9, crosshair;
 }
 
-.mode-draw-line .behavior-hover .way,
-.mode-draw-area .behavior-hover .way,
-.mode-add-line  .behavior-hover .way,
-.mode-add-area  .behavior-hover .way,
-.mode-drag-node .behavior-hover .way {
+.mode-draw-line .way.hover,
+.mode-draw-area .way.hover,
+.mode-add-line  .way.hover,
+.mode-add-area  .way.hover,
+.mode-drag-node .way.hover {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw-connect-line.png) 9 9, crosshair; /* FF */
     cursor: -webkit-image-set(
@@ -1008,11 +1008,11 @@ text.point {
         ) 9 9, crosshair;
 }
 
-.mode-draw-line .behavior-hover .vertex,
-.mode-draw-area .behavior-hover .vertex,
-.mode-add-line  .behavior-hover .vertex,
-.mode-add-area  .behavior-hover .vertex,
-.mode-drag-node .behavior-hover .vertex {
+.mode-draw-line .vertex.hover,
+.mode-draw-area .vertex.hover,
+.mode-add-line  .vertex.hover,
+.mode-add-area  .vertex.hover,
+.mode-drag-node .vertex.hover {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw-connect-vertex.png) 9 9, crosshair; /* FF */
     cursor: -webkit-image-set(
