@@ -47,8 +47,7 @@ iD.svg.Points = function(projection, context) {
             .attr('clip-path', 'url(#clip-square-12)');
 
         groups.attr('transform', iD.svg.PointTransform(projection))
-            .call(iD.svg.TagClasses())
-            .call(iD.svg.MemberClasses(graph));
+            .call(iD.svg.TagClasses());
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element

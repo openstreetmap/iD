@@ -33,19 +33,6 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.line')).to.be.classed('tag-highway-residential');
     });
 
-    it("adds member classes", function () {
-        var a = iD.Node({loc: [0, 0]}),
-            b = iD.Node({loc: [1, 1]}),
-            line = iD.Way({nodes: [a.id, b.id]}),
-            relation = iD.Relation({members: [{id: line.id}], tags: {type: 'route'}}),
-            graph = iD.Graph([a, b, line, relation]);
-
-        surface.call(iD.svg.Lines(projection), graph, [line], filter);
-
-        expect(surface.select('.line')).to.be.classed('member');
-        expect(surface.select('.line')).to.be.classed('member-type-route');
-    });
-
     it("adds stroke classes for the tags of the parent relation of multipolygon members", function() {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [1, 1]}),

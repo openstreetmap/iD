@@ -70,8 +70,7 @@ iD.svg.Lines = function(projection) {
 
             paths
                 .order()
-                .attr('d', path)
-                .call(iD.svg.MemberClasses(graph));
+                .attr('d', path);
 
             paths.exit()
                 .remove();

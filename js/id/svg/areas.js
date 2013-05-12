@@ -78,8 +78,7 @@ iD.svg.Areas = function(projection) {
 
             paths
                 .order()
-                .attr('d', function(entity) { return path(entity.asGeoJSON(graph, closeWay)); })
-                .call(iD.svg.MemberClasses(graph));
+                .attr('d', function(entity) { return path(entity.asGeoJSON(graph, closeWay)); });
 
             if (klass === 'fill') paths.call(setPattern);
 

@@ -156,18 +156,11 @@ path.shadow.selected {
     stroke-opacity: 0.7;
 }
 
-path.area.stroke,
-path.line.member-type-multipolygon.stroke {
-    stroke-width:2;
-}
-path.area.stroke.selected,
-path.line.member-type-multipolygon.stroke.selected {
-    stroke-width:4 !important;
+path.area.stroke {
+    stroke: white;
+    stroke-width: 1;
 }
 
-path.area.stroke {
-    stroke:#fff;
-}
 path.area.fill {
     fill:#fff;
     fill-opacity:0.3;
@@ -181,7 +174,6 @@ path.line.stroke {
 
 path.stroke.tag-natural {
     stroke: #b6e199;
-    stroke-width:1;
 }
 path.fill.tag-natural {
     fill: #b6e199;
@@ -196,7 +188,6 @@ path.fill.tag-natural-water {
 
 path.stroke.tag-amenity-school {
     stroke: #ffff94;
-    stroke-width: 1;
 }
 path.fill.tag-amenity-school {
     fill: #ffff94;
@@ -213,7 +204,6 @@ path.fill.tag-amenity-university {
 
 path.stroke.tag-building {
     stroke: #e06e5f;
-    stroke-width: 1;
 }
 path.fill.tag-building {
     fill: #e06e5f;
@@ -229,7 +219,6 @@ path.stroke.tag-natural-grassland,
 path.stroke.tag-leisure-pitch,
 path.stroke.tag-leisure-park {
     stroke: #8cd05f;
-    stroke-width: 1;
 }
 
 path.stroke.tag-landuse-residential {
@@ -398,7 +387,6 @@ path.fill.tag-landuse-industrial {
 
 path.stroke.tag-amenity-parking {
     stroke: #aaa;
-    stroke-width: 1;
 }
 path.fill.tag-amenity-parking {
     fill: #aaa;

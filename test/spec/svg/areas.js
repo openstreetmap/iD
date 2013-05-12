@@ -28,18 +28,6 @@ describe("iD.svg.Areas", function () {
         expect(surface.select('.area')).to.be.classed('tag-building-yes');
     });
 
-    it("adds member classes", function () {
-        var area = iD.Way({tags: {area: 'yes'}}),
-            relation = iD.Relation({members: [{id: area.id, role: 'inner'}], tags: {type: 'multipolygon'}}),
-            graph = iD.Graph([area, relation]);
-
-        surface.call(iD.svg.Areas(projection), graph, [area], filter);
-
-        expect(surface.select('.area')).to.be.classed('member');
-        expect(surface.select('.area')).to.be.classed('member-role-inner');
-        expect(surface.select('.area')).to.be.classed('member-type-multipolygon');
-    });
-
     it("preserves non-area paths", function () {
         var area = iD.Way({tags: {area: 'yes'}}),
             graph = iD.Graph([area]);
