@@ -153,6 +153,11 @@ iD.modes.DragNode = function(context) {
         context.enter(iD.modes.Browse(context));
     }
 
+    function setActiveElements() {
+        context.surface().selectAll(iD.util.entitySelector(activeIDs))
+            .classed('active', true);
+    }
+
     var behavior = iD.behavior.drag()
         .delegate("g.node, g.point, g.midpoint")
         .surface(context.surface().node())
@@ -167,10 +172,10 @@ iD.modes.DragNode = function(context) {
         context.history()
             .on('undone.drag-node', cancel);
 
-        context.surface()
-            .selectAll('.node, .way')
-            .filter(function(d) { return activeIDs.indexOf(d.id) >= 0; })
-            .classed('active', true);
+        context.map()
+            .on('drawn.drag-node', setActiveElements);
+
+        setActiveElements();
     };
 
     mode.exit = function() {
@@ -178,6 +183,9 @@ iD.modes.DragNode = function(context) {
 
         context.history()
             .on('undone.drag-node', null);
+
+        context.map()
+            .on('drawn.drag-node', null);
 
         context.surface()
             .selectAll('.active')
