@@ -191,12 +191,6 @@ iD.Map = function(context) {
 
         transformed = true;
         supersurface.style(transformProp, transform);
-
-        if (tX || tY) {
-            context.container().selectAll('#map')
-                .classed('panning', true);
-        }
-
         queueRedraw();
 
         dispatch.move(map);
@@ -205,8 +199,6 @@ iD.Map = function(context) {
     function resetTransform() {
         if (!transformed) return false;
         supersurface.style(transformProp, '');
-        context.container().selectAll('#map')
-            .classed('panning', false);
         transformed = false;
         return true;
     }

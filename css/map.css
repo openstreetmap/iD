@@ -888,7 +888,7 @@ text.point {
         ) 9 9, auto;
 }
 
-#map.panning {
+#map:active {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-grabbing.png) 9 9, auto; /* FF */
     cursor: -webkit-image-set(
