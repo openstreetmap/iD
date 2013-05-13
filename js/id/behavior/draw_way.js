@@ -37,12 +37,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         }
 
         context.replace(iD.actions.MoveNode(end.id, loc));
-
-        context.surface().selectAll('.way, .node')
-            .filter(function(d) {
-                return d.id === end.id || d.id === segment.id;
-            })
-            .classed('active', true);
     }
 
     function undone() {
@@ -50,12 +44,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         context.enter(iD.modes.Browse(context));
     }
 
-    function lineActives(d) {
-        return d.id === segment.id || d.id === start.id || d.id === end.id;
-    }
-
-    function areaActives(d) {
-        return d.id === wayId || d.id === end.id;
+    function setActiveElements() {
+        var active = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
+        context.surface().selectAll(iD.util.entitySelector(active))
+            .classed('active', true);
     }
 
     var drawWay = function(surface) {
@@ -69,12 +61,12 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         context.map()
             .minzoom(16)
-            .dblclickEnable(false);
+            .dblclickEnable(false)
+            .on('drawn.draw', setActiveElements);
 
-        surface.call(draw)
-          .selectAll('.way, .node')
-            .filter(isArea ? areaActives : lineActives)
-            .classed('active', true);
+        setActiveElements();
+
+        surface.call(draw);
 
         context.history()
             .on('undone.draw', undone);
@@ -86,10 +78,11 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         context.map()
             .minzoom(0)
-            .tail(false);
+            .tail(false)
+            .on('drawn.draw', null);
 
         surface.call(draw.off)
-          .selectAll('.way, .node')
+            .selectAll('.active')
             .classed('active', false);
 
         context.history()

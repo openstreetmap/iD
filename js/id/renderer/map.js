@@ -66,6 +66,7 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var hover = d3.event.target.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
+                dispatch.drawn(map);
             }
         });
 
@@ -73,6 +74,7 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
+                dispatch.drawn(map);
             }
         });
 
