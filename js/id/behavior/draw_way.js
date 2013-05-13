@@ -26,21 +26,23 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
     function move(datum) {
-        var loc = context.map().mouseCoordinates();
+        var loc;
 
-        if (datum.id === end.id || datum.id === segment.id) {
-            context.surface().selectAll('.way, .node')
-                .filter(function(d) {
-                    return d.id === end.id || d.id === segment.id;
-                })
-                .classed('active', true);
-        } else if (datum.type === 'node') {
+        if (datum.type === 'node' && datum.id !== end.id) {
             loc = datum.loc;
-        } else if (datum.type === 'way') {
+        } else if (datum.type === 'way' && datum.id !== segment.id) {
             loc = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+        } else {
+            loc = context.map().mouseCoordinates();
         }
 
         context.replace(iD.actions.MoveNode(end.id, loc));
+
+        context.surface().selectAll('.way, .node')
+            .filter(function(d) {
+                return d.id === end.id || d.id === segment.id;
+            })
+            .classed('active', true);
     }
 
     function undone() {
