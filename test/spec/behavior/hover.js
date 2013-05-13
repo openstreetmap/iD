@@ -9,20 +9,7 @@ describe("iD.behavior.Hover", function() {
         container.remove();
     });
 
-    describe("#on", function () {
-        it("adds the .behavior-hover class to the selection", function () {
-            container.call(iD.behavior.Hover());
-            expect(container).to.be.classed('behavior-hover')
-        });
-    });
-
     describe("#off", function () {
-        it("removes the .behavior-hover class from the selection", function () {
-            container.classed('behavior-hover', true);
-            container.call(iD.behavior.Hover().off);
-            expect(container).not.to.be.classed('behavior-hover')
-        });
-
         it("removes the .hover class from all elements", function () {
             container.append('span').attr('class', 'hover');
             container.call(iD.behavior.Hover().off);
@@ -67,6 +54,30 @@ describe("iD.behavior.Hover", function() {
             container.selectAll('.hover').trigger('mouseout');
 
             expect(container.selectAll('.hover')[0]).to.have.length(0);
+        });
+    });
+
+    describe("alt keydown", function () {
+        it("replaces the .hover class with .hover-suppressed", function () {
+            container.append('span').attr('class', 'hover');
+
+            container.call(iD.behavior.Hover().altDisables(true));
+            happen.keydown(document, {keyCode: 18});
+
+            expect(container.selectAll('.hover')[0]).to.have.length(0);
+            expect(container.selectAll('.hover-suppressed')[0]).to.have.length(1);
+        });
+    });
+
+    describe("alt keyup", function () {
+        it("replaces the .hover-suppressed class with .hover", function () {
+            container.append('span').attr('class', 'hover-suppressed');
+
+            container.call(iD.behavior.Hover().altDisables(true));
+            happen.keyup(document, {keyCode: 18});
+
+            expect(container.selectAll('.hover')[0]).to.have.length(1);
+            expect(container.selectAll('.hover-suppressed')[0]).to.have.length(0);
         });
     });
 });

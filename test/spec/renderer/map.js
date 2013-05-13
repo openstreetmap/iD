@@ -202,6 +202,8 @@ describe('iD.Map', function() {
 
         specify('hovered ways use draw-connect-line cursor in draw modes', function() {
             behavior.attr('class', 'behavior-hover');
+            line.classed('hover', true);
+            area.classed('hover', true);
             mode.attr('class', 'mode-draw-line');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
@@ -221,6 +223,7 @@ describe('iD.Map', function() {
 
         specify('hovered vertices use draw-connect-vertex cursor in draw modes', function() {
             behavior.attr('class', 'behavior-hover');
+            vertex.classed('hover', true);
             mode.attr('class', 'mode-draw-line');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
             mode.attr('class', 'mode-draw-area');
