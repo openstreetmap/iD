@@ -63,16 +63,16 @@ iD.svg.Areas = function(projection) {
                 .filter(filter)
                 .data(areas, iD.Entity.key);
 
-            paths.enter()
+            var enter = paths.enter()
                 .append('path')
                 .attr('class', function(d) { return d.type + ' area ' + klass + ' ' + d.id; })
                 .call(iD.svg.TagClasses());
 
+            if (klass === 'fill') enter.call(setPattern);
+
             paths
                 .order()
                 .attr('d', path);
-
-            if (klass === 'fill') paths.call(setPattern);
 
             paths.exit()
                 .remove();
