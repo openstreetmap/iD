@@ -63,18 +63,10 @@ iD.svg.Areas = function(projection) {
                 .filter(filter)
                 .data(areas, iD.Entity.key);
 
-            var enter = paths.enter()
+            paths.enter()
                 .append('path')
-                .attr('class', function(d) { return d.type + ' area ' + klass + ' ' + d.id; });
-
-            // Optimization: call simple TagClasses only on enter selection. This
-            // works because iD.Entity.key is defined to include the entity v attribute.
-            if (klass !== 'stroke') {
-                enter.call(iD.svg.TagClasses());
-            } else {
-                paths.call(iD.svg.TagClasses()
-                    .tags(iD.svg.MultipolygonMemberTags(graph)));
-            }
+                .attr('class', function(d) { return d.type + ' area ' + klass + ' ' + d.id; })
+                .call(iD.svg.TagClasses());
 
             paths
                 .order()

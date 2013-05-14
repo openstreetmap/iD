@@ -96,20 +96,6 @@ describe("iD.svg.Areas", function () {
         expect(surface.selectAll('.stroke')[0].length).to.equal(0);
     });
 
-    it("adds stroke classes for the tags of the parent relation of multipolygon members", function() {
-        var a = iD.Node({loc: [1, 1]}),
-            b = iD.Node({loc: [2, 2]}),
-            c = iD.Node({loc: [3, 3]}),
-            w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
-            r = iD.Relation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon', natural: 'wood'}}),
-            graph = iD.Graph([a, b, c, w, r]);
-
-        surface.call(iD.svg.Areas(projection), graph, [w], filter);
-
-        expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
-        expect(surface.select('.fill')).not.to.be.classed('tag-natural-wood');
-    });
-
     it("renders fill for a multipolygon with tags on the outer way", function() {
         var a = iD.Node({loc: [1, 1]}),
             b = iD.Node({loc: [2, 2]}),
