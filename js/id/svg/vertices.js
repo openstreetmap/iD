@@ -48,12 +48,6 @@ iD.svg.Vertices = function(projection, context) {
         return vertices;
     }
 
-    function isIntersection(entity, graph) {
-        return graph.parentWays(entity).filter(function (parent) {
-            return parent.geometry(graph) === 'line';
-        }).length > 1;
-    }
-
     function draw(groups, vertices, klass, graph, zoom) {
         groups = groups.data(vertices, function(entity) {
             return iD.Entity.key(entity) + ',' + zoom;
@@ -129,7 +123,7 @@ iD.svg.Vertices = function(projection, context) {
 
             if (entity.id in selected ||
                 entity.hasInterestingTags() ||
-                isIntersection(entity, graph)) {
+                entity.isIntersection(graph)) {
                 vertices.push(entity)
             }
         }

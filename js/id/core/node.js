@@ -23,6 +23,14 @@ _.extend(iD.Node.prototype, {
         return this.update({loc: loc});
     },
 
+    isIntersection: function(resolver) {
+        return resolver.transient(this, 'isIntersection', function() {
+            return resolver.parentWays(this).filter(function(parent) {
+                return parent.geometry(resolver) === 'line';
+            }).length > 1;
+        });
+    },
+
     asJXON: function(changeset_id) {
         var r = {
             node: {
