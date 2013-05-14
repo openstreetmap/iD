@@ -95,6 +95,12 @@ iD.Entity.prototype = {
         return this.extent(resolver).intersects(extent);
     },
 
+    area: function(resolver, path) {
+        return resolver.transient(this, 'area', function() {
+            return path.area(this);
+        });
+    },
+
     hasInterestingTags: function() {
         return _.keys(this.tags).some(function(key) {
             return key != 'attribution' &&

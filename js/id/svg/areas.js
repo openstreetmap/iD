@@ -37,12 +37,12 @@ iD.svg.Areas = function(projection) {
             if (multipolygon = iD.geo.isSimpleMultipolygonOuterMember(entity, graph)) {
                 areas[multipolygon.id] = {
                     entity: multipolygon.mergeTags(entity.tags),
-                    area: Math.abs(path.area(entity))
+                    area: Math.abs(entity.area(graph, path))
                 };
             } else if (!areas[entity.id]) {
                 areas[entity.id] = {
                     entity: entity,
-                    area: Math.abs(path.area(entity))
+                    area: Math.abs(entity.area(graph, path))
                 };
             }
         }
