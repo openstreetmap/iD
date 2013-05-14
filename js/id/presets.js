@@ -1,4 +1,4 @@
-iD.presets = function(context) {
+iD.presets = function() {
 
     // an iD.presets.Collection with methods for
     // loading new data and returning defaults
@@ -56,9 +56,8 @@ iD.presets = function(context) {
         return universal;
     };
 
-    all.defaults = function(entity, n) {
-        var geometry = entity.geometry(context.graph()),
-            rec = recent.matchGeometry(geometry).collection.slice(0, 4),
+    all.defaults = function(geometry, n) {
+        var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
             def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
         return iD.presets.Collection(_.unique(rec.concat(def).concat(geometry === 'area' ? other_area : other)));
     };

@@ -30,12 +30,14 @@ iD.ui.PresetGrid = function(context, entity) {
                 .attr('class', 'icon close');
         }
 
+        var geometry = entity.geometry(context.graph());
+
         var gridwrap = selection.append('div')
-            .attr('class', 'fillL2 inspector-body inspector-body-' + entity.geometry(context.graph()));
+            .attr('class', 'fillL2 inspector-body inspector-body-' + geometry);
 
         var grid = gridwrap.append('div')
             .attr('class', 'preset-grid fillL cf')
-            .call(drawGrid, context.presets().defaults(entity, 36));
+            .call(drawGrid, context.presets().defaults(geometry, 36));
 
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
@@ -71,7 +73,7 @@ iD.ui.PresetGrid = function(context, entity) {
                     }));
                     grid.call(drawGrid, results);
                 } else {
-                    grid.call(drawGrid, context.presets().defaults(entity, 36));
+                    grid.call(drawGrid, context.presets().defaults(geometry, 36));
                 }
             }
         }

@@ -161,7 +161,7 @@ window.iD = function () {
     };
 
     /* Presets */
-    var presets = iD.presets(context)
+    var presets = iD.presets()
         .load(iD.data.presets);
 
     context.presets = function() {
