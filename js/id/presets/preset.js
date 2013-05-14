@@ -12,7 +12,7 @@ iD.presets.Preset = function(id, preset, fields) {
         return preset.geometry.indexOf(geometry) >= 0;
     };
 
-    preset.matchTags = function(entity) {
+    preset.matchScore = function(entity) {
         var tags = preset.tags,
             score = 0;
         for (var t in tags) {

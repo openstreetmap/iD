@@ -26,7 +26,7 @@ iD.presets.Collection = function(collection) {
                 match;
 
             for (var i = 0; i < collection.length; i++) {
-                var score = collection[i].matchTags(entity);
+                var score = collection[i].matchScore(entity);
                 if (score > best) {
                     best = score;
                     match = collection[i];

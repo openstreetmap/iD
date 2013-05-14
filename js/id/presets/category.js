@@ -11,7 +11,7 @@ iD.presets.Category = function(id, category, all) {
         return category.geometry.indexOf(geometry) >= 0;
     };
 
-    category.matchTags = function() { return false; };
+    category.matchScore = function() { return -1; };
 
     category.name = function() {
         return t('presets.categories.' + id + '.name', {'default': id});

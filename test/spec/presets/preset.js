@@ -50,23 +50,23 @@ describe('iD.presets.Preset', function() {
         });
     });
 
-    describe('#matchTags', function() {
+    describe('#matchScore', function() {
        it("returns -1 if preset does not match tags", function() {
-            expect(p['highway/residential'].matchTags(w1)).to.equal(-1);
+            expect(p['highway/residential'].matchScore(w1)).to.equal(-1);
         });
 
         it("returns 0 for other preset (no match tags)", function() {
-            expect(p.other.matchTags(w1)).to.equal(0);
+            expect(p.other.matchScore(w1)).to.equal(0);
         });
 
         it("returns the number of matched tags", function() {
-            expect(p['highway/residential'].matchTags(w3)).to.equal(1);
-            expect(p['leisure/pitch/tennis'].matchTags(w2)).to.equal(2);
+            expect(p['highway/residential'].matchScore(w3)).to.equal(1);
+            expect(p['leisure/pitch/tennis'].matchScore(w2)).to.equal(2);
         });
 
         it("counts * as a match for any value", function() {
-            expect(p.building.matchTags(w4)).to.equal(0.5);
-            expect(p.building.matchTags(w5)).to.equal(-1);
+            expect(p.building.matchScore(w4)).to.equal(0.5);
+            expect(p.building.matchScore(w5)).to.equal(-1);
         });
 
     });
