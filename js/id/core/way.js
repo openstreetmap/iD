@@ -143,7 +143,7 @@ _.extend(iD.Way.prototype, {
             childnodes = childnodes.concat([childnodes[0]]);
         }
 
-        if (this.isArea() && (close || this.isClosed())) {
+        if (this.isArea() && childnodes.length >= 4 && (close || this.isClosed())) {
             return {
                 type: 'Feature',
                 properties: this.tags,

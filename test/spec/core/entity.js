@@ -144,7 +144,7 @@ describe('iD.Entity', function () {
         });
     });
 
-   describe("#hasDeprecatedTags", function () {
+    describe("#hasDeprecatedTags", function () {
         it("returns false if entity has no tags", function () {
             expect(iD.Entity().deprecatedTags()).to.eql({});
         });
@@ -152,7 +152,7 @@ describe('iD.Entity', function () {
         it("returns true if entity has deprecated tags", function () {
             expect(iD.Entity({ tags: { barrier: 'wire_fence' } }).deprecatedTags()).to.eql({ barrier: 'wire_fence' });
         });
-   });
+    });
 
     describe("#hasInterestingTags", function () {
         it("returns false if the entity has no tags", function () {
@@ -169,6 +169,44 @@ describe('iD.Entity', function () {
 
         it("return false if the entity has only tiger tags", function () {
             expect(iD.Entity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
+        });
+    });
+
+    describe("#area", function() {
+        it("returns a relative measure of area", function () {
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                    'b': iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                    'c': iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                    'd': iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                    'e': iD.Node({id: 'a', loc: [-0.0004,  0.0002]}),
+                    'f': iD.Node({id: 'b', loc: [ 0.0004,  0.0002]}),
+                    'g': iD.Node({id: 'c', loc: [ 0.0004, -0.0002]}),
+                    'h': iD.Node({id: 'd', loc: [-0.0004, -0.0002]}),
+                    's': iD.Way({id: 's', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                    'l': iD.Way({id: 'l', tags: {area: 'yes'}, nodes: ['e', 'f', 'g', 'h', 'e']})
+                });
+
+            var s = Math.abs(graph.entity('s').area(graph)),
+                l = Math.abs(graph.entity('l').area(graph));
+
+            expect(s).to.be.lt(l);
+        });
+
+        it("returns 0 for degenerate areas", function () {
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                    'b': iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                    'c': iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                    'd': iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                    '0': iD.Way({id: '0', tags: {area: 'yes'}, nodes: []}),
+                    '1': iD.Way({id: '1', tags: {area: 'yes'}, nodes: ['a']}),
+                    '2': iD.Way({id: '2', tags: {area: 'yes'}, nodes: ['a', 'b']})
+                });
+
+            expect(graph.entity('0').area(graph)).to.equal(0);
+            expect(graph.entity('1').area(graph)).to.equal(0);
+            expect(graph.entity('2').area(graph)).to.equal(0);
         });
     });
 });

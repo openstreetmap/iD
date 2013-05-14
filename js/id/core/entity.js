@@ -34,6 +34,10 @@ iD.Entity.key = function(entity) {
     return entity.id + ',' + entity.v;
 };
 
+iD.Entity.areaPath = d3.geo.path()
+    .projection(d3.geo.mercator()
+        .scale(12016420.517592335));
+
 iD.Entity.prototype = {
     tags: {},
 
@@ -95,9 +99,12 @@ iD.Entity.prototype = {
         return this.extent(resolver).intersects(extent);
     },
 
-    area: function(resolver, path) {
+    // Returns the (possibly negative) area of the entity in square pixels at an
+    // arbitrary unspecified zoom level -- so basically, only useful for relative
+    // comparisons.
+    area: function(resolver) {
         return resolver.transient(this, 'area', function() {
-            return path.area(this);
+            return iD.Entity.areaPath.area(this.asGeoJSON(resolver, true));
         });
     },
 

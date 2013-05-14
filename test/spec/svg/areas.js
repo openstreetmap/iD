@@ -53,12 +53,16 @@ describe("iD.svg.Areas", function () {
 
     it("stacks smaller areas above larger ones", function () {
         var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [1, 0]}),
-                'c': iD.Node({id: 'c', loc: [1, 1]}),
-                'd': iD.Node({id: 'd', loc: [0, 1]}),
-                's': iD.Way({id: 's', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
-                'l': iD.Way({id: 'l', tags: {landuse: 'park'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+                'a': iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                'b': iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                'c': iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                'd': iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                'e': iD.Node({id: 'a', loc: [-0.0004,  0.0002]}),
+                'f': iD.Node({id: 'b', loc: [ 0.0004,  0.0002]}),
+                'g': iD.Node({id: 'c', loc: [ 0.0004, -0.0002]}),
+                'h': iD.Node({id: 'd', loc: [-0.0004, -0.0002]}),
+                's': iD.Way({id: 's', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                'l': iD.Way({id: 'l', tags: {landuse: 'park'}, nodes: ['e', 'f', 'g', 'h', 'e']})
             }),
             areas = [graph.entity('s'), graph.entity('l')];
 
