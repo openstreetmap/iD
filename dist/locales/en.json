@@ -201,8 +201,8 @@
         "created": "Created"
     },
     "contributors": {
-        "list": "Contributed by {users}",
-        "truncated_list": "Contributed by {users} and {count} others"
+        "list": "Edits by {users}",
+        "truncated_list": "Edits by {users} and {count} others"
     },
     "geocoder": {
         "title": "Find a place",

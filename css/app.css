@@ -543,6 +543,7 @@ button.save.has-count .count::before {
 .icon.help.light       { background-position: -460px -20px;}
 .icon.avatar.light     { background-position: -320px -20px;}
 .icon.nearby.light     { background-position: -340px -20px;}
+.icon.bug.light        { background-position: -400px -20px;}
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
@@ -587,12 +588,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 ------------------------------------------------------- */
 
 #bar {
-    position:absolute;
+    position:fixed;
     padding: 10px;
     left:0;
     top:0;
     right:0;
     height:60px;
+    z-index: 1;
+    min-width: 768px;
 }
 
 /* Header for modals / panes
@@ -639,6 +642,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     float: right;
     height: 100%;
     overflow: hidden;
+    z-index: 2;
 }
 
 .inspector-wrap {
@@ -1520,7 +1524,7 @@ img.wiki-image {
     left: 0;
     top: 80px;
     width: 30px;
-    position: absolute;
+    position: fixed;
     z-index: 100;
 }
 
@@ -1752,7 +1756,7 @@ img.wiki-image {
 }
 
 .help-wrap {
-    position: absolute;
+    position: fixed;
     top:60px;
     bottom: 30px;
     padding: 20px 20px 20px 50px;
@@ -1874,10 +1878,8 @@ img.wiki-image {
 
 .about-block {
     position: absolute;
-    right:0px;
-    bottom:0px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    right:0;
+    bottom:0;
     border-radius: 0;
     opacity: .625;
     -webkit-transition: opacity 200ms;
