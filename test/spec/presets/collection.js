@@ -36,12 +36,6 @@ describe("iD.presets.Collection", function() {
         });
     });
 
-    describe("#matchTags", function() {
-        it("returns a new collection only containing presets matching an entity's tags", function() {
-            expect(c.matchTags(w, g)).to.eql(p.residential);
-        });
-    });
-
     describe("#search", function() {
         it("filters presets by name", function() {
             expect(c.search("resid").collection.indexOf(p.residential) >= 0).to.eql(true);

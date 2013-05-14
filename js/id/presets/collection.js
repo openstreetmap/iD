@@ -10,30 +10,10 @@ iD.presets.Collection = function(collection) {
             });
         },
 
-        match: function(entity, resolver) {
-            return presets.matchGeometry(entity.geometry(resolver)).matchTags(entity);
-        },
-
         matchGeometry: function(geometry) {
             return iD.presets.Collection(collection.filter(function(d) {
                 return d.matchGeometry(geometry);
             }));
-        },
-
-        matchTags: function(entity) {
-
-            var best = -1,
-                match;
-
-            for (var i = 0; i < collection.length; i++) {
-                var score = collection[i].matchScore(entity);
-                if (score > best) {
-                    best = score;
-                    match = collection[i];
-                }
-            }
-
-            return match;
         },
 
         search: function(value) {

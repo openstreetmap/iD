@@ -11,6 +11,37 @@ iD.presets = function() {
         other,
         other_area;
 
+    // Index of presets by (geometry, tag key).
+    var index = {
+        point: {},
+        vertex: {},
+        line: {},
+        area: {},
+        relation: {}
+    };
+
+    all.match = function(entity, resolver) {
+        var geometry = entity.geometry(resolver),
+            geometryMatches = index[geometry],
+            best = -1,
+            match = geometry === 'area' ? other_area : other;
+
+        for (var k in entity.tags) {
+            var keyMatches = geometryMatches[k];
+            if (!keyMatches) continue;
+
+            for (var i = 0; i < keyMatches.length; i++) {
+                var score = keyMatches[i].matchScore(entity);
+                if (score > best) {
+                    best = score;
+                    match = keyMatches[i];
+                }
+            }
+        }
+
+        return match;
+    };
+
     all.load = function(d) {
 
         if (d.fields) {
@@ -44,6 +75,18 @@ iD.presets = function() {
 
         other = all.item('other');
         other_area = all.item('other_area');
+
+        for (var i = 0; i < all.collection.length; i++) {
+            var preset = all.collection[i],
+                geometry = preset.geometry;
+
+            for (var j = 0; j < geometry.length; j++) {
+                var g = index[geometry[j]];
+                for (var k in preset.tags) {
+                    (g[k] = g[k] || []).push(preset);
+                }
+            }
+        }
 
         return all;
     };
