@@ -234,7 +234,7 @@ ul.toggle-list {
 
 ul.toggle-list li a {
     position: relative;
-    padding: 5px 10px 5px 25px;
+    padding: 5px 10px 5px 30px;
     display:block;
     border-top: 1px solid #ccc;
 }
@@ -273,13 +273,13 @@ ul.link-list li:last-child {
     content: "";
     display: inline-block;
     border-radius: 50%;
-    height: 12px;
-    width: 12px;
+    height: 16px;
+    width: 16px;
     margin-right: 10px;
     border: 1px solid #CCC;
     position: absolute;
     left: 5px;
-    top: 8px;
+    top: 5px;
 }
 
 .toggle-list a:hover::before {
@@ -289,6 +289,19 @@ ul.link-list li:last-child {
 .toggle-list a.selected::before {
     background: #7092ff;
     box-shadow: inset 0 0 0 2px white;
+}
+
+.toggle-list.check-list a::before {
+    border-radius: 2px;
+}
+
+.toggle-list.check-list a:hover::before {
+    background: white url(img/sprite.svg) no-repeat -480px -0px;
+    box-shadow: none;
+}
+
+.toggle-list.check-list a.selected::before {
+    background: white url(img/sprite.svg) no-repeat -480px -20px;
 }
 
 /* Utility Classes
@@ -1065,7 +1078,7 @@ input[type=number] {
 }
 
 .spin-control button.decrement::after,
-.spin-control button.increment::after {
+.spin-control button.increment` {
     content:"";
     height: 0; width: 0;
     position: absolute;
@@ -1124,20 +1137,20 @@ input[type=number] {
     border-bottom: 1px solid #CCC;
     color: #7092FF;
     width: 100%;
-    padding-left: 25px;
+    padding-left: 30px;
 }
 
 .radio-wrap button::before {
     content: "";
     display: inline-block;
     border-radius: 50%;
-    height: 12px;
-    width: 12px;
+    height: 16px;
+    width: 16px;
     margin-right: 10px;
     border: 1px solid #CCC;
     position: absolute;
     left: 5px;
-    top: 8px;
+    top: 5px;
 }
 
 .radio-wrap button:hover::before {
