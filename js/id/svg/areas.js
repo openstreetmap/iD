@@ -15,16 +15,14 @@ iD.svg.Areas = function(projection) {
 
     var patternKeys = ['landuse', 'natural', 'amenity'];
 
-    function setPattern(selection) {
-        selection.each(function(d) {
-            for (var i = 0; i < patternKeys.length; i++) {
-                if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
-                    this.style.fill = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
-                    return;
-                }
+    function setPattern(d) {
+        for (var i = 0; i < patternKeys.length; i++) {
+            if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
+                this.style.fill = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+                return;
             }
-            this.style.fill = '';
-        });
+        }
+        this.style.fill = '';
     }
 
     return function drawAreas(surface, graph, entities, filter) {
@@ -53,35 +51,39 @@ iD.svg.Areas = function(projection) {
         areas.sort(function areaSort(a, b) { return b.area - a.area; });
         areas = _.pluck(areas, 'entity');
 
-        var strokes = areas.filter(function isWay(area) {
+        var strokes = areas.filter(function(area) {
             return area.type === 'way';
         });
 
-        function drawPaths(areas, klass, path) {
-            var paths = surface.select('.layer-' + klass)
-                .selectAll('path.area')
-                .filter(filter)
-                .data(areas, iD.Entity.key);
+        var data = {
+            shadow: strokes,
+            stroke: strokes,
+            fill: areas
+        };
 
-            var enter = paths.enter()
-                .append('path')
-                .attr('class', function(d) { return d.type + ' area ' + klass + ' ' + d.id; })
-                .call(iD.svg.TagClasses());
+        var paths = surface.selectAll('.layer-shadow, .layer-stroke, .layer-fill')
+            .selectAll('path.area')
+            .filter(filter)
+            .data(function(layer) { return data[layer]; }, iD.Entity.key);
 
-            if (klass === 'fill') enter.call(setPattern);
+        paths.enter()
+            .append('path')
+            .each(function(entity) {
+                var layer = this.parentNode.__data__;
 
-            paths
-                .order()
-                .attr('d', path);
+                this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
-            paths.exit()
-                .remove();
+                if (layer === 'fill') {
+                    setPattern.apply(this, arguments);
+                }
+            })
+            .call(iD.svg.TagClasses());
 
-            return paths;
-        }
+        paths
+            .order()
+            .attr('d', path);
 
-        drawPaths(strokes, 'shadow', path);
-        drawPaths(strokes, 'stroke', path);
-        drawPaths(areas, 'fill', path);
+        paths.exit()
+            .remove();
     };
 };
