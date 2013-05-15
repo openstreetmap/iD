@@ -240,12 +240,12 @@ iD.ui.Background = function(context) {
 
         var overlayList = content
             .append('ul')
-            .attr('class', 'toggle-list');
+            .attr('class', 'toggle-list check-list');
 
         var gpxLayerItem = content
             .append('ul')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
-            .attr('class', 'toggle-list')
+            .attr('class', 'toggle-list check-list')
             .append('li')
             .append('a')
             .classed('layer-toggle-gpx', true)
