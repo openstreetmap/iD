@@ -1078,7 +1078,7 @@ input[type=number] {
 }
 
 .spin-control button.decrement::after,
-.spin-control button.increment` {
+.spin-control button.increment::after {
     content:"";
     height: 0; width: 0;
     position: absolute;
