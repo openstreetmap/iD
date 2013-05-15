@@ -1,10 +1,10 @@
-describe('iD.ui.Taglist', function() {
+describe('iD.ui.RawTagEditor', function() {
     var taglist, element,
         tags = {highway: 'residential'},
         entity, context;
 
     function render() {
-        taglist = iD.ui.Taglist(context, entity);
+        taglist = iD.ui.RawTagEditor(context, entity);
         element = d3.select('body')
             .append('div')
             .call(taglist);

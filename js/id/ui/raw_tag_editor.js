@@ -1,25 +1,25 @@
-iD.ui.Taglist = function(context, entity) {
+iD.ui.RawTagEditor = function(context, entity) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         collapsebutton,
         list;
 
-    function taglist(selection, other) {
+    function rawTagEditor(selection, other) {
 
         collapsebutton = selection.append('a')
             .attr('href','#')
             .attr('class','hide-toggle')
             .text(t('inspector.all_tags'))
             .on('click', function() {
-                iD.ui.Taglist.expanded = wrap.classed('hide');
-                collapsebutton.classed('expanded', iD.ui.Taglist.expanded);
-                wrap.call(iD.ui.Toggle(iD.ui.Taglist.expanded));
+                iD.ui.RawTagEditor.expanded = wrap.classed('hide');
+                collapsebutton.classed('expanded', iD.ui.RawTagEditor.expanded);
+                wrap.call(iD.ui.Toggle(iD.ui.RawTagEditor.expanded));
                 selection.node().parentNode.scrollTop += 200;
             })
-            .classed('expanded', iD.ui.Taglist.expanded || other);
+            .classed('expanded', iD.ui.RawTagEditor.expanded || other);
 
         var wrap = selection.append('div')
-            .classed('hide', !iD.ui.Taglist.expanded && !other);
+            .classed('hide', !iD.ui.RawTagEditor.expanded && !other);
 
         list = wrap.append('ul')
             .attr('class', 'tag-list');
@@ -72,7 +72,7 @@ iD.ui.Taglist = function(context, entity) {
 
         function keyChange(d) {
             d.key = this.value;
-            event.change(taglist.tags());
+            event.change(rawTagEditor.tags());
         }
 
         row.append('div')
@@ -88,7 +88,7 @@ iD.ui.Taglist = function(context, entity) {
 
         function valueChange(d) {
             d.value = this.value;
-            event.change(taglist.tags());
+            event.change(rawTagEditor.tags());
         }
 
         row.each(bindTypeahead);
@@ -162,21 +162,21 @@ iD.ui.Taglist = function(context, entity) {
     }
 
     function addTag() {
-        var tags = taglist.tags();
+        var tags = rawTagEditor.tags();
         tags[''] = '';
         drawTags(tags);
         list.selectAll('li:last-child input.key').node().focus();
     }
 
     function removeTag(d) {
-        var tags = taglist.tags();
+        var tags = rawTagEditor.tags();
         tags[d.key] = '';
         event.change(tags);
         delete tags[d.key];
         drawTags(tags);
     }
 
-    taglist.tags = function(tags) {
+    rawTagEditor.tags = function(tags) {
         if (!arguments.length) {
             tags = {};
             list.selectAll('li').each(function() {
@@ -191,5 +191,5 @@ iD.ui.Taglist = function(context, entity) {
         }
     };
 
-    return d3.rebind(taglist, event, 'on');
+    return d3.rebind(rawTagEditor, event, 'on');
 };

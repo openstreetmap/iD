@@ -6,7 +6,7 @@ iD.ui.EntityEditor = function(context, entity) {
         preset,
         selection_,
         presetUI,
-        tagList;
+        rawTagEditor;
 
     function update() {
         var entity = context.hasEntity(id);
@@ -22,7 +22,7 @@ iD.ui.EntityEditor = function(context, entity) {
         }
 
         presetUI.change(tags);
-        tagList.tags(tags);
+        rawTagEditor.tags(tags);
     }
 
     function entityEditor(selection, newpreset) {
@@ -77,7 +77,7 @@ iD.ui.EntityEditor = function(context, entity) {
             .on('change', changeTags)
             .on('close', event.close);
 
-        tagList = iD.ui.Taglist(context, entity)
+        rawTagEditor = iD.ui.RawTagEditor(context, entity)
             .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')
@@ -85,8 +85,8 @@ iD.ui.EntityEditor = function(context, entity) {
             .call(presetUI);
 
         editorwrap.append('div')
-            .attr('class', 'inspector-inner col12 additional-tags')
-            .call(tagList, preset.id === 'other');
+            .attr('class', 'inspector-inner raw-tag-editor col12')
+            .call(rawTagEditor, preset.id === 'other');
 
         if (!entity.isNew()) {
             var osmLink = tageditorpreset.append('div')
@@ -102,7 +102,7 @@ iD.ui.EntityEditor = function(context, entity) {
         }
 
         presetUI.change(tags);
-        tagList.tags(tags);
+        rawTagEditor.tags(tags);
 
         changeTags();
 

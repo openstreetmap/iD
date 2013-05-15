@@ -1346,7 +1346,7 @@ div.combobox {
 
 /* tag editor */
 
-.inspector-inner.additional-tags {
+.raw-tag-editor {
     border-top: 1px solid #ccc;
 }
 
@@ -1466,7 +1466,7 @@ div.combobox {
     width: 100%;
 }
 
-.additional-tags .tag-reference-body {
+.raw-tag-editor .tag-reference-body {
     border-bottom: 1px solid #ccc;
     float: left;
     width: 100%;
