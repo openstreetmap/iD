@@ -1,16 +1,6 @@
 iD.ui.Inspector = function(context, entity) {
     var tagEditor,
-        id = entity.id,
         newFeature = false;
-
-    function changeTags(tags) {
-        var entity = context.hasEntity(id);
-        if (entity && !_.isEqual(entity.tags, tags)) {
-            context.perform(
-                iD.actions.ChangeTags(entity.id, tags),
-                t('operations.change_tags.annotation'));
-        }
-    }
 
     function browse() {
         context.enter(iD.modes.Browse(context));
@@ -54,7 +44,6 @@ iD.ui.Inspector = function(context, entity) {
             });
 
         tagEditor = iD.ui.TagEditor(context, entity)
-            .on('changeTags', changeTags)
             .on('close', browse)
             .on('choose', function(preset) {
                 var right = panewrap.style('right').indexOf('%') > 0 ?

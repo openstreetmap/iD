@@ -1,5 +1,5 @@
 iD.ui.TagEditor = function(context, entity) {
-    var event = d3.dispatch('changeTags', 'choose', 'close'),
+    var event = d3.dispatch('choose', 'close'),
         presets = context.presets(),
         id = entity.id,
         tags = _.clone(entity.tags),
@@ -121,7 +121,12 @@ iD.ui.TagEditor = function(context, entity) {
 
     function changeTags(changed) {
         tags = clean(_.extend(tags, changed));
-        event.changeTags(_.clone(tags));
+        var entity = context.hasEntity(id);
+        if (entity && !_.isEqual(entity.tags, tags)) {
+            context.perform(
+                iD.actions.ChangeTags(entity.id, tags),
+                t('operations.change_tags.annotation'));
+        }
     }
 
     tageditor.close = function() {
