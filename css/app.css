@@ -521,6 +521,8 @@ button.save.has-count .count::before {
 .icon.back       { background-position: -420px 0;}
 .icon.forward    { background-position: -440px 0;}
 .icon.help       { background-position: -460px 0;}
+.icon.translate  { background-position: -520px 0;}
+
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
@@ -992,11 +994,11 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
     width: 12.5%;
 }
 
-.preset-add-field .tooltip.top .tooltip-arrow {
+.inspector-preset .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
-.preset-add-field .tooltip-inner {
+.inspector-preset .tooltip-inner {
     background: #000;
     color: #ccc;
 }
