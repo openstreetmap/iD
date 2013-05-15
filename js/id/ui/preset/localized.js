@@ -99,7 +99,7 @@ iD.ui.preset.localized = function(field, context) {
 
                 wrap.append('label')
                     .attr('class','form-label')
-                    .text('Translation')
+                    .text(t('localized_translation_label'))
                     .attr('for','localized-lang');
 
                 wrap.append('input')

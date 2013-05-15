@@ -43,7 +43,6 @@ iD.ui.preset.wikipedia = function(field, context) {
         title = selection.append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-title')
-            .attr('plaeholder', 'URL to Wikipedia page')
             .attr('id', 'preset-input-' + field.id)
             .on('blur', change)
             .on('change', change)

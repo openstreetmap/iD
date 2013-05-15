@@ -58,10 +58,10 @@ iD.ui.Taglist = function(context, entity) {
         li.exit().remove();
 
         var row = li.enter().append('li')
-            .attr('class', 'tag-row');
+            .attr('class', 'tag-row cf');
 
         row.append('div')
-            .attr('class', 'key-wrap col6')
+            .attr('class', 'key-wrap')
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
