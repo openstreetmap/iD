@@ -160,9 +160,11 @@ input[type=email] {
     height:30px;
     width: 100%;
     border-radius:4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
     -webkit-transition: all 100ms;
        -moz-transition: all 100ms;
-       -o-transition: all 100ms;
+         -o-transition: all 100ms;
             transition: all 100ms;
 }
 
@@ -398,7 +400,7 @@ button.minor {
     top: 0;
     right: 0;
     height: 100%;
-    width: 20px;
+    width: 10%;
     opacity: .5;
     border-radius: 0;
 }
@@ -508,8 +510,6 @@ button.save.has-count .count::before {
 .icon.delete     { background-position: -180px 0;}
 .icon.remove     { background-position: -200px 0;}
 .icon.inspect    { background-position: -220px 0;}
-.icon.zoom-in    { background-position: -240px 0;}
-.icon.zoom-out   { background-position: -260px 0;}
 .icon.plus       { background-position: -240px 0;}
 .icon.search     { background-position: -280px 0;}
 .icon.geocode    { background-position: -280px 0;}
@@ -523,6 +523,9 @@ button.save.has-count .count::before {
 .icon.help       { background-position: -460px 0;}
 .icon.translate  { background-position: -520px 0;}
 
+.icon.plus.light,
+.icon.zoom-in          { background-position: -240px -20px;}
+.icon.zoom-out         { background-position: -260px -20px;}
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
 .icon.help.light       { background-position: -460px -20px;}
@@ -916,7 +919,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .form-label .modified-icon {
     border-right: 0;
     opacity: 0;
-    right: 20px;
+    right: 10%;
 }
 
 .modified .form-label .modified-icon {
@@ -937,12 +940,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .form-field textarea {
     height: 65px;
-}
-
-.form-field-name input.localized-main {
-    height: 35px;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 /* adding additional preset fields */
@@ -992,11 +989,11 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
     width: 12.5%;
 }
 
-.preset-add-field .tooltip.top .tooltip-arrow {
+.tag-wrap .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
-.preset-add-field .tooltip-inner {
+.tag-wrap .tooltip-inner {
     background: #000;
     color: #ccc;
 }
@@ -1035,15 +1032,15 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
 
 input[type=number] {
     position: relative;
-    padding-right: 65px;
+    padding-right: 20%;
 }
 
 .spin-control {
-    width: 41px;
+    width: 20%;
     height: 29px;
     border-left: 1px solid #CCC;
     display: inline-block;
-    margin-left: -41px;
+    margin-left: -20%;
     margin-bottom: -11px;
     position: relative;
 }
@@ -1169,75 +1166,23 @@ input[type=number] {
     content: none;
 }
 
-.form-field .localized-main {
-    width: 90%;
-    border-radius: 0 0 0 4px;
-}
-
-.form-field .localized-add {
-    width: 10%;
-    height: 35px;
-    border-radius: 0 0 4px 0;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    vertical-align: top;
-}
-
-.form-field .localized-wrap .entry .localized-lang {
-    border-top: none;
-    border-right: none;
-    border-radius: 0;
-    width: 30%;
-}
-
-.form-field .localized-wrap .entry .localized-value {
-    border-top: none;
-    border-radius: 0;
-    width: 60%;
-}
-
-.form-field .localized-wrap .entry .localized-remove {
-    height: 30px;
-    border-radius: 0;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    vertical-align: top;
-    width: 10%;
-}
-
-.form-field .localized-wrap .entry:last-child .localized-lang {
-    border-radius: 0 0 0 4px;
-}
-
-.form-field .localized-wrap .entry:last-child .localized-remove {
-    border-radius: 0 0 4px 0;
-}
-
 .form-field .wiki-lang {
-    width: 30%;
-    border-right: none;
-    border-radius: 0 0 0 4px;
+    border-radius: 0;
 }
 
 .form-field .wiki-title {
-    width: 60%;
-    border-right: none;
-    border-radius: 0;
+    padding-right: 10%;
+}
+
+.form-field .wiki-title ~ .combobox-carat {
+    margin-left: -20%;
+    margin-right: 10%;
 }
 
 .form-field .wiki-link {
-    border-radius: 0 0 4px 0;
-    border: 1px solid #ccc;
-    border-top: none;
-    height: 30px;
-    width: 10%;
     float: right;
     padding: 5px;
     text-align: center;
-    -webkit-transition: all 100ms;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 .form-field .wiki-link:hover {
@@ -1261,6 +1206,61 @@ input[type=number] {
     text-align: center;
     color: #A9A9A9;
     font-weight: bold;
+}
+
+/* Name + translate form */
+
+.form-field-name input.localized-main {
+    font-weight: bold;
+}
+
+.form-field .localized-main {
+    padding-right: 10%;
+}
+
+.form-field .button-input-action {
+    position: relative;
+    width: 10%;
+    margin-left: -10%;
+    border: 1px solid #CCC;
+    border-top-width: 0;
+    border-radius: 0 0 4px 0;
+    height: 30px;
+    vertical-align: top;
+}
+
+.form-field .localized-wrap .entry {
+    padding: 0;
+    padding-top: 10px;
+    position: relative;
+}
+
+.form-field .localized-wrap .entry::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background:#ccc;
+    height: 10px;
+    width: 1px;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+}
+
+.form-field .localized-wrap .entry .localized-lang {
+    border-radius: 0;
+    border-top-width: 0;
+}
+
+.form-field .localized-wrap .entry .localized-value {
+    padding-right: 10%;
+    border-top-width: 0;
+    border-radius: 0 0 4px 4px;
+}
+
+.form-field .localized-wrap .entry .localized-remove {
+    border-radius: 0 0 4px 0;
 }
 
 /* Preset form address */
@@ -1348,7 +1348,7 @@ div.combobox {
 }
 
 .tag-list {
-    margin-right: 40px;
+    margin-right: 20%;
 }
 
 .tag-row {
@@ -1384,7 +1384,7 @@ div.combobox {
 .tag-row button {
     position: absolute;
     height: 30px;
-    right: -20px;
+    right: -10%;
     border: 1px solid #CCC;
     border-top-width: 0; border-left-width: 0;
     border-radius: 0;
@@ -1413,7 +1413,7 @@ div.combobox {
 }
 
 .tag-row button.tag-help-button {
-    right: -40px;
+    right: -20%;
 }
 
 /* Adding form fields to tag editor */

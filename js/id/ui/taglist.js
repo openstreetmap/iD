@@ -29,7 +29,7 @@ iD.ui.Taglist = function(context, entity) {
             .on('click', addTag);
 
         newTag.append('span')
-            .attr('class', 'icon plus');
+            .attr('class', 'icon plus light');
 
         newTag.append('span')
             .attr('class', 'label')

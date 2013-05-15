@@ -15,19 +15,19 @@ iD.ui.preset.localized = function(field, context) {
             .on('change', change)
             .call(iD.behavior.accept().on('accept', event.close));
 
-        localizedInputs = selection.append('div')
-            .attr('class', 'localized-wrap');
-
         var translateButton = selection.append('button')
-            .attr('class', 'localized-add')
+            .attr('class', 'button-input-action localized-add minor')
             .on('click', addBlank);
 
         translateButton.append('span')
-            .attr('class', 'icon translate');
+            .attr('class', 'icon plus');
 
         translateButton.call(bootstrap.tooltip()
             .title(t('translate'))
             .placement('top'));
+
+        localizedInputs = selection.append('div')
+            .attr('class', 'localized-wrap');
 
     }
 
@@ -97,9 +97,15 @@ iD.ui.preset.localized = function(field, context) {
                 var wrap = d3.select(this);
                 var langcombo = d3.combobox().fetcher(fetcher);
 
+                wrap.append('label')
+                    .attr('class','form-label')
+                    .text('Translation')
+                    .attr('for','localized-lang');
+
                 wrap.append('input')
                     .attr('class', 'localized-lang')
                     .attr('type', 'text')
+                    .attr('placeholder','Choose language')
                     .on('blur', changeLang)
                     .on('change', changeLang)
                     .call(langcombo);
@@ -111,14 +117,14 @@ iD.ui.preset.localized = function(field, context) {
                     .attr('class', 'localized-value');
 
                 wrap.append('button')
-                    .attr('class', 'localized-remove')
+                    .attr('class', 'minor button-input-action localized-remove')
                     .on('click', function(d) {
                         var t = {};
                         t[key(d.lang)] = '';
                         event.change(t);
                         d3.select(this.parentNode).remove();
                     })
-                    .append('span').attr('class', 'icon remove');
+                    .append('span').attr('class', 'icon delete');
 
             });
 
