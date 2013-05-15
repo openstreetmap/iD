@@ -15,14 +15,19 @@ iD.ui.preset.localized = function(field, context) {
             .on('change', change)
             .call(iD.behavior.accept().on('accept', event.close));
 
-        selection.append('button')
-            .attr('class', 'localized-add')
-            .on('click', addBlank)
-            .append('span')
-            .attr('class', 'icon plus-dark');
-
         localizedInputs = selection.append('div')
             .attr('class', 'localized-wrap');
+
+        var translateButton = selection.append('button')
+            .attr('class', 'localized-add')
+            .on('click', addBlank);
+
+        translateButton.append('span')
+            .attr('class', 'icon translate');
+
+        translateButton.call(bootstrap.tooltip()
+            .title(t('translate'))
+            .placement('top'));
 
     }
 
