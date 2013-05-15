@@ -18,19 +18,22 @@ iD.behavior.AddWay = function(context) {
 
     addWay.off = function(surface) {
         context.map()
-            .minzoom(0)
-            .tail(false);
+            .minzoom(0);
 
         surface.call(draw.off);
     };
 
     addWay.cancel = function() {
-
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
         }, 1000);
 
         context.enter(iD.modes.Browse(context));
+    };
+
+    addWay.tail = function(text) {
+        draw.tail(text);
+        return addWay;
     };
 
     return d3.rebind(addWay, event, 'on');

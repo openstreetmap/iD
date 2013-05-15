@@ -8,9 +8,10 @@ iD.modes.AddLine = function(context) {
     };
 
     var behavior = iD.behavior.AddWay(context)
-            .on('start', start)
-            .on('startFromWay', startFromWay)
-            .on('startFromNode', startFromNode);
+        .tail(t('modes.add_line.tail'))
+        .on('start', start)
+        .on('startFromWay', startFromWay)
+        .on('startFromNode', startFromNode);
 
     function start(loc) {
         var graph = context.graph(),
@@ -63,7 +64,6 @@ iD.modes.AddLine = function(context) {
 
     mode.enter = function() {
         context.install(behavior);
-        context.tail(t('modes.add_line.tail'));
     };
 
     mode.exit = function() {

@@ -11,7 +11,8 @@ iD.modes.DrawArea = function(context, wayId, baseGraph) {
             headId = way.nodes[way.nodes.length - 2],
             tailId = way.first();
 
-        behavior = iD.behavior.DrawWay(context, wayId, -1, mode, baseGraph);
+        behavior = iD.behavior.DrawWay(context, wayId, -1, mode, baseGraph)
+            .tail(t('modes.draw_area.tail'));
 
         var addNode = behavior.addNode;
 
@@ -24,7 +25,6 @@ iD.modes.DrawArea = function(context, wayId, baseGraph) {
         };
 
         context.install(behavior);
-        context.tail(t('modes.draw_area.tail'));
     };
 
     mode.exit = function() {

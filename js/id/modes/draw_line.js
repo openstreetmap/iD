@@ -11,7 +11,8 @@ iD.modes.DrawLine = function(context, wayId, direction, baseGraph) {
             index = (direction === 'forward') ? undefined : 0,
             headId = (direction === 'forward') ? way.last() : way.first();
 
-        behavior = iD.behavior.DrawWay(context, wayId, index, mode, baseGraph);
+        behavior = iD.behavior.DrawWay(context, wayId, index, mode, baseGraph)
+            .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;
 
@@ -24,7 +25,6 @@ iD.modes.DrawLine = function(context, wayId, direction, baseGraph) {
         };
 
         context.install(behavior);
-        context.tail(t('modes.draw_line.tail'));
     };
 
     mode.exit = function() {

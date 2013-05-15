@@ -8,6 +8,7 @@ iD.modes.AddArea = function(context) {
     };
 
     var behavior = iD.behavior.AddWay(context)
+            .tail(t('modes.add_area.tail'))
             .on('start', start)
             .on('startFromWay', startFromWay)
             .on('startFromNode', startFromNode),
@@ -56,7 +57,6 @@ iD.modes.AddArea = function(context) {
 
     mode.enter = function() {
         context.install(behavior);
-        context.tail(t('modes.add_area.tail'));
     };
 
     mode.exit = function() {

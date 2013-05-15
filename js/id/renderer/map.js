@@ -24,7 +24,6 @@ iD.Map = function(context) {
         areas = iD.svg.Areas(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(roundedProjection, context),
-        tail = iD.ui.Tail(),
         supersurface, surface,
         mouse;
 
@@ -91,9 +90,6 @@ iD.Map = function(context) {
 
         labels.supersurface(supersurface);
         mouse = iD.util.fastMouse(supersurface.node());
-
-        supersurface
-            .call(tail);
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
@@ -418,15 +414,6 @@ iD.Map = function(context) {
     map.flush = function() {
         context.connection().flush();
         context.history().reset();
-        return map;
-    };
-
-    var usedTails = {};
-    map.tail = function(_) {
-        if (!_ || usedTails[_] === undefined) {
-            tail.text(_);
-            usedTails[_] = true;
-        }
         return map;
     };
 

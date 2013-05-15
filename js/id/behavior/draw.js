@@ -3,6 +3,7 @@ iD.behavior.Draw = function(context) {
         'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
         hover = iD.behavior.Hover().altDisables(true),
+        tail = iD.behavior.Tail(),
         closeTolerance = 4,
         tolerance = 12;
 
@@ -87,6 +88,7 @@ iD.behavior.Draw = function(context) {
 
     function draw(selection) {
         context.install(hover);
+        context.install(tail);
 
         keybinding
             .on('⌫', backspace)
@@ -106,6 +108,7 @@ iD.behavior.Draw = function(context) {
 
     draw.off = function(selection) {
         context.uninstall(hover);
+        context.uninstall(tail);
 
         selection
             .on('mousedown.draw', null)
@@ -118,5 +121,15 @@ iD.behavior.Draw = function(context) {
             .call(keybinding.off);
     };
 
+    draw.tail = function(_) {
+        if (!_ || iD.behavior.Draw.usedTails[_] === undefined) {
+            tail.text(_);
+            iD.behavior.Draw.usedTails[_] = true;
+        }
+        return draw;
+    };
+
     return d3.rebind(draw, event, 'on');
 };
+
+iD.behavior.Draw.usedTails = {};

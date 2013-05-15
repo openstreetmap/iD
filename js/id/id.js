@@ -140,7 +140,6 @@ window.iD = function () {
     context.surface = function() { return map.surface; };
     context.mouse = map.mouse;
     context.projection = map.projection;
-    context.tail = map.tail;
     context.redraw = map.redraw;
     context.pan = map.pan;
     context.zoomIn = map.zoomIn;

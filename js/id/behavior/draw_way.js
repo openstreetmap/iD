@@ -78,7 +78,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         context.map()
             .minzoom(0)
-            .tail(false)
             .on('drawn.draw', null);
 
         surface.call(draw.off)
@@ -190,6 +189,11 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
         finished = true;
         context.enter(iD.modes.Browse(context));
+    };
+
+    drawWay.tail = function(text) {
+        draw.tail(text);
+        return drawWay;
     };
 
     return drawWay;

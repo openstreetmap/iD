@@ -7,6 +7,7 @@ iD.modes.AddPoint = function(context) {
     };
 
     var behavior = iD.behavior.Draw(context)
+        .tail(t('modes.add_point.tail'))
         .on('click', add)
         .on('clickWay', addWay)
         .on('clickNode', addNode)
@@ -40,12 +41,10 @@ iD.modes.AddPoint = function(context) {
 
     mode.enter = function() {
         context.install(behavior);
-        context.tail(t('modes.add_point.tail'));
     };
 
     mode.exit = function() {
         context.uninstall(behavior);
-        context.tail(false);
     };
 
     return mode;
