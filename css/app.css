@@ -518,6 +518,7 @@ button.save.has-count .count::before {
 .icon.nearby     { background-position: -340px 0;}
 .icon.geolocate  { background-position: -360px 0;}
 .icon.warning    { background-position: -380px 0;}
+.icon.bug        { background-position: -400px 0;}
 .icon.back       { background-position: -420px 0;}
 .icon.forward    { background-position: -440px 0;}
 .icon.help       { background-position: -460px 0;}
@@ -1845,7 +1846,6 @@ img.wiki-image {
     position: absolute;
     right:0px;
     bottom:0px;
-    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     border-radius: 0;
