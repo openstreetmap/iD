@@ -150,8 +150,8 @@ iD.modes.Select = function(context, selection) {
             var s = iD.util.entitySelector(selection);
 
             selection.forEach(function(id) {
-                var entity = context.entity(id);
-                if (entity.type === 'relation') {
+                var entity = context.hasEntity(id);
+                if (entity && entity.type === 'relation') {
                     entity.members.forEach(function(member) {
                         s += ',.' + member.id
                     });
