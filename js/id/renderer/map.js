@@ -1,7 +1,9 @@
 iD.Map = function(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
-        projection = d3.geo.mercator().scale(512 / Math.PI),
+        projection = d3.geo.mercator()
+            .scale(512 / Math.PI)
+            .precision(0),
         roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
