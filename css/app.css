@@ -521,6 +521,7 @@ button.save.has-count .count::before {
 .icon.back       { background-position: -420px 0;}
 .icon.forward    { background-position: -440px 0;}
 .icon.help       { background-position: -460px 0;}
+.icon.translate  { background-position: -520px 0;}
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
