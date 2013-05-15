@@ -601,13 +601,17 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .header button {
     height: 100%;
     border-radius: 0;
-    border-left: 1px solid #CCC;
     width: 40px;
     text-align: center;
     overflow: hidden;
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.modal > button.fr,
+.header button.fr {
+    border-left: 1px solid #CCC;
 }
 
 .modal > button {
