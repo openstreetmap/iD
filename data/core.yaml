@@ -122,6 +122,7 @@ en:
       multiple_ways: There are too many lines here to split.
   nothing_to_undo: Nothing to undo.
   nothing_to_redo: Nothing to redo.
+  tooltip_keyhint: "Shortcut:"
   just_edited: "You just edited OpenStreetMap!"
   browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
   view_on_osm: "View on OSM"

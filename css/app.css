@@ -590,6 +590,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .header h3 {
+    text-align: center;
     margin-right: 40px;
     margin-bottom: 0;
     white-space: nowrap;
@@ -607,11 +608,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     position: absolute;
     right: 0;
     top: 0;
-}
-
-.modal > button.fr,
-.header button.fr {
-    border-left: 1px solid #CCC;
 }
 
 .modal > button {
@@ -649,7 +645,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .inspector-wrap .header button.preset-reset {
-    border-right: 1px solid #CCC;
     position: relative;
 }
 
@@ -1271,10 +1266,11 @@ input[type=number] {
 
 .form-field .addr-housename {
     border: 0;
+    border-radius: 0;
 }
 
 .form-field .addr-number {
-    width: 33%;
+    width: 33.3333%;
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
@@ -1282,14 +1278,14 @@ input[type=number] {
 }
 
 .form-field .addr-street {
-    width: 66%;
+    width: 66.6666%;
     border-right: 0;
     border-bottom: 0;
     border-radius: 0;
 }
 
 .form-field .addr-city {
-    width: 66%;
+    width: 66.6666%;
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
@@ -1297,7 +1293,7 @@ input[type=number] {
 }
 
 .form-field .addr-postcode {
-    width: 33%;
+    width: 33.3333%;
     border-right: 0;
     border-bottom: 0;
     border-radius: 0 0 4px 0;
@@ -1748,13 +1744,9 @@ img.wiki-image {
 .help-wrap .toc li a,
 .help-wrap .nav a {
     display: block;
-    border: 1px solid #CCC;
     padding: 5px 10px;
 }
 
-.help-wrap .toc li a {
-    border-bottom: 0;
-}
 
 .help-wrap .toc li a:hover,
 .help-wrap .nav a:hover  {
@@ -1769,15 +1761,8 @@ img.wiki-image {
     border-radius: 4px 4px 0 0;
 }
 
-.help-wrap .toc li:nth-last-child(2) a {
-    border-bottom: 1px solid #CCC;
-    border-radius: 0 0 4px 4px
-}
-
 .help-wrap .toc li.walkthrough a {
     overflow: hidden;
-    margin-top: 10px;
-    border-bottom: 1px solid #ccc;
     border-radius: 4px;
 }
 
@@ -2139,7 +2124,8 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .tooltip {
-    width: 200px;
+    max-width: 200px;
+    min-width: 120px;
     position: absolute;
     display: none;
     color:#333;
@@ -2173,7 +2159,6 @@ img.wiki-image {
 }
 
 .tooltip-inner {
-    display: inline-block;
     padding: 10px;
     font-weight: normal;
     background-color: white;
@@ -2278,11 +2263,15 @@ img.wiki-image {
 }
 
 .tooltip .keyhint-wrap {
-    padding: 5px 0 5px 0;
+    background: #f6f6f6;
+    padding: 10px;
+    left: 0;
+    right: 0;
+    bottom: -42px;
+    position: absolute;
 }
 
 .tooltip-inner .keyhint {
-    color: #222;
     font-size: 10px;
     padding: 0 7px;
     font-weight: bold;
@@ -2293,10 +2282,6 @@ img.wiki-image {
     z-index: 1;
     text-align: left;
     clear: both;
-}
-
-.tooltip .keyhint .keyhint-label {
-    display: inline-block;
 }
 
 .tooltip-inner .keyhint::after {

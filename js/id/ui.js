@@ -164,5 +164,5 @@ iD.ui = function(context) {
 };
 
 iD.ui.tooltipHtml = function(text, key) {
-    return '<span>' + text + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + key + '</span></div>';
+    return '<span>' + text + '</span>' + '<div class="keyhint-wrap">' + '<span> ' + (t('tooltip_keyhint')) + ' </span>' + '<span class="keyhint"> ' + key + '</span></div>';
 };
