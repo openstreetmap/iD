@@ -1747,9 +1747,13 @@ img.wiki-image {
 .help-wrap .toc li a,
 .help-wrap .nav a {
     display: block;
+    border: 1px solid #CCC;
     padding: 5px 10px;
 }
 
+.help-wrap .toc li a {
+    border-bottom: 0;
+}
 
 .help-wrap .toc li a:hover,
 .help-wrap .nav a:hover  {
@@ -1764,9 +1768,16 @@ img.wiki-image {
     border-radius: 4px 4px 0 0;
 }
 
+.help-wrap .toc li:nth-last-child(2) a {
+    border-bottom: 1px solid #CCC;
+    border-radius: 0 0 4px 4px
+}
+
 .help-wrap .toc li.walkthrough a {
     overflow: hidden;
-    border-radius: 0 0 4px 4px;
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .help-wrap .nav {
