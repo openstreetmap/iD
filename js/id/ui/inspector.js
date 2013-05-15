@@ -1,5 +1,5 @@
 iD.ui.Inspector = function(context, entity) {
-    var tagEditor,
+    var entityEditor,
         newFeature = false;
 
     function browse() {
@@ -40,10 +40,10 @@ iD.ui.Inspector = function(context, entity) {
                     .transition()
                     .style('right', right);
 
-                tagLayer.call(tagEditor, preset);
+                tagLayer.call(entityEditor, preset);
             });
 
-        tagEditor = iD.ui.TagEditor(context, entity)
+        entityEditor = iD.ui.EntityEditor(context, entity)
             .on('close', browse)
             .on('choose', function(preset) {
                 var right = panewrap.style('right').indexOf('%') > 0 ?
@@ -67,7 +67,7 @@ iD.ui.Inspector = function(context, entity) {
             presetLayer.call(presetList);
         } else {
             panewrap.style('right', '-0%');
-            tagLayer.call(tagEditor);
+            tagLayer.call(entityEditor);
         }
 
         if (d3.event) {
@@ -86,7 +86,7 @@ iD.ui.Inspector = function(context, entity) {
     }
 
     inspector.close = function(selection) {
-        tagEditor.close();
+        entityEditor.close();
 
         selection.transition()
             .style('right', '-500px')

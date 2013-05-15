@@ -1,4 +1,4 @@
-iD.ui.TagEditor = function(context, entity) {
+iD.ui.EntityEditor = function(context, entity) {
     var event = d3.dispatch('choose', 'close'),
         presets = context.presets(),
         id = entity.id,
@@ -17,7 +17,7 @@ iD.ui.TagEditor = function(context, entity) {
         // change preset if necessary (undos/redos)
         var newmatch = presets.match(entity, context.graph());
         if (newmatch !== preset) {
-            tageditor(selection_, newmatch);
+            entityEditor(selection_, newmatch);
             return;
         }
 
@@ -25,7 +25,7 @@ iD.ui.TagEditor = function(context, entity) {
         tagList.tags(tags);
     }
 
-    function tageditor(selection, newpreset) {
+    function entityEditor(selection, newpreset) {
         selection_ = selection;
         var geometry = entity.geometry(context.graph());
 
@@ -107,7 +107,7 @@ iD.ui.TagEditor = function(context, entity) {
         changeTags();
 
         context.history()
-            .on('change.tag-editor', update);
+            .on('change.entity-editor', update);
     }
 
     function clean(o) {
@@ -129,7 +129,7 @@ iD.ui.TagEditor = function(context, entity) {
         }
     }
 
-    tageditor.close = function() {
+    entityEditor.close = function() {
         // Blur focused element so that tag changes are dispatched
         // See #1295
         document.activeElement.blur();
@@ -139,8 +139,8 @@ iD.ui.TagEditor = function(context, entity) {
         d3.selectAll('div.typeahead').remove();
 
         context.history()
-            .on('change.tag-editor', null);
+            .on('change.entity-editor', null);
     };
 
-    return d3.rebind(tageditor, event, 'on');
+    return d3.rebind(entityEditor, event, 'on');
 };
