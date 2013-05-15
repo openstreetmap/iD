@@ -160,7 +160,12 @@
     "just_edited": "You just edited OpenStreetMap!",
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
     "view_on_osm": "View on OSM",
-    "translate": "Translate",
+    "translate": {
+        "translate": "Translate",
+        "localized_translation_label": "Translation",
+        "localized_translation_language": "Choose language",
+        "localized_translation_name": "Name"
+    },
     "localized_translation_label": "Translation",
     "zoom_in_edit": "zoom in to edit the map",
     "logout": "logout",

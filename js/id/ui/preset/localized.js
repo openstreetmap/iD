@@ -23,7 +23,7 @@ iD.ui.preset.localized = function(field, context) {
             .attr('class', 'icon plus');
 
         translateButton.call(bootstrap.tooltip()
-            .title(t('translate'))
+            .title(t('translate.translate'))
             .placement('top'));
 
         localizedInputs = selection.append('div')
@@ -99,13 +99,13 @@ iD.ui.preset.localized = function(field, context) {
 
                 wrap.append('label')
                     .attr('class','form-label')
-                    .text(t('localized_translation_label'))
+                    .text(t('translate.localized_translation_label'))
                     .attr('for','localized-lang');
 
                 wrap.append('input')
                     .attr('class', 'localized-lang')
                     .attr('type', 'text')
-                    .attr('placeholder','Choose language')
+                    .attr('placeholder',t('translate.localized_translation_language'))
                     .on('blur', changeLang)
                     .on('change', changeLang)
                     .call(langcombo);
@@ -114,6 +114,7 @@ iD.ui.preset.localized = function(field, context) {
                     .on('blur', changeValue)
                     .on('change', changeValue)
                     .attr('type', 'text')
+                    .attr('placeholder', t('translate.localized_translation_name'))
                     .attr('class', 'localized-value');
 
                 wrap.append('button')
