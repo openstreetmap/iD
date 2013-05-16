@@ -1246,9 +1246,8 @@ input[type=number] {
 }
 
 .form-field .localized-wrap .entry {
-    padding: 0;
-    padding-top: 10px;
     position: relative;
+    overflow: hidden;
 }
 
 .form-field .localized-wrap .entry::before {
