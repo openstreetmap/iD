@@ -8,14 +8,14 @@ iD.svg.Vertices = function(projection, context) {
 
     var hover;
 
-    function siblingAndChildVertices(ids, graph) {
+    function siblingAndChildVertices(ids, graph, extent) {
         var vertices = {};
 
         function addChildVertices(entity) {
             var i;
             if (entity.type === 'way') {
                 for (i = 0; i < entity.nodes.length; i++) {
-                    vertices[entity.nodes[i]] = graph.entity(entity.nodes[i]);
+                    addChildVertices(graph.entity(entity.nodes[i]));
                 }
             } else if (entity.type === 'relation') {
                 for (i = 0; i < entity.members.length; i++) {
@@ -24,7 +24,7 @@ iD.svg.Vertices = function(projection, context) {
                         addChildVertices(member);
                     }
                 }
-            } else {
+            } else if (entity.intersects(extent, graph)) {
                 vertices[entity.id] = entity;
             }
         }
@@ -107,8 +107,8 @@ iD.svg.Vertices = function(projection, context) {
             .remove();
     }
 
-    function drawVertices(surface, graph, entities, filter, zoom) {
-        var selected = siblingAndChildVertices(context.selection(), graph),
+    function drawVertices(surface, graph, entities, filter, extent, zoom) {
+        var selected = siblingAndChildVertices(context.selection(), graph, extent),
             vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -131,8 +131,8 @@ iD.svg.Vertices = function(projection, context) {
         drawHover(surface, graph, zoom);
     }
 
-    function drawHover(surface, graph, zoom) {
-        var hovered = hover ? siblingAndChildVertices([hover.id], graph) : {};
+    function drawHover(surface, graph, extent, zoom) {
+        var hovered = hover ? siblingAndChildVertices([hover.id], graph, extent) : {};
 
         surface.select('.layer-hit').selectAll('g.vertex.vertex-hover')
             .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);

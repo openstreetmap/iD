@@ -62,7 +62,7 @@ iD.Map = function(context) {
         surface.on('mouseover.vertices', function() {
             if (map.editable() && !transformed) {
                 var hover = d3.event.target.__data__;
-                surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
+                surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                 dispatch.drawn(map);
             }
         });
@@ -70,7 +70,7 @@ iD.Map = function(context) {
         surface.on('mouseout.vertices', function() {
             if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
-                surface.call(vertices.drawHover, context.graph(), hover, map.zoom());
+                surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                 dispatch.drawn(map);
             }
         });
@@ -81,7 +81,7 @@ iD.Map = function(context) {
                     filter = d3.functor(true),
                     extent = map.extent(),
                     graph = context.graph();
-                surface.call(vertices, graph, all, filter, map.zoom());
+                surface.call(vertices, graph, all, filter, extent, map.zoom());
                 surface.call(midpoints, graph, all, filter, extent);
                 dispatch.drawn(map);
             }
@@ -138,7 +138,7 @@ iD.Map = function(context) {
         } else {
             surface
                 .call(points, graph, all, filter)
-                .call(vertices, graph, all, filter, map.zoom())
+                .call(vertices, graph, all, filter, extent, map.zoom())
                 .call(lines, graph, all, filter)
                 .call(areas, graph, all, filter)
                 .call(midpoints, graph, all, filter, extent)
