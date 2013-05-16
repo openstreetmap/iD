@@ -11,7 +11,7 @@ iD.actions.DeleteWay = function(wayId) {
 
         graph.parentRelations(way)
             .forEach(function(parent) {
-                graph = graph.replace(parent.removeMember(wayId));
+                graph = graph.replace(parent.removeMembersWithID(wayId));
             });
 
         _.uniq(way.nodes).forEach(function(nodeId) {

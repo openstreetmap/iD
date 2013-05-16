@@ -11,11 +11,11 @@ iD.actions.DeleteRelation = function(relationId) {
 
         graph.parentRelations(relation)
             .forEach(function(parent) {
-                graph = graph.replace(parent.removeMember(relationId));
+                graph = graph.replace(parent.removeMembersWithID(relationId));
             });
 
         _.uniq(_.pluck(relation.members, 'id')).forEach(function(memberId) {
-            graph = graph.replace(relation.removeMember(memberId));
+            graph = graph.replace(relation.removeMembersWithID(memberId));
 
             var entity = graph.entity(memberId);
             if (deleteEntity(entity, graph)) {

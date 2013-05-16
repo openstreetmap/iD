@@ -15,7 +15,7 @@ iD.actions.DeleteNode = function(nodeId) {
 
         graph.parentRelations(node)
             .forEach(function(parent) {
-                graph = graph.replace(parent.removeMember(nodeId));
+                graph = graph.replace(parent.removeMembersWithID(nodeId));
             });
 
         return graph.remove(node);

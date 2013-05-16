@@ -128,10 +128,10 @@ describe('iD.Relation', function () {
         });
     });
 
-    describe("#removeMember", function () {
-        it("removes a member", function () {
-            var r = iD.Relation({members: [{id: 'a'}]});
-            expect(r.removeMember('a').members).to.eql([]);
+    describe("#removeMembersWithID", function () {
+        it("removes members with the given ID", function () {
+            var r = iD.Relation({members: [{id: 'a'}, {id: 'b'}, {id: 'a'}]});
+            expect(r.removeMembersWithID('a').members).to.eql([{id: 'b'}]);
         });
     });
 

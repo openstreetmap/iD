@@ -179,7 +179,7 @@ describe('iD.Graph', function() {
         it("avoids re-adding a modified relation as a parent relation", function() {
             var n = iD.Node({id: 'n'}),
                 r1 = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
-                r2 = r1.removeMember('n'),
+                r2 = r1.removeMembersWithID('n'),
                 graph = iD.Graph([n, r1]),
                 graph2 = graph.replace(r2);
 

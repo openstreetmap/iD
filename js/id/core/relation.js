@@ -73,7 +73,7 @@ _.extend(iD.Relation.prototype, {
         return this.update({members: members});
     },
 
-    removeMember: function(id) {
+    removeMembersWithID: function(id) {
         var members = _.reject(this.members, function(m) { return m.id === id; });
         return this.update({members: members});
     },
