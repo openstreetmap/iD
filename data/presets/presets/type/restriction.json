@@ -1,0 +1,9 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "restriction"
+    },
+    "name": "Restriction"
+}

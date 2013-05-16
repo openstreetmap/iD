@@ -1,0 +1,9 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route"
+    },
+    "name": "Route"
+}

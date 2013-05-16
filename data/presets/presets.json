@@ -4470,6 +4470,33 @@
         },
         "name": "Zoo"
     },
+    "type/boundary": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "boundary"
+        },
+        "name": "Boundary"
+    },
+    "type/restriction": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction"
+        },
+        "name": "Restriction"
+    },
+    "type/route": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route"
+        },
+        "name": "Route"
+    },
     "waterway": {
         "fields": [
             "waterway"

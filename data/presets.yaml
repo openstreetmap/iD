@@ -1054,6 +1054,15 @@ en:
       tourism/zoo: 
         name: Zoo
         terms: ""
+      type/boundary: 
+        name: Boundary
+        terms: ""
+      type/restriction: 
+        name: Restriction
+        terms: ""
+      type/route: 
+        name: Route
+        terms: ""
       waterway: 
         name: Waterway
         terms: ""
