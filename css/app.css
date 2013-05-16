@@ -1436,8 +1436,7 @@ div.combobox {
 /* Adding form fields to tag editor */
 
 .inspector-inner .add-tag {
-    width: -webkit-calc(50% - 20px);
-    width: calc(50% - 20px);
+    width: 40%;
     height: 30px;
     border-top: 0;
     background: rgba(0,0,0,.5);
