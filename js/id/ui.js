@@ -102,12 +102,19 @@ iD.ui = function(context) {
             .attr('href', 'http://github.com/systemed/iD')
             .text(iD.version);
 
-        linkList.append('li')
+        var bugReport = linkList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'https://github.com/systemed/iD/issues')
-            .text(t('report_a_bug'));
+            .attr('href', 'https://github.com/systemed/iD/issues');
+
+        bugReport.append('span')
+            .attr('class','icon bug light');
+
+        bugReport.call(bootstrap.tooltip()
+                .title(t('report_a_bug'))
+                .placement('top')
+            );
 
         linkList.append('li')
             .attr('class', 'user-list')
@@ -164,5 +171,5 @@ iD.ui = function(context) {
 };
 
 iD.ui.tooltipHtml = function(text, key) {
-    return '<span>' + text + '</span>' + '<div class="keyhint-wrap"><span class="keyhint"> ' + key + '</span></div>';
+    return '<span>' + text + '</span>' + '<div class="keyhint-wrap">' + '<span> ' + (t('tooltip_keyhint')) + ' </span>' + '<span class="keyhint"> ' + key + '</span></div>';
 };
