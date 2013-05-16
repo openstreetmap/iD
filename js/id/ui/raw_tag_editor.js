@@ -1,26 +1,27 @@
 iD.ui.RawTagEditor = function(context, entity) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
-        collapsebutton,
+        disclosure,
         list;
 
     function rawTagEditor(selection, other) {
-
-        collapsebutton = selection.append('a')
-            .attr('href','#')
-            .attr('class','hide-toggle')
-            .text(t('inspector.all_tags'))
-            .on('click', function() {
-                iD.ui.RawTagEditor.expanded = wrap.classed('hide');
-                collapsebutton.classed('expanded', iD.ui.RawTagEditor.expanded);
-                wrap.call(iD.ui.Toggle(iD.ui.RawTagEditor.expanded));
+        function toggled(expanded) {
+            iD.ui.RawTagEditor.expanded = expanded;
+            if (expanded) {
                 selection.node().parentNode.scrollTop += 200;
-            })
-            .classed('expanded', iD.ui.RawTagEditor.expanded || other);
+            }
+        }
 
-        var wrap = selection.append('div')
-            .classed('hide', !iD.ui.RawTagEditor.expanded && !other);
+        disclosure = iD.ui.Disclosure()
+            .title(t('inspector.all_tags'))
+            .expanded(iD.ui.RawTagEditor.expanded || other)
+            .on('toggled', toggled)
+            .content(content);
 
+        selection.call(disclosure);
+    }
+
+    function content(wrap) {
         list = wrap.append('ul')
             .attr('class', 'tag-list');
 
@@ -39,7 +40,7 @@ iD.ui.RawTagEditor = function(context, entity) {
     function drawTags(tags) {
 
         var count = Object.keys(tags).filter(function(d) { return d; }).length;
-        collapsebutton.text(t('inspector.all_tags') + ' (' + count + ')');
+        disclosure.title(t('inspector.all_tags') + ' (' + count + ')');
 
         tags = d3.entries(tags);
 
