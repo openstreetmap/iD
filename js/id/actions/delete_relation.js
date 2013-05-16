@@ -6,7 +6,7 @@ iD.actions.DeleteRelation = function(relationId) {
             !entity.hasInterestingTags();
     }
 
-    return function(graph) {
+    var action = function(graph) {
         var relation = graph.entity(relationId);
 
         graph.parentRelations(relation)
@@ -25,4 +25,11 @@ iD.actions.DeleteRelation = function(relationId) {
 
         return graph.remove(relation);
     };
+
+    action.disabled = function(graph) {
+        if (!graph.entity(relationId).isComplete(graph))
+            return 'incomplete_relation';
+    };
+
+    return action;
 };

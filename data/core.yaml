@@ -65,6 +65,7 @@ en:
         area: Deleted an area.
         relation: Deleted a relation.
         multiple: "Deleted {n} objects."
+      incomplete_relation: This feature can't be deleted because it hasn't been fully downloaded.
     connect:
       annotation:
         point: Connected a way to a point.

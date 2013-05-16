@@ -73,4 +73,13 @@ describe("iD.actions.DeleteRelation", function () {
             graph    = action(iD.Graph([node, way, relation]));
         expect(graph.hasEntity(node.id)).to.be.undefined;
     });
+
+    describe("#disabled", function() {
+        it("returns 'incomplete_relation' if the relation is incomplete", function() {
+            var relation = iD.Relation({members: [{id: 'w'}]}),
+                graph    = iD.Graph([relation]),
+                action   = iD.actions.DeleteRelation(relation.id);
+            expect(action.disabled(graph)).to.equal('incomplete_relation');
+        });
+    });
 });

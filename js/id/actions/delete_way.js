@@ -6,7 +6,7 @@ iD.actions.DeleteWay = function(wayId) {
             !node.hasInterestingTags();
     }
 
-    return function(graph) {
+    var action = function(graph) {
         var way = graph.entity(wayId);
 
         graph.parentRelations(way)
@@ -25,4 +25,10 @@ iD.actions.DeleteWay = function(wayId) {
 
         return graph.remove(way);
     };
+
+    action.disabled = function() {
+        return false;
+    };
+
+    return action;
 };

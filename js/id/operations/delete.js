@@ -1,4 +1,6 @@
 iD.operations.Delete = function(selection, context) {
+    var action = iD.actions.DeleteMultiple(selection);
+
     var operation = function() {
         var annotation;
 
@@ -9,7 +11,7 @@ iD.operations.Delete = function(selection, context) {
         }
 
         context.perform(
-            iD.actions.DeleteMultiple(selection),
+            action,
             annotation);
 
         context.enter(iD.modes.Browse(context));
@@ -20,11 +22,14 @@ iD.operations.Delete = function(selection, context) {
     };
 
     operation.disabled = function() {
-        return false;
+        return action.disabled(context.graph());
     };
 
     operation.tooltip = function() {
-        return t('operations.delete.description');
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.delete.' + disable) :
+            t('operations.delete.description');
     };
 
     operation.id = "delete";

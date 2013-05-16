@@ -84,7 +84,8 @@
                 "area": "Deleted an area.",
                 "relation": "Deleted a relation.",
                 "multiple": "Deleted {n} objects."
-            }
+            },
+            "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded."
         },
         "connect": {
             "annotation": {
@@ -156,7 +157,7 @@
     },
     "nothing_to_undo": "Nothing to undo.",
     "nothing_to_redo": "Nothing to redo.",
-    "tooltip_keyhint": "Shortcut: ",
+    "tooltip_keyhint": "Shortcut:",
     "just_edited": "You just edited OpenStreetMap!",
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
     "view_on_osm": "View on OSM",
@@ -166,7 +167,6 @@
         "localized_translation_language": "Choose language",
         "localized_translation_name": "Name"
     },
-    "localized_translation_label": "Translation",
     "zoom_in_edit": "zoom in to edit the map",
     "logout": "logout",
     "loading_auth": "Connecting to OpenStreetMap...",

@@ -18,4 +18,14 @@ describe("iD.actions.DeleteMultiple", function () {
         expect(graph.hasEntity(w.id)).to.be.undefined;
         expect(graph.hasEntity(n.id)).to.be.undefined;
     });
+
+    describe("#disabled", function () {
+        it("returns the result of the first action that is disabled", function () {
+            var node     = iD.Node(),
+                relation = iD.Relation({members: [{id: 'w'}]}),
+                graph    = iD.Graph([node, relation]),
+                action   = iD.actions.DeleteMultiple([node.id, relation.id]);
+            expect(action.disabled(graph)).to.equal('incomplete_relation');
+        });
+    });
 });
