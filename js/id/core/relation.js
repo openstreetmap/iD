@@ -73,6 +73,12 @@ _.extend(iD.Relation.prototype, {
         return this.update({members: members});
     },
 
+    removeMember: function(index) {
+        var members = this.members.slice();
+        members.splice(index, 1);
+        return this.update({members: members});
+    },
+
     removeMembersWithID: function(id) {
         var members = _.reject(this.members, function(m) { return m.id === id; });
         return this.update({members: members});

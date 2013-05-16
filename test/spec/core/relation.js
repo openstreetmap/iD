@@ -128,6 +128,13 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#removeMember", function () {
+        it("removes the member at the specified index", function () {
+            var r = iD.Relation({members: [{id: 'a'}, {id: 'b'}, {id: 'c'}]});
+            expect(r.removeMember(1).members).to.eql([{id: 'a'}, {id: 'c'}]);
+        });
+    });
+
     describe("#removeMembersWithID", function () {
         it("removes members with the given ID", function () {
             var r = iD.Relation({members: [{id: 'a'}, {id: 'b'}, {id: 'a'}]});
