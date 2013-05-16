@@ -49,7 +49,7 @@ iD.ui.preset.wikipedia = function(field, context) {
             .call(titlecombo);
 
         link = selection.append('a')
-            .attr('class', 'wiki-link minor')
+            .attr('class', 'wiki-link button-input-action minor')
             .attr('target', '_blank');
         link.append('span')
                 .attr('class','icon out-link');
