@@ -29,7 +29,7 @@ iD.svg.Vertices = function(projection, context) {
             }
         }
 
-        function addSiblingAndChildVertices(id) {
+        ids.forEach(function(id) {
             var entity = context.hasEntity(id);
             if (entity && entity.type === 'node') {
                 vertices[entity.id] = entity;
@@ -39,10 +39,6 @@ iD.svg.Vertices = function(projection, context) {
             } else if (entity) {
                 addChildVertices(entity);
             }
-        }
-
-        ids.forEach(function(id) {
-            addSiblingAndChildVertices(id, 'vertex-selected');
         });
 
         return vertices;
