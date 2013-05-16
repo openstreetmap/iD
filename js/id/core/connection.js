@@ -100,11 +100,7 @@ iD.Connection = function() {
                 id: iD.Entity.id.fromOSM(nodeStr, attrs.id.nodeValue),
                 loc: [parseFloat(attrs.lon.nodeValue), parseFloat(attrs.lat.nodeValue)],
                 version: attrs.version.nodeValue,
-                changeset: attrs.changeset.nodeValue,
                 user: attrs.user && attrs.user.nodeValue,
-                uid: attrs.uid && attrs.uid.nodeValue,
-                visible: attrs.visible.nodeValue,
-                timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj)
             });
         },
@@ -114,11 +110,7 @@ iD.Connection = function() {
             return new iD.Way({
                 id: iD.Entity.id.fromOSM(wayStr, attrs.id.nodeValue),
                 version: attrs.version.nodeValue,
-                changeset: attrs.changeset.nodeValue,
                 user: attrs.user && attrs.user.nodeValue,
-                uid: attrs.uid && attrs.uid.nodeValue,
-                visible: attrs.visible.nodeValue,
-                timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj),
                 nodes: getNodes(obj)
             });
@@ -129,11 +121,7 @@ iD.Connection = function() {
             return new iD.Relation({
                 id: iD.Entity.id.fromOSM(relationStr, attrs.id.nodeValue),
                 version: attrs.version.nodeValue,
-                changeset: attrs.changeset.nodeValue,
                 user: attrs.user && attrs.user.nodeValue,
-                uid: attrs.uid && attrs.uid.nodeValue,
-                visible: attrs.visible.nodeValue,
-                timestamp: attrs.timestamp.nodeValue,
                 tags: getTags(obj),
                 members: getMembers(obj)
             });
