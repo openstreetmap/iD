@@ -148,9 +148,6 @@ iD.Map = function(context) {
         surface.selectAll('.layer *').remove();
     }
 
-    var translate3d = !iD.detect().opera &&
-        iD.util.stringQs(location.search.substring(1)).translate3d !== '0';
-
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
             if (!dblclickEnabled) {
@@ -180,9 +177,9 @@ iD.Map = function(context) {
 
         var transform =
             'scale(' + scale + ')' +
-            (translate3d ?
-                'translate3d(' + tX + 'px,' + tY + 'px, 0)' :
-                'translate(' + tX + 'px,' + tY + 'px)');
+            (iD.detect().opera ?
+                'translate(' + tX + 'px,' + tY + 'px)' :
+                'translate3d(' + tX + 'px,' + tY + 'px, 0)');
 
         transformed = true;
         supersurface.style(transformProp, transform);
