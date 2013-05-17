@@ -24,7 +24,7 @@ iD.ui.preset.localized = function(field, context) {
 
         translateButton.call(bootstrap.tooltip()
             .title(t('translate.translate'))
-            .placement('top'));
+            .placement('left'));
 
         localizedInputs = selection.append('div')
             .attr('class', 'localized-wrap');

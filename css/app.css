@@ -756,10 +756,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
     line-height: 50px;
+    -moz-transition: all 100ms;
+    -o-transition: all 100ms;
+    transition: all 100ms;
     }
 
 .grid-entry:hover .label {
-    background: none;
+    background: #ececec;
 }
 
 .grid-button-wrap button.tag-reference-button {
@@ -885,7 +888,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .tag-wrap .preset-icon-wrap {
     border-bottom: 1px solid #CCC;
-    background-color: #e8ebff;
+    background-color: #F6F6F6;
 }
 
 .tag-wrap .preset-icon-wrap::after {
@@ -1005,6 +1008,10 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
 
 .tag-wrap .tooltip.top .tooltip-arrow {
     border-top-color: #000;
+}
+
+.tag-wrap .tooltip.left .tooltip-arrow {
+    border-left-color: #000;
 }
 
 .tag-wrap .tooltip-inner {
@@ -2149,8 +2156,6 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .tooltip {
-    max-width: 200px;
-    min-width: 120px;
     position: absolute;
     display: none;
     color:#333;
@@ -2181,9 +2186,12 @@ img.wiki-image {
 
 .tooltip.left {
     margin-left: -20px;
+    text-align: right;
 }
 
 .tooltip-inner {
+    display: inline-block;
+    max-width: 200px;
     padding: 10px;
     font-weight: normal;
     background-color: white;
@@ -2277,7 +2285,6 @@ img.wiki-image {
     border-width: 0 5px 5px;
 }
 
-
 /* Exceptions for tooltips that are up against the edge of the screen */
 .add-point .tooltip {
     left: -20px !important; }
@@ -2288,12 +2295,9 @@ img.wiki-image {
 }
 
 .tooltip .keyhint-wrap {
-    background: #f6f6f6;
+    background: #F6F6F6;
     padding: 10px;
-    left: 0;
-    right: 0;
-    bottom: -42px;
-    position: absolute;
+    margin: 10px -10px -10px;
 }
 
 .tooltip-inner .keyhint {
@@ -2306,7 +2310,6 @@ img.wiki-image {
     position: relative;
     z-index: 1;
     text-align: left;
-    clear: both;
 }
 
 .tooltip-inner .keyhint::after {
