@@ -16,7 +16,9 @@ _.extend(iD.Node.prototype, {
     },
 
     geometry: function(graph) {
-        return graph.isPoi(this) ? 'point' : 'vertex';
+        return graph.transient(this, 'geometry', function() {
+            return graph.isPoi(this) ? 'point' : 'vertex';
+        });
     },
 
     move: function(loc) {

@@ -47,8 +47,12 @@ describe('iD.Relation', function () {
     });
 
     describe("#geometry", function () {
-        it("returns 'relation'", function () {
-            expect(iD.Relation().geometry()).to.equal('relation');
+        it("returns 'area' for multipolygons", function () {
+            expect(iD.Relation({tags: {type: 'multipolygon'}}).geometry(iD.Graph())).to.equal('area');
+        });
+
+        it("returns 'relation' for other relations", function () {
+            expect(iD.Relation().geometry(iD.Graph())).to.equal('relation');
         });
     });
 

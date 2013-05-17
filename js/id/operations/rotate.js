@@ -8,7 +8,7 @@ iD.operations.Rotate = function(selection, context) {
     operation.available = function() {
         return selection.length === 1 &&
             context.entity(entityId).type === 'way' &&
-            context.entity(entityId).geometry() === 'area';
+            context.geometry(entityId) === 'area';
     };
 
     operation.disabled = function() {

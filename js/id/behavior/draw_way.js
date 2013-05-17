@@ -1,6 +1,6 @@
 iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
-        isArea = way.geometry() === 'area',
+        isArea = context.geometry(wayId) === 'area',
         finished = false,
         annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :

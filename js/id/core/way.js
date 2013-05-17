@@ -70,8 +70,10 @@ _.extend(iD.Way.prototype, {
         return false;
     },
 
-    geometry: function() {
-        return this.isArea() ? 'area' : 'line';
+    geometry: function(graph) {
+        return graph.transient(this, 'geometry', function() {
+            return this.isArea() ? 'area' : 'line';
+        });
     },
 
     addNode: function(id, index) {

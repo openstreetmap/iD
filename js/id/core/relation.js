@@ -25,8 +25,10 @@ _.extend(iD.Relation.prototype, {
         });
     },
 
-    geometry: function() {
-        return this.isMultipolygon() ? 'area' : 'relation';
+    geometry: function(graph) {
+        return graph.transient(this, 'geometry', function() {
+            return this.isMultipolygon() ? 'area' : 'relation';
+        });
     },
 
     // Return the first member with the given role. A copy of the member object

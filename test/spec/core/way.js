@@ -176,11 +176,11 @@ describe('iD.Way', function() {
 
     describe("#geometry", function() {
         it("returns 'line' when the way is not an area", function () {
-            expect(iD.Way().geometry()).to.equal('line');
+            expect(iD.Way().geometry(iD.Graph())).to.equal('line');
         });
 
         it("returns 'area' when the way is an area", function () {
-            expect(iD.Way({tags: { area: 'yes' }}).geometry()).to.equal('area');
+            expect(iD.Way({tags: { area: 'yes' }}).geometry(iD.Graph())).to.equal('area');
         });
     });
 
