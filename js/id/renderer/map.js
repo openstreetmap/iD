@@ -168,12 +168,9 @@ iD.Map = function(context) {
             .translate(d3.event.translate)
             .scale(d3.event.scale / (2 * Math.PI));
 
-        var ascale = d3.event.scale;
-        var bscale = transformStart[0];
-        var scale = (ascale / bscale);
-
-        var tX = Math.round((d3.event.translate[0] / scale) - (transformStart[1][0]));
-        var tY = Math.round((d3.event.translate[1] / scale) - (transformStart[1][1]));
+        var scale = d3.event.scale / transformStart[0],
+            tX = Math.round(d3.event.translate[0] / scale - transformStart[1][0]),
+            tY = Math.round(d3.event.translate[1] / scale - transformStart[1][1]);
 
         var transform =
             'scale(' + scale + ')' +
