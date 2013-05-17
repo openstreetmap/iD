@@ -108,6 +108,14 @@ iD.Entity.prototype = {
         });
     },
 
+    // Returns the centroid of the area, in unprojected coordinates.
+    centroid: function(resolver) {
+        return resolver.transient(this, 'centroid', function() {
+            return iD.Entity.areaPath.projection().invert(
+                iD.Entity.areaPath.centroid(this.asGeoJSON(resolver, true)));
+        });
+    },
+
     hasInterestingTags: function() {
         return _.keys(this.tags).some(function(key) {
             return key != 'attribution' &&
