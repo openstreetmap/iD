@@ -135,16 +135,21 @@ iD.ui.preset.localized = function(field, context) {
             });
 
         innerWrap.transition()
-            .style('max-height', '0px')
-            .style('padding-top', '0px')
+            .style('margin-top','0')
+            .style('max-height', '0')
+            .style('padding', '0')
             .style('opacity', '0')
+            .style('border-width', '0')
             .transition()
             .duration(200)
-            .style('padding-top', '10px')
+            .style('margin-top','10px')
+            .style('border-width', '1px')
+            .style('padding', '10px')
             .style('max-height', '240px')
             .style('opacity', '1')
             .each('end', function(d) {
                 d3.select(this).style('max-height', '');
+                d3.select(this).style('overflow', 'visible');
             });;
 
         wraps.exit()

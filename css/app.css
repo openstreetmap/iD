@@ -1257,6 +1257,10 @@ input[type=number] {
 .form-field .localized-wrap .entry {
     position: relative;
     overflow: hidden;
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-width: 0;
+    border-radius: 4px;
 }
 
 .form-field .localized-wrap .entry::before {
@@ -1264,11 +1268,11 @@ input[type=number] {
     display: block;
     position: absolute;
     background:#ccc;
-    height: 10px;
+    height: 11px;
     width: 1px;
     left: 0;
     right: 0;
-    top: 0;
+    top: -11px;
     margin: auto;
 }
 
