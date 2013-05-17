@@ -2188,12 +2188,13 @@ img.wiki-image {
 
 .tooltip.left {
     margin-left: -20px;
-    text-align: right;
+    text-align: center;
 }
 
 .tooltip-inner {
     display: inline-block;
     max-width: 200px;
+    min-width: 80px;
     padding: 10px;
     font-weight: normal;
     background-color: white;
