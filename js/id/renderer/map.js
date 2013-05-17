@@ -133,17 +133,14 @@ iD.Map = function(context) {
             };
         }
 
-        if (all.length > 100000) {
-            editOff();
-        } else {
-            surface
-                .call(points, graph, all, filter)
-                .call(vertices, graph, all, filter, extent, map.zoom())
-                .call(lines, graph, all, filter)
-                .call(areas, graph, all, filter)
-                .call(midpoints, graph, all, filter, extent)
-                .call(labels, graph, all, filter, dimensions, !difference);
-        }
+        surface
+            .call(points, graph, all, filter)
+            .call(vertices, graph, all, filter, extent, map.zoom())
+            .call(lines, graph, all, filter)
+            .call(areas, graph, all, filter)
+            .call(midpoints, graph, all, filter, extent)
+            .call(labels, graph, all, filter, dimensions, !difference);
+
         dispatch.drawn(map);
     }
 
