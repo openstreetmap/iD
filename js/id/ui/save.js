@@ -54,8 +54,7 @@ iD.ui.Save = function(context) {
                         .append('p')
                         .text(err.responseText);
                 } else {
-                    history.reset();
-                    map.flush().redraw();
+                    context.flush();
                     success(e, changeset_id);
                 }
             });

@@ -79,6 +79,13 @@ window.iD = function () {
     context.changes = history.changes;
     context.intersects = history.intersects;
 
+    context.flush = function() {
+        history.reset();
+        connection.flush();
+        map.redraw();
+        return context;
+    };
+
     /* Graph */
     context.hasEntity = function(id) {
         return history.graph().hasEntity(id);

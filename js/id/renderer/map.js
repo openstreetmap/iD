@@ -404,12 +404,6 @@ iD.Map = function(context) {
         return newZoom;
     };
 
-    map.flush = function() {
-        context.connection().flush();
-        context.history().reset();
-        return map;
-    };
-
     map.editable = function() {
         return map.zoom() >= 16;
     };
