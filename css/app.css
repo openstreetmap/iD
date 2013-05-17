@@ -181,11 +181,11 @@ input.major {
     height:60px;
 }
 
-/* remove bottom border radius when combox is open */
-.combobox + div textarea:focus,
-.combobox + div input:focus {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+/* remove bottom border radius when combobox is open */
+.combobox + * textarea:focus,
+.combobox + * input:focus {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 /* tables */
@@ -953,6 +953,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border: 1px solid #CCC;
     border-top: 0;
     border-radius: 0 0 4px 4px;
+    overflow: hidden;
 }
 
 .form-field textarea {
@@ -1035,6 +1036,7 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
 }
 
 .preset-input-wrap .label {
+    height: 30px;
     background: #F6F6F6;
     padding: 5px;
 }
@@ -1180,7 +1182,7 @@ input[type=number] {
 }
 .radio-wrap button.remove .icon {
     position: absolute;
-    left: 2px;
+    left: 5px;
 }
 
 .radio-wrap button.remove::before {
@@ -1196,8 +1198,8 @@ input[type=number] {
 }
 
 .form-field .wiki-title ~ .combobox-carat {
-    margin-left: -20%;
-    margin-right: 10%;
+    margin-left: -18%;
+    margin-right: 9%;
 }
 
 .form-field .wiki-link {
