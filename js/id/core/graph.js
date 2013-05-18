@@ -140,6 +140,8 @@ iD.Graph.prototype = {
                 }
             }
         }
+
+        this.transients = {};
     },
 
     // Updates calculated properties (parentWays, parentRels) for the specified change

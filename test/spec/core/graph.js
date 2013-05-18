@@ -214,6 +214,22 @@ describe('iD.Graph', function() {
             expect(graph2.parentRelations(n)).to.eql([r1, r2, r3]);
         });
 
+        it("invalidates transients", function() {
+            var n = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w1', nodes: ['n']}),
+                w2 = iD.Way({id: 'w2', nodes: ['n']}),
+                graph = iD.Graph([n, w1]);
+
+            function numParents(entity) {
+                return graph.transient(entity, 'numParents', function() {
+                    return graph.parentWays(entity).length;
+                });
+            }
+
+            expect(numParents(n)).to.equal(1);
+            graph.rebase({w2: w2});
+            expect(numParents(n)).to.equal(2);
+        });
     });
 
     describe("#remove", function () {
