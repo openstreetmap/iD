@@ -142,6 +142,9 @@ iD.Graph.prototype = {
         }
 
         this.transients = {};
+
+        // this._childNodes is not updated, under the assumption that
+        // ways are always downloaded with their child nodes.
     },
 
     // Updates calculated properties (parentWays, parentRels) for the specified change
