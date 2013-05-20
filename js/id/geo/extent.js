@@ -35,6 +35,14 @@ _.extend(iD.geo.Extent.prototype, {
                obj[1][1] >= this[0][1];
     },
 
+    intersection: function(obj) {
+        if (!this.intersects(obj)) return new iD.geo.Extent();
+        return new iD.geo.Extent([Math.max(obj[0][0], this[0][0]),
+                                  Math.max(obj[0][1], this[0][1])],
+                                 [Math.min(obj[1][0], this[1][0]),
+                                  Math.min(obj[1][1], this[1][1])]);
+    },
+
     padByMeters: function(meters) {
         var dLat = meters / 111200,
             dLon = meters / 111200 / Math.abs(Math.cos(this.center()[1]));

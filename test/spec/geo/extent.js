@@ -109,4 +109,47 @@ describe("iD.geo.Extent", function () {
             expect(iD.geo.Extent([[6, 6], [7, 7]]).intersects([[0, 0], [5, 5]])).to.be.false;
         });
     });
+
+    describe("#intersection", function () {
+        it("returns an empty extent if self does not intersect with other", function () {
+            var a = iD.geo.Extent([0, 0], [5, 5]),
+                b = iD.geo.Extent([6, 6], [7, 7]);
+            expect(a.intersection(b)).to.eql(iD.geo.Extent());
+        });
+
+        it("returns the intersection of self with other (1)", function () {
+            var a = iD.geo.Extent([0, 0], [5, 5]),
+                b = iD.geo.Extent([3, 4], [7, 7]);
+            expect(a.intersection(b)).to.eql(iD.geo.Extent([3, 4], [5, 5]));
+            expect(b.intersection(a)).to.eql(iD.geo.Extent([3, 4], [5, 5]));
+        });
+
+        it("returns the intersection of self with other (2)", function () {
+            var a = iD.geo.Extent([0, 0], [5, 5]),
+                b = iD.geo.Extent([3, -4], [7, 2]);
+            expect(a.intersection(b)).to.eql(iD.geo.Extent([3, 0], [5, 2]));
+            expect(b.intersection(a)).to.eql(iD.geo.Extent([3, 0], [5, 2]));
+        });
+
+        it("returns the intersection of self with other (3)", function () {
+            var a = iD.geo.Extent([0, 0], [5, 5]),
+                b = iD.geo.Extent([3, 3], [4, 7]);
+            expect(a.intersection(b)).to.eql(iD.geo.Extent([3, 3], [4, 5]));
+            expect(b.intersection(a)).to.eql(iD.geo.Extent([3, 3], [4, 5]));
+        });
+
+        it("returns the intersection of self with other (4)", function () {
+            var a = iD.geo.Extent([0, 0], [5, 5]),
+                b = iD.geo.Extent([3, -2], [4, 2]);
+            expect(a.intersection(b)).to.eql(iD.geo.Extent([3, 0], [4, 2]));
+            expect(b.intersection(a)).to.eql(iD.geo.Extent([3, 0], [4, 2]));
+        });
+
+        it("returns the intersection of self with other (5)", function () {
+            var a = iD.geo.Extent([0, 0], [5, 5]),
+                b = iD.geo.Extent([1, 1], [2, 2]);
+            expect(a.intersection(b)).to.eql(iD.geo.Extent([1, 1], [2, 2]));
+            expect(b.intersection(a)).to.eql(iD.geo.Extent([1, 1], [2, 2]));
+        });
+    });
 });

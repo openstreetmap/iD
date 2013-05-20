@@ -41,7 +41,7 @@ iD.History = function(context) {
             return stack[index].graph;
         },
 
-        merge: function(entities) {
+        merge: function(entities, extent) {
 
             var base = stack[0].graph.base(),
                 newentities = Object.keys(entities).filter(function(i) {
@@ -54,7 +54,7 @@ iD.History = function(context) {
 
             tree.rebase(newentities);
 
-            dispatch.change();
+            dispatch.change(undefined, extent);
         },
 
         perform: function() {

@@ -275,40 +275,44 @@ iD.Connection = function() {
 
         if (off) return;
 
-        var scaleExtent = [16, 16],
-            s = projection.scale() * 2 * Math.PI,
-            tiles = d3.geo.tile()
-                .scaleExtent(scaleExtent)
-                .scale(s)
-                .size(dimensions)
-                .translate(projection.translate())(),
+        var s = projection.scale() * 2 * Math.PI,
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
-            rz = Math.max(scaleExtent[0], Math.min(scaleExtent[1], Math.floor(z))),
-            ts = 256 * Math.pow(2, z - rz),
-            tile_origin = [
+            ts = 256 * Math.pow(2, z - 16),
+            origin = [
                 s / 2 - projection.translate()[0],
                 s / 2 - projection.translate()[1]];
 
-        function bboxUrl(tile) {
-            var x = (tile[0] * ts) - tile_origin[0];
-            var y = (tile[1] * ts) - tile_origin[1];
-            var b = [
-                projection.invert([x, y]),
-                projection.invert([x + ts, y + ts])];
+        var tiles = d3.geo.tile()
+            .scaleExtent([16, 16])
+            .scale(s)
+            .size(dimensions)
+            .translate(projection.translate())()
+            .map(function(tile) {
+                var x = tile[0] * ts - origin[0],
+                    y = tile[1] * ts - origin[1];
 
-            return url + '/api/0.6/map?bbox=' + [b[0][0], b[1][1], b[1][0], b[0][1]];
+                return {
+                    id: tile.toString(),
+                    extent: iD.geo.Extent(
+                        projection.invert([x, y + ts]),
+                        projection.invert([x + ts, y]))
+                }
+            });
+
+        function bboxUrl(tile) {
+            return url + '/api/0.6/map?bbox=' + tile.extent.toParam();
         }
 
         _.filter(inflight, function(v, i) {
             var wanted = _.find(tiles, function(tile) {
-                return i === tile.toString();
+                return i === tile.id;
             });
             if (!wanted) delete inflight[i];
             return !wanted;
         }).map(abortRequest);
 
         tiles.forEach(function(tile) {
-            var id = tile.toString();
+            var id = tile.id;
 
             if (loadedTiles[id] || inflight[id]) return;
 
@@ -320,7 +324,7 @@ iD.Connection = function() {
                 loadedTiles[id] = true;
                 delete inflight[id];
 
-                event.load(err, parsed);
+                event.load(err, _.extend({data: parsed}, tile));
 
                 if (_.isEmpty(inflight)) {
                     event.loaded();

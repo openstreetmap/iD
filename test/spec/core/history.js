@@ -23,10 +23,11 @@ describe("iD.History", function () {
             expect(history.graph().entity('n')).to.equal(n);
         });
 
-        it("emits a change event", function () {
+        it("emits a change event with the specified extent", function () {
+            var extent = {};
             history.on('change', spy);
-            history.merge({});
-            expect(spy).to.have.been.called;
+            history.merge({}, extent);
+            expect(spy).to.have.been.calledWith(undefined, extent);
         });
     });
 

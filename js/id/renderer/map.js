@@ -96,16 +96,12 @@ iD.Map = function(context) {
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
 
-    function drawVector(difference) {
+    function drawVector(difference, extent) {
         var filter, all,
-            extent = map.extent(),
             graph = context.graph();
 
-        if (!difference) {
-            all = context.intersects(extent);
-            filter = d3.functor(true);
-        } else {
-            var complete = difference.complete(extent);
+        if (difference) {
+            var complete = difference.complete(map.extent());
             all = _.compact(_.values(complete));
             filter = function(d) {
                 if (d.type === 'midpoint') {
@@ -131,15 +127,24 @@ iD.Map = function(context) {
                     return d.id in complete;
                 }
             };
+
+        } else if (extent) {
+            all = context.intersects(map.extent().intersection(extent));
+            var set = d3.set(_.pluck(all, 'id'));
+            filter = function(d) { return set.has(d.id); };
+
+        } else {
+            all = context.intersects(map.extent());
+            filter = d3.functor(true);
         }
 
         surface
             .call(points, graph, all, filter)
-            .call(vertices, graph, all, filter, extent, map.zoom())
+            .call(vertices, graph, all, filter, map.extent(), map.zoom())
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
-            .call(midpoints, graph, all, filter, extent)
-            .call(labels, graph, all, filter, dimensions, !difference);
+            .call(midpoints, graph, all, filter, map.extent())
+            .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
         dispatch.drawn(map);
     }
@@ -192,7 +197,7 @@ iD.Map = function(context) {
         return true;
     }
 
-    function redraw(difference) {
+    function redraw(difference, extent) {
 
         if (!surface) return;
 
@@ -202,7 +207,7 @@ iD.Map = function(context) {
         // It would result in artifacts where differenced entities are redrawn with
         // one transform and unchanged entities with another.
         if (resetTransform()) {
-            difference = undefined;
+            difference = extent = undefined;
         }
 
         var zoom = String(~~map.zoom());
@@ -218,7 +223,7 @@ iD.Map = function(context) {
 
         if (map.editable()) {
             context.connection().loadTiles(projection, dimensions);
-            drawVector(difference);
+            drawVector(difference, extent);
         } else {
             editOff();
         }
