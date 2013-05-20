@@ -34,10 +34,7 @@ iD.ui.Contributors = function(context) {
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .attr('href', function() {
-                    var ext = context.map().extent();
-                    return 'http://www.openstreetmap.org/browse/changesets?bbox=' + [
-                        ext[0][0], ext[0][1],
-                        ext[1][0], ext[1][1]];
+                    return context.connection().changesetsURL(context.map().extent());
                 })
                 .text(u.length - limit + 1);
 

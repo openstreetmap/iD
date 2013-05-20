@@ -25,6 +25,10 @@ iD.Connection = function() {
         return url + '/browse/changeset/' + changesetId;
     };
 
+    connection.changesetsURL = function(extent) {
+        return url + '/browse/changesets?bbox=' + extent.toParam();
+    };
+
     connection.entityURL = function(entity) {
         return url + '/browse/' + entity.type + '/' + entity.osmId();
     };

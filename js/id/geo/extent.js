@@ -41,5 +41,9 @@ _.extend(iD.geo.Extent.prototype, {
         return iD.geo.Extent(
                 [this[0][0] - dLon, this[0][1] - dLat],
                 [this[1][0] + dLon, this[1][1] + dLat]);
+    },
+
+    toParam: function() {
+        return [this[0][0], this[0][1], this[1][0], this[1][1]].join(',');
     }
 });
