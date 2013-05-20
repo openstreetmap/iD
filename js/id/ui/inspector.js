@@ -60,9 +60,11 @@ iD.ui.Inspector = function(context, entity) {
                 presetLayer.call(presetList);
             });
 
-        var tagless = _.without(Object.keys(entity.tags), 'area').length === 0;
+        var unused =
+            _.without(Object.keys(entity.tags), 'area').length === 0 &&
+            context.graph().parentRelations(entity).length === 0;
 
-        if (tagless) {
+        if (unused) {
             panewrap.style('right', '-100%');
             presetLayer.call(presetList);
         } else {
