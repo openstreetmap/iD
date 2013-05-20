@@ -147,6 +147,7 @@ window.iD = function () {
     context.surface = function() { return map.surface; };
     context.mouse = map.mouse;
     context.projection = map.projection;
+    context.extent = map.extent;
     context.redraw = map.redraw;
     context.pan = map.pan;
     context.zoomIn = map.zoomIn;

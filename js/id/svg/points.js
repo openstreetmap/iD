@@ -10,15 +10,8 @@ iD.svg.Points = function(projection, context) {
         return b.loc[1] - a.loc[1];
     }
 
-    return function drawPoints(surface, graph, entities, filter) {
-        var points = [];
-
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
-            if (entity.geometry(graph) === 'point') {
-                points.push(entity);
-            }
-        }
+    function drawPoints(surface, points) {
+        points = points || drawPoints.points();
 
         if (points.length > 100) {
             return surface.select('.layer-hit').selectAll('g.point').remove();
@@ -27,7 +20,6 @@ iD.svg.Points = function(projection, context) {
         points.sort(sortY);
 
         var groups = surface.select('.layer-hit').selectAll('g.point')
-            .filter(filter)
             .data(points, iD.Entity.key);
 
         var group = groups.enter()
@@ -55,11 +47,28 @@ iD.svg.Points = function(projection, context) {
         groups.select('.stroke');
         groups.select('.icon')
             .attr('xlink:href', function(entity) {
-                var preset = context.presets().match(entity, graph);
+                var preset = context.presets().match(entity, context.graph());
                 return preset.icon ? '#maki-' + preset.icon + '-12' : '';
             });
 
         groups.exit()
             .remove();
+    }
+
+    drawPoints.points = function() {
+        var graph = context.graph(),
+            entities = context.intersects(context.extent()),
+            points = [];
+
+        for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+            if (entity.geometry(graph) === 'point') {
+                points.push(entity);
+            }
+        }
+
+        return points;
     };
+
+    return drawPoints;
 };
