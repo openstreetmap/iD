@@ -888,15 +888,6 @@ text.point {
         ) 9 9, auto;
 }
 
-#map:active {
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-grabbing.png) 9 9, auto; /* FF */
-    cursor: -webkit-image-set(
-        url(img/cursor-grabbing.png) 1x,
-        url(img/cursor-grabbing2x.png) 2x
-        ) 9 9, auto;
-}
-
 .mode-browse .point,
 .mode-select .point {
     cursor: pointer; /* Opera */
