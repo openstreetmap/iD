@@ -18,7 +18,7 @@ iD.svg.TagClasses = function() {
 
             var t = tags(entity);
             for (var k in t) {
-                if (!keys.has(k)) continue;
+                if (!keys.has(k) || t[k] === 'no') continue;
                 classes += ' tag-' + k + ' tag-' + k + '-' + t[k];
             }
 

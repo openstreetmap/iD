@@ -19,6 +19,13 @@ describe("iD.svg.TagClasses", function () {
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
 
+    it('adds no bridge=no tags', function() {
+        selection
+            .datum(iD.Entity({tags: {bridge: 'no'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection.attr('class')).to.equal(null);
+    });
+
     it('adds tags based on the result of the `tags` accessor', function() {
         selection
             .datum(iD.Entity())
