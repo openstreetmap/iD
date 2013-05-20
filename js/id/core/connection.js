@@ -51,7 +51,7 @@ iD.Connection = function() {
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
-                event.load(err, entities);
+                event.load(err, {data: entities});
                 if (callback) callback(err, entities && entities[id]);
             });
     };
