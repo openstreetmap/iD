@@ -182,18 +182,21 @@ window.iD = function () {
         return context;
     };
 
-    var q = iD.util.stringQs(location.hash.substring(1)), detected = false;
-    if (q.layer && q.layer.indexOf('custom:') === 0) {
+    var q = iD.util.stringQs(location.hash.substring(1)),
+        detected = false,
+        background = q.background || q.layer;
+
+    if (background && background.indexOf('custom:') === 0) {
         context.layers()[0]
            .source(iD.BackgroundSource.template({
-                template: q.layer.replace(/^custom:/, ''),
+                template: background.replace(/^custom:/, ''),
                 name: 'Custom'
             }));
         detected = true;
-    } else if (q.layer) {
+    } else if (background) {
         context.layers()[0]
            .source(_.find(backgroundSources, function(l) {
-               if (l.data.sourcetag === q.layer) {
+               if (l.data.sourcetag === background) {
                    detected = true;
                    return true;
                }
