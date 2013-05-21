@@ -125,12 +125,8 @@ iD.ui.preset = function(context, entity, preset) {
             .attr('for', function(field) { return 'preset-input-' + field.id; })
             .text(function(field) { return field.label(); });
 
-        label.append('button')
-            .attr('class', 'tag-reference-button minor')
-            .attr('tabindex', -1)
-            .on('click', toggleReference)
-            .append('span')
-            .attr('class', 'icon inspect');
+        label.call(iD.ui.TagReferenceButton()
+            .on('click', toggleReference));
 
         label.append('button')
             .attr('class', 'modified-icon minor')

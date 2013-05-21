@@ -100,9 +100,7 @@ iD.ui.Taglist = function(context, entity) {
             .append('span')
             .attr('class', 'icon delete');
 
-        row.append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'tag-help-button minor')
+        row.call(iD.ui.TagReferenceButton()
             .on('click', function(tag) {
                 tags.forEach(function(other) {
                     if (other.key === tag.key) {
@@ -111,9 +109,7 @@ iD.ui.Taglist = function(context, entity) {
                         other.reference.hide();
                     }
                 });
-            })
-            .append('span')
-            .attr('class', 'icon inspect');
+            }));
 
         row.each(function(tag) {
             d3.select(this).call(tag.reference);

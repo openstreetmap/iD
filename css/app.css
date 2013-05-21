@@ -1413,15 +1413,15 @@ div.combobox {
     border-top-width: 1px;
 }
 
-.tag-row:first-child button.tag-help-button {
+.tag-row:first-child .tag-reference-button {
     border-top-right-radius: 4px;
 }
 
-.tag-row:last-child button.tag-help-button {
+.tag-row:last-child .tag-reference-button {
     border-bottom-right-radius: 4px;
 }
 
-.tag-row button.tag-help-button {
+.tag-row .tag-reference-button {
     right: 0;
 }
 

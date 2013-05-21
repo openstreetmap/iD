@@ -214,12 +214,8 @@ iD.ui.PresetGrid = function(context, entity) {
                 .text(function(d) { return d.name(); });
 
             entered.filter(function(d) { return !d.members; })
-                .append('button')
-                .attr('tabindex', -1)
-                .attr('class', 'tag-reference-button minor')
-                .on('click', helpClick)
-                .append('span')
-                .attr('class', 'icon inspect');
+                .call(iD.ui.TagReferenceButton()
+                    .on('click', helpClick));
 
             entries.order();
         }
