@@ -126,8 +126,12 @@ iD.ui.preset.localized = function(field, context) {
                         t[key(d.lang)] = '';
                         event.change(t);
                         d3.select(this.parentNode)
+                            .style('top','0')
+                            .style('max-height','240px')
+                            .style('overflow','hidden')
                             .transition()
                             .style('opacity', '0')
+                            .style('max-height','0px')
                             .remove();
                     })
                     .append('span').attr('class', 'icon delete');
@@ -153,9 +157,13 @@ iD.ui.preset.localized = function(field, context) {
             });;
 
         wraps.exit()
-            .style('opacity', '1')
+            .style('top','0')
+            .style('overflow','hidden')
+            .style('max-height','240px')
             .transition()
+            .style('max-height','0')
             .style('opacity', '0')
+            .style('top','-10px')
             .remove();
 
         selection.selectAll('.entry').select('.localized-lang').property('value', function(d) {
