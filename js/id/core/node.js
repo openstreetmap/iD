@@ -28,7 +28,11 @@ _.extend(iD.Node.prototype, {
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
-                return parent.geometry(resolver) === 'line';
+                return (parent.tags.highway ||
+                    parent.tags.waterway ||
+                    parent.tags.railway ||
+                    parent.tags.aeroway) &&
+                    parent.geometry(resolver) === 'line';
             }).length > 1;
         });
     },

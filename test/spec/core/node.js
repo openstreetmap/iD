@@ -43,6 +43,24 @@ describe('iD.Node', function () {
         });
     });
 
+    describe("#isIntersection", function () {
+        it("returns true for a node shared by more than one highway", function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
+                w2 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isIntersection(graph)).to.equal(true);
+        });
+
+        it("returns true for a node shared by more two non-highways", function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id]}),
+                w2 = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isIntersection(graph)).to.equal(false);
+        });
+    });
+
     describe("#asJXON", function () {
         it('converts a node to jxon', function() {
             var node = iD.Node({id: 'n-1', loc: [-77, 38], tags: {amenity: 'cafe'}});
