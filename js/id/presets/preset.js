@@ -45,6 +45,16 @@ iD.presets.Preset = function(id, preset, fields) {
         return preset.t('terms', {'default': ''}).split(',');
     };
 
+    preset.reference = function() {
+        var reference = {key: Object.keys(preset.tags)[0]};
+
+        if (preset.tags[reference.key] !== '*') {
+            reference.value = preset.tags[reference.key];
+        }
+
+        return reference;
+    };
+
     preset.removeTags = function(tags, geometry) {
         tags = _.omit(tags, _.keys(preset.tags));
 

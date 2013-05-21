@@ -64,8 +64,11 @@ iD.ui.Inspector = function(context, entity) {
                     .transition()
                     .style('right', right);
 
-                presetGrid.autofocus(true);
-                presetLayer.call(presetGrid, preset);
+                presetGrid
+                    .current(preset)
+                    .autofocus(true);
+
+                presetLayer.call(presetGrid);
             });
 
         var tagless = _.without(Object.keys(entity.tags), 'area').length === 0;
