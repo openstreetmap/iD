@@ -184,11 +184,7 @@ iD.ui.PresetList = function(context, entity) {
                 .text(preset.name());
 
             wrap.call(item.reference.button);
-
-            selection.append('div')
-                .attr('class', 'preset-inspect col12')
-                .style('max-height', '200px')
-                .call(item.reference.body);
+            selection.call(item.reference.body);
         }
 
         item.choose = function() {

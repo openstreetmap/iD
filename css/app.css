@@ -1441,10 +1441,6 @@ div.combobox {
 
 /* Tag reference */
 
-.preset-inspect {
-    position: relative;
-}
-
 .tag-reference-loading .icon {
     background-image: url(img/mini-loader.gif);
     background-position: 0 0;
@@ -1463,6 +1459,11 @@ div.combobox {
     margin-top: 5px;
     margin-bottom: 5px;
     display: block;
+}
+
+.preset-list .tag-reference-body {
+    position: relative;
+    width: 100%;
 }
 
 .additional-tags .tag-reference-body {
