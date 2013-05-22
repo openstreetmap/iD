@@ -2301,7 +2301,7 @@ img.wiki-image {
     left: 60px;
 }
 
-.tooltip .keyhint-wrap {
+.keyhint-wrap {
     background: #F6F6F6;
     padding: 10px;
     margin: 10px -10px -10px;
@@ -2333,7 +2333,7 @@ img.wiki-image {
 }
 
 .radial-menu-tooltip {
-    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 0.8;
     display: none;
     position: absolute;
     width: 200px;
