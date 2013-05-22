@@ -1,9 +1,9 @@
-iD.ui.PresetGrid = function(context, entity) {
+iD.ui.PresetList = function(context, entity) {
     var event = d3.dispatch('choose', 'close'),
         presets, current,
         autofocus = false;
 
-    function presetGrid(selection) {
+    function presetList(selection) {
         var geometry = entity.geometry(context.graph());
         presets = context.presets().matchGeometry(geometry);
 
@@ -208,17 +208,17 @@ iD.ui.PresetGrid = function(context, entity) {
         return item;
     }
 
-    presetGrid.autofocus = function(_) {
+    presetList.autofocus = function(_) {
         if (!arguments.length) return autofocus;
         autofocus = _;
-        return presetGrid;
+        return presetList;
     };
 
-    presetGrid.current = function(_) {
+    presetList.current = function(_) {
         if (!arguments.length) return current;
         current = _;
-        return presetGrid;
+        return presetList;
     };
 
-    return d3.rebind(presetGrid, event, 'on');
+    return d3.rebind(presetList, event, 'on');
 };

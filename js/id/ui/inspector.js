@@ -41,7 +41,7 @@ iD.ui.Inspector = function(context, entity) {
             .append('div')
             .classed('pane tag-pane', true);
 
-        var presetGrid = iD.ui.PresetGrid(context, entity)
+        var presetList = iD.ui.PresetList(context, entity)
             .autofocus(newFeature)
             .on('close', browse)
             .on('choose', function(preset) {
@@ -64,18 +64,18 @@ iD.ui.Inspector = function(context, entity) {
                     .transition()
                     .style('right', right);
 
-                presetGrid
+                presetList
                     .current(preset)
                     .autofocus(true);
 
-                presetLayer.call(presetGrid);
+                presetLayer.call(presetList);
             });
 
         var tagless = _.without(Object.keys(entity.tags), 'area').length === 0;
 
         if (tagless) {
             panewrap.style('right', '-100%');
-            presetLayer.call(presetGrid);
+            presetLayer.call(presetList);
         } else {
             panewrap.style('right', '-0%');
             tagLayer.call(tagEditor);
