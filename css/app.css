@@ -828,10 +828,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Preset icon colors */
 
-.inspector-body-line .icon.feature-marker-stroked {
-    top: 30px;
-}
-
 .preset-icon-fill.icon-area {
     cursor: inherit;
     height: 45px;

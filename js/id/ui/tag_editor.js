@@ -65,7 +65,7 @@ iD.ui.TagEditor = function(context, entity) {
             .attr('class', 'icon close');
 
         var editorwrap = selection.append('div')
-            .attr('class', 'tag-wrap inspector-body fillL2 inspector-body-' + geometry);
+            .attr('class', 'tag-wrap inspector-body fillL2');
 
         editorwrap.append('div')
             .attr('class', 'col12 inspector-inner preset-icon-wrap')
