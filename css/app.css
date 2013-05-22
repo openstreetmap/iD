@@ -643,6 +643,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 100%;
     overflow: hidden;
     z-index: 2;
+    background: #f6f6f6;
 }
 
 .inspector-wrap {

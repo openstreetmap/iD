@@ -15,7 +15,7 @@ iD.ui = function(context) {
 
         container.append('div')
             .attr('id', 'sidebar')
-            .attr('class', 'col4 fillL2')
+            .attr('class', 'col4')
             .call(iD.ui.Sidebar(context));
 
         var m = container.append('div')
