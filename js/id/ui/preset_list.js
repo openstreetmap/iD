@@ -183,13 +183,12 @@ iD.ui.PresetList = function(context, entity) {
                 .attr('class', 'label')
                 .text(preset.name());
 
-            wrap.call(iD.ui.TagReferenceButton()
-                .on('click', item.help));
+            wrap.call(item.reference.button);
 
             selection.append('div')
                 .attr('class', 'preset-inspect col12')
                 .style('max-height', '200px')
-                .call(item.reference);
+                .call(item.reference.body);
         }
 
         item.choose = function() {

@@ -81,15 +81,6 @@ iD.ui.preset = function(context, entity, preset) {
         event.change(t);
     }
 
-    function toggleReference(field) {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
-
-        field.reference.toggle();
-
-        render();
-    }
-
     function render() {
         var selection = formwrap.selectAll('.form-field')
             .data(shown(), fieldKey);
@@ -119,8 +110,10 @@ iD.ui.preset = function(context, entity, preset) {
             .attr('for', function(field) { return 'preset-input-' + field.id; })
             .text(function(field) { return field.label(); });
 
-        label.call(iD.ui.TagReferenceButton()
-            .on('click', toggleReference));
+        label.each(function(field) {
+            d3.select(this)
+                .call(field.reference.button);
+        });
 
         label.append('button')
             .attr('class', 'modified-icon minor')
@@ -132,7 +125,7 @@ iD.ui.preset = function(context, entity, preset) {
         enter.each(function(field) {
             d3.select(this)
                 .call(field.input)
-                .call(field.reference);
+                .call(field.reference.body);
         });
 
         selection

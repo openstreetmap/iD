@@ -100,13 +100,10 @@ iD.ui.Taglist = function(context, entity) {
             .append('span')
             .attr('class', 'icon delete');
 
-        row.call(iD.ui.TagReferenceButton()
-            .on('click', function(tag) {
-                tag.reference.toggle();
-            }));
-
         row.each(function(tag) {
-            d3.select(this).call(tag.reference);
+            d3.select(this)
+                .call(tag.reference.button)
+                .call(tag.reference.body);
         });
 
         return li;

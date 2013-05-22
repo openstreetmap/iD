@@ -1445,29 +1445,28 @@ div.combobox {
     position: relative;
 }
 
-.tag-help {
+.tag-reference-loading .icon {
+    background-image: url(img/mini-loader.gif);
+    background-position: 0 0;
+}
+
+.tag-reference-body {
     overflow: hidden;
 }
 
-.tag-help a {
+.tag-reference-body p,
+.tag-reference-body img {
+    padding-top: 10px;
+}
+
+.tag-reference-body a {
     margin-top: 5px;
+    margin-bottom: 5px;
     display: block;
 }
 
-.grid-pane .tag-reference-wrap {
-    padding: 10px 0 20px 0;
-}
-
-.tag-pane .tag-reference-wrap {
-    padding-top: 20px;
-}
-
-.additional-tags .tag-reference-wrap {
+.additional-tags .tag-reference-body {
     border-bottom: 1px solid #ccc;
-    padding: 20px 0;
-}
-
-.additional-tags div.tag-help {
     float: left;
     width: 100%;
 }
