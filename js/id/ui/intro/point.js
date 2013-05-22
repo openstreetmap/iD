@@ -40,18 +40,18 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', null);
 
             setTimeout(function() {
-                reveal('.preset-grid-search-wrap input', 'intro.points.search');
-                d3.select('.preset-grid-search-wrap input').on('keyup.intro', keySearch);
+                reveal('.preset-search-input', 'intro.points.search');
+                d3.select('.preset-search-input').on('keyup.intro', keySearch);
             }, 500);
         }
 
         function keySearch() {
-            var first = d3.select('.grid-button-wrap:first-child');
-            if (first.datum().id === 'amenity/cafe') {
-                reveal(first.select('.grid-entry').node(), 'intro.points.choose');
+            var first = d3.select('.preset-list-item:first-child');
+            if (first.classed('preset-amenity-cafe')) {
+                reveal(first.select('.preset-list-button').node(), 'intro.points.choose');
                 d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
 
-                d3.select('.preset-grid-search-wrap input').on('keydown.intro', function() {
+                d3.select('.preset-search-input').on('keydown.intro', function() {
                     // Prevent search from updating and changing the grid
                     d3.event.stopPropagation();
                     d3.event.preventDefault();
@@ -68,7 +68,7 @@ iD.ui.intro.point = function(context, reveal) {
         }
 
         function closeEditor() {
-            d3.select('.preset-grid-search-wrap input').on('keydown.intro', null);
+            d3.select('.preset-search-input').on('keydown.intro', null);
             context.history().on('change.intro', null);
             reveal('.tag-pane', 'intro.points.close');
         }
@@ -138,7 +138,7 @@ iD.ui.intro.point = function(context, reveal) {
         context.on('enter.intro', null);
         context.map().on('move.intro', null);
         context.history().on('change.intro', null);
-        d3.select('.preset-grid-search-wrap input').on('keyup.intro', null).on('keydown.intro', null);
+        d3.select('.preset-search-input').on('keyup.intro', null).on('keydown.intro', null);
     };
 
     return d3.rebind(step, event, 'on');

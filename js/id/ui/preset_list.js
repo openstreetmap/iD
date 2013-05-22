@@ -53,57 +53,57 @@ iD.ui.PresetList = function(context, entity) {
             // enter
             var value = search.property('value');
             if (d3.event.keyCode === 13 && value.length) {
-                grid.selectAll('.grid-entry:first-child').datum().choose();
+                list.selectAll('.preset-list-item:first-child').datum().choose();
             } else {
-                grid.classed('filtered', value.length);
+                list.classed('filtered', value.length);
                 if (value.length) {
                     var results = presets.search(value);
                     message.text(t('inspector.results', {
                         n: results.collection.length,
                         search: value
                     }));
-                    grid.call(drawGrid, results);
+                    list.call(drawList, results);
                 } else {
-                    grid.call(drawGrid, context.presets().defaults(geometry, 36));
+                    list.call(drawList, context.presets().defaults(geometry, 36));
                 }
             }
         }
 
-        var searchwrap = selection.append('div')
-            .attr('class', 'preset-grid-search-wrap');
+        var searchWrap = selection.append('div')
+            .attr('class', 'preset-search');
 
-        var search = searchwrap.append('input')
-            .attr('class', 'major')
+        var search = selection.append('input')
+            .attr('class', 'preset-search-input major')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .on('keydown', keydown)
             .on('keyup', keyup);
 
-        searchwrap.append('span')
-            .attr('class', 'icon search');
+        searchWrap.append('span')
+            .attr('class', 'preset-search-icon icon search');
 
         if (autofocus) {
             search.node().focus();
         }
 
-        var gridwrap = selection.append('div')
+        var listWrap = selection.append('div')
             .attr('class', 'fillL2 inspector-body inspector-body-' + geometry);
 
-        var grid = gridwrap.append('div')
-            .attr('class', 'preset-grid fillL cf')
-            .call(drawGrid, context.presets().defaults(geometry, 36));
+        var list = listWrap.append('div')
+            .attr('class', 'preset-list fillL cf')
+            .call(drawList, context.presets().defaults(geometry, 36));
     }
 
-    function drawGrid(grid, presets) {
+    function drawList(list, presets) {
         var collection = presets.collection.map(function(preset) {
             return preset.members ? CategoryItem(preset) : PresetItem(preset)
         });
 
-        var items = grid.selectAll('.preset-item')
+        var items = list.selectAll('.preset-list-item')
             .data(collection, function(d) { return d.preset.id; });
 
         items.enter().append('div')
-            .attr('class', 'preset-item')
+            .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
             .classed('current', function(item) { return item.preset === current; })
             .each(function(item) {
                 d3.select(this).call(item);
@@ -119,15 +119,15 @@ iD.ui.PresetList = function(context, entity) {
     }
 
     function CategoryItem(preset) {
-        var box, subgrid, shown = false;
+        var box, sublist, shown = false;
 
         function item(selection) {
             var wrap = selection.append('div')
-                .attr('class', 'grid-button-wrap category col12');
+                .attr('class', 'preset-list-button-wrap category col12');
 
             wrap.append('button')
                 .datum(preset)
-                .attr('class', 'grid-entry')
+                .attr('class', 'preset-list-button')
                 .call(iD.ui.PresetIcon(context.geometry(entity.id)))
                 .on('click', item.choose)
                 .append('div')
@@ -141,8 +141,8 @@ iD.ui.PresetList = function(context, entity) {
             box.append('div')
                 .attr('class', 'arrow');
 
-            subgrid = box.append('div')
-                .attr('class', 'preset-grid fillL3 cf fl');
+            sublist = box.append('div')
+                .attr('class', 'preset-list fillL3 cf fl');
         }
 
         item.choose = function() {
@@ -155,7 +155,7 @@ iD.ui.PresetList = function(context, entity) {
                     .style('padding-bottom', '0');
             } else {
                 shown = true;
-                subgrid.call(drawGrid, preset.members);
+                sublist.call(drawList, preset.members);
                 box.transition()
                     .duration(200)
                     .style('opacity', '1')
@@ -172,11 +172,11 @@ iD.ui.PresetList = function(context, entity) {
     function PresetItem(preset) {
         function item(selection) {
             var wrap = selection.append('div')
-                .attr('class', 'grid-button-wrap col12');
+                .attr('class', 'preset-list-button-wrap col12');
 
             wrap.append('button')
                 .datum(preset)
-                .attr('class', 'grid-entry')
+                .attr('class', 'preset-list-button')
                 .call(iD.ui.PresetIcon(context.geometry(entity.id)))
                 .on('click', item.choose)
                 .append('div')

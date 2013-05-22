@@ -97,7 +97,7 @@ iD.ui.intro.line = function(context, reveal) {
 
             timeout(function() {
                 d3.select('#curtain').style('pointer-events', 'none');
-                var road = d3.select('.preset-grid .grid-entry').filter(function(d) {
+                var road = d3.select('.preset-list .preset-list-button').filter(function(d) {
                     return d.id === 'category-road';
                 });
                 reveal(road.node(), 'intro.lines.road');
@@ -109,7 +109,7 @@ iD.ui.intro.line = function(context, reveal) {
             timeout(function() {
                 var grid = d3.select('.subgrid');
                 reveal(grid.node(),  'intro.lines.residential');
-                grid.selectAll('.grid-entry').filter(function(d) {
+                grid.selectAll('.preset-list-button').filter(function(d) {
                     return d.id === 'highway/residential';
                 }).one('click.intro', roadDetails);
             }, 200);

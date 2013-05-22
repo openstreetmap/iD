@@ -703,25 +703,25 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Preset grid  */
 
-.preset-grid  {
+.preset-list  {
     width:100%;
     padding: 20px 20px 10px 20px;
     border-bottom: 1px solid #ccc;
 }
 
-.grid-button-wrap {
+.preset-list-button-wrap {
     margin-bottom: 10px;
     height: 60px;
 }
 
-.grid-entry {
+.preset-list-button {
     width: 100%;
     height: 100%;
     position: relative;
     border: 1px solid #ccc;
 }
 
-.preset-grid.filtered .grid-button-wrap:first-child .grid-entry {
+.preset-list.filtered .preset-list-item:first-child .preset-list-button {
     background: #ececec;
 }
 
@@ -737,7 +737,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     left: 0;
 }
 
-.grid-entry .label {
+.preset-list-button .label {
     background-color: #f6f6f6;
     text-align: left;
     position: absolute;
@@ -757,11 +757,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 0 3px 3px 0;
     }
 
-.grid-entry:hover .label {
+.preset-list-button:hover .label {
     background-color: #ececec;
 }
 
-.grid-button-wrap button.tag-reference-button {
+.preset-list-item button.tag-reference-button {
     float: right;
     position: static;
     margin-top: -60px;
@@ -770,13 +770,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 0 3px 3px 0;
 }
 
-.current .grid-entry,
-.current .grid-entry .label {
+.current .preset-list-button,
+.current .preset-list-button .label {
     background-color: #E8EBFF;
 }
 
-.category .grid-entry:after,
-.category .grid-entry:before {
+.category .preset-list-button:after,
+.category .preset-list-button:before {
     content: "";
     position: absolute;
     top: -5px;
@@ -787,11 +787,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 6px;
 }
 
-.category .grid-entry:before {
+.category .preset-list-button:before {
     top: -3px;
 }
 
-.preset-grid-search-wrap .icon {
+.grid-pane .preset-search-icon {
     display: block;
     position: absolute;
     left: 10px;
@@ -799,7 +799,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     pointer-events: none;
 }
 
-.preset-grid-search-wrap input {
+.grid-pane .preset-search-input {
     position: absolute;
     top: 60px;
     border-radius: 0;
@@ -808,7 +808,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-indent: 30px;
 }
 
-.subgrid .preset-grid {
+.subgrid .preset-list {
     padding: 10px 10px 0 10px;
     border: 1px solid #CCC;
     margin-top: 0;
