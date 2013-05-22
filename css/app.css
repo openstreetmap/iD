@@ -710,8 +710,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .grid-button-wrap {
-    padding-bottom: 10px;
-    height: 70px;
+    margin-bottom: 10px;
+    height: 60px;
 }
 
 .grid-entry {
@@ -719,7 +719,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 100%;
     position: relative;
     border: 1px solid #ccc;
-    float: left;
 }
 
 .grid-inner {
@@ -743,26 +742,27 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .grid-entry .label {
-    background: #f6f6f6;
+    background-color: #f6f6f6;
     text-align: left;
     position: absolute;
-    padding: 5px 10px;
-    height: 100%;
+    top: 0;
     bottom: 0;
-    left: 60px;
     right: 0;
+    padding: 5px 10px;
+    left: 60px;
+    line-height: 50px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
-    line-height: 50px;
     -moz-transition: all 100ms;
     -o-transition: all 100ms;
     transition: all 100ms;
+    border-radius: 0 3px 3px 0;
     }
 
 .grid-entry:hover .label {
-    background: #ececec;
+    background-color: #ececec;
 }
 
 .grid-button-wrap button.tag-reference-button {
