@@ -85,13 +85,7 @@ iD.ui.preset = function(context, entity, preset) {
         d3.event.stopPropagation();
         d3.event.preventDefault();
 
-        _.forEach(shown(), function(other) {
-            if (other.id === field.id) {
-                other.reference.toggle();
-            } else {
-                other.reference.hide();
-            }
-        });
+        field.reference.toggle();
 
         render();
     }

@@ -102,13 +102,7 @@ iD.ui.Taglist = function(context, entity) {
 
         row.call(iD.ui.TagReferenceButton()
             .on('click', function(tag) {
-                tags.forEach(function(other) {
-                    if (other.key === tag.key) {
-                        other.reference.toggle();
-                    } else {
-                        other.reference.hide();
-                    }
-                });
+                tag.reference.toggle();
             }));
 
         row.each(function(tag) {
