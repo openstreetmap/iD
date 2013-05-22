@@ -3,10 +3,6 @@ iD.ui.Inspector = function(context, entity) {
         entityEditor,
         newFeature = false;
 
-    function browse() {
-        context.enter(iD.modes.Browse(context));
-    }
-
     function inspector(selection) {
 
         var reselect = selection.html();
@@ -34,7 +30,6 @@ iD.ui.Inspector = function(context, entity) {
 
         presetList = iD.ui.PresetList(context, entity)
             .autofocus(newFeature)
-            .on('close', browse)
             .on('choose', function(preset) {
                 panewrap
                     .transition()
@@ -44,7 +39,6 @@ iD.ui.Inspector = function(context, entity) {
             });
 
         entityEditor = iD.ui.EntityEditor(context, entity)
-            .on('close', browse)
             .on('choose', function(preset) {
                 panewrap
                     .transition()

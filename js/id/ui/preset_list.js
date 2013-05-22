@@ -1,7 +1,11 @@
 iD.ui.PresetList = function(context, entity) {
-    var event = d3.dispatch('choose', 'close'),
+    var event = d3.dispatch('choose'),
         presets, current,
         autofocus = false;
+
+    function browse() {
+        context.enter(iD.modes.Browse(context));
+    }
 
     function presetList(selection) {
         var geometry = entity.geometry(context.graph());
@@ -25,7 +29,7 @@ iD.ui.PresetList = function(context, entity) {
         } else {
             messagewrap.append('button')
                 .attr('class', 'close')
-                .on('click', event.close)
+                .on('click', browse)
                 .append('span')
                 .attr('class', 'icon close');
         }

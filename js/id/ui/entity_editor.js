@@ -1,5 +1,5 @@
 iD.ui.EntityEditor = function(context, entity) {
-    var event = d3.dispatch('choose', 'close'),
+    var event = d3.dispatch('choose'),
         presets = context.presets(),
         id = entity.id,
         tags = _.clone(entity.tags),
@@ -9,6 +9,10 @@ iD.ui.EntityEditor = function(context, entity) {
         rawTagEditor,
         rawMemberEditor,
         rawMembershipEditor;
+
+    function browse() {
+        context.enter(iD.modes.Browse(context));
+    }
 
     function update() {
         var entity = context.hasEntity(id);
@@ -64,7 +68,7 @@ iD.ui.EntityEditor = function(context, entity) {
 
         messagewrap.append('button')
             .attr('class', 'preset-close fr')
-            .on('click', event.close)
+            .on('click', browse)
             .append('span')
             .attr('class', 'icon close');
 
@@ -79,7 +83,7 @@ iD.ui.EntityEditor = function(context, entity) {
 
         presetUI = iD.ui.preset(context, entity, preset)
             .on('change', changeTags)
-            .on('close', event.close);
+            .on('close', browse);
 
         var tageditorpreset = editorwrap.append('div')
             .attr('class', 'inspector-preset cf fillL col12')
