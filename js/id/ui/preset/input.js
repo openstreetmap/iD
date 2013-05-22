@@ -8,10 +8,15 @@ iD.ui.preset.url = function(field) {
         input;
 
     function i(selection) {
-        input = selection.append('input')
+        input = selection.selectAll('input')
+            .data([0]);
+
+        input.enter().append('input')
             .attr('type', field.type)
             .attr('id', 'preset-input-' + field.id)
-            .attr('placeholder', field.placeholder || '')
+            .attr('placeholder', field.placeholder || '');
+
+        input
             .on('blur', change)
             .on('change', change);
 
@@ -23,23 +28,25 @@ iD.ui.preset.url = function(field) {
         }
 
         if (field.type == 'number') {
-
             input.attr('type', 'text');
 
-            var numbercontrols = selection.append('div')
+            var spinControl = selection.selectAll('.spin-control')
+                .data([0]);
+
+            var enter = spinControl.enter().append('div')
                 .attr('class', 'spin-control');
 
-            numbercontrols
-                .append('button')
-                .attr('class', 'increment')
-                .on('click', function() {
-                    pm(input.node(), 1);
-                });
-            numbercontrols
-                .append('button')
-                .attr('class', 'decrement')
-                .on('click', function() {
-                    pm(input.node(), -1);
+            enter.append('button')
+                .datum(1)
+                .attr('class', 'increment');
+
+            enter.append('button')
+                .datum(-1)
+                .attr('class', 'decrement');
+
+            spinControl.selectAll('button')
+                .on('click', function(d) {
+                    pm(input.node(), d);
                 });
         }
     }

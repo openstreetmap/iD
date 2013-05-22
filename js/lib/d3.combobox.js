@@ -12,16 +12,25 @@ d3.combobox = function() {
     };
 
     var combobox = function(input) {
-        var idx = -1, container, shown = false;
+        var idx = -1,
+            container = d3.select(document.body)
+                .selectAll('div.combobox')
+                .filter(function(d) { return d === input.node(); }),
+            shown = !container.empty();
 
         input
             .classed('combobox-input', true)
             .each(function() {
                 var parent = this.parentNode,
                     sibling = this.nextSibling;
-                d3.select(parent)
-                    .insert('div', function() { return sibling; })
-                    .attr('class', 'combobox-carat')
+
+                var carat = d3.select(parent).selectAll('.combobox-carat')
+                    .data([0]);
+
+                carat.enter().insert('div', function() { return sibling; })
+                    .attr('class', 'combobox-carat');
+
+                carat
                     .on('mousedown', function () {
                         // prevent the form element from blurring. it blurs
                         // on mousedown
@@ -50,6 +59,7 @@ d3.combobox = function() {
             if (!shown) {
                 container = d3.select(document.body)
                     .insert('div', ':first-child')
+                    .datum(input.node())
                     .attr('class', 'combobox')
                     .style({
                         position: 'absolute',
@@ -201,18 +211,18 @@ d3.combobox = function() {
                     .selectAll('a.combobox-option')
                     .data(data, function(d) { return d.value; });
 
-                options.enter()
-                    .append('a')
-                    .text(function(d) { return d.value; })
+                options.enter().append('a')
                     .attr('class', 'combobox-option')
-                    .attr('title', function(d) { return d.title; })
-                    .on('click', select);
-
-                options.exit().remove();
+                    .text(function(d) { return d.value; });
 
                 options
+                    .attr('title', function(d) { return d.title; })
                     .classed('selected', function(d, i) { return i == idx; })
+                    .on('click', select)
                     .order();
+
+                options.exit()
+                    .remove();
             }
 
             fetcher.apply(input, [value, data, render]);
@@ -234,7 +244,7 @@ d3.combobox = function() {
             input.node().focus();
             update('');
 
-            if (!container) return;
+            if (container.empty()) return;
 
             var entries = container.selectAll('a'),
                 height = container.node().scrollHeight / entries[0].length,

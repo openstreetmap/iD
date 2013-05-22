@@ -1,127 +1,124 @@
-iD.ui.EntityEditor = function(context, entity) {
+iD.ui.EntityEditor = function(context) {
     var event = d3.dispatch('choose'),
-        presets = context.presets(),
-        id = entity.id,
-        tags = _.clone(entity.tags),
-        preset,
-        selection_,
-        presetUI,
-        rawTagEditor,
-        rawMemberEditor,
-        rawMembershipEditor;
+        id,
+        preset;
 
-    function browse() {
-        context.enter(iD.modes.Browse(context));
-    }
+    function entityEditor(selection) {
+        var entity = context.entity(id),
+            tags = _.clone(entity.tags);
 
-    function update() {
-        var entity = context.hasEntity(id);
-        if (!entity) return;
+        var $header = selection.selectAll('.header')
+            .data([0]);
 
-        tags = _.clone(entity.tags);
+        // Enter
 
-        // change preset if necessary (undos/redos)
-        var newmatch = presets.match(entity, context.graph());
-        if (newmatch !== preset) {
-            entityEditor(selection_, newmatch);
-            return;
-        }
-
-        presetUI.change(tags);
-        rawTagEditor.tags(tags);
-        if (rawMemberEditor) rawMemberEditor.change();
-        rawMembershipEditor.change();
-    }
-
-    function entityEditor(selection, newpreset) {
-        selection_ = selection;
-        var geometry = entity.geometry(context.graph());
-
-        if (!preset) preset = presets.match(entity, context.graph());
-
-        // preset was explicitly chosen
-        if (newpreset) {
-            tags = preset.removeTags(tags, geometry);
-
-            newpreset.applyTags(tags, geometry);
-            preset = newpreset;
-        }
-
-        selection.html('');
-
-        var messagewrap = selection.append('div')
+        var $enter = $header.enter().append('div')
             .attr('class', 'header fillL cf');
 
-        messagewrap.append('button')
+        $enter.append('button')
             .attr('class', 'preset-reset fl ')
-            .on('click', function() {
-                event.choose(preset);
-            })
             .append('span')
             .attr('class', 'icon back');
 
-        messagewrap.append('h3')
-            .attr('class', 'inspector-inner')
-            .text(t('inspector.editing_feature', { feature: preset.name() }));
+        $enter.append('h3')
+            .attr('class', 'inspector-inner');
 
-        messagewrap.append('button')
+        $enter.append('button')
             .attr('class', 'preset-close fr')
-            .on('click', browse)
             .append('span')
             .attr('class', 'icon close');
 
-        var editorwrap = selection.append('div')
+        // Update
+
+        $header.select('h3')
+            .text(t('inspector.editing_feature', {feature: preset.name()}));
+
+        $header.select('.preset-reset')
+            .on('click', function() {
+                event.choose(preset);
+            });
+
+        $header.select('.preset-close')
+            .on('click', function() {
+                context.enter(iD.modes.Browse(context));
+            });
+
+        var $body = selection.selectAll('.inspector-body')
+            .data([0]);
+
+        // Enter
+
+        $enter = $body.enter().append('div')
             .attr('class', 'tag-wrap inspector-body fillL2');
 
-        editorwrap.append('div')
-            .attr('class', 'col12 inspector-inner preset-icon-wrap')
+        $enter.append('div')
+            .attr('class', 'preset-icon-wrap inspector-inner col12')
             .append('div')
-            .attr('class','fillL')
+            .attr('class', 'fillL');
+
+        $enter.append('div')
+            .attr('class', 'inspector-preset cf fillL col12');
+
+        $enter.append('div')
+            .attr('class', 'raw-tag-editor inspector-inner col12');
+
+        $enter.append('div')
+            .attr('class', 'raw-member-editor inspector-inner col12');
+
+        $enter.append('div')
+            .attr('class', 'raw-membership-editor inspector-inner col12');
+
+        $enter.append('div')
+            .attr('class', 'inspector-external-links inspector-inner col12');
+
+        // Update
+
+        $body.select('.preset-icon-wrap .fillL')
             .call(iD.ui.PresetIcon()
-                .geometry(context.geometry(entity.id))
+                .geometry(context.geometry(id))
                 .preset(preset));
 
-        presetUI = iD.ui.preset(context, entity, preset)
-            .on('change', changeTags);
+        $body.select('.inspector-preset')
+            .call(iD.ui.preset(context)
+                .preset(preset)
+                .entityID(id)
+                .tags(tags)
+                .on('change', changeTags));
 
-        var tageditorpreset = editorwrap.append('div')
-            .attr('class', 'inspector-preset cf fillL col12')
-            .call(presetUI);
-
-        rawTagEditor = iD.ui.RawTagEditor(context, entity)
-            .on('change', changeTags);
-
-        editorwrap.append('div')
-            .attr('class', 'inspector-inner raw-tag-editor col12')
-            .call(rawTagEditor, preset.id === 'other');
+        $body.select('.raw-tag-editor')
+            .call(iD.ui.RawTagEditor(context)
+                .preset(preset)
+                .entityID(id)
+                .tags(tags)
+                .on('change', changeTags));
 
         if (entity.type === 'relation') {
-            rawMemberEditor = iD.ui.RawMemberEditor(context, entity);
-
-            editorwrap.append('div')
-                .attr('class', 'inspector-inner raw-membership-editor col12')
-                .call(rawMemberEditor);
+            $body.select('.raw-member-editor')
+                .style('display', 'block')
+                .call(iD.ui.RawMemberEditor(context)
+                    .entityID(id));
+        } else {
+            $body.select('.raw-member-editor')
+                .style('display', 'none')
         }
 
-        rawMembershipEditor = iD.ui.RawMembershipEditor(context, entity);
+        $body.select('.raw-membership-editor')
+            .call(iD.ui.RawMembershipEditor(context)
+                .entityID(id));
 
-        editorwrap.append('div')
-            .attr('class', 'inspector-inner raw-membership-editor col12')
-            .call(rawMembershipEditor);
+        $body.select('.inspector-external-links')
+            .call(iD.ui.ViewOnOSM(context)
+                .entityID(id));
 
-        var viewOnOSM = iD.ui.ViewOnOSM(context);
-
-        editorwrap.append('div')
-            .attr('class', 'col12 inspector-inner inspector-external-links')
-            .call(viewOnOSM, entity);
-
-        presetUI.change(tags);
-        rawTagEditor.tags(tags);
-
-        changeTags();
+        function historyChanged() {
+            var entity = context.hasEntity(id);
+            if (!entity) return;
+            preset = context.presets().match(entity, context.graph());
+            entityEditor(selection);
+        }
 
         context.history()
-            .on('change.entity-editor', update);
+            .on('change.entity-editor', historyChanged);
     }
 
     function clean(o) {
@@ -134,14 +131,39 @@ iD.ui.EntityEditor = function(context, entity) {
     }
 
     function changeTags(changed) {
-        tags = clean(_.extend(tags, changed));
-        var entity = context.hasEntity(id);
-        if (entity && !_.isEqual(entity.tags, tags)) {
+        var entity = context.entity(id),
+            tags = clean(_.extend({}, entity.tags, changed));
+
+        if (!_.isEqual(entity.tags, tags)) {
             context.perform(
-                iD.actions.ChangeTags(entity.id, tags),
+                iD.actions.ChangeTags(id, tags),
                 t('operations.change_tags.annotation'));
         }
     }
+
+    entityEditor.entityID = function(_) {
+        if (!arguments.length) return id;
+        id = _;
+        preset = context.presets().match(context.entity(id), context.graph());
+        return entityEditor;
+    };
+
+    entityEditor.preset = function(_) {
+        if (!arguments.length) return preset;
+
+        var entity = context.entity(id),
+            geometry = context.geometry(id),
+            tags = preset.removeTags(entity.tags, geometry);
+
+        preset = _;
+        tags = preset.applyTags(tags, geometry);
+
+        context.perform(
+            iD.actions.ChangeTags(id, tags),
+            t('operations.change_tags.annotation'));
+
+        return entityEditor;
+    };
 
     entityEditor.close = function() {
         // Blur focused element so that tag changes are dispatched

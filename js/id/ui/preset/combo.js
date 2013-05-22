@@ -1,14 +1,18 @@
 iD.ui.preset.combo = function(field) {
-
     var event = d3.dispatch('change'),
         input;
 
     function combo(selection) {
         var combobox = d3.combobox();
 
-        input = selection.append('input')
+        input = selection.selectAll('input')
+            .data([0]);
+
+        input.enter().append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.id);
+
+        input
             .on('change', change)
             .on('blur', change)
             .call(combobox);
@@ -36,7 +40,6 @@ iD.ui.preset.combo = function(field) {
             });
         }
     }
-
 
     function change() {
         var t = {};

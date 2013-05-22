@@ -1,47 +1,51 @@
 iD.ui.Disclosure = function() {
-    var title,
+    var dispatch = d3.dispatch('toggled'),
+        title,
         expanded = false,
-        content = function () {},
-        dispatch = d3.dispatch('toggled'),
-        link, container;
-
-    function toggle() {
-        expanded = !expanded;
-        link.classed('expanded', expanded);
-        container.call(iD.ui.Toggle(expanded));
-        dispatch.toggled(expanded);
-    }
+        content = function () {};
 
     var disclosure = function(selection) {
-        link = selection.append('a')
+        var $link = selection.selectAll('.hide-toggle')
+            .data([0]);
+
+        $link.enter().append('a')
             .attr('href', '#')
-            .attr('class', 'hide-toggle')
-            .text(title)
+            .attr('class', 'hide-toggle');
+
+        $link.text(title)
             .on('click', toggle)
             .classed('expanded', expanded);
 
-        container = selection.append('div')
-            .classed('hide', !expanded);
+        var $body = selection.selectAll('div')
+            .data([0]);
 
-        container.call(content);
+        $body.enter().append('div');
+
+        $body.classed('hide', !expanded)
+            .call(content);
+
+        function toggle() {
+            expanded = !expanded;
+            $link.classed('expanded', expanded);
+            $body.call(iD.ui.Toggle(expanded));
+            dispatch.toggled(expanded);
+        }
     };
 
     disclosure.title = function(_) {
+        if (!arguments.length) return title;
         title = _;
-        if (link) link.text(_);
         return disclosure;
     };
 
     disclosure.expanded = function(_) {
-        if (link && expanded !== _) {
-            toggle();
-        } else {
-            expanded = _;
-        }
+        if (!arguments.length) return expanded;
+        expanded = _;
         return disclosure;
     };
 
     disclosure.content = function(_) {
+        if (!arguments.length) return content;
         content = _;
         return disclosure;
     };

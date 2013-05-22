@@ -4,10 +4,15 @@ iD.ui.preset.textarea = function(field) {
         input;
 
     function i(selection) {
-        input = selection.append('textarea')
+        input = selection.selectAll('textarea')
+            .data([0]);
+
+        input.enter().append('textarea')
             .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder || '')
-            .attr('maxlength', 255)
+            .attr('maxlength', 255);
+
+        input
             .on('blur', change)
             .on('change', change);
     }

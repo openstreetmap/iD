@@ -1,5 +1,4 @@
 iD.ui.preset.address = function(field, context) {
-
     var event = d3.dispatch('change'),
         housename,
         housenumber,
@@ -36,45 +35,54 @@ iD.ui.preset.address = function(field, context) {
     }
 
     function address(selection) {
-        var wrap = selection.append('div')
+        var wrap = selection.selectAll('.preset-input-wrap')
+            .data([0]);
+
+        // Enter
+
+        var enter = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap');
 
-        housename = wrap.append('input')
+        enter.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.housename'))
             .attr('class', 'addr-housename')
-            .attr('id', 'preset-input-' + field.id)
-            .on('blur', change)
-            .on('change', change);
+            .attr('id', 'preset-input-' + field.id);
 
-        housenumber = wrap.append('input')
+        enter.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.number'))
-            .attr('class', 'addr-number')
-            .on('blur', change)
-            .on('change', change);
+            .attr('class', 'addr-number');
 
-        street = wrap.append('input')
+        enter.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.street'))
-            .attr('class', 'addr-street')
-            .on('blur', change)
-            .on('change', change)
-            .call(d3.combobox().data(getStreets()));
+            .attr('class', 'addr-street');
 
-        city = wrap.append('input')
+        enter.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.city'))
-            .attr('class', 'addr-city')
+            .attr('class', 'addr-city');
+
+        enter.append('input')
+            .property('type', 'text')
+            .attr('placeholder', field.t('placeholders.postcode'))
+            .attr('class', 'addr-postcode');
+
+        // Update
+
+        housename = wrap.select('.addr-housename');
+        housenumber = wrap.select('.addr-number');
+        street = wrap.select('.addr-street');
+        city = wrap.select('.addr-city');
+        postcode = wrap.select('.addr-postcode');
+
+        wrap.selectAll('input')
             .on('blur', change)
             .on('change', change);
 
-        postcode = wrap.append('input')
-            .property('type', 'text')
-            .attr('placeholder', field.t('placeholders.postcode'))
-            .attr('class', 'addr-postcode')
-            .on('blur', change)
-            .on('change', change);
+        street
+            .call(d3.combobox().data(getStreets()));
     }
 
     function change() {

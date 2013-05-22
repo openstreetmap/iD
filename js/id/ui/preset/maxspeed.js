@@ -14,9 +14,14 @@ iD.ui.preset.maxspeed = function(field, context) {
         combobox = d3.combobox();
         var unitCombobox = d3.combobox().data(['km/h', 'mph'].map(comboValues));
 
-        input = selection.append('input')
+        input = selection.selectAll('#preset-input-' + field.id)
+            .data([0]);
+
+        input.enter().append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.id);
+
+        input
             .on('change', change)
             .on('blur', change)
             .call(combobox);
@@ -30,9 +35,14 @@ iD.ui.preset.maxspeed = function(field, context) {
             });
         });
 
-        unitInput = selection.append('input')
+        unitInput = selection.selectAll('input.maxspeed-unit')
+            .data([0]);
+
+        unitInput.enter().append('input')
             .attr('type', 'text')
-            .attr('class', 'maxspeed-unit')
+            .attr('class', 'maxspeed-unit');
+
+        unitInput
             .on('blur', changeUnits)
             .on('change', changeUnits)
             .call(unitCombobox);

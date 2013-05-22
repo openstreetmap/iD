@@ -4,14 +4,19 @@ iD.ui.preset.access = function(field, context) {
         items;
 
     function access(selection) {
-        var wrap = selection.append('div')
-            .attr('class', 'cf preset-input-wrap');
+        var wrap = selection.selectAll('.preset-input-wrap')
+            .data([0]);
 
-        items = wrap.append('ul').selectAll('li')
+        wrap.enter().append('div')
+            .attr('class', 'cf preset-input-wrap')
+            .append('ul');
+
+        items = wrap.select('ul').selectAll('li')
             .data(field.keys);
 
-        var enter = items.enter()
-            .append('li')
+        // Enter
+
+        var enter = items.enter().append('li')
             .attr('class', function(d) { return 'cf preset-access-' + d; });
 
         enter.append('span')
@@ -25,13 +30,17 @@ iD.ui.preset.access = function(field, context) {
             .attr('type', 'text')
             .attr('class', 'preset-input-access')
             .attr('id', function(d) { return 'preset-input-access-' + d; })
-            .on('change', change)
-            .on('blur', change)
             .each(function(d) {
                 d3.select(this)
                     .call(d3.combobox()
                         .data(access.options(d)));
             });
+
+        // Update
+
+        wrap.selectAll('.preset-input-access')
+            .on('change', change)
+            .on('blur', change);
     }
 
     function change(d) {

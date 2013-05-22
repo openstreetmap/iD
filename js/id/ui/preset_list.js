@@ -1,15 +1,12 @@
-iD.ui.PresetList = function(context, entity) {
+iD.ui.PresetList = function(context) {
     var event = d3.dispatch('choose'),
-        presets, current,
+        id,
+        preset,
         autofocus = false;
 
-    function browse() {
-        context.enter(iD.modes.Browse(context));
-    }
-
     function presetList(selection) {
-        var geometry = entity.geometry(context.graph());
-        presets = context.presets().matchGeometry(geometry);
+        var geometry = context.geometry(id),
+            presets = context.presets().matchGeometry(geometry);
 
         selection.html('');
 
@@ -20,7 +17,7 @@ iD.ui.PresetList = function(context, entity) {
             .attr('class', 'inspector-inner')
             .text(t('inspector.choose'));
 
-        if (current) {
+        if (preset) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
                 .on('click', event.choose)
@@ -29,7 +26,9 @@ iD.ui.PresetList = function(context, entity) {
         } else {
             messagewrap.append('button')
                 .attr('class', 'close')
-                .on('click', browse)
+                .on('click', function() {
+                    context.enter(iD.modes.Browse(context));
+                })
                 .append('span')
                 .attr('class', 'icon close');
         }
@@ -41,7 +40,7 @@ iD.ui.PresetList = function(context, entity) {
                  d3.event.keyCode === d3.keybinding.keyCodes['⌦'])) {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
-                iD.operations.Delete([entity.id], context)();
+                iD.operations.Delete([id], context)();
             } else if (search.property('value').length === 0 &&
                 (d3.event.ctrlKey || d3.event.metaKey) &&
                 d3.event.keyCode === d3.keybinding.keyCodes.z) {
@@ -108,7 +107,7 @@ iD.ui.PresetList = function(context, entity) {
 
         items.enter().append('div')
             .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
-            .classed('current', function(item) { return item.preset === current; })
+            .classed('current', function(item) { return item.preset === preset; })
             .each(function(item) {
                 d3.select(this).call(item);
             })
@@ -132,7 +131,7 @@ iD.ui.PresetList = function(context, entity) {
             wrap.append('button')
                 .attr('class', 'preset-list-button')
                 .call(iD.ui.PresetIcon()
-                    .geometry(context.geometry(entity.id))
+                    .geometry(context.geometry(id))
                     .preset(preset))
                 .on('click', item.choose)
                 .append('div')
@@ -182,7 +181,7 @@ iD.ui.PresetList = function(context, entity) {
             wrap.append('button')
                 .attr('class', 'preset-list-button')
                 .call(iD.ui.PresetIcon()
-                    .geometry(context.geometry(entity.id))
+                    .geometry(context.geometry(id))
                     .preset(preset))
                 .on('click', item.choose)
                 .append('div')
@@ -215,9 +214,15 @@ iD.ui.PresetList = function(context, entity) {
         return presetList;
     };
 
-    presetList.current = function(_) {
-        if (!arguments.length) return current;
-        current = _;
+    presetList.entityID = function(_) {
+        if (!arguments.length) return id;
+        id = _;
+        return presetList;
+    };
+
+    presetList.preset = function(_) {
+        if (!arguments.length) return preset;
+        preset = _;
         return presetList;
     };
 

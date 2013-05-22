@@ -5,29 +5,38 @@ iD.ui.preset.localized = function(field, context) {
         input, localizedInputs, wikiTitles;
 
     function i(selection) {
+        input = selection.selectAll('.localized-main')
+            .data([0]);
 
-        input = selection.append('input')
+        input.enter().append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
-            .attr('placeholder', field.placeholder || '')
+            .attr('placeholder', field.placeholder || '');
+
+        input
             .on('blur', change)
             .on('change', change);
 
-        var translateButton = selection.append('button')
-            .attr('class', 'button-input-action localized-add minor')
-            .on('click', addBlank);
+        var translateButton = selection.selectAll('.localized-add')
+            .data([0]);
 
-        translateButton.append('span')
+        translateButton.enter().append('button')
+            .attr('class', 'button-input-action localized-add minor')
+            .call(bootstrap.tooltip()
+                .title(t('translate.translate'))
+                .placement('left'))
+            .append('span')
             .attr('class', 'icon plus');
 
-        translateButton.call(bootstrap.tooltip()
-            .title(t('translate.translate'))
-            .placement('left'));
+        translateButton
+            .on('click', addBlank);
 
-        localizedInputs = selection.append('div')
+        localizedInputs = selection.selectAll('.localized-wrap')
+            .data([0]);
+
+        localizedInputs.enter().append('div')
             .attr('class', 'localized-wrap');
-
     }
 
     function addBlank() {

@@ -33,26 +33,39 @@ iD.ui.preset.wikipedia = function(field, context) {
                 });
             });
 
-        lang = selection.append('input')
+        lang = selection.selectAll('input.wiki-lang')
+            .data([0]);
+
+        lang.enter().append('input')
             .attr('type', 'text')
-            .attr('class', 'wiki-lang')
+            .attr('class', 'wiki-lang');
+
+        lang
             .on('blur', changeLang)
             .on('change', changeLang)
             .call(langcombo);
 
-        title = selection.append('input')
+        title = selection.selectAll('input.wiki-title')
+            .data([0]);
+
+        title.enter().append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-title')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.id);
+
+        title
             .on('blur', change)
             .on('change', change)
             .call(titlecombo);
 
-        link = selection.append('a')
+        link = selection.selectAll('a.wiki-link')
+            .data([0]);
+
+        link.enter().append('a')
             .attr('class', 'wiki-link button-input-action minor')
-            .attr('target', '_blank');
-        link.append('span')
-                .attr('class','icon out-link');
+            .attr('target', '_blank')
+            .append('span')
+            .attr('class', 'icon out-link');
     }
 
     function changeLang() {

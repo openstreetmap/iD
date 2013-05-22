@@ -1,70 +1,59 @@
 iD.ui.Inspector = function(context) {
-    var presetList,
-        entityEditor,
+    var presetList = iD.ui.PresetList(context),
+        entityEditor = iD.ui.EntityEditor(context),
         entityID,
         newFeature = false;
 
     function inspector(selection) {
+        selection.style('display', 'block');
 
-        var reselect = selection.html(),
-            entity = context.entity(entityID);
+        var $wrap = selection.selectAll('.panewrap')
+            .data([0]);
 
-        selection
-            .html('')
-            .style('display', 'block')
-            .style('right', '-500px')
-            .style('opacity', 1)
-            .transition()
-            .duration(reselect ? 0 : 200)
-            .style('right', '0px');
+        var $enter = $wrap.enter().append('div')
+            .attr('class', 'panewrap');
 
-        var panewrap = selection
-            .append('div')
-            .classed('panewrap', true);
+        $enter.append('div')
+            .attr('class', 'grid-pane pane');
 
-        var presetLayer = panewrap
-            .append('div')
-            .classed('pane grid-pane', true);
+        $enter.append('div')
+            .attr('class', 'tag-pane pane');
 
-        var tagLayer = panewrap
-            .append('div')
-            .classed('pane tag-pane', true);
+        var $presetPane = $wrap.select('.grid-pane')
+            .call(presetList
+                .entityID(entityID)
+                .autofocus(newFeature)
+                .on('choose', setPreset));
 
-        presetList = iD.ui.PresetList(context, entity)
-            .autofocus(newFeature)
-            .on('choose', function(preset) {
-                panewrap
-                    .transition()
-                    .style('right', '0%');
+        var $editorPane = $wrap.select('.tag-pane')
+            .call(entityEditor
+                .entityID(entityID)
+                .on('choose', showList));
 
-                tagLayer.call(entityEditor, preset);
-            });
+        $wrap.style('right', context.entity(entityID).isUsed(context.graph()) ? '-0%' : '-100%');
 
-        entityEditor = iD.ui.EntityEditor(context, entity)
-            .on('choose', function(preset) {
-                panewrap
-                    .transition()
-                    .style('right', '-100%');
+        function showList(preset) {
+            $wrap.transition()
+                .style('right', '-100%');
 
-                presetList
-                    .current(preset)
-                    .autofocus(true);
+            $presetPane.call(presetList
+                .preset(preset)
+                .autofocus(true));
+        }
 
-                presetLayer.call(presetList);
-            });
+        function setPreset(preset) {
+            $wrap.transition()
+                .style('right', '0%');
 
-        if (entity.isUsed(context.graph())) {
-            panewrap.style('right', '-0%');
-            tagLayer.call(entityEditor);
-        } else {
-            panewrap.style('right', '-100%');
-            presetLayer.call(presetList);
+            $editorPane.call(entityEditor
+                .preset(preset));
         }
     }
 
     inspector.close = function(selection) {
         entityEditor.close();
-        selection.html('');
+
+        selection.style('display', 'none');
     };
 
     inspector.entityID = function(_) {

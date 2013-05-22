@@ -31,25 +31,32 @@ iD.ui.TagReference = function(tag) {
     }
 
     tagReference.button = function(selection) {
-        button = selection.append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'tag-reference-button minor')
-            .on('click', function() {
-                d3.event.stopPropagation();
-                d3.event.preventDefault();
-                if (showing) {
-                    tagReference.hide();
-                } else {
-                    tagReference.load();
-                }
-            });
+        button = selection.selectAll('.tag-reference-button')
+            .data([0]);
 
-        button.append('span')
+        var enter = button.enter().append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'tag-reference-button minor');
+
+        enter.append('span')
             .attr('class', 'icon inspect');
+
+        button.on('click', function () {
+            d3.event.stopPropagation();
+            d3.event.preventDefault();
+            if (showing) {
+                tagReference.hide();
+            } else {
+                tagReference.load();
+            }
+        });
     };
 
     tagReference.body = function(selection) {
-        body = selection.append('div')
+        body = selection.selectAll('.tag-reference-body')
+            .data([0]);
+
+        body.enter().append('div')
             .attr('class', 'tag-reference-body cf')
             .style('max-height', '0')
             .style('opacity', '0');
@@ -67,6 +74,8 @@ iD.ui.TagReference = function(tag) {
             if (!err && docs) {
                 docs = findLocal(docs);
             }
+
+            body.html('');
 
             if (!docs || !docs.description) {
                 body.append('p').text(t('inspector.no_documentation_key'));
