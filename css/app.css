@@ -721,10 +721,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border: 1px solid #ccc;
 }
 
-.grid-inner {
-    margin-bottom: 20px;
-}
-
 .preset-grid.filtered .grid-button-wrap:first-child .grid-entry {
     background: #ececec;
 }
@@ -812,12 +808,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-indent: 30px;
 }
 
-.preset-search-result {
-    padding: 0 10px;
-    height:30px;
-    margin: 5px;
-}
-
 .subgrid .preset-grid {
     padding: 10px 10px 0 10px;
     border: 1px solid #CCC;
@@ -834,17 +824,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin-left: 50%;
     margin-left: -webkit-calc(50% - 10px);
     margin-top: -10px;
-}
-
-.show-more {
-    text-align: center;
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
-}
-
-.show-more a {
-    color: #222;
 }
 
 /* Preset icon colors */
