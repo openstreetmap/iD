@@ -122,7 +122,7 @@ describe('iD.Connection', function () {
         it('emits a load event', function(done) {
             c.loadEntity('n1');
             c.on('load', function(error, result) {
-                expect(result.n1).to.be.an.instanceOf(iD.Node);
+                expect(result.data.n1).to.be.an.instanceOf(iD.Node);
                 done();
             });
 
