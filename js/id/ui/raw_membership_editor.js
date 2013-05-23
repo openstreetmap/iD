@@ -64,16 +64,6 @@ iD.ui.RawMembershipEditor = function(context, entity) {
         var row = li.enter().append('li')
             .attr('class', 'member-row form-field');
 
-        // var relation = row.append('div')
-        //     .attr('class', 'member-entity cf');
-
-        // relation.append('span')
-        //     .attr('class', 'member-entity-icon')
-        //     .each(function(d) {
-        //         return d3.select(this)
-        //             .call(iD.ui.PresetIcon(context.geometry(d.relation.id)));
-        //     });
-
         relationLabel = row.append('label')
             .attr('class', 'form-label')
             .append('a')

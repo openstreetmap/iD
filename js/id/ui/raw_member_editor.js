@@ -61,42 +61,34 @@ iD.ui.RawMemberEditor = function(context, entity) {
             .data(memberships, function(d) { return iD.Entity.key(entity) + ',' + d.index; });
 
         var row = li.enter().append('li')
-            .attr('class', 'member-row');
+            .attr('class', 'member-row form-field');
 
         row.each(function(d) {
             if (d.entity) {
-                var member = d3.select(this).append('a')
+                var member = d3.select(this).append('label')
+                    .attr('class', 'form-label')
+                    .append('a')
                     .attr('href', '#')
-                    .attr('class', 'member-entity')
                     .on('click', selectMember);
-
-                member.append('span')
-                    .attr('class', 'member-entity-icon')
-                    .each(function(d) {
-                        return d3.select(this)
-                            .call(iD.ui.PresetIcon(context.geometry(d.entity.id)));
-                    });
-
-                member.append('span')
-                    .attr('class', 'member-entity-name')
-                    .text(function(d) { return iD.util.localeName(d.entity); });
 
                 member.append('span')
                     .attr('class', 'member-entity-type')
                     .text(function(d) { return context.presets().match(d.entity, context.graph()).name(); });
 
+                member.append('span')
+                    .attr('class', 'member-entity-name')
+                    .text(function(d) { return iD.util.localeName(d.entity); });
+
             } else {
-                d3.select(this).append('span')
-                    .attr('class', 'member-incomplete')
+                d3.select(this).append('label')
+                    .attr('class', 'form-label member-incomplete')
                     .text(t('inspector.incomplete'));
             }
         });
 
-        row.append('span')
+        row.append('input')
             .attr('class', 'member-role')
-            .append('input')
             .property('type', 'text')
-            .attr('class', 'member-role-input')
             .attr('maxlength', 255)
             .attr('placeholder', t('inspector.role'))
             .property('value', function(d) { return d.member.role; })
@@ -104,7 +96,7 @@ iD.ui.RawMemberEditor = function(context, entity) {
 
         row.append('button')
             .attr('tabindex', -1)
-            .attr('class', 'member-delete')
+            .attr('class', 'remove button-input-action member-delete minor')
             .on('click', deleteMember)
             .append('span')
             .attr('class', 'icon delete');
