@@ -6,7 +6,9 @@ iD.ui.EntityEditor = function(context, entity) {
         preset,
         selection_,
         presetUI,
-        rawTagEditor;
+        rawTagEditor,
+        rawMemberEditor,
+        rawMembershipEditor;
 
     function update() {
         var entity = context.hasEntity(id);
@@ -23,6 +25,8 @@ iD.ui.EntityEditor = function(context, entity) {
 
         presetUI.change(tags);
         rawTagEditor.tags(tags);
+        if (rawMemberEditor) rawMemberEditor.change();
+        rawMembershipEditor.change();
     }
 
     function entityEditor(selection, newpreset) {
@@ -77,16 +81,30 @@ iD.ui.EntityEditor = function(context, entity) {
             .on('change', changeTags)
             .on('close', event.close);
 
-        rawTagEditor = iD.ui.RawTagEditor(context, entity)
-            .on('change', changeTags);
-
         var tageditorpreset = editorwrap.append('div')
             .attr('class', 'inspector-preset cf fillL col12')
             .call(presetUI);
 
+        rawTagEditor = iD.ui.RawTagEditor(context, entity)
+            .on('change', changeTags);
+
         editorwrap.append('div')
             .attr('class', 'inspector-inner raw-tag-editor col12')
             .call(rawTagEditor, preset.id === 'other');
+
+        if (entity.type === 'relation') {
+            rawMemberEditor = iD.ui.RawMemberEditor(context, entity);
+
+            editorwrap.append('div')
+                .attr('class', 'inspector-inner raw-membership-editor col12')
+                .call(rawMemberEditor);
+        }
+
+        rawMembershipEditor = iD.ui.RawMembershipEditor(context, entity);
+
+        editorwrap.append('div')
+            .attr('class', 'inspector-inner raw-membership-editor col12')
+            .call(rawMembershipEditor);
 
         if (!entity.isNew()) {
             var osmLink = tageditorpreset.append('div')

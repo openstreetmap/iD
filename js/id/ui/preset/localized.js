@@ -120,7 +120,7 @@ iD.ui.preset.localized = function(field, context) {
                     .attr('class', 'localized-value');
 
                 wrap.append('button')
-                    .attr('class', 'minor button-input-action localized-remove')
+                    .attr('class', 'minor button-input-action remove')
                     .on('click', function(d) {
                         var t = {};
                         t[key(d.lang)] = '';
