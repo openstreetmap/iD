@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "Canceled drawing."
         },
+        "change_role": {
+            "annotation": "Changed the role of a relation member."
+        },
         "change_tags": {
             "annotation": "Changed tags."
         },
@@ -86,6 +89,15 @@
                 "multiple": "Deleted {n} objects."
             },
             "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded."
+        },
+        "delete_member": {
+            "annotation": {
+                "point": "Removed a point from a relation.",
+                "vertex": "Removed a node from a relation.",
+                "line": "Removed a line from a relation.",
+                "area": "Removed an area from a relation.",
+                "relation": "Removed a relation from a relation."
+            }
         },
         "connect": {
             "annotation": {
@@ -208,12 +220,16 @@
         "view_on_osm": "View on openstreetmap.org",
         "editing_feature": "Editing {feature}",
         "all_tags": "All tags",
+        "all_members": "All members",
+        "all_relations": "All relations",
+        "role": "Role",
         "choose": "Select feature type",
         "results": "{n} results for {search}",
         "reference": "View on OpenStreetMap Wiki",
         "back_tooltip": "Change feature type",
         "remove": "Remove",
-        "search": "Search"
+        "search": "Search",
+        "incomplete": "<not downloaded>"
     },
     "background": {
         "title": "Background",
