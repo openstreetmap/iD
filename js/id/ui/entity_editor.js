@@ -106,18 +106,11 @@ iD.ui.EntityEditor = function(context, entity) {
             .attr('class', 'inspector-inner raw-membership-editor col12')
             .call(rawMembershipEditor);
 
-        if (!entity.isNew()) {
-            var osmLink = tageditorpreset.append('div')
-                .attr('class', 'col12 inspector-inner')
-                .append('a')
-                .attr('href', context.connection().entityURL(entity))
-                .attr('target', '_blank');
+        var viewOnOSM = iD.ui.ViewOnOSM(context);
 
-            osmLink.append('span')
-                .attr('class','icon icon-pre-text out-link');
-
-            osmLink.append('span').text(t('inspector.view_on_osm'));
-        }
+        editorwrap.append('div')
+            .attr('class', 'col12 inspector-inner inspector-external-links')
+            .call(viewOnOSM, entity);
 
         presetUI.change(tags);
         rawTagEditor.tags(tags);
