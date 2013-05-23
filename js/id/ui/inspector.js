@@ -1,11 +1,13 @@
-iD.ui.Inspector = function(context, entity) {
+iD.ui.Inspector = function(context) {
     var presetList,
         entityEditor,
+        entityID,
         newFeature = false;
 
     function inspector(selection) {
 
-        var reselect = selection.html();
+        var reselect = selection.html(),
+            entity = context.entity(entityID);
 
         selection
             .html('')
@@ -88,6 +90,12 @@ iD.ui.Inspector = function(context, entity) {
                     .style('display', 'none')
                     .html('');
             });
+    };
+
+    inspector.entityID = function(_) {
+        if (!arguments.length) return entityID;
+        entityID = _;
+        return inspector;
     };
 
     inspector.newFeature = function(_) {

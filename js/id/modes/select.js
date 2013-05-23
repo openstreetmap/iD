@@ -103,7 +103,8 @@ iD.modes.Select = function(context, selection) {
         }
 
         if (singular()) {
-            inspector = iD.ui.Inspector(context, singular())
+            inspector = iD.ui.Inspector(context)
+                .entityID(singular().id)
                 .newFeature(newFeature);
 
             wrap.call(inspector);
