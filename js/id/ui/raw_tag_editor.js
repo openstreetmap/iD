@@ -49,7 +49,7 @@ iD.ui.RawTagEditor = function(context, entity) {
         }
 
         tags.forEach(function(tag) {
-            tag.reference = iD.ui.TagReference(entity, {key: tag.key});
+            tag.reference = iD.ui.TagReference({key: tag.key});
         });
 
         var li = list.html('')

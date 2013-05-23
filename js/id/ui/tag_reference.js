@@ -1,4 +1,4 @@
-iD.ui.TagReference = function(entity, tag) {
+iD.ui.TagReference = function(tag) {
     var tagReference = {},
         taginfo = iD.taginfo(),
         button, body,

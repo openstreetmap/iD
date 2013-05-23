@@ -198,7 +198,7 @@ iD.ui.PresetList = function(context, entity) {
         };
 
         item.preset = preset;
-        item.reference = iD.ui.TagReference(null, preset.reference());
+        item.reference = iD.ui.TagReference(preset.reference());
 
         return item;
     }
