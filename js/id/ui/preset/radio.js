@@ -1,6 +1,6 @@
 iD.ui.preset.radio = function(field) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         buttons;
 
     function radio(selection) {

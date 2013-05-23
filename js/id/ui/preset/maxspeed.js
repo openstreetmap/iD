@@ -1,6 +1,6 @@
 iD.ui.preset.maxspeed = function(field, context) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         entity,
         imperial,
         unitInput,

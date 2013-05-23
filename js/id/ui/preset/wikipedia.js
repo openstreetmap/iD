@@ -1,6 +1,6 @@
 iD.ui.preset.wikipedia = function(field, context) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
         language = iD.data.wikipedia[0],
         link, entity, lang, title;

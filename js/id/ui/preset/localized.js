@@ -1,6 +1,6 @@
 iD.ui.preset.localized = function(field, context) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
         input, localizedInputs, wikiTitles;
 
@@ -12,8 +12,7 @@ iD.ui.preset.localized = function(field, context) {
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder || '')
             .on('blur', change)
-            .on('change', change)
-            .call(iD.behavior.accept().on('accept', event.close));
+            .on('change', change);
 
         var translateButton = selection.append('button')
             .attr('class', 'button-input-action localized-add minor')

@@ -1,6 +1,6 @@
 iD.ui.preset.defaultcheck = function(field) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         input;
 
     var check = function(selection) {

@@ -1,6 +1,6 @@
 iD.ui.preset.textarea = function(field) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         input;
 
     function i(selection) {
@@ -9,8 +9,7 @@ iD.ui.preset.textarea = function(field) {
             .attr('placeholder', field.placeholder || '')
             .attr('maxlength', 255)
             .on('blur', change)
-            .on('change', change)
-            .call(iD.behavior.accept().on('accept', event.close));
+            .on('change', change);
     }
 
     function change() {

@@ -1,5 +1,5 @@
 iD.ui.preset.access = function(field, context) {
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         entity,
         items;
 

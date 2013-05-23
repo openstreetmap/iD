@@ -4,7 +4,7 @@ iD.ui.preset.tel =
 iD.ui.preset.email =
 iD.ui.preset.url = function(field) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         input;
 
     function i(selection) {
@@ -13,8 +13,7 @@ iD.ui.preset.url = function(field) {
             .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder || '')
             .on('blur', change)
-            .on('change', change)
-            .call(iD.behavior.accept().on('accept', event.close));
+            .on('change', change);
 
         function pm(elem, x) {
             var num = elem.value ?

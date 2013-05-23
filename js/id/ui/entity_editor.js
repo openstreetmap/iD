@@ -82,8 +82,7 @@ iD.ui.EntityEditor = function(context, entity) {
             .call(iD.ui.PresetIcon(context.geometry(entity.id)));
 
         presetUI = iD.ui.preset(context, entity, preset)
-            .on('change', changeTags)
-            .on('close', browse);
+            .on('change', changeTags);
 
         var tageditorpreset = editorwrap.append('div')
             .attr('class', 'inspector-preset cf fillL col12')

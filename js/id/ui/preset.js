@@ -1,6 +1,6 @@
 iD.ui.preset = function(context, entity, preset) {
     var original = context.graph().base().entities[entity.id],
-        event = d3.dispatch('change', 'close'),
+        event = d3.dispatch('change'),
         fields = [],
         tags = {},
         formwrap,
@@ -10,7 +10,6 @@ iD.ui.preset = function(context, entity, preset) {
         field = _.clone(field);
 
         field.input = iD.ui.preset[field.type](field, context)
-            .on('close', event.close)
             .on('change', event.change);
 
         field.reference = iD.ui.TagReference({key: field.key});

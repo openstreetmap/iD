@@ -1,6 +1,6 @@
 iD.ui.preset.address = function(field, context) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         housename,
         housenumber,
         street,
@@ -36,9 +36,6 @@ iD.ui.preset.address = function(field, context) {
     }
 
     function address(selection) {
-
-        function close() { return iD.behavior.accept().on('accept', event.close); }
-
         var wrap = selection.append('div')
             .attr('class', 'preset-input-wrap');
 
@@ -48,16 +45,14 @@ iD.ui.preset.address = function(field, context) {
             .attr('class', 'addr-housename')
             .attr('id', 'preset-input-' + field.id)
             .on('blur', change)
-            .on('change', change)
-            .call(close());
+            .on('change', change);
 
         housenumber = wrap.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.number'))
             .attr('class', 'addr-number')
             .on('blur', change)
-            .on('change', change)
-            .call(close());
+            .on('change', change);
 
         street = wrap.append('input')
             .property('type', 'text')
@@ -72,16 +67,14 @@ iD.ui.preset.address = function(field, context) {
             .attr('placeholder', field.t('placeholders.city'))
             .attr('class', 'addr-city')
             .on('blur', change)
-            .on('change', change)
-            .call(close());
+            .on('change', change);
 
         postcode = wrap.append('input')
             .property('type', 'text')
             .attr('placeholder', field.t('placeholders.postcode'))
             .attr('class', 'addr-postcode')
             .on('blur', change)
-            .on('change', change)
-            .call(close());
+            .on('change', change);
     }
 
     function change() {

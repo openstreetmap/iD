@@ -1,6 +1,6 @@
 iD.ui.preset.combo = function(field) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         input;
 
     function combo(selection) {

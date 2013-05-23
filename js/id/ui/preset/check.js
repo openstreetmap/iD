@@ -1,6 +1,6 @@
 iD.ui.preset.check = function(field) {
 
-    var event = d3.dispatch('change', 'close'),
+    var event = d3.dispatch('change'),
         values = ['', 'yes', 'no'],
         value = '',
         box,
