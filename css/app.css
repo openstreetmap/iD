@@ -893,6 +893,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     padding-left: 20px;
     padding-right: 20px;
 }
+.inspector-preset .form-field:first-child {
+    margin-top: 10px;
+}
 
 .form-label {
     position: relative;
@@ -933,6 +936,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .form-field textarea {
     height: 65px;
+}
+
+.form-field button.remove {
+    border-radius: 0 0 4px 0;
 }
 
 /* adding additional preset fields */
@@ -1262,10 +1269,6 @@ input[type=number] {
     border-radius: 0 0 4px 4px;
 }
 
-.form-field .localized-wrap .entry .localized-remove {
-    border-radius: 0 0 4px 0;
-}
-
 /* Preset form address */
 
 .form-field .addr-housename {
@@ -1344,10 +1347,15 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
-/* tag editor */
+/* Raw Tag Editor */
 
 .raw-tag-editor {
     border-top: 1px solid #ccc;
+    padding-bottom: 0;
+}
+
+.tag-list {
+    padding-top: 10px;
 }
 
 .tag-row {
@@ -1367,6 +1375,7 @@ div.combobox {
 .tag-row .input-wrap-position {
     width: 40%;
     float: left;
+    height: 29px;
 }
 
 .tag-row input.key {
@@ -1452,12 +1461,11 @@ div.combobox {
 
 .tag-reference-body p,
 .tag-reference-body img {
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .tag-reference-body a {
     margin-top: 5px;
-    margin-bottom: 5px;
     display: block;
 }
 
@@ -1472,6 +1480,10 @@ div.combobox {
     width: 100%;
 }
 
+.raw-tag-editor .tag-reference-body * {
+    padding-bottom: 10px;
+}
+
 img.wiki-image {
     float: right;
     width: 33.3333%;
@@ -1481,6 +1493,22 @@ img.wiki-image {
     margin-right: 10px;
     border-radius: 4px;
     max-height: 200px;
+}
+
+/* Raw relation membership editor */
+
+.raw-membership-editor:nth-last-child(2) {
+    padding-bottom: 0;
+}
+
+.raw-membership-editor .member-row {
+    position: relative;
+    padding-top: 10px;
+}
+
+.raw-membership-editor .member-row .member-entity-name {
+    font-weight: normal;
+    padding-left: 10px;
 }
 
 /* Map Controls */
@@ -1543,9 +1571,13 @@ img.wiki-image {
     border: 0;
 }
 
+.background-control .hide-toggle  {
+    padding-bottom: 10px;
+}
+
 .hide-toggle {
     display: block;
-    padding: 0 0 10px 12px;
+    padding-left:12px;
     position: relative;
 }
 

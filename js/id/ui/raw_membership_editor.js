@@ -62,33 +62,35 @@ iD.ui.RawMembershipEditor = function(context, entity) {
             .data(memberships, function(d) { return iD.Entity.key(d.relation) + ',' + d.index; });
 
         var row = li.enter().append('li')
-            .attr('class', 'member-row');
+            .attr('class', 'member-row form-field');
 
-        var relation = row.append('a')
+        // var relation = row.append('div')
+        //     .attr('class', 'member-entity cf');
+
+        // relation.append('span')
+        //     .attr('class', 'member-entity-icon')
+        //     .each(function(d) {
+        //         return d3.select(this)
+        //             .call(iD.ui.PresetIcon(context.geometry(d.relation.id)));
+        //     });
+
+        relationLabel = row.append('label')
+            .attr('class', 'form-label')
+            .append('a')
             .attr('href', '#')
-            .attr('class', 'member-entity')
             .on('click', selectRelation);
 
-        relation.append('span')
-            .attr('class', 'member-entity-icon')
-            .each(function(d) {
-                return d3.select(this)
-                    .call(iD.ui.PresetIcon(context.geometry(d.relation.id)));
-            });
+        relationLabel.append('span')
+            .attr('class','member-entity-type')
+            .text(function(d) { return context.presets().match(d.relation, context.graph()).name(); });
 
-        relation.append('span')
+        relationLabel.append('span')
             .attr('class', 'member-entity-name')
             .text(function(d) { return iD.util.localeName(d.relation); });
 
-        relation.append('span')
-            .attr('class', 'member-entity-type')
-            .text(function(d) { return context.presets().match(d.relation, context.graph()).name(); });
-
-        row.append('span')
+        row.append('input')
             .attr('class', 'member-role')
-            .append('input')
             .property('type', 'text')
-            .attr('class', 'member-role-input')
             .attr('maxlength', 255)
             .attr('placeholder', t('inspector.role'))
             .property('value', function(d) { return d.member.role; })
@@ -96,7 +98,7 @@ iD.ui.RawMembershipEditor = function(context, entity) {
 
         row.append('button')
             .attr('tabindex', -1)
-            .attr('class', 'member-delete')
+            .attr('class', 'remove button-input-action member-delete minor')
             .on('click', deleteMembership)
             .append('span')
             .attr('class', 'icon delete');

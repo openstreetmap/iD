@@ -98,7 +98,7 @@ iD.ui.preset = function(context, entity, preset) {
             .style('opacity', '0')
             .transition()
             .duration(200)
-            .style('padding-top', '20px')
+            .style('padding-top', '10px')
             .style('max-height', '240px')
             .style('opacity', '1')
             .each('end', function(d) {
