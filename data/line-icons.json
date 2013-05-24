@@ -40,5 +40,8 @@
     "category-roads": [2000, 25],
     "category-rail": [2060, 25],
     "category-path": [2120, 25],
-    "category-water": [2180, 25]
+    "category-water": [2180, 25],
+
+    "ferry": [2240, 25],
+    "pipeline": [2300, 25]
 }

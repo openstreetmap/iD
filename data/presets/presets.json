@@ -2590,7 +2590,8 @@
             "location",
             "operator"
         ],
-        "name": "Pipeline"
+        "name": "Pipeline",
+        "icon": "pipeline"
     },
     "man_made/survey_point": {
         "icon": "monument",
@@ -3280,6 +3281,16 @@
         "geometry": [
             "relation"
         ]
+    },
+    "route/ferry": {
+        "icon": "ferry",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "route": "ferry"
+        },
+        "name": "Ferry Route"
     },
     "shop": {
         "icon": "shop",

@@ -853,6 +853,9 @@ en:
       relation: 
         name: Relation
         terms: ""
+      route/ferry: 
+        name: Ferry Route
+        terms: ""
       shop: 
         name: Shop
         terms: ""

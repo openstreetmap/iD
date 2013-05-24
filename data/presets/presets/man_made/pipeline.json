@@ -9,5 +9,6 @@
         "location",
         "operator"
     ],
-    "name": "Pipeline"
+    "name": "Pipeline",
+    "icon": "pipeline"
 }
