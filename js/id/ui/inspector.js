@@ -53,16 +53,12 @@ iD.ui.Inspector = function(context) {
                 presetLayer.call(presetList);
             });
 
-        var unused =
-            _.without(Object.keys(entity.tags), 'area').length === 0 &&
-            context.graph().parentRelations(entity).length === 0;
-
-        if (unused) {
-            panewrap.style('right', '-100%');
-            presetLayer.call(presetList);
-        } else {
+        if (entity.isUsed(context.graph())) {
             panewrap.style('right', '-0%');
             tagLayer.call(entityEditor);
+        } else {
+            panewrap.style('right', '-100%');
+            presetLayer.call(presetList);
         }
     }
 

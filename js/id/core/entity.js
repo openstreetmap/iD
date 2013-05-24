@@ -99,6 +99,11 @@ iD.Entity.prototype = {
         return this.extent(resolver).intersects(extent);
     },
 
+    isUsed: function(resolver) {
+        return _.without(Object.keys(this.tags), 'area').length > 0 ||
+            resolver.parentRelations(this).length > 0;
+    },
+
     // Returns the (possibly negative) area of the entity in square pixels at an
     // arbitrary unspecified zoom level -- so basically, only useful for relative
     // comparisons.

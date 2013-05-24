@@ -144,6 +144,33 @@ describe('iD.Entity', function () {
         });
     });
 
+    describe("#isUsed", function () {
+        it("returns false for an entity without tags", function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(node.isUsed(graph)).to.equal(false);
+        });
+
+        it("returns true for an entity with tags", function () {
+            var node = iD.Node({tags: {foo: 'bar'}}),
+                graph = iD.Graph([node]);
+            expect(node.isUsed(graph)).to.equal(true);
+        });
+
+        it("returns false for an entity with only an area=yes tag", function () {
+            var node = iD.Node({tags: {area: 'yes'}}),
+                graph = iD.Graph([node]);
+            expect(node.isUsed(graph)).to.equal(false);
+        });
+
+        it("returns true for an entity that is a relation member", function () {
+            var node = iD.Node(),
+                relation = iD.Relation({members: [{id: node.id}]}),
+                graph = iD.Graph([node, relation]);
+            expect(node.isUsed(graph)).to.equal(true);
+        });
+    });
+
     describe("#hasDeprecatedTags", function () {
         it("returns false if entity has no tags", function () {
             expect(iD.Entity().deprecatedTags()).to.eql({});
