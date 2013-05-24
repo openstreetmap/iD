@@ -16,9 +16,12 @@ iD.ui.PresetIcon = function(geometry) {
                 var icon = preset.icon || fallbackIcon,
                     klass = 'feature-' + icon + ' preset-icon';
 
-                icon = iD.data.featureIcons[icon];
-                if (icon && icon[geometry]) {
+                var featureicon = iD.data.featureIcons[icon];
+                if (featureicon && featureicon[geometry]) {
                     klass += ' preset-icon-' + geometry;
+                } else if (icon === 'multipolygon') {
+                    // Special case (geometry === 'area')
+                    klass += ' preset-icon-relation';
                 }
 
                 return klass;
