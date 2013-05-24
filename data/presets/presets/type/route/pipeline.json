@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "pipeline"
+    },
+    "name": "Pipeline Route",
+    "icon": "route-pipeline"
+}

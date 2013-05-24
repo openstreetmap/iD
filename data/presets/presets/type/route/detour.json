@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "detour"
+    },
+    "name": "Detour Route",
+    "icon": "route-detour"
+}

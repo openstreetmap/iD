@@ -5,5 +5,6 @@
     "tags": {
         "type": "boundary"
     },
-    "name": "Boundary"
+    "name": "Boundary",
+    "icon": "boundary"
 }

@@ -1057,11 +1057,44 @@ en:
       type/boundary: 
         name: Boundary
         terms: ""
+      type/multipolygon: 
+        name: Multipolygon
+        terms: ""
       type/restriction: 
         name: Restriction
         terms: ""
       type/route: 
         name: Route
+        terms: ""
+      type/route/bicycle: 
+        name: Cycle Route
+        terms: ""
+      type/route/bus: 
+        name: Bus Route
+        terms: ""
+      type/route/detour: 
+        name: Detour Route
+        terms: ""
+      type/route/ferry: 
+        name: Ferry Route
+        terms: ""
+      type/route/foot: 
+        name: Foot Route
+        terms: ""
+      type/route/pipeline: 
+        name: Pipeline Route
+        terms: ""
+      type/route/power: 
+        name: Power Route
+        terms: ""
+      type/route/road: 
+        name: Road Route
+        terms: ""
+      type/route/train: 
+        name: Train Route
+        terms: ""
+      type/route/tram: 
+        name: Tram Route
         terms: ""
       waterway: 
         name: Waterway

@@ -739,7 +739,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: auto;
 }
 
-.preset-icon-line {
+.preset-icon-line,
+.preset-icon-relation {
     top: 0;
     left: 0;
 }

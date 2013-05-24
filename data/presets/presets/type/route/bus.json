@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "bus"
+    },
+    "name": "Bus Route",
+    "icon": "route-bus"
+}

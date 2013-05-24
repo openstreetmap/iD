@@ -1,0 +1,17 @@
+{
+    "relation": [20, 25],
+    "restriction": [80, 25],
+    "multipolygon": [140, 25],
+    "boundary": [200, 25],
+    "route": [260, 25],
+    "route-road": [320, 25],
+    "route-bicycle": [380, 25],
+    "route-foot": [440, 25],
+    "route-bus": [500, 25],
+    "route-train": [560, 25],
+    "route-detour": [620, 25],
+    "route-tram": [680, 25],
+    "route-ferry": [740, 25],
+    "route-power": [800, 25],
+    "route-pipeline": [860, 25]
+}

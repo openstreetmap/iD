@@ -17,8 +17,8 @@ iD.ui.PresetIcon = function(geometry) {
                     klass = 'feature-' + icon + ' preset-icon';
 
                 icon = iD.data.featureIcons[icon];
-                if (geometry === 'line' && icon && icon.line) {
-                    klass += ' preset-icon-line';
+                if (icon && icon[geometry]) {
+                    klass += ' preset-icon-' + geometry;
                 }
 
                 return klass;

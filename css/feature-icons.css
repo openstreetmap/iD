@@ -2,6 +2,7 @@
 
 .preset-icon{background-image:url(img/maki-sprite.png);background-repeat:no-repeat;width:24px;height:24px;}
 .preset-icon-line{background-image:url(img/line-presets.png);background-repeat:no-repeat;width:60px;height:60px;}
+.preset-icon-relation{background-image:url(img/relation-presets.png);background-repeat:no-repeat;width:60px;height:60px;}
 .feature-airfield{background-position:-0px -34px;}
 .feature-airport{background-position:-0px -94px;}
 .feature-alcohol-shop{background-position:-0px -154px;}
@@ -132,3 +133,18 @@
 .preset-icon-line.feature-category-rail{background-position:-2060px -25px;}
 .preset-icon-line.feature-category-path{background-position:-2120px -25px;}
 .preset-icon-line.feature-category-water{background-position:-2180px -25px;}
+.preset-icon-relation.feature-relation{background-position:-20px -25px;}
+.preset-icon-relation.feature-restriction{background-position:-80px -25px;}
+.preset-icon-relation.feature-multipolygon{background-position:-140px -25px;}
+.preset-icon-relation.feature-boundary{background-position:-200px -25px;}
+.preset-icon-relation.feature-route{background-position:-260px -25px;}
+.preset-icon-relation.feature-route-road{background-position:-320px -25px;}
+.preset-icon-relation.feature-route-bicycle{background-position:-380px -25px;}
+.preset-icon-relation.feature-route-foot{background-position:-440px -25px;}
+.preset-icon-relation.feature-route-bus{background-position:-500px -25px;}
+.preset-icon-relation.feature-route-train{background-position:-560px -25px;}
+.preset-icon-relation.feature-route-detour{background-position:-620px -25px;}
+.preset-icon-relation.feature-route-tram{background-position:-680px -25px;}
+.preset-icon-relation.feature-route-ferry{background-position:-740px -25px;}
+.preset-icon-relation.feature-route-power{background-position:-800px -25px;}
+.preset-icon-relation.feature-route-pipeline{background-position:-860px -25px;}

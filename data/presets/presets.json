@@ -4477,7 +4477,18 @@
         "tags": {
             "type": "boundary"
         },
-        "name": "Boundary"
+        "name": "Boundary",
+        "icon": "boundary"
+    },
+    "type/multipolygon": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "multipolygon"
+        },
+        "name": "Multipolygon",
+        "icon": "multipolygon"
     },
     "type/restriction": {
         "geometry": [
@@ -4486,7 +4497,8 @@
         "tags": {
             "type": "restriction"
         },
-        "name": "Restriction"
+        "name": "Restriction",
+        "icon": "restriction"
     },
     "type/route": {
         "geometry": [
@@ -4495,7 +4507,118 @@
         "tags": {
             "type": "route"
         },
-        "name": "Route"
+        "name": "Route",
+        "icon": "route"
+    },
+    "type/route/bicycle": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "bicycle"
+        },
+        "name": "Cycle Route",
+        "icon": "route-bicycle"
+    },
+    "type/route/bus": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "bus"
+        },
+        "name": "Bus Route",
+        "icon": "route-bus"
+    },
+    "type/route/detour": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "detour"
+        },
+        "name": "Detour Route",
+        "icon": "route-detour"
+    },
+    "type/route/ferry": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "ferry"
+        },
+        "name": "Ferry Route",
+        "icon": "route-ferry"
+    },
+    "type/route/foot": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "foot"
+        },
+        "name": "Foot Route",
+        "icon": "route-foot"
+    },
+    "type/route/pipeline": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "pipeline"
+        },
+        "name": "Pipeline Route",
+        "icon": "route-pipeline"
+    },
+    "type/route/power": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "power"
+        },
+        "name": "Power Route",
+        "icon": "route-power"
+    },
+    "type/route/road": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "road"
+        },
+        "name": "Road Route",
+        "icon": "route-road"
+    },
+    "type/route/train": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "train"
+        },
+        "name": "Train Route",
+        "icon": "route-train"
+    },
+    "type/route/tram": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "tram"
+        },
+        "name": "Tram Route",
+        "icon": "route-tram"
     },
     "waterway": {
         "fields": [

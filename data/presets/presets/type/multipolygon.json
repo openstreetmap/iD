@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "multipolygon"
+    },
+    "name": "Multipolygon",
+    "icon": "multipolygon"
+}

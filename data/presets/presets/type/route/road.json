@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "road"
+    },
+    "name": "Road Route",
+    "icon": "route-road"
+}

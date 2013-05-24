@@ -4,7 +4,8 @@ all: \
 	dist/iD.css \
 	dist/iD.js \
 	dist/iD.min.js \
-	dist/img/line-presets.png
+	dist/img/line-presets.png \
+	dist/img/relation-presets.png
 
 DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
 data/data.js: $(DATA_FILES) dist/locales/en.json dist/img/maki-sprite.png
@@ -82,10 +83,13 @@ clean:
 translations:
 	node data/update_locales
 
-SPRITE = inkscape --export-area-page --export-png=dist/img/line-presets.png svg/line-presets.svg
+SPRITE = inkscape --export-area-page
 
 dist/img/line-presets.png: svg/line-presets.svg
-	if [ `which inkscape` ]; then $(SPRITE); else echo "Inkscape is not installed"; fi;
+	if [ `which inkscape` ]; then $(SPRITE) --export-png=$@ $<; else echo "Inkscape is not installed"; fi;
+
+dist/img/relation-presets.png: svg/relation-presets.svg
+	if [ `which inkscape` ]; then $(SPRITE) --export-png=$@ $<; else echo "Inkscape is not installed"; fi;
 
 dist/img/maki-sprite.png: $(wildcard node_modules/maki/renders/*.png)
 	node data/maki_sprite
