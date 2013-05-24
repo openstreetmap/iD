@@ -370,6 +370,9 @@ en:
       amenity/waste_basket: 
         name: Waste Basket
         terms: "rubbish bin,litter bin,trash can,garbage can"
+      area: 
+        name: Area
+        terms: ""
       barrier: 
         name: Barrier
         terms: ""
@@ -670,6 +673,9 @@ en:
       leisure/swimming_pool: 
         name: Swimming Pool
         terms: ""
+      line: 
+        name: Line
+        terms: ""
       man_made: 
         name: Man Made
         terms: ""
@@ -763,12 +769,6 @@ en:
       office: 
         name: Office
         terms: ""
-      other: 
-        name: Other
-        terms: ""
-      other_area: 
-        name: Other
-        terms: ""
       place: 
         name: Place
         terms: ""
@@ -792,6 +792,9 @@ en:
         terms: ""
       place/village: 
         name: Village
+        terms: ""
+      point: 
+        name: Point
         terms: ""
       power: 
         name: Power
@@ -847,6 +850,9 @@ en:
       railway/tram: 
         name: Tram
         terms: streetcar
+      relation: 
+        name: Relation
+        terms: ""
       shop: 
         name: Shop
         terms: ""
@@ -1095,6 +1101,9 @@ en:
         terms: ""
       type/route/tram: 
         name: Tram Route
+        terms: ""
+      vertex: 
+        name: Other
         terms: ""
       waterway: 
         name: Waterway

@@ -8,7 +8,7 @@
         "amenity/place_of_worship",
         "amenity/cafe",
         "amenity/restaurant",
-        "other_area"
+        "area"
     ],
     "line": [
         "category-road",
@@ -16,7 +16,7 @@
         "category-path",
         "category-water",
         "power/line",
-        "other"
+        "line"
     ],
     "point": [
         "leisure/park",
@@ -27,7 +27,7 @@
         "amenity/bar",
         "amenity/bank",
         "shop/supermarket",
-        "other"
+        "point"
     ],
     "vertex": [
         "highway/crossing",
@@ -36,6 +36,6 @@
         "highway/turning_circle",
         "highway/mini_roundabout",
         "highway/motorway_junction",
-        "other"
+        "vertex"
     ]
 }

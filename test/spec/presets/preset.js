@@ -34,7 +34,7 @@ describe('iD.presets.Preset', function() {
 
 
     it("has optional fields", function() {
-        expect(p.other.fields).to.eql([]);
+        expect(p.point.fields).to.eql([]);
     });
 
     describe('#matchGeometry', function() {
@@ -46,17 +46,17 @@ describe('iD.presets.Preset', function() {
         });
 
         it("returns true if it does match", function() {
-            expect(p.other.matchGeometry('point')).to.equal(true);
+            expect(p.point.matchGeometry('point')).to.equal(true);
         });
     });
 
     describe('#matchScore', function() {
-       it("returns -1 if preset does not match tags", function() {
+        it("returns -1 if preset does not match tags", function() {
             expect(p['highway/residential'].matchScore(w1)).to.equal(-1);
         });
 
-        it("returns 0 for other preset (no match tags)", function() {
-            expect(p.other.matchScore(w1)).to.equal(0);
+        it("returns 0 for fallback presets", function() {
+            expect(p.point.matchScore(w1)).to.equal(0);
         });
 
         it("returns the number of matched tags", function() {
@@ -68,11 +68,19 @@ describe('iD.presets.Preset', function() {
             expect(p.building.matchScore(w4)).to.equal(0.5);
             expect(p.building.matchScore(w5)).to.equal(-1);
         });
+    });
 
+    describe("isFallback", function() {
+        it("returns true if preset has no tags", function() {
+            expect(iD.presets.Preset("area", {name: "Area", tags: {}}).isFallback()).to.equal(true);
+        });
+
+        it("returns false if preset has no tags", function() {
+            expect(p.building.isFallback()).to.equal(false);
+        });
     });
 
     describe('#applyTags', function() {
-
         it("adds match tags", function() {
             expect(p['highway/residential'].applyTags({}, 'area')).to.eql({ highway: 'residential' });
         });
@@ -88,7 +96,6 @@ describe('iD.presets.Preset', function() {
     });
 
     describe('#removeTags', function() {
-
         it('removes match tags', function() {
             expect(p['highway/residential'].removeTags({ highway: 'residential' }, 'area')).to.eql({});
         });
@@ -98,5 +105,4 @@ describe('iD.presets.Preset', function() {
             expect(p['amenity/cafe'].removeTags({ amenity: 'cafe', building: 'yep'}, 'area')).to.eql({ building: 'yep'});
         });
     });
-
 });

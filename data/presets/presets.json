@@ -1035,6 +1035,13 @@
         ],
         "name": "Waste Basket"
     },
+    "area": {
+        "name": "Area",
+        "tags": {},
+        "geometry": [
+            "area"
+        ]
+    },
     "barrier": {
         "geometry": [
             "point",
@@ -2511,6 +2518,13 @@
         "icon": "swimming",
         "name": "Swimming Pool"
     },
+    "line": {
+        "name": "Line",
+        "tags": {},
+        "geometry": [
+            "line"
+        ]
+    },
     "man_made": {
         "fields": [
             "man_made"
@@ -2920,28 +2934,6 @@
         "terms": [],
         "name": "Office"
     },
-    "other": {
-        "name": "Other",
-        "tags": {},
-        "geometry": [
-            "point",
-            "vertex",
-            "line",
-            "area",
-            "relation"
-        ],
-        "fields": []
-    },
-    "other_area": {
-        "name": "Other",
-        "tags": {
-            "area": "yes"
-        },
-        "geometry": [
-            "area"
-        ],
-        "fields": []
-    },
     "place": {
         "fields": [
             "place"
@@ -3040,6 +3032,13 @@
             "place": "village"
         },
         "name": "Village"
+    },
+    "point": {
+        "name": "Point",
+        "tags": {},
+        "geometry": [
+            "point"
+        ]
     },
     "power": {
         "geometry": [
@@ -3273,6 +3272,14 @@
             "streetcar"
         ],
         "name": "Tram"
+    },
+    "relation": {
+        "name": "Relation",
+        "icon": "relation",
+        "tags": {},
+        "geometry": [
+            "relation"
+        ]
     },
     "shop": {
         "icon": "shop",
@@ -4619,6 +4626,13 @@
         },
         "name": "Tram Route",
         "icon": "route-tram"
+    },
+    "vertex": {
+        "name": "Other",
+        "tags": {},
+        "geometry": [
+            "vertex"
+        ]
     },
     "waterway": {
         "fields": [

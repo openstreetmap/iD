@@ -1,8 +1,12 @@
 describe("iD.presets", function() {
     var p = {
-        other: {
+        point: {
             tags: {},
-            geometry: ['point', 'vertex', 'line', 'area']
+            geometry: ['point']
+        },
+        line: {
+            tags: {},
+            geometry: ['line']
         },
         residential: {
             tags: {
@@ -29,10 +33,12 @@ describe("iD.presets", function() {
             expect(c.match(way, graph).id).to.eql('residential');
         });
 
-        it("returns an other preset when no tags match", function() {
-            var way = iD.Way({tags: {foo: 'bar'}}),
-                graph = iD.Graph([way]);
-            expect(c.match(way, graph).id).to.eql('other');
+        it("returns the appropriate fallback preset when no tags match", function() {
+            var point = iD.Node(),
+                line = iD.Way({tags: {foo: 'bar'}}),
+                graph = iD.Graph([point, line]);
+            expect(c.match(point, graph).id).to.eql('point');
+            expect(c.match(line, graph).id).to.eql('line');
         });
     });
 });

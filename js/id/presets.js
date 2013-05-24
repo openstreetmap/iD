@@ -5,11 +5,10 @@ iD.presets = function() {
 
     var all = iD.presets.Collection([]),
         defaults = { area: all, line: all, point: all, vertex: all },
+        fallbacks = {},
         fields = {},
         universal = [],
-        recent = iD.presets.Collection([]),
-        other,
-        other_area;
+        recent = iD.presets.Collection([]);
 
     // Index of presets by (geometry, tag key).
     var index = {
@@ -24,7 +23,7 @@ iD.presets = function() {
         var geometry = entity.geometry(resolver),
             geometryMatches = index[geometry],
             best = -1,
-            match = geometry === 'area' ? other_area : other;
+            match;
 
         for (var k in entity.tags) {
             var keyMatches = geometryMatches[k];
@@ -39,7 +38,7 @@ iD.presets = function() {
             }
         }
 
-        return match;
+        return match || fallbacks[geometry];
     };
 
     all.load = function(d) {
@@ -73,8 +72,13 @@ iD.presets = function() {
             };
         }
 
-        other = all.item('other');
-        other_area = all.item('other_area');
+        fallbacks = {
+            point: all.item('point'),
+            vertex: all.item('vertex'),
+            line: all.item('line'),
+            area: all.item('area'),
+            relation: all.item('relation')
+        };
 
         for (var i = 0; i < all.collection.length; i++) {
             var preset = all.collection[i],
@@ -102,11 +106,11 @@ iD.presets = function() {
     all.defaults = function(geometry, n) {
         var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
             def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
-        return iD.presets.Collection(_.unique(rec.concat(def).concat(geometry === 'area' ? other_area : other)));
+        return iD.presets.Collection(_.unique(rec.concat(def).concat(fallbacks[geometry])));
     };
 
     all.choose = function(preset) {
-        if (preset !== other && preset !== other_area) {
+        if (!preset.isFallback()) {
             recent = iD.presets.Collection(_.unique([preset].concat(recent.collection)));
         }
         return all;

@@ -45,6 +45,10 @@ iD.presets.Preset = function(id, preset, fields) {
         return preset.t('terms', {'default': ''}).split(',');
     };
 
+    preset.isFallback = function() {
+        return Object.keys(preset.tags).length === 0;
+    };
+
     preset.reference = function() {
         var reference = {key: Object.keys(preset.tags)[0]};
 
