@@ -5,7 +5,6 @@ iD.presets = function() {
 
     var all = iD.presets.Collection([]),
         defaults = { area: all, line: all, point: all, vertex: all },
-        fallbacks = {},
         fields = {},
         universal = [],
         recent = iD.presets.Collection([]);
@@ -38,7 +37,7 @@ iD.presets = function() {
             }
         }
 
-        return match || fallbacks[geometry];
+        return match || all.item(geometry);
     };
 
     all.load = function(d) {
@@ -72,14 +71,6 @@ iD.presets = function() {
             };
         }
 
-        fallbacks = {
-            point: all.item('point'),
-            vertex: all.item('vertex'),
-            line: all.item('line'),
-            area: all.item('area'),
-            relation: all.item('relation')
-        };
-
         for (var i = 0; i < all.collection.length; i++) {
             var preset = all.collection[i],
                 geometry = preset.geometry;
@@ -106,7 +97,7 @@ iD.presets = function() {
     all.defaults = function(geometry, n) {
         var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
             def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
-        return iD.presets.Collection(_.unique(rec.concat(def).concat(fallbacks[geometry])));
+        return iD.presets.Collection(_.unique(rec.concat(def).concat(all.item(geometry))));
     };
 
     all.choose = function(preset) {

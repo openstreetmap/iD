@@ -16,7 +16,7 @@ iD.presets.Collection = function(collection) {
             }));
         },
 
-        search: function(value) {
+        search: function(value, geometry) {
             if (!value) return this;
 
             value = value.toLowerCase();
@@ -59,7 +59,7 @@ iD.presets.Collection = function(collection) {
                     });
                 });
 
-            var other = presets.item('other');
+            var other = presets.item(geometry);
 
             return iD.presets.Collection(
                 _.unique(

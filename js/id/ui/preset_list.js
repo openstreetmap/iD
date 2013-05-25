@@ -61,7 +61,7 @@ iD.ui.PresetList = function(context, entity) {
             } else {
                 list.classed('filtered', value.length);
                 if (value.length) {
-                    var results = presets.search(value);
+                    var results = presets.search(value, geometry);
                     message.text(t('inspector.results', {
                         n: results.collection.length,
                         search: value
