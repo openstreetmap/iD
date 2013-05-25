@@ -350,10 +350,11 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.zoomTo = function(entity) {
+    map.zoomTo = function(entity, zoomLimits) {
         var extent = entity.extent(context.graph()),
             zoom = map.extentZoom(extent);
-        map.centerZoom(extent.center(), zoom);
+        zoomLimits = zoomLimits || [16, 20];
+        map.centerZoom(extent.center(), Math.min(Math.max(zoom, zoomLimits[0]), zoomLimits[1]));
     };
 
     map.centerZoom = function(loc, z) {
