@@ -130,9 +130,10 @@ iD.ui.PresetList = function(context, entity) {
                 .attr('class', 'preset-list-button-wrap category col12');
 
             wrap.append('button')
-                .datum(preset)
                 .attr('class', 'preset-list-button')
-                .call(iD.ui.PresetIcon(context.geometry(entity.id)))
+                .call(iD.ui.PresetIcon()
+                    .geometry(context.geometry(entity.id))
+                    .preset(preset))
                 .on('click', item.choose)
                 .append('div')
                 .attr('class', 'label')
@@ -179,9 +180,10 @@ iD.ui.PresetList = function(context, entity) {
                 .attr('class', 'preset-list-button-wrap col12');
 
             wrap.append('button')
-                .datum(preset)
                 .attr('class', 'preset-list-button')
-                .call(iD.ui.PresetIcon(context.geometry(entity.id)))
+                .call(iD.ui.PresetIcon()
+                    .geometry(context.geometry(entity.id))
+                    .preset(preset))
                 .on('click', item.choose)
                 .append('div')
                 .attr('class', 'label')

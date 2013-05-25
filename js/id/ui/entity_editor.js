@@ -47,9 +47,7 @@ iD.ui.EntityEditor = function(context, entity) {
             preset = newpreset;
         }
 
-        selection
-            .datum(preset)
-            .html('');
+        selection.html('');
 
         var messagewrap = selection.append('div')
             .attr('class', 'header fillL cf');
@@ -79,7 +77,9 @@ iD.ui.EntityEditor = function(context, entity) {
             .attr('class', 'col12 inspector-inner preset-icon-wrap')
             .append('div')
             .attr('class','fillL')
-            .call(iD.ui.PresetIcon(context.geometry(entity.id)));
+            .call(iD.ui.PresetIcon()
+                .geometry(context.geometry(entity.id))
+                .preset(preset));
 
         presetUI = iD.ui.preset(context, entity, preset)
             .on('change', changeTags);
