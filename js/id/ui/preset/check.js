@@ -1,7 +1,7 @@
 iD.ui.preset.check = function(field) {
     var event = d3.dispatch('change'),
-        values = ['', 'yes', 'no'],
-        value = '',
+        values = [undefined, 'yes', 'no'],
+        value,
         box,
         text,
         label;
@@ -28,7 +28,6 @@ iD.ui.preset.check = function(field) {
             .on('click', function() {
                 var t = {};
                 t[field.key] = values[(values.indexOf(value) + 1) % 3];
-                check.tags(t);
                 event.change(t);
                 d3.event.stopPropagation();
             });
@@ -37,7 +36,7 @@ iD.ui.preset.check = function(field) {
     };
 
     check.tags = function(tags) {
-        value = tags[field.key] || '';
+        value = tags[field.key];
         box.property('indeterminate', !value);
         box.property('checked', value === 'yes');
         text.text(value || 'unknown');

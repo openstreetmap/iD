@@ -45,7 +45,7 @@ iD.ui.preset.access = function(field, context) {
 
     function change(d) {
         var tag = {};
-        tag[d] = d3.select(this).property('value');
+        tag[d] = d3.select(this).property('value') || undefined;
         event.change(tag);
     }
 

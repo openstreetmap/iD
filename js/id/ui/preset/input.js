@@ -53,7 +53,7 @@ iD.ui.preset.url = function(field) {
 
     function change() {
         var t = {};
-        t[field.key] = input.property('value');
+        t[field.key] = input.property('value') || undefined;
         event.change(t);
     }
 

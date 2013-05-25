@@ -69,18 +69,18 @@ iD.ui.preset.maxspeed = function(field, context) {
     }
 
     function change() {
-        var value = input.property('value');
-        var t = {};
-        if (value) {
-            if (isNaN(value) || !imperial) {
-                t[field.key] = value;
-            } else {
-                t[field.key] = value + ' mph';
-            }
+        var tag = {},
+            value = input.property('value');
+
+        if (!value) {
+            tag[field.key] = undefined;
+        } else if (isNaN(value) || !imperial) {
+            tag[field.key] = value;
         } else {
-            t[field.key] = '';
+            tag[field.key] = value + ' mph';
         }
-        event.change(t);
+
+        event.change(tag);
     }
 
     maxspeed.tags = function(tags) {

@@ -47,7 +47,7 @@ iD.ui.preset.localized = function(field, context) {
 
     function change() {
         var t = {};
-        t[field.key] = d3.select(this).property('value');
+        t[field.key] = d3.select(this).property('value') || undefined;
         event.change(t);
     }
 
@@ -131,7 +131,7 @@ iD.ui.preset.localized = function(field, context) {
                     .attr('class', 'minor button-input-action remove')
                     .on('click', function(d) {
                         var t = {};
-                        t[key(d.lang)] = '';
+                        t[key(d.lang)] = undefined;
                         event.change(t);
                         d3.select(this.parentNode)
                             .style('top','0')

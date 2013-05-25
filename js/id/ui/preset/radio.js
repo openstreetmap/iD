@@ -42,13 +42,13 @@ iD.ui.preset.radio = function(field) {
 
     function change() {
         var t = {};
-        if (field.key) t[field.key] = null;
+        if (field.key) t[field.key] = undefined;
         buttons.each(function(d) {
             var active = d3.select(this).classed('active');
             if (field.key) {
                 if (active) t[field.key] = d;
             } else {
-                t[d] = active ? 'yes' : '';
+                t[d] = active ? 'yes' : undefined;
             }
         });
         event.change(t);

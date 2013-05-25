@@ -99,7 +99,7 @@ iD.ui.EntityEditor = function(context) {
                     .entityID(id));
         } else {
             $body.select('.raw-member-editor')
-                .style('display', 'none')
+                .style('display', 'none');
         }
 
         $body.select('.raw-membership-editor')
@@ -122,10 +122,11 @@ iD.ui.EntityEditor = function(context) {
     }
 
     function clean(o) {
-        var out = {};
-        for (var k in o) {
-            var v = o[k].trim();
-            if (v) out[k] = v;
+        var out = {}, k, v;
+        for (k in o) {
+            if (k && (v = o[k]) !== undefined) {
+                out[k] = v.trim();
+            }
         }
         return out;
     }

@@ -43,7 +43,7 @@ iD.ui.preset.combo = function(field) {
 
     function change() {
         var t = {};
-        t[field.key] = input.property('value').replace(' ', '_');
+        t[field.key] = input.property('value').replace(' ', '_') || undefined;
         event.change(t);
     }
 

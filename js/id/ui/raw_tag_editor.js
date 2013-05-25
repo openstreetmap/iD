@@ -114,19 +114,6 @@ iD.ui.RawTagEditor = function(context) {
         $items.exit()
             .remove();
 
-        function keyChange(d) {
-            var tag = {};
-            tag[this.value] = d.value;
-            d.key = this.value; // Maintain DOM identity through the subsequent update.
-            event.change(tag);
-        }
-
-        function valueChange(d) {
-            var tag = {};
-            tag[d.key] = this.value;
-            event.change(tag);
-        }
-
         function pushMore() {
             if (d3.event.keyCode === 9 && !d3.event.shiftKey &&
                 $list.selectAll('li:last-child input.value').node() === this) {
@@ -178,15 +165,30 @@ iD.ui.RawTagEditor = function(context) {
                 }));
         }
 
+        function keyChange(d) {
+            var tag = {};
+            tag[d.key] = undefined;
+            tag[this.value] = d.value;
+            d.key = this.value; // Maintain DOM identity through the subsequent update.
+            event.change(tag);
+        }
+
+        function valueChange(d) {
+            var tag = {};
+            tag[d.key] = this.value;
+            event.change(tag);
+        }
+
+        function removeTag(d) {
+            var tag = {};
+            tag[d.key] = undefined;
+            event.change(tag);
+        }
+
         function addTag() {
             tags[''] = '';
             content($wrap);
             $list.selectAll('li:last-child input.key').node().focus();
-        }
-
-        function removeTag(d) {
-            tags[d.key] = '';
-            event.change(tags);
         }
     }
 

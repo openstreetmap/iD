@@ -101,7 +101,7 @@ iD.ui.preset.wikipedia = function(field, context) {
             lang.property('value', language[0]);
         }
 
-        t[field.key] = value ? language[2] + ':' + value : '';
+        t[field.key] = value ? language[2] + ':' + value : undefined;
         event.change(t);
         link.attr('href', 'http://' + language[2] + '.wikipedia.org/wiki/' + (value || ''));
     }

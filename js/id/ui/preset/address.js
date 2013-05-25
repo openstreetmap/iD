@@ -87,11 +87,11 @@ iD.ui.preset.address = function(field, context) {
 
     function change() {
         event.change({
-            'addr:housename': housename.property('value'),
-            'addr:housenumber': housenumber.property('value'),
-            'addr:street': street.property('value'),
-            'addr:city': city.property('value'),
-            'addr:postcode': postcode.property('value')
+            'addr:housename': housename.property('value') || undefined,
+            'addr:housenumber': housenumber.property('value') || undefined,
+            'addr:street': street.property('value') || undefined,
+            'addr:city': city.property('value') || undefined,
+            'addr:postcode': postcode.property('value') || undefined
         });
     }
 
