@@ -70,7 +70,7 @@ iD.ui.intro.point = function(context, reveal) {
         function closeEditor() {
             d3.select('.preset-search-input').on('keydown.intro', null);
             context.history().on('change.intro', null);
-            reveal('.tag-pane', 'intro.points.close');
+            reveal('.entity-editor-pane', 'intro.points.close');
         }
 
         function selectPoint() {
@@ -93,7 +93,7 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', null);
 
             setTimeout(function() {
-                reveal('.tag-pane', 'intro.points.fixname');
+                reveal('.entity-editor-pane', 'intro.points.fixname');
                 context.on('exit.intro', deletePoint);
             }, 500);
         }

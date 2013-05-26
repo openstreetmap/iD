@@ -14,18 +14,18 @@ iD.ui.Inspector = function(context) {
             .attr('class', 'panewrap');
 
         $enter.append('div')
-            .attr('class', 'grid-pane pane');
+            .attr('class', 'preset-list-pane pane');
 
         $enter.append('div')
-            .attr('class', 'tag-pane pane');
+            .attr('class', 'entity-editor-pane pane');
 
-        var $presetPane = $wrap.select('.grid-pane')
+        var $presetPane = $wrap.select('.preset-list-pane')
             .call(presetList
                 .entityID(entityID)
                 .autofocus(newFeature)
                 .on('choose', setPreset));
 
-        var $editorPane = $wrap.select('.tag-pane')
+        var $editorPane = $wrap.select('.entity-editor-pane')
             .call(entityEditor
                 .entityID(entityID)
                 .on('choose', showList));

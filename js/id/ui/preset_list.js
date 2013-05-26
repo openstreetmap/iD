@@ -90,7 +90,7 @@ iD.ui.PresetList = function(context) {
         }
 
         var listWrap = selection.append('div')
-            .attr('class', 'fillL2 inspector-body');
+            .attr('class', 'inspector-body');
 
         var list = listWrap.append('div')
             .attr('class', 'preset-list fillL cf')

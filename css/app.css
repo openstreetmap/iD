@@ -658,11 +658,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     right: 0;
     left: 0;
     bottom: 0;
-    top: 60px;
 }
 
-.pane:first-child .inspector-body {
+.preset-list-pane .inspector-body {
     top: 120px;
+}
+
+.entity-editor-pane .inspector-body {
+    top: 60px;
 }
 
 .inspector-inner {
@@ -812,7 +815,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top: -3px;
 }
 
-.grid-pane .preset-search-icon {
+.preset-list-pane .preset-search-icon {
     display: block;
     position: absolute;
     left: 10px;
@@ -820,7 +823,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     pointer-events: none;
 }
 
-.grid-pane .preset-search-input {
+.preset-list-pane .preset-search-input {
     position: absolute;
     top: 60px;
     border-radius: 0;
@@ -882,12 +885,12 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* preset form basics */
 
-.tag-wrap .preset-icon-wrap {
+.entity-editor-pane .preset-icon-wrap {
     border-bottom: 1px solid #CCC;
     background-color: #F6F6F6;
 }
 
-.tag-wrap .preset-icon-wrap::after {
+.entity-editor-pane .preset-icon-wrap::after {
     content: "";
     position: absolute;
     height: 0;
@@ -901,7 +904,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-bottom-color: #CCC;
 }
 
-.tag-wrap .preset-icon-wrap > div {
+.entity-editor-pane .preset-icon-wrap > div {
     height: 60px;
     width: 60px;
     margin: auto;
@@ -964,7 +967,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 0 0 4px 0;
 }
 
-.tag-wrap .inspector-external-links { 
+.entity-editor-pane .inspector-external-links {
     border-top: 1px solid #ccc;
 }
 
@@ -1057,15 +1060,15 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
     width: 12.5%;
 }
 
-.tag-wrap .tooltip.top .tooltip-arrow {
+.entity-editor-pane .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
-.tag-wrap .tooltip.left .tooltip-arrow {
+.entity-editor-pane .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 
-.tag-wrap .tooltip-inner {
+.entity-editor-pane .tooltip-inner {
     background: #000;
     color: #ccc;
 }

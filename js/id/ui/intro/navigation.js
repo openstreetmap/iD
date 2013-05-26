@@ -63,7 +63,7 @@ iD.ui.intro.navigation = function(context, reveal) {
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
             set(function() {
-                reveal('.tag-pane', 'intro.navigation.pane');
+                reveal('.entity-editor-pane', 'intro.navigation.pane');
                 context.on('exit.intro', event.done);
             }, 700);
         }

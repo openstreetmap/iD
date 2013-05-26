@@ -49,7 +49,7 @@ iD.ui.EntityEditor = function(context) {
         // Enter
 
         $enter = $body.enter().append('div')
-            .attr('class', 'tag-wrap inspector-body fillL2');
+            .attr('class', 'inspector-body');
 
         $enter.append('div')
             .attr('class', 'preset-icon-wrap inspector-inner col12')
