@@ -1023,14 +1023,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     padding: 0;
 }
 
-/* Hacky overrides to d3 animations,
-should probably be fixed in the d3 code */
-.inspector-hover .inspector-preset .form-field { 
-    padding-top: 10px !important;
-    max-height: none !important;
-    opacity: 1 !important;
-}
-
 /* adding additional preset fields */
 
 .more-buttons {
