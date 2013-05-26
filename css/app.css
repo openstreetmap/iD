@@ -914,17 +914,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     background-color: #F6F6F6;
 }
 
-.inspector-preset .form-field {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.inspector-preset .form-field:first-child {
-    margin-top: 10px;
-}
-
-.inspector-preset .form-field:last-child { 
-    padding-bottom: 20px;
+.form-field {
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .form-label {
@@ -1026,12 +1018,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* adding additional preset fields */
 
 .more-buttons {
-    margin-top: 20px;
     border-top: 1px solid #CCC;
-}
-
-.more-buttons:nth-last-child(2) {
-    border-bottom: 1px solid #CCC;
 }
 
 button.preset-add-field {

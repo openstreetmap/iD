@@ -73,7 +73,13 @@ iD.ui.preset = function(context) {
         var shown = fields.filter(function(field) { return field.shown(); }),
             notShown = fields.filter(function(field) { return !field.shown(); });
 
-        var $fields = selection.selectAll('.form-field')
+        var $form = selection.selectAll('form')
+            .data([0]);
+
+        $form.enter().append('form')
+            .attr('class', 'preset-form inspector-inner col12');
+
+        var $fields = $form.selectAll('.form-field')
             .data(shown, fieldKey);
 
         // Enter
@@ -81,7 +87,7 @@ iD.ui.preset = function(context) {
         var $enter = $fields.enter()
             .insert('div', '.more-buttons')
             .attr('class', function(field) {
-                return 'form-field form-field-' + field.id + ' col12';
+                return 'form-field form-field-' + field.id;
             });
 
         var $label = $enter.append('label')
