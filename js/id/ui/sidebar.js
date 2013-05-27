@@ -10,6 +10,7 @@ iD.ui.Sidebar = function(context) {
                 wrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', true)
                     .call(iD.ui.Inspector(context)
+                        .state('hover')
                         .entityID(entity.id));
             } else {
                 wrap.classed('inspector-hidden', true);
@@ -21,6 +22,7 @@ iD.ui.Sidebar = function(context) {
                 wrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', false)
                     .call(iD.ui.Inspector(context)
+                        .state('select')
                         .entityID(selection[0]));
             } else {
                 wrap.classed('inspector-hidden', true);

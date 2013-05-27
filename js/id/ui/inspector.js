@@ -1,6 +1,7 @@
 iD.ui.Inspector = function(context) {
     var presetList = iD.ui.PresetList(context),
         entityEditor = iD.ui.EntityEditor(context),
+        state = 'select',
         entityID,
         newFeature = false;
 
@@ -27,6 +28,7 @@ iD.ui.Inspector = function(context) {
 
         var $editorPane = $wrap.select('.entity-editor-pane')
             .call(entityEditor
+                .state(state)
                 .entityID(entityID)
                 .on('choose', showList));
 
@@ -54,6 +56,12 @@ iD.ui.Inspector = function(context) {
         entityEditor.close();
 
         selection.style('display', 'none');
+    };
+
+    inspector.state = function(_) {
+        if (!arguments.length) return state;
+        state = _;
+        return inspector;
     };
 
     inspector.entityID = function(_) {

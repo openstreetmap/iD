@@ -1,5 +1,6 @@
 iD.ui.EntityEditor = function(context) {
     var event = d3.dispatch('choose'),
+        state = 'select',
         id,
         preset;
 
@@ -31,7 +32,9 @@ iD.ui.EntityEditor = function(context) {
         // Update
 
         $header.select('h3')
-            .text(t('inspector.editing_feature', {feature: preset.name()}));
+            .text(state === 'select' ?
+                t('inspector.editing_feature', {feature: preset.name()}) :
+                preset.name());
 
         $header.select('.preset-reset')
             .on('click', function() {
@@ -141,6 +144,12 @@ iD.ui.EntityEditor = function(context) {
                 t('operations.change_tags.annotation'));
         }
     }
+
+    entityEditor.state = function(_) {
+        if (!arguments.length) return state;
+        state = _;
+        return entityEditor;
+    };
 
     entityEditor.entityID = function(_) {
         if (!arguments.length) return id;
