@@ -14,7 +14,11 @@ iD.taginfo = function() {
             line: 'ways'
         };
 
-    var cache = this.cache = {};
+    if (!iD.taginfo.cache) {
+        iD.taginfo.cache = {};
+    }
+
+    var cache = iD.taginfo.cache;
 
     function sets(parameters, n, o) {
         if (parameters.geometry && o[parameters.geometry]) {
