@@ -160,10 +160,10 @@ input[type=email] {
     border-radius:4px;
     text-overflow: ellipsis;
     overflow: hidden;
-    -webkit-transition: all 100ms;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
+    -webkit-transition: all 200ms;
+       -moz-transition: all 200ms;
+         -o-transition: all 200ms;
+            transition: all 200ms;
 }
 
 textarea:focus,
@@ -610,26 +610,28 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .header h3 {
     text-align: center;
-    margin-right: 40px;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.modal > button,
-.header button {
-    height: 100%;
+.header button,
+.modal > button {
     border-radius: 0;
     width: 40px;
     text-align: center;
     overflow: hidden;
-    position: absolute;
-    right: 0;
-    top: 0;
+}
+
+.header button {
+    height: 100%;
 }
 
 .modal > button {
+    position: absolute;
+    right: 0;
+    top: 0;
     height: 59px;
     z-index: 3;
 }
@@ -674,11 +676,25 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .inspector-wrap .header button.preset-reset {
-    position: relative;
+    float: left;
+}
+
+.inspector-wrap .header button.preset-close {
+    float: right;
+}
+
+.inspector-wrap .header button.preset-reset,
+.inspector-wrap .header button.preset-close {
+    -moz-transition: opacity 200ms;
+      -o-transition: opacity 200ms;
+         transition: opacity 200ms;
 }
 
 .inspector-hover .header button.preset-reset,
-.inspector-hover .header button.preset-close,
+.inspector-hover .header button.preset-close {
+    opacity: 0;
+}
+
 .inspector-hover .more-buttons,
 .inspector-hover .inspector-external-links {
     display: none;
@@ -911,6 +927,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 4px;
     border: 1px solid #CCC;
     position: relative;
+}
+
+.inspector-wrap .inspector-preset {
+    background-color: white;
+    -moz-transition: background-color 200ms;
+      -o-transition: background-color 200ms;
+         transition: background-color 200ms;
 }
 
 .inspector-hover .inspector-preset {

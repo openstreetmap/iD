@@ -17,17 +17,17 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'header fillL cf');
 
         $enter.append('button')
-            .attr('class', 'preset-reset fl ')
+            .attr('class', 'preset-reset')
             .append('span')
             .attr('class', 'icon back');
 
-        $enter.append('h3')
-            .attr('class', 'inspector-inner');
-
         $enter.append('button')
-            .attr('class', 'preset-close fr')
+            .attr('class', 'preset-close')
             .append('span')
             .attr('class', 'icon close');
+
+        $enter.append('h3')
+            .attr('class', 'inspector-inner');
 
         // Update
 
@@ -60,7 +60,7 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'fillL');
 
         $enter.append('div')
-            .attr('class', 'inspector-preset cf fillL col12');
+            .attr('class', 'inspector-preset col12');
 
         $enter.append('div')
             .attr('class', 'raw-tag-editor inspector-inner col12');
