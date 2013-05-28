@@ -69,10 +69,17 @@ function generateFields() {
 
         validate(file, field, fieldSchema);
 
-        translations.fields[id] = {label: field.label};
+        var t = translations.fields[id] = {
+            label: field.label
+        };
+
+        if (field.placeholder) {
+            t.placeholder = field.placeholder;
+        }
+
         if (field.strings) {
             for (var i in field.strings) {
-                translations.fields[id][i] = field.strings[i];
+                t[i] = field.strings[i];
             }
         }
 

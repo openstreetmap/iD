@@ -19,10 +19,21 @@ function t(s, o, loc) {
         if (o) for (var k in o) rep = rep.replace('{' + k + '}', o[k]);
         return rep;
     } else {
-        var missing = 'Missing translation: ' + s;
-        if (typeof console !== "undefined") console.error(missing);
-        if (loc !== 'en') return t(s, o, 'en');
-        if (o && 'default' in o) return o['default'];
-        return missing;
+        function missing() {
+            var missing = 'Missing ' + loc + ' translation: ' + s;
+            if (typeof console !== "undefined") console.error(missing);
+            return missing;
+        }
+
+        if (loc !== 'en') {
+            missing();
+            return t(s, o, 'en');
+        }
+
+        if (o && 'default' in o) {
+            return o['default'];
+        }
+
+        return missing();
     }
 }

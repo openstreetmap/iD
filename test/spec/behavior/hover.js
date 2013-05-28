@@ -64,7 +64,7 @@ describe("iD.behavior.Hover", function() {
         it("replaces the .hover class with .hover-suppressed", function () {
             container.append('span').attr('class', 'hover');
 
-            container.call(iD.behavior.Hover().altDisables(true));
+            container.call(iD.behavior.Hover(context).altDisables(true));
             happen.keydown(document, {keyCode: 18});
 
             expect(container.selectAll('.hover')[0]).to.have.length(0);
@@ -76,7 +76,7 @@ describe("iD.behavior.Hover", function() {
         it("replaces the .hover-suppressed class with .hover", function () {
             container.append('span').attr('class', 'hover-suppressed');
 
-            container.call(iD.behavior.Hover().altDisables(true));
+            container.call(iD.behavior.Hover(context).altDisables(true));
             happen.keyup(document, {keyCode: 18});
 
             expect(container.selectAll('.hover')[0]).to.have.length(1);
