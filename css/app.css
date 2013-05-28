@@ -1526,14 +1526,27 @@ div.combobox {
     padding-top: 20px;
 }
 
+.tag-reference-body p:last-child {
+    padding-bottom: 20px;
+}
+
 .tag-reference-body a {
-    margin-top: 5px;
     display: block;
+    padding-bottom: 10px;
 }
 
 .preset-list .tag-reference-body {
     position: relative;
     width: 100%;
+}
+
+.preset-list .tag-reference-body a {
+    padding-bottom: 20px;
+}
+
+.preset-list .tag-reference-body p,
+.preset-list .tag-reference-body img {
+    padding-top: 10px;
 }
 
 .raw-tag-editor .tag-reference-body {
@@ -1542,8 +1555,12 @@ div.combobox {
     width: 100%;
 }
 
-.raw-tag-editor .tag-reference-body * {
-    padding-bottom: 10px;
+.raw-tag-editor .tag-reference-body p:last-child {
+    padding-bottom: 20px;
+}
+
+.raw-tag-editor .tag-reference-body a {
+    padding-bottom: 20px;
 }
 
 img.wiki-image {
@@ -1555,6 +1572,7 @@ img.wiki-image {
     margin-right: 10px;
     border-radius: 4px;
     max-height: 200px;
+    margin-bottom: 20px;
 }
 
 /* Raw relation membership editor */
