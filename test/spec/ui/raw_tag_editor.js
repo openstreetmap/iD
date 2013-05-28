@@ -1,36 +1,27 @@
 describe('iD.ui.RawTagEditor', function() {
     var taglist, element,
-        tags = {highway: 'residential'},
         entity, context;
 
-    function render() {
-        taglist = iD.ui.RawTagEditor(context, entity);
+    function render(tags) {
+        taglist = iD.ui.RawTagEditor(context)
+            .entityID(entity.id)
+            .preset({isFallback: function() { return false; }})
+            .tags(tags);
+
         element = d3.select('body')
             .append('div')
             .call(taglist);
-        taglist.tags(entity.tags);
     }
 
     beforeEach(function () {
-        entity = iD.Entity({type: 'node', id: "n12345", tags: tags});
+        entity = iD.Node({id: "n12345"});
         context = iD();
-        render();
+        context.history().merge({n12345: entity});
+        render({highway: 'residential'});
     });
 
     afterEach(function () {
         element.remove();
-    });
-
-    describe("#tags", function () {
-        it("returns the current tags", function () {
-            expect(taglist.tags()).to.eql(tags);
-        });
-
-        it("returns updated tags when input values have changed", function () {
-            element.selectAll("input.key").property('value', 'k');
-            element.selectAll("input.value").property('value', 'v');
-            expect(taglist.tags()).to.eql({k: 'v'});
-        });
     });
 
     it("creates input elements for each key-value pair", function () {
@@ -40,8 +31,7 @@ describe('iD.ui.RawTagEditor', function() {
 
     it("creates a pair of empty input elements if the entity has no tags", function () {
         element.remove();
-        entity = entity.update({tags: {}});
-        render();
+        render({});
         expect(element.select('.tag-list').selectAll("input.value").property('value')).to.be.empty;
         expect(element.select('.tag-list').selectAll("input.key").property('value')).to.be.empty;
     });
@@ -52,9 +42,12 @@ describe('iD.ui.RawTagEditor', function() {
         expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
     });
 
-    it("removes tags when clicking the remove button", function () {
+    it("removes tags when clicking the remove button", function (done) {
+        taglist.on('change', function(tags) {
+            expect(tags).to.eql({highway: undefined});
+            done();
+        });
         element.selectAll("button.remove").trigger('click');
-        expect(taglist.tags()).to.eql({});
     });
 
     it("adds tags when pressing the TAB key on last input.value", function () {
