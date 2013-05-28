@@ -653,6 +653,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 100%;
 }
 
+.inspector-hidden {
+    display: none;
+}
+
 .inspector-body {
     overflow-y: scroll;
     overflow-x: hidden;
