@@ -47,7 +47,8 @@ body {
     position: absolute;
     height: 40px;
     width: 40px;
-    right: 10px;
+    right:  33.3333%;
+    margin-right: 10px;
     top: 10px;
     margin: auto;
     border-radius: 4px;
