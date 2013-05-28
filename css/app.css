@@ -1179,11 +1179,10 @@ input[type=number] {
     margin-right: 5px;
     width: 20px;
     vertical-align: middle;
-    opacity: 0.5;
 }
 
-.checkselect .set input[type="checkbox"] {
-    opacity: 1;
+.checkselect label:not(.set) input[type="checkbox"] {
+    opacity: .5;
 }
 
 /* Preset form radio button */
