@@ -176,52 +176,6 @@ _.extend(iD.Relation.prototype, {
             .filter(function(m) { return m.type === 'way' && resolver.hasEntity(m.id); })
             .map(function(m) { return { role: m.role || 'outer', id: m.id, nodes: resolver.childNodes(resolver.entity(m.id)) }; });
 
-        function join(ways) {
-            var joined = [], current, first, last, i, how, what;
-
-            while (ways.length) {
-                current = ways.pop().nodes.slice();
-                joined.push(current);
-
-                while (ways.length && _.first(current) !== _.last(current)) {
-                    first = _.first(current);
-                    last  = _.last(current);
-
-                    for (i = 0; i < ways.length; i++) {
-                        what = ways[i].nodes;
-
-                        if (last === _.first(what)) {
-                            how  = current.push;
-                            what = what.slice(1);
-                            break;
-                        } else if (last === _.last(what)) {
-                            how  = current.push;
-                            what = what.slice(0, -1).reverse();
-                            break;
-                        } else if (first == _.last(what)) {
-                            how  = current.unshift;
-                            what = what.slice(0, -1);
-                            break;
-                        } else if (first == _.first(what)) {
-                            how  = current.unshift;
-                            what = what.slice(1).reverse();
-                            break;
-                        } else {
-                            what = how = null;
-                        }
-                    }
-
-                    if (!what)
-                        break; // Invalid geometry (unclosed ring)
-
-                    ways.splice(i, 1);
-                    how.apply(current, what);
-                }
-            }
-
-            return joined.map(function(nodes) { return _.pluck(nodes, 'loc'); });
-        }
-
         function findOuter(inner) {
             var o, outer;
 
@@ -238,8 +192,8 @@ _.extend(iD.Relation.prototype, {
             }
         }
 
-        var outers = join(members.filter(function(m) { return m.role === 'outer'; })),
-            inners = join(members.filter(function(m) { return m.role === 'inner'; })),
+        var outers = _.pluck(this.joinMemberWays(members.filter(function(m) { return m.role === 'outer'; })), 'locs'),
+            inners = _.pluck(this.joinMemberWays(members.filter(function(m) { return m.role === 'inner'; })), 'locs'),
             result = outers.map(function(o) { return [o]; });
 
         for (var i = 0; i < inners.length; i++) {
@@ -251,5 +205,68 @@ _.extend(iD.Relation.prototype, {
         }
 
         return result;
+    },
+
+    joinMemberWays: function(ways, resolver) {
+        var joined = [], way, current, first, last, i, how, what;
+
+        ways = ways || this.members.filter(function(m) {
+            return m.type === 'way';
+        }).map(function(m) {
+            return {
+                id: m.id,
+                nodes: resolver.childNodes(resolver.entity(m.id))
+            };
+        });
+
+        while (ways.length) {
+            way = ways.pop();
+            current = way.nodes.slice();
+            current.ids = [way.id];
+            joined.push(current);
+
+            while (ways.length && _.first(current) !== _.last(current)) {
+                first = _.first(current);
+                last  = _.last(current);
+
+                for (i = 0; i < ways.length; i++) {
+                    what = ways[i].nodes;
+
+                    if (last === _.first(what)) {
+                        how  = current.push;
+                        what = what.slice(1);
+                        break;
+                    } else if (last === _.last(what)) {
+                        how  = current.push;
+                        what = what.slice(0, -1).reverse();
+                        break;
+                    } else if (first == _.last(what)) {
+                        how  = current.unshift;
+                        what = what.slice(0, -1);
+                        break;
+                    } else if (first == _.first(what)) {
+                        how  = current.unshift;
+                        what = what.slice(1).reverse();
+                        break;
+                    } else {
+                        what = how = null;
+                    }
+                }
+
+                if (!what)
+                    break; // Invalid geometry (unclosed ring)
+
+                current.ids.push(ways[i].id);
+                ways.splice(i, 1);
+                how.apply(current, what);
+            }
+        }
+        return joined.map(function(nodes) {
+            return {
+                ids: nodes.ids,
+                locs: _.pluck(nodes, 'loc')
+            };
+        });
     }
+
 });
