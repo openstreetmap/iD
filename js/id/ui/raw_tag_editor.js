@@ -31,10 +31,6 @@ iD.ui.RawTagEditor = function(context) {
             entries.push({key: '', value: ''});
         }
 
-        entries.forEach(function(entry) {
-            entry.reference = iD.ui.TagReference({key: entry.key});
-        });
-
         var $list = $wrap.selectAll('.tag-list')
             .data([0]);
 
@@ -89,10 +85,11 @@ iD.ui.RawTagEditor = function(context) {
         $items.order();
 
         $items.each(function(tag) {
+            var reference = iD.ui.TagReference({key: tag.key});
             d3.select(this)
                 .each(bindTypeahead)
-                .call(tag.reference.button)
-                .call(tag.reference.body);
+                .call(reference.button)
+                .call(reference.body);
         });
 
         $items.select('input.key')
