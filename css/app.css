@@ -856,6 +856,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* preset form basics */
 
+.inspector-preset {
+    border-bottom: 1px solid #ccc;
+}
+
 .entity-editor-pane .preset-icon-wrap {
     border-bottom: 1px solid #ccc;
     padding: 10px 20px;
@@ -886,6 +890,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .form-field {
     margin-bottom: 10px;
     width: 100%;
+    -webkit-transition: margin-bottom 200ms 0ms;
+       -moz-transition: margin-bottom 200ms 0ms;
+         -o-transition: margin-bottom 200ms 0ms;
+            transition: margin-bottom 200ms 0ms;
 }
 
 .form-field:last-child {
@@ -925,9 +933,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .form-field .preset-input-wrap {
     border: 1px solid #CCC;
     min-height: 30px;
+    max-height: 300px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
+    -webkit-transition: max-height 400ms 0ms;
+       -moz-transition: max-height 400ms 0ms;
+         -o-transition: max-height 400ms 0ms;
+            transition: max-height 400ms 0ms;
 }
 
 .form-field textarea {
@@ -939,38 +952,59 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* Preset form (hover mode) */
+
+
 .inspector-hover .header {
     background-color: #f6f6f6;
 }
 
+.header {
+    -webkit-transition: background-color 400ms;
+       -moz-transition: background-color 400ms;
+         -o-transition: background-color 400ms;
+            transition: background-color 400ms;
+}
+
 .inspector-hover textarea,
-.inspector-hover form,
-.inspector-hover input[type=text],
-.inspector-hover input[type=search],
-.inspector-hover input[type=number],
-.inspector-hover input[type=url],
-.inspector-hover input[type=tel],
-.inspector-hover input[type=email],
+.inspector-hover input,
 .inspector-hover .form-label,
 .inspector-hover .checkselect label:last-of-type,
 .inspector-hover .preset-input-wrap,
 .inspector-hover .preset-input-wrap * {
-    background-color: #f6f6f6;
+    background-color: white;
     border-color: #DFDFDF;
 }
 
+header,
+textarea,
+input,
+.form-label,
+.checkselect label:last-of-type,
+.preset-input-wrap,
+.preset-input-wrap * {
+    -webkit-transition: background-color 400ms, border-color 400ms;
+       -moz-transition: background-color 400ms, border-color 400ms;
+         -o-transition: background-color 400ms, border-color 400ms;
+            transition: background-color 400ms, border-color 400ms;
+}
+
+.inspector-hover .form-field:last-child > input,
+.inspector-hover .form-field:last-child > textarea,
+.inspector-hover .form-field:last-child .preset-input-wrap {
+    margin-bottom: 20px;
+}
+
 /* hide and remove from layout */
-.inspector-hover .more-buttons,
 .inspector-hover .inspector-external-links
 .inspector-hidden,
-.inspector-hover .checkselect input[type="checkbox"],
+.inspector-hover .checkselect label input[type="checkbox"],
 .inspector-hover .radio-wrap button::before,
 .inspector-hover .preset-radio button:not(.active),
 .inspector-hover .tag-list {
     height: 0;
     width: 0;
     overflow: hidden;
-    opacity: 0;
+    opacity: 0 !important;
     border-width: 0;
     margin: 0;
     padding: 0;
@@ -988,6 +1022,26 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .tag-list,
 .inspector-hover .inspector-external-links {
     opacity: 0;
+}
+
+.modified .form-label .modified-icon,
+button.minor,
+.combobox-carat,
+button,
+.spin-control,
+.hide-toggle:before,
+.more-buttons,
+.tag-list,
+.inspector-external-links {
+    -webkit-transition: opacity 400ms;
+       -moz-transition: opacity 400ms;
+         -o-transition: opacity 400ms;
+            transition: opacity 400ms;
+}
+
+.inspector-hover .inspector-body .more-buttons {
+    max-height: 0;
+    padding: 0;
 }
 
 /* reposition labels after stripping icons */
@@ -1020,16 +1074,20 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* adding additional preset fields */
 
 .inspector-body .more-buttons {
-    border-bottom: 1px solid #ccc;
+    max-height: 100px;
+    -webkit-transition: max-height 400ms, padding 400ms;
+       -moz-transition: max-height 400ms, padding 400ms;
+         -o-transition: max-height 400ms, padding 400ms;
+            transition: max-height 400ms, padding 400ms;
 }
 
 button.preset-add-field {
     width: 25%;
     height: 40px;
     -webkit-transition: width 200ms;
-    -moz-transition: width 200ms;
-    -o-transition: width 200ms;
-    transition: width 200ms;
+       -moz-transition: width 200ms;
+         -o-transition: width 200ms;
+            transition: width 200ms;
 }
 
 /* set width based on # of buttons */
