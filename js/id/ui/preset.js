@@ -148,8 +148,6 @@ iD.ui.preset = function(context) {
         $buttons.on('click', show);
 
         $buttons.exit()
-            .transition()
-            .style('opacity', 0)
             .remove();
 
         function show(field) {
