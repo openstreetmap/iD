@@ -6,8 +6,6 @@ iD.ui.Inspector = function(context) {
         newFeature = false;
 
     function inspector(selection) {
-        selection.style('display', 'block');
-
         var $wrap = selection.selectAll('.panewrap')
             .data([0]);
 
