@@ -40,6 +40,7 @@ iD.ui.preset.localized = function(field, context) {
     }
 
     function addBlank() {
+        d3.event.preventDefault();
         var data = localizedInputs.selectAll('div.entry').data();
         data.push({ lang: '', value: '' });
         localizedInputs.call(render, data);
