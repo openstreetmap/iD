@@ -1,179 +1,179 @@
-en:
-  presets:
-    categories:
-      "category-landuse":
+en: 
+  presets: 
+    categories: 
+      "category-landuse": 
         name: Land Use
-      "category-path":
+      "category-path": 
         name: Path
-      "category-rail":
+      "category-rail": 
         name: Rail
-      "category-road":
+      "category-road": 
         name: Road
-      "category-water":
+      "category-water": 
         name: Water
-    fields:
-      access:
+    fields: 
+      access: 
         label: Access
-        types:
+        types: 
           access: General
           foot: Foot
           motor_vehicle: Motor Vehicles
           bicycle: Bicycles
           horse: Horses
-        options:
-          yes:
+        options: 
+          yes: 
             title: Allowed
             description: Access permitted by law; a right of way
-          no:
+          no: 
             title: Prohibited
             description: Access not permitted to the general public
-          permissive:
+          permissive: 
             title: Permissive
             description: Access permitted until such time as the owner revokes the permission
-          private:
+          private: 
             title: Private
             description: Access permitted only with permission of the owner on an individual basis
-          designated:
+          designated: 
             title: Designated
             description: Access permitted according to signs or specific local laws
-          destination:
+          destination: 
             title: Destination
             description: Access permitted only to reach a destination
-      address:
+      address: 
         label: Address
-        placeholders:
+        placeholders: 
           housename: Housename
           number: "123"
           street: Street
           city: City
           postcode: Postal code
-      admin_level:
+      admin_level: 
         label: Admin Level
-      aeroway:
+      aeroway: 
         label: Type
-      amenity:
+      amenity: 
         label: Type
-      atm:
+      atm: 
         label: ATM
-      barrier:
+      barrier: 
         label: Type
-      bicycle_parking:
+      bicycle_parking: 
         label: Type
-      building:
+      building: 
         label: Building
-      building_area:
+      building_area: 
         label: Building
-      building_yes:
+      building_yes: 
         label: Building
-      capacity:
+      capacity: 
         label: Capacity
         placeholder: "50, 100, 200..."
-      cardinal_direction:
+      cardinal_direction: 
         label: Direction
-      clock_direction:
+      clock_direction: 
         label: Direction
-        options:
+        options: 
           clockwise: Clockwise
           anticlockwise: Counterclockwise
-      collection_times:
+      collection_times: 
         label: Collection Times
-      construction:
+      construction: 
         label: Type
-      country:
+      country: 
         label: Country
-      crossing:
+      crossing: 
         label: Type
-      cuisine:
+      cuisine: 
         label: Cuisine
-      denomination:
+      denomination: 
         label: Denomination
-      denotation:
+      denotation: 
         label: Denotation
-      elevation:
+      elevation: 
         label: Elevation
-      emergency:
+      emergency: 
         label: Emergency
-      entrance:
+      entrance: 
         label: Type
-      fax:
+      fax: 
         label: Fax
         placeholder: +31 42 123 4567
-      fee:
+      fee: 
         label: Fee
-      highway:
+      highway: 
         label: Type
-      historic:
+      historic: 
         label: Type
-      iata:
+      iata: 
         label: IATA
-      icao:
+      icao: 
         label: ICAO
-      incline:
+      incline: 
         label: Incline
-      internet_access:
+      internet_access: 
         label: Internet Access
-        options:
+        options: 
           yes: Yes
           no: No
           wlan: Wifi
           wired: Wired
           terminal: Terminal
-      landuse:
+      landuse: 
         label: Type
-      lanes:
+      lanes: 
         label: Lanes
         placeholder: "1, 2, 3..."
-      layer:
+      layer: 
         label: Layer
-      leisure:
+      leisure: 
         label: Type
-      levels:
+      levels: 
         label: Levels
         placeholder: "2, 4, 6..."
-      location:
+      location: 
         label: Location
-      man_made:
+      man_made: 
         label: Type
-      maxspeed:
+      maxspeed: 
         label: Speed Limit
         placeholder: "40, 50, 60..."
-      name:
+      name: 
         label: Name
         placeholder: Common name (if any)
-      natural:
+      natural: 
         label: Natural
-      network:
+      network: 
         label: Network
-      note:
+      note: 
         label: Note
-      office:
+      office: 
         label: Type
-      oneway:
+      oneway: 
         label: One Way
-      oneway_yes:
+      oneway_yes: 
         label: One Way
-      opening_hours:
+      opening_hours: 
         label: Hours
-      operator:
+      operator: 
         label: Operator
-      park_ride:
+      park_ride: 
         label: Park and Ride
-      parking:
+      parking: 
         label: Type
-      phone:
+      phone: 
         label: Phone
         placeholder: +31 42 123 4567
-      place:
+      place: 
         label: Type
-      power:
+      power: 
         label: Type
-      railway:
+      railway: 
         label: Type
-      ref:
+      ref: 
         label: Reference
-      religion:
+      religion: 
         label: Religion
-        options:
+        options: 
           christian: Christian
           muslim: Muslim
           buddhist: Buddhist
@@ -181,966 +181,966 @@ en:
           hindu: Hindu
           shinto: Shinto
           taoist: Taoist
-      sac_scale:
+      sac_scale: 
         label: Path Difficulty
-      service:
+      service: 
         label: Type
-      shelter:
+      shelter: 
         label: Shelter
-      shop:
+      shop: 
         label: Type
-      source:
+      source: 
         label: Source
-      sport:
+      sport: 
         label: Sport
-      structure:
+      structure: 
         label: Structure
-        placeholder: Unkown
-        options:
+        placeholder: Unknown
+        options: 
           bridge: Bridge
           tunnel: Tunnel
           embankment: Embankment
           cutting: Cutting
-      supervised:
+      supervised: 
         label: Supervised
-      surface:
+      surface: 
         label: Surface
-      tourism:
+      tourism: 
         label: Type
-      towertype:
+      towertype: 
         label: Tower type
-      tracktype:
+      tracktype: 
         label: Type
-      trail_visibility:
+      trail_visibility: 
         label: Trail Visibility
-      water:
+      water: 
         label: Type
-      waterway:
+      waterway: 
         label: Type
-      website:
+      website: 
         label: Website
         placeholder: "http://example.com/"
-      wetland:
+      wetland: 
         label: Type
-      wheelchair:
+      wheelchair: 
         label: Wheelchair Access
-      wikipedia:
+      wikipedia: 
         label: Wikipedia
-      wood:
+      wood: 
         label: Type
-    presets:
-      aeroway:
+    presets: 
+      aeroway: 
         name: Aeroway
         terms: ""
-      aeroway/aerodrome:
+      aeroway/aerodrome: 
         name: Airport
         terms: "airplane,airport,aerodrome"
-      aeroway/apron:
+      aeroway/apron: 
         name: Apron
         terms: ramp
-      aeroway/gate:
+      aeroway/gate: 
         name: Airport gate
         terms: ""
-      aeroway/hangar:
+      aeroway/hangar: 
         name: Hangar
         terms: ""
-      aeroway/helipad:
+      aeroway/helipad: 
         name: Helipad
         terms: "helicopter,helipad,heliport"
-      aeroway/runway:
+      aeroway/runway: 
         name: Runway
         terms: landing strip
-      aeroway/taxiway:
+      aeroway/taxiway: 
         name: Taxiway
         terms: ""
-      aeroway/terminal:
+      aeroway/terminal: 
         name: Airport terminal
         terms: "airport,aerodrome"
-      amenity:
+      amenity: 
         name: Amenity
         terms: ""
-      amenity/atm:
+      amenity/atm: 
         name: ATM
         terms: ""
-      amenity/bank:
+      amenity/bank: 
         name: Bank
         terms: "coffer,countinghouse,credit union,depository,exchequer,fund,hoard,investment firm,repository,reserve,reservoir,safe,savings,stock,stockpile,store,storehouse,thrift,treasury,trust company,vault"
-      amenity/bar:
+      amenity/bar: 
         name: Bar
         terms: ""
-      amenity/bench:
+      amenity/bench: 
         name: Bench
         terms: ""
-      amenity/bicycle_parking:
+      amenity/bicycle_parking: 
         name: Bicycle Parking
         terms: ""
-      amenity/bicycle_rental:
+      amenity/bicycle_rental: 
         name: Bicycle Rental
         terms: ""
-      amenity/cafe:
+      amenity/cafe: 
         name: Cafe
         terms: "coffee,tea,coffee shop"
-      amenity/car_wash:
+      amenity/car_wash: 
         name: Car Wash
         terms: ""
-      amenity/cinema:
+      amenity/cinema: 
         name: Cinema
         terms: "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
-      amenity/college:
+      amenity/college: 
         name: College
         terms: ""
-      amenity/courthouse:
+      amenity/courthouse: 
         name: Courthouse
         terms: ""
-      amenity/embassy:
+      amenity/embassy: 
         name: Embassy
         terms: ""
-      amenity/fast_food:
+      amenity/fast_food: 
         name: Fast Food
         terms: ""
-      amenity/fire_station:
+      amenity/fire_station: 
         name: Fire Station
         terms: ""
-      amenity/fountain:
+      amenity/fountain: 
         name: Fountain
         terms: ""
-      amenity/fuel:
+      amenity/fuel: 
         name: Gas Station
         terms: ""
-      amenity/grave_yard:
+      amenity/grave_yard: 
         name: Graveyard
         terms: ""
-      amenity/hospital:
+      amenity/hospital: 
         name: Hospital
         terms: "clinic,emergency room,health service,hospice,infirmary,institution,nursing home,rest home,sanatorium,sanitarium,sick bay,surgery,ward"
-      amenity/kindergarten:
+      amenity/kindergarten: 
         name: Kindergarten
         terms: "preschool,nursery,childcare,playgroup"
-      amenity/library:
+      amenity/library: 
         name: Library
         terms: ""
-      amenity/marketplace:
+      amenity/marketplace: 
         name: Marketplace
         terms: ""
-      amenity/parking:
+      amenity/parking: 
         name: Parking
         terms: ""
-      amenity/pharmacy:
+      amenity/pharmacy: 
         name: Pharmacy
         terms: ""
-      amenity/place_of_worship:
+      amenity/place_of_worship: 
         name: Place of Worship
         terms: "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
-      amenity/place_of_worship/christian:
+      amenity/place_of_worship/christian: 
         name: Church
         terms: "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
-      amenity/place_of_worship/jewish:
+      amenity/place_of_worship/jewish: 
         name: Synagogue
         terms: "jewish,synagogue"
-      amenity/place_of_worship/muslim:
+      amenity/place_of_worship/muslim: 
         name: Mosque
         terms: "muslim,mosque"
-      amenity/police:
+      amenity/police: 
         name: Police
         terms: "badge,bear,blue,bluecoat,bobby,boy scout,bull,constable,constabulary,cop,copper,corps,county mounty,detective,fed,flatfoot,force,fuzz,gendarme,gumshoe,heat,law,law enforcement,man,narc,officers,patrolman,police"
-      amenity/post_box:
+      amenity/post_box: 
         name: Mailbox
         terms: "letter drop,letterbox,mail drop,mailbox,pillar box,postbox"
-      amenity/post_office:
+      amenity/post_office: 
         name: Post Office
         terms: ""
-      amenity/pub:
+      amenity/pub: 
         name: Pub
         terms: ""
-      amenity/restaurant:
+      amenity/restaurant: 
         name: Restaurant
         terms: "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"
-      amenity/school:
+      amenity/school: 
         name: School
         terms: "academy,alma mater,blackboard,college,department,discipline,establishment,faculty,hall,halls of ivy,institute,institution,jail*,schoolhouse,seminary,university"
-      amenity/swimming_pool:
+      amenity/swimming_pool: 
         name: Swimming Pool
         terms: ""
-      amenity/telephone:
+      amenity/telephone: 
         name: Telephone
         terms: ""
-      amenity/theatre:
+      amenity/theatre: 
         name: Theater
         terms: "theatre,performance,play,musical"
-      amenity/toilets:
+      amenity/toilets: 
         name: Toilets
         terms: ""
-      amenity/townhall:
+      amenity/townhall: 
         name: Town Hall
         terms: "village hall,city government,courthouse,municipal building,municipal center"
-      amenity/university:
+      amenity/university: 
         name: University
         terms: college
-      amenity/waste_basket:
+      amenity/waste_basket: 
         name: Waste Basket
         terms: "rubbish bin,litter bin,trash can,garbage can"
-      area:
+      area: 
         name: Area
         terms: ""
-      barrier:
+      barrier: 
         name: Barrier
         terms: ""
-      barrier/block:
+      barrier/block: 
         name: Block
         terms: ""
-      barrier/bollard:
+      barrier/bollard: 
         name: Bollard
         terms: ""
-      barrier/cattle_grid:
+      barrier/cattle_grid: 
         name: Cattle Grid
         terms: ""
-      barrier/city_wall:
+      barrier/city_wall: 
         name: City Wall
         terms: ""
-      barrier/cycle_barrier:
+      barrier/cycle_barrier: 
         name: Cycle Barrier
         terms: ""
-      barrier/ditch:
+      barrier/ditch: 
         name: Ditch
         terms: ""
-      barrier/entrance:
+      barrier/entrance: 
         name: Entrance
         terms: ""
-      barrier/fence:
+      barrier/fence: 
         name: Fence
         terms: ""
-      barrier/gate:
+      barrier/gate: 
         name: Gate
         terms: ""
-      barrier/hedge:
+      barrier/hedge: 
         name: Hedge
         terms: ""
-      barrier/kissing_gate:
+      barrier/kissing_gate: 
         name: Kissing Gate
         terms: ""
-      barrier/lift_gate:
+      barrier/lift_gate: 
         name: Lift Gate
         terms: ""
-      barrier/retaining_wall:
+      barrier/retaining_wall: 
         name: Retaining Wall
         terms: ""
-      barrier/stile:
+      barrier/stile: 
         name: Stile
         terms: ""
-      barrier/toll_booth:
+      barrier/toll_booth: 
         name: Toll Booth
         terms: ""
-      barrier/wall:
+      barrier/wall: 
         name: Wall
         terms: ""
-      boundary/administrative:
+      boundary/administrative: 
         name: Administrative Boundary
         terms: ""
-      building:
+      building: 
         name: Building
         terms: ""
-      building/apartments:
+      building/apartments: 
         name: Apartments
         terms: ""
-      building/entrance:
+      building/entrance: 
         name: Entrance
         terms: ""
-      building/house:
+      building/house: 
         name: House
         terms: ""
-      emergency/phone:
+      emergency/phone: 
         name: Emergency Phone
         terms: ""
-      entrance:
+      entrance: 
         name: Entrance
         terms: ""
-      highway:
+      highway: 
         name: Highway
         terms: ""
-      highway/bridleway:
+      highway/bridleway: 
         name: Bridle Path
         terms: "bridleway,equestrian trail,horse riding path,bridle road,horse trail"
-      highway/bus_stop:
+      highway/bus_stop: 
         name: Bus Stop
         terms: ""
-      highway/crossing:
+      highway/crossing: 
         name: Crossing
         terms: "crosswalk,zebra crossing"
-      highway/cycleway:
+      highway/cycleway: 
         name: Cycle Path
         terms: ""
-      highway/footway:
+      highway/footway: 
         name: Foot Path
         terms: "beaten path,boulevard,clearing,course,cut*,drag*,footpath,highway,lane,line,orbit,passage,pathway,rail,rails,road,roadway,route,street,thoroughfare,trackway,trail,trajectory,walk"
-      highway/living_street:
+      highway/living_street: 
         name: Living Street
         terms: ""
-      highway/mini_roundabout:
+      highway/mini_roundabout: 
         name: "Mini-Roundabout"
         terms: ""
-      highway/motorway:
+      highway/motorway: 
         name: Motorway
         terms: ""
-      highway/motorway_junction:
+      highway/motorway_junction: 
         name: Motorway Junction
         terms: ""
-      highway/motorway_link:
+      highway/motorway_link: 
         name: Motorway Link
         terms: "ramp,on ramp,off ramp"
-      highway/path:
+      highway/path: 
         name: Path
         terms: ""
-      highway/pedestrian:
+      highway/pedestrian: 
         name: Pedestrian
         terms: ""
-      highway/primary:
+      highway/primary: 
         name: Primary Road
         terms: ""
-      highway/primary_link:
+      highway/primary_link: 
         name: Primary Link
         terms: "ramp,on ramp,off ramp"
-      highway/residential:
+      highway/residential: 
         name: Residential Road
         terms: ""
-      highway/road:
+      highway/road: 
         name: Unknown Road
         terms: ""
-      highway/secondary:
+      highway/secondary: 
         name: Secondary Road
         terms: ""
-      highway/secondary_link:
+      highway/secondary_link: 
         name: Secondary Link
         terms: "ramp,on ramp,off ramp"
-      highway/service:
+      highway/service: 
         name: Service Road
         terms: ""
-      highway/service/alley:
+      highway/service/alley: 
         name: Alley
         terms: ""
-      "highway/service/drive-through":
+      "highway/service/drive-through": 
         name: "Drive-Through"
         terms: ""
-      highway/service/driveway:
+      highway/service/driveway: 
         name: Driveway
         terms: ""
-      highway/service/emergency_access:
+      highway/service/emergency_access: 
         name: Emergency Access
         terms: ""
-      highway/service/parking_aisle:
+      highway/service/parking_aisle: 
         name: Parking Aisle
         terms: ""
-      highway/steps:
+      highway/steps: 
         name: Steps
         terms: "stairs,staircase"
-      highway/tertiary:
+      highway/tertiary: 
         name: Tertiary Road
         terms: ""
-      highway/tertiary_link:
+      highway/tertiary_link: 
         name: Tertiary Link
         terms: "ramp,on ramp,off ramp"
-      highway/track:
+      highway/track: 
         name: Track
         terms: ""
-      highway/traffic_signals:
+      highway/traffic_signals: 
         name: Traffic Signals
         terms: "light,stoplight,traffic light"
-      highway/trunk:
+      highway/trunk: 
         name: Trunk Road
         terms: ""
-      highway/trunk_link:
+      highway/trunk_link: 
         name: Trunk Link
         terms: "ramp,on ramp,off ramp"
-      highway/turning_circle:
+      highway/turning_circle: 
         name: Turning Circle
         terms: ""
-      highway/unclassified:
+      highway/unclassified: 
         name: Unclassified Road
         terms: ""
-      historic:
+      historic: 
         name: Historic Site
         terms: ""
-      historic/archaeological_site:
+      historic/archaeological_site: 
         name: Archaeological Site
         terms: ""
-      historic/boundary_stone:
+      historic/boundary_stone: 
         name: Boundary Stone
         terms: ""
-      historic/castle:
+      historic/castle: 
         name: Castle
         terms: ""
-      historic/memorial:
+      historic/memorial: 
         name: Memorial
         terms: ""
-      historic/monument:
+      historic/monument: 
         name: Monument
         terms: ""
-      historic/ruins:
+      historic/ruins: 
         name: Ruins
         terms: ""
-      historic/wayside_cross:
+      historic/wayside_cross: 
         name: Wayside Cross
         terms: ""
-      historic/wayside_shrine:
+      historic/wayside_shrine: 
         name: Wayside Shrine
         terms: ""
-      landuse:
+      landuse: 
         name: Landuse
         terms: ""
-      landuse/allotments:
+      landuse/allotments: 
         name: Allotments
         terms: ""
-      landuse/basin:
+      landuse/basin: 
         name: Basin
         terms: ""
-      landuse/cemetery:
+      landuse/cemetery: 
         name: Cemetery
         terms: ""
-      landuse/commercial:
+      landuse/commercial: 
         name: Commercial
         terms: ""
-      landuse/construction:
+      landuse/construction: 
         name: Construction
         terms: ""
-      landuse/farm:
+      landuse/farm: 
         name: Farm
         terms: ""
-      landuse/farmyard:
+      landuse/farmyard: 
         name: Farmyard
         terms: ""
-      landuse/forest:
+      landuse/forest: 
         name: Forest
         terms: ""
-      landuse/grass:
+      landuse/grass: 
         name: Grass
         terms: ""
-      landuse/industrial:
+      landuse/industrial: 
         name: Industrial
         terms: ""
-      landuse/meadow:
+      landuse/meadow: 
         name: Meadow
         terms: ""
-      landuse/orchard:
+      landuse/orchard: 
         name: Orchard
         terms: ""
-      landuse/quarry:
+      landuse/quarry: 
         name: Quarry
         terms: ""
-      landuse/residential:
+      landuse/residential: 
         name: Residential
         terms: ""
-      landuse/retail:
+      landuse/retail: 
         name: Retail
         terms: ""
-      landuse/vineyard:
+      landuse/vineyard: 
         name: Vineyard
         terms: ""
-      leisure:
+      leisure: 
         name: Leisure
         terms: ""
-      leisure/garden:
+      leisure/garden: 
         name: Garden
         terms: ""
-      leisure/golf_course:
+      leisure/golf_course: 
         name: Golf Course
         terms: ""
-      leisure/marina:
+      leisure/marina: 
         name: Marina
         terms: ""
-      leisure/park:
+      leisure/park: 
         name: Park
         terms: "esplanade,estate,forest,garden,grass,green,grounds,lawn,lot,meadow,parkland,place,playground,plaza,pleasure garden,recreation area,square,tract,village green,woodland"
-      leisure/pitch:
+      leisure/pitch: 
         name: Sport Pitch
         terms: ""
-      leisure/pitch/american_football:
+      leisure/pitch/american_football: 
         name: American Football Field
         terms: ""
-      leisure/pitch/baseball:
+      leisure/pitch/baseball: 
         name: Baseball Diamond
         terms: ""
-      leisure/pitch/basketball:
+      leisure/pitch/basketball: 
         name: Basketball Court
         terms: ""
-      leisure/pitch/soccer:
+      leisure/pitch/soccer: 
         name: Soccer Field
         terms: ""
-      leisure/pitch/tennis:
+      leisure/pitch/tennis: 
         name: Tennis Court
         terms: ""
-      leisure/pitch/volleyball:
+      leisure/pitch/volleyball: 
         name: Volleyball Court
         terms: ""
-      leisure/playground:
+      leisure/playground: 
         name: Playground
         terms: "jungle gym,play area"
-      leisure/slipway:
+      leisure/slipway: 
         name: Slipway
         terms: ""
-      leisure/stadium:
+      leisure/stadium: 
         name: Stadium
         terms: ""
-      leisure/swimming_pool:
+      leisure/swimming_pool: 
         name: Swimming Pool
         terms: ""
-      line:
+      line: 
         name: Line
         terms: ""
-      man_made:
+      man_made: 
         name: Man Made
         terms: ""
-      man_made/breakwater:
+      man_made/breakwater: 
         name: Breakwater
         terms: ""
-      man_made/cutline:
+      man_made/cutline: 
         name: Cut line
         terms: ""
-      man_made/lighthouse:
+      man_made/lighthouse: 
         name: Lighthouse
         terms: ""
-      man_made/pier:
+      man_made/pier: 
         name: Pier
         terms: ""
-      man_made/pipeline:
+      man_made/pipeline: 
         name: Pipeline
         terms: ""
-      man_made/survey_point:
+      man_made/survey_point: 
         name: Survey Point
         terms: ""
-      man_made/tower:
+      man_made/tower: 
         name: Tower
         terms: ""
-      man_made/wastewater_plant:
+      man_made/wastewater_plant: 
         name: Wastewater Plant
         terms: "sewage works,sewage treatment plant,water treatment plant,reclamation plant"
-      man_made/water_tower:
+      man_made/water_tower: 
         name: Water Tower
         terms: ""
-      man_made/water_well:
+      man_made/water_well: 
         name: Water well
         terms: ""
-      man_made/water_works:
+      man_made/water_works: 
         name: Water Works
         terms: ""
-      natural:
+      natural: 
         name: Natural
         terms: ""
-      natural/bay:
+      natural/bay: 
         name: Bay
         terms: ""
-      natural/beach:
+      natural/beach: 
         name: Beach
         terms: ""
-      natural/cliff:
+      natural/cliff: 
         name: Cliff
         terms: ""
-      natural/coastline:
+      natural/coastline: 
         name: Coastline
         terms: shore
-      natural/glacier:
+      natural/glacier: 
         name: Glacier
         terms: ""
-      natural/grassland:
+      natural/grassland: 
         name: Grassland
         terms: ""
-      natural/heath:
+      natural/heath: 
         name: Heath
         terms: ""
-      natural/peak:
+      natural/peak: 
         name: Peak
         terms: "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
-      natural/scrub:
+      natural/scrub: 
         name: Scrub
         terms: ""
-      natural/spring:
+      natural/spring: 
         name: Spring
         terms: ""
-      natural/tree:
+      natural/tree: 
         name: Tree
         terms: ""
-      natural/water:
+      natural/water: 
         name: Water
         terms: ""
-      natural/water/lake:
+      natural/water/lake: 
         name: Lake
         terms: "lakelet,loch,mere"
-      natural/water/pond:
+      natural/water/pond: 
         name: Pond
         terms: "lakelet,millpond,tarn,pool,mere"
-      natural/water/reservoir:
+      natural/water/reservoir: 
         name: Reservoir
         terms: ""
-      natural/wetland:
+      natural/wetland: 
         name: Wetland
         terms: ""
-      natural/wood:
+      natural/wood: 
         name: Wood
         terms: ""
-      office:
+      office: 
         name: Office
         terms: ""
-      place:
+      place: 
         name: Place
         terms: ""
-      place/city:
+      place/city: 
         name: City
         terms: ""
-      place/hamlet:
+      place/hamlet: 
         name: Hamlet
         terms: ""
-      place/island:
+      place/island: 
         name: Island
         terms: "archipelago,atoll,bar,cay,isle,islet,key,reef"
-      place/isolated_dwelling:
+      place/isolated_dwelling: 
         name: Isolated Dwelling
         terms: ""
-      place/locality:
+      place/locality: 
         name: Locality
         terms: ""
-      place/town:
+      place/town: 
         name: Town
         terms: ""
-      place/village:
+      place/village: 
         name: Village
         terms: ""
-      point:
+      point: 
         name: Point
         terms: ""
-      power:
+      power: 
         name: Power
         terms: ""
-      power/generator:
+      power/generator: 
         name: Power Plant
         terms: ""
-      power/line:
+      power/line: 
         name: Power Line
         terms: ""
-      power/pole:
+      power/pole: 
         name: Power Pole
         terms: ""
-      power/sub_station:
+      power/sub_station: 
         name: Substation
         terms: ""
-      power/tower:
+      power/tower: 
         name: "High-Voltage Tower"
         terms: ""
-      power/transformer:
+      power/transformer: 
         name: Transformer
         terms: ""
-      railway:
+      railway: 
         name: Railway
         terms: ""
-      railway/abandoned:
+      railway/abandoned: 
         name: Abandoned Railway
         terms: ""
-      railway/disused:
+      railway/disused: 
         name: Disused Railway
         terms: ""
-      railway/level_crossing:
+      railway/level_crossing: 
         name: Level Crossing
         terms: "crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing"
-      railway/monorail:
+      railway/monorail: 
         name: Monorail
         terms: ""
-      railway/platform:
+      railway/platform: 
         name: Railway Platform
         terms: ""
-      railway/rail:
+      railway/rail: 
         name: Rail
         terms: ""
-      railway/station:
+      railway/station: 
         name: Railway Station
         terms: ""
-      railway/subway:
+      railway/subway: 
         name: Subway
         terms: ""
-      railway/subway_entrance:
+      railway/subway_entrance: 
         name: Subway Entrance
         terms: ""
-      railway/tram:
+      railway/tram: 
         name: Tram
         terms: streetcar
-      relation:
+      relation: 
         name: Relation
         terms: ""
-      route/ferry:
+      route/ferry: 
         name: Ferry Route
         terms: ""
-      shop:
+      shop: 
         name: Shop
         terms: ""
-      shop/alcohol:
+      shop/alcohol: 
         name: Liquor Store
         terms: alcohol
-      shop/bakery:
+      shop/bakery: 
         name: Bakery
         terms: ""
-      shop/beauty:
+      shop/beauty: 
         name: Beauty Shop
         terms: ""
-      shop/beverages:
+      shop/beverages: 
         name: Beverage Store
         terms: ""
-      shop/bicycle:
+      shop/bicycle: 
         name: Bicycle Shop
         terms: ""
-      shop/books:
+      shop/books: 
         name: Bookstore
         terms: ""
-      shop/boutique:
+      shop/boutique: 
         name: Boutique
         terms: ""
-      shop/butcher:
+      shop/butcher: 
         name: Butcher
         terms: ""
-      shop/car:
+      shop/car: 
         name: Car Dealership
         terms: ""
-      shop/car_parts:
+      shop/car_parts: 
         name: Car Parts Store
         terms: ""
-      shop/car_repair:
+      shop/car_repair: 
         name: Car Repair Shop
         terms: ""
-      shop/chemist:
+      shop/chemist: 
         name: Chemist
         terms: ""
-      shop/clothes:
+      shop/clothes: 
         name: Clothing Store
         terms: ""
-      shop/computer:
+      shop/computer: 
         name: Computer Store
         terms: ""
-      shop/confectionery:
+      shop/confectionery: 
         name: Confectionery
         terms: ""
-      shop/convenience:
+      shop/convenience: 
         name: Convenience Store
         terms: ""
-      shop/deli:
+      shop/deli: 
         name: Deli
         terms: ""
-      shop/department_store:
+      shop/department_store: 
         name: Department Store
         terms: ""
-      shop/doityourself:
+      shop/doityourself: 
         name: DIY Store
         terms: ""
-      shop/dry_cleaning:
+      shop/dry_cleaning: 
         name: Dry Cleaners
         terms: ""
-      shop/electronics:
+      shop/electronics: 
         name: Electronics Store
         terms: ""
-      shop/fishmonger:
+      shop/fishmonger: 
         name: Fishmonger
         terms: ""
-      shop/florist:
+      shop/florist: 
         name: Florist
         terms: ""
-      shop/furniture:
+      shop/furniture: 
         name: Furniture Store
         terms: ""
-      shop/garden_centre:
+      shop/garden_centre: 
         name: Garden Center
         terms: ""
-      shop/gift:
+      shop/gift: 
         name: Gift Shop
         terms: ""
-      shop/greengrocer:
+      shop/greengrocer: 
         name: Greengrocer
         terms: ""
-      shop/hairdresser:
+      shop/hairdresser: 
         name: Hairdresser
         terms: ""
-      shop/hardware:
+      shop/hardware: 
         name: Hardware Store
         terms: ""
-      shop/hifi:
+      shop/hifi: 
         name: Hifi Store
         terms: ""
-      shop/jewelry:
+      shop/jewelry: 
         name: Jeweler
         terms: ""
-      shop/kiosk:
+      shop/kiosk: 
         name: Kiosk
         terms: ""
-      shop/laundry:
+      shop/laundry: 
         name: Laundry
         terms: ""
-      shop/mall:
+      shop/mall: 
         name: Mall
         terms: ""
-      shop/mobile_phone:
+      shop/mobile_phone: 
         name: Mobile Phone Store
         terms: ""
-      shop/motorcycle:
+      shop/motorcycle: 
         name: Motorcycle Dealership
         terms: ""
-      shop/music:
+      shop/music: 
         name: Music Store
         terms: ""
-      shop/newsagent:
+      shop/newsagent: 
         name: Newsagent
         terms: ""
-      shop/optician:
+      shop/optician: 
         name: Optician
         terms: ""
-      shop/outdoor:
+      shop/outdoor: 
         name: Outdoor Store
         terms: ""
-      shop/pet:
+      shop/pet: 
         name: Pet Store
         terms: ""
-      shop/shoes:
+      shop/shoes: 
         name: Shoe Store
         terms: ""
-      shop/sports:
+      shop/sports: 
         name: Sporting Goods Store
         terms: ""
-      shop/stationery:
+      shop/stationery: 
         name: Stationery Store
         terms: ""
-      shop/supermarket:
+      shop/supermarket: 
         name: Supermarket
         terms: "bazaar,boutique,chain,co-op,cut-rate store,discount store,five-and-dime,flea market,galleria,mall,mart,outlet,outlet store,shop,shopping center,shopping plaza,stand,store,supermarket,thrift shop"
-      shop/toys:
+      shop/toys: 
         name: Toy Store
         terms: ""
-      shop/travel_agency:
+      shop/travel_agency: 
         name: Travel Agency
         terms: ""
-      shop/tyres:
+      shop/tyres: 
         name: Tire Store
         terms: ""
-      shop/vacant:
+      shop/vacant: 
         name: Vacant Shop
         terms: ""
-      shop/variety_store:
+      shop/variety_store: 
         name: Variety Store
         terms: ""
-      shop/video:
+      shop/video: 
         name: Video Store
         terms: ""
-      tourism:
+      tourism: 
         name: Tourism
         terms: ""
-      tourism/alpine_hut:
+      tourism/alpine_hut: 
         name: Alpine Hut
         terms: ""
-      tourism/artwork:
+      tourism/artwork: 
         name: Artwork
         terms: ""
-      tourism/attraction:
+      tourism/attraction: 
         name: Tourist Attraction
         terms: ""
-      tourism/camp_site:
+      tourism/camp_site: 
         name: Camp Site
         terms: ""
-      tourism/caravan_site:
+      tourism/caravan_site: 
         name: RV Park
         terms: ""
-      tourism/chalet:
+      tourism/chalet: 
         name: Chalet
         terms: ""
-      tourism/guest_house:
+      tourism/guest_house: 
         name: Guest House
         terms: "B&B,Bed & Breakfast,Bed and Breakfast"
-      tourism/hostel:
+      tourism/hostel: 
         name: Hostel
         terms: ""
-      tourism/hotel:
+      tourism/hotel: 
         name: Hotel
         terms: ""
-      tourism/information:
+      tourism/information: 
         name: Information
         terms: ""
-      tourism/motel:
+      tourism/motel: 
         name: Motel
         terms: ""
-      tourism/museum:
+      tourism/museum: 
         name: Museum
         terms: "exhibition,exhibits archive,foundation,gallery,hall,institution,library,menagerie,repository,salon,storehouse,treasury,vault"
-      tourism/picnic_site:
+      tourism/picnic_site: 
         name: Picnic Site
         terms: ""
-      tourism/theme_park:
+      tourism/theme_park: 
         name: Theme Park
         terms: ""
-      tourism/viewpoint:
+      tourism/viewpoint: 
         name: Viewpoint
         terms: ""
-      tourism/zoo:
+      tourism/zoo: 
         name: Zoo
         terms: ""
-      type/boundary:
+      type/boundary: 
         name: Boundary
         terms: ""
-      type/multipolygon:
+      type/multipolygon: 
         name: Multipolygon
         terms: ""
-      type/restriction:
+      type/restriction: 
         name: Restriction
         terms: ""
-      type/route:
+      type/route: 
         name: Route
         terms: ""
-      type/route/bicycle:
+      type/route/bicycle: 
         name: Cycle Route
         terms: ""
-      type/route/bus:
+      type/route/bus: 
         name: Bus Route
         terms: ""
-      type/route/detour:
+      type/route/detour: 
         name: Detour Route
         terms: ""
-      type/route/ferry:
+      type/route/ferry: 
         name: Ferry Route
         terms: ""
-      type/route/foot:
+      type/route/foot: 
         name: Foot Route
         terms: ""
-      type/route/pipeline:
+      type/route/pipeline: 
         name: Pipeline Route
         terms: ""
-      type/route/power:
+      type/route/power: 
         name: Power Route
         terms: ""
-      type/route/road:
+      type/route/road: 
         name: Road Route
         terms: ""
-      type/route/train:
+      type/route/train: 
         name: Train Route
         terms: ""
-      type/route/tram:
+      type/route/tram: 
         name: Tram Route
         terms: ""
-      vertex:
+      vertex: 
         name: Other
         terms: ""
-      waterway:
+      waterway: 
         name: Waterway
         terms: ""
-      waterway/canal:
+      waterway/canal: 
         name: Canal
         terms: ""
-      waterway/dam:
+      waterway/dam: 
         name: Dam
         terms: ""
-      waterway/ditch:
+      waterway/ditch: 
         name: Ditch
         terms: ""
-      waterway/drain:
+      waterway/drain: 
         name: Drain
         terms: ""
-      waterway/river:
+      waterway/river: 
         name: River
         terms: "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
-      waterway/riverbank:
+      waterway/riverbank: 
         name: Riverbank
         terms: ""
-      waterway/stream:
+      waterway/stream: 
         name: Stream
         terms: "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
-      waterway/weir:
+      waterway/weir: 
         name: Weir
         terms: ""

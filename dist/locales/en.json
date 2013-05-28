@@ -630,7 +630,7 @@
             },
             "structure": {
                 "label": "Structure",
-                "placeholder": "Unkown",
+                "placeholder": "Unknown",
                 "options": {
                     "bridge": "Bridge",
                     "tunnel": "Tunnel",
