@@ -20,6 +20,7 @@ iD.ui.preset.radio = function(field) {
 
         buttons
             .on('click', function(d) {
+                d3.event.preventDefault();
                 buttons.classed('active', function(e) { return d === e; });
                 change();
             });
@@ -39,6 +40,7 @@ iD.ui.preset.radio = function(field) {
 
         remove
             .on('click', function() {
+                d3.event.preventDefault();
                 buttons.classed('active', false);
                 change();
             });
