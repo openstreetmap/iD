@@ -1,5 +1,6 @@
 {
     "key": "maxspeed",
     "type": "maxspeed",
-    "label": "Speed Limit"
+    "label": "Speed Limit",
+    "placeholder": "40, 50, 60..."
 }

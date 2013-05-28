@@ -19,7 +19,8 @@ iD.ui.preset.maxspeed = function(field, context) {
 
         input.enter().append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id);
+            .attr('id', 'preset-input-' + field.id)
+            .attr('placeholder', field.placeholder());
 
         input
             .on('change', change)

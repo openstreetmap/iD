@@ -1,5 +1,6 @@
 {
     "key": "name",
     "type": "localized",
-    "label": "Name"
+    "label": "Name",
+    "placeholder": "Common name (if any)"
 }

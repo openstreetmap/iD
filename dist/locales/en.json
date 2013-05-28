@@ -446,7 +446,8 @@
                 "label": "Building"
             },
             "capacity": {
-                "label": "Capacity"
+                "label": "Capacity",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "Direction"
@@ -489,7 +490,8 @@
                 "label": "Type"
             },
             "fax": {
-                "label": "Fax"
+                "label": "Fax",
+                "placeholder": "+31 42 123 4567"
             },
             "fee": {
                 "label": "Fee"
@@ -523,7 +525,8 @@
                 "label": "Type"
             },
             "lanes": {
-                "label": "Lanes"
+                "label": "Lanes",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "Layer"
@@ -532,7 +535,8 @@
                 "label": "Type"
             },
             "levels": {
-                "label": "Levels"
+                "label": "Levels",
+                "placeholder": "2, 4, 6..."
             },
             "location": {
                 "label": "Location"
@@ -541,10 +545,12 @@
                 "label": "Type"
             },
             "maxspeed": {
-                "label": "Speed Limit"
+                "label": "Speed Limit",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Name"
+                "label": "Name",
+                "placeholder": "Common name (if any)"
             },
             "natural": {
                 "label": "Natural"
@@ -577,7 +583,8 @@
                 "label": "Type"
             },
             "phone": {
-                "label": "Phone"
+                "label": "Phone",
+                "placeholder": "+31 42 123 4567"
             },
             "place": {
                 "label": "Type"
@@ -623,6 +630,7 @@
             },
             "structure": {
                 "label": "Structure",
+                "placeholder": "Unkown",
                 "options": {
                     "bridge": "Bridge",
                     "tunnel": "Tunnel",

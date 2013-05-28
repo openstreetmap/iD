@@ -117,8 +117,9 @@
     },
     "capacity": {
         "key": "capacity",
-        "type": "text",
-        "label": "Capacity"
+        "type": "number",
+        "label": "Capacity",
+        "placeholder": "50, 100, 200..."
     },
     "cardinal_direction": {
         "key": "direction",
@@ -213,7 +214,8 @@
     "fax": {
         "key": "fax",
         "type": "tel",
-        "label": "Fax"
+        "label": "Fax",
+        "placeholder": "+31 42 123 4567"
     },
     "fee": {
         "key": "fee",
@@ -274,7 +276,8 @@
     "lanes": {
         "key": "lanes",
         "type": "number",
-        "label": "Lanes"
+        "label": "Lanes",
+        "placeholder": "1, 2, 3..."
     },
     "layer": {
         "key": "layer",
@@ -289,7 +292,8 @@
     "levels": {
         "key": "building:levels",
         "type": "number",
-        "label": "Levels"
+        "label": "Levels",
+        "placeholder": "2, 4, 6..."
     },
     "location": {
         "key": "location",
@@ -304,12 +308,14 @@
     "maxspeed": {
         "key": "maxspeed",
         "type": "maxspeed",
-        "label": "Speed Limit"
+        "label": "Speed Limit",
+        "placeholder": "40, 50, 60..."
     },
     "name": {
         "key": "name",
         "type": "localized",
-        "label": "Name"
+        "label": "Name",
+        "placeholder": "Common name (if any)"
     },
     "natural": {
         "key": "natural",
@@ -378,7 +384,8 @@
         "type": "tel",
         "icon": "telephone",
         "universal": true,
-        "label": "Phone"
+        "label": "Phone",
+        "placeholder": "+31 42 123 4567"
     },
     "place": {
         "key": "place",
@@ -473,6 +480,7 @@
             "cutting"
         ],
         "label": "Structure",
+        "placeholder": "Unkown",
         "strings": {
             "options": {
                 "bridge": "Bridge",

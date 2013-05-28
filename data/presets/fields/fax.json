@@ -1,5 +1,6 @@
 {
     "key": "fax",
     "type": "tel",
-    "label": "Fax"
+    "label": "Fax",
+    "placeholder":"+31 42 123 4567"
 }

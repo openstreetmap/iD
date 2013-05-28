@@ -7,6 +7,7 @@
         "cutting"
     ],
     "label": "Structure",
+    "placeholder": "Unkown",
     "strings": {
         "options": {
             "bridge": "Bridge",

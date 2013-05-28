@@ -1028,6 +1028,19 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     padding-left: 10px;
 }
 
+/* Add placeholder only on hover for radio buttons, TODO: make this less hacky */
+.inspector-hover .form-field.preset-radio .placeholder {
+    color: #a9a9a9;
+    display: block;
+    padding: 5px 10px;
+}
+
+/* Hide placeholder for radio buttons if another is active, or not in hover state */
+.form-field.preset-radio button.active ~ .placeholder,
+.form-field.preset-radio .placeholder {
+    display: none;
+}
+
 /* adding additional preset fields */
 
 .more-buttons {
@@ -1296,10 +1309,6 @@ input[type=number] {
 }
 
 /* Name + translate form */
-
-.form-field-name input.localized-main {
-    font-weight: bold;
-}
 
 .form-field .localized-main {
     padding-right: 10%;

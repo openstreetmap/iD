@@ -9,7 +9,7 @@ iD.ui.preset.radio = function(field) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        wrap.enter().append('div')
+        var buttonWrap = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap toggle-list radio-wrap');
 
         buttons = wrap.selectAll('button')
@@ -23,6 +23,10 @@ iD.ui.preset.radio = function(field) {
                 buttons.classed('active', function(e) { return d === e; });
                 change();
             });
+
+        buttonWrap.append('span')
+            .attr('class','placeholder')
+            .text(field.placeholder());
 
         var remove = wrap.selectAll('button.remove')
             .data([0]);
@@ -38,6 +42,7 @@ iD.ui.preset.radio = function(field) {
                 buttons.classed('active', false);
                 change();
             });
+
     }
 
     function change() {
