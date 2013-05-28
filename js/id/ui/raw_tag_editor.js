@@ -86,30 +86,26 @@ iD.ui.RawTagEditor = function(context) {
 
         $items.order();
 
-        $items.select('input.key')
-            .property('value', function(d) {
-                return d.key;
-            })
-            .on('blur', keyChange)
-            .on('change', keyChange);
-
-        $items.select('input.value')
-            .property('value', function(d) {
-                return d.value;
-            })
-            .on('blur', valueChange)
-            .on('change', valueChange)
-            .on('keydown.push-more', pushMore);
-
-        $items.select('button.remove')
-            .on('click', removeTag);
-
         $items.each(function(tag) {
             d3.select(this)
                 .each(bindTypeahead)
                 .call(tag.reference.button)
                 .call(tag.reference.body);
         });
+
+        $items.select('input.key')
+            .property('value', function(d) { return d.key; })
+            .on('blur', keyChange)
+            .on('change', keyChange);
+
+        $items.select('input.value')
+            .property('value', function(d) { return d.value; })
+            .on('blur', valueChange)
+            .on('change', valueChange)
+            .on('keydown.push-more', pushMore);
+
+        $items.select('button.remove')
+            .on('click', removeTag);
 
         $items.exit()
             .remove();
