@@ -655,7 +655,8 @@
                 "label": "Type"
             },
             "website": {
-                "label": "Website"
+                "label": "Website",
+                "placeholder": "http://example.com/"
             },
             "wetland": {
                 "label": "Type"

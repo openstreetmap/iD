@@ -14,7 +14,7 @@ iD.ui.preset.url = function(field) {
         input.enter().append('input')
             .attr('type', field.type)
             .attr('id', 'preset-input-' + field.id)
-            .attr('placeholder', field.placeholder || '');
+            .attr('placeholder', field.placeholder());
 
         input
             .on('blur', change)

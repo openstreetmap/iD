@@ -12,7 +12,7 @@ iD.ui.preset.localized = function(field, context) {
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
-            .attr('placeholder', field.placeholder || '');
+            .attr('placeholder', field.placeholder());
 
         input
             .on('blur', change)

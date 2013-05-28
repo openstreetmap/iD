@@ -211,6 +211,7 @@ en:
         label: Type
       website: 
         label: Website
+        placeholder: "http://example.com/"
       wetland: 
         label: Type
       wheelchair: 
