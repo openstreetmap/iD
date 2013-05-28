@@ -34,9 +34,7 @@ iD.ui.EntityEditor = function(context) {
         // Update
 
         $header.select('h3')
-            .text(state === 'select' ?
-                t('inspector.editing_feature', {feature: preset.name()}) :
-                preset.name());
+            .text(preset.name());
 
         $header.select('.preset-reset')
             .on('click', function() {

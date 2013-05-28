@@ -175,7 +175,6 @@ en:
     show_more: Show More
     new_tag: New tag
     view_on_osm: View on openstreetmap.org
-    editing_feature: "Editing {feature}"
     all_tags: All tags
     all_members: All members
     all_relations: All relations
