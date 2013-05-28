@@ -14,7 +14,6 @@ iD.ui.PresetList = function(context) {
             .attr('class', 'header fillL cf');
 
         var message = messagewrap.append('h3')
-            .attr('class', 'inspector-inner')
             .text(t('inspector.choose'));
 
         if (preset) {

@@ -614,6 +614,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    padding: 20px;
 }
 
 .header button,
@@ -625,7 +626,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .header button {
+    position: relative;
     height: 100%;
+}
+
+.preset-list-pane .header button {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .modal > button {
@@ -675,50 +683,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .inspector-inner {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     position: relative;
 }
 
-.inspector-wrap .header button.preset-reset {
-    float: left;
+.inspector-inner:last-child,
+.inspector-inner:only-child {
+    padding-bottom: 20px;
 }
-
-.inspector-wrap .header button.preset-close {
-    float: right;
-}
-
-.inspector-wrap .header button.preset-reset > div {
-    height: 100%;
-    padding: 20px 0;
-}
-
-.inspector-wrap .header button.preset-reset .col12:last-child {
-    position: absolute;
-    width: 100%;
-    padding: 20px 0;
-    opacity: 0;
-}
-
-.inspector-wrap .header button:hover .col12:first-child {
-    opacity: 0;
-}
-
-.inspector-wrap .header button:hover .col12:last-child {
-    opacity: 1;
-}
-
-.inspector-wrap .header button.line > div {
-    padding: 0;
-}
-
-.inspector-toggle {
-    color:#fff;
-    width: 100%;
-    display: block;
-    background:#7092ff;
-    border: 0;
-}
-
 
 /* Presets
 ------------------------------------------------------- */
@@ -966,11 +938,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 0 0 4px 0;
 }
 
-.entity-editor-pane .inspector-external-links {
-    border-top: 1px solid #ccc;
+/* Preset form (hover mode) */
+.inspector-hover .header {
+    background-color: #f6f6f6;
 }
 
-/* Preset form (hover mode) */
 .inspector-hover textarea,
 .inspector-hover form,
 .inspector-hover input[type=text],
@@ -1047,8 +1019,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* adding additional preset fields */
 
-.more-buttons {
-    border-top: 1px solid #CCC;
+.inspector-body .more-buttons {
+    border-bottom: 1px solid #ccc;
 }
 
 button.preset-add-field {
@@ -1444,11 +1416,6 @@ div.combobox {
 
 /* Raw Tag Editor */
 
-.raw-tag-editor {
-    border-top: 1px solid #ccc;
-    padding-bottom: 0;
-}
-
 .tag-list {
     padding-top: 10px;
 }
@@ -1591,6 +1558,10 @@ img.wiki-image {
 }
 
 /* Raw relation membership editor */
+
+.raw-member-editor .member-list {
+    padding-top: 10px;
+}
 
 .raw-membership-editor .member-row {
     position: relative;

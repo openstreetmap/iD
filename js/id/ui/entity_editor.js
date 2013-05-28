@@ -20,17 +20,16 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'header fillL cf');
 
         $enter.append('button')
-            .attr('class', 'preset-reset')
+            .attr('class', 'fl preset-reset')
             .append('span')
             .attr('class', 'icon back');
 
         $enter.append('button')
-            .attr('class', 'preset-close')
+            .attr('class', 'fr preset-close')
             .append('span')
             .attr('class', 'icon close');
 
-        $enter.append('h3')
-            .attr('class', 'inspector-inner');
+        $enter.append('h3');
 
         // Update
 
