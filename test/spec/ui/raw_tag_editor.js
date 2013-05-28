@@ -36,10 +36,13 @@ describe('iD.ui.RawTagEditor', function() {
         expect(element.select('.tag-list').selectAll("input.key").property('value')).to.be.empty;
     });
 
-    it("adds tags when clicking the add button", function () {
+    it("adds tags when clicking the add button", function (done) {
         element.selectAll("button.add-tag").trigger('click');
-        expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
-        expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
+        setTimeout(function() {
+            expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
+            expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
+            done();
+        }, 20);
     });
 
     it("removes tags when clicking the remove button", function (done) {
@@ -50,19 +53,25 @@ describe('iD.ui.RawTagEditor', function() {
         element.selectAll("button.remove").trigger('click');
     });
 
-    it("adds tags when pressing the TAB key on last input.value", function () {
+    it("adds tags when pressing the TAB key on last input.value", function (done) {
         expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
         var input = d3.select('.tag-list li:last-child input.value')[0][0];
         happen.keydown(d3.select(input).node(), {keyCode: 9});
-        expect(element.selectAll('.tag-list li')[0].length).to.eql(2);
-        expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
-        expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
+        setTimeout(function() {
+            expect(element.selectAll('.tag-list li')[0].length).to.eql(2);
+            expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
+            expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
+            done();
+        }, 20);
     });
 
-    it("does not add a tag when pressing TAB while shift is pressed", function () {
+    it("does not add a tag when pressing TAB while shift is pressed", function (done) {
         expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
         var input = d3.select('.tag-list li:last-child input.value')[0][0];
         happen.keydown(d3.select(input).node(), {keyCode: 9, shiftKey: true});
-        expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
+        setTimeout(function() {
+            expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
+            done();
+        }, 20)
     });
 });
