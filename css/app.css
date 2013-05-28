@@ -48,10 +48,9 @@ body {
     height: 40px;
     width: 40px;
     right:  33.3333%;
-    margin-right: 10px;
     top: 10px;
-    margin: auto;
     border-radius: 4px;
+    margin-right: 10px;
     background: black;
 }
 
