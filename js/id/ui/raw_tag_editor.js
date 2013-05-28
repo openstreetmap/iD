@@ -1,6 +1,7 @@
 iD.ui.RawTagEditor = function(context) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
+        showBlank = false,
         preset,
         tags,
         id;
@@ -25,8 +26,9 @@ iD.ui.RawTagEditor = function(context) {
     function content($wrap) {
         var entries = d3.entries(tags);
 
-        if (!entries.length) {
-            entries = [{key: '', value: ''}];
+        if (!entries.length || showBlank) {
+            showBlank = false;
+            entries.push({key: '', value: ''});
         }
 
         entries.forEach(function(entry) {
@@ -114,7 +116,6 @@ iD.ui.RawTagEditor = function(context) {
             if (d3.event.keyCode === 9 && !d3.event.shiftKey &&
                 $list.selectAll('li:last-child input.value').node() === this) {
                 addTag();
-                d3.event.preventDefault();
             }
         }
 
@@ -182,9 +183,14 @@ iD.ui.RawTagEditor = function(context) {
         }
 
         function addTag() {
-            tags[''] = '';
-            content($wrap);
-            $list.selectAll('li:last-child input.key').node().focus();
+            // Wrapped in a setTimeout in case it's being called from a blur
+            // handler. Without the setTimeout, the call to `content` would
+            // wipe out the pending value change.
+            setTimeout(function() {
+                showBlank = true;
+                content($wrap);
+                $list.selectAll('li:last-child input.key').node().focus();
+            }, 0);
         }
     }
 

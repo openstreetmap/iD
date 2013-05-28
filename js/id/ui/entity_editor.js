@@ -4,6 +4,9 @@ iD.ui.EntityEditor = function(context) {
         id,
         preset;
 
+    var rawTagEditor = iD.ui.RawTagEditor(context)
+        .on('change', changeTags);
+
     function entityEditor(selection) {
         var entity = context.entity(id),
             tags = _.clone(entity.tags);
@@ -88,11 +91,10 @@ iD.ui.EntityEditor = function(context) {
                 .on('change', changeTags));
 
         $body.select('.raw-tag-editor')
-            .call(iD.ui.RawTagEditor(context)
+            .call(rawTagEditor
                 .preset(preset)
                 .entityID(id)
-                .tags(tags)
-                .on('change', changeTags));
+                .tags(tags));
 
         if (entity.type === 'relation') {
             $body.select('.raw-member-editor')
