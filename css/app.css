@@ -683,27 +683,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     float: right;
 }
 
-.inspector-wrap .header button.preset-reset,
-.inspector-wrap .header button.preset-close {
-    -moz-transition: opacity 200ms;
-      -o-transition: opacity 200ms;
-         transition: opacity 200ms;
-}
-
-.inspector-hover .header button.preset-reset,
-.inspector-hover .header button.preset-close {
-    opacity: 0;
-}
-
-.inspector-hover .more-buttons,
-.inspector-hover .inspector-external-links {
-    display: none;
-}
-
-.inspector-hidden {
-    display: none;
-}
-
 .inspector-wrap .header button.preset-reset > div {
     height: 100%;
     padding: 20px 0;
@@ -902,8 +881,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* preset form basics */
 
 .entity-editor-pane .preset-icon-wrap {
-    border-bottom: 1px solid #CCC;
-    background-color: #F6F6F6;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 20px;
 }
 
 .entity-editor-pane .preset-icon-wrap::after {
@@ -917,7 +896,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: auto;
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #CCC;
+    border-bottom-color: #ccc;
 }
 
 .entity-editor-pane .preset-icon-wrap > div {
@@ -925,24 +904,16 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 60px;
     margin: auto;
     border-radius: 4px;
-    border: 1px solid #CCC;
     position: relative;
-}
-
-.inspector-wrap .inspector-preset {
-    background-color: white;
-    -moz-transition: background-color 200ms;
-      -o-transition: background-color 200ms;
-         transition: background-color 200ms;
-}
-
-.inspector-hover .inspector-preset {
-    background-color: #F6F6F6;
 }
 
 .form-field {
     margin-bottom: 10px;
     width: 100%;
+}
+
+.form-field:last-child {
+    margin-bottom: 0;
 }
 
 .form-label {
@@ -977,6 +948,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .form-field > textarea,
 .form-field .preset-input-wrap {
     border: 1px solid #CCC;
+    min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
@@ -995,25 +967,42 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* Preset form (hover mode) */
-/* Remember to set up transitions between these states and the active versions */
-
 .inspector-hover textarea,
+.inspector-hover form,
 .inspector-hover input[type=text],
 .inspector-hover input[type=search],
 .inspector-hover input[type=number],
 .inspector-hover input[type=url],
 .inspector-hover input[type=tel],
-.inspector-hover input[type=email] {
+.inspector-hover input[type=email],
+.inspector-hover .form-label,
+.inspector-hover .checkselect label:last-of-type,
+.inspector-hover .preset-input-wrap,
+.inspector-hover .preset-input-wrap * {
     background-color: #f6f6f6;
+    border-color: #DFDFDF;
 }
 
-.inspector-hover .checkselect input[type="checkbox"] { 
+/* hide and remove from layout */
+.inspector-hover .more-buttons,
+.inspector-hover .inspector-external-links
+.inspector-hidden,
+.inspector-hover .checkselect input[type="checkbox"],
+.inspector-hover .radio-wrap button::before,
+.inspector-hover .preset-radio button:not(.active),
+.inspector-hover .tag-list {
+    height: 0;
     width: 0;
     overflow: hidden;
     opacity: 0;
+    border-width: 0;
     margin: 0;
+    padding: 0;
+    content: none;
 }
 
+/* hide but preserve in layout */
+.inspector-hover .modified .form-label .modified-icon,
 .inspector-hover button.minor,
 .inspector-hover .combobox-carat,
 .inspector-hover button,
@@ -1021,24 +1010,22 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-buttons,
 .inspector-hover .tag-list,
-.inspector-hover .inspector-external-links { 
+.inspector-hover .inspector-external-links {
     opacity: 0;
 }
 
-.inspector-hover .tag-list { 
-    height: 0;
-    overflow: hidden;
-}
-
-.inspector-hover .hide-toggle { 
+/* reposition labels after stripping icons */
+.inspector-hover .form-field.preset-radio button.active,
+.inspector-hover .hide-toggle {
+    opacity: 1;
+    background-color: transparent;
     color: #a9a9a9;
     padding-left: 0;
+    border-width: 0;
 }
 
-.inspector-hover .more-buttons,
-.inspector-hover .inspector-external-links {
-    height: 0;
-    padding: 0;
+.inspector-hover .form-field.preset-radio button.active {
+    padding-left: 10px;
 }
 
 /* adding additional preset fields */
@@ -1185,9 +1172,9 @@ input[type=number] {
 
 .checkselect label:last-of-type {
     display: block;
-    padding: 5px;
-    box-sizing: border-box;
-    color: #999;
+    padding: 5px 10px;
+    color: #A9A9A9;
+    background-color: white;
 }
 
 .checkselect label:hover {
@@ -1214,6 +1201,7 @@ input[type=number] {
 .radio-wrap button {
     position: relative;
     text-align: left;
+    float: left;
     font-weight: normal;
     height: 30px;
     border-radius: 0;
@@ -1249,8 +1237,8 @@ input[type=number] {
     border-bottom: 0;
 }
 
-.radio-wrap button.active {
-    background-color: #E8EBFF !important;
+.form-field .radio-wrap button.active {
+    background-color: #E8EBFF;
 }
 
 .radio-wrap button.remove {
@@ -1590,10 +1578,6 @@ img.wiki-image {
 }
 
 /* Raw relation membership editor */
-
-.raw-membership-editor:nth-last-child(2) {
-    padding-bottom: 0;
-}
 
 .raw-membership-editor .member-row {
     position: relative;

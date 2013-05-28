@@ -56,8 +56,7 @@ iD.ui.EntityEditor = function(context) {
 
         $enter.append('div')
             .attr('class', 'preset-icon-wrap inspector-inner col12')
-            .append('div')
-            .attr('class', 'fillL');
+            .append('div');
 
         $enter.append('div')
             .attr('class', 'inspector-preset col12');
@@ -76,7 +75,7 @@ iD.ui.EntityEditor = function(context) {
 
         // Update
 
-        $body.select('.preset-icon-wrap .fillL')
+        $body.select('.preset-icon-wrap div')
             .call(iD.ui.PresetIcon()
                 .geometry(context.geometry(id))
                 .preset(preset));
