@@ -54,7 +54,7 @@ describe("iD.actions.MergePolygon", function () {
         graph = iD.actions.MergePolygon(['w0', 'w1'], 'r')(graph);
         var r = graph.entity('r');
         expect(!!r).to.equal(true);
-        expect(r.geometry()).to.equal('area');
+        expect(r.geometry(graph)).to.equal('area');
         expect(r.isMultipolygon()).to.equal(true);
         expect(r.members.length).to.equal(2);
         expect(find(r, 'w0').role).to.equal('outer');
@@ -76,7 +76,7 @@ describe("iD.actions.MergePolygon", function () {
         graph = iD.actions.MergePolygon(['r', 'r2'])(graph);
         
         // Delete other relation
-        expect(graph.entity('r2')).to.equal(undefined);
+        expect(graph.hasEntity('r2')).to.equal(undefined);
 
         var r = graph.entity('r');
         expect(find(r, 'w0').role).to.equal('outer');

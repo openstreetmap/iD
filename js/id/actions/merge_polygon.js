@@ -1,7 +1,7 @@
 iD.actions.MergePolygon = function(ids, newRelationId) {
 
     function groupEntities(graph) {
-        var entities = ids.map(graph.getEntity);
+        var entities = ids.map(function (id) { return graph.entity(id); });
         return _.extend({
                 closedWay: [],
                 multipolygon: [],
