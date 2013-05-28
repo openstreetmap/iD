@@ -15,8 +15,9 @@ iD.presets.Field = function(id, field) {
         return field.t('label', {'default': id});
     };
 
+    var placeholder = field.placeholder;
     field.placeholder = function() {
-        return field.t('placeholder', {'default': field.placeholder});
+        return field.t('placeholder', {'default': placeholder});
     };
 
     return field;
