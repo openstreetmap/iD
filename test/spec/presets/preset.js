@@ -1,108 +1,108 @@
 describe('iD.presets.Preset', function() {
-
-    var fields, p;
-
-    beforeEach(function() {
-        if (!p) {
-            fields = {};
-            var i = 0;
-            for (i in iD.data.presets.fields) {
-                fields[i] = iD.presets.Field(i, iD.data.presets.fields[i]);
-            }
-            p = {};
-            for (i in iD.data.presets.presets) {
-                p[i] = iD.presets.Preset(i, iD.data.presets.presets[i], fields);
-            }
-        }
-    });
-
-     var w1 = iD.Way({ tags: {
-            highway: 'motorway'
-        }}),
-        w2 = iD.Way({ tags: {
-            leisure: 'pitch',
-            sport: 'tennis'
-        }}),
-        w3 = iD.Way({ tags: {
-            highway: 'residential'
-        }}),
-        w4 = iD.Way({ tags: {
-            building: 'yep'
-        }}),
-        w5 = iD.Way(),
-        g = iD.Graph().replace(w1).replace(w2);
-
-
     it("has optional fields", function() {
-        expect(p.point.fields).to.eql([]);
+        var preset = iD.presets.Preset('test', {});
+        expect(preset.fields).to.eql([]);
     });
 
     describe('#matchGeometry', function() {
-        var n = iD.Node();
-        var g = iD.Graph().replace(n);
-
         it("returns false if it doesn't match", function() {
-            expect(p['highway/residential'].matchGeometry('point')).to.equal(false);
+            var preset = iD.presets.Preset('test', {geometry: ['line']});
+            expect(preset.matchGeometry('point')).to.equal(false);
         });
 
         it("returns true if it does match", function() {
-            expect(p.point.matchGeometry('point')).to.equal(true);
+            var preset = iD.presets.Preset('test', {geometry: ['point', 'line']});
+            expect(preset.matchGeometry('point')).to.equal(true);
         });
     });
 
     describe('#matchScore', function() {
         it("returns -1 if preset does not match tags", function() {
-            expect(p['highway/residential'].matchScore(w1)).to.equal(-1);
+            var preset = iD.presets.Preset('test', {tags: {foo: 'bar'}}),
+                entity = iD.Way({tags: {highway: 'motorway'}});
+            expect(preset.matchScore(entity)).to.equal(-1);
         });
 
-        it("returns 0 for fallback presets", function() {
-            expect(p.point.matchScore(w1)).to.equal(0);
+        it("returns the value of the matchScore property when matched", function() {
+            var preset = iD.presets.Preset('test', {tags: {highway: 'motorway'}, matchScore: 0.2}),
+                entity = iD.Way({tags: {highway: 'motorway'}});
+            expect(preset.matchScore(entity)).to.equal(0.2);
         });
 
-        it("returns the number of matched tags", function() {
-            expect(p['highway/residential'].matchScore(w3)).to.equal(1);
-            expect(p['leisure/pitch/tennis'].matchScore(w2)).to.equal(2);
+        it("defaults to the number of matched tags", function() {
+            var preset = iD.presets.Preset('test', {tags: {highway: 'residential'}}),
+                entity = iD.Way({tags: {highway: 'residential'}});
+            expect(preset.matchScore(entity)).to.equal(1);
+
+            var preset = iD.presets.Preset('test', {tags: {highway: 'service', service: 'alley'}}),
+                entity = iD.Way({tags: {highway: 'service', service: 'alley'}});
+            expect(preset.matchScore(entity)).to.equal(2);
         });
 
-        it("counts * as a match for any value", function() {
-            expect(p.building.matchScore(w4)).to.equal(0.5);
-            expect(p.building.matchScore(w5)).to.equal(-1);
+        it("counts * as a match for any value with score 0.5", function() {
+            var preset = iD.presets.Preset('test', {tags: {building: '*'}}),
+                entity = iD.Way({tags: {building: 'yep'}});
+            expect(preset.matchScore(entity)).to.equal(0.5);
         });
     });
 
     describe("isFallback", function() {
         it("returns true if preset has no tags", function() {
-            expect(iD.presets.Preset("area", {name: "Area", tags: {}}).isFallback()).to.equal(true);
+            var preset = iD.presets.Preset("area", {tags: {}});
+            expect(preset.isFallback()).to.equal(true);
         });
 
-        it("returns false if preset has no tags", function() {
-            expect(p.building.isFallback()).to.equal(false);
+        it("returns false if preset has tags", function() {
+            var preset = iD.presets.Preset("area", {tags: {building: 'yes'}});
+            expect(preset.isFallback()).to.equal(false);
         });
     });
 
     describe('#applyTags', function() {
         it("adds match tags", function() {
-            expect(p['highway/residential'].applyTags({}, 'area')).to.eql({ highway: 'residential' });
+            var preset = iD.presets.Preset('test', {tags: {highway: 'residential'}});
+            expect(preset.applyTags({}, 'area')).to.eql({highway: 'residential'});
         });
 
         it("does not add wildcard tags", function() {
-            expect(p.amenity.applyTags({}, 'area')).to.eql({});
+            var preset = iD.presets.Preset('test', {tags: {building: '*'}});
+            expect(preset.applyTags({}, 'area')).to.eql({});
         });
 
-        it("adds default tags", function() {
-            expect(p['amenity/cafe'].applyTags({}, 'area')).to.eql({ amenity: 'cafe', building: 'yes'});
-            expect(p['amenity/cafe'].applyTags({}, 'point')).to.eql({ amenity: 'cafe' });
+        it("adds default tags of fields with matching geometry", function() {
+            var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
+                preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
+            expect(preset.applyTags({}, 'area')).to.eql({building: 'yes'});
+        });
+
+        it("adds no default tags of fields with non-matching geometry", function() {
+            var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
+                preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
+            expect(preset.applyTags({}, 'point')).to.eql({});
         });
     });
 
     describe('#removeTags', function() {
-        it('removes match tags', function() {
-            expect(p['highway/residential'].removeTags({ highway: 'residential' }, 'area')).to.eql({});
+        it('removes tags that match preset tags', function() {
+            var preset = iD.presets.Preset('test', {tags: {highway: 'residential'}});
+            expect(preset.removeTags({highway: 'residential'}, 'area')).to.eql({});
         });
 
-        it('removes default tags', function() {
-            expect(p['amenity/cafe'].removeTags({ amenity: 'cafe', building: 'yes'}, 'area')).to.eql({});
-            expect(p['amenity/cafe'].removeTags({ amenity: 'cafe', building: 'yep'}, 'area')).to.eql({ building: 'yep'});
+        it('removes tags that match field default tags', function() {
+            var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
+                preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
+            expect(preset.removeTags({building: 'yes'}, 'area')).to.eql({});
+        });
+
+        it('preserves tags that do not match field default tags', function() {
+            var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
+                preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
+            expect(preset.removeTags({building: 'yep'}, 'area')).to.eql({ building: 'yep'});
+        });
+
+        it('preserves tags that are not listed in removeTags', function() {
+            var preset = iD.presets.Preset('test', {tags: {a: 'b'}, removeTags: {}});
+            expect(preset.removeTags({a: 'b'}, 'area')).to.eql({a: 'b'});
         });
     });
 });

@@ -27,6 +27,20 @@
             },
             "required": true
         },
+        "addTags": {
+            "description": "Tags that are added when changing to the preset (default is the same value as 'tags')",
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "removeTags": {
+            "description": "Tags that are removed when changing to another preset (default is the same value as 'tags')",
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
         "fields": {
             "description": "Form fields that are displayed for the preset",
             "type": "array",
@@ -49,6 +63,11 @@
             "description": "Whether or not the preset will be suggested via search",
             "type": "boolean",
             "default": true
+        },
+        "matchScore": {
+            "description": "The quality score this preset will receive when being compared with other matches (higher is better)",
+            "type": "number",
+            "default": 1.0
         }
     },
     "additionalProperties": false

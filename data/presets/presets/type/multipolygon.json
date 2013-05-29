@@ -6,6 +6,9 @@
     "tags": {
         "type": "multipolygon"
     },
+    "removeTags": {},
     "name": "Multipolygon",
-    "icon": "multipolygon"
+    "icon": "multipolygon",
+    "searchable": false,
+    "matchScore": 0.1
 }

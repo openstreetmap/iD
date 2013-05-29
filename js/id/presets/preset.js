@@ -12,24 +12,21 @@ iD.presets.Preset = function(id, preset, fields) {
         return preset.geometry.indexOf(geometry) >= 0;
     };
 
+    var matchScore = preset.matchScore || 1;
     preset.matchScore = function(entity) {
         var tags = preset.tags,
             score = 0;
+
         for (var t in tags) {
             if (entity.tags[t] === tags[t]) {
-                if (t === 'area') {
-                    // score area tag lower to prevent other/area preset
-                    // from being chosen over something more specific
-                    score += 0.5;
-                } else {
-                    score += 1;
-                }
+                score += matchScore;
             } else if (tags[t] === '*' && t in entity.tags) {
-                score += 0.5;
+                score += matchScore / 2;
             } else {
                 return -1;
             }
         }
+
         return score;
     };
 
@@ -59,30 +56,32 @@ iD.presets.Preset = function(id, preset, fields) {
         return reference;
     };
 
+    var removeTags = preset.removeTags || preset.tags;
     preset.removeTags = function(tags, geometry) {
-        tags = _.omit(tags, _.keys(preset.tags));
+        tags = _.omit(tags, _.keys(removeTags));
 
-        for (var i in preset.fields) {
-            var field = preset.fields[i];
+        for (var f in preset.fields) {
+            var field = preset.fields[f];
             if (field.matchGeometry(geometry) && field['default'] === tags[field.key]) {
                 delete tags[field.key];
             }
         }
-        return tags;
 
+        return tags;
     };
 
+    var applyTags = preset.applyTags || preset.tags;
     preset.applyTags = function(tags, geometry) {
         tags = _.clone(tags);
 
-        for (var k in preset.tags) {
-            if (preset.tags[k] !== '*') tags[k] = preset.tags[k];
+        for (var k in applyTags) {
+            if (applyTags[k] !== '*') tags[k] = applyTags[k];
         }
 
         for (var f in preset.fields) {
-            f = preset.fields[f];
-            if (f.matchGeometry(geometry) && f.key && !tags[f.key] && f['default']) {
-                tags[f.key] = f['default'];
+            var field = preset.fields[f];
+            if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field['default']) {
+                tags[field.key] = field['default'];
             }
         }
 
