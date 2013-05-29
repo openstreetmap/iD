@@ -73,6 +73,8 @@ iD.presets.Preset = function(id, preset, fields) {
     };
 
     preset.applyTags = function(tags, geometry) {
+        tags = _.clone(tags);
+
         for (var k in preset.tags) {
             if (preset.tags[k] !== '*') tags[k] = preset.tags[k];
         }
@@ -83,6 +85,7 @@ iD.presets.Preset = function(id, preset, fields) {
                 tags[f.key] = f['default'];
             }
         }
+
         return tags;
     };
 
