@@ -136,22 +136,20 @@ _.extend(iD.Way.prototype, {
         return r;
     },
 
-    asGeoJSON: function(resolver, close) {
+    asGeoJSON: function(resolver, polygon) {
+        var nodes = resolver.childNodes(this);
 
-        var childnodes = resolver.childNodes(this);
+        if (this.isArea() && polygon && nodes.length >= 4) {
+            if (!this.isClosed()) {
+                nodes = nodes.concat([nodes[0]]);
+            }
 
-        // Close unclosed way
-        if (close && !this.isClosed() && childnodes.length) {
-            childnodes = childnodes.concat([childnodes[0]]);
-        }
-
-        if (this.isArea() && childnodes.length >= 4 && (close || this.isClosed())) {
             return {
                 type: 'Feature',
                 properties: this.tags,
                 geometry: {
                     type: 'Polygon',
-                    coordinates: [_.pluck(childnodes, 'loc')]
+                    coordinates: [_.pluck(nodes, 'loc')]
                 }
             };
         } else {
@@ -160,7 +158,7 @@ _.extend(iD.Way.prototype, {
                 properties: this.tags,
                 geometry: {
                     type: 'LineString',
-                    coordinates: _.pluck(childnodes, 'loc')
+                    coordinates: _.pluck(nodes, 'loc')
                 }
             };
         }

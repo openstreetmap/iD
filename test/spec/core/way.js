@@ -267,7 +267,7 @@ describe('iD.Way', function() {
     });
 
     describe("#asGeoJSON", function () {
-        it("converts a line to a GeoJSON LineString features", function () {
+        it("converts a line to a GeoJSON LineString feature", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [3, 4]}),
                 w = iD.Way({tags: {highway: 'residential'}, nodes: [a.id, b.id]}),
@@ -280,13 +280,13 @@ describe('iD.Way', function() {
             expect(json.geometry.coordinates).to.eql([[1, 2], [3, 4]]);
         });
 
-        it("converts an area to a GeoJSON Polygon features", function () {
+        it("converts an area to a GeoJSON Polygon feature", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [3, 4]}),
                 c = iD.Node({loc: [5, 6]}),
                 w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
                 graph = iD.Graph([a, b, c, w]),
-                json = w.asGeoJSON(graph);
+                json = w.asGeoJSON(graph, true);
 
             expect(json.type).to.equal('Feature');
             expect(json.properties).to.eql({area: 'yes'});

@@ -13,7 +13,7 @@ iD.svg = {
         };
     },
 
-    Path: function(projection, graph) {
+    Path: function(projection, graph, polygon) {
         var cache = {},
             path = d3.geo.path().projection(projection);
 
@@ -30,14 +30,10 @@ iD.svg = {
                 closePath: function() { buffer += 'Z'; }
             });
 
-            path(entity.asGeoJSON(graph));
+            path(entity.asGeoJSON(graph, polygon));
 
             return cache[entity.id] = buffer;
         }
-
-        result.area = function(entity) {
-            return path.area(entity.asGeoJSON(graph, true));
-        };
 
         return result;
     },

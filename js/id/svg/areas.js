@@ -26,7 +26,7 @@ iD.svg.Areas = function(projection) {
     }
 
     return function drawAreas(surface, graph, entities, filter) {
-        var path = iD.svg.Path(projection, graph),
+        var path = iD.svg.Path(projection, graph, true),
             areas = {},
             multipolygon;
 
