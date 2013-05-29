@@ -228,6 +228,7 @@
         "back_tooltip": "Change feature",
         "remove": "Remove",
         "search": "Search",
+        "unknown": "Unknown",
         "incomplete": "<not downloaded>"
     },
     "background": {
@@ -376,7 +377,7 @@
         "fields": {
             "access": {
                 "label": "Access",
-                "placeholder": "Unkown",
+                "placeholder": "Unknown",
                 "types": {
                     "access": "General",
                     "foot": "Foot",

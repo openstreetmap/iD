@@ -16,7 +16,7 @@ en:
     fields: 
       access: 
         label: Access
-        placeholder: Unkown
+        placeholder: Unknown
         types: 
           access: General
           foot: Foot

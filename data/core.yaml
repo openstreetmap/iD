@@ -185,6 +185,7 @@ en:
     back_tooltip: Change feature
     remove: Remove
     search: Search
+    unknown: Unknown
     incomplete: <not downloaded>
   background:
     title: Background
