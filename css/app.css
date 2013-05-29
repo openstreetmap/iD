@@ -1097,13 +1097,7 @@ input,
 }
 
 .inspector-external-links,
-.hide-toggle:before {
-    -webkit-transition: opacity 200ms 200ms;
-       -moz-transition: opacity 200ms 200ms;
-         -o-transition: opacity 200ms 200ms;
-            transition: opacity 200ms 200ms;
-}
-
+.hide-toggle:before,
 .radio-wrap button::before,
 .radio-wrap button.remove .icon {
     -webkit-transition: opacity 200ms 200ms;
@@ -1147,10 +1141,10 @@ a.hide-toggle {
 button.preset-add-field {
     width: 25%;
     height: 40px;
-    -webkit-transition: width 200ms 100ms;
-       -moz-transition: width 200ms 100ms;
-         -o-transition: width 200ms 100ms;
-            transition: width 200ms 100ms;
+    -webkit-transition: width 200ms 400ms;
+       -moz-transition: width 200ms 400ms;
+         -o-transition: width 200ms 400ms;
+            transition: width 200ms 400ms;
 }
 
 /* set width based on # of buttons */
