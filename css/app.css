@@ -1155,6 +1155,20 @@ button.preset-add-field {
 
 /* set width based on # of buttons */
 
+button.preset-add-field:only-child {
+    width: 100%;
+}
+
+button.preset-add-field:nth-last-child(2),
+button.preset-add-field:nth-last-child(2) ~ button.preset-add-field {
+    width: 50%;
+}
+
+button.preset-add-field:nth-last-child(3),
+button.preset-add-field:nth-last-child(3) ~ button.preset-add-field {
+    width: 33.3333%;
+}
+
 button.preset-add-field:nth-last-child(4),
 button.preset-add-field:nth-last-child(4) ~ button.preset-add-field {
     width: 25%;
