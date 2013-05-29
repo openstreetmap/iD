@@ -4,8 +4,8 @@ iD.actions.ChangePreset = function(entityId, oldPreset, newPreset) {
             geometry = entity.geometry(graph),
             tags = entity.tags;
 
-        tags = oldPreset.removeTags(tags, geometry);
-        tags = newPreset.applyTags(tags, geometry);
+        if (oldPreset) tags = oldPreset.removeTags(tags, geometry);
+        if (newPreset) tags = newPreset.applyTags(tags, geometry);
 
         return graph.replace(entity.update({tags: tags}));
     };
