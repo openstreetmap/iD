@@ -19,7 +19,7 @@ iD.ui.PresetList = function(context) {
         if (currentPreset) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
-                .on('click', event.choose)
+                .on('click', function() { event.choose(currentPreset); })
                 .append('span')
                 .attr('class', 'icon forward');
         } else {
