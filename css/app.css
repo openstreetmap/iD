@@ -961,13 +961,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     background-color: #f6f6f6;
 }
 
-.header {
-    -webkit-transition: background-color 200ms;
-       -moz-transition: background-color 200ms;
-         -o-transition: background-color 200ms;
-            transition: background-color 200ms;
-}
-
 .inspector-hover textarea,
 .inspector-hover input,
 .inspector-hover .form-label,
@@ -984,26 +977,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     background-color: #fafafa;
 }
 
-header,
-textarea,
-input,
-.form-label,
-.checkselect label:last-of-type,
-.preset-input-wrap,
-.preset-input-wrap li,
-.preset-input-wrap .label {
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-         -o-transition: all 200ms;
-            transition: all 200ms;
-}
-
 /* hide and remove from layout */
 .inspector-hidden,
 .inspector-hover .checkselect label input[type="checkbox"],
 .inspector-hover .radio-wrap button::before,
 .inspector-hover .preset-radio button:not(.active),
-.inspector-hover .inspector-inner .add-tag {
+.inspector-hover .inspector-inner .add-tag,
+.inspector-hover .radio-wrap button.remove .icon {
     height: 0;
     width: 0;
     overflow: hidden;
@@ -1011,7 +991,6 @@ input,
     border-width: 0;
     margin: 0;
     padding: 0;
-    content: none;
 }
 
 /* hide but preserve in layout */
@@ -1024,20 +1003,6 @@ input,
 .inspector-hover .more-buttons,
 .inspector-hover .inspector-external-links {
     opacity: 0;
-}
-
-.modified .form-label .modified-icon,
-button.minor,
-.combobox-carat,
-button,
-.spin-control,
-.hide-toggle:before,
-.more-buttons,
-.inspector-external-links {
-    -webkit-transition: opacity 200ms;
-       -moz-transition: opacity 200ms;
-         -o-transition: opacity 200ms;
-            transition: opacity 200ms;
 }
 
 /* Styles for raw tag inspector on hover */
@@ -1056,7 +1021,6 @@ button,
 
 .inspector-hover .tag-row:last-child input.key {
     border-bottom-left-radius: 4px;
-
 }
 
 .inspector-hover .inspector-body .more-buttons {
@@ -1064,9 +1028,9 @@ button,
     padding-bottom: 0;
 }
 
-/* reposition labels after stripping icons */
+/* Unstyle button fields */
 .inspector-hover .form-field.preset-radio button.active,
-.inspector-hover .hide-toggle {
+.inspector-hover a.hide-toggle {
     opacity: 1;
     background-color: transparent;
     color: #a9a9a9;
@@ -1091,24 +1055,102 @@ button,
     display: none;
 }
 
+/* first phase hover-to-active animations */
+.header {
+    -webkit-transition: background-color 200ms;
+       -moz-transition: background-color 200ms;
+         -o-transition: background-color 200ms;
+            transition: background-color 200ms;
+}
+
+header,
+textarea,
+.form-label,
+.preset-input-wrap,
+.preset-input-wrap li,
+.preset-input-wrap .label {
+    -webkit-transition: all 200ms;
+       -moz-transition: all 200ms;
+         -o-transition: all 200ms;
+            transition: all 200ms;
+}
+
+.modified .form-label .modified-icon,
+button.minor,
+.combobox-carat,
+button,
+.spin-control,
+.more-buttons {
+    -webkit-transition: opacity 200ms;
+       -moz-transition: opacity 200ms;
+         -o-transition: opacity 200ms;
+            transition: opacity 200ms;
+}
+
+/* second phase hover-to-active animations */
+input,
+.checkselect label:last-of-type {
+    -webkit-transition: all 200ms 200ms;
+       -moz-transition: all 200ms 200ms;
+         -o-transition: all 200ms 200ms;
+            transition: all 200ms 200ms;
+}
+
+.inspector-external-links,
+.hide-toggle:before {
+    -webkit-transition: opacity 200ms 200ms;
+       -moz-transition: opacity 200ms 200ms;
+         -o-transition: opacity 200ms 200ms;
+            transition: opacity 200ms 200ms;
+}
+
+.radio-wrap button::before,
+.radio-wrap button.remove .icon {
+    -webkit-transition: opacity 200ms 200ms;
+       -moz-transition: opacity 200ms 200ms;
+         -o-transition: opacity 200ms 200ms;
+            transition: opacity 200ms 200ms;
+}
+
+.preset-radio button:not(.active) {
+    -webkit-transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
+       -moz-transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
+         -o-transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
+            transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
+}
+
+.form-field.preset-radio button.active {
+    -webkit-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
+       -moz-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
+         -o-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
+            transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
+}
+
+a.hide-toggle {
+    -webkit-transition: padding-left 200ms 200ms, color 200ms;
+       -moz-transition: padding-left 200ms 200ms, color 200ms;
+         -o-transition: padding-left 200ms 200ms, color 200ms;
+            transition: padding-left 200ms 200ms, color 200ms;
+}
+
 /* adding additional preset fields */
 
 .inspector-body .more-buttons {
     max-height: 100px;
     padding-top: 0;
-    -webkit-transition: padding 200ms, max-height 200ms;
-       -moz-transition: padding 200ms, max-height 200ms;
-         -o-transition: padding 200ms, max-height 200ms;
-            transition: padding 200ms, max-height 200ms;
+    -webkit-transition: padding 200ms 200ms, max-height 200ms 200ms;
+       -moz-transition: padding 200ms 200ms, max-height 200ms 200ms;
+         -o-transition: padding 200ms 200ms, max-height 200ms 200ms;
+            transition: padding 200ms 200ms, max-height 200ms 200ms;
 }
 
 button.preset-add-field {
     width: 25%;
     height: 40px;
-    -webkit-transition: width 200ms;
-       -moz-transition: width 200ms;
-         -o-transition: width 200ms;
-            transition: width 200ms;
+    -webkit-transition: width 200ms 100ms;
+       -moz-transition: width 200ms 100ms;
+         -o-transition: width 200ms 100ms;
+            transition: width 200ms 100ms;
 }
 
 /* set width based on # of buttons */
@@ -1241,7 +1283,7 @@ input[type=number] {
 .checkselect label:last-of-type {
     display: block;
     padding: 5px 10px;
-    color: #A9A9A9;
+    color: #7092FF;
     background-color: white;
 }
 
