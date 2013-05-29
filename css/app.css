@@ -53,6 +53,11 @@ body {
     background: black;
 }
 
+@media only screen and (min-width: 1200px) {
+    .spinner img {
+        right: 400px;
+    }
+}
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
