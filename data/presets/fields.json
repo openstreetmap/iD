@@ -194,6 +194,11 @@
         "type": "combo",
         "label": "Denotation"
     },
+    "description": {
+        "key": "description",
+        "type": "textarea",
+        "label": "Description"
+    },
     "elevation": {
         "key": "ele",
         "type": "number",
@@ -221,6 +226,11 @@
         "key": "fee",
         "type": "check",
         "label": "Fee"
+    },
+    "fixme": {
+        "key": "fixme",
+        "type": "textarea",
+        "label": "Fix Me"
     },
     "highway": {
         "key": "highway",

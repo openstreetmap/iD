@@ -89,6 +89,8 @@ en:
         label: Denomination
       denotation: 
         label: Denotation
+      description: 
+        label: Description
       elevation: 
         label: Elevation
       emergency: 
@@ -100,6 +102,8 @@ en:
         placeholder: +31 42 123 4567
       fee: 
         label: Fee
+      fixme: 
+        label: Fix Me
       highway: 
         label: Type
       historic: 

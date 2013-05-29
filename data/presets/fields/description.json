@@ -1,0 +1,5 @@
+{
+    "key": "description",
+    "type": "textarea",
+    "label": "Description"
+}
