@@ -2,7 +2,7 @@
     "icon": "school",
     "fields": [
         "operator",
-        "building",
+        "building_area",
         "address"
     ],
     "geometry": [

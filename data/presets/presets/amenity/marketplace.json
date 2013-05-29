@@ -8,7 +8,7 @@
         "amenity": "marketplace"
     },
     "fields": [
-        "building"
+        "building_area"
     ],
     "name": "Marketplace"
 }

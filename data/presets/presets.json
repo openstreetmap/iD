@@ -551,7 +551,7 @@
             "amenity": "marketplace"
         },
         "fields": [
-            "building"
+            "building_area"
         ],
         "name": "Marketplace"
     },
@@ -599,7 +599,7 @@
         "fields": [
             "religion",
             "denomination",
-            "building",
+            "building_area",
             "address"
         ],
         "geometry": [
@@ -881,7 +881,7 @@
         "icon": "school",
         "fields": [
             "operator",
-            "building",
+            "building_area",
             "address"
         ],
         "geometry": [
@@ -962,7 +962,7 @@
     "amenity/toilets": {
         "fields": [
             "operator",
-            "building"
+            "building_area"
         ],
         "geometry": [
             "point",
