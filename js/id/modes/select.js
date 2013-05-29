@@ -10,7 +10,9 @@ iD.modes.Select = function(context, selection) {
             iD.behavior.Hover(context),
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
-            iD.modes.DragNode(context).behavior],
+            iD.modes.DragNode(context)
+                .selection(selection)
+                .behavior],
         inspector,
         radialMenu,
         newFeature = false,
