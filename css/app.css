@@ -688,13 +688,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .inspector-inner {
-    padding: 20px 20px 0 20px;
+    padding: 20px;
     position: relative;
-}
-
-.inspector-inner:last-child,
-.inspector-inner:only-child {
-    padding-bottom: 20px;
 }
 
 /* Presets
@@ -863,7 +858,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .inspector-preset {
     overflow: hidden;
-    border-bottom: 1px solid #ccc;
 }
 
 .inspector-preset form.preset-form {
@@ -958,13 +952,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 0 0 4px 0;
 }
 
-.inspector-external-links {
-    border-top: 1px solid #CCC;
-    margin-top: 20px;
+.inspector-border {
+    border-bottom: 1px solid #CCC
 }
-
 /* Preset form (hover mode) */
-
 
 .inspector-hover .header {
     background-color: #f6f6f6;
@@ -980,8 +971,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover textarea,
 .inspector-hover input,
 .inspector-hover .form-label,
+.inspector-hover a,
 .inspector-hover .checkselect label:last-of-type,
-.inspector-hover .preset-input-wrap {
+.inspector-hover .preset-input-wrap,
+.inspector-hover .preset-input-wrap li {
     color: #666;
     border-color: #DFDFDF;
 }
@@ -997,6 +990,7 @@ input,
 .form-label,
 .checkselect label:last-of-type,
 .preset-input-wrap,
+.preset-input-wrap li,
 .preset-input-wrap .label {
     -webkit-transition: all 200ms;
        -moz-transition: all 200ms;
@@ -1357,12 +1351,7 @@ input[type=number] {
 
 .form-field .maxspeed-unit {
     border-radius: 0 0 4px 0;
-    border: 1px solid #ccc;
-    border-top: none;
-    height: 30px;
     width: 20%;
-    float: right;
-    padding: 5px 10px;
     color: #A9A9A9;
 }
 
@@ -1659,13 +1648,13 @@ img.wiki-image {
 
 /* Raw relation membership editor */
 
-.raw-member-editor .member-list {
+.raw-member-editor .member-list li:first-child,
+.raw-membership-editor .member-list li:first-child {
     padding-top: 10px;
 }
 
 .raw-membership-editor .member-row {
     position: relative;
-    padding-top: 10px;
 }
 
 .raw-membership-editor .member-row .member-entity-name {

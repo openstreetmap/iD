@@ -59,16 +59,16 @@ iD.ui.EntityEditor = function(context) {
             .append('div');
 
         $enter.append('div')
-            .attr('class', 'inspector-preset col12');
+            .attr('class', 'inspector-border inspector-preset col12');
 
         $enter.append('div')
-            .attr('class', 'raw-tag-editor inspector-inner col12');
+            .attr('class', 'inspector-border raw-tag-editor inspector-inner col12');
 
         $enter.append('div')
-            .attr('class', 'raw-member-editor inspector-inner col12');
+            .attr('class', 'inspector-border raw-member-editor inspector-inner col12');
 
         $enter.append('div')
-            .attr('class', 'raw-membership-editor inspector-inner col12');
+            .attr('class', 'inspector-border raw-membership-editor inspector-inner col12');
 
         $enter.append('div')
             .attr('class', 'inspector-external-links inspector-inner col12');
