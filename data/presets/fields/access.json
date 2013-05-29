@@ -2,6 +2,7 @@
     "keys": ["access", "foot", "motor_vehicle", "bicycle", "horse"],
     "type": "access",
     "label": "Access",
+    "placeholder": "Unkown",
     "strings": {
         "types": {
             "access": "General",

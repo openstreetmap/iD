@@ -28,6 +28,7 @@ iD.ui.preset.access = function(field, context) {
             .attr('class', 'col6 preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
+            .attr('placeholder', field.placeholder())
             .attr('class', 'preset-input-access')
             .attr('id', function(d) { return 'preset-input-access-' + d; })
             .each(function(d) {

@@ -376,6 +376,7 @@
         "fields": {
             "access": {
                 "label": "Access",
+                "placeholder": "Unkown",
                 "types": {
                     "access": "General",
                     "foot": "Foot",

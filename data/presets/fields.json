@@ -9,6 +9,7 @@
         ],
         "type": "access",
         "label": "Access",
+        "placeholder": "Unkown",
         "strings": {
             "types": {
                 "access": "General",
