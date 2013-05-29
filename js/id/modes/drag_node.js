@@ -8,6 +8,7 @@ iD.modes.DragNode = function(context) {
         activeIDs,
         wasMidpoint,
         cancelled,
+        selection = [],
         hover = iD.behavior.Hover(context).altDisables(true);
 
     function edge(point, size) {
@@ -120,7 +121,6 @@ iD.modes.DragNode = function(context) {
                 connectAnnotation(d));
 
         } else if (d.type === 'node' && d.id !== entity.id) {
-            // `entity` is last so it will survive and it's parent ways can be selected below.
             context.replace(
                 iD.actions.Connect([d.id, entity.id]),
                 connectAnnotation(d));
@@ -136,11 +136,13 @@ iD.modes.DragNode = function(context) {
                 moveAnnotation(entity));
         }
 
-        var parentWays = _.pluck(context.graph().parentWays(entity), 'id');
+        var reselection = selection.filter(function(id) {
+            return context.graph().hasEntity(id);
+        });
 
-        if (parentWays.length) {
+        if (reselection.length) {
             context.enter(
-                iD.modes.Select(context, parentWays)
+                iD.modes.Select(context, reselection)
                     .suppressMenu(true));
         } else {
             context.enter(iD.modes.Browse(context));
@@ -191,6 +193,12 @@ iD.modes.DragNode = function(context) {
             .classed('active', false);
 
         stopNudge();
+    };
+
+    mode.selection = function(_) {
+        if (!arguments.length) return selection;
+        selection = _;
+        return mode;
     };
 
     mode.behavior = behavior;
