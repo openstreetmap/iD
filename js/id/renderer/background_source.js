@@ -15,7 +15,7 @@ iD.BackgroundSource.template = function(data) {
 
         return data.template
             .replace('{t}', data.subdomains ?
-                data.subdomains[coord[2] % data.subdomains.length] : '')
+                data.subdomains[(coord[0] + coord[1]) % data.subdomains.length] : '')
             .replace('{u}', u)
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
