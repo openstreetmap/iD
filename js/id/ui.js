@@ -18,13 +18,16 @@ iD.ui = function(context) {
             .attr('class', 'col4')
             .call(iD.ui.Sidebar(context));
 
-        var m = container.append('div')
+        var content = container.append('div')
+            .attr('id', 'content');
+
+        var bar = content.append('div')
+            .attr('id', 'bar')
+            .attr('class', 'fillD');
+
+        var m = content.append('div')
             .attr('id', 'map')
             .call(map);
-
-        var bar = m.append('div')
-            .attr('id', 'bar')
-            .attr('class','fillD');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');
@@ -45,12 +48,12 @@ iD.ui = function(context) {
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 
-        m.append('div')
+        content.append('div')
             .attr('class', 'attribution')
             .attr('tabindex', -1)
             .call(iD.ui.Attribution(context));
 
-        m.append('div')
+        content.append('div')
             .style('display', 'none')
             .attr('class', 'help-wrap fillL col5 content');
 
@@ -79,7 +82,7 @@ iD.ui = function(context) {
             .attr('class', 'map-control geolocate-control')
             .call(iD.ui.Geolocate(map));
 
-        var about = m.append('div')
+        var about = content.append('div')
             .attr('class','col12 about-block fillD');
 
         about.append('div')

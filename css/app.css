@@ -33,6 +33,12 @@ body {
     min-width: 768px;
 }
 
+#content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
 .limiter {
     position: relative;
     max-width: 1200px;
