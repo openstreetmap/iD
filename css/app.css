@@ -958,6 +958,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 0 0 4px 0;
 }
 
+.inspector-external-links {
+    border-top: 1px solid #CCC;
+    margin-top: 20px;
+}
+
 /* Preset form (hover mode) */
 
 
@@ -1000,7 +1005,6 @@ input,
 }
 
 /* hide and remove from layout */
-.inspector-hover .inspector-external-links
 .inspector-hidden,
 .inspector-hover .checkselect label input[type="checkbox"],
 .inspector-hover .radio-wrap button::before,
