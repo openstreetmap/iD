@@ -30,7 +30,8 @@ iD.ui.Inspector = function(context) {
                 .entityID(entityID)
                 .on('choose', showList));
 
-        $wrap.style('right', context.entity(entityID).isUsed(context.graph()) ? '-0%' : '-100%');
+        var showEditor = state === 'hover' || context.entity(entityID).isUsed(context.graph());
+        $wrap.style('right', showEditor ? '-0%' : '-100%');
 
         function showList(preset) {
             $wrap.transition()
