@@ -158,18 +158,7 @@ iD.ui.EntityEditor = function(context) {
 
     entityEditor.preset = function(_) {
         if (!arguments.length) return preset;
-
-        var entity = context.entity(id),
-            geometry = context.geometry(id),
-            tags = preset.removeTags(entity.tags, geometry);
-
         preset = _;
-        tags = preset.applyTags(tags, geometry);
-
-        context.perform(
-            iD.actions.ChangeTags(id, tags),
-            t('operations.change_tags.annotation'));
-
         return entityEditor;
     };
 

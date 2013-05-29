@@ -1,7 +1,7 @@
 iD.ui.PresetList = function(context) {
     var event = d3.dispatch('choose'),
         id,
-        preset,
+        currentPreset,
         autofocus = false;
 
     function presetList(selection) {
@@ -16,7 +16,7 @@ iD.ui.PresetList = function(context) {
         var message = messagewrap.append('h3')
             .text(t('inspector.choose'));
 
-        if (preset) {
+        if (currentPreset) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
                 .on('click', event.choose)
@@ -106,7 +106,7 @@ iD.ui.PresetList = function(context) {
 
         items.enter().append('div')
             .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
-            .classed('current', function(item) { return item.preset === preset; })
+            .classed('current', function(item) { return item.preset === currentPreset; })
             .each(function(item) {
                 d3.select(this).call(item);
             })
@@ -193,6 +193,11 @@ iD.ui.PresetList = function(context) {
 
         item.choose = function() {
             context.presets().choose(preset);
+
+            context.perform(
+                iD.actions.ChangePreset(id, currentPreset, preset),
+                t('operations.change_tags.annotation'));
+
             event.choose(preset);
         };
 
@@ -220,8 +225,8 @@ iD.ui.PresetList = function(context) {
     };
 
     presetList.preset = function(_) {
-        if (!arguments.length) return preset;
-        preset = _;
+        if (!arguments.length) return currentPreset;
+        currentPreset = _;
         return presetList;
     };
 
