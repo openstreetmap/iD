@@ -17,7 +17,6 @@ body {
     min-width: 768px;
     color:#333;
     overflow: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .unsupported {
@@ -53,6 +52,7 @@ body {
     margin-right: 10px;
     background: black;
 }
+
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
@@ -857,7 +857,12 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* preset form basics */
 
 .inspector-preset {
+    overflow: hidden;
     border-bottom: 1px solid #ccc;
+}
+
+.inspector-preset form.preset-form {
+    padding: 20px;
 }
 
 .entity-editor-pane .preset-icon-wrap {
@@ -890,10 +895,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .form-field {
     margin-bottom: 10px;
     width: 100%;
-    -webkit-transition: margin-bottom 200ms 0ms;
-       -moz-transition: margin-bottom 200ms 0ms;
-         -o-transition: margin-bottom 200ms 0ms;
-            transition: margin-bottom 200ms 0ms;
+    -webkit-transition: margin-bottom 200ms;
+       -moz-transition: margin-bottom 200ms;
+         -o-transition: margin-bottom 200ms;
+            transition: margin-bottom 200ms;
 }
 
 .form-field:last-child {
@@ -917,11 +922,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .form-label .modified-icon {
     border-right: 0;
     opacity: 0;
+    z-index: -10;
     right: 10%;
 }
 
 .modified .form-label .modified-icon {
     opacity: .5;
+    z-index: 1;
 }
 
 .form-label button.tag-reference-button {
@@ -933,14 +940,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .form-field .preset-input-wrap {
     border: 1px solid #CCC;
     min-height: 30px;
-    max-height: 300px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
-    -webkit-transition: max-height 400ms 0ms;
-       -moz-transition: max-height 400ms 0ms;
-         -o-transition: max-height 400ms 0ms;
-            transition: max-height 400ms 0ms;
 }
 
 .form-field textarea {
@@ -959,20 +961,24 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .header {
-    -webkit-transition: background-color 400ms;
-       -moz-transition: background-color 400ms;
-         -o-transition: background-color 400ms;
-            transition: background-color 400ms;
+    -webkit-transition: background-color 200ms;
+       -moz-transition: background-color 200ms;
+         -o-transition: background-color 200ms;
+            transition: background-color 200ms;
 }
 
 .inspector-hover textarea,
 .inspector-hover input,
 .inspector-hover .form-label,
 .inspector-hover .checkselect label:last-of-type,
-.inspector-hover .preset-input-wrap,
-.inspector-hover .preset-input-wrap * {
-    background-color: white;
+.inspector-hover .preset-input-wrap {
+    color: #666;
     border-color: #DFDFDF;
+}
+
+.inspector-hover .preset-input-wrap .label,
+.inspector-hover .form-label {
+    background-color: #fafafa;
 }
 
 header,
@@ -981,17 +987,11 @@ input,
 .form-label,
 .checkselect label:last-of-type,
 .preset-input-wrap,
-.preset-input-wrap * {
-    -webkit-transition: background-color 400ms, border-color 400ms;
-       -moz-transition: background-color 400ms, border-color 400ms;
-         -o-transition: background-color 400ms, border-color 400ms;
-            transition: background-color 400ms, border-color 400ms;
-}
-
-.inspector-hover .form-field:last-child > input,
-.inspector-hover .form-field:last-child > textarea,
-.inspector-hover .form-field:last-child .preset-input-wrap {
-    margin-bottom: 20px;
+.preset-input-wrap .label {
+    -webkit-transition: all 200ms;
+       -moz-transition: all 200ms;
+         -o-transition: all 200ms;
+            transition: all 200ms;
 }
 
 /* hide and remove from layout */
@@ -1000,7 +1000,7 @@ input,
 .inspector-hover .checkselect label input[type="checkbox"],
 .inspector-hover .radio-wrap button::before,
 .inspector-hover .preset-radio button:not(.active),
-.inspector-hover .tag-list {
+.inspector-hover .inspector-inner .add-tag {
     height: 0;
     width: 0;
     overflow: hidden;
@@ -1019,7 +1019,6 @@ input,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-buttons,
-.inspector-hover .tag-list,
 .inspector-hover .inspector-external-links {
     opacity: 0;
 }
@@ -1031,17 +1030,35 @@ button,
 .spin-control,
 .hide-toggle:before,
 .more-buttons,
-.tag-list,
 .inspector-external-links {
-    -webkit-transition: opacity 400ms;
-       -moz-transition: opacity 400ms;
-         -o-transition: opacity 400ms;
-            transition: opacity 400ms;
+    -webkit-transition: opacity 200ms;
+       -moz-transition: opacity 200ms;
+         -o-transition: opacity 200ms;
+            transition: opacity 200ms;
+}
+
+/* Styles for raw tag inspector on hover */
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .input-wrap-position {
+    width: 50%;
+}
+
+.inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 4px;
+
 }
 
 .inspector-hover .inspector-body .more-buttons {
     max-height: 0;
-    padding: 0;
+    padding-bottom: 0;
 }
 
 /* reposition labels after stripping icons */
@@ -1075,10 +1092,11 @@ button,
 
 .inspector-body .more-buttons {
     max-height: 100px;
-    -webkit-transition: max-height 400ms, padding 400ms;
-       -moz-transition: max-height 400ms, padding 400ms;
-         -o-transition: max-height 400ms, padding 400ms;
-            transition: max-height 400ms, padding 400ms;
+    padding-top: 0;
+    -webkit-transition: padding 200ms, max-height 200ms;
+       -moz-transition: padding 200ms, max-height 200ms;
+         -o-transition: padding 200ms, max-height 200ms;
+            transition: padding 200ms, max-height 200ms;
 }
 
 button.preset-add-field {
@@ -1148,7 +1166,7 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
 .preset-input-wrap .label {
     height: 30px;
     background: #F6F6F6;
-    padding: 5px;
+    padding: 5px 10px;
 }
 
 .preset-input-access-wrap input {
@@ -1335,10 +1353,8 @@ input[type=number] {
     height: 30px;
     width: 20%;
     float: right;
-    padding: 5px;
-    text-align: center;
+    padding: 5px 10px;
     color: #A9A9A9;
-    font-weight: bold;
 }
 
 /* Name + translate form */
@@ -1584,7 +1600,7 @@ div.combobox {
 }
 
 .tag-reference-body p:last-child {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .tag-reference-body a {
