@@ -417,6 +417,11 @@
         "type": "text",
         "label": "Reference"
     },
+    "relation": {
+        "key": "type",
+        "type": "combo",
+        "label": "Type"
+    },
     "religion": {
         "key": "religion",
         "type": "combo",
@@ -441,6 +446,11 @@
                 "taoist": "Taoist"
             }
         }
+    },
+    "route": {
+        "key": "route",
+        "type": "combo",
+        "label": "Type"
     },
     "sac_scale": {
         "key": "sac_scale",

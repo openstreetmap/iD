@@ -9,6 +9,8 @@ en:
         name: Rail
       "category-road": 
         name: Road
+      "category-route": 
+        name: Route
       "category-water": 
         name: Water
     fields: 
@@ -175,6 +177,8 @@ en:
         label: Type
       ref: 
         label: Reference
+      relation: 
+        label: Type
       religion: 
         label: Religion
         options: 
@@ -185,6 +189,8 @@ en:
           hindu: Hindu
           shinto: Shinto
           taoist: Taoist
+      route: 
+        label: Type
       sac_scale: 
         label: Path Difficulty
       service: 

@@ -37,5 +37,12 @@
         "highway/mini_roundabout",
         "highway/motorway_junction",
         "vertex"
+    ],
+    "relation": [
+        "category-route",
+        "type/boundary",
+        "type/restriction",
+        "type/multipolygon",
+        "relation"
     ]
 }

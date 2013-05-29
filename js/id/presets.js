@@ -4,7 +4,7 @@ iD.presets = function() {
     // loading new data and returning defaults
 
     var all = iD.presets.Collection([]),
-        defaults = { area: all, line: all, point: all, vertex: all },
+        defaults = { area: all, line: all, point: all, vertex: all, relation: all },
         fields = {},
         universal = [],
         recent = iD.presets.Collection([]);
@@ -67,7 +67,8 @@ iD.presets = function() {
                 area: iD.presets.Collection(d.defaults.area.map(getItem)),
                 line: iD.presets.Collection(d.defaults.line.map(getItem)),
                 point: iD.presets.Collection(d.defaults.point.map(getItem)),
-                vertex: iD.presets.Collection(d.defaults.vertex.map(getItem))
+                vertex: iD.presets.Collection(d.defaults.vertex.map(getItem)),
+                relation: iD.presets.Collection(d.defaults.relation.map(getItem))
             };
         }
 

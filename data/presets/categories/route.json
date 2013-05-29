@@ -1,0 +1,18 @@
+{
+    "geometry": "relation",
+    "name": "Route",
+    "icon": "route",
+    "members": [
+        "type/route/road",
+        "type/route/foot",
+        "type/route/bicycle",
+        "type/route/bus",
+        "type/route/train",
+        "type/route/tram",
+        "type/route/ferry",
+        "type/route/power",
+        "type/route/pipeline",
+        "type/route/detour",
+        "type/route"
+    ]
+}

@@ -6,5 +6,8 @@
         "type": "route"
     },
     "name": "Route",
-    "icon": "route"
+    "icon": "route",
+    "fields": [
+        "route"
+    ]
 }

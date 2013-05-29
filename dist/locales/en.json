@@ -366,6 +366,9 @@
             "category-road": {
                 "name": "Road"
             },
+            "category-route": {
+                "name": "Route"
+            },
             "category-water": {
                 "name": "Water"
             }
@@ -603,6 +606,9 @@
             "ref": {
                 "label": "Reference"
             },
+            "relation": {
+                "label": "Type"
+            },
             "religion": {
                 "label": "Religion",
                 "options": {
@@ -614,6 +620,9 @@
                     "shinto": "Shinto",
                     "taoist": "Taoist"
                 }
+            },
+            "route": {
+                "label": "Type"
             },
             "sac_scale": {
                 "label": "Path Difficulty"

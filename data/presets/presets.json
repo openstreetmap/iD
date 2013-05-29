@@ -3280,6 +3280,9 @@
         "tags": {},
         "geometry": [
             "relation"
+        ],
+        "fields": [
+            "relation"
         ]
     },
     "route/ferry": {
@@ -4527,7 +4530,10 @@
             "type": "route"
         },
         "name": "Route",
-        "icon": "route"
+        "icon": "route",
+        "fields": [
+            "route"
+        ]
     },
     "type/route/bicycle": {
         "geometry": [
